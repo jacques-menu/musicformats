@@ -17,17 +17,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-// As a special exception, you may create a larger work that contains
+// As a special std::exception, you may create a larger work that contains
 // part or all of the Bison parser skeleton and distribute that work
 // under terms of your choice, so long as that work isn't itself a
 // parser generator using the skeleton or a modified version thereof
 // as a parser skeleton.  Alternatively, if you modify or redistribute
 // the parser skeleton itself, you may (at your option) remove this
-// special exception, which will cause the skeleton and the resulting
+// special std::exception, which will cause the skeleton and the resulting
 // Bison output files to be licensed under the GNU General Public
-// License without this special exception.
+// License without this special std::exception.
 
-// This special exception was added by the Free Software Foundation in
+// This special std::exception was added by the Free Software Foundation in
 // version 2.2 of Bison.
 
 // DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
@@ -100,7 +100,7 @@ using namespace MusicFormats;
 #endif
 
 
-// Whether we are compiled with exception support.
+// Whether we are compiled with std::exception support.
 #ifndef YY_EXCEPTIONS
 # if defined __GNUC__ && !defined __EXCEPTIONS
 #  define YY_EXCEPTIONS 0
@@ -133,7 +133,7 @@ using namespace MusicFormats;
 // Enable debugging if requested.
 #if ISCMDEBUG
 
-// A pseudo ostream that takes yydebug_ into account.
+// A pseudo std::ostream that takes yydebug_ into account.
 # define YYCDEBUG if (yydebug_) (*yycdebug_)
 
 # define YY_SYMBOL_PRINT(Title, Symbol)         \
@@ -253,10 +253,10 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
-        value.YY_MOVE_OR_COPY< string > (YY_MOVE (that.value));
+        value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
       default:
@@ -282,10 +282,10 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
-        value.move< string > (YY_MOVE (that.value));
+        value.move< std::string > (YY_MOVE (that.value));
         break;
 
       default:
@@ -311,10 +311,10 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
-        value.copy< string > (that.value);
+        value.copy< std::string > (that.value);
         break;
 
       default:
@@ -339,10 +339,10 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
-        value.move< string > (that.value);
+        value.move< std::string > (that.value);
         break;
 
       default:
@@ -383,67 +383,67 @@ namespace iscm {
     {
       case symbol_kind::S_INTEGER: // "integer number"
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 388 "ischemeParser.cpp"
         break;
 
       case symbol_kind::S_DOUBLE: // "double number"
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 394 "ischemeParser.cpp"
         break;
 
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted_string"
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 400 "ischemeParser.cpp"
         break;
 
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted_string"
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 406 "ischemeParser.cpp"
         break;
 
       case symbol_kind::S_NAME: // "name"
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 412 "ischemeParser.cpp"
         break;
 
       case symbol_kind::S_OPTION: // "option"
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 418 "ischemeParser.cpp"
         break;
 
       case symbol_kind::S_Number: // Number
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 424 "ischemeParser.cpp"
         break;
 
       case symbol_kind::S_SingleString: // SingleString
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 430 "ischemeParser.cpp"
         break;
 
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 436 "ischemeParser.cpp"
         break;
 
       case symbol_kind::S_OptionValue: // OptionValue
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 442 "ischemeParser.cpp"
         break;
 
       case symbol_kind::S_LabelName: // LabelName
 #line 64 "ischemeParser.yy"
-                 { yyo << yysym.value.template as < string > (); }
+                 { yyo << yysym.value.template as < std::string > (); }
 #line 448 "ischemeParser.cpp"
         break;
 
@@ -610,7 +610,7 @@ namespace iscm {
 #if YY_EXCEPTIONS
         catch (const syntax_error& yyexc)
           {
-            YYCDEBUG << "Caught exception: " << yyexc.what() << '\n';
+            YYCDEBUG << "Caught std::exception: " << yyexc.what() << '\n';
             error (yyexc);
             goto yyerrlab1;
           }
@@ -692,10 +692,10 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
-        yylhs.value.emplace< string > ();
+        yylhs.value.emplace< std::string > ();
         break;
 
       default:
@@ -754,38 +754,38 @@ namespace iscm {
 
   case 5: // Number: "integer number"
 #line 188 "ischemeParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 759 "ischemeParser.cpp"
     break;
 
   case 6: // Number: "double number"
 #line 189 "ischemeParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 765 "ischemeParser.cpp"
     break;
 
   case 7: // SingleString: "single quoted_string"
 #line 197 "ischemeParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 771 "ischemeParser.cpp"
     break;
 
   case 8: // SingleString: "double quoted_string"
 #line 198 "ischemeParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 777 "ischemeParser.cpp"
     break;
 
-  case 9: // String: SingleString
+  case 9: // std::string: SingleString
 #line 202 "ischemeParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 783 "ischemeParser.cpp"
     break;
 
-  case 10: // String: String SingleString
+  case 10: // std::string: std::string SingleString
 #line 204 "ischemeParser.yy"
       {
-        yylhs.value.as < string > () = yystack_[1].value.as < string > () + yystack_[0].value.as < string > ();
+        yylhs.value.as < std::string > () = yystack_[1].value.as < std::string > () + yystack_[0].value.as < std::string > ();
       }
 #line 791 "ischemeParser.cpp"
     break;
@@ -793,7 +793,7 @@ namespace iscm {
   case 11: // Tool: "tool" ":" "name" ";"
 #line 215 "ischemeParser.yy"
       {
-        drv.setTool (yystack_[1].value.as < string > ());
+        drv.setTool (yystack_[1].value.as < std::string > ());
       }
 #line 799 "ischemeParser.cpp"
     break;
@@ -801,15 +801,15 @@ namespace iscm {
   case 15: // InputSource: "name"
 #line 235 "ischemeParser.yy"
       {
-        drv.appendInputSouce (yystack_[0].value.as < string > ());
+        drv.appendInputSouce (yystack_[0].value.as < std::string > ());
       }
 #line 807 "ischemeParser.cpp"
     break;
 
-  case 16: // InputSource: String
+  case 16: // InputSource: std::string
 #line 240 "ischemeParser.yy"
       {
-        drv.appendInputSouce (yystack_[0].value.as < string > ());
+        drv.appendInputSouce (yystack_[0].value.as < std::string > ());
       }
 #line 815 "ischemeParser.cpp"
     break;
@@ -821,13 +821,13 @@ namespace iscm {
 
         if (drv.getDisplayOptions ()) {
           gLogStream <<
-            "====> option " << yystack_[0].value.as < string > () <<
+            "====> option " << yystack_[0].value.as < std::string > () <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         drv.registerOptionInCurrentOptionsBlock (
-          oahOption::create (yystack_[0].value.as < string > (), ""),
+          oahOption::create (yystack_[0].value.as < std::string > (), ""),
           drv);
 
         --gIndenter;
@@ -842,13 +842,13 @@ namespace iscm {
 
         if (drv.getDisplayOptions ()) {
           gLogStream <<
-            "====> option " << yystack_[1].value.as < string > () << ' ' << yystack_[0].value.as < string > () <<
+            "====> option " << yystack_[1].value.as < std::string > () << ' ' << yystack_[0].value.as < std::string > () <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         drv.registerOptionInCurrentOptionsBlock (
-          oahOption::create (yystack_[1].value.as < string > (), yystack_[0].value.as < string > ()),
+          oahOption::create (yystack_[1].value.as < std::string > (), yystack_[0].value.as < std::string > ()),
           drv);
 
         --gIndenter;
@@ -858,26 +858,26 @@ namespace iscm {
 
   case 27: // OptionValue: "name"
 #line 310 "ischemeParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 863 "ischemeParser.cpp"
     break;
 
   case 28: // OptionValue: Number
 #line 311 "ischemeParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 869 "ischemeParser.cpp"
     break;
 
-  case 29: // OptionValue: String
+  case 29: // OptionValue: std::string
 #line 312 "ischemeParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 875 "ischemeParser.cpp"
     break;
 
   case 30: // OptionValue: "name" "=" "name"
 #line 314 "ischemeParser.yy"
       {
-        yylhs.value.as < string > () = yystack_[2].value.as < string > () + "=" + yystack_[0].value.as < string > ();
+        yylhs.value.as < std::string > () = yystack_[2].value.as < std::string > () + "=" + yystack_[0].value.as < std::string > ();
       }
 #line 883 "ischemeParser.cpp"
     break;
@@ -885,7 +885,7 @@ namespace iscm {
   case 31: // OptionValue: "name" ":" "name"
 #line 318 "ischemeParser.yy"
       {
-        yylhs.value.as < string > () = yystack_[2].value.as < string > () + ":" + yystack_[0].value.as < string > ();
+        yylhs.value.as < std::string > () = yystack_[2].value.as < std::string > () + ":" + yystack_[0].value.as < std::string > ();
       }
 #line 891 "ischemeParser.cpp"
     break;
@@ -893,7 +893,7 @@ namespace iscm {
   case 32: // OptionValue: "name" "=" Number
 #line 322 "ischemeParser.yy"
       {
-        yylhs.value.as < string > () = yystack_[2].value.as < string > () + "=" + yystack_[0].value.as < string > ();
+        yylhs.value.as < std::string > () = yystack_[2].value.as < std::string > () + "=" + yystack_[0].value.as < std::string > ();
       }
 #line 899 "ischemeParser.cpp"
     break;
@@ -901,7 +901,7 @@ namespace iscm {
   case 33: // OptionValue: "name" ":" Number
 #line 326 "ischemeParser.yy"
       {
-        yylhs.value.as < string > () = yystack_[2].value.as < string > () + ":" + yystack_[0].value.as < string > ();
+        yylhs.value.as < std::string > () = yystack_[2].value.as < std::string > () + ":" + yystack_[0].value.as < std::string > ();
       }
 #line 907 "ischemeParser.cpp"
     break;
@@ -911,13 +911,13 @@ namespace iscm {
       {
         ++gIndenter;
 
-        string choiceName = yystack_[1].value.as < string > ();
+        std::string choiceName = yystack_[1].value.as < std::string > ();
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "====> choice " << choiceName << " : " << "..." <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         // create a choice
@@ -940,9 +940,9 @@ namespace iscm {
   case 35: // $@4: %empty
 #line 369 "ischemeParser.yy"
       {
-        string
-          choiceName = yystack_[7].value.as < string > (),
-          label      = yystack_[0].value.as < string > ();
+        std::string
+          choiceName = yystack_[7].value.as < std::string > (),
+          label      = yystack_[0].value.as < std::string > ();
 
         // fetch the voice in the choices table
         S_ischemeChoice
@@ -967,7 +967,7 @@ namespace iscm {
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
-            endl;
+            std::endl;
         }
 
         --gIndenter;
@@ -980,7 +980,7 @@ namespace iscm {
       {
         ++gIndenter;
 
-        string label = yystack_[0].value.as < string > ();
+        std::string label = yystack_[0].value.as < std::string > ();
 
         drv.getCurrentChoiceChoice ()->
           addLabel (
@@ -997,7 +997,7 @@ namespace iscm {
       {
         ++gIndenter;
 
-        string label = yystack_[0].value.as < string > ();
+        std::string label = yystack_[0].value.as < std::string > ();
 
         drv.getCurrentChoiceChoice ()->
           addLabel (
@@ -1014,7 +1014,7 @@ namespace iscm {
       {
         ++gIndenter;
 
-        string label = yystack_[0].value.as < string > ();
+        std::string label = yystack_[0].value.as < std::string > ();
 
         // fetch case statement stack top
         S_ischemeCaseChoiceStatement
@@ -1037,13 +1037,13 @@ namespace iscm {
       {
         ++gIndenter;
 
-        string choiceName = yystack_[1].value.as < string > ();
+        std::string choiceName = yystack_[1].value.as < std::string > ();
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "====> case " << choiceName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         // create a new current case statement
@@ -1059,13 +1059,13 @@ namespace iscm {
                 drv);
 
         if (! choice) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "name \"" << choiceName <<
             "\" is no choice name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
 
           ischemeError (
             s.str (),
@@ -1102,7 +1102,7 @@ namespace iscm {
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
-            endl;
+            std::endl;
         }
 
         --gIndenter;
@@ -1134,7 +1134,7 @@ namespace iscm {
             drv.caseChoiceStatementsStackTop ();
 
         // push a new current options block onto the stack
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Case alternative for " <<
@@ -1142,7 +1142,7 @@ namespace iscm {
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation ();
 
-        string
+        std::string
           CaseChoiceAlternativeDescription =
             s.str ();
 
@@ -1171,7 +1171,7 @@ namespace iscm {
               getCaseChoice ();
 
         // handle the labels
-        for (string label : currentCaseChoiceStatement->getCaseCurrentLabelsList ()) {
+        for (std::string label : currentCaseChoiceStatement->getCaseCurrentLabelsList ()) {
           // enrich the options block for label
           currentCaseChoice->
             enrichLabelOptionsBlock (
@@ -1181,16 +1181,16 @@ namespace iscm {
         } // for
 
         // discard this case alternative
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Discarding case alternative options block for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation () <<
-          endl;
+          std::endl;
 
-        string context = s.str ();
+        std::string context = s.str ();
 
         drv.optionsBlocksStackPop (
           context);
@@ -1205,7 +1205,7 @@ namespace iscm {
       {
         ++gIndenter;
 
-        string label = yystack_[0].value.as < string > ();
+        std::string label = yystack_[0].value.as < std::string > ();
 
         // fetch case input statement stack top
         S_ischemeCaseInputStatement
@@ -1228,13 +1228,13 @@ namespace iscm {
       {
         ++gIndenter;
 
-        string inputName = "$2 INPUT";
+        std::string inputName = "$2 INPUT";
 
         if (drv.getTraceCaseInputStatements ()) {
           gLogStream <<
             "====> case input " << inputName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         // create a new current case input statement
@@ -1250,13 +1250,13 @@ namespace iscm {
                 drv);
 
         if (! input) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "name \"" << inputName <<
             "\" is no input name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
 
           ischemeError (
             s.str (),
@@ -1293,7 +1293,7 @@ namespace iscm {
         if (drv.getTraceCaseInputStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
-            endl;
+            std::endl;
         }
 
         --gIndenter;
@@ -1325,7 +1325,7 @@ namespace iscm {
             drv.caseInputStatementsStackTop ();
 
         // push a new current options block onto the stack
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "CaseInput alternative for " <<
@@ -1333,7 +1333,7 @@ namespace iscm {
             currentNamesListAsString () <<
           ", line " << drv.getScannerLocation ();
 
-        string
+        std::string
           caseInputAlternativeDescription =
             s.str ();
 
@@ -1362,7 +1362,7 @@ namespace iscm {
               getCaseInputInput ();
 
         // handle the names
-        for (string name : currentCaseInputStatement->getCaseInputCurrentNamesList ()) {
+        for (std::string name : currentCaseInputStatement->getCaseInputCurrentNamesList ()) {
           // enrich the options block for name
           currentCaseInputInput->
             enrichNameOptionsBlock (
@@ -1372,16 +1372,16 @@ namespace iscm {
         } // for
 
         // discard this case input alternative
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Discarding case input alternative options block for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
           ", line " << drv.getScannerLocation () <<
-          endl;
+          std::endl;
 
-        string context = s.str ();
+        std::string context = s.str ();
 
         drv.optionsBlocksStackPop (
           context);
@@ -1393,22 +1393,22 @@ namespace iscm {
 
   case 67: // LabelName: "name"
 #line 844 "ischemeParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 1398 "ischemeParser.cpp"
     break;
 
   case 68: // LabelName: "all"
 #line 846 "ischemeParser.yy"
-      { yylhs.value.as < string > () = ischemeDriver::K_ALL_PSEUDO_LABEL_NAME; }
+      { yylhs.value.as < std::string > () = ischemeDriver::K_ALL_PSEUDO_LABEL_NAME; }
 #line 1404 "ischemeParser.cpp"
     break;
 
   case 69: // SelectStatement: "select" "name" ":" LabelName ";"
 #line 851 "ischemeParser.yy"
       {
-        string
-          choiceName = yystack_[3].value.as < string > (),
-          label = yystack_[1].value.as < string > ();
+        std::string
+          choiceName = yystack_[3].value.as < std::string > (),
+          label = yystack_[1].value.as < std::string > ();
 
         drv.handleSelectLabel (
           choiceName,
@@ -1427,7 +1427,7 @@ namespace iscm {
 #if YY_EXCEPTIONS
       catch (const syntax_error& yyexc)
         {
-          YYCDEBUG << "Caught exception: " << yyexc.what() << '\n';
+          YYCDEBUG << "Caught std::exception: " << yyexc.what() << '\n';
           error (yyexc);
           YYERROR;
         }
@@ -1575,9 +1575,9 @@ namespace iscm {
 #if YY_EXCEPTIONS
     catch (...)
       {
-        YYCDEBUG << "Exception caught: cleaning lookahead and stack\n";
+        YYCDEBUG << "std::exception caught: cleaning lookahead and stack\n";
         // Do not try to display the values of the reclaimed symbols,
-        // as their printers might throw an exception.
+        // as their printers might throw an std::exception.
         if (!yyla.empty ())
           yy_destroy_ (YY_NULLPTR, yyla);
 
@@ -1606,7 +1606,7 @@ namespace iscm {
   "tool", "input", "choice", "default", "case", "select", "all",
   "integer number", "double number", "single quoted_string",
   "double quoted_string", "name", "option", "$accept", "Script", "$@1",
-  "$@2", "Number", "SingleString", "String", "Tool", "Input",
+  "$@2", "Number", "SingleString", "std::string", "Tool", "Input",
   "InputSourcesSeq", "InputSource", "OptionalScriptElementsSeq",
   "ScriptElementsSeq", "ScriptElement", "Option", "OptionValue",
   "ChoiceDeclaration", "$@3", "$@4", "ChoiceLabels", "CaseChoiceLabel",
@@ -2028,7 +2028,7 @@ namespace iscm {
   void
   parser::yy_stack_print_ () const
   {
-    *yycdebug_ << "Stack now";
+    *yycdebug_ << "stack now";
     for (stack_type::const_iterator
            i = yystack_.begin (),
            i_end = yystack_.end ();
@@ -2066,7 +2066,7 @@ namespace iscm {
 
 
 void
-iscm::parser::error (const location_type& loc, const string& message)
+iscm::parser::error (const location_type& loc, const std::string& message)
 {
   ischemeError (
     message,

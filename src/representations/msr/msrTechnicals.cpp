@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -24,16 +24,14 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrTechnicalKindAsString (
+std::string msrTechnicalKindAsString (
   msrTechnicalKind technicalKind)
 {
-  string result;
+  std::string result;
 
   switch (technicalKind) {
     case msrTechnicalKind::kTechnicalArrow:
@@ -86,16 +84,16 @@ string msrTechnicalKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTechnicalKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTechnicalKind& elt)
 {
   os << msrTechnicalKindAsString (elt);
   return os;
 }
 
-string msrTechnicalTypeKindAsString (
+std::string msrTechnicalTypeKindAsString (
   msrTechnicalTypeKind technicalTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (technicalTypeKind) {
     case msrTechnicalTypeKind::kTechnicalType_NO_:
@@ -112,16 +110,16 @@ string msrTechnicalTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTechnicalTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTechnicalTypeKind& elt)
 {
   os << msrTechnicalTypeKindAsString (elt);
   return os;
 }
 
-string msrTechnicalWithIntegerKindAsString (
+std::string msrTechnicalWithIntegerKindAsString (
   msrTechnicalWithIntegerKind technicalWithIntegerKind)
 {
-  string result;
+  std::string result;
 
   switch (technicalWithIntegerKind) {
     case msrTechnicalWithIntegerKind::kFingering:
@@ -138,16 +136,16 @@ string msrTechnicalWithIntegerKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTechnicalWithIntegerKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTechnicalWithIntegerKind& elt)
 {
   os << msrTechnicalWithIntegerKindAsString (elt);
   return os;
 }
 
-string msrTechnicalWithFloatKindAsString (
+std::string msrTechnicalWithFloatKindAsString (
   msrTechnicalWithFloatKind technicalWithFloatKind)
 {
-  string result;
+  std::string result;
 
   switch (technicalWithFloatKind) {
     case msrTechnicalWithFloatKind::kTechnicalWithFloatBend:
@@ -158,16 +156,16 @@ string msrTechnicalWithFloatKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTechnicalWithFloatKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTechnicalWithFloatKind& elt)
 {
   os << msrTechnicalWithFloatKindAsString (elt);
   return os;
 }
 
-string msrTechnicalWithStringKindAsString (
+std::string msrTechnicalWithStringKindAsString (
   msrTechnicalWithStringKind technicalWithStringKind)
 {
-  string result;
+  std::string result;
 
   switch (technicalWithStringKind) {
     case msrTechnicalWithStringKind::kHammerOn:
@@ -190,7 +188,7 @@ string msrTechnicalWithStringKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTechnicalWithStringKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTechnicalWithStringKind& elt)
 {
   os << msrTechnicalWithStringKindAsString (elt);
   return os;
@@ -230,7 +228,7 @@ void msrTechnical::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTechnical::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTechnical>*
@@ -241,7 +239,7 @@ void msrTechnical::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTechnical::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -252,7 +250,7 @@ void msrTechnical::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTechnical::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTechnical>*
@@ -263,7 +261,7 @@ void msrTechnical::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTechnical::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -272,30 +270,30 @@ void msrTechnical::acceptOut (basevisitor* v)
 void msrTechnical::browseData (basevisitor* v)
 {}
 
-string msrTechnical::asString () const
+std::string msrTechnical::asString () const
 {
   return
     msrPlacementKindAsString (
       fTechnicalPlacementKind);
 }
 
-void msrTechnical::print (ostream& os) const
+void msrTechnical::print (std::ostream& os) const
 {
   os <<
     "Technical " <<
     asString () <<
     ", line " << fInputLineNumber <<
 //    ", accidental mark" << " = " << technicalAccidentalMarkKindAsString () <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTechnical& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTechnical& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -340,7 +338,7 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTechnicalWithInteger::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTechnicalWithInteger>*
@@ -351,7 +349,7 @@ void msrTechnicalWithInteger::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTechnicalWithInteger::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -362,7 +360,7 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTechnicalWithInteger::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTechnicalWithInteger>*
@@ -373,7 +371,7 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTechnicalWithInteger::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -382,9 +380,9 @@ void msrTechnicalWithInteger::acceptOut (basevisitor* v)
 void msrTechnicalWithInteger::browseData (basevisitor* v)
 {}
 
-string msrTechnicalWithInteger::asString () const
+std::string msrTechnicalWithInteger::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[TechnicalWithInteger"
@@ -396,39 +394,39 @@ string msrTechnicalWithInteger::asString () const
   return s.str ();
 }
 
-void msrTechnicalWithInteger::print (ostream& os) const
+void msrTechnicalWithInteger::print (std::ostream& os) const
 {
   os <<
     "[TechnicalWithInteger" <<
     ", fTechnicalWithIntegerKind: " << fTechnicalWithIntegerKind <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 14;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTechnicalWithIntegerValue" << " : " << fTechnicalWithIntegerValue <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fTechnicalWithIntegerPlacementKind" << " : " << fTechnicalWithIntegerPlacementKind <<
-    endl <<
+    std::endl <<
     ']' <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrTechnicalWithInteger& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithInteger& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -473,7 +471,7 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTechnicalWithFloat::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTechnicalWithFloat>*
@@ -484,7 +482,7 @@ void msrTechnicalWithFloat::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTechnicalWithFloat::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -495,7 +493,7 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTechnicalWithFloat::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTechnicalWithFloat>*
@@ -506,7 +504,7 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTechnicalWithFloat::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -515,9 +513,9 @@ void msrTechnicalWithFloat::acceptOut (basevisitor* v)
 void msrTechnicalWithFloat::browseData (basevisitor* v)
 {}
 
-string msrTechnicalWithFloat::asString () const
+std::string msrTechnicalWithFloat::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "TechnicalWithFloat" <<
@@ -529,40 +527,40 @@ string msrTechnicalWithFloat::asString () const
   return s.str ();
 }
 
-void msrTechnicalWithFloat::print (ostream& os) const
+void msrTechnicalWithFloat::print (std::ostream& os) const
 {
   os <<
     "[TechnicalWithFloat" <<
     ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 14;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTechnicalWithFloatValue" << " : " << fTechnicalWithFloatValue <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fTechnicalWithFloatPlacementKind" << " : " << fTechnicalWithFloatPlacementKind <<
-    endl <<
+    std::endl <<
     ']' <<
-    endl <<
-    endl;
+    std::endl <<
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrTechnicalWithFloat& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithFloat& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -573,7 +571,7 @@ S_msrTechnicalWithString msrTechnicalWithString::create (
   int                        inputLineNumber,
   msrTechnicalWithStringKind technicalWithStringKind,
   msrTechnicalTypeKind       technicalWithStringTypeKind,
-  const string&              technicalWithStringValue,
+  const std::string&              technicalWithStringValue,
   msrPlacementKind           technicalWithStringPlacementKind)
 {
   msrTechnicalWithString* o =
@@ -591,7 +589,7 @@ msrTechnicalWithString::msrTechnicalWithString (
   int                        inputLineNumber,
   msrTechnicalWithStringKind technicalWithStringKind,
   msrTechnicalTypeKind       technicalWithStringTypeKind,
-  const string&              technicalWithStringValue,
+  const std::string&              technicalWithStringValue,
   msrPlacementKind           technicalWithStringPlacementKind)
     : msrElement (inputLineNumber)
 {
@@ -612,7 +610,7 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTechnicalWithString::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTechnicalWithString>*
@@ -623,7 +621,7 @@ void msrTechnicalWithString::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTechnicalWithString::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -634,7 +632,7 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTechnicalWithString::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTechnicalWithString>*
@@ -645,7 +643,7 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTechnicalWithString::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -654,9 +652,9 @@ void msrTechnicalWithString::acceptOut (basevisitor* v)
 void msrTechnicalWithString::browseData (basevisitor* v)
 {}
 
-string msrTechnicalWithString::asString () const
+std::string msrTechnicalWithString::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[TechnicalWithString" <<
@@ -670,46 +668,46 @@ string msrTechnicalWithString::asString () const
   return s.str ();
 }
 
-void msrTechnicalWithString::print (ostream& os) const
+void msrTechnicalWithString::print (std::ostream& os) const
 {
   os <<
     "[msrTechnicalWithString" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 14;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     ", fTechnicalWithStringPlacementKind " << fTechnicalWithStringPlacementKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     ", fTechnicalWithStringPlacementKind " << fTechnicalWithStringPlacementKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTechnicalWithStringValue" << " : \"" << fTechnicalWithStringValue << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     ", fTechnicalWithStringPlacementKind" << " : \"" << fTechnicalWithStringPlacementKind <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
-    endl;
+    std::setw (fieldWidth) <<
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTechnicalWithString& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithString& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

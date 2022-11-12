@@ -31,10 +31,10 @@ The useful options here are:
 
 Figured bass is represented in \msrRepr\ by classes defined in \msrBoth{msrFiguredBasses}. There is \class{msrFiguredBass}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrFiguredBass : public msrMeasureElement
+class EXP msrFiguredBass : public msrMeasureElementLambda
 {
 	// ... ... ...
-	
+
   private:
 
     // private fields
@@ -49,7 +49,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;
 
-    list<S_msrBassFigure> fFiguredBassFiguresList;
+    std::list<S_msrBassFigure> fFiguredBassFiguresList;
 
     msrTupletFactor       fFiguredBassTupletFactor;
 };
@@ -60,7 +60,7 @@ The figured bass figures are defined in:
 class EXP msrBassFigure : public msrElement
 {
 	// ... ... ...
-	
+
   private:
 
     // private fields
@@ -91,7 +91,7 @@ In \class{msrNote}, there is:
     void                  appendFiguredBassToNoteFiguredBassesList (
                             S_msrFiguredBass figuredBass);
 
-    const list<S_msrFiguredBass>&
+    const std::list<S_msrFiguredBass>&
                           getNoteFiguredBassesList () const
                               { return fNoteFiguredBassesList; }
 
@@ -100,7 +100,7 @@ In \class{msrNote}, there is:
     // figured bass
     // ------------------------------------------------------
 
-    list<S_msrFiguredBass>
+    std::list<S_msrFiguredBass>
                           fNoteFiguredBassesList;
 \end{lstlisting}
 
@@ -135,7 +135,7 @@ In \class{msrStaff}, there is:
 
     S_msrVoice            createPartFiguredBassVoice (
                             int    inputLineNumber,
-                            string currentMeasureNumber);
+                            std::string currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
                             S_msrVoice             figuredBassSupplierVoice,
@@ -187,7 +187,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
 \begin{lstlisting}[language=CPlusPlus]
 S_msrVoice msrPart::createPartFiguredBassVoice (
   int    inputLineNumber,
-  string currentMeasureNumber)
+  std::string currentMeasureNumber)
 {
 	// ... ... ...
 
@@ -260,7 +260,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
       "--> Start visiting S_figured_bass" <<
       ", figuredBassVoicesCounter = " << fFiguredBassVoicesCounter <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -291,7 +291,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
           "Ignoring the figured bass elements" <<
           ", line " <<
           inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -352,13 +352,13 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
     gLogStream <<
       "--> Start visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   ++fFiguredBassVoicesCounter;
 
-  string parentheses = elt->getAttributeValue ("parentheses");
+  std::string parentheses = elt->getAttributeValue ("parentheses");
 
   fCurrentFiguredBassParenthesesKind =
     msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo; // default value
@@ -373,7 +373,7 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
         msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo;
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "parentheses value " << parentheses <<
@@ -418,7 +418,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
     gLogStream <<
       "--> End visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -428,7 +428,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
     gLogStream <<
       "Creating a figured bass" <<
       ", line " << inputLineNumber << ":" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -462,7 +462,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
     // forget about those pending figures
     fPendingFiguredBassFiguresList.clear ();
 
-    // append the figured bass element to the pending figured bass elements list
+    // append the figured bass element to the pending figured bass elements std::list
     fPendingFiguredBassesList.push_back (figuredBass);
   }
 
@@ -588,7 +588,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
     // don't append the figured bass to the part figured bass voice
     // before the note itself has been appended to the voice
 
-    // remove the figured bass from the list
+    // remove the figured bass from the std::list
     fPendingFiguredBassesList.pop_front ();
   } // while
 }
@@ -603,12 +603,12 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %{
 %  // copy note's harmony if any from the first note to chord
 %
-%  const list<S_msrHarmony>&
+%  const std::list<S_msrHarmony>&
 %    noteHarmoniesList =
 %      note->getNoteHarmoniesList ();
 %
 %  if (noteHarmoniesList.size ()) {
-%    list<S_msrHarmony>::const_iterator i;
+%    std::list<S_msrHarmony>::const_iterator i;
 %    for (i=noteHarmoniesList.begin (); i!=noteHarmoniesList.end (); ++i) {
 %      S_msrHarmony harmony = (*i);
 %
@@ -620,7 +620,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %          "' from note " << note->asString () <<
 %          " to chord '" << chord->asString () <<
 %          "'" <<
-%          endl;
+%          std::endl;
 %      }
 %#endif
 %
@@ -644,7 +644,7 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
 	// ... ... ...
 
   // are there figured bass elements attached to this note?
-  const list<S_msrFiguredBass>&
+  const std::list<S_msrFiguredBass>&
     noteFiguredBassesList =
       note->
         getNoteFiguredBassesList ();
@@ -683,7 +683,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
       "'" <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -726,7 +726,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "figured bass is out of context, cannot be handled:'" <<
@@ -753,7 +753,7 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -778,7 +778,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       "'" <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -821,7 +821,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "figured bass is out of context, cannot be handled:'" <<
@@ -848,7 +848,7 @@ void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -878,7 +878,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       "'" <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -921,7 +921,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "figured bass is out of context, cannot be handled:'" <<

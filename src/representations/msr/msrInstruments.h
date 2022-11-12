@@ -74,7 +74,7 @@ class EXP msrStringTuning : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                stringTuningKindAsString () const;
+    std::string           stringTuningKindAsString () const;
 
   public:
 
@@ -91,7 +91,7 @@ class EXP msrStringTuning : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -105,7 +105,7 @@ class EXP msrStringTuning : public msrElement
     msrOctaveKind         fStringTuningOctaveKind;
 };
 typedef SMARTP<msrStringTuning> S_msrStringTuning;
-EXP ostream& operator << (ostream& os, const S_msrStringTuning& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrStringTuning& elt);
 
 //______________________________________________________________________________
 // data types
@@ -116,12 +116,12 @@ enum class msrScordaturaKind {
   kScordaturaStop, kScordaturaContinue
 };
 
-string msrScordaturaKindAsString (
+std::string msrScordaturaKindAsString (
   msrScordaturaKind scordaturaKind);
 
-ostream& operator << (ostream& os, const msrScordaturaKind& elt);
+std::ostream& operator << (std::ostream& os, const msrScordaturaKind& elt);
 
-class EXP msrScordatura : public msrMeasureElement
+class EXP msrScordatura : public msrMeasureElementLambda
 {
   public:
 
@@ -147,7 +147,7 @@ class EXP msrScordatura : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    const list<S_msrStringTuning>&
+    const std::list<S_msrStringTuning>&
                           getScordaturaStringTuningsList () const
                               { return fScordaturaStringTuningsList; }
 
@@ -174,21 +174,21 @@ class EXP msrScordatura : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    list<S_msrStringTuning>
+    std::list<S_msrStringTuning>
                           fScordaturaStringTuningsList;
 };
 typedef SMARTP<msrScordatura> S_msrScordatura;
-EXP ostream& operator << (ostream& os, const S_msrScordatura& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrScordatura& elt);
 
 //______________________________________________________________________________
-class EXP msrAccordionRegistration : public msrMeasureElement
+class EXP msrAccordionRegistration : public msrMeasureElementLambda
 {
   public:
 
@@ -235,7 +235,7 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     // public services
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
   public:
 
@@ -252,7 +252,7 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -267,10 +267,10 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     int                   fLowDotsNumber;
 };
 typedef SMARTP<msrAccordionRegistration> S_msrAccordionRegistration;
-EXP ostream& operator << (ostream& os, const S_msrAccordionRegistration& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrAccordionRegistration& elt);
 
 //______________________________________________________________________________
-class EXP msrHarpPedalsTuning : public msrMeasureElement
+class EXP msrHarpPedalsTuning : public msrMeasureElementLambda
 {
   public:
 
@@ -301,7 +301,7 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    const map<msrDiatonicPitchKind, msrAlterationKind>&
+    const std::map<msrDiatonicPitchKind, msrAlterationKind>&
                           getHarpPedalsAlterationKindsMap () const
                               { return fHarpPedalsAlterationKindsMap; }
 
@@ -330,20 +330,20 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   public:
 
     // fields
     // ------------------------------------------------------
 
-    map<msrDiatonicPitchKind, msrAlterationKind>
+    std::map<msrDiatonicPitchKind, msrAlterationKind>
                           fHarpPedalsAlterationKindsMap;
 };
 typedef SMARTP<msrHarpPedalsTuning> S_msrHarpPedalsTuning;
-EXP ostream& operator << (ostream& os, const S_msrHarpPedalsTuning& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHarpPedalsTuning& elt);
 
 //______________________________________________________________________________
 // data types
@@ -353,30 +353,30 @@ enum class msrPedalTypeKind {
   kPedalTypeStart, kPedalTypeContinue, kPedalTypeChange, kPedalTypeStop
 };
 
-string msrPedalTypeKindAsString (
+std::string msrPedalTypeKindAsString (
   msrPedalTypeKind pedalTypeKind);
 
-ostream& operator << (ostream& os, const msrPedalTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPedalTypeKind& elt);
 
 enum class msrPedalLineKind {
   kPedalLineYes, kPedalLineNo
 };
 
-string msrPedalLineKindAsString (
+std::string msrPedalLineKindAsString (
   msrPedalLineKind pedalLineKind);
 
-ostream& operator << (ostream& os, const msrPedalLineKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPedalLineKind& elt);
 
 enum class msrPedalSignKind {
   kPedalSignYes, kPedalSignNo
 };
 
-string msrPedalSignKindAsString (
+std::string msrPedalSignKindAsString (
   msrPedalSignKind pedalSignKind);
 
-ostream& operator << (ostream& os, const msrPedalSignKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPedalSignKind& elt);
 
-class EXP msrPedal : public msrMeasureElement
+class EXP msrPedal : public msrMeasureElementLambda
 {
   public:
 
@@ -438,7 +438,7 @@ class EXP msrPedal : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -450,10 +450,10 @@ class EXP msrPedal : public msrMeasureElement
     msrPedalSignKind      fPedalSignKind;
 };
 typedef SMARTP<msrPedal> S_msrPedal;
-EXP ostream& operator << (ostream& os, const S_msrPedal& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrPedal& elt);
 
 //______________________________________________________________________________
-class EXP msrDamp : public msrMeasureElement
+class EXP msrDamp : public msrMeasureElementLambda
 {
   public:
 
@@ -500,7 +500,7 @@ class EXP msrDamp : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -508,10 +508,10 @@ class EXP msrDamp : public msrMeasureElement
     // ------------------------------------------------------
 };
 typedef SMARTP<msrDamp> S_msrDamp;
-EXP ostream& operator << (ostream& os, const S_msrDamp& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrDamp& elt);
 
 //______________________________________________________________________________
-class EXP msrDampAll : public msrMeasureElement
+class EXP msrDampAll : public msrMeasureElementLambda
 {
   public:
 
@@ -558,7 +558,7 @@ class EXP msrDampAll : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -566,7 +566,7 @@ class EXP msrDampAll : public msrMeasureElement
     // ------------------------------------------------------
 };
 typedef SMARTP<msrDampAll> S_msrDampAll;
-EXP ostream& operator << (ostream& os, const S_msrDampAll& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrDampAll& elt);
 
 
 }

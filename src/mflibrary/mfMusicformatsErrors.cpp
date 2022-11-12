@@ -38,9 +38,9 @@ EXP std::string mfMusicFormatsErrorAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const mfMusicformatsErrorKind& elt)
+std::ostream& operator << (std::ostream& os, const mfMusicformatsErrorKind& elt)
 {
-  os << mfMusicFormatsErrorAsString (elt) << endl;
+  os << mfMusicFormatsErrorAsString (elt) << std::endl;
   return os;
 }
 

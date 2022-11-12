@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -35,8 +35,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -44,7 +42,7 @@ namespace MusicFormats
 // XMLLang
 msrXMLLangKind msrXMLLangKindFromString (
   int           inputLineNumber,
-  const string& XMLLangString)
+  const std::string& XMLLangString)
 {
   msrXMLLangKind
     result = msrXMLLangKind::kXMLLangIt; // default value
@@ -63,7 +61,7 @@ msrXMLLangKind msrXMLLangKindFromString (
     result = msrXMLLangKind::kXMLLangLa;
   else {
     if (XMLLangString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "xml:lang value '" << XMLLangString <<
@@ -80,10 +78,10 @@ msrXMLLangKind msrXMLLangKindFromString (
   return result;
 }
 
-string msrXMLLangKindAsString (
+std::string msrXMLLangKindAsString (
   msrXMLLangKind XMLLangKind)
 {
-  string result;
+  std::string result;
 
   switch (XMLLangKind) {
     case msrXMLLangKind::kXMLLangIt:
@@ -109,16 +107,16 @@ string msrXMLLangKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrXMLLangKind& elt)
+std::ostream& operator << (std::ostream& os, const msrXMLLangKind& elt)
 {
   os << msrXMLLangKindAsString (elt);
   return os;
 }
 
-string msrOtherAppearanceTypeKindAsString (
+std::string msrOtherAppearanceTypeKindAsString (
   msrOtherAppearanceTypeKind otherAppearanceTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (otherAppearanceTypeKind) {
     case msrOtherAppearanceTypeKind::kOtherAppearanceType_NO_:
@@ -129,16 +127,16 @@ string msrOtherAppearanceTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrOtherAppearanceTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrOtherAppearanceTypeKind& elt)
 {
   os << msrOtherAppearanceTypeKindAsString (elt);
   return os;
 }
 
-string msrLineWidthTypeKindAsString (
+std::string msrLineWidthTypeKindAsString (
   msrLineWidthTypeKind lineWidthTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (lineWidthTypeKind) {
     case msrLineWidthTypeKind::kLineWidthType_NO_:
@@ -206,16 +204,16 @@ string msrLineWidthTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrLineWidthTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrLineWidthTypeKind& elt)
 {
   os << msrLineWidthTypeKindAsString (elt);
   return os;
 }
 
-string msrNoteSizeTypeKindAsString (
+std::string msrNoteSizeTypeKindAsString (
   msrNoteSizeTypeKind noteSizeTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (noteSizeTypeKind) {
     case msrNoteSizeTypeKind::kNote_NO_SizeType:
@@ -235,16 +233,16 @@ string msrNoteSizeTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrNoteSizeTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrNoteSizeTypeKind& elt)
 {
   os << msrNoteSizeTypeKindAsString (elt);
   return os;
 }
 
-string msrDistanceTypeKindAsString (
+std::string msrDistanceTypeKindAsString (
   msrDistanceTypeKind distanceTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (distanceTypeKind) {
     case msrDistanceTypeKind::kDistanceType_NO_:
@@ -261,16 +259,16 @@ string msrDistanceTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrDistanceTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrDistanceTypeKind& elt)
 {
   os << msrDistanceTypeKindAsString (elt);
   return os;
 }
 
-string msrGlyphTypeKindAsString (
+std::string msrGlyphTypeKindAsString (
   msrGlyphTypeKind glyphTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (glyphTypeKind) {
     case msrGlyphTypeKind::kGlyphType_NO_:
@@ -323,7 +321,7 @@ string msrGlyphTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrGlyphTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrGlyphTypeKind& elt)
 {
   os << msrGlyphTypeKindAsString (elt);
   return os;
@@ -353,7 +351,7 @@ void msrPageLayout::setOddMarginsGroup (
   S_msrMarginsGroup val)
 {
   if (fBothMarginsGroup) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "setting an odd margins group when there is already a both margins group in " <<
@@ -374,7 +372,7 @@ void msrPageLayout::setEvenMarginsGroup (
   S_msrMarginsGroup val)
 {
   if (fBothMarginsGroup) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "setting an even margins group when there is already a both margins group in " <<
@@ -395,7 +393,7 @@ void msrPageLayout::setBothMarginsGroup (
   S_msrMarginsGroup val)
 {
   if (fOddMarginsGroup || fEvenMarginsGroup) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "setting a both margins group when there is already an odd or even margins group in " <<
@@ -489,7 +487,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPageLayout::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPageLayout>*
@@ -500,7 +498,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPageLayout::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -511,7 +509,7 @@ void msrPageLayout::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPageLayout::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPageLayout>*
@@ -522,7 +520,7 @@ void msrPageLayout::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPageLayout::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -551,9 +549,9 @@ void msrPageLayout::browseData (basevisitor* v)
   */
 }
 
-string msrPageLayout::asString () const
+std::string msrPageLayout::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[PageLayout" <<
@@ -563,17 +561,17 @@ string msrPageLayout::asString () const
   return s.str ();
 }
 
-void msrPageLayout::print (ostream& os) const
+void msrPageLayout::print (std::ostream& os) const
 {
-  os << "[PageLayout" << endl;
+  os << "[PageLayout" << std::endl;
 
   const int fieldWidth = 17;
 
   ++gIndenter;
 
   // page size
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPageHeight" << " : ";
     if (fPageHeight) {
       os << fPageHeight;
@@ -581,10 +579,10 @@ void msrPageLayout::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPageWidth" << " : ";
     if (fPageWidth) {
       os << fPageWidth;
@@ -592,51 +590,51 @@ void msrPageLayout::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
   // margins groups
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fOddMarginsGroup" << " : ";
     if (fOddMarginsGroup) {
       os << fOddMarginsGroup;
     }
     else {
-      os << "[NONE]" << endl;
+      os << "[NONE]" << std::endl;
     }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fEvenMarginsGroup" << " : ";
     if (fEvenMarginsGroup) {
       os << fEvenMarginsGroup;
     }
     else {
-      os << "[NONE]" << endl;
+      os << "[NONE]" << std::endl;
     }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fBothMarginsGroup" << " : ";
     if (fBothMarginsGroup) {
       os << fBothMarginsGroup;
     }
     else {
-      os << "[NONE]" << endl;
+      os << "[NONE]" << std::endl;
     }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrPageLayout& elt)
+std::ostream& operator << (std::ostream& os, const S_msrPageLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -666,7 +664,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSystemLayout::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSystemLayout>*
@@ -677,7 +675,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSystemLayout::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -688,7 +686,7 @@ void msrSystemLayout::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSystemLayout::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSystemLayout>*
@@ -699,7 +697,7 @@ void msrSystemLayout::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSystemLayout::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -718,9 +716,9 @@ void msrSystemLayout::browseData (basevisitor* v)
     */
 }
 
-string msrSystemLayout::asString () const
+std::string msrSystemLayout::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[SystemLayout" <<
@@ -730,17 +728,17 @@ string msrSystemLayout::asString () const
   return s.str ();
 }
 
-void msrSystemLayout::print (ostream& os) const
+void msrSystemLayout::print (std::ostream& os) const
 {
-  os << "[SystemLayout" << endl;
+  os << "[SystemLayout" << std::endl;
 
   const int fieldWidth = 18;
 
   ++gIndenter;
 
   // margins
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fLeftMargin" << " : ";
     if (fLeftMargin) {
       os << fLeftMargin;
@@ -748,10 +746,10 @@ void msrSystemLayout::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fRightMargin" << " : ";
     if (fRightMargin) {
       os << fRightMargin;
@@ -759,11 +757,11 @@ void msrSystemLayout::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
   // distances
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fSystemDistance" << " : ";
     if (fSystemDistance) {
       os << fSystemDistance;
@@ -771,10 +769,10 @@ void msrSystemLayout::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTopSystemDistance" << " : ";
     if (fTopSystemDistance) {
       os << fTopSystemDistance;
@@ -782,20 +780,20 @@ void msrSystemLayout::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSystemLayout& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSystemLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -828,7 +826,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSystemDividers::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSystemDividers>*
@@ -839,7 +837,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSystemDividers::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -850,7 +848,7 @@ void msrSystemDividers::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSystemDividers::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSystemDividers>*
@@ -861,7 +859,7 @@ void msrSystemDividers::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSystemDividers::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -870,9 +868,9 @@ void msrSystemDividers::acceptOut (basevisitor* v)
 void msrSystemDividers::browseData (basevisitor* v)
 {}
 
-string msrSystemDividers::asString () const
+std::string msrSystemDividers::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[SystemDividers" <<
@@ -882,34 +880,34 @@ string msrSystemDividers::asString () const
   return s.str ();
 }
 
-void msrSystemDividers::print (ostream& os) const
+void msrSystemDividers::print (std::ostream& os) const
 {
-  os << "[SystemDividers" << endl;
+  os << "[SystemDividers" << std::endl;
 
   const int fieldWidth = 13;
 
   ++gIndenter;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fLeftDivider" << " : " << fLeftDivider <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fRightDivider" << " : " << fRightDivider <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSystemDividers& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSystemDividers& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -944,7 +942,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStaffLayout::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStaffLayout>*
@@ -955,7 +953,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStaffLayout::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -966,7 +964,7 @@ void msrStaffLayout::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStaffLayout::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStaffLayout>*
@@ -977,7 +975,7 @@ void msrStaffLayout::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStaffLayout::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -986,9 +984,9 @@ void msrStaffLayout::acceptOut (basevisitor* v)
 void msrStaffLayout::browseData (basevisitor* v)
 {}
 
-string msrStaffLayout::asString () const
+std::string msrStaffLayout::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[StaffLayout" <<
@@ -999,41 +997,41 @@ string msrStaffLayout::asString () const
   return s.str ();
 }
 
-void msrStaffLayout::print (ostream& os) const
+void msrStaffLayout::print (std::ostream& os) const
 {
-  os << "[StaffLayout" << endl;
+  os << "[StaffLayout" << std::endl;
 
   const int fieldWidth = 14;
 
   ++gIndenter;
 
   // staff number
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fStaffNumber" << " : " << fStaffNumber <<
-    endl;
+    std::endl;
 
   // staff distance
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fStaffDistance" << " : ";
   if (fStaffDistance) {
     os << fStaffDistance;
   }
-  os << endl;
+  os << std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrStaffLayout& elt)
+std::ostream& operator << (std::ostream& os, const S_msrStaffLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1063,7 +1061,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureLayout::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureLayout>*
@@ -1074,7 +1072,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureLayout::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1085,7 +1083,7 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureLayout::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureLayout>*
@@ -1096,7 +1094,7 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureLayout::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1105,9 +1103,9 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
 void msrMeasureLayout::browseData (basevisitor* v)
 {}
 
-string msrMeasureLayout::asString () const
+std::string msrMeasureLayout::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[MeasureLayout" <<
@@ -1118,32 +1116,32 @@ string msrMeasureLayout::asString () const
   return s.str ();
 }
 
-void msrMeasureLayout::print (ostream& os) const
+void msrMeasureLayout::print (std::ostream& os) const
 {
-  os << "[MeasureLayout" << endl;
+  os << "[MeasureLayout" << std::endl;
 
   const int fieldWidth = 14;
 
   ++gIndenter;
 
   // measure distance
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fMeasureDistance" << " : " << fMeasureDistance <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrMeasureLayout& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMeasureLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1165,7 +1163,7 @@ S_msrPrintLayout msrPrintLayout::create (
 msrPrintLayout::msrPrintLayout (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -1173,7 +1171,7 @@ msrPrintLayout::msrPrintLayout (
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1195,7 +1193,7 @@ void msrPrintLayout::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPrintLayout::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPrintLayout>*
@@ -1206,7 +1204,7 @@ void msrPrintLayout::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPrintLayout::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1217,7 +1215,7 @@ void msrPrintLayout::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPrintLayout::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPrintLayout>*
@@ -1228,7 +1226,7 @@ void msrPrintLayout::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPrintLayout::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1249,7 +1247,7 @@ void msrPrintLayout::browseData (basevisitor* v)
   }
 
   for (
-    list<S_msrStaffLayout>::const_iterator i = fStaffLayoutsList.begin ();
+    std::list<S_msrStaffLayout>::const_iterator i = fStaffLayoutsList.begin ();
     i != fStaffLayoutsList.end ();
     ++i
   ) {
@@ -1265,9 +1263,9 @@ void msrPrintLayout::browseData (basevisitor* v)
   }
 }
 
-string msrPrintLayout::asString () const
+std::string msrPrintLayout::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[PrintLayout" <<
@@ -1277,35 +1275,35 @@ string msrPrintLayout::asString () const
   return s.str ();
 }
 
-void msrPrintLayout::print (ostream& os) const
+void msrPrintLayout::print (std::ostream& os) const
 {
   os <<
     "[PrintLayout" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPageLayout" << " : ";
     if (fPageLayout) {
       os << fPageLayout;
     }
     else {
-      os << "[NONE]" << endl;
+      os << "[NONE]" << std::endl;
     }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fSystemLayout" << " : ";
     if (fSystemLayout) {
       os << fSystemLayout;
     }
     else {
-      os << "[NONE]" << endl;
+      os << "[NONE]" << std::endl;
     }
 
   size_t
@@ -1313,83 +1311,83 @@ void msrPrintLayout::print (ostream& os) const
       fStaffLayoutsList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "staffLayoutsList" << " : " <<
     mfSingularOrPlural (
       staffLayoutsListSize, "element", "elements") <<
-    endl;
+    std::endl;
 
   if (staffLayoutsListSize) {
     ++gIndenter;
 
-    list<S_msrStaffLayout>::const_iterator
+    std::list<S_msrStaffLayout>::const_iterator
       iBegin = fStaffLayoutsList.begin (),
       iEnd   = fStaffLayoutsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
   }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "systemDividers" << " : ";
     if (fSystemDividers) {
       os << fSystemDividers;
     }
     else {
-      os << "[NONE]" << endl;
+      os << "[NONE]" << std::endl;
     }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fStaffSpacing" << " : " << fStaffSpacing <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fNewSystem" << " : " << fNewSystem <<
-    endl;
-  os << left <<
-    setw (fieldWidth) <<
+    std::endl;
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fNewPage" << " : " << fNewPage <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fBlankPage" << " : " << fBlankPage <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPageNumber" << " : " << fPageNumber <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrPrintLayout::printShort (ostream& os) const
+void msrPrintLayout::printShort (std::ostream& os) const
 {
   os <<
     "[PrintLayout" <<
     ", line " << fInputLineNumber <<
     ']' <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrPrintLayout& elt)
+std::ostream& operator << (std::ostream& os, const S_msrPrintLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1420,7 +1418,7 @@ msrLineWidth::msrLineWidth (
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1436,7 +1434,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrLineWidth::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrLineWidth>*
@@ -1447,7 +1445,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrLineWidth::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1458,7 +1456,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrLineWidth::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrLineWidth>*
@@ -1469,7 +1467,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrLineWidth::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1478,9 +1476,9 @@ void msrLineWidth::acceptOut (basevisitor* v)
 void msrLineWidth::browseData (basevisitor* v)
 {}
 
-string msrLineWidth::asString () const
+std::string msrLineWidth::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[LineWidth" <<
@@ -1499,23 +1497,23 @@ string msrLineWidth::asString () const
   return s.str ();
 }
 
-void msrLineWidth::print (ostream& os) const
+void msrLineWidth::print (std::ostream& os) const
 {
   os <<
     "[LineWidth" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fLineWidthTypeKind" << " : " << fLineWidthTypeKind <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fLineWidthValue" <<  " : ";
     if (fLineWidthValue) {
       os << fLineWidthValue;
@@ -1523,20 +1521,20 @@ void msrLineWidth::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrLineWidth& elt)
+std::ostream& operator << (std::ostream& os, const S_msrLineWidth& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1567,7 +1565,7 @@ msrNoteSize::msrNoteSize (
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1583,7 +1581,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrNoteSize::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrNoteSize>*
@@ -1594,7 +1592,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrNoteSize::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1605,7 +1603,7 @@ void msrNoteSize::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrNoteSize::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrNoteSize>*
@@ -1616,7 +1614,7 @@ void msrNoteSize::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrNoteSize::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1625,9 +1623,9 @@ void msrNoteSize::acceptOut (basevisitor* v)
 void msrNoteSize::browseData (basevisitor* v)
 {}
 
-string msrNoteSize::asString () const
+std::string msrNoteSize::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[NoteSize" <<
@@ -1639,38 +1637,38 @@ string msrNoteSize::asString () const
   return s.str ();
 }
 
-void msrNoteSize::print (ostream& os) const
+void msrNoteSize::print (std::ostream& os) const
 {
   os <<
     "[NoteSize" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fNoteSizeTypeKind" << " : " << fNoteSizeTypeKind <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fNoteSizeValue" <<  " : " << fNoteSizeValue <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrNoteSize& elt)
+std::ostream& operator << (std::ostream& os, const S_msrNoteSize& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1701,7 +1699,7 @@ msrDistance::msrDistance (
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1717,7 +1715,7 @@ void msrDistance::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDistance::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDistance>*
@@ -1728,7 +1726,7 @@ void msrDistance::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDistance::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1739,7 +1737,7 @@ void msrDistance::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDistance::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDistance>*
@@ -1750,7 +1748,7 @@ void msrDistance::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDistance::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1759,9 +1757,9 @@ void msrDistance::acceptOut (basevisitor* v)
 void msrDistance::browseData (basevisitor* v)
 {}
 
-string msrDistance::asString () const
+std::string msrDistance::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Distance" <<
@@ -1773,38 +1771,38 @@ string msrDistance::asString () const
   return s.str ();
 }
 
-void msrDistance::print (ostream& os) const
+void msrDistance::print (std::ostream& os) const
 {
   os <<
     "[Distance" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fDistanceTypeKind" << " : " << fDistanceTypeKind <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fDistanceValue" <<  " : " << fDistanceValue <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrDistance& elt)
+std::ostream& operator << (std::ostream& os, const S_msrDistance& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1814,7 +1812,7 @@ ostream& operator << (ostream& os, const S_msrDistance& elt)
 S_msrGlyph msrGlyph::create (
   int              inputLineNumber,
   msrGlyphTypeKind glyphTypeKind,
-  const string&    glyphValue)
+  const std::string&    glyphValue)
 {
   msrGlyph* o =
     new msrGlyph (
@@ -1828,14 +1826,14 @@ S_msrGlyph msrGlyph::create (
 msrGlyph::msrGlyph (
   int              inputLineNumber,
   msrGlyphTypeKind glyphTypeKind,
-  const string&    glyphValue)
+  const std::string&    glyphValue)
     : msrElement (inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1851,7 +1849,7 @@ void msrGlyph::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrGlyph::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrGlyph>*
@@ -1862,7 +1860,7 @@ void msrGlyph::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrGlyph::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1873,7 +1871,7 @@ void msrGlyph::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrGlyph::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrGlyph>*
@@ -1884,7 +1882,7 @@ void msrGlyph::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrGlyph::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1893,9 +1891,9 @@ void msrGlyph::acceptOut (basevisitor* v)
 void msrGlyph::browseData (basevisitor* v)
 {}
 
-string msrGlyph::asString () const
+std::string msrGlyph::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Glyph" <<
@@ -1907,38 +1905,38 @@ string msrGlyph::asString () const
   return s.str ();
 }
 
-void msrGlyph::print (ostream& os) const
+void msrGlyph::print (std::ostream& os) const
 {
   os <<
     "[Glyph" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "glyphTypeKind" << " : " << fGlyphTypeKind <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fGlyphValue" <<  " : \"" << fGlyphValue << "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrGlyph& elt)
+std::ostream& operator << (std::ostream& os, const S_msrGlyph& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1948,7 +1946,7 @@ ostream& operator << (ostream& os, const S_msrGlyph& elt)
 S_msrOtherAppearance msrOtherAppearance::create (
   int                        inputLineNumber,
   msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-  const string&              otherAppearanceValue)
+  const std::string&              otherAppearanceValue)
 {
   msrOtherAppearance* o =
     new msrOtherAppearance (
@@ -1962,14 +1960,14 @@ S_msrOtherAppearance msrOtherAppearance::create (
 msrOtherAppearance::msrOtherAppearance (
   int                        inputLineNumber,
   msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-  const string&              otherAppearanceValue)
+  const std::string&              otherAppearanceValue)
     : msrElement (inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1985,7 +1983,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrOtherAppearance::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrOtherAppearance>*
@@ -1996,7 +1994,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrOtherAppearance::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -2007,7 +2005,7 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrOtherAppearance::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrOtherAppearance>*
@@ -2018,7 +2016,7 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrOtherAppearance::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -2027,9 +2025,9 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
 void msrOtherAppearance::browseData (basevisitor* v)
 {}
 
-string msrOtherAppearance::asString () const
+std::string msrOtherAppearance::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[OtherAppearance" <<
@@ -2041,38 +2039,38 @@ string msrOtherAppearance::asString () const
   return s.str ();
 }
 
-void msrOtherAppearance::print (ostream& os) const
+void msrOtherAppearance::print (std::ostream& os) const
 {
   os <<
     "[OtherAppearance" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fOtherAppearanceTypeKind" << " : " << fOtherAppearanceTypeKind <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fOtherAppearanceValue" <<  " : " << fOtherAppearanceValue <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrOtherAppearance& elt)
+std::ostream& operator << (std::ostream& os, const S_msrOtherAppearance& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -2097,7 +2095,7 @@ msrAppearance::msrAppearance (
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
     gLogStream <<
       "Creating an appearance" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2110,7 +2108,7 @@ void msrAppearance::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrAppearance::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrAppearance>*
@@ -2121,7 +2119,7 @@ void msrAppearance::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrAppearance::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -2132,7 +2130,7 @@ void msrAppearance::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrAppearance::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrAppearance>*
@@ -2143,7 +2141,7 @@ void msrAppearance::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrAppearance::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -2152,15 +2150,15 @@ void msrAppearance::acceptOut (basevisitor* v)
 void msrAppearance::browseData (basevisitor* v)
 {
 /*
-    list<S_msrLineWidth>  fLineWidthsList;
+    std::list<S_msrLineWidth>  fLineWidthsList;
 
-    list<S_msrNoteSize>   fNoteSizesList;
+    std::list<S_msrNoteSize>   fNoteSizesList;
 
-    list<S_msrDistance>   fDistancesList;
+    std::list<S_msrDistance>   fDistancesList;
 
-    list<S_msrGlyph>      fGlyphsList;
+    std::list<S_msrGlyph>      fGlyphsList;
 
-    list<S_msrOtherAppearance>
+    std::list<S_msrOtherAppearance>
                           fOtherAppearancesList;
 
 
@@ -2184,9 +2182,9 @@ void msrAppearance::browseData (basevisitor* v)
   */
 }
 
-string msrAppearance::asString () const
+std::string msrAppearance::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Appearance" <<
@@ -2201,12 +2199,12 @@ string msrAppearance::asString () const
   return s.str ();
 }
 
-void msrAppearance::print (ostream& os) const
+void msrAppearance::print (std::ostream& os) const
 {
   os <<
     "[Appearance" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -2218,23 +2216,23 @@ void msrAppearance::print (ostream& os) const
       fLineWidthsList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "lineWidthsList" << " : " <<
     mfSingularOrPlural (
       lineWidthsListSize, "element", "elements") <<
-    endl;
+    std::endl;
 
   if (lineWidthsListSize) {
     ++gIndenter;
 
-    list<S_msrLineWidth>::const_iterator
+    std::list<S_msrLineWidth>::const_iterator
       iBegin = fLineWidthsList.begin (),
       iEnd   = fLineWidthsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
@@ -2246,23 +2244,23 @@ void msrAppearance::print (ostream& os) const
       fNoteSizesList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "noteSizesList" << " : " <<
     mfSingularOrPlural (
       noteSizesListSize, "element", "elements") <<
-    endl;
+    std::endl;
 
   if (noteSizesListSize) {
     ++gIndenter;
 
-    list<S_msrNoteSize>::const_iterator
+    std::list<S_msrNoteSize>::const_iterator
       iBegin = fNoteSizesList.begin (),
       iEnd   = fNoteSizesList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
@@ -2274,23 +2272,23 @@ void msrAppearance::print (ostream& os) const
       fDistancesList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "distancesList" << " : " <<
     mfSingularOrPlural (
       distancesListSize, "element", "elements") <<
-    endl;
+    std::endl;
 
   if (distancesListSize) {
     ++gIndenter;
 
-    list<S_msrDistance>::const_iterator
+    std::list<S_msrDistance>::const_iterator
       iBegin = fDistancesList.begin (),
       iEnd   = fDistancesList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
@@ -2302,23 +2300,23 @@ void msrAppearance::print (ostream& os) const
       fGlyphsList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "glyphsList" << " : " <<
     mfSingularOrPlural (
       glyphsListSize, "element", "elements") <<
-    endl;
+    std::endl;
 
   if (glyphsListSize) {
     ++gIndenter;
 
-    list<S_msrGlyph>::const_iterator
+    std::list<S_msrGlyph>::const_iterator
       iBegin = fGlyphsList.begin (),
       iEnd   = fGlyphsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
@@ -2330,23 +2328,23 @@ void msrAppearance::print (ostream& os) const
       fOtherAppearancesList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "otherAppearancesList" << " : " <<
     mfSingularOrPlural (
       otherAppearancesListSize, "element", "elements") <<
-    endl;
+    std::endl;
 
   if (otherAppearancesListSize) {
     ++gIndenter;
 
-    list<S_msrOtherAppearance>::const_iterator
+    std::list<S_msrOtherAppearance>::const_iterator
       iBegin = fOtherAppearancesList.begin (),
       iEnd   = fOtherAppearancesList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
@@ -2354,16 +2352,16 @@ void msrAppearance::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrAppearance& elt)
+std::ostream& operator << (std::ostream& os, const S_msrAppearance& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

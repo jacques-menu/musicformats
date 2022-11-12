@@ -14,8 +14,6 @@
 #include "msrComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -31,7 +29,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Initializing MSR format component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -46,7 +44,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -56,7 +54,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 14, 2021",
-          list<string> {
+          std::list<std::string> {
             "Refined MSR names and summary display options"
           }
       ));
@@ -66,7 +64,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "November 27, 2021",
-          list<string> {
+          std::list<std::string> {
             "Finalized harmonies handling in MSR"
           }
       ));
@@ -76,7 +74,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.61"),
           "November 27, 2021",
-          list<string> {
+          std::list<std::string> {
             "Added msrCrescDecresc to MSR"
           }
       ));
@@ -86,7 +84,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.62"),
           "November 27, 2021",
-          list<string> {
+          std::list<std::string> {
             "Added measure end line numbers to MSR"
           }
       ));
@@ -96,7 +94,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.63"),
           "May 17, 2022",
-          list<string> {
+          std::list<std::string> {
             "Introduced msrSegmentComponent in MSR"
           }
       ));
@@ -106,7 +104,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.64"),
           "July 22, 2022",
-          list<string> {
+          std::list<std::string> {
             "Fixed unchechecked smart pointers in msrNotes.cpp",
             "Finalized the representation of full-bar rests"
           }
@@ -117,7 +115,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "October 6, 2022",
-          list<string> {
+          std::list<std::string> {
             "Finalized the computation of positions in measures",
             "Finalized the '-display-msr-*' options"
           }

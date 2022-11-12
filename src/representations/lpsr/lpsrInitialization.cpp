@@ -35,7 +35,7 @@ void initializeLPSR ()
     ) {
       gLogStream <<
         "Initializing LPSR" <<
-        endl;
+        std::endl;
     }
 #endif
 

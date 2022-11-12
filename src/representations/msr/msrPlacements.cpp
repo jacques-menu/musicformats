@@ -25,7 +25,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 msrPlacementKind msrPlacementKindFromString (
   int           inputLineNumber,
-  const string& placementString)
+  const std::string& placementString)
 {
   msrPlacementKind result = msrPlacementKind::kPlacement_NO_; // default value
 
@@ -35,7 +35,7 @@ msrPlacementKind msrPlacementKindFromString (
     result = msrPlacementKind::kPlacementBelow;
   else {
     if (placementString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "placement \"" << placementString <<
@@ -52,10 +52,10 @@ msrPlacementKind msrPlacementKindFromString (
   return result;
 }
 
-string msrPlacementKindAsString (
+std::string msrPlacementKindAsString (
   msrPlacementKind placementKind)
 {
-  string result;
+  std::string result;
 
   switch (placementKind) {
     case msrPlacementKind::kPlacement_NO_:
@@ -76,7 +76,7 @@ string msrPlacementKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrPlacementKind& elt)
+std::ostream& operator << (std::ostream& os, const msrPlacementKind& elt)
 {
   os << msrPlacementKindAsString (elt);
   return os;

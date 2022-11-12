@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -34,8 +34,6 @@
 
 #include "LilyPondIssue34InsiderHandler.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -98,11 +96,11 @@ R"(Generate GENERATION_API code to the output.
 The NUMBER generation API kinds available are:
 GENERATION_API_KINDS.
 The default is 'DEFAULT_VALUE'.)",
-            regex ("NUMBER"),
-            to_string (gGlobalGenerationAPIKindsMap.size ())),
-          regex ("GENERATION_API_KINDS"),
+            std::regex ("NUMBER"),
+            std::to_string (gGlobalGenerationAPIKindsMap.size ())),
+          std::regex ("GENERATION_API_KINDS"),
           existingGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-        regex ("DEFAULT_VALUE"),
+        std::regex ("DEFAULT_VALUE"),
         msrGenerationAPIKindAsString (
           msrGenerationAPIKindDefaultValue)),
       "GENERATION_API",
@@ -141,11 +139,11 @@ void LilyPondIssue34OahGroup::initializeMultiGenerationOutputOptions ()
 // The NUMBER generation API kinds available are:
 // GENERATION_API_KINDS.
 // The default is 'DEFAULT_VALUE'.)",
-//             regex ("NUMBER"),
-//             to_string (gGlobalMultiGenerationOutputKindsMap.size ())),
-//           regex ("GENERATION_API_KINDS"),
+//             std::regex ("NUMBER"),
+//             std::to_string (gGlobalMultiGenerationOutputKindsMap.size ())),
+//           std::regex ("GENERATION_API_KINDS"),
 //           existingMultiGenerationOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-//         regex ("DEFAULT_VALUE"),
+//         std::regex ("DEFAULT_VALUE"),
 //         mfMultiGenerationOutputKindAsString (
 //           multiGenerationKindDefaultValue)),
 //       "fMultiGenerationOutputKind",
@@ -181,12 +179,12 @@ void LilyPondIssue34OahGroup::checkGroupOptionsConsistency ()
   switch (fMultiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           fUpLinkToHandler->getHandlerServiceName () <<
           " needs an generate code option chosen among:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
 
@@ -209,7 +207,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34OahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -222,7 +220,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -235,7 +233,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34OahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -248,7 +246,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -261,7 +259,7 @@ void LilyPondIssue34OahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34OahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -271,7 +269,7 @@ void LilyPondIssue34OahGroup::printLilyPondIssue34OahValues (
 {
   gLogStream <<
     "The LilyPondIssue34 options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -280,14 +278,14 @@ void LilyPondIssue34OahGroup::printLilyPondIssue34OahValues (
 
   gLogStream <<
     "Generation API:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fGenerationAPIKind" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fGenerationAPIKind" << " : " <<
       msrGenerationAPIKindAsString (fGenerationAPIKind) <<
-      endl;
+      std::endl;
 
   --gIndenter;
 
@@ -296,27 +294,27 @@ void LilyPondIssue34OahGroup::printLilyPondIssue34OahValues (
 
   gLogStream <<
     "multi-generation output:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fMultiGenerationOutputKind" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fMultiGenerationOutputKind" << " : " <<
       mfMultiGenerationOutputKindAsString (fMultiGenerationOutputKind) <<
-      endl;
+      std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_LilyPondIssue34OahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34OahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -329,20 +327,20 @@ S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global LilyPondIssue34 OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // protect library against multiple initializations
   if (! gGlobalLilyPondIssue34OahGroup) {
 
-    // initialize the generation API kinds map
+    // initialize the generation API kinds std::map
     // ------------------------------------------------------
 
     initializeMsrGenerationAPI ();
 
 
-    // initialize the multi-generation output kinds map
+    // initialize the multi-generation output kinds std::map
     // ------------------------------------------------------
 
     initializeMultiGenerationOutputKindsMap ();

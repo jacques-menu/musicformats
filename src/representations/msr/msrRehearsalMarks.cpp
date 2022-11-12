@@ -23,8 +23,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -33,7 +31,7 @@ S_msrRehearsalMark msrRehearsalMark::create (
   int                  inputLineNumber,
   S_msrMeasure         upLinkToMeasure,
   msrRehearsalMarkKind rehearsalKind,
-  const string&        rehearsalText,
+  const std::string&        rehearsalText,
   msrPlacementKind     rehearsalPlacementKind)
 {
   msrRehearsalMark* o =
@@ -51,9 +49,9 @@ msrRehearsalMark::msrRehearsalMark (
   int                  inputLineNumber,
   S_msrMeasure         upLinkToMeasure,
   msrRehearsalMarkKind rehearsalKind,
-  const string&        rehearsalText,
+  const std::string&        rehearsalText,
   msrPlacementKind     rehearsalPlacementKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -72,7 +70,7 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRehearsalMark::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRehearsalMark>*
@@ -83,7 +81,7 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRehearsalMark::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -94,7 +92,7 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRehearsalMark::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRehearsalMark>*
@@ -105,7 +103,7 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRehearsalMark::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -114,10 +112,10 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
 void msrRehearsalMark::browseData (basevisitor* v)
 {}
 
-string msrRrehearsalKindAsString (
+std::string msrRrehearsalKindAsString (
   msrRehearsalMarkKind rehearsalKind)
 {
-  string result;
+  std::string result;
 
   switch (rehearsalKind) {
     case msrRehearsalMarkKind::kRehearsalMarkNone:
@@ -146,15 +144,15 @@ string msrRrehearsalKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrRehearsalMarkKind& elt)
+std::ostream& operator << (std::ostream& os, const msrRehearsalMarkKind& elt)
 {
   os << msrRrehearsalKindAsString (elt);
   return os;
 }
 
-string msrRehearsalMark::asString () const
+std::string msrRehearsalMark::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[RehearsalMark" <<
@@ -166,18 +164,18 @@ string msrRehearsalMark::asString () const
   return s.str ();
 }
 
-void msrRehearsalMark::print (ostream& os) const
+void msrRehearsalMark::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrRehearsalMark& elt)
+std::ostream& operator << (std::ostream& os, const S_msrRehearsalMark& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

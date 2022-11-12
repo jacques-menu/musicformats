@@ -9,19 +9,17 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
-#include "msrNotes.h"
+// #include "msrNotes.h"
 #include "msrOrnaments.h"
 
 #include "oahOah.h"
 
 #include "msrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -60,7 +58,7 @@ void msrOrnament::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrOrnament::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrOrnament>*
@@ -71,7 +69,7 @@ void msrOrnament::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrOrnament::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -82,7 +80,7 @@ void msrOrnament::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrOrnament::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrOrnament>*
@@ -93,7 +91,7 @@ void msrOrnament::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrOrnament::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -102,10 +100,10 @@ void msrOrnament::acceptOut (basevisitor* v)
 void msrOrnament::browseData (basevisitor* v)
 {}
 
-string msrOrnamentKindAsString (
+std::string msrOrnamentKindAsString (
   msrOrnamentKind ornamentKind)
 {
-  string result;
+  std::string result;
 
   switch (ornamentKind) {
     case msrOrnamentKind::kOrnamentTrill:
@@ -151,15 +149,15 @@ string msrOrnamentKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrOrnamentKind& elt)
+std::ostream& operator << (std::ostream& os, const msrOrnamentKind& elt)
 {
   os << msrOrnamentKindAsString (elt);
   return os;
 }
 
-string msrOrnament::asString () const
+std::string msrOrnament::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Ornament" <<
@@ -174,44 +172,44 @@ string msrOrnament::asString () const
 }
 
 
-void msrOrnament::print (ostream& os) const
+void msrOrnament::print (std::ostream& os) const
 {
   os <<
     "[Ornament" <<
     ", " << msrPlacementKindAsString (fOrnamentPlacementKind)  <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 16;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fOrnamentPlacementKind" << " : " <<
     msrPlacementKindAsString (fOrnamentPlacementKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fOrnamentAccidentalKind" << " : " <<
     msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fOrnamentUpLinkToNote" << " : " <<
     fOrnamentUpLinkToNote->asShortString () <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrOrnament& elt)
+std::ostream& operator << (std::ostream& os, const S_msrOrnament& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

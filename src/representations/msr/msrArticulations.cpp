@@ -21,8 +21,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -55,10 +53,10 @@ msrArticulation::msrArticulation (
 msrArticulation::~msrArticulation ()
 {}
 
-string msrArticulationKindAsString (
+std::string msrArticulationKindAsString (
   msrArticulationKind articulationKind)
 {
-  string result;
+  std::string result;
 
   switch (articulationKind) {
     case msrArticulationKind::kArticulation_NO_:
@@ -124,7 +122,7 @@ string msrArticulationKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrArticulationKind& elt)
+std::ostream& operator << (std::ostream& os, const msrArticulationKind& elt)
 {
   os << msrArticulationKindAsString (elt);
   return os;
@@ -135,7 +133,7 @@ void msrArticulation::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrArticulation::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrArticulation>*
@@ -146,7 +144,7 @@ void msrArticulation::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrArticulation::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -157,7 +155,7 @@ void msrArticulation::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrArticulation::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrArticulation>*
@@ -168,7 +166,7 @@ void msrArticulation::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrArticulation::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -177,9 +175,9 @@ void msrArticulation::acceptOut (basevisitor* v)
 void msrArticulation::browseData (basevisitor* v)
 {}
 
-string msrArticulation::asString () const
+std::string msrArticulation::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Articulation " <<
@@ -191,18 +189,18 @@ string msrArticulation::asString () const
   return s.str ();
 }
 
-void msrArticulation::print (ostream& os) const
+void msrArticulation::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrArticulation& elt)
+std::ostream& operator << (std::ostream& os, const S_msrArticulation& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -244,7 +242,7 @@ void msrFermata::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrFermata::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrFermata>*
@@ -255,7 +253,7 @@ void msrFermata::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrFermata::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -266,7 +264,7 @@ void msrFermata::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrFermata::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrFermata>*
@@ -277,7 +275,7 @@ void msrFermata::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrFermata::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -286,10 +284,10 @@ void msrFermata::acceptOut (basevisitor* v)
 void msrFermata::browseData (basevisitor* v)
 {}
 
-string msrFermataShapeKindAsString (
+std::string msrFermataShapeKindAsString (
   msrFermataShapeKind fermataShapeKind)
 {
-  string result;
+  std::string result;
 
   switch (fermataShapeKind) {
     case msrFermataShapeKind::kArticulationFermataNormal:
@@ -306,16 +304,16 @@ string msrFermataShapeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrFermataShapeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrFermataShapeKind& elt)
 {
   os << msrFermataShapeKindAsString (elt);
   return os;
 }
 
-string msrArticulationFermataTypeAsString (
+std::string msrArticulationFermataTypeAsString (
   msrArticulationFermataType fermataTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (fermataTypeKind) {
     case msrArticulationFermataType::kArticulationFermataTypeNone:
@@ -332,15 +330,15 @@ string msrArticulationFermataTypeAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrArticulationFermataType& elt)
+std::ostream& operator << (std::ostream& os, const msrArticulationFermataType& elt)
 {
   os << msrArticulationFermataTypeAsString (elt);
   return os;
 }
 
-string msrFermata::asString () const
+std::string msrFermata::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Fermata" <<
@@ -352,18 +350,18 @@ string msrFermata::asString () const
   return s.str ();
 }
 
-void msrFermata::print (ostream& os) const
+void msrFermata::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrFermata& elt)
+std::ostream& operator << (std::ostream& os, const S_msrFermata& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -404,7 +402,7 @@ msrArpeggiato::msrArpeggiato (
 msrArpeggiato::~msrArpeggiato ()
 {}
 
-string msrArpeggiato::arpeggiatoDirectionKindAsString () const
+std::string msrArpeggiato::arpeggiatoDirectionKindAsString () const
 {
   return
     msrDirectionKindAsString (fArpeggiatoDirectionKind);
@@ -415,7 +413,7 @@ void msrArpeggiato::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrArpeggiato::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrArpeggiato>*
@@ -426,7 +424,7 @@ void msrArpeggiato::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrArpeggiato::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -437,7 +435,7 @@ void msrArpeggiato::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrArpeggiato::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrArpeggiato>*
@@ -448,7 +446,7 @@ void msrArpeggiato::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrArpeggiato::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -457,9 +455,9 @@ void msrArpeggiato::acceptOut (basevisitor* v)
 void msrArpeggiato::browseData (basevisitor* v)
 {}
 
-string msrArpeggiato::asString () const
+std::string msrArpeggiato::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Arpeggiato " <<
@@ -472,18 +470,18 @@ string msrArpeggiato::asString () const
   return s.str ();
 }
 
-void msrArpeggiato::print (ostream& os) const
+void msrArpeggiato::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrArpeggiato& elt)
+std::ostream& operator << (std::ostream& os, const S_msrArpeggiato& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -524,10 +522,10 @@ msrNonArpeggiato::msrNonArpeggiato (
 msrNonArpeggiato::~msrNonArpeggiato ()
 {}
 
-string msrNonArpeggiatoTypeKindAsString (
+std::string msrNonArpeggiatoTypeKindAsString (
   msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (nonArpeggiatoTypeKind) {
     case msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeNone:
@@ -544,7 +542,7 @@ string msrNonArpeggiatoTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrNonArpeggiatoTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrNonArpeggiatoTypeKind& elt)
 {
   os << msrNonArpeggiatoTypeKindAsString (elt);
   return os;
@@ -555,7 +553,7 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrNonArpeggiato::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrNonArpeggiato>*
@@ -566,7 +564,7 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrNonArpeggiato::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -577,7 +575,7 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrNonArpeggiato::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrNonArpeggiato>*
@@ -588,7 +586,7 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrNonArpeggiato::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -597,9 +595,9 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
 void msrNonArpeggiato::browseData (basevisitor* v)
 {}
 
-string msrNonArpeggiato::asString () const
+std::string msrNonArpeggiato::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[NonArpeggiato " <<
@@ -612,18 +610,18 @@ string msrNonArpeggiato::asString () const
   return s.str ();
 }
 
-void msrNonArpeggiato::print (ostream& os) const
+void msrNonArpeggiato::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrNonArpeggiato& elt)
+std::ostream& operator << (std::ostream& os, const S_msrNonArpeggiato& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

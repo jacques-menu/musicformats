@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
 
@@ -28,7 +28,6 @@
 #include "mfAssert.h"
 
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
 
 #include "oahEarlyOptions.h"
@@ -42,17 +41,15 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // time signatures
 //______________________________________________________________________________
-string msrTimeSignatureSymbolKindAsString (
+std::string msrTimeSignatureSymbolKindAsString (
   msrTimeSignatureSymbolKind timeSignatureSymbolKind)
 {
-  string result;
+  std::string result;
 
   switch (timeSignatureSymbolKind) {
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCommon:
@@ -81,16 +78,16 @@ string msrTimeSignatureSymbolKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTimeSignatureSymbolKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTimeSignatureSymbolKind& elt)
 {
   os << msrTimeSignatureSymbolKindAsString (elt);
   return os;
 }
 
-string msrTimeSignatureSeparatorKindAsString (
+std::string msrTimeSignatureSeparatorKindAsString (
   msrTimeSignatureSeparatorKind timeSignatureSeparatorKind)
 {
-  string result;
+  std::string result;
 
   switch (timeSignatureSeparatorKind) {
     case msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorNone:
@@ -113,16 +110,16 @@ string msrTimeSignatureSeparatorKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTimeSignatureSeparatorKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTimeSignatureSeparatorKind& elt)
 {
   os << msrTimeSignatureSeparatorKindAsString (elt);
   return os;
 }
 
-string msrTimeSignatureRelationKindAsString (
+std::string msrTimeSignatureRelationKindAsString (
   msrTimeSignatureRelationKind timeSignatureRelationKind)
 {
-  string result;
+  std::string result;
 
   switch (timeSignatureRelationKind) {
     case msrTimeSignatureRelationKind::kTimeSignatureRelationNone:
@@ -151,7 +148,7 @@ string msrTimeSignatureRelationKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTimeSignatureRelationKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTimeSignatureRelationKind& elt)
 {
   os << msrTimeSignatureRelationKindAsString (elt);
   return os;
@@ -180,7 +177,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
     gLogStream <<
       "Creating time signature item" <<
       ", line = " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -231,7 +228,7 @@ void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
       "' to time signature item '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -250,7 +247,7 @@ void msrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue
       "' in time signature item '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -274,7 +271,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTimeSignatureItem::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTimeSignatureItem>*
@@ -285,7 +282,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTimeSignatureItem::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -296,7 +293,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTimeSignatureItem::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTimeSignatureItem>*
@@ -307,7 +304,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTimeSignatureItem::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -316,9 +313,9 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
 void msrTimeSignatureItem::browseData (basevisitor* v)
 {}
 
-string msrTimeSignatureItem::asString () const
+std::string msrTimeSignatureItem::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[TimeSignatureItem ";
@@ -333,7 +330,7 @@ string msrTimeSignatureItem::asString () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time signature item beats numbers vector is empty");
+        "time signature item beats numbers std::vector is empty");
         */
       s <<
         "beats numbers: [NONE]";
@@ -369,9 +366,9 @@ string msrTimeSignatureItem::asString () const
   return s.str ();
 }
 
-string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
+std::string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
 {
-  stringstream s;
+  std::stringstream s;
 
 //   s <<
 //     "TimeSignatureItem ";
@@ -386,7 +383,7 @@ string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time signature item beats numbers vector is empty");
+        "time signature item beats numbers std::vector is empty");
         */
       s <<
         "beats numbers: [NONE]";
@@ -423,18 +420,18 @@ string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrTimeSignatureItem::print (ostream& os) const
+void msrTimeSignatureItem::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTimeSignatureItem& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTimeSignatureItem& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -461,7 +458,7 @@ msrTimeSignature::msrTimeSignature (
   S_msrMeasure  upLinkToMeasure,
   msrTimeSignatureSymbolKind
                 timeSignatureSymbolKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -805,7 +802,7 @@ S_msrTimeSignature msrTimeSignature::createFourHalvesTime (
 //________________________________________________________________________
 S_msrTimeSignature msrTimeSignature::createTimeFromString (
   int           inputLineNumber,
-  const string& timeString)
+  const std::string& timeString)
 {
   /*
     Handles timeString à la LilyPond, such as 3/4
@@ -816,14 +813,14 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating time from string \"" <<
+      "Creating time from std::string \"" <<
       timeString <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string regularExpression (
+  std::string regularExpression (
     "[[:space:]]*"
     "([[:digit:]]+)" // beatsNumber
     "[[:space:]]*"
@@ -838,12 +835,12 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     gLogStream <<
       "regularExpression = " <<
       regularExpression <<
-      endl;
+      std::endl;
   }
 #endif
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (timeString, sm, e);
 
@@ -853,19 +850,19 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for time string \"" << timeString <<
-      "\" with regex \"" << regularExpression <<
+      " for time std::string \"" << timeString <<
+      "\" with std::regex \"" << regularExpression <<
       "\":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
         i << ": " << "\"" << sm [i] << "\"" <<
-        endl;
+        std::endl;
     } // for
-    gLogStream << endl;
+    gLogStream << std::endl;
 
     --gIndenter;
   }
@@ -874,7 +871,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   // handling timeString à la LilyPond, such as "3/4"
 
   if (smSize != 3) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "timeString \"" << timeString <<
@@ -883,7 +880,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     oahError (s.str ());
   }
 
-  string
+  std::string
     beatsNumber   = sm [1],
     beatsDuration = sm [2];
 
@@ -893,25 +890,25 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       "beatsNumber = \"" <<
       beatsNumber <<
       "\"" <<
-      endl <<
+      std::endl <<
 
       "beatsDuration = \"" <<
       beatsDuration <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
     int integerBeatsNumber;
     {
-      stringstream s;
+      std::stringstream s;
       s << beatsNumber;
       s >> integerBeatsNumber;
     }
 
     int integerValue;
     {
-      stringstream s;
+      std::stringstream s;
       s << beatsDuration;
       s >> integerValue;
     }
@@ -921,10 +918,10 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     gLogStream <<
       "integerBeatsNumber = " <<
       integerBeatsNumber <<
-      endl <<
+      std::endl <<
       "integerValue = " <<
       integerValue <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -956,10 +953,21 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 msrTimeSignature::~msrTimeSignature ()
 {}
 
+void msrTimeSignature::setMeasureElementMeasurePosition (
+  const S_msrMeasure measure,
+  const Rational&    measurePosition,
+  const std::string& context)
+{
+  setTimeSignatureMeasurePosition (
+    measure,
+    measurePosition,
+    context);
+}
+
 void msrTimeSignature::setTimeSignatureMeasurePosition (
   const S_msrMeasure measure,
   const Rational&    measurePosition,
-  const string&      context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -977,7 +985,7 @@ void msrTimeSignature::setTimeSignatureMeasurePosition (
       "), context: \"" <<
       context <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1002,7 +1010,7 @@ void msrTimeSignature::appendTimeSignatureItem (
       "' to time '" <<
       "JMI" <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -1023,7 +1031,7 @@ void msrTimeSignature::appendTimeSignatureItem (
     fTimeIsCompound = true;
   }
 
-  // append the time signature item to the vector
+  // append the time signature item to the std::vector
   fTimeSignatureItemsVector.insert (
     fTimeSignatureItemsVector.end (), timeSignatureItem);
 }
@@ -1045,12 +1053,12 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
 
 /* JMI
     gLogStream <<
-      endl << endl <<
+      std::endl << std::endl <<
       "result1 = " <<
       result.getNumerator () <<
       '/' <<
       result.getDenominator () <<
-      endl << endl;
+      std::endl << std::endl;
 */
 
     // iterate over the others
@@ -1062,12 +1070,12 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
 
 /* JMI
       gLogStream <<
-        endl << endl <<
+        std::endl << std::endl <<
         "result2 = " <<
         result.getNumerator () <<
         '/' <<
         result.getDenominator () <<
-        endl << endl;
+        std::endl << std::endl;
         */
 
     } // for
@@ -1078,7 +1086,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
       gGlobalServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
-      "time signature items vector is empty");
+      "time signature items std::vector is empty");
   }
 
   // return result
@@ -1090,7 +1098,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTimeSignature::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTimeSignature>*
@@ -1101,7 +1109,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTimeSignature::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1112,7 +1120,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTimeSignature::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTimeSignature>*
@@ -1123,7 +1131,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTimeSignature::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1132,9 +1140,9 @@ void msrTimeSignature::acceptOut (basevisitor* v)
 void msrTimeSignature::browseData (basevisitor* v)
 {}
 
-string msrTimeSignature::asString () const
+std::string msrTimeSignature::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Time" <<
@@ -1153,7 +1161,7 @@ string msrTimeSignature::asString () const
     s <<
       ", ";
 
-    vector<S_msrTimeSignatureItem>::const_iterator
+    std::vector<S_msrTimeSignatureItem>::const_iterator
       iBegin = fTimeSignatureItemsVector.begin (),
       iEnd   = fTimeSignatureItemsVector.end (),
       i      = iBegin;
@@ -1170,7 +1178,7 @@ string msrTimeSignature::asString () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time  items vector is empty");
+        "time  items std::vector is empty");
     }
   }
 
@@ -1179,10 +1187,10 @@ string msrTimeSignature::asString () const
   return s.str ();
 }
 
-string msrTimeSignature::asShortString () const
+std::string msrTimeSignature::asShortString () const
 {
   /* JMI
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "TimeSignature, " <<
@@ -1201,9 +1209,9 @@ string msrTimeSignature::asShortString () const
   return asString ();
 }
 
-string msrTimeSignature::asShortStringForMeasuresSlices () const
+std::string msrTimeSignature::asShortStringForMeasuresSlices () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '[';
@@ -1225,7 +1233,7 @@ string msrTimeSignature::asShortStringForMeasuresSlices () const
 //     s <<
 //       ", ";
 
-    vector<S_msrTimeSignatureItem>::const_iterator
+    std::vector<S_msrTimeSignatureItem>::const_iterator
       iBegin = fTimeSignatureItemsVector.begin (),
       iEnd   = fTimeSignatureItemsVector.end (),
       i      = iBegin;
@@ -1244,7 +1252,7 @@ string msrTimeSignature::asShortStringForMeasuresSlices () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time  items vector is empty");
+        "time  items std::vector is empty");
     }
   }
 
@@ -1253,40 +1261,40 @@ string msrTimeSignature::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrTimeSignature::print (ostream& os) const
+void msrTimeSignature::print (std::ostream& os) const
 {
   os <<
     "[Time" <<
     ", line "  << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 31;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "timeSignatureSymbolKind" << " : " <<
     msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTimeIsCompound" << " : " <<
     fTimeIsCompound <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "timeSignatureItemsVector.size()" << " : " <<
     mfSingularOrPlural (
       fTimeSignatureItemsVector.size (), "item", "items") <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTimeSignatureItemsVector" << " : ";
 
   if (fTimeSignatureItemsVector.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    vector<S_msrTimeSignatureItem>::const_iterator
+    std::vector<S_msrTimeSignatureItem>::const_iterator
       iBegin = fTimeSignatureItemsVector.begin (),
       iEnd   = fTimeSignatureItemsVector.end (),
       i      = iBegin;
@@ -1294,7 +1302,7 @@ void msrTimeSignature::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
@@ -1303,21 +1311,21 @@ void msrTimeSignature::print (ostream& os) const
   else {
     os <<
       " [NONE]" <<
-      endl;
+      std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTimeSignature& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTimeSignature& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

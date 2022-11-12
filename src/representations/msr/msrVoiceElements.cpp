@@ -12,8 +12,6 @@
 #include "msrVoiceElements.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,13 +24,13 @@ msrVoiceElement::msrVoiceElement (
 msrVoiceElement::~msrVoiceElement ()
 {}
 
-ostream& operator << (ostream& os, const S_msrVoiceElement& elt)
+std::ostream& operator << (std::ostream& os, const S_msrVoiceElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

@@ -26,8 +26,6 @@
 #include "displayOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -96,23 +94,23 @@ if (true) // for tests JMI
     gLogStream <<
       "___PART___" <<
       part <<
-      endl;
+      std::endl;
 */
 
     // print the score
     gOutputStream <<
-      endl <<
+      std::endl <<
       "%--------------------------------------------------------------" <<
-      endl <<
+      std::endl <<
       "The Mikrokosmos III Wandering MSR score contains:" <<
-      endl <<
+      std::endl <<
       "%--------------------------------------------------------------" <<
-      endl << endl;
+      std::endl << std::endl;
 
     ++gIndenter;
     gOutputStream <<
       theMsrScore <<
-      endl;
+      std::endl;
     --gIndenter;
   }
 
@@ -334,7 +332,7 @@ S_msrVoice Mikrokosmos3WanderingGenerator::createRegularVoiceInStaff (
 //------------------------------------------------------------------------
 S_msrMeasure Mikrokosmos3WanderingGenerator::createMeasureInVoice (
   int           inputLineNumber,
-  const string& measureNumber,
+  const std::string& measureNumber,
   S_msrVoice    voice)
 //------------------------------------------------------------------------
 {
@@ -359,7 +357,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure1number = "1"; // the measure number is a string;
+    std::string measure1number = "1"; // the measure number is a std::string;
 
     S_msrMeasure
       measure1 =
@@ -530,7 +528,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
   {
     // create the measure
-    string measure2number = "2"; // the measure number is a string;
+    std::string measure2number = "2"; // the measure number is a std::string;
 
     S_msrMeasure
       measure2 =
@@ -706,7 +704,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure3number = "3"; // the measure number is a string;
+    std::string measure3number = "3"; // the measure number is a std::string;
 
     S_msrMeasure
       measure3 =
@@ -930,7 +928,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure4number = "4"; // the measure number is a string;
+    std::string measure4number = "4"; // the measure number is a std::string;
 
     S_msrMeasure
       measure4 =
@@ -984,7 +982,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure5number = "5"; // the measure number is a string;
+    std::string measure5number = "5"; // the measure number is a std::string;
 
     S_msrMeasure
       measure5 =
@@ -1073,7 +1071,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
     // create the measure
 
 
-    string measure1number = "1"; // the measure number is a string;
+    std::string measure1number = "1"; // the measure number is a std::string;
 
     S_msrMeasure
       measure1 =
@@ -1160,7 +1158,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
   {
     // create the measure
 
-    string measure2number = "2"; // the measure number is a string;
+    std::string measure2number = "2"; // the measure number is a std::string;
 
     S_msrMeasure
       measure2 =
@@ -1222,7 +1220,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
   {
     // create the measure
 
-    string measure3number = "3"; // the measure number is a string;
+    std::string measure3number = "3"; // the measure number is a std::string;
 
     S_msrMeasure
       measure3 =
@@ -1284,7 +1282,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
   {
     // create the measure
 
-    string measure4number = "4"; // the measure number is a string;
+    std::string measure4number = "4"; // the measure number is a std::string;
 
     S_msrMeasure
       measure4 =
@@ -1312,7 +1310,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
   {
     // create the measure
 
-    string measure5number = "5"; // the measure number is a string;
+    std::string measure5number = "5"; // the measure number is a std::string;
 
     S_msrMeasure
       measure5 =
@@ -1355,7 +1353,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure1number = "1"; // the measure number is a string;
+    std::string measure1number = "1"; // the measure number is a std::string;
 
     S_msrMeasure
       measure1 =
@@ -1483,7 +1481,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure2number = "2"; // the measure number is a string;
+    std::string measure2number = "2"; // the measure number is a std::string;
 
     S_msrMeasure
       measure2 =
@@ -1643,7 +1641,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure3number = "3"; // the measure number is a string;
+    std::string measure3number = "3"; // the measure number is a std::string;
 
     S_msrMeasure
       measure3 =
@@ -1809,7 +1807,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure4number = "4"; // the measure number is a string;
+    std::string measure4number = "4"; // the measure number is a std::string;
 
     S_msrMeasure
       measure4 =
@@ -1841,7 +1839,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure5number = "5"; // the measure number is a string;
+    std::string measure5number = "5"; // the measure number is a std::string;
 
     S_msrMeasure
       measure5 =
@@ -1882,7 +1880,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
   {
     // create the measure
 
-    string measure1number = "1"; // the measure number is a string;
+    std::string measure1number = "1"; // the measure number is a std::string;
 
     S_msrMeasure
       measure1 =
@@ -1950,7 +1948,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
   {
     // create the measure
 
-    string measure2number = "2"; // the measure number is a string;
+    std::string measure2number = "2"; // the measure number is a std::string;
 
     S_msrMeasure
       measure2 =
@@ -2011,7 +2009,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
   {
     // create the measure
 
-    string measure3number = "3"; // the measure number is a string;
+    std::string measure3number = "3"; // the measure number is a std::string;
 
     S_msrMeasure
       measure3 =
@@ -2072,7 +2070,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
   {
     // create the measure
 
-    string measure4number = "4"; // the measure number is a string;
+    std::string measure4number = "4"; // the measure number is a std::string;
 
     S_msrMeasure
       measure4 =
@@ -2097,7 +2095,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
   {
     // create the measure
 
-    string measure5number = "5"; // the measure number is a string;
+    std::string measure5number = "5"; // the measure number is a std::string;
 
     S_msrMeasure
       measure5 =
@@ -2138,7 +2136,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure1number = "1"; // the measure number is a string;
+    std::string measure1number = "1"; // the measure number is a std::string;
 
     S_msrMeasure
       measure1 =
@@ -2194,7 +2192,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure2number = "2"; // the measure number is a string;
+    std::string measure2number = "2"; // the measure number is a std::string;
 
     S_msrMeasure
       measure2 =
@@ -2228,7 +2226,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure3number = "3"; // the measure number is a string;
+    std::string measure3number = "3"; // the measure number is a std::string;
 
     S_msrMeasure
       measure3 =
@@ -2262,7 +2260,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure4number = "4"; // the measure number is a string;
+    std::string measure4number = "4"; // the measure number is a std::string;
 
     S_msrMeasure
       measure4 =
@@ -2305,7 +2303,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
   {
     // create the measure
 
-    string measure5number = "5"; // the measure number is a string;
+    std::string measure5number = "5"; // the measure number is a std::string;
 
     S_msrMeasure
       measure5 =
@@ -2362,7 +2360,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
   {
     // create the measure
 
-    string measure1number = "1"; // the measure number is a string;
+    std::string measure1number = "1"; // the measure number is a std::string;
 
     S_msrMeasure
       measure1 =
@@ -2416,7 +2414,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
   {
     // create the measure
 
-    string measure2number = "2"; // the measure number is a string;
+    std::string measure2number = "2"; // the measure number is a std::string;
 
     S_msrMeasure
       measure2 =
@@ -2449,7 +2447,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
   {
     // create the measure
 
-    string measure3number = "3"; // the measure number is a string;
+    std::string measure3number = "3"; // the measure number is a std::string;
 
     S_msrMeasure
       measure3 =
@@ -2482,7 +2480,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
   {
     // create the measure
 
-    string measure4number = "4"; // the measure number is a string;
+    std::string measure4number = "4"; // the measure number is a std::string;
 
     S_msrMeasure
       measure4 =
@@ -2514,7 +2512,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
   {
     // create the measure
 
-    string measure5number = "5"; // the measure number is a string;
+    std::string measure5number = "5"; // the measure number is a std::string;
 
     S_msrMeasure
       measure5 =

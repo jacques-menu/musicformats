@@ -18,19 +18,17 @@
 
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 bsr2brailleException::bsr2brailleException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_bsr2brailleException bsr2brailleException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   bsr2brailleException* o = new
     bsr2brailleException (
@@ -41,12 +39,12 @@ S_bsr2brailleException bsr2brailleException::create (
 }
 
 bsr2brailleInternalException::bsr2brailleInternalException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_bsr2brailleInternalException bsr2brailleInternalException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   bsr2brailleInternalException* o = new
     bsr2brailleInternalException (
@@ -58,9 +56,9 @@ S_bsr2brailleInternalException bsr2brailleInternalException::create (
 
 //______________________________________________________________________________
 void bsr2brailleWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeWarning (
     "bsr2braille",
@@ -70,11 +68,11 @@ void bsr2brailleWarning (
 }
 
 void bsr2brailleInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   gIndenter.resetToZero ();
 

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
 // libmusicxml2
@@ -51,15 +51,13 @@
 #include "msr2brailleInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msr2brailleInsiderHandler msr2brailleInsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   // create the insider handler
   msr2brailleInsiderHandler* o = new
@@ -72,8 +70,8 @@ S_msr2brailleInsiderHandler msr2brailleInsiderHandler::create (
 }
 
 msr2brailleInsiderHandler::msr2brailleInsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahInsiderHandler (
       serviceName,
       handlerHeader,
@@ -93,7 +91,7 @@ Usage: msr2braille [option]* [MusicXMLFile|-] [[option]*
       "Initializing msr2braille insider options handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -116,7 +114,7 @@ void msr2brailleInsiderHandler::initializeHandlerMultiComponent ()
     createMsr2brailleConverterComponent ();
 }
 
-string msr2brailleInsiderHandler::handlerServiceAboutInformation () const
+std::string msr2brailleInsiderHandler::handlerServiceAboutInformation () const
 {
   return
 R"(What msr2braille does:
@@ -152,7 +150,7 @@ void msr2brailleInsiderHandler::createTheXml2braillePrefixes ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msr2braille prefixes" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -161,7 +159,7 @@ void msr2brailleInsiderHandler::createTheXml2braillePrefixes ()
 
 //______________________________________________________________________________
 void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -169,7 +167,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
       "Creating the msr2braille insider option groups" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -242,14 +240,14 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
     // print the options handler initial state
     gLogStream <<
       "msr2brailleInsiderHandler has been initialized as:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     print (gLogStream);
 
     gLogStream <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -265,7 +263,7 @@ void msr2brailleInsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -273,7 +271,7 @@ void msr2brailleInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -281,7 +279,7 @@ string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -305,13 +303,13 @@ string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
       autoOutputFileNameAtom->
         getSetByAnOption ();
 
-  string outputFileName;
+  std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "options' " <<
@@ -336,7 +334,7 @@ string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has NOT been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      string
+      std::string
         inputSourceName =
           gGlobalServiceRunData->getInputSourceName ();
 
@@ -355,7 +353,7 @@ string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
             outputFileName.rfind ('.');
 
         // remove file extension
-        if (posInString != string::npos) {
+        if (posInString != std::string::npos) {
           outputFileName.replace (
             posInString,
             outputFileName.size () - posInString,
@@ -369,7 +367,7 @@ string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -429,7 +427,7 @@ string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -455,7 +453,7 @@ string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3 = " <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -518,7 +516,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -531,7 +529,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -544,7 +542,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -557,7 +555,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -570,7 +568,7 @@ void msr2brailleInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -578,33 +576,33 @@ void msr2brailleInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msr2brailleInsiderHandler::print (ostream& os) const
+void msr2brailleInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "msr2brailleInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -612,7 +610,7 @@ void msr2brailleInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -620,16 +618,16 @@ void msr2brailleInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msr2brailleInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2brailleInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -639,8 +637,8 @@ ostream& operator << (ostream& os, const S_msr2brailleInsiderHandler& elt)
 S_msr2brailleInsiderOahGroup gGlobalMsr2brailleInsiderOahGroup;
 
 S_msr2brailleInsiderOahGroup msr2brailleInsiderOahGroup::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   msr2brailleInsiderOahGroup* o = new msr2brailleInsiderOahGroup (
     serviceName,
@@ -651,8 +649,8 @@ S_msr2brailleInsiderOahGroup msr2brailleInsiderOahGroup::create (
 }
 
 msr2brailleInsiderOahGroup::msr2brailleInsiderOahGroup (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahGroup (
     serviceName,
     "hx2b", "help-msr2braille",
@@ -670,11 +668,11 @@ void msr2brailleInsiderOahGroup::initializeXml2brailleInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -684,7 +682,7 @@ void msr2brailleInsiderOahGroup::printXml2brailleInsiderOahGroupValues (int fiel
 {
   gLogStream <<
     "The msr2braille options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -693,17 +691,17 @@ void msr2brailleInsiderOahGroup::printXml2brailleInsiderOahGroupValues (int fiel
 
   gLogStream <<
     "Quit after some passes:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
     fQuitAfterPass2a <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
     fQuitAfterPass2b <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -712,14 +710,14 @@ void msr2brailleInsiderOahGroup::printXml2brailleInsiderOahGroupValues (int fiel
 
 //______________________________________________________________________________
 S_msr2brailleInsiderOahGroup createGlobalMrailleGenerationOahGroup (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2braille OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

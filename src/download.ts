@@ -2,7 +2,7 @@
 //----------------------------------------------------------------------------
 // a download function
 //----------------------------------------------------------------------------
-function download (filename : string, text: string) : void {
+function download (filename : std::string, text: std::string) : void {
   downloadMedia (filename, text, "text/plain;charset=utf-8,");
   // var element = document.createElement('a');
   // element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -14,7 +14,7 @@ function download (filename : string, text: string) : void {
   // document.body.removeChild(element);
 }
 
-function downloadMedia (filename : string, data: string, type: string) : void {
+function downloadMedia (filename : std::string, data: std::string, type: std::string) : void {
   var element = document.createElement('a');
   element.setAttribute('href', 'data:'+type + encodeURIComponent(data));
   element.setAttribute('download', filename);

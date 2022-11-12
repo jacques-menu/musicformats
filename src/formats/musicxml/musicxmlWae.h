@@ -17,8 +17,6 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,7 +24,7 @@ namespace MusicFormats
 class EXP musicxmlException: public mfException
 {
   public:
-    musicxmlException (string const& exceptionDescription) throw ()
+    musicxmlException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };
@@ -34,16 +32,16 @@ typedef SMARTP<musicxmlException> S_musicxmlException;
 
 //______________________________________________________________________________
 EXP void musicxmlWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void musicxmlError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 
 }

@@ -24,18 +24,16 @@
 #include "oahInsiderHandlers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 /* this class   is purely virtual
 S_oahInsiderHandler oahInsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader,
-  const string&           handlerDescription,
-  const string&           handlerUsage)
+  const std::string& serviceName,
+  const std::string& handlerHeader,
+  const std::string&           handlerDescription,
+  const std::string&           handlerUsage)
 {
   // create the insider handler
   oahInsiderHandler* o = new
@@ -51,10 +49,10 @@ S_oahInsiderHandler oahInsiderHandler::create (
 */
 
 oahInsiderHandler::oahInsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader,
-  const string&           handlerDescription,
-  const string&           handlerUsage)
+  const std::string& serviceName,
+  const std::string& handlerHeader,
+  const std::string&           handlerDescription,
+  const std::string&           handlerUsage)
   : oahHandler (
       serviceName,
       handlerHeader,
@@ -67,7 +65,7 @@ oahInsiderHandler::oahInsiderHandler (
       "Initializing \"" <<
       fHandlerHeader <<
       "\" insider handler" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -75,9 +73,9 @@ oahInsiderHandler::oahInsiderHandler (
 oahInsiderHandler::~oahInsiderHandler ()
 {}
 
-string oahInsiderHandler::asString () const
+std::string oahInsiderHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "oahInsiderHandler \"" << fHandlerHeader; // JMI v0.9.65
@@ -85,33 +83,33 @@ string oahInsiderHandler::asString () const
   return s.str ();
 }
 
-void oahInsiderHandler::print (ostream& os) const
+void oahInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "oahInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -119,7 +117,7 @@ void oahInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -127,16 +125,16 @@ void oahInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_oahInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_oahInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -12,9 +12,9 @@
                          (module-name found))
              (ly:message "~a not defined, or maybe defined dynamically." id)))))
 
-#(show-modules 'map)
+#(show-modules 'std::map)
 #(show-modules 'match)
-#(show-modules 'music-map)
+#(show-modules 'music-std::map)
 variable = #'value
 #(define variable2 'value2)
 #(show-modules 'variable)

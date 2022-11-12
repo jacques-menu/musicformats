@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -29,16 +29,14 @@
 #include "msrCodas.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrCodaKindAsString (
+std::string msrCodaKindAsString (
   msrCodaKind codaKind)
 {
-  string result;
+  std::string result;
 
   switch (codaKind) {
     case msrCodaKind::kCodaFirst:
@@ -52,7 +50,7 @@ string msrCodaKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrCodaKind& elt)
+std::ostream& operator << (std::ostream& os, const msrCodaKind& elt)
 {
   os << msrCodaKindAsString (elt);
   return os;
@@ -80,7 +78,7 @@ msrCoda::msrCoda (
   S_msrMeasure upLinkToMeasure,
   int          staffNumber,
   msrCodaKind  codaKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -97,7 +95,7 @@ void msrCoda::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrCoda::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrCoda>*
@@ -108,7 +106,7 @@ void msrCoda::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrCoda::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -119,7 +117,7 @@ void msrCoda::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrCoda::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrCoda>*
@@ -130,7 +128,7 @@ void msrCoda::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrCoda::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -139,9 +137,9 @@ void msrCoda::acceptOut (basevisitor* v)
 void msrCoda::browseData (basevisitor* v)
 {}
 
-string msrCoda::asString () const
+std::string msrCoda::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Coda" <<
@@ -152,18 +150,18 @@ string msrCoda::asString () const
   return s.str ();
 }
 
-void msrCoda::print (ostream& os) const
+void msrCoda::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrCoda& elt)
+std::ostream& operator << (std::ostream& os, const S_msrCoda& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -15,8 +15,6 @@
 #include <string>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -44,12 +42,12 @@ enum class msrMeasureKind {
   kMeasureKindMusicallyEmpty
 };
 
-string msrMeasureKindAsString (
+std::string msrMeasureKindAsString (
   msrMeasureKind measureKind);
 
-ostream& operator << (ostream& os, const msrMeasureKind& elt);
+std::ostream& operator << (std::ostream& os, const msrMeasureKind& elt);
 
-string msrMeasureKindasShortStringForMeasuresSlices (
+std::string msrMeasureKindasShortStringForMeasuresSlices (
   msrMeasureKind measureKind);
 
 enum class msrMeasureImplicitKind {
@@ -57,10 +55,10 @@ enum class msrMeasureImplicitKind {
   kMeasureImplicitKindNo
 };
 
-string msrMeasureImplicitKindAsString (
+std::string msrMeasureImplicitKindAsString (
   msrMeasureImplicitKind measureImplicitKind);
 
-ostream& operator << (ostream& os, const msrMeasureImplicitKind& elt);
+std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt);
 
 //______________________________________________________________________________
   // data types
@@ -71,7 +69,7 @@ enum msrMeasureFirstInSegmentKind {
   kMeasureFirstInSegmentKindNo
 };
 
-string msrMeasureFirstInSegmentKindAsString (
+std::string msrMeasureFirstInSegmentKindAsString (
   msrMeasureFirstInSegmentKind measureFirstInSegmentKind);
 
 enum msrMeasureRepeatContextKind {
@@ -85,7 +83,7 @@ enum msrMeasureRepeatContextKind {
   kMeasureRepeatContextNextMeasureAfterHooklessEnding
 };
 
-string msrMeasureRepeatContextKindAsString (
+std::string msrMeasureRepeatContextKindAsString (
   msrMeasureRepeatContextKind measureRepeatContextKind);
 
 enum msrMeasureEndRegularKind {
@@ -94,7 +92,7 @@ enum msrMeasureEndRegularKind {
   kMeasureEndRegularKindNo
 };
 
-string msrMeasureEndRegularKindAsString (
+std::string msrMeasureEndRegularKindAsString (
   msrMeasureEndRegularKind measureEndRegularKind);
 
 

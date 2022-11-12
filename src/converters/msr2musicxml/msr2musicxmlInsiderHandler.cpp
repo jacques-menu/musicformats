@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "oahWae.h"
 
@@ -48,15 +48,13 @@
 #include "msr2musicxmlInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msr2musicxmlInsiderHandler msr2musicxmlInsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   // create the insider handler
   msr2musicxmlInsiderHandler* o = new
@@ -69,8 +67,8 @@ S_msr2musicxmlInsiderHandler msr2musicxmlInsiderHandler::create (
 }
 
 msr2musicxmlInsiderHandler::msr2musicxmlInsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahInsiderHandler (
       serviceName,
       handlerHeader,
@@ -90,7 +88,7 @@ Usage: msr2musicxml [[option]* [MusicXMLFile|-] [[option]*
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -113,7 +111,7 @@ void msr2musicxmlInsiderHandler::initializeHandlerMultiComponent ()
     createMsr2musicxmlConverterComponent ();
 }
 
-string msr2musicxmlInsiderHandler::handlerServiceAboutInformation () const
+std::string msr2musicxmlInsiderHandler::handlerServiceAboutInformation () const
 {
   return
 R"(What msr2musicxml does:
@@ -145,7 +143,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlPrefixes ()
       "Creating the msr2musicxml prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -154,7 +152,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlPrefixes ()
 
 //______________________________________________________________________________
 void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -162,7 +160,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -237,7 +235,7 @@ void msr2musicxmlInsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -245,7 +243,7 @@ void msr2musicxmlInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -253,7 +251,7 @@ string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -277,13 +275,13 @@ string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       autoOutputFileNameAtom->
         getSetByAnOption ();
 
-  string outputFileName;
+  std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "options' " <<
@@ -308,7 +306,7 @@ string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has NOT been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      string
+      std::string
         inputSourceName =
           gGlobalServiceRunData->getInputSourceName ();
 
@@ -327,7 +325,7 @@ string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
             outputFileName.rfind ('.');
 
         // remove file extension
-        if (posInString != string::npos) {
+        if (posInString != std::string::npos) {
           outputFileName.replace (
             posInString,
             outputFileName.size () - posInString,
@@ -341,7 +339,7 @@ string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -354,7 +352,7 @@ string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -406,7 +404,7 @@ void msr2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << inputSourceName << "\" is both the input and output file name";
@@ -418,7 +416,7 @@ void msr2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
 
 
   if (! fOutputFileName.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "msr2musicxmlInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
@@ -427,7 +425,7 @@ void msr2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
   }
 
   else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
@@ -444,7 +442,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -457,7 +455,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -470,7 +468,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -483,7 +481,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -496,7 +494,7 @@ void msr2musicxmlInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -504,33 +502,33 @@ void msr2musicxmlInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msr2musicxmlInsiderHandler::print (ostream& os) const
+void msr2musicxmlInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "msr2musicxmlInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -538,7 +536,7 @@ void msr2musicxmlInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -546,16 +544,16 @@ void msr2musicxmlInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msr2musicxmlInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2musicxmlInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -590,11 +588,11 @@ void msr2musicxmlInsiderOahGroup::initializeMsr2musicxmlInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
     "\" group" <<
-    endl;
+    std::endl;
   }
 #endif
 }
@@ -604,7 +602,7 @@ void msr2musicxmlInsiderOahGroup::printMsr2musicxmlInsiderOahGroupValues (int fi
 {
   gLogStream <<
     "The msr2musicxml options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -613,17 +611,17 @@ void msr2musicxmlInsiderOahGroup::printMsr2musicxmlInsiderOahGroupValues (int fi
 
   gLogStream <<
     "Quit after some passes:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
     fQuitAfterPass2a <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
     fQuitAfterPass2b <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -637,7 +635,7 @@ S_msr2musicxmlInsiderOahGroup createGlobalMsr2musicxmlOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2musicxml OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

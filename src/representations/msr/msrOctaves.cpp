@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 
 #include <regex>
 
@@ -212,7 +212,7 @@ msrOctaveKind msrOctaveKindFromNumber (
     case 9: result = msrOctaveKind::kOctave9; break;
     default:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot create an octave kind from number '" <<
@@ -232,7 +232,7 @@ msrOctaveKind msrOctaveKindFromNumber (
 
 msrOctaveKind msrOctaveKindFromCommasOrQuotes (
   int           inputLineNumber,
-  const string& octaveIndication)
+  const std::string& octaveIndication)
 {
   /*
     octaveIndication should containt a possibly empty
@@ -255,7 +255,7 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
       case ',':
         if (result > octaveKindBelowMiddleC) {
           // a '\'' has been found previously
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "octave indication \"" << octaveIndication <<
@@ -270,7 +270,7 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
       case '\'':
         if (result < octaveKindBelowMiddleC) {
           // a ',' has been found previously
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "octave indication \"" << octaveIndication <<
@@ -284,7 +284,7 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
 
       default:
         {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "octave indication \"" <<
@@ -303,15 +303,15 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
 //     gLogStream << JMI
 //       "---> result: " <<
 //       result <<
-//       endl;
+//       std::endl;
   } // for
 
   return result;
 }
 
-string msrOctaveKindAsString (msrOctaveKind octaveKind)
+std::string msrOctaveKindAsString (msrOctaveKind octaveKind)
 {
-  string result;
+  std::string result;
 
   switch (octaveKind) {
     case msrOctaveKind::kOctave_NO_:
@@ -352,7 +352,7 @@ string msrOctaveKindAsString (msrOctaveKind octaveKind)
   return result;
 }
 
-ostream& operator << (ostream& os, const msrOctaveKind& elt)
+std::ostream& operator << (std::ostream& os, const msrOctaveKind& elt)
 {
   os << msrOctaveKindAsString (elt);
   return os;
@@ -361,13 +361,13 @@ ostream& operator << (ostream& os, const msrOctaveKind& elt)
 // octave entry kinds
 //______________________________________________________________________________
 
-map<string, msrOctaveEntryKind>
+std::map<std::string, msrOctaveEntryKind>
   gGlobalMsrOctaveEntryKindsMap;
 
-string msrOctaveEntryKindAsString (
+std::string msrOctaveEntryKindAsString (
   msrOctaveEntryKind octaveEntryKind)
 {
-  string result;
+  std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
@@ -386,7 +386,7 @@ string msrOctaveEntryKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrOctaveEntryKind& elt)
+std::ostream& operator << (std::ostream& os, const msrOctaveEntryKind& elt)
 {
   os << msrOctaveEntryKindAsString (elt);
   return os;
@@ -404,9 +404,9 @@ void initializeMsrOctaveEntryKindsMap ()
   gGlobalMsrOctaveEntryKindsMap ["fixed"] = msrOctaveEntryKind::kOctaveEntryFixed;
 }
 
-string existingMsrOctaveEntryKinds (size_t namesListMaxLength)
+std::string existingMsrOctaveEntryKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     msrOctaveEntryKindsMapSize =
@@ -421,18 +421,18 @@ string existingMsrOctaveEntryKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msrOctaveEntryKind>::const_iterator i =
+      std::map<std::string, msrOctaveEntryKind>::const_iterator i =
         gGlobalMsrOctaveEntryKindsMap.begin ();
       i != gGlobalMsrOctaveEntryKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -481,7 +481,7 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
       "==> Creating pitch and octave '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -502,18 +502,18 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createSemiTonesPitchAnd
 
 S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
   int           inputLineNumber,
-  const string& theString)
+  const std::string& theString)
 {
   S_msrSemiTonesPitchAndOctave result;
 
   // decipher theString
-  string regularExpression (
+  std::string regularExpression (
     "([[:lower:]]+)" // pitch
     "([,\']*)"       // octaveIndication
     );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -523,10 +523,10 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for semitones pitch and octave string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for semitones pitch and octave std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl <<
+      std::endl <<
       smSize << " elements: ";
 
       for (unsigned i = 0; i < smSize; ++i) {
@@ -534,14 +534,14 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
           '[' << sm [i] << "] ";
       } // for
 
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 #endif
 
   if (smSize == 3) {
     // found a well-formed specification,
     // need to check its ',' and '\'' contents
-    string
+    std::string
       pitch            = sm [1],
       octaveIndication = sm [2];
 
@@ -550,7 +550,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
       gLogStream <<
         "--> pitch = \"" << pitch << "\", " <<
         "--> octaveIndication = \"" << octaveIndication << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -575,7 +575,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
           semiTonesPitchKind) << "\", " <<
         "--> octaveKind = " <<
         msrOctaveKindAsString (octaveKind) <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -587,7 +587,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "semitones pitch and octave argument '" << theString <<
@@ -682,11 +682,11 @@ void msrSemiTonesPitchAndOctave::decrementOctaveKind ()
   } // switch
 }
 
-string msrSemiTonesPitchAndOctave::asString () const
+std::string msrSemiTonesPitchAndOctave::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
-  s << left <<
+  s << std::left <<
     "[SemiTonesPitchAndOctave" <<
     ": " <<
     "semiTonesPitchKind: " <<
@@ -698,36 +698,36 @@ string msrSemiTonesPitchAndOctave::asString () const
   return s.str ();
 }
 
-void msrSemiTonesPitchAndOctave::print (ostream& os) const
+void msrSemiTonesPitchAndOctave::print (std::ostream& os) const
 {
   os <<
     "SemiTonesPitchAndOctave" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fSemiTonesPitchKind" << " : " <<
       msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fOctaveKind: " << " : " <<
     msrOctaveKindAsString (fOctaveKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndOctave& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSemiTonesPitchAndOctave& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -762,7 +762,7 @@ msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
       "==> Creating harmony item '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -781,51 +781,51 @@ S_msrSemiTonesPitchAndAbsoluteOctave msrSemiTonesPitchAndAbsoluteOctave::createS
   return newbornClone;
 }
 
-string msrSemiTonesPitchAndAbsoluteOctave::asString () const
+std::string msrSemiTonesPitchAndAbsoluteOctave::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   const int fieldWidth = 19;
 
-  s << left <<
+  s << std::left <<
     "SemiTonesPitchAndAbsoluteOctave" <<
     ": " <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
     ", absoluteOctave: " << fAbsoluteOctave;
 
   return s.str ();
 }
 
-void msrSemiTonesPitchAndAbsoluteOctave::print (ostream& os) const
+void msrSemiTonesPitchAndAbsoluteOctave::print (std::ostream& os) const
 {
   os <<
     "SemiTonesPitchAndAbsoluteOctave" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "semiTonesPitchKind" << " : " <<
       msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "absoluteOctave" << " : " << fAbsoluteOctave <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndAbsoluteOctave& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSemiTonesPitchAndAbsoluteOctave& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -859,7 +859,7 @@ msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
       "==> Creating harmony item '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -878,51 +878,51 @@ S_msrSemiTonesPitchAndRelativeOctave msrSemiTonesPitchAndRelativeOctave::createS
   return newbornClone;
 }
 
-string msrSemiTonesPitchAndRelativeOctave::asString () const
+std::string msrSemiTonesPitchAndRelativeOctave::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   const int fieldWidth = 19;
 
-  s << left <<
+  s << std::left <<
     "SemiTonesPitchAndRelativeOctave" <<
     ": " <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
     ", relativeOctave: " << fRelativeOctave;
 
   return s.str ();
 }
 
-void msrSemiTonesPitchAndRelativeOctave::print (ostream& os) const
+void msrSemiTonesPitchAndRelativeOctave::print (std::ostream& os) const
 {
   os <<
     "SemiTonesPitchAndRelativeOctave" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "semiTonesPitchKind" << " : " <<
       msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "relativeOctave" << " : " << fRelativeOctave <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndRelativeOctave& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSemiTonesPitchAndRelativeOctave& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -957,7 +957,7 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
       "==> Creating pitch and octave '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -978,18 +978,18 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createQuarterTone
 
 S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString (
   int           inputLineNumber,
-  const string& theString)
+  const std::string& theString)
 {
   S_msrQuarterTonesPitchAndOctave result;
 
   // decipher theString
-  string regularExpression (
+  std::string regularExpression (
     "([[:lower:]]+)" // pitch
     "([,\']*)"       // octaveIndication
     );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -999,10 +999,10 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for quartertones pitch and octave string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for quartertones pitch and octave std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl <<
+      std::endl <<
       smSize << " elements: ";
 
       for (unsigned i = 0; i < smSize; ++i) {
@@ -1010,14 +1010,14 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
           '[' << sm [i] << "] ";
       } // for
 
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 #endif
 
   if (smSize == 3) {
     // found a well-formed specification,
     // need to check its ',' and '\'' contents
-    string
+    std::string
       pitch            = sm [1],
       octaveIndication = sm [2];
 
@@ -1026,7 +1026,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
       gLogStream <<
         "--> pitch = \"" << pitch << "\", " <<
         "--> octaveIndication = \"" << octaveIndication << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -1053,7 +1053,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
             quarterTonesPitchKind) <<
         "\", " <<
         "--> octaveKind = " << msrOctaveKindAsString (octaveKind) <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -1065,7 +1065,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "quartertones pitch and octave argument '" << theString <<
@@ -1160,11 +1160,11 @@ void msrQuarterTonesPitchAndOctave::decrementOctaveKind ()
   } // switch
 }
 
-string msrQuarterTonesPitchAndOctave::asString () const
+std::string msrQuarterTonesPitchAndOctave::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
-  s << left <<
+  s << std::left <<
     "[QuarterTonesPitchAndOctave" <<
     ": " <<
     "fQuarterTonesPitchKind: " <<
@@ -1176,36 +1176,36 @@ string msrQuarterTonesPitchAndOctave::asString () const
   return s.str ();
 }
 
-void msrQuarterTonesPitchAndOctave::print (ostream& os) const
+void msrQuarterTonesPitchAndOctave::print (std::ostream& os) const
 {
   os <<
     "QuarterTonesPitchAndOctave" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "quarterTonesPitchKind" << " : " <<
       msrQuarterTonesPitchKindAsString (fQuarterTonesPitchKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "octave: " << " : " <<
     msrOctaveKindAsString (fOctaveKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrQuarterTonesPitchAndOctave& elt)
+std::ostream& operator << (std::ostream& os, const S_msrQuarterTonesPitchAndOctave& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

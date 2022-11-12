@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
 #include "visitor.h"
@@ -24,16 +24,14 @@
 #include "oahOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_insiderOahAtom insiderOahAtom::create (
-  const string& longName,
-  const string& shortName,
-  const string& description)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description)
 {
   insiderOahAtom* o = new
     insiderOahAtom (
@@ -45,9 +43,9 @@ S_insiderOahAtom insiderOahAtom::create (
 }
 
 insiderOahAtom::insiderOahAtom (
-  const string& longName,
-  const string& shortName,
-  const string& description)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description)
   : oahAtom (
       longName,
       shortName,
@@ -58,14 +56,14 @@ insiderOahAtom::insiderOahAtom (
 insiderOahAtom::~insiderOahAtom ()
 {}
 
-void insiderOahAtom::applyElement (ostream& os)
+void insiderOahAtom::applyElement (std::ostream& os)
 {
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a insiderOahAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -80,7 +78,7 @@ void insiderOahAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> insiderOahAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -93,7 +91,7 @@ void insiderOahAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching insiderOahAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -106,7 +104,7 @@ void insiderOahAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> insiderOahAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -119,7 +117,7 @@ void insiderOahAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching insiderOahAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -132,18 +130,18 @@ void insiderOahAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> insiderOahAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void insiderOahAtom::print (ostream& os) const
+void insiderOahAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "insiderOahAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -154,24 +152,24 @@ void insiderOahAtom::print (ostream& os) const
 }
 
 void insiderOahAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     "insider" <<  " : " <<
     "fOptionHasBeenSelected: " <<
     fOptionHasBeenSelected <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_insiderOahAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_insiderOahAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -179,9 +177,9 @@ ostream& operator << (ostream& os, const S_insiderOahAtom& elt)
 
 //______________________________________________________________________________
 S_regularOahAtom regularOahAtom::create (
-  const string& longName,
-  const string& shortName,
-  const string& description)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description)
 {
   regularOahAtom* o = new
     regularOahAtom (
@@ -193,9 +191,9 @@ S_regularOahAtom regularOahAtom::create (
 }
 
 regularOahAtom::regularOahAtom (
-  const string& longName,
-  const string& shortName,
-  const string& description)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description)
   : oahAtom (
       longName,
       shortName,
@@ -206,14 +204,14 @@ regularOahAtom::regularOahAtom (
 regularOahAtom::~regularOahAtom ()
 {}
 
-void regularOahAtom::applyElement (ostream& os)
+void regularOahAtom::applyElement (std::ostream& os)
 {
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a regularOahAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -228,7 +226,7 @@ void regularOahAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> regularOahAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -241,7 +239,7 @@ void regularOahAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching regularOahAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -254,7 +252,7 @@ void regularOahAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> regularOahAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -267,7 +265,7 @@ void regularOahAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching regularOahAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -280,18 +278,18 @@ void regularOahAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> regularOahAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void regularOahAtom::print (ostream& os) const
+void regularOahAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "regularOahAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -302,24 +300,24 @@ void regularOahAtom::print (ostream& os) const
 }
 
 void regularOahAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     "regular" <<  " : " <<
     "fOptionHasBeenSelected: " <<
     fOptionHasBeenSelected <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_regularOahAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_regularOahAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -329,7 +327,7 @@ ostream& operator << (ostream& os, const S_regularOahAtom& elt)
 S_oahOahGroup gGlobalOahOahGroup;
 
 S_oahOahGroup oahOahGroup::create (
-  const string& serviceName)
+  const std::string& serviceName)
 {
   oahOahGroup* o = new oahOahGroup (
     serviceName);
@@ -339,7 +337,7 @@ S_oahOahGroup oahOahGroup::create (
 }
 
 oahOahGroup::oahOahGroup (
-  const string& serviceName)
+  const std::string& serviceName)
   : oahGroup (
       "Options and help group",
       "help-oah", "hoah",
@@ -355,7 +353,7 @@ oahOahGroup::~oahOahGroup ()
 {}
 
 void oahOahGroup::initializeOahBasicHelpOptions (
-  const string& serviceName)
+  const std::string& serviceName)
 {
   S_oahSubGroup
     subGroup =
@@ -430,7 +428,7 @@ This option is handy to debug OAH.)",
         "help", "h",
         regex_replace (
 R"(Display EXECUTABLE_NAME's full help.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName));
 
@@ -442,7 +440,7 @@ R"(Display EXECUTABLE_NAME's full help.)",
         "help-options-usage", "hou",
         regex_replace (
 R"(Display EXECUTABLE_NAME's options usage help.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName));
 
@@ -454,7 +452,7 @@ R"(Display EXECUTABLE_NAME's options usage help.)",
         "help-summary", "hs",
         regex_replace (
 R"(Display EXECUTABLE_NAME's help summary.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName));
 
@@ -466,7 +464,7 @@ R"(Display EXECUTABLE_NAME's help summary.)",
         "about", "a",
         regex_replace (
 R"(Display information about EXECUTABLE_NAME.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName));
 
@@ -478,7 +476,7 @@ R"(Display information about EXECUTABLE_NAME.)",
         "version", "v",
         regex_replace (
 R"(Display EXECUTABLE_NAME's version.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName,
         oahVersionKind::kOahVersionShort));
@@ -489,7 +487,7 @@ R"(Display EXECUTABLE_NAME's version.)",
         "version-full", "vf",
         regex_replace (
 R"(Display EXECUTABLE_NAME's version.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName,
         oahVersionKind::kOahVersionFull));
@@ -511,7 +509,7 @@ R"(Display MusicFormats's version.)",
         "history", "hist",
         regex_replace (
 R"(Display EXECUTABLE_NAME's history.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName));
 
@@ -532,7 +530,7 @@ R"(Display MusicFormats's history.)",
         "contact", "c",
         regex_replace (
 R"(Display information about how to contact the maintainers of EXECUTABLE_NAME.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName));
 
@@ -544,7 +542,7 @@ R"(Display information about how to contact the maintainers of EXECUTABLE_NAME.)
         "display-prefixes", "prefixes",
         regex_replace (
 R"(Display the prefixes known to EXECUTABLE_NAME.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName));
 
@@ -556,13 +554,13 @@ R"(Display the prefixes known to EXECUTABLE_NAME.)",
         "display-single-character-options", "single",
         regex_replace (
 R"(Display the single character options known to EXECUTABLE_NAME.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName));
 
   // help about option name
 
-  string defaultOptionLongName = "name-help";
+  std::string defaultOptionLongName = "name-help";
 
   fOptionNameToProvideHelpAbout = defaultOptionLongName;
 
@@ -572,7 +570,7 @@ R"(Display the single character options known to EXECUTABLE_NAME.)",
       regex_replace (
 R"(Print help about OPTION_NAME.
 OPTION_NAME is optional, and the default value is 'DEFAULT_VALUE'.)",
-        regex ("DEFAULT_VALUE"),
+        std::regex ("DEFAULT_VALUE"),
         defaultOptionLongName),
       "OPTION_NAME",
       defaultOptionLongName, // better variable name JMI ???
@@ -596,12 +594,12 @@ R"(Print help about OPTION_NAME.)",
     appendAtomToSubGroup (
       fQueryOptionNameAtom);
 
-  // find string
+  // find std::string
 
   fFindStringAtom =
     oahFindStringAtom::create (
-      "find", "", // "find-string" ??? JMI
-R"(Find string STRING in the help.
+      "find", "", // "find-std::string" ??? JMI
+R"(Find std::string STRING in the help.
 The search is case insensitive, and a '-' is added in front of options name for clarity.)",
       "STRING",
       serviceName);
@@ -617,15 +615,15 @@ The search is case insensitive, and a '-' is added in front of options name for 
       K_INCLUDE_OPTION_LONG_NAME, K_INCLUDE_OPTION_SHORT_NAME,
       regex_replace (
 R"(Include the options and arguments contained in FILENAME.
-FILENAME is a string and should be a path to a text file.
+FILENAME is a std::string and should be a path to a text file.
 Such a file is expected to hold at most one option or argument per line.
 A '#' starts a comment that spans to the end of the line.
 Comments and empty lines are ignored and can be used at will.
 '-include, -inc' options may be used to include other files,
 up to a maximum level of MAXIMUM_LEVEL.
 This is handy to share often used options in groups, for example.)",
-        regex ("MAXIMUM_LEVEL"),
-        to_string (oahHandler::getIncludeFilesMaximumLevel ())),
+        std::regex ("MAXIMUM_LEVEL"),
+        std::to_string (oahHandler::getIncludeFilesMaximumLevel ())),
       "FILENAME",
       serviceName);
 
@@ -655,7 +653,7 @@ This options makes it easier to find short names in the help output.)",
 R"(Display the source code file name and line number
 in warning and error messages.
 This is useful when debugging EXECUTABLE.)",
-          regex ("EXECUTABLE"),
+          std::regex ("EXECUTABLE"),
           fOahOahGroupServiceName),
         "fDisplaySourceCodePositions",
         fDisplaySourceCodePositions));
@@ -682,7 +680,7 @@ R"()",
         "show-options-and-arguments", "soaa",
         regex_replace (
 R"(Print the options and arguments to EXECUTABLE.)",
-          regex ("EXECUTABLE"),
+          std::regex ("EXECUTABLE"),
           fOahOahGroupServiceName),
         "fShowOptionsAndArguments",
         fShowOptionsAndArguments));
@@ -715,7 +713,7 @@ R"(Write a trace of the OAH tree visiting activity to standard error.)",
 #endif
 
 void oahOahGroup::initializeOahOahGroup (
-  const string& serviceName)
+  const std::string& serviceName)
 {
   // help
   // --------------------------------------
@@ -759,7 +757,7 @@ void oahOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       "% ==> oahOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -772,7 +770,7 @@ void oahOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             "% ==> Launching oahOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -785,7 +783,7 @@ void oahOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       "% ==> oahOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -798,7 +796,7 @@ void oahOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             "% ==> Launching oahOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -811,29 +809,29 @@ void oahOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       "% ==> oahOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
 void oahOahGroup::printAtomWithVariableOptionsValues ( // JMIJMIJMI
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
+  os << std::left <<
   /* JMI
-    setw (valueFieldWidth) <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : \"" <<
     oahOptionalValuesStyleKindAsString (
       fOahOptionalValuesStyleKindVariable) <<
     "\"" <<
-    endl <<
+    std::endl <<
 */
 
-    setw (valueFieldWidth) << "tracingOahVisitors" << " : " <<
+    std::setw (valueFieldWidth) << "tracingOahVisitors" << " : " <<
     fTracingOahVisitors <<
-    endl;
+    std::endl;
 }
 
 //______________________________________________________________________________
@@ -841,60 +839,60 @@ void oahOahGroup::printOahOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The basic options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // command line
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "Command line:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "Command line:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fShowOptionsAndArguments" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fShowOptionsAndArguments" << " : " <<
     fShowOptionsAndArguments <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   // options and help display
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "Options trace and display:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "Options trace and display:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fReverseNamesDisplayOrder" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fReverseNamesDisplayOrder" << " : " <<
     fReverseNamesDisplayOrder <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplaySourceCodePositions" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplaySourceCodePositions" << " : " <<
     fDisplaySourceCodePositions <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fTracingOahVisitors" << " : " <<
+    std::setw (valueFieldWidth) << "fTracingOahVisitors" << " : " <<
     fTracingOahVisitors <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_oahOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_oahOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -902,13 +900,13 @@ ostream& operator << (ostream& os, const S_oahOahGroup& elt)
 
 //______________________________________________________________________________
 S_oahOahGroup createGlobalOahOahGroup (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global global OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -31,19 +31,17 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msrReplaceClefAtom msrReplaceClefAtom::create (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
-  map<msrClefKind, msrClefKind>&
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
+  std::map<msrClefKind, msrClefKind>&
                     clefKindToClefKindMapVariable)
 {
   msrReplaceClefAtom* o = new
@@ -59,12 +57,12 @@ S_msrReplaceClefAtom msrReplaceClefAtom::create (
 }
 
 msrReplaceClefAtom::msrReplaceClefAtom (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
-  map<msrClefKind, msrClefKind>&
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
+  std::map<msrClefKind, msrClefKind>&
                     clefKindToClefKindMapVariable)
   : oahAtomStoringAValue (
       longName,
@@ -82,14 +80,14 @@ msrReplaceClefAtom::~msrReplaceClefAtom ()
 {}
 
 void msrReplaceClefAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrReplaceClefAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -100,18 +98,18 @@ void msrReplaceClefAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> theString = \"" << theString << "\", " <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string regularExpression (
+  std::string regularExpression (
     "(.*)" // originalClefName
     "="
     "(.*)" // destinationClefName
     );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -121,10 +119,10 @@ void msrReplaceClefAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for part transpose string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for part transpose std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -135,13 +133,13 @@ void msrReplaceClefAtom::applyAtomWithValue (
         gLogStream <<
           '[' << sm [i] << "] ";
       } // for
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 #endif
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "-marTransposePart argument '" << theString <<
@@ -150,7 +148,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     oahError (s.str ());
   }
 
-  string
+  std::string
     originalClefName    = sm [1],
     destinationClefName = sm [2];
 
@@ -159,24 +157,24 @@ void msrReplaceClefAtom::applyAtomWithValue (
     gLogStream <<
       "--> originalClefName = \"" << originalClefName << "\", " <<
       "--> destinationClefName = \"" << destinationClefName << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // is originalClefName in the replace clef map?
+  // is originalClefName in the replace clef std::map?
   msrClefKind
     originalClefKind =
       msrClefKindFromString (
         K_MF_NO_INPUT_LINE_NUMBER,
         originalClefName);
 
-  map<msrClefKind, msrClefKind>::iterator
+  std::map<msrClefKind, msrClefKind>::iterator
     it =
       fClefKindToClefKindMapVariable.find (originalClefKind);
 
   if (it != fClefKindToClefKindMapVariable.end ()) {
     // yes, issue error message
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Replace clef value \"" << theString << "\" occurs more that once" <<
@@ -205,7 +203,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrReplaceClefAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -218,7 +216,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -231,7 +229,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrReplaceClefAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -244,7 +242,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -257,14 +255,14 @@ void msrReplaceClefAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrReplaceClefAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string msrReplaceClefAtom::asShortNamedOptionString () const
+std::string msrReplaceClefAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ';
@@ -273,7 +271,7 @@ string msrReplaceClefAtom::asShortNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    map<msrClefKind, msrClefKind>::const_iterator
+    std::map<msrClefKind, msrClefKind>::const_iterator
       iBegin = fClefKindToClefKindMapVariable.begin (),
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
@@ -290,9 +288,9 @@ string msrReplaceClefAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string msrReplaceClefAtom::asActualLongNamedOptionString () const
+std::string msrReplaceClefAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ';
@@ -301,7 +299,7 @@ string msrReplaceClefAtom::asActualLongNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    map<msrClefKind, msrClefKind>::const_iterator
+    std::map<msrClefKind, msrClefKind>::const_iterator
       iBegin = fClefKindToClefKindMapVariable.begin (),
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
@@ -318,32 +316,32 @@ string msrReplaceClefAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void msrReplaceClefAtom::print (ostream& os) const
+void msrReplaceClefAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msrReplaceClefAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "variableName" << " : " <<
     fVariableName <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fClefKindToClefKindMapVariable" << " : " <<
-    endl;
+    std::endl;
 
   if (! fClefKindToClefKindMapVariable.size ()) {
     os << "[EMPTY]";
   }
   else {
-    map<msrClefKind, msrClefKind>::const_iterator
+    std::map<msrClefKind, msrClefKind>::const_iterator
       iBegin = fClefKindToClefKindMapVariable.begin (),
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
@@ -353,33 +351,33 @@ void msrReplaceClefAtom::print (ostream& os) const
         " --> " <<
         "\"" << msrClefKindAsString ((*i).second) << "\"";
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
-  os << endl;
+  os << std::endl;
 
   --gIndenter;
 }
 
 void msrReplaceClefAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : ";
 
   if (! fClefKindToClefKindMapVariable.size ()) {
     os <<
       "[EMPTY]" <<
-      endl;
+      std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    map<msrClefKind, msrClefKind>::const_iterator
+    std::map<msrClefKind, msrClefKind>::const_iterator
       iBegin = fClefKindToClefKindMapVariable.begin (),
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
@@ -388,7 +386,7 @@ void msrReplaceClefAtom::printAtomWithVariableOptionsValues (
         "\"" << msrClefKindAsString ((*i).first) << "\"" <<
         " --> " <<
         "\"" << msrClefKindAsString ((*i).second) << "\"" <<
-        endl;
+        std::endl;
       if (++i == iEnd) break;
     } // for
 
@@ -396,13 +394,13 @@ void msrReplaceClefAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator << (ostream& os, const S_msrReplaceClefAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_msrReplaceClefAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -562,7 +560,7 @@ R"()",
   fIgnoreMusicXMLPartIDAtom =
     oahStringSetElementAtom::create (
       "ignore-musicxml-part-id", "imxmlpi",
-R"(Ignore the part with ID PART_ID, which is a string.
+R"(Ignore the part with ID PART_ID, which is a std::string.
 There can be several occurrences of this option.
 All the parts not ignored are kept.
 This option is incompatible with '-mkpi, -msr-keep-musicxml-part-id'.)",
@@ -580,7 +578,7 @@ This option is incompatible with '-mkpi, -msr-keep-musicxml-part-id'.)",
   fIgnoreMusicXMLPartNameAtom =
     oahStringSetElementAtom::create (
       "ignore-musicxml-part-name", "imxmlpn",
-R"(Ignore the part named PART_NAME, which is a string.
+R"(Ignore the part named PART_NAME, which is a std::string.
 There can be several occurrences of this option.
 All the parts not ignored are kept.
 This option is incompatible with '-mkpn, -msr-keep-musicxml-part-name'.)",
@@ -598,7 +596,7 @@ This option is incompatible with '-mkpn, -msr-keep-musicxml-part-name'.)",
   fKeepMusicXMLPartIDAtom =
     oahStringSetElementAtom::create (
       "keep-musicxml-part-id", "kmxmlpi",
-R"(Keep the part with ID PART_ID, which is a string.
+R"(Keep the part with ID PART_ID, which is a std::string.
 There can be several occurrences of this option.
 All the parts not kept are ignored.
 This option is incompatible with '-mopi, -msr-ignore-musicxml-part-id'.)",
@@ -616,7 +614,7 @@ This option is incompatible with '-mopi, -msr-ignore-musicxml-part-id'.)",
   fKeepMusicXMLPartNameAtom =
     oahStringSetElementAtom::create (
       "keep-musicxml-part-name", "kmxmlpn",
-R"(Keep the part named PART_NAME, which is a string.
+R"(Keep the part named PART_NAME, which is a std::string.
 There can be several occurrences of this option.
 All the parts not kept are ignored.
 This option is incompatible with '-mopn, -msr-ignore-musicxml-part-name'.)",
@@ -759,9 +757,9 @@ and around the '=' sign, otherwise they can be dispensed with.
 The NUMBER clefs available are:
 CLEFS_NAMES.
 There can be several occurrences of this option.)",
-            regex ("NUMBER"),
-            to_string (gGlobalClefKindsMap.size ())),
-          regex ("CLEFS_NAMES"),
+            std::regex ("NUMBER"),
+            std::to_string (gGlobalClefKindsMap.size ())),
+          std::regex ("CLEFS_NAMES"),
 //           gIndenter.indentMultiLineString (
 //             foundString,
 //             os);
@@ -899,7 +897,7 @@ R"()",
         "replicate-msr-measure", "rmmeas",
 R"###(Replicate an MSR mesure according to SPECIFICATION.
 SPECIFICATION should be of the form 'MEASURE_NUMBER:NUMBER_OF_MEASURES_TO_ADD',
-where MEASURE_NUMBER is a string, and NUMBER_OF_MEASURES_TO_ADD is the number
+where MEASURE_NUMBER is a std::string, and NUMBER_OF_MEASURES_TO_ADD is the number
 of empty measures to add after measure MEASURE_NUMBER.
 MEASURE_NUMBER should be the number of an existing, empty measure,
 and NUMBER_OF_MEASURES_TO_ADD should be at least 1, , such as '17:3'.
@@ -921,7 +919,7 @@ This option can be used any number of times.)###",
         "add-empty-msr-measures", "aemmeas",
 R"###(Add empty MSR mesures according to SPECIFICATION.
 SPECIFICATION should be of the form 'MEASURE_NUMBER:NUMBER_OF_MEASURES_TO_ADD',
-where MEASURE_NUMBER is a string, and NUMBER_OF_MEASURES_TO_ADD is the number
+where MEASURE_NUMBER is a std::string, and NUMBER_OF_MEASURES_TO_ADD is the number
 of empty measures to add after measure MEASURE_NUMBER.
 MEASURE_NUMBER should be the number of an existing, empty measure,
 and NUMBER_OF_MEASURES_TO_ADD should be at least 1, , such as '17:3'.
@@ -1574,14 +1572,14 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
       "Checking the consistency of mxsr2msrOahGroup group \"" <<
       fGroupHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // JMI and if mixed ID and name options are used?
 
   if (fPartsIgnoreIDSet.size () > 0 && fMusicXMLPartsKeepIDSet.size () > 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "options '" <<
@@ -1594,7 +1592,7 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
   }
 
   if (fMusicXMLMusicXMLPartsIgnoreNameSet.size () > 0 && fMusicXMLPartsKeepNameSet.size () > 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "options '" <<
@@ -1609,13 +1607,13 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 
 //______________________________________________________________________________
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToBold (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fBoldWordsSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fBoldWordsSet.find (wordsValue);
 
@@ -1631,13 +1629,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToBold (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToItalic (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fItalicWordsSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fItalicWordsSet.find (wordsValue);
 
@@ -1653,13 +1651,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToItalic (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBePlacedAbove (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToBePlacedAboveSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToBePlacedAboveSet.find (wordsValue);
 
@@ -1675,13 +1673,13 @@ Bool mxsr2msrOahGroup::wordsIsToBePlacedAbove (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBePlacedBelow (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToBePlacedBelowSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToBePlacedBelowSet.find (wordsValue);
 
@@ -1698,13 +1696,13 @@ Bool mxsr2msrOahGroup::wordsIsToBePlacedBelow (
 
 //______________________________________________________________________________
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToTempo (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToTemposSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToTemposSet.find (wordsValue);
 
@@ -1720,13 +1718,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToTempo (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToRehearsalMark (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToRehearsalMarkSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToRehearsalMarkSet.find (wordsValue);
 
@@ -1742,13 +1740,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToRehearsalMark (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToSegno (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToSegnoSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToSegnoSet.find (wordsValue);
 
@@ -1764,13 +1762,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToSegno (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegno (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToDalSegnoSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToDalSegnoSet.find (wordsValue);
 
@@ -1786,13 +1784,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegno (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegnoAlFine (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToDalSegnoAlFineSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToDalSegnoAlFineSet.find (wordsValue);
 
@@ -1808,13 +1806,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegnoAlFine (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegnoAlCoda (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToDalSegnoAlCodaSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToDalSegnoAlCodaSet.find (wordsValue);
 
@@ -1830,13 +1828,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegnoAlCoda (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCodaFirst (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToCodaFirstSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToCodaFirstSet.find (wordsValue);
 
@@ -1852,13 +1850,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCodaFirst (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCodaSecond (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToCodaSecondSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToCodaSecondSet.find (wordsValue);
 
@@ -1874,13 +1872,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCodaSecond (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCresc (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToCrescSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToCrescSet.find (wordsValue);
 
@@ -1896,13 +1894,13 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCresc (
 }
 
 Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDecresc (
-  const string& wordsValue)
+  const std::string& wordsValue)
 {
   Bool result;
 
-  // is wordsValue in the string to dal segno kind map?
+  // is wordsValue in the std::string to dal segno kind std::map?
   if (fWordsToDecrescSet.size ()) {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       it =
         fWordsToDecrescSet.find (wordsValue);
 
@@ -1924,7 +1922,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsr2msrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1937,7 +1935,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -1950,7 +1948,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsr2msrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1963,7 +1961,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -1976,7 +1974,7 @@ void mxsr2msrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsr2msrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1986,7 +1984,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 {
   gLogStream <<
     "The MusicXML options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1995,14 +1993,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Parts:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // parts ignored IDs
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "parts ignored IDs" << " : ";
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "parts ignored IDs" << " : ";
 
   if (! fPartsIgnoreIDSet.size ()) {
     gLogStream <<
@@ -2010,7 +2008,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   }
   else {
     for (
-      set<string> ::const_iterator i =
+      std::set<std::string> ::const_iterator i =
         fPartsIgnoreIDSet.begin ();
       i != fPartsIgnoreIDSet.end ();
       ++i
@@ -2022,8 +2020,8 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   // parts kept IDs
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "parts kept IDs" << " : ";
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "parts kept IDs" << " : ";
 
   if (! fMusicXMLPartsKeepIDSet.size ()) {
     gLogStream <<
@@ -2031,7 +2029,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   }
   else {
     for (
-      set<string> ::const_iterator i =
+      std::set<std::string> ::const_iterator i =
         fMusicXMLPartsKeepIDSet.begin ();
       i != fMusicXMLPartsKeepIDSet.end ();
       ++i
@@ -2043,8 +2041,8 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   // parts ignored names
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "parts ignored names" << " : ";
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "parts ignored names" << " : ";
 
   if (! fMusicXMLMusicXMLPartsIgnoreNameSet.size ()) {
     gLogStream <<
@@ -2052,7 +2050,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   }
   else {
     for (
-      set<string> ::const_iterator i =
+      std::set<std::string> ::const_iterator i =
         fMusicXMLMusicXMLPartsIgnoreNameSet.begin ();
       i != fMusicXMLMusicXMLPartsIgnoreNameSet.end ();
       ++i
@@ -2064,8 +2062,8 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   // parts kept names
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "parts kept names" << " : ";
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "parts kept names" << " : ";
 
   if (! fMusicXMLPartsKeepNameSet.size ()) {
     gLogStream <<
@@ -2073,7 +2071,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   }
   else {
     for (
-      set<string> ::const_iterator i =
+      std::set<std::string> ::const_iterator i =
         fMusicXMLPartsKeepNameSet.begin ();
       i != fMusicXMLPartsKeepNameSet.end ();
       ++i
@@ -2083,7 +2081,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
     } // for
   }
 
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   --gIndenter;
 
@@ -2092,22 +2090,22 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "clefs, keys, time signatures:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreRedundantClefs" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantClefs" << " : " <<
     fIgnoreRedundantClefs <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fIgnoreRedundantKeys" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantKeys" << " : " <<
     fIgnoreRedundantKeys <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fIgnoreRedundantTimes" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantTimes" << " : " <<
     fIgnoreRedundantTimes <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2116,14 +2114,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Page breaks:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnorePageBreaksInMusicXML" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnorePageBreaksInMusicXML" << " : " <<
     fIgnorePageBreaksInMusicXML <<
-    endl <<
+    std::endl <<
 
   --gIndenter;
 
@@ -2132,14 +2130,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Line breaks:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreLineBreaksInMusicXML" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreLineBreaksInMusicXML" << " : " <<
     fIgnoreLineBreaksInMusicXML <<
-    endl <<
+    std::endl <<
 
   --gIndenter;
 
@@ -2148,25 +2146,25 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Measures:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-//     map<string,int>       fAddEmptyMeasuresStringToIntMap;
+//     std::map<std::string,int>       fAddEmptyMeasuresStringToIntMap;
 
 /* JMI
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreRedundantClefs" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantClefs" << " : " <<
     fIgnoreRedundantClefs <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fIgnoreRedundantKeys" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantKeys" << " : " <<
     fIgnoreRedundantKeys <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fIgnoreRedundantTimes" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantTimes" << " : " <<
     fIgnoreRedundantTimes <<
-    endl;
+    std::endl;
 */
   --gIndenter;
 
@@ -2175,48 +2173,48 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
      "Notes:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fDelayRestsDynamics" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fDelayRestsDynamics" << " : " <<
     fDelayRestsDynamics <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDelayRestsWords" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsWords" << " : " <<
     fDelayRestsWords <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDelayRestsSlurs" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsSlurs" << " : " <<
     fDelayRestsSlurs <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDelayRestsLigatures" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsLigatures" << " : " <<
     fDelayRestsLigatures <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDelayRestsPedals" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsPedals" << " : " <<
     fDelayRestsPedals <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDelayRestsSlashes" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsSlashes" << " : " <<
     fDelayRestsSlashes <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDelayRestsWedges" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsWedges" << " : " <<
     fDelayRestsWedges <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fSlashAllGraceNotes" << " : " <<
+    std::setw (valueFieldWidth) << "fSlashAllGraceNotes" << " : " <<
     fSlashAllGraceNotes <<
-    endl <<
-    setw (valueFieldWidth) << "fSlurAllGraceNotes" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fSlurAllGraceNotes" << " : " <<
     fSlurAllGraceNotes <<
-    endl <<
-    setw (valueFieldWidth) << "fBeamAllGraceNotes" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fBeamAllGraceNotes" << " : " <<
     fBeamAllGraceNotes <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2225,14 +2223,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
      "Articulations:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreArticulations" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreArticulations" << " : " <<
     fIgnoreArticulations <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2241,14 +2239,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
      "Ornaments:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreOrnaments" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreOrnaments" << " : " <<
     fIgnoreOrnaments <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2257,19 +2255,19 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
      "Words:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreMusicXMLWords" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreMusicXMLWords" << " : " <<
     fIgnoreMusicXMLWords <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) <<
+    std::setw (valueFieldWidth) <<
     "fAddMsrWordsFromTheMusicXMLLyrics" << " : " <<
     fAddMsrWordsFromTheMusicXMLLyrics <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2278,14 +2276,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
      "Ties:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreTies" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreTies" << " : " <<
     fIgnoreTies <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2294,14 +2292,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
      "Dynamics:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreDynamics" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreDynamics" << " : " <<
     fIgnoreDynamics <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2310,14 +2308,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
      "Slurs:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreSlurs" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreSlurs" << " : " <<
     fIgnoreSlurs <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2326,14 +2324,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
      "Wedges:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreWedges" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreWedges" << " : " <<
     fIgnoreWedges <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2342,14 +2340,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Lyrics:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   gLogStream <<
-    setw (valueFieldWidth) << "fIgnoreLyrics" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreLyrics" << " : " <<
     fIgnoreLyrics <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2358,14 +2356,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Harmonies:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreHarmonies" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreHarmonies" << " : " <<
     fIgnoreHarmonies <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2374,14 +2372,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Figured bass:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreFiguredBasses" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fIgnoreFiguredBasses" << " : " <<
     fIgnoreFiguredBasses <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2390,17 +2388,17 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Dynamics and wedges:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fAllDynamicsBelow" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fAllDynamicsBelow" << " : " <<
     fAllDynamicsBelow <<
-    endl <<
-    setw (valueFieldWidth) << "fAllWedgesBelow" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fAllWedgesBelow" << " : " <<
     fAllWedgesBelow <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2409,14 +2407,14 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Cubase:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fCubase" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fCubase" << " : " <<
     fCubase <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2426,7 +2424,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   gLogStream <<
     "Trace:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -2439,13 +2437,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_mxsr2msrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_mxsr2msrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -2459,7 +2457,7 @@ S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global mxsr2msr OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

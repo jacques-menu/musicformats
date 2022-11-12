@@ -29,8 +29,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -110,7 +108,7 @@ bool lpsrPartBlock::compareStaffBlockWithOtherElement (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "part block element '" <<
@@ -126,17 +124,17 @@ bool lpsrPartBlock::compareStaffBlockWithOtherElement (
 
 /* JMI
   gLogStream <<
-    endl <<
+    std::endl <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!" <<
-    endl <<
+    std::endl <<
     "compareStaffBlockWithOtherElement:" <<
-    endl <<
+    std::endl <<
     staffBlock <<
-    endl <<
+    std::endl <<
     otherElement <<
-    endl <<
+    std::endl <<
     "===> " << result <<
-    endl << endl;
+    std::endl << std::endl;
     */
 
   return result;
@@ -227,7 +225,7 @@ bool lpsrPartBlock::compareChordNamesContextWithOtherElement (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "part block element '" <<
@@ -243,17 +241,17 @@ bool lpsrPartBlock::compareChordNamesContextWithOtherElement (
 
 /* JMI
   gLogStream <<
-    endl <<
+    std::endl <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!" <<
-    endl <<
+    std::endl <<
     "compareChordNamesContextWithOtherElement:" <<
-    endl <<
+    std::endl <<
     chordNamesContext <<
-    endl <<
+    std::endl <<
     otherElement <<
-    endl <<
+    std::endl <<
     "===> " << result <<
-    endl << endl;
+    std::endl << std::endl;
 */
 
   return result;
@@ -299,7 +297,7 @@ bool lpsrPartBlock::compareElementsToHaveHarmoniesAboveCorrespondingStaff (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "part block element '" <<
@@ -326,28 +324,28 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
   int                     inputLineNumber,
   S_lpsrChordNamesContext chordNamesContext)
 {
-  // appent chordNamesContext to the part block elements list
+  // appent chordNamesContext to the part block elements std::list
   fPartBlockElementsList.push_back (chordNamesContext);
 
-  // sort the list if necessary
+  // sort the std::list if necessary
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Sorting the voices in part block for part \"" <<
       fPart->getPartCombinedName () << "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 /* JMI
   gLogStream <<
-    endl << endl <<
+    std::endl << std::endl <<
     "@@@@@@@@@@@@@@@@ fPartBlockElementsList contains initially:" <<
-    endl << endl;
+    std::endl << std::endl;
 
   for (
-    list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
+    std::list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
     i != fPartBlockElementsList.end ();
     ++i
   ) {
@@ -356,10 +354,10 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
 
     gLogStream <<
       element->asShortString () <<
-      endl;
+      std::endl;
   } // for
   gLogStream <<
-    endl << endl;
+    std::endl << std::endl;
 */
 
   // sort fPartBlockElementsList, to have harmonies just before
@@ -371,12 +369,12 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
 
 /* JMI
   gLogStream <<
-    endl << endl <<
+    std::endl << std::endl <<
     "@@@@@@@@@@@@@@@@ fPartBlockElementsList contains after sort:" <<
-    endl << endl;
+    std::endl << std::endl;
 
   for (
-    list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
+    std::list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
     i != fPartBlockElementsList.end ();
     ++i
   ) {
@@ -385,10 +383,10 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
 
     gLogStream <<
       element->asShortString () <<
-      endl;
+      std::endl;
   } // for
   gLogStream <<
-    endl << endl;
+    std::endl << std::endl;
 */
 }
 
@@ -404,7 +402,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -417,7 +415,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPartBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -430,7 +428,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -443,7 +441,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPartBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -456,12 +454,12 @@ void lpsrPartBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
   for (
-    list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
+    std::list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
     i != fPartBlockElementsList.end ();
     ++i
   ) {
@@ -474,12 +472,12 @@ void lpsrPartBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrPartBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void lpsrPartBlock::print (ostream& os) const
+void lpsrPartBlock::print (std::ostream& os) const
 {
   os <<
     "PartBlock" << ' ' <<
@@ -487,47 +485,47 @@ void lpsrPartBlock::print (ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fPartBlockElementsList.size (), "element", "elements") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 28;
 
-  os << left <<
-    setw (fieldWidth) << string ("") + "partName" << " = \"" <<
+  os << std::left <<
+    std::setw (fieldWidth) << std::string ("") + "partName" << " = \"" <<
     fPart->getPartName () << "\"" <<
-    endl <<
-    setw (fieldWidth) << string ("") + "partAbbreviation" << " = \"" <<
+    std::endl <<
+    std::setw (fieldWidth) << std::string ("") + "partAbbreviation" << " = \"" <<
     fPart->getPartAbbreviation () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "partBlockInstrumentName" << " = \"" <<
+    std::setw (fieldWidth) << "partBlockInstrumentName" << " = \"" <<
     fPartBlockInstrumentName <<
     "\"" <<
-    endl <<
-    setw (fieldWidth) << "partBlockShortInstrumentName" << " = \"" <<
+    std::endl <<
+    std::setw (fieldWidth) << "partBlockShortInstrumentName" << " = \"" <<
     fPartBlockShortInstrumentName <<
     "\"" <<
-    endl;
+    std::endl;
 
-  os << endl;
+  os << std::endl;
 
   if (fPartBlockElementsList.size ()) {
-    list<S_msrElement>::const_iterator
+    std::list<S_msrElement>::const_iterator
       iBegin = fPartBlockElementsList.begin (),
       iEnd   = fPartBlockElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrPartBlock& scr)
+std::ostream& operator << (std::ostream& os, const S_lpsrPartBlock& scr)
 {
   scr->print (os);
   return os;

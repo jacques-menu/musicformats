@@ -18,16 +18,14 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 void musicxmlWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeWarning (
     "MusicXML",
@@ -37,11 +35,11 @@ void musicxmlWarning (
 }
 
 void musicxmlError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeError (
     "MusicXML",

@@ -17,8 +17,6 @@
 #include "lpsrElements.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -32,7 +30,7 @@ class EXP lpsrVariableUseCommand : public lpsrElement
 
     static SMARTP<lpsrVariableUseCommand> create (
                             int           inputLineNumber,
-                            const string& variableName);
+                            const std::string& variableName);
 
   protected:
 
@@ -41,7 +39,7 @@ class EXP lpsrVariableUseCommand : public lpsrElement
 
                           lpsrVariableUseCommand (
                             int           inputLineNumber,
-                            const string& variableName);
+                            const std::string& variableName);
 
     virtual               ~lpsrVariableUseCommand ();
 
@@ -70,17 +68,17 @@ class EXP lpsrVariableUseCommand : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // fields
     // ------------------------------------------------------
 
-    string                fVariableName;
+    std::string           fVariableName;
 };
 typedef SMARTP<lpsrVariableUseCommand> S_lpsrVariableUseCommand;
-EXP ostream& operator << (ostream& os, const S_lpsrVariableUseCommand& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrVariableUseCommand& elt);
 
 
 }

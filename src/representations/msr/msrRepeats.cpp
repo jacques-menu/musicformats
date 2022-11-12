@@ -34,8 +34,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -43,7 +41,7 @@ namespace MusicFormats
 /*
   Repeats in MusicXML are applied to all voices in all staves of the current part
 
-  The currentRepeat in each voice is the top of the voice repeats stack
+  The currentRepeat in each voice is the top of the voice repeats std::stack
 
   A repeat is recognized in MusicXML either by:
 
@@ -91,7 +89,7 @@ msrRepeatCommonPart::~msrRepeatCommonPart ()
 void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
   int           inputLineNumber,
   S_msrSegment  segment,
-  const string& context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSegments ()) {
@@ -101,7 +99,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
       "' to repeat common part '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -117,7 +115,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
 void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
   int           inputLineNumber,
   S_msrRepeat   repeat,
-  const string& context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -128,7 +126,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
       "' to repeat common part '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -144,7 +142,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
 void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
   int                inputLineNumber,
   S_msrMeasureRepeat measureRepeat,
-  const string&      context)
+  const std::string&      context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
@@ -154,7 +152,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
       "' to repeat common part '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -170,7 +168,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
   int                   inputLineNumber,
   S_msrMultipleFullBarRests multipleFullBarRests,
-  const string&         context)
+  const std::string&         context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
@@ -180,7 +178,7 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
       " to repeat common part " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -196,7 +194,7 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
 void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
   int               inputLineNumber,
   S_msrVoiceElement voiceElement,
-  const string&     context)
+  const std::string&     context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -206,7 +204,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
       "' to repeat common part '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -230,7 +228,7 @@ S_msrNote msrRepeatCommonPart::fetchRepeatCommonPartFirstNonGraceNote () const
   // possibly inside a chord or tuplet
 
   if (fRepeatCommonPartElementsList.size ()) {
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fRepeatCommonPartElementsList.begin (),
       iEnd   = fRepeatCommonPartElementsList.end (),
       i      = iBegin;
@@ -279,7 +277,7 @@ S_msrNote msrRepeatCommonPart::fetchRepeatCommonPartFirstNonGraceNote () const
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "tuplet first element should be a note, a chord or another tuplet, found instead '" <<
@@ -305,7 +303,7 @@ void msrRepeatCommonPart::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRepeatCommonPart::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRepeatCommonPart>*
@@ -316,7 +314,7 @@ void msrRepeatCommonPart::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRepeatCommonPart::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -327,7 +325,7 @@ void msrRepeatCommonPart::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRepeatCommonPart::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRepeatCommonPart>*
@@ -338,7 +336,7 @@ void msrRepeatCommonPart::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRepeatCommonPart::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -349,7 +347,7 @@ void msrRepeatCommonPart::browseData (basevisitor* v)
   // browse the elements
   if (fRepeatCommonPartElementsList.size ()) {
     for (
-      list<S_msrVoiceElement>::const_iterator i = fRepeatCommonPartElementsList.begin ();
+      std::list<S_msrVoiceElement>::const_iterator i = fRepeatCommonPartElementsList.begin ();
       i != fRepeatCommonPartElementsList.end ();
       ++i
   ) {
@@ -360,9 +358,9 @@ void msrRepeatCommonPart::browseData (basevisitor* v)
   }
 }
 
-string msrRepeatCommonPart::asString () const
+std::string msrRepeatCommonPart::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[RepeatCommonPart" <<
@@ -375,12 +373,12 @@ string msrRepeatCommonPart::asString () const
   return s.str ();
 }
 
-void msrRepeatCommonPart::print (ostream& os) const
+void msrRepeatCommonPart::print (std::ostream& os) const
 {
   os <<
     "[RepeatCommonPart" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -389,7 +387,7 @@ void msrRepeatCommonPart::print (ostream& os) const
     fRepeatCommonPartUpLinkToRepeat->
       asShortString () <<
       "'" <<
-    endl << endl;
+    std::endl << std::endl;
 
   // print the elements
   int repeatCommonPartElementsListSize =
@@ -407,14 +405,14 @@ void msrRepeatCommonPart::print (ostream& os) const
   else {
     os << "[EMPTY]";
   }
-  os << endl;
+  os << std::endl;
 
   if (repeatCommonPartElementsListSize) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fRepeatCommonPartElementsList.begin (),
       iEnd   = fRepeatCommonPartElementsList.end (),
       i      = iBegin;
@@ -423,7 +421,7 @@ void msrRepeatCommonPart::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -431,10 +429,10 @@ void msrRepeatCommonPart::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrRepeatCommonPart::printShort (ostream& os) const
+void msrRepeatCommonPart::printShort (std::ostream& os) const
 {
   os <<
     "[RepeatCommonPart" <<
@@ -442,7 +440,7 @@ void msrRepeatCommonPart::printShort (ostream& os) const
 //     fRepeatCommonPartUpLinkToRepeat->
 //       asShortString () <<
     "', line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -452,7 +450,7 @@ void msrRepeatCommonPart::printShort (ostream& os) const
     fRepeatCommonPartUpLinkToRepeat->
       asShortString () <<
       "'" <<
-    endl;
+    std::endl;
 */
 
   // print the elements
@@ -471,14 +469,14 @@ void msrRepeatCommonPart::printShort (ostream& os) const
   else {
     os << "[EMPTY]";
   }
-  os << endl;
+  os << std::endl;
 
   if (repeatCommonPartElementsListSize) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fRepeatCommonPartElementsList.begin (),
       iEnd   = fRepeatCommonPartElementsList.end (),
       i      = iBegin;
@@ -487,7 +485,7 @@ void msrRepeatCommonPart::printShort (ostream& os) const
       // short print the element
       (*i)->printShort (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -495,16 +493,16 @@ void msrRepeatCommonPart::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrRepeatCommonPart& elt)
+std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -513,7 +511,7 @@ ostream& operator << (ostream& os, const S_msrRepeatCommonPart& elt)
 //______________________________________________________________________________
 S_msrRepeatEnding msrRepeatEnding::create (
   int                 inputLineNumber,
-  const string&       repeatEndingNumber, // may be "1, 2"
+  const std::string&       repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind repeatEndingKind,
   S_msrRepeat         upLinkToRepeat)
 {
@@ -529,7 +527,7 @@ S_msrRepeatEnding msrRepeatEnding::create (
 
 msrRepeatEnding::msrRepeatEnding (
   int                 inputLineNumber,
-  const string&       repeatEndingNumber, // may be "1, 2"
+  const std::string&       repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind repeatEndingKind,
   S_msrRepeat         upLinkToRepeat)
     : msrElement (inputLineNumber)
@@ -550,7 +548,7 @@ msrRepeatEnding::~msrRepeatEnding ()
 void msrRepeatEnding::appendSegmentToRepeatEnding (
   int           inputLineNumber,
   S_msrSegment  segment,
-  const string& context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
@@ -559,7 +557,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
       "' to repeat ending '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -575,7 +573,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
 void msrRepeatEnding::appendRepeatToRepeatEnding (
   int           inputLineNumber,
   S_msrRepeat   repeat,
-  const string& context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
@@ -584,7 +582,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
       "' to repeat ending '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -600,7 +598,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
 void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
   int                inputLineNumber,
   S_msrMeasureRepeat measureRepeat,
-  const string&      context)
+  const std::string&      context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
@@ -610,7 +608,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
       "' to repeat ending '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -626,7 +624,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
   int                   inputLineNumber,
   S_msrMultipleFullBarRests multipleFullBarRests,
-  const string&         context)
+  const std::string&         context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
@@ -636,7 +634,7 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
       " to repeat ending " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -652,7 +650,7 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
 void msrRepeatEnding::appendVoiceElementToRepeatEnding (
   int               inputLineNumber,
   S_msrVoiceElement voiceElement,
-  const string&     context)
+  const std::string&     context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
@@ -661,7 +659,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
       "' to repeat ending '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -679,7 +677,7 @@ void msrRepeatEnding::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRepeatEnding::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRepeatEnding>*
@@ -690,7 +688,7 @@ void msrRepeatEnding::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRepeatEnding::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -701,7 +699,7 @@ void msrRepeatEnding::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRepeatEnding::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRepeatEnding>*
@@ -712,7 +710,7 @@ void msrRepeatEnding::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRepeatEnding::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -723,7 +721,7 @@ void msrRepeatEnding::browseData (basevisitor* v)
   // browse the elements
   if (fRepeatEndingElementsList.size ()) {
     for (
-      list<S_msrVoiceElement>::const_iterator i = fRepeatEndingElementsList.begin ();
+      std::list<S_msrVoiceElement>::const_iterator i = fRepeatEndingElementsList.begin ();
       i != fRepeatEndingElementsList.end ();
       ++i
   ) {
@@ -734,9 +732,9 @@ void msrRepeatEnding::browseData (basevisitor* v)
   }
 }
 
-string msrRepeatEnding::asString () const
+std::string msrRepeatEnding::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[RepeatEnding" <<
@@ -763,16 +761,16 @@ string msrRepeatEnding::asString () const
   return s.str ();
 }
 
-void msrRepeatEnding::print (ostream& os) const
+void msrRepeatEnding::print (std::ostream& os) const
 {
   os <<
-    endl <<
+    std::endl <<
     "[RepeatEnding" <<
     ", repeatEndingKind" << " : " <<
     msrRepeatEndingKindAsString (
       fRepeatEndingKind) <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -782,24 +780,24 @@ void msrRepeatEnding::print (ostream& os) const
     fRepeatEndingUpLinkToRepeat->
       asShortString () <<
       "'" <<
-    endl;
+    std::endl;
 */
 
   const int fieldWidth = 27;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "repeatEndingNumber" <<  " : " <<fRepeatEndingNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "repeatEndingInternalNumber" <<  " : " <<fRepeatEndingInternalNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "repeat upLink" << " : '" <<
     fRepeatEndingUpLinkToRepeat->
       asShortString () <<
     "'" <<
-    endl << endl;
+    std::endl << std::endl;
 
   // print the elements
   int repeatEndingElementsListSize =
@@ -817,14 +815,14 @@ void msrRepeatEnding::print (ostream& os) const
   else {
     os << "[EMPTY]";
   }
-  os << endl;
+  os << std::endl;
 
   if (repeatEndingElementsListSize) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fRepeatEndingElementsList.begin (),
       iEnd   = fRepeatEndingElementsList.end (),
       i      = iBegin;
@@ -833,7 +831,7 @@ void msrRepeatEnding::print (ostream& os) const
       // print the element
       (*i)->print (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -841,10 +839,10 @@ void msrRepeatEnding::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrRepeatEnding::printShort (ostream& os) const
+void msrRepeatEnding::printShort (std::ostream& os) const
 {
   os <<
     "[RepeatEnding" <<
@@ -853,29 +851,29 @@ void msrRepeatEnding::printShort (ostream& os) const
     ", repeatEndingNumber: " << fRepeatEndingNumber <<
     ", repeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
     "', line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
 /*
   ++gIndenter;
 
   const int fieldWidth = 27;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "repeatEndingNumber" <<  " : " <<fRepeatEndingNumber <<
     / * JMI
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "repeatEndingInternalNumber" <<  " : " <<fRepeatEndingInternalNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "repeat upLink: " << " : '" <<
     fRepeatEndingUpLinkToRepeat->
       asShortString () <<
     "'" <<
-    endl <<
+    std::endl <<
     * /
-    endl;
+    std::endl;
 
 / * JMI
   os <<
@@ -883,7 +881,7 @@ void msrRepeatEnding::printShort (ostream& os) const
     fRepeatEndingUpLinkToRepeat->
       asShortString () <<
       "'" <<
-    endl;
+    std::endl;
 * /
 
   // print the elements
@@ -902,14 +900,14 @@ void msrRepeatEnding::printShort (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
   if (repeatEndingElementsListSize) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fRepeatEndingElementsList.begin (),
       iEnd   = fRepeatEndingElementsList.end (),
       i      = iBegin;
@@ -918,7 +916,7 @@ void msrRepeatEnding::printShort (ostream& os) const
       // print the element
       (*i)->printShort (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -927,16 +925,16 @@ void msrRepeatEnding::printShort (ostream& os) const
   --gIndenter;
 */
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrRepeatEnding& elt)
+std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -990,7 +988,7 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of a repeat" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1031,7 +1029,7 @@ void msrRepeat::setRepeatCommonPart (
           getRepeatCommonPartElementsList ().size (),
         "element",
         "elements") <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1061,7 +1059,7 @@ void msrRepeat::addRepeatEndingToRepeat (
       "' to repeat '" <<
       asShortString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1085,7 +1083,7 @@ void msrRepeat::addRepeatEndingToRepeat (
       switch (fCurrentRepeatBuildPhaseKind) {
         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "cannot add hooked ending '" <<
@@ -1108,7 +1106,7 @@ void msrRepeat::addRepeatEndingToRepeat (
           break;
         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "cannot add hooked ending '" <<
@@ -1129,7 +1127,7 @@ void msrRepeat::addRepeatEndingToRepeat (
       switch (fCurrentRepeatBuildPhaseKind) {
         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "cannot add hookless repeat ending " <<
@@ -1145,7 +1143,7 @@ void msrRepeat::addRepeatEndingToRepeat (
           break;
         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "cannot add hookless repeat ending " <<
@@ -1165,7 +1163,7 @@ void msrRepeat::addRepeatEndingToRepeat (
           break;
         case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "cannot add hookless ending '" <<
@@ -1201,7 +1199,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 void msrRepeat::appendSegmentToRepeat (
   int           inputLineNumber,
   S_msrSegment  segment,
-  const string& context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -1211,7 +1209,7 @@ void msrRepeat::appendSegmentToRepeat (
       "' to repeat '" <<
       asShortString () <<
       "'" <<
-      endl;
+      std::endl;
 
     displayRepeat (
       inputLineNumber,
@@ -1222,7 +1220,7 @@ void msrRepeat::appendSegmentToRepeat (
   switch (fCurrentRepeatBuildPhaseKind) {
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "segment '" <<
@@ -1256,7 +1254,7 @@ void msrRepeat::appendSegmentToRepeat (
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "segment '" <<
@@ -1285,7 +1283,7 @@ void msrRepeat::appendSegmentToRepeat (
 void msrRepeat::appendRepeatToRepeat (
   int           inputLineNumber,
   S_msrRepeat   repeat,
-  const string& context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -1295,7 +1293,7 @@ void msrRepeat::appendRepeatToRepeat (
       "' to repeat '" <<
       asShortString () <<
       "'" <<
-      endl;
+      std::endl;
 
     displayRepeat (
       inputLineNumber,
@@ -1306,7 +1304,7 @@ void msrRepeat::appendRepeatToRepeat (
   switch (fCurrentRepeatBuildPhaseKind) {
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "repeat '" <<
@@ -1340,7 +1338,7 @@ void msrRepeat::appendRepeatToRepeat (
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "repeat '" <<
@@ -1369,7 +1367,7 @@ void msrRepeat::appendRepeatToRepeat (
 void msrRepeat::appendMeasureRepeatToRepeat (
   int                inputLineNumber,
   S_msrMeasureRepeat measureRepeat,
-  const string&      context)
+  const std::string&      context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -1379,7 +1377,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
       "' to repeat '" <<
       asShortString () <<
       "'" <<
-      endl;
+      std::endl;
 
     displayRepeat (
       inputLineNumber,
@@ -1390,7 +1388,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
   switch (fCurrentRepeatBuildPhaseKind) {
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "measures repeat '" <<
@@ -1424,7 +1422,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "measures repeat '" <<
@@ -1453,7 +1451,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 void msrRepeat::appendMultipleFullBarRestsToRepeat (
   int                   inputLineNumber,
   S_msrMultipleFullBarRests multipleFullBarRests,
-  const string&         context)
+  const std::string&         context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -1462,7 +1460,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
       multipleFullBarRests->asString () <<
       " to repeat " <<
       asShortString () <<
-      endl;
+      std::endl;
 
     displayRepeat (
       inputLineNumber,
@@ -1473,7 +1471,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
   switch (fCurrentRepeatBuildPhaseKind) {
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "multiple full-bar rests '" <<
@@ -1507,7 +1505,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "multiple full-bar rests '" <<
@@ -1551,7 +1549,7 @@ void msrRepeat::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRepeat::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRepeat>*
@@ -1562,7 +1560,7 @@ void msrRepeat::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRepeat::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1573,7 +1571,7 @@ void msrRepeat::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRepeat::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRepeat>*
@@ -1584,7 +1582,7 @@ void msrRepeat::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRepeat::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1600,7 +1598,7 @@ void msrRepeat::browseData (basevisitor* v)
 
   // browse the alternatives
   for (
-    vector<S_msrRepeatEnding>::const_iterator i = fRepeatEndings.begin ();
+    std::vector<S_msrRepeatEnding>::const_iterator i = fRepeatEndings.begin ();
     i != fRepeatEndings.end ();
     ++i
   ) {
@@ -1610,9 +1608,9 @@ void msrRepeat::browseData (basevisitor* v)
   } // for
 }
 
-string msrRepeat::asShortString () const
+std::string msrRepeat::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Repeat" <<
@@ -1664,9 +1662,9 @@ string msrRepeat::asShortString () const
   return s.str ();
 }
 
-string msrRepeat::asString () const
+std::string msrRepeat::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Repeat" <<
@@ -1707,7 +1705,7 @@ string msrRepeat::asString () const
     ", endingsNumber: " << endingsNumber;
 
   if (endingsNumber) {
-    vector<S_msrRepeatEnding>::const_iterator
+    std::vector<S_msrRepeatEnding>::const_iterator
       iBegin = fRepeatEndings.begin (),
       iEnd   = fRepeatEndings.end (),
       i      = iBegin;
@@ -1732,16 +1730,16 @@ string msrRepeat::asString () const
 
 void msrRepeat::displayRepeat (
   int           inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     "*********>> Repeat '" <<
     asShortString () <<
     "' (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   print (gLogStream);
@@ -1749,49 +1747,49 @@ void msrRepeat::displayRepeat (
 
   gLogStream <<
     " <<*********" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
-void msrRepeat::print (ostream& os) const
+void msrRepeat::print (std::ostream& os) const
 {
   os <<
     "[Repeat" <<
     ", " << fRepeatTimes << " times" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 28;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
    "fRepeatExplicitStartKind" << " : " <<
     msrRepeatExplicitStartKindAsString (
       fRepeatExplicitStartKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "repeat ending(s)" << " : " <<
     fRepeatEndings.size () <<
-    endl;
+    std::endl;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
 //     // print the current repeat build phase
-//     os << left <<
-//       setw (fieldWidth) <<
+//     os << std::left <<
+//       std::setw (fieldWidth) <<
 //       "fCurrentRepeatBuildPhaseKind" << " : " <<
 //       repeatBuildPhaseKindAsString (
 //         fCurrentRepeatBuildPhaseKind) <<
-//       endl;
+//       std::endl;
   }
 #endif
 
-  os << endl;
+  os << std::endl;
 
   // print the immediately preceding and following repeats
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fImmediatelyPrecedingRepeat" << " : ";
   if (fImmediatelyPrecedingRepeat) {
     os <<
@@ -1800,10 +1798,10 @@ void msrRepeat::print (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl << endl;
+  os << std::endl << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fImmediatelyFollowingRepeat" << " : ";
   if (fImmediatelyFollowingRepeat) {
     os <<
@@ -1812,21 +1810,21 @@ void msrRepeat::print (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl << endl;
+  os << std::endl << std::endl;
 
   // print the repeat common part
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fRepeatCommonPart" << " : ";
   if (fRepeatCommonPart) {
     os <<
       fRepeatCommonPart <<
-      endl;
+      std::endl;
   }
   else {
     os << "[NONE]";
   }
-  os << endl << endl;
+  os << std::endl << std::endl;
 
   // print the repeat endings
   int endingsNumber =
@@ -1840,12 +1838,12 @@ void msrRepeat::print (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
   if (endingsNumber) {
     ++gIndenter;
 
-    vector<S_msrRepeatEnding>::const_iterator
+    std::vector<S_msrRepeatEnding>::const_iterator
       iBegin = fRepeatEndings.begin (),
       iEnd   = fRepeatEndings.end (),
       i      = iBegin;
@@ -1854,7 +1852,7 @@ void msrRepeat::print (ostream& os) const
       // print the repeat ending
       os << (*i);
       if (++i == iEnd) break;
-  // JMI    os << endl;
+  // JMI    os << std::endl;
     } // for
 
     --gIndenter;
@@ -1862,10 +1860,10 @@ void msrRepeat::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrRepeat::printShort (ostream& os) const
+void msrRepeat::printShort (std::ostream& os) const
 {
   os <<
     "[Repeat" <<
@@ -1876,7 +1874,7 @@ void msrRepeat::printShort (ostream& os) const
 //     repeatBuildPhaseKindAsString (
 //       fCurrentRepeatBuildPhaseKind);
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1884,16 +1882,16 @@ void msrRepeat::printShort (ostream& os) const
 
   // short print the repeat common part
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fRepeatCommonPart" << " : ";
   if (fRepeatCommonPart) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
     fRepeatCommonPart->printShort (os);
     --gIndenter;
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   // short print the repeat endings
@@ -1901,7 +1899,7 @@ void msrRepeat::printShort (ostream& os) const
     fRepeatEndings.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fRepeatEndings" << " : ";
   if (repeatEndingsSize) {
     os << '(' << repeatEndingsSize << ")";
@@ -1909,12 +1907,12 @@ void msrRepeat::printShort (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
   if (repeatEndingsSize) {
     ++gIndenter;
 
-    vector<S_msrRepeatEnding>::const_iterator
+    std::vector<S_msrRepeatEnding>::const_iterator
       iBegin = fRepeatEndings.begin (),
       iEnd   = fRepeatEndings.end (),
       i      = iBegin;
@@ -1923,7 +1921,7 @@ void msrRepeat::printShort (ostream& os) const
       // short print the repeat ending
       (*i)->printShort (os);
       if (++i == iEnd) break;
-  // JMI    os << endl;
+  // JMI    os << std::endl;
     } // for
 
     --gIndenter;
@@ -1931,16 +1929,16 @@ void msrRepeat::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrRepeat& elt)
+std::ostream& operator << (std::ostream& os, const S_msrRepeat& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

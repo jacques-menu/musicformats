@@ -11,16 +11,16 @@ Measures are presented at \sectionRef{Measures}.
 \section{Voices contents}
 % -------------------------------------------------------------------------
 
-\Class{msrVoice} contain a list of the first elements and a last segment:
+\Class{msrVoice} contain a std::list of the first elements and a last segment:
 \begin{lstlisting}[language=CPlusPlus]
-    list<S_msrVoiceElement>
+    std::list<S_msrVoiceElement>
                           fVoiceInitialElementsList;
 
     // fVoiceLastSegment contains the music
     // not yet stored in fVoiceInitialElementsList,
     // it is thus logically the end of the latter,
     // and is created implicitly for every voice.
-    // It is needed 'outside' of the 'list<S_msrElement>'
+    // It is needed 'outside' of the 'std::list<S_msrElement>'
     // because it is not a mere S_msrElement, but a S_msrSegment
     S_msrSegment          fVoiceLastSegment;
 \end{lstlisting}
@@ -40,17 +40,17 @@ formats/msr/msrMultipleFullBarRests.h:class EXP msrMultipleFullBarRests : public
 formats/msr/msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \end{lstlisting}
 
-\Class{msrSegment} contains a list of measures:
+\Class{msrSegment} contains a std::list of measures:
 \begin{lstlisting}[language=CPlusPlus]
     // the measures in the segment contain the mmusic
-    list<S_msrMeasure>    fSegmentElementsList;
+    std::list<S_msrMeasure>    fSegmentElementsList;
 \end{lstlisting}
 
-class   {\tt } contains a list of mesure elements:
+class   {\tt } contains a std::list of mesure elements:
 \begin{lstlisting}[language=CPlusPlus]
     // elements
 
-    list<S_msrMeasureElement>
+    std::list<S_msrMeasureElement>
                           fMeasureElementsList;
 \end{lstlisting}
 
@@ -62,37 +62,37 @@ class   {\tt } contains a list of mesure elements:
 The \class{msrMeasureElements} sub-classes instances in {\tt } can be of types:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep 'public msrMeasureElement' *.h
-msrBarChecks.h:class EXP msrBarCheck : public msrMeasureElement
-msrBarLines.h:class EXP msrBarLine : public msrMeasureElement
-msrBarNumberChecks.h:class EXP msrBarNumberCheck : public msrMeasureElement
-msrBreaks.h:class EXP msrLineBreak : public msrMeasureElement
-msrBreaks.h:class EXP msrPageBreak : public msrMeasureElement
-msrClefs.h:class EXP msrClef : public msrMeasureElement
-msrCodas.h:class EXP msrCoda : public msrMeasureElement
-msrDoubleTremolos.h:class EXP msrDoubleTremolo : public msrMeasureElement
-msrEyeGlasses.h:class EXP msrEyeGlasses : public msrMeasureElement
-msrFiguredBasses.h:class EXP msrFiguredBass : public msrMeasureElement
-msrHarmonies.h:class EXP msrHarmony : public msrMeasureElement
-msrHiddenMeasureAndBarLines.h:class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
-msrInstruments.h:class EXP msrScordatura : public msrMeasureElement
-msrInstruments.h:class EXP msrAccordionRegistration : public msrMeasureElement
-msrInstruments.h:class EXP msrHarpPedalsTuning : public msrMeasureElement
-msrInstruments.h:class EXP msrPedal : public msrMeasureElement
-msrInstruments.h:class EXP msrDamp : public msrMeasureElement
-msrInstruments.h:class EXP msrDampAll : public msrMeasureElement
-msrKeys.h:class EXP msrKey : public msrMeasureElement
-msrLyrics.h:class EXP msrSyllable : public msrMeasureElement
-msrMusicXMLSpecifics.h:class EXP msrPrintLayout : public msrMeasureElement
-msrRehearsalMarks.h:class EXP msrRehearsalMark : public msrMeasureElement
-msrSegnos.h:class EXP msrSegno : public msrMeasureElement
-msrDalSegnos.h:class EXP msrDalSegno : public msrMeasureElement
-msrStavesDetails.h:class EXP msrStaffDetails : public msrMeasureElement
-msrTempos.h:class EXP msrTempo : public msrMeasureElement
-msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElement
-msrTranspositions.h:class EXP msrOctaveShift : public msrMeasureElement
-msrTranspositions.h:class EXP msrTransposition : public msrMeasureElement
-msrTupletElements.h:class EXP msrTupletElement : public msrMeasureElement
-msrVoiceStaffChanges.h:class EXP msrVoiceStaffChange : public msrMeasureElement
+msrBarChecks.h:class EXP msrBarCheck : public msrMeasureElementLambda
+msrBarLines.h:class EXP msrBarLine : public msrMeasureElementLambda
+msrBarNumberChecks.h:class EXP msrBarNumberCheck : public msrMeasureElementLambda
+msrBreaks.h:class EXP msrLineBreak : public msrMeasureElementLambda
+msrBreaks.h:class EXP msrPageBreak : public msrMeasureElementLambda
+msrClefs.h:class EXP msrClef : public msrMeasureElementLambda
+msrCodas.h:class EXP msrCoda : public msrMeasureElementLambda
+msrDoubleTremolos.h:class EXP msrDoubleTremolo : public msrMeasureElementLambda
+msrEyeGlasses.h:class EXP msrEyeGlasses : public msrMeasureElementLambda
+msrFiguredBasses.h:class EXP msrFiguredBass : public msrMeasureElementLambda
+msrHarmonies.h:class EXP msrHarmony : public msrMeasureElementLambda
+msrHiddenMeasureAndBarLines.h:class EXP msrHiddenMeasureAndBarLine : public msrMeasureElementLambda
+msrInstruments.h:class EXP msrScordatura : public msrMeasureElementLambda
+msrInstruments.h:class EXP msrAccordionRegistration : public msrMeasureElementLambda
+msrInstruments.h:class EXP msrHarpPedalsTuning : public msrMeasureElementLambda
+msrInstruments.h:class EXP msrPedal : public msrMeasureElementLambda
+msrInstruments.h:class EXP msrDamp : public msrMeasureElementLambda
+msrInstruments.h:class EXP msrDampAll : public msrMeasureElementLambda
+msrKeys.h:class EXP msrKey : public msrMeasureElementLambda
+msrLyrics.h:class EXP msrSyllable : public msrMeasureElementLambda
+msrMusicXMLSpecifics.h:class EXP msrPrintLayout : public msrMeasureElementLambda
+msrRehearsalMarks.h:class EXP msrRehearsalMark : public msrMeasureElementLambda
+msrSegnos.h:class EXP msrSegno : public msrMeasureElementLambda
+msrDalSegnos.h:class EXP msrDalSegno : public msrMeasureElementLambda
+msrStavesDetails.h:class EXP msrStaffDetails : public msrMeasureElementLambda
+msrTempos.h:class EXP msrTempo : public msrMeasureElementLambda
+msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElementLambda
+msrTranspositions.h:class EXP msrOctaveShift : public msrMeasureElementLambda
+msrTranspositions.h:class EXP msrTransposition : public msrMeasureElementLambda
+msrTupletElements.h:class EXP msrTupletElement : public msrMeasureElementLambda
+msrVoiceStaffChanges.h:class EXP msrVoiceStaffChange : public msrMeasureElementLambda
 \end{lstlisting}
 
 
@@ -120,7 +120,7 @@ void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -169,7 +169,7 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -178,7 +178,7 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
     setMeasureNumber (
       fetchMeasureElementMeasureNumber ());
 
-  // append the harmony to the measure elements list
+  // append the harmony to the measure elements std::list
   // DON'T call 'appendElementToMeasure (harmony)':
   // that would override harmony's position in measure,
   // which already has the correct value, thus:
@@ -222,13 +222,13 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   ++gIndenter;
 
-  // append the harmony to the measure elements list
+  // append the harmony to the measure elements std::list
   appendElementToMeasure (harmony);
 
   // fetch harmony sounding whole notes
@@ -261,13 +261,13 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   int inputLineNumber =
     measure->getInputLineNumber ();
 
-  string measureNumber =
+  std::string measureNumber =
     measure->getMeasureNumber ();
 
   unsigned int segmentElementsListSize =
     fSegmentElementsList.size ();
 
-  string currentMeasureNumber =
+  std::string currentMeasureNumber =
     segmentElementsListSize == 0
       ? ""
       : fSegmentElementsList.back ()->getMeasureNumber ();
@@ -290,12 +290,12 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << measure->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (measureNumber == currentMeasureNumber) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "appending measure number '" << measureNumber <<
@@ -389,7 +389,7 @@ Calls to \method{msrSegment}{appendMeasureToSegment} occur in:
 \begin{lstlisting}[language=CPlusPlus]
 S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   int    inputLineNumber,
-  string measureNumber,
+  std::string measureNumber,
   msrMeasureImplicitKind
          measureImplicitKind)
 {
@@ -402,7 +402,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       measureNumber <<
       "' and appending it to voice \"" << getVoiceName () << "\"" <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -420,12 +420,12 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
     )
   ) { // POUSSE JMI
     gLogStream <<
-      endl <<
+      std::endl <<
       "++++ createAMeasureAndAppendItToVoice() POUSSE, fCallsCounter: " << fCallsCounter << " ++++" <<
-      endl;
+      std::endl;
     this->print (gLogStream);
     gLogStream <<
-      endl;
+      std::endl;
   }
 
 #ifdef TRACING_IS_ENABLED
@@ -502,7 +502,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   value is "no" if not specified.
 */
 
-  string
+  std::string
     implicit =
       elt->getAttributeValue ("implicit");
 
@@ -520,7 +520,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   }
   else {
     if (implicit.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "implicit \"" << implicit <<
@@ -590,7 +590,7 @@ This can lead to several \class{msrMeasure} instances being created, depending o
 \begin{lstlisting}[language=CPlusPlus]
 void msrPart::createAMeasureAndAppendItToPart (
   int    inputLineNumber,
-  string measureNumber,
+  std::string measureNumber,
   msrMeasureImplicitKind
          measureImplicitKind)
 {

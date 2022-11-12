@@ -28,7 +28,7 @@ namespace MusicFormats
 struct msrHiddenMeasureAndBarLineDescr : public smartable
 {
 /*
- * positions represent the order in which the parts appear in <part-list />
+ * positions represent the order in which the parts appear in <part-std::list />
 */
 
   public:
@@ -67,14 +67,14 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     // public services
     // ------------------------------------------------------
 
-    string                hiddenMeasureAndBarLineDescrAsString () const;
+    std::string           hiddenMeasureAndBarLineDescrAsString () const;
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -85,7 +85,7 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     S_msrDalSegno         fDalSegno;
 };
 typedef SMARTP<msrHiddenMeasureAndBarLineDescr> S_msrHiddenMeasureAndBarLineDescr;
-EXP ostream& operator << (ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt);
 
 //________________________________________________________________________
 class EXP msr2msrTranslator :
@@ -621,9 +621,9 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
   //  S_msrPartGroup            fCurrentPartGroupClone; JMI
 
-    // partGroup's can be nested, hence this stack
-    // the current partGroup is the top of the stack
-    stack<S_msrPartGroup>     fPartGroupsStack;
+    // partGroup's can be nested, hence this std::stack
+    // the current partGroup is the top of the std::stack
+    std::stack<S_msrPartGroup>     fPartGroupsStack;
 
 
     // parts
@@ -649,12 +649,12 @@ class EXP msr2msrTranslator :
     S_msrVoice                fCurrentVoiceClone;
     S_msrVoice                fCurrentVoiceOriginal;
 
-    map<S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
+    std::map<S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
 
     // dal segnos
     // ------------------------------------------------------
 
-    list<S_msrHiddenMeasureAndBarLineDescr>
+    std::list<S_msrHiddenMeasureAndBarLineDescr>
                               fPartHiddenMeasureAndBarLineDescrList;
 
     void                      displayPartHiddenMeasureAndBarLineDescrList ();
@@ -669,7 +669,7 @@ class EXP msr2msrTranslator :
     Bool                      fOnGoingHarmony;
     S_msrHarmony              fCurrentHarmonyClone;
 
-    list<S_msrHarmony>        fPendingHarmoniesList;
+    std::list<S_msrHarmony>        fPendingHarmoniesList;
 
 
     // figured bass
@@ -680,7 +680,7 @@ class EXP msr2msrTranslator :
 
     // segments
     // ------------------------------------------------------
-    // the current segment clone is the one at the top of the stack
+    // the current segment clone is the one at the top of the std::stack
     S_msrSegment              fCurrentSegmentClone;
 
 
@@ -707,8 +707,8 @@ class EXP msr2msrTranslator :
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    list<S_msrNote>           fOnGoingNotesStack;
-    void                      displayOnGoingNotesStack (const string& context);
+    std::list<S_msrNote>           fOnGoingNotesStack;
+    void                      displayOnGoingNotesStack (const std::string& context);
 
     Bool                      fOnGoingNonGraceNote;
 
@@ -779,7 +779,7 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
 //    S_msrTuplet             fCurrentTupletClone;
  //   Bool                      fOnGoingTuplet;
-    stack<S_msrTuplet>        fTupletClonesStack;
+    std::stack<S_msrTuplet>        fTupletClonesStack;
 
 
     // slurs

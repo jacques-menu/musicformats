@@ -12,8 +12,6 @@
 #include "msr2lpsrComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -29,7 +27,7 @@ S_mfcPassComponent createMsr2lpsrComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the msr2lpsr pass component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -44,7 +42,7 @@ S_mfcPassComponent createMsr2lpsrComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));

@@ -28,7 +28,7 @@ An simple example is:
   Sxmlelement directionElement = createMxmlelement (k_direction, "");
 
   // set it's "placement" attribute if relevant
-  string
+  std::string
     placementString =
       msrPlacementKindAsMusicXMLString (placementKind);
 
@@ -42,16 +42,16 @@ This one supplies a value to the {\tt xmlelement} it creates:
 void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
 {
   // composers
-  const list<string>&
+  const std::list<std::string>&
     composersList =
       elt->getComposersList ();
 
   for (
-    list<string>::const_iterator i=composersList.begin ();
+    std::list<std::string>::const_iterator i=composersList.begin ();
     i!=composersList.end ();
     ++i
   ) {
-    string variableValue = (*i);
+    std::string variableValue = (*i);
 
     // create a creator element
     Sxmlelement creatorElement = createMxmlelement (k_creator, variableValue);
@@ -59,7 +59,7 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
     // set its "type" attribute
     creatorElement->add (createMxmlAttribute ("type", "composer"));
 
-    // append it to the composers elements list
+    // append it to the composers elements std::list
     fComposersElementsList.push_back (creatorElement);
   } // for
 

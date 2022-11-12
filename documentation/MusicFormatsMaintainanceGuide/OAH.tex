@@ -48,14 +48,14 @@ The output of the help  goes to \standardOutput, so that the user can pipe it in
     A {\tt oahPrefix} contains the prefix name, the ersatz by which to replace it,
     and a description.
 
-\item a \class{oahHandler} contains a list of {\tt oahGroup}'s, each handled
-    in a pair of {\tt .h/.cpp} files such as \msr{msrOah.h} and \msr{msrOah.cpp},
-    and a list of options prefixes.
+\item a \class{oahHandler} contains a std::list of {\tt oahGroup}'s, each handled
+    in a std::pair of {\tt .h/.cpp} files such as \msr{msrOah.h} and \msr{msrOah.cpp},
+    and a std::list of options prefixes.
 
-\item a \class{oahGroup} contains a list of {\tt oahSubGroup}'s
+\item a \class{oahGroup} contains a std::list of {\tt oahSubGroup}'s
     and an upLink to the containing {\tt oahHandler}.
 
-\item a \class{oahSubGroup} contains a list of {\tt oahAtom}'s
+\item a \class{oahSubGroup} contains a std::list of {\tt oahAtom}'s
     and an upLink to the containing {\tt oahGroup}.
 
 \item each \class{oahAtom} contains an atomic option and the corresponding help,
@@ -91,13 +91,13 @@ The output of the help  goes to \standardOutput, so that the user can pipe it in
     in the \CLI\ or in option vectors (\API);
 
 \item a class   such as \class{lpsrPitchesLanguageAtom} is used
-    to supply a string value to be converted into an internal enumerated type;
+    to supply a std::string value to be converted into an internal enumerated type;
 
-\item a \class{oahCombinedBooleansAtom} contains a list of boolean atoms
+\item a \class{oahCombinedBooleansAtom} contains a std::list of boolean atoms
     to manipulate several such atoms as a single one,
     see the '\class{cubase}' combined booleans atom in \mxsrToMsr{mxsr2msrOah.cpp};
 
-\item \class{oahMultiplexBooleansAtom} contains a list of boolean atoms
+\item \class{oahMultiplexBooleansAtom} contains a std::list of boolean atoms
     sharing a common prefix to display such atoms in a compact manner,
     see the '{\tt ignore-redundant-clefs}' multiplex booleans atom in \mxsrToMsr{mxsr2msrOah.cpp};
 
@@ -189,14 +189,14 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
                             // reports an error
 
     virtual void          applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) = 0;
+                            const std::string& theString,
+                            std::ostream&      os) = 0;
 
-    virtual void          applyAtomWithDefaultValue (ostream& os);
+    virtual void          applyAtomWithDefaultValue (std::ostream& os);
                             // used only if fElementValueKind
                             // is oahElementValueKind::kElementValueImplicit
                             // or oahElementValueKind::kElementValueOptional
@@ -229,19 +229,19 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
     virtual void          printAtomWithVariableEssentials (
-                            ostream& os,
+                            std::ostream& os,
                             int fieldWidth) const;
     virtual void          printAtomWithVariableEssentialsShort (
-                            ostream& os,
+                            std::ostream& os,
                             int fieldWidth) const;
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
-    void                  printHelp (ostream& os) const override;
+    void                  printHelp (std::ostream& os) const override;
 
     virtual void          printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   protected:
@@ -249,14 +249,14 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     // protected fields
     // ------------------------------------------------------
 
-    string                fValueSpecification;
+    std::string           fValueSpecification;
 
-    string                fVariableName;
+    std::string           fVariableName;
     Bool                  fSetByAnOption;
 };
 \end{lstlisting}
 
-The \field{oahAtomStoringAValue}{fSetByAnOption} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahColorRGBAtom}, for example. It is not used for data structures such as sets, lists and vector, since this is indicated by their size.
+The \field{oahAtomStoringAValue}{fSetByAnOption} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahColorRGBAtom}, for example. It is not used for data structures such as sets, lists and std::vector, since this is indicated by their size.
 
 \fieldName{fSetByAnOption} is set in \methodName{set*Variable} methods, as in \method{oahIntegerAtom}{setIntegerVariable}\\
 in \oah{oahAtomsCollection.cpp}:
@@ -271,7 +271,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
       "' integer variable to '" <<
       value <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -305,7 +305,7 @@ class EXP oahBooleanAtom : public oahAtom
     // protected fields
     // ------------------------------------------------------
 
-    string                fVariableName;
+    std::string           fVariableName;
     Bool&                 fBooleanVariable;
     Bool                  fSetByAnOption;
 };
@@ -330,7 +330,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
         getLilypondVersionAtom ()->
           getSetByAnOption ();
 
-  string
+  std::string
     lilypondVersion =
       lilypondVersionHasBeenSet
         ? gGlobalLpsr2lilypondOahGroup->
@@ -342,14 +342,14 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
     "\\version \"" <<
     lilypondVersion <<
     "\"" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 \end{lstlisting}
 
 The default \lily\ version number is \code{2.22.0}. Another can be chosen with the \optionNameBoth{lilypond-version}{lpv} option:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -find lilypond-version
-1 occurrence of string "lilypond-version" has been found:
+1 occurrence of std::string "lilypond-version" has been found:
    1:
     -lilypond-version, -lpv
     Set the Lilypond '\version' to STRING in the Lilypond code.
@@ -436,7 +436,7 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // protected fields
     // ------------------------------------------------------
 
-    string                fHelpAtomWithoutAValueServiceName;
+    std::string           fHelpAtomWithoutAValueServiceName;
 };
 \end{lstlisting}
 
@@ -470,7 +470,7 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // protected fields
     // ------------------------------------------------------
 
-    string                fHelpAtomExpectingAValueServiceName; // JMI ???
+    std::string           fHelpAtomExpectingAValueServiceName; // JMI ???
 };
 
 \end{lstlisting}
@@ -524,7 +524,7 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // protected fields
     // ------------------------------------------------------
 
-    string                fVariableName;
+    std::string           fVariableName;
     Bool                  fSetByAnOption;
 };
 \end{lstlisting}
@@ -550,10 +550,10 @@ The value is stored in the variable in \\
 \constructor{mfMultiGenerationOutputKindAtom}:
 \begin{lstlisting}[language=CPlusPlus]
 mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
-  const string&             longName,
-  const string&             shortName,
-  const string&             description,
-  const string&             variableName,
+  const std::string&             longName,
+  const std::string&             shortName,
+  const std::string&             description,
+  const std::string&             variableName,
   mfMultiGenerationOutputKind& mfMultiGenerationOutputKindVariable)
   : oahAtomImplicitlyStoringAValue (
       longName,
@@ -584,9 +584,9 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
     uncontracted options are handled;
 
 \item options handling works in two passes:
-    \item the first one creates a list of \class{oahElementUse} instances from
+    \item the first one creates a std::list of \class{oahElementUse} instances from
         \argcargv\ or an options and arguments;
-    \item the second one traverses this list to apply the options that are used.
+    \item the second one traverses this std::list to apply the options that are used.
 
 \item the options are applied by \virtualMethod{applyElement}, \virtualMethod{applyAtomWithValue} and
     \virtualMethod{applyAtomWithDefaultValue};
@@ -680,7 +680,7 @@ class   {\tt oahHandler} in \oahBoth{oahBasicTypes} contains:
     // options and arguments handling
     oahElementHelpOnlyKind
                           handleOptionsFromOptionsAndArguments (
-                            string                  serviceName,
+                            std::string             serviceName,
                             const oahOptionsVector& theOptionsVector);
 
     oahElementHelpOnlyKind
@@ -700,16 +700,16 @@ class   {\tt oahHandler} in \oahBoth{oahBasicTypes} contains:
 
 Each {\tt oahElement}, defined in {\oahBoth{oahElements}, has an applyElement {\tt } method:
 \begin{lstlisting}[language=CPlusPlus]
-    virtual void          applyElement (ostream& os) = 0;
+    virtual void          applyElement (std::ostream& os) = 0;
 \end{lstlisting}
 
 Atoms that can have an associated value are described in \oahBoth{oahBasicTypes} by class   {\tt oahAtomExpectingAValue}, which has methods {\tt applyAtomWithValue} and {\tt applyAtomWithDefaultValue}:
 \begin{lstlisting}[language=CPlusPlus]
     virtual void          applyAtomWithValue (
-                            const string& theString,
-                            ostream& os) = 0;
+                            const std::string& theString,
+                            std::ostream& os) = 0;
 
-    virtual void          applyAtomWithDefaultValue (ostream& os);
+    virtual void          applyAtomWithDefaultValue (std::ostream& os);
                             // used only if fElementValueKind
                             // is oahElementValueKind::kElementValueImplicit
                             // or oahElementValueKind::kElementValueOptional
@@ -717,7 +717,7 @@ Atoms that can have an associated value are described in \oahBoth{oahBasicTypes}
 
 There are two methods for that:%%%JMI
 \begin{lstlisting}[language=CPlusPlus]
-    void                  applyElement (ostream& os) override; %%%JMI
+    void                  applyElement (std::ostream& os) override; %%%JMI
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
@@ -853,7 +853,7 @@ jacquesmenu@macmini > xml2ly -query cpu
 Option {\tt -find} searches the OAH tree ignoring letter cases:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -find grace
-5 occurrences of string "grace" have been found:
+5 occurrences of std::string "grace" have been found:
    1:
     -hgraces-group, -help-grace-notes-group
 
@@ -1033,19 +1033,19 @@ EXP mfMusicformatsErrorKind musicxmlfile2musicxml (
 
 This is done using a two-pass scheme:
 \begin{itemize}
-\item first, a list of the options uses is built;
-\item then, the options and their arguments, if any, im this list are applied.
+\item first, a std::list of the options uses is built;
+\item then, the options and their arguments, if any, im this std::list are applied.
 \end{itemize}
 
 class   {\tt oahHandler} contains:
 \begin{lstlisting}[language=CPlusPlus]
     // elements uses
-    list<S_oahElementUse> fElementUsesList;
+    std::list<S_oahElementUse> fElementUsesList;
 
     // atoms waiting for a value
     S_oahAtomExpectingAValue
                           fPendingArgvAtomExpectingAValue;
-    string                fNameUsedForPendingArgvAtomExpectingAValue;
+    std::string           fNameUsedForPendingArgvAtomExpectingAValue;
 \end{lstlisting}
 
 
@@ -1121,7 +1121,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
             switch (atomValueKind) {
               case oahElementValueKind::kElementValueWithout:
                 {
-                  stringstream s;
+                  std::stringstream s;
 
                   s <<
                     "Atom with value " <<
@@ -1146,7 +1146,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
                       gOutputStream);
                 }
                 else {
-                  stringstream s;
+                  std::stringstream s;
 
                   s <<
                     "Atom expecting a value " <<
@@ -1178,13 +1178,13 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
             if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
               gLogStream <<
                 "**** Handling atom not expecting a value:" <<
-                endl;
+                std::endl;
 
               ++gIndenter;
 
               gLogStream <<
                 atom <<
-                endl;
+                std::endl;
 
               --gIndenter;
             }
@@ -1211,10 +1211,10 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
-          "Element from the from the atom uses list for \"" <<
+          "Element from the from the atom uses std::list for \"" <<
           nameUsed <<
           "\" is null";
 
@@ -1242,8 +1242,8 @@ The early options names are declared in \oah{oahEarlyOptions.h}:
 // ... ... ...
 
 // insider
-EXP extern const string K_INSIDER_OPTION_LONG_NAME;
-EXP extern const string K_INSIDER_OPTION_SHORT_NAME;
+EXP extern const std::string K_INSIDER_OPTION_LONG_NAME;
+EXP extern const std::string K_INSIDER_OPTION_SHORT_NAME;
 
 // ... ... ...
 
@@ -1277,15 +1277,15 @@ Then, in \oah{oahEarlyOptions.cpp}, there is:
 \begin{lstlisting}[language=Terminal]
 // ... ... ...
 
-const string K_INSIDER_OPTION_LONG_NAME  = "insider";
-const string K_INSIDER_OPTION_SHORT_NAME = "ins";
+const std::string K_INSIDER_OPTION_LONG_NAME  = "insider";
+const std::string K_INSIDER_OPTION_SHORT_NAME = "ins";
 
 void oahEarlyOptions::setEarlyInsiderOption ()
 {
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyInsiderOption" <<
-      endl;
+      std::endl;
   }
 
   fEarlyInsiderOption = true;
@@ -1297,8 +1297,8 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 \Method {oahEarlyOptions}{applyEarlyOptionIfRelevant} performs the analysis:
 \begin{lstlisting}[language=CPlusPlus]
 void oahEarlyOptions::applyEarlyOptionIfRelevant (
-  const string& argumentWithoutDashToBeUsed,
-  const string& optionValue)
+  const std::string& argumentWithoutDashToBeUsed,
+  const std::string& optionValue)
 {
   // this is OAH handling pass 1
   if (
@@ -1341,20 +1341,20 @@ class EXP oahFindableElement : public smartable
     // ------------------------------------------------------
 
     virtual Bool          findStringInFindableElement (
-                            const string&               lowerCaseString,
-                            list<S_oahFindStringMatch>& foundMatchesList,
-                            ostream&                    os) const = 0;
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const = 0;
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    virtual string        asString () const = 0;
+    virtual std::string        asString () const = 0;
 
-    virtual void          print (ostream& os) const = 0;
+    virtual void          print (std::ostream& os) const = 0;
 
-		virtual const string 	containingFindableElementAsString () const = 0;
+		virtual const std::string 	containingFindableElementAsString () const = 0;
 
   private:
 
@@ -1363,7 +1363,7 @@ class EXP oahFindableElement : public smartable
 };
 \end{lstlisting}
 
-When matches are found, there are stored in a list of instances of \className{oahFindStringMatch}:
+When matches are found, there are stored in a std::list of instances of \className{oahFindStringMatch}:
 \begin{lstlisting}[language=Terminal]
 class   oahFindStringMatch : public smartable
 {
@@ -1374,19 +1374,19 @@ class   oahFindStringMatch : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    string			          fFoundString;
-		string                fContainingFindableElementInfo;
+    std::string			          fFoundString;
+		std::string           fContainingFindableElementInfo;
 };
 \end{lstlisting}
 
-The \fieldName{fContainingFindableElementInfo} describes the \oahRepr\ element that the string was found in, either in its option name(s) or in its description.
+The \fieldName{fContainingFindableElementInfo} describes the \oahRepr\ element that the std::string was found in, either in its option name(s) or in its description.
 
-For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oahElement.cpp} creates an instance and appends it to the list :
+For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oahElement.cpp} creates an instance and appends it to the std::list :
 \begin{lstlisting}[language=Terminal]
 Bool oahHandler::findStringInFindableElement (
-	const string&               lowerCaseString,
-	list<S_oahFindStringMatch>& foundMatchesList,
-	ostream&                    os) const
+	const std::string&               lowerCaseString,
+	std::list<S_oahFindStringMatch>& foundMatchesList,
+	std::ostream&                    os) const
 {
 	Bool result;
 
@@ -1394,18 +1394,18 @@ Bool oahHandler::findStringInFindableElement (
 
   // does this handler's header match?
   Bool headerMatches =
-    mfStringToLowerCase (fHandlerHeader).find (lowerCaseString) != string::npos;
+    mfStringToLowerCase (fHandlerHeader).find (lowerCaseString) != std::string::npos;
 
   // does this handler's description match?
   Bool descriptionMatches =
-    mfStringToLowerCase (fHandlerDescription).find (lowerCaseString) != string::npos;
+    mfStringToLowerCase (fHandlerDescription).find (lowerCaseString) != std::string::npos;
 
   // does this handler's usage match?
   Bool usageMatches =
-    mfStringToLowerCase (fHandlerUsage).find (lowerCaseString) != string::npos;
+    mfStringToLowerCase (fHandlerUsage).find (lowerCaseString) != std::string::npos;
 
   if (headerMatches || descriptionMatches || usageMatches) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       fHandlerHeader <<
@@ -1428,7 +1428,7 @@ Bool oahHandler::findStringInFindableElement (
     ++gIndenter;
 
     for (
-      map<string, S_oahPrefix>::const_iterator i =
+      std::map<std::string, S_oahPrefix>::const_iterator i =
         fHandlerPrefixesMap.begin ();
       i != fHandlerPrefixesMap.end ();
       ++i
@@ -1546,7 +1546,7 @@ class EXP oahOahGroup : public oahGroup
 \item \method{oahOahGroup}{initializeOahBasicHelpOptions} was augmented with:
 \begin{lstlisting}[language=CPlusPlus]
 void oahOahGroup::initializeOahBasicHelpOptions (
-  string serviceName)
+  std::string serviceName)
 {
 	// ... ... ...
 
@@ -1572,32 +1572,32 @@ void oahOahGroup::printOahOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The basic options are:" <<
-    endl;
+    std::endl;
 
 	// ... ... ...
 
   // options and help display
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "Options trace and display:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "Options trace and display:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fReverseNamesDisplayOrder" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fReverseNamesDisplayOrder" << " : " <<
     fReverseNamesDisplayOrder <<
-    endl <<
+    std::endl <<
 
 	// ... ... ...
 \end{lstlisting}
 
 \item then tests of the use of \optionBoth{reverse-names-display-order}{rndo} were added in \oah{oahElements.cpp}, such as in \method{oahElement}{fetchNames}:
 \begin{lstlisting}[language=CPlusPlus]
-string oahElement::fetchNames () const
+std::string oahElement::fetchNames () const
 {
-  stringstream s;
+  std::stringstream s;
 
   if (
     fShortName.size ()
@@ -1663,8 +1663,8 @@ class   mfcMultiComponent : public smartable
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const;
-    void                  printHistory (ostream& os) const;
+    void                  print (std::ostream& os) const;
+    void                  printHistory (std::ostream& os) const;
 
 	// ... ... ...
 };
@@ -1686,7 +1686,7 @@ class EXP oahHistoryAtom : public oahPureHelpAtomWithoutAValue
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
   public:
 
@@ -1701,21 +1701,21 @@ class EXP oahHistoryAtom : public oahPureHelpAtomWithoutAValue
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printHistory (ostream& os) const;
+    void                  printHistory (std::ostream& os) const;
 };
 \end{lstlisting}
 
 Then in \method{oahHistoryAtom}{printHistory}, the call to \methodName{printVersion} has been replaced by a call to \methodName{printHistory}:
 \begin{lstlisting}[language=CPlusPlus]
-void oahHistoryAtom::applyElement (ostream& os)
+void oahHistoryAtom::applyElement (std::ostream& os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahHistoryAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1731,7 +1731,7 @@ void oahHistoryAtom::applyElement (ostream& os)
 
 \method{}{} has the be adapted as:
 \begin{lstlisting}[language=CPlusPlus]
-void oahHistoryAtom::printHistory (ostream& os) const
+void oahHistoryAtom::printHistory (std::ostream& os) const
 {
   // get the handler history
   S_mfcMultiComponent
@@ -1760,7 +1760,7 @@ Then a new option has been added in \method{oahOahGroup}{initializeOahBasicHelpO
         "hist", "history",
         regex_replace (
 R"(Display EXECUTABLE_NAME's history.)",
-          regex ("EXECUTABLE_NAME"),
+          std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName));
 \end{lstlisting}
@@ -1855,8 +1855,8 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
 	// ... ... ...
 
@@ -1868,7 +1868,7 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
 	// ... ... ...
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -1880,16 +1880,16 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
 };
 \end{lstlisting}
 
-\Method{oahLengthAtom}{applyAtomWithValue} in \oah{oahAtomsCollection.cpp} deciphers the string supplied by the user and stores it the \class{msrLength} variable:
+\Method{oahLengthAtom}{applyAtomWithValue} in \oah{oahAtomsCollection.cpp} deciphers the std::string supplied by the user and stores it the \class{msrLength} variable:
 \begin{lstlisting}[language=CPlusPlus]
 void oahLengthAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 	// ... ... ...
 
-  regex e (regularExpression);
-  smatch sm;
+  std::regex e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -1901,33 +1901,33 @@ void oahLengthAtom::applyAtomWithValue (
     // leave the low level details to the STL...
     float floatValue;
     {
-      stringstream s;
+      std::stringstream s;
       // concatenate the integer and decimal parts
       s << sm [ 1 ] << sm [ 2 ];
       s >> floatValue;
     }
 
-    string lengthUnitName = sm [ 3 ];
+    std::string lengthUnitName = sm [ 3 ];
 
-    // is lengthUnitName known in the length unit names map?
-    map<string, msrLengthUnitKind>::const_iterator
+    // is lengthUnitName known in the length unit names std::map?
+    std::map<std::string, msrLengthUnitKind>::const_iterator
       it =
         gGlobalMsrLengthUnitKindsMap.find (
           lengthUnitName);
 
     if (it == gGlobalMsrLengthUnitKindsMap.end ()) {
-      // no, length unit name is unknown in the map
+      // no, length unit name is unknown in the std::map
 
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "length unit name \"" << lengthUnitName <<
         "\" is unknown" <<
-        endl <<
+        std::endl <<
         "The " <<
         gGlobalMsrLengthUnitKindsMap.size () <<
         " known length unit names are:" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
@@ -1946,7 +1946,7 @@ void oahLengthAtom::applyAtomWithValue (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "length value \"" << theString <<
@@ -1961,11 +1961,11 @@ void oahLengthAtom::applyAtomWithValue (
 \Method{oahLengthAtom}{printAtomWithVariableOptionsValues} is in charge of displaying the length value when \option{display-options-values}{dov} is chosen:
 \begin{lstlisting}[language=CPlusPlus]
 void oahLengthAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     fLengthVariable.asString ();
@@ -1973,7 +1973,7 @@ void oahLengthAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by user";
   }
-  os << endl;
+  os << std::endl;
 }
 \end{lstlisting}
 
@@ -2073,8 +2073,8 @@ class EXP generalOahGroup : public oahGroup
     // translation date
     // --------------------------------------
 
-    string                fTranslationDateFull;
-    string                fTranslationDateYYYYMMDD;
+    std::string           fTranslationDateFull;
+    std::string           fTranslationDateYYYYMMDD;
 
     // warning and error handling
     // --------------------------------------
@@ -2113,7 +2113,7 @@ class EXP harmoniesExtraOahGroup : public oahGroup
     // fields
     // ------------------------------------------------------
 
-    string                fHarmoniesRootAsString;
+    std::string           fHarmoniesRootAsString;
 };
 \end{lstlisting}
 

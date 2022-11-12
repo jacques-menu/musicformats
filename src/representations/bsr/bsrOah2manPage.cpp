@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <cmath>
 #include <string>
 
@@ -25,15 +25,13 @@
 
 #include "oahOah.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //________________________________________________________________________
 bsrOah2manPage::bsrOah2manPage (
   const S_oahHandler handler,
-  ostream&           manPageOutputStream)
+  std::ostream&           manPageOutputStream)
     : oah2manPage (
         handler,
         manPageOutputStream)
@@ -48,28 +46,28 @@ void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting bsrFacSimileKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
@@ -77,10 +75,10 @@ void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting bsrFacSimileKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -91,28 +89,28 @@ void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting bsrTextsLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
@@ -120,10 +118,10 @@ void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting bsrTextsLanguageAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }

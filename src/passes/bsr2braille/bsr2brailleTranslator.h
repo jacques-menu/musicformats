@@ -76,7 +76,7 @@ class EXP bsr2brailleTranslator :
                           bsr2brailleTranslator (
                             S_bsrScore     bsrScore,
                             const S_bsrOahGroup& bsrOpts,
-                            ostream&       brailleOutputStream);
+                            std::ostream&       brailleOutputStream);
 
     virtual               ~bsr2brailleTranslator ();
 
@@ -163,7 +163,7 @@ class EXP bsr2brailleTranslator :
     // the output stream
     // ------------------------------------------------------
 
-    ostream&              fBrailleOutputStream;
+    std::ostream&              fBrailleOutputStream;
 };
 
 

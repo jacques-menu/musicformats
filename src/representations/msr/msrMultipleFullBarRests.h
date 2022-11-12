@@ -12,6 +12,8 @@
 #ifndef ___msrMultipleFullBarRests___
 #define ___msrMultipleFullBarRests___
 
+#include <list>
+
 #include "msrSegmentElements.h"
 
 
@@ -26,10 +28,10 @@ namespace MusicFormats
 //   kMultipleFullBarRestsStart, kMultipleFullBarRestsStop
 // };
 //
-// string msrMultipleFullBarRestsKindAsString (
+// std::string msrMultipleFullBarRestsKindAsString (
 //   msrMultipleFullBarRestsKind multipleFullBarRestsKind);
 //
-// ostream& operator << (ostream& os, const msrMultipleFullBarRestsKind& elt);
+// std::ostream& operator << (std::ostream& os, const msrMultipleFullBarRestsKind& elt);
 
 class EXP msrMultipleFullBarRests : public msrSegmentElement
 {
@@ -79,14 +81,14 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     int                   getMultipleFullBarRestsNumber () const
                               { return fMultipleFullBarRestsNumber; }
 
-    const list<S_msrMeasure>&
+    const std::list<S_msrMeasure>&
                           getFullBarRestsMeasuresList () const
                               { return fFullBarRestsMeasuresList; }
 
     void                  setMultipleFullBarRestsNextMeasureNumber (
-                            const string& nextMeasureNumber);
+                            const std::string& nextMeasureNumber);
 
-    string                getMultipleFullBarRestsNextMeasureNumber () const
+    std::string           getMultipleFullBarRestsNextMeasureNumber () const
                               { return fMultipleFullBarRestsNextMeasureNumber; }
 
     void                  setMultipleFullBarRestsLastMeasurePuristMeasureNumber (
@@ -134,14 +136,14 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
     void                  displayMultipleFullBarRests (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -151,14 +153,14 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     S_msrSegment          fMultipleFullBarRestsUpLinkToSegment;
 
     int                   fMultipleFullBarRestsNumber; // supplied by MusicXML
-    list<S_msrMeasure>    fFullBarRestsMeasuresList;
+    std::list<S_msrMeasure>    fFullBarRestsMeasuresList;
 
     int                   fMultipleFullBarRestsLastMeasurePuristNumber;
 
-    string                fMultipleFullBarRestsNextMeasureNumber;
+    std::string           fMultipleFullBarRestsNextMeasureNumber;
 };
 typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
-EXP ostream& operator << (ostream& os, const S_msrMultipleFullBarRests& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMultipleFullBarRests& elt);
 
 
 }

@@ -39,8 +39,6 @@
 #include "msr2summaryVisitor.h"
 #include "msr2namesVisitor.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -48,8 +46,8 @@ namespace MusicFormats
 void populateMsrSkeletonFromMxsr (
   Sxmlelement   theMxsr,
   S_msrScore    scoreSkeletonToBePopulated,
-  const string& passNumber,
-  const string& passDescription)
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -68,20 +66,20 @@ void populateMsrSkeletonFromMxsr (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl;
+      std::endl;
 
     gLogStream <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -110,7 +108,7 @@ void populateMsrSkeletonFromMxsr (
       "### populateMsrSkeletonFromMxsr gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }

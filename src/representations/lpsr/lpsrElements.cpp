@@ -18,8 +18,6 @@
 #include "lpsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -48,7 +46,7 @@ void lpsrElement::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrElement::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -61,7 +59,7 @@ void lpsrElement::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -74,7 +72,7 @@ void lpsrElement::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -87,7 +85,7 @@ void lpsrElement::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);

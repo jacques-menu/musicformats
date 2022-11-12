@@ -30,7 +30,7 @@ namespace MusicFormats
 // typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 
 //______________________________________________________________________________
-class EXP msrBarCheck : public msrMeasureElement
+class EXP msrBarCheck : public msrMeasureElementLambda
 {
   public:
 
@@ -44,7 +44,7 @@ class EXP msrBarCheck : public msrMeasureElement
     static SMARTP<msrBarCheck> createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
                             int           inputLineNumber,
                             S_msrMeasure  upLinkToMeasure,
-                            const string& nextBarOriginalNumber,
+                            const std::string& nextBarOriginalNumber,
                             int           nextBarPuristNumber);
 
   protected:
@@ -59,7 +59,7 @@ class EXP msrBarCheck : public msrMeasureElement
                           msrBarCheck (
                             int           inputLineNumber,
                             S_msrMeasure  upLinkToMeasure,
-                            const string& nextBarOriginalNumber,
+                            const std::string& nextBarOriginalNumber,
                             int           nextBarPuristNumber);
 
     virtual               ~msrBarCheck ();
@@ -69,7 +69,7 @@ class EXP msrBarCheck : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    string                getNextBarOriginalNumber () const
+    std::string           getNextBarOriginalNumber () const
                               { return fNextBarOriginalNumber; }
 
     void                  setNextBarPuristNumber (int puristNumber);
@@ -97,20 +97,20 @@ class EXP msrBarCheck : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fNextBarOriginalNumber;
+    std::string           fNextBarOriginalNumber;
     int                   fNextBarPuristNumber;
 };
 typedef SMARTP<msrBarCheck> S_msrBarCheck;
-EXP ostream& operator << (ostream& os, const S_msrBarCheck& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrBarCheck& elt);
 
 
 }

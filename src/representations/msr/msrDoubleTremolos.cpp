@@ -37,16 +37,14 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrDoubleTremoloTypeKindAsString (
+std::string msrDoubleTremoloTypeKindAsString (
   msrDoubleTremoloTypeKind tremoloTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (tremoloTypeKind) {
     case msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_:
@@ -66,7 +64,7 @@ string msrDoubleTremoloTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrDoubleTremoloTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrDoubleTremoloTypeKind& elt)
 {
   os << msrDoubleTremoloTypeKindAsString (elt);
   return os;
@@ -100,7 +98,7 @@ msrDoubleTremolo::msrDoubleTremolo (
   msrDoubleTremoloTypeKind   doubleDoubleTremoloTypeKind,
   int                  doubleTremoloMarksNumber,
   msrPlacementKind     doubleTremoloPlacementKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -123,7 +121,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Creating a newborn clone of a double tremolo" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -173,7 +171,7 @@ msrDoubleTremolo::~msrDoubleTremolo ()
 void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
   const S_msrMeasure measure,
   const Rational&    measurePosition,
-  const string&      context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -193,7 +191,7 @@ void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
       "), context: \"" <<
       context <<
       "\"" <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -212,7 +210,7 @@ void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
 // void msrDoubleTremolo::setDoubleTremoloMeasurePosition ( ??? JMI v0.9.66
 //   const Rational& measurePosition)
 // {
-//   string context =
+//   std::string context =
 //     "setDoubleTremoloMeasurePosition()";
 //
 //   setDoubleTremoloMeasurePosition ( // JMI v0.9.66 CLEAN THAT!!!
@@ -291,7 +289,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (S_msrNote note)
       "Setting note " << note->asShortString () <<
       " as first element of double tremolo " <<
       asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -347,20 +345,20 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (S_msrNote note)
       2; // there are two repeated notes
 
   if (numberOfRepeatsAsRational.getDenominator () != 1) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot handle numberOfRepeatsAsRational.getDenominator () != 1" <<
-      endl <<
+      std::endl <<
       "numberOfRepeatsAsRational = " <<
       numberOfRepeatsAsRational <<
-      endl <<
+      std::endl <<
       "fDoubleTremoloSoundingWholeNotes = '" <<
       fDoubleTremoloSoundingWholeNotes << "'" <<
-      endl <<
+      std::endl <<
       "fDoubleTremoloElementsDuration = '" <<
       fDoubleTremoloElementsDuration << "'" <<
-      endl <<
+      std::endl <<
       "line " << inputLineNumber;
 
     msrInternalError (
@@ -383,7 +381,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (S_msrNote note)
       ", fDoubleTremoloElementsDuration = '" <<
       fDoubleTremoloElementsDuration << "'" <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -397,7 +395,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       "Setting note " << note->asShortString () <<
       " as second element of double tremolo " <<
       asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -435,7 +433,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       "', doubleTremoloElementsDuration = '" <<
       fDoubleTremoloElementsDuration << "'" <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -443,7 +441,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
     expectedDoubleTremoloSoundingWholeNotes
       !=
     fDoubleTremoloSoundingWholeNotes) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "attempt to set notes double tremolo whole notes both to " <<
@@ -451,13 +449,13 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       " and " <<
       expectedDoubleTremoloSoundingWholeNotes <<
       " on note second element:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     s <<
       note <<
-      endl;
+      std::endl;
 
     --gIndenter;
 
@@ -484,7 +482,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
       "Setting chord " << chord->asString () <<
       " as first element of double tremolo " <<
       asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -513,7 +511,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
         !=
       fDoubleTremoloSoundingWholeNotes
     ) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "attempt to set chord double tremolo sounding whole notes both to " <<
@@ -521,13 +519,13 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
         " and " <<
         expectedDoubleTremoloSoundingWholeNotes <<
         " on chord first element:" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       s <<
         chord->asString () <<
-        endl;
+        std::endl;
 
       --gIndenter;
 
@@ -551,7 +549,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (S_msrChord chord)
       "Setting chord " << chord->asString () <<
       " as second element of double tremolo " <<
       asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -571,7 +569,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (S_msrChord chord)
   // set double tremolo whole notes to the chords's displayed whole notes
   if (fDoubleTremoloSoundingWholeNotes.getNumerator () != 0) {
     if (chordDisplayWholeNotes != fDoubleTremoloSoundingWholeNotes) { // JMI
-      stringstream s;
+      std::stringstream s;
 
      s <<
         "attempt to set double tremolo whole notes both to " <<
@@ -579,13 +577,13 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (S_msrChord chord)
         " and " <<
         chordDisplayWholeNotes <<
         " on chord second element:" << " (chord)" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       s <<
         chord <<
-        endl;
+        std::endl;
 
       --gIndenter;
 
@@ -604,7 +602,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (S_msrChord chord)
 }
 
 void msrDoubleTremolo::setDoubleTremoloMeasureNumber (
-  const string& measureNumber)
+  const std::string& measureNumber)
 {
   fetchMeasureElementMeasureNumber () =  measureNumber;
 }
@@ -614,7 +612,7 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDoubleTremolo::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDoubleTremolo>*
@@ -625,7 +623,7 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDoubleTremolo::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -636,7 +634,7 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDoubleTremolo::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDoubleTremolo>*
@@ -647,7 +645,7 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDoubleTremolo::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -668,10 +666,10 @@ void msrDoubleTremolo::browseData (basevisitor* v)
   }
 }
 
-string msrDoubleTremoloKindAsString (
+std::string msrDoubleTremoloKindAsString (
   msrDoubleTremoloKind doubleTremolotKind)
 {
-  string result;
+  std::string result;
 
   switch (doubleTremolotKind) {
     case msrDoubleTremoloKind::kDoubleTremoloNotes:
@@ -685,22 +683,22 @@ string msrDoubleTremoloKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrDoubleTremoloKind& elt)
+std::ostream& operator << (std::ostream& os, const msrDoubleTremoloKind& elt)
 {
   os << msrDoubleTremoloKindAsString (elt);
   return os;
 }
 
-string msrDoubleTremolo::doubleTremoloPlacementKindAsString () const
+std::string msrDoubleTremolo::doubleTremoloPlacementKindAsString () const
 {
   return
     msrPlacementKindAsString (
       fDoubleTremoloPlacementKind);
 }
 
-string msrDoubleTremolo::asShortString () const
+std::string msrDoubleTremolo::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[DoubleTremolo" <<
@@ -715,9 +713,9 @@ string msrDoubleTremolo::asShortString () const
   return s.str ();
 }
 
-string msrDoubleTremolo::asString () const
+std::string msrDoubleTremolo::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[DoubleTremolo " <<
@@ -814,49 +812,49 @@ string msrDoubleTremolo::asString () const
   return s.str ();
 }
 
-void msrDoubleTremolo::print (ostream& os) const
+void msrDoubleTremolo::print (std::ostream& os) const
 {
   os <<
     "[DoubleTremolo" <<
     ", " << msrDoubleTremoloTypeKindAsString (fDoubleDoubleTremoloTypeKind) <<
     ", on " << msrDoubleTremoloKindAsString (fDoubleTremoloKind) <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 32;
 
   ++gIndenter;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "doubleTremoloSoundingWholeNotes" << " : " <<
     fDoubleTremoloSoundingWholeNotes <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "doubleTremoloMarksNumber" << " : " <<
     fDoubleTremoloMarksNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "doubleTremoloElementsDuration" << " : " <<
     fDoubleTremoloElementsDuration <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "numberOfRepeats" << " : " <<
     fDoubleTremoloNumberOfRepeats <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "placement" << " : " <<
     doubleTremoloPlacementKindAsString () <<
-    endl;
+    std::endl;
 
   os <<
     "First element:";
   if (fDoubleTremoloFirstElement) { // it may not yet be set
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
     os <<
@@ -866,13 +864,13 @@ void msrDoubleTremolo::print (ostream& os) const
   else {
     os <<
       " [NONE]" <<
-      endl;
+      std::endl;
   }
 
   os <<
     "Second element:";
   if (fDoubleTremoloSecondElement) { // it may not yet be set
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
     os <<
@@ -882,21 +880,21 @@ void msrDoubleTremolo::print (ostream& os) const
   else {
     os <<
       " [NONE]" <<
-      endl;
+      std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrDoubleTremolo& elt)
+std::ostream& operator << (std::ostream& os, const S_msrDoubleTremolo& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

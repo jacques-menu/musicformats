@@ -29,9 +29,9 @@ class EXP insiderOahAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<insiderOahAtom> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description);
 
   protected:
 
@@ -39,9 +39,9 @@ class EXP insiderOahAtom : public oahAtom
     // ------------------------------------------------------
 
                           insiderOahAtom (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description);
 
     virtual               ~insiderOahAtom ();
 
@@ -55,7 +55,7 @@ class EXP insiderOahAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
   public:
 
@@ -70,10 +70,10 @@ class EXP insiderOahAtom : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
 
@@ -83,7 +83,7 @@ class EXP insiderOahAtom : public oahAtom
     Bool                  fOptionHasBeenSelected;
 };
 typedef SMARTP<insiderOahAtom> S_insiderOahAtom;
-EXP ostream& operator << (ostream& os, const S_insiderOahAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_insiderOahAtom& elt);
 
 //______________________________________________________________________________
 class EXP regularOahAtom : public oahAtom
@@ -94,9 +94,9 @@ class EXP regularOahAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<regularOahAtom> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description);
 
   protected:
 
@@ -104,9 +104,9 @@ class EXP regularOahAtom : public oahAtom
     // ------------------------------------------------------
 
                           regularOahAtom (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description);
 
     virtual               ~regularOahAtom ();
 
@@ -120,7 +120,7 @@ class EXP regularOahAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
   public:
 
@@ -135,10 +135,10 @@ class EXP regularOahAtom : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -149,7 +149,7 @@ class EXP regularOahAtom : public oahAtom
     Bool                  fOptionHasBeenSelected;
 };
 typedef SMARTP<regularOahAtom> S_regularOahAtom;
-EXP ostream& operator << (ostream& os, const S_regularOahAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_regularOahAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahOahGroup : public oahGroup
@@ -157,7 +157,7 @@ class EXP oahOahGroup : public oahGroup
   public:
 
     static SMARTP<oahOahGroup> create (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   public:
 
@@ -165,7 +165,7 @@ class EXP oahOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeOahOahGroup (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   protected:
 
@@ -173,7 +173,7 @@ class EXP oahOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           oahOahGroup (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
     virtual               ~oahOahGroup ();
 
@@ -183,7 +183,7 @@ class EXP oahOahGroup : public oahGroup
     // ------------------------------------------------------
 
     // command line
-    string                getOahOahGroupServiceName () const
+    std::string           getOahOahGroupServiceName () const
                               { return fOahOahGroupServiceName; }
 
     S_mfcMultiComponent   fetchOahOahGroupHandlerMultiComponent () const;
@@ -204,21 +204,21 @@ class EXP oahOahGroup : public oahGroup
                               { return fShowOptionsAndArguments; }
 
     // help about option name
-    string                getOptionNameToProvideHelpAbout () const
+    std::string           getOptionNameToProvideHelpAbout () const
                               { return fOptionNameToProvideHelpAbout; }
     S_oahOptionNameHelpAtom
                           getOptionNameHelpAtom () const
                               { return fOptionNameHelpAtom; }
 
     // query about option name
-    string                getOptionNameToProvideQueryAbout () const
+    std::string           getOptionNameToProvideQueryAbout () const
                               { return fOptionNameToProvideQueryAbout; }
     S_oahQueryOptionNameAtom
                           getQueryOptionNameAtom () const
                               { return fQueryOptionNameAtom; }
 
-    // find string
-//     string                getStringToBeFound () const
+    // find std::string
+//     std::string           getStringToBeFound () const
 //                               { return fStringToBeFound; }
     S_oahFindStringAtom   getFindStringAtom () const
                               { return fFindStringAtom; }
@@ -263,7 +263,7 @@ class EXP oahOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeOahBasicHelpOptions (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
     void                  initializeOahOahAndArgumentsOptions ();
 
@@ -291,7 +291,7 @@ class EXP oahOahGroup : public oahGroup
     void                  printOahOahValues (int valueFieldWidth);
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const;
 
   private:
@@ -300,7 +300,7 @@ class EXP oahOahGroup : public oahGroup
     // --------------------------------------
 
     // command line
-    string                fOahOahGroupServiceName;
+    std::string           fOahOahGroupServiceName;
 
     // trace early options
 
@@ -313,17 +313,17 @@ class EXP oahOahGroup : public oahGroup
     S_oahBooleanAtom      fOahVerboseModeAtom;
 
     // help about option name
-    string                fOptionNameToProvideHelpAbout;
+    std::string           fOptionNameToProvideHelpAbout;
     S_oahOptionNameHelpAtom
                           fOptionNameHelpAtom;
 
     // query about option name
-    string                fOptionNameToProvideQueryAbout;
+    std::string           fOptionNameToProvideQueryAbout;
     S_oahQueryOptionNameAtom
                           fQueryOptionNameAtom;
 
-    // find string
-//     string                fStringToBeFound; JMI ???
+    // find std::string
+//     std::string           fStringToBeFound; JMI ???
     S_oahFindStringAtom   fFindStringAtom;
 
     // include options file
@@ -348,13 +348,13 @@ class EXP oahOahGroup : public oahGroup
     Bool                  fTracingOahVisitors;
 };
 typedef SMARTP<oahOahGroup> S_oahOahGroup;
-EXP ostream& operator << (ostream& os, const S_oahOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahOahGroup& elt);
 
 EXP extern S_oahOahGroup gGlobalOahOahGroup;
 
 //______________________________________________________________________________
 EXP S_oahOahGroup createGlobalOahOahGroup (
-  const string& serviceName);
+  const std::string& serviceName);
 
 
 }

@@ -18,8 +18,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -45,9 +43,9 @@ msrPartGroupElement::msrPartGroupElement (
 msrPartGroupElement::~msrPartGroupElement ()
 {}
 
-// string msrPartGroupElement::asString () const
+// std::string msrPartGroupElement::asString () const
 // {
-//   string result;
+//   std::string result;
 //
 //   if (
 //     // part group?
@@ -68,7 +66,7 @@ msrPartGroupElement::~msrPartGroupElement ()
 //   }
 //
 //   else {
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "part group element is neither a part group nor a part";
@@ -79,12 +77,12 @@ msrPartGroupElement::~msrPartGroupElement ()
 //   return result;
 // }
 //
-// void msrPartGroupElement::print (ostream& os) const
+// void msrPartGroupElement::print (std::ostream& os) const
 // {
 // //   os << // JMI
 // //     "PartGroupElement" <<
 // //     ", line " << fInputLineNumber <<
-// //     endl;
+// //     std::endl;
 //
 //   if (
 //     // part group?
@@ -105,7 +103,7 @@ msrPartGroupElement::~msrPartGroupElement ()
 //   }
 //
 //   else {
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "part group element is neither a part group nor a part";
@@ -114,12 +112,12 @@ msrPartGroupElement::~msrPartGroupElement ()
 //   }
 // }
 //
-// void msrPartGroupElement::printShort (ostream& os) const
+// void msrPartGroupElement::printShort (std::ostream& os) const
 // {
 // //   os << // JMI
 // //     "PartGroupElement" <<
 // //     ", line " << fInputLineNumber <<
-// //     endl;
+// //     std::endl;
 //
 //   if (
 //     // part group?
@@ -140,7 +138,7 @@ msrPartGroupElement::~msrPartGroupElement ()
 //   }
 //
 //   else {
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "part group element is neither a part group nor a part";
@@ -149,13 +147,13 @@ msrPartGroupElement::~msrPartGroupElement ()
 //   }
 // }
 
-ostream& operator << (ostream& os, const S_msrPartGroupElement& elt)
+std::ostream& operator << (std::ostream& os, const S_msrPartGroupElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

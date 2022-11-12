@@ -21,8 +21,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -54,7 +52,7 @@ void msrStem::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStem::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStem>*
@@ -65,7 +63,7 @@ void msrStem::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStem::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -76,7 +74,7 @@ void msrStem::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStem::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStem>*
@@ -87,7 +85,7 @@ void msrStem::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStem::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -96,10 +94,10 @@ void msrStem::acceptOut (basevisitor* v)
 void msrStem::browseData (basevisitor* v)
 {}
 
-string msrStemKindAsString (
+std::string msrStemKindAsString (
   msrStemKind stemKind)
 {
-  string result;
+  std::string result;
 
   switch (stemKind) {
     case msrStemKind::kStemNeutral:
@@ -119,9 +117,9 @@ string msrStemKindAsString (
   return result;
 }
 
-string msrStem::asString () const
+std::string msrStem::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Stem" <<
@@ -133,18 +131,18 @@ string msrStem::asString () const
   return s.str ();
 }
 
-void msrStem::print (ostream& os) const
+void msrStem::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrStem& elt)
+std::ostream& operator << (std::ostream& os, const S_msrStem& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -15,6 +15,7 @@
 #include "msrElements.h"
 
 #include "msrAccidentals.h"
+#include "msrNotes.h"
 #include "msrPlacements.h"
 
 
@@ -34,10 +35,10 @@ enum class msrOrnamentKind {
   kOrnamentAccidentalKind
 };
 
-string msrOrnamentKindAsString (
+std::string msrOrnamentKindAsString (
   msrOrnamentKind ornamentKind);
 
-ostream& operator << (ostream& os, const msrOrnamentKind& elt);
+std::ostream& operator << (std::ostream& os, const msrOrnamentKind& elt);
 
 class EXP msrOrnament : public msrElement
 {
@@ -119,9 +120,9 @@ class EXP msrOrnament : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -137,7 +138,7 @@ class EXP msrOrnament : public msrElement
     msrAccidentalKind     fOrnamentAccidentalKind;
 };
 typedef SMARTP<msrOrnament> S_msrOrnament;
-EXP ostream& operator << (ostream& os, const S_msrOrnament& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrOrnament& elt);
 
 
 }

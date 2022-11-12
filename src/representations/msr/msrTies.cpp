@@ -23,16 +23,14 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // ties
 // ------------------------------------------------------
-string msrTieKindAsString (msrTieKind tieKind)
+std::string msrTieKindAsString (msrTieKind tieKind)
 {
-  stringstream s;
+  std::stringstream s;
 
   switch (tieKind) {
     case msrTieKind::kTieNone:
@@ -52,7 +50,7 @@ string msrTieKindAsString (msrTieKind tieKind)
   return s.str ();
 }
 
-ostream& operator << (ostream& os, const msrTieKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTieKind& elt)
 {
   os << msrTieKindAsString (elt);
   return os;
@@ -103,7 +101,7 @@ void msrTie::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTie::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTie>*
@@ -114,7 +112,7 @@ void msrTie::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTie::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -125,7 +123,7 @@ void msrTie::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTie::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTie>*
@@ -136,7 +134,7 @@ void msrTie::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTie::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -145,9 +143,9 @@ void msrTie::acceptOut (basevisitor* v)
 void msrTie::browseData (basevisitor* v)
 {}
 
-string msrTie::asString () const
+std::string msrTie::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Tie" << ' ' << msrTieKindAsString (fTieKind) <<
@@ -156,18 +154,18 @@ string msrTie::asString () const
   return s.str ();
 }
 
-void msrTie::print (ostream& os) const
+void msrTie::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTie& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTie& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -13,17 +13,15 @@
 #include "msrRepeatsEnumTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // repeat endings
 //______________________________________________________________________________
-string msrRepeatEndingKindAsString (
+std::string msrRepeatEndingKindAsString (
   msrRepeatEndingKind repeatEndingKind)
 {
-  string result;
+  std::string result;
 
   switch (repeatEndingKind) {
     case msrRepeatEndingKind::kRepeatEndingHooked:
@@ -37,16 +35,16 @@ string msrRepeatEndingKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrRepeatEndingKind& elt)
+std::ostream& operator << (std::ostream& os, const msrRepeatEndingKind& elt)
 {
   os << msrRepeatEndingKindAsString (elt);
   return os;
 }
 
-string msrRepeatExplicitStartKindAsString (
+std::string msrRepeatExplicitStartKindAsString (
   msrRepeatExplicitStartKind repeatExplicitStartKind)
 {
-  string result;
+  std::string result;
 
   switch (repeatExplicitStartKind) {
     case msrRepeatExplicitStartKind::kRepeatExplicitStartNo:
@@ -60,16 +58,16 @@ string msrRepeatExplicitStartKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrRepeatExplicitStartKind& elt)
+std::ostream& operator << (std::ostream& os, const msrRepeatExplicitStartKind& elt)
 {
   os << msrRepeatExplicitStartKindAsString (elt);
   return os;
 }
 
-string repeatBuildPhaseKindAsString (
+std::string repeatBuildPhaseKindAsString (
   msrRepeatBuildPhaseKind repeatBuildPhaseKind)
 {
-  string result;
+  std::string result;
 
   switch (repeatBuildPhaseKind) {
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:

@@ -19,7 +19,7 @@ class EXP bsrFootNotesElement : public bsrElement
 
     static SMARTP<bsrFootNotesElement> create (
                             int           inputLineNumber,
-                            const string& footNoteText);
+                            const std::string& footNoteText);
 
   protected:
 
@@ -28,7 +28,7 @@ class EXP bsrFootNotesElement : public bsrElement
 
                           bsrFootNotesElement (
                             int           inputLineNumber,
-                            const string& footNoteText);
+                            const std::string& footNoteText);
 
     virtual               ~bsrFootNotesElement ();
 
@@ -37,7 +37,7 @@ class EXP bsrFootNotesElement : public bsrElement
     // set and get
     // ------------------------------------------------------
 
-    string                getFootNoteText () const
+    std::string           getFootNoteText () const
                               { return fFootNoteText; }
 
     S_bsrCellsList        getFootNotesElementCellsList () const
@@ -63,21 +63,21 @@ class EXP bsrFootNotesElement : public bsrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fFootNoteText;
+    std::string           fFootNoteText;
 
     S_bsrCellsList        fFootNotesElementCellsList; // UNUSED JMI v0.9.66
 };
 typedef SMARTP<bsrFootNotesElement> S_bsrFootNotesElement;
-EXP ostream& operator << (ostream& os, const S_bsrFootNotesElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrFootNotesElement& elt);
 
 
 }

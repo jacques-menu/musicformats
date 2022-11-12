@@ -32,8 +32,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -71,16 +69,16 @@ msrMeasureRepeatElement::~msrMeasureRepeatElement ()
 void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI ???
   int          inputLineNumber,
   S_msrSegment segment,
-  string       context)
+  std::string       context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending segment '" << segment <<
-      "' to measureRepeat element elements list '" << asString () <<
+      "' to measureRepeat element elements std::list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -96,16 +94,16 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
 void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
   int                  inputLineNumber,
   S_msrMeasureRepeat  measureRepeat,
-  string               context)
+  std::string               context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending measureRepeat '" << measureRepeat <<
-      "' to measureRepeat element elements list '" << asString () <<
+      "' to measureRepeat element elements std::list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -121,16 +119,16 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
 void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
   int               inputLineNumber,
   S_msrVoiceElement voiceElement,
-  string            context)
+  std::string            context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending voice element '" << voiceElement <<
-      "' to measureRepeat element elements list '" << asString () <<
+      "' to measureRepeat element elements std::list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -154,7 +152,7 @@ S_msrNote msrMeasureRepeatElement::fetchMeasureRepeatElementFirstNonGraceNote ()
   // possibly inside a chord or tuplet
 
   if (fMeasureRepeatElementsList.size ()) {
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fMeasureRepeatElementsList.begin (),
       iEnd   = fMeasureRepeatElementsList.end (),
       i      = iBegin;
@@ -203,7 +201,7 @@ S_msrNote msrMeasureRepeatElement::fetchMeasureRepeatElementFirstNonGraceNote ()
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "tuplet first element should be a note, a chord or another tuplet, found instead '" <<
@@ -229,7 +227,7 @@ void msrMeasureRepeatElement::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeatElement::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureRepeatElement>*
@@ -240,7 +238,7 @@ void msrMeasureRepeatElement::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureRepeatElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -251,7 +249,7 @@ void msrMeasureRepeatElement::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeatElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureRepeatElement>*
@@ -262,7 +260,7 @@ void msrMeasureRepeatElement::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureRepeatElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -273,7 +271,7 @@ void msrMeasureRepeatElement::browseData (basevisitor* v)
   // browse the elements
   if (fMeasureRepeatElementsList.size ()) {
     for (
-      list<S_msrVoiceElement>::const_iterator i = fMeasureRepeatElementsList.begin ();
+      std::list<S_msrVoiceElement>::const_iterator i = fMeasureRepeatElementsList.begin ();
       i != fMeasureRepeatElementsList.end ();
       ++i
   ) {
@@ -284,9 +282,9 @@ void msrMeasureRepeatElement::browseData (basevisitor* v)
   }
 }
 
-string msrMeasureRepeatElement::asString () const
+std::string msrMeasureRepeatElement::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MeasureRepeatElement" <<
@@ -294,17 +292,17 @@ string msrMeasureRepeatElement::asString () const
     fMeasureRepeatElementUpLinkToMeasureRepeat->
       asShortString () <<
     "', line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   return s.str ();
 }
 
-void msrMeasureRepeatElement::print (ostream& os) const
+void msrMeasureRepeatElement::print (std::ostream& os) const
 {
   os <<
     "MeasureRepeatElement" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -313,7 +311,7 @@ void msrMeasureRepeatElement::print (ostream& os) const
     fMeasureRepeatElementUpLinkToMeasureRepeat->
       asShortString () <<
       "'" <<
-    endl << endl;
+    std::endl << std::endl;
 
   // print the elements
   int elementsNumber =
@@ -331,14 +329,14 @@ void msrMeasureRepeatElement::print (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
   if (elementsNumber) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fMeasureRepeatElementsList.begin (),
       iEnd   = fMeasureRepeatElementsList.end (),
       i      = iBegin;
@@ -347,7 +345,7 @@ void msrMeasureRepeatElement::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -356,12 +354,12 @@ void msrMeasureRepeatElement::print (ostream& os) const
   --gIndenter;
 }
 
-void msrMeasureRepeatElement::printShort (ostream& os) const
+void msrMeasureRepeatElement::printShort (std::ostream& os) const
 {
   os <<
     "MeasureRepeatElement" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -371,7 +369,7 @@ void msrMeasureRepeatElement::printShort (ostream& os) const
     fMeasureRepeatElementUpLinkToMeasureRepeat->
       asShortString () <<
       "'" <<
-    endl;
+    std::endl;
 * /
 
   // print the elements
@@ -390,14 +388,14 @@ void msrMeasureRepeatElement::printShort (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
   if (elementsNumber) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fMeasureRepeatElementsList.begin (),
       iEnd   = fMeasureRepeatElementsList.end (),
       i      = iBegin;
@@ -406,7 +404,7 @@ void msrMeasureRepeatElement::printShort (ostream& os) const
       // print the element
       (*i)->printShort (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -415,13 +413,13 @@ void msrMeasureRepeatElement::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrMeasureRepeatElement& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -469,7 +467,7 @@ void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
         fetchMeasuresNumber (),
         "measure",
         "measures") <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -504,7 +502,7 @@ void msrMeasureRepeatPattern::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeatPattern::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureRepeatPattern>*
@@ -515,7 +513,7 @@ void msrMeasureRepeatPattern::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureRepeatPattern::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -526,7 +524,7 @@ void msrMeasureRepeatPattern::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeatPattern::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureRepeatPattern>*
@@ -537,7 +535,7 @@ void msrMeasureRepeatPattern::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureRepeatPattern::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -548,7 +546,7 @@ void msrMeasureRepeatPattern::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeatPattern::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   if (fMeasureRepeatPatternSegment) {
@@ -558,9 +556,9 @@ void msrMeasureRepeatPattern::browseData (basevisitor* v)
   }
 }
 
-string msrMeasureRepeatPattern::asString () const
+std::string msrMeasureRepeatPattern::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 
@@ -576,13 +574,13 @@ string msrMeasureRepeatPattern::asString () const
   return s.str ();
 }
 
-void msrMeasureRepeatPattern::print (ostream& os) const
+void msrMeasureRepeatPattern::print (std::ostream& os) const
 {
   os <<
-    endl <<
+    std::endl <<
     '[' <<
     asString () <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -593,10 +591,10 @@ void msrMeasureRepeatPattern::print (ostream& os) const
   if (! fMeasureRepeatPatternSegment) {
     os <<
       " [NONE]" <<
-      endl;
+      std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
@@ -608,16 +606,16 @@ void msrMeasureRepeatPattern::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrMeasureRepeatPattern& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatPattern& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -664,7 +662,7 @@ void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
         fetchMeasuresNumber (),
         "measure",
         "measures") <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -699,7 +697,7 @@ void msrMeasureRepeatReplicas::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeatReplicas::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureRepeatReplicas>*
@@ -710,7 +708,7 @@ void msrMeasureRepeatReplicas::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureRepeatReplicas::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -721,7 +719,7 @@ void msrMeasureRepeatReplicas::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeatReplicas::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureRepeatReplicas>*
@@ -732,7 +730,7 @@ void msrMeasureRepeatReplicas::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureRepeatReplicas::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -743,7 +741,7 @@ void msrMeasureRepeatReplicas::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeatReplicas::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   if (fMeasureRepeatReplicasSegment) {
@@ -753,9 +751,9 @@ void msrMeasureRepeatReplicas::browseData (basevisitor* v)
   }
 }
 
-string msrMeasureRepeatReplicas::asString () const
+std::string msrMeasureRepeatReplicas::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 
@@ -771,13 +769,13 @@ string msrMeasureRepeatReplicas::asString () const
   return s.str ();
 }
 
-void msrMeasureRepeatReplicas::print (ostream& os) const
+void msrMeasureRepeatReplicas::print (std::ostream& os) const
 {
   os <<
-    endl <<
+    std::endl <<
     '[' <<
     asString () <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -788,10 +786,10 @@ void msrMeasureRepeatReplicas::print (ostream& os) const
   if (! fMeasureRepeatReplicasSegment) {
     os <<
       " [NONE]" <<
-      endl;
+      std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
@@ -803,16 +801,16 @@ void msrMeasureRepeatReplicas::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrMeasureRepeatReplicas& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatReplicas& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -877,7 +875,7 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
       "Creating a newborn clone of measures repeat '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -910,7 +908,7 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
           fetchMeasuresNumber (),
         "measure",
         "measures") <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -939,7 +937,7 @@ void msrMeasureRepeat::setMeasureRepeatReplicas (
           fetchMeasuresNumber (),
         "measure",
         "measures") <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1004,7 +1002,7 @@ void msrMeasureRepeat::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeat::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureRepeat>*
@@ -1015,7 +1013,7 @@ void msrMeasureRepeat::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureRepeat::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1026,7 +1024,7 @@ void msrMeasureRepeat::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeat::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMeasureRepeat>*
@@ -1037,7 +1035,7 @@ void msrMeasureRepeat::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureRepeat::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1048,7 +1046,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureRepeat::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   if (fMeasureRepeatPattern) {
@@ -1071,7 +1069,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
     if (gGlobalMsrOahGroup->getTraceMsrVisitors () || gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
       gLogStream <<
         "% ==> visiting measures repeat replicas is inhibited" <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -1088,7 +1086,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
 void msrMeasureRepeat:: appendMeasureElementToSegmentElement (
   S_msrMeasureElement elem)
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "cannot append measure element " <<
@@ -1103,10 +1101,10 @@ void msrMeasureRepeat:: appendMeasureElementToSegmentElement (
     s.str ());
 }
 
-string measureRepeatBuildPhaseKindAsString (
+std::string measureRepeatBuildPhaseKindAsString (
   msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind)
 {
-  string result;
+  std::string result;
 
   switch (measureRepeatBuildPhaseKind) {
     case msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseJustCreated:
@@ -1126,15 +1124,15 @@ string measureRepeatBuildPhaseKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrMeasureRepeatBuildPhaseKind& elt)
+std::ostream& operator << (std::ostream& os, const msrMeasureRepeatBuildPhaseKind& elt)
 {
   os << measureRepeatBuildPhaseKindAsString (elt);
   return os;
 }
 
-string msrMeasureRepeat::asString () const
+std::string msrMeasureRepeat::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 
@@ -1160,22 +1158,22 @@ string msrMeasureRepeat::asString () const
 
 void msrMeasureRepeat::displayMeasureRepeat (
   int           inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     "*********>> MeasureRepeat " <<
     ", measureRepeatMeasuresNumber: '" <<
     fMeasureRepeatMeasuresNumber <<
     ", measureRepeatSlashesNumber: '" <<
     fMeasureRepeatSlashesNumber <<
     "', voice:" <<
-    endl <<
+    std::endl <<
     fUpLinkToMeasureRepeatToVoice->getVoiceName () <<
     " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   print (gLogStream);
@@ -1183,10 +1181,10 @@ void msrMeasureRepeat::displayMeasureRepeat (
 
   gLogStream <<
     " <<*********" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
-void msrMeasureRepeat::print (ostream& os) const
+void msrMeasureRepeat::print (std::ostream& os) const
 {
   os <<
     "[MeasureRepeat" <<
@@ -1205,7 +1203,7 @@ void msrMeasureRepeat::print (ostream& os) const
       "replica measure",
       "replicas measures") <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1215,11 +1213,11 @@ void msrMeasureRepeat::print (ostream& os) const
     const int fieldWidth = 36;
 
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentMeasureRepeatBuildPhaseKind" << " : " <<
       measureRepeatBuildPhaseKindAsString (
         fCurrentMeasureRepeatBuildPhaseKind) <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1227,7 +1225,7 @@ void msrMeasureRepeat::print (ostream& os) const
   if (! fMeasureRepeatPattern) {
     os <<
       "measures repeat pattern: [NONE]" <<
-      endl;
+      std::endl;
   }
 
   else {
@@ -1239,7 +1237,7 @@ void msrMeasureRepeat::print (ostream& os) const
   if (! fMeasureRepeatReplicas) {
     os <<
       "measures repeat replicas: [NONE]" <<
-      endl;
+      std::endl;
   }
 
   else {
@@ -1249,21 +1247,21 @@ void msrMeasureRepeat::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrMeasureRepeat::printShort (ostream& os) const
+void msrMeasureRepeat::printShort (std::ostream& os) const
 {
   print (os);
 }
 
-ostream& operator << (ostream& os, const S_msrMeasureRepeat& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeat& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

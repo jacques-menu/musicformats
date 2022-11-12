@@ -25,16 +25,16 @@ S_msrScore translateMsrToMsr (
   S_msrScore        originalMsrScore,
   S_msrOahGroup     msrOpts,
   S_msr2msrOahGroup msr2msrOpts,
-  const string&     passNumber,
-  const string&     passDescription);
+  const std::string&     passNumber,
+  const std::string&     passDescription);
 
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsrAlongPathToVoice (
   S_msrScore        originalMsrScore,
   S_msrOahGroup     msrOpts,
   S_msr2msrOahGroup msr2msrOpts,
-  const string&     passNumber,
-  const string&     passDescription,
+  const std::string&     passNumber,
+  const std::string&     passDescription,
   S_msrPathToVoice  pathToVoice);
 
 

@@ -25,8 +25,6 @@
 #include "msdlParserWaeHandlers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -47,9 +45,9 @@ msdlParserWaeHandler::msdlParserWaeHandler ()
 msdlParserWaeHandler::~msdlParserWaeHandler ()
 {}
 
-string msdlParserWaeHandler::asString () const
+std::string msdlParserWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL WAE lexical handler";
@@ -57,20 +55,20 @@ string msdlParserWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserWaeHandler::print (ostream& os) const
+void msdlParserWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlParserWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlParserWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -95,85 +93,85 @@ void msdlParserEnglishWaeHandler::multipleIdentifications () const
 {
   gLogStream <<
     "### only one identification section is possible, ahead of the specfication ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserEnglishWaeHandler::stringExpectedAsTitle () const
 {
   gLogStream <<
-    "### a string is expected as title ###" <<
-    endl;
+    "### a std::string is expected as title ###" <<
+    std::endl;
 }
 
 void msdlParserEnglishWaeHandler::stringExpectedAsComposer () const
 {
   gLogStream <<
-    "### a string is expected as composer ###" <<
-    endl;
+    "### a std::string is expected as composer ###" <<
+    std::endl;
 }
 
 void msdlParserEnglishWaeHandler::stringExpectedAsOpus () const
 {
   gLogStream <<
-    "### a string is expected as opus ###" <<
-    endl;
+    "### a std::string is expected as opus ###" <<
+    std::endl;
 }
 
 void msdlParserEnglishWaeHandler::unexpectedToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "unexpected token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserEnglishWaeHandler::ignoringToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "ignoring token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserEnglishWaeHandler::inputIsSyntacticallyCorrect () const
 {
   gLogStream <<
     "The MSDL input is syntactically correct" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserEnglishWaeHandler::inputIsSyntacticallyIncorrect () const
 {
   gLogStream <<
     "### The MSDL input is syntactically incorrect ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserEnglishWaeHandler::mixedCommasAndQuotesInOctaveIndication () const
 {
   gLogStream <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserEnglishWaeHandler::malformedNoteDuration () const
 {
   gLogStream <<
     "### Malformed note duration ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlParserEnglishWaeHandler::asString () const
+std::string msdlParserEnglishWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -181,20 +179,20 @@ string msdlParserEnglishWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserEnglishWaeHandler::print (ostream& os) const
+void msdlParserEnglishWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlParserEnglishWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlParserEnglishWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserEnglishWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -219,33 +217,33 @@ void msdlParserFrenchWaeHandler::multipleIdentifications () const
 {
   gLogStream <<
     "### une seule section d'identification est possible, au début de la spécification ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserFrenchWaeHandler::stringExpectedAsTitle () const
 {
   gLogStream <<
     "### une chaîne est attendue comme titre ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserFrenchWaeHandler::stringExpectedAsComposer () const
 {
   gLogStream <<
     "### une chaîne est attendue comme compositeur-trice ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserFrenchWaeHandler::stringExpectedAsOpus () const
 {
   gLogStream <<
     "### une chaîne est attendue comme opus ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserFrenchWaeHandler::unexpectedToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
 
   gLogStream <<
@@ -253,52 +251,52 @@ void msdlParserFrenchWaeHandler::unexpectedToken (
     "terminal inattendu: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserFrenchWaeHandler::ignoringToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "on ignore le terminal: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserFrenchWaeHandler::inputIsSyntacticallyCorrect () const
 {
   gLogStream <<
     "Le texte MSDL est syntaxiquement correct" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserFrenchWaeHandler::inputIsSyntacticallyIncorrect () const
 {
   gLogStream <<
     "### Le texte MSDL est syntaxiquement incorrect ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserFrenchWaeHandler::mixedCommasAndQuotesInOctaveIndication () const
 {
   gLogStream <<
     "### On ne peut pas mélanger les virgules et apostrophes dans les indications d'octave ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserFrenchWaeHandler::malformedNoteDuration () const
 {
   gLogStream <<
     "### Durée de note mal formée ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlParserFrenchWaeHandler::asString () const
+std::string msdlParserFrenchWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "gestionnaire WAE pour MSDL en français";
@@ -306,20 +304,20 @@ string msdlParserFrenchWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserFrenchWaeHandler::print (ostream& os) const
+void msdlParserFrenchWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlParserFrenchWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlParserFrenchWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserFrenchWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -344,85 +342,85 @@ void msdlParserItalianWaeHandler::multipleIdentifications () const
 {
   gLogStream <<
     "### only one identification section is possible, ahead of the specfication ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserItalianWaeHandler::stringExpectedAsTitle () const
 {
   gLogStream <<
-    "### a string is expected as title ###" <<
-    endl;
+    "### a std::string is expected as title ###" <<
+    std::endl;
 }
 
 void msdlParserItalianWaeHandler::stringExpectedAsComposer () const
 {
   gLogStream <<
-    "### a string is expected as composer ###" <<
-    endl;
+    "### a std::string is expected as composer ###" <<
+    std::endl;
 }
 
 void msdlParserItalianWaeHandler::stringExpectedAsOpus () const
 {
   gLogStream <<
-    "### a string is expected as opus ###" <<
-    endl;
+    "### a std::string is expected as opus ###" <<
+    std::endl;
 }
 
 void msdlParserItalianWaeHandler::unexpectedToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "unexpected token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserItalianWaeHandler::ignoringToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "ignoring token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserItalianWaeHandler::inputIsSyntacticallyCorrect () const
 {
   gLogStream <<
     "The MSDL input is syntactically correct" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserItalianWaeHandler::inputIsSyntacticallyIncorrect () const
 {
   gLogStream <<
     "### The MSDL input is syntactically incorrect ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserItalianWaeHandler::mixedCommasAndQuotesInOctaveIndication () const
 {
   gLogStream <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserItalianWaeHandler::malformedNoteDuration () const
 {
   gLogStream <<
     "### Malformed note duration ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlParserItalianWaeHandler::asString () const
+std::string msdlParserItalianWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -430,20 +428,20 @@ string msdlParserItalianWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserItalianWaeHandler::print (ostream& os) const
+void msdlParserItalianWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlParserItalianWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlParserItalianWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserItalianWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -468,52 +466,52 @@ void msdlParserGermanWaeHandler::multipleIdentifications () const
 {
   gLogStream <<
     "### only one identification section is possible, ahead of the specfication ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserGermanWaeHandler::stringExpectedAsTitle () const
 {
   gLogStream <<
-    "### a string is expected as title ###" <<
-    endl;
+    "### a std::string is expected as title ###" <<
+    std::endl;
 }
 
 void msdlParserGermanWaeHandler::stringExpectedAsComposer () const
 {
   gLogStream <<
-    "### a string is expected as composer ###" <<
-    endl;
+    "### a std::string is expected as composer ###" <<
+    std::endl;
 }
 
 void msdlParserGermanWaeHandler::stringExpectedAsOpus () const
 {
   gLogStream <<
-    "### a string is expected as opus ###" <<
-    endl;
+    "### a std::string is expected as opus ###" <<
+    std::endl;
 }
 
 void msdlParserGermanWaeHandler::unexpectedToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "unexpected token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserGermanWaeHandler::ignoringToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "ignoring token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserGermanWaeHandler::inputIsSyntacticallyCorrect () const
@@ -521,33 +519,33 @@ void msdlParserGermanWaeHandler::inputIsSyntacticallyCorrect () const
   gLogStream <<
     "The MSDL input is syntactically correct" <<
     " tokens" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserGermanWaeHandler::inputIsSyntacticallyIncorrect () const
 {
   gLogStream <<
     "### The MSDL input is syntactically incorrect ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserGermanWaeHandler::mixedCommasAndQuotesInOctaveIndication () const
 {
   gLogStream <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserGermanWaeHandler::malformedNoteDuration () const
 {
   gLogStream <<
     "### Malformed note duration ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlParserGermanWaeHandler::asString () const
+std::string msdlParserGermanWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -555,20 +553,20 @@ string msdlParserGermanWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserGermanWaeHandler::print (ostream& os) const
+void msdlParserGermanWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlParserGermanWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlParserGermanWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserGermanWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -593,52 +591,52 @@ void msdlParserSpanishWaeHandler::multipleIdentifications () const
 {
   gLogStream <<
     "### only one identification section is possible, ahead of the specfication ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserSpanishWaeHandler::stringExpectedAsTitle () const
 {
   gLogStream <<
-    "### a string is expected as title ###" <<
-    endl;
+    "### a std::string is expected as title ###" <<
+    std::endl;
 }
 
 void msdlParserSpanishWaeHandler::stringExpectedAsComposer () const
 {
   gLogStream <<
-    "### a string is expected as composer ###" <<
-    endl;
+    "### a std::string is expected as composer ###" <<
+    std::endl;
 }
 
 void msdlParserSpanishWaeHandler::stringExpectedAsOpus () const
 {
   gLogStream <<
-    "### a string is expected as opus ###" <<
-    endl;
+    "### a std::string is expected as opus ###" <<
+    std::endl;
 }
 
 void msdlParserSpanishWaeHandler::unexpectedToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "unexpected token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserSpanishWaeHandler::ignoringToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "ignoring token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserSpanishWaeHandler::inputIsSyntacticallyCorrect () const
@@ -646,33 +644,33 @@ void msdlParserSpanishWaeHandler::inputIsSyntacticallyCorrect () const
   gLogStream <<
     "The MSDL input is syntactically correct" <<
     " tokens" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserSpanishWaeHandler::inputIsSyntacticallyIncorrect () const
 {
   gLogStream <<
     "### The MSDL input is syntactically incorrect ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserSpanishWaeHandler::mixedCommasAndQuotesInOctaveIndication () const
 {
   gLogStream <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserSpanishWaeHandler::malformedNoteDuration () const
 {
   gLogStream <<
     "### Malformed note duration ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlParserSpanishWaeHandler::asString () const
+std::string msdlParserSpanishWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -680,20 +678,20 @@ string msdlParserSpanishWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserSpanishWaeHandler::print (ostream& os) const
+void msdlParserSpanishWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlParserSpanishWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlParserSpanishWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserSpanishWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -718,52 +716,52 @@ void msdlParserDutchWaeHandler::multipleIdentifications () const
 {
   gLogStream <<
     "### only one identification section is possible, ahead of the specfication ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserDutchWaeHandler::stringExpectedAsTitle () const
 {
   gLogStream <<
-    "### a string is expected as title ###" <<
-    endl;
+    "### a std::string is expected as title ###" <<
+    std::endl;
 }
 
 void msdlParserDutchWaeHandler::stringExpectedAsComposer () const
 {
   gLogStream <<
-    "### a string is expected as composer ###" <<
-    endl;
+    "### a std::string is expected as composer ###" <<
+    std::endl;
 }
 
 void msdlParserDutchWaeHandler::stringExpectedAsOpus () const
 {
   gLogStream <<
-    "### a string is expected as opus ###" <<
-    endl;
+    "### a std::string is expected as opus ###" <<
+    std::endl;
 }
 
 void msdlParserDutchWaeHandler::unexpectedToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "unexpected token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserDutchWaeHandler::ignoringToken (
   const msdlToken& theToken,
-  const string&    context) const
+  const std::string&    context) const
 {
   gLogStream <<
     "### " << context << ": " <<
     "ignoring token: " <<
     "'" << theToken.asString () <<  "'" <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserDutchWaeHandler::inputIsSyntacticallyCorrect () const
@@ -771,33 +769,33 @@ void msdlParserDutchWaeHandler::inputIsSyntacticallyCorrect () const
   gLogStream <<
     "The MSDL input is syntactically correct" <<
     " tokens" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserDutchWaeHandler::inputIsSyntacticallyIncorrect () const
 {
   gLogStream <<
     "### The MSDL input is syntactically incorrect ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserDutchWaeHandler::mixedCommasAndQuotesInOctaveIndication () const
 {
   gLogStream <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlParserDutchWaeHandler::malformedNoteDuration () const
 {
   gLogStream <<
     "### Malformed note duration ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlParserDutchWaeHandler::asString () const
+std::string msdlParserDutchWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -805,20 +803,20 @@ string msdlParserDutchWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserDutchWaeHandler::print (ostream& os) const
+void msdlParserDutchWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlParserDutchWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlParserDutchWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserDutchWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

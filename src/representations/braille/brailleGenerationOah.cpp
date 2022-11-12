@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -32,31 +32,29 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 // constants
-const string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_LONG_NAME  = "use-encoding-in-file-name";
-const string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_SHORT_NAME = "ueifn";
+const std::string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_LONG_NAME  = "use-encoding-in-file-name";
+const std::string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_SHORT_NAME = "ueifn";
 
-// const string K_BRAILLE_OUTPUT_KIND_LONG_NAME  = "use-encoding-in-file-name";
-// const string K_BRAILLE_OUTPUT_KIND_SHORT_NAME = "ueifn";
+// const std::string K_BRAILLE_OUTPUT_KIND_LONG_NAME  = "use-encoding-in-file-name";
+// const std::string K_BRAILLE_OUTPUT_KIND_SHORT_NAME = "ueifn";
 //
-// const string K_BRAILLE_UTF_KIND_LONG_NAME  = "use-encoding-in-file-name";
-// const string K_BRAILLE_UTF_KIND_SHORT_NAME = "ueifn";
+// const std::string K_BRAILLE_UTF_KIND_LONG_NAME  = "use-encoding-in-file-name";
+// const std::string K_BRAILLE_UTF_KIND_SHORT_NAME = "ueifn";
 
-const string K_BRAILLE_BYTE_ORDERING_KIND_LONG_NAME  = "byte-ordering-kind";
-const string K_BRAILLE_BYTE_ORDERING_KIND_SHORT_NAME = "bok";
+const std::string K_BRAILLE_BYTE_ORDERING_KIND_LONG_NAME  = "byte-ordering-kind";
+const std::string K_BRAILLE_BYTE_ORDERING_KIND_SHORT_NAME = "bok";
 
 //______________________________________________________________________________
 S_brailleOutputKindAtom brailleOutputKindAtom::create (
-  const string&         longName,
-  const string&         shortName,
-  const string&         description,
-  const string&         variableName,
+  const std::string&         longName,
+  const std::string&         shortName,
+  const std::string&         description,
+  const std::string&         variableName,
   bsrBrailleOutputKind& brailleOutputKindVariable,
   bsrBrailleOutputKind  brailleOutputKindValue)
 {
@@ -73,10 +71,10 @@ S_brailleOutputKindAtom brailleOutputKindAtom::create (
 }
 
 brailleOutputKindAtom::brailleOutputKindAtom (
-  const string&         longName,
-  const string&         shortName,
-  const string&         description,
-  const string&         variableName,
+  const std::string&         longName,
+  const std::string&         shortName,
+  const std::string&         description,
+  const std::string&         variableName,
   bsrBrailleOutputKind& brailleOutputKindVariable,
   bsrBrailleOutputKind  brailleOutputKindValue)
   : oahAtomImplicitlyStoringAValue (
@@ -96,7 +94,7 @@ brailleOutputKindAtom::brailleOutputKindAtom (
 brailleOutputKindAtom::~brailleOutputKindAtom ()
 {}
 
-void brailleOutputKindAtom::applyElement (ostream& os)
+void brailleOutputKindAtom::applyElement (std::ostream& os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -104,17 +102,17 @@ void brailleOutputKindAtom::applyElement (ostream& os)
       "==> handling atom '" <<
       fetchNames () <<
       "; which is of type 'brailleOutputKindAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (fSetByAnOption) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "brailleOutputKindAtom generated output kind" << // JMI ???
       " set more than once" <<
-      endl;
+      std::endl;
 
     oahError (s.str ());
   }
@@ -130,7 +128,7 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleOutputKindAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -143,7 +141,7 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleOutputKindAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -156,7 +154,7 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleOutputKindAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -169,7 +167,7 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleOutputKindAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -182,14 +180,14 @@ void brailleOutputKindAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleOutputKindAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string brailleOutputKindAtom::asShortNamedOptionString () const
+std::string brailleOutputKindAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -198,9 +196,9 @@ string brailleOutputKindAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string brailleOutputKindAtom::asActualLongNamedOptionString () const
+std::string brailleOutputKindAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -209,46 +207,46 @@ string brailleOutputKindAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void brailleOutputKindAtom::print (ostream& os) const
+void brailleOutputKindAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "brailleOutputKindAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fBrailleOutputKindVariable" << " : \"" <<
     bsrBrailleOutputKindAsString (
       fBrailleOutputKindVariable) <<
       "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fBrailleOutputKindValue" << " : \"" <<
     bsrBrailleOutputKindAsString (
       fBrailleOutputKindValue) <<
       "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void brailleOutputKindAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     bsrBrailleOutputKindAsString (
@@ -257,16 +255,16 @@ void brailleOutputKindAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_brailleOutputKindAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_brailleOutputKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -274,11 +272,11 @@ ostream& operator << (ostream& os, const S_brailleOutputKindAtom& elt)
 
 //______________________________________________________________________________
 S_brailleUTFKindAtom brailleUTFKindAtom::create (
-  const string& longName,
-  const string& shortName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   bsrUTFKind&   brailleUTFKindVariable)
 {
   brailleUTFKindAtom* o = new
@@ -294,11 +292,11 @@ S_brailleUTFKindAtom brailleUTFKindAtom::create (
 }
 
 brailleUTFKindAtom::brailleUTFKindAtom (
-  const string& longName,
-  const string& shortName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   bsrUTFKind&   brailleUTFKindVariable)
   : oahAtomStoringAValue (
       longName,
@@ -314,15 +312,15 @@ brailleUTFKindAtom::~brailleUTFKindAtom ()
 {}
 
 void brailleUTFKindAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> handling atom '" << fetchNames () << "; which is of type 'brailleUTFKindAtom'" <<
       " with value \"" << theString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -336,14 +334,14 @@ void brailleUTFKindAtom::applyAtomWithValue (
   }
   else {
     // no, theString is unknown
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "UTF kind '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The possible values are 8 and 16" <<
-      endl;
+      std::endl;
 
     oahError (s.str ());
   }
@@ -358,7 +356,7 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleUTFKindAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -371,7 +369,7 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleUTFKindAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -384,7 +382,7 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleUTFKindAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -397,7 +395,7 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleUTFKindAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -410,14 +408,14 @@ void brailleUTFKindAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleUTFKindAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string brailleUTFKindAtom::asShortNamedOptionString () const
+std::string brailleUTFKindAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -426,9 +424,9 @@ string brailleUTFKindAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string brailleUTFKindAtom::asActualLongNamedOptionString () const
+std::string brailleUTFKindAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -437,39 +435,39 @@ string brailleUTFKindAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void brailleUTFKindAtom::print (ostream& os) const
+void brailleUTFKindAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "brailleUTFKindAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fBrailleOutputKindVariable" << " : " <<
     fVariableName <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fBsrUTFKindVariable" << " : " <<
     bsrUTFKindAsString (
       fBsrUTFKindVariable) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void brailleUTFKindAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : \"" <<
     bsrUTFKindAsString (
@@ -479,16 +477,16 @@ void brailleUTFKindAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_brailleUTFKindAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_brailleUTFKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -496,11 +494,11 @@ ostream& operator << (ostream& os, const S_brailleUTFKindAtom& elt)
 
 //______________________________________________________________________________
 S_brailleByteOrderingKindAtom brailleByteOrderingKindAtom::create (
-  const string&        longName,
-  const string&        shortName,
-  const string&        description,
-  const string&        valueSpecification,
-  const string&        variableName,
+  const std::string&        longName,
+  const std::string&        shortName,
+  const std::string&        description,
+  const std::string&        valueSpecification,
+  const std::string&        variableName,
   bsrByteOrderingKind& brailleByteOrderingKindVariable)
 {
   brailleByteOrderingKindAtom* o = new
@@ -516,11 +514,11 @@ S_brailleByteOrderingKindAtom brailleByteOrderingKindAtom::create (
 }
 
 brailleByteOrderingKindAtom::brailleByteOrderingKindAtom (
-  const string&        longName,
-  const string&        shortName,
-  const string&        description,
-  const string&        valueSpecification,
-  const string&        variableName,
+  const std::string&        longName,
+  const std::string&        shortName,
+  const std::string&        description,
+  const std::string&        valueSpecification,
+  const std::string&        variableName,
   bsrByteOrderingKind& brailleByteOrderingKindVariable)
   : oahAtomStoringAValue (
       longName,
@@ -536,15 +534,15 @@ brailleByteOrderingKindAtom::~brailleByteOrderingKindAtom ()
 {}
 
 void brailleByteOrderingKindAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> handling atom '" << fetchNames () << "; which is of type 'brailleByteOrderingKindAtom'" <<
       " with value \"" << theString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -558,14 +556,14 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
   }
   else {
     // no, theString is unknown
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "byte ordering '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The possible values are big and small" <<
-      endl;
+      std::endl;
 
     oahError (s.str ());
   }
@@ -580,7 +578,7 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleByteOrderingKindAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -593,7 +591,7 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleByteOrderingKindAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -606,7 +604,7 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleByteOrderingKindAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -619,7 +617,7 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleByteOrderingKindAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -632,14 +630,14 @@ void brailleByteOrderingKindAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleByteOrderingKindAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string brailleByteOrderingKindAtom::asShortNamedOptionString () const
+std::string brailleByteOrderingKindAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -648,9 +646,9 @@ string brailleByteOrderingKindAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string brailleByteOrderingKindAtom::asActualLongNamedOptionString () const
+std::string brailleByteOrderingKindAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -659,40 +657,40 @@ string brailleByteOrderingKindAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void brailleByteOrderingKindAtom::print (ostream& os) const
+void brailleByteOrderingKindAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "brailleByteOrderingKindAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fBsrUTFKindVariable" << " : " <<
     fVariableName <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fBsrByteOrderingKindVariable" << " : \"" <<
     bsrByteOrderingKindAsString (
       fBsrByteOrderingKindVariable) <<
       "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void brailleByteOrderingKindAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     bsrByteOrderingKindAsString (
@@ -701,16 +699,16 @@ void brailleByteOrderingKindAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_brailleByteOrderingKindAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_brailleByteOrderingKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -1043,7 +1041,7 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleGenerationOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1056,7 +1054,7 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleGenerationOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -1069,7 +1067,7 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleGenerationOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1082,7 +1080,7 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleGenerationOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -1095,7 +1093,7 @@ void brailleGenerationOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleGenerationOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1105,7 +1103,7 @@ void brailleGenerationOahGroup::printBrailleGenerationOahValues (int fieldWidth)
 {
   gLogStream <<
     "The Bsr2braille options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1114,53 +1112,53 @@ void brailleGenerationOahGroup::printBrailleGenerationOahValues (int fieldWidth)
 
   gLogStream <<
     "Braille code generation:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fBrailleUTFKind" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fBrailleUTFKind" << " : " <<
       bsrUTFKindAsString (fBrailleUTFKind) <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fByteOrderingKind" << " : " <<
+    std::setw (fieldWidth) << "fByteOrderingKind" << " : " <<
       bsrByteOrderingKindAsString (fByteOrderingKind) <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fUseEncodingInFileName" << " : " <<
+    std::setw (fieldWidth) << "fUseEncodingInFileName" << " : " <<
       fUseEncodingInFileName <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fCellsPerLine" << " : " <<
+    std::setw (fieldWidth) << "fCellsPerLine" << " : " <<
       fCellsPerLine <<
-      endl <<
-    setw (fieldWidth) << "fMeasuresPerLine" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fMeasuresPerLine" << " : " <<
       fMeasuresPerLine <<
-      endl <<
-    setw (fieldWidth) << "fLinesPerPage" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fLinesPerPage" << " : " <<
       fLinesPerPage <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fXml2brlInfos" << " : " <<
+    std::setw (fieldWidth) << "fXml2brlInfos" << " : " <<
       fXml2brlInfos <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fNoBrailleCode" << " : " <<
+    std::setw (fieldWidth) << "fNoBrailleCode" << " : " <<
       fNoBrailleCode <<
-      endl;
+      std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_brailleGenerationOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_brailleGenerationOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -1173,7 +1171,7 @@ S_brailleGenerationOahGroup createGlobalBrailleGenerationOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global bsr2braille OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

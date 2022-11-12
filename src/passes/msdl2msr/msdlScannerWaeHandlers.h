@@ -15,8 +15,6 @@
 #include "waeHandlers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -52,7 +50,7 @@ class EXP msdlScannerWaeHandler : public waeHandler
     // ------------------------------------------------------
 
     virtual void          illegalCharacter (char theChar) const = 0;
-    virtual void          illegalCharacters (const string& theString) const = 0;
+    virtual void          illegalCharacters (const std::string& theString) const = 0;
 
     virtual void          digitExpectedAfterDecimalDot (char theChar) const = 0;
     virtual void          digitExpectedInExponent (char theChar) const = 0;
@@ -71,9 +69,9 @@ class EXP msdlScannerWaeHandler : public waeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -81,7 +79,7 @@ class EXP msdlScannerWaeHandler : public waeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerWaeHandler> S_msdlScannerWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlScannerWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerEnglishWaeHandler : public msdlScannerWaeHandler
@@ -113,7 +111,7 @@ class EXP msdlScannerEnglishWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 
     void                  illegalCharacter (char theChar) const override;
-    void                  illegalCharacters (const string& theString) const override;
+    void                  illegalCharacters (const std::string& theString) const override;
 
     void                  digitExpectedAfterDecimalDot (char theChar) const override;
     void                  digitExpectedInExponent (char theChar) const override;
@@ -132,9 +130,9 @@ class EXP msdlScannerEnglishWaeHandler : public msdlScannerWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -142,7 +140,7 @@ class EXP msdlScannerEnglishWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerEnglishWaeHandler> S_msdlScannerEnglishWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlScannerEnglishWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerEnglishWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerFrenchWaeHandler : public msdlScannerWaeHandler
@@ -174,7 +172,7 @@ class EXP msdlScannerFrenchWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 
     void                  illegalCharacter (char theChar) const override;
-    void                  illegalCharacters (const string& theString) const override;
+    void                  illegalCharacters (const std::string& theString) const override;
 
     void                  digitExpectedAfterDecimalDot (char theChar) const override;
     void                  digitExpectedInExponent (char theChar) const override;
@@ -193,9 +191,9 @@ class EXP msdlScannerFrenchWaeHandler : public msdlScannerWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -203,7 +201,7 @@ class EXP msdlScannerFrenchWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerFrenchWaeHandler> S_msdlScannerFrenchWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlScannerFrenchWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerFrenchWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerItalianWaeHandler : public msdlScannerWaeHandler
@@ -235,7 +233,7 @@ class EXP msdlScannerItalianWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 
     void                  illegalCharacter (char theChar) const override;
-    void                  illegalCharacters (const string& theString) const override;
+    void                  illegalCharacters (const std::string& theString) const override;
 
     void                  digitExpectedAfterDecimalDot (char theChar) const override;
     void                  digitExpectedInExponent (char theChar) const override;
@@ -254,9 +252,9 @@ class EXP msdlScannerItalianWaeHandler : public msdlScannerWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -264,7 +262,7 @@ class EXP msdlScannerItalianWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerItalianWaeHandler> S_msdlScannerItalianWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlScannerItalianWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerItalianWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerGermanWaeHandler : public msdlScannerWaeHandler
@@ -296,7 +294,7 @@ class EXP msdlScannerGermanWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 
     void                  illegalCharacter (char theChar) const override;
-    void                  illegalCharacters (const string& theString) const override;
+    void                  illegalCharacters (const std::string& theString) const override;
 
     void                  digitExpectedAfterDecimalDot (char theChar) const override;
     void                  digitExpectedInExponent (char theChar) const override;
@@ -315,9 +313,9 @@ class EXP msdlScannerGermanWaeHandler : public msdlScannerWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -325,7 +323,7 @@ class EXP msdlScannerGermanWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerGermanWaeHandler> S_msdlScannerGermanWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlScannerGermanWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerGermanWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerSpanishWaeHandler : public msdlScannerWaeHandler
@@ -357,7 +355,7 @@ class EXP msdlScannerSpanishWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 
     void                  illegalCharacter (char theChar) const override;
-    void                  illegalCharacters (const string& theString) const override;
+    void                  illegalCharacters (const std::string& theString) const override;
 
     void                  digitExpectedAfterDecimalDot (char theChar) const override;
     void                  digitExpectedInExponent (char theChar) const override;
@@ -376,9 +374,9 @@ class EXP msdlScannerSpanishWaeHandler : public msdlScannerWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -386,7 +384,7 @@ class EXP msdlScannerSpanishWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerSpanishWaeHandler> S_msdlScannerSpanishWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlScannerSpanishWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerSpanishWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerDutchWaeHandler : public msdlScannerWaeHandler
@@ -418,7 +416,7 @@ class EXP msdlScannerDutchWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 
     void                  illegalCharacter (char theChar) const override;
-    void                  illegalCharacters (const string& theString) const override;
+    void                  illegalCharacters (const std::string& theString) const override;
 
     void                  digitExpectedAfterDecimalDot (char theChar) const override;
     void                  digitExpectedInExponent (char theChar) const override;
@@ -437,9 +435,9 @@ class EXP msdlScannerDutchWaeHandler : public msdlScannerWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -447,7 +445,7 @@ class EXP msdlScannerDutchWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerDutchWaeHandler> S_msdlScannerDutchWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlScannerDutchWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerDutchWaeHandler& elt);
 
 
 }

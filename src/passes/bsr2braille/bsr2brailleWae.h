@@ -18,8 +18,6 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -29,10 +27,10 @@ class EXP bsr2brailleException : public mfException
   public:
 
     static SMARTP<bsr2brailleException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           bsr2brailleException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<bsr2brailleException> S_bsr2brailleException;
 
@@ -41,25 +39,25 @@ class EXP bsr2brailleInternalException : public mfException
   public:
 
     static SMARTP<bsr2brailleInternalException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           bsr2brailleInternalException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<bsr2brailleInternalException> S_bsr2brailleInternalException;
 
 //______________________________________________________________________________
 EXP void bsr2brailleWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void bsr2brailleInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 
 }

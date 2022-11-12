@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -29,8 +29,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -38,7 +36,7 @@ namespace MusicFormats
 S_msrBarNumberCheck msrBarNumberCheck::create (
   int           inputLineNumber,
   S_msrMeasure  upLinkToMeasure,
-  const string& nextBarOriginalNumber,
+  const std::string& nextBarOriginalNumber,
   int           nextBarPuristNumber)
 {
   msrBarNumberCheck* o =
@@ -54,9 +52,9 @@ S_msrBarNumberCheck msrBarNumberCheck::create (
 msrBarNumberCheck::msrBarNumberCheck (
   int           inputLineNumber,
   S_msrMeasure  upLinkToMeasure,
-  const string& nextBarOriginalNumber,
+  const std::string& nextBarOriginalNumber,
   int           nextBarPuristNumber)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -72,7 +70,7 @@ msrBarNumberCheck::msrBarNumberCheck (
       " and next bar purist number '" <<
       fNextBarPuristNumber <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -85,7 +83,7 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBarNumberCheck::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBarNumberCheck>*
@@ -96,7 +94,7 @@ void msrBarNumberCheck::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBarNumberCheck::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -107,7 +105,7 @@ void msrBarNumberCheck::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBarNumberCheck::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBarNumberCheck>*
@@ -118,7 +116,7 @@ void msrBarNumberCheck::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBarNumberCheck::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -127,9 +125,9 @@ void msrBarNumberCheck::acceptOut (basevisitor* v)
 void msrBarNumberCheck::browseData (basevisitor* v)
 {}
 
-string msrBarNumberCheck::asString () const
+std::string msrBarNumberCheck::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[BarNumberCheck" <<
@@ -141,18 +139,18 @@ string msrBarNumberCheck::asString () const
   return s.str ();
 }
 
-void msrBarNumberCheck::print (ostream& os) const
+void msrBarNumberCheck::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrBarNumberCheck& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBarNumberCheck& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

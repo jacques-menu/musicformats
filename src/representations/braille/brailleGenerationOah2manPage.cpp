@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <cmath>
 #include <string>
 
@@ -26,15 +26,13 @@
 #include "oahOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //________________________________________________________________________
 brailleGenerationOah2manPage::brailleGenerationOah2manPage (
   const S_oahHandler handler,
-  ostream&           manPageOutputStream)
+  std::ostream&           manPageOutputStream)
     : oah2manPage (
         handler,
         manPageOutputStream)
@@ -49,28 +47,28 @@ void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting brailleOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
@@ -78,10 +76,10 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting brailleOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -92,28 +90,28 @@ void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting brailleUTFKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
@@ -121,10 +119,10 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting brailleUTFKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -135,28 +133,28 @@ void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& el
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting brailleByteOrderingKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
@@ -164,10 +162,10 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting brailleByteOrderingKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }

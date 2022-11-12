@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -23,15 +23,13 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_bsrPageHeading bsrPageHeading::create (
   int             inputLineNumber,
-  const string&   pageHeadingTitle,
+  const std::string&   pageHeadingTitle,
   S_bsrPagination pageHeadingPagination,
   int             pageHeadingNumber)
 {
@@ -45,7 +43,7 @@ S_bsrPageHeading bsrPageHeading::create (
 
 bsrPageHeading::bsrPageHeading (
   int             inputLineNumber,
-  const string&   pageHeadingTitle,
+  const std::string&   pageHeadingTitle,
   S_bsrPagination pageHeadingPagination,
   int             pageHeadingNumber)
     : bsrLine (
@@ -113,7 +111,7 @@ void bsrPageHeading::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPageHeading::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -126,7 +124,7 @@ void bsrPageHeading::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPageHeading::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -139,7 +137,7 @@ void bsrPageHeading::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPageHeading::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -152,7 +150,7 @@ void bsrPageHeading::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPageHeading::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -165,7 +163,7 @@ void bsrPageHeading::browseData (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrScore::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -179,14 +177,14 @@ void bsrPageHeading::browseData (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% <== bsrScore::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string bsrPageHeading::asString () const
+std::string bsrPageHeading::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "PageHeading" <<
@@ -209,9 +207,9 @@ string bsrPageHeading::asString () const
   return s.str ();
 }
 
-string bsrPageHeading::asDebugString () const
+std::string bsrPageHeading::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[PH " << fPageHeadingTitle << "\"";
@@ -228,24 +226,24 @@ string bsrPageHeading::asDebugString () const
   return s.str ();
 }
 
-void bsrPageHeading::print (ostream& os) const
+void bsrPageHeading::print (std::ostream& os) const
 {
   os <<
     "PageHeading" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "pageHeadingTitle" << " : \"" << fPageHeadingTitle << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "pageHeadingPagination" <<
-    endl;
+    std::endl;
 
   if (fPageHeadingPagination) {
     ++gIndenter;
@@ -258,24 +256,24 @@ void bsrPageHeading::print (ostream& os) const
   else {
     os <<
       " : " << "[NONE]" <<
-    endl;
+    std::endl;
   }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "pageHeadingNumber" << " : " << fPageHeadingNumber <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrPageHeading& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrPageHeading& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

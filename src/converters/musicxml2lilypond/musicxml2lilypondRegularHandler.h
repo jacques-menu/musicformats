@@ -33,8 +33,8 @@ class EXP xml2lyRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<xml2lyRegularHandler> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_xml2lyInsiderHandler
                                               insiderOahHandler);
 
@@ -44,8 +44,8 @@ class EXP xml2lyRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           xml2lyRegularHandler (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_xml2lyInsiderHandler
                                               insiderOahHandler);
 
@@ -58,7 +58,7 @@ class EXP xml2lyRegularHandler : public oahRegularHandler
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override
+    std::string           fetchOutputFileNameFromTheOptions () const override
                               {
                                 return
                                   fInsiderHandler->
@@ -89,7 +89,7 @@ class EXP xml2lyRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -172,7 +172,7 @@ class EXP xml2lyRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<xml2lyRegularHandler> S_xml2lyRegularHandler;
-EXP ostream& operator << (ostream& os, const S_xml2lyRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2lyRegularHandler& elt);
 
 
 }

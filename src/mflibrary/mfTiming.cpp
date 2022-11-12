@@ -9,22 +9,20 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, ...
+#include <iomanip>      // std::setw, ...
 
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string mfTimingItemKindAsString (
+std::string mfTimingItemKindAsString (
   mfTimingItemKind imingItemKind)
 {
-  string result;
+  std::string result;
 
   switch (imingItemKind) {
     case mfTimingItemKind::kMandatory:
@@ -38,7 +36,7 @@ string mfTimingItemKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const mfTimingItemKind& elt)
+std::ostream& operator << (std::ostream& os, const mfTimingItemKind& elt)
 {
   os << mfTimingItemKindAsString (elt);
   return os;
@@ -48,8 +46,8 @@ ostream& operator << (ostream& os, const mfTimingItemKind& elt)
 mfTimingItemsList mfTimingItemsList::gGlobalTimingItemsList;
 
 S_timingItem mfTimingItem::createTimingItem (
-  const string&  activity,
-  const string&  description,
+  const std::string&  activity,
+  const std::string&  description,
   mfTimingItemKind kind,
   clock_t        startClock,
   clock_t        endClock)
@@ -65,8 +63,8 @@ S_timingItem mfTimingItem::createTimingItem (
 }
 
 mfTimingItem::mfTimingItem (
-  const string&  activity,
-  const string&  description,
+  const std::string&  activity,
+  const std::string&  description,
   mfTimingItemKind kind,
   clock_t        startClock,
   clock_t        endClock)
@@ -85,8 +83,8 @@ mfTimingItemsList::~mfTimingItemsList ()
 {}
 
 void mfTimingItemsList::appendTimingItem (
-  const string&     activity,
-  const string&     description,
+  const std::string&     activity,
+  const std::string&     description,
   mfTimingItemKind kind,
   clock_t           startClock,
   clock_t            endClock)
@@ -103,7 +101,7 @@ void mfTimingItemsList::appendTimingItem (
   fTimingItemsList.push_back (mfTimingItem);
 }
 
-void mfTimingItemsList::doPrint (ostream& os) const
+void mfTimingItemsList::doPrint (std::ostream& os) const
 {
   // printing the details
   const int
@@ -118,19 +116,19 @@ void mfTimingItemsList::doPrint (ostream& os) const
     totalMandatoryClock = 0,
     totalOptionalClock  = 0;
 
-  os << left <<
-    setw (activityWidth) << "Activity" << "  " <<
-    setw (descriptionWidth) << "Description" << "  " <<
-    setw (kindWidth)     << "Kind" << "  " <<
-    setw (secondsWidth)  << "CPU (sec)" << endl <<
-    setw (activityWidth) << mfReplicateString ("-", activityWidth) << "  " <<
-    setw (descriptionWidth) << mfReplicateString ("-", descriptionWidth) << "  " <<
-    setw (kindWidth) << mfReplicateString ("-", kindWidth) << "  " <<
-    setw (secondsWidth) << mfReplicateString ("-", secondsWidth) <<
-    endl << endl;
+  os << std::left <<
+    std::setw (activityWidth) << "Activity" << "  " <<
+    std::setw (descriptionWidth) << "Description" << "  " <<
+    std::setw (kindWidth)     << "Kind" << "  " <<
+    std::setw (secondsWidth)  << "CPU (sec)" << std::endl <<
+    std::setw (activityWidth) << mfReplicateString ("-", activityWidth) << "  " <<
+    std::setw (descriptionWidth) << mfReplicateString ("-", descriptionWidth) << "  " <<
+    std::setw (kindWidth) << mfReplicateString ("-", kindWidth) << "  " <<
+    std::setw (secondsWidth) << mfReplicateString ("-", secondsWidth) <<
+    std::endl << std::endl;
 
   for (
-    list<S_timingItem>::const_iterator i=fTimingItemsList.begin ();
+    std::list<S_timingItem>::const_iterator i=fTimingItemsList.begin ();
     i!=fTimingItemsList.end ();
     ++i
   ) {
@@ -140,30 +138,30 @@ void mfTimingItemsList::doPrint (ostream& os) const
       theTimingItem->getEndClock () - theTimingItem->getStartClock ();
     totalClock += timingItemClock;
 
-    os << left <<
-      setw (activityWidth) << theTimingItem->getActivity () << "  " <<
-      setw (descriptionWidth) << theTimingItem->getDescription () << "  ";
+    os << std::left <<
+      std::setw (activityWidth) << theTimingItem->getActivity () << "  " <<
+      std::setw (descriptionWidth) << theTimingItem->getDescription () << "  ";
 
     switch (theTimingItem->getKind ()) {
       case mfTimingItemKind::kMandatory:
         totalMandatoryClock += timingItemClock;
-        os << setw (kindWidth) << "mandatory";
+        os << std::setw (kindWidth) << "mandatory";
         break;
       case mfTimingItemKind::kOptional:
         totalOptionalClock += timingItemClock;
-        os << setw (kindWidth) << "optional";
+        os << std::setw (kindWidth) << "optional";
         break;
     } // switch
 
     os << "  " <<
-      right << fixed <<
-      setprecision (secondsPrecision) <<
+      std::right << std::fixed <<
+      std::setprecision (secondsPrecision) <<
 
-      setw (secondsWidth) <<
+      std::setw (secondsWidth) <<
       float(timingItemClock) / CLOCKS_PER_SEC <<
-      endl;
+      std::endl;
   } // for
-  os << endl;
+  os << std::endl;
 
   // printing the totals
   const int
@@ -172,59 +170,59 @@ void mfTimingItemsList::doPrint (ostream& os) const
     totalOptionalClockWidth  =  9,
     totalsPrecision          =  secondsPrecision;
 
-  os << left <<
-    setw (totalClockWidth)            << "Total (sec)" <<
+  os << std::left <<
+    std::setw (totalClockWidth)            << "Total (sec)" <<
     "  " <<
-    setw (totalMandatoryClockWidth)   << "Mandatory" <<
+    std::setw (totalMandatoryClockWidth)   << "Mandatory" <<
     "  " <<
-    setw (totalOptionalClockWidth)    << "Optional" <<
-    endl <<
+    std::setw (totalOptionalClockWidth)    << "Optional" <<
+    std::endl <<
 
-    setw (totalClockWidth) <<
+    std::setw (totalClockWidth) <<
     mfReplicateString ("-", totalClockWidth) <<
     "  " <<
-    setw (totalMandatoryClockWidth) <<
+    std::setw (totalMandatoryClockWidth) <<
     mfReplicateString ("-", totalMandatoryClockWidth) <<
     "  " <<
-    setw (secondsWidth) <<
+    std::setw (secondsWidth) <<
     mfReplicateString ("-", secondsWidth) <<
-    endl <<
+    std::endl <<
 
-    fixed <<
-    setprecision (totalsPrecision) <<
+    std::fixed <<
+    std::setprecision (totalsPrecision) <<
 
-    setw (totalClockWidth) <<
+    std::setw (totalClockWidth) <<
     float(totalClock) / CLOCKS_PER_SEC <<
     "  " <<
-    setw (totalMandatoryClockWidth) <<
+    std::setw (totalMandatoryClockWidth) <<
     float(totalMandatoryClock) / CLOCKS_PER_SEC <<
     "  " <<
-    setw (totalOptionalClockWidth) <<
+    std::setw (totalOptionalClockWidth) <<
     float(totalOptionalClock) / CLOCKS_PER_SEC <<
-    endl;
+    std::endl;
 }
 
 void mfTimingItemsList::printWithContext (
-  const string& context,
-  ostream&      os) const
+  const std::string& context,
+  std::ostream&      os) const
 {
-  os << left <<
+  os << std::left <<
     "Timing information for " << context << ":" <<
-    endl << endl;
+    std::endl << std::endl;
 
   doPrint (os);
 }
 
-void mfTimingItemsList::print (ostream& os) const
+void mfTimingItemsList::print (std::ostream& os) const
 {
-  os << left <<
+  os << std::left <<
     "Timing information:" <<
-    endl << endl;
+    std::endl << std::endl;
 
   doPrint (os);
 }
 
-ostream& operator << (ostream& os, const mfTimingItemsList& tim) {
+std::ostream& operator << (std::ostream& os, const mfTimingItemsList& tim) {
   tim.print(os);
   return os;
 }

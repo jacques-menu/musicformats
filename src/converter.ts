@@ -7,7 +7,7 @@ const kLilyMode   = "2";
 const kBrailleMode   = "3";
 
 declare var forge: any;
-interface UrlOption  { option: string; value: string; }
+interface UrlOption  { option: std::string; value: std::string; }
 
 //----------------------------------------------------------------------------
 // this is the editor part, currently using CodeMirror
@@ -15,7 +15,7 @@ interface UrlOption  { option: string; value: string; }
 class   XMLConverter {
 
   private fFileName = "";
-  private fMode: string;
+  private fMode: std::string;
   private fXmlContent = "";
   private fCode: HTMLElement;
   private fLogs: HTMLElement;
@@ -73,7 +73,7 @@ class   XMLConverter {
     div.addEventListener ("dragleave",  (e: DragEvent) => { this.dragLeave(e); }, true);
     div.addEventListener ("drop",    (e: DragEvent) => { this.drop(e); }, true);
 
-    $("input[name='output'").change ( (event) => { this.changeMode(<string>$("input[name='output']:checked").val()); } );
+    $("input[name='output'").change ( (event) => { this.changeMode(<std::string>$("input[name='output']:checked").val()); } );
     $("#gmnbars").change       ( (event) => { this.convert(this.fXmlContent, this.fFileName+".xml"); } );
     $("#transpose").change       ( (event) => { this.convert(this.fXmlContent, this.fFileName+".xml"); } );
     $("#guidotry").click      ( (event) => { this.tryGuido(); } );
@@ -83,13 +83,13 @@ class   XMLConverter {
     $("#font-size").change      ( (event) => { this.fontSize ( <number>$("#font-size").val()); });
     this.fontSize ( <number>$("#font-size").val());
 
-    this.changeMode(<string>$("input[name='output']:checked").val());
+    this.changeMode(<std::string>$("input[name='output']:checked").val());
 
     $('#lilyopt').on  ('blur', (event) =>  { this.convert(this.fXmlContent, this.fFileName+".xml"); });
     // let logs = document.getElementById ("logs");
-    // $("#log-font").click    ( () => { logs.style.fontFamily = <string>$("#log-font").val(); });
+    // $("#log-font").click    ( () => { logs.style.fontFamily = <std::string>$("#log-font").val(); });
     // $("#log-size").click    ( () => { logs.style.fontSize = $("#log-size").val() + "px"; });
-    // logs.style.fontFamily = <string>$("#log-font").val();
+    // logs.style.fontFamily = <std::string>$("#log-font").val();
     // logs.style.fontSize = $("#log-size").val() + "px";
   }
 
@@ -130,7 +130,7 @@ class   XMLConverter {
     }
   }
 
-  outSuffix () : string    { 
+  outSuffix () : std::string    { 
     switch (this.fMode) {
       case kGuidoMode: return ".gmn";
       case kLilyMode : return ".ly";
@@ -140,12 +140,12 @@ class   XMLConverter {
   }
 
   getTransposition () : number {
-    let trsp = <string>$("#transpose").val();
+    let trsp = <std::string>$("#transpose").val();
     if (trsp.length) return parseInt(trsp);
     return 0;
   }
 
-  cversion () : string    { 
+  cversion () : std::string    { 
     switch (this.fMode) {
       case kGuidoMode: return this.fXmlEngine.musicxml2guidoVersionStr();
       case kLilyMode : return this.fXmlEngine.musicxml2lilypondVersionStr();
@@ -159,7 +159,7 @@ class   XMLConverter {
     $("#guidotry").prop('disabled', disable);
   }
 
-  changeOptionsStatus (mode: string): void {
+  changeOptionsStatus (mode: std::string): void {
     $("#guidoOptions").hide();
     $("#lilyOptions").hide();
     $("#brailleOptions").hide();
@@ -170,7 +170,7 @@ class   XMLConverter {
     }
   }
 
-  changeMode (mode: string) : void    { 
+  changeMode (mode: std::string) : void    { 
     this.fMode = mode;
     $("#convVersion").text (this.cversion());
     this.changeGuidoTryStatus();
@@ -180,7 +180,7 @@ class   XMLConverter {
     }
   }
 
-  convert ( script: string, path: string): void {
+  convert ( script: std::string, path: std::string): void {
     if (!script.length) return;
     $("#file-name").text(path);
     this.fXmlContent = script;
@@ -195,7 +195,7 @@ class   XMLConverter {
           this.changeGuidoTryStatus();
           break;
         case kLilyMode:
-          code = this.fXmlEngine.string2lily(script, <string>$("#lilyopt").val());
+          code = this.fXmlEngine.string2lily(script, <std::string>$("#lilyopt").val());
           break;
         case kBrailleMode:
           code = "not yet available";
@@ -207,7 +207,7 @@ class   XMLConverter {
         $("#lognav").click();
     }
     catch {
-      console.error ("Exception raised while converting " + path);
+      console.error ("std::exception raised while converting " + path);
       $("#lognav").click();
     }
   } 

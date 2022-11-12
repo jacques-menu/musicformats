@@ -33,8 +33,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -105,7 +103,7 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
       "Creating a newborn clone of multiple full-bar rests '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -143,7 +141,7 @@ Rational msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes 
 }
 
 void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
-  const string& nextMeasureNumber)
+  const std::string& nextMeasureNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
@@ -151,7 +149,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
       "Setting multiple full-bar rests next measure number to '" <<
       "' " <<
       nextMeasureNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -179,8 +177,8 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //     multipleFullBarRestsContentsSegment != nullptr,
 //     "multipleFullBarRestsContentsSegment is null");
 
-  // get multiple full-bar rests contents segment measure elements list
-//   const list<S_msrMeasure>&
+  // get multiple full-bar rests contents segment measure elements std::list
+//   const std::list<S_msrMeasure>&
 //     contentsSegmentElementsList =
 //       multipleFullBarRestsContentsSegment->
 //         getSegmentElementsList ();
@@ -194,11 +192,11 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //         getMeasurePuristNumber ();
 //   }
 //   else {
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "cannot get multiple full-bar rests contents last measure purist number" <<
-//       " because its measure elements list is empty" <<
+//       " because its measure elements std::list is empty" <<
 //       " in voice clone '" <<
 //       asShortString () <<
 //       "' ";
@@ -217,7 +215,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
       "' " <<
       lastMeasuresPuristNumber <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -228,7 +226,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 void msrMultipleFullBarRests:: appendMeasureElementToSegmentElement (
   S_msrMeasureElement elem)
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "cannot append measure element " <<
@@ -258,7 +256,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
       " to multiple full-bar rests " <<
       asShortString () <<
       "', line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -298,7 +296,7 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMultipleFullBarRests::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMultipleFullBarRests>*
@@ -309,7 +307,7 @@ void msrMultipleFullBarRests::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMultipleFullBarRests::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -320,7 +318,7 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMultipleFullBarRests::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMultipleFullBarRests>*
@@ -331,7 +329,7 @@ void msrMultipleFullBarRests::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMultipleFullBarRests::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -342,7 +340,7 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMultipleFullBarRests::browseData ()" <<
-      endl;
+      std::endl;
   }
 
  // JMI   if (! inhibitMultipleFullBarRestsBrowsing) { // KAKA
@@ -356,14 +354,14 @@ void msrMultipleFullBarRests::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% <== msrMultipleFullBarRests::browseData ()" <<
-      endl;
+      std::endl;
   }
 //  }
 }
 
-string msrMultipleFullBarRests::asString () const
+std::string msrMultipleFullBarRests::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[MultipleFullBarRests" <<
@@ -408,16 +406,16 @@ string msrMultipleFullBarRests::asString () const
 
 void msrMultipleFullBarRests::displayMultipleFullBarRests (
   int           inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     "*********>> Full-bar rests " << context << " \"" <<
  // JMI   getVoiceName () <<
     "\"" <<
     ", line " << inputLineNumber <<
     " contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   print (gLogStream);
@@ -425,15 +423,15 @@ void msrMultipleFullBarRests::displayMultipleFullBarRests (
 
   gLogStream <<
     " <<*********" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
-void msrMultipleFullBarRests::print (ostream& os) const
+void msrMultipleFullBarRests::print (std::ostream& os) const
 {
   os <<
     "[MultipleFullBarRests" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -451,55 +449,55 @@ void msrMultipleFullBarRests::print (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fMultipleFullBarRestsNumber" << " : " <<
     fMultipleFullBarRestsNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fMultipleFullBarRestsLastMeasurePuristNumber" << " : " <<
     fMultipleFullBarRestsLastMeasurePuristNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fMultipleFullBarRestsNextMeasureNumber" << " : '" <<
     fMultipleFullBarRestsNextMeasureNumber <<
     "'" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "multipleFullBarRestsMeasureSoundingNotes" << " : " <<
     fetchMultipleFullBarRestsMeasureSoundingNotes () <<
-    endl;
+    std::endl;
 
   // print the segment upLink
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fMultipleFullBarRestsUpLinkToSegment" << " : ";
   if (fMultipleFullBarRestsUpLinkToSegment) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    os << "fMultipleFullBarRestsUpLinkToSegment" << endl; // KAKA
+    os << "fMultipleFullBarRestsUpLinkToSegment" << std::endl; // KAKA
 
     --gIndenter;
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
-  os << endl;
+  os << std::endl;
 
-  // print the full-bar rests measures list
-  os << left <<
-    setw (fieldWidth) <<
+  // print the full-bar rests measures std::list
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fFullBarRestsMeasuresList" << " : ";
 
   if (fFullBarRestsMeasuresList.size ()) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
     for (S_msrMeasure measure : fFullBarRestsMeasuresList) {
@@ -510,26 +508,26 @@ void msrMultipleFullBarRests::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 
   --gIndenter;
 }
 
-void msrMultipleFullBarRests::printShort (ostream& os) const
+void msrMultipleFullBarRests::printShort (std::ostream& os) const
 {
   print (os);
 }
 
-ostream& operator << (ostream& os, const S_msrMultipleFullBarRests& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMultipleFullBarRests& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

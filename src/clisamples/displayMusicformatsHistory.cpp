@@ -14,8 +14,6 @@
 #include "mfcLibraryComponent.h"
 
 
-using namespace std;
-
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
@@ -24,7 +22,7 @@ int main (int argc, char* argv[])
   // create the global output and log indented streams
   // ------------------------------------------------------
 
-  createTheGlobalIndentedOstreams (cout, cerr);
+  createTheGlobalIndentedOstreams (std::cout, std::cerr);
 
   // display the library components history
   // ------------------------------------------------------

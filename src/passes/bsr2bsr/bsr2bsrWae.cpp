@@ -18,19 +18,17 @@
 
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 bsr2bsrException::bsr2bsrException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_bsr2bsrException bsr2bsrException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   bsr2bsrException* o = new
     bsr2bsrException (
@@ -41,12 +39,12 @@ S_bsr2bsrException bsr2bsrException::create (
 }
 
 bsr2finalizedBsrException::bsr2finalizedBsrException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_bsr2finalizedBsrException bsr2finalizedBsrException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   bsr2finalizedBsrException* o = new
     bsr2finalizedBsrException (
@@ -57,12 +55,12 @@ S_bsr2finalizedBsrException bsr2finalizedBsrException::create (
 }
 
 bsr2bsrInternalException::bsr2bsrInternalException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_bsr2bsrInternalException bsr2bsrInternalException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   bsr2bsrInternalException* o = new
     bsr2bsrInternalException (
@@ -74,9 +72,9 @@ S_bsr2bsrInternalException bsr2bsrInternalException::create (
 
 //______________________________________________________________________________
 void bsr2bsrWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeWarning (
     "bsr2bsr",
@@ -86,11 +84,11 @@ void bsr2bsrWarning (
 }
 
 void bsr2bsrInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   gIndenter.resetToZero ();
 

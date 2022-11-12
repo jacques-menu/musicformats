@@ -38,17 +38,15 @@
 #include "xml2guidovisitor.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
 void translateMxsrToGuido (
   Sxmlelement   theMxsr,
-  string        outputFileName,
-  ostream&      err,
-  const string& passNumber,
-  const string& passDescription)
+  std::string        outputFileName,
+  std::ostream&      err,
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -61,18 +59,18 @@ void translateMxsrToGuido (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     err <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -95,7 +93,7 @@ void translateMxsrToGuido (
       "xmlFile2gmn() outputFileName = \"" <<
       outputFileName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -104,14 +102,14 @@ void translateMxsrToGuido (
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2gmn() output goes to standard output" <<
-        endl;
+        std::endl;
     }
 #endif
 
     // write the Guido data to the output file stream
     gOutputStream <<
       guidoData <<
-      endl;
+      std::endl;
   }
 
   else {
@@ -121,40 +119,40 @@ void translateMxsrToGuido (
         "xmlFile2gmn() output goes to file \"" <<
         outputFileName <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
     // open output file
-    ofstream outputFileStream;
+    std::ofstream outputFileStream;
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
-        endl <<
+        std::endl <<
         "Opening file '" << outputFileName << "' for writing" <<
-        endl;
+        std::endl;
     }
 #endif
 
-    ofstream
+    std::ofstream
       guidoFileOutputStream (
         outputFileName.c_str(),
-        ofstream::out);
+        std::ofstream::out);
 
     if (! guidoFileOutputStream.is_open ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "Could not open Guido output file \"" <<
         outputFileName <<
         "\" for writing - quitting";
 
-      string message = s.str ();
+      std::string message = s.str ();
 
       err <<
         message <<
-        endl;
+        std::endl;
 
       throw mxsr2guidoException (message);
     }
@@ -162,15 +160,15 @@ void translateMxsrToGuido (
     // write the Guido data to the output file stream
     guidoFileOutputStream <<
       guidoData <<
-      endl;
+      std::endl;
 
     // close output file
 #ifdef TRACE_OAH
     if (gtracingOah->fTracePasses) {
       err <<
-        endl <<
+        std::endl <<
         "Closing file \"" << outputFileName << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 

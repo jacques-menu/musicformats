@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <sstream>
 
 #include "visitor.h"
@@ -32,16 +32,14 @@
 #include "bsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string bsrKeyKindAsString (
+std::string bsrKeyKindAsString (
   bsrKeyKind keyKind)
 {
-  string result;
+  std::string result;
 
   switch (keyKind) {
     case bsrKeyKind::kKeyKindNone:
@@ -61,7 +59,7 @@ string bsrKeyKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrKeyKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrKeyKind& elt)
 {
   os << bsrKeyKindAsString (elt);
   return os;
@@ -96,7 +94,7 @@ bsrKey::bsrKey (
       &&
     fNumberOfAlterations != 0
   ) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "BSR key inconsistency:" <<
@@ -119,7 +117,7 @@ bsrKey::bsrKey (
       asString () <<
       "', line " <<
       fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -212,7 +210,7 @@ void bsrKey::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrKey::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -225,7 +223,7 @@ void bsrKey::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrKey::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -238,7 +236,7 @@ void bsrKey::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrKey::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -251,7 +249,7 @@ void bsrKey::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrKey::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -261,9 +259,9 @@ void bsrKey::acceptOut (basevisitor* v)
 void bsrKey::browseData (basevisitor* v)
 {}
 
-string bsrKey::asString () const
+std::string bsrKey::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Key" <<
@@ -276,9 +274,9 @@ string bsrKey::asString () const
   return s.str ();
 }
 
-string bsrKey::asDebugString () const
+std::string bsrKey::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s << "[KEY ";
 
@@ -352,41 +350,41 @@ string bsrKey::asDebugString () const
   return s.str ();
 }
 
-void bsrKey::print (ostream& os) const
+void bsrKey::print (std::ostream& os) const
 {
   os <<
     "Key" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 20;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "keyKind" << " : " << bsrKeyKindAsString (fKeyKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "numberOfAlterations" << " : " << fNumberOfAlterations <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "keyCellsList" << " : " << fKeyCellsList->asShortString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "spacesBefore" << " : " << fSpacesBefore <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrKey& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrKey& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
 
@@ -21,8 +21,6 @@
 
 #include "bsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -83,7 +81,7 @@ S_bsrCellsList bsrNumber::numberValueAsCellsList () const
       ", n = " << n <<
       ", div = " << div <<
       ", mod = " << mod <<
-      endl;
+      std::endl;
 */
 
     bsrCellKind cellKind = bsrCellKind::kCellUnknown; // SEE TICINO
@@ -157,7 +155,7 @@ void bsrNumber::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrNumber::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -170,7 +168,7 @@ void bsrNumber::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrNumber::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -183,7 +181,7 @@ void bsrNumber::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrNumber::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -196,7 +194,7 @@ void bsrNumber::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrNumber::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -206,10 +204,10 @@ void bsrNumber::acceptOut (basevisitor* v)
 void bsrNumber::browseData (basevisitor* v)
 {}
 
-string bsrNumberSignIsNeededKindAsString (
+std::string bsrNumberSignIsNeededKindAsString (
   bsrNumberSignIsNeededKind numberSignIsNeededKind)
 {
-  string result;
+  std::string result;
 
   switch (numberSignIsNeededKind) {
     case bsrNumberSignIsNeededKind::kNumberSignIsNeededYes:
@@ -223,15 +221,15 @@ string bsrNumberSignIsNeededKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrNumberSignIsNeededKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrNumberSignIsNeededKind& elt)
 {
   os << bsrNumberSignIsNeededKindAsString (elt);
   return os;
 }
 
-string bsrNumber::asString () const
+std::string bsrNumber::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Number" <<
@@ -247,9 +245,9 @@ string bsrNumber::asString () const
   return s.str ();
 }
 
-string bsrNumber::asDebugString () const
+std::string bsrNumber::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "N" << // JMI
@@ -262,43 +260,43 @@ string bsrNumber::asDebugString () const
   return s.str ();
 }
 
-void bsrNumber::print (ostream& os) const
+void bsrNumber::print (std::ostream& os) const
 {
   os <<
     "Number" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 21;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     ", numberValue" << " : " << fNumberValue <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     ", numberSignIsNeeded" << " : " <<
     bsrNumberSignIsNeededKindAsString (
       fNumberSignIsNeededKind) <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     ", numberCellsList" << " : " <<
     fNumberCellsList->asShortString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "spacesBefore" << " : " << fSpacesBefore <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrNumber& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrNumber& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

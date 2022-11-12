@@ -18,13 +18,13 @@ enum class bsrBarLineKind {
   kBarLineKindFinalDouble, kBarLineKindSectionalDouble
 };
 
-string bsrBarLineKindAsString (
+std::string bsrBarLineKindAsString (
   bsrBarLineKind barLineKind);
 
-string bsrBarLineKindAsDebugString (
+std::string bsrBarLineKindAsDebugString (
   bsrBarLineKind barLineKind);
 
-ostream& operator << (ostream& os, const bsrBarLineKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrBarLineKind& elt);
 
 class EXP bsrBarLine : public bsrLineContentsElement
 {
@@ -90,11 +90,11 @@ class EXP bsrBarLine : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -106,7 +106,7 @@ class EXP bsrBarLine : public bsrLineContentsElement
     S_bsrCellsList        fBarLineCellsList;
 };
 typedef SMARTP<bsrBarLine> S_bsrBarLine;
-EXP ostream& operator << (ostream& os, const S_bsrBarLine& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrBarLine& elt);
 
 }
 

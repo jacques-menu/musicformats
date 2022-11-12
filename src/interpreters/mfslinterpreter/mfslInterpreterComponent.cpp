@@ -12,8 +12,6 @@
 #include "mfcComponents.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -22,7 +20,7 @@ static S_mfcConverterComponent pConverterComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the interpreter's representations list
+  // populate the interpreter's representations std::list
   pConverterComponent->
     appendRepresentationToMultiComponent (
       createMsrRepresentationComponent ());
@@ -36,7 +34,7 @@ static void populateMultiComponent ()
     appendRepresentationToMultiComponent (
       createMxsrRepresentationComponent ());
 
-  // populate the interpreter's passes list
+  // populate the interpreter's passes std::list
   pConverterComponent->
     appendPassToMultiComponent (
       createMsr2msrComponent ());
@@ -83,7 +81,7 @@ S_mfcConverterComponent createMfslInterpreterComponent ()
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating the mfsl component" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -100,7 +98,7 @@ S_mfcConverterComponent createMfslInterpreterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.62"),
           "March 9, 2022",
-          list<string> {
+          std::list<std::string> {
             "Created the MFSL component"
           }
       ));
@@ -111,7 +109,7 @@ S_mfcConverterComponent createMfslInterpreterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.63"),
           "March 9, 2022",
-          list<string> {
+          std::list<std::string> {
             "Finalized the syntax and semantics of MFSL, added '-input' option"
           }
       ));

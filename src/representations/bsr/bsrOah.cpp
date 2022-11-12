@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -33,16 +33,14 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string bsrFacSimileKindAsString (
+std::string bsrFacSimileKindAsString (
   bsrFacSimileKind facSimileKind)
 {
-  string result;
+  std::string result;
 
   switch (facSimileKind) {
     case bsrFacSimileKind::kFacSimileYes:
@@ -56,7 +54,7 @@ string bsrFacSimileKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrFacSimileKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrFacSimileKind& elt)
 {
   os << bsrFacSimileKindAsString (elt);
   return os;
@@ -64,11 +62,11 @@ ostream& operator << (ostream& os, const bsrFacSimileKind& elt)
 
 //______________________________________________________________________________
 S_bsrFacSimileKindAtom bsrFacSimileKindAtom::create (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   bsrFacSimileKind  bsrFacSimileKindVariable)
 {
   bsrFacSimileKindAtom* o = new
@@ -84,11 +82,11 @@ S_bsrFacSimileKindAtom bsrFacSimileKindAtom::create (
 }
 
 bsrFacSimileKindAtom::bsrFacSimileKindAtom (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   bsrFacSimileKind  bsrFacSimileKindVariable)
   : oahAtomStoringAValue (
       longName,
@@ -104,8 +102,8 @@ bsrFacSimileKindAtom::~bsrFacSimileKindAtom ()
 {}
 
 void bsrFacSimileKindAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
   // JMI ???
 
@@ -113,7 +111,7 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'bsrFacSimileKindAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -124,7 +122,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrFacSimileKindAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -137,7 +135,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrFacSimileKindAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -150,7 +148,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrFacSimileKindAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -163,7 +161,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrFacSimileKindAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -176,14 +174,14 @@ void bsrFacSimileKindAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrFacSimileKindAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string bsrFacSimileKindAtom::asShortNamedOptionString () const
+std::string bsrFacSimileKindAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -192,9 +190,9 @@ string bsrFacSimileKindAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string bsrFacSimileKindAtom::asActualLongNamedOptionString () const
+std::string bsrFacSimileKindAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -203,39 +201,39 @@ string bsrFacSimileKindAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void bsrFacSimileKindAtom::print (ostream& os) const
+void bsrFacSimileKindAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "bsrFacSimileKindAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fBsrFacSimileKindVariable" << " : " <<
     bsrFacSimileKindAsString (
       fBsrFacSimileKindVariable) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void bsrFacSimileKindAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     bsrFacSimileKindAsString (
@@ -244,16 +242,16 @@ void bsrFacSimileKindAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrFacSimileKindAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrFacSimileKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -261,11 +259,11 @@ ostream& operator << (ostream& os, const S_bsrFacSimileKindAtom& elt)
 
 //______________________________________________________________________________
 S_bsrTextsLanguageAtom bsrTextsLanguageAtom::create (
-  const string&  longName,
-  const string&  shortName,
-  const string&  description,
-  const string&  valueSpecification,
-  const string&  variableName,
+  const std::string&  longName,
+  const std::string&  shortName,
+  const std::string&  description,
+  const std::string&  valueSpecification,
+  const std::string&  variableName,
   bsrTextsLanguageKind&
                  bsrTextsLanguageKindVariable)
 {
@@ -282,11 +280,11 @@ S_bsrTextsLanguageAtom bsrTextsLanguageAtom::create (
 }
 
 bsrTextsLanguageAtom::bsrTextsLanguageAtom (
-  const string&  longName,
-  const string&  shortName,
-  const string&  description,
-  const string&  valueSpecification,
-  const string&  variableName,
+  const std::string&  longName,
+  const std::string&  shortName,
+  const std::string&  description,
+  const std::string&  valueSpecification,
+  const std::string&  variableName,
   bsrTextsLanguageKind&
                  bsrTextsLanguageKindVariable)
   : oahAtomStoringAValue (
@@ -303,8 +301,8 @@ bsrTextsLanguageAtom::~bsrTextsLanguageAtom ()
 {}
 
 void bsrTextsLanguageAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
   // JMI ???
 
@@ -312,7 +310,7 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'bsrTextsLanguageAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -323,7 +321,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrTextsLanguageAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -336,7 +334,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrTextsLanguageAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -349,7 +347,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrTextsLanguageAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -362,7 +360,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrTextsLanguageAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -375,14 +373,14 @@ void bsrTextsLanguageAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrTextsLanguageAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string bsrTextsLanguageAtom::asShortNamedOptionString () const
+std::string bsrTextsLanguageAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -391,9 +389,9 @@ string bsrTextsLanguageAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string bsrTextsLanguageAtom::asActualLongNamedOptionString () const
+std::string bsrTextsLanguageAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -402,38 +400,38 @@ string bsrTextsLanguageAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void bsrTextsLanguageAtom::print (ostream& os) const
+void bsrTextsLanguageAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "bsrTextsLanguageAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBsrTextsLanguageKindVariable" << " : " <<
     bsrTextsLanguageKindAsString (
       fBsrTextsLanguageKindVariable) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void bsrTextsLanguageAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     bsrTextsLanguageKindAsString (
@@ -442,16 +440,16 @@ void bsrTextsLanguageAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrTextsLanguageAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrTextsLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -568,16 +566,16 @@ R"()",
   // texts language
 
   if (! setBsrTextsLanguage ("english")) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "INTERNAL INITIALIZATION ERROR: "
       "BSR texts language 'english' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       gGlobalBsrTextsLanguageKindsMap.size () <<
       " known BSR texts languages are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -605,11 +603,11 @@ as well as in the generated Braille.
 The NUMBER texts languages available are:
 TEXT_LANGUAGES.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (gGlobalBsrTextsLanguageKindsMap.size ())),
-            regex ("TEXT_LANGUAGES"),
+              std::regex ("NUMBER"),
+              std::to_string (gGlobalBsrTextsLanguageKindsMap.size ())),
+            std::regex ("TEXT_LANGUAGES"),
             existingBsrTextsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           bsrTextsLanguageKindAsString (
             bsrTextsLanguageKindDefaultValue)),
         "LANGUAGE",
@@ -722,15 +720,15 @@ void bsrOahGroup::initializeBsrOahGroup ()
 }
 
 //______________________________________________________________________________
-Bool bsrOahGroup::setBsrTextsLanguage (const string& language)
+Bool bsrOahGroup::setBsrTextsLanguage (const std::string& language)
 {
-  // is language in the chords languages map?
-  map<string, bsrTextsLanguageKind>::const_iterator
+  // is language in the chords languages std::map?
+  std::map<std::string, bsrTextsLanguageKind>::const_iterator
     it =
       gGlobalBsrTextsLanguageKindsMap.find (language);
 
   if (it == gGlobalBsrTextsLanguageKindsMap.end ()) {
-    // no, language is unknown in the map
+    // no, language is unknown in the std::map
     return false;
   }
 
@@ -762,7 +760,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -775,7 +773,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -788,7 +786,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -801,7 +799,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -814,7 +812,7 @@ void bsrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -824,7 +822,7 @@ void bsrOahGroup::printBsrOahValues (int fieldWidth)
 {
   gLogStream <<
     "The BSR bsr are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -832,24 +830,24 @@ void bsrOahGroup::printBsrOahValues (int fieldWidth)
   // --------------------------------------
   gLogStream <<
     "Display:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fDisplayFirstBsrShort" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fDisplayFirstBsrShort" << " : " <<
     fDisplayFirstBsrShort <<
-    endl <<
-    setw (fieldWidth) << "fDisplayFirstBsrFull" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fDisplayFirstBsrFull" << " : " <<
     fDisplayFirstBsrFull <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fDisplaySecondBsrShort" << " : " <<
+    std::setw (fieldWidth) << "fDisplaySecondBsrShort" << " : " <<
     fDisplaySecondBsrShort <<
-    endl <<
-    setw (fieldWidth) << "fDisplaySecondBsrFull" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fDisplaySecondBsrFull" << " : " <<
     fDisplaySecondBsrFull <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -859,32 +857,32 @@ void bsrOahGroup::printBsrOahValues (int fieldWidth)
 #ifdef TRACING_IS_ENABLED
   gLogStream <<
     "Trace:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fTraceBsr" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fTraceBsr" << " : " <<
     fTraceBsr <<
-    endl <<
-    setw (fieldWidth) << "fTracePages" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTracePages" << " : " <<
     fTracePages <<
-    endl <<
-    setw (fieldWidth) << "fTraceLines" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceLines" << " : " <<
     fTraceLines <<
-    endl <<
-    setw (fieldWidth) << "fTraceSpaces" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceSpaces" << " : " <<
     fTraceSpaces <<
-    endl <<
-    setw (fieldWidth) << "fTraceNumbers" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceNumbers" << " : " <<
     fTraceNumbers <<
-    endl <<
-    setw (fieldWidth) << "fTraceParallels" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceParallels" << " : " <<
     fTraceParallels <<
-    endl <<
-    setw (fieldWidth) << "fTraceBsrVisitors" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceBsrVisitors" << " : " <<
     fTraceBsrVisitors <<
-    endl;
+    std::endl;
 
   --gIndenter;
 #endif
@@ -892,13 +890,13 @@ void bsrOahGroup::printBsrOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -911,7 +909,7 @@ S_bsrOahGroup createGlobalBsrOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global BSR OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

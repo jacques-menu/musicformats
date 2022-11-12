@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -28,8 +28,6 @@
 
 #include "msrTranspositions.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -62,7 +60,7 @@ msrTransposition::msrTransposition (
   int          transposeChromatic,
   int          transposeOctaveChange,
   Bool         transposeDouble)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -77,7 +75,7 @@ msrTransposition::msrTransposition (
       "Creating transpose '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -110,7 +108,7 @@ void msrTransposition::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTransposition::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTransposition>*
@@ -121,7 +119,7 @@ void msrTransposition::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTransposition::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -132,7 +130,7 @@ void msrTransposition::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTransposition::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTransposition>*
@@ -143,7 +141,7 @@ void msrTransposition::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTransposition::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -152,9 +150,9 @@ void msrTransposition::acceptOut (basevisitor* v)
 void msrTransposition::browseData (basevisitor* v)
 {}
 
-string msrTransposition::asString () const
+std::string msrTransposition::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Transpose" <<
@@ -168,43 +166,43 @@ string msrTransposition::asString () const
   return s.str ();
 }
 
-void msrTransposition::print (ostream& os) const
+void msrTransposition::print (std::ostream& os) const
 {
   const int fieldWidth = 22;
 
   os <<
     "[Transpose" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTranspositionDouble" << " = " << fTranspositionDouble <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTransposition& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTransposition& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

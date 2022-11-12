@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -27,8 +27,6 @@
 #include "msrMeasures.h"
 #include "msrSegnos.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -52,7 +50,7 @@ msrSegno::msrSegno (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure,
   int          staffNumber)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -67,7 +65,7 @@ void msrSegno::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegno::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSegno>*
@@ -78,7 +76,7 @@ void msrSegno::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegno::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -89,7 +87,7 @@ void msrSegno::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegno::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSegno>*
@@ -100,7 +98,7 @@ void msrSegno::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegno::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -109,9 +107,9 @@ void msrSegno::acceptOut (basevisitor* v)
 void msrSegno::browseData (basevisitor* v)
 {}
 
-string msrSegno::asString () const
+std::string msrSegno::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Segno" <<
@@ -121,18 +119,18 @@ string msrSegno::asString () const
   return s.str ();
 }
 
-void msrSegno::print (ostream& os) const
+void msrSegno::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSegno& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSegno& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

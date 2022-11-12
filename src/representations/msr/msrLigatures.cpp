@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -25,8 +25,6 @@
 
 #include "msrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -93,7 +91,7 @@ void msrLigature::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrLigature::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrLigature>*
@@ -104,7 +102,7 @@ void msrLigature::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrLigature::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -115,7 +113,7 @@ void msrLigature::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrLigature::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrLigature>*
@@ -126,7 +124,7 @@ void msrLigature::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrLigature::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -136,10 +134,10 @@ void msrLigature::acceptOut (basevisitor* v)
 void msrLigature::browseData (basevisitor* v)
 {}
 
-string msrLigatureKindAsString (
+std::string msrLigatureKindAsString (
   msrLigatureKind ligatureKind)
 {
-  string result;
+  std::string result;
 
   switch (ligatureKind) {
     case msrLigatureKind::kLigatureStart:
@@ -158,16 +156,16 @@ string msrLigatureKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrLigatureKind& elt)
+std::ostream& operator << (std::ostream& os, const msrLigatureKind& elt)
 {
   os << msrLigatureKindAsString (elt);
   return os;
 }
 
-string msrLigatureLineEndKindAsString (
+std::string msrLigatureLineEndKindAsString (
   msrLigatureLineEndKind ligatureLineEndKind)
 {
-  stringstream s;
+  std::stringstream s;
 
   switch (ligatureLineEndKind) {
     case msrLigatureLineEndKind::kLigatureLineEndUp:
@@ -190,15 +188,15 @@ string msrLigatureLineEndKindAsString (
   return s.str ();
 }
 
-ostream& operator << (ostream& os, const msrLigatureLineEndKind& elt)
+std::ostream& operator << (std::ostream& os, const msrLigatureLineEndKind& elt)
 {
   os << msrLigatureLineEndKindAsString (elt);
   return os;
 }
 
-string msrLigature::asString () const
+std::string msrLigature::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Ligature" <<
@@ -212,41 +210,41 @@ string msrLigature::asString () const
   return s.str ();
 }
 
-void msrLigature::print (ostream& os) const
+void msrLigature::print (std::ostream& os) const
 {
   os <<
     "[Ligature" <<
     ", fLigatureKind: " << fLigatureKind <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fLigatureLineEndKind" << " : " << fLigatureLineEndKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fLigatureLineTypeKind" << " : " << fLigatureLineTypeKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fLigaturePlacementKind" << " : " << fLigaturePlacementKind <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrLigature& elt)
+std::ostream& operator << (std::ostream& os, const S_msrLigature& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

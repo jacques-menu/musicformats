@@ -19,7 +19,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrSegno : public msrMeasureElement
+class EXP msrSegno : public msrMeasureElementLambda
 {
   public:
 
@@ -71,9 +71,9 @@ class EXP msrSegno : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -83,7 +83,7 @@ class EXP msrSegno : public msrMeasureElement
     int                   fStaffNumber;
 };
 typedef SMARTP<msrSegno> S_msrSegno;
-EXP ostream& operator << (ostream& os, const S_msrSegno& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSegno& elt);
 
 
 }

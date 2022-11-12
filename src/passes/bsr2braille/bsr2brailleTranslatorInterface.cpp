@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
@@ -29,17 +29,15 @@
 #include "bsr2brailleTranslatorInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
 void translateBsrToBraille (
   const S_bsrScore originalBsrScore,
   S_bsrOahGroup    bsrOpts,
-  const string&    passNumber,
-  const string&    passDescription,
-  ostream&         brailleOutputStream)
+  const std::string&    passNumber,
+  const std::string&    passDescription,
+  std::ostream&         brailleOutputStream)
 {
   // sanity check
   mfAssert (
@@ -50,20 +48,20 @@ void translateBsrToBraille (
   // start the clock
   clock_t startClock = clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -93,7 +91,7 @@ void translateBsrToBraille (
       "### translateBsrToBraille gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -77,15 +77,13 @@
 #include "LilyPondIssue34InsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_LilyPondIssue34InsiderHandler LilyPondIssue34InsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader,
+  const std::string& serviceName,
+  const std::string& handlerHeader,
   mfMultiGenerationOutputKind
                           multiGenerationOutputKind)
 {
@@ -101,8 +99,8 @@ S_LilyPondIssue34InsiderHandler LilyPondIssue34InsiderHandler::create (
 }
 
 LilyPondIssue34InsiderHandler::LilyPondIssue34InsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader,
+  const std::string& serviceName,
+  const std::string& handlerHeader,
   mfMultiGenerationOutputKind
                           multiGenerationOutputKind)
   : oahInsiderHandler (
@@ -126,7 +124,7 @@ R"(
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -152,15 +150,15 @@ void LilyPondIssue34InsiderHandler::initializeHandlerMultiComponent ()
     createLilyPondIssue34GeneratorComponent ();
 }
 
-string LilyPondIssue34InsiderHandler::usageInformation (
+std::string LilyPondIssue34InsiderHandler::usageInformation (
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 R"(Usage: LilyPondIssue34 [option]*
 )" <<
-    endl;
+    std::endl;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
@@ -178,17 +176,17 @@ R"(Usage: LilyPondIssue34 [option]*
   return s.str ();
 }
 
-string LilyPondIssue34InsiderHandler::handlerServiceAboutInformation () const
+std::string LilyPondIssue34InsiderHandler::handlerServiceAboutInformation () const
 {
   return
     LilyPondIssue34AboutInformation (
       fMultiGenerationOutputKind);
 }
 
-string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
+std::string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
   mfMultiGenerationOutputKind multiGenerationOutputKind) const
 {
-  string result;
+  std::string result;
 
   size_t passesNumber = 0;
 
@@ -218,7 +216,7 @@ string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
       break;
   } // switch
 
-  string headPart;
+  std::string headPart;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
@@ -235,7 +233,7 @@ R"(What LilyPondIssue34 does:
 
     default:
       {
-        stringstream headPartStream;
+        std::stringstream headPartStream;
 
         headPartStream <<
 R"(What LilyPondIssue34 does:
@@ -247,7 +245,7 @@ R"(What LilyPondIssue34 does:
           " passes when generating " <<
           mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
           " output:" <<
-          endl <<
+          std::endl <<
 R"(
         Pass 1:  generate a first MSR for the LilyPondIssue34 score)";
 
@@ -256,7 +254,7 @@ R"(
   } // switch
 
 
-  string specificPart;
+  std::string specificPart;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
@@ -311,7 +309,7 @@ R"(
       break;
   } // switch
 
-   string commonTailPart =
+   std::string commonTailPart =
 R"(
 
     Other passes are performed according to the options, such as
@@ -332,7 +330,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34Prefixes ()
       "Creating the LilyPondIssue34 prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -341,7 +339,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34Prefixes ()
 
 //______________________________________________________________________________
 void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
-  const string&       serviceName,
+  const std::string&       serviceName,
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
 #ifdef TRACING_IS_ENABLED
@@ -350,7 +348,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -508,7 +506,7 @@ void LilyPondIssue34InsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -516,7 +514,7 @@ void LilyPondIssue34InsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -524,7 +522,7 @@ string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -556,11 +554,11 @@ string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
       outputFileNameHasBeenSet <<
       " autoOutputFileNameHasBeenSet: " <<
       autoOutputFileNameHasBeenSet <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string outputFileName;
+  std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
     // '-o, -output-file-name' has been chosen
@@ -672,7 +670,7 @@ string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
     gLogStream <<
       "outputFileName: " <<
       outputFileName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -719,7 +717,7 @@ void LilyPondIssue34InsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << inputSourceName << "\" is both the input and output file name";
@@ -731,7 +729,7 @@ void LilyPondIssue34InsiderOahGroup::checkGroupOptionsConsistency ()
 
 
   if (! fOutputFileName.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "LilyPondIssue34InsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
@@ -740,7 +738,7 @@ void LilyPondIssue34InsiderOahGroup::checkGroupOptionsConsistency ()
   }
 
   else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
@@ -757,7 +755,7 @@ void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34InsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -770,7 +768,7 @@ void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching LilyPondIssue34InsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -783,7 +781,7 @@ void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34InsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -796,7 +794,7 @@ void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching LilyPondIssue34InsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -809,7 +807,7 @@ void LilyPondIssue34InsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34InsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -817,33 +815,33 @@ void LilyPondIssue34InsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void LilyPondIssue34InsiderHandler::print (ostream& os) const
+void LilyPondIssue34InsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "LilyPondIssue34InsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -851,7 +849,7 @@ void LilyPondIssue34InsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -859,16 +857,16 @@ void LilyPondIssue34InsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_LilyPondIssue34InsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34InsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -907,11 +905,11 @@ void LilyPondIssue34InsiderOahGroup::initializeLilyPondIssue34InsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -922,41 +920,41 @@ void LilyPondIssue34InsiderOahGroup::printLilyPondIssue34InsiderOahGroupValues (
 {
   gLogStream <<
     "The LilyPondIssue34 options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // generation API kind
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (fieldWidth) << "Generation API kind:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "Generation API kind:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "msrGenerationAPIKind" << " : " <<
     msrGenerationAPIKindAsString (fGenerationAPIKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   // generate output kind
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (fieldWidth) << "Generated output kind:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "Generated output kind:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "mfMultiGenerationOutputKind" << " : " <<
     mfMultiGenerationOutputKindAsString (fMultiGenerationOutputKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -970,7 +968,7 @@ S_LilyPondIssue34InsiderOahGroup createGlobalLilyPondIssue34InsiderOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global LilyPondIssue34 insider OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

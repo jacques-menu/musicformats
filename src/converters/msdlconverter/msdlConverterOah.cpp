@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -31,8 +31,6 @@
 
 #include "msdlConverterInsiderHandler.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -93,7 +91,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlConverterOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -106,7 +104,7 @@ void msdlConverterOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlConverterOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -119,7 +117,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlConverterOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -132,7 +130,7 @@ void msdlConverterOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlConverterOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -145,7 +143,7 @@ void msdlConverterOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlConverterOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -155,20 +153,20 @@ void msdlConverterOahGroup::printMsdlConverterOahValues (
 {
   gLogStream <<
     "The msdlConverter options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msdlConverterOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlConverterOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -181,14 +179,14 @@ S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdlConverter OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // protect library against multiple initializations
   if (! gGlobalMsdlConverterOahGroup) {
 
-    // initialize the generated output kinds map
+    // initialize the generated output kinds std::map
     // ------------------------------------------------------
 
     initializeMultiGenerationOutputKindsMap ();

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 
 #include "visitor.h"
 #include "oahWae.h"
@@ -21,16 +21,14 @@
 #include "msrGenerationBasicTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrGenerationAPIKindAsString (
+std::string msrGenerationAPIKindAsString (
   msrGenerationAPIKind generationAPIKind)
 {
-  string result;
+  std::string result;
 
   switch (generationAPIKind) {
     case msrGenerationAPIKind::kMsrFunctionsAPIKind:
@@ -45,7 +43,7 @@ string msrGenerationAPIKindAsString (
 }
 
 EXP msrGenerationAPIKind msrGenerationAPIKindFromString (
-  const string& theString)
+  const std::string& theString)
 {
   msrGenerationAPIKind result = msrGenerationAPIKind::kMsrFunctionsAPIKind; // default value
 
@@ -56,10 +54,10 @@ EXP msrGenerationAPIKind msrGenerationAPIKindFromString (
     result = msrGenerationAPIKind::kMsrStringsAPIKind;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
-      "the string \"" <<
+      "the std::string \"" <<
       theString <<
       "\" is no valid generation API kind";
 
@@ -71,7 +69,7 @@ EXP msrGenerationAPIKind msrGenerationAPIKindFromString (
   return result;
 }
 
-map<string, msrGenerationAPIKind>
+std::map<std::string, msrGenerationAPIKind>
   gGlobalGenerationAPIKindsMap;
 
 void initializeGenerationAPIKindsMap ()
@@ -80,10 +78,10 @@ void initializeGenerationAPIKindsMap ()
   gGlobalGenerationAPIKindsMap ["strings"]   = msrGenerationAPIKind::kMsrStringsAPIKind;
 }
 
-string existingGenerationAPIKinds (
+std::string existingGenerationAPIKinds (
   size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t brailleOutputKindsMapSize =
     gGlobalGenerationAPIKindsMap.size ();
@@ -96,18 +94,18 @@ string existingGenerationAPIKinds (
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msrGenerationAPIKind>::const_iterator i =
+      std::map<std::string, msrGenerationAPIKind>::const_iterator i =
         gGlobalGenerationAPIKindsMap.begin ();
       i != gGlobalGenerationAPIKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -130,11 +128,11 @@ string existingGenerationAPIKinds (
 
 //______________________________________________________________________________
 S_msrGenerationAPIKindAtom msrGenerationAPIKindAtom::create (
-  const string&         longName,
-  const string&         shortName,
-  const string&         description,
-  const string&         valueSpecification,
-  const string&         variableName,
+  const std::string&         longName,
+  const std::string&         shortName,
+  const std::string&         description,
+  const std::string&         valueSpecification,
+  const std::string&         variableName,
   msrGenerationAPIKind& generationAPIKindVariable)
 {
   msrGenerationAPIKindAtom* o = new
@@ -150,11 +148,11 @@ S_msrGenerationAPIKindAtom msrGenerationAPIKindAtom::create (
 }
 
 msrGenerationAPIKindAtom::msrGenerationAPIKindAtom (
-  const string&         longName,
-  const string&         shortName,
-  const string&         description,
-  const string&         valueSpecification,
-  const string&         variableName,
+  const std::string&         longName,
+  const std::string&         shortName,
+  const std::string&         description,
+  const std::string&         valueSpecification,
+  const std::string&         variableName,
   msrGenerationAPIKind& generationAPIKindVariable)
   : oahAtomStoringAValue (
       longName,
@@ -170,38 +168,38 @@ msrGenerationAPIKindAtom::~msrGenerationAPIKindAtom ()
 {}
 
 void msrGenerationAPIKindAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
   // theString contains the output kind name:
-  // is it in the  output kinds map?
+  // is it in the  output kinds std::map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> handling atom '" << fetchNames () << "; which is of type 'msrGenerationAPIKindAtom'" <<
       " with value \"" << theString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  map<string, msrGenerationAPIKind>::const_iterator
+  std::map<std::string, msrGenerationAPIKind>::const_iterator
     it =
       gGlobalGenerationAPIKindsMap.find (
         theString);
 
   if (it == gGlobalGenerationAPIKindsMap.end ()) {
-    // no, optional values style kind is unknown in the map
-    stringstream s;
+    // no, optional values style kind is unknown in the std::map
+    std::stringstream s;
 
     s <<
       "generation API kind '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       gGlobalGenerationAPIKindsMap.size () - 1 <<
       " known generation API kinds are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -224,7 +222,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrGenerationAPIKindAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -237,7 +235,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrGenerationAPIKindAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -250,7 +248,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrGenerationAPIKindAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -263,7 +261,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrGenerationAPIKindAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -276,14 +274,14 @@ void msrGenerationAPIKindAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrGenerationAPIKindAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string msrGenerationAPIKindAtom::asShortNamedOptionString () const
+std::string msrGenerationAPIKindAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -292,9 +290,9 @@ string msrGenerationAPIKindAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string msrGenerationAPIKindAtom::asActualLongNamedOptionString () const
+std::string msrGenerationAPIKindAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -303,39 +301,39 @@ string msrGenerationAPIKindAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void msrGenerationAPIKindAtom::print (ostream& os) const
+void msrGenerationAPIKindAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "GenerationAPIKindAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fGenerationAPIKindVariable" << " : " <<
     msrGenerationAPIKindAsString (
       fGenerationAPIKindVariable) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void msrGenerationAPIKindAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName << " : " <<
     msrGenerationAPIKindAsString (
       fGenerationAPIKindVariable);
@@ -343,16 +341,16 @@ void msrGenerationAPIKindAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrGenerationAPIKindAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_msrGenerationAPIKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

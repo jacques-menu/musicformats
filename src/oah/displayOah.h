@@ -133,7 +133,7 @@ class EXP displayOahGroup : public oahGroup
     void                  printDisplayOptionsValues (int valueFieldWidth);
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const;
 
   private:
@@ -164,7 +164,7 @@ class EXP displayOahGroup : public oahGroup
     S_oahBooleanAtom      fDisplayCPUusageAtom;
 };
 typedef SMARTP<displayOahGroup> S_displayOahGroup;
-EXP ostream& operator << (ostream& os, const S_displayOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_displayOahGroup& elt);
 
 EXP extern S_displayOahGroup gGlobalDisplayOahGroup;
 

@@ -25,8 +25,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -49,7 +47,7 @@ msrVoiceStaffChange::msrVoiceStaffChange (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure,
   S_msrStaff   staffToChangeTo)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -67,7 +65,7 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
       "Creating a newborn clone of voice staff change '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -86,7 +84,7 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrVoiceStaffChange::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrVoiceStaffChange>*
@@ -97,7 +95,7 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrVoiceStaffChange::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -108,7 +106,7 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrVoiceStaffChange::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrVoiceStaffChange>*
@@ -119,7 +117,7 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrVoiceStaffChange::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -128,9 +126,9 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
 void msrVoiceStaffChange::browseData (basevisitor* v)
 {}
 
-string msrVoiceStaffChange::asString () const
+std::string msrVoiceStaffChange::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "VoiceStaffChange" <<
@@ -141,18 +139,18 @@ string msrVoiceStaffChange::asString () const
   return s.str ();
 }
 
-void msrVoiceStaffChange::print (ostream& os) const
+void msrVoiceStaffChange::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrVoiceStaffChange& elt)
+std::ostream& operator << (std::ostream& os, const S_msrVoiceStaffChange& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

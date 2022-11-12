@@ -12,8 +12,6 @@
 #include "bsr2bsrComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -29,7 +27,7 @@ S_mfcPassComponent createBsr2bsrComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the bsr2bsr pass component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -44,7 +42,7 @@ S_mfcPassComponent createBsr2bsrComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));

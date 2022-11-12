@@ -22,17 +22,15 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 void waeWarning (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndentation ();
@@ -42,7 +40,7 @@ void waeWarning (
     gLogStream <<
       "*** " << context << " warning *** " <<
       inputSourceName << ":" << inputLineNumber << ": " <<message <<
-      endl;
+      std::endl;
 
     gGlobalWarningsInputLineNumbers.insert (inputLineNumber);
 
@@ -51,10 +49,10 @@ void waeWarning (
 }
 
 void waeInternalWarning (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndentation ();
@@ -64,7 +62,7 @@ void waeInternalWarning (
     gLogStream <<
       "*** " << context << " INTERNAL warning *** " <<
       inputSourceName << ":" << inputLineNumber << ": " <<message <<
-      endl;
+      std::endl;
 
     gGlobalWarningsInputLineNumbers.insert (
       inputLineNumber);
@@ -75,10 +73,10 @@ void waeInternalWarning (
 
 //______________________________________________________________________________
 void waeErrorWithoutException (
-  const string& context,
-  const string& sourceCodeFileName,
+  const std::string& context,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -95,7 +93,7 @@ void waeErrorWithoutException (
       gLogStream <<
         "### " << context << " ERROR ### " <<
         message <<
-        endl;
+        std::endl;
 
       gIndenter.setIndentation (saveIndent);
     }
@@ -103,12 +101,12 @@ void waeErrorWithoutException (
 }
 
 void waeErrorWithoutException (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -125,7 +123,7 @@ void waeErrorWithoutException (
       gLogStream <<
         "### " << context << " ERROR ### " <<
         inputSourceName << ":" << inputLineNumber << ": " << message <<
-        endl;
+        std::endl;
 
       gIndenter.setIndentation (saveIndent);
 
@@ -136,10 +134,10 @@ void waeErrorWithoutException (
 }
 
 void waeError (
-  const string& context,
-  const string& sourceCodeFileName,
+  const std::string& context,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeErrorWithoutException (
     context,
@@ -151,12 +149,12 @@ void waeError (
 }
 
 void waeError (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeErrorWithoutException (
     context,
@@ -170,11 +168,11 @@ void waeError (
 }
 
 void waeErrorWithException (
-  const string& context,
-  const string& sourceCodeFileName,
+  const std::string& context,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message,
-  S_mfException exception)
+  const std::string& message,
+  S_mfException except)
 {
   waeErrorWithoutException (
     context,
@@ -184,17 +182,17 @@ void waeErrorWithException (
 
 abort (); // JMI
 
-  throw *exception;
+  throw *except;
 }
 
 void waeErrorWithException (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message,
-  S_mfException exception)
+  const std::string& message,
+  S_mfException except)
 {
   waeErrorWithoutException (
     context,
@@ -206,17 +204,17 @@ void waeErrorWithException (
 
 abort (); // JMI
 
-  throw *exception;
+  throw *except;
 }
 
 //______________________________________________________________________________
 void waeInternalError (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeErrorWithoutException (
     context,
@@ -230,13 +228,13 @@ void waeInternalError (
 }
 
 void waeInternalErrorWithException (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message,
-  S_mfException exception)
+  const std::string& message,
+  S_mfException except)
 {
   waeErrorWithoutException (
     context,
@@ -246,7 +244,7 @@ void waeInternalErrorWithException (
     sourceCodeLineNumber,
     message);
 
-  throw *exception;
+  throw *except;
 }
 
 //______________________________________________________________________________
@@ -267,7 +265,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
     ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
   ) {
     gLogStream <<
-      endl <<
+      std::endl <<
       mfSingularOrPluralWithoutNumber (
         warningsInputLineNumbersSize, "A warning message has", "Warning messages have") <<
       " been issued for input " <<
@@ -275,7 +273,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
         warningsInputLineNumbersSize, "line", "lines") <<
       ' ';
 
-    set<int>::const_iterator
+    std::set<int>::const_iterator
       iBegin = gGlobalWarningsInputLineNumbers.begin (),
       iEnd   = gGlobalWarningsInputLineNumbers.end (),
       i      = iBegin;
@@ -285,7 +283,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
       gLogStream << ", ";
     } // for
 
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 
   size_t errorsInputLineNumbersSize =
@@ -293,7 +291,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
 
   if (errorsInputLineNumbersSize) {
     gLogStream <<
-      endl <<
+      std::endl <<
       mfSingularOrPluralWithoutNumber (
         errorsInputLineNumbersSize, "An error message has", "Error messages have") <<
       " been issued for input " <<
@@ -301,7 +299,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
         errorsInputLineNumbersSize, "line", "lines") <<
       ' ';
 
-    set<int>::const_iterator
+    std::set<int>::const_iterator
       iBegin = gGlobalErrorsInputLineNumbers.begin (),
       iEnd   = gGlobalErrorsInputLineNumbers.end (),
       i      = iBegin;
@@ -311,7 +309,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
       gLogStream << ", ";
     } // for
 
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 }
 
@@ -323,9 +321,9 @@ void displayWarningsAndErrorsInputLineNumbers ()
 /*
 void msrStreamsWarning (
   int    inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int    sourceCodeLineNumber,
-  string  message)
+  std::string  message)
 {
   if (! (gGlobalOahEarlyOptions.getEarlyQuietOption () && gGlobalWaeOahGroup->getDontShowErrors ())) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -338,15 +336,15 @@ void msrStreamsWarning (
       "*** " << "MSR STREAMS" << " warning *** " <<
       " ### " << "MSR STREAMS" << " ERROR ### " <<
       "fake line number" << ":" << inputLineNumber << ": " << message <<
-      endl;
+      std::endl;
   }
 }
 
 void msrStreamsError (
   int    inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int    sourceCodeLineNumber,
-  string  message)
+  std::string  message)
 {
   if (! (gGlobalOahEarlyOptions.getEarlyQuietOption () && gGlobalWaeOahGroup->getDontShowErrors ())) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -358,7 +356,7 @@ void msrStreamsError (
     gLogStream <<
       "### " << "MSR STREAMS" << " ERROR ### " <<
       "fake line number" << ":" << inputLineNumber << ": " << message <<
-      endl;
+      std::endl;
   }
 
   throw mfStreamsException (message);

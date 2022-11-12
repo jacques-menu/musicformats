@@ -14,7 +14,7 @@
 #ifdef EXTRA_OAH_IS_ENABLED
 
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
 #include "visitor.h"
@@ -27,7 +27,7 @@
 
 #include "oahOah.h"
 
-#include "msrPitchesNames.h"
+// #include "msrPitchesNames.h"
 #include "msrHarmonies.h"
 
 #include "lpsrOah.h"
@@ -35,16 +35,14 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_extraShowAllHarmoniesStructuresAtom extraShowAllHarmoniesStructuresAtom::create (
-  const string& shortName,
-  const string& longName,
-  const string& description)
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description)
 {
   extraShowAllHarmoniesStructuresAtom* o = new
     extraShowAllHarmoniesStructuresAtom (
@@ -56,9 +54,9 @@ S_extraShowAllHarmoniesStructuresAtom extraShowAllHarmoniesStructuresAtom::creat
 }
 
 extraShowAllHarmoniesStructuresAtom::extraShowAllHarmoniesStructuresAtom (
-  const string& shortName,
-  const string& longName,
-  const string& description)
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -71,13 +69,13 @@ extraShowAllHarmoniesStructuresAtom::~extraShowAllHarmoniesStructuresAtom ()
 {}
 
 /* JMI
-void extraShowAllHarmoniesStructuresAtom::applyElement (ostream& os)
+void extraShowAllHarmoniesStructuresAtom::applyElement (std::ostream& os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a extraShowAllHarmoniesStructuresAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -86,14 +84,14 @@ void extraShowAllHarmoniesStructuresAtom::applyElement (ostream& os)
 */
 
 void extraShowAllHarmoniesStructuresAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a extraShowAllHarmoniesStructuresAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -106,7 +104,7 @@ void extraShowAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowAllHarmoniesStructuresAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -119,7 +117,7 @@ void extraShowAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching extraShowAllHarmoniesStructuresAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -132,7 +130,7 @@ void extraShowAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowAllHarmoniesStructuresAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -145,7 +143,7 @@ void extraShowAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching extraShowAllHarmoniesStructuresAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -158,18 +156,18 @@ void extraShowAllHarmoniesStructuresAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowAllHarmoniesStructuresAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void extraShowAllHarmoniesStructuresAtom::print (ostream& os) const
+void extraShowAllHarmoniesStructuresAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "extraShowAllHarmoniesStructuresAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -179,25 +177,25 @@ void extraShowAllHarmoniesStructuresAtom::print (ostream& os) const
   --gIndenter;
 }
 
-void extraShowAllHarmoniesStructuresAtom::printAllHarmoniesStructures (ostream& os) const
+void extraShowAllHarmoniesStructuresAtom::printAllHarmoniesStructures (std::ostream& os) const
 {
   msrHarmonyStructure::printAllHarmoniesStructures (os);
 }
 
 void extraShowAllHarmoniesStructuresAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
   // nothing to print here
 }
 
-ostream& operator << (ostream& os, const S_extraShowAllHarmoniesStructuresAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesStructuresAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -205,12 +203,12 @@ ostream& operator << (ostream& os, const S_extraShowAllHarmoniesStructuresAtom& 
 
 //______________________________________________________________________________
 S_extraShowAllHarmoniesContentsAtom extraShowAllHarmoniesContentsAtom::create (
-  const string& shortName,
-  const string& longName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  string&       stringVariable)
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::string&       stringVariable)
 {
   extraShowAllHarmoniesContentsAtom* o = new
     extraShowAllHarmoniesContentsAtom (
@@ -225,12 +223,12 @@ S_extraShowAllHarmoniesContentsAtom extraShowAllHarmoniesContentsAtom::create (
 }
 
 extraShowAllHarmoniesContentsAtom::extraShowAllHarmoniesContentsAtom (
-  const string& shortName,
-  const string& longName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  string&       stringVariable)
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::string&       stringVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -248,26 +246,26 @@ extraShowAllHarmoniesContentsAtom::~extraShowAllHarmoniesContentsAtom ()
 {}
 
 void extraShowAllHarmoniesContentsAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'extraShowAllHarmoniesContentsAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the pitch name in the current language
-  // is it in the accidental styles map?
+  // is it in the accidental styles std::map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'extraShowAllHarmoniesContentsAtom'" <<
       ", theString = \"" << theString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -280,7 +278,7 @@ void extraShowAllHarmoniesContentsAtom::applyAtomWithValue (
   switch (semiTonesPitchKind) {
     case msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "'" << theString <<
@@ -290,7 +288,7 @@ void extraShowAllHarmoniesContentsAtom::applyAtomWithValue (
             gGlobalLpsrOahGroup->
               getLpsrQuarterTonesPitchesLanguageKind ()) <<
           "'" <<
-          endl;
+          std::endl;
 
         oahError (s.str ());
       }
@@ -327,12 +325,12 @@ void extraShowAllHarmoniesContentsAtom::applyAtomWithValue (
 
     default:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "'" << theString <<
           "' is no diatonic (semitones) pitch" <<
-          endl;
+          std::endl;
 
         oahError (s.str ());
       }
@@ -350,7 +348,7 @@ void extraShowAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowAllHarmoniesContentsAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -363,7 +361,7 @@ void extraShowAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching extraShowAllHarmoniesContentsAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -376,7 +374,7 @@ void extraShowAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowAllHarmoniesContentsAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -389,7 +387,7 @@ void extraShowAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching extraShowAllHarmoniesContentsAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -402,18 +400,18 @@ void extraShowAllHarmoniesContentsAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowAllHarmoniesContentsAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void extraShowAllHarmoniesContentsAtom::print (ostream& os) const
+void extraShowAllHarmoniesContentsAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "extraShowAllHarmoniesContentsAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -424,7 +422,7 @@ void extraShowAllHarmoniesContentsAtom::print (ostream& os) const
 }
 
 void extraShowAllHarmoniesContentsAtom::printAllHarmoniesContents (
-  ostream&              os,
+  std::ostream&              os,
   msrSemiTonesPitchKind semiTonesPitchKind) const
 {
   msrHarmonyContents::printAllHarmoniesContents (
@@ -433,19 +431,19 @@ void extraShowAllHarmoniesContentsAtom::printAllHarmoniesContents (
 }
 
 void extraShowAllHarmoniesContentsAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
   // nothing to print here
 }
 
-ostream& operator << (ostream& os, const S_extraShowAllHarmoniesContentsAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesContentsAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -453,12 +451,12 @@ ostream& operator << (ostream& os, const S_extraShowAllHarmoniesContentsAtom& el
 
 //______________________________________________________________________________
 S_extraShowHarmonyDetailsAtom extraShowHarmonyDetailsAtom::create (
-  const string& shortName,
-  const string& longName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  string&       stringVariable)
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::string&       stringVariable)
 {
   extraShowHarmonyDetailsAtom* o = new
     extraShowHarmonyDetailsAtom (
@@ -473,12 +471,12 @@ S_extraShowHarmonyDetailsAtom extraShowHarmonyDetailsAtom::create (
 }
 
 extraShowHarmonyDetailsAtom::extraShowHarmonyDetailsAtom (
-  const string& shortName,
-  const string& longName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  string&       stringVariable)
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::string&       stringVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -496,38 +494,38 @@ extraShowHarmonyDetailsAtom::~extraShowHarmonyDetailsAtom ()
 {}
 
 void extraShowHarmonyDetailsAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'extraShowHarmonyDetailsAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the pitch name in the current language
-  // is it in the accidental styles map?
+  // is it in the accidental styles std::map?
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'extraShowHarmonyDetailsAtom'" <<
       ", theString = \"" << theString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // decipher theString with a regular expression
-  string regularExpression (
+  std::string regularExpression (
     "[[:space:]]*"
     "([[:alnum:]]+)"
     "[[:space:]]*"
     "([[:alnum:]]+)"
     "[[:space:]]*");
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -537,10 +535,10 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for Harmony details string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for Harmony details std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -552,7 +550,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
       gLogStream <<
         '[' << sm [i] << "] ";
     } // for
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 #endif
 
@@ -560,7 +558,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "-Harmony details argument '" << theString <<
@@ -569,7 +567,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
     oahError (s.str ());
   }
 
-  string
+  std::string
     rootName    = sm [1],
     harmonyName = sm [2];
 
@@ -578,7 +576,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
     gLogStream <<
       "--> rootName = \"" << rootName << "\", " <<
       "--> harmonyName = \"" << harmonyName << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -591,7 +589,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
   switch (semiTonesPitchKind) {
     case msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "'" << rootName <<
@@ -601,7 +599,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
             gGlobalLpsrOahGroup->
               getLpsrQuarterTonesPitchesLanguageKind ()) <<
           "'" <<
-          endl;
+          std::endl;
 
         oahError (s.str ());
       }
@@ -638,12 +636,12 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
 
     default:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "'" << rootName <<
           "' is no diatonic (semitones) pitch" <<
-          endl;
+          std::endl;
 
         oahError (s.str ());
       }
@@ -668,7 +666,7 @@ void extraShowHarmonyDetailsAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowHarmonyDetailsAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -681,7 +679,7 @@ void extraShowHarmonyDetailsAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching extraShowHarmonyDetailsAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -694,7 +692,7 @@ void extraShowHarmonyDetailsAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowHarmonyDetailsAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -707,7 +705,7 @@ void extraShowHarmonyDetailsAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching extraShowHarmonyDetailsAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -720,18 +718,18 @@ void extraShowHarmonyDetailsAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowHarmonyDetailsAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void extraShowHarmonyDetailsAtom::print (ostream& os) const
+void extraShowHarmonyDetailsAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "extraShowHarmonyDetailsAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -742,7 +740,7 @@ void extraShowHarmonyDetailsAtom::print (ostream& os) const
 }
 
 void extraShowHarmonyDetailsAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
   // nothing to print here
@@ -750,12 +748,12 @@ void extraShowHarmonyDetailsAtom::printAtomWithVariableOptionsValues (
 
 //______________________________________________________________________________
 S_extraShowHarmonyAnalysisAtom extraShowHarmonyAnalysisAtom::create (
-  const string& shortName,
-  const string& longName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  string&       stringVariable)
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::string&       stringVariable)
 {
   extraShowHarmonyAnalysisAtom* o = new
     extraShowHarmonyAnalysisAtom (
@@ -770,12 +768,12 @@ S_extraShowHarmonyAnalysisAtom extraShowHarmonyAnalysisAtom::create (
 }
 
 extraShowHarmonyAnalysisAtom::extraShowHarmonyAnalysisAtom (
-  const string& shortName,
-  const string& longName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  string&       stringVariable)
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::string&       stringVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -793,31 +791,31 @@ extraShowHarmonyAnalysisAtom::~extraShowHarmonyAnalysisAtom ()
 {}
 
 void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'extraShowHarmonyAnalysisAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the pitch name in the current language
-  // is it in the accidental styles map?
+  // is it in the accidental styles std::map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'extraShowHarmonyAnalysisAtom'" <<
       ", theString = \"" << theString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // decipher theString with a regular expression
-  string regularExpression (
+  std::string regularExpression (
     "[[:space:]]*"
     "([[:alnum:]]+)"
     "[[:space:]]+"
@@ -826,8 +824,8 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
     "([[:digit:]]+)"
     "[[:space:]]*");
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -837,10 +835,10 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for Harmony analysis string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for Harmony analysis std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -853,13 +851,13 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
         gLogStream <<
           '[' << sm [i] << "] ";
       } // for
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 #endif
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Harmony analysis argument '" << theString <<
@@ -875,7 +873,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
 */
   }
 
-  string
+  std::string
     rootName          = sm [1],
     harmonyName       = sm [2],
     inversionAsString = sm [3];
@@ -883,7 +881,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
   int inversion;
 
   {
-    stringstream s;
+    std::stringstream s;
 
     s << inversionAsString;
 
@@ -896,7 +894,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
       "--> rootName = \"" << rootName << "\", " <<
       "--> harmonyName = \"" << harmonyName << "\"" <<
       "--> inversion = " << inversion <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -909,7 +907,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
   switch (semiTonesPitchKind) {
     case msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "'" << rootName <<
@@ -919,7 +917,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
             gGlobalLpsrOahGroup->
               getLpsrQuarterTonesPitchesLanguageKind ()) <<
           "'" <<
-          endl;
+          std::endl;
 
         oahError (s.str ());
       }
@@ -956,12 +954,12 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
 
     default:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "'" << rootName <<
           "' is no diatonic (semitones) pitch" <<
-          endl;
+          std::endl;
 
         oahError (s.str ());
       }
@@ -974,14 +972,14 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
         harmonyName);
 
   if (harmonyKind == msrHarmonyKind::kHarmony_NO_) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "'" << harmonyName <<
       "' is no harmony name, valid names are:" <<
-      endl <<
+      std::endl <<
       "maj, min,aug, dim, dom, maj7, min7, dim7, aug7, halfdim, minmaj7, maj6, min6, dom9, maj9, min9, dom11, maj11, min11, dom13, maj13, min13, sus2, sus4, neapolitan, italian, french, german, pedal, power, tristan, minmaj9, domsus4, domaug5, dommin9, domaug9dim5, domaug9aug5, domaug11 and maj7aug11" <<
-      endl;
+      std::endl;
 
     oahError (s.str ());
   }
@@ -1000,7 +998,7 @@ void extraShowHarmonyAnalysisAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowHarmonyAnalysisAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1013,7 +1011,7 @@ void extraShowHarmonyAnalysisAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching extraShowHarmonyAnalysisAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -1026,7 +1024,7 @@ void extraShowHarmonyAnalysisAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowHarmonyAnalysisAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1039,7 +1037,7 @@ void extraShowHarmonyAnalysisAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching extraShowHarmonyAnalysisAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -1052,18 +1050,18 @@ void extraShowHarmonyAnalysisAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> extraShowHarmonyAnalysisAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void extraShowHarmonyAnalysisAtom::print (ostream& os) const
+void extraShowHarmonyAnalysisAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "extraShowHarmonyAnalysisAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1074,7 +1072,7 @@ void extraShowHarmonyAnalysisAtom::print (ostream& os) const
 }
 
 void extraShowHarmonyAnalysisAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
   // nothing to print here
@@ -1148,7 +1146,7 @@ void harmoniesExtraOahGroup::initializeExtraShowAllHarmoniesContentsOptions ()
         "Harmonies contents",
         "help-extra-harmonies-contents", "hecc",
 //          regex_replace (
-//            regex ("HARMONIES_KINDS"),
+//            std::regex ("HARMONIES_KINDS"),
 //            existingHarmonyKindsNames ()
 //    HARMONIES_KINDS.
 R"()",
@@ -1190,7 +1188,7 @@ R"(Write the details of the harmony for the given diatonic (semitones) pitch
 in the current language and the given harmony to standard output.
 HARMONY_SPEC should be of the form ROOT_DIATONIC_PITCH:HARMONY_NAME .
 There can be spaces around the ':', in which case quoting is needed.")",
-         regex ("EXECUTABLE"),
+         std::regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "HARMONY_SPEC",
         "fHarmoniesRootAsString",
@@ -1218,7 +1216,7 @@ R"()",
 R"(Write an analysis of the harmony for the given diatonic (semitones) pitch
 in the current language and the given harmony to standard output.
 HARMONY_SPEC should be of the form ROOT_DIATONIC_PITCH:HARMONY_NAME INVERSION .")",
-          regex ("EXECUTABLE"),
+          std::regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "HARMONY_SPEC",
         "fHarmoniesRootAsString",
@@ -1261,7 +1259,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> harmoniesExtraOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1274,7 +1272,7 @@ void harmoniesExtraOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching harmoniesExtraOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -1287,7 +1285,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> harmoniesExtraOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1300,7 +1298,7 @@ void harmoniesExtraOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching harmoniesExtraOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -1313,7 +1311,7 @@ void harmoniesExtraOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> harmoniesExtraOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1323,7 +1321,7 @@ void harmoniesExtraOahGroup::printHarmoniesExtraOahValues (int fieldWidth)
 {
   gLogStream <<
     "The extra extra are:" << // JMI
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1336,13 +1334,13 @@ void harmoniesExtraOahGroup::printHarmoniesExtraOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_harmoniesExtraOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_harmoniesExtraOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1355,7 +1353,7 @@ S_harmoniesExtraOahGroup createGlobalHarmoniesExtraOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global extra OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

@@ -20,19 +20,17 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 mfOahException::mfOahException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_mfOahException mfOahException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   mfOahException* o = new
     mfOahException (
@@ -43,7 +41,7 @@ S_mfOahException mfOahException::create (
 }
 
 //______________________________________________________________________________
-void oahWarning (const string& warningMessage)
+void oahWarning (const std::string& warningMessage)
 {
   int saveIndent = gIndenter.getIndentation ();
 
@@ -52,14 +50,14 @@ void oahWarning (const string& warningMessage)
   gLogStream <<
     "*** WARNING [OAH]: " <<
     warningMessage <<
-    endl;
+    std::endl;
 
   gIndenter.setIndentation (saveIndent);
 }
 
 void oahWarningWithContext (
-  const string& warningMessage,
-  const string& context)
+  const std::string& warningMessage,
+  const std::string& context)
 {
   int saveIndent = gIndenter.getIndentation ();
 
@@ -70,20 +68,20 @@ void oahWarningWithContext (
     warningMessage <<
     ", " <<
     context <<
-    endl;
+    std::endl;
 
   gIndenter.setIndentation (saveIndent);
 }
 
 //______________________________________________________________________________
-void oahError (const string& errorMessage)
+void oahError (const std::string& errorMessage)
 {
   gIndenter.resetToZero ();
 
   gLogStream <<
     "### ERROR [OAH]: " <<
     errorMessage <<
-    endl;
+    std::endl;
 
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();
@@ -93,8 +91,8 @@ void oahError (const string& errorMessage)
 }
 
 void oahErrorWithContext (
-  const string& errorMessage,
-  const string& context)
+  const std::string& errorMessage,
+  const std::string& context)
 {
   gIndenter.resetToZero ();
 
@@ -103,7 +101,7 @@ void oahErrorWithContext (
     errorMessage <<
     ", " <<
     context <<
-    endl;
+    std::endl;
 
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();
@@ -113,14 +111,14 @@ void oahErrorWithContext (
 }
 
 //______________________________________________________________________________
-void oahInternalError (const string& errorMessage)
+void oahInternalError (const std::string& errorMessage)
 {
   gIndenter.resetToZero ();
 
   gLogStream <<
     "### INTERNAL ERROR: [OAH]: " <<
     errorMessage <<
-    endl;
+    std::endl;
 
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();
@@ -129,7 +127,7 @@ void oahInternalError (const string& errorMessage)
   throw mfOahException (errorMessage);
 }
 
-void oahInternalWarning (const string& errorMessage)
+void oahInternalWarning (const std::string& errorMessage)
 {
   int saveIndent = gIndenter.getIndentation ();
 
@@ -138,14 +136,14 @@ void oahInternalWarning (const string& errorMessage)
   gLogStream <<
     "### INTERNAL WARNING: [OAH]: " <<
     errorMessage <<
-    endl;
+    std::endl;
 
   gIndenter.setIndentation (saveIndent);
 }
 
 void oahInternalErrorWithContext (
-  const string& errorMessage,
-  const string& context)
+  const std::string& errorMessage,
+  const std::string& context)
 {
   gIndenter.resetToZero ();
 
@@ -154,7 +152,7 @@ void oahInternalErrorWithContext (
     errorMessage <<
     ", " <<
     context <<
-    endl;
+    std::endl;
 
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();

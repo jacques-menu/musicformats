@@ -12,8 +12,6 @@
 #include "mfcComponents.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -22,12 +20,12 @@ static S_mfcConverterComponent pConverterComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the interpreter's formats list
+  // populate the interpreter's formats std::list
 //   pConverterComponent->
 //     appendRepresentationToMultiComponent (
 //       createMsrRepresentationComponent ());
 
-  // populate the interpreter's passes list
+  // populate the interpreter's passes std::list
 //   pConverterComponent->
 //     appendPassToMultiComponent (
 //       createMsr2msrComponent ());
@@ -44,7 +42,7 @@ S_mfcConverterComponent createIschemeInterpreterComponent ()
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating the ischeme component" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -61,7 +59,7 @@ S_mfcConverterComponent createIschemeInterpreterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.64"),
           "June 20, 2022",
-          list<string> {
+          std::list<std::string> {
             "Created the iScheme interpreter component",
             "Cloned the MFSL interpreter into iScheme"
           }

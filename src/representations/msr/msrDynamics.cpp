@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -22,16 +22,14 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrDynamicKindAsString (
+std::string msrDynamicKindAsString (
   msrDynamicKind dynamicKind)
 {
-  string result;
+  std::string result;
 
   switch (dynamicKind) {
     case msrDynamicKind::kDynamic_NO_:
@@ -124,13 +122,13 @@ string msrDynamicKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrDynamicKind& elt)
+std::ostream& operator << (std::ostream& os, const msrDynamicKind& elt)
 {
   os << msrDynamicKindAsString (elt);
   return os;
 }
 
-msrDynamicKind dynamicFromString (const string& theString)
+msrDynamicKind dynamicFromString (const std::string& theString)
 {
   msrDynamicKind result = msrDynamicKind::kDynamic_NO_;
 
@@ -236,17 +234,17 @@ S_msrDynamic msrDynamic::create (
 
 S_msrDynamic msrDynamic::createDynamicFromString (
   int              inputLineNumber,
-  const string&    dynamicsString,
+  const std::string&    dynamicsString,
   msrPlacementKind dynamicPlacementKind)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamicss ()) {
     gLogStream <<
-      "Creating dynamic from string \"" <<
+      "Creating dynamic from std::string \"" <<
       dynamicsString <<
       "\", dynamicsMeasureNumber: '" << dynamicsMeasureNumber <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -276,7 +274,7 @@ void msrDynamic::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDynamic::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDynamic>*
@@ -287,7 +285,7 @@ void msrDynamic::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDynamic::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -298,7 +296,7 @@ void msrDynamic::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDynamic::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDynamic>*
@@ -309,7 +307,7 @@ void msrDynamic::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDynamic::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -319,7 +317,7 @@ void msrDynamic::acceptOut (basevisitor* v)
 void msrDynamic::browseData (basevisitor* v)
 {}
 
-void msrDynamic::print (ostream& os) const
+void msrDynamic::print (std::ostream& os) const
 {
   os <<
     "Dynamics " <<
@@ -327,16 +325,16 @@ void msrDynamic::print (ostream& os) const
     ", dynamicPlacementKind: " <<
     msrPlacementKindAsString (fDynamicPlacementKind) <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrDynamic& elt)
+std::ostream& operator << (std::ostream& os, const S_msrDynamic& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -345,7 +343,7 @@ ostream& operator << (ostream& os, const S_msrDynamic& elt)
 //______________________________________________________________________________
 S_msrOtherDynamic msrOtherDynamic::create (
   int              inputLineNumber,
-  const string&    otherDynamicString,
+  const std::string&    otherDynamicString,
   msrPlacementKind otherDynamicPlacementKind)
 {
   msrOtherDynamic* o =
@@ -359,7 +357,7 @@ S_msrOtherDynamic msrOtherDynamic::create (
 
 msrOtherDynamic::msrOtherDynamic (
   int              inputLineNumber,
-  const string&    otherDynamicString,
+  const std::string&    otherDynamicString,
   msrPlacementKind otherDynamicPlacementKind)
     : msrElement (inputLineNumber)
 {
@@ -376,7 +374,7 @@ void msrOtherDynamic::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrOtherDynamic::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrOtherDynamic>*
@@ -387,7 +385,7 @@ void msrOtherDynamic::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrOtherDynamic::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -398,7 +396,7 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrOtherDynamic::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrOtherDynamic>*
@@ -409,7 +407,7 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrOtherDynamic::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -419,9 +417,9 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
 void msrOtherDynamic::browseData (basevisitor* v)
 {}
 
-string msrOtherDynamic::asString () const
+std::string msrOtherDynamic::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "OtherDynamics '" <<
@@ -434,28 +432,28 @@ string msrOtherDynamic::asString () const
   return s.str ();
 }
 
-void msrOtherDynamic::print (ostream& os) const
+void msrOtherDynamic::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrOtherDynamic& elt)
+std::ostream& operator << (std::ostream& os, const S_msrOtherDynamic& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
 //______________________________________________________________________________
-string msrCrescDecrescKindAsString (
+std::string msrCrescDecrescKindAsString (
   msrCrescDecrescKind crescDecrescKind)
 {
-  string result;
+  std::string result;
 
   switch (crescDecrescKind) {
     case msrCrescDecrescKind::kCrescDecrescCrescendo:
@@ -469,7 +467,7 @@ string msrCrescDecrescKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrCrescDecrescKind& elt)
+std::ostream& operator << (std::ostream& os, const msrCrescDecrescKind& elt)
 {
   os << msrCrescDecrescKindAsString (elt);
   return os;
@@ -504,7 +502,7 @@ void msrCrescDecresc::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrCrescDecresc::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrCrescDecresc>*
@@ -515,7 +513,7 @@ void msrCrescDecresc::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrCrescDecresc::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -526,7 +524,7 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrCrescDecresc::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrCrescDecresc>*
@@ -537,7 +535,7 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrCrescDecresc::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -546,33 +544,33 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
 void msrCrescDecresc::browseData (basevisitor* v)
 {}
 
-void msrCrescDecresc::print (ostream& os) const
+void msrCrescDecresc::print (std::ostream& os) const
 {
   os <<
     "[CrescDecresc " << fCrescDecrescKind <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrCrescDecresc& elt)
+std::ostream& operator << (std::ostream& os, const S_msrCrescDecresc& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
 //______________________________________________________________________________
-string msrWedgeKindAsString (
+std::string msrWedgeKindAsString (
   msrWedgeKind wedgeKind)
 {
-  string result;
+  std::string result;
 
   switch (wedgeKind) {
     case msrWedgeKind::kWedgeKindNone:
@@ -592,16 +590,16 @@ string msrWedgeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrWedgeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrWedgeKind& elt)
 {
   os << msrWedgeKindAsString (elt);
   return os;
 }
 
-string msrWedgeNienteKindAsString (
+std::string msrWedgeNienteKindAsString (
   msrWedgeNienteKind wedgeNienteKind)
 {
-  string result;
+  std::string result;
 
   switch (wedgeNienteKind) {
     case msrWedgeNienteKind::kWedgeNienteYes:
@@ -615,7 +613,7 @@ string msrWedgeNienteKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrWedgeNienteKind& elt)
+std::ostream& operator << (std::ostream& os, const msrWedgeNienteKind& elt)
 {
   os << msrWedgeNienteKindAsString (elt);
   return os;
@@ -662,7 +660,7 @@ void msrWedge::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrWedge::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrWedge>*
@@ -673,7 +671,7 @@ void msrWedge::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrWedge::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -684,7 +682,7 @@ void msrWedge::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrWedge::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrWedge>*
@@ -695,7 +693,7 @@ void msrWedge::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrWedge::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -704,46 +702,46 @@ void msrWedge::acceptOut (basevisitor* v)
 void msrWedge::browseData (basevisitor* v)
 {}
 
-void msrWedge::print (ostream& os) const
+void msrWedge::print (std::ostream& os) const
 {
   os <<
     "[Wedge " << fWedgeKind <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 19;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "wedgeNienteKind" << " : " <<
     msrWedgeNienteKindAsString (
       fWedgeNienteKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "wedgeLineTypeKind" << " : " <<
     msrLineTypeKindAsString (
       fWedgeLineTypeKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "wedgePlacementKind" << " : " <<
     msrPlacementKindAsString (
       fWedgePlacementKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrWedge& elt)
+std::ostream& operator << (std::ostream& os, const S_msrWedge& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

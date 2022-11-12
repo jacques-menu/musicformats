@@ -33,16 +33,14 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string lpsrElementsSeparatorKindAsString (
+std::string lpsrElementsSeparatorKindAsString (
   lpsrElementsSeparatorKind elementsSeparatorKind)
 {
-  string result;
+  std::string result;
 
   switch (elementsSeparatorKind) {
     case lpsrElementsSeparatorKind::kElementsSeparatorEndOfLine:
@@ -56,7 +54,7 @@ string lpsrElementsSeparatorKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrElementsSeparatorKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrElementsSeparatorKind& elt)
 {
   os << lpsrElementsSeparatorKindAsString (elt);
   return os;
@@ -92,7 +90,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrParallelMusicBLock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -105,7 +103,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrParallelMusicBLock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -118,7 +116,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrParallelMusicBLock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -131,7 +129,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrParallelMusicBLock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -144,12 +142,12 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrParallelMusicBLock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
   for (
-    list<S_lpsrPartGroupBlock>::const_iterator i =
+    std::list<S_lpsrPartGroupBlock>::const_iterator i =
       fParallelMusicBLockPartGroupBlocks.begin ();
     i != fParallelMusicBLockPartGroupBlocks.end ();
     ++i
@@ -163,24 +161,24 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrParallelMusicBLock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void lpsrParallelMusicBLock::print (ostream& os) const
+void lpsrParallelMusicBLock::print (std::ostream& os) const
 {
   os <<
     "ParallelMusicBLock" <<
     ", " <<
     mfSingularOrPlural (
       fParallelMusicBLockPartGroupBlocks.size (), "part group", "part groups") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   for (
-    list<S_lpsrPartGroupBlock>::const_iterator i =
+    std::list<S_lpsrPartGroupBlock>::const_iterator i =
       fParallelMusicBLockPartGroupBlocks.begin ();
     i != fParallelMusicBLockPartGroupBlocks.end ();
     ++i
@@ -191,13 +189,13 @@ void lpsrParallelMusicBLock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrParallelMusicBLock& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrParallelMusicBLock& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

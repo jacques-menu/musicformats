@@ -17,8 +17,6 @@
 #include "oahBasicTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 /*
@@ -29,14 +27,14 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   S_msrScore   theMsrScore,
-  string       passNumber1a,
-  string       passDescription1a,
-  string       passNumber1b,
-  string       passDescription1b,
-  string       passNumber2,
-  string       passDescription2,
-  ostream&     out,
-  ostream&     err,
+  std::string       passNumber1a,
+  std::string       passDescription1a,
+  std::string       passNumber1b,
+  std::string       passDescription1b,
+  std::string       passNumber2,
+  std::string       passDescription2,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler);
 
 

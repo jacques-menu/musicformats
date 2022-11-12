@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
@@ -24,8 +24,6 @@
 #include "oahWae.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -33,7 +31,7 @@ namespace MusicFormats
 S_mfServiceRunData gGlobalServiceRunData;
 
 S_mfServiceRunData mfServiceRunData::create (
-  const string& serviceName)
+  const std::string& serviceName)
 {
   mfServiceRunData* o = new
     mfServiceRunData (
@@ -43,7 +41,7 @@ S_mfServiceRunData mfServiceRunData::create (
 }
 
 // S_mfServiceRunData mfServiceRunData::create (
-//   const string& serviceName,
+//   const std::string& serviceName,
 //   S_oahHandler  runOahHandler)
 // {
 //   mfServiceRunData* o = new
@@ -55,7 +53,7 @@ S_mfServiceRunData mfServiceRunData::create (
 // }
 
 mfServiceRunData::mfServiceRunData (
-  const string& serviceName)
+  const std::string& serviceName)
 {
   // service name
   fServiceName = serviceName;
@@ -68,7 +66,7 @@ mfServiceRunData::mfServiceRunData (
 }
 
 // mfServiceRunData::mfServiceRunData (
-//   const string& serviceName,
+//   const std::string& serviceName,
 //   S_oahHandler  runOahHandler)
 // {
 //   // service name
@@ -100,11 +98,11 @@ void mfServiceRunData::initializeRunDate ()
   fRunDateYYYYMMDD = buffer;
 }
 
-void mfServiceRunData::print (ostream& os) const
+void mfServiceRunData::print (std::ostream& os) const
 {
   os <<
     "The service run data are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -113,43 +111,43 @@ void mfServiceRunData::print (ostream& os) const
   // service name
   // --------------------------------------
 
-  os << left <<
-    setw (fieldWidth) << "Service name" << " : " <<
+  os << std::left <<
+    std::setw (fieldWidth) << "Service name" << " : " <<
     fServiceName <<
-    endl;
+    std::endl;
 
 //   // OAH handler
 //   // --------------------------------------
 //
-//   os << left <<
-//     setw (fieldWidth) << "OAH handler" << " : " <<
+//   os << std::left <<
+//     std::setw (fieldWidth) << "OAH handler" << " : " <<
 //     fRunOahHandler->getHandlerHeader () <<
-//     endl;
+//     std::endl;
 
   // input source name
   // --------------------------------------
 
-  os << left <<
-    setw (fieldWidth) << "fInputSourceName" << " : " << // JMIJMIJMI in oahHandler???
+  os << std::left <<
+    std::setw (fieldWidth) << "fInputSourceName" << " : " << // JMIJMIJMI in oahHandler???
     fInputSourceName <<
-    endl;
+    std::endl;
 
   // run date
   // --------------------------------------
 
-  os << left <<
-    setw (fieldWidth) << "Run date:" <<
-    endl;
+  os << std::left <<
+    std::setw (fieldWidth) << "Run date:" <<
+    std::endl;
 
   ++gIndenter;
 
-  os << left <<
-    setw (fieldWidth) << "fRunDateFull" << " : " <<
+  os << std::left <<
+    std::setw (fieldWidth) << "fRunDateFull" << " : " <<
     fRunDateFull <<
-    endl <<
-    setw (fieldWidth) << "fRunDateYYYYMMDD" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fRunDateYYYYMMDD" << " : " <<
     fRunDateYYYYMMDD <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -157,7 +155,7 @@ void mfServiceRunData::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const mfServiceRunData& elt)
+std::ostream& operator << (std::ostream& os, const mfServiceRunData& elt)
 {
   elt.print (os);
   return os;

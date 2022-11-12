@@ -30,8 +30,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -88,7 +86,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Creating a newborn clone of after grace notes group" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -124,7 +122,7 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrAfterGraceNotesGroupContents::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrAfterGraceNotesGroupContents>*
@@ -135,7 +133,7 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrAfterGraceNotesGroupContents::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -146,7 +144,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrAfterGraceNotesGroupContents::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrAfterGraceNotesGroupContents>*
@@ -157,7 +155,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrAfterGraceNotesGroupContents::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -165,7 +163,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
 
 void msrAfterGraceNotesGroupContents::browseData (basevisitor* v)
 {
-  list<S_msrMeasureElement>::const_iterator i;
+  std::list<S_msrMeasureElement>::const_iterator i;
 
   for (
     i=fAfterGraceNotesGroupContentsNotesList.begin ();
@@ -178,9 +176,9 @@ void msrAfterGraceNotesGroupContents::browseData (basevisitor* v)
   } // for
 }
 
-string msrAfterGraceNotesGroupContents::asShortString () const
+std::string msrAfterGraceNotesGroupContents::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "AfterGraceNotesGroupContents" <<
@@ -190,7 +188,7 @@ string msrAfterGraceNotesGroupContents::asShortString () const
 
 
   if (fAfterGraceNotesGroupContentsNotesList.size ()) {
-    list<S_msrMeasureElement>::const_iterator
+    std::list<S_msrMeasureElement>::const_iterator
       iBegin = fAfterGraceNotesGroupContentsNotesList.begin (),
       iEnd   = fAfterGraceNotesGroupContentsNotesList.end (),
       i      = iBegin;
@@ -205,7 +203,7 @@ string msrAfterGraceNotesGroupContents::asShortString () const
   return s.str ();
 }
 
-void msrAfterGraceNotesGroupContents::print (ostream& os) const
+void msrAfterGraceNotesGroupContents::print (std::ostream& os) const
 {
   os <<
     "[AfterGraceNotesGroupContents" <<
@@ -213,12 +211,12 @@ void msrAfterGraceNotesGroupContents::print (ostream& os) const
     mfSingularOrPlural (
       fAfterGraceNotesGroupContentsNotesList.size (), "note", "notes") <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fAfterGraceNotesGroupContentsNotesList.size ()) {
-    list<S_msrMeasureElement>::const_iterator
+    std::list<S_msrMeasureElement>::const_iterator
       iBegin = fAfterGraceNotesGroupContentsNotesList.begin (),
       iEnd   = fAfterGraceNotesGroupContentsNotesList.end (),
       i      = iBegin;
@@ -226,22 +224,22 @@ void msrAfterGraceNotesGroupContents::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-   // JMI   os << endl;
+   // JMI   os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrAfterGraceNotesGroupContents& elt)
+std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroupContents& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -322,7 +320,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
       "Creating a newborn clone of after grace notes group '" <<
       asShortString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -362,7 +360,7 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrAfterGraceNotesGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrAfterGraceNotesGroup>*
@@ -373,7 +371,7 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrAfterGraceNotesGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -384,7 +382,7 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrAfterGraceNotesGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrAfterGraceNotesGroup>*
@@ -395,7 +393,7 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrAfterGraceNotesGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -416,9 +414,9 @@ void msrAfterGraceNotesGroup::browseData (basevisitor* v)
   }
 }
 
-string msrAfterGraceNotesGroup::asShortString () const
+std::string msrAfterGraceNotesGroup::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "AfterGraceNotesGroup " <<
@@ -430,19 +428,19 @@ string msrAfterGraceNotesGroup::asShortString () const
   return s.str ();
 }
 
-void msrAfterGraceNotesGroup::print (ostream& os) const
+void msrAfterGraceNotesGroup::print (std::ostream& os) const
 {
   os <<
     "[AfterGraceNotesGroup" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // print the afterGraceNotesGroup element
   os <<
     "Element:" <<
-    endl;
+    std::endl;
   ++gIndenter;
   os <<
     fAfterGraceNotesGroupElement;
@@ -451,7 +449,7 @@ void msrAfterGraceNotesGroup::print (ostream& os) const
   os <<
     "fAfterGraceNotesGroupIsSlashed: " <<
     fAfterGraceNotesGroupIsSlashed <<
-    endl;
+    std::endl;
 
   // print the afterGraceNotesGroup contents
   os <<
@@ -459,16 +457,16 @@ void msrAfterGraceNotesGroup::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrAfterGraceNotesGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

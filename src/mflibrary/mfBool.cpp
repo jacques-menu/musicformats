@@ -14,8 +14,6 @@
 #include "mfBool.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -34,7 +32,7 @@ Bool::~Bool ()
 {}
 
 Bool::Bool(const Bool& theBool) {
-//   cout << "Bool copy constructor " << endl; // JMI CLAR
+//   std::cout << "Bool copy constructor " << std::endl; // JMI CLAR
 
    // copy the value
    fValue = theBool.getValue ();
@@ -46,7 +44,7 @@ Bool::Bool(const Bool& theBool) {
   Point operator--(int);     // Postfix decrement operator.
 */
 
-Bool::Bool (const string& theString)
+Bool::Bool (const std::string& theString)
 {
   if (theString == "false") {
     fValue = false;
@@ -117,7 +115,7 @@ EXP Bool operator|| (const bool& theBool, const Bool& rightBool)
   return result;
 }
 
-string Bool::asString () const
+std::string Bool::asString () const
 {
   return
     fValue
@@ -125,12 +123,12 @@ string Bool::asString () const
       : "false";
 }
 
-void Bool::print (ostream& os) const
+void Bool::print (std::ostream& os) const
 {
   os << asString ();
 }
 
-ostream& operator << (ostream& os, const Bool& theBool) {
+std::ostream& operator << (std::ostream& os, const Bool& theBool) {
   theBool.print(os);
   return os;
 }
@@ -180,25 +178,25 @@ void testBool ()
 
   Bool e (true);
 
-  cout <<
-    "a: " << a << endl <<
-    "b: " << b << endl <<
-    "c: " << c << endl <<
-    "d: " << d << endl <<
-    "e: " << e << endl <<
-    endl;
+  std::cout <<
+    "a: " << a << std::endl <<
+    "b: " << b << std::endl <<
+    "c: " << c << std::endl <<
+    "d: " << d << std::endl <<
+    "e: " << e << std::endl <<
+    std::endl;
 
   if (b) {
-    cout << nand (d, e);
+    std::cout << nand (d, e);
   }
   else {
-    cout << nor (d, e);
+    std::cout << nor (d, e);
   }
-  cout << endl;
+  std::cout << std::endl;
 
-  cout <<
+  std::cout <<
     implies (a, a) <<
-    endl;
+    std::endl;
 }
 
 

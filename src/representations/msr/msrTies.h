@@ -28,10 +28,10 @@ enum class msrTieKind {
   kTieStart, kTieContinue, kTieStop
 };
 
-string msrTieKindAsString (
+std::string msrTieKindAsString (
   msrTieKind tieKind);
 
-ostream& operator << (ostream& os, const msrTieKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTieKind& elt);
 
 //______________________________________________________________________________
 class EXP msrTie : public msrElement
@@ -99,9 +99,9 @@ class EXP msrTie : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -113,7 +113,7 @@ class EXP msrTie : public msrElement
     msrPlacementKind      fTiePlacementKind;
 };
 typedef SMARTP<msrTie> S_msrTie;
-EXP ostream& operator << (ostream& os, const S_msrTie& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTie& elt);
 
 
 }

@@ -22,15 +22,13 @@
 #include "lpsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_lpsrComment lpsrComment::create (
   int                inputLineNumber,
-  const string&      contents,
+  const std::string&      contents,
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
 {
   lpsrComment* o = new
@@ -42,7 +40,7 @@ S_lpsrComment lpsrComment::create (
 
 lpsrComment::lpsrComment (
   int                inputLineNumber,
-  const string&      contents,
+  const std::string&      contents,
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
     : lpsrElement (inputLineNumber)
 {
@@ -59,7 +57,7 @@ void lpsrComment::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrComment::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -72,7 +70,7 @@ void lpsrComment::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrComment::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -85,7 +83,7 @@ void lpsrComment::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrComment::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -98,7 +96,7 @@ void lpsrComment::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrComment::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -108,10 +106,10 @@ void lpsrComment::acceptOut (basevisitor* v)
 void lpsrComment::browseData (basevisitor* v)
 {}
 
-string lpsrCommentGapAfterwardsKindAsString (
+std::string lpsrCommentGapAfterwardsKindAsString (
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
 {
-  string result;
+  std::string result;
 
   switch (commentGapAfterwardsKind) {
     case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
@@ -125,37 +123,37 @@ string lpsrCommentGapAfterwardsKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrCommentGapAfterwardsKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrCommentGapAfterwardsKind& elt)
 {
   os << lpsrCommentGapAfterwardsKindAsString (elt);
   return os;
 }
 
-void lpsrComment::print (ostream& os) const
+void lpsrComment::print (std::ostream& os) const
 {
   os <<
     "Comment" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   os <<
     "% " << fContents <<
-    endl;
+    std::endl;
 
   if (fCommentGapKind == lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes)
-    os << endl;
+    os << std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrComment& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrComment& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

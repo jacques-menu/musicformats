@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -38,8 +38,6 @@
 
 #include "oahEarlyOptions.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -77,11 +75,11 @@ void guidoGenerationOahGroup::initializeGuidoGenerationOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
     "\" group" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -95,11 +93,11 @@ void guidoGenerationOahGroup::createGuidoSubGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Creating insider Guido subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -152,7 +150,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> guidoGenerationOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -165,7 +163,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching guidoGenerationOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -178,7 +176,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> guidoGenerationOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -191,7 +189,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching guidoGenerationOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -204,7 +202,7 @@ void guidoGenerationOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> guidoGenerationOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -223,32 +221,32 @@ void guidoGenerationOahGroup::printGuidoGenerationOahGroupValues (
 {
   gLogStream <<
     "The generators options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // Guido
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (fieldWidth) << "Guido:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "Guido:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "fGenerateGuidoComments" << " : " <<
     fGenerateGuidoComments <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fGenerateGuidoStem" << " : " <<
     fGenerateGuidoStem <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fGenerateGuidoBars" << " : " <<
     fGenerateGuidoBars <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -262,7 +260,7 @@ S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global generators insider OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -282,7 +280,7 @@ S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
     ));

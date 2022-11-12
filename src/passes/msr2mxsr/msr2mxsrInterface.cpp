@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -35,8 +35,6 @@
 
 #include "msr2mxsrTranslator.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -44,8 +42,8 @@ namespace MusicFormats
 Sxmlelement translateMsrToMxsr (
   const S_msrScore theMsrScore,
   S_msrOahGroup    msrOpts,
-  string           passNumber,
-  string           passDescription,
+  std::string           passNumber,
+  std::string           passDescription,
   mfTimingItemKind mfTimingItemKind)
 {
   // sanity check
@@ -59,18 +57,18 @@ Sxmlelement translateMsrToMxsr (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber + ": Translating the MSR into an MXSR" <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -97,24 +95,24 @@ Sxmlelement translateMsrToMxsr (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl <<
+      std::endl <<
       "translateMsrToMxsr(), resultingMxsr contains:" <<
-      endl << endl;
+      std::endl << std::endl;
 
     ++gIndenter;
 
     printMxsr (resultingMxsr, gLogStream);
 
     gLogStream <<
-      endl;
+      std::endl;
 
     --gIndenter;
 
     gLogStream <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 

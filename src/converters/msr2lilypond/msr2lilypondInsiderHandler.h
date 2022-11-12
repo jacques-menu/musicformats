@@ -35,8 +35,8 @@ class EXP msr2lilypondInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<msr2lilypondInsiderHandler> create (
-                            const string&           serviceName,
-                            const string&           handlerHeader,
+                            const std::string&           serviceName,
+                            const std::string&           handlerHeader,
                             oahHandlerUsedThruKind  handlerUsedThruKind);
 
   protected:
@@ -45,8 +45,8 @@ class EXP msr2lilypondInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           msr2lilypondInsiderHandler (
-                            const string&           serviceName,
-                            const string&           handlerHeader,
+                            const std::string&           serviceName,
+                            const std::string&           handlerHeader,
                             oahHandlerUsedThruKind  handlerUsedThruKind);
 
     virtual               ~msr2lilypondInsiderHandler ();
@@ -66,18 +66,18 @@ class EXP msr2lilypondInsiderHandler : public oahInsiderHandler
     void                  createTheMsr2lilypondPrefixes ();
 
     void                  createTheMsr2lilypondOptionGroups (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override;
+    std::string           fetchOutputFileNameFromTheOptions () const override;
 
     // quiet mode
     void                  enforceHandlerQuietness () override;
@@ -95,14 +95,14 @@ class EXP msr2lilypondInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private methods
     // ------------------------------------------------------
 
-    string               usageFromUsedThruKind (
+    std::string               usageFromUsedThruKind (
                            oahHandlerUsedThruKind handlerUsedThruKind) const;
   private:
 
@@ -113,7 +113,7 @@ class EXP msr2lilypondInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<msr2lilypondInsiderHandler> S_msr2lilypondInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_msr2lilypondInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2lilypondInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msr2lilypondInsiderOahGroup : public oahGroup
@@ -207,7 +207,7 @@ class EXP msr2lilypondInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<msr2lilypondInsiderOahGroup> S_msr2lilypondInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_msr2lilypondInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2lilypondInsiderOahGroup& elt);
 
 EXP extern S_msr2lilypondInsiderOahGroup gGlobalMsr2lilypondInsiderOahGroup;
 

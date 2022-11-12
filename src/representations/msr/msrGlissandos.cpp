@@ -25,16 +25,14 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrGlissandoTypeKindAsString (
+std::string msrGlissandoTypeKindAsString (
   msrGlissandoTypeKind glissandoTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (glissandoTypeKind) {
     case msrGlissandoTypeKind::kGlissandoTypeNone:
@@ -51,7 +49,7 @@ string msrGlissandoTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrGlissandoTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrGlissandoTypeKind& elt)
 {
   os << msrGlissandoTypeKindAsString (elt);
   return os;
@@ -63,7 +61,7 @@ S_msrGlissando msrGlissando::create (
   int                  glissandoNumber,
   msrGlissandoTypeKind glissandoTypeKind,
   msrLineTypeKind      glissandoLineTypeKind,
-  const string&        glissandoTextValue)
+  const std::string&        glissandoTextValue)
 {
   msrGlissando* o =
     new msrGlissando (
@@ -81,7 +79,7 @@ msrGlissando::msrGlissando (
   int                  glissandoNumber,
   msrGlissandoTypeKind glissandoTypeKind,
   msrLineTypeKind      glissandoLineTypeKind,
-  const string&        glissandoTextValue)
+  const std::string&        glissandoTextValue)
     : msrElement (inputLineNumber)
 {
   fGlissandoNumber = glissandoNumber;
@@ -103,7 +101,7 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
       "Creating a newborn clone of glissando '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -124,7 +122,7 @@ void msrGlissando::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrGlissando::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrGlissando>*
@@ -135,7 +133,7 @@ void msrGlissando::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrGlissando::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -146,7 +144,7 @@ void msrGlissando::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrGlissando::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrGlissando>*
@@ -157,7 +155,7 @@ void msrGlissando::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrGlissando::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -166,9 +164,9 @@ void msrGlissando::acceptOut (basevisitor* v)
 void msrGlissando::browseData (basevisitor* v)
 {}
 
-string msrGlissando::asString () const
+std::string msrGlissando::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Glissando" <<
@@ -182,43 +180,43 @@ string msrGlissando::asString () const
   return s.str ();
 }
 
-void msrGlissando::print (ostream& os) const
+void msrGlissando::print (std::ostream& os) const
 {
   os <<
     "[Glissando" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fGlissandoNumber: " << fGlissandoNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fGlissandoTypeKind: " <<  fGlissandoTypeKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fGlissandoLineTypeKind: " << fGlissandoLineTypeKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fGlissandoTextValue: \"" << fGlissandoTextValue << "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrGlissando& elt)
+std::ostream& operator << (std::ostream& os, const S_msrGlissando& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

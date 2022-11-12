@@ -19,7 +19,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
+class EXP msrHiddenMeasureAndBarLine : public msrMeasureElementLambda
 {
   public:
 
@@ -66,9 +66,9 @@ class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -76,7 +76,7 @@ class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
     // ------------------------------------------------------
 };
 typedef SMARTP<msrHiddenMeasureAndBarLine> S_msrHiddenMeasureAndBarLine;
-EXP ostream& operator << (ostream& os, const S_msrHiddenMeasureAndBarLine& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLine& elt);
 
 
 }

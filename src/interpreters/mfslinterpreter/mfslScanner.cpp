@@ -577,10 +577,10 @@ struct yy_buffer_state
 /* %not-for-header */
 /* %if-not-reentrant */
 
-/* Stack of input buffers. */
+/* stack of input buffers. */
 static size_t yy_buffer_stack_top = 0; /**< index of top of stack. */
 static size_t yy_buffer_stack_max = 0; /**< capacity of stack. */
-static YY_BUFFER_STATE * yy_buffer_stack = NULL; /**< Stack as an array. */
+static YY_BUFFER_STATE * yy_buffer_stack = NULL; /**< stack as an array. */
 /* %endif */
 /* %ok-for-header */
 
@@ -1080,7 +1080,7 @@ static int input ( void );
 /* Copy whatever the last rule matched to the standard output. */
 #ifndef ECHO
 /* %if-c-only Standard (non-C++) definition */
-/* This used to be an fputs(), but since the string might contain NUL's,
+/* This used to be an fputs(), but since the std::string might contain NUL's,
  * we now use fwrite().
  */
 #define ECHO do { if (fwrite( yytext, (size_t) yyleng, 1, yyout )) {} } while (0)
@@ -1440,8 +1440,8 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream <<
       "--> " << drv.getScannerLocation () <<
-      ": single quoted string [" << pStringBuffer << ']' <<
-      endl;
+      ": single quoted std::string [" << pStringBuffer << ']' <<
+      std::endl;
   }
 
   BEGIN INITIAL;
@@ -1510,8 +1510,8 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream <<
       "--> " << drv.getScannerLocation () <<
-      ": double quoted string [" << pStringBuffer << ']' <<
-      endl;
+      ": double quoted std::string [" << pStringBuffer << ']' <<
+      std::endl;
   }
 
   loc.step ();
@@ -1574,7 +1574,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     " double: " << yytext <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1591,7 +1591,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     " integer: " << yytext <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1608,7 +1608,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1625,7 +1625,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1642,7 +1642,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1659,7 +1659,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1676,7 +1676,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1693,7 +1693,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1710,7 +1710,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1727,7 +1727,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": name [" << yytext << ']' <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1746,7 +1746,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << ']' <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1762,7 +1762,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1779,7 +1779,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1796,7 +1796,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1813,7 +1813,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1830,7 +1830,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -1847,7 +1847,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -2700,9 +2700,9 @@ YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size )
 /* %endif */
 
 /* %if-c-only */
-/** Setup the input buffer state to scan a string. The next call to yylex() will
+/** Setup the input buffer state to scan a std::string. The next call to yylex() will
  * scan from a @e copy of @a str.
- * @param yystr a NUL-terminated string to scan
+ * @param yystr a NUL-terminated std::string to scan
  * 
  * @return the newly allocated buffer state object.
  * @note If you want to scan bytes that may contain NUL values, then use
@@ -3012,7 +3012,7 @@ void mfslDriver::scanBegin ()
 
   else if (!(yyin = fopen (fScriptName.c_str (), "r")))
     {
-      stringstream s;
+      std::stringstream s;
 
       char*
         errorString =
@@ -3023,7 +3023,7 @@ void mfslDriver::scanBegin ()
           "cannot open " <<
           fScriptName << ": " <<
           errorString <<
-          endl;
+          std::endl;
 
         mfslFileError (
           fScriptName,

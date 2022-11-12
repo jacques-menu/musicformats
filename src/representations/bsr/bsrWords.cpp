@@ -10,7 +10,7 @@
 */
 
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <sstream>
 
 #include "visitor.h"
@@ -23,8 +23,6 @@
 
 #include "bsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -165,7 +163,7 @@ S_bsrCellsList brailleCharacter (
 
 S_bsrCellsList brailleWord (
   int           inputLineNumber,
-  const string& str)
+  const std::string& str)
 {
   S_bsrCellsList
     result =
@@ -173,7 +171,7 @@ S_bsrCellsList brailleWord (
         inputLineNumber, kCellWordSign);
 
   if (str.size ()) {
-    string::const_iterator
+    std::string::const_iterator
       iBegin = str.begin (),
       iEnd   = str.end (),
       i      = iBegin;
@@ -195,7 +193,7 @@ S_bsrCellsList brailleWord (
 //______________________________________________________________________________
 S_bsrWords bsrWords::create (
   int           inputLineNumber,
-  const string& wordContents)
+  const std::string& wordContents)
 {
   bsrWords* o =
     new bsrWords (
@@ -206,7 +204,7 @@ S_bsrWords bsrWords::create (
 
 bsrWords::bsrWords (
   int           inputLineNumber,
-  const string& wordContents)
+  const std::string& wordContents)
     : bsrLineContentsElement (inputLineNumber)
 {
   fWordContents = wordContents;
@@ -225,7 +223,7 @@ void bsrWords::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrWords::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -238,7 +236,7 @@ void bsrWords::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrWords::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -256,7 +254,7 @@ void bsrWords::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrWords::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -269,7 +267,7 @@ void bsrWords::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrWords::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -279,9 +277,9 @@ void bsrWords::acceptOut (basevisitor* v)
 void bsrWords::browseData (basevisitor* v)
 {}
 
-string bsrWords::asString () const
+std::string bsrWords::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Word" <<
@@ -293,9 +291,9 @@ string bsrWords::asString () const
   return s.str ();
 }
 
-string bsrWords::asDebugString () const
+std::string bsrWords::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "WD" <<
@@ -305,38 +303,38 @@ string bsrWords::asDebugString () const
   return s.str ();
 }
 
-void bsrWords::print (ostream& os) const
+void bsrWords::print (std::ostream& os) const
 {
   os <<
     "Word" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 16;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "wordContents" << " : " << fWordContents <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "wordCellsList" << " : " << fWordCellsList <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "spacesBefore" << " : " << fSpacesBefore <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrWords& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrWords& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

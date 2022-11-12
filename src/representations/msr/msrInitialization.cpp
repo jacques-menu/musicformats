@@ -37,7 +37,7 @@ void initializeMSR ()
     ) {
       gLogStream <<
         "Initializing MSR" <<
-        endl;
+        std::endl;
     }
 #endif
 

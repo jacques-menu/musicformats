@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -25,16 +25,14 @@
 #include "musicxml2guidoManPageOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_xml2gmnManPageGenerateAtom xml2gmnManPageGenerateAtom::create (
-  const string& shortName,
-  const string& longName,
-  const string& description,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
   S_oahVisitor  theOahVisitor)
 {
   xml2gmnManPageGenerateAtom* o = new
@@ -48,9 +46,9 @@ S_xml2gmnManPageGenerateAtom xml2gmnManPageGenerateAtom::create (
 }
 
 xml2gmnManPageGenerateAtom::xml2gmnManPageGenerateAtom (
-  const string& shortName,
-  const string& longName,
-  const string& description,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
   S_oahVisitor  theOahVisitor)
   : oahAtom (
       longName,
@@ -64,13 +62,13 @@ xml2gmnManPageGenerateAtom::xml2gmnManPageGenerateAtom (
 xml2gmnManPageGenerateAtom::~xml2gmnManPageGenerateAtom ()
 {}
 
-void xml2gmnManPageGenerateAtom::applyElement (ostream& os)
+void xml2gmnManPageGenerateAtom::applyElement (std::ostream& os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a xml2gmnManPageGenerateAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -83,7 +81,7 @@ void xml2gmnManPageGenerateAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageGenerateAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -96,7 +94,7 @@ void xml2gmnManPageGenerateAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnManPageGenerateAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -109,7 +107,7 @@ void xml2gmnManPageGenerateAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageGenerateAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -122,7 +120,7 @@ void xml2gmnManPageGenerateAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnManPageGenerateAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -135,18 +133,18 @@ void xml2gmnManPageGenerateAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageGenerateAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void xml2gmnManPageGenerateAtom::print (ostream& os) const
+void xml2gmnManPageGenerateAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "xml2gmnManPageGenerateAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -156,7 +154,7 @@ void xml2gmnManPageGenerateAtom::print (ostream& os) const
   --gIndenter;
 }
 
-void xml2gmnManPageGenerateAtom::generateManPageData (ostream& os) const
+void xml2gmnManPageGenerateAtom::generateManPageData (std::ostream& os) const
 {
   // generate the man page from the OAH handler
   fOahVisitor->visitTheHandler ();
@@ -168,19 +166,19 @@ void xml2gmnManPageGenerateAtom::generateManPageData (ostream& os) const
 }
 
 void xml2gmnManPageGenerateAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
   // nothing to print here
 }
 
-ostream& operator << (ostream& os, const S_xml2gmnManPageGenerateAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_xml2gmnManPageGenerateAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -251,7 +249,7 @@ R"(Write the contents of the OAH data to standard error.)",
         "generate-man-page", "gmp",
         regex_replace (
 R"(Write man page data for EXECUTABLE to standard output.)",
-          regex ("EXECUTABLE"),
+          std::regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         fOahVisitor));
 }
@@ -310,7 +308,7 @@ void xml2gmnManPageOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -323,7 +321,7 @@ void xml2gmnManPageOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnManPageOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -336,7 +334,7 @@ void xml2gmnManPageOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -349,7 +347,7 @@ void xml2gmnManPageOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnManPageOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -362,7 +360,7 @@ void xml2gmnManPageOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -372,7 +370,7 @@ void xml2gmnManPageOahGroup::printManPageOahValues (int fieldWidth)
 {
   gLogStream <<
     "The OAH options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -381,13 +379,13 @@ void xml2gmnManPageOahGroup::printManPageOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_xml2gmnManPageOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_xml2gmnManPageOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -401,7 +399,7 @@ S_xml2gmnManPageOahGroup createGlobalXml2gmnManPageOahGroupHandler (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global xml2gmnManPage OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

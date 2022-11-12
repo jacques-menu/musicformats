@@ -24,10 +24,10 @@ namespace MusicFormats
 
 // diatonic pitches
 //______________________________________________________________________________
-string msrDiatonicPitchKindAsString (
+std::string msrDiatonicPitchKindAsString (
   msrDiatonicPitchKind diatonicPitchKind)
 {
-  string result;
+  std::string result;
 
   switch (diatonicPitchKind) {
     case msrDiatonicPitchKind::kDiatonicPitch_NO_:
@@ -60,7 +60,7 @@ string msrDiatonicPitchKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrDiatonicPitchKind& elt)
+std::ostream& operator << (std::ostream& os, const msrDiatonicPitchKind& elt)
 {
   os << msrDiatonicPitchKindAsString (elt);
   return os;
@@ -217,10 +217,10 @@ float msrMusicXMLAlterFromAlterationKind (
   return result;
 }
 
-string msrAlterationKindAsString (
+std::string msrAlterationKindAsString (
   msrAlterationKind alterationKind)
 {
-  string result;
+  std::string result;
 
   switch (alterationKind) {
     case msrAlterationKind::kAlteration_NO_:
@@ -265,16 +265,16 @@ string msrAlterationKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrAlterationKind& elt)
+std::ostream& operator << (std::ostream& os, const msrAlterationKind& elt)
 {
   os << msrAlterationKindAsString (elt);
   return os;
 }
 
-string msrAlterationPreferenceKindAsString (
+std::string msrAlterationPreferenceKindAsString (
   msrAlterationPreferenceKind alterationPreferenceKind)
 {
-  string result;
+  std::string result;
 
   switch (alterationPreferenceKind) {
     case msrAlterationPreferenceKind::kAlterationPreferenceFlat:
@@ -291,7 +291,7 @@ string msrAlterationPreferenceKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrAlterationPreferenceKind& elt)
+std::ostream& operator << (std::ostream& os, const msrAlterationPreferenceKind& elt)
 {
   os << msrAlterationPreferenceKindAsString (elt);
   return os;
@@ -300,7 +300,7 @@ ostream& operator << (ostream& os, const msrAlterationPreferenceKind& elt)
 // semi tones pitches
 //______________________________________________________________________________
 msrSemiTonesPitchKind semiTonesPitchKindFromString (
-  const string& theString)
+  const std::string& theString)
 {
   msrSemiTonesPitchKind result;
 
@@ -320,10 +320,10 @@ msrSemiTonesPitchKind semiTonesPitchKindFromString (
   return result;
 }
 
-string msrSemiTonesPitchKindAsString (
+std::string msrSemiTonesPitchKindAsString (
   msrSemiTonesPitchKind semiTonesPitchKind)
 {
-  string result;
+  std::string result;
 
   switch (semiTonesPitchKind) {
     case msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch:
@@ -488,18 +488,18 @@ string msrSemiTonesPitchKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrSemiTonesPitchKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSemiTonesPitchKind& elt)
 {
   os << msrSemiTonesPitchKindAsString (elt);
   return os;
 }
 
 /* JMI
-string semiTonesPitchKindAsFlatsAndSharps (
+std::string semiTonesPitchKindAsFlatsAndSharps (
   msrQuarterTonesPitchesLanguageKind languageKind,
   msrSemiTonesPitchKind              semiTonesPitchKind)
 {
-  string result;
+  std::string result;
 
 / * JMI
   msrDiatonicPitchKind
@@ -1202,10 +1202,10 @@ void setDiatonicPitchAndAlterationKind (
   } // switch
 }
 
-string msrQuarterTonesPitchKindAsString (
+std::string msrQuarterTonesPitchKindAsString (
   msrQuarterTonesPitchKind quarterTonesPitchKind)
 {
-  string result;
+  std::string result;
 
   switch (quarterTonesPitchKind) {
     case msrQuarterTonesPitchKind::kQTP_NO_:
@@ -1460,7 +1460,7 @@ string msrQuarterTonesPitchKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrQuarterTonesPitchKind& elt)
+std::ostream& operator << (std::ostream& os, const msrQuarterTonesPitchKind& elt)
 {
   os << msrQuarterTonesPitchKindAsString (elt);
   return os;
@@ -1483,9 +1483,9 @@ void fetchDiatonicPitchKindAndAlterationKindFromQuarterTonesPitchKind (
       quarterTonesPitchKind);
 }
 
-string existingQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength)
+std::string existingQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     quarterTonesPitchesLanguageKindsMapSize =
@@ -1500,18 +1500,18 @@ string existingQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
+      std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
         getQuarterTonesPitchesLanguageKindsMap ().begin ();
       i != getQuarterTonesPitchesLanguageKindsMap ().end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -1548,7 +1548,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
       {
         result = msrQuarterTonesPitchKind::kQTP_NO_;
         /* JMI
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot convert msrDiatonicPitchKind::kDiatonicPitch_NO_ to a quarter tones pitch"
@@ -1600,7 +1600,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_NO_:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "'A' alteration has not been set"
@@ -1653,7 +1653,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_NO_:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "'B' alteration has not been set"
@@ -1708,7 +1708,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_NO_:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "'C' alteration has not been set"
@@ -1761,7 +1761,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_NO_:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "'D' alteration has not been set"
@@ -1814,7 +1814,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_NO_:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "'E' alteration has not been set"
@@ -1867,7 +1867,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_NO_:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "'F' alteration has not been set"
@@ -1920,7 +1920,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
           break;
         case msrAlterationKind::kAlteration_NO_:
           {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "'G' alteration has not been set"
@@ -2047,7 +2047,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
 
     case msrQuarterTonesPitchKind::kQTP_Rest:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot get the diatonic pitch of a rest"
@@ -2062,7 +2062,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
 
     case msrQuarterTonesPitchKind::kQTP_Skip:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot get the diatonic pitch of a skip"
@@ -2080,7 +2080,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
         result = msrDiatonicPitchKind::kDiatonicPitch_NO_;
 
         /* JMI
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_NO_"
@@ -2217,7 +2217,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
 
     case msrQuarterTonesPitchKind::kQTP_Rest:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot get the alteration kind of a rest"
@@ -2232,7 +2232,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
 
     case msrQuarterTonesPitchKind::kQTP_Skip:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot get the alteration kind of a skip"
@@ -2250,7 +2250,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
         result = msrAlterationKind::kAlteration_NO_;
 
         /* JMI
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_NO_"
@@ -2525,10 +2525,10 @@ msrSemiTonesPitchKind semiTonesPitchKindFromQuarterTonesPitchKind (
   return result;
 }
 
-string existingMsrQuarterTonesPitchesLanguageKinds (
+std::string existingMsrQuarterTonesPitchesLanguageKinds (
   size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     quarterTonesPitchesLanguageKindsMapSize =
@@ -2542,18 +2542,18 @@ string existingMsrQuarterTonesPitchesLanguageKinds (
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
+      std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
         getQuarterTonesPitchesLanguageKindsMap ().begin ();
       i != getQuarterTonesPitchesLanguageKindsMap ().end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }

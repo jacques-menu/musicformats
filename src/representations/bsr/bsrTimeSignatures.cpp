@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <sstream>
 
 #include "visitor.h"
@@ -35,16 +35,14 @@
 #include "bsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string bsrTimeSignatureKindAsString (
+std::string bsrTimeSignatureKindAsString (
   bsrTimeSignatureKind timeKind)
 {
-  string result;
+  std::string result;
 
   switch (timeKind) {
     case bsrTimeSignatureKind::kTimeSignatureNone:
@@ -77,16 +75,16 @@ string bsrTimeSignatureKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrTimeSignatureKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrTimeSignatureKind& elt)
 {
   os << bsrTimeSignatureKindAsString (elt);
   return os;
 }
 
-string bsrTimeKindAsDebugString (
+std::string bsrTimeKindAsDebugString (
   bsrTimeSignatureKind timeKind)
 {
-  string result;
+  std::string result;
 
   switch (timeKind) {
     case bsrTimeSignatureKind::kTimeSignatureNone:
@@ -142,7 +140,7 @@ bsrTimeSignatureItem::bsrTimeSignatureItem (
     gLogStream <<
       "Creating time signature item" <<
       ", line = " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -193,7 +191,7 @@ void bsrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
       "' to time signature item '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -212,7 +210,7 @@ void bsrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue
       "' in time signature item '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -237,7 +235,7 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTimeSignatureItem::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -250,7 +248,7 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTimeSignatureItem::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -263,7 +261,7 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTimeSignatureItem::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -276,7 +274,7 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTimeSignatureItem::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -286,9 +284,9 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
 void bsrTimeSignatureItem::browseData (basevisitor* v)
 {}
 
-string bsrTimeSignatureItem::asString () const
+std::string bsrTimeSignatureItem::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t timeSignatureBeatsNumbersVectorSize =
     fTimeSignatureBeatsNumbersVector.size ();
@@ -306,7 +304,7 @@ string bsrTimeSignatureItem::asString () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time signature item beats numbers vector is empty");
+        "time signature item beats numbers std::vector is empty");
         */
       break;
 
@@ -341,18 +339,18 @@ string bsrTimeSignatureItem::asString () const
   return s.str ();
 }
 
-void bsrTimeSignatureItem::print (ostream& os) const
+void bsrTimeSignatureItem::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrTimeSignatureItem& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrTimeSignatureItem& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -385,7 +383,7 @@ bsrTimeSignature::bsrTimeSignature (
       asString () <<
       "', line " <<
       fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -404,7 +402,7 @@ void bsrTimeSignature::appendTimeSignatureItem (S_bsrTimeSignatureItem timeSigna
       asString () <<
       "', line " <<
       fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -438,14 +436,14 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
     case bsrTimeSignatureKind::kTimeSignatureDottedNote:
       {
         if (fTimeSignatureItemsVector.size ()) {
-          vector<S_bsrTimeSignatureItem>::const_iterator
+          std::vector<S_bsrTimeSignatureItem>::const_iterator
             iBegin = fTimeSignatureItemsVector.begin (),
         // JMI    iEnd   = fTimeSignatureItemsVector.end (),
             i      = iBegin;
 
           S_bsrTimeSignatureItem theBsrTimeSignatureItem = (*i);
 
-          const vector<int>&
+          const std::vector<int>&
             timeSignatureBeatsNumbersVector =
               theBsrTimeSignatureItem->getTimeSignatureBeatsNumbersVector ();
 
@@ -462,7 +460,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 gGlobalServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
-                "time signature item beats numbers vector is empty");
+                "time signature item beats numbers std::vector is empty");
                 */
               break;
 
@@ -575,7 +573,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                     break;
                   default:
                     {
-                      stringstream s;
+                      std::stringstream s;
 
                       s <<
                         "MSR time beat value '" <<
@@ -630,14 +628,14 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
     case bsrTimeSignatureKind::kTimeSignatureSingleNumber:
       {
         if (fTimeSignatureItemsVector.size ()) {
-          vector<S_bsrTimeSignatureItem>::const_iterator
+          std::vector<S_bsrTimeSignatureItem>::const_iterator
             iBegin = fTimeSignatureItemsVector.begin (),
    // JMI         iEnd   = fTimeSignatureItemsVector.end (),
             i      = iBegin;
 
           S_bsrTimeSignatureItem theBsrTimeSignatureItem = (*i);
 
-          const vector<int>&
+          const std::vector<int>&
             timeSignatureBeatsNumbersVector =
               theBsrTimeSignatureItem->getTimeSignatureBeatsNumbersVector ();
 
@@ -654,7 +652,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 gGlobalServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
-                "time signature item beats numbers vector is empty");
+                "time signature item beats numbers std::vector is empty");
                 */
               break;
 
@@ -704,7 +702,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                     break;
                   default:
                     {
-                      stringstream s;
+                      std::stringstream s;
 
                       s <<
                         "MSR time beat value '" <<
@@ -763,7 +761,7 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTimeSignature::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -776,7 +774,7 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTimeSignature::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -789,7 +787,7 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTimeSignature::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -802,7 +800,7 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTimeSignature::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -812,9 +810,9 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
 void bsrTimeSignature::browseData (basevisitor* v)
 {}
 
-string bsrTimeSignature::asString () const
+std::string bsrTimeSignature::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Time" <<
@@ -827,9 +825,9 @@ string bsrTimeSignature::asString () const
   return s.str ();
 }
 
-string bsrTimeSignature::asDebugString () const
+std::string bsrTimeSignature::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[TIME " <<
@@ -839,7 +837,7 @@ string bsrTimeSignature::asDebugString () const
   return s.str ();
 }
 
-void bsrTimeSignature::print (ostream& os) const
+void bsrTimeSignature::print (std::ostream& os) const
 {
   size_t timeSignatureItemsVectorSize = fTimeSignatureItemsVector.size ();
 
@@ -850,26 +848,26 @@ void bsrTimeSignature::print (ostream& os) const
       timeSignatureItemsVectorSize, "item", "items") <<
     ", line " << fInputLineNumber <<
     ":" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 16;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "timeKind " << " : " <<
     bsrTimeSignatureKindAsString (fTimeKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "timeSignatureItemsVector" << " : ";
 
   if (timeSignatureItemsVectorSize) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    vector<S_bsrTimeSignatureItem>::const_iterator
+    std::vector<S_bsrTimeSignatureItem>::const_iterator
       iBegin = fTimeSignatureItemsVector.begin (),
       iEnd   = fTimeSignatureItemsVector.end (),
       i      = iBegin;
@@ -877,7 +875,7 @@ void bsrTimeSignature::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
@@ -886,27 +884,27 @@ void bsrTimeSignature::print (ostream& os) const
   else {
     os <<
       " [NONE]" <<
-      endl;
+      std::endl;
   }
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "timeCellsList" << " : " << fetchCellsList ()->asString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "spacesBefore" << " : " << fSpacesBefore <<
-   endl;
+   std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrTimeSignature& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrTimeSignature& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

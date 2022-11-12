@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -31,8 +31,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -44,7 +42,7 @@ S_msrBarLine msrBarLine::create (
   msrBarLineStyleKind           barLineStyleKind,
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
   msrBarLineEndingTypeKind      barLineEndingTypeKind,
-  const string&                 endingNumber,
+  const std::string&                 endingNumber,
   int                           barLineTimes,
   msrBarLineCategoryKind        barLineCategoryKind,
   msrBarLineHasSegnoKind        barLineHasSegnoKind,
@@ -76,13 +74,13 @@ msrBarLine::msrBarLine (
   msrBarLineStyleKind           barLineStyleKind,
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
   msrBarLineEndingTypeKind      barLineEndingTypeKind,
-  const string&                 endingNumber,
+  const std::string&                 endingNumber,
   int                           barLineTimes,
   msrBarLineCategoryKind        barLineCategoryKind,
   msrBarLineHasSegnoKind        barLineHasSegnoKind,
   msrBarLineHasCodaKind         barLineHasCodaKind,
   msrBarLineRepeatWingedKind    barLineRepeatWingedKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -165,7 +163,7 @@ void msrBarLine::setBarLineCategory (
             " to '" <<
             msrBarLineCategoryKindAsString (barLineCategoryKind) <<
             "'" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -205,7 +203,7 @@ void msrBarLine::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBarLine::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBarLine>*
@@ -216,7 +214,7 @@ void msrBarLine::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBarLine::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -227,7 +225,7 @@ void msrBarLine::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBarLine::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBarLine>*
@@ -238,7 +236,7 @@ void msrBarLine::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBarLine::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -247,10 +245,10 @@ void msrBarLine::acceptOut (basevisitor* v)
 void msrBarLine::browseData (basevisitor* v)
 {}
 
-string msrBarLineLocationKindAsString (
+std::string msrBarLineLocationKindAsString (
   msrBarLineLocationKind barLineLocationKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineLocationKind) {
     case msrBarLineLocationKind::kBarLineLocationNone:
@@ -270,16 +268,16 @@ string msrBarLineLocationKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBarLineLocationKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBarLineLocationKind& elt)
 {
   os << msrBarLineLocationKindAsString (elt);
   return os;
 }
 
-string msrBarLineCategoryKindAsString (
+std::string msrBarLineCategoryKindAsString (
   msrBarLineCategoryKind barLineCategoryKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineCategoryKind) {
     case msrBarLineCategoryKind::kBarLineCategory_NO_:
@@ -311,16 +309,16 @@ string msrBarLineCategoryKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBarLineCategoryKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBarLineCategoryKind& elt)
 {
   os << msrBarLineCategoryKindAsString (elt);
   return os;
 }
 
-string msrBarLineHasSegnoKindAsString (
+std::string msrBarLineHasSegnoKindAsString (
   msrBarLineHasSegnoKind barLineHasSegnoKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineHasSegnoKind) {
     case msrBarLineHasSegnoKind::kBarLineHasSegnoYes:
@@ -334,16 +332,16 @@ string msrBarLineHasSegnoKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBarLineHasSegnoKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBarLineHasSegnoKind& elt)
 {
   os << msrBarLineHasSegnoKindAsString (elt);
   return os;
 }
 
-string msrBarLineHasCodaKindAsString (
+std::string msrBarLineHasCodaKindAsString (
   msrBarLineHasCodaKind barLineHasCodaKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineHasCodaKind) {
     case msrBarLineHasCodaKind::kBarLineHasCodaYes:
@@ -357,16 +355,16 @@ string msrBarLineHasCodaKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBarLineHasCodaKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBarLineHasCodaKind& elt)
 {
   os << msrBarLineHasCodaKindAsString (elt);
   return os;
 }
 
-string msrBarLineStyleKindAsString (
+std::string msrBarLineStyleKindAsString (
   msrBarLineStyleKind barLineStyleKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineStyleKind) {
     case msrBarLineStyleKind::kBarLineStyleNone:
@@ -407,16 +405,16 @@ string msrBarLineStyleKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBarLineStyleKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBarLineStyleKind& elt)
 {
   os << msrBarLineStyleKindAsString (elt);
   return os;
 }
 
-string msrBarLineEndingTypeKindAsString (
+std::string msrBarLineEndingTypeKindAsString (
   msrBarLineEndingTypeKind barLineEndingTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineEndingTypeKind) {
     case msrBarLineEndingTypeKind::kBarLineEndingTypeNone:
@@ -436,16 +434,16 @@ string msrBarLineEndingTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBarLineEndingTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBarLineEndingTypeKind& elt)
 {
   os << msrBarLineEndingTypeKindAsString (elt);
   return os;
 }
 
-string msrBarLineRepeatDirectionKindAsString (
+std::string msrBarLineRepeatDirectionKindAsString (
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineRepeatDirectionKind) {
     case msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionNone:
@@ -462,16 +460,16 @@ string msrBarLineRepeatDirectionKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBarLineRepeatDirectionKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBarLineRepeatDirectionKind& elt)
 {
   os << msrBarLineRepeatDirectionKindAsString (elt);
   return os;
 }
 
-string msrBarLineRepeatWingedKindAsString (
+std::string msrBarLineRepeatWingedKindAsString (
   msrBarLineRepeatWingedKind barLineRepeatWingedKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineRepeatWingedKind) {
     case msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone:
@@ -494,18 +492,18 @@ string msrBarLineRepeatWingedKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBarLineRepeatWingedKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBarLineRepeatWingedKind& elt)
 {
   os << msrBarLineRepeatWingedKindAsString (elt);
   return os;
 }
 
-string msrBarLine::endingNumbersListAsString () const
+std::string msrBarLine::endingNumbersListAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   if (fEndingNumbersList.size ()) {
-    list<int>::const_iterator
+    std::list<int>::const_iterator
       iBegin = fEndingNumbersList.begin (),
       iEnd   = fEndingNumbersList.end (),
       i      = iBegin;
@@ -519,9 +517,9 @@ string msrBarLine::endingNumbersListAsString () const
   return s.str ();
 }
 
-string msrBarLine::asShortString () const
+std::string msrBarLine::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[BarLine " <<
@@ -559,9 +557,9 @@ string msrBarLine::asShortString () const
   return s.str ();
 }
 
-string msrBarLine::asString () const
+std::string msrBarLine::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[BarLine " <<
@@ -601,7 +599,7 @@ string msrBarLine::asString () const
   return s.str ();
 }
 
-void msrBarLine::print (ostream& os) const
+void msrBarLine::print (std::ostream& os) const
 {
   os <<
     "[BarLine" <<
@@ -611,83 +609,83 @@ void msrBarLine::print (ostream& os) const
     ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 24;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fLocationKind" << " : " <<
     msrBarLineLocationKindAsString (fLocationKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fStyleKind" << " : " <<
     msrBarLineStyleKindAsString (fStyleKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fRepeatDirectionKind" << " : " <<
     msrBarLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fRepeatWingedKind" << " : " <<
     msrBarLineRepeatWingedKindAsString (fRepeatWingedKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fEndingTypeKind" << " : " <<
     msrBarLineEndingTypeKindAsString (fEndingTypeKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fEndingNumber" << " : " <<
     fEndingNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBarLineTimes" << " : " <<
     fBarLineTimes <<
-    endl <<
+    std::endl <<
 
 /* JMI
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBarLineCategoryKind" << " : " <<
     msrBarLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    endl <<
+    std::endl <<
 */
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBarLineHasSegnoKind" << " : " <<
     msrBarLineHasSegnoKindAsString (
       fBarLineHasSegnoKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fBarLineHasCodaKind" << " : " <<
     msrBarLineHasCodaKindAsString (
       fBarLineHasCodaKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "endingNumbersList" << " : " <<
     endingNumbersListAsString () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << " : " <<
     fetchMeasureElementMeasureNumber () <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   os <<
     ']' <<
-    endl;
+    std::endl;
 }
 
-void msrBarLine::printShort (ostream& os) const
+void msrBarLine::printShort (std::ostream& os) const
 {
   os <<
     "[BarLine" <<
@@ -698,16 +696,16 @@ void msrBarLine::printShort (ostream& os) const
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber <<
     ']' <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrBarLine& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBarLine& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

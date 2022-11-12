@@ -87,7 +87,7 @@ There is \method{msrVoice}{createNewLastSegmentForVoice}, called at many places 
 \begin{lstlisting}[language=CPlusPlus]
 void msrVoice::createNewLastSegmentForVoice (
   int    inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
 	// ... ... ...
 
@@ -143,7 +143,7 @@ The calls to \method{msrVoice}{createNewLastSegmentForVoice} are in:
 void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
   int          inputLineNumber,
   S_msrMeasure firstMeasure,
-  string       context)
+  std::string       context)
 {
   // create the last segment
   fVoiceLastSegment =
@@ -215,7 +215,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
 
     mfAssert (
       __FILE__, __LINE__,
@@ -237,7 +237,7 @@ void msrSegment::appendKeyToSegment (S_msrKey key)
     ", in voice \"" <<
     fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 

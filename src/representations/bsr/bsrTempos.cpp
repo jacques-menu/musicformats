@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
 #include <regex>
@@ -41,16 +41,14 @@
 #include "msr2bsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// string tempoKindAsDebugString ( // JMI v0.9.66
+// std::string tempoKindAsDebugString ( // JMI v0.9.66
 //   msrTempoKBeatUnitsKind tempoKind)
 // {
-//   string result;
+//   std::string result;
 //
 //   switch (tempoKind) {
 //     case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
@@ -116,7 +114,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
       case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
         {
           // fetch MSR tempo attributes
-          const list<S_msrWords>&
+          const std::list<S_msrWords>&
             tempoWordsList =
               fMsrTempo->getTempoWordsList ();
 
@@ -128,7 +126,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           size_t tempoWordsListSize = tempoWordsList.size ();
 
           if (tempoWordsListSize) {
-            list<S_msrWords>::const_iterator
+            std::list<S_msrWords>::const_iterator
               iBegin = tempoWordsList.begin (),
               iEnd   = tempoWordsList.end (),
               i      = iBegin;
@@ -220,7 +218,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
               kCellTempoEquals);
 
           // handle per minute value
-          string
+          std::string
             tempoPerMinuteString =
               fMsrTempo->getTempoPerMinute ();
 
@@ -229,14 +227,14 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             perMinuteMax = -1; // may be absent
 
           // decipher it to extract min and max values
-          string regularExpression (
+          std::string regularExpression (
             "[[:space:]]*([[:digit:]]+)[[:space:]]*" // perMinuteMin
             "-"
             "[[:space:]]*([[:digit:]]+)[[:space:]]*" // perMinuteMax
             );
 
-          regex e (regularExpression);
-          smatch sm;
+          std::regex e (regularExpression);
+          std::smatch sm;
 
           regex_match (tempoPerMinuteString, sm, e);
 
@@ -246,28 +244,28 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
             gLogStream <<
               "There are " << smSize << " matches" <<
-              " for Rational string '" << tempoPerMinuteString <<
-              "' with regex '" << regularExpression <<
+              " for Rational std::string '" << tempoPerMinuteString <<
+              "' with std::regex '" << regularExpression <<
               "'" <<
-              endl;
+              std::endl;
 
             for (unsigned i = 0; i < smSize; ++i) {
               gLogStream <<
                 '[' << sm [i] << "] ";
             } // for
 
-            gLogStream << endl;
+            gLogStream << std::endl;
           }
 #endif
 
           if (smSize == 3) {
             {
-              stringstream s;
+              std::stringstream s;
               s << sm [1];
               s >> perMinuteMin;
             }
             {
-              stringstream s;
+              std::stringstream s;
               s << sm [2];
               s >> perMinuteMax;
             }
@@ -275,12 +273,12 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
           else {
             // decipher it to extract min (and only) values
-            string regularExpression (
+            std::string regularExpression (
               "[[:space:]]*([[:digit:]]+)[[:space:]]*" // perMinuteMin
               );
 
-            regex e (regularExpression);
-            smatch sm;
+            std::regex e (regularExpression);
+            std::smatch sm;
 
             regex_match (tempoPerMinuteString, sm, e);
 
@@ -290,28 +288,28 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
               gLogStream <<
                 "There are " << smSize << " matches" <<
-                " for Rational string '" << tempoPerMinuteString <<
-                "' with regex '" << regularExpression <<
+                " for Rational std::string '" << tempoPerMinuteString <<
+                "' with std::regex '" << regularExpression <<
                 "'" <<
-                endl;
+                std::endl;
 
               for (unsigned i = 0; i < smSize; ++i) {
                 gLogStream <<
                   '[' << sm [i] << "] ";
               } // for
 
-              gLogStream << endl;
+              gLogStream << std::endl;
             }
 #endif
 
             if (smSize == 2) {
-              stringstream s;
+              std::stringstream s;
               s << sm [1];
               s >> perMinuteMin;
             }
 
             else {
-              stringstream s;
+              std::stringstream s;
 
               s <<
                 "tempoPerMinuteString '" <<
@@ -333,7 +331,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             ", tempoPerMinuteString = " << tempoPerMinuteString <<
             ", perMinuteMin = " << perMinuteMin <<
             ", perMinuteMax = " << perMinuteMax <<
-            endl;
+            std::endl;
             */
 
           // create a number to represent perMinuteMin
@@ -393,7 +391,7 @@ void bsrTempo::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTempo::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -406,7 +404,7 @@ void bsrTempo::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTempo::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -419,7 +417,7 @@ void bsrTempo::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTempo::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -432,7 +430,7 @@ void bsrTempo::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTempo::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -442,9 +440,9 @@ void bsrTempo::acceptOut (basevisitor* v)
 void bsrTempo::browseData (basevisitor* v)
 {}
 
-string bsrTempo::asString () const
+std::string bsrTempo::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Tempo" <<
@@ -458,9 +456,9 @@ string bsrTempo::asString () const
   return s.str ();
 }
 
-string bsrTempo::asDebugString () const
+std::string bsrTempo::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[TEMPO ";
@@ -498,40 +496,40 @@ string bsrTempo::asDebugString () const
   return s.str ();
 }
 
-void bsrTempo::print (ostream& os) const
+void bsrTempo::print (std::ostream& os) const
 {
   os <<
     "Tempo" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 23;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "tempoKind" << " : " <<
     msrTempoBeatUnitsKindAsString (fMsrTempo->getTempoKind ()) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "tempoCellsList" << " : " <<
     fTempoCellsList->asShortString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "spacesBefore" << " : " << fSpacesBefore <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrTempo& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrTempo& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

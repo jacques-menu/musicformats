@@ -22,7 +22,7 @@ Lilypond generation is done in \lpsrToLilypondBoth{lpsr2lilypondTranslator}.
                           lpsr2lilypondTranslator (
                             S_msrOahGroup&  msrOpts,
                             S_lpsrOahGroup& lpsrOpts,
-                            ostream&        lilypondCodeStream);
+                            std::ostream&        lilypondCodeStream);
 
     virtual               ~lpsr2lilypondTranslator ();
 
@@ -47,7 +47,7 @@ It contains these fields among others:
     // the output stream
     // ------------------------------------------------------
 
-    ostream&              fLilypondCodeStream;
+    std::ostream&              fLilypondCodeStream;
 \end{lstlisting}
 
 

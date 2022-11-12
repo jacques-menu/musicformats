@@ -36,8 +36,6 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -123,7 +121,7 @@ int lpsrNumberOfDots (int n)
 }
 
 //_______________________________________________________________________________
-string wholeNotesAsLilypondString (
+std::string wholeNotesAsLilypondString (
   int             inputLineNumber,
   const Rational& wholeNotes,
   int&            dotsNumber)
@@ -137,7 +135,7 @@ string wholeNotesAsLilypondString (
       ", wholeNotes: " << wholeNotes <<
       ", dotsNumber: " << dotsNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -149,15 +147,15 @@ string wholeNotesAsLilypondString (
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "--> numerator:   " << numerator <<
-      endl <<
+      std::endl <<
       "--> denominator: " << denominator <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
 /* JMI
   if (false && numerator <= 0) { // JMI
-    stringstream s;
+    std::stringstream s;
 
     s <<
      "%{ZERO_LENGTH: " <<
@@ -172,13 +170,13 @@ string wholeNotesAsLilypondString (
 
   // sanity check
   if (numerator <= 0) {
-    stringstream s1;
+    std::stringstream s1;
 
     s1 <<
       "numerator is not positive in wholeNotesAsLilypondString()" <<
       ", wholeNotes = " << wholeNotes;
 
-    string message = s1.str ();
+    std::string message = s1.str ();
 
  //   lpsrError ( JMI
     lpsrWarning (
@@ -187,7 +185,7 @@ string wholeNotesAsLilypondString (
   //    __FILE__, __LINE__,
       message);
 
-    stringstream s2;
+    std::stringstream s2;
 
     s2 <<
       "%{ " <<
@@ -203,7 +201,7 @@ string wholeNotesAsLilypondString (
 //   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
 //     gLogStream <<
 //       "--> wholeNotes rationalised: " << wholeNotes <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -224,10 +222,10 @@ string wholeNotesAsLilypondString (
     gLogStream <<
 //       "--> rationalHasBeenSimplified: " <<
 //      rationalHasBeenSimplified <<
-//       endl <<
+//       std::endl <<
       "--> integralNumberOfWholeNotes: " <<
       integralNumberOfWholeNotes <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -248,7 +246,7 @@ string wholeNotesAsLilypondString (
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numeratorDots " << " : " << numeratorDots <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -260,7 +258,7 @@ string wholeNotesAsLilypondString (
       else {
         // there can be integral numbers of whole notes up to 15,
         // corresponding to a \maxima...
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "numerator " << numerator <<
@@ -272,7 +270,7 @@ string wholeNotesAsLilypondString (
           if (rationalHasBeenSimplified) {
             s <<
               " (" << numerator << '/' << denominator << ")" <<
-            endl;
+            std::endl;
           }
 
           s <<
@@ -294,9 +292,9 @@ string wholeNotesAsLilypondString (
     the Rational representing a dotted duration has to be brought
     to a value less than two, as explained above
 
-    this is done by changing it denominator in the resulting string:
+    this is done by changing it denominator in the resulting std::string:
 
-     whole notes        string
+     whole notes        std::string
          3/1              \breve.
          3/2              1.
          3/4              2.
@@ -316,10 +314,10 @@ string wholeNotesAsLilypondString (
     lpsrDurationBinaryLogarithm (denominator);
 
   if (denominatorDurationLog == INT_MIN) {
-    string result;
+    std::string result;
 
     {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         1 <<
@@ -333,7 +331,7 @@ string wholeNotesAsLilypondString (
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "denominator " << denominator <<
@@ -345,7 +343,7 @@ string wholeNotesAsLilypondString (
 //       if (rationalHasBeenSimplified) {
 //         s <<
 //           " (" << numerator << '/' << denominator << ")" <<
-//         endl;
+//         std::endl;
 //       }
 
       s <<
@@ -371,7 +369,7 @@ string wholeNotesAsLilypondString (
     gLogStream <<
       "--> denominatorDurationLog" << " : " <<
       denominatorDurationLog <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -385,7 +383,7 @@ string wholeNotesAsLilypondString (
       gLogStream <<
         "--> integralNumberOfWholeNotes,"
         " bringing the faction to be less that 2" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -398,10 +396,10 @@ string wholeNotesAsLilypondString (
         gLogStream <<
           "--> numerator" << " : " <<
           numerator <<
-          endl <<
+          std::endl <<
           "--> denominatorDurationLog " << " : " <<
           denominatorDurationLog <<
-          endl << endl;
+          std::endl << std::endl;
       }
 #endif
     } // while
@@ -415,13 +413,13 @@ string wholeNotesAsLilypondString (
     gLogStream <<
       "--> numerator" << " : " <<
       numerator <<
-      endl <<
+      std::endl <<
       "--> denominatorDurationLog" << " : " <<
       denominatorDurationLog <<
-      endl <<
+      std::endl <<
       "--> numeratorDots " << " : " <<
       numeratorDots <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -437,10 +435,10 @@ string wholeNotesAsLilypondString (
       gLogStream <<
         "--> denominatorDurationLog" << " : " <<
         denominatorDurationLog <<
-        endl <<
+        std::endl <<
         "--> multiplyingFactor " << " : " <<
         multiplyingFactor <<
-        endl << endl;
+        std::endl << std::endl;
     }
 #endif
   }
@@ -450,7 +448,7 @@ string wholeNotesAsLilypondString (
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> setting the multiplying factor" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -467,10 +465,10 @@ string wholeNotesAsLilypondString (
       gLogStream <<
         "--> denominatorDurationLog" << " : " <<
         denominatorDurationLog <<
-        endl <<
+        std::endl <<
         "--> multiplyingFactor " << " : " <<
         multiplyingFactor <<
-        endl << endl;
+        std::endl << std::endl;
     }
 #endif
 
@@ -486,10 +484,10 @@ string wholeNotesAsLilypondString (
         gLogStream <<
           "--> denominatorDurationLog" << " : " <<
           denominatorDurationLog <<
-          endl <<
+          std::endl <<
           "--> multiplyingFactor " << " : " <<
           multiplyingFactor <<
-          endl << endl;
+          std::endl << std::endl;
       }
 #endif
     } // while
@@ -501,21 +499,21 @@ string wholeNotesAsLilypondString (
     gLogStream <<
       "--> numerator " << " : " <<
       numerator <<
-      endl <<
+      std::endl <<
       "--> numeratorDots " << " : " <<
       numeratorDots <<
-      endl <<
+      std::endl <<
       "--> denominatorDurationLog" << " : " <<
       denominatorDurationLog <<
-      endl <<
+      std::endl <<
       "--> multiplyingFactor " << " : " <<
       multiplyingFactor <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
   // generate the code for the duration
-  stringstream s;
+  std::stringstream s;
 
   switch (denominatorDurationLog) {
     case -3:
@@ -556,7 +554,7 @@ string wholeNotesAsLilypondString (
     */
   }
 
-  string result = s.str ();
+  std::string result = s.str ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
@@ -564,7 +562,7 @@ string wholeNotesAsLilypondString (
       "--> wholeNotesAsLilypondString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
       ", numeratorDots" << " : " << numeratorDots <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -574,7 +572,7 @@ string wholeNotesAsLilypondString (
   return result;
 }
 
-string wholeNotesAsLilypondString (
+std::string wholeNotesAsLilypondString (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
@@ -588,7 +586,7 @@ string wholeNotesAsLilypondString (
 }
 
 //_______________________________________________________________________________
-string dottedDurationAsLilypondString (
+std::string dottedDurationAsLilypondString (
   int               inputLineNumber,
   msrDottedDuration dottedDuration)
 {
@@ -599,11 +597,11 @@ string dottedDurationAsLilypondString (
         inputLineNumber));
 }
 
-string dottedDurationAsLilypondStringWithoutBackSlash (
+std::string dottedDurationAsLilypondStringWithoutBackSlash (
   int               inputLineNumber,
   msrDottedDuration dottedDuration)
 {
-  string result =
+  std::string result =
     wholeNotesAsLilypondString (
       inputLineNumber,
       dottedDuration.dottedDurationAsWholeNotes_FOR_TEMPO (
@@ -617,11 +615,11 @@ string dottedDurationAsLilypondStringWithoutBackSlash (
 }
 
 //_______________________________________________________________________________
-string multipleFullBarRestsWholeNoteAsLilypondString (
+std::string multipleFullBarRestsWholeNoteAsLilypondString (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
-  stringstream s;
+  std::stringstream s;
 
   Rational
     denominatorAsFraction =
@@ -647,13 +645,13 @@ string multipleFullBarRestsWholeNoteAsLilypondString (
 
 //_______________________________________________________________________________
 void writeTextsListAsLilypondString (
-  const list<string>& textsList,
-  ostream&            os)
+  const std::list<std::string>& textsList,
+  std::ostream&            os)
 {
-  string contents;
+  std::string contents;
 
   if (textsList.size ()) {
-    list<string>::const_iterator
+    std::list<std::string>::const_iterator
       iBegin = textsList.begin (),
       iEnd   = textsList.end (),
       i      = iBegin;
@@ -677,13 +675,13 @@ void writeTextsListAsLilypondString (
 // score output kinds
 //______________________________________________________________________________
 
-map<string, lpsrScoreOutputKind>
+std::map<std::string, lpsrScoreOutputKind>
   gGlobalLpsrScoreOutputKindsMap;
 
-string lpsrScoreOutputKindAsString (
+std::string lpsrScoreOutputKindAsString (
   lpsrScoreOutputKind scoreOutputKind)
 {
-  string result;
+  std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
@@ -714,7 +712,7 @@ string lpsrScoreOutputKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrScoreOutputKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrScoreOutputKind& elt)
 {
   os << lpsrScoreOutputKindAsString (elt);
   return os;
@@ -743,9 +741,9 @@ void initializeLpsrScoreOutputKindsMap ()
     lpsrScoreOutputKind::kScoreOutputPartsOnlyOneFile;
 }
 
-string existingLpsrScoreOutputKinds (size_t namesListMaxLength)
+std::string existingLpsrScoreOutputKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     lpsrScoreOutputKindsMapSize =
@@ -760,18 +758,18 @@ string existingLpsrScoreOutputKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, lpsrScoreOutputKind>::const_iterator i =
+      std::map<std::string, lpsrScoreOutputKind>::const_iterator i =
         gGlobalLpsrScoreOutputKindsMap.begin ();
       i != gGlobalLpsrScoreOutputKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -795,13 +793,13 @@ string existingLpsrScoreOutputKinds (size_t namesListMaxLength)
 // accidental styles
 //______________________________________________________________________________
 
-map<string, lpsrAccidentalStyleKind>
+std::map<std::string, lpsrAccidentalStyleKind>
   gGlobalLpsrAccidentalStyleKindsMap;
 
-string lpsrAccidentalStyleKindAsString (
+std::string lpsrAccidentalStyleKindAsString (
   lpsrAccidentalStyleKind accidentalStyleKind)
 {
-  string result;
+  std::string result;
 
   switch (accidentalStyleKind) {
     case lpsrAccidentalStyleKind::kAccidentalStyleDefault: // default value
@@ -863,16 +861,16 @@ string lpsrAccidentalStyleKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrAccidentalStyleKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrAccidentalStyleKind& elt)
 {
   os << lpsrAccidentalStyleKindAsString (elt);
   return os;
 }
 
-string lpsrAccidentalStyleKindAsLilypondString (
+std::string lpsrAccidentalStyleKindAsLilypondString (
   lpsrAccidentalStyleKind accidentalStyleKind)
 {
-  string result;
+  std::string result;
 
   switch (accidentalStyleKind) {
     case lpsrAccidentalStyleKind::kAccidentalStyleDefault: // default value
@@ -977,9 +975,9 @@ void initializeLpsrAccidentalStyleKindsMap ()
     lpsrAccidentalStyleKind::kAccidentalStyleForget;
 }
 
-string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength)
+std::string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     accidentalStyleKindsMapSize =
@@ -994,18 +992,18 @@ string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, lpsrAccidentalStyleKind>::const_iterator i =
+      std::map<std::string, lpsrAccidentalStyleKind>::const_iterator i =
         gGlobalLpsrAccidentalStyleKindsMap.begin ();
       i != gGlobalLpsrAccidentalStyleKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -1029,7 +1027,7 @@ string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength)
 // chords languages
 //______________________________________________________________________________
 
-map<string, lpsrChordsLanguageKind>
+std::map<std::string, lpsrChordsLanguageKind>
   gGlobalLpsrChordsLanguageKindsMap;
 
 void initializeLpsrChordsLanguageKindsMap ()
@@ -1046,10 +1044,10 @@ void initializeLpsrChordsLanguageKindsMap ()
     lpsrChordsLanguageKind::kChordsFrench;
 }
 
-string lpsrChordsLanguageKindAsString (
+std::string lpsrChordsLanguageKindAsString (
   lpsrChordsLanguageKind languageKind)
 {
-  string result;
+  std::string result;
 
   switch (languageKind) {
     case lpsrChordsLanguageKind::kChordsIgnatzek: // default value
@@ -1072,15 +1070,15 @@ string lpsrChordsLanguageKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrChordsLanguageKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrChordsLanguageKind& elt)
 {
   os << lpsrChordsLanguageKindAsString (elt);
   return os;
 }
 
-string existingLpsrChordsLanguageKinds (size_t namesListMaxLength)
+std::string existingLpsrChordsLanguageKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     lpsrChordsLanguageKindsMapSize =
@@ -1094,18 +1092,18 @@ string existingLpsrChordsLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, lpsrChordsLanguageKind>::const_iterator i =
+      std::map<std::string, lpsrChordsLanguageKind>::const_iterator i =
         gGlobalLpsrChordsLanguageKindsMap.begin ();
       i != gGlobalLpsrChordsLanguageKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
@@ -1128,11 +1126,11 @@ string existingLpsrChordsLanguageKinds (size_t namesListMaxLength)
 }
 
 //______________________________________________________________________________
-string msrSemiTonesPitchAndOctaveAsLilypondString (
+std::string msrSemiTonesPitchAndOctaveAsLilypondString (
   msrQuarterTonesPitchesLanguageKind languageKind,
   S_msrSemiTonesPitchAndOctave       semiTonesPitchAndOctave)
 {
-  stringstream s;
+  std::stringstream s;
 
   msrQuarterTonesPitchKind
     quarterTonesPitchKind =
@@ -1140,11 +1138,11 @@ string msrSemiTonesPitchAndOctaveAsLilypondString (
         semiTonesPitchAndOctave->
           getSemiTonesPitchKind ());
 
-  map<msrQuarterTonesPitchKind, string>*
+  std::map<msrQuarterTonesPitchKind, std::string>*
     pitchesNamesMapPTR =
       &getNederlandsPitchesNamesMap (); // default LilyPond value
 
-  // is quarterTonesPitchName in the part renaming map?
+  // is quarterTonesPitchName in the part renaming std::map?
   switch (languageKind) {
     case msrQuarterTonesPitchesLanguageKind::kQTPNederlands:
       pitchesNamesMapPTR = &getNederlandsPitchesNamesMap ();
@@ -1238,7 +1236,7 @@ string msrSemiTonesPitchAndOctaveAsLilypondString (
 }
 
 /* JMI
-string msrSemiTonesPitchAndOctaveAsLilypondString (
+std::string msrSemiTonesPitchAndOctaveAsLilypondString (
   msrQuarterTonesPitchesLanguageKind languageKind,
   S_msrSemiTonesPitchAndOctave       semiTonesPitchAndOctave)
 {
@@ -1258,19 +1256,19 @@ string msrSemiTonesPitchAndOctaveAsLilypondString (
 
 // dynamics
 //______________________________________________________________________________
-map<string, lpsrDynamicsTextSpannersStyleKind>
+std::map<std::string, lpsrDynamicsTextSpannersStyleKind>
   pLpsrDynamicsTextSpannersStyleKindsMap;
 
-map<string, lpsrDynamicsTextSpannersStyleKind>&
+std::map<std::string, lpsrDynamicsTextSpannersStyleKind>&
   getLpsrDynamicsTextSpannersStyleKindsMap ()
 {
   return pLpsrDynamicsTextSpannersStyleKindsMap;
 }
 
-string lpsrDynamicsTextSpannersStyleKindAsString (
+std::string lpsrDynamicsTextSpannersStyleKindAsString (
   lpsrDynamicsTextSpannersStyleKind dynamicsTextSpannersStyleKind)
 {
-  string result;
+  std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
@@ -1292,7 +1290,7 @@ string lpsrDynamicsTextSpannersStyleKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt)
 {
   os << lpsrDynamicsTextSpannersStyleKindAsString (elt);
   return os;
@@ -1300,7 +1298,7 @@ ostream& operator << (ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt)
 
 lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
   int           inputLineNumber,
-  const string& dynamicsTextSpannersStyleKindString)
+  const std::string& dynamicsTextSpannersStyleKindString)
 {
   lpsrDynamicsTextSpannersStyleKind result =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleNone;
@@ -1318,10 +1316,10 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
     result =
       lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleTrill;
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
-      "dynamics text spanners style string \"" <<
+      "dynamics text spanners style std::string \"" <<
       dynamicsTextSpannersStyleKindString <<
       "\" is unknown" <<
       ", line = " << inputLineNumber;
@@ -1353,10 +1351,10 @@ void initializeLpsrDynamicsTextSpannersStyleKindsMap ()
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleTrill;
 }
 
-string existingLpsrDynamicsTextSpannersStyleKinds (
+std::string existingLpsrDynamicsTextSpannersStyleKinds (
   size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     lpsrDynamicsTextSpannersStyleKindsMapSize =
@@ -1371,18 +1369,18 @@ string existingLpsrDynamicsTextSpannersStyleKinds (
     size_t cumulatedLength = 0;
 
     for (
-      map<string, lpsrDynamicsTextSpannersStyleKind>::const_iterator i =
+      std::map<std::string, lpsrDynamicsTextSpannersStyleKind>::const_iterator i =
         pLpsrDynamicsTextSpannersStyleKindsMap.begin ();
       i != pLpsrDynamicsTextSpannersStyleKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
@@ -1407,13 +1405,13 @@ string existingLpsrDynamicsTextSpannersStyleKinds (
 // lyrics durations
 //______________________________________________________________________________
 
-map<string, lpsrLyricsDurationsKind>
+std::map<std::string, lpsrLyricsDurationsKind>
   gGlobalLpsrLyricsDurationsKindsMap;
 
-string lpsrLyricsDurationsKindAsString (
+std::string lpsrLyricsDurationsKindAsString (
   lpsrLyricsDurationsKind lyricsDurationsKind)
 {
-  string result;
+  std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
@@ -1429,7 +1427,7 @@ string lpsrLyricsDurationsKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrLyricsDurationsKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrLyricsDurationsKind& elt)
 {
   os << lpsrLyricsDurationsKindAsString (elt);
   return os;
@@ -1448,9 +1446,9 @@ void initializeLpsrLyricsDurationsKindsMap ()
     lpsrLyricsDurationsKind::kLyricsDurationsExplicit;
 }
 
-string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength)
+std::string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     lpsrLyricsDurationsKindsMapSize =
@@ -1465,18 +1463,18 @@ string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, lpsrLyricsDurationsKind>::const_iterator i =
+      std::map<std::string, lpsrLyricsDurationsKind>::const_iterator i =
         gGlobalLpsrLyricsDurationsKindsMap.begin ();
       i != gGlobalLpsrLyricsDurationsKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }

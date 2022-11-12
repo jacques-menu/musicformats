@@ -32,16 +32,14 @@
 #include "bsr2bsrFinalizerInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
 S_bsrScore translateBsrToFinalizedBsr (
   const S_bsrScore originalBsrScore,
   S_bsrOahGroup    bsrOpts,
-  const string&    passNumber,
-  const string&    passDescription)
+  const std::string&    passNumber,
+  const std::string&    passDescription)
 {
   S_bsrScore finalizedBsrScore;
 
@@ -57,20 +55,20 @@ S_bsrScore translateBsrToFinalizedBsr (
     // start the clock
     clock_t startClock = clock ();
 
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       gLogStream <<
-        endl <<
+        std::endl <<
         separator <<
-        endl <<
+        std::endl <<
         gTab <<
         passNumber << ": " << passDescription <<
-        endl <<
+        std::endl <<
         separator <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -101,7 +99,7 @@ S_bsrScore translateBsrToFinalizedBsr (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "gIndenter value after " << passNumber << ": " <<
@@ -117,12 +115,12 @@ S_bsrScore translateBsrToFinalizedBsr (
   }
 
   if (! finalizedBsrScore) {
-    string message =
+    std::string message =
       "### Conversion from first BSR to finalized BSR failed ###";
 
     gLogStream <<
       message <<
-      endl << endl;
+      std::endl << std::endl;
 
     throw bsr2finalizedBsrException (message);
   }
@@ -133,7 +131,7 @@ S_bsrScore translateBsrToFinalizedBsr (
       "### translateBsrToFinalizedBsrScore gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }

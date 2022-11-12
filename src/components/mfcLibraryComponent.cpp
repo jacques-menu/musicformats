@@ -18,31 +18,29 @@
 #include "mfcComponents.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-const string pMusicFormatsVersionNumber =
+const std::string pMusicFormatsVersionNumber =
   MUSICFORMATS_VERSION_NUMBER;
 
-const string pMusicFormatsVersionDate =
+const std::string pMusicFormatsVersionDate =
   MUSICFORMATS_VERSION_DATE;
 
-EXP extern string getGlobalMusicFormatsVersionNumber ()
+EXP extern std::string getGlobalMusicFormatsVersionNumber ()
 {
   return pMusicFormatsVersionNumber;
 }
 
-EXP extern string getGlobalMusicFormatsVersionDate ()
+EXP extern std::string getGlobalMusicFormatsVersionDate ()
 {
   return pMusicFormatsVersionDate;
 }
 
-EXP extern string getGlobalMusicFormatsVersionNumberAndDate ()
+EXP extern std::string getGlobalMusicFormatsVersionNumberAndDate ()
 {
-  string result;
+  std::string result;
 
   return
     "v" +
@@ -68,7 +66,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         getGlobalMusicFormatsVersionNumber <<
         ", " <<
         getGlobalMusicFormatsVersionDate <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -79,7 +77,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
-    // populate the library's representations list
+    // populate the library's representations std::list
     pLibraryComponent->
       appendRepresentationToMultiComponent (
         createMsrRepresentationComponent ());
@@ -93,7 +91,7 @@ S_mfcLibraryComponent createLibraryComponent ()
       appendRepresentationToMultiComponent (
         createMxsrRepresentationComponent ());
 
-    // populate the library's passes list
+    // populate the library's passes std::list
     pLibraryComponent->
       appendPassToMultiComponent (
         createMsr2msrComponent ());
@@ -127,7 +125,7 @@ S_mfcLibraryComponent createLibraryComponent ()
       appendPassToMultiComponent (
         createMxsr2guidoComponent ());
 
-    // populate the library's converters list
+    // populate the library's converters std::list
     pLibraryComponent->
       appendConverterToMultiComponent (
         createMusicxml2lilypondConverterComponent ());
@@ -188,7 +186,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -198,7 +196,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 12, 2021",
-          list<string> {
+          std::list<std::string> {
             "Adding a version number to the MusicFormats library",
             "Fixed trace OAH issue in the musicxml2* converters)"
           }
@@ -209,7 +207,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "October 12, 2021",
-          list<string> {
+          std::list<std::string> {
             "Added MusicFormats library versions history to '-hist, -history'"
           }
       ));
@@ -219,7 +217,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.53"),
           "October 22, 2021",
-          list<string> {
+          std::list<std::string> {
             "Replaced bool by class   Bool in variables and fields",
             "Created MFC (MusicFormats components)"
           }
@@ -230,8 +228,8 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.54"),
           "Novermber 6, 2021",
-          list<string> {
-            "Replaced cout and cerr by gOutputStream and gLogStream respectively in the CLI samples",
+          std::list<std::string> {
+            "Replaced std::cout and std::cerr by gOutputStream and gLogStream respectively in the CLI samples",
             "Finalized components numbering (MFC)"
           }
       ));
@@ -241,7 +239,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.55"),
           "Novermber 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Added options to lpsr2lilypond"
           }
       ));
@@ -251,7 +249,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.56"),
           "Novermber 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Fixed UTF-16 encoding detection in mxsr2msr"
           }
       ));
@@ -261,9 +259,9 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.57"),
           "December 12, 2021",
-          list<string> {
+          std::list<std::string> {
             "Finalized MusicXML data encoding check against UTF-8",
-            "Added a list of the converters to the library component",
+            "Added a std::list of the converters to the library component",
             "Redistributed WAE files in the code base",
             "Added the ' -mf-version, -mfv' and '-mf-history, -mfhist' options",
             "Finalized early options handling"
@@ -275,7 +273,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.58"),
           "January 2, 2022",
-          list<string> {
+          std::list<std::string> {
             "Finalized the OAH documentation and macros handling",
             "Fixed an issue in options and argumentss handling",
             "Fixed generated output options handling in Mikrokosmos3Wandering and LilyPondIssue34",
@@ -289,7 +287,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.59"),
           "January 4, 2022",
-          list<string> {
+          std::list<std::string> {
             "Fixed an issue in strings quoting",
             "Finalized the components terminology",
             "Finalized oahAtomImplicitlyStoringAValue"
@@ -301,7 +299,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.60"),
           "February 14, 2022",
-          list<string> {
+          std::list<std::string> {
             "Finalized the handling of option '-include'",
             "Finalized the options values display options",
             "Added distributions for MacOS, Ubuntu and Windows",
@@ -315,7 +313,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.61"),
           "February 18, 2022",
-          list<string> {
+          std::list<std::string> {
             "Complements to the user guide"
           }
       ));
@@ -325,7 +323,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.62"),
           "March 28, 2022",
-          list<string> {
+          std::list<std::string> {
             "Finalized ragged output handling"
           }
       ));
@@ -335,7 +333,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.65"),
           "Augus 24, 2022",
-          list<string> {
+          std::list<std::string> {
             "Upgraded MusicXML from version 3.1 to 4.0",
             "Switched to GitHub's release management",
             "Ready-to-use versions installation and use documentation complements"
@@ -347,8 +345,8 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "September 29, 2022",
-          list<string> {
-            "Finalized the 'string existing*()' functions"
+          std::list<std::string> {
+            "Finalized the 'std::string existing*()' functions"
           }
       ));
  }

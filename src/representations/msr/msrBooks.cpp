@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // for 'setw()'
+#include <iomanip>      // for 'std::setw()'
 
 #include "visitor.h"
 
@@ -30,15 +30,13 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msrBook msrBook::create (
   int           inputLineNumber,
-  const string& bookName)
+  const std::string& bookName)
 {
   msrBook* o =
     new msrBook (
@@ -50,7 +48,7 @@ S_msrBook msrBook::create (
 
 msrBook::msrBook (
   int           inputLineNumber,
-  const string& bookName)
+  const std::string& bookName)
     : msrElement (inputLineNumber)
 {
   // set the name
@@ -94,7 +92,7 @@ S_msrBook msrBook::createBookNewbornClone ()
   if (gGlobalTracingOahGroup->getTraceBooks ()) {
     gLogStream <<
       "Creating a newborn clone of a score" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -160,7 +158,7 @@ void msrBook::addBookElementToBook (
   S_msrBookElement bookElement)
 {
   if (fBookElementsSet.count (bookElement)) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "part group '" <<
@@ -197,7 +195,7 @@ void msrBook::appendCreditToBook (S_msrCredit credit)
       "Appending credit '" <<
       credit->asString () <<
       "' to score" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -213,7 +211,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
       &&
     gGlobalMsrOahGroup->getUseFilenameAsWorkCreditTypeTitle ()
   ) {
-    string
+    std::string
       inputSourceName =
         gGlobalServiceRunData->getInputSourceName ();
 
@@ -241,7 +239,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
 
   // credits on top of page one can be used as identification
   if (fCreditsList.size () >= 1) {
-    list<S_msrCredit>::const_iterator
+    std::list<S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -253,7 +251,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
       S_msrCredit credit = (*i);
 
       if (credit->getCreditPageNumber () == 1) {
-        const vector<S_msrCreditWords>&
+        const std::vector<S_msrCreditWords>&
           creditWordsVector =
             credit->
               getCreditWordsList ();
@@ -263,7 +261,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
             creditWords =
               creditWordsVector.front ();
 
-          string
+          std::string
             creditWordsContents =
               creditWords->
                 getCreditWordsContents ();
@@ -283,7 +281,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
                       "Using credit words '" <<
                       creditWordsContents <<
                       "' as score title" <<
-                      endl;
+                      std::endl;
               }
 #endif
 
@@ -300,7 +298,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
                       "Using credit words '" <<
                       creditWordsContents <<
                       "' as movement title" <<
-                      endl;
+                      std::endl;
               }
 #endif
 
@@ -329,7 +327,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
                       "Using credit words '" <<
                       creditWordsContents <<
                       "' as composer" <<
-                      endl;
+                      std::endl;
               }
 #endif
 
@@ -346,7 +344,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
                       "Using credit words '" <<
                       creditWordsContents <<
                       "' as poet" <<
-                      endl;
+                      std::endl;
               }
 #endif
 
@@ -389,7 +387,7 @@ void msrBook::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBook::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBook>*
@@ -400,7 +398,7 @@ void msrBook::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBook::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -411,7 +409,7 @@ void msrBook::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBook::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBook>*
@@ -422,7 +420,7 @@ void msrBook::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBook::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -433,7 +431,7 @@ void msrBook::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBook::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   if (fIdentification) {
@@ -473,7 +471,7 @@ void msrBook::browseData (basevisitor* v)
   }
 
   for (
-    list<S_msrCredit>::const_iterator i = fCreditsList.begin ();
+    std::list<S_msrCredit>::const_iterator i = fCreditsList.begin ();
     i != fCreditsList.end ();
     ++i
   ) {
@@ -483,7 +481,7 @@ void msrBook::browseData (basevisitor* v)
   } // for
 
   for (
-    list<S_msrBookElement>::const_iterator i = fBookElementsList.begin ();
+    std::list<S_msrBookElement>::const_iterator i = fBookElementsList.begin ();
     i != fBookElementsList.end ();
     ++i
   ) {
@@ -495,16 +493,16 @@ void msrBook::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% <== msrBook::browseData ()" <<
-      endl;
+      std::endl;
   }
 }
 
-void msrBook::print (ostream& os) const
+void msrBook::print (std::ostream& os) const
 {
   os <<
     "[MSR book" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -513,56 +511,56 @@ void msrBook::print (ostream& os) const
   size_t bookElementsListSize =
     fBookElementsList.size ();
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "bookElementsListSize" << " : " <<
     bookElementsListSize <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookNumberOfMeasures" << " : " <<
     fBookNumberOfMeasures <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookPartGroupNamesMaxLength" <<  " : " <<
     fBookElementNamesMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookCreditTypePartNamesMaxLength" <<  " : " <<
     fBookElementNamesMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookInstrumentNamesMaxLength" <<  " : " <<
     fBookInstrumentNamesMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookInstrumentAbbreviationsMaxLength" <<  " : " <<
     fBookInstrumentAbbreviationsMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fInhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
     fInhibitMultipleFullBarRestsBrowsing <<
-    endl<<
-    endl;
+    std::endl<<
+    std::endl;
 
   // print the identification if any
   if (fIdentification) {
@@ -574,50 +572,50 @@ void msrBook::print (ostream& os) const
   if (fScaling) {
     os <<
       fScaling <<
-      endl;
+      std::endl;
   }
 
   // print the page layout if any
   if (fPageLayout) {
     os <<
       fPageLayout <<
-      endl;
+      std::endl;
   }
 
   // print the system layout if any
   if (fSystemLayout) {
     os <<
       fSystemLayout <<
-      endl;
+      std::endl;
   }
 
   // print the staff layout if any
   if (fStaffLayout) {
     os <<
       fStaffLayout <<
-      endl;
+      std::endl;
   }
 
   // print the appearance if any
   if (fAppearance) {
     os <<
       fAppearance <<
-      endl;
+      std::endl;
   }
 
-  os << endl;
+  os << std::endl;
 
   // print the credits if any
   size_t creditsListSize = fCreditsList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "CreditsList";
   if (creditsListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    list<S_msrCredit>::const_iterator
+    std::list<S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -626,7 +624,7 @@ void msrBook::print (ostream& os) const
 
       os << credit;
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -634,69 +632,69 @@ void msrBook::print (ostream& os) const
   else {
     os <<
       " : " << "[NONE]" <<
-      endl;
+      std::endl;
   }
-  os << endl;
+  os << std::endl;
 
   // print all the voices if any
   size_t scoreAllVoicesListSize = fBookAllVoicesList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "BookAllVoicesList";
   if (scoreAllVoicesListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    list<S_msrVoice>::const_iterator
+    std::list<S_msrVoice>::const_iterator
       iBegin = fBookAllVoicesList.begin (),
       iEnd   = fBookAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
       S_msrVoice voice = (*i);
 
-      os << voice->getVoiceName () << endl;
+      os << voice->getVoiceName () << std::endl;
       if (++i == iEnd) break;
-      // os << endl;
+      // os << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
     os <<
       " : " << "[NONE]" <<
-      endl;
+      std::endl;
   }
 
   // print the part groups if any
   if (bookElementsListSize) {
-    list<S_msrBookElement>::const_iterator
+    std::list<S_msrBookElement>::const_iterator
       iBegin = fBookElementsList.begin (),
       iEnd   = fBookElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      // no endl here
+      // no std::endl here
     } // for
   }
   else {
     os <<
-      "There are no part groups in the list" <<
-      endl;
+      "There are no part groups in the std::list" <<
+      std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrBook::printShort (ostream& os) const
+void msrBook::printShort (std::ostream& os) const
 {
   os <<
     "[MSR book, short version" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -705,58 +703,58 @@ void msrBook::printShort (ostream& os) const
   size_t bookElementsListSize =
     fBookElementsList.size ();
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "bookElementsListSize" << " : " <<
     bookElementsListSize <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookNumberOfMeasures" << " : " <<
     fBookNumberOfMeasures <<
-    endl;
+    std::endl;
 
 /*
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fBookPartGroupNamesMaxLength" <<  " : " <<
     fBookElementNamesMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookCreditTypePartNamesMaxLength" <<  " : " <<
     fBookElementNamesMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookInstrumentNamesMaxLength" <<  " : " <<
     fBookInstrumentNamesMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookInstrumentAbbreviationsMaxLength" <<  " : " <<
     fBookInstrumentAbbreviationsMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "inhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fInhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
     fInhibitMultipleFullBarRestsBrowsing <<
-    endl<<
-    endl;
+    std::endl<<
+    std::endl;
 
   // print the identification if any
   if (fIdentification) {
@@ -765,41 +763,41 @@ void msrBook::printShort (ostream& os) const
   }
 */
 
-  os << endl;
+  os << std::endl;
 
   // print the scaling if any
   if (fScaling) {
     os <<
       fScaling <<
-      endl;
+      std::endl;
   }
 
   // print the page layout if any
   if (fPageLayout) {
     os <<
       fPageLayout <<
-      endl;
+      std::endl;
   }
 
   // print the system layout if any
   if (fSystemLayout) {
     os <<
       fSystemLayout <<
-      endl;
+      std::endl;
   }
 
   // print the staff layout if any
   if (fStaffLayout) {
     os <<
       fStaffLayout <<
-      endl;
+      std::endl;
   }
 
   // print the appearance if any
   if (fAppearance) {
     os <<
       fAppearance <<
-      endl;
+      std::endl;
   }
 
 /*
@@ -807,13 +805,13 @@ void msrBook::printShort (ostream& os) const
   size_t creditsListSize = fCreditsList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "CreditsList";
   if (creditsListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    list<S_msrCredit>::const_iterator
+    std::list<S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -822,7 +820,7 @@ void msrBook::printShort (ostream& os) const
 
       os << credit;
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -830,70 +828,70 @@ void msrBook::printShort (ostream& os) const
   else {
     os <<
       " : " << "[NONE]" <<
-      endl;
+      std::endl;
   }
-  os << endl;
+  os << std::endl;
 
   // print all the voices if any
   size_t scoreAllVoicesListSize = fBookAllVoicesList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "BookAllVoicesList";
   if (scoreAllVoicesListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    list<S_msrVoice>::const_iterator
+    std::list<S_msrVoice>::const_iterator
       iBegin = fBookAllVoicesList.begin (),
       iEnd   = fBookAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
       S_msrVoice voice = (*i);
 
-      os << voice->getVoiceName () << endl;
+      os << voice->getVoiceName () << std::endl;
       if (++i == iEnd) break;
-      // os << endl;
+      // os << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
     os <<
       " : " << "[NONE]" <<
-      endl;
+      std::endl;
   }
 */
 
   // print the part groups if any
   if (bookElementsListSize) {
-    list<S_msrBookElement>::const_iterator
+    std::list<S_msrBookElement>::const_iterator
       iBegin = fBookElementsList.begin (),
       iEnd   = fBookElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       (*i)->printShort (os);
       if (++i == iEnd) break;
-      // no endl here
+      // no std::endl here
     } // for
   }
   else {
     os <<
-      "There are no part groups in the list" <<
-      endl;
+      "There are no part groups in the std::list" <<
+      std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrBook::printSummary (ostream& os) const
+void msrBook::printSummary (std::ostream& os) const
 {
   os <<
     "[MSR book summary" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -903,105 +901,105 @@ void msrBook::printSummary (ostream& os) const
     fBookElementsList.size ();
 
   // print global information
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "bookElementsListSize" << " : " <<
     bookElementsListSize <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookNumberOfMeasures" << " : " <<
     fBookNumberOfMeasures <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookInstrumentNamesMaxLength" <<  " : " <<
     fBookInstrumentNamesMaxLength <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fBookInstrumentAbbreviationsMaxLength" <<  " : " <<
     fBookInstrumentAbbreviationsMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fInhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
     fInhibitMultipleFullBarRestsBrowsing <<
-    endl<<
-    endl;
+    std::endl<<
+    std::endl;
 
   // print the identification if any
   if (fIdentification) {
     os <<
       fIdentification <<
-      endl;
+      std::endl;
   }
 
   // print the scaling if any
   if (fScaling) {
     os <<
       fScaling <<
-      endl;
+      std::endl;
   }
 
   // print the page layout if any
   if (fPageLayout) {
     os <<
       fPageLayout <<
-      endl;
+      std::endl;
   }
 
   // print the system layout if any
   if (fSystemLayout) {
     os <<
       fSystemLayout <<
-      endl;
+      std::endl;
   }
 
   // print the staff layout if any
   if (fStaffLayout) {
     os <<
       fStaffLayout <<
-      endl;
+      std::endl;
   }
 
   // print the appearance if any
   if (fAppearance) {
     os <<
       fAppearance <<
-      endl;
+      std::endl;
   }
 
   // print the credits if any
   if (fCreditsList.size ()) {
-    list<S_msrCredit>::const_iterator
+    std::list<S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
   }
 
   if (bookElementsListSize) {
-    list<S_msrBookElement>::const_iterator
+    std::list<S_msrBookElement>::const_iterator
       iBegin = fBookElementsList.begin (),
       iEnd   = fBookElementsList.end (),
       i      = iBegin;
@@ -1009,22 +1007,22 @@ void msrBook::printSummary (ostream& os) const
       (*i)->
         printSummary (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrBook& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBook& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

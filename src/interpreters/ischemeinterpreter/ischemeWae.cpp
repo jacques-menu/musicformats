@@ -17,24 +17,22 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 EXP void ischemeWarning (
-  const string&       message,
+  const std::string&       message,
   const iscm::location& loc)
 {
   gLogStream <<
     "### [iScheme] WARNING " <<
     loc << ": " << message <<
-    endl;
+    std::endl;
 }
 
 EXP void ischemeError (
-  const string&       message,
+  const std::string&       message,
   const iscm::location& loc)
 {
   gIndenter.resetToZero ();
@@ -42,7 +40,7 @@ EXP void ischemeError (
   gLogStream <<
     "### [iScheme] ERROR " <<
     loc << ": " << message <<
-    endl;
+    std::endl;
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw ischemeException (message);
@@ -52,7 +50,7 @@ EXP void ischemeError (
 }
 
 EXP void ischemeInternalError (
-  const string&       message,
+  const std::string&       message,
   const iscm::location& loc)
 {
   gIndenter.resetToZero ();
@@ -60,7 +58,7 @@ EXP void ischemeInternalError (
   gLogStream <<
     "### [iScheme] INNTERNAL ERROR " <<
     loc << ": " << message <<
-    endl;
+    std::endl;
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw ischemeException (message);
@@ -70,12 +68,12 @@ EXP void ischemeInternalError (
 }
 
 EXP void ischemeFileError (
-  const string& inputSourceName,
-  const string& message)
+  const std::string& inputSourceName,
+  const std::string& message)
 {
   gLogStream <<
     "### iScheme file error: " << message <<
-    endl;
+    std::endl;
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw ischemeException (message);
@@ -88,7 +86,7 @@ EXP void ischemeOptionsIncompatibilityError (
   const S_oahAtom atom1,
   const S_oahAtom atom2)
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "### iScheme options incompatibility: " <<
@@ -96,9 +94,9 @@ EXP void ischemeOptionsIncompatibilityError (
     " and " <<
     atom2->fetchNamesBetweenQuotes () <<
     " are incompatible" <<
-    endl;
+    std::endl;
 
-  string message = s.str ();
+  std::string message = s.str ();
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw ischemeException (message);

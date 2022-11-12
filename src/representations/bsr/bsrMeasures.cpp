@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -29,15 +29,13 @@
 #include "bsrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_bsrMeasure bsrMeasure::create (
   int           inputLineNumber,
-  const string& printMeasureNumber)
+  const std::string& printMeasureNumber)
 {
   bsrMeasure* o =
     new bsrMeasure (
@@ -48,7 +46,7 @@ S_bsrMeasure bsrMeasure::create (
 
 bsrMeasure::bsrMeasure (
   int           inputLineNumber,
-  const string& printMeasureNumber)
+  const std::string& printMeasureNumber)
     : bsrLineContentsElement (inputLineNumber)
 {
   fPrintMeasureNumber = printMeasureNumber;
@@ -63,7 +61,7 @@ bsrMeasure::bsrMeasure (
       asString () <<
       "', line " <<
       fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -78,7 +76,7 @@ S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
     gLogStream <<
       "Creating a newborn clone of measure " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -111,7 +109,7 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
       "' to measure '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -128,7 +126,7 @@ void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
       " to measure '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -145,7 +143,7 @@ void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
       "' to measure '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -162,7 +160,7 @@ void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
       "' to measure '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -179,7 +177,7 @@ void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
       "' to measure '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -196,7 +194,7 @@ void bsrMeasure::appendDynamicToMeasure (S_bsrDynamic dynamic)
       "' to measure '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -210,7 +208,7 @@ S_bsrCellsList bsrMeasure::buildCellsList () const
       bsrCellsList::create (fInputLineNumber);
 
   for (
-    list<S_bsrLineContentsElement>::const_iterator i = fMeasureLineElementsList.begin ();
+    std::list<S_bsrLineContentsElement>::const_iterator i = fMeasureLineElementsList.begin ();
     i != fMeasureLineElementsList.end ();
     ++i ) {
     // append the braille for the element
@@ -233,7 +231,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrMeasure::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -246,7 +244,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrMeasure::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -259,7 +257,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrMeasure::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -272,7 +270,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrMeasure::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -282,7 +280,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
 void bsrMeasure::browseData (basevisitor* v)
 {
   for (
-    list<S_bsrLineContentsElement>::const_iterator i = fMeasureLineElementsList.begin ();
+    std::list<S_bsrLineContentsElement>::const_iterator i = fMeasureLineElementsList.begin ();
     i != fMeasureLineElementsList.end ();
     ++i ) {
     // browse the element
@@ -291,9 +289,9 @@ void bsrMeasure::browseData (basevisitor* v)
   } // for
 }
 
-string bsrMeasure::asString () const
+std::string bsrMeasure::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Measure" <<
@@ -307,16 +305,16 @@ string bsrMeasure::asString () const
   return s.str ();
 }
 
-string bsrMeasure::asDebugString () const // JMI
+std::string bsrMeasure::asDebugString () const // JMI
 {
-  stringstream s;
+  std::stringstream s;
 
   s << "{";
 
   size_t measureElementsListSize = fMeasureLineElementsList.size ();
 
   if (measureElementsListSize) {
-    list<S_bsrLineContentsElement>::const_iterator
+    std::list<S_bsrLineContentsElement>::const_iterator
       iBegin = fMeasureLineElementsList.begin (),
       iEnd   = fMeasureLineElementsList.end (),
       i      = iBegin;
@@ -332,64 +330,64 @@ string bsrMeasure::asDebugString () const // JMI
   return s.str ();
 }
 
-void bsrMeasure::print (ostream& os) const
+void bsrMeasure::print (std::ostream& os) const
 {
   os <<
     "Measure" <<
     ", printMeasureNumber " << fPrintMeasureNumber <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 21;
 
   // print the measure numbers
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "printMeasureNumber" << " : " << fPrintMeasureNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "brailleMeasureNumber" << " : " << fBrailleMeasureNumber <<
-    endl;
+    std::endl;
 
   // print the number of cells
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "cellsNumber" << " : " << fetchCellsNumber () <<
-    endl;
+    std::endl;
 
   // print spaces needs
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "spacesBefore" << " : " <<
     fSpacesBefore <<
-    endl;
+    std::endl;
 
-  os << endl;
+  os << std::endl;
 
   // print the measure elements if any
   size_t measureElementsListSize = fMeasureLineElementsList.size ();
 
   if (measureElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
-//      setw (fieldWidth) <<
+//      std::setw (fieldWidth) <<
       "MeasureElementsList" <<
       ", " <<
       mfSingularOrPlural (
         measureElementsListSize, "element", "elements");
     if (measureElementsListSize) {
-      os << endl;
+      os << std::endl;
       ++gIndenter;
 
-      list<S_bsrLineContentsElement>::const_iterator
+      std::list<S_bsrLineContentsElement>::const_iterator
         iBegin = fMeasureLineElementsList.begin (),
         iEnd   = fMeasureLineElementsList.end (),
         i      = iBegin;
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        os << endl;
+        os << std::endl;
       } // for
 
       --gIndenter;
@@ -397,20 +395,20 @@ void bsrMeasure::print (ostream& os) const
     else {
       os <<
         " : " << "[EMPTY]" <<
-      endl;
+      std::endl;
     }
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrMeasure& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrMeasure& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

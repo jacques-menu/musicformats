@@ -119,7 +119,7 @@ void msrSegment::browseData (basevisitor* v)
 	// ... ... ...
 
   for (
-    list<S_msrMeasure>::const_iterator i = fSegmentElementsList.begin ();
+    std::list<S_msrMeasure>::const_iterator i = fSegmentElementsList.begin ();
     i != fSegmentElementsList.end ();
     ++i
   ) {
@@ -147,7 +147,7 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
     gLogStream <<
       "--> Start visiting msrClef" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 

@@ -25,7 +25,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
 
     static SMARTP<bsrMeasure> create (
                             int           inputLineNumber,
-                            const string& printMeasureNumber);
+                            const std::string& printMeasureNumber);
 
     SMARTP<bsrMeasure> createMeasureNewbornClone ();
 
@@ -36,7 +36,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
 
                           bsrMeasure (
                             int           inputLineNumber,
-                            const string& printMeasureNumber);
+                            const std::string& printMeasureNumber);
 
     virtual               ~bsrMeasure ();
 
@@ -45,10 +45,10 @@ class EXP bsrMeasure : public bsrLineContentsElement
     // set and get
     // ------------------------------------------------------
 
-    string                getPrintMeasureNumber () const
+    std::string           getPrintMeasureNumber () const
                               { return fPrintMeasureNumber; }
 
-    string                getBrailleMeasureNumber () const
+    std::string           getBrailleMeasureNumber () const
                               { return fBrailleMeasureNumber; }
 
   public:
@@ -100,25 +100,25 @@ class EXP bsrMeasure : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fPrintMeasureNumber;
-    string                fBrailleMeasureNumber;
+    std::string           fPrintMeasureNumber;
+    std::string           fBrailleMeasureNumber;
 
-    list<S_bsrLineContentsElement>
+    std::list<S_bsrLineContentsElement>
                           fMeasureLineElementsList;
 };
 typedef SMARTP<bsrMeasure> S_bsrMeasure;
-EXP ostream& operator << (ostream& os, const S_bsrMeasure& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrMeasure& elt);
 
 
 }

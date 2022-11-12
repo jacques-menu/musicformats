@@ -27,8 +27,6 @@
 #include "msdlScannerWaeHandlers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -49,9 +47,9 @@ msdlScannerWaeHandler::msdlScannerWaeHandler ()
 msdlScannerWaeHandler::~msdlScannerWaeHandler ()
 {}
 
-string msdlScannerWaeHandler::asString () const
+std::string msdlScannerWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL WAE lexical handler";
@@ -59,20 +57,20 @@ string msdlScannerWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlScannerWaeHandler::print (ostream& os) const
+void msdlScannerWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlScannerWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlScannerWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -98,15 +96,15 @@ void msdlScannerEnglishWaeHandler::illegalCharacter (char theChar) const
   gLogStream <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
-void msdlScannerEnglishWaeHandler::illegalCharacters (const string& theString) const
+void msdlScannerEnglishWaeHandler::illegalCharacters (const std::string& theString) const
 {
   gLogStream <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerEnglishWaeHandler::digitExpectedAfterDecimalDot (char theChar) const
@@ -114,14 +112,14 @@ void msdlScannerEnglishWaeHandler::digitExpectedAfterDecimalDot (char theChar) c
   gLogStream <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 void msdlScannerEnglishWaeHandler::digitExpectedInExponent (char theChar) const
 {
   gLogStream <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerEnglishWaeHandler::illegalEscapedCharacterInString (char theChar) const
@@ -129,7 +127,7 @@ void msdlScannerEnglishWaeHandler::illegalEscapedCharacterInString (char theChar
   gLogStream <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerEnglishWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) const
@@ -138,7 +136,7 @@ void msdlScannerEnglishWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) 
     "The MSDL input is lexically correct. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerEnglishWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens) const
@@ -148,7 +146,7 @@ void msdlScannerEnglishWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerEnglishWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
@@ -159,12 +157,12 @@ void msdlScannerEnglishWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlScannerEnglishWaeHandler::asString () const
+std::string msdlScannerEnglishWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -172,20 +170,20 @@ string msdlScannerEnglishWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlScannerEnglishWaeHandler::print (ostream& os) const
+void msdlScannerEnglishWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlScannerEnglishWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlScannerEnglishWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlScannerEnglishWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -211,15 +209,15 @@ void msdlScannerFrenchWaeHandler::illegalCharacter (char theChar) const
   gLogStream <<
     "### caractère illégal: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
-void msdlScannerFrenchWaeHandler::illegalCharacters (const string& theString) const
+void msdlScannerFrenchWaeHandler::illegalCharacters (const std::string& theString) const
 {
   gLogStream <<
     "### caractères illégaux: " <<
     "\"" << theString << "\" ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerFrenchWaeHandler::digitExpectedAfterDecimalDot (char theChar) const
@@ -227,14 +225,14 @@ void msdlScannerFrenchWaeHandler::digitExpectedAfterDecimalDot (char theChar) co
   gLogStream <<
     "### un chiffre est attendu après un point décimal, trouvé: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 void msdlScannerFrenchWaeHandler::digitExpectedInExponent (char theChar) const
 {
   gLogStream <<
     "### un chiffre est attendu dans un exposant, trouvé: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerFrenchWaeHandler::illegalEscapedCharacterInString (char theChar) const
@@ -242,7 +240,7 @@ void msdlScannerFrenchWaeHandler::illegalEscapedCharacterInString (char theChar)
   gLogStream <<
     "### caractère d'échappement illégal après '\': " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerFrenchWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) const
@@ -251,7 +249,7 @@ void msdlScannerFrenchWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) c
     "Le texte MSDL est lexicalement correct. Il contient " <<
     mfSingularOrPlural (
       numberOfTokens, "terminal", "terminaux") <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerFrenchWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens) const
@@ -261,7 +259,7 @@ void msdlScannerFrenchWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens)
     mfSingularOrPlural (
       numberOfTokens, "terminal", "terminaux") <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerFrenchWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
@@ -272,12 +270,12 @@ void msdlScannerFrenchWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
     "### Le texte MSDL est déjà dans la langue \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\" pour les mots clés, il n'a a pas besoin de le traduire ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlScannerFrenchWaeHandler::asString () const
+std::string msdlScannerFrenchWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "gestionnaire WAE pour MSDL en français";
@@ -285,20 +283,20 @@ string msdlScannerFrenchWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlScannerFrenchWaeHandler::print (ostream& os) const
+void msdlScannerFrenchWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlScannerFrenchWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlScannerFrenchWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlScannerFrenchWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -324,15 +322,15 @@ void msdlScannerItalianWaeHandler::illegalCharacter (char theChar) const
   gLogStream <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
-void msdlScannerItalianWaeHandler::illegalCharacters (const string& theString) const
+void msdlScannerItalianWaeHandler::illegalCharacters (const std::string& theString) const
 {
   gLogStream <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerItalianWaeHandler::digitExpectedAfterDecimalDot (char theChar) const
@@ -340,14 +338,14 @@ void msdlScannerItalianWaeHandler::digitExpectedAfterDecimalDot (char theChar) c
   gLogStream <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 void msdlScannerItalianWaeHandler::digitExpectedInExponent (char theChar) const
 {
   gLogStream <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerItalianWaeHandler::illegalEscapedCharacterInString (char theChar) const
@@ -355,7 +353,7 @@ void msdlScannerItalianWaeHandler::illegalEscapedCharacterInString (char theChar
   gLogStream <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerItalianWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) const
@@ -364,7 +362,7 @@ void msdlScannerItalianWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) 
     "The MSDL input is lexically correct. It contains " <<
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerItalianWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens) const
@@ -374,7 +372,7 @@ void msdlScannerItalianWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerItalianWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
@@ -385,12 +383,12 @@ void msdlScannerItalianWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlScannerItalianWaeHandler::asString () const
+std::string msdlScannerItalianWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -398,20 +396,20 @@ string msdlScannerItalianWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlScannerItalianWaeHandler::print (ostream& os) const
+void msdlScannerItalianWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlScannerItalianWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlScannerItalianWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlScannerItalianWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -437,15 +435,15 @@ void msdlScannerGermanWaeHandler::illegalCharacter (char theChar) const
   gLogStream <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
-void msdlScannerGermanWaeHandler::illegalCharacters (const string& theString) const
+void msdlScannerGermanWaeHandler::illegalCharacters (const std::string& theString) const
 {
   gLogStream <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerGermanWaeHandler::digitExpectedAfterDecimalDot (char theChar) const
@@ -453,14 +451,14 @@ void msdlScannerGermanWaeHandler::digitExpectedAfterDecimalDot (char theChar) co
   gLogStream <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 void msdlScannerGermanWaeHandler::digitExpectedInExponent (char theChar) const
 {
   gLogStream <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerGermanWaeHandler::illegalEscapedCharacterInString (char theChar) const
@@ -468,7 +466,7 @@ void msdlScannerGermanWaeHandler::illegalEscapedCharacterInString (char theChar)
   gLogStream <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerGermanWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) const
@@ -478,7 +476,7 @@ void msdlScannerGermanWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) c
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
     " tokens" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerGermanWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens) const
@@ -488,7 +486,7 @@ void msdlScannerGermanWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens)
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerGermanWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
@@ -499,12 +497,12 @@ void msdlScannerGermanWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlScannerGermanWaeHandler::asString () const
+std::string msdlScannerGermanWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -512,20 +510,20 @@ string msdlScannerGermanWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlScannerGermanWaeHandler::print (ostream& os) const
+void msdlScannerGermanWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlScannerGermanWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlScannerGermanWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlScannerGermanWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -551,15 +549,15 @@ void msdlScannerSpanishWaeHandler::illegalCharacter (char theChar) const
   gLogStream <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
-void msdlScannerSpanishWaeHandler::illegalCharacters (const string& theString) const
+void msdlScannerSpanishWaeHandler::illegalCharacters (const std::string& theString) const
 {
   gLogStream <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerSpanishWaeHandler::digitExpectedAfterDecimalDot (char theChar) const
@@ -567,14 +565,14 @@ void msdlScannerSpanishWaeHandler::digitExpectedAfterDecimalDot (char theChar) c
   gLogStream <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 void msdlScannerSpanishWaeHandler::digitExpectedInExponent (char theChar) const
 {
   gLogStream <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerSpanishWaeHandler::illegalEscapedCharacterInString (char theChar) const
@@ -582,7 +580,7 @@ void msdlScannerSpanishWaeHandler::illegalEscapedCharacterInString (char theChar
   gLogStream <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerSpanishWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) const
@@ -592,7 +590,7 @@ void msdlScannerSpanishWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) 
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
     " tokens" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerSpanishWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens) const
@@ -602,7 +600,7 @@ void msdlScannerSpanishWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerSpanishWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
@@ -613,12 +611,12 @@ void msdlScannerSpanishWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlScannerSpanishWaeHandler::asString () const
+std::string msdlScannerSpanishWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -626,20 +624,20 @@ string msdlScannerSpanishWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlScannerSpanishWaeHandler::print (ostream& os) const
+void msdlScannerSpanishWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlScannerSpanishWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlScannerSpanishWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlScannerSpanishWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -665,15 +663,15 @@ void msdlScannerDutchWaeHandler::illegalCharacter (char theChar) const
   gLogStream <<
     "### illegal character: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
-void msdlScannerDutchWaeHandler::illegalCharacters (const string& theString) const
+void msdlScannerDutchWaeHandler::illegalCharacters (const std::string& theString) const
 {
   gLogStream <<
     "### illegal characters: " <<
     "\"" << theString << "\" ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerDutchWaeHandler::digitExpectedAfterDecimalDot (char theChar) const
@@ -681,14 +679,14 @@ void msdlScannerDutchWaeHandler::digitExpectedAfterDecimalDot (char theChar) con
   gLogStream <<
     "### a digit is expected after decimal dot, found: " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 void msdlScannerDutchWaeHandler::digitExpectedInExponent (char theChar) const
 {
   gLogStream <<
     "### a digit is expected in exponent, found: " <<
     "'" << theChar << "' " <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerDutchWaeHandler::illegalEscapedCharacterInString (char theChar) const
@@ -696,7 +694,7 @@ void msdlScannerDutchWaeHandler::illegalEscapedCharacterInString (char theChar) 
   gLogStream <<
     "### illegal escaped character after '\': " <<
     "'" << theChar << "' ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerDutchWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) const
@@ -706,7 +704,7 @@ void msdlScannerDutchWaeHandler::inputIsLexicallyCorrect (int numberOfTokens) co
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
     " tokens" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerDutchWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens) const
@@ -716,7 +714,7 @@ void msdlScannerDutchWaeHandler::inputIsLexicallyIncorrect (int numberOfTokens) 
     mfSingularOrPlural (
       numberOfTokens, "token", "tokens") <<
     " ###" <<
-    endl;
+    std::endl;
 }
 
 void msdlScannerDutchWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
@@ -727,12 +725,12 @@ void msdlScannerDutchWaeHandler::inputIsAlreadyInMsdlKeywordsLanguage (
     "### The MSDL input is already in keywords language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
     "\", there is no need to translate it ###" <<
-    endl;
+    std::endl;
 }
 
-string msdlScannerDutchWaeHandler::asString () const
+std::string msdlScannerDutchWaeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDL lexical english WAE handler";
@@ -740,20 +738,20 @@ string msdlScannerDutchWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlScannerDutchWaeHandler::print (ostream& os) const
+void msdlScannerDutchWaeHandler::print (std::ostream& os) const
 {
   os <<
     "msdlScannerDutchWaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlScannerDutchWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlScannerDutchWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

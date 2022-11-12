@@ -14,8 +14,6 @@
 #include "mfOnOff.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -44,10 +42,10 @@ Bool mfOnOffKindAsBool (
   return result;
 }
 
-string mfOnOffKindAsString (
+std::string mfOnOffKindAsString (
   mfOnOffKind onOffKind)
 {
-  string result;
+  std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
@@ -66,7 +64,7 @@ string mfOnOffKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const mfOnOffKind elt)
+std::ostream& operator << (std::ostream& os, const mfOnOffKind elt)
 {
   os << mfOnOffKindAsString (elt);
   return os;

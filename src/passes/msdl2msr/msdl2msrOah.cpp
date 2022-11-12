@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -37,8 +37,6 @@
 
 #include "oahAtomsCollection.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -172,16 +170,16 @@ R"()",
   appendSubGroupToGroup (subGroup);
 
   if (! setMsdlQuarterTonesPitchesLanguage ("english")) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "INTERNAL INITIALIZATION ERROR: "
       "MSDR pitches default language 'english' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known MSDL pitches languages are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -213,14 +211,14 @@ R"(Use LANGUAGE to interact with the user.
 The NUMBER MSDL user languages available are:
 USER_LANGUAGES.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (gGlobalMsdlUserLanguageKindsMap.size ())),
-            regex ("USER_LANGUAGES"),
+              std::regex ("NUMBER"),
+              std::to_string (gGlobalMsdlUserLanguageKindsMap.size ())),
+            std::regex ("USER_LANGUAGES"),
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
             existingMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           msdlUserLanguageKindAsString (
             msdlUserLanguageKindDefaultValue)),
         "LANGUAGE",
@@ -247,14 +245,14 @@ R"(Use LANGUAGE to input note pitches.
 The NUMBER MSDL pitches languages available are:
 PITCHES_LANGUAGES.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
-            regex ("PITCHES_LANGUAGES"),
+              std::regex ("NUMBER"),
+              std::to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
+            std::regex ("PITCHES_LANGUAGES"),
 //           gIndenter.indentMultiLineString (
 //             foundString,
 //             os);
             existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
         "LANGUAGE",
@@ -281,14 +279,14 @@ R"(Use LANGUAGE to input keyword names.
 The NUMBER MSDL keywords input languages available are:
 KEYWORDS_LANGUAGES.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (gGlobalMsdlKeywordsLanguageKindsMap.size ())),
-            regex ("KEYWORDS_LANGUAGES"),
+              std::regex ("NUMBER"),
+              std::to_string (gGlobalMsdlKeywordsLanguageKindsMap.size ())),
+            std::regex ("KEYWORDS_LANGUAGES"),
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
             existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlKeywordsInputLanguageKindDefaultValue)),
         "LANGUAGE",
@@ -347,9 +345,9 @@ followed by a quit.
 The NUMBER MSDL keywords translation languages available are:
 KEYWORDS_LANGUAGES.
 The default is not to translate the keywords.)",
-            regex ("NUMBER"),
-            to_string (gGlobalMsdlKeywordsLanguageKindsMap.size ())),
-          regex ("KEYWORDS_LANGUAGES"),
+            std::regex ("NUMBER"),
+            std::to_string (gGlobalMsdlKeywordsLanguageKindsMap.size ())),
+          std::regex ("KEYWORDS_LANGUAGES"),
 //           gIndenter.indentMultiLineString (
 //             foundString,
 //             os);
@@ -378,14 +376,14 @@ R"(Use TYPE for the translated comments.
 The NUMBER MSDL comments types available are:
 COMMENTS_TYPES.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (gGlobalMsdlCommentsTypeKindsMap.size ())),
-            regex ("COMMENTS_TYPES"),
+              std::regex ("NUMBER"),
+              std::to_string (gGlobalMsdlCommentsTypeKindsMap.size ())),
+            std::regex ("COMMENTS_TYPES"),
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
             existingMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           msdlCommentsTypeKindAsString (
             msdlCommentsTypeKindDefaultValue)),
         "TYPE",
@@ -407,15 +405,15 @@ void msdl2msrOahGroup::initializeMsdl2msrGroup ()
 }
 
 //______________________________________________________________________________
-Bool msdl2msrOahGroup::setMsdlQuarterTonesPitchesLanguage (string language)
+Bool msdl2msrOahGroup::setMsdlQuarterTonesPitchesLanguage (std::string language)
 {
-  // is language in the pitches languages map?
-  map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  // is language in the pitches languages std::map?
+  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the map
+    // no, language is unknown in the std::map
     return false;
   }
 
@@ -445,7 +443,7 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2msrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -458,7 +456,7 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2msrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -471,7 +469,7 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2msrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -484,7 +482,7 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2msrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -497,7 +495,7 @@ void msdl2msrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2msrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -507,7 +505,7 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 {
   gLogStream <<
     "The msdl2msr options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -517,7 +515,7 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 
   gLogStream <<
     "Trace:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -526,31 +524,31 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 
   gLogStream <<
     "MSDL tokens and syntax:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fTraceTokens" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fTraceTokens" << " : " <<
       fTraceTokens <<
-      endl <<
-    setw (fieldWidth) << "fTraceTokensDetails" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fTraceTokensDetails" << " : " <<
       fTraceTokensDetails <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fTraceSyntax" << " : " <<
+    std::setw (fieldWidth) << "fTraceSyntax" << " : " <<
       fTraceSyntax <<
-      endl <<
-    setw (fieldWidth) << "fTraceSyntaxDetails" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fTraceSyntaxDetails" << " : " <<
       fTraceSyntaxDetails <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fTraceSyntaxErrorRecovery" << " : " <<
+    std::setw (fieldWidth) << "fTraceSyntaxErrorRecovery" << " : " <<
       fTraceSyntaxErrorRecovery <<
-      endl <<
-    setw (fieldWidth) << "fTraceSyntaxErrorRecoveryDetails" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fTraceSyntaxErrorRecoveryDetails" << " : " <<
       fTraceSyntaxErrorRecoveryDetails <<
-      endl;
+      std::endl;
 
   --gIndenter;
 #endif
@@ -558,24 +556,24 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
   // languages
   gLogStream <<
     "Languages:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fMsdlUserLanguageKind" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fMsdlUserLanguageKind" << " : " <<
       msdlUserLanguageKindAsString (
         fMsdlUserLanguageKind) <<
-      endl <<
-    setw (fieldWidth) << "fMsdlKeywordsInputLanguageKind" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fMsdlKeywordsInputLanguageKind" << " : " <<
       msdlKeywordsLanguageKindAsString (
         fMsdlKeywordsInputLanguageKind) <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fMsdlQuarterTonesPitchesLanguageKind" << " : " <<
+    std::setw (fieldWidth) << "fMsdlQuarterTonesPitchesLanguageKind" << " : " <<
       msrQuarterTonesPitchesLanguageKindAsString (
         fMsdlQuarterTonesPitchesLanguageKind) <<
-      endl;
+      std::endl;
 
   --gIndenter;
 
@@ -583,27 +581,27 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 
   gLogStream <<
     "Whole input scan:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fLexicalAnalysisOnly" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fLexicalAnalysisOnly" << " : " <<
       fLexicalAnalysisOnly <<
-      endl <<
-    setw (fieldWidth) << "fIgnoreSeparatorTokens" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fIgnoreSeparatorTokens" << " : " <<
       fIgnoreSeparatorTokens <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fMsdlKeywordsConversionLanguageKind" << " : " <<
+    std::setw (fieldWidth) << "fMsdlKeywordsConversionLanguageKind" << " : " <<
       msdlKeywordsLanguageKindAsString (
         fMsdlKeywordsConversionLanguageKind) <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fMsdlCommentsTypeKind" << " : " <<
+    std::setw (fieldWidth) << "fMsdlCommentsTypeKind" << " : " <<
       msdlCommentsTypeKindAsString (
         fMsdlCommentsTypeKind) <<
-      endl;
+      std::endl;
 
   --gIndenter;
 
@@ -611,14 +609,14 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 
   gLogStream <<
     "Quit:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fQuitOnLexicalErrors" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fQuitOnLexicalErrors" << " : " <<
       fQuitOnLexicalErrors <<
-      endl;
+      std::endl;
 
   --gIndenter;
 
@@ -626,13 +624,13 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msdl2msrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msdl2msrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -645,7 +643,7 @@ S_msdl2msrOahGroup createGlobalMsdl2msrOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdl2msr OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

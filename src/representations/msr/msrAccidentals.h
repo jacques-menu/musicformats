@@ -16,8 +16,6 @@
 #include <ostream>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -50,12 +48,12 @@ enum class msrAccidentalKind {
   kAccidentalOther
 };
 
-string msrAccidentalKindAsString (
+std::string msrAccidentalKindAsString (
   msrAccidentalKind accidentalKind);
 
-ostream& operator << (ostream& os, const msrAccidentalKind& elt);
+std::ostream& operator << (std::ostream& os, const msrAccidentalKind& elt);
 
-string msrAccidentalKindAsMusicXMLString (
+std::string msrAccidentalKindAsMusicXMLString (
   msrAccidentalKind accidentalKind);
 
 // editorial accidentals
@@ -65,10 +63,10 @@ enum class msrEditorialAccidentalKind {
   kEditorialAccidentalYes, kEditorialAccidentalNo
 };
 
-string msrEditorialAccidentalKindAsString (
+std::string msrEditorialAccidentalKindAsString (
   msrEditorialAccidentalKind noteEditorialAccidentalKind);
 
-ostream& operator << (ostream& os, const msrEditorialAccidentalKind& elt);
+std::ostream& operator << (std::ostream& os, const msrEditorialAccidentalKind& elt);
 
 // cautionary accidentals
 //______________________________________________________________________________
@@ -77,10 +75,10 @@ enum class msrCautionaryAccidentalKind {
   kCautionaryAccidentalYes, kCautionaryAccidentalNo
 };
 
-string msrCautionaryAccidentalKindAsString (
+std::string msrCautionaryAccidentalKindAsString (
   msrCautionaryAccidentalKind noteCautionaryAccidentalKind);
 
-ostream& operator << (ostream& os, const msrCautionaryAccidentalKind& elt);
+std::ostream& operator << (std::ostream& os, const msrCautionaryAccidentalKind& elt);
 
 
 }

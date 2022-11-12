@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
 #include "visitor.h"
@@ -27,8 +27,6 @@
 
 #include "displayOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -177,7 +175,7 @@ void displayOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       "% ==> displayOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -190,7 +188,7 @@ void displayOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             "% ==> Launching displayOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -203,7 +201,7 @@ void displayOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       "% ==> displayOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -216,7 +214,7 @@ void displayOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             "% ==> Launching displayOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -229,44 +227,44 @@ void displayOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       "% ==> displayOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
 void displayOahGroup::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << " : " <<
+  os << std::left <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << " : " <<
     fDisplayOptionsAndArguments <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplayEarlyOptionsValues" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplayEarlyOptionsValues" << " : " <<
     fDisplayEarlyOptionsValues <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplayOptionsValues" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValues" << " : " <<
     fDisplayOptionsValues <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << " : " <<
     fDisplayOptionsValuesAll <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplayOahHandler" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandler" << " : " <<
     fDisplayOahHandler <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplayOahHandlerSummary" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandlerSummary" << " : " <<
     fDisplayOahHandlerSummary <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplayOahHandlerEssentials" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandlerEssentials" << " : " <<
     fDisplayOahHandlerEssentials <<
-    endl <<
+    std::endl <<
 
     // CPU usage
-    setw (valueFieldWidth) << "fDisplayCPUusage" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayCPUusage" << " : " <<
     fDisplayCPUusage <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
@@ -276,61 +274,61 @@ void displayOahGroup::printDisplayOptionsValues (int valueFieldWidth)
 {
   gLogStream <<
     "The basic options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // options and help display
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "Display:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "Display:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << " : " <<
     fDisplayOptionsAndArguments <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplayEarlyOptionsValues" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplayEarlyOptionsValues" << " : " <<
     fDisplayEarlyOptionsValues <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplayOptionsValues" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValues" << " : " <<
     fDisplayOptionsValues <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << " : " <<
     fDisplayOptionsValuesAll <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplayOahHandler" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandler" << " : " <<
     fDisplayOahHandler <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplayOahHandlerSummary" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandlerSummary" << " : " <<
     fDisplayOahHandlerSummary <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplayOahHandlerEssentials" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandlerEssentials" << " : " <<
     fDisplayOahHandlerEssentials <<
-    endl <<
+    std::endl <<
 
     // CPU usage
-    setw (valueFieldWidth) << "fDisplayCPUusage" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayCPUusage" << " : " <<
     fDisplayCPUusage <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_displayOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_displayOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -343,7 +341,7 @@ S_displayOahGroup createGlobalDisplayOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global global OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

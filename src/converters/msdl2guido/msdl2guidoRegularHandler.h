@@ -32,8 +32,8 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<msdl2guidoRegularHandler> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_msdl2guidoInsiderHandler
                                               insiderOahHandler);
 
@@ -43,8 +43,8 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           msdl2guidoRegularHandler (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_msdl2guidoInsiderHandler
                                               insiderOahHandler);
 
@@ -57,7 +57,7 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override
+    std::string           fetchOutputFileNameFromTheOptions () const override
                               {
                                 return
                                   fInsiderHandler->
@@ -88,7 +88,7 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -156,7 +156,7 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdl2guidoRegularHandler> S_msdl2guidoRegularHandler;
-EXP ostream& operator << (ostream& os, const S_msdl2guidoRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2guidoRegularHandler& elt);
 
 
 }

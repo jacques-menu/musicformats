@@ -44,8 +44,6 @@
 
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
@@ -53,14 +51,14 @@ S_lpsrScore translateMsrToLpsr (
   S_msrScore          originalMsrScore,
   S_msrOahGroup       msrOpts,
   S_lpsrOahGroup      lpsrOpts,
-  string              passNumber,
-  string              passDescription,
+  std::string              passNumber,
+  std::string              passDescription,
   S_mfcMultiComponent multiComponent)
 {
   if (gGlobalLpsr2lilypondOahGroup->getNoLilypondCode ()) {
     gLogStream <<
       "Option '-nolpc, -no-lilypond-code' is set, no LPSR is created" <<
-      endl;
+      std::endl;
 
     return nullptr;
   }
@@ -76,18 +74,18 @@ S_lpsrScore translateMsrToLpsr (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -114,7 +112,7 @@ S_lpsrScore translateMsrToLpsr (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "gIndenter value after pass 3: " <<
@@ -130,12 +128,12 @@ S_lpsrScore translateMsrToLpsr (
   }
 
   if (! resultingLpsr && ! gGlobalLpsr2lilypondOahGroup->getNoLilypondCode ()) {
-    string message =
+    std::string message =
       "### Conversion from MSR to LPSR failed ###";
 
     gLogStream <<
       message <<
-      endl;
+      std::endl;
 
     throw msr2lpsrException (message);
   }
@@ -146,7 +144,7 @@ S_lpsrScore translateMsrToLpsr (
       "### translateMsrToLpsrScore gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }

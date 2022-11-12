@@ -41,8 +41,6 @@
 
 #include "msr2bsrTranslator.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
@@ -50,8 +48,8 @@ S_bsrScore translateMsrToBsr (
   S_msrScore    originalMsrScore,
   S_msrOahGroup msrOpts,
   S_bsrOahGroup bsrOpts,
-  const string& passNumber,
-  const string& passDescription)
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -64,18 +62,18 @@ S_bsrScore translateMsrToBsr (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -101,7 +99,7 @@ S_bsrScore translateMsrToBsr (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "gIndenter value after pass 3a: " <<
@@ -117,12 +115,12 @@ S_bsrScore translateMsrToBsr (
   }
 
   if (! resultingBsr) {
-    string message =
+    std::string message =
       "### Conversion from MSR to BSR failed ###";
 
     gLogStream <<
       message <<
-      endl;
+      std::endl;
 
     throw msr2bsrException (message);
   }
@@ -133,7 +131,7 @@ S_bsrScore translateMsrToBsr (
       "### translateMsrToBsr gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }

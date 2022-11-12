@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <cmath>
 #include <string>
 
@@ -23,15 +23,13 @@
 
 #include "oahOah.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //________________________________________________________________________
 oah2manPage::oah2manPage (
   const S_oahHandler handler,
-  ostream&           manPageOutputStream)
+  std::ostream&           manPageOutputStream)
     : oahVisitor (
         handler),
       fManPageOutputStream (

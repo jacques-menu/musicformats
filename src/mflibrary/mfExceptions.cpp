@@ -16,25 +16,23 @@
 #include "enebleCaughtExceptionsDisplay.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-EXP void mfDisplayException (exception& e, ostream& os)
+EXP void mfDisplayException (std::exception& e, std::ostream& os)
 {
 #ifdef CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
   os <<
-    "Exception caught: " <<
+    "std::exception caught: " <<
     e.what () <<
-    endl;
+    std::endl;
 #endif
 }
 
 //______________________________________________________________________________
 mfException::mfException (
-  string const& exceptionDescription,
+  std::string const& exceptionDescription,
   int           exceptionNumber,
   int           exceptionLevel) throw ()
   : fExceptionDescription (
@@ -49,12 +47,12 @@ mfException::~mfException () throw ()
 
 //______________________________________________________________________________
 mfAssertException::mfAssertException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_mfAssertException mfAssertException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   mfAssertException* o = new
     mfAssertException (

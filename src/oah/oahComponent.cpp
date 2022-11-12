@@ -13,8 +13,6 @@
 #include "oahComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -30,7 +28,7 @@ S_mfcOahComponent createOahComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the OAH component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -45,7 +43,7 @@ S_mfcOahComponent createOahComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.65"),
           "August 16, 2022",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering",
             "Finalized option '-find' handling"
           }
@@ -56,7 +54,7 @@ S_mfcOahComponent createOahComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "October 4, 2022",
-          list<string> {
+          std::list<std::string> {
             "Added oahElementValueKind::kElementValueUnknown to fix an initialization issue"
           }
       ));

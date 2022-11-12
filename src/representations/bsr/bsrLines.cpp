@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -31,8 +31,6 @@
 
 #include "bsrBrowsers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -72,7 +70,7 @@ bsrLine::bsrLine (
       asString () <<
       "', line " <<
       fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -87,7 +85,7 @@ S_bsrLine bsrLine::createLineNewbornClone ()
     gLogStream <<
       "Creating a newborn clone of line " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -127,7 +125,7 @@ void bsrLine::appendLineElementToLine (S_bsrLineContentsElement lineElement)
         break;
     } // switch
 
-    // append it to the line contents list
+    // append it to the line contents std::list
     fLineContentsList.push_back (lineContentsToAppendTo);
   }
   else {
@@ -138,7 +136,7 @@ void bsrLine::appendLineElementToLine (S_bsrLineContentsElement lineElement)
   }
 
   if (fASpaceIsNeededInLine) {
-    // append a space to the line elements list // JMI appendSpacesToLine ???
+    // append a space to the line elements std::list // JMI appendSpacesToLine ???
     lineContentsToAppendTo->
       appendLineElementToLineContents (
         bsrSpaces::create (
@@ -164,7 +162,7 @@ void bsrLine::insertElementBeforeLastElementOfLine (
         lineElement->getInputLineNumber (),
         bsrLineContentsKind::kLineContentsRegular);
 
-    // append it to the line contents list
+    // append it to the line contents std::list
     fLineContentsList.push_back (lineContentsToAppendTo);
   }
   else {
@@ -185,7 +183,7 @@ void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
       "' to line '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -201,7 +199,7 @@ void bsrLine::appendKeyToLine (S_bsrKey key)
       key->asShortString () <<
       "' to line '" <<
       asString () <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -219,7 +217,7 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
       "' to line '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -237,7 +235,7 @@ void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignatur
       "' before the last element of line '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -254,7 +252,7 @@ void bsrLine::appendTempoToLine (S_bsrTempo tempo)
       tempo->asShortString () <<
       " to BSR line " <<
       asString () <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -272,7 +270,7 @@ void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
       "' to line '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -303,7 +301,7 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
         break;
     } // switch
 
-    // append it to the line contents list
+    // append it to the line contents std::list
     fLineContentsList.push_back (lineContentsToAppendTo);
   }
   else {
@@ -314,7 +312,7 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
   }
 
   if (fASpaceIsNeededInLine) {
-    // append a space to the line elements list // JMI appendSpacesToLine ???
+    // append a space to the line elements std::list // JMI appendSpacesToLine ???
     lineContentsToAppendTo->
       appendLineElementToLineContents (
         bsrSpaces::create (
@@ -337,7 +335,7 @@ void bsrLine::appendNoteToLine (S_bsrNote note)
       "' to line '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -390,7 +388,7 @@ int bsrLine::fetchCellsNumber () const
   int result = 0;
 
   for (
-    list<S_bsrLineContents>::const_iterator i = fLineContentsList.begin ();
+    std::list<S_bsrLineContents>::const_iterator i = fLineContentsList.begin ();
     i != fLineContentsList.end ();
     ++i ) {
     result += (*i)->fetchCellsNumber ();
@@ -405,7 +403,7 @@ void bsrLine::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrLine::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -418,7 +416,7 @@ void bsrLine::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrLine::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -431,7 +429,7 @@ void bsrLine::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrLine::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -444,7 +442,7 @@ void bsrLine::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrLine::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -454,7 +452,7 @@ void bsrLine::acceptOut (basevisitor* v)
 void bsrLine::browseData (basevisitor* v)
 {
   for (
-    list<S_bsrLineContents>::const_iterator i = fLineContentsList.begin ();
+    std::list<S_bsrLineContents>::const_iterator i = fLineContentsList.begin ();
     i != fLineContentsList.end ();
     ++i ) {
     // browse the element
@@ -463,9 +461,9 @@ void bsrLine::browseData (basevisitor* v)
   } // for
 }
 
-string bsrLine::asString () const
+std::string bsrLine::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Line" <<
@@ -479,9 +477,9 @@ string bsrLine::asString () const
   return s.str ();
 }
 
-string bsrLine::asDebugString () const
+std::string bsrLine::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "L" <<
@@ -494,7 +492,7 @@ string bsrLine::asDebugString () const
   return s.str ();
 }
 
-void bsrLine::print (ostream& os) const
+void bsrLine::print (std::ostream& os) const
 {
   size_t lineContentsListSize = fLineContentsList.size ();
 
@@ -504,53 +502,53 @@ void bsrLine::print (ostream& os) const
     ", " <<
     mfSingularOrPlural (
       lineContentsListSize, "lineContent", "lineContents") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // print the line numbers
   const int fieldWidth = 20;
 
-  os << left <<
+  os << std::left <<
   /* JMI
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "printLineNumber" << " : " << fPrintLineNumber <<
-    endl <<
+    std::endl <<
     */
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "brailleLineNumber" << " : " << fBrailleLineNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "cellsPerLine" << " : " << fCellsPerLine <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "lineNumberCellsList" << " : " << buildLineNumberCellsList () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "cellsNumber" << " : " << fetchCellsNumber () <<
-    endl;
-  os << endl;
+    std::endl;
+  os << std::endl;
 
   // print the line contents if any
   if (lineContentsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
-//      setw (fieldWidth) <<
+//      std::setw (fieldWidth) <<
       "LineContentsList" <<
       ", " <<
       mfSingularOrPlural (
         lineContentsListSize, "lineContent", "lineContents");
     if (lineContentsListSize) {
-      os << endl;
+      os << std::endl;
       ++gIndenter;
 
-      list<S_bsrLineContents>::const_iterator
+      std::list<S_bsrLineContents>::const_iterator
         iBegin = fLineContentsList.begin (),
         iEnd   = fLineContentsList.end (),
         i      = iBegin;
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        os << endl;
+        os << std::endl;
       } // for
 
       --gIndenter;
@@ -558,20 +556,20 @@ void bsrLine::print (ostream& os) const
     else {
       os <<
         " : " << "[EMPTY]" <<
-      endl;
+      std::endl;
     }
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrLine& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrLine& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

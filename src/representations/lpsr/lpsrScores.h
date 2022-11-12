@@ -74,11 +74,11 @@ class EXP lpsrScore : public lpsrElement
     S_lpsrLayout          getScoreLayout () const
                               { return fScoreLayout; }
 
-    const list<S_msrElement>&
+    const std::list<S_msrElement>&
                           getScoreElementsList () const
                               { return fScoreElementsList; }
 
-    const list<S_lpsrBookBlock>&
+    const std::list<S_lpsrBookBlock>&
                           getScoreBookBlocksList () const
                               { return fScoreBookBlocksList; }
 
@@ -420,11 +420,11 @@ class EXP lpsrScore : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override
+    void                  print (std::ostream& os) const override
                               { printShort (os); }
 
-    void                  printShort (ostream& os) const override;
-    void                  printFull (ostream& os) const;
+    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const;
 
   private:
 
@@ -454,10 +454,10 @@ class EXP lpsrScore : public lpsrElement
     S_lpsrLayout          fScoreLayout;
 
     // variables, voices and stanzas
-    list<S_msrElement>    fScoreElementsList;
+    std::list<S_msrElement>    fScoreElementsList;
 
-    // score LPSR book blocks list
-    list<S_lpsrBookBlock> fScoreBookBlocksList;
+    // score LPSR book blocks std::list
+    std::list<S_lpsrBookBlock> fScoreBookBlocksList;
     S_lpsrScoreBlock      fScoreScoreBlock; // JMI ???
 
     // files includes
@@ -529,12 +529,12 @@ class EXP lpsrScore : public lpsrElement
     // private work fields
     // ------------------------------------------------------
 
-    // the Scheme functions map
-    map<string, S_lpsrSchemeFunction>
+    // the Scheme functions std::map
+    std::map<std::string, S_lpsrSchemeFunction>
                           fScoreSchemeFunctionsMap;
 };
 typedef SMARTP<lpsrScore> S_lpsrScore;
-EXP ostream& operator << (ostream& os, const S_lpsrScore& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrScore& elt);
 
 
 }

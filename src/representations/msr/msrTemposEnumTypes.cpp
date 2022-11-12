@@ -12,16 +12,14 @@
 #include "msrTemposEnumTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrTempoBeatUnitsKindAsString (
+std::string msrTempoBeatUnitsKindAsString (
   msrTempoKBeatUnitsKind tempoKind)
 {
-  string result;
+  std::string result;
 
   switch (tempoKind) {
     case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
@@ -44,16 +42,16 @@ string msrTempoBeatUnitsKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTempoKBeatUnitsKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTempoKBeatUnitsKind& elt)
 {
   os << msrTempoBeatUnitsKindAsString (elt);
   return os;
 }
 
-string msrTempoParenthesizedKindAsString (
+std::string msrTempoParenthesizedKindAsString (
   msrTempoParenthesizedKind tempoParenthesizedKind)
 {
-  string result;
+  std::string result;
 
   switch (tempoParenthesizedKind) {
     case msrTempoParenthesizedKind::kTempoParenthesizedYes:
@@ -67,16 +65,16 @@ string msrTempoParenthesizedKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTempoParenthesizedKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTempoParenthesizedKind& elt)
 {
   os << msrTempoParenthesizedKindAsString (elt);
   return os;
 }
 
-string msrTempoNotesRelationshipKindAsString (
+std::string msrTempoNotesRelationshipKindAsString (
   msrTempoNotesRelationshipKind tempoNotesRelationshipKind)
 {
-  string result;
+  std::string result;
 
   switch (tempoNotesRelationshipKind) {
     case msrTempoNotesRelationshipKind::kTempoNotesRelationshipEquals:
@@ -90,7 +88,7 @@ string msrTempoNotesRelationshipKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTempoNotesRelationshipKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTempoNotesRelationshipKind& elt)
 {
   os << msrTempoNotesRelationshipKindAsString (elt);
   return os;

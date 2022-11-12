@@ -17,16 +17,14 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 void musicxml2mxsrWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeWarning (
     "musicxml2mxsr",
@@ -36,11 +34,11 @@ void musicxml2mxsrWarning (
 }
 
 void musicxml2mxsrError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeError (
     "musicxml2mxsr",
@@ -61,11 +59,11 @@ void musicxml2mxsrError (
 }
 
 void musicxml2mxsrInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeInternalError (
     "musicxml2mxsr",

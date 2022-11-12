@@ -61,9 +61,9 @@ class EXP outputFileOahGroup : public oahGroup
     S_oahBooleanAtom      getAutoOutputFileNameAtom () const
                               { return fAutoOutputFileNameAtom; }
 
-    void                  setOutputFileName (string value)
+    void                  setOutputFileName (std::string value)
                               { fOutputFileName = value; }
-    string                getOutputFileName () const
+    std::string           getOutputFileName () const
                               { return fOutputFileName; }
     S_oahStringAtom       getOutputFileNameStringAtom () const
                               { return fOutputFileNameStringAtom; }
@@ -115,11 +115,11 @@ class EXP outputFileOahGroup : public oahGroup
     S_oahBooleanAtom      fAutoOutputFileNameAtom;
     Bool                  fAutoOutputFileName;
 
-    string                fOutputFileName;
+    std::string           fOutputFileName;
     S_oahStringAtom       fOutputFileNameStringAtom;
 };
 typedef SMARTP<outputFileOahGroup> S_outputFileOahGroup;
-EXP ostream& operator << (ostream& os, const S_outputFileOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_outputFileOahGroup& elt);
 
 EXP extern S_outputFileOahGroup gGlobalOutputFileOahGroup;
 

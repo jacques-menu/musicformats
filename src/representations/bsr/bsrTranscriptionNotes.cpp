@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip> // for 'setw()'
+#include <iomanip> // for 'std::setw()'
 
 #include "visitor.h"
 
@@ -24,15 +24,13 @@
 #include "bsrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_bsrTranscriptionNotesElement bsrTranscriptionNotesElement::create (
   int           inputLineNumber,
-  const string& transcriptionNoteText)
+  const std::string& transcriptionNoteText)
 {
   bsrTranscriptionNotesElement* o =
     new bsrTranscriptionNotesElement (
@@ -43,7 +41,7 @@ S_bsrTranscriptionNotesElement bsrTranscriptionNotesElement::create (
 
 bsrTranscriptionNotesElement::bsrTranscriptionNotesElement (
   int           inputLineNumber,
-  const string& transcriptionNoteText)
+  const std::string& transcriptionNoteText)
     : bsrElement (inputLineNumber)
 {
   fTranscriptionNoteText = transcriptionNoteText;
@@ -67,7 +65,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTranscriptionNotesElement::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -80,7 +78,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTranscriptionNotesElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -93,7 +91,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTranscriptionNotesElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -106,7 +104,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTranscriptionNotesElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -116,9 +114,9 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
 void bsrTranscriptionNotesElement::browseData (basevisitor* v)
 {}
 
-string bsrTranscriptionNotesElement::asString () const
+std::string bsrTranscriptionNotesElement::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "TranscriptionNotesElement" <<
@@ -129,29 +127,29 @@ string bsrTranscriptionNotesElement::asString () const
   return s.str ();
 }
 
-void bsrTranscriptionNotesElement::print (ostream& os) const
+void bsrTranscriptionNotesElement::print (std::ostream& os) const
 {
   os <<
     "TranscriptionNotesElement" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   os <<
     "transcriptionNoteText " << " : \"" << fTranscriptionNoteText << "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrTranscriptionNotesElement& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotesElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -185,7 +183,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTranscriptionNotes::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -198,7 +196,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTranscriptionNotes::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -211,7 +209,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTranscriptionNotes::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -224,7 +222,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTranscriptionNotes::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -234,7 +232,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
 void bsrTranscriptionNotes::browseData (basevisitor* v)
 {
   for (
-    list<S_bsrTranscriptionNotesElement>::const_iterator i =
+    std::list<S_bsrTranscriptionNotesElement>::const_iterator i =
       fTranscriptionNotesElementsList.begin ();
     i != fTranscriptionNotesElementsList.end ();
     ++i ) {
@@ -244,11 +242,11 @@ void bsrTranscriptionNotes::browseData (basevisitor* v)
   } // for
 }
 
-void bsrTranscriptionNotes::print (ostream& os) const
+void bsrTranscriptionNotes::print (std::ostream& os) const
 {
   os <<
     "TranscriptionNotes" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -260,44 +258,44 @@ void bsrTranscriptionNotes::print (ostream& os) const
 
   if (transcriptionNotesElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "transcriptionNotesElementsList" << " : " <<
-      endl;
+      std::endl;
 
     if (transcriptionNotesElementsListSize) {
       ++gIndenter;
 
-      list<S_bsrTranscriptionNotesElement>::const_iterator
+      std::list<S_bsrTranscriptionNotesElement>::const_iterator
         iBegin = fTranscriptionNotesElementsList.begin (),
         iEnd   = fTranscriptionNotesElementsList.end (),
         i      = iBegin;
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        os << endl;
+        os << std::endl;
       } // for
 
-      os << endl;
+      os << std::endl;
 
       --gIndenter;
     }
     else {
       os <<
         "[EMPTY]" <<
-      endl;
+      std::endl;
     }
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrTranscriptionNotes& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotes& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

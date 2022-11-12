@@ -12,17 +12,15 @@
 #include "msrAccidentals.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // accidentals
 //______________________________________________________________________________
-string msrAccidentalKindAsString (
+std::string msrAccidentalKindAsString (
   msrAccidentalKind accidentalKind)
 {
-  string result;
+  std::string result;
 
   switch (accidentalKind) {
     case msrAccidentalKind::kAccidentalNone:
@@ -141,16 +139,16 @@ string msrAccidentalKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrAccidentalKind& elt)
+std::ostream& operator << (std::ostream& os, const msrAccidentalKind& elt)
 {
   os <<msrAccidentalKindAsString (elt);
   return os;
 }
 
-string msrAccidentalKindAsMusicXMLString (
+std::string msrAccidentalKindAsMusicXMLString (
   msrAccidentalKind accidentalKind)
 {
-  string result;
+  std::string result;
 
   switch (accidentalKind) {
     case msrAccidentalKind::kAccidentalNone:
@@ -271,10 +269,10 @@ string msrAccidentalKindAsMusicXMLString (
 // editorial accidentals
 //______________________________________________________________________________
 
-string msrEditorialAccidentalKindAsString (
+std::string msrEditorialAccidentalKindAsString (
   msrEditorialAccidentalKind noteEditorialAccidentalKind)
 {
-  string result;
+  std::string result;
 
   switch (noteEditorialAccidentalKind) {
     case msrEditorialAccidentalKind::kEditorialAccidentalYes:
@@ -288,7 +286,7 @@ string msrEditorialAccidentalKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrEditorialAccidentalKind& elt)
+std::ostream& operator << (std::ostream& os, const msrEditorialAccidentalKind& elt)
 {
   os <<msrEditorialAccidentalKindAsString (elt);
   return os;
@@ -297,10 +295,10 @@ ostream& operator << (ostream& os, const msrEditorialAccidentalKind& elt)
 // cautionary accidentals
 //______________________________________________________________________________
 
-string msrCautionaryAccidentalKindAsString (
+std::string msrCautionaryAccidentalKindAsString (
   msrCautionaryAccidentalKind noteCautionaryAccidentalKind)
 {
-  string result;
+  std::string result;
 
   switch (noteCautionaryAccidentalKind) {
     case msrCautionaryAccidentalKind::kCautionaryAccidentalYes:
@@ -314,7 +312,7 @@ string msrCautionaryAccidentalKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrCautionaryAccidentalKind& elt)
+std::ostream& operator << (std::ostream& os, const msrCautionaryAccidentalKind& elt)
 {
   os <<msrCautionaryAccidentalKindAsString (elt);
   return os;

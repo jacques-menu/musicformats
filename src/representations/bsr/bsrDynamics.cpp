@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <iostream>
 #include <sstream>
 
@@ -21,8 +21,6 @@
 
 #include "bsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -238,7 +236,7 @@ void bsrDynamic::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrDynamic::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -251,7 +249,7 @@ void bsrDynamic::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrDynamic::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -264,7 +262,7 @@ void bsrDynamic::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrDynamic::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -277,7 +275,7 @@ void bsrDynamic::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrDynamic::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -287,9 +285,9 @@ void bsrDynamic::acceptOut (basevisitor* v)
 void bsrDynamic::browseData (basevisitor* v)
 {}
 
-string bsrDynamic::asString () const
+std::string bsrDynamic::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Dynamics" <<
@@ -303,9 +301,9 @@ string bsrDynamic::asString () const
   return s.str ();
 }
 
-string bsrDynamic::asDebugString () const
+std::string bsrDynamic::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Dyn" <<
@@ -319,40 +317,40 @@ string bsrDynamic::asDebugString () const
   return s.str ();
 }
 
-void bsrDynamic::print (ostream& os) const
+void bsrDynamic::print (std::ostream& os) const
 {
   os <<
     "Dynamics" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 23;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "dynamicKind" << " : " <<
     msrDynamicKindAsString (fDynamicKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "noteCellsList" << " : " <<
     fDynamicsCellsList->asShortString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "spacesBefore" << " : " << fSpacesBefore <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrDynamic& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrDynamic& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

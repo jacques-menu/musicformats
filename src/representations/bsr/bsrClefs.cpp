@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <iostream>
 #include <sstream>
 
@@ -26,8 +26,6 @@
 
 #include "bsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -60,7 +58,7 @@ bsrClef::bsrClef (
       asString () <<
       "', line " <<
       fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -161,7 +159,7 @@ void bsrClef::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrClef::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -174,7 +172,7 @@ void bsrClef::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrClef::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -187,7 +185,7 @@ void bsrClef::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrClef::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -200,7 +198,7 @@ void bsrClef::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrClef::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -211,10 +209,10 @@ void bsrClef::browseData (basevisitor* v)
 {}
 
 
-string bsrClefKindAsString (
+std::string bsrClefKindAsString (
   bsrClefKind clefKind)
 {
-  string result;
+  std::string result;
 
   switch (clefKind) {
     case bsrClefKind::kClefKindNone:
@@ -255,10 +253,10 @@ string bsrClefKindAsString (
   return result;
 }
 
-string bsrClefKindAsDebugString (
+std::string bsrClefKindAsDebugString (
   bsrClefKind clefKind)
 {
-  string result;
+  std::string result;
 
   switch (clefKind) {
     case bsrClefKind::kClefKindNone:
@@ -299,15 +297,15 @@ string bsrClefKindAsDebugString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrClefKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrClefKind& elt)
 {
   os << bsrClefKindAsString (elt);
   return os;
 }
 
-string bsrClef::asString () const
+std::string bsrClef::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Clef" <<
@@ -320,9 +318,9 @@ string bsrClef::asString () const
   return s.str ();
 }
 
-string bsrClef::asDebugString () const
+std::string bsrClef::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "CLEF " <<
@@ -332,38 +330,38 @@ string bsrClef::asDebugString () const
   return s.str ();
 }
 
-void bsrClef::print (ostream& os) const
+void bsrClef::print (std::ostream& os) const
 {
   os <<
     "Clef" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 16;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fClefKind" << " : " << fClefKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fClefCellsList" << " : " << fClefCellsList <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSpacesBefore" << " : " << fSpacesBefore <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrClef& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrClef& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

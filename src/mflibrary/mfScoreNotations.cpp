@@ -15,16 +15,14 @@
 #include "mfScoreNotations.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrScoreNotationKindAsString (
+std::string msrScoreNotationKindAsString (
   msrScoreNotationKind lilypondScoreNotationKind)
 {
-  string result;
+  std::string result;
 
   switch (lilypondScoreNotationKind) {
     case msrScoreNotationKind::kScoreNotationWestern:
@@ -39,7 +37,7 @@ string msrScoreNotationKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrScoreNotationKind& elt)
+std::ostream& operator << (std::ostream& os, const msrScoreNotationKind& elt)
 {
   os << msrScoreNotationKindAsString (elt);
   return os;

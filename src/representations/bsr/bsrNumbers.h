@@ -16,10 +16,10 @@ enum class bsrNumberSignIsNeededKind {
   kNumberSignIsNeededYes, kNumberSignIsNeededNo
 };
 
-string bsrNumberSignIsNeededKindAsString (
+std::string bsrNumberSignIsNeededKindAsString (
   bsrNumberSignIsNeededKind numberSignIsNeededKind);
 
-ostream& operator << (ostream& os, const bsrNumberSignIsNeededKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrNumberSignIsNeededKind& elt);
 
 class EXP bsrNumber : public bsrLineContentsElement
 {
@@ -102,11 +102,11 @@ class EXP bsrNumber : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -121,7 +121,7 @@ class EXP bsrNumber : public bsrLineContentsElement
     S_bsrCellsList        fNumberCellsList;
 };
 typedef SMARTP<bsrNumber> S_bsrNumber;
-EXP ostream& operator << (ostream& os, const S_bsrNumber& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrNumber& elt);
 
 
 }

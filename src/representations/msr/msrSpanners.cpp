@@ -17,23 +17,21 @@
 
 #include "msrSpanners.h"
 
-#include "msrNotes.h"
+// #include "msrNotes.h"
 
 #include "oahOah.h"
 
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrSpannerTypeKindAsString (
+std::string msrSpannerTypeKindAsString (
   msrSpannerTypeKind spannerTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (spannerTypeKind) {
     case msrSpannerTypeKind::kSpannerType_NO_:
@@ -53,7 +51,7 @@ string msrSpannerTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrSpannerTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSpannerTypeKind& elt)
 {
   os << msrSpannerTypeKindAsString (elt);
   return os;
@@ -125,7 +123,7 @@ void msrSpanner::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSpanner::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSpanner>*
@@ -136,7 +134,7 @@ void msrSpanner::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSpanner::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -147,7 +145,7 @@ void msrSpanner::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSpanner::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSpanner>*
@@ -158,7 +156,7 @@ void msrSpanner::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSpanner::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -167,10 +165,10 @@ void msrSpanner::acceptOut (basevisitor* v)
 void msrSpanner::browseData (basevisitor* v)
 {}
 
-string msrSpannerKindAsString (
+std::string msrSpannerKindAsString (
   msrSpannerKind spannerKind)
 {
-  string result;
+  std::string result;
 
   switch (spannerKind) {
     case msrSpannerKind::kSpannerDashes:
@@ -184,15 +182,15 @@ string msrSpannerKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrSpannerKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSpannerKind& elt)
 {
   os << msrSpannerKindAsString (elt);
   return os;
 }
 
-string msrSpanner::asShortString () const
+std::string msrSpanner::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Spanner" <<
@@ -206,78 +204,78 @@ string msrSpanner::asShortString () const
   return s.str ();
 }
 
-void msrSpanner::print (ostream& os) const
+void msrSpanner::print (std::ostream& os) const
 {
   os <<
     "[Spanner" <<
     ", fSpannerNumber = " << fSpannerNumber <<
     ", fSpannerKind: " << fSpannerKind <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 24;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fSpannerPlacementKind" << " : " << fSpannerPlacementKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSpannerTypeKind" << " : " << fSpannerTypeKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSpannerUpLinkToNote" << " : " << fSpannerUpLinkToNote->asShortString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSpannerBeginText" << " : \"" << fSpannerBeginText <<
     "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSpannerMiddleText" << " : \"" << fSpannerMiddleText <<
     "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSpannerEndText" << " : \"" << fSpannerEndText <<
     "\"" <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fSpannerUpLinkToNote" << " : " << // JMI v0.9.66
-    endl;
+    std::endl;
   ++gIndenter;
     os <<
       fSpannerUpLinkToNote->asString () <<
-      endl;
+      std::endl;
   --gIndenter;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fSpannerSideLinkToOtherEnd";
   if (fSpannerSideLinkToOtherEnd) {
     os <<
-      endl <<
+      std::endl <<
       fSpannerSideLinkToOtherEnd->asShortString ();
   }
   else {
     os <<
     " : " << "[NONE]" <<
-    endl;
+    std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSpanner& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSpanner& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

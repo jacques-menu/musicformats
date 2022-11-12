@@ -87,14 +87,14 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
-      endl <<
+      std::endl <<
       "% --> generating code for noteRegularInMeasure " <<
       note->asString () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
 
     gLogStream          << s.str ();
     fLilypondCodeStream << s.str ();

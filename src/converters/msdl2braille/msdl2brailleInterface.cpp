@@ -10,8 +10,8 @@
 */
 
 #include <iostream>
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
-                        // ifstream, ifstream::open(), ifstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
+                        // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
 #include "mfBool.h"
 #include "mfServiceRunData.h"
@@ -56,15 +56,13 @@
 #include "msdl2brailleInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
-  string        inputSourceName,
-  istream&      inputStream,
+  std::string        inputSourceName,
+  std::istream&      inputStream,
   S_oahHandler  handler,
   std::ostream& out,
   std::ostream& err)
@@ -96,17 +94,17 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-      string separator =
+      std::string separator =
         "%--------------------------------------------------------------";
       err <<
-        endl <<
+        std::endl <<
         separator <<
-        endl <<
+        std::endl <<
         gTab <<
         "Pass 1: Creating a first MSR from the MSDL input" <<
-        endl <<
+        std::endl <<
         separator <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -132,18 +130,18 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
     // sanity check
     if (! firstMsrScore) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "Could not perform comversion of \"" <<
         inputSourceName <<
         "\" to MSR - quitting";
 
-      string message = s.str ();
+      std::string message = s.str ();
 
       err <<
         message <<
-        endl;
+        std::endl;
 
       throw msdl2msrException (message);
     }
@@ -162,9 +160,9 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
   if (gGlobalMsdl2brlInsiderOahGroup->getQuitAfterPass1 ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after creating the first MSR as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -197,9 +195,9 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
   if (gGlobalMsdl2brlInsiderOahGroup->getQuitAfterPass2 ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after creating the second MSR as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -256,9 +254,9 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
   if (gGlobalMsdl2brlInsiderOahGroup->getQuitAfterPass3 ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after creating the first BSR as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -314,9 +312,9 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
   if (gGlobalMsdl2brlInsiderOahGroup->getQuitAfterPass4 ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after creating the finalized BSR as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -325,7 +323,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     // convert the BSR to Braille text (pass 5)
     // ------------------------------------------------------
 
-    string
+    std::string
       outputFileName =
         handler->
           fetchOutputFileNameFromTheOptions ();
@@ -336,7 +334,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           "convertMsdlStream2brailleWithHandler() outputFileName = \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -345,7 +343,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "convertMsdlStream2brailleWithHandler() output goes to standard output" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -375,7 +373,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           "convertMsdlStream2brailleWithHandler() output goes to file \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -383,30 +381,30 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         err <<
-          endl <<
+          std::endl <<
           "Opening file \"" << outputFileName << "\" for writing" <<
-          endl;
+          std::endl;
       }
 #endif
 
-      ofstream
+      std::ofstream
         brailleCodeFileOutputStream (
           outputFileName,
-          ofstream::out);
+          std::ofstream::out);
 
       if (! brailleCodeFileOutputStream.is_open ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Could not open Braille output file \"" <<
           outputFileName <<
           "\" for writing - quitting";
 
-        string message = s.str ();
+        std::string message = s.str ();
 
         err <<
           message <<
-          endl;
+          std::endl;
 
         throw bsr2brailleException (message);
       }
@@ -433,9 +431,9 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "Closing file \"" << outputFileName << "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -448,8 +446,8 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
 //_______________________________________________________________________________
 mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
-  string                  inputSourceName,
-  istream&                inputStream,
+  std::string             inputSourceName,
+  std::istream&                inputStream,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -457,7 +455,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
   // the service name
   // ------------------------------------------------------
 
-  string serviceName = "msdl2braille";
+  std::string serviceName = "msdl2braille";
 
   // reset the global indenter
   // ------------------------------------------------------
@@ -495,7 +493,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
     gLogStream <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -572,7 +570,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
       " gIndenter value after options ands arguments checking: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -592,7 +590,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
-  string                  fileName,
+  std::string             fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -601,30 +599,30 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
-      endl <<
+      std::endl <<
       "Opening file \"" << fileName << "\" for writing" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  ifstream
+  std::ifstream
     inputStream (
       fileName.c_str (),
-      ifstream::in);
+      std::ifstream::in);
 
   if (! inputStream.is_open ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
       "\" for reading - quitting";
 
-    string message = s.str ();
+    std::string message = s.str ();
 
     err <<
       message <<
-      endl;
+      std::endl;
 
     throw bsr2brailleException (message);
   }
@@ -639,7 +637,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
 }
 
 mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
-  string        fileName,
+  std::string        fileName,
   S_oahHandler  handler,
   std::ostream& out,
   std::ostream& err)
@@ -648,30 +646,30 @@ mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
-      endl <<
+      std::endl <<
       "Opening file \"" << fileName << "\" for writing" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  ifstream
+  std::ifstream
     inputStream (
       fileName.c_str (),
-      ifstream::in);
+      std::ifstream::in);
 
   if (! inputStream.is_open ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
       "\" for reading - quitting";
 
-    string message = s.str ();
+    std::string message = s.str ();
 
     err <<
       message <<
-      endl;
+      std::endl;
 
     throw msdl2brailleException (message);
   }
@@ -688,10 +686,10 @@ EXP mfMusicformatsErrorKind convertMsdlString2brailleWithOptionsAndArguments (
   std::ostream&           out,
   std::ostream&           err)
 {
-  stringstream
+  std::stringstream
     inputStream (
       buffer,
-      ios_base::in);
+      std::ios_base::in);
 
   // call convertMsdlStream2brailleWithHandler() even if buffer is empty,
   // to handle the help options if any
@@ -710,10 +708,10 @@ mfMusicformatsErrorKind convertMsdlString2brailleWithHandler (
   std::ostream& out,
   std::ostream& err)
 {
-  stringstream
+  std::stringstream
     inputStream (
       buffer,
-      ios_base::in);
+      std::ios_base::in);
 
   // call convertMsdlStream2brailleWithHandler() even if buffer is empty,
   // to handle the help options if any

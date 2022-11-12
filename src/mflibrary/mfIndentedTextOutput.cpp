@@ -16,8 +16,6 @@
 #include "mfIndentedTextOutput.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -27,7 +25,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 mfOutputIndenter mfOutputIndenter::gGlobalOStreamIndenter;
 
-mfOutputIndenter::mfOutputIndenter (string spacer)
+mfOutputIndenter::mfOutputIndenter (std::string spacer)
 {
   fIndentation = 0;
   fSpacer = spacer;
@@ -48,7 +46,7 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
 #ifdef DEBUG_INDENTER
   gLogStream <<
     "% Incrementing INDENTER: " << fIndentation <<
-    endl;
+    std::endl;
 #endif
 
   ++fIndentation;
@@ -56,7 +54,7 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
 #ifdef DEBUG_INDENTER
   gLogStream <<
     "% INDENTER: " << fIndentation <<
-    endl;
+    std::endl;
 #endif
 
   return *this;
@@ -68,16 +66,16 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 #ifdef DEBUG_INDENTER
   gLogStream <<
     "% Decrementing INDENTER: " << fIndentation <<
-    endl;
+    std::endl;
 #endif
 
   --fIndentation;
 
   if (fIndentation < 0) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "% ### Indentation has become negative: " <<  fIndentation <<
-      endl << endl;
+      std::endl << std::endl;
 
 #ifdef DEBUG_INDENTER
     mfAssert (
@@ -91,7 +89,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
   else {
     gLogStream <<
       "% INDENTER: " << fIndentation <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -106,7 +104,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
 #ifdef DEBUG_INDENTER
   gLogStream <<
     "% INDENTER: " << fIndentation <<
-    endl;
+    std::endl;
 #endif
 
   return *this;
@@ -119,9 +117,9 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
 
   if (fIndentation < 0) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "% ### Indentation has become negative: " <<  fIndentation <<
-      endl << endl;
+      std::endl << std::endl;
 
 #ifdef DEBUG_INDENTER
     mfAssert (
@@ -135,7 +133,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
   else {
     gLogStream <<
       "% INDENTER: " << fIndentation <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -148,9 +146,9 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
 
   if (fIndentation < 0) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "% ### Indentation has become negative: " <<  fIndentation <<
-      endl << endl;
+      std::endl << std::endl;
 
 #ifdef DEBUG_INDENTER
     mfAssert (
@@ -164,7 +162,7 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
   else {
     gLogStream <<
       "% INDENTER: " << fIndentation <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -177,9 +175,9 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
 
   if (fIndentation < 0) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "% ### Indentation has become negative: " <<  fIndentation <<
-      endl << endl;
+      std::endl << std::endl;
 
 #ifdef DEBUG_INDENTER
     mfAssert (
@@ -193,14 +191,14 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
   else {
     gLogStream <<
       "% INDENTER: " << fIndentation <<
-      endl;
+      std::endl;
   }
 #endif
 
   return *this;
 }
 
-string mfOutputIndenter::fetchCurrentOffset ()
+std::string mfOutputIndenter::fetchCurrentOffset ()
 {
   return
     mfReplicateString (
@@ -209,48 +207,48 @@ string mfOutputIndenter::fetchCurrentOffset ()
 }
 
 void mfOutputIndenter::indentMultiLineString (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
   // add indentation ahead of all lines of theString
 
-  // the istringstream to read lines from theString
-  istringstream inputStream (theString);
-  string        line;
+  // the std::istringstream to read lines from theString
+  std::istringstream inputStream (theString);
+  std::string        line;
 
   // print theString line by line
   while (getline (inputStream, line)) {
-    os << line << endl;
+    os << line << std::endl;
   } // while
 }
 
-string mfOutputIndenter::indentMultiLineStringWithCurrentOffset (
-  const string& theString)
+std::string mfOutputIndenter::indentMultiLineStringWithCurrentOffset (
+  const std::string& theString)
 {
   // add indentation ahead of all lines of theString
 
-  stringstream s;
+  std::stringstream s;
 
-  // the istringstream to read lines from theString
-  istringstream inputStream (theString);
-  string        line;
+  // the std::istringstream to read lines from theString
+  std::istringstream inputStream (theString);
+  std::string        line;
 
   // append theString line by line
   while (getline (inputStream, line)) {
-    s << fetchCurrentOffset () << line << endl;
+    s << fetchCurrentOffset () << line << std::endl;
   } // while
 
   return s.str ();
 }
 
-void mfOutputIndenter::print (ostream& os) const
+void mfOutputIndenter::print (std::ostream& os) const
 {
   int i = fIndentation;
 
   while (i-- > 0) os << fSpacer;
 }
 
-ostream& operator << (ostream& os, const mfOutputIndenter& theIndenter) {
+std::ostream& operator << (std::ostream& os, const mfOutputIndenter& theIndenter) {
   theIndenter.print(os);
   return os;
 }
@@ -300,8 +298,8 @@ S_indentedOstream gGlobalOutputIndentedOstream;
 S_indentedOstream gGlobalLogIndentedOstream;
 
 void createTheGlobalIndentedOstreams (
-  ostream& theOutputStream,
-  ostream& theLogStream)
+  std::ostream& theOutputStream,
+  std::ostream& theLogStream)
 {
   gGlobalOutputIndentedOstream =
     mfIndentedOstream::create (
@@ -317,10 +315,10 @@ void createTheGlobalIndentedOstreams (
 //______________________________________________________________________________
 // code taken from:
 // http://comp.lang.cpp.moderated.narkive.com/fylLGJgp/redirect-output-to-dev-null
-template<typename Ch, typename Traits = char_traits<Ch> >
-struct basic_nullbuf : basic_streambuf<Ch, Traits>
+template<typename Ch, typename Traits = std::char_traits<Ch> >
+struct basic_nullbuf : std::basic_streambuf<Ch, Traits>
 {
-  typedef basic_streambuf<Ch, Traits> base_type;
+  typedef std::basic_streambuf<Ch, Traits> base_type;
   typedef typename base_type::int_type int_type;
   typedef typename base_type::traits_type traits_type;
 
@@ -337,7 +335,7 @@ typedef basic_nullbuf <char>    nullbuf;
 nullbuf cnull_obj;
 //wnullbuf wcnull_obj;
 
-ostream cnull  (& cnull_obj);
+std::ostream cnull  (& cnull_obj);
 //wostream wcnull (& wcnull_obj);
 
 

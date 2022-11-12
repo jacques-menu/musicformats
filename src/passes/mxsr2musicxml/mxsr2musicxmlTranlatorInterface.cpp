@@ -32,17 +32,15 @@
 
 #include "mxsr2musicxmlTranlatorInterface.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
 EXP void translateMxsrToMusicXML (
   Sxmlelement   theMxsr,
-  string        outputFileName,
-  ostream&      err,
-  const string& passNumber,
-  const string& passDescription)
+  std::string        outputFileName,
+  std::ostream&      err,
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -55,18 +53,18 @@ EXP void translateMxsrToMusicXML (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     err <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -76,7 +74,7 @@ EXP void translateMxsrToMusicXML (
       "translateMxsrToMusicXML() outputFileName = \"" <<
       outputFileName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -92,7 +90,7 @@ EXP void translateMxsrToMusicXML (
       "xmlFile2musicxml() outputFileName = \"" <<
       outputFileName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -101,13 +99,13 @@ EXP void translateMxsrToMusicXML (
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2musicxml() output goes to standard output" <<
-        endl;
+        std::endl;
     }
 #endif
 
     // write the MusicXML data to the output file stream
     sxmlfile->print (gOutputStream);
-    gOutputStream << endl;
+    gOutputStream << std::endl;
   }
 
   else {
@@ -117,40 +115,40 @@ EXP void translateMxsrToMusicXML (
         "xmlFile2musicxml() output goes to file \"" <<
         outputFileName <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
     // open output file
-    ofstream outputFileStream;
+    std::ofstream outputFileStream;
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
-        endl <<
+        std::endl <<
         "Opening file '" << outputFileName << "' for writing" <<
-        endl;
+        std::endl;
     }
 #endif
 
-    ofstream
+    std::ofstream
       musicxmlFileOutputStream (
         outputFileName.c_str(),
-        ofstream::out);
+        std::ofstream::out);
 
     if (! musicxmlFileOutputStream.is_open ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "Could not open MusicXML output file \"" <<
         outputFileName <<
         "\" for writing - quitting";
 
-      string message = s.str ();
+      std::string message = s.str ();
 
       err <<
         message <<
-        endl;
+        std::endl;
 
       throw mxsr2musicxmlException (message);
     }
@@ -158,19 +156,19 @@ EXP void translateMxsrToMusicXML (
     // write the MusicXML data to the output file stream
   if (sxmlfile->elements ()) {
     sxmlfile->print (musicxmlFileOutputStream);
-    musicxmlFileOutputStream << endl;
+    musicxmlFileOutputStream << std::endl;
   }
   else {
-    err << "TXMLFile::elements() is null" << endl;
+    err << "TXMLFile::elements() is null" << std::endl;
   }
 
     // close output file
 #ifdef TRACE_OAH
     if (gtracingOah->fTracePasses) {
       err <<
-        endl <<
+        std::endl <<
         "Closing file \"" << outputFileName << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 

@@ -83,12 +83,12 @@
 
 #include "msrArpeggiatos.h"
 
-#include "msrNotes.h"
+// #include "msrNotes.h"
 
 #include "msrChords.h"
 
 #include "msrTupletElements.h"
-#include "msrTuplets.h"
+// #include "msrTuplets.h"
 
 #include "msrLyrics.h"
 

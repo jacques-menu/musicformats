@@ -6,8 +6,8 @@
 
 In order to represent the music according to simultaneous sounding time, MSR builds:
 \begin{itemize}
-\item a flat list of measures at the voice and staff levels;
-\item from this, a vector of measures slices at the voice, staff, part, part group and score levels.
+\item a flat std::list of measures at the voice and staff levels;
+\item from this, a std::vector of measures slices at the voice, staff, part, part group and score levels.
 \end{itemize}
 
 The source files are in \msrBoth{msrMeasuresSlices}.
@@ -47,7 +47,7 @@ class   msrNoteEvent : public smartable
 \section{Simultaneous notes chunks}
 % -------------------------------------------------------------------------
 
-Such a chunk is a set of notes or rests played simultaneously, i.e. that start and stop at the same time. The set is stored as a list actually:
+Such a chunk is a set of notes or rests played simultaneously, i.e. that start and stop at the same time. The set is stored as a std::list actually:
 \begin{lstlisting}[language=CPlusPlus]
 class   msrSimultaneousNotesChunk : public smartable
 {
@@ -59,7 +59,7 @@ class   msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
     rational              fChunkMeasurePosition;
-    list<S_msrNote>       fChunkNotesList;
+    std::list<S_msrNote>       fChunkNotesList;
     rational              fChunkDurationWholeNotes;
 };
 \end{lstlisting}
@@ -81,19 +81,19 @@ class EXP msrMeasuresSlice : public smartable
     // ------------------------------------------------------
 
     int                   fSlicePuristMeasureNumber;
-    string                fSliceMeasureNumber;
+    std::string           fSliceMeasureNumber;
 
     // the measures in the slice
-    vector<S_msrMeasure>  fSliceMeasuresVector;
+    std::vector<S_msrMeasure>  fSliceMeasuresVector;
 
-    // notes flat list
-    list<S_msrNote>       fSliceNotesFlatList;
+    // notes flat std::list
+    std::list<S_msrNote>       fSliceNotesFlatList;
 
-    // note events list
-    list<S_msrNoteEvent>  fSliceNoteEventsList;
+    // note events std::list
+    std::list<S_msrNoteEvent>  fSliceNoteEventsList;
 
-    // simultaneous notes chunks list
-    list<S_msrSimultaneousNotesChunk>
+    // simultaneous notes chunks std::list
+    std::list<S_msrSimultaneousNotesChunk>
                           fSliceSimultaneousNotesChunksList;
 };
 
@@ -104,7 +104,7 @@ class EXP msrMeasuresSlice : public smartable
 \section{Measures slices sequences}
 % -------------------------------------------------------------------------
 
-A \class{msrMeasuresSlicesSequence} contains a vector of {\tt S_msrMeasuresSlice} instances:
+A \class{msrMeasuresSlicesSequence} contains a std::vector of {\tt S_msrMeasuresSlice} instances:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP msrMeasuresSlicesSequence : public smartable
 {
@@ -115,9 +115,9 @@ class EXP msrMeasuresSlicesSequence : public smartable
     // private fields
     // ------------------------------------------------------
 
-    string                fMeasuresOrigin;
+    std::string           fMeasuresOrigin;
 
-    vector<S_msrMeasuresSlice>
+    std::vector<S_msrMeasuresSlice>
                           fMeasuresSlicesVector;
 };
 \end{lstlisting}
@@ -157,7 +157,7 @@ void msrPart::collectPartMeasuresSlices (
           getStaffMeasuresSlicesSequence ();
 
     if (! staffMeasuresSlicesSequence) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "The staffMeasuresSlicesSequence of staff \"" <<
@@ -247,7 +247,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 
   // collect the notes from the sequence's measures slices
   for (
-    vector<S_msrMeasuresSlice>::const_iterator i =
+    std::vector<S_msrMeasuresSlice>::const_iterator i =
       fMeasuresSlicesVector.begin ();
     i != fMeasuresSlicesVector.end ();
     ++i

@@ -17,10 +17,10 @@ namespace MusicFormats
 
 // directions
 //______________________________________________________________________________
-string msrDirectionKindAsString (
+std::string msrDirectionKindAsString (
   msrDirectionKind directionKind)
 {
-  string result;
+  std::string result;
 
   switch (directionKind) {
     case msrDirectionKind::kDirectionNone:
@@ -38,7 +38,7 @@ string msrDirectionKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrDirectionKind& elt)
+std::ostream& operator << (std::ostream& os, const msrDirectionKind& elt)
 {
   os << msrDirectionKindAsString (elt);
   return os;

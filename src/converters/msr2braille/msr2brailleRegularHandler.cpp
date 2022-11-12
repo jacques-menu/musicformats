@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
@@ -33,15 +33,13 @@
 #include "msr2brailleRegularHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msr2brailleRegularHandler msr2brailleRegularHandler::create (
-  const string&     serviceName,
-  const string&     handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   S_msr2brailleInsiderHandler
                     insiderOahHandler)
 {
@@ -57,8 +55,8 @@ S_msr2brailleRegularHandler msr2brailleRegularHandler::create (
 }
 
 msr2brailleRegularHandler::msr2brailleRegularHandler (
-  const string&     serviceName,
-  const string&     handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   S_msr2brailleInsiderHandler
                     insiderOahHandler)
   : oahRegularHandler (
@@ -80,7 +78,7 @@ msr2brailleRegularHandler::msr2brailleRegularHandler (
     "msr2brailleRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
-    endl;
+    std::endl;
   }
 #endif
 }
@@ -96,7 +94,7 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
       "Creating the regular handler groups for \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -158,7 +156,7 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
       "All the regular handler groups for \"" <<
       fHandlerHeader <<
       "\" have been created" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1255,7 +1253,7 @@ void msr2brailleRegularHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1263,33 +1261,33 @@ void msr2brailleRegularHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-void msr2brailleRegularHandler::print (ostream& os) const
+void msr2brailleRegularHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "msr2brailleRegularHandler '" << fHandlerHeader << "':" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -1297,7 +1295,7 @@ void msr2brailleRegularHandler::print (ostream& os) const
       // print the options group
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -1305,16 +1303,16 @@ void msr2brailleRegularHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msr2brailleRegularHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2brailleRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

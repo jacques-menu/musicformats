@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "mfServiceRunData.h"
 
@@ -24,8 +24,6 @@
 
 #include "msrBrowsers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -91,14 +89,14 @@ void msr2summaryVisitor::visitStart (S_msrScore& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrScore" <<
-      endl;
+      std::endl;
   }
 
   gLogStream <<
     "MSR contents summary of \"" <<
     gGlobalServiceRunData->getInputSourceName () <<
     "\":" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 }
@@ -110,137 +108,137 @@ void msr2summaryVisitor::visitEnd (S_msrScore& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrScore" <<
-      endl;
+      std::endl;
   }
 
   gLogStream <<
     "The score contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 3;
 
   gLogStream <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fPartGroupsCounter,
       "part group",
       "part groups") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fPartsCounter,
       "part",
       "parts") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fStavesCounter,
       "stave",
       "staves") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fVoicesCounter,
       "voice",
       "voices") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fStanzasCounter,
       "stanza",
       "stanzas") <<
-    endl <<
+    std::endl <<
 
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       elt->getScoreNumberOfMeasures (),
       "measure",
       "measures") <<
-    endl <<
+    std::endl <<
 
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreRegularNotesCounter,
       "standalone note",
       "standalone notes") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreRestNotesCounter,
       "rest note",
       "rest notes") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreSkipNotesCounter,
       "skip note",
       "skip notes") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreUnpitchedNotesCounter,
       "unpitched note",
       "unpitched notes") <<
-    endl <<
+    std::endl <<
 
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreChordsCounter,
       "chord",
       "chords") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreChordNotesCounter,
       "chord note",
       "chord notes") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreTupletsCounter,
       "tuplet",
       "tuplets") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreTupletNotesCounter,
       "tuplet note",
       "tuplet notes") <<
-    endl <<
+    std::endl <<
 
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreGraceNotesGroupCounter,
       "grace note group",
       "grace notes groups") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fScoreDoubleTremoloNotesCounter,
       "double tremolo note",
       "double tremolo notes") <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
 }
@@ -251,7 +249,7 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrPartGroup" <<
-      endl;
+      std::endl;
   }
 
   ++fPartGroupsCounter;
@@ -265,60 +263,60 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
       partGroupElementsSize,
       " part or sub part group",
       " parts or sub part groups") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 24;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "partGroupAbsoluteNumber" << " : \"" <<
     elt->getPartGroupAbsoluteNumber  () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupName" << " : \"" <<
     elt->getPartGroupName  () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupNameDisplayText" << " : \"" <<
     elt->getPartGroupNameDisplayText  () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupAccidentalText" << " : \"" <<
     elt->getPartGroupAccidentalText  () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupAbbrevation" << " : \"" <<
     elt->getPartGroupAbbreviation  () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupSymbolKind" << " : " <<
     msrPartGroupSymbolKindAsString (
       elt->getPartGroupSymbolKind  ()) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupSymbolDefaultX" << " : " <<
     elt->getPartGroupSymbolDefaultX  () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupBarLine" << " : \"" <<
     msrPartGroupBarLineKindAsString (
       elt->getPartGroupBarLineKind ()) <<
     "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupInstrumentName" << " : \"" <<
       elt->getPartGroupInstrumentName () << "\"" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
 void msr2summaryVisitor::visitEnd (S_msrPartGroup& elt)
@@ -328,7 +326,7 @@ void msr2summaryVisitor::visitEnd (S_msrPartGroup& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrPartGroup" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -338,7 +336,7 @@ void msr2summaryVisitor::visitStart (S_msrPart& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrPart" <<
-      endl;
+      std::endl;
   }
 
   ++fPartsCounter;
@@ -351,47 +349,47 @@ void msr2summaryVisitor::visitStart (S_msrPart& elt)
     mfSingularOrPlural (
       partStavesMapSize,
       "staff", "staves") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 28;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "partID" << " : \"" <<
     elt->getPartID () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partMsrName" << " : \"" <<
     elt->getPartMsrName () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partName" << " : \"" <<
     elt->getPartName  () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partAbbrevation" << " : \"" <<
     elt->getPartAbbreviation () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partInstrumentName" << " : \"" <<
     elt->getPartInstrumentName () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partInstrumentAbbreviation" << " : \"" <<
     elt->getPartInstrumentAbbreviation () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partNumberOfMeasures" << " : " <<
     elt->getPartNumberOfMeasures () <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
 void msr2summaryVisitor::visitEnd (S_msrPart& elt)
@@ -401,7 +399,7 @@ void msr2summaryVisitor::visitEnd (S_msrPart& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrPart" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -411,7 +409,7 @@ void msr2summaryVisitor::visitStart (S_msrStaff& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStaff" <<
-      endl;
+      std::endl;
   }
 
   ++fStavesCounter;
@@ -425,7 +423,7 @@ void msr2summaryVisitor::visitStart (S_msrStaff& elt)
     mfSingularOrPlural (
       staffAllVoicesVectorSize,
       "voice", "voices") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -433,23 +431,23 @@ void msr2summaryVisitor::visitStart (S_msrStaff& elt)
   const int fieldWidth = 27;
 
   // print the staff number
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "staffNumber" << " : " <<
     elt->getStaffNumber () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
    "staffInstrumentName" << ": \"" <<
     elt->getStaffInstrumentName () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
    "staffInstrumentAbbreviation" << ": \"" <<
     elt->getStaffInstrumentAbbreviation () << "\"" <<
-    endl;
+    std::endl;
 
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   fOnGoingStaff = true;
 }
@@ -461,7 +459,7 @@ void msr2summaryVisitor::visitEnd (S_msrStaff& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrStaff" <<
-      endl;
+      std::endl;
   }
 
   fOnGoingStaff = false;
@@ -473,7 +471,7 @@ void msr2summaryVisitor::visitStart (S_msrVoice& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrVoice" <<
-      endl;
+      std::endl;
   }
 
   ++fVoicesCounter;
@@ -486,35 +484,35 @@ void msr2summaryVisitor::visitStart (S_msrVoice& elt)
     mfSingularOrPlural (
       voiceStanzasMapSize,
       "stanza", "stanzas") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 34;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "voiceNumber" << " : " <<
     elt->getVoiceNumber () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "regularVoiceStaffSequentialNumber" << " : " <<
     elt->getRegularVoiceStaffSequentialNumber () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "voiceActualNotesCounter" << " : " <<
     elt->getVoiceActualNotesCounter () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "voiceActualHarmoniesCounter" << " : " <<
     elt->getVoiceActualHarmoniesCounter () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "musicHasBeenInsertedInVoice" << " : " <<
     elt->getMusicHasBeenInsertedInVoice () <<
-    endl;
+    std::endl;
 
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   // don't show fVoiceMuteStanza in the summary
 }
@@ -526,7 +524,7 @@ void msr2summaryVisitor::visitEnd (S_msrVoice& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrVoice" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -536,7 +534,7 @@ void msr2summaryVisitor::visitStart (S_msrStanza& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStanza" <<
-      endl;
+      std::endl;
   }
 
   ++fStanzasCounter;
@@ -556,7 +554,7 @@ void msr2summaryVisitor::visitStart (S_msrStanza& elt)
   }
 
   gLogStream <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
 void msr2summaryVisitor::visitEnd (S_msrStanza& elt)
@@ -564,7 +562,7 @@ void msr2summaryVisitor::visitEnd (S_msrStanza& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrStanza" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -574,7 +572,7 @@ void msr2summaryVisitor::visitStart (S_msrSyllable& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSyllable" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -583,7 +581,7 @@ void msr2summaryVisitor::visitEnd (S_msrSyllable& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSyllable" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -593,13 +591,13 @@ void msr2summaryVisitor::visitStart (S_msrClef& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrClef" <<
-      endl;
+      std::endl;
   }
 
   if (! fOnGoingStaff) {
     gLogStream <<
       elt->asString () <<
-      endl;
+      std::endl;
   }
 }
 
@@ -608,7 +606,7 @@ void msr2summaryVisitor::visitEnd (S_msrClef& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrClef" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -618,13 +616,13 @@ void msr2summaryVisitor::visitStart (S_msrKey& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrKey" <<
-      endl;
+      std::endl;
   }
 
   if (! fOnGoingStaff) {
     gLogStream <<
       elt->asString () <<
-      endl;
+      std::endl;
   }
 }
 
@@ -633,7 +631,7 @@ void msr2summaryVisitor::visitEnd (S_msrKey& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrKey" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -643,13 +641,13 @@ void msr2summaryVisitor::visitStart (S_msrTimeSignature& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTimeSignature" <<
-      endl;
+      std::endl;
   }
 
   if (! fOnGoingStaff) {
     gLogStream <<
       elt->asString () <<
-      endl;
+      std::endl;
   }
 }
 
@@ -658,7 +656,7 @@ void msr2summaryVisitor::visitEnd (S_msrTimeSignature& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTimeSignature" <<
-    endl;
+    std::endl;
   }
 }
 
@@ -668,13 +666,13 @@ void msr2summaryVisitor::visitStart (S_msrTempo& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTempo" <<
-       endl;
+       std::endl;
   }
 
   gLogStream <<
     "Tempo " <<
     elt->getTempoBeatUnit () << ' ' << elt->getTempoPerMinute () <<
-    endl;
+    std::endl;
 }
 
 void msr2summaryVisitor::visitEnd (S_msrTempo& elt)
@@ -682,7 +680,7 @@ void msr2summaryVisitor::visitEnd (S_msrTempo& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTempo" <<
-    endl;
+    std::endl;
   }
 }
 
@@ -692,7 +690,7 @@ void msr2summaryVisitor::visitStart (S_msrSegment& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSegment" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -701,7 +699,7 @@ void msr2summaryVisitor::visitEnd (S_msrSegment& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSegment" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -711,7 +709,7 @@ void msr2summaryVisitor::visitStart (S_msrArticulation& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrArticulation" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -720,7 +718,7 @@ void msr2summaryVisitor::visitEnd (S_msrArticulation& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrArticulation" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -730,7 +728,7 @@ void msr2summaryVisitor::visitStart (S_msrDynamic& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrDynamic" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -739,7 +737,7 @@ void msr2summaryVisitor::visitEnd (S_msrDynamic& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrDynamic" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -748,7 +746,7 @@ void msr2summaryVisitor::visitStart (S_msrCrescDecresc& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrCrescDecresc" << endl;
+      "--> Start visiting msrCrescDecresc" << std::endl;
   }
 }
 
@@ -756,7 +754,7 @@ void msr2summaryVisitor::visitEnd (S_msrCrescDecresc& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrCrescDecresc" << endl;
+      "--> End visiting msrCrescDecresc" << std::endl;
   }
 }
 
@@ -765,7 +763,7 @@ void msr2summaryVisitor::visitStart (S_msrWedge& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrWedge" << endl;
+      "--> Start visiting msrWedge" << std::endl;
   }
 }
 
@@ -773,7 +771,7 @@ void msr2summaryVisitor::visitEnd (S_msrWedge& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrWedge" << endl;
+      "--> End visiting msrWedge" << std::endl;
   }
 }
 
@@ -782,7 +780,7 @@ void msr2summaryVisitor::visitStart (S_msrGraceNotesGroup& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrGraceNotesGroup" << endl;
+      "--> Start visiting msrGraceNotesGroup" << std::endl;
   }
 }
 
@@ -790,7 +788,7 @@ void msr2summaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrGraceNotesGroup" << endl;
+      "--> End visiting msrGraceNotesGroup" << std::endl;
   }
 }
 
@@ -803,7 +801,7 @@ void msr2summaryVisitor::visitStart (S_msrNote& elt)
       msrNoteKindAsString (
         elt->getNoteKind ()) <<
       " msrNote" <<
-      endl;
+      std::endl;
   }
 
   switch (elt->getNoteKind ()) {
@@ -849,7 +847,7 @@ void msr2summaryVisitor::visitEnd (S_msrNote& elt)
       msrNoteKindAsString (
         elt->getNoteKind ()) <<
       " msrNote" <<
-      endl;
+      std::endl;
   }
 
   switch (elt->getNoteKind ()) { // JMI
@@ -884,7 +882,7 @@ void msr2summaryVisitor::visitStart (S_msrStem& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrStem" << endl;
+      "--> Start visiting msrStem" << std::endl;
   }
 }
 
@@ -893,7 +891,7 @@ void msr2summaryVisitor::visitEnd (S_msrStem& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrStem" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -902,7 +900,7 @@ void msr2summaryVisitor::visitStart (S_msrBeam& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrBeam" << endl;
+      "--> Start visiting msrBeam" << std::endl;
   }
 }
 
@@ -911,7 +909,7 @@ void msr2summaryVisitor::visitEnd (S_msrBeam& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrBeam" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -921,7 +919,7 @@ void msr2summaryVisitor::visitStart (S_msrChord& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrChord" <<
-      endl;
+      std::endl;
   }
 
   ++fScoreChordsCounter;
@@ -932,7 +930,7 @@ void msr2summaryVisitor::visitEnd (S_msrChord& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrChord" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -942,7 +940,7 @@ void msr2summaryVisitor::visitStart (S_msrTuplet& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTuplet" <<
-      endl;
+      std::endl;
   }
 
   ++fScoreTupletsCounter;
@@ -953,7 +951,7 @@ void msr2summaryVisitor::visitEnd (S_msrTuplet& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTuplet" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -963,7 +961,7 @@ void msr2summaryVisitor::visitStart (S_msrSlur& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSlur" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -972,7 +970,7 @@ void msr2summaryVisitor::visitEnd (S_msrSlur& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSlur" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -982,7 +980,7 @@ void msr2summaryVisitor::visitStart (S_msrBarLine& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrBarLine" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -991,7 +989,7 @@ void msr2summaryVisitor::visitEnd (S_msrBarLine& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrBarLine" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1001,7 +999,7 @@ void msr2summaryVisitor::visitStart (S_msrBarNumberCheck& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrBarNumberCheck" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1010,7 +1008,7 @@ void msr2summaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrBarNumberCheck" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1020,7 +1018,7 @@ void msr2summaryVisitor::visitStart (S_msrLineBreak& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrLineBreak" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1029,7 +1027,7 @@ void msr2summaryVisitor::visitEnd (S_msrLineBreak& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrLineBreak" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1039,7 +1037,7 @@ void msr2summaryVisitor::visitStart (S_msrRepeat& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrRepeat" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1048,7 +1046,7 @@ void msr2summaryVisitor::visitEnd (S_msrRepeat& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrRepeat" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1058,7 +1056,7 @@ void msr2summaryVisitor::visitStart (S_msrScaling& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrScaling" <<
-      endl;
+      std::endl;
   }
 
   gLogStream <<
@@ -1070,7 +1068,7 @@ void msr2summaryVisitor::visitEnd (S_msrScaling& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrScaling" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1080,10 +1078,10 @@ void msr2summaryVisitor::visitStart (S_msrPageLayout& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrPageLayout" <<
-      endl;
+      std::endl;
   }
 
-  gLogStream << elt << endl;
+  gLogStream << elt << std::endl;
 }
 
 void msr2summaryVisitor::visitEnd (S_msrPageLayout& elt)
@@ -1091,7 +1089,7 @@ void msr2summaryVisitor::visitEnd (S_msrPageLayout& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrPageLayout" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1101,7 +1099,7 @@ void msr2summaryVisitor::visitStart (S_msrMidiTempo& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrMidiTempo" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -1110,7 +1108,7 @@ void msr2summaryVisitor::visitEnd (S_msrMidiTempo& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrMidiTempo" <<
-      endl;
+      std::endl;
   }
 }
 

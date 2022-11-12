@@ -22,8 +22,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -53,7 +51,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartGroupBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -66,7 +64,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPartGroupBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -79,7 +77,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartGroupBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -92,7 +90,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPartGroupBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -105,12 +103,12 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartGroupBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
   for (
-    list<S_msrElement>::const_iterator i = fPartGroupBlockElements.begin ();
+    std::list<S_msrElement>::const_iterator i = fPartGroupBlockElements.begin ();
     i != fPartGroupBlockElements.end ();
     ++i
   ) {
@@ -123,15 +121,15 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrPartGroupBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void lpsrPartGroupBlock::print (ostream& os) const
+void lpsrPartGroupBlock::print (std::ostream& os) const
 {
   os <<
-    endl <<
+    std::endl <<
     "PartGroupBlock for partGroup \"" <<
     fPartGroup->getPartGroupCombinedName () <<
     "\", " <<
@@ -140,26 +138,26 @@ void lpsrPartGroupBlock::print (ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fPartGroupBlockElements.size (), "element", "elements") <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
   if (fPartGroupBlockElements.size ()) {
-    list<S_msrElement>::const_iterator
+    std::list<S_msrElement>::const_iterator
       iBegin = fPartGroupBlockElements.begin (),
       iEnd   = fPartGroupBlockElements.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrPartGroupBlock& scr)
+std::ostream& operator << (std::ostream& os, const S_lpsrPartGroupBlock& scr)
 {
   scr->print (os);
   return os;

@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -47,20 +47,18 @@
 
 #include "msr2lilypondInterface.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   S_msrScore   theMsrScore,
-  string       passNumber1,
-  string       passDescription1,
-  string       passNumber2,
-  string       passDescription2,
-  ostream&     out,
-  ostream&     err,
+  std::string       passNumber1,
+  std::string       passDescription1,
+  std::string       passNumber2,
+  std::string       passDescription2,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
 #ifdef TRACING_IS_ENABLED
@@ -69,7 +67,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
       "Translating an MSR score to LilyPond in \"" <<
       handler->getHandlerHeader () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -113,7 +111,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
     // convert the LPSR into LilyPond code
     // ------------------------------------------------------
 
-    string
+    std::string
       outputFileName =
         handler->
           fetchOutputFileNameFromTheOptions ();
@@ -124,7 +122,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
         "xmlFile2lilypond() outputFileName = \"" <<
         outputFileName <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -133,7 +131,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2lilypond() output goes to standard output" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -171,7 +169,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           "xmlFile2lilypond() output goes to file \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -179,30 +177,30 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         err <<
-          endl <<
+          std::endl <<
           "Opening file '" << outputFileName << "' for writing" <<
-          endl;
+          std::endl;
       }
 #endif
 
-      ofstream
+      std::ofstream
         outputFileStream (
           outputFileName.c_str (),
-          ofstream::out);
+          std::ofstream::out);
 
       if (! outputFileStream.is_open ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Could not open LilyPond output file \"" <<
           outputFileName <<
           "\" for writing - quitting";
 
-        string message = s.str ();
+        std::string message = s.str ();
 
         err <<
           message <<
-          endl;
+          std::endl;
 
         throw lpsr2lilypondException (message);
       }
@@ -237,9 +235,9 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "Closing file \"" << outputFileName << "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 

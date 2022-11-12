@@ -25,18 +25,16 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 void msr2bsrUnsupported (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   if (!
     (
@@ -56,7 +54,7 @@ void msr2bsrUnsupported (
     gLogStream <<
       "### msr2bsr LIMITATION ### " <<
       inputSourceName << ":" << inputLineNumber << ": " << message <<
-      endl;
+      std::endl;
   }
 
   throw msr2bsrUnsupportedException (message);
@@ -64,9 +62,9 @@ void msr2bsrUnsupported (
 
 //______________________________________________________________________________
 void msr2bsrInternalWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeInternalWarning (
     "msr2bsr",
@@ -76,11 +74,11 @@ void msr2bsrInternalWarning (
 }
 
 void msr2bsrInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   gIndenter.resetToZero ();
 
@@ -101,9 +99,9 @@ void msr2bsrInternalError (
 
 //______________________________________________________________________________
 void msr2bsrWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeWarning (
     "msr2bsr",
@@ -113,11 +111,11 @@ void msr2bsrWarning (
 }
 
 void msr2bsrError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeError (
     "msr2bsr",

@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -58,8 +58,6 @@
 #include "musicxml2guidoInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -73,22 +71,22 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl <<
+      std::endl <<
       "xmlFile2guidoWithHandler(), sxmlfile contains:" <<
-      endl << endl;
+      std::endl << std::endl;
 
     ++gIndenter;
 
     sxmlfile->print (gLogStream);
-    gLogStream << endl << endl;
+    gLogStream << std::endl << std::endl;
 
     --gIndenter;
 
     gLogStream <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -138,9 +136,9 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2a ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after creating the MSR skeleton in pass 2a of xmlFile2guidoWithHandler as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -170,9 +168,9 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2b ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after pass 2b as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -205,9 +203,9 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass3 ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after pass 3 as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -238,7 +236,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // convert the MXSR to Guido (pass 5)
   // ------------------------------------------------------
 
-  string
+  std::string
     outputFileName =
       handler->
         fetchOutputFileNameFromTheOptions ();
@@ -286,7 +284,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   err <<
     "xmlFile2guido(), sxmlfile is NULL" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -296,7 +294,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   // the service name
   // ------------------------------------------------------
 
-  string serviceName = "xml2gmn";
+  std::string serviceName = "xml2gmn";
 
   // reset the global indenter
   // ------------------------------------------------------
@@ -334,7 +332,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
     gLogStream <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -411,7 +409,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
       " gIndenter value after options ands arguments checking: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -456,8 +454,8 @@ EXP mfMusicformatsErrorKind musicxmlFile2guido (
 
 mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
   const char*  fileName,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   SXMLFile
@@ -507,8 +505,8 @@ EXP mfMusicformatsErrorKind musicxmlFd2guido (
 
 mfMusicformatsErrorKind convertMusicxmlFd2guidoWithHandler (
   FILE*        fd,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   SXMLFile
@@ -558,8 +556,8 @@ EXP mfMusicformatsErrorKind musicxmlString2guido (
 
 mfMusicformatsErrorKind convertMusicxmlString2guidoWithHandler (
   const char*  buffer,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   SXMLFile

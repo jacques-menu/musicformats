@@ -29,15 +29,13 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msdrMeasure msdrMeasure::create (
   int           inputLineNumber,
-  const string& measureNumber)
+  const std::string& measureNumber)
 {
   msdrMeasure* o =
     new msdrMeasure (
@@ -50,13 +48,13 @@ S_msdrMeasure msdrMeasure::create (
 
 msdrMeasure::msdrMeasure (
   int           inputLineNumber,
-  const string& measureNumber)
+  const std::string& measureNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Creating MSDR music \"" << asString () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -85,7 +83,7 @@ void msdrMeasure::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msdrMeasure::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msdrMeasure>*
@@ -96,7 +94,7 @@ void msdrMeasure::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msdrMeasure::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -107,7 +105,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msdrMeasure::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msdrMeasure>*
@@ -118,7 +116,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msdrMeasure::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -130,13 +128,13 @@ void msdrMeasure::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msdrMeasure::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   // browse the voice initial elements
   if (fInitialMusicLayersList.size ()) {
     for (
-      list<S_msdrMeasureElement>::const_iterator i = fInitialMusicLayersList.begin ();
+      std::list<S_msdrMeasureElement>::const_iterator i = fInitialMusicLayersList.begin ();
       i != fInitialMusicLayersList.end ();
       ++i
     ) {
@@ -155,7 +153,7 @@ void msdrMeasure::browseData (basevisitor* v)
   // browse the voice stanzas
   if (fMusicStanzasMap.size ()) {
     for (
-      map<string, S_msrStanza>::const_iterator i = fMusicStanzasMap.begin ();
+      std::map<std::string, S_msrStanza>::const_iterator i = fMusicStanzasMap.begin ();
       i != fMusicStanzasMap.end ();
       ++i
     ) {
@@ -172,14 +170,14 @@ void msdrMeasure::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% <== msdrMeasure::browseData ()" <<
-      endl;
+      std::endl;
   }
   */
 }
 
-string msdrMeasure::asShortString () const
+std::string msdrMeasure::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDR measure \"" << fMeasureNumber << "\"" <<
@@ -188,9 +186,9 @@ string msdrMeasure::asShortString () const
   return s.str ();
 }
 
-string msdrMeasure::asString () const
+std::string msdrMeasure::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDR measure \"" << fMeasureNumber << "\"" <<
@@ -201,16 +199,16 @@ string msdrMeasure::asString () const
 
 void msdrMeasure::displayMeasure (
   int           inputLineNumber,
-  const string& context) const
+  const std::string& context) const
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     "*********>> Displaying MSDR measure \"" <<
     fMeasureNumber <<
     "\" (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   print (gLogStream);
@@ -218,20 +216,20 @@ void msdrMeasure::displayMeasure (
 
   gLogStream <<
     " <<*********" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
-void msdrMeasure::print (ostream& os) const
+void msdrMeasure::print (std::ostream& os) const
 {
   os <<
     "MSDR measure \"" << fMeasureNumber <<
     "\", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
 /* JMI
-  os << left <<
+  os << std::left <<
     '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
@@ -251,52 +249,52 @@ void msdrMeasure::print (ostream& os) const
     mfSingularOrPlural (
       fVoiceStanzasMap.size (), "stanza", "stanzas") <<
     ")" <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 41;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "upLinkToStaff" << " : " <<
     fVoiceUpLinkToStaff->getStaffName () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "voiceCurrentMeasureNumber" << " : \"" <<
     fVoiceCurrentMeasureNumber <<
     "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "voiceCurrentMeasureOrdinalNumber" << " : " <<
     fVoiceCurrentMeasureOrdinalNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "voiceCurrentMeasurePuristNumber" << " : " <<
     fVoiceCurrentMeasurePuristNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "regularVoiceStaffSequentialNumber" << " : " <<
     regularVoiceStaffSequentialNumberAsString () <<
-    endl;
+    std::endl;
 
 #ifdef TRACING_IS_ENABLED
   // regular measure ends detection
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fWholeNotesSinceLastRegularMeasureEnd" << " : " <<
     fWholeNotesSinceLastRegularMeasureEnd <<
-    endl;
+    std::endl;
 
   // incomplete measures after repeats detection
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fCurrentVoiceRepeatPhaseKind" << " : " <<
     msrVoiceRepeatPhaseKindAsString (
       fCurrentVoiceRepeatPhaseKind) <<
-    endl;
+    std::endl;
 
   }
 */
@@ -304,18 +302,18 @@ void msdrMeasure::print (ostream& os) const
   --gIndenter;
 }
 
-void msdrMeasure::printShort (ostream& os) const
+void msdrMeasure::printShort (std::ostream& os) const
 {
   os <<
     "MSDR measure number '" <<
     fMeasureNumber <<
     "', line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
 /* JMI
-  os << left <<
+  os << std::left <<
     '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
@@ -335,17 +333,17 @@ void msdrMeasure::printShort (ostream& os) const
     mfSingularOrPlural (
       fVoiceStanzasMap.size (), "stanza", "stanzas") <<
     ")" <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 41;
 
 #ifdef TRACING_IS_ENABLED
-  // print the voice measures flat list
+  // print the voice measures flat std::list
   size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "voiceMeasuresFlatList";
   if (voiceMeasuresFlatListSize) {
     os <<
@@ -355,12 +353,12 @@ void msdrMeasure::printShort (ostream& os) const
     os <<
       " : " << "[EMPTY]";
   }
-  os << endl;
+  os << std::endl;
 
   if (voiceMeasuresFlatListSize) {
     ++gIndenter;
 
-    list<S_msrMeasure>::const_iterator
+    std::list<S_msrMeasure>::const_iterator
       iBegin = fVoiceMeasuresFlatList.begin (),
       iEnd   = fVoiceMeasuresFlatList.end (),
       i      = iBegin;
@@ -376,7 +374,7 @@ void msdrMeasure::printShort (ostream& os) const
       if (++i == iEnd) break;
       os << ' ';
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
@@ -386,13 +384,13 @@ void msdrMeasure::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msdrMeasure& elt)
+std::ostream& operator << (std::ostream& os, const S_msdrMeasure& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

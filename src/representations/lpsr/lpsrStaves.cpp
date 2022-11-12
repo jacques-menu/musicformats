@@ -26,8 +26,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -56,7 +54,7 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffgroupBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -69,7 +67,7 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffgroupBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -82,7 +80,7 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffgroupBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -95,7 +93,7 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffgroupBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -105,9 +103,9 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
 void lpsrNewStaffgroupBlock::browseData (basevisitor* v)
 {}
 
-void lpsrNewStaffgroupBlock::print (ostream& os) const
+void lpsrNewStaffgroupBlock::print (std::ostream& os) const
 {
-  os << "NewStaffgroupBlock" << endl;
+  os << "NewStaffgroupBlock" << std::endl;
 
   ++gIndenter;
 
@@ -120,7 +118,7 @@ void lpsrNewStaffgroupBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrNewStaffgroupBlock& nstf)
+std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffgroupBlock& nstf)
 {
   nstf->print (os);
   return os;
@@ -155,7 +153,7 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffTuningBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -168,7 +166,7 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffTuningBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -181,7 +179,7 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffTuningBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -194,7 +192,7 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffTuningBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -204,9 +202,9 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
 void lpsrNewStaffTuningBlock::browseData (basevisitor* v)
 {}
 
-void lpsrNewStaffTuningBlock::print (ostream& os) const
+void lpsrNewStaffTuningBlock::print (std::ostream& os) const
 {
-  os << "NewStaffTuningBlock" << endl;
+  os << "NewStaffTuningBlock" << std::endl;
 
   ++gIndenter;
 
@@ -216,7 +214,7 @@ void lpsrNewStaffTuningBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrNewStaffTuningBlock& nstf)
+std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffTuningBlock& nstf)
 {
   nstf->print (os);
   return os;
@@ -247,7 +245,7 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -260,7 +258,7 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -273,7 +271,7 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -286,7 +284,7 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -296,9 +294,9 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
 void lpsrNewStaffBlock::browseData (basevisitor* v)
 {}
 
-void lpsrNewStaffBlock::print (ostream& os) const
+void lpsrNewStaffBlock::print (std::ostream& os) const
 {
-  os << "NewStaffBlock" << endl;
+  os << "NewStaffBlock" << std::endl;
 
   ++gIndenter;
 
@@ -311,7 +309,7 @@ void lpsrNewStaffBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrNewStaffBlock& nstf)
+std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffBlock& nstf)
 {
   nstf->print (os);
   return os;
@@ -380,7 +378,7 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrStaffBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -393,7 +391,7 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrStaffBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -406,7 +404,7 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrStaffBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -419,7 +417,7 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrStaffBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -432,12 +430,12 @@ void lpsrStaffBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrStaffBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
   for (
-    list<S_msrElement>::const_iterator i = fStaffBlockElements.begin ();
+    std::list<S_msrElement>::const_iterator i = fStaffBlockElements.begin ();
     i != fStaffBlockElements.end ();
     ++i
   ) {
@@ -450,12 +448,12 @@ void lpsrStaffBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrStaffBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void lpsrStaffBlock::print (ostream& os) const
+void lpsrStaffBlock::print (std::ostream& os) const
 {
   os <<
     "StaffBlock for staff \"" <<
@@ -464,38 +462,38 @@ void lpsrStaffBlock::print (ostream& os) const
     "), " <<
     mfSingularOrPlural (
       fStaffBlockElements.size (), "element", "elements") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 31;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "(StaffBlockInstrumentName" << " = \"" << fStaffBlockInstrumentName <<
     "\")" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "(StaffBlockShortInstrumentName" << " = \"" << fStaffBlockShortInstrumentName <<
     "\")" <<
-    endl << endl;
+    std::endl << std::endl;
 
   if (fStaffBlockElements.size ()) {
-    list<S_msrElement>::const_iterator
+    std::list<S_msrElement>::const_iterator
       iBegin = fStaffBlockElements.begin (),
       iEnd   = fStaffBlockElements.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrStaffBlock& scr)
+std::ostream& operator << (std::ostream& os, const S_lpsrStaffBlock& scr)
 {
   scr->print (os);
   return os;

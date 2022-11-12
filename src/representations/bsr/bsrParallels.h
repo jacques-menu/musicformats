@@ -27,10 +27,10 @@ enum class bsrParallelLayoutKind {
     kParallelLayoutBarOverBar,
     kParallelLayoutLineOverLine };
 
-string bsrParallelLayoutKindAsString (
+std::string bsrParallelLayoutKindAsString (
   bsrParallelLayoutKind parallelLayoutKind);
 
-ostream& operator << (ostream& os, const bsrParallelLayoutKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrParallelLayoutKind& elt);
 
 class EXP bsrParallel : public bsrElement
 {
@@ -86,7 +86,7 @@ class EXP bsrParallel : public bsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -96,11 +96,11 @@ class EXP bsrParallel : public bsrElement
     int                   fPrintParallelNumber;
     int                   fBrailleParallelNumber;
 
-    list<S_bsrElement>
+    std::list<S_bsrElement>
                           fParallelElementsList;
 };
 typedef SMARTP<bsrParallel> S_bsrParallel;
-EXP ostream& operator << (ostream& os, const S_bsrParallel& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrParallel& elt);
 
 
 }

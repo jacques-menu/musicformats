@@ -10,7 +10,7 @@
 */
 
 #include <climits>      // INT_MIN, INT_MAX
-#include <iomanip>      // for 'setw()'
+#include <iomanip>      // for 'std::setw()'
 
 #include "visitor.h"
 
@@ -24,8 +24,6 @@
 
 #include "msrBrowsers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -66,7 +64,7 @@ void bsrScore::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrScore::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -79,7 +77,7 @@ void bsrScore::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrScore::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -92,7 +90,7 @@ void bsrScore::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrScore::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -105,7 +103,7 @@ void bsrScore::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrScore::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -118,7 +116,7 @@ void bsrScore::browseData (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrScore::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -129,7 +127,7 @@ void bsrScore::browseData (basevisitor* v)
   }
 
   for (
-    list<S_bsrPage>::const_iterator i =
+    std::list<S_bsrPage>::const_iterator i =
       fScorePagesList.begin ();
     i != fScorePagesList.end ();
     ++i
@@ -143,23 +141,23 @@ void bsrScore::browseData (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% <== bsrScore::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void bsrScore::printFull (ostream& os) const
+void bsrScore::printFull (std::ostream& os) const
 {
   os <<
     "BSR Score" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
   // print the MSR structure (without the voices)
   fMsrScore->
     printSummary (os);
-  os << endl;
+  os << std::endl;
 
   // print the transcription notes if any
   const int fieldWidth = 19;
@@ -172,20 +170,20 @@ void bsrScore::printFull (ostream& os) const
     else {
       os <<
         "TranscriptionNotes: [NONE]" <<
-        endl;
+        std::endl;
     }
   }
 
 /*
   // print the lines and pages maximum lengthes JMI
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "BrailleLineLength" << " : " << fBrailleLineLength <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "BraillePageLength" << " : " << fBraillePageLength <<
-    endl;
-  os << endl;
+    std::endl;
+  os << std::endl;
         */
 
   // print the score pages if any
@@ -193,21 +191,21 @@ void bsrScore::printFull (ostream& os) const
 
   if (scorePagesListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "ScorePagesList";
 
     if (scorePagesListSize) {
-      os << endl;
+      os << std::endl;
       ++gIndenter;
 
-      list<S_bsrPage>::const_iterator
+      std::list<S_bsrPage>::const_iterator
         iBegin = fScorePagesList.begin (),
         iEnd   = fScorePagesList.end (),
         i      = iBegin;
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        // no endl here
+        // no std::endl here
       } // for
 
       --gIndenter;
@@ -216,25 +214,25 @@ void bsrScore::printFull (ostream& os) const
       os <<
         " : " <<
          "[NONE]" <<
-      endl;
+      std::endl;
     }
   }
 
   --gIndenter;
 }
 
-void bsrScore::printShort (ostream& os) const
+void bsrScore::printShort (std::ostream& os) const
 {
   os <<
     "BSR Score" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
   // print the MSR structure (without the voices)
   fMsrScore->
     printShort (os);
-  os << endl;
+  os << std::endl;
 
   // print the transcription notes if any
   const int fieldWidth = 19;
@@ -247,20 +245,20 @@ void bsrScore::printShort (ostream& os) const
     else {
       os <<
         "TranscriptionNotes: [NONE]" <<
-        endl;
+        std::endl;
     }
   }
 
 /*
   // print the lines and pages maximum lengthes JMI
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "BrailleLineLength" << " : " << fBrailleLineLength <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "BraillePageLength" << " : " << fBraillePageLength <<
-    endl;
-  os << endl;
+    std::endl;
+  os << std::endl;
         */
 
   // print the score pages if any
@@ -268,21 +266,21 @@ void bsrScore::printShort (ostream& os) const
 
   if (scorePagesListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "ScorePagesList";
 
     if (scorePagesListSize) {
-      os << endl;
+      os << std::endl;
       ++gIndenter;
 
-      list<S_bsrPage>::const_iterator
+      std::list<S_bsrPage>::const_iterator
         iBegin = fScorePagesList.begin (),
         iEnd   = fScorePagesList.end (),
         i      = iBegin;
       for ( ; ; ) {
         (*i)->printShort (os);
         if (++i == iEnd) break;
-        // no endl here
+        // no std::endl here
       } // for
 
       --gIndenter;
@@ -291,14 +289,14 @@ void bsrScore::printShort (ostream& os) const
       os <<
         " : " <<
          "[EMPTY]" <<
-      endl;
+      std::endl;
     }
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrScore& score)
+std::ostream& operator << (std::ostream& os, const S_bsrScore& score)
 {
   score->print (os);
   return os;

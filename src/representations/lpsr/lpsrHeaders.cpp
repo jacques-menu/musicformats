@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -25,8 +25,6 @@
 #include "lpsrOah.h"
 #include "lpsr2lilypondOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -105,7 +103,7 @@ void lpsrHeader::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrHeader::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -118,7 +116,7 @@ void lpsrHeader::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrHeader::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -131,7 +129,7 @@ void lpsrHeader::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrHeader::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -144,7 +142,7 @@ void lpsrHeader::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrHeader::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -154,9 +152,9 @@ void lpsrHeader::acceptOut (basevisitor* v)
 void lpsrHeader::browseData (basevisitor* v)
 {}
 
-string lpsrHeader::asString () const
+std::string lpsrHeader::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[LpsrHeader" <<
@@ -172,11 +170,11 @@ string lpsrHeader::asString () const
   return s.str ();
 }
 
-void lpsrHeader::print (ostream& os) const
+void lpsrHeader::print (std::ostream& os) const
 {
   os <<
     "Header" <<
-    endl;
+    std::endl;
 
   Bool emptyHeader (true);
 
@@ -190,114 +188,114 @@ void lpsrHeader::print (ostream& os) const
     "HeaderIdentification:";
 
   if (fHeaderIdentification) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
     os <<
       fHeaderIdentification;
     --gIndenter;
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   // LilyPond informations
 
   if (fLilypondDedication.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondDedication" << " : " <<
       fLilypondDedication <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
 
   if (fLilypondPiece.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondPiece" << " : " <<
       fLilypondPiece <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
 
   if (fLilypondOpus.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondOpus" << " : " <<
       fLilypondOpus <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
 
   if (fLilypondTitle.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondTitle" << " : " <<
       fLilypondTitle <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
 
   if (fLilypondSubTitle.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondSubTitle" << " : " <<
       fLilypondSubTitle <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
 
   if (fLilypondSubSubTitle.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondSubSubTitle" << " : " <<
       fLilypondSubSubTitle <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
 
   if (fLilypondInstrument.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondInstrument" << " : " <<
       fLilypondInstrument <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
 
   if (fLilypondMeter.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondMeter" << " : " <<
       fLilypondMeter <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
 
   if (fLilypondCopyright.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondCopyright" << " : " <<
       fLilypondCopyright <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
 
   if (fLilypondTagline.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fLilypondTagline" << " : " <<
       fLilypondTagline <<
-      endl;
+      std::endl;
 
     emptyHeader = false;
   }
@@ -305,24 +303,24 @@ void lpsrHeader::print (ostream& os) const
   if (emptyHeader) {
     os <<
       ' ' << "nothing specified" <<
-      endl << endl; // JMI
+      std::endl << std::endl; // JMI
   }
 
   --gIndenter;
 }
 
-void lpsrHeader::printShort (ostream& os) const
+void lpsrHeader::printShort (std::ostream& os) const
 {
   print (os); // JMI
 }
 
-ostream& operator << (ostream& os, const S_lpsrHeader& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrHeader& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -334,7 +332,7 @@ ostream& operator << (ostream& os, const S_lpsrHeader& elt)
 /*
 void lpsrHeader::appendRight (
   int    inputLineNumber,
-  string value)
+  std::string value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
@@ -343,7 +341,7 @@ void lpsrHeader::appendRight (
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -352,7 +350,7 @@ void lpsrHeader::appendRight (
 
 void lpsrHeader::appendComposer (
   int    inputLineNumber,
-  string value)
+  std::string value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
@@ -361,7 +359,7 @@ void lpsrHeader::appendComposer (
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -370,7 +368,7 @@ void lpsrHeader::appendComposer (
 
 void lpsrHeader::appendArranger (
   int    inputLineNumber,
-  string value)
+  std::string value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
@@ -379,7 +377,7 @@ void lpsrHeader::appendArranger (
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -388,7 +386,7 @@ void lpsrHeader::appendArranger (
 
 void lpsrHeader::appendLyricist (
   int    inputLineNumber,
-  string value)
+  std::string value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
@@ -397,7 +395,7 @@ void lpsrHeader::appendLyricist (
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -406,7 +404,7 @@ void lpsrHeader::appendLyricist (
 
 void lpsrHeader::appendPoet (
   int    inputLineNumber,
-  string value)
+  std::string value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
@@ -415,7 +413,7 @@ void lpsrHeader::appendPoet (
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -430,7 +428,7 @@ void lpsrHeader::removeAllPoets (
     gLogStream <<
       "Removing all poets from lpsrHeader" <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -439,7 +437,7 @@ void lpsrHeader::removeAllPoets (
 
 void lpsrHeader::appendTranslator (
   int    inputLineNumber,
-  string value)
+  std::string value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
@@ -448,7 +446,7 @@ void lpsrHeader::appendTranslator (
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -457,7 +455,7 @@ void lpsrHeader::appendTranslator (
 
 void lpsrHeader::appendArtist (
   int    inputLineNumber,
-  string value)
+  std::string value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
@@ -466,7 +464,7 @@ void lpsrHeader::appendArtist (
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -475,7 +473,7 @@ void lpsrHeader::appendArtist (
 
 void lpsrHeader::appendSoftware (
   int    inputLineNumber,
-  string value)
+  std::string value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
@@ -484,7 +482,7 @@ void lpsrHeader::appendSoftware (
       value <<
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 

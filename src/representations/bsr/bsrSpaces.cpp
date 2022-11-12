@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
 
@@ -21,8 +21,6 @@
 
 #include "bsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -64,7 +62,7 @@ void bsrSpaces::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrSpaces::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -77,7 +75,7 @@ void bsrSpaces::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrSpaces::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -95,7 +93,7 @@ void bsrSpaces::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrSpaces::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -108,7 +106,7 @@ void bsrSpaces::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrSpaces::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -118,9 +116,9 @@ void bsrSpaces::acceptOut (basevisitor* v)
 void bsrSpaces::browseData (basevisitor* v)
 {}
 
-string bsrSpaces::asString () const
+std::string bsrSpaces::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Spaces" <<
@@ -132,9 +130,9 @@ string bsrSpaces::asString () const
   return s.str ();
 }
 
-string bsrSpaces::asDebugString () const
+std::string bsrSpaces::asDebugString () const
 {
-  string result;
+  std::string result;
 
   for (int i = 1; i <= fNumberOfSpaces; ++i) {
     result += ' ';
@@ -143,38 +141,38 @@ string bsrSpaces::asDebugString () const
   return result;
 }
 
-void bsrSpaces::print (ostream& os) const
+void bsrSpaces::print (std::ostream& os) const
 {
   os <<
     "Spaces" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 16;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "numberOfSpaces" << " : " << fNumberOfSpaces <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "spacesCellsList" << " : " << fSpacesCellsList <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "spacesBefore" << " : " << fSpacesBefore <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrSpaces& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrSpaces& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

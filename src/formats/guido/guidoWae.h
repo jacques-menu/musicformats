@@ -17,8 +17,6 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,7 +24,7 @@ namespace MusicFormats
 class EXP msr2guidoException: public mfException
 {
   public:
-    msr2guidoException (string const& exceptionDescription) throw ()
+    msr2guidoException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };
@@ -35,7 +33,7 @@ typedef SMARTP<msr2guidoException> S_msr2guidoException;
 class EXP msdl2guidoException: public mfException
 {
   public:
-    msdl2guidoException (string const& exceptionDescription) throw ()
+    msdl2guidoException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };

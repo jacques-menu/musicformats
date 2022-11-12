@@ -30,8 +30,8 @@ class EXP xml2brlInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<xml2brlInsiderHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
   protected:
 
@@ -39,8 +39,8 @@ class EXP xml2brlInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           xml2brlInsiderHandler (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
     virtual               ~xml2brlInsiderHandler ();
 
@@ -59,18 +59,18 @@ class EXP xml2brlInsiderHandler : public oahInsiderHandler
     void                  createTheXml2brlPrefixes ();
 
     void                  createTheXml2brlOptionGroups (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override;
+    std::string           fetchOutputFileNameFromTheOptions () const override;
 
     // quiet mode
     void                  enforceHandlerQuietness () override;
@@ -88,7 +88,7 @@ class EXP xml2brlInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -99,7 +99,7 @@ class EXP xml2brlInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<xml2brlInsiderHandler> S_xml2brlInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_xml2brlInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2brlInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP xml2brlInsiderOahGroup : public oahGroup
@@ -107,8 +107,8 @@ class EXP xml2brlInsiderOahGroup : public oahGroup
   public:
 
     static SMARTP<xml2brlInsiderOahGroup> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader);
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader);
 
   public:
 
@@ -123,8 +123,8 @@ class EXP xml2brlInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           xml2brlInsiderOahGroup (
-                            const string&     serviceName,
-                            const string&     handlerHeader);
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader);
 
     virtual               ~xml2brlInsiderOahGroup ();
 
@@ -197,14 +197,14 @@ class EXP xml2brlInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<xml2brlInsiderOahGroup> S_xml2brlInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_xml2brlInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2brlInsiderOahGroup& elt);
 
 EXP extern S_xml2brlInsiderOahGroup gGlobalXml2brlInsiderOahGroup;
 
 //______________________________________________________________________________
 S_xml2brlInsiderOahGroup createGlobalXml2brlOahGroup (
-  const string& serviceName,
-  const string& handlerHeader);
+  const std::string& serviceName,
+  const std::string& handlerHeader);
 
 
 }

@@ -18,8 +18,6 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -29,35 +27,35 @@ class EXP mfOahException: public mfException
   public:
 
     static SMARTP<mfOahException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           mfOahException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<mfOahException> S_mfOahException;
 
 //______________________________________________________________________________
-EXP void oahWarning (const string& warningMessage);
+EXP void oahWarning (const std::string& warningMessage);
 
 EXP void oahWarningWithContext (
-  const string& warningMessage,
-  const string& context);
+  const std::string& warningMessage,
+  const std::string& context);
 
 //______________________________________________________________________________
-EXP void oahError (const string& errorMessage);
+EXP void oahError (const std::string& errorMessage);
 
 EXP void oahErrorWithContext (
-  const string& errorMessage,
-  const string& context);
+  const std::string& errorMessage,
+  const std::string& context);
 
 //______________________________________________________________________________
-EXP void oahInternalWarning (const string& errorMessage);
+EXP void oahInternalWarning (const std::string& errorMessage);
 
-EXP void oahInternalError (const string& errorMessage);
+EXP void oahInternalError (const std::string& errorMessage);
 
 EXP void oahInternalErrorWithContext (
-  const string& errorMessage,
-  const string& context);
+  const std::string& errorMessage,
+  const std::string& context);
 
 
 }

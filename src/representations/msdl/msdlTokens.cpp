@@ -29,16 +29,14 @@
 #include "msdlTokens.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //________________________________________________________________________
-string msdlTokenKindAsString (
+std::string msdlTokenKindAsString (
   msdlTokenKind tokenKind)
 {
-  stringstream s;
+  std::stringstream s;
 
   switch (tokenKind) {
     case msdlTokenKind::kToken_NO_:
@@ -265,10 +263,10 @@ string msdlTokenKindAsString (
   return s.str ();
 }
 
-string msdlTokenDescriptionKindAsString (
+std::string msdlTokenDescriptionKindAsString (
   msdlTokenDescriptionKind tokenDescriptionKind)
 {
-  string result;
+  std::string result;
 
   switch (tokenDescriptionKind) {
     case msdlTokenDescriptionKind::kTokenKeyword:
@@ -290,13 +288,13 @@ string msdlTokenDescriptionKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msdlTokenDescriptionKind& elt)
+std::ostream& operator << (std::ostream& os, const msdlTokenDescriptionKind& elt)
 {
   os << msdlTokenDescriptionKindAsString (elt);
   return os;
 }
 
-string msdlTokenKindAsMsdlString (
+std::string msdlTokenKindAsMsdlString (
   msdlTokenKind            tokenKind,
   msdlKeywordsLanguageKind languageKind)
 {
@@ -306,11 +304,11 @@ string msdlTokenKindAsMsdlString (
       "==> msdlTokenKindAsMsdlString()" <<
       ", tokenKind" << " : " << msdlTokenKindAsString (tokenKind) <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string result;
+  std::string result;
 
   switch (tokenKind) {
     case msdlTokenKind::kToken_NO_:
@@ -452,7 +450,7 @@ string msdlTokenKindAsMsdlString (
 //      break;
 
     case msdlTokenKind::kTokenString:
-      result = "<string>";
+      result = "<std::string>";
       break;
 
     case msdlTokenKind::kTokenName:
@@ -569,15 +567,15 @@ msdlTokenKind msdlTokenKindFromKeywordKind (
   return result;
 }
 
-string existingTokensInLanguage (
+std::string existingTokensInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
   size_t                   namesListMaxLength)
 {
-  string result;
+  std::string result;
 
-  map<msdlKeywordKind, string> *keywordsNamesMapPTR = nullptr;
+  std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
-  // select the relevant keywords names map
+  // select the relevant keywords names std::map
   switch (keywordsLanguageKind) {
     case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
@@ -611,10 +609,10 @@ string existingTokensInLanguage (
     size_t count = 0;
     size_t cumulatedLength = 0;
 
-    stringstream s;
+    std::stringstream s;
 
     for (auto e : EnumNonSeparators<msdlTokenKind> ()) {
-      string
+      std::string
         nonSeparatorTokenAsMsdlString  =
           msdlTokenKindAsMsdlString (
             e,
@@ -630,7 +628,7 @@ string existingTokensInLanguage (
           ||
         e == msdlTokenKind::LanguageDependentFirst
       ) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -669,7 +667,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::create ()
 }
 
 S_msdlTokenKindsSet msdlTokenKindsSet::create (
-  initializer_list<msdlTokenKind> elements)
+  std::initializer_list<msdlTokenKind> elements)
 {
   // create the set
   msdlTokenKindsSet* o = new
@@ -698,7 +696,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
 
   if (fTokenKindsSet.size ()) {
     for (
-      set<msdlTokenKind>::const_iterator i =
+      std::set<msdlTokenKind>::const_iterator i =
         fTokenKindsSet.begin ();
       i != fTokenKindsSet.end ();
       ++i
@@ -712,7 +710,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
     gLogStream <<
       "<== createClone()" <<
       ", result:" << result->asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -723,10 +721,10 @@ msdlTokenKindsSet::msdlTokenKindsSet ()
 {}
 
 msdlTokenKindsSet::msdlTokenKindsSet (
-  initializer_list<msdlTokenKind> elements)
+  std::initializer_list<msdlTokenKind> elements)
 {
   // populate the set
-  initializer_list<msdlTokenKind>::const_iterator it;
+  std::initializer_list<msdlTokenKind>::const_iterator it;
 
   for (it = elements.begin (); it != elements.end (); ++it) {
     fTokenKindsSet.insert ((*it));
@@ -746,7 +744,7 @@ void msdlTokenKindsSet::addElementsFrom (S_msdlTokenKindsSet tokenKindsSet)
 {
   if (tokenKindsSet->fTokenKindsSet.size ()) {
     for (
-      set<msdlTokenKind>::const_iterator i =
+      std::set<msdlTokenKind>::const_iterator i =
         tokenKindsSet->fTokenKindsSet.begin ();
       i != tokenKindsSet->fTokenKindsSet.end ();
       ++i
@@ -760,7 +758,7 @@ void msdlTokenKindsSet::removeElementsFrom (S_msdlTokenKindsSet tokenKindsSet)
 {
   if (tokenKindsSet->fTokenKindsSet.size ()) {
     for (
-      set<msdlTokenKind>::const_iterator i =
+      std::set<msdlTokenKind>::const_iterator i =
         tokenKindsSet->fTokenKindsSet.begin ();
       i != tokenKindsSet->fTokenKindsSet.end ();
       ++i
@@ -770,14 +768,14 @@ void msdlTokenKindsSet::removeElementsFrom (S_msdlTokenKindsSet tokenKindsSet)
   }
 }
 
-string msdlTokenKindsSet::asString () const
+std::string msdlTokenKindsSet::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s << '[';
 
   if (fTokenKindsSet.size ()) {
-    set<msdlTokenKind>::const_iterator
+    std::set<msdlTokenKind>::const_iterator
       iBegin = fTokenKindsSet.begin (),
       iEnd   = fTokenKindsSet.end (),
       i      = iBegin;
@@ -802,13 +800,13 @@ string msdlTokenKindsSet::asString () const
   return s.str ();
 }
 
-void msdlTokenKindsSet::print (ostream& os) const
+void msdlTokenKindsSet::print (std::ostream& os) const
 {
   os <<
     "msdlTokenKindsSet:";
 
   if (fTokenKindsSet.size ()) {
-    set<msdlTokenKind>::const_iterator
+    std::set<msdlTokenKind>::const_iterator
       iBegin = fTokenKindsSet.begin (),
       iEnd   = fTokenKindsSet.end (),
       i      = iBegin;
@@ -828,17 +826,17 @@ void msdlTokenKindsSet::print (ostream& os) const
     } // for
   }
   else {
-    os << " empty" << endl;
+    os << " empty" << std::endl;
   }
 }
 
-ostream& operator << (ostream& os, const S_msdlTokenKindsSet& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlTokenKindsSet& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -905,7 +903,7 @@ EXP S_msdlTokenKindsSet operator+ (
     gLogStream <<
       "<== S_msdlTokenKindsSet operator+()" <<
       ", result:" << result->asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -927,7 +925,7 @@ EXP S_msdlTokenKindsSet operator+ (
     gLogStream <<
       "<== S_msdlTokenKindsSet operator+()" <<
       ", result:" << result->asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -988,12 +986,12 @@ msdlKeywordKind msdlTokenDescription::getKeywordKind () const
 
     case msdlTokenDescriptionKind::kTokenInteger:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains an integer, not a keyword";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1001,12 +999,12 @@ msdlKeywordKind msdlTokenDescription::getKeywordKind () const
 
     case msdlTokenDescriptionKind::kTokenDouble:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a double, not an keyword";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1014,12 +1012,12 @@ msdlKeywordKind msdlTokenDescription::getKeywordKind () const
 
     case msdlTokenDescriptionKind::kTokenCharacter:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a character, not an keyword";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1027,12 +1025,12 @@ msdlKeywordKind msdlTokenDescription::getKeywordKind () const
 
     case msdlTokenDescriptionKind::kTokenString:
       {
-        string message =
-          "MSDL token desr contains a string, not an keyword";
+        std::string message =
+          "MSDL token desr contains a std::string, not an keyword";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1049,12 +1047,12 @@ int msdlTokenDescription::getInteger () const
   switch (fTokenDescriptionKind) {
     case msdlTokenDescriptionKind::kTokenKeyword:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a keyword, not an integer";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1066,12 +1064,12 @@ int msdlTokenDescription::getInteger () const
 
     case msdlTokenDescriptionKind::kTokenDouble:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a double, not an integer";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1079,12 +1077,12 @@ int msdlTokenDescription::getInteger () const
 
     case msdlTokenDescriptionKind::kTokenCharacter:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a character, not an integer";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1092,12 +1090,12 @@ int msdlTokenDescription::getInteger () const
 
     case msdlTokenDescriptionKind::kTokenString:
       {
-        string message =
-          "MSDL token desr contains a string, not an integer";
+        std::string message =
+          "MSDL token desr contains a std::string, not an integer";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1114,12 +1112,12 @@ double msdlTokenDescription::getDouble () const
   switch (fTokenDescriptionKind) {
     case msdlTokenDescriptionKind::kTokenKeyword:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a keyword, not a double";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1127,12 +1125,12 @@ double msdlTokenDescription::getDouble () const
 
     case msdlTokenDescriptionKind::kTokenInteger:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains an integer, not a double";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1144,12 +1142,12 @@ double msdlTokenDescription::getDouble () const
 
     case msdlTokenDescriptionKind::kTokenCharacter:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a character, not a double";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1157,12 +1155,12 @@ double msdlTokenDescription::getDouble () const
 
     case msdlTokenDescriptionKind::kTokenString:
       {
-        string message =
-          "MSDL token desr contains a string, not a double";
+        std::string message =
+          "MSDL token desr contains a std::string, not a double";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1180,12 +1178,12 @@ char msdlTokenDescription::getCharacter () const
   switch (fTokenDescriptionKind) {
     case msdlTokenDescriptionKind::kTokenKeyword:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a keyword, not a character";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1193,12 +1191,12 @@ char msdlTokenDescription::getCharacter () const
 
     case msdlTokenDescriptionKind::kTokenInteger:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains an integer, not a character";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1206,12 +1204,12 @@ char msdlTokenDescription::getCharacter () const
 
     case msdlTokenDescriptionKind::kTokenDouble:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a double, not a character";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1223,12 +1221,12 @@ char msdlTokenDescription::getCharacter () const
 
     case msdlTokenDescriptionKind::kTokenString:
       {
-        string message =
+        std::string message =
           "MSDL token desr contains a double, not a character";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1237,19 +1235,19 @@ char msdlTokenDescription::getCharacter () const
   return result;
 }
 
-string msdlTokenDescription::getString () const
+std::string msdlTokenDescription::getString () const
 {
-  string result;
+  std::string result;
 
   switch (fTokenDescriptionKind) {
     case msdlTokenDescriptionKind::kTokenKeyword:
       {
-        string message =
-          "MSDL token desr contains a keyword, not a string";
+        std::string message =
+          "MSDL token desr contains a keyword, not a std::string";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1257,12 +1255,12 @@ string msdlTokenDescription::getString () const
 
     case msdlTokenDescriptionKind::kTokenInteger:
       {
-        string message =
-          "MSDL token desr contains an integer, not a string";
+        std::string message =
+          "MSDL token desr contains an integer, not a std::string";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1270,12 +1268,12 @@ string msdlTokenDescription::getString () const
 
     case msdlTokenDescriptionKind::kTokenDouble:
       {
-        string message =
-          "MSDL token desr contains a double, not a string";
+        std::string message =
+          "MSDL token desr contains a double, not a std::string";
 
         gLogStream <<
           message <<
-          endl;
+          std::endl;
 
         throw msdlException (message);
       }
@@ -1293,9 +1291,9 @@ string msdlTokenDescription::getString () const
   return result;
 }
 
-string msdlTokenDescription::asString () const
+std::string msdlTokenDescription::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[MSDL tokenDescription" <<
@@ -1330,7 +1328,7 @@ string msdlTokenDescription::asString () const
   return s.str ();
 }
 
-void msdlTokenDescription::print (ostream& os) const
+void msdlTokenDescription::print (std::ostream& os) const
 {
   os <<
     fTokenDescriptionKind <<
@@ -1361,7 +1359,7 @@ void msdlTokenDescription::print (ostream& os) const
   os << ']';
 }
 
-ostream& operator << (ostream& os, const msdlTokenDescription& elt)
+std::ostream& operator << (std::ostream& os, const msdlTokenDescription& elt)
 {
   elt.print (os);
   return os;
@@ -1403,7 +1401,7 @@ msdlToken::msdlToken (
 
 msdlToken::msdlToken (
   msdlTokenKind tokenKind,
-  const string& value)
+  const std::string& value)
     : fTokenKind (tokenKind)
 {
   initializeToken ();
@@ -1430,11 +1428,11 @@ void msdlToken::initializeToken ()
   fTokenPositionInLine = 0;
 }
 
-string msdlToken::asString () const
+std::string msdlToken::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
-  s << left <<
+  s << std::left <<
     "[ " <<
     "@" << fTokenLineNumber <<
     ":" << fTokenPositionInLine <<
@@ -1601,7 +1599,7 @@ string msdlToken::asString () const
   return s.str ();
 }
 
-string msdlToken::asMsdlString (
+std::string msdlToken::asMsdlString (
   msdlKeywordsLanguageKind languageKind,
   msdlCommentsTypeKind     commentsTypeKind) const
 {
@@ -1611,11 +1609,11 @@ string msdlToken::asMsdlString (
       "==> asMsdlString()" <<
       ", tokenKind" << " : " << msdlTokenKindAsString (fTokenKind) <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
-      endl;
+      std::endl;
   }
 #endif
 
-  stringstream s;
+  std::stringstream s;
 
   switch (fTokenKind) {
     case msdlTokenKind::kToken_NO_:
@@ -1644,7 +1642,7 @@ string msdlToken::asMsdlString (
       break;
 
     case msdlTokenKind::kTokenEndOfLine:
-      s << endl;
+      s << std::endl;
       break;
 
     case msdlTokenKind::kTokenParenthesizedComment:
@@ -1790,13 +1788,13 @@ string msdlToken::asMsdlString (
   return s.str ();
 }
 
-void msdlToken::print (ostream& os) const
+void msdlToken::print (std::ostream& os) const
 {
-  os << left <<
+  os << std::left <<
     msdlTokenKindAsString (fTokenKind) <<
     " @" << fTokenLineNumber <<
     ":" << fTokenPositionInLine <<
-    endl;
+    std::endl;
 
   switch (fTokenKind) {
     case msdlTokenKind::kToken_NO_:
@@ -1952,10 +1950,10 @@ void msdlToken::print (ostream& os) const
         msdlKeywordKindAsString (fTokenDescription.getKeywordKind ());
   } // switch
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const msdlToken& elt)
+std::ostream& operator << (std::ostream& os, const msdlToken& elt)
 {
   elt.print (os);
   return os;
@@ -1982,23 +1980,23 @@ void msdlTokensList::appendTokenToTokensList (
   fTokensList.push_back (token);
 }
 
-string msdlTokensList::asString () const
+std::string msdlTokensList::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
-    "MSDL tokens list" <<
+    "MSDL tokens std::list" <<
     mfSingularOrPluralWithoutNumber (
       fTokensList.size (), "element", "elements");
 
   return s.str ();
 }
 
-void msdlTokensList::print (ostream& os) const
+void msdlTokensList::print (std::ostream& os) const
 {
   os <<
     "MsdlTokensList" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -2009,7 +2007,7 @@ void msdlTokensList::print (ostream& os) const
   if (tokensListSize) {
     ++gIndenter;
 
-    list<msdlToken>::const_iterator
+    std::list<msdlToken>::const_iterator
       iBegin = fTokensList.begin (),
       iEnd   = fTokensList.end (),
       i      = iBegin;
@@ -2017,25 +2015,25 @@ void msdlTokensList::print (ostream& os) const
     for ( ; ; ) {
       os << ((*i));
       if (++i == iEnd) break;
- // JMI      os << endl;
+ // JMI      os << std::endl;
     } // for
 
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msdlTokensList& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlTokensList& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

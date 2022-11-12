@@ -75,8 +75,8 @@ The latter file can be used to check the grammar, in particular if \LR\ conflict
 
 Only the predefined \code{bool} type is used, since the generated C++ code relies on this. This is why \methodName{getValue} is used in \clisamples{mfsl.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
-    string                 theMfTool;
-    string                 theInputFile;
+    std::string            theMfTool;
+    std::string            theInputFile;
     oahOptionsAndArguments optionsAndArguments;
 
     err =
@@ -198,7 +198,7 @@ clean:
 
 The tokens are described in \mfsl{mfslParser.yy}, such as:
 \begin{lstlisting}[language=Bison]
-%token <string> OPTION "option"
+%token <std::string> OPTION "option"
 \end{lstlisting}
 
 Both \code{OPTION} and \code{"option"} can be used in the productions, but the grammar is more readable if the capitalized name is used:
@@ -209,7 +209,7 @@ Option
 	    if (drv.getDisplayNonTerminals ()) {
         gLogStream <<
           "  ==> option " << $1 <<
-          endl << endl;
+          std::endl << std::endl;
 			}
 
 			$$ = oahOptionNameAndValue::create ($1, "");
@@ -220,7 +220,7 @@ Option
       if (drv.getDisplayNonTerminals ()) {
         gLogStream <<
           "  ==> option " << $1 << ' ' << $2 <<
-          endl << endl;
+          std::endl << std::endl;
       }
 
       $$ = oahOptionNameAndValue::create ($1, $2);
@@ -237,7 +237,7 @@ The name \code{OPTION} is used in \mfsl{mfslScanner.ll} prefixed by \code{yy::pa
   if (drv.getTraceTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << ']' <<
-    endl;
+    std::endl;
   }
   return yy::parser::make_OPTION (yytext, loc);
 }
@@ -245,7 +245,7 @@ The name \code{OPTION} is used in \mfsl{mfslScanner.ll} prefixed by \code{yy::pa
 
 The suffix after \code{make_} has to be defined in the \mfsl{mfslParser.yy} for this to do the link between the Flex-generated and Bison-generated code:
 \begin{lstlisting}[language=Terminal]
-%token <string> OPTION "option"
+%token <std::string> OPTION "option"
 \end{lstlisting}
 
 In \mfsl{mfslParser.cpp}, this becomes:
@@ -304,7 +304,7 @@ class   mfslDriver
     // constants
     // ------------------------------------------------------
 
-    static const string   K_ALL_PSEUDO_LABEL_NAME;
+    static const std::string   K_ALL_PSEUDO_LABEL_NAME;
 
     // // constructor/destructor
     // ------------------------------------------------------
@@ -335,13 +335,13 @@ class   mfslDriver
     // ------------------------------------------------------
 
     // the name of the MusicFormats tool
-		string                fTool;
+		std::string           fTool;
 
     // the name of the MusicFormats script
-		string                fScriptName;
+		std::string           fScriptName;
 
     // the names of the input sources
-    list<string>          fInputSoucesList;
+    std::list<std::string>          fInputSoucesList;
 
 
     // scanning
@@ -402,7 +402,7 @@ void mfslDriver::scanBegin ()
 
   else if (!(yyin = fopen (fScriptName.c_str (), "r")))
     {
-      stringstream s;
+      std::stringstream s;
 
       char*
         errorString =
@@ -413,7 +413,7 @@ void mfslDriver::scanBegin ()
           "cannot open " <<
           fScriptName << ": " <<
           errorString <<
-          endl;
+          std::endl;
 
         mfslFileError (
           fScriptName,
@@ -528,7 +528,7 @@ The numbers are handled by:
     gLogStream <<
     	"--> " << drv.getScannerLocation () <<
 			" double: " << yytext <<
-			endl;
+			std::endl;
   }
   return yy::parser::make_DOUBLE (yytext, loc);
 }
@@ -538,7 +538,7 @@ The numbers are handled by:
     gLogStream <<
     	"--> " << drv.getScannerLocation () <<
 			" integer: " << yytext <<
-			endl;
+			std::endl;
   }
   return yy::parser::make_INTEGER (yytext, loc);
 }
@@ -550,7 +550,7 @@ The \mfslLang\ keywords are handled with the \code{make_...} facility:
   if (drv.getTraceTokens ()) {
     gLogStream <<
     	"--> " << drv.getScannerLocation () << ": " << yytext <<
-			endl;
+			std::endl;
   }
   return yy::parser::make_TOOL (loc);
 }
@@ -562,7 +562,7 @@ The names and the options are handled by:
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": name [" << yytext << ']' <<
-    endl;
+    std::endl;
   }
 
   loc.begin.column += yyleng;
@@ -579,7 +579,7 @@ The names and the options are handled by:
   if (drv.getTraceTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << ']' <<
-    endl;
+    std::endl;
   }
   return yy::parser::make_OPTION (yytext, loc);
 }
@@ -590,7 +590,7 @@ The names and the options are handled by:
   if (drv.getTraceTokens ()) {
     gLogStream <<
     	"--> " << drv.getScannerLocation () << ": " << yytext <<
-			endl;
+			std::endl;
   }
   return yy::parser::make_LEFT_PARENTHESIS (loc);
 }
@@ -697,15 +697,15 @@ The \mfslLang\ tokens are:
   #include "mfslDriver.h"
 }
 
-%token <string> INTEGER "integer number"
-%token <string> DOUBLE  "double number"
+%token <std::string> INTEGER "integer number"
+%token <std::string> DOUBLE  "double number"
 
-%token <string> SINGLE_QUOTED_STRING "single quoted_string"
-%token <string> DOUBLE_QUOTED_STRING "double quoted_string"
+%token <std::string> SINGLE_QUOTED_STRING "single quoted_string"
+%token <std::string> DOUBLE_QUOTED_STRING "double quoted_string"
 
-%token <string> NAME "name"
+%token <std::string> NAME "name"
 
-%token <string> OPTION "option"
+%token <std::string> OPTION "option"
 \end{lstlisting}
 
 
@@ -718,14 +718,14 @@ They are:
 // the MFSL non-terminals
 //_______________________________________________________________________________
 
-%nterm <string> Number
+%nterm <std::string> Number
 
-%nterm <string> SingleString
-%nterm <string> String
+%nterm <std::string> SingleString
+%nterm <std::string> std::string
 
-%nterm <string> OptionValue
+%nterm <std::string> OptionValue
 
-%nterm <string> LabelName
+%nterm <std::string> LabelName
 
 
 // the MFSL axiom
@@ -742,26 +742,26 @@ They are:
 This is provided by \mfsl{mfslInterpreterInterface.h}:
 \begin{lstlisting}[language=Terminal]
 EXP extern mfMusicformatsErrorKind launchMfslInterpreter (
-  const string&           inputSourceName,
+  const std::string&           inputSourceName,
   bool                    traceScanning,
   bool                    traceParsing,
   bool                    displayTokens,
   bool                    displayNonTerminals,
-  string&                 theMfTool,
-  string&                 theInputFile,
+  std::string&                 theMfTool,
+  std::string&                 theInputFile,
   oahOptionsAndArguments& optionsAndArguments);
 \end{lstlisting}
 
 The definition of this function is placed in \mfsl{mfslScanner.ll}:
 \begin{lstlisting}[language=Terminal]
 mfMusicformatsErrorKind launchMfslInterpreter (
-  const string&           inputSourceName,
+  const std::string&           inputSourceName,
   bool                    traceScanning,
   bool                    traceParsing,
   bool                    displayTokens,
   bool                    displayNonTerminals,
-  string&                 theMfTool,
-  string&                 theInputFile,
+  std::string&                 theMfTool,
+  std::string&                 theInputFile,
   oahOptionsAndArguments& optionsAndArguments)
 {
   mfMusicformatsErrorKind
@@ -780,7 +780,7 @@ mfMusicformatsErrorKind launchMfslInterpreter (
 
   gLogStream <<
     "--> parseResult: " << parseResult <<
-    endl;
+    std::endl;
 
   if (! parseResult) {
     result =
@@ -789,9 +789,9 @@ mfMusicformatsErrorKind launchMfslInterpreter (
 
 	gLogStream <<
     "inputFileName: " << theDriver.getInputFileName () <<
-  	endl <<
+  	std::endl <<
 		"toolName: " << theDriver.getToolName () <<
-  	endl;
+  	std::endl;
 
   theMfTool    = theDriver.getToolName ();
   theInputFile = theDriver.getInputFileName ();
@@ -857,7 +857,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl 
 --> test.mfsl:13.2-11: name [voice1Only]
 --> test.mfsl:13.12: :
 --> test.mfsl:14.5-10: option [-title]
---> test.mfsl:14.12-34: double quoted string ["]
+--> test.mfsl:14.12-34: double quoted std::string ["]
   ==> option -title "
 
 --> test.mfsl:15.5-21: option [-ignore-msr-voice]
@@ -870,7 +870,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl 
 --> test.mfsl:18.2-11: name [voice2Only]
 --> test.mfsl:18.12: :
 --> test.mfsl:19.5-10: option [-title]
---> test.mfsl:19.12-34: double quoted string ["]
+--> test.mfsl:19.12-34: double quoted std::string ["]
   ==> option -title "
 
 --> test.mfsl:20.5-22: option [--ignore-msr-voice]
@@ -903,7 +903,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl >
 
 The \mfslInterp\ uses a variant of the \MainIt{stopper sets} method that was present in the early Pascal and Pascal-S converters. The latter passed a set of tokens not to be overtaken to the procedures in charge of accepting the various statements in the language. Strangely enough, this was not done for declarations.
 
-We use a stack of tokens sets that grows and shrinks in parallel with the accepting functions\index{functions}, to know more contextual informations when deciding wether to consume a token or not. The corresponding term is {it shift}
+We use a std::stack of tokens sets that grows and shrinks in parallel with the accepting functions\index{functions}, to know more contextual informations when deciding wether to consume a token or not. The corresponding term is {it shift}
 when building the analysis tables in LR technology.
 
 

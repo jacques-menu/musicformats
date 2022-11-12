@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <algorithm>    // for_each
 
 #include "visitor.h"
@@ -21,16 +21,14 @@
 #include "oahOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string lpsrCommentedKindAsString (
+std::string lpsrCommentedKindAsString (
   lpsrCommentedKind commentedKind)
 {
-  string result;
+  std::string result;
 
   switch (commentedKind) {
     case lpsrCommentedKind::kCommentedYes:
@@ -44,16 +42,16 @@ string lpsrCommentedKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrCommentedKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrCommentedKind& elt)
 {
   os << lpsrCommentedKindAsString (elt);
   return os;
 }
 
-string lpsrEndOfLineKindAsString (
+std::string lpsrEndOfLineKindAsString (
   lpsrEndOfLineKind endOfLineKind)
 {
-  string result;
+  std::string result;
 
   switch (endOfLineKind) {
     case lpsrEndOfLineKind::kEndOfLineOnce:
@@ -70,7 +68,7 @@ string lpsrEndOfLineKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrEndOfLineKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrEndOfLineKind& elt)
 {
   os << lpsrEndOfLineKindAsString (elt);
   return os;
@@ -80,9 +78,9 @@ ostream& operator << (ostream& os, const lpsrEndOfLineKind& elt)
 S_lpsrSchemeVariable lpsrSchemeVariable::create (
   int               inputLineNumber,
   lpsrCommentedKind commentedKind,
-  const string&     variableName,
-  const string&     value,
-  const string&     comment,
+  const std::string&     variableName,
+  const std::string&     value,
+  const std::string&     comment,
   lpsrEndOfLineKind endOfLineKind)
 {
   lpsrSchemeVariable* o =
@@ -96,9 +94,9 @@ S_lpsrSchemeVariable lpsrSchemeVariable::create (
 lpsrSchemeVariable::lpsrSchemeVariable (
   int               inputLineNumber,
   lpsrCommentedKind commentedKind,
-  const string&     variableName,
-  const string&     value,
-  const string&     comment,
+  const std::string&     variableName,
+  const std::string&     value,
+  const std::string&     comment,
   lpsrEndOfLineKind endOfLineKind)
     : lpsrElement (inputLineNumber)
 {
@@ -121,7 +119,7 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrSchemeVariable::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -134,7 +132,7 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrSchemeVariable::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -147,7 +145,7 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrSchemeVariable::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -160,7 +158,7 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrSchemeVariable::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -170,17 +168,17 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
 void lpsrSchemeVariable::browseData (basevisitor* v)
 {}
 
-void lpsrSchemeVariable::print (ostream& os) const
+void lpsrSchemeVariable::print (std::ostream& os) const
 {
   os <<
     "[SchemeVariable" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // escape quotes if any
-  string variableName;
-  string variableValue;
+  std::string variableName;
+  std::string variableValue;
 
   for_each (
     fVariableName.begin (),
@@ -194,35 +192,35 @@ void lpsrSchemeVariable::print (ostream& os) const
   // print resulting strings
   const int fieldWidth = 15;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "variableName" << " : " <<
     "\"" << variableName << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "variableValue" << " : " <<
     "\"" << variableValue << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fCommentedKind" << " : " <<
     fCommentedKind <<
-    endl <<
+    std::endl <<
 
   // backSlashKindAsString ??? JMI
   // varValSeparatorKindAsString ??? JMI
   // quotesKindAsString ??? JMI
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fEndOfLineKind" << " : " <<
     lpsrEndOfLineKindAsString (fEndOfLineKind) <<
-    endl <<
+    std::endl <<
     ']';
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrSchemeVariable& schemeVariable)
+std::ostream& operator << (std::ostream& os, const S_lpsrSchemeVariable& schemeVariable)
 {
   schemeVariable->print (os);
   return os;
@@ -231,9 +229,9 @@ ostream& operator << (ostream& os, const S_lpsrSchemeVariable& schemeVariable)
 //______________________________________________________________________________
 S_lpsrSchemeFunction lpsrSchemeFunction::create (
   int           inputLineNumber,
-  const string& functionName,
-  const string& functionDescription,
-  const string& functionCode)
+  const std::string& functionName,
+  const std::string& functionDescription,
+  const std::string& functionCode)
 {
   lpsrSchemeFunction* o =
     new lpsrSchemeFunction (
@@ -245,9 +243,9 @@ S_lpsrSchemeFunction lpsrSchemeFunction::create (
 
 lpsrSchemeFunction::lpsrSchemeFunction (
   int           inputLineNumber,
-  const string& functionName,
-  const string& functionDescription,
-  const string& functionCode)
+  const std::string& functionName,
+  const std::string& functionDescription,
+  const std::string& functionCode)
     : lpsrElement (inputLineNumber)
 {
   fFunctionName        = functionName;
@@ -264,7 +262,7 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrSchemeFunction::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -277,7 +275,7 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrSchemeFunction::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -290,7 +288,7 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrSchemeFunction::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -303,7 +301,7 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrSchemeFunction::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -313,27 +311,27 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
 void lpsrSchemeFunction::browseData (basevisitor* v)
 {}
 
-void lpsrSchemeFunction::print (ostream& os) const
+void lpsrSchemeFunction::print (std::ostream& os) const
 {
   os <<
     "SchemeFunction" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // print resulting strings
   os <<
     "fFunctionName: \"" << fFunctionName << "\"" <<
-    endl <<
+    std::endl <<
     "fFunctionDescription: \"" << fFunctionDescription << "\"" <<
-    endl <<
+    std::endl <<
     "fFunctionCode: \"" << fFunctionCode << "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrSchemeFunction& schemeFunction)
+std::ostream& operator << (std::ostream& os, const S_lpsrSchemeFunction& schemeFunction)
 {
   schemeFunction->print (os);
   return os;

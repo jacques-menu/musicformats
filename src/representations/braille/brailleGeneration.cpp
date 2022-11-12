@@ -22,16 +22,14 @@
 #include "bsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string bsrUTFKindAsString (
+std::string bsrUTFKindAsString (
   bsrUTFKind UTFKind)
 {
-  string result;
+  std::string result;
 
   switch (UTFKind) {
     case bsrUTFKind::kUTF8:
@@ -45,16 +43,16 @@ string bsrUTFKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrUTFKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrUTFKind& elt)
 {
   os << bsrUTFKindAsString (elt);
   return os;
 }
 
-string bsrByteOrderingKindAsString (
+std::string bsrByteOrderingKindAsString (
   bsrByteOrderingKind byteOrderingKind)
 {
-  string result;
+  std::string result;
 
   switch (byteOrderingKind) {
     case bsrByteOrderingKind::kByteOrderingNone:
@@ -71,7 +69,7 @@ string bsrByteOrderingKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrByteOrderingKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrByteOrderingKind& elt)
 {
   os << bsrByteOrderingKindAsString (elt);
   return os;
@@ -79,7 +77,7 @@ ostream& operator << (ostream& os, const bsrByteOrderingKind& elt)
 
 //______________________________________________________________________________
 // writing UTF-16 to ostreams
-void write_wchar_t (ostream& os, wchar_t cell)
+void write_wchar_t (std::ostream& os, wchar_t cell)
 {
   union Conversion {
     wchar_t       cellar;
@@ -92,7 +90,7 @@ void write_wchar_t (ostream& os, wchar_t cell)
   os << conversion.chars [0] << conversion.chars [1];
 }
 
-ostream& operator << (ostream& os, const bsrCellKind cell)
+std::ostream& operator << (std::ostream& os, const bsrCellKind cell)
 {
   union Conversion {
     wchar_t       cellar;
@@ -111,7 +109,7 @@ ostream& operator << (ostream& os, const bsrCellKind cell)
 /* this class   is purely virtual
 S_bsrBrailleGenerator bsrBrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
-  ostream&            brailleOutputStream)
+  std::ostream&            brailleOutputStream)
 {
   bsrBrailleGenerator* o =
     new bsrBrailleGenerator (
@@ -123,7 +121,7 @@ S_bsrBrailleGenerator bsrBrailleGenerator::create (
 */
 
 bsrBrailleGenerator::bsrBrailleGenerator (
-  ostream& brailleOutputStream)
+  std::ostream& brailleOutputStream)
   : fBrailleOutputStream (
       brailleOutputStream)
 {}
@@ -134,12 +132,12 @@ bsrBrailleGenerator::~bsrBrailleGenerator ()
 void bsrBrailleGenerator::generateCodeForCellsList (
   S_bsrCellsList cellsList)
 {
-  const list<bsrCellKind>&
+  const std::list<bsrCellKind>&
     cellsListElements =
       cellsList->getCellsListElements ();
 
   if (cellsListElements.size ()) {
-    list<bsrCellKind>::const_iterator
+    std::list<bsrCellKind>::const_iterator
       iBegin = cellsListElements.begin (),
       iEnd   = cellsListElements.end (),
       i      = iBegin;
@@ -169,9 +167,9 @@ void bsrBrailleGenerator::generateCodeForLineContents (
         fetchCellsList ());
 }
 
-string bsrBrailleGenerator::asString () const
+std::string bsrBrailleGenerator::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "BrailleGenerator";
@@ -179,18 +177,18 @@ string bsrBrailleGenerator::asString () const
   return s.str ();
 }
 
-void bsrBrailleGenerator::print (ostream& os) const
+void bsrBrailleGenerator::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrBrailleGenerator& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -198,7 +196,7 @@ ostream& operator << (ostream& os, const S_bsrBrailleGenerator& elt)
 
 //______________________________________________________________________________
 S_bsrAsciiBrailleGenerator bsrAsciiBrailleGenerator::create (
-  ostream& brailleOutputStream)
+  std::ostream& brailleOutputStream)
 {
   bsrAsciiBrailleGenerator* o =
     new bsrAsciiBrailleGenerator (
@@ -208,7 +206,7 @@ S_bsrAsciiBrailleGenerator bsrAsciiBrailleGenerator::create (
 }
 
 bsrAsciiBrailleGenerator::bsrAsciiBrailleGenerator (
-  ostream& brailleOutputStream)
+  std::ostream& brailleOutputStream)
     : bsrBrailleGenerator (
         brailleOutputStream)
 {
@@ -221,12 +219,12 @@ bsrAsciiBrailleGenerator::~bsrAsciiBrailleGenerator ()
 void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
   bsrCellKind cellKind)
 {
-  string stringForCell;
+  std::string stringForCell;
 
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot generate code for braille cell '" <<
@@ -317,11 +315,11 @@ void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
     stringForCell;
 }
 
-void bsrAsciiBrailleGenerator::writeTestData (ostream& os)
+void bsrAsciiBrailleGenerator::writeTestData (std::ostream& os)
 {
   gLogStream <<
     "bsrAsciiBrailleGenerator::writeTestData()" <<
-    endl;
+    std::endl;
 
   // generate the table of all Dots 6 cells
 /*
@@ -334,12 +332,12 @@ void bsrAsciiBrailleGenerator::writeTestData (ostream& os)
   os <<
     " A1B'K2l@CIF/MSP\"E3H9O6R^DJG>NTQ,*5<-U8V.%[$+X!&;:4\\0Z7(_?W]#Y)=" <<
  //   "\x0a"; // \n
-    endl; // \n
+    std::endl; // \n
 }
 
-string bsrAsciiBrailleGenerator::asString () const
+std::string bsrAsciiBrailleGenerator::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "AsciiBrailleGenerator";
@@ -347,18 +345,18 @@ string bsrAsciiBrailleGenerator::asString () const
   return s.str ();
 }
 
-void bsrAsciiBrailleGenerator::print (ostream& os) const
+void bsrAsciiBrailleGenerator::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrAsciiBrailleGenerator& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrAsciiBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -367,7 +365,7 @@ ostream& operator << (ostream& os, const S_bsrAsciiBrailleGenerator& elt)
 //______________________________________________________________________________
 S_bsrUTF8BrailleGenerator bsrUTF8BrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
-  ostream&            brailleOutputStream)
+  std::ostream&            brailleOutputStream)
 {
   bsrUTF8BrailleGenerator* o =
     new bsrUTF8BrailleGenerator (
@@ -379,7 +377,7 @@ S_bsrUTF8BrailleGenerator bsrUTF8BrailleGenerator::create (
 
 bsrUTF8BrailleGenerator::bsrUTF8BrailleGenerator (
   bsrByteOrderingKind byteOrderingKind,
-  ostream&            brailleOutputStream)
+  std::ostream&            brailleOutputStream)
     : bsrBrailleGenerator (
         brailleOutputStream)
 {
@@ -407,12 +405,12 @@ bsrUTF8BrailleGenerator::~bsrUTF8BrailleGenerator ()
 void bsrUTF8BrailleGenerator::generateCodeForBrailleCell (
   bsrCellKind cellKind)
 {
-  string stringForCell;
+  std::string stringForCell;
 
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot generate code for braille cell '" <<
@@ -503,11 +501,11 @@ void bsrUTF8BrailleGenerator::generateCodeForBrailleCell (
     stringForCell;
 }
 
-void bsrUTF8BrailleGenerator::writeTestData (ostream& os)
+void bsrUTF8BrailleGenerator::writeTestData (std::ostream& os)
 {
   gLogStream <<
     "bsrUTF8BrailleGenerator::writeTestData()" <<
-    endl;
+    std::endl;
 
   // generate the table of all Dots 6 cells
   for (wchar_t wch = L'\u2800'; wch <= L'\u280f'; ++wch) {
@@ -529,12 +527,12 @@ void bsrUTF8BrailleGenerator::writeTestData (ostream& os)
   } // for
   os << bsrCellKind::kCellEOL;
   os << bsrCellKind::kCellEOP;
-  os << endl;
+  os << std::endl;
 }
 
-string bsrUTF8BrailleGenerator::asString () const
+std::string bsrUTF8BrailleGenerator::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "UTF8BrailleGenerator" <<
@@ -545,18 +543,18 @@ string bsrUTF8BrailleGenerator::asString () const
   return s.str ();
 }
 
-void bsrUTF8BrailleGenerator::print (ostream& os) const
+void bsrUTF8BrailleGenerator::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrUTF8BrailleGenerator& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrUTF8BrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -565,7 +563,7 @@ ostream& operator << (ostream& os, const S_bsrUTF8BrailleGenerator& elt)
 //______________________________________________________________________________
 S_bsrUTF8DebugBrailleGenerator bsrUTF8DebugBrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
-  ostream&            brailleOutputStream)
+  std::ostream&            brailleOutputStream)
 {
   bsrUTF8DebugBrailleGenerator* o =
     new bsrUTF8DebugBrailleGenerator (
@@ -577,7 +575,7 @@ S_bsrUTF8DebugBrailleGenerator bsrUTF8DebugBrailleGenerator::create (
 
 bsrUTF8DebugBrailleGenerator::bsrUTF8DebugBrailleGenerator (
   bsrByteOrderingKind byteOrderingKind,
-  ostream&            brailleOutputStream)
+  std::ostream&            brailleOutputStream)
     : bsrUTF8BrailleGenerator (
         byteOrderingKind,
         brailleOutputStream)
@@ -603,9 +601,9 @@ bsrUTF8DebugBrailleGenerator::bsrUTF8DebugBrailleGenerator (
 bsrUTF8DebugBrailleGenerator::~bsrUTF8DebugBrailleGenerator ()
 {}
 
-string bsrUTF8DebugBrailleGenerator::asString () const
+std::string bsrUTF8DebugBrailleGenerator::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "UTF8DebugBrailleGenerator" <<
@@ -668,18 +666,18 @@ if (true) // JMI TESTS
       bsrCellKind::kCellEOL);
 }
 
-void bsrUTF8DebugBrailleGenerator::print (ostream& os) const
+void bsrUTF8DebugBrailleGenerator::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -688,7 +686,7 @@ ostream& operator << (ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt)
 //______________________________________________________________________________
 S_bsrUTF16BigEndianBrailleGenerator bsrUTF16BigEndianBrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
-  ostream&            brailleOutputStream)
+  std::ostream&            brailleOutputStream)
 {
   bsrUTF16BigEndianBrailleGenerator* o =
     new bsrUTF16BigEndianBrailleGenerator (
@@ -700,7 +698,7 @@ S_bsrUTF16BigEndianBrailleGenerator bsrUTF16BigEndianBrailleGenerator::create (
 
 bsrUTF16BigEndianBrailleGenerator::bsrUTF16BigEndianBrailleGenerator (
   bsrByteOrderingKind byteOrderingKind,
-  ostream&            brailleOutputStream)
+  std::ostream&            brailleOutputStream)
     : bsrBrailleGenerator (
         brailleOutputStream)
 {
@@ -751,12 +749,12 @@ UTF-32/UTF-32bE (hex)  0x00002803 (00002803)
 UTF-32lE (hex)  0x03280000 (03280000)
 Octal Escape Sequence  \342\240\203*/
 
-  string stringForCell;
+  std::string stringForCell;
 
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot generate code for braille cell '" <<
@@ -847,11 +845,11 @@ Octal Escape Sequence  \342\240\203*/
     stringForCell;
 }
 
-void bsrUTF16BigEndianBrailleGenerator::writeTestData (ostream& os)
+void bsrUTF16BigEndianBrailleGenerator::writeTestData (std::ostream& os)
 {
   gLogStream <<
     "bsrUTF16BigEndianBrailleGenerator::writeTestData()" <<
-    endl;
+    std::endl;
 
   // generate the table of all Dots 6 cells
   for (wchar_t wch = L'\u2800'; wch <= L'\u280f'; ++wch) {
@@ -873,12 +871,12 @@ void bsrUTF16BigEndianBrailleGenerator::writeTestData (ostream& os)
   } // for
   os << bsrCellKind::kCellEOL;
   os << bsrCellKind::kCellEOP;
-  os << endl;
+  os << std::endl;
 }
 
-string bsrUTF16BigEndianBrailleGenerator::asString () const
+std::string bsrUTF16BigEndianBrailleGenerator::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "UTF16BigEndianBrailleGenerator" <<
@@ -889,18 +887,18 @@ string bsrUTF16BigEndianBrailleGenerator::asString () const
   return s.str ();
 }
 
-void bsrUTF16BigEndianBrailleGenerator::print (ostream& os) const
+void bsrUTF16BigEndianBrailleGenerator::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrUTF16BigEndianBrailleGenerator& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrUTF16BigEndianBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -909,7 +907,7 @@ ostream& operator << (ostream& os, const S_bsrUTF16BigEndianBrailleGenerator& el
 //______________________________________________________________________________
 S_bsrUTF16SmallEndianBrailleGenerator bsrUTF16SmallEndianBrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
-  ostream&            brailleOutputStream)
+  std::ostream&            brailleOutputStream)
 {
   bsrUTF16SmallEndianBrailleGenerator* o =
     new bsrUTF16SmallEndianBrailleGenerator (
@@ -921,7 +919,7 @@ S_bsrUTF16SmallEndianBrailleGenerator bsrUTF16SmallEndianBrailleGenerator::creat
 
 bsrUTF16SmallEndianBrailleGenerator::bsrUTF16SmallEndianBrailleGenerator (
   bsrByteOrderingKind byteOrderingKind,
-  ostream&            brailleOutputStream)
+  std::ostream&            brailleOutputStream)
     : bsrBrailleGenerator (
         brailleOutputStream)
 {
@@ -974,12 +972,12 @@ UTF-32lE (hex)  0x03280000 (03280000)
 Octal Escape Sequence  \342\240\203
 */
 
-  string stringForCell;
+  std::string stringForCell;
 
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot generate code for braille cell '" <<
@@ -1070,11 +1068,11 @@ Octal Escape Sequence  \342\240\203
     stringForCell;
 }
 
-void bsrUTF16SmallEndianBrailleGenerator::writeTestData (ostream& os)
+void bsrUTF16SmallEndianBrailleGenerator::writeTestData (std::ostream& os)
 {
   gLogStream <<
     "bsrUTF16SmallEndianBrailleGenerator::writeTestData()" <<
-    endl;
+    std::endl;
 
   // generate the table of all Dots 6 cells
   for (wchar_t wch = L'\u2800'; wch <= L'\u280f'; ++wch) {
@@ -1096,12 +1094,12 @@ void bsrUTF16SmallEndianBrailleGenerator::writeTestData (ostream& os)
   } // for
   os << bsrCellKind::kCellEOL;
   os << bsrCellKind::kCellEOP;
-  os << endl;
+  os << std::endl;
 }
 
-string bsrUTF16SmallEndianBrailleGenerator::asString () const
+std::string bsrUTF16SmallEndianBrailleGenerator::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "UTF16SmallEndianBrailleGenerator" <<
@@ -1112,18 +1110,18 @@ string bsrUTF16SmallEndianBrailleGenerator::asString () const
   return s.str ();
 }
 
-void bsrUTF16SmallEndianBrailleGenerator::print (ostream& os) const
+void bsrUTF16SmallEndianBrailleGenerator::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrUTF16SmallEndianBrailleGenerator& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrUTF16SmallEndianBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

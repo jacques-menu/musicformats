@@ -78,7 +78,7 @@ class EXP lpsrLayout : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -87,11 +87,11 @@ class EXP lpsrLayout : public lpsrElement
 
     float                 fLayoutGlobalStaffSize;
 
-    vector<S_lpsrSchemeVariable>
+    std::vector<S_lpsrSchemeVariable>
                           fLpsrSchemeVariablesVector;
 };
 typedef SMARTP<lpsrLayout> S_lpsrLayout;
-EXP ostream& operator << (ostream& os, const S_lpsrLayout& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrLayout& elt);
 
 
 }

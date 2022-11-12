@@ -10,14 +10,12 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 
 #include "mfIndentedTextOutput.h"
 
 #include "msrTupletFactors.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -56,9 +54,9 @@ msrTupletFactor msrTupletFactor::inverse () const
   return result;
 }
 
-string msrTupletFactor::asString () const
+std::string msrTupletFactor::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[TupletFactor" <<
@@ -69,37 +67,37 @@ string msrTupletFactor::asString () const
   return s.str ();
 }
 
-string msrTupletFactor::asFractionString () const
+std::string msrTupletFactor::asFractionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s << fTupletActualNotes << '/' << fTupletNormalNotes;
 
   return s.str ();
 }
 
-void msrTupletFactor::print (ostream& os) const
+void msrTupletFactor::print (std::ostream& os) const
 {
   os <<
     "TupletFactor" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 11;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTupletActualNotes" << " : " << fTupletActualNotes <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTupletNormalNotes" << " : " << fTupletNormalNotes <<
-    endl;
+    std::endl;
 
   --gIndenter;
 };
 
-ostream& operator << (ostream& os, const msrTupletFactor& elt)
+std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 {
   elt.print (os);
   return os;
@@ -109,7 +107,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 // S_msrTuplet msrTuplet::create (
 //   int                     inputLineNumber,
 //   S_msrMeasure            upLinkToMeasure,
-//   const string&           tupletMeasureNumber,
+//   const std::string&           tupletMeasureNumber,
 //   int                     tupletNumber,
 //   msrTupletBracketKind    tupletBracketKind,
 //   msrTupletLineShapeKind  tupletLineShapeKind,
@@ -139,7 +137,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 // msrTuplet::msrTuplet (
 //   int                     inputLineNumber,
 //   S_msrMeasure            upLinkToMeasure,
-//   const string&           tupletMeasureNumber,
+//   const std::string&           tupletMeasureNumber,
 //   int                     tupletNumber,
 //   msrTupletBracketKind    tupletBracketKind,
 //   msrTupletLineShapeKind  tupletLineShapeKind,
@@ -176,7 +174,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
 //     gLogStream <<
 //       "Creating tuplet:" <<
-//       endl;
+//       std::endl;
 //
 //     ++gIndenter;
 //
@@ -197,7 +195,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //     gLogStream <<
 //       "Creating a newborn clone of tuplet " <<
 //       asString () <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -236,7 +234,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 // void msrTuplet::setTupletMeasurePosition (
 //   const S_msrMeasure measure,
 //   const Rational&    measurePosition,
-//   const string&      context)
+//   const std::string&      context)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -253,7 +251,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -311,10 +309,10 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   return result;
 // }
 //
-// string msrTupletTypeKindAsString (
+// std::string msrTupletTypeKindAsString (
 //   msrTupletTypeKind tupletTypeKind)
 // {
-//   string result;
+//   std::string result;
 //
 //   switch (tupletTypeKind) {
 //     case msrTupletTypeKind::kTupletTypeNone:
@@ -337,16 +335,16 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   return result;
 // }
 //
-// ostream& operator << (ostream& os, const msrTupletTypeKind& elt)
+// std::ostream& operator << (std::ostream& os, const msrTupletTypeKind& elt)
 // {
 //   os << msrTupletTypeKindAsString (elt);
 //   return os;
 // }
 //
-// string msrTupletBracketKindAsString (
+// std::string msrTupletBracketKindAsString (
 //   msrTupletBracketKind tupletBracketKind)
 // {
-//   string result;
+//   std::string result;
 //
 //   switch (tupletBracketKind) {
 //     case msrTupletBracketKind::kTupletBracketYes:
@@ -360,16 +358,16 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   return result;
 // }
 //
-// ostream& operator << (ostream& os, const msrTupletBracketKind& elt)
+// std::ostream& operator << (std::ostream& os, const msrTupletBracketKind& elt)
 // {
 //   os << msrTupletBracketKindAsString (elt);
 //   return os;
 // }
 //
-// string msrTupletLineShapeKindAsString (
+// std::string msrTupletLineShapeKindAsString (
 //   msrTupletLineShapeKind tupletLineShapeKind)
 // {
-//   string result;
+//   std::string result;
 //
 //   switch (tupletLineShapeKind) {
 //     case msrTupletLineShapeKind::kTupletLineShapeStraight:
@@ -383,16 +381,16 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   return result;
 // }
 //
-// ostream& operator << (ostream& os, const msrTupletLineShapeKind& elt)
+// std::ostream& operator << (std::ostream& os, const msrTupletLineShapeKind& elt)
 // {
 //   os << msrTupletLineShapeKindAsString (elt);
 //   return os;
 // }
 //
-// string msrTupletShowNumberKindAsString (
+// std::string msrTupletShowNumberKindAsString (
 //   msrTupletShowNumberKind tupletShowNumberKind)
 // {
-//   string result;
+//   std::string result;
 //
 //   switch (tupletShowNumberKind) {
 //     case msrTupletShowNumberKind::kTupletShowNumberActual:
@@ -409,16 +407,16 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   return result;
 // }
 //
-// ostream& operator << (ostream& os, const msrTupletShowNumberKind& elt)
+// std::ostream& operator << (std::ostream& os, const msrTupletShowNumberKind& elt)
 // {
 //   os << msrTupletShowNumberKindAsString (elt);
 //   return os;
 // }
 //
-// string msrTupletShowTypeKindAsString (
+// std::string msrTupletShowTypeKindAsString (
 //   msrTupletShowTypeKind tupletShowTypeKind)
 // {
-//   string result;
+//   std::string result;
 //
 //   switch (tupletShowTypeKind) {
 //     case msrTupletShowTypeKind::kTupletShowTypeActual:
@@ -435,7 +433,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   return result;
 // }
 //
-// ostream& operator << (ostream& os, const msrTupletShowTypeKind& elt)
+// std::ostream& operator << (std::ostream& os, const msrTupletShowTypeKind& elt)
 // {
 //   os << msrTupletShowTypeKindAsString (elt);
 //   return os;
@@ -457,13 +455,13 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //       // the information is missing to display it the normal way
 //       " to tuplet " <<
 //       asString () <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
 //   ++gIndenter;
 //
-//   // append note to elements list
+//   // append note to elements std::list
 //   fTupletElementsList.push_back (note);
 //
 //   // set note's position in tuplet
@@ -516,14 +514,14 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //       chord->asString () <<
 //       " to tuplet " <<
 //       asString () <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
 //   // set the chord kind
 //   chord->setChordKind (msrChordInKind::kChordInTuplet);
 //
-//   // append chord to elements list
+//   // append chord to elements std::list
 //   fTupletElementsList.push_back (chord);
 //
 //   // set chord's position in tuplet
@@ -560,7 +558,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //       tuplet->asString () <<
 //       " to tuplet " <<
 //       asString () <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -576,7 +574,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   // set the tuplet kind
 //   tuplet->setTupletKind (msrTupletInKind::kTupletInTuplet);
 //
-//   // append tuplet to elements list
+//   // append tuplet to elements std::list
 //   fTupletElementsList.push_back (tuplet);
 //
 //   // set tuplet's position in tuplet
@@ -600,14 +598,14 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //       tuplet->asString () <<
 //       " to tuplet clone " <<
 //       asString () <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
 //   // dont' unapply containing tuplet factor,
 //   // this has been done when building the MSR from MusicXML
 //
-//   // append tuplet to elements list
+//   // append tuplet to elements std::list
 //   fTupletElementsList.push_back (tuplet);
 //
 //   // set tuplet's position in tuplet
@@ -667,7 +665,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //     gLogStream <<
 //       "Removing first note from tuplet " <<
 //       asString () <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -697,7 +695,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //
 // /* JMI
 //     for (
-//       list<S_msrElement>::iterator i=fTupletElementsList.begin ();
+//       std::list<S_msrElement>::iterator i=fTupletElementsList.begin ();
 //       i!=fTupletElementsList.end ();
 //       ++i) {
 //       if ((*i) == note) {
@@ -720,7 +718,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //       }
 //     } // for
 //
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "cannot remove note " <<
@@ -742,7 +740,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   }
 //
 //   else {
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "cannot remove the first note of an empty tuplet " <<
@@ -772,7 +770,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //     gLogStream <<
 //       "Removing last note from tuplet " <<
 //       asString () <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -784,7 +782,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //     if (
 //       S_msrNote note = dynamic_cast<msrNote*>(&(*lastTupletElement))
 //     ) {
-//       // remove note from tuplet elements list
+//       // remove note from tuplet elements std::list
 //       fTupletElementsList.pop_back ();
 //
 // /*
@@ -810,7 +808,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   }
 //
 //   else {
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "cannot remove the last note of an empty tuplet " <<
@@ -834,7 +832,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //       asString () <<
 //       " turns out to be " <<
 //       result->asShortString () <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -853,11 +851,11 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //       " to '" <<
 //       measurePosition <<
 //       "'" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
-//   string context = // JMI v0.9.66
+//   std::string context = // JMI v0.9.66
 //     "setTupletMembersMeasurePositions()";
 //
 //   // sanity check
@@ -902,7 +900,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //
 //   // compute position in measure for the tuplets elements
 //   for (
-//     list<S_msrTupletElement>::const_iterator i = fTupletElementsList.begin ();
+//     std::list<S_msrTupletElement>::const_iterator i = fTupletElementsList.begin ();
 //     i != fTupletElementsList.end ();
 //     ++i
 //   ) {
@@ -979,15 +977,15 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
 //     gLogStream <<
 //       "unapplySoundingFactorToTupletMembers ()" <<
-//       endl;
+//       std::endl;
 //
 //     ++gIndenter;
 //
 //     gLogStream <<
 //       "% fTupletFactor = " << fTupletFactor.asString () <<
-//       endl <<
+//       std::endl <<
 //       "% containingTupletFactor = " << containingTupletFactor.asString () <<
-//       endl;
+//       std::endl;
 //
 //     --gIndenter;
 //   }
@@ -1020,7 +1018,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //       "Finalizing tuplet " <<
 //       asString () <<
 //       ", line " << inputLineNumber <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -1037,7 +1035,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 //     gLogStream <<
 //       "% ==> msrTuplet::acceptIn ()" <<
-//       endl;
+//       std::endl;
 //   }
 //
 //   if (visitor<S_msrTuplet>*
@@ -1048,7 +1046,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 //           gLogStream <<
 //             "% ==> Launching msrTuplet::visitStart ()" <<
-//             endl;
+//             std::endl;
 //         }
 //         p->visitStart (elem);
 //   }
@@ -1059,7 +1057,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 //     gLogStream <<
 //       "% ==> msrTuplet::acceptOut ()" <<
-//       endl;
+//       std::endl;
 //   }
 //
 //   if (visitor<S_msrTuplet>*
@@ -1070,7 +1068,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 //           gLogStream <<
 //             "% ==> Launching msrTuplet::visitEnd ()" <<
-//             endl;
+//             std::endl;
 //         }
 //         p->visitEnd (elem);
 //   }
@@ -1079,7 +1077,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 // void msrTuplet::browseData (basevisitor* v)
 // {
 //   for (
-//     list<S_msrTupletElement>::const_iterator i = fTupletElementsList.begin ();
+//     std::list<S_msrTupletElement>::const_iterator i = fTupletElementsList.begin ();
 //     i != fTupletElementsList.end ();
 //     ++i
 //   ) {
@@ -1089,9 +1087,9 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   } // for
 // }
 //
-// string msrTuplet::asString () const
+// std::string msrTuplet::asString () const
 // {
-//   stringstream s;
+//   std::stringstream s;
 //
 //   s <<
 //     "[Tuplet" <<
@@ -1113,7 +1111,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   s << "[[";
 //
 //   if (fTupletElementsList.size ()) {
-//     list<S_msrTupletElement>::const_iterator
+//     std::list<S_msrTupletElement>::const_iterator
 //       iBegin = fTupletElementsList.begin (),
 //       iEnd   = fTupletElementsList.end (),
 //       i      = iBegin;
@@ -1159,7 +1157,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   return s.str ();
 // }
 //
-// void msrTuplet::print (ostream& os) const
+// void msrTuplet::print (std::ostream& os) const
 // {
 //   os <<
 //     "[Tuplet" <<
@@ -1176,68 +1174,68 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //     ", meas " <<
 //     fetchMeasureElementMeasureNumber () <<
 //     ", line " << fInputLineNumber <<
-//     endl;
+//     std::endl;
 //
 //   ++gIndenter;
 //
 //   const int fieldWidth = 30;
 //
-//   os << left <<
-//     setw (fieldWidth) <<
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
 //     "fTupletBracketKind" << " : " <<
 //     msrTupletBracketKindAsString (
 //       fTupletBracketKind) <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fTupletLineShapeKind" << " : " <<
 //     msrTupletLineShapeKindAsString (
 //       fTupletLineShapeKind) <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fTupletShowNumberKind" << " : " <<
 //     msrTupletShowNumberKindAsString (
 //       fTupletShowNumberKind) <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fTupletShowTypeKind" << " : " <<
 //     msrTupletShowTypeKindAsString (
 //       fTupletShowTypeKind) <<
-//     endl <<
+//     std::endl <<
 //
-//     setw (fieldWidth) <<
+//     std::setw (fieldWidth) <<
 //     "fMemberNotesSoundingWholeNotes" << " : " <<
 //     fMemberNotesSoundingWholeNotes <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fMemberNotesDisplayWholeNotes" << " : " <<
 //     fMemberNotesDisplayWholeNotes <<
-//     endl <<
+//     std::endl <<
 //
-//     setw (fieldWidth) <<
+//     std::setw (fieldWidth) <<
 //     "fTupletSoundingWholeNotes" << " : " <<
 //     fMeasureElementSoundingWholeNotes <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fTupletDisplayWholeNotes" << " : " <<
 //     fTupletDisplayWholeNotes <<
-//     endl <<
+//     std::endl <<
 //
-//     setw (fieldWidth) <<
+//     std::setw (fieldWidth) <<
 //     "fTupletMeasureNumber" << " : " <<
 //     fetchMeasureElementMeasureNumber () <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fMeasurePosition" << " : " <<
 //     fMeasureElementMeasurePosition <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fVoicePosition" << " : " <<
 //     fMeasureElementVoicePosition <<
-//     endl << endl;
+//     std::endl << std::endl;
 //
 // /* JMI ???
-//   os << left <<
-//     setw (fieldWidth) <<
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
 //     "(position in measure" << " : ";
 //   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
 //     os << "???)";
@@ -1245,7 +1243,7 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   else {
 //     os << fMeasureElementMeasurePosition << ")";
 //   }
-//   os << endl;
+//   os << std::endl;
 //     */
 //
 //   --gIndenter;
@@ -1253,23 +1251,23 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   if (fTupletElementsList.size ()) {
 //     ++gIndenter;
 //
-//     list<S_msrTupletElement>::const_iterator
+//     std::list<S_msrTupletElement>::const_iterator
 //       iBegin = fTupletElementsList.begin (),
 //       iEnd   = fTupletElementsList.end (),
 //       i      = iBegin;
 //     for ( ; ; ) {
 //       os << (*i);
 //       if (++i == iEnd) break;
-//       os << endl;
+//       os << std::endl;
 //     } // for
 //
 //     --gIndenter;
 //
-//   // JMI  os << endl;
+//   // JMI  os << std::endl;
 //   }
 //
-//   os << left <<
-//     setw (fieldWidth) <<
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
 //     "fMeasureElementUpLinkToMeasure" << " : ";
 //   if (fMeasureElementUpLinkToMeasure) {
 //     os <<
@@ -1278,10 +1276,10 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   else {
 //     os << "[NONE]";
 //   }
-//   os << endl;
+//   os << std::endl;
 //
-//   os << left <<
-//     setw (fieldWidth) <<
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
 //     "fTupletDirectUpLinkToTuplet" << " : ";
 //   if (fTupletDirectUpLinkToTuplet) {
 //     os <<
@@ -1290,18 +1288,18 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   else {
 //     os << "[NONE]";
 //   }
-//   os << endl;
+//   os << std::endl;
 //
 //   os <<
-//     setw (fieldWidth) <<
+//     std::setw (fieldWidth) <<
 //     "fPositionInTuplet" << " : " <<
 //     fPositionInTuplet <<
-//     endl;
+//     std::endl;
 //
-//   os << ']' << endl;
+//   os << ']' << std::endl;
 // }
 //
-// void msrTuplet::printShort (ostream& os)
+// void msrTuplet::printShort (std::ostream& os)
 // {
 //   os <<
 //     "[Tuplet" <<
@@ -1318,71 +1316,71 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //     ", meas " <<
 //     fetchMeasureElementMeasureNumber () <<
 //     ", line " << fInputLineNumber <<
-//     endl;
+//     std::endl;
 //
 //   ++gIndenter;
 //
 //   const int fieldWidth = 44;
 //
 // /*
-//   os << left <<
-//     setw (fieldWidth) <<
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
 //     "fTupletBracketKind" << " : " <<
 //     msrTupletBracketKindAsString (
 //       fTupletBracketKind) <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fTupletLineShapeKind" << " : " <<
 //     msrTupletLineShapeKindAsString (
 //       fTupletLineShapeKind) <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fTupletShowNumberKind" << " : " <<
 //     msrTupletShowNumberKindAsString (
 //       fTupletShowNumberKind) <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fTupletShowTypeKind" << " : " <<
 //     msrTupletShowTypeKindAsString (
 //       fTupletShowTypeKind) <<
-//     endl <<
+//     std::endl <<
 // */
 //
-//   os << left <<
-//     setw (fieldWidth) <<
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
 //     "fMemberNotesSoundingWholeNotes" << " : " <<
 //     fMemberNotesSoundingWholeNotes <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fMemberNotesDisplayWholeNotes" << " : " <<
 //     fMemberNotesDisplayWholeNotes <<
-//     endl <<
+//     std::endl <<
 //
-//     setw (fieldWidth) <<
+//     std::setw (fieldWidth) <<
 //     "fTupletSoundingWholeNotes" << " : " <<
 //     fMeasureElementSoundingWholeNotes <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fTupletDisplayWholeNotes" << " : " <<
 //     fTupletDisplayWholeNotes <<
-//     endl <<
+//     std::endl <<
 //
-//     setw (fieldWidth) <<
+//     std::setw (fieldWidth) <<
 //     "fTupletMeasureNumber" << " : " <<
 //     fetchMeasureElementMeasureNumber () <<
-//     endl <<
-//     setw (fieldWidth) <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
 //     "fMeasureElementMeasurePosition" << " : " <<
 //     fMeasureElementMeasurePosition <<
-// //     endl <<
-// //     setw (fieldWidth) <<
+// //     std::endl <<
+// //     std::setw (fieldWidth) <<
 // //     "fMeasureElementVoicePosition" << " : " <<
 // //     fMeasureElementVoicePosition <<
-//     endl << endl;
+//     std::endl << std::endl;
 //
 // /* JMI ???
-//   os << left <<
-//     setw (fieldWidth) <<
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
 //     "(position in measure" << " : ";
 //   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
 //     os << "???)";
@@ -1390,39 +1388,39 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   else {
 //     os << fMeasureElementMeasurePosition << ")";
 //   }
-//   os << endl;
+//   os << std::endl;
 //     */
 //
 //   --gIndenter;
 //
 //   if (fTupletElementsList.size ()) {
-//     os << left <<
-//       setw (fieldWidth) <<
+//     os << std::left <<
+//       std::setw (fieldWidth) <<
 //         "fTupletElements" << " :" <<
-//         endl;
+//         std::endl;
 //
 //     ++gIndenter;
 //
-//     list<S_msrTupletElement>::const_iterator
+//     std::list<S_msrTupletElement>::const_iterator
 //       iBegin = fTupletElementsList.begin (),
 //       iEnd   = fTupletElementsList.end (),
 //       i      = iBegin;
 //     for ( ; ; ) {
 // //       os <<
 // //         (*i)->asShortString () <<
-// //         endl;
+// //         std::endl;
 //       (*i)->printShort (os); // JMI
 //       if (++i == iEnd) break;
-//       os << endl;
+//       os << std::endl;
 //     } // for
 //
 //     --gIndenter;
 //
-//   // JMI  os << endl;
+//   // JMI  os << std::endl;
 //   }
 //
-//   os << left <<
-//     setw (fieldWidth) <<
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
 //     "fMeasureElementUpLinkToMeasure" << " : ";
 //   if (fMeasureElementUpLinkToMeasure) {
 //     os <<
@@ -1431,10 +1429,10 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   else {
 //     os << "[NONE]";
 //   }
-//   os << endl;
+//   os << std::endl;
 //
-//   os << left <<
-//     setw (fieldWidth) <<
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
 //     "fTupletDirectUpLinkToTuplet" << " : ";
 //   if (fTupletDirectUpLinkToTuplet) {
 //     os <<
@@ -1443,18 +1441,18 @@ ostream& operator << (ostream& os, const msrTupletFactor& elt)
 //   else {
 //     os << "[NONE]";
 //   }
-//   os << endl;
+//   os << std::endl;
 //
-//   os << ']' << endl;
+//   os << ']' << std::endl;
 // }
 //
-// ostream& operator << (ostream& os, const S_msrTuplet& elt)
+// std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt)
 // {
 //   if (elt) {
 //     elt->print (os);
 //   }
 //   else {
-//     os << "[NONE]" << endl;
+//     os << "[NONE]" << std::endl;
 //   }
 //
 //   return os;

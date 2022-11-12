@@ -30,8 +30,6 @@
 
 #include "bsrInterface.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
@@ -39,7 +37,7 @@ void displayBsrScoreShort (
   S_bsrScore    bsrScore,
   S_msrOahGroup msrOpts,
   S_bsrOahGroup bsrOpts,
-  const string& passDescription)
+  const std::string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -50,20 +48,20 @@ void displayBsrScoreShort (
   // start the clock
   clock_t startClock = clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
   gLogStream <<
     separator <<
-    endl <<
+    std::endl <<
     gTab <<
     "Pass (optional): " << passDescription << ", short version" <<
-    endl <<
+    std::endl <<
     separator <<
-    endl << endl <<
+    std::endl << std::endl <<
     bsrScore <<
     separator <<
-    endl << endl;
+    std::endl << std::endl;
 
   // register time spent
   clock_t endClock = clock ();
@@ -81,7 +79,7 @@ void displayBsrScoreFull (
   S_bsrScore    bsrScore,
   S_msrOahGroup msrOpts,
   S_bsrOahGroup bsrOpts,
-  const string& passDescription)
+  const std::string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -92,23 +90,23 @@ void displayBsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
   gLogStream <<
     separator <<
-    endl <<
+    std::endl <<
     gTab <<
     "Pass (optional): " << passDescription << ", full version" <<
-    endl <<
+    std::endl <<
     separator <<
-    endl << endl;
+    std::endl << std::endl;
 
   bsrScore->printShort (gLogStream);
 
   gLogStream <<
     separator <<
-    endl << endl;
+    std::endl << std::endl;
 
   // register time spent
   clock_t endClock = clock ();
@@ -126,7 +124,7 @@ void displayBsrScoreFull (
 
 //   if (gIndenter != 0) {
 //     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-//       stringstream s;
+//       std::stringstream s;
 //
 //       s <<
 //         "gIndenter value after BSR score short display: " <<

@@ -17,17 +17,15 @@
 #include "enableAbortToDebugErrors.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 void mfAssert (
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
   Bool          condition,
-  const string& messageIfFalse)
+  const std::string& messageIfFalse)
 {
   if (! condition) {
     gIndenter.resetToZero ();
@@ -37,7 +35,7 @@ void mfAssert (
       ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
       " -- " << messageIfFalse <<
       " - quitting." <<
-      endl;
+      std::endl;
 
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();

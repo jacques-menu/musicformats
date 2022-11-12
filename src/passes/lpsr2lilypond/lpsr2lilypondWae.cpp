@@ -15,16 +15,14 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 void lpsr2lilypondWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeWarning (
     "lpsr2lilypond",
@@ -34,9 +32,9 @@ void lpsr2lilypondWarning (
 }
 
 void lpsr2lilypondInternalWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeInternalWarning (
     "lpsr2lilypond",
@@ -46,11 +44,11 @@ void lpsr2lilypondInternalWarning (
 }
 
 void lpsr2lilypondError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeError (
     "lpsr2lilypond",
@@ -71,11 +69,11 @@ void lpsr2lilypondError (
 }
 
 void lpsr2lilypondInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeInternalError (
     "lpsr2lilypond",

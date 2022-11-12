@@ -47,12 +47,12 @@ class EXP oahFindStringAtom : public oahPureHelpAtomExpectingAValue
 \section{OAH macro atoms}
 % -------------------------------------------------------------------------
 
-A OAH macro atom is a combination, a list of several options under a single name. The \className{oahMacroAtom} class   is defined in \oahBoth{oahAtomsCollection}:
+A OAH macro atom is a combination, a std::list of several options under a single name. The \className{oahMacroAtom} class   is defined in \oahBoth{oahAtomsCollection}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP oahMacroAtom : public oahAtom
 {
 /*
-  a list of atoms
+  a std::list of atoms
 */
 
 	// ... ... ...
@@ -64,7 +64,7 @@ class EXP oahMacroAtom : public oahAtom
 
     void                  appendAtomToMacro (S_oahAtom atom);
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
 
 
@@ -73,7 +73,7 @@ class EXP oahMacroAtom : public oahAtom
     // private fields
     // ------------------------------------------------------
 
-     list<S_oahAtom>      fMacroAtomsList;
+     std::list<S_oahAtom>      fMacroAtomsList;
 };
 \end{lstlisting}
 
@@ -93,18 +93,18 @@ void oahMacroAtom::appendAtomToMacro (S_oahAtom atom)
 
 Applying the macro atom is done in \method{oahMacroAtom}{applyElement}:
 \begin{lstlisting}[language=CPlusPlus]
-void oahMacroAtom::applyElement (ostream& os)
+void oahMacroAtom::applyElement (std::ostream& os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahMacroAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
   for (
-    list<S_oahAtom>::const_iterator i =
+    std::list<S_oahAtom>::const_iterator i =
       fMacroAtomsList.begin ();
     i != fMacroAtomsList.end ();
     ++i
@@ -235,7 +235,7 @@ class EXP msrOctaveEntryVariable : public smartable
     // private fields
     // ------------------------------------------------------
 
-    string                fVariableName;
+    std::string           fVariableName;
     msrOctaveEntryKind    fOctaveEntryKind;
 
     Bool                  fSetByAnOption;

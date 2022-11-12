@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <cmath>
 #include <string>
 
@@ -28,8 +28,6 @@
 #include "bsrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -37,7 +35,7 @@ namespace MusicFormats
 bsr2brailleTranslator::bsr2brailleTranslator (
   S_bsrScore     bsrScore,
   const S_bsrOahGroup& bsrOpts,
-  ostream&       brailleOutputStream)
+  std::ostream&       brailleOutputStream)
   : fBrailleOutputStream (
       brailleOutputStream)
 {
@@ -55,7 +53,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
       ", gGlobalBrailleGenerationOahGroup->getByteOrderingKind (): " <<
       bsrByteOrderingKindAsString (
         gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -84,11 +82,11 @@ bsr2brailleTranslator::bsr2brailleTranslator (
       switch (gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) {
         case bsrByteOrderingKind::kByteOrderingNone:
           {
-            stringstream s;
+            std::stringstream s;
 
             s << "bsr2brailleTranslator: " ;
 
-            string message = s.str ();
+            std::string message = s.str ();
 
             bsr2brailleInternalError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -144,7 +142,7 @@ void bsr2brailleTranslator::visitStart (S_bsrScore& elt)
     gLogStream <<
       "% --> Start visiting bsrScore" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -156,7 +154,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
     gLogStream <<
       "% --> End visiting bsrScore" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -169,7 +167,7 @@ void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
     gLogStream <<
       "% --> Start visiting bsrSpaces" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -179,7 +177,7 @@ void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
     ", numberOfSpaces: " << elt->getNumberOfSpaces () <<
     ", spacesCellsList: " << elt->fetchCellsList () <<
     ", line " << elt->getInputLineNumber () <<
-    endl;
+    std::endl;
 */
 
   fBrailleGenerator->generateCodeForCellsList (
@@ -193,7 +191,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrSpaces& elt)
     gLogStream <<
       "% --> End visiting bsrSpaces" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -206,7 +204,7 @@ void bsr2brailleTranslator::visitStart (S_bsrBarLine& elt)
     gLogStream <<
       "% --> Start visiting bsrBarLine" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -222,7 +220,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotes& elt)
     gLogStream <<
       "% --> Start visiting S_bsrTranscriptionNotes" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -234,7 +232,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
     gLogStream <<
       "% --> End visiting S_bsrTranscriptionNotes" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -247,7 +245,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotesElement& elt)
     gLogStream <<
       "% --> Start visiting bsrTranscriptionNotesElement" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -262,7 +260,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotesElement& elt)
     gLogStream <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -277,7 +275,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPage& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -291,7 +289,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -309,7 +307,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageElement& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -323,7 +321,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -338,7 +336,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPagination& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -355,7 +353,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPagination& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -370,7 +368,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageHeading& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -387,7 +385,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageHeading& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -402,7 +400,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -419,7 +417,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
     if (true) {
       gLogStream <<
         "Generating a space before S_bsrMusicHeading" <<
-        endl;
+        std::endl;
     }
 
     fBrailleGenerator->
@@ -439,7 +437,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -447,7 +445,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
   if (false) { // JMI
     gLogStream <<
       "Generating an EOL after S_bsrMusicHeading" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -466,7 +464,7 @@ void bsr2brailleTranslator::visitStart (S_bsrFootNotes& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -485,7 +483,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrFootNotes& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -500,7 +498,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLine& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -514,7 +512,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -529,7 +527,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLineContents& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -546,7 +544,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -554,7 +552,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
   if (false) { // JMI
     gLogStream <<
       "Generating an EOL after S_bsrLineContents" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -573,7 +571,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -587,7 +585,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -602,7 +600,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNumber& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -619,7 +617,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNumber& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -634,7 +632,7 @@ void bsr2brailleTranslator::visitStart (S_bsrWords& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -651,7 +649,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrWords& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -666,7 +664,7 @@ void bsr2brailleTranslator::visitStart (S_bsrClef& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -683,7 +681,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrClef& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -698,7 +696,7 @@ void bsr2brailleTranslator::visitStart (S_bsrKey& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -715,7 +713,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrKey& elt)
       elt->asString () <<
       "'"  <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -729,7 +727,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTimeSignature& elt)
       "% --> Start visiting bsrTimeSignature " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -745,7 +743,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTimeSignature& elt)
       "% --> End visiting bsrTimeSignature " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -759,7 +757,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTempo& elt)
       "% --> Start visiting bsrTempo " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -775,7 +773,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTempo& elt)
       "% --> End visiting bsrTempo " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -789,7 +787,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNote& elt)
       "% --> Start visiting bsrNote " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -805,7 +803,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNote& elt)
       "% --> End visiting bsrNote " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-//#include <iomanip>      // setw, setprecision, ...
+//#include <iomanip>      // std::setw, std::setprecision, ...
 //#include <cmath>
 //#include <string>
 
@@ -27,8 +27,6 @@
 
 
 
-
-using namespace std;
 
 namespace MusicFormats
 {

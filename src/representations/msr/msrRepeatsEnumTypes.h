@@ -15,8 +15,6 @@
 #include <string>
 #include <ostream>
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -27,10 +25,10 @@ enum class msrRepeatExplicitStartKind {
   kRepeatExplicitStartYes
 };
 
-string msrRepeatExplicitStartKindAsString (
+std::string msrRepeatExplicitStartKindAsString (
   msrRepeatExplicitStartKind repeatExplicitStartKind);
 
-ostream& operator << (ostream& os, const msrRepeatExplicitStartKind& elt);
+std::ostream& operator << (std::ostream& os, const msrRepeatExplicitStartKind& elt);
 
 enum class msrRepeatBuildPhaseKind {
   kRepeatBuildPhaseJustCreated,
@@ -39,10 +37,10 @@ enum class msrRepeatBuildPhaseKind {
   kRepeatBuildPhaseCompleted
 };
 
-string repeatBuildPhaseKindAsString (
+std::string repeatBuildPhaseKindAsString (
   msrRepeatBuildPhaseKind repeatBuildPhaseKind);
 
-ostream& operator << (ostream& os, const msrRepeatBuildPhaseKind& elt);
+std::ostream& operator << (std::ostream& os, const msrRepeatBuildPhaseKind& elt);
 
 // repeat endings
 //______________________________________________________________________________
@@ -51,10 +49,10 @@ enum class msrRepeatEndingKind {
   kRepeatEndingHookless
 };
 
-string msrRepeatEndingKindAsString (
+std::string msrRepeatEndingKindAsString (
   msrRepeatEndingKind repeatEndingKind);
 
-ostream& operator << (ostream& os, const msrRepeatEndingKind& elt);
+std::ostream& operator << (std::ostream& os, const msrRepeatEndingKind& elt);
 
 
 }

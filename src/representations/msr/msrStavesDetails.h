@@ -90,9 +90,9 @@ class EXP msrStaffTuning : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   public:
 
@@ -106,7 +106,7 @@ class EXP msrStaffTuning : public msrElement
     msrOctaveKind         fStaffTuningOctaveKind;
 };
 typedef SMARTP<msrStaffTuning> S_msrStaffTuning;
-EXP ostream& operator << (ostream& os, const S_msrStaffTuning& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrStaffTuning& elt);
 
 //______________________________________________________________________________
 // data types
@@ -117,31 +117,31 @@ enum class msrStaffTypeKind {
   kStaffTypeAlternate
 };
 
-string msrStaffTypeKindAsString (
+std::string msrStaffTypeKindAsString (
   msrStaffTypeKind staffTypeKind);
 
-ostream& operator << (ostream& os, const msrStaffTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrStaffTypeKind& elt);
 
 enum class msrShowFretsKind {
   kShowFretsNumbers, kShowFretsLetters
 };
 
-string msrShowFretsKindAsString (
+std::string msrShowFretsKindAsString (
   msrShowFretsKind showFretsKind);
 
-ostream& operator << (ostream& os, const msrShowFretsKind& elt);
+std::ostream& operator << (std::ostream& os, const msrShowFretsKind& elt);
 
 enum class msrPrintSpacingKind {
   kPrintSpacingYes, kPrintSpacingNo
 };
 
-string msrPrintSpacingKindAsString (
+std::string msrPrintSpacingKindAsString (
   msrPrintSpacingKind printSpacingKind);
 
-ostream& operator << (ostream& os, const msrPrintSpacingKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPrintSpacingKind& elt);
 
 //______________________________________________________________________________
-class EXP msrStaffDetails : public msrMeasureElement
+class EXP msrStaffDetails : public msrMeasureElementLambda
 {
   public:
 
@@ -187,7 +187,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     int                   getStaffLinesNumber () const
                               { return fStaffLinesNumber; }
 
-    const list<S_msrStaffTuning>&
+    const std::list<S_msrStaffTuning>&
                           getStaffTuningsList () const
                               { return fStaffTuningsList; }
 
@@ -211,7 +211,7 @@ class EXP msrStaffDetails : public msrMeasureElement
                                 fStaffTuningsList.push_back (staffTuning);
                               }
 
-    string                asShortString () const override;
+    std::string           asShortString () const override;
 
   public:
 
@@ -228,7 +228,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -238,7 +238,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     msrStaffTypeKind      fStaffTypeKind;
 
     int                   fStaffLinesNumber;
-    list<S_msrStaffTuning>
+    std::list<S_msrStaffTuning>
                           fStaffTuningsList;
 
     msrShowFretsKind      fShowFretsKind;
@@ -247,7 +247,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     msrPrintSpacingKind   fPrintSpacingKind;
 };
 typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
-EXP ostream& operator << (ostream& os, const S_msrStaffDetails& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrStaffDetails& elt);
 
 
 }

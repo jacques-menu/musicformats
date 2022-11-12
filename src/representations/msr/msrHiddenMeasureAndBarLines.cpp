@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -29,8 +29,6 @@
 #include "msrHiddenMeasureAndBarLines.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -44,7 +42,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
     gLogStream <<
       "Creating hiddenMeasureAndBarLine" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -59,7 +57,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 msrHiddenMeasureAndBarLine::msrHiddenMeasureAndBarLine (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {}
@@ -72,7 +70,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHiddenMeasureAndBarLine::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHiddenMeasureAndBarLine>*
@@ -83,7 +81,7 @@ void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHiddenMeasureAndBarLine::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -94,7 +92,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHiddenMeasureAndBarLine::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHiddenMeasureAndBarLine>*
@@ -105,7 +103,7 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHiddenMeasureAndBarLine::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -114,9 +112,9 @@ void msrHiddenMeasureAndBarLine::acceptOut (basevisitor* v)
 void msrHiddenMeasureAndBarLine::browseData (basevisitor* v)
 {}
 
-string msrHiddenMeasureAndBarLine::asString () const
+std::string msrHiddenMeasureAndBarLine::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "HiddenMeasureAndBarLine" <<
@@ -126,18 +124,18 @@ string msrHiddenMeasureAndBarLine::asString () const
   return s.str ();
 }
 
-void msrHiddenMeasureAndBarLine::print (ostream& os) const
+void msrHiddenMeasureAndBarLine::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrHiddenMeasureAndBarLine& elt)
+std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLine& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

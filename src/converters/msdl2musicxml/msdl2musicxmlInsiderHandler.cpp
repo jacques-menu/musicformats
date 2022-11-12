@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "mfStringsHandling.h"
 
@@ -48,15 +48,13 @@
 #include "msdl2musicxmlInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msdl2musicxmlInsiderHandler msdl2musicxmlInsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   // create the insider handler
   msdl2musicxmlInsiderHandler* o = new
@@ -69,8 +67,8 @@ S_msdl2musicxmlInsiderHandler msdl2musicxmlInsiderHandler::create (
 }
 
 msdl2musicxmlInsiderHandler::msdl2musicxmlInsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahInsiderHandler (
       serviceName,
       handlerHeader,
@@ -90,7 +88,7 @@ Usage: msdl2musicxml [option]* [MSDLFile] [option]*
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -113,7 +111,7 @@ void msdl2musicxmlInsiderHandler::initializeHandlerMultiComponent ()
     createMsdl2musicxmlConverterComponent ();
 }
 
-string msdl2musicxmlInsiderHandler::handlerServiceAboutInformation () const
+std::string msdl2musicxmlInsiderHandler::handlerServiceAboutInformation () const
 {
   return
 R"(What msdl2musicxml does:
@@ -145,7 +143,7 @@ void msdl2musicxmlInsiderHandler::createTheMsdl2xmlPrefixes ()
       "Creating the msdl2musicxml prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -154,7 +152,7 @@ void msdl2musicxmlInsiderHandler::createTheMsdl2xmlPrefixes ()
 
 //______________________________________________________________________________
 void msdl2musicxmlInsiderHandler::createTheMsdl2xmlOptionGroups (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -162,7 +160,7 @@ void msdl2musicxmlInsiderHandler::createTheMsdl2xmlOptionGroups (
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -237,7 +235,7 @@ void msdl2musicxmlInsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -245,7 +243,7 @@ void msdl2musicxmlInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string msdl2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string msdl2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
   return ""; // JMI
 }
@@ -290,7 +288,7 @@ void msdl2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << inputSourceName << "\" is both the input and output file name";
@@ -302,7 +300,7 @@ void msdl2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
 
 
   if (! fOutputFileName.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "msdl2musicxmlInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
@@ -311,7 +309,7 @@ void msdl2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
   }
 
   else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
@@ -328,7 +326,7 @@ void msdl2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2musicxmlInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -341,7 +339,7 @@ void msdl2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2musicxmlInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -354,7 +352,7 @@ void msdl2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2musicxmlInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -367,7 +365,7 @@ void msdl2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2musicxmlInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -380,7 +378,7 @@ void msdl2musicxmlInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2musicxmlInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -388,33 +386,33 @@ void msdl2musicxmlInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msdl2musicxmlInsiderHandler::print (ostream& os) const
+void msdl2musicxmlInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "msdl2musicxmlInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -422,7 +420,7 @@ void msdl2musicxmlInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -430,16 +428,16 @@ void msdl2musicxmlInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdl2musicxmlInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdl2musicxmlInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -474,11 +472,11 @@ void msdl2musicxmlInsiderOahGroup::initializeMsdl2xmlInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -492,11 +490,11 @@ void msdl2musicxmlInsiderOahGroup::createInsiderQuitSubGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Creating insider quit subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -533,7 +531,7 @@ void msdl2musicxmlInsiderOahGroup::printMsdl2xmlInsiderOahGroupValues (
 {
   gLogStream <<
     "The msdl2musicxml options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -542,14 +540,14 @@ void msdl2musicxmlInsiderOahGroup::printMsdl2xmlInsiderOahGroupValues (
 
   gLogStream <<
     "Quit after some passes:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fQuitAfterPass1" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fQuitAfterPass1" << " : " <<
     fQuitAfterPass1 <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -563,7 +561,7 @@ S_msdl2musicxmlInsiderOahGroup createGlobalMsdl2xmlOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdl2xm OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

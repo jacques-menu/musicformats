@@ -17,17 +17,15 @@
 #include "mfcBasicTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 
-EXP extern string getGlobalMusicFormatsVersionNumber ();
-EXP extern string getGlobalMusicFormatsVersionDate ();
+EXP extern std::string getGlobalMusicFormatsVersionNumber ();
+EXP extern std::string getGlobalMusicFormatsVersionDate ();
 
-EXP extern string getGlobalMusicFormatsVersionNumberAndDate ();
+EXP extern std::string getGlobalMusicFormatsVersionNumberAndDate ();
 
 //______________________________________________________________________________
 S_mfcLibraryComponent EXP createLibraryComponent ();

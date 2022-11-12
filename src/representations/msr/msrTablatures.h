@@ -29,10 +29,10 @@ enum class msrBarreTypeKind {
   kBarreTypeStart, kBarreTypeStop
 };
 
-string msrBarreTypeKindAsString (
+std::string msrBarreTypeKindAsString (
   msrBarreTypeKind barreTypeKind);
 
-ostream& operator << (ostream& os, const msrBarreTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBarreTypeKind& elt);
 
 class EXP msrFrameNote : public msrElement
 {
@@ -40,7 +40,7 @@ class EXP msrFrameNote : public msrElement
 
 /*
           <frame-note>
-            <string>6</string>
+            <std::string>6</std::string>
             <fret>0</fret>
           </frame-note>
 */
@@ -106,9 +106,9 @@ class EXP msrFrameNote : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -123,7 +123,7 @@ class EXP msrFrameNote : public msrElement
     msrBarreTypeKind      fFrameNoteBarreTypeKind;
 };
 typedef SMARTP<msrFrameNote> S_msrFrameNote;
-EXP ostream& operator << (ostream& os, const S_msrFrameNote& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrFrameNote& elt);
 
 //______________________________________________________________________________
 class EXP msrBarre
@@ -209,11 +209,11 @@ class EXP msrFrame : public msrElement
     int                   getFrameFirstFretNumber () const
                               { return fFrameFirstFretNumber; }
 
-    const list<S_msrFrameNote>&
+    const std::list<S_msrFrameNote>&
                           getFrameFrameNotesList () const
                               { return fFrameFrameNotesList; }
 
-    const list<msrBarre>& getFrameBarresList ()
+    const std::list<msrBarre>& getFrameBarresList ()
                               { return fFrameBarresList; }
 
     Bool                  getFrameContainsFingerings () const
@@ -253,9 +253,9 @@ class EXP msrFrame : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -266,19 +266,19 @@ class EXP msrFrame : public msrElement
     int                   fFrameFretsNumber;
     int                   fFrameFirstFretNumber;
 
-    list<S_msrFrameNote>  fFrameFrameNotesList;
+    std::list<S_msrFrameNote>  fFrameFrameNotesList;
 
-    list<msrBarre >       fFrameBarresList;
+    std::list<msrBarre >       fFrameBarresList;
 
     // a barre start remains pending
     // until the matching stop is appended to the frame
-    stack<S_msrFrameNote> fPendingBarreStartFrameNotes;
+    std::stack<S_msrFrameNote> fPendingBarreStartFrameNotes;
 
     // optimizing computation
     Bool                  fFrameContainsFingerings;
 };
 typedef SMARTP<msrFrame> S_msrFrame;
-EXP ostream& operator << (ostream& os, const S_msrFrame& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrFrame& elt);
 
 
 }

@@ -26,45 +26,43 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // the MSDL keywords languages
 //______________________________________________________________________________
 
-map<string, msdlKeywordsLanguageKind>
+std::map<std::string, msdlKeywordsLanguageKind>
   gGlobalMsdlKeywordsLanguageKindsMap;
 
-map<msdlKeywordKind, string> gGlobalEnglishKeywordsNamesMap;
-map<msdlKeywordKind, string> gGlobalFrenchKeywordsNamesMap;
-map<msdlKeywordKind, string> gGlobalItalianKeywordsNamesMap;
-map<msdlKeywordKind, string> gGlobalGermanKeywordsNamesMap;
-map<msdlKeywordKind, string> gGlobalSpanishKeywordsNamesMap;
-map<msdlKeywordKind, string> gGlobalDutchKeywordsNamesMap;
+std::map<msdlKeywordKind, std::string> gGlobalEnglishKeywordsNamesMap;
+std::map<msdlKeywordKind, std::string> gGlobalFrenchKeywordsNamesMap;
+std::map<msdlKeywordKind, std::string> gGlobalItalianKeywordsNamesMap;
+std::map<msdlKeywordKind, std::string> gGlobalGermanKeywordsNamesMap;
+std::map<msdlKeywordKind, std::string> gGlobalSpanishKeywordsNamesMap;
+std::map<msdlKeywordKind, std::string> gGlobalDutchKeywordsNamesMap;
 
-msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (const string& theString)
+msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (const std::string& theString)
 {
   msdlKeywordsLanguageKind result = msdlKeywordsLanguageKind::kKeywordsLanguageEnglish; // MSDL default
 
-  map<string, msdlKeywordsLanguageKind>::const_iterator
+  std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
       gGlobalMsdlKeywordsLanguageKindsMap.find (
         theString);
 
   if (it == gGlobalMsdlKeywordsLanguageKindsMap.end ()) {
-    // no, keywords language kind is unknown in the map
-    stringstream s;
+    // no, keywords language kind is unknown in the std::map
+    std::stringstream s;
 
     s <<
       "MSDL language kind '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       gGlobalMsdlKeywordsLanguageKindsMap.size () - 1 <<
       " known MSDL language kinds are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -116,10 +114,10 @@ void initializeMsdlKeywordsLanguageKindsMap ()
   }
 }
 
-string msdlKeywordsLanguageKindAsString (
+std::string msdlKeywordsLanguageKindAsString (
   msdlKeywordsLanguageKind languageKind)
 {
-  string result;
+  std::string result;
 
   switch (languageKind) {
     case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_: // default value
@@ -149,9 +147,9 @@ string msdlKeywordsLanguageKindAsString (
   return result;
 }
 
-string existingMsdlKeywordsLanguageKinds (size_t namesListMaxLength)
+std::string existingMsdlKeywordsLanguageKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     msdlKeywordsLanguageKindsMapSize =
@@ -165,18 +163,18 @@ string existingMsdlKeywordsLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msdlKeywordsLanguageKind>::const_iterator i =
+      std::map<std::string, msdlKeywordsLanguageKind>::const_iterator i =
         gGlobalMsdlKeywordsLanguageKindsMap.begin ();
       i != gGlobalMsdlKeywordsLanguageKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
@@ -402,10 +400,10 @@ void initializeDutchKeywordsNamesMap ()
 
 // the MSDL keywords
 //______________________________________________________________________________
-string msdlKeywordKindAsString (
+std::string msdlKeywordKindAsString (
   msdlKeywordKind keywordKind)
 {
-  string result;
+  std::string result;
 
   switch (keywordKind) {
     case msdlKeywordKind::kKeyword_NO_:
@@ -489,7 +487,7 @@ string msdlKeywordKindAsString (
   return result;
 }
 
-string msdlKeywordKindAsMsdlString (
+std::string msdlKeywordKindAsMsdlString (
   msdlKeywordsLanguageKind languageKind,
   msdlKeywordKind          keywordKind)
 {
@@ -499,15 +497,15 @@ string msdlKeywordKindAsMsdlString (
       "--> msdlKeywordKindAsMsdlString()" <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       ", keywordKind: \"" << msdlKeywordKindAsString (keywordKind) << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string result;
+  std::string result;
 
-  map<msdlKeywordKind, string> *keywordsNamesMapPTR = nullptr;
+  std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
-  // select the relevant keywords names map
+  // select the relevant keywords names std::map
   switch (languageKind) {
     case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
@@ -534,9 +532,9 @@ string msdlKeywordKindAsMsdlString (
   } // switch
 
   if (keywordsNamesMapPTR) {
-    // is keywordKind present in the map?
+    // is keywordKind present in the std::map?
     if (keywordsNamesMapPTR->size ()) {
-      map<msdlKeywordKind, string>::const_iterator
+      std::map<msdlKeywordKind, std::string>::const_iterator
         iBegin = (*keywordsNamesMapPTR).begin (),
         iEnd   = (*keywordsNamesMapPTR).end (),
         i      = iBegin;
@@ -556,7 +554,7 @@ string msdlKeywordKindAsMsdlString (
     gLogStream <<
       "<-- msdlKeywordKindAsMsdlString()" <<
       ", result: \"" << result << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -654,7 +652,7 @@ msdlKeywordKind msdlKeywordKindFromTokenKind (
 
 msdlKeywordKind msdlKeywordKindFromString (
   msdlKeywordsLanguageKind languageKind,
-  const string&            theString)
+  const std::string&            theString)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
@@ -662,15 +660,15 @@ msdlKeywordKind msdlKeywordKindFromString (
       "--> msdlKeywordKindFromString()" <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       ", theString: \"" << theString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   msdlKeywordKind result = msdlKeywordKind::kKeyword_NO_;
 
-  map<msdlKeywordKind, string> *keywordsNamesMapPTR = nullptr;
+  std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
-  // select the relevant keywords names map
+  // select the relevant keywords names std::map
   switch (languageKind) {
     case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
@@ -697,9 +695,9 @@ msdlKeywordKind msdlKeywordKindFromString (
   } // switch
 
   if (keywordsNamesMapPTR) {
-    // is theString present in the map?
+    // is theString present in the std::map?
     if (keywordsNamesMapPTR->size ()) {
-      map<msdlKeywordKind, string>::const_iterator
+      std::map<msdlKeywordKind, std::string>::const_iterator
         iBegin = (*keywordsNamesMapPTR).begin (),
         iEnd   = (*keywordsNamesMapPTR).end (),
         i      = iBegin;
@@ -720,22 +718,22 @@ msdlKeywordKind msdlKeywordKindFromString (
       "<-- msdlKeywordKindFromString()" <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       ", result: \"" << msdlKeywordKindAsString (result) << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   return result;
 }
 
-string existingKeywordsInLanguage (
+std::string existingKeywordsInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
   size_t                   namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
-  map<msdlKeywordKind, string> *keywordsNamesMapPTR = nullptr;
+  std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
-  // select the relevant keywords names map
+  // select the relevant keywords names std::map
   switch (keywordsLanguageKind) {
     case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
@@ -774,18 +772,18 @@ string existingKeywordsInLanguage (
     size_t cumulatedLength = 0;
 
     for (
-      map<msdlKeywordKind, string>::const_iterator i =
+      std::map<msdlKeywordKind, std::string>::const_iterator i =
         (*keywordsNamesMapPTR).begin ();
       i != (*keywordsNamesMapPTR).end ();
       ++i
     ) {
-      string theString = (*i).second;
+      std::string theString = (*i).second;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -817,7 +815,7 @@ void initializeMSDLKeywords ()
     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       gLogStream <<
         "Initializing MSR basic types handling" <<
-        endl;
+        std::endl;
   }
 #endif
 

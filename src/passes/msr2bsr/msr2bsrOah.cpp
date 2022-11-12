@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -27,8 +27,6 @@
 
 #include "oahAtomsCollection.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -190,7 +188,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2bsrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -203,7 +201,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2bsrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -216,7 +214,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2bsrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -229,7 +227,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2bsrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -242,7 +240,7 @@ void msr2bsrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2bsrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -251,7 +249,7 @@ void msr2bsrOahGroup::printMsr2bsrOahValues (int fieldWidth)
 {
   gLogStream <<
     "The Msr2bsr options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -260,57 +258,57 @@ void msr2bsrOahGroup::printMsr2bsrOahValues (int fieldWidth)
 
   gLogStream <<
     "Miscellaneous:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fNoBrailleHeadings" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fNoBrailleHeadings" << " : " <<
       fNoBrailleHeadings <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fNoTempos" << " : " <<
+    std::setw (fieldWidth) << "fNoTempos" << " : " <<
       fNoTempos <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fNoPageNumbers" << " : " <<
+    std::setw (fieldWidth) << "fNoPageNumbers" << " : " <<
       fNoPageNumbers <<
-      endl <<
-    setw (fieldWidth) << "fNoLineNumbers" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fNoLineNumbers" << " : " <<
       fNoLineNumbers <<
-      endl <<
-    setw (fieldWidth) << "fNoMeasureNumbers" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fNoMeasureNumbers" << " : " <<
       fNoMeasureNumbers <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fNoBrailleLyrics" << " : " <<
+    std::setw (fieldWidth) << "fNoBrailleLyrics" << " : " <<
       fNoBrailleLyrics <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fBrailleRunDate" << " : " <<
+    std::setw (fieldWidth) << "fBrailleRunDate" << " : " <<
       fBrailleRunDate <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fFacSimileKind" << " : " <<
+    std::setw (fieldWidth) << "fFacSimileKind" << " : " <<
       bsrFacSimileKindAsString (fFacSimileKind) <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fIncludeClefs" << " : " <<
+    std::setw (fieldWidth) << "fIncludeClefs" << " : " <<
       fIncludeClefs <<
-      endl;
+      std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msr2bsrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2bsrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -323,7 +321,7 @@ S_msr2bsrOahGroup createGlobalMsr2bsrOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2bsr OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

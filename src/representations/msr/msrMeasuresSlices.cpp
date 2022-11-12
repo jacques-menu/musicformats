@@ -25,23 +25,21 @@
 #endif
 
 #include "msrMeasuresSlices.h"
-#include "msrNotes.h"
+// #include "msrNotes.h"
 
 #include "oahOah.h"
 
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrNoteEventKindAsString (
+std::string msrNoteEventKindAsString (
   msrNoteEventKind noteEventKind)
 {
-  string result;
+  std::string result;
 
   switch (noteEventKind) {
     case msrNoteEventKind::kNoteEventStart:
@@ -153,9 +151,9 @@ bool msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition (
   return result;
 }
 
-string msrNoteEvent::asString () const
+std::string msrNoteEvent::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[NoteEvent" <<
@@ -190,18 +188,18 @@ string msrNoteEvent::asString () const
   return s.str ();
 }
 
-void msrNoteEvent::print (ostream& os) const
+void msrNoteEvent::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrNoteEvent& elt)
+std::ostream& operator << (std::ostream& os, const S_msrNoteEvent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -239,9 +237,9 @@ bool msrSimultaneousNotesChunk::compareSimultaneousNotesChunksByIncreasingMeasur
     );
 }
 
-string msrSimultaneousNotesChunk::asString () const
+std::string msrSimultaneousNotesChunk::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t chunkNotesListSize =
     fChunkNotesList.size ();
@@ -255,7 +253,7 @@ string msrSimultaneousNotesChunk::asString () const
     ": ";
 
   if (chunkNotesListSize) {
-    list<S_msrNote>::const_iterator
+    std::list<S_msrNote>::const_iterator
       iBegin = fChunkNotesList.begin (),
       iEnd   = fChunkNotesList.end (),
       i      = iBegin;
@@ -278,18 +276,18 @@ string msrSimultaneousNotesChunk::asString () const
   return s.str ();
 }
 
-void msrSimultaneousNotesChunk::print (ostream& os) const
+void msrSimultaneousNotesChunk::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSimultaneousNotesChunk& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSimultaneousNotesChunk& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -297,7 +295,7 @@ ostream& operator << (ostream& os, const S_msrSimultaneousNotesChunk& elt)
 
 //______________________________________________________________________________
 S_msrMeasuresSlice msrMeasuresSlice::create (
-  const string& measureNumber,
+  const std::string& measureNumber,
   int           puristMeasureNumber)
 {
   msrMeasuresSlice* o =
@@ -309,7 +307,7 @@ S_msrMeasuresSlice msrMeasuresSlice::create (
 }
 
 msrMeasuresSlice::msrMeasuresSlice (
-  const string& measureNumber,
+  const std::string& measureNumber,
   int           puristMeasureNumber)
 {
   fSliceMeasureNumber = measureNumber;
@@ -327,7 +325,7 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
     gLogStream <<
       "Creating a shallow copy of measures slice " <<
       this->asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -340,7 +338,7 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
 
   // populate it
   for (
-    vector<S_msrMeasure>::const_iterator i =
+    std::vector<S_msrMeasure>::const_iterator i =
       fSliceMeasuresVector.begin ();
     i != fSliceMeasuresVector.end ();
     ++i
@@ -364,7 +362,7 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
       measure->asShortStringForMeasuresSlices () <<
       " to measures slice " <<
       asShortStringForMeasuresSlices () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -382,7 +380,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
       otherSlice->asShortStringForMeasuresSlices () <<
       " to measures slice " <<
       asShortStringForMeasuresSlices () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -392,7 +390,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
       !=
     fSliceMeasureNumber
   ) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot append measures slices " <<
@@ -412,8 +410,8 @@ if (true) // JMI
   size_t otherSliceSize = otherSlice->getSliceSize ();
 
   if (otherSliceSize) {
-    // get the other slices vector
-    const vector<S_msrMeasure>&
+    // get the other slices std::vector
+    const std::vector<S_msrMeasure>&
       otherMeasuresVector =
         otherSlice->
           getSliceMeasuresVector ();
@@ -435,29 +433,29 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
     gLogStream <<
       "Collecting the notes from the measures slices in " <<
       asShortStringForMeasuresSlices () <<
-      endl;
+      std::endl;
   }
 #endif
 
   // collect the notes from the measures
   for (
-    vector<S_msrMeasure>::const_iterator i =
+    std::vector<S_msrMeasure>::const_iterator i =
       fSliceMeasuresVector.begin ();
     i != fSliceMeasuresVector.end ();
     ++i
   ) {
     S_msrMeasure measure = (*i);
 
-    const list<S_msrNote>&
+    const std::list<S_msrNote>&
       measureNotesFlatList =
         measure->
           getMeasureNotesFlatList ();
 
     ++gIndenter;
 
-    // append the measure's notes to the slices sequence notes flat list
+    // append the measure's notes to the slices sequence notes flat std::list
     for (
-      list<S_msrNote>::const_iterator i = measureNotesFlatList.begin ();
+      std::list<S_msrNote>::const_iterator i = measureNotesFlatList.begin ();
       i != measureNotesFlatList.end ();
       ++i
     ) {
@@ -468,7 +466,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
         gLogStream <<
           "--> note: " <<
           note->asShortString () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -491,10 +489,10 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
             note->
               getMeasureElementMeasurePosition ();
 
-        // append note to the slice notes flat list
+        // append note to the slice notes flat std::list
         fSliceNotesFlatList.push_back (note);
 
-        // append a note start event to the slice notes events list
+        // append a note start event to the slice notes events std::list
         S_msrNoteEvent
           noteStartEvent =
             msrNoteEvent::create (
@@ -504,7 +502,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
         fSliceNoteEventsList.push_back (noteStartEvent);
 
-        // append a note stop event to the slice notes events list
+        // append a note stop event to the slice notes events std::list
         Rational
           noteEndMeasurePosition =
             noteMeasurePosition
@@ -526,15 +524,15 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
     --gIndenter;
   } // for
 
-  // sort the slice notes flat list by position in measure
+  // sort the slice notes flat std::list by position in measure
   fSliceNotesFlatList.sort (
     msrNote::compareNotesByIncreasingMeasurePosition);
 
-  // sort the slice notes events list by position in measure
+  // sort the slice notes events std::list by position in measure
   fSliceNoteEventsList.sort (
     msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition);
 
-  // build the simultaneous notes chunks list
+  // build the simultaneous notes chunks std::list
   buildTheSimutaneousNotesChunksList ();
 
   // identify the solo notes and rests in measusre slice
@@ -546,9 +544,9 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
-      "Building the simultaneous notes chunks list in " <<
+      "Building the simultaneous notes chunks std::list in " <<
       asShortStringForMeasuresSlices () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -559,7 +557,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
     currentChunkMeasurePosition = Rational (-1, 1);
 
   for (
-    list<S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
+    std::list<S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
     i != fSliceNoteEventsList.end ();
     ++i
   ) {
@@ -576,7 +574,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
         msrSimultaneousNotesChunk::create (
           noteEventMeasurePosition);
 
-      // append it to the simultaneous notes chunks list
+      // append it to the simultaneous notes chunks std::list
       fSliceSimultaneousNotesChunksList.push_back (
         currentSimultaneousNotesChunk);
 
@@ -615,7 +613,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
     gLogStream <<
       "Identifying solo notes and rests in measures slice " <<
       asShortStringForMeasuresSlices () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -624,7 +622,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
   S_msrNote soloCandidate;
 
   for (
-    list<S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
+    std::list<S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
     i != fSliceNoteEventsList.end ();
     ++i
   ) {
@@ -678,7 +676,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 
             gLogStream <<
               " is a solo candidate" <<
-              endl;
+              std::endl;
           }
 #endif
         }
@@ -731,7 +729,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                     noteStaff =
                       note->fetchUpLinkToNoteToStaff ();
 
-                  const list<S_msrVoice>&
+                  const std::list<S_msrVoice>&
                     staffRegularVoicesList =
                       noteStaff->
                         getStaffRegularVoicesList ();
@@ -775,7 +773,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 
                       gLogStream <<
                         " has been identified" <<
-                        endl;
+                        std::endl;
                     }
 #endif
                   }
@@ -802,9 +800,9 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 }
 
 
-string msrMeasuresSlice::asString () const
+std::string msrMeasuresSlice::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[MeasuresSlice" <<
@@ -817,9 +815,9 @@ string msrMeasuresSlice::asString () const
   return s.str ();
 }
 
-string msrMeasuresSlice::asShortString () const
+std::string msrMeasuresSlice::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t sliceMeasuresVectorSize =
     fSliceMeasuresVector.size ();
@@ -832,7 +830,7 @@ string msrMeasuresSlice::asShortString () const
       sliceMeasuresVectorSize, "measure", "measures");
 
   if (sliceMeasuresVectorSize) {
-    vector<S_msrMeasure>::const_iterator
+    std::vector<S_msrMeasure>::const_iterator
       iBegin = fSliceMeasuresVector.begin (),
       iEnd   = fSliceMeasuresVector.end (),
       i      = iBegin;
@@ -856,9 +854,9 @@ string msrMeasuresSlice::asShortString () const
   return s.str ();
 }
 
-string msrMeasuresSlice::asShortStringForMeasuresSlices () const
+std::string msrMeasuresSlice::asShortStringForMeasuresSlices () const
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t sliceMeasuresVectorSize =
     fSliceMeasuresVector.size ();
@@ -872,7 +870,7 @@ string msrMeasuresSlice::asShortStringForMeasuresSlices () const
 
   if (sliceMeasuresVectorSize) {
 
-    vector<S_msrMeasure>::const_iterator
+    std::vector<S_msrMeasure>::const_iterator
       iBegin = fSliceMeasuresVector.begin (),
       iEnd   = fSliceMeasuresVector.end (),
       i      = iBegin;
@@ -896,7 +894,7 @@ string msrMeasuresSlice::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrMeasuresSlice::print (ostream& os) const
+void msrMeasuresSlice::print (std::ostream& os) const
 {
   size_t sliceMeasuresVectorSize =
     fSliceMeasuresVector.size ();
@@ -907,23 +905,23 @@ void msrMeasuresSlice::print (ostream& os) const
     mfSingularOrPlural (
       sliceMeasuresVectorSize, "measure", "measures") <<
     ")" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   os <<
     "sliceMeasureNumber: " << fSliceMeasureNumber <<
-    endl;
+    std::endl;
 
-  // print the slice measures vector
+  // print the slice measures std::vector
   if (sliceMeasuresVectorSize) {
     os <<
       "sliceMeasuresVector: " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
-    vector<S_msrMeasure>::const_iterator
+    std::vector<S_msrMeasure>::const_iterator
       iBegin = fSliceMeasuresVector.begin (),
       iEnd   = fSliceMeasuresVector.end (),
       i      = iBegin;
@@ -936,28 +934,28 @@ void msrMeasuresSlice::print (ostream& os) const
       os <<
         measure->
           asShortStringForMeasuresSlices () <<
-          endl;
+          std::endl;
 
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
-// JMI    os << endl;
+// JMI    os << std::endl;
 
     --gIndenter;
   }
 
-  // print the slice notes flat list
+  // print the slice notes flat std::list
   size_t sliceNotesFlatListSize =
     fSliceNotesFlatList.size ();
 
   if (sliceNotesFlatListSize) {
     os <<
       "sliceNotesFlatList: " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
-    list<S_msrNote>::const_iterator
+    std::list<S_msrNote>::const_iterator
       iBegin = fSliceNotesFlatList.begin (),
       iEnd   = fSliceNotesFlatList.end (),
       i      = iBegin;
@@ -973,23 +971,23 @@ void msrMeasuresSlice::print (ostream& os) const
       if (++i == iEnd) break;
       os << ' ';
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
 
-  // print the slice notes events list
+  // print the slice notes events std::list
   size_t sliceNoteEventsListSize =
     fSliceNoteEventsList.size ();
 
   if (sliceNoteEventsListSize) {
     os <<
       "sliceNoteEventsList: " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
-    list<S_msrNoteEvent>::const_iterator
+    std::list<S_msrNoteEvent>::const_iterator
       iBegin = fSliceNoteEventsList.begin (),
       iEnd   = fSliceNoteEventsList.end (),
       i      = iBegin;
@@ -1003,25 +1001,25 @@ void msrMeasuresSlice::print (ostream& os) const
           asString();
 
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
 
-  // print the simultaneous notes chunks list
+  // print the simultaneous notes chunks std::list
   size_t sliceSimultaneousNotesChunksListSize =
     fSliceSimultaneousNotesChunksList.size ();
 
   if (sliceSimultaneousNotesChunksListSize) {
     os <<
       "sliceSimultaneousNotesChunksList: " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
-    list<S_msrSimultaneousNotesChunk>::const_iterator
+    std::list<S_msrSimultaneousNotesChunk>::const_iterator
       iBegin = fSliceSimultaneousNotesChunksList.begin (),
       iEnd   = fSliceSimultaneousNotesChunksList.end (),
       i      = iBegin;
@@ -1035,30 +1033,30 @@ void msrMeasuresSlice::print (ostream& os) const
           asString();
 
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrMeasuresSlice::printShort (ostream& os) const
+void msrMeasuresSlice::printShort (std::ostream& os) const
 {
   print (os);
 }
 
-ostream& operator << (ostream& os, const S_msrMeasuresSlice& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlice& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1066,7 +1064,7 @@ ostream& operator << (ostream& os, const S_msrMeasuresSlice& elt)
 
 //______________________________________________________________________________
 S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::create (
-  const string& measuresOrigin)
+  const std::string& measuresOrigin)
 {
   msrMeasuresSlicesSequence* o =
     new msrMeasuresSlicesSequence (
@@ -1076,7 +1074,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::create (
 }
 
 S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::create (
-  const string& measuresOrigin,
+  const std::string& measuresOrigin,
   int           measuresNumber)
 {
   msrMeasuresSlicesSequence* o =
@@ -1088,13 +1086,13 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::create (
 }
 
 msrMeasuresSlicesSequence::msrMeasuresSlicesSequence (
-  const string& measuresOrigin)
+  const std::string& measuresOrigin)
 {
   fMeasuresOrigin = measuresOrigin;
 }
 
 msrMeasuresSlicesSequence::msrMeasuresSlicesSequence (
-  const string& measuresOrigin,
+  const std::string& measuresOrigin,
   int           measuresNumber)
 {
   fMeasuresOrigin = measuresOrigin;
@@ -1112,14 +1110,14 @@ msrMeasuresSlicesSequence::~msrMeasuresSlicesSequence ()
 {}
 
 S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSequenceShallowCopy (
-  const string& measuresOrigin)
+  const std::string& measuresOrigin)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Creating a shallow copy of measures slices sequence " <<
       this->asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1131,7 +1129,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
 
   // populate it
   for (
-    vector<S_msrMeasuresSlice>::const_iterator i =
+    std::vector<S_msrMeasuresSlice>::const_iterator i =
       fMeasuresSlicesVector.begin ();
     i != fMeasuresSlicesVector.end ();
     ++i
@@ -1157,7 +1155,7 @@ void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
       measuresSlice->asShortStringForMeasuresSlices () <<
       " to measures slices sequence " <<
       asShortStringForMeasuresSlices () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1167,7 +1165,7 @@ void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
 
 S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSequence (
   int           inputLineNumber,
-  const string& measuresOrigin,
+  const std::string& measuresOrigin,
   S_msrMeasuresSlicesSequence
                 otherMeasuresSlicesSequence)
 {
@@ -1180,7 +1178,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       asShortStringForMeasuresSlices () <<
       " with " <<
       otherMeasuresSlicesSequence->asShortStringForMeasuresSlices () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1192,7 +1190,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
     gLogStream <<
       "---> sequenceSize: " <<
       sequenceSize <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1225,13 +1223,13 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
         "mergeWithMeasuresSlicesSequence()" <<
         ", otherSequenceSize: " <<
         otherSequenceSize <<
-        endl;
+        std::endl;
     }
 #endif
 
     // sanity check
     if (otherSequenceSize != sequenceSize) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "cannot enrich measures slices sequence " <<
@@ -1241,11 +1239,11 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
         " which has not the same size";
 
       gLogStream <<
-        endl <<
+        std::endl <<
         S_msrMeasuresSlicesSequence (this) <<
-        endl <<
+        std::endl <<
         otherMeasuresSlicesSequence <<
-        endl;
+        std::endl;
 
       msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -1258,8 +1256,8 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       if (sequenceSize) {
         // the two measures slices sequences have the same non null size
 
-        // get the other sequence's measures slices vector
-        const vector<S_msrMeasuresSlice>&
+        // get the other sequence's measures slices std::vector
+        const std::vector<S_msrMeasuresSlice>&
           otherMeasuresSlicesVector =
             otherMeasuresSlicesSequence->
               getMeasuresSlicesVector ();
@@ -1303,11 +1301,11 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
     gLogStream <<
       "---> mergeWithMeasuresSlicesSequence()" <<
       ", result: " <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       result->asShortStringForMeasuresSlices () <<
-      endl;
+      std::endl;
     --gIndenter;
   }
 #endif
@@ -1323,7 +1321,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
       "Identifying solo notes and rests in measures slices sequence " <<
       asShortStringForMeasuresSlices () <<
       ":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     this->printShort (gLogStream);
@@ -1333,7 +1331,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 
   // collect the notes from the sequence's measures slices
   for (
-    vector<S_msrMeasuresSlice>::const_iterator i =
+    std::vector<S_msrMeasuresSlice>::const_iterator i =
       fMeasuresSlicesVector.begin ();
     i != fMeasuresSlicesVector.end ();
     ++i
@@ -1345,9 +1343,9 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
   } // for
 }
 
-string msrMeasuresSlicesSequence::asString () const
+std::string msrMeasuresSlicesSequence::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[MeasuresSlicesSequence" <<
@@ -1360,17 +1358,17 @@ string msrMeasuresSlicesSequence::asString () const
   return s.str ();
 }
 
-string msrMeasuresSlicesSequence::asShortString () const
+std::string msrMeasuresSlicesSequence::asShortString () const
 {
   return asString ();
 }
 
-string msrMeasuresSlicesSequence::asShortStringForMeasuresSlices () const
+std::string msrMeasuresSlicesSequence::asShortStringForMeasuresSlices () const
 {
   return asString ();
 }
 
-void msrMeasuresSlicesSequence::print (ostream& os) const
+void msrMeasuresSlicesSequence::print (std::ostream& os) const
 {
   size_t measuresSlicesVectorSize =
     fMeasuresSlicesVector.size ();
@@ -1380,19 +1378,19 @@ void msrMeasuresSlicesSequence::print (ostream& os) const
     mfSingularOrPlural (
       measuresSlicesVectorSize, "measures slice", "measures slices") <<
     ")" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   os <<
     "measuresOrigin: " << fMeasuresOrigin <<
-    endl;
+    std::endl;
   --gIndenter;
 
   if (measuresSlicesVectorSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    vector<S_msrMeasuresSlice>::const_iterator
+    std::vector<S_msrMeasuresSlice>::const_iterator
       iBegin = fMeasuresSlicesVector.begin (),
       iEnd   = fMeasuresSlicesVector.end (),
       i      = iBegin;
@@ -1405,28 +1403,28 @@ void msrMeasuresSlicesSequence::print (ostream& os) const
         measuresSlice;
 
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
-    os << endl;
+    os << std::endl;
     --gIndenter;
   }
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrMeasuresSlicesSequence::printShort (ostream& os) const
+void msrMeasuresSlicesSequence::printShort (std::ostream& os) const
 {
   print (os);
 }
 
-ostream& operator << (ostream& os, const S_msrMeasuresSlicesSequence& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlicesSequence& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

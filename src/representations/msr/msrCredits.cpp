@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -24,16 +24,14 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-string msrCreditTypeKindAsString (
+std::string msrCreditTypeKindAsString (
   msrCreditTypeKind creditTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (creditTypeKind) {
     case msrCreditTypeKind::kCreditType_NO_:
@@ -71,7 +69,7 @@ string msrCreditTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrCreditTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrCreditTypeKind& elt)
 {
   os << msrCreditTypeKindAsString (elt);
   return os;
@@ -80,10 +78,10 @@ ostream& operator << (ostream& os, const msrCreditTypeKind& elt)
 //______________________________________________________________________________
 S_msrCreditWords msrCreditWords::create (
   int                        inputLineNumber,
-  const string&              creditWordsContents,
+  const std::string&              creditWordsContents,
   float                      creditWordsDefaultX,
   float                      creditWordsDefaultY,
-  const string&              creditWordsFontFamily,
+  const std::string&              creditWordsFontFamily,
   float                      creditWordsFontSize,
   msrFontWeightKind          creditWordsFontWeightKind,
   msrFontStyleKind           creditWordsFontStyleKind,
@@ -112,10 +110,10 @@ S_msrCreditWords msrCreditWords::create (
 
 msrCreditWords::msrCreditWords (
   int                        inputLineNumber,
-  const string&              creditWordsContents,
+  const std::string&              creditWordsContents,
   float                      creditWordsDefaultX,
   float                      creditWordsDefaultY,
-  const string&              creditWordsFontFamily,
+  const std::string&              creditWordsFontFamily,
   float                      creditWordsFontSize,
   msrFontWeightKind          creditWordsFontWeightKind,
   msrFontStyleKind           creditWordsFontStyleKind,
@@ -151,7 +149,7 @@ void msrCreditWords::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrCreditWords::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrCreditWords>*
@@ -162,7 +160,7 @@ void msrCreditWords::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrCreditWords::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -173,7 +171,7 @@ void msrCreditWords::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrCreditWords::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrCreditWords>*
@@ -184,7 +182,7 @@ void msrCreditWords::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrCreditWords::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -193,85 +191,85 @@ void msrCreditWords::acceptOut (basevisitor* v)
 void msrCreditWords::browseData (basevisitor* v)
 {}
 
-void msrCreditWords::print (ostream& os) const
+void msrCreditWords::print (std::ostream& os) const
 {
   os <<
     "[CreditWords" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 35;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fCreditWordsContents" << " : \"" <<
     fCreditWordsContents <<
     "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fCreditWordsDefaultX" << " : " <<
     fCreditWordsDefaultX <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fCreditWordsDefaultY" << " : " <<
     fCreditWordsDefaultY <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fCreditWordsFontFamily" << " : \"" <<
     fCreditWordsFontFamily <<
     "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fCreditWordsFontSize" << " : " <<
     fCreditWordsFontSize <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fCreditWordsFontWeightKind" << " : " <<
     msrFontWeightKindAsString (
       fCreditWordsFontWeightKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fCreditWordsFontStyleKind" << " : " <<
     msrFontStyleKindAsString (fCreditWordsFontStyleKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fCreditWordsJustifyKind" << " : " <<
     msrJustifyKindAsString (fCreditWordsJustifyKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fCreditWordsHorizontalAlignmentKind" << " : " <<
     msrHorizontalAlignmentKindAsString (
       fCreditWordsHorizontalAlignmentKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fCreditWordsVerticalAlignmentKind" << " : " <<
     msrVerticalAlignmentKindAsString (
       fCreditWordsVerticalAlignmentKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fCreditWordsXMLLang" << " : \"" <<
     msrXMLLangKindAsString (fCreditWordsXMLLang) <<
     "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrCreditWords& elt)
+std::ostream& operator << (std::ostream& os, const S_msrCreditWords& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -313,7 +311,7 @@ void msrCredit::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrCredit::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrCredit>*
@@ -324,7 +322,7 @@ void msrCredit::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrCredit::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -335,7 +333,7 @@ void msrCredit::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrCredit::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrCredit>*
@@ -346,7 +344,7 @@ void msrCredit::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrCredit::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -363,9 +361,9 @@ void msrCredit::browseData (basevisitor* v)
   } // for
 }
 
-string msrCredit::asString () const
+std::string msrCredit::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Credit" <<
@@ -377,7 +375,7 @@ string msrCredit::asString () const
   if (fCreditWordsList.size ()) {
     s << " [";
 
-    vector<S_msrCreditWords>::const_iterator
+    std::vector<S_msrCreditWords>::const_iterator
       iBegin = fCreditWordsList.begin (),
       iEnd   = fCreditWordsList.end (),
       i      = iBegin;
@@ -397,26 +395,26 @@ string msrCredit::asString () const
   return s.str ();
 }
 
-void msrCredit::print (ostream& os) const
+void msrCredit::print (std::ostream& os) const
 {
   os <<
     "[Credit" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 33;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fCreditPageNumber" << " : " << fCreditPageNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fCreditTypeKind" << " : " << fCreditTypeKind <<
-    endl;
+    std::endl;
 
   if (fCreditWordsList.size ()) {
-    vector<S_msrCreditWords>::const_iterator
+    std::vector<S_msrCreditWords>::const_iterator
       iBegin = fCreditWordsList.begin (),
       iEnd   = fCreditWordsList.end (),
       i      = iBegin;
@@ -424,22 +422,22 @@ void msrCredit::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-  // JMI    os << endl;
+  // JMI    os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrCredit& elt)
+std::ostream& operator << (std::ostream& os, const S_msrCredit& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

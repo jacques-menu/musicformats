@@ -21,18 +21,16 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 void msr2lpsrUnsupported (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   if (!
     (
@@ -52,7 +50,7 @@ void msr2lpsrUnsupported (
     gLogStream <<
       "### MSR LIMITATION ### " <<
       inputSourceName << ":" << inputLineNumber << ": " << message <<
-      endl;
+      std::endl;
   }
 
   throw msr2lpsrUnsupportedException (message);
@@ -60,9 +58,9 @@ void msr2lpsrUnsupported (
 
 //______________________________________________________________________________
 void msr2lpsrInternalWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeInternalWarning (
     "msr2lpsr",
@@ -72,11 +70,11 @@ void msr2lpsrInternalWarning (
 }
 
 void msr2lpsrInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeInternalError (
     "msr2lpsr",
@@ -89,9 +87,9 @@ void msr2lpsrInternalError (
 
 //______________________________________________________________________________
 void msr2lpsrWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeWarning (
     "LPSR",

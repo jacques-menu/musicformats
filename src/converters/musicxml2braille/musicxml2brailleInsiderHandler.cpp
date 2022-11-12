@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
 // libmusicxml2
@@ -54,15 +54,13 @@
 #include "musicxml2brailleInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_xml2brlInsiderHandler xml2brlInsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   // create the insider handler
   xml2brlInsiderHandler* o = new
@@ -75,8 +73,8 @@ S_xml2brlInsiderHandler xml2brlInsiderHandler::create (
 }
 
 xml2brlInsiderHandler::xml2brlInsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahInsiderHandler (
       serviceName,
       handlerHeader,
@@ -96,7 +94,7 @@ Usage: xml2brl [[option]* [MusicXMLFile|-] [[option]*
       "Initializing xml2brl insider options handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -120,7 +118,7 @@ void xml2brlInsiderHandler::initializeHandlerMultiComponent ()
 }
 
 //_______________________________________________________________________________
-string xml2brlInsiderHandler::handlerServiceAboutInformation () const
+std::string xml2brlInsiderHandler::handlerServiceAboutInformation () const
 {
   return
 R"(What xml2brl does:
@@ -157,7 +155,7 @@ void xml2brlInsiderHandler::createTheXml2brlPrefixes ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Creating the xml2brl prefixes" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -166,7 +164,7 @@ void xml2brlInsiderHandler::createTheXml2brlPrefixes ()
 
 //______________________________________________________________________________
 void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -174,7 +172,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
       "Creating the xml2brl insider option groups" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -262,14 +260,14 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
     // print the options handler initial state
     gLogStream <<
       "xml2brlInsiderHandler has been initialized as:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     print (gLogStream);
 
     gLogStream <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -285,7 +283,7 @@ void xml2brlInsiderHandler::checkOptionsAndArguments () const
       "Checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -293,7 +291,7 @@ void xml2brlInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -301,7 +299,7 @@ string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -325,13 +323,13 @@ string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       autoOutputFileNameAtom->
         getSetByAnOption ();
 
-  string outputFileName;
+  std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "options' " <<
@@ -356,7 +354,7 @@ string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has NOT been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      string
+      std::string
         inputSourceName =
           gGlobalServiceRunData->getInputSourceName ();
 
@@ -375,7 +373,7 @@ string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
             outputFileName.rfind ('.');
 
         // remove file extension
-        if (posInString != string::npos) {
+        if (posInString != std::string::npos) {
           outputFileName.replace (
             posInString,
             outputFileName.size () - posInString,
@@ -389,7 +387,7 @@ string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -449,7 +447,7 @@ string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -475,7 +473,7 @@ string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3 = " <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -544,7 +542,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2brlInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -557,7 +555,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2brlInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -570,7 +568,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2brlInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -583,7 +581,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2brlInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -596,7 +594,7 @@ void xml2brlInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2brlInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -604,33 +602,33 @@ void xml2brlInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void xml2brlInsiderHandler::print (ostream& os) const
+void xml2brlInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "xml2brlInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -638,7 +636,7 @@ void xml2brlInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -646,16 +644,16 @@ void xml2brlInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_xml2brlInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_xml2brlInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -665,8 +663,8 @@ ostream& operator << (ostream& os, const S_xml2brlInsiderHandler& elt)
 S_xml2brlInsiderOahGroup gGlobalXml2brlInsiderOahGroup;
 
 S_xml2brlInsiderOahGroup xml2brlInsiderOahGroup::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   xml2brlInsiderOahGroup* o = new xml2brlInsiderOahGroup (
     serviceName,
@@ -677,8 +675,8 @@ S_xml2brlInsiderOahGroup xml2brlInsiderOahGroup::create (
 }
 
 xml2brlInsiderOahGroup::xml2brlInsiderOahGroup (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahGroup (
     serviceName,
     "help-xml2brl", "hx2b",
@@ -696,11 +694,11 @@ void xml2brlInsiderOahGroup::initializeXml2brlInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -715,11 +713,11 @@ void xml2brlInsiderOahGroup::createInsiderQuitSubGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Creating insider quit subgroup in \"" <<
       fGroupHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -785,7 +783,7 @@ void xml2brlInsiderOahGroup::printXml2brlInsiderOahGroupValues (int fieldWidth)
 {
   gLogStream <<
     "The xml2brl options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -794,20 +792,20 @@ void xml2brlInsiderOahGroup::printXml2brlInsiderOahGroupValues (int fieldWidth)
 
   gLogStream <<
     "Quit after some passes:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
     fQuitAfterPass2a <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
     fQuitAfterPass2b <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass3" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << " : " <<
     fQuitAfterPass3 <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -816,14 +814,14 @@ void xml2brlInsiderOahGroup::printXml2brlInsiderOahGroupValues (int fieldWidth)
 
 //______________________________________________________________________________
 S_xml2brlInsiderOahGroup createGlobalXml2brlOahGroup (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global xml2brl OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

@@ -31,8 +31,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -84,7 +82,7 @@ msrBassFigure::msrBassFigure (
       "Creating bass figure '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -101,7 +99,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
       "Creating a newborn clone of bass figure '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -132,7 +130,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
       "Creating a deep clone of bass figure '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -154,10 +152,10 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   return figureDeepClone;
 }
 
-string msrBassFigurePrefixKindAsString (
+std::string msrBassFigurePrefixKindAsString (
   msrBassFigurePrefixKind figurePrefixKind)
 {
-  string result;
+  std::string result;
 
   switch (figurePrefixKind) {
     case msrBassFigurePrefixKind::kBassFigurePrefix_NO_:
@@ -189,16 +187,16 @@ string msrBassFigurePrefixKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBassFigurePrefixKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBassFigurePrefixKind& elt)
 {
   os << msrBassFigurePrefixKindAsString (elt);
   return os;
 }
 
-string msrBassFigureSuffixKindAsString (
+std::string msrBassFigureSuffixKindAsString (
   msrBassFigureSuffixKind figureSuffixKind)
 {
-  string result;
+  std::string result;
 
   switch (figureSuffixKind) {
     case msrBassFigureSuffixKind::kBassFigureSuffix_NO_:
@@ -233,7 +231,7 @@ string msrBassFigureSuffixKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBassFigureSuffixKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBassFigureSuffixKind& elt)
 {
   os << msrBassFigureSuffixKindAsString (elt);
   return os;
@@ -244,7 +242,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBassFigure::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBassFigure>*
@@ -255,7 +253,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBassFigure::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -266,7 +264,7 @@ void msrBassFigure::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBassFigure::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBassFigure>*
@@ -277,7 +275,7 @@ void msrBassFigure::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBassFigure::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -286,9 +284,9 @@ void msrBassFigure::acceptOut (basevisitor* v)
 void msrBassFigure::browseData (basevisitor* v)
 {}
 
-string msrBassFigure::asString () const
+std::string msrBassFigure::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[BassFigure" <<
@@ -305,9 +303,9 @@ string msrBassFigure::asString () const
   return s.str ();
 }
 
-void msrBassFigure::print (ostream& os) const
+void msrBassFigure::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 
 /* JMI
   if (fFigureUpLinkToPart) { // JMI ???
@@ -320,13 +318,13 @@ void msrBassFigure::print (ostream& os) const
 */
 }
 
-ostream& operator << (ostream& os, const S_msrBassFigure& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBassFigure& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -380,7 +378,7 @@ msrFiguredBass::msrFiguredBass (
   msrFiguredBassParenthesesKind
                   figuredBassParenthesesKind,
   msrTupletFactor figuredBassTupletFactor)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure),
       fFiguredBassTupletFactor (
@@ -417,7 +415,7 @@ msrFiguredBass::msrFiguredBass (
     gLogStream <<
       "Creating figuredBass " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -434,7 +432,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
       "Creating a newborn clone of figured bass '" <<
       asShortString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -466,7 +464,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
       "Creating a deep clone of figuredBass '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -494,7 +492,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 // void msrFiguredBass::setFiguredBassMeasurePosition (
 //   const S_msrMeasure measure,
 //   const Rational&    measurePosition,
-//   const string&      context)
+//   const std::string&      context)
 // {
 //   // set the figured bass position in measure
 //
@@ -513,7 +511,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -563,7 +561,7 @@ void msrFiguredBass::appendFigureToFiguredBass (
       "' to figured-bass element '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -575,7 +573,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrFiguredBass::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrFiguredBass>*
@@ -586,7 +584,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrFiguredBass::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -597,7 +595,7 @@ void msrFiguredBass::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrFiguredBass::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrFiguredBass>*
@@ -608,7 +606,7 @@ void msrFiguredBass::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrFiguredBass::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -623,10 +621,10 @@ void msrFiguredBass::browseData (basevisitor* v)
   } // for
 }
 
-string msrFiguredBassParenthesesKindAsString (
+std::string msrFiguredBassParenthesesKindAsString (
   msrFiguredBassParenthesesKind figuredBassParenthesesKind)
 {
-  string result;
+  std::string result;
 
   switch (figuredBassParenthesesKind) {
     case msrFiguredBassParenthesesKind::kFiguredBassParenthesesYes:
@@ -640,9 +638,9 @@ string msrFiguredBassParenthesesKindAsString (
   return result;
 }
 
-string msrFiguredBass::asString () const
+std::string msrFiguredBass::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[FiguredBass" <<
@@ -665,7 +663,7 @@ string msrFiguredBass::asString () const
   if (fFiguredBassFiguresList.size ()) {
     s << ", fFiguredBassFiguresList: [";
 
-    list<S_msrBassFigure>::const_iterator
+    std::list<S_msrBassFigure>::const_iterator
       iBegin = fFiguredBassFiguresList.begin (),
       iEnd   = fFiguredBassFiguresList.end (),
       i      = iBegin;
@@ -703,19 +701,19 @@ string msrFiguredBass::asString () const
   return s.str ();
 }
 
-void msrFiguredBass::print (ostream& os) const
+void msrFiguredBass::print (std::ostream& os) const
 {
   os <<
     "[FiguredBass" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 36;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fFiguredBassUpLinkToNote" << " : ";
   if (fFiguredBassUpLinkToNote) {
     os << fFiguredBassUpLinkToNote->asString ();
@@ -723,10 +721,10 @@ void msrFiguredBass::print (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fFiguredBassUpLinkToVoice" << " : ";
   if (fFiguredBassUpLinkToVoice) {
     os << fFiguredBassUpLinkToVoice->asString ();
@@ -734,35 +732,35 @@ void msrFiguredBass::print (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fMeasureElementSoundingWholeNotes" << " : " <<
     fMeasureElementSoundingWholeNotes <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fFiguredBassDisplayWholeNotes" << " : " <<
     fFiguredBassDisplayWholeNotes <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fFiguredBassParenthesesKind" << " : " <<
     msrFiguredBassParenthesesKindAsString (
       fFiguredBassParenthesesKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fFiguredBassTupletFactor" << " : " <<
     fFiguredBassTupletFactor.asString () <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fFiguredBassFiguresList" << " : ";
   if (fFiguredBassFiguresList.size ()) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
     for (S_msrBassFigure bassFigure : fFiguredBassFiguresList) {
@@ -772,33 +770,33 @@ void msrFiguredBass::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
   // print the figured bass position in measure
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
-    endl;
+    std::endl;
 
 //   // print the figured bass position in voice
 //   os <<
-//     setw (fieldWidth) <<
+//     std::setw (fieldWidth) <<
 //     "fMeasureElementVoicePosition" << " : " << fMeasureElementVoicePosition <<
-//     endl;
+//     std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrFiguredBass& elt)
+std::ostream& operator << (std::ostream& os, const S_msrFiguredBass& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

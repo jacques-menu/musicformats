@@ -32,8 +32,8 @@ class EXP msdl2musicxmlRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<msdl2musicxmlRegularHandler> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_msdl2musicxmlInsiderHandler
                                               insiderOahHandler);
 
@@ -43,8 +43,8 @@ class EXP msdl2musicxmlRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           msdl2musicxmlRegularHandler (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_msdl2musicxmlInsiderHandler
                                               insiderOahHandler);
 
@@ -57,7 +57,7 @@ class EXP msdl2musicxmlRegularHandler : public oahRegularHandler
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override
+    std::string           fetchOutputFileNameFromTheOptions () const override
                               {
                                 return
                                   fInsiderHandler->
@@ -88,7 +88,7 @@ class EXP msdl2musicxmlRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -156,7 +156,7 @@ class EXP msdl2musicxmlRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdl2musicxmlRegularHandler> S_msdl2musicxmlRegularHandler;
-EXP ostream& operator << (ostream& os, const S_msdl2musicxmlRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2musicxmlRegularHandler& elt);
 
 
 }

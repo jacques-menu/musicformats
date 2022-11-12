@@ -16,8 +16,6 @@
 #include <ostream>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -28,10 +26,10 @@ enum class msrDirectionKind {
   kDirectionUp, kDirectionDown
 };
 
-string msrDirectionKindAsString (
+std::string msrDirectionKindAsString (
   msrDirectionKind directionKind);
 
-ostream& operator << (ostream& os, const msrDirectionKind& elt);
+std::ostream& operator << (std::ostream& os, const msrDirectionKind& elt);
 
 
 }

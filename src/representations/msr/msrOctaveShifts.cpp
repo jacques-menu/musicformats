@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -28,8 +28,6 @@
 
 #include "msrOctaveShifts.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -56,7 +54,7 @@ msrOctaveShift::msrOctaveShift (
   S_msrMeasure       upLinkToMeasure,
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -73,7 +71,7 @@ void msrOctaveShift::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrOctaveShift::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrOctaveShift>*
@@ -84,7 +82,7 @@ void msrOctaveShift::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrOctaveShift::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -95,7 +93,7 @@ void msrOctaveShift::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrOctaveShift::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrOctaveShift>*
@@ -106,7 +104,7 @@ void msrOctaveShift::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrOctaveShift::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -115,10 +113,10 @@ void msrOctaveShift::acceptOut (basevisitor* v)
 void msrOctaveShift::browseData (basevisitor* v)
 {}
 
-string msrOctaveShiftKindAsString (
+std::string msrOctaveShiftKindAsString (
   msrOctaveShiftKind octaveShiftKind)
 {
-  string result;
+  std::string result;
 
   switch (octaveShiftKind) {
     case msrOctaveShiftKind::kOctaveShiftNone:
@@ -141,15 +139,15 @@ string msrOctaveShiftKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrOctaveShiftKind& elt)
+std::ostream& operator << (std::ostream& os, const msrOctaveShiftKind& elt)
 {
   os << msrOctaveShiftKindAsString (elt);
   return os;
 }
 
-string msrOctaveShift::asString () const
+std::string msrOctaveShift::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[OctaveShift" <<
@@ -160,18 +158,18 @@ string msrOctaveShift::asString () const
   return s.str ();
 }
 
-void msrOctaveShift::print (ostream& os) const
+void msrOctaveShift::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrOctaveShift& elt)
+std::ostream& operator << (std::ostream& os, const S_msrOctaveShift& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -34,8 +34,6 @@
 
 #include "msrWae.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -80,7 +78,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTempoNote::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTempoNote>*
@@ -91,7 +89,7 @@ void msrTempoNote::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTempoNote::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -102,7 +100,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTempoNote::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTempoNote>*
@@ -113,7 +111,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTempoNote::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -122,7 +120,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
 void msrTempoNote::browseData (basevisitor* v)
 {
   for (
-    list<S_msrBeam>::const_iterator i = fTempoNoteBeams.begin ();
+    std::list<S_msrBeam>::const_iterator i = fTempoNoteBeams.begin ();
     i != fTempoNoteBeams.end ();
     ++i ) {
     // browse tempoTuplet element
@@ -131,9 +129,9 @@ void msrTempoNote::browseData (basevisitor* v)
   } // for
 }
 
-string msrTempoNote::asString () const
+std::string msrTempoNote::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Tempo note" <<
@@ -144,41 +142,41 @@ string msrTempoNote::asString () const
   return s.str ();
 }
 
-void msrTempoNote::print (ostream& os) const
+void msrTempoNote::print (std::ostream& os) const
 {
   os <<
     "[TempoNote" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 26;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "tempoNoteWholeNotes" << " : " << fTempoNoteWholeNotes <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "tempoNoteBelongsToATuplet" << " : " <<
     fTempoNoteBelongsToATuplet <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "tempoNoteBeams";
 
     if (fTempoNoteBeams.size ()) {
-      os << endl;
+      os << std::endl;
 
       ++gIndenter;
 
-      list<S_msrBeam>::const_iterator
+      std::list<S_msrBeam>::const_iterator
         iBegin = fTempoNoteBeams.begin (),
         iEnd   = fTempoNoteBeams.end (),
         i      = iBegin;
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        os << endl;
+        os << std::endl;
       } // for
 
       --gIndenter;
@@ -187,21 +185,21 @@ void msrTempoNote::print (ostream& os) const
       os <<
         " : " <<
        "[NONE]" <<
-        endl;
+        std::endl;
     }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTempoNote& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTempoNote& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -254,7 +252,7 @@ msrTempoTuplet::msrTempoTuplet (
       "Creating tempo tuplet '" <<
       this->asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -262,10 +260,10 @@ msrTempoTuplet::msrTempoTuplet (
 msrTempoTuplet::~msrTempoTuplet ()
 {}
 
-string msrTempoTupletTypeKindAsString (
+std::string msrTempoTupletTypeKindAsString (
   msrTempoTupletTypeKind tempoTupletTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (tempoTupletTypeKind) {
     case msrTempoTupletTypeKind::kTempoTupletTypeNone:
@@ -282,16 +280,16 @@ string msrTempoTupletTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTempoTupletTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTempoTupletTypeKind& elt)
 {
   os << msrTempoTupletTypeKindAsString (elt);
   return os;
 }
 
-string msrTempoTupletBracketKindAsString (
+std::string msrTempoTupletBracketKindAsString (
   msrTempoTupletBracketKind tempoTupletBracketKind)
 {
-  string result;
+  std::string result;
 
   switch (tempoTupletBracketKind) {
     case msrTempoTupletBracketKind::kTempoTupletBracketYes:
@@ -305,16 +303,16 @@ string msrTempoTupletBracketKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTempoTupletBracketKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTempoTupletBracketKind& elt)
 {
   os << msrTempoTupletBracketKindAsString (elt);
   return os;
 }
 
-string msrTempoTupletShowNumberKindAsString (
+std::string msrTempoTupletShowNumberKindAsString (
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind)
 {
-  string result;
+  std::string result;
 
   switch (tempoTupletShowNumberKind) {
     case msrTempoTupletShowNumberKind::kTempoTupletShowNumberActual:
@@ -331,7 +329,7 @@ string msrTempoTupletShowNumberKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTempoTupletShowNumberKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTempoTupletShowNumberKind& elt)
 {
   os << msrTempoTupletShowNumberKindAsString (elt);
   return os;
@@ -348,7 +346,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
       "' to tempoTuplet '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -376,11 +374,11 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
       "' to tempoTuplet '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // register tempoTuplet in elements list
+  // register tempoTuplet in elements std::list
   fTempoTupletElements.push_back (tempoTuplet);
 
   // account for tempoTuplet duration
@@ -416,7 +414,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
       "' from tempoTuplet '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -426,7 +424,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
         fTempoTupletElements.front ();
 
     for (
-      list<S_msrElement>::iterator i=fTempoTupletElements.begin ();
+      std::list<S_msrElement>::iterator i=fTempoTupletElements.begin ();
       i!=fTempoTupletElements.end ();
       ++i) {
       if ((*i) == tempoNote) {
@@ -445,7 +443,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
       }
     } // for
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot remove tempoNote " <<
@@ -461,7 +459,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot remove tempoNote " <<
@@ -485,14 +483,14 @@ void msrTempoTuplet::applyDisplayFactorToTempoTupletMembers ()
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "% ==> applyDisplayFactorToTempoTupletMembers ()" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       "% fTempoTupletFactor = " <<
       fTempoTupletFactor <<
-      endl << endl;
+      std::endl << std::endl;
 
     --gIndenter;
   }
@@ -507,19 +505,19 @@ void msrTempoTuplet::unapplySoundingFactorToTempoTupletMembers (
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "unapplySoundingFactorToTempoTupletMembers ()" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       "% fTempoTupletFactor = " <<
       fTempoTupletFactor <<
-      endl <<
+      std::endl <<
       "% containingTempoTupletActualNotes = " <<
       containingTempoTupletActualNotes <<
       ", containingTempoTupletNormalNotes = " <<
       containingTempoTupletNormalNotes <<
-      endl << endl;
+      std::endl << std::endl;
 
     --gIndenter;
   }
@@ -535,7 +533,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTempoTuplet::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTempoTuplet>*
@@ -546,7 +544,7 @@ void msrTempoTuplet::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTempoTuplet::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -557,7 +555,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTempoTuplet::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTempoTuplet>*
@@ -568,7 +566,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTempoTuplet::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -577,7 +575,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
 void msrTempoTuplet::browseData (basevisitor* v)
 {
   for (
-    list<S_msrElement>::const_iterator i = fTempoTupletElements.begin ();
+    std::list<S_msrElement>::const_iterator i = fTempoTupletElements.begin ();
     i != fTempoTupletElements.end ();
     ++i ) {
     // browse tempoTuplet element
@@ -586,9 +584,9 @@ void msrTempoTuplet::browseData (basevisitor* v)
   } // for
 }
 
-string msrTempoTuplet::asString () const
+std::string msrTempoTuplet::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "TempoTuplet " <<
@@ -599,7 +597,7 @@ string msrTempoTuplet::asString () const
   s << "[[";
 
   if (fTempoTupletElements.size ()) {
-    list<S_msrElement>::const_iterator
+    std::list<S_msrElement>::const_iterator
       iBegin = fTempoTupletElements.begin (),
       iEnd   = fTempoTupletElements.end (),
       i      = iBegin;
@@ -639,9 +637,9 @@ string msrTempoTuplet::asString () const
 }
 
 /* JMI
-string msrTempoTuplet::asString () const
+std::string msrTempoTuplet::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "TempoTuplet " <<
@@ -661,7 +659,7 @@ string msrTempoTuplet::asString () const
   s << "[[";
 
   if (fTempoTupletElements.size ()) {
-    list<S_msrElement>::const_iterator
+    std::list<S_msrElement>::const_iterator
       iBegin = fTempoTupletElements.begin (),
       iEnd   = fTempoTupletElements.end (),
       i      = iBegin;
@@ -707,7 +705,7 @@ string msrTempoTuplet::asString () const
 }
 */
 
-void msrTempoTuplet::print (ostream& os) const
+void msrTempoTuplet::print (std::ostream& os) const
 {
   os <<
     "[TempoTuplet " <<
@@ -718,30 +716,30 @@ void msrTempoTuplet::print (ostream& os) const
     ", display whole notes: " <<
     fTempoTupletDisplayWholeNotes <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 30;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "TempoTupletBracketKind" << " : " <<
     msrTempoTupletBracketKindAsString (
       fTempoTupletBracketKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "TempoTupletShowNumberKind" << " : " <<
     fTempoTupletShowNumberKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "MemberNotesDisplayWholeNotes" << " : " <<
     fMemberNotesDisplayWholeNotes <<
-    endl << endl;
+    std::endl << std::endl;
 
 /* JMI ???
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "(position in measure" << " : ";
   if (fTempoTupletMeasurePosition.getNumerator () < 0) {
     os << "???)";
@@ -749,7 +747,7 @@ void msrTempoTuplet::print (ostream& os) const
   else {
     os << fTempoTupletMeasurePosition << ")";
   }
-  os << endl;
+  os << std::endl;
     */
 
   os <<
@@ -758,36 +756,36 @@ void msrTempoTuplet::print (ostream& os) const
   if (fTempoTupletElements.size ()) {
     ++gIndenter;
 
-    list<S_msrElement>::const_iterator
+    std::list<S_msrElement>::const_iterator
       iBegin = fTempoTupletElements.begin (),
       iEnd   = fTempoTupletElements.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      // no endl here
+      // no std::endl here
     } // for
 
     --gIndenter;
     }
   else {
-    os << left <<
+    os << std::left <<
       " : " << "[EMPTY]" <<
-      endl;
+      std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTempoTuplet& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTempoTuplet& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -829,7 +827,7 @@ void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElemen
       "Adding element '" <<
       element->asString () <<
       "' to tempo relationship" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -841,7 +839,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTempoNotesRelationshipElements::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTempoNotesRelationshipElements>*
@@ -852,7 +850,7 @@ void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTempoNotesRelationshipElements::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -863,7 +861,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTempoNotesRelationshipElements::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTempoNotesRelationshipElements>*
@@ -874,7 +872,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTempoNotesRelationshipElements::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -882,10 +880,10 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
 
 void msrTempoNotesRelationshipElements::browseData (basevisitor* v)
 {
-  // browse the elements list
+  // browse the elements std::list
   if (fTempoNotesRelationshipElementsList.size ()) {
     for (
-      list<S_msrElement>::const_iterator i =
+      std::list<S_msrElement>::const_iterator i =
         fTempoNotesRelationshipElementsList.begin ();
       i != fTempoNotesRelationshipElementsList.end ();
       ++i
@@ -897,9 +895,9 @@ void msrTempoNotesRelationshipElements::browseData (basevisitor* v)
   }
 }
 
-string msrTempoNotesRelationshipElements::asString () const
+std::string msrTempoNotesRelationshipElements::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "TempoNotesRelationshipElements" <<
@@ -908,10 +906,10 @@ string msrTempoNotesRelationshipElements::asString () const
   return s.str ();
 }
 
-string msrTempoNotesRelationshipElementsKindAsString (
+std::string msrTempoNotesRelationshipElementsKindAsString (
   msrTempoNotesRelationshipElementsKind tempoNotesRelationshipElementsKind)
 {
-  string result;
+  std::string result;
 
   switch (tempoNotesRelationshipElementsKind) {
     case msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsLeft:
@@ -925,18 +923,18 @@ string msrTempoNotesRelationshipElementsKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTempoNotesRelationshipElementsKind& elt)
+std::ostream& operator << (std::ostream& os, const msrTempoNotesRelationshipElementsKind& elt)
 {
   os << msrTempoNotesRelationshipElementsKindAsString (elt);
   return os;
 }
 
-void msrTempoNotesRelationshipElements::print (ostream& os) const
+void msrTempoNotesRelationshipElements::print (std::ostream& os) const
 {
   os <<
     "[TempoNotesRelationshipElements" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -944,20 +942,20 @@ void msrTempoNotesRelationshipElements::print (ostream& os) const
     "msrTempoNotesRelationshipElementsKindAsString : " <<
     msrTempoNotesRelationshipElementsKindAsString (
       fTempoNotesRelationshipElementsKind) <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 26;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "tempoNotesRelationshipElementsList";
 
     if (fTempoNotesRelationshipElementsList.size ()) {
       ++gIndenter;
 
-      os << endl;
+      os << std::endl;
 
-      list<S_msrElement>::const_iterator
+      std::list<S_msrElement>::const_iterator
         iBegin = fTempoNotesRelationshipElementsList.begin (),
         iEnd   = fTempoNotesRelationshipElementsList.end (),
         i      = iBegin;
@@ -965,7 +963,7 @@ void msrTempoNotesRelationshipElements::print (ostream& os) const
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        // os << endl;
+        // os << std::endl;
       } // for
 
       --gIndenter;
@@ -973,21 +971,21 @@ void msrTempoNotesRelationshipElements::print (ostream& os) const
   else {
     os <<
       " : " << "[NONE]" <<
-      endl;
+      std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipElements& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTempoNotesRelationshipElements& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1018,7 +1016,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
   int               inputLineNumber,
   S_msrMeasure      upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
-  string            tempoPerMinute,
+  std::string            tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1089,7 +1087,7 @@ msrTempo::msrTempo (
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure),
       fTempoBeatUnit (),
@@ -1119,11 +1117,11 @@ msrTempo::msrTempo (
   int               inputLineNumber,
   S_msrMeasure      upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
-  string            tempoPerMinute,
+  std::string            tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure),
       fTempoBeatUnit (tempoBeatUnit),
@@ -1149,7 +1147,7 @@ msrTempo::msrTempo (
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure),
       fTempoBeatUnit (tempoBeatUnit),
@@ -1179,7 +1177,7 @@ msrTempo::msrTempo (
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure),
       fTempoBeatUnit (),
@@ -1206,7 +1204,7 @@ void msrTempo::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTempo::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTempo>*
@@ -1217,7 +1215,7 @@ void msrTempo::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTempo::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1228,7 +1226,7 @@ void msrTempo::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrTempo::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrTempo>*
@@ -1239,7 +1237,7 @@ void msrTempo::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrTempo::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1278,11 +1276,11 @@ void msrTempo::browseData (basevisitor* v)
   } // switch
 }
 
-string msrTempo::tempoWordsListAsString (const string& separator) const
+std::string msrTempo::tempoWordsListAsString (const std::string& separator) const
 {
-  string result;
+  std::string result;
 
-  list<S_msrWords>::const_iterator
+  std::list<S_msrWords>::const_iterator
     iBegin = fTempoWordsList.begin (),
     iEnd   = fTempoWordsList.end (),
     i      = iBegin;
@@ -1295,9 +1293,9 @@ string msrTempo::tempoWordsListAsString (const string& separator) const
   return result;
 }
 
-string msrTempo::asString () const
+std::string msrTempo::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Tempo" <<
@@ -1305,7 +1303,7 @@ string msrTempo::asString () const
     ", fTempoWordsList: ";
 
   if (fTempoWordsList.size ()) {
-    list<S_msrWords>::const_iterator
+    std::list<S_msrWords>::const_iterator
       iBegin = fTempoWordsList.begin (),
       iEnd   = fTempoWordsList.end (),
       i      = iBegin;
@@ -1329,9 +1327,9 @@ string msrTempo::asString () const
   return s.str ();
 }
 
-string msrTempo::asShortStringForMeasuresSlices () const
+std::string msrTempo::asShortStringForMeasuresSlices () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '[';
@@ -1339,7 +1337,7 @@ string msrTempo::asShortStringForMeasuresSlices () const
 //     ", tempoWordsList: ";
 //
 //   if (fTempoWordsList.size ()) {
-//     list<S_msrWords>::const_iterator
+//     std::list<S_msrWords>::const_iterator
 //       iBegin = fTempoWordsList.begin (),
 //       iEnd   = fTempoWordsList.end (),
 //       i      = iBegin;
@@ -1366,39 +1364,39 @@ string msrTempo::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrTempo::print (ostream& os) const
+void msrTempo::print (std::ostream& os) const
 {
   os <<
     "[Tempo" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 27;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
    "fTempoKind" << " : " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTempoWordsList";
 
   if (fTempoWordsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrWords>::const_iterator
+    std::list<S_msrWords>::const_iterator
       iBegin = fTempoWordsList.begin (),
       iEnd   = fTempoWordsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -1406,13 +1404,13 @@ void msrTempo::print (ostream& os) const
   else {
     os <<
       " : " << "[EMPTY]" <<
-      endl;
+      std::endl;
   }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTempoBeatUnit :" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1421,28 +1419,28 @@ void msrTempo::print (ostream& os) const
 
   --gIndenter;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "tempoPerMinute" << " : \"" << fTempoPerMinute << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fTempoEquivalentBeatUnit"  << " : " <<
     fTempoEquivalentBeatUnit <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "tempoParenthesizedKind"  << " : " <<
     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTempoNotesRelationshipLeftElements";
   if (fTempoNotesRelationshipLeftElements) {
     os <<
       " : " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -1453,23 +1451,23 @@ void msrTempo::print (ostream& os) const
   }
   else {
     os << " : " << "[NONE]" <<
-    endl;
+    std::endl;
   }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTempoNotesRelationshipKind" << " : " <<
     msrTempoNotesRelationshipKindAsString (
       fTempoNotesRelationshipKind) <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTempoNotesRelationshipRightElements";
   if (fTempoNotesRelationshipRightElements) {
     os <<
       ":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -1480,33 +1478,33 @@ void msrTempo::print (ostream& os) const
   }
   else {
     os << " : " << "[NONE]" <<
-    endl;
+    std::endl;
   }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTempoPlacementKind" << " : " <<
     msrPlacementKindAsString (
       fTempoPlacementKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrTempo::printShort (ostream& os) const
+void msrTempo::printShort (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTempo& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTempo& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

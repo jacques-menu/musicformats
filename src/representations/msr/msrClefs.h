@@ -43,22 +43,22 @@ enum class msrClefKind {
   kClefJianpu
 };
 
-string msrClefKindAsString (
+std::string msrClefKindAsString (
   msrClefKind clefKind);
 
-ostream& operator << (ostream& os, const msrClefKind& elt);
+std::ostream& operator << (std::ostream& os, const msrClefKind& elt);
 
 EXP msrClefKind msrClefKindFromString (
   int           inputLineNumber,
-  const string& clefString);
+  const std::string& clefString);
 
-string existingClefKinds (size_t namesListMaxLength);
-string existingClefKindsNames (size_t namesListMaxLength);
+std::string existingClefKinds (size_t namesListMaxLength);
+std::string existingClefKindsNames (size_t namesListMaxLength);
 
-extern map<string, msrClefKind>
+extern std::map<std::string, msrClefKind>
   gGlobalClefKindsMap;
 
-extern list<string>
+extern std::list<std::string>
   gClefKindsNamesList;
 
 void initializeClefKinds ();
@@ -70,7 +70,7 @@ class   msrClef;
 typedef SMARTP<msrClef> S_msrClef;
 
 //______________________________________________________________________________
-class EXP msrClef : public msrMeasureElement
+class EXP msrClef : public msrMeasureElementLambda
 {
   public:
 
@@ -89,7 +89,7 @@ class EXP msrClef : public msrMeasureElement
     static SMARTP<msrClef> createClefFromString (
                             int           inputLineNumber,
                             S_msrMeasure  upLinkToMeasure,
-                            const string& clefString,
+                            const std::string& clefString,
                             int           clefLineNumber);
 
   protected:
@@ -147,10 +147,10 @@ class EXP msrClef : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
-    string                asShortStringForMeasuresSlices () const override;
+    std::string           asString () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -162,7 +162,7 @@ class EXP msrClef : public msrMeasureElement
                                             // 1 by default in MusicXML
 };
 typedef SMARTP<msrClef> S_msrClef;
-EXP ostream& operator << (ostream& os, const S_msrClef& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrClef& elt);
 
 
 }

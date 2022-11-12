@@ -96,7 +96,7 @@ class EXP xmlelement : public ctree<xmlelement>, public visitable
 		std::string fName;
 		//! the element value
 		std::string fValue;
-		//! list of the element attributes
+		//! std::list of the element attributes
 		std::vector<Sxmlattribute> fAttributes;
 
 	protected:
@@ -345,7 +345,7 @@ SXMLFile xmlreader::read(FILE* file)
 
 An {\tt xmlelement} can be printed by \function{printMxsr}, defined in \mxsrBoth{mxsr}:
 \begin{lstlisting}[language=CPlusPlus]
-void printMxsr (const Sxmlelement theMxsr, ostream& os)
+void printMxsr (const Sxmlelement theMxsr, std::ostream& os)
 {
   xmlvisitor v (os);
   tree_browser<xmlelement> browser (&v);

@@ -47,7 +47,7 @@ class EXP msrVoiceElement : public msrElement
   */
 };
 typedef SMARTP<msrVoiceElement> S_msrVoiceElement;
-EXP ostream& operator << (ostream& os, const S_msrVoiceElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrVoiceElement& elt);
 
 
 }

@@ -42,8 +42,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -101,7 +99,7 @@ msrStaff::msrStaff (
       "Creating staff \"" << asString () <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -158,7 +156,7 @@ void msrStaff::initializeStaff ()
     case msrStaffKind::kStaffKindRegular:
       // the staff number should not be negative
       if (fStaffNumber < 0) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "regular staff number " << fStaffNumber <<
@@ -180,7 +178,7 @@ void msrStaff::initializeStaff ()
     case msrStaffKind::kStaffKindFiguredBass:
     /* JMI
       if (fStaffNumber != msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "figured bass staff number " << fStaffNumber <<
@@ -235,7 +233,7 @@ void msrStaff::initializeStaff ()
           fStaffName <<
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -260,7 +258,7 @@ void msrStaff::initializeStaff ()
           fStaffName <<
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -284,7 +282,7 @@ void msrStaff::initializeStaff ()
           fStaffName <<
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -320,7 +318,7 @@ S_msrStaff msrStaff::createStaffNewbornClone (
       "Creating a newborn clone of staff \"" <<
       fStaffName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -422,7 +420,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (S_msrNote note)
       gLogStream <<
         "The new shortest note in staff \"" << fStaffName << "\"" <<
         " becomes " << note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -449,9 +447,9 @@ void msrStaff::setStaffCurrentTime (S_msrTimeSignature timeSignature)
   fStaffCurrentTimeSignature = time;
 };
 
-string msrStaff::staffNumberAsString () const
+std::string msrStaff::staffNumberAsString () const
 {
-  string result = to_string (fStaffNumber);
+  std::string result = std::to_string (fStaffNumber);
 
   if (fStaffNumber == msrPart::K_PART_HARMONIES_STAFF_NUMBER) {
     result += " (msrPart::K_PART_HARMONIES_STAFF_NUMBER)";
@@ -499,7 +497,7 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 void msrStaff::createAMeasureAndAppendItToStaff (
   int           inputLineNumber,
   int           previousMeasureEndInputLineNumber,
-  const string& measureNumber,
+  const std::string& measureNumber,
   msrMeasureImplicitKind
                 measureImplicitKind)
 {
@@ -510,7 +508,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
       measureNumber <<
       "' and appending it to staff \"" << fStaffName << "\"" <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -533,7 +531,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
 
 void msrStaff::setNextMeasureNumberInStaff (
   int           inputLineNumber,
-  const string& nextMeasureNumber)
+  const std::string& nextMeasureNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -542,7 +540,7 @@ void msrStaff::setNextMeasureNumberInStaff (
       nextMeasureNumber <<
       ", in staff \"" << fStaffName << "\"" <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -563,7 +561,7 @@ void msrStaff::setNextMeasureNumberInStaff (
         nextMeasureNumber <<
         "', line " << inputLineNumber <<
         ", in voice \"" << voice->getVoiceName () << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -579,7 +577,7 @@ void msrStaff::setNextMeasureNumberInStaff (
 S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
   int           inputLineNumber,
   int           voiceNumber,
-  const string& currentMeasureNumber)
+  const std::string& currentMeasureNumber)
 {
   ++fStaffRegularVoicesCounter;
 
@@ -595,28 +593,28 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       "\", current measure number: " <<
       currentMeasureNumber <<
  // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
   // are there too many regular voices in this staff?
   if (fStaffRegularVoicesCounter > msrStaff::gStaffMaxRegularVoices) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "staff \"" << fStaffName <<
       "\" is already filled up with " <<
       msrStaff::gStaffMaxRegularVoices << " regular voices" <<
-      endl <<
+      std::endl <<
       ". voice number " <<
       voiceNumber <<
       " overflows it" <<
-      endl <<
+      std::endl <<
       ", fStaffRegularVoicesCounter = " <<
       fStaffRegularVoicesCounter <<
       ", msrStaff::gStaffMaxRegularVoices = " <<
       msrStaff::gStaffMaxRegularVoices <<
-      endl;
+      std::endl;
 
       /* JMI ???
     musicxmlError (
@@ -628,8 +626,8 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       */
   }
 
-  // is this voice number already in the regular voices map?
-  map<int, S_msrVoice>::const_iterator
+  // is this voice number already in the regular voices std::map?
+  std::map<int, S_msrVoice>::const_iterator
     it =
       fStaffVoiceNumbersToRegularVoicesMap.find (voiceNumber);
 
@@ -638,7 +636,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
     S_msrVoice
       olderVoice = (*it).second;
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "attempting to create a voice anew by number" <<
@@ -691,7 +689,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "\", current measure number: " <<
           currentMeasureNumber <<
      // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
-          endl;
+          std::endl;
       }
 #endif
       break;
@@ -709,7 +707,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "\", current measure number: " <<
           currentMeasureNumber <<
      // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
-          endl;
+          std::endl;
       }
 #endif
       break;
@@ -758,7 +756,7 @@ void msrStaff::setStaffShortestNoteDuration (
         fStaffName <<
         "\" becomes " <<
         duration <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -775,7 +773,7 @@ void msrStaff::setStaffShortestNoteTupletFactor (
         fStaffName <<
         "\" becomes " <<
         noteTupletFactor <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -789,8 +787,8 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering voice \"" << voice->getVoiceName () <<
-      "\" in all voices list of staff " << fStaffName <<
-      endl;
+      "\" in all voices std::list of staff " << fStaffName <<
+      std::endl;
   }
 #endif
 
@@ -800,22 +798,22 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
   if (fStaffAllVoicesList.size ()) {
     for (S_msrVoice knownVoice : fStaffAllVoicesList) {
       if (voice == knownVoice) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Voice \"" <<
           knownVoice->getVoiceName () <<
-          "\" is already present in the staff's all voices list";
+          "\" is already present in the staff's all voices std::list";
 
         gLogStream <<
-          endl <<
+          std::endl <<
           "---> knownVoice:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
         gLogStream <<
           knownVoice <<
-          endl << endl;
+          std::endl << std::endl;
         --gIndenter;
 
         msrInternalError ( // JMI ???
@@ -826,22 +824,22 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
       }
 
       if (voice->getVoiceName () == knownVoice->getVoiceName ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "A voice with the same name as \"" <<
           knownVoice->getVoiceName () <<
-          "\" is already present in the staff's all voices list";
+          "\" is already present in the staff's all voices std::list";
 
         gLogStream <<
-          endl <<
+          std::endl <<
           "---> knownVoice:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
         gLogStream <<
           knownVoice <<
-          endl << endl;
+          std::endl << std::endl;
         --gIndenter;
 
         msrInternalError ( // JMI ???
@@ -853,7 +851,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
     } // for
   }
 
-  // register voice in this staff's 'all voices' list
+  // register voice in this staff's 'all voices' std::list
   fStaffAllVoicesList.push_back (voice);
 
   // register it in the part uplink
@@ -877,19 +875,19 @@ void msrStaff::registerVoiceByItsNumber (
       voice->asShortString () <<
       ", by its number '" << voiceNumber <<
       "\" in staff " << fStaffName <<
-      endl;
+      std::endl;
   }
 #endif
 
   ++gIndenter;
 
-  // register it in the 'all voices' list
+  // register it in the 'all voices' std::list
   registerVoiceInStaffAllVoicesList (voice); // JMI v0.9.63 NASTY bug???
 
-  // register voice in the 'numbers to all voices' map
+  // register voice in the 'numbers to all voices' std::map
   fStaffVoiceNumbersToAllVoicesMap [voiceNumber] = voice;
 
-  // sort the all voices list if necessary
+  // sort the all voices std::list if necessary
   switch (voice->getVoiceKind ()) {
     case msrVoiceKind::kVoiceKindRegular:
       // set regularVoice staff sequential number
@@ -897,10 +895,10 @@ void msrStaff::registerVoiceByItsNumber (
         setRegularVoiceStaffSequentialNumber (
           fStaffRegularVoicesCounter);
 
-      // register it in 'regular voices' list
+      // register it in 'regular voices' std::list
       fStaffRegularVoicesList.push_back (voice);
 
-      // register voice in the 'numbers to regular voices' map
+      // register voice in the 'numbers to regular voices' std::map
       fStaffVoiceNumbersToRegularVoicesMap [voiceNumber] = voice;
       break;
 
@@ -914,7 +912,7 @@ void msrStaff::registerVoiceByItsNumber (
           "Sorting the voices in staff \"" <<
           fStaffName << "\"" <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -933,7 +931,7 @@ void msrStaff::registerVoiceByItsNumber (
           "Sorting the voices in staff \"" <<
           fStaffName << "\"" <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -961,10 +959,10 @@ void msrStaff::registerRegularVoiceByItsNumber (
       regularVoice->asShortString () <<
       " by it's number '" << voiceNumber <<
       "\" in staff " << fStaffName <<
-      "'s regular voices list with sequential number '" <<
+      "'s regular voices std::list with sequential number '" <<
       fStaffRegularVoicesCounter <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -972,22 +970,22 @@ void msrStaff::registerRegularVoiceByItsNumber (
   if (fStaffAllVoicesList.size ()) {
     for (S_msrVoice knownVoice : fStaffAllVoicesList) {
       if (regularVoice == knownVoice) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Voice \"" <<
           knownVoice->getVoiceName () <<
-          "\" is already present in the staff's all voices list";
+          "\" is already present in the staff's all voices std::list";
 
         gLogStream <<
-          endl <<
+          std::endl <<
           "---> knownVoice:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
         gLogStream <<
           knownVoice <<
-          endl << endl;
+          std::endl << std::endl;
         --gIndenter;
 
         msrInternalError ( // JMI ???
@@ -998,22 +996,22 @@ void msrStaff::registerRegularVoiceByItsNumber (
       }
 
       if (regularVoice->getVoiceName () == knownVoice->getVoiceName ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "A voice with the same name as \"" <<
           knownVoice->getVoiceName () <<
-          "\" is already present in the staff's all voices list";
+          "\" is already present in the staff's all voices std::list";
 
         gLogStream <<
-          endl <<
+          std::endl <<
           "---> knownVoice:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
         gLogStream <<
           knownVoice <<
-          endl << endl;
+          std::endl << std::endl;
         --gIndenter;
 
         msrInternalError ( // JMI ???
@@ -1047,7 +1045,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1070,7 +1068,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1095,12 +1093,12 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // search list ??? JMI
-  for (pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
+  // search std::list ??? JMI
+  for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
 #ifdef TRACING_IS_ENABLED
     int        number = thePair.first;
 #endif
@@ -1118,7 +1116,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
           "' in staff \"" << fStaffName << "\"" <<
           " has staff relative number '" << number <<
           "'" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -1140,7 +1138,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
       fStaffName <<
       "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1152,7 +1150,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
   if (fStaffRegularVoicesList.size ()) {
     int voiceSequentialCounter = 0;
 
-    list<S_msrVoice>::const_iterator
+    std::list<S_msrVoice>::const_iterator
       iBegin = fStaffRegularVoicesList.begin (),
       iEnd   = fStaffRegularVoicesList.end (),
       i      = iBegin;
@@ -1180,7 +1178,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
           " in staff \"" <<
           fStaffName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -1206,12 +1204,12 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (! fStaffRegularVoicesList.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "staff " << fStaffNumber <<
@@ -1243,7 +1241,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
         fStaffName <<
         "\" is " <<
         result->asShortString () <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -1254,7 +1252,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       "--> result = \"" <<
       result->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1280,7 +1278,7 @@ void msrStaff::registerVoiceInStaff (
       " of staff \"" << fStaffName <<
       "\", line " << inputLineNumber <<
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1298,20 +1296,20 @@ void msrStaff::registerVoiceInStaff (
 
       // are there too many voices in this staff?
       if (fStaffRegularVoicesCounter > msrStaff::gStaffMaxRegularVoices) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "staff \"" << fStaffName <<
           "\" is already filled up with " <<
           msrStaff::gStaffMaxRegularVoices << " regular voices," <<
-          endl <<
+          std::endl <<
           "the voice named \"" << voice->getVoiceName () << "\" overflows it" <<
-          endl <<
+          std::endl <<
           ", fStaffRegularVoicesCounter = " <<
           fStaffRegularVoicesCounter <<
           ", msrStaff::gStaffMaxRegularVoices = " <<
           msrStaff::gStaffMaxRegularVoices <<
-          endl;
+          std::endl;
 
           /* JMI ???
         musicxmlError (
@@ -1397,20 +1395,20 @@ void msrStaff::registerPartLevelVoiceInStaff (
 
       // are there too many voices in this staff?
       if (fStaffRegularVoicesCounter > msrStaff::gStaffMaxRegularVoices) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "staff \"" << fStaffName <<
           "\" is already filled up with " <<
           msrStaff::gStaffMaxRegularVoices << " regular voices," <<
-          endl <<
+          std::endl <<
           "the voice named \"" << voice->getVoiceName () << "\" overflows it" <<
-          endl <<
+          std::endl <<
           ", fStaffRegularVoicesCounter = " <<
           fStaffRegularVoicesCounter <<
           ", msrStaff::gStaffMaxRegularVoices = " <<
           msrStaff::gStaffMaxRegularVoices <<
-          endl;
+          std::endl;
 
           /* JMI ???
         musicxmlError (
@@ -1434,7 +1432,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
       " in staff \"" << fStaffName <<
       "\", line " << inputLineNumber <<
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1503,7 +1501,7 @@ void msrStaff::registerVoiceInStaffClone (
       " of staff clone \"" << fStaffName <<
       "\", line " << inputLineNumber <<
 // JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1517,20 +1515,20 @@ void msrStaff::registerVoiceInStaffClone (
 
       // are there too many voices in this staff?
       if (fStaffRegularVoicesCounter > msrStaff::gStaffMaxRegularVoices) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "staff clone \"" << fStaffName <<
           "\" is already filled up with " <<
           msrStaff::gStaffMaxRegularVoices << " regular voices," <<
-          endl <<
+          std::endl <<
           "the voice named \"" << voice->getVoiceName () << "\" overflows it" <<
-          endl <<
+          std::endl <<
           ", fStaffRegularVoicesCounter = " <<
           fStaffRegularVoicesCounter <<
           ", msrStaff::gStaffMaxRegularVoices = " <<
           msrStaff::gStaffMaxRegularVoices <<
-          endl;
+          std::endl;
 
           /* JMI ???
         musicxmlError (
@@ -1580,7 +1578,7 @@ void msrStaff::appendClefToStaff (S_msrClef clef)
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1622,7 +1620,7 @@ void msrStaff::appendClefToStaff (S_msrClef clef)
         fStaffName <<
         "\" in part " <<
         fStaffUpLinkToPart->getPartCombinedName () <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -1640,7 +1638,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1669,7 +1667,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
             fStaffName <<
             "\" in part " <<
             fStaffUpLinkToPart->getPartCombinedName () <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -1701,7 +1699,7 @@ void msrStaff::appendTimeSignatureToStaff (S_msrTimeSignature timeSignature)
       "' to staff \"" <<
       fStaffName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1730,7 +1728,7 @@ void msrStaff::appendTimeSignatureToStaff (S_msrTimeSignature timeSignature)
             fStaffName <<
             "\" in part " <<
             fStaffUpLinkToPart->getPartCombinedName () <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -1763,7 +1761,7 @@ void msrStaff::appendTimeSignatureToStaffClone (S_msrTimeSignature timeSignature
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1789,7 +1787,7 @@ void msrStaff::appendTempoToStaff (S_msrTempo tempo)
       "Appending tempo " << tempo->asString () <<
       " to staff " <<
       fStaffName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1809,7 +1807,7 @@ void msrStaff::appendRehearsalMarkToStaff (
       "Appending rehearsal mark " << rehearsalMark->asString () <<
       " to staff " <<
       fStaffName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1828,7 +1826,7 @@ void msrStaff::appendLineBreakToStaff (S_msrLineBreak lineBreak)
       "Appending line break " << lineBreak->asString () <<
       " to staff " <<
       fStaffName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1847,7 +1845,7 @@ void msrStaff::appendPageBreakToStaff (S_msrPageBreak pageBreak)
       "Appending page break " << pageBreak->asString () <<
       " to staff " <<
       fStaffName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1872,7 +1870,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1900,7 +1898,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1923,7 +1921,7 @@ void msrStaff::handleRepeatStartInStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1940,7 +1938,7 @@ void msrStaff::handleRepeatStartInStaff (
 
 void msrStaff::handleRepeatEndInStaff (
   int           inputLineNumber,
-  const string& measureNumber,
+  const std::string& measureNumber,
   int           repeatTimes)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1951,7 +1949,7 @@ void msrStaff::handleRepeatEndInStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1979,7 +1977,7 @@ void msrStaff::handleRepeatEndingStartInStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1996,7 +1994,7 @@ void msrStaff::handleRepeatEndingStartInStaff (
 
 void msrStaff::handleRepeatEndingEndInStaff (
   int              inputLineNumber,
-  const string&    repeatEndingNumber, // may be "1, 2"
+  const std::string&    repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind
                     repeatEndingKind)
 {
@@ -2011,7 +2009,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2031,7 +2029,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
 /* JMI
 void msrStaff::finalizeRepeatEndInStaff (
   int           inputLineNumber,
-  const string& measureNumber,
+  const std::string& measureNumber,
   int           repeatTimes)
 {
 #ifdef TRACING_IS_ENABLED
@@ -2042,7 +2040,7 @@ void msrStaff::finalizeRepeatEndInStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2072,7 +2070,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2095,7 +2093,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2121,7 +2119,7 @@ void msrStaff::appendMultipleFullBarRestsToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2145,7 +2143,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
       "Replicating last appended measure in staff \"" <<
       fStaffName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2160,7 +2158,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
 
 void msrStaff::addEmptyMeasuresToStaff (
   int           inputLineNumber,
-  const string& previousMeasureNumber,
+  const std::string& previousMeasureNumber,
   int           emptyMeasuresNumber)
 {
 #ifdef TRACING_IS_ENABLED
@@ -2175,7 +2173,7 @@ void msrStaff::addEmptyMeasuresToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2200,7 +2198,7 @@ void msrStaff::appendPendingMultipleFullBarRestsToStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2223,7 +2221,7 @@ void msrStaff::appendMultipleFullBarRestsCloneToStaff (
       "' to staff clone \"" <<
       fStaffName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2246,7 +2244,7 @@ void msrStaff::appendRepeatCloneToStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2268,7 +2266,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << repeatEndingClone->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2293,7 +2291,7 @@ void msrStaff::appendBarLineToStaff (S_msrBarLine barLine)
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2319,7 +2317,7 @@ void msrStaff::appendTranspositionToStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2341,7 +2339,7 @@ void msrStaff::appendTranspositionToStaff (
           fStaffName <<
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -2370,7 +2368,7 @@ void msrStaff::appendStaffDetailsToStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2406,7 +2404,7 @@ void msrStaff::appendStaffDetailsToStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2465,7 +2463,7 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
       "Finalizing last appended measure in staff \"" <<
       fStaffName <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2645,7 +2643,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       "Finalizing staff \"" <<
       fStaffName << "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2658,7 +2656,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       "Finalizing the voices in staff \"" <<
       fStaffName << "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2684,9 +2682,9 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
     gLogStream <<
       "Collecting measures from the staff voices into staff \"" <<
       fStaffName <<
-      "s measures flat list vector" <<
+      "s measures flat std::list std::vector" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2714,7 +2712,7 @@ void msrStaff::collectStaffMeasuresSlices (
       mfSingularOrPlural (
         staffVoiceNumbersToAllVoicesMapSize, "voice", "voices") <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2739,7 +2737,7 @@ void msrStaff::collectStaffMeasuresSlices (
         "---> voice \"" <<
         voice->getVoiceName () <<
         "\":" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -2758,14 +2756,14 @@ void msrStaff::collectStaffMeasuresSlices (
 
       if (voiceMeasuresSlicesSequence) {
         gLogStream <<
-          endl;
+          std::endl;
         ++gIndenter;
         gLogStream <<
           voiceMeasuresSlicesSequence;
         --gIndenter;
       }
       else {
-        gLogStream << " : [NONE]" << endl;
+        gLogStream << " : [NONE]" << std::endl;
       }
     }
 #endif
@@ -2791,7 +2789,7 @@ void msrStaff::collectStaffMeasuresSlices (
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "---> staffMeasuresSlicesSequence:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream <<
@@ -2808,7 +2806,7 @@ void msrStaff::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStaff::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStaff>*
@@ -2819,7 +2817,7 @@ void msrStaff::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStaff::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -2830,7 +2828,7 @@ void msrStaff::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStaff::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStaff>*
@@ -2841,7 +2839,7 @@ void msrStaff::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStaff::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -2852,13 +2850,13 @@ void msrStaff::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStaff::browseData ()" <<
-      endl;
+      std::endl;
   }
 
 /*
   if (fStaffTuningsList.size ()) {
     for (
-      list<S_msrStaffTuning>::const_iterator i = fStaffTuningsList.begin ();
+      std::list<S_msrStaffTuning>::const_iterator i = fStaffTuningsList.begin ();
       i != fStaffTuningsList.end ();
       ++i
   ) {
@@ -2884,15 +2882,15 @@ void msrStaff::browseData (basevisitor* v)
     gLogStream <<
       "++++++++ fStaffAllVoicesList.size(): " <<
       fStaffAllVoicesList.size () <<
-      endl;
+      std::endl;
 
     if (fStaffAllVoicesList.size ()) {
       for (S_msrVoice voice : fStaffAllVoicesList) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "+++++++++ voice: ++++++++" <<
           " \"" << voice->getVoiceName () << "\"" <<
-          endl;
+          std::endl;
       } // for
     }
   }
@@ -2924,7 +2922,7 @@ void msrStaff::browseData (basevisitor* v)
 
       // JMI this should be done in mxsr2msrOahGroup::checkGroupOptionsConsistency () v0.9.62
       if (ignoreMsrVoicesSetIsSetByAnOption && keepMsrVoicesSetIsSetByAnOption) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Options " <<
@@ -2932,7 +2930,7 @@ void msrStaff::browseData (basevisitor* v)
           " and " <<
           keepMsrVoicesSetAtom->fetchNamesBetweenQuotes () <<
           " are incompatible" <<
-          endl;
+          std::endl;
 
         msrError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -2941,7 +2939,7 @@ void msrStaff::browseData (basevisitor* v)
           s.str ());
       }
 
-      const set<string>&
+      const std::set<std::string>&
         ignoreMsrVoicesSet =
           gGlobalMsr2msrOahGroup->
             getIgnoreMsrVoicesSet ();
@@ -2955,7 +2953,7 @@ void msrStaff::browseData (basevisitor* v)
       }
 #endif
 
-      const set<string>&
+      const std::set<std::string>&
         keepMsrVoicesSet =
           gGlobalMsr2msrOahGroup->
             getKeepMsrVoicesSet ();
@@ -2972,7 +2970,7 @@ void msrStaff::browseData (basevisitor* v)
       // a voice is to be browsed by default
       Bool voiceIsToBeBrowsed (true);
 
-      string
+      std::string
         voiceName =
           voice->
             getVoiceName ();
@@ -3013,7 +3011,7 @@ void msrStaff::browseData (basevisitor* v)
             "Ignoring voice \"" <<
             voiceName <<
             "\"" <<
-            endl;
+            std::endl;
         }
 #endif
       }
@@ -3023,13 +3021,13 @@ void msrStaff::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% <== msrStaff::browseData ()" <<
-      endl;
+      std::endl;
   }
 }
 
-string msrStaff::asString () const
+std::string msrStaff::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Staff \"" << fStaffName <<
@@ -3040,12 +3038,12 @@ string msrStaff::asString () const
     ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
     ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
     ']' <<
-    endl;
+    std::endl;
 
   return s.str ();
 }
 
-void msrStaff::print (ostream& os) const
+void msrStaff::print (std::ostream& os) const
 {
   os <<
     "[Staff \"" << fStaffName <<
@@ -3055,45 +3053,45 @@ void msrStaff::print (ostream& os) const
     fStaffNumber <<
     ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
     ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 38;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fStaffNumber" << " : " <<
     staffNumberAsString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fStaffUpLinkToPart" << " : " <<
     fStaffUpLinkToPart->getPartCombinedName () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fStaffInstrumentName" << " : \"" <<
     fStaffInstrumentName <<
     "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fStaffInstrumentAbbreviation" << " : \"" <<
     fStaffInstrumentAbbreviation <<
-    endl;
+    std::endl;
 
   // staff shortest note
-  os << left <<
-    setw (fieldWidth) << "fStaffShortestNoteDuration" << " : " <<
+  os << std::left <<
+    std::setw (fieldWidth) << "fStaffShortestNoteDuration" << " : " <<
     fStaffShortestNoteDuration <<
-    endl <<
-    setw (fieldWidth) << "fStaffShortestNoteTupletFactor" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fStaffShortestNoteTupletFactor" << " : " <<
     fStaffShortestNoteTupletFactor <<
-    endl;
+    std::endl;
 
   // print current the staff clef if any
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fStaffCurrentClef" << " : ";
 
     if (fStaffCurrentClef) {
@@ -3106,15 +3104,15 @@ void msrStaff::print (ostream& os) const
       os << "[NONE]";
     }
 
-    os << endl;
+    os << std::endl;
   }
 #endif
 
   // print the current staff key if any
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fStaffCurrentKey" << " : ";
 
     if (fStaffCurrentKey) {
@@ -3128,15 +3126,15 @@ void msrStaff::print (ostream& os) const
         "[NONE]";
     }
 
-    os << endl;
+    os << std::endl;
   }
 #endif
 
   // print the current staff time if any
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fStaffCurrentTimeSignature" << " : ";
 
     if (fStaffCurrentTimeSignature) {
@@ -3150,7 +3148,7 @@ void msrStaff::print (ostream& os) const
         "[NONE]";
     }
 
-    os << endl;
+    os << std::endl;
   }
 #endif
 
@@ -3162,41 +3160,41 @@ void msrStaff::print (ostream& os) const
         fCurrentStaffStaffDetails;
     }
     else {
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         "fCurrentStaffStaffDetails" << " : " << "[NONE]";
     }
-    os << endl;
+    os << std::endl;
   }
 #endif
 
-  // print the staff 'all voices' list
-  os << left <<
-    setw (fieldWidth) <<
+  // print the staff 'all voices' std::list
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "Voice names in fStaffAllVoicesList" << " : ";
 
   if (fStaffAllVoicesList.size ()) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
     for (S_msrVoice voice : fStaffAllVoicesList) {
-      os << "\"" << voice->getVoiceName () << "\"" << endl;
+      os << "\"" << voice->getVoiceName () << "\"" << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
-  // print the staff 'regular voices' list
-  os << left <<
-    setw (fieldWidth) <<
+  // print the staff 'regular voices' std::list
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "Voice names in fStaffRegularVoicesList" << " : ";
 
   if (fStaffRegularVoicesList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
@@ -3215,7 +3213,7 @@ void msrStaff::print (ostream& os) const
         voiceNumber <<
         " : " <<
         voice->asShortString () <<
-        endl;
+        std::endl;
 
       gIndenter.increment (3);
 
@@ -3224,7 +3222,7 @@ void msrStaff::print (ostream& os) const
 //         msrVoiceKindAsString (voice->getVoiceKind ()) <<
         "regularVoiceStaffSequentialNumber: " <<
         voice->getRegularVoiceStaffSequentialNumber () <<
-        endl;
+        std::endl;
 
       gIndenter.decrement (3);
     } // for
@@ -3232,22 +3230,22 @@ void msrStaff::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
-  os << endl;
+  os << std::endl;
 
-  // print the staff 'voice numbers to all voices' map
-  os << left <<
-    setw (fieldWidth) <<
+  // print the staff 'voice numbers to all voices' std::map
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fStaffVoiceNumbersToAllVoicesMap" << " : ";
 
   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    for (pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToAllVoicesMap) {
+    for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToAllVoicesMap) {
       int        voiceNumber = thePair.first;
       S_msrVoice voice       = thePair.second;
 
@@ -3261,7 +3259,7 @@ void msrStaff::print (ostream& os) const
         voiceNumber <<
         " : " <<
         voice->asShortString () <<
-        endl;
+        std::endl;
 
       gIndenter.increment (3);
 
@@ -3270,29 +3268,29 @@ void msrStaff::print (ostream& os) const
 //         msrVoiceKindAsString (voice->getVoiceKind ()) <<
         "regularVoiceStaffSequentialNumber: " <<
         voice->getRegularVoiceStaffSequentialNumber () <<
-        endl;
+        std::endl;
 
       gIndenter.decrement (3);
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
-  // print the staff 'voice numbers to regular voices' map
-  os << left <<
-    setw (fieldWidth) <<
+  // print the staff 'voice numbers to regular voices' std::map
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fStaffVoiceNumbersToRegularVoicesMap" << " : ";
 
   if (fStaffVoiceNumbersToRegularVoicesMap.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    for (pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
+    for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
       int        voiceNumber = thePair.first;
       S_msrVoice voice       = thePair.second;
 
@@ -3307,7 +3305,7 @@ void msrStaff::print (ostream& os) const
         " : " <<
         "Voice \"" << voice->getVoiceName () <<
         "\", line " << voice->getInputLineNumber () <<
-        endl;
+        std::endl;
 
       gIndenter.increment (3);
 
@@ -3316,26 +3314,26 @@ void msrStaff::print (ostream& os) const
 //        msrVoiceKindAsString (voice->getVoiceKind ()) <<
         "regularVoiceStaffSequentialNumber: " <<
         voice->getRegularVoiceStaffSequentialNumber () <<
-        endl;
+        std::endl;
 
       gIndenter.decrement (3);
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
-  os << endl;
+  os << std::endl;
 
-  // print the staff measures flat list vector
+  // print the staff measures flat std::list std::vector
   size_t staffMeasuresFlatListsVectorSize =
     fStaffMeasuresFlatListsVector.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fStaffMeasuresFlatListsVector" << " : ";
   if (staffMeasuresFlatListsVectorSize) {
     os <<
@@ -3343,20 +3341,20 @@ void msrStaff::print (ostream& os) const
 
     ++gIndenter;
 
-    vector<list<S_msrMeasure> >::const_iterator
+    std::vector<std::list<S_msrMeasure> >::const_iterator
       iBegin = fStaffMeasuresFlatListsVector.begin (),
       iEnd   = fStaffMeasuresFlatListsVector.end (),
       i      = iBegin;
 
     for ( ; ; ) {
-      const list<S_msrMeasure>&
+      const std::list<S_msrMeasure>&
         measuresList = (*i);
 
-      // print the measurs list
+      // print the measurs std::list
       if (staffMeasuresFlatListsVectorSize) {
         ++gIndenter;
 
-        list<S_msrMeasure>::const_iterator
+        std::list<S_msrMeasure>::const_iterator
           iBegin = measuresList.begin (),
           iEnd   = measuresList.end (),
           i      = iBegin;
@@ -3369,45 +3367,45 @@ void msrStaff::print (ostream& os) const
           os << (*i)->asShortStringForMeasuresSlices ();
 
           if (++i == iEnd) break;
-          os << endl;
+          os << std::endl;
         } // for
-        os << endl;
+        os << std::endl;
 
         --gIndenter;
       }
 
       if (++i == iEnd) break;
 
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
-  os << endl;
+  os << std::endl;
 
   // print the staff measures slices sequence
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fStaffMeasuresSlicesSequence" << " : ";
 
   if (fStaffMeasuresSlicesSequence) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
     os << fStaffMeasuresSlicesSequence;
     --gIndenter;
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
-  os << endl;
+  os << std::endl;
 
   // print the  voices
   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
-    map<int, S_msrVoice>::const_iterator
+    std::map<int, S_msrVoice>::const_iterator
       iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
       iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
       i      = iBegin;
@@ -3419,16 +3417,16 @@ void msrStaff::print (ostream& os) const
 
       if (++i == iEnd) break;
 
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrStaff::printShort (ostream& os) const
+void msrStaff::printShort (std::ostream& os) const
 {
   os <<
     "[Staff \"" << fStaffName <<
@@ -3438,15 +3436,15 @@ void msrStaff::printShort (ostream& os) const
     fStaffNumber <<
     ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
     ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // print the  voices
   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
-    os << endl;
+    os << std::endl;
 
-    map<int, S_msrVoice>::const_iterator
+    std::map<int, S_msrVoice>::const_iterator
       iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
       iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
       i      = iBegin;
@@ -3458,16 +3456,16 @@ void msrStaff::printShort (ostream& os) const
 
       if (++i == iEnd) break;
 
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrStaff::printSummary (ostream& os) const
+void msrStaff::printSummary (std::ostream& os) const
 {
   os <<
     "[Staff \"" << fStaffName <<
@@ -3477,22 +3475,22 @@ void msrStaff::printSummary (ostream& os) const
     fStaffNumber <<
     ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
     ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   os <<
     "fStaffInstrumentName: \"" <<
     fStaffInstrumentName << "\"" <<
-    endl;
+    std::endl;
 
 /* JMI
   if (fStaffTuningsList.size ()) {
     os <<
-      "fStaff tunings list:" <<
-      endl;
+      "fStaff tunings std::list:" <<
+      std::endl;
 
-    list<S_msrStaffTuning>::const_iterator
+    std::list<S_msrStaffTuning>::const_iterator
       iBegin = fStaffTuningsList.begin (),
       iEnd   = fStaffTuningsList.end (),
       i      = iBegin;
@@ -3501,9 +3499,9 @@ void msrStaff::printSummary (ostream& os) const
     for ( ; ; ) {
       os << (*i)->asString ();
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
     --gIndenter;
   }
 
@@ -3511,11 +3509,11 @@ void msrStaff::printSummary (ostream& os) const
   if (fStaffAllVoicesList.size ()) {
     os <<
       "Voices:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
-    list<S_msrVoice>::const_iterator
+    std::list<S_msrVoice>::const_iterator
       iBegin = fStaffAllVoicesList.begin (),
       iEnd   = fStaffAllVoicesList.end (),
       i      = iBegin;
@@ -3525,7 +3523,7 @@ void msrStaff::printSummary (ostream& os) const
         voice = (*i);
 
       os <<
-        left <<
+        std::left <<
           voice->getVoiceName () <<
           " (" <<
           mfSingularOrPlural (
@@ -3539,30 +3537,30 @@ void msrStaff::printSummary (ostream& os) const
             "stanzas") <<
           ")";
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
   }
 
-  os << endl;
+  os << std::endl;
 */
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrStaff::printSlices (ostream& os) const
+void msrStaff::printSlices (std::ostream& os) const
 {
   os << "MSR staff slices";
 
-  os << endl << endl;
+  os << std::endl << std::endl;
 
   ++gIndenter;
 
 //   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
-//     map<int, S_msrVoice>::const_iterator
+//     std::map<int, S_msrVoice>::const_iterator
 //       iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
 //       iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
 //       i      = iBegin;
@@ -3570,20 +3568,20 @@ void msrStaff::printSlices (ostream& os) const
 //       (*i)->
 //         printSlices (os);
 //       if (++i == iEnd) break;
-//       os << endl;
+//       os << std::endl;
 //     } // for
 //   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrStaff& elt)
+std::ostream& operator << (std::ostream& os, const S_msrStaff& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

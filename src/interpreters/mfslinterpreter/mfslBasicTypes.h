@@ -24,8 +24,6 @@
 #include "oahBasicTypes.h"
 
 
-using namespace std;
-
 using namespace MusicXML2;
 
 using namespace MusicFormats;
@@ -43,14 +41,14 @@ class EXP mfslOptionsBlock : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mfslOptionsBlock> create (const string& optionsBlockName);
+    static SMARTP<mfslOptionsBlock> create (const std::string& optionsBlockName);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mfslOptionsBlock (const string& optionsBlockName);
+                          mfslOptionsBlock (const std::string& optionsBlockName);
 
     virtual               ~mfslOptionsBlock ();
 
@@ -59,17 +57,17 @@ class EXP mfslOptionsBlock : public smartable
     // set and get
     // ------------------------------------------------------
 
-    string                getOptionsBlockName () const
+    std::string           getOptionsBlockName () const
                               { return fOptionsBlockName; }
 
     size_t                getOptionsBlockSize () const
                               { return fOptionsBlockOptionsVector.size (); }
 
-    const vector<S_oahOption>&
+    const std::vector<S_oahOption>&
                           getOptionsBlockOptionsVector () const
                               { return fOptionsBlockOptionsVector; }
 
-    vector<S_oahOption>&
+    std::vector<S_oahOption>&
                           getOptionsBlockOptionsVectorNonConst ()
                               { return fOptionsBlockOptionsVector; }
 
@@ -87,11 +85,11 @@ class EXP mfslOptionsBlock : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                asOptionsString () const;
+    std::string           asOptionsString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -99,12 +97,12 @@ class EXP mfslOptionsBlock : public smartable
     // private fields
     // ------------------------------------------------------
 
-    string                fOptionsBlockName;
+    std::string           fOptionsBlockName;
 
-    vector<S_oahOption>   fOptionsBlockOptionsVector;
+    std::vector<S_oahOption>   fOptionsBlockOptionsVector;
 };
 typedef SMARTP<mfslOptionsBlock> S_mfslOptionsBlock;
-EXP ostream& operator << (ostream& os, const S_mfslOptionsBlock& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslOptionsBlock& elt);
 
 //______________________________________________________________________________
 enum class mfslInputNameKind {
@@ -113,10 +111,10 @@ enum class mfslInputNameKind {
   kInputNameSetInScript
 };
 
-string mfslInputNameKindAsString (
+std::string mfslInputNameKindAsString (
   mfslInputNameKind inputNameKind);
 
-ostream& operator << (ostream& os, const mfslInputNameKind& elt);
+std::ostream& operator << (std::ostream& os, const mfslInputNameKind& elt);
 
 //______________________________________________________________________________
 class EXP mfslInput : public smartable
@@ -127,7 +125,7 @@ class EXP mfslInput : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfslInput> create (
-                            const string& inputName);
+                            const std::string& inputName);
 
   protected:
 
@@ -135,7 +133,7 @@ class EXP mfslInput : public smartable
     // ------------------------------------------------------
 
                           mfslInput (
-                            const string& inputName);
+                            const std::string& inputName);
 
     virtual               ~mfslInput ();
 
@@ -144,31 +142,31 @@ class EXP mfslInput : public smartable
     // set and get
     // ------------------------------------------------------
 
-    string                getInputName () const
+    std::string           getInputName () const
                               { return fInputName; }
 
     void                  setInputNameSuppliedByAnOption (
-                            const string& name,
+                            const std::string& name,
                             mfslDriver&   drv);
 
     void                  selectInputName (
-                            const string& name,
+                            const std::string& name,
                             mfslDriver&   drv);
 
-    string                getInputName (
+    std::string           getInputName (
                             mfslDriver& drv) const;
 
-    string                getInputNameWithoutTrace ( // JMI
+    std::string           getInputNameWithoutTrace ( // JMI
                             mfslDriver& drv) const;
 
     mfslInputNameKind     getInputNameKind () const
                               { return fInputNameKind; }
 
-    const set<string>&    getNamesSet () const
+    const std::set<std::string>&    getNamesSet () const
                               { return fNamesSet; }
 
     S_mfslOptionsBlock    getInputOptionsBlockForName (
-                            const string& name,
+                            const std::string& name,
                             mfslDriver&   drv) const;
 
     void                  setInputIsUsedInCaseInputStatements ()
@@ -183,11 +181,11 @@ class EXP mfslInput : public smartable
     // ------------------------------------------------------
 
     void                  addName (
-                            const string& name,
+                            const std::string& name,
                             mfslDriver&   drv);
 
     void                  enrichNameOptionsBlock (
-                            const string&      name,
+                            const std::string&      name,
                             S_mfslOptionsBlock optionsBlock,
                             mfslDriver&        drv);
 
@@ -196,33 +194,33 @@ class EXP mfslInput : public smartable
     // print
     // ------------------------------------------------------
 
-    string                namesSetAsString () const;
+    std::string           namesSetAsString () const;
 
-    string                asString () const;
+    std::string           asString () const;
 
     void                  displayInputNamesToOptionsBlocksMap (
-                            ostream& os) const;
+                            std::ostream& os) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fInputName;
+    std::string           fInputName;
 
     mfslInputNameKind     fInputNameKind;
 
-    set<string>           fNamesSet;
+    std::set<std::string>           fNamesSet;
 
     Bool                  fInputIsUsedInCaseInputStatements;
 
-    map<string, S_mfslOptionsBlock>
+    std::map<std::string, S_mfslOptionsBlock>
                           fInputNamesToOptionsBlocksMap;
 };
 typedef SMARTP<mfslInput> S_mfslInput;
-EXP ostream& operator << (ostream& os, const S_mfslInput& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslInput& elt);
 
 //______________________________________________________________________________
 class EXP mfslInputsTable : public smartable
@@ -248,7 +246,7 @@ class EXP mfslInputsTable : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const map<string, S_mfslInput>&
+    const std::map<std::string, S_mfslInput>&
                           getInputsMap () const
                               { return fInputsMap; }
 
@@ -262,14 +260,14 @@ class EXP mfslInputsTable : public smartable
                             mfslDriver& drv);
 
 //     S_mfslInput          lookupInputByName (
-//                             const string& name);
+//                             const std::string& name);
 
     S_mfslInput           fetchInputByName (
-                            const string&     name,
+                            const std::string&     name,
                             const mfslDriver& drv);
 
     S_mfslInput           fetchInputByNameNonConst (
-                            const string& name,
+                            const std::string& name,
                             mfslDriver&   drv);
 
   public:
@@ -277,11 +275,11 @@ class EXP mfslInputsTable : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  displayInputsMap (ostream& os) const;
+    void                  displayInputsMap (std::ostream& os) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -289,11 +287,11 @@ class EXP mfslInputsTable : public smartable
     // private fields
     // ------------------------------------------------------
 
-    map<string, S_mfslInput>
+    std::map<std::string, S_mfslInput>
                           fInputsMap;
 };
 typedef SMARTP<mfslInputsTable> S_mfslInputsTable;
-EXP ostream& operator << (ostream& os, const S_mfslInputsTable& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslInputsTable& elt);
 
 //______________________________________________________________________________
 class EXP mfslCaseInputStatement : public smartable
@@ -326,7 +324,7 @@ class EXP mfslCaseInputStatement : public smartable
     S_mfslInput           getCaseInputInput () const
                               { return fCaseInputInput; }
 
-    const list<string>&   getCaseInputCurrentNamesList () const
+    const std::list<std::string>&   getCaseInputCurrentNamesList () const
                               { return fCaseInputCurrentNamesList; }
 
     void                  clearCaseInputCurrentNamesList ()
@@ -338,7 +336,7 @@ class EXP mfslCaseInputStatement : public smartable
     // ------------------------------------------------------
 
     void                  registerCaseInputName (
-                            const string& name,
+                            const std::string& name,
                             mfslDriver&   drv);
 
     void                  checkThatAllNamesHaveBeenUsed (
@@ -349,11 +347,11 @@ class EXP mfslCaseInputStatement : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                currentNamesListAsString () const;
+    std::string           currentNamesListAsString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -363,15 +361,15 @@ class EXP mfslCaseInputStatement : public smartable
 
     S_mfslInput           fCaseInputInput;
 
-    set<string>           fCaseInputNamesSet;
-    list<string>          fCaseInputCurrentNamesList;
+    std::set<std::string>           fCaseInputNamesSet;
+    std::list<std::string>          fCaseInputCurrentNamesList;
 
     // checking unused names
-    set<string>           fUsedNames;
-    set<string>           fCaseInputUnusedNames;
+    std::set<std::string>           fUsedNames;
+    std::set<std::string>           fCaseInputUnusedNames;
 };
 typedef SMARTP<mfslCaseInputStatement> S_mfslCaseInputStatement;
-EXP ostream& operator << (ostream& os, const S_mfslCaseInputStatement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslCaseInputStatement& elt);
 
 //______________________________________________________________________________
 enum class mfslChoiceLabelKind {
@@ -380,10 +378,10 @@ enum class mfslChoiceLabelKind {
   kChoiceLabelSetInScript
 };
 
-string mfslChoiceLabelKindAsString (
+std::string mfslChoiceLabelKindAsString (
   mfslChoiceLabelKind choiceLabelKind);
 
-ostream& operator << (ostream& os, const mfslChoiceLabelKind& elt);
+std::ostream& operator << (std::ostream& os, const mfslChoiceLabelKind& elt);
 
 //______________________________________________________________________________
 class EXP mfslChoice : public smartable
@@ -394,7 +392,7 @@ class EXP mfslChoice : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfslChoice> create (
-                            const string& choiceName);
+                            const std::string& choiceName);
 
   protected:
 
@@ -402,7 +400,7 @@ class EXP mfslChoice : public smartable
     // ------------------------------------------------------
 
                           mfslChoice (
-                            const string& choiceName);
+                            const std::string& choiceName);
 
     virtual               ~mfslChoice ();
 
@@ -411,34 +409,34 @@ class EXP mfslChoice : public smartable
     // set and get
     // ------------------------------------------------------
 
-    string                getChoiceName () const
+    std::string           getChoiceName () const
                               { return fChoiceName; }
 
     void                  setChoiceLabelSuppliedByAnOption (
-                            const string& label,
+                            const std::string& label,
                             mfslDriver&   drv);
 
     void                  selectChoiceLabel (
-                            const string& label,
+                            const std::string& label,
                             mfslDriver&   drv);
 
-    string                getChoiceLabel (
+    std::string           getChoiceLabel (
                             mfslDriver& drv) const;
 
-    string                getChoiceLabelWithoutTrace ( // JMI
+    std::string           getChoiceLabelWithoutTrace ( // JMI
                             mfslDriver& drv) const;
 
     mfslChoiceLabelKind   getChoiceLabelKind () const
                               { return fChoiceLabelKind; }
 
-    const set<string>&    getLabelsSet () const
+    const std::set<std::string>&    getLabelsSet () const
                               { return fLabelsSet; }
 
-    string                getChoiceDefaultLabel () const
+    std::string           getChoiceDefaultLabel () const
                               { return fChoiceDefaultLabel; }
 
     S_mfslOptionsBlock    getChoiceOptionsBlockForLabel (
-                            const string& label,
+                            const std::string& label,
                             mfslDriver&   drv) const;
 
     void                  setChoiceIsUsedInCaseChoiceStatements ()
@@ -453,16 +451,16 @@ class EXP mfslChoice : public smartable
     // ------------------------------------------------------
 
     void                  addLabel (
-                            const string& label,
+                            const std::string& label,
                             mfslDriver&   drv);
 
     void                  enrichLabelOptionsBlock (
-                            const string&      label,
+                            const std::string&      label,
                             S_mfslOptionsBlock optionsBlock,
                             mfslDriver&        drv);
 
     void                  registerChoiceDefaultLabel (
-                            const string& label,
+                            const std::string& label,
                             mfslDriver&   drv);
 
   public:
@@ -470,36 +468,36 @@ class EXP mfslChoice : public smartable
     // print
     // ------------------------------------------------------
 
-    string                labelsSetAsString () const;
+    std::string           labelsSetAsString () const;
 
-    string                asString () const;
+    std::string           asString () const;
 
     void                  displayChoiceLabelsToOptionsBlocksMap (
-                            ostream& os) const;
+                            std::ostream& os) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fChoiceName;
+    std::string           fChoiceName;
 
-    string                fChoiceLabel;
+    std::string           fChoiceLabel;
     mfslChoiceLabelKind   fChoiceLabelKind;
 
-    set<string>           fLabelsSet;
+    std::set<std::string>           fLabelsSet;
 
-    string                fChoiceDefaultLabel;
+    std::string           fChoiceDefaultLabel;
 
     Bool                  fChoiceIsUsedInCaseChoiceStatements;
 
-    map<string, S_mfslOptionsBlock>
+    std::map<std::string, S_mfslOptionsBlock>
                           fChoiceLabelsToOptionsBlocksMap;
 };
 typedef SMARTP<mfslChoice> S_mfslChoice;
-EXP ostream& operator << (ostream& os, const S_mfslChoice& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslChoice& elt);
 
 //______________________________________________________________________________
 class EXP mfslChoicesTable : public smartable
@@ -525,7 +523,7 @@ class EXP mfslChoicesTable : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const map<string, S_mfslChoice>&
+    const std::map<std::string, S_mfslChoice>&
                           getChoicesMap () const
                               { return fChoicesMap; }
 
@@ -539,14 +537,14 @@ class EXP mfslChoicesTable : public smartable
                             mfslDriver&  drv);
 
 //     S_mfslChoice          lookupChoiceByName (
-//                             const string& name);
+//                             const std::string& name);
 
     S_mfslChoice          fetchChoiceByName (
-                            const string&     name,
+                            const std::string&     name,
                             const mfslDriver& drv);
 
     S_mfslChoice          fetchChoiceByNameNonConst (
-                            const string& name,
+                            const std::string& name,
                             mfslDriver&   drv);
 
   public:
@@ -554,11 +552,11 @@ class EXP mfslChoicesTable : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  displayChoicesMap (ostream& os) const;
+    void                  displayChoicesMap (std::ostream& os) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -566,11 +564,11 @@ class EXP mfslChoicesTable : public smartable
     // private fields
     // ------------------------------------------------------
 
-    map<string, S_mfslChoice>
+    std::map<std::string, S_mfslChoice>
                           fChoicesMap;
 };
 typedef SMARTP<mfslChoicesTable> S_mfslChoicesTable;
-EXP ostream& operator << (ostream& os, const S_mfslChoicesTable& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslChoicesTable& elt);
 
 //______________________________________________________________________________
 class EXP mfslCaseChoiceStatement : public smartable
@@ -603,7 +601,7 @@ class EXP mfslCaseChoiceStatement : public smartable
     S_mfslChoice          getCaseChoice () const
                               { return fCaseChoice; }
 
-    const list<string>&   getCaseCurrentLabelsList () const
+    const std::list<std::string>&   getCaseCurrentLabelsList () const
                               { return fCaseCurrentLabelsList; }
 
     void                  clearCaseCurrentLabelsList ()
@@ -615,7 +613,7 @@ class EXP mfslCaseChoiceStatement : public smartable
     // ------------------------------------------------------
 
     void                  registerCaseChoiceLabel (
-                            const string& label,
+                            const std::string& label,
                             mfslDriver&   drv);
 
     void                  checkThatAllLabelsHaveBeenUsed (
@@ -626,11 +624,11 @@ class EXP mfslCaseChoiceStatement : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                currentLabelsListAsString () const;
+    std::string           currentLabelsListAsString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -640,15 +638,15 @@ class EXP mfslCaseChoiceStatement : public smartable
 
     S_mfslChoice          fCaseChoice;
 
-    set<string>           fCaseLabelsSet;
-    list<string>          fCaseCurrentLabelsList;
+    std::set<std::string>           fCaseLabelsSet;
+    std::list<std::string>          fCaseCurrentLabelsList;
 
     // checking unused labels
-    set<string>           fUsedLabels;
-    set<string>           fCaseUnusedLabels;
+    std::set<std::string>           fUsedLabels;
+    std::set<std::string>           fCaseUnusedLabels;
 };
 typedef SMARTP<mfslCaseChoiceStatement> S_mfslCaseChoiceStatement;
-EXP ostream& operator << (ostream& os, const S_mfslCaseChoiceStatement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslCaseChoiceStatement& elt);
 
 // // initialization
 // //______________________________________________________________________________

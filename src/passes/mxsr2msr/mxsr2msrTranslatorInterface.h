@@ -29,8 +29,8 @@ namespace MusicFormats
 EXP void populateMsrSkeletonFromMxsr (
   Sxmlelement   theMxsr,
   S_msrScore    scoreSkeletonToBePopulated,
-  const string& passNumber,
-  const string& passDescription);
+  const std::string& passNumber,
+  const std::string& passDescription);
 
 
 }

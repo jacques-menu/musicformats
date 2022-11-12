@@ -16,10 +16,10 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrLineTypeKindAsString (
+std::string msrLineTypeKindAsString (
   msrLineTypeKind lineTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (lineTypeKind) {
     case msrLineTypeKind::kLineTypeSolid:
@@ -39,7 +39,7 @@ string msrLineTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrLineTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrLineTypeKind& elt)
 {
   os << msrLineTypeKindAsString (elt);
   return os;

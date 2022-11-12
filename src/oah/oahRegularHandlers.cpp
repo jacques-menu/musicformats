@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
 #include "oahWae.h"
@@ -37,8 +37,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 /* this class   is purely virtual
 S_oahRegularHandler oahRegularHandler::create (
-  string            serviceName,
-  const string&     handlerHeader,
+  std::string            serviceName,
+  const std::string&     handlerHeader,
   S_oahHandler      insiderOahHandler)
 {
   // create the regular handler
@@ -54,8 +54,8 @@ S_oahRegularHandler oahRegularHandler::create (
 */
 
 oahRegularHandler::oahRegularHandler (
-  string            serviceName,
-  const string&     handlerHeader,
+  std::string            serviceName,
+  const std::string&     handlerHeader,
   S_oahHandler      insiderOahHandler)
   : oahHandler (
       serviceName,
@@ -70,7 +70,7 @@ oahRegularHandler::oahRegularHandler (
       "Creating the insider handler for \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -92,7 +92,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
       "Initializing the regular handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -111,7 +111,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
     "oahRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -119,7 +119,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
   this->printHelp (gOutputStream); // JMI
 
   gLogStream <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
   }
@@ -143,7 +143,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
       "\" to regular handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -151,11 +151,11 @@ void oahRegularHandler::appendGroupToRegulalHandler (
   group->
     setGroupHeaderIsToBeWritten (false);
 
-  // append group to elements list
+  // append group to elements std::list
   group->
     appendGroupToElementsList (this);
 
-  // append group to groups list
+  // append group to groups std::list
   fHandlerGroupsList.push_back (group);
 
   // set the group upLink to this handler
@@ -180,7 +180,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
       "\" to regular handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -188,11 +188,11 @@ void oahRegularHandler::prependGroupToRegularHandler (
   group->
     setGroupHeaderIsToBeWritten (false);
 
-  // prepend group  to elements list
+  // prepend group  to elements std::list
   group->
     appendGroupToElementsList (this);
 
-  // prepend group to the groups list
+  // prepend group to the groups std::list
   fHandlerGroupsList.push_front (group);
 
   // set the group upLink to this handler
@@ -201,7 +201,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
 }
 
 void oahRegularHandler::registerAtomInRegularSubgroup (
-  const string& atomName,
+  const std::string& atomName,
   S_oahSubGroup subGroup)
 {
   S_oahElement
@@ -215,11 +215,11 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
     if (false) { // JMI
       gLogStream <<
         "===> insiderElement:" <<
-        endl;
+        std::endl;
       ++gIndenter;
       gLogStream <<
         insiderElement <<
-        endl;
+        std::endl;
       --gIndenter;
     }
 
@@ -243,7 +243,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "atom name \"" << atomName <<
@@ -259,9 +259,9 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
 }
 
 //______________________________________________________________________________
-string oahRegularHandler::asString () const
+std::string oahRegularHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "oahRegularHandler \"" << fHandlerHeader; // JMI v0.9.65
@@ -269,33 +269,33 @@ string oahRegularHandler::asString () const
   return s.str ();
 }
 
-void oahRegularHandler::print (ostream& os) const
+void oahRegularHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "oahRegularHandler \"" << fHandlerHeader << "\":" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -303,7 +303,7 @@ void oahRegularHandler::print (ostream& os) const
       // print the options group
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -313,24 +313,24 @@ if (false) { // JMI
   // print the known options
   os <<
     "oahRegularHandler known options +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" <<
-    endl <<
+    std::endl <<
     "oahRegularHandler known options +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" <<
-    endl;
+    std::endl;
   displayNamesToElementsMap (os);
 }
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_oahRegularHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_oahRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -343,13 +343,13 @@ ostream& operator << (ostream& os, const S_oahRegularHandler& elt)
 // optional values style
 //______________________________________________________________________________
 
-map<string, oahOptionalValuesStyleKind>
+std::map<std::string, oahOptionalValuesStyleKind>
   gGlobalOahOptionalValuesStyleKindsMap;
 
-string oahOptionalValuesStyleKindAsString (
+std::string oahOptionalValuesStyleKindAsString (
   oahOptionalValuesStyleKind optionalValuesStyleKind)
 {
-  string result;
+  std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
@@ -376,9 +376,9 @@ void initializeOahOptionalValuesStyleKindsMap ()
   gGlobalOahOptionalValuesStyleKindsMap ["oah"] = kOptionalValuesStyleOAH;
 }
 
-string existingOahOptionalValuesStyleKinds (size_t namesListMaxLength)
+std::string existingOahOptionalValuesStyleKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     optionalValuesStyleKindsMapSize =
@@ -393,18 +393,18 @@ string existingOahOptionalValuesStyleKinds (size_t namesListMaxLength)
     int cumulatedLength = 0;
 
     for (
-      map<string, oahOptionalValuesStyleKind>::const_iterator i =
+      std::map<std::string, oahOptionalValuesStyleKind>::const_iterator i =
         gGlobalOahOptionalValuesStyleKindsMap.begin ();
       i != gGlobalOahOptionalValuesStyleKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 

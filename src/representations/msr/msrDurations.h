@@ -34,13 +34,13 @@ enum class msrDurationKind {
   kDuration128th, kDuration256th, kDuration512th, kDuration1024th
 };
 
-string msrDurationKindAsString (msrDurationKind durationKind);
+std::string msrDurationKindAsString (msrDurationKind durationKind);
 
-ostream& operator << (ostream& os, const msrDurationKind& elt);
+std::ostream& operator << (std::ostream& os, const msrDurationKind& elt);
 
 EXP msrDurationKind msrDurationKindFromMusicXMLString (
   int           inputLineNumber,
-  const string& durationString);
+  const std::string& durationString);
 
 EXP msrDurationKind msrDurationKindFromInteger (
   int inputLineNumber,
@@ -48,7 +48,7 @@ EXP msrDurationKind msrDurationKindFromInteger (
 
 EXP msrDurationKind msrDurationKindFromString (
   int           inputLineNumber,
-  const string& durationString);
+  const std::string& durationString);
 
 EXP Rational rationalFromDurationKindAndDotsNumber (
   msrDurationKind durationKind,
@@ -59,7 +59,7 @@ EXP Rational msrDurationKindAsWholeNotes (
 
 EXP msrDurationKind wholeNotesAsDurationKind (Rational wholeNotes);
 
-string msrDurationKindAsMusicXMLType (msrDurationKind durationKind);
+std::string msrDurationKindAsMusicXMLType (msrDurationKind durationKind);
 
 // durations
 //______________________________________________________________________________
@@ -125,9 +125,9 @@ class EXP msrDuration
 
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -137,7 +137,7 @@ class EXP msrDuration
     msrDurationKind       fDurationKind;
     int                   fDotsNumber;
 };
-EXP ostream& operator << (ostream& os, const msrDuration& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrDuration& elt);
 
 // dotted durations
 //______________________________________________________________________________
@@ -203,9 +203,9 @@ class EXP msrDottedDuration
 
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -215,20 +215,20 @@ class EXP msrDottedDuration
     msrDurationKind       fDurationKind;
     int                   fDotsNumber;
 };
-EXP ostream& operator << (ostream& os, const msrDottedDuration& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrDottedDuration& elt);
 
 // whole notes
 //______________________________________________________________________________
-string wholeNotesAsMsrString (
+std::string wholeNotesAsMsrString (
   int             inputLineNumber,
   const Rational& wholeNotes,
   int&            dotsNumber);
 
-string wholeNotesAsMsrString (
+std::string wholeNotesAsMsrString (
   int             inputLineNumber,
   const Rational& wholeNotes);
 
-string multipleFullBarRestsWholeNotesAsMsrString (
+std::string multipleFullBarRestsWholeNotesAsMsrString (
   int             inputLineNumber, // JMI
   const Rational& wholeNotes);
 

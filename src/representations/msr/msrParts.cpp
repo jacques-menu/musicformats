@@ -10,7 +10,7 @@
 */
 
 #include <climits>      // INT_MIN, INT_MAX
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <algorithm>    // for_each
 
 #include "visitor.h"
@@ -41,8 +41,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -59,7 +57,7 @@ int msrPart::gPartsCounter = 0;
 
 S_msrPart msrPart::create (
   int            inputLineNumber,
-  const string&  partID,
+  const std::string&  partID,
   S_msrPartGroup PartUpLinkToPartGroup)
 {
   msrPart* o =
@@ -73,7 +71,7 @@ S_msrPart msrPart::create (
 
 msrPart::msrPart (
   int            inputLineNumber,
-  const string&  partID,
+  const std::string&  partID,
   S_msrPartGroup PartUpLinkToPartGroup)
     : msrPartGroupElement (inputLineNumber)
 {
@@ -107,22 +105,22 @@ void msrPart::initializePart ()
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "Creating part \"" << asString () << "\"" <<
-      endl;
+      std::endl;
 
     gGlobalMsrOahGroup->printMsrOahValues (40); // JMI
   }
 #endif
 
-  // is this part name in the part renaming map?
-  map<string, string>::const_iterator
+  // is this part name in the part renaming std::map?
+  std::map<std::string, std::string>::const_iterator
     it =
       gGlobalMsrOahGroup->getMsrPartsRenamingMap ().find (fPartID);
 
   if (it != gGlobalMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
     // yes, rename the part accordinglingly
-    string newMsrPartName = (*it).second;
+    std::string newMsrPartName = (*it).second;
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Renaming MSR part " <<
@@ -163,7 +161,7 @@ void msrPart::initializePart ()
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "Creating part \"" << asString () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -191,7 +189,7 @@ S_msrPart msrPart::createPartNewbornClone (S_msrPartGroup partGroupClone)
     gLogStream <<
       "Creating a newborn clone of part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -257,23 +255,23 @@ void msrPart::registerStaffInPart (
       staffNumber <<
       " in part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // register staff in the all staves list
+  // register staff in the all staves std::list
   fPartAllStavesList.push_back (staff);
 
-  // register its number in the staves numbers to staves map
+  // register its number in the staves numbers to staves std::map
   fPartStaveNumbersToStavesMap [staffNumber] = staff;
 
   switch (staffKind) {
     case msrStaffKind::kStaffKindRegular:
-      // register staff in the regular staves list
+      // register staff in the regular staves std::list
       fPartRegularStavesList.push_back (staff);
 
       // register staff in the
-      // non harmonies nor figured bass staves list
+      // non harmonies nor figured bass staves std::list
       fPartNonHarmoniesNorFiguredBassStavesList.push_back (staff);
       break;
 
@@ -281,14 +279,14 @@ void msrPart::registerStaffInPart (
     case msrStaffKind::kStaffKindDrum:
     case msrStaffKind::kStaffKindRythmic:
       // register staff in the
-      // non harmonies nor figured bass staves list
+      // non harmonies nor figured bass staves std::list
       fPartNonHarmoniesNorFiguredBassStavesList.push_back (staff);
       break;
 
     case msrStaffKind::kStaffKindHarmonies:
       // sanity check
       if (fPartHarmoniesStaff) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "a harmonies staff already exists in part " <<
@@ -309,7 +307,7 @@ void msrPart::registerStaffInPart (
     case msrStaffKind::kStaffKindFiguredBass:
       // sanity check
       if (fPartFiguredBassStaff) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "a figured bass staff already exists in part " <<
@@ -340,12 +338,12 @@ void msrPart::setPartCurrentMeasurePosition (
       measurePosition <<
       " in part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (measurePosition.getNumerator () < 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot set part current position in measure to " <<
@@ -380,7 +378,7 @@ void msrPart::incrementPartCurrentMeasurePosition (
       getPartCombinedName () <<
       ", thus setting it to " <<
       fPartCurrentMeasurePosition <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -396,14 +394,14 @@ void msrPart::decrementPartCurrentMeasurePosition (
       duration <<
       " in part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
   fPartCurrentMeasurePosition -= duration;
 
   if (fPartCurrentMeasurePosition.getNumerator () < 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot decrement part current position in measure by " <<
@@ -428,7 +426,7 @@ void msrPart::decrementPartCurrentMeasurePosition (
       fPartCurrentMeasurePosition <<
       " in part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -447,7 +445,7 @@ void msrPart::setPartShortestNoteDuration (
       fPartName <<
       "\" to " <<
       duration <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -468,7 +466,7 @@ void msrPart::setPartShortestNoteTupletFactor (
       fPartName <<
       " to " <<
       noteTupletFactor <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -487,7 +485,7 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
       fPartName <<
       "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -498,10 +496,10 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
   } // for
 }
 
-void msrPart::setPartMsrName (const string& partMsrName)
+void msrPart::setPartMsrName (const std::string& partMsrName)
 {
-  // is this part name in the part renaming map?
-  map<string, string>::const_iterator
+  // is this part name in the part renaming std::map?
+  std::map<std::string, std::string>::const_iterator
     it =
       gGlobalMsrOahGroup->getMsrPartsRenamingMap ().find (fPartMsrName);
 
@@ -514,7 +512,7 @@ void msrPart::setPartMsrName (const string& partMsrName)
       gLogStream <<
         "Setting part name of " << getPartCombinedName () <<
         " to \"" << fPartMsrName << "\"" <<
-         endl;
+         std::endl;
     }
 #endif
   }
@@ -527,15 +525,15 @@ void msrPart::setPartMsrName (const string& partMsrName)
       gLogStream <<
         "Keeping partID \"" << partMsrName <<
         "\" as part name  for " << getPartCombinedName () <<
-      endl;
+      std::endl;
     }
 #endif
   }
 }
 
-string msrPart::getPartCombinedName () const
+std::string msrPart::getPartCombinedName () const
 {
-  stringstream s;
+  std::stringstream s;
 
   if (! fPartMsrName.size ()) {
     s <<
@@ -566,7 +564,7 @@ string msrPart::getPartCombinedName () const
 void msrPart::createAMeasureAndAppendItToPart (
   int           inputLineNumber,
   int           previousMeasureEndInputLineNumber,
-  const string& measureNumber,
+  const std::string& measureNumber,
   msrMeasureImplicitKind
                 measureImplicitKind)
 {
@@ -578,7 +576,7 @@ void msrPart::createAMeasureAndAppendItToPart (
       "' and appending it to part " <<
       getPartCombinedName () <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -602,7 +600,7 @@ void msrPart::createAMeasureAndAppendItToPart (
 
 void msrPart::setNextMeasureNumberInPart (
   int           inputLineNumber,
-  const string& nextMeasureNumber)
+  const std::string& nextMeasureNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -612,7 +610,7 @@ void msrPart::setNextMeasureNumberInPart (
       "' in part " <<
       getPartCombinedName () <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -648,7 +646,7 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
         ", partMeasuresWholeNotesDurationsVectorSize: " <<
         partMeasuresWholeNotesDurationsVectorSize <<
         ", indexValue: " << indexValue <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -662,10 +660,10 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
     result = currentValue;
   }
 
-  catch (const out_of_range& e) {
+  catch (const std::out_of_range& e) {
     // no
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "fetchPartMeasuresWholeNotesDurationsVectorAt() in part \"" <<
@@ -726,7 +724,7 @@ void msrPart::registerShortestNoteInPartIfRelevant (S_msrNote note)
       gLogStream <<
         "The new shortest note in part \"" << getPartCombinedName () << "\"" <<
         " becomes " << note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -747,7 +745,7 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
       getPartCombinedName () <<
       " to " <<
       partNumberOfMeasures <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -768,7 +766,7 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
         " to " <<
         partNumberOfMeasures <<
         " measures" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -794,7 +792,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
       " in part " << getPartCombinedName () <<
       ", measureOrdinalNumber: " << measureOrdinalNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -806,17 +804,17 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
   ) {
     gLogStream <<
       "===> fPartMeasuresWholeNotesDurationsVector contents: " <<
-      endl;
+      std::endl;
     for (Rational rat : fPartMeasuresWholeNotesDurationsVector) {
       ++gIndenter;
       gLogStream <<
         rat <<
-        endl;
+        std::endl;
       --gIndenter;
     } // for
     gLogStream <<
       "<==== end of fPartMeasuresWholeNotesDurationsVector contents " <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -845,12 +843,12 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
         ", now registering it with a duration of " <<
         wholeNotesDuration <<
         " in part " << getPartCombinedName () <<
-        endl;
+        std::endl;
     }
 #endif
   }
 
-  catch (const out_of_range& e) {
+  catch (const std::out_of_range& e) {
     // no
 
     fPartMeasuresWholeNotesDurationsVector [index] =
@@ -870,7 +868,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
         " in part " << getPartCombinedName () <<
         ", fPartMeasuresWholeNotesDurationsVector.size () = " <<
         fPartMeasuresWholeNotesDurationsVector.size () <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -885,7 +883,7 @@ void msrPart::appendStaffDetailsToPart (
       "Appending staff details\"" <<
       staffDetails->asShortString () <<
       "\" to part " << getPartCombinedName () <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -908,7 +906,7 @@ void msrPart::appendClefToPart (S_msrClef clef)
       "Appending clef '" <<
       clef->asString () <<
       "' to part " << getPartCombinedName () <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -941,7 +939,7 @@ void msrPart::appendKeyToPart (S_msrKey key)
       "Appending key " <<
       key->asString () <<
       " to part " << getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -977,7 +975,7 @@ void msrPart::appendTimeSignatureToPart (S_msrTimeSignature timeSignature)
       "Appending time signature '" <<
       timeSignature->asString () <<
       "' to part " << getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1013,7 +1011,7 @@ void msrPart::appendTimeSignatureToPartClone (S_msrTimeSignature timeSignature)
       "Appending time signature '" <<
       timeSignature->asString () <<
       "' to part clone " << getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1039,7 +1037,7 @@ void msrPart::appendTempoToPart (S_msrTempo tempo)
       "Appending tempo " << tempo->asString () <<
       " to part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1059,7 +1057,7 @@ void msrPart::appendRehearsalMarkToPart (
       "Appending rehearsal mark " << rehearsalMark->asString () <<
       " to part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1079,7 +1077,7 @@ void msrPart::appendLineBreakToPart (S_msrLineBreak lineBreak)
       "Appending line break " << lineBreak->asString () <<
       " to part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1098,7 +1096,7 @@ void msrPart::appendPageBreakToPart (S_msrPageBreak pageBreak)
       "Appending page break " << pageBreak->asString () <<
       " to part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1120,7 +1118,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
       measurePosition <<
       "' in part clone " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1146,7 +1144,7 @@ void msrPart::appendTranspositionToPart (
       "Appending transposition \"" <<
       transposition->asString () <<
       "\" to part " << getPartCombinedName () <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -1181,7 +1179,7 @@ void msrPart::handleRepeatStartInPart (
       "Handling a repeat start in part \"" <<
       getPartCombinedName () <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1199,7 +1197,7 @@ void msrPart::handleRepeatStartInPart (
 
 void msrPart::handleRepeatEndInPart (
   int           inputLineNumber,
-  const string& measureNumber,
+  const std::string& measureNumber,
   int           repeatTimes)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1209,7 +1207,7 @@ void msrPart::handleRepeatEndInPart (
       getPartCombinedName () <<
       "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1237,7 +1235,7 @@ void msrPart::handleRepeatEndingStartInPart (
       getPartCombinedName () <<
       "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1255,7 +1253,7 @@ void msrPart::handleRepeatEndingStartInPart (
 
 void msrPart::handleRepeatEndingEndInPart (
   int           inputLineNumber,
-  const string& repeatEndingNumber, // may be "1, 2"
+  const std::string& repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind
                 repeatEndingKind)
 {
@@ -1269,7 +1267,7 @@ void msrPart::handleRepeatEndingEndInPart (
       getPartCombinedName () <<
       "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1290,7 +1288,7 @@ void msrPart::handleRepeatEndingEndInPart (
 /* JMI
 void msrPart::finalizeRepeatEndInPart (
   int    inputLineNumber,
-  const string& measureNumber,
+  const std::string& measureNumber,
   int    repeatTimes)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1300,7 +1298,7 @@ void msrPart::finalizeRepeatEndInPart (
       getPartCombinedName () <<
       "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1400,7 +1398,7 @@ void msrPart::appendMultipleFullBarRestsToPart (
       " to part " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1424,7 +1422,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
     gLogStream <<
       "Replicating last appended measure in part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1439,7 +1437,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
 
 void msrPart::addEmptyMeasuresToPart (
   int           inputLineNumber,
-  const string& previousMeasureNumber,
+  const std::string& previousMeasureNumber,
   int           multipleFullBarRestsNumber)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1451,7 +1449,7 @@ void msrPart::addEmptyMeasuresToPart (
       " to part " <<
       getPartCombinedName () <<
       ", " <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1475,7 +1473,7 @@ void msrPart::appendPendingMultipleFullBarRestsToPart (
     gLogStream <<
       "Appending the pending multiple rest to part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1498,7 +1496,7 @@ void msrPart::appendMultipleFullBarRestsCloneToPart (
       multipleFullBarRests->asString () <<
       "' to part clone " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1518,7 +1516,7 @@ void msrPart::appendBarLineToPart (S_msrBarLine barLine)
       "Appending barLine " << barLine->asString () <<
       " to part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1535,7 +1533,7 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
   int          staffNumber)
 {
   if (fPartStaveNumbersToStavesMap.count (staffNumber)) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "staffNumber " << staffNumber <<
@@ -1559,7 +1557,7 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
       " staff " << staffNumber <<
       " to part " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1601,7 +1599,7 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
       "Adding harmonies staff " <<
       " to part " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1648,7 +1646,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
       "Adding figured bass staff " <<
       " to part " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1693,7 +1691,7 @@ void msrPart::addStaffToPartCloneByItsNumber (S_msrStaff staff)
     gLogStream <<
       "Adding staff \"" << staff->getStaffName () <<
       "\" to part clone " << getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1728,10 +1726,10 @@ void msrPart::registerVoiceInPartAllVoicesList (
 
 S_msrVoice msrPart::createPartHarmoniesVoice (
   int           inputLineNumber,
-  const string& currentMeasureNumber)
+  const std::string& currentMeasureNumber)
 {
   if (fPartHarmoniesVoice) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Part \"" <<
@@ -1757,7 +1755,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       "\" with staff number " <<
       partHarmoniesStaffNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1777,7 +1775,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       "\" with voice number " <<
       partHarmoniesVoiceNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1807,10 +1805,10 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 
 S_msrVoice msrPart::createPartFiguredBassVoice (
   int           inputLineNumber,
-  const string& currentMeasureNumber)
+  const std::string& currentMeasureNumber)
 {
   if (fPartFiguredBassVoice) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Part \"" <<
@@ -1836,7 +1834,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       "\" with staff number " <<
       partFiguredBassStaffNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1856,7 +1854,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       "\" with voice number " <<
       partFiguredBassVoiceNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1903,7 +1901,7 @@ void msrPart::appendFiguredBassToPart (
           " to part " <<
           getPartCombinedName () <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -1917,7 +1915,7 @@ void msrPart::appendFiguredBassToPart (
     case msrVoiceKind::kVoiceKindHarmonies:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "figured bass cannot by appended to part by " <<
@@ -1959,7 +1957,7 @@ void msrPart::appendFiguredBassToPartClone (
           " to part clone " <<
           getPartCombinedName () <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -1973,7 +1971,7 @@ void msrPart::appendFiguredBassToPartClone (
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindHarmonies:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "figured bass cannot by appended to part clone by " <<
@@ -2005,7 +2003,7 @@ void msrPart::appendScordaturaToPart (
       scordatura->asString () <<
       "' to part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2027,7 +2025,7 @@ void msrPart::appendAccordionRegistrationToPart (
       accordionRegistration->asString () <<
       "' to part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2049,7 +2047,7 @@ void msrPart::appendHarpPedalsTuningToPart (
       harpPedalsTuning->asString () <<
       "' to part " <<
       getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2081,17 +2079,17 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
       "addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded () in " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   for (S_msrStaff staff : fPartAllStavesList) {
-    map<int, S_msrVoice>
+    std::map<int, S_msrVoice>
       staffAllVoicesMap =
         staff->
           getStaffVoiceNumbersToAllVoicesMap ();
 
-    for (pair<int, S_msrVoice> thePair : staffAllVoicesMap) {
+    for (std::pair<int, S_msrVoice> thePair : staffAllVoicesMap) {
       S_msrVoice voice = thePair.second;
 
       if (voice != graceNotesGroupOriginVoice) {
@@ -2123,7 +2121,7 @@ void msrPart::finalizeLastAppendedMeasureInPart (
       "Finalizing last appended measure in part " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2208,19 +2206,19 @@ void msrPart::finalizePart (
       "Finalizing part " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   ++gIndenter;
 
   if (! fPartAllStavesList.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Part " <<
       getPartCombinedName () <<
-      " appears in the part list, but doesn't contain any stave";
+      " appears in the part std::list, but doesn't contain any stave";
 
     msrWarning (
       gGlobalServiceRunData->getInputSourceName (),
@@ -2261,7 +2259,7 @@ void msrPart::finalizePartClone (
       "Finalizing part clone " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2296,7 +2294,7 @@ void msrPart::finalizePartAndAllItsMeasures (
       "Finalizing all the measures of part \"" <<
       getPartCombinedName () <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2330,7 +2328,7 @@ void msrPart::collectPartMeasuresSlices (
       mfSingularOrPlural (
         partAllStavesListSize, "voice", "voices") <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2355,7 +2353,7 @@ void msrPart::collectPartMeasuresSlices (
         "---> staff \"" <<
         staff->getStaffName () <<
         "\":" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -2367,7 +2365,7 @@ void msrPart::collectPartMeasuresSlices (
           getStaffMeasuresSlicesSequence ();
 
     if (! staffMeasuresSlicesSequence) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "The staffMeasuresSlicesSequence of staff \"" <<
@@ -2394,7 +2392,7 @@ void msrPart::collectPartMeasuresSlices (
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "fPartMeasuresSlicesSequence:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream <<
@@ -2411,7 +2409,7 @@ void msrPart::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPart::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPart>*
@@ -2422,7 +2420,7 @@ void msrPart::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPart::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -2433,7 +2431,7 @@ void msrPart::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPart::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPart>*
@@ -2444,7 +2442,7 @@ void msrPart::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPart::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -2455,7 +2453,7 @@ void msrPart::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPart::browseData ()" <<
-      endl;
+      std::endl;
   }
 
 #ifdef TRACING_IS_ENABLED // JMI
@@ -2463,30 +2461,30 @@ void msrPart::browseData (basevisitor* v)
     gLogStream <<
       "++++++++ fPartAllStavesList.size(): " <<
       fPartAllStavesList.size () <<
-      endl;
+      std::endl;
 
     if (fPartAllStavesList.size ()) {
       for (S_msrStaff staff : fPartAllStavesList) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "+++++++++ staff: ++++++++" <<
           " \"" << staff->getStaffName () << "\"" <<
-          endl;
+          std::endl;
       } // for
     }
 
     gLogStream <<
       "++++++++ fPartNonHarmoniesNorFiguredBassStavesList.size(): " <<
       fPartNonHarmoniesNorFiguredBassStavesList.size () <<
-      endl;
+      std::endl;
 
     if (fPartNonHarmoniesNorFiguredBassStavesList.size ()) {
       for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "+++++++++ staff: ++++++++" <<
           " \"" << staff->getStaffName () << "\"" <<
-          endl;
+          std::endl;
       } // for
     }
   }
@@ -2525,9 +2523,9 @@ void msrPart::browseData (basevisitor* v)
 //   } // for
 }
 
-string msrPart::asString () const
+std::string msrPart::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Part" <<
@@ -2544,38 +2542,38 @@ string msrPart::asString () const
 }
 
 void msrPart::printPartMeasuresWholeNotesDurationsVector (
-  ostream& os,
+  std::ostream& os,
   int      fieldWidth) const
 {
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartMeasuresWholeNotesDurationsVector" << " : " ;
 
   if (fPartNumberOfMeasures == 0) {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
     for (size_t i = 0; i < fPartNumberOfMeasures; ++i) {
       int j = i + 1; // indices start at 0
 
-      os << left <<
+      os << std::left <<
         "ordinal number " <<
-        setw (3) << right <<
+        std::setw (3) << std::right <<
         j << " : " <<
-        setw (4) <<
+        std::setw (4) <<
         fPartMeasuresWholeNotesDurationsVector [ i ].toString () <<
-        endl;
+        std::endl;
     } // for
 
     --gIndenter;
   }
 }
 
-void msrPart::print (ostream& os) const
+void msrPart::print (std::ostream& os) const
 {
   os <<
     "[Part" << ' ' << fPartMsrName <<
@@ -2584,14 +2582,14 @@ void msrPart::print (ostream& os) const
       fPartAllStavesList.size (), "staff", "staves") <<
     ")" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 37;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fUpLinkToPartGroup" << " : ";
   if (fPartUpLinkToPartGroup) {
     // it may be empty
@@ -2601,73 +2599,73 @@ void msrPart::print (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartID" << " : \"" <<
     fPartID << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartMsrName" << " : \"" <<
     fPartMsrName << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartName" << " : \"" <<
     fPartName << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fPartNameDisplayText" << " : \"" <<
     fPartNameDisplayText << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartAbbrevation" << " : \"" <<
     fPartAbbreviation << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fPartAbbreviationDisplayText" << " : \"" <<
     fPartAbbreviationDisplayText << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartAbsoluteNumber" << " : " <<
     fPartAbsoluteNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartInstrumentName" << " : \"" <<
     fPartInstrumentName << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fPartInstrumentAbbreviation" << " : \"" <<
     fPartInstrumentAbbreviation << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartNumberOfMeasures" << " : " <<
     fPartNumberOfMeasures <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartContainsMultipleFullBarRests" << " : " <<
     fPartContainsMultipleFullBarRests <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartCurrentMeasurePosition" << " : " <<
     fPartCurrentMeasurePosition <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartHarmoniesStaff" << " : \"" <<
     fPartHarmoniesStaff->asShortString () << "\"" <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartHarmoniesStaff" << " : ";
     if (fPartHarmoniesStaff) {
       os <<
@@ -2676,10 +2674,10 @@ void msrPart::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartHarmoniesVoice" << " : ";
     if (fPartHarmoniesVoice) {
       os <<
@@ -2688,10 +2686,10 @@ void msrPart::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartFiguredBassStaff" << " : ";
     if (fPartFiguredBassStaff) {
       os <<
@@ -2700,10 +2698,10 @@ void msrPart::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartFiguredBassVoice" << " : ";
     if (fPartFiguredBassVoice) {
       os <<
@@ -2712,13 +2710,13 @@ void msrPart::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
   // print current the part clef if any
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fPartCurrentClef" << " : ";
 
     if (fPartCurrentClef) {
@@ -2732,15 +2730,15 @@ void msrPart::print (ostream& os) const
         "[NONE]";
     }
 
-    os << endl;
+    os << std::endl;
   }
 #endif
 
   // print the current part key if any
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fPartCurrentKey" << " : ";
 
     if (fPartCurrentKey) {
@@ -2754,15 +2752,15 @@ void msrPart::print (ostream& os) const
         "[NONE]";
     }
 
-    os << endl;
+    os << std::endl;
   }
 #endif
 
   // print the current part time if any
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fPartCurrentTimeSignature" << " : ";
 
     if (fPartCurrentTimeSignature) {
@@ -2775,159 +2773,159 @@ void msrPart::print (ostream& os) const
       os << "[NONE]";
     }
 
-    os << endl;
+    os << std::endl;
   }
 #endif
 
-  os << left <<
-    setw (fieldWidth) << "fPartShortestNoteDuration" << " : " <<
+  os << std::left <<
+    std::setw (fieldWidth) << "fPartShortestNoteDuration" << " : " <<
     fPartShortestNoteDuration <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) << "fPartShortestNoteTupletFactor" << " : " <<
-    endl;
+  os << std::left <<
+    std::setw (fieldWidth) << "fPartShortestNoteTupletFactor" << " : " <<
+    std::endl;
 
   ++gIndenter;
-  os << fPartShortestNoteTupletFactor << endl;
+  os << fPartShortestNoteTupletFactor << std::endl;
   --gIndenter;
 
-  // print the staves list
+  // print the staves std::list
   size_t partAllStavesListSize =
     fPartAllStavesList.size ();
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartAllStavesList" << " : ";
 
   if (partAllStavesListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
     for (S_msrStaff staff : fPartAllStavesList) {
-      os << "\"" << staff->getStaffName () << "\"" << endl;
+      os << "\"" << staff->getStaffName () << "\"" << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
-  // print the regular staves list
+  // print the regular staves std::list
   size_t partRegularStavesListSize =
     fPartRegularStavesList.size ();
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartRegularStavesList" << " : ";
 
   if (partRegularStavesListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
     for (S_msrStaff staff : fPartRegularStavesList) {
-      os << "\"" << staff->getStaffName () << "\"" << endl;
+      os << "\"" << staff->getStaffName () << "\"" << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
-  // print the non harmonies nor figured bass staves list
+  // print the non harmonies nor figured bass staves std::list
   size_t partNonHarmoniesNorFiguredBassStavesListSize =
     fPartNonHarmoniesNorFiguredBassStavesList.size ();
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartNonHarmoniesNorFiguredBassStavesList" << " : ";
 
   if (partNonHarmoniesNorFiguredBassStavesListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
     for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
-      os << "\"" << staff->getStaffName () << "\"" << endl;
+      os << "\"" << staff->getStaffName () << "\"" << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
   // print part part all voices
   size_t partAllVoicesListSize =
     fPartAllVoicesList.size ();
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "Voice names in fPartAllVoicesList" << " : ";
 
   if (partAllVoicesListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
     for (S_msrVoice voice : fPartAllVoicesList) {
-      os << "\"" << voice->getVoiceName () << "\"" << endl;
+      os << "\"" << voice->getVoiceName () << "\"" << std::endl;
     } // for
 
     --gIndenter;
   }
   else {
-    os << "[EMPTY]" << endl;
+    os << "[EMPTY]" << std::endl;
   }
 
-  os << endl;
+  os << std::endl;
 
   // print the part harmonies staff if any
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartHarmoniesStaff" << " : ";
   if (fPartHarmoniesStaff) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
     os << fPartHarmoniesStaff;
     --gIndenter;
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
-  os << endl;
+  os << std::endl;
 
   // print the part figured bass staff if any
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartFiguredBassStaff" << " : ";
   if (fPartFiguredBassStaff) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
     os << fPartFiguredBassStaff;
     --gIndenter;
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
-  os << endl;
+  os << std::endl;
 
-  // print the part measures whole notes durations vector
+  // print the part measures whole notes durations std::vector
   printPartMeasuresWholeNotesDurationsVector (
     os,
     fieldWidth);
 
-  os << endl;
+  os << std::endl;
 
   // print all the staves
   if (fPartAllStavesList.size ()) {
-    list<S_msrStaff>::const_iterator
+    std::list<S_msrStaff>::const_iterator
       iBegin = fPartAllStavesList.begin (),
       iEnd   = fPartAllStavesList.end (),
       i      = iBegin;
@@ -2975,33 +2973,33 @@ void msrPart::print (ostream& os) const
 
       if (++i == iEnd) break;
 
-      os << endl;
+      os << std::endl;
     } // for
   }
 
-  os << endl;
+  os << std::endl;
 
   // print the part measures slices sequence
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartMeasuresSlicesSequence" << " : ";
 
   if (fPartMeasuresSlicesSequence) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
     os << fPartMeasuresSlicesSequence;
     --gIndenter;
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrPart::printShort (ostream& os) const
+void msrPart::printShort (std::ostream& os) const
 {
   os <<
     "[Part" << ' ' << fPartMsrName <<
@@ -3010,15 +3008,15 @@ void msrPart::printShort (ostream& os) const
       fPartAllStavesList.size (), "staff", "staves") <<
     ")" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 39;
 
 /*
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fUpLinkToPartGroup" << " : ";
   if (fPartUpLinkToPartGroup) {
     // it may be empty
@@ -3028,32 +3026,32 @@ void msrPart::printShort (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 */
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartID" << " : \"" <<
     fPartID << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartMsrName" << " : \"" <<
     fPartMsrName << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartAbsoluteNumber" << " : " <<
     fPartAbsoluteNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartName" << " : \"" <<
     fPartName << "\"" <<
-    endl;
+    std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartHarmoniesStaff" << " : ";
     if (fPartHarmoniesStaff) {
       os <<
@@ -3062,10 +3060,10 @@ void msrPart::printShort (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartHarmoniesVoice" << " : ";
     if (fPartHarmoniesVoice) {
       os <<
@@ -3074,10 +3072,10 @@ void msrPart::printShort (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartFiguredBassStaff" << " : ";
     if (fPartFiguredBassStaff) {
       os <<
@@ -3086,10 +3084,10 @@ void msrPart::printShort (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartFiguredBassVoice" << " : ";
     if (fPartFiguredBassVoice) {
       os <<
@@ -3098,18 +3096,18 @@ void msrPart::printShort (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  // print the part measure' whole notes durations vector
+  // print the part measure' whole notes durations std::vector
   printPartMeasuresWholeNotesDurationsVector (
     os,
     fieldWidth);
 
   // print all the staves
   if (fPartAllStavesList.size ()) {
-    os << endl;
+    os << std::endl;
 
-    list<S_msrStaff>::const_iterator
+    std::list<S_msrStaff>::const_iterator
       iBegin = fPartAllStavesList.begin (),
       iEnd   = fPartAllStavesList.end (),
       i      = iBegin;
@@ -3155,16 +3153,16 @@ void msrPart::printShort (ostream& os) const
 
       if (++i == iEnd) break;
 
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrPart::printSummary (ostream& os) const
+void msrPart::printSummary (std::ostream& os) const
 {
   os <<
     "[Part" << ' ' << fPartMsrName <<
@@ -3175,77 +3173,77 @@ void msrPart::printSummary (ostream& os) const
     mfSingularOrPlural (
       fPartNumberOfMeasures, "measure", "measure") <<
     ")" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 28;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fPartID" << " : \"" <<
     fPartID << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartMsrName" << " : \"" <<
     fPartMsrName << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartName" << " : \"" <<
     fPartName << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartAbsoluteNumber" << " : " <<
     fPartAbsoluteNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartNameDisplayText" << " : \"" <<
     fPartNameDisplayText << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartAbbrevation" << " : \"" <<
     fPartAbbreviation << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fPartAbbreviationDisplayText" << " : \"" <<
     fPartAbbreviationDisplayText << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartInstrumentName" << " : \"" <<
     fPartInstrumentName << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fPartInstrumentAbbreviation" << " : \"" <<
     fPartInstrumentAbbreviation << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartNumberOfMeasures" << " : " <<
     fPartNumberOfMeasures <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartContainsMultipleFullBarRests" << " : " <<
     fPartContainsMultipleFullBarRests <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fPartCurrentMeasurePosition" << " : " <<
     fPartCurrentMeasurePosition <<
-    endl;
+    std::endl;
 
   // print all the staves
   if (fPartAllStavesList.size ()) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fPartAllStavesList" << " : " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -3259,46 +3257,46 @@ void msrPart::printSummary (ostream& os) const
   // print the harmonies staff if any
   if (fPartHarmoniesStaff) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fPartHarmoniesStaff" << " : " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     os <<
       fPartHarmoniesStaff <<
-      endl;
+      std::endl;
     --gIndenter;
   }
 
   // print the figured bass staff if any
   if (fPartFiguredBassStaff) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fPartFiguredBassStaff" << " : " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     os <<
       fPartFiguredBassStaff <<
-      endl;
+      std::endl;
     --gIndenter;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrPart::printSlices (ostream& os) const
+void msrPart::printSlices (std::ostream& os) const
 {
   os << "MSR part slices";
 
-  os << endl << endl;
+  os << std::endl << std::endl;
 
   ++gIndenter;
 
   if (fPartAllStavesList.size ()) {
-    list<S_msrStaff>::const_iterator
+    std::list<S_msrStaff>::const_iterator
       iBegin = fPartAllStavesList.begin (),
       iEnd   = fPartAllStavesList.end (),
       i      = iBegin;
@@ -3306,20 +3304,20 @@ void msrPart::printSlices (ostream& os) const
       (*i)->
         printSlices (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrPart& elt)
+std::ostream& operator << (std::ostream& os, const S_msrPart& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

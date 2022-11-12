@@ -29,8 +29,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -83,7 +81,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
     gLogStream <<
       "Creating a newborn clone of a " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -119,7 +117,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
     gLogStream <<
       "Creating a newborn clone of a " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -168,7 +166,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRepeatCoda::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRepeatCoda>*
@@ -179,7 +177,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRepeatCoda::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -190,7 +188,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrRepeatCoda::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrRepeatCoda>*
@@ -201,7 +199,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrRepeatCoda::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -214,25 +212,25 @@ void msrRepeatCoda::browseData (basevisitor* v)
   browser.browse (*fRepeatCodaSegment);
 }
 
-string msrRepeatCoda::asString () const
+std::string msrRepeatCoda::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "RepeatCoda" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   return s.str ();
 }
 
-void msrRepeatCoda::print (ostream& os) const
+void msrRepeatCoda::print (std::ostream& os) const
 {
   os <<
-    endl <<
+    std::endl <<
     '[' <<
     asString () <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -241,16 +239,16 @@ void msrRepeatCoda::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrRepeatCoda& elt)
+std::ostream& operator << (std::ostream& os, const S_msrRepeatCoda& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

@@ -12,8 +12,6 @@
 #include "mxsr2musicxmlComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,7 +24,7 @@ S_mfcPassComponent createMxsr2musicxmlComponent ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the mxsr2musicxml pass component" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -44,7 +42,7 @@ S_mfcPassComponent createMxsr2musicxmlComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));

@@ -17,24 +17,22 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 EXP void mfslWarning (
-  const string&       message,
+  const std::string&       message,
   const mfsl::location& loc)
 {
   gLogStream <<
     "### [MFSL] WARNING " <<
     loc << ": " << message <<
-    endl;
+    std::endl;
 }
 
 EXP void mfslError (
-  const string&       message,
+  const std::string&       message,
   const mfsl::location& loc)
 {
   gIndenter.resetToZero ();
@@ -42,7 +40,7 @@ EXP void mfslError (
   gLogStream <<
     "### [MFSL] ERROR " <<
     loc << ": " << message <<
-    endl;
+    std::endl;
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);
@@ -52,7 +50,7 @@ EXP void mfslError (
 }
 
 EXP void mfslInternalError (
-  const string&       message,
+  const std::string&       message,
   const mfsl::location& loc)
 {
   gIndenter.resetToZero ();
@@ -60,7 +58,7 @@ EXP void mfslInternalError (
   gLogStream <<
     "### [MFSL] INNTERNAL ERROR " <<
     loc << ": " << message <<
-    endl;
+    std::endl;
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);
@@ -70,12 +68,12 @@ EXP void mfslInternalError (
 }
 
 EXP void mfslFileError (
-  const string& inputSourceName,
-  const string& message)
+  const std::string& inputSourceName,
+  const std::string& message)
 {
   gLogStream <<
     "### MFSL file error: " << message <<
-    endl;
+    std::endl;
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);
@@ -88,7 +86,7 @@ EXP void mfslOptionsIncompatibilityError (
   const S_oahAtom atom1,
   const S_oahAtom atom2)
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "### MFSL options incompatibility: " <<
@@ -96,9 +94,9 @@ EXP void mfslOptionsIncompatibilityError (
     " and " <<
     atom2->fetchNamesBetweenQuotes () <<
     " are incompatible" <<
-    endl;
+    std::endl;
 
-  string message = s.str ();
+  std::string message = s.str ();
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);
