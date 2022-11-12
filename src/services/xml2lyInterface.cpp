@@ -80,7 +80,7 @@ static void catchSignals ()
 static void catchSignals ()  {}
 #endif
 
-void allowCoreDumps ()zsgf
+void allowCoreDumps ()
 {
 //_______________________________________________________________________________
 // #include <unistd.h>
