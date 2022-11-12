@@ -51,8 +51,7 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
                           msrMeasureElement (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int inputLineNumber);
 
     virtual               ~msrMeasureElement ();
 
@@ -108,6 +107,12 @@ class EXP msrMeasureElement : public msrElement
     // public services
     // ------------------------------------------------------
 
+    // uplink to measure
+    virtual S_msrMeasure  fetchMeasureElementUpLinkToMeasure () const = 0;
+
+    virtual void          setMeasureElementUpLinkToMeasure (
+                            S_msrMeasure measure) = 0;
+
     std::string           fetchMeasureElementMeasureNumber () const;
 
     static bool           compareMeasureElementsByIncreasingMeasurePosition (
@@ -154,7 +159,6 @@ class EXP msrMeasureElement : public msrElement
     // protected fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fMeasureElementUpLinkToMeasure; // JMI VIRER
     Rational              fMeasureElementSoundingWholeNotes;
 
     Rational              fMeasureElementMeasurePosition;
@@ -185,10 +189,8 @@ class EXP msrMeasureElementLambda : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setMeasureElementLambdaUpLinkToMeasure (
-                            S_msrMeasure measure);
-
-    S_msrMeasure          getMeasureElementLambdaUpLinkToMeasure () const;
+    void                  setMeasureElementUpLinkToMeasure (
+                            S_msrMeasure measure) override;
 
   public:
 
@@ -199,6 +201,14 @@ class EXP msrMeasureElementLambda : public msrMeasureElement
     void                  acceptOut (basevisitor* v) override;
 
     void                  browseData (basevisitor* v) override = 0; // JMI ??? v0.9.66
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    // upLink to measure
+    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
 
   public:
 

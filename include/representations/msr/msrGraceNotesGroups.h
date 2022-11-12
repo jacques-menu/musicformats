@@ -131,7 +131,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // public services
     // ------------------------------------------------------
 
-    // tuplet uplink
+    // uplink to tuplet
     S_msrTuplet           fetchGraceNoteGroupUpLinkToTuplet () const;
 
     // part uplink

@@ -88,7 +88,13 @@ class EXP msrChord : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-    // tuplet upLink
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            S_msrMeasure measure) override;
+
+    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
+
+    // uplink to tuplet
     void                  setChordDirectUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
                               { fChordDirectUpLinkToTuplet = tuplet; }
@@ -96,7 +102,7 @@ class EXP msrChord : public msrTupletElement
     S_msrTuplet           getChordDirectUpLinkToTuplet () const
                             { return fChordDirectUpLinkToTuplet; }
 
-    // grace notes group upLink
+    // uplink to grace notes group
     void                  setChordDirectUpLinkToGraceNotesGroup (
                             const S_msrGraceNotesGroup& graceNotesGroup)
                               {
@@ -354,13 +360,10 @@ class EXP msrChord : public msrTupletElement
     // public services
     // ------------------------------------------------------
 
-    // measure upLink
-    S_msrMeasure          fetchChordUpLinkToMeasure () const;
-
-    // tuplet upLink
+    // uplink to tuplet
     S_msrTuplet           fetchChordUpLinkToTuplet () const;
 
-    // grace notes group upLink
+    // uplink to grace notes group
     S_msrGraceNotesGroup  fetchChordUpLinkToGraceNotesGroup () const;
 
     // score upLink
@@ -504,13 +507,13 @@ class EXP msrChord : public msrTupletElement
     // private fields
     // ------------------------------------------------------
 
-    // measure uplink
-    S_msrMeasure          fChordElementUpLinkToMeasure;
+    // uplink to measure
+    S_msrMeasure          fChordUpLinkToMeasure;
 
-    // tuplet uplink
+    // uplink to tuplet
     S_msrTuplet           fChordDirectUpLinkToTuplet;
 
-    // grace notes group uplink
+    // uplink to grace notes group
     S_msrGraceNotesGroup  fChordDirectUpLinkToGraceNotesGroup;
 
     msrChordInKind        fChordKind;

@@ -74,6 +74,12 @@ class EXP msrTuplet : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            S_msrMeasure measure) override;
+
+    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
+
     // tuplet kind
     void                  setTupletKind (
                             msrTupletInKind tupletKind)
@@ -82,7 +88,7 @@ class EXP msrTuplet : public msrTupletElement
     msrTupletInKind       getTupletKind () const
                               { return fTupletKind; }
 
-    // tuplet uplink
+    // uplink to tuplet
     void                  setTupletDirectUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
                               { fTupletDirectUpLinkToTuplet = tuplet; }
@@ -157,10 +163,7 @@ class EXP msrTuplet : public msrTupletElement
     // public services
     // ------------------------------------------------------
 
-    // measure upLink
-    S_msrMeasure          fetchTupletUpLinkToMeasure () const;
-
-    // tuplet upLink
+    // uplink to tuplet
     S_msrTuplet           fetchTupletUpLinkToTuplet () const;
 
     void                  appendNoteToTuplet (
@@ -217,9 +220,12 @@ class EXP msrTuplet : public msrTupletElement
     // private fields
     // ------------------------------------------------------
 
+    // uplink to measure
+    S_msrMeasure          fTupletUpLinkToMeasure;
+
     msrTupletInKind       fTupletKind;
 
-    // tuplet uplink
+    // uplink to tuplet
     S_msrTuplet           fTupletDirectUpLinkToTuplet;
 
     // number
