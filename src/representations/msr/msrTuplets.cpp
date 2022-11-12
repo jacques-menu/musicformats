@@ -200,7 +200,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 //   fMeasureElementMeasurePosition = measurePosition;
 // }
 
-S_msrMeasure msrTuplet::fetchTupletUpLinkToMeasure () const
+S_msrMeasure msrTuplet::fetchMeasureElementUpLinkToMeasure () const
 {
   S_msrMeasure result;
 
@@ -209,14 +209,14 @@ S_msrMeasure msrTuplet::fetchTupletUpLinkToMeasure () const
       break;
 
     case msrTupletInKind::kTupletInMeasure:
-      result = fMeasureElementUpLinkToMeasure;
+      result = fTupletUpLinkToMeasure;
       break;
 
     case msrTupletInKind::kTupletInTuplet:
       if (fTupletDirectUpLinkToTuplet) {
         result =
           fTupletDirectUpLinkToTuplet->
-            fetchTupletUpLinkToMeasure ();
+            fetchMeasureElementUpLinkToMeasure ();
       }
       break;
   } // switch
@@ -224,7 +224,19 @@ S_msrMeasure msrTuplet::fetchTupletUpLinkToMeasure () const
   return result;
 }
 
-// tuplet upLink
+// uplink to tuplet
+void msrTuplet::setMeasureElementUpLinkToMeasure (
+  S_msrMeasure measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+  fTupletUpLinkToMeasure = measure;
+}
+
 S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
 {
   S_msrTuplet result;
@@ -273,13 +285,14 @@ void msrTuplet::appendNoteToTuplet (
   note->setPositionInTuplet (
     fTupletElementsList.size ());
 
-  // register note's tuplet upLink
+  // register note's uplink to tuplet
   note->
     setNoteDirectUpLinkToTuplet (this);
 
-  // register note's measure upLink // JMI ???
+  // register note's uplink to measure // JMI ???
   note->
-    setMeasureElementUpLinkToMeasure (fMeasureElementUpLinkToMeasure);
+    setMeasureElementUpLinkToMeasure (
+      fTupletUpLinkToMeasure);
 
   // account for note duration in tuplet duration
   fMeasureElementSoundingWholeNotes +=
@@ -530,7 +543,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       note <<
       " from tuplet " << asString () <<
       " in voice \"" <<
-      fMeasureElementUpLinkToMeasure->
+      fTupletUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"," <<
@@ -550,7 +563,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
     s <<
       "cannot remove the first note of an empty tuplet " <<
       " in voice \"" <<
-      fMeasureElementUpLinkToMeasure->
+      fTupletUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"";
@@ -618,7 +631,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
     s <<
       "cannot remove the last note of an empty tuplet " <<
       " in voice \"" <<
-      fMeasureElementUpLinkToMeasure->
+      fTupletUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"";
@@ -676,7 +689,7 @@ if (false) { // JMI
   // compute tuplet's position in voice
   Rational
      voicePosition =
-      fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
+      fTupletUpLinkToMeasure->getMeasureVoicePosition ()
         +
       measurePosition;
 
@@ -692,7 +705,7 @@ if (false) { // JMI
   // update current position in voice
   S_msrVoice
     voice =
-      fMeasureElementUpLinkToMeasure->
+      fTupletUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ();
 
   voice->
@@ -1074,10 +1087,10 @@ void msrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementUpLinkToMeasure" << " : ";
-  if (fMeasureElementUpLinkToMeasure) {
+    "fTupletUpLinkToMeasure" << " : ";
+  if (fTupletUpLinkToMeasure) {
     os <<
-      fMeasureElementUpLinkToMeasure->asShortString ();
+      fTupletUpLinkToMeasure->asShortString ();
   }
   else {
     os << "[NONE]";
@@ -1227,10 +1240,10 @@ void msrTuplet::printShort (std::ostream& os)
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementUpLinkToMeasure" << " : ";
-  if (fMeasureElementUpLinkToMeasure) {
+    "fTupletUpLinkToMeasure" << " : ";
+  if (fTupletUpLinkToMeasure) {
     os <<
-      fMeasureElementUpLinkToMeasure->asShortString ();
+      fTupletUpLinkToMeasure->asShortString ();
   }
   else {
     os << "[NONE]";

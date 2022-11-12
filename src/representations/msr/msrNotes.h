@@ -196,7 +196,13 @@ class EXP msrNote : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-    // chord upLink
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            S_msrMeasure measure) override;
+
+    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
+
+    // uplink to chord
     void                  setNoteDirectUpLinkToChord (
                             const S_msrChord& chord)
                               { fNoteDirectUpLinkToChord = chord; }
@@ -204,7 +210,7 @@ class EXP msrNote : public msrTupletElement
     S_msrChord            getNoteDirectUpLinkToChord () const
                               { return fNoteDirectUpLinkToChord; }
 
-    // grace notes group upLink
+    // uplink to grace notes group
     void                  setNoteDirectUpLinkToGraceNotesGroup (
                             const S_msrGraceNotesGroup& graceNotesGroup)
                               { fNoteDirectUpLinkToGraceNotesGroup = graceNotesGroup; }
@@ -212,7 +218,7 @@ class EXP msrNote : public msrTupletElement
     S_msrGraceNotesGroup  getNoteDirectUpLinkToGraceNotesGroup () const
                               { return fNoteDirectUpLinkToGraceNotesGroup; }
 
-    // tuplet upLink
+    // uplink to tuplet
     void                  setNoteDirectUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
                               { fNoteDirectUpLinkToTuplet = tuplet; }
@@ -453,7 +459,8 @@ class EXP msrNote : public msrTupletElement
     // note lyrics
     // -------------------------------
 
-    std::list<S_msrSyllable>   getNoteSyllables () const
+    std::list<S_msrSyllable>
+                          getNoteSyllables () const
                               { return fNoteSyllables; }
 
     // elements attached to the note
@@ -727,13 +734,10 @@ class EXP msrNote : public msrTupletElement
     // public services
     // ------------------------------------------------------
 
-    // measure upLink
-    S_msrMeasure          fetchNoteUpLinkToMeasure () const;
-
-    // tuplet upLink
+    // uplink to tuplet
 // JMI ???    S_msrTuplet           fetchNoteUpLinkToTuplet () const;
 
-    // grace notes group upLink
+    // uplink to grace notes group
     S_msrGraceNotesGroup  fetchNoteUpLinkToGraceNotesGroup () const;
 
     // voice upLink
@@ -941,6 +945,7 @@ class EXP msrNote : public msrTupletElement
     // upLinks
     // ------------------------------------------------------
 
+    // uplink to measure
     S_msrMeasure          fNoteUpLinkToMeasure;
 
     S_msrChord            fNoteDirectUpLinkToChord;

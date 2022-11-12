@@ -47,16 +47,13 @@ const Rational
   msrMeasureElement::K_NO_WHOLE_NOTES (-444444, 1);
 
 msrMeasureElement::msrMeasureElement (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int inputLineNumber)
     : msrElement (inputLineNumber)
 //       fMeasureElementMeasureMoment (
 //         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
 //       fMeasureElementVoiceMoment (
 //         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
 {
-  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
-
   fMeasureElementSoundingWholeNotes = Rational (0, 1),
 
   fMeasureElementMeasurePosition = msrMoment::K_NO_POSITION;
@@ -269,14 +266,18 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 
 std::string msrMeasureElement::fetchMeasureElementMeasureNumber () const
 {
+  S_msrMeasure
+    upLinkToMeasure =
+      fetchMeasureElementUpLinkToMeasure ();
+
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fMeasureElementUpLinkToMeasure != nullptr,
-    "fMeasureElementUpLinkToMeasure is null");
+    upLinkToMeasure != nullptr,
+    "upLinkToMeasure is null");
 
   return
-    fMeasureElementUpLinkToMeasure->
+    upLinkToMeasure->
       getMeasureNumber ();
 }
 
@@ -377,18 +378,13 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt)
 msrMeasureElementLambda::msrMeasureElementLambda (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrElement (inputLineNumber)
+    : msrMeasureElement (inputLineNumber)
 //       fMeasureElementMeasureMoment (
 //         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
 //       fMeasureElementVoiceMoment (
 //         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
 {
-  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
-
-  fMeasureElementSoundingWholeNotes = Rational (0, 1),
-
-  fMeasureElementMeasurePosition = msrMoment::K_NO_POSITION;
-  fMeasureElementVoicePosition   = msrMoment::K_NO_POSITION;
+  fMeasureElementLambdaUpLinkToMeasure = upLinkToMeasure;
 }
 
 msrMeasureElementLambda::~msrMeasureElementLambda ()
@@ -420,9 +416,15 @@ void msrMeasureElementLambda::acceptIn (basevisitor* v)
   }
 }
 
-void msrMeasureElementLambda::setMeasureElementLambdaUpLinkToMeasure (
+void msrMeasureElementLambda::setMeasureElementUpLinkToMeasure (
   S_msrMeasure measure)
 {
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
@@ -439,12 +441,12 @@ void msrMeasureElementLambda::setMeasureElementLambdaUpLinkToMeasure (
   }
 #endif
 
-  fMeasureElementLambaUpLinkToMeasure = measure;
+  fMeasureElementLambdaUpLinkToMeasure = measure;
 }
 
-S_msrMeasure msrMeasureElementLambda::getMeasureElementLambdaUpLinkToMeasure () const
+S_msrMeasure msrMeasureElementLambda::fetchMeasureElementUpLinkToMeasure () const
 {
-  return fMeasureElementLambaUpLinkToMeasure;
+  return fMeasureElementLambdaUpLinkToMeasure;
 }
 
 void msrMeasureElementLambda::acceptOut (basevisitor* v)

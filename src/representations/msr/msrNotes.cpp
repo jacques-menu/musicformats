@@ -372,7 +372,7 @@ msrNote::~msrNote ()
 {}
 
 //________________________________________________________________________
-S_msrMeasure msrNote::fetchNoteUpLinkToMeasure () const
+S_msrMeasure msrNote::fetchMeasureElementUpLinkToMeasure () const
 {
   S_msrMeasure result;
 
@@ -384,14 +384,14 @@ S_msrMeasure msrNote::fetchNoteUpLinkToMeasure () const
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteUnpitchedInMeasure:
-      result = fMeasureElementUpLinkToMeasure;
+      result = fNoteUpLinkToMeasure;
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       if (fNoteDirectUpLinkToChord) {
         result =
           fNoteDirectUpLinkToChord->
-            getMeasureElementUpLinkToMeasure ();
+            fetchMeasureElementUpLinkToMeasure ();
       }
       break;
 
@@ -401,7 +401,7 @@ S_msrMeasure msrNote::fetchNoteUpLinkToMeasure () const
       if (fNoteDirectUpLinkToTuplet) {
         result =
           fNoteDirectUpLinkToTuplet->
-            getMeasureElementUpLinkToMeasure ();
+            fetchMeasureElementUpLinkToMeasure ();
       }
       break;
 
@@ -434,7 +434,20 @@ S_msrMeasure msrNote::fetchNoteUpLinkToMeasure () const
   return result;
 }
 
-// grace notes group upLink
+// uplink to measure
+void msrNote::setMeasureElementUpLinkToMeasure (
+  S_msrMeasure measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+  fNoteUpLinkToMeasure = measure;
+}
+
+// uplink to grace notes group
 S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
 {
   S_msrGraceNotesGroup result;
@@ -459,7 +472,7 @@ S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
       /* JMI
         result =
           fNoteDirectUpLinkToTuplet->
-            getMeasureElementUpLinkToMeasure ()->
+            fetchMeasureElementUpLinkToMeasure ()->
               fetchMeasureUpLinkToVoice ();
       */
       }
@@ -517,9 +530,9 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteRegularInChord:
-      if (fMeasureElementUpLinkToMeasure) {
+      if (fNoteUpLinkToMeasure) {
         result =
-          fMeasureElementUpLinkToMeasure->
+          fNoteUpLinkToMeasure->
             fetchMeasureUpLinkToVoice ();
       }
       break;
@@ -533,7 +546,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
         S_msrMeasure
           tupletDirectUpLinkToMeasure =
             fNoteDirectUpLinkToTuplet->
-              getMeasureElementUpLinkToMeasure ();
+              fetchMeasureElementUpLinkToMeasure ();
 
         if (tupletDirectUpLinkToMeasure) {
           result =
@@ -578,9 +591,9 @@ S_msrStaff msrNote::fetchUpLinkToNoteToStaff () const
 {
   S_msrStaff result;
 
-  if (fMeasureElementUpLinkToMeasure) {
+  if (fNoteUpLinkToMeasure) {
     result =
-      fMeasureElementUpLinkToMeasure->
+      fNoteUpLinkToMeasure->
         fetchMeasureUpLinkToStaff ();
   }
 
@@ -591,9 +604,9 @@ S_msrPart msrNote::fetchUpLinkToNoteToPart () const
 {
   S_msrPart result;
 
-  if (fMeasureElementUpLinkToMeasure) {
+  if (fNoteUpLinkToMeasure) {
     result =
-      fMeasureElementUpLinkToMeasure->
+      fNoteUpLinkToMeasure->
         fetchMeasureUpLinkToPart ();
   }
 
@@ -604,9 +617,9 @@ S_msrPartGroup msrNote::fetchNoteUpLinkToPartGroup () const
 {
   S_msrPartGroup result;
 
-  if (fMeasureElementUpLinkToMeasure) {
+  if (fNoteUpLinkToMeasure) {
     result =
-      fMeasureElementUpLinkToMeasure->
+      fNoteUpLinkToMeasure->
         fetchMeasureUpLinkToPartGroup ();
   }
 
@@ -617,9 +630,9 @@ S_msrScore msrNote::fetchUpLinkToNoteToScore () const
 {
   S_msrScore result;
 
-  if (fMeasureElementUpLinkToMeasure) {
+  if (fNoteUpLinkToMeasure) {
     result =
-      fMeasureElementUpLinkToMeasure->
+      fNoteUpLinkToMeasure->
         fetchMeasureUpLinkToScore ();
   }
 
@@ -2228,13 +2241,13 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     fMeasureElementUpLinkToMeasure != nullptr,
-//     "fMeasureElementUpLinkToMeasure is null");
+//     fNoteUpLinkToMeasure != nullptr,
+//     "fNoteUpLinkToMeasure is null");
 //
 //   // compute note's position in voice
 //   Rational
 //      voicePosition =
-//       fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
+//       fNoteUpLinkToMeasure->getMeasureVoicePosition ()
 //         +
 //       measurePosition;
 //
@@ -2246,7 +2259,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //   // update current position in voice
 //   S_msrVoice
 //     voice =
-//       fMeasureElementUpLinkToMeasure->
+//       fNoteUpLinkToMeasure->
 //         fetchMeasureUpLinkToVoice ();
 //
 //   voice->
@@ -3805,7 +3818,7 @@ void msrNote::browseData (basevisitor* v)
     // fetch the score
     S_msrScore
       score =
-        fMeasureElementUpLinkToMeasure->
+        fNoteUpLinkToMeasure->
           fetchMeasureUpLinkToScore ();
 
     if (score) {
@@ -5566,18 +5579,18 @@ void msrNote::print (std::ostream& os) const
 //     fMeasureElementVoiceMoment;
 //   --gIndenter;
 
-  // print note measure uplink
+  // print note uplink to measure
   os <<
     std::setw (fieldWidth) <<
-    "fMeasureElementUpLinkToMeasure" << " : ";
+    "fNoteUpLinkToMeasure" << " : ";
 
-  if (fMeasureElementUpLinkToMeasure) {
+  if (fNoteUpLinkToMeasure) {
     os << std::endl;
 
     ++gIndenter;
 
     os <<
-      fMeasureElementUpLinkToMeasure->asShortString () <<
+      fNoteUpLinkToMeasure->asShortString () <<
       std::endl;
 
     --gIndenter;
@@ -5588,7 +5601,7 @@ void msrNote::print (std::ostream& os) const
   }
   os << std::endl;
 
-  // print note chord uplink
+  // print note uplink to chord
   os <<
     std::setw (fieldWidth) <<
     "fNoteDirectUpLinkToChord" << " : ";
@@ -5603,7 +5616,7 @@ void msrNote::print (std::ostream& os) const
   }
   os << std::endl;
 
-  // print note grace notes group uplink
+  // print note uplink to grace notes group
   os <<
     std::setw (fieldWidth) <<
     "fNoteDirectUpLinkToGraceNotesGroup" << " :";
@@ -5621,7 +5634,7 @@ void msrNote::print (std::ostream& os) const
   }
   os << std::endl;
 
-  // print note tuplet uplink
+  // print note uplink to tuplet
   os <<
     std::setw (fieldWidth) <<
     "fNoteDirectUpLinkToTuplet" << " : ";
@@ -5711,9 +5724,9 @@ void msrNote::print (std::ostream& os) const
   // may be unknown if there is no time signature
   Rational
     measureFullLength =
-      fMeasureElementUpLinkToMeasure
+      fNoteUpLinkToMeasure
         ?
-          fMeasureElementUpLinkToMeasure->
+          fNoteUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
         : Rational (0, 1); // JMI KAKA
 
@@ -7859,7 +7872,7 @@ std::ostream& operator << (std::ostream& os, const S_msrNote& elt)
 }
 
 /* JMI
-// tuplet upLink
+// uplink to tuplet
 S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 {
   S_msrTuplet result;

@@ -938,13 +938,13 @@ void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
   }
 #endif
 
-  // populate elem measure upLink
+  // populate elem uplink to measure
   elem->
     setMeasureElementUpLinkToMeasure (this);
 
   // set elem's measure number
   elem->
-    getMeasureElementUpLinkToMeasure ()->
+    fetchMeasureElementUpLinkToMeasure ()->
       setMeasureNumber (
         fMeasureNumber);
 
@@ -992,7 +992,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 
   // set elem's measure number
   elem->
-    getMeasureElementUpLinkToMeasure ()->
+    fetchMeasureElementUpLinkToMeasure ()->
       setMeasureNumber (
         fMeasureNumber);
 
@@ -1309,7 +1309,7 @@ void msrMeasure::insertElementAtMeasurePosition (
 
   // set elem's measure number
   elem->
-    getMeasureElementUpLinkToMeasure ()->
+    fetchMeasureElementUpLinkToMeasure ()->
       setMeasureNumber (
         fMeasureNumber);
 
@@ -2032,7 +2032,7 @@ void msrMeasure::appendBarLineToMeasure (S_msrBarLine barLine)
 
   // register barLine's measure number
   barLine->
-    getMeasureElementUpLinkToMeasure ()->
+    fetchMeasureElementUpLinkToMeasure ()->
       setMeasureNumber (
         fMeasureNumber);
 
@@ -2300,13 +2300,13 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 
   ++gIndenter;
 
-  // populate measure upLink
+  // populate uplink to measure
   note->
     setMeasureElementUpLinkToMeasure (this);
 
   // set note's measure number
   note->
-    getMeasureElementUpLinkToMeasure ()->
+    fetchMeasureElementUpLinkToMeasure ()->
       setMeasureNumber (
         fMeasureNumber);
 
@@ -2448,7 +2448,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (S_msrNote note)
 
   ++gIndenter;
 
-  // populate measure upLink
+  // populate uplink to measure
   note->
     setMeasureElementUpLinkToMeasure (this);
 
@@ -2530,7 +2530,7 @@ void msrMeasure::appendNoteToMeasureClone (S_msrNote note)
   */
     // regular insertion in current measure
 
-    // populate measure upLink
+    // populate uplink to measure
     note->
       setMeasureElementUpLinkToMeasure (this);
 
@@ -2644,7 +2644,7 @@ void msrMeasure::appendChordToMeasure (S_msrChord chord)
   int inputLineNumber =
     chord->getInputLineNumber ();
 
-  // populate measure upLink
+  // populate uplink to measure
   chord->setMeasureElementUpLinkToMeasure (this);
 
 #ifdef TRACING_IS_ENABLED
@@ -2727,7 +2727,7 @@ void msrMeasure::appendTupletToMeasure (S_msrTuplet tuplet)
 //       fCurrentMeasureWholeNotesDuration,
 //       "msrMeasure::appendTupletToMeasure (S_msrChord chord)");
 
-  // populate measure upLink
+  // populate uplink to measure
   tuplet->setMeasureElementUpLinkToMeasure (this);
 
   // append the tuplet to the measure elements std::list
@@ -2770,7 +2770,7 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
 
   // set harmony's measure number
   harmony->
-    getMeasureElementUpLinkToMeasure ()->
+    fetchMeasureElementUpLinkToMeasure ()->
       setMeasureNumber (
         fMeasureNumber);
 
@@ -2832,7 +2832,7 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
 
   // set harmony's measure number
   harmony->
-    getMeasureElementUpLinkToMeasure ()->
+    fetchMeasureElementUpLinkToMeasure ()->
       setMeasureNumber (
         fMeasureNumber);
 
@@ -2893,7 +2893,7 @@ void msrMeasure::appendFiguredBassToMeasure (
 
   // set figuredBass's measure number
   figuredBass->
-    getMeasureElementUpLinkToMeasure ()->
+    fetchMeasureElementUpLinkToMeasure ()->
       setMeasureNumber (
         fMeasureNumber);
 

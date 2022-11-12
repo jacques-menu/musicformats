@@ -17094,11 +17094,11 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
   copyNoteElementsToChord (
     chordFirstNote, chord);
 
-  // get chordFirstNote's measure upLink
+  // get chordFirstNote's uplink to measure
   S_msrMeasure
     chordFirstNoteDirectUpLinkToMeasure =
       chordFirstNote->
-        getMeasureElementUpLinkToMeasure ();
+        fetchMeasureElementUpLinkToMeasure ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChordsDetails ()) {
@@ -17110,7 +17110,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
       std::endl <<
       "+++++++++++++++++" <<
       std::endl << std::endl <<
-      "++++++++++++++++ chordFirstNote->getMeasureElementUpLinkToMeasure () =";
+      "++++++++++++++++ chordFirstNote->fetchMeasureElementUpLinkToMeasure () =";
 
     if (chordFirstNoteDirectUpLinkToMeasure) {
       gLogStream <<
@@ -18460,7 +18460,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-    // only after appendNoteToTuplet() has set the note's tuplet upLink
+    // only after appendNoteToTuplet() has set the note's uplink to tuplet
     gLogStream <<
       "Adding first note " <<
       firstNote->
@@ -18472,7 +18472,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
   }
 #endif
 
-  // set tuplet's tuplet uplink
+  // set tuplet's uplink to tuplet
   if (fTupletsStack.size ()) {
     tuplet->
       setTupletDirectUpLinkToTuplet (
@@ -20143,7 +20143,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //         S_msrMeasure
 //           noteMeasure =
 //             note->
-//               getMeasureElementUpLinkToMeasure ();
+//               fetchMeasureElementUpLinkToMeasure ();
 //
 //         // sanity check
 //         mfAssert (

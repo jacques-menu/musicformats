@@ -6055,7 +6055,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
       {
-        // get theMsrNote's tuplet uplink
+        // get theMsrNote's uplink to tuplet
         S_msrTuplet
           noteDirectUpLinkToTuplet =
             theMsrNote->

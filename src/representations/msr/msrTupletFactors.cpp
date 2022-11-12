@@ -289,7 +289,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //   return result;
 // }
 //
-// // tuplet upLink
+// // uplink to tuplet
 // S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
 // {
 //   S_msrTuplet result;
@@ -468,11 +468,11 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //   note->setPositionInTuplet (
 //     fTupletElementsList.size ());
 //
-//   // register note's tuplet upLink
+//   // register note's uplink to tuplet
 //   note->
 //     setNoteDirectUpLinkToTuplet (this);
 //
-//   // register note's measure upLink // JMI ???
+//   // register note's uplink to measure // JMI ???
 //   note->
 //     setMeasureElementUpLinkToMeasure (fMeasureElementUpLinkToMeasure);
 //
