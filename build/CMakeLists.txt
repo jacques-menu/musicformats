@@ -171,13 +171,17 @@ message (STATUS "-----> LXML_SRC_FOLDERS: ${LXML_SRC_FOLDERS}")
 # MusicFormats directories, sources and headers
 #===============================================================
 
-set (MF_CLI_SAMPLES_DIR ${ROOT_DIR}/src/clisamples)
-message (STATUS "-----> MF_CLI_SAMPLES_DIR: ${MF_CLI_SAMPLES_DIR}")
-
 set (MF_SRC_DIR  ${ROOT_DIR}/src)
 message (STATUS "-----> MF_SRC_DIR: ${MF_SRC_DIR}")
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mflibrary components oah wae manpage)
+set (MF_CLI_SAMPLES_DIR ${MF_SRC_DIR}/clisamples)
+message (STATUS "-----> MF_CLI_SAMPLES_DIR: ${MF_CLI_SAMPLES_DIR}")
+
+# set (MF_SERVICES_DIR ${MF_SRC_DIR}/services)
+# message (STATUS "-----> MF_SERVICES_DIR: ${MF_SERVICES_DIR}")
+
+
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mflibrary components oah wae manpage services)
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} interpreters/mfslinterpreter interpreters/ischemeinterpreter)
 
@@ -195,7 +199,6 @@ set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/guido passes/mxsr2guido co
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/msdl representations/msdr passes/msdl2msr passes/msdl2msr converters/msdl2braille converters/msdl2guido converters/msdl2lilypond converters/msdl2musicxml converters/msdlconverter)
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} services)
 
 message (STATUS "-----> MF_SRC_FOLDERS: ${MF_SRC_FOLDERS}")
 

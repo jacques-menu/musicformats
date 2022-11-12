@@ -495,7 +495,12 @@ int xml2ly (
 }
 
 //_______________________________________________________________________________
+// #include "xml2lyInterface.h"
+
 int main (int argc, char* argv[])
 {
-  return xml2ly (argc, argv);
+  return
+    xml2ly (
+      argc,
+      argv);
 }
