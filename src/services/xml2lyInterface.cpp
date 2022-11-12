@@ -109,7 +109,7 @@ void allowCoreDumps ()
 }
 
 //_______________________________________________________________________________
-int xml2ly (
+int xml2ly_BIS (
   int   argc,
   char* argv[])
 {

@@ -55,77 +55,10 @@ using namespace std;
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
-#ifndef WIN32
-
-static void _sigaction (int signal, siginfo_t *si, void *arg)
-{
-  cerr << "Signal #" << signal << " catched!" << endl;
-  exit (-2);
-}
-
-static void catchSignals ()
-{
-  struct sigaction sa;
-
-  memset (&sa, 0, sizeof(struct sigaction));
-
-  sigemptyset (&sa.sa_mask);
-
-  sa.sa_sigaction = _sigaction;
-  sa.sa_flags     = SA_SIGINFO;
-
-  sigaction (SIGSEGV, &sa, NULL);
-  sigaction (SIGILL, &sa, NULL);
-  sigaction (SIGFPE, &sa, NULL);
-}
-
-#else
-static void catchSignals ()  {}
-#endif
-
-//_______________________________________________________________________________
-void allowCoreDumps ()
-{
-// #include <unistd.h>
-// #include <signal.h>
-// #include <sys/resource.h>
-// #include <stdio.h>
-//
-//   pid_t pid = getpid();
-//
-//   struct rlimit l;
-//   int ret = getrlimit(RLIMIT_CORE, &l);
-//
-//   printf ("--> getrlimit returned %d\n", ret);
-//   printf ("--> rlim_cur = %llu\n", l.rlim_cur);
-//   printf ("--> rlim_max = %llu\n", l.rlim_max);
-//
-//   l.rlim_cur = l.rlim_max;
-//   printf ("--> setrlimit returned %d\n", setrlimit(RLIMIT_CORE, &l));
-//
-//   bool killMyself = false;
-//
-//   if (killMyself) {
-//     printf ("Time to kill myself\n");
-//     kill (pid, SIGBUS);
-//   }
-}
-
-//_______________________________________________________________________________
 int xml2ly (
   int   argc,
   char* argv[])
 {
-  // setup signals catching
-  // ------------------------------------------------------
-
-// JMI  catchSignals ();
-
-  // core dumps
-  // ------------------------------------------------------
-
-  allowCoreDumps ();
-
   // the service name
   // ------------------------------------------------------
 
@@ -135,16 +68,6 @@ int xml2ly (
   // ------------------------------------------------------
 
   createTheGlobalIndentedOstreams (cout, cerr);
-
-// JMI testBool ();
-
-// JMI  testIncludeOptionsFromFile ();
-
-  testMsrMomentComparisons (cout);
-
-//   gLogStream <<
-//     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<
-//     endl;
 
   // apply early options if any
   // ------------------------------------------------------
@@ -495,12 +418,90 @@ int xml2ly (
 }
 
 //_______________________________________________________________________________
-// #include "xml2lyInterface.h"
+#ifndef WIN32
+
+static void _sigaction (int signal, siginfo_t *si, void *arg)
+{
+  cerr << "Signal #" << signal << " catched!" << endl;
+  exit (-2);
+}
+
+static void catchSignals ()
+{
+  struct sigaction sa;
+
+  memset (&sa, 0, sizeof(struct sigaction));
+
+  sigemptyset (&sa.sa_mask);
+
+  sa.sa_sigaction = _sigaction;
+  sa.sa_flags     = SA_SIGINFO;
+
+  sigaction (SIGSEGV, &sa, NULL);
+  sigaction (SIGILL, &sa, NULL);
+  sigaction (SIGFPE, &sa, NULL);
+}
+
+#else
+static void catchSignals ()  {}
+#endif
+
+//_______________________________________________________________________________
+// void allowCoreDumps () JMI v0.9.66 USELESS ???
+// {
+// #include <unistd.h>
+// #include <signal.h>
+// #include <sys/resource.h>
+// #include <stdio.h>
+//
+//   pid_t pid = getpid();
+//
+//   struct rlimit l;
+//   int ret = getrlimit(RLIMIT_CORE, &l);
+//
+//   printf ("--> getrlimit returned %d\n", ret);
+//   printf ("--> rlim_cur = %llu\n", l.rlim_cur);
+//   printf ("--> rlim_max = %llu\n", l.rlim_max);
+//
+//   l.rlim_cur = l.rlim_max;
+//   printf ("--> setrlimit returned %d\n", setrlimit(RLIMIT_CORE, &l));
+//
+//   bool killMyself = false;
+//
+//   if (killMyself) {
+//     printf ("Time to kill myself\n");
+//     kill (pid, SIGBUS);
+//   }
+// }
+
+//_______________________________________________________________________________
+#include "xml2lyInterface.h"
 
 int main (int argc, char* argv[])
 {
+  // setup signals catching
+  // ------------------------------------------------------
+
+// JMI  catchSignals ();
+
+  // core dumps
+  // ------------------------------------------------------
+
+// JMI allowCoreDumps ();
+
+// JMI testBool ();
+
+// JMI testIncludeOptionsFromFile ();
+
+//  JMI testMsrMomentComparisons (// cout);
+
+//   gLogStream <<
+//     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<
+//     endl;
+
   return
     xml2ly (
+//     xml2ly_BIS (
       argc,
       argv);
 }
