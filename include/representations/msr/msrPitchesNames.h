@@ -17,8 +17,6 @@
 #include "msrPitches.h"
 
 
-// using namespace MusicXML2;
-
 namespace MusicFormats
 {
 
