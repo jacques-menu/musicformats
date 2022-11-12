@@ -177,9 +177,6 @@ message (STATUS "-----> MF_SRC_DIR: ${MF_SRC_DIR}")
 set (MF_CLI_SAMPLES_DIR ${MF_SRC_DIR}/clisamples)
 message (STATUS "-----> MF_CLI_SAMPLES_DIR: ${MF_CLI_SAMPLES_DIR}")
 
-# set (MF_SERVICES_DIR ${MF_SRC_DIR}/services)
-# message (STATUS "-----> MF_SERVICES_DIR: ${MF_SERVICES_DIR}")
-
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mflibrary components oah wae manpage services)
 
