@@ -22,13 +22,13 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 void checkDesiredEncoding (
-  const string& encoding,
-  const string& desiredEncoding);
+  const std::string& encoding,
+  const std::string& desiredEncoding);
 
 //______________________________________________________________________________
 void checkSXMLFile (
   SXMLFile      sxmlfile,
-  const string& context);
+  const std::string& context);
 
 //______________________________________________________________________________
 /*!
@@ -56,33 +56,33 @@ EXP Sxmlelement musicxmlFd2mxsr (
 //______________________________________________________________________________
 /*!
   \brief Converts a MusicXML representation to an MSR.
-  \param buff a string containing MusicXML code
+  \param buff a std::string containing MusicXML code
   \param msrOpts the MSR options to be used
   \return an error code (\c mfMusicformatsErrorKind::kMusicformatsError_NO_ when success)
 */
 EXP Sxmlelement musicxmlString2mxsr (
   const char*    buffer,
   S_mxsrOahGroup musicxmlOpts,
-  const string&  passNumber,
-  const string&  passDescription);
+  const std::string&  passNumber,
+  const std::string&  passDescription);
 
 //_______________________________________________________________________________
 EXP SXMLFile createSXMLFileFromFile (
   const char*   fileName,
-  const string& passNumber,
-  const string& passDescription);
+  const std::string& passNumber,
+  const std::string& passDescription);
 
 //_______________________________________________________________________________
 EXP SXMLFile createSXMLFileFromFd (
   FILE*         fd,
-  const string& passNumber,
-  const string& passDescription);
+  const std::string& passNumber,
+  const std::string& passDescription);
 
 //_______________________________________________________________________________
 EXP SXMLFile createSXMLFileFromString (
   const char*   buffer,
-  const string& passNumber,
-  const string& passDescription);
+  const std::string& passNumber,
+  const std::string& passDescription);
 
 
 }

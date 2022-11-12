@@ -35,9 +35,9 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<extraShowAllHarmoniesStructuresAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description);
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description);
 
   protected:
 
@@ -45,9 +45,9 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     extraShowAllHarmoniesStructuresAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description);
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description);
 
     virtual               ~extraShowAllHarmoniesStructuresAtom ();
 
@@ -62,8 +62,8 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -80,12 +80,12 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printAllHarmoniesStructures (ostream& os) const;
+    void                  printAllHarmoniesStructures (std::ostream& os) const;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -96,7 +96,7 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
     //  JMI ???
 };
 typedef SMARTP<extraShowAllHarmoniesStructuresAtom> S_extraShowAllHarmoniesStructuresAtom;
-EXP ostream& operator << (ostream& os, const S_extraShowAllHarmoniesStructuresAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesStructuresAtom& elt);
 
 //______________________________________________________________________________
 class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
@@ -107,12 +107,12 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<extraShowAllHarmoniesContentsAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            string&       stringVariable);
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::string&       stringVariable);
 
   protected:
 
@@ -120,12 +120,12 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     extraShowAllHarmoniesContentsAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            string&       stringVariable);
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::string&       stringVariable);
 
     virtual               ~extraShowAllHarmoniesContentsAtom ();
 
@@ -134,7 +134,7 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    void                  setStringVariable (const string& value)
+    void                  setStringVariable (const std::string& value)
                               { fStringVariable = value; }
 
   public:
@@ -143,8 +143,8 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -161,14 +161,14 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAllHarmoniesContents (
-                            ostream&              os,
+                            std::ostream&              os,
                             msrSemiTonesPitchKind semiTonesPitchKind) const;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -176,10 +176,10 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    string&               fStringVariable;
+    std::string&               fStringVariable;
 };
 typedef SMARTP<extraShowAllHarmoniesContentsAtom> S_extraShowAllHarmoniesContentsAtom;
-EXP ostream& operator << (ostream& os, const S_extraShowAllHarmoniesContentsAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesContentsAtom& elt);
 
 //______________________________________________________________________________
 class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
@@ -190,12 +190,12 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<extraShowHarmonyDetailsAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            string&       stringVariable);
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::string&       stringVariable);
 
   protected:
 
@@ -203,12 +203,12 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     extraShowHarmonyDetailsAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            string&       stringVariable);
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::string&       stringVariable);
 
     virtual               ~extraShowHarmonyDetailsAtom ();
 
@@ -218,7 +218,7 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setShowHarmonyDetailsVariableValue (
-                            const string& value)
+                            const std::string& value)
                               {  fStringVariable = value; }
 
   public:
@@ -227,8 +227,8 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -245,10 +245,10 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -256,10 +256,10 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    string&               fStringVariable;
+    std::string&               fStringVariable;
 };
 typedef SMARTP<extraShowHarmonyDetailsAtom> S_extraShowHarmonyDetailsAtom;
-EXP ostream& operator << (ostream& os, const S_extraShowHarmonyDetailsAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_extraShowHarmonyDetailsAtom& elt);
 
 //______________________________________________________________________________
 class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
@@ -270,12 +270,12 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<extraShowHarmonyAnalysisAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            string&       stringVariable);
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::string&       stringVariable);
 
   protected:
 
@@ -283,12 +283,12 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     extraShowHarmonyAnalysisAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            string&       stringVariable);
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::string&       stringVariable);
 
     virtual               ~extraShowHarmonyAnalysisAtom ();
 
@@ -298,7 +298,7 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setShowHarmonyAnalysisVariableValue (
-                            const string& value)
+                            const std::string& value)
                               { fStringVariable = value; }
 
   public:
@@ -307,8 +307,8 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -325,10 +325,10 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -336,10 +336,10 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    string&               fStringVariable;
+    std::string&               fStringVariable;
 };
 typedef SMARTP<extraShowHarmonyAnalysisAtom> S_extraShowHarmonyAnalysisAtom;
-EXP ostream& operator << (ostream& os, const S_extraShowHarmonyAnalysisAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_extraShowHarmonyAnalysisAtom& elt);
 
 //______________________________________________________________________________
 class EXP harmoniesExtraOahGroup : public oahGroup
@@ -415,10 +415,10 @@ class EXP harmoniesExtraOahGroup : public oahGroup
     // fields
     // ------------------------------------------------------
 
-    string                fHarmoniesRootAsString;
+    std::string           fHarmoniesRootAsString;
 };
 typedef SMARTP<harmoniesExtraOahGroup> S_harmoniesExtraOahGroup;
-EXP ostream& operator << (ostream& os, const S_harmoniesExtraOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_harmoniesExtraOahGroup& elt);
 
 EXP extern S_harmoniesExtraOahGroup gGlobalHarmoniesExtraOahGroup;
 

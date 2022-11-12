@@ -86,9 +86,9 @@ class EXP msrRepeatCoda : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -102,7 +102,7 @@ class EXP msrRepeatCoda : public msrElement
     S_msrRepeat           fRepeatCodaUpLinkToRepeat;
 };
 typedef SMARTP<msrRepeatCoda> S_msrRepeatCoda;
-EXP ostream& operator << (ostream& os, const S_msrRepeatCoda& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatCoda& elt);
 
 
 }

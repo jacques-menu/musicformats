@@ -26,20 +26,20 @@ enum class msrSpannerKind {
   kSpannerDashes, kSpannerWavyLine
 };
 
-string msrSpannerKindAsString (
+std::string msrSpannerKindAsString (
   msrSpannerKind spannerKind);
 
-ostream& operator << (ostream& os, const msrSpannerKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSpannerKind& elt);
 
 enum class msrSpannerTypeKind {
   kSpannerType_NO_,
   kSpannerTypeStart, kSpannerTypeContinue, kSpannerTypeStop
 };
 
-string msrSpannerTypeKindAsString (
+std::string msrSpannerTypeKindAsString (
   msrSpannerTypeKind spannerTypeKind);
 
-ostream& operator << (ostream& os, const msrSpannerTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSpannerTypeKind& elt);
 
 //______________________________________________________________________________
 // PRE-declaration for two-way sideLinks
@@ -124,22 +124,22 @@ class EXP msrSpanner : public msrElement
     msrPlacementKind      getSpannerPlacementKind () const
                               { return fSpannerPlacementKind; }
 
-    void                  setSpannerBeginText (string beginText)
+    void                  setSpannerBeginText (std::string beginText)
                               { fSpannerBeginText = beginText; }
 
-    string                getSpannerBeginText () const
+    std::string           getSpannerBeginText () const
                               { return fSpannerBeginText; }
 
-    void                  setSpannerMiddleText (string middleText)
+    void                  setSpannerMiddleText (std::string middleText)
                               { fSpannerMiddleText = middleText; }
 
-    string                getSpannerMiddleText () const
+    std::string           getSpannerMiddleText () const
                               { return fSpannerMiddleText; }
 
-    void                  setSpannerEndText (string endText)
+    void                  setSpannerEndText (std::string endText)
                               { fSpannerEndText = endText; }
 
-    string                getSpannerEndText () const
+    std::string           getSpannerEndText () const
                               { return fSpannerEndText; }
 
 
@@ -163,9 +163,9 @@ class EXP msrSpanner : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
+    std::string           asShortString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -188,12 +188,12 @@ class EXP msrSpanner : public msrElement
 
     msrPlacementKind      fSpannerPlacementKind;
 
-    string                fSpannerBeginText;
-    string                fSpannerMiddleText;
-    string                fSpannerEndText;
+    std::string           fSpannerBeginText;
+    std::string           fSpannerMiddleText;
+    std::string           fSpannerEndText;
 };
 typedef SMARTP<msrSpanner> S_msrSpanner;
-EXP ostream& operator << (ostream& os, const S_msrSpanner& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSpanner& elt);
 
 
 }

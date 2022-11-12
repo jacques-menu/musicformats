@@ -20,7 +20,7 @@
 #include "msrRepeatsEnumTypes.h"
 
 #include "msrMeasureRepeats.h"
-#include "msrNotes.h"
+// #include "msrNotes.h"
 #include "msrMultipleFullBarRests.h"
 
 
@@ -60,7 +60,7 @@ class EXP msrRepeatCommonPart : public msrElement
                               { return fRepeatCommonPartUpLinkToRepeat; }
 
     // elements
-    const list<S_msrVoiceElement>&
+    const std::list<S_msrVoiceElement>&
                           getRepeatCommonPartElementsList () const
                               { return fRepeatCommonPartElementsList; }
 
@@ -72,27 +72,27 @@ class EXP msrRepeatCommonPart : public msrElement
     void                  appendVoiceElementToRepeatCommonPart (
                             int               inputLineNumber,
                             S_msrVoiceElement voiceElement,
-                            const string&     context);
+                            const std::string&     context);
 
     void                  appendSegmentToRepeatCommonPart (
                             int          inputLineNumber,
                             S_msrSegment segment,
-                            const string&context);
+                            const std::string&context);
 
     void                  appendRepeatToRepeatCommonPart (
                             int           inputLineNumber,
                             S_msrRepeat   repeat,
-                            const string& context);
+                            const std::string& context);
 
     void                  appendMeasureRepeatToRepeatCommonPart (
                             int                inputLineNumber,
                             S_msrMeasureRepeat measureRepeat,
-                            const string&      context);
+                            const std::string&      context);
 
     void                  appendMultipleFullBarRestsToRepeatCommonPart (
                             int                   inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRests,
-                            const string&         context);
+                            const std::string&         context);
 
     S_msrNote             fetchRepeatCommonPartFirstNonGraceNote () const;
 
@@ -114,11 +114,11 @@ class EXP msrRepeatCommonPart : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -128,12 +128,12 @@ class EXP msrRepeatCommonPart : public msrElement
     // upLinks
     S_msrRepeat           fRepeatCommonPartUpLinkToRepeat;
 
-    // elements list
-    list<S_msrVoiceElement>
+    // elements std::list
+    std::list<S_msrVoiceElement>
                           fRepeatCommonPartElementsList;
 };
 typedef SMARTP<msrRepeatCommonPart> S_msrRepeatCommonPart;
-EXP ostream& operator << (ostream& os, const S_msrRepeatCommonPart& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt);
 
 //______________________________________________________________________________
 class EXP msrRepeatEnding : public msrElement
@@ -145,7 +145,7 @@ class EXP msrRepeatEnding : public msrElement
 
     static SMARTP<msrRepeatEnding> create (
                             int                 inputLineNumber,
-                            const string&       repeatEndingNumber, // may be "1, 2"
+                            const std::string&       repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind repeatEndingKind,
                             S_msrRepeat         upLinkToRepeat);
 
@@ -156,7 +156,7 @@ class EXP msrRepeatEnding : public msrElement
 
                           msrRepeatEnding (
                             int                 inputLineNumber,
-                            const string&       repeatEndingNumber, // may be "1, 2"
+                            const std::string&       repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind repeatEndingKind,
                             S_msrRepeat         upLinkToRepeat);
 
@@ -172,7 +172,7 @@ class EXP msrRepeatEnding : public msrElement
                               { return fRepeatEndingUpLinkToRepeat; }
 
     // numbers
-    string                getRepeatEndingNumber () const
+    std::string           getRepeatEndingNumber () const
                               { return fRepeatEndingNumber; }
 
     void                  setRepeatEndingNumber (int repeatEndingNumber)
@@ -193,7 +193,7 @@ class EXP msrRepeatEnding : public msrElement
                               { return fRepeatEndingKind; }
 
     // elements
-    const list<S_msrVoiceElement>&
+    const std::list<S_msrVoiceElement>&
                           getRepeatEndingElementsList () const
                               { return fRepeatEndingElementsList; }
 
@@ -205,27 +205,27 @@ class EXP msrRepeatEnding : public msrElement
     void                  appendVoiceElementToRepeatEnding ( // JMI
                             int               inputLineNumber,
                             S_msrVoiceElement voiceElement,
-                            const string&     context);
+                            const std::string&     context);
 
     void                  appendSegmentToRepeatEnding (
                             int           inputLineNumber,
                             S_msrSegment  segment,
-                            const string& context);
+                            const std::string& context);
 
     void                  appendRepeatToRepeatEnding (
                             int           inputLineNumber,
                             S_msrRepeat   repeat,
-                            const string& context);
+                            const std::string& context);
 
     void                  appendMeasureRepeatToRepeatEnding (
                             int                inputLineNumber,
                             S_msrMeasureRepeat measureRepeat,
-                            const string&      context);
+                            const std::string&      context);
 
     void                  appendMultipleFullBarRestsToRepeatEnding (
                             int                   inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRests,
-                            const string&         context);
+                            const std::string&         context);
 
     void                  collectRepeatEndingMeasuresIntoFlatList (
                             int inputLineNumber);
@@ -245,11 +245,11 @@ class EXP msrRepeatEnding : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -260,18 +260,18 @@ class EXP msrRepeatEnding : public msrElement
     S_msrRepeat           fRepeatEndingUpLinkToRepeat;
 
     // numbers
-    string                fRepeatEndingNumber; // may be "1, 2"
+    std::string           fRepeatEndingNumber; // may be "1, 2"
     int                   fRepeatEndingInternalNumber; // internally assigned
 
     // kind
     msrRepeatEndingKind   fRepeatEndingKind;
 
-    // elements list
-    list<S_msrVoiceElement>
+    // elements std::list
+    std::list<S_msrVoiceElement>
                           fRepeatEndingElementsList;
 };
 typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
-EXP ostream& operator << (ostream& os, const S_msrRepeatEnding& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt);
 
 //______________________________________________________________________________
 class EXP msrRepeat : public msrVoiceElement
@@ -336,7 +336,7 @@ class EXP msrRepeat : public msrVoiceElement
                               { return fRepeatCommonPart; }
 
     // endings
-    const vector<S_msrRepeatEnding>&
+    const std::vector<S_msrRepeatEnding>&
                           getRepeatEndings () const
                               { return fRepeatEndings; }
 
@@ -367,22 +367,22 @@ class EXP msrRepeat : public msrVoiceElement
     void                  appendSegmentToRepeat (
                             int           inputLineNumber,
                             S_msrSegment  segment,
-                            const string& context);
+                            const std::string& context);
 
     void                  appendRepeatToRepeat (
                             int          inputLineNumber,
                             S_msrRepeat  repeat,
-                            const string& context);
+                            const std::string& context);
 
     void                  appendMeasureRepeatToRepeat (
                             int                inputLineNumber,
                             S_msrMeasureRepeat measureRepeat,
-                            const string&      context);
+                            const std::string&      context);
 
     void                  appendMultipleFullBarRestsToRepeat (
                             int                   inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRests,
-                            const string&         context);
+                            const std::string&         context);
 
     S_msrNote             fetchRepeatFirstNonGraceNote () const;
 
@@ -404,16 +404,16 @@ class EXP msrRepeat : public msrVoiceElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
     void                  displayRepeat (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -434,7 +434,7 @@ class EXP msrRepeat : public msrVoiceElement
     S_msrRepeatCommonPart fRepeatCommonPart;
 
     // repeat endings
-    vector<S_msrRepeatEnding>
+    std::vector<S_msrRepeatEnding>
                           fRepeatEndings;
     int                   fRepeatEndingsInternalCounter;
 
@@ -476,7 +476,7 @@ class EXP msrRepeat : public msrVoiceElement
                           fCurrentRepeatBuildPhaseKind;
 };
 typedef SMARTP<msrRepeat> S_msrRepeat;
-EXP ostream& operator << (ostream& os, const S_msrRepeat& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrRepeat& elt);
 
 
 }

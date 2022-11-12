@@ -29,9 +29,9 @@ class EXP msr2musicxmlManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<msr2musicxmlManPageGenerateAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
   protected:
@@ -40,9 +40,9 @@ class EXP msr2musicxmlManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
                           msr2musicxmlManPageGenerateAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
     virtual               ~msr2musicxmlManPageGenerateAtom ();
@@ -57,7 +57,7 @@ class EXP msr2musicxmlManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
   public:
 
     // visitors
@@ -73,10 +73,10 @@ class EXP msr2musicxmlManPageGenerateAtom : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -84,7 +84,7 @@ class EXP msr2musicxmlManPageGenerateAtom : public oahAtom
     // private services
     // ------------------------------------------------------
 
-    void                  generateManPageData (ostream& os) const;
+    void                  generateManPageData (std::ostream& os) const;
 
   private:
 
@@ -94,7 +94,7 @@ class EXP msr2musicxmlManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msr2musicxmlManPageGenerateAtom> S_msr2musicxmlManPageGenerateAtom;
-EXP ostream& operator << (ostream& os, const S_msr2musicxmlManPageGenerateAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2musicxmlManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP msr2musicxmlManPageOahGroup : public oahGroup
@@ -181,7 +181,7 @@ class EXP msr2musicxmlManPageOahGroup : public oahGroup
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msr2musicxmlManPageOahGroup> S_msr2musicxmlManPageOahGroup;
-EXP ostream& operator << (ostream& os, const S_msr2musicxmlManPageOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2musicxmlManPageOahGroup& elt);
 
 EXP extern S_msr2musicxmlManPageOahGroup gGlobalMsr2musicxmlManPageOahGroup;
 

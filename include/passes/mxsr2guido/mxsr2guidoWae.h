@@ -17,8 +17,6 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,7 +24,7 @@ namespace MusicFormats
 class EXP mxsr2guidoException : public mfException
 {
   public:
-    mxsr2guidoException (string const& exceptionDescription) throw ()
+    mxsr2guidoException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };
@@ -34,23 +32,23 @@ typedef SMARTP<mxsr2guidoException> S_mxsr2guidoException;
 
 //______________________________________________________________________________
 EXP void mxsr2guidoWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void mxsr2guidoError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void mxsr2guidoInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 
 }

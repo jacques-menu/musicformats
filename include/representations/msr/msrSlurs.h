@@ -32,10 +32,10 @@ enum class msrSlurTypeKind {
   kSlurTypePhrasingStart, kSlurTypePhrasingContinue, kSlurTypePhrasingStop
 };
 
-string msrSlurTypeKindAsString (
+std::string msrSlurTypeKindAsString (
   msrSlurTypeKind slurTypeKind);
 
-ostream& operator << (ostream& os, const msrSlurTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSlurTypeKind& elt);
 
 //______________________________________________________________________________
 class EXP msrSlur : public msrElement
@@ -121,9 +121,9 @@ class EXP msrSlur : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -139,7 +139,7 @@ class EXP msrSlur : public msrElement
     msrPlacementKind      fSlurPlacementKind;
 };
 typedef SMARTP<msrSlur> S_msrSlur;
-EXP ostream& operator << (ostream& os, const S_msrSlur& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSlur& elt);
 
 
 }

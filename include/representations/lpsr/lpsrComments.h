@@ -15,8 +15,6 @@
 #include "lpsrElements.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -27,10 +25,10 @@ enum class lpsrCommentGapAfterwardsKind {
   kCommentGapAfterwardsYes, kCommentGapAfterwardsNo
 };
 
-string lpsrCommentGapAfterwardsKindAsString (
+std::string lpsrCommentGapAfterwardsKindAsString (
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind);
 
-ostream& operator << (ostream& os, const lpsrCommentGapAfterwardsKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrCommentGapAfterwardsKind& elt);
 
 class EXP lpsrComment : public lpsrElement
 {
@@ -41,7 +39,7 @@ class EXP lpsrComment : public lpsrElement
 
     static SMARTP<lpsrComment> create (
                             int                inputLineNumber,
-                            const string&      contents,
+                            const std::string&      contents,
                             lpsrCommentGapAfterwardsKind commentGapAfterwardsKind =
                                                  lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
 
@@ -52,7 +50,7 @@ class EXP lpsrComment : public lpsrElement
 
                           lpsrComment (
                             int                inputLineNumber,
-                            const string&      contents,
+                            const std::string&      contents,
                             lpsrCommentGapAfterwardsKind commentGapAfterwardsKind =
                                                  lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
 
@@ -63,7 +61,7 @@ class EXP lpsrComment : public lpsrElement
     // set and get
     // ------------------------------------------------------
 
-    string                getContents () const
+    std::string           getContents () const
                               { return fContents; }
 
     lpsrCommentGapAfterwardsKind    getCommentGapKind  () const
@@ -89,18 +87,18 @@ class EXP lpsrComment : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string              fContents;
+    std::string              fContents;
     lpsrCommentGapAfterwardsKind  fCommentGapKind;
 };
 typedef SMARTP<lpsrComment> S_lpsrComment;
-EXP ostream& operator << (ostream& os, const S_lpsrComment& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrComment& elt);
 
 
 }

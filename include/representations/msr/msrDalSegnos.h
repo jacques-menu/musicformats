@@ -26,13 +26,13 @@ enum class msrDalSegnoKind {
   kDalSegno, kDalSegnoAlFine, kDalSegnoAlCoda
 };
 
-string msrDalSegnoKindAsString (
+std::string msrDalSegnoKindAsString (
   msrDalSegnoKind dalSegnoKind);
 
-ostream& operator << (ostream& os,const msrDalSegnoKind& elt);
+std::ostream& operator << (std::ostream& os,const msrDalSegnoKind& elt);
 
 //______________________________________________________________________________
-class EXP msrDalSegno : public msrMeasureElement
+class EXP msrDalSegno : public msrMeasureElementLambda
 {
   public:
 
@@ -43,7 +43,7 @@ class EXP msrDalSegno : public msrMeasureElement
                             int             inputLineNumber,
                             S_msrMeasure    upLinkToMeasure,
                             msrDalSegnoKind dalSegnoKind,
-                            const string&   dalSegnoString,
+                            const std::string&   dalSegnoString,
                             int             staffNumber);
 
   protected:
@@ -55,7 +55,7 @@ class EXP msrDalSegno : public msrMeasureElement
                             int             inputLineNumber,
                             S_msrMeasure    upLinkToMeasure,
                             msrDalSegnoKind dalSegnoKind,
-                            const string&   dalSegnoString,
+                            const std::string&   dalSegnoString,
                             int             staffNumber);
 
     virtual               ~msrDalSegno ();
@@ -68,7 +68,7 @@ class EXP msrDalSegno : public msrMeasureElement
     msrDalSegnoKind       getDalSegnoKind () const
                               { return fDalSegnoKind; }
 
-    string                getDalSegnoString () const
+    std::string           getDalSegnoString () const
                               { return fDalSegnoString; }
 
     int                   getStaffNumber () const
@@ -78,7 +78,7 @@ class EXP msrDalSegno : public msrMeasureElement
     void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
                             const Rational&    measurePosition,
-                            const string&      context) override
+                            const std::string& context) override
                               {
                                 setDalSegnoMeasurePosition (
                                   measure,
@@ -89,7 +89,7 @@ class EXP msrDalSegno : public msrMeasureElement
     void                  setDalSegnoMeasurePosition (
                             const S_msrMeasure measure,
                             const Rational&    measurePosition,
-                            const string&      context);
+                            const std::string& context);
 
   public:
 
@@ -111,9 +111,9 @@ class EXP msrDalSegno : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -123,12 +123,12 @@ class EXP msrDalSegno : public msrMeasureElement
 
       msrDalSegnoKind     fDalSegnoKind;
 
-      string              fDalSegnoString;
+      std::string              fDalSegnoString;
 
       int                 fStaffNumber;
 };
 typedef SMARTP<msrDalSegno> S_msrDalSegno;
-EXP ostream& operator << (ostream& os, const S_msrDalSegno& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrDalSegno& elt);
 
 
 }

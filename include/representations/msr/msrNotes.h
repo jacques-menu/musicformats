@@ -18,6 +18,8 @@
 
 #include "msrTypesForwardDeclarations.h"
 
+#include "msrNotesEnumTypes.h"
+
 #include "msrAccidentals.h"
 #include "msrChords.h"
 #include "msrColors.h"
@@ -32,160 +34,7 @@
 namespace MusicFormats
 {
 
-// notes
 //______________________________________________________________________________
-
-/*
-  Measures can contain either:
-    individual notes;
-    tuplets;
-    chords;
-    double tremolos.
-
-  Tuplets can contain either:
-    individual notes;
-    other tuplets;
-    chords.
-
-  Chords contain:
-    individual notes.
-
-  Grace notes groups can contain either (no tuplets here):
-    individual notes;
-    chords.
-
-  Double tremolos can contain either:
-    individual notes;
-    chords.
-
-  Notes can have attached:
-    grace notes groups (before and after the note).
-
-  Attempting to use classes to describe this graph would be a nightmare:
-  we thus use enum class types and uplinks to handles the variants.
-*/
-
-enum class msrNoteKind {
-  kNote_NO_,
-
-  // in measures
-  kNoteRegularInMeasure,
-  kNoteRestInMeasure,
-  kNoteSkipInMeasure, // an invisible rest
-  kNoteUnpitchedInMeasure,
-
-  // in chords
-  kNoteRegularInChord,
-
-  // in tuplets
-  kNoteRegularInTuplet,
-  kNoteRestInTuplet,
-  kNoteUnpitchedInTuplet,
-
-  // in grace notes groups
-  kNoteRegularInGraceNotesGroup,
-  kNoteSkipInGraceNotesGroup, // used to circumvent LilyPond issue #34
-
-  // in chords in grace notes groups
-  kNoteInChordInGraceNotesGroup,
-
-  // in tuplets in grace notes groups
-  kNoteInTupletInGraceNotesGroup,
-
-  // in double-tremolos
-  kNoteInDoubleTremolo
-};
-
-EXP string msrNoteKindAsString (
-  msrNoteKind noteKind);
-
-ostream& operator << (ostream& os, const msrNoteKind& elt);
-
-// solo notes or rests
-//______________________________________________________________________________
-
-/*
-  A solo note or rest is one that is played alone,
-  with no other note or rest being played at the same time
-
-  In a voice, a solo note is one not a member of a chord,
-  and a rest is always a solo note
-
-  In a staff, a solo note
-*/
-
-enum class msrSoloNoteOrRestInVoiceKind {
-  kSoloNoteOrRestInVoiceYes,
-  kSoloNoteOrRestInVoiceNo
-};
-
-string msrSoloNoteOrRestInVoiceKindAsString (
-  msrSoloNoteOrRestInVoiceKind soloNoteOrRestInVoiceKind);
-
-ostream& operator << (ostream& os, const msrSoloNoteOrRestInVoiceKind& elt);
-
-enum class msrSoloNoteOrRestInStaffKind {
-  kSoloNoteOrRestInStaffYes,
-  kSoloNoteOrRestInStaffPartially,
-  kSoloNoteOrRestInStaffNo
-};
-
-string msrSoloNoteOrRestInStaffKindAsString (
-  msrSoloNoteOrRestInStaffKind soloNoteOrRestInStaffKind);
-
-ostream& operator << (ostream& os, const msrSoloNoteOrRestInStaffKind& elt);
-
-//______________________________________________________________________________
-// data types
-
-enum class msrNoteHeadKind {
-  kNoteHeadSlash,
-  kNoteHeadTriangle, kNoteHeadDiamond, kNoteHeadSquare,
-  kNoteHeadCross,kNoteHeadX,
-  kNoteHeadCircleX, kNoteHeadInvertedTriangle,
-  kNoteHeadArrowDown, kNoteHeadArrowUp,
-  kNoteHeadSlashed, kNoteHeadBackSlashed,
-  kNoteHeadNormal, kNoteHeadCluster,
-  kNoteHeadCircleDot,
-  kNoteHeadLeftTriangle,
-  kNoteHeadRectangle,
-  kNoteHeadNone,
-  kNoteHeadDo, kNoteHeadRe, kNoteHeadMi, kNoteHeadFa, kNoteHeadFaUp,
-  kNoteHeadSo, kNoteHeadLa, kNoteHeadTi
-};
-
-string msrNoteHeadKindAsString (
-  msrNoteHeadKind noteHeadKind);
-
-ostream& operator << (ostream& os, const msrNoteHeadKind& elt);
-
-enum class msrNoteHeadFilledKind {
-  kNoteHeadFilledYes, kNoteHeadFilledNo
-};
-
-string msrNoteHeadFilledKindAsString (
-  msrNoteHeadFilledKind msrNoteHeadFilledKind);
-
-ostream& operator << (ostream& os, const msrNoteHeadFilledKind& elt);
-
-enum class msrNoteHeadParenthesesKind {
-  kNoteHeadParenthesesYes, kNoteHeadParenthesesNo
-};
-
-string msrNoteHeadParenthesesKindAsString (
-  msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind);
-
-ostream& operator << (ostream& os, const msrNoteHeadParenthesesKind& elt);
-
-enum class msrNoteIsACueNoteKind {
-  kNoteIsACueNoteYes, kNoteIsACueNoteNo
-};
-
-string msrNoteIsACueNoteKindAsString (
-  msrNoteIsACueNoteKind msrNoteIsACueNoteKind);
-
-ostream& operator << (ostream& os, const msrNoteIsACueNoteKind& elt);
-
 class EXP msrNote : public msrTupletElement
 {
   public:
@@ -197,7 +46,7 @@ class EXP msrNote : public msrTupletElement
                             int                        inputLineNumber,
                             S_msrMeasure               upLinkToMeasure,
 
-                            const string&              noteMeasureNumber,
+                            const std::string&              noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 
@@ -233,14 +82,14 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createRestNote (
                             int             inputLineNumber,
-                            const string&   noteMeasureNumber,
+                            const std::string&   noteMeasureNumber,
                             const Rational& soundingWholeNotes,
                             const Rational& displayWholeNotes,
                             int             dotsNumber);
 
     static SMARTP<msrNote> createRestNoteWithOctave (
                             int             inputLineNumber,
-                            const string&   noteMeasureNumber,
+                            const std::string&   noteMeasureNumber,
                             msrOctaveKind   noteOctave,
                             const Rational& soundingWholeNotes,
                             const Rational& displayWholeNotes,
@@ -248,14 +97,14 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createSkipNote (
                             int             inputLineNumber,
-                            const string&   noteMeasureNumber,
+                            const std::string&   noteMeasureNumber,
                             const Rational& soundingWholeNotes,
                             const Rational& displayWholeNotes,
                             int             dotsNumberr);
 
     static SMARTP<msrNote> createSkipNoteWithOctave (
                             int             inputLineNumber,
-                            const string&   noteMeasureNumber,
+                            const std::string&   noteMeasureNumber,
                             msrOctaveKind   noteOctave,
                             const Rational& soundingWholeNotes,
                             const Rational& displayWholeNotes,
@@ -263,14 +112,14 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createGraceSkipNote (
                             int             inputLineNumber,
-                            const string&   noteMeasureNumber,
+                            const std::string&   noteMeasureNumber,
                             const Rational& soundingWholeNotes,
                             const Rational& displayWholeNotes,
                             int             dotsNumber);
 
     static SMARTP<msrNote> createRegularNote (
                             int                      inputLineNumber,
-                            const string&            noteMeasureNumber,
+                            const std::string&            noteMeasureNumber,
                             msrQuarterTonesPitchKind quarterTonesPitchKind,
                             msrOctaveKind            noteOctaveKind,
                             const Rational&          soundingWholeNotes,
@@ -279,18 +128,18 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createRestFromString (
                             int           inputLineNumber,
-                            const string& restString,
-                            const string& restMeasureNumber);
+                            const std::string& restString,
+                            const std::string& restMeasureNumber);
 
     static SMARTP<msrNote> createSkipFromString (
                             int           inputLineNumber,
-                            const string& skipString,
-                            const string& skipMeasureNumber);
+                            const std::string& skipString,
+                            const std::string& skipMeasureNumber);
 
     static SMARTP<msrNote> createNoteFromString (
                             int           inputLineNumber,
-                            const string& noteString,
-                            const string& noteMeasureNumber);
+                            const std::string& noteString,
+                            const std::string& noteMeasureNumber);
 
     // creation from the options
     // ------------------------------------------------------
@@ -308,7 +157,7 @@ class EXP msrNote : public msrTupletElement
                             int                        inputLineNumber,
                             S_msrMeasure               upLinkToMeasure,
 
-                            const string&              noteMeasureNumber,
+                            const std::string&              noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 
@@ -375,7 +224,7 @@ class EXP msrNote : public msrTupletElement
 //     void                  setMeasureElementMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context) override
+//                             const std::string&      context) override
 //                               {
 //                                 setNoteMeasurePosition (
 //                                   measure,
@@ -386,7 +235,7 @@ class EXP msrNote : public msrTupletElement
 //     void                  setNoteMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context);
+//                             const std::string&      context);
 
     // note kind
 
@@ -589,7 +438,7 @@ class EXP msrNote : public msrTupletElement
     void                  appendHarmonyToNoteHarmoniesList (
                             S_msrHarmony harmony);
 
-    const list<S_msrHarmony>&
+    const std::list<S_msrHarmony>&
                           getNoteHarmoniesList () const
                               { return fNoteHarmoniesList; }
 
@@ -597,14 +446,14 @@ class EXP msrNote : public msrTupletElement
     void                  appendFiguredBassToNoteFiguredBassesList (
                             S_msrFiguredBass figuredBass);
 
-    const list<S_msrFiguredBass>&
+    const std::list<S_msrFiguredBass>&
                           getNoteFiguredBassesList () const
                               { return fNoteFiguredBassesList; }
 
     // note lyrics
     // -------------------------------
 
-    list<S_msrSyllable>   getNoteSyllables () const
+    std::list<S_msrSyllable>   getNoteSyllables () const
                               { return fNoteSyllables; }
 
     // elements attached to the note
@@ -617,57 +466,57 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteStem; }
 
     // beams
-    const list<S_msrBeam>&
+    const std::list<S_msrBeam>&
                           getNoteBeams () const
                               { return fNoteBeams; }
 
     // articulations
-    const list<S_msrArticulation>&
+    const std::list<S_msrArticulation>&
                           getNoteArticulations () const
                               { return fNoteArticulations; }
 
-    list<S_msrArticulation>&
+    std::list<S_msrArticulation>&
                           getNoteArticulationsNonConst ()
                               { return fNoteArticulations; }
 
     // spanners
-    const list<S_msrSpanner>&
+    const std::list<S_msrSpanner>&
                           getNoteSpanners () const
                               { return fNoteSpanners; }
 
-    list<S_msrSpanner>&
+    std::list<S_msrSpanner>&
                           getNoteSpannersNonConst ()
                               { return fNoteSpanners; }
 
     // technicals
-    const list<S_msrTechnical>&
+    const std::list<S_msrTechnical>&
                           getNoteTechnicals () const
                               { return fNoteTechnicals; }
 
-    const list<S_msrTechnicalWithInteger>&
+    const std::list<S_msrTechnicalWithInteger>&
                           getNoteTechnicalWithIntegers () const
                               { return fNoteTechnicalWithIntegers; }
 
-    const list<S_msrTechnicalWithFloat>&
+    const std::list<S_msrTechnicalWithFloat>&
                           getNoteTechnicalWithFloats () const
                               { return fNoteTechnicalWithFloats; }
 
-    const list<S_msrTechnicalWithString>&
+    const std::list<S_msrTechnicalWithString>&
                           getNoteTechnicalWithStrings () const
                               { return fNoteTechnicalWithStrings; }
 
     // ornaments
-    const list<S_msrOrnament>&
+    const std::list<S_msrOrnament>&
                           getNoteOrnaments () const
                               { return fNoteOrnaments; }
 
     // glissandos
-    const list<S_msrGlissando>&
+    const std::list<S_msrGlissando>&
                           getNoteGlissandos () const
                               { return fNoteGlissandos; }
 
     // slides
-    const list<S_msrSlide>&
+    const std::list<S_msrSlide>&
                           getNoteSlides () const
                               { return fNoteSlides; }
 
@@ -708,87 +557,87 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteTie; }
 
     // dynamics
-    const list<S_msrDynamic>&
+    const std::list<S_msrDynamic>&
                           getNoteDynamics () const
                               { return fNoteDynamics; }
-    const list<S_msrOtherDynamic>&
+    const std::list<S_msrOtherDynamic>&
                           getNoteOtherDynamics () const
                               { return fNoteOtherDynamics; }
 
     // words
-    const list<S_msrWords>&
+    const std::list<S_msrWords>&
                           getNoteWords () const
                               { return fNoteWords; }
 
-    list<S_msrWords>&     getNoteWordsNonConst ()
+    std::list<S_msrWords>&     getNoteWordsNonConst ()
                               { return fNoteWords; }
 
     // slashes
-    const list<S_msrSlash>&
+    const std::list<S_msrSlash>&
                           getNoteSlashes () const
                               { return fNoteSlashes; }
 
     // wedges
-    const list<S_msrCrescDecresc>&
+    const std::list<S_msrCrescDecresc>&
                           getNoteCrescDecrescs () const
                               { return fNoteCrescDecrescs; }
 
     // wedges
-    const list<S_msrWedge>&
+    const std::list<S_msrWedge>&
                           getNoteWedges () const
                               { return fNoteWedges; }
 
-    list<S_msrWedge>&
+    std::list<S_msrWedge>&
                           getNoteWedgesNonConst ()
                               { return fNoteWedges; }
 
     // segnos
-    const list<S_msrSegno>&
+    const std::list<S_msrSegno>&
                           getNoteSegnos () const
                               { return fNoteSegnos; }
 
     // dal segnos
-    const list<S_msrDalSegno>&
+    const std::list<S_msrDalSegno>&
                           getNoteDalSegnos () const
                               { return fNoteDalSegnos; }
 
     // coda
-    const list<S_msrCoda>&
+    const std::list<S_msrCoda>&
                           getNoteCodas () const
                               { return fNoteCodas; }
 
     // eyeglasses
-    const list<S_msrEyeGlasses>&
+    const std::list<S_msrEyeGlasses>&
                           getNoteEyeGlasses () const
                               { return fNoteEyeGlasses; }
 
     // damps
-    const list<S_msrDamp>&
+    const std::list<S_msrDamp>&
                           getNoteDamps () const
                               { return fNoteDamps; }
 
     // damp alls
-    const list<S_msrDampAll>&
+    const std::list<S_msrDampAll>&
                           getNoteDampAlls () const
                               { return fNoteDampAlls; }
 
     // scordaturas
-    const list<S_msrScordatura>&
+    const std::list<S_msrScordatura>&
                           getNoteScordaturas () const
                               { return fNoteScordaturas; }
 
     // slurs
-    const list<S_msrSlur>&
+    const std::list<S_msrSlur>&
                           getNoteSlurs () const
                               { return fNoteSlurs; }
 
     // ligatures
-    const list<S_msrLigature>&
+    const std::list<S_msrLigature>&
                           getNoteLigatures () const
                               { return fNoteLigatures; }
 
     // pedals
-    const list<S_msrPedal>&
+    const std::list<S_msrPedal>&
                           getNotePedals () const
                               { return fNotePedals; }
 
@@ -1019,40 +868,40 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // pitch kind
-    string                notePitchAsString () const;
+    std::string           notePitchAsString () const;
 
-    string                noteDisplayPitchKindAsString () const;
+    std::string           noteDisplayPitchKindAsString () const;
 
     // octave kind
-    string                bsrNoteOctaveKindAsString () const
+    std::string           bsrNoteOctaveKindAsString () const
                               {
                                 return
                                   msrOctaveKindAsString (fNoteOctaveKind);
                               }
 
-    string                noteDisplayOctaveKindAsString () const
+    std::string           noteDisplayOctaveKindAsString () const
                               {
                                 return
                                   msrOctaveKindAsString (fNoteDisplayOctaveKind);
                               }
 
     // note head
-    string                noteDiatonicPitchKindAsString (
+    std::string           noteDiatonicPitchKindAsString (
                             int inputLineNumber) const;
 
     // whole notes
-    string                noteSoundingWholeNotesAsMsrString () const;
-    string                noteDisplayWholeNotesAsMsrString () const;
+    std::string           noteSoundingWholeNotesAsMsrString () const;
+    std::string           noteDisplayWholeNotesAsMsrString () const;
 
     // graphic duration
-    string                noteGraphicDurationAsMsrString () const;
-    string                noteGraphicDurationAsMusicXMLString () const;
+    std::string           noteGraphicDurationAsMsrString () const;
+    std::string           noteGraphicDurationAsMusicXMLString () const;
 
-    string                tupletNoteGraphicDurationAsMsrString ( // JMI
+    std::string           tupletNoteGraphicDurationAsMsrString ( // JMI
                             int actualNotes, int normalNotes) const;
 
-    // note as string
-    string                notePitchAndSoundingWholeNotesAsString () const
+    // note as std::string
+    std::string           notePitchAndSoundingWholeNotesAsString () const
                               {
                                 return
                                   notePitchAsString ()
@@ -1060,29 +909,29 @@ class EXP msrNote : public msrTupletElement
                                 noteSoundingWholeNotesAsMsrString ();
                               }
 
-    string                soundingNoteEssentialsAsString () const;
-    string                soundingNoteEssentialsAsStringForMeasuresSlices () const;
+    std::string           soundingNoteEssentialsAsString () const;
+    std::string           soundingNoteEssentialsAsStringForMeasuresSlices () const;
 
-    string                nonSoundingNoteEssentialsAsString () const;
-    string                nonSoundingNoteEssentialsAsStringForMeasuresSlices () const;
+    std::string           nonSoundingNoteEssentialsAsString () const;
+    std::string           nonSoundingNoteEssentialsAsStringForMeasuresSlices () const;
 
-    string                noteComplementsAsString () const;
+    std::string           noteComplementsAsString () const;
 
-    string                asString () const override;
-    string                asShortStringForMeasuresSlices () const override;
+    std::string           asString () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
-    string                asShortString () const override;
-    string                asShortStringWithRawWholeNotes () const;
+    std::string           asShortString () const override;
+    std::string           asShortStringWithRawWholeNotes () const;
 
-    string                asShortStringForTimeView () const;
+    std::string           asShortStringForTimeView () const;
 
-    string                asMinimalString () const;
+    std::string           asMinimalString () const;
 
-    void                  printNoteEssentials (ostream& os) const;
+    void                  printNoteEssentials (std::ostream& os) const;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -1091,6 +940,8 @@ class EXP msrNote : public msrTupletElement
 
     // upLinks
     // ------------------------------------------------------
+
+    S_msrMeasure          fNoteUpLinkToMeasure;
 
     S_msrChord            fNoteDirectUpLinkToChord;
 
@@ -1175,7 +1026,7 @@ class EXP msrNote : public msrTupletElement
     // note lyrics
     // ------------------------------------------------------
 
-    list<S_msrSyllable>   fNoteSyllables;
+    std::list<S_msrSyllable>   fNoteSyllables;
 
     // stem
     // ------------------------------------------------------
@@ -1185,47 +1036,47 @@ class EXP msrNote : public msrTupletElement
     // beams
     // ------------------------------------------------------
 
-    list<S_msrBeam>       fNoteBeams;
+    std::list<S_msrBeam>       fNoteBeams;
 
     // articulations
     // ------------------------------------------------------
 
-    list<S_msrArticulation>
+    std::list<S_msrArticulation>
                           fNoteArticulations;
 
     // spanners
     // ------------------------------------------------------
 
-    list<S_msrSpanner>    fNoteSpanners;
+    std::list<S_msrSpanner>    fNoteSpanners;
 
     // technicals
     // ------------------------------------------------------
 
-    list<S_msrTechnical>  fNoteTechnicals;
+    std::list<S_msrTechnical>  fNoteTechnicals;
 
-    list<S_msrTechnicalWithInteger>
+    std::list<S_msrTechnicalWithInteger>
                           fNoteTechnicalWithIntegers;
 
-    list<S_msrTechnicalWithFloat>
+    std::list<S_msrTechnicalWithFloat>
                           fNoteTechnicalWithFloats;
 
-    list<S_msrTechnicalWithString>
+    std::list<S_msrTechnicalWithString>
                           fNoteTechnicalWithStrings;
 
     // ornaments
     // ------------------------------------------------------
 
-    list<S_msrOrnament>   fNoteOrnaments;
+    std::list<S_msrOrnament>   fNoteOrnaments;
 
     // glissandos
     // ------------------------------------------------------
 
-    list<S_msrGlissando>  fNoteGlissandos;
+    std::list<S_msrGlissando>  fNoteGlissandos;
 
     // slides
     // ------------------------------------------------------
 
-    list<S_msrSlide>      fNoteSlides;
+    std::list<S_msrSlide>      fNoteSlides;
 
     // grace notes
     // ------------------------------------------------------
@@ -1248,90 +1099,90 @@ class EXP msrNote : public msrTupletElement
     // dynamics
     // ------------------------------------------------------
 
-    list<S_msrDynamic>    fNoteDynamics;
-    list<S_msrOtherDynamic>
+    std::list<S_msrDynamic>    fNoteDynamics;
+    std::list<S_msrOtherDynamic>
                           fNoteOtherDynamics;
 
     // slashes
     // ------------------------------------------------------
 
-    list<S_msrSlash>      fNoteSlashes;
+    std::list<S_msrSlash>      fNoteSlashes;
 
     // cresc/decresc
     // ------------------------------------------------------
 
-    list<S_msrCrescDecresc>
+    std::list<S_msrCrescDecresc>
                           fNoteCrescDecrescs;
 
     // wedges
     // ------------------------------------------------------
 
-    list<S_msrWedge>      fNoteWedges;
+    std::list<S_msrWedge>      fNoteWedges;
 
     // segnos
     // ------------------------------------------------------
 
-    list<S_msrSegno>      fNoteSegnos;
+    std::list<S_msrSegno>      fNoteSegnos;
 
     // dal segnos
     // ------------------------------------------------------
 
-    list<S_msrDalSegno>   fNoteDalSegnos;
+    std::list<S_msrDalSegno>   fNoteDalSegnos;
 
     // coda
     // ------------------------------------------------------
 
-    list<S_msrCoda>       fNoteCodas;
+    std::list<S_msrCoda>       fNoteCodas;
 
     // eyeglasses
     // ------------------------------------------------------
 
-    list<S_msrEyeGlasses> fNoteEyeGlasses;
+    std::list<S_msrEyeGlasses> fNoteEyeGlasses;
 
     // damps
     // ------------------------------------------------------
 
-    list<S_msrDamp>       fNoteDamps;
+    std::list<S_msrDamp>       fNoteDamps;
 
     // damp alls
     // ------------------------------------------------------
 
-    list<S_msrDampAll>    fNoteDampAlls;
+    std::list<S_msrDampAll>    fNoteDampAlls;
 
     // scordaturas
     // ------------------------------------------------------
 
-    list<S_msrScordatura> fNoteScordaturas;
+    std::list<S_msrScordatura> fNoteScordaturas;
 
     // words
     // ------------------------------------------------------
 
-    list<S_msrWords>      fNoteWords;
+    std::list<S_msrWords>      fNoteWords;
 
     // slurs
     // ------------------------------------------------------
 
-    list<S_msrSlur>       fNoteSlurs;
+    std::list<S_msrSlur>       fNoteSlurs;
 
     // ligatures
     // ------------------------------------------------------
 
-    list<S_msrLigature>   fNoteLigatures;
+    std::list<S_msrLigature>   fNoteLigatures;
 
     // pedals
     // ------------------------------------------------------
 
-    list<S_msrPedal>      fNotePedals;
+    std::list<S_msrPedal>      fNotePedals;
 
     // harmonies
     // ------------------------------------------------------
 
-    list<S_msrHarmony>    fNoteHarmoniesList;
+    std::list<S_msrHarmony>    fNoteHarmoniesList;
 
     // figured bass
     // ------------------------------------------------------
 
-    list<S_msrFiguredBass>
+    std::list<S_msrFiguredBass>
                           fNoteFiguredBassesList;
 
     // note redundant information (for speed)
@@ -1377,7 +1228,7 @@ class EXP msrNote : public msrTupletElement
                           fNoteSoloNoteOrRestInStaffKind;
 };
 typedef SMARTP<msrNote> S_msrNote;
-EXP ostream& operator << (ostream& os, const S_msrNote& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrNote& elt);
 
 
 }

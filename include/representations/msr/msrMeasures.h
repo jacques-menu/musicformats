@@ -16,7 +16,7 @@
 
 #include "msrMeasuresEnumTypes.h"
 #include "msrMoments.h"
-#include "msrNotes.h"
+// #include "msrNotes.h"
 #include "msrSegments.h"
 
 
@@ -33,7 +33,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     static SMARTP<msrMeasure> create (
                             int           inputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             S_msrSegment  measureUpLinkToSegment);
 
     SMARTP<msrMeasure> createMeasureNewbornClone (
@@ -44,7 +44,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     SMARTP<msrMeasure> createMeasureCopyWithNotesOnly (
                             S_msrSegment  containingSegment,
-                            const string& measureNumber);
+                            const std::string& measureNumber);
 
   protected:
 
@@ -53,7 +53,7 @@ class EXP msrMeasure : public msrSegmentElement
 
                           msrMeasure (
                             int           inputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             S_msrSegment  measureUpLinkToSegment);
 
   public:
@@ -83,9 +83,9 @@ class EXP msrMeasure : public msrSegmentElement
     // measure numbers
 
     void                  setMeasureNumber (
-                            const string& measureNumber);
+                            const std::string& measureNumber);
 
-    string                getMeasureNumber () const
+    std::string           getMeasureNumber () const
                               { return fMeasureNumber; }
 
     void                  setMeasureOrdinalNumberInVoice (
@@ -100,9 +100,9 @@ class EXP msrMeasure : public msrSegmentElement
     int                   getMeasurePuristNumber () const
                               { return fMeasurePuristNumber; }
 
-    void                  setNextMeasureNumber (const string& nextMeasureNumber);
+    void                  setNextMeasureNumber (const std::string& nextMeasureNumber);
 
-    string                getNextMeasureNumber () const
+    std::string           getNextMeasureNumber () const
                               { return fNextMeasureNumber; }
 
     void                  setMeasureFirstInVoice ();
@@ -206,9 +206,9 @@ class EXP msrMeasure : public msrSegmentElement
     S_msrNote             getMeasureLastHandledNote () const
                               { return fMeasureLastHandledNote; }
 
-    // elements list
+    // elements std::list
 
-    const list<S_msrMeasureElement>&
+    const std::list<S_msrMeasureElement>&
                           getMeasureElementsList () const
                               { return fMeasureElementsList; }
 
@@ -252,9 +252,9 @@ class EXP msrMeasure : public msrSegmentElement
     const msrMoment&      getMeasureVoiceMoment () const
                               { return fMeasureVoiceMoment; }
 
-    // notes flat list
+    // notes flat std::list
 
-    const list<S_msrNote>&
+    const std::list<S_msrNote>&
                           getMeasureNotesFlatList () const
                               { return fMeasureNotesFlatList; }
 
@@ -288,7 +288,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // lengthes
 
-    string                fullMeasureWholeNotesDurationAsMsrString ();
+    std::string           fullMeasureWholeNotesDurationAsMsrString ();
 
     // backup and padding
 
@@ -531,7 +531,7 @@ class EXP msrMeasure : public msrSegmentElement
                             int          inputLineNumber,
                             S_msrElement elem);
 
-    // notes flat list
+    // notes flat std::list
 
     void                  appendNoteToMeasureNotesFlatList (
                             S_msrNote note);
@@ -554,7 +554,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const string&               context);
+                            const std::string&               context);
 
     void                  finalizeMeasureClone (
                             int          inputLineNumber,
@@ -572,17 +572,17 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeRegularMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const string&               context);
+                            const std::string&               context);
 
     void                  finalizeHarmonyMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const string&               context);
+                            const std::string&               context);
 
     void                  finalizeFiguredBassMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const string&               context);
+                            const std::string&               context);
 
   public:
 
@@ -599,18 +599,18 @@ class EXP msrMeasure : public msrSegmentElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
-    string                asShortStringForMeasuresSlices () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
     void                  displayMeasure (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -630,8 +630,8 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure numbers
 
-    string                fMeasureNumber;
-    string                fNextMeasureNumber;
+    std::string           fMeasureNumber;
+    std::string           fNextMeasureNumber;
 
     int                   fMeasureOrdinalNumberInVoice;
 
@@ -695,7 +695,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // elements
 
-    list<S_msrMeasureElement>
+    std::list<S_msrMeasureElement>
                           fMeasureElementsList;
 
     Bool                  fMeasureContainsMusic;
@@ -712,9 +712,9 @@ class EXP msrMeasure : public msrSegmentElement
     Rational              fMeasureVoicePosition;
     msrMoment             fMeasureVoiceMoment;
 
-    // notes flat list
+    // notes flat std::list
     // this is used to identify solo notes and rests in measures slices
-    list<S_msrNote>       fMeasureNotesFlatList;
+    std::list<S_msrNote>       fMeasureNotesFlatList;
 
   private:
 
@@ -740,20 +740,20 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  finalizeTheHarmoniesInHarmoniesMeasure (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
     void                  finalizeHarmonyInHarmoniesMeasure (
                             int           inputLineNumber,
                             S_msrVoice    voice,
                             S_msrHarmony  previousHarmony,
                             S_msrHarmony  currentHarmony,
-                            const string& context);
+                            const std::string& context);
 
     // figurd bass
     void                  handleFirstFiguredBassInFiguredBassMeasure (
                             int          inputLineNumber,
                             S_msrVoice   voice,
-                            list<S_msrMeasureElement>::iterator&
+                            std::list<S_msrMeasureElement>::iterator&
                                          i,
                             S_msrFiguredBass previousFiguredBass,
                             S_msrFiguredBass currentFiguredBass,
@@ -762,7 +762,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  handleSubsequentFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
                             S_msrVoice              voice,
-                            list<S_msrMeasureElement>::iterator&
+                            std::list<S_msrMeasureElement>::iterator&
                                                     i,
                             S_msrFiguredBass previousFiguredBass,
                             S_msrFiguredBass currentFiguredBass,
@@ -775,17 +775,17 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  finalizeFiguredBassesInFiguredBassMeasure (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
     // measure elements
     void                  insertElementInMeasureBeforeIterator (
                             int                                 inputLineNumber,
-                            list<S_msrMeasureElement>::iterator iter,
+                            std::list<S_msrMeasureElement>::iterator iter,
                             S_msrMeasureElement                 elem);
 
     void                  insertElementInMeasureBeforeReverseIterator (
                             int                                 inputLineNumber,
-                            list<S_msrMeasureElement>::reverse_iterator iter,
+                            std::list<S_msrMeasureElement>::reverse_iterator iter,
                             S_msrMeasureElement                 elem);
 
     void                  appendElementAtTheEndOfMeasure (
@@ -809,21 +809,21 @@ class EXP msrMeasure : public msrSegmentElement
                             // this increases when musical elements
                             // are appended to the measure
 
-    string                currentMeasureWholeNotesDurationAsMsrString ();
+    std::string           currentMeasureWholeNotesDurationAsMsrString ();
 
     // pending measure elements, which may have to be delayed
     // because of <backup />
-    list<S_msrMeasureElement>
+    std::list<S_msrMeasureElement>
                           fMeasurePendingMeasureElementsList;
 
     // measure finalization
     Bool                  fMeasureHasBeenFinalized;
     Bool                  fMeasureKindAndPuristNumberHaveBeenDetermined;
 
-    string                fMeasureFinalizationContext;
+    std::string           fMeasureFinalizationContext;
 };
 typedef SMARTP<msrMeasure> S_msrMeasure;
-EXP ostream& operator << (ostream& os, const S_msrMeasure& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt);
 
 
 }

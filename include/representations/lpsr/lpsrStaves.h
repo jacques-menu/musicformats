@@ -21,8 +21,6 @@
 #include "msrVoices.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -72,17 +70,17 @@ class EXP lpsrNewStaffgroupBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // fields
     // ------------------------------------------------------
 
-    vector<S_msrElement> fNewStaffgroupElements;
+    std::vector<S_msrElement> fNewStaffgroupElements;
 };
 typedef SMARTP<lpsrNewStaffgroupBlock> S_lpsrNewStaffgroupBlock;
-EXP ostream& operator << (ostream& os, const S_lpsrNewStaffgroupBlock& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffgroupBlock& elt);
 
 //______________________________________________________________________________
 class EXP lpsrNewStaffTuningBlock : public lpsrElement
@@ -135,7 +133,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -145,7 +143,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
     S_msrStaffTuning fStaffTuning;
 };
 typedef SMARTP<lpsrNewStaffTuningBlock> S_lpsrNewStaffTuningBlock;
-EXP ostream& operator << (ostream& os, const S_lpsrNewStaffTuningBlock& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffTuningBlock& elt);
 
 //______________________________________________________________________________
 class EXP lpsrNewStaffBlock : public lpsrElement
@@ -193,17 +191,17 @@ class EXP lpsrNewStaffBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // fields
     // ------------------------------------------------------
 
-    vector<S_msrElement> fNewStaffElements;
+    std::vector<S_msrElement> fNewStaffElements;
 };
 typedef SMARTP<lpsrNewStaffBlock> S_lpsrNewStaffBlock;
-EXP ostream& operator << (ostream& os, const S_lpsrNewStaffBlock& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffBlock& elt);
 
 //______________________________________________________________________________
 class EXP lpsrStaffBlock : public lpsrElement
@@ -234,28 +232,28 @@ class EXP lpsrStaffBlock : public lpsrElement
     S_msrStaff            getStaff () const
                               { return fStaff; }
 
-    const list<S_msrElement>&
+    const std::list<S_msrElement>&
                           getStaffBlockElements () const
                               { return fStaffBlockElements; }
 
     void                  setStaffBlockInstrumentName (
-                            const string& instrumentName)
+                            const std::string& instrumentName)
                               {
                                 fStaffBlockInstrumentName =
                                   instrumentName;
                               }
 
-    string                getStaffBlockInstrumentName () const
+    std::string           getStaffBlockInstrumentName () const
                               { return fStaffBlockInstrumentName; }
 
     void                  setStaffBlockShortInstrumentName (
-                            const string& shortInstrumentName)
+                            const std::string& shortInstrumentName)
                               {
                                 fStaffBlockShortInstrumentName =
                                   shortInstrumentName;
                               }
 
-    string                getStaffBlockShortInstrumentName () const
+    std::string           getStaffBlockShortInstrumentName () const
                               { return fStaffBlockShortInstrumentName; }
 
   public:
@@ -288,7 +286,7 @@ class EXP lpsrStaffBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -297,13 +295,13 @@ class EXP lpsrStaffBlock : public lpsrElement
 
     S_msrStaff            fStaff;
 
-    list<S_msrElement>    fStaffBlockElements;
+    std::list<S_msrElement>    fStaffBlockElements;
 
-    string                fStaffBlockInstrumentName;
-    string                fStaffBlockShortInstrumentName;
+    std::string           fStaffBlockInstrumentName;
+    std::string           fStaffBlockShortInstrumentName;
 };
 typedef SMARTP<lpsrStaffBlock> S_lpsrStaffBlock;
-EXP ostream& operator << (ostream& os, const S_lpsrStaffBlock& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrStaffBlock& elt);
 
 
 }

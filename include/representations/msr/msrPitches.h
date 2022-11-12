@@ -15,7 +15,7 @@
 #include <string>
 #include <ostream>
 
-#include "msrMusicXMLSpecifics.h"
+#include "exports.h"
 
 
 namespace MusicFormats
@@ -32,14 +32,10 @@ enum class msrDiatonicPitchKind {
   kDiatonicPitchG, kDiatonicPitchA, kDiatonicPitchB
 };
 
-string msrDiatonicPitchKindAsString (
+std::string msrDiatonicPitchKindAsString (
   msrDiatonicPitchKind diatonicPitchKind);
 
-ostream& operator << (ostream& os, const msrDiatonicPitchKind& elt);
-
-EXP msrXMLLangKind msrXMLLangKindFromString (
-  int           inputLineNumber,
-  const string& XMLLangString);
+std::ostream& operator << (std::ostream& os, const msrDiatonicPitchKind& elt);
 
 EXP msrDiatonicPitchKind msrDiatonicPitchKindFromChar (
   char diatonicNoteName);
@@ -92,10 +88,10 @@ enum class msrSemiTonesPitchKind {
   kSTP_B_TripleSharp
 };
 
-string msrSemiTonesPitchKindAsString (
+std::string msrSemiTonesPitchKindAsString (
   msrSemiTonesPitchKind semiTonesPitchKind);
 
-ostream& operator << (ostream& os, const msrSemiTonesPitchKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSemiTonesPitchKind& elt);
 
 // quarter tones pitches
 //______________________________________________________________________________
@@ -147,10 +143,10 @@ enum class msrQuarterTonesPitchKind {
   kQTP_G_TripleSharp
 };
 
-EXP string msrQuarterTonesPitchKindAsString (
+EXP std::string msrQuarterTonesPitchKindAsString (
   msrQuarterTonesPitchKind quarterTonesPitchKind);
 
-ostream& operator << (ostream& os, const msrQuarterTonesPitchKind& elt);
+std::ostream& operator << (std::ostream& os, const msrQuarterTonesPitchKind& elt);
 
 // alterations
 //______________________________________________________________________________
@@ -164,10 +160,10 @@ enum class msrAlterationKind {
   kAlterationDoubleSharp, kAlterationTripleSharp
 };
 
-string msrAlterationKindAsString (
+std::string msrAlterationKindAsString (
   msrAlterationKind alterationKind);
 
-ostream& operator << (ostream& os, const msrAlterationKind& elt);
+std::ostream& operator << (std::ostream& os, const msrAlterationKind& elt);
 
 EXP msrAlterationKind msrAlterationKindFromMusicXMLAlter (
   float alter);
@@ -184,10 +180,10 @@ enum class msrAlterationPreferenceKind {
   kAlterationPreferenceSharp
 };
 
-EXP string msrAlterationPreferenceKindAsString (
+EXP std::string msrAlterationPreferenceKindAsString (
   msrAlterationPreferenceKind alterationPreferenceKind);
 
-ostream& operator << (ostream& os, const msrAlterationPreferenceKind& elt);
+std::ostream& operator << (std::ostream& os, const msrAlterationPreferenceKind& elt);
 
 //______________________________________________________________________________
 msrQuarterTonesPitchKind msrSemiTonesPitchKindAsQuarterTonesPitchKind (
@@ -220,7 +216,7 @@ EXP msrSemiTonesPitchKind semiTonesPitchKindFromQuarterTonesPitchKind (
   msrQuarterTonesPitchKind quarterTonesPitchKind);
 
 EXP msrSemiTonesPitchKind semiTonesPitchKindFromString (
-  const string& theString);
+  const std::string& theString);
 
 // enharmonies
 //______________________________________________________________________________

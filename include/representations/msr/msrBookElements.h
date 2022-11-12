@@ -47,7 +47,7 @@ class EXP msrBookElement : public msrElement
   */
 };
 typedef SMARTP<msrBookElement> S_msrBookElement;
-EXP ostream& operator << (ostream& os, const S_msrBookElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrBookElement& elt);
 
 
 }

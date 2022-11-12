@@ -32,8 +32,8 @@ class EXP xml2gmnRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<xml2gmnRegularHandler> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_xml2gmnInsiderHandler
                                               insiderOahHandler);
 
@@ -43,8 +43,8 @@ class EXP xml2gmnRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           xml2gmnRegularHandler (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_xml2gmnInsiderHandler
                                               insiderOahHandler);
 
@@ -57,7 +57,7 @@ class EXP xml2gmnRegularHandler : public oahRegularHandler
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override
+    std::string           fetchOutputFileNameFromTheOptions () const override
                               {
                                 return
                                   fInsiderHandler->
@@ -88,7 +88,7 @@ class EXP xml2gmnRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -158,7 +158,7 @@ class EXP xml2gmnRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<xml2gmnRegularHandler> S_xml2gmnRegularHandler;
-EXP ostream& operator << (ostream& os, const S_xml2gmnRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2gmnRegularHandler& elt);
 
 
 }

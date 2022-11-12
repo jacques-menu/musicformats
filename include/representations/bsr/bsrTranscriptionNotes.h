@@ -31,7 +31,7 @@ class EXP bsrTranscriptionNotesElement : public bsrElement
 
     static SMARTP<bsrTranscriptionNotesElement> create (
                             int           inputLineNumber,
-                            const string& transcriptionNoteText);
+                            const std::string& transcriptionNoteText);
 
   protected:
 
@@ -40,7 +40,7 @@ class EXP bsrTranscriptionNotesElement : public bsrElement
 
                           bsrTranscriptionNotesElement (
                             int           inputLineNumber,
-                            const string& transcriptionNoteText);
+                            const std::string& transcriptionNoteText);
 
     virtual               ~bsrTranscriptionNotesElement ();
 
@@ -49,7 +49,7 @@ class EXP bsrTranscriptionNotesElement : public bsrElement
     // set and get
     // ------------------------------------------------------
 
-    string                getTranscriptionNoteText () const
+    std::string           getTranscriptionNoteText () const
                               { return fTranscriptionNoteText; }
 
   public:
@@ -82,19 +82,19 @@ class EXP bsrTranscriptionNotesElement : public bsrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fTranscriptionNoteText;
+    std::string           fTranscriptionNoteText;
 };
 typedef SMARTP<bsrTranscriptionNotesElement> S_bsrTranscriptionNotesElement;
-EXP ostream& operator << (ostream& os, const S_bsrTranscriptionNotesElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotesElement& elt);
 
 //______________________________________________________________________________
 class EXP bsrTranscriptionNotes : public bsrLine
@@ -152,18 +152,18 @@ class EXP bsrTranscriptionNotes : public bsrLine
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    list<S_bsrTranscriptionNotesElement>
+    std::list<S_bsrTranscriptionNotesElement>
                           fTranscriptionNotesElementsList;
 };
 typedef SMARTP<bsrTranscriptionNotes> S_bsrTranscriptionNotes;
-EXP ostream& operator << (ostream& os, const S_bsrTranscriptionNotes& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrTranscriptionNotes& elt);
 
 
 }

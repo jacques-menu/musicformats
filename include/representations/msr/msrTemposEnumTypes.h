@@ -16,8 +16,6 @@
 #include <ostream>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -29,19 +27,19 @@ enum class msrTempoTupletTypeKind {
   kTempoTupletTypeStart, kTempoTupletTypeStop
 };
 
-string msrTempoTupletTypeKindAsString (
+std::string msrTempoTupletTypeKindAsString (
   msrTempoTupletTypeKind tempoTupletTypeKind);
 
-ostream& operator << (ostream& os, const msrTempoTupletTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTempoTupletTypeKind& elt);
 
 enum class msrTempoTupletBracketKind {
   kTempoTupletBracketYes, kTempoTupletBracketNo
 };
 
-string msrTempoTupletBracketKindAsString (
+std::string msrTempoTupletBracketKindAsString (
   msrTempoTupletBracketKind tempoTupletBracketKind);
 
-ostream& operator << (ostream& os, const msrTempoTupletBracketKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTempoTupletBracketKind& elt);
 
 enum class msrTempoTupletShowNumberKind {
   kTempoTupletShowNumberActual,
@@ -49,20 +47,20 @@ enum class msrTempoTupletShowNumberKind {
   kTempoTupletShowNumberNone
 };
 
-string msrTempoTupletShowNumberKindAsString (
+std::string msrTempoTupletShowNumberKindAsString (
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind);
 
-ostream& operator << (ostream& os, const msrTempoTupletShowNumberKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTempoTupletShowNumberKind& elt);
 
 enum class msrTempoNotesRelationshipElementsKind {
   kTempoNotesRelationshipElementsLeft,
   kTempoNotesRelationshipElementsRight
 };
 
-string msrTempoNotesRelationshipElementsKindAsString (
+std::string msrTempoNotesRelationshipElementsKindAsString (
   msrTempoNotesRelationshipElementsKind tempoNotesRelationshipElementsKind);
 
-ostream& operator << (ostream& os, const msrTempoNotesRelationshipElementsKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTempoNotesRelationshipElementsKind& elt);
 
 enum class msrTempoKBeatUnitsKind {
   kTempoBeatUnits_NO_,
@@ -72,28 +70,28 @@ enum class msrTempoKBeatUnitsKind {
   kTempoNotesRelationship
 };
 
-string msrTempoBeatUnitsKindAsString (
+std::string msrTempoBeatUnitsKindAsString (
   msrTempoKBeatUnitsKind tempoKind);
 
-ostream& operator << (ostream& os, const msrTempoKBeatUnitsKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTempoKBeatUnitsKind& elt);
 
 enum class msrTempoParenthesizedKind {
   kTempoParenthesizedYes, kTempoParenthesizedNo
 };
 
-string msrTempoParenthesizedKindAsString (
+std::string msrTempoParenthesizedKindAsString (
   msrTempoParenthesizedKind tempoParenthesizedKind);
 
-ostream& operator << (ostream& os, const msrTempoParenthesizedKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTempoParenthesizedKind& elt);
 
 enum class msrTempoNotesRelationshipKind {
   kTempoNotesRelationshipNone, kTempoNotesRelationshipEquals
 };
 
-string msrTempoNotesRelationshipKindAsString (
+std::string msrTempoNotesRelationshipKindAsString (
   msrTempoNotesRelationshipKind tempoNotesRelationshipKind);
 
-ostream& operator << (ostream& os, const msrTempoNotesRelationshipKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTempoNotesRelationshipKind& elt);
 
 
 }

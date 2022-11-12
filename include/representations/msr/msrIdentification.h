@@ -49,105 +49,105 @@ class EXP msrIdentification : public msrElement
     // work number
     void                  setIdentificationWorkNumber (
                             int           inputLineNumber,
-                            const string& val);
+                            const std::string& val);
 
-    string                getIdentificationWorkNumber () const
+    std::string           getIdentificationWorkNumber () const
                               { return fIdentificationWorkNumber; }
 
     // work title
     void                  setIdentificationWorkCreditTypeTitle (
                             int           inputLineNumber,
-                            const string& val);
+                            const std::string& val);
 
-    string                getIdentificationWorkCreditTypeTitle () const
+    std::string           getIdentificationWorkCreditTypeTitle () const
                               { return fIdentificationWorkCreditTypeTitle; }
 
     // opus
     void                  setIdentificationOpus (
                             int           inputLineNumber,
-                            const string& val);
+                            const std::string& val);
 
-    string                getIdentificationOpus () const
+    std::string           getIdentificationOpus () const
                               { return fIdentificationOpus; }
 
     // movement number
     void                  setIdentificationMovementNumber (
                             int           inputLineNumber,
-                            const string& val);
+                            const std::string& val);
 
-    string                getIdentificationMovementNumber () const
+    std::string           getIdentificationMovementNumber () const
                               { return fIdentificationMovementNumber; }
 
     // movement title
     void                  setIdentificationMovementTitle (
                             int           inputLineNumber,
-                            const string& val);
+                            const std::string& val);
 
-    string                getIdentificationMovementTitle () const
+    std::string           getIdentificationMovementTitle () const
                               { return fIdentificationMovementTitle; }
 
     // encoding date
     void                  setIdentificationEncodingDate (
                             int           inputLineNumber,
-                            const string& val);
+                            const std::string& val);
 
-    string                getIdentificationEncodingDate () const
+    std::string           getIdentificationEncodingDate () const
                               { return fIdentificationEncodingDate; }
 
     // miscellaneous field
     void                  setIdentificationMiscellaneousField (
                             int           inputLineNumber,
-                            const string& val);
+                            const std::string& val);
 
-    string                getIdentificationMiscellaneousField () const
+    std::string           getIdentificationMiscellaneousField () const
                               { return fIdentificationMiscellaneousField; }
 
     // score instrument
     void                  setIdentificationScoreInstrument (
                             int           inputLineNumber,
-                            const string& val);
+                            const std::string& val);
 
-    string                getIdentificationScoreInstrument () const
+    std::string           getIdentificationScoreInstrument () const
                               { return fIdentificationScoreInstrument; }
 
     // composers
-    const list<string>&   getIdentificationComposersList () const
+    const std::list<std::string>&   getIdentificationComposersList () const
                               { return fIdentificationComposersList; }
 
     // lyricists
-    const list<string>&   getIdentificationLyricistsList () const
+    const std::list<std::string>&   getIdentificationLyricistsList () const
                               { return fIdentificationLyricistsList; }
 
     // arrangers
-    const list<string>&   getIdentificationArrangersList () const
+    const std::list<std::string>&   getIdentificationArrangersList () const
                               { return fIdentificationArrangersList; }
 
     // poets
-    const list<string>&   getIdentificationPoetsList () const
+    const std::list<std::string>&   getIdentificationPoetsList () const
                               { return fIdentificationPoetsList; }
 
     // translators
-    const list<string>&   getIdentificationTranslatorsList () const
+    const std::list<std::string>&   getIdentificationTranslatorsList () const
                               { return fIdentificationTranslatorsList; }
 
     // artists
-    const list<string>&   getIdentificationArtistsList () const
+    const std::list<std::string>&   getIdentificationArtistsList () const
                               { return fIdentificationArtistsList; }
 
     // softwares
-    const list<string>&   getIdentificationSoftwaresList () const
+    const std::list<std::string>&   getIdentificationSoftwaresList () const
                               { return fIdentificationSoftwaresList; }
 
     // rights
-    const list<string>&   getIdentificationRightsList () const
+    const std::list<std::string>&   getIdentificationRightsList () const
                               { return fIdentificationRightsList; }
 
     // sources
-    const list<string>&   getIdentificationSourcesList () const
+    const std::list<std::string>&   getIdentificationSourcesList () const
                               { return fIdentificationSourcesList; }
 
     // relations
-    const list<string>&   getIdentificationRelationsList () const
+    const std::list<std::string>&   getIdentificationRelationsList () const
                               { return fIdentificationRelationsList; }
 
   public:
@@ -158,52 +158,52 @@ class EXP msrIdentification : public msrElement
     // composers
     void                  appendComposer (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     // lyricists
     void                  appendLyricist (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     // arrangers
     void                  appendArranger (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     // poets
     void                  appendPoet (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     // translators
     void                  appendTranslator (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     // artists
     void                  appendArtist (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     // softwares
     void                  appendSoftware (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     // rights
     void                  appendRight (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     // rources
     void                  appendSource (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     // relations
     void                  appendRelation (
                             int           inputLineNumber,
-                            const string& value);
+                            const std::string& value);
 
     size_t                maxIdentificationNamesLength ();
 
@@ -222,9 +222,9 @@ class EXP msrIdentification : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -232,43 +232,43 @@ class EXP msrIdentification : public msrElement
     // ------------------------------------------------------
 
     // work
-    string                fIdentificationWorkNumber;
-    string                fIdentificationWorkCreditTypeTitle;
-    string                fIdentificationOpus;
+    std::string           fIdentificationWorkNumber;
+    std::string           fIdentificationWorkCreditTypeTitle;
+    std::string           fIdentificationOpus;
 
-    string                fIdentificationMovementNumber;
-    string                fIdentificationMovementTitle;
+    std::string           fIdentificationMovementNumber;
+    std::string           fIdentificationMovementTitle;
 
     // encoding date
-    string                fIdentificationEncodingDate;
+    std::string           fIdentificationEncodingDate;
 
     // miscellaneous field
-    string                fIdentificationMiscellaneousField;
+    std::string           fIdentificationMiscellaneousField;
 
     // score instrument
-    string                fIdentificationScoreInstrument;
+    std::string           fIdentificationScoreInstrument;
 
     // creators
-    list<string>          fIdentificationComposersList;
-    list<string>          fIdentificationLyricistsList;
-    list<string>          fIdentificationArrangersList;
+    std::list<std::string>          fIdentificationComposersList;
+    std::list<std::string>          fIdentificationLyricistsList;
+    std::list<std::string>          fIdentificationArrangersList;
 
-    list<string>          fIdentificationPoetsList;
-    list<string>          fIdentificationTranslatorsList;
-    list<string>          fIdentificationArtistsList;
+    std::list<std::string>          fIdentificationPoetsList;
+    std::list<std::string>          fIdentificationTranslatorsList;
+    std::list<std::string>          fIdentificationArtistsList;
 
-    list<string>          fIdentificationSoftwaresList;
+    std::list<std::string>          fIdentificationSoftwaresList;
 
     // rights
-    list<string>          fIdentificationRightsList;
+    std::list<std::string>          fIdentificationRightsList;
     // sources
-    list<string>          fIdentificationSourcesList;
+    std::list<std::string>          fIdentificationSourcesList;
 
     // relations
-    list<string>          fIdentificationRelationsList;
+    std::list<std::string>          fIdentificationRelationsList;
 };
 typedef SMARTP<msrIdentification> S_msrIdentification;
-EXP ostream& operator << (ostream& os, const S_msrIdentification& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrIdentification& elt);
 
 
 }

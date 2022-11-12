@@ -26,10 +26,10 @@ enum class msrStemKind {
   kStemUp, kStemDown, kStemDouble
 };
 
-string msrStemKindAsString (
+std::string msrStemKindAsString (
   msrStemKind stemKind);
 
-ostream& operator << (ostream& os, const msrStemKind& elt);
+std::ostream& operator << (std::ostream& os, const msrStemKind& elt);
 
 class EXP msrStem : public msrElement
 {
@@ -81,9 +81,9 @@ class EXP msrStem : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -93,7 +93,7 @@ class EXP msrStem : public msrElement
     msrStemKind           fStemKind;
 };
 typedef SMARTP<msrStem> S_msrStem;
-EXP ostream& operator << (ostream& os, const S_msrStem& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrStem& elt);
 
 
 }

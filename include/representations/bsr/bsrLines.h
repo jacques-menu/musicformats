@@ -119,11 +119,11 @@ class EXP bsrLine : public bsrPageElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    virtual string        asDebugString () const;
+    virtual std::string        asDebugString () const;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -137,13 +137,13 @@ class EXP bsrLine : public bsrPageElement
 
     S_bsrCellsList        fLineNumberCellsList;
 
-    list<S_bsrLineContents>
+    std::list<S_bsrLineContents>
                           fLineContentsList;
 
     Bool                  fASpaceIsNeededInLine;
 };
 typedef SMARTP<bsrLine> S_bsrLine;
-EXP ostream& operator << (ostream& os, const S_bsrLine& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrLine& elt);
 
 
 }

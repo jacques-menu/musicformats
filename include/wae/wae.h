@@ -20,90 +20,88 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 void waeWarning (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 void waeInternalWarning (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 //______________________________________________________________________________
 void waeErrorWithoutException (
-  const string& context,
-  const string& sourceCodeFileName,
+  const std::string& context,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 void waeErrorWithoutException (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 void waeError (
-  const string& context,
-  const string& sourceCodeFileName,
+  const std::string& context,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 void waeError (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 void waeErrorWithException (
-  const string& context,
-  const string& sourceCodeFileName,
+  const std::string& context,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message,
-  S_mfException exception);
+  const std::string& message,
+  S_mfException except);
 
 void waeErrorWithException (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message,
-  S_mfException exception);
+  const std::string& message,
+  S_mfException except);
 
 //______________________________________________________________________________
 void waeInternalError (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 void waeInternalErrorWithException (
-  const string& context,
-  const string& inputSourceName,
+  const std::string& context,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message,
-  S_mfException exception);
+  const std::string& message,
+  S_mfException except);
 
 //______________________________________________________________________________
-EXP extern set<int> gGlobalWarningsInputLineNumbers;
-EXP extern set<int> gGlobalErrorsInputLineNumbers;
+EXP extern std::set<int> gGlobalWarningsInputLineNumbers;
+EXP extern std::set<int> gGlobalErrorsInputLineNumbers;
 
 EXP void displayWarningsAndErrorsInputLineNumbers ();
 
@@ -116,14 +114,14 @@ EXP void displayWarningsAndErrorsInputLineNumbers ();
 /*
 EXP void msrStreamsError (
   int    inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int    sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void msrStreamsWarning (
   int    inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int    sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 */
 

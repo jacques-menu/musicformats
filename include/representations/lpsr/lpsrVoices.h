@@ -19,8 +19,6 @@
 #include "msrVoices.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -74,7 +72,7 @@ class EXP lpsrUseVoiceCommand : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -84,7 +82,7 @@ class EXP lpsrUseVoiceCommand : public lpsrElement
     S_msrVoice            fVoice;
 };
 typedef SMARTP<lpsrUseVoiceCommand> S_lpsrUseVoiceCommand;
-EXP ostream& operator << (ostream& os, const S_lpsrUseVoiceCommand& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrUseVoiceCommand& elt);
 
 
 }

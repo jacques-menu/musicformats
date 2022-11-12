@@ -33,12 +33,12 @@ enum class msrRehearsalMarkKind {
   kRehearsalMarkDiamond
 };
 
-string msrRrehearsalKindAsString (
+std::string msrRrehearsalKindAsString (
   msrRehearsalMarkKind rehearsalKind);
 
-ostream& operator << (ostream& os, const msrRehearsalMarkKind& elt);
+std::ostream& operator << (std::ostream& os, const msrRehearsalMarkKind& elt);
 
-class EXP msrRehearsalMark : public msrMeasureElement
+class EXP msrRehearsalMark : public msrMeasureElementLambda
 {
   public:
 
@@ -49,7 +49,7 @@ class EXP msrRehearsalMark : public msrMeasureElement
                             int                  inputLineNumber,
                             S_msrMeasure         upLinkToMeasure,
                             msrRehearsalMarkKind rehearsalKind,
-                            const string&        rehearsalText,
+                            const std::string&        rehearsalText,
                             msrPlacementKind     rehearsalPlacementKind);
 
   protected:
@@ -61,7 +61,7 @@ class EXP msrRehearsalMark : public msrMeasureElement
                             int                  inputLineNumber,
                             S_msrMeasure         upLinkToMeasure,
                             msrRehearsalMarkKind rehearsalKind,
-                            const string&        rehearsalText,
+                            const std::string&        rehearsalText,
                             msrPlacementKind     rehearsalPlacementKind);
 
     virtual               ~msrRehearsalMark ();
@@ -77,7 +77,7 @@ class EXP msrRehearsalMark : public msrMeasureElement
     msrPlacementKind      getRehearsalMarkPlacementKind () const
                               { return fRehearsalMarkPlacementKind; }
 
-    string                getRehearsalMarkText () const
+    std::string           getRehearsalMarkText () const
                               { return fRehearsalMarkText; }
 
   public:
@@ -100,9 +100,9 @@ class EXP msrRehearsalMark : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -111,12 +111,12 @@ class EXP msrRehearsalMark : public msrMeasureElement
 
     msrRehearsalMarkKind  fRehearsalMarkKind;
 
-    string                fRehearsalMarkText;
+    std::string           fRehearsalMarkText;
 
     msrPlacementKind      fRehearsalMarkPlacementKind;
 };
 typedef SMARTP<msrRehearsalMark> S_msrRehearsalMark;
-EXP ostream& operator << (ostream& os, const S_msrRehearsalMark& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrRehearsalMark& elt);
 
 
 }

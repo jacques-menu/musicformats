@@ -17,8 +17,6 @@
 #include "msrNotes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -28,10 +26,10 @@ enum class msrNoteEventKind {
   kNoteEventStop
 };
 
-string msrNoteEventKindAsString (
+std::string msrNoteEventKindAsString (
   msrNoteEventKind noteEventKind);
 
-ostream& operator << (ostream& os, const msrNoteEventKind& elt);
+std::ostream& operator << (std::ostream& os, const msrNoteEventKind& elt);
 
 //________________________________________________________________________
 class msrNoteEvent : public smartable
@@ -86,9 +84,9 @@ class msrNoteEvent : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual string        asString () const;
+    virtual std::string        asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -100,7 +98,7 @@ class msrNoteEvent : public smartable
     msrNoteEventKind      fNoteEventKind;
 };
 typedef SMARTP<msrNoteEvent> S_msrNoteEvent;
-EXP ostream& operator << (ostream& os, const S_msrNoteEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrNoteEvent& elt);
 
 //________________________________________________________________________
 class msrSimultaneousNotesChunk : public smartable
@@ -131,7 +129,7 @@ class msrSimultaneousNotesChunk : public smartable
     Rational              getChunkMeasurePosition () const
                               { return fChunkMeasurePosition; }
 
-    const list<S_msrNote>&
+    const std::list<S_msrNote>&
                           getChunkNotesList () const
                               { return fChunkNotesList; }
 
@@ -157,9 +155,9 @@ class msrSimultaneousNotesChunk : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual string        asString () const;
+    virtual std::string        asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -167,11 +165,11 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
     Rational              fChunkMeasurePosition;
-    list<S_msrNote>       fChunkNotesList;
+    std::list<S_msrNote>       fChunkNotesList;
     Rational              fChunkDurationWholeNotes;
 };
 typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
-EXP ostream& operator << (ostream& os, const S_msrSimultaneousNotesChunk& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSimultaneousNotesChunk& elt);
 
 //______________________________________________________________________________
 // PRE-declaration
@@ -186,7 +184,7 @@ class EXP msrMeasuresSlice : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrMeasuresSlice> create (
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             int           puristMeasureNumber);
 
     SMARTP<msrMeasuresSlice> createMeasuresSliceShallowCopy ();
@@ -197,7 +195,7 @@ class EXP msrMeasuresSlice : public smartable
   protected:
 
                           msrMeasuresSlice (
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             int           puristMeasureNumber);
 
     virtual               ~msrMeasuresSlice ();
@@ -207,34 +205,34 @@ class EXP msrMeasuresSlice : public smartable
     // set and get
     // ------------------------------------------------------
 
-    string                getSliceMeasureNumber () const
+    std::string           getSliceMeasureNumber () const
                               { return fSliceMeasureNumber; }
 
     int                   getSlicePuristMeasureNumber () const
                               { return fSlicePuristMeasureNumber; }
 
-    const vector<S_msrMeasure>&
+    const std::vector<S_msrMeasure>&
                           getSliceMeasuresVector () const
                               { return fSliceMeasuresVector; }
 
     int                   getSliceSize () const
                               { return fSliceMeasuresVector.size (); }
 
-    // notes flat list
+    // notes flat std::list
 
-    const list<S_msrNote>&
+    const std::list<S_msrNote>&
                           getSliceNotesFlatList () const
                               { return fSliceNotesFlatList; }
 
-    // note events list
+    // note events std::list
 
-    const list<S_msrNoteEvent>&
+    const std::list<S_msrNoteEvent>&
                           getSliceNoteEventsList () const
                               { return fSliceNoteEventsList; }
 
-    // simultaneous notes chunks list
+    // simultaneous notes chunks std::list
 
-    const list<S_msrSimultaneousNotesChunk>&
+    const std::list<S_msrSimultaneousNotesChunk>&
                           getSliceSimultaneousNotesChunksList () const
                               { return fSliceSimultaneousNotesChunksList; }
 
@@ -262,13 +260,13 @@ class EXP msrMeasuresSlice : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual string        asShortString () const;
-    virtual string        asString () const;
-    virtual string        asShortStringForMeasuresSlices () const;
+    virtual std::string        asShortString () const;
+    virtual std::string        asString () const;
+    virtual std::string        asShortStringForMeasuresSlices () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
-    virtual void          printShort (ostream& os) const;
+    virtual void          printShort (std::ostream& os) const;
 
   protected:
 
@@ -276,22 +274,22 @@ class EXP msrMeasuresSlice : public smartable
     // ------------------------------------------------------
 
     int                   fSlicePuristMeasureNumber;
-    string                fSliceMeasureNumber;
+    std::string           fSliceMeasureNumber;
 
     // the measures in the slice
-    vector<S_msrMeasure>  fSliceMeasuresVector;
+    std::vector<S_msrMeasure>  fSliceMeasuresVector;
 
-    // notes flat list
-    list<S_msrNote>       fSliceNotesFlatList;
+    // notes flat std::list
+    std::list<S_msrNote>       fSliceNotesFlatList;
 
-    // note events list
-    list<S_msrNoteEvent>  fSliceNoteEventsList;
+    // note events std::list
+    std::list<S_msrNoteEvent>  fSliceNoteEventsList;
 
-    // simultaneous notes chunks list
-    list<S_msrSimultaneousNotesChunk>
+    // simultaneous notes chunks std::list
+    std::list<S_msrSimultaneousNotesChunk>
                           fSliceSimultaneousNotesChunksList;
 };
-EXP ostream& operator << (ostream& os, const S_msrMeasuresSlice& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlice& elt);
 
 //______________________________________________________________________________
 class   msrMeasuresSlicesSequence;
@@ -305,14 +303,14 @@ class EXP msrMeasuresSlicesSequence : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrMeasuresSlicesSequence> create (
-                            const string& measuresOrigin);
+                            const std::string& measuresOrigin);
 
     static SMARTP<msrMeasuresSlicesSequence> create (
-                            const string& measuresOrigin,
+                            const std::string& measuresOrigin,
                             int           measuresNumber);
 
     SMARTP<msrMeasuresSlicesSequence> createMeasuresSlicesSequenceShallowCopy (
-                            const string& measuresOrigin);
+                            const std::string& measuresOrigin);
 
   protected:
 
@@ -320,10 +318,10 @@ class EXP msrMeasuresSlicesSequence : public smartable
     // ------------------------------------------------------
 
                           msrMeasuresSlicesSequence (
-                            const string& measuresOrigin);
+                            const std::string& measuresOrigin);
 
                           msrMeasuresSlicesSequence (
-                            const string& measuresOrigin,
+                            const std::string& measuresOrigin,
                             int           measuresNumber);
 
     virtual               ~msrMeasuresSlicesSequence ();
@@ -333,13 +331,13 @@ class EXP msrMeasuresSlicesSequence : public smartable
     // set and get
     // ------------------------------------------------------
 
-    void                  setMeasuresOrigin (const string& origin)
+    void                  setMeasuresOrigin (const std::string& origin)
                               { fMeasuresOrigin = origin; }
 
-    string                getMeasuresOrigin () const
+    std::string           getMeasuresOrigin () const
                               { return fMeasuresOrigin; }
 
-    const vector<S_msrMeasuresSlice>&
+    const std::vector<S_msrMeasuresSlice>&
                           getMeasuresSlicesVector () const
                               { return fMeasuresSlicesVector; }
 
@@ -357,7 +355,7 @@ class EXP msrMeasuresSlicesSequence : public smartable
     S_msrMeasuresSlicesSequence
                           mergeWithMeasuresSlicesSequence (
                             int           inputLineNumber,
-                            const string& measuresOrigin,
+                            const std::string& measuresOrigin,
                             S_msrMeasuresSlicesSequence
                                           otherMeasuresSlicesSequence);
 
@@ -368,25 +366,25 @@ class EXP msrMeasuresSlicesSequence : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual string        asShortString () const;
-    string                asString () const;
-    virtual string        asShortStringForMeasuresSlices () const;
+    virtual std::string        asShortString () const;
+    std::string           asString () const;
+    virtual std::string        asShortStringForMeasuresSlices () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
-    virtual void          printShort (ostream& os) const;
+    virtual void          printShort (std::ostream& os) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fMeasuresOrigin;
+    std::string           fMeasuresOrigin;
 
-    vector<S_msrMeasuresSlice>
+    std::vector<S_msrMeasuresSlice>
                           fMeasuresSlicesVector;
 };
-EXP ostream& operator << (ostream& os, const S_msrMeasuresSlicesSequence& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlicesSequence& elt);
 
 
 }

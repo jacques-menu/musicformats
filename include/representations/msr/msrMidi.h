@@ -28,7 +28,7 @@ class EXP msrMidiTempo : public msrElement
 
     static SMARTP<msrMidiTempo> create (
                             int           inputLineNumber,
-                            const string& midiTempoDuration,
+                            const std::string& midiTempoDuration,
                             int           midiTempoPerSecond);
 
     SMARTP<msrMidiTempo> createMsrMidiTempoNewbornClone ();
@@ -40,7 +40,7 @@ class EXP msrMidiTempo : public msrElement
 
                           msrMidiTempo (
                             int           inputLineNumber,
-                            const string& midiTempoDuration,
+                            const std::string& midiTempoDuration,
                             int           midiTempoPerSecond);
 
     msrMidiTempo ();
@@ -51,10 +51,10 @@ class EXP msrMidiTempo : public msrElement
 
     // set and get
     // ------------------------------------------------------
-    void                  setMidiTempoDuration (const string& value)
+    void                  setMidiTempoDuration (const std::string& value)
                               { fMidiTempoDuration = value; }
 
-    string                getMidiTempoDuration () const
+    std::string           getMidiTempoDuration () const
                               { return fMidiTempoDuration; }
 
     void                  setMidiTempoPerSecond (int value)
@@ -83,20 +83,20 @@ class EXP msrMidiTempo : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fMidiTempoDuration;
+    std::string           fMidiTempoDuration;
     int                   fMidiTempoPerSecond;
 };
 typedef SMARTP<msrMidiTempo> S_msrMidiTempo;
-EXP ostream& operator << (ostream& os, const S_msrMidiTempo& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMidiTempo& elt);
 
 
 }

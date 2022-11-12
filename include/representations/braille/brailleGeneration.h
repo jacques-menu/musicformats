@@ -25,24 +25,24 @@ enum class bsrUTFKind {
   kUTF8, kUTF16
 };
 
-string bsrUTFKindAsString (
+std::string bsrUTFKindAsString (
   bsrUTFKind UTFKind);
 
-ostream& operator << (ostream& os, const bsrUTFKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrUTFKind& elt);
 
 enum class bsrByteOrderingKind {
   kByteOrderingNone,
   kByteOrderingBigEndian, kByteOrderingSmallEndian
 };
 
-string bsrByteOrderingKindAsString (
+std::string bsrByteOrderingKindAsString (
   bsrByteOrderingKind byteOrderingKind);
 
-ostream& operator << (ostream& os, const bsrByteOrderingKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrByteOrderingKind& elt);
 
 //______________________________________________________________________________
 // Bytes Encoding Marks (BOM)
-const string
+const std::string
   kBOM_UTF_32_BigEndian =
     "\x00\x00\xFE\xFF", // UTF-32, big-endian
   kBOM_UTF_32_LittleEndian =
@@ -64,7 +64,7 @@ class EXP bsrBrailleGenerator : public smartable
 
 /* this class   is purely virtual
     static SMARTP<bsrBrailleGenerator> create (
-                            ostream& brailleOutputStream);
+                            std::ostream& brailleOutputStream);
 */
 
   protected:
@@ -73,7 +73,7 @@ class EXP bsrBrailleGenerator : public smartable
     // ------------------------------------------------------
 
                           bsrBrailleGenerator (
-                            ostream& brailleOutputStream);
+                            std::ostream& brailleOutputStream);
 
     virtual               ~bsrBrailleGenerator ();
 
@@ -104,19 +104,19 @@ class EXP bsrBrailleGenerator : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    ostream&              fBrailleOutputStream;
+    std::ostream&              fBrailleOutputStream;
 };
 typedef SMARTP<bsrBrailleGenerator> S_bsrBrailleGenerator;
-EXP ostream& operator << (ostream& os, const S_bsrBrailleGenerator& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrBrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrAsciiBrailleGenerator : public bsrBrailleGenerator
@@ -127,7 +127,7 @@ class EXP bsrAsciiBrailleGenerator : public bsrBrailleGenerator
     // ------------------------------------------------------
 
     static SMARTP<bsrAsciiBrailleGenerator> create (
-                            ostream& brailleOutputStream);
+                            std::ostream& brailleOutputStream);
 
   protected:
 
@@ -135,7 +135,7 @@ class EXP bsrAsciiBrailleGenerator : public bsrBrailleGenerator
     // ------------------------------------------------------
 
                           bsrAsciiBrailleGenerator (
-                            ostream& brailleOutputStream);
+                            std::ostream& brailleOutputStream);
 
     virtual               ~bsrAsciiBrailleGenerator ();
 
@@ -152,16 +152,16 @@ class EXP bsrAsciiBrailleGenerator : public bsrBrailleGenerator
     virtual void          generateCodeForBrailleCell (
                             bsrCellKind cellKind) override;
 
-    static void           writeTestData (ostream& os);
+    static void           writeTestData (std::ostream& os);
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -169,7 +169,7 @@ class EXP bsrAsciiBrailleGenerator : public bsrBrailleGenerator
     // ------------------------------------------------------
 };
 typedef SMARTP<bsrAsciiBrailleGenerator> S_bsrAsciiBrailleGenerator;
-EXP ostream& operator << (ostream& os, const S_bsrAsciiBrailleGenerator& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrAsciiBrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrUTF8BrailleGenerator : public bsrBrailleGenerator
@@ -181,7 +181,7 @@ class EXP bsrUTF8BrailleGenerator : public bsrBrailleGenerator
 
     static SMARTP<bsrUTF8BrailleGenerator> create (
                             bsrByteOrderingKind byteOrderingKind,
-                            ostream&            brailleOutputStream);
+                            std::ostream&            brailleOutputStream);
 
   protected:
 
@@ -190,7 +190,7 @@ class EXP bsrUTF8BrailleGenerator : public bsrBrailleGenerator
 
                           bsrUTF8BrailleGenerator (
                             bsrByteOrderingKind byteOrderingKind,
-                            ostream&            brailleOutputStream);
+                            std::ostream&            brailleOutputStream);
 
     virtual               ~bsrUTF8BrailleGenerator ();
 
@@ -210,16 +210,16 @@ class EXP bsrUTF8BrailleGenerator : public bsrBrailleGenerator
     virtual void          generateCodeForBrailleCell (
                             bsrCellKind cellKind) override;
 
-    static void           writeTestData (ostream& os);
+    static void           writeTestData (std::ostream& os);
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -229,7 +229,7 @@ class EXP bsrUTF8BrailleGenerator : public bsrBrailleGenerator
     bsrByteOrderingKind   fByteOrderingKind;
 };
 typedef SMARTP<bsrUTF8BrailleGenerator> S_bsrUTF8BrailleGenerator;
-EXP ostream& operator << (ostream& os, const S_bsrUTF8BrailleGenerator& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrUTF8BrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
@@ -241,7 +241,7 @@ class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
 
     static SMARTP<bsrUTF8DebugBrailleGenerator> create (
                             bsrByteOrderingKind byteOrderingKind,
-                            ostream&            brailleOutputStream);
+                            std::ostream&            brailleOutputStream);
 
   protected:
 
@@ -250,7 +250,7 @@ class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
 
                           bsrUTF8DebugBrailleGenerator (
                             bsrByteOrderingKind byteOrderingKind,
-                            ostream&            brailleOutputStream);
+                            std::ostream&            brailleOutputStream);
 
     virtual               ~bsrUTF8DebugBrailleGenerator ();
 
@@ -275,9 +275,9 @@ class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -285,7 +285,7 @@ class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
     // ------------------------------------------------------
 };
 typedef SMARTP<bsrUTF8DebugBrailleGenerator> S_bsrUTF8DebugBrailleGenerator;
-EXP ostream& operator << (ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrUTF16BigEndianBrailleGenerator : public bsrBrailleGenerator
@@ -297,7 +297,7 @@ class EXP bsrUTF16BigEndianBrailleGenerator : public bsrBrailleGenerator
 
     static SMARTP<bsrUTF16BigEndianBrailleGenerator> create (
                             bsrByteOrderingKind byteOrderingKind,
-                            ostream&            brailleOutputStream);
+                            std::ostream&            brailleOutputStream);
 
   protected:
 
@@ -306,7 +306,7 @@ class EXP bsrUTF16BigEndianBrailleGenerator : public bsrBrailleGenerator
 
                           bsrUTF16BigEndianBrailleGenerator (
                             bsrByteOrderingKind byteOrderingKind,
-                            ostream&            brailleOutputStream);
+                            std::ostream&            brailleOutputStream);
 
     virtual               ~bsrUTF16BigEndianBrailleGenerator ();
 
@@ -326,16 +326,16 @@ class EXP bsrUTF16BigEndianBrailleGenerator : public bsrBrailleGenerator
     virtual void          generateCodeForBrailleCell (
                             bsrCellKind cellKind) override;
 
-    static void           writeTestData (ostream& os);
+    static void           writeTestData (std::ostream& os);
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -345,7 +345,7 @@ class EXP bsrUTF16BigEndianBrailleGenerator : public bsrBrailleGenerator
     bsrByteOrderingKind   fByteOrderingKind;
 };
 typedef SMARTP<bsrUTF16BigEndianBrailleGenerator> S_bsrUTF16BigEndianBrailleGenerator;
-EXP ostream& operator << (ostream& os, const S_bsrUTF16BigEndianBrailleGenerator& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrUTF16BigEndianBrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrUTF16SmallEndianBrailleGenerator : public bsrBrailleGenerator
@@ -357,7 +357,7 @@ class EXP bsrUTF16SmallEndianBrailleGenerator : public bsrBrailleGenerator
 
     static SMARTP<bsrUTF16SmallEndianBrailleGenerator> create (
                             bsrByteOrderingKind byteOrderingKind,
-                            ostream&            brailleOutputStream);
+                            std::ostream&            brailleOutputStream);
 
   protected:
 
@@ -366,7 +366,7 @@ class EXP bsrUTF16SmallEndianBrailleGenerator : public bsrBrailleGenerator
 
                           bsrUTF16SmallEndianBrailleGenerator (
                             bsrByteOrderingKind byteOrderingKind,
-                            ostream&            brailleOutputStream);
+                            std::ostream&            brailleOutputStream);
 
     virtual               ~bsrUTF16SmallEndianBrailleGenerator ();
 
@@ -386,16 +386,16 @@ class EXP bsrUTF16SmallEndianBrailleGenerator : public bsrBrailleGenerator
     virtual void          generateCodeForBrailleCell (
                             bsrCellKind cellKind) override;
 
-    static void           writeTestData (ostream& os);
+    static void           writeTestData (std::ostream& os);
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -405,7 +405,7 @@ class EXP bsrUTF16SmallEndianBrailleGenerator : public bsrBrailleGenerator
     bsrByteOrderingKind   fByteOrderingKind;
 };
 typedef SMARTP<bsrUTF16SmallEndianBrailleGenerator> S_bsrUTF16SmallEndianBrailleGenerator;
-EXP ostream& operator << (ostream& os, const S_bsrUTF16SmallEndianBrailleGenerator& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrUTF16SmallEndianBrailleGenerator& elt);
 
 
 }

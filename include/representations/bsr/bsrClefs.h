@@ -27,13 +27,13 @@ enum class bsrClefKind {
   kClefKindModifiedTrebleForLeftHandPart
 };
 
-string bsrClefKindAsString (
+std::string bsrClefKindAsString (
   bsrClefKind clefKind);
 
-string bsrClefKindAsDebugString (
+std::string bsrClefKindAsDebugString (
   bsrClefKind clefKind);
 
-ostream& operator << (ostream& os, const bsrClefKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrClefKind& elt);
 
 class EXP bsrClef : public bsrLineContentsElement
 {
@@ -97,11 +97,11 @@ class EXP bsrClef : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -113,7 +113,7 @@ class EXP bsrClef : public bsrLineContentsElement
     S_bsrCellsList        fClefCellsList;
 };
 typedef SMARTP<bsrClef> S_bsrClef;
-EXP ostream& operator << (ostream& os, const S_bsrClef& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrClef& elt);
 
 
 }

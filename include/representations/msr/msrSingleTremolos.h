@@ -99,11 +99,11 @@ class EXP msrSingleTremolo : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                singleTremoloPlacementKindAsString () const;
+    std::string           singleTremoloPlacementKindAsString () const;
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -117,7 +117,7 @@ class EXP msrSingleTremolo : public msrElement
     msrDurationKind       fSingleTremoloGraphicDurationKind;
 };
 typedef SMARTP<msrSingleTremolo> S_msrSingleTremolo;
-EXP ostream& operator << (ostream& os, const S_msrSingleTremolo& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSingleTremolo& elt);
 
 
 }

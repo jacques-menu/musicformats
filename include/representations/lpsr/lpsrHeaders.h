@@ -59,73 +59,73 @@ class EXP lpsrHeader : public lpsrElement
 
     // centered
 
-    void                  setLilypondDedication (string value)
+    void                  setLilypondDedication (std::string value)
                               { fLilypondDedication = value; }
 
-    string                getLilypondDedication () const
+    std::string           getLilypondDedication () const
                               { return fLilypondDedication; }
 
-    void                  setLilypondPiece (string value)
+    void                  setLilypondPiece (std::string value)
                               { fLilypondPiece = value; }
 
-    string                getLilypondPiece () const
+    std::string           getLilypondPiece () const
                               { return fLilypondPiece; }
 
-    void                  setLilypondOpus (string value)
+    void                  setLilypondOpus (std::string value)
                               { fLilypondOpus = value; }
 
-    string                getLilypondOpus () const
+    std::string           getLilypondOpus () const
                               { return fLilypondOpus; }
 
-    void                  setLilypondTitle (string value)
+    void                  setLilypondTitle (std::string value)
                               { fLilypondTitle = value; }
 
-    string                getLilypondTitle () const
+    std::string           getLilypondTitle () const
                               { return fLilypondTitle; }
 
-    void                  setLilypondSubTitle (string value)
+    void                  setLilypondSubTitle (std::string value)
                               { fLilypondSubTitle = value; }
 
-    string                getLilypondSubTitle () const
+    std::string           getLilypondSubTitle () const
                               { return fLilypondSubTitle; }
 
-    void                  setLilypondSubSubTitle (string value)
+    void                  setLilypondSubSubTitle (std::string value)
                               { fLilypondSubSubTitle = value; }
 
-    string                getLilypondSubSubTitle () const
+    std::string           getLilypondSubSubTitle () const
                               { return fLilypondSubSubTitle; }
 
     // evenly spread on one line
     // "instrument" also appears on following pages
 
-    void                  setLilypondInstrument (string value)
+    void                  setLilypondInstrument (std::string value)
                               { fLilypondInstrument = value; }
 
-    string                getLilypondInstrument () const
+    std::string           getLilypondInstrument () const
                               { return fLilypondInstrument; }
 
     // at opposite ends of the same line
 
-    void                  setLilypondMeter (string value)
+    void                  setLilypondMeter (std::string value)
                               { fLilypondMeter = value; }
 
-    string                getLilypondMeter () const
+    std::string           getLilypondMeter () const
                               { return fLilypondMeter; }
 
     // centered at the bottom of the first page
 
-    void                  setLilypondCopyright (string value)
+    void                  setLilypondCopyright (std::string value)
                               { fLilypondCopyright = value; }
 
-    string                getLilypondCopyright () const
+    std::string           getLilypondCopyright () const
                               { return fLilypondCopyright; }
 
     // centered at the bottom of the last page
 
-    void                  setLilypondTagline (string value)
+    void                  setLilypondTagline (std::string value)
                               { fLilypondTagline = value; }
 
-    string                getLilypondTagline () const
+    std::string           getLilypondTagline () const
                               { return fLilypondTagline; }
 
   public:
@@ -152,11 +152,11 @@ class EXP lpsrHeader : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -170,30 +170,30 @@ class EXP lpsrHeader : public lpsrElement
     // Lilypond informations
 
     // centered
-    string                fLilypondDedication;
+    std::string           fLilypondDedication;
 
-    string                fLilypondPiece;
-    string                fLilypondOpus;
+    std::string           fLilypondPiece;
+    std::string           fLilypondOpus;
 
-    string                fLilypondTitle;
-    string                fLilypondSubTitle;
-    string                fLilypondSubSubTitle;
+    std::string           fLilypondTitle;
+    std::string           fLilypondSubTitle;
+    std::string           fLilypondSubSubTitle;
 
     // evenly spread on one line
     // "instrument" also appears on following pages
-    string                fLilypondInstrument;
+    std::string           fLilypondInstrument;
 
     // at opposite ends of the same line
-    string                fLilypondMeter;
+    std::string           fLilypondMeter;
 
     // centered at the bottom of the first page
-    string                fLilypondCopyright;
+    std::string           fLilypondCopyright;
 
     // centered at the bottom of the last page
-    string                fLilypondTagline;
+    std::string           fLilypondTagline;
 };
 typedef SMARTP<lpsrHeader> S_lpsrHeader;
-EXP ostream& operator << (ostream& os, const S_lpsrHeader& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrHeader& elt);
 
 
 }

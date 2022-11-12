@@ -17,8 +17,6 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,7 +24,7 @@ namespace MusicFormats
 class EXP meiException : public mfException
 {
   public:
-    meiException (string const& exceptionDescription) throw ()
+    meiException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };
@@ -35,7 +33,7 @@ typedef SMARTP<meiException> S_meiException;
 // class EXP meiInternalException: public mfException
 // {
 //   public:
-//     meiInternalException (string const& exceptionDescription) throw ()
+//     meiInternalException (std::string const& exceptionDescription) throw ()
 //       : mfException (exceptionDescription)
 //     {}
 // };
@@ -43,23 +41,23 @@ typedef SMARTP<meiException> S_meiException;
 
 //______________________________________________________________________________
 EXP void meiWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void meiError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void meiInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 
 }

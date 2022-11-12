@@ -21,7 +21,7 @@ class EXP msdrMeasure : public smartable
 
     static SMARTP<msdrMeasure> create (
                             int           inputLineNumber,
-                            const string& measureNumber);
+                            const std::string& measureNumber);
 
     SMARTP<msdrMeasure> createMusicNewbornClone ();
 
@@ -33,7 +33,7 @@ class EXP msdrMeasure : public smartable
     // for regular voices
                           msdrMeasure (
                             int           inputLineNumber,
-                            const string& measureNumber);
+                            const std::string& measureNumber);
 
                           msdrMeasure ();
 
@@ -53,19 +53,19 @@ class EXP msdrMeasure : public smartable
     // ------------------------------------------------------
 
     // measure number
-    string                getMeasureNumber () const
+    std::string           getMeasureNumber () const
                               { return fMeasureNumber; }
 
     // input line number
     int                   getInputLineNumber () const
                               { return fInputLineNumber; }
 
-    // music measures vector
-    const vector<S_msdrLayer>&
+    // music measures std::vector
+    const std::vector<S_msdrLayer>&
                           getMeasureElementsVector () const
                               { return fMeasureElementsVector; }
-    // measures flat list
-    const list<S_msdrLayer>&
+    // measures flat std::list
+    const std::list<S_msdrLayer>&
                           getMeasureLayersList () const
                               { return fMeasureLayersList; }
 
@@ -99,16 +99,16 @@ class EXP msdrMeasure : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const;
-    string                asString () const;
+    std::string           asShortString () const;
+    std::string           asString () const;
 
     void                  displayMeasure (
                             int           inputLineNumber,
-                            const string& context) const;
+                            const std::string& context) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
-    void                  printShort (ostream& os) const;
+    void                  printShort (std::ostream& os) const;
 
   private:
 
@@ -116,13 +116,13 @@ class EXP msdrMeasure : public smartable
     // ------------------------------------------------------
 
     // measure number
-    string                fMeasureNumber;
+    std::string           fMeasureNumber;
 
     // input line number
     int                   fInputLineNumber;
 
-    // measures elements list
-    list<S_msdrLayer>
+    // measures elements std::list
+    std::list<S_msdrLayer>
                           fMeasureLayersList;
 
   public:
@@ -135,15 +135,15 @@ class EXP msdrMeasure : public smartable
     // work fields
     // ------------------------------------------------------
 
-    // measures elements vector
-    vector<S_msdrLayer>
+    // measures elements std::vector
+    std::vector<S_msdrLayer>
                           fMeasureElementsVector;
 
     // voice finalization
     Bool                  fMeasureHasBeenFinalized;
 };
 typedef SMARTP<msdrMeasure> S_msdrMeasure;
-EXP ostream& operator << (ostream& os, const S_msdrMeasure& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdrMeasure& elt);
 
 
 }

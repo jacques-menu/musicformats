@@ -90,7 +90,7 @@ class EXP LilyPondIssue34Generator : public smartable
     // the measures
     S_msrMeasure          createMeasureInVoice (
                             int           inputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             S_msrVoice    voice);
 
     // populating the upper voice
@@ -114,7 +114,7 @@ class EXP LilyPondIssue34Generator : public smartable
                             S_msrVoice lowerVoice2);
 };
 typedef SMARTP<LilyPondIssue34Generator> S_LilyPondIssue34Generator;
-// JMI EXP ostream& operator << (ostream& os, const S_LilyPondIssue34Generator& elt);
+// JMI EXP std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34Generator& elt);
 
 
 }

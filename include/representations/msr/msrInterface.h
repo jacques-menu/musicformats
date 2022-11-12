@@ -30,28 +30,28 @@ S_msrScore createScore ();
 //_______________________________________________________________________________
 void displayMsrScoreShort (
   S_msrScore     theMsrScore,
-  const string&  passDescription);
+  const std::string&  passDescription);
 
 void displayMsrScoreFull (
   S_msrScore     theMsrScore,
-  const string&  passDescription);
+  const std::string&  passDescription);
 
 //______________________________________________________________________________
 EXP void displayMsrScoreSummary (
   S_msrScore     theMsrScore,
   S_msrOahGroup& msrOpts,
-  const string&  passDescription);
+  const std::string&  passDescription);
 
 //______________________________________________________________________________
 EXP void displayMsrScoreNames (
   S_msrScore     theMsrScore,
   S_msrOahGroup& msrOpts,
-  const string&  passDescription);
+  const std::string&  passDescription);
 
 //_______________________________________________________________________________
 void displayMsrScoreSlices (
   S_msrScore    theMsrScore,
-  const string& passDescription);
+  const std::string& passDescription);
 
 // parts
 // ------------------------------------------------------
@@ -74,7 +74,7 @@ S_msrVoice createRegularVoiceInStaff (
 // ------------------------------------------------------
 S_msrMeasure createMeasureInVoice (
   int        inputLineNumber,
-  string     measureNumber,
+  std::string     measureNumber,
              S_msrVoice voice);
 
 

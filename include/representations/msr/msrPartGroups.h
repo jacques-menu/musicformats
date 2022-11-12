@@ -31,20 +31,20 @@ enum class msrPartGroupImplicitKind { // an MSR concept, not present in MusicXML
     kPartGroupImplicitYes, kPartGroupImplicitNo
 };
 
-string msrPartGroupImplicitKindAsString (
+std::string msrPartGroupImplicitKindAsString (
   msrPartGroupImplicitKind partGroupImplicitKind);
 
-ostream& operator << (ostream& os, const msrPartGroupImplicitKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPartGroupImplicitKind& elt);
 
 enum class msrPartGroupTypeKind {
   kPartGroupTypeNone,
   kPartGroupTypeStart, kPartGroupTypeStop
 };
 
-string msrPartGroupTypeKindAsString (
+std::string msrPartGroupTypeKindAsString (
   msrPartGroupTypeKind partGroupTypeKind);
 
-ostream& operator << (ostream& os, const msrPartGroupTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPartGroupTypeKind& elt);
 
 enum class msrPartGroupSymbolKind {
   kPartGroupSymbolNone,
@@ -52,19 +52,19 @@ enum class msrPartGroupSymbolKind {
   kPartGroupSymbolLine, kPartGroupSymbolSquare
 };
 
-string msrPartGroupSymbolKindAsString (
+std::string msrPartGroupSymbolKindAsString (
   msrPartGroupSymbolKind partGroupSymbolKind);
 
-ostream& operator << (ostream& os, const msrPartGroupSymbolKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPartGroupSymbolKind& elt);
 
 enum class msrPartGroupBarLineKind {
   kPartGroupBarLineYes, kPartGroupBarLineNo
 };
 
-string msrPartGroupBarLineKindAsString (
+std::string msrPartGroupBarLineKindAsString (
   msrPartGroupBarLineKind partGroupBarLineKind);
 
-ostream& operator << (ostream& os, const msrPartGroupBarLineKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPartGroupBarLineKind& elt);
 
 //______________________________________________________________________________
 // PRE-declaration
@@ -97,10 +97,10 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const string&            partGroupName,
-                            const string&            partGroupNameDisplayText,
-                            const string&            partGroupAccidentalText,
-                            const string&            partGroupAbbreviation,
+                            const std::string&            partGroupName,
+                            const std::string&            partGroupNameDisplayText,
+                            const std::string&            partGroupAccidentalText,
+                            const std::string&            partGroupAbbreviation,
                             msrPartGroupSymbolKind   partGroupSymbolKind,
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
@@ -111,10 +111,10 @@ class EXP msrPartGroup : public msrPartGroupElement
     static SMARTP<msrPartGroup> createImplicitPartGroup (
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const string&            partGroupName,
-                            const string&            partGroupNameDisplayText,
-                            const string&            partGroupAccidentalText,
-                            const string&            partGroupAbbreviation,
+                            const std::string&            partGroupName,
+                            const std::string&            partGroupNameDisplayText,
+                            const std::string&            partGroupAccidentalText,
+                            const std::string&            partGroupAbbreviation,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
                             S_msrScore               UpLinkToPartGroupToScore);
 
@@ -130,7 +130,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const string&            partGroupName,
+                            const std::string&            partGroupName,
                             S_msrPartGroup           partGroupUpLinkToPartGroup,
                             S_msrScore               UpLinkToPartGroupToScore);
 
@@ -143,10 +143,10 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const string&            partGroupName,
-                            const string&            partGroupNameDisplayText,
-                            const string&            partGroupAccidentalText,
-                            const string&            partGroupAbbreviation,
+                            const std::string&            partGroupName,
+                            const std::string&            partGroupNameDisplayText,
+                            const std::string&            partGroupAccidentalText,
+                            const std::string&            partGroupAbbreviation,
                             msrPartGroupSymbolKind   partGroupSymbolKind,
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
@@ -158,7 +158,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const string&            partGroupName,
+                            const std::string&            partGroupName,
                             S_msrPartGroup           partGroupUpLinkToPartGroup,
                             S_msrScore               UpLinkToPartGroupToScore);
 
@@ -192,23 +192,23 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // names
 
-    string                getPartGroupCombinedName () const;
+    std::string           getPartGroupCombinedName () const;
 
-    string                getPartGroupCombinedNameWithoutEndOfLines () const;
+    std::string           getPartGroupCombinedNameWithoutEndOfLines () const;
                             // for comments in LilyPond code
 
     // miscellaneous
 
-    string                getPartGroupNameDisplayText () const
+    std::string           getPartGroupNameDisplayText () const
                               { return fPartGroupNameDisplayText; }
 
-    string                getPartGroupAccidentalText () const
+    std::string           getPartGroupAccidentalText () const
                               { return fPartGroupAccidentalText; }
 
-    string                getPartGroupName () const
+    std::string           getPartGroupName () const
                               { return fPartGroupName; }
 
-    string                getPartGroupAbbreviation () const
+    std::string           getPartGroupAbbreviation () const
                               { return fPartGroupAbbreviation; }
 
     // symbol
@@ -237,14 +237,14 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // instrument name
 
-    void                  setPartGroupInstrumentName (const string& name);
+    void                  setPartGroupInstrumentName (const std::string& name);
 
-    string                getPartGroupInstrumentName () const
+    std::string           getPartGroupInstrumentName () const
                               { return fPartGroupInstrumentName; }
 
     // elements
 
-    const list<S_msrPartGroupElement>&
+    const std::list<S_msrPartGroupElement>&
                           getPartGroupElementsList () const
                               { return fPartGroupElementsList; }
 
@@ -262,7 +262,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     S_msrPart             appendPartToPartGroupByItsPartID ( // JMI superflous
                             int           inputLineNumber,
-                            const string& partID);
+                            const std::string& partID);
 
     void                  appendPartToPartGroup (S_msrPart part);
 
@@ -278,11 +278,11 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     S_msrPart             fetchPartFromPartGroupByItsPartID (
                             int           inputLineNumber,
-                            const string& partID);
+                            const std::string& partID);
 
     void                  collectPartGroupPartsList (
                             int    inputLineNumber,
-                            list<S_msrPart>& partsList);
+                            std::list<S_msrPart>& partsList);
 
     // voices
 
@@ -306,21 +306,21 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     void                  printPartGroupElementsList (
                             int      inputLineNumber,
-                            ostream& os) const;
+                            std::ostream& os) const;
 
     void                  printPartGroupElementsListShort (
                             int      inputLineNumber,
-                            ostream& os) const;
+                            std::ostream& os) const;
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
-    void                  printSummary (ostream& os) const override;
+    void                  printSummary (std::ostream& os) const override;
 
-    void                  printSlices (ostream& os) const;
+    void                  printSlices (std::ostream& os) const;
 
   private:
 
@@ -349,12 +349,12 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // name
 
-    string                fPartGroupName;
-    string                fPartGroupNameDisplayText;
+    std::string           fPartGroupName;
+    std::string           fPartGroupNameDisplayText;
 
-    string                fPartGroupAccidentalText;
+    std::string           fPartGroupAccidentalText;
 
-    string                fPartGroupAbbreviation;
+    std::string           fPartGroupAbbreviation;
 
     // symbol kind
 
@@ -377,21 +377,21 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // instrument name
 
-    string                fPartGroupInstrumentName; // JMI
+    std::string           fPartGroupInstrumentName; // JMI
 
     // accessing parts by name
 
-    map<string, S_msrPart>
+    std::map<std::string, S_msrPart>
                           fPartGroupPartsMap;
 
     // allowing for both parts and (sub-)part groups as elements
 
-    list<S_msrPartGroupElement>
+    std::list<S_msrPartGroupElement>
                           fPartGroupElementsList;
 
     // voices
 
-    list<S_msrVoice>      fPartGroupAllVoicesList;
+    std::list<S_msrVoice>      fPartGroupAllVoicesList;
 
     // measures slices sequence
 
@@ -399,7 +399,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                           fPartGroupMeasuresSlicesSequence;
 };
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
-EXP ostream& operator << (ostream& os, const S_msrPartGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrPartGroup& elt);
 
 
 }

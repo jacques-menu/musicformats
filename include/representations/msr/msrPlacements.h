@@ -16,8 +16,6 @@
 #include <ostream>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -28,14 +26,14 @@ enum class msrPlacementKind {
   kPlacementAbove, kPlacementBelow
 };
 
-string msrPlacementKindAsString (
+std::string msrPlacementKindAsString (
   msrPlacementKind placementKind);
 
-ostream& operator << (ostream& os, const msrPlacementKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPlacementKind& elt);
 
 msrPlacementKind msrPlacementKindFromString (
   int           inputLineNumber,
-  const string& placementString);
+  const std::string& placementString);
 
 
 }

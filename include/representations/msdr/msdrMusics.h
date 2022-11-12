@@ -22,7 +22,7 @@ class EXP msdrMusic : public smartable
 
     static SMARTP<msdrMusic> create (
                             int           inputLineNumber,
-                            const string& musicName);
+                            const std::string& musicName);
 
     SMARTP<msdrMusic> createMusicNewbornClone ();
 
@@ -33,7 +33,7 @@ class EXP msdrMusic : public smartable
 
                           msdrMusic (
                             int           inputLineNumber,
-                            const string& musicName);
+                            const std::string& musicName);
 
                           msdrMusic ();
 
@@ -52,19 +52,19 @@ class EXP msdrMusic : public smartable
     // ------------------------------------------------------
 
     // music name
-    string                getMusicName () const
+    std::string           getMusicName () const
                               { return fMusicName; }
 
     // input line number
     int                   getInputLineNumber () const
                               { return fInputLineNumber; }
 
-    // music measures vector
-    const vector<S_msdrMeasure>&
+    // music measures std::vector
+    const std::vector<S_msdrMeasure>&
                           getMusicMeasuresVector () const
                               { return fMusicMeasuresVector; }
-    // measures list
-    const list<S_msdrMeasure>&
+    // measures std::list
+    const std::list<S_msdrMeasure>&
                           getMusicMeasuresList () const
                               { return fMusicMeasuresList; }
 
@@ -98,16 +98,16 @@ class EXP msdrMusic : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const;
-    string                asString () const;
+    std::string           asShortString () const;
+    std::string           asString () const;
 
     void                  displayMusic (
                             int           inputLineNumber,
-                            const string& context) const;
+                            const std::string& context) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
-    void                  printShort (ostream& os) const;
+    void                  printShort (std::ostream& os) const;
 
   private:
 
@@ -115,13 +115,13 @@ class EXP msdrMusic : public smartable
     // ------------------------------------------------------
 
     // music name
-    string                fMusicName;
+    std::string           fMusicName;
 
     // input line number
     int                   fInputLineNumber;
 
-    // measures vector
-    vector<S_msdrMeasure> fMusicMeasuresVector;
+    // measures std::vector
+    std::vector<S_msdrMeasure> fMusicMeasuresVector;
 
   public:
 
@@ -133,14 +133,14 @@ class EXP msdrMusic : public smartable
     // work fields
     // ------------------------------------------------------
 
-    // measures list
-    list<S_msdrMeasure>   fMusicMeasuresList; // JMI
+    // measures std::list
+    std::list<S_msdrMeasure>   fMusicMeasuresList; // JMI
 
     // voice finalization
     Bool                  fMusicHasBeenFinalized;
 };
 typedef SMARTP<msdrMusic> S_msdrMusic;
-EXP ostream& operator << (ostream& os, const S_msdrMusic& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdrMusic& elt);
 
 
 }

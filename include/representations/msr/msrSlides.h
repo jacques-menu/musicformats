@@ -28,10 +28,10 @@ enum class msrSlideTypeKind {
   kSlideTypeStart, kSlideTypeStop
 };
 
-string msrSlideTypeKindAsString (
+std::string msrSlideTypeKindAsString (
   msrSlideTypeKind slideTypeKind);
 
-ostream& operator << (ostream& os, const msrSlideTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSlideTypeKind& elt);
 
 class EXP msrSlide : public msrElement
 {
@@ -45,7 +45,7 @@ class EXP msrSlide : public msrElement
                             int              slideNumber,
                             msrSlideTypeKind slideTypeKind,
                             msrLineTypeKind  slideLineTypeKind,
-                            const string&    slideTextValue);
+                            const std::string&    slideTextValue);
 
     SMARTP<msrSlide> createSlideNewbornClone ();
 
@@ -61,7 +61,7 @@ class EXP msrSlide : public msrElement
                             int              slideNumber,
                             msrSlideTypeKind slideTypeKind,
                             msrLineTypeKind  slideLineTypeKind,
-                            const string&    slideTextValue);
+                            const std::string&    slideTextValue);
 
     virtual               ~msrSlide ();
 
@@ -79,7 +79,7 @@ class EXP msrSlide : public msrElement
     msrLineTypeKind       getSlideLineTypeKind () const
                               { return fSlideLineTypeKind; }
 
-    string                getSlideTextValue () const
+    std::string           getSlideTextValue () const
                               { return fSlideTextValue; }
 
   public:
@@ -102,9 +102,9 @@ class EXP msrSlide : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -117,10 +117,10 @@ class EXP msrSlide : public msrElement
 
     msrLineTypeKind       fSlideLineTypeKind;
 
-    string                fSlideTextValue;
+    std::string           fSlideTextValue;
 };
 typedef SMARTP<msrSlide> S_msrSlide;
-EXP ostream& operator << (ostream& os, const S_msrSlide& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSlide& elt);
 
 
 }

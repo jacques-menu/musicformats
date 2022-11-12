@@ -69,11 +69,11 @@ class EXP bsrSpaces : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -85,7 +85,7 @@ class EXP bsrSpaces : public bsrLineContentsElement
     S_bsrCellsList        fSpacesCellsList;
 };
 typedef SMARTP<bsrSpaces> S_bsrSpaces;
-EXP ostream& operator << (ostream& os, const S_bsrSpaces& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrSpaces& elt);
 
 
 }

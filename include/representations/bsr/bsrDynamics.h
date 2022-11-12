@@ -78,11 +78,11 @@ class EXP bsrDynamic : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -94,7 +94,7 @@ class EXP bsrDynamic : public bsrLineContentsElement
     S_bsrCellsList        fDynamicsCellsList;
 };
 typedef SMARTP<bsrDynamic> S_bsrDynamic;
-EXP ostream& operator << (ostream& os, const S_bsrDynamic& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrDynamic& elt);
 
 
 }

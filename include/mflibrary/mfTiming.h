@@ -20,7 +20,6 @@
 #include "smartpointer.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
@@ -33,10 +32,10 @@ enum mfTimingItemKind {
   kMandatory, kOptional
 };
 
-string mfTimingItemKindAsString (
+std::string mfTimingItemKindAsString (
   mfTimingItemKind imingItemKind);
 
-ostream& operator << (ostream& os, const mfTimingItemKind& elt);
+std::ostream& operator << (std::ostream& os, const mfTimingItemKind& elt);
 
 class EXP mfTimingItem : public smartable
 {
@@ -46,15 +45,15 @@ class EXP mfTimingItem : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfTimingItem> createTimingItem (
-      const string&  activity,
-      const string&  description,
+      const std::string&  activity,
+      const std::string&  description,
       mfTimingItemKind kind,
       clock_t        startClock,
       clock_t        endClock);
 
     mfTimingItem (
-      const string&  activity,
-      const string&  description,
+      const std::string&  activity,
+      const std::string&  description,
       mfTimingItemKind kind,
       clock_t        startClock,
       clock_t        endClock);
@@ -67,9 +66,9 @@ class EXP mfTimingItem : public smartable
     mfTimingItemKind     getKind () const
                               { return fKind; }
 
-    string                getActivity () const
+    std::string           getActivity () const
                               { return fActivity; }
-    string                getDescription () const
+    std::string           getDescription () const
                               { return fDescription; }
 
     clock_t               getStartClock () const
@@ -84,8 +83,8 @@ class EXP mfTimingItem : public smartable
 
     mfTimingItemKind     fKind;
 
-    string                fActivity;
-    string                fDescription;
+    std::string           fActivity;
+    std::string           fDescription;
 
     clock_t               fStartClock;
     clock_t               fEndClock;
@@ -118,8 +117,8 @@ class EXP mfTimingItemsList {
 
     // add an item
     void                  appendTimingItem (
-                            const string&     activity,
-                            const string&     description,
+                            const std::string&     activity,
+                            const std::string&     description,
                             mfTimingItemKind kind,
                             clock_t           startClock,
                             clock_t            endClock);
@@ -129,27 +128,27 @@ class EXP mfTimingItemsList {
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
     void                  printWithContext (
-                            const string& context,
-                            ostream&      os) const;
+                            const std::string& context,
+                            std::ostream&      os) const;
 
   private:
 
     // private services
     // ------------------------------------------------------
 
-    void                  doPrint (ostream& os) const;
+    void                  doPrint (std::ostream& os) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    list<S_timingItem>    fTimingItemsList;
+    std::list<S_timingItem>    fTimingItemsList;
 };
-EXP ostream& operator << (ostream& os, const mfTimingItemsList& tim);
+EXP std::ostream& operator << (std::ostream& os, const mfTimingItemsList& tim);
 
 
 

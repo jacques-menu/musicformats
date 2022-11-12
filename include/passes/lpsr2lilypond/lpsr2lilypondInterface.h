@@ -24,19 +24,19 @@ EXP void translateLpsrToLilypond (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
   S_lpsrOahGroup    lpsrOpts,
-  const string&     passNumber,
-  const string&     passDescription,
-  ostream&          lilypondCodeStream);
+  const std::string&     passNumber,
+  const std::string&     passDescription,
+  std::ostream&          lilypondCodeStream);
 
 EXP void translateLpsrToLilypondWithHandler (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
   S_lpsrOahGroup    lpsrOpts,
-  const string&     passNumber,
-  const string&     passDescription,
+  const std::string&     passNumber,
+  const std::string&     passDescription,
   S_oahHandler      handler,
-  ostream&          out,
-  ostream&          err);
+  std::ostream&          out,
+  std::ostream&          err);
 
 
 }

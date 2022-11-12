@@ -34,18 +34,18 @@ enum class msdlUserLanguageKind {
   kUserLanguageDutch
 };
 
-string msdlUserLanguageKindAsString (
+std::string msdlUserLanguageKindAsString (
   msdlUserLanguageKind languageKind);
 
-ostream& operator << (ostream& os, const msdlUserLanguageKind& elt);
+std::ostream& operator << (std::ostream& os, const msdlUserLanguageKind& elt);
 
 msdlUserLanguageKind msdlUserLanguageKindFromString (
-  const string& theString);
+  const std::string& theString);
 
-extern map<string, msdlUserLanguageKind>
+extern std::map<std::string, msdlUserLanguageKind>
   gGlobalMsdlUserLanguageKindsMap;
 
-string existingMsdlUserLanguageKinds (size_t namesListMaxLength);
+std::string existingMsdlUserLanguageKinds (size_t namesListMaxLength);
 
 void initializeMsdlUserLanguageKindsMap ();
 
@@ -56,20 +56,20 @@ enum class msdlCommentsTypeKind {
   kCommentsTypeStar
 };
 
-string msdlCommentsTypeKindAsString (
+std::string msdlCommentsTypeKindAsString (
   msdlCommentsTypeKind languageKind);
 
-ostream& operator << (ostream& os, const msdlCommentsTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msdlCommentsTypeKind& elt);
 
 msdlCommentsTypeKind msdlCommentsTypeKindFromString (
-  const string& theString);
+  const std::string& theString);
 
-extern map<string, msdlCommentsTypeKind>
+extern std::map<std::string, msdlCommentsTypeKind>
   gGlobalMsdlCommentsTypeKindsMap;
 
 void initializeMsdlCommentsTypeKinds ();
 
-string existingMsdlCommentsTypeKinds (size_t namesListMaxLength);
+std::string existingMsdlCommentsTypeKinds (size_t namesListMaxLength);
 
 void initializeMsdlCommentsTypeKindsMap ();
 

@@ -25,12 +25,12 @@ enum class bsrNoteOctaveKind {
   kNoteOctaveAbove7
 };
 
-extern string bsrNoteOctaveKindAsString (
+extern std::string bsrNoteOctaveKindAsString (
   bsrNoteOctaveKind noteOctaveKind);
 
-ostream& operator << (ostream& os, const bsrNoteOctaveKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrNoteOctaveKind& elt);
 
-extern string bsrNoteOctaveKindAsDebugString (
+extern std::string bsrNoteOctaveKindAsDebugString (
   bsrNoteOctaveKind noteOctaveKind);
 
 extern S_bsrCellsList noteOctaveKindAsCellsList (
@@ -130,12 +130,12 @@ enum class bsrNoteValueKind {
   kNoteValueB256th
 };
 
-string bsrNoteValueKindAsString (
+std::string bsrNoteValueKindAsString (
   bsrNoteValueKind noteValueKind);
 
-ostream& operator << (ostream& os, const bsrNoteValueKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrNoteValueKind& elt);
 
-string bsrNoteValueKindAsDebugString (
+std::string bsrNoteValueKindAsDebugString (
   bsrNoteValueKind noteValueKind);
 
 S_bsrCellsList noteValueKindAsCellsList (
@@ -148,10 +148,10 @@ enum class bsrNoteValueSizeKind {
   kNoteValueSizeSmaller
 };
 
-string bsrNoteValueSizeKindAsString (
+std::string bsrNoteValueSizeKindAsString (
   bsrNoteValueSizeKind noteValueSizeKind);
 
-ostream& operator << (ostream& os, const bsrNoteValueSizeKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrNoteValueSizeKind& elt);
 
 bsrNoteValueSizeKind bsrNoteValueSizeKindFromNoteValueKind (
   bsrNoteValueKind noteValueKind);
@@ -164,10 +164,10 @@ enum class bsrNoteOctaveIsNeeded {
   kNoteOctaveIsNeededYes, kNoteOctaveIsNeededNo
 };
 
-string bsrNoteOctaveIsNeededAsString (
+std::string bsrNoteOctaveIsNeededAsString (
   bsrNoteOctaveIsNeeded noteOctaveIsNeeded);
 
-ostream& operator << (ostream& os, const bsrNoteOctaveIsNeeded& elt);
+std::ostream& operator << (std::ostream& os, const bsrNoteOctaveIsNeeded& elt);
 
 enum class bsrAccidentalKind {
   kAccidentalNone,
@@ -177,13 +177,13 @@ enum class bsrAccidentalKind {
   kAccidentalThreeQuarterSharp, kAccidentalThreeQuarterFlat
 };
 
-string bsrAccidentalKindAsString (
+std::string bsrAccidentalKindAsString (
   bsrAccidentalKind accidentalKind);
 
-string bsrAccidentalKindAsDebugString (
+std::string bsrAccidentalKindAsDebugString (
   bsrAccidentalKind accidentalKind);
 
-ostream& operator << (ostream& os, const bsrAccidentalKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrAccidentalKind& elt);
 
 //______________________________________________________________________________
 class EXP bsrNote : public bsrLineContentsElement
@@ -284,13 +284,13 @@ class EXP bsrNote : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asShortString () const override;
+    std::string           asShortString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -309,7 +309,7 @@ class EXP bsrNote : public bsrLineContentsElement
     bsrAccidentalKind     fAccidentalKind;
 };
 typedef SMARTP<bsrNote> S_bsrNote;
-EXP ostream& operator << (ostream& os, const S_bsrNote& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrNote& elt);
 
 
 }

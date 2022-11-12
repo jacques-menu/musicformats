@@ -29,9 +29,9 @@ class EXP xml2gmnManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<xml2gmnManPageGenerateAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
   protected:
@@ -40,9 +40,9 @@ class EXP xml2gmnManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
                           xml2gmnManPageGenerateAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
     virtual               ~xml2gmnManPageGenerateAtom ();
@@ -57,7 +57,7 @@ class EXP xml2gmnManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
   public:
 
     // visitors
@@ -73,10 +73,10 @@ class EXP xml2gmnManPageGenerateAtom : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -84,7 +84,7 @@ class EXP xml2gmnManPageGenerateAtom : public oahAtom
     // private services
     // ------------------------------------------------------
 
-    void                  generateManPageData (ostream& os) const;
+    void                  generateManPageData (std::ostream& os) const;
 
   private:
 
@@ -94,7 +94,7 @@ class EXP xml2gmnManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<xml2gmnManPageGenerateAtom> S_xml2gmnManPageGenerateAtom;
-EXP ostream& operator << (ostream& os, const S_xml2gmnManPageGenerateAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2gmnManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP xml2gmnManPageOahGroup : public oahGroup
@@ -181,7 +181,7 @@ class EXP xml2gmnManPageOahGroup : public oahGroup
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<xml2gmnManPageOahGroup> S_xml2gmnManPageOahGroup;
-EXP ostream& operator << (ostream& os, const S_xml2gmnManPageOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2gmnManPageOahGroup& elt);
 
 EXP extern S_xml2gmnManPageOahGroup gGlobalXml2gmnManPageOahGroup;
 

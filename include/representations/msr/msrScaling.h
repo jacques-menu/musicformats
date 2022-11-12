@@ -79,7 +79,7 @@ class EXP msrScaling : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
 
   private:
@@ -92,7 +92,7 @@ class EXP msrScaling : public msrElement
     float                 fTenths;
 };
 typedef SMARTP<msrScaling> S_msrScaling;
-EXP ostream& operator << (ostream& os, const S_msrScaling& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrScaling& elt);
 
 
 }

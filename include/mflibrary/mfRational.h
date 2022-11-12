@@ -19,8 +19,6 @@
 
 #include "mfBool.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -44,7 +42,7 @@ class EXP Rational
 
                           Rational (const Rational& pos);
 
-                          Rational (const string &theString);
+                          Rational (const std::string &theString);
 
     virtual               ~Rational ();
 
@@ -122,12 +120,12 @@ class EXP Rational
 
     // conversions
 
-                          operator string () const;
+                          operator std::string () const;
                           operator double () const;
                           operator float () const;
                           operator int () const;
 
-    string                toString () const;
+    std::string           toString () const;
     double	              toDouble () const;
     float	                toFloat () const;
     int		                toInt () const;
@@ -137,11 +135,11 @@ class EXP Rational
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                asFractionString () const;
+    std::string           asFractionString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -162,7 +160,7 @@ class EXP Rational
     // Used by rationalise()
     long int gcd(long int a, long int b);
 };
-EXP ostream& operator << (ostream& os, const Rational& elt);
+EXP std::ostream& operator << (std::ostream& os, const Rational& elt);
 
 
 EXP void testRational ();

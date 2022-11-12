@@ -17,8 +17,6 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,7 +24,7 @@ namespace MusicFormats
 class EXP mxsr2musicxmlException : public mfException
 {
   public:
-    mxsr2musicxmlException (string const& exceptionDescription) throw ()
+    mxsr2musicxmlException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };

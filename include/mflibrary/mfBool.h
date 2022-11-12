@@ -17,8 +17,6 @@
 
 #include "exports.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -37,7 +35,7 @@ class EXP Bool
 
                           Bool (bool value);
 
-                          Bool (const string& theString);
+                          Bool (const std::string& theString);
 
     virtual               ~Bool ();
 
@@ -96,9 +94,9 @@ public:
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -117,7 +115,7 @@ EXP Bool operator&& (const bool& theBool, const Bool& rightBool);
 EXP Bool operator|| (const Bool& leftBool, const bool& theBool);
 EXP Bool operator|| (const bool& theBool, const Bool& rightBool);
 
-EXP ostream& operator << (ostream& os, const Bool& theBool);
+EXP std::ostream& operator << (std::ostream& os, const Bool& theBool);
 
 EXP Bool nand (Bool p, Bool q);
 EXP Bool nor (Bool p, Bool q);

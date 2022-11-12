@@ -136,7 +136,7 @@ class EXP bsrCellsList : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const list<bsrCellKind>&
+    const std::list<bsrCellKind>&
                           getCellsListElements () const
                               { return fCellsListElements; }
 
@@ -157,7 +157,7 @@ class EXP bsrCellsList : public smartable
     int                   fetchCellsNumber () const
                               { return fCellsListElements.size (); }
 
-// JMI    void                  generateBrailleCode (ostream& os);
+// JMI    void                  generateBrailleCode (std::ostream& os);
 
   public:
 
@@ -174,21 +174,21 @@ class EXP bsrCellsList : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual string        asString () const;
+    virtual std::string        asString () const;
 
-    virtual string        asShortString () const;
+    virtual std::string        asShortString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    list<bsrCellKind>     fCellsListElements;
+    std::list<bsrCellKind>     fCellsListElements;
 };
 typedef SMARTP<bsrCellsList> S_bsrCellsList;
-EXP ostream& operator << (ostream& os, const S_bsrCellsList& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrCellsList& elt);
 
 
 }

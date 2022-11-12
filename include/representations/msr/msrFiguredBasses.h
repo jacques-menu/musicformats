@@ -32,10 +32,10 @@ enum class msrBassFigurePrefixKind {
   kBassFigurePrefixSharpSharp, kBassFigurePrefixSharp, kBassFigurePrefixDoubleSharp
 };
 
-string msrBassFigurePrefixKindAsString (
+std::string msrBassFigurePrefixKindAsString (
   msrBassFigurePrefixKind figurePrefixKind);
 
-ostream& operator << (ostream& os,const msrBassFigurePrefixKind& elt);
+std::ostream& operator << (std::ostream& os,const msrBassFigurePrefixKind& elt);
 
 enum class msrBassFigureSuffixKind {
   kBassFigureSuffix_NO_,
@@ -45,10 +45,10 @@ enum class msrBassFigureSuffixKind {
   kBassFigureSuffixSlash
 };
 
-string msrBassFigureSuffixKindAsString (
+std::string msrBassFigureSuffixKindAsString (
   msrBassFigureSuffixKind figureSuffixKind);
 
-ostream& operator << (ostream& os,const msrBassFigureSuffixKind& elt);
+std::ostream& operator << (std::ostream& os,const msrBassFigureSuffixKind& elt);
 
 class EXP msrBassFigure : public msrElement
 {
@@ -123,9 +123,9 @@ class EXP msrBassFigure : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -142,7 +142,7 @@ class EXP msrBassFigure : public msrElement
                           fFigureSuffixKind;
 };
 typedef SMARTP<msrBassFigure> S_msrBassFigure;
-EXP ostream& operator << (ostream& os, const S_msrBassFigure& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrBassFigure& elt);
 
 //______________________________________________________________________________
 // data types
@@ -151,12 +151,12 @@ enum class msrFiguredBassParenthesesKind {
   kFiguredBassParenthesesYes, kFiguredBassParenthesesNo
 };
 
-string msrFiguredBassParenthesesKindAsString (
+std::string msrFiguredBassParenthesesKindAsString (
   msrFiguredBassParenthesesKind figuredBassParenthesesKind);
 
-ostream& operator << (ostream& os, const msrFiguredBassParenthesesKind& elt);
+std::ostream& operator << (std::ostream& os, const msrFiguredBassParenthesesKind& elt);
 
-class EXP msrFiguredBass : public msrMeasureElement
+class EXP msrFiguredBass : public msrMeasureElementLambda
 {
   public:
 
@@ -226,7 +226,7 @@ class EXP msrFiguredBass : public msrMeasureElement
 //     void                  setMeasureElementMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context) override
+//                             const std::string&      context) override
 //                               {
 //                                 setFiguredBassMeasurePosition (
 //                                   measure,
@@ -237,7 +237,7 @@ class EXP msrFiguredBass : public msrMeasureElement
 //     void                  setFiguredBassMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context);
+//                             const std::string&      context);
 
     // whole notes
     void                  setFiguredBassDisplayWholeNotes (
@@ -254,7 +254,7 @@ class EXP msrFiguredBass : public msrMeasureElement
                           getFiguredBassParenthesesKind () const
                               { return fFiguredBassParenthesesKind; }
 
-    const list<S_msrBassFigure>&
+    const std::list<S_msrBassFigure>&
                           getFiguredBassFiguresList () const
                               { return fFiguredBassFiguresList;  }
 
@@ -288,9 +288,9 @@ class EXP msrFiguredBass : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -306,12 +306,12 @@ class EXP msrFiguredBass : public msrMeasureElement
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;
 
-    list<S_msrBassFigure> fFiguredBassFiguresList;
+    std::list<S_msrBassFigure> fFiguredBassFiguresList;
 
     msrTupletFactor       fFiguredBassTupletFactor;
 };
 typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
-EXP ostream& operator << (ostream& os, const S_msrFiguredBass& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrFiguredBass& elt);
 
 
 }

@@ -24,12 +24,12 @@ enum class msrUserChosenLineBreakKind {
   kUserChosenLineBreakNo
 };
 
-string msrUserChosenLineBreakKindAsString (
+std::string msrUserChosenLineBreakKindAsString (
   msrUserChosenLineBreakKind userChosenLineBreakKind);
 
-ostream& operator << (ostream& os, const msrUserChosenLineBreakKind& elt);
+std::ostream& operator << (std::ostream& os, const msrUserChosenLineBreakKind& elt);
 
-class EXP msrLineBreak : public msrMeasureElement
+class EXP msrLineBreak : public msrMeasureElementLambda
 {
   public:
 
@@ -39,7 +39,7 @@ class EXP msrLineBreak : public msrMeasureElement
     static SMARTP<msrLineBreak> create (
                             int           inputLineNumber,
                             S_msrMeasure  upLinkToMeasure,
-                            const string& nextBarNumber,
+                            const std::string& nextBarNumber,
                             msrUserChosenLineBreakKind
                                           userChosenLineBreakKind);
 
@@ -51,7 +51,7 @@ class EXP msrLineBreak : public msrMeasureElement
                           msrLineBreak (
                             int           inputLineNumber,
                             S_msrMeasure  upLinkToMeasure,
-                            const string& nextBarNumber,
+                            const std::string& nextBarNumber,
                             msrUserChosenLineBreakKind
                                           userChosenLineBreakKind);
 
@@ -62,7 +62,7 @@ class EXP msrLineBreak : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    string                getNextBarNumber () const
+    std::string           getNextBarNumber () const
                               { return fNextBarNumber; }
 
     msrUserChosenLineBreakKind
@@ -89,22 +89,22 @@ class EXP msrLineBreak : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fNextBarNumber;
+    std::string           fNextBarNumber;
 
     msrUserChosenLineBreakKind
                           fUserChosenLineBreakKind;
 };
 typedef SMARTP<msrLineBreak> S_msrLineBreak;
-EXP ostream& operator << (ostream& os, const S_msrLineBreak& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrLineBreak& elt);
 
 //______________________________________________________________________________
 enum class msrUserChosenPageBreakKind {
@@ -112,12 +112,12 @@ enum class msrUserChosenPageBreakKind {
   kUserChosenPageBreakNo
 };
 
-string msrUserChosenPageBreakKindAsString (
+std::string msrUserChosenPageBreakKindAsString (
   msrUserChosenPageBreakKind userChosenPageBreakKind);
 
-ostream& operator << (ostream& os, const msrUserChosenPageBreakKind& elt);
+std::ostream& operator << (std::ostream& os, const msrUserChosenPageBreakKind& elt);
 
-class EXP msrPageBreak : public msrMeasureElement
+class EXP msrPageBreak : public msrMeasureElementLambda
 {
   public:
 
@@ -172,9 +172,9 @@ class EXP msrPageBreak : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -185,7 +185,7 @@ class EXP msrPageBreak : public msrMeasureElement
                           fUserChosenPageBreakKind;
 };
 typedef SMARTP<msrPageBreak> S_msrPageBreak;
-EXP ostream& operator << (ostream& os, const S_msrPageBreak& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrPageBreak& elt);
 
 
 }

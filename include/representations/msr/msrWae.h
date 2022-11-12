@@ -16,8 +16,6 @@
 
 #include "mfExceptions.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -27,10 +25,10 @@ class EXP msrException: public mfException
   public:
 
     static SMARTP<msrException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           msrException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<msrException> S_msrException;
 
@@ -39,10 +37,10 @@ class EXP msrInternalException: public mfException
   public:
 
     static SMARTP<msrInternalException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           msrInternalException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<msrInternalException> S_msrInternalException;
 
@@ -51,44 +49,44 @@ class EXP msrUnsupportedException: public mfException
   public:
 
     static SMARTP<msrUnsupportedException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           msrUnsupportedException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<msrUnsupportedException> S_msrUnsupportedException;
 
 //______________________________________________________________________________
 EXP void msrWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void msrError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void msrUnsupported (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void msrInternalWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void msrInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 
 }

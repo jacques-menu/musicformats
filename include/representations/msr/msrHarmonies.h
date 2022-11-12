@@ -12,6 +12,7 @@
 #ifndef ___msrHarmonies___
 #define ___msrHarmonies___
 
+#include <map>
 #include <vector>
 
 #include "msrElements.h"
@@ -21,7 +22,7 @@
 
 #include "msrDurations.h"
 #include "msrIntervals.h"
-#include "msrNotes.h"
+// #include "msrNotes.h"
 #include "msrTupletFactors.h"
 #include "msrVoices.h"
 
@@ -95,30 +96,30 @@ enum class msrHarmonyKind {
   TrueHarmoniesLast  = kHarmonyMajorSeventhAugmentedEleventh
 };
 
-string msrHarmonyKindAsString (
+std::string msrHarmonyKindAsString (
   msrHarmonyKind harmonyKind);
 
-string msrHarmonyKindAsShortString (
+std::string msrHarmonyKindAsShortString (
   msrHarmonyKind harmonyKind);
 
-ostream& operator << (ostream& os, const msrHarmonyKind& elt);
+std::ostream& operator << (std::ostream& os, const msrHarmonyKind& elt);
 
-string msrHarmonyKindShortName (
+std::string msrHarmonyKindShortName (
   msrHarmonyKind harmonyKind);
 
 EXP msrHarmonyKind msrHarmonyKindFromString (
-  const string& theString);
+  const std::string& theString);
 
-string existingHarmonyKinds (size_t namesListMaxLength);
-string existingHarmonyKindsNames (size_t namesListMaxLength);
+std::string existingHarmonyKinds (size_t namesListMaxLength);
+std::string existingHarmonyKindsNames (size_t namesListMaxLength);
 
 // constant
 EXP extern const int K_HARMONY_NO_INVERSION;
 
-EXP extern map<string, msrHarmonyKind>
+EXP extern std::map<std::string, msrHarmonyKind>
   gGlobalHarmonyKindsMap;
 
-EXP extern list<string>
+EXP extern std::list<std::string>
   gHarmonyKindsNamesList;
 
 void initializeHarmonyKinds ();
@@ -173,10 +174,10 @@ enum class msrHarmonyDegreeTypeKind {
   kHarmonyDegreeTypeSubstract
 };
 
-string msrHarmonyDegreeTypeKindAsString (
+std::string msrHarmonyDegreeTypeKindAsString (
   msrHarmonyDegreeTypeKind harmonyDegreeTypeKind);
 
-ostream& operator << (ostream& os, const msrHarmonyDegreeTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrHarmonyDegreeTypeKind& elt);
 
 class EXP msrHarmonyDegree : public msrElement
 {
@@ -247,12 +248,12 @@ class EXP msrHarmonyDegree : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                harmonyDegreeKindAsString () const;
-    string                harmonyDegreeKindAsShortString () const;
+    std::string           harmonyDegreeKindAsString () const;
+    std::string           harmonyDegreeKindAsShortString () const;
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -268,10 +269,10 @@ class EXP msrHarmonyDegree : public msrElement
                           fHarmonyDegreeTypeKind;
 };
 typedef SMARTP<msrHarmonyDegree> S_msrHarmonyDegree;
-EXP ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHarmonyDegree& elt);
 
 //______________________________________________________________________________
-class EXP msrHarmony : public msrMeasureElement
+class EXP msrHarmony : public msrMeasureElementLambda
 {
   public:
 
@@ -283,7 +284,7 @@ class EXP msrHarmony : public msrMeasureElement
                             S_msrMeasure             upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
-                            const string&            harmonyKindText,
+                            const std::string&            harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
                             const Rational&          harmonySoundingWholeNotes,
@@ -308,7 +309,7 @@ class EXP msrHarmony : public msrMeasureElement
                             S_msrMeasure             upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
-                            const string&            harmonyKindText,
+                            const std::string&            harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
                             const Rational&          harmonySoundingWholeNotes,
@@ -341,7 +342,7 @@ class EXP msrHarmony : public msrMeasureElement
 //     void                  setMeasureElementMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context) override
+//                             const std::string&      context) override
 //                               {
 //                                 setHarmonyMeasurePosition (
 //                                   measure,
@@ -352,7 +353,7 @@ class EXP msrHarmony : public msrMeasureElement
 //     void                  setHarmonyMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context);
+//                             const std::string&      context);
 
     // whole notes
     void                  setHarmonyDisplayWholeNotes (
@@ -378,11 +379,11 @@ class EXP msrHarmony : public msrMeasureElement
     msrHarmonyKind        getHarmonyKind () const
                               { return fHarmonyKind; }
 
-    string                getHarmonyKindText () const
+    std::string           getHarmonyKindText () const
                               { return fHarmonyKindText; }
 
     // degrees
-    const list<S_msrHarmonyDegree>&
+    const std::list<S_msrHarmonyDegree>&
                           getHarmonyDegreesList () const
                               { return fHarmonyDegreesList; }
 
@@ -449,9 +450,9 @@ class EXP msrHarmony : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -474,7 +475,7 @@ class EXP msrHarmony : public msrMeasureElement
 
     // kind
     msrHarmonyKind        fHarmonyKind;
-    string                fHarmonyKindText;
+    std::string           fHarmonyKindText;
 
     // inversion
     int                   fHarmonyInversion;
@@ -484,7 +485,7 @@ class EXP msrHarmony : public msrMeasureElement
                           fHarmonyBassQuarterTonesPitchKind;
 
     // degrees
-    list<S_msrHarmonyDegree>
+    std::list<S_msrHarmonyDegree>
                           fHarmonyDegreesList;
 
     // staff
@@ -497,7 +498,7 @@ class EXP msrHarmony : public msrMeasureElement
     S_msrFrame            fHarmonyFrame;
 };
 typedef SMARTP<msrHarmony> S_msrHarmony;
-EXP ostream& operator << (ostream& os, const S_msrHarmony& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHarmony& elt);
 
 // harmonies intervals
 //______________________________________________________________________________
@@ -562,8 +563,8 @@ class EXP msrHarmonyInterval : public smartable
                                     fHarmonyIntervalIntervalKind);
                               }
 
-    string                harmonyIntervalAsString () const;
-    string                harmonyIntervalAsShortString () const;
+    std::string           harmonyIntervalAsString () const;
+    std::string           harmonyIntervalAsShortString () const;
 
     /*
       we handle intervals up to the thirteenth in harmonies,
@@ -578,8 +579,8 @@ class EXP msrHarmonyInterval : public smartable
     S_msrHarmonyInterval  intervalSum (
                             S_msrHarmonyInterval otherHarmonyInterval);
 
-    string                asString () const;
-    string                asShortString () const;
+    std::string           asString () const;
+    std::string           asShortString () const;
 
   public:
 
@@ -598,7 +599,7 @@ class EXP msrHarmonyInterval : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -610,7 +611,7 @@ class EXP msrHarmonyInterval : public smartable
     int                   fHarmonyIntervalRelativeOctave;
 };
 typedef SMARTP<msrHarmonyInterval> S_msrHarmonyInterval;
-EXP ostream& operator << (ostream& os, const S_msrHarmonyInterval& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHarmonyInterval& elt);
 
 // harmonies structure
 //______________________________________________________________________________
@@ -655,7 +656,7 @@ class EXP msrHarmonyStructure : public smartable
     msrHarmonyKind        getHarmonyStructureHarmonyKind () const
                               { return fHarmonyStructureHarmonyKind; }
 
-    const vector <S_msrHarmonyInterval>&
+    const std::vector <S_msrHarmonyInterval>&
                           getHarmonyStructureIntervals () const
                               { return fHarmonyStructureIntervals; }
 
@@ -669,8 +670,8 @@ class EXP msrHarmonyStructure : public smartable
 
     void                  populateHarmonyStructure ();
 
-    string                harmonyStructureAsString () const;
-    string                harmonyStructureAsShortString () const;
+    std::string           harmonyStructureAsString () const;
+    std::string           harmonyStructureAsShortString () const;
 
     S_msrHarmonyInterval    bassHarmonyIntervalForHarmonyInversion (
                             int inputLineNumber,
@@ -678,7 +679,7 @@ class EXP msrHarmonyStructure : public smartable
 
     S_msrHarmonyStructure   invertHarmonyStructure (int inversion);
 
-    static void           printAllHarmoniesStructures (ostream& os);
+    static void           printAllHarmoniesStructures (std::ostream& os);
 
   public:
 
@@ -695,7 +696,7 @@ class EXP msrHarmonyStructure : public smartable
 
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -703,11 +704,11 @@ class EXP msrHarmonyStructure : public smartable
     // ------------------------------------------------------
 
     msrHarmonyKind        fHarmonyStructureHarmonyKind;
-    vector<S_msrHarmonyInterval>
+    std::vector<S_msrHarmonyInterval>
                           fHarmonyStructureIntervals;
 };
 typedef SMARTP<msrHarmonyStructure> S_msrHarmonyStructure;
-EXP ostream& operator << (ostream& os, const S_msrHarmonyStructure& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHarmonyStructure& elt);
 
 // harmonies contents
 //______________________________________________________________________________
@@ -747,7 +748,7 @@ class EXP msrHarmonyContents : public smartable
     msrHarmonyKind        getHarmonyContentsHarmonyKind () const
                               { return fHarmonyContentsHarmonyKind; }
 
-    const vector<S_msrSemiTonesPitchAndOctave>&
+    const std::vector<S_msrSemiTonesPitchAndOctave>&
                           getHarmonyElementsVector () const
                               { return fHarmonyElementsVector; }
 
@@ -756,15 +757,15 @@ class EXP msrHarmonyContents : public smartable
     // public services
     // ------------------------------------------------------
 
-    string                harmonyContentsAsString () const;
-    string                harmonyContentsAsShortString () const;
+    std::string           harmonyContentsAsString () const;
+    std::string           harmonyContentsAsShortString () const;
 
     msrSemiTonesPitchKind bassSemiTonesPitchKindForHarmonyInversion (
                             int inputLineNumber,
                             int inversionNumber);
 
     static void           printAllHarmoniesContents (
-                            ostream&              os,
+                            std::ostream&              os,
                             msrSemiTonesPitchKind semiTonesPitchKind);
 
   public:
@@ -782,7 +783,7 @@ class EXP msrHarmonyContents : public smartable
 
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -792,28 +793,28 @@ class EXP msrHarmonyContents : public smartable
     msrSemiTonesPitchKind fHarmonyContentsRootNote;
     msrHarmonyKind        fHarmonyContentsHarmonyKind;
 
-    vector<S_msrSemiTonesPitchAndOctave>
+    std::vector<S_msrSemiTonesPitchAndOctave>
                           fHarmonyElementsVector;
 };
 typedef SMARTP<msrHarmonyContents> S_msrHarmonyContents;
-EXP ostream& operator << (ostream& os, const S_msrHarmonyContents& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHarmonyContents& elt);
 
 // harmonies details and analysis
 //______________________________________________________________________________
 void printHarmonyDetails (
-  ostream&              os,
+  std::ostream&              os,
   msrSemiTonesPitchKind rootSemiTonesPitchKind,
   msrHarmonyKind        harmonyKind);
 
 void printHarmonyAnalysis (
-  ostream&              os,
+  std::ostream&              os,
   msrSemiTonesPitchKind rootSemiTonesPitchKind,
   msrHarmonyKind        harmonyKind,
   int                   inversion);
 
 // global variables
 //______________________________________________________________________________
-extern map<msrHarmonyKind, S_msrHarmonyStructure>
+extern std::map<msrHarmonyKind, S_msrHarmonyStructure>
   gGlobalHarmonyStructuresMap;
 
 void initializeHarmonyStructuresMap ();

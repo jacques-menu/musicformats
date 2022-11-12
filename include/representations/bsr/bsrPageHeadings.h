@@ -20,7 +20,7 @@ class EXP bsrPageHeading : public bsrLine
 
     static SMARTP<bsrPageHeading> create (
                             int             inputLineNumber,
-                            const string&   pageHeadingTitle,
+                            const std::string&   pageHeadingTitle,
                             S_bsrPagination pageHeadingPagination,
                             int             pageHeadingNumber);
 
@@ -31,7 +31,7 @@ class EXP bsrPageHeading : public bsrLine
 
                           bsrPageHeading (
                             int             inputLineNumber,
-                            const string&   pageHeadingTitle,
+                            const std::string&   pageHeadingTitle,
                             S_bsrPagination pageHeadingPagination,
                             int             pageHeadingNumber);
 
@@ -42,7 +42,7 @@ class EXP bsrPageHeading : public bsrLine
     // set and get
     // ------------------------------------------------------
 
-    string                getPageHeadingTitle () const
+    std::string           getPageHeadingTitle () const
                               { return fPageHeadingTitle; }
 
     S_bsrPagination       getPageHeadingPagination () const
@@ -81,24 +81,24 @@ class EXP bsrPageHeading : public bsrLine
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fPageHeadingTitle;
+    std::string           fPageHeadingTitle;
 
     S_bsrPagination       fPageHeadingPagination; // before title
     int                   fPageHeadingNumber;     // after title ??? JMI
 };
 typedef SMARTP<bsrPageHeading> S_bsrPageHeading;
-EXP ostream& operator << (ostream& os, const S_bsrPageHeading& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrPageHeading& elt);
 
 
 }

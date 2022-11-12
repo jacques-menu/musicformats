@@ -17,17 +17,15 @@
 #include "mfBool.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 EXP void mfAssert (
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
   Bool          condition,
-  const string& messageIfFalse);
+  const std::string& messageIfFalse);
 
 
 }

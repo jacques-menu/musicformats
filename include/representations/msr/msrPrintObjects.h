@@ -16,8 +16,6 @@
 #include <ostream>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -29,14 +27,14 @@ enum class msrPrintObjectKind {
   kPrintObjectNo
 };
 
-string msrPrintObjectKindAsString (
+std::string msrPrintObjectKindAsString (
   msrPrintObjectKind printObjectKind);
 
-ostream& operator << (ostream& os, const msrPrintObjectKind& elt);
+std::ostream& operator << (std::ostream& os, const msrPrintObjectKind& elt);
 
 msrPrintObjectKind msrPrintObjectKindFromString (
   int           inputLineNumber,
-  const string& printObjectString);
+  const std::string& printObjectString);
 
 
 }

@@ -25,7 +25,7 @@ class   msrTransposition;
 typedef SMARTP<msrTransposition> S_msrTransposition;
 
 //______________________________________________________________________________
-class EXP msrTransposition : public msrMeasureElement
+class EXP msrTransposition : public msrMeasureElementLambda
 {
   public:
 
@@ -95,9 +95,9 @@ class EXP msrTransposition : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -110,7 +110,7 @@ class EXP msrTransposition : public msrMeasureElement
     Bool                  fTranspositionDouble;
 };
 typedef SMARTP<msrTransposition> S_msrTransposition;
-EXP ostream& operator << (ostream& os, const S_msrTransposition& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTransposition& elt);
 
 
 }

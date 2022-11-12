@@ -19,8 +19,6 @@
 
 #include "mfBool.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -33,10 +31,10 @@ enum class mfOnOffKind {
 Bool mfOnOffKindAsBool (
   mfOnOffKind onOffKind);
 
-string mfOnOffKindAsString (
+std::string mfOnOffKindAsString (
   mfOnOffKind onOffKind);
 
-ostream& operator << (ostream& os, const mfOnOffKind elt);
+std::ostream& operator << (std::ostream& os, const mfOnOffKind elt);
 
 
 }

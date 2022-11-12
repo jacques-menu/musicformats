@@ -25,8 +25,6 @@
 
 #include "ischemeParser.h"
 
-using namespace std;
-
 using namespace MusicFormats;
 
 
@@ -39,7 +37,7 @@ class   ischemeDriver
     // constants
     // ------------------------------------------------------
 
-    static const string   K_ALL_PSEUDO_LABEL_NAME;
+    static const std::string   K_ALL_PSEUDO_LABEL_NAME;
 
     // // constructor/destructor
     // ------------------------------------------------------
@@ -54,19 +52,19 @@ class   ischemeDriver
     // ------------------------------------------------------
 
     // internal
-    void                  setScriptName (string scriptName);
+    void                  setScriptName (std::string scriptName);
 
-    string                getScriptName () const
+    std::string           getScriptName () const
                               { return fScriptName; }
 
-    void                  setTool (string tool);
+    void                  setTool (std::string tool);
 
-    string                getTool () const
+    std::string           getTool () const
                               { return fTool; }
 
-    void                  appendInputSouce (string inputSouce);
+    void                  appendInputSouce (std::string inputSouce);
 
-    const list<string>&   getInputSoucesList () const
+    const std::list<std::string>&   getInputSoucesList () const
                               { return fInputSoucesList; }
 
     bool                  getTraceScanning () const
@@ -141,12 +139,12 @@ class   ischemeDriver
     // options blocks
     void                  optionsBlocksStackPush (
                             S_ischemeOptionsBlock optionsBlock,
-                            const string&      context);
+                            const std::string&      context);
 
     S_ischemeOptionsBlock         optionsBlocksStackTop () const;
 
     void                  optionsBlocksStackPop (
-                            const string& context);
+                            const std::string& context);
 
     // options
     void                  registerOptionInCurrentOptionsBlock (
@@ -154,12 +152,12 @@ class   ischemeDriver
                             ischemeDriver& drv);
 
     void                  registerOptionsSuppliedChoicesAsUsed (
-                            const string& choiceName);
+                            const std::string& choiceName);
     void                  registerOptionsSuppliedChoicesAsUnused (
-                            const string& choiceName);
+                            const std::string& choiceName);
 
     void                  displayOptionsBlocksStack (
-                            const string& context) const;
+                            const std::string& context) const;
 
     // case choice statements
     void                  caseChoiceStatementsStackPush (
@@ -171,7 +169,7 @@ class   ischemeDriver
     void                  caseChoiceStatementsStackPop ();
 
     void                  displayCaseChoiceStatementsStack (
-                            const string& context) const;
+                            const std::string& context) const;
 
     // case input statements
     void                  caseInputStatementsStackPush (
@@ -183,16 +181,16 @@ class   ischemeDriver
     void                  caseInputStatementsStackPop ();
 
     void                  displayCaseInputStatementsStack (
-                            const string& context) const;
+                            const std::string& context) const;
 
     // launching the iScheme tool
     void                  handleSelectLabel (
-                            const string& choiceName,
-                            const string& label);
+                            const std::string& choiceName,
+                            const std::string& label);
 
     void                  appendSelectLabelForToolLaunching (
                             const S_ischemeChoice choice,
-                            const string&      label,
+                            const std::string&      label,
                             Bool               allLabelSelected);
 
     mfMusicformatsErrorKind   launchIschemeTool_Pass2 ();
@@ -205,18 +203,18 @@ class   ischemeDriver
     // 'select' statements
 //     Bool                  applySelectOptionIfPresent (
 //                             const S_ischemeChoice choice,
-//                             const string&      label);
+//                             const std::string&      label);
 
     Bool                  applySelectOptionsFinally ();
 
     Bool                  applySelectOption (
                             const S_ischemeChoice choice,
-                            const string&      label);
+                            const std::string&      label);
 
     // final semantics check
     void                  finalSemanticsCheck ();
 
-    // populate commands list
+    // populate commands std::list
     void                  populateTheCommandsList ();
 
   private:
@@ -225,13 +223,13 @@ class   ischemeDriver
     // ------------------------------------------------------
 
     // the name of the MusicFormats tool
-    string                fTool;
+    std::string           fTool;
 
     // the name of the MusicFormats script
-    string                fScriptName;
+    std::string           fScriptName;
 
     // the names of the input sources
-    list<string>          fInputSoucesList;
+    std::list<std::string>          fInputSoucesList;
 
     // scanning
     bool                  fTraceScanning;
@@ -264,18 +262,18 @@ class   ischemeDriver
     bool                  fNoLaunch;
 
     // known tool names
-    set<string>           fKnownNames;
+    std::set<std::string>           fKnownNames;
 
     // choices handling
     S_ischemeChoicesTable    fChoicesTable;
 
-    multimap<string, string>
+    std::multimap<std::string, std::string>
                           fOptionsSuppliedChoicesLabelsMultiMap;
-    set<string>           fUnusedOptionsSuppliedChoicesSet;
+    std::set<std::string>           fUnusedOptionsSuppliedChoicesSet;
 
     // case choice statements
     int                   fCaseChoiceStatementsNumber;
-    list<S_ischemeCaseChoiceStatement>
+    std::list<S_ischemeCaseChoiceStatement>
                           fCaseChoiceStatementsStack;
 
     S_ischemeChoice       fCurrentChoiceChoice;
@@ -283,27 +281,27 @@ class   ischemeDriver
     // inputs handling
     S_ischemeInputsTable  fInputsTable;
 
-    multimap<string, string>
+    std::multimap<std::string, std::string>
                           fOptionsSuppliedInputsLabelsMultiMap;
-    set<string>           fUnusedOptionsSuppliedInputsSet;
+    std::set<std::string>           fUnusedOptionsSuppliedInputsSet;
 
     // case input statements
     int                   fCaseInputStatementsNumber;
-    list<S_ischemeCaseInputStatement>
+    std::list<S_ischemeCaseInputStatement>
                           fCaseInputStatementsStack;
 
     // options blocks
-    list<S_ischemeOptionsBlock>
+    std::list<S_ischemeOptionsBlock>
                           fOptionsBlocksStack;
 
     S_ischemeOptionsBlock    fMainOptionsBlock;
 
     // tool launching
-    list<S_ischemeOptionsBlock>
+    std::list<S_ischemeOptionsBlock>
                           fSelectedOptionsBlocksList;
 
-    // commands list
-    list<string>          fCommandsList;
+    // commands std::list
+    std::list<std::string>          fCommandsList;
 };
 
 //______________________________________________________________________________

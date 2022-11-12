@@ -25,34 +25,34 @@ enum class msrSlashTypeKind {
   kSlashTypeStart, kSlashTypeStop
 };
 
-string msrSlashTypeKindAsString (
+std::string msrSlashTypeKindAsString (
   msrSlashTypeKind slashTypeKind);
 
-ostream& operator << (ostream& os, const msrSlashTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSlashTypeKind& elt);
 
 enum class msrUseDotsKind {
   kUseDots_NO_,
   kUseDotsYes, kUseDotsNo
 };
 
-string msrUseDotsKindAsString (
+std::string msrUseDotsKindAsString (
   msrUseDotsKind useDotsKind);
 
-ostream& operator << (ostream& os, const msrUseDotsKind& elt);
+std::ostream& operator << (std::ostream& os, const msrUseDotsKind& elt);
 
 msrUseDotsKind msrUseDotsFromString (
   int           inputLineNumber,
-  const string& useDotsString);
+  const std::string& useDotsString);
 
 enum class msrSlashUseStemsKind {
   kSlashUseStems_NO_,
   kSlashUseStemsYes, kSlashUseStemsNo
 };
 
-string msrSlashUseStemsKindAsString (
+std::string msrSlashUseStemsKindAsString (
   msrSlashUseStemsKind slashUseStemsKind);
 
-ostream& operator << (ostream& os, const msrSlashUseStemsKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSlashUseStemsKind& elt);
 
 //______________________________________________________________________________
 class EXP msrSlash : public msrElement
@@ -115,9 +115,9 @@ class EXP msrSlash : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -129,7 +129,7 @@ class EXP msrSlash : public msrElement
     msrSlashUseStemsKind  fSlashUseStemsKind;
 };
 typedef SMARTP<msrSlash> S_msrSlash;
-EXP ostream& operator << (ostream& os, const S_msrSlash& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSlash& elt);
 
 
 }

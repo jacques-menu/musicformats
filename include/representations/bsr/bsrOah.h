@@ -32,10 +32,10 @@ enum class bsrFacSimileKind {
   kFacSimileYes, kFacSimileNo
 };
 
-string bsrFacSimileKindAsString (
+std::string bsrFacSimileKindAsString (
   bsrFacSimileKind facSimileKind);
 
-ostream& operator << (ostream& os, const bsrFacSimileKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrFacSimileKind& elt);
 
 //______________________________________________________________________________
 class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
@@ -46,11 +46,11 @@ class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<bsrFacSimileKindAtom> create (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             bsrFacSimileKind  bsrFacSimileKindVariable);
 
   protected:
@@ -59,11 +59,11 @@ class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           bsrFacSimileKindAtom (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             bsrFacSimileKind  bsrFacSimileKindVariable);
 
     virtual               ~bsrFacSimileKindAtom ();
@@ -83,8 +83,8 @@ class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -101,13 +101,13 @@ class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -118,7 +118,7 @@ class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
     bsrFacSimileKind      fBsrFacSimileKindVariable;
 };
 typedef SMARTP<bsrFacSimileKindAtom> S_bsrFacSimileKindAtom;
-EXP ostream& operator << (ostream& os, const S_bsrFacSimileKindAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrFacSimileKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP bsrTextsLanguageAtom : public oahAtomStoringAValue
@@ -129,11 +129,11 @@ class EXP bsrTextsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<bsrTextsLanguageAtom> create (
-                            const string&  longName,
-                            const string&  shortName,
-                            const string&  description,
-                            const string&  valueSpecification,
-                            const string&  variableName,
+                            const std::string&  longName,
+                            const std::string&  shortName,
+                            const std::string&  description,
+                            const std::string&  valueSpecification,
+                            const std::string&  variableName,
                             bsrTextsLanguageKind&
                                            bsrTextsLanguageKindVariable);
 
@@ -143,11 +143,11 @@ class EXP bsrTextsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           bsrTextsLanguageAtom (
-                            const string&  longName,
-                            const string&  shortName,
-                            const string&  description,
-                            const string&  valueSpecification,
-                            const string&  variableName,
+                            const std::string&  longName,
+                            const std::string&  shortName,
+                            const std::string&  description,
+                            const std::string&  valueSpecification,
+                            const std::string&  variableName,
                             bsrTextsLanguageKind&
                                            bsrTextsLanguageKindVariable);
 
@@ -170,8 +170,8 @@ class EXP bsrTextsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -188,13 +188,13 @@ class EXP bsrTextsLanguageAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -205,7 +205,7 @@ class EXP bsrTextsLanguageAtom : public oahAtomStoringAValue
     bsrTextsLanguageKind& fBsrTextsLanguageKindVariable;
 };
 typedef SMARTP<bsrTextsLanguageAtom> S_bsrTextsLanguageAtom;
-EXP ostream& operator << (ostream& os, const S_bsrTextsLanguageAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrTextsLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP bsrOahGroup : public oahGroup
@@ -239,7 +239,7 @@ class EXP bsrOahGroup : public oahGroup
     // ------------------------------------------------------
 
     Bool                  setBsrTextsLanguage (
-                            const string& language);
+                            const std::string& language);
 
     // display
 
@@ -420,7 +420,7 @@ class EXP bsrOahGroup : public oahGroup
 #endif
 };
 typedef SMARTP<bsrOahGroup> S_bsrOahGroup;
-EXP ostream& operator << (ostream& os, const S_bsrOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrOahGroup& elt);
 
 EXP extern S_bsrOahGroup gGlobalBsrOahGroup;
 

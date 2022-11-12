@@ -20,8 +20,6 @@
 #include "lpsrPartGroups.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -32,10 +30,10 @@ enum class lpsrElementsSeparatorKind {
   kElementsSeparatorEndOfLine, kElementsSeparatorSpace
 };
 
-string lpsrElementsSeparatorKindAsString (
+std::string lpsrElementsSeparatorKindAsString (
   lpsrElementsSeparatorKind elementsSeparatorKind);
 
-ostream& operator << (ostream& os, const lpsrElementsSeparatorKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrElementsSeparatorKind& elt);
 
 //______________________________________________________________________________
 class EXP lpsrParallelMusicBLock : public lpsrElement
@@ -65,7 +63,7 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     // set and get
     // ------------------------------------------------------
 
-    const list<S_lpsrPartGroupBlock>&
+    const std::list<S_lpsrPartGroupBlock>&
                           getParallelMusicBLockPartGroupBlocks () const
                               { return fParallelMusicBLockPartGroupBlocks; }
 
@@ -109,21 +107,21 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // fields
     // ------------------------------------------------------
 
-    list<S_lpsrPartGroupBlock>
+    std::list<S_lpsrPartGroupBlock>
                           fParallelMusicBLockPartGroupBlocks;
 
     lpsrElementsSeparatorKind
                           fElementsSeparatorKind;
 };
 typedef SMARTP<lpsrParallelMusicBLock> S_lpsrParallelMusicBLock;
-EXP ostream& operator << (ostream& os, const S_lpsrParallelMusicBLock& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrParallelMusicBLock& elt);
 
 
 }

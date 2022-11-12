@@ -92,9 +92,9 @@ class EXP msrMeasureRepeatPattern : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -108,7 +108,7 @@ class EXP msrMeasureRepeatPattern : public msrElement
     S_msrSegment          fMeasureRepeatPatternSegment;
 };
 typedef SMARTP<msrMeasureRepeatPattern> S_msrMeasureRepeatPattern;
-EXP ostream& operator << (ostream& os, const S_msrMeasureRepeatPattern& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatPattern& elt);
 
 //______________________________________________________________________________
 class EXP msrMeasureRepeatReplicas : public msrElement
@@ -181,9 +181,9 @@ class EXP msrMeasureRepeatReplicas : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -197,7 +197,7 @@ class EXP msrMeasureRepeatReplicas : public msrElement
     S_msrSegment          fMeasureRepeatReplicasSegment;
 };
 typedef SMARTP<msrMeasureRepeatReplicas> S_msrMeasureRepeatReplicas;
-EXP ostream& operator << (ostream& os, const S_msrMeasureRepeatReplicas& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatReplicas& elt);
 
 //______________________________________________________________________________
 // data types
@@ -207,10 +207,10 @@ enum class msrMeasureRepeatKind {
   kMeasureRepeatStart, kMeasureRepeatStop
 };
 
-// string msrMeasureRepeatKindAsString ( // JMI v0.9.66
+// std::string msrMeasureRepeatKindAsString ( // JMI v0.9.66
 //   msrMeasureRepeatKind measureRepeatKind);
 //
-// ostream& operator << (ostream& os, const msrMeasureRepeatKind& elt);
+// std::ostream& operator << (std::ostream& os, const msrMeasureRepeatKind& elt);
 
 enum class msrMeasureRepeatBuildPhaseKind {
   kMeasureRepeatBuildPhaseJustCreated,
@@ -219,9 +219,9 @@ enum class msrMeasureRepeatBuildPhaseKind {
   kMeasureRepeatBuildPhaseCompleted
 };
 
-ostream& operator << (ostream& os, const msrMeasureRepeatBuildPhaseKind& elt);
+std::ostream& operator << (std::ostream& os, const msrMeasureRepeatBuildPhaseKind& elt);
 
-// string msrMeasureRepeatBuildPhaseKindAsString ( // JMI v0.9.66
+// std::string msrMeasureRepeatBuildPhaseKindAsString ( // JMI v0.9.66
 //   msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind);
 //
 
@@ -335,14 +335,14 @@ class EXP msrMeasureRepeat : public msrSegmentElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
     void                  displayMeasureRepeat (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -369,7 +369,7 @@ class EXP msrMeasureRepeat : public msrSegmentElement
                           fCurrentMeasureRepeatBuildPhaseKind;
 };
 typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
-EXP ostream& operator << (ostream& os, const S_msrMeasureRepeat& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeat& elt);
 
 
 }
@@ -412,7 +412,7 @@ class EXP msrMeasureRepeatElement : public msrElement
                               { return fMeasureRepeatElementUpLinkToMeasureRepeat; }
 
     // elements
-    const list<S_msrVoiceElement>&
+    const std::list<S_msrVoiceElement>&
                           getMeasureRepeatElementsList () const
                               { return fMeasureRepeatElementsList; }
 
@@ -424,18 +424,18 @@ class EXP msrMeasureRepeatElement : public msrElement
     void                  appendSegmentToMeasureRepeatElementsList (
                             int          inputLineNumber,
                             S_msrSegment segment,
-                            const string&       context);
+                            const std::string&       context);
 
     void                  appendMeasureRepeatToMeasureRepeatElementsList (
                             int                  inputLineNumber,
                             S_msrMeasureRepeat  measureRepeat,
-                            const string&               context);
+                            const std::string&               context);
 
 
     void                  appendMultipleFullBarRestsToMeasureRepeatElementsList (
                             int                         inputLineNumber,
                             S_msrMeasureRepeat measureRepeat,
-                            const string&                      context);
+                            const std::string&                      context);
 
     S_msrNote             fetchMeasureRepeatElementFirstNonGraceNote () const;
 
@@ -450,7 +450,7 @@ class EXP msrMeasureRepeatElement : public msrElement
     void                  appendVoiceElementToMeasureRepeatElementsList ( // JMI
                             int               inputLineNumber,
                             S_msrVoiceElement voiceElement,
-                            const string&            context);
+                            const std::string&            context);
 
   public:
 
@@ -467,11 +467,11 @@ class EXP msrMeasureRepeatElement : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -481,11 +481,11 @@ class EXP msrMeasureRepeatElement : public msrElement
     // upLinks
     S_msrMeasureRepeat   fMeasureRepeatElementUpLinkToMeasureRepeat;
 
-    // elements list
-    list<S_msrVoiceElement>
+    // elements std::list
+    std::list<S_msrVoiceElement>
                           fMeasureRepeatElementsList;
 };
 typedef SMARTP<msrMeasureRepeatElement> S_msrMeasureRepeatElement;
-EXP ostream& operator << (ostream& os, const S_msrMeasureRepeatElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatElement& elt);
 */
 

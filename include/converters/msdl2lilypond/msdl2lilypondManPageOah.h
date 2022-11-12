@@ -29,9 +29,9 @@ class EXP msdl2lilypondManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<msdl2lilypondManPageGenerateAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
   protected:
@@ -40,9 +40,9 @@ class EXP msdl2lilypondManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
                           msdl2lilypondManPageGenerateAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
     virtual               ~msdl2lilypondManPageGenerateAtom ();
@@ -57,7 +57,7 @@ class EXP msdl2lilypondManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
   public:
 
@@ -74,10 +74,10 @@ class EXP msdl2lilypondManPageGenerateAtom : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -85,7 +85,7 @@ class EXP msdl2lilypondManPageGenerateAtom : public oahAtom
     // private services
     // ------------------------------------------------------
 
-    void                  generateManPageData (ostream& os) const;
+    void                  generateManPageData (std::ostream& os) const;
 
   private:
 
@@ -95,7 +95,7 @@ class EXP msdl2lilypondManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msdl2lilypondManPageGenerateAtom> S_msdl2lilypondManPageGenerateAtom;
-EXP ostream& operator << (ostream& os, const S_msdl2lilypondManPageGenerateAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2lilypondManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP msdl2lilypondManPageOahGroup : public oahGroup
@@ -182,7 +182,7 @@ class EXP msdl2lilypondManPageOahGroup : public oahGroup
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msdl2lilypondManPageOahGroup> S_msdl2lilypondManPageOahGroup;
-EXP ostream& operator << (ostream& os, const S_msdl2lilypondManPageOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2lilypondManPageOahGroup& elt);
 
 EXP extern S_msdl2lilypondManPageOahGroup gGlobalMsdl2lyManPageOahGroup;
 

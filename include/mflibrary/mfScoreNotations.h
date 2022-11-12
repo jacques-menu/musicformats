@@ -15,8 +15,6 @@
 #include <string>
 #include <ostream>
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -28,10 +26,10 @@ enum class msrScoreNotationKind {
   kScoreNotationDiatonicAccordion
 };
 
-string msrScoreNotationKindAsString (
+std::string msrScoreNotationKindAsString (
   msrScoreNotationKind lilypondScoreNotationKind);
 
-ostream& operator << (ostream& os, const msrScoreNotationKind& elt);
+std::ostream& operator << (std::ostream& os, const msrScoreNotationKind& elt);
 
 
 }

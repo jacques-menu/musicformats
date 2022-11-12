@@ -29,14 +29,14 @@ enum class msrMarginTypeKind {
   kMarginOdd, kMarginEven, kMarginBoth
 };
 
-string msrMarginTypeKindAsString (
+std::string msrMarginTypeKindAsString (
   msrMarginTypeKind marginTypeKind);
 
-ostream& operator << (ostream& os, const msrMarginTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrMarginTypeKind& elt);
 
-string existingMsrMarginTypeKinds (size_t namesListMaxLength);
+std::string existingMsrMarginTypeKinds (size_t namesListMaxLength);
 
-extern map<string, msrMarginTypeKind>
+extern std::map<std::string, msrMarginTypeKind>
   gGlobalMsrMarginTypeKindsMap;
 
 void initializeMsrMarginTypeKindsMap ();
@@ -108,9 +108,9 @@ class EXP msrMargin : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -122,7 +122,7 @@ class EXP msrMargin : public smartable
     msrLength             fMarginLength;
 };
 typedef SMARTP<msrMargin> S_msrMargin;
-EXP ostream& operator << (ostream& os, const S_msrMargin& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMargin& elt);
 
 // margins groups
 //______________________________________________________________________________
@@ -209,9 +209,9 @@ class EXP msrMarginsGroup : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -228,7 +228,7 @@ class EXP msrMarginsGroup : public smartable
     S_msrMargin           fBottomMargin;
 };
 typedef SMARTP<msrMarginsGroup> S_msrMarginsGroup;
-EXP ostream& operator << (ostream& os, const S_msrMarginsGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMarginsGroup& elt);
 
 
 }

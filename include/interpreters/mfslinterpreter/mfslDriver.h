@@ -25,8 +25,6 @@
 
 #include "mfslParser.h"
 
-using namespace std;
-
 using namespace MusicFormats;
 
 
@@ -39,7 +37,7 @@ class   mfslDriver
     // constants
     // ------------------------------------------------------
 
-    static const string   K_ALL_PSEUDO_LABEL_NAME;
+    static const std::string   K_ALL_PSEUDO_LABEL_NAME;
 
     // // constructor/destructor
     // ------------------------------------------------------
@@ -54,19 +52,19 @@ class   mfslDriver
     // ------------------------------------------------------
 
     // internal
-    void                  setScriptName (string scriptName);
+    void                  setScriptName (std::string scriptName);
 
-    string                getScriptName () const
+    std::string           getScriptName () const
                               { return fScriptName; }
 
-    void                  setTool (string tool);
+    void                  setTool (std::string tool);
 
-    string                getTool () const
+    std::string           getTool () const
                               { return fTool; }
 
-    void                  appendInputSouce (string inputSouce);
+    void                  appendInputSouce (std::string inputSouce);
 
-    const list<string>&   getInputSoucesList () const
+    const std::list<std::string>&   getInputSoucesList () const
                               { return fInputSoucesList; }
 
     bool                  getTraceScanning () const
@@ -141,12 +139,12 @@ class   mfslDriver
     // options blocks
     void                  optionsBlocksStackPush (
                             S_mfslOptionsBlock optionsBlock,
-                            const string&      context);
+                            const std::string&      context);
 
     S_mfslOptionsBlock    optionsBlocksStackTop () const;
 
     void                  optionsBlocksStackPop (
-                            const string& context);
+                            const std::string& context);
 
     // options
     void                  registerOptionInCurrentOptionsBlock (
@@ -154,12 +152,12 @@ class   mfslDriver
                             mfslDriver& drv);
 
     void                  registerOptionsSuppliedChoicesAsUsed (
-                            const string& choiceName);
+                            const std::string& choiceName);
     void                  registerOptionsSuppliedChoicesAsUnused (
-                            const string& choiceName);
+                            const std::string& choiceName);
 
     void                  displayOptionsBlocksStack (
-                            const string& context) const;
+                            const std::string& context) const;
 
     // case choice statements
     void                  caseChoiceStatementsStackPush (
@@ -171,7 +169,7 @@ class   mfslDriver
     void                  caseChoiceStatementsStackPop ();
 
     void                  displayCaseChoiceStatementsStack (
-                            const string& context) const;
+                            const std::string& context) const;
 
     // case input statements
     void                  caseInputStatementsStackPush (
@@ -183,16 +181,16 @@ class   mfslDriver
     void                  caseInputStatementsStackPop ();
 
     void                  displayCaseInputStatementsStack (
-                            const string& context) const;
+                            const std::string& context) const;
 
     // launching the MFSL tool
     void                  handleSelectLabel (
-                            const string& choiceName,
-                            const string& label);
+                            const std::string& choiceName,
+                            const std::string& label);
 
     void                  appendSelectLabelForToolLaunching (
                             const S_mfslChoice choice,
-                            const string&      label,
+                            const std::string&      label,
                             Bool               allLabelSelected);
 
     mfMusicformatsErrorKind   launchMfslTool_Pass2 ();
@@ -205,18 +203,18 @@ class   mfslDriver
     // 'select' statements
 //     Bool                  applySelectOptionIfPresent (
 //                             const S_mfslChoice choice,
-//                             const string&      label);
+//                             const std::string&      label);
 
     Bool                  applySelectOptionsFinally ();
 
     Bool                  applySelectOption (
                             const S_mfslChoice choice,
-                            const string&      label);
+                            const std::string&      label);
 
     // final semantics check
     void                  finalSemanticsCheck ();
 
-    // populate commands list
+    // populate commands std::list
     void                  populateTheCommandsList ();
 
   private:
@@ -225,13 +223,13 @@ class   mfslDriver
     // ------------------------------------------------------
 
     // the name of the MusicFormats tool
-    string                fTool;
+    std::string           fTool;
 
     // the name of the MusicFormats script
-    string                fScriptName;
+    std::string           fScriptName;
 
     // the names of the input sources
-    list<string>          fInputSoucesList;
+    std::list<std::string>          fInputSoucesList;
 
     // scanning
     bool                  fTraceScanning;
@@ -264,18 +262,18 @@ class   mfslDriver
     bool                  fNoLaunch;
 
     // known tool names
-    set<string>           fKnownNames;
+    std::set<std::string>           fKnownNames;
 
     // choices handling
     S_mfslChoicesTable    fChoicesTable;
 
-    multimap<string, string>
+    std::multimap<std::string, std::string>
                           fOptionsSuppliedChoicesLabelsMultiMap;
-    set<string>           fUnusedOptionsSuppliedChoicesSet;
+    std::set<std::string>           fUnusedOptionsSuppliedChoicesSet;
 
     // case choice statements
     int                   fCaseChoiceStatementsNumber;
-    list<S_mfslCaseChoiceStatement>
+    std::list<S_mfslCaseChoiceStatement>
                           fCaseChoiceStatementsStack;
 
     S_mfslChoice          fCurrentChoiceChoice;
@@ -283,27 +281,27 @@ class   mfslDriver
     // inputs handling
     S_mfslInputsTable     fInputsTable;
 
-    multimap<string, string>
+    std::multimap<std::string, std::string>
                           fOptionsSuppliedInputsLabelsMultiMap;
-    set<string>           fUnusedOptionsSuppliedInputsSet;
+    std::set<std::string>           fUnusedOptionsSuppliedInputsSet;
 
     // case input statements
     int                   fCaseInputStatementsNumber;
-    list<S_mfslCaseInputStatement>
+    std::list<S_mfslCaseInputStatement>
                           fCaseInputStatementsStack;
 
     // options blocks
-    list<S_mfslOptionsBlock>
+    std::list<S_mfslOptionsBlock>
                           fOptionsBlocksStack;
 
     S_mfslOptionsBlock    fMainOptionsBlock;
 
     // tool launching
-    list<S_mfslOptionsBlock>
+    std::list<S_mfslOptionsBlock>
                           fSelectedOptionsBlocksList;
 
-    // commands list
-    list<string>          fCommandsList;
+    // commands std::list
+    std::list<std::string>          fCommandsList;
 };
 
 //______________________________________________________________________________

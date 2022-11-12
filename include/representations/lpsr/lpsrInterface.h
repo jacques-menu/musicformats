@@ -30,13 +30,13 @@ EXP void displayLpsrScoreShort (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
   S_lpsrOahGroup    lpsrOpts,
-  const string&     passDescription);
+  const std::string&     passDescription);
 
 EXP void displayLpsrScoreFull (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
   S_lpsrOahGroup    lpsrOpts,
-  const string&     passDescription);
+  const std::string&     passDescription);
 
 
 }

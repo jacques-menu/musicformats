@@ -15,8 +15,6 @@
 #include "mfcBasicTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 

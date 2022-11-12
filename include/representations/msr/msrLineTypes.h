@@ -16,8 +16,6 @@
 #include <ostream>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -28,10 +26,10 @@ enum class msrLineTypeKind {
   kLineTypeDotted, kLineTypeWavy
 };
 
-string msrLineTypeKindAsString (
+std::string msrLineTypeKindAsString (
   msrLineTypeKind lineTypeKind);
 
-ostream& operator << (ostream& os, const msrLineTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrLineTypeKind& elt);
 
 
 }

@@ -15,8 +15,6 @@
 #include <string>
 #include <ostream>
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -35,42 +33,42 @@ enum class msrJustifyKind {
   kJustifyLeft, kJustifyCenter, kJustifyRight
 };
 
-string msrJustifyKindAsString (
+std::string msrJustifyKindAsString (
   msrJustifyKind justifyKind);
 
-ostream& operator << (ostream& os, const msrJustifyKind& elt);
+std::ostream& operator << (std::ostream& os, const msrJustifyKind& elt);
 
 msrJustifyKind msrJustifyKindFromString (
   int           inputLineNumber,
-  const string& justifyString);
+  const std::string& justifyString);
 
 enum class msrHorizontalAlignmentKind {
   kHorizontalAlignmentNone,
   kHorizontalAlignmentLeft, kHorizontalAlignmentCenter, kHorizontalAlignmentRight
 };
 
-string msrHorizontalAlignmentKindAsString (
+std::string msrHorizontalAlignmentKindAsString (
   msrHorizontalAlignmentKind horizontalAlignmentKind);
 
-ostream& operator << (ostream& os, const msrHorizontalAlignmentKind& elt);
+std::ostream& operator << (std::ostream& os, const msrHorizontalAlignmentKind& elt);
 
 msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
   int           inputLineNumber,
-  const string& horizontalAlignString);
+  const std::string& horizontalAlignString);
 
 enum class msrVerticalAlignmentKind {
   kVerticalAlignmentNone,
   kVerticalAlignmentTop, kVerticalAlignmentMiddle, kVerticalAlignmentBottom
 };
 
-string msrVerticalAlignmentKindAsString (
+std::string msrVerticalAlignmentKindAsString (
   msrVerticalAlignmentKind verticalAlignmentKind);
 
-ostream& operator << (ostream& os, const msrVerticalAlignmentKind& elt);
+std::ostream& operator << (std::ostream& os, const msrVerticalAlignmentKind& elt);
 
 msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
   int           inputLineNumber,
-  const string& verticalAlignmentString);
+  const std::string& verticalAlignmentString);
 
 
 }

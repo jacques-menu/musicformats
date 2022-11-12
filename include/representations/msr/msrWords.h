@@ -30,19 +30,19 @@ enum class msrWordsFontStyleKind {
   kNormalStyle, KItalicStyle
 };
 
-string msrWordsFontStyleKindAsString (
+std::string msrWordsFontStyleKindAsString (
   msrWordsFontStyleKind wordsFontStyleKind);
 
-ostream& operator << (ostream& os, const msrWordsFontStyleKind& elt);
+std::ostream& operator << (std::ostream& os, const msrWordsFontStyleKind& elt);
 
 enum class msrWordsFontWeightKind {
   kNormalWeight, kBoldWeight
 };
 
-string msrWordsFontWeightKindAsString (
+std::string msrWordsFontWeightKindAsString (
   msrWordsFontWeightKind wordsFontWeightKind);
 
-ostream& operator << (ostream& os, const msrWordsFontWeightKind& elt);
+std::ostream& operator << (std::ostream& os, const msrWordsFontWeightKind& elt);
 
 class EXP msrWords : public msrElement
 {
@@ -54,7 +54,7 @@ class EXP msrWords : public msrElement
     static SMARTP<msrWords> create (
                             int                        inputLineNumber,
                             msrPlacementKind           wordsPlacementKind,
-                            const string&              wordsContents,
+                            const std::string&              wordsContents,
                             msrJustifyKind             wordsJustifyKind,
                             msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
                             msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
@@ -72,7 +72,7 @@ class EXP msrWords : public msrElement
                           msrWords (
                             int                        inputLineNumber,
                             msrPlacementKind           wordsPlacementKind,
-                            const string&              wordsContents,
+                            const std::string&              wordsContents,
                             msrJustifyKind             wordsJustifyKind,
                             msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
                             msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
@@ -92,7 +92,7 @@ class EXP msrWords : public msrElement
     msrPlacementKind      getWordsPlacementKind () const
                               { return fWordsPlacementKind; }
 
-    string                getWordsContents () const
+    std::string           getWordsContents () const
                               { return fWordsContents; }
 
     msrJustifyKind        getWordsJustifyKind () const
@@ -141,22 +141,22 @@ class EXP msrWords : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                wordsPlacementKindAsString () const;
+    std::string           wordsPlacementKindAsString () const;
 
-    string                wordsJustifyKindAsString () const;
+    std::string           wordsJustifyKindAsString () const;
 
-    string                wordsHorizontalAlignmentKindAsString () const;
-    string                wordsVerticalAlignmentKindAsString () const;
+    std::string           wordsHorizontalAlignmentKindAsString () const;
+    std::string           wordsVerticalAlignmentKindAsString () const;
 
-    string                msrWordsFontStyleKindAsString () const;
+    std::string           msrWordsFontStyleKindAsString () const;
 
-    string                wordsFontSizeAsString () const;
+    std::string           wordsFontSizeAsString () const;
 
-    string                wordsFontWeightKindAsString () const;
+    std::string           wordsFontWeightKindAsString () const;
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -165,7 +165,7 @@ class EXP msrWords : public msrElement
 
     msrPlacementKind      fWordsPlacementKind;
 
-    string                fWordsContents;
+    std::string           fWordsContents;
 
     msrJustifyKind        fWordsJustifyKind;
 
@@ -183,7 +183,7 @@ class EXP msrWords : public msrElement
     int                   fWordsStaffNumber;
 };
 typedef SMARTP<msrWords> S_msrWords;
-EXP ostream& operator << (ostream& os, const S_msrWords& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrWords& elt);
 
 
 }

@@ -39,15 +39,15 @@ enum class lpsrScoreOutputKind {
   kScoreOutputPartsOnlyOneFile
 };
 
-string lpsrScoreOutputKindAsString (
+std::string lpsrScoreOutputKindAsString (
   lpsrScoreOutputKind scoreOutputKind);
 
-ostream& operator << (ostream& os, const lpsrScoreOutputKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrScoreOutputKind& elt);
 
-extern map<string, lpsrScoreOutputKind>
+extern std::map<std::string, lpsrScoreOutputKind>
   gGlobalLpsrScoreOutputKindsMap;
 
-string existingLpsrScoreOutputKinds (size_t namesListMaxLength);
+std::string existingLpsrScoreOutputKinds (size_t namesListMaxLength);
 
 void initializeLpsrScoreOutputKindsMap ();
 
@@ -75,18 +75,18 @@ enum class lpsrAccidentalStyleKind {
   kAccidentalStyleForget
 };
 
-string lpsrAccidentalStyleKindAsString (
+std::string lpsrAccidentalStyleKindAsString (
   lpsrAccidentalStyleKind accidentalStyleKind);
 
-ostream& operator << (ostream& os, const lpsrAccidentalStyleKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrAccidentalStyleKind& elt);
 
-string lpsrAccidentalStyleKindAsLilypondString (
+std::string lpsrAccidentalStyleKindAsLilypondString (
   lpsrAccidentalStyleKind accidentalStyleKind);
 
-extern map<string, lpsrAccidentalStyleKind>
+extern std::map<std::string, lpsrAccidentalStyleKind>
   gGlobalLpsrAccidentalStyleKindsMap;
 
-string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength);
+std::string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength);
 
 void initializeLpsrAccidentalStyleKindsMap ();
 
@@ -100,59 +100,59 @@ enum class lpsrChordsLanguageKind {
   kChordsFrench
 };
 
-string lpsrChordsLanguageKindAsString (
+std::string lpsrChordsLanguageKindAsString (
   lpsrChordsLanguageKind languageKind);
 
-ostream& operator << (ostream& os, const lpsrChordsLanguageKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrChordsLanguageKind& elt);
 
-extern map<string, lpsrChordsLanguageKind>
+extern std::map<std::string, lpsrChordsLanguageKind>
   gGlobalLpsrChordsLanguageKindsMap;
 
-string existingLpsrChordsLanguageKinds (size_t namesListMaxLength);
+std::string existingLpsrChordsLanguageKinds (size_t namesListMaxLength);
 
 void initializeLpsrChordsLanguageKindsMap ();
 
 // whole notes
 //______________________________________________________________________________
-string wholeNotesAsLilypondString (
+std::string wholeNotesAsLilypondString (
   int             inputLineNumber,
   const Rational& wholeNotes,
   int&            dotsNumber);
 
-string wholeNotesAsLilypondString (
+std::string wholeNotesAsLilypondString (
   int             inputLineNumber,
   const Rational& wholeNotes);
 
 // dotted durations
 //______________________________________________________________________________
 
-string dottedDurationAsLilypondString (
+std::string dottedDurationAsLilypondString (
   int               inputLineNumber,
   msrDottedDuration dottedDuration);
 
-string dottedDurationAsLilypondStringWithoutBackSlash (
+std::string dottedDurationAsLilypondStringWithoutBackSlash (
   int               inputLineNumber,
   msrDottedDuration dottedDuration);
 
 // rests measures
 //______________________________________________________________________________
-string multipleFullBarRestsWholeNoteAsLilypondString (
+std::string multipleFullBarRestsWholeNoteAsLilypondString (
   int             inputLineNumber,
   const Rational& wholeNotes);
 
 // texts lists
 //______________________________________________________________________________
 EXP void writeTextsListAsLilypondString (
-  const list<string>& textsList,
-  ostream&            os);
+  const std::list<std::string>& textsList,
+  std::ostream&            os);
 
 // pitches and octaves
 //______________________________________________________________________________
-string msrSemiTonesPitchKindAsLilypondString (
+std::string msrSemiTonesPitchKindAsLilypondString (
   msrQuarterTonesPitchesLanguageKind languageKind,
   msrSemiTonesPitchKind              semiTonesPitchKind);
 
-string msrSemiTonesPitchAndOctaveAsLilypondString (
+std::string msrSemiTonesPitchAndOctaveAsLilypondString (
   msrQuarterTonesPitchesLanguageKind languageKind,
   S_msrSemiTonesPitchAndOctave       quarterTonesPitchAndOctave);
 
@@ -165,19 +165,19 @@ enum class lpsrDynamicsTextSpannersStyleKind {
   kDynamicsTextSpannersStyleTrill
 };
 
-string lpsrDynamicsTextSpannersStyleKindAsString (
+std::string lpsrDynamicsTextSpannersStyleKindAsString (
   lpsrDynamicsTextSpannersStyleKind dynamicsTextSpannersStyleKind);
 
-ostream& operator << (ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt);
 
 lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
   int           inputLineNumber,
-  const string& dynamicsTextSpannersStyleKindString);
+  const std::string& dynamicsTextSpannersStyleKindString);
 
-extern map<string, lpsrDynamicsTextSpannersStyleKind>&
+extern std::map<std::string, lpsrDynamicsTextSpannersStyleKind>&
   getLpsrDynamicsTextSpannersStyleKindsMap ();
 
-string existingLpsrDynamicsTextSpannersStyleKinds (
+std::string existingLpsrDynamicsTextSpannersStyleKinds (
   size_t namesListMaxLength);
 
 void initializeLpsrDynamicsTextSpannersStyleKindsMap ();
@@ -189,15 +189,15 @@ enum class lpsrLyricsDurationsKind {
   kLyricsDurationsExplicit
 };
 
-string lpsrLyricsDurationsKindAsString (
+std::string lpsrLyricsDurationsKindAsString (
   lpsrLyricsDurationsKind lyricsDurationsKind);
 
-ostream& operator << (ostream& os, const lpsrLyricsDurationsKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrLyricsDurationsKind& elt);
 
-extern map<string, lpsrLyricsDurationsKind>
+extern std::map<std::string, lpsrLyricsDurationsKind>
   gGlobalLpsrLyricsDurationsKindsMap;
 
-string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength);
+std::string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength);
 
 void initializeLpsrLyricsDurationsKindsMap ();
 

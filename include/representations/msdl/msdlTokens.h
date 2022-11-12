@@ -22,8 +22,6 @@
 #include "msdlInputOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -149,19 +147,19 @@ enum class msdlTokenKind {
   LanguageDependentLast  = kTokenTime
 };
 
-string msdlTokenKindAsString (
+std::string msdlTokenKindAsString (
   msdlTokenKind tokenKind);
 
-ostream& operator << (ostream& os, const msdlTokenKind& elt);
+std::ostream& operator << (std::ostream& os, const msdlTokenKind& elt);
 
-string msdlTokenKindAsMsdlString (
+std::string msdlTokenKindAsMsdlString (
   msdlTokenKind            tokenKind,
   msdlKeywordsLanguageKind languageKind);
 
 msdlTokenKind msdlTokenKindFromKeywordKind (
   msdlKeywordKind keywordKind);
 
-string existingTokensInLanguage (
+std::string existingTokensInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
   size_t                   namesListMaxLength);
 
@@ -302,7 +300,7 @@ class   msdlTokenKindsSet : public smartable
     static SMARTP<msdlTokenKindsSet> create ();
 
     static SMARTP<msdlTokenKindsSet> create (
-                            initializer_list<msdlTokenKind> elements);
+                            std::initializer_list<msdlTokenKind> elements);
 
     static SMARTP<msdlTokenKindsSet> create (
                             msdlTokenKindsSet& tokenKindsSet);
@@ -317,7 +315,7 @@ class   msdlTokenKindsSet : public smartable
                           msdlTokenKindsSet ();
 
                           msdlTokenKindsSet (
-                            initializer_list<msdlTokenKind> elements);
+                            std::initializer_list<msdlTokenKind> elements);
 
                           msdlTokenKindsSet (
                             msdlTokenKindsSet& tokenKindsSet);
@@ -327,7 +325,7 @@ class   msdlTokenKindsSet : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const set<msdlTokenKind>&
+    const std::set<msdlTokenKind>&
                           getTokenKindsSet () const
                               { return fTokenKindsSet; }
 
@@ -357,18 +355,18 @@ class   msdlTokenKindsSet : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    set<msdlTokenKind>    fTokenKindsSet;
+    std::set<msdlTokenKind>    fTokenKindsSet;
 };
-EXP ostream& operator << (ostream& os, const msdlTokenKindsSet& elt);
+EXP std::ostream& operator << (std::ostream& os, const msdlTokenKindsSet& elt);
 
 EXP S_msdlTokenKindsSet operator+= (
   S_msdlTokenKindsSet aTokenKindsSet,
@@ -406,7 +404,7 @@ EXP S_msdlTokenKindsSet operator- (
   see https://stackoverflow.com/questions/1448396/how-to-use-enums-as-flags-in-c
 
 
-// initializer_list::begin/end
+// std::initializer_list::begin/end
 #include <iostream>          // std::cout
 #include <string>            // std::string
 #include <sstream>           // std::stringstream
@@ -455,10 +453,10 @@ enum class msdlTokenDescriptionKind {
   kTokenString
 };
 
-string msdlTokenDescriptionKindAsString (
+std::string msdlTokenDescriptionKindAsString (
   msdlTokenDescriptionKind tokenDescriptionKind);
 
-ostream& operator << (ostream& os, const msdlTokenDescriptionKind& elt);
+std::ostream& operator << (std::ostream& os, const msdlTokenDescriptionKind& elt);
 
 //________________________________________________________________________
 class EXP msdlTokenDescription : public smartable
@@ -518,14 +516,14 @@ class EXP msdlTokenDescription : public smartable
 
     char                  getCharacter () const;
 
-    void                  setString (const string& value)
+    void                  setString (const std::string& value)
                               {
                                 fTokenDescriptionKind =
                                   msdlTokenDescriptionKind::kTokenString;
                                 fString               = value;
                               }
 
-    string                getString () const;
+    std::string           getString () const;
 
   public:
 
@@ -537,9 +535,9 @@ class EXP msdlTokenDescription : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -556,10 +554,10 @@ class EXP msdlTokenDescription : public smartable
     double                fDouble;
 
     char                  fCharacter;
-    string                fString;
+    std::string           fString;
 };
 typedef SMARTP<msdlTokenDescription> S_msdlTokenDescription;
-EXP ostream& operator << (ostream& os, const msdlTokenDescription& elt);
+EXP std::ostream& operator << (std::ostream& os, const msdlTokenDescription& elt);
 
 //________________________________________________________________________
 class EXP msdlToken : public smartable
@@ -591,7 +589,7 @@ class EXP msdlToken : public smartable
 
                           msdlToken (
                             msdlTokenKind tokenKind,
-                            const string& value);
+                            const std::string& value);
 
                           msdlToken (
                             msdlTokenKind tokenKind,
@@ -643,13 +641,13 @@ class EXP msdlToken : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                asMsdlString (
+    std::string           asMsdlString (
                             msdlKeywordsLanguageKind languageKind,
                             msdlCommentsTypeKind     commentsTypeKind) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -673,7 +671,7 @@ class EXP msdlToken : public smartable
     int                   fTokenPositionInLine;
 };
 typedef SMARTP<msdlToken> S_msdlToken;
-EXP ostream& operator << (ostream& os, const msdlToken& elt);
+EXP std::ostream& operator << (std::ostream& os, const msdlToken& elt);
 
 //________________________________________________________________________
 class EXP msdlTokensList : public smartable
@@ -699,7 +697,7 @@ class EXP msdlTokensList : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const list<msdlToken>&
+    const std::list<msdlToken>&
                           getTokensList () const
                               { return fTokensList; }
 
@@ -716,23 +714,23 @@ class EXP msdlTokensList : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                asMsdlString (
+    std::string           asMsdlString (
                             msdlKeywordsLanguageKind languageKind,
                             msdlCommentsTypeKind     commentsTypeKind) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    list<msdlToken>       fTokensList;
+    std::list<msdlToken>       fTokensList;
 };
 typedef SMARTP<msdlTokensList> S_msdlTokensList;
-EXP ostream& operator << (ostream& os, const S_msdlTokensList& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlTokensList& elt);
 
 
 }

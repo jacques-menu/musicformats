@@ -17,38 +17,36 @@
 #include "oahBasicTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
-  string                        inputSourceName,
-  istream&                      inputStream,
+  std::string                   inputSourceName,
+  std::istream&                      inputStream,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
 EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
-  string       inputSourceName,
-  istream&     inputStream,
+  std::string       inputSourceName,
+  std::istream&     inputStream,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err);
+  std::ostream&     out,
+  std::ostream&     err);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
-  string                        fileName,
+  std::string                   fileName,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
 EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
-  string       fileName,
+  std::string       fileName,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err);
+  std::ostream&     out,
+  std::ostream&     err);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithOptionsAndArguments (
@@ -60,8 +58,8 @@ EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithOptionsAndArguments (
 EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithHandler (
   const char*  buffer,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err);
+  std::ostream&     out,
+  std::ostream&     err);
 
 
 }

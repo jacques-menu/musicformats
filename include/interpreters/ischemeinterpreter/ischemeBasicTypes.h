@@ -24,8 +24,6 @@
 #include "oahBasicTypes.h"
 
 
-using namespace std;
-
 using namespace MusicXML2;
 
 using namespace MusicFormats;
@@ -43,14 +41,14 @@ class EXP ischemeOptionsBlock : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<ischemeOptionsBlock> create (const string& optionsBlockName);
+    static SMARTP<ischemeOptionsBlock> create (const std::string& optionsBlockName);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          ischemeOptionsBlock (const string& optionsBlockName);
+                          ischemeOptionsBlock (const std::string& optionsBlockName);
 
     virtual               ~ischemeOptionsBlock ();
 
@@ -59,17 +57,17 @@ class EXP ischemeOptionsBlock : public smartable
     // set and get
     // ------------------------------------------------------
 
-    string                getOptionsBlockName () const
+    std::string           getOptionsBlockName () const
                               { return fOptionsBlockName; }
 
     size_t                getOptionsBlockSize () const
                               { return fOptionsBlockOptionsVector.size (); }
 
-    const vector<S_oahOption>&
+    const std::vector<S_oahOption>&
                           getOptionsBlockOptionsVector () const
                               { return fOptionsBlockOptionsVector; }
 
-    vector<S_oahOption>&
+    std::vector<S_oahOption>&
                           getOptionsBlockOptionsVectorNonConst ()
                               { return fOptionsBlockOptionsVector; }
 
@@ -87,11 +85,11 @@ class EXP ischemeOptionsBlock : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                asOptionsString () const;
+    std::string           asOptionsString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -99,12 +97,12 @@ class EXP ischemeOptionsBlock : public smartable
     // private fields
     // ------------------------------------------------------
 
-    string                fOptionsBlockName;
+    std::string           fOptionsBlockName;
 
-    vector<S_oahOption>   fOptionsBlockOptionsVector;
+    std::vector<S_oahOption>   fOptionsBlockOptionsVector;
 };
 typedef SMARTP<ischemeOptionsBlock> S_ischemeOptionsBlock;
-EXP ostream& operator << (ostream& os, const S_ischemeOptionsBlock& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeOptionsBlock& elt);
 
 //______________________________________________________________________________
 enum class ischemeInputNameKind {
@@ -113,10 +111,10 @@ enum class ischemeInputNameKind {
   kInputNameSetInScript
 };
 
-string ischemeInputNameKindAsString (
+std::string ischemeInputNameKindAsString (
   ischemeInputNameKind inputNameKind);
 
-ostream& operator << (ostream& os, const ischemeInputNameKind& elt);
+std::ostream& operator << (std::ostream& os, const ischemeInputNameKind& elt);
 
 //______________________________________________________________________________
 class EXP ischemeInput : public smartable
@@ -127,7 +125,7 @@ class EXP ischemeInput : public smartable
     // ------------------------------------------------------
 
     static SMARTP<ischemeInput> create (
-                            const string& inputName);
+                            const std::string& inputName);
 
   protected:
 
@@ -135,7 +133,7 @@ class EXP ischemeInput : public smartable
     // ------------------------------------------------------
 
                           ischemeInput (
-                            const string& inputName);
+                            const std::string& inputName);
 
     virtual               ~ischemeInput ();
 
@@ -144,31 +142,31 @@ class EXP ischemeInput : public smartable
     // set and get
     // ------------------------------------------------------
 
-    string                getInputName () const
+    std::string           getInputName () const
                               { return fInputName; }
 
     void                  setInputNameSuppliedByAnOption (
-                            const string& name,
+                            const std::string& name,
                             ischemeDriver&   drv);
 
     void                  selectInputName (
-                            const string& name,
+                            const std::string& name,
                             ischemeDriver&   drv);
 
-    string                getInputName (
+    std::string           getInputName (
                             ischemeDriver& drv) const;
 
-    string                getInputNameWithoutTrace ( // JMI
+    std::string           getInputNameWithoutTrace ( // JMI
                             ischemeDriver& drv) const;
 
     ischemeInputNameKind     getInputNameKind () const
                               { return fInputNameKind; }
 
-    const set<string>&    getNamesSet () const
+    const std::set<std::string>&    getNamesSet () const
                               { return fNamesSet; }
 
     S_ischemeOptionsBlock    getInputOptionsBlockForName (
-                            const string& name,
+                            const std::string& name,
                             ischemeDriver&   drv) const;
 
     void                  setInputIsUsedInCaseInputStatements ()
@@ -183,11 +181,11 @@ class EXP ischemeInput : public smartable
     // ------------------------------------------------------
 
     void                  addName (
-                            const string& name,
+                            const std::string& name,
                             ischemeDriver&   drv);
 
     void                  enrichNameOptionsBlock (
-                            const string&      name,
+                            const std::string&      name,
                             S_ischemeOptionsBlock optionsBlock,
                             ischemeDriver&        drv);
 
@@ -196,33 +194,33 @@ class EXP ischemeInput : public smartable
     // print
     // ------------------------------------------------------
 
-    string                namesSetAsString () const;
+    std::string           namesSetAsString () const;
 
-    string                asString () const;
+    std::string           asString () const;
 
     void                  displayInputNamesToOptionsBlocksMap (
-                            ostream& os) const;
+                            std::ostream& os) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fInputName;
+    std::string           fInputName;
 
     ischemeInputNameKind     fInputNameKind;
 
-    set<string>           fNamesSet;
+    std::set<std::string>           fNamesSet;
 
     Bool                  fInputIsUsedInCaseInputStatements;
 
-    map<string, S_ischemeOptionsBlock>
+    std::map<std::string, S_ischemeOptionsBlock>
                           fInputNamesToOptionsBlocksMap;
 };
 typedef SMARTP<ischemeInput> S_ischemeInput;
-EXP ostream& operator << (ostream& os, const S_ischemeInput& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeInput& elt);
 
 //______________________________________________________________________________
 class EXP ischemeInputsTable : public smartable
@@ -248,7 +246,7 @@ class EXP ischemeInputsTable : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const map<string, S_ischemeInput>&
+    const std::map<std::string, S_ischemeInput>&
                           getInputsMap () const
                               { return fInputsMap; }
 
@@ -262,14 +260,14 @@ class EXP ischemeInputsTable : public smartable
                             ischemeDriver& drv);
 
 //     S_ischemeInput          lookupInputByName (
-//                             const string& name);
+//                             const std::string& name);
 
     S_ischemeInput           fetchInputByName (
-                            const string&     name,
+                            const std::string&     name,
                             const ischemeDriver& drv);
 
     S_ischemeInput           fetchInputByNameNonConst (
-                            const string& name,
+                            const std::string& name,
                             ischemeDriver&   drv);
 
   public:
@@ -277,11 +275,11 @@ class EXP ischemeInputsTable : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  displayInputsMap (ostream& os) const;
+    void                  displayInputsMap (std::ostream& os) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -289,11 +287,11 @@ class EXP ischemeInputsTable : public smartable
     // private fields
     // ------------------------------------------------------
 
-    map<string, S_ischemeInput>
+    std::map<std::string, S_ischemeInput>
                           fInputsMap;
 };
 typedef SMARTP<ischemeInputsTable> S_ischemeInputsTable;
-EXP ostream& operator << (ostream& os, const S_ischemeInputsTable& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeInputsTable& elt);
 
 //______________________________________________________________________________
 class EXP ischemeCaseInputStatement : public smartable
@@ -326,7 +324,7 @@ class EXP ischemeCaseInputStatement : public smartable
     S_ischemeInput           getCaseInputInput () const
                               { return fCaseInputInput; }
 
-    const list<string>&   getCaseInputCurrentNamesList () const
+    const std::list<std::string>&   getCaseInputCurrentNamesList () const
                               { return fCaseInputCurrentNamesList; }
 
     void                  clearCaseInputCurrentNamesList ()
@@ -338,7 +336,7 @@ class EXP ischemeCaseInputStatement : public smartable
     // ------------------------------------------------------
 
     void                  registerCaseInputName (
-                            const string& name,
+                            const std::string& name,
                             ischemeDriver&   drv);
 
     void                  checkThatAllNamesHaveBeenUsed (
@@ -349,11 +347,11 @@ class EXP ischemeCaseInputStatement : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                currentNamesListAsString () const;
+    std::string           currentNamesListAsString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -363,15 +361,15 @@ class EXP ischemeCaseInputStatement : public smartable
 
     S_ischemeInput           fCaseInputInput;
 
-    set<string>           fCaseInputNamesSet;
-    list<string>          fCaseInputCurrentNamesList;
+    std::set<std::string>           fCaseInputNamesSet;
+    std::list<std::string>          fCaseInputCurrentNamesList;
 
     // checking unused names
-    set<string>           fUsedNames;
-    set<string>           fCaseInputUnusedNames;
+    std::set<std::string>           fUsedNames;
+    std::set<std::string>           fCaseInputUnusedNames;
 };
 typedef SMARTP<ischemeCaseInputStatement> S_ischemeCaseInputStatement;
-EXP ostream& operator << (ostream& os, const S_ischemeCaseInputStatement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeCaseInputStatement& elt);
 
 //______________________________________________________________________________
 enum class ischemeChoiceLabelKind {
@@ -380,10 +378,10 @@ enum class ischemeChoiceLabelKind {
   kChoiceLabelSetInScript
 };
 
-string ischemeChoiceLabelKindAsString (
+std::string ischemeChoiceLabelKindAsString (
   ischemeChoiceLabelKind choiceLabelKind);
 
-ostream& operator << (ostream& os, const ischemeChoiceLabelKind& elt);
+std::ostream& operator << (std::ostream& os, const ischemeChoiceLabelKind& elt);
 
 //______________________________________________________________________________
 class EXP ischemeChoice : public smartable
@@ -394,7 +392,7 @@ class EXP ischemeChoice : public smartable
     // ------------------------------------------------------
 
     static SMARTP<ischemeChoice> create (
-                            const string& choiceName);
+                            const std::string& choiceName);
 
   protected:
 
@@ -402,7 +400,7 @@ class EXP ischemeChoice : public smartable
     // ------------------------------------------------------
 
                           ischemeChoice (
-                            const string& choiceName);
+                            const std::string& choiceName);
 
     virtual               ~ischemeChoice ();
 
@@ -411,34 +409,34 @@ class EXP ischemeChoice : public smartable
     // set and get
     // ------------------------------------------------------
 
-    string                getChoiceName () const
+    std::string           getChoiceName () const
                               { return fChoiceName; }
 
     void                  setChoiceLabelSuppliedByAnOption (
-                            const string& label,
+                            const std::string& label,
                             ischemeDriver&   drv);
 
     void                  selectChoiceLabel (
-                            const string& label,
+                            const std::string& label,
                             ischemeDriver&   drv);
 
-    string                getChoiceLabel (
+    std::string           getChoiceLabel (
                             ischemeDriver& drv) const;
 
-    string                getChoiceLabelWithoutTrace ( // JMI
+    std::string           getChoiceLabelWithoutTrace ( // JMI
                             ischemeDriver& drv) const;
 
     ischemeChoiceLabelKind   getChoiceLabelKind () const
                               { return fChoiceLabelKind; }
 
-    const set<string>&    getLabelsSet () const
+    const std::set<std::string>&    getLabelsSet () const
                               { return fLabelsSet; }
 
-    string                getChoiceDefaultLabel () const
+    std::string           getChoiceDefaultLabel () const
                               { return fChoiceDefaultLabel; }
 
     S_ischemeOptionsBlock    getChoiceOptionsBlockForLabel (
-                            const string& label,
+                            const std::string& label,
                             ischemeDriver&   drv) const;
 
     void                  setChoiceIsUsedInCaseChoiceStatements ()
@@ -453,16 +451,16 @@ class EXP ischemeChoice : public smartable
     // ------------------------------------------------------
 
     void                  addLabel (
-                            const string& label,
+                            const std::string& label,
                             ischemeDriver&   drv);
 
     void                  enrichLabelOptionsBlock (
-                            const string&      label,
+                            const std::string&      label,
                             S_ischemeOptionsBlock optionsBlock,
                             ischemeDriver&        drv);
 
     void                  registerChoiceDefaultLabel (
-                            const string& label,
+                            const std::string& label,
                             ischemeDriver&   drv);
 
   public:
@@ -470,36 +468,36 @@ class EXP ischemeChoice : public smartable
     // print
     // ------------------------------------------------------
 
-    string                labelsSetAsString () const;
+    std::string           labelsSetAsString () const;
 
-    string                asString () const;
+    std::string           asString () const;
 
     void                  displayChoiceLabelsToOptionsBlocksMap (
-                            ostream& os) const;
+                            std::ostream& os) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fChoiceName;
+    std::string           fChoiceName;
 
-    string                fChoiceLabel;
+    std::string           fChoiceLabel;
     ischemeChoiceLabelKind   fChoiceLabelKind;
 
-    set<string>           fLabelsSet;
+    std::set<std::string>           fLabelsSet;
 
-    string                fChoiceDefaultLabel;
+    std::string           fChoiceDefaultLabel;
 
     Bool                  fChoiceIsUsedInCaseChoiceStatements;
 
-    map<string, S_ischemeOptionsBlock>
+    std::map<std::string, S_ischemeOptionsBlock>
                           fChoiceLabelsToOptionsBlocksMap;
 };
 typedef SMARTP<ischemeChoice> S_ischemeChoice;
-EXP ostream& operator << (ostream& os, const S_ischemeChoice& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeChoice& elt);
 
 //______________________________________________________________________________
 class EXP ischemeChoicesTable : public smartable
@@ -525,7 +523,7 @@ class EXP ischemeChoicesTable : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const map<string, S_ischemeChoice>&
+    const std::map<std::string, S_ischemeChoice>&
                           getChoicesMap () const
                               { return fChoicesMap; }
 
@@ -539,14 +537,14 @@ class EXP ischemeChoicesTable : public smartable
                             ischemeDriver&  drv);
 
 //     S_ischemeChoice          lookupChoiceByName (
-//                             const string& name);
+//                             const std::string& name);
 
     S_ischemeChoice          fetchChoiceByName (
-                            const string&     name,
+                            const std::string&     name,
                             const ischemeDriver& drv);
 
     S_ischemeChoice          fetchChoiceByNameNonConst (
-                            const string& name,
+                            const std::string& name,
                             ischemeDriver&   drv);
 
   public:
@@ -554,11 +552,11 @@ class EXP ischemeChoicesTable : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  displayChoicesMap (ostream& os) const;
+    void                  displayChoicesMap (std::ostream& os) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -566,11 +564,11 @@ class EXP ischemeChoicesTable : public smartable
     // private fields
     // ------------------------------------------------------
 
-    map<string, S_ischemeChoice>
+    std::map<std::string, S_ischemeChoice>
                           fChoicesMap;
 };
 typedef SMARTP<ischemeChoicesTable> S_ischemeChoicesTable;
-EXP ostream& operator << (ostream& os, const S_ischemeChoicesTable& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeChoicesTable& elt);
 
 //______________________________________________________________________________
 class EXP ischemeCaseChoiceStatement : public smartable
@@ -603,7 +601,7 @@ class EXP ischemeCaseChoiceStatement : public smartable
     S_ischemeChoice          getCaseChoice () const
                               { return fCaseChoice; }
 
-    const list<string>&   getCaseCurrentLabelsList () const
+    const std::list<std::string>&   getCaseCurrentLabelsList () const
                               { return fCaseCurrentLabelsList; }
 
     void                  clearCaseCurrentLabelsList ()
@@ -615,7 +613,7 @@ class EXP ischemeCaseChoiceStatement : public smartable
     // ------------------------------------------------------
 
     void                  registerCaseChoiceLabel (
-                            const string& label,
+                            const std::string& label,
                             ischemeDriver&   drv);
 
     void                  checkThatAllLabelsHaveBeenUsed (
@@ -626,11 +624,11 @@ class EXP ischemeCaseChoiceStatement : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                currentLabelsListAsString () const;
+    std::string           currentLabelsListAsString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
 
   private:
@@ -640,15 +638,15 @@ class EXP ischemeCaseChoiceStatement : public smartable
 
     S_ischemeChoice          fCaseChoice;
 
-    set<string>           fCaseLabelsSet;
-    list<string>          fCaseCurrentLabelsList;
+    std::set<std::string>           fCaseLabelsSet;
+    std::list<std::string>          fCaseCurrentLabelsList;
 
     // checking unused labels
-    set<string>           fUsedLabels;
-    set<string>           fCaseUnusedLabels;
+    std::set<std::string>           fUsedLabels;
+    std::set<std::string>           fCaseUnusedLabels;
 };
 typedef SMARTP<ischemeCaseChoiceStatement> S_ischemeCaseChoiceStatement;
-EXP ostream& operator << (ostream& os, const S_ischemeCaseChoiceStatement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeCaseChoiceStatement& elt);
 
 // // initialization
 // //______________________________________________________________________________

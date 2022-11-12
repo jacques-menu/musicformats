@@ -27,12 +27,12 @@ enum class msrOctaveShiftKind {
   kOctaveShiftStop, kOctaveShiftContinue
 };
 
-string msrOctaveShiftKindAsString (
+std::string msrOctaveShiftKindAsString (
   msrOctaveShiftKind octaveShiftKind);
 
-ostream& operator << (ostream& os, const msrOctaveShiftKind& elt);
+std::ostream& operator << (std::ostream& os, const msrOctaveShiftKind& elt);
 
-class EXP msrOctaveShift : public msrMeasureElement
+class EXP msrOctaveShift : public msrMeasureElementLambda
 {
   public:
 
@@ -89,9 +89,9 @@ class EXP msrOctaveShift : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -103,7 +103,7 @@ class EXP msrOctaveShift : public msrMeasureElement
     int                   fOctaveShiftSize;
 };
 typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
-EXP ostream& operator << (ostream& os, const S_msrOctaveShift& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrOctaveShift& elt);
 
 
 }

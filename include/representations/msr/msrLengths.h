@@ -22,7 +22,6 @@
 #include "mfBool.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
@@ -35,14 +34,14 @@ enum class msrLengthUnitKind {
   kUnitInch, kUnitCentimeter, kUnitMillimeter
 };
 
-string msrLengthUnitKindAsString (
+std::string msrLengthUnitKindAsString (
   msrLengthUnitKind lengthUnitKind);
 
-ostream& operator << (ostream& os, const msrLengthUnitKind& elt);
+std::ostream& operator << (std::ostream& os, const msrLengthUnitKind& elt);
 
-string existingMsrLengthUnitKinds (size_t namesListMaxLength);
+std::string existingMsrLengthUnitKinds (size_t namesListMaxLength);
 
-extern map<string, msrLengthUnitKind>
+extern std::map<std::string, msrLengthUnitKind>
   gGlobalMsrLengthUnitKindsMap;
 
 void initializeMsrLengthUnitKindsMap ();
@@ -116,9 +115,9 @@ class EXP msrLength : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -129,8 +128,8 @@ class EXP msrLength : public smartable
     float                 fLengthValue;
 };
 typedef SMARTP<msrLength> S_msrLength;
-EXP ostream& operator << (ostream& os, const msrLength& elt);
-EXP ostream& operator << (ostream& os, const S_msrLength& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrLength& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrLength& elt);
 
 
 }

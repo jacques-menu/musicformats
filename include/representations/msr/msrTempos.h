@@ -62,7 +62,7 @@ class EXP msrTempoNote : public msrElement
     Rational              getTempoNoteWholeNotes () const
                               { return fTempoNoteWholeNotes; }
 
-    const list<S_msrBeam>&
+    const std::list<S_msrBeam>&
                           getTempoNoteBeams () const
                               { return fTempoNoteBeams; }
 
@@ -88,9 +88,9 @@ class EXP msrTempoNote : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -99,12 +99,12 @@ class EXP msrTempoNote : public msrElement
 
     Rational              fTempoNoteWholeNotes;
 
-    list<S_msrBeam>       fTempoNoteBeams;
+    std::list<S_msrBeam>       fTempoNoteBeams;
 
     Bool                  fTempoNoteBelongsToATuplet;
 };
 typedef SMARTP<msrTempoNote> S_msrTempoNote;
-EXP ostream& operator << (ostream& os, const S_msrTempoNote& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTempoNote& elt);
 
 //______________________________________________________________________________
 class EXP msrTempoTuplet : public msrElement
@@ -159,7 +159,7 @@ class EXP msrTempoTuplet : public msrElement
     Rational              getMemberNotesDisplayWholeNotes () const
                               { return fMemberNotesDisplayWholeNotes; }
 
-    const list<S_msrElement>&
+    const std::list<S_msrElement>&
                           getTempoTupletElements () const
                               { return fTempoTupletElements; }
 
@@ -205,9 +205,9 @@ class EXP msrTempoTuplet : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -228,10 +228,10 @@ class EXP msrTempoTuplet : public msrElement
 
     Rational              fTempoTupletDisplayWholeNotes;
 
-    list<S_msrElement>    fTempoTupletElements;
+    std::list<S_msrElement>    fTempoTupletElements;
 };
 typedef SMARTP<msrTempoTuplet> S_msrTempoTuplet;
-EXP ostream& operator << (ostream& os, const S_msrTempoTuplet& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTempoTuplet& elt);
 
 //______________________________________________________________________________
 class EXP msrTempoNotesRelationshipElements : public msrElement
@@ -269,7 +269,7 @@ class EXP msrTempoNotesRelationshipElements : public msrElement
                           getTempoNotesRelationshipElementsKind () const
                               { return fTempoNotesRelationshipElementsKind; }
 
-    const list<S_msrElement>&
+    const std::list<S_msrElement>&
                           getTempoNotesRelationshipElementsList () const
                               { return fTempoNotesRelationshipElementsList; }
 
@@ -278,7 +278,7 @@ class EXP msrTempoNotesRelationshipElements : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
     void                  addElementToTempoNotesRelationshipElements (
                             S_msrElement element);
@@ -298,24 +298,24 @@ class EXP msrTempoNotesRelationshipElements : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     msrTempoNotesRelationshipElementsKind
                           fTempoNotesRelationshipElementsKind;
 
-    list<S_msrElement>    fTempoNotesRelationshipElementsList;
+    std::list<S_msrElement>    fTempoNotesRelationshipElementsList;
 };
 typedef SMARTP<msrTempoNotesRelationshipElements> S_msrTempoNotesRelationshipElements;
-EXP ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipElements& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTempoNotesRelationshipElements& elt);
 
 //______________________________________________________________________________
 // data types
 
 
 //______________________________________________________________________________
-class EXP msrTempo : public msrMeasureElement
+class EXP msrTempo : public msrMeasureElementLambda
 {
   public:
 
@@ -334,7 +334,7 @@ class EXP msrTempo : public msrMeasureElement
                             int               inputLineNumber,
                             S_msrMeasure      upLinkToMeasure,
                             msrDottedDuration tempoBeatUnit,
-                            string            tempoPerMinute,
+                            std::string            tempoPerMinute,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
                             msrPlacementKind  tempoPlacementKind);
@@ -378,7 +378,7 @@ class EXP msrTempo : public msrMeasureElement
                             int               inputLineNumber,
                             S_msrMeasure      upLinkToMeasure,
                             msrDottedDuration tempoBeatUnit,
-                            string            tempoPerMinute,
+                            std::string            tempoPerMinute,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
                             msrPlacementKind  tempoPlacementKind);
@@ -415,7 +415,7 @@ class EXP msrTempo : public msrMeasureElement
     msrTempoKBeatUnitsKind          getTempoKind () const
                               { return fTempoKind; }
 
-    const list<S_msrWords>&
+    const std::list<S_msrWords>&
                           getTempoWordsList () const
                               { return fTempoWordsList; }
 
@@ -423,7 +423,7 @@ class EXP msrTempo : public msrMeasureElement
                           getTempoBeatUnit () const
                               { return fTempoBeatUnit; }
 
-    string                getTempoPerMinute () const
+    std::string           getTempoPerMinute () const
                               { return fTempoPerMinute; }
 
     const msrDottedDuration&
@@ -462,7 +462,7 @@ class EXP msrTempo : public msrMeasureElement
                                 fTempoWordsList.push_back (tempoWords);
                               }
 
-    string                tempoWordsListAsString (const string& separator) const;
+    std::string           tempoWordsListAsString (const std::string& separator) const;
 
   public:
 
@@ -479,12 +479,12 @@ class EXP msrTempo : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
-    string                asShortStringForMeasuresSlices () const override;
+    std::string           asString () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -495,7 +495,7 @@ class EXP msrTempo : public msrMeasureElement
 
     msrTempoKBeatUnitsKind          fTempoKind;
 
-    list<S_msrWords>      fTempoWordsList;
+    std::list<S_msrWords>      fTempoWordsList;
 
     msrDottedDuration     fTempoBeatUnit;
 
@@ -508,7 +508,7 @@ class EXP msrTempo : public msrMeasureElement
 
     // kTempoBeatUnitsPerMinute
 
-    string                fTempoPerMinute; // '90' or '132-156' for example
+    std::string           fTempoPerMinute; // '90' or '132-156' for example
 
     // kTempoBeatUnitsEquivalence
 
@@ -523,7 +523,7 @@ class EXP msrTempo : public msrMeasureElement
                           fTempoNotesRelationshipRightElements;
 };
 typedef SMARTP<msrTempo> S_msrTempo;
-EXP ostream& operator << (ostream& os, const S_msrTempo& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTempo& elt);
 
 
 }

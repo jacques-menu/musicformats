@@ -90,7 +90,7 @@ class EXP Mikrokosmos3WanderingGenerator : public smartable
     // the measures
     S_msrMeasure          createMeasureInVoice (
                             int           inputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             S_msrVoice    voice);
 
     // populating the upper voice
@@ -114,7 +114,7 @@ class EXP Mikrokosmos3WanderingGenerator : public smartable
                             S_msrVoice lowerVoice2);
 };
 typedef SMARTP<Mikrokosmos3WanderingGenerator> S_Mikrokosmos3WanderingGenerator;
-// JMI EXP ostream& operator << (ostream& os, const S_Mikrokosmos3WanderingGenerator& elt);
+// JMI EXP std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingGenerator& elt);
 
 
 }

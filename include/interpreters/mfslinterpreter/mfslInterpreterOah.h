@@ -140,14 +140,14 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  getNoLaunch () const
                               { return fNoLaunch; }
 
-    const set<string>&    getInputSourcesSet () const
+    const std::set<std::string>&    getInputSourcesSet () const
                               { return fInputSourcesSet; }
 
     S_oahStringSetElementAtom
                           getInputSourcesSetAtom () const
                               { return fInputSourcesSetAtom; }
 
-    const multimap<string, string>&
+    const std::multimap<std::string, std::string>&
                           getSelectChoiceToLabelsMultiMap () const
                               { return fSelectChoiceToLabelsMultiMap; }
 
@@ -224,18 +224,18 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  fTraceOptionsBlocks;
 
     // input sources
-    set<string>           fInputSourcesSet;
+    std::set<std::string>           fInputSourcesSet;
     S_oahStringSetElementAtom
                           fInputSourcesSetAtom;
 
     // select statement
-    multimap<string, string>
+    std::multimap<std::string, std::string>
                           fSelectChoiceToLabelsMultiMap;
     S_oahStringToStringMultiMapElementAtom
                           fSelectChoiceToLabelsMultiMapAtom;
 };
 typedef SMARTP<mfslInterpreterOahGroup> S_mfslInterpreterOahGroup;
-EXP ostream& operator << (ostream& os, const S_mfslInterpreterOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslInterpreterOahGroup& elt);
 
 EXP extern S_mfslInterpreterOahGroup gGlobalMfslInterpreterOahGroup;
 

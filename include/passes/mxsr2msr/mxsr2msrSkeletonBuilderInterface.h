@@ -20,15 +20,15 @@ namespace MusicFormats
 EXP S_msrScore translateMxsrToMsrSkeleton (
   Sxmlelement    theMxsr,
   S_msrOahGroup& msrOpts,
-  const string&   passNumber,
-  const string&   passDescription);
+  const std::string&   passNumber,
+  const std::string&   passDescription);
 
 //_______________________________________________________________________________
 EXP void displayMsrScoreSkeleton (
   S_msrOahGroup& msrOpts,
   S_msrScore     theMsrScore,
-  const string&  passNumber,
-  const string&  passDescription);
+  const std::string&  passNumber,
+  const std::string&  passDescription);
 
 
 }

@@ -29,9 +29,9 @@ class EXP msdl2guidoManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<msdl2guidoManPageGenerateAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
   protected:
@@ -40,9 +40,9 @@ class EXP msdl2guidoManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
                           msdl2guidoManPageGenerateAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
     virtual               ~msdl2guidoManPageGenerateAtom ();
@@ -57,7 +57,7 @@ class EXP msdl2guidoManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
   public:
 
     // visitors
@@ -73,10 +73,10 @@ class EXP msdl2guidoManPageGenerateAtom : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -84,7 +84,7 @@ class EXP msdl2guidoManPageGenerateAtom : public oahAtom
     // private services
     // ------------------------------------------------------
 
-    void                  generateManPageData (ostream& os) const;
+    void                  generateManPageData (std::ostream& os) const;
 
   private:
 
@@ -94,7 +94,7 @@ class EXP msdl2guidoManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msdl2guidoManPageGenerateAtom> S_msdl2guidoManPageGenerateAtom;
-EXP ostream& operator << (ostream& os, const S_msdl2guidoManPageGenerateAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2guidoManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP msdl2guidoManPageOahGroup : public oahGroup
@@ -181,7 +181,7 @@ class EXP msdl2guidoManPageOahGroup : public oahGroup
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msdl2guidoManPageOahGroup> S_msdl2guidoManPageOahGroup;
-EXP ostream& operator << (ostream& os, const S_msdl2guidoManPageOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2guidoManPageOahGroup& elt);
 
 EXP extern S_msdl2guidoManPageOahGroup gGlobalMsdl2gmnManPageOahGroup;
 

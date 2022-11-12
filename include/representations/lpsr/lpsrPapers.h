@@ -23,8 +23,6 @@
 #include "oahAtomsCollection.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -151,24 +149,24 @@ class EXP lpsrPaper : public lpsrElement
 
 
     // headers and footers
-    void                  setOddHeaderMarkup (string value)
+    void                  setOddHeaderMarkup (std::string value)
                               { fOddHeaderMarkup = value; }
-    string                getOddHeaderMarkup () const
+    std::string           getOddHeaderMarkup () const
                               { return fOddHeaderMarkup; }
 
-    void                  setEvenHeaderMarkup (string value)
+    void                  setEvenHeaderMarkup (std::string value)
                               { fEvenHeaderMarkup = value; }
-    string                getEvenHeaderMarkup () const
+    std::string           getEvenHeaderMarkup () const
                               { return fEvenHeaderMarkup; }
 
-    void                  setOddFooterMarkup (string value)
+    void                  setOddFooterMarkup (std::string value)
                               { fOddFooterMarkup = value; }
-    string                getOddFooterMarkup () const
+    std::string           getOddFooterMarkup () const
                               { return fOddFooterMarkup; }
 
-    void                  setEvenFooterMarkup (string value)
+    void                  setEvenFooterMarkup (std::string value)
                               { fEvenFooterMarkup = value; }
-    string                getEvenFooterMarkup () const
+    std::string           getEvenFooterMarkup () const
                               { return fEvenFooterMarkup; }
 
   public:
@@ -191,9 +189,9 @@ class EXP lpsrPaper : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
 
   private:
@@ -235,13 +233,13 @@ class EXP lpsrPaper : public lpsrElement
     S_oahOnOffAtom        fRaggedRightAtom;
 
     // headers and footers
-    string                fOddHeaderMarkup;
-    string                fEvenHeaderMarkup;
-    string                fOddFooterMarkup;
-    string                fEvenFooterMarkup;
+    std::string           fOddHeaderMarkup;
+    std::string           fEvenHeaderMarkup;
+    std::string           fOddFooterMarkup;
+    std::string           fEvenFooterMarkup;
 };
 typedef SMARTP<lpsrPaper> S_lpsrPaper;
-EXP ostream& operator << (ostream& os, const S_lpsrPaper& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrPaper& elt);
 
 
 }

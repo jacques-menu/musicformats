@@ -30,13 +30,13 @@ class EXP oah2manPage : public oahVisitor
 
     oah2manPage (
       const S_oahHandler handler,
-      ostream&           manPageOutputStream);
+      std::ostream&           manPageOutputStream);
 
     virtual               ~oah2manPage ();
 
   protected:
 
-    ostream&              fManPageOutputStream;
+    std::ostream&              fManPageOutputStream;
 };
 typedef SMARTP<oah2manPage> S_oah2manPage;
 
