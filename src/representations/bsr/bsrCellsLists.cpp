@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -19,8 +19,6 @@
 
 #include "bsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -214,7 +212,7 @@ void bsrCellsList::appendCellsListToCellsList (
 {
   if (otherCellsList) {
     if (otherCellsList->fCellsListElements.size ()) {
-      list<bsrCellKind>::const_iterator
+      std::list<bsrCellKind>::const_iterator
         iBegin = otherCellsList->fCellsListElements.begin (),
         iEnd   = otherCellsList->fCellsListElements.end (),
         i      = iBegin;
@@ -232,7 +230,7 @@ void bsrCellsList::prependCellsListToCellsList (
 {
   if (otherCellsList) {
     if (otherCellsList->fCellsListElements.size ()) {
-      list<bsrCellKind>::const_reverse_iterator
+      std::list<bsrCellKind>::const_reverse_iterator
         iBegin = otherCellsList->fCellsListElements.rbegin (),
         iEnd   = otherCellsList->fCellsListElements.rend (),
         i      = iBegin;
@@ -246,10 +244,10 @@ void bsrCellsList::prependCellsListToCellsList (
 }
 
 /* JMI
-void bsrCellsList::generateBrailleCode (ostream& os)
+void bsrCellsList::generateBrailleCode (std::ostream& os)
 {
   if (fCellsListElements.size ()) {
-    list<bsrCellKind>::const_iterator
+    std::list<bsrCellKind>::const_iterator
       iBegin = fCellsListElements.begin (),
       iEnd   = fCellsListElements.end (),
       i      = iBegin;
@@ -269,7 +267,7 @@ void bsrCellsList::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrCellsList::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -282,7 +280,7 @@ void bsrCellsList::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrCellsList::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -295,7 +293,7 @@ void bsrCellsList::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrCellsList::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -308,7 +306,7 @@ void bsrCellsList::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrCellsList::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -319,15 +317,15 @@ void bsrCellsList::browseData (basevisitor* v)
 {}
 
 
-string bsrCellsList::asString () const
+std::string bsrCellsList::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "cellsListElements [";
 
   if (fCellsListElements.size ()) {
-    list<bsrCellKind>::const_iterator
+    std::list<bsrCellKind>::const_iterator
       iBegin = fCellsListElements.begin (),
       iEnd   = fCellsListElements.end (),
       i      = iBegin;
@@ -345,18 +343,18 @@ string bsrCellsList::asString () const
   return s.str ();
 }
 
-string bsrCellsList::asShortString () const
+std::string bsrCellsList::asShortString () const
 {
   return asString ();
 }
 
-void bsrCellsList::print (ostream& os) const
+void bsrCellsList::print (std::ostream& os) const
 {
   os <<
     "cellsListElements [";
 
   if (fCellsListElements.size ()) {
-    list<bsrCellKind>::const_iterator
+    std::list<bsrCellKind>::const_iterator
       iBegin = fCellsListElements.begin (),
       iEnd   = fCellsListElements.end (),
       i      = iBegin;
@@ -372,13 +370,13 @@ void bsrCellsList::print (ostream& os) const
     ']';
 }
 
-ostream& operator << (ostream& os, const S_bsrCellsList& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrCellsList& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

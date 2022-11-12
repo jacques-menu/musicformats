@@ -10,7 +10,8 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw()), set::precision(), ...
+#include <climits>      // INT_MIN, INT_MAX
+#include <iomanip>      // std::setw()), set::precision(), ...
 
 #include "mfServiceRunData.h"
 
@@ -26,7 +27,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 msrDurationKind msrDurationKindFromMusicXMLString (
   int           inputLineNumber,
-  const string& durationString)
+  const std::string& durationString)
 {
   msrDurationKind result = msrDurationKind::kDuration_NO_;
 
@@ -73,7 +74,7 @@ msrDurationKind msrDurationKindFromMusicXMLString (
     result = msrDurationKind::kDuration1024th;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "MusicXML durationString \"" << durationString <<
@@ -138,7 +139,7 @@ EXP msrDurationKind msrDurationKindFromInteger (
 
 msrDurationKind msrDurationKindFromString (
   int           inputLineNumber,
-  const string& durationString)
+  const std::string& durationString)
 {
   msrDurationKind result = msrDurationKind::kDuration_NO_;
 
@@ -185,7 +186,7 @@ msrDurationKind msrDurationKindFromString (
     result = msrDurationKind::kDuration1024th;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "MSR durationString \"" << durationString <<
@@ -217,7 +218,7 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
       "=== rationalFromDurationKindAndDotsNumber()" <<
       ", (int) durationKind: " << (int) durationKind <<
       ", result: " << result <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -240,7 +241,7 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
       ", dots: " << dots <<
       ", result: " << result <<
       ", increment: " << increment <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -370,9 +371,9 @@ msrDurationKind wholeNotesAsDurationKind (Rational wholeNotes)
   return result;
 }
 
-string msrDurationKindAsMusicXMLType (msrDurationKind durationKind)
+std::string msrDurationKindAsMusicXMLType (msrDurationKind durationKind)
 {
-  string result;
+  std::string result;
 
   switch (durationKind) {
     case msrDurationKind::kDuration_NO_:
@@ -426,9 +427,9 @@ string msrDurationKindAsMusicXMLType (msrDurationKind durationKind)
   return result;
 }
 
-string msrDurationKindAsString_INTERNAL (msrDurationKind durationKind) // JMI don't keep ???
+std::string msrDurationKindAsString_INTERNAL (msrDurationKind durationKind) // JMI don't keep ???
 {
-  string result;
+  std::string result;
 
   switch (durationKind) {
     case msrDurationKind::kDuration_NO_:
@@ -482,9 +483,9 @@ string msrDurationKindAsString_INTERNAL (msrDurationKind durationKind) // JMI do
   return result;
 }
 
-string msrDurationKindAsString (msrDurationKind durationKind)
+std::string msrDurationKindAsString (msrDurationKind durationKind)
 {
-  string result;
+  std::string result;
 
   switch (durationKind) {
     case msrDurationKind::kDuration_NO_:
@@ -538,7 +539,7 @@ string msrDurationKindAsString (msrDurationKind durationKind)
   return result;
 }
 
-ostream& operator << (ostream& os, const msrDurationKind& elt)
+std::ostream& operator << (std::ostream& os, const msrDurationKind& elt)
 {
   os << msrDurationKindAsString (elt);
   return os;
@@ -580,7 +581,7 @@ Rational msrDuration::dottedDurationAsWholeNotes (
       "=== dottedDurationAsWholeNotes()" <<
       ", (int) fDurationKind: " << (int) fDurationKind <<
       ", result: " << result <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -603,7 +604,7 @@ Rational msrDuration::dottedDurationAsWholeNotes (
       ", dots: " << dots <<
       ", result: " << result <<
       ", increment: " << increment <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -632,7 +633,7 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
       ", result: " << result <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -651,7 +652,7 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       ", dots: " << dots <<
       ", result: " << result <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -662,9 +663,9 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
   return result;
 }
 
-string msrDuration::asString () const
+std::string msrDuration::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
      msrDurationKindAsString (fDurationKind);
@@ -676,21 +677,21 @@ string msrDuration::asString () const
   return s.str ();
 }
 
-void msrDuration::print (ostream& os) const
+void msrDuration::print (std::ostream& os) const
 {
   const int fieldWidth = 11;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "durationKind" << " : " <<
     msrDurationKindAsString (fDurationKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "dotsNumber" << " : " << fDotsNumber <<
-    endl;
+    std::endl;
 };
 
-ostream& operator << (ostream& os, const msrDuration& elt)
+std::ostream& operator << (std::ostream& os, const msrDuration& elt)
 {
   os << elt.asString ();
   return os;
@@ -828,7 +829,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
       "=== dottedDurationAsWholeNotes()" <<
       ", (int) fDurationKind: " << (int) fDurationKind <<
       ", result: " << result <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -851,7 +852,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
       ", dots: " << dots <<
       ", result: " << result <<
       ", increment: " << increment <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -880,7 +881,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
       ", result: " << result <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -899,7 +900,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       ", dots: " << dots <<
       ", result: " << result <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -910,9 +911,9 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
   return result;
 }
 
-string msrDottedDuration::asString () const
+std::string msrDottedDuration::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
      msrDurationKindAsString (fDurationKind);
@@ -924,28 +925,28 @@ string msrDottedDuration::asString () const
   return s.str ();
 }
 
-void msrDottedDuration::print (ostream& os) const
+void msrDottedDuration::print (std::ostream& os) const
 {
   const int fieldWidth = 11;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "durationKind" << " : " <<
     msrDurationKindAsString (fDurationKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "dotsNumber" << " : " << fDotsNumber <<
-    endl;
+    std::endl;
 };
 
-ostream& operator << (ostream& os, const msrDottedDuration& elt)
+std::ostream& operator << (std::ostream& os, const msrDottedDuration& elt)
 {
   os << elt.asString ();
   return os;
 }
 
 //_______________________________________________________________________________
-string wholeNotesAsMsrString (
+std::string wholeNotesAsMsrString (
   int             inputLineNumber,
   const Rational& wholeNotes,
   int&            dotsNumber)
@@ -956,7 +957,7 @@ string wholeNotesAsMsrString (
       "--> wholeNotesAsMsrString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -968,9 +969,9 @@ string wholeNotesAsMsrString (
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numerator:   " << numerator <<
-      endl <<
+      std::endl <<
       "--> denominator: " << denominator <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -980,7 +981,7 @@ string wholeNotesAsMsrString (
   }
   else if (numerator < 0) {
     // sanity check
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "numerator is not positive in wholeNotesAsMsrString()" <<
@@ -1002,7 +1003,7 @@ string wholeNotesAsMsrString (
 //   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
 //     gLogStream <<
 //       "--> wholeNotes rationalised: " << wholeNotes <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -1023,10 +1024,10 @@ string wholeNotesAsMsrString (
     gLogStream <<
 //       "--> rationalHasBeenSimplified: " <<
 //       rationalHasBeenSimplified <<
-//       endl <<
+//       std::endl <<
       "--> integralNumberOfWholeNotes: " <<
       integralNumberOfWholeNotes <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -1047,7 +1048,7 @@ string wholeNotesAsMsrString (
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numeratorDots " << " : " << numeratorDots <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -1057,9 +1058,9 @@ string wholeNotesAsMsrString (
     the Rational representing a dotted duration has to be brought
     to a value less than two, as explained above
 
-    this is done by changing it denominator in the resulting string:
+    this is done by changing it denominator in the resulting std::string:
 
-     whole notes        string
+     whole notes        std::string
          3/1              \breve.
          3/2              1.
          3/4              2.
@@ -1079,10 +1080,10 @@ string wholeNotesAsMsrString (
     msrDurationBinaryLogarithm (denominator);
 
   if (denominatorDurationLog == INT_MIN) {
-    string result;
+    std::string result;
 
     {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         1 <<
@@ -1096,7 +1097,7 @@ string wholeNotesAsMsrString (
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "denominator " << denominator <<
@@ -1108,7 +1109,7 @@ string wholeNotesAsMsrString (
 //       if (rationalHasBeenSimplified) {
 //         s <<
 //           " (" << numerator << '/' << denominator << ")" <<
-//         endl;
+//         std::endl;
 //       }
 
       s <<
@@ -1134,7 +1135,7 @@ string wholeNotesAsMsrString (
     gLogStream <<
       "--> denominatorDurationLog" << " : " <<
       denominatorDurationLog <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -1148,7 +1149,7 @@ string wholeNotesAsMsrString (
       gLogStream <<
         "--> integralNumberOfWholeNotes,"
         " bringing the faction to be less that 2" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -1161,10 +1162,10 @@ string wholeNotesAsMsrString (
         gLogStream <<
           "--> numerator" << " : " <<
           numerator <<
-          endl <<
+          std::endl <<
           "--> denominatorDurationLog " << " : " <<
           denominatorDurationLog <<
-          endl << endl;
+          std::endl << std::endl;
       }
 #endif
     } // while
@@ -1178,13 +1179,13 @@ string wholeNotesAsMsrString (
     gLogStream <<
       "--> numerator" << " : " <<
       numerator <<
-      endl <<
+      std::endl <<
       "--> denominatorDurationLog" << " : " <<
       denominatorDurationLog <<
-      endl <<
+      std::endl <<
       "--> numeratorDots " << " : " <<
       numeratorDots <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -1197,7 +1198,7 @@ string wholeNotesAsMsrString (
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> taking the dots into account" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -1208,10 +1209,10 @@ string wholeNotesAsMsrString (
       gLogStream <<
         "--> denominatorDurationLog" << " : " <<
         denominatorDurationLog <<
-        endl <<
+        std::endl <<
         "--> multiplyingFactor " << " : " <<
         multiplyingFactor <<
-        endl << endl;
+        std::endl << std::endl;
     }
 #endif
   }
@@ -1221,7 +1222,7 @@ string wholeNotesAsMsrString (
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> setting the multiplying factor" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -1238,10 +1239,10 @@ string wholeNotesAsMsrString (
       gLogStream <<
         "--> denominatorDurationLog" << " : " <<
         denominatorDurationLog <<
-        endl <<
+        std::endl <<
         "--> multiplyingFactor " << " : " <<
         multiplyingFactor <<
-        endl << endl;
+        std::endl << std::endl;
     }
 #endif
 
@@ -1257,10 +1258,10 @@ string wholeNotesAsMsrString (
         gLogStream <<
           "--> denominatorDurationLog" << " : " <<
           denominatorDurationLog <<
-          endl <<
+          std::endl <<
           "--> multiplyingFactor " << " : " <<
           multiplyingFactor <<
-          endl << endl;
+          std::endl << std::endl;
       }
 #endif
     } // while
@@ -1272,21 +1273,21 @@ string wholeNotesAsMsrString (
     gLogStream <<
       "--> numerator " << " : " <<
       numerator <<
-      endl <<
+      std::endl <<
       "--> numeratorDots " << " : " <<
       numeratorDots <<
-      endl <<
+      std::endl <<
       "--> denominatorDurationLog" << " : " <<
       denominatorDurationLog <<
-      endl <<
+      std::endl <<
       "--> multiplyingFactor " << " : " <<
       multiplyingFactor <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
   // generate the code for the duration
-  stringstream s;
+  std::stringstream s;
 
   switch (denominatorDurationLog) {
     case -3:
@@ -1327,7 +1328,7 @@ string wholeNotesAsMsrString (
     */
   }
 
-  string result = s.str ();
+  std::string result = s.str ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
@@ -1335,7 +1336,7 @@ string wholeNotesAsMsrString (
       "--> wholeNotesAsMsrString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
       ", numeratorDots" << " : " << numeratorDots <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1345,7 +1346,7 @@ string wholeNotesAsMsrString (
   return result;
 }
 
-string wholeNotesAsMsrString (
+std::string wholeNotesAsMsrString (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
@@ -1358,11 +1359,11 @@ string wholeNotesAsMsrString (
       dotsNumber);
 }
 
-string multipleFullBarRestsWholeNotesAsMsrString (
+std::string multipleFullBarRestsWholeNotesAsMsrString (
   int             inputLineNumber, // JMI
   const Rational& wholeNotes)
 {
-  stringstream s;
+  std::stringstream s;
 
   Rational
     denominatorAsFraction =

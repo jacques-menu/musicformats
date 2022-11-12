@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -23,8 +23,6 @@
 #include "msrWae.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -32,7 +30,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 msrUseDotsKind msrUseDotsFromString (
   int           inputLineNumber,
-  const string& useDotsString)
+  const std::string& useDotsString)
 {
   msrUseDotsKind result = msrUseDotsKind::kUseDotsNo; // default value
 
@@ -42,7 +40,7 @@ msrUseDotsKind msrUseDotsFromString (
     result = msrUseDotsKind::kUseDotsNo;
   else {
     if (useDotsString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "use-dots \"" << useDotsString <<
@@ -59,10 +57,10 @@ msrUseDotsKind msrUseDotsFromString (
   return result;
 }
 
-string msrSlashTypeKindAsString (
+std::string msrSlashTypeKindAsString (
   msrSlashTypeKind slashTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (slashTypeKind) {
     case msrSlashTypeKind::kSlashType_NO_:
@@ -79,16 +77,16 @@ string msrSlashTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrSlashTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSlashTypeKind& elt)
 {
   os << msrSlashTypeKindAsString (elt);
   return os;
 }
 
-string msrUseDotsKindAsString (
+std::string msrUseDotsKindAsString (
   msrUseDotsKind useDotsKind)
 {
-  string result;
+  std::string result;
 
   switch (useDotsKind) {
     case msrUseDotsKind::kUseDots_NO_:
@@ -105,16 +103,16 @@ string msrUseDotsKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrUseDotsKind& elt)
+std::ostream& operator << (std::ostream& os, const msrUseDotsKind& elt)
 {
   os << msrUseDotsKindAsString (elt);
   return os;
 }
 
-string msrSlashUseStemsKindAsString (
+std::string msrSlashUseStemsKindAsString (
   msrSlashUseStemsKind slashUseStemsKind)
 {
-  string result;
+  std::string result;
 
   switch (slashUseStemsKind) {
     case msrSlashUseStemsKind::kSlashUseStems_NO_:
@@ -131,7 +129,7 @@ string msrSlashUseStemsKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrSlashUseStemsKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSlashUseStemsKind& elt)
 {
   os << msrSlashUseStemsKindAsString (elt);
   return os;
@@ -174,7 +172,7 @@ void msrSlash::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSlash::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSlash>*
@@ -185,7 +183,7 @@ void msrSlash::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSlash::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -196,7 +194,7 @@ void msrSlash::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSlash::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSlash>*
@@ -207,7 +205,7 @@ void msrSlash::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSlash::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -216,9 +214,9 @@ void msrSlash::acceptOut (basevisitor* v)
 void msrSlash::browseData (basevisitor* v)
 {}
 
-string msrSlash::asString () const
+std::string msrSlash::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Slash" <<
@@ -236,47 +234,47 @@ string msrSlash::asString () const
   return s.str ();
 }
 
-void msrSlash::print (ostream& os) const
+void msrSlash::print (std::ostream& os) const
 {
   os <<
     "[Slash" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
   // print the voice upLink
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "slashTypeKind" << " : " <<
     msrSlashTypeKindAsString (
       fSlashTypeKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "useDotsKind" << " : " <<
     msrUseDotsKindAsString (
       fUseDotsKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "slashUseStemsKind" << " : " <<
     msrSlashUseStemsKindAsString (
       fSlashUseStemsKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSlash& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSlash& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

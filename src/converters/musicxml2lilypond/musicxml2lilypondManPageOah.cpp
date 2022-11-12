@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -26,16 +26,14 @@
 #include "musicxml2lilypondManPageOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_xml2lyManPageGenerateAtom xml2lyManPageGenerateAtom::create (
-  const string& shortName,
-  const string& longName,
-  const string& description,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
   S_oahVisitor  theOahVisitor)
 {
   xml2lyManPageGenerateAtom* o = new
@@ -49,9 +47,9 @@ S_xml2lyManPageGenerateAtom xml2lyManPageGenerateAtom::create (
 }
 
 xml2lyManPageGenerateAtom::xml2lyManPageGenerateAtom (
-  const string& shortName,
-  const string& longName,
-  const string& description,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
   S_oahVisitor  theOahVisitor)
   : oahAtom (
       longName,
@@ -65,13 +63,13 @@ xml2lyManPageGenerateAtom::xml2lyManPageGenerateAtom (
 xml2lyManPageGenerateAtom::~xml2lyManPageGenerateAtom ()
 {}
 
-void xml2lyManPageGenerateAtom::applyElement (ostream& os)
+void xml2lyManPageGenerateAtom::applyElement (std::ostream& os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a xml2lyManPageGenerateAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -84,7 +82,7 @@ void xml2lyManPageGenerateAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyManPageGenerateAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -97,7 +95,7 @@ void xml2lyManPageGenerateAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2lyManPageGenerateAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -110,7 +108,7 @@ void xml2lyManPageGenerateAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyManPageGenerateAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -123,7 +121,7 @@ void xml2lyManPageGenerateAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2lyManPageGenerateAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -136,18 +134,18 @@ void xml2lyManPageGenerateAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyManPageGenerateAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void xml2lyManPageGenerateAtom::print (ostream& os) const
+void xml2lyManPageGenerateAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "musicxml2lilypondInsiderManPageGenerateAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -157,7 +155,7 @@ void xml2lyManPageGenerateAtom::print (ostream& os) const
   --gIndenter;
 }
 
-void xml2lyManPageGenerateAtom::generateManPageData (ostream& os) const
+void xml2lyManPageGenerateAtom::generateManPageData (std::ostream& os) const
 {
   // generate the man page from the OAH handler
   fOahVisitor->visitTheHandler ();
@@ -169,19 +167,19 @@ void xml2lyManPageGenerateAtom::generateManPageData (ostream& os) const
 }
 
 void xml2lyManPageGenerateAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
   // nothing to print here
 }
 
-ostream& operator << (ostream& os, const S_xml2lyManPageGenerateAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_xml2lyManPageGenerateAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -251,7 +249,7 @@ R"(Write the contents of the OAH data to standard error.)",
         "generate-man-page", "gmp",
         regex_replace (
 R"(Write man page data for EXECUTABLE to standard output.)",
-          regex ("EXECUTABLE"),
+          std::regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         fOahVisitor));
 }
@@ -309,7 +307,7 @@ void xml2lyManPageOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyManPageOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -322,7 +320,7 @@ void xml2lyManPageOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2lyManPageOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -335,7 +333,7 @@ void xml2lyManPageOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyManPageOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -348,7 +346,7 @@ void xml2lyManPageOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2lyManPageOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -361,7 +359,7 @@ void xml2lyManPageOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyManPageOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -371,7 +369,7 @@ void xml2lyManPageOahGroup::printManPageOahValues (int fieldWidth)
 {
   gLogStream <<
     "The OAH options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -380,13 +378,13 @@ void xml2lyManPageOahGroup::printManPageOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_xml2lyManPageOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_xml2lyManPageOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -400,7 +398,7 @@ S_xml2lyManPageOahGroup createGlobalXml2lyManPageOahGroup (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global xml2lyManpage OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

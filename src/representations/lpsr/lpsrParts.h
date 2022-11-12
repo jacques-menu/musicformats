@@ -51,28 +51,28 @@ class EXP lpsrPartBlock : public lpsrElement
     S_msrPart             getPart () const
                               { return fPart; }
 
-    const list<S_msrElement>&
+    const std::list<S_msrElement>&
                           getPartBlockElementsList () const
                               { return fPartBlockElementsList; }
 
     void                  setPartBlockInstrumentName (
-                            const string& instrumentName)
+                            const std::string& instrumentName)
                               {
                                 fPartBlockInstrumentName =
                                   instrumentName;
                               }
 
-    string                getPartBlockInstrumentName () const
+    std::string           getPartBlockInstrumentName () const
                               { return fPartBlockInstrumentName; }
 
     void                  setPartBlockShortInstrumentName (
-                            const string& shortInstrumentName)
+                            const std::string& shortInstrumentName)
                               {
                                 fPartBlockShortInstrumentName =
                                   shortInstrumentName;
                               }
 
-    string                getPartBlockShortInstrumentName () const
+    std::string           getPartBlockShortInstrumentName () const
                               { return fPartBlockShortInstrumentName; }
 
   public:
@@ -124,7 +124,7 @@ class EXP lpsrPartBlock : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -133,13 +133,13 @@ class EXP lpsrPartBlock : public lpsrElement
 
     S_msrPart             fPart;
 
-    list<S_msrElement>    fPartBlockElementsList;
+    std::list<S_msrElement>    fPartBlockElementsList;
 
-    string                fPartBlockInstrumentName; // JMI
-    string                fPartBlockShortInstrumentName; // JMI
+    std::string           fPartBlockInstrumentName; // JMI
+    std::string           fPartBlockShortInstrumentName; // JMI
 };
 typedef SMARTP<lpsrPartBlock> S_lpsrPartBlock;
-EXP ostream& operator << (ostream& os, const S_lpsrPartBlock& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrPartBlock& elt);
 
 
 }

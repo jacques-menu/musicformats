@@ -13,8 +13,6 @@
 #include "mfcComponents.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -23,7 +21,7 @@ static S_mfcConverterComponent pConverterComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the converter's representations list
+  // populate the converter's representations std::list
   pConverterComponent->
     appendRepresentationToMultiComponent (
       createMxsrRepresentationComponent ());
@@ -31,7 +29,7 @@ static void populateMultiComponent ()
     appendRepresentationToMultiComponent (
       createMsrRepresentationComponent ());
 
-  // populate the converter's passes list
+  // populate the converter's passes std::list
   pConverterComponent->
     appendPassToMultiComponent (
       createMxsr2msrComponent ());
@@ -59,7 +57,7 @@ EXP S_mfcConverterComponent createMusicxml2musicxmlConverterComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the musicxml2musicxml component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -76,7 +74,7 @@ EXP S_mfcConverterComponent createMusicxml2musicxmlConverterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -86,7 +84,7 @@ EXP S_mfcConverterComponent createMusicxml2musicxmlConverterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 12, 2021",
-          list<string> {
+          std::list<std::string> {
             "Fixed trace OAH issue"
           }
       ));

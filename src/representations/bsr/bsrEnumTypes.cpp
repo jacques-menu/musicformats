@@ -30,9 +30,9 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string bsrCellKindAsShortString (bsrCellKind cellKind)
+std::string bsrCellKindAsShortString (bsrCellKind cellKind)
 {
-  string result;
+  std::string result;
 
   switch (cellKind) {
     case bsrCellKind::kCellUnknown : result = "***cellUnknown***"; break;
@@ -116,9 +116,9 @@ string bsrCellKindAsShortString (bsrCellKind cellKind)
 }
 
 //______________________________________________________________________________
-string bsrCellKindAsString (bsrCellKind cellKind)
+std::string bsrCellKindAsString (bsrCellKind cellKind)
 {
-  string result;
+  std::string result;
 
   switch (cellKind) {
     // non 6dots values
@@ -202,7 +202,7 @@ string bsrCellKindAsString (bsrCellKind cellKind)
 
 // braille output kinds
 //______________________________________________________________________________
-map<string, bsrBrailleOutputKind>
+std::map<std::string, bsrBrailleOutputKind>
   gGlobalBsrBrailleOutputKindsMap;
 
 void initializeBsrBrailleOutputKindsMap ()
@@ -213,10 +213,10 @@ void initializeBsrBrailleOutputKindsMap ()
   gGlobalBsrBrailleOutputKindsMap ["utf16"] = bsrBrailleOutputKind::kBrailleOutputUTF16;
 }
 
-string bsrBrailleOutputKindAsString (
+std::string bsrBrailleOutputKindAsString (
   bsrBrailleOutputKind brailleOutputKind)
 {
-  string result;
+  std::string result;
 
   // no CamelCase here, these strings are used in the command line options
   switch (brailleOutputKind) {
@@ -237,9 +237,9 @@ string bsrBrailleOutputKindAsString (
   return result;
 }
 
-string existingBsrBrailleOutputKinds (size_t namesListMaxLength)
+std::string existingBsrBrailleOutputKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t brailleOutputKindsMapSize =
     gGlobalBsrBrailleOutputKindsMap.size ();
@@ -252,18 +252,18 @@ string existingBsrBrailleOutputKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, bsrBrailleOutputKind>::const_iterator i =
+      std::map<std::string, bsrBrailleOutputKind>::const_iterator i =
         gGlobalBsrBrailleOutputKindsMap.begin ();
       i != gGlobalBsrBrailleOutputKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -287,7 +287,7 @@ string existingBsrBrailleOutputKinds (size_t namesListMaxLength)
 // chords languages
 //______________________________________________________________________________
 
-map<string, bsrTextsLanguageKind>
+std::map<std::string, bsrTextsLanguageKind>
   gGlobalBsrTextsLanguageKindsMap;
 
 void initializeBsrTextsLanguageKindsMap ()
@@ -298,10 +298,10 @@ void initializeBsrTextsLanguageKindsMap ()
   gGlobalBsrTextsLanguageKindsMap ["french"]  = bsrTextsLanguageKind::kTextsFrench;
 }
 
-string bsrTextsLanguageKindAsString (
+std::string bsrTextsLanguageKindAsString (
   bsrTextsLanguageKind languageKind)
 {
-  string result;
+  std::string result;
 
   switch (languageKind) {
     case bsrTextsLanguageKind::kTextsEnglish: // default value
@@ -321,9 +321,9 @@ string bsrTextsLanguageKindAsString (
   return result;
 }
 
-string existingBsrTextsLanguageKinds (size_t namesListMaxLength)
+std::string existingBsrTextsLanguageKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t textsLanguageKindsMapSize =
     gGlobalBsrTextsLanguageKindsMap.size ();
@@ -336,18 +336,18 @@ string existingBsrTextsLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, bsrTextsLanguageKind>::const_iterator i =
+      std::map<std::string, bsrTextsLanguageKind>::const_iterator i =
         gGlobalBsrTextsLanguageKindsMap.begin ();
       i != gGlobalBsrTextsLanguageKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -383,7 +383,7 @@ void write_wchar_t ( wchar_t cell )
   gOutputStream << conversion.chars [0] << conversion.chars [1];
 }
 
-void write_wstring (ostream& os, wstring wstr )
+void write_wstring (std::ostream& os, wstring wstr )
 {
   for (size_t i = 0; i < wstr.size (); ++i) {
     wchar_t cell = wstr [i];
@@ -391,7 +391,7 @@ void write_wstring (ostream& os, wstring wstr )
   } // for
 }
 
-ostream& operator << (ostream& os, const wstring& wstr)
+std::ostream& operator << (std::ostream& os, const wstring& wstr)
 {
   for (size_t i = 0; i < wstr.size (); ++i) {
     wchar_t cell = wstr [i];
@@ -497,9 +497,9 @@ ostream& operator << (ostream& os, const wstring& wstr)
 
 //______________________________________________________________________________
 /*
-string bsrCellKindAsShortString (bsrCellKind cellKind)
+std::string bsrCellKindAsShortString (bsrCellKind cellKind)
 {
-  string result;
+  std::string result;
 
   switch (cellKind) {
 
@@ -634,12 +634,12 @@ string bsrCellKindAsShortString (bsrCellKind cellKind)
 }
 
 
-string bsrCellKindAsString (bsrCellKind cellKind)
+std::string bsrCellKindAsString (bsrCellKind cellKind)
 {
   return bsrCellKindAsShortString (cellKind);
 }
 
-ostream& operator << (ostream& os, const bsrCellKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrCellKind& elt)
 {
   os << bsrCellKindAsString (elt);
   return os;

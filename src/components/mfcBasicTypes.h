@@ -22,7 +22,6 @@
 #include "mfBool.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
@@ -30,15 +29,15 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 void crackVersionNumber ( // JMI ???
-  const string& theString,
+  const std::string& theString,
   int&          generationNumber,
   int&          majorNumber,
   int&          minorNumber);
 
 //______________________________________________________________________________
 Bool versionNumberGreaterThanOrEqualTo ( // JMI ???
-  const string& versionNumber,
-  const string& otherVersionNumber);
+  const std::string& versionNumber,
+  const std::string& otherVersionNumber);
 
 //______________________________________________________________________________
 /*
@@ -55,13 +54,13 @@ class EXP mfcVersionNumber : public smartable
                             int           majorNumber,
                             int           minorNumber,
                             int           patchNumber,
-                            const string& preRelease);
+                            const std::string& preRelease);
 
-    // creation from  a string
+    // creation from  a std::string
     // ------------------------------------------------------
 
     static SMARTP<mfcVersionNumber> createFromString (
-                            const string& theString);
+                            const std::string& theString);
 
   protected:
 
@@ -72,7 +71,7 @@ class EXP mfcVersionNumber : public smartable
                             int           majorNumber,
                             int           minorNumber,
                             int           patchNumber,
-                            const string& preRelease);
+                            const std::string& preRelease);
 
     virtual               ~mfcVersionNumber ();
 
@@ -90,7 +89,7 @@ class EXP mfcVersionNumber : public smartable
     int                   getPatchNumber () const
                               { return fPatchNumber; }
 
-    string                getPreRelease () const
+    std::string           getPreRelease () const
                               { return fPreRelease; }
 
   public:
@@ -115,9 +114,9 @@ class EXP mfcVersionNumber : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -127,10 +126,10 @@ class EXP mfcVersionNumber : public smartable
     int                   fMajorNumber;
     int                   fMinorNumber;
     int                   fPatchNumber;
-    string                fPreRelease;
+    std::string           fPreRelease;
 };
 typedef SMARTP<mfcVersionNumber> S_mfcVersionNumber;
-EXP ostream& operator << (ostream& os, const S_mfcVersionNumber& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcVersionNumber& elt);
 
 //______________________________________________________________________________
 class EXP mfcVersionDescr : public smartable
@@ -142,8 +141,8 @@ class EXP mfcVersionDescr : public smartable
 
     static SMARTP<mfcVersionDescr> create (
                             S_mfcVersionNumber  versionNumber,
-                            const string&       versionDate,
-                            const list<string>& versionDescriptionItems);
+                            const std::string&       versionDate,
+                            const std::list<std::string>& versionDescriptionItems);
 
   protected:
 
@@ -152,8 +151,8 @@ class EXP mfcVersionDescr : public smartable
 
                           mfcVersionDescr (
                             S_mfcVersionNumber  versionNumber,
-                            const string&       versionDate,
-                            const list<string>& versionDescriptionItems);
+                            const std::string&       versionDate,
+                            const std::list<std::string>& versionDescriptionItems);
 
     virtual               ~mfcVersionDescr ();
 
@@ -165,10 +164,10 @@ class EXP mfcVersionDescr : public smartable
     S_mfcVersionNumber    getVersionNumber () const
                               { return fVersionNumber; }
 
-    string                getVersionDate () const
+    std::string           getVersionDate () const
                               { return fVersionDate; }
 
-    const list<string>&   getVersionDescriptionItems () const
+    const std::list<std::string>&   getVersionDescriptionItems () const
                               { return fVersionDescriptionItems; }
 
   public:
@@ -176,9 +175,9 @@ class EXP mfcVersionDescr : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -186,11 +185,11 @@ class EXP mfcVersionDescr : public smartable
     // ------------------------------------------------------
 
     S_mfcVersionNumber    fVersionNumber;
-    string                fVersionDate;
-    list<string>          fVersionDescriptionItems;
+    std::string           fVersionDate;
+    std::list<std::string>          fVersionDescriptionItems;
 };
 typedef SMARTP<mfcVersionDescr> S_mfcVersionDescr;
-EXP ostream& operator << (ostream& os, const S_mfcVersionDescr& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcVersionDescr& elt);
 
 //______________________________________________________________________________
 class EXP mfcVersionsHistory : public smartable
@@ -216,7 +215,7 @@ class EXP mfcVersionsHistory : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const list<S_mfcVersionDescr>&
+    const std::list<S_mfcVersionDescr>&
                           getVersionsList () const
                               { return fVersionsList; }
 
@@ -237,18 +236,18 @@ class EXP mfcVersionsHistory : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    list<S_mfcVersionDescr>
+    std::list<S_mfcVersionDescr>
                           fVersionsList;
 };
 typedef SMARTP<mfcVersionsHistory> S_mfcVersionsHistory;
-EXP ostream& operator << (ostream& os, const S_mfcVersionsHistory& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcVersionsHistory& elt);
 
 //______________________________________________________________________________
 enum class mfcComponenKind {
@@ -259,10 +258,10 @@ enum class mfcComponenKind {
   kComponentLibrary
 };
 
-string mfcComponenKindAsString (
+std::string mfcComponenKindAsString (
   mfcComponenKind componenKind);
 
-ostream& operator << (ostream& os, const mfcComponenKind& elt);
+std::ostream& operator << (std::ostream& os, const mfcComponenKind& elt);
 
 //______________________________________________________________________________
 class EXP mfcComponent : public smartable
@@ -274,7 +273,7 @@ class EXP mfcComponent : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfcComponent> create (
-                            const string&   componentName,
+                            const std::string&   componentName,
                             mfcComponenKind componenKind);
 */
 
@@ -284,7 +283,7 @@ class EXP mfcComponent : public smartable
     // ------------------------------------------------------
 
                           mfcComponent (
-                            const string&   componentName,
+                            const std::string&   componentName,
                             mfcComponenKind componenKind);
 
     virtual               ~mfcComponent ();
@@ -294,7 +293,7 @@ class EXP mfcComponent : public smartable
     // set and get
     // ------------------------------------------------------
 
-    string                getComponentName () const
+    std::string           getComponentName () const
                               { return fComponentName; }
 
     mfcComponenKind       getComponenKind () const
@@ -328,30 +327,30 @@ class EXP mfcComponent : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                mostRecentVersionNumberAndDateAsString () const;
+    std::string           mostRecentVersionNumberAndDateAsString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
-    virtual void          printVersion (ostream& os) const;
-    virtual void          printHistory (ostream& os) const;
+    virtual void          printVersion (std::ostream& os) const;
+    virtual void          printHistory (std::ostream& os) const;
 
-    virtual void          printOwnHistory (ostream& os) const;
+    virtual void          printOwnHistory (std::ostream& os) const;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    string                fComponentName;
+    std::string           fComponentName;
 
     mfcComponenKind       fComponenKind;
 
     S_mfcVersionsHistory  fVersionsHistory;
 };
 typedef SMARTP<mfcComponent> S_mfcComponent;
-EXP ostream& operator << (ostream& os, const S_mfcComponent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcOahComponent : public mfcComponent
@@ -362,7 +361,7 @@ class EXP mfcOahComponent : public mfcComponent
     // ------------------------------------------------------
 
     static SMARTP<mfcOahComponent> create (
-                            const string& formatName);
+                            const std::string& formatName);
 
   protected:
 
@@ -370,12 +369,12 @@ class EXP mfcOahComponent : public mfcComponent
     // ------------------------------------------------------
 
                           mfcOahComponent (
-                            const string& formatName);
+                            const std::string& formatName);
 
     virtual               ~mfcOahComponent ();
 };
 typedef SMARTP<mfcOahComponent> S_mfcOahComponent;
-EXP ostream& operator << (ostream& os, const S_mfcOahComponent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcOahComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcRepresentationComponent : public mfcComponent
@@ -386,7 +385,7 @@ class EXP mfcRepresentationComponent : public mfcComponent
     // ------------------------------------------------------
 
     static SMARTP<mfcRepresentationComponent> create (
-                            const string& formatName);
+                            const std::string& formatName);
 
   protected:
 
@@ -394,12 +393,12 @@ class EXP mfcRepresentationComponent : public mfcComponent
     // ------------------------------------------------------
 
                           mfcRepresentationComponent (
-                            const string& formatName);
+                            const std::string& formatName);
 
     virtual               ~mfcRepresentationComponent ();
 };
 typedef SMARTP<mfcRepresentationComponent> S_mfcRepresentationComponent;
-EXP ostream& operator << (ostream& os, const S_mfcRepresentationComponent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcRepresentationComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcPassComponent : public mfcComponent
@@ -410,7 +409,7 @@ class EXP mfcPassComponent : public mfcComponent
     // ------------------------------------------------------
 
     static SMARTP<mfcPassComponent> create (
-                            const string& passName);
+                            const std::string& passName);
 
   protected:
 
@@ -418,12 +417,12 @@ class EXP mfcPassComponent : public mfcComponent
     // ------------------------------------------------------
 
                           mfcPassComponent (
-                            const string& passName);
+                            const std::string& passName);
 
     virtual               ~mfcPassComponent ();
 };
 typedef SMARTP<mfcPassComponent> S_mfcPassComponent;
-EXP ostream& operator << (ostream& os, const S_mfcPassComponent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcPassComponent& elt);
 
 //______________________________________________________________________________
 enum class mfcMultiComponentUsedFromTheCLIKind {
@@ -431,20 +430,20 @@ enum class mfcMultiComponentUsedFromTheCLIKind {
   kComponentUsedFromTheCLINo
 };
 
-string mfcComponentUsedFromTheCLIKindAsString (
+std::string mfcComponentUsedFromTheCLIKindAsString (
   mfcMultiComponentUsedFromTheCLIKind componentUsedFromTheCLIKind);
 
-ostream& operator << (ostream& os, const mfcMultiComponentUsedFromTheCLIKind& elt);
+std::ostream& operator << (std::ostream& os, const mfcMultiComponentUsedFromTheCLIKind& elt);
 
 enum class mfcMultiComponentEntropicityKind {
   kComponentEntropicityYes,
   kComponentEntropicityNo
 };
 
-string mfcComponentEntropicityKindAsString (
+std::string mfcComponentEntropicityKindAsString (
   mfcMultiComponentEntropicityKind componentEntropicityKind);
 
-ostream& operator << (ostream& os, const mfcMultiComponentEntropicityKind& elt);
+std::ostream& operator << (std::ostream& os, const mfcMultiComponentEntropicityKind& elt);
 
 //______________________________________________________________________________
 class EXP mfcMultiComponent : public mfcComponent
@@ -456,7 +455,7 @@ class EXP mfcMultiComponent : public mfcComponent
     // ------------------------------------------------------
 
     static SMARTP<mfcMultiComponent> create (
-                            const string&   multiComponentName,
+                            const std::string&   multiComponentName,
                             mfcComponenKind componenKind,
                             mfcMultiComponentEntropicityKind
                                             componentEntropicityKind,
@@ -470,7 +469,7 @@ class EXP mfcMultiComponent : public mfcComponent
     // ------------------------------------------------------
 
                           mfcMultiComponent (
-                            const string&   multiComponentName,
+                            const std::string&   multiComponentName,
                             mfcComponenKind componenKind,
                             mfcMultiComponentEntropicityKind
                                             componentEntropicityKind,
@@ -487,11 +486,11 @@ class EXP mfcMultiComponent : public mfcComponent
     S_mfcOahComponent        getOahComponent () const
                               { return fOahComponent; }
 
-    const list<S_mfcRepresentationComponent>&
+    const std::list<S_mfcRepresentationComponent>&
                           getRepresentationComponentsList () const
                               { return fRepresentationComponentsList; }
 
-    const list<S_mfcPassComponent>&
+    const std::list<S_mfcPassComponent>&
                           getPassComponentsList () const
                               { return fPassComponentsList; }
 
@@ -519,26 +518,26 @@ class EXP mfcMultiComponent : public mfcComponent
     // print
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
-    virtual void          printVersionShort (ostream& os) const;
-    virtual void          printVersionFull (ostream& os) const;
+    virtual void          printVersionShort (std::ostream& os) const;
+    virtual void          printVersionFull (std::ostream& os) const;
 
-    virtual void          printHistory (ostream& os) const;
+    virtual void          printHistory (std::ostream& os) const;
 
   protected:
 
     // protected services
     // ------------------------------------------------------
 
-    void                  printOahVersion (ostream&  os) const;
-    void                  printOahHistory (ostream&  os) const;
+    void                  printOahVersion (std::ostream&  os) const;
+    void                  printOahHistory (std::ostream&  os) const;
 
-    void                  printRepresentationsVersions (ostream&  os) const;
-    void                  printRepresentationsHistory (ostream&  os) const;
+    void                  printRepresentationsVersions (std::ostream&  os) const;
+    void                  printRepresentationsHistory (std::ostream&  os) const;
 
-    void                  printPassesVersions (ostream&  os) const;
-    void                  printPassesHistory (ostream&  os) const;
+    void                  printPassesVersions (std::ostream&  os) const;
+    void                  printPassesHistory (std::ostream&  os) const;
 
   protected:
 
@@ -547,10 +546,10 @@ class EXP mfcMultiComponent : public mfcComponent
 
     S_mfcOahComponent        fOahComponent;
 
-    list<S_mfcRepresentationComponent>
+    std::list<S_mfcRepresentationComponent>
                           fRepresentationComponentsList;
 
-    list<S_mfcPassComponent>
+    std::list<S_mfcPassComponent>
                           fPassComponentsList;
 
     // should the version number be at least equal to
@@ -562,7 +561,7 @@ class EXP mfcMultiComponent : public mfcComponent
                           fComponentUsedFromTheCLIKind;
 };
 typedef SMARTP<mfcMultiComponent> S_mfcMultiComponent;
-EXP ostream& operator << (ostream& os, const S_mfcMultiComponent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcMultiComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcGeneratorComponent : public mfcMultiComponent
@@ -573,7 +572,7 @@ class EXP mfcGeneratorComponent : public mfcMultiComponent
     // ------------------------------------------------------
 
     static SMARTP<mfcGeneratorComponent> create (
-                            const string&   generatorName,
+                            const std::string&   generatorName,
                             mfcMultiComponentEntropicityKind
                                             componentEntropicityKind,
                             mfcMultiComponentUsedFromTheCLIKind
@@ -585,7 +584,7 @@ class EXP mfcGeneratorComponent : public mfcMultiComponent
     // ------------------------------------------------------
 
                           mfcGeneratorComponent (
-                            const string&   generatorName,
+                            const std::string&   generatorName,
                             mfcMultiComponentEntropicityKind
                                             componentEntropicityKind,
                             mfcMultiComponentUsedFromTheCLIKind
@@ -594,7 +593,7 @@ class EXP mfcGeneratorComponent : public mfcMultiComponent
     virtual               ~mfcGeneratorComponent ();
 };
 typedef SMARTP<mfcGeneratorComponent> S_mfcGeneratorComponent;
-EXP ostream& operator << (ostream& os, const S_mfcGeneratorComponent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcGeneratorComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcConverterComponent : public mfcMultiComponent
@@ -605,7 +604,7 @@ class EXP mfcConverterComponent : public mfcMultiComponent
     // ------------------------------------------------------
 
     static SMARTP<mfcConverterComponent> create (
-                            const string&   converterName,
+                            const std::string&   converterName,
                             mfcMultiComponentEntropicityKind
                                             componentEntropicityKind,
                             mfcMultiComponentUsedFromTheCLIKind
@@ -617,7 +616,7 @@ class EXP mfcConverterComponent : public mfcMultiComponent
     // ------------------------------------------------------
 
                           mfcConverterComponent (
-                            const string&   converterName,
+                            const std::string&   converterName,
                             mfcMultiComponentEntropicityKind
                                             componentEntropicityKind,
                             mfcMultiComponentUsedFromTheCLIKind
@@ -626,7 +625,7 @@ class EXP mfcConverterComponent : public mfcMultiComponent
     virtual               ~mfcConverterComponent ();
 };
 typedef SMARTP<mfcConverterComponent> S_mfcConverterComponent;
-EXP ostream& operator << (ostream& os, const S_mfcConverterComponent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcConverterComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcLibraryComponent : public mfcMultiComponent
@@ -637,7 +636,7 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
     // ------------------------------------------------------
 
     static SMARTP<mfcLibraryComponent> create (
-                            const string&   libraryVersionsName,
+                            const std::string&   libraryVersionsName,
                             mfcMultiComponentEntropicityKind
                                             componentEntropicityKind,
                             mfcMultiComponentUsedFromTheCLIKind
@@ -649,7 +648,7 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
     // ------------------------------------------------------
 
                           mfcLibraryComponent (
-                            const string&   libraryVersionsName,
+                            const std::string&   libraryVersionsName,
                             mfcMultiComponentEntropicityKind
                                             componentEntropicityKind,
                             mfcMultiComponentUsedFromTheCLIKind
@@ -662,7 +661,7 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
     // set and get
     // ------------------------------------------------------
 
-    const list<S_mfcConverterComponent>&
+    const std::list<S_mfcConverterComponent>&
                           getConverterComponentsList () const
                               { return fConverterComponentsList; }
 
@@ -679,29 +678,29 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
     // print
     // ------------------------------------------------------
 
-    void                  printVersionShort (ostream& os) const override;
-    void                  printVersionFull (ostream& os) const override;
+    void                  printVersionShort (std::ostream& os) const override;
+    void                  printVersionFull (std::ostream& os) const override;
 
-    void                  printHistory (ostream& os) const override;
+    void                  printHistory (std::ostream& os) const override;
 
   protected:
 
     // protected services
     // ------------------------------------------------------
 
-    void                  printConvertersVersions (ostream&  os) const;
-    void                  printConvertersHistory (ostream&  os) const;
+    void                  printConvertersVersions (std::ostream&  os) const;
+    void                  printConvertersHistory (std::ostream&  os) const;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    list<S_mfcConverterComponent>
+    std::list<S_mfcConverterComponent>
                           fConverterComponentsList;
 };
 typedef SMARTP<mfcLibraryComponent> S_mfcLibraryComponent;
-EXP ostream& operator << (ostream& os, const S_mfcLibraryComponent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfcLibraryComponent& elt);
 
 }
 

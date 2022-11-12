@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip> // for 'setw()'
+#include <iomanip> // for 'std::setw()'
 
 #include "visitor.h"
 
@@ -22,8 +22,6 @@
 
 #include "bsrBrowsers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -56,7 +54,7 @@ void bsrFootNotes::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrFootNotes::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -69,7 +67,7 @@ void bsrFootNotes::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrFootNotes::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -82,7 +80,7 @@ void bsrFootNotes::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrFootNotes::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -95,7 +93,7 @@ void bsrFootNotes::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrFootNotes::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -105,7 +103,7 @@ void bsrFootNotes::acceptOut (basevisitor* v)
 void bsrFootNotes::browseData (basevisitor* v)
 {
   for (
-    list<S_bsrFootNotesElement>::const_iterator i =
+    std::list<S_bsrFootNotesElement>::const_iterator i =
       fFootNotesElementsList.begin ();
     i != fFootNotesElementsList.end ();
     ++i ) {
@@ -115,11 +113,11 @@ void bsrFootNotes::browseData (basevisitor* v)
   } // for
 }
 
-void bsrFootNotes::print (ostream& os) const
+void bsrFootNotes::print (std::ostream& os) const
 {
   os <<
     "FootNotes" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -130,21 +128,21 @@ void bsrFootNotes::print (ostream& os) const
 
   if (footNotesElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "footNotesElementsList" << " : " <<
-      endl;
+      std::endl;
 
     if (footNotesElementsListSize) {
       ++gIndenter;
 
-      list<S_bsrFootNotesElement>::const_iterator
+      std::list<S_bsrFootNotesElement>::const_iterator
         iBegin = fFootNotesElementsList.begin (),
         iEnd   = fFootNotesElementsList.end (),
         i      = iBegin;
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        os << endl;
+        os << std::endl;
       } // for
 
       --gIndenter;
@@ -152,20 +150,20 @@ void bsrFootNotes::print (ostream& os) const
     else {
       os <<
         "[EMPTY]" <<
-      endl;
+      std::endl;
     }
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrFootNotes& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrFootNotes& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

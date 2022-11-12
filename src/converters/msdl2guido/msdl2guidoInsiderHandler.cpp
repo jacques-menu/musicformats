@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
@@ -48,15 +48,13 @@
 #include "msdl2guidoInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msdl2guidoInsiderHandler msdl2guidoInsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   // create the insider handler
   msdl2guidoInsiderHandler* o = new
@@ -69,8 +67,8 @@ S_msdl2guidoInsiderHandler msdl2guidoInsiderHandler::create (
 }
 
 msdl2guidoInsiderHandler::msdl2guidoInsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahInsiderHandler (
       serviceName,
       handlerHeader,
@@ -90,7 +88,7 @@ Usage: msdl2guido [option]* [MSDLFile] [option]*
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -114,7 +112,7 @@ void msdl2guidoInsiderHandler::initializeHandlerMultiComponent ()
 }
 
 //_______________________________________________________________________________
-string msdl2guidoInsiderHandler::handlerServiceAboutInformation () const
+std::string msdl2guidoInsiderHandler::handlerServiceAboutInformation () const
 {
   return
 R"(What msdl2guido does:
@@ -146,7 +144,7 @@ void msdl2guidoInsiderHandler::createTheMsdl2gmnPrefixes ()
       "Creating the msdl2guido prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -155,7 +153,7 @@ void msdl2guidoInsiderHandler::createTheMsdl2gmnPrefixes ()
 
 //______________________________________________________________________________
 void msdl2guidoInsiderHandler::createTheMsdl2gmnOptionGroups (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -163,7 +161,7 @@ void msdl2guidoInsiderHandler::createTheMsdl2gmnOptionGroups (
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -238,7 +236,7 @@ void msdl2guidoInsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -246,7 +244,7 @@ void msdl2guidoInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string msdl2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string msdl2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
   return ""; // JMI
 }
@@ -288,7 +286,7 @@ void msdl2guidoInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << inputSourceName << "\" is both the input and output file name";
@@ -300,7 +298,7 @@ void msdl2guidoInsiderOahGroup::checkGroupOptionsConsistency ()
 
 
   if (! fOutputFileName.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "msdl2guidoInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
@@ -309,7 +307,7 @@ void msdl2guidoInsiderOahGroup::checkGroupOptionsConsistency ()
   }
 
   else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
@@ -326,7 +324,7 @@ void msdl2guidoInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -339,7 +337,7 @@ void msdl2guidoInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2guidoInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -352,7 +350,7 @@ void msdl2guidoInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -365,7 +363,7 @@ void msdl2guidoInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2guidoInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -378,7 +376,7 @@ void msdl2guidoInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -386,33 +384,33 @@ void msdl2guidoInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msdl2guidoInsiderHandler::print (ostream& os) const
+void msdl2guidoInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "msdl2guidoInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -420,7 +418,7 @@ void msdl2guidoInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -428,16 +426,16 @@ void msdl2guidoInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdl2guidoInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdl2guidoInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -472,11 +470,11 @@ void msdl2guidoInsiderOahGroup::initializeMsdl2gmnInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
     "\" group" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -490,11 +488,11 @@ void msdl2guidoInsiderOahGroup::createInsiderQuitSubGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Creating insider quit subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -531,7 +529,7 @@ void msdl2guidoInsiderOahGroup::printMsdl2gmnInsiderOahGroupValues (
 {
   gLogStream <<
     "The msdl2guido options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -540,14 +538,14 @@ void msdl2guidoInsiderOahGroup::printMsdl2gmnInsiderOahGroupValues (
 
   gLogStream <<
     "Quit after some passes:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fQuitAfterPass1" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fQuitAfterPass1" << " : " <<
     fQuitAfterPass1 <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -561,7 +559,7 @@ S_msdl2guidoInsiderOahGroup createGlobalMsdl2gmnInsiderOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdl2guido insider OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

@@ -32,10 +32,10 @@ enum class msrBarLineLocationKind {
   kBarLineLocationRight // by default
 };
 
-string msrBarLineLocationKindAsString (
+std::string msrBarLineLocationKindAsString (
   msrBarLineLocationKind barLineLocationKind);
 
-ostream& operator << (ostream& os, const msrBarLineLocationKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBarLineLocationKind& elt);
 
 // style
 enum class msrBarLineStyleKind {
@@ -49,10 +49,10 @@ enum class msrBarLineStyleKind {
   kBarLineStyleTick, kBarLineStyleShort
 };
 
-string msrBarLineStyleKindAsString (
+std::string msrBarLineStyleKindAsString (
   msrBarLineStyleKind barLineStyleKind);
 
-ostream& operator << (ostream& os, const msrBarLineStyleKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBarLineStyleKind& elt);
 
 // repeat direction
 enum class msrBarLineRepeatDirectionKind {
@@ -60,10 +60,10 @@ enum class msrBarLineRepeatDirectionKind {
   kBarLineRepeatDirectionForward, kBarLineRepeatDirectionBackward
 };
 
-string msrBarLineRepeatDirectionKindAsString (
+std::string msrBarLineRepeatDirectionKindAsString (
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind);
 
-ostream& operator << (ostream& os, const msrBarLineRepeatDirectionKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBarLineRepeatDirectionKind& elt);
 
 // ending type
 enum class msrBarLineEndingTypeKind {
@@ -74,10 +74,10 @@ enum class msrBarLineEndingTypeKind {
   kBarLineEndingTypeDiscontinue
 };
 
-string msrBarLineEndingTypeKindAsString (
+std::string msrBarLineEndingTypeKindAsString (
   msrBarLineEndingTypeKind barLineEndingTypeKind);
 
-ostream& operator << (ostream& os, const msrBarLineEndingTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBarLineEndingTypeKind& elt);
 
 // category
 enum class msrBarLineCategoryKind {
@@ -91,30 +91,30 @@ enum class msrBarLineCategoryKind {
   kBarLineCategoryHooklessEndingStart, kBarLineCategoryHooklessEndingEnd
 };
 
-string msrBarLineCategoryKindAsString (
+std::string msrBarLineCategoryKindAsString (
   msrBarLineCategoryKind barLineCategoryKind);
 
-ostream& operator << (ostream& os, const msrBarLineCategoryKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBarLineCategoryKind& elt);
 
 // segno
 enum class msrBarLineHasSegnoKind {
   kBarLineHasSegnoYes, kBarLineHasSegnoNo
 };
 
-string msrBarLineHasSegnoKindAsString (
+std::string msrBarLineHasSegnoKindAsString (
   msrBarLineHasSegnoKind barLineHasSegnoKind);
 
-ostream& operator << (ostream& os, const msrBarLineHasSegnoKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBarLineHasSegnoKind& elt);
 
 // coda
 enum class msrBarLineHasCodaKind {
   kBarLineHasCodaYes, kBarLineHasCodaNo
 };
 
-string msrBarLineHasCodaKindAsString (
+std::string msrBarLineHasCodaKindAsString (
   msrBarLineHasCodaKind barLineHasCodaKind);
 
-ostream& operator << (ostream& os, const msrBarLineHasCodaKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBarLineHasCodaKind& elt);
 
 // repeat winged
 enum class msrBarLineRepeatWingedKind {
@@ -124,12 +124,12 @@ enum class msrBarLineRepeatWingedKind {
   kBarLineRepeatWingedDoubleStraight, kBarLineRepeatWingedDoubleCurved
 };
 
-string msrBarLineRepeatWingedKindAsString (
+std::string msrBarLineRepeatWingedKindAsString (
   msrBarLineRepeatWingedKind barLineRepeatWingedKind);
 
-ostream& operator << (ostream& os, const msrBarLineRepeatWingedKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBarLineRepeatWingedKind& elt);
 
-class EXP msrBarLine : public msrMeasureElement
+class EXP msrBarLine : public msrMeasureElementLambda
 {
   public:
 
@@ -143,7 +143,7 @@ class EXP msrBarLine : public msrMeasureElement
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const string&                 endingNumber,
+                            const std::string&                 endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,
@@ -173,7 +173,7 @@ class EXP msrBarLine : public msrMeasureElement
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const string&                 endingNumber,
+                            const std::string&                 endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,
@@ -206,7 +206,7 @@ class EXP msrBarLine : public msrMeasureElement
                           getEndingType () const
                               { return fEndingTypeKind; }
 
-    string                getEndingNumber () const
+    std::string           getEndingNumber () const
                               { return fEndingNumber; }
 
     msrBarLineCategoryKind
@@ -239,7 +239,7 @@ class EXP msrBarLine : public msrMeasureElement
     // private services
     // ------------------------------------------------------
 
-    const list<int>&      getEndingNumbersList () const
+    const std::list<int>&      getEndingNumbersList () const
                               { return fEndingNumbersList; }
 
   public:
@@ -257,14 +257,14 @@ class EXP msrBarLine : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                endingNumbersListAsString () const;
+    std::string           endingNumbersListAsString () const;
 
-    string                asString () const override;
-    string                asShortString () const override;
+    std::string           asString () const override;
+    std::string           asShortString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -286,7 +286,7 @@ class EXP msrBarLine : public msrMeasureElement
 
     msrBarLineEndingTypeKind
                           fEndingTypeKind;
-    string                fEndingNumber; // may be "1, 2"
+    std::string           fEndingNumber; // may be "1, 2"
 
     int                   fBarLineTimes;
 
@@ -298,10 +298,10 @@ class EXP msrBarLine : public msrMeasureElement
     msrBarLineHasCodaKind fBarLineHasCodaKind;
 
     // the numbers extracted from fEndingNumber
-    list<int>             fEndingNumbersList;
+    std::list<int>             fEndingNumbersList;
 };
 typedef SMARTP<msrBarLine> S_msrBarLine;
-EXP ostream& operator << (ostream& os, const S_msrBarLine& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrBarLine& elt);
 
 
 }

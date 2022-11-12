@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -31,19 +31,17 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msrIgnorePartAtom msrIgnorePartAtom::create (
-  const string& longName,
-  const string& shortName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  set<string>&  stringSetVariable)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::set<std::string>&  stringSetVariable)
 {
   msrIgnorePartAtom* o = new
     msrIgnorePartAtom (
@@ -58,12 +56,12 @@ S_msrIgnorePartAtom msrIgnorePartAtom::create (
 }
 
 msrIgnorePartAtom::msrIgnorePartAtom (
-  const string& longName,
-  const string& shortName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  set<string>&  stringSetVariable)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::set<std::string>&  stringSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -80,37 +78,37 @@ msrIgnorePartAtom::~msrIgnorePartAtom ()
 {}
 
 void msrIgnorePartAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrIgnorePartAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the name of the part to be ignored
 
-  string partName = theString;
+  std::string partName = theString;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> partName = \"" << partName << "\", " <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // is this part name in the part renaming map?
-  set<string>::iterator
+  // is this part name in the part renaming std::map?
+  std::set<std::string>::iterator
     it =
       fStringSetVariable.find (partName);
 
   if (it != fStringSetVariable.end ()) {
     // yes, issue error message
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Part \"" << partName << "\" occurs more that once" <<
@@ -132,7 +130,7 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrIgnorePartAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -145,7 +143,7 @@ void msrIgnorePartAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrIgnorePartAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -158,7 +156,7 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrIgnorePartAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -171,7 +169,7 @@ void msrIgnorePartAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrIgnorePartAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -184,14 +182,14 @@ void msrIgnorePartAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrIgnorePartAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string msrIgnorePartAtom::asShortNamedOptionString () const
+std::string msrIgnorePartAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ';
@@ -200,7 +198,7 @@ string msrIgnorePartAtom::asShortNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -214,9 +212,9 @@ string msrIgnorePartAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string msrIgnorePartAtom::asActualLongNamedOptionString () const
+std::string msrIgnorePartAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ';
@@ -225,7 +223,7 @@ string msrIgnorePartAtom::asActualLongNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -239,74 +237,74 @@ string msrIgnorePartAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void msrIgnorePartAtom::print (ostream& os) const
+void msrIgnorePartAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msrIgnorePartAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "variableName" << " : " <<
     fVariableName <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fStringSetVariable" << " : " <<
-    endl;
+    std::endl;
 
   if (! fStringSetVariable.size ()) {
     os << "[EMPTY]";
   }
   else {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
 void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : ";
 
   if (! fStringSetVariable.size ()) {
     os <<
       "[EMPTY]" <<
-      endl;
+      std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
       os <<
         "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
       if (++i == iEnd) break;
     } // for
 
@@ -317,13 +315,13 @@ void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator << (ostream& os, const S_msrIgnorePartAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_msrIgnorePartAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -331,12 +329,12 @@ ostream& operator << (ostream& os, const S_msrIgnorePartAtom& elt)
 
 //______________________________________________________________________________
 S_msrKeepPartAtom msrKeepPartAtom::create (
-  const string& longName,
-  const string& shortName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  set<string>&  stringSetVariable)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::set<std::string>&  stringSetVariable)
 {
   msrKeepPartAtom* o = new
     msrKeepPartAtom (
@@ -351,12 +349,12 @@ S_msrKeepPartAtom msrKeepPartAtom::create (
 }
 
 msrKeepPartAtom::msrKeepPartAtom (
-  const string& longName,
-  const string& shortName,
-  const string& description,
-  const string& valueSpecification,
-  const string& variableName,
-  set<string>&  stringSetVariable)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::set<std::string>&  stringSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -373,37 +371,37 @@ msrKeepPartAtom::~msrKeepPartAtom ()
 {}
 
 void msrKeepPartAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrKeepPartAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the name of the part to be kept
 
-  string partName = theString;
+  std::string partName = theString;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> partName = \"" << partName << "\", " <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // is this part name in the part renaming map?
-  set<string>::iterator
+  // is this part name in the part renaming std::map?
+  std::set<std::string>::iterator
     it =
       fStringSetVariable.find (partName);
 
   if (it != fStringSetVariable.end ()) {
     // yes, issue error message
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Part \"" << partName << "\" occurs more that once" <<
@@ -425,7 +423,7 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrKeepPartAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -438,7 +436,7 @@ void msrKeepPartAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrKeepPartAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -451,7 +449,7 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrKeepPartAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -464,7 +462,7 @@ void msrKeepPartAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrKeepPartAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -477,14 +475,14 @@ void msrKeepPartAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrKeepPartAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string msrKeepPartAtom::asShortNamedOptionString () const
+std::string msrKeepPartAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ';
@@ -493,7 +491,7 @@ string msrKeepPartAtom::asShortNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -507,9 +505,9 @@ string msrKeepPartAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string msrKeepPartAtom::asActualLongNamedOptionString () const
+std::string msrKeepPartAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ';
@@ -518,7 +516,7 @@ string msrKeepPartAtom::asActualLongNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -532,74 +530,74 @@ string msrKeepPartAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void msrKeepPartAtom::print (ostream& os) const
+void msrKeepPartAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msrKeepPartAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "variableName" << " : " <<
     fVariableName <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fStringSetVariable" << " : " <<
-    endl;
+    std::endl;
 
   if (! fStringSetVariable.size ()) {
     os << "[EMPTY]";
   }
   else {
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
 void msrKeepPartAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : ";
 
   if (! fStringSetVariable.size ()) {
     os <<
       "[EMPTY]" <<
-      endl;
+      std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    set<string>::const_iterator
+    std::set<std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
       os <<
         "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
       if (++i == iEnd) break;
     } // for
 
@@ -610,13 +608,13 @@ void msrKeepPartAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator << (ostream& os, const S_msrKeepPartAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_msrKeepPartAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -985,7 +983,7 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2msrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -998,7 +996,7 @@ void msr2msrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2msrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -1011,7 +1009,7 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2msrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1024,7 +1022,7 @@ void msr2msrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2msrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -1037,7 +1035,7 @@ void msr2msrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2msrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1047,7 +1045,7 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The MusicXML options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1056,15 +1054,15 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "avoid msr2msr? (for TESTS):" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) <<
     "fAvoidMsr2msr" << " : " <<
     fAvoidMsr2msr <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1074,15 +1072,15 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Book:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) <<
     "fExpandToHarmonyBandBook" << " : " <<
     fExpandToHarmonyBandBook <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1092,7 +1090,7 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Voices:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1114,7 +1112,7 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Breaks:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1136,20 +1134,20 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Compress" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) <<
     "fCoalesceEmptyMeasures" << " : " <<
     fCoalesceEmptyMeasures <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) <<
+    std::setw (valueFieldWidth) <<
     "fMergeStaffCommonRests" << " : " <<
     fMergeStaffCommonRests <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1159,15 +1157,15 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Repeats:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) <<
     "fCreateImplicitInitialRepeatBarLine" << " : " <<
     fCreateImplicitInitialRepeatBarLine <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1175,13 +1173,13 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msr2msrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2msrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -1194,7 +1192,7 @@ S_msr2msrOahGroup createGlobalMsr2msrOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2msr OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

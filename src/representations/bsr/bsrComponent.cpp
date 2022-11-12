@@ -13,8 +13,6 @@
 #include "bsrComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -30,7 +28,7 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the BSR component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -45,7 +43,7 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -56,7 +54,7 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Finalized the '-display-bsr*' options"
           }
       ));

@@ -28,8 +28,8 @@ class EXP xml2xmlInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<xml2xmlInsiderHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
   protected:
 
@@ -37,8 +37,8 @@ class EXP xml2xmlInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           xml2xmlInsiderHandler (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
     virtual               ~xml2xmlInsiderHandler ();
 
@@ -57,18 +57,18 @@ class EXP xml2xmlInsiderHandler : public oahInsiderHandler
     void                  createTheXml2xmlPrefixes ();
 
     void                  createTheXml2xmlOptionGroups (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override;
+    std::string           fetchOutputFileNameFromTheOptions () const override;
 
     // quiet mode
     void                  enforceHandlerQuietness () override;
@@ -86,7 +86,7 @@ class EXP xml2xmlInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -97,7 +97,7 @@ class EXP xml2xmlInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<xml2xmlInsiderHandler> S_xml2xmlInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_xml2xmlInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2xmlInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP xml2xmlInsiderOahGroup : public oahGroup
@@ -191,7 +191,7 @@ class EXP xml2xmlInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<xml2xmlInsiderOahGroup> S_xml2xmlInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_xml2xmlInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2xmlInsiderOahGroup& elt);
 
 EXP extern S_xml2xmlInsiderOahGroup gGlobalXml2xmlInsiderOahGroup;
 

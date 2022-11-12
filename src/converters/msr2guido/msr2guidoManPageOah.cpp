@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -25,16 +25,14 @@
 #include "msr2guidoManPageOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msr2guidoManPageGenerateAtom msr2guidoManPageGenerateAtom::create (
-  const string& shortName,
-  const string& longName,
-  const string& description,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
   S_oahVisitor  theOahVisitor)
 {
   msr2guidoManPageGenerateAtom* o = new
@@ -48,9 +46,9 @@ S_msr2guidoManPageGenerateAtom msr2guidoManPageGenerateAtom::create (
 }
 
 msr2guidoManPageGenerateAtom::msr2guidoManPageGenerateAtom (
-  const string& shortName,
-  const string& longName,
-  const string& description,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
   S_oahVisitor  theOahVisitor)
   : oahAtom (
       longName,
@@ -64,13 +62,13 @@ msr2guidoManPageGenerateAtom::msr2guidoManPageGenerateAtom (
 msr2guidoManPageGenerateAtom::~msr2guidoManPageGenerateAtom ()
 {}
 
-void msr2guidoManPageGenerateAtom::applyElement (ostream& os)
+void msr2guidoManPageGenerateAtom::applyElement (std::ostream& os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a msr2guidoManPageGenerateAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -83,7 +81,7 @@ void msr2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageGenerateAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -96,7 +94,7 @@ void msr2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2guidoManPageGenerateAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -109,7 +107,7 @@ void msr2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageGenerateAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -122,7 +120,7 @@ void msr2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2guidoManPageGenerateAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -135,18 +133,18 @@ void msr2guidoManPageGenerateAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageGenerateAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void msr2guidoManPageGenerateAtom::print (ostream& os) const
+void msr2guidoManPageGenerateAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msr2guidoManPageGenerateAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -156,7 +154,7 @@ void msr2guidoManPageGenerateAtom::print (ostream& os) const
   --gIndenter;
 }
 
-void msr2guidoManPageGenerateAtom::generateManPageData (ostream& os) const
+void msr2guidoManPageGenerateAtom::generateManPageData (std::ostream& os) const
 {
   // generate the man page from the OAH handler
   fOahVisitor->visitTheHandler ();
@@ -168,19 +166,19 @@ void msr2guidoManPageGenerateAtom::generateManPageData (ostream& os) const
 }
 
 void msr2guidoManPageGenerateAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
   // nothing to print here
 }
 
-ostream& operator << (ostream& os, const S_msr2guidoManPageGenerateAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2guidoManPageGenerateAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -251,7 +249,7 @@ R"(Write the contents of the OAH data to standard error.)",
         "generate-man-page", "gmp",
         regex_replace (
 R"(Write man page data for EXECUTABLE to standard output.)",
-          regex ("EXECUTABLE"),
+          std::regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         fOahVisitor));
 }
@@ -310,7 +308,7 @@ void msr2guidoManPageOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -323,7 +321,7 @@ void msr2guidoManPageOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2guidoManPageOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -336,7 +334,7 @@ void msr2guidoManPageOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -349,7 +347,7 @@ void msr2guidoManPageOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2guidoManPageOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -362,7 +360,7 @@ void msr2guidoManPageOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -372,7 +370,7 @@ void msr2guidoManPageOahGroup::printManPageOahValues (int fieldWidth)
 {
   gLogStream <<
     "The OAH options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -381,13 +379,13 @@ void msr2guidoManPageOahGroup::printManPageOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msr2guidoManPageOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2guidoManPageOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -401,7 +399,7 @@ S_msr2guidoManPageOahGroup createGlobalMsr2guidoManPageOahGroupHandler (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2guidoManPage OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

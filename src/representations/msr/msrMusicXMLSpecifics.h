@@ -29,23 +29,23 @@ enum class msrXMLLangKind {
   kXMLLangIt, kXMLLangEn, kXMLLangDe, kXMLLangFr, kXMLLangJa, kXMLLangLa
 };
 
-string msrXMLLangKindAsString (
+std::string msrXMLLangKindAsString (
   msrXMLLangKind XMLLangKind);
 
-ostream& operator << (ostream& os, const msrXMLLangKind& elt);
+std::ostream& operator << (std::ostream& os, const msrXMLLangKind& elt);
 
 EXP msrXMLLangKind msrXMLLangKindFromString (
   int           inputLineNumber,
-  const string& XMLLangString);
+  const std::string& XMLLangString);
 
 enum class msrOtherAppearanceTypeKind { // JMI which values??? v0.9.62
   kOtherAppearanceType_NO_
 };
 
-string msrOtherAppearanceTypeKindAsString (
+std::string msrOtherAppearanceTypeKindAsString (
   msrOtherAppearanceTypeKind otherAppearanceTypeKind);
 
-ostream& operator << (ostream& os, const msrOtherAppearanceTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrOtherAppearanceTypeKind& elt);
 
 enum class msrLineWidthTypeKind {
   kLineWidthType_NO_,
@@ -63,30 +63,30 @@ enum class msrLineWidthTypeKind {
   kLineWidthTypeWedge
 };
 
-string msrLineWidthTypeKindAsString (
+std::string msrLineWidthTypeKindAsString (
   msrLineWidthTypeKind lineWidthTypeKind);
 
-ostream& operator << (ostream& os, const msrLineWidthTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrLineWidthTypeKind& elt);
 
 enum class msrNoteSizeTypeKind {
   kNote_NO_SizeType,
   kNoteSizeTypeCue, kNoteSizeTypeGrace, kNoteSizeTypeLarge
 };
 
-string msrNoteSizeTypeKindAsString (
+std::string msrNoteSizeTypeKindAsString (
   msrNoteSizeTypeKind noteSizeTypeKind);
 
-ostream& operator << (ostream& os, const msrNoteSizeTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrNoteSizeTypeKind& elt);
 
 enum class msrDistanceTypeKind {
   kDistanceType_NO_,
   kDistanceTypeHyphen, kDistanceTypeBeam
 };
 
-string msrDistanceTypeKindAsString (
+std::string msrDistanceTypeKindAsString (
   msrDistanceTypeKind distanceTypeKind);
 
-ostream& operator << (ostream& os, const msrDistanceTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrDistanceTypeKind& elt);
 
 enum class msrGlyphTypeKind {
   kGlyphType_NO_,
@@ -99,10 +99,10 @@ enum class msrGlyphTypeKind {
   kGlyphTypeOctaveShiftDown22, kGlyphTypeOctaveShiftUp22, kGlyphTypeOctaveShiftContinue22
 };
 
-string msrGlyphTypeKindAsString (
+std::string msrGlyphTypeKindAsString (
   msrGlyphTypeKind GlyphTypeKind);
 
-ostream& operator << (ostream& os, const msrGlyphTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrGlyphTypeKind& elt);
 
 //______________________________________________________________________________
 class EXP msrPageLayout : public msrElement
@@ -209,9 +209,9 @@ class EXP msrPageLayout : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -228,7 +228,7 @@ class EXP msrPageLayout : public msrElement
     S_msrMarginsGroup     fBothMarginsGroup;
 };
 typedef SMARTP<msrPageLayout> S_msrPageLayout;
-EXP ostream& operator << (ostream& os, const S_msrPageLayout& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrPageLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrSystemLayout : public msrElement
@@ -298,9 +298,9 @@ class EXP msrSystemLayout : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -316,7 +316,7 @@ class EXP msrSystemLayout : public msrElement
     S_msrLength           fTopSystemDistance;
 };
 typedef SMARTP<msrSystemLayout> S_msrSystemLayout;
-EXP ostream& operator << (ostream& os, const S_msrSystemLayout& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSystemLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrSystemDividers : public msrElement
@@ -416,9 +416,9 @@ class EXP msrSystemDividers : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -429,7 +429,7 @@ class EXP msrSystemDividers : public msrElement
     Bool                  fRightDivider;
 };
 typedef SMARTP<msrSystemDividers> S_msrSystemDividers;
-EXP ostream& operator << (ostream& os, const S_msrSystemDividers& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSystemDividers& elt);
 
 //______________________________________________________________________________
 class EXP msrStaffLayout : public msrElement
@@ -509,9 +509,9 @@ class EXP msrStaffLayout : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -525,7 +525,7 @@ class EXP msrStaffLayout : public msrElement
     S_msrLength           fStaffDistance;
 };
 typedef SMARTP<msrStaffLayout> S_msrStaffLayout;
-EXP ostream& operator << (ostream& os, const S_msrStaffLayout& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrStaffLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrMeasureLayout : public msrElement
@@ -591,9 +591,9 @@ class EXP msrMeasureLayout : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -604,10 +604,10 @@ class EXP msrMeasureLayout : public msrElement
     S_msrLength           fMeasureDistance;
 };
 typedef SMARTP<msrMeasureLayout> S_msrMeasureLayout;
-EXP ostream& operator << (ostream& os, const S_msrMeasureLayout& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureLayout& elt);
 
 //______________________________________________________________________________
-class EXP msrPrintLayout : public msrMeasureElement
+class EXP msrPrintLayout : public msrMeasureElementLambda
 {
 /*
 <!--
@@ -696,7 +696,7 @@ class EXP msrPrintLayout : public msrMeasureElement
     S_msrSystemLayout     getSystemLayout () const
                               { return fSystemLayout; }
 
-    const list<S_msrStaffLayout>&
+    const std::list<S_msrStaffLayout>&
                           getStaffLayoutsList () const
                               { return fStaffLayoutsList; }
 
@@ -762,11 +762,11 @@ class EXP msrPrintLayout : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -777,7 +777,7 @@ class EXP msrPrintLayout : public msrMeasureElement
 
     S_msrSystemLayout     fSystemLayout;
 
-    list<S_msrStaffLayout>
+    std::list<S_msrStaffLayout>
                           fStaffLayoutsList;
 
     S_msrSystemDividers   fSystemDividers; // JMI ???
@@ -792,7 +792,7 @@ class EXP msrPrintLayout : public msrMeasureElement
     int                   fPageNumber;
 };
 typedef SMARTP<msrPrintLayout> S_msrPrintLayout;
-EXP ostream& operator << (ostream& os, const S_msrPrintLayout& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrPrintLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrLineWidth : public msrElement
@@ -844,9 +844,9 @@ class EXP msrLineWidth : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -857,7 +857,7 @@ class EXP msrLineWidth : public msrElement
     S_msrLength           fLineWidthValue;
 };
 typedef SMARTP<msrLineWidth> S_msrLineWidth;
-EXP ostream& operator << (ostream& os, const S_msrLineWidth& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrLineWidth& elt);
 
 //______________________________________________________________________________
 class EXP msrNoteSize : public msrElement
@@ -910,9 +910,9 @@ class EXP msrNoteSize : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -923,7 +923,7 @@ class EXP msrNoteSize : public msrElement
     float                 fNoteSizeValue;
 };
 typedef SMARTP<msrNoteSize> S_msrNoteSize;
-EXP ostream& operator << (ostream& os, const S_msrNoteSize& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrNoteSize& elt);
 
 //______________________________________________________________________________
 class EXP msrDistance : public msrElement
@@ -975,9 +975,9 @@ class EXP msrDistance : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -988,7 +988,7 @@ class EXP msrDistance : public msrElement
     S_msrLength           fDistanceValue;
 };
 typedef SMARTP<msrDistance> S_msrDistance;
-EXP ostream& operator << (ostream& os, const S_msrDistance& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrDistance& elt);
 
 //______________________________________________________________________________
 class EXP msrGlyph : public msrElement
@@ -1003,14 +1003,14 @@ class EXP msrGlyph : public msrElement
     static SMARTP<msrGlyph> create (
                             int              inputLineNumber,
                             msrGlyphTypeKind glyphTypeKind,
-                            const string&    glyphValue);
+                            const std::string&    glyphValue);
 
   protected:
 
                           msrGlyph (
                             int              inputLineNumber,
                             msrGlyphTypeKind glyphTypeKind,
-                            const string&    glyphValue);
+                            const std::string&    glyphValue);
 
     virtual               ~msrGlyph ();
 
@@ -1022,7 +1022,7 @@ class EXP msrGlyph : public msrElement
     msrGlyphTypeKind      getGlyphTypeKind () const
                               { return fGlyphTypeKind; }
 
-    string                getGlyphValue () const
+    std::string           getGlyphValue () const
                               { return fGlyphValue; }
 
   public:
@@ -1040,9 +1040,9 @@ class EXP msrGlyph : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -1050,10 +1050,10 @@ class EXP msrGlyph : public msrElement
     // ------------------------------------------------------
 
     msrGlyphTypeKind      fGlyphTypeKind;
-    string                fGlyphValue;
+    std::string           fGlyphValue;
 };
 typedef SMARTP<msrGlyph> S_msrGlyph;
-EXP ostream& operator << (ostream& os, const S_msrGlyph& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrGlyph& elt);
 
 //______________________________________________________________________________
 class EXP msrOtherAppearance : public msrElement
@@ -1068,14 +1068,14 @@ class EXP msrOtherAppearance : public msrElement
     static SMARTP<msrOtherAppearance> create (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const string&              otherAppearanceValue);
+                            const std::string&              otherAppearanceValue);
 
   protected:
 
                           msrOtherAppearance (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const string&              otherAppearanceValue);
+                            const std::string&              otherAppearanceValue);
 
     virtual               ~msrOtherAppearance ();
 
@@ -1088,7 +1088,7 @@ class EXP msrOtherAppearance : public msrElement
                           getOtherAppearanceTypeKind () const
                               { return fOtherAppearanceTypeKind; }
 
-    string                getOtherAppearanceValue () const
+    std::string           getOtherAppearanceValue () const
                               { return fOtherAppearanceValue; }
 
   public:
@@ -1106,9 +1106,9 @@ class EXP msrOtherAppearance : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -1117,10 +1117,10 @@ class EXP msrOtherAppearance : public msrElement
 
     msrOtherAppearanceTypeKind
                           fOtherAppearanceTypeKind;
-    string                fOtherAppearanceValue;
+    std::string           fOtherAppearanceValue;
 };
 typedef SMARTP<msrOtherAppearance> S_msrOtherAppearance;
-EXP ostream& operator << (ostream& os, const S_msrOtherAppearance& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrOtherAppearance& elt);
 
 //______________________________________________________________________________
 class EXP msrAppearance : public msrElement
@@ -1243,23 +1243,23 @@ class EXP msrAppearance : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    const list<S_msrLineWidth>&
+    const std::list<S_msrLineWidth>&
                           getLineWidthsList () const
                               { return fLineWidthsList; }
 
-    const list<S_msrNoteSize>&
+    const std::list<S_msrNoteSize>&
                           getNoteSizesList () const
                               { return fNoteSizesList; }
 
-    const list<S_msrDistance>&
+    const std::list<S_msrDistance>&
                           getDistancesList () const
                               { return fDistancesList; }
 
-    const list<S_msrGlyph>&
+    const std::list<S_msrGlyph>&
                           getGlyphsList () const
                               { return fGlyphsList; }
 
-    const list<S_msrOtherAppearance>&
+    const std::list<S_msrOtherAppearance>&
                           getOtherAppearancesList () const
                               { return fOtherAppearancesList; }
 
@@ -1301,28 +1301,28 @@ class EXP msrAppearance : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    list<S_msrLineWidth>  fLineWidthsList;
+    std::list<S_msrLineWidth>  fLineWidthsList;
 
-    list<S_msrNoteSize>   fNoteSizesList;
+    std::list<S_msrNoteSize>   fNoteSizesList;
 
-    list<S_msrDistance>   fDistancesList;
+    std::list<S_msrDistance>   fDistancesList;
 
-    list<S_msrGlyph>      fGlyphsList;
+    std::list<S_msrGlyph>      fGlyphsList;
 
-    list<S_msrOtherAppearance>
+    std::list<S_msrOtherAppearance>
                           fOtherAppearancesList;
 };
 typedef SMARTP<msrAppearance> S_msrAppearance;
-EXP ostream& operator << (ostream& os, const S_msrAppearance& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrAppearance& elt);
 
 
 }

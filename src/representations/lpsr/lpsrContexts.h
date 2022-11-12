@@ -25,8 +25,6 @@
 #include "lpsrElements.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -37,19 +35,19 @@ enum class lpsrContextTypeKind {
   kContextChordNames, kContextFiguredBass
 };
 
-string lpsrContextTypeKindAsString (
+std::string lpsrContextTypeKindAsString (
   lpsrContextTypeKind contextTypeKind);
 
-ostream& operator << (ostream& os, const lpsrContextTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrContextTypeKind& elt);
 
 enum class lpsrContextExistingKind {
   kExistingContextYes, kExistingContextNo
 };
 
-string lpsrContextExistingKindAsString (
+std::string lpsrContextExistingKindAsString (
   lpsrContextExistingKind contextExistingKind);
 
-ostream& operator << (ostream& os, const lpsrContextExistingKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrContextExistingKind& elt);
 
 //______________________________________________________________________________
 class EXP lpsrContext : public lpsrElement
@@ -63,7 +61,7 @@ class EXP lpsrContext : public lpsrElement
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
                             lpsrContextTypeKind     contextTypeKind,
-                            const string&           contextName);
+                            const std::string&           contextName);
 
   protected:
 
@@ -74,7 +72,7 @@ class EXP lpsrContext : public lpsrElement
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
                             lpsrContextTypeKind     contextTypeKind,
-                            const string&           contextName);
+                            const std::string&           contextName);
 
     virtual               ~lpsrContext ();
 
@@ -90,7 +88,7 @@ class EXP lpsrContext : public lpsrElement
     lpsrContextTypeKind   getContextTypeKind () const
                               { return fContextTypeKind; }
 
-    string                getContextName () const
+    std::string           getContextName () const
                               { return fContextName; }
 
   public:
@@ -113,21 +111,21 @@ class EXP lpsrContext : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    string                getlpsrContextTypeKindAsString () const
+    std::string           getlpsrContextTypeKindAsString () const
                               {
                                 return
                                   lpsrContextTypeKindAsString (
                                     fContextTypeKind);
                               }
 
-    string                getlpsrContextExistingKindAsString () const
+    std::string           getlpsrContextExistingKindAsString () const
                               {
                                 return
                                   lpsrContextExistingKindAsString (
                                     fContextExistingKind);
                               }
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -137,12 +135,12 @@ class EXP lpsrContext : public lpsrElement
     lpsrContextExistingKind
                           fContextExistingKind;
     lpsrContextTypeKind   fContextTypeKind;
-    string                fContextName;
+    std::string           fContextName;
 
-    list<S_msrElement>    fContextElementsList;
+    std::list<S_msrElement>    fContextElementsList;
 };
 typedef SMARTP<lpsrContext> S_lpsrContext;
-EXP ostream& operator << (ostream& os, const S_lpsrContext& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrContext& elt);
 
 //______________________________________________________________________________
 class EXP lpsrChordNamesContext : public lpsrContext
@@ -155,7 +153,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
     static SMARTP<lpsrChordNamesContext> create (
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
-                            const string&           contextName,
+                            const std::string&           contextName,
                             S_msrVoice              contextVoice);
 
   protected:
@@ -166,7 +164,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
                           lpsrChordNamesContext (
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
-                            const string&           contextName,
+                            const std::string&           contextName,
                             S_msrVoice              contextVoice);
 
     virtual               ~lpsrChordNamesContext ();
@@ -199,7 +197,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -209,7 +207,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
     S_msrVoice            fContextVoice;
 };
 typedef SMARTP<lpsrChordNamesContext> S_lpsrChordNamesContext;
-EXP ostream& operator << (ostream& os, const S_lpsrChordNamesContext& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt);
 
 //______________________________________________________________________________
 class EXP lpsrFiguredBassContext : public lpsrContext
@@ -222,7 +220,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
     static SMARTP<lpsrFiguredBassContext> create (
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
-                            const string&           contextName,
+                            const std::string&           contextName,
                             S_msrStaff              contextStaff);
 
   protected:
@@ -233,7 +231,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
                           lpsrFiguredBassContext (
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
-                            const string&           contextName,
+                            const std::string&           contextName,
                             S_msrStaff              contextStaff);
 
     virtual               ~lpsrFiguredBassContext ();
@@ -266,7 +264,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -276,7 +274,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
     S_msrStaff            fContextStaff;
 };
 typedef SMARTP<lpsrFiguredBassContext> S_lpsrFiguredBassContext;
-EXP ostream& operator << (ostream& os, const S_lpsrFiguredBassContext& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrFiguredBassContext& elt);
 
 
 }

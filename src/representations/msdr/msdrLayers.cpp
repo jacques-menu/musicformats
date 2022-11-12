@@ -29,15 +29,13 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msdrLayer msdrLayer::create (
   int           inputLineNumber,
-  const string& layerNumber)
+  const std::string& layerNumber)
 {
   msdrLayer* o =
     new msdrLayer (
@@ -50,13 +48,13 @@ S_msdrLayer msdrLayer::create (
 
 msdrLayer::msdrLayer (
   int           inputLineNumber,
-  const string& layerNumber)
+  const std::string& layerNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Creating MSDR music \"" << asString () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -106,7 +104,7 @@ void msdrLayer::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msdrLayer::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msdrLayer>*
@@ -117,7 +115,7 @@ void msdrLayer::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msdrLayer::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -128,7 +126,7 @@ void msdrLayer::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msdrLayer::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msdrLayer>*
@@ -139,7 +137,7 @@ void msdrLayer::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msdrLayer::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -151,13 +149,13 @@ void msdrLayer::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msdrLayer::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   // browse the voice initial elements
   if (fInitialMusicElementsList.size ()) {
     for (
-      list<S_msdrLayerElement>::const_iterator i = fInitialMusicElementsList.begin ();
+      std::list<S_msdrLayerElement>::const_iterator i = fInitialMusicElementsList.begin ();
       i != fInitialMusicElementsList.end ();
       ++i
     ) {
@@ -176,7 +174,7 @@ void msdrLayer::browseData (basevisitor* v)
   // browse the voice stanzas
   if (fMusicStanzasMap.size ()) {
     for (
-      map<string, S_msrStanza>::const_iterator i = fMusicStanzasMap.begin ();
+      std::map<std::string, S_msrStanza>::const_iterator i = fMusicStanzasMap.begin ();
       i != fMusicStanzasMap.end ();
       ++i
     ) {
@@ -193,14 +191,14 @@ void msdrLayer::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% <== msdrLayer::browseData ()" <<
-      endl;
+      std::endl;
   }
   */
 }
 
-string msdrLayer::asShortString () const
+std::string msdrLayer::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDR layer '" << fLayerNumber << "', " <<
@@ -209,9 +207,9 @@ string msdrLayer::asShortString () const
   return s.str ();
 }
 
-string msdrLayer::asString () const
+std::string msdrLayer::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDR layer '" << fLayerNumber << "', " <<
@@ -222,16 +220,16 @@ string msdrLayer::asString () const
 
 void msdrLayer::displayLayer (
   int           inputLineNumber,
-  const string& context) const
+  const std::string& context) const
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     "*********>> Displaying MSDR layer '" <<
     fLayerNumber <<
     "' (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   print (gLogStream);
@@ -239,20 +237,20 @@ void msdrLayer::displayLayer (
 
   gLogStream <<
     " <<*********" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
-void msdrLayer::print (ostream& os) const
+void msdrLayer::print (std::ostream& os) const
 {
   os <<
     "MSDR measure '" << fLayerNumber <<
     "', line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
 /* JMI
-  os << left <<
+  os << std::left <<
     '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
@@ -272,52 +270,52 @@ void msdrLayer::print (ostream& os) const
     mfSingularOrPlural (
       fVoiceStanzasMap.size (), "stanza", "stanzas") <<
     ")" <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 41;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVoiceUpLinkToStaff" << " : " <<
     fVoiceUpLinkToStaff->getStaffName () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fVoiceCurrentMeasureNumber" << " : \"" <<
     fVoiceCurrentMeasureNumber <<
     "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fVoiceCurrentMeasureOrdinalNumber" << " : " <<
     fVoiceCurrentMeasureOrdinalNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fVoiceCurrentMeasurePuristNumber" << " : " <<
     fVoiceCurrentMeasurePuristNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "regularVoiceStaffSequentialNumber" << " : " <<
     regularVoiceStaffSequentialNumberAsString () <<
-    endl;
+    std::endl;
 
 #ifdef TRACING_IS_ENABLED
   // regular measure ends detection
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fWholeNotesSinceLastRegularMeasureEnd" << " : " <<
     fWholeNotesSinceLastRegularMeasureEnd <<
-    endl;
+    std::endl;
 
   // incomplete measures after repeats detection
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fCurrentVoiceRepeatPhaseKind" << " : " <<
     msrVoiceRepeatPhaseKindAsString (
       fCurrentVoiceRepeatPhaseKind) <<
-    endl;
+    std::endl;
 
   }
 */
@@ -325,18 +323,18 @@ void msdrLayer::print (ostream& os) const
   --gIndenter;
 }
 
-void msdrLayer::printShort (ostream& os) const
+void msdrLayer::printShort (std::ostream& os) const
 {
   os <<
     "MSDR layer '" <<
     fLayerNumber <<
     "', line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
 /* JMI
-  os << left <<
+  os << std::left <<
     '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
@@ -356,17 +354,17 @@ void msdrLayer::printShort (ostream& os) const
     mfSingularOrPlural (
       fVoiceStanzasMap.size (), "stanza", "stanzas") <<
     ")" <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 41;
 
 #ifdef TRACING_IS_ENABLED
-  // print the voice measures flat list
+  // print the voice measures flat std::list
   size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "voiceMeasuresFlatList";
   if (voiceMeasuresFlatListSize) {
     os <<
@@ -376,12 +374,12 @@ void msdrLayer::printShort (ostream& os) const
     os <<
       " : " << "[EMPTY]";
   }
-  os << endl;
+  os << std::endl;
 
   if (voiceMeasuresFlatListSize) {
     ++gIndenter;
 
-    list<S_msrMeasure>::const_iterator
+    std::list<S_msrMeasure>::const_iterator
       iBegin = fVoiceMeasuresFlatList.begin (),
       iEnd   = fVoiceMeasuresFlatList.end (),
       i      = iBegin;
@@ -397,7 +395,7 @@ void msdrLayer::printShort (ostream& os) const
       if (++i == iEnd) break;
       os << ' ';
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
@@ -407,13 +405,13 @@ void msdrLayer::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msdrLayer& elt)
+std::ostream& operator << (std::ostream& os, const S_msdrLayer& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

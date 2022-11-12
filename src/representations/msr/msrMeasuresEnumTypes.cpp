@@ -12,17 +12,15 @@
 #include "msrMeasuresEnumTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // measures
 //______________________________________________________________________________
-string msrMeasureKindAsString (
+std::string msrMeasureKindAsString (
   msrMeasureKind measureKind)
 {
-  string result;
+  std::string result;
 
   switch (measureKind) {
     case msrMeasureKind::kMeasureKindUnknown:
@@ -69,16 +67,16 @@ string msrMeasureKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrMeasureKind& elt)
+std::ostream& operator << (std::ostream& os, const msrMeasureKind& elt)
 {
   os << msrMeasureKindAsString (elt);
   return os;
 }
 
-string msrMeasureKindasShortStringForMeasuresSlices (
+std::string msrMeasureKindasShortStringForMeasuresSlices (
   msrMeasureKind measureKind)
 {
-  string result;
+  std::string result;
 
   switch (measureKind) {
     case msrMeasureKind::kMeasureKindUnknown:
@@ -125,10 +123,10 @@ string msrMeasureKindasShortStringForMeasuresSlices (
   return result;
 }
 
-string msrMeasureImplicitKindAsString (
+std::string msrMeasureImplicitKindAsString (
   msrMeasureImplicitKind measureImplicitKind)
 {
-  string result;
+  std::string result;
 
   switch (measureImplicitKind) {
     case msrMeasureImplicitKind::kMeasureImplicitKindYes:
@@ -142,7 +140,7 @@ string msrMeasureImplicitKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrMeasureImplicitKind& elt)
+std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt)
 {
   os << msrMeasureImplicitKindAsString (elt);
   return os;
@@ -173,7 +171,7 @@ ostream& operator << (ostream& os, const msrMeasureImplicitKind& elt)
 //         fCurrentMeasureWholeNotesDuration,
 //         "handleSubsequentHarmonyInHarmoniesMeasure() 2");
 //
-//     // insert skipNote before currentHarmony in the measure's elements list
+//     // insert skipNote before currentHarmony in the measure's elements std::list
 // #ifdef TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
@@ -184,11 +182,11 @@ ostream& operator << (ostream& os, const msrMeasureImplicitKind& elt)
 //         " in voice \"" <<
 //         voice->getVoiceName () <<
 //         "\", line " << inputLineNumber <<
-//         endl;
+//         std::endl;
 //     }
 // #endif
 //
-//     // insert skipNote in the measure elements list before (*i)
+//     // insert skipNote in the measure elements std::list before (*i)
 //     insertElementInMeasureBeforeIterator (
 //       inputLineNumber,
 //       i,
@@ -197,7 +195,7 @@ ostream& operator << (ostream& os, const msrMeasureImplicitKind& elt)
 //
 //   else if (measurePositionsDelta.getNumerator () < 0) {
 //     // the two harmonies overlap in time
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "Previous harmony " <<
@@ -229,12 +227,12 @@ ostream& operator << (ostream& os, const msrMeasureImplicitKind& elt)
 //         " in voice \"" <<
 //         voice->getVoiceName () <<
 //         "\", line " << inputLineNumber <<
-//         endl;
+//         std::endl;
 //     }
 // #endif
 //
 //     if (reducedSoundingWholeNotes.getNumerator () == 0) {
-//       stringstream s;
+//       std::stringstream s;
 //
 //       s <<
 //         "Cannot reduce the duration of harmony " <<

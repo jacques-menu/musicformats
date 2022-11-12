@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -21,8 +21,6 @@
 
 #include "lpsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -54,7 +52,7 @@ void lpsrLayout::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrLayout::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -67,7 +65,7 @@ void lpsrLayout::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrLayout::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -80,7 +78,7 @@ void lpsrLayout::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrLayout::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -93,7 +91,7 @@ void lpsrLayout::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrLayout::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -103,25 +101,25 @@ void lpsrLayout::acceptOut (basevisitor* v)
 void lpsrLayout::browseData (basevisitor* v)
 {}
 
-void lpsrLayout::print (ostream& os) const
+void lpsrLayout::print (std::ostream& os) const
 {
   os <<
     "Layout" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 9;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
    "layoutGlobalStaffSize" << " : " << fLayoutGlobalStaffSize <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrLayout& lay)
+std::ostream& operator << (std::ostream& os, const S_lpsrLayout& lay)
 {
   lay->print (os);
   return os;

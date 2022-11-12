@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -64,8 +64,6 @@
 
 #include "musicxml2lilypondInterface.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -79,22 +77,22 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl <<
+      std::endl <<
       "sxmlFile2lilypondWithHandler(), sxmlfile contains:" <<
-      endl << endl;
+      std::endl << std::endl;
 
     ++gIndenter;
 
     sxmlfile->print (gLogStream);
-    gLogStream << endl << endl;
+    gLogStream << std::endl << std::endl;
 
     --gIndenter;
 
     gLogStream <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -144,9 +142,9 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 
   if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass2a ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after creating the MSR skeleton in pass 2a of sxmlFile2lilypondWithHandler as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -175,9 +173,9 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 
   if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass2b ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after pass 2b as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -192,7 +190,7 @@ if (false) { // JMI
     for (S_msrVoice voice: firstMsrScore->getScoreAllVoicesList ()) {
       gLogStream <<
         "===> firstMsrScore voice: " << voice->getVoiceName () <<
-        endl;
+        std::endl;
 
       S_msrPathToVoice
         pathToVoice =
@@ -233,9 +231,9 @@ else {
 
   if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass3 ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after pass 3 as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -270,7 +268,7 @@ else {
   // convert the LPSR to LilyPond code (pass 5)
   // ------------------------------------------------------
 
-  string
+  std::string
     outputFileName =
       handler->
         fetchOutputFileNameFromTheOptions ();
@@ -281,7 +279,7 @@ else {
       "xmlFile2lilypond() outputFileName = \"" <<
       outputFileName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -290,7 +288,7 @@ else {
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -328,7 +326,7 @@ else {
         "xmlFile2lilypond() output goes to file \"" <<
         outputFileName <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -336,30 +334,30 @@ else {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
-        endl <<
+        std::endl <<
         "Opening file '" << outputFileName << "' for writing" <<
-        endl;
+        std::endl;
     }
 #endif
 
-    ofstream
+    std::ofstream
       outputFileStream (
         outputFileName.c_str (),
-        ofstream::out);
+        std::ofstream::out);
 
     if (! outputFileStream.is_open ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "Could not open LilyPond output file \"" <<
         outputFileName <<
         "\" for writing - quitting";
 
-      string message = s.str ();
+      std::string message = s.str ();
 
       err <<
         message <<
-        endl;
+        std::endl;
 
       throw lpsr2lilypondException (message);
     }
@@ -394,9 +392,9 @@ else {
 #ifdef TRACE_OAH
     if (gtracingOah->fTracePasses) {
       gLogStream <<
-        endl <<
+        std::endl <<
         "Closing file \"" << outputFileName << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -429,7 +427,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   err <<
     "xmlFile2musicxml(), sxmlfile is NULL" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -439,7 +437,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   // the service name
   // ------------------------------------------------------
 
-  string serviceName = "xml2ly";
+  std::string serviceName = "xml2ly";
 
   // reset the global indenter
   // ------------------------------------------------------
@@ -477,7 +475,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
     gLogStream <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -555,7 +553,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
       " gIndenter value after options ands arguments checking: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -600,8 +598,8 @@ EXP mfMusicformatsErrorKind musicxmlFile2lilypond (
 
 mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
   const char*  fileName,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   SXMLFile
@@ -651,8 +649,8 @@ EXP mfMusicformatsErrorKind musicxmlFd2lilypond (
 
 mfMusicformatsErrorKind convertMusicxmlFd2lilypondWithHandler (
   FILE*        fd,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   SXMLFile
@@ -702,8 +700,8 @@ EXP mfMusicformatsErrorKind musicxmlString2lilypond (
 
 mfMusicformatsErrorKind convertMusicxmlString2lilypondWithHandler (
   const char*  buffer,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   SXMLFile

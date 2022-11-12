@@ -16,6 +16,8 @@
 
 #include "mfRational.h"
 
+// #include "msrMeasures.h"
+
 
 namespace MusicFormats
 {
@@ -39,7 +41,7 @@ class EXP msrMeasureElement : public msrElement
     // constants
     // ------------------------------------------------------
 
-    static const string K_NO_MEASURE_NUMBER;
+    static const std::string K_NO_MEASURE_NUMBER;
 
     static const Rational K_NO_WHOLE_NOTES;
 
@@ -58,15 +60,9 @@ class EXP msrMeasureElement : public msrElement
 
     // set and get
     // ------------------------------------------------------
-
-    void                  setMeasureElementUpLinkToMeasure (
-                            S_msrMeasure measure);
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const;
-
     void                  setMeasureElementSoundingWholeNotes (
                             const Rational& wholeNotes,
-                            const string&   context);
+                            const std::string&   context);
 
     Rational              getMeasureElementSoundingWholeNotes () const
                               { return fMeasureElementSoundingWholeNotes; }
@@ -81,28 +77,28 @@ class EXP msrMeasureElement : public msrElement
     virtual void          setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
                             const Rational&    measurePosition,
-                            const string&      context);
+                            const std::string& context);
 
     Rational              getMeasureElementMeasurePosition () const
                               { return fMeasureElementMeasurePosition; }
 
     void                  setMeasureElementVoicePosition (
                             const Rational& voicePosition,
-                            const string&   context);
+                            const std::string&   context);
 
     Rational              getMeasureElementVoicePosition () const
                               { return fMeasureElementVoicePosition; }
 
 //     void                  setMeasureElementMeasureMoment (
 //                             const msrMoment& measureMoment,
-//                             const string&    context);
+//                             const std::string&    context);
 //
 //     const msrMoment&      getMeasureElementMeasureMoment () const
 //                               { return fMeasureElementMeasureMoment; }
 //
 //     void                  setMeasureElementVoiceMoment (
 //                             const msrMoment& voiceMoment,
-//                             const string&    context);
+//                             const std::string&    context);
 //
 //     const msrMoment&      getMeasureElementVoiceMoment () const
 //                               { return fMeasureElementVoiceMoment; }
@@ -112,7 +108,7 @@ class EXP msrMeasureElement : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                fetchMeasureElementMeasureNumber () const;
+    std::string           fetchMeasureElementMeasureNumber () const;
 
     static bool           compareMeasureElementsByIncreasingMeasurePosition (
                             const SMARTP<msrMeasureElement>& first,
@@ -120,7 +116,7 @@ class EXP msrMeasureElement : public msrElement
 
 //     virtual void          assignMeasureElementVoicePosition ( // JMI v0.9.66 REMOVE
 //                             Rational&     voicePosition,
-//                             const string& context);
+//                             const std::string& context);
 
   public:
 
@@ -137,12 +133,12 @@ class EXP msrMeasureElement : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printSummary (ostream& os) const override {}
+    void                  printSummary (std::ostream& os) const override {}
 
   protected:
 
@@ -151,15 +147,14 @@ class EXP msrMeasureElement : public msrElement
 
     void                  doSetMeasureElementSoundingWholeNotes (
                             const Rational& wholeNotes,
-                            const string&   context);
+                            const std::string&   context);
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fMeasureElementUpLinkToMeasure;
-
+    S_msrMeasure          fMeasureElementUpLinkToMeasure; // JMI VIRER
     Rational              fMeasureElementSoundingWholeNotes;
 
     Rational              fMeasureElementMeasurePosition;
@@ -169,7 +164,64 @@ class EXP msrMeasureElement : public msrElement
 //     msrMoment             fMeasureElementVoiceMoment;
 };
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
-EXP ostream& operator << (ostream& os, const S_msrMeasureElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt);
+
+//______________________________________________________________________________
+class EXP msrMeasureElementLambda : public msrMeasureElement
+{
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          msrMeasureElementLambda (
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
+
+    virtual               ~msrMeasureElementLambda ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    void                  setMeasureElementLambdaUpLinkToMeasure (
+                            S_msrMeasure measure);
+
+    S_msrMeasure          getMeasureElementLambdaUpLinkToMeasure () const;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override = 0; // JMI ??? v0.9.66
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asShortString () const override;
+    std::string           asString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+    void                  printSummary (std::ostream& os) const override
+                              {}
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    S_msrMeasure          fMeasureElementLambdaUpLinkToMeasure;
+};
+typedef SMARTP<msrMeasureElementLambda> S_msrMeasureElementLambda;
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElementLambda& elt);
 
 
 }

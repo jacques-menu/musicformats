@@ -13,7 +13,7 @@ class   {\tt mfException} and context-specific exceptions are defined in \wae{wa
 class EXP mfOahException: public mfException
 {
   public:
-    mfOahException (string const& exceptionDescription) throw ()
+    mfOahException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };

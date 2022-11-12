@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 
 #include "mfIndentedTextOutput.h"
 
@@ -23,13 +23,13 @@ namespace MusicFormats
 // length units
 //______________________________________________________________________________
 
-map<string, msrLengthUnitKind>
+std::map<std::string, msrLengthUnitKind>
   gGlobalMsrLengthUnitKindsMap;
 
-string msrLengthUnitKindAsString (
+std::string msrLengthUnitKindAsString (
   msrLengthUnitKind lengthUnitKind)
 {
-  string result;
+  std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
@@ -48,7 +48,7 @@ string msrLengthUnitKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrLengthUnitKind& elt)
+std::ostream& operator << (std::ostream& os, const msrLengthUnitKind& elt)
 {
   os << msrLengthUnitKindAsString (elt);
   return os;
@@ -66,9 +66,9 @@ void initializeMsrLengthUnitKindsMap ()
   gGlobalMsrLengthUnitKindsMap ["mm"] = msrLengthUnitKind::kUnitMillimeter;
 }
 
-string existingMsrLengthUnitKinds (size_t namesListMaxLength)
+std::string existingMsrLengthUnitKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t msrLengthUnitKindsMapSize =
     gGlobalMsrLengthUnitKindsMap.size ();
@@ -81,18 +81,18 @@ string existingMsrLengthUnitKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msrLengthUnitKind>::const_iterator i =
+      std::map<std::string, msrLengthUnitKind>::const_iterator i =
         gGlobalMsrLengthUnitKindsMap.begin ();
       i != gGlobalMsrLengthUnitKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -194,13 +194,13 @@ void msrLength::convertToLengthUnit (
   }
 }
 
-string msrLength::asString () const
+std::string msrLength::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Length " <<
-    setprecision (4) <<
+    std::setprecision (4) <<
     fLengthValue <<
     ' ' <<
     msrLengthUnitKindAsString (fLengthUnitKind) <<
@@ -209,25 +209,25 @@ string msrLength::asString () const
   return s.str ();
 }
 
-void msrLength::print (ostream& os) const
+void msrLength::print (std::ostream& os) const
 {
   os <<
     asString (); // JMI
 };
 
-ostream& operator << (ostream& os, const msrLength& elt)
+std::ostream& operator << (std::ostream& os, const msrLength& elt)
 {
   elt.print (os);
   return os;
 }
 
-ostream& operator << (ostream& os, const S_msrLength& elt)
+std::ostream& operator << (std::ostream& os, const S_msrLength& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

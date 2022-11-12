@@ -20,7 +20,6 @@
 #include "oahBasicTypes.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
@@ -35,10 +34,10 @@ class EXP mfServiceRunData : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfServiceRunData> create (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
 //     static SMARTP<mfServiceRunData> create ( // JMI
-//                             const string& serviceName,
+//                             const std::string& serviceName,
 //                             S_oahHandler  runOahHandler);
 
   public:
@@ -47,10 +46,10 @@ class EXP mfServiceRunData : public smartable
     // ------------------------------------------------------
 
                           mfServiceRunData (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
 //                           mfServiceRunData (
-//                             const string& serviceName,
+//                             const std::string& serviceName,
 //                             S_oahHandler  runOahHandler);
 
     virtual               ~mfServiceRunData ();
@@ -61,7 +60,7 @@ class EXP mfServiceRunData : public smartable
     // ------------------------------------------------------
 
     // service name
-    string                getServiceName () const
+    std::string           getServiceName () const
                               { return fServiceName; }
 
 //     // OAH handler
@@ -69,17 +68,17 @@ class EXP mfServiceRunData : public smartable
 //                               { return fRunOahHandler; }
 
     // input source name
-    void                  setInputSourceName (const string& name)
+    void                  setInputSourceName (const std::string& name)
                               { fInputSourceName = name; }
 
-    string                getInputSourceName () const
+    std::string           getInputSourceName () const
                               { return fInputSourceName; }
 
     // run date
-    string                getRunDateFull () const
+    std::string           getRunDateFull () const
                               { return fRunDateFull; }
 
-    string                getRunDateYYYYMMDD () const
+    std::string           getRunDateYYYYMMDD () const
                               { return fRunDateYYYYMMDD; }
 
   public:
@@ -92,7 +91,7 @@ class EXP mfServiceRunData : public smartable
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -109,17 +108,17 @@ class EXP mfServiceRunData : public smartable
     // ------------------------------------------------------
 
     // service name
-    string                fServiceName;
+    std::string           fServiceName;
 
 //     // OAH handler
 //     S_oahHandler          fRunOahHandler;
 
     // input source name
-    string                fInputSourceName;
+    std::string           fInputSourceName;
 
     // run date
-    string                fRunDateFull;
-    string                fRunDateYYYYMMDD;
+    std::string           fRunDateFull;
+    std::string           fRunDateYYYYMMDD;
 
   private:
 
@@ -129,7 +128,7 @@ class EXP mfServiceRunData : public smartable
   // JMIJMIJMI
 };
 typedef SMARTP<mfServiceRunData> S_mfServiceRunData;
-EXP ostream& operator << (ostream& os, const S_mfServiceRunData& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfServiceRunData& elt);
 
 EXP extern S_mfServiceRunData gGlobalServiceRunData;
 

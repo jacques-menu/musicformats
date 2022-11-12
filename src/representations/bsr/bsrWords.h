@@ -17,7 +17,7 @@ S_bsrCellsList brailleCharacter (
 
 S_bsrCellsList brailleWord (
   int           inputLineNumber,
-  const string& str);
+  const std::string& str);
 
 //______________________________________________________________________________
 class EXP bsrWords : public bsrLineContentsElement
@@ -29,7 +29,7 @@ class EXP bsrWords : public bsrLineContentsElement
 
     static SMARTP<bsrWords> create (
                             int           inputLineNumber,
-                            const string& wordContents);
+                            const std::string& wordContents);
 
   protected:
 
@@ -38,7 +38,7 @@ class EXP bsrWords : public bsrLineContentsElement
 
                           bsrWords (
                             int           inputLineNumber,
-                            const string& wordContents);
+                            const std::string& wordContents);
 
     virtual               ~bsrWords ();
 
@@ -47,7 +47,7 @@ class EXP bsrWords : public bsrLineContentsElement
     // set and get
     // ------------------------------------------------------
 
-    string                getWordContents () const
+    std::string           getWordContents () const
                               { return fWordContents; }
 
   public:
@@ -75,23 +75,23 @@ class EXP bsrWords : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fWordContents;
+    std::string           fWordContents;
 
     S_bsrCellsList        fWordCellsList;
 };
 typedef SMARTP<bsrWords> S_bsrWords;
-EXP ostream& operator << (ostream& os, const S_bsrWords& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrWords& elt);
 
 
 }

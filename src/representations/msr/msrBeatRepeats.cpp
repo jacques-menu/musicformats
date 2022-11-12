@@ -32,8 +32,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -71,16 +69,16 @@ msrBeatRepeatElement::~msrBeatRepeatElement ()
 void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
   int           inputLineNumber,
   S_msrSegment  segment,
-  const string& context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending segment '" << segment <<
-      "' to beatRepeat element elements list '" << asString () <<
+      "' to beatRepeat element elements std::list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -96,16 +94,16 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
 void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
   int             inputLineNumber,
   S_msrBeatRepeat beatRepeat,
-  const string&   context)
+  const std::string&   context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending beatRepeat '" << beatRepeat <<
-      "' to beatRepeat element elements list '" << asString () <<
+      "' to beatRepeat element elements std::list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -121,16 +119,16 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
 void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
   int               inputLineNumber,
   S_msrVoiceElement voiceElement,
-  const string&     context)
+  const std::string&     context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending voice element '" << voiceElement <<
-      "' to beatRepeat element elements list '" << asString () <<
+      "' to beatRepeat element elements std::list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -154,7 +152,7 @@ S_msrNote msrBeatRepeatElement::fetchBeatRepeatElementFirstNonGraceNote () const
   // possibly inside a chord or tuplet
 
   if (fBeatRepeatElementsList.size ()) {
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fBeatRepeatElementsList.begin (),
       iEnd   = fBeatRepeatElementsList.end (),
       i      = iBegin;
@@ -203,7 +201,7 @@ S_msrNote msrBeatRepeatElement::fetchBeatRepeatElementFirstNonGraceNote () const
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "tuplet first element should be a note, a chord or another tuplet, found instead '" <<
@@ -229,7 +227,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeatElement::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeatRepeatElement>*
@@ -240,7 +238,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeatRepeatElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -251,7 +249,7 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeatElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeatRepeatElement>*
@@ -262,7 +260,7 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeatRepeatElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -273,7 +271,7 @@ void msrBeatRepeatElement::browseData (basevisitor* v)
   // browse the elements
   if (fBeatRepeatElementsList.size ()) {
     for (
-      list<S_msrVoiceElement>::const_iterator i = fBeatRepeatElementsList.begin ();
+      std::list<S_msrVoiceElement>::const_iterator i = fBeatRepeatElementsList.begin ();
       i != fBeatRepeatElementsList.end ();
       ++i
   ) {
@@ -284,9 +282,9 @@ void msrBeatRepeatElement::browseData (basevisitor* v)
   }
 }
 
-string msrBeatRepeatElement::asString () const
+std::string msrBeatRepeatElement::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "BeatRepeatElement" <<
@@ -294,17 +292,17 @@ string msrBeatRepeatElement::asString () const
     fBeatRepeatElementUpLinkToBeatRepeat->
       asShortString () <<
     "', line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   return s.str ();
 }
 
-void msrBeatRepeatElement::print (ostream& os) const
+void msrBeatRepeatElement::print (std::ostream& os) const
 {
   os <<
     "BeatRepeatElement" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -313,7 +311,7 @@ void msrBeatRepeatElement::print (ostream& os) const
     fBeatRepeatElementUpLinkToBeatRepeat->
       asShortString () <<
       "'" <<
-    endl << endl;
+    std::endl << std::endl;
 
   // print the elements
   int elementsNumber =
@@ -331,14 +329,14 @@ void msrBeatRepeatElement::print (ostream& os) const
   else {
     os << "[EMPTY]";
   }
-  os << endl;
+  os << std::endl;
 
   if (elementsNumber) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fBeatRepeatElementsList.begin (),
       iEnd   = fBeatRepeatElementsList.end (),
       i      = iBegin;
@@ -347,7 +345,7 @@ void msrBeatRepeatElement::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -356,12 +354,12 @@ void msrBeatRepeatElement::print (ostream& os) const
   --gIndenter;
 }
 
-void msrBeatRepeatElement::printShort (ostream& os)
+void msrBeatRepeatElement::printShort (std::ostream& os)
 {
   os <<
     "BeatRepeatElement" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -371,7 +369,7 @@ void msrBeatRepeatElement::printShort (ostream& os)
     fBeatRepeatElementUpLinkToBeatRepeat->
       asShortString () <<
       "'" <<
-    endl;
+    std::endl;
 * /
 
   // print the elements
@@ -390,14 +388,14 @@ void msrBeatRepeatElement::printShort (ostream& os)
   else {
     os << "[EMPTY]";
   }
-  os << endl;
+  os << std::endl;
 
   if (elementsNumber) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrVoiceElement>::const_iterator
+    std::list<S_msrVoiceElement>::const_iterator
       iBegin = fBeatRepeatElementsList.begin (),
       iEnd   = fBeatRepeatElementsList.end (),
       i      = iBegin;
@@ -406,7 +404,7 @@ void msrBeatRepeatElement::printShort (ostream& os)
       // print the element
       (*i)->printShort (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -415,13 +413,13 @@ void msrBeatRepeatElement::printShort (ostream& os)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrBeatRepeatElement& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -469,7 +467,7 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
         fetchMeasuresNumber (),
         "measure",
         "measures") <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -504,7 +502,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeatPattern::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeatRepeatPattern>*
@@ -515,7 +513,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeatRepeatPattern::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -526,7 +524,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeatPattern::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeatRepeatPattern>*
@@ -537,7 +535,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeatRepeatPattern::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -548,7 +546,7 @@ void msrBeatRepeatPattern::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeatPattern::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   if (fBeatRepeatPatternSegment) {
@@ -558,9 +556,9 @@ void msrBeatRepeatPattern::browseData (basevisitor* v)
   }
 }
 
-string msrBeatRepeatPattern::asString () const
+std::string msrBeatRepeatPattern::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 
@@ -576,13 +574,13 @@ string msrBeatRepeatPattern::asString () const
   return s.str ();
 }
 
-void msrBeatRepeatPattern::print (ostream& os) const
+void msrBeatRepeatPattern::print (std::ostream& os) const
 {
   os <<
-    endl <<
+    std::endl <<
     '[' <<
     asString () <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -593,10 +591,10 @@ void msrBeatRepeatPattern::print (ostream& os) const
   if (! fBeatRepeatPatternSegment) {
     os <<
       " [NONE]" <<
-      endl;
+      std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
@@ -608,16 +606,16 @@ void msrBeatRepeatPattern::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrBeatRepeatPattern& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatPattern& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -664,7 +662,7 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
         fetchMeasuresNumber (),
         "measure",
         "measures") <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -699,7 +697,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeatReplicas::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeatRepeatReplicas>*
@@ -710,7 +708,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeatRepeatReplicas::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -721,7 +719,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeatReplicas::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeatRepeatReplicas>*
@@ -732,7 +730,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeatRepeatReplicas::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -743,7 +741,7 @@ void msrBeatRepeatReplicas::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeatReplicas::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   if (fBeatRepeatReplicasSegment) {
@@ -753,9 +751,9 @@ void msrBeatRepeatReplicas::browseData (basevisitor* v)
   }
 }
 
-string msrBeatRepeatReplicas::asString () const
+std::string msrBeatRepeatReplicas::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 
@@ -771,13 +769,13 @@ string msrBeatRepeatReplicas::asString () const
   return s.str ();
 }
 
-void msrBeatRepeatReplicas::print (ostream& os) const
+void msrBeatRepeatReplicas::print (std::ostream& os) const
 {
   os <<
-    endl <<
+    std::endl <<
     '[' <<
     asString () <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -788,10 +786,10 @@ void msrBeatRepeatReplicas::print (ostream& os) const
   if (! fBeatRepeatReplicasSegment) {
     os <<
       " [NONE]" <<
-      endl;
+      std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
@@ -803,16 +801,16 @@ void msrBeatRepeatReplicas::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrBeatRepeatReplicas& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatReplicas& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -877,7 +875,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
       "Creating a newborn clone of measures repeat '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -910,7 +908,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
           fetchMeasuresNumber (),
         "measure",
         "measures") <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -939,7 +937,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
           fetchMeasuresNumber (),
         "measure",
         "measures") <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1004,7 +1002,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeat::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeatRepeat>*
@@ -1015,7 +1013,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeatRepeat::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1026,7 +1024,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeat::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeatRepeat>*
@@ -1037,7 +1035,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeatRepeat::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1048,7 +1046,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeatRepeat::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   if (fBeatRepeatPattern) {
@@ -1072,7 +1070,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
     if (gGlobalMsrOahGroup->getTraceMsrVisitors () || gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
       gLogStream <<
         "% ==> visiting measures repeat replicas is inhibited" <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -1090,7 +1088,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
 void msrBeatRepeat:: appendMeasureElementToSegmentElement (
   S_msrMeasureElement elem)
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "cannot append measure element " <<
@@ -1105,10 +1103,10 @@ void msrBeatRepeat:: appendMeasureElementToSegmentElement (
     s.str ());
 }
 
-string msrBeatRepeatKindAsString (
+std::string msrBeatRepeatKindAsString (
   msrBeatRepeatKind beatRepeatKind)
 {
-  string result;
+  std::string result;
 
   switch (beatRepeatKind) {
     case msrBeatRepeatKind::kBeatRepeat_NO_:
@@ -1125,16 +1123,16 @@ string msrBeatRepeatKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBeatRepeatKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBeatRepeatKind& elt)
 {
   os << msrBeatRepeatKindAsString (elt);
   return os;
 }
 
-string msrBeatRepeatBuildPhaseKindAsString (
+std::string msrBeatRepeatBuildPhaseKindAsString (
   msrBeatRepeatBuildPhaseKind beatRepeatBuildPhaseKind)
 {
-  string result;
+  std::string result;
 
   switch (beatRepeatBuildPhaseKind) {
     case msrBeatRepeatBuildPhaseKind::kBeatRepeatBuildPhaseJustCreated:
@@ -1154,15 +1152,15 @@ string msrBeatRepeatBuildPhaseKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBeatRepeatBuildPhaseKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBeatRepeatBuildPhaseKind& elt)
 {
   os << msrBeatRepeatBuildPhaseKindAsString (elt);
   return os;
 }
 
-string msrBeatRepeat::asString () const
+std::string msrBeatRepeat::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 
@@ -1188,22 +1186,22 @@ string msrBeatRepeat::asString () const
 
 void msrBeatRepeat::displayBeatRepeat (
   int           inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     "*********>> BeatRepeat " <<
     ", beatRepeatMeasuresNumber: '" <<
     fBeatRepeatMeasuresNumber <<
     ", beatRepeatSlashesNumber: '" <<
     fBeatRepeatSlashesNumber <<
     "', voice:" <<
-    endl <<
+    std::endl <<
     fUpLinkToBeatRepeatToVoice->getVoiceName () <<
     " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   print (gLogStream);
@@ -1211,10 +1209,10 @@ void msrBeatRepeat::displayBeatRepeat (
 
   gLogStream <<
     " <<*********" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
-void msrBeatRepeat::print (ostream& os) const
+void msrBeatRepeat::print (std::ostream& os) const
 {
   os <<
     "[BeatRepeat" <<
@@ -1233,7 +1231,7 @@ void msrBeatRepeat::print (ostream& os) const
       "replica measure",
       "replicas measures") <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1243,11 +1241,11 @@ void msrBeatRepeat::print (ostream& os) const
     const int fieldWidth = 36;
 
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentBeatRepeatBuildPhaseKind" << " : " <<
       msrBeatRepeatBuildPhaseKindAsString (
         fCurrentBeatRepeatBuildPhaseKind) <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1255,7 +1253,7 @@ void msrBeatRepeat::print (ostream& os) const
   if (! fBeatRepeatPattern) {
     os <<
       "measures repeat pattern: [NONE]" <<
-      endl;
+      std::endl;
   }
 
   else {
@@ -1267,7 +1265,7 @@ void msrBeatRepeat::print (ostream& os) const
   if (! fBeatRepeatReplicas) {
     os <<
       "measures repeat replicas: [NONE]" <<
-      endl;
+      std::endl;
   }
 
   else {
@@ -1277,21 +1275,21 @@ void msrBeatRepeat::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrBeatRepeat::printShort (ostream& os) const
+void msrBeatRepeat::printShort (std::ostream& os) const
 {
   print (os);
 }
 
-ostream& operator << (ostream& os, const S_msrBeatRepeat& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBeatRepeat& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

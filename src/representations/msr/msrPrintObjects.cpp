@@ -25,7 +25,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 msrPrintObjectKind msrPrintObjectKindFromString (
   int           inputLineNumber,
-  const string& printObjectString)
+  const std::string& printObjectString)
 {
   msrPrintObjectKind
     result =
@@ -34,7 +34,7 @@ msrPrintObjectKind msrPrintObjectKindFromString (
 //   gLogStream << // JMI TEST JMI v0.9.65
 //     "printObjectString = " <<
 //     printObjectString <<
-//     endl;
+//     std::endl;
 
   if      (printObjectString == "yes")
     result = msrPrintObjectKind::kPrintObjectYes;
@@ -42,7 +42,7 @@ msrPrintObjectKind msrPrintObjectKindFromString (
     result = msrPrintObjectKind::kPrintObjectNo;
   else {
     if (printObjectString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "printObject \"" << printObjectString <<
@@ -59,10 +59,10 @@ msrPrintObjectKind msrPrintObjectKindFromString (
   return result;
 }
 
-string msrPrintObjectKindAsString (
+std::string msrPrintObjectKindAsString (
   msrPrintObjectKind printObjectKind)
 {
-  string result;
+  std::string result;
 
   switch (printObjectKind) {
     case msrPrintObjectKind::kPrintObjectNone:
@@ -79,7 +79,7 @@ string msrPrintObjectKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrPrintObjectKind& elt)
+std::ostream& operator << (std::ostream& os, const msrPrintObjectKind& elt)
 {
   os << msrPrintObjectKindAsString (elt);
   return os;

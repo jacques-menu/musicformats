@@ -25,8 +25,6 @@
 #include "msrWae.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -40,7 +38,7 @@ Rational::Rational (
   mfAssert (
     __FILE__, __LINE__,
     denom > 0,
-    "denom '" + to_string (denom) + "' is not positive");
+    "denom '" + std::to_string (denom) + "' is not positive");
 
   fNumerator = num;
   fDenominator = denom;
@@ -54,17 +52,17 @@ Rational::Rational(const Rational& pos)
   fDenominator = pos.fDenominator;
 }
 
-Rational::Rational (const string &theString)
+Rational::Rational (const std::string &theString)
 {
   // decipher theString
-  string regularExpression (
+  std::string regularExpression (
     "([-|+]?[[:digit:]]+)"  // numerator
     "/"
     "([[:digit:]]+)"        // denominator
     );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -73,7 +71,7 @@ Rational::Rational (const string &theString)
   if (smSize == 3) {
     // found a well-formed specification,
     // need to check its contents
-    string
+    std::string
       numerator   = sm [1],
       denominator = sm [2];
 
@@ -82,20 +80,20 @@ Rational::Rational (const string &theString)
       gLogStream <<
         "--> numerator = \"" << numerator << "\", " <<
         "--> denominator = \"" << denominator << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
     // extract the numerator
     {
-      stringstream s;
+      std::stringstream s;
       s << numerator;
       s >> fNumerator;
     }
 
     // extract the denominator
     {
-      stringstream s;
+      std::stringstream s;
       s << denominator;
       s >> fDenominator;
 
@@ -108,10 +106,10 @@ Rational::Rational (const string &theString)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
-      "Rational string '" << theString <<
+      "Rational std::string '" << theString <<
       "' is ill-formed";
 
     msrError (
@@ -353,16 +351,16 @@ float Rational::toFloat () const
     (fDenominator != 0) ? ((float)fNumerator/(float)fDenominator) : 0;
 }
 
-string Rational::toString () const
+std::string Rational::toString () const
 {
-  ostringstream res;
+  std::ostringstream res;
 
   res << fNumerator << '/' << fDenominator;
 
   return res.str ();
 }
 
-Rational::operator string () const
+Rational::operator std::string () const
 {
   return toString ();
 }
@@ -381,30 +379,30 @@ Rational::operator int () const
   return ((int) floor (x + 0.5f));
 }
 
-string Rational::asString () const
+std::string Rational::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s << '[' << fNumerator << '/' << fDenominator << ']';
 
   return s.str ();
 }
 
-string Rational::asFractionString () const
+std::string Rational::asFractionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s << fNumerator << '/' << fDenominator;
 
   return s.str ();
 }
 
-void Rational::print (ostream& os) const
+void Rational::print (std::ostream& os) const
 {
   os << "[Rational " << fNumerator << '/' << fDenominator << ']';
 }
 
-ostream& operator << (ostream& os, const Rational& pos)
+std::ostream& operator << (std::ostream& os, const Rational& pos)
 {
   pos.print (os);
   return os;
@@ -413,16 +411,16 @@ ostream& operator << (ostream& os, const Rational& pos)
 void testRational ()
 {
   Rational rat1 ("33/55");
-  cout << "rat1: " << rat1 << endl;
+  std::cout << "rat1: " << rat1 << std::endl;
 
   Rational rat2 (-1, 4);
-  cout << "rat2: " << rat2 << endl;
+  std::cout << "rat2: " << rat2 << std::endl;
 
   Rational rat3 (3, 8);
-  cout << "rat3: " << rat3 << endl;
+  std::cout << "rat3: " << rat3 << std::endl;
 
   Rational res1 = rat2 - rat3;
-  cout << "res1: " << res1 << endl;
+  std::cout << "res1: " << res1 << std::endl;
 }
 
 

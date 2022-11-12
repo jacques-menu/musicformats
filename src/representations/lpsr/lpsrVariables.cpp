@@ -18,15 +18,13 @@
 #include "lpsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_lpsrVariableUseCommand lpsrVariableUseCommand::create (
   int           inputLineNumber,
-  const string& variableName)
+  const std::string& variableName)
 {
   lpsrVariableUseCommand* o =
     new lpsrVariableUseCommand (
@@ -37,7 +35,7 @@ S_lpsrVariableUseCommand lpsrVariableUseCommand::create (
 
 lpsrVariableUseCommand::lpsrVariableUseCommand (
   int           inputLineNumber,
-  const string& variableName)
+  const std::string& variableName)
     : lpsrElement (inputLineNumber)
 {
   fVariableName = variableName;
@@ -52,7 +50,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrVariableUseCommand::acceptIn()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -65,7 +63,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrVariableUseCommand::visitStart()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -78,7 +76,7 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrVariableUseCommand::acceptOut()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -91,7 +89,7 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrVariableUseCommand::visitEnd()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -101,15 +99,15 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
 void lpsrVariableUseCommand::browseData (basevisitor* v)
 {}
 
-void lpsrVariableUseCommand::print (ostream& os) const
+void lpsrVariableUseCommand::print (std::ostream& os) const
 {
-  os << "VariableUseCommand" << endl;
+  os << "VariableUseCommand" << std::endl;
   ++gIndenter;
-  os << fVariableName << endl;
+  os << fVariableName << std::endl;
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrVariableUseCommand& nstf)
+std::ostream& operator << (std::ostream& os, const S_lpsrVariableUseCommand& nstf)
 {
   nstf->print (os);
   return os;

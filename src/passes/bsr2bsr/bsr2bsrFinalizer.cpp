@@ -20,8 +20,6 @@
 #include "bsrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -60,7 +58,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrScore& elt)
     gLogStream <<
       "% --> Start visiting bsrScore" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -78,7 +76,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrScore& elt)
     gLogStream <<
       "% --> End visiting bsrScore" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -91,7 +89,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrSpaces& elt)
     gLogStream <<
       "% --> Start visiting bsrSpaces" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 /* JMI
@@ -107,7 +105,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrSpaces& elt)
     gLogStream <<
       "% --> End visiting bsrSpaces" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -120,7 +118,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrBarLine& elt)
     gLogStream <<
       "% --> Start visiting bsrBarLine" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -136,7 +134,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotes& elt)
     gLogStream <<
       "% --> Start visiting bsrTranscriptionNotes" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -148,7 +146,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotes& elt)
     gLogStream <<
       "% --> End visiting bsrTranscriptionNotes" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -161,7 +159,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotesElement& elt)
     gLogStream <<
       "% --> Start visiting bsrTranscriptionNotesElement" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -178,7 +176,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotesElement& elt)
     gLogStream <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -193,7 +191,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPage& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -212,7 +210,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPage& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -227,7 +225,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPageHeading& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -248,7 +246,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPageHeading& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -265,7 +263,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMusicHeading& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -286,7 +284,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMusicHeading& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -303,7 +301,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrFootNotes& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -324,7 +322,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrFootNotes& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -341,7 +339,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLine& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -360,7 +358,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLine& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -375,7 +373,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLineContents& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -396,7 +394,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLineContents& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -411,7 +409,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -431,7 +429,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMeasure& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -446,7 +444,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNumber& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -463,7 +461,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNumber& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -478,7 +476,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrWords& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -495,7 +493,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrWords& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -510,7 +508,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrClef& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -527,7 +525,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrClef& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -542,7 +540,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrKey& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -565,7 +563,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrKey& elt)
       elt->asString () <<
       "'"  <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -579,7 +577,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTimeSignature& elt)
       "% --> Start visiting bsrTimeSignature " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -601,7 +599,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTimeSignature& elt)
       "% --> End visiting bsrTimeSignature " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -615,7 +613,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTempo& elt)
       "% --> Start visiting bsrTempo " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -639,7 +637,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTempo& elt)
       "% --> End visiting bsrTempo " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -653,7 +651,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNote& elt)
       "% --> Start visiting bsrNote " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -669,7 +667,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNote& elt)
       "% --> End visiting bsrNote " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }

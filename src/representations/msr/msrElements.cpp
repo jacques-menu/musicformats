@@ -24,8 +24,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -44,7 +42,7 @@ void msrElement::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrElement::msrElement ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrElement>*
@@ -55,7 +53,7 @@ void msrElement::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -66,7 +64,7 @@ void msrElement::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrElement>*
@@ -77,7 +75,7 @@ void msrElement::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -97,46 +95,46 @@ void msrElement::browseDataAlongPathToVoice (
   browseData (v);
 }
 
-string msrElement::asString () const
+std::string msrElement::asString () const
 {
   // this is overriden all in actual elements
   return "??? msrElement::asString () ???";
 }
 
-string msrElement::asShortString () const
+std::string msrElement::asShortString () const
 {
   // this can be overriden in actual elements
   return asString ();
 }
 
-string msrElement::asShortStringForMeasuresSlices () const
+std::string msrElement::asShortStringForMeasuresSlices () const
 {
   // this can be overriden in actual elements
   return asShortString ();
 }
 
-void msrElement::print (ostream& os) const
+void msrElement::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-void msrElement::printShort (ostream& os) const
-{
-  print (os);
-}
-
-void msrElement::printSummary (ostream& os) const
+void msrElement::printShort (std::ostream& os) const
 {
   print (os);
 }
 
-ostream& operator << (ostream& os, const S_msrElement& elt)
+void msrElement::printSummary (std::ostream& os) const
+{
+  print (os);
+}
+
+std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

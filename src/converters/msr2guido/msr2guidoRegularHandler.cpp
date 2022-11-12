@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
@@ -28,15 +28,13 @@
 #include "msr2guidoRegularHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msr2guidoRegularHandler msr2guidoRegularHandler::create (
-  const string&     serviceName,
-  const string&     handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   S_msr2guidoInsiderHandler
                     insiderOahHandler)
 {
@@ -52,8 +50,8 @@ S_msr2guidoRegularHandler msr2guidoRegularHandler::create (
 }
 
 msr2guidoRegularHandler::msr2guidoRegularHandler (
-  const string&     serviceName,
-  const string&     handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   S_msr2guidoInsiderHandler
                     insiderOahHandler)
   : oahRegularHandler (
@@ -75,13 +73,13 @@ msr2guidoRegularHandler::msr2guidoRegularHandler (
     "msr2guidoRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   gLogStream <<
     "===> printHelp():" <<
-    endl;
+    std::endl;
   this->printHelp (gOutputStream); // JMI
 
   --gIndenter;
@@ -100,7 +98,7 @@ void msr2guidoRegularHandler::createRegularHandlerGroups ()
       "Creating the regular handler groups for \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -160,7 +158,7 @@ void msr2guidoRegularHandler::createRegularHandlerGroups ()
       "All the regular handler groups for \"" <<
       fHandlerHeader <<
       "\" have been created" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1192,7 +1190,7 @@ void msr2guidoRegularHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1200,33 +1198,33 @@ void msr2guidoRegularHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-void msr2guidoRegularHandler::print (ostream& os) const
+void msr2guidoRegularHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "msr2guidoRegularHandler '" << fHandlerHeader << "':" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -1234,7 +1232,7 @@ void msr2guidoRegularHandler::print (ostream& os) const
       // print the options group
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -1242,16 +1240,16 @@ void msr2guidoRegularHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msr2guidoRegularHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2guidoRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

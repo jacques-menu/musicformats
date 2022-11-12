@@ -48,7 +48,7 @@ void msrWords::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrWords::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrWords>*
@@ -59,7 +59,7 @@ void msrWords::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrWords::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -170,7 +170,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
     gLogStream <<
       "--> Start visiting S_millimeters" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -184,7 +184,7 @@ void mxsr2msrTranslator::visitStart ( S_tenths& elt )
     gLogStream <<
       "--> Start visiting S_tenths" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -201,7 +201,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
     gLogStream <<
       "--> End visiting S_scaling" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -218,7 +218,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
     gLogStream <<
       "There are " << fCurrentTenths <<
       " tenths for " <<  fCurrentMillimeters <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -305,7 +305,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               ) {
                 gLogStream <<
                   "% ==> end visiting multiple full-bar rests is ignored" <<
-                  endl;
+                  std::endl;
               }
 #endif
 
@@ -313,7 +313,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
                 gLogStream <<
                   "% ==> returning from visitEnd (S_msrNote&)" <<
-                  endl;
+                  std::endl;
               }
 #endif
 
@@ -331,7 +331,7 @@ lpsr2lilypondTranslator::lpsr2lilypondTranslator (
   S_lpsrScore     lpsrScore,
   S_msrOahGroup&  msrOpts,
   S_lpsrOahGroup& lpsrOpts,
-  ostream&        lilypondCodeStream)
+  std::ostream&        lilypondCodeStream)
   : fLilypondCodeStream (
       lilypondCodeStream)
 {
@@ -382,7 +382,7 @@ void msrNote::browseData (basevisitor* v)
         ) {
           gLogStream <<
             "% ==> visiting grace notes groups before is inhibited" <<
-            endl;
+            std::endl;
         }
 #endif
       }
@@ -409,11 +409,11 @@ void msrStaff::browseData (basevisitor* v)
       // is this voice name in the ignore voices set?
       Bool ignoreVoice (false);
 
-      string voiceName =
+      std::string voiceName =
         voice->
           getVoiceName ();
 
-      const set<string>&
+      const std::set<std::string>&
         ignoreMsrVoicesSet =
           gGlobalMsr2msrOahGroup->
             getIgnoreMsrVoicesSet ();
@@ -434,7 +434,7 @@ void msrStaff::browseData (basevisitor* v)
             "Ignoring voice \"" <<
             voiceName <<
             "\"" <<
-            endl;
+            std::endl;
         }
 #endif
       }
@@ -591,11 +591,11 @@ void mxsr2msrTranslator::visitEnd ( S_system_layout& elt )
 
 In more complex cases, the visiting order leads to have several on-going elements simultaneously. This is the case with \class{msrTuplet}, which can be nested.
 
-They are handled in \mxsrToMsr{mxsr2msrTranslator} and \lpsrToLilypondBoth{lpsr2lilypondTranslator}, for example, using a stack to keep track of them.
+They are handled in \mxsrToMsr{mxsr2msrTranslator} and \lpsrToLilypondBoth{lpsr2lilypondTranslator}, for example, using a std::stack to keep track of them.
 
 \mf\ never uses C++ STL stacks, because they cannot be iterated over:
 \begin{lstlisting}[language=CPlusPlus]
-    list<S_msrTuplet>         fOnGoingTupletsStack;
+    std::list<S_msrTuplet>         fOnGoingTupletsStack;
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
@@ -620,7 +620,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
 	// ... ... ...
 
-  // push the tuplet on the tuplets stack
+  // push the tuplet on the tuplets std::stack
   fOnGoingTupletsStack (elt);
 
 	// ... ... ...
@@ -630,7 +630,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 {
 	// ... ... ...
 
-  // pop the tuplet from the tuplets stack
+  // pop the tuplet from the tuplets std::stack
   fOnGoingTupletsStack ();
 
 	// ... ... ...
@@ -656,7 +656,7 @@ void msrPart::appendStaffDetailsToPart (
 
   // append staff details to registered staves
   for (
-    map<int, S_msrStaff>::const_iterator i =
+    std::map<int, S_msrStaff>::const_iterator i =
       getPartStaveNumbersToStavesMap.begin ();
     i != getPartStaveNumbersToStavesMap.end ();
     ++i

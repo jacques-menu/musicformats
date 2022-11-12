@@ -103,7 +103,7 @@ NAME
        man - format and display the on-line manual pages
 
 SYNOPSIS
-       man [-acdfFhkKtwW] [--path] [-m system] [-p string] [-C config_file] [-M pathlist] [-P pager] [-B browser] [-H
+       man [-acdfFhkKtwW] [--path] [-m system] [-p std::string] [-C config_file] [-M pathlist] [-P pager] [-B browser] [-H
        htmlpager] [-S section_list] [section] name ...
 
 DESCRIPTION
@@ -166,7 +166,7 @@ Shell commands are submitted as a sequence of words separated by spaces. If a wo
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly Nice file.xml
 Several input file names supplied, only one can be used
-The arguments vector contains 2 elements:
+The arguments std::vector contains 2 elements:
    0: "Nice"
    1: "file.xml"
 
@@ -182,11 +182,11 @@ can't open file Nice file.xml
 Note that if a quote or double quote is part of word, the word should be inclosed by the other such:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -find "tuplet's"
-0 occurrence of string "tuplet's" has been found
+0 occurrence of std::string "tuplet's" has been found
 
 jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > 
 jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -find 'tuplet"s'
-0 occurrence of string "tuplet"s" has been found
+0 occurrence of std::string "tuplet"s" has been found
 \end{lstlisting}
 
 A shell \MainIt{variable} is a name for a piece of text, called its \MainIt{value}, that can be used instead of that text in commands. The value of the variable can be seen in the terminal with the \code{echo} command:
@@ -202,7 +202,7 @@ Variables can be used surrounded by curly brackets, too:
 jacquesmenu@macmini: ~/musicformats-git-dev/documentation > echo ${DOC_DIR}
 documentation
 \end{lstlisting}
-This notation provides further possibilities such as string replacement, which are out of the scope of this document.
+This notation provides further possibilities such as std::string replacement, which are out of the scope of this document.
 
 Using variables is interesting when there are several uses of its value: changing the value at one place causing the new value to be used at every such use:
 \begin{lstlisting}[language=Terminal]

@@ -17,14 +17,12 @@
 #include "mfSystemInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 EXP int mfExecuteCommand (
-  const string& command,
+  const std::string& command,
   Bool          doTrace)
 {
   int result = 0;
@@ -32,13 +30,13 @@ EXP int mfExecuteCommand (
   if (doTrace) {
     gLogStream <<
       "Executing command:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       command <<
-        endl;
+        std::endl;
 
     --gIndenter;
   }
@@ -95,7 +93,7 @@ EXP int mfExecuteCommand (
 // //       ", failed to execute command [" <<
 // //       command <<
 // //       " - quitting." <<
-// //       endl;
+// //       std::endl;
 // //
 // //     result = pclose (commandOutputStream);
 // //   }

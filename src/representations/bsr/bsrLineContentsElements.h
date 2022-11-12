@@ -74,13 +74,13 @@ class EXP bsrLineContentsElement : public bsrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asShortString () const override;
+    std::string           asShortString () const override;
 
-    virtual string        asDebugString () const = 0;
+    virtual std::string        asDebugString () const = 0;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -90,7 +90,7 @@ class EXP bsrLineContentsElement : public bsrElement
     int                   fSpacesBefore;
 };
 typedef SMARTP<bsrLineContentsElement> S_bsrLineContentsElement;
-EXP ostream& operator << (ostream& os, const S_bsrLineContentsElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrLineContentsElement& elt);
 
 
 }

@@ -15,7 +15,7 @@ For example, \method{msrMeasure}{finalizeMeasure} delegates part of the job to m
 void msrMeasure::finalizeMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  string                       context)
+  std::string                  context)
 {
 	// ... ... ...
 
@@ -138,7 +138,7 @@ void msrPart::finalizePartAndAllItsMeasures (
       "Finalizing part clone " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -148,12 +148,12 @@ void msrPart::finalizePartAndAllItsMeasures (
       "Finalizing all the measures of part \"" <<
       getPartCombinedName () <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   for (
-    list<S_msrVoice>::const_iterator i = fPartAllVoicesList.begin ();
+    std::list<S_msrVoice>::const_iterator i = fPartAllVoicesList.begin ();
     i != fPartAllVoicesList.end ();
     ++i
   ) {
@@ -186,19 +186,19 @@ void msrPart::finalizePart (
       "Finalizing part " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   ++gIndenter;
 
   if (! getPartStaveNumbersToStavesMap.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Part " <<
       getPartCombinedName () <<
-      " appears in the part list, but doesn't contain any stave";
+      " appears in the part std::list, but doesn't contain any stave";
 
     musicxmlWarning (
       gGlobalServiceRunData->getInputSourceName (),
@@ -213,7 +213,7 @@ void msrPart::finalizePart (
 
     // finalize the staves
     for (
-      map<int, S_msrStaff>::const_iterator i =
+      std::map<int, S_msrStaff>::const_iterator i =
       getPartStaveNumbersToStavesMap.begin ();
       i != getPartStaveNumbersToStavesMap.end ();
       ++i
@@ -253,7 +253,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       "Finalizing staff \"" <<
       getStaffName () << "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -266,12 +266,12 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       "Finalizing the voices in staff \"" <<
       getStaffName () << "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   for (
-    map<int, S_msrVoice>::const_iterator i =
+    std::map<int, S_msrVoice>::const_iterator i =
       fStaffVoiceNumbersToAllVoicesMap.begin ();
     i != fStaffVoiceNumbersToAllVoicesMap.end ();
     ++i
@@ -297,7 +297,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 \section{Finalizing voices}
 % -------------------------------------------------------------------------
 
-\Method{msrVoice}{finalizeVoice} handles pending repeats if any and collects the voice measures into a flat list. It does not, however, \cascade\ to finalizing the voice repeats and measures.
+\Method{msrVoice}{finalizeVoice} handles pending repeats if any and collects the voice measures into a flat std::list. It does not, however, \cascade\ to finalizing the voice repeats and measures.
 \begin{lstlisting}[language=CPlusPlus]
 void msrVoice::finalizeVoice (
   int inputLineNumber)
@@ -305,7 +305,7 @@ void msrVoice::finalizeVoice (
 	// ... ... ...
 
   if (fVoiceHasBeenFinalized) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Attempting to finalize  voice \"" <<
@@ -349,13 +349,13 @@ void msrVoice::finalizeVoice (
       &&
     fVoiceLastSegment->getSegmentElementsList ().size () == 0
   ) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Voice \"" <<
       getVoiceName () <<
       "\" is totally empty, no contents ever specified for it" <<
-      endl;
+      std::endl;
 
     musicxmlWarning (
       gGlobalServiceRunData->getInputSourceName (),
@@ -363,13 +363,13 @@ void msrVoice::finalizeVoice (
       s.str ());
   }
 
-  // are there pending repeats in the voice repeats stack???
+  // are there pending repeats in the voice repeats std::stack???
   unsigned int voicePendingRepeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
 	// ... ... ...
 
-  // collect the voice measures into the flat list
+  // collect the voice measures into the flat std::list
   collectVoiceMeasuresIntoFlatList (
     inputLineNumber);
 
@@ -394,10 +394,10 @@ void msrVoice::finalizeVoice (
 void msrMeasure::finalizeMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  string                       context)
+  std::string                  context)
 {
   if (fMeasureHasBeenFinalized) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Attempting to finalize measure " <<
@@ -463,7 +463,7 @@ void msrMeasure::finalizeMeasure (
 
     // assign measure' elements position in measure
     for (
-      list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
+      std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
       i != fMeasureElementsList.end ();
       ++i
     ) {
@@ -491,7 +491,7 @@ void msrMeasure::finalizeMeasure (
 void msrMeasure::finalizeRegularMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  string                       context)
+  std::string                  context)
 {
   // fetch the regular voice
   S_msrVoice
@@ -513,14 +513,14 @@ void msrMeasure::finalizeRegularMeasure (
   if (false) { // JMI
     gLogStream <<
       "---> regularPart: " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream <<
       regularPart <<
-      endl;
+      std::endl;
     --gIndenter;
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 
   rational
@@ -542,7 +542,7 @@ void msrMeasure::finalizeRegularMeasure (
       ", measureWholeNotesDurationFromPartMeasuresVector: " <<
       measureWholeNotesDurationFromPartMeasuresVector <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -624,7 +624,7 @@ void msrMeasure::finalizeRegularMeasure (
           "' in voice \"" <<
           voice->getVoiceName () <<
           "\", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -654,7 +654,7 @@ void msrMeasure::finalizeRegularMeasure (
 void msrMeasure::finalizeHarmonyMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  string                       context)
+  std::string                  context)
 {
   // fetch the harmonies voice
   S_msrVoice
@@ -684,7 +684,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       harmoniesVoice->getVoiceName () <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -711,7 +711,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       fMeasureOrdinalNumberInVoice <<
       ", harmoniesPartNumberOfMeasures = " <<
       harmoniesPartNumberOfMeasures <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -758,7 +758,7 @@ void msrMeasure::finalizeHarmonyMeasure (
 void msrMeasure::finalizeFiguredBassMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  string                       context)
+  std::string                  context)
 {
   // fetch the figured bass voice
   S_msrVoice
@@ -788,7 +788,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       figuredBassVoice->getVoiceName () <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -815,7 +815,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       fMeasureOrdinalNumberInVoice <<
       ", figuredBassPartNumberOfMeasures = " <<
       figuredBassPartNumberOfMeasures <<
-      endl;
+      std::endl;
   }
 #endif
 

@@ -32,8 +32,8 @@ EXP S_bsrScore translateMsrToBsr (
   S_msrScore    originalMsrScore,
   S_msrOahGroup msrOpts,
   S_bsrOahGroup bsrOpts,
-  const string& passNumber,
-  const string& passDescription);
+  const std::string& passNumber,
+  const std::string& passDescription);
 
 
 }

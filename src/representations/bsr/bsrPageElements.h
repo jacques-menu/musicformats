@@ -76,11 +76,11 @@ class EXP bsrPageElement : public bsrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asShortString () const override;
+    std::string           asShortString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -95,7 +95,7 @@ class EXP bsrPageElement : public bsrElement
  // JMI   int                   fSpacesAfter;
 };
 typedef SMARTP<bsrPageElement> S_bsrPageElement;
-EXP ostream& operator << (ostream& os, const S_bsrPageElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrPageElement& elt);
 
 
 }

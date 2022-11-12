@@ -21,8 +21,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -53,7 +51,7 @@ msrSingleTremolo::msrSingleTremolo (
 msrSingleTremolo::~msrSingleTremolo ()
 {}
 
-string msrSingleTremolo::singleTremoloPlacementKindAsString () const
+std::string msrSingleTremolo::singleTremoloPlacementKindAsString () const
 {
   return
     msrPlacementKindAsString (
@@ -65,7 +63,7 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSingleTremolo::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSingleTremolo>*
@@ -76,7 +74,7 @@ void msrSingleTremolo::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSingleTremolo::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -87,7 +85,7 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSingleTremolo::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSingleTremolo>*
@@ -98,7 +96,7 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSingleTremolo::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -107,9 +105,9 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
 void msrSingleTremolo::browseData (basevisitor* v)
 {}
 
-string msrSingleTremolo::asString () const
+std::string msrSingleTremolo::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "SingleTremolo" <<
@@ -120,18 +118,18 @@ string msrSingleTremolo::asString () const
   return s.str ();
 }
 
-void msrSingleTremolo::print (ostream& os) const
+void msrSingleTremolo::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSingleTremolo& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSingleTremolo& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

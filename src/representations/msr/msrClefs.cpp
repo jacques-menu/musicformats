@@ -29,23 +29,21 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // clefs
 //______________________________________________________________________________
-map<string, msrClefKind>
+std::map<std::string, msrClefKind>
   gGlobalClefKindsMap;
 
-list<string>
+std::list<std::string>
   gClefKindsNamesList;
 
-string msrClefKindAsString (
+std::string msrClefKindAsString (
   msrClefKind clefKind)
 {
-  string result;
+  std::string result;
 
   switch (clefKind) {
     case msrClefKind::kClef_NO_:
@@ -125,7 +123,7 @@ string msrClefKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrClefKind& elt)
+std::ostream& operator << (std::ostream& os, const msrClefKind& elt)
 {
   os << msrClefKindAsString (elt);
   return os;
@@ -133,7 +131,7 @@ ostream& operator << (ostream& os, const msrClefKind& elt)
 
 msrClefKind msrClefKindFromString (
   int           inputLineNumber,
-  const string& clefString)
+  const std::string& clefString)
 {
   msrClefKind result = msrClefKind::kClef_NO_;
 
@@ -184,10 +182,10 @@ msrClefKind msrClefKindFromString (
   else if (clefString == "jianpu")
     result = msrClefKind::kClefJianpu;
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
-      "clef string \"" <<
+      "clef std::string \"" <<
       clefString <<
       "\" is unknown" <<
       ", line = " << inputLineNumber;
@@ -261,9 +259,9 @@ void initializeClefKinds ()
   }
 }
 
-string existingClefKinds (size_t namesListMaxLength)
+std::string existingClefKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t clefKindsMapSize =
     gGlobalClefKindsMap.size ();
@@ -276,18 +274,18 @@ string existingClefKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msrClefKind>::const_iterator i =
+      std::map<std::string, msrClefKind>::const_iterator i =
         gGlobalClefKindsMap.begin ();
       i != gGlobalClefKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -308,9 +306,9 @@ string existingClefKinds (size_t namesListMaxLength)
   return s.str ();
 }
 
-string existingClefKindsNames (size_t namesListMaxLength)
+std::string existingClefKindsNames (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t clefKindsNamesMapSize =
     gClefKindsNamesList.size ();
@@ -323,18 +321,18 @@ string existingClefKindsNames (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      list<string>::const_iterator i =
+      std::list<std::string>::const_iterator i =
         gClefKindsNamesList.begin ();
       i != gClefKindsNamesList.end ();
       ++i
     ) {
-      string theString = (*i);
+      std::string theString = (*i);
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -377,7 +375,7 @@ msrClef::msrClef (
   S_msrMeasure upLinkToMeasure,
   msrClefKind  clefKind,
   int          clefStaffNumber)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -392,7 +390,7 @@ msrClef::~msrClef ()
 S_msrClef msrClef::createClefFromString (
   int           inputLineNumber,
   S_msrMeasure  upLinkToMeasure,
-  const string& clefString,
+  const std::string& clefString,
   int           clefLineNumber)
 {
   /*
@@ -404,14 +402,14 @@ S_msrClef msrClef::createClefFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating clef from string \"" <<
+      "Creating clef from std::string \"" <<
       clefString <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string regularExpression (
+  std::string regularExpression (
     "[[:space:]]*"
     "([[:alpha:]]+)" // clefName
     "[[:space:]]*"
@@ -422,12 +420,12 @@ S_msrClef msrClef::createClefFromString (
     gLogStream <<
       "regularExpression = " <<
       regularExpression <<
-      endl;
+      std::endl;
   }
 #endif
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (clefString, sm, e);
 
@@ -437,19 +435,19 @@ S_msrClef msrClef::createClefFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for clef string \"" << clefString <<
-      "\" with regex \"" << regularExpression <<
+      " for clef std::string \"" << clefString <<
+      "\" with std::regex \"" << regularExpression <<
       "\":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
         i << ": " << "\"" << sm [i] << "\"" <<
-        endl;
+        std::endl;
     } // for
-    gLogStream << endl;
+    gLogStream << std::endl;
 
     --gIndenter;
   }
@@ -458,7 +456,7 @@ S_msrClef msrClef::createClefFromString (
   //  Handles clefString à la LilyPond, such as c [major] or bes minor
 
   if (smSize != 2) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "clefString \"" << clefString <<
@@ -471,7 +469,7 @@ S_msrClef msrClef::createClefFromString (
       s.str ());
   }
 
-  string clefName = sm [1];
+  std::string clefName = sm [1];
 
   // compute the clefKind from the clefName
   msrClefKind
@@ -486,7 +484,7 @@ S_msrClef msrClef::createClefFromString (
       "clefName = \"" <<
       beatsNumber <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -543,7 +541,7 @@ void msrClef::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrClef::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrClef>*
@@ -554,7 +552,7 @@ void msrClef::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrClef::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -565,7 +563,7 @@ void msrClef::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrClef::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrClef>*
@@ -576,7 +574,7 @@ void msrClef::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrClef::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -585,9 +583,9 @@ void msrClef::acceptOut (basevisitor* v)
 void msrClef::browseData (basevisitor* v)
 {}
 
-string msrClef::asString () const
+std::string msrClef::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Clef" <<
@@ -599,9 +597,9 @@ string msrClef::asString () const
   return s.str ();
 }
 
-string msrClef::asShortStringForMeasuresSlices () const
+std::string msrClef::asShortStringForMeasuresSlices () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '[' <<
@@ -613,18 +611,18 @@ string msrClef::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrClef::print (ostream& os) const
+void msrClef::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrClef& elt)
+std::ostream& operator << (std::ostream& os, const S_msrClef& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

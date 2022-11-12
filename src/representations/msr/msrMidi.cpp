@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -22,15 +22,13 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msrMidiTempo msrMidiTempo::create (
   int           inputLineNumber,
-  const string& midiTempoDuration,
+  const std::string& midiTempoDuration,
   int           midiTempoPerSecond)
 {
   msrMidiTempo* o =
@@ -44,7 +42,7 @@ S_msrMidiTempo msrMidiTempo::create (
 
 msrMidiTempo::msrMidiTempo (
   int           inputLineNumber,
-  const string& midiTempoDuration,
+  const std::string& midiTempoDuration,
   int           midiTempoPerSecond)
     : msrElement (inputLineNumber)
 {
@@ -79,7 +77,7 @@ void msrMidiTempo::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMidiTempo::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMidiTempo>*
@@ -90,7 +88,7 @@ void msrMidiTempo::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMidiTempo::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -101,7 +99,7 @@ void msrMidiTempo::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMidiTempo::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMidiTempo>*
@@ -112,7 +110,7 @@ void msrMidiTempo::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMidiTempo::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -121,9 +119,9 @@ void msrMidiTempo::acceptOut (basevisitor* v)
 void msrMidiTempo::browseData (basevisitor* v)
 {}
 
-string msrMidiTempo::asString () const
+std::string msrMidiTempo::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[MidiTempo" <<
@@ -135,34 +133,34 @@ string msrMidiTempo::asString () const
   return s.str ();
 }
 
-void msrMidiTempo::print (ostream& os) const
+void msrMidiTempo::print (std::ostream& os) const
 {
-  os << "[MidiTempo" << endl;
+  os << "[MidiTempo" << std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "midiTempoDuration" << " = " << fMidiTempoDuration <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "midiTempoPerSecond" << " = " << fMidiTempoPerSecond <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrMidiTempo& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMidiTempo& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

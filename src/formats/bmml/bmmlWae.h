@@ -17,8 +17,6 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,7 +24,7 @@ namespace MusicFormats
 class EXP bmmlException : public mfException
 {
   public:
-    bmmlException (string const& exceptionDescription) throw ()
+    bmmlException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };
@@ -35,7 +33,7 @@ typedef SMARTP<bmmlException> S_bmmlException;
 // class EXP bmmlInternalException: public mfException
 // {
 //   public:
-//     bmmlInternalException (string const& exceptionDescription) throw ()
+//     bmmlInternalException (std::string const& exceptionDescription) throw ()
 //       : mfException (exceptionDescription)
 //     {}
 // };
@@ -43,23 +41,23 @@ typedef SMARTP<bmmlException> S_bmmlException;
 
 //______________________________________________________________________________
 EXP void bmmlWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void bmmlError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void bmmlInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 
 }

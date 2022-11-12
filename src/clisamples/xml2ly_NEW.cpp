@@ -9,8 +9,6 @@
 #include "xml2lyInterface.h"
 
 
-using namespace std;
-
 using namespace MusicFormats;
 
 //_______________________________________________________________________________

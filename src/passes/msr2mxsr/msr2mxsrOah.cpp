@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -30,8 +30,6 @@
 
 #include "oahEarlyOptions.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 
@@ -197,7 +195,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2mxsrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -210,7 +208,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2mxsrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -223,7 +221,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2mxsrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -236,7 +234,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2mxsrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -249,7 +247,7 @@ void msr2mxsrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2mxsrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -259,7 +257,7 @@ void msr2mxsrOahGroup::printMsr2mxsrOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The MusicXML options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -268,28 +266,28 @@ void msr2mxsrOahGroup::printMsr2mxsrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Book:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) <<
     "fWorkCreditTypeTitle" << " : " <<
     fWorkCreditTypeTitle <<
-    endl <<
-    setw (valueFieldWidth) <<
+    std::endl <<
+    std::setw (valueFieldWidth) <<
     "fWorkNumber" << " : " <<
     fWorkNumber <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) <<
+    std::setw (valueFieldWidth) <<
     "fMovementTitle" << " : " <<
     fMovementTitle <<
-    endl <<
-    setw (valueFieldWidth) <<
+    std::endl <<
+    std::setw (valueFieldWidth) <<
     "fMovementNumber" << " : " <<
     fMovementNumber <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -297,13 +295,13 @@ void msr2mxsrOahGroup::printMsr2mxsrOahValues (int valueFieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msr2mxsrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2mxsrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -316,7 +314,7 @@ S_msr2mxsrOahGroup createGlobalMsr2mxsrOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2mxsr OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

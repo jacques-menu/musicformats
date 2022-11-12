@@ -12,8 +12,6 @@
 #include "lpsr2lilypondComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -29,7 +27,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the lpsr2lilypond pass component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -44,7 +42,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -54,7 +52,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "November 23, 2021",
-          list<string> {
+          std::list<std::string> {
             "Added '-lilypond-dynamics-text-spanners-style, -dtss' option"
           }
       ));
@@ -64,7 +62,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "December 16, 2021",
-          list<string> {
+          std::list<std::string> {
             "Finalized harmonies duration generation",
             "Added kVoiceKindDynamics to enum class msrVoiceKind"
           }
@@ -75,7 +73,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.60"),
           "February 21, 2022",
-          list<string> {
+          std::list<std::string> {
             "Finalized paper options handling"
           }
       ));
@@ -85,7 +83,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.63"),
           "May 31, 2022",
-          list<string> {
+          std::list<std::string> {
             "Fixed an issue in octave shift handling",
             "Replace \\fermataMarkup by \\fermata in R* multiple full-bar rests",
             "Fixed bug in absolute and relative octaves generation"
@@ -97,7 +95,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.64"),
           "May 31, 2022",
-          list<string> {
+          std::list<std::string> {
             "Finalized the generation of LilyPond code for full-bar rests"
           }
       ));
@@ -107,7 +105,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.65"),
           "August 2, 2022",
-          list<string> {
+          std::list<std::string> {
             "Added support for '\"print-object=\"no\"' in notes",
             "Removed extraneous '(' in tempo beat units equivalence code generation"
           }

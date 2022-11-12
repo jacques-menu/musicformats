@@ -40,13 +40,13 @@ enum class msrDynamicKind {
   kDynamicN // niente
 };
 
-string msrDynamicKindAsString (
+std::string msrDynamicKindAsString (
   msrDynamicKind dynamicKind);
 
-ostream& operator << (ostream& os, const msrDynamicKind& elt);
+std::ostream& operator << (std::ostream& os, const msrDynamicKind& elt);
 
 msrDynamicKind dynamicFromString (
-  const string& theString);
+  const std::string& theString);
 
 //______________________________________________________________________________
 class EXP msrDynamic : public msrElement
@@ -66,7 +66,7 @@ class EXP msrDynamic : public msrElement
 
     static SMARTP<msrDynamic> createDynamicFromString (
                             int              inputLineNumber,
-                            const string&    dynamicsString,
+                            const std::string&    dynamicsString,
                             msrPlacementKind dynamicPlacementKind);
 
   protected:
@@ -112,7 +112,7 @@ class EXP msrDynamic : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -124,7 +124,7 @@ class EXP msrDynamic : public msrElement
     msrPlacementKind      fDynamicPlacementKind;
 };
 typedef SMARTP<msrDynamic> S_msrDynamic;
-EXP ostream& operator << (ostream& os, const S_msrDynamic& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrDynamic& elt);
 
 //______________________________________________________________________________
 class EXP msrOtherDynamic : public msrElement
@@ -136,7 +136,7 @@ class EXP msrOtherDynamic : public msrElement
 
     static SMARTP<msrOtherDynamic> create (
                             int              inputLineNumber,
-                            const string&    otherDynamicString,
+                            const std::string&    otherDynamicString,
                             msrPlacementKind otherDynamicPlacementKind);
 
   protected:
@@ -146,7 +146,7 @@ class EXP msrOtherDynamic : public msrElement
 
                           msrOtherDynamic (
                             int              inputLineNumber,
-                            const string&    otherDynamicString,
+                            const std::string&    otherDynamicString,
                             msrPlacementKind otherDynamicPlacementKind);
 
     virtual               ~msrOtherDynamic ();
@@ -156,7 +156,7 @@ class EXP msrOtherDynamic : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    string                getOtherDynamicsString () const
+    std::string           getOtherDynamicsString () const
                               { return fOtherDynamicsString; }
 
     msrPlacementKind      getOtherDynamicPlacementKind () const
@@ -182,31 +182,31 @@ class EXP msrOtherDynamic : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fOtherDynamicsString;
+    std::string           fOtherDynamicsString;
 
     msrPlacementKind      fOtherDynamicPlacementKind;
 };
 typedef SMARTP<msrOtherDynamic> S_msrOtherDynamic;
-EXP ostream& operator << (ostream& os, const S_msrOtherDynamic& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrOtherDynamic& elt);
 
 //______________________________________________________________________________
 enum class msrCrescDecrescKind {
   kCrescDecrescCrescendo, kCrescDecrescDecrescendo
 };
 
-string msrCrescDecrescKindAsString (
+std::string msrCrescDecrescKindAsString (
   msrCrescDecrescKind crescDecrescKind);
 
-ostream& operator << (ostream& os,const msrCrescDecrescKind& elt);
+std::ostream& operator << (std::ostream& os,const msrCrescDecrescKind& elt);
 
 //______________________________________________________________________________
 class EXP msrCrescDecresc : public msrElement
@@ -259,7 +259,7 @@ class EXP msrCrescDecresc : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -269,7 +269,7 @@ class EXP msrCrescDecresc : public msrElement
     msrCrescDecrescKind   fCrescDecrescKind;
 };
 typedef SMARTP<msrCrescDecresc> S_msrCrescDecresc;
-EXP ostream& operator << (ostream& os, const S_msrCrescDecresc& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrCrescDecresc& elt);
 
 //______________________________________________________________________________
 enum class msrWedgeKind {
@@ -277,19 +277,19 @@ enum class msrWedgeKind {
   kWedgeCrescendo, kWedgeDecrescendo, kWedgeStop
 };
 
-string msrWedgeKindAsString (
+std::string msrWedgeKindAsString (
   msrWedgeKind wedgeKind);
 
-ostream& operator << (ostream& os,const msrWedgeKind& elt);
+std::ostream& operator << (std::ostream& os,const msrWedgeKind& elt);
 
 enum class msrWedgeNienteKind {
   kWedgeNienteYes, kWedgeNienteNo
 };
 
-string msrWedgeNienteKindAsString (
+std::string msrWedgeNienteKindAsString (
   msrWedgeNienteKind wedgeNienteKind);
 
-ostream& operator << (ostream& os,const msrWedgeNienteKind& elt);
+std::ostream& operator << (std::ostream& os,const msrWedgeNienteKind& elt);
 
 //______________________________________________________________________________
 class EXP msrWedge : public msrElement
@@ -357,7 +357,7 @@ class EXP msrWedge : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -373,7 +373,7 @@ class EXP msrWedge : public msrElement
     msrPlacementKind      fWedgePlacementKind;
 };
 typedef SMARTP<msrWedge> S_msrWedge;
-EXP ostream& operator << (ostream& os, const S_msrWedge& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrWedge& elt);
 
 
 }

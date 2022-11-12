@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 
 #include "mfServiceRunData.h"
 
@@ -25,13 +25,13 @@ namespace MusicFormats
 // margins types
 //______________________________________________________________________________
 
-map<string, msrMarginTypeKind>
+std::map<std::string, msrMarginTypeKind>
   gGlobalMsrMarginTypeKindsMap;
 
-string msrMarginTypeKindAsString (
+std::string msrMarginTypeKindAsString (
   msrMarginTypeKind marginTypeKind)
 {
-  string result;
+  std::string result;
 
   // no CamelCase here, these strings are used in the command line options
 
@@ -50,7 +50,7 @@ string msrMarginTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrMarginTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrMarginTypeKind& elt)
 {
   os << msrMarginTypeKindAsString (elt);
   return os;
@@ -68,9 +68,9 @@ void initializeMsrMarginTypeKindsMap ()
   gGlobalMsrMarginTypeKindsMap ["both"] = msrMarginTypeKind::kMarginBoth;
 }
 
-string existingMsrMarginTypeKinds (size_t namesListMaxLength)
+std::string existingMsrMarginTypeKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t msrMarginTypeKindsMapSize =
     gGlobalMsrMarginTypeKindsMap.size ();
@@ -83,18 +83,18 @@ string existingMsrMarginTypeKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msrMarginTypeKind>::const_iterator i =
+      std::map<std::string, msrMarginTypeKind>::const_iterator i =
         gGlobalMsrMarginTypeKindsMap.begin ();
       i != gGlobalMsrMarginTypeKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -141,13 +141,13 @@ msrMargin::msrMargin (
 msrMargin::~msrMargin ()
 {}
 
-string msrMargin::asString () const
+std::string msrMargin::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Margin, " <<
-    setprecision (4) <<
+    std::setprecision (4) <<
     fMarginLength.asString () <<
     ' ' <<
     msrMarginTypeKindAsString (fMarginTypeKind) <<
@@ -156,19 +156,19 @@ string msrMargin::asString () const
   return s.str ();
 }
 
-void msrMargin::print (ostream& os) const
+void msrMargin::print (std::ostream& os) const
 {
   os <<
     asString ();
 };
 
-ostream& operator << (ostream& os, const S_msrMargin& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMargin& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -205,7 +205,7 @@ void msrMarginsGroup::setLeftMargin (
       val->getMarginTypeKind ();
 
   if (marginTypeKind != fMarginsGroupTypeKind) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "setting a " <<
@@ -233,7 +233,7 @@ void msrMarginsGroup::setRightMargin (
       val->getMarginTypeKind ();
 
   if (marginTypeKind != fMarginsGroupTypeKind) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "setting a " <<
@@ -261,7 +261,7 @@ void msrMarginsGroup::setTopMargin (
       val->getMarginTypeKind ();
 
   if (marginTypeKind != fMarginsGroupTypeKind) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "setting a " <<
@@ -289,7 +289,7 @@ void msrMarginsGroup::setBottomMargin (
       val->getMarginTypeKind ();
 
   if (marginTypeKind != fMarginsGroupTypeKind) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "setting a " <<
@@ -313,7 +313,7 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMarginsGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMarginsGroup>*
@@ -324,7 +324,7 @@ void msrMarginsGroup::acceptIn (basevisitor* v) {
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMarginsGroup::visitStart ()" <<
-             endl;
+             std::endl;
         p->visitStart (elem);
   }
 }
@@ -333,7 +333,7 @@ void msrMarginsGroup::acceptOut (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMarginsGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrMarginsGroup>*
@@ -344,7 +344,7 @@ void msrMarginsGroup::acceptOut (basevisitor* v) {
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMarginsGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         p->visitEnd (elem);
   }
 }
@@ -353,9 +353,9 @@ void msrMarginsGroup::browseData (basevisitor* v)
 {}
 */
 
-string msrMarginsGroup::asString () const
+std::string msrMarginsGroup::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[MarginsGroup, " <<
@@ -369,22 +369,22 @@ string msrMarginsGroup::asString () const
   return s.str ();
 }
 
-void msrMarginsGroup::print (ostream& os) const
+void msrMarginsGroup::print (std::ostream& os) const
 {
 
   os <<
     "MarginsGroup" <<
     ", marginsGroupTypeKind: " <<
     msrMarginTypeKindAsString (fMarginsGroupTypeKind) <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 13;
 
   ++gIndenter;
 
   // margins
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "leftMargin" << " : ";
     if (fLeftMargin) {
       os << fLeftMargin;
@@ -392,10 +392,10 @@ void msrMarginsGroup::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "rightMargin" << " : ";
     if (fRightMargin) {
       os << fRightMargin;
@@ -403,10 +403,10 @@ void msrMarginsGroup::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "topMargin" << " : ";
     if (fTopMargin) {
       os << fTopMargin;
@@ -414,10 +414,10 @@ void msrMarginsGroup::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "bottomMargin" << " : ";
     if (fBottomMargin) {
       os << fBottomMargin;
@@ -425,18 +425,18 @@ void msrMarginsGroup::print (ostream& os) const
     else {
       os << "[NONE]";
     }
-  os << endl;
+  os << std::endl;
 
   --gIndenter;
 };
 
-ostream& operator << (ostream& os, const S_msrMarginsGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMarginsGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

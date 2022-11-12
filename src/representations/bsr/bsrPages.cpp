@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -23,8 +23,6 @@
 
 #include "bsrBrowsers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -60,7 +58,7 @@ bsrPage::bsrPage (
       asString () <<
       "', line " <<
       fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -75,7 +73,7 @@ S_bsrPage bsrPage::createPageNewbornClone ()
     gLogStream <<
       "Creating a newborn clone of page " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -98,7 +96,7 @@ int bsrPage::fetchLineContentsNumber () const
   int result = 0;
 
   for (
-    list<S_bsrPageElement>::const_iterator i = fPageElementsList.begin ();
+    std::list<S_bsrPageElement>::const_iterator i = fPageElementsList.begin ();
     i != fPageElementsList.end ();
     ++i
   ) {
@@ -114,7 +112,7 @@ void bsrPage::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPage::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -127,7 +125,7 @@ void bsrPage::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPage::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -140,7 +138,7 @@ void bsrPage::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPage::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -153,7 +151,7 @@ void bsrPage::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPage::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -163,7 +161,7 @@ void bsrPage::acceptOut (basevisitor* v)
 void bsrPage::browseData (basevisitor* v)
 {
   for (
-    list<S_bsrPageElement>::const_iterator i = fPageElementsList.begin ();
+    std::list<S_bsrPageElement>::const_iterator i = fPageElementsList.begin ();
     i != fPageElementsList.end ();
     ++i ) {
     // browse the element
@@ -172,9 +170,9 @@ void bsrPage::browseData (basevisitor* v)
   } // for
 }
 
-string bsrPage::asString () const
+std::string bsrPage::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Page" <<
@@ -187,56 +185,56 @@ string bsrPage::asString () const
   return s.str ();
 }
 
-void bsrPage::print (ostream& os) const
+void bsrPage::print (std::ostream& os) const
 {
   os <<
     "Page" <<
     ", printPageNumber: " << fPrintPageNumber <<
     ", lineContentsNumber: " << fetchLineContentsNumber () <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // print the page numbers
   const int fieldWidth = 18;
 
-  os << left <<
+  os << std::left <<
   /* JMI
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "printPageNumber" << " : " << fPrintPageNumber <<
-    endl <<
+    std::endl <<
     */
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "braillePageNumber" << " : " << fBraillePageNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "linesPerPage" << " : " << fLinesPerPage <<
-    endl;
-  os << endl;
+    std::endl;
+  os << std::endl;
 
   // print the page elements if any
   size_t pageElementsListSize = fPageElementsList.size ();
 
   if (pageElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
-//      setw (fieldWidth) <<
+//      std::setw (fieldWidth) <<
       "PageElementsList" <<
     ", " <<
     mfSingularOrPlural (
       pageElementsListSize, "pageElement", "pageElements");
     if (pageElementsListSize) {
-      os << endl;
+      os << std::endl;
       ++gIndenter;
 
-      list<S_bsrPageElement>::const_iterator
+      std::list<S_bsrPageElement>::const_iterator
         iBegin = fPageElementsList.begin (),
         iEnd   = fPageElementsList.end (),
         i      = iBegin;
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        os << endl;
+        os << std::endl;
       } // for
 
       --gIndenter;
@@ -244,20 +242,20 @@ void bsrPage::print (ostream& os) const
     else {
       os <<
         " : " << "[EMPTY]" <<
-      endl;
+      std::endl;
     }
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrPage& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrPage& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

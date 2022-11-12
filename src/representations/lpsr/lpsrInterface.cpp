@@ -32,8 +32,6 @@
 
 #include "lpsrInterface.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
@@ -41,7 +39,7 @@ void displayLpsrScoreShort (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
   S_lpsrOahGroup    lpsrOpts,
-  const string&     passDescription)
+  const std::string&     passDescription)
 {
   // sanity check
   mfAssert (
@@ -52,23 +50,23 @@ void displayLpsrScoreShort (
   // start the clock
   clock_t startClock = clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
   gLogStream <<
     separator <<
-    endl <<
+    std::endl <<
     gTab <<
     "Pass (optional): " << passDescription << ", short version" <<
-    endl <<
+    std::endl <<
     separator <<
-    endl << endl;
+    std::endl << std::endl;
 
   theLpsrScore->printShort (gLogStream);
 
   gLogStream <<
     separator <<
-    endl << endl;
+    std::endl << std::endl;
 
   // register time spent
   clock_t endClock = clock ();
@@ -86,7 +84,7 @@ void displayLpsrScoreFull (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
   S_lpsrOahGroup    lpsrOpts,
-  const string&     passDescription)
+  const std::string&     passDescription)
 {
   // sanity check
   mfAssert (
@@ -97,23 +95,23 @@ void displayLpsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
   gLogStream <<
     separator <<
-    endl <<
+    std::endl <<
     gTab <<
     "Pass (optional): " << passDescription << ", full version" <<
-    endl <<
+    std::endl <<
     separator <<
-    endl << endl;
+    std::endl << std::endl;
 
   theLpsrScore->printFull (gLogStream);
 
   gLogStream <<
     separator <<
-    endl << endl;
+    std::endl << std::endl;
 
   // register time spent
   clock_t endClock = clock ();
@@ -131,7 +129,7 @@ void displayLpsrScoreFull (
 
 //   if (gIndenter != 0) {
 //     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-//       stringstream s;
+//       std::stringstream s;
 //
 //       s <<
 //         "gIndenter value after LPSR score display: " <<

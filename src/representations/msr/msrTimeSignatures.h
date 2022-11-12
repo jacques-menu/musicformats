@@ -33,10 +33,10 @@ enum class msrTimeSignatureSymbolKind {
   kTimeSignatureSymbolSenzaMisura
 };
 
-string msrTimeSignatureSymbolKindAsString (
+std::string msrTimeSignatureSymbolKindAsString (
   msrTimeSignatureSymbolKind timeSignatureSymbolKind);
 
-ostream& operator << (ostream& os, const msrTimeSignatureSymbolKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTimeSignatureSymbolKind& elt);
 
 enum class msrTimeSignatureSeparatorKind {
   kTimeSignatureSeparatorNone,
@@ -46,10 +46,10 @@ enum class msrTimeSignatureSeparatorKind {
   kTimeSignatureSeparatorAdjacent
 };
 
-string msrTimeSignatureSeparatorKindAsString (
+std::string msrTimeSignatureSeparatorKindAsString (
   msrTimeSignatureSeparatorKind timeSignatureSeparatorKind);
 
-ostream& operator << (ostream& os, const msrTimeSignatureSeparatorKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTimeSignatureSeparatorKind& elt);
 
 enum class msrTimeSignatureRelationKind {
   kTimeSignatureRelationNone,
@@ -61,10 +61,10 @@ enum class msrTimeSignatureRelationKind {
   kTimeSignatureRelationHyphen
 };
 
-string msrTimeSignatureRelationKindAsString (
+std::string msrTimeSignatureRelationKindAsString (
   msrTimeSignatureRelationKind timeSignatureRelationKind);
 
-ostream& operator << (ostream& os, const msrTimeSignatureRelationKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTimeSignatureRelationKind& elt);
 
 //______________________________________________________________________________
 class EXP msrTimeSignatureItem : public msrElement
@@ -92,7 +92,8 @@ class EXP msrTimeSignatureItem : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    const vector<int>&    getTimeSignatureBeatsNumbersVector () const
+    const std::vector<int>&
+                          getTimeSignatureBeatsNumbersVector () const
                               { return fTimeSignatureBeatsNumbersVector; }
 
     void                  setTimeSignatureBeatValue (int timeSignatureBeatValue);
@@ -127,24 +128,24 @@ class EXP msrTimeSignatureItem : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
-    string                asShortStringForMeasuresSlices () const override;
+    std::string           asString () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    vector<int>           fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
+    std::vector<int>      fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
     int                   fTimeSignatureBeatValue;
 };
 typedef SMARTP<msrTimeSignatureItem> S_msrTimeSignatureItem;
-EXP ostream& operator << (ostream& os, const S_msrTimeSignatureItem& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTimeSignatureItem& elt);
 
 //______________________________________________________________________________
-class EXP msrTimeSignature : public msrMeasureElement
+class EXP msrTimeSignature : public msrMeasureElementLambda
 {
   public:
 
@@ -195,7 +196,7 @@ class EXP msrTimeSignature : public msrMeasureElement
 
     static SMARTP<msrTimeSignature> createTimeFromString (
                             int           inputLineNumber,
-                            const string& timeString);
+                            const std::string& timeString);
 
   protected:
 
@@ -219,18 +220,12 @@ class EXP msrTimeSignature : public msrMeasureElement
     void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
                             const Rational&    measurePosition,
-                            const string&      context) override
-                              {
-                                setTimeSignatureMeasurePosition (
-                                  measure,
-                                  measurePosition,
-                                  context);
-                              }
+                            const std::string& context) override;
 
     void                  setTimeSignatureMeasurePosition (
                             const S_msrMeasure measure,
                             const Rational&    measurePosition,
-                            const string&      context);
+                            const std::string& context);
 
     msrTimeSignatureSymbolKind
                           getTimeSignatureSymbolKind () const
@@ -239,7 +234,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     Bool                  getTimeIsCompound () const
                               { return fTimeIsCompound; }
 
-    const vector<S_msrTimeSignatureItem>&
+    const std::vector<S_msrTimeSignatureItem>&
                           getTimeSignatureItemsVector () const
                               { return fTimeSignatureItemsVector; }
 
@@ -270,12 +265,12 @@ class EXP msrTimeSignature : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asShortString () const override;
-    string                asShortStringForMeasuresSlices () const override;
+    std::string           asShortString () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -285,7 +280,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     msrTimeSignatureSymbolKind
                           fTimeSignatureSymbolKind;
 
-    vector<S_msrTimeSignatureItem>
+    std::vector<S_msrTimeSignatureItem>
                           fTimeSignatureItemsVector;
 
     // a time is compound if it contains several items
@@ -294,7 +289,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     Bool                  fTimeIsCompound;
 };
 typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
-EXP ostream& operator << (ostream& os, const S_msrTimeSignature& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTimeSignature& elt);
 
 
 }

@@ -31,15 +31,13 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // user languages
 //______________________________________________________________________________
 
-map<string, msdlUserLanguageKind>
+std::map<std::string, msdlUserLanguageKind>
   gGlobalMsdlUserLanguageKindsMap;
 
 void initializeMsdlUserLanguageKindsMap ()
@@ -51,10 +49,10 @@ void initializeMsdlUserLanguageKindsMap ()
   gGlobalMsdlUserLanguageKindsMap ["espanol"]  = msdlUserLanguageKind::kUserLanguageSpanish;
 }
 
-string msdlUserLanguageKindAsString (
+std::string msdlUserLanguageKindAsString (
   msdlUserLanguageKind languageKind)
 {
-  string result;
+  std::string result;
 
   switch (languageKind) {
     case msdlUserLanguageKind::kUserLanguageEnglish: // default value
@@ -80,27 +78,27 @@ string msdlUserLanguageKindAsString (
   return result;
 }
 
-msdlUserLanguageKind msdlUserLanguageKindFromString (const string& theString)
+msdlUserLanguageKind msdlUserLanguageKindFromString (const std::string& theString)
 {
   msdlUserLanguageKind result = msdlUserLanguageKind::kUserLanguageEnglish; // MSDL default
 
-  map<string, msdlUserLanguageKind>::const_iterator
+  std::map<std::string, msdlUserLanguageKind>::const_iterator
     it =
       gGlobalMsdlUserLanguageKindsMap.find (
         theString);
 
   if (it == gGlobalMsdlUserLanguageKindsMap.end ()) {
-    // no, User language kind is unknown in the map
-    stringstream s;
+    // no, User language kind is unknown in the std::map
+    std::stringstream s;
 
     s <<
       "MSDL language kind '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       gGlobalMsdlUserLanguageKindsMap.size () - 1 <<
       " known MSDL language kinds are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -117,9 +115,9 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const string& theString)
   return result;
 }
 
-string existingMsdlUserLanguageKinds (size_t namesListMaxLength)
+std::string existingMsdlUserLanguageKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     msdlUserLanguageKindsMapSize =
@@ -133,18 +131,18 @@ string existingMsdlUserLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msdlUserLanguageKind>::const_iterator i =
+      std::map<std::string, msdlUserLanguageKind>::const_iterator i =
         gGlobalMsdlUserLanguageKindsMap.begin ();
       i != gGlobalMsdlUserLanguageKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
@@ -169,30 +167,30 @@ string existingMsdlUserLanguageKinds (size_t namesListMaxLength)
 // comments types
 //______________________________________________________________________________
 
-map<string, msdlCommentsTypeKind>
+std::map<std::string, msdlCommentsTypeKind>
   gGlobalMsdlCommentsTypeKindsMap;
 
-msdlCommentsTypeKind msdlCommentsTypeKindFromString (const string& theString)
+msdlCommentsTypeKind msdlCommentsTypeKindFromString (const std::string& theString)
 {
   msdlCommentsTypeKind result = msdlCommentsTypeKind::kCommentsTypePercent; // MSDL default
 
-  map<string, msdlCommentsTypeKind>::const_iterator
+  std::map<std::string, msdlCommentsTypeKind>::const_iterator
     it =
       gGlobalMsdlCommentsTypeKindsMap.find (
         theString);
 
   if (it == gGlobalMsdlCommentsTypeKindsMap.end ()) {
-    // no, keywords language kind is unknown in the map
-    stringstream s;
+    // no, keywords language kind is unknown in the std::map
+    std::stringstream s;
 
     s <<
       "MSDL language kind '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       gGlobalMsdlCommentsTypeKindsMap.size () - 1 <<
       " known MSDL language kinds are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -222,10 +220,10 @@ void initializeMsdlCommentsTypeKindsMap ()
   }
 }
 
-string msdlCommentsTypeKindAsString (
+std::string msdlCommentsTypeKindAsString (
   msdlCommentsTypeKind languageKind)
 {
-  string result;
+  std::string result;
 
   switch (languageKind) {
     case msdlCommentsTypeKind::kCommentsTypePercent: // MSDL default
@@ -239,9 +237,9 @@ string msdlCommentsTypeKindAsString (
   return result;
 }
 
-string existingMsdlCommentsTypeKinds (size_t namesListMaxLength)
+std::string existingMsdlCommentsTypeKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t
     msdlCommentsTypeKindsMapSize =
@@ -255,18 +253,18 @@ string existingMsdlCommentsTypeKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msdlCommentsTypeKind>::const_iterator i =
+      std::map<std::string, msdlCommentsTypeKind>::const_iterator i =
         gGlobalMsdlCommentsTypeKindsMap.begin ();
       i != gGlobalMsdlCommentsTypeKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
@@ -299,7 +297,7 @@ void initializeMSDLBasicTypes ()
     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       gLogStream <<
         "Initializing MSDL basic types handling" <<
-        endl;
+        std::endl;
     }
 #endif
 

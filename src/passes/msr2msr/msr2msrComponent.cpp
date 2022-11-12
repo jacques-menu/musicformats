@@ -12,8 +12,6 @@
 #include "msr2msrComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -29,7 +27,7 @@ S_mfcPassComponent createMsr2msrComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the msr2msr pass component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -44,7 +42,7 @@ S_mfcPassComponent createMsr2msrComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -54,7 +52,7 @@ S_mfcPassComponent createMsr2msrComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "November 15, 2021",
-          list<string> {
+          std::list<std::string> {
             "Added '-insert-page-break-after-measure, -ipbam' option",
             "Added '-avoid-msr2msr, -am2m' option (for TESTS)",
             "Added 'generate-stems-directions, ksd' option to lpsr2lilypond"
@@ -66,7 +64,7 @@ S_mfcPassComponent createMsr2msrComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.62"),
           "March 5, 2022",
-          list<string> {
+          std::list<std::string> {
             "Added '-ignore-msr-voice, -imv' and '-keep-msr-voice, -kmv' options"
           }
       ));

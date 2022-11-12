@@ -56,8 +56,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -85,9 +83,9 @@ msrHiddenMeasureAndBarLineDescr::msrHiddenMeasureAndBarLineDescr (
 msrHiddenMeasureAndBarLineDescr::~msrHiddenMeasureAndBarLineDescr ()
 {}
 
-string msrHiddenMeasureAndBarLineDescr::hiddenMeasureAndBarLineDescrAsString () const
+std::string msrHiddenMeasureAndBarLineDescr::hiddenMeasureAndBarLineDescrAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "hiddenMeasureAndBarLineDescr" <<
@@ -97,28 +95,28 @@ string msrHiddenMeasureAndBarLineDescr::hiddenMeasureAndBarLineDescrAsString () 
   return s.str ();
 }
 
-void msrHiddenMeasureAndBarLineDescr::print (ostream& os) const
+void msrHiddenMeasureAndBarLineDescr::print (std::ostream& os) const
 {
   const int fieldWidth = 14;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "inputLineNumber" << " : " <<
     fInputLineNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "dalSegno" << " : " <<
     fDalSegno->asString () <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt)
+std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -206,49 +204,49 @@ void msr2msrTranslator::displayCurrentOnGoingValues ()
 {
   gLogStream <<
     "Current ongoing values:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 25;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "fOnGoingIdentification" << ": " << fOnGoingIdentification <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingStaff" << ": " << fOnGoingStaff <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingHarmoniesVoice" << ": " << fOnGoingHarmoniesVoice <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingHarmony" << ": " << fOnGoingHarmony <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingFiguredBassVoice" << ": " << fOnGoingFiguredBassVoice <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingNotesStack.size ()" << ": " << fOnGoingNotesStack.size () <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingNonGraceNote" << ": " << fOnGoingNonGraceNote <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingDoubleTremolo" << ": " << fOnGoingDoubleTremolo <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingGraceNotesGroup" << ": " << fOnGoingGraceNotesGroup <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingChord" << ": " << fOnGoingChord <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingStanza" << ": " << fOnGoingStanza <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fOnGoingSyllableExtend" << ": " << fOnGoingSyllableExtend <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
@@ -258,14 +256,14 @@ void msr2msrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
 {
   gLogStream <<
     "fPartHiddenMeasureAndBarLineDescrList:" <<
-    endl;
+    std::endl;
 
   if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
     ++gIndenter;
 
     const int fieldWidth = 19;
 
-    list<S_msrHiddenMeasureAndBarLineDescr>::const_iterator
+    std::list<S_msrHiddenMeasureAndBarLineDescr>::const_iterator
       iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
       iEnd   = fPartHiddenMeasureAndBarLineDescrList.end (),
       i      = iBegin;
@@ -284,15 +282,15 @@ void msr2msrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
         dalSegno =
           hiddenMeasureAndBarLineDescr->getDalSegno ();
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "inputLineNumber" << " : " <<
         hiddenMeasureAndBarLineDescr->getInputLineNumber () <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "dalSegno" << " : " <<
         dalSegno <<
-        endl;
+        std::endl;
 
       if (++i == iEnd) break;
     } // for
@@ -300,27 +298,27 @@ void msr2msrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
     --gIndenter;
   }
   else {
-    gLogStream << "[EMPTY]" << endl;
+    gLogStream << "[EMPTY]" << std::endl;
   }
 }
 
 //________________________________________________________________________
 void msr2msrTranslator::displayOnGoingNotesStack (
-  const string& context)
+  const std::string& context)
 {
   size_t onGoingNotesStackSize = fOnGoingNotesStack.size ();
 
   gLogStream <<
-    endl <<
+    std::endl <<
     ">>++++++++++++++++ " <<
-    "The on-going notes stack contains " <<
+    "The on-going notes std::stack contains " <<
     onGoingNotesStackSize <<
     " elements" <<
     " (" << context << "):" <<
-    endl;
+    std::endl;
 
   if (onGoingNotesStackSize) {
-    list<S_msrNote>::const_iterator
+    std::list<S_msrNote>::const_iterator
       iBegin = fOnGoingNotesStack.begin (),
       iEnd   = fOnGoingNotesStack.end (),
       i      = iBegin;
@@ -333,7 +331,7 @@ void msr2msrTranslator::displayOnGoingNotesStack (
     for ( ; ; ) {
       gLogStream <<
         "v (" << n << ")" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
       note->printShort (gLogStream);
@@ -343,7 +341,7 @@ void msr2msrTranslator::displayOnGoingNotesStack (
 
       if (++i == iEnd) break;
 
-      gLogStream << endl;
+      gLogStream << std::endl;
     } // for
 
     --gIndenter;
@@ -351,7 +349,7 @@ void msr2msrTranslator::displayOnGoingNotesStack (
 
   gLogStream <<
     " <<++++++++++++++++ " <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
 //________________________________________________________________________
@@ -359,10 +357,10 @@ void msr2msrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
 {
   gLogStream <<
     "fPartHiddenMeasureAndBarLineDescrList:" <<
-    endl;
+    std::endl;
 
   if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
-    list<S_msrHiddenMeasureAndBarLineDescr>::const_iterator
+    std::list<S_msrHiddenMeasureAndBarLineDescr>::const_iterator
       iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
       iEnd   = fPartHiddenMeasureAndBarLineDescrList.end (),
       i      = iBegin;
@@ -402,7 +400,7 @@ void msr2msrTranslator::visitStart (S_msrScore& elt)
     gLogStream <<
       "--> Start visiting msrScore" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -417,7 +415,7 @@ void msr2msrTranslator::visitEnd (S_msrScore& elt)
     gLogStream <<
       "--> End visiting msrScore" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -430,7 +428,7 @@ void msr2msrTranslator::visitStart (S_msrIdentification& elt)
     gLogStream <<
       "--> Start visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -458,7 +456,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
     gLogStream <<
       "--> End visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -471,7 +469,7 @@ void msr2msrTranslator::visitStart (S_msrScaling& elt)
     gLogStream <<
       "--> Start visiting msrScaling" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -497,7 +495,7 @@ void msr2msrTranslator::visitEnd (S_msrScaling& elt)
     gLogStream <<
       "--> End visiting msrScaling" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -510,7 +508,7 @@ void msr2msrTranslator::visitStart (S_msrSystemLayout& elt)
     gLogStream <<
       "--> Start visiting msrSystemLayout" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -527,7 +525,7 @@ void msr2msrTranslator::visitEnd (S_msrSystemLayout& elt)
     gLogStream <<
       "--> End visiting msrSystemLayout" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -540,7 +538,7 @@ void msr2msrTranslator::visitStart (S_msrStaffLayout& elt)
     gLogStream <<
       "--> Start visiting msrStaffLayout" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -557,7 +555,7 @@ void msr2msrTranslator::visitEnd (S_msrStaffLayout& elt)
     gLogStream <<
       "--> End visiting msrStaffLayout" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -570,7 +568,7 @@ void msr2msrTranslator::visitStart (S_msrAppearance& elt)
     gLogStream <<
       "--> Start visiting msrAppearance" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -587,7 +585,7 @@ void msr2msrTranslator::visitEnd (S_msrAppearance& elt)
     gLogStream <<
       "--> End visiting msrAppearance" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -600,7 +598,7 @@ void msr2msrTranslator::visitStart (S_msrPageLayout& elt)
     gLogStream <<
       "--> Start visiting msrPageLayout" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -617,7 +615,7 @@ void msr2msrTranslator::visitEnd (S_msrPageLayout& elt)
     gLogStream <<
       "--> End visiting msrPageLayout" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -630,7 +628,7 @@ void msr2msrTranslator::visitStart (S_msrCredit& elt)
     gLogStream <<
       "--> Start visiting msrCredit" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -648,7 +646,7 @@ void msr2msrTranslator::visitEnd (S_msrCredit& elt)
     gLogStream <<
       "--> End visiting msrCredit" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -662,7 +660,7 @@ void msr2msrTranslator::visitStart (S_msrCreditWords& elt)
     gLogStream <<
       "--> Start visiting msrCreditWords" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -681,7 +679,7 @@ void msr2msrTranslator::visitEnd (S_msrCreditWords& elt)
     gLogStream <<
       "--> End visiting msrCreditWords" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -695,12 +693,12 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
       "--> Start visiting msrPartGroup " <<
       elt->getPartGroupCombinedName () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
   // create a partGroup clone
-  // current partGroup clone, i.e. the top of the stack,
+  // current partGroup clone, i.e. the top of the std::stack,
   // is the upLink of the new one if it exists
   S_msrPartGroup
     partGroupClone =
@@ -710,15 +708,15 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
           : nullptr,
         fResultingNewMsrScore);
 
-  // push it onto this visitors's stack,
+  // push it onto this visitors's std::stack,
   // making it the current partGroup
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Pushing part group clone " <<
       partGroupClone->getPartGroupCombinedName () <<
-      " onto stack" <<
-      endl;
+      " onto std::stack" <<
+      std::endl;
   }
 #endif
 
@@ -734,18 +732,18 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
       "--> End visiting msrPartGroup " <<
       elt->getPartGroupCombinedName () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // fetch the current part group at the top of the stack
+  // fetch the current part group at the top of the std::stack
   S_msrPartGroup
     currentPartGroup =
       fPartGroupsStack.top ();
 
   if (fPartGroupsStack.size () == 1) {
     // add the current partgroup clone to the MSR score clone
-    // since it's alone in the stack
+    // since it's alone in the std::stack
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -753,7 +751,7 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
         "Adding part group clone " <<
         currentPartGroup->getPartGroupCombinedName () <<
         " to MSR score" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -770,14 +768,14 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
         currentPartGroup);
   }
 
-  // pop current partGroup from this visitors's stack
+  // pop current partGroup from this visitors's std::stack
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Popping part group clone " <<
       fPartGroupsStack.top ()->getPartGroupCombinedName () <<
-      " from stack" <<
-      endl;
+      " from std::stack" <<
+      std::endl;
   }
 #endif
 
@@ -791,7 +789,7 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-  string
+  std::string
     partCombinedName =
       elt->getPartCombinedName ();
 
@@ -800,17 +798,17 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
       "--> Start visiting msrPart " <<
       partCombinedName <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!--=== part \"" << partCombinedName << "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -830,7 +828,7 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
       " to part group clone \"" <<
       fPartGroupsStack.top ()->getPartGroupCombinedName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -851,18 +849,18 @@ void msr2msrTranslator::visitEnd (S_msrPart& elt)
       "--> End visiting msrPart " <<
       elt->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string
+  std::string
     partInstrumentAbbreviation =
       fCurrentPartClone->
         getPartInstrumentAbbreviation ();
 
   // populate part instrument short name if empty and possible
   if (partInstrumentAbbreviation.size () == 0) {
-    string
+    std::string
       partAbbreviation =
         elt->getPartAbbreviation ();
 
@@ -907,7 +905,7 @@ void msr2msrTranslator::visitStart (S_msrStaffLinesNumber& elt)
     gLogStream <<
       "--> Start visiting msrStaffLinesNumber" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -926,7 +924,7 @@ void msr2msrTranslator::visitStart (S_msrStaffTuning& elt)
     gLogStream <<
       "--> Start visiting msrStaffTuning" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -944,7 +942,7 @@ void msr2msrTranslator::visitStart (S_msrStaffDetails& elt)
     gLogStream <<
       "--> Start visiting msrStaffDetails" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -958,7 +956,7 @@ void msr2msrTranslator::visitEnd (S_msrStaffDetails& elt)
     gLogStream <<
       "--> End visiting msrStaffDetails" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -977,7 +975,7 @@ void msr2msrTranslator::visitStart (S_msrStaff& elt)
       "--> Start visiting msrStaff \"" <<
       elt->getStaffName () << "\"" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1052,7 +1050,7 @@ void msr2msrTranslator::visitEnd (S_msrStaff& elt)
       "--> End visiting S_msrStaff \"" <<
       elt->getStaffName () << "\"" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1091,7 +1089,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
       "--> Start visiting msrVoice \"" <<
       elt->asString () << "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1099,7 +1097,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
 
   ++gIndenter;
 
-  string voiceName = elt->getVoiceName ();
+  std::string voiceName = elt->getVoiceName ();
 
   // create a voice clone
   fCurrentVoiceClone =
@@ -1131,7 +1129,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
           fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI
           ) {
           // create a ChordNames context
-          string partCombinedName =
+          std::string partCombinedName =
             fCurrentVoiceOriginal->
               fetchVoiceUpLinkToPart ()->
                 getPartCombinedName ();
@@ -1141,7 +1139,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
             gLogStream <<
               "Creating a ChordNames context for \"" << voiceName <<
               "\" in part " << partCombinedName <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -1161,7 +1159,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
           fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI
           ) {
           // create a FiguredBass context
-          string partCombinedName =
+          std::string partCombinedName =
             fCurrentVoiceOriginal->
               fetchVoiceUpLinkToPart ()->
                 getPartCombinedName ();
@@ -1171,7 +1169,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
             gLogStream <<
               "Creating a FiguredBass context for \"" << voiceName <<
               "\" in part " << partCombinedName <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -1181,7 +1179,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
       break;
   } // switch
 
-  // clear the voice notes map
+  // clear the voice notes std::map
   fVoiceNotesMap.clear ();
 
   fFirstNoteCloneInVoice = nullptr;
@@ -1197,7 +1195,7 @@ void msr2msrTranslator::visitEnd (S_msrVoice& elt)
       "--> End visiting msrVoice \"" <<
       elt->getVoiceName () << "\"" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1228,7 +1226,7 @@ void msr2msrTranslator::visitStart (S_msrVoiceStaffChange& elt)
       "--> Start visiting msrVoiceStaffChange '" <<
       elt->asString () << "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1253,7 +1251,7 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
       "--> Start visiting msrSegment '" <<
       elt->getSegmentAbsoluteNumber () << "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1279,7 +1277,7 @@ void msr2msrTranslator::visitEnd (S_msrSegment& elt)
       "--> End visiting msrSegment '" <<
       elt->getSegmentAbsoluteNumber () << "'" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1306,7 +1304,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
       ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1372,7 +1370,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "harmony is out of context, cannot be handled: '" <<
@@ -1401,7 +1399,7 @@ void msr2msrTranslator::visitStart (S_msrHarmonyDegree& elt)
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
       "', line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1420,7 +1418,7 @@ void msr2msrTranslator::visitEnd (S_msrHarmony& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1438,7 +1436,7 @@ void msr2msrTranslator::visitStart (S_msrFrame& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1449,7 +1447,7 @@ void msr2msrTranslator::visitStart (S_msrFrame& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "frame is out of context, cannot be handled:'" <<
@@ -1475,7 +1473,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
       "'" <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1518,7 +1516,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "figured bass is out of context, cannot be handled:'" <<
@@ -1542,7 +1540,7 @@ void msr2msrTranslator::visitStart (S_msrBassFigure& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1561,7 +1559,7 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1575,7 +1573,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
     inputLineNumber =
       elt->getInputLineNumber ();
 
-  string
+  std::string
     measureNumber =
       elt->getMeasureNumber ();
 
@@ -1591,20 +1589,20 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
       "', measurePuristNumber = '" <<
       measurePuristNumber <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!--=== measure '" << measureNumber <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1713,11 +1711,11 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-  string
+  std::string
     measureNumber =
       elt->getMeasureNumber ();
 
-  string
+  std::string
     nextMeasureNumber =
       elt->getNextMeasureNumber ();
 
@@ -1735,7 +1733,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
       "', measurePuristNumber = '" <<
       measurePuristNumber <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1750,7 +1748,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
   switch (elt->getMeasureKind ()) {
     case msrMeasureKind::kMeasureKindUnknown:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "measure '" << measureNumber <<
@@ -1836,7 +1834,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //       }
 //
 //       else {
-//         stringstream s;
+//         std::stringstream s;
 //
 //         s <<
 //           "fCurrentMultipleFullBarRests is null upon multiple full-bar rest end" <<
@@ -1898,11 +1896,11 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //     measureNumber <<
 //     "\"" <<
 //     ", line " << inputLineNumber <<
-//     endl;
+//     std::endl;
 
   // is this measureNumber in the parts ignore IDs set?
   if (gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().size ()) {
-    set<string>::iterator
+    std::set<std::string>::iterator
       it =
         gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().find (
           measureNumber);
@@ -1913,7 +1911,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
         measureNumber <<
         "\"" <<
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
 
       S_msrPageBreak
         pageBreak =
@@ -1939,7 +1937,7 @@ void msr2msrTranslator::visitStart (S_msrStanza& elt)
       elt->getStanzaName () <<
       "\"" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1972,7 +1970,7 @@ void msr2msrTranslator::visitEnd (S_msrStanza& elt)
       elt->getStanzaName () <<
       "\"" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1993,7 +1991,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
     gLogStream <<
       "--> Start visiting msrSyllable" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2017,15 +2015,15 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
         fCurrentNonGraceNoteClone);
 
 //     if (gGlobalMsr2msrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) { JMI ???
-//       // get the syllable texts list
-//       const list<string>&
+//       // get the syllable texts std::list
+//       const std::list<std::string>&
 //         syllableTextsList =
 //           elt->getSyllableTextsList ();
 //
 //       if (syllableTextsList.size ()) {
-//         // build a single words value from the texts list
+//         // build a single words value from the texts std::list
 //         // JMI create an msrWords instance for each???
-//         string wordsValue =
+//         std::string wordsValue =
 //           elt->syllableTextsListAsString();
 //
 //         // create the words
@@ -2038,7 +2036,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //             fCurrentNonGraceNoteClone->asShortString () <<
 //             "'" <<
 //       // JMI      fCurrentSyllableClone->asString () <<
-//             endl;
+//             std::endl;
 //         }
 // #endif
 //
@@ -2070,7 +2068,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //             "' to note '" <<
 //             fCurrentNonGraceNoteClone->asShortString () <<
 //             "'" <<
-//             endl;
+//             std::endl;
 //         }
 // #endif
 //         fCurrentNonGraceNoteClone->
@@ -2081,7 +2079,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "syllable is out of context, cannot be handled: '" <<
@@ -2121,7 +2119,7 @@ void msr2msrTranslator::visitEnd (S_msrSyllable& elt)
     gLogStream <<
       "--> End visiting msrSyllable" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2134,7 +2132,7 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
     gLogStream <<
       "--> Start visiting msrClef" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2149,7 +2147,7 @@ void msr2msrTranslator::visitEnd (S_msrClef& elt)
     gLogStream <<
       "--> End visiting msrClef" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2162,7 +2160,7 @@ void msr2msrTranslator::visitStart (S_msrKey& elt)
     gLogStream <<
       "--> Start visiting msrKey" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2177,7 +2175,7 @@ void msr2msrTranslator::visitEnd (S_msrKey& elt)
     gLogStream <<
       "--> End visiting msrKey" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2190,7 +2188,7 @@ void msr2msrTranslator::visitStart (S_msrTimeSignature& elt)
     gLogStream <<
       "--> Start visiting msrTimeSignature" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2206,7 +2204,7 @@ void msr2msrTranslator::visitEnd (S_msrTimeSignature& elt)
     gLogStream <<
       "--> End visiting msrTimeSignature" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2219,7 +2217,7 @@ void msr2msrTranslator::visitStart (S_msrTransposition& elt)
     gLogStream <<
       "--> Start visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2235,7 +2233,7 @@ void msr2msrTranslator::visitEnd (S_msrTransposition& elt)
     gLogStream <<
       "--> End visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2248,7 +2246,7 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
     gLogStream <<
       "--> Start visiting msrTempo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2271,7 +2269,7 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
 //         "' to rehearsal mark '" <<
 //         rehearsalMark->asShortString () <<
 //         "'" <<
-//         endl;
+//         std::endl;
 //     }
 // #endif
 //
@@ -2293,7 +2291,7 @@ void msr2msrTranslator::visitEnd (S_msrTempo& elt)
     gLogStream <<
       "--> End visiting msrTempo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2306,7 +2304,7 @@ void msr2msrTranslator::visitStart (S_msrRehearsalMark& elt)
     gLogStream <<
       "--> Start visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2321,7 +2319,7 @@ void msr2msrTranslator::visitEnd (S_msrRehearsalMark& elt)
     gLogStream <<
       "--> End visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2334,7 +2332,7 @@ void msr2msrTranslator::visitStart (S_msrArticulation& elt)
     gLogStream <<
       "--> Start visiting msrArticulation" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2347,7 +2345,7 @@ void msr2msrTranslator::visitStart (S_msrArticulation& elt)
       appendArticulationToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "articulation is out of context, cannot be handled: '" <<
@@ -2369,7 +2367,7 @@ void msr2msrTranslator::visitEnd (S_msrArticulation& elt)
     gLogStream <<
       "--> End visiting msrArticulation" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2382,7 +2380,7 @@ void msr2msrTranslator::visitStart (S_msrFermata& elt)
     gLogStream <<
       "--> Start visiting msrFermata" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2397,7 +2395,7 @@ void msr2msrTranslator::visitStart (S_msrFermata& elt)
       appendArticulationToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "fermata is out of context, cannot be handled: '" <<
@@ -2420,7 +2418,7 @@ void msr2msrTranslator::visitStart (S_msrArpeggiato& elt)
     gLogStream <<
       "--> Start visiting msrArpeggiato" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2435,7 +2433,7 @@ void msr2msrTranslator::visitStart (S_msrArpeggiato& elt)
       appendArticulationToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "arpeggiato is out of context, cannot be handled: '" <<
@@ -2458,7 +2456,7 @@ void msr2msrTranslator::visitStart (S_msrNonArpeggiato& elt)
     gLogStream <<
       "--> Start visiting msrNonArpeggiato" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2473,7 +2471,7 @@ void msr2msrTranslator::visitStart (S_msrNonArpeggiato& elt)
       appendArticulationToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "nonArpeggiato is out of context, cannot be handled: '" <<
@@ -2496,7 +2494,7 @@ void msr2msrTranslator::visitStart (S_msrTechnical& elt)
     gLogStream <<
       "--> Start visiting msrTechnical" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2509,7 +2507,7 @@ void msr2msrTranslator::visitStart (S_msrTechnical& elt)
       appendTechnicalToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "technical is out of context, cannot be handled: '" <<
@@ -2531,7 +2529,7 @@ void msr2msrTranslator::visitEnd (S_msrTechnical& elt)
     gLogStream <<
       "--> End visiting msrTechnical" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2544,7 +2542,7 @@ void msr2msrTranslator::visitStart (S_msrTechnicalWithInteger& elt)
     gLogStream <<
       "--> Start visiting msrTechnicalWithInteger" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2557,7 +2555,7 @@ void msr2msrTranslator::visitStart (S_msrTechnicalWithInteger& elt)
       appendTechnicalWithIntegerToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "technicalWithInteger is out of context, cannot be handled: '" <<
@@ -2579,7 +2577,7 @@ void msr2msrTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
     gLogStream <<
       "--> End visiting msrTechnicalWithInteger" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2592,7 +2590,7 @@ void msr2msrTranslator::visitStart (S_msrTechnicalWithFloat& elt)
     gLogStream <<
       "--> Start visiting msrTechnicalWithFloat" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2605,7 +2603,7 @@ void msr2msrTranslator::visitStart (S_msrTechnicalWithFloat& elt)
       appendTechnicalWithFloatToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "technicalWithFloat is out of context, cannot be handled: '" <<
@@ -2627,7 +2625,7 @@ void msr2msrTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
     gLogStream <<
       "--> End visiting msrTechnicalWithFloat" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2640,7 +2638,7 @@ void msr2msrTranslator::visitStart (S_msrTechnicalWithString& elt)
     gLogStream <<
       "--> Start visiting msrTechnicalWithString" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2653,7 +2651,7 @@ void msr2msrTranslator::visitStart (S_msrTechnicalWithString& elt)
       appendTechnicalWithStringToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "technicalWithString is out of context, cannot be handled: '" <<
@@ -2675,7 +2673,7 @@ void msr2msrTranslator::visitEnd (S_msrTechnicalWithString& elt)
     gLogStream <<
       "--> End visiting msrTechnicalWithString" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2689,7 +2687,7 @@ void msr2msrTranslator::visitStart (S_msrOrnament& elt)
       "--> Start visiting msrOrnament " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2708,7 +2706,7 @@ void msr2msrTranslator::visitStart (S_msrOrnament& elt)
       appendOrnamentToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "ornament is out of context, cannot be handled: '" <<
@@ -2731,7 +2729,7 @@ void msr2msrTranslator::visitEnd (S_msrOrnament& elt)
       "--> End visiting msrOrnament " <<
       elt->asString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2744,7 +2742,7 @@ void msr2msrTranslator::visitStart (S_msrSpanner& elt)
     gLogStream <<
       "--> Start visiting msrSpanner" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2769,7 +2767,7 @@ void msr2msrTranslator::visitStart (S_msrSpanner& elt)
       appendSpannerToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "spanner is out of context, cannot be handled: '" <<
@@ -2791,7 +2789,7 @@ void msr2msrTranslator::visitEnd (S_msrSpanner& elt)
     gLogStream <<
       "--> End visiting msrSpanner" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2804,7 +2802,7 @@ void msr2msrTranslator::visitStart (S_msrGlissando& elt)
     gLogStream <<
       "--> Start visiting msrGlissando" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2817,7 +2815,7 @@ void msr2msrTranslator::visitStart (S_msrGlissando& elt)
       appendGlissandoToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "glissando is out of context, cannot be handled: '" <<
@@ -2839,7 +2837,7 @@ void msr2msrTranslator::visitEnd (S_msrGlissando& elt)
     gLogStream <<
       "--> End visiting msrGlissando" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2852,7 +2850,7 @@ void msr2msrTranslator::visitStart (S_msrSlide& elt)
     gLogStream <<
       "--> Start visiting msrSlide" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2865,7 +2863,7 @@ void msr2msrTranslator::visitStart (S_msrSlide& elt)
       appendSlideToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "slide is out of context, cannot be handled: '" <<
@@ -2887,7 +2885,7 @@ void msr2msrTranslator::visitEnd (S_msrSlide& elt)
     gLogStream <<
       "--> End visiting msrSlide" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2900,7 +2898,7 @@ void msr2msrTranslator::visitStart (S_msrSingleTremolo& elt)
     gLogStream <<
       "--> Start visiting msrSingleTremolo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2913,7 +2911,7 @@ void msr2msrTranslator::visitStart (S_msrSingleTremolo& elt)
       setChordSingleTremolo (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "singleTremolo is out of context, cannot be handled: '" <<
@@ -2935,7 +2933,7 @@ void msr2msrTranslator::visitEnd (S_msrSingleTremolo& elt)
     gLogStream <<
       "--> End visiting msrSingleTremolo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2948,7 +2946,7 @@ void msr2msrTranslator::visitStart (S_msrDoubleTremolo& elt)
     gLogStream <<
       "--> Start visiting msrDoubleTremolo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2972,7 +2970,7 @@ void msr2msrTranslator::visitEnd (S_msrDoubleTremolo& elt)
     gLogStream <<
       "--> End visiting msrSingleTremolo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2995,7 +2993,7 @@ void msr2msrTranslator::visitStart (S_msrDynamic& elt)
     gLogStream <<
       "--> Start visiting msrDynamic" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3010,7 +3008,7 @@ void msr2msrTranslator::visitStart (S_msrDynamic& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "dynamic is out of context, cannot be handled: '" <<
@@ -3032,7 +3030,7 @@ void msr2msrTranslator::visitEnd (S_msrDynamic& elt)
     gLogStream <<
       "--> End visiting msrDynamic" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -3045,7 +3043,7 @@ void msr2msrTranslator::visitStart (S_msrOtherDynamic& elt)
     gLogStream <<
       "--> Start visiting msrOtherDynamic" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3058,7 +3056,7 @@ void msr2msrTranslator::visitStart (S_msrOtherDynamic& elt)
       appendOtherDynamicToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "otherDynamic is out of context, cannot be handled: '" <<
@@ -3080,7 +3078,7 @@ void msr2msrTranslator::visitEnd (S_msrOtherDynamic& elt)
     gLogStream <<
       "--> End visiting msrOtherDynamic" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -3096,7 +3094,7 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
     gLogStream <<
       "--> Start visiting msrWords" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3116,7 +3114,7 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
 //     Bool wordsHasBeenHandled;
 //
 //     // is wordsValue to be converted to an MSR tempo?
-//     string wordsValue = elt->getWordsContents ();
+//     std::string wordsValue = elt->getWordsContents ();
 //
 //     if (gGlobalMsr2msrOahGroup->wordsIsToBeConvertedToTempo (wordsValue)) {
 //       // create a tempo containing elt
@@ -3136,7 +3134,7 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
 //           "' to tempo '" <<
 //           tempo->asShortString () <<
 //           "'" <<
-//           endl;
+//           std::endl;
 //       }
 // #endif
 //
@@ -3164,7 +3162,7 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
 //   }
 //
 //   else {
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "words is out of context, cannot be handled: '" <<
@@ -3186,7 +3184,7 @@ void msr2msrTranslator::visitEnd (S_msrWords& elt)
     gLogStream <<
       "--> End visiting msrWords" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -3203,7 +3201,7 @@ void msr2msrTranslator::visitStart (S_msrSlur& elt)
       "--> Start visiting msrSlur " <<
       elt->asShortString () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
@@ -3220,7 +3218,7 @@ void msr2msrTranslator::visitStart (S_msrSlur& elt)
       fOnGoingGraceNotesGroup <<
       ", fOnGoingChordSlurLink: " <<
       fOnGoingChordSlurLink <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3256,7 +3254,7 @@ void msr2msrTranslator::visitStart (S_msrSlur& elt)
   else {
     displayCurrentOnGoingValues ();
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "slur is out of context, cannot be handled: '" <<
@@ -3279,7 +3277,7 @@ void msr2msrTranslator::visitEnd (S_msrSlur& elt)
       "--> End visiting msrSlur " <<
       elt->asShortString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -3293,7 +3291,7 @@ void msr2msrTranslator::visitStart (S_msrChordSlurLink& elt)
       "--> Start visiting msrChordSlurLink " <<
       elt->asShortString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3306,7 +3304,7 @@ void msr2msrTranslator::visitStart (S_msrChordSlurLink& elt)
       elt->asShortString () <<
       ", originalSlur: " <<
       originalSlur->asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3325,7 +3323,7 @@ void msr2msrTranslator::visitStart (S_msrChordSlurLink& elt)
   else {
     displayCurrentOnGoingValues ();
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "slur link is out of context, cannot be handled: '" <<
@@ -3350,7 +3348,7 @@ void msr2msrTranslator::visitEnd (S_msrChordSlurLink& elt)
       "--> End visiting msrChordSlurLink " <<
       elt->asShortString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3365,7 +3363,7 @@ void msr2msrTranslator::visitStart (S_msrLigature& elt)
     gLogStream <<
       "--> Start visiting msrLigature" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3378,7 +3376,7 @@ void msr2msrTranslator::visitStart (S_msrLigature& elt)
       appendLigatureToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "ligature is out of context, cannot be handled: '" <<
@@ -3400,7 +3398,7 @@ void msr2msrTranslator::visitEnd (S_msrLigature& elt)
     gLogStream <<
       "--> End visiting msrLigature" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -3413,7 +3411,7 @@ void msr2msrTranslator::visitStart (S_msrSlash& elt)
     gLogStream <<
       "--> Start visiting msrSlash" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3426,7 +3424,7 @@ void msr2msrTranslator::visitStart (S_msrSlash& elt)
       appendSlashToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "slash is out of context, cannot be handled: '" <<
@@ -3449,7 +3447,7 @@ void msr2msrTranslator::visitStart (S_msrCrescDecresc& elt)
     gLogStream <<
       "--> Start visiting msrCrescDecresc" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3462,7 +3460,7 @@ void msr2msrTranslator::visitStart (S_msrCrescDecresc& elt)
       appendCrescDecrescToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cresc/decresc is out of context, cannot be handled: '" <<
@@ -3484,7 +3482,7 @@ void msr2msrTranslator::visitEnd (S_msrCrescDecresc& elt)
     gLogStream <<
       "--> End visiting msrCrescDecresc" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -3497,7 +3495,7 @@ void msr2msrTranslator::visitStart (S_msrWedge& elt)
     gLogStream <<
       "--> Start visiting msrWedge" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3510,7 +3508,7 @@ void msr2msrTranslator::visitStart (S_msrWedge& elt)
       appendWedgeToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "wedge is out of context, cannot be handled: '" <<
@@ -3532,7 +3530,7 @@ void msr2msrTranslator::visitEnd (S_msrWedge& elt)
     gLogStream <<
       "--> End visiting msrWedge" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -3553,7 +3551,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       ", fOnGoingChordGraceNotesGroupLink: " <<
         fOnGoingChordGraceNotesGroupLink <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3569,7 +3567,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
         "' and attaching it to clone note '" <<
         fCurrentNonGraceNoteClone->asShortString () <<
         "'" <<
-        endl;
+        std::endl;
       }
 #endif
 
@@ -3621,7 +3619,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "graceNotesGroup is out of context, fOnGoingNotesStack.size () == 0, cannot be handled: '" <<
@@ -3640,7 +3638,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "+++++++++++++++++++++++++ visitStart (S_msrGraceNotesGroup&)" <<
-      endl <<
+      std::endl <<
       "fCurrentNonGraceNoteClone: ";
 
     if (fCurrentNonGraceNoteClone) {
@@ -3651,7 +3649,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       gLogStream <<
         "[NONE]";
     }
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 #endif
 
@@ -3662,7 +3660,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
         getGraceNotesGroupUpLinkToNote ();
 
   if (! noteNotesGroupIsAttachedTo) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "grace notes group '" << elt->asShortString () <<
@@ -3695,7 +3693,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     gLogStream <<
        "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3716,7 +3714,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     gLogStream <<
        "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3740,7 +3738,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
             "Creating a skip clone of grace notes group '" <<
             elt->asShortString () <<
             "' to work around LilyPond issue #34" << // JMI ???
-            endl;
+            std::endl;
         }
 #endif
 
@@ -3766,7 +3764,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       ", fOnGoingChordGraceNotesGroupLink: " <<
         fOnGoingChordGraceNotesGroupLink <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3774,7 +3772,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "+++++++++++++++++++++++++ visitEnd (S_msrGraceNotesGroup&)" <<
-      endl <<
+      std::endl <<
       "fCurrentNonGraceNoteClone: ";
 
     if (fCurrentNonGraceNoteClone) {
@@ -3785,7 +3783,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       gLogStream <<
         "[NONE]";
     }
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 #endif
 
@@ -3802,7 +3800,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
       gLogStream <<
         "Removing the after grace notes element from the current voice clone" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -3832,7 +3830,7 @@ void msr2msrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
       "--> Start visiting msrChordGraceNotesGroupLink " <<
       elt->asShortString () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3851,7 +3849,7 @@ void msr2msrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingChordGraceNotesGroupLink: " <<
         fOnGoingChordGraceNotesGroupLink <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3882,7 +3880,7 @@ void msr2msrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
   else {
     displayCurrentOnGoingValues ();
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "grace notes group link is out of context, cannot be handled: '" <<
@@ -3916,7 +3914,7 @@ void msr2msrTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingChordGraceNotesGroupLink: " << fOnGoingChordGraceNotesGroupLink <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3933,7 +3931,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3946,7 +3944,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
         createNoteNewbornClone (
           fCurrentPartClone);
 
-  // register clone in this tranlastors' voice notes map and ongoing notes stack
+  // register clone in this tranlastors' voice notes std::map and ongoing notes std::stack
   fVoiceNotesMap [elt] = noteClone; // JMI XXL
   fOnGoingNotesStack.push_front (noteClone);
 
@@ -3976,7 +3974,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
           }
           gLogStream <<
              "'" <<
-            endl;
+            std::endl;
         }
 #endif
 */
@@ -4004,7 +4002,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
             "' is '" <<
             fFirstNoteCloneInVoice->asShortString () <<
              "'" <<
-            endl;
+            std::endl;
         }
 #endif
       }
@@ -4030,7 +4028,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
         elt->asShortString () <<
         "' as after grace notes " <<
         ", line " << inputLineNumber<<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -4062,7 +4060,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
       "--> End visiting msrNote " <<
       elt->asString () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4070,7 +4068,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
     gLogStream <<
       "FAA fCurrentNonGraceNoteClone = " <<
-      endl;
+      std::endl;
     if (fCurrentNonGraceNoteClone) {
       gLogStream <<
         fCurrentNonGraceNoteClone;
@@ -4078,12 +4076,12 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     else {
       gLogStream <<
         "[NONE]" <<
-        endl;
+        std::endl;
     }
 
     gLogStream <<
       "FAA fCurrentGraceNoteClone = " <<
-      endl;
+      std::endl;
     if (fCurrentGraceNoteClone) {
       gLogStream <<
         fCurrentGraceNoteClone;
@@ -4091,7 +4089,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     else {
       gLogStream <<
         "[NONE]" <<
-        endl;
+        std::endl;
     }
   }
 #endif
@@ -4108,7 +4106,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           "Appending rest note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
           fCurrentVoiceClone->getVoiceName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -4125,7 +4123,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           "Appending skip note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
           fCurrentVoiceClone->getVoiceName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -4141,7 +4139,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           "Appending unpitched note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
           fCurrentVoiceClone->getVoiceName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -4157,7 +4155,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           "Appending regular note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
           fCurrentVoiceClone->getVoiceName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -4180,7 +4178,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
               " in voice \"" <<
               fCurrentVoiceClone->getVoiceName () <<
               "\"" <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -4200,7 +4198,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
               " in voice \"" <<
               fCurrentVoiceClone->getVoiceName () <<
               "\"" <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -4210,7 +4208,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         }
 
         else {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "note '" << fCurrentNonGraceNoteClone->asShortString () <<
@@ -4225,7 +4223,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "double tremolo note '" << fCurrentNonGraceNoteClone->asShortString () <<
@@ -4245,7 +4243,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
       gLogStream <<
         "fOnGoingGraceNotesGroup = " <<
         fOnGoingGraceNotesGroup <<
-        endl;
+        std::endl;
         */
 
       if (!fOnGoingGraceNotesGroup) { // JMI v0.9.66
@@ -4258,7 +4256,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             fCurrentGraceNotesGroupClone->asShortString () <<
             "' in voice \"" <<
             fCurrentVoiceClone->getVoiceName () << "\"" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -4267,7 +4265,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             fCurrentGraceNoteClone);
       }
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "grace note '" << fCurrentNonGraceNoteClone->asShortString () <<
@@ -4289,7 +4287,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             fCurrentNonGraceNoteClone->asShortString () <<
             "' to the grace notes in voice \"" <<
             fCurrentVoiceClone->getVoiceName () << "\"" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -4306,7 +4304,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             fCurrentNonGraceNoteClone->asShortString () <<
             "' to the after grace notes in voice \"" <<
             fCurrentVoiceClone->getVoiceName () << "\"" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -4316,11 +4314,11 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "both fCurrentGraceNoteGroupsClone and fPendingAfterGraceNoteGroup are null," <<
-          endl <<
+          std::endl <<
           "cannot handle grace note'" <<
           elt->asString () <<
           "'";
@@ -4350,7 +4348,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
      }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "msr2msrTranslator::visitEnd (S_msrNote& elt): chord member note " <<
@@ -4374,7 +4372,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "msr2msrTranslator::visitEnd (S_msrNote& elt): chord member note " <<
@@ -4399,7 +4397,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           "Appending note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "'' to voice clone " <<
           fCurrentVoiceClone->getVoiceName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -4471,7 +4469,7 @@ void msr2msrTranslator::visitStart (S_msrOctaveShift& elt)
     gLogStream <<
       "--> Start visiting msrOctaveShift" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4484,7 +4482,7 @@ void msr2msrTranslator::visitStart (S_msrOctaveShift& elt)
       setChordOctaveShift (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "octaveShift is out of context, cannot be handled: '" <<
@@ -4506,7 +4504,7 @@ void msr2msrTranslator::visitEnd (S_msrOctaveShift& elt)
     gLogStream <<
       "--> End visiting msrOctaveShift" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -4519,7 +4517,7 @@ void msr2msrTranslator::visitStart (S_msrAccordionRegistration& elt)
     gLogStream <<
       "--> Start visiting msrAccordionRegistration" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4536,7 +4534,7 @@ void msr2msrTranslator::visitStart (S_msrHarpPedalsTuning& elt)
     gLogStream <<
       "--> Start visiting msrHarpPedalsTuning" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4553,7 +4551,7 @@ void msr2msrTranslator::visitStart (S_msrStem& elt)
     gLogStream <<
       "--> Start visiting msrStem" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4567,7 +4565,7 @@ void msr2msrTranslator::visitStart (S_msrStem& elt)
       appendStemToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "stem is out of context, cannot be handled: '" <<
@@ -4589,7 +4587,7 @@ void msr2msrTranslator::visitEnd (S_msrStem& elt)
     gLogStream <<
       "--> End visiting msrStem" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -4604,7 +4602,7 @@ void msr2msrTranslator::visitStart (S_msrBeam& elt)
       ", line " << elt->getInputLineNumber () <<
 // JMI      ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
 // JMI      ", fOnGoingChord: " << fOnGoingChord <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4647,7 +4645,7 @@ void msr2msrTranslator::visitEnd (S_msrBeam& elt)
     gLogStream <<
       "--> End visiting msrBeam" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -4661,7 +4659,7 @@ void msr2msrTranslator::visitStart (S_msrChordBeamLink& elt)
       "--> Start visiting msrChordBeamLink " <<
       elt->asShortString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4674,7 +4672,7 @@ void msr2msrTranslator::visitStart (S_msrChordBeamLink& elt)
       elt->asShortString () <<
       ", originalBeam: " <<
       originalBeam->asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4693,7 +4691,7 @@ void msr2msrTranslator::visitStart (S_msrChordBeamLink& elt)
   else {
     displayCurrentOnGoingValues ();
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "beam link is out of context, cannot be handled: '" <<
@@ -4718,7 +4716,7 @@ void msr2msrTranslator::visitEnd (S_msrChordBeamLink& elt)
       "--> End visiting msrChordBeamLink " <<
       elt->asShortString () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4737,7 +4735,7 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
       "--> Start visiting msrChord " <<
       elt->asShortString () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4774,7 +4772,7 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "chord '" << elt->asString () <<
@@ -4812,7 +4810,7 @@ void msr2msrTranslator::visitEnd (S_msrChord& elt)
     gLogStream <<
       "--> End visiting msrChord" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4830,7 +4828,7 @@ void msr2msrTranslator::visitStart (S_msrTuplet& elt)
     gLogStream <<
       "--> Start visiting msrTuplet" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4845,8 +4843,8 @@ void msr2msrTranslator::visitStart (S_msrTuplet& elt)
     gLogStream <<
       "++> pushing tuplet '" <<
       tupletClone->asString () <<
-      "' to tuplets stack" <<
-      endl;
+      "' to tuplets std::stack" <<
+      std::endl;
   }
 #endif
 
@@ -4860,7 +4858,7 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
     gLogStream <<
       "--> End visiting msrTuplet" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4869,8 +4867,8 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
     gLogStream <<
       "Popping tuplet '" <<
       elt->asString () <<
-      "' from tuplets stack" <<
-      endl;
+      "' from tuplets std::stack" <<
+      std::endl;
   }
 #endif
 
@@ -4883,10 +4881,10 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
       gLogStream <<
         "Adding nested tuplet '" <<
       elt->asString () <<
-        "' to stack top tuplet '" <<
+        "' to std::stack top tuplet '" <<
       fTupletClonesStack.top ()->asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -4904,7 +4902,7 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
       elt->asString () <<
       "' to voice" <<
       fCurrentVoiceClone->getVoiceName () <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -4921,7 +4919,7 @@ void msr2msrTranslator::visitStart (S_msrTie& elt)
     gLogStream <<
       "--> Start visiting msrTie" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4934,7 +4932,7 @@ void msr2msrTranslator::visitStart (S_msrTie& elt)
       appendTieToChord (elt);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "tie is out of context, cannot be handled: '" <<
@@ -4956,7 +4954,7 @@ void msr2msrTranslator::visitEnd (S_msrTie& elt)
     gLogStream <<
       "--> End visiting msrTie" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -4969,7 +4967,7 @@ void msr2msrTranslator::visitStart (S_msrSegno& elt)
     gLogStream <<
       "--> Start visiting msrSegno" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4984,7 +4982,7 @@ void msr2msrTranslator::visitStart (S_msrSegno& elt)
     }
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "segno is out of context, cannot be handled: '" <<
@@ -5009,7 +5007,7 @@ void msr2msrTranslator::visitStart (S_msrDalSegno& elt)
     gLogStream <<
       "--> Start visiting msrDalSegno" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5024,7 +5022,7 @@ void msr2msrTranslator::visitStart (S_msrDalSegno& elt)
     }
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "dal segno is out of context, cannot be handled: '" <<
@@ -5053,7 +5051,7 @@ void msr2msrTranslator::visitStart (S_msrDalSegno& elt)
         measurePosition);
 */
 
-  // register it in the hidden measure and barLine descr list
+  // register it in the hidden measure and barLine descr std::list
   fPartHiddenMeasureAndBarLineDescrList.push_back (
     msrHiddenMeasureAndBarLineDescr::create (
       inputLineNumber,
@@ -5074,7 +5072,7 @@ void msr2msrTranslator::visitStart (S_msrCoda& elt)
     gLogStream <<
       "--> Start visiting msrCoda" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5089,7 +5087,7 @@ void msr2msrTranslator::visitStart (S_msrCoda& elt)
     }
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "coda is out of context, cannot be handled: '" << elt->asShortString () <<
@@ -5111,7 +5109,7 @@ void msr2msrTranslator::visitStart (S_msrEyeGlasses& elt)
     gLogStream <<
       "--> Start visiting eyeGlasses" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5126,7 +5124,7 @@ void msr2msrTranslator::visitStart (S_msrScordatura& elt)
     gLogStream <<
       "--> Start visiting scordatura" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5141,7 +5139,7 @@ void msr2msrTranslator::visitStart (S_msrPedal& elt)
     gLogStream <<
       "--> Start visiting pedal" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5156,7 +5154,7 @@ void msr2msrTranslator::visitStart (S_msrDamp& elt)
     gLogStream <<
       "--> Start visiting damp" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5171,7 +5169,7 @@ void msr2msrTranslator::visitStart (S_msrDampAll& elt)
     gLogStream <<
       "--> Start visiting dampAll" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5189,7 +5187,7 @@ void msr2msrTranslator::visitStart (S_msrBarCheck& elt)
       ", nextBarNumber: " <<
       elt->getNextBarPuristNumber () <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5204,7 +5202,7 @@ void msr2msrTranslator::visitEnd (S_msrBarCheck& elt)
     gLogStream <<
       "--> End visiting msrBarCheck" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -5217,7 +5215,7 @@ void msr2msrTranslator::visitStart (S_msrBarNumberCheck& elt)
     gLogStream <<
       "--> Start visiting msrBarNumberCheck" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5232,7 +5230,7 @@ void msr2msrTranslator::visitEnd (S_msrBarNumberCheck& elt)
     gLogStream <<
       "--> End visiting msrBarNumberCheck" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -5245,7 +5243,7 @@ void msr2msrTranslator::visitStart (S_msrLineBreak& elt)
     gLogStream <<
       "--> Start visiting msrLineBreak" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5260,7 +5258,7 @@ void msr2msrTranslator::visitEnd (S_msrLineBreak& elt)
     gLogStream <<
       "--> End visiting msrLineBreak" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -5273,7 +5271,7 @@ void msr2msrTranslator::visitStart (S_msrPageBreak& elt)
     gLogStream <<
       "--> Start visiting msrPageBreak" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5288,7 +5286,7 @@ void msr2msrTranslator::visitEnd (S_msrPageBreak& elt)
     gLogStream <<
       "--> End visiting msrPageBreak" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -5304,7 +5302,7 @@ void msr2msrTranslator::visitStart (S_msrRepeat& elt)
     gLogStream <<
       "--> Start visiting msrRepeat" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5314,7 +5312,7 @@ void msr2msrTranslator::visitStart (S_msrRepeat& elt)
       "Handling repeat start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5334,7 +5332,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeat& elt)
     gLogStream <<
       "--> End visiting msrRepeat" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5346,7 +5344,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeat& elt)
 //      "\" in part \"" <<
 //      fCurrentPartClone->getPartCombinedName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5366,7 +5364,7 @@ void msr2msrTranslator::visitStart (S_msrRepeatCommonPart& elt)
     gLogStream <<
       "--> Start visiting msrRepeatCommonPart" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5385,7 +5383,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
     gLogStream <<
       "--> End visiting msrRepeatCommonPart" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5405,7 +5403,7 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
     gLogStream <<
       "--> Start visiting msrRepeatEnding" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5416,7 +5414,7 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
       "Handling a repeat ending start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5437,7 +5435,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)
     gLogStream <<
       "--> End visiting msrRepeatEnding" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5448,7 +5446,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)
       "Handling a repeat ending end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5470,7 +5468,7 @@ void msr2msrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
     gLogStream <<
       "--> Start visiting msrMultipleFullBarRests" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5482,7 +5480,7 @@ void msr2msrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
       "Handling multiple rest start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5511,7 +5509,7 @@ void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     gLogStream <<
       "--> End visiting msrMultipleFullBarRests" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5523,7 +5521,7 @@ void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       "Handling multiple rest start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5544,7 +5542,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeat& elt)
     gLogStream <<
       "--> Start visiting msrMeasureRepeat" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5556,7 +5554,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeat& elt)
       "Handling measures repeat start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5576,7 +5574,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
     gLogStream <<
       "--> End visiting msrMeasureRepeat" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5590,7 +5588,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
       "Setting current last segment as measures repeat pattern segment in voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 */
@@ -5601,7 +5599,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
       "Handling measures repeat end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5621,7 +5619,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
     gLogStream <<
       "--> Start visiting msrMeasureRepeatPattern" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5651,7 +5649,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
     gLogStream <<
       "--> End visiting msrMeasureRepeatPattern" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5682,7 +5680,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
     gLogStream <<
       "--> Start visiting msrMeasureRepeatReplicas" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5712,7 +5710,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
     gLogStream <<
       "--> End visiting S_msrMeasureRepeatReplicas" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5746,7 +5744,7 @@ void msr2msrTranslator::visitStart (S_msrBarLine& elt)
     gLogStream <<
       "--> Start visiting msrBarLine" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5758,7 +5756,7 @@ void msr2msrTranslator::visitStart (S_msrBarLine& elt)
         elt->getBarLineCategory ()) <<
       "' in voice \"" <<
       fCurrentVoiceClone->getVoiceName () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5774,7 +5772,7 @@ void msr2msrTranslator::visitEnd (S_msrBarLine& elt)
     gLogStream <<
       "--> End visiting msrBarLine" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -5787,7 +5785,7 @@ void msr2msrTranslator::visitStart (S_msrMidiTempo& elt)
     gLogStream <<
       "--> Start visiting msrMidiTempo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -5799,7 +5797,7 @@ void msr2msrTranslator::visitEnd (S_msrMidiTempo& elt)
     gLogStream <<
       "--> End visiting msrMidiTempo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -5824,27 +5822,27 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
         " in part " <<
         partClone->getPartCombinedName () <<
         ", line " << skipGraceNotesGroup->getInputLineNumber () <<
-        endl;
+        std::endl;
     }
 #endif
 
-  map<int, S_msrStaff>
+  std::map<int, S_msrStaff>
     partStavesMap =
       partClone->
         getPartStaveNumbersToStavesMap ();
 
   for (
-    map<int, S_msrStaff>::const_iterator i=partStavesMap.begin ();
+    std::map<int, S_msrStaff>::const_iterator i=partStavesMap.begin ();
     i!=partStavesMap.end ();
     ++i
   ) {
-    list<S_msrVoice>
+    std::list<S_msrVoice>
       staffAllVoicesVector =
         (*i).second->
           getStaffAllVoicesVector ();
 
     for (
-      list<S_msrVoice>::const_iterator j=staffAllVoicesVector.begin ();
+      std::list<S_msrVoice>::const_iterator j=staffAllVoicesVector.begin ();
       j!=staffAllVoicesVector.end ();
       ++j
     ) {
@@ -5883,7 +5881,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //           "' to rehearsal mark '" <<
 //           rehearsalMark->asShortString () <<
 //           "'" <<
-//           endl;
+//           std::endl;
 //       }
 // #endif
 //
@@ -5895,15 +5893,15 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //     }
 //
 //     else {
-//       string wordsContents = elt->getWordsContents ();
+//       std::string wordsContents = elt->getWordsContents ();
 //
-//       // is this words contents in the string to dal segno kind map?
-//       const map<string, msrDalSegno::msrDalSegnoKind>&
+//       // is this words contents in the std::string to dal segno kind std::map?
+//       const std::map<std::string, msrDalSegno::msrDalSegnoKind>&
 //         converStringToDalSegnoMap =
 //           gGlobalMsr2msrOahGroup->
 //             getStringToDalSegnoKindMap ();
 //
-//       map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
+//       std::map<std::string, msrDalSegno::msrDalSegnoKind>::const_iterator
 //         it = converStringToDalSegnoMap.find (wordsContents);
 //
 //       if (it != converStringToDalSegnoMap.end ()) {
@@ -5929,7 +5927,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //             "' to dal segno element '" <<
 //             dalSegno->asShortString () <<
 //             "'" <<
-//             endl;
+//             std::endl;
 //         }
 // #endif
 //

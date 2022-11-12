@@ -28,10 +28,10 @@ enum class msrGraceNotesGroupKind {
   kGraceNotesGroupAfter
 };
 
-string msrGraceNotesGroupKindAsString (
+std::string msrGraceNotesGroupKindAsString (
   msrGraceNotesGroupKind graceNotesGroupKind);
 
-ostream& operator << (ostream& os, const msrGraceNotesGroupKind& elt);
+std::ostream& operator << (std::ostream& os, const msrGraceNotesGroupKind& elt);
 
 class EXP msrGraceNotesGroup : public msrElement
 {
@@ -45,7 +45,7 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
-                            const string&          graceNotesGroupMeasureNumber);
+                            const std::string&          graceNotesGroupMeasureNumber);
 
     SMARTP<msrGraceNotesGroup> createGraceNotesGroupNewbornClone ();
 
@@ -63,7 +63,7 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
-                            const string&          graceNotesGroupMeasureNumber);
+                            const std::string&          graceNotesGroupMeasureNumber);
 
     virtual               ~msrGraceNotesGroup ();
 
@@ -87,7 +87,7 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind)
                               { fGraceNotesGroupKind = graceNotesGroupKind; }
 
-    const list<S_msrMeasureElement>&
+    const std::list<S_msrMeasureElement>&
                           getGraceNotesGroupElementsList () const
                               { return fGraceNotesGroupElementsList; }
 
@@ -113,12 +113,12 @@ class EXP msrGraceNotesGroup : public msrElement
                               { return fGraceNotesGroupIsFollowedByNotes; }
 
     void                  setGraceNotesGroupMeasureNumber (
-                            const string& measureNumber)
+                            const std::string& measureNumber)
                               {
                                 fGraceNotesGroupMeasureNumber = measureNumber;
                               }
 
-    string                getGraceNotesGroupMeasureNumber () const
+    std::string           getGraceNotesGroupMeasureNumber () const
                               { return fGraceNotesGroupMeasureNumber; }
 
     // positions in measures
@@ -159,12 +159,12 @@ class EXP msrGraceNotesGroup : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -177,7 +177,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // note upLink
     S_msrNote             fGraceNotesGroupUpLinkToNote;
 
-    list<S_msrMeasureElement>
+    std::list<S_msrMeasureElement>
                           fGraceNotesGroupElementsList;
 
     Bool                  fGraceNotesGroupIsSlashed;
@@ -190,10 +190,10 @@ class EXP msrGraceNotesGroup : public msrElement
     // other than the one containing these grace notes:
     // the measure number is needed to create the first measure
     // in case the grace notes are at the beginning of the voice
-    string                fGraceNotesGroupMeasureNumber; // JMI ???
+    std::string           fGraceNotesGroupMeasureNumber; // JMI ???
 };
 typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
-EXP ostream& operator << (ostream& os, const S_msrGraceNotesGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrGraceNotesGroup& elt);
 
 
 }

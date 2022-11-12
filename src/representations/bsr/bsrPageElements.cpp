@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -19,8 +19,6 @@
 
 #include "bsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -75,7 +73,7 @@ void bsrPageElement::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPageElement::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -88,7 +86,7 @@ void bsrPageElement::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPageElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -101,7 +99,7 @@ void bsrPageElement::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPageElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -114,7 +112,7 @@ void bsrPageElement::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPageElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -125,30 +123,30 @@ void bsrPageElement::browseData (basevisitor* v)
 {}
 
 
-string bsrPageElement::asString () const
+std::string bsrPageElement::asString () const
 {
   // this is overriden all in actual elements
   return "??? bsrPageElement::asString () ???";
 }
 
-string bsrPageElement::asShortString () const
+std::string bsrPageElement::asShortString () const
 {
   // this can be overriden in actual elements
   return asString ();
 }
 
-void bsrPageElement::print (ostream& os) const
+void bsrPageElement::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrPageElement& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrPageElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

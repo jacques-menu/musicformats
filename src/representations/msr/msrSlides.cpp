@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 
 #include "visitor.h"
 
@@ -25,16 +25,14 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrSlideTypeKindAsString (
+std::string msrSlideTypeKindAsString (
   msrSlideTypeKind slideTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (slideTypeKind) {
     case msrSlideTypeKind::kSlideTypeNone:
@@ -51,7 +49,7 @@ string msrSlideTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrSlideTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSlideTypeKind& elt)
 {
   os << msrSlideTypeKindAsString (elt);
   return os;
@@ -63,7 +61,7 @@ S_msrSlide msrSlide::create (
   int              slideNumber,
   msrSlideTypeKind slideTypeKind,
   msrLineTypeKind  slideLineTypeKind,
-  const string&    slideTextValue)
+  const std::string&    slideTextValue)
 {
   msrSlide* o =
     new msrSlide (
@@ -81,7 +79,7 @@ msrSlide::msrSlide (
   int              slideNumber,
   msrSlideTypeKind slideTypeKind,
   msrLineTypeKind  slideLineTypeKind,
-  const string&    slideTextValue)
+  const std::string&    slideTextValue)
     : msrElement (inputLineNumber)
 {
   fSlideNumber = slideNumber;
@@ -103,7 +101,7 @@ S_msrSlide msrSlide::createSlideNewbornClone ()
       "Creating a newborn clone of slide '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -124,7 +122,7 @@ void msrSlide::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSlide::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSlide>*
@@ -135,7 +133,7 @@ void msrSlide::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSlide::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -146,7 +144,7 @@ void msrSlide::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSlide::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSlide>*
@@ -157,7 +155,7 @@ void msrSlide::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSlide::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -166,9 +164,9 @@ void msrSlide::acceptOut (basevisitor* v)
 void msrSlide::browseData (basevisitor* v)
 {}
 
-string msrSlide::asString () const
+std::string msrSlide::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Slide" <<
@@ -181,44 +179,44 @@ string msrSlide::asString () const
   return s.str ();
 }
 
-void msrSlide::print (ostream& os) const
+void msrSlide::print (std::ostream& os) const
 {
   os <<
     "[Slide" <<
     ", line " << fInputLineNumber <<
     ']' <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fSlideNumber" << fSlideNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSlideTypeKind" << fSlideTypeKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSlideLineTypeKind" << fSlideLineTypeKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSlideTextValue" << " : \"" << fSlideTextValue << "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSlide& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSlide& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

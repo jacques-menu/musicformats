@@ -19,18 +19,16 @@
 #include "oahAtomsCollection.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 // constants
-EXP extern const string K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME;
-EXP extern const string K_GENERATED_OUTPUT_KIND_BRAILLE_NAME;
-EXP extern const string K_GENERATED_OUTPUT_KIND_MUSICXML_NAME;
-EXP extern const string K_GENERATED_OUTPUT_KIND_GUIDO_NAME;
-EXP extern const string K_GENERATED_OUTPUT_KIND_MIDI_NAME;
+EXP extern const std::string K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME;
+EXP extern const std::string K_GENERATED_OUTPUT_KIND_BRAILLE_NAME;
+EXP extern const std::string K_GENERATED_OUTPUT_KIND_MUSICXML_NAME;
+EXP extern const std::string K_GENERATED_OUTPUT_KIND_GUIDO_NAME;
+EXP extern const std::string K_GENERATED_OUTPUT_KIND_MIDI_NAME;
 
 //______________________________________________________________________________
 enum class mfMultiGenerationOutputKind {
@@ -42,18 +40,18 @@ enum class mfMultiGenerationOutputKind {
   kGenerationMidi
 };
 
-EXP extern string mfMultiGenerationOutputKindAsString (
+EXP extern std::string mfMultiGenerationOutputKindAsString (
   mfMultiGenerationOutputKind multiGenerationOutputKind);
 
-ostream& operator << (ostream& os, const mfMultiGenerationOutputKind& elt);
+std::ostream& operator << (std::ostream& os, const mfMultiGenerationOutputKind& elt);
 
 EXP extern mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
-  const string& theString);
+  const std::string& theString);
 
-extern map<string, mfMultiGenerationOutputKind>
+extern std::map<std::string, mfMultiGenerationOutputKind>
   gGlobalMultiGenerationOutputKindsMap;
 
-string existingMultiGenerationOutputKinds (size_t namesListMaxLength);
+std::string existingMultiGenerationOutputKinds (size_t namesListMaxLength);
 
 void initializeMultiGenerationOutputKindsMap ();
 
@@ -69,10 +67,10 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
     // ------------------------------------------------------
 
     static SMARTP<mfMultiGenerationOutputKindAtom> create (
-                          const string&   longName,
-                          const string&   shortName,
-                          const string&   description,
-                          const string&   variableName,
+                          const std::string&   longName,
+                          const std::string&   shortName,
+                          const std::string&   description,
+                          const std::string&   variableName,
                           mfMultiGenerationOutputKind&
                                           multiGenerationOutputKindVariable,
                           mfMultiGenerationOutputKind
@@ -84,10 +82,10 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
     // ------------------------------------------------------
 
                           mfMultiGenerationOutputKindAtom (
-                          const string&   longName,
-                          const string&   shortName,
-                          const string&   description,
-                          const string&   variableName,
+                          const std::string&   longName,
+                          const std::string&   shortName,
+                          const std::string&   description,
+                          const std::string&   variableName,
                           mfMultiGenerationOutputKind&
                                           multiGenerationOutputKindVariable,
                           mfMultiGenerationOutputKind
@@ -112,7 +110,7 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
   public:
 
@@ -129,13 +127,13 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -149,7 +147,7 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
                           fMultiGenerationOutputKindValue;
 };
 typedef SMARTP<mfMultiGenerationOutputKindAtom> S_mfMultiGenerationOutputKindAtom;
-EXP ostream& operator << (ostream& os, const S_mfMultiGenerationOutputKindAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfMultiGenerationOutputKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP mfMultiGenerationOahGroup : public oahGroup
@@ -228,7 +226,7 @@ class EXP mfMultiGenerationOahGroup : public oahGroup
                           fMultiGenerationOutputKindAtom;
 };
 typedef SMARTP<mfMultiGenerationOahGroup> S_multiGenerationOahGroup;
-EXP ostream& operator << (ostream& os, const S_multiGenerationOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_multiGenerationOahGroup& elt);
 
 EXP extern S_multiGenerationOahGroup gGlobalMultiGenerationOahGroup;
 

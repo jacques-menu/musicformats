@@ -55,10 +55,10 @@ class EXP msrPartGroupElement : public msrElement
 //     // print
 //     // ------------------------------------------------------
 //
-//     string                asString () const override;
+//     std::string           asString () const override;
 //
-//     void                  print (ostream& os) const override;
-//     void                  printShort (ostream& os) const override;
+//     void                  print (std::ostream& os) const override;
+//     void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -72,7 +72,7 @@ class EXP msrPartGroupElement : public msrElement
     */
 };
 typedef SMARTP<msrPartGroupElement> S_msrPartGroupElement;
-EXP ostream& operator << (ostream& os, const S_msrPartGroupElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrPartGroupElement& elt);
 
 
 }

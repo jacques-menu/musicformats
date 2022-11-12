@@ -19,8 +19,6 @@
 #include "oahBasicTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 // layout settings
@@ -41,10 +39,10 @@ enum class oahElementValueKind {
   kElementValueOptional   // i.e. -name-help, -name-help=cpu
 };
 
-string oahElementValueKindAsString (
+std::string oahElementValueKindAsString (
   oahElementValueKind elementValueKind);
 
-ostream& operator << (ostream& os, const oahElementValueKind& elt);
+std::ostream& operator << (std::ostream& os, const oahElementValueKind& elt);
 
 enum class oahElementVisibilityKind {
 	kElementVisibilityNone, // default value
@@ -53,29 +51,29 @@ enum class oahElementVisibilityKind {
   kElementVisibilityHidden
 };
 
-string oahElementVisibilityKindAsString (
+std::string oahElementVisibilityKindAsString (
   oahElementVisibilityKind elementVisibilityKind);
 
-ostream& operator << (ostream& os, const oahElementVisibilityKind& elt);
+std::ostream& operator << (std::ostream& os, const oahElementVisibilityKind& elt);
 
 enum class oahElementHelpOnlyKind {
   kElementHelpOnlyYes,
   kElementHelpOnlyNo
 };
 
-string oahElementHelpOnlyKindAsString (
+std::string oahElementHelpOnlyKindAsString (
   oahElementHelpOnlyKind elementHelpOnlyKind);
 
-ostream& operator << (ostream& os, const oahElementHelpOnlyKind& elt);
+std::ostream& operator << (std::ostream& os, const oahElementHelpOnlyKind& elt);
 
 //_______________________________________________________________________________
 /*
-  A type to hold the matched string and information about
+  A type to hold the matched std::string and information about
   the oahElement that has been found to contain it
   in a OAH oahFindableElement's hierarchy
 
-  In the pair:
-    - first is the string that has been found
+  In the std::pair:
+    - first is the std::string that has been found
     - second is the description of the oahElement in which it has been found
 */
 class   oahFindStringMatch : public smartable
@@ -86,9 +84,9 @@ class   oahFindStringMatch : public smartable
     // ------------------------------------------------------
 
     static SMARTP<oahFindStringMatch> create (
-    												const string& elementName,
-                            const string& foundString,
-                            const string& containingFindableElementInfo);
+    												const std::string& elementName,
+                            const std::string& foundString,
+                            const std::string& containingFindableElementInfo);
 
   public:
 
@@ -96,9 +94,9 @@ class   oahFindStringMatch : public smartable
     // ------------------------------------------------------
 
                           oahFindStringMatch (
-    												const string& elementName,
-                            const string& foundString,
-                            const string& containingFindableElementInfo);
+    												const std::string& elementName,
+                            const std::string& foundString,
+                            const std::string& containingFindableElementInfo);
 
     virtual               ~oahFindStringMatch ();
 
@@ -107,13 +105,13 @@ class   oahFindStringMatch : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const string&         getElementName () const
+    const std::string&         getElementName () const
                               { return fElementName; }
 
-    const string&         getFoundString () const
+    const std::string&         getFoundString () const
                               { return fFoundString; }
 
-    const string&			    getContainingFindableElementInfo () const
+    const std::string&			    getContainingFindableElementInfo () const
                               { return fContainingFindableElementInfo; }
 
   public:
@@ -126,24 +124,24 @@ class   oahFindStringMatch : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    string			          fElementName;
-    string			          fFoundString;
-		string                fContainingFindableElementInfo;
+    std::string			          fElementName;
+    std::string			          fFoundString;
+		std::string           fContainingFindableElementInfo;
 };
 typedef SMARTP<oahFindStringMatch> S_oahFindStringMatch;
-EXP ostream& operator << (ostream& os, const S_oahFindStringMatch& elt);
-EXP ostream& operator << (ostream& os, const oahFindStringMatch& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahFindStringMatch& elt);
+EXP std::ostream& operator << (std::ostream& os, const oahFindStringMatch& elt);
 
 //______________________________________________________________________________
 /*
-  A type to hold the the OAH elements that can be found by (sub)string,
+  A type to hold the the OAH elements that can be found by (sub)std::string,
   thus implementing OAH introspection
 */
 class EXP oahFindableElement : public smartable
@@ -177,20 +175,20 @@ class EXP oahFindableElement : public smartable
     // ------------------------------------------------------
 
     virtual Bool          findStringInFindableElement (
-                            const string&               lowerCaseString,
-                            list<S_oahFindStringMatch>& foundMatchesList,
-                            ostream&                    os) const = 0;
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const = 0;
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    virtual string        asString () const = 0;
+    virtual std::string        asString () const = 0;
 
-    virtual void          print (ostream& os) const = 0;
+    virtual void          print (std::ostream& os) const = 0;
 
-		virtual const string 	containingFindableElementAsString () const = 0;
+		virtual const std::string 	containingFindableElementAsString () const = 0;
 
   private:
 
@@ -198,8 +196,8 @@ class EXP oahFindableElement : public smartable
     // ------------------------------------------------------
 };
 typedef SMARTP<oahFindableElement> S_oahFindableElement;
-EXP ostream& operator << (ostream& os, const S_oahFindableElement& elt);
-EXP ostream& operator << (ostream& os, const oahFindableElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahFindableElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const oahFindableElement& elt);
 
 //______________________________________________________________________________
 /*
@@ -221,9 +219,9 @@ class EXP oahElement : public oahFindableElement
     // ------------------------------------------------------
 
     static SMARTP<oahElement> create (
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementValueKind      elementValueKind,
                             oahElementVisibilityKind elementVisibilityKind);
 */
@@ -234,9 +232,9 @@ class EXP oahElement : public oahFindableElement
     // ------------------------------------------------------
 
                           oahElement (
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementValueKind      elementValueKind,
                             oahElementVisibilityKind elementVisibilityKind);
 
@@ -249,15 +247,15 @@ class EXP oahElement : public oahFindableElement
     // set and get
     // ------------------------------------------------------
 
-    string                getLongName () const
+    std::string           getLongName () const
                               { return fLongName; }
 
-    string                getShortName () const
+    std::string           getShortName () const
                               { return fShortName; }
 
-    string                getShortNameOrLongNameIfEmpty () const;
+    std::string           getShortNameOrLongNameIfEmpty () const;
 
-    string                getDescription () const
+    std::string           getDescription () const
                               { return fDescription; }
 
     void                  setElementValueKind (
@@ -290,17 +288,17 @@ class EXP oahElement : public oahFindableElement
     // public services
     // ------------------------------------------------------
 
-    string                fetchNames () const;
-    string                fetchNamesInColumns (
+    std::string           fetchNames () const;
+    std::string           fetchNamesInColumns (
                             int subGroupsShortNameFieldWidth) const;
 
-    string                fetchNamesBetweenQuotes () const;
+    std::string           fetchNamesBetweenQuotes () const;
 
-    string                fetchNamesBetweenParentheses () const;
-    string                fetchNamesInColumnsBetweenParentheses (
+    std::string           fetchNamesBetweenParentheses () const;
+    std::string           fetchNamesInColumnsBetweenParentheses (
                             int subGroupsShortNameFieldWidth) const;
 
-    Bool                  nameIsANameForElement (const string& name)
+    Bool                  nameIsANameForElement (const std::string& name)
                               {
                                 return
                                   name == fLongName
@@ -312,17 +310,17 @@ class EXP oahElement : public oahFindableElement
                               { return fLongName.size (); }
 
     S_oahElement          thisElementIfItHasName (
-                            const string& name);
+                            const std::string& name);
 
-    virtual void          applyElement (ostream& os) = 0;
+    virtual void          applyElement (std::ostream& os) = 0;
 
     Bool                  findStringInFindableElement (
-                            const string&               lowerCaseString,
-                            list<S_oahFindStringMatch>& foundMatchesList,
-                            ostream&                    os) const override;
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const override;
 
 		Bool									elementMatchesString (
-														const string& lowerCaseString) const;
+														const std::string& lowerCaseString) const;
   public:
 
     // visitors
@@ -338,40 +336,40 @@ class EXP oahElement : public oahFindableElement
     // print
     // ------------------------------------------------------
 
-    virtual string        asActualLongNamedOptionString () const
+    virtual std::string        asActualLongNamedOptionString () const
                               { return '-' + fLongName; }
-    virtual string        asShortNamedOptionString () const
+    virtual std::string        asShortNamedOptionString () const
                               { return '-' + fShortName; }
 
-    string                asLongNamedOptionString () const;
+    std::string           asLongNamedOptionString () const;
 
-    virtual string        asString () const override;
-    virtual string        asShortString () const;
+    virtual std::string        asString () const override;
+    virtual std::string        asShortString () const;
 
-    virtual void          printOptionHeader (ostream& os) const;
+    virtual void          printOptionHeader (std::ostream& os) const;
 
     virtual void          printOahElementEssentials (
-                            ostream& os,
+                            std::ostream& os,
                             int fieldWidth) const;
     virtual void          printOahElementEssentialsShort (
-                            ostream& os,
+                            std::ostream& os,
                             int fieldWidth) const;
 
-    virtual void          print (ostream& os) const override;
-    virtual void          printShort (ostream& os) const;
+    virtual void          print (std::ostream& os) const override;
+    virtual void          printShort (std::ostream& os) const;
 
-    virtual void          printHelp (ostream& os) const;
+    virtual void          printHelp (std::ostream& os) const;
 
-		const string 					containingFindableElementAsString () const override;
+		const std::string 					containingFindableElementAsString () const override;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    string                fLongName;
-    string                fShortName; // may be empty
-    string                fDescription;
+    std::string           fLongName;
+    std::string           fShortName; // may be empty
+    std::string           fDescription;
 
     oahElementValueKind   fElementValueKind;
 
@@ -383,8 +381,8 @@ class EXP oahElement : public oahFindableElement
 
     Bool                  fMultipleOccurrencesAllowed;
 };
-EXP ostream& operator << (ostream& os, const S_oahElement& elt);
-EXP ostream& operator << (ostream& os, const oahElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const oahElement& elt);
 
 //______________________________________________________________________________
 /*
@@ -409,8 +407,8 @@ class EXP oahElementUse : public smartable
 
     static SMARTP<oahElementUse> create (
                             S_oahElement  elementUsed,
-                            const string& nameUsed,
-                            const string& valueUsed);
+                            const std::string& nameUsed,
+                            const std::string& valueUsed);
 
   protected:
 
@@ -419,8 +417,8 @@ class EXP oahElementUse : public smartable
 
                           oahElementUse (
                             S_oahElement  elementUsed,
-                            const string& nameUsed,
-                            const string& valueUsed);
+                            const std::string& nameUsed,
+                            const std::string& valueUsed);
 
     virtual               ~oahElementUse ();
 
@@ -432,13 +430,13 @@ class EXP oahElementUse : public smartable
     S_oahElement          getElementUsed () const
                               { return fElementUsed; }
 
-    string                getNameUsed () const
+    std::string           getNameUsed () const
                               { return fNameUsed; }
 
-    void                  setValueUsed (const string& value)
+    void                  setValueUsed (const std::string& value)
                               { fValueUsed = value; }
 
-    string                getValueUsed () const
+    std::string           getValueUsed () const
                               { return fValueUsed; }
 
   public:
@@ -446,9 +444,9 @@ class EXP oahElementUse : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -457,11 +455,11 @@ class EXP oahElementUse : public smartable
 
     S_oahElement          fElementUsed;
 
-    string                fNameUsed;
-    string                fValueUsed;
+    std::string           fNameUsed;
+    std::string           fValueUsed;
 };
 typedef SMARTP<oahElementUse> S_oahElementUse;
-EXP ostream& operator << (ostream& os, const S_oahElementUse& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahElementUse& elt);
 
 
 }

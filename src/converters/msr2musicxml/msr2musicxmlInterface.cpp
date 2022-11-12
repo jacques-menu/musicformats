@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -51,22 +51,20 @@
 #include "msr2musicxmlInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
   S_msrScore   theMsrScore,
-  string       passNumber1,
-  string       passDescription1,
-  string       passNumber2,
-  string       passDescription2,
-  string       passNumber3,
-  string       passDescription3,
-  ostream&     out,
-  ostream&     err,
+  std::string       passNumber1,
+  std::string       passDescription1,
+  std::string       passNumber2,
+  std::string       passDescription2,
+  std::string       passNumber3,
+  std::string       passDescription3,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
 #ifdef TRACING_IS_ENABLED
@@ -75,7 +73,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
       "Translating an MSR score to MusicXML in \"" <<
       handler->getHandlerHeader () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -137,31 +135,31 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl <<
+      std::endl <<
       "msrScore2musicxmlWithHandler(), theMxsr contains:" <<
-      endl << endl;
+      std::endl << std::endl;
 
     ++gIndenter;
 
     printMxsr (theMxsr, gLogStream);
 
     gLogStream <<
-      endl;
+      std::endl;
 
     --gIndenter;
 
     gLogStream <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
   // convert the MXSR into MusicXML text
   // ------------------------------------------------------
 
-  string
+  std::string
     outputFileName =
       handler->
         fetchOutputFileNameFromTheOptions ();

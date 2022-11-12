@@ -22,19 +22,17 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 msrException::msrException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_msrException msrException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   msrException* o = new
     msrException (
@@ -45,12 +43,12 @@ S_msrException msrException::create (
 }
 
 msrInternalException::msrInternalException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_msrInternalException msrInternalException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   msrInternalException* o = new
     msrInternalException (
@@ -61,12 +59,12 @@ S_msrInternalException msrInternalException::create (
 }
 
 msrUnsupportedException::msrUnsupportedException (
-  string const& exceptionDescription) throw ()
+  std::string const& exceptionDescription) throw ()
   : mfException (exceptionDescription)
 {}
 
 S_msrUnsupportedException msrUnsupportedException::create (
-  string const& exceptionDescription)
+  std::string const& exceptionDescription)
 {
   msrUnsupportedException* o = new
     msrUnsupportedException (
@@ -78,9 +76,9 @@ S_msrUnsupportedException msrUnsupportedException::create (
 
 //______________________________________________________________________________
 void msrWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeWarning (
     "MSR",
@@ -90,11 +88,11 @@ void msrWarning (
 }
 
 void msrError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeError (
     "MSR",
@@ -116,11 +114,11 @@ void msrError (
 
 //______________________________________________________________________________
 void msrUnsupported (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   if (!
     (
@@ -140,7 +138,7 @@ void msrUnsupported (
     gLogStream <<
       "### MSR LIMITATION ### " <<
       inputSourceName << ":" << inputLineNumber << ": " << message <<
-      endl;
+      std::endl;
   }
 
   throw msrUnsupportedException (message);
@@ -148,9 +146,9 @@ void msrUnsupported (
 
 //______________________________________________________________________________
 void msrInternalWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message)
+  const std::string& message)
 {
   waeInternalWarning (
     "MSR",
@@ -160,11 +158,11 @@ void msrInternalWarning (
 }
 
 void msrInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message)
+  const std::string& message)
 {
   gIndenter.resetToZero ();
 

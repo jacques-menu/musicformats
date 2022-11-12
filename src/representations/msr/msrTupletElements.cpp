@@ -16,8 +16,6 @@
 #include "msrTupletElements.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -25,7 +23,7 @@ namespace MusicFormats
 msrTupletElement::msrTupletElement (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -35,13 +33,13 @@ msrTupletElement::msrTupletElement (
 msrTupletElement::~msrTupletElement ()
 {}
 
-ostream& operator << (ostream& os, const S_msrTupletElement& elt)
+std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

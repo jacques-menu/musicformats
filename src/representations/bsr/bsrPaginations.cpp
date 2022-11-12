@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
 
@@ -23,8 +23,6 @@
 
 #include "bsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -111,7 +109,7 @@ void bsrPagination::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPagination::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -124,7 +122,7 @@ void bsrPagination::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPagination::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -137,7 +135,7 @@ void bsrPagination::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPagination::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -150,7 +148,7 @@ void bsrPagination::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPagination::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -160,9 +158,9 @@ void bsrPagination::acceptOut (basevisitor* v)
 void bsrPagination::browseData (basevisitor* v)
 {}
 
-string bsrPagination::asString () const
+std::string bsrPagination::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Pagination" <<
@@ -174,9 +172,9 @@ string bsrPagination::asString () const
   return s.str ();
 }
 
-string bsrPagination::asDebugString () const
+std::string bsrPagination::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "PGNT" <<
@@ -186,38 +184,38 @@ string bsrPagination::asDebugString () const
   return s.str ();
 }
 
-void bsrPagination::print (ostream& os) const
+void bsrPagination::print (std::ostream& os) const
 {
   os <<
     "Pagination" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "printPageNumber" << " : " << fPrintPageNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "braillePageNumber" << " : " << fBraillePageNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "paginationCellsList" << " : " << fPaginationCellsList <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrPagination& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrPagination& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

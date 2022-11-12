@@ -14,8 +14,8 @@ Grammar
     6 SingleString: "single quoted_string"
     7             | "double quoted_string"
 
-    8 String: SingleString
-    9       | String SingleString
+    8 std::string: SingleString
+    9       | std::string SingleString
 
    10 Tool: "tool" ":" "name" ";"
 
@@ -25,7 +25,7 @@ Grammar
    13                | InputSourcesSeq "&" InputSource
 
    14 InputSource: "name"
-   15            | String
+   15            | std::string
 
    16 OptionalScriptElementsSeq: ScriptElementsSeq
    17                          | ε
@@ -43,7 +43,7 @@ Grammar
 
    26 OptionValue: "name"
    27            | Number
-   28            | String
+   28            | std::string
    29            | "name" "=" "name"
    30            | "name" ":" "name"
    31            | "name" "=" Number
@@ -129,12 +129,12 @@ Terminals, with rules where they appear
     "case" (268) 42 54
     "select" (269) 68
     "all" (270) 67
-    "integer number" <string> (271) 4
-    "double number" <string> (272) 5
-    "single quoted_string" <string> (273) 6
-    "double quoted_string" <string> (274) 7
-    "name" <string> (275) 10 14 26 29 30 31 32 35 36 37 38 42 50 66 68
-    "option" <string> (276) 24 25
+    "integer number" <std::string> (271) 4
+    "double number" <std::string> (272) 5
+    "single quoted_string" <std::string> (273) 6
+    "double quoted_string" <std::string> (274) 7
+    "name" <std::string> (275) 10 14 26 29 30 31 32 35 36 37 38 42 50 66 68
+    "option" <std::string> (276) 24 25
 
 
 Nonterminals, with rules where they appear
@@ -150,13 +150,13 @@ Nonterminals, with rules where they appear
     $@2 (25)
         on left: 2
         on right: 3
-    Number <string> (26)
+    Number <std::string> (26)
         on left: 4 5
         on right: 27 31 32
-    SingleString <string> (27)
+    SingleString <std::string> (27)
         on left: 6 7
         on right: 8 9
-    String <string> (28)
+    std::string <std::string> (28)
         on left: 8 9
         on right: 9 15 28
     Tool (29)
@@ -183,7 +183,7 @@ Nonterminals, with rules where they appear
     Option (36)
         on left: 24 25
         on right: 20
-    OptionValue <string> (37)
+    OptionValue <std::string> (37)
         on left: 26 27 28 29 30 31 32
         on right: 25
     ChoiceDeclaration (38)
@@ -258,7 +258,7 @@ Nonterminals, with rules where they appear
     SelectStatementSeq (61)
         on left: 64 65
         on right: 62 65
-    LabelName <string> (62)
+    LabelName <std::string> (62)
         on left: 66 67
         on right: 68
     SelectStatement (63)
@@ -345,7 +345,7 @@ State 9
     "name"                  shift, and go to state 14
 
     SingleString     go to state 15
-    String           go to state 16
+    std::string           go to state 16
     InputSourcesSeq  go to state 17
     InputSource      go to state 18
 
@@ -399,15 +399,15 @@ State 14
 
 State 15
 
-    8 String: SingleString •
+    8 std::string: SingleString •
 
-    $default  reduce using rule 8 (String)
+    $default  reduce using rule 8 (std::string)
 
 
 State 16
 
-    9 String: String • SingleString
-   15 InputSource: String •
+    9 std::string: std::string • SingleString
+   15 InputSource: std::string •
 
     "single quoted_string"  shift, and go to state 12
     "double quoted_string"  shift, and go to state 13
@@ -464,7 +464,7 @@ State 21
 
     Number        go to state 38
     SingleString  go to state 15
-    String        go to state 39
+    std::string        go to state 39
     OptionValue   go to state 40
 
 
@@ -532,9 +532,9 @@ State 28
 
 State 29
 
-    9 String: String SingleString •
+    9 std::string: std::string SingleString •
 
-    $default  reduce using rule 9 (String)
+    $default  reduce using rule 9 (std::string)
 
 
 State 30
@@ -546,7 +546,7 @@ State 30
     "name"                  shift, and go to state 14
 
     SingleString  go to state 15
-    String        go to state 16
+    std::string        go to state 16
     InputSource   go to state 43
 
 
@@ -615,8 +615,8 @@ State 38
 
 State 39
 
-    9 String: String • SingleString
-   28 OptionValue: String •
+    9 std::string: std::string • SingleString
+   28 OptionValue: std::string •
 
     "single quoted_string"  shift, and go to state 12
     "double quoted_string"  shift, and go to state 13

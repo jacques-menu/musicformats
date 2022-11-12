@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
@@ -34,15 +34,13 @@
 #include "musicxml2brailleRegularHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_xml2brlRegularHandler xml2brlRegularHandler::create (
-  const string&     serviceName,
-  const string&     handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   S_xml2brlInsiderHandler
                     insiderOahHandler)
 {
@@ -58,8 +56,8 @@ S_xml2brlRegularHandler xml2brlRegularHandler::create (
 }
 
 xml2brlRegularHandler::xml2brlRegularHandler (
-  const string&     serviceName,
-  const string&     handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   S_xml2brlInsiderHandler
                     insiderOahHandler)
   : oahRegularHandler (
@@ -81,7 +79,7 @@ xml2brlRegularHandler::xml2brlRegularHandler (
       "xml2brlRegularHandler \"" <<
       fHandlerHeader <<
       "\" has been initialized as:" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -97,7 +95,7 @@ void xml2brlRegularHandler::createRegularHandlerGroups ()
       "Creating the regular handler groups for \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -168,7 +166,7 @@ void xml2brlRegularHandler::createRegularHandlerGroups ()
       "All the regular handler groups for \"" <<
       fHandlerHeader <<
       "\" have been created" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1327,7 +1325,7 @@ void xml2brlRegularHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1335,33 +1333,33 @@ void xml2brlRegularHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-void xml2brlRegularHandler::print (ostream& os) const
+void xml2brlRegularHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "xml2brlRegularHandler '" << fHandlerHeader << "':" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -1369,7 +1367,7 @@ void xml2brlRegularHandler::print (ostream& os) const
       // print the options group
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -1377,16 +1375,16 @@ void xml2brlRegularHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_xml2brlRegularHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_xml2brlRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

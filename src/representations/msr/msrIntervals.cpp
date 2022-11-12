@@ -20,8 +20,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -198,10 +196,10 @@ int msrIntervalAsQuarterTones (
     msrIntervalKindAsSemiTones (intervalKind) * 2;
 }
 
-string msrIntervalKindAsString (
+std::string msrIntervalKindAsString (
   msrIntervalKind intervalKind)
 {
-  string result;
+  std::string result;
 
   switch (intervalKind) {
     case msrIntervalKind::kInterval_NO_:
@@ -363,16 +361,16 @@ string msrIntervalKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrIntervalKind& elt)
+std::ostream& operator << (std::ostream& os, const msrIntervalKind& elt)
 {
   os << msrIntervalKindAsString (elt);
   return os;
 }
 
-string msrIntervalAsShortString (
+std::string msrIntervalAsShortString (
   msrIntervalKind intervalKind)
 {
-  string result;
+  std::string result;
 
   switch (intervalKind) {
     case msrIntervalKind::kInterval_NO_:
@@ -4411,7 +4409,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
       {
         // computing intervals on double or triple flats/sharps
         // is not considered useful, hence not supported
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Sorry, computing intervals from semitones pitch '" <<
@@ -7300,7 +7298,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
       {
         // computing intervals on double or triple flats/sharps
         // is not considered useful, hence not supported
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Sorry, computing intervals from quartertones pitch '" <<

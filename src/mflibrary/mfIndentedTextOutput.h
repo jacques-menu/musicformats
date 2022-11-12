@@ -12,7 +12,7 @@
 #ifndef ___mfIndentedTextOutput___
 #define ___mfIndentedTextOutput___
 
-#include <sstream>   // for stringbuf
+#include <sstream>   // for std::stringbuf
 
 #include "exports.h"
 #include "smartpointer.h"
@@ -20,7 +20,6 @@
 #include "mfBool.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
@@ -34,7 +33,7 @@ class EXP mfOutputIndenter
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mfOutputIndenter (string spacer = "  ");
+                          mfOutputIndenter (std::string spacer = "  ");
 
     virtual               ~mfOutputIndenter ();
 
@@ -44,7 +43,7 @@ class EXP mfOutputIndenter
     // ------------------------------------------------------
 
     // spacer
-    string                getSpacer () const
+    std::string           getSpacer () const
                               { return fSpacer; }
 
     // indentation
@@ -89,18 +88,18 @@ class EXP mfOutputIndenter
                               { return fIndentation != value; }
 
     // output as much space as specified
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
     // current offset
-    string                fetchCurrentOffset ();
+    std::string           fetchCurrentOffset ();
 
-    // indent a multiline 'R"(...)"' string
+    // indent a multiline 'R"(...)"' std::string
     void                  indentMultiLineString (
-                            const string& theString,
-                            ostream&      os);
+                            const std::string& theString,
+                            std::ostream&      os);
 
-    string                indentMultiLineStringWithCurrentOffset (
-                            const string& theString);
+    std::string           indentMultiLineStringWithCurrentOffset (
+                            const std::string& theString);
 
     // global variables for general use
     static mfOutputIndenter
@@ -112,10 +111,10 @@ class EXP mfOutputIndenter
     // ------------------------------------------------------
 
     int                   fIndentation;
-    string                fSpacer;
+    std::string           fSpacer;
 };
 
-EXP ostream& operator << (ostream& os, const mfOutputIndenter& theIndenter);
+EXP std::ostream& operator << (std::ostream& os, const mfOutputIndenter& theIndenter);
 
 // useful shortcut macros
 #define gIndenter mfOutputIndenter::gGlobalOStreamIndenter
@@ -126,14 +125,14 @@ EXP ostream& operator << (ostream& os, const mfOutputIndenter& theIndenter);
 // with the current indentation, i.e. spaces
 
 /*
-endl declaration:
+std::endl declaration:
 
-  endl for ostream
-  ostream& endl (ostream& os);
+  std::endl for std::ostream
+  std::ostream& std::endl (std::ostream& os);
 
   basic template
   template <class   charT, class   traits>
-  basic_ostream<charT,traits>& endl (basic_ostream<charT,traits>& os);
+  basic_ostream<charT,traits>& std::endl (basic_ostream<charT,traits>& os);
 
   Insert newline and flush
   Inserts a new-line character and flushes the stream.
@@ -146,18 +145,18 @@ Reference for this class:
   https://stackoverflow.com/questions/2212776/overload-handling-of-stdendl
 */
 
-class EXP mfIndentedStreamBuf: public stringbuf
+class EXP mfIndentedStreamBuf: public std::stringbuf
 {
   private:
 
-    ostream&              fOutputSteam;
+    std::ostream&              fOutputSteam;
     mfOutputIndenter&     fOutputIndenter;
 
   public:
 
     // constructor
                           mfIndentedStreamBuf (
-                            ostream&   outputStream,
+                            std::ostream&   outputStream,
                             mfOutputIndenter& theIndenter)
                             : fOutputSteam (
                                 outputStream),
@@ -177,19 +176,19 @@ class EXP mfIndentedStreamBuf: public stringbuf
 };
 
 //______________________________________________________________________________
-class EXP mfIndentedOstream: public ostream, public smartable
+class EXP mfIndentedOstream: public std::ostream, public smartable
 {
 /*
 Reference for this class:
   https://stackoverflow.com/questions/2212776/overload-handling-of-stdendl
 
 Usage:
-  mfIndentedOstream myStream (cout);
+  mfIndentedOstream myStream (std::cout);
 
   myStream <<
-    1 << 2 << 3 << endl <<
-    5 << 6 << endl <<
-    7 << 8 << endl;
+    1 << 2 << 3 << std::endl <<
+    5 << 6 << std::endl <<
+    7 << 8 << std::endl;
 */
 
   public:
@@ -198,7 +197,7 @@ Usage:
     // ------------------------------------------------------
 
     static SMARTP<mfIndentedOstream> create (
-                            ostream&        theOStream,
+                            std::ostream&        theOStream,
                             mfOutputIndenter& theIndenter)
                               {
                                 mfIndentedOstream* o = new mfIndentedOstream (
@@ -213,9 +212,9 @@ Usage:
     // ------------------------------------------------------
 
                           mfIndentedOstream (
-                            ostream&        theOStream,
+                            std::ostream&        theOStream,
                             mfOutputIndenter& theIndenter)
-                            : ostream (
+                            : std::ostream (
                                 & fIndentedStreamBuf),
                               fIndentedStreamBuf (
                                 theOStream,
@@ -263,8 +262,8 @@ EXP extern S_indentedOstream gGlobalLogIndentedOstream;
 #define gLogStream    *gGlobalLogIndentedOstream
 
 EXP extern void createTheGlobalIndentedOstreams (
-  ostream& theOutputStream,
-  ostream& theLogStream);
+  std::ostream& theOutputStream,
+  std::ostream& theLogStream);
 
 
 }

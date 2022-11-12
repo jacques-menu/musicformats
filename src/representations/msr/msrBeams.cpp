@@ -26,17 +26,15 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // beams
 //______________________________________________________________________________
-string msrBeamKindAsString (
+std::string msrBeamKindAsString (
   msrBeamKind beamKind)
 {
-  string result;
+  std::string result;
 
   switch (beamKind) {
     case msrBeamKind::kBeam_NO_:
@@ -62,7 +60,7 @@ string msrBeamKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBeamKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBeamKind& elt)
 {
   os << msrBeamKindAsString (elt);
   return os;
@@ -96,7 +94,7 @@ msrBeam::msrBeam (
       "Creating beam '" <<
       this->asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -109,7 +107,7 @@ void msrBeam::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeam::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeam>*
@@ -120,7 +118,7 @@ void msrBeam::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeam::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -131,7 +129,7 @@ void msrBeam::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrBeam::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrBeam>*
@@ -142,7 +140,7 @@ void msrBeam::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrBeam::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -151,9 +149,9 @@ void msrBeam::acceptOut (basevisitor* v)
 void msrBeam::browseData (basevisitor* v)
 {}
 
-string msrBeam::asString () const
+std::string msrBeam::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Beam " <<
@@ -165,18 +163,18 @@ string msrBeam::asString () const
   return s.str ();
 }
 
-void msrBeam::print (ostream& os) const
+void msrBeam::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrBeam& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBeam& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "mfStringsHandling.h"
 
@@ -28,8 +28,6 @@
 
 #include "visitor.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -196,7 +194,7 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -209,7 +207,7 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mxsrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -222,7 +220,7 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -235,7 +233,7 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mxsrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -248,7 +246,7 @@ void mxsrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -257,7 +255,7 @@ void mxsrOahGroup::printMxsrOahValues (int fieldWidth)
 {
   gLogStream <<
     "The MusicXML options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -267,32 +265,32 @@ void mxsrOahGroup::printMxsrOahValues (int fieldWidth)
 
   gLogStream <<
     "Trace:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fTraceEncoding" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fTraceEncoding" << " : " <<
     fTraceEncoding <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fTraceDivisions" << " : " <<
+    std::setw (fieldWidth) << "fTraceDivisions" << " : " <<
     fTraceDivisions <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fTraceBackup" << " : " <<
+    std::setw (fieldWidth) << "fTraceBackup" << " : " <<
     fTraceBackup <<
-    endl <<
-    setw (fieldWidth) << "fTraceForward" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceForward" << " : " <<
     fTraceForward <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fTraceMxsr" << " : " <<
+    std::setw (fieldWidth) << "fTraceMxsr" << " : " <<
     fTraceMxsr <<
-    endl <<
-    setw (fieldWidth) << "fTraceMxsrVisitors" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceMxsrVisitors" << " : " <<
     fTraceMxsrVisitors <<
-    endl;
+    std::endl;
 
   --gIndenter;
 #endif
@@ -300,13 +298,13 @@ void mxsrOahGroup::printMxsrOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_mxsrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_mxsrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -319,7 +317,7 @@ S_mxsrOahGroup createGlobalMxsrOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global mxsr OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

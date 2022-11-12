@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <sstream>
 #include <regex>
 
@@ -44,9 +44,9 @@ msrColorRGB::msrColorRGB (
 }
 
 msrColorRGB::msrColorRGB (
-  const string& theString)
+  const std::string& theString)
 {
-  string regularExpression (
+  std::string regularExpression (
     "([[:digit:]]*.[[:digit:]]*)" // RString
     ","
     "([[:digit:]]*.[[:digit:]]*)" // GString
@@ -54,8 +54,8 @@ msrColorRGB::msrColorRGB (
     "([[:digit:]]*.[[:digit:]]*)" // BString
     );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -65,10 +65,10 @@ msrColorRGB::msrColorRGB (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for RGB color string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for RGB color std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -79,22 +79,22 @@ msrColorRGB::msrColorRGB (
         gLogStream <<
           '[' << sm [i] << "] ";
       } // for
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 #endif
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
-      "msrColorRGB string '" << theString <<
+      "msrColorRGB std::string '" << theString <<
       "' is ill-formed";
 
     oahError (s.str ());
   }
 
-  string
+  std::string
     RString = sm [1],
     GString = sm [2],
     BString = sm [3];
@@ -105,13 +105,13 @@ msrColorRGB::msrColorRGB (
       "--> RString = \"" << RString << "\", " <<
       "--> GString = \"" << GString << "\"" <<
       "--> BString = \"" << BString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // are these strings alright?
   {
-    stringstream s;
+    std::stringstream s;
 
     s << RString;
     s >> fR;
@@ -120,11 +120,11 @@ msrColorRGB::msrColorRGB (
       gLogStream <<
         "### ERROR: the R component " << fR <<
         " is not in the [0.0..1.0] interval in RGB color '" << theString << "'" <<
-        endl;
+        std::endl;
     }
   }
   {
-    stringstream s;
+    std::stringstream s;
 
     s << GString;
     s >> fG;
@@ -133,11 +133,11 @@ msrColorRGB::msrColorRGB (
       gLogStream <<
         "### ERROR: the G component " << fG <<
         " is not in the [0.0..1.0] interval in RGB color '" << theString << "'" <<
-        endl;
+        std::endl;
     }
   }
   {
-    stringstream s;
+    std::stringstream s;
 
     s << BString;
     s >> fB;
@@ -146,19 +146,19 @@ msrColorRGB::msrColorRGB (
       gLogStream <<
         "### ERROR: the B component " << fB <<
         " is not in the [0.0..1.0] interval in RGB color '" << theString << "'" <<
-        endl;
+        std::endl;
     }
   }
 
 }
 
-string msrColorRGB::asString (int precision) const
+std::string msrColorRGB::asString (int precision) const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[ColorRGB " <<
-    setprecision (precision) <<
+    std::setprecision (precision) <<
     '[' <<
     fR <<
     "," <<
@@ -170,12 +170,12 @@ string msrColorRGB::asString (int precision) const
   return s.str ();
 }
 
-string msrColorRGB::asSpaceSeparatedString (int precision) const
+std::string msrColorRGB::asSpaceSeparatedString (int precision) const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
-    setprecision (precision) <<
+    std::setprecision (precision) <<
     fR <<
     ' ' <<
     fG <<
@@ -185,12 +185,12 @@ string msrColorRGB::asSpaceSeparatedString (int precision) const
   return s.str ();
 }
 
-void msrColorRGB::print (ostream& os) const
+void msrColorRGB::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 };
 
-ostream& operator << (ostream& os, const msrColorRGB& elt)
+std::ostream& operator << (std::ostream& os, const msrColorRGB& elt)
 {
   elt.print (os);
   return os;
@@ -199,15 +199,15 @@ ostream& operator << (ostream& os, const msrColorRGB& elt)
 // AlphaRGB colors
 //______________________________________________________________________________
 msrColorAlphaRGB::msrColorAlphaRGB (
-  const string& colorRGB,
-  const string& colorAlpha)
+  const std::string& colorRGB,
+  const std::string& colorAlpha)
 {
   fColorRGB   = colorRGB;
   fColorAlpha = colorAlpha;
 }
 
 msrColorAlphaRGB::msrColorAlphaRGB (
-  const string& colorRGB)
+  const std::string& colorRGB)
 {
   fColorRGB   = colorRGB;
   fColorAlpha = "FF";
@@ -216,9 +216,9 @@ msrColorAlphaRGB::msrColorAlphaRGB (
 msrColorAlphaRGB::~msrColorAlphaRGB ()
 {}
 
-string msrColorAlphaRGB::asString () const
+std::string msrColorAlphaRGB::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[ColorAlphaRGB" <<
@@ -229,12 +229,12 @@ string msrColorAlphaRGB::asString () const
   return s.str ();
 }
 
-void msrColorAlphaRGB::print (ostream& os) const
+void msrColorAlphaRGB::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 };
 
-ostream& operator << (ostream& os, const msrColorAlphaRGB& elt)
+std::ostream& operator << (std::ostream& os, const msrColorAlphaRGB& elt)
 {
   elt.print (os);
   return os;

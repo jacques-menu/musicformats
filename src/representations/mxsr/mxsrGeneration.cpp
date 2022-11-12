@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-//#include <iomanip>      // setw, setprecision, ...
+//#include <iomanip>      // std::setw, std::setprecision, ...
 //#include <cmath>
 //#include <string>
 
@@ -24,13 +24,11 @@
 #endif
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //________________________________________________________________________
-string mxmlelementAsString (Sxmlelement elem)
+std::string mxmlelementAsString (Sxmlelement elem)
 {
   int
     elemType = elem->getType ();
@@ -41,7 +39,7 @@ string mxmlelementAsString (Sxmlelement elem)
   const std::vector<Sxmlattribute>& elemAttributes =
     elem->attributes();
 
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[mxmlelement " <<
@@ -53,7 +51,7 @@ string mxmlelementAsString (Sxmlelement elem)
   return s.str ();
 }
 
-void printMxsr (const Sxmlelement theMxsr, ostream& os)
+void printMxsr (const Sxmlelement theMxsr, std::ostream& os)
 {
   xmlvisitor v (os);
   tree_browser<xmlelement> browser (&v);
@@ -61,7 +59,7 @@ void printMxsr (const Sxmlelement theMxsr, ostream& os)
 }
 
 //------------------------------------------------------------------------
-Sxmlelement createMxmlelement (int type, const string& value)
+Sxmlelement createMxmlelement (int type, const std::string& value)
 {
   Sxmlelement result = factory::instance().create(type);
 
@@ -89,7 +87,7 @@ Sxmlelement createMxmlFloatElement (int type, float value)
 }
 
 //------------------------------------------------------------------------
-Sxmlattribute createMxmlAttribute (const string& name, const string& value)
+Sxmlattribute createMxmlAttribute (const std::string& name, const std::string& value)
 {
   Sxmlattribute result = xmlattribute::create();
 
@@ -99,7 +97,7 @@ Sxmlattribute createMxmlAttribute (const string& name, const string& value)
   return result;
 }
 
-Sxmlattribute createMxmlIntegerAttribute (const string& name, int value)
+Sxmlattribute createMxmlIntegerAttribute (const std::string& name, int value)
 {
   Sxmlattribute result = xmlattribute::create();
 
@@ -109,7 +107,7 @@ Sxmlattribute createMxmlIntegerAttribute (const string& name, int value)
   return result;
 }
 
-Sxmlattribute createMxmlFloatAttribute (const string& name, float value)
+Sxmlattribute createMxmlFloatAttribute (const std::string& name, float value)
 {
   Sxmlattribute result = xmlattribute::create();
 

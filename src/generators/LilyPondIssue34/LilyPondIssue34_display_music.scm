@@ -3,10 +3,10 @@
 (make-music
  'SequentialMusic
  'elements
- (list (make-music
+ (std::list (make-music
         'KeyChangeEvent
         'pitch-alist
-        (list (cons 5 0)
+        (std::list (cons 5 0)
               (cons 6 0)
               (cons 0 1/2)
               (cons 1 0)
@@ -28,7 +28,7 @@
          'grob-value
          'numbered
          'grob-property-path
-         (list (quote style))
+         (std::list (quote style))
          'symbol
          'TimeSignature))
        
@@ -49,7 +49,7 @@
         (make-music
          'SequentialMusic
          'elements
-         (list (make-music
+         (std::list (make-music
                 'PropertySet
                 'value
                 "clefs.G"
@@ -90,14 +90,14 @@
         (make-music
          'SequentialMusic
          'elements
-         (list (make-music
+         (std::list (make-music
                 'SequentialMusic
                 'elements
                 '())
                (make-music
                 'SequentialMusic
                 'elements
-                (list (make-music
+                (std::list (make-music
                        'SkipEvent
                        'duration
                        (ly:make-duration 4))
@@ -126,7 +126,7 @@
          'grob-value
          1
          'grob-property-path
-         (list (quote direction))
+         (std::list (quote direction))
          'symbol
          'Stem))
        
@@ -150,10 +150,10 @@
 (make-music
  'SequentialMusic
  'elements
- (list (make-music
+ (std::list (make-music
         'KeyChangeEvent
         'pitch-alist
-        (list (cons 5 0)
+        (std::list (cons 5 0)
               (cons 6 0)
               (cons 0 1/2)
               (cons 1 0)
@@ -175,7 +175,7 @@
          'grob-value
          'numbered
          'grob-property-path
-         (list (quote style))
+         (std::list (quote style))
          'symbol
          'TimeSignature))
        
@@ -196,7 +196,7 @@
         (make-music
          'SequentialMusic
          'elements
-         (list (make-music
+         (std::list (make-music
                 'PropertySet
                 'value
                 "clefs.G"
@@ -237,14 +237,14 @@
         (make-music
          'SequentialMusic
          'elements
-         (list (make-music
+         (std::list (make-music
                 'SequentialMusic
                 'elements
                 '())
                (make-music
                 'SequentialMusic
                 'elements
-                (list (make-music
+                (std::list (make-music
                        'SkipEvent
                        'duration
                        (ly:make-duration 4))
@@ -264,7 +264,7 @@
        (make-music
         'SequentialMusic
         'elements
-        (list (make-music
+        (std::list (make-music
                'ContextSpeccedMusic
                'context-type
                'Bottom
@@ -272,7 +272,7 @@
                (make-music
                 'RevertProperty
                 'grob-property-path
-                (list (quote stencil))
+                (std::list (quote stencil))
                 'symbol
                 'Arpeggio))
               (make-music
@@ -283,7 +283,7 @@
                (make-music
                 'RevertProperty
                 'grob-property-path
-                (list (quote X-extent))
+                (std::list (quote X-extent))
                 'symbol
                 'Arpeggio))
               (make-music
@@ -294,7 +294,7 @@
                (make-music
                 'RevertProperty
                 'grob-property-path
-                (list (quote arpeggio-direction))
+                (std::list (quote arpeggio-direction))
                 'symbol
                 'Arpeggio))
               (make-music
@@ -305,7 +305,7 @@
                (make-music
                 'RevertProperty
                 'grob-property-path
-                (list (quote dash-definition))
+                (std::list (quote dash-definition))
                 'symbol
                 'Arpeggio))))
        
@@ -321,14 +321,14 @@
          'grob-value
          -1
          'grob-property-path
-         (list (quote direction))
+         (std::list (quote direction))
          'symbol
          'Stem))
        
        (make-music
         'EventChord
         'elements
-        (list (make-music
+        (std::list (make-music
                'NoteEvent
                'duration
                (ly:make-duration 2)
@@ -362,10 +362,10 @@
 (make-music
  'SequentialMusic
  'elements
- (list (make-music
+ (std::list (make-music
         'KeyChangeEvent
         'pitch-alist
-        (list (cons 5 0)
+        (std::list (cons 5 0)
               (cons 6 0)
               (cons 0 1/2)
               (cons 1 0)
@@ -387,7 +387,7 @@
          'grob-value
          'numbered
          'grob-property-path
-         (list (quote style))
+         (std::list (quote style))
          'symbol
          'TimeSignature))
        
@@ -408,7 +408,7 @@
         (make-music
          'SequentialMusic
          'elements
-         (list (make-music
+         (std::list (make-music
                 'PropertySet
                 'value
                 "clefs.F"
@@ -449,14 +449,14 @@
         (make-music
          'SequentialMusic
          'elements
-         (list (make-music
+         (std::list (make-music
                 'SequentialMusic
                 'elements
                 '())
                (make-music
                 'SequentialMusic
                 'elements
-                (list (make-music
+                (std::list (make-music
                        'ContextSpeccedMusic
                        'context-type
                        'Bottom
@@ -468,7 +468,7 @@
                         'grob-value
                         1
                         'grob-property-path
-                        (list (quote direction))
+                        (std::list (quote direction))
                         'symbol
                         'Stem))
                       (make-music
@@ -483,13 +483,13 @@
                         'grob-value
                         1
                         'grob-property-path
-                        (list (quote direction))
+                        (std::list (quote direction))
                         'symbol
                         'Slur))
                       (make-music
                        'NoteEvent
                        'articulations
-                       (list (make-music
+                       (std::list (make-music
                               'BeamEvent
                               'span-direction
                               -1)
@@ -510,7 +510,7 @@
                       (make-music
                        'NoteEvent
                        'articulations
-                       (list (make-music
+                       (std::list (make-music
                               'BeamEvent
                               'span-direction
                               1))
@@ -535,14 +535,14 @@
          'grob-value
          -1
          'grob-property-path
-         (list (quote direction))
+         (std::list (quote direction))
          'symbol
          'Stem))
        
        (make-music
         'NoteEvent
         'articulations
-        (list (make-music
+        (std::list (make-music
                'BeamEvent
                'span-direction
                -1)
@@ -572,7 +572,7 @@
        (make-music
         'NoteEvent
         'articulations
-        (list (make-music
+        (std::list (make-music
                'BeamEvent
                'span-direction
                1))

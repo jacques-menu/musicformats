@@ -21,7 +21,7 @@ Lilypond generation is done in \bsrToBrailleBoth{bsr2brailleTranslator}.
                           bsr2brailleTranslator (
                             S_bsrScore     bsrScore,
                             const S_bsrOahGroup& bsrOpts,
-                            ostream&       brailleOutputStream);
+                            std::ostream&       brailleOutputStream);
 
     virtual               ~bsr2brailleTranslator ();
 
@@ -50,7 +50,7 @@ It contains these fields among others:
     // the output stream
     // ------------------------------------------------------
 
-    ostream&              fBrailleOutputStream;
+    std::ostream&              fBrailleOutputStream;
 \end{lstlisting}
 
 
@@ -148,7 +148,7 @@ The base \class{bsrBrailleGenerator} contains:
     // protected fields
     // ------------------------------------------------------
 
-    ostream&              fBrailleOutputStream;
+    std::ostream&              fBrailleOutputStream;
 \end{lstlisting}
 
 
@@ -156,19 +156,19 @@ The base \class{bsrBrailleGenerator} contains:
 \section{Writing braille cells}
 % -------------------------------------------------------------------------
 
-Braille cells are output to an \fileName{ostream} as hexadecimal strings by \virtualMethod{generateCodeForBrailleCell} methods in \bsrToBraille{brailleGeneration.h}, depending on the kind of output chosen.
+Braille cells are output to an \fileName{std::ostream} as hexadecimal strings by \virtualMethod{generateCodeForBrailleCell} methods in \bsrToBraille{brailleGeneration.h}, depending on the kind of output chosen.
 
 For example, ASCII braille generation is done by:
 \begin{lstlisting}[language=CPlusPlus]
 void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
   bsrCellKind cellKind)
 {
-  string stringForCell;
+  std::string stringForCell;
 
   switch (cellKind) {
     case bsrCellKind::kCellUnknown:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cannot generate code for braille cell '" <<

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -31,8 +31,6 @@
 
 #include "oahAtomsCollection.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -103,7 +101,7 @@ R"(Don't show errors in the log.)",
         regex_replace (
 R"(Do not quit execution on errors and go ahead.
 This may be useful when debugging EXECUTABLE.)",
-          regex ("EXECUTABLE"),
+          std::regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "fDontQuitOnErrors",
         fDontQuitOnErrors));
@@ -135,7 +133,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> waeOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -148,7 +146,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching waeOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -161,7 +159,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> waeOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -174,7 +172,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching waeOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -187,7 +185,7 @@ void waeOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> waeOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -197,29 +195,29 @@ void waeOahGroup::printWaeOahValues (int fieldWidth)
 {
   gLogStream <<
     "The wae options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // warning and error handling
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (fieldWidth) << "Warning and error handling:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "Warning and error handling:" <<
+    std::endl;
 
   ++gIndenter;
 
   gLogStream <<
-    setw (fieldWidth) << "fQuiet" << " : " <<
+    std::setw (fieldWidth) << "fQuiet" << " : " <<
     fQuiet <<
-    endl <<
-    setw (fieldWidth) << "fDontShowErrors" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fDontShowErrors" << " : " <<
     fDontShowErrors <<
-    endl <<
-    setw (fieldWidth) << "fDontQuitOnErrors" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fDontQuitOnErrors" << " : " <<
     fDontQuitOnErrors <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -227,13 +225,13 @@ void waeOahGroup::printWaeOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_waeOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_waeOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -246,7 +244,7 @@ S_waeOahGroup createGlobalWaeOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global wae OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

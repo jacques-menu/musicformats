@@ -44,10 +44,10 @@ class EXP oahInsiderHandler : public oahHandler
     // ------------------------------------------------------
 
     static SMARTP<oahInsiderHandler> create (
-                            const string&           serviceName,
-                            const string&           handlerHeader,
-                            const string&           handlerDescription,
-                            const string&           handlerUsage);
+                            const std::string&           serviceName,
+                            const std::string&           handlerHeader,
+                            const std::string&           handlerDescription,
+                            const std::string&           handlerUsage);
 */
 
   protected:
@@ -56,10 +56,10 @@ class EXP oahInsiderHandler : public oahHandler
     // ------------------------------------------------------
 
                           oahInsiderHandler (
-                            const string&           serviceName,
-                            const string&           handlerHeader,
-                            const string&           handlerDescription,
-                            const string&           handlerUsage);
+                            const std::string&           serviceName,
+                            const std::string&           handlerHeader,
+                            const std::string&           handlerDescription,
+                            const std::string&           handlerUsage);
 
     virtual               ~oahInsiderHandler ();
 
@@ -88,9 +88,9 @@ class EXP oahInsiderHandler : public oahHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -109,7 +109,7 @@ class EXP oahInsiderHandler : public oahHandler
 
 };
 typedef SMARTP<oahInsiderHandler> S_oahInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_oahInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahInsiderHandler& elt);
 
 
 }

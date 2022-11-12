@@ -46,8 +46,6 @@
 
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
@@ -55,8 +53,8 @@ S_msrScore translateMsrToMsr (
   S_msrScore        originalMsrScore,
   S_msrOahGroup     msrOpts,
   S_msr2msrOahGroup msr2msrOpts,
-  const string&     passNumber,
-  const string&     passDescription)
+  const std::string&     passNumber,
+  const std::string&     passDescription)
 {
   // sanity check
   mfAssert (
@@ -73,18 +71,18 @@ S_msrScore translateMsrToMsr (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -110,7 +108,7 @@ S_msrScore translateMsrToMsr (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "gIndenter value after pass 3: " <<
@@ -131,7 +129,7 @@ S_msrScore translateMsrToMsr (
       "### translateMsrToMsr gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -180,8 +178,8 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   S_msrScore        originalMsrScore,
   S_msrOahGroup     msrOpts,
   S_msr2msrOahGroup msr2msrOpts,
-  const string&     passNumber,
-  const string&     passDescription,
+  const std::string&     passNumber,
+  const std::string&     passDescription,
   S_msrPathToVoice  pathToVoice)
 {
   // sanity check
@@ -199,18 +197,18 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -237,7 +235,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "gIndenter value after pass 3: " <<
@@ -258,7 +256,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
       "### translateMsrToMsr gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }

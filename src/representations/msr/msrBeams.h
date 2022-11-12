@@ -48,10 +48,10 @@ enum class msrBeamKind {
   kBeamForwardHook, kBeamBackwardHook
 };
 
-EXP string msrBeamKindAsString (
+EXP std::string msrBeamKindAsString (
   msrBeamKind beamKind);
 
-ostream& operator << (ostream& os, const msrBeamKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBeamKind& elt);
 
 //______________________________________________________________________________
 class EXP msrBeam : public msrElement
@@ -109,9 +109,9 @@ class EXP msrBeam : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -122,7 +122,7 @@ class EXP msrBeam : public msrElement
     msrBeamKind           fBeamKind;
 };
 typedef SMARTP<msrBeam> S_msrBeam;
-EXP ostream& operator << (ostream& os, const S_msrBeam& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrBeam& elt);
 
 
 }

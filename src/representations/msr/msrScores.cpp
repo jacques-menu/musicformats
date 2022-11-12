@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // for 'setw()'
+#include <iomanip>      // for 'std::setw()'
 
 #include "visitor.h"
 
@@ -37,8 +37,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 
 namespace MusicFormats
 {
@@ -46,7 +44,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrScore msrScore::create (
   int           inputLineNumber,
-  const string& scoreName)
+  const std::string& scoreName)
 {
   msrScore* o =
     new msrScore (
@@ -58,7 +56,7 @@ S_msrScore msrScore::create (
 
 msrScore::msrScore (
   int           inputLineNumber,
-  const string& scoreName)
+  const std::string& scoreName)
     : msrBookElement (inputLineNumber)
 {
   // set the name
@@ -102,7 +100,7 @@ S_msrScore msrScore::createScoreNewbornClone ()
   if (gGlobalTracingOahGroup->getTraceScores ()) {
     gLogStream <<
       "Creating a newborn clone of a score" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -167,7 +165,7 @@ void msrScore::registerVoiceInScoreAllVoicesList (
 void msrScore::addPartGroupToScore (S_msrPartGroup partGroup)
 {
   if (fScorePartGroupsSet.count (partGroup)) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "part group '" <<
@@ -194,7 +192,7 @@ void msrScore::appendCreditToScore (S_msrCredit credit)
       "Appending credit '" <<
       credit->asString () <<
       "' to score" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -203,7 +201,7 @@ void msrScore::appendCreditToScore (S_msrCredit credit)
 
 S_msrPart msrScore::fetchPartFromScoreByItsPartID (
   int           inputLineNumber,
-  const string& partID)
+  const std::string& partID)
 {
   S_msrPart result;
 
@@ -211,12 +209,12 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
     gLogStream <<
       "fetchPartFromScoreByItsPartID(" << partID << "), fPartGroupsList contains:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     for (
-      list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
+      std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
         i != fPartGroupsList.end ();
         ++i
       ) {
@@ -224,19 +222,19 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
         (*i)->getPartGroupCombinedName () <<
         ", " <<
         (*i)->getPartGroupName () <<
-        endl;
+        std::endl;
     } // for
 
     --gIndenter;
 
     gLogStream <<
       "<=- fetchPartFromScoreByItsPartID(" << partID << ")" <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
   for (
-    list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
+    std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
     i != fPartGroupsList.end ();
     ++i
   ) {
@@ -258,12 +256,12 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 
 void msrScore::collectScorePartsList (
   int              inputLineNumber,
-  list<S_msrPart>& partsList)
+  std::list<S_msrPart>& partsList)
 {
   S_msrPart result;
 
   for (
-    list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
+    std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
     i != fPartGroupsList.end ();
     ++i
   ) {
@@ -295,7 +293,7 @@ void msrScore::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrScore::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrScore>*
@@ -306,7 +304,7 @@ void msrScore::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrScore::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -317,7 +315,7 @@ void msrScore::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrScore::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrScore>*
@@ -328,7 +326,7 @@ void msrScore::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrScore::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -339,7 +337,7 @@ void msrScore::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrScore::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   if (fIdentification) {
@@ -379,7 +377,7 @@ void msrScore::browseData (basevisitor* v)
   }
 
   for (
-    list<S_msrCredit>::const_iterator i = fCreditsList.begin ();
+    std::list<S_msrCredit>::const_iterator i = fCreditsList.begin ();
     i != fCreditsList.end ();
     ++i
   ) {
@@ -389,7 +387,7 @@ void msrScore::browseData (basevisitor* v)
   } // for
 
   for (
-    list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
+    std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
     i != fPartGroupsList.end ();
     ++i
   ) {
@@ -401,16 +399,16 @@ void msrScore::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% <== msrScore::browseData ()" <<
-      endl;
+      std::endl;
   }
 }
 
-void msrScore::printFull (ostream& os) const
+void msrScore::printFull (std::ostream& os) const
 {
   os <<
     "[MSR Score" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -419,56 +417,56 @@ void msrScore::printFull (ostream& os) const
   size_t partGroupsListSize =
     fPartGroupsList.size ();
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "partGroupsListSize" << " : " <<
     partGroupsListSize <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScoreNumberOfMeasures" << " : " <<
     fScoreNumberOfMeasures <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScorePartGroupNamesMaxLength" <<  " : " <<
     fScorePartGroupNamesMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScorePartNamesMaxLength" <<  " : " <<
     fScorePartNamesMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScoreInstrumentNamesMaxLength" <<  " : " <<
     fScoreInstrumentNamesMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScoreInstrumentAbbreviationsMaxLength" <<  " : " <<
     fScoreInstrumentAbbreviationsMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fIinhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fIinhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fIinhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fIinhibitMultipleFullBarRestsBrowsing" <<  " : " <<
     fInhibitMultipleFullBarRestsBrowsing <<
-    endl<<
-    endl;
+    std::endl<<
+    std::endl;
 
   // print the identification if any
   if (fIdentification) {
@@ -480,50 +478,50 @@ void msrScore::printFull (ostream& os) const
   if (fScaling) {
     os <<
       fScaling <<
-      endl;
+      std::endl;
   }
 
   // print the page layout if any
   if (fPageLayout) {
     os <<
       fPageLayout <<
-      endl;
+      std::endl;
   }
 
   // print the system layout if any
   if (fSystemLayout) {
     os <<
       fSystemLayout <<
-      endl;
+      std::endl;
   }
 
   // print the staff layout if any
   if (fStaffLayout) {
     os <<
       fStaffLayout <<
-      endl;
+      std::endl;
   }
 
   // print the appearance if any
   if (fAppearance) {
     os <<
       fAppearance <<
-      endl;
+      std::endl;
   }
 
-  os << endl;
+  os << std::endl;
 
   // print the credits if any
   size_t creditsListSize = fCreditsList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "CreditsList";
   if (creditsListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    list<S_msrCredit>::const_iterator
+    std::list<S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -532,7 +530,7 @@ void msrScore::printFull (ostream& os) const
 
       os << credit;
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -540,69 +538,69 @@ void msrScore::printFull (ostream& os) const
   else {
     os <<
       " : " << "[NONE]" <<
-      endl;
+      std::endl;
   }
-  os << endl;
+  os << std::endl;
 
   // print all the voices if any
   size_t scoreAllVoicesListSize = fScoreAllVoicesList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScoreAllVoicesList";
   if (scoreAllVoicesListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    list<S_msrVoice>::const_iterator
+    std::list<S_msrVoice>::const_iterator
       iBegin = fScoreAllVoicesList.begin (),
       iEnd   = fScoreAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
       S_msrVoice voice = (*i);
 
-      os << "\"" << voice->getVoiceName () << "\"" << endl;
+      os << "\"" << voice->getVoiceName () << "\"" << std::endl;
       if (++i == iEnd) break;
-      // os << endl;
+      // os << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
     os <<
       " : " << "[NONE]" <<
-      endl;
+      std::endl;
   }
 
   // print the part groups if any
   if (partGroupsListSize) {
-    list<S_msrPartGroup>::const_iterator
+    std::list<S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      // no endl here
+      // no std::endl here
     } // for
   }
   else {
     os <<
-      "There are no part groups in the list" <<
-      endl;
+      "There are no part groups in the std::list" <<
+      std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrScore::printShort (ostream& os) const
+void msrScore::printShort (std::ostream& os) const
 {
   os <<
     "MSR Score, short version" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -611,65 +609,65 @@ void msrScore::printShort (ostream& os) const
   size_t partGroupsListSize =
     fPartGroupsList.size ();
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "partGroupsListSize" << " : " <<
     partGroupsListSize <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScoreNumberOfMeasures" << " : " <<
     fScoreNumberOfMeasures <<
-    endl;
+    std::endl;
 
-  os << endl;
+  os << std::endl;
 
   // print the scaling if any
   if (fScaling) {
     os <<
       fScaling <<
-      endl;
+      std::endl;
   }
 
   // print the page layout if any
   if (fPageLayout) {
     os <<
       fPageLayout <<
-      endl;
+      std::endl;
   }
 
   // print the system layout if any
   if (fSystemLayout) {
     os <<
       fSystemLayout <<
-      endl;
+      std::endl;
   }
 
   // print the staff layout if any
   if (fStaffLayout) {
     os <<
       fStaffLayout <<
-      endl;
+      std::endl;
   }
 
   // print the appearance if any
   if (fAppearance) {
     os <<
       fAppearance <<
-      endl;
+      std::endl;
   }
 
   // print the credits if any
   size_t creditsListSize = fCreditsList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "CreditsList";
   if (creditsListSize) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    list<S_msrCredit>::const_iterator
+    std::list<S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -678,7 +676,7 @@ void msrScore::printShort (ostream& os) const
 
       os << credit;
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -686,32 +684,32 @@ void msrScore::printShort (ostream& os) const
   else {
     os <<
       " : " << "[NONE]" <<
-      endl;
+      std::endl;
   }
-  os << endl;
+  os << std::endl;
 
   // print the part groups if any
   if (partGroupsListSize) {
-    list<S_msrPartGroup>::const_iterator
+    std::list<S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       (*i)->printShort (os);
       if (++i == iEnd) break;
-      // no endl here
+      // no std::endl here
     } // for
   }
   else {
     os <<
-      "There are no part groups in the list" <<
-      endl;
+      "There are no part groups in the std::list" <<
+      std::endl;
   }
 
   --gIndenter;
 }
 
-void msrScore::printSummary (ostream& os) const
+void msrScore::printSummary (std::ostream& os) const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
@@ -727,7 +725,7 @@ void msrScore::printSummary (ostream& os) const
   os << "MSR score";
 #endif
 
-  os << endl << endl;
+  os << std::endl << std::endl;
 
   ++gIndenter;
 
@@ -737,53 +735,53 @@ void msrScore::printSummary (ostream& os) const
     fPartGroupsList.size ();
 
   // print global information
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "partGroupsListSize" << " : " <<
     partGroupsListSize <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScoreNumberOfMeasures" << " : " <<
     fScoreNumberOfMeasures <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScoreInstrumentNamesMaxLength" <<  " : " <<
     fScoreInstrumentNamesMaxLength <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fScoreInstrumentAbbreviationsMaxLength" <<  " : " <<
     fScoreInstrumentAbbreviationsMaxLength <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
-    endl<<
-    setw (fieldWidth) <<
+    std::endl<<
+    std::setw (fieldWidth) <<
     "fInhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
-    endl<<
+    std::endl<<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
     fInhibitMultipleFullBarRestsBrowsing <<
-    endl<<
-    endl;
+    std::endl<<
+    std::endl;
 
   // print the implicit part group contents
   // it is the only element in fPartGroupsList JMI single variable
   if (partGroupsListSize) {
     os <<
-      "Part groups list:" <<
-      endl;
+      "Part groups std::list:" <<
+      std::endl;
 
     ++gIndenter;
 
@@ -794,67 +792,67 @@ void msrScore::printSummary (ostream& os) const
 
     --gIndenter;
 
-    os << endl;
+    os << std::endl;
   }
 
   // print the identification if any
   if (fIdentification) {
     os <<
       fIdentification <<
-      endl;
+      std::endl;
   }
 
   // print the scaling if any
   if (fScaling) {
     os <<
       fScaling <<
-      endl;
+      std::endl;
   }
 
   // print the page layout if any
   if (fPageLayout) {
     os <<
       fPageLayout <<
-      endl;
+      std::endl;
   }
 
   // print the system layout if any
   if (fSystemLayout) {
     os <<
       fSystemLayout <<
-      endl;
+      std::endl;
   }
 
   // print the staff layout if any
   if (fStaffLayout) {
     os <<
       fStaffLayout <<
-      endl;
+      std::endl;
   }
 
   // print the appearance if any
   if (fAppearance) {
     os <<
       fAppearance <<
-      endl;
+      std::endl;
   }
 
   // print the credits if any
   if (fCreditsList.size ()) {
-    list<S_msrCredit>::const_iterator
+    std::list<S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
   }
 
   if (partGroupsListSize) {
-    list<S_msrPartGroup>::const_iterator
+    std::list<S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
@@ -862,23 +860,23 @@ void msrScore::printSummary (ostream& os) const
       (*i)->
         printSummary (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 }
 
-void msrScore::printSlices (ostream& os) const
+void msrScore::printSlices (std::ostream& os) const
 {
   os << "MSR score slices";
 
-  os << endl << endl;
+  os << std::endl << std::endl;
 
   ++gIndenter;
 
   if (fPartGroupsList.size ()) {
-    list<S_msrPartGroup>::const_iterator
+    std::list<S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
@@ -886,20 +884,20 @@ void msrScore::printSlices (ostream& os) const
       (*i)->
         printSlices (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrScore& elt)
+std::ostream& operator << (std::ostream& os, const S_msrScore& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -28,8 +28,6 @@
 
 #include "msrEyeGlasses.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -50,7 +48,7 @@ S_msrEyeGlasses msrEyeGlasses::create (
 msrEyeGlasses::msrEyeGlasses (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {}
@@ -63,7 +61,7 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrEyeGlasses::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrEyeGlasses>*
@@ -74,7 +72,7 @@ void msrEyeGlasses::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrEyeGlasses::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -85,7 +83,7 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrEyeGlasses::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrEyeGlasses>*
@@ -96,7 +94,7 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrEyeGlasses::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -105,9 +103,9 @@ void msrEyeGlasses::acceptOut (basevisitor* v)
 void msrEyeGlasses::browseData (basevisitor* v)
 {}
 
-string msrEyeGlasses::asString () const
+std::string msrEyeGlasses::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "EyeGlasses" <<
@@ -116,18 +114,18 @@ string msrEyeGlasses::asString () const
   return s.str ();
 }
 
-void msrEyeGlasses::print (ostream& os) const
+void msrEyeGlasses::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrEyeGlasses& elt)
+std::ostream& operator << (std::ostream& os, const S_msrEyeGlasses& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

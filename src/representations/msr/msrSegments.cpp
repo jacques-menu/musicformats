@@ -42,8 +42,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -101,7 +99,7 @@ void msrSegment::initializeSegment ()
       "', in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -137,7 +135,7 @@ void msrSegment::setSegmentFirstMeasure (
       " in segment " <<
       asString () <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -168,7 +166,7 @@ void msrSegment::setSegmentLastMeasure (
       " in segment " <<
       asString () <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -235,7 +233,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
     gLogStream <<
       "Creating a newborn clone of segment " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -268,7 +266,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
     gLogStream <<
       "Creating a deep clone of segment " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -301,7 +299,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
         "There are " <<
         segmentElementsListSize <<
         " measure elements in segment to be deep copied" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -324,7 +322,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
     if (gGlobalTracingOahGroup->getTraceSegments ()) {
       gLogStream <<
         "There are no measures in segment to be deep copied" <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -351,7 +349,7 @@ void msrSegment::setSegmentShortestNoteDuration (
       fSegmentAbsoluteNumber <<
       " to " <<
       duration <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -372,7 +370,7 @@ void msrSegment::setSegmentShortestNoteTupletFactor (
       fSegmentAbsoluteNumber <<
       " to " <<
       noteTupletFactor <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -399,7 +397,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
   }
 #endif
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "fSegmentLastMeasure is null in segment " <<
@@ -408,7 +406,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -437,7 +435,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
   }
 #endif
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "assertSegmentElementsListIsNotEmpty()" <<
@@ -448,11 +446,11 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
 
     gLogStream <<
       s.str () <<
-      endl;
+      std::endl;
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -465,7 +463,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
 S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
   int           inputLineNumber,
   int           previousMeasureEndInputLineNumber,
-  const string& measureNumber,
+  const std::string& measureNumber,
   msrMeasureImplicitKind
                 measureImplicitKind)
 {
@@ -478,7 +476,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -512,7 +510,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       msrMeasureFirstInSegmentKindAsString (
         measureFirstInSegmentKind) <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -538,7 +536,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
 //         getSegmentUpLinkToVoice ()->
 //           getVoiceName () <<
 //       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -562,7 +560,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
 
 void msrSegment::setNextMeasureNumberInSegment (
   int           inputLineNumber,
-  const string& nextMeasureNumber)
+  const std::string& nextMeasureNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -573,7 +571,7 @@ void msrSegment::setNextMeasureNumberInSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "' line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -590,7 +588,7 @@ void msrSegment::setNextMeasureNumberInSegment (
         fSegmentUpLinkToVoice->getVoiceName () <<
         "\"" <<
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -613,7 +611,7 @@ void msrSegment::appendPrintLayoutToSegment (
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -621,7 +619,7 @@ void msrSegment::appendPrintLayoutToSegment (
 
   // sanity check
   if (fSegmentElementsList.size () == 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "fSegmentElementsList is empty"  << // JMI
@@ -635,11 +633,11 @@ void msrSegment::appendPrintLayoutToSegment (
 
     gLogStream <<
       "fSegmentUpLinkToVoice:" <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       fSegmentUpLinkToVoice <<
-      endl;
+      std::endl;
     --gIndenter;
 
     msrInternalError (
@@ -666,7 +664,7 @@ void msrSegment::appendClefToSegment (S_msrClef clef)
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -674,7 +672,7 @@ void msrSegment::appendClefToSegment (S_msrClef clef)
 
   // sanity check
   if (fSegmentElementsList.size () == 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "fSegmentElementsList is empty"  <<
@@ -688,11 +686,11 @@ void msrSegment::appendClefToSegment (S_msrClef clef)
 
     gLogStream <<
       "fSegmentUpLinkToVoice:" <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       fSegmentUpLinkToVoice <<
-      endl;
+      std::endl;
     --gIndenter;
 
     msrInternalError (
@@ -719,7 +717,7 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -727,7 +725,7 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
 
   // sanity check
   if (fSegmentElementsList.size () == 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "fSegmentElementsList is empty"  <<
@@ -741,11 +739,11 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
 
     gLogStream <<
       "fSegmentUpLinkToVoice:" <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       fSegmentUpLinkToVoice <<
-      endl;
+      std::endl;
     --gIndenter;
 
     msrInternalError (
@@ -780,7 +778,7 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
       multipleFullBarRests =
         dynamic_cast<msrMultipleFullBarRests*>(&(*segmentElementsListFirstElement))
   ) {
-    const list<S_msrMeasure>&
+    const std::list<S_msrMeasure>&
       fullBarRestsMeasuresList =
         multipleFullBarRests->
           getFullBarRestsMeasuresList ();
@@ -796,7 +794,7 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "attempt at prepending clef " <<
@@ -821,7 +819,7 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
 //   if (segmentElementsListFirstElement == fSegmentFirstMeasure) {
 //   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "attempt at prepending clef " <<
@@ -835,36 +833,36 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
       "', line " << fInputLineNumber; // JMI v0.9.64
 
     gLogStream <<
-      endl << endl <<
+      std::endl << std::endl <<
       s.str () <<
-      endl << endl;
+      std::endl << std::endl;
 
-    gLogStream << "THIS:" << endl;
-    gLogStream << "----------------------------" << endl;
+    gLogStream << "THIS:" << std::endl;
+    gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
     this->printShort (gLogStream);
     --gIndenter;
 
-    gLogStream << endl;
+    gLogStream << std::endl;
 
-    gLogStream << "fSegmentFirstMeasure:" << endl;
-    gLogStream << "----------------------------" << endl;
+    gLogStream << "fSegmentFirstMeasure:" << std::endl;
+    gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
     fSegmentFirstMeasure->printShort (gLogStream);
     --gIndenter;
 
-    gLogStream << endl;
+    gLogStream << std::endl;
 
-    gLogStream << "fSegmentLastMeasure:" << endl;
-    gLogStream << "----------------------------" << endl;
+    gLogStream << "fSegmentLastMeasure:" << std::endl;
+    gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
     fSegmentLastMeasure->printShort (gLogStream);
     --gIndenter;
 
-    gLogStream << endl;
+    gLogStream << std::endl;
 
-    gLogStream << "segmentElementsListLastElement:" << endl;
-    gLogStream << "----------------------------" << endl;
+    gLogStream << "segmentElementsListLastElement:" << std::endl;
+    gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
     segmentElementsListFirstElement->printShort (gLogStream);
     --gIndenter;
@@ -894,7 +892,7 @@ void msrSegment::appendKeyToSegment (S_msrKey key)
     ", in voice \"" <<
     fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -917,7 +915,7 @@ void msrSegment::appendTimeSignatureToSegment (S_msrTimeSignature timeSignature)
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending time signature:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -931,7 +929,7 @@ void msrSegment::appendTimeSignatureToSegment (S_msrTimeSignature timeSignature)
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -954,7 +952,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (S_msrTimeSignature timeSigna
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending time signature:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -968,7 +966,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (S_msrTimeSignature timeSigna
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -999,7 +997,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1028,7 +1026,7 @@ void msrSegment::appendHarmonyToSegment (S_msrHarmony harmony)
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1058,7 +1056,7 @@ void msrSegment::appendHarmonyToSegmentClone (S_msrHarmony harmony)
       "' in voice clone \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1083,7 +1081,7 @@ void msrSegment::appendFiguredBassToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1116,7 +1114,7 @@ void msrSegment::appendFiguredBassToSegmentClone (
       "' in voice clone \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1139,7 +1137,7 @@ void msrSegment::appendSegnoToSegment (S_msrSegno segno)
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1166,7 +1164,7 @@ void msrSegment::appendCodaToSegment (S_msrCoda coda)
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1194,7 +1192,7 @@ void msrSegment::appendEyeGlassesToSegment (
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1221,7 +1219,7 @@ void msrSegment::appendPedalToSegment (S_msrPedal pedal)
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 
 #endif
@@ -1248,7 +1246,7 @@ void msrSegment::appendDampToSegment (S_msrDamp damp)
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1275,7 +1273,7 @@ void msrSegment::appendDampAllToSegment (S_msrDampAll dampAll)
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1303,7 +1301,7 @@ void msrSegment::appendTranspositionToSegment (
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1339,7 +1337,7 @@ void msrSegment::appendStaffDetailsToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\" line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1393,7 +1391,7 @@ void msrSegment::appendLineBreakToSegment (S_msrLineBreak lineBreak)
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1420,7 +1418,7 @@ void msrSegment::appendPageBreakToSegment (S_msrPageBreak pageBreak)
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1448,7 +1446,7 @@ void msrSegment::appendBarNumberCheckToSegment (
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1478,7 +1476,7 @@ void msrSegment::appendTempoToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1506,7 +1504,7 @@ void msrSegment::appendRehearsalMarkToSegment (
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1535,7 +1533,7 @@ void msrSegment::appendOctaveShiftToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1564,7 +1562,7 @@ void msrSegment::appendScordaturaToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1594,7 +1592,7 @@ void msrSegment::appendAccordionRegistrationToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1625,7 +1623,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1658,12 +1656,12 @@ void msrSegment::padUpToMeasurePositionInSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (false && fSegmentMeasuresFlatList.size () == 0) { // JMI
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "fSegmentMeasuresFlatList is empty"  <<
@@ -1677,20 +1675,20 @@ void msrSegment::padUpToMeasurePositionInSegment (
 
     gLogStream <<
       "fSegmentUpLinkToVoice:" <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       fSegmentUpLinkToVoice <<
-      endl;
+      std::endl;
     --gIndenter;
 
     gLogStream <<
       "Part:" <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       fSegmentUpLinkToVoice->fetchVoiceUpLinkToPart () <<
-      endl;
+      std::endl;
     --gIndenter;
 
     msrInternalError (
@@ -1730,7 +1728,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1760,7 +1758,7 @@ void msrSegment::appendPaddingNoteToSegment (
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1782,13 +1780,13 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   int inputLineNumber =
     measure->getInputLineNumber ();
 
-  string measureNumber =
+  std::string measureNumber =
     measure->getMeasureNumber ();
 
   size_t segmentElementsListSize =
     fSegmentMeasuresFlatList.size ();
 
-  string currentMeasureNumber =
+  std::string currentMeasureNumber =
     segmentElementsListSize == 0
       ? ""
       : fSegmentLastMeasure->getMeasureNumber ();
@@ -1811,12 +1809,12 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << measure->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (measureNumber == currentMeasureNumber) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "appending measure number '" << measureNumber <<
@@ -1875,13 +1873,13 @@ void msrSegment::prependMeasureToSegment (S_msrMeasure measure)
   int inputLineNumber =
     measure->getInputLineNumber ();
 
-  string measureNumber =
+  std::string measureNumber =
     measure->getMeasureNumber ();
 
   size_t segmentElementsListSize =
     fSegmentElementsList.size ();
 
-  string currentMeasureNumber =
+  std::string currentMeasureNumber =
     segmentElementsListSize == 0
       ? ""
       : fSegmentLastMeasure->getMeasureNumber ();
@@ -1908,12 +1906,12 @@ void msrSegment::prependMeasureToSegment (S_msrMeasure measure)
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"," <<
       ", line " << measure->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (measureNumber == currentMeasureNumber) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "prepending measure number '" << measureNumber <<
@@ -1951,7 +1949,7 @@ void msrSegment::appendMultipleFullBarRestsToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1969,7 +1967,7 @@ void msrSegment::prependBarLineToSegment (S_msrBarLine barLine)
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1997,7 +1995,7 @@ void msrSegment::appendBarLineToSegment (
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2024,7 +2022,7 @@ void msrSegment::appendBarCheckToSegment (S_msrBarCheck barCheck)
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"," <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2046,7 +2044,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
       voiceStaffChange->asString () <<
       " to segment " << asString () <<
       ", line " << voiceStaffChange->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2105,7 +2103,7 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2242,7 +2240,7 @@ void msrSegment::removeNoteFromSegment (
       note->asString () <<
       " from segment " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2256,7 +2254,7 @@ void msrSegment::removeNoteFromSegment (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot remove note from segment " <<
@@ -2287,7 +2285,7 @@ void msrSegment::removeElementFromSegment (
       element->asString () <<
       " from segment '" <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2299,7 +2297,7 @@ void msrSegment::removeElementFromSegment (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot remove note from segment " <<
@@ -2319,7 +2317,7 @@ void msrSegment::removeElementFromSegment (
 
 S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
   int           inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -2330,12 +2328,12 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
       fSegmentDebugNumber <<
       " (" << context << ")" <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (! fSegmentMeasuresFlatList.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot fetch last measure from segment '" <<
@@ -2361,15 +2359,15 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "The fetched measure contains:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       result <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -2380,7 +2378,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 
 S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   int           inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
   S_msrMeasure result;
 
@@ -2393,7 +2391,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       fSegmentDebugNumber <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2407,7 +2405,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 #endif
 
 //   if (! fSegmentMeasuresFlatList.size ()) {
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "cannot remove last measure from segment '" <<
@@ -2428,7 +2426,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 
   // sanity check
   if (! fSegmentLastMeasure) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "cannot remove last measure from segment '" <<
@@ -2450,7 +2448,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   // we've got the result
   result = fSegmentLastMeasure;
 
-  // remove it from segment elements list too ??? JMI v0.9.63 KAKA
+  // remove it from segment elements std::list too ??? JMI v0.9.63 KAKA
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
@@ -2466,11 +2464,11 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       fSegmentElementsList.back ();
 
   if (segmentElementsListLastElement == fSegmentLastMeasure) {
-    // remove it from the elements list
+    // remove it from the elements std::list
     fSegmentElementsList.pop_back ();
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "attempt at removing the last measure of segment " <<
@@ -2482,28 +2480,28 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       "', line " << inputLineNumber;
 
     gLogStream <<
-      endl << endl <<
+      std::endl << std::endl <<
       s.str () <<
-      endl << endl;
+      std::endl << std::endl;
 
-    gLogStream << "THIS:" << endl;
-    gLogStream << "----------------------------" << endl;
+    gLogStream << "THIS:" << std::endl;
+    gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
     this->printShort (gLogStream);
     --gIndenter;
 
-    gLogStream << endl;
+    gLogStream << std::endl;
 
-    gLogStream << "fSegmentLastMeasure:" << endl;
-    gLogStream << "----------------------------" << endl;
+    gLogStream << "fSegmentLastMeasure:" << std::endl;
+    gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
     fSegmentLastMeasure->printShort (gLogStream);
     --gIndenter;
 
-    gLogStream << endl;
+    gLogStream << std::endl;
 
-    gLogStream << "segmentElementsListLastElement:" << endl;
-    gLogStream << "----------------------------" << endl;
+    gLogStream << "segmentElementsListLastElement:" << std::endl;
+    gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
     segmentElementsListLastElement->printShort (gLogStream);
     --gIndenter;
@@ -2521,19 +2519,19 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "The removed measure contains:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       result->asString () <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
 #endif
 
-  // remove the last measure from the segments measures flat list
+  // remove the last measure from the segments measures flat std::list
   fSegmentMeasuresFlatList.pop_back ();
 
   // don't forget about fSegmentLastMeasure now,
@@ -2553,7 +2551,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
       "Finalizing all the measures of segment '" <<
       fSegmentAbsoluteNumber <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2571,7 +2569,7 @@ void msrSegment::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegment::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSegment>*
@@ -2582,7 +2580,7 @@ void msrSegment::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegment::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -2593,7 +2591,7 @@ void msrSegment::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegment::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSegment>*
@@ -2604,7 +2602,7 @@ void msrSegment::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegment::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -2615,7 +2613,7 @@ void msrSegment::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegment::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   for (S_msrSegmentElement segmentElement : fSegmentElementsList) {
@@ -2627,13 +2625,13 @@ void msrSegment::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% <== msrSegment::browseData ()" <<
-      endl;
+      std::endl;
   }
 }
 
-string msrSegment::asShortString () const
+std::string msrSegment::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '[' <<
@@ -2649,9 +2647,9 @@ string msrSegment::asShortString () const
   return s.str ();
 }
 
-string msrSegment::asString () const
+std::string msrSegment::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '[' <<
@@ -2675,7 +2673,7 @@ string msrSegment::asString () const
       "), i.e. [";
 
     if (fSegmentElementsList.size ()) {
-      list<S_msrSegmentElement>::const_iterator
+      std::list<S_msrSegmentElement>::const_iterator
         iBegin = fSegmentElementsList.begin (),
         iEnd   = fSegmentElementsList.end (),
         i      = iBegin;
@@ -2697,27 +2695,27 @@ string msrSegment::asString () const
 
 void msrSegment::displaySegment (
   int           inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     "*********>> Segment '" <<
     fSegmentAbsoluteNumber <<
     ", segmentDebugNumber: '" <<
     fSegmentDebugNumber <<
     /* JMI
     "', score:" <<
-    endl <<
+    std::endl <<
     fSegmentUpLinkToVoice->
       fetchVoiceGroupUpLinkToScore () <<
             */
     "', voice:" <<
-    endl <<
+    std::endl <<
     fSegmentUpLinkToVoice->getVoiceName () <<
     " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   print (gLogStream);
@@ -2725,10 +2723,10 @@ void msrSegment::displaySegment (
 
   gLogStream <<
     " <<*********" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
-void msrSegment::print (ostream& os) const
+void msrSegment::print (std::ostream& os) const
 {
   os <<
     "[Segment '" <<
@@ -2739,67 +2737,67 @@ void msrSegment::print (ostream& os) const
     mfSingularOrPlural (
       fSegmentElementsList.size (), "measure", "measures") <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 20;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fSegmentUpLinkToVoice" << " : " <<
     "\"" <<
     fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
-    endl;
+    std::endl;
 
 /* JMI
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fSegmentShortestNoteDuration" << " : " <<
     fSegmentShortestNoteDuration <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSegmentShortestNoteTupletFactor" << " : " <<
     fSegmentShortestNoteTupletFactor <<
-    endl;
+    std::endl;
 */
 
   os <<
     "fSegmentFirstMeasure" << " : ";
   if (fSegmentFirstMeasure) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
     os << fSegmentFirstMeasure;
     --gIndenter;
   }
   else {
-    os << "null" << endl;
+    os << "null" << std::endl;
   }
 
   os <<
     "fSegmentLastMeasure" << " : ";
   if (fSegmentLastMeasure) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
     os << fSegmentLastMeasure;
     --gIndenter;
   }
   else {
-    os << "null" << endl;
+    os << "null" << std::endl;
   }
 
   if (! fSegmentElementsList.size ()) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fSegmentElementsList" << " : " << "[EMPTY]" <<
-      endl;
+      std::endl;
   }
 
   else {
-    os << endl;
+    os << std::endl;
 
-    list<S_msrSegmentElement>::const_iterator
+    std::list<S_msrSegmentElement>::const_iterator
       iBegin = fSegmentElementsList.begin (),
       iEnd   = fSegmentElementsList.end (),
       i      = iBegin;
@@ -2807,16 +2805,16 @@ void msrSegment::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void msrSegment::printShort (ostream& os) const
+void msrSegment::printShort (std::ostream& os) const
 {
   os <<
     "[Segment '" <<
@@ -2827,7 +2825,7 @@ void msrSegment::printShort (ostream& os) const
     mfSingularOrPlural (
       fSegmentElementsList.size (), "measure", "measures") <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -2835,15 +2833,15 @@ void msrSegment::printShort (ostream& os) const
 
   if (! fSegmentElementsList.size ()) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fSegmentElementsList" << " : " << "[EMPTY]" <<
-      endl;
+      std::endl;
   }
 
   else {
-    os << endl;
+    os << std::endl;
 
-    list<S_msrSegmentElement>::const_iterator
+    std::list<S_msrSegmentElement>::const_iterator
       iBegin = fSegmentElementsList.begin (),
       iEnd   = fSegmentElementsList.end (),
       i      = iBegin;
@@ -2851,22 +2849,22 @@ void msrSegment::printShort (ostream& os) const
     for ( ; ; ) {
       (*i)->printShort (os);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSegment& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSegment& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

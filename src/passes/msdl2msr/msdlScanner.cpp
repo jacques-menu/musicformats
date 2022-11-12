@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <iomanip>  // for setw()
+#include <iomanip>  // for std::setw()
 #include <cstdlib>  // for stod()
 
 #include "mfServiceRunData.h"
@@ -31,31 +31,29 @@
 #include "msdl2msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //________________________________________________________________________
-string msdlIgnoreSeparatorTokensKindAsString (
+std::string msdlIgnoreSeparatorTokensKindAsString (
   msdlIgnoreSeparatorTokensKind ignoreSeparatorTokensKind);
-void displayStreamState (const ios& stream) {
+void displayStreamState (const std::ios& stream) {
   gLogStream <<
     "good () : " << stream.good () <<
-    endl <<
+    std::endl <<
     "eof ()  : " << stream.eof () <<
-    endl <<
+    std::endl <<
     "fail () : " << stream.fail () <<
-    endl <<
+    std::endl <<
     "bad ()  : " << stream.bad () <<
-    endl;
+    std::endl;
 }
 
 //________________________________________________________________________
-string msdlIgnoreSeparatorTokensKindAsString (
+std::string msdlIgnoreSeparatorTokensKindAsString (
   msdlIgnoreSeparatorTokensKind ignoreSeparatorTokensKind)
 {
-  string result;
+  std::string result;
 
   switch (ignoreSeparatorTokensKind) {
     case msdlIgnoreSeparatorTokensKind::kIgnoreSeparatorTokensNo:
@@ -70,7 +68,7 @@ string msdlIgnoreSeparatorTokensKindAsString (
 }
 
 //________________________________________________________________________
-S_msdlScanner msdlScanner::create (istream& inputStream)
+S_msdlScanner msdlScanner::create (std::istream& inputStream)
 {
   msdlScanner* o =
     new msdlScanner (
@@ -79,7 +77,7 @@ S_msdlScanner msdlScanner::create (istream& inputStream)
   return o;
 }
 
-msdlScanner::msdlScanner (istream& inputStream)
+msdlScanner::msdlScanner (std::istream& inputStream)
     : fInputStream (
         inputStream),
       fCurrentToken (
@@ -102,7 +100,7 @@ msdlScanner::msdlScanner (istream& inputStream)
   // input stream
   fInputIsEmpty = true;
 
-  // input string
+  // input std::string
   fInputStringSize = 0;
 
   // lines
@@ -131,7 +129,7 @@ msdlScanner::msdlScanner (istream& inputStream)
   fKeywordsInputLanguageKind =
     gGlobalMsdl2msrOahGroup->getMsdlKeywordsInputLanguageKind ();
 
-  // tokens list
+  // tokens std::list
   fAppendTokensToList = false;
 
   // warnings and errors
@@ -169,13 +167,13 @@ msdlScanner::~ msdlScanner ()
 //  msdlScanner::populateInputString
 // --------------------------------------------------------------------------
 
-void msdlScanner::populateInputString (istream& inputStream)
+void msdlScanner::populateInputString (std::istream& inputStream)
 {
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
-      "Populating the input string" <<
-      endl;
+      "Populating the input std::string" <<
+      std::endl;
   }
 #endif
 
@@ -199,11 +197,11 @@ void msdlScanner::populateInputString (istream& inputStream)
   if (fTraceTokensDetails) {
     gLogStream <<
       "inputStringSize: " << fInputStringSize <<
-      endl <<
+      std::endl <<
       "inputString: \"" <<
       fInputString <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -212,9 +210,9 @@ void msdlScanner::populateInputString (istream& inputStream)
 //  msdlScanner::currentCharacterAsString
 // --------------------------------------------------------------------------
 
-string msdlScanner::currentCharacterAsString () const
+std::string msdlScanner::currentCharacterAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   if (fCurrentCharacter == EOF) {
     s << "EOF";
@@ -248,7 +246,7 @@ char msdlScanner::fetchNextCharacter ()
       fCurrentLinePositionInInput <<
       ", fCurrentPositionInLine: " <<
       fCurrentPositionInLine <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -273,7 +271,7 @@ char msdlScanner::fetchNextCharacter ()
     gLogStream <<
       "<-- fetchNextCharacter() returns: " <<
       currentCharacterAsString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -284,7 +282,7 @@ char msdlScanner::fetchNextCharacter ()
 //  msdlScanner::handleEndOfLine
 // --------------------------------------------------------------------------
 
-void msdlScanner::handleEndOfLine (const string& context)
+void msdlScanner::handleEndOfLine (const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
@@ -294,7 +292,7 @@ void msdlScanner::handleEndOfLine (const string& context)
       ", fCurrentLineNumber: " << fCurrentLineNumber <<
       ", fCurrentLinePositionInInput: " << fCurrentLinePositionInInput <<
       ", fCurrentPositionInLine: " << fCurrentPositionInLine <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -311,7 +309,7 @@ void msdlScanner::handleEndOfLine (const string& context)
       ", fCurrentLineNumber: " << fCurrentLineNumber <<
       ", fCurrentLinePositionInInput: " << fCurrentLinePositionInInput <<
       ", fCurrentPositionInLine: " << fCurrentPositionInLine <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 }
@@ -329,33 +327,33 @@ msdlTokenKind msdlScanner::fetchNextToken (
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokens) {
     gLogStream <<
-      endl <<
+      std::endl <<
       fTokensCounter << " ==> fetchNextToken()" <<
       ", ignoreSeparatorTokens: " <<
       msdlIgnoreSeparatorTokensKindAsString (ignoreSeparatorTokens) <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     int fieldWidth = 28;
 
-    gLogStream << left <<
-      setw (fieldWidth) <<
+    gLogStream << std::left <<
+      std::setw (fieldWidth) <<
       "fNextCharacterIsAvailable: " << " : " <<
       fNextCharacterIsAvailable <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentPositionInInput" << " : " << fCurrentPositionInInput <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentPositionInLine" << " : " << fCurrentPositionInLine <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentCharacter" << " : '" << currentCharacterAsString () <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fNextCharacterIsAvailable" << " : " << fNextCharacterIsAvailable <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -381,7 +379,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
       case EOF:
 #ifdef TRACING_IS_ENABLED
         if (fTraceTokensDetails) {
-          gLogStream << "EOF has been reached" << endl;
+          gLogStream << "EOF has been reached" << std::endl;
         }
 #endif
 
@@ -549,7 +547,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         }
         break;
 
-      case '"': //  double-quoted string
+      case '"': //  double-quoted std::string
         acceptAString ();
         break;
 
@@ -575,7 +573,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
           fScannerWaeHandler->illegalCharacter (fCurrentCharacter);
           fSourceIsLexicallyCorrect = false;
 
-          stringstream s;
+          std::stringstream s;
 
           s << fCurrentCharacter;
 
@@ -590,7 +588,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
     if (fTraceTokensDetails) {
       gLogStream <<
         fCurrentToken.asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -632,7 +630,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
     if (fTraceTokensDetails) {
       gLogStream <<
         "--- fetchNextToken(): onceMore = " << onceMore <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -660,15 +658,15 @@ msdlTokenKind msdlScanner::fetchNextToken (
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokens) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "#" << fTokensCounter << " <== fetchNextToken()" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       "fCurrentToken: " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream << fCurrentToken;
@@ -676,29 +674,29 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
     int fieldWidth = 28;
 
-    gLogStream << left <<
-      setw (fieldWidth) <<
+    gLogStream << std::left <<
+      std::setw (fieldWidth) <<
       "fNextCharacterIsAvailable: " << " : " <<
       fNextCharacterIsAvailable <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentPositionInInput" << " : " << fCurrentPositionInInput <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentPositionInLine" << " : " << fCurrentPositionInLine <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentCharacter" << " : '" << currentCharacterAsString () <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fNextCharacterIsAvailable" << " : " << fNextCharacterIsAvailable <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
 #endif
 
-  // should the current token be appended to the tokens list?
+  // should the current token be appended to the tokens std::list?
   if (fAppendTokensToList) {
     fTokensList.appendTokenToTokensList (fCurrentToken);
   }
@@ -747,14 +745,14 @@ void msdlScanner::handlePercent ()
           gLogStream <<
             "percentParenthesizedCommentStartPositionInInput: " <<
             percentParenthesizedCommentStartPositionInInput <<
-            endl <<
+            std::endl <<
             "fCurrentPositionInInput: " <<
             fCurrentPositionInInput <<
-            endl;
+            std::endl;
         }
 #endif
 
-        string commentString =
+        std::string commentString =
           fInputString.substr (
             percentParenthesizedCommentStartPositionInInput + 2,
             fCurrentPositionInInput - percentParenthesizedCommentStartPositionInInput - 3);
@@ -776,7 +774,7 @@ void msdlScanner::handlePercent ()
         // the end of the comment to end of line has been overtaken
         fNextCharacterIsAvailable = true;
 
-        string commentString =
+        std::string commentString =
           fInputString.substr (
             parcentCommentToEndOfLineStartPositionInInput + 1,
             fCurrentPositionInInput - parcentCommentToEndOfLineStartPositionInInput - 1);
@@ -830,14 +828,14 @@ void msdlScanner::handleSlash ()
         if (fTraceTokensDetails) {
           gLogStream <<
             "slashParenthesizedCommentStartPositionInInput: " <<
-            slashParenthesizedCommentStartPositionInInput << endl <<
+            slashParenthesizedCommentStartPositionInInput << std::endl <<
             "fCurrentPositionInInput: " <<
             fCurrentPositionInInput <<
-            endl;
+            std::endl;
         }
 #endif
 
-        string commentString =
+        std::string commentString =
           fInputString.substr (
             slashParenthesizedCommentStartPositionInInput + 2,
             fCurrentPositionInInput - slashParenthesizedCommentStartPositionInInput - 3);
@@ -864,7 +862,7 @@ void msdlScanner::handleSlash ()
         // the end of the comment to end of line has been overtaken
         fNextCharacterIsAvailable = true;
 
-        string commentString =
+        std::string commentString =
           fInputString.substr (
             slashCommentToEndOfLineStartPositionInInput + 2,
             fCurrentPositionInInput - slashCommentToEndOfLineStartPositionInInput - 3);
@@ -902,11 +900,11 @@ void msdlScanner::acceptAName ()
 
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Accepting a name" <<
       ", nameStartPositionInInput: " <<
       nameStartPositionInInput <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -935,7 +933,7 @@ void msdlScanner::acceptAName ()
   // the end of the name has been overtaken
   fNextCharacterIsAvailable = true;
 
-  string nameString =
+  std::string nameString =
     fInputString.substr (
       nameStartPositionInInput,
       fCurrentPositionInInput - nameStartPositionInInput);
@@ -945,7 +943,7 @@ void msdlScanner::acceptAName ()
     gLogStream <<
       "--- acceptAName()" <<
       ", nameString: \"" << nameString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
   // is nameString the name of a keyword?
@@ -961,7 +959,7 @@ void msdlScanner::acceptAName ()
       "--- acceptAName()" <<
       ", nameString: \"" << nameString << "\"" <<
       ", keyWordKind: \"" << msdlKeywordKindAsString (keyWordKind) << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1059,7 +1057,7 @@ void msdlScanner::acceptAName ()
   if (fTraceTokensDetails) {
     gLogStream <<
       "Accepting a name, found: \"" << nameString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1078,11 +1076,11 @@ void msdlScanner::acceptAnInteger ()
 
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Accepting an integer" <<
       ", integerStartPositionInInput: " <<
       integerStartPositionInInput <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1118,7 +1116,7 @@ void msdlScanner::acceptAnInteger ()
   // the end of the integer has been overtaken
   fNextCharacterIsAvailable = true;
 
-  string integerString =
+  std::string integerString =
     fInputString.substr (
       integerStartPositionInInput,
       fCurrentPositionInInput - integerStartPositionInInput);
@@ -1132,7 +1130,7 @@ void msdlScanner::acceptAnInteger ()
   if (fTraceTokensDetails) {
     gLogStream <<
       "Accepting an integer, found: \"" << integerString << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1142,7 +1140,7 @@ void msdlScanner::acceptAnInteger ()
 // --------------------------------------------------------------------------
 void msdlScanner::acceptAString ()
 {
-  // accept all the string characters
+  // accept all the std::string characters
   // we're on the initial double quote
 
   size_t
@@ -1151,18 +1149,18 @@ void msdlScanner::acceptAString ()
 
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
-    gLogStream << left <<
-      endl <<
-      "Accepting a string" <<
+    gLogStream << std::left <<
+      std::endl <<
+      "Accepting a std::string" <<
       ", stringStartPositionInInput: " << stringStartPositionInInput <<
-      endl;
+      std::endl;
   }
 #endif
 
   ++gIndenter;
 
-  // the string we're building
-  string theString;
+  // the std::string we're building
+  std::string theString;
 
   // consume the '"'
   fetchNextCharacter ();
@@ -1187,7 +1185,7 @@ void msdlScanner::acceptAString ()
       fCurrentPositionInInput <<
       ", fCurrentPositionInLine: " <<
       fCurrentPositionInLine <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1210,11 +1208,11 @@ void msdlScanner::acceptAString ()
               fCurrentPositionInInput <<
               ", fCurrentPositionInInput - chunkStartPositionInInput: " <<
               fCurrentPositionInInput - chunkStartPositionInInput <<
-              endl;
+              std::endl;
           }
 #endif
 
-          string currentChunk =
+          std::string currentChunk =
             fInputString.substr (
               chunkStartPositionInInput,
               fCurrentPositionInInput - chunkStartPositionInInput);
@@ -1226,7 +1224,7 @@ void msdlScanner::acceptAString ()
               ", currentChunk: \"" <<
               currentChunk <<
               "\"" <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -1238,7 +1236,7 @@ void msdlScanner::acceptAString ()
               ", theString: \"" <<
               theString <<
               "\"" <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -1251,7 +1249,7 @@ void msdlScanner::acceptAString ()
             gLogStream <<
               ", escaped character: " <<
               currentCharacterAsString () <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -1263,7 +1261,7 @@ void msdlScanner::acceptAString ()
               theString += '\\';
               break;
             case 'n':
-              handleEndOfLine ("string 1");
+              handleEndOfLine ("std::string 1");
 
               theString += '\n';
               break;
@@ -1284,7 +1282,7 @@ void msdlScanner::acceptAString ()
               ", theString: \"" <<
               theString <<
               "\"" <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -1295,7 +1293,7 @@ void msdlScanner::acceptAString ()
 
 // JMI multi-line strings ???
       case '\n':
-        handleEndOfLine ("string 2");
+        handleEndOfLine ("std::string 2");
 
         theString += "\n";
         fNextCharacterIsAvailable = false;
@@ -1311,12 +1309,12 @@ void msdlScanner::acceptAString ()
       break;
     }
 
-    // consume this string character
+    // consume this std::string character
     fetchNextCharacter ();
   } // while
 
   // append the last chunk to theString
-  string currentChunk =
+  std::string currentChunk =
     fInputString.substr (
       chunkStartPositionInInput,
       fCurrentPositionInInput - chunkStartPositionInInput);
@@ -1330,9 +1328,9 @@ void msdlScanner::acceptAString ()
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
-      endl <<
-      "Accepting a string, found: \"" << theString << "\"" <<
-      endl;
+      std::endl <<
+      "Accepting a std::string, found: \"" << theString << "\"" <<
+      std::endl;
   }
 #endif
 }
@@ -1341,27 +1339,27 @@ void msdlScanner::acceptAString ()
 //  msdlScanner::currentLocationAsString
 // --------------------------------------------------------------------------
 
-string msdlScanner::currentLocationAsString () const
+std::string msdlScanner::currentLocationAsString () const
 {
-  string separateur = // JMI
+  std::string separateur = // JMI
           "-----------------------------------------------------";
 
-  stringstream s;
+  std::stringstream s;
 
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokens) {
     s <<
       "==> fCurrentTokenPositionInInput:" << fCurrentTokenPositionInInput <<
       ", fCurrentPositionInInput:" << fCurrentPositionInInput <<
-      endl;
+      std::endl;
   }
 #endif
 
   // the line indication
-  string lineIndication;
+  std::string lineIndication;
 
   {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       gGlobalServiceRunData->getInputSourceName () << ":" << fCurrentLineNumber << ' ';
@@ -1376,7 +1374,7 @@ string msdlScanner::currentLocationAsString () const
         ? fCurrentPositionInInput - fCurrentTokenPositionInInput - 1
         : fCurrentPositionInInput - fCurrentTokenPositionInInput;
 
-  string
+  std::string
     lineBeginning =
       fInputString.substr (
         fCurrentTokenPositionInInput,
@@ -1386,24 +1384,24 @@ string msdlScanner::currentLocationAsString () const
   if (fTraceTokens) {
     s <<
       "==> lineBeginningLength:" << lineBeginningLength <<
-      endl <<
+      std::endl <<
       "==> lineBeginning:" <<
-      endl <<
+      std::endl <<
       "|" <<
       lineBeginning <<
       "|" <<
-      endl;
+      std::endl;
   }
 #endif
 
   s <<
     lineIndication <<
     lineBeginning <<
-    endl <<
+    std::endl <<
     mfReplicateString (" ", lineIndication.size ()) <<
     mfReplicateString (" ", lineBeginning.size ()) <<
     "^" <<
-    endl;
+    std::endl;
 
   return s.str ();
 }
@@ -1426,10 +1424,10 @@ void msdlScanner::scanAllTheInputAtOnce (
     gLogStream <<
       ", ignoreSeparatorTokens: " <<
       msdlIgnoreSeparatorTokensKindAsString (ignoreSeparatorTokens) <<
-      endl;
+      std::endl;
   }
   else {
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 #endif
 
@@ -1437,7 +1435,7 @@ void msdlScanner::scanAllTheInputAtOnce (
 #ifdef TRACING_IS_ENABLED
     gLogStream <<
       "Input is empty " <<
-      endl;
+      std::endl;
 #endif
   }
 
@@ -1463,29 +1461,29 @@ void msdlScanner::scanAllTheInputAtOnce (
           int fieldWidth = 28;
 
           gLogStream <<
-            endl <<
+            std::endl <<
             "--- scanAllTheInputAtOnce()" <<
-            endl;
+            std::endl;
 
           ++gIndenter;
 
-          gLogStream << left <<
-            setw (fieldWidth) <<
+          gLogStream << std::left <<
+            std::setw (fieldWidth) <<
             "fCurrentTokenPositionInInput" << " : " << fCurrentTokenPositionInInput <<
-            endl <<
-            setw (fieldWidth) <<
+            std::endl <<
+            std::setw (fieldWidth) <<
             "fCurrentCharacter" << " : " << currentCharacterAsString () <<
-            endl <<
-            setw (fieldWidth) <<
+            std::endl <<
+            std::setw (fieldWidth) <<
             "fNextCharacterIsAvailable" << " : " << fNextCharacterIsAvailable <<
-            endl <<
+            std::endl <<
 
-            setw (fieldWidth) <<
+            std::setw (fieldWidth) <<
             "fCurrentToken" << " : " <<
-            endl;
+            std::endl;
 
           ++gIndenter;
-          gLogStream << fCurrentToken << endl;
+          gLogStream << fCurrentToken << std::endl;
           --gIndenter;
 
           --gIndenter;
@@ -1494,10 +1492,10 @@ void msdlScanner::scanAllTheInputAtOnce (
       }
       while (tokenKind != msdlTokenKind::k_TokenEOF); // do
     }
-    catch (out_of_range& e) {
+    catch (std::out_of_range& e) {
       mfDisplayException (e, gOutputStream);
     }
-    catch (exception& e) {
+    catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
     }
 
@@ -1516,9 +1514,9 @@ void msdlScanner::scanAllTheInputAtOnce (
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<== scanAllTheInputAtOnce()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1537,7 +1535,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
       "==> translateAllTheInputToKeywordsLanguage()" <<
       ", keywordsConversionLanguage: " <<
       msdlKeywordsLanguageKindAsString (keywordsConversionLanguage) <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1545,7 +1543,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 #ifdef TRACING_IS_ENABLED
     gLogStream <<
       "Input is empty " <<
-      endl;
+      std::endl;
 #endif
 
     return;
@@ -1580,40 +1578,40 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
         int fieldWidth = 23;
 
         gLogStream <<
-          endl <<
+          std::endl <<
           "--- translateAllTheInputToKeywordsLanguage()" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
 
-        gLogStream << left <<
-          setw (fieldWidth) <<
+        gLogStream << std::left <<
+          std::setw (fieldWidth) <<
           "fCurrentToken" << " : " <<
-          endl;
+          std::endl;
 
         ++gIndenter;
-        gLogStream << fCurrentToken << endl;
+        gLogStream << fCurrentToken << std::endl;
         --gIndenter;
 
         --gIndenter;
 
-        gLogStream << left <<
-          setw (fieldWidth) <<
+        gLogStream << std::left <<
+          std::setw (fieldWidth) <<
           "fCurrentTokenPositionInInput" << " : " << fCurrentTokenPositionInInput <<
-          endl <<
-          setw (fieldWidth) <<
+          std::endl <<
+          std::setw (fieldWidth) <<
           "fCurrentCharacter" << " : '" << currentCharacterAsString () <<
-          endl <<
-          setw (fieldWidth) <<
+          std::endl <<
+          std::setw (fieldWidth) <<
           "fNextCharacterIsAvailable" << " : " << fNextCharacterIsAvailable <<
-          endl <<
+          std::endl <<
 
-          setw (fieldWidth) <<
+          std::setw (fieldWidth) <<
           "fCurrentToken" << " : " <<
-          endl;
+          std::endl;
 
         ++gIndenter;
-        gLogStream << fCurrentToken << endl;
+        gLogStream << fCurrentToken << std::endl;
         --gIndenter;
 
         --gIndenter;
@@ -1629,19 +1627,19 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
     }
     while (tokenKind != msdlTokenKind::k_TokenEOF); // do
   }
-  catch (out_of_range& e) {
+  catch (std::out_of_range& e) {
     mfDisplayException (e, gOutputStream);
   }
-  catch (exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
   }
 
 #ifdef TRACING_IS_ENABLED
   if (fTraceTokens) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<== translateAllTheInputToKeywordsLanguage()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1656,7 +1654,7 @@ void msdlScanner::scanWholeInputAtOnce ()
   if (fTraceTokensDetails) {
     gLogStream <<
       "==> scanWholeInputAtOnce()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1664,7 +1662,7 @@ void msdlScanner::scanWholeInputAtOnce ()
 #ifdef TRACING_IS_ENABLED
     gLogStream <<
       "Input is empty " <<
-      endl;
+      std::endl;
 #endif
 
     return;

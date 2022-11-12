@@ -16,9 +16,12 @@
 #include <ostream>
 
 #include "exports.h"
+#include "smartpointer.h"
 
 #include "msrPitches.h"
 
+
+using namespace MusicXML2;
 
 namespace MusicFormats
 {
@@ -33,9 +36,9 @@ enum class msrOctaveKind {
   kOctave5, kOctave6, kOctave7, kOctave8, kOctave9
 };
 
-string msrOctaveKindAsString (msrOctaveKind octaveKind);
+std::string msrOctaveKindAsString (msrOctaveKind octaveKind);
 
-ostream& operator << (ostream& os, const msrOctaveKind& elt);
+std::ostream& operator << (std::ostream& os, const msrOctaveKind& elt);
 
 EXP int octaveNumberFromOctaveKind (msrOctaveKind octaveKind);
 
@@ -63,7 +66,7 @@ EXP msrOctaveKind msrOctaveKindFromNumber (
 
 EXP msrOctaveKind msrOctaveKindFromCommasOrQuotes (
   int           inputLineNumber,
-  const string& octaveIndication);
+  const std::string& octaveIndication);
 
 // octave entry
 //______________________________________________________________________________
@@ -73,15 +76,15 @@ enum class msrOctaveEntryKind {
   kOctaveEntryFixed
 };
 
-string msrOctaveEntryKindAsString (
+std::string msrOctaveEntryKindAsString (
   msrOctaveEntryKind octaveEntryKind);
 
-ostream& operator << (ostream& os, const msrOctaveEntryKind& elt);
+std::ostream& operator << (std::ostream& os, const msrOctaveEntryKind& elt);
 
-extern map<string, msrOctaveEntryKind>
+extern std::map<std::string, msrOctaveEntryKind>
   gGlobalMsrOctaveEntryKindsMap;
 
-string existingMsrOctaveEntryKinds (size_t namesListMaxLength);
+std::string existingMsrOctaveEntryKinds (size_t namesListMaxLength);
 
 void initializeMsrOctaveEntryKindsMap ();
 
@@ -101,12 +104,12 @@ class EXP msrSemiTonesPitchAndOctave : public smartable
 
     SMARTP<msrSemiTonesPitchAndOctave> createSemiTonesPitchAndOctaveNewbornClone ();
 
-    // creation from  a string
+    // creation from  a std::string
     // ------------------------------------------------------
 
     static SMARTP<msrSemiTonesPitchAndOctave> createFromString (
                             int           inputLineNumber,
-                            const string& theString);
+                            const std::string& theString);
 
   protected:
 
@@ -138,14 +141,14 @@ class EXP msrSemiTonesPitchAndOctave : public smartable
     // public services
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -156,7 +159,7 @@ class EXP msrSemiTonesPitchAndOctave : public smartable
     msrOctaveKind         fOctaveKind;
 };
 typedef SMARTP<msrSemiTonesPitchAndOctave> S_msrSemiTonesPitchAndOctave;
-EXP ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndOctave& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSemiTonesPitchAndOctave& elt);
 
 // semitone pitches and octave
 // can be used as absolute, relative or fixed reference
@@ -174,12 +177,12 @@ class EXP msrQuarterTonesPitchAndOctave : public smartable
 
     SMARTP<msrQuarterTonesPitchAndOctave> createQuarterTonesPitchAndOctaveNewbornClone ();
 
-    // creation from  a string
+    // creation from  a std::string
     // ------------------------------------------------------
 
     static SMARTP<msrQuarterTonesPitchAndOctave> createFromString (
                             int           inputLineNumber,
-                            const string& theString);
+                            const std::string& theString);
 
   protected:
 
@@ -217,9 +220,9 @@ class EXP msrQuarterTonesPitchAndOctave : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -231,7 +234,7 @@ class EXP msrQuarterTonesPitchAndOctave : public smartable
     msrOctaveKind         fOctaveKind;
 };
 typedef SMARTP<msrQuarterTonesPitchAndOctave> S_msrQuarterTonesPitchAndOctave;
-EXP ostream& operator << (ostream& os, const S_msrQuarterTonesPitchAndOctave& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrQuarterTonesPitchAndOctave& elt);
 
 
 }

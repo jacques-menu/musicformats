@@ -25,7 +25,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 msrJustifyKind msrJustifyKindFromString (
   int           inputLineNumber,
-  const string& justifyString)
+  const std::string& justifyString)
 {
   msrJustifyKind result = msrJustifyKind::kJustifyNone; // default value
 
@@ -37,7 +37,7 @@ msrJustifyKind msrJustifyKindFromString (
     result = msrJustifyKind::kJustifyRight;
   else {
     if (justifyString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "justify value " << justifyString <<
@@ -54,10 +54,10 @@ msrJustifyKind msrJustifyKindFromString (
   return result;
 }
 
-string msrJustifyKindAsString (
+std::string msrJustifyKindAsString (
   msrJustifyKind justifyKind)
 {
-  string result;
+  std::string result;
 
   switch (justifyKind) {
     case msrJustifyKind::kJustifyNone:
@@ -77,7 +77,7 @@ string msrJustifyKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrJustifyKind& elt)
+std::ostream& operator << (std::ostream& os, const msrJustifyKind& elt)
 {
   os << msrJustifyKindAsString (elt);
   return os;
@@ -85,7 +85,7 @@ ostream& operator << (ostream& os, const msrJustifyKind& elt)
 
 msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
   int           inputLineNumber,
-  const string& horizontalAlignmentString)
+  const std::string& horizontalAlignmentString)
 {
   msrHorizontalAlignmentKind
     result = msrHorizontalAlignmentKind::kHorizontalAlignmentNone; // default value
@@ -98,7 +98,7 @@ msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
     result = msrHorizontalAlignmentKind::kHorizontalAlignmentRight;
   else {
     if (horizontalAlignmentString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "halign value " << horizontalAlignmentString <<
@@ -115,10 +115,10 @@ msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
   return result;
 }
 
-string msrHorizontalAlignmentKindAsString (
+std::string msrHorizontalAlignmentKindAsString (
   msrHorizontalAlignmentKind horizontalAlignmentKind)
 {
-  string result;
+  std::string result;
 
   switch (horizontalAlignmentKind) {
     case msrHorizontalAlignmentKind::kHorizontalAlignmentNone:
@@ -138,7 +138,7 @@ string msrHorizontalAlignmentKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrHorizontalAlignmentKind& elt)
+std::ostream& operator << (std::ostream& os, const msrHorizontalAlignmentKind& elt)
 {
   os << msrHorizontalAlignmentKindAsString (elt);
   return os;
@@ -146,7 +146,7 @@ ostream& operator << (ostream& os, const msrHorizontalAlignmentKind& elt)
 
 msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
   int           inputLineNumber,
-  const string& verticalAlignmentString)
+  const std::string& verticalAlignmentString)
 {
   msrVerticalAlignmentKind
     result = msrVerticalAlignmentKind::kVerticalAlignmentNone; // default value
@@ -159,7 +159,7 @@ msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
     result = msrVerticalAlignmentKind::kVerticalAlignmentBottom;
   else {
     if (verticalAlignmentString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "valign value " << verticalAlignmentString <<
@@ -176,10 +176,10 @@ msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
   return result;
 }
 
-string msrVerticalAlignmentKindAsString (
+std::string msrVerticalAlignmentKindAsString (
   msrVerticalAlignmentKind verticalAlignmentKind)
 {
-  string result;
+  std::string result;
 
   switch (verticalAlignmentKind) {
     case msrVerticalAlignmentKind::kVerticalAlignmentNone:
@@ -199,7 +199,7 @@ string msrVerticalAlignmentKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrVerticalAlignmentKind& elt)
+std::ostream& operator << (std::ostream& os, const msrVerticalAlignmentKind& elt)
 {
   os << msrVerticalAlignmentKindAsString (elt);
   return os;

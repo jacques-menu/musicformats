@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -53,15 +53,13 @@
 #include "msr2lilypondInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msr2lilypondInsiderHandler msr2lilypondInsiderHandler::create (
-  const string&           serviceName,
-  const string&           handlerHeader,
+  const std::string&           serviceName,
+  const std::string&           handlerHeader,
   oahHandlerUsedThruKind  handlerUsedThruKind)
 {
   // create the insider handler
@@ -76,8 +74,8 @@ S_msr2lilypondInsiderHandler msr2lilypondInsiderHandler::create (
 }
 
 msr2lilypondInsiderHandler::msr2lilypondInsiderHandler (
-  const string&           serviceName,
-  const string&           handlerHeader,
+  const std::string&           serviceName,
+  const std::string&           handlerHeader,
   oahHandlerUsedThruKind  handlerUsedThruKind)
   : oahInsiderHandler (
       serviceName,
@@ -101,7 +99,7 @@ Usage: msr2lilypond [[option]* [MusicXMLFile|-] [[option]*
       "Initializing msr2lilypond insider options handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -125,7 +123,7 @@ void msr2lilypondInsiderHandler::initializeHandlerMultiComponent ()
     createMsr2lilypondConverterComponent ();
 }
 
-string msr2lilypondInsiderHandler::handlerServiceAboutInformation () const
+std::string msr2lilypondInsiderHandler::handlerServiceAboutInformation () const
 {
   return
 R"(What msr2lilypond does:
@@ -149,15 +147,15 @@ R"(What msr2lilypond does:
 }
 
 //______________________________________________________________________________
-string msr2lilypondInsiderHandler::usageFromUsedThruKind (
+std::string msr2lilypondInsiderHandler::usageFromUsedThruKind (
    oahHandlerUsedThruKind handlerUsedThruKind) const
 {
-  string result;
+  std::string result;
 
   switch (handlerUsedThruKind) {
     case oahHandlerUsedThruKind::kHandlerUsedThruUnknown:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "oahHandlerUsedThruKind::kHandlerUsedThruUnknown found in usageFromUsedThruKind() in handler \"" <<
@@ -187,7 +185,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondPrefixes ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msr2lilypond prefixes" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -196,7 +194,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondPrefixes ()
 
 //______________________________________________________________________________
 void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -204,7 +202,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
       "Creating the msr2lilypond insider option groups" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -275,14 +273,14 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
     // print the options handler initial state
     gLogStream <<
       "msr2lilypondInsiderHandler has been initialized as:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     print (gLogStream);
 
     gLogStream <<
-      endl << endl;
+      std::endl << std::endl;
 
     --gIndenter;
   }
@@ -292,7 +290,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
 if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "msr2lilypondInsiderHandler help:" <<
-      endl;
+      std::endl;
 
     this->printHelp (gOutputStream);
   }
@@ -308,7 +306,7 @@ void msr2lilypondInsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -316,7 +314,7 @@ void msr2lilypondInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -324,7 +322,7 @@ string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () const
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -348,13 +346,13 @@ string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () const
       autoOutputFileNameAtom->
         getSetByAnOption ();
 
-  string outputFileName;
+  std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "options' " <<
@@ -379,7 +377,7 @@ string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () const
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has NOT been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      string
+      std::string
         inputSourceName =
           gGlobalServiceRunData->getInputSourceName ();
 
@@ -398,7 +396,7 @@ string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () const
             outputFileName.rfind ('.');
 
         // remove file extension
-        if (posInString != string::npos) {
+        if (posInString != std::string::npos) {
           outputFileName.replace (
             posInString,
             outputFileName.size () - posInString,
@@ -412,7 +410,7 @@ string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -425,7 +423,7 @@ string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -488,7 +486,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lilypondInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -501,7 +499,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -514,7 +512,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lilypondInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -527,7 +525,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -540,7 +538,7 @@ void msr2lilypondInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lilypondInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -548,33 +546,33 @@ void msr2lilypondInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msr2lilypondInsiderHandler::print (ostream& os) const
+void msr2lilypondInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "msr2lilypondInsiderHandler '" << fHandlerHeader << "':" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -582,7 +580,7 @@ void msr2lilypondInsiderHandler::print (ostream& os) const
       // print the options group
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -590,16 +588,16 @@ void msr2lilypondInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msr2lilypondInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2lilypondInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -634,11 +632,11 @@ void msr2lilypondInsiderOahGroup::initializeMsr2lilypondInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
     "\" group" <<
-    endl;
+    std::endl;
   }
 #endif
 }
@@ -648,7 +646,7 @@ void msr2lilypondInsiderOahGroup::printMsr2lilypondInsiderOahGroupValues (int fi
 {
   gLogStream <<
     "The msr2lilypond options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -657,17 +655,17 @@ void msr2lilypondInsiderOahGroup::printMsr2lilypondInsiderOahGroupValues (int fi
 
   gLogStream <<
     "Quit after some passes:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
     fQuitAfterPass2a <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
     fQuitAfterPass2b <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -681,7 +679,7 @@ S_msr2lilypondInsiderOahGroup createGlobalMsr2lilypondInsiderOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2lilypond OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

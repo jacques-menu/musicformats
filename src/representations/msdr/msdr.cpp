@@ -13,8 +13,6 @@
 #include "msdr.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 

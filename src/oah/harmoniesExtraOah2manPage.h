@@ -40,7 +40,7 @@ class EXP harmoniesExtraOah2manPage : virtual public oah2manPage,
 
                           harmoniesExtraOah2manPage (
                             const S_oahHandler handler,
-                            ostream&           manPageOutputStream);
+                            std::ostream&           manPageOutputStream);
 
     virtual               ~harmoniesExtraOah2manPage ();
 

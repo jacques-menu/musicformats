@@ -63,13 +63,13 @@ enum class msrIntervalKind {
   kIntervalMajorThirteenth, kIntervalAugmentedThirteenth
 };
 
-string msrIntervalKindAsString (
+std::string msrIntervalKindAsString (
   msrIntervalKind intervaKindl);
 
-string msrIntervalKindAsShortString (
+std::string msrIntervalKindAsShortString (
   msrIntervalKind intervalKind);
 
-ostream& operator << (ostream& os, const msrIntervalKind& elt);
+std::ostream& operator << (std::ostream& os, const msrIntervalKind& elt);
 
 EXP int msrIntervalKindAsSemiTones (
   msrIntervalKind intervalKind);

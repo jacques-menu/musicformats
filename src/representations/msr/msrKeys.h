@@ -31,10 +31,10 @@ enum class msrKeyKind {
   kKeyTraditional, kKeyHumdrumScot
 };
 
-string msrKeyKindAsString (
+std::string msrKeyKindAsString (
   msrKeyKind keyKind);
 
-ostream& operator << (ostream& os, const msrKeyKind& elt);
+std::ostream& operator << (std::ostream& os, const msrKeyKind& elt);
 
 enum class msrModeKind {
   kMode_NO_,
@@ -44,14 +44,14 @@ enum class msrModeKind {
   kModeMixolydian, kModeAeolian, kModeLocrian
 };
 
-string msrModeKindAsString (
+std::string msrModeKindAsString (
   msrModeKind modeKind);
 
-ostream& operator << (ostream& os,const msrModeKind& elt);
+std::ostream& operator << (std::ostream& os,const msrModeKind& elt);
 
 msrModeKind modeKindFromString (
   int           inputLineNumber,
-  const string& modeString);
+  const std::string& modeString);
 
 //______________________________________________________________________________
 // PRE-declarations for mutual class dependencies
@@ -125,10 +125,10 @@ class EXP msrHumdrumScotKeyItem : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
-    string                asShortStringForMeasuresSlices () const override;
+    std::string           asString () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -140,7 +140,7 @@ class EXP msrHumdrumScotKeyItem : public msrElement
     msrOctaveKind         fKeyOctaveKind;
 };
 typedef SMARTP<msrHumdrumScotKeyItem> S_msrHumdrumScotKeyItem;
-EXP ostream& operator << (ostream& os, const S_msrHumdrumScotKeyItem& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHumdrumScotKeyItem& elt);
 
 //______________________________________________________________________________
 // PRE-declaration
@@ -148,7 +148,7 @@ EXP ostream& operator << (ostream& os, const S_msrHumdrumScotKeyItem& elt);
 class   msrKey;
 typedef SMARTP<msrKey> S_msrKey;
 
-class EXP msrKey : public msrMeasureElement
+class EXP msrKey : public msrMeasureElementLambda
 {
   public:
 
@@ -171,7 +171,7 @@ class EXP msrKey : public msrMeasureElement
 
     static SMARTP<msrKey> createTraditionalKeyFromString (
                             int           inputLineNumber,
-                            const string& keyString);
+                            const std::string& keyString);
 
   protected:
 
@@ -219,7 +219,7 @@ class EXP msrKey : public msrMeasureElement
     Bool                  getKeyItemsOctavesAreSpecified () const
                               { return fKeyItemsOctavesAreSpecified; }
 
-    const vector<S_msrHumdrumScotKeyItem>&
+    const std::vector<S_msrHumdrumScotKeyItem>&
                           getHumdrumScotKeyItemsVector () const
                               { return fHumdrumScotKeyItemsVector; }
 
@@ -249,10 +249,10 @@ class EXP msrKey : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
-    string                asShortStringForMeasuresSlices () const override;
+    std::string           asString () const override;
+    std::string           asShortStringForMeasuresSlices () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -270,12 +270,12 @@ class EXP msrKey : public msrMeasureElement
 
     // Humdrum/Scot keys
 
-    vector<S_msrHumdrumScotKeyItem>
+    std::vector<S_msrHumdrumScotKeyItem>
                           fHumdrumScotKeyItemsVector;
     Bool                  fKeyItemsOctavesAreSpecified;
 };
 typedef SMARTP<msrKey> S_msrKey;
-EXP ostream& operator << (ostream& os, const S_msrKey& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrKey& elt);
 
 
 }

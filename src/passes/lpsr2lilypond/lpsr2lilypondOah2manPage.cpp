@@ -21,15 +21,13 @@
 
 #include "oahOah.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //________________________________________________________________________
 lpsr2lilypondOah2manPage::lpsr2lilypondOah2manPage (
   const S_oahHandler handler,
-  ostream&           manPageOutputStream)
+  std::ostream&           manPageOutputStream)
     : oah2manPage (
         handler,
         manPageOutputStream)
@@ -44,28 +42,28 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondScoreOutputKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting lilypondScoreOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondScoreOutputKindAtom& elt)
@@ -73,10 +71,10 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondScoreOutputKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting lilypondScoreOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -87,28 +85,28 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondTransposePartNameAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting lilypondTransposePartNameAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondTransposePartNameAtom& elt)
@@ -116,10 +114,10 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondTransposePartNameAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting lilypondTransposePartNameAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -130,28 +128,28 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondAbsoluteOctaveEntryAtom& el
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting lilypondAbsoluteOctaveEntryAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAbsoluteOctaveEntryAtom& elt)
@@ -159,10 +157,10 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAbsoluteOctaveEntryAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting lilypondAbsoluteOctaveEntryAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -173,28 +171,28 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondRelativeOctaveEntryAtom& el
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting lilypondRelativeOctaveEntryAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondRelativeOctaveEntryAtom& elt)
@@ -202,10 +200,10 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondRelativeOctaveEntryAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting lilypondRelativeOctaveEntryAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -216,28 +214,28 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondFixedOctaveEntryAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting lilypondFixedOctaveEntryAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondFixedOctaveEntryAtom& elt)
@@ -245,10 +243,10 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondFixedOctaveEntryAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting lilypondFixedOctaveEntryAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -259,27 +257,27 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondAccidentalStyleKindAtom& el
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting lilypondAccidentalStyleKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAccidentalStyleKindAtom& elt)
@@ -287,10 +285,10 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAccidentalStyleKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting lilypondAccidentalStyleKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -301,28 +299,28 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondChordsDisplayAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting lilypondChordsDisplayAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondChordsDisplayAtom& elt)
@@ -330,10 +328,10 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondChordsDisplayAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting lilypondChordsDisplayAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -344,28 +342,28 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondLyricsDurationsKindAtom& el
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting lilypondLyricsDurationsKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 
 }
 
@@ -374,10 +372,10 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondLyricsDurationsKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting lilypondLyricsDurationsKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -388,28 +386,28 @@ void lpsr2lilypondOah2manPage::visitStart (S_oahMidiTempoAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahMidiTempoAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
 }
 
 void lpsr2lilypondOah2manPage::visitEnd (S_oahMidiTempoAtom& elt)
@@ -417,10 +415,10 @@ void lpsr2lilypondOah2manPage::visitEnd (S_oahMidiTempoAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahMidiTempoAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }

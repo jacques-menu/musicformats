@@ -12,7 +12,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// string tempoKindAsDebugString ( // JMI v0.9.66
+// std::string tempoKindAsDebugString ( // JMI v0.9.66
 //   msrTempoKBeatUnitsKind tempoKind);
 
 //______________________________________________________________________________
@@ -89,11 +89,11 @@ class EXP bsrTempo : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -105,7 +105,7 @@ class EXP bsrTempo : public bsrLineContentsElement
     S_bsrCellsList        fTempoCellsList;
 };
 typedef SMARTP<bsrTempo> S_bsrTempo;
-EXP ostream& operator << (ostream& os, const S_bsrTempo& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrTempo& elt);
 
 
 }

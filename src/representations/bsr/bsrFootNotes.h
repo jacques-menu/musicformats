@@ -65,18 +65,18 @@ class EXP bsrFootNotes : public bsrLine
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    list<S_bsrFootNotesElement>
+    std::list<S_bsrFootNotesElement>
                           fFootNotesElementsList;
 };
 typedef SMARTP<bsrFootNotes> S_bsrFootNotes;
-EXP ostream& operator << (ostream& os, const S_bsrFootNotes& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrFootNotes& elt);
 
 
 }

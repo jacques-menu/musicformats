@@ -22,7 +22,7 @@ Please contact the maintainers of MusicFormats (see option '-c, -contact'):
   either you found a bug in the xml2ly converter,
   or this MusicXML data is the first-ever real-world case
   of a score exhibiting overlapping part groups.
-  Exception caught: mfException:
+  std::exception caught: mfException:
 There are overlapping part groups, namely:
   '2' -=> PartGroup_6 ('2', partGroupName "1
 2"), lines 164..169
@@ -44,7 +44,7 @@ class   {\tt mxmlPartGroupDescr} contains:
 struct mxmlPartGroupDescr : public smartable
 {
 /*
-  positions represent the order in which the parts appear in <part-list />
+  positions represent the order in which the parts appear in <part-std::list />
 */
 
 	// ... ... ...
@@ -79,13 +79,13 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      createImplicitPartGroup ();
 
     // part groups numbers can be re-used, they're no identifier
-    // we use a map to access them by part group number
+    // we use a std::map to access them by part group number
     int                       fPartGroupsCounter;
-    vector<S_mxmlPartGroupDescr>
+    std::vector<S_mxmlPartGroupDescr>
                               fPartGroupDescsVector;
-    map<int, S_mxmlPartGroupDescr>
+    std::map<int, S_mxmlPartGroupDescr>
                               fAllPartGroupDescrsMap;
-    map<int, S_mxmlPartGroupDescr>
+    std::map<int, S_mxmlPartGroupDescr>
                               fStartedPartGroupDescrsMap;
 
 	// ... ... ...

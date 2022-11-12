@@ -14,8 +14,6 @@
 #include "LilyPondIssue34Component.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -24,7 +22,7 @@ static S_mfcGeneratorComponent pGeneratorComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the generator's representations list
+  // populate the generator's representations std::list
   pGeneratorComponent->
     appendRepresentationToMultiComponent (
       createMsrRepresentationComponent ());
@@ -38,7 +36,7 @@ static void populateMultiComponent ()
     appendRepresentationToMultiComponent (
       createMxsrRepresentationComponent ());
 
-  // populate the converter's passes list
+  // populate the converter's passes std::list
   pGeneratorComponent->
     appendPassToMultiComponent (
       createMsr2msrComponent ());
@@ -87,7 +85,7 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Creating the LilyPondIssue34 component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -104,7 +102,7 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -114,7 +112,7 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.6"),
           "October 23, 2021",
-          list<string> {
+          std::list<std::string> {
             "Fixed generated output options handling"
           }
       ));

@@ -10,8 +10,8 @@
 */
 
 #include <iostream>
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
-                        // ifstream, ifstream::open(), ifstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
+                        // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
 #include "mfServiceRunData.h"
 
@@ -48,8 +48,6 @@
 #include "msdl2musicxmlInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 /*
@@ -61,8 +59,8 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
-  string        inputSourceName,
-  istream&      inputStream,
+  std::string        inputSourceName,
+  std::istream&      inputStream,
   S_oahHandler  handler,
   std::ostream& out,
   std::ostream& err)
@@ -94,17 +92,17 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-      string separator =
+      std::string separator =
         "%--------------------------------------------------------------";
       err <<
-        endl <<
+        std::endl <<
         separator <<
-        endl <<
+        std::endl <<
         gTab <<
         "Pass 1: Creating a first MSR from the MSDL input" <<
-        endl <<
+        std::endl <<
         separator <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -130,18 +128,18 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
     // sanity check
     if (! firstMsrScore) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "Could not perform comversion of \"" <<
         inputSourceName <<
         "\" to MSR - quitting";
 
-      string message = s.str ();
+      std::string message = s.str ();
 
       err <<
         message <<
-        endl;
+        std::endl;
 
       throw msdl2msrException (message);
     }
@@ -160,9 +158,9 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
   if (false && gGlobalMsdl2xmlInsiderOahGroup->getQuitAfterPass1 ()) { // JMI
     err <<
-      endl <<
+      std::endl <<
       "Quitting after creating the MSR skeleton in pass 1 of convertMsdlStream2musicxmlWithHandler as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -216,7 +214,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
   // convert the MXSR to MusicXML (pass 4)
   // ------------------------------------------------------
 
-  string
+  std::string
     outputFileName =
       handler->
         fetchOutputFileNameFromTheOptions ();
@@ -243,8 +241,8 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
-  string                  inputSourceName,
-  istream&                inputStream,
+  std::string             inputSourceName,
+  std::istream&                inputStream,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -252,7 +250,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
   // the service name
   // ------------------------------------------------------
 
-  string serviceName = "msdl2musicxml";
+  std::string serviceName = "msdl2musicxml";
 
   // reset the global indenter
   // ------------------------------------------------------
@@ -290,7 +288,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
     gLogStream <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -367,7 +365,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
       " gIndenter value after options ands arguments checking: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -387,7 +385,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
-  string                  fileName,
+  std::string             fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -396,30 +394,30 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
-      endl <<
+      std::endl <<
       "Opening file \"" << fileName << "\" for writing" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  ifstream
+  std::ifstream
     inputStream (
       fileName.c_str (),
-      ifstream::in);
+      std::ifstream::in);
 
   if (! inputStream.is_open ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
       "\" for reading - quitting";
 
-    string message = s.str ();
+    std::string message = s.str ();
 
     err <<
       message <<
-      endl;
+      std::endl;
 
     throw msdl2musicxmlException (message);
   }
@@ -434,39 +432,39 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
 }
 
 EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
-  string       fileName,
+  std::string       fileName,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err)
+  std::ostream&     out,
+  std::ostream&     err)
 {
   // open input file
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
-      endl <<
+      std::endl <<
       "Opening file \"" << fileName << "\" for writing" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  ifstream
+  std::ifstream
     inputStream (
       fileName.c_str (),
-      ifstream::in);
+      std::ifstream::in);
 
   if (! inputStream.is_open ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
       "\" for reading - quitting";
 
-    string message = s.str ();
+    std::string message = s.str ();
 
     err <<
       message <<
-      endl;
+      std::endl;
 
     throw msdl2musicxmlException (message);
   }
@@ -483,10 +481,10 @@ EXP mfMusicformatsErrorKind msdlString2musicxmlWithOptionsAndArguments (
   std::ostream&           out,
   std::ostream&           err)
 {
-  stringstream
+  std::stringstream
     inputStream (
       buffer,
-      ios_base::in);
+      std::ios_base::in);
 
   // call convertMsdlStream2musicxmlWithOptionsAndArguments() even if buffer is empty,
   // to handle the help options if any
@@ -503,14 +501,14 @@ EXP mfMusicformatsErrorKind msdlString2musicxmlWithOptionsAndArguments (
 
 EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithHandler (
   const char*  buffer,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
-  stringstream
+  std::stringstream
     inputStream (
       buffer,
-      ios_base::in);
+      std::ios_base::in);
 
   // call convertMsdlStream2musicxmlWithOptionsAndArguments() even if buffer is empty,
   // to handle the help options if any

@@ -41,20 +41,20 @@ enum class msrTechnicalKind {
   kTechnicalUpBow
 };
 
-string msrTechnicalKindAsString (
+std::string msrTechnicalKindAsString (
   msrTechnicalKind technicalKind);
 
-ostream& operator << (ostream& os, const msrTechnicalKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTechnicalKind& elt);
 
 /* JMI v0.9.66
 enum class msrTechnicalAccidentalMarkKind {
   msrAlterationKind::kAlterationNatural, msrAlterationKind::kAlterationSharp, msrAlterationKind::kAlterationFlat
 };
 
-string technicalAccidentalMarkKindAsString (
+std::string technicalAccidentalMarkKindAsString (
   msrTechnicalAccidentalMarkKind technicalAccidentalMarkKind);
 
-ostream& operator << (ostream& os, const msrTechnicalAccidentalMarkKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTechnicalAccidentalMarkKind& elt);
 
 */
 
@@ -63,10 +63,10 @@ enum class msrTechnicalTypeKind { // JMI ???
   kTechnicalTypeStart, kTechnicalTypeStop
 };
 
-string msrTechnicalTypeKindAsString (
+std::string msrTechnicalTypeKindAsString (
   msrTechnicalTypeKind technicalTypeKind);
 
-ostream& operator << (ostream& os, const msrTechnicalTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTechnicalTypeKind& elt);
 
 // data types
 
@@ -74,10 +74,10 @@ enum class msrTechnicalWithFloatKind {
   kTechnicalWithFloatBend
 };
 
-string msrTechnicalWithFloatKindAsString (
+std::string msrTechnicalWithFloatKindAsString (
   msrTechnicalWithFloatKind technicalWithFloatKind);
 
-ostream& operator << (ostream& os, const msrTechnicalWithFloatKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTechnicalWithFloatKind& elt);
 
 enum class msrTechnicalWithIntegerKind {
   kFingering,
@@ -85,10 +85,10 @@ enum class msrTechnicalWithIntegerKind {
   kString
 };
 
-string msrTechnicalWithIntegerKindAsString (
+std::string msrTechnicalWithIntegerKindAsString (
   msrTechnicalWithIntegerKind technicalWithIntegerKind);
 
-ostream& operator << (ostream& os, const msrTechnicalWithIntegerKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTechnicalWithIntegerKind& elt);
 
 enum class msrTechnicalWithStringKind {
   kHammerOn,
@@ -98,10 +98,10 @@ enum class msrTechnicalWithStringKind {
   kPullOff
 };
 
-string msrTechnicalWithStringKindAsString (
+std::string msrTechnicalWithStringKindAsString (
   msrTechnicalWithStringKind technicalWithStringKind);
 
-ostream& operator << (ostream& os, const msrTechnicalWithStringKind& elt);
+std::ostream& operator << (std::ostream& os, const msrTechnicalWithStringKind& elt);
 
 //______________________________________________________________________________
 class EXP msrTechnical : public msrElement
@@ -180,9 +180,9 @@ class EXP msrTechnical : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -196,7 +196,7 @@ class EXP msrTechnical : public msrElement
 // JMI    msrTechnicalAccidentalMarkKind  fTechnicalAccidentalMarkKind;
 };
 typedef SMARTP<msrTechnical> S_msrTechnical;
-EXP ostream& operator << (ostream& os, const S_msrTechnical& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTechnical& elt);
 
 //______________________________________________________________________________
 class EXP msrTechnicalWithInteger : public msrElement
@@ -268,9 +268,9 @@ class EXP msrTechnicalWithInteger : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -285,7 +285,7 @@ class EXP msrTechnicalWithInteger : public msrElement
     msrPlacementKind      fTechnicalWithIntegerPlacementKind;
 };
 typedef SMARTP<msrTechnicalWithInteger> S_msrTechnicalWithInteger;
-EXP ostream& operator << (ostream& os, const S_msrTechnicalWithInteger& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithInteger& elt);
 
 //______________________________________________________________________________
 class EXP msrTechnicalWithFloat : public msrElement
@@ -342,7 +342,7 @@ class EXP msrTechnicalWithFloat : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                technicalWithFloatAccidentalMarkKindAsString () const;
+    std::string           technicalWithFloatAccidentalMarkKindAsString () const;
 
   public:
 
@@ -359,9 +359,9 @@ class EXP msrTechnicalWithFloat : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -376,7 +376,7 @@ class EXP msrTechnicalWithFloat : public msrElement
     msrPlacementKind      fTechnicalWithFloatPlacementKind;
 };
 typedef SMARTP<msrTechnicalWithFloat> S_msrTechnicalWithFloat;
-EXP ostream& operator << (ostream& os, const S_msrTechnicalWithFloat& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithFloat& elt);
 
 //______________________________________________________________________________
 class EXP msrTechnicalWithString : public msrElement
@@ -390,7 +390,7 @@ class EXP msrTechnicalWithString : public msrElement
                             int                        inputLineNumber,
                             msrTechnicalWithStringKind technicalWithStringKind,
                             msrTechnicalTypeKind       technicalWithStringTypeKind,
-                            const string&              technicalWithStringValue,
+                            const std::string&              technicalWithStringValue,
                             msrPlacementKind           technicalWithStringPlacementKind);
 
   protected:
@@ -402,7 +402,7 @@ class EXP msrTechnicalWithString : public msrElement
                             int                        inputLineNumber,
                             msrTechnicalWithStringKind technicalWithStringKind,
                             msrTechnicalTypeKind       technicalWithStringTypeKind,
-                            const string&              technicalWithStringValue,
+                            const std::string&              technicalWithStringValue,
                             msrPlacementKind           technicalWithStringPlacementKind);
 
     virtual               ~msrTechnicalWithString ();
@@ -419,7 +419,7 @@ class EXP msrTechnicalWithString : public msrElement
     msrTechnicalTypeKind  getTechnicalWithStringTypeKind () const
                               { return fTechnicalWithStringTypeKind; }
 
-    string                getTechnicalWithStringValue () const
+    std::string           getTechnicalWithStringValue () const
                               { return fTechnicalWithStringValue; }
 
     void                  setTechnicalWithStringPlacementKind (
@@ -453,9 +453,9 @@ class EXP msrTechnicalWithString : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -467,12 +467,12 @@ class EXP msrTechnicalWithString : public msrElement
 
     msrTechnicalTypeKind  fTechnicalWithStringTypeKind;
 
-    string                fTechnicalWithStringValue;
+    std::string           fTechnicalWithStringValue;
 
     msrPlacementKind      fTechnicalWithStringPlacementKind;
 };
 typedef SMARTP<msrTechnicalWithString> S_msrTechnicalWithString;
-EXP ostream& operator << (ostream& os, const S_msrTechnicalWithString& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTechnicalWithString& elt);
 
 
 }

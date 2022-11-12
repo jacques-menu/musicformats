@@ -1179,7 +1179,7 @@ class EXP mxsr2msrTranslator :
 
     msrPrintObjectKind        fCurrentPrintObjectKind;
 
-    string                    fCurrentDisplayText;
+    std::string               fCurrentDisplayText;
 
     S_msrPrintLayout          fCurrentPrintLayout;
 
@@ -1197,9 +1197,9 @@ class EXP mxsr2msrTranslator :
     // since measure numbers are actually strings
 
     int                       fPartMeasuresCounter;
-    string                    fScoreFirstMeasureNumber;
-    string                    fPartFirstMeasureNumber;
-    string                    fCurrentMeasureNumber;
+    std::string               fScoreFirstMeasureNumber;
+    std::string               fPartFirstMeasureNumber;
+    std::string               fCurrentMeasureNumber;
 
     // measure end line number
 
@@ -1290,7 +1290,7 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     int                       fCurrentClefStaffNumber;
-    string                    fCurrentClefSign;
+    std::string               fCurrentClefSign;
     int                       fCurrentClefLine;
     int                       fCurrentClefOctaveChange;
 
@@ -1310,7 +1310,7 @@ class EXP mxsr2msrTranslator :
 
     // Humdrum-Scot
     S_msrHumdrumScotKeyItem   fCurrentHumdrumScotKeyItem;
-    vector<S_msrHumdrumScotKeyItem>
+    std::vector<S_msrHumdrumScotKeyItem>
                               fCurrentHumdrumScotKeyItemsVector;
 
     S_msrKey                  handleHumdrumScotKey (
@@ -1386,7 +1386,7 @@ class EXP mxsr2msrTranslator :
     // rehearsal marks remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrRehearsalMark>  fPendingRehearsalMarksList;
+    std::list<S_msrRehearsalMark>  fPendingRehearsalMarksList;
 
     void                      attachPendingRehearsalMarksToVoice (
                                 S_msrVoice voice);
@@ -1396,7 +1396,7 @@ class EXP mxsr2msrTranslator :
 
 //     void                      convertWordsToRehearsalMark (
 //                                 int           inputLineNumber,
-//                                 const string& wordsValuee);
+//                                 const std::string& wordsValuee);
 
 
     // segnos handling
@@ -1404,14 +1404,14 @@ class EXP mxsr2msrTranslator :
     // segnos remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrSegno>          fPendingSegnosList;
+    std::list<S_msrSegno>          fPendingSegnosList;
 
     void                      attachPendingSegnosToNote (
                                 S_msrNote note);
 
 //     void                      convertWordsToSegno (
 //                                 int           inputLineNumber,
-//                                 const string& wordsValuee);
+//                                 const std::string& wordsValuee);
 
 
     // dal segnos handling
@@ -1419,7 +1419,7 @@ class EXP mxsr2msrTranslator :
     // dal segnos are not represented as such in MusicXML,
     // but they are in MSR, hence an option to convert words
     // with specific contents to dal segnos
-    list<S_msrDalSegno>       fPendingDalSegnosList;
+    std::list<S_msrDalSegno>       fPendingDalSegnosList;
 
     void                      attachPendingDalSegnosToNote (
                                 S_msrNote note);
@@ -1428,7 +1428,7 @@ class EXP mxsr2msrTranslator :
 
 //     void                      convertWordsToDalSegno (
 //                                 int           inputLineNumber,
-//                                 const string& wordsValuee);
+//                                 const std::string& wordsValuee);
 
 
     // codas handling
@@ -1436,7 +1436,7 @@ class EXP mxsr2msrTranslator :
     // codas remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrCoda>           fPendingCodasList;
+    std::list<S_msrCoda>           fPendingCodasList;
 
     int                       fCodasCounter;
 
@@ -1445,15 +1445,15 @@ class EXP mxsr2msrTranslator :
 
 //     void                      convertWordsToDalSegnoAlFine (
 //                                 int           inputLineNumber,
-//                                 const string& wordsValuee);
+//                                 const std::string& wordsValuee);
 //
 //     void                      convertWordsToDalSegnoAlCoda (
 //                                 int           inputLineNumber,
-//                                 const string& wordsValuee);
+//                                 const std::string& wordsValuee);
 //
 //     void                      convertWordsToCoda (
 //                                 int           inputLineNumber,
-//                                 const string& wordsValuee);
+//                                 const std::string& wordsValuee);
 
 
     // cresc/decresc handling
@@ -1462,18 +1462,18 @@ class EXP mxsr2msrTranslator :
     // but they are in MSR, hence an option to convert words
     // with specific contents to dal segnos
 
-    list<S_msrCrescDecresc>   fPendinCrescDecrescsList;
+    std::list<S_msrCrescDecresc>   fPendinCrescDecrescsList;
 
     void                      attachPendingCrescDecrescsToNote (
                                 S_msrNote note);
 
 //     void                      convertWordsToCresc (
 //                                 int           inputLineNumber,
-//                                 const string& wordsValuee);
+//                                 const std::string& wordsValuee);
 
 //     void                      convertWordsToDecresc (
 //                                 int           inputLineNumber,
-//                                 const string& wordsValuee);
+//                                 const std::string& wordsValuee);
 
 
     // eyeglasses handling
@@ -1481,7 +1481,7 @@ class EXP mxsr2msrTranslator :
     // eyeglasses remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrEyeGlasses>     fPendingEyeGlassesList;
+    std::list<S_msrEyeGlasses>     fPendingEyeGlassesList;
 
     void                      attachPendingEyeGlassesToNote (
                                 S_msrNote note);
@@ -1492,7 +1492,7 @@ class EXP mxsr2msrTranslator :
     // damps remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrDamp>           fPendingDampsList;
+    std::list<S_msrDamp>           fPendingDampsList;
 
     void                      attachPendingDampsToNote (
                                 S_msrNote note);
@@ -1503,7 +1503,7 @@ class EXP mxsr2msrTranslator :
     // damp alls remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrDampAll>        fPendingDampAllsList;
+    std::list<S_msrDampAll>        fPendingDampAllsList;
 
     void                      attachPendingDampAllsToNote (
                                 S_msrNote note);
@@ -1523,19 +1523,19 @@ class EXP mxsr2msrTranslator :
 
     msrDurationKind           fCurrentMetronomeBeatUnitDurationKind;
 
-    vector<msrDottedDuration> fCurrentMetronomeBeatUnitsVector;
-    string                    fCurrentMetrenomePerMinute;
+    std::vector<msrDottedDuration> fCurrentMetronomeBeatUnitsVector;
+    std::string               fCurrentMetrenomePerMinute;
     msrTempoParenthesizedKind fCurrentMetronomeParenthesedKind;
 
     int                       fCurrentMetrenomeDotsNumber;
     msrTempoNotesRelationshipKind
                               fCurrentMetrenomeRelationKind;
     msrDurationKind           fCurrentMetronomeDurationKind;
-    string                    fCurrentMetronomeBeamValue;
+    std::string               fCurrentMetronomeBeamValue;
 
     Bool                      fOnGoingMetronomeNote;
 
-    list<S_msrBeam>           fPendingMetronomeBeamsList; // stack JMI ???
+    std::list<S_msrBeam>           fPendingMetronomeBeamsList; // std::stack JMI ???
     void                      attachCurrentMetronomeBeamsToMetronomeNote (
                                 S_msrTempoNote tempoNote);
 
@@ -1547,7 +1547,7 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentMetrenomeNormalDotsNumber;
     int                       fCurrentMetronomeNoteActualNotes;
     int                       fCurrentMetronomeNoteNormalNotes;
-    string                    fCurrentMetronomeNoteNormalType; // JMI ???
+    std::string               fCurrentMetronomeNoteNormalType; // JMI ???
 
     Rational                  fCurrentMetronomeNoteWholeNotesFromMetronomeType;
 
@@ -1564,7 +1564,7 @@ class EXP mxsr2msrTranslator :
     // tempos remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrTempo>          fPendingTemposList;
+    std::list<S_msrTempo>          fPendingTemposList;
 
     void                      attachPendingTemposToVoice (
                                 S_msrVoice voice);
@@ -1574,13 +1574,13 @@ class EXP mxsr2msrTranslator :
 
 //     void                      convertWordsToTempo (
 //                                 int           inputLineNumber,
-//                                 const string& wordsValue);
+//                                 const std::string& wordsValue);
 
 
     // line breaks handling
     // ------------------------------------------------------
 
-    list<S_msrLineBreak>      fPendingLineBreaksList;
+    std::list<S_msrLineBreak>      fPendingLineBreaksList;
 
     void                      attachLineBreaksToVoice (
                                 S_msrVoice voice);
@@ -1592,7 +1592,7 @@ class EXP mxsr2msrTranslator :
     // page and line breaks handling
     // ------------------------------------------------------
 
-    list<S_msrPageBreak>      fPendingPageBreaksList;
+    std::list<S_msrPageBreak>      fPendingPageBreaksList;
 
     void                      attachPageBreaksToVoice (
                                 S_msrVoice voice);
@@ -1607,7 +1607,7 @@ class EXP mxsr2msrTranslator :
     // octave shifts remain pending until the next note
     // (they precede the note in MusicXML and
     // may occur when no current voice exists)
-    list<S_msrOctaveShift>    fPendingOctaveShiftsList;
+    std::list<S_msrOctaveShift>    fPendingOctaveShiftsList;
     void                      attachPendingOctaveShiftsToNote (
                                 S_msrNote note);
 
@@ -1620,7 +1620,7 @@ class EXP mxsr2msrTranslator :
     // scordaturas remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrScordatura>     fPendingScordaturasList;
+    std::list<S_msrScordatura>     fPendingScordaturasList;
 
     void                      attachPendingScordaturasToNote (
                                 S_msrNote note);
@@ -1641,10 +1641,10 @@ class EXP mxsr2msrTranslator :
                               fCurrentTimeSignatureSymbolKind;
 
     int                       fCurrentTimeStaffNumber;
-    string                    fCurrentTimeSignatureBeats;
+    std::string               fCurrentTimeSignatureBeats;
     Bool                      fCurrentTimeSenzaMisura;
 
-    vector<S_msrTimeSignatureItem>
+    std::vector<S_msrTimeSignatureItem>
                               fCurrentTimeSignatureItemsVector;
 
     S_msrTimeSignature        fCurrentTimeSignature;
@@ -1663,24 +1663,24 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     Bool                      fOnGoingLyric;
-    string                    fCurrentSyllabic;
+    std::string               fCurrentSyllabic;
     msrSyllableKind           fCurrentSyllableKind;
     msrSyllableKind           fFirstSyllableInSlurKind;
     msrSyllableKind           fFirstSyllableInLigatureKind;
-    list<string>              fCurrentLyricTextsList;
+    std::list<std::string>              fCurrentLyricTextsList;
 
     msrSyllableExtendKind     fCurrentSyllableExtendKind;
     Bool                      fOnGoingSyllableExtend;
 
-    string                    fCurrentStanzaNumber;
-    string                    fCurrentStanzaName;
+    std::string               fCurrentStanzaNumber;
+    std::string               fCurrentStanzaName;
 
     Bool                      fCurrentNoteHasLyrics;
     Bool                      fASkipSyllableHasBeenGeneratedForcurrentNote;
 
     Bool                      fCurrentStanzaHasText;
 
-    list<S_msrSyllable>       fCurrentNoteSyllables;
+    std::list<S_msrSyllable>       fCurrentNoteSyllables;
 
     Bool                      fLastHandledNoteInVoiceHasLyrics;
 
@@ -1693,7 +1693,7 @@ class EXP mxsr2msrTranslator :
 
     int                       fHarmoniesVoicesCounter;
 
-    list<S_msrHarmony>        fPendingHarmoniesList;
+    std::list<S_msrHarmony>        fPendingHarmoniesList;
     void                      handlePendingHarmonies (
                                 S_msrNote  newNote,
                                 S_msrVoice voiceToInsertInto);
@@ -1704,7 +1704,7 @@ class EXP mxsr2msrTranslator :
     msrAlterationKind         fCurrentHarmonyRootAlterationKind;
 
     msrHarmonyKind            fCurrentHarmonyKind;
-    string                    fCurrentHarmonyKindText;
+    std::string               fCurrentHarmonyKindText;
 
     int                       fCurrentHarmonyInversion;
 
@@ -1713,7 +1713,7 @@ class EXP mxsr2msrTranslator :
     msrHarmonyDegreeTypeKind
                               fCurrentHarmonyDegreeTypeKind;
 
-    list<S_msrHarmonyDegree>  fCurrentHarmonyDegreesList;
+    std::list<S_msrHarmonyDegree>  fCurrentHarmonyDegreesList;
 
 
     int                       fCurrentHarmonyDegreeValue;
@@ -1732,7 +1732,7 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     int                       fFiguredBassVoicesCounter;
-    list<S_msrFiguredBass>
+    std::list<S_msrFiguredBass>
                               fPendingFiguredBassesList;
     void                      handlePendingFiguredBasses (
                                 S_msrNote  newNote,
@@ -1752,7 +1752,7 @@ class EXP mxsr2msrTranslator :
     msrFiguredBassParenthesesKind
                               fCurrentFiguredBassParenthesesKind;
 
-    list<S_msrBassFigure>     fPendingFiguredBassFiguresList;
+    std::list<S_msrBassFigure>     fPendingFiguredBassFiguresList;
 
     // frames handling
     // ------------------------------------------------------
@@ -1772,7 +1772,7 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fOnGoingFrameNote;
 
-    list<S_msrFrameNote>      fPendingFramesNotesList;
+    std::list<S_msrFrameNote>      fPendingFramesNotesList;
 
     // bar lines handling
     // ------------------------------------------------------
@@ -1782,7 +1782,7 @@ class EXP mxsr2msrTranslator :
 
     msrBarLineHasSegnoKind    fCurrentBarLineHasSegnoKind;
     msrBarLineHasCodaKind     fCurrentBarLineHasCodaKind;
-    string                    fCurrentBarLineEndingNumber; // vector<string> ??? JMI
+    std::string               fCurrentBarLineEndingNumber; // std::vector<std::string> ??? JMI
                                 // may be "1, 2"
 
     msrBarLineLocationKind    fCurrentBarLineLocationKind;
@@ -1798,7 +1798,7 @@ class EXP mxsr2msrTranslator :
     // bar lines remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrBarLine>        fPendingBarLinesList;
+    std::list<S_msrBarLine>        fPendingBarLinesList;
 
     void                      attachPendingBarLinesToVoice (
                                 S_msrVoice voice);
@@ -1809,8 +1809,8 @@ class EXP mxsr2msrTranslator :
     // repeats handling
     // ------------------------------------------------------
 
-    string                    fCurrentRepeatStartMeasureNumber; // stack ??? JMI
-    S_msrBarLine              fCurrentRepeatEndingStartBarLine; // stack ??? JMI
+    std::string               fCurrentRepeatStartMeasureNumber; // std::stack ??? JMI
+    S_msrBarLine              fCurrentRepeatEndingStartBarLine; // std::stack ??? JMI
 
     void                      handleRepeatStart (
                                 S_msrBarLine& barLine);
@@ -1839,19 +1839,19 @@ class EXP mxsr2msrTranslator :
     // notes/rests handling
     // ------------------------------------------------------
 
-    // map<S_msrVoice, S_msrNote> seems buggy in g++ 4.9.x,
-    // so we use a pair containing the staff and voice numbers:
-    map<pair<int, int>, S_msrNote>
+    // std::map<S_msrVoice, S_msrNote> seems buggy in g++ 4.9.x,
+    // so we use a std::pair containing the staff and voice numbers:
+    std::map<std::pair<int, int>, S_msrNote>
                               fVoicesLastMetNoteMap;
 
     void                      printVoicesLastMetNoteMap (
                                 int           inputLineNumber,
-                                const string& context);
+                                const std::string& context);
 
     void                      checkStep (
                                 int           inputLineNumber,
-                                const string& stepValue,
-                                const string& markup);
+                                const std::string& stepValue,
+                                const std::string& markup);
 
     // notes
     msrDiatonicPitchKind      fCurrentNoteDiatonicPitchKind;
@@ -1879,8 +1879,8 @@ class EXP mxsr2msrTranslator :
                               fCurrentCautionaryAccidentalKind;
 
     // note color
-    string                    fCurrentNoteRGB;
-    string                    fCurrentNoteAlpha;
+    std::string               fCurrentNoteRGB;
+    std::string               fCurrentNoteAlpha;
 
     // ongoing note
     Bool                      fOnGoingNote;
@@ -1917,9 +1917,9 @@ class EXP mxsr2msrTranslator :
 
     // grace notes
     Bool                      fCurrentNoteIsAGraceNote;
-    string                    fCurrentStealTimeFollowing;
-    string                    fCurrentStealTimePrevious;
-    string                    fCurrentMakeTimeSignature;
+    std::string               fCurrentStealTimeFollowing;
+    std::string               fCurrentStealTimePrevious;
+    std::string               fCurrentMakeTimeSignature;
 
     S_msrNote                 fCurrentNonGraceNote;
 
@@ -1945,7 +1945,7 @@ class EXP mxsr2msrTranslator :
     // elements attached to the note
     S_msrStem                 fCurrentStem;
 
-    string                    fCurrentBeamValue;
+    std::string               fCurrentBeamValue;
     int                       fCurrentBeamNumber;
 
     // initialization
@@ -1983,7 +1983,7 @@ class EXP mxsr2msrTranslator :
     // articulations handling
     // ------------------------------------------------------
 
-    list<S_msrArticulation>   fCurrentArticulations;
+    std::list<S_msrArticulation>   fCurrentArticulations;
 
     void                      attachCurrentArticulationsToNote (
                                 S_msrNote note);
@@ -2000,13 +2000,13 @@ class EXP mxsr2msrTranslator :
     // (they precede the note in MusicXML but follow it in LilyPond)
     // ------------------------------------------------------
 
-    list<S_msrDynamic>        fPendingDynamicxList;
-    list<S_msrOtherDynamic>   fPendingOtherDynamicxList;
-    list<S_msrWords>          fPendingWordsList;
-    list<S_msrSlur>           fPendingSlursList;
-    list<S_msrLigature>       fPendingLigaturesList;
-    list<S_msrWedge>          fPendingWedgesList;
-    list<S_msrSlash>          fPendingSlashesList;
+    std::list<S_msrDynamic>        fPendingDynamicxList;
+    std::list<S_msrOtherDynamic>   fPendingOtherDynamicxList;
+    std::list<S_msrWords>          fPendingWordsList;
+    std::list<S_msrSlur>           fPendingSlursList;
+    std::list<S_msrLigature>       fPendingLigaturesList;
+    std::list<S_msrWedge>          fPendingWedgesList;
+    std::list<S_msrSlash>          fPendingSlashesList;
 
     // attaching elements to notes
     // ------------------------------------------------------
@@ -2089,12 +2089,12 @@ class EXP mxsr2msrTranslator :
     // technicals handling
     // ------------------------------------------------------
 
-    list<S_msrTechnical>      fCurrentTechnicalsList;
-    list<S_msrTechnicalWithInteger>
+    std::list<S_msrTechnical>      fCurrentTechnicalsList;
+    std::list<S_msrTechnicalWithInteger>
                               fCurrentTechnicalWithIntegersList;
-    list<S_msrTechnicalWithFloat>
+    std::list<S_msrTechnicalWithFloat>
                               fCurrentTechnicalWithFloatsList;
-    list<S_msrTechnicalWithString>
+    std::list<S_msrTechnicalWithString>
                               fCurrentTechnicalWithStringsList;
 
     Bool                      fOnGoingTechnical;
@@ -2125,7 +2125,7 @@ class EXP mxsr2msrTranslator :
     // ornaments handling
     // ------------------------------------------------------
 
-    list<S_msrOrnament>       fCurrentOrnamentsList;
+    std::list<S_msrOrnament>       fCurrentOrnamentsList;
 
     void                      attachCurrentOrnamentsToNote (
                                 S_msrNote note);
@@ -2141,7 +2141,7 @@ class EXP mxsr2msrTranslator :
 
     S_msrSpanner              fCurrentWavyLineSpannerStart;
 
-    list<S_msrSpanner>        fCurrentSpannersList;
+    std::list<S_msrSpanner>        fCurrentSpannersList;
 
     void                      attachCurrentSpannersToNote (
                                 S_msrNote note);
@@ -2152,7 +2152,7 @@ class EXP mxsr2msrTranslator :
     // stems handling
     // ------------------------------------------------------
 
-    vector<S_msrStem>         fPendingStemsVector; // stack JMI ???
+    std::vector<S_msrStem>         fPendingStemsVector; // std::stack JMI ???
 
     void                      copyNoteStemToChord (
                                 S_msrNote note, S_msrChord chord);
@@ -2160,7 +2160,7 @@ class EXP mxsr2msrTranslator :
     // beams handling
     // ------------------------------------------------------
 
-    list<S_msrBeam>           fPendingBeamsList;
+    std::list<S_msrBeam>           fPendingBeamsList;
 
     void                      attachPendingBeamsToNote (
                                 S_msrNote note);
@@ -2174,12 +2174,12 @@ class EXP mxsr2msrTranslator :
     // glissandos handling
     // ------------------------------------------------------
 
-    list<S_msrGlissando>      fPendingGlissandosList;
+    std::list<S_msrGlissando>      fPendingGlissandosList;
 
     // slides handling
     // ------------------------------------------------------
 
-    list<S_msrSlide>          fPendingSlidesList;
+    std::list<S_msrSlide>          fPendingSlidesList;
 
     // tremolos handling
     // ------------------------------------------------------
@@ -2204,9 +2204,9 @@ class EXP mxsr2msrTranslator :
     Bool                      fCurrentNoteBelongsToAChord;
 
 /* JMI
- //    map<S_msrVoice, S_msrChord> // seems buggy in g++ 4.9.x, so
-    // we use a pair containing the staff and voice numbers:
-    map<pair<int, int>, S_msrChord>
+ //    std::map<S_msrVoice, S_msrChord> // seems buggy in g++ 4.9.x, so
+    // we use a std::pair containing the staff and voice numbers:
+    std::map<std::pair<int, int>, S_msrChord>
                               fVoicesCurrentChordMap;
                               */
 
@@ -2248,12 +2248,12 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fOnGoingTupletActual;
     int                       fCurrentTupletActualNumber;
-    string                    fCurrentTupletActualType;
+    std::string               fCurrentTupletActualType;
     int                       fCurrentTupletActualDotsNumber;
 
     Bool                      fOnGoingTupletNormal;
     int                       fCurrentTupletNormalNumber;
-    string                    fCurrentTupletNormalType;
+    std::string               fCurrentTupletNormalType;
     int                       fCurrentTupletNormalDotsNumber;
 
     msrTupletTypeKind         fCurrentTupletTypeKind;
@@ -2265,8 +2265,8 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fCurrentNoteBelongsToATuplet;
 
-    list<S_msrTuplet>         fTupletsStack;
-    void                      displayTupletsStack (const string& context);
+    std::list<S_msrTuplet>         fTupletsStack;
+    void                      displayTupletsStack (const std::string& context);
 
     Bool                      fCurrentATupletStopIsPending;
 
@@ -2283,34 +2283,34 @@ class EXP mxsr2msrTranslator :
     void                      handleTupletsPendingOnTupletsStack (
                                 int inputLineNumber);
 
-    // map<S_msrVoice, S_msrTuplet> seems buggy in g++ 4.9.x, so
-    // we use a pair containing the staff and voice numbers:
-//     map<S_msrVoice, S_msrTuplet>
-    map<pair<int, int>, S_msrTuplet>
+    // std::map<S_msrVoice, S_msrTuplet> seems buggy in g++ 4.9.x, so
+    // we use a std::pair containing the staff and voice numbers:
+//     std::map<S_msrVoice, S_msrTuplet>
+    std::map<std::pair<int, int>, S_msrTuplet>
                               fLastHandledTupletInVoiceMap;
 
      void                     displayLastHandledTupletInVoiceMap (
-                                const string& header);
+                                const std::string& header);
 
     // ties handling
     // ------------------------------------------------------
 
-// JMI    string                    fCurrentTiedType;
+// JMI    std::string               fCurrentTiedType;
     msrTieKind                fCurrentTieKind;
-    string                    fCurrentTiedOrientation; // JMI
+    std::string               fCurrentTiedOrientation; // JMI
     S_msrTie                  fCurrentTie;
 
     // slurs handling
     // ------------------------------------------------------
 
-    string                    fCurrentSlurType;
+    std::string               fCurrentSlurType;
     msrSlurTypeKind           fCurrentSlurTypeKind;
     Bool                      fOnGoingSlur;
     Bool                      fOnGoingSlurHasStanza;
 
-    list<S_msrSlur>           fSlurStartsStack;
+    std::list<S_msrSlur>           fSlurStartsStack;
     void                      displaySlurStartsStack (
-                                  const string& context);
+                                  const std::string& context);
 
     // ligatures handling
     // ------------------------------------------------------
@@ -2318,7 +2318,7 @@ class EXP mxsr2msrTranslator :
     S_msrLigature             fCurrentLigatureStartAbove;
     S_msrLigature             fCurrentLigatureStartBelow;
 
-    string                    fCurrentLigaturePlacement;
+    std::string               fCurrentLigaturePlacement;
     msrLigatureKind           fCurrentLigatureKind;
     Bool                      fOnGoingLigature;
     Bool                      fOnGoingLigatureHasStanza;
@@ -2326,7 +2326,7 @@ class EXP mxsr2msrTranslator :
     // piano pedals handling
     // ------------------------------------------------------
 
-    list<S_msrPedal>          fPendingPedalsList;
+    std::list<S_msrPedal>          fPendingPedalsList;
 
 /* JMI
     damperPedalKind           fCurrentDamperPedalKind;

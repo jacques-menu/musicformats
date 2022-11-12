@@ -8,8 +8,8 @@
 */
 
 #include <cstring>      // memset
-#include <iomanip>      // setw()), set::precision(), ...
-#include <fstream>      // ifstream, ...
+#include <iomanip>      // std::setw()), set::precision(), ...
+#include <fstream>      // std::ifstream, ...
 
 #ifndef WIN32
 #include <signal.h>
@@ -50,8 +50,6 @@
 #include "mfcLibraryComponent.h"
 
 
-using namespace std;
-
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
@@ -59,7 +57,7 @@ using namespace MusicFormats;
 
 static void _sigaction (int signal, siginfo_t *si, void *arg)
 {
-  cerr << "Signal #" << signal << " catched!" << endl;
+  std::cerr << "Signal #" << signal << " catched!" << std::endl;
   exit (-2);
 }
 
@@ -127,14 +125,14 @@ int main (int argc, char* argv[])
   // the service name
   // ------------------------------------------------------
 
-  string serviceName = argv [0];
+  std::string serviceName = argv [0];
 
   // create the global output and log indented streams
   // ------------------------------------------------------
 
-  createTheGlobalIndentedOstreams (cout, cerr);
+  createTheGlobalIndentedOstreams (std::cout, std::cerr);
 
-// JMI  msrMoment::testMsrMomentComparisons (cerr); // BLARK CLAR
+// JMI  msrMoment::testMsrMomentComparisons (std::cerr); // BLARK CLAR
 
 // JMI testBool ();
 
@@ -142,7 +140,7 @@ int main (int argc, char* argv[])
 
 //   gLogStream <<
 //     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<
-//     endl;
+//     std::endl;
 
   // apply early options if any
   // ------------------------------------------------------
@@ -162,7 +160,7 @@ int main (int argc, char* argv[])
     gLogStream <<
       serviceName << " xml2ly()" <<
       ", insiderOption: " << insiderOption <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -246,7 +244,7 @@ int main (int argc, char* argv[])
       " gIndenter value after options ands arguments checking: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -256,27 +254,27 @@ int main (int argc, char* argv[])
 
 //   testRational ();
 
-  string
+  std::string
     inputSourceName =
       gGlobalServiceRunData->getInputSourceName ();
 
-  string
+  std::string
     outputFileName =
       handler->
         fetchOutputFileNameFromTheOptions ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
       serviceName << ": " <<
       "inputSourceName = \"" << inputSourceName << "\"" <<
       ", outputFileName = \"" << outputFileName << "\"" <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -286,7 +284,7 @@ int main (int argc, char* argv[])
       return 0; // pure help run
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "this is not a pure help run, \"" <<
@@ -320,7 +318,7 @@ int main (int argc, char* argv[])
     gLogStream <<
       "This is " << serviceName << ' ' <<
       getGlobalMusicFormatsVersionNumberAndDate () <<
-      endl;
+      std::endl;
 
     gLogStream <<
       "Launching the conversion of ";
@@ -336,44 +334,44 @@ int main (int argc, char* argv[])
 
     gLogStream <<
       " to LilyPond" <<
-      endl;
+      std::endl;
 
     gLogStream <<
       "Time is " <<
       gGlobalServiceRunData->getRunDateFull () <<
-      endl;
+      std::endl;
 
     gLogStream <<
       "The command line is:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream <<
       handler->
         getLaunchCommandAsSupplied () <<
-      endl;
+      std::endl;
     --gIndenter;
 
     gLogStream <<
       "or with options long names:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream <<
       handler->
         getLaunchCommandWithLongOptionsNames () <<
-      endl;
+      std::endl;
     --gIndenter;
 
     gLogStream <<
       "or with options short names:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream <<
       handler->
         getLaunchCommandWithShortOptionsNames () <<
-      endl;
+      std::endl;
     --gIndenter;
 
     gLogStream <<
@@ -386,7 +384,7 @@ int main (int argc, char* argv[])
       gLogStream <<
         "standard output";
     }
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 #endif
 
@@ -397,7 +395,7 @@ int main (int argc, char* argv[])
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       "The command line options and arguments have been analyzed" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -411,7 +409,7 @@ int main (int argc, char* argv[])
       // MusicXML data comes from standard input
 #ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream << "Reading standard input" << endl;
+        gLogStream << "Reading standard input" << std::endl;
       }
 #endif
 
@@ -431,7 +429,7 @@ int main (int argc, char* argv[])
           "Reading file \"" <<
           inputSourceName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -473,7 +471,7 @@ int main (int argc, char* argv[])
       "### " << serviceName << " gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -484,7 +482,7 @@ int main (int argc, char* argv[])
   if (err != mfMusicformatsErrorKind::kMusicformatsError_NO_) {
     gLogStream <<
       "### Conversion from MusicXML to LilyPond failed ###" <<
-      endl;
+      std::endl;
 
     return 1;
   }

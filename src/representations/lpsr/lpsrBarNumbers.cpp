@@ -18,8 +18,6 @@
 #include "lpsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -52,7 +50,7 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBarNumberCheck::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -65,7 +63,7 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBarNumberCheck::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -78,7 +76,7 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBarNumberCheck::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -91,7 +89,7 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBarNumberCheck::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -101,20 +99,20 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
 void lpsrBarNumberCheck::browseData (basevisitor* v)
 {}
 
-void lpsrBarNumberCheck::print (ostream& os) const
+void lpsrBarNumberCheck::print (std::ostream& os) const
 {
   os <<
     "BarNumberCheck" << ' ' << fNextBarNumber <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_lpsrBarNumberCheck& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrBarNumberCheck& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;
@@ -145,7 +143,7 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBarCommand::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -158,7 +156,7 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBarCommand::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -171,7 +169,7 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBarCommand::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -184,7 +182,7 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBarCommand::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -194,14 +192,14 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
 void lpsrBarCommand::browseData (basevisitor* v)
 {}
 
-void lpsrBarCommand::print (ostream& os) const
+void lpsrBarCommand::print (std::ostream& os) const
 {
   os <<
     "BarCommand" << ' ' << "\"|.\"" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_lpsrBarCommand& nstf)
+std::ostream& operator << (std::ostream& os, const S_lpsrBarCommand& nstf)
 {
   nstf->print (os);
   return os;

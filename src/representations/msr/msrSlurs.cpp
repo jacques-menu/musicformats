@@ -25,17 +25,15 @@
 
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // slurs
 // ------------------------------------------------------
-string msrSlurTypeKindAsString (
+std::string msrSlurTypeKindAsString (
   msrSlurTypeKind slurTypeKind)
 {
-  stringstream s;
+  std::stringstream s;
 
   switch (slurTypeKind) {
     case msrSlurTypeKind::kSlurType_NO_:
@@ -66,7 +64,7 @@ string msrSlurTypeKindAsString (
   return s.str ();
 }
 
-ostream& operator << (ostream& os, const msrSlurTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSlurTypeKind& elt)
 {
   os << msrSlurTypeKindAsString (elt);
   return os;
@@ -128,7 +126,7 @@ void msrSlur::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSlur::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSlur>*
@@ -139,7 +137,7 @@ void msrSlur::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSlur::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -150,7 +148,7 @@ void msrSlur::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSlur::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSlur>*
@@ -161,7 +159,7 @@ void msrSlur::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSlur::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -171,9 +169,9 @@ void msrSlur::acceptOut (basevisitor* v)
 void msrSlur::browseData (basevisitor* v)
 {}
 
-string msrSlur::asString () const
+std::string msrSlur::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Slur" <<
@@ -198,18 +196,18 @@ string msrSlur::asString () const
   return s.str ();
 }
 
-void msrSlur::print (ostream& os) const
+void msrSlur::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSlur& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSlur& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

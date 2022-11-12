@@ -11,7 +11,7 @@
 
 #include <sstream>
 #include <climits>      // INT_MIN, INT_MAX
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "xml_tree_browser.h"
 
@@ -41,8 +41,6 @@
 
 #include "mxsr2msrTranslator.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -393,27 +391,27 @@ void mxsr2msrTranslator::initializeNoteData ()
 //________________________________________________________________________
 void mxsr2msrTranslator::printVoicesLastMetNoteMap (
   int           inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
   size_t
     voicesLastMetNoteMapSize =
       fVoicesLastMetNoteMap.size ();
 
   gLogStream <<
-    endl <<
+    std::endl <<
     "fVoicesLastMetNoteMap contains " <<
     mfSingularOrPlural (
       voicesLastMetNoteMapSize, "element", "elements") <<
     ", context: " << context <<
     ", line " << inputLineNumber <<
     ":" <<
-    endl;
+    std::endl;
 
   if (voicesLastMetNoteMapSize) {
     ++gIndenter;
 
-//    map<S_msrVoice, S_msrNote>::const_iterator
-    map<pair<int, int>, S_msrNote>::const_iterator
+//    std::map<S_msrVoice, S_msrNote>::const_iterator
+    std::map<std::pair<int, int>, S_msrNote>::const_iterator
       iBegin = fVoicesLastMetNoteMap.begin (),
       iEnd   = fVoicesLastMetNoteMap.end (),
       i      = iBegin;
@@ -423,19 +421,19 @@ void mxsr2msrTranslator::printVoicesLastMetNoteMap (
         "staff " << (*i).first.first <<
         ", voice " <<  (*i).first.second <<
         ":" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       gLogStream <<
         (*i).second <<
-        endl;
+        std::endl;
 
       --gIndenter;
 
       if (++i == iEnd) break;
 
-      gLogStream << endl;
+      gLogStream << std::endl;
     } // for
 
     --gIndenter;
@@ -445,14 +443,14 @@ void mxsr2msrTranslator::printVoicesLastMetNoteMap (
 //________________________________________________________________________
 void mxsr2msrTranslator::checkStep (
   int           inputLineNumber,
-  const string& stepValue,
-	const string& markup)
+  const std::string& stepValue,
+	const std::string& markup)
 {
   if (stepValue.size () == 1) {
     char firstChar = stepValue [0];
 
     if (firstChar < 'A' || firstChar > 'G') {
-      stringstream s;
+      std::stringstream s;
 
       s <<
       	markup <<
@@ -468,7 +466,7 @@ void mxsr2msrTranslator::checkStep (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
 			markup <<
@@ -495,7 +493,7 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
       staffNumber <<
       " from current part" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -513,7 +511,7 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
 
   // sanity check
   if (! staff) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "staff '" << staffNumber <<
@@ -532,7 +530,7 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
     gLogStream <<
       "--> fetchStaffFromCurrentPart returns " <<
       staff->getStaffName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -554,7 +552,7 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
       staffNumber <<
       " from current part" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -581,11 +579,11 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       staff <<
-      endl;
+      std::endl;
   }
 #endif
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "voice '" << voiceNumber <<
@@ -611,7 +609,7 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
     gLogStream <<
       "--> fetchVoiceFromCurrentPart() returns " <<
       voice->getVoiceName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -631,7 +629,7 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
       staffNumber <<
       " from current part" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -653,7 +651,7 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
   if (! voice) {
     staff->print (gLogStream); // JMI
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "first voice not found in score skeleton's staff \"" <<
@@ -678,7 +676,7 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
     gLogStream <<
       "--> fetchVoiceFromCurrentPart() returns " <<
       voice->getVoiceName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -693,7 +691,7 @@ void mxsr2msrTranslator::visitStart (S_millimeters& elt)
     gLogStream <<
       "--> Start visiting S_millimeters" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -707,7 +705,7 @@ void mxsr2msrTranslator::visitStart (S_tenths& elt)
     gLogStream <<
       "--> Start visiting S_tenths" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -724,7 +722,7 @@ void mxsr2msrTranslator::visitEnd (S_scaling& elt)
     gLogStream <<
       "--> End visiting S_scaling" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -741,7 +739,7 @@ void mxsr2msrTranslator::visitEnd (S_scaling& elt)
     gLogStream <<
       "There are " << fCurrentTenths <<
       " tenths for " <<  fCurrentMillimeters <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -761,7 +759,7 @@ void mxsr2msrTranslator::visitStart (S_system_layout& elt)
     gLogStream <<
       "--> Start visiting S_system_layout" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -783,7 +781,7 @@ void mxsr2msrTranslator::visitEnd (S_system_layout& elt)
     gLogStream <<
       "--> End visiting S_system_layout" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -817,7 +815,7 @@ void mxsr2msrTranslator::visitStart (S_system_margins& elt)
     gLogStream <<
       "--> Start visiting S_system_margins" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -839,7 +837,7 @@ void mxsr2msrTranslator::visitStart (S_system_distance& elt)
     gLogStream <<
       "--> Start visiting S_system_distance" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -872,7 +870,7 @@ void mxsr2msrTranslator::visitStart (S_top_system_distance& elt)
     gLogStream <<
       "--> Start visiting S_top_system_distance" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -905,7 +903,7 @@ void mxsr2msrTranslator::visitEnd (S_system_margins& elt)
     gLogStream <<
       "--> End visiting S_system_margins" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -928,11 +926,11 @@ void mxsr2msrTranslator::visitStart (S_system_dividers& elt)
     gLogStream <<
       "--> Start visiting S_system_dividers" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<system-dividers /> is not supported yet by " <<
@@ -956,13 +954,13 @@ void mxsr2msrTranslator::visitStart (S_left_divider& elt)
     gLogStream <<
       "--> Start visiting S_left_divider" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -982,13 +980,13 @@ void mxsr2msrTranslator::visitStart (S_right_divider& elt)
     gLogStream <<
       "--> Start visiting S_right_divider" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -1009,7 +1007,7 @@ void mxsr2msrTranslator::visitStart (S_notations& elt)
     gLogStream <<
       "--> Start visiting S_notations" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1026,7 +1024,7 @@ void mxsr2msrTranslator::visitStart (S_other_notation& elt)
     gLogStream <<
       "--> Start visiting S_other_notation" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1044,7 +1042,7 @@ void mxsr2msrTranslator::visitStart (S_page_layout& elt)
     gLogStream <<
       "--> Start visiting S_page_layout" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1063,7 +1061,7 @@ void mxsr2msrTranslator::visitEnd (S_page_layout& elt)
     gLogStream <<
       "--> End visiting S_page_layout" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1086,7 +1084,7 @@ void mxsr2msrTranslator::visitStart (S_page_height& elt)
     gLogStream <<
       "--> Start visiting S_page_height" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1115,7 +1113,7 @@ void mxsr2msrTranslator::visitStart (S_page_width& elt)
     gLogStream <<
       "--> Start visiting S_page_width" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1147,12 +1145,12 @@ void mxsr2msrTranslator::visitStart (S_page_margins& elt)
     gLogStream <<
       "--> Start visiting S_page_margins" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (fOnGoingPageLayout) {
-    string pageMarginsType =
+    std::string pageMarginsType =
       elt->getAttributeValue ("type");
 
     fCurrentPageMarginsTypeKind = msrMarginTypeKind::kMarginBoth; // default value
@@ -1164,7 +1162,7 @@ void mxsr2msrTranslator::visitStart (S_page_margins& elt)
     else if (pageMarginsType == "both")
       fCurrentPageMarginsTypeKind = msrMarginTypeKind::kMarginBoth;
     else if (pageMarginsType. size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "unknown page margins type \"" <<
@@ -1223,7 +1221,7 @@ void mxsr2msrTranslator::visitEnd (S_page_margins& elt)
     gLogStream <<
       "--> End visiting S_page_margins" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1246,7 +1244,7 @@ void mxsr2msrTranslator::visitStart (S_left_margin& elt)
       "--> Start visiting S_left_margin" <<
       ", " << leftMargin << " tenths" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1296,7 +1294,7 @@ void mxsr2msrTranslator::visitStart (S_right_margin& elt)
       "--> Start visiting S_right_margin" <<
       ", " << rightMargin << " tenths" <<
        ", line " << inputLineNumber <<
-     endl;
+     std::endl;
   }
 #endif
 
@@ -1346,7 +1344,7 @@ void mxsr2msrTranslator::visitStart (S_top_margin& elt)
       "--> Start visiting S_top_margin" <<
       ", " << topMargin << " tenths" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1383,7 +1381,7 @@ void mxsr2msrTranslator::visitStart (S_bottom_margin& elt)
       "--> Start visiting S_bottom_margin" <<
       ", " << bottomMargin << " tenths" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1418,7 +1416,7 @@ void mxsr2msrTranslator::visitStart (S_staff_layout& elt)
     gLogStream <<
       "--> Start visiting S_staff_layout" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1465,7 +1463,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_layout& elt)
     gLogStream <<
       "--> End visiting S_staff_layout" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1485,7 +1483,7 @@ void mxsr2msrTranslator::visitStart (S_staff_distance& elt)
     gLogStream <<
       "--> Start visiting S_staff_distance" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1519,7 +1517,7 @@ void mxsr2msrTranslator::visitStart (S_measure_layout& elt)
     gLogStream <<
       "--> Start visiting S_measure_layout" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1541,7 +1539,7 @@ void mxsr2msrTranslator::visitEnd (S_measure_layout& elt)
     gLogStream <<
       "--> End visiting S_measure_layout" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1561,7 +1559,7 @@ void mxsr2msrTranslator::visitStart (S_measure_distance& elt)
     gLogStream <<
       "--> Start visiting S_measure_distance" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1595,7 +1593,7 @@ void mxsr2msrTranslator::visitStart (S_appearance& elt)
     gLogStream <<
       "--> Start visiting S_appearance" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1712,7 +1710,7 @@ void mxsr2msrTranslator::visitEnd (S_appearance& elt)
     gLogStream <<
       "--> End visiting S_appearance" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1732,7 +1730,7 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
     gLogStream <<
       "--> Start visiting S_line_width" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1741,7 +1739,7 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
     float lineWidthTenths = (float)(*elt);
 
     // type
-    string lineWidthTypeString = elt->getAttributeValue ("type");
+    std::string lineWidthTypeString = elt->getAttributeValue ("type");
 
     if (lineWidthTypeString.size ()) {
       msrLineWidthTypeKind
@@ -1788,7 +1786,7 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
         lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeWedge;
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "<line-width /> type \"" <<
@@ -1817,7 +1815,7 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
         appendLineWidth (lineWidth);
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "<line-width /> type \"" <<
@@ -1851,7 +1849,7 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
     gLogStream <<
       "--> Start visiting S_note_size" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1860,7 +1858,7 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
     float noteSizePercentage = (float)(*elt);
 
     // type
-    string noteSizeTypeString = elt->getAttributeValue ("type");
+    std::string noteSizeTypeString = elt->getAttributeValue ("type");
 
     if (noteSizeTypeString.size ()) {
       msrNoteSizeTypeKind
@@ -1875,7 +1873,7 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
         noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeLarge;
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "<note-size /> type \"" <<
@@ -1902,7 +1900,7 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
         appendNoteSize (noteSize);
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "<note-size /> type \"" <<
@@ -1936,7 +1934,7 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
     gLogStream <<
       "--> Start visiting S_distance" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1945,7 +1943,7 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
     float distanceTenths = (float)(*elt);
 
     // type
-    string distanceTypeString = elt->getAttributeValue ("type");
+    std::string distanceTypeString = elt->getAttributeValue ("type");
 
     if (distanceTypeString.size ()) {
       msrDistanceTypeKind
@@ -1958,7 +1956,7 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
         distanceTypeKind = msrDistanceTypeKind::kDistanceTypeBeam;
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "<distance /> type \"" <<
@@ -1987,7 +1985,7 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
         appendDistance (distance);
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "<distance /> type \"" <<
@@ -2020,16 +2018,16 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
     gLogStream <<
       "--> Start visiting S_glyph" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (fOnGoingAppearance) {
     // value
-    string glyphValue = elt->getValue ();
+    std::string glyphValue = elt->getValue ();
 
     // type
-    string glyphTypeString = elt->getAttributeValue ("type");
+    std::string glyphTypeString = elt->getAttributeValue ("type");
 
     if (glyphTypeString.size ()) {
       msrGlyphTypeKind
@@ -2066,7 +2064,7 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
         glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue22;
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "<glyph /> type \"" <<
@@ -2093,7 +2091,7 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
         appendGlyph (glyph);
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "<glyph /> type \"" <<
@@ -2126,7 +2124,7 @@ void mxsr2msrTranslator::visitStart (S_other_appearance& elt)
     gLogStream <<
       "--> Start visiting S_other_appearance" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2153,11 +2151,11 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     gLogStream <<
       "--> Start visiting S_part" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string partID = elt->getAttributeValue ("id");
+  std::string partID = elt->getAttributeValue ("id");
 
 #ifdef TRACING_IS_ENABLED
   if (
@@ -2166,10 +2164,10 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     gGlobalOahEarlyOptions.getEarlyTracePasses ()
   ) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!--=== part \"" << partID << "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2182,8 +2180,8 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 
   // sanity check
   if (! fCurrentPart) {
-    // fetch fMsrScore's part list
-    list<S_msrPart> partsList;
+    // fetch fMsrScore's part std::list
+    std::list<S_msrPart> partsList;
 
     fMsrScore->
       collectScorePartsList (
@@ -2191,7 +2189,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
         partsList);
 
     if (partsList.size () == 1) {
-      // there's only one part in the part list,
+      // there's only one part in the part std::list,
       // assume this is the one
       fCurrentPart =
         partsList.front ();
@@ -2200,12 +2198,12 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
         fCurrentPart->
           getPartID ();
 
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "part 'id' is empty, using '" <<
         partID <<
-        "' since it is the only part in the <part-list />";
+        "' since it is the only part in the <part-std::list />";
 
       mxsr2msrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -2214,7 +2212,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "part \"" << partID <<
@@ -2230,7 +2228,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -2243,12 +2241,12 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "--------------------------------------------" <<
-      endl <<
+      std::endl <<
       "Analyzing part " <<
       fCurrentPart->
         getPartCombinedName () <<
         " -- start" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2265,8 +2263,8 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   // cross staff chords
   fCurrentNoteIsCrossStaves = false; // needed ??? JMI
 
-  // get this part's staves map
-  map<int, S_msrStaff>
+  // get this part's staves std::map
+  std::map<int, S_msrStaff>
     partStavesMap =
       fCurrentPart->
         getPartStaveNumbersToStavesMap ();
@@ -2299,7 +2297,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
     gLogStream <<
       "--> End visiting S_part" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2313,9 +2311,9 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
       fCurrentPart->
         getPartCombinedName () <<
         " -- end" <<
-      endl <<
+      std::endl <<
       "--------------------------------------------" <<
-      endl;
+      std::endl;
   }
 #endif
 */
@@ -2350,7 +2348,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 
   // is this part name in the parts ignore IDs set?
   if (gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().size ()) {
-    set<string>::iterator
+    std::set<std::string>::iterator
       it =
         gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().find (
           fCurrentPart->
@@ -2370,7 +2368,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 
   // is this part name in the parts keep IDs set?
   if (gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().size ()) {
-    set<string>::iterator
+    std::set<std::string>::iterator
       it =
         gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().find (
           fCurrentPart->
@@ -2390,7 +2388,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 
   // is this part name in the parts ignore names set?
   if (gGlobalMxsr2msrOahGroup->getMusicXMLMusicXMLPartsIgnoreNameSet ().size ()) {
-    set<string>::iterator
+    std::set<std::string>::iterator
       it =
         gGlobalMxsr2msrOahGroup->getMusicXMLMusicXMLPartsIgnoreNameSet ().find (
           fCurrentPart->
@@ -2410,7 +2408,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 
   // is this part name in the parts keep names set?
   if (gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().size ()) {
-    set<string>::iterator
+    std::set<std::string>::iterator
       it =
         gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().find (
           fCurrentPart->
@@ -2437,7 +2435,7 @@ void mxsr2msrTranslator::visitStart (S_attributes& elt)
     gLogStream <<
       "--> Start visiting S_attributes" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2452,7 +2450,7 @@ void mxsr2msrTranslator::visitEnd (S_attributes& elt)
     gLogStream <<
       "--> End visiting S_attributes" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2500,7 +2498,7 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
     gLogStream <<
       "--> Start visiting S_divisions" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2536,7 +2534,7 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
       " per quarter note in part " <<
       fCurrentPart->getPartCombinedName() <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2558,7 +2556,7 @@ void mxsr2msrTranslator::visitStart (S_clef& elt)
     gLogStream <<
       "--> Start visiting S_clef" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2572,7 +2570,7 @@ void mxsr2msrTranslator::visitStart (S_clef& elt)
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -2593,7 +2591,7 @@ void mxsr2msrTranslator::visitStart (S_sign& elt)
     gLogStream <<
       "--> Start visiting S_sign" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2607,7 +2605,7 @@ void mxsr2msrTranslator::visitStart (S_line& elt)
     gLogStream <<
       "--> Start visiting S_line" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2624,14 +2622,14 @@ void mxsr2msrTranslator::visitStart (S_clef_octave_change& elt)
     gLogStream <<
       "--> Start visiting S_clef_octave_change" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   fCurrentClefOctaveChange = (int)(*elt);
 
   if (fCurrentClefOctaveChange < -2 || fCurrentClefOctaveChange > 2) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "clef-octave-change \"" << fCurrentClefOctaveChange <<
@@ -2655,12 +2653,12 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
     gLogStream <<
       "--> End visiting S_clef" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // convert clef to upper case for analysis
-  string currentClefSignToUpperCase =
+  std::string currentClefSignToUpperCase =
     mfStringToUpperCase (fCurrentClefSign);
 
   msrClefKind clefKind = msrClefKind::kClef_NO_;
@@ -2695,7 +2693,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
       clefKind = msrClefKind::kClefTrebleLine1;
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "'G' clef line \"" << fCurrentClefLine <<
@@ -2763,7 +2761,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "'F' clef line \"" << fCurrentClefLine <<
@@ -2797,7 +2795,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
         break;
       default:
         {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "'C' clef line \"" << fCurrentClefLine <<
@@ -2829,7 +2827,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
         break;
       default:
         {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "tablature line \"" << fCurrentClefLine <<
@@ -2858,7 +2856,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
 
   else {
     // unknown clef sign
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "clef sign \"" << fCurrentClefSign <<
@@ -2871,13 +2869,13 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
       s.str ());
   }
 
-  // is this clef sign in the replace clef map?
-  const map<msrClefKind, msrClefKind>&
+  // is this clef sign in the replace clef std::map?
+  const std::map<msrClefKind, msrClefKind>&
     replaceClefKindToClefKindMapVariable =
       gGlobalMxsr2msrOahGroup->
         getReplaceClefKindToClefKindMapVariable ();
 
-  map<msrClefKind, msrClefKind>::const_iterator
+  std::map<msrClefKind, msrClefKind>::const_iterator
     it =
       replaceClefKindToClefKindMapVariable.find (clefKind);
 
@@ -2894,7 +2892,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
         " by " <<
         msrClefKindAsString (newClefKind) <<
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -2938,7 +2936,7 @@ void mxsr2msrTranslator::visitStart (S_key& elt)
     gLogStream <<
       "--> Start visiting S_key" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2951,7 +2949,7 @@ void mxsr2msrTranslator::visitStart (S_key& elt)
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -2979,7 +2977,7 @@ void mxsr2msrTranslator::visitStart (S_cancel& elt)
     gLogStream <<
       "--> Start visiting S_cancel" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2993,7 +2991,7 @@ void mxsr2msrTranslator::visitStart (S_fifths& elt)
     gLogStream <<
       "--> Start visiting S_fifths" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3012,11 +3010,11 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
     gLogStream <<
       "--> Start visiting S_mode" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string mode = elt->getValue();
+  std::string mode = elt->getValue();
 
   if       (mode == "[NONE]") {
     fCurrentModeKind = msrModeKind::kMode_NO_;
@@ -3049,7 +3047,7 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
     fCurrentModeKind = msrModeKind::kModeLocrian;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "mode '" << mode << "' is unknown";
@@ -3072,7 +3070,7 @@ void mxsr2msrTranslator::visitStart (S_key_step& elt)
     gLogStream <<
       "--> Start visiting S_key_step" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3086,7 +3084,7 @@ void mxsr2msrTranslator::visitStart (S_key_step& elt)
 
   fCurrentKeyKind = msrKeyKind::kKeyHumdrumScot;
 
-  string step = elt->getValue();
+  std::string step = elt->getValue();
 
   // check the step value
   checkStep (
@@ -3108,7 +3106,7 @@ void mxsr2msrTranslator::visitStart (S_key_step& elt)
     setKeyItemDiatonicPitchKind (
       keyDiatonicPitchKind);
 
-  // insert it into the items vector
+  // insert it into the items std::vector
   fCurrentHumdrumScotKeyItemsVector.
     insert (
       fCurrentHumdrumScotKeyItemsVector.end (),
@@ -3125,7 +3123,7 @@ void mxsr2msrTranslator::visitStart (S_key_alter& elt)
     gLogStream <<
       "--> Start visiting S_key_alter" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3146,7 +3144,7 @@ void mxsr2msrTranslator::visitStart (S_key_alter& elt)
         keyAlter);
 
   if (keyAlterationKind == msrAlterationKind::kAlteration_NO_) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "key alter '" << keyAlter << "'"
@@ -3178,7 +3176,7 @@ void mxsr2msrTranslator::visitStart (S_key_octave& elt)
     gLogStream <<
       "--> Start visiting S_key_octave" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3198,7 +3196,7 @@ If the cancel attribute is
   by the cancel element. It is no by default.
 */
 
-  // fetch Humdrum/Scot item with 'number' in the vector
+  // fetch Humdrum/Scot item with 'number' in the std::vector
   S_msrHumdrumScotKeyItem item;
 
   try {
@@ -3206,13 +3204,13 @@ If the cancel attribute is
     item = fCurrentHumdrumScotKeyItemsVector [number - 1];
   }
   catch (int e) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "item " << number <<
       " not found in Humdrum/Scot key items" <<
-      endl <<
-      "An exception number " << e << " occurred";
+      std::endl <<
+      "An std::exception number " << e << " occurred";
 
     mxsr2msrError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3222,23 +3220,23 @@ If the cancel attribute is
   }
 
   if (! item) { // JMI
-    gLogStream << "----------------" << endl;
+    gLogStream << "----------------" << std::endl;
 
     int counter = 0;
     for (
-      vector<S_msrHumdrumScotKeyItem>::const_iterator i=
+      std::vector<S_msrHumdrumScotKeyItem>::const_iterator i=
         fCurrentHumdrumScotKeyItemsVector.begin ();
       i!=fCurrentHumdrumScotKeyItemsVector.end ();
       ++i
   ) {
       gLogStream <<
         ++counter << ": " << (*i) <<
-        endl;
+        std::endl;
     } // for
 
-    gLogStream << "----------------" << endl;
+    gLogStream << "----------------" << std::endl;
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "item " << number <<
@@ -3267,7 +3265,7 @@ void mxsr2msrTranslator::visitEnd (S_key& elt)
     gLogStream <<
       "--> End visiting S_key" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3387,7 +3385,7 @@ S_msrKey mxsr2msrTranslator::handleTraditionalKey (
 
     default: // unknown key sign!!
       {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "unknown key fifths number \"" << fCurrentKeyFifths << "\"";
@@ -3435,7 +3433,7 @@ S_msrKey mxsr2msrTranslator::handleHumdrumScotKey (
   // populate the key with the Humdrum/Scot items
   if (fCurrentHumdrumScotKeyItemsVector.size ()) {
     for (
-      vector<S_msrHumdrumScotKeyItem>::const_iterator i=
+      std::vector<S_msrHumdrumScotKeyItem>::const_iterator i=
         fCurrentHumdrumScotKeyItemsVector.begin ();
       i!=fCurrentHumdrumScotKeyItemsVector.end ();
       ++i
@@ -3469,14 +3467,14 @@ void mxsr2msrTranslator::visitStart (S_time& elt)
     gLogStream <<
       "--> Start visiting S_time" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   fCurrentTimeStaffNumber =
     elt->getAttributeIntValue ("number", 0);
 
-  string timeSignatureSymbol =
+  std::string timeSignatureSymbol =
     elt->getAttributeValue ("symbol");
 
   fCurrentTimeSignatureSymbolKind =
@@ -3500,7 +3498,7 @@ void mxsr2msrTranslator::visitStart (S_time& elt)
 
   else {
     if (timeSignatureSymbol.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "time symbol " << timeSignatureSymbol << " is unknown";
@@ -3525,11 +3523,11 @@ void mxsr2msrTranslator::visitStart (S_beats& elt)
     gLogStream <<
       "--> Start visiting S_beats" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
-  fCurrentTimeSignatureBeats = elt->getValue (); // can be a string such as 3+2
+  fCurrentTimeSignatureBeats = elt->getValue (); // can be a std::string such as 3+2
 }
 
 void mxsr2msrTranslator::visitStart (S_beat_type& elt)
@@ -3542,14 +3540,14 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
     gLogStream <<
       "--> Start visiting S_beat_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   int beatType = (int)(*elt);
 
-  // extract the numbers list from the beat type
-  list<int>
+  // extract the numbers std::list from the beat type
+  std::list<int>
     beatNumbers =
       mfExtractNumbersFromString (
         fCurrentTimeSignatureBeats, // may contain "1+5+3"
@@ -3565,7 +3563,7 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
   if (beatNumbers.size ()) {
     // append the beats numbers to the time signature item
     for (
-      list<int>::const_iterator i = beatNumbers.begin ();
+      std::list<int>::const_iterator i = beatNumbers.begin ();
       i != beatNumbers.end ();
       ++i
   ) {
@@ -3586,7 +3584,7 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
       "beat type doesn't contain any beats numbers");
   }
 
-  // append the time signature item to the current time signature items vector
+  // append the time signature item to the current time signature items std::vector
   fCurrentTimeSignatureItemsVector.insert (
     fCurrentTimeSignatureItemsVector.end (),
     timeSignatureItem);
@@ -3599,7 +3597,7 @@ void mxsr2msrTranslator::visitStart (S_senza_misura& elt)
     gLogStream <<
       "--> Start visiting S_senza_misura" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3616,11 +3614,11 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
     gLogStream <<
       "--> Start visiting S_interchangeable" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string interchangeableSymbol =
+  std::string interchangeableSymbol =
     elt->getAttributeValue ("symbol");
 
   fCurrentInterchangeableSymbolKind =
@@ -3644,7 +3642,7 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
 
   else {
     if (interchangeableSymbol.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "interchangeable symbol " << interchangeableSymbol << " is unknown";
@@ -3657,7 +3655,7 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
     }
   }
 
-  string interchangeableSeparator =
+  std::string interchangeableSeparator =
     elt->getAttributeValue ("separator");
 
   fCurrentInterchangeableSeparatorKind =
@@ -3681,7 +3679,7 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
 
   else {
     if (interchangeableSymbol.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "interchangeable symbol " << interchangeableSymbol << " is unknown";
@@ -3707,11 +3705,11 @@ void mxsr2msrTranslator::visitStart (S_time_relation& elt)
     gLogStream <<
       "--> Start visiting S_time_relation" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string timeSignatureRelation = elt->getValue ();
+  std::string timeSignatureRelation = elt->getValue ();
 
   fCurrentInterchangeableRelationKind =
     msrTimeSignatureRelationKind::kTimeSignatureRelationNone; // default value
@@ -3743,7 +3741,7 @@ void mxsr2msrTranslator::visitStart (S_time_relation& elt)
 
   else {
     if (timeSignatureRelation.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "time-relation " << timeSignatureRelation << " is unknown";
@@ -3767,7 +3765,7 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
     gLogStream <<
       "--> End visiting S_time" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3781,7 +3779,7 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
   // populate the time with the time signature items
   if (fCurrentTimeSignatureItemsVector.size ()) {
     for (
-      vector<S_msrTimeSignatureItem>::const_iterator i =
+      std::vector<S_msrTimeSignatureItem>::const_iterator i =
         fCurrentTimeSignatureItemsVector.begin ();
       i!=fCurrentTimeSignatureItemsVector.end ();
       ++i
@@ -3839,7 +3837,7 @@ void mxsr2msrTranslator::visitStart (S_score_instrument& elt)
     gLogStream <<
       "--> Start visiting S_score_instrument" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3899,7 +3897,7 @@ void mxsr2msrTranslator::visitStart (S_instrument_name& elt)
     gLogStream <<
       "--> Start visiting S_instrument_name" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3917,7 +3915,7 @@ void mxsr2msrTranslator::visitStart (S_solo& elt)
     gLogStream <<
       "--> Start visiting S_solo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3935,7 +3933,7 @@ void mxsr2msrTranslator::visitStart (S_instruments& elt)
     gLogStream <<
       "--> Start visiting S_instruments" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3991,7 +3989,7 @@ void mxsr2msrTranslator::visitStart (S_transpose& elt)
     gLogStream <<
       "--> Start visiting S_transpose" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4010,7 +4008,7 @@ void mxsr2msrTranslator::visitStart (S_diatonic& elt)
     gLogStream <<
       "--> Start visiting S_diatonic" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4024,7 +4022,7 @@ void mxsr2msrTranslator::visitStart (S_chromatic& elt)
     gLogStream <<
       "--> Start visiting S_chromatic" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4038,7 +4036,7 @@ void mxsr2msrTranslator::visitStart (S_octave_change& elt)
     gLogStream <<
       "--> Start visiting octave_change" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4052,7 +4050,7 @@ void mxsr2msrTranslator::visitStart (S_double& elt)
     gLogStream <<
       "--> Start visiting double" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4076,7 +4074,7 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
     gLogStream <<
       "--> End visiting S_transpose" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4092,7 +4090,7 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
       ++octaveOffset;
     } // while
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "fTransposition: augmenting chromatic " <<
@@ -4120,7 +4118,7 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
       ++octaveOffset;
     } // while
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "fTransposition: diminishing  chromatic to " <<
@@ -4175,13 +4173,13 @@ void mxsr2msrTranslator::visitStart (S_direction& elt)
     gLogStream <<
       "--> Start visiting S_direction" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   fCurrentDirectionPlacementKind =
     msrPlacementKindFromString (
@@ -4207,7 +4205,7 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
     gLogStream <<
       "--> End visiting S_direction" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4227,7 +4225,7 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
             words->asString () <<
             "' to metronome tempo '" <<
             fCurrentMetronomeTempo->asString () << "'" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -4238,7 +4236,7 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
         fPendingWordsList.pop_front();
       } // while
 
-      // append the tempo to the pending tempos list
+      // append the tempo to the pending tempos std::list
       fPendingTemposList.push_back (fCurrentMetronomeTempo);
 
       fCurrentMetronomeTempo = nullptr;
@@ -4255,7 +4253,7 @@ void mxsr2msrTranslator::visitStart (S_direction_type& elt)
 <!ELEMENT direction-type (rehearsalMark+ | segno+ | coda+ |
   (words | symbol)+ | wedge | dynamics+ | dashes |
   bracket | pedal | metronome | octave-shift | harp-pedals |
-  damp | damp-all | eyeglasses | string-mute |
+  damp | damp-all | eyeglasses | std::string-mute |
   scordatura | image | principal-voice | percussion+ |
   accordion-registration | staff-divide | other-direction)>
 <!ATTLIST direction-type
@@ -4271,7 +4269,7 @@ void mxsr2msrTranslator::visitStart (S_direction_type& elt)
     gLogStream <<
       "--> Start visiting S_direction_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4293,7 +4291,7 @@ void mxsr2msrTranslator::visitEnd (S_direction_type& elt)
     gLogStream <<
       "--> End visiting S_direction_type" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4311,7 +4309,7 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
     gLogStream <<
       "--> Start visiting S_offset" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4326,7 +4324,7 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
 
   // sound
 
-  string offsetSound =elt->getAttributeValue ("sound");
+  std::string offsetSound =elt->getAttributeValue ("sound");
 
   Bool offsetSoundValue; // JMI
 
@@ -4338,7 +4336,7 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
       offsetSoundValue = false;
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "offset sound value " << offsetSound <<
@@ -4367,7 +4365,7 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
         ", represents = \'" <<
        offsetWholeNotesFromDuration <<
        "\' whole notes" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -4387,13 +4385,13 @@ void mxsr2msrTranslator::visitStart (S_other_direction& elt)
     gLogStream <<
       "--> Start visiting S_direction" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -4414,13 +4412,13 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
     gLogStream <<
       "--> Start visiting S_sound" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (fOnGoingDirection) {
     // tempo
-    string tempoString = elt->getAttributeValue ("tempo"); // to be seen JMI
+    std::string tempoString = elt->getAttributeValue ("tempo"); // to be seen JMI
 
     if (tempoString.size ()) {
       fCurrentMetronomeTempo =
@@ -4440,7 +4438,7 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
     // measure-level <sound /> markup
 
     // dynamics
-    string dynamicsString = elt->getAttributeValue ("dynamics");
+    std::string dynamicsString = elt->getAttributeValue ("dynamics");
 
     if (dynamicsString.size ()) {
       // JMI
@@ -4455,7 +4453,7 @@ void mxsr2msrTranslator::visitEnd (S_sound& elt)
     gLogStream <<
       "--> End visiting S_sound" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -4471,17 +4469,17 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
     gLogStream <<
       "--> Start visiting S_octave_shift" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // size
 
-  string octaveShiftSizeString = elt->getAttributeValue ("size");
+  std::string octaveShiftSizeString = elt->getAttributeValue ("size");
   int    octaveShiftSize = 8;
 
   if (! octaveShiftSizeString.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "octave shift size absent, assuming 8";
@@ -4493,7 +4491,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
   }
 
   else {
-    istringstream inputStream (octaveShiftSizeString);
+    std::istringstream inputStream (octaveShiftSizeString);
 
     inputStream >> octaveShiftSize;
 
@@ -4508,7 +4506,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
       octaveShiftSize != 27
       */
       ) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "octave-shift size \"" << octaveShiftSize <<
@@ -4528,7 +4526,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
 
   // type
 
-  string type = elt->getAttributeValue ("type");
+  std::string type = elt->getAttributeValue ("type");
 
   msrOctaveShiftKind
     octaveShiftKind = msrOctaveShiftKind::kOctaveShiftNone;
@@ -4543,7 +4541,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
     octaveShiftKind = msrOctaveShiftKind::kOctaveShiftContinue;
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "octave-shift type \"" << type <<
@@ -4571,11 +4569,11 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
         "Creating octave shift " <<
         octaveShift->asString () <<
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
-  // append the octave shift to the pending octave shifts list
+  // append the octave shift to the pending octave shifts std::list
   fPendingOctaveShiftsList.push_back (octaveShift);
 }
 
@@ -4590,11 +4588,11 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
     gLogStream <<
       "--> Start visiting S_words" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string wordsValue = elt->getValue ();
+  std::string wordsValue = elt->getValue ();
 
   if (! wordsValue.size ()) {
     mxsr2msrWarning (
@@ -4604,7 +4602,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
   }
 
   // justify
-  string wordsJustifyString = elt->getAttributeValue ("justify");
+  std::string wordsJustifyString = elt->getAttributeValue ("justify");
 
   msrJustifyKind
     justifyKind =
@@ -4613,7 +4611,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         wordsJustifyString);
 
   // halign
-  string wordsHorizontalAlignmentString = elt->getAttributeValue ("halign");
+  std::string wordsHorizontalAlignmentString = elt->getAttributeValue ("halign");
 
   msrHorizontalAlignmentKind
     horizontalAlignmentKind =
@@ -4622,7 +4620,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         wordsHorizontalAlignmentString);
 
   // valign
-  string wordsVerticalAlignmentString = elt->getAttributeValue ("valign");
+  std::string wordsVerticalAlignmentString = elt->getAttributeValue ("valign");
 
   msrVerticalAlignmentKind
     verticalAlignmentKind =
@@ -4631,7 +4629,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         wordsVerticalAlignmentString);
 
   // font style
-  string wordsFontStyleString = elt->getAttributeValue ("font-style");
+  std::string wordsFontStyleString = elt->getAttributeValue ("font-style");
 
   msrFontStyleKind fontStyleKind = msrFontStyleKind::kFontStyleNone; // default value
 
@@ -4641,7 +4639,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
     fontStyleKind = msrFontStyleKind::KFontStyleItalic;
   else {
     if (wordsFontStyleString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "font-style value " << wordsFontStyleString <<
@@ -4658,7 +4656,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
 /* JMI
   // justify
-  string wordsFontJustifyString = elt->getAttributeValue ("justify");
+  std::string wordsFontJustifyString = elt->getAttributeValue ("justify");
 
   msrJustifyKind fontJustifyKind = msrJustifyKind::kJustifyNone; // default value
 
@@ -4670,7 +4668,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
     fontJustifyKind = msrFontStyleKind::KFontStyleItalic;
   else {
     if (wordsFontJustifyString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "justify value " << wordsFontJustifyString <<
@@ -4686,7 +4684,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
   */
 
   // font size
-  string wordsFontSizeString = elt->getAttributeValue ("font-size");
+  std::string wordsFontSizeString = elt->getAttributeValue ("font-size");
 
   msrFontSizeKind
     fontSizeKind =
@@ -4736,7 +4734,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
     } // switch
 
   // font weight
-  string wordsFontWeightString = elt->getAttributeValue ("font-weight");
+  std::string wordsFontWeightString = elt->getAttributeValue ("font-weight");
 
   msrFontWeightKind fontWeightKind = msrFontWeightKind::kFontWeightNone; // default value
 
@@ -4746,7 +4744,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
     fontWeightKind = msrFontWeightKind::kFontWeightBold;
   else {
     if (wordsFontWeightString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "font-weight value " << wordsFontWeightString <<
@@ -4761,7 +4759,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
   }
 
   // XMLLang
-  string wordsXMLLangString = elt->getAttributeValue ("xml:lang");
+  std::string wordsXMLLangString = elt->getAttributeValue ("xml:lang");
 
   msrXMLLangKind
     wordsXMLLangKind =
@@ -4820,7 +4818,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -4858,11 +4856,11 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
-      // append the rehearsalMark to the pending tempos list
+      // append the rehearsalMark to the pending tempos std::list
       fPendingRehearsalMarksList.push_back (rehearsalMark);
 
       wordsHasBeenHandled = true;
@@ -4894,11 +4892,11 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
-      // append dal segno to the pending tempos list
+      // append dal segno to the pending tempos std::list
       fPendingSegnosList.push_back (segno);
 
       wordsHasBeenHandled = true;
@@ -4934,7 +4932,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -4973,7 +4971,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -5012,7 +5010,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -5050,11 +5048,11 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
-      // append it to the pending codas list
+      // append it to the pending codas std::list
       fPendingCodasList.push_back (coda);
 
       wordsHasBeenHandled = true;
@@ -5089,11 +5087,11 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
-      // append it to the pending codas list
+      // append it to the pending codas std::list
       fPendingCodasList.push_back (coda);
 
       wordsHasBeenHandled = true;
@@ -5116,7 +5114,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -5129,7 +5127,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         gLogStream <<
           "Creating an msrCrescDecresc crescendo" <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -5139,7 +5137,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
             inputLineNumber,
             msrCrescDecrescKind::kCrescDecrescCrescendo);
 
-      // append the rehearsalMark to the pending tempos list
+      // append the rehearsalMark to the pending tempos std::list
       fPendinCrescDecrescsList.push_back (crescDecresc);
 
       wordsHasBeenHandled = true;
@@ -5162,7 +5160,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -5175,7 +5173,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         gLogStream <<
           "Creating an msrCrescDecresc decrescendo" <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -5185,7 +5183,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
             inputLineNumber,
             msrCrescDecrescKind::kCrescDecrescDecrescendo);
 
-      // append the rehearsalMark to the pending tempos list
+      // append the rehearsalMark to the pending tempos std::list
       fPendinCrescDecrescsList.push_back (crescDecresc);
 
       wordsHasBeenHandled = true;
@@ -5203,7 +5201,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
             fCurrentDirectionPlacementKind) <<
           "\"" <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -5254,7 +5252,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_registration& elt)
     gLogStream <<
       "--> Start visiting S_accordion_registration" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5284,7 +5282,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_high& elt)
     gLogStream <<
       "--> Start visiting S_accordion_high" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5303,14 +5301,14 @@ void mxsr2msrTranslator::visitStart (S_accordion_middle& elt)
     gLogStream <<
       "--> Start visiting S_accordion_middle" <<
        ", line " << inputLineNumber <<
-     endl;
+     std::endl;
   }
 #endif
 
   fCurrentAccordionMiddle = (int)(*elt);
 
   if (fCurrentAccordionMiddle < 1 || fCurrentAccordionMiddle > 3) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "accordion middle " <<
@@ -5335,7 +5333,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_low& elt)
     gLogStream <<
       "--> Start visiting S_accordion_low" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5354,7 +5352,7 @@ void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
     gLogStream <<
       "--> End visiting S_accordion_registration" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5397,11 +5395,11 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
     gLogStream <<
       "--> Start visiting S_metronome" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string parentheses = elt->getAttributeValue ("parentheses");
+  std::string parentheses = elt->getAttributeValue ("parentheses");
 
   // JMI fCurrentMetronomeParenthesedKind default value?
 
@@ -5413,7 +5411,7 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
       fCurrentMetronomeParenthesedKind =
       	msrTempoParenthesizedKind::kTempoParenthesizedNo;
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "parentheses value " << parentheses <<
@@ -5429,7 +5427,7 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -5471,11 +5469,11 @@ void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
     gLogStream <<
       "--> Start visiting S_beat_unit" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string beatUnitString = elt->getValue();
+  std::string beatUnitString = elt->getValue();
 
   // the type contains a display duration
   msrDurationKind
@@ -5486,14 +5484,14 @@ void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
 
   // there can be several <beat-unit/> in a <metronome/> markup,
   if (fCurrentMetronomeBeatUnitsVector.size () < 2) {
-    // register beat unit in in dotted durations list
+    // register beat unit in in dotted durations std::list
     fCurrentMetronomeBeatUnitsVector.push_back (
       msrDottedDuration (
         beatUnitDurationKind,
         0)); // dots number
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "there are more than 2 <beat-unit/> elements in a <metronome/> markup";
@@ -5516,7 +5514,7 @@ void mxsr2msrTranslator::visitStart (S_beat_unit_dot& elt)
     gLogStream <<
       "--> Start visiting S_beat_unit_dot" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5524,7 +5522,7 @@ void mxsr2msrTranslator::visitStart (S_beat_unit_dot& elt)
     fCurrentMetronomeBeatUnitsVector.back ().incrDotsNumber ();
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "beat unit dot occurs without any prior beat unit";
@@ -5544,7 +5542,7 @@ void mxsr2msrTranslator::visitStart (S_per_minute& elt)
     gLogStream <<
       "--> Start visiting S_per_minute" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5558,7 +5556,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_note& elt)
     gLogStream <<
       "--> Start visiting S_metronome_note" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5575,11 +5573,11 @@ void mxsr2msrTranslator::visitStart (S_metronome_type& elt)
     gLogStream <<
       "--> Start visiting S_metronome_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string noteType = elt->getValue();
+  std::string noteType = elt->getValue();
 
   // the type contains a display duration,
   fCurrentMetronomeDurationKind =
@@ -5595,7 +5593,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_dot& elt)
     gLogStream <<
       "--> Start visiting S_metronome_dot" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5612,7 +5610,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
     gLogStream <<
       "--> Start visiting S_metronome_beam" <<
       ", line " << inputLineNumber <<
-     endl;
+     std::endl;
   }
 #endif
 
@@ -5638,7 +5636,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
     beamKind = msrBeamKind::kBeamBackwardHook;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "metronome beam \"" << fCurrentMetronomeBeamValue <<
@@ -5683,7 +5681,7 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
       gLogStream <<
         "Attaching current beams to tempoNote " <<
         tempoNote->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -5702,7 +5700,7 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
           "Attaching beam '" <<
           beam->asString () <<
           "' to tempoNote '" << tempoNote->asString () << "'" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -5725,7 +5723,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
     gLogStream <<
       "--> End visiting S_metronome_note" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5772,7 +5770,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
     // register stand-alone metronome note
 
     if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
-      // this metronome note belongs to the left elements list
+      // this metronome note belongs to the left elements std::list
 
       if (! fCurrentMetronomeRelationLeftElements) {
         // create the relation left elements
@@ -5787,7 +5785,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
           tempoNote);
     }
     else {
-      // this metronome note belongs to the right elements list
+      // this metronome note belongs to the right elements std::list
 
       if (! fCurrentMetronomeRelationRightElements) {
         // create the relation right elements
@@ -5816,11 +5814,11 @@ void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
     gLogStream <<
       "--> Start visiting S_metronome_relation" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string metrenomeRelation = elt->getValue ();
+  std::string metrenomeRelation = elt->getValue ();
 
   fCurrentMetrenomeRelationKind = msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone;
 
@@ -5828,7 +5826,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
     fCurrentMetrenomeRelationKind = msrTempoNotesRelationshipKind::kTempoNotesRelationshipEquals;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "metronome relation \"" << metrenomeRelation <<
@@ -5852,7 +5850,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
     gLogStream <<
       "--> Start visiting S_metronome_tuplet" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5863,7 +5861,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
   // bracket
 
   {
-    string tupletBracket = elt->getAttributeValue ("bracket");
+    std::string tupletBracket = elt->getAttributeValue ("bracket");
 
     fCurrentTempoTupletBracketKind = msrTempoTupletBracketKind::kTempoTupletBracketYes; // option ??? JMI
 
@@ -5873,7 +5871,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
       fCurrentTempoTupletBracketKind = msrTempoTupletBracketKind::kTempoTupletBracketNo;
     else {
       if (tupletBracket.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "tuplet bracket \"" << tupletBracket <<
@@ -5888,7 +5886,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
       else {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "tuplet bracket is empty: this is implementation dependent," <<
@@ -5907,7 +5905,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
   // type
 
   {
-    string tupletType = elt->getAttributeValue ("type");
+    std::string tupletType = elt->getAttributeValue ("type");
 
     fCurrentTempoTupletTypeKind = msrTempoTupletTypeKind::kTempoTupletTypeNone;
 
@@ -5916,7 +5914,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
     else if (tupletType == "stop")
       fCurrentTempoTupletTypeKind = msrTempoTupletTypeKind::kTempoTupletTypeStop;
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "tuplet type \"" << tupletType <<
@@ -5933,7 +5931,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
   // show-number
 
   {
-    string tupletShowNumber = elt->getAttributeValue ("show-number");
+    std::string tupletShowNumber = elt->getAttributeValue ("show-number");
 
     fCurrentTempoTupletShowNumberKind =
       msrTempoTupletShowNumberKind::kTempoTupletShowNumberActual; // default value
@@ -5967,7 +5965,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
 			fCurrentTempoTupletBracketKind <<
       "fCurrentTempoTupletShowNumberKind: " <<
 			fCurrentTempoTupletShowNumberKind <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5981,7 +5979,7 @@ void mxsr2msrTranslator::visitStart (S_normal_dot& elt)
     gLogStream <<
       "--> Start visiting S_normal_dot" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -5998,7 +5996,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
     gLogStream <<
       "--> End visiting S_metronome_tuplet" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6021,7 +6019,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
 
       // register the metronome tuplet
       if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
-        // this metronome tuplet belongs to the left elements list
+        // this metronome tuplet belongs to the left elements std::list
 
         if (! fCurrentMetronomeRelationLeftElements) {
           // create the relation left elements
@@ -6036,7 +6034,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
             fCurrentMetronomeTuplet);
       }
       else {
-        // this metronome tuplet belongs to the right elements list
+        // this metronome tuplet belongs to the right elements std::list
 
         if (! fCurrentMetronomeRelationRightElements) {
           // create the relation right elements
@@ -6071,7 +6069,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
     gLogStream <<
       "--> End visiting S_metronome" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6096,7 +6094,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
   }
 
   if (tempoKind == msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "ill-formed <metronome/> markup: there are " <<
@@ -6171,7 +6169,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       "Creating tempo '" <<
       fCurrentMetronomeTempo->asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6198,7 +6196,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
             words->asString () <<
             "' to tempo '" <<
             fCurrentMetronomeTempo->asString () << "'" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -6210,7 +6208,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       } // while
 
 
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "<direction/> contains " <<
@@ -6232,14 +6230,14 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       fCurrentMetronomeTempo->
         appendWordsToTempo (words);
 
-       // remove it from the list
+       // remove it from the std::list
       fPendingWordsList.pop_front ();
     } // while
   }
 
 /* if (true) { // JMI
 */
-  // append the tempo to the pending tempos list
+  // append the tempo to the pending tempos std::list
   fPendingTemposList.push_back (fCurrentMetronomeTempo);
   /*
 }
@@ -6273,7 +6271,7 @@ void mxsr2msrTranslator::visitStart (S_staves& elt)
     gLogStream <<
       "--> Start visiting S_direction" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -6289,7 +6287,7 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
     gLogStream <<
       "--> Start visiting S_staff" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6297,7 +6295,7 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
 
   // the staff number should be positive
   if (fCurrentMusicXMLStaffNumber <= 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "staff number " << fCurrentMusicXMLStaffNumber <<
@@ -6320,10 +6318,10 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
     gLogStream <<
       "--> S_staff, fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
-      endl <<
+      std::endl <<
       "--> S_staff, current staff name: " <<
       staff->getStaffName() <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6344,7 +6342,7 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<staff /> " <<
@@ -6370,7 +6368,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
     gLogStream <<
       "--> Start visiting S_staff_details" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6382,7 +6380,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
   // show-frets
 
   {
-    string showFrets = elt->getAttributeValue ("show-frets");
+    std::string showFrets = elt->getAttributeValue ("show-frets");
 
     fCurrentShowFretsKind =
       msrShowFretsKind::kShowFretsNumbers; // default value
@@ -6401,7 +6399,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
     }
     else {
       if (showFrets.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s << "show-frets " << showFrets << " unknown";
 
@@ -6416,7 +6414,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -6427,7 +6425,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
 
   // print-spacing
 
-  string
+  std::string
     printSpacing =
       elt->getAttributeValue ("print-spacing");
 
@@ -6444,7 +6442,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
   }
   else {
     if (printSpacing.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s << "print-spacing " << printSpacing << " is unknown";
 
@@ -6460,10 +6458,10 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     gLogStream <<
       "Handling staff details:" <<
-      endl <<
+      std::endl <<
       gTab << "StaffDetailsStaffNumber" << " = " <<
       fStaffDetailsStaffNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6502,11 +6500,11 @@ void mxsr2msrTranslator::visitStart (S_staff_type& elt)
     gLogStream <<
       "--> Start visiting S_staff_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string staffType = elt->getValue ();
+  std::string staffType = elt->getValue ();
 
   if      (staffType == "ossia") {
 
@@ -6539,7 +6537,7 @@ void mxsr2msrTranslator::visitStart (S_staff_type& elt)
 
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s << "staff-type" << staffType << "unknown";
 
@@ -6558,7 +6556,7 @@ void mxsr2msrTranslator::visitStart (S_staff_lines& elt)
     gLogStream <<
       "--> Start visiting S_staff_lines" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6572,7 +6570,7 @@ void mxsr2msrTranslator::visitStart (S_staff_tuning& elt)
     gLogStream <<
       "--> Start visiting S_staff_tuning" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6595,11 +6593,11 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt)
     gLogStream <<
       "--> Start visiting S_tuning_step" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string tuningStep = elt->getValue();
+  std::string tuningStep = elt->getValue();
 
   checkStep (
     inputLineNumber,
@@ -6618,7 +6616,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt)
     fCurrentAccordDiatonicPitchKind = tuningDiatonicKind;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<tuning-step /> " <<
@@ -6643,7 +6641,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_octave& elt)
     gLogStream <<
       "--> Start visiting S_tuning_octave" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6662,7 +6660,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_octave& elt)
     fCurrentAccordOctaveKind = tuningOctaveKind;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<tuning-octave /> " <<
@@ -6687,7 +6685,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
     gLogStream <<
       "--> Start visiting S_tuning_alter" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6699,7 +6697,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
         tuningAlter);
 
   if (tuningAlterationKind == msrAlterationKind::kAlteration_NO_) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "tuning alter '" << tuningAlter <<
@@ -6719,7 +6717,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
     fCurrentAccordAlterationKind = tuningAlterationKind;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<tuning-alter /> " <<
@@ -6744,7 +6742,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
     gLogStream <<
       "--> End visiting S_staff_tuning" <<
        ", line " << inputLineNumber <<
-     endl;
+     std::endl;
   }
 #endif
 
@@ -6767,40 +6765,40 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
   if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
     gLogStream <<
       "Creating staff tuning:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     const int fieldWidth = 32;
 
-    gLogStream << left <<
-      setw (fieldWidth) <<
+    gLogStream << std::left <<
+      std::setw (fieldWidth) <<
       "fCurrentStaffTuningLine" << " = " <<
       fCurrentStaffTuningLine <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentStaffTuningDiatonicPitch" << " = " <<
       msrDiatonicPitchKindAsStringInLanguage (
         gGlobalMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind (),
         fCurrentStaffTuningDiatonicPitchKind) <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentStaffTuningAlteration" << " = " <<
       msrAlterationKindAsString (
         fCurrentStaffTuningAlterationKind) <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "quarterTonesPitch" << " = " <<
       msrQuarterTonesPitchKindAsStringInLanguage (
         quarterTonesPitchKind,
         gGlobalMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind ()) <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "currentStaffTuningOctaveKind" << " = " <<
       msrOctaveKindAsString (fCurrentStaffTuningOctaveKind) <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -6834,7 +6832,7 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
     gLogStream <<
       "--> Start visiting S_staff_details" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6855,7 +6853,7 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<voice /> " <<
@@ -6881,7 +6879,7 @@ void mxsr2msrTranslator::visitStart (S_backup& elt)
     gLogStream <<
       "--> Start visiting S_backup" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6898,7 +6896,7 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
     gLogStream <<
       "--> End visiting S_backup" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6912,7 +6910,7 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6939,7 +6937,7 @@ void mxsr2msrTranslator::visitStart (S_forward& elt)
     gLogStream <<
       "--> Start visiting S_forward" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6966,7 +6964,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
     gLogStream <<
       "--> End visiting S_forward" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6980,13 +6978,13 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
       ", fCurrentForwardVoiceNumber: " <<
       fCurrentForwardVoiceNumber <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // the staff number should be positive
   if (fCurrentForwardStaffNumber <= 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "staff number " << fCurrentForwardStaffNumber <<
@@ -7018,7 +7016,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
       gLogStream <<
         "--> current forward divisions: " <<
         fCurrentForwardDivisions <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -7052,7 +7050,7 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
     gLogStream <<
       "--> Start visiting S_tied" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -7060,7 +7058,7 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
 
   // type
 
-  string tiedType =
+  std::string tiedType =
     elt->getAttributeValue ("type");
 
   fCurrentTiedOrientation =
@@ -7082,7 +7080,7 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
     // let' complain on slur notes outside of slurs
     if (! fOnGoingSlur) {
       if (tiedType.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s << "tied type '" << fCurrentSlurType << "' inside a slur is unknown";
 
@@ -7098,7 +7096,7 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
     // let' complain on ligature notes outside of ligatures
     if (! fOnGoingLigature) {
       if (tiedType.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s << "tied type '" << fCurrentSlurType << "' inside a ligature is unknown";
 
@@ -7126,16 +7124,16 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
 
 //________________________________________________________________________
 void mxsr2msrTranslator::displaySlurStartsStack (
-  const string& context)
+  const std::string& context)
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     ">>++++++++++++++++ " <<
-    "The slurs starts stack contains:" <<
-    endl;
+    "The slurs starts std::stack contains:" <<
+    std::endl;
 
   if (fSlurStartsStack.size ()) {
-    list<S_msrSlur>::const_iterator
+    std::list<S_msrSlur>::const_iterator
       iBegin = fSlurStartsStack.begin (),
       iEnd   = fSlurStartsStack.end (),
       i      = iBegin;
@@ -7145,7 +7143,7 @@ void mxsr2msrTranslator::displaySlurStartsStack (
     for ( ; ; ) {
       gLogStream << "v " << (*i);
       if (++i == iEnd) break;
-      // no endl here
+      // no std::endl here
     } // for
 
     --gIndenter;
@@ -7153,23 +7151,23 @@ void mxsr2msrTranslator::displaySlurStartsStack (
 
   gLogStream <<
     " <<++++++++++++++++ " <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
 //________________________________________________________________________
 void mxsr2msrTranslator::displayTupletsStack (
-  const string& context)
+  const std::string& context)
 {
   size_t tupletsStackSize = fTupletsStack.size ();
 
   gLogStream <<
-    endl <<
+    std::endl <<
     ">>++++++++++++++++ " <<
-    "The tuplets stack contains " << tupletsStackSize << " elements:" <<
-    endl;
+    "The tuplets std::stack contains " << tupletsStackSize << " elements:" <<
+    std::endl;
 
   if (tupletsStackSize) {
-    list<S_msrTuplet>::const_iterator
+    std::list<S_msrTuplet>::const_iterator
       iBegin = fTupletsStack.begin (),
       iEnd   = fTupletsStack.end (),
       i      = iBegin;
@@ -7182,7 +7180,7 @@ void mxsr2msrTranslator::displayTupletsStack (
     for ( ; ; ) {
       gLogStream <<
         "v (" << n << ")" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
       tuplet->printShort (gLogStream);
@@ -7192,7 +7190,7 @@ void mxsr2msrTranslator::displayTupletsStack (
 
       if (++i == iEnd) break;
 
-      gLogStream << endl;
+      gLogStream << std::endl;
     } // for
 
     --gIndenter;
@@ -7200,7 +7198,7 @@ void mxsr2msrTranslator::displayTupletsStack (
 
   gLogStream <<
     " <<++++++++++++++++ " <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
 //________________________________________________________________________
@@ -7214,7 +7212,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
     gLogStream <<
       "--> Start visiting S_slur" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -7232,7 +7230,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
       these should be ignored
     */
     if (fCurrentNoteBelongsToAChord) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "ignoring a slur in a chord member note other than the first one";
@@ -7255,7 +7253,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
       // placement
 
-      string placementString = elt->getAttributeValue ("placement");
+      std::string placementString = elt->getAttributeValue ("placement");
 
       fCurrentDirectionPlacementKind = // use it JMI ???
         msrPlacementKindFromString (
@@ -7282,7 +7280,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
               fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStart;
 
   /* JMI BUGGED?
-              // the stack top is in fact a phrasing slur start
+              // the std::stack top is in fact a phrasing slur start
   #ifdef TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceSlurs ()) {
                 gLogStream <<
@@ -7290,7 +7288,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
                   containingSlur->asString () <<
                   "' contains a nested slur, it is thus a phrasing slur start" <<
                   ", line " << inputLineNumber <<
-                  endl;
+                  std::endl;
               }
   #endif
 
@@ -7303,7 +7301,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
           default:
             {
-              stringstream s;
+              std::stringstream s;
 
               s <<
                 "only one slur nesting level is meaningfull";
@@ -7321,14 +7319,14 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
       }
 
       else if (fCurrentSlurType == "continue") {
-        // the current slur continue kind depends on that of the stack's top
+        // the current slur continue kind depends on that of the std::stack's top
         switch (fSlurStartsStack.front ()->getSlurTypeKind ()) {
           case msrSlurTypeKind::kSlurTypeRegularStart:
             fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularContinue;
             break;
 
           case msrSlurTypeKind::kSlurTypePhrasingStart:
-            // the stack top is in fact a phrasing slur start
+            // the std::stack top is in fact a phrasing slur start
             fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypePhrasingContinue;
             break;
 
@@ -7342,7 +7340,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
         switch (slurStartsStackSize) {
           case 0:
             {
-              stringstream s;
+              std::stringstream s;
 
               s <<
                 "a standalone slur 'stop' is meaningless, ignoring it";
@@ -7359,25 +7357,25 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
             // the current slur stop is regular
             fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
 
-            // pop the top element off the stack
+            // pop the top element off the std::stack
             fSlurStartsStack.pop_front ();
             break;
     */
           case 2:
-            // the current slur stop kind depends on that of the stack's top
+            // the current slur stop kind depends on that of the std::stack's top
             switch (fSlurStartsStack.front ()->getSlurTypeKind ()) {
               case msrSlurTypeKind::kSlurTypeRegularStart:
                 fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
                 break;
 
               case msrSlurTypeKind::kSlurTypePhrasingStart:
-                // the stack top is in fact a phrasing slur start
+                // the std::stack top is in fact a phrasing slur start
   #ifdef TRACING_IS_ENABLED
                 if (gGlobalTracingOahGroup->getTraceSlurs ()) {
                   gLogStream <<
                     "A slur stop matches a phrasing slur start, it is thus a phrasing slur stop" <<
                     ", line " << inputLineNumber <<
-                    endl;
+                    std::endl;
                 }
   #endif
 
@@ -7388,7 +7386,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
                 ; // should not occur
             } // switch
 
-            // pop the top element off the stack
+            // pop the top element off the std::stack
             fSlurStartsStack.pop_front ();
             break;
 
@@ -7404,7 +7402,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
         // let' complain only on slur notes outside of slurs
         if (! fOnGoingSlur) {
           if (fCurrentSlurType.size ()) {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "slur type \"" << fCurrentSlurType <<
@@ -7421,7 +7419,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
       // line-type
 
-      string slurLineType = elt->getAttributeValue ("line-type");
+      std::string slurLineType = elt->getAttributeValue ("line-type");
 
       msrLineTypeKind
         slurLineTypeKind =
@@ -7463,7 +7461,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
           ", slurLineType: " <<
           msrLineTypeKindAsString (
             slurLineTypeKind) <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -7478,7 +7476,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
       fPendingSlursList.push_back (slur);
 
-      // push slurs starts onto the stack
+      // push slurs starts onto the std::stack
       switch (fCurrentSlurTypeKind) {
         case msrSlurTypeKind::kSlurTypeRegularStart:
         case msrSlurTypeKind::kSlurTypePhrasingStart:
@@ -7508,7 +7506,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
     gLogStream <<
       "--> Start visiting S_bracket" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -7519,7 +7517,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 
   // type
 
-  string ligatureType =
+  std::string ligatureType =
     elt->getAttributeValue ("type");
 
   fCurrentLigatureKind = msrLigatureKind::kLigatureNone;
@@ -7541,7 +7539,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
     // let's complain on ligature notes outside of ligatures
     if (! fOnGoingLigature) {
       if (ligatureType.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "ligature type \"" << ligatureType <<
@@ -7558,7 +7556,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 
   // line-end
 
-  string ligatureLineEndValue = elt->getAttributeValue ("line-end");
+  std::string ligatureLineEndValue = elt->getAttributeValue ("line-end");
 
   msrLigatureLineEndKind
     ligatureLineEndKind = msrLigatureLineEndKind::kLigatureLineEndNone;
@@ -7580,7 +7578,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
   }
   else {
     if (ligatureLineEndValue.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "ligature line-end \"" << ligatureLineEndValue <<
@@ -7596,7 +7594,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 
   // line-type
 
-  string ligatureLineTypeValue = elt->getAttributeValue ("line-type");
+  std::string ligatureLineTypeValue = elt->getAttributeValue ("line-type");
 
   msrLineTypeKind
     ligatureLineTypeKind =
@@ -7637,7 +7635,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
         ligatureLineTypeKind,
         fCurrentDirectionPlacementKind);
 
-  // append it to the pending ligatures list
+  // append it to the pending ligatures std::list
   fPendingLigaturesList.push_back (ligature);
 
   switch (fCurrentLigatureKind) {
@@ -7648,7 +7646,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
           {
 #ifdef TRACING_IS_ENABLED
             if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-              stringstream s;
+              std::stringstream s;
 
               s <<
                 "Bracket start found with no placement, placing it above by default";
@@ -7684,7 +7682,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
           {
 #ifdef TRACING_IS_ENABLED
             if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-              stringstream s;
+              std::stringstream s;
 
               s <<
                 "Bracket stop found with no placement, placing it above by default";
@@ -7699,7 +7697,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
             ligature->setLigaturePlacementKind (msrPlacementKind::kPlacementAbove);
 
             if (! fCurrentLigatureStartAbove) {
-              stringstream s;
+              std::stringstream s;
 
               s <<
                 "Bracket 'stop above' found with no corresponding bracket start, ignoring it"; // JMI cannot occur
@@ -7725,7 +7723,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 
         case msrPlacementKind::kPlacementAbove:
           if (! fCurrentLigatureStartAbove) {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "Bracket 'stop above' found with no corresponding bracket start, ignoring it";
@@ -7750,7 +7748,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 
         case msrPlacementKind::kPlacementBelow:
           if (! fCurrentLigatureStartBelow) {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "Bracket 'stop below' found with no corresponding bracket start, ignoring it";
@@ -7796,13 +7794,13 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
     gLogStream <<
       "--> Start visiting S_wedge" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // type
 
-  string type = elt->getAttributeValue("type");
+  std::string type = elt->getAttributeValue("type");
 
   msrWedgeKind wedgeKind = msrWedgeKind::kWedgeKindNone;
 
@@ -7817,7 +7815,7 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
   }
   else {
     if (type.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "unknown wedge type \"" +
@@ -7834,7 +7832,7 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
 
   // niente
 
-  string nienteString = elt->getAttributeValue ("niente");
+  std::string nienteString = elt->getAttributeValue ("niente");
 
   msrWedgeNienteKind
     wedgeNienteKind = msrWedgeNienteKind::kWedgeNienteNo;
@@ -7847,7 +7845,7 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
   }
   else {
     if (nienteString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "wedge niente \"" << nienteString <<
@@ -7863,7 +7861,7 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
 
   // line-type
 
-  string wedgeLineType = elt->getAttributeValue ("line-type");
+  std::string wedgeLineType = elt->getAttributeValue ("line-type");
 
   msrLineTypeKind
     wedgeLineTypeKind =
@@ -7923,7 +7921,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
     gLogStream <<
       "--> Start visiting S_lyric" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -7948,7 +7946,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
         "Setting fCurrentStanzaNumber to " <<
         fCurrentStanzaNumber <<
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -7972,7 +7970,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
           "Lyric name is empty, using \"" <<
           msrStanza::K_NO_STANZA_NAME <<
           "\" by default" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -7985,7 +7983,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
         "Setting fCurrentStanzaName to \"" <<
         fCurrentStanzaName <<
         "\", line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -7997,7 +7995,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -8027,7 +8025,7 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
     gLogStream <<
       "--> Start visiting S_syllabic" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -8048,7 +8046,7 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
     fCurrentSyllableKind = msrSyllableKind::kSyllableEnd;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "syllabic \"" << fCurrentSyllabic <<
@@ -8075,17 +8073,17 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
     gLogStream <<
       "--> Start visiting S_text" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string textValue = elt->getValue();
+  std::string textValue = elt->getValue();
 
   mfConvertHTMLEntitiesToPlainCharacters (textValue); // JMI ???
 
   // color JMI
 
-  // there can be several <text/>'s and <elision/> in a row, hence the list
+  // there can be several <text/>'s and <elision/> in a row, hence the std::list
   fCurrentLyricTextsList.push_back (textValue);
 
 #ifdef TRACING_IS_ENABLED
@@ -8093,7 +8091,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
     gLogStream <<
       "textValue = \"" << textValue << "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -8106,27 +8104,27 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 
     const int fieldWidth = 23;
 
-    gLogStream << left <<
-      setw (fieldWidth) <<
+    gLogStream << std::left <<
+      std::setw (fieldWidth) <<
       "line " << " = " << inputLineNumber <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentSyllabic" << " = " << fCurrentSyllabic <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentLyricTextsList" << " = ";
 
     msrSyllable::writeTextsList (
       fCurrentLyricTextsList,
       gLogStream);
 
-    gLogStream << endl;
+    gLogStream << std::endl;
 
     --gIndenter;
   }
@@ -8143,11 +8141,11 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
     gLogStream <<
       "--> Start visiting S_elision" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string elisionValue = elt->getValue ();
+  std::string elisionValue = elt->getValue ();
 
   if (! elisionValue.size ()) {
     elisionValue = ' ';
@@ -8155,7 +8153,7 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
 
   // color JMI
 
-  // there can be several <text/>'s and <elision/> in a row, hence the list
+  // there can be several <text/>'s and <elision/> in a row, hence the std::list
   fCurrentLyricTextsList.push_back (elisionValue);
 
   fCurrentStanzaHasText = true;
@@ -8171,11 +8169,11 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
     gLogStream <<
       "--> Start visiting S_extend" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string extendType =
+  std::string extendType =
     elt->getAttributeValue ("type");
 
   // extend
@@ -8197,7 +8195,7 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
     }
     else {
       if (extendType.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "extend type \"" << extendType <<
@@ -8231,7 +8229,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     gLogStream <<
       "--> End visiting S_lyric" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -8239,7 +8237,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
       // syllabic is not mandatory, thus:
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "<lyric /> has no <syllabic/> component, using 'single' by default";
@@ -8257,7 +8255,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
   if (fCurrentNoteIsARest) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "syllable ";
@@ -8295,119 +8293,119 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       msrSyllableKindAsString (fCurrentSyllableKind) <<
       ", line " << inputLineNumber <<
       ", with:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       "Lyric data:" <<
-      endl;
+      std::endl;
 
     {
       ++gIndenter;
 
       const int fieldWidth = 31;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fCurrentMusicXMLStaffNumber" << " = " << fCurrentMusicXMLStaffNumber <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentStaffNumberToInsertInto" << " = " << fCurrentStaffNumberToInsertInto <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentLyricTextsList" << " = ";
 
       msrSyllable::writeTextsList (
         fCurrentLyricTextsList,
         gLogStream);
 
-      gLogStream << left <<
-        endl <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentSyllableExtendKind" << " = " <<
         msrSyllableExtendKindAsString (
           fCurrentSyllableExtendKind) <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentNoteIsARest" << " = " <<
         fCurrentNoteIsARest <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentRestIsAMeasureRest" << " = " <<
         fCurrentRestIsAMeasureRest <<
-        endl;
+        std::endl;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fCurrentTieKind" << " = \"" <<
         msrTieKindAsString (fCurrentTieKind) <<
         "\"" <<
-        endl;
+        std::endl;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fCurrentSlurTypeKind" << " = \"" <<
         msrSlurTypeKindAsString (fCurrentSlurTypeKind) <<
         "\"" <<
-        endl;
+        std::endl;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fCurrentLigatureKind" << " = \"" <<
 				fCurrentLigatureKind <<
         "\"" <<
-        endl;
+        std::endl;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fOnGoingSlur" << " = " <<
         fOnGoingSlur <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fOnGoingSlurHasStanza" << " = " <<
         fOnGoingSlurHasStanza <<
-        endl;
+        std::endl;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fOnGoingLigature" << " = " <<
         fOnGoingLigature <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fOnGoingLigatureHasStanza" << " = " <<
         fOnGoingLigatureHasStanza <<
-        endl;
+        std::endl;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fFirstSyllableInSlurKind" << " = \"" <<
         msrSyllableKindAsString (
           fFirstSyllableInSlurKind) <<
         "\"" <<
-        endl;
+        std::endl;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fFirstSyllableInLigatureKind" << " = \"" <<
         msrSyllableKindAsString (
           fFirstSyllableInLigatureKind) <<
         "\"" <<
-      endl;
+      std::endl;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fCurrentSyllableKind" << " = \"" <<
         msrSyllableKindAsString (
           fCurrentSyllableKind) <<
         "\"" <<
-      endl;
+      std::endl;
 
       --gIndenter;
     }
@@ -8423,33 +8421,33 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       msrSyllableKindAsString (fCurrentSyllableKind) <<
       ", line = " << inputLineNumber <<
       ", with:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       "Lyric data:" <<
-      endl;
+      std::endl;
 
     {
       ++gIndenter;
 
       const int fieldWidth = 31;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fCurrentMusicXMLStaffNumber" << " = " << fCurrentMusicXMLStaffNumber <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentStaffNumberToInsertInto" << " = " << fCurrentStaffNumberToInsertInto <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "fCurrentLyricTextsList" << " = ";
 
       msrSyllable::writeTextsList (
@@ -8505,7 +8503,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
           fCurrentSyllableKind) << "\"" <<
         ", in stanza " << stanza->getStanzaName () <<
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -8526,7 +8524,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
     // append the lyric texts to the syllable
     for (
-      list<string>::const_iterator i = fCurrentLyricTextsList.begin ();
+      std::list<std::string>::const_iterator i = fCurrentLyricTextsList.begin ();
       i!=fCurrentLyricTextsList.end ();
       ++i
     ) {
@@ -8541,7 +8539,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     // will be called in handleLyrics(),
     // after the note has been created
 
-    // append syllable to current note's syllables list
+    // append syllable to current note's syllables std::list
     fCurrentNoteSyllables.push_back (
       syllable);
 
@@ -8568,7 +8566,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
     gLogStream <<
       "--> Start visiting S_measure" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -8586,7 +8584,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       "', line " << inputLineNumber <<
       ", in part \"" <<
       fCurrentPart->getPartCombinedName () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -8601,10 +8599,10 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
     gGlobalOahEarlyOptions.getEarlyTracePasses ()
   ) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!--=== measure '" << fCurrentMeasureNumber << "'" <<
       ", line " << inputLineNumber << " ===-->" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -8630,7 +8628,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
     }
     else {
       if (fPartFirstMeasureNumber != fScoreFirstMeasureNumber) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "measure numbering inconsistency: first measure numbers '" <<
@@ -8660,7 +8658,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   value is "no" if not specified.
 */
 
-  string
+  std::string
     implicit =
       elt->getAttributeValue ("implicit");
 
@@ -8678,7 +8676,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   }
   else {
     if (implicit.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "implicit \"" << implicit <<
@@ -8719,7 +8717,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   // is this measure number in the debug set?
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDetailed ()) {
-    set<int>::const_iterator
+    std::set<int>::const_iterator
       it =
         gGlobalServiceRunData->fTraceDetailedMeasureNumbersSet.find (fMeasuresCounter);
 
@@ -8746,7 +8744,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
     gLogStream <<
       "--> End visiting S_measure" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -8765,7 +8763,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
     // JMI might prove not precise enough???
 //      fVoicesLastMetNoteMap [currentVoice];
       fVoicesLastMetNoteMap [
-        make_pair (
+        std::make_pair (
           fCurrentStaffNumberToInsertInto,
           fCurrentMusicXMLVoiceNumber)
         ];
@@ -8777,30 +8775,30 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
       gLogStream <<
-        endl <<
+        std::endl <<
         "fCurrentGraceNotes IS NOT NULL at the end of measure '" << // JMI
         elt->getAttributeValue ("number") <<
         "'" <<
-        endl;
+        std::endl;
 
       gLogStream <<
         "+++++++++++++++++" <<
         fCurrentPart <<
-        endl;
+        std::endl;
     }
 #endif
 
     // attach these grace notes group as an after grace notes group
     // to the last note found in its voice
     if (! noteToAttachTo) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "cannot find voice to insert after grace notes group into: " <<
         "chordFirstNote is null" <<
         ", fCurrentStaffNumberToInsertInto = " <<
         fCurrentStaffNumberToInsertInto <<
-        endl <<
+        std::endl <<
         ", fCurrentMusicXMLVoiceNumber = " <<
         fCurrentMusicXMLVoiceNumber;
 
@@ -8855,13 +8853,13 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       inputLineNumber);
 
   // should this measure be replicated?
-  const map<string,int>&
+  const std::map<std::string,int>&
     measuresToBeReplicatedStringToIntMap =
       gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedStringToIntMap ();
 
   if (measuresToBeReplicatedStringToIntMap.size ()) {
     // should we add empty measures after current measures?
-    map<string,int>::const_iterator
+    std::map<std::string,int>::const_iterator
       it =
         measuresToBeReplicatedStringToIntMap.find (
           fCurrentMeasureNumber);
@@ -8871,12 +8869,12 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "Replicating meaure " <<
           fCurrentMeasureNumber <<
           " in part " <<
           fCurrentPart->getPartCombinedName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -8893,21 +8891,21 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
   }
 
   // should empty measures be added after this one?
-  const map<string,int>&
+  const std::map<std::string,int>&
     addEmptyMeasuresStringToIntMap =
       gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ();
 
   if (addEmptyMeasuresStringToIntMap.size ()) {
     // should we add empty measures after current measures?
-    map<string,int>::const_iterator
+    std::map<std::string,int>::const_iterator
       it =
         addEmptyMeasuresStringToIntMap.find (
           fCurrentMeasureNumber);
 
     if (it != addEmptyMeasuresStringToIntMap.end ()) {
-      // fCurrentMeasureNumber is present in the map,
+      // fCurrentMeasureNumber is present in the std::map,
       // fetch the number of empty measures to add
-      stringstream s;
+      std::stringstream s;
 
       s << (*it).second;
 
@@ -8918,13 +8916,13 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "Adding " <<
           mfSingularOrPlural (
             measuresToBeAdded, "empty measure", "empty measures") <<
           " to part " <<
           fCurrentPart->getPartCombinedName () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -8956,19 +8954,19 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
 
     gLogStream <<
       "--> handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure()" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentMultipleFullBarRestsHasBeenCreated " << " : " <<
       fCurrentMultipleFullBarRestsHasBeenCreated <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fRemainingExpectedMultipleFullBarRests" << " : " <<
       fRemainingExpectedMultipleFullBarRests <<
-      endl << endl;
+      std::endl << std::endl;
 
     --gIndenter;
   }
@@ -9027,23 +9025,23 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
     gLogStream <<
       "--> handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure()" <<
       ", onGoingMultipleFullBarRests:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentMultipleFullBarRestsHasBeenCreated " << " : " <<
       fCurrentMultipleFullBarRestsHasBeenCreated <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fRemainingExpectedMultipleFullBarRests" << " : " <<
       fRemainingExpectedMultipleFullBarRests <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fOnGoingMultipleFullBarRests " << " : " <<
       fOnGoingMultipleFullBarRests <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -9061,7 +9059,7 @@ void mxsr2msrTranslator::visitStart (S_print& elt)
     gLogStream <<
       "--> Start visiting S_print" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -9123,11 +9121,11 @@ Staff spacing between multiple staves is measured in
 
   // handle 'staff-spacing' if present
 
-  const string staffSpacing =
+  const std::string staffSpacing =
     elt->getAttributeValue ("staff-spacing");
 
   if (staffSpacing.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s << staffSpacing;
     float value;
@@ -9138,7 +9136,7 @@ Staff spacing between multiple staves is measured in
 
   // handle 'new-system' if present
 
-  const string newSystem = elt->getAttributeValue ("new-system");
+  const std::string newSystem = elt->getAttributeValue ("new-system");
 
   if (newSystem.size ()) {
     fCurrentPrintLayout->setNewSystem ();
@@ -9150,7 +9148,7 @@ Staff spacing between multiple staves is measured in
         gLogStream <<
           "Creating a line break, " <<
           "line = " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -9171,7 +9169,7 @@ Staff spacing between multiple staves is measured in
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s << "new-system \"" << newSystem <<
       "\" is unknown in '<print />', should be 'yes', 'no' or empty";
@@ -9186,7 +9184,7 @@ Staff spacing between multiple staves is measured in
 
   // handle 'new-page' if present and relevant
   if (! gGlobalMxsr2msrOahGroup->getIgnorePageBreaksInMusicXML ()) {
-    const string newPage = elt->getAttributeValue ("new-page");
+    const std::string newPage = elt->getAttributeValue ("new-page");
 
     if (newPage.size ()) {
       fCurrentPrintLayout->setNewPage ();
@@ -9198,7 +9196,7 @@ Staff spacing between multiple staves is measured in
           gLogStream <<
             "Creating a page break, " <<
             "line = " << inputLineNumber <<
-            endl;
+            std::endl;
         }
   #endif
 
@@ -9218,7 +9216,7 @@ Staff spacing between multiple staves is measured in
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s << "new-page \"" << newPage <<
         "\" is unknown in '<print />', should be 'yes', 'no' or empty";
@@ -9263,7 +9261,7 @@ void mxsr2msrTranslator::visitEnd (S_print& elt)
     gLogStream <<
       "--> End visiting S_print" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -9292,7 +9290,7 @@ void mxsr2msrTranslator::visitStart (S_measure_numbering& elt)
     gLogStream <<
       "--> Start visiting S_measure_numbering" <<
        ", line " << elt->getInputLineNumber () <<
-     endl;
+     std::endl;
   }
 #endif
 
@@ -9310,7 +9308,7 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
     gLogStream <<
       "--> Start visiting S_barline" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -9330,7 +9328,7 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
   // location
 
   {
-    string
+    std::string
       location =
         elt->getAttributeValue ("location");
 
@@ -9347,7 +9345,7 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
       fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationRight;
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "barLine location \"" << location <<
@@ -9376,13 +9374,13 @@ void mxsr2msrTranslator::visitStart (S_bar_style& elt)
     gLogStream <<
       "--> Start visiting S_bar_style" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // style
 
-  string barStyle = elt->getValue();
+  std::string barStyle = elt->getValue();
 
   fCurrentBarLineStyleKind =
     msrBarLineStyleKind::kBarLineStyleNone; // default value
@@ -9453,7 +9451,7 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
     gLogStream <<
       "--> Start visiting S_segno" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -9466,7 +9464,7 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
 					nullptr, // will be set when segno is appended to a measure JMI v0.9.66 PIM
           fCurrentDirectionStaffNumber);
 
-    // append it to the pending segnos list
+    // append it to the pending segnos std::list
     fPendingSegnosList.push_back (segno);
   }
 
@@ -9476,7 +9474,7 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s << "<segno /> is out of context";
 
@@ -9498,7 +9496,7 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
     gLogStream <<
       "--> Start visiting S_coda" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -9517,7 +9515,7 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
         break;
       default:
         {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "this is <coda /> number " << fCodasCounter <<
@@ -9540,7 +9538,7 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
           fCurrentDirectionStaffNumber,
           codaKind);
 
-    // append it to the pending codas list
+    // append it to the pending codas std::list
     fPendingCodasList.push_back (coda);
   }
 
@@ -9550,7 +9548,7 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s << "<coda /> is out of context";
 
@@ -9572,7 +9570,7 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
     gLogStream <<
       "--> Start visiting S_eyeglasses" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -9584,12 +9582,12 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
           inputLineNumber,
 					nullptr); // will be set when eye glasses is appended to a measure JMI v0.9.66 PIM
 
-    // append it to the pending eyeglasses list
+    // append it to the pending eyeglasses std::list
     fPendingEyeGlassesList.push_back (eyeGlasses);
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s << "<eyeGlasses /> is out of context";
 
@@ -9611,13 +9609,13 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
     gLogStream <<
       "--> Start visiting S_pedal" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // type
 
-  string type = elt->getAttributeValue ("type");
+  std::string type = elt->getAttributeValue ("type");
 
   msrPedalTypeKind pedalTypeKind = msrPedalTypeKind::kPedalType_NO_;
 
@@ -9634,7 +9632,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
     pedalTypeKind = msrPedalTypeKind::kPedalTypeStop;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s << "pedal type '" << type << "' is unknown";
 
@@ -9647,7 +9645,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
 
   // line
 
-  string line = elt->getAttributeValue ("line");
+  std::string line = elt->getAttributeValue ("line");
 
   msrPedalLineKind pedalLineKind = msrPedalLineKind::kPedalLineNo;
 
@@ -9659,7 +9657,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
   }
   else {
     if (line.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "pedal line \"" << line <<
@@ -9675,7 +9673,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
 
   // sign
 
-  string sign = elt->getAttributeValue ("sign");
+  std::string sign = elt->getAttributeValue ("sign");
 
   msrPedalSignKind
     pedalSignKind =
@@ -9689,7 +9687,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
   }
   else {
     if (sign.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "pedal sign \"" << sign <<
@@ -9714,11 +9712,11 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
         pedalSignKind);
 
   if (fOnGoingDirectionType) {
-    // append it to the pending pedals list
+    // append it to the pending pedals std::list
     fPendingPedalsList.push_back (pedal);
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s << "<pedal /> " << pedal->asShortString () << " is out of context";
 
@@ -9741,7 +9739,7 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
     gLogStream <<
       "--> Start visiting S_ending" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -9764,7 +9762,7 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
   // type
 
   {
-    string type =
+    std::string type =
       elt->getAttributeValue ("type");
 
     fCurrentBarLineEndingTypeKind =
@@ -9783,7 +9781,7 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
         msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue;
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "ending type \"" << type <<
@@ -9799,7 +9797,7 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -9820,14 +9818,14 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
     gLogStream <<
       "--> Start visiting S_repeat" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // direction
 
   {
-    string direction = elt->getAttributeValue ("direction");
+    std::string direction = elt->getAttributeValue ("direction");
 
     fCurrentBarLineRepeatDirectionKind =
       msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionNone;
@@ -9841,7 +9839,7 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
         msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionBackward;
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "repeat direction \"" << direction <<
@@ -9858,7 +9856,7 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
   // winged
 
   {
-    string winged = elt->getAttributeValue ("winged");
+    std::string winged = elt->getAttributeValue ("winged");
 
     fCurrentBarLineRepeatWingedKind =
       msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone; // default value
@@ -9885,7 +9883,7 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
           msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleCurved;
       }
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "repeat winged \"" << winged <<
@@ -9919,7 +9917,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
     gLogStream <<
       "--> End visiting S_barline" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -9953,7 +9951,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
     gLogStream <<
       "Creating barLine in part " <<
       fCurrentPart->getPartCombinedName () << ":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -10123,7 +10121,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
           gLogStream <<
             "Appending a standalone barLine to part " <<
             fCurrentPart->getPartCombinedName () << ":" <<
-            endl;
+            std::endl;
 
           ++gIndenter;
 
@@ -10142,7 +10140,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         break;
 
       case msrBarLineStyleKind::kBarLineStyleNone:
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "barLine " <<
@@ -10160,9 +10158,9 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 
   // has this barLine been handled?
   if (! barLineHasBeenHandled) {
-    stringstream s;
+    std::stringstream s;
 
-    s << left <<
+    s << std::left <<
       "cannot handle a barLine containing: " <<
       barLine->asString ();
 
@@ -10177,7 +10175,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
   switch (barLine->getBarLineCategory ()) {
     case msrBarLineCategoryKind::kBarLineCategory_NO_:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "barLine " <<
@@ -10216,7 +10214,7 @@ void mxsr2msrTranslator::visitStart (S_note& elt)
     gLogStream <<
       "--> Start visiting S_note" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -10348,13 +10346,13 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // print-object
 
-  string printObjectString =
+  std::string printObjectString =
     elt->getAttributeValue ("print-object");
 
 //   gLogStream << // JMI TEST v0.9.65
 // 		"fCurrentNotePrintObjectKind = " <<
 // 		fCurrentNotePrintObjectKind <<
-// 		endl;
+// 		std::endl;
 
   fCurrentNotePrintObjectKind =
     msrPrintObjectKindFromString (
@@ -10363,7 +10361,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // note color, unofficial ??? JMI
 
-  string noteColorAlphaRGB = elt->getAttributeValue ("color");
+  std::string noteColorAlphaRGB = elt->getAttributeValue ("color");
 
   fCurrentNoteRGB   = "";
   fCurrentNoteAlpha = "";
@@ -10381,7 +10379,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
         found =
           noteColorAlphaRGB.find_first_not_of ("#0123456789ABCDEF");
 
-      if (found != string::npos) {
+      if (found != std::string::npos) {
         wellFormedColor = false;
       }
       else {
@@ -10402,7 +10400,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
   }
 
   if (! wellFormedColor) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "note color \"" << noteColorAlphaRGB <<
@@ -10429,11 +10427,11 @@ void mxsr2msrTranslator::visitStart (S_step& elt)
     gLogStream <<
       "--> Start visiting S_step" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string step = elt->getValue();
+  std::string step = elt->getValue();
 
   checkStep (
     inputLineNumber,
@@ -10454,7 +10452,7 @@ void mxsr2msrTranslator::visitStart (S_alter& elt)
     gLogStream <<
       "--> Start visiting S_alter" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -10465,7 +10463,7 @@ void mxsr2msrTranslator::visitStart (S_alter& elt)
       alter);
 
   if (fCurrentNoteAlterationKind == msrAlterationKind::kAlteration_NO_) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "alter '" << alter << "'"
@@ -10489,14 +10487,14 @@ void mxsr2msrTranslator::visitStart (S_octave& elt)
     gLogStream <<
       "--> Start visiting S_octave" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   int octaveNumber = (int)(*elt);
 
   if (octaveNumber < 0 || octaveNumber > 9) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "octave number '" << octaveNumber <<
@@ -10526,7 +10524,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
     gLogStream <<
       "--> Start visiting S_duration" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -10536,7 +10534,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
     gLogStream <<
       "Note duration: " << duration <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -10554,7 +10552,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       gLogStream <<
         "fCurrentDivisionsPerQuarterNote: " <<
         fCurrentDivisionsPerQuarterNote <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -10569,7 +10567,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       gLogStream <<
         "fCurrentNoteSoundingWholeNotesFromDuration: " <<
         fCurrentNoteSoundingWholeNotesFromDuration <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -10587,7 +10585,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       gLogStream <<
         "fCurrentDivisionsPerQuarterNote: " <<
         fCurrentDivisionsPerQuarterNote <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -10602,7 +10600,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       gLogStream <<
         "fCurrentFiguredBassSoundingWholeNotes: " <<
         fCurrentFiguredBassSoundingWholeNotes <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -10617,13 +10615,13 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       gLogStream <<
         "fCurrentFiguredBassDisplayWholeNotes: " <<
         fCurrentFiguredBassDisplayWholeNotes <<
-        endl;
+        std::endl;
     }
 #endif
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s << "<duration /> " << duration << " is out of context";
 
@@ -10634,7 +10632,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       s.str ());
   }
 
-//  gLogStream << "=== mxsr2msrTranslator::visitStart (S_duration& elt), fCurrentDuration = " << fCurrentDuration << endl; JMI
+//  gLogStream << "=== mxsr2msrTranslator::visitStart (S_duration& elt), fCurrentDuration = " << fCurrentDuration << std::endl; JMI
 }
 
 void mxsr2msrTranslator::visitStart (S_instrument& elt)
@@ -10644,7 +10642,7 @@ void mxsr2msrTranslator::visitStart (S_instrument& elt)
     gLogStream <<
       "--> Start visiting S_instrument" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -10686,7 +10684,7 @@ void mxsr2msrTranslator::visitStart (S_dot& elt)
     gLogStream <<
       "--> Start visiting S_dot" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -10703,7 +10701,7 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
     gLogStream <<
       "--> Start visiting S_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -10712,7 +10710,7 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
 */
 
   {
-    string noteType = elt->getValue();
+    std::string noteType = elt->getValue();
 
     // the type contains a display duration,
     fCurrentNoteGraphicDurationKind =
@@ -10724,7 +10722,7 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
   // size
 
   {
-    string noteTypeSize = elt->getAttributeValue ("size");
+    std::string noteTypeSize = elt->getAttributeValue ("size");
 
     if (noteTypeSize == "full") {
       // a regular note
@@ -10750,11 +10748,11 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
       "noteType: \"" <<
       noteType <<
       "\"" <<
-      endl <<
+      std::endl <<
       "noteTypeSize: \"" <<
       noteTypeSize <<
       "\"" <<
-      endl;
+      std::endl;
         */
   }
 #endif
@@ -10770,12 +10768,12 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
     gLogStream <<
       "--> Start visiting S_notehead" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   {
-    string noteHead = elt->getValue();
+    std::string noteHead = elt->getValue();
 
     if      (noteHead == "slash") {
       fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadSlash; }
@@ -10830,7 +10828,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
     else if (noteHead == "ti") {
       fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadTi; }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "note head \"" << noteHead <<
@@ -10847,7 +10845,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
   // filled
 
   {
-    string noteHeadFilled = elt->getAttributeValue ("filled");
+    std::string noteHeadFilled = elt->getAttributeValue ("filled");
 
     if      (noteHeadFilled == "yes")
       fCurrentNoteHeadFilledKind = msrNoteHeadFilledKind::kNoteHeadFilledYes;
@@ -10855,7 +10853,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
       fCurrentNoteHeadFilledKind = msrNoteHeadFilledKind::kNoteHeadFilledNo;
     else {
       if (noteHeadFilled.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "note head filled \"" << noteHeadFilled <<
@@ -10873,7 +10871,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
   // parentheses
 
   {
-    string noteHeadParentheses = elt->getAttributeValue ("parentheses");
+    std::string noteHeadParentheses = elt->getAttributeValue ("parentheses");
 
     if      (noteHeadParentheses == "yes")
       fCurrentNoteHeadParenthesesKind = msrNoteHeadParenthesesKind::kNoteHeadParenthesesYes;
@@ -10881,7 +10879,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
       fCurrentNoteHeadParenthesesKind = msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo;
     else {
       if (noteHeadParentheses.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "note head parentheses \"" << noteHeadParentheses <<
@@ -10910,14 +10908,14 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
     gLogStream <<
       "--> Start visiting S_accidental" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // value
 
   {
-    string accidentalValue = elt->getValue ();
+    std::string accidentalValue = elt->getValue ();
 
     fCurrentAccidentalKind = msrAccidentalKind::kAccidentalNone;
 
@@ -10992,7 +10990,7 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
       fCurrentAccidentalKind = msrAccidentalKind::kAccidentalKoron;
     else {
       if (accidentalValue.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "accidental \"" << accidentalValue <<
@@ -11010,7 +11008,7 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
   // editorial
 
   {
-    string editorialAccidental = elt->getAttributeValue ("editorial");
+    std::string editorialAccidental = elt->getAttributeValue ("editorial");
 
     fCurrentEditorialAccidentalKind =
       msrEditorialAccidentalKind::kEditorialAccidentalNo; // default value
@@ -11023,7 +11021,7 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
         msrEditorialAccidentalKind::kEditorialAccidentalNo;
     else {
       if (editorialAccidental.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "editorial accidental \"" << editorialAccidental <<
@@ -11041,7 +11039,7 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
   // cautionary
 
   {
-    string cautionaryAccidental = elt->getAttributeValue ("cautionary");
+    std::string cautionaryAccidental = elt->getAttributeValue ("cautionary");
 
     fCurrentCautionaryAccidentalKind =
       msrCautionaryAccidentalKind::kCautionaryAccidentalNo; // default value
@@ -11054,7 +11052,7 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
         msrCautionaryAccidentalKind::kCautionaryAccidentalNo;
     else {
       if (cautionaryAccidental.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "cautionary accidental \"" << cautionaryAccidental <<
@@ -11080,7 +11078,7 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
     gLogStream <<
       "--> Start visiting S_stem" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -11102,7 +11100,7 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
 >
 */
 
-  string        stem = elt->getValue();
+  std::string        stem = elt->getValue();
 
   // kind
   msrStemKind stemKind = msrStemKind::kStemNeutral;
@@ -11120,7 +11118,7 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
     stemKind = msrStemKind::kStemDouble;
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "stem \"" << fCurrentBeamValue <<
@@ -11151,7 +11149,7 @@ void mxsr2msrTranslator::visitStart (S_beam& elt)
     gLogStream <<
       "--> Start visiting S_beam" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -11177,7 +11175,7 @@ void mxsr2msrTranslator::visitStart (S_beam& elt)
     beamKind = msrBeamKind::kBeamBackwardHook;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "beam \"" << fCurrentBeamValue <<
@@ -11215,7 +11213,7 @@ void mxsr2msrTranslator::visitStart (S_measure_style& elt)
     gLogStream <<
       "--> Start visiting S_measure_style" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -11232,7 +11230,7 @@ void mxsr2msrTranslator::visitStart (S_beat_repeat& elt)
     gLogStream <<
       "--> Start visiting S_beat_repeat" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -11261,7 +11259,7 @@ void mxsr2msrTranslator::visitStart (S_beat_repeat& elt)
 
   // use-dots
 
-  string useDotsString = elt->getAttributeValue ("use-dots");
+  std::string useDotsString = elt->getAttributeValue ("use-dots");
 
   fCurrentUseDotsKind =
     msrUseDotsFromString (
@@ -11279,7 +11277,7 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
     gLogStream <<
       "--> Start visiting S_measure_repeat" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -11302,7 +11300,7 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
 
   // type
 
-  string measureRepeatType =
+  std::string measureRepeatType =
     elt->getAttributeValue ("type");
 
   fCurrentMeasureRepeatKind =
@@ -11323,7 +11321,7 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
       ", fCurrentMeasureRepeatSlashesNumber: " <<
       fCurrentMeasureRepeatSlashesNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -11345,7 +11343,7 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
       "to part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -11355,7 +11353,7 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "measure-repeat type \"" << measureRepeatType <<
@@ -11445,13 +11443,13 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
     gLogStream <<
       "--> Start visiting S_multiple_rest" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   fCurrentMultipleFullBarRestsNumber = (int)(*elt);
 
-  string useSymbols = elt->getAttributeValue ("use-symbols");
+  std::string useSymbols = elt->getAttributeValue ("use-symbols");
 
   // what do we do with fMultipleFullBarRestsUseSymbols ??? JMI v0.9.63
   if      (useSymbols == "yes") {
@@ -11462,7 +11460,7 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
   }
   else {
     if (useSymbols.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "multiple rest use symbols " <<
@@ -11505,20 +11503,20 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
     gLogStream <<
       "--> Start visiting S_slash" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // type
 
-  string slashType = elt->getAttributeValue ("type");
+  std::string slashType = elt->getAttributeValue ("type");
 
   if      (slashType == "start")
     fCurrentSlashTypeKind = msrSlashTypeKind::kSlashTypeStart;
   else if (slashType == "stop")
     fCurrentSlashTypeKind = msrSlashTypeKind::kSlashTypeStop;
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "slash type \"" << slashType <<
@@ -11533,7 +11531,7 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
 
   // use-dots
 
-  string useDotsString = elt->getAttributeValue ("use-dots");
+  std::string useDotsString = elt->getAttributeValue ("use-dots");
 
   fCurrentUseDotsKind =
     msrUseDotsFromString (
@@ -11542,7 +11540,7 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
 
   // use-stems
 
-  string slashUseStems = elt->getAttributeValue ("use-stems");
+  std::string slashUseStems = elt->getAttributeValue ("use-stems");
 
   if      (slashUseStems == "yes")
     fCurrentSlashUseStemsKind = msrSlashUseStemsKind::kSlashUseStemsYes;
@@ -11550,7 +11548,7 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
     fCurrentSlashUseStemsKind = msrSlashUseStemsKind::kSlashUseStemsNo;
   else {
     if (slashUseStems.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "slash use-stems \"" << slashUseStems <<
@@ -11577,11 +11575,11 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
     gLogStream <<
       "--> Start visiting S_slash_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string slashType = elt->getValue();
+  std::string slashType = elt->getValue();
 
   // the type contains a display duration,
   fCurrentSlashGraphicDurationKind =
@@ -11591,7 +11589,7 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
 
   // size
 
-  string slashTypeSize = elt->getAttributeValue ("size");
+  std::string slashTypeSize = elt->getAttributeValue ("size");
 
   if (slashTypeSize == "cue") { // USE IT! JMI ???
   }
@@ -11612,11 +11610,11 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
       "slashType: \"" <<
       slashType <<
       "\"" <<
-      endl <<
+      std::endl <<
       "slashTypeSize: \"" <<
       slashTypeSize <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -11628,7 +11626,7 @@ void mxsr2msrTranslator::visitStart (S_slash_dot& elt)
     gLogStream <<
       "--> Start visiting S_slash_dot" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -11645,7 +11643,7 @@ void mxsr2msrTranslator::visitEnd (S_slash& elt)
     gLogStream <<
       "--> End visiting S_slash" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -11668,7 +11666,7 @@ void mxsr2msrTranslator::visitStart (S_articulations& elt)
     gLogStream <<
       "--> Start visiting S_articulations" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -11683,13 +11681,13 @@ void mxsr2msrTranslator::visitStart (S_accent& elt)
     gLogStream <<
       "--> Start visiting S_accent" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -11720,13 +11718,13 @@ void mxsr2msrTranslator::visitStart (S_breath_mark& elt)
     gLogStream <<
       "--> Start visiting S_breath_mark" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -11757,13 +11755,13 @@ void mxsr2msrTranslator::visitStart (S_caesura& elt)
     gLogStream <<
       "--> Start visiting S_caesura" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -11794,13 +11792,13 @@ void mxsr2msrTranslator::visitStart (S_spiccato& elt)
     gLogStream <<
       "--> Start visiting S_spiccato" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -11831,13 +11829,13 @@ void mxsr2msrTranslator::visitStart (S_staccato& elt)
     gLogStream <<
       "--> Start visiting S_staccato" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -11868,13 +11866,13 @@ void mxsr2msrTranslator::visitStart (S_staccatissimo& elt)
     gLogStream <<
       "--> Start visiting S_staccatissimo" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -11905,13 +11903,13 @@ void mxsr2msrTranslator::visitStart (S_stress& elt)
     gLogStream <<
       "--> Start visiting S_stress" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -11942,13 +11940,13 @@ void mxsr2msrTranslator::visitStart (S_unstress& elt)
     gLogStream <<
       "--> Start visiting S_unstress" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -11979,13 +11977,13 @@ void mxsr2msrTranslator::visitStart (S_detached_legato& elt)
     gLogStream <<
       "--> Start visiting S_detached_legato" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12016,13 +12014,13 @@ void mxsr2msrTranslator::visitStart (S_strong_accent& elt)
     gLogStream <<
       "--> Start visiting S_strong_accent" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12054,7 +12052,7 @@ void mxsr2msrTranslator::visitStart (S_tenuto& elt)
     gLogStream <<
       "--> Start visiting S_tenuto" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -12062,7 +12060,7 @@ void mxsr2msrTranslator::visitStart (S_tenuto& elt)
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12093,13 +12091,13 @@ void mxsr2msrTranslator::visitStart (S_doit& elt)
     gLogStream <<
       "--> Start visiting S_doit" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12130,13 +12128,13 @@ void mxsr2msrTranslator::visitStart (S_falloff& elt)
     gLogStream <<
       "--> Start visiting S_falloff" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12167,13 +12165,13 @@ void mxsr2msrTranslator::visitStart (S_plop& elt)
     gLogStream <<
       "--> Start visiting S_plop" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12204,13 +12202,13 @@ void mxsr2msrTranslator::visitStart (S_scoop& elt)
     gLogStream <<
       "--> Start visiting S_scoop" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12238,7 +12236,7 @@ void mxsr2msrTranslator::visitEnd (S_articulations& elt)
     gLogStream <<
       "--> End visiting S_articulations" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -12256,13 +12254,13 @@ void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
     gLogStream <<
       "--> Start visiting S_arpeggiate" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12276,7 +12274,7 @@ void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
 
   // direction
 
-  string directionString = elt->getAttributeValue ("direction");
+  std::string directionString = elt->getAttributeValue ("direction");
 
   msrDirectionKind directionKind = msrDirectionKind::kDirectionNone; // default value
 
@@ -12286,7 +12284,7 @@ void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
     directionKind = msrDirectionKind::kDirectionDown;
   else {
     if (directionString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "arpeggiate direction \"" << directionString << "\"" << "is unknown";
@@ -12324,13 +12322,13 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
     gLogStream <<
       "--> Start visiting S_non_arpeggiate" << // JMI
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12340,7 +12338,7 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
 
   // type
 
-  string typeString = elt->getAttributeValue ("type");
+  std::string typeString = elt->getAttributeValue ("type");
 
   msrNonArpeggiatoTypeKind
     nonArpeggiatoTypeKind =
@@ -12355,7 +12353,7 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
   else {
     if (typeString.size ()) {
 
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "non-arpeggiate type \"" << typeString <<
@@ -12395,7 +12393,7 @@ void mxsr2msrTranslator::visitStart (S_technical& elt)
     gLogStream <<
       "--> Start visiting S_technical" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -12409,7 +12407,7 @@ void mxsr2msrTranslator::visitEnd (S_technical& elt)
     gLogStream <<
       "--> Start visiting S_technical" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -12426,13 +12424,13 @@ void mxsr2msrTranslator::visitStart (S_arrow& elt)
     gLogStream <<
       "--> Start visiting S_arrow" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12458,7 +12456,7 @@ void mxsr2msrTranslator::visitStart (S_bend_alter& elt)
     gLogStream <<
       "--> Start visiting S_bend_alter" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -12472,7 +12470,7 @@ void mxsr2msrTranslator::visitStart (S_bend& elt) // JMI
     gLogStream <<
       "--> Start visiting S_bend" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -12487,13 +12485,13 @@ void mxsr2msrTranslator::visitEnd (S_bend& elt)
     gLogStream <<
       "--> Start visiting S_bend" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12524,13 +12522,13 @@ void mxsr2msrTranslator::visitStart (S_double_tongue& elt)
     gLogStream <<
       "--> Start visiting S_double_tongue" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12559,13 +12557,13 @@ void mxsr2msrTranslator::visitStart (S_down_bow& elt)
     gLogStream <<
       "--> Start visiting S_down_bow" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12594,7 +12592,7 @@ void mxsr2msrTranslator::visitStart (S_fingering& elt)
     gLogStream <<
       "--> Start visiting S_fingering" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -12603,7 +12601,7 @@ void mxsr2msrTranslator::visitStart (S_fingering& elt)
   if (fOnGoingTechnical) {
     // placement
 
-    string placementString = elt->getAttributeValue ("placement");
+    std::string placementString = elt->getAttributeValue ("placement");
 
     msrPlacementKind
       placementKind =
@@ -12629,7 +12627,7 @@ void mxsr2msrTranslator::visitStart (S_fingering& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<fingering /> \"" << fingeringValue <<
@@ -12653,13 +12651,13 @@ void mxsr2msrTranslator::visitStart (S_fingernails& elt)
     gLogStream <<
       "--> Start visiting S_fingernails" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12688,7 +12686,7 @@ void mxsr2msrTranslator::visitStart (S_fret& elt)
     gLogStream <<
       "--> Start visiting S_fret" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -12697,7 +12695,7 @@ void mxsr2msrTranslator::visitStart (S_fret& elt)
   if (fOnGoingTechnical) {
     // placement
 
-    string placementString = elt->getAttributeValue ("placement");
+    std::string placementString = elt->getAttributeValue ("placement");
 
     msrPlacementKind
       fretPlacementKind =  msrPlacementKind::kPlacement_NO_;
@@ -12722,7 +12720,7 @@ void mxsr2msrTranslator::visitStart (S_fret& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<fret /> \"" << fretValue <<
@@ -12746,15 +12744,15 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
     gLogStream <<
       "--> Start visiting S_hammer_on" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string hammerOnValue = elt->getValue ();
+  std::string hammerOnValue = elt->getValue ();
 
   // type
 
-  string hammerOnType = elt->getAttributeValue ("type");
+  std::string hammerOnType = elt->getAttributeValue ("type");
 
   msrTechnicalTypeKind hammerOnTechnicalTypeKind = msrTechnicalTypeKind::kTechnicalType_NO_;
 
@@ -12764,7 +12762,7 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
     hammerOnTechnicalTypeKind = msrTechnicalTypeKind::kTechnicalTypeStop;
   else {
     if (hammerOnType.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "hammer-on type \"" << hammerOnType <<
@@ -12780,7 +12778,7 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12788,7 +12786,7 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
         inputLineNumber,
         placementString);
 
-  // create the technical with string
+  // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
@@ -12811,15 +12809,15 @@ void mxsr2msrTranslator::visitStart (S_handbell& elt)
     gLogStream <<
       "--> Start visiting S_handbell" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string handBellValue = elt->getValue ();
+  std::string handBellValue = elt->getValue ();
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12827,7 +12825,7 @@ void mxsr2msrTranslator::visitStart (S_handbell& elt)
         inputLineNumber,
         placementString);
 
-  // create the technical with string
+  // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
@@ -12850,13 +12848,13 @@ void mxsr2msrTranslator::visitStart (S_harmonic& elt)
     gLogStream <<
       "--> Start visiting S_harmonic" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12866,7 +12864,7 @@ void mxsr2msrTranslator::visitStart (S_harmonic& elt)
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -12896,13 +12894,13 @@ void mxsr2msrTranslator::visitStart (S_heel& elt)
     gLogStream <<
       "--> Start visiting S_heel" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12931,13 +12929,13 @@ void mxsr2msrTranslator::visitStart (S_hole& elt)
     gLogStream <<
       "--> Start visiting S_hole" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -12966,13 +12964,13 @@ void mxsr2msrTranslator::visitStart (S_open_string& elt)
     gLogStream <<
       "--> Start visiting S_open_string" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13001,15 +12999,15 @@ void mxsr2msrTranslator::visitStart (S_other_technical& elt)
     gLogStream <<
       "--> Start visiting S_other_technical" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string otherTechnicalValue = elt->getValue ();
+  std::string otherTechnicalValue = elt->getValue ();
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13017,7 +13015,7 @@ void mxsr2msrTranslator::visitStart (S_other_technical& elt)
         inputLineNumber,
         placementString);
 
-  // create the technical with string
+  // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
@@ -13040,15 +13038,15 @@ void mxsr2msrTranslator::visitStart (S_pluck& elt)
     gLogStream <<
       "--> Start visiting S_pluck" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string pluckValue = elt->getValue ();
+  std::string pluckValue = elt->getValue ();
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13056,7 +13054,7 @@ void mxsr2msrTranslator::visitStart (S_pluck& elt)
         inputLineNumber,
         placementString);
 
-  // create the technical with string
+  // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
@@ -13079,15 +13077,15 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
     gLogStream <<
       "--> Start visiting S_pull_off" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string pullOffValue = elt->getValue ();
+  std::string pullOffValue = elt->getValue ();
 
   // type
 
-  string pullOffType = elt->getAttributeValue ("type");
+  std::string pullOffType = elt->getAttributeValue ("type");
 
   msrTechnicalTypeKind pullOffTechnicalTypeKind = msrTechnicalTypeKind::kTechnicalType_NO_;
 
@@ -13097,7 +13095,7 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
     pullOffTechnicalTypeKind = msrTechnicalTypeKind::kTechnicalTypeStop;
   else {
     if (pullOffType.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "pull-off type \"" << pullOffType <<
@@ -13113,7 +13111,7 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13121,7 +13119,7 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
         inputLineNumber,
         placementString);
 
-  // create the technical with string
+  // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
@@ -13144,13 +13142,13 @@ void mxsr2msrTranslator::visitStart (S_snap_pizzicato& elt)
     gLogStream <<
       "--> Start visiting S_snap_pizzicato" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13179,13 +13177,13 @@ void mxsr2msrTranslator::visitStart (S_stopped& elt)
     gLogStream <<
       "--> Start visiting S_stopped" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13214,34 +13212,34 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
     gLogStream <<
       "--> Start visiting S_string" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 /*
         <notations>
           <technical>
-            <string>5</string>
+            <std::string>5</std::string>
             <fret>0</fret>
           </technical>
         </notations>
 */
 
-  string stringValue = elt->getValue();
+  std::string stringValue = elt->getValue();
 
   int stringIntegerValue;
 
-  istringstream inputStream (stringValue);
+  std::istringstream inputStream (stringValue);
 
   inputStream >> stringIntegerValue;
 
   if (! stringValue.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     stringIntegerValue = 0;
 
     s <<
-      "string value \"" << stringValue <<
+      "std::string value \"" << stringValue <<
       "\" is empoty, '" << stringIntegerValue << "' is assumed";
 
     mxsr2msrWarning (
@@ -13253,7 +13251,7 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
   if (fOnGoingTechnical) {
     // placement
 
-    string placementString = elt->getAttributeValue ("placement");
+    std::string placementString = elt->getAttributeValue ("placement");
 
     msrPlacementKind
       placementKind =
@@ -13279,10 +13277,10 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
-      "<string /> \"" << stringValue <<
+      "<std::string /> \"" << stringValue <<
       "\" is out of context";
 
     mxsr2msrError (
@@ -13303,13 +13301,13 @@ void mxsr2msrTranslator::visitStart (S_tap& elt)
     gLogStream <<
       "--> Start visiting S_tap" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13338,13 +13336,13 @@ void mxsr2msrTranslator::visitStart (S_thumb_position& elt)
     gLogStream <<
       "--> Start visiting S_thumb_position" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13373,13 +13371,13 @@ void mxsr2msrTranslator::visitStart (S_toe& elt)
     gLogStream <<
       "--> Start visiting S_toe" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13408,13 +13406,13 @@ void mxsr2msrTranslator::visitStart (S_triple_tongue& elt)
     gLogStream <<
       "--> Start visiting S_triple_tongue" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13443,13 +13441,13 @@ void mxsr2msrTranslator::visitStart (S_up_bow& elt)
     gLogStream <<
       "--> Start visiting S_up_bow" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13479,11 +13477,11 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
     gLogStream <<
       "--> Start visiting S_fermata" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string fermataTextValue = elt->getValue ();
+  std::string fermataTextValue = elt->getValue ();
 
   // kind
 
@@ -13502,7 +13500,7 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 
   else {
     if (fermataTextValue.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "fermata kind \"" << fermataTextValue <<
@@ -13518,7 +13516,7 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 
   // type
 
-  string fermataTypeValue = elt->getAttributeValue ("type");
+  std::string fermataTypeValue = elt->getAttributeValue ("type");
 
   msrArticulationFermataType
     articulationFermataType =
@@ -13532,7 +13530,7 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 
   else {
     if (fermataTypeValue.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "fermata type \"" << fermataTypeValue <<
@@ -13565,7 +13563,7 @@ void mxsr2msrTranslator::visitStart (S_ornaments& elt)
     gLogStream <<
       "--> Start visiting S_ornaments" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -13580,19 +13578,19 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
     gLogStream <<
       "--> Start visiting tremolo" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // value (tremolo marks number)
 
-  string tremoloMarksNumberString =
+  std::string tremoloMarksNumberString =
     elt->getValue ();
 
   int tremoloMarksNumber = (int)(*elt);
 
   if (! tremoloMarksNumberString.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     tremoloMarksNumber = 1;
 
@@ -13606,7 +13604,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
   }
 
   if (tremoloMarksNumber < 0 || tremoloMarksNumber > 8) { // JMI what does 0 mean?
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "tremolo value \"" << tremoloMarksNumber <<
@@ -13621,7 +13619,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 
   // type
 
-  string tremoloType = elt->getAttributeValue ("type");
+  std::string tremoloType = elt->getAttributeValue ("type");
 
   fCurrentDoubleTremoloTypeKind = msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle; // default value
 
@@ -13635,7 +13633,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
     fCurrentDoubleTremoloTypeKind = msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop;
 
   else if (tremoloType.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "tremolo type \"" << tremoloType <<
@@ -13650,7 +13648,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     singleTremoloPlacementKind = msrPlacementKind::kPlacement_NO_;
@@ -13702,7 +13700,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 
   else if (placementString.size ()) {
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "tremolo placement \"" << placementString <<
@@ -13735,7 +13733,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
           ", placement : " <<
           msrPlacementKindAsString (
             singleTremoloPlacementKind) <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -13769,7 +13767,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
             ", placement : " <<
             msrPlacementKindAsString (
               doubleTremoloPlacementKind) <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -13785,7 +13783,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 
 /*
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "<tremolo/> start when a current double tremolo is already open";
@@ -13806,7 +13804,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
           gLogStream <<
             "Meeting a double tremolo stop" <<
             ", line " << inputLineNumber <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -13815,7 +13813,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "<tremolo/> stop whit no preceeding <tremolo/> start";
@@ -13840,7 +13838,7 @@ void mxsr2msrTranslator::visitStart (S_trill_mark& elt)
     gLogStream <<
       "--> Start visiting S_trill_mark" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -13848,7 +13846,7 @@ void mxsr2msrTranslator::visitStart (S_trill_mark& elt)
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13879,7 +13877,7 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
     gLogStream <<
       "--> Start visiting S_dashes" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -13891,7 +13889,7 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
 
   // type
 
-  string dashesType = elt->getAttributeValue ("type");
+  std::string dashesType = elt->getAttributeValue ("type");
 
   msrSpannerTypeKind fDashesSpannerTypeKind = msrSpannerTypeKind::kSpannerType_NO_;
 
@@ -13903,7 +13901,7 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
     fDashesSpannerTypeKind = msrSpannerTypeKind::kSpannerTypeStop;
   else {
     if (dashesType.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "dashes type \"" << dashesType <<
@@ -13919,7 +13917,7 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -13953,7 +13951,7 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
     gLogStream <<
       "--> Start visiting S_wavy_line" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -13963,7 +13961,7 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
 
   // type
 
-  string wavyLineType = elt->getAttributeValue ("type");
+  std::string wavyLineType = elt->getAttributeValue ("type");
 
   msrSpannerTypeKind fWavyLineSpannerTypeKind = msrSpannerTypeKind::kSpannerType_NO_;
 
@@ -13975,7 +13973,7 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
     fWavyLineSpannerTypeKind = msrSpannerTypeKind::kSpannerTypeStop;
   else {
     if (wavyLineType.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "wavy-line type \"" << wavyLineType <<
@@ -13991,7 +13989,7 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14024,7 +14022,7 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
       // set spanner two-way sideLinks
       // between both ends of the wavy line spanner
       if (! fCurrentWavyLineSpannerStart) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "wavy-line stop found without corresponding start, ignoring it";
@@ -14065,13 +14063,13 @@ void mxsr2msrTranslator::visitStart (S_turn& elt)
     gLogStream <<
       "--> Start visiting S_turn" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14102,13 +14100,13 @@ void mxsr2msrTranslator::visitStart (S_inverted_turn& elt)
     gLogStream <<
       "--> Start visiting S_inverted_turn" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14139,13 +14137,13 @@ void mxsr2msrTranslator::visitStart (S_delayed_turn& elt)
     gLogStream <<
       "--> Start visiting S_delayed_turn" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14176,13 +14174,13 @@ void mxsr2msrTranslator::visitStart (S_delayed_inverted_turn& elt)
     gLogStream <<
       "--> Start visiting S_delayed_inverted_turn" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14213,13 +14211,13 @@ void mxsr2msrTranslator::visitStart (S_vertical_turn& elt)
     gLogStream <<
       "--> Start visiting S_vertical_turn" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14250,13 +14248,13 @@ void mxsr2msrTranslator::visitStart (S_mordent& elt)
     gLogStream <<
       "--> Start visiting S_mordent" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14287,13 +14285,13 @@ void mxsr2msrTranslator::visitStart (S_inverted_mordent& elt)
     gLogStream <<
       "--> Start visiting S_inverted_mordent" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14324,13 +14322,13 @@ void mxsr2msrTranslator::visitStart (S_schleifer& elt)
     gLogStream <<
       "--> Start visiting S_schleifer" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14361,13 +14359,13 @@ void mxsr2msrTranslator::visitStart (S_shake& elt)
     gLogStream <<
       "--> Start visiting S_shake" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14398,11 +14396,11 @@ void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
     gLogStream <<
       "--> Start visiting S_accidental_mark" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string accidentalMark = elt->getValue ();
+  std::string accidentalMark = elt->getValue ();
 
 /*
 <!--
@@ -14561,7 +14559,7 @@ void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
     currentOrnamentAccidentalKind = msrAccidentalKind::kAccidentalOther;
 
   else if (accidentalMark.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "accidental-mark \"" << accidentalMark <<
@@ -14576,7 +14574,7 @@ void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14608,7 +14606,7 @@ void mxsr2msrTranslator::visitEnd (S_ornaments& elt)
     gLogStream <<
       "--> End visiting S_ornaments" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -14624,13 +14622,13 @@ void mxsr2msrTranslator::visitStart( S_f& elt)
     gLogStream <<
       "--> Start visiting S_f" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14665,13 +14663,13 @@ void mxsr2msrTranslator::visitStart( S_ff& elt)
     gLogStream <<
       "--> Start visiting S_ff" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14706,13 +14704,13 @@ void mxsr2msrTranslator::visitStart( S_fff& elt)
     gLogStream <<
       "--> Start visiting S_fff" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14747,13 +14745,13 @@ void mxsr2msrTranslator::visitStart( S_ffff& elt)
     gLogStream <<
       "--> Start visiting S_ffff" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14788,13 +14786,13 @@ void mxsr2msrTranslator::visitStart( S_fffff& elt)
     gLogStream <<
       "--> Start visiting S_fffff" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14829,13 +14827,13 @@ void mxsr2msrTranslator::visitStart( S_ffffff& elt)
     gLogStream <<
       "--> Start visiting S_ffffff" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14871,13 +14869,13 @@ void mxsr2msrTranslator::visitStart( S_p& elt)
     gLogStream <<
       "--> Start visiting S_p" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14912,13 +14910,13 @@ void mxsr2msrTranslator::visitStart( S_pp& elt)
     gLogStream <<
       "--> Start visiting S_pp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14953,13 +14951,13 @@ void mxsr2msrTranslator::visitStart( S_ppp& elt)
     gLogStream <<
       "--> Start visiting S_ppp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -14994,13 +14992,13 @@ void mxsr2msrTranslator::visitStart( S_pppp& elt)
     gLogStream <<
       "--> Start visiting S_pppp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15035,13 +15033,13 @@ void mxsr2msrTranslator::visitStart( S_ppppp& elt)
     gLogStream <<
       "--> Start visiting S_ppppp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15076,13 +15074,13 @@ void mxsr2msrTranslator::visitStart( S_pppppp& elt)
     gLogStream <<
       "--> Start visiting S_pppppp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15119,13 +15117,13 @@ void mxsr2msrTranslator::visitStart( S_mf& elt)
     gLogStream <<
       "--> Start visiting S_mf" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15160,13 +15158,13 @@ void mxsr2msrTranslator::visitStart( S_mp& elt)
     gLogStream <<
       "--> Start visiting S_mp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15202,13 +15200,13 @@ void mxsr2msrTranslator::visitStart( S_fp& elt)
     gLogStream <<
       "--> Start visiting S_fp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15244,13 +15242,13 @@ void mxsr2msrTranslator::visitStart( S_fz& elt)
     gLogStream <<
       "--> Start visiting S_fz" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15286,13 +15284,13 @@ void mxsr2msrTranslator::visitStart( S_pf& elt)
     gLogStream <<
       "--> Start visiting S_pf" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15328,13 +15326,13 @@ void mxsr2msrTranslator::visitStart( S_rf& elt)
     gLogStream <<
       "--> Start visiting S_rf" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15370,13 +15368,13 @@ void mxsr2msrTranslator::visitStart( S_sf& elt)
     gLogStream <<
       "--> Start visiting S_sf" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15412,13 +15410,13 @@ void mxsr2msrTranslator::visitStart( S_rfz& elt)
     gLogStream <<
       "--> Start visiting S_rfz" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15454,13 +15452,13 @@ void mxsr2msrTranslator::visitStart( S_sfz& elt)
     gLogStream <<
       "--> Start visiting S_sfz" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15496,13 +15494,13 @@ void mxsr2msrTranslator::visitStart( S_sfp& elt)
     gLogStream <<
       "--> Start visiting S_sfp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15538,13 +15536,13 @@ void mxsr2msrTranslator::visitStart( S_sfpp& elt)
     gLogStream <<
       "--> Start visiting S_sfpp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15580,13 +15578,13 @@ void mxsr2msrTranslator::visitStart( S_sffz& elt)
     gLogStream <<
       "--> Start visiting S_sffz" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15622,13 +15620,13 @@ void mxsr2msrTranslator::visitStart( S_sfzp& elt)
     gLogStream <<
       "--> Start visiting S_sfzp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15664,13 +15662,13 @@ void mxsr2msrTranslator::visitStart( S_n& elt)
     gLogStream <<
       "--> Start visiting S_n" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15706,15 +15704,15 @@ void mxsr2msrTranslator::visitStart( S_other_dynamics& elt)
     gLogStream <<
       "--> Start visiting S_other_dynamics" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string otherDynamicsValue = elt->getValue ();
+  std::string otherDynamicsValue = elt->getValue ();
 
   // placement
 
-  string placementString = elt->getAttributeValue ("placement");
+  std::string placementString = elt->getAttributeValue ("placement");
 
   msrPlacementKind
     placementKind =
@@ -15767,10 +15765,10 @@ void mxsr2msrTranslator::visitStart( S_damper_pedal& elt)
     gLogStream <<
       "--> Start visiting S_damper_pedal" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
 #endif
 
-  string damperPedalValue = elt->getValue ();
+  std::string damperPedalValue = elt->getValue ();
 
   // check damper pedal value
   if      (damperPedalValue == "yes")
@@ -15782,7 +15780,7 @@ void mxsr2msrTranslator::visitStart( S_damper_pedal& elt)
       msrDamperPedal::kDamperPedalValueNo;
 
   else {
-    istringstream inputStream (damperPedalValue);
+    std::istringstream inputStream (damperPedalValue);
 
     inputStream >> fCurrentDamperPedalIntegerValue;
 
@@ -15790,7 +15788,7 @@ void mxsr2msrTranslator::visitStart( S_damper_pedal& elt)
       fCurrentDamperPedalIntegerValue < 0
         &&
       fCurrentDamperPedalIntegerValue > 100) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "damper pedal integer value \"" <<
@@ -15835,11 +15833,11 @@ void mxsr2msrTranslator::visitStart( S_soft_pedal& elt)
     gLogStream <<
       "--> Start visiting S_soft_pedal" <<
        ", line " << inputLineNumber <<
-     endl;
+     std::endl;
   }
 #endif
 
-  string softPedalValue = elt->getValue ();
+  std::string softPedalValue = elt->getValue ();
 
   msrPlacementKind
     placementKind =
@@ -15872,11 +15870,11 @@ void mxsr2msrTranslator::visitStart( S_sostenuto_pedal& elt)
     gLogStream <<
       "--> Start visiting S_sostenuto_pedal" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string sostenutoPedalValue = elt->getValue ();
+  std::string sostenutoPedalValue = elt->getValue ();
 
   msrPlacementKind
     placementKind =
@@ -15908,7 +15906,7 @@ void mxsr2msrTranslator::visitStart (S_cue& elt)
     gLogStream <<
       "--> Start visiting S_cue" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -15926,7 +15924,7 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
     gLogStream <<
       "--> Start visiting S_grace" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -15934,7 +15932,7 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
 
   // slash
 
-  string slash = elt->getAttributeValue ("slash");
+  std::string slash = elt->getAttributeValue ("slash");
 
   fCurrentGraceIsSlashed = false; // default value
 
@@ -15983,7 +15981,7 @@ void mxsr2msrTranslator::visitStart (S_chord& elt)
     gLogStream <<
       "--> Start visiting S_chord" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16004,7 +16002,7 @@ void mxsr2msrTranslator::visitStart (S_time_modification& elt)
     gLogStream <<
       "--> Start visiting S_time_modification" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16024,7 +16022,7 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
     gLogStream <<
       "--> Start visiting S_actual_notes" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16038,7 +16036,7 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
       gLogStream <<
         "fCurrentNoteActualNotes: " <<
         fCurrentNoteActualNotes <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -16061,13 +16059,13 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
       gLogStream <<
         "fCurrentMetronomeNoteActualNotes: " <<
         fCurrentMetronomeNoteActualNotes <<
-        endl;
+        std::endl;
     }
 #endif
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<actual-notes /> \"" << actualNotes <<
@@ -16091,7 +16089,7 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
     gLogStream <<
       "--> Start visiting S_normal_notes" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16105,7 +16103,7 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
       gLogStream <<
         "fCurrentNoteNormalNotes: " <<
         fCurrentNoteNormalNotes <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -16128,13 +16126,13 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
       gLogStream <<
         "fCurrentMetronomeNoteNormalNotes: " <<
         fCurrentMetronomeNoteNormalNotes <<
-        endl;
+        std::endl;
     }
 #endif
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<normal-notes /> \"" << normalNotes <<
@@ -16158,11 +16156,11 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
     gLogStream <<
       "--> Start visiting S_normal_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string normalTypeString = elt->getValue();
+  std::string normalTypeString = elt->getValue();
 
   if (fOnGoingNote) {
 #ifdef TRACING_IS_ENABLED
@@ -16170,7 +16168,7 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
       gLogStream <<
         "normalTypeString: " <<
         normalTypeString <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -16182,7 +16180,7 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
 
   /*
     // there can be several <beat-unit/> in a <metronome/> markup,
-    // register beat unit in in dotted durations list
+    // register beat unit in in dotted durations std::list
     fCurrentMetronomeBeatUnitsVector.push_back (
       msrDottedDuration (
         fCurrentNoteNormalTypeDuration,
@@ -16198,14 +16196,14 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
       gLogStream <<
         "fCurrentMetronomeNoteNormalType: " <<
         fCurrentMetronomeNoteNormalType <<
-        endl;
+        std::endl;
     }
 #endif
 
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "<normal-type /> \"" << normalTypeString <<
@@ -16230,7 +16228,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     gLogStream <<
       "--> Start visiting S_tuplet" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16243,7 +16241,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   // bracket
 
   {
-    string tupletBracket = elt->getAttributeValue ("bracket");
+    std::string tupletBracket = elt->getAttributeValue ("bracket");
 
     fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketYes; // option ??? JMI
 
@@ -16253,7 +16251,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketNo;
     else {
       if (tupletBracket.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "tuplet bracket \"" << tupletBracket <<
@@ -16268,7 +16266,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       else {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "tuplet bracket is empty: this is implementation dependent," <<
@@ -16287,7 +16285,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   // line-shape
 
   {
-    string tupletLineShape = elt->getAttributeValue ("line-shape");
+    std::string tupletLineShape = elt->getAttributeValue ("line-shape");
 
     fCurrentTupletLineShapeKind =
       msrTupletLineShapeKind::kTupletLineShapeStraight; // default value
@@ -16298,7 +16296,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       fCurrentTupletLineShapeKind = msrTupletLineShapeKind::kTupletLineShapeCurved;
     else {
       if (tupletLineShape.size ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "tuplet line-shape \"" << tupletLineShape <<
@@ -16316,7 +16314,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   // type
 
   {
-    string tupletType = elt->getAttributeValue ("type");
+    std::string tupletType = elt->getAttributeValue ("type");
 
     msrTupletTypeKind
       previousTupletTypeKind = fCurrentTupletTypeKind;
@@ -16329,7 +16327,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
         gLogStream <<
           "--> There is a tuplet start (kTupletTypeStart)" <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -16341,7 +16339,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
         gLogStream <<
           "--> There is a tuplet continue (kTupletTypeContinue)" <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -16366,7 +16364,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
             "--> There is a tuplet stop right after a tuplet start for tuplet nummber " << fCurrentTupletNumber <<
             " (kTupletTypeStartAndStopInARow)" <<
             ", line " << inputLineNumber <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -16379,7 +16377,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
           gLogStream <<
             "--> There is a tuplet stop (kTupletTypeStop)" <<
             ", line " << inputLineNumber <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -16387,7 +16385,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       }
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "tuplet type \"" << tupletType <<
@@ -16404,7 +16402,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   // show-number
 
   {
-    string tupletShowNumber = elt->getAttributeValue ("show-number");
+    std::string tupletShowNumber = elt->getAttributeValue ("show-number");
 
     fCurrentTupletShowNumberKind =
       msrTupletShowNumberKind::kTupletShowNumberActual; // default value
@@ -16432,7 +16430,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   // show-type
 
   {
-    string tupletShowType = elt->getAttributeValue ("show-type");
+    std::string tupletShowType = elt->getAttributeValue ("show-type");
 
     fCurrentTupletShowTypeKind = msrTupletShowTypeKind::kTupletShowTypeNone; // default value
 
@@ -16473,7 +16471,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       ", fCurrentTupletShowTypeKind: " <<
       msrTupletShowTypeKindAsString (
         fCurrentTupletShowTypeKind) <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16487,7 +16485,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_actual& elt)
     gLogStream <<
       "--> Start visiting S_tuplet_actual" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16501,7 +16499,7 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_actual& elt)
     gLogStream <<
       "--> End visiting S_tuplet_actual" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16515,7 +16513,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_normal& elt)
     gLogStream <<
       "--> Start visiting S_tuplet_normal" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16529,7 +16527,7 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_normal& elt)
     gLogStream <<
       "--> End visiting S_tuplet_normal" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16546,7 +16544,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
     gLogStream <<
       "--> Start visiting S_tuplet_number" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16574,7 +16572,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
     gLogStream <<
       "tuplet number (not handled): " <<
       tupletNumberValue <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -16589,12 +16587,12 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
     gLogStream <<
       "--> Start visiting S_tuplet_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // not handled JMI
-  string tupletTypeValue = elt->getValue();
+  std::string tupletTypeValue = elt->getValue();
 
   if (fOnGoingTupletActual) {
     fCurrentTupletActualType = tupletTypeValue;
@@ -16617,7 +16615,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
     gLogStream <<
       "tuplet type (not handled): " <<
       tupletTypeValue <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -16632,7 +16630,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_dot& elt)
     gLogStream <<
       "--> Start visiting S_tuplet_dot" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16664,12 +16662,12 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
     gLogStream <<
       "--> Start visiting S_glissando" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // glissando text, i.e. the text along it
-  string glissandoTextValue = elt->getValue ();
+  std::string glissandoTextValue = elt->getValue ();
 
   // number
 
@@ -16677,7 +16675,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
 
   // type
 
-  string glissandoType = elt->getAttributeValue ("type");
+  std::string glissandoType = elt->getAttributeValue ("type");
 
   msrGlissandoTypeKind
     glissandoTypeKind = msrGlissandoTypeKind::kGlissandoTypeNone;
@@ -16687,7 +16685,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
   else if (glissandoType == "stop")
     glissandoTypeKind = msrGlissandoTypeKind::kGlissandoTypeStop;
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "glissando type \"" << glissandoType <<
@@ -16702,7 +16700,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
 
   // line-type
 
-  string glissandoLineType = elt->getAttributeValue ("line-type");
+  std::string glissandoLineType = elt->getAttributeValue ("line-type");
 
   msrLineTypeKind
     glissandoLineTypeKind =
@@ -16737,7 +16735,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
       "glissandoType: " << glissandoTypeKind <<
       "glissandoLineType: " << glissandoLineTypeKind <<
       "glissandoTextValue: " << glissandoTextValue <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16757,8 +16755,8 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
     gLogStream <<
       "Appending glissando '" <<
       glissando->asString () <<
-      "' to the glissandos pending list" <<
-      endl;
+      "' to the glissandos pending std::list" <<
+      std::endl;
   }
 #endif
 
@@ -16776,12 +16774,12 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
     gLogStream <<
       "--> Start visiting S_slide" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // slide text, i.e. the text along it
-  string slideTextValue = elt->getValue ();
+  std::string slideTextValue = elt->getValue ();
 
   // number
 
@@ -16789,7 +16787,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
 
   // type
 
-  string slideType = elt->getAttributeValue ("type");
+  std::string slideType = elt->getAttributeValue ("type");
 
   msrSlideTypeKind
     slideTypeKind = msrSlideTypeKind::kSlideTypeNone;
@@ -16799,7 +16797,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
   else if (slideType == "stop")
     slideTypeKind = msrSlideTypeKind::kSlideTypeStop;
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "slide type \"" << slideType <<
@@ -16814,7 +16812,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
 
   // line-type
 
-  string slideLineType = elt->getAttributeValue ("line-type");
+  std::string slideLineType = elt->getAttributeValue ("line-type");
 
   msrLineTypeKind
     slideLineTypeKind =
@@ -16851,7 +16849,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
 			slideTypeKind <<
       "slideLineType: " <<
 			slideLineTypeKind <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16871,8 +16869,8 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
     gLogStream <<
       "Appending slide '" <<
       slide->asString () <<
-      "' to the slides pending list" <<
-      endl;
+      "' to the slides pending std::list" <<
+      std::endl;
   }
 #endif
 
@@ -16890,7 +16888,7 @@ void mxsr2msrTranslator::visitStart (S_rest& elt)
     gLogStream <<
       "--> Start visiting S_rest" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -16930,7 +16928,7 @@ void mxsr2msrTranslator::visitStart (S_rest& elt)
   fCurrentNoteQuarterTonesPitchKind = msrQuarterTonesPitchKind::kQTP_Rest;
   fCurrentNoteIsARest = true;
 
-  string restMeasure = elt->getAttributeValue ("measure");
+  std::string restMeasure = elt->getAttributeValue ("measure");
 
   fCurrentRestIsAMeasureRest = false;
 
@@ -16963,11 +16961,11 @@ void mxsr2msrTranslator::visitStart (S_display_step& elt)
     gLogStream <<
       "--> Start visiting S_display_step" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string displayStep = elt->getValue();
+  std::string displayStep = elt->getValue();
 
   checkStep (
     inputLineNumber,
@@ -16993,14 +16991,14 @@ void mxsr2msrTranslator::visitStart (S_display_octave& elt)
     gLogStream <<
       "--> Start visiting S_display_octave" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   int displayOctaveNumber = (int)(*elt);
 
   if (displayOctaveNumber < 0 || displayOctaveNumber > 9) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "display octave number '" << displayOctaveNumber <<
@@ -17027,7 +17025,7 @@ void mxsr2msrTranslator::visitEnd (S_unpitched& elt)
     gLogStream <<
       "--> End visiting S_unpitched" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -17054,7 +17052,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
       chordFirstNote->asShortString () <<
       ", in voice \"" << voice->getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -17080,7 +17078,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
         asShortString () <<
       ", line " << inputLineNumber <<
       ", to new chord" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -17105,18 +17103,18 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChordsDetails ()) {
     gLogStream << // JMI
-      endl << endl <<
+      std::endl << std::endl <<
       "++++++++++++++++ chordFirstNote =" <<
-      endl << endl <<
+      std::endl << std::endl <<
       chordFirstNote <<
-      endl <<
+      std::endl <<
       "+++++++++++++++++" <<
-      endl << endl <<
+      std::endl << std::endl <<
       "++++++++++++++++ chordFirstNote->getMeasureElementUpLinkToMeasure () =";
 
     if (chordFirstNoteDirectUpLinkToMeasure) {
       gLogStream <<
-        endl << endl;
+        std::endl << std::endl;
     }
     else {
       gLogStream <<
@@ -17155,13 +17153,13 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
       " as current chord in voice \"" <<
       voice->getVoiceName () <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
  // fVoicesCurrentChordMap [voice] = chord;
   fVoicesCurrentChordMap [
-    make_pair (
+    std::make_pair (
       voice->
         getVoiceUpLinkToStaff ()->
           getStaffNumber (),
@@ -17183,19 +17181,19 @@ void mxsr2msrTranslator::printVoicesCurrentChordMap ()
 {
   gLogStream <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" <<
-    endl <<
+    std::endl <<
     "fVoicesCurrentChordMap contains " <<
     mfSingularOrPlural (
       fVoicesCurrentChordMap.size (), "element", "elements") <<
     ":";
 
   if (fVoicesCurrentChordMap.size ()) {
-    gLogStream << endl;
+    gLogStream << std::endl;
 
     ++gIndenter;
 
-//    map<S_msrVoice, S_msrChord>::const_iterator
-    map<pair<int, int>, S_msrChord>::const_iterator
+//    std::map<S_msrVoice, S_msrChord>::const_iterator
+    std::map<std::pair<int, int>, S_msrChord>::const_iterator
       iBegin = fVoicesCurrentChordMap.begin (),
       iEnd   = fVoicesCurrentChordMap.end (),
       i      = iBegin;
@@ -17212,7 +17210,7 @@ void mxsr2msrTranslator::printVoicesCurrentChordMap ()
         "staff " << (*i).first.first <<
         ", voice " <<  (*i).first.second <<
         ":" <<
-        endl;
+        std::endl;
 
 // * JMI
       S_msrChord chord = (*i).second;
@@ -17225,7 +17223,7 @@ void mxsr2msrTranslator::printVoicesCurrentChordMap ()
 
       if (++i == iEnd) break;
 
-      gLogStream << endl;
+      gLogStream << std::endl;
     } // for
 
     --gIndenter;
@@ -17233,7 +17231,7 @@ void mxsr2msrTranslator::printVoicesCurrentChordMap ()
 
   gLogStream <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" <<
-    endl;
+    std::endl;
 }
 */
 
@@ -17245,11 +17243,11 @@ void mxsr2msrTranslator::finalizeCurrentChord (
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Finalizing current chord START:" <<
-      endl <<
+      std::endl <<
       fCurrentChord <<
-      endl <<
+      std::endl <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -17261,11 +17259,11 @@ void mxsr2msrTranslator::finalizeCurrentChord (
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Finalizing current chord END: " <<
-      endl <<
+      std::endl <<
       fCurrentChord <<
-      endl <<
+      std::endl <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -17278,12 +17276,12 @@ void mxsr2msrTranslator::printCurrentChord ()
 {
   gLogStream <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" <<
-    endl;
+    std::endl;
 
   if (fCurrentChord) {
     gLogStream <<
       "fCurrentChord contains:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -17296,12 +17294,12 @@ void mxsr2msrTranslator::printCurrentChord ()
   else {
     gLogStream <<
      "fCurrentChord is null" <<
-     endl;
+     std::endl;
   }
 
   gLogStream <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" <<
-    endl;
+    std::endl;
 }
 
 //______________________________________________________________________________
@@ -17310,7 +17308,7 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
 {
   // copy note's articulations if any from the first note to chord
 
-  list<S_msrArticulation>
+  std::list<S_msrArticulation>
     noteArticulations =
       note->
         getNoteArticulations ();
@@ -17323,7 +17321,7 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
         articulation->getArticulationKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17337,7 +17335,7 @@ void mxsr2msrTranslator::copyNoteTechnicalsToChord (
 {
   // copy note's technicals if any from the first note to chord
 
-  list<S_msrTechnical>
+  std::list<S_msrTechnical>
     noteTechnicals =
       note->
         getNoteTechnicals ();
@@ -17350,7 +17348,7 @@ void mxsr2msrTranslator::copyNoteTechnicalsToChord (
       technical->getTechnicalKind () <<
       "' from note " << note->asString () <<
       " to chord" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -17364,7 +17362,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
 {
   // copy note's technicals if any from the first note to chord
 
-  list<S_msrTechnicalWithInteger>
+  std::list<S_msrTechnicalWithInteger>
     noteTechnicalWithIntegers =
       note->
         getNoteTechnicalWithIntegers ();
@@ -17377,7 +17375,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
 				technicalWithInteger->getTechnicalWithIntegerKind () <<
 				"' from note " << note->asString () <<
 				" to chord" <<
-				endl;
+				std::endl;
 			}
 #endif
 
@@ -17391,7 +17389,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
 {
   // copy note's technicals if any from the first note to chord
 
-  list<S_msrTechnicalWithFloat>
+  std::list<S_msrTechnicalWithFloat>
     noteTechnicalWithFloats =
       note->
         getNoteTechnicalWithFloats ();
@@ -17404,7 +17402,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
         technicalWithFloat->getTechnicalWithFloatKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17418,7 +17416,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
 {
   // copy note's technicals if any from the first note to chord
 
-  list<S_msrTechnicalWithString>
+  std::list<S_msrTechnicalWithString>
     noteTechnicalWithStrings =
       note->
         getNoteTechnicalWithStrings ();
@@ -17431,7 +17429,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
         technicalWithString->getTechnicalWithStringKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17445,7 +17443,7 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
 {
   // copy note's ornaments if any from the first note to chord
 
-  list<S_msrOrnament>
+  std::list<S_msrOrnament>
     noteOrnaments =
       note->
         getNoteOrnaments ();
@@ -17458,7 +17456,7 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
         msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17473,7 +17471,7 @@ void mxsr2msrTranslator::copyNoteSpannersToChord (
 {
   // copy note's spanners if any from the first note to chord
 
-  list<S_msrSpanner>
+  std::list<S_msrSpanner>
     noteSpanners =
       note->
         getNoteSpanners ();
@@ -17486,7 +17484,7 @@ void mxsr2msrTranslator::copyNoteSpannersToChord (
         spanner->getSpannerKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17514,7 +17512,7 @@ void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
         noteSingleTremolo->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17529,12 +17527,12 @@ void mxsr2msrTranslator::copyNoteDynamicsToChord (
 {
   // copy note's dynamics if any from the first note to chord
 
-  list<S_msrDynamic>
+  std::list<S_msrDynamic>
     noteDynamics =
       note->
         getNoteDynamics ();
 
-  list<S_msrDynamic>::const_iterator i;
+  std::list<S_msrDynamic>::const_iterator i;
   for (
     i=noteDynamics.begin ();
     i!=noteDynamics.end ();
@@ -17548,7 +17546,7 @@ void mxsr2msrTranslator::copyNoteDynamicsToChord (
         msrDynamicKindAsString ((*i)->getDynamicKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17563,12 +17561,12 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
 {
   // copy note's other dynamics if any from the first note to chord
 
-  list<S_msrOtherDynamic>
+  std::list<S_msrOtherDynamic>
     noteOtherDynamics =
       note->
         getNoteOtherDynamics ();
 
-  list<S_msrOtherDynamic>::const_iterator i;
+  std::list<S_msrOtherDynamic>::const_iterator i;
   for (
     i=noteOtherDynamics.begin ();
     i!=noteOtherDynamics.end ();
@@ -17582,7 +17580,7 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17597,12 +17595,12 @@ void mxsr2msrTranslator::copyNoteWordsToChord (
 {
   // copy note's words if any from the first note to chord
 
-  list<S_msrWords>
+  std::list<S_msrWords>
     noteWords =
       note->
         getNoteWords ();
 
-  list<S_msrWords>::const_iterator i;
+  std::list<S_msrWords>::const_iterator i;
   for (
     i=noteWords.begin ();
     i!=noteWords.end ();
@@ -17616,7 +17614,7 @@ void mxsr2msrTranslator::copyNoteWordsToChord (
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17644,7 +17642,7 @@ void mxsr2msrTranslator::copyNoteStemToChord (
         noteStem->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17660,12 +17658,12 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
 {
   // copy note's beams if any from the first note to chord
 
-  list<S_msrBeam>
+  std::list<S_msrBeam>
     noteBeams =
       note->
         getNoteBeams ();
 
-  list<S_msrBeam>::const_iterator i;
+  std::list<S_msrBeam>::const_iterator i;
   for (
     i=noteBeams.begin ();
     i!=noteBeams.end ();
@@ -17679,7 +17677,7 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17691,13 +17689,13 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
     gLogStream <<
       "==> AFTER copying beams to chord:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       chord <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -17710,12 +17708,12 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
 {
   // append link of note's beams if any from the first note to chord
 
-  list<S_msrBeam>
+  std::list<S_msrBeam>
     noteBeams =
       note->
         getNoteBeams ();
 
-  list<S_msrBeam>::const_iterator i;
+  std::list<S_msrBeam>::const_iterator i;
   for (
     i=noteBeams.begin ();
     i!=noteBeams.end ();
@@ -17730,7 +17728,7 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
         beam->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17751,13 +17749,13 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
     gLogStream <<
       "==> AFTER appending note's beams links to chord:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       chord <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -17783,7 +17781,7 @@ void mxsr2msrTranslator::copyNoteTieToChord (
         noteTie->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17795,13 +17793,13 @@ void mxsr2msrTranslator::copyNoteTieToChord (
     if (gGlobalTracingOahGroup->getTraceTies ()) {
     gLogStream <<
       "==> AFTER appending tie to chord:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       chord <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -17815,12 +17813,12 @@ void mxsr2msrTranslator::copyNoteSlursToChord (
 {
   // copy note's slurs if any from the first note to chord
 
-  list<S_msrSlur>
+  std::list<S_msrSlur>
     noteSlurs =
       note->
         getNoteSlurs ();
 
-  list<S_msrSlur>::const_iterator i;
+  std::list<S_msrSlur>::const_iterator i;
   for (
     i=noteSlurs.begin ();
     i!=noteSlurs.end ();
@@ -17834,7 +17832,7 @@ void mxsr2msrTranslator::copyNoteSlursToChord (
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17850,12 +17848,12 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 {
   // append link of note's slurs if any from the first note to chord
 
-  list<S_msrSlur>
+  std::list<S_msrSlur>
     noteSlurs =
       note->
         getNoteSlurs ();
 
-  list<S_msrSlur>::const_iterator i;
+  std::list<S_msrSlur>::const_iterator i;
   for (
     i=noteSlurs.begin ();
     i!=noteSlurs.end ();
@@ -17870,7 +17868,7 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
         slur->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17891,13 +17889,13 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
     gLogStream <<
       "==> AFTER appending note's slurs links to chord:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       chord <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -17910,7 +17908,7 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
 {
   // copy note's ligatures if any from the first note to chord
 
-  list<S_msrLigature>
+  std::list<S_msrLigature>
     noteLigatures =
       note->
         getNoteLigatures ();
@@ -17923,7 +17921,7 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
         ligature->getLigatureKind () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17938,12 +17936,12 @@ void mxsr2msrTranslator::copyNotePedalsToChord (
 {
   // copy note's pedals if any from the first note to chord
 
-  list<S_msrPedal>
+  std::list<S_msrPedal>
     notePedals =
       note->
         getNotePedals ();
 
-  list<S_msrPedal>::const_iterator i;
+  std::list<S_msrPedal>::const_iterator i;
   for (S_msrPedal pedal : notePedals) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePedals ()) {
@@ -17952,7 +17950,7 @@ void mxsr2msrTranslator::copyNotePedalsToChord (
         pedal->asString () <<
         "' from note " << note->asString () <<
         " to chord" << chord->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -17967,12 +17965,12 @@ void mxsr2msrTranslator::copyNoteSlashesToChord (
 {
   // copy note's slashes if any from the first note to chord
 
-  list<S_msrSlash>
+  std::list<S_msrSlash>
     noteSlashes =
       note->
         getNoteSlashes ();
 
-  list<S_msrSlash>::const_iterator i;
+  std::list<S_msrSlash>::const_iterator i;
   for (
     i=noteSlashes.begin ();
     i!=noteSlashes.end ();
@@ -17986,7 +17984,7 @@ void mxsr2msrTranslator::copyNoteSlashesToChord (
         (*i)->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18001,12 +17999,12 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
 {
   // copy note's wedges if any from the first note to chord
 
-  list<S_msrWedge>
+  std::list<S_msrWedge>
     noteWedges =
       note->
         getNoteWedges ();
 
-  list<S_msrWedge>::const_iterator i;
+  std::list<S_msrWedge>::const_iterator i;
   for (
     i=noteWedges.begin ();
     i!=noteWedges.end ();
@@ -18021,7 +18019,7 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
         msrWedgeKindAsString (wedge->getWedgeKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18036,12 +18034,12 @@ void mxsr2msrTranslator::copyNoteSegnosToChord (
 {
   // copy note's segnos if any from the first note to chord
 
-  list<S_msrSegno>
+  std::list<S_msrSegno>
     noteSegnos =
       note->
         getNoteSegnos ();
 
-  list<S_msrSegno>::const_iterator i;
+  std::list<S_msrSegno>::const_iterator i;
   for (
     i=noteSegnos.begin ();
     i!=noteSegnos.end ();
@@ -18055,7 +18053,7 @@ void mxsr2msrTranslator::copyNoteSegnosToChord (
         (*i)->asShortString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18070,12 +18068,12 @@ void mxsr2msrTranslator::copyNoteDalSegnosToChord (
 {
   // copy note's dal segnos if any from the first note to chord
 
-  list<S_msrDalSegno>
+  std::list<S_msrDalSegno>
     noteDalSegnos =
       note->
         getNoteDalSegnos ();
 
-  list<S_msrDalSegno>::const_iterator i;
+  std::list<S_msrDalSegno>::const_iterator i;
   for (
     i=noteDalSegnos.begin ();
     i!=noteDalSegnos.end ();
@@ -18089,7 +18087,7 @@ void mxsr2msrTranslator::copyNoteDalSegnosToChord (
         (*i)->asShortString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18104,12 +18102,12 @@ void mxsr2msrTranslator::copyNoteCodasToChord (
 {
   // copy note's codas if any from the first note to chord
 
-  list<S_msrCoda>
+  std::list<S_msrCoda>
     noteCodas =
       note->
         getNoteCodas ();
 
-  list<S_msrCoda>::const_iterator i;
+  std::list<S_msrCoda>::const_iterator i;
   for (
     i=noteCodas.begin ();
     i!=noteCodas.end ();
@@ -18123,7 +18121,7 @@ void mxsr2msrTranslator::copyNoteCodasToChord (
         (*i)->asShortString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18151,7 +18149,7 @@ void mxsr2msrTranslator::copyNoteOctaveShiftToChord (
         noteOctaveShift->asString () <<
         "' from note " << note->asString () <<
         " to chord" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18179,7 +18177,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
         "' from note " << note->asString () <<
         " to chord '" << chord->asString () <<
         "'" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18201,7 +18199,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
         "' from note " << note->asString () <<
         " to chord '" << chord->asString () <<
         "'" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18231,7 +18229,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
         "' from note " << note->asString () <<
         " to chord '" << chord->asString () <<
         "'" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18264,7 +18262,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
         "' from note " << note->asString () <<
         " to chord '" << chord->asString () <<
         "'" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18290,12 +18288,12 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 {
   // copy note's harmony if any from the first note to chord
 
-  const list<S_msrHarmony>&
+  const std::list<S_msrHarmony>&
     noteHarmoniesList =
       note->getNoteHarmoniesList ();
 
   if (noteHarmoniesList.size ()) {
-    list<S_msrHarmony>::const_iterator i;
+    std::list<S_msrHarmony>::const_iterator i;
     for (i=noteHarmoniesList.begin (); i!=noteHarmoniesList.end (); ++i) {
       S_msrHarmony harmony = (*i);
 
@@ -18307,7 +18305,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
           "' from note " << note->asString () <<
           " to chord '" << chord->asString () <<
           "'" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -18416,7 +18414,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
       "' tuplet with first note " <<
       firstNote->
         asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -18454,7 +18452,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
         fCurrentStaffNumberToInsertInto, // fCurrentMusicXMLStaffNumber,
         fCurrentMusicXMLVoiceNumber);
 
-  // add note as first note of the stack top tuplet
+  // add note as first note of the std::stack top tuplet
   tuplet->
     appendNoteToTuplet (
       firstNote,
@@ -18470,7 +18468,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
       " to tuplet '" <<
       tuplet->asString () <<
        "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -18487,8 +18485,8 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
     gLogStream <<
       "++> pushing tuplet '" <<
       tuplet->asString () <<
-      "' to tuplets stack" <<
-      endl;
+      "' to tuplets std::stack" <<
+      std::endl;
   }
 #endif
 
@@ -18518,7 +18516,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
   // for chords in tuplets handling
 // JMI  fLastHandledTupletInVoiceMap [currentVoice] = tuplet;
   fLastHandledTupletInVoiceMap [
-    make_pair (
+    std::make_pair (
       fCurrentMusicXMLStaffNumber, // JMI fCurrentStaffNumberToInsertInto,
       fCurrentMusicXMLVoiceNumber)
     ] =
@@ -18541,7 +18539,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
     gLogStream <<
       "mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack(), " <<
       "line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -18560,7 +18558,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
         fCurrentStaffNumberToInsertInto, // fCurrentMusicXMLStaffNumber ??? JMI
         fCurrentMusicXMLVoiceNumber);
 
-  // get tuplet from top of tuplet stack
+  // get tuplet from top of tuplet std::stack
   S_msrTuplet
     tuplet =
       fTupletsStack.front ();
@@ -18578,29 +18576,29 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "==> adding last note " << lastNote->asString () <<
-      " to tuplets stack top " <<
+      " to tuplets std::stack top " <<
       fTupletsStack.front ()->asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
   tuplet->appendNoteToTuplet (lastNote);
 */
 
-  // pop from the tuplets stack
+  // pop from the tuplets std::stack
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Popping tuplet:" <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       tuplet;
     --gIndenter;
     gLogStream <<
-      " from tuplets stack" <<
+      " from tuplets std::stack" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -18613,11 +18611,11 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
       gLogStream <<
         "=== adding nested tuplet '" <<
       tuplet->asString () <<
-        "' to current stack top tuplet '" <<
+        "' to current std::stack top tuplet '" <<
       fTupletsStack.front ()->asString () <<
       "'" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -18636,7 +18634,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
       currentVoice->getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -18674,7 +18672,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
       gLogStream <<
         "Attaching current articulations to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18689,7 +18687,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
           "Attaching articulation '" <<
           art->getArticulationKind () <<
           "' to note " << note->asString () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -18714,7 +18712,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
       gLogStream <<
         "Attaching current technicals to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18729,7 +18727,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
           "Attaching technical '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -18754,7 +18752,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
       gLogStream <<
         "Attaching current technical with integers to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18769,7 +18767,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
           "Attaching technical with integer '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -18794,7 +18792,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
       gLogStream <<
         "Attaching current technical with floats to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18809,7 +18807,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
           "Attaching technical with integer '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -18834,7 +18832,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
       gLogStream <<
         "Attaching current technical with strings to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18846,10 +18844,10 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
         gLogStream <<
-          "Attaching technical with string '" <<
+          "Attaching technical with std::string '" <<
           tech->asString () <<
           "' to note " << note->asString () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -18874,7 +18872,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
       gLogStream <<
         "Attaching current ornaments to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18889,7 +18887,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
           "Attaching ornament '" <<
           msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
           "' to note " << note->asString () <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -18914,7 +18912,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
       gLogStream <<
         "Attaching current spanners to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -18971,7 +18969,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
             "Attaching spanner '" <<
             spanner->asShortString () <<
             "' to note " << note->asString () <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -18993,7 +18991,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
             "Spanner start amd stop on one and the same note' to note " <<
             note->asString () <<
             ", delaying 'stop' until next note" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -19005,7 +19003,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
       }
     } // while
 
-    // append delayed stop spanner if any again to the list
+    // append delayed stop spanner if any again to the std::list
     if (delayedStopSpanner) {
       fCurrentSpannersList.push_back (
         delayedStopSpanner);
@@ -19025,7 +19023,7 @@ void mxsr2msrTranslator::attachCurrentSingleTremoloToNote (
       gLogStream <<
         "Attaching current singleTremolo to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19055,11 +19053,11 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
       gLogStream <<
         "Attaching current articulations to chord " <<
         chord->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
-    list<S_msrArticulation>::const_iterator i;
+    std::list<S_msrArticulation>::const_iterator i;
     for (
       i=fCurrentArticulations.begin ();
       i!=fCurrentArticulations.end ();
@@ -19070,7 +19068,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
         gLogStream <<
           "Attaching articulation " <<  (*i) <<
           " to chord " << chord <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -19093,11 +19091,11 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
       gLogStream <<
         "Attaching current ornaments to chord " <<
         chord->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
-    list<S_msrOrnament>::const_iterator i;
+    std::list<S_msrOrnament>::const_iterator i;
     for (
       i=fCurrentOrnamentsList.begin ();
       i!=fCurrentOrnamentsList.end ();
@@ -19108,7 +19106,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
         gLogStream <<
           "Attaching ornament " <<  (*i) << " to chord " <<
           chord <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -19131,7 +19129,7 @@ void mxsr2msrTranslator::attachPendingTemposToVoice (
         "Attaching pending tempos to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19159,7 +19157,7 @@ void mxsr2msrTranslator::attachPendingTemposToPart (
         "Attaching pending tempos to part \""  <<
         part->getPartName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19187,7 +19185,7 @@ void mxsr2msrTranslator::attachPendingBarLinesToVoice (
         "Attaching pending barlines to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19218,7 +19216,7 @@ void mxsr2msrTranslator::attachPendingBarLinesToPart (
         "Attaching pending barlines to part \""  <<
         part->getPartName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19249,7 +19247,7 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
         "Attaching pending rehearsals to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19277,7 +19275,7 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
         "Attaching pending rehearsals to part \""  <<
         part->getPartName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19305,7 +19303,7 @@ void mxsr2msrTranslator::attachLineBreaksToVoice (
         "Attaching pending line breaks to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19318,7 +19316,7 @@ void mxsr2msrTranslator::attachLineBreaksToVoice (
       voice->
         appendLineBreakToVoice (lineBreak);
 
-      // remove it from the list
+      // remove it from the std::list
       fPendingLineBreaksList.pop_front ();
     } // while
   }
@@ -19335,7 +19333,7 @@ void mxsr2msrTranslator::attachLineBreaksToPart (
         "Attaching pending line breaks to part \""  <<
         part->getPartName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19348,7 +19346,7 @@ void mxsr2msrTranslator::attachLineBreaksToPart (
       part->
         appendLineBreakToPart (lineBreak);
 
-      // remove it from the list
+      // remove it from the std::list
       fPendingLineBreaksList.pop_front ();
     } // while
   }
@@ -19365,7 +19363,7 @@ void mxsr2msrTranslator::attachPageBreaksToVoice (
         "Attaching pending page breaks to voice \""  <<
         voice->getVoiceName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19378,7 +19376,7 @@ void mxsr2msrTranslator::attachPageBreaksToVoice (
       voice->
         appendPageBreakToVoice (pageBreak);
 
-      // remove it from the list
+      // remove it from the std::list
       fPendingPageBreaksList.pop_front ();
     } // while
   }
@@ -19395,7 +19393,7 @@ void mxsr2msrTranslator::attachPageBreaksToPart (
         "Attaching pending page breaks to part \""  <<
         part->getPartName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19408,7 +19406,7 @@ void mxsr2msrTranslator::attachPageBreaksToPart (
       part->
         appendPageBreakToPart (pageBreak);
 
-      // remove it from the list
+      // remove it from the std::list
       fPendingPageBreaksList.pop_front ();
     } // while
   }
@@ -19425,7 +19423,7 @@ void mxsr2msrTranslator::attachPendingSegnosToNote (
       gLogStream <<
         "Attaching pending segno to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19453,7 +19451,7 @@ void mxsr2msrTranslator::attachPendingDalSegnosToNote (
       gLogStream <<
         "Attaching pending dal segno to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19480,7 +19478,7 @@ void mxsr2msrTranslator::attachPendingDalSegnosToChord (
       gLogStream <<
         "Attaching pending dal segno to chord " <<
         chord->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19508,7 +19506,7 @@ void mxsr2msrTranslator::attachPendingCodasToNote (
       gLogStream <<
         "Attaching pending codas to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19536,7 +19534,7 @@ void mxsr2msrTranslator::attachPendingCrescDecrescsToNote (
       gLogStream <<
         "Attaching pending crescDecresc to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19564,7 +19562,7 @@ void mxsr2msrTranslator::attachPendingEyeGlassesToNote (
       gLogStream <<
         "Attaching pending eyeglasses to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19592,7 +19590,7 @@ void mxsr2msrTranslator::attachPendingDampsToNote (
       gLogStream <<
         "Attaching pending damps to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19620,7 +19618,7 @@ void mxsr2msrTranslator::attachPendingDampAllsToNote (
       gLogStream <<
         "Attaching pending damp alls to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19648,7 +19646,7 @@ void mxsr2msrTranslator::attachPendingOctaveShiftsToNote (
       gLogStream <<
         "Attaching pending octave shifts to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19686,7 +19684,7 @@ void mxsr2msrTranslator::attachPendingScordaturasToNote (
       gLogStream <<
         "Attaching pending scordaturas to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19716,7 +19714,7 @@ void mxsr2msrTranslator::attachPendingDynamicsToNote (
       gLogStream <<
         "Attaching pending dynamics to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19724,7 +19722,7 @@ void mxsr2msrTranslator::attachPendingDynamicsToNote (
       if (gGlobalMxsr2msrOahGroup->getDelayRestsDynamics ()) {
         gLogStream <<
           "Delaying dynamics attached to a rest until next note" <<
-          endl;
+          std::endl;
 
         delayAttachment = true;
       }
@@ -19732,7 +19730,7 @@ void mxsr2msrTranslator::attachPendingDynamicsToNote (
       else {
 #ifdef TRACING_IS_ENABLED
        if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-          stringstream s;
+          std::stringstream s;
 
           int numberOfDynamics = fPendingDynamicxList.size ();
 
@@ -19782,7 +19780,7 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
       gLogStream <<
         "Attaching pending other dynamics to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19790,7 +19788,7 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
       if (gGlobalMxsr2msrOahGroup->getDelayRestsDynamics ()) {
         gLogStream <<
           "Delaying dynamics attached to a rest until next note" <<
-          endl;
+          std::endl;
 
         delayAttachment = true;
       }
@@ -19798,7 +19796,7 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
       else {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceDynamics ()) {
-          stringstream s;
+          std::stringstream s;
 
           int numberOfOtherDynamics = fPendingOtherDynamicxList.size ();
 
@@ -19848,7 +19846,7 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
       gLogStream <<
         "Attaching pending words to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19856,7 +19854,7 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
       if (gGlobalMxsr2msrOahGroup->getDelayRestsWords ()) {
         gLogStream <<
           "Delaying word(s) attached to a rest until next note" <<
-          endl;
+          std::endl;
 
         delayAttachment = true;
       }
@@ -19864,7 +19862,7 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
       else {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceWords ()) {
-          stringstream s;
+          std::stringstream s;
 
           int numberOfWords = fPendingWordsList.size ();
 
@@ -19914,7 +19912,7 @@ void mxsr2msrTranslator::attachPendingBeamsToNote (
       gLogStream <<
         "Attaching pending beams to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19922,7 +19920,7 @@ void mxsr2msrTranslator::attachPendingBeamsToNote (
       if (gGlobalMxsr2msrOahGroup->getDelayRestsBeams ()) {
         gLogStream <<
           "Delaying beam attached to a rest until next note" <<
-          endl;
+          std::endl;
 
         delayAttachment = true;
       }
@@ -19930,7 +19928,7 @@ void mxsr2msrTranslator::attachPendingBeamsToNote (
       else {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceBeams ()) {
-          stringstream s;
+          std::stringstream s;
 
           int numberOfBeams = fPendingBeamsList.size ();
 
@@ -19980,7 +19978,7 @@ void mxsr2msrTranslator::attachPendingSlursToNote (
       gLogStream <<
         "Attaching pending slurs to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -19988,13 +19986,13 @@ void mxsr2msrTranslator::attachPendingSlursToNote (
       if (gGlobalMxsr2msrOahGroup->getDelayRestsSlurs ()) {
         gLogStream <<
           "Delaying slur attached to a rest until next note" <<
-          endl;
+          std::endl;
 
         delayAttachment = true;
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         int numberOfSlurs = fPendingSlursList.size ();
 
@@ -20047,7 +20045,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
           "ligature", "ligatures") <<
         " to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -20057,7 +20055,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
       if (gGlobalMxsr2msrOahGroup->getDelayRestsLigatures ()) {
         gLogStream <<
           "Delaying ligature attached to a rest until next note" <<
-          endl;
+          std::endl;
 
         delayAttachment = true;
       }
@@ -20065,7 +20063,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
       else {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             mfSingularOrPluralWithoutNumber (
@@ -20092,7 +20090,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
     if (! delayAttachment) {
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             mfSingularOrPluralWithoutNumber (
@@ -20118,7 +20116,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
       // append ligatures to note only if they belong to a suitable voice,
       // i.e. above goes to voice 1 or 3, and below to voice 2 or 4
 
-      list<S_msrLigature>::iterator
+      std::list<S_msrLigature>::iterator
         iBegin = fPendingLigaturesList.begin (),
         iEnd   = fPendingLigaturesList.end (),
         i      = iBegin;
@@ -20131,7 +20129,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
           gLogStream <<
             "--> ligature: " <<
             ligature->asString () <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -20196,7 +20194,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //                 noteVoice->getVoiceName () <<
 //                 "\"" <<
                 ", line " << ligature->getInputLineNumber () <<
-                endl;
+                std::endl;
             }
 #endif
 
@@ -20225,7 +20223,7 @@ void mxsr2msrTranslator::attachPendingPedalsToNote (
       gLogStream <<
         "Attaching pending pedals to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -20233,13 +20231,13 @@ void mxsr2msrTranslator::attachPendingPedalsToNote (
       if (gGlobalMxsr2msrOahGroup->getDelayRestsPedals ()) {
         gLogStream <<
           "Delaying pedal attached to a rest until next note" <<
-          endl;
+          std::endl;
 
         delayAttachment = true;
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         int numberOfPedals = fPendingPedalsList.size ();
 
@@ -20287,7 +20285,7 @@ void mxsr2msrTranslator::attachPendingSlashesToNote (
       gLogStream <<
         "Attaching pending slashes to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -20295,13 +20293,13 @@ void mxsr2msrTranslator::attachPendingSlashesToNote (
       if (gGlobalMxsr2msrOahGroup->getDelayRestsSlashes ()) {
         gLogStream <<
           "Delaying slash attached to a rest until next note" <<
-      endl;
+      std::endl;
 
         delayAttachment = true;
       }
 
       else {
-        stringstream s;
+        std::stringstream s;
 
         int numberOfSlashes = fPendingSlashesList.size ();
 
@@ -20349,7 +20347,7 @@ void mxsr2msrTranslator::attachPendingWedgesToNote (
       gLogStream <<
         "Attaching pending wedges to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -20357,7 +20355,7 @@ void mxsr2msrTranslator::attachPendingWedgesToNote (
       if (gGlobalMxsr2msrOahGroup->getDelayRestsWedges ()) {
         gLogStream <<
           "Delaying wedge attached to a rest until next note" <<
-      endl;
+      std::endl;
 
         delayAttachment = true;
       }
@@ -20365,7 +20363,7 @@ void mxsr2msrTranslator::attachPendingWedgesToNote (
       else {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceWedges ()) {
-          stringstream s;
+          std::stringstream s;
 
           int numberOfWedges = fPendingWedgesList.size ();
 
@@ -20413,7 +20411,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
       gLogStream <<
         "Attaching pending glissandos to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -20444,8 +20442,8 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                 fCurrentStaffNumberToInsertInto, // JMI fCurrentMusicXMLStaffNumber,
                 fCurrentMusicXMLVoiceNumber);
 
-          // get the voice's stanzas map
-          const map<string, S_msrStanza>&
+          // get the voice's stanzas std::map
+          const std::map<std::string, S_msrStanza>&
             voiceStanzasMap =
               voice->
                 getVoiceStanzasMap ();
@@ -20459,7 +20457,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                   ", fCurrentNoteHasLyrics = " <<
                   fCurrentNoteHasLyrics <<
                   ", line " << inputLineNumber <<
-                  endl;
+                  std::endl;
               }
 #endif
 
@@ -20475,12 +20473,12 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                   note->asString () <<
                   "' that has a glissando stop and no lyrics " <<
                   ", line " << inputLineNumber <<
-                  endl;
+                  std::endl;
               }
 #endif
 
               for (
-                map<string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+                std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
                 i != voiceStanzasMap.end ();
                 ++i
               ) {
@@ -20496,7 +20494,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                       fCurrentNoteSoundingWholeNotesFromDuration,
                       stanza);
 
-                // append syllable to current note's syllables list
+                // append syllable to current note's syllables std::list
                 fCurrentNoteSyllables.push_back (
                   syllable);
 
@@ -20528,7 +20526,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
       gLogStream <<
         "Attaching pending slides to note " <<
         note->asString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -20559,8 +20557,8 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                 fCurrentStaffNumberToInsertInto, // JMI fCurrentMusicXMLStaffNumber,
                 fCurrentMusicXMLVoiceNumber);
 
-          // get the voice's stanzas map
-          const map<string, S_msrStanza>&
+          // get the voice's stanzas std::map
+          const std::map<std::string, S_msrStanza>&
             voiceStanzasMap =
               voice->
                 getVoiceStanzasMap ();
@@ -20574,7 +20572,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                   ", fCurrentNoteHasLyrics = " <<
                   fCurrentNoteHasLyrics <<
                   ", line " << inputLineNumber <<
-                  endl;
+                  std::endl;
               }
 #endif
 
@@ -20590,12 +20588,12 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                   note->asString () <<
                   "' that has a slide stop and no lyrics " <<
                   ", line " << inputLineNumber <<
-                  endl;
+                  std::endl;
               }
 #endif
 
               for (
-                map<string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+                std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
                 i != voiceStanzasMap.end ();
                 ++i
               ) {
@@ -20611,7 +20609,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                       fCurrentNoteSoundingWholeNotesFromDuration,
                       stanza);
 
-                // append syllable to current note's syllables list
+                // append syllable to current note's syllables std::list
                 fCurrentNoteSyllables.push_back (
                   syllable);
 
@@ -20642,7 +20640,7 @@ void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
 //     ", fPendingBarLinesList.size () = " << fPendingBarLinesList.size () <<
 //     ", fPendingLineBreaksList.size () = " << fPendingLineBreaksList.size () <<
 //     ", fPendingPageBreaksList.size () = " << fPendingPageBreaksList.size () <<
-//     endl;
+//     std::endl;
 //     */
 //
 //   // the elements pending since before the note
@@ -20675,7 +20673,7 @@ void mxsr2msrTranslator::attachPendingPartLevelElementsToPart ( // JMI v0.9.63
     ", fPendingBarLinesList.size () = " << fPendingBarLinesList.size () <<
     ", fPendingLineBreaksList.size () = " << fPendingLineBreaksList.size () <<
     ", fPendingPageBreaksList.size () = " << fPendingPageBreaksList.size () <<
-    endl;
+    std::endl;
     */
 
   // the elements pending since before the note // JMI
@@ -20797,19 +20795,19 @@ S_msrNote mxsr2msrTranslator::createNote (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "(1):" <<
-          endl <<
+          std::endl <<
           "fCurrentNoteGraphicDurationKind = " <<
           msrDurationKindAsString (
             fCurrentNoteGraphicDurationKind) <<
-          endl <<
+          std::endl <<
           "fCurrentNoteDisplayWholeNotesFromType = " <<
           fCurrentNoteDisplayWholeNotesFromType <<
-          endl <<
+          std::endl <<
           "fCurrentNoteDotsNumber = " <<
           fCurrentNoteDotsNumber <<
-          endl << endl;
+          std::endl << std::endl;
       }
 #endif
 
@@ -20833,18 +20831,18 @@ S_msrNote mxsr2msrTranslator::createNote (
 #ifdef TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
             gLogStream <<
-              endl <<
+              std::endl <<
               "(2):" <<
-              endl <<
+              std::endl <<
               "fCurrentNoteDisplayWholeNotesFromType = " <<
               fCurrentNoteDisplayWholeNotesFromType <<
-              endl <<
+              std::endl <<
               "wholeNotesIncrement = " <<
               wholeNotesIncrement <<
-              endl <<
+              std::endl <<
               "dots = " <<
               dots <<
-              endl << endl;
+              std::endl << std::endl;
           }
 #endif
         } // while
@@ -20853,19 +20851,19 @@ S_msrNote mxsr2msrTranslator::createNote (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "(3):" <<
-          endl <<
+          std::endl <<
           "fCurrentNoteGraphicDurationKind = " <<
           msrDurationKindAsString (
             fCurrentNoteGraphicDurationKind) <<
-          endl <<
+          std::endl <<
           "fCurrentNoteDisplayWholeNotesFromType = " <<
           fCurrentNoteDisplayWholeNotesFromType <<
-          endl <<
+          std::endl <<
           "fCurrentNoteDotsNumber = " <<
           fCurrentNoteDotsNumber <<
-          endl << endl;
+          std::endl << std::endl;
       }
 #endif
   } // switch
@@ -20874,82 +20872,82 @@ S_msrNote mxsr2msrTranslator::createNote (
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Gathered note informations:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     const int fieldWidth = 42;
 
-    gLogStream << left <<
-      setw (fieldWidth) <<
+    gLogStream << std::left <<
+      std::setw (fieldWidth) <<
       "CurrentNoteSoundingWholeNotesFromDuration" << " = " <<
       fCurrentNoteSoundingWholeNotesFromDuration <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentNoteGraphicDuration" << " : " <<
         msrDurationKindAsString (
           fCurrentNoteGraphicDurationKind) <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentNoteDotsNumber" << " : " <<
         fCurrentNoteDotsNumber <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentNoteDisplayWholeNotesFromType" << " = " <<
       fCurrentNoteDisplayWholeNotesFromType <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentNoteIsARest" << " = " <<
       fCurrentNoteIsARest <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentDivisionsPerQuarterNote" << " = " <<
       fCurrentDivisionsPerQuarterNote <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentNotePrintObjectKind" << " = " <<
       fCurrentNotePrintObjectKind <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentNoteRGB" << " = " <<
       fCurrentNoteRGB <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentNoteAlpha" << " = " <<
       fCurrentNoteAlpha <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentMusicXMLStaffNumber =" << " = " <<
       fCurrentMusicXMLStaffNumber <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentMusicXMLStaffNumber" << " = " <<
       fCurrentMusicXMLStaffNumber <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentStaffNumberToInsertInto" << " = " <<
       fCurrentStaffNumberToInsertInto <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fPreviousNoteMusicXMLStaffNumber" << " = " <<
       fPreviousNoteMusicXMLStaffNumber <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentMusicXMLVoiceNumber" << " = " <<
       fCurrentMusicXMLVoiceNumber <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "inputLineNumber" << " = " <<
       inputLineNumber <<
-      endl << endl;
+      std::endl << std::endl;
 
     --gIndenter;
   }
@@ -20968,7 +20966,7 @@ S_msrNote mxsr2msrTranslator::createNote (
   ) {
     // double tremolo note
     if (fCurrentNoteGraphicDurationKind == msrDurationKind::kDuration_NO_) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "double tremolo note lacks a <type/>"; // JMI a completer
@@ -21083,13 +21081,13 @@ S_msrNote mxsr2msrTranslator::createNote (
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
     gLogStream <<
       "Creating note:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       newNote <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -21154,7 +21152,7 @@ void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
       case msrNoteKind::kNoteRegularInMeasure:
       case msrNoteKind::kNoteRegularInChord:
         if (! fCurrentNoteIsAGraceNote) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "note duration inconsistency: divisions indicates " <<
@@ -21199,7 +21197,7 @@ void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
   // attach the beams if any to the note
   if (fPendingBeamsList.size ()) {
     for (
-      list<S_msrBeam>::const_iterator i=fPendingBeamsList.begin ();
+      std::list<S_msrBeam>::const_iterator i=fPendingBeamsList.begin ();
       i!=fPendingBeamsList.end ();
       ++i
     ) {
@@ -21348,7 +21346,7 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
           " to staff " << fCurrentMusicXMLStaffNumber <<
           ", \"" << staffToChangeTo->getStaffName () << "\"" <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -21377,7 +21375,7 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
           " to staff " << fCurrentMusicXMLStaffNumber <<
           ", \"" << staffToChangeTo->getStaffName () << "\"" <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -21470,7 +21468,7 @@ void mxsr2msrTranslator::handleNoteItself (
       "--> fOnGoingChord: " <<
       fOnGoingChord <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -21501,27 +21499,27 @@ void mxsr2msrTranslator::handleNoteItself (
       newNote->asShortString () <<
       " as last note found in voice " <<
       voiceToInsertInto->getVoiceName () <<
-      endl <<
+      std::endl <<
       "-->  fCurrentMusicXMLStaffNumber = " <<
       fCurrentMusicXMLStaffNumber <<
-      endl <<
+      std::endl <<
       "--> fCurrentMusicXMLVoiceNumber  = " <<
       fCurrentMusicXMLVoiceNumber <<
-      endl <<
+      std::endl <<
       / * JMI
       "--> staff name  = " <<
       staff->getStaffName () <<
-      endl <<
+      std::endl <<
       * /
       "--> voice name  = " <<
       voiceToInsertInto->getVoiceName () <<
-      endl;
+      std::endl;
       */
   }
 #endif
 
   fVoicesLastMetNoteMap [
-    make_pair (
+    std::make_pair (
       fCurrentStaffNumberToInsertInto, // JMI fCurrentSequenceStaffNumber,
       fCurrentMusicXMLVoiceNumber)
     ] =
@@ -21546,22 +21544,22 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
     if (gGlobalMxsrOahGroup->getTraceBackup ()) {
       gLogStream <<
         "Attaching pending grace notes group to current non-grace note upon backup" <<
-        endl;
+        std::endl;
     }
 
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
       gLogStream <<
-        endl <<
+        std::endl <<
         "fCurrentGraceNotes IS NOT NULL upon <backup/>" << // JMI
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
 
       gLogStream <<
         "+++++++++++++++++ fPendingGraceNotesGroup:" <<
-        endl <<
+        std::endl <<
         fPendingGraceNotesGroup <<
         "+++++++++++++++++" <<
-        endl;
+        std::endl;
 
 
 //     // fetch the voice
@@ -21579,7 +21577,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //       // JMI might prove not precise enough???
 //   //      fVoicesLastMetNoteMap [currentVoice];
 //         fVoicesLastMetNoteMap [
-//           make_pair (
+//           std::make_pair (
 //             fCurrentStaffNumberToInsertInto,
 //             fCurrentMusicXMLVoiceNumber)
 //           ];
@@ -21593,10 +21591,10 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 #ifdef TRACING_IS_ENABLED
       gLogStream <<
         "+++++++++++++++++ fCurrentNonGraceNote:" <<
-        endl <<
+        std::endl <<
         fCurrentNonGraceNote <<
         "+++++++++++++++++" <<
-        endl;
+        std::endl;
 #endif
 
       // set the pending grace notes group's kind to 'after'
@@ -21611,14 +21609,14 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "cannot find voice to insert after grace notes group into: " <<
         "chordFirstNote is null" <<
         ", fCurrentStaffNumberToInsertInto = " <<
         fCurrentStaffNumberToInsertInto <<
-        endl <<
+        std::endl <<
         ", fCurrentMusicXMLVoiceNumber = " <<
         fCurrentMusicXMLVoiceNumber;
 
@@ -21646,7 +21644,7 @@ void mxsr2msrTranslator::handleBackup (
       fCurrentBackupDivisions <<
       ", fCurrentNonGraceNote: " <<
       fCurrentNonGraceNote->asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -21660,7 +21658,7 @@ void mxsr2msrTranslator::handleBackup (
       ", fCurrentMusicXMLVoiceNumber: " <<
       fCurrentMusicXMLVoiceNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -21704,7 +21702,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
     gLogStream <<
       "--> End visiting S_note" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -21748,10 +21746,10 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   }
 
   /* JMI
-  map<pair<int, int>, S_msrNote>::iterator
+  std::map<std::pair<int, int>, S_msrNote>::iterator
     it =
       fVoicesLastMetNoteMap.find (
-        make_pair (
+        std::make_pair (
           fPreviousNoteMusicXMLStaffNumber,
           fCurrentMusicXMLVoiceNumber)); // JMI ???
 
@@ -21809,7 +21807,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
         currentNoteVoice->getVoiceName () <<
         "\"" <<
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -21829,7 +21827,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       ", fCurrentMusicXMLVoiceNumber: " <<
       fCurrentMusicXMLVoiceNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -21867,7 +21865,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       "\"" <<
       */
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -21895,7 +21893,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
       ", fCurrentMusicXMLVoiceNumber: " <<
       fCurrentMusicXMLVoiceNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -21916,7 +21914,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
   // CAUTION JMI v0.9.66
   // permuted the order of populateNote() and handleNoteItself()
-  // to have newNote's harmonies list already populated if relevant
+  // to have newNote's harmonies std::list already populated if relevant
   // when newNote is appended to the voice,
   // so as to compute the harmonies positions in the measure.
 
@@ -21971,11 +21969,11 @@ void mxsr2msrTranslator::handlePendingHarmonies (
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "handlePendingHarmonies(), newNote: " <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       newNote <<
-      endl;
+      std::endl;
     --gIndenter;
   }
 #endif
@@ -22029,7 +22027,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     harmony->
       setHarmonyUpLinkToNote (newNote);
 
-    // append the harmony to newNote's harmonies list
+    // append the harmony to newNote's harmonies std::list
     newNote->
       appendHarmonyToNoteHarmoniesList (
         harmony);
@@ -22061,7 +22059,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     // don't append the harmony to the part harmonies voice,
     // this will be done when the note itself is appended to the voice
 
-    // remove the harmony from the list
+    // remove the harmony from the std::list
     fPendingHarmoniesList.pop_front ();
   } // while
 }
@@ -22075,11 +22073,11 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
   if (gGlobalTracingOahGroup->getTraceFiguredBassDetails ()) {
     gLogStream <<
       "handlePendingFiguredBasses(), newNote: " <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       newNote <<
-      endl;
+      std::endl;
     --gIndenter;
   }
 #endif
@@ -22133,7 +22131,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
     figuredBass->
       setFiguredBassUpLinkToNote (newNote);
 
-    // append the figured bass to newNote's figured bass elements list
+    // append the figured bass to newNote's figured bass elements std::list
     newNote->
       appendFiguredBassToNoteFiguredBassesList (
         figuredBass);
@@ -22168,7 +22166,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
     // don't append the figured bass to the part figured bass voice
     // before the note itself has been appended to the voice
 
-    // remove the figured bass from the list
+    // remove the figured bass from the std::list
     fPendingFiguredBassesList.pop_front ();
   } // while
 }
@@ -22199,7 +22197,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
       gLogStream <<
         "handleNonChordNorTupletNoteOrRest(), fCurrentNonGraceNote: " <<
         fCurrentNonGraceNote->asShortString () <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -22238,11 +22236,11 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
   if (gGlobalTracingOahGroup->getTraceChords ()) { // JMI
     gLogStream <<
       "handleNonChordNorTupletNoteOrRest(), newNote: " <<
-      endl;
+      std::endl;
     ++gIndenter;
     gLogStream <<
       newNote <<
-      endl;
+      std::endl;
     --gIndenter;
   }
 #endif
@@ -22264,38 +22262,38 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
       currentVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       ":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       newNote->asString () <<
-      endl;
+      std::endl;
 
     const int fieldWidth = 25;
 
-    gLogStream << left <<
-      setw (fieldWidth) << "voice" << " : \"" <<
+    gLogStream << std::left <<
+      std::setw (fieldWidth) << "voice" << " : \"" <<
       currentVoice->getVoiceName () << "\"" <<
-      endl <<
-      setw (fieldWidth) << "line:" << " : " <<
+      std::endl <<
+      std::setw (fieldWidth) << "line:" << " : " <<
       inputLineNumber <<
-      endl <<
-      setw (fieldWidth) << "fCurrentNoteIsAGraceNote" << " : " <<
+      std::endl <<
+      std::setw (fieldWidth) << "fCurrentNoteIsAGraceNote" << " : " <<
       fCurrentNoteIsAGraceNote <<
-      endl;
+      std::endl;
 
     if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
       gLogStream <<
-        setw (fieldWidth) << "fPendingGraceNotesGroup" << " : " <<
-        endl <<
+        std::setw (fieldWidth) << "fPendingGraceNotesGroup" << " : " <<
+        std::endl <<
         "======================= handleNonChordNorTupletNoteOrRest()" <<
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
       fCurrentPart->print (gLogStream);
       gLogStream <<
         "=======================" <<
-        endl << endl;
+        std::endl << std::endl;
 
       if (fPendingGraceNotesGroup) {
         gLogStream <<
@@ -22306,7 +22304,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
  //         "fCurrentGraceNotes is NULL"; // JMI
       }
 
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 
     --gIndenter;
@@ -22334,7 +22332,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
           newNote->asString () <<
           "' in voice \"" <<
           currentVoice->getVoiceName () << "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -22394,7 +22392,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         " to grace notes in voice \"" <<
         currentVoice->getVoiceName () <<
         "\", line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -22422,7 +22420,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             ", to voice \"" <<
             currentVoice->getVoiceName () <<
             "\"" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -22445,7 +22443,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             " in voice \"" <<
             currentVoice->getVoiceName () <<
             "\"" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -22466,7 +22464,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             " in voice \"" <<
             currentVoice->getVoiceName () <<
             "\"" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -22498,7 +22496,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         ", to voice \"" <<
         currentVoice->getVoiceName () <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -22512,9 +22510,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         "&&&&&&&&&&&&&&&&&& currentVoice (" <<
         currentVoice->getVoiceName () <<
         ") contents &&&&&&&&&&&&&&&&&&" <<
-        endl <<
+        std::endl <<
         currentVoice <<
-        endl;
+        std::endl;
     }
 
     --gIndenter;
@@ -22571,56 +22569,56 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
       "Handling lyrics for note '" <<
       newNote->asShortString () <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     const int fieldWidth = 33;
 
     gLogStream <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "currentVoice" << " = \"" << currentVoice->getVoiceName () <<"\"" <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "newNote" << " = \"" << newNote->asShortString () << "\"" <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fLastHandledNoteInVoiceHasLyrics" << " = " <<
       fLastHandledNoteInVoiceHasLyrics <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentSyllableExtendKind" << "" << " = " <<
       msrSyllableExtendKindAsString (
         fCurrentSyllableExtendKind) <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fOnGoingSyllableExtend" << " = " <<
       fOnGoingSyllableExtend <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentNoteHasLyrics" << " = " <<
       fCurrentNoteHasLyrics <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fASkipSyllableHasBeenGeneratedForcurrentNote" << " = " <<
       fASkipSyllableHasBeenGeneratedForcurrentNote <<
-      endl <<
+      std::endl <<
 
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentStanzaName" << " = " << fCurrentStanzaName << "\"" <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentLyricTextsList" << " = ";
 
     msrSyllable::writeTextsList (
       fCurrentLyricTextsList,
       gLogStream);
 
-    gLogStream << endl;
+    gLogStream << std::endl;
 
     --gIndenter;
   }
@@ -22634,12 +22632,12 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
         "Note '" <<
         newNote->asShortString () <<
         "' has lyrics attached to it" << " ***" <<
-        endl;
+        std::endl;
     }
 #endif
 
     for (
-      list<S_msrSyllable>::const_iterator i =
+      std::list<S_msrSyllable>::const_iterator i =
         fCurrentNoteSyllables.begin ();
       i != fCurrentNoteSyllables.end ();
       ++i ) {
@@ -22687,14 +22685,14 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
       if (
         ! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)
       ) {
-        // get the current voice's stanzas map
-        const map<string, S_msrStanza>&
+        // get the current voice's stanzas std::map
+        const std::map<std::string, S_msrStanza>&
           voiceStanzasMap =
             currentVoice->
               getVoiceStanzasMap ();
 
         for (
-          map<string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+          std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
           i != voiceStanzasMap.end ();
           ++i
         ) {
@@ -22780,12 +22778,12 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
     gLogStream <<
       "Handling a note belonging to a chord" <<
       ", newChordNote:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream << newChordNote <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -22830,7 +22828,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream << // JMI
-      endl <<
+      std::endl <<
       "***==> fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
       ", fCurrentChordStaffNumber: " <<
@@ -22842,7 +22840,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       ", staffNumberToUse: " <<
       staffNumberToUse <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -22868,21 +22866,21 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       "\", fOnGoingChord: " <<
       fOnGoingChord <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChordsDetails ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "======================= handleNoteBelongingToAChord" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
     fCurrentPart->print (gLogStream);
     gLogStream <<
       "=======================" <<
-      endl << endl;
+      std::endl << std::endl;
 
 /* JMI
     if (fCurrentGraceNotes) {
@@ -22895,7 +22893,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
     }
 */
 
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 #endif
 
@@ -22918,7 +22916,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       chordFirstNote =
   //      fVoicesLastMetNoteMap [currentVoice];
         fVoicesLastMetNoteMap [
-          make_pair (
+          std::make_pair (
             fCurrentStaffNumberToInsertInto,
             fCurrentMusicXMLVoiceNumber)
           ];
@@ -22928,16 +22926,16 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           */
 
     if (! chordFirstNote) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "handleNoteBelongingToAChord():" <<
-        endl <<
+        std::endl <<
         "chordFirstNote is null on " <<
         newChordNote->asString () <<
-        endl <<
+        std::endl <<
         "fCurrentMusicXMLStaffNumber: " << fCurrentMusicXMLStaffNumber <<
-        endl <<
+        std::endl <<
         "fCurrentMusicXMLVoiceNumber: " << fCurrentMusicXMLVoiceNumber;
 
       mxsr2msrInternalError (
@@ -22952,13 +22950,13 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       gLogStream <<
         "mxsr2msrTranslator::handleNoteBelongingToAChord()" <<
         ", chordFirstNote:" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       gLogStream <<
         chordFirstNote <<
-        endl;
+        std::endl;
 
       --gIndenter;
     }
@@ -22976,13 +22974,13 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         "Handling a note belonging to a chord" <<
         ", savedChordFirstNoteKind: " <<
         msrNoteKindAsString (savedChordFirstNoteKind) <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       gLogStream <<
         chordFirstNote <<
-        endl;
+        std::endl;
 
       --gIndenter;
     }
@@ -23017,25 +23015,25 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             ", line " << inputLineNumber <<
             ", from voice \"" << currentVoice->getVoiceName () << "\"" <<
             ", line " << inputLineNumber <<
-            endl;
+            std::endl;
         }
 #endif
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceChordsDetails ()) {
           gLogStream <<
-            endl << endl <<
+            std::endl << std::endl <<
             "&&&&&&&&&&&&&&&&&& fCurrentPart contents &&&&&&&&&&&&&&&&&&" <<
-            endl <<
+            std::endl <<
             fCurrentPart <<
-            endl << endl;
+            std::endl << std::endl;
         }
 #endif
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceStaffChanges ()) {
           gLogStream << // JMI
-            endl <<
+            std::endl <<
             "***==> fCurrentStaffNumberToInsertInto: " <<
             fCurrentStaffNumberToInsertInto <<
             ", fPreviousNoteMusicXMLStaffNumber: " <<
@@ -23043,7 +23041,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             ", fCurrentMusicXMLStaffNumber: " <<
             fCurrentMusicXMLStaffNumber <<
             "', line " << inputLineNumber <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -23060,7 +23058,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             " to voice \"" <<
             currentVoice->getVoiceName () <<
             "\"" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -23089,7 +23087,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
               "' in voice \"" <<
               currentVoice->getVoiceName () <<
               "\"" <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -23114,7 +23112,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           }
 
           else {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "chord first note '" <<
@@ -23143,7 +23141,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             ", line " << inputLineNumber <<
             ", from voice \"" << currentVoice->getVoiceName () << "\"" <<
             ", line " << inputLineNumber <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -23183,7 +23181,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         "is newChordNote in the same chord but in another voice?" <<
         ", currentVoice: " <<
         currentVoice->getVoiceName () <<
-        endl;
+        std::endl;
 
       printVoicesCurrentChordMap ();
     }
@@ -23199,7 +23197,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         ", line " << inputLineNumber <<
         " to current chord in voice " <<
         currentVoice->getVoiceName () <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -23235,7 +23233,7 @@ void mxsr2msrTranslator::handlePendingTupletStopIfAny (
         note->
           asShortString () <<
         "', line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -23284,7 +23282,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       note->
         asShortString () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -23304,7 +23302,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             note->
               asShortString () <<
             "', line " << inputLineNumber <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -23322,7 +23320,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
               note->
                 asShortString () <<
               "', line " << inputLineNumber <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -23352,17 +23350,17 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             currentTuplet =
               fTupletsStack.front ();
 
-          // populate the tuplet at the top of the stack
+          // populate the tuplet at the top of the std::stack
 #ifdef TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceTuplets ()) {
             gLogStream <<
               "--> kTupletTypeContinue: adding tuplet member note '" <<
               note->
                 asShortString () <<
-              "' to stack top tuplet '" <<
+              "' to std::stack top tuplet '" <<
               currentTuplet->asString () <<
               "', line " << inputLineNumber <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -23397,15 +23395,15 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         }
 
         else {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "handleNoteBelongingToATuplet():" <<
-            endl <<
+            std::endl <<
             "tuplet member note " <<
             note->
               asShortString () <<
-            " cannot be added, tuplets stack is empty";
+            " cannot be added, tuplets std::stack is empty";
 
           mxsr2msrInternalError (
             gGlobalServiceRunData->getInputSourceName (),
@@ -23421,15 +23419,15 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         switch (fTupletsStack.size ()) {
           case 0:
             {
-              stringstream s;
+              std::stringstream s;
 
               s <<
                 "handleNoteBelongingToATuplet():" <<
-                endl <<
+                std::endl <<
                 "tuplet member note " <<
                 note->
                   asShortString () <<
-                " cannot be added, tuplets stack is empty";
+                " cannot be added, tuplets std::stack is empty";
 
               mxsr2msrInternalError (
                 gGlobalServiceRunData->getInputSourceName (),
@@ -23447,17 +23445,17 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                 currentTuplet =
                   fTupletsStack.front ();
 
-              // populate the tuplet at the top of the stack
+              // populate the tuplet at the top of the std::stack
 #ifdef TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceTuplets ()) {
                 gLogStream <<
                   "--> kTupletTypeStop: adding outer-most tuplet member note " <<
                   note->
                     asShortString () <<
-                  "' to stack top tuplet '" <<
+                  "' to std::stack top tuplet '" <<
                   currentTuplet->asString () <<
                   ", line " << inputLineNumber <<
-                  endl;
+                  std::endl;
               }
 #endif
 
@@ -23490,7 +23488,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                   gLogStream <<
                     "--> kTupletTypeStop: finalizing pending tuplet" <<
                     ", line " << inputLineNumber <<
-                    endl;
+                    std::endl;
                 }
 #endif
 
@@ -23506,7 +23504,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                   gLogStream <<
                     "--> kTupletTypeStop: finalizing non-pending tuplet" << // JMI ???
                     ", line " << inputLineNumber <<
-                    endl;
+                    std::endl;
                 }
 #endif
 
@@ -23515,7 +23513,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
               }
     //*/
 
-              // don't pop the inner-most tuplet from the stack yet
+              // don't pop the inner-most tuplet from the std::stack yet
 
         //      fCurrentATupletStopIsPending = true;
             }
@@ -23536,7 +23534,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                   gLogStream <<
                     "--> kTupletTypeStop: finalizing tuplet" <<
                     ", line " << inputLineNumber <<
-                    endl;
+                    std::endl;
                 }
 #endif
 
@@ -23552,17 +23550,17 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                 currentTuplet =
                   fTupletsStack.front ();
 
-              // populate the tuplet at the top of the stack
+              // populate the tuplet at the top of the std::stack
 #ifdef TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceTuplets ()) {
                 gLogStream <<
                   "--> kTupletTypeStop: adding nested tuplet member note " <<
                   note->
                     asShortString () <<
-                  "' to stack top tuplet '" <<
+                  "' to std::stack top tuplet '" <<
                   currentTuplet->asString () <<
                   ", line " << inputLineNumber <<
-                  endl;
+                  std::endl;
               }
 #endif
 
@@ -23615,7 +23613,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             note->
               asShortString () <<
             "', line " << inputLineNumber <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -23623,7 +23621,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStartAndStopInARow;
         }
         else {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "one-note tuplet with a non single tremolo contents found";
@@ -23697,7 +23695,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       ", newChordNote: " <<
       newChordNote->
         asShortString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -23721,7 +23719,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
   if (! fOnGoingChord) {
     // this is the second note of the chord to be created,
 
-    // fetch the current tuplet, i.e. the top of the stack
+    // fetch the current tuplet, i.e. the top of the std::stack
     S_msrTuplet currentTuplet;
 
     /* JMI
@@ -23730,13 +23728,13 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         fTupletsStack.front ();
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "handleNoteBelongingToAChordInATuplet():" <<
-        endl <<
+        std::endl <<
         " a tuplet member chord " <<
-        "cannot be added, tuplets stack is empty";
+        "cannot be added, tuplets std::stack is empty";
 
       mxsr2msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -23748,7 +23746,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 
     currentTuplet =
       fLastHandledTupletInVoiceMap [
-        make_pair (
+        std::make_pair (
           fCurrentStaffNumberToInsertInto,
           fCurrentMusicXMLVoiceNumber)
       ];
@@ -23766,7 +23764,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       tupletLastNote =
   //      fVoicesLastMetNoteMap [currentVoice];
         fVoicesLastMetNoteMap [
-          make_pair (fCurrentMusicXMLStaffNumber, fCurrentMusicXMLVoiceNumber)
+          std::make_pair (fCurrentMusicXMLStaffNumber, fCurrentMusicXMLVoiceNumber)
           ];
 
     currentVoice->
@@ -23795,9 +23793,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         "&&&&&&&&&&&&&&&&&& currentVoice (" <<
         currentVoice->getVoiceName () <<
         ") contents &&&&&&&&&&&&&&&&&&" <<
-        endl <<
+        std::endl <<
         currentVoice <<
-        endl;
+        std::endl;
     }
 
     // add chord to the current tuplet instead of tupletLastNote
@@ -23806,10 +23804,10 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       gLogStream <<
         "Adding chord '" <<
         fCurrentChord->asString () <<
-        "' to stack top tuplet '" <<
+        "' to std::stack top tuplet '" <<
         currentTuplet->asString () <<
         "', line " << inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -23839,7 +23837,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       ", line " << inputLineNumber <<
       " to current chord in voice " <<
       currentVoice->getVoiceName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -23886,7 +23884,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       newChordNote->
         asShortString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -23930,11 +23928,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
           getVoiceLastAppendedNote ();
 
       if (! chordFirstNote) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "handleNoteBelongingToAChordInGraceNotes():" <<
-          endl <<
+          std::endl <<
           "chordFirstNote is null on " <<
           newChordNote->asString ();
 
@@ -23953,7 +23951,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
         chordFirstNote->
           asShortString () <<
         "'" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -23975,9 +23973,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
         "&&&&&&&&&&&&&&&&&& currentVoice (" <<
         currentVoice->getVoiceName () <<
         ") contents &&&&&&&&&&&&&&&&&&" <<
-        endl <<
+        std::endl <<
         currentVoice <<
-        endl << endl;
+        std::endl << std::endl;
     }
 
     if (fPendingGraceNotesGroup) {
@@ -23996,13 +23994,13 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 
     /* JMI
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "handleNoteBelongingToAChordInGraceNotes():" <<
-        endl <<
+        std::endl <<
         "tuplet member chord " << chord->asString () <<
-        "cannot be added, tuplets stack is empty";
+        "cannot be added, tuplets std::stack is empty";
 
       mxsr2msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -24026,7 +24024,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       ", line " << inputLineNumber <<
       " to current chord in voice " <<
       currentVoice->getVoiceName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24052,13 +24050,13 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
-      "Handling tuplets pending on tuplet stack" <<
+      "Handling tuplets pending on tuplet std::stack" <<
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
       ", fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
       ", line: " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 
   if (gGlobalTracingOahGroup->getTraceTupletsDetails ()) {
@@ -24077,13 +24075,13 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
         fCurrentMusicXMLVoiceNumber);
 */
 
-  // handle tuplets pending on the tuplet stack
+  // handle tuplets pending on the tuplet std::stack
   while (fTupletsStack.size ()) {
     S_msrTuplet
       pendingTuplet =
         fTupletsStack.front ();
 
-    // finalize the tuplet, thus popping it off the stack
+    // finalize the tuplet, thus popping it off the std::stack
     finalizeTupletAndPopItFromTupletsStack (
       inputLineNumber);
   } // while
@@ -24096,26 +24094,26 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
 #endif
 }
 
-void mxsr2msrTranslator::displayLastHandledTupletInVoiceMap (const string& header)
+void mxsr2msrTranslator::displayLastHandledTupletInVoiceMap (const std::string& header)
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     header <<
     ", fLastHandledTupletInVoiceMap contains:";
 
   if (! fLastHandledTupletInVoiceMap.size ()) {
     gLogStream <<
       " [NONE]" <<
-      endl;
+      std::endl;
   }
 
   else {
-    map<pair<int, int>, S_msrTuplet>::const_iterator
+    std::map<std::pair<int, int>, S_msrTuplet>::const_iterator
       iBegin = fLastHandledTupletInVoiceMap.begin (),
       iEnd   = fLastHandledTupletInVoiceMap.end (),
       i      = iBegin;
 
-    gLogStream << endl;
+    gLogStream << std::endl;
 
     ++gIndenter;
 
@@ -24123,19 +24121,19 @@ void mxsr2msrTranslator::displayLastHandledTupletInVoiceMap (const string& heade
       gLogStream <<
         "staff " << (*i).first.first <<
         ", voice " <<  (*i).first.second <<
-        endl;
+        std::endl;
 //        "\"" << (*i).first->getVoiceName () <<
 //        "\" ----> " << (*i).second->asString ();
       if (++i == iEnd) break;
-      gLogStream << endl;
+      gLogStream << std::endl;
     } // for
 
-    gLogStream << endl;
+    gLogStream << std::endl;
 
     --gIndenter;
   }
 
-  gLogStream << endl;
+  gLogStream << std::endl;
 }
 
 //______________________________________________________________________________
@@ -24156,7 +24154,7 @@ void mxsr2msrTranslator::handleRepeatStart (
       barLine->getBarLineMeasurePosition () <<
       */
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24180,7 +24178,7 @@ void mxsr2msrTranslator::handleRepeatEnd (
   int inputLineNumber =
     barLine->getInputLineNumber ();
 
-  string repeatStartMeasureNumber =
+  std::string repeatStartMeasureNumber =
     fCurrentRepeatStartMeasureNumber.size ()
       ? // there was a repeat start before hand
         fCurrentRepeatStartMeasureNumber
@@ -24196,7 +24194,7 @@ void mxsr2msrTranslator::handleRepeatEnd (
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
       "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24229,19 +24227,19 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
       "Handling a repeat ending start in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
     gLogStream <<
-      endl << endl <<
+      std::endl << std::endl <<
       "****************** handleRepeatEndingStart()" <<
       ", line " << inputLineNumber <<
-      endl <<
+      std::endl <<
       fCurrentPart <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24252,7 +24250,7 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
       "Handling a repeat ending upon its start in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24279,19 +24277,19 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
       "Handling a repeat hooked ending end in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
     gLogStream <<
-      endl << endl <<
+      std::endl << std::endl <<
       "****************** handleRepeatHookedEndingEnd()" <<
       ", line " << inputLineNumber <<
-      endl <<
+      std::endl <<
       fCurrentPart <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24306,7 +24304,7 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
       "Handling a hooked repeat ending in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24340,19 +24338,19 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
       "Handling a repeat hookless ending end in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
     gLogStream <<
-      endl << endl <<
+      std::endl << std::endl <<
       "****************** handleRepeatHooklessEndingEnd()" <<
       ", line " << inputLineNumber <<
-      endl <<
+      std::endl <<
       fCurrentPart <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24367,7 +24365,7 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
       "Handling a hookless repeat ending in part " <<
       fCurrentPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24389,13 +24387,13 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
     gLogStream <<
       "--> Start visiting S_rehearsal" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string rehearsalValue = elt->getValue();
+  std::string rehearsalValue = elt->getValue();
 
-  string rehearsalEnclosure =
+  std::string rehearsalEnclosure =
     elt->getAttributeValue ("enclosure");
 
   msrRehearsalMarkKind
@@ -24425,7 +24423,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
   }
   else {
     if (rehearsalEnclosure.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "rehearsalMark enclosure \"" << rehearsalEnclosure <<
@@ -24445,7 +24443,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
       "Creating rehearsalMark \"" << rehearsalValue << "\"" <<
       " in part " <<
       fCurrentPart->getPartCombinedName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24458,7 +24456,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
         rehearsalValue,
         fCurrentDirectionPlacementKind);
 
-  // append the rehearsalMark to the pending tempos list
+  // append the rehearsalMark to the pending tempos std::list
   fPendingRehearsalMarksList.push_back (rehearsalMark);
 }
 
@@ -24473,13 +24471,13 @@ void mxsr2msrTranslator::visitStart (S_harmony& elt)
     gLogStream <<
       "--> Start visiting S_harmony" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -24517,13 +24515,13 @@ void mxsr2msrTranslator::visitStart (S_root& elt)
     gLogStream <<
       "--> Start visiting S_root" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -24543,11 +24541,11 @@ void mxsr2msrTranslator::visitStart (S_root_step& elt)
     gLogStream <<
       "--> Start visiting S_root_step" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string step = elt->getValue ();
+  std::string step = elt->getValue ();
 
   checkStep (
     inputLineNumber,
@@ -24569,7 +24567,7 @@ void mxsr2msrTranslator::visitStart (S_root_alter& elt)
     gLogStream <<
       "--> Start visiting S_root_alter" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24580,7 +24578,7 @@ void mxsr2msrTranslator::visitStart (S_root_alter& elt)
       rootAlter);
 
   if (fCurrentHarmonyRootAlterationKind == msrAlterationKind::kAlteration_NO_) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "root alter '" << rootAlter << "'"
@@ -24604,14 +24602,14 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     gLogStream <<
       "--> Start visiting S_kind" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // harmony kind
   // ----------------------------------
 
-  string kind = elt->getValue ();
+  std::string kind = elt->getValue ();
 
   fCurrentHarmonyKindText =
     elt->getAttributeValue ("text");
@@ -24715,7 +24713,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
   // harmony use symbols
   // ----------------------------------
 
-  string kindUseSymbols = elt->getAttributeValue ("use-symbols");
+  std::string kindUseSymbols = elt->getAttributeValue ("use-symbols");
 
 /* JMI
   if      (kindUseSymbols == "yes")
@@ -24724,7 +24722,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     fCurrentTupletTypeKind = msrTuplet::kStopTuplet;
   else {
     if (kindUseSymbols.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "kind use-symbols \"" << kindUseSymbols <<
@@ -24739,10 +24737,10 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
   }
 */
 
-  // harmony use stack degrees
+  // harmony use std::stack degrees
   // ----------------------------------
 
-  string kindStackDegrees = elt->getAttributeValue ("stack-degrees");
+  std::string kindStackDegrees = elt->getAttributeValue ("std::stack-degrees");
 
 /* JMI
   if      (kindStackDegrees == "yes")
@@ -24751,10 +24749,10 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     fCurrentTupletTypeKind = msrTuplet::kStopTuplet;
   else {
     if (kindStackDegrees.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
-        "kind stack-degrees " << kindStackDegrees <<
+        "kind std::stack-degrees " << kindStackDegrees <<
         "\" is unknown";
 
       mxsr2msrError (
@@ -24769,7 +24767,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
   // harmony use parentheses degrees
   // ----------------------------------
 
-  string kindParenthesesDegrees = elt->getAttributeValue ("parentheses-degrees");
+  std::string kindParenthesesDegrees = elt->getAttributeValue ("parentheses-degrees");
 
 /* JMI
   if      (kindParenthesesDegrees == "yes")
@@ -24778,7 +24776,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     fCurrentTupletTypeKind = msrTuplet::kStopTuplet;
   else {
     if (kindParenthesesDegrees.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "kind parentheses-degrees \"" << kindParenthesesDegrees <<
@@ -24796,7 +24794,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
   // harmony use bracket degrees
   // ------------------
 
-  string kindBracketDegrees = elt->getAttributeValue ("bracket-degrees");
+  std::string kindBracketDegrees = elt->getAttributeValue ("bracket-degrees");
 
 /* JMI
   if      (kindBracketDegrees == "yes")
@@ -24805,7 +24803,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     fCurrentTupletTypeKind = msrTuplet::kStopTuplet;
   else {
     if (kindBracketDegrees.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "kind bracket-degrees \"" << kindBracketDegrees <<
@@ -24828,7 +24826,7 @@ void mxsr2msrTranslator::visitStart (S_inversion& elt)
     gLogStream <<
       "--> Start visiting S_inversion" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24850,7 +24848,7 @@ void mxsr2msrTranslator::visitStart (S_bass& elt)
     gLogStream <<
       "--> Start visiting S_bass" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -24865,11 +24863,11 @@ void mxsr2msrTranslator::visitStart (S_bass_step& elt)
     gLogStream <<
       "--> Start visiting S_bass_step" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string step = elt->getValue();
+  std::string step = elt->getValue();
 
   checkStep (
     inputLineNumber,
@@ -24891,7 +24889,7 @@ void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
     gLogStream <<
       "--> Start visiting S_bass_alter" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24902,7 +24900,7 @@ void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
       bassAlter);
 
   if (fCurrentHarmonyBassAlterationKind == msrAlterationKind::kAlteration_NO_) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "bass alter '" << bassAlter << "'"
@@ -24926,13 +24924,13 @@ void mxsr2msrTranslator::visitStart (S_degree& elt)
     gLogStream <<
       "--> Start visiting S_degree" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -24949,7 +24947,7 @@ void mxsr2msrTranslator::visitStart (S_degree_value& elt)
     gLogStream <<
       "--> Start visiting S_degree_value" <<
        ", line " << elt->getInputLineNumber () <<
-     endl;
+     std::endl;
   }
 #endif
 
@@ -24966,7 +24964,7 @@ void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
     gLogStream <<
       "--> Start visiting S_degree_alter" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -24977,7 +24975,7 @@ void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
       degreeAlter);
 
   if (fCurrentHarmonyDegreeAlterationKind == msrAlterationKind::kAlteration_NO_) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "degree alter '" << degreeAlter << "'"
@@ -25001,11 +24999,11 @@ void mxsr2msrTranslator::visitStart (S_degree_type& elt)
     gLogStream <<
       "--> Start visiting S_degree_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string degreeType = elt->getValue ();
+  std::string degreeType = elt->getValue ();
 
   // check harmony degree type
   if      (degreeType == "add")
@@ -25039,7 +25037,7 @@ void mxsr2msrTranslator::visitEnd (S_degree& elt)
     gLogStream <<
       "--> End visiting S_degree" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25052,7 +25050,7 @@ void mxsr2msrTranslator::visitEnd (S_degree& elt)
         fCurrentHarmonyDegreeAlterationKind,
         fCurrentHarmonyDegreeTypeKind);
 
-  // register it in current harmony degrees list
+  // register it in current harmony degrees std::list
   fCurrentHarmonyDegreesList.push_back (
     harmonyDegree);
 }
@@ -25067,7 +25065,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
     gLogStream <<
       "--> End visiting S_harmony" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25101,7 +25099,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
     fCurrentHarmonyRootQuarterTonesPitchKind
       ==
     fCurrentHarmonyBassQuarterTonesPitchKind) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "harmony root and bass notes are both equal to '" <<
@@ -25128,7 +25126,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
         "Ignoring harmony" <<
         ", line " <<
         inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -25139,66 +25137,66 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       gLogStream <<
         "Creating a harmony" <<
         ", line " << inputLineNumber << ":" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       const int fieldWidth = 32;
 
-      gLogStream << left <<
-        setw (fieldWidth) << "fCurrentPart" << " = " <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) << "fCurrentPart" << " = " <<
         fCurrentPart->getPartCombinedName () <<
-        endl <<
+        std::endl <<
         /* JMI
-        setw (fieldWidth) << "harmoniesVoice" << " = " <<
+        std::setw (fieldWidth) << "harmoniesVoice" << " = " <<
         harmoniesVoice->getVoiceName () <<
-        endl <<
+        std::endl <<
         */
 
-        setw (fieldWidth) << "fCurrentHarmonyRootDiatonicPitch" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyRootDiatonicPitch" << " = " <<
         msrDiatonicPitchKindAsStringInLanguage (
           gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
           fCurrentHarmonyRootDiatonicPitchKind) <<
-        endl <<
-        setw (fieldWidth) << "fCurrentHarmonyRootAlteration" << " = " <<
+        std::endl <<
+        std::setw (fieldWidth) << "fCurrentHarmonyRootAlteration" << " = " <<
         msrAlterationKindAsString(
           fCurrentHarmonyRootAlterationKind) <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) << "fCurrentHarmonyKind" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyKind" << " = " <<
         msrHarmonyKindAsString (
           fCurrentHarmonyKind) <<
-        endl <<
-        setw (fieldWidth) << "fCurrentHarmonyKindText" << " = " <<
+        std::endl <<
+        std::setw (fieldWidth) << "fCurrentHarmonyKindText" << " = " <<
         fCurrentHarmonyKindText <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) << "fCurrentHarmonyInversion" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyInversion" << " = " <<
         fCurrentHarmonyInversion <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) << "fCurrentHarmonyBassDiatonicPitch" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyBassDiatonicPitch" << " = " <<
         msrDiatonicPitchKindAsStringInLanguage (
           gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
           fCurrentHarmonyBassDiatonicPitchKind) <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) << "fCurrentHarmonyBassAlteration" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyBassAlteration" << " = " <<
         msrAlterationKindAsString(
           fCurrentHarmonyBassAlterationKind) <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) << "fCurrentNoteSoundingWholeNotes" << " = " <<
+        std::setw (fieldWidth) << "fCurrentNoteSoundingWholeNotes" << " = " <<
         fCurrentNoteSoundingWholeNotes <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) << "fCurrentHarmoniesStaffNumber" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmoniesStaffNumber" << " = " <<
         fCurrentHarmoniesStaffNumber <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) << "fCurrentHarmonyWholeNotesOffset" << " = " <<
+        std::setw (fieldWidth) << "fCurrentHarmonyWholeNotesOffset" << " = " <<
         fCurrentHarmonyWholeNotesOffset <<
-        endl;
+        std::endl;
 
       --gIndenter;
     }
@@ -25251,12 +25249,12 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
           setHarmonyDegreeUpLinkToHarmony (
             harmony);
 
-        // append it to harmony's degrees list
+        // append it to harmony's degrees std::list
         harmony->
           appendHarmonyDegreeToHarmony (
             harmonyDegree);
 
-        // remove it from the list
+        // remove it from the std::list
         fCurrentHarmonyDegreesList.pop_front ();
       } // while
     }
@@ -25266,7 +25264,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       harmony->setHarmonyFrame (fCurrentFrame);
     }
 
-    // append the harmony to the pending harmonies list
+    // append the harmony to the pending harmonies std::list
     fPendingHarmoniesList.push_back (harmony);
   }
 
@@ -25284,12 +25282,12 @@ void mxsr2msrTranslator::visitStart (S_frame& elt)
     gLogStream <<
       "--> Start visiting S_frame" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (! fOnGoingHarmony) {
-    stringstream s;
+    std::stringstream s;
 
     s << "<frame /> out of context, not handled";
 
@@ -25310,27 +25308,27 @@ void mxsr2msrTranslator::visitStart (S_frame& elt)
           <frame-strings>6</frame-strings>
           <frame-frets>4</frame-frets>
           <frame-note>
-            <string>6</string>
+            <std::string>6</std::string>
             <fret>0</fret>
           </frame-note>
           <frame-note>
-            <string>5</string>
+            <std::string>5</std::string>
             <fret>3</fret>
           </frame-note>
           <frame-note>
-            <string>4</string>
+            <std::string>4</std::string>
             <fret>2</fret>
           </frame-note>
           <frame-note>
-            <string>3</string>
+            <std::string>3</std::string>
             <fret>0</fret>
           </frame-note>
           <frame-note>
-            <string>2</string>
+            <std::string>2</std::string>
             <fret>1</fret>
           </frame-note>
           <frame-note>
-            <string>1</string>
+            <std::string>1</std::string>
             <fret>0</fret>
           </frame-note>
         </frame>
@@ -25346,7 +25344,7 @@ void mxsr2msrTranslator::visitStart (S_frame& elt)
       degreeAlter);
 
   if (fCurrentHarmonyDegreeAlterationKind == msrAlterationKind::kAlteration_NO_) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "degree alter '" << degreeAlter << "'"
@@ -25371,7 +25369,7 @@ void mxsr2msrTranslator::visitStart (S_frame_strings& elt)
     gLogStream <<
       "--> Start visiting S_frame_strings" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25385,7 +25383,7 @@ void mxsr2msrTranslator::visitStart (S_frame_frets& elt)
     gLogStream <<
       "--> Start visiting S_frame_frets" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25399,7 +25397,7 @@ void mxsr2msrTranslator::visitStart (S_first_fret& elt)
     gLogStream <<
       "--> Start visiting S_first_fret" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25410,8 +25408,8 @@ void mxsr2msrTranslator::visitStart (S_first_fret& elt)
   fCurrentFrameFirstFret = (int)(*elt);
 
   // the following two are not used yet JMI
-  string firstFretLocation = elt->getAttributeValue ("location");
-  string firstFretText = elt->getAttributeValue ("text");
+  std::string firstFretLocation = elt->getAttributeValue ("location");
+  std::string firstFretText = elt->getAttributeValue ("text");
 }
 
 void mxsr2msrTranslator::visitStart (S_frame_note& elt)
@@ -25421,7 +25419,7 @@ void mxsr2msrTranslator::visitStart (S_frame_note& elt)
     gLogStream <<
       "--> Start visiting S_frame_note" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25443,13 +25441,13 @@ void mxsr2msrTranslator::visitStart (S_barre& elt)
     gLogStream <<
       "--> Start visiting S_barre" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // type
 
-  string barreType = elt->getAttributeValue ("type");
+  std::string barreType = elt->getAttributeValue ("type");
 
   fCurrentFrameNoteBarreTypeKind = msrBarreTypeKind::kBarreTypeNone;
 
@@ -25458,7 +25456,7 @@ void mxsr2msrTranslator::visitStart (S_barre& elt)
   else if (barreType == "stop")
     fCurrentFrameNoteBarreTypeKind = msrBarreTypeKind::kBarreTypeStop;
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "barre type \"" << barreType <<
@@ -25484,7 +25482,7 @@ void mxsr2msrTranslator::visitEnd (S_frame_note& elt)
     gLogStream <<
       "--> Start visiting S_frame_note" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25498,7 +25496,7 @@ void mxsr2msrTranslator::visitEnd (S_frame_note& elt)
         fCurrentFrameNoteFingering,
         fCurrentFrameNoteBarreTypeKind);
 
-  // append the frame note to the pending frame notes list
+  // append the frame note to the pending frame notes std::list
   fPendingFramesNotesList.push_back (frameNote);
 
   fOnGoingFrameNote = false;
@@ -25514,7 +25512,7 @@ void mxsr2msrTranslator::visitEnd (S_frame& elt)
     gLogStream <<
       "--> End visiting S_frame" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25538,7 +25536,7 @@ void mxsr2msrTranslator::visitEnd (S_frame& elt)
       fCurrentFrame->
         appendFrameNoteToFrame (frameNote);
 
-      // remove it from the list
+      // remove it from the std::list
       fPendingFramesNotesList.pop_front ();
     } // while
   }
@@ -25557,13 +25555,13 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
     gLogStream <<
       "--> Start visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   ++fFiguredBassVoicesCounter;
 
-  string parentheses = elt->getAttributeValue ("parentheses");
+  std::string parentheses = elt->getAttributeValue ("parentheses");
 
   fCurrentFiguredBassParenthesesKind =
     msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo; // default value
@@ -25578,7 +25576,7 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
         msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo;
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "parentheses value " << parentheses <<
@@ -25612,7 +25610,7 @@ void mxsr2msrTranslator::visitStart (S_figure& elt)
     gLogStream <<
       "--> Start visiting S_figure" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -25627,11 +25625,11 @@ void mxsr2msrTranslator::visitStart (S_prefix& elt)
     gLogStream <<
       "--> Start visiting S_prefix" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string prefix =
+  std::string prefix =
     elt->getValue ();
 
   fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefix_NO_;
@@ -25658,7 +25656,7 @@ void mxsr2msrTranslator::visitStart (S_prefix& elt)
     fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefixDoubleSharp;
 
   else if (prefix.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "prefix \"" << prefix <<
@@ -25683,14 +25681,14 @@ void mxsr2msrTranslator::visitStart (S_figure_number& elt)
     gLogStream <<
       "--> Start visiting S_figure_number" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   fCurrentFigureNumber = (int)(*elt);
 
   if (fCurrentFigureNumber > 13) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "figure-number '" << fCurrentFigureNumber <<
@@ -25713,11 +25711,11 @@ void mxsr2msrTranslator::visitStart (S_suffix& elt)
     gLogStream <<
       "--> Start visiting S_suffix" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string suffix =
+  std::string suffix =
     elt->getValue ();
 
   fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffix_NO_;
@@ -25747,7 +25745,7 @@ void mxsr2msrTranslator::visitStart (S_suffix& elt)
     fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffixSlash;
 
   else if (suffix.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "suffix \"" << suffix <<
@@ -25771,7 +25769,7 @@ void mxsr2msrTranslator::visitEnd (S_figure& elt)
     gLogStream <<
       "--> End visiting S_figure" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25785,7 +25783,7 @@ void mxsr2msrTranslator::visitEnd (S_figure& elt)
         fCurrentFigureNumber,
         fCurrentFigureSuffixKind);
 
-  // append it to the pending figures list
+  // append it to the pending figures std::list
   fPendingFiguredBassFiguresList.push_back (
     bassFigure);
 }
@@ -25800,7 +25798,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
     gLogStream <<
       "--> End visiting S_figured_bass" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25810,7 +25808,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
     gLogStream <<
       "Creating a figured bass" <<
       ", line " << inputLineNumber << ":" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25844,7 +25842,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
     // forget about those pending figures
     fPendingFiguredBassFiguresList.clear ();
 
-    // append the figured bass element to the pending figured bass elements list
+    // append the figured bass element to the pending figured bass elements std::list
     fPendingFiguredBassesList.push_back (figuredBass);
   }
 
@@ -25862,7 +25860,7 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
     gLogStream <<
       "--> Start visiting S_harp_pedals" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25933,7 +25931,7 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
   if (gGlobalTracingOahGroup->getTraceHarpPedalsTunings ()) {
     gLogStream <<
       "Creating harp pedals tuning:" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -25956,7 +25954,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_tuning& elt)
     gLogStream <<
       "--> Start visiting S_pedal_tuning" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -25971,11 +25969,11 @@ void mxsr2msrTranslator::visitStart (S_pedal_step& elt)
     gLogStream <<
       "--> Start visiting S_pedal_step" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string tuningStep = elt->getValue();
+  std::string tuningStep = elt->getValue();
 
   checkStep (
     inputLineNumber,
@@ -25997,7 +25995,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
     gLogStream <<
       "--> Start visiting S_pedal_alter" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26008,7 +26006,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
       pedalAlter);
 
   if (fCurrentHarpPedalAlterationKind == msrAlterationKind::kAlteration_NO_) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "pedal alter '" << pedalAlter << "'"
@@ -26032,7 +26030,7 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
     gLogStream <<
       "--> End visiting S_pedal_tuning" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26041,24 +26039,24 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
   if (gGlobalTracingOahGroup->getTraceHarpPedalsTunings ()) {
     gLogStream <<
       "Creating harp pedal tuning:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     const int fieldWidth = 31;
 
-    gLogStream << left <<
-      setw (fieldWidth) <<
+    gLogStream << std::left <<
+      std::setw (fieldWidth) <<
       "fCurrentHarpPedalDiatonicPitch" << ": " <<
       msrDiatonicPitchKindAsStringInLanguage (
         gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
         fCurrentHarpPedalDiatonicPitchKind) <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentHarpPedalAlteration" << ": " <<
       msrAlterationKindAsString (
         fCurrentHarpPedalAlterationKind) <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -26081,7 +26079,7 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
     gLogStream <<
       "--> Start visiting S_damp" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26101,7 +26099,7 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
 					inputLineNumber,
 					nullptr); // will be set when damp is appended to a measure JMI v0.9.66 PIM
 
-    // append it to the pending damps list
+    // append it to the pending damps std::list
     fPendingDampsList.push_back (damp);
   }
 }
@@ -26116,7 +26114,7 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
     gLogStream <<
       "--> Start visiting S_damp_all" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26136,7 +26134,7 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
 					inputLineNumber,
 					nullptr); // will be set when damp all is appended to a measure JMI v0.9.66 PIM
 
-    // append it to the pending damp alls list
+    // append it to the pending damp alls std::list
     fPendingDampAllsList.push_back (dampAll);
   }
 }
@@ -26149,7 +26147,7 @@ void mxsr2msrTranslator::visitStart (S_capo& elt)
     gLogStream <<
       "--> Start visiting S_capo" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26163,7 +26161,7 @@ void mxsr2msrTranslator::visitStart (S_staff_size& elt)
     gLogStream <<
       "--> Start visiting S_staff_size" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26181,7 +26179,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
     gLogStream <<
       "--> End visiting S_staff_details" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26189,23 +26187,23 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     const int fieldWidth = 29;
 
-    gLogStream << left <<
-      setw (fieldWidth) <<
+    gLogStream << std::left <<
+      std::setw (fieldWidth) <<
       "fCurrentStaffLinesNumber" << " = " <<
       fCurrentStaffLinesNumber <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fStaffDetailsStaffNumber" << " = " <<
       fStaffDetailsStaffNumber <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentStaffDetailsCapo" << " = " <<
       fCurrentStaffDetailsCapo <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "fCurrentStaffDetailsStaffSize" << " = " <<
       fCurrentStaffDetailsStaffSize <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26249,7 +26247,7 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
     gLogStream <<
       "--> Start visiting S_scordatura" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26257,15 +26255,15 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
   <direction>
     <direction-type>
       <scordatura>
-        <accord string="3">
+        <accord std::string="3">
           <tuning-step>C</tuning-step>
           <tuning-octave>3</tuning-octave>
           </accord>
-        <accord string="2">
+        <accord std::string="2">
           <tuning-step>G</tuning-step>
           <tuning-octave>5</tuning-octave>
           </accord>
-        <accord string="1">
+        <accord std::string="1">
           <tuning-step>E</tuning-step><
           tuning-octave>5</tuning-octave>
           </accord>
@@ -26290,18 +26288,18 @@ void mxsr2msrTranslator::visitStart (S_accord& elt)
     gLogStream <<
       "--> Start visiting S_accord" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 /*
-        <accord string="3">
+        <accord std::string="3">
           <tuning-step>C</tuning-step>
           <tuning-octave>3</tuning-octave>
           </accord>
 */
 
-  fCurrentAccordNumber = elt->getAttributeIntValue ("string", 0);
+  fCurrentAccordNumber = elt->getAttributeIntValue ("std::string", 0);
 
   fCurrentAccordDiatonicPitchKind =
     msrDiatonicPitchKind::kDiatonicPitch_NO_;
@@ -26325,14 +26323,14 @@ void mxsr2msrTranslator::visitEnd (S_accord& elt)
     gLogStream <<
       "--> End visiting S_accord" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   fOnGoingAccord = false;
 
 //   gLogStream <<
-//     "S_tuning_octave: tuningOctaveNumber: " << tuningOctaveNumber << endl;
+//     "S_tuning_octave: tuningOctaveNumber: " << tuningOctaveNumber << std::endl;
 
   S_msrStringTuning
     stringTuning =
@@ -26355,11 +26353,11 @@ void mxsr2msrTranslator::visitEnd (S_scordatura& elt)
     gLogStream <<
       "--> End visiting S_scordatura" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // append the current scordatura to the pending scordatura list
+  // append the current scordatura to the pending scordatura std::list
   fPendingScordaturasList.push_back (fCurrentScordatura);
 
   // forget about this scordatura
@@ -26374,7 +26372,7 @@ void mxsr2msrTranslator::visitStart (S_instrument_sound& elt)
     gLogStream <<
       "--> Start visiting S_instrument_sound" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -26387,7 +26385,7 @@ void mxsr2msrTranslator::visitStart (S_virtual_instrument& elt)
     gLogStream <<
       "--> Start visiting S_virtual_instrument" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -26400,7 +26398,7 @@ void mxsr2msrTranslator::visitStart (S_midi_device& elt)
     gLogStream <<
       "--> Start visiting S_midi_device" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26417,7 +26415,7 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
     gLogStream <<
       "--> Start visiting S_midi_instrument" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -26441,19 +26439,19 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
       gLogStream <<
         "--> figured bass" <<
         ", line " << inputLineNumber << ":" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       const int fieldWidth = 31;
 
-      gLogStream << left <<
-        setw (fieldWidth) << "fCurrentPart" << " = " <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) << "fCurrentPart" << " = " <<
         fCurrentPart->getPartCombinedName () <<
-        endl <<
-        setw (fieldWidth) << "fCurrentFiguredBassSoundingWholeNotes" << " = " <<
+        std::endl <<
+        std::setw (fieldWidth) << "fCurrentFiguredBassSoundingWholeNotes" << " = " <<
         fCurrentFiguredBassSoundingWholeNotes <<
-        endl;
+        std::endl;
 
       --gIndenter;
     }
@@ -26480,7 +26478,7 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
     // attach pending figures to the figured bass
     if (fPendingFiguredBassFiguresList.size ()) {
       for (
-        list<S_msrBassFigure>::const_iterator i=fPendingFiguredBassFiguresList.begin ();
+        std::list<S_msrBassFigure>::const_iterator i=fPendingFiguredBassFiguresList.begin ();
         i!=fPendingFiguredBassFiguresList.end ();
         ++i
       ) {
@@ -26512,27 +26510,27 @@ part-symbol
   if (gGlobalTracingOahGroup->getTraceNotes ()) { // JMI
      const int fieldWidth = 27;
 
-    gLogStream << left <<
-      endl <<
+    gLogStream << std::left <<
+      std::endl <<
       "==> AFTER visitEnd (S_note&) " <<
       newNote->asString () <<
       ", line " << inputLineNumber <<
       " we have:" <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "--> fCurrentMusicXMLStaffNumber" << " = " <<
       fCurrentMusicXMLStaffNumber <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "--> fCurrentMusicXMLVoiceNumber" << " = " <<
       fCurrentMusicXMLVoiceNumber <<
-      endl <<
-      setw (fieldWidth) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
       "--> current voice" << " = \"" <<
       currentVoice->getVoiceName () << "\"" <<
-      endl <<
+      std::endl <<
       "<==" <<
-      endl;
+      std::endl;
   }
 #endif
 */
@@ -26541,33 +26539,33 @@ part-symbol
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) { // JMI
     gLogStream <<
-      endl <<
+      std::endl <<
       "==> BEFORE visitEnd (S_note&)" <<
       ", line " << inputLineNumber <<
       " we have:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     const int fieldWidth = 27;
 
-    gLogStream << left <<
-      setw (fieldWidth) << "--> fCurrentMusicXMLStaffNumber" << " = " <<
+    gLogStream << std::left <<
+      std::setw (fieldWidth) << "--> fCurrentMusicXMLStaffNumber" << " = " <<
       fCurrentMusicXMLStaffNumber <<
-      endl <<
-      setw (fieldWidth) << "--> fCurrentMusicXMLVoiceNumber" << " = " <<
+      std::endl <<
+      std::setw (fieldWidth) << "--> fCurrentMusicXMLVoiceNumber" << " = " <<
       fCurrentMusicXMLVoiceNumber <<
-      endl <<
-      setw (fieldWidth) << "--> current voice" << " = \"" <<
+      std::endl <<
+      std::setw (fieldWidth) << "--> current voice" << " = \"" <<
       currentVoice->getVoiceName () << "\"" <<
-      endl;
+      std::endl;
 
     --gIndenter;
 
     gLogStream <<
       "<==" <<
-      endl <<
-      * endl;
+      std::endl <<
+      * std::endl;
   }
 #endif
 */
@@ -26617,7 +26615,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 
 // void mxsr2msrTranslator::convertWordsToTempo (
 //   int           inputLineNumber,
-//   const string& wordsValue)
+//   const std::string& wordsValue)
 // {
 //   // create an msrWords containing wordsValue
 //   S_msrWords
@@ -26657,7 +26655,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
 //       ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -26666,7 +26664,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 
 // void mxsr2msrTranslator::convertWordsToRehearsalMark (
 //   int           inputLineNumber,
-//   const string& wordsValue)
+//   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
 //       S_msrRehearsalMark
@@ -26690,17 +26688,17 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
 //           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
-//           endl;
+//           std::endl;
 //       }
 //     #endif
 //
-//       // append the rehearsalMark to the pending tempos list
+//       // append the rehearsalMark to the pending tempos std::list
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
 // void mxsr2msrTranslator::convertWordsToSegno (
 //   int           inputLineNumber,
-//   const string& wordsValue)
+//   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
 //       S_msrRehearsalMark
@@ -26724,11 +26722,11 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
 //           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
-//           endl;
+//           std::endl;
 //       }
 //     #endif
 //
-//       // append dal segno to the pending tempos list
+//       // append dal segno to the pending tempos std::list
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
@@ -26755,17 +26753,17 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
 //       ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
-//   // append dal segno al fine to the pending tempos list
+//   // append dal segno al fine to the pending tempos std::list
 //   fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
 // void mxsr2msrTranslator::convertWordsToDalSegnoAlCoda (
 //   int           inputLineNumber,
-//   const string& wordsValue)
+//   const std::string& wordsValue)
 // {
 //   // create an msrWords containing wordsValue
 //   S_msrRehearsalMark
@@ -26789,16 +26787,16 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
 //       ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
-//   // append dal segno al coda to the pending tempos list
+//   // append dal segno al coda to the pending tempos std::list
 //   fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 // void mxsr2msrTranslator::convertWordsToCoda (
 //   int           inputLineNumber,
-//   const string& wordsValue)
+//   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
 //       S_msrRehearsalMark
@@ -26822,17 +26820,17 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
 //           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
-//           endl;
+//           std::endl;
 //       }
 //     #endif
 //
-//       // append coda to the pending tempos list
+//       // append coda to the pending tempos std::list
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
 // void mxsr2msrTranslator::convertWordsToCresc (
 //   int           inputLineNumber,
-//   const string& wordsValue)
+//   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
 //       S_msrCrescDecresc
@@ -26856,16 +26854,16 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
 //           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
-//           endl;
+//           std::endl;
 //       }
 //     #endif
 //
-//       // append the rehearsalMark to the pending tempos list
+//       // append the rehearsalMark to the pending tempos std::list
 //       fPendinCrescDecrescsList.push_back (crescDecresc);
 // }
 // void mxsr2msrTranslator::convertWordsToDecresc (
 //   int           inputLineNumber,
-//   const string& wordsValue)
+//   const std::string& wordsValue)
 //     {
 //       // create an msrWords containing wordsValue
 //       S_msrCrescDecresc
@@ -26889,11 +26887,11 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
 //           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
-//           endl;
+//           std::endl;
 //       }
 //     #endif
 //
-//       // append the rehearsalMark to the pending tempos list
+//       // append the rehearsalMark to the pending tempos std::list
 //       fPendinCrescDecrescsList.push_back (crescDecresc);
 // }
 
@@ -26909,7 +26907,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //                     noteVoice->getVoiceName () <<
 //                     "\"" <<
 //                     ", line " << ligature->getInputLineNumber () <<
-//                     endl;
+//                     std::endl;
 //                 }
 // #endif
 //
@@ -26931,7 +26929,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //                     noteVoice->getVoiceName () <<
 //                     "\"" <<
 //                     ", line " << ligature->getInputLineNumber () <<
-//                     endl;
+//                     std::endl;
 //                 }
 // #endif
 //

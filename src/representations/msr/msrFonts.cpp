@@ -24,10 +24,10 @@ namespace MusicFormats
 
 // font size
 //______________________________________________________________________________
-string msrFontSizeKindAsString (
+std::string msrFontSizeKindAsString (
   msrFontSizeKind fontSizeKind)
 {
-  string result;
+  std::string result;
 
   switch (fontSizeKind) {
     case msrFontSizeKind::kFontSizeNone:
@@ -62,7 +62,7 @@ string msrFontSizeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const  msrFontSizeKind& elt)
+std::ostream& operator << (std::ostream& os, const  msrFontSizeKind& elt)
 {
   os <<  msrFontSizeKindAsString (elt);
   return os;
@@ -107,9 +107,9 @@ msrFontSize::msrFontSize (
 msrFontSize::~msrFontSize ()
 {}
 
-string msrFontSize::fontSizeAsString () const
+std::string msrFontSize::fontSizeAsString () const
 {
-  string result;
+  std::string result;
 
   switch (fFontSizeKind) {
     case msrFontSizeKind::kFontSizeNone:
@@ -125,7 +125,7 @@ string msrFontSize::fontSizeAsString () const
 
     case msrFontSizeKind::kFontSizeNumeric:
       result =
-        to_string (fFontNumericSize);
+        std::to_string (fFontNumericSize);
       break;
     } // switch
 
@@ -146,7 +146,7 @@ float msrFontSize::getFontNumericSize () const
     case msrFontSizeKind::kFontSizeXLarge:
     case msrFontSizeKind::kFontSizeXXLarge:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "attempting to get font numeric size for a " <<
@@ -168,7 +168,7 @@ float msrFontSize::getFontNumericSize () const
   return result;
 }
 
-void msrFontSize::print (ostream& os) const
+void msrFontSize::print (std::ostream& os) const
 {
   switch (fFontSizeKind) {
     case msrFontSizeKind::kFontSizeNone:
@@ -194,7 +194,7 @@ void msrFontSize::print (ostream& os) const
 //______________________________________________________________________________
 msrFontStyleKind msrFontStyleKindFromString (
   int           inputLineNumber,
-  const string& fontStyleString)
+  const std::string& fontStyleString)
 {
   msrFontStyleKind result = msrFontStyleKind::kFontStyleNone; // default value
 
@@ -204,7 +204,7 @@ msrFontStyleKind msrFontStyleKindFromString (
     result = msrFontStyleKind::KFontStyleItalic;
   else {
     if (fontStyleString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "style value " << fontStyleString <<
@@ -221,10 +221,10 @@ msrFontStyleKind msrFontStyleKindFromString (
   return result;
 }
 
-string msrFontStyleKindAsString (
+std::string msrFontStyleKindAsString (
   msrFontStyleKind fontStyleKind)
 {
-  string result;
+  std::string result;
 
   switch (fontStyleKind) {
     case msrFontStyleKind::kFontStyleNone:
@@ -241,7 +241,7 @@ string msrFontStyleKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrFontStyleKind& elt)
+std::ostream& operator << (std::ostream& os, const msrFontStyleKind& elt)
 {
   os << msrFontStyleKindAsString (elt);
   return os;
@@ -251,7 +251,7 @@ ostream& operator << (ostream& os, const msrFontStyleKind& elt)
 //______________________________________________________________________________
 msrFontWeightKind msrFontWeightKindFromString (
   int           inputLineNumber,
-  const string& fontWeightString)
+  const std::string& fontWeightString)
 {
   msrFontWeightKind result = msrFontWeightKind::kFontWeightNone; // default value
 
@@ -261,7 +261,7 @@ msrFontWeightKind msrFontWeightKindFromString (
     result = msrFontWeightKind::kFontWeightBold;
   else {
     if (fontWeightString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "font weight value " << fontWeightString <<
@@ -278,10 +278,10 @@ msrFontWeightKind msrFontWeightKindFromString (
   return result;
 }
 
-string msrFontWeightKindAsString (
+std::string msrFontWeightKindAsString (
   msrFontWeightKind fontWeightKind)
 {
-  string result;
+  std::string result;
 
   switch (fontWeightKind) {
     case msrFontWeightKind::kFontWeightNone:
@@ -298,7 +298,7 @@ string msrFontWeightKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrFontWeightKind& elt)
+std::ostream& operator << (std::ostream& os, const msrFontWeightKind& elt)
 {
   os << msrFontWeightKindAsString (elt);
   return os;

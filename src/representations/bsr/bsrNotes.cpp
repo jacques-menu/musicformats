@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
 
@@ -24,16 +24,14 @@
 #include "bsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string bsrNoteOctaveKindAsString (
+std::string bsrNoteOctaveKindAsString (
   bsrNoteOctaveKind noteOctaveKind)
 {
-  string result;
+  std::string result;
 
   switch (noteOctaveKind) {
     case bsrNoteOctaveKind::kNoteOctaveNone:   result = "octaveNone"; break;
@@ -51,10 +49,10 @@ string bsrNoteOctaveKindAsString (
   return result;
 }
 
-string bsrNoteOctaveKindAsDebugString (
+std::string bsrNoteOctaveKindAsDebugString (
   bsrNoteOctaveKind noteOctaveKind)
 {
-  string result;
+  std::string result;
 
   switch (noteOctaveKind) {
     case bsrNoteOctaveKind::kNoteOctaveNone: break; // should be "_", fix noteOctaveIsNeeded in msr2bsrTranslator.cpp for rests JMI
@@ -72,7 +70,7 @@ string bsrNoteOctaveKindAsDebugString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrNoteOctaveKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrNoteOctaveKind& elt)
 {
   os << bsrNoteOctaveKindAsString (elt);
   return os;
@@ -870,7 +868,7 @@ void bsrNote::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrNote::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -883,7 +881,7 @@ void bsrNote::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrNote::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -896,7 +894,7 @@ void bsrNote::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrNote::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -909,7 +907,7 @@ void bsrNote::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrNote::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -919,10 +917,10 @@ void bsrNote::acceptOut (basevisitor* v)
 void bsrNote::browseData (basevisitor* v)
 {}
 
-string bsrNoteValueKindAsString (
+std::string bsrNoteValueKindAsString (
   bsrNoteValueKind noteValueKind)
 {
-  string result;
+  std::string result;
 
   switch (noteValueKind) {
     case bsrNoteValueKind::kNoteValueNone: result = "None"; break;
@@ -1019,10 +1017,10 @@ string bsrNoteValueKindAsString (
   return result;
 }
 
-string bsrNoteValueKindAsDebugString (
+std::string bsrNoteValueKindAsDebugString (
   bsrNoteValueKind noteValueKind)
 {
-  string result;
+  std::string result;
 
   switch (noteValueKind) {
     case bsrNoteValueKind::kNoteValueNone: result = "_"; break;
@@ -1119,16 +1117,16 @@ string bsrNoteValueKindAsDebugString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrNoteValueKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrNoteValueKind& elt)
 {
   os << bsrNoteValueKindAsString (elt);
   return os;
 }
 
-string bsrNoteValueSizeKindAsString (
+std::string bsrNoteValueSizeKindAsString (
   bsrNoteValueSizeKind noteValueSizeKind)
 {
-  string result;
+  std::string result;
 
   switch (noteValueSizeKind) {
     case bsrNoteValueSizeKind::kNoteValueSizeNone:
@@ -1145,16 +1143,16 @@ string bsrNoteValueSizeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrNoteValueSizeKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrNoteValueSizeKind& elt)
 {
   os << bsrNoteValueSizeKindAsString (elt);
   return os;
 }
 
-string bsrNoteOctaveIsNeededAsString (
+std::string bsrNoteOctaveIsNeededAsString (
   bsrNoteOctaveIsNeeded noteOctaveIsNeeded)
 {
-  string result;
+  std::string result;
 
   switch (noteOctaveIsNeeded) {
     case bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededYes:
@@ -1168,16 +1166,16 @@ string bsrNoteOctaveIsNeededAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrNoteOctaveIsNeeded& elt)
+std::ostream& operator << (std::ostream& os, const bsrNoteOctaveIsNeeded& elt)
 {
   os << bsrNoteOctaveIsNeededAsString (elt);
   return os;
 }
 
-string bsrAccidentalKindAsString (
+std::string bsrAccidentalKindAsString (
   bsrAccidentalKind accidentalKind)
 {
-  string result;
+  std::string result;
 
   switch (accidentalKind) {
     case bsrAccidentalKind::kAccidentalNone:
@@ -1220,10 +1218,10 @@ string bsrAccidentalKindAsString (
   return result;
 }
 
-string bsrAccidentalKindAsDebugString (
+std::string bsrAccidentalKindAsDebugString (
   bsrAccidentalKind accidentalKind)
 {
-  string result;
+  std::string result;
 
   switch (accidentalKind) {
     case bsrAccidentalKind::kAccidentalNone:
@@ -1266,15 +1264,15 @@ string bsrAccidentalKindAsDebugString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrAccidentalKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrAccidentalKind& elt)
 {
   os << bsrAccidentalKindAsString (elt);
   return os;
 }
 
-string bsrNote::asString () const
+std::string bsrNote::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Note" <<
@@ -1292,9 +1290,9 @@ string bsrNote::asString () const
   return s.str ();
 }
 
-string bsrNote::asShortString () const // finalize this JMI
+std::string bsrNote::asShortString () const // finalize this JMI
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Note" <<
@@ -1312,9 +1310,9 @@ string bsrNote::asShortString () const // finalize this JMI
   return s.str ();
 }
 
-string bsrNote::asDebugString () const
+std::string bsrNote::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   switch (fNoteOctaveIsNeeded) {
     case bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededYes:
@@ -1336,54 +1334,54 @@ string bsrNote::asDebugString () const
   return s.str ();
 }
 
-void bsrNote::print (ostream& os) const
+void bsrNote::print (std::ostream& os) const
 {
   os <<
     "Note" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 23;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fNoteValueKind" << " : " << fNoteValueKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fNoteDotsNumber" << " : " << fNoteDotsNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fNoteOctaveKind" << " : " <<  fNoteOctaveKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fNoteValueSizeIsNeeded" << " : " << fNoteValueSizeIsNeeded <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fNoteOctaveIsNeeded" << " : " << fNoteOctaveIsNeeded <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fAccidentalKind" << " : " << fAccidentalKind <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "cellsList" << " : " <<
     buildCellsList ()->asShortString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fSpacesBefore" << " : " << fSpacesBefore <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrNote& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrNote& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

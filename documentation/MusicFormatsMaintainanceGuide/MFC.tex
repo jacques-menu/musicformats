@@ -39,9 +39,9 @@ class   mfcVersionNumber: public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -51,7 +51,7 @@ class   mfcVersionNumber: public smartable
     int                   fMajorNumber;
     int                   fMinorNumber;
     int                   fPatchNumber;
-    string                fPreRelease;
+    std::string           fPreRelease;
 };
 \end{lstlisting}
 
@@ -72,8 +72,8 @@ class   mfcVersionDescr : public smartable
     // ------------------------------------------------------
 
     S_mfcVersionNumber    fVersionNumber;
-    string                fVersionDate;
-    list<string>          fVersionDescriptionItems;
+    std::string           fVersionDate;
+    std::list<std::string>          fVersionDescriptionItems;
 };
 \end{lstlisting}
 
@@ -82,7 +82,7 @@ class   mfcVersionDescr : public smartable
 \section{Versions histories}\label{Versions histories}
 % -------------------------------------------------------------------------
 
-An instance of \className{mfcVersionsHistory} is essentially a list of \className{mfcVersionsHistory} instances:
+An instance of \className{mfcVersionsHistory} is essentially a std::list of \className{mfcVersionsHistory} instances:
 \begin{lstlisting}[language=CPlusPlus]
 class   mfcVersionsHistory : public smartable
 {
@@ -107,7 +107,7 @@ class   mfcVersionsHistory : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    list<S_mfcVersionDescr>
+    std::list<S_mfcVersionDescr>
                           fVersionsList;
 };
 \end{lstlisting}
@@ -167,28 +167,28 @@ class   mfcComponent : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    string                mostRecentVersionNumberAndDateAsString () const;
+    std::string           mostRecentVersionNumberAndDateAsString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
-    virtual void          printVersion (ostream& os) const;
-    virtual void          printHistory (ostream& os) const;
+    virtual void          printVersion (std::ostream& os) const;
+    virtual void          printHistory (std::ostream& os) const;
 
   protected:
 
     // protected services
     // ------------------------------------------------------
 
-    virtual void          printOwnHistory (ostream& os) const;
+    virtual void          printOwnHistory (std::ostream& os) const;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    string                fComponentName;
+    std::string           fComponentName;
 
     mfcComponenKind       fComponenKind;
 
@@ -233,9 +233,9 @@ class   mfcMultiComponent : public mfcComponent
     // protected fields
     // ------------------------------------------------------
 
-    list<S_mfcRepresentationComponent>
+    std::list<S_mfcRepresentationComponent>
                           fRepresentationComponentsList;
-    list<S_mfcPassComponent>
+    std::list<S_mfcPassComponent>
                           fPassComponentsList;
 
     // should the version number be at least equal to
@@ -377,7 +377,7 @@ S_mfcRepresentationComponent EXP createMsrRepresentationComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Initializing MSR format component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -392,7 +392,7 @@ S_mfcRepresentationComponent EXP createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -402,7 +402,7 @@ S_mfcRepresentationComponent EXP createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"), // JMI
           "October 14, 2021",
-          list<string> {
+          std::list<std::string> {
             "Refined MSR names and summary display options"
           }
       ));
@@ -421,7 +421,7 @@ The conversion of \mxml\ to \mxsrRepr does not belong to \mf\, since it is provi
 
 In that case, the formats and passes components used by the multi-component should be created as well.
 
-For example, the formats and passes used by the \fileName{musicxml2braille} converter are appended to the atoms versions list in its history in \function{createMusicxml2brailleConverterComponent} in \\
+For example, the formats and passes used by the \fileName{musicxml2braille} converter are appended to the atoms versions std::list in its history in \function{createMusicxml2brailleConverterComponent} in \\
 \musicxmlToBraille{musicxml2brailleConverterComponent.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
@@ -435,7 +435,7 @@ S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the musicxml2braille component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -452,7 +452,7 @@ S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -462,12 +462,12 @@ S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 12, 2021",
-          list<string> {
+          std::list<std::string> {
             "Fixed trace OAH issue"
           }
       ));
 
-    // populate the converter's formats list
+    // populate the converter's formats std::list
     pConverterComponent->
       appendRepresentationToMultiComponent (
         createMxsrRepresentationComponent ());
@@ -521,7 +521,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Creating the  MFC library component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -538,7 +538,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -548,7 +548,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 12, 2021",
-          list<string> {
+          std::list<std::string> {
             "Adding a version number to the MusicFormats library",
             "Fixed trace OAH issue in the musicxml2* converters)"
           }
@@ -559,7 +559,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "October 12, 2021",
-          list<string> {
+          std::list<std::string> {
             "Added MusicFormats library versions history to '-hist, -history'"
           }
       ));
@@ -569,7 +569,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.53"),
           "October 22, 2021",
-          list<string> {
+          std::list<std::string> {
             "Replaced bool by class   Bool in variables and fields",
             "Created MFC (MusicFormats components)"
           }
@@ -580,8 +580,8 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.54"),
           "Novermber 6, 2021",
-          list<string> {
-            "Replaced cout and cerr by gOutputStream and gLogStream respectively in the CLI samples",
+          std::list<std::string> {
+            "Replaced std::cout and std::cerr by gOutputStream and gLogStream respectively in the CLI samples",
             "Finalized components numbering (MFC)"
           }
       ));
@@ -690,8 +690,8 @@ class EXP oahHandler : public smartable
 For example in \constructor{xml2xmlInsiderHandler}:
 \begin{lstlisting}[language=CPlusPlus]
 xml2xmlInsiderHandler::xml2xmlInsiderHandler (
-  const string& serviceName,
-  string handlerHeader)
+  const std::string& serviceName,
+  std::string handlerHeader)
   : oahInsiderHandler (
       serviceName,
       handlerHeader,
@@ -850,7 +850,7 @@ class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
 	// ... ... ...
 
@@ -861,19 +861,19 @@ class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
 
 		// ... ... ...
 
-    void                  printVersion (ostream& os) const;
+    void                  printVersion (std::ostream& os) const;
 };
 \end{lstlisting}
 
 The option is applied by \method{oahVersionAtom}{applyElement}:
 \begin{lstlisting}[language=CPlusPlus]
-void oahVersionAtom::applyElement (ostream& os)
+void oahVersionAtom::applyElement (std::ostream& os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahVersionAtom" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -889,7 +889,7 @@ void oahVersionAtom::applyElement (ostream& os)
 
 The work is done by \method{oahVersionAtom}{printVersion}:
 \begin{lstlisting}[language=CPlusPlus]
-void oahVersionAtom::printVersion (ostream& os) const
+void oahVersionAtom::printVersion (std::ostream& os) const
 {
   // get the handler version
   S_mfcMultiComponent
@@ -975,7 +975,7 @@ lpsrScore::lpsrScore (
   if (gGlobalLpsr2lilypondOahGroup->getXml2lyInfos ()) {
     // create the 'input source name and translation date' comment
     {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "Generated by " <<
@@ -983,11 +983,11 @@ lpsrScore::lpsrScore (
         ' ' <<
         fMultiComponent->
           mostRecentVersionNumberAndDateAsString () <<
-        endl <<
+        std::endl <<
 
         "% on " <<
         gGlobalServiceRunData->getTranslationDateFull () <<
-        endl <<
+        std::endl <<
 
         "% from ";
 
@@ -1062,33 +1062,33 @@ void msr2mxsrTranslator::visitStart (S_msrScore& elt)
       createMsr2mxsrComponent ();
 
   // get the pass component current version number and date
-  string
+  std::string
     passComponentMostRecentVersionNumberAndDateAsString =
       passComponent->
         mostRecentVersionNumberAndDateAsString ();
 
   // create the initial creation comment
-  stringstream s;
+  std::stringstream s;
   s <<
-    endl <<
+    std::endl <<
     "==================================================" <<
-    endl <<
+    std::endl <<
     "Created by " <<
     gGlobalOahOahGroup->getOahOahGroupServiceName () <<
     ' ' <<
     passComponentMostRecentVersionNumberAndDateAsString <<
-    endl <<
+    std::endl <<
 
     "on " <<
     gGlobalServiceRunData->getTranslationDateFull () <<
-    endl <<
+    std::endl <<
 
     "from " <<
     gGlobalServiceRunData->getInputSourceName () <<
-    endl <<
+    std::endl <<
 
     "==================================================" <<
-    endl;
+    std::endl;
 
   // append the initial creation comment to the score part wise element
   fResultingMusicxmlelement->push (createMxmlelement (kComment, s.str ()));

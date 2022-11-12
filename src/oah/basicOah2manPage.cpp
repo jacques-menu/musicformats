@@ -22,15 +22,13 @@
 
 #include "oahOah.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //________________________________________________________________________
 basicOah2manPage::basicOah2manPage (
   const S_oahHandler handler,
-  ostream&           manPageOutputStream)
+  std::ostream&           manPageOutputStream)
     : oah2manPage (
         handler,
         manPageOutputStream)
@@ -45,10 +43,10 @@ void basicOah2manPage::visitStart (S_oahHandler& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahHandler" <<
       " \"" << elt->getHandlerHeader () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -62,7 +60,7 @@ void basicOah2manPage::visitStart (S_oahHandler& elt)
         fetchComponentMostRecentVersionNumber () <<
     " on " <<
     gGlobalServiceRunData->getRunDateFull () <<
-    endl;
+    std::endl;
 
   // the man page header
   fManPageOutputStream <<
@@ -77,31 +75,31 @@ void basicOah2manPage::visitStart (S_oahHandler& elt)
     " \"" <<
     "User Commands" <<
     "\"" <<
-    endl <<
+    std::endl <<
 
     ".SH NAME" <<
-    endl <<
+    std::endl <<
     ".NM " <<
     gGlobalOahOahGroup->getOahOahGroupServiceName () <<
-    endl <<
+    std::endl <<
     ".ND " <<
     "manual page for " <<
     gGlobalOahOahGroup->getOahOahGroupServiceName () <<
-    endl <<
+    std::endl <<
 
     ".SH DESCRIPTION" <<
-    endl <<
+    std::endl <<
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getHandlerDescription () <<
-    endl <<
+    std::endl <<
 
     ".SH \"USAGE\"" <<
-    endl <<
+    std::endl <<
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getHandlerUsage () <<
-    endl;
+    std::endl;
 }
 
 void basicOah2manPage::visitEnd (S_oahHandler& elt)
@@ -109,10 +107,10 @@ void basicOah2manPage::visitEnd (S_oahHandler& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahHandler" <<
       " \"" << elt->getHandlerHeader () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -123,20 +121,20 @@ void basicOah2manPage::visitStart (S_oahPrefix& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahPrefix" <<
       " \"" << elt->getPrefixName () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".IT FL " <<
- //   endl <<
+ //   std::endl <<
     elt->getPrefixErsatz () <<
     ' ' <<
     elt->getPrefixDescription () <<
-    endl;
+    std::endl;
 }
 
 void basicOah2manPage::visitEnd (S_oahPrefix& elt)
@@ -144,10 +142,10 @@ void basicOah2manPage::visitEnd (S_oahPrefix& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahPrefix" <<
       " \"" << elt->getPrefixName () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -158,24 +156,24 @@ void basicOah2manPage::visitStart (S_oahGroup& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahGroup" <<
       " \"" << elt->getGroupHeader () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fManPageOutputStream <<
     ".SH " <<
     elt->getGroupHeader () <<
-    endl <<
+    std::endl <<
     "(\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR): " <<
-    endl;
+    std::endl;
 }
 
 void basicOah2manPage::visitEnd (S_oahGroup& elt)
@@ -183,10 +181,10 @@ void basicOah2manPage::visitEnd (S_oahGroup& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahGroup" <<
       " \"" << elt->getGroupHeader () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -197,27 +195,27 @@ void basicOah2manPage::visitStart (S_oahSubGroup& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahSubGroup" <<
       " \"" << elt->getSubGroupHeader () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 /*
   fManPageOutputStream <<
     ".TP" <<
-    endl <<
+    std::endl <<
     elt->getSubGroupHeader () <<
-    endl <<
+    std::endl <<
     ".BL -tag -width indent" <<
-    endl <<
+    std::endl <<
     "(\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR): " <<
-    endl;
+    std::endl;
 */
 }
 
@@ -226,10 +224,10 @@ void basicOah2manPage::visitEnd (S_oahSubGroup& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahSubGroup" <<
       " \"" << elt->getSubGroupHeader () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -240,10 +238,10 @@ void basicOah2manPage::visitStart (S_oahAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting S_oahAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -253,10 +251,10 @@ void basicOah2manPage::visitEnd (S_oahAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting S_oahAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -267,12 +265,12 @@ void basicOah2manPage::visitStart (S_oahAtomStoringAValue& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahAtomStoringAValue '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -282,10 +280,10 @@ void basicOah2manPage::visitEnd (S_oahAtomStoringAValue& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahAtomStoringAValue" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -296,10 +294,10 @@ void basicOah2manPage::visitStart (S_oahAtomAlias& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahAtomAlias" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -310,10 +308,10 @@ void basicOah2manPage::visitEnd (S_oahAtomAlias& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahAtomAlias" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -324,10 +322,10 @@ void basicOah2manPage::visitStart (S_oahOptionsUsageAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahOptionsUsageAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -338,10 +336,10 @@ void basicOah2manPage::visitEnd (S_oahOptionsUsageAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahOptionsUsageAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -352,10 +350,10 @@ void basicOah2manPage::visitStart (S_oahHelpSummaryAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahHelpSummaryAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -365,10 +363,10 @@ void basicOah2manPage::visitEnd (S_oahHelpSummaryAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahHelpSummaryAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -379,12 +377,12 @@ void basicOah2manPage::visitStart (S_oahOptionNameHelpAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahOptionNameHelpAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -394,10 +392,10 @@ void basicOah2manPage::visitEnd (S_oahOptionNameHelpAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahOptionNameHelpAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -408,30 +406,30 @@ void basicOah2manPage::visitStart (S_oahBooleanAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahBooleanAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 /*
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
     */
 }
 
@@ -440,10 +438,10 @@ void basicOah2manPage::visitEnd (S_oahBooleanAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahBooleanAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -454,31 +452,31 @@ void basicOah2manPage::visitStart (S_oahTwoBooleansAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahTwoBooleansAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
 /*
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
     */
 }
 
@@ -487,10 +485,10 @@ void basicOah2manPage::visitEnd (S_oahTwoBooleansAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahTwoBooleansAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -501,31 +499,31 @@ void basicOah2manPage::visitStart (S_oahThreeBooleansAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahThreeBooleansAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
 /*
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
     */
 }
 
@@ -534,10 +532,10 @@ void basicOah2manPage::visitEnd (S_oahThreeBooleansAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahThreeBooleansAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -548,12 +546,12 @@ void basicOah2manPage::visitStart (S_oahCombinedBooleansAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahCombinedBooleansAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -563,10 +561,10 @@ void basicOah2manPage::visitEnd (S_oahCombinedBooleansAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahCombinedBooleansAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -577,12 +575,12 @@ void basicOah2manPage::visitStart (S_oahCommonPrefixBooleansAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahCommonPrefixBooleansAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -592,10 +590,10 @@ void basicOah2manPage::visitEnd (S_oahCommonPrefixBooleansAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahCommonPrefixBooleansAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -606,12 +604,12 @@ void basicOah2manPage::visitStart (S_oahIntegerAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahIntegerAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -621,10 +619,10 @@ void basicOah2manPage::visitEnd (S_oahIntegerAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahIntegerAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -635,12 +633,12 @@ void basicOah2manPage::visitStart (S_oahTwoIntegersAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahTwoIntegersAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -650,10 +648,10 @@ void basicOah2manPage::visitEnd (S_oahTwoIntegersAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahTwoIntegersAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -664,12 +662,12 @@ void basicOah2manPage::visitStart (S_oahFloatAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahFloatAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -679,10 +677,10 @@ void basicOah2manPage::visitEnd (S_oahFloatAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahFloatAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -693,12 +691,12 @@ void basicOah2manPage::visitStart (S_oahStringAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahStringAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -708,10 +706,10 @@ void basicOah2manPage::visitEnd (S_oahStringAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahStringAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -722,12 +720,12 @@ void basicOah2manPage::visitStart (S_oahRationalAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahRationalAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -737,10 +735,10 @@ void basicOah2manPage::visitEnd (S_oahRationalAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahRationalAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -751,12 +749,12 @@ void basicOah2manPage::visitStart (S_oahFactorizedStringAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahFactorizedStringAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -766,10 +764,10 @@ void basicOah2manPage::visitEnd (S_oahFactorizedStringAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahFactorizedStringAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -780,12 +778,12 @@ void basicOah2manPage::visitStart (S_oahStringWithDefaultValueAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahStringWithDefaultValueAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -795,12 +793,12 @@ void basicOah2manPage::visitEnd (S_oahStringWithDefaultValueAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahStringWithDefaultValueAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -812,12 +810,12 @@ void basicOah2manPage::visitStart (S_oahNaturalNumbersSetElementAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahNaturalNumbersSetElementAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -827,10 +825,10 @@ void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetElementAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahNaturalNumbersSetElementAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -842,12 +840,12 @@ void basicOah2manPage::visitStart (S_oahStringsSetElementAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahStringsSetElementAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -857,10 +855,10 @@ void basicOah2manPage::visitEnd (S_oahStringsSetElementAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahStringsSetElementAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -872,12 +870,12 @@ void basicOah2manPage::visitStart (S_oahStringSetElementAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahStringSetElementAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -887,10 +885,10 @@ void basicOah2manPage::visitEnd (S_oahStringSetElementAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahStringSetElementAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -901,12 +899,12 @@ void basicOah2manPage::visitStart (S_oahColorRGBAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahColorRGBAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -916,10 +914,10 @@ void basicOah2manPage::visitEnd (S_oahColorRGBAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahColorRGBAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -930,12 +928,12 @@ void basicOah2manPage::visitStart (S_oahStringAndIntegerAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahStringAndIntegerAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -945,10 +943,10 @@ void basicOah2manPage::visitEnd (S_oahStringAndIntegerAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahStringAndIntegerAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -959,12 +957,12 @@ void basicOah2manPage::visitStart (S_oahStringAndTwoIntegersAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahStringAndTwoIntegersAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -974,10 +972,10 @@ void basicOah2manPage::visitEnd (S_oahStringAndTwoIntegersAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahStringAndTwoIntegersAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }

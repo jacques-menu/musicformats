@@ -19,7 +19,7 @@
 #include "xml.h"
 #include "xmlfile.h"
 
-using namespace std;
+
 using namespace MusicXML2;
 
 
@@ -38,15 +38,15 @@ static int getrandom(int range) {
   return (int)(f * range);
 }
 
-static string randomNote() {
+static std::string randomNote() {
   int n = getrandom(7);
-  string note;
+  std::string note;
   note += (char('A' + n));
   return note;
 }
 
 //------------------------------------------------------------------------
-static Sxmlattribute newAttribute(const string& name, const string& value)
+static Sxmlattribute newAttribute(const std::string& name, const std::string& value)
 {
   Sxmlattribute attribute = xmlattribute::create();
   attribute->setName(name);
@@ -55,7 +55,7 @@ static Sxmlattribute newAttribute(const string& name, const string& value)
 }
 
 //------------------------------------------------------------------------
-static Sxmlattribute newAttributeI(const string& name, int value)
+static Sxmlattribute newAttributeI(const std::string& name, int value)
 {
   Sxmlattribute attribute = xmlattribute::create();
   attribute->setName(name);
@@ -64,7 +64,7 @@ static Sxmlattribute newAttributeI(const string& name, int value)
 }
 
 //------------------------------------------------------------------------
-static Sxmlelement newElement(int type, const string& value)
+static Sxmlelement newElement(int type, const std::string& value)
 {
   Sxmlelement elt = factory::instance().create(type);
   elt->setValue (value);
@@ -211,7 +211,7 @@ static Sxmlelement makePart (int count) {
 }
 
 //------------------------------------------------------------------------
-// creates the part list element
+// creates the part std::list element
 //------------------------------------------------------------------------
 static Sxmlelement makePartList() {
   Sxmlelement partlist = factory::instance().create(k_part_list);
@@ -268,8 +268,8 @@ int main (int argc, char*  argv[]) {
   f->set( new TXMLDecl("1.0", "UTF-8", TXMLDecl::kNo));
   f->set( new TDocType("score-partwise"));
   f->set( randomMusic(count) );
-  f->print(cout);
-  cout << endl;
+  f->print(std::cout);
+  std::cout << std::endl;
     return 0;
 }
 

@@ -10,10 +10,10 @@
 */
 
 #include <string.h> // for strlen()
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 #include <regex>
 
-#include <iomanip> // for setw()
+#include <iomanip> // for std::setw()
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -43,8 +43,6 @@
 #include "oahAtomsCollection.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -52,28 +50,28 @@ namespace MusicFormats
 void displayXMLDeclaration (
   TXMLDecl* xmlDeclaration)
 {
-  string xmlVersion    = xmlDeclaration->getVersion ();
-  string xmlEncoding   = xmlDeclaration->getEncoding ();
+  std::string xmlVersion    = xmlDeclaration->getVersion ();
+  std::string xmlEncoding   = xmlDeclaration->getEncoding ();
   int    xmlStandalone = xmlDeclaration->getStandalone ();
 
   const int fieldWidth = 14;
 
   gLogStream <<
     "XML Declaration:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "xmlVersion" << " = \"" << xmlVersion << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "xmlEncoding" << " = \"" << xmlEncoding << "\"" <<
-    endl  <<
-    setw (fieldWidth) <<
+    std::endl  <<
+    std::setw (fieldWidth) <<
     "xmlStandalone" << " = \"" << xmlStandalone << "\"" <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
 }
@@ -86,7 +84,7 @@ void displayMusicXMLDocumentType (
 
   gLogStream <<
     "Document Type:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -95,62 +93,62 @@ void displayMusicXMLDocumentType (
   std::string xmlPubLitteral  = documentType->getPubLitteral ();
   std::string xmlSysLitteral  = documentType->getSysLitteral ();
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "xmlStartElement" << " = \"" << xmlStartElement << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "xmlPublic" << " = \"" << xmlPublic << "\"" <<
-    endl  <<
-    setw (fieldWidth) <<
+    std::endl  <<
+    std::setw (fieldWidth) <<
     "xmlPubLitteral" << " = \"" << xmlPubLitteral << "\"" <<
-    endl  <<
-    setw (fieldWidth) <<
+    std::endl  <<
+    std::setw (fieldWidth) <<
     "xmlSysLitteral" << " = \"" << xmlSysLitteral << "\"" <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
 }
 
 //_______________________________________________________________________________
-string uncompressMXLFile (
-  string mxlFileName)
+std::string uncompressMXLFile (
+  std::string mxlFileName)
 {
-  string fileBaseName = mfBaseName (mxlFileName);
+  std::string fileBaseName = mfBaseName (mxlFileName);
 
   gLogStream <<
     "The compressed file name is '" <<
     mxlFileName <<
     "'" <<
-    endl << endl;
+    std::endl << std::endl;
 
-  string uncompressedFileName;
+  std::string uncompressedFileName;
 
 #ifdef WIN32
   // JMI
 #else
   {
-    // build shell command to list the contents of the uncompress file
-    stringstream s1;
+    // build shell command to std::list the contents of the uncompress file
+    std::stringstream s1;
 
     s1 <<
       "unzip -l " <<
       mxlFileName;
 
-    string listContentsShellCommand = s1.str ();
+    std::string listContentsShellCommand = s1.str ();
 
     if (true) { // JMI
       gLogStream <<
         "Listing the contents of the compressed file '" <<
         mxlFileName <<
         "' with command:" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       gLogStream <<
         listContentsShellCommand <<
-        endl << endl;
+        std::endl << std::endl;
 
       --gIndenter;
     }
@@ -162,10 +160,10 @@ string uncompressMXLFile (
         "r");
 
     if (inputStream == nullptr) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
-        "Cannot list the contents of compressed file '" <<
+        "Cannot std::list the contents of compressed file '" <<
         mxlFileName <<
         "' with 'popen ()'";
 
@@ -177,9 +175,9 @@ string uncompressMXLFile (
     }
 
     else {
-      string contentsList;
+      std::string contentsList;
 
-      // read the list from inputStream
+      // read the std::list from inputStream
       char tampon [1024];
 
       while (
@@ -192,7 +190,7 @@ string uncompressMXLFile (
         // append the contents of tampon to contentsList
         contentsList += tampon;
       } // while
-      // terminate the string in tampon
+      // terminate the std::string in tampon
       tampon [strlen (tampon) -1] = '\0';
 
       // close the stream
@@ -208,21 +206,21 @@ string uncompressMXLFile (
         "The contents of the compressed file '" <<
         mxlFileName <<
         "' is:" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       gLogStream <<
         contentsList <<
-        endl;
+        std::endl;
 
       --gIndenter;
 
-      // analyze the contents list
-      list<string> linesList;
+      // analyze the contents std::list
+      std::list<std::string> linesList;
 
-      istringstream inputStream (contentsList);
-      string        currentLine;
+      std::istringstream inputStream (contentsList);
+      std::string        currentLine;
 
       while (getline (inputStream, currentLine)) {
 
@@ -232,13 +230,13 @@ string uncompressMXLFile (
         {
           gLogStream <<
             "*** currentLine:" <<
-            endl;
+            std::endl;
 
           ++gIndenter;
 
           gLogStream <<
             currentLine <<
-            endl;
+            std::endl;
 
           --gIndenter;
         }
@@ -257,7 +255,7 @@ string uncompressMXLFile (
             33643                     4 files
         */
 
-        string regularExpression (
+        std::string regularExpression (
           "[[:space:]]*"
           ".*"            // length
           "[[:space:]]+"
@@ -268,8 +266,8 @@ string uncompressMXLFile (
           "(.*)"          // name
           );
 
-        regex  e (regularExpression);
-        smatch sm;
+        std::regex  e (regularExpression);
+        std::smatch sm;
 
         regex_match (currentLine, sm, e);
 
@@ -278,22 +276,22 @@ string uncompressMXLFile (
           if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) { // JMI ???
             gLogStream <<
               "There are " << sm.size () - 1 << " match(es) " <<
-              "with regex '" << regularExpression <<
+              "with std::regex '" << regularExpression <<
               "':" <<
-              endl;
+              std::endl;
 
             for (unsigned i = 1; i < sm.size (); ++i) {
               gLogStream <<
                 '[' << sm [i] << "] " <<
-                endl;
+                std::endl;
             } // for
 
             gLogStream <<
-              endl << endl;
+              std::endl << std::endl;
           }
 #endif
 
-          string stringFromLine = sm [1];
+          std::string stringFromLine = sm [1];
 
           // has stringFromLine a ".xml" suffix?
           size_t
@@ -314,7 +312,7 @@ string uncompressMXLFile (
               // no, this is an actual MusicXML file
 
               if (uncompressedFileName.size ()) {
-                stringstream s;
+                std::stringstream s;
 
                 s <<
                   "Compressed file '" << mxlFileName <<
@@ -337,7 +335,7 @@ string uncompressMXLFile (
                   "The uncompressed file name is '" <<
                   uncompressedFileName <<
                   "'" <<
-                  endl << endl;
+                  std::endl << std::endl;
               }
             }
           }
@@ -348,13 +346,13 @@ string uncompressMXLFile (
 
   {
     // build shell command to uncompress the file
-    stringstream s2;
+    std::stringstream s2;
 
     s2 <<
       "unzip -u -d /tmp " <<
       mxlFileName;
 
-    string uncompressShellCommand = s2.str ();
+    std::string uncompressShellCommand = s2.str ();
 
     if (true) { // JMI
       gLogStream <<
@@ -363,13 +361,13 @@ string uncompressMXLFile (
         "' into '/tmp/" <<
         uncompressedFileName <<
         "' with command:" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       gLogStream <<
         uncompressShellCommand <<
-        endl << endl;
+        std::endl << std::endl;
 
       --gIndenter;
     }
@@ -381,7 +379,7 @@ string uncompressMXLFile (
         "r");
 
     if (inputStream == nullptr) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "Cannot uncompress the file '" <<
@@ -402,12 +400,12 @@ string uncompressMXLFile (
 
 //_______________________________________________________________________________
 void checkDesiredEncoding (
-  const string& encoding,
-  const string& desiredEncoding)
+  const std::string& encoding,
+  const std::string& desiredEncoding)
 {
   if (encoding != desiredEncoding) {
     if (encoding.size () == 0) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "MusicXML data in this file" <<
@@ -421,7 +419,7 @@ void checkDesiredEncoding (
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "this file is encoded in " <<
@@ -448,20 +446,20 @@ void checkDesiredEncoding (
 //_______________________________________________________________________________
 void checkSXMLFile (
   SXMLFile      sxmlfile,
-  const string& context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "!!!!! sxmlfile contents from " <<
       context <<
-      endl;
+      std::endl;
 
     sxmlfile->print (gLogStream);
 
     gLogStream <<
-      endl; // twice ??? JMI
+      std::endl; // twice ??? JMI
   }
 #endif
 
@@ -471,9 +469,9 @@ void checkSXMLFile (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "!!!!! xmlDecl contents from file:" <<
-      endl << endl;
+      std::endl << std::endl;
     xmlDecl->print (gLogStream);
 
     displayXMLDeclaration (
@@ -487,9 +485,9 @@ void checkSXMLFile (
 
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "!!!!! docType from file:" <<
-      endl << endl;
+      std::endl << std::endl;
     docType->print (gLogStream);
 
     displayMusicXMLDocumentType (
@@ -498,7 +496,7 @@ void checkSXMLFile (
 #endif
 
   // get the encoding type
-  string encoding = xmlDecl->getEncoding ();
+  std::string encoding = xmlDecl->getEncoding ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
@@ -506,7 +504,7 @@ void checkSXMLFile (
       "% MusicXML data uses " <<
       encoding <<
       " encoding" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -519,8 +517,8 @@ void checkSXMLFile (
 //_______________________________________________________________________________
 SXMLFile createSXMLFileFromFile (
   const char*   fileName,
-  const string& passNumber,
-  const string& passDescription)
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
   SXMLFile sxmlfile;
 
@@ -529,20 +527,20 @@ SXMLFile createSXMLFileFromFile (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl;
+      std::endl;
 
     gLogStream <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -550,9 +548,9 @@ SXMLFile createSXMLFileFromFile (
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "Reading MusicXML data from file \"" << outputFileName << "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -586,8 +584,8 @@ SXMLFile createSXMLFileFromFile (
 //_______________________________________________________________________________
 SXMLFile createSXMLFileFromFd (
   FILE*         fd,
-  const string& passNumber,
-  const string& passDescription)
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
   SXMLFile sxmlfile;
 
@@ -596,20 +594,20 @@ SXMLFile createSXMLFileFromFd (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl;
+      std::endl;
 
     gLogStream <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -617,9 +615,9 @@ SXMLFile createSXMLFileFromFd (
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "Reading MusicXML data from file descriptor \"" << fd << "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -653,8 +651,8 @@ SXMLFile createSXMLFileFromFd (
 //_______________________________________________________________________________
 SXMLFile createSXMLFileFromString (
   const char*   buffer,
-  const string& passNumber,
-  const string& passDescription)
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
   SXMLFile sxmlfile;
 
@@ -668,9 +666,9 @@ SXMLFile createSXMLFileFromString (
 #ifdef TRACE_OAH
     if (gtracingOah->fTracePasses) {
       gLogStream <<
-        endl <<
-        "Reading MusicXML data from a string " << buffer.size () << " characters long" <<
-        endl;
+        std::endl <<
+        "Reading MusicXML data from a std::string " << buffer.size () << " characters long" <<
+        std::endl;
     }
 #endif
 
@@ -706,29 +704,29 @@ SXMLFile createSXMLFileFromString (
 EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
   const char*    fileName,
   S_mxsrOahGroup musicxmlOpts,
-  const string&  passNumber,
-  const string&  passDescription)
+  const std::string&  passNumber,
+  const std::string&  passDescription)
 {
   // start the clock
   clock_t startClock = clock ();
 
-  string fileNameAsString = fileName;
+  std::string fileNameAsString = fileName;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": building the MXSR from \"" <<
       fileNameAsString << "\"" <<
-      endl <<
+      std::endl <<
       separator <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -742,7 +740,7 @@ EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
     // yes, this is a compressed file
 
     /* JMI OS dependent
-    string uncompressedFileName =
+    std::string uncompressedFileName =
       uncompressMXLFile (
         fileNameAsString);
 
@@ -751,14 +749,14 @@ EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
     fileName = uncompressedFileName.c_str ();
     */
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "you should uncompress file " <<
       fileNameAsString <<
       " prior to running xml2ly";
 
-    string message = s.str ();
+    std::string message = s.str ();
 
     musicxml2mxsrError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -768,7 +766,7 @@ EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
 
     gLogStream <<
       message <<
-      endl;
+      std::endl;
 
     throw musicxml2mxsrException (message);
   }
@@ -810,26 +808,26 @@ EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
 EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
   FILE*          fd,
   S_mxsrOahGroup musicxmlOpts,
-  const string&  passNumber,
-  const string&  passDescription)
+  const std::string&  passNumber,
+  const std::string&  passDescription)
 {
   // start the clock
   clock_t startClock = clock ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": building the MXSR from standard input" <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -854,9 +852,9 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "xmlDecl contents:" <<
-      endl << endl;
+      std::endl << std::endl;
     xmlDecl->print (gLogStream);
 
     displayXMLDeclaration (
@@ -870,9 +868,9 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
 
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "!!!!! docType from stream:" <<
-      endl << endl;
+      std::endl << std::endl;
     docType->print (gLogStream);
 
     displayMusicXMLDocumentType (
@@ -881,10 +879,10 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
 #endif
 
   // get the encoding type JMI
-  string encoding = xmlDecl->getEncoding ();
+  std::string encoding = xmlDecl->getEncoding ();
 //
 //   // should the encoding be converted to UTF-8?
-//   string desiredEncoding = "UTF-8";
+//   std::string desiredEncoding = "UTF-8";
 //
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
@@ -893,12 +891,12 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
 //       desiredEncoding <<
 //       "\" encoding" <<
 //       ", desired encoding is \"" << desiredEncoding << "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
 //   if (encoding != desiredEncoding) {
-//      stringstream s;
+//      std::stringstream s;
 //
 //     s <<
 //       "you should convert this stream to " <<
@@ -932,26 +930,26 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
 EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
   const char*    buffer,
   S_mxsrOahGroup musicxmlOpts,
-  const string&  passNumber,
-  const string&  passDescription)
+  const std::string&  passNumber,
+  const std::string&  passDescription)
 {
   // start the clock
   clock_t startClock = clock ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << "building the MXSR from a buffer" <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -988,22 +986,22 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
 
 //_______________________________________________________________________________
 Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
-  const string& inputSourceName,
-  const string& passNumber,
-  const string& passDescription)
+  const std::string& inputSourceName,
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
       "convertMusicXMLToMxsr(): " <<
       "inputSourceName: \"" << inputSourceName << "\"" <<
       ", passNumber: \"" << passNumber << "\"" <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1033,7 +1031,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
         inputSourceName.rfind (".mxl");
 
     if (posInString == inputSourceName.size () - 4) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "compressed MusicXML files are not handled by xml2ly currently - quitting";

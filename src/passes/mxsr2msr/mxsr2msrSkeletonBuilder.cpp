@@ -43,8 +43,6 @@
 #include "mxsr2msrSkeletonBuilder.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -84,9 +82,9 @@ mxmlPartGroupDescr::mxmlPartGroupDescr (
 mxmlPartGroupDescr::~mxmlPartGroupDescr ()
 {}
 
-string mxmlPartGroupDescr::partGroupDescrAsString () const
+std::string mxmlPartGroupDescr::partGroupDescrAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "'" <<
@@ -109,43 +107,43 @@ string mxmlPartGroupDescr::partGroupDescrAsString () const
   return s.str ();
 }
 
-void mxmlPartGroupDescr::print (ostream& os) const
+void mxmlPartGroupDescr::print (std::ostream& os) const
 {
   const int fieldWidth = 14;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "partGroupNumber" << " : " <<
     fPartGroupNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "partGroup" << " : " <<
     fPartGroup <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "startPosition" << " : " <<
     fStartPosition <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "startInputLineNumber" << " : " <<
     fStartInputLineNumber <<
-    endl <<
+    std::endl <<
     "stopPosition" << " : " <<
     fStopPosition <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "stopInputLineNumber" << " : " <<
     fStopInputLineNumber <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_mxmlPartGroupDescr& elt)
+std::ostream& operator << (std::ostream& os, const S_mxmlPartGroupDescr& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -200,15 +198,15 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
   fCurrentStaffMusicXMLNumber = 0;
   fCurrentVoiceMusicXMLNumber = 0;
 
-  // create an empty list for part groups starting at 0,
+  // create an empty std::list for part groups starting at 0,
   // i.e. for the implicit part group
   fPositionStartingPartGroupDescrsVector.push_back (
-    list<S_mxmlPartGroupDescr> ());
+    std::list<S_mxmlPartGroupDescr> ());
 
-  // create an empty list for part groups stopping at 0,
+  // create an empty std::list for part groups stopping at 0,
   // that will remain empty
   fPositionStoppingPartGroupDescrsVector.push_back (
-    list<S_mxmlPartGroupDescr> ());
+    std::list<S_mxmlPartGroupDescr> ());
 
   // create the implicit part group
   createImplicitPartGroup ();
@@ -250,12 +248,12 @@ void mxsr2msrSkeletonBuilder::showAllPartGroupDescrsMap (
 {
   gLogStream <<
     "AllPartGroupDescrsMap:" <<
-    endl;
+    std::endl;
 
   if (fAllPartGroupDescrsMap.size ()) {
     ++gIndenter;
 
-    map<int, S_mxmlPartGroupDescr>::const_iterator
+    std::map<int, S_mxmlPartGroupDescr>::const_iterator
       iBegin = fAllPartGroupDescrsMap.begin (),
       iEnd   = fAllPartGroupDescrsMap.end (),
       i      = iBegin;
@@ -270,7 +268,7 @@ void mxsr2msrSkeletonBuilder::showAllPartGroupDescrsMap (
 
       gLogStream <<
         partGroupDescr->partGroupDescrAsString () <<
-        endl;
+        std::endl;
 
         ++gIndenter;
 
@@ -282,7 +280,7 @@ void mxsr2msrSkeletonBuilder::showAllPartGroupDescrsMap (
         --gIndenter;
 
       if (++i == iEnd) break;
-      // no endl here
+      // no std::endl here
     } // for
 
     --gIndenter;
@@ -290,13 +288,13 @@ void mxsr2msrSkeletonBuilder::showAllPartGroupDescrsMap (
 
   else {
     gLogStream <<
-      gTab << "empty map" <<
-      endl;
+      gTab << "empty std::map" <<
+      std::endl;
   }
 
   gLogStream <<
     "------------------" <<
-    endl;
+    std::endl;
 }
 
 //________________________________________________________________________
@@ -305,12 +303,12 @@ void mxsr2msrSkeletonBuilder::showStartedPartGroupDescrsMap (
 {
   gLogStream <<
     "StartedPartGroupDescrsMap:" <<
-    endl;
+    std::endl;
 
   if (fStartedPartGroupDescrsMap.size ()) {
     ++gIndenter;
 
-    map<int, S_mxmlPartGroupDescr>::const_iterator
+    std::map<int, S_mxmlPartGroupDescr>::const_iterator
       iBegin = fStartedPartGroupDescrsMap.begin (),
       iEnd   = fStartedPartGroupDescrsMap.end (),
       i      = iBegin;
@@ -325,7 +323,7 @@ void mxsr2msrSkeletonBuilder::showStartedPartGroupDescrsMap (
 
       gLogStream <<
         partGroupDescr->partGroupDescrAsString () <<
-        endl;
+        std::endl;
 
         ++gIndenter;
 
@@ -337,7 +335,7 @@ void mxsr2msrSkeletonBuilder::showStartedPartGroupDescrsMap (
         --gIndenter;
 
       if (++i == iEnd) break;
-      // no endl here
+      // no std::endl here
     } // for
 
     --gIndenter;
@@ -345,13 +343,13 @@ void mxsr2msrSkeletonBuilder::showStartedPartGroupDescrsMap (
 
   else {
     gLogStream <<
-      gTab << "empty map" <<
-      endl;
+      gTab << "empty std::map" <<
+      std::endl;
   }
 
   gLogStream <<
     "------------------" <<
-    endl;
+    std::endl;
 }
 
 //________________________________________________________________________
@@ -360,12 +358,12 @@ void mxsr2msrSkeletonBuilder::showPartGroupsStack (
 {
   gLogStream <<
     "PartGroupsDescrStack:" <<
-    endl;
+    std::endl;
 
   if (fPartGroupsDescrStack.size ()) {
     ++gIndenter;
 
-    list<S_mxmlPartGroupDescr>::const_iterator
+    std::list<S_mxmlPartGroupDescr>::const_iterator
       iBegin = fPartGroupsDescrStack.begin (),
       iEnd   = fPartGroupsDescrStack.end (),
       i      = iBegin;
@@ -374,9 +372,9 @@ void mxsr2msrSkeletonBuilder::showPartGroupsStack (
       gLogStream <<
         "v " <<
         (*i)->partGroupDescrAsString () <<
-        endl;
+        std::endl;
       if (++i == iEnd) break;
-      // no endl here
+      // no std::endl here
     } // for
 
     --gIndenter;
@@ -384,13 +382,13 @@ void mxsr2msrSkeletonBuilder::showPartGroupsStack (
 
   else {
     gLogStream <<
-      gTab << "empty stack" <<
-      endl;
+      gTab << "empty std::stack" <<
+      std::endl;
   }
 
   gLogStream <<
     "------------------" <<
-    endl;
+    std::endl;
 }
 
 //________________________________________________________________________
@@ -399,7 +397,7 @@ void mxsr2msrSkeletonBuilder::showPartGroupDescrsVector (
 {
   gLogStream <<
     "PartGroupDescrsVector:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -415,12 +413,12 @@ void mxsr2msrSkeletonBuilder::showPartGroupDescrsVector (
       i + 1 << ": " <<
         partGroupDescr->partGroupDescrAsString () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   } // for
 
   gLogStream <<
     "------------------" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
@@ -431,7 +429,7 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
 {
   gLogStream <<
     "PositionStartingPartGroupDescrsVector:" <<
-    endl;
+    std::endl;
 
   if (fPositionStartingPartGroupDescrsVector.size ()) {
     ++gIndenter;
@@ -439,16 +437,16 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
     for (size_t k = 0; k < fPositionStartingPartGroupDescrsVector.size (); ++k) {
       gLogStream <<
         k << ": " <<
-        endl;
+        std::endl;
 
-      list<S_mxmlPartGroupDescr>&
+      std::list<S_mxmlPartGroupDescr>&
         startingPartGroupDescrsList =
           fPositionStartingPartGroupDescrsVector [k];
 
       if (startingPartGroupDescrsList.size ()) {
         ++gIndenter;
 
-        list<S_mxmlPartGroupDescr>::const_iterator
+        std::list<S_mxmlPartGroupDescr>::const_iterator
           iBegin = startingPartGroupDescrsList.begin (),
           iEnd   = startingPartGroupDescrsList.end (),
           i      = iBegin;
@@ -464,10 +462,10 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
           gLogStream <<
               partGroupDescr->partGroupDescrAsString () <<
             ", line " << inputLineNumber <<
-            endl;
+            std::endl;
 
           if (++i == iEnd) break;
-          // no endl here
+          // no std::endl here
         } // for
 
         --gIndenter;
@@ -475,8 +473,8 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
 
       else {
         gLogStream <<
-          gTab << "empty list" <<
-          endl;
+          gTab << "empty std::list" <<
+          std::endl;
       }
     }
 
@@ -485,7 +483,7 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
 
   gLogStream <<
     "------------------" <<
-    endl;
+    std::endl;
 }
 
 //________________________________________________________________________
@@ -494,7 +492,7 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
 {
   gLogStream <<
     "PositionStoppingPartGroupDescrsVector:" <<
-    endl;
+    std::endl;
 
   if (fPositionStoppingPartGroupDescrsVector.size ()) {
     ++gIndenter;
@@ -502,16 +500,16 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
     for (size_t k = 0; k < fPositionStoppingPartGroupDescrsVector.size (); ++k) {
       gLogStream <<
         k << ": " <<
-        endl;
+        std::endl;
 
-      list<S_mxmlPartGroupDescr>&
+      std::list<S_mxmlPartGroupDescr>&
         theList =
           fPositionStoppingPartGroupDescrsVector [k];
 
       if (theList.size ()) {
         ++gIndenter;
 
-        list<S_mxmlPartGroupDescr>::const_iterator
+        std::list<S_mxmlPartGroupDescr>::const_iterator
           iBegin = theList.begin (),
           iEnd   = theList.end (),
           i      = iBegin;
@@ -527,10 +525,10 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
           gLogStream <<
               partGroupDescr->partGroupDescrAsString () <<
             ", line " << inputLineNumber <<
-            endl;
+            std::endl;
 
           if (++i == iEnd) break;
-          // no endl here
+          // no std::endl here
         } // for
 
         --gIndenter;
@@ -538,8 +536,8 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
 
       else {
         gLogStream <<
-          gTab << "empty list" <<
-          endl;
+          gTab << "empty std::list" <<
+          std::endl;
       }
     }
 
@@ -548,7 +546,7 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
 
   gLogStream <<
     "------------------" <<
-    endl;
+    std::endl;
 }
 
 //________________________________________________________________________
@@ -557,7 +555,7 @@ void mxsr2msrSkeletonBuilder::showPartsVector (
 {
   gLogStream <<
     "PartsVector:" <<
-    endl;
+    std::endl;
 
   if (fPartsVector.size ()) {
     ++gIndenter;
@@ -588,7 +586,7 @@ void mxsr2msrSkeletonBuilder::showPartsVector (
 
       gLogStream <<
         ", line " << inputLineNumber <<
-        endl;
+        std::endl;
     } // for
 
     --gIndenter;
@@ -596,61 +594,61 @@ void mxsr2msrSkeletonBuilder::showPartsVector (
 
   else {
     gLogStream <<
-      gTab << "empty vector" <<
-      endl;
+      gTab << "empty std::vector" <<
+      std::endl;
   }
 
   gLogStream <<
     "------------------" <<
-    endl;
+    std::endl;
 }
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::showPartGroupsData (
   int           inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     context <<
     ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
     ", line " << inputLineNumber <<
     ":" <<
-    endl <<
+    std::endl <<
     ">>> ================================================" <<
-    endl;
+    std::endl;
 
   showAllPartGroupDescrsMap (
     inputLineNumber);
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   showStartedPartGroupDescrsMap (
     inputLineNumber);
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   showPartGroupDescrsVector (
     inputLineNumber);
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   showPositionStartingPartGroupDescrsVector (
     inputLineNumber);
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   showPositionStoppingPartGroupDescrsVector (
     inputLineNumber);
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   showPartsVector (
     inputLineNumber);
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   showPartGroupsStack (
     inputLineNumber);
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   gLogStream <<
     " <<< ================================================" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
 //________________________________________________________________________
@@ -658,8 +656,8 @@ S_mxmlPartGroupDescr mxsr2msrSkeletonBuilder::fetchPartGroupDescrStackTop ()
 {
   S_mxmlPartGroupDescr result;
 
-  // the current part group is the top of the stack,
-  // i.e. the front for the list used to implement it
+  // the current part group is the top of the std::stack,
+  // i.e. the front for the std::list used to implement it
   if (fPartGroupsDescrStack.size () != 0) {
    result =
     fPartGroupsDescrStack.front ();
@@ -680,7 +678,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
       partGroupDescr->getPartGroupDescrCombinedName () <<
       " as started" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
@@ -693,7 +691,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
   }
 #endif
 
-  // register part group in part groups vector, i.e. by appearance order
+  // register part group in part groups std::vector, i.e. by appearance order
   fPartGroupDescsVector.push_back (
     partGroupDescr);
 
@@ -728,40 +726,40 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
 void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
   int                  inputLineNumber,
   S_mxmlPartGroupDescr partGroupDescr,
-  list<S_mxmlPartGroupDescr>&
+  std::list<S_mxmlPartGroupDescr>&
                        startingPartGroupDescrsList)
 {
-  // this list is created in stop position decreasing order,
+  // this std::list is created in stop position decreasing order,
   // so as to have the outer-most part group descr appearing first
-  list<S_mxmlPartGroupDescr>::iterator
+  std::list<S_mxmlPartGroupDescr>::iterator
     iBegin = startingPartGroupDescrsList.begin (),
     iEnd   = startingPartGroupDescrsList.end (),
     i      = iBegin;
 
   while (true) {
     if (i == iEnd) {
-      // append partGroupDescr to the list
+      // append partGroupDescr to the std::list
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTracePartGroups ()) {
         gLogStream <<
           "Appending part group descr " <<
           partGroupDescr->
             partGroupDescrAsString () <<
-          "' at the end of the list of part group descrs starting at position " <<
+          "' at the end of the std::list of part group descrs starting at position " <<
           fCurrentPartsPosition <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
       startingPartGroupDescrsList.push_back (
         partGroupDescr);
       /*
-      stringstream s;
+      std::stringstream s;
       s <<
         "part group descr " <<
         partGroupDescr->partGroupDescrAsString () <<
-        " could not be inserted in part groups to be stopped list";
+        " could not be inserted in part groups to be stopped std::list";
 
       msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -772,7 +770,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
       break;
     }
 
-    // fetch current element in the list
+    // fetch current element in the std::list
     S_mxmlPartGroupDescr
       currentPartGroupDescr = (*i);
 
@@ -788,11 +786,11 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
           "Inserting part group descr " <<
           currentPartGroupDescr->
             partGroupDescrAsString () <<
-          "' in pending list before" <<
+          "' in pending std::list before" <<
           partGroupDescr->
             partGroupDescrAsString () <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -809,40 +807,40 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
 void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
   int                  inputLineNumber,
   S_mxmlPartGroupDescr partGroupDescr,
-  list<S_mxmlPartGroupDescr>&
+  std::list<S_mxmlPartGroupDescr>&
                        stoppingPartGroupDescrsList)
 {
-  // this list is created in start position decreasing order,
+  // this std::list is created in start position decreasing order,
   // so as to have the inner-most part group descr appearing first
-  list<S_mxmlPartGroupDescr>::iterator
+  std::list<S_mxmlPartGroupDescr>::iterator
     iBegin = stoppingPartGroupDescrsList.begin (),
     iEnd   = stoppingPartGroupDescrsList.end (),
     i      = iBegin;
 
   while (true) {
     if (i == iEnd) {
-      // append partGroupDescr to the list
+      // append partGroupDescr to the std::list
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTracePartGroups ()) {
         gLogStream <<
           "Appending part group descr " <<
           partGroupDescr->
             partGroupDescrAsString () <<
-          "' at the end of the list of part group descrs stopping at position " <<
+          "' at the end of the std::list of part group descrs stopping at position " <<
           fCurrentPartsPosition <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
       stoppingPartGroupDescrsList.push_back (
         partGroupDescr);
       /*
-      stringstream s;
+      std::stringstream s;
       s <<
         "part group descr " <<
         partGroupDescr->partGroupDescrAsString () <<
-        " could not be inserted in part groups to be stopped list";
+        " could not be inserted in part groups to be stopped std::list";
 
       msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -853,7 +851,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
       break;
     }
 
-    // fetch current element in the list
+    // fetch current element in the std::list
     S_mxmlPartGroupDescr
       currentPartGroupDescr = (*i);
 
@@ -869,11 +867,11 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
           "Inserting part group descr " <<
           currentPartGroupDescr->
             partGroupDescrAsString () <<
-          "' in pending list before" <<
+          "' in pending std::list before" <<
           partGroupDescr->
             partGroupDescrAsString () <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -891,9 +889,9 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStoppingAtCurrentPosition 
   int                  inputLineNumber,
   S_mxmlPartGroupDescr partGroupDescr)
 {
-  // fetch the list of part group descrs stopping at
+  // fetch the std::list of part group descrs stopping at
   // the same position as partGroupDescr
-  list<S_mxmlPartGroupDescr>&
+  std::list<S_mxmlPartGroupDescr>&
     stoppingPartGroupDescrsList =
       fPositionStoppingPartGroupDescrsVector [
         fCurrentPartsPosition];
@@ -905,16 +903,16 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStoppingAtCurrentPosition 
   }
 
   else {
-    // insert the element at the right place in the stopping list
+    // insert the element at the right place in the stopping std::list
     insertPartGroupDescInStoppingList (
       inputLineNumber,
       partGroupDescr,
       stoppingPartGroupDescrsList);
   }
 
-  // fetch the list of part group descrs starting at
+  // fetch the std::list of part group descrs starting at
   // the same position as partGroupDescr
-  list<S_mxmlPartGroupDescr>&
+  std::list<S_mxmlPartGroupDescr>&
     startingPartGroupDescrsList =
       fPositionStartingPartGroupDescrsVector [
         partGroupDescr->
@@ -927,7 +925,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStoppingAtCurrentPosition 
   }
 
   else {
-    // insert partGroupDescr at the right place in the starting list
+    // insert partGroupDescr at the right place in the starting std::list
     insertPartGroupDescInStartingList (
       inputLineNumber,
       partGroupDescr,
@@ -947,7 +945,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStopped (
       partGroupDescr->getPartGroupDescrCombinedName () <<
       " as stopped" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -985,7 +983,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
       "Creating part group with number '" <<
       fCurrentPartGroupNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1030,7 +1028,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
       "' to visitor's part groups data" <<
       ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1059,7 +1057,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
 
   if (! partGroupDescrToBeStopped) {
     // no, but we should have found it
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "no part group '" << fCurrentPartGroupNumber <<
@@ -1121,7 +1119,7 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
       containingPartGroup->
         getPartGroupCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1140,7 +1138,7 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
       containingPartGroup->
         getPartGroupCombinedName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1173,7 +1171,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       "Creating an implicit part group with number '" <<
       fCurrentPartGroupNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1199,7 +1197,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       "' to MSR score" <<
       ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1224,7 +1222,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       "' to the part groups data" <<
       ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1249,12 +1247,12 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "doPartGroupsNestingAndPartsAllocation:" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // this is actually a partial subpass of pass 2a,
-  // since we run through the contents of <part-list />,
+  // since we run through the contents of <part-std::list />,
   // stored in the data we've built, a second time
 
 #ifdef TRACING_IS_ENABLED
@@ -1270,25 +1268,25 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
 
     if (k > 0) {
       // parts actual positions start at 1
-      // append part to current part group, i.e. to the top of the stack
+      // append part to current part group, i.e. to the top of the std::stack
       S_msrPart
         part =
           fPartsVector [k - 1];
 
-      // fetch the part group descr stack top
+      // fetch the part group descr std::stack top
       S_mxmlPartGroupDescr
         partGroupsDescrStackTop =
           fetchPartGroupDescrStackTop ();
 
       if (! partGroupsDescrStackTop) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Cannot append part " <<
           part->getPartCombinedName () <<
           " to any part group " <<
           " at position " << k <<
-          ", since the stack is empty";
+          ", since the std::stack is empty";
 
         musicxmlError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -1310,14 +1308,14 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
 
     // handle the part groups descrs stopping at position k
     if (fPositionStoppingPartGroupDescrsVector.size ()) {
-      list<S_mxmlPartGroupDescr>&
+      std::list<S_mxmlPartGroupDescr>&
         stoppingPartGroupDescrsList =
           fPositionStoppingPartGroupDescrsVector [k];
 
       if (stoppingPartGroupDescrsList.size ()) {
         ++gIndenter;
 
-        list<S_mxmlPartGroupDescr>::const_iterator
+        std::list<S_mxmlPartGroupDescr>::const_iterator
           iBegin = stoppingPartGroupDescrsList.begin (),
           iEnd   = stoppingPartGroupDescrsList.end (),
           i      = iBegin;
@@ -1333,19 +1331,19 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
             partGroup =
               partGroupDescr->getPartGroup ();
 
-          // fetch the part group descr stack top
+          // fetch the part group descr std::stack top
           S_mxmlPartGroupDescr
             partGroupsDescrStackTop =
               fetchPartGroupDescrStackTop ();
 
           if (! partGroupsDescrStackTop) {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "Cannot 'stop' part group descr " <<
               partGroupDescr->getPartGroupDescrCombinedName () <<
               " at position " << k <<
-              ", since the stack is empty";
+              ", since the std::stack is empty";
 
             musicxmlError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -1355,7 +1353,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
           }
 
           if (partGroupsDescrStackTop == partGroupDescr) {
-            // pop partGroupDescrToBeStopped from the stack
+            // pop partGroupDescrToBeStopped from the std::stack
             S_mxmlPartGroupDescr
               partGroupsDescrStackTop =
                 fPartGroupsDescrStack.front ();
@@ -1366,9 +1364,9 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
                 "Popping part group " <<
                 partGroupDescr->
                   getPartGroupDescrCombinedName () <<
-                "' from the stack" <<
+                "' from the std::stack" <<
                 ", line " << stopInputLineNumber <<
-                endl;
+                std::endl;
             }
 #endif
 
@@ -1382,10 +1380,10 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
                   fetchPartGroupDescrStackTop ();
 
               if (! newPartGroupDescrStackTop) {
-                stringstream s;
+                std::stringstream s;
 
                 s <<
-                  "there is no part group in the stack to nest part group descr " <<
+                  "there is no part group in the std::stack to nest part group descr " <<
                   partGroupDescr->partGroupDescrAsString () <<
                   fCurrentPartID << "\"" <<
                   " into";
@@ -1415,18 +1413,18 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
             }
 #endif
 
-            stringstream s;
+            std::stringstream s;
 
             s <<
-              endl <<
+              std::endl <<
               "There are overlapping part groups, namely: " <<
-              endl <<
+              std::endl <<
               gTab << partGroupDescr->partGroupDescrAsString () <<
-              endl <<
+              std::endl <<
               "and" <<
-              endl <<
+              std::endl <<
               gTab << partGroupsDescrStackTop->partGroupDescrAsString () <<
-              endl;
+              std::endl;
 
 /* JMI
             // fetch the positions in the intersection
@@ -1451,15 +1449,15 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
             }
 
             s <<
-              endl <<
+              std::endl <<
               "The parts they share are:" <<
-              endl;
+              std::endl;
 
             s <<
               "(positions range is " <<
               firstCommonPosision << ".." << lastCommonPosision <<
               ")" <<
-              endl;
+              std::endl;
 
             for (int m = firstCommonPosision; m <= lastCommonPosision; ++m) {
               S_msrPart
@@ -1470,18 +1468,18 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
                 gTab <<
                 part->getPartCombinedName () <<
                 ", line " << part->getInputLineNumber () <<
-                endl;
+                std::endl;
             } // for
 */
 
             s <<
-              endl <<
+              std::endl <<
               regex_replace (
 R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
   either you found a bug in the EXECUTABLE translator,
   or this MusicXML data is the first-ever real-world case
   of a score exhibiting overlapping part groups.)",
-              regex ("EXECUTABLE"),
+              std::regex ("EXECUTABLE"),
               gGlobalOahOahGroup->getOahOahGroupServiceName ());
 
             musicxmlError (
@@ -1492,7 +1490,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
           }
 
           if (++i == iEnd) break;
-          // no endl here
+          // no std::endl here
         } // for
 
         --gIndenter;
@@ -1501,14 +1499,14 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
 
     // handle the part groups descrs starting at position k
     if (fPositionStartingPartGroupDescrsVector.size ()) {
-      list<S_mxmlPartGroupDescr>&
+      std::list<S_mxmlPartGroupDescr>&
         startingPartGroupDescrsList =
           fPositionStartingPartGroupDescrsVector [k];
 
       if (startingPartGroupDescrsList.size ()) {
         ++gIndenter;
 
-        list<S_mxmlPartGroupDescr>::const_iterator
+        std::list<S_mxmlPartGroupDescr>::const_iterator
           iBegin = startingPartGroupDescrsList.begin (),
           iEnd   = startingPartGroupDescrsList.end (),
           i      = iBegin;
@@ -1527,9 +1525,9 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
             gLogStream <<
               "Pushing part group descr '" <<
               partGroupDescr->partGroupDescrAsString () <<
-              "' onto the part groups stack" <<
+              "' onto the part groups std::stack" <<
               ", line " << inputLineNumber <<
-              endl;
+              std::endl;
           }
 #endif
 
@@ -1537,7 +1535,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
             partGroupDescr);
 
           if (++i == iEnd) break;
-          // no endl here
+          // no std::endl here
         } // for
 
         --gIndenter;
@@ -1546,7 +1544,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "AT position " << k;
@@ -1727,7 +1725,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
     gLogStream <<
       "--> Start visiting S_score_partwise" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1735,7 +1733,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "Analysing the score partwise" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1752,7 +1750,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
     gLogStream <<
       "--> End visiting S_score_partwise" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1785,7 +1783,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
     gLogStream <<
       "--> Start visiting S_work_number" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1805,11 +1803,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
     gLogStream <<
       "--> Start visiting S_work_title" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string workCreditTypeTitle = elt->getValue ();
+  std::string workCreditTypeTitle = elt->getValue ();
 
   fMsrScore->getIdentification () ->
     setIdentificationWorkCreditTypeTitle (
@@ -1827,11 +1825,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
     gLogStream <<
       "--> Start visiting S_opus" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string opus = elt->getValue ();
+  std::string opus = elt->getValue ();
 
   fMsrScore->getIdentification () ->
     setIdentificationOpus (
@@ -1849,7 +1847,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
     gLogStream <<
       "--> Start visiting S_movement_number" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1869,11 +1867,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
     gLogStream <<
       "--> Start visiting S_movement_title" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string movementTitle = elt->getValue ();
+  std::string movementTitle = elt->getValue ();
 
   // remove HTML entities if any // JMI option for that?
 /*
@@ -1898,7 +1896,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
     gLogStream <<
       "--> Start visiting S_identification" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1913,7 +1911,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
     gLogStream <<
       "--> End visiting S_identification" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1928,12 +1926,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
     gLogStream <<
       "--> Start visiting S_creator" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string creatorType = elt->getAttributeValue ("type");
-  string creatorValue = elt->getValue ();
+  std::string creatorType = elt->getAttributeValue ("type");
+  std::string creatorValue = elt->getValue ();
 
   if      (creatorType == "composer") {
     fMsrScore->getIdentification () ->
@@ -1986,7 +1984,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "creator type \"" << creatorType <<
@@ -2011,11 +2009,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
     gLogStream <<
       "--> Start visiting S_rights" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string rightsValue = elt->getValue ();
+  std::string rightsValue = elt->getValue ();
 
   mfConvertHTMLEntitiesToPlainCharacters (rightsValue); // JMI &#x00a9;
 
@@ -2035,12 +2033,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
     gLogStream <<
       "--> Start visiting S_source" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 /* JMI
-  string rightsValue = elt->getValue ();
+  std::string rightsValue = elt->getValue ();
 
   mfConvertHTMLEntitiesToPlainCharacters (rightsValue); // JMI &#x00a9;
 
@@ -2061,12 +2059,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
     gLogStream <<
       "--> Start visiting S_relation" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 /* JMI
-  string rightsValue = elt->getValue ();
+  std::string rightsValue = elt->getValue ();
 
   mfConvertHTMLEntitiesToPlainCharacters (rightsValue); // JMI &#x00a9;
 
@@ -2085,7 +2083,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
     gLogStream <<
       "--> Start visiting S_encoding" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2094,7 +2092,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
     gLogStream <<
       "*** Analysing S_encoding ***" <<
       ", " << elt->getValue () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2111,7 +2109,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
     gLogStream <<
       "--> End visiting S_encoding" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2126,7 +2124,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
     gLogStream <<
       "--> Start visiting S_encoding_date" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2146,7 +2144,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
     gLogStream <<
       "--> Start visiting S_encoder" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2168,16 +2166,16 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
     gLogStream <<
       "--> Start visiting S_software" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string softwareValue = elt->getValue ();
+  std::string softwareValue = elt->getValue ();
 
   // convert clef to lower case for analysis
-  string softwareValueToLower = mfStringToLowerCase (softwareValue);
+  std::string softwareValueToLower = mfStringToLowerCase (softwareValue);
 
-  if (softwareValueToLower.find ("cubase") != string::npos) {
+  if (softwareValueToLower.find ("cubase") != std::string::npos) {
     musicxmlWarning (
       gGlobalServiceRunData->getInputSourceName (),
       inputLineNumber,
@@ -2202,7 +2200,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
         if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
           gLogStream <<
             "Setting '-cubase' option" <<
-            endl;
+            std::endl;
         }
 #endif
 
@@ -2230,7 +2228,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
     gLogStream <<
       "--> Start visiting S_encoding_description" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2252,7 +2250,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
     gLogStream <<
       "--> Start visiting S_supports" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2275,12 +2273,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
     gLogStream <<
       "--> Start visiting S_miscellaneous" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 /* JMI
-  string miscellaneousFielValue = elt->getValue ();
+  std::string miscellaneousFielValue = elt->getValue ();
 
   mfConvertHTMLEntitiesToPlainCharacters (
     miscellaneousFielValue);
@@ -2303,7 +2301,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
     gLogStream <<
       "--> End visiting S_miscellaneous" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2319,11 +2317,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
     gLogStream <<
       "--> Start visiting S_miscellaneous_field" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string miscellaneousFielValue = elt->getValue ();
+  std::string miscellaneousFielValue = elt->getValue ();
 
   mfConvertHTMLEntitiesToPlainCharacters (
     miscellaneousFielValue);
@@ -2417,7 +2415,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
     gLogStream <<
       "--> Start visiting S_credit" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2445,11 +2443,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
     gLogStream <<
       "--> Start visiting S_credit_type" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string creditTypeValue = elt->getValue ();
+  std::string creditTypeValue = elt->getValue ();
 
   msrCreditTypeKind
     creditTypeKind =
@@ -2490,7 +2488,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
     gLogStream <<
       "--> Start visiting S_credit_symbol" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2505,7 +2503,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
     gLogStream <<
       "--> Start visiting S_credit_image" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2520,7 +2518,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
     gLogStream <<
       "--> Start visiting S_credit_words" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2539,7 +2537,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
   </credit>
   */
 
-  string creditWordsContents =
+  std::string creditWordsContents =
     elt->getValue ();
 
   // position
@@ -2549,7 +2547,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
     elt->getAttributeFloatValue ("default-y", 0.0);
 
   // font family
-  string creditWordsFontFamily =
+  std::string creditWordsFontFamily =
     elt->getAttributeValue ("font-family");
 
   // font size
@@ -2557,7 +2555,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
     elt->getAttributeFloatValue ("font-size", 0.0);
 
   // font weight
-  string creditWordsFontWeightString =
+  std::string creditWordsFontWeightString =
     elt->getAttributeValue ("font-weight"); // JMI etc
 
   msrFontWeightKind
@@ -2567,7 +2565,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
         creditWordsFontWeightString);
 
   // font style
-  string creditWordsFontStyleString =
+  std::string creditWordsFontStyleString =
     elt->getAttributeValue ("font-style");
 
   msrFontStyleKind
@@ -2577,7 +2575,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
         creditWordsFontStyleString);
 
   // justify
-  string creditWordsJustifyString =
+  std::string creditWordsJustifyString =
     elt->getAttributeValue ("justify");
 
   msrJustifyKind
@@ -2587,7 +2585,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
         creditWordsJustifyString);
 
   // halign
-  string creditWordsHAlignString =
+  std::string creditWordsHAlignString =
     elt->getAttributeValue ("halign");
 
   msrHorizontalAlignmentKind
@@ -2597,7 +2595,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
         creditWordsHAlignString);
 
   // valign
-  string creditWordsVAlignString =
+  std::string creditWordsVAlignString =
     elt->getAttributeValue ("valign");
 
   msrVerticalAlignmentKind
@@ -2607,7 +2605,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
         creditWordsVAlignString);
 
   // XMLLang
-  string creditWordsXMLLangString =
+  std::string creditWordsXMLLangString =
     elt->getAttributeValue ("xml:lang");
 
   msrXMLLangKind
@@ -2649,7 +2647,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
     gLogStream <<
       "--> End visiting S_credit" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2665,15 +2663,15 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
     gLogStream <<
       "--> Start visiting S_part_list" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
-      "Analysing part list" <<
-      endl;
+      "Analysing part std::list" <<
+      std::endl;
   }
 #endif
 
@@ -2690,7 +2688,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
     gLogStream <<
       "--> End visiting S_part_list" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2721,9 +2719,9 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
 
   if (gGlobalMsrOahGroup->getDisplayPartGroups ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "The implicit part group contains:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -2734,7 +2732,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 #endif
 
@@ -2753,7 +2751,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
     gLogStream <<
       "--> Start visiting S_part_group" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2764,7 +2762,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
 
   // part group type
 
-  string partGroupType = elt->getAttributeValue ("type");
+  std::string partGroupType = elt->getAttributeValue ("type");
 
   fCurrentPartGroupTypeKind = msrPartGroupTypeKind::kPartGroupTypeNone;
 
@@ -2773,7 +2771,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
   else if (partGroupType == "stop")
     fCurrentPartGroupTypeKind = msrPartGroupTypeKind::kPartGroupTypeStop;
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "unknown part group type \"" <<
@@ -2789,11 +2787,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
 
   // part group print style
 
-  string printStyle = elt->getAttributeValue ("print-style"); // JMI
+  std::string printStyle = elt->getAttributeValue ("print-style"); // JMI
 
   // part group print object
 
-  string printObject = elt->getAttributeValue ("print-object"); // JMI
+  std::string printObject = elt->getAttributeValue ("print-object"); // JMI
 
   // handle part group type
 
@@ -2824,7 +2822,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
     gLogStream <<
       "--> Start visiting S_group_name" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2841,13 +2839,13 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
     gLogStream <<
       "--> Start visiting S_group_name_display" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -2866,7 +2864,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_group_name_display& elt)
     gLogStream <<
       "--> End visiting S_group_name_display" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2883,7 +2881,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
     gLogStream <<
       "--> Start visiting S_display_text" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2915,7 +2913,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_accidental_text& elt)
     gLogStream <<
       "--> Start visiting S_accidental_text" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2929,7 +2927,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_abbreviation& elt)
     gLogStream <<
       "--> Start visiting S_group_abbreviation" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2946,11 +2944,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
     gLogStream <<
       "--> Start visiting S_group_symbol" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string groupSymbol = elt->getValue ();
+  std::string groupSymbol = elt->getValue ();
 
   fCurrentPartGroupSymbolKind =
     msrPartGroupSymbolKind::kPartGroupSymbolNone; // default value
@@ -2973,7 +2971,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
   else {
     if (groupSymbol.size ()) {
       // part group type may be absent
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "unknown part group symbol \"" + groupSymbol + "\"";
@@ -3000,11 +2998,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
     gLogStream <<
       "--> Start visiting S_group_barline" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string groupBarLine = elt->getValue ();
+  std::string groupBarLine = elt->getValue ();
 
   // check part group barLine
   if      (groupBarLine == "yes")
@@ -3012,7 +3010,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
   else if (groupBarLine == "no")
     fCurrentPartGroupBarLineKind = msrPartGroupBarLineKind::kPartGroupBarLineNo;
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "unknown part group barLine \"" + groupBarLine + "\"";
@@ -3036,7 +3034,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
     gLogStream <<
       "--> End visiting S_part_group" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3050,7 +3048,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
         fCurrentPartGroupTypeKind) << "\""  <<
       ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3090,7 +3088,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
     gLogStream <<
       "--> Start visiting S_score_part" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3100,26 +3098,26 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "Found part name \"" << fCurrentPartID << "\"" <<
-      " in part list" <<
+      " in part std::list" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   // is the part id a pure number?
-  string regularExpression (
+  std::string regularExpression (
     "[[:space:]]*"
     "[[:digit:]]+"
     "[[:space:]]*"
     );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (fCurrentPartID, sm, e);
 
   if (sm.size () == 1) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Part name \"" << fCurrentPartID << "\"" <<
@@ -3154,19 +3152,19 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
     gLogStream <<
       "--> Start visiting S_part_name" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   fCurrentPartName = elt->getValue ();
 
-  string printStyle = elt->getAttributeValue ("print-style"); // JMI
+  std::string printStyle = elt->getAttributeValue ("print-style"); // JMI
   if (printStyle == "JMI") {
   }
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -3186,7 +3184,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name_display& elt)
     gLogStream <<
       "--> Start visiting S_part_name_display" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3200,7 +3198,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
     gLogStream <<
       "--> End visiting S_part_name_display" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3217,7 +3215,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
     gLogStream <<
       "--> Start visiting S_part_abbreviation" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3225,7 +3223,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
 
   // print-object
 
-  string
+  std::string
     printObjectString =
       elt->getAttributeValue ("print-object");
 
@@ -3242,7 +3240,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)
     gLogStream <<
       "--> Start visiting S_part_abbreviation_display" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3256,7 +3254,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_abbreviation_display& elt)
     gLogStream <<
       "--> End visiting S_part_abbreviation_display" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3270,7 +3268,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_name& elt)
     gLogStream <<
       "--> Start visiting S_instrument_name" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3284,7 +3282,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_abbreviation& elt)
     gLogStream <<
       "--> Start visiting S_instrument_abbreviation" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3301,23 +3299,23 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
     gLogStream <<
       "--> End visiting S_score_part" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
   ++fCurrentPartsPosition;
 
-  string partID = elt->getAttributeValue ("id");
+  std::string partID = elt->getAttributeValue ("id");
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
    gLogStream <<
     "--------------------------------------------" <<
-    endl <<
+    std::endl <<
     "Handling score part name \"" << fCurrentPartID << "\"" <<
     ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
     ", line " << inputLineNumber <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -3328,10 +3326,10 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
   if (gGlobalTracingOahGroup->getTraceParts ()) {
    gLogStream <<
     "--------------------------------------------" <<
-    endl <<
+    std::endl <<
     "Creating part \"" << fCurrentPartID << "\"" <<
     ", line " << inputLineNumber <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -3395,23 +3393,23 @@ void mxsr2msrSkeletonBuilder::registerPart (
       " in the parts data" <<
       ", partPosition = " << partPosition <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // register part in the parts vector
+  // register part in the parts std::vector
   fPartsVector.push_back (part);
 
-  // register it in the parts map
+  // register it in the parts std::map
   fPartsMap [part->getPartID ()] = part;
 
-  // create an empty list for part groups starting at partPosition
+  // create an empty std::list for part groups starting at partPosition
   fPositionStartingPartGroupDescrsVector.push_back (
-    list<S_mxmlPartGroupDescr> ());
+    std::list<S_mxmlPartGroupDescr> ());
 
-  // create an empty list for part groups stopping at partPosition
+  // create an empty std::list for part groups stopping at partPosition
   fPositionStoppingPartGroupDescrsVector.push_back (
-    list<S_mxmlPartGroupDescr> ());
+    std::list<S_mxmlPartGroupDescr> ());
 }
 
 //________________________________________________________________________
@@ -3425,7 +3423,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
     gLogStream <<
       "--> Start visiting S_part" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3439,27 +3437,27 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
     gGlobalOahEarlyOptions.getEarlyTracePasses ()
   ) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!--=== part \"" << fCurrentPartID << "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (! fCurrentPartID.size ()) {
     if (fPartsMap.size () == 1) {
-      // there's only one part in the part list,
+      // there's only one part in the part std::list,
       // assume this is the one
       fCurrentPartID =
         (*fPartsMap.begin ()).second->
           getPartID ();
 
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "part id is empty, using '" <<
         fCurrentPartID <<
-        "' since it is the only part in the <part-list />";
+        "' since it is the only part in the <part-std::list />";
 
       musicxmlWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -3470,7 +3468,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
     else {
       ++fCurrentNoIDPartNumber;
 
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "NO_ID_PART_" << fCurrentNoIDPartNumber;
@@ -3491,12 +3489,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "part \"" <<
       fCurrentPartID <<
-      "\" is not known in the <part-list />";
+      "\" is not known in the <part-std::list />";
 
     musicxmlError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3510,11 +3508,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "--------------------------------------------" <<
-      endl <<
+      std::endl <<
       "Analyzing part \"" << fCurrentPartID << "\" -- start" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3536,7 +3534,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
     gLogStream <<
       "--> End visiting S_part" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3544,9 +3542,9 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "Analyzing part \"" << fCurrentPartID << "\" -- end" <<
-      endl <<
+      std::endl <<
       "--------------------------------------------" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3560,7 +3558,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
   else {
     // is the part number of measures consistent?
     if (fPartNumberOfMeasures != fScoreNumberOfMeasures) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "part " << fCurrentPart->getPartCombinedName () <<
@@ -3604,7 +3602,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
     gLogStream <<
       "--> Start visiting S_direction" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3630,7 +3628,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
 
     gLogStream <<
       " in part " << fCurrentPart->getPartCombinedName() <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3668,7 +3666,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
     gLogStream <<
       "--> Start visiting S_staff" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3676,7 +3674,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
 
   // the staff number should be positive
   if (fCurrentStaffMusicXMLNumber <= 0) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "staff number " << fCurrentStaffMusicXMLNumber <<
@@ -3704,7 +3702,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
     gLogStream <<
       "--> Start visiting S_voice" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3733,7 +3731,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
     gLogStream <<
       "--> Start visiting S_measure" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3752,10 +3750,10 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
     gGlobalOahEarlyOptions.getEarlyTracePasses ()
   ) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!--=== measure \"" << fCurrentMeasureNumber << "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3772,7 +3770,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
     gLogStream <<
       "--> End visiting S_measure" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3790,7 +3788,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
     gLogStream <<
       "--> Start visiting S_print" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3804,7 +3802,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
     gLogStream <<
       "--> End visiting S_print" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3819,7 +3817,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
     gLogStream <<
       "--> Start visiting S_note" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3846,7 +3844,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
     gLogStream <<
       "--> End visiting S_note" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3870,16 +3868,16 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
     gLogStream <<
       "--> S_note, fCurrentStaffMusicXMLNumber = " <<
       fCurrentStaffMusicXMLNumber <<
-      endl <<
+      std::endl <<
       "--> S_note, current staff name  = " <<
       staff->getStaffName() <<
-      endl <<
+      std::endl <<
       "--> S_note, fCurrentVoiceMusicXMLNumber        = " <<
       fCurrentVoiceMusicXMLNumber <<
-      endl <<
+      std::endl <<
       "--> S_note, current noteVoice name  = " <<
       noteVoice->getVoiceName() <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3892,7 +3890,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
           "Ignoring the harmonies" <<
           ", line " <<
           inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -3917,7 +3915,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
           "Ignoring the figured bass elements" <<
           ", line " <<
           inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -3947,7 +3945,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
     gLogStream <<
       "--> Start visiting S_lyric" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3973,7 +3971,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
           "--> setting fCurrentStanzaNumber to " <<
           fCurrentStanzaNumber <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -3994,7 +3992,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceLyrics ()) {
         // lyrics names are not so frequent after all...
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "lyric name is empty, using \"" <<
@@ -4018,7 +4016,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
           "--> setting fCurrentStanzaName to " <<
           fCurrentStanzaName <<
           ", line " << inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -4040,34 +4038,34 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
     gLogStream <<
       "--> End visiting S_lyric" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "visitEnd (S_lyric& )" <<
       ", line = " << inputLineNumber <<
       ", with:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     gLogStream <<
       "Lyric data:" <<
-      endl;
+      std::endl;
 
     {
       ++gIndenter;
 
       const int fieldWidth = 28;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
-        endl;
+        std::endl;
 
       --gIndenter;
     }
@@ -4105,7 +4103,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
       "--> Start visiting S_harmony" <<
       ", harmoniesVoicesCounter = " << fHarmoniesVoicesCounter <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4129,7 +4127,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
       "--> Start visiting S_figured_bass" <<
       ", figuredBassVoicesCounter = " << fFiguredBassVoicesCounter <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 

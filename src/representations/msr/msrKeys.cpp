@@ -40,18 +40,16 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // keys
 // ------------------------------------------------------
 
-string msrKeyKindAsString (
+std::string msrKeyKindAsString (
   msrKeyKind keyKind)
 {
-  string result;
+  std::string result;
 
   switch (keyKind) {
     case msrKeyKind::kKeyTraditional:
@@ -65,7 +63,7 @@ string msrKeyKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrKeyKind& elt)
+std::ostream& operator << (std::ostream& os, const msrKeyKind& elt)
 {
   os << msrKeyKindAsString (elt);
   return os;
@@ -92,7 +90,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
     gLogStream <<
       "Creating Humdrum/Scot key item" <<
       ", line = " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -129,7 +127,7 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
       "Setting Humdrum/Scot key item diatonic pitch to '" <<
       msrDiatonicPitchKindAsString (diatonicPitchKind) <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -145,7 +143,7 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
       "Setting Humdrum/Scot key item alteration to '" <<
       msrAlterationKindAsString (alterationKind) <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -160,7 +158,7 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
       "Setting Humdrum/Scot key item octave to '" <<
       msrOctaveKindAsString (keyOctaveKind) <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -172,7 +170,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHumdrumScotKeyItem::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHumdrumScotKeyItem>*
@@ -183,7 +181,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHumdrumScotKeyItem::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -194,7 +192,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHumdrumScotKeyItem::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHumdrumScotKeyItem>*
@@ -205,7 +203,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHumdrumScotKeyItem::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -214,9 +212,9 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
 void msrHumdrumScotKeyItem::browseData (basevisitor* v)
 {}
 
-string msrHumdrumScotKeyItem::asString () const
+std::string msrHumdrumScotKeyItem::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[HumdrumScotKeyItem" <<
@@ -232,9 +230,9 @@ string msrHumdrumScotKeyItem::asString () const
   return s.str ();
 }
 
-string msrHumdrumScotKeyItem::asShortStringForMeasuresSlices () const
+std::string msrHumdrumScotKeyItem::asShortStringForMeasuresSlices () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "HumdrumScotKeyItem" <<
@@ -249,18 +247,18 @@ string msrHumdrumScotKeyItem::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrHumdrumScotKeyItem::print (ostream& os) const
+void msrHumdrumScotKeyItem::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrHumdrumScotKeyItem& elt)
+std::ostream& operator << (std::ostream& os, const S_msrHumdrumScotKeyItem& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -304,7 +302,7 @@ msrKey::msrKey ( // for traditional keys
   msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
   int                      keyCancel)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -362,7 +360,7 @@ msrKey::msrKey ( // for traditional keys
       "Creating traditional key '" <<
       this->asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 }
@@ -370,7 +368,7 @@ msrKey::msrKey ( // for traditional keys
 msrKey::msrKey ( // for Humdrum/Scot keys
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -386,7 +384,7 @@ msrKey::msrKey ( // for Humdrum/Scot keys
       "Creating Humdrum/Scot key '" <<
       this->asString () <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 }
@@ -462,7 +460,7 @@ void msrKey::appendHumdrumScotKeyItem (
       item->asString () <<
       "' to key '" <<
       "'" <<
-      endl;
+      std::endl;
     }
 #endif
 
@@ -471,7 +469,7 @@ void msrKey::appendHumdrumScotKeyItem (
     fKeyItemsOctavesAreSpecified = true;
   }
 
-  // append the item to the vector
+  // append the item to the std::vector
   fHumdrumScotKeyItemsVector.insert (
     fHumdrumScotKeyItemsVector.end (), item);
 }
@@ -479,7 +477,7 @@ void msrKey::appendHumdrumScotKeyItem (
 //________________________________________________________________________
 S_msrKey msrKey::createTraditionalKeyFromString (
   int           inputLineNumber,
-  const string& keyString)
+  const std::string& keyString)
 {
   /*
     Handles keyString à la LilyPond, such as 'c [major]' or 'bes minor'
@@ -490,14 +488,14 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating traditional key from string \"" <<
+      "Creating traditional key from std::string \"" <<
       keyString <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string regularExpression (
+  std::string regularExpression (
     "[[:space:]]*"
     "([[:lower:]]+)"  // tonic pitch
     "[[:space:]]*"
@@ -510,12 +508,12 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     gLogStream <<
       "regularExpression = " <<
       regularExpression <<
-      endl;
+      std::endl;
   }
 #endif
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (keyString, sm, e);
 
@@ -525,19 +523,19 @@ S_msrKey msrKey::createTraditionalKeyFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for traditional key string \"" << keyString <<
-      "\" with regex \"" << regularExpression <<
+      " for traditional key std::string \"" << keyString <<
+      "\" with std::regex \"" << regularExpression <<
       "\":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
         i << ": " << "\"" << sm [i] << "\"" <<
-        endl;
+        std::endl;
     } // for
-    gLogStream << endl;
+    gLogStream << std::endl;
 
     --gIndenter;
   }
@@ -546,10 +544,10 @@ S_msrKey msrKey::createTraditionalKeyFromString (
   //  Handles keyString à la LilyPond, such as c [major] or bes minor
 
   if (smSize != 3) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
-      "traditional key string \"" << keyString <<
+      "traditional key std::string \"" << keyString <<
       "\" is ill-formed";
 
     msrError (
@@ -559,7 +557,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       s.str ());
   }
 
-  string
+  std::string
     keyTonic = sm [1],
     keyMode  = sm [2];
 
@@ -584,19 +582,19 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       "keyTonic = \"" <<
       keyTonic <<
       "\"" <<
-      endl <<
+      std::endl <<
       "keyTonicPitchKind = \"" <<
       msrQuarterTonesPitchKindAsString (keyTonicPitchKind) <<
       "\"" <<
-      endl <<
+      std::endl <<
       "keyMode = \"" <<
       keyMode <<
       "\"" <<
-      endl <<
+      std::endl <<
       "keyModeKind = \"" <<
       keyModeKind <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -617,7 +615,7 @@ void msrKey::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrKey::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrKey>*
@@ -628,7 +626,7 @@ void msrKey::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrKey::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -639,7 +637,7 @@ void msrKey::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrKey::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrKey>*
@@ -650,7 +648,7 @@ void msrKey::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrKey::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -659,9 +657,9 @@ void msrKey::acceptOut (basevisitor* v)
 void msrKey::browseData (basevisitor* v)
 {}
 
-string msrKey::asString () const
+std::string msrKey::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Key" <<
@@ -694,9 +692,9 @@ string msrKey::asString () const
   return s.str ();
 }
 
-string msrKey::asShortStringForMeasuresSlices () const
+std::string msrKey::asShortStringForMeasuresSlices () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '[';
@@ -727,7 +725,7 @@ string msrKey::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrKey::print (ostream& os) const
+void msrKey::print (std::ostream& os) const
 {
   os <<
     "[Key" <<
@@ -755,14 +753,14 @@ void msrKey::print (ostream& os) const
         fHumdrumScotKeyItemsVector.size () <<
         " items" <<
         ", line " << fInputLineNumber <<
-        endl;
+        std::endl;
 
       if (fHumdrumScotKeyItemsVector.size ()) {
-        os << endl;
+        os << std::endl;
 
         ++gIndenter;
 
-        vector<S_msrHumdrumScotKeyItem>::const_iterator
+        std::vector<S_msrHumdrumScotKeyItem>::const_iterator
           iBegin = fHumdrumScotKeyItemsVector.begin (),
           iEnd   = fHumdrumScotKeyItemsVector.end (),
           i      = iBegin;
@@ -770,7 +768,7 @@ void msrKey::print (ostream& os) const
         for ( ; ; ) {
           os << (*i);
           if (++i == iEnd) break;
-    // JMI     os << endl;
+    // JMI     os << std::endl;
         } // for
 
         --gIndenter;
@@ -780,21 +778,21 @@ void msrKey::print (ostream& os) const
         {
           os <<
             " [NONE]" <<
-            endl;
+            std::endl;
         }
       break;
   } // switch
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrKey& elt)
+std::ostream& operator << (std::ostream& os, const S_msrKey& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

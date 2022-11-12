@@ -23,10 +23,10 @@ enum class bsrLineContentsKind {
   kLineContentsContinuation
 };
 
-string bsrLineContentsKindAsString (
+std::string bsrLineContentsKindAsString (
   bsrLineContentsKind lineContentsKind);
 
-ostream& operator << (ostream& os, const bsrLineContentsKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrLineContentsKind& elt);
 
 class EXP bsrLineContents : public bsrElement
 {
@@ -67,7 +67,7 @@ class EXP bsrLineContents : public bsrElement
     bsrLineContentsKind   getLineContentsKind () const
                               { return fLineContentsKind; }
 
-    const list<S_bsrLineContentsElement>&
+    const std::list<S_bsrLineContentsElement>&
                           getLineContentsLineElementsList () const
                               { return fLineContentsLineElementsList; }
 
@@ -102,13 +102,13 @@ class EXP bsrLineContents : public bsrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asShortString () const override;
+    std::string           asShortString () const override;
 
-    virtual string        asDebugString () const;
+    virtual std::string        asDebugString () const;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -126,11 +126,11 @@ class EXP bsrLineContents : public bsrElement
 
     bsrLineContentsKind   fLineContentsKind;
 
-    list<S_bsrLineContentsElement>
+    std::list<S_bsrLineContentsElement>
                           fLineContentsLineElementsList;
 };
 typedef SMARTP<bsrLineContents> S_bsrLineContents;
-EXP ostream& operator << (ostream& os, const S_bsrLineContents& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrLineContents& elt);
 
 
 }

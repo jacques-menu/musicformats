@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 // libmusicxml2
 #include "visitor.h"
@@ -102,15 +102,13 @@
 #include "msdlConverterInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msdlConverterInsiderHandler msdlConverterInsiderHandler::create (
-  const string&               serviceName,
-  const string&               handlerHeader,
+  const std::string&               serviceName,
+  const std::string&               handlerHeader,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
   // create the insider handler
@@ -125,8 +123,8 @@ S_msdlConverterInsiderHandler msdlConverterInsiderHandler::create (
 }
 
 msdlConverterInsiderHandler::msdlConverterInsiderHandler (
-  const string&               serviceName,
-  const string&               handlerHeader,
+  const std::string&               serviceName,
+  const std::string&               handlerHeader,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
   : oahInsiderHandler (
       serviceName,
@@ -149,7 +147,7 @@ R"(
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -175,15 +173,15 @@ void msdlConverterInsiderHandler::initializeHandlerMultiComponent ()
     createMsdlConverterConverterComponent ();
 }
 
-string msdlConverterInsiderHandler::usageInformation (
+std::string msdlConverterInsiderHandler::usageInformation (
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 R"(Usage: msdl [option]*
 )" <<
-    endl;
+    std::endl;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
@@ -201,17 +199,17 @@ R"(Usage: msdl [option]*
   return s.str ();
 }
 
-string msdlConverterInsiderHandler::handlerServiceAboutInformation () const
+std::string msdlConverterInsiderHandler::handlerServiceAboutInformation () const
 {
   return
     msdlConverterAboutInformation (
       fMultiGenerationOutputKind);
 }
 
-string msdlConverterInsiderHandler::msdlConverterAboutInformation (
+std::string msdlConverterInsiderHandler::msdlConverterAboutInformation (
   mfMultiGenerationOutputKind multiGenerationOutputKind) const
 {
-  string result;
+  std::string result;
 
   size_t passesNumber = 0;
 
@@ -241,13 +239,13 @@ string msdlConverterInsiderHandler::msdlConverterAboutInformation (
       break;
   } // switch
 
-  string headPart;
+  std::string headPart;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should only occur if the run is a pure help one
       {
-        stringstream headPartStream;
+        std::stringstream headPartStream;
 
         headPartStream <<
 R"(What msdlConverter does:
@@ -261,7 +259,7 @@ R"(What msdlConverter does:
 
     default:
       {
-        stringstream headPartStream;
+        std::stringstream headPartStream;
 
         headPartStream <<
 R"(What msdlConverter does:
@@ -271,7 +269,7 @@ R"(What msdlConverter does:
           " passes when generating " <<
           mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
           " output:" <<
-          endl <<
+          std::endl <<
 R"(
         Pass 1:  converts the MSDL input into a first MSR)";
 
@@ -279,7 +277,7 @@ R"(
       }
   } // switch
 
-  string specificPart;
+  std::string specificPart;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
@@ -334,7 +332,7 @@ R"(
       break;
   } // switch
 
-   string commonTailPart =
+   std::string commonTailPart =
 R"(
 
     Other passes are performed according to the options, such as
@@ -355,7 +353,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
       "Creating the msdlConverter prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -364,7 +362,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
 
 //______________________________________________________________________________
 void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
-  const string&               serviceName,
+  const std::string&               serviceName,
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
 #ifdef TRACING_IS_ENABLED
@@ -373,7 +371,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -563,14 +561,14 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  if (MSDR_STANDARD_INPUT_NAME == string ("-")) {
+  if (MSDR_STANDARD_INPUT_NAME == std::string ("-")) {
     checkSingleInputSourceInArgumentsVector ();
   }
-  else if (MSDR_STANDARD_INPUT_NAME == string ("")) {
+  else if (MSDR_STANDARD_INPUT_NAME == std::string ("")) {
     checkNoOrOneInputSourceInArgumentsVector ();
   }
   else {
@@ -580,7 +578,7 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -588,7 +586,7 @@ string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -620,21 +618,21 @@ string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
       outputFileNameHasBeenSet <<
       " autoOutputFileNameHasBeenSet: " <<
       autoOutputFileNameHasBeenSet <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string
+  std::string
     inputSourceName =
       gGlobalServiceRunData->getInputSourceName ();
 
-  string outputFileName;
+  std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "options' " <<
@@ -674,7 +672,7 @@ string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
             outputFileName.rfind ('.');
 
         // remove file extension
-        if (posInString != string::npos) {
+        if (posInString != std::string::npos) {
           outputFileName.replace (
             posInString,
             outputFileName.size () - posInString,
@@ -688,7 +686,7 @@ string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -698,7 +696,7 @@ string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -803,7 +801,7 @@ string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
     gLogStream <<
       "outputFileName: " <<
       outputFileName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -847,7 +845,7 @@ void msdlConverterInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << inputSourceName << "\" is both the input and output file name";
@@ -859,7 +857,7 @@ void msdlConverterInsiderOahGroup::checkGroupOptionsConsistency ()
 
 
   if (! fOutputFileName.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "msdlConverterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
@@ -868,7 +866,7 @@ void msdlConverterInsiderOahGroup::checkGroupOptionsConsistency ()
   }
 
   else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
@@ -885,7 +883,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -898,7 +896,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlConverterInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -911,7 +909,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -924,7 +922,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlConverterInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -937,7 +935,7 @@ void msdlConverterInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlConverterInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -945,33 +943,33 @@ void msdlConverterInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msdlConverterInsiderHandler::print (ostream& os) const
+void msdlConverterInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "msdlConverterInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -979,7 +977,7 @@ void msdlConverterInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -987,16 +985,16 @@ void msdlConverterInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdlConverterInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlConverterInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1033,11 +1031,11 @@ void msdlConverterInsiderOahGroup::initializemsdlConverterInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1049,24 +1047,24 @@ void msdlConverterInsiderOahGroup::printmsdlConverterInsiderOahGroupValues (int 
 {
   gLogStream <<
     "The msdlConverter options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // generate output kind
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (fieldWidth) << "Generated output kind:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "Generated output kind:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "mfMultiGenerationOutputKind" << " : " <<
     mfMultiGenerationOutputKindAsString (fMultiGenerationOutputKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1080,7 +1078,7 @@ S_msdlConverterInsiderOahGroup createGlobalmsdlConverterInsiderOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdlConverter insider OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

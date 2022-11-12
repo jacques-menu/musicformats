@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -56,15 +56,13 @@
 #include "musicxml2lilypondInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_xml2lyInsiderHandler xml2lyInsiderHandler::create (
-  const string&           serviceName,
-  const string&           handlerHeader,
+  const std::string&           serviceName,
+  const std::string&           handlerHeader,
   oahHandlerUsedThruKind  handlerUsedThruKind)
 {
   // create the insider handler
@@ -79,8 +77,8 @@ S_xml2lyInsiderHandler xml2lyInsiderHandler::create (
 }
 
 xml2lyInsiderHandler::xml2lyInsiderHandler (
-  const string&           serviceName,
-  const string&           handlerHeader,
+  const std::string&           serviceName,
+  const std::string&           handlerHeader,
   oahHandlerUsedThruKind  handlerUsedThruKind)
   : oahInsiderHandler (
       serviceName,
@@ -105,7 +103,7 @@ Usage: xml2ly [[option]* [MusicXMLFile|-] [[option]*
       "Initializing xml2ly insider options handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -135,7 +133,7 @@ void xml2lyInsiderHandler::initializeHandlerMultiComponent ()
 }
 
 //_______________________________________________________________________________
-string xml2lyInsiderHandler::handlerServiceAboutInformation () const
+std::string xml2lyInsiderHandler::handlerServiceAboutInformation () const
 {
   return
 R"(What xml2ly does:
@@ -160,15 +158,15 @@ R"(What xml2ly does:
 }
 
 //______________________________________________________________________________
-string xml2lyInsiderHandler::usageFromUsedThruKind (
+std::string xml2lyInsiderHandler::usageFromUsedThruKind (
    oahHandlerUsedThruKind handlerUsedThruKind) const
 {
-  string result;
+  std::string result;
 
   switch (handlerUsedThruKind) {
     case oahHandlerUsedThruKind::kHandlerUsedThruUnknown:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "oahHandlerUsedThruKind::kHandlerUsedThruUnknown found in usageFromUsedThruKind() in handler \"" <<
@@ -205,7 +203,7 @@ void xml2lyInsiderHandler::createTheXml2lyPrefixes ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Creating the xml2ly prefixes" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -214,7 +212,7 @@ void xml2lyInsiderHandler::createTheXml2lyPrefixes ()
 
 //______________________________________________________________________________
 void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -222,7 +220,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
       "Creating the xml2ly insider option groups" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -308,14 +306,14 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
     // print the options handler initial state
     gLogStream <<
       "musicxml2lilypondInsiderInsiderHandler has been initialized as:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     print (gLogStream);
 
     gLogStream <<
-      endl << endl;
+      std::endl << std::endl;
 
     --gIndenter;
   }
@@ -325,7 +323,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
 if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "musicxml2lilypondInsiderInsiderHandler help:" <<
-      endl;
+      std::endl;
 
     this->printHelp (gOutputStream);
   }
@@ -341,7 +339,7 @@ void xml2lyInsiderHandler::checkOptionsAndArguments () const
       "Checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -349,7 +347,7 @@ void xml2lyInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -357,7 +355,7 @@ string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -381,13 +379,13 @@ string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
       autoOutputFileNameAtom->
         getSetByAnOption ();
 
-  string outputFileName;
+  std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "options' " <<
@@ -412,7 +410,7 @@ string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
     if (autoOutputFileNameHasBeenSet) {
       // '-o, -output-file-name' has NOT been chosen
       // '-aofn, -auto-output-file-name' has been chosen
-      string
+      std::string
         inputSourceName =
           gGlobalServiceRunData->getInputSourceName ();
 
@@ -431,7 +429,7 @@ string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
             outputFileName.rfind ('.');
 
         // remove file extension
-        if (posInString != string::npos) {
+        if (posInString != std::string::npos) {
           outputFileName.replace (
             posInString,
             outputFileName.size () - posInString,
@@ -445,7 +443,7 @@ string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -458,7 +456,7 @@ string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -527,7 +525,7 @@ void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -540,7 +538,7 @@ void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2lyInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -553,7 +551,7 @@ void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -566,7 +564,7 @@ void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2lyInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -579,40 +577,40 @@ void xml2lyInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
   oahGroup::browseData (v);
 }
 
-void xml2lyInsiderHandler::print (ostream& os) const
+void xml2lyInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "musicxml2lilypondInsiderInsiderHandler '" << fHandlerHeader << "':" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -620,7 +618,7 @@ void xml2lyInsiderHandler::print (ostream& os) const
       // print the options group
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -628,16 +626,16 @@ void xml2lyInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_xml2lyInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_xml2lyInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -672,11 +670,11 @@ void xml2lyInsiderOahGroup::initializeXml2lyInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
     "\" group" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -696,11 +694,11 @@ void xml2lyInsiderOahGroup::createInsiderQuitSubGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Creating insider quit subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -766,11 +764,11 @@ void xml2lyInsiderOahGroup::createInsiderMacrosSubGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Creating insider macro subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -821,7 +819,7 @@ void xml2lyInsiderOahGroup::printXml2lyInsiderOahGroupValues (int fieldWidth)
 {
   gLogStream <<
     "The xml2ly options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -830,20 +828,20 @@ void xml2lyInsiderOahGroup::printXml2lyInsiderOahGroupValues (int fieldWidth)
 
   gLogStream <<
     "Quit after some passes:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
     fQuitAfterPass2a <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
     fQuitAfterPass2b <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass3" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << " : " <<
     fQuitAfterPass3 <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -857,7 +855,7 @@ S_xml2lyInsiderOahGroup createGlobalXml2lyInsiderOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global xml2ly OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

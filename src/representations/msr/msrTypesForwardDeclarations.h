@@ -34,6 +34,9 @@ typedef SMARTP<msrAfterGraceNotesGroup> S_msrAfterGraceNotesGroup;
 class   msrAfterGraceNotesGroupContents;
 typedef SMARTP<msrAfterGraceNotesGroupContents> S_msrAfterGraceNotesGroupContents;
 
+class   msrAppearance;
+typedef SMARTP<msrAppearance> S_msrAppearance;
+
 class   msrArpeggiato;
 typedef SMARTP<msrArpeggiato> S_msrArpeggiato;
 
@@ -109,6 +112,9 @@ typedef SMARTP<msrDamp> S_msrDamp;
 class   msrDampAll;
 typedef SMARTP<msrDampAll> S_msrDampAll;
 
+class   msrDistance;
+typedef SMARTP<msrDistance> S_msrDistance;
+
 class   msrDoubleTremolo;
 typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
 
@@ -135,6 +141,9 @@ typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 
 class   msrFrame;
 typedef SMARTP<msrFrame> S_msrFrame;
+
+class   msrGlyph;
+typedef SMARTP<msrGlyph> S_msrGlyph;
 
 class   msrGlissando;
 typedef SMARTP<msrGlissando> S_msrGlissando;
@@ -166,14 +175,20 @@ typedef SMARTP<msrLigature> S_msrLigature;
 class   msrLineBreak;
 typedef SMARTP<msrLineBreak> S_msrLineBreak;
 
-class   msrLineBreak;
-typedef SMARTP<msrLineBreak> S_msrLineBreak;
+class   msrLineWidth;
+typedef SMARTP<msrLineWidth> S_msrLineWidth;
+
+class   msrMarginsGroup;
+typedef SMARTP<msrMarginsGroup> S_msrMarginsGroup;
 
 class   msrMeasure;
 typedef SMARTP<msrMeasure> S_msrMeasure;
 
 class   msrMeasureElement;
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
+
+class   msrMeasureLayout;
+typedef SMARTP<msrMeasureLayout> S_msrMeasureLayout;
 
 class   msrMeasureRepeat;
 typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
@@ -199,6 +214,9 @@ typedef SMARTP<msrNonArpeggiato> S_msrNonArpeggiato;
 class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
+class   msrNoteSize;
+typedef SMARTP<msrNoteSize> S_msrNoteSize;
+
 class   msrOctaveShift;
 typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
 
@@ -208,11 +226,17 @@ typedef SMARTP<msrOrnament> S_msrOrnament;
 class   msrOrnament;
 typedef SMARTP<msrOrnament> S_msrOrnament;
 
+class   msrOtherAppearance;
+typedef SMARTP<msrOtherAppearance> S_msrOtherAppearance;
+
 class   msrOtherDynamic;
 typedef SMARTP<msrOtherDynamic> S_msrOtherDynamic;
 
 class   msrPageBreak;
 typedef SMARTP<msrPageBreak> S_msrPageBreak;
+
+class   msrPageLayout;
+typedef SMARTP<msrPageLayout> S_msrPageLayout;
 
 class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;
@@ -319,8 +343,14 @@ typedef SMARTP<msrTie> S_msrTie;
 class   msrStaff;
 typedef SMARTP<msrStaff> S_msrStaff;
 
+class   msrStaffLayout;
+typedef SMARTP<msrStaffLayout> S_msrStaffLayout;
+
 class   msrStaffTuning;
 typedef SMARTP<msrStaffTuning> S_msrStaffTuning;
+
+class   msrSystemLayout;
+typedef SMARTP<msrSystemLayout> S_msrSystemLayout;
 
 class   msrTempoNote;
 typedef SMARTP<msrTempoNote> S_msrTempoNote;

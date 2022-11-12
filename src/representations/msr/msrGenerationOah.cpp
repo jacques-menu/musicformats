@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -29,8 +29,6 @@
 
 #include "msrGenerationOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -89,11 +87,11 @@ R"()",
   The NUMBER generation API kinds available are:
   GENERATION_API_KINDS.
   The default is 'DEFAULT_VALUE'.)",
-            regex ("NUMBER"),
-            to_string (gGlobalGenerationAPIKindsMap.size ())),
-          regex ("GENERATION_API_KINDS"),
+            std::regex ("NUMBER"),
+            std::to_string (gGlobalGenerationAPIKindsMap.size ())),
+          std::regex ("GENERATION_API_KINDS"),
           existingGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-        regex ("DEFAULT_VALUE"),
+        std::regex ("DEFAULT_VALUE"),
         msrGenerationAPIKindAsString (
           msrGenerationAPIKindDefaultValue)),
       "GENERATION_API",
@@ -133,7 +131,7 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrGeneratorsOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -146,7 +144,7 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrGeneratorsOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -159,7 +157,7 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrGeneratorsOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -172,7 +170,7 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrGeneratorsOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -185,7 +183,7 @@ void msrGeneratorsOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrGeneratorsOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -196,7 +194,7 @@ void msrGeneratorsOahGroup::printMsrGeneratorsOahValues (
 {
   gLogStream <<
     "The msrGenerators options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -205,27 +203,27 @@ void msrGeneratorsOahGroup::printMsrGeneratorsOahValues (
 
   gLogStream <<
     "Generation API:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "gnerationAPIKind" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "gnerationAPIKind" << " : " <<
       msrGenerationAPIKindAsString (fGenerationAPIKind) <<
-      endl;
+      std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrGeneratorsOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msrGeneratorsOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -238,14 +236,14 @@ S_msrGeneratorsOahGroup createGlobalMsrGeneratorsOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msrGenerators OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // protect library against multiple initializations
   if (! gGlobalMsrGeneratorsOahGroup) {
 
-    // initialize the generation API kinds map
+    // initialize the generation API kinds std::map
     // ------------------------------------------------------
 
     initializeMsrGenerationAPI ();

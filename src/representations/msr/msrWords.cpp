@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -22,8 +22,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -31,7 +29,7 @@ namespace MusicFormats
 S_msrWords msrWords::create (
   int                        inputLineNumber,
   msrPlacementKind           wordsPlacementKind,
-  const string&              wordsContents,
+  const std::string&              wordsContents,
   msrJustifyKind             wordsJustifyKind,
   msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
   msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
@@ -61,7 +59,7 @@ S_msrWords msrWords::create (
 msrWords::msrWords (
   int                        inputLineNumber,
   msrPlacementKind           wordsPlacementKind,
-  const string&              wordsContents,
+  const std::string&              wordsContents,
   msrJustifyKind             wordsJustifyKind,
   msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
   msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
@@ -98,7 +96,7 @@ void msrWords::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrWords::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrWords>*
@@ -109,7 +107,7 @@ void msrWords::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrWords::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -120,7 +118,7 @@ void msrWords::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrWords::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrWords>*
@@ -131,7 +129,7 @@ void msrWords::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrWords::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -140,50 +138,50 @@ void msrWords::acceptOut (basevisitor* v)
 void msrWords::browseData (basevisitor* v)
 {}
 
-string msrWords::wordsPlacementKindAsString () const
+std::string msrWords::wordsPlacementKindAsString () const
 {
   return
     msrPlacementKindAsString (
       fWordsPlacementKind);
 }
 
-string msrWords::wordsJustifyKindAsString () const
+std::string msrWords::wordsJustifyKindAsString () const
 {
   return msrJustifyKindAsString (fWordsJustifyKind);
 }
 
-string msrWords::wordsHorizontalAlignmentKindAsString () const
+std::string msrWords::wordsHorizontalAlignmentKindAsString () const
 {
   return
     msrHorizontalAlignmentKindAsString (
       fWordsHorizontalAlignmentKind);
 }
 
-string msrWords::wordsVerticalAlignmentKindAsString () const
+std::string msrWords::wordsVerticalAlignmentKindAsString () const
 {
   return
     msrVerticalAlignmentKindAsString (
       fWordsVerticalAlignmentKind);
 }
 
-string msrWords::msrWordsFontStyleKindAsString () const
+std::string msrWords::msrWordsFontStyleKindAsString () const
 {
   return msrFontStyleKindAsString (fWordsFontStyleKind);
 }
 
-string msrWords::wordsFontSizeAsString () const
+std::string msrWords::wordsFontSizeAsString () const
 {
   return fWordsFontSize->fontSizeAsString ();
 }
 
-string msrWords::wordsFontWeightKindAsString () const
+std::string msrWords::wordsFontWeightKindAsString () const
 {
   return msrFontWeightKindAsString (fWordsFontWeightKind);
 }
 
-string msrWords::asString () const
+std::string msrWords::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Words" <<
@@ -195,76 +193,76 @@ string msrWords::asString () const
   return s.str ();
 }
 
-void msrWords::print (ostream& os) const
+void msrWords::print (std::ostream& os) const
 {
-// JMI  os << asString () << endl;
+// JMI  os << asString () << std::endl;
 
   os <<
     "[Words" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 29;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "wordsContents" << " : \"" << fWordsContents << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "placement" << " : " <<
     msrPlacementKindAsString (fWordsPlacementKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "wordsJustifyKind" << " : " <<
     msrJustifyKindAsString (fWordsJustifyKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "wordsHorizontalAlignmentKind" << " : " <<
     msrHorizontalAlignmentKindAsString (fWordsHorizontalAlignmentKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "wordsVerticalAlignmentKind" << " : " <<
     msrVerticalAlignmentKindAsString (fWordsVerticalAlignmentKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "wordsFontStyle" << " : " <<
     msrFontStyleKindAsString (fWordsFontStyleKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "wordsFontSize" << " : " <<
     fWordsFontSize->fontSizeAsString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "wordsFontWeight" << " : " <<
     msrFontWeightKindAsString (fWordsFontWeightKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "wordsFontXMLLang" << " : " <<
     msrXMLLangKindAsString (fWordsXMLLangKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "wordsStaffNumber" << " : " <<
     fWordsStaffNumber <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrWords& elt)
+std::ostream& operator << (std::ostream& os, const S_msrWords& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
 #include "visitor.h"
@@ -29,8 +29,6 @@
 
 #include "oahAtomsCollection.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -70,11 +68,11 @@ void outputFileOahGroup::initializeOutputFileNameOptions ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Creating insider output file subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -138,7 +136,7 @@ void outputFileOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> outputFileOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -151,7 +149,7 @@ void outputFileOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching outputFileOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -164,7 +162,7 @@ void outputFileOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> outputFileOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -177,7 +175,7 @@ void outputFileOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching outputFileOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -190,7 +188,7 @@ void outputFileOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> outputFileOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -200,41 +198,41 @@ void outputFileOahGroup::printOutputFileOahValues (int fieldWidth)
 {
   gLogStream <<
     "The outputFile options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // output file
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (fieldWidth) << "Output file:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "Output file:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fOutputFileName" << " : \"" <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fOutputFileName" << " : \"" <<
     fOutputFileName <<
     "\"" <<
-    endl <<
-    setw (fieldWidth) << "fAutoOutputFileName" << " : \"" <<
+    std::endl <<
+    std::setw (fieldWidth) << "fAutoOutputFileName" << " : \"" <<
     fAutoOutputFileName <<
     "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_outputFileOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_outputFileOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -247,7 +245,7 @@ S_outputFileOahGroup createGlobalOutputFileOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global outputFile OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

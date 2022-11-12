@@ -38,8 +38,6 @@
 #include "msrInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -100,7 +98,7 @@ S_msrScore createScore ()
 //_______________________________________________________________________________
 void displayMsrScoreShort (
   S_msrScore    theMsrScore,
-  const string& passDescription)
+  const std::string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -111,18 +109,18 @@ void displayMsrScoreShort (
   // start the clock
   clock_t startClock =  clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
   gLogStream <<
-    endl <<
+    std::endl <<
     separator <<
-    endl <<
+    std::endl <<
     gTab <<
     "Pass (optional): " << passDescription << ", short version" <<
-    endl <<
+    std::endl <<
     separator <<
-    endl << endl <<
+    std::endl << std::endl <<
     theMsrScore;
 
   // register time spent
@@ -137,7 +135,7 @@ void displayMsrScoreShort (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "gIndenter value after " << passDescription << ": " <<
@@ -156,7 +154,7 @@ void displayMsrScoreShort (
 //_______________________________________________________________________________
 void displayMsrScoreFull (
   S_msrScore    theMsrScore,
-  const string& passDescription)
+  const std::string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -167,18 +165,18 @@ void displayMsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
   gLogStream <<
-    endl <<
+    std::endl <<
     separator <<
-    endl <<
+    std::endl <<
     gTab <<
     "Pass (optional): " << passDescription << ", full version" <<
-    endl <<
+    std::endl <<
     separator <<
-    endl << endl;
+    std::endl << std::endl;
 
   theMsrScore->printShort (gLogStream);
 
@@ -194,7 +192,7 @@ void displayMsrScoreFull (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "gIndenter value after " << passDescription << ": " <<
@@ -214,7 +212,7 @@ void displayMsrScoreFull (
 void displayMsrScoreSummary (
   S_msrScore     theMsrScore,
   S_msrOahGroup& msrOpts,
-  const string&  passDescription)
+  const std::string&  passDescription)
 {
   // sanity check
   mfAssert (
@@ -227,18 +225,18 @@ void displayMsrScoreSummary (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       "Pass (optional): " << passDescription  << ", summary" <<
-      endl <<
+      std::endl <<
       separator <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -265,7 +263,7 @@ void displayMsrScoreSummary (
 void displayMsrScoreNames (
   S_msrScore     theMsrScore,
   S_msrOahGroup& msrOpts,
-  const string&  passDescription)
+  const std::string&  passDescription)
 {
   // sanity check
   mfAssert (
@@ -278,18 +276,18 @@ void displayMsrScoreNames (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       "Pass (optional): " << passDescription << ", names" <<
-      endl <<
+      std::endl <<
       separator <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -315,7 +313,7 @@ void displayMsrScoreNames (
 //_______________________________________________________________________________
 void displayMsrScoreSlices (
   S_msrScore    theMsrScore,
-  const string& passDescription)
+  const std::string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -326,18 +324,18 @@ void displayMsrScoreSlices (
   // start the clock
   clock_t startClock = clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
   gLogStream <<
-    endl <<
+    std::endl <<
     separator <<
-    endl <<
+    std::endl <<
     gTab <<
     "Pass (optional): " << passDescription << ", slices" <<
-    endl <<
+    std::endl <<
     separator <<
-    endl << endl;
+    std::endl << std::endl;
 
   theMsrScore->printSlices (gLogStream);
 
@@ -353,7 +351,7 @@ void displayMsrScoreSlices (
 
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "gIndenter value after " << passDescription << ": " <<
@@ -448,7 +446,7 @@ S_msrVoice createRegularVoiceInStaff (
 //_______________________________________________________________________________
 S_msrMeasure createMeasureInVoice (
   int        inputLineNumber,
-  string     measureNumber,
+  std::string     measureNumber,
   S_msrVoice voice)
 {
   return
@@ -467,7 +465,7 @@ S_msrMeasure createMeasureInVoice (
   {
     // create the measure
 
-    string measure1number = "1"; // the measure number is a string;
+    std::string measure1number = "1"; // the measure number is a std::string;
 
     S_msrMeasure
       measure1 =

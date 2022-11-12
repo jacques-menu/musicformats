@@ -20,8 +20,6 @@
 #include "msdlScannerWaeHandlers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -31,10 +29,10 @@ enum class msdlIgnoreSeparatorTokensKind {
   kIgnoreSeparatorTokensYes
 };
 
-string msdlIgnoreSeparatorTokensKindAsString (
+std::string msdlIgnoreSeparatorTokensKindAsString (
   msdlIgnoreSeparatorTokensKind ignoreSeparatorTokensKind);
 
-ostream& operator << (ostream& os, const msdlIgnoreSeparatorTokensKind& elt);
+std::ostream& operator << (std::ostream& os, const msdlIgnoreSeparatorTokensKind& elt);
 
 //________________________________________________________________________
 class   msdlScanner : public smartable
@@ -44,14 +42,14 @@ class   msdlScanner : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlScanner> create (istream& inputStream);
+    static SMARTP<msdlScanner> create (std::istream& inputStream);
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlScanner (istream& inputStream);
+                          msdlScanner (std::istream& inputStream);
 
     virtual               ~msdlScanner ();
 
@@ -95,24 +93,24 @@ class   msdlScanner : public smartable
     // print
     // ------------------------------------------------------
 
-    string                currentLocationAsString () const;
+    std::string           currentLocationAsString () const;
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
     // private services
     // ------------------------------------------------------
 
-    void                  populateInputString (istream& inputStream);
+    void                  populateInputString (std::istream& inputStream);
 
     char                  fetchNextCharacter ();
 
-     void                 handleEndOfLine (const string& context);
+     void                 handleEndOfLine (const std::string& context);
 
-    string                currentCharacterAsString () const;
+    std::string           currentCharacterAsString () const;
 
     void                  handlePercent ();
     void                  handleSlash ();
@@ -138,16 +136,16 @@ class   msdlScanner : public smartable
     msdlUserLanguageKind  fUserLanguageKind;
 
     // input stream
-    istream&              fInputStream;
+    std::istream&              fInputStream;
     Bool                  fInputIsEmpty;
 
-    // input string
-    string                fInputString;     // modern machines can cope with large data
+    // input std::string
+    std::string           fInputString;     // modern machines can cope with large data
     int                   fInputStringSize; // denormalization for speed
 
     /*
       line numbers                  start at 1
-      positions in the input string start at 0 (array indexing)
+      positions in the input std::string start at 0 (array indexing)
       positions in the current line start at 1
     */
 
@@ -185,7 +183,7 @@ class   msdlScanner : public smartable
     msdlKeywordsLanguageKind
                           fKeywordsInputLanguageKind;
 
-    // tokens list
+    // tokens std::list
     Bool                  fAppendTokensToList;
     msdlTokensList        fTokensList;
 
@@ -197,7 +195,7 @@ class   msdlScanner : public smartable
     Bool                  fSourceIsLexicallyCorrect;
 };
 typedef SMARTP<msdlScanner> S_msdlScanner;
-EXP ostream& operator << (ostream& os, const msdlScanner& elt);
+EXP std::ostream& operator << (std::ostream& os, const msdlScanner& elt);
 
 
 }

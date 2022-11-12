@@ -77,7 +77,7 @@ class EXP msrSegment : public msrVoiceElement
 
     // measures elements
 
-    const list<S_msrSegmentElement>&
+    const std::list<S_msrSegmentElement>&
                           getSegmentElementsList () const
                               { return fSegmentElementsList; }
 
@@ -95,9 +95,9 @@ class EXP msrSegment : public msrVoiceElement
     S_msrMeasure          getSegmentLastMeasure () const
                               { return fSegmentLastMeasure; }
 
-    // measures flat list
+    // measures flat std::list
 
-    const list<S_msrMeasure>&
+    const std::list<S_msrMeasure>&
                           getSegmentMeasuresFlatList () const
                               { return fSegmentMeasuresFlatList; }
 
@@ -157,18 +157,18 @@ class EXP msrSegment : public msrVoiceElement
 
     S_msrMeasure          fetchLastMeasureFromSegment (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
     S_msrMeasure          createAMeasureAndAppendItToSegment (
                             int           inputLineNumber,
                             int           previousMeasureEndInputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             msrMeasureImplicitKind
                                           measureImplicitKind);
 
     void                  setNextMeasureNumberInSegment (
                             int           inputLineNumber,
-                            const string& nextMeasureNumber);
+                            const std::string& nextMeasureNumber);
 
     void                  appendMeasureToSegment (
                             S_msrMeasure measure);
@@ -371,7 +371,7 @@ class EXP msrSegment : public msrVoiceElement
 
     S_msrMeasure          removeLastMeasureFromSegment (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
     void                  finalizeAllTheMeasuresOfSegment (
                             int inputLineNumber);
@@ -391,16 +391,16 @@ class EXP msrSegment : public msrVoiceElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
     void                  displaySegment (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -427,12 +427,12 @@ class EXP msrSegment : public msrVoiceElement
     int                   fSegmentAbsoluteNumber;
 
     // the measures elements in the segment contain the mmusic
-    list<S_msrSegmentElement>
+    std::list<S_msrSegmentElement>
                           fSegmentElementsList;
 
-    // measures flat list
+    // measures flat std::list
     // including those not in non-measure segment elements,
-    list<S_msrMeasure>    fSegmentMeasuresFlatList;
+    std::list<S_msrMeasure>    fSegmentMeasuresFlatList;
 
     // debug number, unique for every msrSegment instance
     static int            gSegmentDebugNumber;
@@ -461,7 +461,7 @@ class EXP msrSegment : public msrVoiceElement
     S_msrMeasure          fSegmentLastMeasure;
 };
 typedef SMARTP<msrSegment> S_msrSegment;
-EXP ostream& operator << (ostream& os, const S_msrSegment& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSegment& elt);
 
 
 }

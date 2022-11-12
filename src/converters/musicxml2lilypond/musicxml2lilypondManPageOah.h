@@ -29,9 +29,9 @@ class EXP xml2lyManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<xml2lyManPageGenerateAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
   protected:
@@ -40,9 +40,9 @@ class EXP xml2lyManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
                           xml2lyManPageGenerateAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
     virtual               ~xml2lyManPageGenerateAtom ();
@@ -57,7 +57,7 @@ class EXP xml2lyManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
   public:
 
@@ -74,10 +74,10 @@ class EXP xml2lyManPageGenerateAtom : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -85,7 +85,7 @@ class EXP xml2lyManPageGenerateAtom : public oahAtom
     // private services
     // ------------------------------------------------------
 
-    void                  generateManPageData (ostream& os) const;
+    void                  generateManPageData (std::ostream& os) const;
 
   private:
 
@@ -95,7 +95,7 @@ class EXP xml2lyManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<xml2lyManPageGenerateAtom> S_xml2lyManPageGenerateAtom;
-EXP ostream& operator << (ostream& os, const S_xml2lyManPageGenerateAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2lyManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP xml2lyManPageOahGroup : public oahGroup
@@ -182,7 +182,7 @@ class EXP xml2lyManPageOahGroup : public oahGroup
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<xml2lyManPageOahGroup> S_xml2lyManPageOahGroup;
-EXP ostream& operator << (ostream& os, const S_xml2lyManPageOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_xml2lyManPageOahGroup& elt);
 
 EXP extern S_xml2lyManPageOahGroup gGlobalXml2lyManPageOahGroup;
 

@@ -165,7 +165,7 @@ class EXP msr2bsrTranslator :
 
     void                      notSupportedMessage (
                                 int           inputLineNumber,
-                                const string& message);
+                                const std::string& message);
 
     // the MSR score we're visiting
     // ------------------------------------------------------
@@ -203,7 +203,7 @@ class EXP msr2bsrTranslator :
     // voices
     // ------------------------------------------------------
     S_msrVoice                fCurrentVoice;
- //   map<S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
+ //   std::map<S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
 
 
     // pages & lines
@@ -297,8 +297,8 @@ class EXP msr2bsrTranslator :
     // ------------------------------------------------------
   //  S_msrPartGroup            fCurrentPartGroupClone; JMI
 
-    // the current partGroup is the top of the stack
-    stack<S_msrPartGroup>     fPartGroupsStack;
+    // the current partGroup is the top of the std::stack
+    std::stack<S_msrPartGroup>     fPartGroupsStack;
 
 
      // harmonies
@@ -307,14 +307,14 @@ class EXP msr2bsrTranslator :
 
     S_msrHarmony              fCurrentHarmonyClone;
 
-    list<S_msrHarmony>        fPendingHarmoniesList;
+    std::list<S_msrHarmony>        fPendingHarmoniesList;
 
 
     // frames
     // ------------------------------------------------------
  //   Bool                      fOnGoingFramesVoice; JMI
 
- //   list<S_msrFrame>          fPendingFramesList; // JMI
+ //   std::list<S_msrFrame>          fPendingFramesList; // JMI
 
 
     // figured bass
@@ -348,8 +348,8 @@ class EXP msr2bsrTranslator :
     // segments
     // ------------------------------------------------------
     // segments can be imbedded in others,
-    // the current segment clone is the one at the top of the stack
-    stack<S_msrSegment>       fCurrentSegmentClonesStack;
+    // the current segment clone is the one at the top of the std::stack
+    std::stack<S_msrSegment>       fCurrentSegmentClonesStack;
 
 
     // measures
@@ -424,7 +424,7 @@ class EXP msr2bsrTranslator :
     // ------------------------------------------------------
 //    S_msrTuplet             fCurrentTupletClone;
  //   Bool                      fOnGoingTuplet;
-    stack<S_msrTuplet>        fTupletClonesStack;
+    std::stack<S_msrTuplet>        fTupletClonesStack;
 
 
     // stanzas
@@ -440,8 +440,8 @@ class EXP msr2bsrTranslator :
 
 
     // part groups block
-    // the current partGroup block is the top of the stack
-    stack<S_bsrPartGroupBlock>
+    // the current partGroup block is the top of the std::stack
+    std::stack<S_bsrPartGroupBlock>
                               fPartGroupBlocksStack;
                               */
 

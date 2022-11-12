@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
@@ -28,15 +28,13 @@
 #include "musicxml2guidoRegularHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_xml2gmnRegularHandler xml2gmnRegularHandler::create (
-  const string&     serviceName,
-  const string&     handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   S_xml2gmnInsiderHandler
                     insiderOahHandler)
 {
@@ -52,8 +50,8 @@ S_xml2gmnRegularHandler xml2gmnRegularHandler::create (
 }
 
 xml2gmnRegularHandler::xml2gmnRegularHandler (
-  const string&     serviceName,
-  const string&     handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   S_xml2gmnInsiderHandler
                     insiderOahHandler)
   : oahRegularHandler (
@@ -75,13 +73,13 @@ xml2gmnRegularHandler::xml2gmnRegularHandler (
     "xml2gmnRegularHandler \"" <<
     fHandlerHeader <<
     "\" has been initialized as:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   gLogStream <<
     "===> printHelp():" <<
-    endl;
+    std::endl;
   this->printHelp (gOutputStream); // JMI
 
   --gIndenter;
@@ -100,7 +98,7 @@ void xml2gmnRegularHandler::createRegularHandlerGroups ()
       "Creating the regular handler groups for \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -169,7 +167,7 @@ void xml2gmnRegularHandler::createRegularHandlerGroups ()
       "All the regular handler groups for \"" <<
       fHandlerHeader <<
       "\" have been created" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1256,7 +1254,7 @@ void xml2gmnRegularHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1264,33 +1262,33 @@ void xml2gmnRegularHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-void xml2gmnRegularHandler::print (ostream& os) const
+void xml2gmnRegularHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "xml2gmnRegularHandler '" << fHandlerHeader << "':" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -1298,7 +1296,7 @@ void xml2gmnRegularHandler::print (ostream& os) const
       // print the options group
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -1306,16 +1304,16 @@ void xml2gmnRegularHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_xml2gmnRegularHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_xml2gmnRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

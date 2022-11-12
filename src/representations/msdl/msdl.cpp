@@ -13,8 +13,6 @@
 #include "msdl.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 

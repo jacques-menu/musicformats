@@ -121,7 +121,7 @@ When building \mf\ with:
 cd build
 make
 \end{lstlisting}
-a \cmake\ \cache\ is created in file {\tt build/libdir/CMakeCache.txt}, containing the list of all the C++ files in the library, including those of the embedded \libmusicxml.
+a \cmake\ \cache\ is created in file {\tt build/libdir/CMakeCache.txt}, containing the std::list of all the C++ files in the library, including those of the embedded \libmusicxml.
 
 Adding individual files in fine, but adding new folders in the {\tt src} hierarchy implies to update variable {\tt SRC_FOLDERS} in {\tt build/CMakeLists.txt} accordingly and to remove the {\tt build/libdir/CMakeCache.txt} \cache.
 
@@ -207,7 +207,7 @@ The few uses of {\tt auto} declarations are in range-based {\tt for} loops over 
           msrHarmonyStructure::create (
             e);
 
-      // register it in the map
+      // register it in the std::map
       gGlobalHarmonyStructuresMap [e] =
         harmonyStructure;
     } // for
@@ -374,9 +374,9 @@ class EXP waeHandler : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -384,7 +384,7 @@ class EXP waeHandler : public smartable
     // ------------------------------------------------------
 };
 typedef SMARTP<waeHandler> S_waeHandler;
-EXP ostream& operator << (ostream& os, const S_waeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_waeHandler& elt);
 \end{lstlisting}
 
 The creation of the instances in \wae{waeHandlers.cpp} is done with:
@@ -425,7 +425,7 @@ A work method is used internally by the class, while a work field is one that ev
 Most class   declarations are followed by a smart pointer type and a {\tt operator <<}, such as:
 \begin{lstlisting}[language=CPlusPlus]
 typedef SMARTP<msrHarmonyDegree> S_msrHarmonyDegree;
-EXP ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrHarmonyDegree& elt);
 \end{lstlisting}
 
 The same order for constructors, destructor and methods is followed in most {\tt .cpp} files.
@@ -467,9 +467,9 @@ The following rules apply:
 \end{lstlisting}
 \end{itemize}
 
-When a field is an STL container, such a {\tt vector}, {\tt list}, {\tt map} or {\tt set}, this in indicated as part of the identifier, such as:
+When a field is an STL container, such a {\tt std::vector}, {\tt std::list}, {\tt std::map} or {\tt set}, this in indicated as part of the identifier, such as:
 \begin{lstlisting}[language=CPlusPlus]
-    map<string, string>   fPartsRenamingMap;
+    std::map<std::string, std::string>   fPartsRenamingMap;
 \end{lstlisting}
 or
 \begin{lstlisting}[language=CPlusPlus]
@@ -477,7 +477,7 @@ or
 \end{lstlisting}
 or
 \begin{lstlisting}[language=CPlusPlus]
-    map<string, Sxmlelement>  fPartMeasureNumbersToElementsMap;
+    std::map<std::string, Sxmlelement>  fPartMeasureNumbersToElementsMap;
 \end{lstlisting}
 
 All \methodName{create*} methods create class   instances, and are paired with an explicit constructor with the same parameters:
@@ -514,9 +514,9 @@ Some classes use private fields and methods for their internal working. A field 
 
 \mf\ defines exceptions for its needs in \waeBoth{waeExceptions}. These exceptions can be related to a format, a pass or a converter. Exceptions named {\tt *Internal*} are raised when something that should not happen occurs: this to avoid ugly crashes later in the execution.
 
-All the exception classes are derived from {\tt }, that contains:
+All the std::exception classes are derived from {\tt }, that contains:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP mfException: public exception
+class EXP mfException: public std::exception
 {
   public:
 
@@ -524,7 +524,7 @@ class EXP mfException: public exception
     // ------------------------------------------------------
 
                           mfException (
-                            string const& exceptionDescription = "",
+                            std::string const& exceptionDescription = "",
                             int           exceptionNumber = 0,
                             int           exceptionLevel = 0
                           ) throw ()
@@ -538,19 +538,19 @@ class EXP mfException: public exception
 
   private:
 
-    string                fExceptionDescription;
+    std::string           fExceptionDescription;
 
     int                   fExceptionNumber;
     int                   fExceptionLevel;
 };
 \end{lstlisting}
 
-An example of exception is:
+An example of std::exception is:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP mxsr2msrException: public mfException
 {
   public:
-    mxsr2msrException (string const& exceptionDescription) throw ()
+    mxsr2msrException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };
@@ -560,9 +560,9 @@ typedef SMARTP<musicxmlException> S_musicxmlException;
 There are warning and error reporting functions\index{functions} in \waeBoth{wae.h}.
 Examples are:
 \begin{lstlisting}[language=CPlusPlus]
-void oahAtomExpectingAValue::applyElement (ostream& os)
+void oahAtomExpectingAValue::applyElement (std::ostream& os)
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Applying atom expecting a value '" <<
@@ -579,7 +579,7 @@ and:
       {
         // should not occur
 
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "msrPedal '" <<
@@ -607,7 +607,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
     gLogStream <<
       "--> End visiting S_accordion_registration" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -828,7 +828,7 @@ void initializeBSR ()
     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       gLogStream <<
         "Initializing BSR basic types handling" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -887,7 +887,7 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
 {
     // ... ... ...
 
-    string winged = elt->getAttributeValue ("winged");
+    std::string winged = elt->getAttributeValue ("winged");
 
     fCurrentBarLineRepeatWingedKind =
       msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone; // default value
@@ -914,7 +914,7 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
           msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleCurved;
       }
       else {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "repeat winged \"" << winged <<
@@ -941,18 +941,18 @@ enum class msrChordInKind {
   kChordInGraceNotesGroup
 };
 
-EXP string msrChordInKindAsString (
+EXP std::string msrChordInKindAsString (
   msrChordInKind chordInKind);
 
-ostream& operator << (ostream& os, const msrChordInKind& elt);
+std::ostream& operator << (std::ostream& os, const msrChordInKind& elt);
 \end{lstlisting}
 
 The implementation is:
 \begin{lstlisting}[language=CPlusPlus]
-string msrChordInKindAsString (
+std::string msrChordInKindAsString (
   msrChordInKind chordInKind)
 {
-  string result;
+  std::string result;
 
   switch (chordInKind) {
     case msrChordInKind::kChordIn_NO_:
@@ -972,7 +972,7 @@ string msrChordInKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrChordInKind& elt)
+std::ostream& operator << (std::ostream& os, const msrChordInKind& elt)
 {
   os << msrChordInKindAsString (elt);
   return os;
@@ -1039,10 +1039,10 @@ enum class mfOnOffKind {
 Bool mfOnOffKindAsBool (
   mfOnOffKind onOffKind);
 
-string mfOnOffKindAsString (
+std::string mfOnOffKindAsString (
   mfOnOffKind onOffKind);
 
-ostream& operator << (ostream& os, const mfOnOffKind elt);
+std::ostream& operator << (std::ostream& os, const mfOnOffKind elt);
 \end{lstlisting}
 
 This is the case for example of page ragging information in \lpsr{lpsr/lpsrPapers.h}:
@@ -1187,7 +1187,7 @@ void initializeHarmonyStructuresMap ()
           msrHarmonyStructure::create (
             e);
 
-      // register it in the map
+      // register it in the std::map
       gGlobalHarmonyStructuresMap [e] =
         harmonyStructure;
     } // for
@@ -1200,7 +1200,7 @@ void initializeHarmonyStructuresMap ()
 The {\tt mfEnumAll} template class, defined in \mfutilities{mfEnumAll.h} can then be used to iterate from \constant{msdlTokenKind}{AllFirst} to \constant{msdlTokenKind}{AllLast}, here in \msdl{msdlTokens.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
     for (auto e : EnumNonSeparators<msdlTokenKind> ()) {
-      string
+      std::string
         nonSeparatorTokenAsMsdlString  =
           msdlTokenKindAsMsdlString (
             e,
@@ -1223,11 +1223,11 @@ utilities/mfutilities.h:class   mfEnumAll
 For example \class{EnumTrueHarmonies}, that relies on \constant{msrHarmonyKind}{TrueHarmoniesFirst} and\\
  \constant{msrHarmonyKind}{TrueHarmoniesLast}:
 \begin{lstlisting}[language=CPlusPlus]
-void msrHarmonyStructure::printAllHarmoniesStructures (ostream& os)
+void msrHarmonyStructure::printAllHarmoniesStructures (std::ostream& os)
 {
   os <<
     "All the known harmonies structures are:" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -1241,7 +1241,7 @@ void msrHarmonyStructure::printAllHarmoniesStructures (ostream& os)
     // print it
     os <<
       harmonyStructure <<
-      endl;
+      std::endl;
   } // for
 
   --gIndenter;
@@ -1270,7 +1270,7 @@ class EXP rational {
 
         rational(long int num = 0, long int denom = 1);
         rational(const rational& d);
-        rational(const string &str);
+        rational(const std::string &str);
 
 	// ... ... ...
 };
@@ -1315,7 +1315,7 @@ In most cases, there are justs named \methodName{create*}, but a couple of them 
 
 One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to them would be hard to distinguish at first glance otherwise:
 \begin{lstlisting}[language=CPlusPlus]
- class EXP msrTempo : public msrMeasureElement
+ class EXP msrTempo : public msrMeasureElementLambda
 {
  		// ... ... ...
 
@@ -1326,7 +1326,7 @@ One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to th
     static SMARTP<msrTempo> createTempoPerMinute (
       int               inputLineNumber,
       msrDottedDuration tempoBeatUnit,
-      string            tempoPerMinute,
+      std::string            tempoPerMinute,
       msrTempoParenthesizedKind
                         tempoParenthesizedKind,
       msrPlacementKind  tempoPlacementKind);
@@ -1357,7 +1357,7 @@ One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to th
 
 Another case is that of \class{msrKey} in \msrBoth{msrKeys}, in which the variant chosen is made explicit:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrKey : public msrMeasureElement
+class EXP msrKey : public msrMeasureElementLambda
 {
 		// ... ... ...
 
@@ -1419,11 +1419,11 @@ Some methods exist in two versions, the second one with a \code{NonConst} suffix
 This happens for example in \msrBoth{mfslNotes}:
 \begin{lstlisting}[language=CPlusPlus]
     // articulations
-    const list<S_msrArticulation>&
+    const std::list<S_msrArticulation>&
                           getNoteArticulations () const
                               { return fNoteArticulations; }
 
-    list<S_msrArticulation>&
+    std::list<S_msrArticulation>&
                           getNoteArticulationsNonConst ()
                               { return fNoteArticulations; }
 \end{lstlisting}
@@ -1448,7 +1448,7 @@ When a description contains many fields, the ones initialized by the values of t
 \begin{lstlisting}[language=CPlusPlus]
 msrPart::msrPart (
   int            inputLineNumber,
-  string         partID,
+  std::string         partID,
   S_msrPartGroup PartUpLinkToPartGroup)
     : msrPartGroupElement (inputLineNumber)
 {
@@ -1500,7 +1500,7 @@ enum class msrPlacementKind {
 //______________________________________________________________________________
 msrPlacementKind msrPlacementKindFromString (
   int    inputLineNumber,
-  string placementString)
+  std::string placementString)
 {
   msrPlacementKind result = msrPlacementKind::kPlacement_NO_; // default value
 
@@ -1510,7 +1510,7 @@ msrPlacementKind msrPlacementKindFromString (
     result = msrPlacementKind::kPlacementBelow;
   else {
     if (placementString.size ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "placement \"" << placementString <<
@@ -1529,10 +1529,10 @@ msrPlacementKind msrPlacementKindFromString (
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
-string msrPlacementKindAsString (
+std::string msrPlacementKindAsString (
   msrPlacementKind placementKind)
 {
-  string result;
+  std::string result;
 
   switch (placementKind) {
     case msrPlacementKind::kPlacement_NO_:
@@ -1622,8 +1622,8 @@ S_msrScore translateMsrToMsr (
   S_msrScore        originalMsrScore,
   S_msrOahGroup     msrOpts,
   S_msr2msrOahGroup msr2msrOpts,
-  const string&     passNumber,
-  const string&     passDescription)
+  const std::string&     passNumber,
+  const std::string&     passDescription)
 {
 	// ... ... ...
 
@@ -1646,26 +1646,26 @@ S_msrScore translateMsrToMsr (
 \section{{\tt context} arguments}
 % -------------------------------------------------------------------------
 
-Some methods have such an argument, a string, to provide helpful information to the maintainer of \mf. An exemple is \method{msrMeasureRepeat}{displayMeasureRepeat}, defined in \msrBoth{msrMeasureRepeats}:
+Some methods have such an argument, a std::string, to provide helpful information to the maintainer of \mf. An exemple is \method{msrMeasureRepeat}{displayMeasureRepeat}, defined in \msrBoth{msrMeasureRepeats}:
 \begin{lstlisting}[language=CPlusPlus]
 void msrMeasureRepeat::displayMeasureRepeat (
   int    inputLineNumber,
-  const string& context)
+  const std::string& context)
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     "*********>> MeasureRepeat " <<
     ", measureRepeatMeasuresNumber: '" <<
     fMeasureRepeatMeasuresNumber <<
     ", measureRepeatSlashesNumber: '" <<
     fMeasureRepeatSlashesNumber <<
     "', voice:" <<
-    endl <<
+    std::endl <<
     fUpLinkToMeasureRepeatToVoice->getVoiceName () <<
     " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   print (gLogStream);
@@ -1673,7 +1673,7 @@ void msrMeasureRepeat::displayMeasureRepeat (
 
   gLogStream <<
     " <<*********" <<
-    endl << endl;
+    std::endl << std::endl;
 \end{lstlisting}
 
 An call example in \msr{msrVoices.h} is:
@@ -1708,8 +1708,8 @@ formats/lpsr/lpsrParts.cpp:    fPartBlockElementsList.sort (
 There are thus a number of \methodName{compare*} methods according to the needs:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r compare * | grep '\.h'
-oah/oahBasicTypes.h:    const multiset<S_oahElement, compareOahElements>&
-oah/oahBasicTypes.h:    multiset<S_oahElement, compareOahElements>
+oah/oahBasicTypes.h:    const std::multiset<S_oahElement, compareOahElements>&
+oah/oahBasicTypes.h:    std::multiset<S_oahElement, compareOahElements>
 oah/oahElements.h:struct compareOahElements {
 formats/msr/msrParts.h:    static bool           compareStavesToHaveFiguredBassesBelowCorrespondingPart (
 formats/msr/msrNotes.h:    static bool           compareNotesByIncreasingMeasurePosition (
@@ -1809,7 +1809,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // allowing for both parts and (sub-)part groups as elements
 
-    list<S_msrPartGroupElement>
+    std::list<S_msrPartGroupElement>
                           fPartGroupElementsList;
 };
 \end{lstlisting}

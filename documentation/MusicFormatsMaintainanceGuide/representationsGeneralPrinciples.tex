@@ -21,11 +21,11 @@ MSR uses \denorm\ explicitly, with smart pointers to class   instances being sto
 In particular, \class{msrChord} contains elements that are actually detained by the notes it is composed of:
 \begin{lstlisting}[language=CPlusPlus]
     // articulations
-    list<S_msrArticulation>
+    std::list<S_msrArticulation>
                           fChordArticulations;
 
     // spanners
-    list<S_msrSpanner>    fChordSpanners;
+    std::list<S_msrSpanner>    fChordSpanners;
 
     // single tremolo
     S_msrSingleTremolo    fChordSingleTremolo;
@@ -63,7 +63,7 @@ void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
     gLogStream <<
       "--> Start visiting msrBarLine" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -86,7 +86,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
     gLogStream <<
       "Creating a newborn clone of tuplet " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -135,7 +135,7 @@ Deep copies of the \msrRepr\ data is not used currently. This can be changed sho
 
 Many classes in \mf\ use single inheritance. For example, in \msr{msrTimeSignature.h}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrTimeSignature : public msrMeasureElement
+class EXP msrTimeSignature : public msrMeasureElementLambda
 {
   public:
 
@@ -161,7 +161,7 @@ class EXP msrTimeSignature : public msrMeasureElement
 
     static SMARTP<msrTimeSignature> createTimeFromString (
                             int    inputLineNumber,
-                            string timeString);
+                            std::string timeString);
 
     // ... ... ...
 \end{lstlisting}
@@ -188,7 +188,7 @@ msrTimeSignature::msrTimeSignature (
   S_msrMeasure  upLinkToMeasure,
   msrTimeSignatureSymbolKind
                 timeSignatureSymbolKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -212,14 +212,14 @@ class   msdlScanner : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlScanner> create (istream& inputStream);
+    static SMARTP<msdlScanner> create (std::istream& inputStream);
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlScanner (istream& inputStream);
+                          msdlScanner (std::istream& inputStream);
 
 	// ... ... ...
 };
@@ -227,7 +227,7 @@ class   msdlScanner : public smartable
 
 This leads to the following in in \msdl{msdlScanner.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
-S_msdlScanner msdlScanner::create (istream& inputStream)
+S_msdlScanner msdlScanner::create (std::istream& inputStream)
 {
   msdlScanner* o =
     new msdlScanner (inputStream);
@@ -235,7 +235,7 @@ S_msdlScanner msdlScanner::create (istream& inputStream)
   return o;
 }
 
-msdlScanner::msdlScanner (istream& inputStream)
+msdlScanner::msdlScanner (std::istream& inputStream)
     : fInputStream (
         inputStream),
       fCurrentToken (
@@ -286,7 +286,7 @@ void msr2msrTranslator::visitStart (S_msrIdentification& elt)
     gLogStream <<
       "--> Start visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -316,7 +316,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
     gLogStream <<
       "--> End visiting msrIdentification" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -326,7 +326,7 @@ Forgetting to define those \methodName{visit*} methods causes \MainIt{no error m
 The visitors trace options are useful to detect such cases:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2ly -find visitors
-3 occurrences of string "visitors" have been found:
+3 occurrences of std::string "visitors" have been found:
    1:
     -tmxmltvis, -trace-mxsr-visitors
     Write a trace of the MusicXML tree visiting activity to standard error.
@@ -345,19 +345,19 @@ jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2ly -find visitors
 
 The only such case is class   {\tt mfIndentedOstream} in \mfutilitiesBoth{mfIndentedTextOutput.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP mfIndentedOstream: public ostream, public smartable
+class EXP mfIndentedOstream: public std::ostream, public smartable
 {
 /*
 Reference for this class:
   https://stackoverflow.com/questions/2212776/overload-handling-of-stdendl
 
 Usage:
-  mfIndentedOstream myStream (cout);
+  mfIndentedOstream myStream (std::cout);
 
   myStream <<
-    1 << 2 << 3 << endl <<
-    5 << 6 << endl <<
-    7 << 8 << endl;
+    1 << 2 << 3 << std::endl <<
+    5 << 6 << std::endl <<
+    7 << 8 << std::endl;
 */
 
   public:
@@ -366,7 +366,7 @@ Usage:
     // ------------------------------------------------------
 
     static SMARTP<mfIndentedOstream> create (
-      ostream&        theOStream,
+      std::ostream&        theOStream,
       mfOutputIndenter& theIndenter)
     {
       mfIndentedOstream* o = new mfIndentedOstream (
@@ -381,9 +381,9 @@ Usage:
     // ------------------------------------------------------
 
                           mfIndentedOstream (
-                            ostream&        theOStream,
+                            std::ostream&        theOStream,
                             mfOutputIndenter& theIndenter)
-                            : ostream (
+                            : std::ostream (
                                 & fIndentedStreamBuf),
                               fIndentedStreamBuf (
                                 theOStream,
@@ -431,7 +431,7 @@ typedef SMARTP<mfIndentedOstream> S_indentedOstream;
 All formats in \mf\ that can be obtained by a conversion from another one should be convertible back in the latter, without information loss.\\
 Thus:
 \begin{itemize}
-\item \mxsrRepr\ contains nearly everything that can be described in \mxml\ data. The main exception at the time of this writing is the MIDI information, see \subSectionRef{MusicXML coverage};
+\item \mxsrRepr\ contains nearly everything that can be described in \mxml\ data. The main std::exception at the time of this writing is the MIDI information, see \subSectionRef{MusicXML coverage};
 \item \msrRepr\ contains \mxml-related informations, so as to convert it back to MXSR;
 \item \lpsrRepr\ and \bsrRepr\ contain an \msrRepr\ component. This is why converting those formats back to MSR\ is merely getting the corresponding field.
 \end{itemize}

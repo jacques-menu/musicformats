@@ -30,8 +30,8 @@ class EXP msdl2guidoInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<msdl2guidoInsiderHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
   protected:
 
@@ -39,8 +39,8 @@ class EXP msdl2guidoInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           msdl2guidoInsiderHandler (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
     virtual               ~msdl2guidoInsiderHandler ();
 
@@ -59,18 +59,18 @@ class EXP msdl2guidoInsiderHandler : public oahInsiderHandler
     void                  createTheMsdl2gmnPrefixes ();
 
     void                  createTheMsdl2gmnOptionGroups (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override;
+    std::string           fetchOutputFileNameFromTheOptions () const override;
 
     // quiet mode
     void                  enforceHandlerQuietness () override;
@@ -88,7 +88,7 @@ class EXP msdl2guidoInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -99,7 +99,7 @@ class EXP msdl2guidoInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<msdl2guidoInsiderHandler> S_msdl2guidoInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_msdl2guidoInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2guidoInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msdl2guidoInsiderOahGroup : public oahGroup
@@ -200,7 +200,7 @@ class EXP msdl2guidoInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<msdl2guidoInsiderOahGroup> S_msdl2guidoInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_msdl2guidoInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2guidoInsiderOahGroup& elt);
 
 EXP extern S_msdl2guidoInsiderOahGroup gGlobalMsdl2gmnInsiderOahGroup;
 

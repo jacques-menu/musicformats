@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 
 #include <regex>
 
@@ -34,25 +34,23 @@
 #include "mfMultiGenerationOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 // constants
-const string K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME = "lilypond";
-const string K_GENERATED_OUTPUT_KIND_BRAILLE_NAME  = "braille";
-const string K_GENERATED_OUTPUT_KIND_MUSICXML_NAME = "musicxml";
-const string K_GENERATED_OUTPUT_KIND_GUIDO_NAME    = "guido";
-const string K_GENERATED_OUTPUT_KIND_MIDI_NAME     = "midi";
+const std::string K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME = "lilypond";
+const std::string K_GENERATED_OUTPUT_KIND_BRAILLE_NAME  = "braille";
+const std::string K_GENERATED_OUTPUT_KIND_MUSICXML_NAME = "musicxml";
+const std::string K_GENERATED_OUTPUT_KIND_GUIDO_NAME    = "guido";
+const std::string K_GENERATED_OUTPUT_KIND_MIDI_NAME     = "midi";
 
 //______________________________________________________________________________
-string mfMultiGenerationOutputKindAsString (
+std::string mfMultiGenerationOutputKindAsString (
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
   // no CamelCase here, these strings are used in the command line options
-  string result;
+  std::string result;
 
 //   switch (multiGenerationOutputKind) {
 //     case mfMultiGenerationOutputKind::kGeneration_NO_:
@@ -100,7 +98,7 @@ string mfMultiGenerationOutputKindAsString (
 }
 
 EXP mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
-  const string& theString)
+  const std::string& theString)
 {
   mfMultiGenerationOutputKind
     result =
@@ -128,7 +126,7 @@ EXP mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
   return result;
 }
 
-map<string, mfMultiGenerationOutputKind>
+std::map<std::string, mfMultiGenerationOutputKind>
   gGlobalMultiGenerationOutputKindsMap;
 
 void initializeMultiGenerationOutputKindsMap ()
@@ -145,9 +143,9 @@ void initializeMultiGenerationOutputKindsMap ()
     mfMultiGenerationOutputKind::kGenerationMidi;
 }
 
-string existingMultiGenerationOutputKinds (size_t namesListMaxLength)
+std::string existingMultiGenerationOutputKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t brailleOutputKindsMapSize =
     gGlobalMultiGenerationOutputKindsMap.size ();
@@ -160,18 +158,18 @@ string existingMultiGenerationOutputKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, mfMultiGenerationOutputKind>::const_iterator i =
+      std::map<std::string, mfMultiGenerationOutputKind>::const_iterator i =
         gGlobalMultiGenerationOutputKindsMap.begin ();
       i != gGlobalMultiGenerationOutputKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -200,25 +198,25 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
       mfMultiGenerationOutputKind::kGeneration_NO_;
 //
 //   // analyze the options
-//   const vector<oahOption>&
+//   const std::vector<oahOption>&
 //     optionsVector =
 //       gGlobalServiceRunData->
 //         getOptionsAndArguments ().getOptionsVector ();
 //
 //   if (optionsVector.size ()) {
 //     for (size_t i = 0; i < optionsVector.size (); ++i) {
-//       string optionName =
+//       std::string optionName =
 //         optionsVector [i].getOptionName ();
-//       string optionValue =
+//       std::string optionValue =
 //         optionsVector [i].getOptionValue ();
 //
-//       string optionNameWithoutDash = optionName.substr (1);
+//       std::string optionNameWithoutDash = optionName.substr (1);
 //
 // //     gLogStream << JMI
 // //       "optionName: " << optionName <<
 // //       ", optionValue: " << optionValue <<
 // //       ", optionNameWithoutDash: " << optionNameWithoutDash <<
-// //       endl;
+// //       std::endl;
 //
 //       // is optionNameWithoutDash one of the multi generators output kinds?
 //       mfMultiGenerationOutputKind
@@ -229,11 +227,11 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //       if (newMultiGenerationOutputKind != mfMultiGenerationOutputKind::kGeneration_NO_) {
 //         // yes, optionNameWithoutDash is a multi generators output kind
 //         if (result != mfMultiGenerationOutputKind::kGeneration_NO_) {
-//           stringstream s;
+//           std::stringstream s;
 //
 //           s <<
 //             "mfMultiGenerationOutputKindAtom generated output kind specified more that once" <<
-//             endl;
+//             std::endl;
 //
 //           oahError (s.str ());
 //         }
@@ -251,17 +249,17 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
   gLogStream <<  // JMIJMIJMI
     "result: " <<
     mfMultiGenerationOutputKindAsString (result) <<
-    endl;
+    std::endl;
 
   return result;
 }
 
 //______________________________________________________________________________
 S_mfMultiGenerationOutputKindAtom mfMultiGenerationOutputKindAtom::create (
-  const string&   longName,
-  const string&   shortName,
-  const string&   description,
-  const string&   variableName,
+  const std::string&   longName,
+  const std::string&   shortName,
+  const std::string&   description,
+  const std::string&   variableName,
   mfMultiGenerationOutputKind&
                   multiGenerationOutputKindVariable,
   mfMultiGenerationOutputKind
@@ -280,10 +278,10 @@ S_mfMultiGenerationOutputKindAtom mfMultiGenerationOutputKindAtom::create (
 }
 
 mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
-  const string&   longName,
-  const string&   shortName,
-  const string&   description,
-  const string&   variableName,
+  const std::string&   longName,
+  const std::string&   shortName,
+  const std::string&   description,
+  const std::string&   variableName,
   mfMultiGenerationOutputKind&
                   multiGenerationOutputKindVariable,
   mfMultiGenerationOutputKind
@@ -305,7 +303,7 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
 mfMultiGenerationOutputKindAtom::~mfMultiGenerationOutputKindAtom ()
 {}
 
-void mfMultiGenerationOutputKindAtom::applyElement (ostream& os)
+void mfMultiGenerationOutputKindAtom::applyElement (std::ostream& os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -313,17 +311,17 @@ void mfMultiGenerationOutputKindAtom::applyElement (ostream& os)
       "==> handling atom '" <<
       fetchNames () <<
       "; which is of type 'mfMultiGenerationOutputKindAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   if (fSetByAnOption) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "mfMultiGenerationOutputKindAtom generated output kind" << // JMI ???
       " set more than once" <<
-      endl;
+      std::endl;
 
     oahError (s.str ());
   }
@@ -339,7 +337,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -352,7 +350,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -365,7 +363,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -378,7 +376,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -391,14 +389,14 @@ void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string mfMultiGenerationOutputKindAtom::asShortNamedOptionString () const
+std::string mfMultiGenerationOutputKindAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -408,9 +406,9 @@ string mfMultiGenerationOutputKindAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string mfMultiGenerationOutputKindAtom::asActualLongNamedOptionString () const
+std::string mfMultiGenerationOutputKindAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -420,44 +418,44 @@ string mfMultiGenerationOutputKindAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void mfMultiGenerationOutputKindAtom::print (ostream& os) const
+void mfMultiGenerationOutputKindAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "MultiGenerationOutputKindAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fMultiGenerationOutputKindVariable" << " : " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindVariable) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fMultiGenerationOutputKindValue" << " : " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindValue) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void mfMultiGenerationOutputKindAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     mfMultiGenerationOutputKindAsString (
@@ -466,16 +464,16 @@ void mfMultiGenerationOutputKindAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_mfMultiGenerationOutputKindAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_mfMultiGenerationOutputKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -603,7 +601,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -616,7 +614,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -629,7 +627,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -642,7 +640,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -655,7 +653,7 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -665,37 +663,37 @@ void mfMultiGenerationOahGroup::printMultiGenerationOahValues (int fieldWidth)
 {
   gLogStream <<
     "The MultiGeneration options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // Output kind
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (fieldWidth) << "Multigenerator output kind:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "Multigenerator output kind:" <<
+    std::endl;
 
   ++gIndenter;
 
   gLogStream <<
-    setw (fieldWidth) << "fMultiGenerationOutputKind" << " : " <<
+    std::setw (fieldWidth) << "fMultiGenerationOutputKind" << " : " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_multiGenerationOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_multiGenerationOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -708,7 +706,7 @@ S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating multi generator OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

@@ -12,8 +12,6 @@
 #include "mfcComponents.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -22,12 +20,12 @@ static S_mfcConverterComponent pConverterComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the converter's representations list
+  // populate the converter's representations std::list
   pConverterComponent->
     appendRepresentationToMultiComponent (
       createMsrRepresentationComponent ());
 
-  // populate the converter's passes list
+  // populate the converter's passes std::list
   pConverterComponent->
     appendPassToMultiComponent (
       createMsdl2msrComponent ());
@@ -55,7 +53,7 @@ S_mfcConverterComponent createMsdl2guidoConverterComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the msdl2guido component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -72,7 +70,7 @@ S_mfcConverterComponent createMsdl2guidoConverterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));

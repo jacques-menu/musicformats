@@ -24,10 +24,10 @@ An LPSR description contains two components:
     S_lpsrLayout          fScoreLayout;
 
     // variables, voices and stanzas
-    list<S_msrElement>    fScoreElementsList;
+    std::list<S_msrElement>    fScoreElementsList;
 
-    // score LPSR book blocks list
-    list<S_lpsrBookBlock> fScoreBookBlocksList;
+    // score LPSR book blocks std::list
+    std::list<S_lpsrBookBlock> fScoreBookBlocksList;
     S_lpsrScoreBlock      fScoreScoreBlock; // JMI ???
 \end{lstlisting}
 

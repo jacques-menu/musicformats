@@ -109,7 +109,7 @@ void mxsr2msrTranslator::visitStart ( S_barline& elt )
   // location
 
   {
-    string
+    std::string
       location =
         elt->getAttributeValue ("location");
 
@@ -126,7 +126,7 @@ void mxsr2msrTranslator::visitStart ( S_barline& elt )
       fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationRight;
     }
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "barLine location \"" << location <<
@@ -332,7 +332,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         break;
 
       case msrBarLineStyleKind::kBarLineStyleNone:
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "barLine " <<
@@ -350,9 +350,9 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
 
   // has this barLine been handled?
   if (! barLineHasBeenHandled) {
-    stringstream s;
+    std::stringstream s;
 
-    s << left <<
+    s << std::left <<
       "cannot handle a barLine containing: " <<
       barLine->asString ();
 

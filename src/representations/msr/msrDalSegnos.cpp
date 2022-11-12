@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -27,16 +27,14 @@
 #include "msrDalSegnos.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrDalSegnoKindAsString (
+std::string msrDalSegnoKindAsString (
   msrDalSegnoKind dalSegnoKind)
 {
-  string result;
+  std::string result;
 
   switch (dalSegnoKind) {
     case msrDalSegnoKind::kDalSegnoNone:
@@ -56,7 +54,7 @@ string msrDalSegnoKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrDalSegnoKind& elt)
+std::ostream& operator << (std::ostream& os, const msrDalSegnoKind& elt)
 {
   os << msrDalSegnoKindAsString (elt);
   return os;
@@ -67,7 +65,7 @@ S_msrDalSegno msrDalSegno::create (
   int             inputLineNumber,
   S_msrMeasure    upLinkToMeasure,
   msrDalSegnoKind dalSegnoKind,
-  const string&   dalSegnoString,
+  const std::string&   dalSegnoString,
   int             staffNumber)
 {
   msrDalSegno* o =
@@ -85,9 +83,9 @@ msrDalSegno::msrDalSegno (
   int             inputLineNumber,
   S_msrMeasure    upLinkToMeasure,
   msrDalSegnoKind dalSegnoKind,
-  const string&   dalSegnoString,
+  const std::string&   dalSegnoString,
   int             staffNumber)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -104,7 +102,7 @@ msrDalSegno::~msrDalSegno ()
 void msrDalSegno::setDalSegnoMeasurePosition (
   const S_msrMeasure measure,
   const Rational&    measurePosition,
-  const string&      context)
+  const std::string& context)
 {
   // set the dal segno position in measure
 
@@ -114,7 +112,7 @@ void msrDalSegno::setDalSegnoMeasurePosition (
       "Setting dal segno's position in measure of " << asString () <<
       " to '" <<
       measurePosition <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -153,7 +151,7 @@ void msrDalSegno::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDalSegno::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDalSegno>*
@@ -164,7 +162,7 @@ void msrDalSegno::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDalSegno::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -175,7 +173,7 @@ void msrDalSegno::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDalSegno::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDalSegno>*
@@ -186,7 +184,7 @@ void msrDalSegno::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDalSegno::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -195,9 +193,9 @@ void msrDalSegno::acceptOut (basevisitor* v)
 void msrDalSegno::browseData (basevisitor* v)
 {}
 
-string msrDalSegno::asString () const
+std::string msrDalSegno::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[DalSegno" <<
@@ -211,48 +209,48 @@ string msrDalSegno::asString () const
   return s.str ();
 }
 
-void msrDalSegno::print (ostream& os) const
+void msrDalSegno::print (std::ostream& os) const
 {
   os <<
     "[DalSegno" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 17;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "dalSegnoKind" << " : " << msrDalSegnoKindAsString (fDalSegnoKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "dalSegnoString" << " : \"" << fDalSegnoString << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "staffNumber" << " : " << fStaffNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "measurePosition" << " : " << fMeasureElementMeasurePosition <<
-    endl <<
-//     setw (fieldWidth) <<
+    std::endl <<
+//     std::setw (fieldWidth) <<
 //     "voicePosition" << " : " << fMeasureElementVoicePosition <<
-//     endl <<
-    setw (fieldWidth) <<
+//     std::endl <<
+    std::setw (fieldWidth) <<
     "line" << " : " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrDalSegno& elt)
+std::ostream& operator << (std::ostream& os, const S_msrDalSegno& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

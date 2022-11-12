@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "mfStringsHandling.h"
 
@@ -24,8 +24,6 @@
 #include "waeOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -38,9 +36,9 @@ oahEarlyOptions gGlobalOahEarlyOptions;
 oahEarlyOptions::oahEarlyOptions ()
 {
 #ifdef DEBUG_EARLY_OPTIONS
-  cerr << // JMI
+  std::cerr << // JMI
     "Enforcing fTraceEarlyOptions" <<
-    endl;
+    std::endl;
 
 #ifdef TRACING_IS_ENABLED
   fTraceEarlyOptions = true;
@@ -58,8 +56,8 @@ oahEarlyOptions::~oahEarlyOptions ()
 {}
 
 //_______________________________________________________________________________
-const string K_INSIDER_OPTION_LONG_NAME  = "insider";
-const string K_INSIDER_OPTION_SHORT_NAME = "ins";
+const std::string K_INSIDER_OPTION_LONG_NAME  = "insider";
+const std::string K_INSIDER_OPTION_SHORT_NAME = "ins";
 
 void oahEarlyOptions::setEarlyInsiderOption ()
 {
@@ -67,15 +65,15 @@ void oahEarlyOptions::setEarlyInsiderOption ()
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyInsiderOption" <<
-      endl;
+      std::endl;
   }
 #endif
 
   fEarlyInsiderOption = true;
 }
 
-// const string K_REGULAR_OPTION_LONG_NAME  = "regular";
-// const string K_REGULAR_OPTION_SHORT_NAME = "reg";
+// const std::string K_REGULAR_OPTION_LONG_NAME  = "regular";
+// const std::string K_REGULAR_OPTION_SHORT_NAME = "reg";
 //
 // void oahEarlyOptions::setEarlyRegularOption ()
 // {
@@ -83,7 +81,7 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 //   if (fTraceEarlyOptions) {
 //     gLogStream <<
 //       "Setting fEarlyRegularOption" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -96,8 +94,8 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 // }
 
 //_______________________________________________________________________________
-const string K_QUIET_OPTION_LONG_NAME  = "quiet";
-const string K_QUIET_OPTION_SHORT_NAME = "q";
+const std::string K_QUIET_OPTION_LONG_NAME  = "quiet";
+const std::string K_QUIET_OPTION_SHORT_NAME = "q";
 
 void oahEarlyOptions::setEarlyQuietOption ()
 {
@@ -105,7 +103,7 @@ void oahEarlyOptions::setEarlyQuietOption ()
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyQuietOption" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -120,7 +118,7 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyInsiderOption" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -128,10 +126,10 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
 }
 
 //______________________________________________________________________________
-const string K_INCLUDE_OPTION_LONG_NAME  = "include";
-const string K_INCLUDE_OPTION_SHORT_NAME = "inc";
+const std::string K_INCLUDE_OPTION_LONG_NAME  = "include";
+const std::string K_INCLUDE_OPTION_SHORT_NAME = "inc";
 
-void oahEarlyOptions::appendEarlyIncludeFileName (string includeFileName)
+void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
 {
 #ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
@@ -139,7 +137,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (string includeFileName)
       "Appending fEarlyIncludeFileName [" <<
       includeFileName <<
       ']' <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -149,23 +147,23 @@ void oahEarlyOptions::appendEarlyIncludeFileName (string includeFileName)
 #ifdef TRACING_IS_ENABLED
 
 //_______________________________________________________________________________
-const string K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME  ("trace-early-options");
-const string K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME = "teo";
+const std::string K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME  ("trace-early-options");
+const std::string K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME = "teo";
 
 void oahEarlyOptions::setTraceEarlyOptions ()
 {
 #ifdef DEBUG_EARLY_OPTIONS
   gLogStream <<
     "Setting fTraceEarlyOptions" <<
-    endl;
+    std::endl;
 #endif
 
   fTraceEarlyOptions = true;
 }
 
 //_______________________________________________________________________________
-const string K_OAH_VERBOSE_MODE_LONG_OPTION_NAME  = "oah-verbose-mode";
-const string K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME = "ovm";
+const std::string K_OAH_VERBOSE_MODE_LONG_OPTION_NAME  = "oah-verbose-mode";
+const std::string K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME = "ovm";
 
 void oahEarlyOptions::setEarlyOahVerboseMode ()
 {
@@ -173,7 +171,7 @@ void oahEarlyOptions::setEarlyOahVerboseMode ()
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyOahVerboseMode" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -181,8 +179,8 @@ void oahEarlyOptions::setEarlyOahVerboseMode ()
 }
 
 //_______________________________________________________________________________
-const string K_TRACE_OAH_LONG_OPTION_NAME  = "trace-oah";
-const string K_TRACE_OAH_SHORT_OPTION_NAME = "toah";
+const std::string K_TRACE_OAH_LONG_OPTION_NAME  = "trace-oah";
+const std::string K_TRACE_OAH_SHORT_OPTION_NAME = "toah";
 
 void oahEarlyOptions::setEarlyTracingOah ()
 {
@@ -190,7 +188,7 @@ void oahEarlyOptions::setEarlyTracingOah ()
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracingOah" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -198,8 +196,8 @@ void oahEarlyOptions::setEarlyTracingOah ()
 }
 
 //_______________________________________________________________________________
-const string K_TRACE_OAH_DETAILS_LONG_OPTION_NAME  = "trace-oah-details";
-const string K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME = "toahd";
+const std::string K_TRACE_OAH_DETAILS_LONG_OPTION_NAME  = "trace-oah-details";
+const std::string K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME = "toahd";
 
 void oahEarlyOptions::setEarlyTracingOahDetails ()
 {
@@ -207,7 +205,7 @@ void oahEarlyOptions::setEarlyTracingOahDetails ()
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracingOahDetails" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -215,8 +213,8 @@ void oahEarlyOptions::setEarlyTracingOahDetails ()
 }
 
 //_______________________________________________________________________________
-const string K_TRACE_COMPONENTS_LONG_OPTION_NAME  = "trace-components";
-const string K_TRACE_COMPONENTS_SHORT_OPTION_NAME = "tcomps";
+const std::string K_TRACE_COMPONENTS_LONG_OPTION_NAME  = "trace-components";
+const std::string K_TRACE_COMPONENTS_SHORT_OPTION_NAME = "tcomps";
 
 void oahEarlyOptions::setEarlyTraceComponents ()
 {
@@ -224,7 +222,7 @@ void oahEarlyOptions::setEarlyTraceComponents ()
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTraceComponents" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -232,8 +230,8 @@ void oahEarlyOptions::setEarlyTraceComponents ()
 }
 
 //_______________________________________________________________________________
-const string K_TRACE_PASSES_LONG_OPTION_NAME  = "trace-passes";
-const string K_TRACE_PASSES_SHORT_OPTION_NAME = "tpasses";
+const std::string K_TRACE_PASSES_LONG_OPTION_NAME  = "trace-passes";
+const std::string K_TRACE_PASSES_SHORT_OPTION_NAME = "tpasses";
 
 void oahEarlyOptions::setEarlyTracePasses ()
 {
@@ -241,7 +239,7 @@ void oahEarlyOptions::setEarlyTracePasses ()
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracePasses" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -252,8 +250,8 @@ void oahEarlyOptions::setEarlyTracePasses ()
 
 //______________________________________________________________________________
 Bool oahEarlyOptions::isEarlyOptionRecognized (
-  const string& theString,
-  const string& optionName)
+  const std::string& theString,
+  const std::string& optionName)
 {
   Bool result;
 
@@ -262,7 +260,7 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
 //       "isEarlyOptionRecognized()" <<
 //       ", theString: " << theString <<
 //       ", optionName: " << optionName <<
-//       endl;
+//       std::endl;
 //   }
 
   if (theString == optionName) {
@@ -272,7 +270,7 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
         "Option '-" <<
         optionName <<
         "' has been recognized early" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -283,8 +281,8 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
 }
 
 void oahEarlyOptions::applyEarlyOptionIfRelevant (
-  const string& argumentWithoutDashToBeUsed,
-  const string& optionValue)
+  const std::string& argumentWithoutDashToBeUsed,
+  const std::string& optionValue)
 {
   // this is OAH handling pass 1
   if (
@@ -429,13 +427,13 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
   int   argc,
   char* argv[])
 {
-  string serviceName = argv [0];
+  std::string serviceName = argv [0];
 
   for (int i = 1; i < argc; ++i) {
-    string argumentAsString = string (argv [i]);
+    std::string argumentAsString = std::string (argv [i]);
 
     Bool   argumentIsAnOption;
-    string argumentWithoutDash;
+    std::string argumentWithoutDash;
 
     // is argumentAsString a double of single dash?
     if (argumentAsString.substr (0, 2) == "--") {
@@ -457,37 +455,37 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
             serviceName << " main()" <<
             ", argumentWithoutDash: '" << argumentWithoutDash <<
             "'" <<
-            endl;
+            std::endl;
       }
 #endif
 
       // is argumentWithoutDash starting with a prefix?
       Bool   argumentWithoutDashStartsWithAPrefix;
-      string argumentWithoutDashToBeUsed = argumentWithoutDash;
+      std::string argumentWithoutDashToBeUsed = argumentWithoutDash;
 
       if (argumentWithoutDash.substr (0, 2) == "t=") {
         argumentWithoutDashStartsWithAPrefix = true;
 
         argumentWithoutDashToBeUsed =
-         string ("t") + argumentWithoutDash.substr (2);
+         std::string ("t") + argumentWithoutDash.substr (2);
       }
       else if (argumentWithoutDash.substr (0, 2) == "t-") { // JMI CLAR
         argumentWithoutDashStartsWithAPrefix = true;
 
         argumentWithoutDashToBeUsed =
-         string ("t") + argumentWithoutDash.substr (2);
+         std::string ("t") + argumentWithoutDash.substr (2);
       }
       else if (argumentWithoutDash.substr (0, 6) == "trace=") {
         argumentWithoutDashStartsWithAPrefix = true;
 
         argumentWithoutDashToBeUsed =
-          string ("trace-") + argumentWithoutDash.substr (6);
+          std::string ("trace-") + argumentWithoutDash.substr (6);
       }
       else if (argumentWithoutDash.substr (0, 6) == "trace-") { // JMI CLAR
         argumentWithoutDashStartsWithAPrefix = true;
 
         argumentWithoutDashToBeUsed =
-          string ("trace-") + argumentWithoutDash.substr (6);
+          std::string ("trace-") + argumentWithoutDash.substr (6);
       }
 
 #ifdef TRACING_IS_ENABLED
@@ -502,7 +500,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           ", argumentWithoutDashToBeUsed: '" <<
           argumentWithoutDashToBeUsed <<
           "'" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -517,7 +515,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
 void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
   oahOptionsAndArguments& optionsAndArguments)
 {
-  const vector<string>&
+  const std::vector<std::string>&
     argumentsVector =
       optionsAndArguments.getArgumentsVector ();
 
@@ -540,20 +538,20 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
         ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
-        " in handler arguments vector for " <<
+        " in handler arguments std::vector for " <<
         gGlobalServiceRunData->getServiceName () <<
         ":" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       for (size_t i = 0; i < argumentsNumber; ++i) {
         gLogStream <<
           i << " : " << argumentsVector [i] <<
-            endl;
+            std::endl;
       } // for
 
-      gLogStream << endl;
+      gLogStream << std::endl;
 
       --gIndenter;
     }
@@ -561,16 +559,16 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
       gLogStream <<
         "There are no arguments to " <<
         "??? fHandlerServiceName" <<
-        endl;
+        std::endl;
     }
   }
 #endif
 
   for (size_t i = 0; i < argumentsNumber; ++i) {
-    string argumentAsString = argumentsVector [i];
+    std::string argumentAsString = argumentsVector [i];
 
     Bool   argumentIsAnOption;
-    string argumentWithoutDash;
+    std::string argumentWithoutDash;
 
     // is argumentAsString a double of single dash?
     if (argumentAsString.substr (0, 2) == "--") {
@@ -592,37 +590,37 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
             "??? serviceName" << " main()" <<
             ", argumentWithoutDash: '" << argumentWithoutDash <<
             "'" <<
-            endl;
+            std::endl;
       }
 #endif
 
       // is argumentWithoutDash starting with a prefix?
       Bool   argumentWithoutDashStartsWithAPrefix;
-      string argumentWithoutDashToBeUsed = argumentWithoutDash;
+      std::string argumentWithoutDashToBeUsed = argumentWithoutDash;
 
       if (argumentWithoutDash.substr (0, 2) == "t=") {
         argumentWithoutDashStartsWithAPrefix = true;
 
         argumentWithoutDashToBeUsed =
-         string ("t") + argumentWithoutDash.substr (2);
+         std::string ("t") + argumentWithoutDash.substr (2);
       }
       else if (argumentWithoutDash.substr (0, 2) == "t-") { // JMI CLAR
         argumentWithoutDashStartsWithAPrefix = true;
 
         argumentWithoutDashToBeUsed =
-         string ("t") + argumentWithoutDash.substr (2);
+         std::string ("t") + argumentWithoutDash.substr (2);
       }
       else if (argumentWithoutDash.substr (0, 6) == "trace=") {
         argumentWithoutDashStartsWithAPrefix = true;
 
         argumentWithoutDashToBeUsed =
-          string ("trace-") + argumentWithoutDash.substr (6);
+          std::string ("trace-") + argumentWithoutDash.substr (6);
       }
       else if (argumentWithoutDash.substr (0, 6) == "trace-") { // JMI CLAR
         argumentWithoutDashStartsWithAPrefix = true;
 
         argumentWithoutDashToBeUsed =
-          string ("trace-") + argumentWithoutDash.substr (6);
+          std::string ("trace-") + argumentWithoutDash.substr (6);
       }
 
 #ifdef TRACING_IS_ENABLED
@@ -637,7 +635,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           ", argumentWithoutDashToBeUsed: '" <<
           argumentWithoutDashToBeUsed <<
           "'" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -649,84 +647,84 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
   } // for
 }
 
-void oahEarlyOptions::print (ostream& os) const
+void oahEarlyOptions::print (std::ostream& os) const
 {
   os <<
     "Early options values:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 26;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "EarlyInsiderOption" << " : " << fEarlyInsiderOption <<
-    endl <<
-//     setw (fieldWidth) <<
+    std::endl <<
+//     std::setw (fieldWidth) <<
 //     "EarlyRegularOption" << " : " << fEarlyRegularOption <<
-//     endl <<
+//     std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "EarlyQuietOption" << " : " << fEarlyQuietOption <<
-    endl;
+    std::endl;
 
 #ifdef TRACING_IS_ENABLED
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "EarlyOahVerboseMode" << " : " << fEarlyOahVerboseMode <<
-    endl;
+    std::endl;
 #endif
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "EarlyIncludeFileNamesList" << " : " <<
-    endl;
+    std::endl;
 
   if (fEarlyIncludeFileNamesList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    for ( string includeFileName : fEarlyIncludeFileNamesList ) {
+    for ( std::string includeFileName : fEarlyIncludeFileNamesList ) {
       os <<
         '[' << includeFileName << ']' <<
-        endl;
+        std::endl;
     } // for
 
     --gIndenter;
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
 #ifdef TRACING_IS_ENABLED
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "TraceEarlyOptions" << " : " << fTraceEarlyOptions <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "EarlyTracingOah" << " : " << fEarlyTracingOah <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "EarlyTracingOahDetails" << " : " << fEarlyTracingOahDetails <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "EarlyTraceComponents" << " : " << fEarlyTraceComponents <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "EarlyTracePasses" << " : " << fEarlyTracePasses <<
-    endl;
+    std::endl;
 
 #endif
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const oahEarlyOptions& elt)
+std::ostream& operator << (std::ostream& os, const oahEarlyOptions& elt)
 {
   elt.print (os);
   return os;

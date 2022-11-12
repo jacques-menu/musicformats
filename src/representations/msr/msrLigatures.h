@@ -29,10 +29,10 @@ enum class msrLigatureKind {
   kLigatureStart, kLigatureContinue, kLigatureStop
 };
 
-string msrLigatureKindAsString (
+std::string msrLigatureKindAsString (
   msrLigatureKind ligatureKind);
 
-ostream& operator << (ostream& os, const msrLigatureKind& elt);
+std::ostream& operator << (std::ostream& os, const msrLigatureKind& elt);
 
 enum class msrLigatureLineEndKind {
   kLigatureLineEndNone,
@@ -40,10 +40,10 @@ enum class msrLigatureLineEndKind {
   kLigatureLineEndBoth, kLigatureLineEndArrow
 };
 
-string msrLigatureLineEndKindAsString (
+std::string msrLigatureLineEndKindAsString (
   msrLigatureLineEndKind ligatureLineEndKind);
 
-ostream& operator << (ostream& os, const msrLigatureLineEndKind& elt);
+std::ostream& operator << (std::ostream& os, const msrLigatureLineEndKind& elt);
 
 //______________________________________________________________________________
 // PRE-declaration
@@ -133,9 +133,9 @@ class EXP msrLigature : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -158,7 +158,7 @@ class EXP msrLigature : public msrElement
     msrPlacementKind      fLigaturePlacementKind;
 };
 typedef SMARTP<msrLigature> S_msrLigature;
-EXP ostream& operator << (ostream& os, const S_msrLigature& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrLigature& elt);
 
 
 }

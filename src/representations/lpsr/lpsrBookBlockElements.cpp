@@ -27,8 +27,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -62,7 +60,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBookBlockElement::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -75,7 +73,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBookBlockElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -88,7 +86,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBookBlockElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -101,7 +99,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBookBlockElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -114,7 +112,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBookBlockElement::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -126,7 +124,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
 
 /* JMI
   for (
-    vector<S_msrElement>::const_iterator i = fBlockElements.begin ();
+    std::vector<S_msrElement>::const_iterator i = fBlockElements.begin ();
     i != fBlockElements.end ();
     ++i
   ) {
@@ -140,17 +138,17 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrBookBlockElement::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void lpsrBookBlockElement::print (ostream& os) const
+void lpsrBookBlockElement::print (std::ostream& os) const
 {
   // will never be called since it is overridden in sub-classes
 }
 
-ostream& operator << (ostream& os, const S_lpsrBookBlockElement& scr)
+std::ostream& operator << (std::ostream& os, const S_lpsrBookBlockElement& scr)
 {
   scr->print (os);
   return os;
@@ -189,7 +187,7 @@ lpsrScoreBlock::lpsrScoreBlock (
       gGlobalLpsr2lilypondOahGroup ->
         getMidiTempoAtom ();
 
-  string midiTempoDuration  = "16";
+  std::string midiTempoDuration  = "16";
   int    midiTempoPerSecond = 360;
 
   if (midiTempoAtom->getSetByAnOption ()) {
@@ -228,7 +226,7 @@ void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
       "Appending part group block " <<
        partGroupBlock-> getPartGroup ()-> getPartGroupCombinedName () <<
        " to LPSR score block" <<
-       endl;
+       std::endl;
   }
 #endif
 
@@ -249,7 +247,7 @@ void lpsrScoreBlock::appendVoiceUseToParallelMusicBLock (
       "Appending the use of voice \"" <<
        voiceUse-> getVoice ()-> getVoiceName () <<
        "\" to LPSR score" <<
-       endl;
+       std::endl;
   }
 #endif
 
@@ -268,7 +266,7 @@ void lpsrScoreBlock::appendLyricsUseToParallelMusicBLock (
       "Appending the use of stanza " <<
        lyricsUse-> getStanza ()-> getStanzaName () <<
        " to LPSR score" <<
-       endl;
+       std::endl;
   }
 #endif
 
@@ -283,7 +281,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrScoreBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -296,7 +294,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrScoreBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -309,7 +307,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrScoreBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -322,7 +320,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrScoreBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -335,7 +333,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrScoreBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -347,7 +345,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
 
 /* JMI
   for (
-    vector<S_msrElement>::const_iterator i = fBlockElements.begin ();
+    std::vector<S_msrElement>::const_iterator i = fBlockElements.begin ();
     i != fBlockElements.end ();
     ++i
   ) {
@@ -372,35 +370,35 @@ void lpsrScoreBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrScoreBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void lpsrScoreBlock::print (ostream& os) const
+void lpsrScoreBlock::print (std::ostream& os) const
 {
-  os << "ScoreBlock" << endl << endl;
+  os << "ScoreBlock" << std::endl << std::endl;
 
   ++gIndenter;
 
   os <<
     fBookBlockElementParallelMusicBlock <<
-    endl;
+    std::endl;
 
   if (fScoreBlockLayout) {
     os <<
       fScoreBlockLayout <<
-      endl;
+      std::endl;
   }
 
   os <<
     fScoreBlockMidiTempo <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrScoreBlock& scr)
+std::ostream& operator << (std::ostream& os, const S_lpsrScoreBlock& scr)
 {
   scr->print (os);
   return os;
@@ -439,7 +437,7 @@ void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
       "Appending part group block " <<
        partGroupBlock-> getPartGroup ()-> getPartGroupCombinedName () <<
        " to LPSR book part block" <<
-       endl;
+       std::endl;
   }
 #endif
 
@@ -460,7 +458,7 @@ void lpsrBookPartBlock::appendVoiceUseToParallelMusicBLock (
       "Appending the use of voice \"" <<
        voiceUse-> getVoice ()-> getVoiceName () <<
        "\" to LPSR score" <<
-       endl;
+       std::endl;
   }
 #endif
 
@@ -479,7 +477,7 @@ void lpsrBookPartBlock::appendLyricsUseToParallelMusicBLock (
       "Appending the use of stanza " <<
        lyricsUse-> getStanza ()-> getStanzaName () <<
        " to LPSR score" <<
-       endl;
+       std::endl;
   }
 #endif
 
@@ -494,7 +492,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBookPartBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -507,7 +505,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBookPartBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -520,7 +518,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBookPartBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -533,7 +531,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBookPartBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -546,7 +544,7 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBookPartBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -560,25 +558,25 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrBookPartBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void lpsrBookPartBlock::print (ostream& os) const
+void lpsrBookPartBlock::print (std::ostream& os) const
 {
-  os << "BookPartBlock" << endl << endl;
+  os << "BookPartBlock" << std::endl << std::endl;
 
   ++gIndenter;
 
   os <<
     fBookBlockElementParallelMusicBlock <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrBookPartBlock& scr)
+std::ostream& operator << (std::ostream& os, const S_lpsrBookPartBlock& scr)
 {
   scr->print (os);
   return os;
@@ -629,7 +627,7 @@ void lpsrBookBlock::appendPartGroupBlockToBlock (
       "Appending part group block " <<
        partGroupBlock-> getPartGroup ()-> getPartGroupCombinedName () <<
        " to LPSR score" <<
-       endl;
+       std::endl;
   }
 #endif
 
@@ -651,7 +649,7 @@ void lpsrBookBlock::appendBookBlockElementToBookBlockElementsList (
       "Appending book block element  " <<
        bookBlockElement-> asString () <<
        " to LPSR book block" <<
-       endl;
+       std::endl;
   }
 #endif
 */
@@ -667,8 +665,8 @@ void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
     gLogStream <<
       "Appending score block element  " <<
        scoreBlock-> asString () <<
-       " to LPSR book block elements list" <<
-       endl;
+       " to LPSR book block elements std::list" <<
+       std::endl;
   }
 #endif
 
@@ -684,8 +682,8 @@ void lpsrBookBlock::appendLpsrBookPartBlockToBookBlockElementsList (
     gLogStream <<
       "Appending book part block element  " <<
        bookPartBlock-> asString () <<
-       " to LPSR book block elements list" <<
-       endl;
+       " to LPSR book block elements std::list" <<
+       std::endl;
   }
 #endif
 
@@ -703,7 +701,7 @@ void lpsrBookBlock::appendVoiceUseToParallelMusicBLock (
       "Appending the use of voice \"" <<
        voiceUse-> getVoice ()-> getVoiceName () <<
        "\" to LPSR score" <<
-       endl;
+       std::endl;
   }
 #endif
 
@@ -722,7 +720,7 @@ void lpsrBookBlock::appendLyricsUseToParallelMusicBLock (
       "Appending the use of stanza " <<
        lyricsUse-> getStanza ()-> getStanzaName () <<
        " to LPSR score" <<
-       endl;
+       std::endl;
   }
 #endif
 
@@ -737,7 +735,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBookBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -750,7 +748,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBookBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -763,7 +761,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBookBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -776,7 +774,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBookBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -789,7 +787,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBookBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -800,7 +798,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
   }
 
   for (
-    list<S_lpsrBookBlockElement>::const_iterator i = fBookBlockElementsList.begin ();
+    std::list<S_lpsrBookBlockElement>::const_iterator i = fBookBlockElementsList.begin ();
     i != fBookBlockElementsList.end ();
     ++i
   ) {
@@ -819,33 +817,33 @@ void lpsrBookBlock::browseData (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrBookBlock::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-void lpsrBookBlock::print (ostream& os) const
+void lpsrBookBlock::print (std::ostream& os) const
 {
-  os << "BookBlock" << endl << endl;
+  os << "BookBlock" << std::endl << std::endl;
 
   ++gIndenter;
 
   if (fBookBlockHeader) {
     os <<
       fBookBlockHeader <<
-      endl;
+      std::endl;
   }
 
   os <<
     "BookBlockElements";
 
   if (fBookBlockElementsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
     for (
-      list<S_lpsrBookBlockElement>::const_iterator i = fBookBlockElementsList.begin ();
+      std::list<S_lpsrBookBlockElement>::const_iterator i = fBookBlockElementsList.begin ();
       i != fBookBlockElementsList.end ();
       ++i
     ) {
@@ -858,19 +856,19 @@ void lpsrBookBlock::print (ostream& os) const
   else {
     os <<
       " : [NONE]" <<
-      endl;
+      std::endl;
   }
 
   if (fBookBlockPaper) {
     os <<
       fBookBlockPaper <<
-      endl;
+      std::endl;
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrBookBlock& scr)
+std::ostream& operator << (std::ostream& os, const S_lpsrBookBlock& scr)
 {
   scr->print (os);
   return os;

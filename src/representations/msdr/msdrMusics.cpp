@@ -25,15 +25,13 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msdrMusic msdrMusic::create (
   int           inputLineNumber,
-  const string& musicName)
+  const std::string& musicName)
 {
   msdrMusic* o =
     new msdrMusic (
@@ -46,13 +44,13 @@ S_msdrMusic msdrMusic::create (
 
 msdrMusic::msdrMusic (
   int           inputLineNumber,
-  const string& musicName)
+  const std::string& musicName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Creating MSDR music \"" << asString () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -81,7 +79,7 @@ void msdrMusic::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msdrMusic::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msdrMusic>*
@@ -92,7 +90,7 @@ void msdrMusic::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msdrMusic::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -103,7 +101,7 @@ void msdrMusic::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msdrMusic::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msdrMusic>*
@@ -114,7 +112,7 @@ void msdrMusic::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msdrMusic::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -126,13 +124,13 @@ void msdrMusic::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msdrMusic::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   // browse the voice initial elements
   if (fInitialMusicElementsList.size ()) {
     for (
-      list<S_msdrMusicElement>::const_iterator i = fInitialMusicElementsList.begin ();
+      std::list<S_msdrMusicElement>::const_iterator i = fInitialMusicElementsList.begin ();
       i != fInitialMusicElementsList.end ();
       ++i
     ) {
@@ -151,7 +149,7 @@ void msdrMusic::browseData (basevisitor* v)
   // browse the voice stanzas
   if (fMusicStanzasMap.size ()) {
     for (
-      map<string, S_msrStanza>::const_iterator i = fMusicStanzasMap.begin ();
+      std::map<std::string, S_msrStanza>::const_iterator i = fMusicStanzasMap.begin ();
       i != fMusicStanzasMap.end ();
       ++i
     ) {
@@ -168,14 +166,14 @@ void msdrMusic::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% <== msdrMusic::browseData ()" <<
-      endl;
+      std::endl;
   }
   */
 }
 
-string msdrMusic::asShortString () const
+std::string msdrMusic::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDR voice \"" << fMusicName << "\", " <<
@@ -184,9 +182,9 @@ string msdrMusic::asShortString () const
   return s.str ();
 }
 
-string msdrMusic::asString () const
+std::string msdrMusic::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "MSDR music \"" << fMusicName << "\", " <<
@@ -197,16 +195,16 @@ string msdrMusic::asString () const
 
 void msdrMusic::displayMusic (
   int           inputLineNumber,
-  const string& context) const
+  const std::string& context) const
 {
   gLogStream <<
-    endl <<
+    std::endl <<
     "*********>> Displaying MSDR music \"" <<
     fMusicName <<
     "\" (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   print (gLogStream);
@@ -214,20 +212,20 @@ void msdrMusic::displayMusic (
 
   gLogStream <<
     " <<*********" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
-void msdrMusic::print (ostream& os) const
+void msdrMusic::print (std::ostream& os) const
 {
   os <<
     "MSDR music \"" << fMusicName <<
     "\", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
 /* JMI
-  os << left <<
+  os << std::left <<
     '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
@@ -247,52 +245,52 @@ void msdrMusic::print (ostream& os) const
     mfSingularOrPlural (
       fVoiceStanzasMap.size (), "stanza", "stanzas") <<
     ")" <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 41;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVoiceUpLinkToStaff" << " : " <<
     fVoiceUpLinkToStaff->getStaffName () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fVoiceCurrentMeasureNumber" << " : \"" <<
     fVoiceCurrentMeasureNumber <<
     "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fVoiceCurrentMeasureOrdinalNumber" << " : " <<
     fVoiceCurrentMeasureOrdinalNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fVoiceCurrentMeasurePuristNumber" << " : " <<
     fVoiceCurrentMeasurePuristNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "regularVoiceStaffSequentialNumber" << " : " <<
     regularVoiceStaffSequentialNumberAsString () <<
-    endl;
+    std::endl;
 
 #ifdef TRACING_IS_ENABLED
   // regular measure ends detection
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fWholeNotesSinceLastRegularMeasureEnd" << " : " <<
     fWholeNotesSinceLastRegularMeasureEnd <<
-    endl;
+    std::endl;
 
   // incomplete measures after repeats detection
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fCurrentVoiceRepeatPhaseKind" << " : " <<
     msrVoiceRepeatPhaseKindAsString (
       fCurrentVoiceRepeatPhaseKind) <<
-    endl;
+    std::endl;
 
   }
 */
@@ -300,17 +298,17 @@ void msdrMusic::print (ostream& os) const
   --gIndenter;
 }
 
-void msdrMusic::printShort (ostream& os) const
+void msdrMusic::printShort (std::ostream& os) const
 {
   os <<
     "MSDR music \"" << fMusicName <<
     "\", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
 /* JMI
-  os << left <<
+  os << std::left <<
     '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
@@ -330,17 +328,17 @@ void msdrMusic::printShort (ostream& os) const
     mfSingularOrPlural (
       fVoiceStanzasMap.size (), "stanza", "stanzas") <<
     ")" <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 41;
 
 #ifdef TRACING_IS_ENABLED
-  // print the voice measures flat list
+  // print the voice measures flat std::list
   size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "voiceMeasuresFlatList";
   if (voiceMeasuresFlatListSize) {
     os <<
@@ -350,12 +348,12 @@ void msdrMusic::printShort (ostream& os) const
     os <<
       " : " << "[EMPTY]";
   }
-  os << endl;
+  os << std::endl;
 
   if (voiceMeasuresFlatListSize) {
     ++gIndenter;
 
-    list<S_msrMeasure>::const_iterator
+    std::list<S_msrMeasure>::const_iterator
       iBegin = fVoiceMeasuresFlatList.begin (),
       iEnd   = fVoiceMeasuresFlatList.end (),
       i      = iBegin;
@@ -371,7 +369,7 @@ void msdrMusic::printShort (ostream& os) const
       if (++i == iEnd) break;
       os << ' ';
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
@@ -381,13 +379,13 @@ void msdrMusic::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msdrMusic& elt)
+std::ostream& operator << (std::ostream& os, const S_msdrMusic& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

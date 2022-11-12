@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include <string>
+#include <stack>
 
 #include "mfIndentedTextOutput.h"
 
@@ -99,28 +100,28 @@ using namespace MusicFormats;
 # include "ischemeDriver.h"
 }
 
-%token <string> INTEGER "integer number"
-%token <string> DOUBLE  "double number"
+%token <std::string> INTEGER "integer number"
+%token <std::string> DOUBLE  "double number"
 
-%token <string> SINGLE_QUOTED_STRING "single quoted_string"
-%token <string> DOUBLE_QUOTED_STRING "double quoted_string"
+%token <std::string> SINGLE_QUOTED_STRING "single quoted_string"
+%token <std::string> DOUBLE_QUOTED_STRING "double quoted_string"
 
-%token <string> NAME "name"
+%token <std::string> NAME "name"
 
-%token <string> OPTION "option"
+%token <std::string> OPTION "option"
 
 
 // the iScheme non-terminals
 //_______________________________________________________________________________
 
-%nterm <string> Number
+%nterm <std::string> Number
 
-%nterm <string> SingleString
-%nterm <string> String
+%nterm <std::string> SingleString
+%nterm <std::string> std::string
 
-%nterm <string> OptionValue
+%nterm <std::string> OptionValue
 
-%nterm <string> LabelName
+%nterm <std::string> LabelName
 
 
 // the iScheme axiom
@@ -198,9 +199,9 @@ SingleString
   | DOUBLE_QUOTED_STRING
 ;
 
-String
+std::string
   : SingleString
-  | String SingleString
+  | std::string SingleString
       {
         $$ = $1 + $2;
       }
@@ -236,7 +237,7 @@ InputSource
         drv.appendInputSouce ($1);
       }
 
-  | String
+  | std::string
       {
         drv.appendInputSouce ($1);
       }
@@ -277,7 +278,7 @@ Option
           gLogStream <<
             "====> option " << $1 <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         drv.registerOptionInCurrentOptionsBlock (
@@ -295,7 +296,7 @@ Option
           gLogStream <<
             "====> option " << $1 << ' ' << $2 <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         drv.registerOptionInCurrentOptionsBlock (
@@ -309,7 +310,7 @@ Option
 OptionValue
   : NAME
   | Number
-  | String
+  | std::string
   | NAME EQUAL NAME
       {
         $$ = $1 + "=" + $3;
@@ -337,13 +338,13 @@ ChoiceDeclaration
       {
         ++gIndenter;
 
-        string choiceName = $2;
+        std::string choiceName = $2;
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "====> choice " << choiceName << " : " << "..." <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         // create a choice
@@ -367,7 +368,7 @@ ChoiceDeclaration
 
     DEFAULT COLON NAME
       {
-        string
+        std::string
           choiceName = $2,
           label      = $9;
 
@@ -391,7 +392,7 @@ ChoiceDeclaration
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
-            endl;
+            std::endl;
         }
 
         --gIndenter;
@@ -403,7 +404,7 @@ ChoiceLabels
       {
         ++gIndenter;
 
-        string label = $1;
+        std::string label = $1;
 
         drv.getCurrentChoiceChoice ()->
           addLabel (
@@ -417,7 +418,7 @@ ChoiceLabels
       {
         ++gIndenter;
 
-        string label = $3;
+        std::string label = $3;
 
         drv.getCurrentChoiceChoice ()->
           addLabel (
@@ -437,7 +438,7 @@ CaseChoiceLabel
       {
         ++gIndenter;
 
-        string label = $1;
+        std::string label = $1;
 
         // fetch case statement stack top
         S_ischemeCaseChoiceStatement
@@ -464,13 +465,13 @@ CaseChoiceStatement
       {
         ++gIndenter;
 
-        string choiceName = $2;
+        std::string choiceName = $2;
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "====> case " << choiceName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         // create a new current case statement
@@ -486,13 +487,13 @@ CaseChoiceStatement
                 drv);
 
         if (! choice) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "name \"" << choiceName <<
             "\" is no choice name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
 
           ischemeError (
             s.str (),
@@ -526,7 +527,7 @@ CaseChoiceStatement
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
-            endl;
+            std::endl;
         }
 
         --gIndenter;
@@ -565,7 +566,7 @@ CaseChoiceAlternative
             drv.caseChoiceStatementsStackTop ();
 
         // push a new current options block onto the stack
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Case alternative for " <<
@@ -573,7 +574,7 @@ CaseChoiceAlternative
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation ();
 
-        string
+        std::string
           CaseChoiceAlternativeDescription =
             s.str ();
 
@@ -599,7 +600,7 @@ CaseChoiceAlternative
               getCaseChoice ();
 
         // handle the labels
-        for (string label : currentCaseChoiceStatement->getCaseCurrentLabelsList ()) {
+        for (std::string label : currentCaseChoiceStatement->getCaseCurrentLabelsList ()) {
           // enrich the options block for label
           currentCaseChoice->
             enrichLabelOptionsBlock (
@@ -609,16 +610,16 @@ CaseChoiceAlternative
         } // for
 
         // discard this case alternative
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Discarding case alternative options block for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation () <<
-          endl;
+          std::endl;
 
-        string context = s.str ();
+        std::string context = s.str ();
 
         drv.optionsBlocksStackPop (
           context);
@@ -636,7 +637,7 @@ CaseInputName
       {
         ++gIndenter;
 
-        string label = $1;
+        std::string label = $1;
 
         // fetch case input statement stack top
         S_ischemeCaseInputStatement
@@ -663,13 +664,13 @@ CaseInputStatement
       {
         ++gIndenter;
 
-        string inputName = "$2 INPUT";
+        std::string inputName = "$2 INPUT";
 
         if (drv.getTraceCaseInputStatements ()) {
           gLogStream <<
             "====> case input " << inputName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
         }
 
         // create a new current case input statement
@@ -685,13 +686,13 @@ CaseInputStatement
                 drv);
 
         if (! input) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "name \"" << inputName <<
             "\" is no input name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
-            endl;
+            std::endl;
 
           ischemeError (
             s.str (),
@@ -725,7 +726,7 @@ CaseInputStatement
         if (drv.getTraceCaseInputStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
-            endl;
+            std::endl;
         }
 
         --gIndenter;
@@ -764,7 +765,7 @@ CaseInputAlternative
             drv.caseInputStatementsStackTop ();
 
         // push a new current options block onto the stack
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "CaseInput alternative for " <<
@@ -772,7 +773,7 @@ CaseInputAlternative
             currentNamesListAsString () <<
           ", line " << drv.getScannerLocation ();
 
-        string
+        std::string
           caseInputAlternativeDescription =
             s.str ();
 
@@ -798,7 +799,7 @@ CaseInputAlternative
               getCaseInputInput ();
 
         // handle the names
-        for (string name : currentCaseInputStatement->getCaseInputCurrentNamesList ()) {
+        for (std::string name : currentCaseInputStatement->getCaseInputCurrentNamesList ()) {
           // enrich the options block for name
           currentCaseInputInput->
             enrichNameOptionsBlock (
@@ -808,16 +809,16 @@ CaseInputAlternative
         } // for
 
         // discard this case input alternative
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Discarding case input alternative options block for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
           ", line " << drv.getScannerLocation () <<
-          endl;
+          std::endl;
 
-        string context = s.str ();
+        std::string context = s.str ();
 
         drv.optionsBlocksStackPop (
           context);
@@ -849,7 +850,7 @@ LabelName
 SelectStatement
   : SELECT NAME COLON LabelName SEMICOLON
       {
-        string
+        std::string
           choiceName = $2,
           label = $4;
 
@@ -869,7 +870,7 @@ SelectStatement
 
 
 void
-iscm::parser::error (const location_type& loc, const string& message)
+iscm::parser::error (const location_type& loc, const std::string& message)
 {
   ischemeError (
     message,

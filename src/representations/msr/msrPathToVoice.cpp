@@ -19,8 +19,6 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -175,7 +173,7 @@ Bool msrPathToVoice::pathContainsVoice (S_msrVoice voice)
 //   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 //     gLogStream <<
 //       "% ==> msrPathToVoice::acceptIn ()" <<
-//       endl;
+//       std::endl;
 //   }
 //
 //   if (visitor<S_msrPathToVoice>*
@@ -186,7 +184,7 @@ Bool msrPathToVoice::pathContainsVoice (S_msrVoice voice)
 //         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 //           gLogStream <<
 //             "% ==> Launching msrPathToVoice::visitStart ()" <<
-//             endl;
+//             std::endl;
 //         }
 //         p->visitStart (elem);
 //   }
@@ -197,7 +195,7 @@ Bool msrPathToVoice::pathContainsVoice (S_msrVoice voice)
 //   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 //     gLogStream <<
 //       "% ==> msrPathToVoice::acceptOut ()" <<
-//       endl;
+//       std::endl;
 //   }
 //
 //   if (visitor<S_msrPathToVoice>*
@@ -208,7 +206,7 @@ Bool msrPathToVoice::pathContainsVoice (S_msrVoice voice)
 //         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
 //           gLogStream <<
 //             "% ==> Launching msrPathToVoice::visitEnd ()" <<
-//             endl;
+//             std::endl;
 //         }
 //         p->visitEnd (elem);
 //   }
@@ -217,9 +215,9 @@ Bool msrPathToVoice::pathContainsVoice (S_msrVoice voice)
 // void msrPathToVoice::browseData (basevisitor* v)
 // {}
 //
-// string msrPathToVoice::asString () const
+// std::string msrPathToVoice::asString () const
 // {
-//   stringstream s;
+//   std::stringstream s;
 //
 //   s <<
 //     "Tie" << ' ' << msrPathToVoiceKindAsString (fTieKind) <<
@@ -228,9 +226,9 @@ Bool msrPathToVoice::pathContainsVoice (S_msrVoice voice)
 //   return s.str ();
 // }
 
-string msrPathToVoice::asString() const
+std::string msrPathToVoice::asString() const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "fBook->getBookName ()" << // JMI
@@ -255,17 +253,17 @@ string msrPathToVoice::asString() const
   return s.str ();
 }
 
-void msrPathToVoice::print (ostream& os) const
+void msrPathToVoice::print (std::ostream& os) const
 {
   os <<
     "Book: " << "fBook->getBookName ()" << // JMI
-  endl;
+  std::endl;
 
   ++gIndenter;
 
     os <<
       "Score: " << fScore->getScoreName () <<
-    endl;
+    std::endl;
 
     // part groups can be nested
     for (S_msrPartGroup currentPartGroup : fPartGroupsList) {
@@ -273,26 +271,26 @@ void msrPathToVoice::print (ostream& os) const
 
       os <<
         "PartGroup: " << currentPartGroup->getPartGroupName () <<
-        endl;
+        std::endl;
     } // for
 
     ++gIndenter;
 
       os <<
         "Part: " << fPart->getPartName () <<
-      endl;
+      std::endl;
 
       ++gIndenter;
 
         os <<
           "Staff: " << fStaff->getStaffName () <<
-        endl;
+        std::endl;
 
         ++gIndenter;
 
           os <<
             "Voice: " << fVoice->getVoiceName () <<
-          endl;
+          std::endl;
 
         for (S_msrPartGroup currentPartGroup : fPartGroupsList) {
           --gIndenter;
@@ -307,13 +305,13 @@ void msrPathToVoice::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrPathToVoice& elt)
+std::ostream& operator << (std::ostream& os, const S_msrPathToVoice& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

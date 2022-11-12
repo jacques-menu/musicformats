@@ -53,7 +53,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    const list<S_msrMeasureElement>&
+    const std::list<S_msrMeasureElement>&
                           getAfterGraceNotesGroupContentsNotesList () const
                               {
                                 return
@@ -89,9 +89,9 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
+    std::string           asShortString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -101,12 +101,12 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // upLinks
     S_msrVoice            fAfterGraceNotesGroupContentsUpLinkToVoice;
 
-    // the notes list
-    list<S_msrMeasureElement>
+    // the notes std::list
+    std::list<S_msrMeasureElement>
                           fAfterGraceNotesGroupContentsNotesList;
 };
 typedef SMARTP<msrAfterGraceNotesGroupContents> S_msrAfterGraceNotesGroupContents;
-EXP ostream& operator << (ostream& os, const S_msrAfterGraceNotesGroupContents& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroupContents& elt);
 
 //______________________________________________________________________________
 class EXP msrAfterGraceNotesGroup : public msrElement
@@ -182,9 +182,9 @@ class EXP msrAfterGraceNotesGroup : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
+    std::string           asShortString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -202,7 +202,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
                           fAfterGraceNotesGroupContents;
 };
 typedef SMARTP<msrAfterGraceNotesGroup> S_msrAfterGraceNotesGroup;
-EXP ostream& operator << (ostream& os, const S_msrAfterGraceNotesGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroup& elt);
 
 
 }

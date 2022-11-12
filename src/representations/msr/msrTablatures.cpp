@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -34,8 +34,6 @@
 
 #include "msrBrowsers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -81,7 +79,7 @@ msrFrameNote::msrFrameNote (
       "Creating frame note '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -89,10 +87,10 @@ msrFrameNote::msrFrameNote (
 msrFrameNote::~msrFrameNote ()
 {}
 
-string msrBarreTypeKindAsString (
+std::string msrBarreTypeKindAsString (
   msrBarreTypeKind barreTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (barreTypeKind) {
     case msrBarreTypeKind::kBarreTypeNone:
@@ -109,15 +107,15 @@ string msrBarreTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrBarreTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrBarreTypeKind& elt)
 {
   os << msrBarreTypeKindAsString (elt);
   return os;
 }
 
-string msrFrameNote::asString () const
+std::string msrFrameNote::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[FrameNote" <<
@@ -136,7 +134,7 @@ void msrFrameNote::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrFrameNote::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrFrameNote>*
@@ -147,7 +145,7 @@ void msrFrameNote::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrFrameNote::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -158,7 +156,7 @@ void msrFrameNote::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrFrameNote::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrFrameNote>*
@@ -169,7 +167,7 @@ void msrFrameNote::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrFrameNote::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -178,43 +176,43 @@ void msrFrameNote::acceptOut (basevisitor* v)
 void msrFrameNote::browseData (basevisitor* v)
 {}
 
-void msrFrameNote::print (ostream& os) const
+void msrFrameNote::print (std::ostream& os) const
 {
   os <<
     "[FrameNote" <<
     ", line: " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 23;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fFrameNoteStringNumber" << " : " << fFrameNoteStringNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fFrameNoteFretNumber" << " : " << fFrameNoteFretNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fFrameNoteFingering" << " : " << fFrameNoteFingering <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fFrameNoteBarreTypeKind" << " : " << fFrameNoteBarreTypeKind <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrFrameNote& elt)
+std::ostream& operator << (std::ostream& os, const S_msrFrameNote& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -257,7 +255,7 @@ msrFrame::msrFrame (
       "Creating frame '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -287,7 +285,7 @@ void msrFrame::appendFrameNoteToFrame (
     case msrBarreTypeKind::kBarreTypeStop:
       {
         if (! fPendingBarreStartFrameNotes.size ()) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "frame note  with barre stop has no maching barre start" <<
@@ -314,7 +312,7 @@ void msrFrame::appendFrameNoteToFrame (
                 getFrameNoteFretNumber ();
 
           if (barreStartFretNumber != barreStopFretNumber) {
-            stringstream s;
+            std::stringstream s;
 
             s <<
               "frame note with barre stop has is at fret" <<
@@ -349,9 +347,9 @@ void msrFrame::appendFrameNoteToFrame (
   }
 }
 
-string msrFrame::asString () const
+std::string msrFrame::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Frame" <<
@@ -372,7 +370,7 @@ void msrFrame::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrFrame::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrFrame>*
@@ -383,7 +381,7 @@ void msrFrame::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrFrame::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -394,7 +392,7 @@ void msrFrame::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrFrame::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrFrame>*
@@ -405,7 +403,7 @@ void msrFrame::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrFrame::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -416,7 +414,7 @@ void msrFrame::browseData (basevisitor* v)
   // browse frame notes if any
   if (fFrameFrameNotesList.size ()) {
     for (
-      list<S_msrFrameNote>::const_iterator i = fFrameFrameNotesList.begin ();
+      std::list<S_msrFrameNote>::const_iterator i = fFrameFrameNotesList.begin ();
       i != fFrameFrameNotesList.end ();
       ++i
   ) {
@@ -427,40 +425,40 @@ void msrFrame::browseData (basevisitor* v)
   }
 }
 
-void msrFrame::print (ostream& os) const
+void msrFrame::print (std::ostream& os) const
 {
   os <<
     "[Frame" <<
      ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 15;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fFrameStringsNumber" << " = " << fFrameStringsNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fFrameFretsNumber" << " = " << fFrameFretsNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fFrameFirstFretNumber" << " = " << fFrameFirstFretNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fFrameContainsFingerings" << " = " << fFrameContainsFingerings <<
-    endl;
+    std::endl;
 
   // print frame notes if any
   os <<
     "fFrameFrameNotesList:";
   if (fFrameFrameNotesList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrFrameNote>::const_iterator
+    std::list<S_msrFrameNote>::const_iterator
       iBegin = fFrameFrameNotesList.begin (),
       iEnd   = fFrameFrameNotesList.end (),
       i      = iBegin;
@@ -468,7 +466,7 @@ void msrFrame::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      // no endl here;
+      // no std::endl here;
     } // for
 
     --gIndenter;
@@ -476,18 +474,18 @@ void msrFrame::print (ostream& os) const
   else {
     os <<
       "[EMPTY]" <<
-      endl;
+      std::endl;
   }
 
   // print the barres if any
   os <<
     "fFrameBarresList:";
   if (fFrameBarresList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<msrBarre>::const_iterator
+    std::list<msrBarre>::const_iterator
       iBegin = fFrameBarresList.begin (),
       iEnd   = fFrameBarresList.end (),
       i      = iBegin;
@@ -497,27 +495,27 @@ void msrFrame::print (ostream& os) const
 
       os <<
         "Barre" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       const int fieldWidth = 21;
 
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         "barreStartString" << " : " << barre.getBarreStartString () <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "barreStopString" << " : " << barre.getBarreStopString () <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "barreFretNumber" << " : " << barre.getBarreFretNumber () <<
-        endl;
+        std::endl;
 
       --gIndenter;
 
       if (++i == iEnd) break;
-      // no endl here;
+      // no std::endl here;
     } // for
 
     --gIndenter;
@@ -525,21 +523,21 @@ void msrFrame::print (ostream& os) const
   else {
     os <<
       "[EMPTY]" <<
-      endl;
+      std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrFrame& elt)
+std::ostream& operator << (std::ostream& os, const S_msrFrame& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

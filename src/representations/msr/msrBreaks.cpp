@@ -28,16 +28,14 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrUserChosenLineBreakKindAsString (
+std::string msrUserChosenLineBreakKindAsString (
   msrUserChosenLineBreakKind userChosenLineBreakKind)
 {
-  string result;
+  std::string result;
 
   switch (userChosenLineBreakKind) {
     case msrUserChosenLineBreakKind::kUserChosenLineBreakYes:
@@ -55,7 +53,7 @@ string msrUserChosenLineBreakKindAsString (
 S_msrLineBreak msrLineBreak::create (
   int           inputLineNumber,
   S_msrMeasure  upLinkToMeasure,
-  const string& nextBarNumber,
+  const std::string& nextBarNumber,
   msrUserChosenLineBreakKind
                 userChosenLineBreakKind)
 {
@@ -72,10 +70,10 @@ S_msrLineBreak msrLineBreak::create (
 msrLineBreak::msrLineBreak (
   int           inputLineNumber,
   S_msrMeasure  upLinkToMeasure,
-  const string& nextBarNumber,
+  const std::string& nextBarNumber,
   msrUserChosenLineBreakKind
                 userChosenLineBreakKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -91,7 +89,7 @@ msrLineBreak::msrLineBreak (
       msrUserChosenLineBreakKindAsString (
         fUserChosenLineBreakKind) <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -104,7 +102,7 @@ void msrLineBreak::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrLineBreak::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrLineBreak>*
@@ -115,7 +113,7 @@ void msrLineBreak::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrLineBreak::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -126,7 +124,7 @@ void msrLineBreak::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrLineBreak::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrLineBreak>*
@@ -137,7 +135,7 @@ void msrLineBreak::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrLineBreak::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -146,9 +144,9 @@ void msrLineBreak::acceptOut (basevisitor* v)
 void msrLineBreak::browseData (basevisitor* v)
 {}
 
-string msrLineBreak::asString () const
+std::string msrLineBreak::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "LineBreak" <<
@@ -161,28 +159,28 @@ string msrLineBreak::asString () const
   return s.str ();
 }
 
-void msrLineBreak::print (ostream& os) const
+void msrLineBreak::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrLineBreak& elt)
+std::ostream& operator << (std::ostream& os, const S_msrLineBreak& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
 //______________________________________________________________________________
-string msrUserChosenPageBreakKindAsString (
+std::string msrUserChosenPageBreakKindAsString (
   msrUserChosenPageBreakKind userChosenPageBreakKind)
 {
-  string result;
+  std::string result;
 
   switch (userChosenPageBreakKind) {
     case msrUserChosenPageBreakKind::kUserChosenPageBreakYes:
@@ -217,7 +215,7 @@ msrPageBreak::msrPageBreak (
   S_msrMeasure  upLinkToMeasure,
   msrUserChosenPageBreakKind
                 userChosenPageBreakKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -229,7 +227,7 @@ msrPageBreak::msrPageBreak (
       msrUserChosenPageBreakKindAsString (
         fUserChosenPageBreakKind) <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -244,7 +242,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPageBreak::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPageBreak>*
@@ -255,7 +253,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPageBreak::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -266,7 +264,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPageBreak::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPageBreak>*
@@ -277,7 +275,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPageBreak::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -286,9 +284,9 @@ void msrPageBreak::acceptOut (basevisitor* v)
 void msrPageBreak::browseData (basevisitor* v)
 {}
 
-string msrPageBreak::asString () const
+std::string msrPageBreak::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "PageBreak" <<
@@ -300,18 +298,18 @@ string msrPageBreak::asString () const
   return s.str ();
 }
 
-void msrPageBreak::print (ostream& os) const
+void msrPageBreak::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrPageBreak& elt)
+std::ostream& operator << (std::ostream& os, const S_msrPageBreak& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

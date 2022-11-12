@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
 #include "mfAssert.h"
 #include "mfTiming.h"
@@ -32,8 +32,6 @@
 #include "lpsr2lilypondInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -42,9 +40,9 @@ void translateLpsrToLilypond (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
   S_lpsrOahGroup    lpsrOpts,
-  const string&     passNumber,
-  const string&     passDescription,
-  ostream&          lilypondCodeStream)
+  const std::string&     passNumber,
+  const std::string&     passDescription,
+  std::ostream&          lilypondCodeStream)
 {
   // sanity check
   mfAssert (
@@ -55,20 +53,20 @@ void translateLpsrToLilypond (
   // start the clock
   clock_t startClock = clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -99,7 +97,7 @@ void translateLpsrToLilypond (
       "### translateLpsrToLilypond gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -109,13 +107,13 @@ EXP void translateLpsrToLilypondWithHandler (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
   S_lpsrOahGroup    lpsrOpts,
-  const string&     passNumber,
-  const string&     passDescription,
+  const std::string&     passNumber,
+  const std::string&     passDescription,
   S_oahHandler      handler,
-  ostream&          out,
-  ostream&          err)
+  std::ostream&          out,
+  std::ostream&          err)
 {
-  string
+  std::string
     outputFileName =
       handler->
         fetchOutputFileNameFromTheOptions ();
@@ -126,7 +124,7 @@ EXP void translateLpsrToLilypondWithHandler (
       "xmlFile2lilypond() outputFileName = \"" <<
       outputFileName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -135,7 +133,7 @@ EXP void translateLpsrToLilypondWithHandler (
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -173,7 +171,7 @@ EXP void translateLpsrToLilypondWithHandler (
         "xmlFile2lilypond() output goes to file \"" <<
         outputFileName <<
         "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -181,31 +179,31 @@ EXP void translateLpsrToLilypondWithHandler (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
-        endl <<
+        std::endl <<
         "Opening file '" << outputFileName << "' for writing" <<
-        endl;
+        std::endl;
     }
 #endif
 
     // create a file output stream
-    ofstream
+    std::ofstream
       outputFileStream (
         outputFileName.c_str (),
-        ofstream::out);
+        std::ofstream::out);
 
     if (! outputFileStream.is_open ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "Could not open LilyPond output file \"" <<
         outputFileName <<
         "\" for writing - quitting";
 
-      string message = s.str ();
+      std::string message = s.str ();
 
       err <<
         message <<
-        endl;
+        std::endl;
 
       throw lpsr2lilypondException (message);
     }
@@ -240,9 +238,9 @@ EXP void translateLpsrToLilypondWithHandler (
 #ifdef TRACE_OAH
     if (gtracingOah->fTracePasses) {
       gLogStream <<
-        endl <<
+        std::endl <<
         "Closing file \"" << outputFileName << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 

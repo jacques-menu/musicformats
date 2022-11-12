@@ -34,7 +34,7 @@ void initializeBSR ()
     ) {
       gLogStream <<
         "Initializing BSR" <<
-        endl;
+        std::endl;
     }
 #endif
 

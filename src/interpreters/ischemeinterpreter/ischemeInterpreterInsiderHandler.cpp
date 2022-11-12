@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 // libmusicxml2
 #include "visitor.h"
@@ -44,15 +44,13 @@
 #include "ischemeInterpreterInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_ischemeInterpreterInsiderHandler ischemeInterpreterInsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   // create the insider handler
   ischemeInterpreterInsiderHandler* o = new
@@ -65,8 +63,8 @@ S_ischemeInterpreterInsiderHandler ischemeInterpreterInsiderHandler::create (
 }
 
 ischemeInterpreterInsiderHandler::ischemeInterpreterInsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahInsiderHandler (
       serviceName,
       handlerHeader,
@@ -85,7 +83,7 @@ R"(
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -110,27 +108,27 @@ void ischemeInterpreterInsiderHandler::initializeHandlerMultiComponent ()
     createIschemeInterpreterComponent ();
 }
 
-string ischemeInterpreterInsiderHandler::usageInformation ()
+std::string ischemeInterpreterInsiderHandler::usageInformation ()
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 R"(Usage: ischeme [option]*
 )" <<
-    endl;
+    std::endl;
 
   return s.str ();
 }
 
-string ischemeInterpreterInsiderHandler::handlerServiceAboutInformation () const
+std::string ischemeInterpreterInsiderHandler::handlerServiceAboutInformation () const
 {
   return
     ischemeInterpreterAboutInformation ();
 }
 
-string ischemeInterpreterInsiderHandler::ischemeInterpreterAboutInformation () const
+std::string ischemeInterpreterInsiderHandler::ischemeInterpreterAboutInformation () const
 {
-  string result =
+  std::string result =
 R"(What ischeme does:
 
     This interpreter reads text input containing
@@ -156,7 +154,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
       "Creating the ischeme prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -165,7 +163,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
 
 //______________________________________________________________________________
 void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -173,7 +171,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -226,14 +224,14 @@ void ischemeInterpreterInsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  if (MSDR_STANDARD_INPUT_NAME == string ("-")) {
+  if (MSDR_STANDARD_INPUT_NAME == std::string ("-")) {
     checkSingleInputSourceInArgumentsVector ();
   }
-  else if (MSDR_STANDARD_INPUT_NAME == string ("")) {
+  else if (MSDR_STANDARD_INPUT_NAME == std::string ("")) {
     checkNoOrOneInputSourceInArgumentsVector ();
   }
   else {
@@ -268,7 +266,7 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << inputSourceName << "\" is both the input and output file name";
@@ -280,7 +278,7 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 
 
   if (! fOutputFileName.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "ischemeInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
@@ -289,7 +287,7 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
   }
 
   else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
@@ -306,7 +304,7 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -319,7 +317,7 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching ischemeInterpreterInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -332,7 +330,7 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -345,7 +343,7 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching ischemeInterpreterInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -358,7 +356,7 @@ void ischemeInterpreterInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -366,33 +364,33 @@ void ischemeInterpreterInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void ischemeInterpreterInsiderHandler::print (ostream& os) const
+void ischemeInterpreterInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "ischemeInterpreterInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -401,7 +399,7 @@ void ischemeInterpreterInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -409,16 +407,16 @@ void ischemeInterpreterInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_ischemeInterpreterInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -453,11 +451,11 @@ void ischemeInterpreterInsiderOahGroup::initializeIschemeInterpreterInsiderOahGr
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -469,7 +467,7 @@ void ischemeInterpreterInsiderOahGroup::printIschemeInterpreterInsiderOahGroupVa
 {
   gLogStream <<
     "The ischeme options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -483,7 +481,7 @@ S_ischemeInterpreterInsiderOahGroup createGlobalIschemeInterpreterInsiderOahGrou
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global ischeme insider OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

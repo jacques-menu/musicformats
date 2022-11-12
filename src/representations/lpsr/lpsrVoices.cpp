@@ -20,8 +20,6 @@
 #include "lpsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -55,7 +53,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrUseVoiceCommand::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -68,7 +66,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrUseVoiceCommand::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -81,7 +79,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrUseVoiceCommand::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -94,7 +92,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrUseVoiceCommand::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -104,7 +102,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
 void lpsrUseVoiceCommand::browseData (basevisitor* v)
 {}
 
-void lpsrUseVoiceCommand::print (ostream& os) const
+void lpsrUseVoiceCommand::print (std::ostream& os) const
 {
   os <<
     "UseVoiceCommand" << " \"" <<
@@ -112,10 +110,10 @@ void lpsrUseVoiceCommand::print (ostream& os) const
     "\", " <<
     mfSingularOrPlural (
       fVoice->getVoiceStanzasMap ().size (), "stanza", "stanzas") <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_lpsrUseVoiceCommand& nlc)
+std::ostream& operator << (std::ostream& os, const S_lpsrUseVoiceCommand& nlc)
 {
   nlc->print (os);
   return os;

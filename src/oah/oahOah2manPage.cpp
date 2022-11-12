@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <cmath>
 #include <string>
 
@@ -23,8 +23,6 @@
 
 #include "oahOah.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -32,7 +30,7 @@ namespace MusicFormats
 //________________________________________________________________________
 oahOah2manPage::oahOah2manPage (
   const S_oahHandler handler,
-  ostream&           manPageOutputStream)
+  std::ostream&           manPageOutputStream)
     : oah2manPage (
         handler,
         manPageOutputStream)
@@ -47,28 +45,28 @@ void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> Start visiting oahOptionalValuesStyleKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 / *
   fManPageOutputStream <<
     ".HP" <<
-    endl <<
+    std::endl <<
     "\\fB\\-" <<
-    regex_replace (elt->getShortName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getShortName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
     "\\fB\\-" <<
-    regex_replace (elt->getLongName (), regex ("-"), "\\-") <<
+    regex_replace (elt->getLongName (), std::regex ("-"), "\\-") <<
     "\\fR, " <<
-    endl <<
+    std::endl <<
 
     ".IP" <<
-    endl <<
+    std::endl <<
     elt->getDescription () <<
-    endl;
+    std::endl;
     * /
 }
 
@@ -77,10 +75,10 @@ void oahOah2manPage::visitEnd (S_oahOptionalValuesStyleKindAtom& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       ".\\\" --> End visiting oahOptionalValuesStyleKindAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }

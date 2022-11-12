@@ -28,8 +28,8 @@ class EXP msr2musicxmlInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<msr2musicxmlInsiderHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
   protected:
 
@@ -37,8 +37,8 @@ class EXP msr2musicxmlInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           msr2musicxmlInsiderHandler (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
     virtual               ~msr2musicxmlInsiderHandler ();
 
@@ -57,18 +57,18 @@ class EXP msr2musicxmlInsiderHandler : public oahInsiderHandler
     void                  createTheMsr2musicxmlPrefixes ();
 
     void                  createTheMsr2musicxmlOptionGroups (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override;
+    std::string           fetchOutputFileNameFromTheOptions () const override;
 
     // quiet mode
     void                  enforceHandlerQuietness () override;
@@ -86,7 +86,7 @@ class EXP msr2musicxmlInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -97,7 +97,7 @@ class EXP msr2musicxmlInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<msr2musicxmlInsiderHandler> S_msr2musicxmlInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_msr2musicxmlInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2musicxmlInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msr2musicxmlInsiderOahGroup : public oahGroup
@@ -189,7 +189,7 @@ class EXP msr2musicxmlInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<msr2musicxmlInsiderOahGroup> S_msr2musicxmlInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_msr2musicxmlInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2musicxmlInsiderOahGroup& elt);
 
 EXP extern S_msr2musicxmlInsiderOahGroup gGlobalMsr2musicxmlInsiderOahGroup;
 

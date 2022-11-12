@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -32,8 +32,6 @@
 
 #include "msrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -80,7 +78,7 @@ void msrStringTuning::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStringTuning::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStringTuning>*
@@ -91,7 +89,7 @@ void msrStringTuning::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStringTuning::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -102,7 +100,7 @@ void msrStringTuning::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStringTuning::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStringTuning>*
@@ -113,7 +111,7 @@ void msrStringTuning::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStringTuning::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -122,41 +120,41 @@ void msrStringTuning::acceptOut (basevisitor* v)
 void msrStringTuning::browseData (basevisitor* v)
 {}
 
-void msrStringTuning::print (ostream& os) const
+void msrStringTuning::print (std::ostream& os) const
 {
   ++gIndenter;
 
   const int fieldWidth = 30;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "stringTuningNumber" << " : " << fStringTuningNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "stringTuningDiatonicPitchKind" << " : " <<
     msrDiatonicPitchKindAsString (
       fStringTuningDiatonicPitchKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "stringTuningAlterationKind" << " : " <<
     msrAlterationKindAsString (
       fStringTuningAlterationKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "stringTuningOctaveKind" << " : " <<
     msrOctaveKindAsString (fStringTuningOctaveKind) <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrStringTuning& elt)
+std::ostream& operator << (std::ostream& os, const S_msrStringTuning& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -178,7 +176,7 @@ S_msrScordatura msrScordatura::create (
 msrScordatura::msrScordatura (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {}
@@ -198,7 +196,7 @@ void msrScordatura::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrScordatura::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrScordatura>*
@@ -209,7 +207,7 @@ void msrScordatura::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrScordatura::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -220,7 +218,7 @@ void msrScordatura::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrScordatura::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrScordatura>*
@@ -231,7 +229,7 @@ void msrScordatura::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrScordatura::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -240,7 +238,7 @@ void msrScordatura::acceptOut (basevisitor* v)
 void msrScordatura::browseData (basevisitor* v)
 {}
 
-void msrScordatura::print (ostream& os) const
+void msrScordatura::print (std::ostream& os) const
 {
   ++gIndenter;
 
@@ -248,38 +246,38 @@ void msrScordatura::print (ostream& os) const
     "Scordatura";
 
   if (fScordaturaStringTuningsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrStringTuning>::const_iterator
+    std::list<S_msrStringTuning>::const_iterator
       iBegin = fScordaturaStringTuningsList.begin (),
       iEnd   = fScordaturaStringTuningsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
   }
   else {
     os <<
-      " : no string tunings" <<
-      endl;
+      " : no std::string tunings" <<
+      std::endl;
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrScordatura& elt)
+std::ostream& operator << (std::ostream& os, const S_msrScordatura& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -308,7 +306,7 @@ msrAccordionRegistration::msrAccordionRegistration (
   int          highDotsNumber,
   int          middleDotsNumber,
   int          lowDotsNumber)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -325,7 +323,7 @@ void msrAccordionRegistration::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrAccordionRegistration::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrAccordionRegistration>*
@@ -336,7 +334,7 @@ void msrAccordionRegistration::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrAccordionRegistration::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -347,7 +345,7 @@ void msrAccordionRegistration::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrAccordionRegistration::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrAccordionRegistration>*
@@ -358,7 +356,7 @@ void msrAccordionRegistration::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrAccordionRegistration::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -367,9 +365,9 @@ void msrAccordionRegistration::acceptOut (basevisitor* v)
 void msrAccordionRegistration::browseData (basevisitor* v)
 {}
 
-string msrAccordionRegistration::asString () const
+std::string msrAccordionRegistration::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "AccordionRegistration" <<
@@ -381,22 +379,22 @@ string msrAccordionRegistration::asString () const
   return s.str ();
 }
 
-void msrAccordionRegistration::print (ostream& os) const
+void msrAccordionRegistration::print (std::ostream& os) const
 {
   ++gIndenter;
 
-  os << asString () << endl;
+  os << asString () << std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrAccordionRegistration& elt)
+std::ostream& operator << (std::ostream& os, const S_msrAccordionRegistration& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -418,7 +416,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
 msrHarpPedalsTuning::msrHarpPedalsTuning (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {}
@@ -433,7 +431,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningNewbornClone ()
     gLogStream <<
       "Creating a newborn clone of a " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -450,7 +448,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
     gLogStream <<
       "Creating a newborn clone of a " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -465,13 +463,13 @@ void msrHarpPedalsTuning::addPedalTuning (
   msrDiatonicPitchKind diatonicPitchKind,
   msrAlterationKind    alterationKind)
 {
-  // is diatonicPitch in the part renaming map?
-  map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
+  // is diatonicPitch in the part renaming std::map?
+  std::map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
     it =
       fHarpPedalsAlterationKindsMap.find (diatonicPitchKind);
 
   if (it != fHarpPedalsAlterationKindsMap.end ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "pedal tuning '" <<
@@ -496,7 +494,7 @@ void msrHarpPedalsTuning::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarpPedalsTuning::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarpPedalsTuning>*
@@ -507,7 +505,7 @@ void msrHarpPedalsTuning::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarpPedalsTuning::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -518,7 +516,7 @@ void msrHarpPedalsTuning::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarpPedalsTuning::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarpPedalsTuning>*
@@ -529,7 +527,7 @@ void msrHarpPedalsTuning::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarpPedalsTuning::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -538,9 +536,9 @@ void msrHarpPedalsTuning::acceptOut (basevisitor* v)
 void msrHarpPedalsTuning::browseData (basevisitor* v)
 {}
 
-string msrHarpPedalsTuning::asString () const
+std::string msrHarpPedalsTuning::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "HarpPedalsTuning" <<
@@ -550,7 +548,7 @@ string msrHarpPedalsTuning::asString () const
   if (fHarpPedalsAlterationKindsMap.size ()) {
     ++gIndenter;
 
-    map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
+    std::map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
       iBegin = fHarpPedalsAlterationKindsMap.begin (),
       iEnd   = fHarpPedalsAlterationKindsMap.end (),
       i      = iBegin;
@@ -578,7 +576,7 @@ string msrHarpPedalsTuning::asString () const
   return s.str ();
 }
 
-void msrHarpPedalsTuning::print (ostream& os) const
+void msrHarpPedalsTuning::print (std::ostream& os) const
 {
   os <<
     "[HarpPedalsTuning" <<
@@ -587,9 +585,9 @@ void msrHarpPedalsTuning::print (ostream& os) const
   if (fHarpPedalsAlterationKindsMap.size ()) {
     ++gIndenter;
 
-    os << endl;
+    os << std::endl;
 
-    map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
+    std::map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
       iBegin = fHarpPedalsAlterationKindsMap.begin (),
       iEnd   = fHarpPedalsAlterationKindsMap.end (),
       i      = iBegin;
@@ -612,19 +610,19 @@ void msrHarpPedalsTuning::print (ostream& os) const
   else {
     os <<
       " empty" <<
-      endl;
+      std::endl;
   }
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrHarpPedalsTuning& elt)
+std::ostream& operator << (std::ostream& os, const S_msrHarpPedalsTuning& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -653,7 +651,7 @@ msrPedal::msrPedal (
   msrPedalTypeKind pedalTypeKind,
   msrPedalLineKind pedalLineKind,
   msrPedalSignKind pedalSignKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -670,7 +668,7 @@ void msrPedal::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPedal::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPedal>*
@@ -681,7 +679,7 @@ void msrPedal::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPedal::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -692,7 +690,7 @@ void msrPedal::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPedal::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrPedal>*
@@ -703,7 +701,7 @@ void msrPedal::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrPedal::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -712,10 +710,10 @@ void msrPedal::acceptOut (basevisitor* v)
 void msrPedal::browseData (basevisitor* v)
 {}
 
-string msrPedalTypeKindAsString (
+std::string msrPedalTypeKindAsString (
   msrPedalTypeKind pedalTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (pedalTypeKind) {
     case msrPedalTypeKind::kPedalType_NO_:
@@ -738,16 +736,16 @@ string msrPedalTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrPedalTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrPedalTypeKind& elt)
 {
   os << msrPedalTypeKindAsString (elt);
   return os;
 }
 
-string msrPedalLineKindAsString (
+std::string msrPedalLineKindAsString (
   msrPedalLineKind pedalLineKind)
 {
-  string result;
+  std::string result;
 
   switch (pedalLineKind) {
     case msrPedalLineKind::kPedalLineYes:
@@ -761,16 +759,16 @@ string msrPedalLineKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrPedalLineKind& elt)
+std::ostream& operator << (std::ostream& os, const msrPedalLineKind& elt)
 {
   os << msrPedalLineKindAsString (elt);
   return os;
 }
 
-string msrPedalSignKindAsString (
+std::string msrPedalSignKindAsString (
   msrPedalSignKind pedalSignKind)
 {
-  string result;
+  std::string result;
 
   switch (pedalSignKind) {
     case msrPedalSignKind::kPedalSignYes:
@@ -784,13 +782,13 @@ string msrPedalSignKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrPedalSignKind& elt)
+std::ostream& operator << (std::ostream& os, const msrPedalSignKind& elt)
 {
   os << msrPedalSignKindAsString (elt);
   return os;
 }
 
-void msrPedal::print (ostream& os) const
+void msrPedal::print (std::ostream& os) const
 {
   os <<
     "[Pedal" <<
@@ -799,16 +797,16 @@ void msrPedal::print (ostream& os) const
     ", fPedalSignKind: " << fPedalSignKind <<
     ", line " << fInputLineNumber <<
     ']' <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrPedal& elt)
+std::ostream& operator << (std::ostream& os, const S_msrPedal& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -830,7 +828,7 @@ S_msrDamp msrDamp::create (
 msrDamp::msrDamp (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {}
@@ -843,7 +841,7 @@ void msrDamp::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDamp::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDamp>*
@@ -854,7 +852,7 @@ void msrDamp::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDamp::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -865,7 +863,7 @@ void msrDamp::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDamp::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDamp>*
@@ -876,7 +874,7 @@ void msrDamp::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDamp::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -885,21 +883,21 @@ void msrDamp::acceptOut (basevisitor* v)
 void msrDamp::browseData (basevisitor* v)
 {}
 
-void msrDamp::print (ostream& os) const
+void msrDamp::print (std::ostream& os) const
 {
   os <<
     "Damp" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrDamp& elt)
+std::ostream& operator << (std::ostream& os, const S_msrDamp& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -921,7 +919,7 @@ S_msrDampAll msrDampAll::create (
 msrDampAll::msrDampAll (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {}
@@ -934,7 +932,7 @@ void msrDampAll::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDampAll::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDampAll>*
@@ -945,7 +943,7 @@ void msrDampAll::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDampAll::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -956,7 +954,7 @@ void msrDampAll::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrDampAll::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrDampAll>*
@@ -967,7 +965,7 @@ void msrDampAll::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrDampAll::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -976,21 +974,21 @@ void msrDampAll::acceptOut (basevisitor* v)
 void msrDampAll::browseData (basevisitor* v)
 {}
 
-void msrDampAll::print (ostream& os) const
+void msrDampAll::print (std::ostream& os) const
 {
   os <<
     "DampAll" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrDampAll& elt)
+std::ostream& operator << (std::ostream& os, const S_msrDampAll& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

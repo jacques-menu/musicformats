@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "mfServiceRunData.h"
 
@@ -22,8 +22,6 @@
 
 #include "msrBrowsers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -70,14 +68,14 @@ void msr2namesVisitor::visitStart (S_msrScore& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrScore" <<
-      endl;
+      std::endl;
   }
 
   gLogStream <<
     "MSR names in \"" <<
     gGlobalServiceRunData->getInputSourceName () <<
     "\":" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 }
@@ -89,45 +87,45 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrScore" <<
-      endl;
+      std::endl;
   }
 
   gLogStream <<
     "The score contains:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 3;
 
   gLogStream <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fPartGroupsCounter,
       "part group",
       "part groups") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fPartsCounter,
       "part",
       "parts") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fStavesCounter,
       "stave",
       "staves") <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fVoicesCounter,
       "voice",
       "voices") <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
@@ -138,7 +136,7 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrPartGroup" <<
-      endl;
+      std::endl;
   }
 
   ++fPartGroupsCounter;
@@ -154,32 +152,32 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
       partGroupElementsSize,
       " part or sub part group",
       " parts or sub part groups") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 25;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "partGroupName" << " : \"" <<
     elt->getPartGroupName  () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupNameDisplayText" << " : \"" <<
     elt->getPartGroupNameDisplayText  () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupAbbrevation" << " : \"" <<
     elt->getPartGroupAbbreviation  () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "partGroupInstrumentName" << " : \"" <<
       elt->getPartGroupInstrumentName () << "\"" <<
-    endl << endl;
+    std::endl << std::endl;
 }
 
 void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
@@ -189,7 +187,7 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrPartGroup" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -199,7 +197,7 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrPart" <<
-      endl;
+      std::endl;
   }
 
   ++fPartsCounter;
@@ -214,39 +212,39 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
     mfSingularOrPlural (
       partStavesMapSize,
       "staff", "staves") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 27;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "partID" << " : \"" <<
     elt->getPartID () << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "partMsrName" << " : \"" <<
     elt->getPartMsrName () << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "partName" << " : \"" <<
     elt->getPartName  () << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "partAbbrevation" << " : \"" <<
     elt->getPartAbbreviation () << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "partInstrumentName" << " : \"" <<
     elt->getPartInstrumentName () << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "partInstrumentAbbreviation" << " : \"" <<
     elt->getPartInstrumentAbbreviation () << "\"" <<
-    endl;
+    std::endl;
 
-  gLogStream << endl;
+  gLogStream << std::endl;
 }
 
 void msr2namesVisitor::visitEnd (S_msrPart& elt)
@@ -256,7 +254,7 @@ void msr2namesVisitor::visitEnd (S_msrPart& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrPart" <<
-      endl;
+      std::endl;
   }
 }
 
@@ -266,7 +264,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStaff" <<
-      endl;
+      std::endl;
   }
 
   ++fStavesCounter;
@@ -281,30 +279,30 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
     mfSingularOrPlural (
       staffAllVoicesVectorSize,
       "voice", "voices") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
 
   const int fieldWidth = 28;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "staffNumber" << " : " <<
     elt->getStaffNumber () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "staffInstrumentName" << ": \"" <<
     elt->getStaffInstrumentName () << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "staffInstrumentAbbreviation" << ": \"" <<
     elt->getStaffInstrumentAbbreviation () << "\"" <<
-    endl;
+    std::endl;
 
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   fOnGoingStaff = true;
 }
@@ -316,7 +314,7 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrStaff" <<
-      endl;
+      std::endl;
   }
 
   fOnGoingStaff = false;
@@ -328,7 +326,7 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrVoice" <<
-      endl;
+      std::endl;
   }
 
   ++fVoicesCounter;
@@ -341,23 +339,23 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
     mfSingularOrPlural (
       voiceStanzasMapSize,
       "stanza", "stanzas") <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 28;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "voiceNumber" << " : " <<
     elt->getVoiceNumber () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "musicHasBeenInsertedInVoice" << " : " <<
     elt->getMusicHasBeenInsertedInVoice () <<
-    endl;
+    std::endl;
 
-  gLogStream << endl;
+  gLogStream << std::endl;
 }
 
 void msr2namesVisitor::visitEnd (S_msrVoice& elt)
@@ -367,7 +365,7 @@ void msr2namesVisitor::visitEnd (S_msrVoice& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrVoice" <<
-      endl;
+      std::endl;
   }
 }
 

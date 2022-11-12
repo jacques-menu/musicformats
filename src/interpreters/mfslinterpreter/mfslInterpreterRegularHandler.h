@@ -32,8 +32,8 @@ class EXP mfslInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<mfslInterpreterRegularHandler> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_mfslInterpreterInsiderHandler
                                               insiderOahHandler);
 
@@ -43,8 +43,8 @@ class EXP mfslInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           mfslInterpreterRegularHandler (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_mfslInterpreterInsiderHandler
                                               insiderOahHandler);
 
@@ -86,7 +86,7 @@ class EXP mfslInterpreterRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -114,7 +114,7 @@ class EXP mfslInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<mfslInterpreterRegularHandler> S_mfslInterpreterRegularHandler;
-EXP ostream& operator << (ostream& os, const S_mfslInterpreterRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslInterpreterRegularHandler& elt);
 
 
 }

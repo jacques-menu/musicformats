@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -26,8 +26,6 @@
 
 #include "msrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -53,13 +51,13 @@ msrIdentification::~msrIdentification ()
 
 void msrIdentification::setIdentificationWorkNumber (
   int           inputLineNumber,
-  const string& val)
+  const std::string& val)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting workNumber to \"" << val << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -68,13 +66,13 @@ void msrIdentification::setIdentificationWorkNumber (
 
 void msrIdentification::setIdentificationWorkCreditTypeTitle (
   int           inputLineNumber,
-  const string& val)
+  const std::string& val)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting workCreditTypeTitle to \"" << val << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -83,13 +81,13 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
 
 void msrIdentification::setIdentificationOpus (
   int           inputLineNumber,
-  const string& val)
+  const std::string& val)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting opus to \"" << val << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -98,13 +96,13 @@ void msrIdentification::setIdentificationOpus (
 
 void msrIdentification::setIdentificationMovementNumber (
   int           inputLineNumber,
-  const string& val)
+  const std::string& val)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting movementNumber to \"" << val << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -113,13 +111,13 @@ void msrIdentification::setIdentificationMovementNumber (
 
 void msrIdentification::setIdentificationMovementTitle (
   int           inputLineNumber,
-  const string& val)
+  const std::string& val)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting movementTitle to \"" << val << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -128,13 +126,13 @@ void msrIdentification::setIdentificationMovementTitle (
 
 void msrIdentification::setIdentificationEncodingDate (
   int           inputLineNumber,
-  const string& val)
+  const std::string& val)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting encodingDate to \"" << val << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -143,13 +141,13 @@ void msrIdentification::setIdentificationEncodingDate (
 
 void msrIdentification::setIdentificationMiscellaneousField (
   int           inputLineNumber,
-  const string& val)
+  const std::string& val)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting miscellaneousField to \"" << val << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -158,13 +156,13 @@ void msrIdentification::setIdentificationMiscellaneousField (
 
 void msrIdentification::setIdentificationScoreInstrument (
   int           inputLineNumber,
-  const string& val)
+  const std::string& val)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting scoreInstrument to \"" << val << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -173,13 +171,13 @@ void msrIdentification::setIdentificationScoreInstrument (
 
 void msrIdentification::appendComposer (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending composer \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -188,13 +186,13 @@ void msrIdentification::appendComposer (
 
 void msrIdentification::appendLyricist (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending lyricist \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -203,13 +201,13 @@ void msrIdentification::appendLyricist (
 
 void msrIdentification::appendArranger (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending arranger \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -218,13 +216,13 @@ void msrIdentification::appendArranger (
 
 void msrIdentification::appendPoet (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending poet \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -233,13 +231,13 @@ void msrIdentification::appendPoet (
 
 void msrIdentification::appendTranslator (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending translator \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -248,13 +246,13 @@ void msrIdentification::appendTranslator (
 
 void msrIdentification::appendArtist (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending artist \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -263,13 +261,13 @@ void msrIdentification::appendArtist (
 
 void msrIdentification::appendSoftware (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending software \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -278,13 +276,13 @@ void msrIdentification::appendSoftware (
 
 void msrIdentification::appendRight (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending right \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -293,13 +291,13 @@ void msrIdentification::appendRight (
 
 void msrIdentification::appendSource (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appendings source \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -308,13 +306,13 @@ void msrIdentification::appendSource (
 
 void msrIdentification::appendRelation (
   int           inputLineNumber,
-  const string& value)
+  const std::string& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending relation \"" << value << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -358,7 +356,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationComposersList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationComposersList.begin (); i!=fIdentificationComposersList.end (); ++i) {
       size_t length = (*i).size ();
@@ -369,7 +367,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationLyricistsList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationLyricistsList.begin (); i!=fIdentificationLyricistsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -380,7 +378,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationArrangersList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationArrangersList.begin (); i!=fIdentificationArrangersList.end (); ++i) {
       size_t length = (*i).size ();
@@ -391,7 +389,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationPoetsList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationPoetsList.begin (); i!=fIdentificationPoetsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -402,7 +400,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationTranslatorsList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationTranslatorsList.begin (); i!=fIdentificationTranslatorsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -413,7 +411,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationArtistsList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationArtistsList.begin (); i!=fIdentificationArtistsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -424,7 +422,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationSoftwaresList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationSoftwaresList.begin (); i!=fIdentificationSoftwaresList.end (); ++i) {
       size_t length = (*i).size ();
@@ -435,7 +433,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationRightsList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationRightsList.begin (); i!=fIdentificationRightsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -446,7 +444,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationSourcesList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationSourcesList.begin (); i!=fIdentificationSourcesList.end (); ++i) {
       size_t length = (*i).size ();
@@ -457,7 +455,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationRelationsList.size ()) {
-    list<string>::const_iterator i;
+    std::list<std::string>::const_iterator i;
 
     for (i=fIdentificationRelationsList.begin (); i!=fIdentificationRelationsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -475,7 +473,7 @@ void msrIdentification::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrIdentification::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrIdentification>*
@@ -486,7 +484,7 @@ void msrIdentification::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrIdentification::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -497,7 +495,7 @@ void msrIdentification::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrIdentification::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrIdentification>*
@@ -508,7 +506,7 @@ void msrIdentification::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrIdentification::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -517,9 +515,9 @@ void msrIdentification::acceptOut (basevisitor* v)
 void msrIdentification::browseData (basevisitor* v)
 {}
 
-string msrIdentification::asString () const
+std::string msrIdentification::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[ Identification" <<
@@ -534,11 +532,11 @@ string msrIdentification::asString () const
   return s.str ();
 }
 
-void msrIdentification::print (ostream& os) const
+void msrIdentification::print (std::ostream& os) const
 {
   os <<
     "[Identification" <<
-    endl;
+    std::endl;
 
   const int fieldWidth = 20;
 
@@ -547,248 +545,248 @@ void msrIdentification::print (ostream& os) const
   ++gIndenter;
 
   if (fIdentificationWorkNumber.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationWorkNumber" << " : \"" <<
       fIdentificationWorkNumber <<
       "\"" <<
-      endl;
+      std::endl;
 
     emptyIdentification = false;
   }
 
   if (fIdentificationWorkCreditTypeTitle.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationWorkCreditTypeTitle" << " : \"" <<
       fIdentificationWorkCreditTypeTitle <<
       "\"" <<
-      endl;
+      std::endl;
 
     emptyIdentification = false;
   }
 
   if (fIdentificationOpus.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationOpus" << " : \"" <<
       fIdentificationOpus <<
       "\"" <<
-      endl;
+      std::endl;
 
     emptyIdentification = false;
   }
 
   if (fIdentificationMovementNumber.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationMovementNumber" << " : \"" <<
       fIdentificationMovementNumber <<
       "\"" <<
-      endl;
+      std::endl;
 
     emptyIdentification = false;
   }
 
   if (fIdentificationMovementTitle.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationMovementTitle" << " : \"" <<
       fIdentificationMovementTitle <<
       "\"" <<
-      endl;
+      std::endl;
 
     emptyIdentification = false;
   }
 
   if (fIdentificationEncodingDate.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationEncodingDate" << " : \"" <<
       fIdentificationEncodingDate <<
       "\"" <<
-      endl;
+      std::endl;
 
     emptyIdentification = false;
   }
 
   if (fIdentificationMiscellaneousField.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationMiscellaneousField" << " : \"" <<
       fIdentificationMiscellaneousField <<
       "\"" <<
-      endl;
+      std::endl;
 
     emptyIdentification = false;
   }
 
   if (fIdentificationComposersList.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationComposersList" << " : " <<
-      endl;
+      std::endl;
 
     for (
-      list<string>::const_iterator i = fIdentificationComposersList.begin ();
+      std::list<std::string>::const_iterator i = fIdentificationComposersList.begin ();
       i != fIdentificationComposersList.end ();
       ++i
     ) {
       os <<
         gTab << "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
     } // for
 
     emptyIdentification = false;
   }
 
   if (fIdentificationLyricistsList.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationLyricistsList" << " : " <<
-      endl;
+      std::endl;
 
     for (
-      list<string>::const_iterator i = fIdentificationLyricistsList.begin ();
+      std::list<std::string>::const_iterator i = fIdentificationLyricistsList.begin ();
       i != fIdentificationLyricistsList.end ();
       ++i
     ) {
       os <<
         gTab << "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
     } // for
 
     emptyIdentification = false;
   }
 
   if (fIdentificationArrangersList.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationArrangersList" << " : " <<
-      endl;
+      std::endl;
 
     for (
-      list<string>::const_iterator i = fIdentificationArrangersList.begin ();
+      std::list<std::string>::const_iterator i = fIdentificationArrangersList.begin ();
       i != fIdentificationArrangersList.end ();
       ++i
     ) {
       os <<
         gTab << "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
     } // for
 
     emptyIdentification = false;
   }
 
   if (fIdentificationPoetsList.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationPoetsList" << " : " <<
-      endl;
+      std::endl;
 
     for (
-      list<string>::const_iterator i = fIdentificationPoetsList.begin ();
+      std::list<std::string>::const_iterator i = fIdentificationPoetsList.begin ();
       i != fIdentificationPoetsList.end ();
       ++i
     ) {
       os <<
         gTab << "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
     } // for
 
     emptyIdentification = false;
   }
 
   if (fIdentificationTranslatorsList.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationTranslatorsList" << " : " <<
-      endl;
+      std::endl;
 
     for (
-      list<string>::const_iterator i = fIdentificationTranslatorsList.begin ();
+      std::list<std::string>::const_iterator i = fIdentificationTranslatorsList.begin ();
       i != fIdentificationTranslatorsList.end ();
       ++i
     ) {
       os <<
         gTab << "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
     } // for
 
     emptyIdentification = false;
   }
 
   if (fIdentificationSoftwaresList.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationSoftwaresList" << " : " <<
-      endl;
+      std::endl;
 
     for (
-      list<string>::const_iterator i = fIdentificationSoftwaresList.begin ();
+      std::list<std::string>::const_iterator i = fIdentificationSoftwaresList.begin ();
       i != fIdentificationSoftwaresList.end ();
       ++i
     ) {
       os <<
         gTab << "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
     } // for
 
     emptyIdentification = false;
   }
 
   if (fIdentificationRightsList.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationRightsList" << " : " <<
-      endl;
+      std::endl;
 
     for (
-      list<string>::const_iterator i = fIdentificationRightsList.begin ();
+      std::list<std::string>::const_iterator i = fIdentificationRightsList.begin ();
       i != fIdentificationRightsList.end ();
       ++i
     ) {
       os <<
         gTab << "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
     } // for
 
     emptyIdentification = false;
   }
 
   if (fIdentificationSourcesList.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationSourcesList" << " : " <<
-      endl;
+      std::endl;
 
     for (
-      list<string>::const_iterator i = fIdentificationSourcesList.begin ();
+      std::list<std::string>::const_iterator i = fIdentificationSourcesList.begin ();
       i != fIdentificationSourcesList.end ();
       ++i
     ) {
       os <<
         gTab << "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
     } // for
 
     emptyIdentification = false;
   }
 
   if (fIdentificationRelationsList.size ()) {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "fIdentificationRelationsList" << " : " <<
-      endl;
+      std::endl;
 
     for (
-      list<string>::const_iterator i = fIdentificationRelationsList.begin ();
+      std::list<std::string>::const_iterator i = fIdentificationRelationsList.begin ();
       i != fIdentificationRelationsList.end ();
       ++i
     ) {
       os <<
         gTab << "\"" << (*i) << "\"" <<
-        endl;
+        std::endl;
     } // for
 
     emptyIdentification = false;
@@ -797,21 +795,21 @@ void msrIdentification::print (ostream& os) const
   if (emptyIdentification) {
     os <<
       ' ' << "nothing specified" <<
-      endl;
+      std::endl;
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrIdentification& elt)
+std::ostream& operator << (std::ostream& os, const S_msrIdentification& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

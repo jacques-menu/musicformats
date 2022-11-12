@@ -29,14 +29,12 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 // constants
-const string   msrSegmentElement::K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
+const std::string   msrSegmentElement::K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
 
 const Rational msrSegmentElement::K_NO_WHOLE_NOTES (-444444, 1);
 
@@ -61,7 +59,7 @@ msrSegmentElement::~msrSegmentElement ()
 
 void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   const Rational& wholeNotes,
-  const string&   context)
+  const std::string&   context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -74,7 +72,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
       "', context: \"" <<
       context <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -89,7 +87,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 
 // void msrSegmentElement::setSegmentElementMeasurePosition (
 //   const Rational& measurePosition,
-//   const string&   context)
+//   const std::string&   context)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -105,7 +103,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 // /* JMI
@@ -121,7 +119,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //
 // void msrSegmentElement::setSegmentElementVoicePosition (
 //   const Rational& voicePosition,
-//   const string&   context)
+//   const std::string&   context)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -134,7 +132,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -149,7 +147,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //
 // void msrSegmentElement::setSegmentElementMeasureMoment (
 //   const msrMoment& measureMoment,
-//   const string&    context)
+//   const std::string&    context)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
@@ -164,7 +162,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -173,7 +171,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //
 // void msrSegmentElement::setSegmentElementVoiceMoment (
 //   const msrMoment& voiceMoment,
-//   const string&    context)
+//   const std::string&    context)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
@@ -186,7 +184,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -201,7 +199,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //
 // void msrSegmentElement::assignSegmentElementVoicePosition (
 //   Rational&     voicePosition,
-//   const string& context)
+//   const std::string& context)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -214,7 +212,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -236,7 +234,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -254,7 +252,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 // }
@@ -275,7 +273,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegmentElement::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -288,7 +286,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegmentElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -301,7 +299,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegmentElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -314,37 +312,37 @@ void msrSegmentElement::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegmentElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
   }
 }
 
-string msrSegmentElement::asString () const
+std::string msrSegmentElement::asString () const
 {
   // this is overriden all in actual elements
   return "??? msrSegmentElement::asString () ???";
 }
 
-string msrSegmentElement::asShortString () const
+std::string msrSegmentElement::asShortString () const
 {
   // this can be overriden in actual elements
   return asString ();
 }
 
-void msrSegmentElement::print (ostream& os) const
+void msrSegmentElement::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSegmentElement& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSegmentElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

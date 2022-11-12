@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -47,22 +47,20 @@
 #include "msr2guidoInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
   S_msrScore   theMsrScore,
-  string       passNumber1,
-  string       passDescription1,
-  string       passNumber2,
-  string       passDescription2,
-  string       passNumber3,
-  string       passDescription3,
-  ostream&     out,
-  ostream&     err,
+  std::string       passNumber1,
+  std::string       passDescription1,
+  std::string       passNumber2,
+  std::string       passDescription2,
+  std::string       passNumber3,
+  std::string       passDescription3,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   // has quiet mode been requested?
@@ -123,31 +121,31 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl <<
+      std::endl <<
       "msrScore2guidoWithHandler(), secondMxsr contains:" <<
-      endl << endl;
+      std::endl << std::endl;
 
     ++gIndenter;
 
     printMxsr (secondMxsr, gLogStream);
 
     gLogStream <<
-      endl;
+      std::endl;
 
     --gIndenter;
 
     gLogStream <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
   // convert the MXSR to Guido
   // ------------------------------------------------------
 
-  string
+  std::string
     outputFileName =
       handler->
         fetchOutputFileNameFromTheOptions ();

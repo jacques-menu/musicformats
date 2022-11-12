@@ -40,8 +40,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -78,7 +76,7 @@ msrHarmonyInterval::msrHarmonyInterval (
       "==> Creating harmony item '" <<
       harmonyIntervalAsString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -97,23 +95,23 @@ S_msrHarmonyInterval msrHarmonyInterval::createHarmonyIntervalNewbornClone ()
   return newbornClone;
 }
 
-string msrHarmonyInterval::harmonyIntervalAsString () const
+std::string msrHarmonyInterval::harmonyIntervalAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   const int fieldWidth = 19;
 
-  s << left <<
+  s << std::left <<
     "HarmonyInterval" <<
     ": " <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
     "harmonyIntervalRelativeOctave: " << fHarmonyIntervalRelativeOctave;
 
   return s.str ();
 }
 
-string msrHarmonyInterval::harmonyIntervalAsShortString () const
+std::string msrHarmonyInterval::harmonyIntervalAsShortString () const
 {
   return
     msrIntervalKindAsString (fHarmonyIntervalIntervalKind);
@@ -157,13 +155,13 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "--> computing intervalDifference betwwen '" <<
       asShortString () <<
       "' and '" <<
       otherHarmonyInterval->asShortString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -189,7 +187,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       "' and '" <<
       operand2->asShortString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -249,7 +247,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       invertInterval <<
       ", resultRelativeOctave = " <<
       resultRelativeOctave <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1424,7 +1422,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       "--> base resultIntervalKind = '" <<
       msrIntervalKindAsString (resultIntervalKind) <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1457,7 +1455,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       "--> result = '" <<
       result->asShortString () <<
       "'" <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -2605,7 +2603,7 @@ void msrHarmonyInterval::acceptIn (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmonyInterval::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmonyInterval>*
@@ -2616,7 +2614,7 @@ void msrHarmonyInterval::acceptIn (basevisitor* v) {
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmonyInterval::visitStart ()" <<
-             endl;
+             std::endl;
         p->visitStart (elem);
   }
 }
@@ -2625,7 +2623,7 @@ void msrHarmonyInterval::acceptOut (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmonyInterval::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmonyInterval>*
@@ -2636,7 +2634,7 @@ void msrHarmonyInterval::acceptOut (basevisitor* v) {
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmonyInterval::visitEnd ()" <<
-            endl;
+            std::endl;
         p->visitEnd (elem);
   }
 }
@@ -2645,9 +2643,9 @@ void msrHarmonyInterval::browseData (basevisitor* v)
 {}
 */
 
-string msrHarmonyInterval::asString () const
+std::string msrHarmonyInterval::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[HarmonyInterval " <<
@@ -2659,9 +2657,9 @@ string msrHarmonyInterval::asString () const
   return s.str ();
 }
 
-string msrHarmonyInterval::asShortString () const
+std::string msrHarmonyInterval::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '[' <<
@@ -2673,43 +2671,43 @@ string msrHarmonyInterval::asShortString () const
   return s.str ();
 }
 
-void msrHarmonyInterval::print (ostream& os) const
+void msrHarmonyInterval::print (std::ostream& os) const
 {
   os <<
     "HarmonyInterval" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
+  os << std::left <<
   /* JMI
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "harmonyIntervalNumber" << " : " << fHarmonyIntervalNumber <<
-    endl <<
+    std::endl <<
     */
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "harmonyIntervalIntervalKind" << " : " <<
       msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "harmonyIntervalRelativeOctave" << " : " << fHarmonyIntervalRelativeOctave <<
   /* JMI
     ", line: " << fInputLineNumber <<
     */
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrHarmonyInterval& elt)
+std::ostream& operator << (std::ostream& os, const S_msrHarmonyInterval& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -2717,10 +2715,10 @@ ostream& operator << (ostream& os, const S_msrHarmonyInterval& elt)
 
 // modes
 //______________________________________________________________________________
-string msrModeKindAsString (
+std::string msrModeKindAsString (
   msrModeKind modeKind)
 {
-  string result;
+  std::string result;
 
   switch (modeKind) {
     case msrModeKind::kMode_NO_:
@@ -2758,7 +2756,7 @@ string msrModeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrModeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrModeKind& elt)
 {
   os << msrModeKindAsString (elt);
   return os;
@@ -2766,7 +2764,7 @@ ostream& operator << (ostream& os, const msrModeKind& elt)
 
 msrModeKind modeKindFromString (
   int           inputLineNumber,
-  const string& modeString)
+  const std::string& modeString)
 {
   // no CamelCase here, these strings are used in the command line options
   msrModeKind result = msrModeKind::kMode_NO_;
@@ -2790,10 +2788,10 @@ msrModeKind modeKindFromString (
   else if (modeString == "locrian")
     result = msrModeKind::kModeLocrian;
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
-      "mode string \"" <<
+      "mode std::string \"" <<
       modeString <<
       "\" is unknown" <<
       ", line = " << inputLineNumber;
@@ -2813,10 +2811,10 @@ msrModeKind modeKindFromString (
 // constant
 const int K_HARMONY_NO_INVERSION = -1;
 
-string msrHarmonyKindAsString (
+std::string msrHarmonyKindAsString (
   msrHarmonyKind harmonyKind)
 {
-  string result;
+  std::string result;
 
   switch (harmonyKind) {
     case msrHarmonyKind::kHarmony_NO_:
@@ -2969,16 +2967,16 @@ string msrHarmonyKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrHarmonyKind& elt)
+std::ostream& operator << (std::ostream& os, const msrHarmonyKind& elt)
 {
   os << msrHarmonyKindAsString (elt);
   return os;
 }
 
-string msrHarmonyKindAsShortString (
+std::string msrHarmonyKindAsShortString (
   msrHarmonyKind harmonyKind)
 {
-  string result;
+  std::string result;
 
   switch (harmonyKind) {
     case msrHarmonyKind::kHarmony_NO_:
@@ -3131,10 +3129,10 @@ string msrHarmonyKindAsShortString (
   return result;
 }
 
-string msrHarmonyKindShortName (
+std::string msrHarmonyKindShortName (
   msrHarmonyKind harmonyKind)
 {
-  string result;
+  std::string result;
 
   switch (harmonyKind) {
     case msrHarmonyKind::kHarmony_NO_:
@@ -3288,7 +3286,7 @@ string msrHarmonyKindShortName (
 }
 
 msrHarmonyKind msrHarmonyKindFromString (
-  const string& theString)
+  const std::string& theString)
 {
   msrHarmonyKind result = msrHarmonyKind::kHarmony_NO_;
 
@@ -3418,10 +3416,10 @@ msrHarmonyKind msrHarmonyKindFromString (
   return result;
 }
 
-map<string, msrHarmonyKind>
+std::map<std::string, msrHarmonyKind>
   gGlobalHarmonyKindsMap;
 
-list<string>
+std::list<std::string>
   gHarmonyKindsNamesList;
 
 void initializeHarmonyKinds ()
@@ -3480,9 +3478,9 @@ void initializeHarmonyKinds ()
   }
 }
 
-string existingHarmonyKinds (size_t namesListMaxLength)
+std::string existingHarmonyKinds (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t harmonyKindsMapSize =
     gGlobalHarmonyKindsMap.size ();
@@ -3495,18 +3493,18 @@ string existingHarmonyKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      map<string, msrHarmonyKind>::const_iterator i =
+      std::map<std::string, msrHarmonyKind>::const_iterator i =
         gGlobalHarmonyKindsMap.begin ();
       i != gGlobalHarmonyKindsMap.end ();
       ++i
     ) {
-      string theString = (*i).first;
+      std::string theString = (*i).first;
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -3527,9 +3525,9 @@ string existingHarmonyKinds (size_t namesListMaxLength)
   return s.str ();
 }
 
-string existingHarmonyKindsNames (size_t namesListMaxLength)
+std::string existingHarmonyKindsNames (size_t namesListMaxLength)
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t harmonyKindsNamesListSize =
     gHarmonyKindsNamesList.size ();
@@ -3542,18 +3540,18 @@ string existingHarmonyKindsNames (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      list<string>::const_iterator i =
+      std::list<std::string>::const_iterator i =
         gHarmonyKindsNamesList.begin ();
       i != gHarmonyKindsNamesList.end ();
       ++i
     ) {
-      string theString = (*i);
+      std::string theString = (*i);
 
       ++count;
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << endl << gIndenter.getSpacer ();
+        s << std::endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
@@ -3609,7 +3607,7 @@ msrHarmonyDegree::msrHarmonyDegree (
       "Creating harmony degree '" <<
       asString () <<
       "', line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -3696,7 +3694,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmonyDegree::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmonyDegree>*
@@ -3707,7 +3705,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmonyDegree::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -3718,7 +3716,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmonyDegree::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmonyDegree>*
@@ -3729,7 +3727,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmonyDegree::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -3738,10 +3736,10 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
 void msrHarmonyDegree::browseData (basevisitor* v)
 {}
 
-string msrHarmonyDegreeTypeKindAsString (
+std::string msrHarmonyDegreeTypeKindAsString (
   msrHarmonyDegreeTypeKind harmonyDegreeTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (harmonyDegreeTypeKind) {
     case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd:
@@ -3758,9 +3756,9 @@ string msrHarmonyDegreeTypeKindAsString (
   return result;
 }
 
-string msrHarmonyDegree::harmonyDegreeKindAsShortString () const
+std::string msrHarmonyDegree::harmonyDegreeKindAsShortString () const
 {
-  string result;
+  std::string result;
 
   switch (fHarmonyDegreeTypeKind) {
     case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd:
@@ -3777,9 +3775,9 @@ string msrHarmonyDegree::harmonyDegreeKindAsShortString () const
   return result;
 }
 
-string msrHarmonyDegree::asString () const
+std::string msrHarmonyDegree::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[HarmonyDegree" <<
@@ -3794,18 +3792,18 @@ string msrHarmonyDegree::asString () const
   return s.str ();
 }
 
-void msrHarmonyDegree::print (ostream& os) const
+void msrHarmonyDegree::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt)
+std::ostream& operator << (std::ostream& os, const S_msrHarmonyDegree& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -3842,7 +3840,7 @@ msrHarmonyContents::msrHarmonyContents (
       "==> Creating harmonyContents '" <<
       harmonyContentsAsString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -3862,7 +3860,7 @@ msrHarmonyContents::msrHarmonyContents (
       msrHarmonyStructure::create (
         fHarmonyContentsHarmonyKind);
 
-  const vector<S_msrHarmonyInterval>&
+  const std::vector<S_msrHarmonyInterval>&
     harmonyIntervals =
       harmonyStructure->
         getHarmonyStructureIntervals ();
@@ -3897,9 +3895,9 @@ msrHarmonyContents::msrHarmonyContents (
 msrHarmonyContents::~msrHarmonyContents ()
 {}
 
-string msrHarmonyContents::harmonyContentsAsString () const
+std::string msrHarmonyContents::harmonyContentsAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "HarmonyContents" <<
@@ -3925,7 +3923,7 @@ msrSemiTonesPitchKind msrHarmonyContents::bassSemiTonesPitchKindForHarmonyInvers
     inversionNumber < 0
       ||
     inversionNumber > int (fHarmonyElementsVector.size ()) - 1 ) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Sorry, inversion number '" <<
@@ -3947,7 +3945,7 @@ msrSemiTonesPitchKind msrHarmonyContents::bassSemiTonesPitchKindForHarmonyInvers
 }
 
 void msrHarmonyContents::printAllHarmoniesContents (
-  ostream&              os,
+  std::ostream&              os,
   msrSemiTonesPitchKind rootSemiTonesPitchKind)
 {
   // fetch the root quartertones pitch kind
@@ -3973,7 +3971,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
       gGlobalLpsrOahGroup->
         getLpsrQuarterTonesPitchesLanguageKind ()) <<
     "' 'are:" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -3981,7 +3979,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
     os <<
       msrHarmonyKindAsString (e) <<
       ":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -3993,14 +3991,14 @@ void msrHarmonyContents::printAllHarmoniesContents (
 
     // fetch the intervals items for these intervals
     // with rootSemiTonesPitchKind as root
-    const vector <S_msrHarmonyInterval>&
+    const std::vector <S_msrHarmonyInterval>&
       harmonyStructureIntervals =
         harmonyStructure->
           getHarmonyStructureIntervals ();
 
     if (harmonyStructureIntervals.size ()) {
       // fetch the notes for these intervals
-      vector<S_msrHarmonyInterval>::const_reverse_iterator
+      std::vector<S_msrHarmonyInterval>::const_reverse_iterator
         iBegin = harmonyStructureIntervals.crbegin (),
         iEnd   = harmonyStructureIntervals.crend (),
         i      = iBegin;
@@ -4031,23 +4029,23 @@ void msrHarmonyContents::printAllHarmoniesContents (
         // print it
         const int fieldWidth2 = 8;
 
-        os << left <<
-          setw (fieldWidth2) <<
+        os << std::left <<
+          std::setw (fieldWidth2) <<
           msrQuarterTonesPitchKindAsStringInLanguage (
             noteQuarterTonesPitchKind,
             gGlobalLpsrOahGroup->
               getLpsrQuarterTonesPitchesLanguageKind ()) <<
           " : " <<
           msrIntervalKindAsString (intervalKind) <<
-          endl;
+          std::endl;
 
         if (++i == iEnd) break;
 
-        // no endl here
+        // no std::endl here
       } // for
     }
 
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   } // for
@@ -4060,7 +4058,7 @@ void msrHarmonyContents::acceptIn (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmonyContents::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmonyContents>*
@@ -4071,7 +4069,7 @@ void msrHarmonyContents::acceptIn (basevisitor* v) {
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmonyContents::visitStart ()" <<
-             endl;
+             std::endl;
         p->visitStart (elem);
   }
 }
@@ -4080,7 +4078,7 @@ void msrHarmonyContents::acceptOut (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmonyContents::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmonyContents>*
@@ -4091,7 +4089,7 @@ void msrHarmonyContents::acceptOut (basevisitor* v) {
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmonyContents::visitEnd ()" <<
-            endl;
+            std::endl;
         p->visitEnd (elem);
   }
 }
@@ -4100,35 +4098,35 @@ void msrHarmonyContents::browseData (basevisitor* v)
 {}
 */
 
-void msrHarmonyContents::print (ostream& os) const
+void msrHarmonyContents::print (std::ostream& os) const
 {
   os <<
     "HarmonyContents" <<
   /* JMI
     ", line: " << fInputLineNumber <<
     */
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 17;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "harmonyContentsRootNote" << " : " <<
     msrSemiTonesPitchKindAsString (fHarmonyContentsRootNote) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "harmonyContentsHarmonyKind" << " : " <<
     msrHarmonyKindAsString (fHarmonyContentsHarmonyKind) <<
-    endl;
+    std::endl;
 
   if (fHarmonyElementsVector.size ()) {
     os <<
     mfSingularOrPlural (
       fHarmonyElementsVector.size (), "harmony element", "harmony elements") <<
     ":" <<
-    endl;
+    std::endl;
 
     ++gIndenter;
 
@@ -4139,7 +4137,7 @@ void msrHarmonyContents::print (ostream& os) const
 
       os <<
         harmonyElement <<
-        endl;
+        std::endl;
     } // for
 
     --gIndenter;
@@ -4147,19 +4145,19 @@ void msrHarmonyContents::print (ostream& os) const
   else {
     os <<
       "no notes" <<
-      endl;
+      std::endl;
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrHarmonyContents& elt)
+std::ostream& operator << (std::ostream& os, const S_msrHarmonyContents& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -4171,7 +4169,7 @@ S_msrHarmony msrHarmony::create (
   S_msrMeasure             upLinkToMeasure,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
-  const string&            harmonyKindText,
+  const std::string&            harmonyKindText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
   const Rational&          harmonySoundingWholeNotes,
@@ -4204,7 +4202,7 @@ msrHarmony::msrHarmony (
   S_msrMeasure             upLinkToMeasure,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
-  const string&            harmonyKindText,
+  const std::string&            harmonyKindText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
   const Rational&          harmonySoundingWholeNotes,
@@ -4212,7 +4210,7 @@ msrHarmony::msrHarmony (
   int                      harmoniesStaffNumber,
   msrTupletFactor          harmonyTupletFactor,
   const Rational&          harmonyWholeNotesOffset)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure),
       fHarmonyTupletFactor (
@@ -4280,7 +4278,7 @@ msrHarmony::msrHarmony (
           !=
         fHarmonyBassQuarterTonesPitchKind
         ) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "inversion '" <<
@@ -4310,7 +4308,7 @@ msrHarmony::msrHarmony (
     gLogStream <<
       "Creating harmony " <<
       asString () <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -4327,7 +4325,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
       "Creating a newborn clone of harmony " <<
       asShortString () <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4372,7 +4370,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
       "Creating a deep clone of harmony " <<
       asShortString () <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4417,7 +4415,7 @@ void msrHarmony::setHarmonyTupletFactor (
       " to " <<
       tupletFactor.asString () <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4431,7 +4429,7 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
     gLogStream <<
       "Setting harmony " << asShortString ()  <<
       " note uplink to " << note->asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4447,7 +4445,7 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
 // void msrHarmony::setHarmonyMeasurePosition (
 //   const S_msrMeasure measure,
 //   const Rational&    measurePosition,
-//   const string&      context)
+//   const std::string&      context)
 // {
 //   // set the harmony position in measure, taking it's offset into account
 //
@@ -4483,7 +4481,7 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
 //       "\"" <<
 //       "', harmonyWholeNotesOffset = " <<
 //       fHarmonyWholeNotesOffset <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -4529,7 +4527,7 @@ void msrHarmony::setHarmonyFrame (S_msrFrame frame)
     gLogStream <<
       "Setting harmony " << asShortString ()  <<
       " frame to " << frame->asString () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4562,7 +4560,7 @@ void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
       " in voice \"" <<
       fHarmoniesUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -4576,7 +4574,7 @@ void msrHarmony::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmony::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmony>*
@@ -4587,7 +4585,7 @@ void msrHarmony::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmony::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -4598,7 +4596,7 @@ void msrHarmony::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmony::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmony>*
@@ -4609,7 +4607,7 @@ void msrHarmony::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmony::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -4620,7 +4618,7 @@ void msrHarmony::browseData (basevisitor* v)
   // browse harmony degrees if any
   if (fHarmonyDegreesList.size ()) {
     for (
-      list<S_msrHarmonyDegree>::const_iterator i = fHarmonyDegreesList.begin ();
+      std::list<S_msrHarmonyDegree>::const_iterator i = fHarmonyDegreesList.begin ();
       i != fHarmonyDegreesList.end ();
       ++i
     ) {
@@ -4637,9 +4635,9 @@ void msrHarmony::browseData (basevisitor* v)
   }
 }
 
-string msrHarmony::asString () const
+std::string msrHarmony::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Harmony" <<
@@ -4685,7 +4683,7 @@ string msrHarmony::asString () const
     s <<
       ", fHarmonyDegreesList: [";
 
-    list<S_msrHarmonyDegree>::const_iterator
+    std::list<S_msrHarmonyDegree>::const_iterator
       iBegin = fHarmonyDegreesList.begin (),
       iEnd   = fHarmonyDegreesList.end (),
       i      = iBegin;
@@ -4735,62 +4733,62 @@ string msrHarmony::asString () const
   return s.str ();
 }
 
-void msrHarmony::print (ostream& os) const
+void msrHarmony::print (std::ostream& os) const
 {
   os <<
     "[Harmony" <<
      ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 44;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "harmonyRoot" << " : " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyRootQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fHarmonyKind" << " : " <<
     msrHarmonyKindAsString (fHarmonyKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fMeasureElementSoundingWholeNotes" << " : " <<
     fMeasureElementSoundingWholeNotes <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fHarmonyDisplayWholeNotes" << " : " <<
     fHarmonyDisplayWholeNotes <<
-    endl;
+    std::endl;
 
   // print the harmony whole notes offset
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fHarmonyWholeNotesOffset" << " : " << fHarmonyWholeNotesOffset <<
-    endl;
+    std::endl;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fHarmonyKindText" << " : \"" <<
     fHarmonyKindText <<
     "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fHarmonyBassQuarterTonesPitchKind" << " : " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyBassQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
-    endl;
+    std::endl;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fHarmonyInversion" << " : ";
   if (fHarmonyInversion == K_HARMONY_NO_INVERSION) {
     os << "[NONE]";
@@ -4798,19 +4796,19 @@ void msrHarmony::print (ostream& os) const
   else {
     os << fHarmonyInversion;
   }
-  os << endl;
+  os << std::endl;
 
   // print harmony degrees if any
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fHarmonyDegreesList";
 
   if (fHarmonyDegreesList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrHarmonyDegree>::const_iterator
+    std::list<S_msrHarmonyDegree>::const_iterator
       iBegin = fHarmonyDegreesList.begin (),
       iEnd   = fHarmonyDegreesList.end (),
       i      = iBegin;
@@ -4819,10 +4817,10 @@ void msrHarmony::print (ostream& os) const
       os <<
         (*i)->asString ();
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
@@ -4830,12 +4828,12 @@ void msrHarmony::print (ostream& os) const
     os <<
       " : " <<
       "[NONE]" <<
-      endl;
+      std::endl;
   }
 
   // print the harmonies staff number
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fHarmoniesStaffNumber" << " : ";
   if (fHarmoniesStaffNumber == msrStaff::K_NO_STAFF_NUMBER) {
     os << "[NONE]";
@@ -4843,17 +4841,17 @@ void msrHarmony::print (ostream& os) const
   else {
     os << fHarmoniesStaffNumber;
   }
-  os << endl;
+  os << std::endl;
 
   // print the harmony tuplet factor
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fHarmonyTupletFactor" << " : " << fHarmonyTupletFactor.asString () <<
-    endl;
+    std::endl;
 
   // print the harmony frame
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fHarmonyFrame" << " : ";
   if (fHarmonyFrame) {
     os << fHarmonyFrame;
@@ -4861,52 +4859,52 @@ void msrHarmony::print (ostream& os) const
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
   // print the harmony measure number
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << " : " << fetchMeasureElementMeasureNumber () <<
-    endl;
+    std::endl;
 
   // print the harmony position in measure
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
-    endl;
+    std::endl;
 
   // print the harmony bass position in voice
 //   os <<
-//     setw (fieldWidth) <<
+//     std::setw (fieldWidth) <<
 //     "fMeasureElementVoicePosition" << " : " << fMeasureElementVoicePosition <<
-//     endl;
+//     std::endl;
 
   // print the harmony note uplink
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fHarmonyUpLinkToNote" << " : ";
   if (fHarmonyUpLinkToNote) {
     os <<
-      endl <<
+      std::endl <<
       gTab << fHarmonyUpLinkToNote->asString ();
   }
   else {
     os << "[NONE]";
   }
-  os << endl;
+  os << std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrHarmony& elt)
+std::ostream& operator << (std::ostream& os, const S_msrHarmony& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -4914,7 +4912,7 @@ ostream& operator << (ostream& os, const S_msrHarmony& elt)
 
 //______________________________________________________________________________
 void printHarmonyDetails (
-  ostream&              os,
+  std::ostream&              os,
   msrSemiTonesPitchKind rootSemiTonesPitchKind,
   msrHarmonyKind        harmonyKind)
 {
@@ -4924,14 +4922,14 @@ void printHarmonyDetails (
       quarterTonesPitchKindFromSemiTonesPitchKind (
         rootSemiTonesPitchKind);
 
-  string
+  std::string
     rootQuarterTonesPitchKindAsString =
       msrQuarterTonesPitchKindAsStringInLanguage (
         rootQuarterTonesPitchKind,
         gGlobalLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ());
 
-  string
+  std::string
     harmonyKindShortName =
       msrHarmonyKindShortName (
         harmonyKind);
@@ -4943,7 +4941,7 @@ void printHarmonyDetails (
     ' ' <<
     harmonyKindShortName <<
     "' are:" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -4955,7 +4953,7 @@ void printHarmonyDetails (
 
   // fetch the intervals items for these intervals
   // with rootSemiTonesPitchKind as root
-  const vector <S_msrHarmonyInterval>&
+  const std::vector <S_msrHarmonyInterval>&
     harmonyStructureIntervals =
       harmonyStructure->
         getHarmonyStructureIntervals ();
@@ -4977,30 +4975,30 @@ void printHarmonyDetails (
         os <<
           "==> inversion = " << inversion <<
           ", initial invertedHarmonyStructure:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
         os <<
           invertedHarmonyStructure <<
-          endl;
+          std::endl;
         --gIndenter;
       }
 #endif
 
       // get the inverted harmony structure intervals
-      const vector <S_msrHarmonyInterval>&
+      const std::vector <S_msrHarmonyInterval>&
         invertedHarmonyStructureIntervals =
           invertedHarmonyStructure->
             getHarmonyStructureIntervals ();
 
       // fetch the notes for these intervals
       /* JMI
-      vector<S_msrHarmonyInterval>::const_iterator
+      std::vector<S_msrHarmonyInterval>::const_iterator
         iBegin = invertedHarmonyStructureIntervals.begin (),
         iEnd   = invertedHarmonyStructureIntervals.end (),
         i      = iBegin;
         */
-      vector<S_msrHarmonyInterval>::const_reverse_iterator
+      std::vector<S_msrHarmonyInterval>::const_reverse_iterator
         iBegin = invertedHarmonyStructureIntervals.crbegin (),
         iEnd   = invertedHarmonyStructureIntervals.crend (),
         i      = iBegin;
@@ -5025,7 +5023,7 @@ void printHarmonyDetails (
         " contents, " <<
         invertedHarmonyStructureIntervals.size () <<
         " intervals:" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
@@ -5040,8 +5038,8 @@ void printHarmonyDetails (
 
         const int fieldWidth1 = 17;
 
-        os << left <<
-          setw (fieldWidth1) <<
+        os << std::left <<
+          std::setw (fieldWidth1) <<
           msrIntervalKindAsString (intervalKind) <<
           ": ";
 
@@ -5062,8 +5060,8 @@ void printHarmonyDetails (
         // print it
         const int fieldWidth2 = 8;
 
-        os << left <<
-          setw (fieldWidth2) <<
+        os << std::left <<
+          std::setw (fieldWidth2) <<
           msrQuarterTonesPitchKindAsStringInLanguage (
             noteQuarterTonesPitchKind,
             gGlobalLpsrOahGroup->
@@ -5075,16 +5073,16 @@ void printHarmonyDetails (
             noteSemiTonesPitchKind) <<
           ")" <<
           */
-          endl;
+          std::endl;
 
         if (++i == iEnd) break;
 
-        // no endl here
+        // no std::endl here
       } // for
 
       --gIndenter;
 
-      os << endl;
+      os << std::endl;
     } // for
   }
 
@@ -5093,7 +5091,7 @@ void printHarmonyDetails (
 
 //______________________________________________________________________________
 void printHarmonyAnalysis (
-  ostream&              os,
+  std::ostream&              os,
   msrSemiTonesPitchKind rootSemiTonesPitchKind,
   msrHarmonyKind        harmonyKind,
   int                   inversion)
@@ -5104,14 +5102,14 @@ void printHarmonyAnalysis (
       quarterTonesPitchKindFromSemiTonesPitchKind (
         rootSemiTonesPitchKind);
 
-  string
+  std::string
     rootQuarterTonesPitchKindAsString =
       msrQuarterTonesPitchKindAsStringInLanguage (
         rootQuarterTonesPitchKind,
         gGlobalLpsrOahGroup->
           getLpsrQuarterTonesPitchesLanguageKind ());
 
-  string
+  std::string
     harmonyKindShortName =
       msrHarmonyKindShortName (
         harmonyKind);
@@ -5125,7 +5123,7 @@ void printHarmonyAnalysis (
     "' inversion " <<
     inversion <<
     " is:" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -5137,7 +5135,7 @@ void printHarmonyAnalysis (
 
   // fetch the intervals items for these intervals
   // with rootSemiTonesPitchKind as root
-  const vector <S_msrHarmonyInterval>&
+  const std::vector <S_msrHarmonyInterval>&
     harmonyStructureIntervals =
       harmonyStructure->
         getHarmonyStructureIntervals ();
@@ -5159,18 +5157,18 @@ void printHarmonyAnalysis (
         os <<
           "==> inversion = " << inversion <<
           ", initial invertedHarmonyStructure:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
         os <<
           invertedHarmonyStructure <<
-          endl;
+          std::endl;
         --gIndenter;
       }
 #endif
 
       // get the inverted harmony structure intervals
-      const vector <S_msrHarmonyInterval>&
+      const std::vector <S_msrHarmonyInterval>&
         invertedHarmonyStructureIntervals =
           invertedHarmonyStructure->
             getHarmonyStructureIntervals ();
@@ -5197,11 +5195,11 @@ void printHarmonyAnalysis (
           " contents, " <<
           invertedHarmonyStructureIntervals.size () <<
           " intervals:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
 
-        vector<S_msrHarmonyInterval>::const_reverse_iterator
+        std::vector<S_msrHarmonyInterval>::const_reverse_iterator
           iBegin = invertedHarmonyStructureIntervals.crbegin (),
           iEnd   = invertedHarmonyStructureIntervals.crend (),
           i      = iBegin;
@@ -5232,24 +5230,24 @@ void printHarmonyAnalysis (
           // print it
           const int fieldWidth2 = 5;
 
-          os << left <<
-            setw (fieldWidth2) <<
+          os << std::left <<
+            std::setw (fieldWidth2) <<
             msrQuarterTonesPitchKindAsStringInLanguage (
               noteQuarterTonesPitchKind,
               gGlobalLpsrOahGroup->
                 getLpsrQuarterTonesPitchesLanguageKind ()) <<
             " : " <<
             msrIntervalKindAsString (intervalKind) <<
-            endl;
+            std::endl;
 
           if (++i == iEnd) break;
 
-          // no endl here
+          // no std::endl here
         } // for
 
         --gIndenter;
 
-        os << endl;
+        os << std::endl;
       }
 
       // print the harmony's inner intervals
@@ -5272,13 +5270,13 @@ void printHarmonyAnalysis (
 
         os <<
           " inner intervals:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
 
         int tritonsCounter = 0;
 
-        vector<S_msrHarmonyInterval>::const_iterator
+        std::vector<S_msrHarmonyInterval>::const_iterator
           iBegin1 = invertedHarmonyStructureIntervals.begin (),
           iEnd1   = invertedHarmonyStructureIntervals.end () - 1,
           i1      = iBegin1;
@@ -5307,7 +5305,7 @@ void printHarmonyAnalysis (
                 noteSemiTonesPitchKind1);
 
           // print the invervals
-          vector<S_msrHarmonyInterval>::const_iterator
+          std::vector<S_msrHarmonyInterval>::const_iterator
             iBegin2 = i1 + 1,
             iEnd2   = invertedHarmonyStructureIntervals.end (),
             i2      = iBegin2;
@@ -5364,8 +5362,8 @@ void printHarmonyAnalysis (
 
             const int fieldWidth2 = 20;
 
-            os << left <<
-              setw (fieldWidth1) <<
+            os << std::left <<
+              std::setw (fieldWidth1) <<
               msrQuarterTonesPitchKindAsStringInLanguage (
                 noteQuarterTonesPitchKind1,
                 gGlobalLpsrOahGroup->
@@ -5373,7 +5371,7 @@ void printHarmonyAnalysis (
 
               " -> " <<
 
-              setw (fieldWidth1) <<
+              std::setw (fieldWidth1) <<
               msrQuarterTonesPitchKindAsStringInLanguage (
                 noteQuarterTonesPitchKind2,
                 gGlobalLpsrOahGroup->
@@ -5381,17 +5379,17 @@ void printHarmonyAnalysis (
 
               " : " <<
 
-              setw (fieldWidth2) << // JMI
+              std::setw (fieldWidth2) << // JMI
               msrIntervalKindAsString (innerIntervalKind) <<
 
               '(' <<
-              setw (fieldWidth2) <<
+              std::setw (fieldWidth2) <<
               msrIntervalKindAsString (intervalKind1) <<
               " -> " <<
               msrIntervalKindAsString (intervalKind2) <<
               ")" <<
 
-              endl;
+              std::endl;
 
             --gIndenter;
 
@@ -5400,7 +5398,7 @@ void printHarmonyAnalysis (
 
           if (++i1 == iEnd1) break;
 
-          os << endl;
+          os << std::endl;
         } // for
 
         --gIndenter;
@@ -5411,10 +5409,10 @@ void printHarmonyAnalysis (
             "This harmony contains " <<
             mfSingularOrPlural (
               tritonsCounter, "triton", "tritons") <<
-            endl;
+            std::endl;
         }
 
-        os << endl;
+        os << std::endl;
       }
     }
 
@@ -5429,7 +5427,7 @@ void printHarmonyAnalysis (
         " intervals, inversion " <<
         inversion <<
         " does not exist" <<
-        endl << endl;
+        std::endl << std::endl;
     }
   }
 
@@ -5438,7 +5436,7 @@ void printHarmonyAnalysis (
 
 // harmonies structure
 //______________________________________________________________________________
-map<msrHarmonyKind, S_msrHarmonyStructure>
+std::map<msrHarmonyKind, S_msrHarmonyStructure>
   gGlobalHarmonyStructuresMap;
 
 S_msrHarmonyStructure msrHarmonyStructure::createBare (
@@ -5476,7 +5474,7 @@ msrHarmonyStructure::msrHarmonyStructure (
       "==> Creating harmony intervals '" <<
       harmonyStructureAsString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -6349,7 +6347,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
   } // switch
 
 /* JMI
-  // register harmony intervals in map
+  // register harmony intervals in std::map
   gGlobalHarmonyStructuresMap [fHarmonyStructureHarmonyKind] = this;
   */
 }
@@ -6372,7 +6370,7 @@ void msrHarmonyStructure::acceptIn (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmonyStructure::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmonyStructure>*
@@ -6383,7 +6381,7 @@ void msrHarmonyStructure::acceptIn (basevisitor* v) {
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmonyStructure::visitStart ()" <<
-             endl;
+             std::endl;
         p->visitStart (elem);
   }
 }
@@ -6392,7 +6390,7 @@ void msrHarmonyStructure::acceptOut (basevisitor* v) {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrHarmonyStructure::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrHarmonyStructure>*
@@ -6403,7 +6401,7 @@ void msrHarmonyStructure::acceptOut (basevisitor* v) {
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrHarmonyStructure::visitEnd ()" <<
-            endl;
+            std::endl;
         p->visitEnd (elem);
   }
 }
@@ -6427,7 +6425,7 @@ S_msrHarmonyInterval msrHarmonyStructure::bassHarmonyIntervalForHarmonyInversion
     inversionNumber < 0
       ||
     inversionNumber > int (fHarmonyStructureIntervals.size ()) - 1 ) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Sorry, inversion number '" <<
@@ -6469,7 +6467,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       inversion <<
       ", original harmonyStructureIntervalsSize = " <<
       harmonyStructureIntervalsSize <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -6485,11 +6483,11 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         gLogStream <<
           "--> adding first item to result:" <<
-          endl;
+          std::endl;
         ++gIndenter;
         gLogStream <<
           harmonyIntervalClone <<
-          endl;
+          std::endl;
         --gIndenter;
       }
 #endif
@@ -6502,12 +6500,12 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         gLogStream <<
           "==> result harmony structure after adding first item :" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
         gLogStream <<
           result <<
-          endl;
+          std::endl;
         --gIndenter;
       }
 #endif
@@ -6527,11 +6525,11 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         gLogStream <<
           "--> adding last item to resultlast item :" <<
-          endl;
+          std::endl;
         ++gIndenter;
         gLogStream <<
           harmonyIntervalClone <<
-          endl;
+          std::endl;
         --gIndenter;
       }
 #endif
@@ -6544,12 +6542,12 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         gLogStream <<
           "==> result harmony structure after  after adding last item:" <<
-          endl;
+          std::endl;
 
         ++gIndenter;
         gLogStream <<
           result <<
-          endl;
+          std::endl;
         --gIndenter;
       }
 #endif
@@ -6559,11 +6557,11 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
   return result;
 }
 
-list<msrSemiTonesPitchKind> buildSemiTonesChord (
+std::list<msrSemiTonesPitchKind> buildSemiTonesChord (
   msrHarmonyKind        harmonyKind,
   msrSemiTonesPitchKind rootNote)
 {
-  list<msrSemiTonesPitchKind> result;
+  std::list<msrSemiTonesPitchKind> result;
 
   // create the harmony intervals
   S_msrHarmonyStructure
@@ -6575,7 +6573,7 @@ list<msrSemiTonesPitchKind> buildSemiTonesChord (
   result.push_back (rootNote);
 
   // add the other notes to the harmony
-  const vector<S_msrHarmonyInterval>&
+  const std::vector<S_msrHarmonyInterval>&
     harmonyStructureIntervals =
       harmonyStructure->
         getHarmonyStructureIntervals ();
@@ -6587,9 +6585,9 @@ list<msrSemiTonesPitchKind> buildSemiTonesChord (
   return result;
 }
 
-string msrHarmonyStructure::harmonyStructureAsString () const
+std::string msrHarmonyStructure::harmonyStructureAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "HarmonyStructure" <<
@@ -6602,7 +6600,7 @@ string msrHarmonyStructure::harmonyStructureAsString () const
   return s.str ();
 }
 
-void msrHarmonyStructure::print (ostream& os) const
+void msrHarmonyStructure::print (std::ostream& os) const
 {
   os <<
     "HarmonyStructure" <<
@@ -6614,12 +6612,12 @@ void msrHarmonyStructure::print (ostream& os) const
   /* JMI
     ", line: " << fInputLineNumber <<
     */
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fHarmonyStructureIntervals.size ()) {
-    vector<S_msrHarmonyInterval>::const_reverse_iterator
+    std::vector<S_msrHarmonyInterval>::const_reverse_iterator
       iBegin = fHarmonyStructureIntervals.crbegin (),
       iEnd   = fHarmonyStructureIntervals.crend (),
       i      = iBegin;
@@ -6630,7 +6628,7 @@ void msrHarmonyStructure::print (ostream& os) const
 
       gLogStream <<
         harmonyInterval->harmonyIntervalAsShortString () <<
-        endl;
+        std::endl;
 
       if (++i == iEnd) break;
     } // for
@@ -6638,17 +6636,17 @@ void msrHarmonyStructure::print (ostream& os) const
   else {
     gLogStream <<
       "no intervals" <<
-      endl;
+      std::endl;
   }
 
   --gIndenter;
 }
 
-void msrHarmonyStructure::printAllHarmoniesStructures (ostream& os)
+void msrHarmonyStructure::printAllHarmoniesStructures (std::ostream& os)
 {
   os <<
     "All the known harmonies structures are:" <<
-    endl << endl;
+    std::endl << std::endl;
 
   ++gIndenter;
 
@@ -6662,19 +6660,19 @@ void msrHarmonyStructure::printAllHarmoniesStructures (ostream& os)
     // print it
     os <<
       harmonyStructure <<
-      endl;
+      std::endl;
   } // for
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrHarmonyStructure& elt)
+std::ostream& operator << (std::ostream& os, const S_msrHarmonyStructure& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -6693,7 +6691,7 @@ void initializeHarmonyStructuresMap ()
           msrHarmonyStructure::create (
             e);
 
-      // register it in the map
+      // register it in the std::map
       gGlobalHarmonyStructuresMap [e] =
         harmonyStructure;
     } // for
@@ -6707,14 +6705,14 @@ void printHarmonyStructuresMap ()
   gLogStream <<
     "Harmonies harmonies structures:" <<
     " (" << gGlobalHarmonyStructuresMap.size () << ")" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   for (auto e : mfEnumAll<msrHarmonyKind> ()) {
     gLogStream <<
       msrHarmonyKindAsString (e) << ":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -6725,22 +6723,22 @@ void printHarmonyStructuresMap ()
     if (harmonyStructure) {
       gLogStream <<
         harmonyStructure <<
-        endl;
+        std::endl;
     }
     else {
       gLogStream <<
         "no intervals" <<
-        endl;
+        std::endl;
     }
 
     --gIndenter;
 
-    gLogStream << endl;
+    gLogStream << std::endl;
   } // for
 
   --gIndenter;
 
-  gLogStream << endl;
+  gLogStream << std::endl;
 }
 
 

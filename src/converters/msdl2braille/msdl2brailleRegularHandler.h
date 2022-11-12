@@ -35,8 +35,8 @@ class EXP msdl2brailleRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<msdl2brailleRegularHandler> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_msdl2brailleInsiderHandler
                                               insiderOahHandler);
 
@@ -46,8 +46,8 @@ class EXP msdl2brailleRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           msdl2brailleRegularHandler (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_msdl2brailleInsiderHandler
                                               insiderOahHandler);
 
@@ -60,7 +60,7 @@ class EXP msdl2brailleRegularHandler : public oahRegularHandler
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override
+    std::string           fetchOutputFileNameFromTheOptions () const override
                               {
                                 return
                                   fInsiderHandler->
@@ -91,7 +91,7 @@ class EXP msdl2brailleRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -163,7 +163,7 @@ class EXP msdl2brailleRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdl2brailleRegularHandler> S_msdl2brailleRegularHandler;
-EXP ostream& operator << (ostream& os, const S_msdl2brailleRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2brailleRegularHandler& elt);
 
 
 }

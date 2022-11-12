@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -33,18 +33,16 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msr2lpsrScoreOutputKindAtom msr2lpsrScoreOutputKindAtom::create (
-  const string&        longName,
-  const string&        shortName,
-  const string&        description,
-  const string&        valueSpecification,
-  const string&        variableName,
+  const std::string&        longName,
+  const std::string&        shortName,
+  const std::string&        description,
+  const std::string&        valueSpecification,
+  const std::string&        variableName,
   lpsrScoreOutputKind& lpsrScoreOutputKindVariable)
 {
   msr2lpsrScoreOutputKindAtom* o = new
@@ -60,11 +58,11 @@ S_msr2lpsrScoreOutputKindAtom msr2lpsrScoreOutputKindAtom::create (
 }
 
 msr2lpsrScoreOutputKindAtom::msr2lpsrScoreOutputKindAtom (
-  const string&        longName,
-  const string&        shortName,
-  const string&        description,
-  const string&        valueSpecification,
-  const string&        variableName,
+  const std::string&        longName,
+  const std::string&        shortName,
+  const std::string&        description,
+  const std::string&        valueSpecification,
+  const std::string&        variableName,
   lpsrScoreOutputKind& lpsrScoreOutputKindVariable)
   : oahAtomStoringAValue (
       longName,
@@ -80,46 +78,46 @@ msr2lpsrScoreOutputKindAtom::~msr2lpsrScoreOutputKindAtom ()
 {}
 
 void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the score output kind:
-  // is it in the score output kinds map?
+  // is it in the score output kinds std::map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  map<string, lpsrScoreOutputKind>::const_iterator
+  std::map<std::string, lpsrScoreOutputKind>::const_iterator
     it =
       gGlobalLpsrScoreOutputKindsMap.find (
         theString);
 
   if (it == gGlobalLpsrScoreOutputKindsMap.end ()) {
-    // no, score output kind is unknown in the map
+    // no, score output kind is unknown in the std::map
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "LPSR score output kind '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       gGlobalLpsrScoreOutputKindsMap.size () <<
       " known LPSR score output kinds are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -141,7 +139,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -154,7 +152,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -167,7 +165,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -180,7 +178,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -193,14 +191,14 @@ void msr2lpsrScoreOutputKindAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string msr2lpsrScoreOutputKindAtom::asShortNamedOptionString () const
+std::string msr2lpsrScoreOutputKindAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -209,9 +207,9 @@ string msr2lpsrScoreOutputKindAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string msr2lpsrScoreOutputKindAtom::asActualLongNamedOptionString () const
+std::string msr2lpsrScoreOutputKindAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -220,40 +218,40 @@ string msr2lpsrScoreOutputKindAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void msr2lpsrScoreOutputKindAtom::print (ostream& os) const
+void msr2lpsrScoreOutputKindAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msr2lpsrScoreOutputKindAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "variableName" << " : " <<
     fVariableName <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fLpsrScoreOutputKindVariable" << " : \"" <<
     lpsrScoreOutputKindAsString (
       fLpsrScoreOutputKindVariable) <<
     "\"" <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void msr2lpsrScoreOutputKindAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     lpsrScoreOutputKindAsString (
@@ -262,16 +260,16 @@ void msr2lpsrScoreOutputKindAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msr2lpsrScoreOutputKindAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2lpsrScoreOutputKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -343,11 +341,11 @@ OUTPUT_KINDS.
 containing all the scores and/or parts.
 Otherwise, one file will be generated for each score and/or part.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (gGlobalLpsrScoreOutputKindsMap.size ())),
-            regex ("OUTPUT_KINDS"),
+              std::regex ("NUMBER"),
+              std::to_string (gGlobalLpsrScoreOutputKindsMap.size ())),
+            std::regex ("OUTPUT_KINDS"),
             existingLpsrScoreOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           lpsrScoreOutputKindAsString (
             lpsrScoreOutputKindDefaultValue)),
         "OUTPUT_KIND",
@@ -447,7 +445,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -460,7 +458,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lpsrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -473,7 +471,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -486,7 +484,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lpsrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -499,7 +497,7 @@ void msr2lpsrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -509,7 +507,7 @@ void msr2lpsrOahGroup::printMsr2lpsrOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The MusicXML options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -518,14 +516,14 @@ void msr2lpsrOahGroup::printMsr2lpsrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "LilyPond output kind:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "scoreOutputKind" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "scoreOutputKind" << " : " <<
     lpsrScoreOutputKindAsString (fScoreOutputKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -534,28 +532,28 @@ void msr2lpsrOahGroup::printMsr2lpsrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Repeats:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) <<
     "fCreateImplicitInitialRepeatBarLine" << " : " <<
     fCreateImplicitInitialRepeatBarLine <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msr2lpsrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2lpsrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -568,7 +566,7 @@ S_msr2lpsrOahGroup createGlobalMsr2lpsrOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2lpsr OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

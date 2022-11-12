@@ -12,8 +12,6 @@
 #include "msrBookElements.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,13 +24,13 @@ msrBookElement::msrBookElement (
 msrBookElement::~msrBookElement ()
 {}
 
-ostream& operator << (ostream& os, const S_msrBookElement& elt)
+std::ostream& operator << (std::ostream& os, const S_msrBookElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

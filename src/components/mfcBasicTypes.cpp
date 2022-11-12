@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 #include "oahWae.h"
@@ -34,14 +34,12 @@
 #include "oahComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 void crackVersionNumber (
-  const string& theString,
+  const std::string& theString,
   int&          generationNumber,
   int&          majorNumber,
   int&          minorNumber)
@@ -49,7 +47,7 @@ void crackVersionNumber (
   // obtains the three numbers in "2.19.83" or "2.20" for example
 
   // decipher theString with a three-number regular expression
-  string regularExpression (
+  std::string regularExpression (
     "([[:digit:]]+)" // generation number
     "."
     "([[:digit:]]+)" // major number
@@ -57,8 +55,8 @@ void crackVersionNumber (
     "([[:digit:]]+)" // minor number
     );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -68,10 +66,10 @@ void crackVersionNumber (
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for version string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for version std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl <<
+      std::endl <<
       smSize << " elements: ";
 
       for (unsigned i = 0; i < smSize; ++i) {
@@ -79,13 +77,13 @@ void crackVersionNumber (
           '[' << sm [i] << "] ";
       } // for
 
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 #endif
 
   if (smSize == 4) {
     // found an n.x.y specification
-    string
+    std::string
       generationNumberValue = sm [1],
       majorNumberValue      = sm [2],
       minorNumberValue      = sm [3];
@@ -96,7 +94,7 @@ void crackVersionNumber (
         "--> generationNumberValue = \"" << generationNumberValue << "\", " <<
         "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
         "--> minorNumberValue = \"" << minorNumberValue << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -107,14 +105,14 @@ void crackVersionNumber (
 
   else {
     // decipher theString with a two-number regular expression
-    string regularExpression (
+    std::string regularExpression (
       "([[:digit:]]+)" // generation number
       "."
       "([[:digit:]]+)" // major number
       );
 
-    regex  e (regularExpression);
-    smatch sm;
+    std::regex  e (regularExpression);
+    std::smatch sm;
 
     regex_match (theString, sm, e);
 
@@ -124,10 +122,10 @@ void crackVersionNumber (
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "There are " << smSize << " matches" <<
-        " for chord details string '" << theString <<
-        "' with regex '" << regularExpression <<
+        " for chord details std::string '" << theString <<
+        "' with std::regex '" << regularExpression <<
         "'" <<
-        endl <<
+        std::endl <<
         smSize << " elements: ";
 
         for (unsigned i = 0; i < smSize; ++i) {
@@ -135,14 +133,14 @@ void crackVersionNumber (
             '[' << sm [i] << "] ";
         } // for
 
-        gLogStream << endl;
+        gLogStream << std::endl;
       }
 #endif
 
     if (smSize == 3) {
       // found an n.x specification
       // assume implicit 0 minor number
-      string
+      std::string
         generationNumberValue = sm [1],
         majorNumberValue      = sm [2];
 
@@ -151,7 +149,7 @@ void crackVersionNumber (
         gLogStream <<
           "--> generationNumberValue = \"" << generationNumberValue << "\", " <<
           "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -161,7 +159,7 @@ void crackVersionNumber (
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "version number argument '" << theString <<
@@ -174,8 +172,8 @@ void crackVersionNumber (
 
 //______________________________________________________________________________
 Bool versionNumberGreaterThanOrEqualTo (
-  const string& versionNumber,
-  const string& otherVersionNumber)
+  const std::string& versionNumber,
+  const std::string& otherVersionNumber)
 {
   Bool result (false);
 
@@ -209,7 +207,7 @@ Bool versionNumberGreaterThanOrEqualTo (
       ", versionGenerationNumber:" << versionGenerationNumber <<
       ", versionMajorNumber:" << versionMajorNumber <<
       ", versionMinorNumber:" << versionMinorNumber <<
-      endl;
+      std::endl;
   }
 
   if (doTrace) {
@@ -218,7 +216,7 @@ Bool versionNumberGreaterThanOrEqualTo (
       ", otherVersionNumbeGenerationNumber:" << otherVersionNumbeGenerationNumber <<
       ", otherVersionNumbeMajorNumber:" << otherVersionNumbeMajorNumber <<
       ", otherVersionNumbeMinorNumber:" << otherVersionNumbeMinorNumber <<
-      endl;
+      std::endl;
   }
 
   if (otherVersionNumbeGenerationNumber != 2) {
@@ -226,7 +224,7 @@ Bool versionNumberGreaterThanOrEqualTo (
       "Using verstion \"" <<
       otherVersionNumbeGenerationNumber << ".x.y\" " <<
       "is probably not such a good idea" <<
-      endl;
+      std::endl;
   }
 
   if (otherVersionNumbeMajorNumber < 19) {
@@ -234,7 +232,7 @@ Bool versionNumberGreaterThanOrEqualTo (
       "Using a verstion older than \"" <<
       otherVersionNumbeGenerationNumber << ".19.y\" " <<
       "is not a good idea: the generated LilyPond code uses features introduced in the latter" <<
-      endl;
+      std::endl;
   }
 
   if (versionGenerationNumber < otherVersionNumbeGenerationNumber) {
@@ -263,7 +261,7 @@ Bool versionNumberGreaterThanOrEqualTo (
     gLogStream <<
       "----> versionNumberGreaterThanOrEqualTo =====> " <<
       result <<
-      endl;
+      std::endl;
   }
 
   return result;
@@ -319,7 +317,7 @@ S_mfcVersionNumber mfcVersionNumber::create (
   int           majorNumber,
   int           minorNumber,
   int           patchNumber,
-  const string& preRelease)
+  const std::string& preRelease)
 {
   mfcVersionNumber* o =
     new mfcVersionNumber (
@@ -335,7 +333,7 @@ mfcVersionNumber::mfcVersionNumber (
   int           majorNumber,
   int           minorNumber,
   int           patchNumber,
-  const string& preRelease)
+  const std::string& preRelease)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
@@ -345,7 +343,7 @@ mfcVersionNumber::mfcVersionNumber (
       ", minorNumber:" << minorNumber <<
       ", patchNumber:" << patchNumber <<
       ", preRelease:" << preRelease <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -359,7 +357,7 @@ mfcVersionNumber::~mfcVersionNumber ()
 {}
 
 S_mfcVersionNumber mfcVersionNumber::createFromString (
-  const string& theString)
+  const std::string& theString)
 {
   // obtains the three numbers in "2.19.83" or "2.20" for example
 
@@ -369,7 +367,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
 
   // decipher theString with a regular expression
-  string regularExpression (
+  std::string regularExpression (
     "^([[:digit:]]+)"                   // major number
     "."
     "([[:digit:]]+)"                    // minor number
@@ -379,8 +377,8 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 //    "(-((-|[[:digit:]]|[[:alpha:]])+))?"
     );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -390,10 +388,10 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for version string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for version std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl <<
+      std::endl <<
       smSize << " elements: ";
 
     for (unsigned i = 0; i < smSize; ++i) {
@@ -401,7 +399,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
         '[' << sm [i] << "] ";
     } // for
 
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 #endif
 
@@ -410,12 +408,12 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
     minorNumber = 0,
     patchNumber = 0;
 
-  string
+  std::string
     preReleaseValue;
 
   if (smSize == 5) {
     // found an n.x.y specification
-    string
+    std::string
       majorNumberValue      = sm [1],
       minorNumberValue      = sm [2],
       patchNumberValue      = sm [3];
@@ -429,7 +427,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
         "--> minorNumberValue = \"" << minorNumberValue << "\"" <<
         "--> patchNumberValue = \"" << patchNumberValue << "\"" <<
         "--> preReleaseValue = \"" << preReleaseValue << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -439,7 +437,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "version number \"" <<
@@ -470,7 +468,7 @@ Bool mfcVersionNumber::operator== (const mfcVersionNumber& other) const
     otherPatchNumber =
       other.getPatchNumber ();
 
-  const string
+  const std::string
     otherPreRelease =
       other.getPreRelease ();
 
@@ -482,12 +480,12 @@ Bool mfcVersionNumber::operator== (const mfcVersionNumber& other) const
       ", fMinorNumber:" << fMinorNumber <<
       ", fPatchNumber:" << fPatchNumber <<
       ", fPreRelease:" << fPreRelease <<
-      endl <<
+      std::endl <<
       ", otherMajorNumber:" << otherMajorNumber <<
       ", otherMinorNumber:" << otherMinorNumber <<
       ", otherPatchNumber:" << otherPatchNumber <<
       ", otherPreRelease:" << otherPreRelease <<
-      endl;
+      std::endl;
   }
 
   return
@@ -522,7 +520,7 @@ Bool mfcVersionNumber::operator>= (const mfcVersionNumber& other) const
     otherPatchNumber =
       other.getPatchNumber ();
 
-  const string
+  const std::string
     otherPreRelease =
       other.getPreRelease ();
 
@@ -534,12 +532,12 @@ Bool mfcVersionNumber::operator>= (const mfcVersionNumber& other) const
       ", fMinorNumber:" << fMinorNumber <<
       ", fPatchNumber:" << fPatchNumber <<
       ", fPreRelease:" << fPreRelease <<
-      endl <<
+      std::endl <<
       ", otherMajorNumber:" << otherMajorNumber <<
       ", otherMinorNumber:" << otherMinorNumber <<
       ", otherPatchNumber:" << otherPatchNumber <<
       ", otherPreRelease:" << otherPreRelease <<
-      endl;
+      std::endl;
   }
 
   if (fMajorNumber < otherMajorNumber) {
@@ -579,7 +577,7 @@ Bool mfcVersionNumber::operator>= (const mfcVersionNumber& other) const
     gLogStream <<
       "----> mfcVersionNumber::operator>= =====> " <<
       result <<
-      endl;
+      std::endl;
   }
 
   return result;
@@ -602,7 +600,7 @@ Bool mfcVersionNumber::operator<= (const mfcVersionNumber& other) const
     otherPatchNumber =
       other.getPatchNumber ();
 
-  const string
+  const std::string
     otherPreRelease =
       other.getPreRelease ();
 
@@ -614,12 +612,12 @@ Bool mfcVersionNumber::operator<= (const mfcVersionNumber& other) const
       ", fMinorNumber:" << fMinorNumber <<
       ", fPatchNumber:" << fPatchNumber <<
       ", fPreRelease:" << fPreRelease <<
-      endl <<
+      std::endl <<
       ", otherMajorNumber:" << otherMajorNumber <<
       ", otherMinorNumber:" << otherMinorNumber <<
       ", otherPatchNumber:" << otherPatchNumber <<
       ", otherPreRelease:" << otherPreRelease <<
-      endl;
+      std::endl;
   }
 
   if (fMajorNumber > otherMajorNumber) {
@@ -659,15 +657,15 @@ Bool mfcVersionNumber::operator<= (const mfcVersionNumber& other) const
     gLogStream <<
       "----> mfcVersionNumber::operator<= =====> " <<
       result <<
-      endl;
+      std::endl;
   }
 
   return result;
 }
 
-string mfcVersionNumber::asString () const
+std::string mfcVersionNumber::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     fMajorNumber <<
@@ -684,18 +682,18 @@ string mfcVersionNumber::asString () const
   return s.str ();
 }
 
-void mfcVersionNumber::print (ostream& os) const
+void mfcVersionNumber::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_mfcVersionNumber& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcVersionNumber& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -704,8 +702,8 @@ ostream& operator << (ostream& os, const S_mfcVersionNumber& elt)
 //______________________________________________________________________________
 S_mfcVersionDescr mfcVersionDescr::create (
   S_mfcVersionNumber  versionNumber,
-  const string&       versionDate,
-  const list<string>& versionDescriptionItems)
+  const std::string&       versionDate,
+  const std::list<std::string>& versionDescriptionItems)
 {
   mfcVersionDescr* o =
     new mfcVersionDescr (
@@ -718,8 +716,8 @@ S_mfcVersionDescr mfcVersionDescr::create (
 
 mfcVersionDescr::mfcVersionDescr (
   S_mfcVersionNumber  versionNumber,
-  const string&       versionDate,
-  const list<string>& versionDescriptionItems)
+  const std::string&       versionDate,
+  const std::list<std::string>& versionDescriptionItems)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
@@ -728,11 +726,11 @@ mfcVersionDescr::mfcVersionDescr (
       ", versionNumber:" << versionNumber <<
       ", versionDate:" << versionDate <<
       ", versionDescriptionItems:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
-    for (string const& item : versionDescriptionItems) {
-      gLogStream << item << endl;
+    for (std::string const& item : versionDescriptionItems) {
+      gLogStream << item << std::endl;
     } // for
     --gIndenter;
   }
@@ -747,9 +745,9 @@ mfcVersionDescr::mfcVersionDescr (
 mfcVersionDescr::~mfcVersionDescr ()
 {}
 
-string mfcVersionDescr::asString () const
+std::string mfcVersionDescr::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     fVersionNumber->asString () <<
@@ -758,29 +756,29 @@ string mfcVersionDescr::asString () const
   return s.str ();
 }
 
-void mfcVersionDescr::print (ostream& os) const
+void mfcVersionDescr::print (std::ostream& os) const
 {
   os <<
     asString () <<
     ":" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  for (string const& item : fVersionDescriptionItems) {
-    gLogStream << item << endl;
+  for (std::string const& item : fVersionDescriptionItems) {
+    gLogStream << item << std::endl;
   } // for
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_mfcVersionDescr& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcVersionDescr& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -793,7 +791,7 @@ S_mfcVersionsHistory mfcVersionsHistory::create ()
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcVersionsHistory" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -810,7 +808,7 @@ mfcVersionsHistory::mfcVersionsHistory ()
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcVersionsHistory" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -827,7 +825,7 @@ void mfcVersionsHistory::appendVersionDescrToHistory (
       "Appending version " <<
       versionDescr <<
       " to history" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -845,9 +843,9 @@ S_mfcVersionDescr mfcVersionsHistory::fetchMostRecentVersion () const
   return fVersionsList.back ();
 }
 
-void mfcVersionsHistory::print (ostream& os) const
+void mfcVersionsHistory::print (std::ostream& os) const
 {
-  list<S_mfcVersionDescr>::const_iterator
+  std::list<S_mfcVersionDescr>::const_iterator
     iBegin = fVersionsList.begin (),
     iEnd   = fVersionsList.end (),
     i      = iBegin;
@@ -857,27 +855,27 @@ void mfcVersionsHistory::print (ostream& os) const
 
     versionDescr->print (os);
     if (++i == iEnd) break;
-    os << endl;
+    os << std::endl;
   } // for
 }
 
-ostream& operator << (ostream& os, const S_mfcVersionsHistory& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcVersionsHistory& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
 //______________________________________________________________________________
-string mfcComponenKindAsString (
+std::string mfcComponenKindAsString (
   mfcComponenKind componenKind)
 {
-  string result;
+  std::string result;
 
   switch (componenKind) {
     case mfcComponenKind::kComponentRepresentation:
@@ -903,7 +901,7 @@ string mfcComponenKindAsString (
 //______________________________________________________________________________
 /* this class   is purely virtual
 S_mfcComponent mfcComponent::create (
-  const string&   componentName,
+  const std::string&   componentName,
   mfcComponenKind componenKind)
 {
 #ifdef TRACING_IS_ENABLED
@@ -911,7 +909,7 @@ S_mfcComponent mfcComponent::create (
     gLogStream <<
       "Creating mfcComponent" <<
       ", componentName: " << componentName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -925,7 +923,7 @@ S_mfcComponent mfcComponent::create (
 */
 
 mfcComponent::mfcComponent (
-  const string&   componentName,
+  const std::string&   componentName,
   mfcComponenKind componenKind)
 {
 #ifdef TRACING_IS_ENABLED
@@ -934,7 +932,7 @@ mfcComponent::mfcComponent (
       "Constructing mfcComponent \"" <<
       componentName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -960,7 +958,7 @@ void mfcComponent::appendVersionDescrToComponent (
       mfcComponenKindAsString (fComponenKind) <<
       ' ' <<
       fComponentName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -968,9 +966,9 @@ void mfcComponent::appendVersionDescrToComponent (
     appendVersionDescrToHistory (versionDescr);
 }
 
-string mfcComponent::asString () const
+std::string mfcComponent::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   S_mfcVersionDescr
     componentMostRecentVersion =
@@ -988,14 +986,14 @@ string mfcComponent::asString () const
     componentMostRecentVersion->
       getVersionDate () <<
     ")" <<
-    endl;
+    std::endl;
 
   return s.str ();
 }
 
-string mfcComponent::mostRecentVersionNumberAndDateAsString () const
+std::string mfcComponent::mostRecentVersionNumberAndDateAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   S_mfcVersionDescr
     componentMostRecentVersion =
@@ -1013,24 +1011,24 @@ string mfcComponent::mostRecentVersionNumberAndDateAsString () const
   return s.str ();
 }
 
-void mfcComponent::print (ostream& os) const
+void mfcComponent::print (std::ostream& os) const
 {
 
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-void mfcComponent::printOwnHistory (ostream&  os) const
+void mfcComponent::printOwnHistory (std::ostream&  os) const
 {
   os <<
     "Own history:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   fVersionsHistory->print (os);
   --gIndenter;
 }
 
-void mfcComponent::printVersion (ostream& os) const
+void mfcComponent::printVersion (std::ostream& os) const
 {
   S_mfcVersionDescr
     componentMostRecentVersion =
@@ -1042,21 +1040,21 @@ void mfcComponent::printVersion (ostream& os) const
     mfcComponenKindAsString (fComponenKind) <<
     ' ' <<
     getGlobalMusicFormatsVersionNumberAndDate () <<
-    endl;
+    std::endl;
 }
 
-void mfcComponent::printHistory (ostream&  os) const
+void mfcComponent::printHistory (std::ostream&  os) const
 {
   fVersionsHistory->print (os);
 }
 
-ostream& operator << (ostream& os, const S_mfcComponent& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1064,14 +1062,14 @@ ostream& operator << (ostream& os, const S_mfcComponent& elt)
 
 //______________________________________________________________________________
 S_mfcOahComponent mfcOahComponent::create (
-  const string& formatName)
+  const std::string& formatName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcOahComponent" <<
       ", formatName: " << formatName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1083,7 +1081,7 @@ S_mfcOahComponent mfcOahComponent::create (
 }
 
 mfcOahComponent::mfcOahComponent (
-  const string& formatName)
+  const std::string& formatName)
   : mfcComponent (
       formatName,
       mfcComponenKind::kComponentRepresentation)
@@ -1094,7 +1092,7 @@ mfcOahComponent::mfcOahComponent (
       "Constructing mfcOahComponent \"" <<
       formatName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1102,13 +1100,13 @@ mfcOahComponent::mfcOahComponent (
 mfcOahComponent::~mfcOahComponent ()
 {}
 
-ostream& operator << (ostream& os, const S_mfcOahComponent& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcOahComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1116,14 +1114,14 @@ ostream& operator << (ostream& os, const S_mfcOahComponent& elt)
 
 //______________________________________________________________________________
 S_mfcRepresentationComponent mfcRepresentationComponent::create (
-  const string& formatName)
+  const std::string& formatName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcRepresentationComponent" <<
       ", formatName: " << formatName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1135,7 +1133,7 @@ S_mfcRepresentationComponent mfcRepresentationComponent::create (
 }
 
 mfcRepresentationComponent::mfcRepresentationComponent (
-  const string& formatName)
+  const std::string& formatName)
   : mfcComponent (
       formatName,
       mfcComponenKind::kComponentRepresentation)
@@ -1146,7 +1144,7 @@ mfcRepresentationComponent::mfcRepresentationComponent (
       "Constructing mfcRepresentationComponent \"" <<
       formatName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1154,13 +1152,13 @@ mfcRepresentationComponent::mfcRepresentationComponent (
 mfcRepresentationComponent::~mfcRepresentationComponent ()
 {}
 
-ostream& operator << (ostream& os, const S_mfcRepresentationComponent& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcRepresentationComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1168,14 +1166,14 @@ ostream& operator << (ostream& os, const S_mfcRepresentationComponent& elt)
 
 //______________________________________________________________________________
 S_mfcPassComponent mfcPassComponent::create (
-  const string& passName)
+  const std::string& passName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcPassComponent" <<
       ", passName: " << passName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1187,7 +1185,7 @@ S_mfcPassComponent mfcPassComponent::create (
 }
 
 mfcPassComponent::mfcPassComponent (
-  const string& passName)
+  const std::string& passName)
   : mfcComponent (
       passName,
       mfcComponenKind::kComponentPass)
@@ -1198,7 +1196,7 @@ mfcPassComponent::mfcPassComponent (
       "Constructing mfcPassComponent \"" <<
       passName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1206,23 +1204,23 @@ mfcPassComponent::mfcPassComponent (
 mfcPassComponent::~mfcPassComponent ()
 {}
 
-ostream& operator << (ostream& os, const S_mfcPassComponent& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcPassComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
 //______________________________________________________________________________
-string mfcComponentUsedFromTheCLIKindAsString (
+std::string mfcComponentUsedFromTheCLIKindAsString (
   mfcMultiComponentUsedFromTheCLIKind componentUsedFromTheCLIKind)
 {
-  string result;
+  std::string result;
 
   switch (componentUsedFromTheCLIKind) {
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes:
@@ -1236,10 +1234,10 @@ string mfcComponentUsedFromTheCLIKindAsString (
   return result;
 }
 
-string mfcComponentEntropicityKindAsString (
+std::string mfcComponentEntropicityKindAsString (
   mfcMultiComponentEntropicityKind componentEntropicityKind)
 {
-  string result;
+  std::string result;
 
   switch (componentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:
@@ -1256,7 +1254,7 @@ string mfcComponentEntropicityKindAsString (
 //______________________________________________________________________________
 /* this class   is purely virtual
 S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
-  const string&   multiComponentName,
+  const std::string&   multiComponentName,
   mfcComponenKind componenKind,
   mfcMultiComponentEntropicityKind
                   componentEntropicityKind,
@@ -1268,7 +1266,7 @@ S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
     gLogStream <<
       "Creating mfcMultiComponent" <<
       ", multiComponentName: " << multiComponentName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1284,7 +1282,7 @@ S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
 */
 
 mfcMultiComponent::mfcMultiComponent (
-  const string&   multiComponentName,
+  const std::string&   multiComponentName,
   mfcComponenKind componenKind,
   mfcMultiComponentEntropicityKind
                   componentEntropicityKind,
@@ -1300,7 +1298,7 @@ mfcMultiComponent::mfcMultiComponent (
       "Constructing mfcMultiComponent \"" <<
       multiComponentName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1330,7 +1328,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
       mfcComponenKindAsString (fComponenKind) <<
       ' ' <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1356,7 +1354,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
             <
           *formatComponentMostRecentVersionNumber
         ) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "Versions numbering inconsistency: multi component " <<
@@ -1391,7 +1389,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
       "Appending pass " <<
       pass <<
       " to multi component \"" << fComponentName << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1417,7 +1415,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
             <
           *passComponentMostRecentVersionNumber
         ) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "Versions numbering inconsistency: multi component " <<
@@ -1443,74 +1441,74 @@ void mfcMultiComponent::appendPassToMultiComponent (
   fPassComponentsList.push_back (pass);
 }
 
-void mfcMultiComponent::printOahVersion (ostream&  os) const
+void mfcMultiComponent::printOahVersion (std::ostream&  os) const
 {
   os <<
     "OAH version:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fOahComponent) {
     const int fieldWidth = 20;
 
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       fOahComponent->
         getComponentName () <<
-        endl;
+        std::endl;
 
     ++gIndenter;
     os <<
       fOahComponent->mostRecentVersionNumberAndDateAsString () <<
-      endl;
+      std::endl;
     --gIndenter;
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   --gIndenter;
 }
 
-void mfcMultiComponent::printOahHistory (ostream&  os) const
+void mfcMultiComponent::printOahHistory (std::ostream&  os) const
 {
   os <<
     "OAH history:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fOahComponent) {
     const int fieldWidth = 20;
 
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       fOahComponent->
         getComponentName () <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     fOahComponent->printHistory (os);
     --gIndenter;
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   --gIndenter;
 }
 
-void mfcMultiComponent::printRepresentationsVersions (ostream&  os) const
+void mfcMultiComponent::printRepresentationsVersions (std::ostream&  os) const
 {
   os <<
     "Representations versions:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fRepresentationComponentsList.size ()) {
-    list<S_mfcRepresentationComponent>::const_iterator
+    std::list<S_mfcRepresentationComponent>::const_iterator
       iBegin = fRepresentationComponentsList.begin (),
       iEnd   = fRepresentationComponentsList.end (),
       i      = iBegin;
@@ -1520,39 +1518,39 @@ void mfcMultiComponent::printRepresentationsVersions (ostream&  os) const
 
       const int fieldWidth = 20;
 
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         representationComponent->
           getComponentName () <<
-          endl;
+          std::endl;
 
       ++gIndenter;
       os <<
         representationComponent->mostRecentVersionNumberAndDateAsString () <<
-        endl;
+        std::endl;
       --gIndenter;
 
       if (++i == iEnd) break;
-//      os << endl;
+//      os << std::endl;
     } // for
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   --gIndenter;
 }
 
-void mfcMultiComponent::printPassesVersions (ostream&  os) const
+void mfcMultiComponent::printPassesVersions (std::ostream&  os) const
 {
   os <<
     "Passes versions:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fPassComponentsList.size ()) {
-    list<S_mfcPassComponent>::const_iterator
+    std::list<S_mfcPassComponent>::const_iterator
       iBegin = fPassComponentsList.begin (),
       iEnd   = fPassComponentsList.end (),
       i      = iBegin;
@@ -1562,39 +1560,39 @@ void mfcMultiComponent::printPassesVersions (ostream&  os) const
 
       const int fieldWidth = 20;
 
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         passComponent->
           getComponentName () <<
-          endl;
+          std::endl;
 
       ++gIndenter;
       os <<
         passComponent->mostRecentVersionNumberAndDateAsString () <<
-        endl;
+        std::endl;
       --gIndenter;
 
       if (++i == iEnd) break;
-//      os << endl;
+//      os << std::endl;
     } // for
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   --gIndenter;
 }
 
-void mfcMultiComponent::printRepresentationsHistory (ostream&  os) const
+void mfcMultiComponent::printRepresentationsHistory (std::ostream&  os) const
 {
   os <<
     "Representations history:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fRepresentationComponentsList.size ()) {
-    list<S_mfcRepresentationComponent>::const_iterator
+    std::list<S_mfcRepresentationComponent>::const_iterator
       iBegin = fRepresentationComponentsList.begin (),
       iEnd   = fRepresentationComponentsList.end (),
       i      = iBegin;
@@ -1604,37 +1602,37 @@ void mfcMultiComponent::printRepresentationsHistory (ostream&  os) const
 
       const int fieldWidth = 20;
 
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         representationComponent->
           getComponentName () <<
-        endl;
+        std::endl;
 
       ++gIndenter;
       representationComponent->printHistory (os);
       --gIndenter;
 
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   --gIndenter;
 }
 
-void mfcMultiComponent::printPassesHistory (ostream&  os) const
+void mfcMultiComponent::printPassesHistory (std::ostream&  os) const
 {
   os <<
     "Passes history:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fPassComponentsList.size ()) {
-    list<S_mfcPassComponent>::const_iterator
+    std::list<S_mfcPassComponent>::const_iterator
       iBegin = fPassComponentsList.begin (),
       iEnd   = fPassComponentsList.end (),
       i      = iBegin;
@@ -1644,28 +1642,28 @@ void mfcMultiComponent::printPassesHistory (ostream&  os) const
 
       const int fieldWidth = 20;
 
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         passComponent->
           getComponentName () <<
-        endl;
+        std::endl;
 
       ++gIndenter;
       passComponent->printHistory (os);
       --gIndenter;
 
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   --gIndenter;
 }
 
-void mfcMultiComponent::print (ostream& os) const
+void mfcMultiComponent::print (std::ostream& os) const
 {
   switch (fComponentUsedFromTheCLIKind) {
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes:
@@ -1688,16 +1686,16 @@ void mfcMultiComponent::print (ostream& os) const
 
   os <<
     getGlobalMusicFormatsVersionNumberAndDate () <<
-    endl;
+    std::endl;
 
   os <<
     "fRepresentationComponentsList:";
 
   if (fRepresentationComponentsList.size ()) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    list<S_mfcRepresentationComponent>::const_iterator
+    std::list<S_mfcRepresentationComponent>::const_iterator
       iBegin = fRepresentationComponentsList.begin (),
       iEnd   = fRepresentationComponentsList.end (),
       i      = iBegin;
@@ -1707,29 +1705,29 @@ void mfcMultiComponent::print (ostream& os) const
 
       const int fieldWidth = 20;
 
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         formatComponent->getComponentName () <<
         formatComponent->mostRecentVersionNumberAndDateAsString ();
 
       if (++i == iEnd) break;
-    // JMI  os << endl;
+    // JMI  os << std::endl;
     } // for
 
     --gIndenter;
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   os <<
     "fPassComponentsList:";
 
   if (fPassComponentsList.size ()) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    list<S_mfcPassComponent>::const_iterator
+    std::list<S_mfcPassComponent>::const_iterator
       iBegin = fPassComponentsList.begin (),
       iEnd   = fPassComponentsList.end (),
       i      = iBegin;
@@ -1739,23 +1737,23 @@ void mfcMultiComponent::print (ostream& os) const
 
       const int fieldWidth = 20;
 
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         passComponent->getComponentName () <<
         passComponent->fetchComponentMostRecentVersionNumber ();
 
       if (++i == iEnd) break;
-    // JMI  os << endl;
+    // JMI  os << std::endl;
     } // for
 
     --gIndenter;
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 }
 
-void mfcMultiComponent::printVersionShort (ostream& os) const
+void mfcMultiComponent::printVersionShort (std::ostream& os) const
 {
   switch (fComponentUsedFromTheCLIKind) {
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes:
@@ -1778,10 +1776,10 @@ void mfcMultiComponent::printVersionShort (ostream& os) const
 
   os <<
     getGlobalMusicFormatsVersionNumberAndDate  () <<
-    endl;
+    std::endl;
 }
 
-void mfcMultiComponent::printVersionFull (ostream& os) const
+void mfcMultiComponent::printVersionFull (std::ostream& os) const
 {
   switch (fComponentUsedFromTheCLIKind) {
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes:
@@ -1804,22 +1802,22 @@ void mfcMultiComponent::printVersionFull (ostream& os) const
 
   os <<
     getGlobalMusicFormatsVersionNumberAndDate () <<
-    endl;
+    std::endl;
 
-  os << endl;
+  os << std::endl;
 
   printOahVersion (os);
 
-  os << endl;
+  os << std::endl;
 
   printRepresentationsVersions (os);
 
-  os << endl;
+  os << std::endl;
 
   printPassesVersions (os);
 }
 
-void mfcMultiComponent::printHistory (ostream&  os) const
+void mfcMultiComponent::printHistory (std::ostream&  os) const
 {
     switch (fComponentUsedFromTheCLIKind) {
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes:
@@ -1842,30 +1840,30 @@ void mfcMultiComponent::printHistory (ostream&  os) const
 
   os <<
     getGlobalMusicFormatsVersionNumberAndDate () <<
-    endl;
+    std::endl;
 
   printOwnHistory (os);
 
-  os << endl;
+  os << std::endl;
 
   printOahHistory (os);
 
-  os << endl;
+  os << std::endl;
 
   printRepresentationsHistory (os);
 
-  os << endl;
+  os << std::endl;
 
   printPassesHistory (os);
 }
 
-ostream& operator << (ostream& os, const S_mfcMultiComponent& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcMultiComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1873,7 +1871,7 @@ ostream& operator << (ostream& os, const S_mfcMultiComponent& elt)
 
 //______________________________________________________________________________
 S_mfcGeneratorComponent mfcGeneratorComponent::create (
-  const string&   generatorName,
+  const std::string&   generatorName,
   mfcMultiComponentEntropicityKind
                   componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
@@ -1884,7 +1882,7 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
     gLogStream <<
       "Creating mfcGeneratorComponent" <<
       ", generatorName: " << generatorName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1898,7 +1896,7 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
 }
 
 mfcGeneratorComponent::mfcGeneratorComponent (
-  const string&   generatorName,
+  const std::string&   generatorName,
   mfcMultiComponentEntropicityKind
                   componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
@@ -1915,7 +1913,7 @@ mfcGeneratorComponent::mfcGeneratorComponent (
       "Constructing mfcGeneratorComponent \"" <<
       generatorName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1923,13 +1921,13 @@ mfcGeneratorComponent::mfcGeneratorComponent (
 mfcGeneratorComponent::~mfcGeneratorComponent ()
 {}
 
-ostream& operator << (ostream& os, const S_mfcGeneratorComponent& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcGeneratorComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1937,7 +1935,7 @@ ostream& operator << (ostream& os, const S_mfcGeneratorComponent& elt)
 
 //______________________________________________________________________________
 S_mfcConverterComponent mfcConverterComponent::create (
-  const string&   converterName,
+  const std::string&   converterName,
   mfcMultiComponentEntropicityKind
                   componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
@@ -1948,7 +1946,7 @@ S_mfcConverterComponent mfcConverterComponent::create (
     gLogStream <<
       "Creating mfcConverterComponent" <<
       ", converterName: " << converterName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1962,7 +1960,7 @@ S_mfcConverterComponent mfcConverterComponent::create (
 }
 
 mfcConverterComponent::mfcConverterComponent (
-  const string&   converterName,
+  const std::string&   converterName,
   mfcMultiComponentEntropicityKind
                   componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
@@ -1979,7 +1977,7 @@ mfcConverterComponent::mfcConverterComponent (
       "Constructing mfcConverterComponent \"" <<
       converterName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1987,13 +1985,13 @@ mfcConverterComponent::mfcConverterComponent (
 mfcConverterComponent::~mfcConverterComponent ()
 {}
 
-ostream& operator << (ostream& os, const S_mfcConverterComponent& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcConverterComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -2001,7 +1999,7 @@ ostream& operator << (ostream& os, const S_mfcConverterComponent& elt)
 
 //______________________________________________________________________________
 S_mfcLibraryComponent mfcLibraryComponent::create (
-  const string&   libraryVersionsName,
+  const std::string&   libraryVersionsName,
   mfcMultiComponentEntropicityKind
                   componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
@@ -2012,7 +2010,7 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
     gLogStream <<
       "Creating mfcLibraryComponent" <<
       ", libraryVersionsName: " << libraryVersionsName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2026,7 +2024,7 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
 }
 
 mfcLibraryComponent::mfcLibraryComponent (
-  const string&   libraryVersionsName,
+  const std::string&   libraryVersionsName,
   mfcMultiComponentEntropicityKind
                   componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
@@ -2043,7 +2041,7 @@ mfcLibraryComponent::mfcLibraryComponent (
       "Constructing mfcLibraryComponent \"" <<
       libraryVersionsName <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2065,7 +2063,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
       mfcComponenKindAsString (fComponenKind) <<
       ' ' <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2091,7 +2089,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
             <
           *converterComponentMostRecentVersionNumber
         ) {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             "Versions numbering inconsistency: multi component " <<
@@ -2117,16 +2115,16 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
   fConverterComponentsList.push_back (converter);
 }
 
-void mfcLibraryComponent::printConvertersVersions (ostream&  os) const
+void mfcLibraryComponent::printConvertersVersions (std::ostream&  os) const
 {
   os <<
     "Converters versions:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fConverterComponentsList.size ()) {
-    list<S_mfcConverterComponent>::const_iterator
+    std::list<S_mfcConverterComponent>::const_iterator
       iBegin = fConverterComponentsList.begin (),
       iEnd   = fConverterComponentsList.end (),
       i      = iBegin;
@@ -2136,40 +2134,40 @@ void mfcLibraryComponent::printConvertersVersions (ostream&  os) const
 
       const int fieldWidth = 20;
 
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         converterComponent->
           getComponentName () <<
-          endl;
+          std::endl;
 
       ++gIndenter;
       os <<
         converterComponent->mostRecentVersionNumberAndDateAsString () <<
-        endl;
+        std::endl;
       --gIndenter;
 
       if (++i == iEnd) break;
-//      os << endl;
+//      os << std::endl;
     } // for
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   --gIndenter;
 }
 
 
-void mfcLibraryComponent::printConvertersHistory (ostream&  os) const
+void mfcLibraryComponent::printConvertersHistory (std::ostream&  os) const
 {
   os <<
     "Converters history:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (fConverterComponentsList.size ()) {
-    list<S_mfcConverterComponent>::const_iterator
+    std::list<S_mfcConverterComponent>::const_iterator
       iBegin = fConverterComponentsList.begin (),
       iEnd   = fConverterComponentsList.end (),
       i      = iBegin;
@@ -2179,103 +2177,103 @@ void mfcLibraryComponent::printConvertersHistory (ostream&  os) const
 
       const int fieldWidth = 20;
 
-      os << left <<
-        setw (fieldWidth) <<
+      os << std::left <<
+        std::setw (fieldWidth) <<
         converterComponent->
           getComponentName () <<
-        endl;
+        std::endl;
 
       ++gIndenter;
       converterComponent->printOwnHistory (os);
       --gIndenter;
 
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
   else {
-    os << " [NONE]" << endl;
+    os << " [NONE]" << std::endl;
   }
 
   --gIndenter;
 }
 
-void mfcLibraryComponent::printVersionShort (ostream& os) const
+void mfcLibraryComponent::printVersionShort (std::ostream& os) const
 {
   os <<
     fComponentName <<
     " library " <<
     getGlobalMusicFormatsVersionNumberAndDate  () <<
-    endl << endl;
+    std::endl << std::endl;
 
-  os << endl;
+  os << std::endl;
 
   printOahVersion (os);
 
-  os << endl;
+  os << std::endl;
 
   printRepresentationsVersions (os);
 
-  os << endl;
+  os << std::endl;
 
   printPassesVersions (os);
 
-  os << endl;
+  os << std::endl;
 
   printConvertersVersions (os);
 }
 
-void mfcLibraryComponent::printVersionFull (ostream& os) const
+void mfcLibraryComponent::printVersionFull (std::ostream& os) const
 {
   os <<
     fComponentName <<
     " library " <<
     getGlobalMusicFormatsVersionNumberAndDate () <<
-    endl << endl;
+    std::endl << std::endl;
 
-  os << endl;
+  os << std::endl;
 
   printRepresentationsVersions (os);
 
-  os << endl;
+  os << std::endl;
 
   printPassesVersions (os);
 
-  os << endl;
+  os << std::endl;
 
   printConvertersVersions (os);
 }
 
-void mfcLibraryComponent::printHistory (ostream&  os) const
+void mfcLibraryComponent::printHistory (std::ostream&  os) const
 {
   os <<
     fComponentName <<
     " library " <<
     getGlobalMusicFormatsVersionNumberAndDate () <<
-    endl << endl;
+    std::endl << std::endl;
 
   printOwnHistory (os);
 
-  os << endl;
+  os << std::endl;
 
   printRepresentationsHistory (os);
 
-  os << endl;
+  os << std::endl;
 
   printPassesHistory (os);
 
-  os << endl;
+  os << std::endl;
 
   printConvertersHistory (os);
 }
 
-ostream& operator << (ostream& os, const S_mfcLibraryComponent& elt)
+std::ostream& operator << (std::ostream& os, const S_mfcLibraryComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

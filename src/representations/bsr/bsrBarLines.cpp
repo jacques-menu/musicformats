@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
 
@@ -24,8 +24,6 @@
 
 #include "bsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -59,7 +57,7 @@ bsrBarLine::bsrBarLine (
       asString () <<
       "', line " <<
       fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -117,7 +115,7 @@ void bsrBarLine::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrBarLine::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -130,7 +128,7 @@ void bsrBarLine::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrBarLine::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -143,7 +141,7 @@ void bsrBarLine::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrBarLine::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -156,7 +154,7 @@ void bsrBarLine::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrBarLine::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -166,10 +164,10 @@ void bsrBarLine::acceptOut (basevisitor* v)
 void bsrBarLine::browseData (basevisitor* v)
 {}
 
-string bsrBarLineKindAsString (
+std::string bsrBarLineKindAsString (
   bsrBarLineKind barLineKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineKind) {
     case bsrBarLineKind::kBarLineKindNone:
@@ -192,10 +190,10 @@ string bsrBarLineKindAsString (
   return result;
 }
 
-string bsrBarLineKindAsDebugString ( // JMI of little use??? v0.9.66
+std::string bsrBarLineKindAsDebugString ( // JMI of little use??? v0.9.66
   bsrBarLineKind barLineKind)
 {
-  string result;
+  std::string result;
 
   switch (barLineKind) {
     case bsrBarLineKind::kBarLineKindNone:
@@ -219,9 +217,9 @@ string bsrBarLineKindAsDebugString ( // JMI of little use??? v0.9.66
   return result;
 }
 
-string bsrBarLine::asString () const
+std::string bsrBarLine::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "BarLine" <<
@@ -232,9 +230,9 @@ string bsrBarLine::asString () const
   return s.str ();
 }
 
-string bsrBarLine::asDebugString () const
+std::string bsrBarLine::asDebugString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[BARLINE " <<
@@ -244,41 +242,41 @@ string bsrBarLine::asDebugString () const
   return s.str ();
 }
 
-ostream& operator << (ostream& os, const bsrBarLineKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrBarLineKind& elt)
 {
   os << bsrBarLineKindAsDebugString (elt);
   return os;
 }
 
-void bsrBarLine::print (ostream& os) const
+void bsrBarLine::print (std::ostream& os) const
 {
   os <<
     "BarLine" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 17;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "barLineKind" << " : " << bsrBarLineKindAsString (fBarLineKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "barLineCellsList" << " : " << fBarLineCellsList->asShortString () <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrBarLine& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrBarLine& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

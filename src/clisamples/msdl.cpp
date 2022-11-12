@@ -49,15 +49,13 @@
 #include "msdl2guidoInterface.h"
 
 
-using namespace std;
-
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
 #ifndef WIN32
 static void _sigaction (int signal, siginfo_t *si, void *arg)
 {
-  cerr << "Signal #" << signal << " catched!" << endl;
+  std::cerr << "Signal #" << signal << " catched!" << std::endl;
   exit (-2);
 }
 
@@ -200,7 +198,7 @@ mfMusicformatsErrorKind generateCodeFromStandardInput (
       result =
         convertMsdlStream2lilypondWithHandler (
           "stdin",
-          cin,
+          std::cin,
           handler,
           gOutputStream,
           gLogStream);
@@ -210,7 +208,7 @@ mfMusicformatsErrorKind generateCodeFromStandardInput (
       result =
         convertMsdlStream2brailleWithHandler (
           "stdin",
-          cin,
+          std::cin,
           handler,
           gOutputStream,
           gLogStream);
@@ -220,7 +218,7 @@ mfMusicformatsErrorKind generateCodeFromStandardInput (
       result =
         convertMsdlStream2musicxmlWithHandler (
           "stdin",
-          cin,
+          std::cin,
           handler,
           gOutputStream,
           gLogStream);
@@ -230,7 +228,7 @@ mfMusicformatsErrorKind generateCodeFromStandardInput (
       result =
         convertMsdlStream2guidoWithHandler (
           "stdin",
-          cin,
+          std::cin,
           handler,
           gOutputStream,
           gLogStream);
@@ -244,7 +242,7 @@ mfMusicformatsErrorKind generateCodeFromStandardInput (
 }
 
 mfMusicformatsErrorKind generateCodeFromAFile (
-  string              inputFileName,
+  std::string              inputFileName,
   S_oahHandler        handler,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
@@ -312,12 +310,12 @@ int main (int argc, char*  argv[])
   // the service name
   // ------------------------------------------------------
 
-  string serviceName = argv [0];
+  std::string serviceName = argv [0];
 
   // create the global output and log indented streams
   // ------------------------------------------------------
 
-  createTheGlobalIndentedOstreams (cout, cerr);
+  createTheGlobalIndentedOstreams (std::cout, std::cerr);
 
   // apply early options if any
   // ------------------------------------------------------
@@ -337,7 +335,7 @@ int main (int argc, char*  argv[])
     gLogStream <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -357,7 +355,7 @@ int main (int argc, char*  argv[])
     gLogStream <<
       "==> multiGenerationOutputKind: " <<
       mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -376,7 +374,7 @@ int main (int argc, char*  argv[])
     case mfMultiGenerationOutputKind::kGenerationMidi:
       gLogStream <<
         "MIDI output is not implemented yet, sorry" <<
-        endl;
+        std::endl;
 
       return 0;
       break;
@@ -447,7 +445,7 @@ int main (int argc, char*  argv[])
     mfDisplayException (e, gOutputStream);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch (exception& e) {
+  catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -458,7 +456,7 @@ int main (int argc, char*  argv[])
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           serviceName <<
@@ -488,7 +486,7 @@ int main (int argc, char*  argv[])
       " gIndenter value after options ands arguments checking: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -499,7 +497,7 @@ int main (int argc, char*  argv[])
   if (gGlobalDisplayOahGroup->getDisplayOahHandler ()) {
     gLogStream <<
       "The OAH handler contains:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     handler->print (gLogStream);
@@ -509,7 +507,7 @@ int main (int argc, char*  argv[])
   if (gGlobalDisplayOahGroup->getDisplayOahHandlerSummary ()) {
     gLogStream <<
       "The summary of the OAH handler contains:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     handler->printSummary (gLogStream);
@@ -519,7 +517,7 @@ int main (int argc, char*  argv[])
   if (gGlobalDisplayOahGroup->getDisplayOahHandlerEssentials ()) {
     gLogStream <<
       "The essentials of the OAH handler contains:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     handler->printHandlerEssentials (
@@ -531,27 +529,27 @@ int main (int argc, char*  argv[])
   // let's go ahead
   // ------------------------------------------------------
 
-  string
+  std::string
     inputSourceName =
       gGlobalServiceRunData->getInputSourceName ();
 
-  string
+  std::string
     outputFileName =
       handler->
         fetchOutputFileNameFromTheOptions ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
       serviceName << ": " <<
       "inputSourceName = \"" << inputSourceName << "\"" <<
       ", outputFileName = \"" << outputFileName << "\"" <<
-      endl <<
+      std::endl <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -585,7 +583,7 @@ int main (int argc, char*  argv[])
     gLogStream <<
       "This is " << serviceName << ' ' <<
       getGlobalMusicFormatsVersionNumberAndDate () <<
-      endl;
+      std::endl;
 
     gLogStream <<
       "Launching the conversion of ";
@@ -602,44 +600,44 @@ int main (int argc, char*  argv[])
     gLogStream <<
       " into " <<
       mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
-      endl;
+      std::endl;
 
     gLogStream <<
       "Time is " <<
       gGlobalServiceRunData->getRunDateFull () <<
-      endl;
+      std::endl;
 
     gLogStream <<
       "The command line is:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream <<
       handler->
         getLaunchCommandAsSupplied () <<
-      endl;
+      std::endl;
     --gIndenter;
 
     gLogStream <<
       "or with options long names:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream <<
       handler->
         getLaunchCommandWithLongOptionsNames () <<
-      endl;
+      std::endl;
     --gIndenter;
 
     gLogStream <<
       "or with options short names:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
     gLogStream <<
       handler->
         getLaunchCommandWithShortOptionsNames () <<
-      endl;
+      std::endl;
     --gIndenter;
 
     gLogStream <<
@@ -652,7 +650,7 @@ int main (int argc, char*  argv[])
       gLogStream <<
         "standard output";
     }
-    gLogStream << endl;
+    gLogStream << std::endl;
   }
 #endif
 
@@ -663,7 +661,7 @@ int main (int argc, char*  argv[])
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       "The command line options and arguments have been analyzed" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -678,7 +676,7 @@ int main (int argc, char*  argv[])
       // MSDL data comes from standard input
 #ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      gLogStream << "Reading standard input" << endl;
+      gLogStream << "Reading standard input" << std::endl;
       }
 #endif
 
@@ -692,7 +690,7 @@ int main (int argc, char*  argv[])
       // MSDL data comes from a file
 #ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream << "Reading file \"" << inputSourceName << "\"" << endl;
+        gLogStream << "Reading file \"" << inputSourceName << "\"" << std::endl;
       }
 #endif
 
@@ -711,7 +709,7 @@ int main (int argc, char*  argv[])
           mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
           ", err = " <<
           mfMusicFormatsErrorAsString (err) <<
-          endl;
+          std::endl;
       }
     }
 #endif
@@ -746,7 +744,7 @@ int main (int argc, char*  argv[])
       "### " << serviceName << " gIndenter final value: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -759,7 +757,7 @@ int main (int argc, char*  argv[])
       "### The generation of " <<
       mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
       " output failed ###" <<
-      endl;
+      std::endl;
   }
 
   switch (err) {

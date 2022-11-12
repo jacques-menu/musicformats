@@ -30,7 +30,7 @@ In \class{msrNote}, there is:
     void                  appendHarmonyToNoteHarmoniesList (
                             S_msrHarmony harmony);
 
-    const list<S_msrHarmony>&
+    const std::list<S_msrHarmony>&
                           getNoteHarmoniesList () const
                               { return fNoteHarmoniesList; }
 
@@ -39,7 +39,7 @@ In \class{msrNote}, there is:
     // harmonies
     // ------------------------------------------------------
 
-    list<S_msrHarmony>    fNoteHarmoniesList;
+    std::list<S_msrHarmony>    fNoteHarmoniesList;
 
 		// ... ... ...
 \end{lstlisting}
@@ -73,7 +73,7 @@ In \class{msrStaff}, there is:
 
     S_msrVoice            createPartHarmoniesVoice (
                             int    inputLineNumber,
-                            string currentMeasureNumber);
+                            std::string currentMeasureNumber);
 
     void                  appendHarmonyToPart (
                             S_msrVoice  harmonySupplierVoice,
@@ -125,7 +125,7 @@ Method {msrPart}{createPartHarmoniesVoice} creates the part harmonies staff and 
 \begin{lstlisting}[language=CPlusPlus]
 S_msrVoice msrPart::createPartHarmoniesVoice (
   int    inputLineNumber,
-  string currentMeasureNumber)
+  std::string currentMeasureNumber)
 {
 	// ... ... ...
 
@@ -186,7 +186,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
       "--> Start visiting S_harmony" <<
       ", harmoniesVoicesCounter = " << fHarmoniesVoicesCounter <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -217,7 +217,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
           "Ignoring the harmonies" <<
           ", line " <<
           inputLineNumber <<
-          endl;
+          std::endl;
       }
 #endif
     }
@@ -288,7 +288,7 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
     gLogStream <<
       "--> Start visiting S_harmony" <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -331,7 +331,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
         "Ignoring harmony" <<
         ", line " <<
         inputLineNumber <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -342,7 +342,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
       gLogStream <<
         "Creating a harmony" <<
         ", line " << inputLineNumber << ":" <<
-        endl;
+        std::endl;
 
     	// ... ... ...
     }
@@ -392,12 +392,12 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
 				// ... ... ...
 
-        // append it to harmony's degrees list
+        // append it to harmony's degrees std::list
         harmony->
           appendHarmonyDegreeToHarmony (
             harmonyDegree);
 
-        // remove it from the list
+        // remove it from the std::list
         fCurrentHarmonyDegreesList.pop_front ();
       } // while
     }
@@ -407,7 +407,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
       harmony->setHarmonyFrame (fCurrentFrame);
     }
 
-    // append the harmony to the pending harmonies list
+    // append the harmony to the pending harmonies std::list
     fPendingHarmoniesList.push_back (harmony);
   }
 
@@ -539,7 +539,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     // don't append the harmony to the part harmonies voice // BLARK
     // before the note itself has been appended to the voice
 
-    // remove the harmony from the list
+    // remove the harmony from the std::list
     fPendingHarmoniesList.pop_front ();
   } // while
 }
@@ -559,10 +559,10 @@ void msrNote::appendHarmonyToNoteHarmoniesList (S_msrHarmony harmony)
     gLogStream <<
       "Appending harmony " <<
       harmony->asString () <<
-      " to the harmonies list of " <<
+      " to the harmonies std::list of " <<
       asString () <<
       ", line " << fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -583,12 +583,12 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 {
   // copy note's harmony if any from the first note to chord
 
-  const list<S_msrHarmony>&
+  const std::list<S_msrHarmony>&
     noteHarmoniesList =
       note->getNoteHarmoniesList ();
 
   if (noteHarmoniesList.size ()) {
-    list<S_msrHarmony>::const_iterator i;
+    std::list<S_msrHarmony>::const_iterator i;
     for (i=noteHarmoniesList.begin (); i!=noteHarmoniesList.end (); ++i) {
       S_msrHarmony harmony = (*i);
 
@@ -600,7 +600,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
           "' from note " << note->asString () <<
           " to chord '" << chord->asString () <<
           "'" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -624,7 +624,7 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
 	// ... ... ...
 
   // are there harmonies attached to this note? // BLARK
-  const list<S_msrHarmony>&
+  const std::list<S_msrHarmony>&
     noteHarmoniesList =
       note->
         getNoteHarmoniesList ();
@@ -669,7 +669,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
       "', line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -730,7 +730,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "harmony is out of context, cannot be handled: '" <<
@@ -759,7 +759,7 @@ void msr2msrTranslator::visitEnd (S_msrHarmony& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -790,7 +790,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
       ", onGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", onGoingHarmony: " << fOnGoingHarmony <<
       "', line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -851,7 +851,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "harmony is out of context, cannot be handled: '" <<
@@ -882,7 +882,7 @@ void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -913,7 +913,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
           getGenerateMsrVisitingInformation ();
 
     if (traceMsrVisitors || generateMsrVisitingInformation) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "% --> Start visiting msrHarmony '" <<
@@ -926,7 +926,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         ", fOnGoingHarmoniesVoice = " <<
         fOnGoingHarmoniesVoice <<
         ", line " << elt->getInputLineNumber () <<
-        endl;
+        std::endl;
 
       if (traceMsrVisitors) {
         gLogStream << s.str ();
@@ -947,7 +947,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         "%{ fOnGoingNotesStack.size () S_msrHarmony JMI " <<
         elt->asString () <<
         " %}" <<
-        endl;
+        std::endl;
     }
 #endif
 */

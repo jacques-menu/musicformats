@@ -16,16 +16,14 @@
 #include "lpsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string lpsrContextTypeKindAsString (
+std::string lpsrContextTypeKindAsString (
   lpsrContextTypeKind contextTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (contextTypeKind) {
     case lpsrContextTypeKind::kContextChordNames:
@@ -39,16 +37,16 @@ string lpsrContextTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrContextTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrContextTypeKind& elt)
 {
   os << lpsrContextTypeKindAsString (elt);
   return os;
 }
 
-string lpsrContextExistingKindAsString (
+std::string lpsrContextExistingKindAsString (
   lpsrContextExistingKind contextExistingKind)
 {
-  string result;
+  std::string result;
 
   switch (contextExistingKind) {
     case lpsrContextExistingKind::kExistingContextYes:
@@ -62,7 +60,7 @@ string lpsrContextExistingKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const lpsrContextExistingKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrContextExistingKind& elt)
 {
   os << lpsrContextExistingKindAsString (elt);
   return os;
@@ -73,7 +71,7 @@ S_lpsrContext lpsrContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   lpsrContextTypeKind     contextTypeKind,
-  const string&           contextName)
+  const std::string&           contextName)
 {
   lpsrContext* o =
     new lpsrContext (
@@ -89,7 +87,7 @@ lpsrContext::lpsrContext (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   lpsrContextTypeKind     contextTypeKind,
-  const string&           contextName)
+  const std::string&           contextName)
     : lpsrElement (inputLineNumber)
 {
   fContextExistingKind = contextExistingKind;
@@ -106,7 +104,7 @@ void lpsrContext::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrContext::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -119,7 +117,7 @@ void lpsrContext::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrContext::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -132,7 +130,7 @@ void lpsrContext::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrContext::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -145,7 +143,7 @@ void lpsrContext::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrContext::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -155,7 +153,7 @@ void lpsrContext::acceptOut (basevisitor* v)
 void lpsrContext::browseData (basevisitor* v)
 {}
 
-void lpsrContext::print (ostream& os) const
+void lpsrContext::print (std::ostream& os) const
 {
   os <<
     "[Context" <<
@@ -165,7 +163,7 @@ void lpsrContext::print (ostream& os) const
   if (fContextName.size ()) {
     os << ' ' << fContextName;
   }
-  os << endl;
+  os << std::endl;
 
   ++gIndenter;
 
@@ -173,25 +171,25 @@ void lpsrContext::print (ostream& os) const
     "fContextElementsList";
 
   if (fContextElementsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrElement>::const_iterator
+    std::list<S_msrElement>::const_iterator
       iBegin = fContextElementsList.begin (),
       iEnd   = fContextElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
   }
   else {
     os << "[NONE]" <<
-    endl;
+    std::endl;
   }
 
   --gIndenter;
@@ -201,7 +199,7 @@ void lpsrContext::print (ostream& os) const
 S_lpsrChordNamesContext lpsrChordNamesContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
-  const string&           contextName,
+  const std::string&           contextName,
   S_msrVoice              contextVoice)
 {
   lpsrChordNamesContext* o =
@@ -217,7 +215,7 @@ S_lpsrChordNamesContext lpsrChordNamesContext::create (
 lpsrChordNamesContext::lpsrChordNamesContext (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
-  const string&           contextName,
+  const std::string&           contextName,
   S_msrVoice              contextVoice)
     : lpsrContext (
       inputLineNumber,
@@ -241,7 +239,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrChordNamesContext::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -254,7 +252,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrChordNamesContext::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -267,7 +265,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrChordNamesContext::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -280,7 +278,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrChordNamesContext::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -290,7 +288,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
 void lpsrChordNamesContext::browseData (basevisitor* v)
 {}
 
-void lpsrChordNamesContext::print (ostream& os) const
+void lpsrChordNamesContext::print (std::ostream& os) const
 {
   os <<
   /* JMI
@@ -299,42 +297,42 @@ void lpsrChordNamesContext::print (ostream& os) const
     "\"" <<
     */
     "ChordNamesContext" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 20;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "contextExistingKind" << " : " <<
     lpsrContextExistingKindAsString (
       fContextExistingKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "contextName" << " : \"" << fContextName << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "contextVoice" << " : \"" << fContextVoice->getVoiceName () << "\"" <<
-    endl;
+    std::endl;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "ContextElements";
 
   if (fContextElementsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrElement>::const_iterator
+    std::list<S_msrElement>::const_iterator
       iBegin = fContextElementsList.begin (),
       iEnd   = fContextElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
@@ -342,19 +340,19 @@ void lpsrChordNamesContext::print (ostream& os) const
   else {
     os <<
       " : " << "[NONE]" <<
-    endl;
+    std::endl;
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrChordNamesContext& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -364,7 +362,7 @@ ostream& operator << (ostream& os, const S_lpsrChordNamesContext& elt)
 S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
-  const string&           contextName,
+  const std::string&           contextName,
   S_msrStaff              contextStaff)
 {
   lpsrFiguredBassContext* o =
@@ -380,7 +378,7 @@ S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
 lpsrFiguredBassContext::lpsrFiguredBassContext (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
-  const string&           contextName,
+  const std::string&           contextName,
   S_msrStaff              contextStaff)
     : lpsrContext (
       inputLineNumber,
@@ -404,7 +402,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrFiguredBassContext::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -417,7 +415,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrFiguredBassContext::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -430,7 +428,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrFiguredBassContext::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -443,7 +441,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrFiguredBassContext::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -453,7 +451,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
 void lpsrFiguredBassContext::browseData (basevisitor* v)
 {}
 
-void lpsrFiguredBassContext::print (ostream& os) const
+void lpsrFiguredBassContext::print (std::ostream& os) const
 {
   os <<
   /* JMI
@@ -462,42 +460,42 @@ void lpsrFiguredBassContext::print (ostream& os) const
     "\"" <<
     */
     "FiguredBassContext" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 20;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fContextExistingKind" << " : " <<
     lpsrContextExistingKindAsString (
       fContextExistingKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fContextName" << " : \"" << fContextName << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "contextStaff" << " : \"" << fContextStaff->getStaffName () << "\"" <<
-    endl;
+    std::endl;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fContextElementsList";
 
   if (fContextElementsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_msrElement>::const_iterator
+    std::list<S_msrElement>::const_iterator
       iBegin = fContextElementsList.begin (),
       iEnd   = fContextElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
- // JMI     os << endl;
+ // JMI     os << std::endl;
     } // for
 
     --gIndenter;
@@ -505,19 +503,19 @@ void lpsrFiguredBassContext::print (ostream& os) const
   else {
     os <<
       " : " << "[EMPTY]" <<
-    endl;
+    std::endl;
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrFiguredBassContext& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrFiguredBassContext& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

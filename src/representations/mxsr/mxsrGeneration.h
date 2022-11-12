@@ -21,30 +21,29 @@
 #include "exports.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
 {
 
 //------------------------------------------------------------------------
-string mxmlelementAsString (Sxmlelement elem);
+std::string mxmlelementAsString (Sxmlelement elem);
 
-void printMxsr (const Sxmlelement theMxsr, ostream& os);
+void printMxsr (const Sxmlelement theMxsr, std::ostream& os);
 
 //------------------------------------------------------------------------
-Sxmlelement createMxmlelement (int type, const string& value);
+Sxmlelement createMxmlelement (int type, const std::string& value);
 
 Sxmlelement createMxmlIntegerElement (int type, int value);
 
 Sxmlelement createMxmlFloatElement (int type, float value);
 
 //------------------------------------------------------------------------
-Sxmlattribute createMxmlAttribute (const string& name, const string& value);
+Sxmlattribute createMxmlAttribute (const std::string& name, const std::string& value);
 
-Sxmlattribute createMxmlIntegerAttribute (const string& name, int value);
+Sxmlattribute createMxmlIntegerAttribute (const std::string& name, int value);
 
-Sxmlattribute createMxmlFloatAttribute (const string& name, float value);
+Sxmlattribute createMxmlFloatAttribute (const std::string& name, float value);
 
 //------------------------------------------------------------------------
 EXP SXMLFile createSxmlFile ();

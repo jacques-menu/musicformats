@@ -18,8 +18,6 @@
 #include "lpsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -56,7 +54,7 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewLyricsBlock::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -69,7 +67,7 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewLyricsBlock::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -82,7 +80,7 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewLyricsBlock::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -95,7 +93,7 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewLyricsBlock::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -105,16 +103,16 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
 void lpsrNewLyricsBlock::browseData (basevisitor* v)
 {}
 
-void lpsrNewLyricsBlock::print (ostream& os) const
+void lpsrNewLyricsBlock::print (std::ostream& os) const
 {
   os <<
     "NewLyricsBlock" << ' ' <<
     fStanza->getStanzaName () << ' ' <<
     fVoice->getVoiceName () <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_lpsrNewLyricsBlock& nlc)
+std::ostream& operator << (std::ostream& os, const S_lpsrNewLyricsBlock& nlc)
 {
   nlc->print (os);
   return os;

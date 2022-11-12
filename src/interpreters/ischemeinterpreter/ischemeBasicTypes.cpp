@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw()), set::precision(), ...
+#include <iomanip>      // std::setw()), set::precision(), ...
 
 #include "mfAssert.h"
 #include "mfBool.h"
@@ -30,13 +30,11 @@
 #include "ischemeWae.h"
 
 
-using namespace std;
-
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
 S_ischemeOptionsBlock ischemeOptionsBlock::create (
-  const string& optionsBlockName)
+  const std::string& optionsBlockName)
 {
   ischemeOptionsBlock* o =
     new ischemeOptionsBlock (
@@ -46,7 +44,7 @@ S_ischemeOptionsBlock ischemeOptionsBlock::create (
 }
 
 ischemeOptionsBlock::ischemeOptionsBlock (
-  const string& optionsBlockName)
+  const std::string& optionsBlockName)
 {
   fOptionsBlockName = optionsBlockName;
 }
@@ -65,16 +63,16 @@ void ischemeOptionsBlock::registerOptionsInOptionsBlock (
       "] in options block \"" <<
       fOptionsBlockName <<
       "\", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   fOptionsBlockOptionsVector.push_back (
     option);
 }
 
-string ischemeOptionsBlock::asString () const
+std::string ischemeOptionsBlock::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "ischemeOptionsBlock [" <<
@@ -84,12 +82,12 @@ string ischemeOptionsBlock::asString () const
   return s.str ();
 }
 
-string ischemeOptionsBlock::asOptionsString () const
+std::string ischemeOptionsBlock::asOptionsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   if (fOptionsBlockOptionsVector.size ()) {
-    vector<S_oahOption>::const_iterator
+    std::vector<S_oahOption>::const_iterator
       iBegin = fOptionsBlockOptionsVector.begin (),
       iEnd   = fOptionsBlockOptionsVector.end (),
       i      = iBegin;
@@ -109,25 +107,25 @@ string ischemeOptionsBlock::asOptionsString () const
   return s.str ();
 }
 
-void ischemeOptionsBlock::print (ostream& os) const
+void ischemeOptionsBlock::print (std::ostream& os) const
 {
   os <<
     "ischemeOptionsBlock [" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 34;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fOptionsBlockName" << " : " << fOptionsBlockName <<
-    endl;
+    std::endl;
 
-  // print the options blocks options name and value vector
+  // print the options blocks options name and value std::vector
   gLogStream <<
     "fOptionsBlockOptionsVector" << " : " <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -139,26 +137,26 @@ void ischemeOptionsBlock::print (ostream& os) const
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_ischemeOptionsBlock& elt)
+std::ostream& operator << (std::ostream& os, const S_ischemeOptionsBlock& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
 //_______________________________________________________________________________
-string ischemeInputNameKindAsString (
+std::string ischemeInputNameKindAsString (
   ischemeInputNameKind inputNameKind)
 {
-  string result;
+  std::string result;
 
   switch (inputNameKind) {
     case ischemeInputNameKind::kInputNameNone:
@@ -175,7 +173,7 @@ string ischemeInputNameKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const ischemeInputNameKind& elt)
+std::ostream& operator << (std::ostream& os, const ischemeInputNameKind& elt)
 {
   os << ischemeInputNameKindAsString (elt);
   return os;
@@ -183,7 +181,7 @@ ostream& operator << (ostream& os, const ischemeInputNameKind& elt)
 
 //_______________________________________________________________________________
 S_ischemeInput ischemeInput::create (
-  const string& inputName)
+  const std::string& inputName)
 {
   ischemeInput* o =
     new ischemeInput (
@@ -193,7 +191,7 @@ S_ischemeInput ischemeInput::create (
 }
 
 ischemeInput::ischemeInput (
-  const string& inputName)
+  const std::string& inputName)
 {
   fInputName = inputName;
 
@@ -205,7 +203,7 @@ ischemeInput::~ischemeInput ()
 {}
 
 void ischemeInput::setInputNameSuppliedByAnOption (
-  const string& name,
+  const std::string& name,
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
@@ -216,7 +214,7 @@ void ischemeInput::setInputNameSuppliedByAnOption (
       name <<
       "\", supplied by an option" <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   // no checks here, the names are not knoown yet
@@ -224,7 +222,7 @@ void ischemeInput::setInputNameSuppliedByAnOption (
 }
 
 void ischemeInput::selectInputName (
-  const string& name,
+  const std::string& name,
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
@@ -234,17 +232,17 @@ void ischemeInput::selectInputName (
       "\" to \"" <<
       name <<
       "\", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   // is this name in the inputs names set?
-  set<string>::const_iterator
+  std::set<std::string>::const_iterator
     it =
       fNamesSet.find (name);
 
   if (it == fNamesSet.end ()) {
     // no, issue error message
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "input \"" <<
@@ -260,7 +258,7 @@ void ischemeInput::selectInputName (
   }
 
 //   // did fInputName get a name by an option?
-//   const multimap<string, string>&
+//   const std::multimap<std::string, std::string>&
 //     setInputToNameMultiMap =
 //       gGlobalIschemeInterpreterOahGroup->
 //         getSelectInputToNamesMultiMap ();
@@ -269,7 +267,7 @@ void ischemeInput::selectInputName (
 //     case ischemeInputNameKind::kInputNameNone:
 //       {
 //         // store into the input
-//         string optionSuppliedName;
+//         std::string optionSuppliedName;
 //
 //         Bool
 //           inputGotAValueByAnOption =
@@ -290,7 +288,7 @@ void ischemeInput::selectInputName (
 //               name <<
 //               "\"" <<
 //               "\", line " << drv.getScannerLocation () <<
-//               endl;
+//               std::endl;
 //           }
 //
 //           fInputName = optionSuppliedName;
@@ -312,7 +310,7 @@ void ischemeInput::selectInputName (
 //     case ischemeInputNameKind::kInputNameOptionSupplied:
 //       {
 //         // ignore this name, and keep name supplied to the script
-//         stringstream s;
+//         std::stringstream s;
 //
 //         s <<
 //           "input \"" <<
@@ -333,7 +331,7 @@ void ischemeInput::selectInputName (
 //     case ischemeInputNameKind::kInputNameSetInScript:
 //       {
 //         // set in script multiple times
-//         stringstream s;
+//         std::stringstream s;
 //
 //         s <<
 //           "input \"" <<
@@ -351,12 +349,12 @@ void ischemeInput::selectInputName (
 //   } // switch
 }
 
-string ischemeInput::getInputName (ischemeDriver& drv) const
+std::string ischemeInput::getInputName (ischemeDriver& drv) const
 {
   switch (fInputNameKind) {
     case ischemeInputNameKind::kInputNameNone:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "input \"" <<
@@ -379,7 +377,7 @@ string ischemeInput::getInputName (ischemeDriver& drv) const
           fInputName <<
           "\", supplied to the script" <<
           ", line " << drv.getScannerLocation () <<
-          endl;
+          std::endl;
       }
       break;
 
@@ -393,7 +391,7 @@ string ischemeInput::getInputName (ischemeDriver& drv) const
           fInputName <<
           " \", set in the script" <<
           ", line " << drv.getScannerLocation () <<
-          endl;
+          std::endl;
       }
       break;
   } // switch
@@ -401,12 +399,12 @@ string ischemeInput::getInputName (ischemeDriver& drv) const
   return fInputName;
 }
 
-string ischemeInput::getInputNameWithoutTrace (ischemeDriver& drv) const
+std::string ischemeInput::getInputNameWithoutTrace (ischemeDriver& drv) const
 {
   switch (fInputNameKind) {
     case ischemeInputNameKind::kInputNameNone:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "input \"" <<
@@ -428,7 +426,7 @@ string ischemeInput::getInputNameWithoutTrace (ischemeDriver& drv) const
 }
 
 S_ischemeOptionsBlock ischemeInput::getInputOptionsBlockForName (
-  const string& name,
+  const std::string& name,
   ischemeDriver&   drv) const
 {
   S_ischemeOptionsBlock result;
@@ -440,10 +438,10 @@ S_ischemeOptionsBlock ischemeInput::getInputOptionsBlockForName (
       "\" in input \"" <<
       fInputName <<
       "\", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
-  map<string, S_ischemeOptionsBlock>::const_iterator
+  std::map<std::string, S_ischemeOptionsBlock>::const_iterator
     it =
       fInputNamesToOptionsBlocksMap.find (
         name);
@@ -452,7 +450,7 @@ S_ischemeOptionsBlock ischemeInput::getInputOptionsBlockForName (
     result = (*it).second;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "name \"" <<
@@ -471,24 +469,24 @@ S_ischemeOptionsBlock ischemeInput::getInputOptionsBlockForName (
       "<==== Result: \"" <<
       result <<
       "\", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   return result;
 }
 
 void ischemeInput::addName (
-  const string& name,
+  const std::string& name,
   ischemeDriver&   drv)
 {
   // is this name in the inputs names set?
-  set<string>::const_iterator
+  std::set<std::string>::const_iterator
     it =
       fNamesSet.find (name);
 
   if (it != fNamesSet.end ()) {
     // yes, issue error message
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "input name \"" <<
@@ -512,7 +510,7 @@ void ischemeInput::addName (
         fInputName <<
         "\"" <<
         ", line " << drv.getScannerLocation () <<
-        endl;
+        std::endl;
     }
 
     // register this inputs name
@@ -526,7 +524,7 @@ void ischemeInput::addName (
 }
 
 void ischemeInput::enrichNameOptionsBlock (
-  const string&      name,
+  const std::string&      name,
   S_ischemeOptionsBlock optionsBlock,
   ischemeDriver&        drv)
 {
@@ -557,15 +555,15 @@ void ischemeInput::enrichNameOptionsBlock (
         "option", "options") <<
       ')' <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
-  vector<S_oahOption>&
+  std::vector<S_oahOption>&
     nameOptionsBlockOptionsVector =
       nameOptionsBlock->
         getOptionsBlockOptionsVectorNonConst ();
 
-  const vector<S_oahOption>&
+  const std::vector<S_oahOption>&
     optionsBlockOptionsVector =
       optionsBlock->
         getOptionsBlockOptionsVector ();
@@ -575,9 +573,9 @@ void ischemeInput::enrichNameOptionsBlock (
     optionsBlockOptionsVector);
 }
 
-string ischemeInput::namesSetAsString () const
+std::string ischemeInput::namesSetAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t namesSetSize =
     fNamesSet.size ();
@@ -592,12 +590,12 @@ string ischemeInput::namesSetAsString () const
     size_t cumulatedLength    = 0;
 
     for (
-      set<string>::const_iterator i =
+      std::set<std::string>::const_iterator i =
         fNamesSet.begin ();
       i != fNamesSet.end ();
       ++i
     ) {
-      string theString = (*i);
+      std::string theString = (*i);
 
       ++count;
 
@@ -621,9 +619,9 @@ string ischemeInput::namesSetAsString () const
   return s.str ();
 }
 
-string ischemeInput::asString () const
+std::string ischemeInput::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "ischemeInput [" <<
@@ -636,7 +634,7 @@ string ischemeInput::asString () const
   return s.str ();
 }
 
-void ischemeInput::displayInputNamesToOptionsBlocksMap (ostream& os) const
+void ischemeInput::displayInputNamesToOptionsBlocksMap (std::ostream& os) const
 {
   size_t
     InputNamesToOptionsBlocksMapSize =
@@ -645,18 +643,18 @@ void ischemeInput::displayInputNamesToOptionsBlocksMap (ostream& os) const
   const int fieldWidth = 19;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInputNamesToOptionsBlocksMap" << " [" <<
-    endl;
+    std::endl;
 
   if (InputNamesToOptionsBlocksMapSize) {
 //     int counter = 0;
-    for (pair<string, S_ischemeOptionsBlock> thePair : fInputNamesToOptionsBlocksMap) {
-      string        key = thePair.first;
+    for (std::pair<std::string, S_ischemeOptionsBlock> thePair : fInputNamesToOptionsBlocksMap) {
+      std::string        key = thePair.first;
       S_ischemeOptionsBlock optionsBlock = thePair.second;
       os <<
         key << ": " <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
@@ -670,42 +668,42 @@ void ischemeInput::displayInputNamesToOptionsBlocksMap (ostream& os) const
 //       }
     } // for
   }
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void ischemeInput::print (ostream& os) const
+void ischemeInput::print (std::ostream& os) const
 {
   os <<
     "ischemeInput [" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 19;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fInputName" << " : \"" << fInputName << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInputNameKind" << " : " << fInputNameKind << "" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fInputName" << " : \"" << fInputName << "\"" <<
-    endl;
+    std::endl;
 
   size_t
     namesSetSize =
       fNamesSet.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fNamesSet" << " : [";
 
   if (namesSetSize) {
     size_t counter = 0;
-    for (string name : fNamesSet) {
+    for (std::string name : fNamesSet) {
       os << name;
 
       if (++counter < namesSetSize) {
@@ -713,25 +711,25 @@ void ischemeInput::print (ostream& os) const
       }
     } // for
   }
-  os << ']' << endl;
+  os << ']' << std::endl;
 
   size_t
     inputNamesToOptionsBlocksMapSize =
       fNamesSet.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fInputNamesToOptionsBlocksMap" << " [" <<
-    endl;
+    std::endl;
 
   if (inputNamesToOptionsBlocksMapSize) {
 //     int counter = 0;
-    for (pair<string, S_ischemeOptionsBlock> thePair : fInputNamesToOptionsBlocksMap) {
-      string        key = thePair.first;
+    for (std::pair<std::string, S_ischemeOptionsBlock> thePair : fInputNamesToOptionsBlocksMap) {
+      std::string        key = thePair.first;
       S_ischemeOptionsBlock optionsBlock = thePair.second;
       os <<
         key << ": " <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
@@ -740,7 +738,7 @@ void ischemeInput::print (ostream& os) const
           optionsBlock;
       }
       else {
-        os << "[NONE]" << endl;
+        os << "[NONE]" << std::endl;
       }
 
       --gIndenter;
@@ -750,20 +748,20 @@ void ischemeInput::print (ostream& os) const
 //       }
     } // for
   }
-  os << ']' << endl;
+  os << ']' << std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_ischemeInput& elt)
+std::ostream& operator << (std::ostream& os, const S_ischemeInput& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -788,18 +786,18 @@ void ischemeInputsTable::addInput (
   S_ischemeInput input,
   ischemeDriver& drv)
 {
-  string
+  std::string
     inputName =
       input->getInputName ();
 
   // is this inputName in the inputs names set?
-  map<string, S_ischemeInput>::const_iterator
+  std::map<std::string, S_ischemeInput>::const_iterator
     it =
       fInputsMap.find (
         inputName);
 
   if (it != fInputsMap.end ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "input \"" <<
@@ -815,12 +813,12 @@ void ischemeInputsTable::addInput (
 }
 
 // S_ischemeInput ischemeInputsTable::lookupInputByName (
-//   const string& name)
+//   const std::string& name)
 // {
 //   S_ischemeInput result;
 //
 //   // is this inputName in the inputs names set?
-//   map<string, S_ischemeInput>::const_iterator
+//   std::map<std::string, S_ischemeInput>::const_iterator
 //     it =
 //       fInputsMap.find (name);
 //
@@ -832,7 +830,7 @@ void ischemeInputsTable::addInput (
 // }
 
 S_ischemeInput ischemeInputsTable::fetchInputByName (
-  const string&     name,
+  const std::string&     name,
   const ischemeDriver& drv)
 {
   S_ischemeInput result;
@@ -843,11 +841,11 @@ S_ischemeInput ischemeInputsTable::fetchInputByName (
       name <<
       "\" in inputs table" <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   // is this inputName in the inputs names set?
-  map<string, S_ischemeInput>::const_iterator
+  std::map<std::string, S_ischemeInput>::const_iterator
     it =
       fInputsMap.find (name);
 
@@ -856,7 +854,7 @@ S_ischemeInput ischemeInputsTable::fetchInputByName (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "input \"" << name <<
@@ -871,7 +869,7 @@ S_ischemeInput ischemeInputsTable::fetchInputByName (
 }
 
 S_ischemeInput ischemeInputsTable::fetchInputByNameNonConst (
-  const string& name,
+  const std::string& name,
   ischemeDriver&   drv)
 {
   S_ischemeInput result;
@@ -882,11 +880,11 @@ S_ischemeInput ischemeInputsTable::fetchInputByNameNonConst (
       name <<
       "\" in inputs table (non-const)" <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
-  // is this inputName in the inputs map?
-  map<string, S_ischemeInput>::const_iterator
+  // is this inputName in the inputs std::map?
+  std::map<std::string, S_ischemeInput>::const_iterator
     it =
       fInputsMap.find (name);
 
@@ -895,7 +893,7 @@ S_ischemeInput ischemeInputsTable::fetchInputByNameNonConst (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "input \"" << name <<
@@ -909,9 +907,9 @@ S_ischemeInput ischemeInputsTable::fetchInputByNameNonConst (
   return result;
 }
 
-string ischemeInputsTable::asString () const
+std::string ischemeInputsTable::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "ischemeInputsTable [" <<
@@ -920,16 +918,16 @@ string ischemeInputsTable::asString () const
   return s.str ();
 }
 
-void ischemeInputsTable::displayInputsMap (ostream& os) const // useless ??? JMI
+void ischemeInputsTable::displayInputsMap (std::ostream& os) const // useless ??? JMI
 {
   os <<
     "ischemeInputsTable [" <<
-    endl;
+    std::endl;
 
   if (fInputsMap.size ()) {
     ++gIndenter;
 
-    for (pair<string, S_ischemeInput> thePair : fInputsMap) {
+    for (std::pair<std::string, S_ischemeInput> thePair : fInputsMap) {
       S_ischemeInput input = thePair.second;
 
       input->
@@ -939,19 +937,19 @@ void ischemeInputsTable::displayInputsMap (ostream& os) const // useless ??? JMI
     --gIndenter;
   }
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void ischemeInputsTable::print (ostream& os) const
+void ischemeInputsTable::print (std::ostream& os) const
 {
   os <<
     "ischemeInputsTable [" <<
-    endl;
+    std::endl;
 
   if (fInputsMap.size ()) {
     ++gIndenter;
 
-    for (pair<string, S_ischemeInput> thePair : fInputsMap) {
+    for (std::pair<std::string, S_ischemeInput> thePair : fInputsMap) {
       S_ischemeInput input = thePair.second;
 
       os << input;
@@ -960,26 +958,26 @@ void ischemeInputsTable::print (ostream& os) const
     --gIndenter;
   }
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_ischemeInputsTable& elt)
+std::ostream& operator << (std::ostream& os, const S_ischemeInputsTable& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
 //_______________________________________________________________________________
-string ischemeChoiceLabelKindAsString (
+std::string ischemeChoiceLabelKindAsString (
   ischemeChoiceLabelKind inputNameKind)
 {
-  string result;
+  std::string result;
 
   switch (inputNameKind) {
     case ischemeChoiceLabelKind::kChoiceLabelNone:
@@ -996,7 +994,7 @@ string ischemeChoiceLabelKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const ischemeChoiceLabelKind& elt)
+std::ostream& operator << (std::ostream& os, const ischemeChoiceLabelKind& elt)
 {
   os << ischemeChoiceLabelKindAsString (elt);
   return os;
@@ -1004,7 +1002,7 @@ ostream& operator << (ostream& os, const ischemeChoiceLabelKind& elt)
 
 //_______________________________________________________________________________
 S_ischemeChoice ischemeChoice::create (
-  const string& choiceName)
+  const std::string& choiceName)
 {
   ischemeChoice* o =
     new ischemeChoice (
@@ -1014,7 +1012,7 @@ S_ischemeChoice ischemeChoice::create (
 }
 
 ischemeChoice::ischemeChoice (
-  const string& choiceName)
+  const std::string& choiceName)
 {
   fChoiceName = choiceName;
 
@@ -1026,7 +1024,7 @@ ischemeChoice::~ischemeChoice ()
 {}
 
 void ischemeChoice::setChoiceLabelSuppliedByAnOption (
-  const string& label,
+  const std::string& label,
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
@@ -1037,7 +1035,7 @@ void ischemeChoice::setChoiceLabelSuppliedByAnOption (
       label <<
       "\", supplied by an option" <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   // no checks here, the labels are not knoown yet
@@ -1045,7 +1043,7 @@ void ischemeChoice::setChoiceLabelSuppliedByAnOption (
 }
 
 void ischemeChoice::selectChoiceLabel (
-  const string& label,
+  const std::string& label,
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
@@ -1055,17 +1053,17 @@ void ischemeChoice::selectChoiceLabel (
       "\" to \"" <<
       label <<
       "\", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   // is this label in the choices labels set?
-  set<string>::const_iterator
+  std::set<std::string>::const_iterator
     it =
       fLabelsSet.find (label);
 
   if (it == fLabelsSet.end ()) {
     // no, issue error message
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "choice \"" <<
@@ -1081,7 +1079,7 @@ void ischemeChoice::selectChoiceLabel (
   }
 
   // did fChoiceName get a label by an option?
-  const multimap<string, string>&
+  const std::multimap<std::string, std::string>&
     setChoiceToLabelMultiMap =
       gGlobalIschemeInterpreterOahGroup->
         getSelectChoiceToLabelsMultiMap ();
@@ -1090,7 +1088,7 @@ void ischemeChoice::selectChoiceLabel (
     case ischemeChoiceLabelKind::kChoiceLabelNone:
       {
         // store into the choice
-        string optionSuppliedLabel;
+        std::string optionSuppliedLabel;
 
         Bool
           choiceGotAValueByAnOption =
@@ -1111,7 +1109,7 @@ void ischemeChoice::selectChoiceLabel (
               label <<
               "\"" <<
               "\", line " << drv.getScannerLocation () <<
-              endl;
+              std::endl;
           }
 
           fChoiceLabel = optionSuppliedLabel;
@@ -1133,7 +1131,7 @@ void ischemeChoice::selectChoiceLabel (
     case ischemeChoiceLabelKind::kChoiceLabelOptionSupplied:
       {
         // ignore this label, and keep label supplied to the script
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "choice \"" <<
@@ -1154,7 +1152,7 @@ void ischemeChoice::selectChoiceLabel (
     case ischemeChoiceLabelKind::kChoiceLabelSetInScript:
       {
         // set in script multiple times
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "choice \"" <<
@@ -1172,12 +1170,12 @@ void ischemeChoice::selectChoiceLabel (
   } // switch
 }
 
-string ischemeChoice::getChoiceLabel (ischemeDriver& drv) const
+std::string ischemeChoice::getChoiceLabel (ischemeDriver& drv) const
 {
   switch (fChoiceLabelKind) {
     case ischemeChoiceLabelKind::kChoiceLabelNone:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "choice \"" <<
@@ -1200,7 +1198,7 @@ string ischemeChoice::getChoiceLabel (ischemeDriver& drv) const
           fChoiceLabel <<
           "\", supplied to the script" <<
           ", line " << drv.getScannerLocation () <<
-          endl;
+          std::endl;
       }
       break;
 
@@ -1214,7 +1212,7 @@ string ischemeChoice::getChoiceLabel (ischemeDriver& drv) const
           fChoiceLabel <<
           " \", set in the script" <<
           ", line " << drv.getScannerLocation () <<
-          endl;
+          std::endl;
       }
       break;
   } // switch
@@ -1222,12 +1220,12 @@ string ischemeChoice::getChoiceLabel (ischemeDriver& drv) const
   return fChoiceLabel;
 }
 
-string ischemeChoice::getChoiceLabelWithoutTrace (ischemeDriver& drv) const
+std::string ischemeChoice::getChoiceLabelWithoutTrace (ischemeDriver& drv) const
 {
   switch (fChoiceLabelKind) {
     case ischemeChoiceLabelKind::kChoiceLabelNone:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "choice \"" <<
@@ -1249,7 +1247,7 @@ string ischemeChoice::getChoiceLabelWithoutTrace (ischemeDriver& drv) const
 }
 
 S_ischemeOptionsBlock ischemeChoice::getChoiceOptionsBlockForLabel (
-  const string& label,
+  const std::string& label,
   ischemeDriver&   drv) const
 {
   S_ischemeOptionsBlock result;
@@ -1261,10 +1259,10 @@ S_ischemeOptionsBlock ischemeChoice::getChoiceOptionsBlockForLabel (
       "\" in choice \"" <<
       fChoiceName <<
       "\", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
-  map<string, S_ischemeOptionsBlock>::const_iterator
+  std::map<std::string, S_ischemeOptionsBlock>::const_iterator
     it =
       fChoiceLabelsToOptionsBlocksMap.find (
         label);
@@ -1273,7 +1271,7 @@ S_ischemeOptionsBlock ischemeChoice::getChoiceOptionsBlockForLabel (
     result = (*it).second;
   }
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "label \"" <<
@@ -1292,24 +1290,24 @@ S_ischemeOptionsBlock ischemeChoice::getChoiceOptionsBlockForLabel (
       "<==== Result: \"" <<
       result <<
       "\", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   return result;
 }
 
 void ischemeChoice::addLabel (
-  const string& label,
+  const std::string& label,
   ischemeDriver&   drv)
 {
   // is this label in the choices labels set?
-  set<string>::const_iterator
+  std::set<std::string>::const_iterator
     it =
       fLabelsSet.find (label);
 
   if (it != fLabelsSet.end ()) {
     // yes, issue error message
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "choice label \"" <<
@@ -1333,7 +1331,7 @@ void ischemeChoice::addLabel (
         fChoiceName <<
         "\"" <<
         ", line " << drv.getScannerLocation () <<
-        endl;
+        std::endl;
     }
 
     // register this choices label
@@ -1347,7 +1345,7 @@ void ischemeChoice::addLabel (
 }
 
 void ischemeChoice::enrichLabelOptionsBlock (
-  const string&      label,
+  const std::string&      label,
   S_ischemeOptionsBlock optionsBlock,
   ischemeDriver&        drv)
 {
@@ -1378,15 +1376,15 @@ void ischemeChoice::enrichLabelOptionsBlock (
         "option", "options") <<
       ')' <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
-  vector<S_oahOption>&
+  std::vector<S_oahOption>&
     labelOptionsBlockOptionsVector =
       labelOptionsBlock->
         getOptionsBlockOptionsVectorNonConst ();
 
-  const vector<S_oahOption>&
+  const std::vector<S_oahOption>&
     optionsBlockOptionsVector =
       optionsBlock->
         getOptionsBlockOptionsVector ();
@@ -1397,11 +1395,11 @@ void ischemeChoice::enrichLabelOptionsBlock (
 }
 
 void ischemeChoice::registerChoiceDefaultLabel (
-  const string& label,
+  const std::string& label,
   ischemeDriver&   drv)
 {
   if (! mfStringIsInStringSet (label, fLabelsSet)) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "choice label \"" <<
@@ -1416,7 +1414,7 @@ void ischemeChoice::registerChoiceDefaultLabel (
   }
 
 //   if (fChoiceDefaultLabel.size ()) { // JMI
-//     stringstream s;
+//     std::stringstream s;
 //
 //     s <<
 //       "choice label \"" <<
@@ -1433,9 +1431,9 @@ void ischemeChoice::registerChoiceDefaultLabel (
   fChoiceDefaultLabel = label;
 }
 
-string ischemeChoice::labelsSetAsString () const
+std::string ischemeChoice::labelsSetAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   size_t labelsSetSize =
     fLabelsSet.size ();
@@ -1450,12 +1448,12 @@ string ischemeChoice::labelsSetAsString () const
     size_t cumulatedLength    = 0;
 
     for (
-      set<string>::const_iterator i =
+      std::set<std::string>::const_iterator i =
         fLabelsSet.begin ();
       i != fLabelsSet.end ();
       ++i
     ) {
-      string theString = (*i);
+      std::string theString = (*i);
 
       ++count;
 
@@ -1479,9 +1477,9 @@ string ischemeChoice::labelsSetAsString () const
   return s.str ();
 }
 
-string ischemeChoice::asString () const
+std::string ischemeChoice::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "ischemeChoice [" <<
@@ -1494,7 +1492,7 @@ string ischemeChoice::asString () const
   return s.str ();
 }
 
-void ischemeChoice::displayChoiceLabelsToOptionsBlocksMap (ostream& os) const
+void ischemeChoice::displayChoiceLabelsToOptionsBlocksMap (std::ostream& os) const
 {
   size_t
     ChoiceLabelsToOptionsBlocksMapSize =
@@ -1503,18 +1501,18 @@ void ischemeChoice::displayChoiceLabelsToOptionsBlocksMap (ostream& os) const
   const int fieldWidth = 19;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fChoiceLabelsToOptionsBlocksMap" << " [" <<
-    endl;
+    std::endl;
 
   if (ChoiceLabelsToOptionsBlocksMapSize) {
 //     int counter = 0;
-    for (pair<string, S_ischemeOptionsBlock> thePair : fChoiceLabelsToOptionsBlocksMap) {
-      string        key = thePair.first;
+    for (std::pair<std::string, S_ischemeOptionsBlock> thePair : fChoiceLabelsToOptionsBlocksMap) {
+      std::string        key = thePair.first;
       S_ischemeOptionsBlock optionsBlock = thePair.second;
       os <<
         key << ": " <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
@@ -1528,42 +1526,42 @@ void ischemeChoice::displayChoiceLabelsToOptionsBlocksMap (ostream& os) const
 //       }
     } // for
   }
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void ischemeChoice::print (ostream& os) const
+void ischemeChoice::print (std::ostream& os) const
 {
   os <<
     "ischemeChoice [" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 19;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fChoiceName" << " : \"" << fChoiceName << "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fChoiceLabelKind" << " : " << fChoiceLabelKind << "" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fChoiceLabel" << " : \"" << fChoiceLabel << "\"" <<
-    endl;
+    std::endl;
 
   size_t
     labelsSetSize =
       fLabelsSet.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fLabelsSet" << " : [";
 
   if (labelsSetSize) {
     size_t counter = 0;
-    for (string label : fLabelsSet) {
+    for (std::string label : fLabelsSet) {
       os << label;
 
       if (++counter < labelsSetSize) {
@@ -1571,30 +1569,30 @@ void ischemeChoice::print (ostream& os) const
       }
     } // for
   }
-  os << ']' << endl;
+  os << ']' << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fChoiceDefaultLabel" << " : \"" << fChoiceDefaultLabel << "\"" <<
-    endl;
+    std::endl;
 
   size_t
     choiceLabelsToOptionsBlocksMapSize =
       fLabelsSet.size ();
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fChoiceLabelsToOptionsBlocksMap" << " [" <<
-    endl;
+    std::endl;
 
   if (choiceLabelsToOptionsBlocksMapSize) {
 //     int counter = 0;
-    for (pair<string, S_ischemeOptionsBlock> thePair : fChoiceLabelsToOptionsBlocksMap) {
-      string        key = thePair.first;
+    for (std::pair<std::string, S_ischemeOptionsBlock> thePair : fChoiceLabelsToOptionsBlocksMap) {
+      std::string        key = thePair.first;
       S_ischemeOptionsBlock optionsBlock = thePair.second;
       os <<
         key << ": " <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
@@ -1603,7 +1601,7 @@ void ischemeChoice::print (ostream& os) const
           optionsBlock;
       }
       else {
-        os << "[NONE]" << endl;
+        os << "[NONE]" << std::endl;
       }
 
       --gIndenter;
@@ -1613,20 +1611,20 @@ void ischemeChoice::print (ostream& os) const
 //       }
     } // for
   }
-  os << ']' << endl;
+  os << ']' << std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_ischemeChoice& elt)
+std::ostream& operator << (std::ostream& os, const S_ischemeChoice& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1651,18 +1649,18 @@ void ischemeChoicesTable::addChoice (
   S_ischemeChoice choice,
   ischemeDriver&  drv)
 {
-  string
+  std::string
     choiceName =
       choice->getChoiceName ();
 
   // is this choiceName in the choices labels set?
-  map<string, S_ischemeChoice>::const_iterator
+  std::map<std::string, S_ischemeChoice>::const_iterator
     it =
       fChoicesMap.find (
         choiceName);
 
   if (it != fChoicesMap.end ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "choice \"" <<
@@ -1678,12 +1676,12 @@ void ischemeChoicesTable::addChoice (
 }
 
 // S_ischemeChoice ischemeChoicesTable::lookupChoiceByName (
-//   const string& name)
+//   const std::string& name)
 // {
 //   S_ischemeChoice result;
 //
 //   // is this choiceName in the choices labels set?
-//   map<string, S_ischemeChoice>::const_iterator
+//   std::map<std::string, S_ischemeChoice>::const_iterator
 //     it =
 //       fChoicesMap.find (name);
 //
@@ -1695,7 +1693,7 @@ void ischemeChoicesTable::addChoice (
 // }
 
 S_ischemeChoice ischemeChoicesTable::fetchChoiceByName (
-  const string&     name,
+  const std::string&     name,
   const ischemeDriver& drv)
 {
   S_ischemeChoice result;
@@ -1706,11 +1704,11 @@ S_ischemeChoice ischemeChoicesTable::fetchChoiceByName (
       name <<
       "\" in choices table" <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   // is this choiceName in the choices labels set?
-  map<string, S_ischemeChoice>::const_iterator
+  std::map<std::string, S_ischemeChoice>::const_iterator
     it =
       fChoicesMap.find (name);
 
@@ -1719,7 +1717,7 @@ S_ischemeChoice ischemeChoicesTable::fetchChoiceByName (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "choice \"" << name <<
@@ -1734,7 +1732,7 @@ S_ischemeChoice ischemeChoicesTable::fetchChoiceByName (
 }
 
 S_ischemeChoice ischemeChoicesTable::fetchChoiceByNameNonConst (
-  const string& name,
+  const std::string& name,
   ischemeDriver&   drv)
 {
   S_ischemeChoice result;
@@ -1745,11 +1743,11 @@ S_ischemeChoice ischemeChoicesTable::fetchChoiceByNameNonConst (
       name <<
       "\" in choices table (non-const)" <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
-  // is this choiceName in the choices map?
-  map<string, S_ischemeChoice>::const_iterator
+  // is this choiceName in the choices std::map?
+  std::map<std::string, S_ischemeChoice>::const_iterator
     it =
       fChoicesMap.find (name);
 
@@ -1758,7 +1756,7 @@ S_ischemeChoice ischemeChoicesTable::fetchChoiceByNameNonConst (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "choice \"" << name <<
@@ -1772,9 +1770,9 @@ S_ischemeChoice ischemeChoicesTable::fetchChoiceByNameNonConst (
   return result;
 }
 
-string ischemeChoicesTable::asString () const
+std::string ischemeChoicesTable::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "ischemeChoicesTable [" <<
@@ -1783,16 +1781,16 @@ string ischemeChoicesTable::asString () const
   return s.str ();
 }
 
-void ischemeChoicesTable::displayChoicesMap (ostream& os) const // useless ??? JMI
+void ischemeChoicesTable::displayChoicesMap (std::ostream& os) const // useless ??? JMI
 {
   os <<
     "ischemeChoicesTable [" <<
-    endl;
+    std::endl;
 
   if (fChoicesMap.size ()) {
     ++gIndenter;
 
-    for (pair<string, S_ischemeChoice> thePair : fChoicesMap) {
+    for (std::pair<std::string, S_ischemeChoice> thePair : fChoicesMap) {
       S_ischemeChoice choice = thePair.second;
 
       choice->
@@ -1802,19 +1800,19 @@ void ischemeChoicesTable::displayChoicesMap (ostream& os) const // useless ??? J
     --gIndenter;
   }
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-void ischemeChoicesTable::print (ostream& os) const
+void ischemeChoicesTable::print (std::ostream& os) const
 {
   os <<
     "ischemeChoicesTable [" <<
-    endl;
+    std::endl;
 
   if (fChoicesMap.size ()) {
     ++gIndenter;
 
-    for (pair<string, S_ischemeChoice> thePair : fChoicesMap) {
+    for (std::pair<std::string, S_ischemeChoice> thePair : fChoicesMap) {
       S_ischemeChoice choice = thePair.second;
 
       os << choice;
@@ -1823,16 +1821,16 @@ void ischemeChoicesTable::print (ostream& os) const
     --gIndenter;
   }
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_ischemeChoicesTable& elt)
+std::ostream& operator << (std::ostream& os, const S_ischemeChoicesTable& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1870,11 +1868,11 @@ ischemeCaseChoiceStatement::ischemeCaseChoiceStatement (
       fCaseChoice->asString () <<
       ']' <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   // all labels are initially unused
-  for (string label : fCaseChoice->getLabelsSet ()) {
+  for (std::string label : fCaseChoice->getLabelsSet ()) {
     fCaseUnusedLabels.insert (label);
   }
 }
@@ -1883,7 +1881,7 @@ ischemeCaseChoiceStatement::~ischemeCaseChoiceStatement ()
 {}
 
 void ischemeCaseChoiceStatement::registerCaseChoiceLabel (
-  const string& label,
+  const std::string& label,
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceCaseChoiceStatements ()) {
@@ -1894,17 +1892,17 @@ void ischemeCaseChoiceStatement::registerCaseChoiceLabel (
       asString () <<
       ']' <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
-  set<string>
+  std::set<std::string>
     choiceLabelSet =
       fCaseChoice->
         getLabelsSet ();
 
   if (! mfStringIsInStringSet (label, choiceLabelSet)) {
     // this label has already been registered in this choice
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "label '" <<
@@ -1922,7 +1920,7 @@ void ischemeCaseChoiceStatement::registerCaseChoiceLabel (
 
   if (mfStringIsInStringSet (label, fCaseLabelsSet)) {
     // this label has already been registered
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "choice label \"" <<
@@ -1941,7 +1939,7 @@ void ischemeCaseChoiceStatement::registerCaseChoiceLabel (
 
   fUsedLabels.insert (label);
 
-  // register label in the current labels list
+  // register label in the current labels std::list
   fCaseCurrentLabelsList.push_back (label);
 
   // label is no longer unused
@@ -1952,7 +1950,7 @@ void ischemeCaseChoiceStatement::checkThatAllLabelsHaveBeenUsed (
   ischemeDriver& drv)
 {
   if (fCaseUnusedLabels.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "The following labels for choice \"" <<
@@ -1966,9 +1964,9 @@ void ischemeCaseChoiceStatement::checkThatAllLabelsHaveBeenUsed (
   }
 }
 
-string ischemeCaseChoiceStatement::asString () const
+std::string ischemeCaseChoiceStatement::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "ischemeCaseChoiceStatement [" <<
@@ -1978,13 +1976,13 @@ string ischemeCaseChoiceStatement::asString () const
   return s.str ();
 }
 
-string ischemeCaseChoiceStatement::currentLabelsListAsString () const
+std::string ischemeCaseChoiceStatement::currentLabelsListAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s << "[Labels:";
 
-  for (string label : fCaseCurrentLabelsList ) {
+  for (std::string label : fCaseCurrentLabelsList ) {
     s << ' ' << label;
   } // for
 
@@ -1993,20 +1991,20 @@ string ischemeCaseChoiceStatement::currentLabelsListAsString () const
   return s.str ();
 }
 
-void ischemeCaseChoiceStatement::print (ostream& os) const
+void ischemeCaseChoiceStatement::print (std::ostream& os) const
 {
   os <<
     "ischemeCaseChoiceStatement [" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fCaseChoice " << " : " <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   os <<
@@ -2014,28 +2012,28 @@ void ischemeCaseChoiceStatement::print (ostream& os) const
   --gIndenter;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fCaseUnusedLabels" << " : " <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   os <<
     mfStringSetAsString (fCaseUnusedLabels) <<
-    endl;
+    std::endl;
   --gIndenter;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_ischemeCaseChoiceStatement& elt)
+std::ostream& operator << (std::ostream& os, const S_ischemeCaseChoiceStatement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -2073,11 +2071,11 @@ ischemeCaseInputStatement::ischemeCaseInputStatement (
       fCaseInputInput->asString () <<
       ']' <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
   // all inputs are initially unused
-  for (string name : fCaseInputInput->getNamesSet ()) {
+  for (std::string name : fCaseInputInput->getNamesSet ()) {
     fCaseInputUnusedNames.insert (name);
   }
 }
@@ -2086,7 +2084,7 @@ ischemeCaseInputStatement::~ischemeCaseInputStatement ()
 {}
 
 void ischemeCaseInputStatement::registerCaseInputName (
-  const string& name,
+  const std::string& name,
   ischemeDriver&   drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceCaseInputStatements ()) {
@@ -2097,17 +2095,17 @@ void ischemeCaseInputStatement::registerCaseInputName (
       asString () <<
       ']' <<
       ", line " << drv.getScannerLocation () <<
-      endl;
+      std::endl;
   }
 
-  set<string>
+  std::set<std::string>
     choiceNameSet =
       fCaseInputInput->
         getNamesSet ();
 
   if (! mfStringIsInStringSet (name, choiceNameSet)) {
     // this name has already been registered in this choice
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "name '" <<
@@ -2125,7 +2123,7 @@ void ischemeCaseInputStatement::registerCaseInputName (
 
   if (mfStringIsInStringSet (name, fCaseInputNamesSet)) {
     // this name has already been registered
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "input name \"" <<
@@ -2144,7 +2142,7 @@ void ischemeCaseInputStatement::registerCaseInputName (
 
   fUsedNames.insert (name);
 
-  // register name in the current names list
+  // register name in the current names std::list
   fCaseInputCurrentNamesList.push_back (name);
 
   // name is no longer unused
@@ -2155,7 +2153,7 @@ void ischemeCaseInputStatement::checkThatAllNamesHaveBeenUsed (
   ischemeDriver& drv)
 {
   if (fCaseInputUnusedNames.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "The following names for input \"" <<
@@ -2169,9 +2167,9 @@ void ischemeCaseInputStatement::checkThatAllNamesHaveBeenUsed (
   }
 }
 
-string ischemeCaseInputStatement::asString () const
+std::string ischemeCaseInputStatement::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "ischemeCaseInputStatement [" <<
@@ -2181,13 +2179,13 @@ string ischemeCaseInputStatement::asString () const
   return s.str ();
 }
 
-string ischemeCaseInputStatement::currentNamesListAsString () const
+std::string ischemeCaseInputStatement::currentNamesListAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s << "[Inputs:";
 
-  for (string name : fCaseInputCurrentNamesList ) {
+  for (std::string name : fCaseInputCurrentNamesList ) {
     s << ' ' << name;
   } // for
 
@@ -2196,20 +2194,20 @@ string ischemeCaseInputStatement::currentNamesListAsString () const
   return s.str ();
 }
 
-void ischemeCaseInputStatement::print (ostream& os) const
+void ischemeCaseInputStatement::print (std::ostream& os) const
 {
   os <<
     "ischemeCaseInputStatement [" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fCaseInputInput " << " : " <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   os <<
@@ -2217,28 +2215,28 @@ void ischemeCaseInputStatement::print (ostream& os) const
   --gIndenter;
 
   os <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fCaseInputUnusedNames" << " : " <<
-    endl;
+    std::endl;
 
   ++gIndenter;
   os <<
     mfStringSetAsString (fCaseInputUnusedNames) <<
-    endl;
+    std::endl;
   --gIndenter;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_ischemeCaseInputStatement& elt)
+std::ostream& operator << (std::ostream& os, const S_ischemeCaseInputStatement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -2255,7 +2253,7 @@ ostream& operator << (ostream& os, const S_ischemeCaseInputStatement& elt)
 //     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
 //       gLogStream <<
 //         "Initializing iScheme basic types handling" <<
-//         endl;
+//         std::endl;
 //     }
 // #endif
 //

@@ -37,8 +37,6 @@
 #include "msrBrowsers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -48,7 +46,7 @@ S_msrSyllable msrSyllable::create (
   S_msrMeasure          upLinkToMeasure,
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
-  const string&         syllableStanzaNumber,
+  const std::string&         syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           syllableUpLinkToStanza)
@@ -73,7 +71,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
   S_msrMeasure          upLinkToMeasure,
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
-  const string&         syllableStanzaNumber,
+  const std::string&         syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           syllableUpLinkToStanza,
@@ -103,11 +101,11 @@ msrSyllable::msrSyllable (
   S_msrMeasure          upLinkToMeasure,
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
-  const string&         syllableStanzaNumber,
+  const std::string&         syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           syllableUpLinkToStanza)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -140,7 +138,7 @@ msrSyllable::msrSyllable (
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a syllable containing:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -163,7 +161,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
       "Creating a newborn clone of syllable '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -187,7 +185,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
 
   // append the lyric texts to the syllable clone
   for (
-    list<string>::const_iterator i = fSyllableTextsList.begin ();
+    std::list<std::string>::const_iterator i = fSyllableTextsList.begin ();
     i!=fSyllableTextsList.end ();
     ++i
   ) {
@@ -214,7 +212,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
       "Creating a newborn clone of syllable '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -238,7 +236,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 
   // append the lyric texts to the syllable deep clone
   for (
-    list<string>::const_iterator i = fSyllableTextsList.begin ();
+    std::list<std::string>::const_iterator i = fSyllableTextsList.begin ();
     i!=fSyllableTextsList.end ();
     ++i
   ) {
@@ -264,7 +262,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
     gLogStream <<
       "Setting syllable next measure purist number to " <<
       fSyllableNextMeasurePuristNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -279,7 +277,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
     case msrSyllableKind::kSyllableSkipNonRestNote:
     case msrSyllableKind::kSyllableMeasureEnd:
       {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "syllable with next measure purist number '" <<
@@ -306,7 +304,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 // void msrSyllable::setSyllableMeasurePosition (
 //   const S_msrMeasure measure,
 //   const Rational&    measurePosition,
-//   const string&      context)
+//   const std::string&      context)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -323,7 +321,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -337,17 +335,17 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //   fMeasureElementMeasurePosition = measurePosition;
 // }
 
-void msrSyllable::appendLyricTextToSyllable (const string& text)
+void msrSyllable::appendLyricTextToSyllable (const std::string& text)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending text \"" <<
       text <<
-      "\" to the texts list of syllable '" <<
+      "\" to the texts std::list of syllable '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -383,7 +381,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Setting syllable note upLink for:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -391,7 +389,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
       asString () <<
     // JMI    "to '" << note->asString () <<
       ", line " << note->getInputLineNumber () <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -403,7 +401,7 @@ void msrSyllable::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSyllable::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSyllable>*
@@ -414,7 +412,7 @@ void msrSyllable::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSyllable::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -425,7 +423,7 @@ void msrSyllable::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSyllable::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrSyllable>*
@@ -436,7 +434,7 @@ void msrSyllable::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSyllable::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -445,9 +443,9 @@ void msrSyllable::acceptOut (basevisitor* v)
 void msrSyllable::browseData (basevisitor* v)
 {}
 
-string msrSyllable::syllableWholeNotesAsMsrString () const
+std::string msrSyllable::syllableWholeNotesAsMsrString () const
 {
-  string result;
+  std::string result;
 
   if (fSyllableUpLinkToNote) { // JMI
     switch (fSyllableUpLinkToNote->getNoteKind ()) {
@@ -472,7 +470,7 @@ string msrSyllable::syllableWholeNotesAsMsrString () const
       case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       case msrNoteKind::kNoteUnpitchedInTuplet:
         {
-          stringstream s;
+          std::stringstream s;
 
           s <<
             fSyllableUpLinkToNote->
@@ -499,10 +497,10 @@ string msrSyllable::syllableWholeNotesAsMsrString () const
   return result;
 }
 
-string msrSyllableKindAsString (
+std::string msrSyllableKindAsString (
   msrSyllableKind syllableKind)
 {
-  string result;
+  std::string result;
 
   switch (syllableKind) {
     case msrSyllableKind::kSyllableNone:
@@ -549,16 +547,16 @@ string msrSyllableKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrSyllableKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSyllableKind& elt)
 {
   os << msrSyllableKindAsString (elt);
   return os;
 }
 
-string msrSyllableExtendKindAsString (
+std::string msrSyllableExtendKindAsString (
   msrSyllableExtendKind syllableExtendKind)
 {
-  string result;
+  std::string result;
 
   switch (syllableExtendKind) {
     case msrSyllableExtendKind::kSyllableExtendNone:
@@ -584,15 +582,15 @@ string msrSyllableExtendKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrSyllableExtendKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSyllableExtendKind& elt)
 {
   os << msrSyllableExtendKindAsString (elt);
   return os;
 }
 
-string msrSyllable::syllableUpLinkToNoteAsString () const
+std::string msrSyllable::syllableUpLinkToNoteAsString () const
 {
-  string result;
+  std::string result;
 
   if (fSyllableUpLinkToNote) {
     result = fSyllableUpLinkToNote->asString ();
@@ -604,12 +602,12 @@ string msrSyllable::syllableUpLinkToNoteAsString () const
   return result;
 }
 
-string msrSyllable::syllableTextsListAsString () const
+std::string msrSyllable::syllableTextsListAsString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   if (fSyllableTextsList.size ()) {
-    list<string>::const_iterator
+    std::list<std::string>::const_iterator
       iBegin = fSyllableTextsList.begin (),
       iEnd   = fSyllableTextsList.end (),
       i      = iBegin;
@@ -625,13 +623,13 @@ string msrSyllable::syllableTextsListAsString () const
 }
 
 void msrSyllable::writeTextsList (
-  const list<string>& textsList,
-  ostream&            os)
+  const std::list<std::string>& textsList,
+  std::ostream&                 os)
 {
   os << '[';
 
   if (textsList.size ()) {
-    list<string>::const_iterator
+    std::list<std::string>::const_iterator
       iBegin = textsList.begin (),
       iEnd   = textsList.end (),
       i      = iBegin;
@@ -646,9 +644,9 @@ void msrSyllable::writeTextsList (
   os << ']';
 }
 
-string msrSyllable::asString () const
+std::string msrSyllable::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Syllable '" <<
@@ -715,68 +713,68 @@ string msrSyllable::asString () const
   return s.str ();
 }
 
-void msrSyllable::print (ostream& os) const
+void msrSyllable::print (std::ostream& os) const
 {
   os <<
     "[Syllable" <<
     ", syllableKind: " <<
     msrSyllableKindAsString (fSyllableKind) <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 32;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "syllableTextsList" << " : ";
 
   writeTextsList (
     fSyllableTextsList,
     os);
-  os << endl;
+  os << std::endl;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "syllableKind" << " : " <<
     msrSyllableKindAsString (fSyllableKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "syllableExtendKind" << " : " <<
     msrSyllableExtendKindAsString (
       fSyllableExtendKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fSyllableStanzaNumber" << " : \"" <<
     fSyllableStanzaNumber <<
     "\"" <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fSyllableWholeNotes" << " : " <<
     fSyllableWholeNotes <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fSyllableTupletFactor" << " : " <<
     fSyllableTupletFactor.asString () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fSyllableNextMeasurePuristNumber" << " : " <<
     fSyllableNextMeasurePuristNumber <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "syllableUpLinkToNote" << " : " <<
     syllableUpLinkToNoteAsString () <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "syllableUpLinkToStanza" << " : " <<
     fSyllableUpLinkToStanza->getStanzaName () <<
-    endl;
+    std::endl;
 
   switch (fSyllableKind) { // JMI
     case msrSyllableKind::kSyllableNone:
@@ -799,20 +797,20 @@ void msrSyllable::print (ostream& os) const
     case msrSyllableKind::kSyllablePageBreak:
       break;
   } // switch
-  os << endl;
+  os << std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrSyllable& elt)
+std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -820,12 +818,12 @@ ostream& operator << (ostream& os, const S_msrSyllable& elt)
 
 //______________________________________________________________________________
 // constants
-const string msrStanza::K_NO_STANZA_NUMBER = "-1";
-const string msrStanza::K_NO_STANZA_NAME   = "Unknown stanza";
+const std::string msrStanza::K_NO_STANZA_NUMBER = "-1";
+const std::string msrStanza::K_NO_STANZA_NAME   = "Unknown stanza";
 
 S_msrStanza msrStanza::create (
   int           inputLineNumber,
-  const string& stanzaNumber,
+  const std::string& stanzaNumber,
   S_msrVoice    stanzaUpLinkToVoice)
 {
   msrStanza* o =
@@ -840,7 +838,7 @@ S_msrStanza msrStanza::create (
 
 msrStanza::msrStanza (
   int           inputLineNumber,
-  const string& stanzaNumber,
+  const std::string& stanzaNumber,
   S_msrVoice    stanzaUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
@@ -874,7 +872,7 @@ void msrStanza::initializeStanza ()
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Initializing stanza " << getStanzaName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -897,7 +895,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
       "\" in voice \"" <<
       containingVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -944,7 +942,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
       "\" in voice \"" <<
       containingVoice->getVoiceName () <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -997,7 +995,7 @@ void msrStanza::appendSyllableToStanza (
     gLogStream <<
       "Appending syllable '" << syllable->asString () <<
       "' to stanza " << getStanzaName () <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1061,7 +1059,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
       " to stanza " << getStanzaName () <<
       ", whole notes = " << wholeNotes <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1100,7 +1098,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
       " to stanza " << getStanzaName () <<
       ", whole notes = " << wholeNotes <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1137,7 +1135,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
       "Appending 'Measure end' syllable " <<
       " to stanza " << getStanzaName () <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1182,7 +1180,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
       " to stanza " << getStanzaName () <<
       ", whole notes = " << wholeNotes <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1221,7 +1219,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
       " to stanza " << getStanzaName () <<
       ", nextMeasurePuristNumber: " << nextMeasurePuristNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1264,7 +1262,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
       " to stanza " << getStanzaName () <<
       ", nextMeasurePuristNumber: " << nextMeasurePuristNumber <<
       ", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1318,7 +1316,7 @@ void msrStanza::appendPaddingNoteToStanza (
       "\" in voice \"" <<
       fStanzaUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1334,7 +1332,7 @@ void msrStanza::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStanza::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStanza>*
@@ -1345,7 +1343,7 @@ void msrStanza::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStanza::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -1356,7 +1354,7 @@ void msrStanza::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStanza::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStanza>*
@@ -1367,7 +1365,7 @@ void msrStanza::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStanza::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -1378,7 +1376,7 @@ void msrStanza::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStanza::browseData ()" <<
-      endl;
+      std::endl;
   }
 
   ++gIndenter;
@@ -1396,11 +1394,11 @@ void msrStanza::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% <== msrStanza::browseData ()" <<
-      endl;
+      std::endl;
   }
 }
 
-void msrStanza::print (ostream& os) const
+void msrStanza::print (std::ostream& os) const
 {
   os <<
     "[Stanza " << getStanzaName () <<
@@ -1408,19 +1406,19 @@ void msrStanza::print (ostream& os) const
     fStanzaNumber <<
     "\", " <<
     fSyllables.size () << " syllables)" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   if (! fStanzaTextPresent) {
     os <<
       "(No actual text)" <<
-      endl;
+      std::endl;
   }
 
   else {
     if (fSyllables.size ()) {
-      vector<S_msrSyllable>::const_iterator
+      std::vector<S_msrSyllable>::const_iterator
         iBegin = fSyllables.begin (),
         iEnd   = fSyllables.end (),
         i      = iBegin;
@@ -1428,23 +1426,23 @@ void msrStanza::print (ostream& os) const
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        // no endl here
+        // no std::endl here
       } // for
     }
   }
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrStanza& elt)
+std::ostream& operator << (std::ostream& os, const S_msrStanza& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -37,10 +37,10 @@ const int K_OAH_ELEMENTS_INDENTER_OFFSET = 3;
 const int K_OAH_FIELD_WIDTH = 40;
 
 //______________________________________________________________________________
-string oahElementValueKindAsString (
+std::string oahElementValueKindAsString (
   oahElementValueKind elementValueKind)
 {
-  string result;
+  std::string result;
 
   switch (elementValueKind) {
     case oahElementValueKind::kElementValueUnknown:
@@ -63,10 +63,10 @@ string oahElementValueKindAsString (
   return result;
 }
 
-string oahElementVisibilityKindAsString (
+std::string oahElementVisibilityKindAsString (
   oahElementVisibilityKind elementVisibilityKind)
 {
-  string result;
+  std::string result;
 
   switch (elementVisibilityKind) {
     case oahElementVisibilityKind::kElementVisibilityNone:
@@ -89,10 +89,10 @@ string oahElementVisibilityKindAsString (
   return result;
 }
 
-string oahElementHelpOnlyKindAsString (
+std::string oahElementHelpOnlyKindAsString (
   oahElementHelpOnlyKind elementHelpOnlyKind)
 {
-  string result;
+  std::string result;
 
   switch (elementHelpOnlyKind) {
     case oahElementHelpOnlyKind::kElementHelpOnlyYes:
@@ -108,9 +108,9 @@ string oahElementHelpOnlyKindAsString (
 
 //______________________________________________________________________________
 S_oahFindStringMatch oahFindStringMatch::create (
-	const string& elementName,
-	const string& foundString,
-	const string& containingFindableElementInfo)
+	const std::string& elementName,
+	const std::string& foundString,
+	const std::string& containingFindableElementInfo)
 {
   oahFindStringMatch* o = new
     oahFindStringMatch (
@@ -122,9 +122,9 @@ S_oahFindStringMatch oahFindStringMatch::create (
 }
 
 oahFindStringMatch::oahFindStringMatch (
-	const string& elementName,
-	const string& foundString,
-	const string& containingFindableElementInfo)
+	const std::string& elementName,
+	const std::string& foundString,
+	const std::string& containingFindableElementInfo)
     : fElementName (elementName),
     	fFoundString (foundString),
     	fContainingFindableElementInfo (containingFindableElementInfo)
@@ -136,7 +136,7 @@ oahFindStringMatch::oahFindStringMatch (
       ", fFoundString: " << fFoundString <<
       ", fContainingFindableElementInfo: " <<
       fContainingFindableElementInfo <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -144,48 +144,48 @@ oahFindStringMatch::oahFindStringMatch (
 oahFindStringMatch::~oahFindStringMatch ()
 {}
 
-void oahFindStringMatch::print (ostream& os) const
+void oahFindStringMatch::print (std::ostream& os) const
 {
   os <<
     "oahFindStringMatch:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 22;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fElementName" << " : " << fElementName <<
-    endl <<
+    std::endl <<
     "fFoundString" << " : " << fFoundString <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fContainingFindableElementInfo" << " : " << fContainingFindableElementInfo <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_oahFindStringMatch& elt)
+std::ostream& operator << (std::ostream& os, const S_oahFindStringMatch& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
-ostream& operator << (ostream& os, const oahFindStringMatch& elt)
+std::ostream& operator << (std::ostream& os, const oahFindStringMatch& elt)
 {
   elt.print (os);
   return os;
 }
 
-ostream& operator << (ostream& os, const oahFindStringMatch* elt)
+std::ostream& operator << (std::ostream& os, const oahFindStringMatch* elt)
 {
   elt->print (os);
   return os;
@@ -208,24 +208,24 @@ oahFindableElement::oahFindableElement ()
 oahFindableElement::~oahFindableElement ()
 {}
 
-void oahFindableElement::print (ostream& os) const
+void oahFindableElement::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_oahFindableElement& elt)
+std::ostream& operator << (std::ostream& os, const S_oahFindableElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
-ostream& operator << (ostream& os, const oahFindableElement& elt)
+std::ostream& operator << (std::ostream& os, const oahFindableElement& elt)
 {
   elt.print (os);
   return os;
@@ -234,9 +234,9 @@ ostream& operator << (ostream& os, const oahFindableElement& elt)
 //______________________________________________________________________________
 /* this class   is purely virtual
 S_oahElement oahElement::create (
-  const string&            longName,
-  const string&            shortName,
-  const string&            description,
+  const std::string&            longName,
+  const std::string&            shortName,
+  const std::string&            description,
   oahElementValueKind      elementValueKind,
   oahElementVisibilityKind elementVisibilityKind)
 {
@@ -253,9 +253,9 @@ S_oahElement oahElement::create (
 */
 
 oahElement::oahElement (
-  const string&            longName,
-  const string&            shortName,
-  const string&            description,
+  const std::string&            longName,
+  const std::string&            shortName,
+  const std::string&            description,
   oahElementValueKind      elementValueKind,
   oahElementVisibilityKind elementVisibilityKind)
 {
@@ -291,7 +291,7 @@ oahElement::~oahElement ()
 {}
 
 S_oahElement oahElement::thisElementIfItHasName (
-  const string& name)
+  const std::string& name)
 {
   S_oahElement result;
 
@@ -306,9 +306,9 @@ S_oahElement oahElement::thisElementIfItHasName (
   return result;
 }
 
-string oahElement::getShortNameOrLongNameIfEmpty () const
+std::string oahElement::getShortNameOrLongNameIfEmpty () const
 {
-  string result;
+  std::string result;
 
   if (fShortName.size ()) {
     result = fShortName;
@@ -320,9 +320,9 @@ string oahElement::getShortNameOrLongNameIfEmpty () const
   return result;
 }
 
-string oahElement::fetchNames () const
+std::string oahElement::fetchNames () const
 {
-  stringstream s;
+  std::stringstream s;
 
   if (
     fLongName.size ()
@@ -357,10 +357,10 @@ string oahElement::fetchNames () const
   return s.str ();
 }
 
-string oahElement::fetchNamesInColumns (
+std::string oahElement::fetchNamesInColumns (
   int subGroupsShortNameFieldWidth) const
 {
-  stringstream s;
+  std::stringstream s;
 
   if (
     fShortName.size ()
@@ -368,15 +368,15 @@ string oahElement::fetchNamesInColumns (
     fLongName.size ()
     ) {
       if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
-        s << left <<
-          setw (subGroupsShortNameFieldWidth) <<
+        s << std::left <<
+          std::setw (subGroupsShortNameFieldWidth) <<
           '-' << fLongName <<
           ", " <<
           '-' << fShortName;
       }
       else {
-        s << left <<
-          setw (subGroupsShortNameFieldWidth) <<
+        s << std::left <<
+          std::setw (subGroupsShortNameFieldWidth) <<
           '-' << fLongName <<
           ", " <<
           '-' << fShortName;
@@ -385,14 +385,14 @@ string oahElement::fetchNamesInColumns (
 
   else {
     s <<
-      setw (subGroupsShortNameFieldWidth);
+      std::setw (subGroupsShortNameFieldWidth);
 
     if (fLongName.size ()) {
       s <<
         '-' << fLongName;
     }
     if (fShortName.size ()) {
-      s << left <<
+      s << std::left <<
          '-' << fShortName;
     }
   }
@@ -400,9 +400,9 @@ string oahElement::fetchNamesInColumns (
   return s.str ();
 }
 
-string oahElement::fetchNamesBetweenQuotes () const
+std::string oahElement::fetchNamesBetweenQuotes () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "'" <<
@@ -412,9 +412,9 @@ string oahElement::fetchNamesBetweenQuotes () const
   return s.str ();
 }
 
-string oahElement::fetchNamesBetweenParentheses () const
+std::string oahElement::fetchNamesBetweenParentheses () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '(' <<
@@ -424,10 +424,10 @@ string oahElement::fetchNamesBetweenParentheses () const
   return s.str ();
 }
 
-string oahElement::fetchNamesInColumnsBetweenParentheses (
+std::string oahElement::fetchNamesInColumnsBetweenParentheses (
   int subGroupsShortNameFieldWidth) const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '(' <<
@@ -444,7 +444,7 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
 //   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
 //     gLogStream <<
 //       ".\\\" ==> oahElement::acceptIn ()" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -457,7 +457,7 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
 //         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
 //           gLogStream <<
 //             ".\\\" ==> Launching oahElement::visitStart ()" <<
-//             endl;
+//             std::endl;
 //         }
 // #endif
 //         p->visitStart (elem);
@@ -470,7 +470,7 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
 //   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
 //     gLogStream <<
 //       ".\\\" ==> oahElement::acceptOut ()" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -483,7 +483,7 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
 //         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
 //           gLogStream <<
 //             ".\\\" ==> Launching oahElement::visitEnd ()" <<
-//             endl;
+//             std::endl;
 //         }
 // #endif
 //         p->visitEnd (elem);
@@ -496,15 +496,15 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
 //   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
 //     gLogStream <<
 //       ".\\\" ==> oahElement::browseData ()" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 // }
 
 Bool oahElement::findStringInFindableElement (
-	const string&               lowerCaseString,
-	list<S_oahFindStringMatch>& foundMatchesList,
-	ostream&                    os) const
+	const std::string&               lowerCaseString,
+	std::list<S_oahFindStringMatch>& foundMatchesList,
+	std::ostream&                    os) const
 {
   Bool result;
 
@@ -523,25 +523,25 @@ Bool oahElement::findStringInFindableElement (
 }
 
 Bool oahElement::elementMatchesString (
-	const string& lowerCaseString) const
+	const std::string& lowerCaseString) const
 {
   // does this element's long name match?
   Bool longNameMatches =
-    mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
+    mfStringToLowerCase (fLongName).find (lowerCaseString) != std::string::npos;
 
   // does this element's short name match?
   Bool shortNameMatches =
-    mfStringToLowerCase (fShortName).find (lowerCaseString) != string::npos;
+    mfStringToLowerCase (fShortName).find (lowerCaseString) != std::string::npos;
 
   // does this element's description match?
   Bool descriptionMatches =
-    mfStringToLowerCase (fDescription).find (lowerCaseString) != string::npos;
+    mfStringToLowerCase (fDescription).find (lowerCaseString) != std::string::npos;
 
 	return
 		shortNameMatches || longNameMatches || descriptionMatches;
 }
 
-string oahElement::asLongNamedOptionString () const
+std::string oahElement::asLongNamedOptionString () const
 {
   if (fLongName.size ()) {
     return asActualLongNamedOptionString ();
@@ -551,9 +551,9 @@ string oahElement::asLongNamedOptionString () const
   }
 }
 
-string oahElement::asShortString () const
+std::string oahElement::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s << "'-" << fLongName;
 
@@ -566,9 +566,9 @@ string oahElement::asShortString () const
   return s.str ();
 }
 
-string oahElement::asString () const
+std::string oahElement::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "'-" << fLongName;
@@ -585,13 +585,13 @@ string oahElement::asString () const
   return s.str ();
 }
 
-void oahElement::printOptionHeader (ostream& os) const
+void oahElement::printOptionHeader (std::ostream& os) const
 {
   os <<
     '-' << fLongName <<
-    endl <<
+    std::endl <<
     '-' << fShortName <<
-    endl;
+    std::endl;
 
   if (fDescription.size ()) {
     // indent a bit more for readability
@@ -606,22 +606,22 @@ void oahElement::printOptionHeader (ostream& os) const
 }
 
 void oahElement::printOahElementEssentials (
-  ostream& os,
+  std::ostream& os,
   int fieldWidth) const
 {
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "longName" << " : " <<
     "\"" << fLongName << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "shortName" << " : " <<
     "\"" << fShortName << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "description" << " : " <<
     "\"" << fDescription << "\"" <<
-    endl <<
+    std::endl <<
 
 /* JMI
   ++gIndenter;
@@ -631,61 +631,61 @@ void oahElement::printOahElementEssentials (
   --gIndenter;
 */
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fElementValueKind" << " : " <<
     oahElementValueKindAsString (fElementValueKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fElementHelpOnlyKind" << " : " <<
     oahElementHelpOnlyKindAsString (fElementHelpOnlyKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fElementVisibilityKind" << " : " <<
     oahElementVisibilityKindAsString (fElementVisibilityKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fMultipleOccurrencesAllowed" << " : " <<
     fMultipleOccurrencesAllowed <<
-    endl;
+    std::endl;
 }
 
 void oahElement::printOahElementEssentialsShort (
-  ostream& os,
+  std::ostream& os,
   int fieldWidth) const
 {
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     fetchNames () << " : " <<
     fDescription <<
-    endl;
+    std::endl;
 }
 
-void oahElement::print (ostream& os) const
+void oahElement::print (std::ostream& os) const
 {
   os <<
     "??? oahElement ???" <<
-    endl;
+    std::endl;
 
   printOahElementEssentials (os, 40); // JMI
 }
 
-void oahElement::printShort (ostream& os) const
+void oahElement::printShort (std::ostream& os) const
 {
   os <<
     "??? oahElement ???" <<
-    endl;
+    std::endl;
 
   printOahElementEssentials (os, 40); // JMI
 }
 
-void oahElement::printHelp (ostream& os) const
+void oahElement::printHelp (std::ostream& os) const
 {
   os <<
     fetchNames () <<
-    endl;
+    std::endl;
 
   if (fDescription.size ()) {
     // indent a bit more for readability
@@ -699,9 +699,9 @@ void oahElement::printHelp (ostream& os) const
   }
 }
 
-const string oahElement::containingFindableElementAsString () const
+const std::string oahElement::containingFindableElementAsString () const
 {
-	stringstream s;
+	std::stringstream s;
 
 	s <<
 		fetchNames () << " : " <<
@@ -710,19 +710,19 @@ const string oahElement::containingFindableElementAsString () const
 	return s.str ();
 }
 
-ostream& operator << (ostream& os, const S_oahElement& elt)
+std::ostream& operator << (std::ostream& os, const S_oahElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
 }
 
-ostream& operator << (ostream& os, const oahElement& elt)
+std::ostream& operator << (std::ostream& os, const oahElement& elt)
 {
   elt.print (os);
   return os;
@@ -735,9 +735,9 @@ bool compareOahElements::operator() (
 /*
   Compare:
   A binary predicate that takes two arguments of the same type as the elements and returns a Bool. The expression comp(a,b), where comp is an object of this type and a and b are key values, shall return true if a is considered to go before b in the strict weak ordering the function defines.
-  The multiset object uses this expression to determine both the order the elements follow in the container and whether two element keys are equivalent (by comparing them reflexively: they are equivalent if !comp(a,b) && !comp(b,a)).
+  The std::multiset object uses this expression to determine both the order the elements follow in the container and whether two element keys are equivalent (by comparing them reflexively: they are equivalent if !comp(a,b) && !comp(b,a)).
   This can be a function pointer or a function object (see constructor for an example). This defaults to less<T>, which returns the same as applying the less-than operator (a<b).
-  Aliased as member types multiset::key_compare and multiset::value_compare.
+  Aliased as member types std::multiset::key_compare and std::multiset::value_compare.
 */
 
   // let's decide that nullptr (which shouldn't occur too often...)
@@ -764,8 +764,8 @@ bool compareOahElements::operator() (
 //______________________________________________________________________________
 S_oahElementUse oahElementUse::create (
   S_oahElement  elementUsed,
-  const string& nameUsed,
-  const string& valueUsed)
+  const std::string& nameUsed,
+  const std::string& valueUsed)
 {
   oahElementUse* o =
     new oahElementUse (
@@ -778,8 +778,8 @@ S_oahElementUse oahElementUse::create (
 
 oahElementUse::oahElementUse (
   S_oahElement  elementUsed,
-  const string& nameUsed,
-  const string& valueUsed)
+  const std::string& nameUsed,
+  const std::string& valueUsed)
 {
   fElementUsed = elementUsed;
   fNameUsed    = nameUsed;
@@ -789,9 +789,9 @@ oahElementUse::oahElementUse (
 oahElementUse::~oahElementUse ()
 {}
 
-string oahElementUse::asString () const
+std::string oahElementUse::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "Element use" <<
@@ -810,18 +810,18 @@ string oahElementUse::asString () const
   return s.str ();
 }
 
-void oahElementUse::print (ostream& os) const
+void oahElementUse::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_oahElementUse& elt)
+std::ostream& operator << (std::ostream& os, const S_oahElementUse& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

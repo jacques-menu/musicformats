@@ -18,7 +18,7 @@ void msrPart::browseData (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrPart::browseData ()" <<
-      endl;
+      std::endl;
   }
 
 #ifdef TRACING_IS_ENABLED // JMI
@@ -26,30 +26,30 @@ void msrPart::browseData (basevisitor* v)
     gLogStream <<
       "++++++++ fPartAllStavesList.size(): " <<
       fPartAllStavesList.size () <<
-      endl;
+      std::endl;
 
     if (fPartAllStavesList.size ()) {
       for (S_msrStaff staff : fPartAllStavesList) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "+++++++++ staff: ++++++++" <<
           " \"" << staff->getStaffName () << "\"" <<
-          endl;
+          std::endl;
       } // for
     }
 
     gLogStream <<
       "++++++++ fPartNonHarmoniesNorFiguredBassStavesList.size(): " <<
       fPartNonHarmoniesNorFiguredBassStavesList.size () <<
-      endl;
+      std::endl;
 
     if (fPartNonHarmoniesNorFiguredBassStavesList.size ()) {
       for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "+++++++++ staff: ++++++++" <<
           " \"" << staff->getStaffName () << "\"" <<
-          endl;
+          std::endl;
       } // for
     }
   }

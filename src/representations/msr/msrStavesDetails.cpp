@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -32,8 +32,6 @@
 
 #include "msrBrowsers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -78,7 +76,7 @@ S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
       "Creating a newborn clone of staff tuning '" <<
       asString () <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -98,7 +96,7 @@ void msrStaffTuning::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStaffTuning::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStaffTuning>*
@@ -109,7 +107,7 @@ void msrStaffTuning::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStaffTuning::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -120,7 +118,7 @@ void msrStaffTuning::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStaffTuning::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStaffTuning>*
@@ -131,7 +129,7 @@ void msrStaffTuning::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStaffTuning::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -140,9 +138,9 @@ void msrStaffTuning::acceptOut (basevisitor* v)
 void msrStaffTuning::browseData (basevisitor* v)
 {}
 
-string msrStaffTuning::asString () const
+std::string msrStaffTuning::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[StaffTuning" <<
@@ -159,46 +157,46 @@ string msrStaffTuning::asString () const
   return s.str ();
 }
 
-void msrStaffTuning::print (ostream& os) const
+void msrStaffTuning::print (std::ostream& os) const
 {
   os <<
     "[StaffTuning" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 29;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fStaffTuningLineNumber" << " : " <<
     fStaffTuningLineNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fStaffTuningQuarterTonesPitchKind" << " : " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fStaffTuningQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fStaffTuningOctaveKind" << " : " <<
     fStaffTuningOctaveKind <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrStaffTuning& elt)
+std::ostream& operator << (std::ostream& os, const S_msrStaffTuning& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -232,7 +230,7 @@ msrStaffDetails::msrStaffDetails (
   msrShowFretsKind    showFretsKind,
   msrPrintObjectKind  printObjectKind,
   msrPrintSpacingKind printSpacingKind)
-    : msrMeasureElement (
+    : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
 {
@@ -254,7 +252,7 @@ void msrStaffDetails::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStaffDetails::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStaffDetails>*
@@ -265,7 +263,7 @@ void msrStaffDetails::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStaffDetails::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -276,7 +274,7 @@ void msrStaffDetails::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrStaffDetails::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrStaffDetails>*
@@ -287,7 +285,7 @@ void msrStaffDetails::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrStaffDetails::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -297,7 +295,7 @@ void msrStaffDetails::browseData (basevisitor* v)
 {
   if (fStaffTuningsList.size ()) {
     for (
-      list<S_msrStaffTuning>::const_iterator i = fStaffTuningsList.begin ();
+      std::list<S_msrStaffTuning>::const_iterator i = fStaffTuningsList.begin ();
       i != fStaffTuningsList.end ();
       ++i
   ) {
@@ -308,10 +306,10 @@ void msrStaffDetails::browseData (basevisitor* v)
   }
 }
 
-string msrStaffTypeKindAsString (
+std::string msrStaffTypeKindAsString (
   msrStaffTypeKind staffTypeKind)
 {
-  string result;
+  std::string result;
 
   switch (staffTypeKind) {
     case msrStaffTypeKind::kStaffTypeRegular:
@@ -334,16 +332,16 @@ string msrStaffTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrStaffTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrStaffTypeKind& elt)
 {
   os << msrStaffTypeKindAsString (elt);
   return os;
 }
 
-string msrShowFretsKindAsString (
+std::string msrShowFretsKindAsString (
   msrShowFretsKind showFretsKind)
 {
-  string result;
+  std::string result;
 
   switch (showFretsKind) {
     case msrShowFretsKind::kShowFretsNumbers:
@@ -357,16 +355,16 @@ string msrShowFretsKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrShowFretsKind& elt)
+std::ostream& operator << (std::ostream& os, const msrShowFretsKind& elt)
 {
   os << msrShowFretsKindAsString (elt);
   return os;
 }
 
-string msrPrintSpacingKindAsString (
+std::string msrPrintSpacingKindAsString (
   msrPrintSpacingKind printSpacingKind)
 {
-  string result;
+  std::string result;
 
   switch (printSpacingKind) {
     case msrPrintSpacingKind::kPrintSpacingYes:
@@ -380,15 +378,15 @@ string msrPrintSpacingKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrPrintSpacingKind& elt)
+std::ostream& operator << (std::ostream& os, const msrPrintSpacingKind& elt)
 {
   os << msrPrintSpacingKindAsString (elt);
   return os;
 }
 
-string msrStaffDetails::asShortString () const
+std::string msrStaffDetails::asShortString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[StaffDetails" <<
@@ -412,31 +410,31 @@ string msrStaffDetails::asShortString () const
   return s.str ();
 }
 
-void msrStaffDetails::print (ostream& os) const
+void msrStaffDetails::print (std::ostream& os) const
 {
   os <<
     "[StaffDetails" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 17;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "staffTypeKind" << " : " <<
     msrStaffTypeKindAsString (fStaffTypeKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "staffLinesNumber" << " : " << fStaffLinesNumber <<
-    endl;
+    std::endl;
 
   // print the staff tunings if any
   if (fStaffTuningsList.size ()) {
-    os << endl;
+    os << std::endl;
 
-    list<S_msrStaffTuning>::const_iterator
+    std::list<S_msrStaffTuning>::const_iterator
       iBegin = fStaffTuningsList.begin (),
       iEnd   = fStaffTuningsList.end (),
       i      = iBegin;
@@ -446,45 +444,45 @@ void msrStaffDetails::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
-    os << endl;
+    os << std::endl;
 
     --gIndenter;
   }
   else {
-    os << left <<
-      setw (fieldWidth) <<
+    os << std::left <<
+      std::setw (fieldWidth) <<
       "staffTunings" << " : " << "[EMPTY]" <<
-      endl;
+      std::endl;
   }
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "showFretsKind" << " : " <<
     msrShowFretsKindAsString (fShowFretsKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "printObjectKind" << " : " <<
     msrPrintObjectKindAsString (fPrintObjectKind) <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "printSpacingKind" << " : " <<
     msrPrintSpacingKindAsString (fPrintSpacingKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrStaffDetails& elt)
+std::ostream& operator << (std::ostream& os, const S_msrStaffDetails& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

@@ -13,8 +13,6 @@
 #include "msdrComponent.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -30,7 +28,7 @@ S_mfcRepresentationComponent getMsdrRepresentationComponent ()
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Create the MSDR format component" <<
-        endl;
+        std::endl;
     }
 #endif
 
@@ -45,7 +43,7 @@ S_mfcRepresentationComponent getMsdrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          list<string> {
+          std::list<std::string> {
             "Start of sequential versions numbering"
           }
       ));

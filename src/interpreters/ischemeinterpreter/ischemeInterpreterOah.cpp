@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -31,8 +31,6 @@
 
 #include "ischemeInterpreterInsiderHandler.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -266,7 +264,7 @@ void ischemeInterpreterOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> ischemeInterpreterOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -279,7 +277,7 @@ void ischemeInterpreterOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching ischemeInterpreterOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -292,7 +290,7 @@ void ischemeInterpreterOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> ischemeInterpreterOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -305,7 +303,7 @@ void ischemeInterpreterOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching ischemeInterpreterOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -318,7 +316,7 @@ void ischemeInterpreterOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> ischemeInterpreterOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -328,7 +326,7 @@ void ischemeInterpreterOahGroup::printIschemeInterpreterOahValues (
 {
   gLogStream <<
     "The ischeme options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -337,57 +335,57 @@ void ischemeInterpreterOahGroup::printIschemeInterpreterOahValues (
 
   gLogStream <<
     "Trace:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fTraceScanning" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fTraceScanning" << " : " <<
       fTraceScanning <<
-      endl <<
-    setw (fieldWidth) << "fDisplayTokens" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fDisplayTokens" << " : " <<
       fDisplayTokens <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fTraceParsing" << " : " <<
+    std::setw (fieldWidth) << "fTraceParsing" << " : " <<
       fTraceParsing <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fDisplayToolAndInput" << " : " <<
+    std::setw (fieldWidth) << "fDisplayToolAndInput" << " : " <<
       fDisplayToolAndInput <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fDisplayOptions" << " : " <<
+    std::setw (fieldWidth) << "fDisplayOptions" << " : " <<
       fDisplayOptions <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fTraceInputs" << " : " <<
+    std::setw (fieldWidth) << "fTraceInputs" << " : " <<
       fTraceInputs <<
-      endl <<
-    setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
       fTraceCaseInputStatements <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fTraceChoices" << " : " <<
+    std::setw (fieldWidth) << "fTraceChoices" << " : " <<
       fTraceChoices <<
-      endl <<
-    setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
       fTraceCaseChoiceStatements <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
+    std::setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
       fTraceCaseChoiceStatements <<
-      endl <<
-    setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
       fTraceCaseInputStatements <<
-      endl <<
-    setw (fieldWidth) << "fNoLaunch" << " : " <<
+      std::endl <<
+    std::setw (fieldWidth) << "fNoLaunch" << " : " <<
       fNoLaunch <<
-      endl <<
+      std::endl <<
 
-    setw (fieldWidth) << "fTraceOptionsBlocks" << " : " <<
+    std::setw (fieldWidth) << "fTraceOptionsBlocks" << " : " <<
       fTraceOptionsBlocks <<
-      endl;
+      std::endl;
 
   --gIndenter;
 
@@ -396,20 +394,20 @@ void ischemeInterpreterOahGroup::printIschemeInterpreterOahValues (
 
   gLogStream <<
     "Choice:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fSelectChoiceToLabelsMultiMap" << " : ";
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fSelectChoiceToLabelsMultiMap" << " : ";
 
   ++gIndenter;
 
   if (fSelectChoiceToLabelsMultiMap.size ()) {
-    for (pair<string, string> thePair : fSelectChoiceToLabelsMultiMap) {
+    for (std::pair<std::string, std::string> thePair : fSelectChoiceToLabelsMultiMap) {
       gLogStream <<
         thePair.first << " : " << thePair.second <<
-        endl;
+        std::endl;
     } // for
   }
 
@@ -420,13 +418,13 @@ void ischemeInterpreterOahGroup::printIschemeInterpreterOahValues (
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_ischemeInterpreterOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -439,7 +437,7 @@ S_ischemeInterpreterOahGroup createGlobalIschemeInterpreterOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global ischeme OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

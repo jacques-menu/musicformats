@@ -24,9 +24,9 @@ namespace MusicFormats
 EXP void translateBsrToBraille (
   const S_bsrScore originalBsrScore,
   S_bsrOahGroup    bsrOpts,
-  const string&    passNumber,
-  const string&    passDescription,
-  ostream&         brailleOutputStream);
+  const std::string&    passNumber,
+  const std::string&    passDescription,
+  std::ostream&         brailleOutputStream);
 
 
 }

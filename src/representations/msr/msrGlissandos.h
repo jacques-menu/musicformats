@@ -28,10 +28,10 @@ enum class msrGlissandoTypeKind {
   kGlissandoTypeStart, kGlissandoTypeStop
 };
 
-string msrGlissandoTypeKindAsString (
+std::string msrGlissandoTypeKindAsString (
   msrGlissandoTypeKind glissandoTypeKind);
 
-ostream& operator << (ostream& os, const msrGlissandoTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrGlissandoTypeKind& elt);
 
 class EXP msrGlissando : public msrElement
 {
@@ -45,7 +45,7 @@ class EXP msrGlissando : public msrElement
                             int                  glissandoNumber,
                             msrGlissandoTypeKind glissandoTypeKind,
                             msrLineTypeKind      glissandoLineTypeKind,
-                            const string&        glissandoTextValue);
+                            const std::string&        glissandoTextValue);
 
     SMARTP<msrGlissando> createGlissandoNewbornClone ();
 
@@ -61,7 +61,7 @@ class EXP msrGlissando : public msrElement
                             int                  glissandoNumber,
                             msrGlissandoTypeKind glissandoTypeKind,
                             msrLineTypeKind      glissandoLineTypeKind,
-                            const string&        glissandoTextValue);
+                            const std::string&        glissandoTextValue);
 
     virtual               ~msrGlissando ();
 
@@ -79,7 +79,7 @@ class EXP msrGlissando : public msrElement
     msrLineTypeKind       getGlissandoLineTypeKind () const
                               { return fGlissandoLineTypeKind; }
 
-    string                getGlissandoTextValue () const
+    std::string           getGlissandoTextValue () const
                               { return fGlissandoTextValue; }
 
   public:
@@ -102,9 +102,9 @@ class EXP msrGlissando : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -117,10 +117,10 @@ class EXP msrGlissando : public msrElement
 
     msrLineTypeKind       fGlissandoLineTypeKind;
 
-    string                fGlissandoTextValue;
+    std::string           fGlissandoTextValue;
 };
 typedef SMARTP<msrGlissando> S_msrGlissando;
-EXP ostream& operator << (ostream& os, const S_msrGlissando& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrGlissando& elt);
 
 
 }

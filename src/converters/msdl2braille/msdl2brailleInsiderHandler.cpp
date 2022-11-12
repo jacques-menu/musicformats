@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
 #include "visitor.h"
@@ -50,15 +50,13 @@
 #include "msdl2brailleInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_msdl2brailleInsiderHandler msdl2brailleInsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   // create the insider handler
   msdl2brailleInsiderHandler* o = new
@@ -71,8 +69,8 @@ S_msdl2brailleInsiderHandler msdl2brailleInsiderHandler::create (
 }
 
 msdl2brailleInsiderHandler::msdl2brailleInsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahInsiderHandler (
       serviceName,
       handlerHeader,
@@ -92,7 +90,7 @@ Usage: msdl2braille [option]* [MSDLFile] [option]*
       "Initializing msdl2braille insider options handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -116,7 +114,7 @@ void msdl2brailleInsiderHandler::initializeHandlerMultiComponent ()
 }
 
 //_______________________________________________________________________________
-string msdl2brailleInsiderHandler::handlerServiceAboutInformation () const
+std::string msdl2brailleInsiderHandler::handlerServiceAboutInformation () const
 {
   return
 R"(What msdl2braille does:
@@ -150,7 +148,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlPrefixes ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msdl2braille prefixes" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -159,7 +157,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlPrefixes ()
 
 //______________________________________________________________________________
 void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
-  const string& serviceName)
+  const std::string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -167,7 +165,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
       "Creating the msdl2braille insider option groups" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -240,14 +238,14 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
     // print the options handler initial state
     gLogStream <<
       "msdl2brailleInsiderHandler has been initialized as:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     print (gLogStream);
 
     gLogStream <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -263,7 +261,7 @@ void msdl2brailleInsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -271,7 +269,7 @@ void msdl2brailleInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string msdl2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string msdl2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
   return ""; // JMI
 }
@@ -324,7 +322,7 @@ void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2brailleInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -337,7 +335,7 @@ void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2brailleInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -350,7 +348,7 @@ void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2brailleInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -363,7 +361,7 @@ void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2brailleInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -376,7 +374,7 @@ void msdl2brailleInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2brailleInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -384,33 +382,33 @@ void msdl2brailleInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msdl2brailleInsiderHandler::print (ostream& os) const
+void msdl2brailleInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "msdl2brailleInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -418,7 +416,7 @@ void msdl2brailleInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -426,16 +424,16 @@ void msdl2brailleInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msdl2brailleInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdl2brailleInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -445,8 +443,8 @@ ostream& operator << (ostream& os, const S_msdl2brailleInsiderHandler& elt)
 S_msdl2brailleInsiderOahGroup gGlobalMsdl2brlInsiderOahGroup;
 
 S_msdl2brailleInsiderOahGroup msdl2brailleInsiderOahGroup::create (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
   msdl2brailleInsiderOahGroup* o = new msdl2brailleInsiderOahGroup (
     serviceName,
@@ -457,8 +455,8 @@ S_msdl2brailleInsiderOahGroup msdl2brailleInsiderOahGroup::create (
 }
 
 msdl2brailleInsiderOahGroup::msdl2brailleInsiderOahGroup (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
   : oahGroup (
     serviceName,
     "hx2b", "help-msdl2braille",
@@ -476,11 +474,11 @@ void msdl2brailleInsiderOahGroup::initializeMsdl2brlInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Initializing \"" <<
     fGroupHeader <<
     "\" group" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -494,11 +492,11 @@ void msdl2brailleInsiderOahGroup::createInsiderQuitSubGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-  gLogStream << left <<
+  gLogStream << std::left <<
     "Creating insider quit subgroup in \"" <<
     fGroupHeader <<
     "\"" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -572,7 +570,7 @@ void msdl2brailleInsiderOahGroup::printMsdl2brlInsiderOahGroupValues (
 {
   gLogStream <<
     "The msdl2braille options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -581,23 +579,23 @@ void msdl2brailleInsiderOahGroup::printMsdl2brlInsiderOahGroupValues (
 
   gLogStream <<
     "Quit after some passes:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fQuitAfterPass1" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fQuitAfterPass1" << " : " <<
     fQuitAfterPass1 <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass2" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass2" << " : " <<
     fQuitAfterPass2 <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass3" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << " : " <<
     fQuitAfterPass3 <<
-    endl <<
-    setw (fieldWidth) << "fQuitAfterPass4" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass4" << " : " <<
     fQuitAfterPass4 <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -607,14 +605,14 @@ void msdl2brailleInsiderOahGroup::printMsdl2brlInsiderOahGroupValues (
 
 //______________________________________________________________________________
 S_msdl2brailleInsiderOahGroup createGlobalMsdl2brlOahGroup (
-  const string& serviceName,
-  const string& handlerHeader)
+  const std::string& serviceName,
+  const std::string& handlerHeader)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdl2braille OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

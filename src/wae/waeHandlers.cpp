@@ -35,8 +35,6 @@
 #include "waeHandlers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -55,9 +53,9 @@ waeHandler::waeHandler ()
 waeHandler::~waeHandler ()
 {}
 
-string waeHandler::asString () const
+std::string waeHandler::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "WAE handler";
@@ -65,20 +63,20 @@ string waeHandler::asString () const
   return s.str ();
 }
 
-void waeHandler::print (ostream& os) const
+void waeHandler::print (std::ostream& os) const
 {
   os <<
     "WaeHandler" <<
-    endl;
+    std::endl;
 }
 
-ostream& operator << (ostream& os, const S_waeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_waeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

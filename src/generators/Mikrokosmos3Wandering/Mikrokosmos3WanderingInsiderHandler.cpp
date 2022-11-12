@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
@@ -77,15 +77,13 @@
 #include "Mikrokosmos3WanderingInsiderHandler.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_Mikrokosmos3WanderingInsiderHandler Mikrokosmos3WanderingInsiderHandler::create (
-  const string& serviceName,
-  const string& handlerHeader,
+  const std::string& serviceName,
+  const std::string& handlerHeader,
   mfMultiGenerationOutputKind
                           multiGenerationOutputKind)
 {
@@ -101,8 +99,8 @@ S_Mikrokosmos3WanderingInsiderHandler Mikrokosmos3WanderingInsiderHandler::creat
 }
 
 Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingInsiderHandler (
-  const string& serviceName,
-  const string& handlerHeader,
+  const std::string& serviceName,
+  const std::string& handlerHeader,
   mfMultiGenerationOutputKind
                           multiGenerationOutputKind)
   : oahInsiderHandler (
@@ -126,7 +124,7 @@ R"(
       "Initializing \"" <<
       fHandlerHeader <<
       "\" regular options handler" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -151,15 +149,15 @@ void Mikrokosmos3WanderingInsiderHandler::initializeHandlerMultiComponent ()
     createMikrokosmos3WanderingGeneratorComponent ();
 }
 
-string Mikrokosmos3WanderingInsiderHandler::usageInformation (
+std::string Mikrokosmos3WanderingInsiderHandler::usageInformation (
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
 R"(Usage: Mikrokosmos3Wandering [option]*
 )" <<
-    endl;
+    std::endl;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
@@ -177,17 +175,17 @@ R"(Usage: Mikrokosmos3Wandering [option]*
   return s.str ();
 }
 
-string Mikrokosmos3WanderingInsiderHandler::handlerServiceAboutInformation () const
+std::string Mikrokosmos3WanderingInsiderHandler::handlerServiceAboutInformation () const
 {
   return
     Mikrokosmos3WanderingAboutInformation (
       fMultiGenerationOutputKind);
 }
 
-string Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingAboutInformation (
+std::string Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingAboutInformation (
   mfMultiGenerationOutputKind multiGenerationOutputKind) const
 {
-  string result;
+  std::string result;
 
   size_t passesNumber = 0;
 
@@ -217,7 +215,7 @@ string Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingAboutInformatio
       break;
   } // switch
 
-  string headPart;
+  std::string headPart;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
@@ -233,7 +231,7 @@ R"(What Mikrokosmos3Wandering does:
 
     default:
       {
-        stringstream headPartStream;
+        std::stringstream headPartStream;
 
         headPartStream <<
 R"(What Mikrokosmos3Wandering does:
@@ -245,7 +243,7 @@ R"(What Mikrokosmos3Wandering does:
           " passes when generating " <<
           mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
           " output:" <<
-          endl <<
+          std::endl <<
 R"(
         Pass 1:  generate a first MSR for the Mikrokosmos III Wandering score)";
 
@@ -254,7 +252,7 @@ R"(
   } // switch
 
 
-  string specificPart;
+  std::string specificPart;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_NO_:
@@ -309,7 +307,7 @@ R"(
       break;
   } // switch
 
-   string commonTailPart =
+   std::string commonTailPart =
 R"(
 
     Other passes are performed according to the options, such as
@@ -330,7 +328,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingPrefixes
       "Creating the Mikrokosmos3Wandering prefixes in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -339,7 +337,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingPrefixes
 
 //______________________________________________________________________________
 void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGroups (
-  const string&             serviceName,
+  const std::string&             serviceName,
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
 #ifdef TRACING_IS_ENABLED
@@ -348,7 +346,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
       "Creating the \"" <<
       fHandlerHeader <<
       "\" insider option groups" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -506,7 +504,7 @@ void Mikrokosmos3WanderingInsiderHandler::checkOptionsAndArguments () const
       "checking options and arguments from argc/argv in \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -514,7 +512,7 @@ void Mikrokosmos3WanderingInsiderHandler::checkOptionsAndArguments () const
 }
 
 //______________________________________________________________________________
-string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions () const
+std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -522,7 +520,7 @@ string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions ()
       "Fetching the output file name from the options in OAH handler \"" <<
       fHandlerHeader <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -554,11 +552,11 @@ string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions ()
       outputFileNameHasBeenSet <<
       " autoOutputFileNameHasBeenSet: " <<
       autoOutputFileNameHasBeenSet <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string outputFileName;
+  std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
     // '-o, -output-file-name' has been chosen
@@ -670,7 +668,7 @@ string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions ()
     gLogStream <<
       "outputFileName: " <<
       outputFileName <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -717,7 +715,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << inputSourceName << "\" is both the input and output file name";
@@ -729,7 +727,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::checkGroupOptionsConsistency ()
 
 
   if (! fOutputFileName.size ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Mikrokosmos3WanderingInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
@@ -738,7 +736,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::checkGroupOptionsConsistency ()
   }
 
   else if (fOutputFileName == gGlobalServiceRunData->getInputSourceName ()) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
@@ -755,7 +753,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> Mikrokosmos3WanderingInsiderOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -768,7 +766,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching Mikrokosmos3WanderingInsiderOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -781,7 +779,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> Mikrokosmos3WanderingInsiderOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -794,7 +792,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching Mikrokosmos3WanderingInsiderOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -807,7 +805,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> Mikrokosmos3WanderingInsiderOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -815,33 +813,33 @@ void Mikrokosmos3WanderingInsiderOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void Mikrokosmos3WanderingInsiderHandler::print (ostream& os) const
+void Mikrokosmos3WanderingInsiderHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
   os <<
     "Mikrokosmos3WanderingInsiderHandler:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printHandlerEssentials (
     os, fieldWidth);
-  os << endl;
+  os << std::endl;
 
   os <<
     "Options groups (" <<
     mfSingularOrPlural (
       fHandlerGroupsList.size (), "element",  "elements") <<
     "):" <<
-    endl;
+    std::endl;
 
   if (fHandlerGroupsList.size ()) {
-    os << endl;
+    os << std::endl;
 
     ++gIndenter;
 
-    list<S_oahGroup>::const_iterator
+    std::list<S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -849,7 +847,7 @@ void Mikrokosmos3WanderingInsiderHandler::print (ostream& os) const
       // print the element
       os << (*i);
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
 
     --gIndenter;
@@ -857,16 +855,16 @@ void Mikrokosmos3WanderingInsiderHandler::print (ostream& os) const
 
   --gIndenter;
 
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_Mikrokosmos3WanderingInsiderHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -905,11 +903,11 @@ void Mikrokosmos3WanderingInsiderOahGroup::initializeMikrokosmos3WanderingInside
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream << left <<
+    gLogStream << std::left <<
       "Initializing \"" <<
       fGroupHeader <<
       "\" group" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -920,41 +918,41 @@ void Mikrokosmos3WanderingInsiderOahGroup::printMikrokosmos3WanderingInsiderOahG
 {
   gLogStream <<
     "The Mikrokosmos3Wandering options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // generation API kind
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (fieldWidth) << "Generation API kind:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "Generation API kind:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "msrGenerationAPIKind" << " : " <<
     msrGenerationAPIKindAsString (fGenerationAPIKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   // generate output kind
   // --------------------------------------
 
-  gLogStream << left <<
-    setw (fieldWidth) << "Generated output kind:" <<
-    endl;
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "Generated output kind:" <<
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     "mfMultiGenerationOutputKind" << " : " <<
     mfMultiGenerationOutputKindAsString (fMultiGenerationOutputKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -968,7 +966,7 @@ S_Mikrokosmos3WanderingInsiderOahGroup createGlobalMikrokosmos3WanderingInsiderO
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global Mikrokosmos3Wandering insider OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

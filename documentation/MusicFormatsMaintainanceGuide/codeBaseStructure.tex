@@ -86,10 +86,10 @@ jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > ma
 grep "<xs:element" 4.0/musicxml.xsd | sed -e 's/^.*name="//' | sed -e 's/"..*//' | sort -u > elements.txt
 ../src/elements/templates/elements.bash elements.txt ../src/elements/templates constants > elements.h   || rm -f elements.h
 ../src/elements/templates/elements.bash elements.txt ../src/elements/templates types > typedefs.h   || rm -f typedefs.h
-../src/elements/templates/elements.bash elements.txt ../src/elements/templates map > factory.cpp || rm -f factory.cpp
+../src/elements/templates/elements.bash elements.txt ../src/elements/templates std::map > factory.cpp || rm -f factory.cpp
 \end{lstlisting}
 
-The resulting files are the following, where \fileName{elements.txt} contains an alphabetic list of the \mxml\ markups found in the DTD:
+The resulting files are the following, where \fileName{elements.txt} contains an alphabetic std::list of the \mxml\ markups found in the DTD:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > ls -sal
 total 208

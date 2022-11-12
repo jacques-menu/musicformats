@@ -10,7 +10,7 @@
 */
 
 #include <climits>      // INT_MIN, INT_MAX
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <sstream>
 
 #include <regex>
@@ -33,22 +33,20 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 // constants
-const string K_MSR_GENERATION_API_KIND_LONG_NAME  = "msr-generation-api-kind";
-const string K_MSR_GENERATION_API_KIND_SHORT_NAME = "msr-gen-api";
+const std::string K_MSR_GENERATION_API_KIND_LONG_NAME  = "msr-generation-api-kind";
+const std::string K_MSR_GENERATION_API_KIND_SHORT_NAME = "msr-gen-api";
 
 S_msrPitchesLanguageAtom msrPitchesLanguageAtom::create (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   msrQuarterTonesPitchesLanguageKind&
                      quarterTonesPitchesLanguageKind)
 {
@@ -65,11 +63,11 @@ S_msrPitchesLanguageAtom msrPitchesLanguageAtom::create (
 }
 
 msrPitchesLanguageAtom::msrPitchesLanguageAtom (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   msrQuarterTonesPitchesLanguageKind&
                      quarterTonesPitchesLanguageKind)
   : oahAtomStoringAValue (
@@ -86,46 +84,46 @@ msrPitchesLanguageAtom::~msrPitchesLanguageAtom ()
 {}
 
 void msrPitchesLanguageAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrPitchesLanguageAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the language name:
-  // is it in the pitches languages map?
+  // is it in the pitches languages std::map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrPitchesLanguageAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (
         theString);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the map
+    // no, language is unknown in the std::map
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "MSR pitches language '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known MSR pitches languages are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -147,7 +145,7 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrPitchesLanguageAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -160,7 +158,7 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrPitchesLanguageAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -173,7 +171,7 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrPitchesLanguageAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -186,7 +184,7 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrPitchesLanguageAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -199,14 +197,14 @@ void msrPitchesLanguageAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrPitchesLanguageAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string msrPitchesLanguageAtom::asShortNamedOptionString () const
+std::string msrPitchesLanguageAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -216,9 +214,9 @@ string msrPitchesLanguageAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string msrPitchesLanguageAtom::asActualLongNamedOptionString () const
+std::string msrPitchesLanguageAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -228,39 +226,39 @@ string msrPitchesLanguageAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void msrPitchesLanguageAtom::print (ostream& os) const
+void msrPitchesLanguageAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msrPitchesLanguageAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fMsrQuarterTonesPitchesLanguageKindVariable" << " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
@@ -269,16 +267,16 @@ void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrPitchesLanguageAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_msrPitchesLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -286,12 +284,12 @@ ostream& operator << (ostream& os, const S_msrPitchesLanguageAtom& elt)
 
 //______________________________________________________________________________
 S_msrRenamePartAtom msrRenamePartAtom::create (
-  const string&         longName,
-  const string&         shortName,
-  const string&         description,
-  const string&         valueSpecification,
-  const string&         variableName,
-  map<string, string>&  stringToStringMapVariable)
+  const std::string&         longName,
+  const std::string&         shortName,
+  const std::string&         description,
+  const std::string&         valueSpecification,
+  const std::string&         variableName,
+  std::map<std::string, std::string>&  stringToStringMapVariable)
 {
   msrRenamePartAtom* o = new
     msrRenamePartAtom (
@@ -306,12 +304,12 @@ S_msrRenamePartAtom msrRenamePartAtom::create (
 }
 
 msrRenamePartAtom::msrRenamePartAtom (
-  const string&         longName,
-  const string&         shortName,
-  const string&         description,
-  const string&         valueSpecification,
-  const string&         variableName,
-  map<string, string>&  stringToStringMapVariable)
+  const std::string&         longName,
+  const std::string&         shortName,
+  const std::string&         description,
+  const std::string&         valueSpecification,
+  const std::string&         variableName,
+  std::map<std::string, std::string>&  stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -328,14 +326,14 @@ msrRenamePartAtom::~msrRenamePartAtom ()
 {}
 
 void msrRenamePartAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrRenamePartAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -346,18 +344,18 @@ void msrRenamePartAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrRenamePartAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string regularExpression (
+  std::string regularExpression (
     "[[:space:]]*(.+)[[:space:]]*"
     ":"
     "[[:space:]]*(.+)[[:space:]]*"
   );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -367,10 +365,10 @@ void msrRenamePartAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for part rename string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for part rename std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -381,13 +379,13 @@ void msrRenamePartAtom::applyAtomWithValue (
         gLogStream <<
           '[' << sm [i] << "] ";
       } // for
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 #endif
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "-msrPartRename argument '" << theString <<
@@ -396,7 +394,7 @@ void msrRenamePartAtom::applyAtomWithValue (
     oahError (s.str ());
   }
 
-  string
+  std::string
     oldPartName = sm [1],
     newPartName = sm [2];
 
@@ -408,18 +406,18 @@ void msrRenamePartAtom::applyAtomWithValue (
     gLogStream <<
       "--> oldPartName = \"" << oldPartName << "\", " <<
       "--> newPartName = \"" << newPartName << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // is this part name in the part renaming map?
-  map<string, string>::iterator
+  // is this part name in the part renaming std::map?
+  std::map<std::string, std::string>::iterator
     it =
       fStringToStringMapVariable.find (oldPartName);
 
   if (it != fStringToStringMapVariable.end ()) {
     // yes, issue error message
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Part \"" << oldPartName << "\" occurs more that once in the " <<
@@ -441,7 +439,7 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrRenamePartAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -454,7 +452,7 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrRenamePartAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -467,7 +465,7 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrRenamePartAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -480,7 +478,7 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrRenamePartAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -493,14 +491,14 @@ void msrRenamePartAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrRenamePartAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string msrRenamePartAtom::asShortNamedOptionString () const
+std::string msrRenamePartAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ';
@@ -509,7 +507,7 @@ string msrRenamePartAtom::asShortNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    map<string, string>::const_iterator
+    std::map<std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -523,9 +521,9 @@ string msrRenamePartAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string msrRenamePartAtom::asActualLongNamedOptionString () const
+std::string msrRenamePartAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ';
@@ -534,7 +532,7 @@ string msrRenamePartAtom::asActualLongNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    map<string, string>::const_iterator
+    std::map<std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -548,65 +546,65 @@ string msrRenamePartAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void msrRenamePartAtom::print (ostream& os) const
+void msrRenamePartAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msrRenamePartAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fStringToStringMapVariable" << " : " <<
-    endl;
+    std::endl;
 
   if (! fStringToStringMapVariable.size ()) {
     os << "[EMPTY]";
   }
   else {
-    map<string, string>::const_iterator
+    std::map<std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i).first << " --> " << (*i).second;
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
-  os << endl;
+  os << std::endl;
 
   --gIndenter;
 }
 
 void msrRenamePartAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : ";
 
   if (! fStringToStringMapVariable.size ()) {
     os <<
       "[EMPTY]" <<
-      endl;
+      std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    map<string, string>::const_iterator
+    std::map<std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -617,7 +615,7 @@ void msrRenamePartAtom::printAtomWithVariableOptionsValues (
         "\" --> \"" <<
         (*i).second <<
         "\"" <<
-        endl;
+        std::endl;
       if (++i == iEnd) break;
     } // for
 
@@ -628,13 +626,13 @@ void msrRenamePartAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator << (ostream& os, const S_msrRenamePartAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_msrRenamePartAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -882,16 +880,16 @@ R"()",
   // notes pitches
 
   if (! setMsrQuarterTonesPitchesLanguage ("nederlands")) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "INTERNAL INITIALIZATION ERROR: "
       "MSR pitches language 'nederlands' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known MSR pitches languages are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -918,14 +916,14 @@ R"(Use LANGUAGE to display note pitches in the MSR logs and text views.
 The NUMBER MSR pitches languages available are:
 PITCHES_LANGUAGES.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
-            regex ("PITCHES_LANGUAGES"),
+              std::regex ("NUMBER"),
+              std::to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
+            std::regex ("PITCHES_LANGUAGES"),
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
             existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
         "LANGUAGE",
@@ -996,7 +994,7 @@ the names in the score or a summary of the latter in a first run with options
 '-dmsrnames, -display-msr-names' or 'dmsrsum, -display-msr-summary'.
 There can be spaces around the ':', in which case quoting is needed.
 There can be several occurrences of this option.)",
-          regex ("EXECUTABLE"),
+          std::regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "PART_RENAME_SPEC",
         "fMsrPartsRenamingMap",
@@ -1148,15 +1146,15 @@ void msrOahGroup::initializeMsrOahGroup ()
 }
 
 //______________________________________________________________________________
-Bool msrOahGroup::setMsrQuarterTonesPitchesLanguage (const string& language)
+Bool msrOahGroup::setMsrQuarterTonesPitchesLanguage (const std::string& language)
 {
-  // is language in the pitches languages map?
-  map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  // is language in the pitches languages std::map?
+  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the map
+    // no, language is unknown in the std::map
     return false;
   }
 
@@ -1180,7 +1178,7 @@ void msrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1193,7 +1191,7 @@ void msrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -1206,7 +1204,7 @@ void msrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1219,7 +1217,7 @@ void msrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -1232,7 +1230,7 @@ void msrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -1242,7 +1240,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The MSR options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1251,51 +1249,51 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Trace and display:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fTraceMsr" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fTraceMsr" << " : " <<
     fTraceMsr <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fTraceMsrVisitors" << " : " <<
+    std::setw (valueFieldWidth) << "fTraceMsrVisitors" << " : " <<
     fTraceMsrVisitors <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplayPartGroups" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayPartGroups" << " : " <<
     fDisplayPartGroups <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplayFirstMsrShort" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrShort" << " : " <<
     fDisplayFirstMsrShort <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplaySecondMsrShort" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrShort" << " : " <<
     fDisplaySecondMsrShort <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplayFirstMsrFull" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrFull" << " : " <<
     fDisplayFirstMsrFull <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplaySecondMsrFull" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrFull" << " : " <<
     fDisplaySecondMsrFull <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplayFirstMsrShortNames" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrShortNames" << " : " <<
     fDisplayFirstMsrShortNames <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplaySecondMsrShortNames" << " : " <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrShortNames" << " : " <<
     fDisplaySecondMsrShortNames <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplayFirstMsrShortSummary" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrShortSummary" << " : " <<
     fDisplayFirstMsrShortSummary <<
-    endl <<
+    std::endl <<
 
-    setw (valueFieldWidth) << "fDisplaySecondMsrShortSummary" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrShortSummary" << " : " <<
     fDisplaySecondMsrShortSummary <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1304,15 +1302,15 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   gLogStream <<
      "Languages:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "msrPitchesLanguage" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "msrPitchesLanguage" << " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1321,14 +1319,14 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   gLogStream <<
      "Parts:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // parts renaming
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "parts renaming" << " : ";
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "parts renaming" << " : ";
 
   if (! fMsrPartsRenamingMap.size ()) {
     gLogStream <<
@@ -1336,7 +1334,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
   }
   else {
     for (
-      map<string, string>::const_iterator i =
+      std::map<std::string, std::string>::const_iterator i =
         fMsrPartsRenamingMap.begin ();
       i != fMsrPartsRenamingMap.end ();
       ++i
@@ -1346,7 +1344,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
     } // for
   }
 
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   --gIndenter;
 
@@ -1355,15 +1353,15 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Staves:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) <<
     "fCreateSingleLineStavesAsRythmic" << " : " <<
     fCreateSingleLineStavesAsRythmic <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1372,15 +1370,15 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Voices:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) <<
     "fCreateVoicesStaffRelativeNumbers" << " : " <<
     fCreateVoicesStaffRelativeNumbers <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1389,14 +1387,14 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Harmonies:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fShowHarmoniesVoices" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fShowHarmoniesVoices" << " : " <<
     fShowHarmoniesVoices <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -1405,27 +1403,27 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   gLogStream <<
     "Figured bass:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (valueFieldWidth) << "fShowFiguredBassVoices" << " : " <<
+  gLogStream << std::left <<
+    std::setw (valueFieldWidth) << "fShowFiguredBassVoices" << " : " <<
     fShowFiguredBassVoices <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_msrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1438,7 +1436,7 @@ S_msrOahGroup createGlobalMsrOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global MSR OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

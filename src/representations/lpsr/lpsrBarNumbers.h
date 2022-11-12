@@ -16,8 +16,6 @@
 
 #include "lpsrElements.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -69,7 +67,7 @@ class EXP lpsrBarNumberCheck : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -126,7 +124,7 @@ class EXP lpsrBarCommand : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -134,7 +132,7 @@ class EXP lpsrBarCommand : public lpsrElement
     // ------------------------------------------------------
 };
 typedef SMARTP<lpsrBarCommand> S_lpsrBarCommand;
-EXP ostream& operator << (ostream& os, const S_lpsrBarCommand& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrBarCommand& elt);
 
 
 }

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -21,8 +21,6 @@
 
 #include "bsrBrowsers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -52,7 +50,7 @@ bsrParallel::~bsrParallel ()
       asString () <<
       "', line " <<
       fInputLineNumber <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -63,7 +61,7 @@ void bsrParallel::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrParallel::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -76,7 +74,7 @@ void bsrParallel::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrParallel::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -89,7 +87,7 @@ void bsrParallel::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrParallel::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -102,7 +100,7 @@ void bsrParallel::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrParallel::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -119,10 +117,10 @@ void bsrParallel::browseData (basevisitor* v)
 
 }
 
-string bsrParallelLayoutKindAsString (
+std::string bsrParallelLayoutKindAsString (
   bsrParallelLayoutKind parallelLayoutKind)
 {
-  string result;
+  std::string result;
 
   switch (parallelLayoutKind) {
     case bsrParallelLayoutKind::kParallelLayoutBarOverBar:
@@ -136,73 +134,73 @@ string bsrParallelLayoutKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const bsrParallelLayoutKind& elt)
+std::ostream& operator << (std::ostream& os, const bsrParallelLayoutKind& elt)
 {
   os << bsrParallelLayoutKindAsString (elt);
   return os;
 }
 
-void bsrParallel::print (ostream& os) const
+void bsrParallel::print (std::ostream& os) const
 {
   os <<
     "Parallel" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   // print the parallel numbers
   const int fieldWidth = 18;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "printParallelNumber" << " : " << fPrintParallelNumber <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "brailleParallelNumber" << " : " << fBrailleParallelNumber <<
-    endl;
+    std::endl;
 
   // print the parallel elements if any
   size_t parallelElementsListSize = fParallelElementsList.size ();
 
   if (parallelElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
-      setw (fieldWidth) <<
+      std::setw (fieldWidth) <<
       "fParallelElementsList";
     if (parallelElementsListSize) {
-      os << endl;
+      os << std::endl;
       ++gIndenter;
 
-      list<S_bsrElement>::const_iterator
+      std::list<S_bsrElement>::const_iterator
         iBegin = fParallelElementsList.begin (),
         iEnd   = fParallelElementsList.end (),
         i      = iBegin;
       for ( ; ; ) {
         os << (*i);
         if (++i == iEnd) break;
-        os << endl;
+        os << std::endl;
       } // for
 
-      os << endl;
+      os << std::endl;
 
       --gIndenter;
     }
     else {
       os <<
         " : " << "[EMPTY]" <<
-      endl;
+      std::endl;
     }
   }
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_bsrParallel& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrParallel& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;

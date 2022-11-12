@@ -42,16 +42,14 @@
 
 #include "msr2summaryVisitor.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
 S_msrScore translateMxsrToMsrSkeleton (
   Sxmlelement    theMxsr,
   S_msrOahGroup& msrOpts,
-  const string&  passNumber,
-  const string&  passDescription)
+  const std::string&  passNumber,
+  const std::string&  passDescription)
 {
   // sanity check
   mfAssert (
@@ -64,20 +62,20 @@ S_msrScore translateMxsrToMsrSkeleton (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    string separator =
+    std::string separator =
       "%--------------------------------------------------------------";
 
     gLogStream <<
-      endl <<
+      std::endl <<
       separator <<
-      endl <<
+      std::endl <<
       gTab <<
       passNumber << ": " << passDescription <<
-      endl;
+      std::endl;
 
     gLogStream <<
       separator <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -115,7 +113,7 @@ S_msrScore translateMxsrToMsrSkeleton (
   // check indentation
   if (gIndenter != 0) {
     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "gIndenter value after " << passNumber << ": " <<
@@ -131,12 +129,12 @@ S_msrScore translateMxsrToMsrSkeleton (
   }
 
   if (! scoreSkeleton) {
-    string message =
+    std::string message =
       "### Conversion from MXSR to an MSR skeleton failed ###";
 
     gLogStream <<
       message <<
-      endl;
+      std::endl;
 
     throw mxsr2msrException (message);
   }
@@ -148,8 +146,8 @@ S_msrScore translateMxsrToMsrSkeleton (
 void displayMsrScoreSkeleton (
   S_msrOahGroup&  msrOpts,
   S_msrScore theMsrScore,
-  string     passNumber,
-  string     passDescription)
+  std::string     passNumber,
+  std::string     passDescription)
 {
   // sanity check
   mfAssert (
@@ -160,18 +158,18 @@ void displayMsrScoreSkeleton (
   // start the clock
   clock_t startClock = clock ();
 
-  string separator =
+  std::string separator =
     "%--------------------------------------------------------------";
 
   gLogStream <<
-    endl <<
+    std::endl <<
     separator <<
-    endl <<
+    std::endl <<
     gTab <<
     "Pass (optional): " << passDescription <<
-    endl <<
+    std::endl <<
     separator <<
-    endl << endl <<
+    std::endl << std::endl <<
     theMsrScore;
 
   // register time spent

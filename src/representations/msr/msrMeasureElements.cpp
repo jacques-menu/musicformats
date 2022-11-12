@@ -35,16 +35,16 @@
 #include "msrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 // constants
-const string   msrMeasureElement::K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
+const std::string
+  msrMeasureElement::K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
 
-const Rational msrMeasureElement::K_NO_WHOLE_NOTES (-444444, 1);
+const Rational
+  msrMeasureElement::K_NO_WHOLE_NOTES (-444444, 1);
 
 msrMeasureElement::msrMeasureElement (
   int          inputLineNumber,
@@ -66,20 +66,9 @@ msrMeasureElement::msrMeasureElement (
 msrMeasureElement::~msrMeasureElement ()
 {}
 
-void msrMeasureElement::setMeasureElementUpLinkToMeasure (
-  S_msrMeasure measure)
-{
-  fMeasureElementUpLinkToMeasure = measure;
-}
-
-S_msrMeasure msrMeasureElement::getMeasureElementUpLinkToMeasure () const
-{
-  return fMeasureElementUpLinkToMeasure;
-}
-
 void msrMeasureElement::setMeasureElementSoundingWholeNotes (
   const Rational& wholeNotes,
-  const string&   context)
+  const std::string&   context)
 {
   doSetMeasureElementSoundingWholeNotes (
     wholeNotes,
@@ -88,7 +77,7 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
 
 void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
   const Rational& wholeNotes,
-  const string&   context)
+  const std::string&   context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
@@ -103,7 +92,7 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
       "', context: \"" <<
       context <<
       "\"" <<
-      endl;
+      std::endl;
 
     --gIndenter;
   }
@@ -121,7 +110,7 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
 void msrMeasureElement::setMeasureElementMeasurePosition (
   const S_msrMeasure measure,
   const Rational&    measurePosition,
-  const string&      context)
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -139,7 +128,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       "), context: \"" <<
       context <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -181,7 +170,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 
 void msrMeasureElement::setMeasureElementVoicePosition (
   const Rational& voicePosition,
-  const string&   context)
+  const std::string&   context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -194,7 +183,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
       "', context: \"" <<
       context <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -216,7 +205,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
       "', context: \"" <<
       context <<
       "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -225,7 +214,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 
 // void msrMeasureElement::setMeasureElementMeasureMoment (
 //   const msrMoment& measureMoment,
-//   const string&    context)
+//   const std::string&    context)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
@@ -243,7 +232,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -252,7 +241,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //
 // void msrMeasureElement::setMeasureElementVoiceMoment (
 //   const msrMoment& voiceMoment,
-//   const string&    context)
+//   const std::string&    context)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
@@ -265,7 +254,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
-//       endl;
+//       std::endl;
 //   }
 // #endif
 //
@@ -278,7 +267,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   fMeasureElementVoiceMoment = voiceMoment;
 // }
 
-string msrMeasureElement::fetchMeasureElementMeasureNumber () const
+std::string msrMeasureElement::fetchMeasureElementMeasureNumber () const
 {
   // sanity check
   mfAssert (
@@ -309,7 +298,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureElement::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -322,7 +311,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -335,7 +324,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -348,37 +337,166 @@ void msrMeasureElement::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
   }
 }
 
-string msrMeasureElement::asString () const
+std::string msrMeasureElement::asString () const
 {
   // this is overriden all in actual elements
   return "??? msrMeasureElement::asString () ???";
 }
 
-string msrMeasureElement::asShortString () const
+std::string msrMeasureElement::asShortString () const
 {
   // this can be overriden in actual elements
   return asString ();
 }
 
-void msrMeasureElement::print (ostream& os) const
+void msrMeasureElement::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrMeasureElement& elt)
+std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
+msrMeasureElementLambda::msrMeasureElementLambda (
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
+    : msrElement (inputLineNumber)
+//       fMeasureElementMeasureMoment (
+//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
+//       fMeasureElementVoiceMoment (
+//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
+{
+  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
+
+  fMeasureElementSoundingWholeNotes = Rational (0, 1),
+
+  fMeasureElementMeasurePosition = msrMoment::K_NO_POSITION;
+  fMeasureElementVoicePosition   = msrMoment::K_NO_POSITION;
+}
+
+msrMeasureElementLambda::~msrMeasureElementLambda ()
+{}
+
+void msrMeasureElementLambda::acceptIn (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrMeasureElementLambda::acceptIn ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_msrMeasureElement>*
+    p =
+      dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
+        S_msrMeasureElement elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrMeasureElementLambda::visitStart ()" <<
+            std::endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void msrMeasureElementLambda::setMeasureElementLambdaUpLinkToMeasure (
+  S_msrMeasure measure)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of measure element lambda " <<
+      asString () <<
+      " to measure " << measure->asString () << // JMI v0.9.66
+      "' in measure '" <<
+      fetchMeasureElementMeasureNumber () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fMeasureElementLambaUpLinkToMeasure = measure;
+}
+
+S_msrMeasure msrMeasureElementLambda::getMeasureElementLambdaUpLinkToMeasure () const
+{
+  return fMeasureElementLambaUpLinkToMeasure;
+}
+
+void msrMeasureElementLambda::acceptOut (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrMeasureElementLambda::acceptOut ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_msrMeasureElement>*
+    p =
+      dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
+        S_msrMeasureElement elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrMeasureElementLambda::visitEnd ()" <<
+            std::endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+std::string msrMeasureElementLambda::asString () const
+{
+  // this is overriden all in actual elements
+  return "??? msrMeasureElementLambda::asString () ???";
+}
+
+std::string msrMeasureElementLambda::asShortString () const
+{
+  // this can be overriden in actual elements
+  return asString ();
+}
+
+void msrMeasureElementLambda::print (std::ostream& os) const
+{
+  os << asString () << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_msrMeasureElementLambda& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << std::endl;
   }
 
   return os;

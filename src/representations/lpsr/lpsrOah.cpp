@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <string>
 
 #include <regex>
@@ -36,18 +36,16 @@
 #include "oahEarlyOptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 S_lpsrPitchesLanguageAtom lpsrPitchesLanguageAtom::create (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   msrQuarterTonesPitchesLanguageKind&
                     lpsrPitchesLanguageKindVariable)
 {
@@ -64,11 +62,11 @@ S_lpsrPitchesLanguageAtom lpsrPitchesLanguageAtom::create (
 }
 
 lpsrPitchesLanguageAtom::lpsrPitchesLanguageAtom (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   msrQuarterTonesPitchesLanguageKind&
                     lpsrPitchesLanguageKindVariable)
   : oahAtomStoringAValue (
@@ -85,47 +83,47 @@ lpsrPitchesLanguageAtom::~lpsrPitchesLanguageAtom ()
 {}
 
 void lpsrPitchesLanguageAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the language name:
-  // is it in the pitches languages map?
+  // is it in the pitches languages std::map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (
         theString);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the map
+    // no, language is unknown in the std::map
 
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "LPSR pitches language '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known LPSR pitches languages are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -147,7 +145,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -160,7 +158,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -173,7 +171,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -186,7 +184,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -199,14 +197,14 @@ void lpsrPitchesLanguageAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrPitchesLanguageAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string lpsrPitchesLanguageAtom::asShortNamedOptionString () const
+std::string lpsrPitchesLanguageAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -216,9 +214,9 @@ string lpsrPitchesLanguageAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string lpsrPitchesLanguageAtom::asActualLongNamedOptionString () const
+std::string lpsrPitchesLanguageAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -228,39 +226,39 @@ string lpsrPitchesLanguageAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void lpsrPitchesLanguageAtom::print (ostream& os) const
+void lpsrPitchesLanguageAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lpsrPitchesLanguageAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fMsrQuarterTonesPitchesLanguageKindVariable" << " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
@@ -269,16 +267,16 @@ void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_lpsrPitchesLanguageAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrPitchesLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -286,11 +284,11 @@ ostream& operator << (ostream& os, const S_lpsrPitchesLanguageAtom& elt)
 
 //______________________________________________________________________________
 S_lpsrChordsLanguageAtom lpsrChordsLanguageAtom::create (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   lpsrChordsLanguageKind&
                     lpsrChordsLanguageKindVariable)
 {
@@ -307,11 +305,11 @@ S_lpsrChordsLanguageAtom lpsrChordsLanguageAtom::create (
 }
 
 lpsrChordsLanguageAtom::lpsrChordsLanguageAtom (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   lpsrChordsLanguageKind&
                     lpsrChordsLanguageKindVariable)
   : oahAtomStoringAValue (
@@ -328,44 +326,44 @@ lpsrChordsLanguageAtom::~lpsrChordsLanguageAtom ()
 {}
 
 void lpsrChordsLanguageAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the language name:
-  // is it in the chords languages map?
+  // is it in the chords languages std::map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  map<string, lpsrChordsLanguageKind>::const_iterator
+  std::map<std::string, lpsrChordsLanguageKind>::const_iterator
     it =
       gGlobalLpsrChordsLanguageKindsMap.find (theString);
 
   if (it == gGlobalLpsrChordsLanguageKindsMap.end ()) {
-    // no, language is unknown in the map
-    stringstream s;
+    // no, language is unknown in the std::map
+    std::stringstream s;
 
     s <<
       "LPSR chords language '" << theString <<
       "' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       gGlobalLpsrChordsLanguageKindsMap.size () - 1 <<
       " known LPSR chords languages apart from the default Ignatzek are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -387,7 +385,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -400,7 +398,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -413,7 +411,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -426,7 +424,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -439,14 +437,14 @@ void lpsrChordsLanguageAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrChordsLanguageAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string lpsrChordsLanguageAtom::asShortNamedOptionString () const
+std::string lpsrChordsLanguageAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -455,9 +453,9 @@ string lpsrChordsLanguageAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string lpsrChordsLanguageAtom::asActualLongNamedOptionString () const
+std::string lpsrChordsLanguageAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -466,38 +464,38 @@ string lpsrChordsLanguageAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void lpsrChordsLanguageAtom::print (ostream& os) const
+void lpsrChordsLanguageAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lpsrChordsLanguageAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fLpsrChordsLanguageKindVariable" << " : " <<
     lpsrChordsLanguageKindAsString (
       fLpsrChordsLanguageKindVariable) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 }
 
 void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
     lpsrChordsLanguageKindAsString (
@@ -506,16 +504,16 @@ void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
     os <<
       ", set by an option";
   }
-  os << endl;
+  os << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_lpsrChordsLanguageAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrChordsLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -523,12 +521,12 @@ ostream& operator << (ostream& os, const S_lpsrChordsLanguageAtom& elt)
 
 //______________________________________________________________________________
 S_lpsrStaffInstrumentNameAtom lpsrStaffInstrumentNameAtom::create (
-  const string&         longName,
-  const string&         shortName,
-  const string&         description,
-  const string&         valueSpecification,
-  const string&         variableName,
-  map<string, string>&  stringToStringMapVariable)
+  const std::string&         longName,
+  const std::string&         shortName,
+  const std::string&         description,
+  const std::string&         valueSpecification,
+  const std::string&         variableName,
+  std::map<std::string, std::string>&  stringToStringMapVariable)
 {
   lpsrStaffInstrumentNameAtom* o = new
     lpsrStaffInstrumentNameAtom (
@@ -543,12 +541,12 @@ S_lpsrStaffInstrumentNameAtom lpsrStaffInstrumentNameAtom::create (
 }
 
 lpsrStaffInstrumentNameAtom::lpsrStaffInstrumentNameAtom (
-  const string&         longName,
-  const string&         shortName,
-  const string&         description,
-  const string&         valueSpecification,
-  const string&         variableName,
-  map<string, string>&  stringToStringMapVariable)
+  const std::string&         longName,
+  const std::string&         shortName,
+  const std::string&         description,
+  const std::string&         valueSpecification,
+  const std::string&         variableName,
+  std::map<std::string, std::string>&  stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -565,14 +563,14 @@ lpsrStaffInstrumentNameAtom::~lpsrStaffInstrumentNameAtom ()
 {}
 
 void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -583,18 +581,18 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  string regularExpression (
+  std::string regularExpression (
     "[[:space:]]*(.+)[[:space:]]*"
     ":"
     "[[:space:]]*(.*)[[:space:]]*"   // the new name may be empty
   );
 
-  regex  e (regularExpression);
-  smatch sm;
+  std::regex  e (regularExpression);
+  std::smatch sm;
 
   regex_match (theString, sm, e);
 
@@ -604,10 +602,10 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for part rename string '" << theString <<
-      "' with regex '" << regularExpression <<
+      " for part rename std::string '" << theString <<
+      "' with std::regex '" << regularExpression <<
       "'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -618,13 +616,13 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
         gLogStream <<
           '[' << sm [i] << "] ";
       } // for
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
 #endif
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "-lpsr-staff-instrument-name argument '" << theString <<
@@ -633,7 +631,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
     oahError (s.str ());
   }
 
-  string
+  std::string
     partName           = sm [1],
     partInstrumentName = sm [2];
 
@@ -645,18 +643,18 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
     gLogStream <<
       "--> partName = \"" << partName << "\", " <<
       "--> partInstrumentName = \"" << partInstrumentName << "\"" <<
-      endl;
+      std::endl;
   }
 #endif
 
-  // is this part name in the part renaming map?
-  map<string, string>::iterator
+  // is this part name in the part renaming std::map?
+  std::map<std::string, std::string>::iterator
     it =
       fStringToStringMapVariable.find (partName);
 
   if (it != fStringToStringMapVariable.end ()) {
     // yes, issue error message
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "Part \"" << partName << "\" occurs more that once in the " <<
@@ -678,7 +676,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -691,7 +689,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -704,7 +702,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -717,7 +715,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -730,14 +728,14 @@ void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
+std::string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ';
@@ -746,7 +744,7 @@ string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    map<string, string>::const_iterator
+    std::map<std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -760,9 +758,9 @@ string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string lpsrStaffInstrumentNameAtom::asActualLongNamedOptionString () const
+std::string lpsrStaffInstrumentNameAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ';
@@ -771,7 +769,7 @@ string lpsrStaffInstrumentNameAtom::asActualLongNamedOptionString () const
     s << "[EMPTY]";
   }
   else {
-    map<string, string>::const_iterator
+    std::map<std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -785,70 +783,70 @@ string lpsrStaffInstrumentNameAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void lpsrStaffInstrumentNameAtom::print (ostream& os) const
+void lpsrStaffInstrumentNameAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lpsrStaffInstrumentNameAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   printAtomWithVariableEssentials (
     os, fieldWidth);
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fVariableName" << " : " <<
     fVariableName <<
-    setw (fieldWidth) <<
+    std::setw (fieldWidth) <<
     "fStringToStringMapVariable" << " : " <<
-    endl;
+    std::endl;
 
   if (! fStringToStringMapVariable.size ()) {
     os << "[EMPTY]";
   }
   else {
-    map<string, string>::const_iterator
+    std::map<std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i).first << " --> " << (*i).second;
       if (++i == iEnd) break;
-      os << endl;
+      os << std::endl;
     } // for
   }
-  os << endl;
+  os << std::endl;
 
   --gIndenter;
 }
 
 void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : ";
 
   if (! fStringToStringMapVariable.size ()) {
     os <<
       "[EMPTY]" <<
-      endl;
+      std::endl;
   }
   else {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
 
-    map<string, string>::const_iterator
+    std::map<std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      string
+      std::string
         staffName           = (*i).first,
         staffInstrumentName = (*i).second;
 
@@ -868,7 +866,7 @@ void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
 
       os <<
         "\"" <<
-        endl;
+        std::endl;
 
       if (++i == iEnd) break;
     } // for
@@ -880,13 +878,13 @@ void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator << (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrStaffInstrumentNameAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -894,11 +892,11 @@ ostream& operator << (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt)
 
 //______________________________________________________________________________
 S_lpsrTransposeAtom lpsrTransposeAtom::create (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   S_msrSemiTonesPitchAndOctave&
                     semiTonesPitchAndOctaveVariable)
 {
@@ -915,11 +913,11 @@ S_lpsrTransposeAtom lpsrTransposeAtom::create (
 }
 
 lpsrTransposeAtom::lpsrTransposeAtom (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
   S_msrSemiTonesPitchAndOctave&
                     semiTonesPitchAndOctaveVariable)
   : oahAtomStoringAValue (
@@ -936,26 +934,26 @@ lpsrTransposeAtom::~lpsrTransposeAtom ()
 {}
 
 void lpsrTransposeAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
+  const std::string& theString,
+  std::ostream&      os)
 {
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrTransposeAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
   // theString contains the language name:
-  // is it in the chords languages map?
+  // is it in the chords languages std::map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrTransposeAtom'" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -977,7 +975,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrTransposeAtom::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -990,7 +988,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrTransposeAtom::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -1003,7 +1001,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrTransposeAtom::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -1016,7 +1014,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrTransposeAtom::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -1029,14 +1027,14 @@ void lpsrTransposeAtom::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrTransposeAtom::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
 
-string lpsrTransposeAtom::asShortNamedOptionString () const
+std::string lpsrTransposeAtom::asShortNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
@@ -1045,9 +1043,9 @@ string lpsrTransposeAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string lpsrTransposeAtom::asActualLongNamedOptionString () const
+std::string lpsrTransposeAtom::asActualLongNamedOptionString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
@@ -1056,13 +1054,13 @@ string lpsrTransposeAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void lpsrTransposeAtom::print (ostream& os) const
+void lpsrTransposeAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lpsrTransposeAtom:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -1073,15 +1071,15 @@ void lpsrTransposeAtom::print (ostream& os) const
 }
 
 void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
+  std::ostream& os,
   int      valueFieldWidth) const
 {
-  os << left <<
-    setw (valueFieldWidth) <<
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
     fVariableName <<
     " : ";
   if (fSemiTonesPitchAndOctaveVariable) {
-    os << endl;
+    os << std::endl;
     ++gIndenter;
     os <<
       fSemiTonesPitchAndOctaveVariable <<
@@ -1092,17 +1090,17 @@ void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
   else {
     os <<
       "[EMPTY]" <<
-      endl;
+      std::endl;
   }
 }
 
-ostream& operator << (ostream& os, const S_lpsrTransposeAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrTransposeAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -1284,14 +1282,14 @@ LENTGTH_UNITS.
 This option should precede options that set paper size and indents
 if they don't specify a unit.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (gGlobalMsrLengthUnitKindsMap.size ())),
-            regex ("LENTGTH_UNITS"),
+              std::regex ("NUMBER"),
+              std::to_string (gGlobalMsrLengthUnitKindsMap.size ())),
+            std::regex ("LENTGTH_UNITS"),
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
             existingMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           msrLengthUnitKindAsString (
             fLengthUnitKindDefaultValue)),
         "UNIT",
@@ -1686,7 +1684,7 @@ the names in the score or a summary of the latter in a first run with options
 '-dmsrnames, -display-msr-names' or 'dmsrsum, -display-msr-summary'.
 There can be spaces around the ':', in which case quoting is needed.
 There can be several occurrences of this option.)",
-        regex ("EXECUTABLE"),
+        std::regex ("EXECUTABLE"),
         gGlobalOahOahGroup->getOahOahGroupServiceName ()),
       "STAFF_INSTRUMENT_NAME_SPEC",
       "fLpsrStavesInstrumentsNamesMap",
@@ -1750,7 +1748,7 @@ R"()",
         "replicate-empty-lpsr-measure", "rem",
 R"###(Replicate an empty LPSR mesure, adding empty others according to SPECIFICATION.
 SPECIFICATION should be of the form 'MEASURE_NUMBER:REPLICATES',
-where MEASURE_NUMBER is a string, and REPLICATES is the number
+where MEASURE_NUMBER is a std::string, and REPLICATES is the number
 of empty measures to add after measure MEASURE_NUMBER.
 MEASURE_NUMBER should be the number of an existing, empty measure,
 and REPLICATES should be at least 1, , such as '17:3'.
@@ -1783,16 +1781,16 @@ R"()",
   if (
     ! setLpsrQuarterTonesPitchesLanguage ("nederlands")
   ) {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "INTERNAL INITIALIZATION ERROR: "
       "LPSR pitches language 'nederlands' is unknown" <<
-      endl <<
+      std::endl <<
       "The " <<
       getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known LPSR pitches languages are:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
@@ -1823,14 +1821,14 @@ as well as in the generated LilyPond code.
 The NUMBER LPSR pitches languages available are:
 PITCHES_LANGUAGES.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
-            regex ("PITCHES_LANGUAGES"),
+              std::regex ("NUMBER"),
+              std::to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
+            std::regex ("PITCHES_LANGUAGES"),
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
             existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
         "LANGUAGE",
@@ -1859,14 +1857,14 @@ The NUMBER LPSR chords pitches languages available are:
 CHORDS_LANGUAGES.
 'ignatzek' is Ignatzek's jazz-like, english naming used by LilyPond by default.
 The default is 'DEFAULT_VALUE'.)",
-              regex ("NUMBER"),
-              to_string (gGlobalLpsrChordsLanguageKindsMap.size ())),
-            regex ("CHORDS_LANGUAGES"),
+              std::regex ("NUMBER"),
+              std::to_string (gGlobalLpsrChordsLanguageKindsMap.size ())),
+            std::regex ("CHORDS_LANGUAGES"),
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
             existingLpsrChordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
-          regex ("DEFAULT_VALUE"),
+          std::regex ("DEFAULT_VALUE"),
           lpsrChordsLanguageKindAsString (
             lpsrChordsLanguageKindDefaultValue)),
         "LANGUAGE",
@@ -1945,15 +1943,15 @@ void lpsrOahGroup::initializeLpsrOahGroup ()
 }
 
 //______________________________________________________________________________
-Bool lpsrOahGroup::setLpsrQuarterTonesPitchesLanguage (string language)
+Bool lpsrOahGroup::setLpsrQuarterTonesPitchesLanguage (std::string language)
 {
-  // is language in the note names languages map?
-  map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  // is language in the note names languages std::map?
+  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the map
+    // no, language is unknown in the std::map
     return false;
   }
 
@@ -1963,15 +1961,15 @@ Bool lpsrOahGroup::setLpsrQuarterTonesPitchesLanguage (string language)
 }
 
 //______________________________________________________________________________
-Bool lpsrOahGroup::setLpsrChordsLanguageKind (string language)
+Bool lpsrOahGroup::setLpsrChordsLanguageKind (std::string language)
 {
-  // is language in the chords languages map?
-  map<string, lpsrChordsLanguageKind>::const_iterator
+  // is language in the chords languages std::map?
+  std::map<std::string, lpsrChordsLanguageKind>::const_iterator
     it =
       gGlobalLpsrChordsLanguageKindsMap.find (language);
 
   if (it == gGlobalLpsrChordsLanguageKindsMap.end ()) {
-    // no, language is unknown in the map
+    // no, language is unknown in the std::map
     return false;
   }
 
@@ -2008,7 +2006,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrOahGroup::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2021,7 +2019,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrOahGroup::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -2034,7 +2032,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrOahGroup::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -2047,7 +2045,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrOahGroup::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -2060,7 +2058,7 @@ void lpsrOahGroup::browseData (basevisitor* v)
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrOahGroup::browseData ()" <<
-      endl;
+      std::endl;
   }
 #endif
 }
@@ -2070,7 +2068,7 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 {
   gLogStream <<
     "The LPSR options are:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -2079,30 +2077,30 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   // --------------------------------------
   gLogStream <<
     "Trace:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fTraceLpsr" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fTraceLpsr" << " : " <<
     fTraceLpsr <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fTraceLilypondVersion" << " : " <<
+    std::setw (fieldWidth) << "fTraceLilypondVersion" << " : " <<
     fTraceLilypondVersion <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fTraceLpsrVisitors" << " : " <<
+    std::setw (fieldWidth) << "fTraceLpsrVisitors" << " : " <<
     fTraceLpsrVisitors <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fTraceLpsrBlocks" << " : " <<
+    std::setw (fieldWidth) << "fTraceLpsrBlocks" << " : " <<
     fTraceLpsrBlocks <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fTraceSchemeFunctions" << " : " <<
+    std::setw (fieldWidth) << "fTraceSchemeFunctions" << " : " <<
     fTraceSchemeFunctions <<
-    endl;
+    std::endl;
 
   --gIndenter;
 #endif
@@ -2111,17 +2109,17 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   // --------------------------------------
   gLogStream <<
     "Display:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fDisplayLpsrShort" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fDisplayLpsrShort" << " : " <<
     fDisplayLpsrShort <<
-    endl <<
-    setw (fieldWidth) << "fDisplayLpsrFull" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fDisplayLpsrFull" << " : " <<
     fDisplayLpsrFull <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2130,73 +2128,73 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 
   gLogStream <<
     "Paper:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fAllPaperVariables" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fAllPaperVariables" << " : " <<
     fAllPaperVariables <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fLengthUnitKind" << " : " <<
+    std::setw (fieldWidth) << "fLengthUnitKind" << " : " <<
     msrLengthUnitKindAsString (fLengthUnitKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fPaperHeight" << " : " <<
+    std::setw (fieldWidth) << "fPaperHeight" << " : " <<
     fPaperHeight.asString () <<
-    endl <<
-    setw (fieldWidth) << "fPaperWidth" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fPaperWidth" << " : " <<
     fPaperWidth.asString () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "paperfPaperLeftMarginLeftMargin" << " : " <<
+    std::setw (fieldWidth) << "paperfPaperLeftMarginLeftMargin" << " : " <<
     fPaperLeftMargin.asString () <<
-    endl <<
-    setw (fieldWidth) << "fPaperRightMargin" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fPaperRightMargin" << " : " <<
     fPaperRightMargin.asString () <<
-    endl <<
-    setw (fieldWidth) << "fPaperTopMargin" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fPaperTopMargin" << " : " <<
     fPaperTopMargin.asString () <<
-    endl <<
-    setw (fieldWidth) << "fPaperBottomMargin" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fPaperBottomMargin" << " : " <<
     fPaperBottomMargin.asString () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fPaperIndent" << " : " <<
+    std::setw (fieldWidth) << "fPaperIndent" << " : " <<
     fPaperIndent.asString () <<
-    endl <<
-    setw (fieldWidth) << "fPaperShortIndent" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fPaperShortIndent" << " : " <<
     fPaperShortIndent.asString () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fMarkupSystemSpacingPadding" << " : " <<
+    std::setw (fieldWidth) << "fMarkupSystemSpacingPadding" << " : " <<
     fMarkupSystemSpacingPadding.asString () <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fRaggedBottom" << " : " <<
+    std::setw (fieldWidth) << "fRaggedBottom" << " : " <<
     fRaggedBottom <<
-    endl <<
-    setw (fieldWidth) << "fRaggedLast" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fRaggedLast" << " : " <<
     fRaggedLast <<
-    endl <<
-    setw (fieldWidth) << "fRaggedLastBottom" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fRaggedLastBottom" << " : " <<
     fRaggedLastBottom <<
-    endl <<
-    setw (fieldWidth) << "fRaggedRight" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fRaggedRight" << " : " <<
     fRaggedRight <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fTagline" << " : " <<
+    std::setw (fieldWidth) << "fTagline" << " : " <<
     fTagline <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fPageCount" << " : " <<
+    std::setw (fieldWidth) << "fPageCount" << " : " <<
     fPageCount <<
-    endl <<
-    setw (fieldWidth) << "fSystemCount" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fSystemCount" << " : " <<
     fSystemCount <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2206,19 +2204,19 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 
   gLogStream <<
     "Measures:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) <<
     fetchNamesBetweenQuotes () <<
     " :";
   if (! fAddEmptyMeasuresStringToIntMap.size ()) {
     gLogStream << "[EMPTY]";
   }
   else {
-    map<string, int>::const_iterator
+    std::map<std::string, int>::const_iterator
       iBegin = fAddEmptyMeasuresStringToIntMap.begin (),
       iEnd   = fAddEmptyMeasuresStringToIntMap.end (),
       i      = iBegin;
@@ -2228,7 +2226,7 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
       gLogStream << ",";
     } // for
   }
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   --gIndenter;
 */
@@ -2238,14 +2236,14 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 
   gLogStream <<
     "Tempos:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fConvertMusicXMLTemposToMsrRehearsalMarks" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fConvertMusicXMLTemposToMsrRehearsalMarks" << " : " <<
     fConvertMusicXMLTemposToMsrRehearsalMarks <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
 
@@ -2254,21 +2252,21 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 
   gLogStream <<
     "Words:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fConvertLpsrWordsToTempo" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fConvertLpsrWordsToTempo" << " : " <<
     fConvertLpsrWordsToTempo <<
-    endl <<
-    setw (fieldWidth) << "fAddLpsrWordsFromTheLyrics" << " : " <<
+    std::endl <<
+    std::setw (fieldWidth) << "fAddLpsrWordsFromTheLyrics" << " : " <<
     fAddLpsrWordsFromTheLyrics <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fConvertLpsrWordsToRehearsalMarks" << " : " <<
+    std::setw (fieldWidth) << "fConvertLpsrWordsToRehearsalMarks" << " : " <<
     fConvertLpsrWordsToRehearsalMarks <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2277,20 +2275,20 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 
   gLogStream <<
     "Languages:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fLpsrQuarterTonesPitchesLanguageKind" << " : " <<
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fLpsrQuarterTonesPitchesLanguageKind" << " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fLpsrQuarterTonesPitchesLanguageKind) <<
-    endl <<
+    std::endl <<
 
-    setw (fieldWidth) << "fLpsrChordsLanguageKind" << " : " <<
+    std::setw (fieldWidth) << "fLpsrChordsLanguageKind" << " : " <<
     lpsrChordsLanguageKindAsString (
       fLpsrChordsLanguageKind) <<
-    endl;
+    std::endl;
 
   --gIndenter;
 
@@ -2299,12 +2297,12 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 
   gLogStream <<
     "Transpose:" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  gLogStream << left <<
-    setw (fieldWidth) << "fTranspositionSemiTonesPitchAndOctave" << " : ";
+  gLogStream << std::left <<
+    std::setw (fieldWidth) << "fTranspositionSemiTonesPitchAndOctave" << " : ";
 
     if (fTranspositionSemiTonesPitchAndOctave) {
       gLogStream <<
@@ -2314,20 +2312,20 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
       gLogStream <<
         "[NONE]";
     }
-  gLogStream << endl;
+  gLogStream << std::endl;
 
   --gIndenter;
 
   --gIndenter;
 }
 
-ostream& operator << (ostream& os, const S_lpsrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_lpsrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -2340,7 +2338,7 @@ S_lpsrOahGroup createGlobalLpsrOahGroup ()
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global LPSR OAH group" <<
-      endl;
+      std::endl;
   }
 #endif
 

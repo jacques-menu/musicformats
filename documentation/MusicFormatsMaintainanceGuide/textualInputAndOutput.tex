@@ -15,7 +15,7 @@ To meet the need of indented output to produce , we got inspiration from \url{ht
 
 This leads to class   {\tt mfIndentedOstream}, defined in \mfutilitiesBoth{mfIndentedTextOutput}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP mfIndentedOstream: public ostream, public smartable
+class EXP mfIndentedOstream: public std::ostream, public smartable
 \end{lstlisting}
 
 The key to this lies in thw overloaded \method{mfIndentedStreamBuf}{sync}:
@@ -69,7 +69,7 @@ Such indented output streams are used for nearly all of the output produced by \
 
 Such indented output streams are passed by reference to various methods which only know of {\tt osstream}, among them:
 \begin{lstlisting}[language=CPlusPlus]
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 \end{lstlisting}
 
 All those methods manipulate {\tt mfIndentedOstream} instances seamlessly, not knowing their actual type.
@@ -85,11 +85,11 @@ EXP void translateLpsrToLilypondWithHandler (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
   S_lpsrOahGroup    lpsrOpts,
-  const string&     passNumber,
-  const string&     passDescription,
+  const std::string&     passNumber,
+  const std::string&     passDescription,
   S_oahHandler      handler,
-  ostream&          out,
-  ostream&          err)
+  std::ostream&          out,
+  std::ostream&          err)
 \end{lstlisting}
 
 In order to have a global current indentation, \mf\ uses \globalVariable{gIndenter}, because it should otherwise passed over to many methods throughout the code base. It is defined in \mfutilities{mfIndentedTextOutput.h}:
@@ -118,12 +118,12 @@ When writing to \standardOutput, the indented output stream is constructed above
     }
 \end{lstlisting}
 
-When writing to a file, an {\tt ofstream} is instantiated to write to the file given by its name, and the indented output stream is constructed above the latter:
+When writing to a file, an {\tt std::ofstream} is instantiated to write to the file given by its name, and the indented output stream is constructed above the latter:
 \begin{lstlisting}[language=CPlusPlus]
-     ofstream
+     std::ofstream
       outputFileStream (
         outputFileName.c_str (),
-        ofstream::out);
+        std::ofstream::out);
 
     // create an indented output stream for the LilyPond code
     // to be written to outputFileStream
@@ -161,30 +161,30 @@ This sharing of a global variable is needed to produce orderly output, since man
 
 A typical sequence to produce indented output is:
 \begin{lstlisting}[language=CPlusPlus]
-void msrTransposition::print (ostream& os) const
+void msrTransposition::print (std::ostream& os) const
 {
   const int fieldWidth = 22;
 
   os <<
     "Transposition" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTranspositionDouble" << " = " << fTranspositionDouble <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
 }
@@ -226,17 +226,17 @@ To debug this:
 
 There is a standard set of methods to print the contents of the descriptions in \mf\ to \standardOutput, depending on the granularity of the information to be displayed:
 \begin{lstlisting}[language=CPlusPlus]
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    string                asString () const override;
-    string                asStringShort () const override;
+    std::string           asString () const override;
+    std::string           asStringShort () const override;
 \end{lstlisting}
 
 There are also more specific methods such as:
 \begin{lstlisting}[language=CPlusPlus]
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
-    void                  printSummary (ostream& os) const override;
+    void                  printSummary (std::ostream& os) const override;
 \end{lstlisting}
 
 Note that:
@@ -247,13 +247,13 @@ Note that:
 
 Most classes in \mf\ can be printed with the {\tt <<} operator. Since \mf\ is a large, a test is done for nullity, which is safer and easier for the applications that use it:
 \begin{lstlisting}[language=CPlusPlus]
-ostream& operator << (ostream& os, const S_msrElement& elt)
+std::ostream& operator << (std::ostream& os, const S_msrElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
 
   return os;
@@ -262,17 +262,17 @@ ostream& operator << (ostream& os, const S_msrElement& elt)
 
 In simple cases, \virtualMethod{print} merely calls \virtualMethod{asString}:
 \begin{lstlisting}[language=CPlusPlus]
-void msrElement::print (ostream& os) const
+void msrElement::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 \end{lstlisting}
 
 All \methodName{asString} methods produce an output of the form {\tt [...]}, in order to facilitate selecting the whole with a double click to help the user, since such output can be nested:
 \begin{lstlisting}[language=CPlusPlus]
-string msrTransposition::asString () const
+std::string msrTransposition::asString () const
 {
-  stringstream s;
+  std::stringstream s;
 
   s <<
     "[Transposition" <<
@@ -289,30 +289,30 @@ string msrTransposition::asString () const
 
 A typical sequence to produce indented output is:
 \begin{lstlisting}[language=CPlusPlus]
-void msrTransposition::print (ostream& os) const
+void msrTransposition::print (std::ostream& os) const
 {
   const int fieldWidth = 22;
 
   os <<
     "Transposition" <<
     ", line " << fInputLineNumber <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
-    endl <<
-    setw (fieldWidth) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fTranspositionDouble" << " = " << fTranspositionDouble <<
-    endl << endl;
+    std::endl << std::endl;
 
   --gIndenter;
 }

@@ -18,8 +18,6 @@
 #include "bsrOah.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -48,7 +46,7 @@ void bsrElement::acceptIn (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrElement::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -61,7 +59,7 @@ void bsrElement::acceptIn (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrElement::visitStart ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitStart (elem);
@@ -74,7 +72,7 @@ void bsrElement::acceptOut (basevisitor* v)
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrElement::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -87,7 +85,7 @@ void bsrElement::acceptOut (basevisitor* v)
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrElement::visitEnd ()" <<
-            endl;
+            std::endl;
         }
 #endif
         p->visitEnd (elem);
@@ -98,30 +96,30 @@ void bsrElement::browseData (basevisitor* v)
 {}
 
 
-string bsrElement::asString () const
+std::string bsrElement::asString () const
 {
   // this is overriden all in actual elements
   return "??? bsrElement::asString () ???";
 }
 
-string bsrElement::asShortString () const
+std::string bsrElement::asShortString () const
 {
   // this can be overriden in actual elements
   return asString ();
 }
 
-void bsrElement::print (ostream& os) const
+void bsrElement::print (std::ostream& os) const
 {
-  os << asString () << endl;
+  os << asString () << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_bsrElement& elt)
+std::ostream& operator << (std::ostream& os, const S_bsrElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <fstream>      // ofstream, ofstream::open(), ofstream::close()
+#include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -64,8 +64,6 @@
 #include "musicxml2brailleInterface.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -79,22 +77,22 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
-      endl <<
+      std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl <<
+      std::endl <<
       "xmlFile2brailleWithHandler(), sxmlfile contains:" <<
-      endl << endl;
+      std::endl << std::endl;
 
     ++gIndenter;
 
     sxmlfile->print (gLogStream);
-    gLogStream << endl << endl;
+    gLogStream << std::endl << std::endl;
 
     --gIndenter;
 
     gLogStream <<
       "<!-- ----------------------------------------------------------- -->" <<
-      endl << endl;
+      std::endl << std::endl;
   }
 #endif
 
@@ -144,9 +142,9 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
   if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass2a ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after creating the MSR skeleton in pass 2a of xmlFile2brailleWithHandler as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -175,9 +173,9 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
   if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass2b ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after pass 2b as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -210,9 +208,9 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
   if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass3 ()) {
     err <<
-      endl <<
+      std::endl <<
       "Quitting after pass 3 as requested" <<
-      endl;
+      std::endl;
 
     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
@@ -312,7 +310,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     // convert the BSR to Braille text (pass 5)
     // ------------------------------------------------------
 
-    string
+    std::string
       outputFileName =
         handler->
           fetchOutputFileNameFromTheOptions ();
@@ -323,7 +321,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "xmlFile2braille() outputFileName = \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -332,7 +330,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2braille() output goes to standard output" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -362,7 +360,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           "xmlFile2braille() output goes to file \"" <<
           outputFileName <<
           "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -370,30 +368,30 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         err <<
-          endl <<
+          std::endl <<
           "Opening file \"" << outputFileName << "\" for writing" <<
-          endl;
+          std::endl;
       }
 #endif
 
-      ofstream
+      std::ofstream
         brailleCodeFileOutputStream (
           outputFileName.c_str (),
-          ofstream::out);
+          std::ofstream::out);
 
       if (! brailleCodeFileOutputStream.is_open ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "Could not open Braille output file \"" <<
           outputFileName <<
           "\" for writing - quitting";
 
-        string message = s.str ();
+        std::string message = s.str ();
 
         err <<
           message <<
-          endl;
+          std::endl;
 
         throw bsr2brailleException (message);
       }
@@ -420,9 +418,9 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 #ifdef TRACE_OAH
       if (gtracingOah->fTracePasses) {
         gLogStream <<
-          endl <<
+          std::endl <<
           "Closing file \"" << outputFileName << "\"" <<
-          endl;
+          std::endl;
       }
 #endif
 
@@ -456,7 +454,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   err <<
     "xmlFile2braille(), sxmlfile is NULL" <<
-    endl;
+    std::endl;
   }
 #endif
 
@@ -466,7 +464,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   // the service name
   // ------------------------------------------------------
 
-  string serviceName = "xml2brl";
+  std::string serviceName = "xml2brl";
 
   // reset the global indenter
   // ------------------------------------------------------
@@ -504,7 +502,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
     gLogStream <<
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption <<
-      endl;
+      std::endl;
   }
 #endif
 
@@ -581,7 +579,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
       " gIndenter value after options ands arguments checking: " <<
       gIndenter.getIndentation () <<
       " ###" <<
-      endl;
+      std::endl;
 
     gIndenter.resetToZero ();
   }
@@ -627,8 +625,8 @@ EXP mfMusicformatsErrorKind musicxmlFile2braille (
 
 mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
   const char*  fileName,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   SXMLFile
@@ -678,8 +676,8 @@ EXP mfMusicformatsErrorKind musicxmlFd2braille (
 
 mfMusicformatsErrorKind convertMusicxmlFd2brailleWithHandler (
   FILE*        fd,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   SXMLFile
@@ -729,8 +727,8 @@ EXP mfMusicformatsErrorKind musicxmlString2braille (
 
 mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
   const char*  buffer,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler)
 {
   SXMLFile

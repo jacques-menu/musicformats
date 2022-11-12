@@ -12,17 +12,15 @@
 #include "msrStavesEnumTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 // staves
 //______________________________________________________________________________
-string msrStaffKindAsString (
+std::string msrStaffKindAsString (
   msrStaffKind staffKind)
 {
-  string result;
+  std::string result;
 
   switch (staffKind) {
     case msrStaffKind::kStaffKindRegular:
@@ -48,16 +46,16 @@ string msrStaffKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrStaffKind& elt)
+std::ostream& operator << (std::ostream& os, const msrStaffKind& elt)
 {
   os << msrStaffKindAsString (elt);
   return os;
 }
 
-string msrStaffKindAsStringForPrint (
+std::string msrStaffKindAsStringForPrint (
   msrStaffKind staffKind)
 {
-  string result;
+  std::string result;
 
   switch (staffKind) {
     case msrStaffKind::kStaffKindRegular:
@@ -83,10 +81,10 @@ string msrStaffKindAsStringForPrint (
   return result;
 }
 
-string msrStaffChangeKindAsString (
+std::string msrStaffChangeKindAsString (
   msrStaffChangeKind staffChangeKind)
 {
-  string result;
+  std::string result;
 
   switch (staffChangeKind) {
     case msrStaffChangeKind::kStaffChange_NO_:
@@ -103,7 +101,7 @@ string msrStaffChangeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrStaffChangeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrStaffChangeKind& elt)
 {
   os << msrStaffChangeKindAsString (elt);
   return os;

@@ -35,11 +35,9 @@ int main()
 #include "mfslWae.h"
 
 
-using namespace std;
-
 //_______________________________________________________________________________
 // constants
-const string mfslDriver::K_ALL_PSEUDO_LABEL_NAME  = "all";
+const std::string mfslDriver::K_ALL_PSEUDO_LABEL_NAME  = "all";
 
 //______________________________________________________________________________
 mfslDriver::mfslDriver ()
@@ -53,7 +51,7 @@ mfslDriver::mfslDriver ()
     // MFSL data comes from standard input
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      gLogStream << "Reading standard input" << endl;
+      gLogStream << "Reading standard input" << std::endl;
     }
 #endif
   }
@@ -64,7 +62,7 @@ mfslDriver::mfslDriver ()
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Reading file \"" << fScriptName << "\"" <<
-        endl;
+        std::endl;
     }
 #endif
   }
@@ -128,7 +126,7 @@ mfslDriver::mfslDriver ()
     gLogStream <<
       "====> The known tools names are: " <<
       mfStringSetAsString (fKnownNames) <<
-      endl;
+      std::endl;
   }
 
   // create the driver's choices table
@@ -144,12 +142,12 @@ mfslDriver::mfslDriver ()
       "====> The choice labels set by options are: " <<
       mfStringToStringMultiMapAsString (
         fOptionsSuppliedChoicesLabelsMultiMap) <<
-      endl;
+      std::endl;
   }
 
   // register all of them as unused
-  for (pair<string, string> thePair : fOptionsSuppliedChoicesLabelsMultiMap) {
-    string choiceName = thePair.first;
+  for (std::pair<std::string, std::string> thePair : fOptionsSuppliedChoicesLabelsMultiMap) {
+    std::string choiceName = thePair.first;
 
     registerOptionsSuppliedChoicesAsUnused (
       choiceName);
@@ -161,12 +159,12 @@ mfslDriver::mfslDriver ()
 mfslDriver::~mfslDriver ()
 {}
 
-void mfslDriver::setTool (string tool)
+void mfslDriver::setTool (std::string tool)
 {
   if (fDisplayToolAndInput) {
     gLogStream <<
       "====> tool: " << tool<<
-      endl;
+      std::endl;
   }
 
   // is this tool a known tool name?
@@ -175,18 +173,18 @@ void mfslDriver::setTool (string tool)
       "### Unkown tool name \"" << tool << "\"" <<
       ", the known tool names are " <<
       mfStringSetAsString (fKnownNames) <<
-      endl;
+      std::endl;
   }
 
   fTool = tool;
 }
 
-void mfslDriver::appendInputSouce (string inputSouce)
+void mfslDriver::appendInputSouce (std::string inputSouce)
 {
   if (fDisplayToolAndInput) {
     gLogStream <<
       "====> input: " << inputSouce <<
-      endl;
+      std::endl;
   }
 
  fInputSoucesList.push_back (inputSouce);
@@ -194,7 +192,7 @@ void mfslDriver::appendInputSouce (string inputSouce)
 
 void mfslDriver::optionsBlocksStackPush (
   S_mfslOptionsBlock optionsBlock,
-  const string&      context)
+  const std::string&      context)
 {
   if (fTraceOptionsBlocks) {
     gLogStream <<
@@ -202,7 +200,7 @@ void mfslDriver::optionsBlocksStackPush (
       optionsBlock->asString () <<
       "] onto the options blocks stack" <<
       ", context: " << context <<
-      endl;
+      std::endl;
   }
 
   if (fOptionsBlocksStack.size () == 0) {
@@ -252,7 +250,7 @@ void mfslDriver::registerOptionInCurrentOptionsBlock (
       "] in (current) \"" <<
       currentOptionsBlock->getOptionsBlockName () <<
       "\" options block" <<
-      endl;
+      std::endl;
   }
 
   currentOptionsBlock->
@@ -262,14 +260,14 @@ void mfslDriver::registerOptionInCurrentOptionsBlock (
 }
 
 void mfslDriver::registerOptionsSuppliedChoicesAsUsed (
-  const string& choiceName)
+  const std::string& choiceName)
 {
   if (fDisplayOptions) { // JMI
     gLogStream <<
       "====> Registering option-supplied choice [" <<
       choiceName <<
       "] as used" <<
-      endl;
+      std::endl;
   }
 
   fUnusedOptionsSuppliedChoicesSet.erase (
@@ -277,14 +275,14 @@ void mfslDriver::registerOptionsSuppliedChoicesAsUsed (
 }
 
 void mfslDriver::registerOptionsSuppliedChoicesAsUnused (
-  const string& choiceName)
+  const std::string& choiceName)
 {
   if (fDisplayOptions) { // JMI
     gLogStream <<
       "====> Registering option-supplied choice [" <<
       choiceName <<
       "] as used" <<
-      endl;
+      std::endl;
   }
 
   fUnusedOptionsSuppliedChoicesSet.erase (
@@ -292,7 +290,7 @@ void mfslDriver::registerOptionsSuppliedChoicesAsUnused (
 }
 
 void mfslDriver::optionsBlocksStackPop (
-  const string& context)
+  const std::string& context)
 {
   // sanity check
   mfAssert (
@@ -306,7 +304,7 @@ void mfslDriver::optionsBlocksStackPop (
       fOptionsBlocksStack.front ()->asString () <<
       "] from the options blocks stack" <<
       ", context: " << context <<
-      endl;
+      std::endl;
   }
 
   fOptionsBlocksStack.pop_front ();
@@ -319,7 +317,7 @@ void mfslDriver::optionsBlocksStackPop (
 }
 
 void mfslDriver::displayOptionsBlocksStack (
-  const string& context) const
+  const std::string& context) const
 {
   gLogStream <<
     "OptionsBlocks stack, context: " <<
@@ -327,7 +325,7 @@ void mfslDriver::displayOptionsBlocksStack (
     ":" ;
 
   if (fOptionsBlocksStack.size ()) {
-    gLogStream << endl;
+    gLogStream << std::endl;
 
     ++gIndenter;
 
@@ -339,7 +337,7 @@ void mfslDriver::displayOptionsBlocksStack (
   }
 
   else {
-    gLogStream << "[EMPTY]" << endl;
+    gLogStream << "[EMPTY]" << std::endl;
   }
 }
 
@@ -351,7 +349,7 @@ void mfslDriver::caseChoiceStatementsStackPush (
       "====> Pushing [" <<
       caseChoiceStatement->asString () <<
       "] onto the case statements stack" <<
-      endl;
+      std::endl;
   }
 
   ++fCaseChoiceStatementsNumber;
@@ -389,7 +387,7 @@ void mfslDriver::caseChoiceStatementsStackPop ()
       "====> Popping [" <<
       fCaseChoiceStatementsStack.front ()->asString () <<
       "] from the case statements stack" <<
-      endl;
+      std::endl;
   }
 
   fCaseChoiceStatementsStack.pop_front ();
@@ -401,12 +399,12 @@ void mfslDriver::caseChoiceStatementsStackPop ()
 }
 
 void mfslDriver::displayCaseChoiceStatementsStack (
-  const string& context) const
+  const std::string& context) const
 {
   gLogStream <<
     "Case statements stack" <<
     ", context: " << context <<
-    endl;
+    std::endl;
 
   if (fCaseChoiceStatementsStack.size ()) {
     ++gIndenter;
@@ -419,7 +417,7 @@ void mfslDriver::displayCaseChoiceStatementsStack (
   }
 
   else {
-    gLogStream << "[EMPTY]" << endl;
+    gLogStream << "[EMPTY]" << std::endl;
   }
 }
 
@@ -431,7 +429,7 @@ void mfslDriver::caseInputStatementsStackPush (
       "====> Pushing [" <<
       caseInputStatement->asString () <<
       "] onto the case statements stack" <<
-      endl;
+      std::endl;
   }
 
   ++fCaseInputStatementsNumber;
@@ -469,7 +467,7 @@ void mfslDriver::caseInputStatementsStackPop ()
       "====> Popping [" <<
       fCaseInputStatementsStack.front ()->asString () <<
       "] from the case statements stack" <<
-      endl;
+      std::endl;
   }
 
   fCaseInputStatementsStack.pop_front ();
@@ -481,12 +479,12 @@ void mfslDriver::caseInputStatementsStackPop ()
 }
 
 void mfslDriver::displayCaseInputStatementsStack (
-  const string& context) const
+  const std::string& context) const
 {
   gLogStream <<
     "Case statements stack" <<
     ", context: " << context <<
-    endl;
+    std::endl;
 
   if (fCaseInputStatementsStack.size ()) {
     ++gIndenter;
@@ -499,7 +497,7 @@ void mfslDriver::displayCaseInputStatementsStack (
   }
 
   else {
-    gLogStream << "[EMPTY]" << endl;
+    gLogStream << "[EMPTY]" << std::endl;
   }
 }
 
@@ -531,19 +529,19 @@ int mfslDriver::parseInput_Pass1 ()
   if (fTraceParsing) {
     gLogStream <<
       "--> parseResult:   " << parseResult <<
-      endl;
+      std::endl;
 
     gLogStream <<
       "--> fTool:      " << fTool <<
-      endl <<
+      std::endl <<
       "--> fInputSoucesList: " <<
-      endl;
+      std::endl;
 
     ++gIndenter;
-    for (string inputSouce : fInputSoucesList ) {
+    for (std::string inputSouce : fInputSoucesList ) {
       gLogStream <<
         inputSouce <<
-        endl;
+        std::endl;
     } // for
     --gIndenter;
   }
@@ -552,14 +550,14 @@ int mfslDriver::parseInput_Pass1 ()
   if (gGlobalMfslInterpreterOahGroup->getTraceOptionsBlocks ()) {
     gLogStream <<
       "====> fOptionsBlocksStack:" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
     for (S_mfslOptionsBlock optionsBlock : fOptionsBlocksStack) {
       gLogStream <<
         optionsBlock <<
-        endl;
+        std::endl;
     } // for
 
     --gIndenter;
@@ -578,21 +576,21 @@ int mfslDriver::parseInput_Pass1 ()
         "====> fChoicesTable:";
 
       if (fChoicesTable) {
-        gLogStream << endl;
+        gLogStream << std::endl;
 
         ++gIndenter;
 
         gLogStream <<
           fChoicesTable <<
-          endl;
+          std::endl;
 
         --gIndenter;
       }
       else {
-        gLogStream << "[NONE]" << endl;
+        gLogStream << "[NONE]" << std::endl;
       }
 
-      gLogStream << endl;
+      gLogStream << std::endl;
     }
   }
 
@@ -603,15 +601,15 @@ int mfslDriver::parseInput_Pass1 ()
 }
 
 void mfslDriver::handleSelectLabel (
-  const string& choiceName,
-  const string& label)
+  const std::string& choiceName,
+  const std::string& label)
 {
   if (fTraceChoices) {
     gLogStream <<
       "====> appendSelectLabelForToolLaunching()" <<
       ", choiceName: " << choiceName <<
       ", label: " << label <<
-      endl;
+      std::endl;
   }
 
   // analyze this select command
@@ -628,14 +626,14 @@ void mfslDriver::handleSelectLabel (
       gLogStream <<
         "====> appendSelectLabelForToolLaunching()" <<
         ", choice: " <<
-        endl;
+        std::endl;
       ++gIndenter;
       gLogStream <<
         choice;
       --gIndenter;
     }
 
-    const set<string>&
+    const std::set<std::string>&
       choiceLabelsSet =
         choice->
           getLabelsSet ();
@@ -648,7 +646,7 @@ void mfslDriver::handleSelectLabel (
     }
 
     if (label == K_ALL_PSEUDO_LABEL_NAME) {
-      for (string choiceLabel : choiceLabelsSet) {
+      for (std::string choiceLabel : choiceLabelsSet) {
         appendSelectLabelForToolLaunching (
           choice,
           choiceLabel,
@@ -664,7 +662,7 @@ void mfslDriver::handleSelectLabel (
     }
 
     else {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "label \"" << label <<
@@ -679,7 +677,7 @@ void mfslDriver::handleSelectLabel (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "choice name \"" << choiceName <<
@@ -693,10 +691,10 @@ void mfslDriver::handleSelectLabel (
 
 void mfslDriver::appendSelectLabelForToolLaunching (
   const S_mfslChoice choice,
-  const string&      label,
+  const std::string&      label,
   Bool               allLabelSelected)
 {
-  string
+  std::string
     choiceName =
       choice->getChoiceName ();
 
@@ -705,7 +703,7 @@ void mfslDriver::appendSelectLabelForToolLaunching (
       "====> appendSelectLabelForToolLaunching()" <<
       ", choiceName: " << choiceName <<
       ", label: " << label <<
-      endl;
+      std::endl;
   }
 
   S_mfslOptionsBlock
@@ -726,7 +724,7 @@ void mfslDriver::appendSelectLabelForToolLaunching (
         getSetByAnOption ()
   ) {
     if (! overriddenMessageHasBeenIssued) {
-      stringstream s;
+      std::stringstream s;
 
       s <<
         "'select' label \"" <<
@@ -755,7 +753,7 @@ void mfslDriver::appendSelectLabelForToolLaunching (
     if (fTraceChoices) {
       gLogStream <<
         "====> optionsBlock from script:" <<
-        endl;
+        std::endl;
       ++gIndenter;
       gLogStream <<
         selectOptionsBlock;
@@ -785,7 +783,7 @@ mfMusicformatsErrorKind mfslDriver::launchMfslTool_Pass2 ()
       fTool <<
       " with the argument and option gathered from " <<
       fScriptName <<
-      endl;
+      std::endl;
   }
 
   // sanity checks
@@ -794,10 +792,10 @@ mfMusicformatsErrorKind mfslDriver::launchMfslTool_Pass2 ()
     fCaseChoiceStatementsStack.size () == 0,
     "fCaseChoiceStatementsStack should be empty after parsing");
 
-  // populate the commands list with the options gathered in the script
+  // populate the commands std::list with the options gathered in the script
   populateTheCommandsList ();
 
-  // display the commands list
+  // display the commands std::list
   if (fDisplayToolAndInput) {
     gLogStream <<
       "====> The " <<
@@ -809,20 +807,20 @@ mfMusicformatsErrorKind mfslDriver::launchMfslTool_Pass2 ()
         fCommandsList.size (),
         "is", "are") <<
       ":" <<
-      endl;
+      std::endl;
 
     ++gIndenter;
 
-    for (string command : fCommandsList) {
+    for (std::string command : fCommandsList) {
       gLogStream <<
         command <<
-        endl;
+        std::endl;
     } // for
 
     --gIndenter;
   }
 
-  // execute the commands in the list
+  // execute the commands in the std::list
   if (fNoLaunch) {
     gLogStream <<
       "====> The " <<
@@ -834,15 +832,15 @@ mfMusicformatsErrorKind mfslDriver::launchMfslTool_Pass2 ()
         fCommandsList.size (),
         "is", "are") <<
       " *NOT* executed" <<
-      endl;
+      std::endl;
   }
 
   else {
-    for (string command : fCommandsList) {
+    for (std::string command : fCommandsList) {
       if (fDisplayToolAndInput) {
         gLogStream <<
           "====> Running the tool with command: [" << command << ']' <<
-          endl;
+          std::endl;
       }
 
       int
@@ -855,7 +853,7 @@ mfMusicformatsErrorKind mfslDriver::launchMfslTool_Pass2 ()
         gLogStream <<
           "====> The execution result is: " <<
           commandExecutionResult <<
-          endl;
+          std::endl;
       }
 
       if (commandExecutionResult) {
@@ -864,7 +862,7 @@ mfMusicformatsErrorKind mfslDriver::launchMfslTool_Pass2 ()
       }
 
       // sleep for some milliseconds
-          this_thread::sleep_for (chrono::milliseconds (100));
+          std::this_thread::sleep_for (std::chrono::milliseconds (100));
     } // for
   }
 
@@ -878,10 +876,10 @@ Bool mfslDriver::applySelectOptionsFinally ()
   if (fTraceChoices) {
     gLogStream <<
       "====> Finally applying 'select' options" <<
-      endl;
+      std::endl;
   }
 
-  const multimap<string, string>&
+  const std::multimap<std::string, std::string>&
     selectChoiceToLabelsMultiMap =
       gGlobalMfslInterpreterOahGroup->
         getSelectChoiceToLabelsMultiMap ();
@@ -893,8 +891,8 @@ Bool mfslDriver::applySelectOptionsFinally ()
       gLogStream);
   }
 
-  for (pair<string, string> thePair : selectChoiceToLabelsMultiMap) {
-    string
+  for (std::pair<std::string, std::string> thePair : selectChoiceToLabelsMultiMap) {
+    std::string
       optionSuppliedChoiceName =
         thePair.first,
       optionSuppliedLabel =
@@ -909,7 +907,7 @@ Bool mfslDriver::applySelectOptionsFinally ()
         ", optionSuppliedLabel\"" <<
         optionSuppliedLabel <<
         "\"" <<
-        endl;
+        std::endl;
     }
 
     S_mfslChoice
@@ -920,7 +918,7 @@ Bool mfslDriver::applySelectOptionsFinally ()
             *this);
 
     if (optionSuppliedLabel == K_ALL_PSEUDO_LABEL_NAME) {
-      const set<string>&
+      const std::set<std::string>&
         choiceLabelsSet =
           choice->
             getLabelsSet ();
@@ -932,7 +930,7 @@ Bool mfslDriver::applySelectOptionsFinally ()
           gLogStream);
       }
 
-      for (string choiceLabel : choiceLabelsSet) {
+      for (std::string choiceLabel : choiceLabelsSet) {
         result =
           applySelectOption (
             choice,
@@ -953,11 +951,11 @@ Bool mfslDriver::applySelectOptionsFinally ()
 
 Bool mfslDriver::applySelectOption (
   const S_mfslChoice choice,
-  const string&      label)
+  const std::string&      label)
 {
   Bool result;
 
-  const string
+  const std::string
     choiceName =
       choice->getChoiceName ();
 
@@ -968,10 +966,10 @@ Bool mfslDriver::applySelectOption (
       "\" for choice \"" <<
       choiceName <<
       "\" is being applied" <<
-      endl;
+      std::endl;
   }
 
-  const set<string>&
+  const std::set<std::string>&
     choiceLabelsSet =
       choice->
         getLabelsSet ();
@@ -1010,7 +1008,7 @@ Bool mfslDriver::applySelectOption (
     if (fTraceChoices) {
       gLogStream <<
         "====> selectOptionsBlock by an option:" <<
-        endl;
+        std::endl;
       ++gIndenter;
       gLogStream <<
         selectOptionsBlock;
@@ -1019,7 +1017,7 @@ Bool mfslDriver::applySelectOption (
   }
 
   else {
-    stringstream s;
+    std::stringstream s;
 
     s <<
       "applySelectOption(): label \"" <<
@@ -1039,8 +1037,8 @@ Bool mfslDriver::applySelectOption (
 void mfslDriver::finalSemanticsCheck ()
 {
   // have all the options supplied choices been used?
-  for (string choiceName : fUnusedOptionsSuppliedChoicesSet) {
-    stringstream s;
+  for (std::string choiceName : fUnusedOptionsSuppliedChoicesSet) {
+    std::stringstream s;
 
     s <<
       "option-supplied choice \"" <<
@@ -1069,16 +1067,16 @@ void mfslDriver::finalSemanticsCheck ()
 
 void mfslDriver::populateTheCommandsList ()
 {
-  for (string inputSouce : fInputSoucesList ) {
-    // the tool and input file source as string
-    string
+  for (std::string inputSouce : fInputSoucesList ) {
+    // the tool and input file source as std::string
+    std::string
       toolAndInputAsString =
         fTool +
         ' ' +
         inputSouce;
 
-    // the main options block options as string
-    string
+    // the main options block options as std::string
+    std::string
       mainOptionsAsString;
 
     if (fMainOptionsBlock) {
@@ -1106,13 +1104,13 @@ void mfslDriver::populateTheCommandsList ()
         // either in the script or by an option
 
         for (S_mfslOptionsBlock optionsBlock :fSelectedOptionsBlocksList ) {
-          // the 'select' choice options block options as string
-          string
+          // the 'select' choice options block options as std::string
+          std::string
             selectChoiceOptionsAsString =
               optionsBlock->
                 asOptionsString ();
 
-          // append it to the commands list
+          // append it to the commands std::list
           fCommandsList.push_back (
             toolAndInputAsString
               +
@@ -1131,7 +1129,7 @@ void mfslDriver::populateTheCommandsList ()
         // check that there is only one choice in the script
 
         // get the choices table
-        const map<string, S_mfslChoice>&
+        const std::map<std::string, S_mfslChoice>&
           choicesMultiMap =
             fChoicesTable->
               getChoicesMap ();
@@ -1149,7 +1147,7 @@ void mfslDriver::populateTheCommandsList ()
               (*( choicesMultiMap.begin ())).second;
 
           // get its default label
-          string
+          std::string
             singleChoiceDefaultLabel =
               singleChoice->
                 getChoiceDefaultLabel ();
@@ -1162,13 +1160,13 @@ void mfslDriver::populateTheCommandsList ()
                   singleChoiceDefaultLabel,
                   *this);
 
-          // fetch the options to be used as a string
-          string
+          // fetch the options to be used as a std::string
+          std::string
             optionsBlockToBeUsedAsString =
               optionsBlockToBeUsed->
                 asOptionsString ();
 
-          // append it to the commands list
+          // append it to the commands std::list
           fCommandsList.push_back (
             toolAndInputAsString
               +

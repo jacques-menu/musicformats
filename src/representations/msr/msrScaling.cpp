@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // setw, setprecision, ...
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "visitor.h"
 
@@ -29,8 +29,6 @@
 #include "msrOah.h"
 #include "lpsrOah.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -112,48 +110,48 @@ float msrScaling::fetchGlobalStaffSize () const
     if (gGlobalTracingOahGroup->getTraceGeometry ()) {
       gLogStream <<
         "fetchGlobalStaffSize():" <<
-        endl;
+        std::endl;
 
       ++gIndenter;
 
       const int fieldWidth = 32;
 
-      gLogStream << left <<
-        setw (fieldWidth) <<
+      gLogStream << std::left <<
+        std::setw (fieldWidth) <<
         "optionsGlobalStaffSize" << " : " <<
         optionsGlobalStaffSize <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "defaultTenthsToMillimetersRatio" << " : " <<
         defaultTenthsToMillimetersRatio <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "millimetersOverTenths" << " : " <<
         millimetersOverTenths <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) <<
+        std::setw (fieldWidth) <<
         "optionsStaffGlobalSizeDefaultValue" << " : " <<
         optionsStaffGlobalSizeDefaultValue <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "optionsGlobalStaffSize" << " : " <<
         optionsGlobalStaffSize <<
-        endl <<
-        setw (fieldWidth) <<
+        std::endl <<
+        std::setw (fieldWidth) <<
         "staffGlobalSizeHasBeenSet" << " : " <<
         staffGlobalSizeHasBeenSet <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) <<
+        std::setw (fieldWidth) <<
         "ratio" << " : " <<
         ratio <<
-        endl <<
+        std::endl <<
 
-        setw (fieldWidth) <<
+        std::setw (fieldWidth) <<
         "result" << " : " <<
         result <<
-        endl;
+        std::endl;
 
       --gIndenter;
     }
@@ -162,12 +160,12 @@ float msrScaling::fetchGlobalStaffSize () const
     if (result < 1.0 || result > 100.0) {
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceGeometry ()) {
-        stringstream s;
+        std::stringstream s;
 
         s <<
           "resulting staffsize " << result <<
           " is not between 1.0 and 100.0, replaced by 20.0:" <<
-          endl;
+          std::endl;
 
         musicxmlWarning (
           gGlobalServiceRunData->getInputSourceName (),
@@ -189,7 +187,7 @@ void msrScaling::acceptIn (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrScaling::acceptIn ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrScaling>*
@@ -200,7 +198,7 @@ void msrScaling::acceptIn (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrScaling::visitStart ()" <<
-            endl;
+            std::endl;
         }
         p->visitStart (elem);
   }
@@ -211,7 +209,7 @@ void msrScaling::acceptOut (basevisitor* v)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrScaling::acceptOut ()" <<
-      endl;
+      std::endl;
   }
 
   if (visitor<S_msrScaling>*
@@ -222,7 +220,7 @@ void msrScaling::acceptOut (basevisitor* v)
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrScaling::visitEnd ()" <<
-            endl;
+            std::endl;
         }
         p->visitEnd (elem);
   }
@@ -231,38 +229,38 @@ void msrScaling::acceptOut (basevisitor* v)
 void msrScaling::browseData (basevisitor* v)
 {}
 
-void msrScaling::print (ostream& os) const
+void msrScaling::print (std::ostream& os) const
 {
   os <<
     "[Scaling" <<
-    endl;
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 13;
 
   // relative to absolute lengths conversion
-  os << left <<
-    setw (fieldWidth) <<
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "millimeters" << " : " <<
-    setprecision (2) << fMillimeters <<
-    endl <<
-    setw (fieldWidth) <<
+    std::setprecision (2) << fMillimeters <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "tenths" << " : " <<
-    setprecision (2) << fTenths <<
-    endl;
+    std::setprecision (2) << fTenths <<
+    std::endl;
 
   --gIndenter;
 
-  os << ']' << endl;
+  os << ']' << std::endl;
 }
 
-ostream& operator << (ostream& os, const S_msrScaling& elt) {
+std::ostream& operator << (std::ostream& os, const S_msrScaling& elt) {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "[NONE]" << endl;
+    os << "[NONE]" << std::endl;
   }
   
   return os;

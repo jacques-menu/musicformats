@@ -13,10 +13,10 @@ enum class bsrKeyKind {
   kKeyKindFlats, kKeyKindNaturals, kKeyKindSharps
 };
 
-string bsrKeyKindAsString (
+std::string bsrKeyKindAsString (
   bsrKeyKind keyKind);
 
-ostream& operator << (ostream& os, const bsrKeyKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrKeyKind& elt);
 
 //______________________________________________________________________________
 class EXP bsrKey : public bsrLineContentsElement
@@ -94,11 +94,11 @@ class EXP bsrKey : public bsrLineContentsElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -111,7 +111,7 @@ class EXP bsrKey : public bsrLineContentsElement
     S_bsrCellsList        fKeyCellsList;
 };
 typedef SMARTP<bsrKey> S_bsrKey;
-EXP ostream& operator << (ostream& os, const S_bsrKey& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrKey& elt);
 
 
 }
