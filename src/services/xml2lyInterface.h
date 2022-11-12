@@ -23,7 +23,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-EXP int xml2ly (
+EXP int xml2ly_BIS (
   int   argc,
   char* argv[]);
 
