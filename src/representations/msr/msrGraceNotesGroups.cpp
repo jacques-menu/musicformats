@@ -428,7 +428,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
     Rational
        voicePosition =
         fGraceNotesGroupUpLinkToNote->
-          getMeasureElementUpLinkToMeasure ()->
+          fetchMeasureElementUpLinkToMeasure ()->
             getMeasureVoicePosition ()
           +
         measurePosition;

@@ -3231,7 +3231,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     voiceFirstNote =
       fetchVoiceFirstNonGraceNote (); // JMI
 
-  // get the voice first note's chord upLink
+  // get the voice first note's uplink to chord
   S_msrChord
     firstNoteDirectUpLinkToChord =
       voiceFirstNote->

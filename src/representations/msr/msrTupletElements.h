@@ -62,7 +62,7 @@ class EXP msrTupletElement : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     /*
-      The tuplet uplink is declared in the sub-classes,
+      The uplink to tuplet is declared in the sub-classes,
       to allow for separate *.h files, C++ constraint
     */
 
