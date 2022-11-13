@@ -82,9 +82,10 @@ msrTuplet::msrTuplet (
   const Rational&         memberNotesSoundingWholeNotes,
   const Rational&         memberNotesDisplayWholeNotes)
     : msrTupletElement (
-        inputLineNumber,
-        upLinkToMeasure)
+        inputLineNumber)
 {
+  fTupletUpLinkToMeasure = upLinkToMeasure;
+
   fTupletKind = msrTupletInKind::kTupletIn_NO_;
 
   fTupletNumber = tupletNumber;

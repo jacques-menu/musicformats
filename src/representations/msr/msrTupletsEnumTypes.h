@@ -81,67 +81,6 @@ std::string msrTupletShowTypeKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrTupletShowTypeKind& elt);
 
-// //______________________________________________________________________________
-// // data types
-//
-// enum class msrTupletInKind {
-//   kTupletIn_NO_,
-//   kTupletInMeasure,
-//   kTupletInTuplet
-// };
-//
-// EXP std::string msrTupletInKindAsString (
-//   msrTupletInKind tupletKind);
-//
-// std::ostream& operator << (std::ostream& os, const msrTupletInKind& elt);
-//
-// enum class msrTupletTypeKind {
-//   kTupletTypeNone,
-//   kTupletTypeStart, kTupletTypeContinue, kTupletTypeStop,
-//   kTupletTypeStartAndStopInARow
-// };
-//
-// std::string msrTupletTypeKindAsString (
-//   msrTupletTypeKind tupletTypeKind);
-//
-// std::ostream& operator << (std::ostream& os, const msrTupletTypeKind& elt);
-//
-// enum class msrTupletBracketKind {
-//   kTupletBracketYes, kTupletBracketNo
-// };
-//
-// std::string msrTupletBracketKindAsString (
-//   msrTupletBracketKind tupletBracketKind);
-//
-// std::ostream& operator << (std::ostream& os, const msrTupletBracketKind& elt);
-//
-// enum class msrTupletLineShapeKind {
-//   kTupletLineShapeStraight, kTupletLineShapeCurved
-// };
-//
-// std::string msrTupletLineShapeKindAsString (
-//   msrTupletLineShapeKind tupletLineShapeKind);
-//
-// std::ostream& operator << (std::ostream& os, const msrTupletLineShapeKind& elt);
-//
-// enum class msrTupletShowNumberKind {
-//   kTupletShowNumberActual, kTupletShowNumberBoth, kTupletShowNumberNone
-// };
-//
-// std::string msrTupletShowNumberKindAsString (
-//   msrTupletShowNumberKind tupletShowNumberKind);
-//
-// std::ostream& operator << (std::ostream& os, const msrTupletShowNumberKind& elt);
-//
-// enum class msrTupletShowTypeKind {
-//   kTupletShowTypeActual, kTupletShowTypeBoth, kTupletShowTypeNone
-// };
-//
-// std::string msrTupletShowTypeKindAsString (
-//   msrTupletShowTypeKind tupletShowTypeKind);
-//
-// std::ostream& operator << (std::ostream& os, const msrTupletShowTypeKind& elt);
-
 
 }
 

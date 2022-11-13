@@ -13,7 +13,7 @@
 #define ___msrFiguredBasses___
 
 #include "msrElements.h"
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 #include "msrTypesForwardDeclarations.h"
 

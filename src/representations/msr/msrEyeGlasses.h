@@ -12,7 +12,7 @@
 #ifndef ___msrEyeGlasses___
 #define ___msrEyeGlasses___
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats

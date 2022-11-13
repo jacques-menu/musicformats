@@ -23,11 +23,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// pre-declarations
-// class   msrStanza;
-// typedef SMARTP<msrStanza> S_msrStanza;
-
-//______________________________________________________________________________
 class EXP lpsrNewLyricsBlock : public lpsrElement
 {
   public:

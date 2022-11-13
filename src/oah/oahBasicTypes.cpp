@@ -1073,7 +1073,7 @@ std::string oahPrefix::fetchPrefixNames () const
 }
 
 Bool oahPrefix::findStringInFindableElement (
-	const std::string&               lowerCaseString,
+	const std::string&          lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {
@@ -1475,7 +1475,7 @@ const std::string oahAtom::containingFindableElementAsString () const
 }
 
 Bool oahAtom::findStringInAtom (
-	const std::string&               lowerCaseString,
+	const std::string&          lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {
@@ -3215,7 +3215,7 @@ const std::string oahSubGroup::containingFindableElementAsString () const
 }
 
 Bool oahSubGroup::findStringInSubGroup (
-	const std::string&               lowerCaseString,
+	const std::string&          lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {
@@ -4337,7 +4337,7 @@ const std::string oahGroup::containingFindableElementAsString () const
 }
 
 void oahGroup::findStringInGroup (
-	const std::string&               lowerCaseString,
+	const std::string&          lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {
@@ -6109,7 +6109,7 @@ const std::string oahHandler::containingFindableElementAsString () const
 }
 
 Bool oahHandler::findStringInFindableElement (
-	const std::string&               lowerCaseString,
+	const std::string&          lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {

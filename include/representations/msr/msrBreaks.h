@@ -12,7 +12,7 @@
 #ifndef ___msrBreaks___
 #define ___msrBreaks___
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats

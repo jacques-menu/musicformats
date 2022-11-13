@@ -22,8 +22,8 @@
 
 /*
   CAUTION: // JMI v0.9.66
-    the following two should be in this order
-    due to mutual dependencies
+    if might be necessary for the the following two to be strictly in this order
+    depending on the C++ compiler
 */
 #include "msrMeasures.h"
 #include "msrMeasureElements.h"
@@ -363,136 +363,6 @@ void msrMeasureElement::print (std::ostream& os) const
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "[NONE]" << std::endl;
-  }
-
-  return os;
-}
-
-//______________________________________________________________________________
-msrMeasureElementLambda::msrMeasureElementLambda (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
-    : msrMeasureElement (inputLineNumber)
-//       fMeasureElementMeasureMoment (
-//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
-//       fMeasureElementVoiceMoment (
-//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
-{
-  fMeasureElementLambdaUpLinkToMeasure = upLinkToMeasure;
-}
-
-msrMeasureElementLambda::~msrMeasureElementLambda ()
-{}
-
-void msrMeasureElementLambda::acceptIn (basevisitor* v)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
-      "% ==> msrMeasureElementLambda::acceptIn ()" <<
-      std::endl;
-  }
-#endif
-
-  if (visitor<S_msrMeasureElement>*
-    p =
-      dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
-        S_msrMeasureElement elem = this;
-
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
-            "% ==> Launching msrMeasureElementLambda::visitStart ()" <<
-            std::endl;
-        }
-#endif
-        p->visitStart (elem);
-  }
-}
-
-void msrMeasureElementLambda::setMeasureElementUpLinkToMeasure (
-  S_msrMeasure measure)
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
-    ++gIndenter;
-
-    gLogStream <<
-      "==> Setting the uplink to measure of measure element lambda " <<
-      asString () <<
-      " to measure " << measure->asString () << // JMI v0.9.66
-      "' in measure '" <<
-      fetchMeasureElementMeasureNumber () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif
-
-  fMeasureElementLambdaUpLinkToMeasure = measure;
-}
-
-S_msrMeasure msrMeasureElementLambda::fetchMeasureElementUpLinkToMeasure () const
-{
-  return fMeasureElementLambdaUpLinkToMeasure;
-}
-
-void msrMeasureElementLambda::acceptOut (basevisitor* v)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
-      "% ==> msrMeasureElementLambda::acceptOut ()" <<
-      std::endl;
-  }
-#endif
-
-  if (visitor<S_msrMeasureElement>*
-    p =
-      dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
-        S_msrMeasureElement elem = this;
-
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
-            "% ==> Launching msrMeasureElementLambda::visitEnd ()" <<
-            std::endl;
-        }
-#endif
-        p->visitEnd (elem);
-  }
-}
-
-std::string msrMeasureElementLambda::asString () const
-{
-  // this is overriden all in actual elements
-  return "??? msrMeasureElementLambda::asString () ???";
-}
-
-std::string msrMeasureElementLambda::asShortString () const
-{
-  // this can be overriden in actual elements
-  return asString ();
-}
-
-void msrMeasureElementLambda::print (std::ostream& os) const
-{
-  os << asString () << std::endl;
-}
-
-std::ostream& operator << (std::ostream& os, const S_msrMeasureElementLambda& elt)
 {
   if (elt) {
     elt->print (os);

@@ -9,6 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <climits>      // INT_MIN, INT_MAX
 #include <sstream>
 
 #include "mfServiceRunData.h"

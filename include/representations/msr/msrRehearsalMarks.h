@@ -12,7 +12,7 @@
 #ifndef ___msrRehearsalMarks___
 #define ___msrRehearsalMarks___
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 #include "msrPlacements.h"
 

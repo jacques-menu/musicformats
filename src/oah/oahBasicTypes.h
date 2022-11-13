@@ -418,7 +418,7 @@ to be developped into :
     std::string           fetchPrefixNames () const;
 
     Bool                  findStringInFindableElement (
-                            const std::string&               lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 
@@ -552,7 +552,7 @@ class EXP oahAtom : public oahElement
     void                  printSummary (std::ostream& os) const;
 
     virtual Bool          findStringInAtom (
-                            const std::string&               lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
@@ -1126,7 +1126,7 @@ class EXP oahSubGroup : public oahElement
                             S_oahSubGroup subGroup) const;
 
     Bool                  findStringInSubGroup (
-                            const std::string&               lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
@@ -1338,7 +1338,7 @@ class EXP oahGroup : public oahElement
                             S_oahSubGroup subGroup) const;
 
     void                  findStringInGroup (
-                            const std::string&               lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
@@ -1649,7 +1649,7 @@ class EXP oahHandler : public oahFindableElement
                             const std::string& name);
 
     Bool                  findStringInFindableElement (
-                            const std::string&               lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 

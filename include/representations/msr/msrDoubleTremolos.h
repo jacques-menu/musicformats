@@ -12,7 +12,7 @@
 #ifndef ___msrDoubleTremolos___
 #define ___msrDoubleTremolos___
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 #include "msrPlacements.h"
 

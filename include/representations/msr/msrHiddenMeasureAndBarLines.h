@@ -12,7 +12,7 @@
 #ifndef ___msrHiddenMeasureAndBarLine___
 #define ___msrHiddenMeasureAndBarLine___
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats

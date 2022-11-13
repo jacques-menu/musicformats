@@ -502,7 +502,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 // }
 
 Bool oahElement::findStringInFindableElement (
-	const std::string&               lowerCaseString,
+	const std::string&          lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {

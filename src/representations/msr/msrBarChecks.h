@@ -14,20 +14,11 @@
 
 #include <list>
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// PRE-declarations
-
-// class msrMeasure;
-// typedef SMARTP<msrMeasure> S_msrMeasure;
-//
-// class msrMeasureElement;
-// typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 
 //______________________________________________________________________________
 class EXP msrBarCheck : public msrMeasureElementLambda

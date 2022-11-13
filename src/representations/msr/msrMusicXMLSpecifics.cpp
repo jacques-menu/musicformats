@@ -1946,7 +1946,7 @@ std::ostream& operator << (std::ostream& os, const S_msrGlyph& elt)
 S_msrOtherAppearance msrOtherAppearance::create (
   int                        inputLineNumber,
   msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-  const std::string&              otherAppearanceValue)
+  const std::string&         otherAppearanceValue)
 {
   msrOtherAppearance* o =
     new msrOtherAppearance (
@@ -1960,7 +1960,7 @@ S_msrOtherAppearance msrOtherAppearance::create (
 msrOtherAppearance::msrOtherAppearance (
   int                        inputLineNumber,
   msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-  const std::string&              otherAppearanceValue)
+  const std::string&         otherAppearanceValue)
     : msrElement (inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED

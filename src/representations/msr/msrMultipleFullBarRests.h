@@ -21,18 +21,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// data types
-
-// enum class msrMultipleFullBarRestsKind { // unused ??? JMI v0.9.66
-//   kMultipleFullBarRests_NO_,
-//   kMultipleFullBarRestsStart, kMultipleFullBarRestsStop
-// };
-//
-// std::string msrMultipleFullBarRestsKindAsString (
-//   msrMultipleFullBarRestsKind multipleFullBarRestsKind);
-//
-// std::ostream& operator << (std::ostream& os, const msrMultipleFullBarRestsKind& elt);
-
 class EXP msrMultipleFullBarRests : public msrSegmentElement
 {
   public:

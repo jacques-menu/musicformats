@@ -12,7 +12,7 @@
 #ifndef ___msrTranspositions___
 #define ___msrTranspositions___
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats

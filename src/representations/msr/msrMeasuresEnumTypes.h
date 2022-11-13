@@ -18,12 +18,6 @@
 namespace MusicFormats
 {
 
-//______________________________________________________________________________
-// PRE-declarations
-
-// class msrMeasureElement;
-// typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
-
 // measures
 //______________________________________________________________________________
 enum class msrMeasureKind {

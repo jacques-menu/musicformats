@@ -1858,7 +1858,7 @@ std::string msrQuarterTonesPitchesLanguageKindAsString (
 //______________________________________________________________________________
 msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
   msrQuarterTonesPitchesLanguageKind languageKind,
-  const std::string&                      quarterTonesPitchName)
+  const std::string&                 quarterTonesPitchName)
 {
   msrQuarterTonesPitchKind
     result =

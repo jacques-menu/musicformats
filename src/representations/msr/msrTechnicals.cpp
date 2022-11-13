@@ -571,7 +571,7 @@ S_msrTechnicalWithString msrTechnicalWithString::create (
   int                        inputLineNumber,
   msrTechnicalWithStringKind technicalWithStringKind,
   msrTechnicalTypeKind       technicalWithStringTypeKind,
-  const std::string&              technicalWithStringValue,
+  const std::string&         technicalWithStringValue,
   msrPlacementKind           technicalWithStringPlacementKind)
 {
   msrTechnicalWithString* o =
@@ -589,7 +589,7 @@ msrTechnicalWithString::msrTechnicalWithString (
   int                        inputLineNumber,
   msrTechnicalWithStringKind technicalWithStringKind,
   msrTechnicalTypeKind       technicalWithStringTypeKind,
-  const std::string&              technicalWithStringValue,
+  const std::string&         technicalWithStringValue,
   msrPlacementKind           technicalWithStringPlacementKind)
     : msrElement (inputLineNumber)
 {

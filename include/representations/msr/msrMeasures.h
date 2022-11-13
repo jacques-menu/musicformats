@@ -14,9 +14,10 @@
 
 #include "msrSegmentElements.h"
 
+#include "msrMeasureElements.h"
+
 #include "msrMeasuresEnumTypes.h"
 #include "msrMoments.h"
-// #include "msrNotes.h"
 #include "msrSegments.h"
 
 
@@ -554,7 +555,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&               context);
+                            const std::string&          context);
 
     void                  finalizeMeasureClone (
                             int          inputLineNumber,
@@ -572,17 +573,17 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeRegularMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&               context);
+                            const std::string&          context);
 
     void                  finalizeHarmonyMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&               context);
+                            const std::string&          context);
 
     void                  finalizeFiguredBassMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&               context);
+                            const std::string&          context);
 
   public:
 
