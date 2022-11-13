@@ -78,10 +78,10 @@ std::ostream& operator << (std::ostream& os, const msrCreditTypeKind& elt)
 //______________________________________________________________________________
 S_msrCreditWords msrCreditWords::create (
   int                        inputLineNumber,
-  const std::string&              creditWordsContents,
+  const std::string&         creditWordsContents,
   float                      creditWordsDefaultX,
   float                      creditWordsDefaultY,
-  const std::string&              creditWordsFontFamily,
+  const std::string&         creditWordsFontFamily,
   float                      creditWordsFontSize,
   msrFontWeightKind          creditWordsFontWeightKind,
   msrFontStyleKind           creditWordsFontStyleKind,
@@ -110,10 +110,10 @@ S_msrCreditWords msrCreditWords::create (
 
 msrCreditWords::msrCreditWords (
   int                        inputLineNumber,
-  const std::string&              creditWordsContents,
+  const std::string&         creditWordsContents,
   float                      creditWordsDefaultX,
   float                      creditWordsDefaultY,
-  const std::string&              creditWordsFontFamily,
+  const std::string&         creditWordsFontFamily,
   float                      creditWordsFontSize,
   msrFontWeightKind          creditWordsFontWeightKind,
   msrFontStyleKind           creditWordsFontStyleKind,

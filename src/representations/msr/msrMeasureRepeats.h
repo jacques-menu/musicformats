@@ -429,13 +429,13 @@ class EXP msrMeasureRepeatElement : public msrElement
     void                  appendMeasureRepeatToMeasureRepeatElementsList (
                             int                  inputLineNumber,
                             S_msrMeasureRepeat  measureRepeat,
-                            const std::string&               context);
+                            const std::string&          context);
 
 
     void                  appendMultipleFullBarRestsToMeasureRepeatElementsList (
                             int                         inputLineNumber,
                             S_msrMeasureRepeat measureRepeat,
-                            const std::string&                      context);
+                            const std::string&                 context);
 
     S_msrNote             fetchMeasureRepeatElementFirstNonGraceNote () const;
 

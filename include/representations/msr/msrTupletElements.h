@@ -26,7 +26,7 @@ namespace MusicFormats
   hence class msrTupletElement
 */
 
-class EXP msrTupletElement : public msrMeasureElementLambda
+class EXP msrTupletElement : public msrMeasureElement
 {
   public:
 
@@ -39,8 +39,7 @@ class EXP msrTupletElement : public msrMeasureElementLambda
   protected:
 
                           msrTupletElement (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int inputLineNumber);
 
     virtual               ~msrTupletElement ();
 
@@ -62,7 +61,7 @@ class EXP msrTupletElement : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     /*
-      The uplink to tuplet is declared in the sub-classes,
+      The uplinks to the tuplet and measure element are declared in the sub-classes,
       to allow for separate *.h files, C++ constraint
     */
 

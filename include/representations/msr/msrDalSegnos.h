@@ -12,7 +12,7 @@
 #ifndef ___msrDalSegnos___
 #define ___msrDalSegnos___
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 #include "msrMeasures.h"
 

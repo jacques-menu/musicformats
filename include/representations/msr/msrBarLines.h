@@ -14,7 +14,7 @@
 
 #include <list>
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats
@@ -143,7 +143,7 @@ class EXP msrBarLine : public msrMeasureElementLambda
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const std::string&                 endingNumber,
+                            const std::string&            endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,
@@ -173,7 +173,7 @@ class EXP msrBarLine : public msrMeasureElementLambda
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const std::string&                 endingNumber,
+                            const std::string&            endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,

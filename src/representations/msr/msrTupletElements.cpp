@@ -21,11 +21,9 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrTupletElement::msrTupletElement (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+  int inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fPositionInTuplet = -1;
 }

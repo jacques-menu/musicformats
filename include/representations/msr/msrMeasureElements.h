@@ -16,17 +16,9 @@
 
 #include "mfRational.h"
 
-// #include "msrMeasures.h"
-
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// PRE-declarations
-
-class msrMeasure;
-typedef SMARTP<msrMeasure> S_msrMeasure;
 
 //______________________________________________________________________________
 /*
@@ -169,69 +161,6 @@ class EXP msrMeasureElement : public msrElement
 };
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt);
-
-//______________________________________________________________________________
-class EXP msrMeasureElementLambda : public msrMeasureElement
-{
-  protected:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          msrMeasureElementLambda (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
-
-    virtual               ~msrMeasureElementLambda ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-    void                  setMeasureElementUpLinkToMeasure (
-                            S_msrMeasure measure) override;
-
-  public:
-
-    // visitors
-    // ------------------------------------------------------
-
-    void                  acceptIn  (basevisitor* v) override;
-    void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override = 0; // JMI ??? v0.9.66
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-    // upLink to measure
-    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    std::string           asShortString () const override;
-    std::string           asString () const override;
-
-    void                  print (std::ostream& os) const override;
-
-    void                  printSummary (std::ostream& os) const override
-                              {}
-
-  protected:
-
-    // protected fields
-    // ------------------------------------------------------
-
-    S_msrMeasure          fMeasureElementLambdaUpLinkToMeasure;
-};
-typedef SMARTP<msrMeasureElementLambda> S_msrMeasureElementLambda;
-EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElementLambda& elt);
 
 
 }

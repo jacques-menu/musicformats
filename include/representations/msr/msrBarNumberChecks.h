@@ -14,7 +14,7 @@
 
 #include <list>
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats

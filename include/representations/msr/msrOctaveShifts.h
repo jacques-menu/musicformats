@@ -12,7 +12,7 @@
 #ifndef ___msrOctaveShifts___
 #define ___msrOctaveShifts___
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats

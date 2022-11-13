@@ -12,9 +12,9 @@
 #ifndef ___msrSegmentElements___
 #define ___msrSegmentElements___
 
-#include "msrElements.h"
+#include "mfRational.h"
 
-#include "msrMeasureElements.h"
+#include "msrElements.h"
 
 
 namespace MusicFormats

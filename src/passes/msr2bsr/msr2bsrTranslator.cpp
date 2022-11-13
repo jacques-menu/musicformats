@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <sstream>
 #include <climits>      // INT_MIN, INT_MAX
+#include <sstream>
 
 #include "visitor.h"
 

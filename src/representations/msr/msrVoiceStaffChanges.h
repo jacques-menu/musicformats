@@ -12,7 +12,7 @@
 #ifndef ___msrStaffChanges___
 #define ___msrStaffChanges___
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 #include "msrStaves.h"
 

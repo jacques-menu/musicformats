@@ -16,7 +16,7 @@
 #include <vector>
 
 #include "msrElements.h"
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 #include "msrOctaves.h"
 

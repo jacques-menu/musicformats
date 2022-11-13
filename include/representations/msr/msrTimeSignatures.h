@@ -15,7 +15,7 @@
 #include <vector>
 
 #include "msrElements.h"
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats

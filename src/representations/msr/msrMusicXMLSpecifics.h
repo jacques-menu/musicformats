@@ -15,7 +15,7 @@
 #include <list>
 
 #include "msrElements.h"
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 #include "msrMargins.h"
 
@@ -1068,14 +1068,14 @@ class EXP msrOtherAppearance : public msrElement
     static SMARTP<msrOtherAppearance> create (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const std::string&              otherAppearanceValue);
+                            const std::string&         otherAppearanceValue);
 
   protected:
 
                           msrOtherAppearance (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const std::string&              otherAppearanceValue);
+                            const std::string&         otherAppearanceValue);
 
     virtual               ~msrOtherAppearance ();
 

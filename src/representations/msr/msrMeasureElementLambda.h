@@ -9,47 +9,38 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrEyeGlasses___
-#define ___msrEyeGlasses___
+#ifndef ___msrMeasureElementsLambda___
+#define ___msrMeasureElementsLambda___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
+
+#include "mfRational.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrEyeGlasses : public msrMeasureElementLambda
+class EXP msrMeasureElementLambda : public msrMeasureElement
 {
-  public:
-
-    // creation from MusicXML
-    // ------------------------------------------------------
-
-    static SMARTP<msrEyeGlasses> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
-
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrEyeGlasses (
+                          msrMeasureElementLambda (
                             int          inputLineNumber,
                             S_msrMeasure upLinkToMeasure);
 
-    virtual               ~msrEyeGlasses ();
+    virtual               ~msrMeasureElementLambda ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-  public:
-
-    // public services
-    // ------------------------------------------------------
+    void                  setMeasureElementUpLinkToMeasure (
+                            S_msrMeasure measure) override;
 
   public:
 
@@ -63,24 +54,37 @@ class EXP msrEyeGlasses : public msrMeasureElementLambda
 
   public:
 
+    // public services
+    // ------------------------------------------------------
+
+    // upLink to measure
+    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
+
+  public:
+
     // print
     // ------------------------------------------------------
 
+    std::string           asShortString () const override;
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
 
-  private:
+    void                  printSummary (std::ostream& os) const override
+                              {}
 
-    // private fields
+  protected:
+
+    // protected fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fMeasureElementLambdaUpLinkToMeasure;
 };
-typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;
-EXP std::ostream& operator << (std::ostream& os, const S_msrEyeGlasses& elt);
+typedef SMARTP<msrMeasureElementLambda> S_msrMeasureElementLambda;
+EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElementLambda& elt);
 
 
 }
 
 
 #endif
-

@@ -52,7 +52,7 @@ S_msrNote msrNote::create (
   int                        inputLineNumber,
   S_msrMeasure               upLinkToMeasure,
 
-  const std::string&              noteMeasureNumber,
+  const std::string&         noteMeasureNumber,
 
   msrNoteKind                noteKind,
 
@@ -115,7 +115,7 @@ msrNote::msrNote (
   int                        inputLineNumber,
   S_msrMeasure               upLinkToMeasure,
 
-  const std::string&              noteMeasureNumber,
+  const std::string&         noteMeasureNumber,
 
   msrNoteKind                noteKind,
 
@@ -140,11 +140,12 @@ msrNote::msrNote (
   msrNoteHeadFilledKind      msrNoteHeadFilledKind,
   msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind)
   : msrTupletElement (
-      inputLineNumber,
-      upLinkToMeasure),
+      inputLineNumber),
     fNoteColorAlphaRGB ("", "")
 {
-  fetchMeasureElementMeasureNumber () = noteMeasureNumber;
+  fNoteUpLinkToMeasure = upLinkToMeasure;
+
+  // JMI v0.9.66 ??? fetchMeasureElementMeasureNumber () = noteMeasureNumber;
 
   // basic note description
   fNoteKind = noteKind;

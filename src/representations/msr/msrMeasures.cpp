@@ -4120,7 +4120,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 void msrMeasure::finalizeRegularMeasure (
   int                         inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  const std::string&               context)
+  const std::string&          context)
 {
   // fetch the regular voice
   S_msrVoice
@@ -5542,7 +5542,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
 void msrMeasure::finalizeHarmonyMeasure (
   int                         inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  const std::string&               context)
+  const std::string&          context)
 {
   // fetch the harmonies voice
   S_msrVoice
@@ -5643,7 +5643,7 @@ void msrMeasure::finalizeHarmonyMeasure (
 void msrMeasure::finalizeFiguredBassMeasure (
   int                         inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  const std::string&               context)
+  const std::string&          context)
 {
   // fetch the figured bass voice
   S_msrVoice
@@ -5743,7 +5743,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
 void msrMeasure::finalizeMeasure (
   int                         inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  const std::string&               context)
+  const std::string&          context)
 {
   if (fMeasureHasBeenFinalized) {
     std::stringstream s;

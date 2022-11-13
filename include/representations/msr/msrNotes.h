@@ -46,7 +46,7 @@ class EXP msrNote : public msrTupletElement
                             int                        inputLineNumber,
                             S_msrMeasure               upLinkToMeasure,
 
-                            const std::string&              noteMeasureNumber,
+                            const std::string&         noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 
@@ -157,7 +157,7 @@ class EXP msrNote : public msrTupletElement
                             int                        inputLineNumber,
                             S_msrMeasure               upLinkToMeasure,
 
-                            const std::string&              noteMeasureNumber,
+                            const std::string&         noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 

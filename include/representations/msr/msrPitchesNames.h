@@ -47,7 +47,7 @@ EXP std::string msrQuarterTonesPitchKindAsStringInLanguage (
 
 EXP msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
   msrQuarterTonesPitchesLanguageKind languageKind,
-  const std::string&                      quarterTonesPitchName);
+  const std::string&                 quarterTonesPitchName);
 
 /* JMI
  msrSemiTonesPitchKindAsString (
