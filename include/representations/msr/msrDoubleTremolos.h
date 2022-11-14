@@ -185,9 +185,6 @@ class EXP msrDoubleTremolo : public msrMeasureElementLambda
 
     // tremolo first note
 
-    void                  setDoubleTremoloFirstNoteMeasurePosition (
-                            const Rational& measurePosition); // v0.9.66 PIM
-
     void                  setDoubleTremoloFirstNoteMeasureNumber (
                             const std::string& measureNumber);
 

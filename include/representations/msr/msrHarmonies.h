@@ -343,17 +343,6 @@ class EXP msrHarmony : public msrMeasureElementLambda
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
 //                             const std::string& context) override
-//                               {
-//                                 setHarmonyMeasurePosition (
-//                                   measure,
-//                                   measurePosition,
-//                                   context);
-//                               }
-//
-//     void                  setHarmonyMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string& context);
 
     // whole notes
     void                  setHarmonyDisplayWholeNotes (

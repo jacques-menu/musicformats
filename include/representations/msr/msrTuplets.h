@@ -45,6 +45,18 @@ class EXP msrTuplet : public msrTupletElement
                             const Rational&         memberNotesSoundingWholeNotes,
                             const Rational&         memberNotesDisplayWholeNotes);
 
+    static SMARTP<msrTuplet> create (
+                            int                     inputLineNumber,
+                            const std::string&      tupletMeasureNumber,
+                            int                     tupletNumber,
+                            msrTupletBracketKind    tupletBracketKind,
+                            msrTupletLineShapeKind  tupletLineShapeKind,
+                            msrTupletShowNumberKind tupletShowNumberKind,
+                            msrTupletShowTypeKind   tupletShowTypeKind,
+                            msrTupletFactor         tupletFactor,
+                            const Rational&         memberNotesSoundingWholeNotes,
+                            const Rational&         memberNotesDisplayWholeNotes);
+
     SMARTP<msrTuplet> createTupletNewbornClone ();
 
     SMARTP<msrTuplet> createTupletDeepClone ();

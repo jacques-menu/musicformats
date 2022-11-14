@@ -37,17 +37,17 @@ class EXP msrLineBreak : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrLineBreak> create (
-                            int                inputLineNumber,
-                            S_msrMeasure&      upLinkToMeasure,
-                            const std::string& nextBarNumber,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
+                            const std::string&  nextBarNumber,
                             msrUserChosenLineBreakKind
-                                               userChosenLineBreakKind);
+                                                userChosenLineBreakKind);
 
     static SMARTP<msrLineBreak> create (
-                            int                inputLineNumber,
-                            const std::string& nextBarNumber,
+                            int                 inputLineNumber,
+                            const std::string&  nextBarNumber,
                             msrUserChosenLineBreakKind
-                                               userChosenLineBreakKind);
+                                                userChosenLineBreakKind);
 
   protected:
 
@@ -55,11 +55,11 @@ class EXP msrLineBreak : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrLineBreak (
-                            int                inputLineNumber,
-                            S_msrMeasure&      upLinkToMeasure,
-                            const std::string& nextBarNumber,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
+                            const std::string&  nextBarNumber,
                             msrUserChosenLineBreakKind
-                                               userChosenLineBreakKind);
+                                                userChosenLineBreakKind);
 
     virtual               ~msrLineBreak ();
 
@@ -131,15 +131,15 @@ class EXP msrPageBreak : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrPageBreak> create (
-                            int            inputLineNumber,
-                            S_msrMeasure&  upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             msrUserChosenPageBreakKind
-                                           userChosenPageBreakKind);
+                                                userChosenPageBreakKind);
 
     static SMARTP<msrPageBreak> create (
-                            int            inputLineNumber,
+                            int                 inputLineNumber,
                             msrUserChosenPageBreakKind
-                                           userChosenPageBreakKind);
+                                                userChosenPageBreakKind);
 
   protected:
 
@@ -147,10 +147,10 @@ class EXP msrPageBreak : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrPageBreak (
-                            int            inputLineNumber,
-                            S_msrMeasure&  upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             msrUserChosenPageBreakKind
-                                           userChosenPageBreakKind);
+                                                userChosenPageBreakKind);
 
     virtual               ~msrPageBreak ();
 

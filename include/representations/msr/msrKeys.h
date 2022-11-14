@@ -171,8 +171,8 @@ class EXP msrKey : public msrMeasureElementLambda
                             int                      keyCancel);
 
     static SMARTP<msrKey> createHumdrumScot ( // for Humdrum/Scot keys
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrKey> createHumdrumScot ( // for Humdrum/Scot keys
                             int inputLineNumber);
@@ -197,8 +197,8 @@ class EXP msrKey : public msrMeasureElementLambda
                             int                      keyCancel);
 
                           msrKey ( // for Humdrum/Scot keys
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrKey ();
 
