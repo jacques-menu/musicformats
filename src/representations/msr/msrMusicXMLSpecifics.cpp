@@ -1149,8 +1149,8 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureLayout& elt)
 
 //______________________________________________________________________________
 S_msrPrintLayout msrPrintLayout::create (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure)
 {
   msrPrintLayout* o =
     new msrPrintLayout (
@@ -1160,9 +1160,19 @@ S_msrPrintLayout msrPrintLayout::create (
   return o;
 }
 
+S_msrPrintLayout msrPrintLayout::create (
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure)
+{
+  return
+    msrPrintLayout::create (
+      inputLineNumber,
+      nullptr); // upLinkToMeasure, will be set when clef is appended to a measure
+}
+
 msrPrintLayout::msrPrintLayout (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
@@ -1946,7 +1956,7 @@ std::ostream& operator << (std::ostream& os, const S_msrGlyph& elt)
 S_msrOtherAppearance msrOtherAppearance::create (
   int                        inputLineNumber,
   msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-  const std::string&         otherAppearanceValue)
+  const std::string&    otherAppearanceValue)
 {
   msrOtherAppearance* o =
     new msrOtherAppearance (
@@ -1960,7 +1970,7 @@ S_msrOtherAppearance msrOtherAppearance::create (
 msrOtherAppearance::msrOtherAppearance (
   int                        inputLineNumber,
   msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-  const std::string&         otherAppearanceValue)
+  const std::string&    otherAppearanceValue)
     : msrElement (inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED

@@ -18,7 +18,6 @@
 // libmusicxml2
 #include "visitor.h"
 
-#include "msrDalSegnos.h"
 
 
 namespace MusicFormats
@@ -669,7 +668,8 @@ class EXP msr2msrTranslator :
     Bool                      fOnGoingHarmony;
     S_msrHarmony              fCurrentHarmonyClone;
 
-    std::list<S_msrHarmony>        fPendingHarmoniesList;
+    std::list<S_msrHarmony>
+                              fPendingHarmoniesList;
 
 
     // figured bass

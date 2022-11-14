@@ -138,7 +138,20 @@ class EXP msrBarLine : public msrMeasureElementLambda
 
     static SMARTP<msrBarLine> create (
                             int                           inputLineNumber,
-                            S_msrMeasure                  upLinkToMeasure,
+                            S_msrMeasure&                 upLinkToMeasure,
+                            msrBarLineLocationKind        barLineLocationKind,
+                            msrBarLineStyleKind           barLineStyleKind,
+                            msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
+                            msrBarLineEndingTypeKind      barLineEndingTypeKind,
+                            const std::string&            endingNumber,
+                            int                           barLineTimes,
+                            msrBarLineCategoryKind        barLineCategoryKind,
+                            msrBarLineHasSegnoKind        barLineHasSegnoKind,
+                            msrBarLineHasCodaKind         barLineHasCodaKind,
+                            msrBarLineRepeatWingedKind    barLineRepeatWingedKind);
+
+    static SMARTP<msrBarLine> create (
+                            int                           inputLineNumber,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
@@ -154,12 +167,12 @@ class EXP msrBarLine : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrBarLine> createFinalBarLine (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrBarLine> createDoubleBarLine (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
   protected:
 
@@ -168,7 +181,7 @@ class EXP msrBarLine : public msrMeasureElementLambda
 
                           msrBarLine (
                             int                           inputLineNumber,
-                            S_msrMeasure                  upLinkToMeasure,
+                            S_msrMeasure&                 upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,

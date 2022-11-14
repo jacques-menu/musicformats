@@ -34,8 +34,8 @@ class EXP msrTuplet : public msrTupletElement
 
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
-                            S_msrMeasure            upLinkToMeasure,
-                            const std::string&           tupletMeasureNumber,
+                            S_msrMeasure&           upLinkToMeasure,
+                            const std::string&      tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
@@ -56,8 +56,8 @@ class EXP msrTuplet : public msrTupletElement
 
                           msrTuplet (
                             int                     inputLineNumber,
-                            S_msrMeasure            upLinkToMeasure,
-                            const std::string&           tupletMeasureNumber,
+                            S_msrMeasure&           upLinkToMeasure,
+                            const std::string&      tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
@@ -73,12 +73,6 @@ class EXP msrTuplet : public msrTupletElement
 
     // set and get
     // ------------------------------------------------------
-
-    // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            S_msrMeasure measure) override;
-
-    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
 
     // tuplet kind
     void                  setTupletKind (
@@ -96,26 +90,9 @@ class EXP msrTuplet : public msrTupletElement
     S_msrTuplet           getTupletDirectUpLinkToTuplet () const
                               { return fTupletDirectUpLinkToTuplet; }
 
-//     // position in measure
-//     void                  setMeasureElementMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string&      context) override
-//                               {
-//                                 setTupletMeasurePosition (
-//                                   measure,
-//                                   measurePosition,
-//                                   context);
-//                               }
-//
-//     void                  setTupletMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string&      context);
-
     // members positions in measures
     Rational              setTupletMembersMeasurePositions (
-                            S_msrMeasure    measure,
+                            S_msrMeasure&   measure,
                             const Rational& measurePosition);
                               // returns the position after the tuplet JMI ??? v0.9.66 SUPERFLOUS ???
 

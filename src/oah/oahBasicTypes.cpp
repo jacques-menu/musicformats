@@ -420,8 +420,8 @@ std::string oahOptionOrArgumentKindAsString (
 //______________________________________________________________________________
 S_oahOptionOrArgument oahOptionOrArgument::create (
   oahOptionOrArgumentKind optionOrArgumentKind,
-  const std::string&           first,
-  const std::string&           second)
+  const std::string&      first,
+  const std::string&      second)
 {
   oahOptionOrArgument* o = new
     oahOptionOrArgument (
@@ -434,8 +434,8 @@ S_oahOptionOrArgument oahOptionOrArgument::create (
 
 oahOptionOrArgument::oahOptionOrArgument (
   oahOptionOrArgumentKind optionOrArgumentKind,
-  const std::string&           first,
-  const std::string&           second)
+  const std::string&      first,
+  const std::string&      second)
 {
   fOptionOrArgumentKind = optionOrArgumentKind;
 
@@ -1073,7 +1073,7 @@ std::string oahPrefix::fetchPrefixNames () const
 }
 
 Bool oahPrefix::findStringInFindableElement (
-	const std::string&          lowerCaseString,
+	const std::string&     lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {
@@ -1475,7 +1475,7 @@ const std::string oahAtom::containingFindableElementAsString () const
 }
 
 Bool oahAtom::findStringInAtom (
-	const std::string&          lowerCaseString,
+	const std::string&     lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {
@@ -2421,10 +2421,10 @@ std::ostream& operator << (std::ostream& os, const S_oahPureHelpAtomExpectingAVa
 
 //______________________________________________________________________________
 S_oahSubGroup oahSubGroup::create (
-  const std::string&            subGroupHeader,
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       subGroupHeader,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
   S_oahGroup               upLinkToGroup)
 {
@@ -2441,10 +2441,10 @@ S_oahSubGroup oahSubGroup::create (
 }
 
 S_oahSubGroup oahSubGroup::createWithNames (
-  const std::string&            subGroupHeader,
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       subGroupHeader,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
   S_oahGroup               upLinkToGroup)
 {
@@ -2461,10 +2461,10 @@ S_oahSubGroup oahSubGroup::createWithNames (
 }
 
 oahSubGroup::oahSubGroup (
-  const std::string&            subGroupHeader,
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       subGroupHeader,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
   S_oahGroup               upLinkToGroup)
   : oahElement (
@@ -3215,7 +3215,7 @@ const std::string oahSubGroup::containingFindableElementAsString () const
 }
 
 Bool oahSubGroup::findStringInSubGroup (
-	const std::string&          lowerCaseString,
+	const std::string&     lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {
@@ -3382,10 +3382,10 @@ std::ostream& operator << (std::ostream& os, const S_oahSubGroup& elt)
 
 //______________________________________________________________________________
 S_oahGroup oahGroup::create (
-  const std::string&            header,
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       header,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind)
 {
   oahGroup* o = new
@@ -3400,10 +3400,10 @@ S_oahGroup oahGroup::create (
 }
 
 S_oahGroup oahGroup::create (
-  const std::string&            header,
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       header,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
   S_oahHandler             groupUpLinkToHandler)
 {
@@ -3420,10 +3420,10 @@ S_oahGroup oahGroup::create (
 }
 
 S_oahGroup oahGroup::createWithNames (
-  const std::string&            header,
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       header,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind)
 {
   oahGroup* o = new
@@ -3438,10 +3438,10 @@ S_oahGroup oahGroup::createWithNames (
 }
 
 S_oahGroup oahGroup::createWithNames (
-  const std::string&            header,
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       header,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
   S_oahHandler             groupUpLinkToHandler)
 {
@@ -3458,10 +3458,10 @@ S_oahGroup oahGroup::createWithNames (
 }
 
 oahGroup::oahGroup (
-  const std::string&            header,
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       header,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind)
   : oahElement (
       longName,
@@ -3481,10 +3481,10 @@ oahGroup::oahGroup (
 }
 
 oahGroup::oahGroup (
-  const std::string&            header,
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       header,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
   S_oahHandler             groupUpLinkToHandler)
   : oahElement (
@@ -4337,7 +4337,7 @@ const std::string oahGroup::containingFindableElementAsString () const
 }
 
 void oahGroup::findStringInGroup (
-	const std::string&          lowerCaseString,
+	const std::string&     lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {
@@ -6109,7 +6109,7 @@ const std::string oahHandler::containingFindableElementAsString () const
 }
 
 Bool oahHandler::findStringInFindableElement (
-	const std::string&          lowerCaseString,
+	const std::string&     lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {
@@ -9450,7 +9450,7 @@ void oahHandler::handleOptionNameCommon (
 
 
 // void oahHandler::analyzeOptionsAndArguments (
-//   std::string                   serviceName,
+//   std::string         serviceName,
 //   const oahOptionsAndArguments& optionsAndArguments)
 // {
 //   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
@@ -9584,7 +9584,7 @@ void oahHandler::handleOptionNameCommon (
 //
 
 void oahHandler::includeOptionsAndArgumentsFile (
-  const std::string&           includeFileName,
+  const std::string&      includeFileName,
   std::ostream&                os)
 {
 #ifdef TRACING_IS_ENABLED

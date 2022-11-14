@@ -2545,11 +2545,11 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<oahStringToStringMapElementAtom> create (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
   protected:
@@ -2558,11 +2558,11 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           oahStringToStringMapElementAtom (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
     virtual               ~oahStringToStringMapElementAtom ();
@@ -2632,11 +2632,11 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<oahStringToStringMultiMapElementAtom> create (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::multimap<std::string, std::string>&  stringToStringMultiMapVariable);
 
   protected:
@@ -2645,11 +2645,11 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           oahStringToStringMultiMapElementAtom (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::multimap<std::string, std::string>&  stringToStringMultiMapVariable);
 
     virtual               ~oahStringToStringMultiMapElementAtom ();

@@ -2904,7 +2904,6 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
     clef =
       msrClef::create (
         inputLineNumber,
-        nullptr, // will be set when clef is appended to a measure JMI v0.9.66 PIM
         clefKind,
         fCurrentClefStaffNumber);
 
@@ -3403,7 +3402,6 @@ S_msrKey mxsr2msrTranslator::handleTraditionalKey (
     key =
       msrKey::createTraditional (
         inputLineNumber,
-        nullptr, // will be set when key is appended to a measure JMI v0.9.66 PIM
         keyTonicPitchKind,
         fCurrentModeKind,
         fCurrentKeyCancelFifths);
@@ -3427,8 +3425,7 @@ S_msrKey mxsr2msrTranslator::handleHumdrumScotKey (
   S_msrKey
     key =
       msrKey::createHumdrumScot (
-        inputLineNumber,
-				nullptr); // will be set when key is appended to a measure JMI v0.9.66 PIM
+        inputLineNumber);
 
   // populate the key with the Humdrum/Scot items
   if (fCurrentHumdrumScotKeyItemsVector.size ()) {
@@ -3773,7 +3770,6 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
   fCurrentTimeSignature =
     msrTimeSignature::create (
       inputLineNumber,
-			nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
       fCurrentTimeSignatureSymbolKind);
 
   // populate the time with the time signature items
@@ -4140,7 +4136,6 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
     transposition =
       msrTransposition::create (
         inputLineNumber,
-        nullptr, // will be set when transposition is appended to a measure JMI v0.9.66 PIM
         fCurrentTransposeDiatonic,
         fCurrentTransposeChromatic,
         fCurrentTransposeOctaveChange,
@@ -4424,10 +4419,9 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
       fCurrentMetronomeTempo =
         msrTempo::createTempoPerMinute (
           inputLineNumber,
-	        nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
           msrDottedDuration (
             msrDurationKind::kDurationQuarter,
-            0),       // JMI could be different???
+            0),       // JMI could be different??? v0.9.66
           tempoString,
           msrTempoParenthesizedKind::kTempoParenthesizedNo,
           msrPlacementKind::kPlacementBelow);
@@ -4441,7 +4435,7 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
     std::string dynamicsString = elt->getAttributeValue ("dynamics");
 
     if (dynamicsString.size ()) {
-      // JMI
+      // JMI v0.9.66
     }
   }
 }
@@ -4559,7 +4553,6 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
     octaveShift =
       msrOctaveShift::create (
         inputLineNumber,
-        nullptr, // will be set when octave shift is appended to a measure JMI v0.9.66 PIM
         octaveShiftKind,
         octaveShiftSize);
 
@@ -4800,7 +4793,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         tempo =
           msrTempo::createTempoWordsOnly (
             inputLineNumber,
-		        nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
             words,
             msrTempoParenthesizedKind::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
@@ -4838,7 +4830,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         rehearsalMark =
           msrRehearsalMark::create (
             inputLineNumber,
-		        nullptr, // will be set when rehearsal mark is appended to a measure JMI v0.9.66 PIM
             msrRehearsalMarkKind::kRehearsalMarkNone, // JMI allow for other values???
             wordsValue,
             fCurrentDirectionPlacementKind);
@@ -4876,7 +4867,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         segno =
           msrSegno::create (
             inputLineNumber,
-		        nullptr, // will be set when segno is appended to a measure JMI v0.9.66 PIM
             fCurrentDirectionStaffNumber);
 
 #ifdef TRACING_IS_ENABLED
@@ -4912,7 +4902,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         dalSegno =
           msrDalSegno::create (
             inputLineNumber,
-		        nullptr, // will be set when dal segno is appended to a measure JMI v0.9.66 PIM
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -4951,7 +4940,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         dalSegno =
           msrDalSegno::create (
             inputLineNumber,
-		        nullptr, // will be set when dal segno is appended to a measure JMI v0.9.66 PIM
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -4990,7 +4978,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         dalSegno =
           msrDalSegno::create (
             inputLineNumber,
-		        nullptr, // will be set when segno is appended to a measure JMI v0.9.66 PIM
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -5029,7 +5016,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         coda =
           msrCoda::create (
             inputLineNumber,
-		        nullptr, // will be set when coda is appended to a measure JMI v0.9.66 PIM
             fCurrentDirectionStaffNumber,
             msrCodaKind::kCodaFirst);
 
@@ -5068,7 +5054,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         coda =
           msrCoda::create (
             inputLineNumber,
-		        nullptr, // will be set when coda is appended to a measure JMI v0.9.66 PIM
 						fCurrentDirectionStaffNumber,
             msrCodaKind::kCodaSecond);
 
@@ -5372,7 +5357,6 @@ void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
       accordionRegistration =
         msrAccordionRegistration::create (
           inputLineNumber,
-					nullptr, // will be set when accordion registration is appended to a measure JMI v0.9.66 PIM
           fCurrentAccordionHigh,
           fCurrentAccordionMiddle,
           fCurrentAccordionLow);
@@ -6005,48 +5989,53 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
       break;
 
     case msrTempoTupletTypeKind::kTempoTupletTypeStart:
-      // create metronome tuplet
-      fCurrentMetronomeTuplet =
-        msrTempoTuplet::create (
-          inputLineNumber,
-          fCurrentTempoTupletNumber,
-          fCurrentTempoTupletBracketKind,
-          fCurrentTempoTupletShowNumberKind,
-          msrTupletFactor (
-            fCurrentMetronomeNoteActualNotes,
-            fCurrentMetronomeNoteNormalNotes),
-          fCurrentMetronomeNoteWholeNotesFromMetronomeType);
+    	{
+				// create metronome tuplet
+				msrTupletFactor
+					tempoTupletFactor (
+						fCurrentMetronomeNoteActualNotes,
+						fCurrentMetronomeNoteNormalNotes);
 
-      // register the metronome tuplet
-      if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
-        // this metronome tuplet belongs to the left elements std::list
+				fCurrentMetronomeTuplet =
+					msrTempoTuplet::create (
+						inputLineNumber,
+						fCurrentTempoTupletNumber,
+						fCurrentTempoTupletBracketKind,
+						fCurrentTempoTupletShowNumberKind,
+						tempoTupletFactor,
+						fCurrentMetronomeNoteWholeNotesFromMetronomeType);
 
-        if (! fCurrentMetronomeRelationLeftElements) {
-          // create the relation left elements
-          fCurrentMetronomeRelationLeftElements =
-            msrTempoNotesRelationshipElements::create (
-              inputLineNumber,
-              msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsLeft);
-        }
+				// register the metronome tuplet
+				if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
+					// this metronome tuplet belongs to the left elements std::list
 
-        fCurrentMetronomeRelationLeftElements->
-          addElementToTempoNotesRelationshipElements (
-            fCurrentMetronomeTuplet);
-      }
-      else {
-        // this metronome tuplet belongs to the right elements std::list
+					if (! fCurrentMetronomeRelationLeftElements) {
+						// create the relation left elements
+						fCurrentMetronomeRelationLeftElements =
+							msrTempoNotesRelationshipElements::create (
+								inputLineNumber,
+								msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsLeft);
+					}
 
-        if (! fCurrentMetronomeRelationRightElements) {
-          // create the relation right elements
-          fCurrentMetronomeRelationRightElements =
-            msrTempoNotesRelationshipElements::create (
-              inputLineNumber,
-              msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsRight);
-        }
+					fCurrentMetronomeRelationLeftElements->
+						addElementToTempoNotesRelationshipElements (
+							fCurrentMetronomeTuplet);
+				}
+				else {
+					// this metronome tuplet belongs to the right elements std::list
 
-        fCurrentMetronomeRelationRightElements->
-          addElementToTempoNotesRelationshipElements (
-            fCurrentMetronomeTuplet);
+					if (! fCurrentMetronomeRelationRightElements) {
+						// create the relation right elements
+						fCurrentMetronomeRelationRightElements =
+							msrTempoNotesRelationshipElements::create (
+								inputLineNumber,
+								msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsRight);
+					}
+
+					fCurrentMetronomeRelationRightElements->
+						addElementToTempoNotesRelationshipElements (
+							fCurrentMetronomeTuplet);
+				}
       }
       break;
 
@@ -6125,7 +6114,6 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
         fCurrentMetronomeTempo =
           msrTempo::createTempoPerMinute (
             inputLineNumber,
-						nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
             beatUnits,
             fCurrentMetrenomePerMinute,
             fCurrentMetronomeParenthesedKind,
@@ -6142,7 +6130,6 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
         fCurrentMetronomeTempo =
           msrTempo::createTempoBeatUnitEquivalent (
             inputLineNumber,
-						nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
             beatUnits,
             fCurrentMetronomeBeatUnitsVector [1],
             fCurrentMetronomeParenthesedKind,
@@ -6154,7 +6141,6 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       fCurrentMetronomeTempo =
         msrTempo::createTempoNotesRelationship (
           inputLineNumber,
-					nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
           fCurrentMetronomeRelationLeftElements,
           fCurrentMetrenomeRelationKind, // msrTempoNotesRelationshipKind::kTempoNotesRelationshipEquals here
           fCurrentMetronomeRelationRightElements,
@@ -6481,7 +6467,6 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
   fCurrentStaffDetails =
     msrStaffDetails::create (
       inputLineNumber,
-			nullptr, // will be set when staff details is appended to a measure JMI v0.9.66 PIM
       fCurrentStaffTypeKind,
       fCurrentShowFretsKind,
       fCurrentPrintObjectKind,
@@ -8508,18 +8493,20 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 #endif
 
     // create a syllable
+    msrTupletFactor
+    	syllableTupletFactor (
+				fCurrentNoteActualNotes,
+				fCurrentNoteNormalNotes);
+
     S_msrSyllable
       syllable =
         msrSyllable::create (
           inputLineNumber,
-					nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
           fCurrentSyllableKind,
           fCurrentSyllableExtendKind,
           fCurrentStanzaNumber,
           fCurrentNoteSoundingWholeNotesFromDuration,
-          msrTupletFactor (
-            fCurrentNoteActualNotes,
-            fCurrentNoteNormalNotes),
+          syllableTupletFactor,
           stanza);
 
     // append the lyric texts to the syllable
@@ -9116,8 +9103,7 @@ Staff spacing between multiple staves is measured in
   // create a print layout
   fCurrentPrintLayout =
      msrPrintLayout::create (
-      inputLineNumber,
-			nullptr); // will be set when print layout is appended to a measure JMI v0.9.66 PIM
+      inputLineNumber);
 
   // handle 'staff-spacing' if present
 
@@ -9156,7 +9142,6 @@ Staff spacing between multiple staves is measured in
         lineBreak =
           msrLineBreak::create (
             inputLineNumber,
-						nullptr, // will be set when line break is appended to a measure JMI v0.9.66 PIM
             fCurrentMeasureNumber,
             msrUserChosenLineBreakKind::kUserChosenLineBreakNo);
 
@@ -9204,7 +9189,6 @@ Staff spacing between multiple staves is measured in
           pageBreak =
             msrPageBreak::create (
               inputLineNumber,
-							nullptr, // will be set when page break is appended to a measure JMI v0.9.66 PIM
               msrUserChosenPageBreakKind::kUserChosenPageBreakNo);
 
         // append it to the pending page breaks
@@ -9461,7 +9445,6 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
       segno =
         msrSegno::create (
           inputLineNumber,
-					nullptr, // will be set when segno is appended to a measure JMI v0.9.66 PIM
           fCurrentDirectionStaffNumber);
 
     // append it to the pending segnos std::list
@@ -9534,7 +9517,6 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
       coda =
         msrCoda::create (
           inputLineNumber,
-					nullptr, // will be set when coda is appended to a measure JMI v0.9.66 PIM
           fCurrentDirectionStaffNumber,
           codaKind);
 
@@ -9579,8 +9561,7 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
     S_msrEyeGlasses
       eyeGlasses =
         msrEyeGlasses::create (
-          inputLineNumber,
-					nullptr); // will be set when eye glasses is appended to a measure JMI v0.9.66 PIM
+          inputLineNumber);
 
     // append it to the pending eyeglasses std::list
     fPendingEyeGlassesList.push_back (eyeGlasses);
@@ -9706,7 +9687,6 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
     pedal =
       msrPedal::create (
         inputLineNumber,
-				nullptr, // will be set when pedal is appended to a measure JMI v0.9.66 PIM
         pedalTypeKind,
         pedalLineKind,
         pedalSignKind);
@@ -9934,7 +9914,6 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
     barLine =
       msrBarLine::create (
         inputLineNumber,
-				nullptr, // will be set when barline is appended to a measure JMI v0.9.66 PIM
         fCurrentBarLineLocationKind,
         fCurrentBarLineStyleKind,
         fCurrentBarLineRepeatDirectionKind,
@@ -13774,7 +13753,6 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
         fCurrentDoubleTremolo =
           msrDoubleTremolo::create (
             inputLineNumber,
-						nullptr, // will be set when double tremolo is appended to a measure JMI v0.9.66 PIM
             msrDoubleTremoloKind::kDoubleTremoloNotes,
             msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart,
             tremoloMarksNumber,
@@ -17064,7 +17042,6 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
     chord =
       msrChord::create (
         firstNoteInputLineNumber,
-				nullptr, // will be set when chord is appended to a measure JMI v0.9.66 PIM
         chordFirstNote->getMeasureElementSoundingWholeNotes (),
         chordFirstNote->getNoteDisplayWholeNotes (),
         chordFirstNote->getNoteGraphicDurationKind ());
@@ -18427,20 +18404,22 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
     memberNotesDisplayWholeNotes =
       firstNote->getNoteDisplayWholeNotes ();
 
+	msrTupletFactor
+		tupletTupletFactor (
+			fCurrentNoteActualNotes,
+			fCurrentNoteNormalNotes);
+
   S_msrTuplet
     tuplet =
       msrTuplet::create (
         firstNoteInputLineNumber,
-				nullptr, // will be set when tuplet is appended to a measure JMI v0.9.66 PIM
         fCurrentMeasureNumber,
         fCurrentTupletNumber,
         fCurrentTupletBracketKind,
         fCurrentTupletLineShapeKind,
         fCurrentTupletShowNumberKind,
         fCurrentTupletShowTypeKind,
-        msrTupletFactor (
-          fCurrentNoteActualNotes,
-          fCurrentNoteNormalNotes),
+        tupletTupletFactor,
         memberNotesSoundingWholeNotes,
         memberNotesDisplayWholeNotes);
 
@@ -21384,7 +21363,6 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
         voiceStaffChange =
           msrVoiceStaffChange::create (
             inputLineNumber,
-		        nullptr, // will be set when staff change is appended to a measure JMI v0.9.66 PIM
             staffToChangeTo);
 
   /* JMI
@@ -22710,7 +22688,6 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
             syllable =
               msrSyllable::create (
                 inputLineNumber,
-				        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
                 syllableKind,
                 fCurrentSyllableExtendKind,
                 fCurrentStanzaNumber,
@@ -24451,7 +24428,6 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
     rehearsalMark =
       msrRehearsalMark::create (
         inputLineNumber,
-        nullptr, // will be set when rehearsal mark is appended to a measure JMI v0.9.66 PIM
         rehearsalKind,
         rehearsalValue,
         fCurrentDirectionPlacementKind);
@@ -25815,15 +25791,19 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
   // create the figured bass element
   // if the sounding whole notes is 0/1 (no <duration /> was found), JMI ???
   // it will be set to the next note's sounding whole notes later
+
+  msrTupletFactor
+  	figuredBassTupletFactor (
+  		1, 1); // will be set upon next note handling
+
   S_msrFiguredBass
     figuredBass =
       msrFiguredBass::create (
         inputLineNumber,
-        nullptr, // will be set when figured bass is appended to a measure JMI v0.9.66 PIM
         fCurrentFiguredBassSoundingWholeNotes,
         fCurrentFiguredBassDisplayWholeNotes,
         fCurrentFiguredBassParenthesesKind,
-        msrTupletFactor (1, 1));    // will be set upon next note handling
+        figuredBassTupletFactor);
 
   // attach pending figures to the figured bass
   if (! fPendingFiguredBassFiguresList.size ()) {
@@ -25937,9 +25917,7 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
 
   fCurrentHarpPedalsTuning =
     msrHarpPedalsTuning::create (
-      inputLineNumber,
-			nullptr); // will be set when harp pedals tuning is appended to a measure JMI v0.9.66 PIM
-
+      inputLineNumber);
 
   // add it to the current part
   fCurrentPart->
@@ -26096,8 +26074,7 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
     S_msrDamp
       damp =
         msrDamp::create (
-					inputLineNumber,
-					nullptr); // will be set when damp is appended to a measure JMI v0.9.66 PIM
+					inputLineNumber);
 
     // append it to the pending damps std::list
     fPendingDampsList.push_back (damp);
@@ -26131,8 +26108,7 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
     S_msrDampAll
       dampAll =
         msrDampAll::create (
-					inputLineNumber,
-					nullptr); // will be set when damp all is appended to a measure JMI v0.9.66 PIM
+					inputLineNumber);
 
     // append it to the pending damp alls std::list
     fPendingDampAllsList.push_back (dampAll);
@@ -26274,8 +26250,7 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
 
   fCurrentScordatura =
     msrScordatura::create (
-			inputLineNumber,
-			nullptr); // will be set when scordatura is appended to a measure JMI v0.9.66 PIM
+			inputLineNumber);
 }
 
 void mxsr2msrTranslator::visitStart (S_accord& elt)

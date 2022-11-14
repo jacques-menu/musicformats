@@ -75,8 +75,8 @@ The latter file can be used to check the grammar, in particular if \LR\ conflict
 
 Only the predefined \code{bool} type is used, since the generated C++ code relies on this. This is why \methodName{getValue} is used in \clisamples{mfsl.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
-    std::string            theMfTool;
-    std::string            theInputFile;
+    std::string       theMfTool;
+    std::string       theInputFile;
     oahOptionsAndArguments optionsAndArguments;
 
     err =
@@ -742,7 +742,7 @@ They are:
 This is provided by \mfsl{mfslInterpreterInterface.h}:
 \begin{lstlisting}[language=Terminal]
 EXP extern mfMusicformatsErrorKind launchMfslInterpreter (
-  const std::string&           inputSourceName,
+  const std::string&      inputSourceName,
   bool                    traceScanning,
   bool                    traceParsing,
   bool                    displayTokens,
@@ -755,7 +755,7 @@ EXP extern mfMusicformatsErrorKind launchMfslInterpreter (
 The definition of this function is placed in \mfsl{mfslScanner.ll}:
 \begin{lstlisting}[language=Terminal]
 mfMusicformatsErrorKind launchMfslInterpreter (
-  const std::string&           inputSourceName,
+  const std::string&      inputSourceName,
   bool                    traceScanning,
   bool                    traceParsing,
   bool                    displayTokens,

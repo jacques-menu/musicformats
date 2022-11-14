@@ -45,7 +45,7 @@ class EXP msrGlissando : public msrElement
                             int                  glissandoNumber,
                             msrGlissandoTypeKind glissandoTypeKind,
                             msrLineTypeKind      glissandoLineTypeKind,
-                            const std::string&        glissandoTextValue);
+                            const std::string&   glissandoTextValue);
 
     SMARTP<msrGlissando> createGlissandoNewbornClone ();
 
@@ -61,7 +61,7 @@ class EXP msrGlissando : public msrElement
                             int                  glissandoNumber,
                             msrGlissandoTypeKind glissandoTypeKind,
                             msrLineTypeKind      glissandoLineTypeKind,
-                            const std::string&        glissandoTextValue);
+                            const std::string&   glissandoTextValue);
 
     virtual               ~msrGlissando ();
 

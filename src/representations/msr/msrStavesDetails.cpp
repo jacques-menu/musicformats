@@ -205,7 +205,7 @@ std::ostream& operator << (std::ostream& os, const S_msrStaffTuning& elt)
 //______________________________________________________________________________
 S_msrStaffDetails msrStaffDetails::create (
   int                 inputLineNumber,
-  S_msrMeasure        upLinkToMeasure,
+  S_msrMeasure&       upLinkToMeasure,
   msrStaffTypeKind    staffTypeKind,
   msrShowFretsKind    showFretsKind,
   msrPrintObjectKind  printObjectKind,
@@ -223,9 +223,26 @@ S_msrStaffDetails msrStaffDetails::create (
   return o;
 }
 
+S_msrStaffDetails msrStaffDetails::create (
+  int                 inputLineNumber,
+  msrStaffTypeKind    staffTypeKind,
+  msrShowFretsKind    showFretsKind,
+  msrPrintObjectKind  printObjectKind,
+  msrPrintSpacingKind printSpacingKind)
+{
+  return
+    msrStaffDetails::create (
+      inputLineNumber,
+      upLinkToMeasure,
+      staffTypeKind,
+      showFretsKind,
+      printObjectKind,
+      printSpacingKind);
+}
+
 msrStaffDetails::msrStaffDetails (
   int                 inputLineNumber,
-  S_msrMeasure        upLinkToMeasure,
+  S_msrMeasure&       upLinkToMeasure,
   msrStaffTypeKind    staffTypeKind,
   msrShowFretsKind    showFretsKind,
   msrPrintObjectKind  printObjectKind,

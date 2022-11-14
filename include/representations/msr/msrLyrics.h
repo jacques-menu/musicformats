@@ -18,7 +18,6 @@
 #include "msrElements.h"
 #include "msrMeasureElementLambda.h"
 
-// #include "msrNotes.h"
 #include "msrTupletFactors.h"
 #include "msrVoices.h"
 
@@ -70,10 +69,19 @@ class EXP msrSyllable : public msrMeasureElementLambda
 
     static SMARTP<msrSyllable> create (
                             int                   inputLineNumber,
-                            S_msrMeasure          upLinkToMeasure,
+                            S_msrMeasure&         upLinkToMeasure,
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
-                            const std::string&         syllableStanzaNumber,
+                            const std::string&    syllableStanzaNumber,
+                            const Rational&       syllableWholeNotes,
+                            msrTupletFactor       syllableTupletFactor,
+                            S_msrStanza           syllableUpLinkToStanza);
+
+    static SMARTP<msrSyllable> create (
+                            int                   inputLineNumber,
+                            msrSyllableKind       syllableKind,
+                            msrSyllableExtendKind syllableExtendKind,
+                            const std::string&    syllableStanzaNumber,
                             const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           syllableUpLinkToStanza);
@@ -86,10 +94,10 @@ class EXP msrSyllable : public msrMeasureElementLambda
 
     static SMARTP<msrSyllable> createWithNextMeasurePuristNumber ( // JMI superflous??? v0.9.66
                             int                   inputLineNumber,
-                            S_msrMeasure          upLinkToMeasure,
+                            S_msrMeasure&         upLinkToMeasure,
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
-                            const std::string&         syllableStanzaNumber,
+                            const std::string&    syllableStanzaNumber,
                             const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           syllableUpLinkToStanza,
@@ -102,10 +110,10 @@ class EXP msrSyllable : public msrMeasureElementLambda
 
                           msrSyllable (
                             int                   inputLineNumber,
-                            S_msrMeasure          upLinkToMeasure,
+                            S_msrMeasure&         upLinkToMeasure,
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
-                            const std::string&         syllableStanzaNumber,
+                            const std::string&    syllableStanzaNumber,
                             const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           syllableUpLinkToStanza);
@@ -132,9 +140,9 @@ class EXP msrSyllable : public msrMeasureElementLambda
 
 //     // position in measure
 //     void                  setMeasureElementMeasurePosition (
-//                             const S_msrMeasure measure,
+//                             const S_msrMeasure& measure,
 //                             const Rational&    measurePosition,
-//                             const std::string&      context) override
+//                             const std::string& context) override
 //                               {
 //                                 setSyllableMeasurePosition (
 //                                   measure,
@@ -143,9 +151,9 @@ class EXP msrSyllable : public msrMeasureElementLambda
 //                               }
 //
 //     void                  setSyllableMeasurePosition (
-//                             const S_msrMeasure measure,
+//                             const S_msrMeasure& measure,
 //                             const Rational&    measurePosition,
-//                             const std::string&      context);
+//                             const std::string& context);
 
     // syllable kind
     msrSyllableKind       getSyllableKind () const

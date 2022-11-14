@@ -62,7 +62,7 @@ class EXP msrMeasure : public msrSegmentElement
     // destructor
     // ------------------------------------------------------
 
-    virtual               ~msrMeasure (); // public for une in msdrVoice
+    virtual               ~msrMeasure (); // public for use in msdrVoice
 
   private:
 
@@ -555,7 +555,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&          context);
+                            const std::string&     context);
 
     void                  finalizeMeasureClone (
                             int          inputLineNumber,
@@ -573,17 +573,17 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeRegularMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&          context);
+                            const std::string&     context);
 
     void                  finalizeHarmonyMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&          context);
+                            const std::string&     context);
 
     void                  finalizeFiguredBassMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&          context);
+                            const std::string&     context);
 
   public:
 

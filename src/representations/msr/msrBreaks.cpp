@@ -51,11 +51,11 @@ std::string msrUserChosenLineBreakKindAsString (
 
 //______________________________________________________________________________
 S_msrLineBreak msrLineBreak::create (
-  int           inputLineNumber,
-  S_msrMeasure  upLinkToMeasure,
+  int                inputLineNumber,
+  S_msrMeasure&      upLinkToMeasure,
   const std::string& nextBarNumber,
   msrUserChosenLineBreakKind
-                userChosenLineBreakKind)
+                     userChosenLineBreakKind)
 {
   msrLineBreak* o =
     new msrLineBreak (
@@ -67,12 +67,26 @@ S_msrLineBreak msrLineBreak::create (
   return o;
 }
 
-msrLineBreak::msrLineBreak (
-  int           inputLineNumber,
-  S_msrMeasure  upLinkToMeasure,
+S_msrLineBreak msrLineBreak::create (
+  int                inputLineNumber,
   const std::string& nextBarNumber,
   msrUserChosenLineBreakKind
-                userChosenLineBreakKind)
+                     userChosenLineBreakKind)
+{
+  return
+    msrLineBreak::create (
+      inputLineNumber,
+      upLinkToMeasure,
+      nextBarNumber,
+      userChosenLineBreakKind);
+}
+
+msrLineBreak::msrLineBreak (
+  int                inputLineNumber,
+  S_msrMeasure&      upLinkToMeasure,
+  const std::string& nextBarNumber,
+  msrUserChosenLineBreakKind
+                     userChosenLineBreakKind)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
@@ -196,10 +210,10 @@ std::string msrUserChosenPageBreakKindAsString (
 
 //______________________________________________________________________________
 S_msrPageBreak msrPageBreak::create (
-  int           inputLineNumber,
-  S_msrMeasure  upLinkToMeasure,
+  int            inputLineNumber,
+  S_msrMeasure&  upLinkToMeasure,
   msrUserChosenPageBreakKind
-                userChosenPageBreakKind)
+                 userChosenPageBreakKind)
 {
   msrPageBreak* o =
     new msrPageBreak (
@@ -210,11 +224,23 @@ S_msrPageBreak msrPageBreak::create (
   return o;
 }
 
-msrPageBreak::msrPageBreak (
-  int           inputLineNumber,
-  S_msrMeasure  upLinkToMeasure,
+S_msrPageBreak msrPageBreak::create (
+  int            inputLineNumber,
   msrUserChosenPageBreakKind
-                userChosenPageBreakKind)
+                 userChosenPageBreakKind)
+{
+  return
+    msrPageBreak::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      userChosenPageBreakKind);
+}
+
+msrPageBreak::msrPageBreak (
+  int            inputLineNumber,
+  S_msrMeasure&  upLinkToMeasure,
+  msrUserChosenPageBreakKind
+                 userChosenPageBreakKind)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

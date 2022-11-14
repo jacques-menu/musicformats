@@ -58,17 +58,17 @@ class EXP msrBassFigure : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrBassFigure> create (
-      int                     inputLineNumber,
-      S_msrPart               figureUpLinkToPart,
-      msrBassFigurePrefixKind figurePrefixKind,
-      int                     figureNumber,
-      msrBassFigureSuffixKind figureSuffixKind);
+                            int                     inputLineNumber,
+                            S_msrPart&              figureUpLinkToPart,
+                            msrBassFigurePrefixKind figurePrefixKind,
+                            int                     figureNumber,
+                            msrBassFigureSuffixKind figureSuffixKind);
 
     SMARTP<msrBassFigure> createFigureNewbornClone (
-      S_msrPart containingPart);
+                            S_msrPart& containingPart);
 
     SMARTP<msrBassFigure> createFigureDeepClone ( // JMI ???
-      S_msrPart containingPart);
+                            S_msrPart& containingPart);
 
   protected:
 
@@ -77,7 +77,7 @@ class EXP msrBassFigure : public msrElement
 
                           msrBassFigure (
                             int                     inputLineNumber,
-                            S_msrPart               figureUpLinkToPart,
+                            S_msrPart&              figureUpLinkToPart,
                             msrBassFigurePrefixKind figurePrefixKind,
                             int                     figureNumber,
                             msrBassFigureSuffixKind figureSuffixKind);
@@ -164,20 +164,23 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrFiguredBass> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrFiguredBass> create (
-                            int             inputLineNumber,
-                            S_msrMeasure    upLinkToMeasure,
-                            const Rational& figuredBassSoundingWholeNotes,
-                            const Rational& figuredBassDisplayWholeNotes,
+                            int           inputLineNumber);
+
+    static SMARTP<msrFiguredBass> create (
+                            int              inputLineNumber,
+                            S_msrMeasure&    upLinkToMeasure,
+                            const Rational&  figuredBassSoundingWholeNotes,
+                            const Rational&  figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
-                                            figuredBassParenthesesKind,
-                            msrTupletFactor figuredBassTupletFactor);
+                                             figuredBassParenthesesKind,
+                            msrTupletFactor& figuredBassTupletFactor);
 
     SMARTP<msrFiguredBass> createFiguredBassNewbornClone (
-                            S_msrVoice containingVoice);
+                            S_msrVoice& containingVoice);
 
     SMARTP<msrFiguredBass> createFiguredBassDeepClone ();
 
@@ -187,13 +190,13 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrFiguredBass (
-                            int             inputLineNumber,
-                            S_msrMeasure    upLinkToMeasure,
-                            const Rational& figuredBassSoundingWholeNotes,
-                            const Rational& figuredBassDisplayWholeNotes,
+                            int              inputLineNumber,
+                            S_msrMeasure&    upLinkToMeasure,
+                            const Rational&  figuredBassSoundingWholeNotes,
+                            const Rational&  figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
-                                            figuredBassParenthesesKind,
-                            msrTupletFactor figuredBassTupletFactor);
+                                             figuredBassParenthesesKind,
+                            msrTupletFactor& figuredBassTupletFactor);
 
     virtual               ~msrFiguredBass ();
 
@@ -221,23 +224,6 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     S_msrPart             getFiguredBassUpLinkToPart () const
                               { return fFiguredBassUpLinkToPart; }
 */
-
-//     // position in measure
-//     void                  setMeasureElementMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string&      context) override
-//                               {
-//                                 setFiguredBassMeasurePosition (
-//                                   measure,
-//                                   measurePosition,
-//                                   context);
-//                               }
-//
-//     void                  setFiguredBassMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string&      context);
 
     // whole notes
     void                  setFiguredBassDisplayWholeNotes (
@@ -306,7 +292,8 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;
 
-    std::list<S_msrBassFigure> fFiguredBassFiguresList;
+    std::list<S_msrBassFigure>
+                          fFiguredBassFiguresList;
 
     msrTupletFactor       fFiguredBassTupletFactor;
 };

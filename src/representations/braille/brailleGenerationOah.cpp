@@ -51,10 +51,10 @@ const std::string K_BRAILLE_BYTE_ORDERING_KIND_SHORT_NAME = "bok";
 
 //______________________________________________________________________________
 S_brailleOutputKindAtom brailleOutputKindAtom::create (
-  const std::string&         longName,
-  const std::string&         shortName,
-  const std::string&         description,
-  const std::string&         variableName,
+  const std::string&    longName,
+  const std::string&    shortName,
+  const std::string&    description,
+  const std::string&    variableName,
   bsrBrailleOutputKind& brailleOutputKindVariable,
   bsrBrailleOutputKind  brailleOutputKindValue)
 {
@@ -71,10 +71,10 @@ S_brailleOutputKindAtom brailleOutputKindAtom::create (
 }
 
 brailleOutputKindAtom::brailleOutputKindAtom (
-  const std::string&         longName,
-  const std::string&         shortName,
-  const std::string&         description,
-  const std::string&         variableName,
+  const std::string&    longName,
+  const std::string&    shortName,
+  const std::string&    description,
+  const std::string&    variableName,
   bsrBrailleOutputKind& brailleOutputKindVariable,
   bsrBrailleOutputKind  brailleOutputKindValue)
   : oahAtomImplicitlyStoringAValue (
@@ -494,11 +494,11 @@ std::ostream& operator << (std::ostream& os, const S_brailleUTFKindAtom& elt)
 
 //______________________________________________________________________________
 S_brailleByteOrderingKindAtom brailleByteOrderingKindAtom::create (
-  const std::string&        longName,
-  const std::string&        shortName,
-  const std::string&        description,
-  const std::string&        valueSpecification,
-  const std::string&        variableName,
+  const std::string&   longName,
+  const std::string&   shortName,
+  const std::string&   description,
+  const std::string&   valueSpecification,
+  const std::string&   variableName,
   bsrByteOrderingKind& brailleByteOrderingKindVariable)
 {
   brailleByteOrderingKindAtom* o = new
@@ -514,11 +514,11 @@ S_brailleByteOrderingKindAtom brailleByteOrderingKindAtom::create (
 }
 
 brailleByteOrderingKindAtom::brailleByteOrderingKindAtom (
-  const std::string&        longName,
-  const std::string&        shortName,
-  const std::string&        description,
-  const std::string&        valueSpecification,
-  const std::string&        variableName,
+  const std::string&   longName,
+  const std::string&   shortName,
+  const std::string&   description,
+  const std::string&   valueSpecification,
+  const std::string&   variableName,
   bsrByteOrderingKind& brailleByteOrderingKindVariable)
   : oahAtomStoringAValue (
       longName,

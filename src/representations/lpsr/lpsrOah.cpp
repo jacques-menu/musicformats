@@ -521,11 +521,11 @@ std::ostream& operator << (std::ostream& os, const S_lpsrChordsLanguageAtom& elt
 
 //______________________________________________________________________________
 S_lpsrStaffInstrumentNameAtom lpsrStaffInstrumentNameAtom::create (
-  const std::string&         longName,
-  const std::string&         shortName,
-  const std::string&         description,
-  const std::string&         valueSpecification,
-  const std::string&         variableName,
+  const std::string&    longName,
+  const std::string&    shortName,
+  const std::string&    description,
+  const std::string&    valueSpecification,
+  const std::string&    variableName,
   std::map<std::string, std::string>&  stringToStringMapVariable)
 {
   lpsrStaffInstrumentNameAtom* o = new
@@ -541,11 +541,11 @@ S_lpsrStaffInstrumentNameAtom lpsrStaffInstrumentNameAtom::create (
 }
 
 lpsrStaffInstrumentNameAtom::lpsrStaffInstrumentNameAtom (
-  const std::string&         longName,
-  const std::string&         shortName,
-  const std::string&         description,
-  const std::string&         valueSpecification,
-  const std::string&         variableName,
+  const std::string&    longName,
+  const std::string&    shortName,
+  const std::string&    description,
+  const std::string&    valueSpecification,
+  const std::string&    variableName,
   std::map<std::string, std::string>&  stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,

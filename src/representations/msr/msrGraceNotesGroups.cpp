@@ -44,7 +44,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::create (
   msrGraceNotesGroupKind graceNotesGroupKind,
   Bool                   graceNotesGroupIsSlashed,
   Bool                   graceNotesGroupIsBeamed,
-  const std::string&          graceNotesGroupMeasureNumber)
+  const std::string&     graceNotesGroupMeasureNumber)
 {
   msrGraceNotesGroup* o =
     new msrGraceNotesGroup (
@@ -63,7 +63,7 @@ msrGraceNotesGroup::msrGraceNotesGroup (
   msrGraceNotesGroupKind graceNotesGroupKind,
   Bool                   graceNotesGroupIsSlashed,
   Bool                   graceNotesGroupIsBeamed,
-  const std::string&          graceNotesGroupMeasureNumber)
+  const std::string&     graceNotesGroupMeasureNumber)
     : msrElement (inputLineNumber)
 {
 

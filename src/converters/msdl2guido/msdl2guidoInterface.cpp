@@ -241,7 +241,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
 
 //_______________________________________________________________________________
 mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
-  std::string             inputSourceName,
+  std::string        inputSourceName,
   std::istream&                inputStream,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -385,7 +385,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
-  std::string             fileName,
+  std::string        fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)

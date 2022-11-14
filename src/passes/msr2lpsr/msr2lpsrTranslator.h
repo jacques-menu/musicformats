@@ -645,7 +645,8 @@ class EXP msr2lpsrTranslator :
     Bool                      fOnGoingHarmony;
     S_msrHarmony              fCurrentHarmonyClone;
 
-    std::list<S_msrHarmony>        fPendingHarmoniesList;
+    std::list<S_msrHarmony>
+                              fPendingHarmoniesList;
 
 
     // figured bass

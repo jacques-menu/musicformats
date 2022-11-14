@@ -211,7 +211,7 @@ S_msrTempoTuplet msrTempoTuplet::create (
   int                          tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
-  msrTupletFactor              tempoTupletFactor,
+  msrTupletFactor&             tempoTupletFactor,
   const Rational&              memberNotesDisplayWholeNotes)
 {
   msrTempoTuplet* o =
@@ -231,7 +231,7 @@ msrTempoTuplet::msrTempoTuplet (
   int                          tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
-  msrTupletFactor              tempoTupletFactor,
+  msrTupletFactor&             tempoTupletFactor,
   const Rational&              memberNotesDisplayWholeNotes)
     : msrElement (inputLineNumber)
 {
@@ -994,7 +994,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoNotesRelationshipEl
 //______________________________________________________________________________
 S_msrTempo msrTempo::createTempoWordsOnly (
   int               inputLineNumber,
-  S_msrMeasure      upLinkToMeasure,
+  S_msrMeasure&     upLinkToMeasure,
   S_msrWords        tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1012,11 +1012,27 @@ S_msrTempo msrTempo::createTempoWordsOnly (
   return o;
 }
 
+S_msrTempo msrTempo::createTempoWordsOnly (
+  int               inputLineNumber,
+  S_msrWords        tempoWords,
+  msrTempoParenthesizedKind
+                    tempoParenthesizedKind,
+  msrPlacementKind  tempoPlacementKind)
+{
+  return
+    msrTempo::createTempoWordsOnly (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      tempoWords,
+      tempoParenthesizedKind,
+      tempoPlacementKind);
+}
+
 S_msrTempo msrTempo::createTempoPerMinute (
   int               inputLineNumber,
-  S_msrMeasure      upLinkToMeasure,
+  S_msrMeasure&     upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
-  std::string            tempoPerMinute,
+  std::string       tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1033,9 +1049,27 @@ S_msrTempo msrTempo::createTempoPerMinute (
   return o;
 }
 
+S_msrTempo msrTempo::createTempoPerMinute (
+  int               inputLineNumber,
+  msrDottedDuration tempoBeatUnit,
+  std::string       tempoPerMinute,
+  msrTempoParenthesizedKind
+                    tempoParenthesizedKind,
+  msrPlacementKind  tempoPlacementKind)
+{
+  return
+    msrTempo::createTempoPerMinute (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when tempo is appended to a measure
+      tempoBeatUnit,
+      tempoPerMinute,
+      tempoParenthesizedKind,
+      tempoPlacementKind);
+}
+
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   int               inputLineNumber,
-  S_msrMeasure      upLinkToMeasure,
+  S_msrMeasure&     upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   msrDottedDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
@@ -1054,9 +1088,27 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   return o;
 }
 
+S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
+  int               inputLineNumber,
+  msrDottedDuration tempoBeatUnit,
+  msrDottedDuration tempoEquivalentBeatUnit,
+  msrTempoParenthesizedKind
+                    tempoParenthesizedKind,
+  msrPlacementKind  tempoPlacementKind)
+{
+  return
+     msrTempo::createTempoBeatUnitEquivalent (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      tempoBeatUnit,
+      tempoEquivalentBeatUnit,
+      tempoParenthesizedKind,
+      tempoPlacementKind);
+}
+
 S_msrTempo msrTempo::createTempoNotesRelationship (
   int               inputLineNumber,
-  S_msrMeasure      upLinkToMeasure,
+  S_msrMeasure&     upLinkToMeasure,
   S_msrTempoNotesRelationshipElements
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
@@ -1080,9 +1132,32 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
   return o;
 }
 
+S_msrTempo msrTempo::createTempoNotesRelationship (
+  int               inputLineNumber,
+  S_msrTempoNotesRelationshipElements
+                    tempoNotesRelationshipLeftElements,
+  msrTempoNotesRelationshipKind
+                    tempoNotesRelationshipKind,
+  S_msrTempoNotesRelationshipElements
+                    tempoNotesRelationshipRightElements,
+  msrTempoParenthesizedKind
+                    tempoParenthesizedKind,
+  msrPlacementKind  tempoPlacementKind)
+{
+  return
+    msrTempo::createTempoNotesRelationship (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when tempo notes relationship is appended to a measure
+      tempoNotesRelationshipLeftElements,
+      tempoNotesRelationshipKind,
+      tempoNotesRelationshipRightElements,
+      tempoParenthesizedKind,
+      tempoPlacementKind);
+}
+
 msrTempo::msrTempo (
   int               inputLineNumber,
-  S_msrMeasure      upLinkToMeasure,
+  S_msrMeasure&     upLinkToMeasure,
   S_msrWords        tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1115,9 +1190,9 @@ msrTempo::msrTempo (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
-  S_msrMeasure      upLinkToMeasure,
+  S_msrMeasure&     upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
-  std::string            tempoPerMinute,
+  std::string       tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1141,7 +1216,7 @@ msrTempo::msrTempo (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
-  S_msrMeasure      upLinkToMeasure,
+  S_msrMeasure&     upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   msrDottedDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
@@ -1167,7 +1242,7 @@ msrTempo::msrTempo (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
-  S_msrMeasure      upLinkToMeasure,
+  S_msrMeasure&     upLinkToMeasure,
   S_msrTempoNotesRelationshipElements
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind

@@ -337,7 +337,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingPrefixes
 
 //______________________________________________________________________________
 void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGroups (
-  const std::string&             serviceName,
+  const std::string&        serviceName,
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
 #ifdef TRACING_IS_ENABLED

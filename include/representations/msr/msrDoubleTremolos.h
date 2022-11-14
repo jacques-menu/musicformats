@@ -52,12 +52,20 @@ class EXP msrDoubleTremolo : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrDoubleTremolo> create (
-                            int                  inputLineNumber,
-                            S_msrMeasure         upLinkToMeasure,
-                            msrDoubleTremoloKind doubleTremoloKind,
-                            msrDoubleTremoloTypeKind   doubleDoubleTremoloTypeKind,
-                            int                  doubleTremoloMarksNumber,
-                            msrPlacementKind     doubleTremoloPlacementKind);
+                            int                       inputLineNumber,
+                            S_msrMeasure&             upLinkToMeasure,
+                            msrDoubleTremoloKind      doubleTremoloKind,
+                            msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
+                            int                       doubleTremoloMarksNumber,
+                            msrPlacementKind          doubleTremoloPlacementKind);
+
+
+    static SMARTP<msrDoubleTremolo> create (
+                            int                       inputLineNumber,
+                            msrDoubleTremoloKind      doubleTremoloKind,
+                            msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
+                            int                       doubleTremoloMarksNumber,
+                            msrPlacementKind          doubleTremoloPlacementKind);
 
 
     SMARTP<msrDoubleTremolo> createDoubleTremoloNewbornClone (
@@ -70,12 +78,12 @@ class EXP msrDoubleTremolo : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrDoubleTremolo (
-                            int                  inputLineNumber,
-                            S_msrMeasure         upLinkToMeasure,
-                            msrDoubleTremoloKind doubleTremoloKind,
-                            msrDoubleTremoloTypeKind   doubleDoubleTremoloTypeKind,
-                            int                  doubleTremoloMarksNumber,
-                            msrPlacementKind     doubleTremoloPlacementKind);
+                            int                       inputLineNumber,
+                            S_msrMeasure&             upLinkToMeasure,
+                            msrDoubleTremoloKind      doubleTremoloKind,
+                            msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
+                            int                       doubleTremoloMarksNumber,
+                            msrPlacementKind          doubleTremoloPlacementKind);
 
     virtual               ~msrDoubleTremolo ();
 
@@ -83,23 +91,6 @@ class EXP msrDoubleTremolo : public msrMeasureElementLambda
 
     // set and get
     // ------------------------------------------------------
-
-    // position in measure
-    void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const std::string& context) override
-                              {
-                                setDoubleTremoloMeasurePosition (
-                                  measure,
-                                  measurePosition,
-                                  context);
-                              }
-
-    void                  setDoubleTremoloMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const std::string& context);
 
     // double tremolo kind
 

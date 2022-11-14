@@ -27,8 +27,11 @@ class EXP msrEyeGlasses : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrEyeGlasses> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
+
+    static SMARTP<msrEyeGlasses> create (
+                            int inputLineNumber);
 
   protected:
 
@@ -36,8 +39,8 @@ class EXP msrEyeGlasses : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrEyeGlasses (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrEyeGlasses ();
 

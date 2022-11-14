@@ -23,7 +23,6 @@
 #include "msrBarLines.h"
 #include "msrBarNumberChecks.h"
 #include "msrBreaks.h"
-#include "msrDalSegnos.h"
 #include "msrDoubleTremolos.h"
 #include "msrGlissandos.h"
 #include "msrRehearsalMarks.h"
@@ -14719,7 +14718,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
   size_t tempoWordsListSize = tempoWordsList.size ();
 
   msrDottedDuration tempoBeatUnit  = tempo->getTempoBeatUnit ();
-  std::string            tempoPerMinute = tempo->getTempoPerMinute ();
+  std::string       tempoPerMinute = tempo->getTempoPerMinute ();
 
   switch (tempoParenthesizedKind) {
     case msrTempoParenthesizedKind::kTempoParenthesizedYes:
@@ -14913,7 +14912,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
   size_t tempoWordsListSize = tempoWordsList.size ();
 
   msrDottedDuration tempoBeatUnit  = tempo->getTempoBeatUnit ();
-  std::string            tempoPerMinute = tempo->getTempoPerMinute ();
+  std::string       tempoPerMinute = tempo->getTempoPerMinute ();
 
   fLilypondCodeStream <<
     "\\tempo ";

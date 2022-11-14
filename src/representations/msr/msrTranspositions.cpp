@@ -34,12 +34,12 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrTransposition msrTransposition::create (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure,
-  int          transposeDiatonic,
-  int          transposeChromatic,
-  int          transposeOctaveChange,
-  Bool         transposeDouble)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure,
+  int           transposeDiatonic,
+  int           transposeChromatic,
+  int           transposeOctaveChange,
+  Bool          transposeDouble)
 {
   msrTransposition* o =
     new msrTransposition (
@@ -53,13 +53,30 @@ S_msrTransposition msrTransposition::create (
   return o;
 }
 
+S_msrTransposition msrTransposition::create (
+  int           inputLineNumber,
+  int           transposeDiatonic,
+  int           transposeChromatic,
+  int           transposeOctaveChange,
+  Bool          transposeDouble)
+{
+  return
+    msrTransposition::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when transposition is appended to a measure
+      transposeDiatonic,
+      transposeChromatic,
+      transposeOctaveChange,
+      transposeDouble);
+}
+
 msrTransposition::msrTransposition (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure,
-  int          transposeDiatonic,
-  int          transposeChromatic,
-  int          transposeOctaveChange,
-  Bool         transposeDouble)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure,
+  int           transposeDiatonic,
+  int           transposeChromatic,
+  int           transposeOctaveChange,
+  Bool          transposeDouble)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

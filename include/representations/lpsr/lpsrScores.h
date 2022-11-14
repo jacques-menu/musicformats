@@ -454,7 +454,8 @@ class EXP lpsrScore : public lpsrElement
     S_lpsrLayout          fScoreLayout;
 
     // variables, voices and stanzas
-    std::list<S_msrElement>    fScoreElementsList;
+    std::list<S_msrElement>
+                          fScoreElementsList;
 
     // score LPSR book blocks std::list
     std::list<S_lpsrBookBlock> fScoreBookBlocksList;

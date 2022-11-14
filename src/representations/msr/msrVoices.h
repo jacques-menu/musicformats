@@ -999,17 +999,17 @@ class EXP msrVoice : public msrElement
     void                  moveVoiceInitialElementsToRepeatCommonPart (
                             int                   inputLineNumber,
                             S_msrRepeatCommonPart repeatCommonPart,
-                            const std::string&         context);
+                            const std::string&    context);
 
     void                  moveVoiceLastSegmentToRepeatCommonPart (
                             int                   inputLineNumber,
                             S_msrRepeatCommonPart repeatCommonPart,
-                            const std::string&         context);
+                            const std::string&    context);
 
     void                  moveAllVoiceContentsToRepeatCommonPart (
                             int                   inputLineNumber,
                             S_msrRepeatCommonPart repeatCommonPart,
-                            const std::string&         context);
+                            const std::string&    context);
 
     void                  moveVoiceLastSegmentToRepeatEnding (
                             int               inputLineNumber,
@@ -1037,7 +1037,7 @@ class EXP msrVoice : public msrElement
 //     void                  appendMultipleFullBarRestsToInitialVoiceElements (
 //                             int                       inputLineNumber,
 //                             S_msrMultipleFullBarRests multipleFullBarRests,
-//                             const std::string&             context);
+//                             const std::string&        context);
 
     // measure repeats
 

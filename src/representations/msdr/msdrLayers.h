@@ -5,12 +5,9 @@
 
 #include "smartpointer.h"
 
-//#include "msrMeasureElements.h"
-
 #include "msrClefs.h"
 #include "msrKeys.h"
 #include "msrTimeSignatures.h"
-// #include "msrNotes.h"
 
 
 namespace MusicFormats

@@ -15,6 +15,7 @@
 #include "msrElements.h"
 
 #include "mfRational.h"
+// #include "msrMeasures.h" // ???
 
 
 namespace MusicFormats
@@ -66,9 +67,9 @@ class EXP msrMeasureElement : public msrElement
     // such occurrence are more explicit when debugging
     // the computations of positions in measures
     virtual void          setMeasureElementMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const std::string& context);
+                            const S_msrMeasure& measure,
+                            const Rational&     measurePosition,
+                            const std::string&  context);
 
     Rational              getMeasureElementMeasurePosition () const
                               { return fMeasureElementMeasurePosition; }

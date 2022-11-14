@@ -26,7 +26,7 @@
   #include "tracingOah.h"
 #endif
 
-#include "msrMeasures.h"
+// #include "msrMeasures.h"
 
 #include "msrDoubleTremolos.h"
 
@@ -72,12 +72,12 @@ std::ostream& operator << (std::ostream& os, const msrDoubleTremoloTypeKind& elt
 
 //______________________________________________________________________________
 S_msrDoubleTremolo msrDoubleTremolo::create (
-  int                  inputLineNumber,
-  S_msrMeasure         upLinkToMeasure,
-  msrDoubleTremoloKind doubleTremoloKind,
-  msrDoubleTremoloTypeKind   doubleDoubleTremoloTypeKind,
-  int                  doubleTremoloMarksNumber,
-  msrPlacementKind     doubleTremoloPlacementKind)
+  int                       inputLineNumber,
+  S_msrMeasure&             upLinkToMeasure,
+  msrDoubleTremoloKind      doubleTremoloKind,
+  msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
+  int                       doubleTremoloMarksNumber,
+  msrPlacementKind          doubleTremoloPlacementKind)
 {
   msrDoubleTremolo* o =
     new msrDoubleTremolo (
@@ -91,13 +91,32 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
   return o;
 }
 
+S_msrDoubleTremolo msrDoubleTremolo::create (
+  int                       inputLineNumber,
+  msrDoubleTremoloKind      doubleTremoloKind,
+  msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
+  int                       doubleTremoloMarksNumber,
+  msrPlacementKind          doubleTremoloPlacementKind)
+{
+  return
+    msrDoubleTremolo::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      doubleTremoloKind,
+      doubleDoubleTremoloTypeKind,
+      doubleTremoloMarksNumber,
+      doubleTremoloPlacementKind);
+  assert (o != nullptr);
+  return o;
+}
+
 msrDoubleTremolo::msrDoubleTremolo (
-  int                  inputLineNumber,
-  S_msrMeasure         upLinkToMeasure,
-  msrDoubleTremoloKind doubleTremoloKind,
-  msrDoubleTremoloTypeKind   doubleDoubleTremoloTypeKind,
-  int                  doubleTremoloMarksNumber,
-  msrPlacementKind     doubleTremoloPlacementKind)
+  int                       inputLineNumber,
+  S_msrMeasure&             upLinkToMeasure,
+  msrDoubleTremoloKind      doubleTremoloKind,
+  msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
+  int                       doubleTremoloMarksNumber,
+  msrPlacementKind          doubleTremoloPlacementKind)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
@@ -169,9 +188,9 @@ msrDoubleTremolo::~msrDoubleTremolo ()
 {}
 
 void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const std::string& context)
+  const S_msrMeasure& measure,
+  const Rational&     measurePosition,
+  const std::string&  context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {

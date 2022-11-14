@@ -61,7 +61,7 @@ S_msrGlissando msrGlissando::create (
   int                  glissandoNumber,
   msrGlissandoTypeKind glissandoTypeKind,
   msrLineTypeKind      glissandoLineTypeKind,
-  const std::string&        glissandoTextValue)
+  const std::string&   glissandoTextValue)
 {
   msrGlissando* o =
     new msrGlissando (
@@ -79,7 +79,7 @@ msrGlissando::msrGlissando (
   int                  glissandoNumber,
   msrGlissandoTypeKind glissandoTypeKind,
   msrLineTypeKind      glissandoLineTypeKind,
-  const std::string&        glissandoTextValue)
+  const std::string&   glissandoTextValue)
     : msrElement (inputLineNumber)
 {
   fGlissandoNumber = glissandoNumber;

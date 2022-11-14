@@ -794,7 +794,7 @@ class EXP msrTempoNote : public msrElement
 
     rational              fTempoNoteWholeNotes;
 
-    std::list<S_msrBeam>       fTempoNoteBeams;
+    std::list<S_msrBeam>  fTempoNoteBeams;
 
     Bool                  fTempoNoteBelongsToATuplet;
 };
@@ -880,7 +880,8 @@ class EXP msrTempoTuplet : public msrElement
 
     rational              fTempoTupletDisplayWholeNotes;
 
-    std::list<S_msrElement>    fTempoTupletElements;
+    std::list<S_msrElement>
+                          fTempoTupletElements;
 };
 \end{lstlisting}
 
@@ -900,9 +901,10 @@ class EXP msrTempo : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    msrTempoKBeatUnitsKind          fTempoKind;
+    msrTempoKBeatUnitsKind
+                          fTempoKind;
 
-    std::list<S_msrWords>      fTempoWordsList;
+    std::list<S_msrWords> fTempoWordsList;
 
     msrDottedDuration     fTempoBeatUnit;
 
@@ -911,7 +913,8 @@ class EXP msrTempo : public msrMeasureElement
 
     S_msrTempoNotesRelationshipElements
                           fTempoNotesRelationshipLeftElements;
-    msrTempoNotesRelationshipKind  fTempoNotesRelationshipKind;
+    msrTempoNotesRelationshipKind  
+                          fTempoNotesRelationshipKind;
     S_msrTempoNotesRelationshipElements
                           fTempoNotesRelationshipRightElements;
 
@@ -2088,7 +2091,8 @@ class EXP msrNote : public msrTupletElement
     // harmonies
     // ------------------------------------------------------
 
-    std::list<S_msrHarmony>    fNoteHarmoniesList;
+    std::list<S_msrHarmony>
+                          fNoteHarmoniesList;
 
     // figured bass
     // ------------------------------------------------------

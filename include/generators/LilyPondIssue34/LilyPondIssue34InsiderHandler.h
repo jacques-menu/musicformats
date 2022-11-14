@@ -71,7 +71,7 @@ class EXP LilyPondIssue34InsiderHandler : public oahInsiderHandler
     void                  createTheLilyPondIssue34Prefixes ();
 
     void                  createTheLilyPondIssue34OptionGroups (
-                            const std::string&             serviceName,
+                            const std::string&        serviceName,
                             mfMultiGenerationOutputKind mfMultiGenerationOutputKind);
 
   public:

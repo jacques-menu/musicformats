@@ -128,8 +128,8 @@ class EXP msrScordatura : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrScordatura> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
   protected:
 
@@ -137,8 +137,8 @@ class EXP msrScordatura : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrScordatura (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrScordatura ();
 
@@ -196,11 +196,17 @@ class EXP msrAccordionRegistration : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrAccordionRegistration> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure,
-                            int          highDotsNumber,
-                            int          middleDotsNumber,
-                            int          lowDotsNumber);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure,
+                            int           highDotsNumber,
+                            int           middleDotsNumber,
+                            int           lowDotsNumber);
+
+    static SMARTP<msrAccordionRegistration> create (
+                            int           inputLineNumber,
+                            int           highDotsNumber,
+                            int           middleDotsNumber,
+                            int           lowDotsNumber);
 
   protected:
 
@@ -208,11 +214,11 @@ class EXP msrAccordionRegistration : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrAccordionRegistration (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure,
-                            int          highDotsNumber,
-                            int          middleDotsNumber,
-                            int          lowDotsNumber);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure,
+                            int           highDotsNumber,
+                            int           middleDotsNumber,
+                            int           lowDotsNumber);
 
     virtual               ~msrAccordionRegistration ();
 
@@ -278,8 +284,11 @@ class EXP msrHarpPedalsTuning : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrHarpPedalsTuning> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
+
+    static SMARTP<msrHarpPedalsTuning> create (
+                            int           inputLineNumber);
 
     SMARTP<msrHarpPedalsTuning> createHarpPedalsTuningNewbornClone ();
 
@@ -291,8 +300,11 @@ class EXP msrHarpPedalsTuning : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrHarpPedalsTuning (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
+
+                          msrHarpPedalsTuning (
+                            int           inputLineNumber);
 
     ~ msrHarpPedalsTuning ();
 
@@ -385,7 +397,13 @@ class EXP msrPedal : public msrMeasureElementLambda
 
                           static SMARTP<msrPedal> create (
                             int              inputLineNumber,
-                            S_msrMeasure     upLinkToMeasure,
+                            S_msrMeasure&    upLinkToMeasure,
+                            msrPedalTypeKind pedalTypeKind,
+                            msrPedalLineKind pedalLineKind,
+                            msrPedalSignKind pedalSignKind);
+
+                          static SMARTP<msrPedal> create (
+                            int              inputLineNumber,
                             msrPedalTypeKind pedalTypeKind,
                             msrPedalLineKind pedalLineKind,
                             msrPedalSignKind pedalSignKind);
@@ -397,7 +415,7 @@ class EXP msrPedal : public msrMeasureElementLambda
 
                           msrPedal (
                             int              inputLineNumber,
-                            S_msrMeasure     upLinkToMeasure,
+                            S_msrMeasure&    upLinkToMeasure,
                             msrPedalTypeKind pedalTypeKind,
                             msrPedalLineKind pedalLineKind,
                             msrPedalSignKind pedalSignKind);
@@ -461,8 +479,11 @@ class EXP msrDamp : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrDamp> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
+
+    static SMARTP<msrDamp> create (
+                            int           inputLineNumber);
 
   protected:
 
@@ -470,8 +491,8 @@ class EXP msrDamp : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrDamp (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrDamp ();
 
@@ -519,8 +540,11 @@ class EXP msrDampAll : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrDampAll> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
+
+    static SMARTP<msrDampAll> create (
+                            int           inputLineNumber);
 
   protected:
 
@@ -528,8 +552,8 @@ class EXP msrDampAll : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrDampAll (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrDampAll ();
 

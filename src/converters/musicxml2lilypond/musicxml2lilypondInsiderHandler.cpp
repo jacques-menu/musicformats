@@ -61,8 +61,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_xml2lyInsiderHandler xml2lyInsiderHandler::create (
-  const std::string&           serviceName,
-  const std::string&           handlerHeader,
+  const std::string&      serviceName,
+  const std::string&      handlerHeader,
   oahHandlerUsedThruKind  handlerUsedThruKind)
 {
   // create the insider handler
@@ -77,8 +77,8 @@ S_xml2lyInsiderHandler xml2lyInsiderHandler::create (
 }
 
 xml2lyInsiderHandler::xml2lyInsiderHandler (
-  const std::string&           serviceName,
-  const std::string&           handlerHeader,
+  const std::string&      serviceName,
+  const std::string&      handlerHeader,
   oahHandlerUsedThruKind  handlerUsedThruKind)
   : oahInsiderHandler (
       serviceName,

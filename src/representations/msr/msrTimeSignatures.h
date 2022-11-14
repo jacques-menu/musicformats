@@ -153,10 +153,15 @@ class EXP msrTimeSignature : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrTimeSignature> create (
-                            int           inputLineNumber,
-                            S_msrMeasure  upLinkToMeasure,
+                            int            inputLineNumber,
+                            S_msrMeasure&  upLinkToMeasure,
                             msrTimeSignatureSymbolKind
-                                          timeSignatureSymbolKind);
+                                           timeSignatureSymbolKind);
+
+    static SMARTP<msrTimeSignature> create (
+                            int            inputLineNumber,
+                            msrTimeSignatureSymbolKind
+                                           timeSignatureSymbolKind);
 
     // creation from the applications
     // ------------------------------------------------------
@@ -195,7 +200,7 @@ class EXP msrTimeSignature : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrTimeSignature> createTimeFromString (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& timeString);
 
   protected:
@@ -205,7 +210,7 @@ class EXP msrTimeSignature : public msrMeasureElementLambda
 
                           msrTimeSignature (
                             int           inputLineNumber,
-                            S_msrMeasure  upLinkToMeasure,
+                            S_msrMeasure& upLinkToMeasure,
                             msrTimeSignatureSymbolKind
                                           timeSignatureSymbolKind);
 
@@ -218,14 +223,9 @@ class EXP msrTimeSignature : public msrMeasureElementLambda
 
     // position in measure
     void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const std::string& context) override;
-
-    void                  setTimeSignatureMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const std::string& context);
+                            const S_msrMeasure& measure,
+                            const Rational&     measurePosition,
+                            const std::string&  context) override;
 
     msrTimeSignatureSymbolKind
                           getTimeSignatureSymbolKind () const

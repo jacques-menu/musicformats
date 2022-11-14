@@ -27,7 +27,6 @@
 #endif
 
 #include "msrArticulations.h"
-#include "msrDalSegnos.h"
 #include "msrGlissandos.h"
 #include "msrPitchesNames.h"
 #include "msrSlides.h"
@@ -52,7 +51,7 @@ S_msrNote msrNote::create (
   int                        inputLineNumber,
   S_msrMeasure               upLinkToMeasure,
 
-  const std::string&         noteMeasureNumber,
+  const std::string&    noteMeasureNumber,
 
   msrNoteKind                noteKind,
 
@@ -115,7 +114,7 @@ msrNote::msrNote (
   int                        inputLineNumber,
   S_msrMeasure               upLinkToMeasure,
 
-  const std::string&         noteMeasureNumber,
+  const std::string&    noteMeasureNumber,
 
   msrNoteKind                noteKind,
 
@@ -1632,7 +1631,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 //________________________________________________________________________
 S_msrNote msrNote::createRegularNote (
   int                      inputLineNumber,
-  const std::string&            noteMeasureNumber,
+  const std::string&       noteMeasureNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind,
   msrOctaveKind            noteOctaveKind,
   const Rational&          soundingWholeNotes,

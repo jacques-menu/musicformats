@@ -71,7 +71,7 @@ S_lpsrContext lpsrContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   lpsrContextTypeKind     contextTypeKind,
-  const std::string&           contextName)
+  const std::string&      contextName)
 {
   lpsrContext* o =
     new lpsrContext (
@@ -87,7 +87,7 @@ lpsrContext::lpsrContext (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   lpsrContextTypeKind     contextTypeKind,
-  const std::string&           contextName)
+  const std::string&      contextName)
     : lpsrElement (inputLineNumber)
 {
   fContextExistingKind = contextExistingKind;
@@ -199,7 +199,7 @@ void lpsrContext::print (std::ostream& os) const
 S_lpsrChordNamesContext lpsrChordNamesContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
-  const std::string&           contextName,
+  const std::string&      contextName,
   S_msrVoice              contextVoice)
 {
   lpsrChordNamesContext* o =
@@ -215,7 +215,7 @@ S_lpsrChordNamesContext lpsrChordNamesContext::create (
 lpsrChordNamesContext::lpsrChordNamesContext (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
-  const std::string&           contextName,
+  const std::string&      contextName,
   S_msrVoice              contextVoice)
     : lpsrContext (
       inputLineNumber,
@@ -362,7 +362,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt)
 S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
-  const std::string&           contextName,
+  const std::string&      contextName,
   S_msrStaff              contextStaff)
 {
   lpsrFiguredBassContext* o =
@@ -378,7 +378,7 @@ S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
 lpsrFiguredBassContext::lpsrFiguredBassContext (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
-  const std::string&           contextName,
+  const std::string&      contextName,
   S_msrStaff              contextStaff)
     : lpsrContext (
       inputLineNumber,

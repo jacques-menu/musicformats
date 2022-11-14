@@ -19,6 +19,17 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+enum class msrDalSegnoKind {
+  kDalSegnoNone,
+  kDalSegno, kDalSegnoAlFine, kDalSegnoAlCoda
+};
+
+std::string msrDalSegnoKindAsString (
+  msrDalSegnoKind dalSegnoKind);
+
+std::ostream& operator << (std::ostream& os,const msrDalSegnoKind& elt);
+
+//______________________________________________________________________________
 class EXP msrSegno : public msrMeasureElementLambda
 {
   public:
@@ -27,9 +38,13 @@ class EXP msrSegno : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrSegno> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure,
-                            int          staffNumber);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure,
+                            int           staffNumber);
+
+    static SMARTP<msrSegno> create (
+                            int inputLineNumber,
+                            int staffNumber);
 
   protected:
 
@@ -37,9 +52,9 @@ class EXP msrSegno : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrSegno (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure,
-                            int          staffNumber);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure,
+                            int           staffNumber);
 
     virtual               ~msrSegno ();
 
@@ -84,6 +99,94 @@ class EXP msrSegno : public msrMeasureElementLambda
 };
 typedef SMARTP<msrSegno> S_msrSegno;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSegno& elt);
+
+//______________________________________________________________________________
+class EXP msrDalSegno : public msrMeasureElementLambda
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static SMARTP<msrDalSegno> create (
+                            int                inputLineNumber,
+                            S_msrMeasure&      upLinkToMeasure,
+                            msrDalSegnoKind    dalSegnoKind,
+                            const std::string& dalSegnoString,
+                            int                staffNumber);
+
+    static SMARTP<msrDalSegno> create (
+                            int                inputLineNumber,
+                            msrDalSegnoKind    dalSegnoKind,
+                            const std::string& dalSegnoString,
+                            int                staffNumber);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          msrDalSegno (
+                            int                inputLineNumber,
+                            S_msrMeasure&      upLinkToMeasure,
+                            msrDalSegnoKind    dalSegnoKind,
+                            const std::string& dalSegnoString,
+                            int                staffNumber);
+
+    virtual               ~msrDalSegno ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    msrDalSegnoKind       getDalSegnoKind () const
+                              { return fDalSegnoKind; }
+
+    std::string           getDalSegnoString () const
+                              { return fDalSegnoString; }
+
+    int                   getStaffNumber () const
+                              { return fStaffNumber; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+
+      msrDalSegnoKind     fDalSegnoKind;
+
+      std::string         fDalSegnoString;
+
+      int                 fStaffNumber;
+};
+typedef SMARTP<msrDalSegno> S_msrDalSegno;
+EXP std::ostream& operator << (std::ostream& os, const S_msrDalSegno& elt);
 
 
 }

@@ -29,9 +29,9 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrRehearsalMark msrRehearsalMark::create (
   int                  inputLineNumber,
-  S_msrMeasure         upLinkToMeasure,
+  S_msrMeasure&        upLinkToMeasure,
   msrRehearsalMarkKind rehearsalKind,
-  const std::string&        rehearsalText,
+  const std::string&   rehearsalText,
   msrPlacementKind     rehearsalPlacementKind)
 {
   msrRehearsalMark* o =
@@ -45,11 +45,27 @@ S_msrRehearsalMark msrRehearsalMark::create (
   return o;
 }
 
+S_msrRehearsalMark msrRehearsalMark::create (
+  int                  inputLineNumber,
+  S_msrMeasure&        upLinkToMeasure,
+  msrRehearsalMarkKind rehearsalKind,
+  const std::string&   rehearsalText,
+  msrPlacementKind     rehearsalPlacementKind)
+{
+  return
+    msrRehearsalMark::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when rehearsal mark is appended to a measure
+      rehearsalKind,
+      rehearsalText,
+      rehearsalPlacementKind);
+}
+
 msrRehearsalMark::msrRehearsalMark (
   int                  inputLineNumber,
-  S_msrMeasure         upLinkToMeasure,
+  S_msrMeasure&        upLinkToMeasure,
   msrRehearsalMarkKind rehearsalKind,
-  const std::string&        rehearsalText,
+  const std::string&   rehearsalText,
   msrPlacementKind     rehearsalPlacementKind)
     : msrMeasureElementLambda (
         inputLineNumber,

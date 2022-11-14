@@ -234,9 +234,9 @@ std::ostream& operator << (std::ostream& os, const oahFindableElement& elt)
 //______________________________________________________________________________
 /* this class   is purely virtual
 S_oahElement oahElement::create (
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementValueKind      elementValueKind,
   oahElementVisibilityKind elementVisibilityKind)
 {
@@ -253,9 +253,9 @@ S_oahElement oahElement::create (
 */
 
 oahElement::oahElement (
-  const std::string&            longName,
-  const std::string&            shortName,
-  const std::string&            description,
+  const std::string&       longName,
+  const std::string&       shortName,
+  const std::string&       description,
   oahElementValueKind      elementValueKind,
   oahElementVisibilityKind elementVisibilityKind)
 {
@@ -502,7 +502,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 // }
 
 Bool oahElement::findStringInFindableElement (
-	const std::string&          lowerCaseString,
+	const std::string&     lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {

@@ -29,11 +29,11 @@ class EXP lilypondScoreOutputKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lilypondScoreOutputKindAtom> create (
-                            const std::string&        shortName,
-                            const std::string&        longName,
-                            const std::string&        description,
-                            const std::string&        valueSpecification,
-                            const std::string&        variableName,
+                            const std::string&   shortName,
+                            const std::string&   longName,
+                            const std::string&   description,
+                            const std::string&   valueSpecification,
+                            const std::string&   variableName,
                             lpsrScoreOutputKind& lilypondScoreOutputKindVariable);
 
   protected:
@@ -42,11 +42,11 @@ class EXP lilypondScoreOutputKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lilypondScoreOutputKindAtom (
-                            const std::string&        shortName,
-                            const std::string&        longName,
-                            const std::string&        description,
-                            const std::string&        valueSpecification,
-                            const std::string&        variableName,
+                            const std::string&   shortName,
+                            const std::string&   longName,
+                            const std::string&   description,
+                            const std::string&   valueSpecification,
+                            const std::string&   variableName,
                             lpsrScoreOutputKind& lilypondScoreOutputKindVariable);
 
     virtual               ~lilypondScoreOutputKindAtom ();
@@ -377,10 +377,10 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<lilypondAbsoluteOctaveEntryAtom> create (
-                            const std::string&           longName,
-                            const std::string&           shortName,
-                            const std::string&           description,
-                            const std::string&           variableName,
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
                             msrOctaveEntryVariable& octaveEntryKindVariable);
 
   protected:
@@ -389,10 +389,10 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
     // ------------------------------------------------------
 
                           lilypondAbsoluteOctaveEntryAtom (
-                            const std::string&           longName,
-                            const std::string&           shortName,
-                            const std::string&           description,
-                            const std::string&           variableName,
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
                             msrOctaveEntryVariable& octaveEntryKindVariable);
 
     virtual               ~lilypondAbsoluteOctaveEntryAtom ();
@@ -734,11 +734,11 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lilypondChordsDisplayAtom> create (
-                            const std::string&         shortName,
-                            const std::string&         longName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    shortName,
+                            const std::string&    longName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::list<std::pair<std::string, std::string> >&
                                                   lilypondChordsDisplayVariable);
 
@@ -748,11 +748,11 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lilypondChordsDisplayAtom (
-                            const std::string&         shortName,
-                            const std::string&         longName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    shortName,
+                            const std::string&    longName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::list<std::pair<std::string, std::string> >&
                                                   lilypondChordsDisplayVariable);
 

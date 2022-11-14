@@ -201,11 +201,11 @@ class EXP lpsrSchemeFunction : public lpsrElement
     // private fields
     // ------------------------------------------------------
 
-    std::string            fFunctionName;
+    std::string       fFunctionName;
 
-    std::string            fFunctionDescription;
+    std::string       fFunctionDescription;
 
-    std::string            fFunctionCode;
+    std::string       fFunctionCode;
 };
 typedef SMARTP<lpsrSchemeFunction> S_lpsrSchemeFunction;
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrSchemeFunction& schemeFunction);
