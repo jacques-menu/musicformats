@@ -50,6 +50,7 @@ std::string msrBassFigureSuffixKindAsString (
 
 std::ostream& operator << (std::ostream& os,const msrBassFigureSuffixKind& elt);
 
+//______________________________________________________________________________
 class EXP msrBassFigure : public msrElement
 {
   public:
@@ -156,6 +157,7 @@ std::string msrFiguredBassParenthesesKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrFiguredBassParenthesesKind& elt);
 
+//______________________________________________________________________________
 class EXP msrFiguredBass : public msrMeasureElementLambda
 {
   public:
@@ -164,20 +166,28 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrFiguredBass> create (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrFiguredBass> create (
-                            int           inputLineNumber);
+                            int                 inputLineNumber);
+
+    static SMARTP<msrFiguredBass> create (
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
+                            const Rational&     figuredBassSoundingWholeNotes,
+                            const Rational&     figuredBassDisplayWholeNotes,
+                            msrFiguredBassParenthesesKind
+                                                figuredBassParenthesesKind,
+                            msrTupletFactor     figuredBassTupletFactor);
 
     static SMARTP<msrFiguredBass> create (
                             int              inputLineNumber,
-                            S_msrMeasure&    upLinkToMeasure,
                             const Rational&  figuredBassSoundingWholeNotes,
                             const Rational&  figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
                                              figuredBassParenthesesKind,
-                            msrTupletFactor& figuredBassTupletFactor);
+                            msrTupletFactor  figuredBassTupletFactor);
 
     SMARTP<msrFiguredBass> createFiguredBassNewbornClone (
                             S_msrVoice& containingVoice);
@@ -190,13 +200,13 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrFiguredBass (
-                            int              inputLineNumber,
-                            S_msrMeasure&    upLinkToMeasure,
-                            const Rational&  figuredBassSoundingWholeNotes,
-                            const Rational&  figuredBassDisplayWholeNotes,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
+                            const Rational&     figuredBassSoundingWholeNotes,
+                            const Rational&     figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
-                                             figuredBassParenthesesKind,
-                            msrTupletFactor& figuredBassTupletFactor);
+                                                figuredBassParenthesesKind,
+                            msrTupletFactor     figuredBassTupletFactor);
 
     virtual               ~msrFiguredBass ();
 
@@ -207,7 +217,7 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
 
     // uplinks
     void                  setFiguredBassUpLinkToNote (
-                            S_msrNote note)
+                            S_msrNote& note)
                               { fFiguredBassUpLinkToNote = note; }
 
     S_msrNote             getFiguredBassUpLinkToNote () const
@@ -257,7 +267,7 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     void                  appendFigureToFiguredBass (
-                            S_msrBassFigure bassFigure);
+                            S_msrBassFigure& bassFigure);
 
   public:
 

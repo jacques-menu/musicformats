@@ -27,8 +27,8 @@ class EXP msrMeasureElementLambda : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrMeasureElementLambda (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrMeasureElementLambda ();
 

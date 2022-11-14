@@ -29,8 +29,8 @@ class EXP msrVoiceStaffChange : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrVoiceStaffChange> create (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             S_msrStaff&   staffToChangeTo);
 
     static SMARTP<msrVoiceStaffChange> create (
@@ -45,8 +45,8 @@ class EXP msrVoiceStaffChange : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrVoiceStaffChange (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             S_msrStaff&    staffToChangeTo);
 
     virtual               ~msrVoiceStaffChange ();
