@@ -65,11 +65,11 @@ std::string lilypondScoreNotationKindAsString (
 
 //______________________________________________________________________________
 S_lilypondScoreOutputKindAtom lilypondScoreOutputKindAtom::create (
-  const std::string&        shortName,
-  const std::string&        longName,
-  const std::string&        description,
-  const std::string&        valueSpecification,
-  const std::string&        variableName,
+  const std::string&   shortName,
+  const std::string&   longName,
+  const std::string&   description,
+  const std::string&   valueSpecification,
+  const std::string&   variableName,
   lpsrScoreOutputKind& lilypondScoreOutputKindVariable)
 {
   lilypondScoreOutputKindAtom* o = new
@@ -85,11 +85,11 @@ S_lilypondScoreOutputKindAtom lilypondScoreOutputKindAtom::create (
 }
 
 lilypondScoreOutputKindAtom::lilypondScoreOutputKindAtom (
-  const std::string&        shortName,
-  const std::string&        longName,
-  const std::string&        description,
-  const std::string&        valueSpecification,
-  const std::string&        variableName,
+  const std::string&   shortName,
+  const std::string&   longName,
+  const std::string&   description,
+  const std::string&   valueSpecification,
+  const std::string&   variableName,
   lpsrScoreOutputKind& lilypondScoreOutputKindVariable)
   : oahAtomStoringAValue (
       longName,
@@ -1063,10 +1063,10 @@ std::ostream& operator << (std::ostream& os, const msrOctaveEntryVariable& elt)
 
 //______________________________________________________________________________
 S_lilypondAbsoluteOctaveEntryAtom lilypondAbsoluteOctaveEntryAtom::create (
-  const std::string&           longName,
-  const std::string&           shortName,
-  const std::string&           description,
-  const std::string&           variableName,
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
   msrOctaveEntryVariable& octaveEntryKindVariable)
 {
   lilypondAbsoluteOctaveEntryAtom* o = new
@@ -1081,10 +1081,10 @@ S_lilypondAbsoluteOctaveEntryAtom lilypondAbsoluteOctaveEntryAtom::create (
 }
 
 lilypondAbsoluteOctaveEntryAtom::lilypondAbsoluteOctaveEntryAtom (
-  const std::string&           longName,
-  const std::string&           shortName,
-  const std::string&           description,
-  const std::string&           variableName,
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
   msrOctaveEntryVariable& octaveEntryKindVariable)
   : oahAtom (
       longName,
@@ -1939,11 +1939,11 @@ std::ostream& operator << (std::ostream& os, const S_lilypondAccidentalStyleKind
 
 //______________________________________________________________________________
 S_lilypondChordsDisplayAtom lilypondChordsDisplayAtom::create (
-  const std::string&         shortName,
-  const std::string&         longName,
-  const std::string&         description,
-  const std::string&         valueSpecification,
-  const std::string&         variableName,
+  const std::string&    shortName,
+  const std::string&    longName,
+  const std::string&    description,
+  const std::string&    valueSpecification,
+  const std::string&    variableName,
   std::list<std::pair<std::string, std::string> >&
                         lilypondChordsDisplayVariable)
 {
@@ -1960,11 +1960,11 @@ S_lilypondChordsDisplayAtom lilypondChordsDisplayAtom::create (
 }
 
 lilypondChordsDisplayAtom::lilypondChordsDisplayAtom (
-  const std::string&         shortName,
-  const std::string&         longName,
-  const std::string&         description,
-  const std::string&         valueSpecification,
-  const std::string&         variableName,
+  const std::string&    shortName,
+  const std::string&    longName,
+  const std::string&    description,
+  const std::string&    valueSpecification,
+  const std::string&    variableName,
   std::list<std::pair<std::string, std::string> >&
                         lilypondChordsDisplayVariable)
   : oahAtomStoringAValue (

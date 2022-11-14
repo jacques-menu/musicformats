@@ -446,7 +446,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
 //_______________________________________________________________________________
 mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
-  std::string             inputSourceName,
+  std::string        inputSourceName,
   std::istream&                inputStream,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -590,7 +590,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
-  std::string             fileName,
+  std::string        fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)

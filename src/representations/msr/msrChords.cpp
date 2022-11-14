@@ -27,7 +27,6 @@
 #endif
 
 #include "msrArticulations.h"
-#include "msrDalSegnos.h"
 #include "msrGlissandos.h"
 #include "msrMeasures.h"
 #include "msrMusicXMLSpecifics.h"
@@ -81,7 +80,7 @@ std::ostream& operator << (std::ostream& os, const msrChordInKind& elt)
 //______________________________________________________________________________
 S_msrChord msrChord::create (
   int             inputLineNumber,
-  S_msrMeasure    upLinkToMeasure,
+  S_msrMeasure&    upLinkToMeasure,
   const Rational& chordSoundingWholeNotes,
   const Rational& chordDisplayWholeNotes,
   msrDurationKind chordGraphicDurationKind)
@@ -102,6 +101,35 @@ S_msrChord msrChord::create (
     new msrChord (
       inputLineNumber,
       upLinkToMeasure,
+      chordSoundingWholeNotes, chordDisplayWholeNotes,
+      chordGraphicDurationKind);
+  assert (o != nullptr);
+
+  return o;
+}
+
+S_msrChord msrChord::create (
+  int             inputLineNumber,
+  const Rational& chordSoundingWholeNotes,
+  const Rational& chordDisplayWholeNotes,
+  msrDurationKind chordGraphicDurationKind)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceChords ()) {
+    gLogStream <<
+      "Creating a chord" <<
+      ", chordSoundingWholeNotes = " << chordSoundingWholeNotes <<
+      ", chordDisplayWholeNotes = " << chordDisplayWholeNotes <<
+      ", chordGraphicDuration = " <<
+      msrDurationKindAsString (chordGraphicDurationKind) <<
+      std::endl;
+ }
+#endif
+
+  return
+    msrChord::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
       chordSoundingWholeNotes, chordDisplayWholeNotes,
       chordGraphicDurationKind);
   assert (o != nullptr);

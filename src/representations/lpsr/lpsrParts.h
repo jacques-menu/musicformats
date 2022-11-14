@@ -133,7 +133,8 @@ class EXP lpsrPartBlock : public lpsrElement
 
     S_msrPart             fPart;
 
-    std::list<S_msrElement>    fPartBlockElementsList;
+    std::list<S_msrElement>
+                          fPartBlockElementsList;
 
     std::string           fPartBlockInstrumentName; // JMI
     std::string           fPartBlockShortInstrumentName; // JMI

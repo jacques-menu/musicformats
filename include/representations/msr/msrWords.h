@@ -54,7 +54,7 @@ class EXP msrWords : public msrElement
     static SMARTP<msrWords> create (
                             int                        inputLineNumber,
                             msrPlacementKind           wordsPlacementKind,
-                            const std::string&         wordsContents,
+                            const std::string&    wordsContents,
                             msrJustifyKind             wordsJustifyKind,
                             msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
                             msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
@@ -72,7 +72,7 @@ class EXP msrWords : public msrElement
                           msrWords (
                             int                        inputLineNumber,
                             msrPlacementKind           wordsPlacementKind,
-                            const std::string&         wordsContents,
+                            const std::string&    wordsContents,
                             msrJustifyKind             wordsJustifyKind,
                             msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
                             msrVerticalAlignmentKind   wordsVerticalAlignmentKind,

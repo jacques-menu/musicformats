@@ -38,11 +38,11 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msr2lpsrScoreOutputKindAtom msr2lpsrScoreOutputKindAtom::create (
-  const std::string&        longName,
-  const std::string&        shortName,
-  const std::string&        description,
-  const std::string&        valueSpecification,
-  const std::string&        variableName,
+  const std::string&   longName,
+  const std::string&   shortName,
+  const std::string&   description,
+  const std::string&   valueSpecification,
+  const std::string&   variableName,
   lpsrScoreOutputKind& lpsrScoreOutputKindVariable)
 {
   msr2lpsrScoreOutputKindAtom* o = new
@@ -58,11 +58,11 @@ S_msr2lpsrScoreOutputKindAtom msr2lpsrScoreOutputKindAtom::create (
 }
 
 msr2lpsrScoreOutputKindAtom::msr2lpsrScoreOutputKindAtom (
-  const std::string&        longName,
-  const std::string&        shortName,
-  const std::string&        description,
-  const std::string&        valueSpecification,
-  const std::string&        variableName,
+  const std::string&   longName,
+  const std::string&   shortName,
+  const std::string&   description,
+  const std::string&   valueSpecification,
+  const std::string&   variableName,
   lpsrScoreOutputKind& lpsrScoreOutputKindVariable)
   : oahAtomStoringAValue (
       longName,

@@ -20,7 +20,7 @@
 
 #include "msrWae.h"
 
-#include "msrMeasures.h"
+// #include "msrMeasures.h"
 
 #include "msrClefs.h"
 
@@ -355,10 +355,10 @@ std::string existingClefKindsNames (size_t namesListMaxLength)
 
 //______________________________________________________________________________
 S_msrClef msrClef::create (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure,
-  msrClefKind  clefKind,
-  int          clefStaffNumber)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure,
+  msrClefKind   clefKind,
+  int           clefStaffNumber)
 {
   msrClef* o =
     new msrClef (
@@ -370,11 +370,24 @@ S_msrClef msrClef::create (
   return o;
 }
 
+S_msrClef msrClef::create (
+  int         inputLineNumber,
+  msrClefKind clefKind,
+  int         clefStaffNumber)
+{
+  return
+    msrClef::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      clefKind,
+      clefStaffNumber);
+}
+
 msrClef::msrClef (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure,
-  msrClefKind  clefKind,
-  int          clefStaffNumber)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure,
+  msrClefKind   clefKind,
+  int           clefStaffNumber)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
@@ -386,12 +399,11 @@ msrClef::msrClef (
 msrClef::~msrClef ()
 {}
 
-//________________________________________________________________________
 S_msrClef msrClef::createClefFromString (
-  int           inputLineNumber,
-  S_msrMeasure  upLinkToMeasure,
+  int                inputLineNumber,
+  S_msrMeasure&      upLinkToMeasure,
   const std::string& clefString,
-  int           clefLineNumber)
+  int                clefLineNumber)
 {
   /*
     Handles clefString à la LilyPond, such as 'treble' or 'baritone'

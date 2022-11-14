@@ -436,13 +436,13 @@ class EXP mxsr2msrSkeletonBuilder :
     int                       fCurrentPartGroupNumber;
     msrPartGroupTypeKind
                               fCurrentPartGroupTypeKind;
-    std::string               fCurrentPartGroupName;
-    std::string               fCurrentPartGroupAbbreviation;
+    std::string          fCurrentPartGroupName;
+    std::string          fCurrentPartGroupAbbreviation;
 
     Bool                      fOnGoingPartGroupNameDisplay;
-    std::string               fCurrentPartGroupNameDisplayText;
+    std::string          fCurrentPartGroupNameDisplayText;
 
-    std::string               fCurrentPartGroupAccidentalText;
+    std::string          fCurrentPartGroupAccidentalText;
     msrPartGroupSymbolKind    fCurrentPartGroupSymbolKind;
     msrPartGroupBarLineKind   fCurrentPartGroupBarLineKind;
     int                       fCurrentPartGroupSymbolDefaultX;
@@ -551,19 +551,19 @@ class EXP mxsr2msrSkeletonBuilder :
     // parts handling
     // ------------------------------------------------------
 
-    std::string               fCurrentPartID; // used throughout
+    std::string          fCurrentPartID; // used throughout
 
-    std::string               fCurrentPartName;
-    std::string               fCurrentPartNameDisplayText;
+    std::string          fCurrentPartName;
+    std::string          fCurrentPartNameDisplayText;
     Bool                      fOnGoingPartNameDisplay;
 
 
-    std::string               fCurrentPartAbbreviation;
-    std::string               fCurrentPartAbbreviationDisplayText;
+    std::string          fCurrentPartAbbreviation;
+    std::string          fCurrentPartAbbreviationDisplayText;
     Bool                      fOnGoingPartAbbreviationDisplay;
 
-    std::string               fCurrentPartInstrumentName;
-    std::string               fCurrentPartInstrumentAbbreviation;
+    std::string          fCurrentPartInstrumentName;
+    std::string          fCurrentPartInstrumentAbbreviation;
 
     std::map<std::string, S_msrPart>    fPartsMap;
 
@@ -608,7 +608,7 @@ class EXP mxsr2msrSkeletonBuilder :
     // measures
     // ------------------------------------------------------
 
-    std::string               fCurrentMeasureNumber;
+    std::string          fCurrentMeasureNumber;
 
     int                       fScoreNumberOfMeasures;
     int                       fPartNumberOfMeasures;
@@ -630,8 +630,8 @@ class EXP mxsr2msrSkeletonBuilder :
     // lyrics handling
     // ------------------------------------------------------
 
-    std::string               fCurrentStanzaNumber;
-    std::string               fCurrentStanzaName;
+    std::string          fCurrentStanzaNumber;
+    std::string          fCurrentStanzaName;
 
 
     // harmonies handling

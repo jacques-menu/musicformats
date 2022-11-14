@@ -20,7 +20,7 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
-  std::string                   inputSourceName,
+  std::string         inputSourceName,
   std::istream&                      inputStream,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
@@ -35,7 +35,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
-  std::string                   fileName,
+  std::string         fileName,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);

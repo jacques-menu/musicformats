@@ -212,11 +212,11 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrStaffInstrumentNameAtom> create (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
   protected:
@@ -225,11 +225,11 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrStaffInstrumentNameAtom (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
     virtual               ~lpsrStaffInstrumentNameAtom ();

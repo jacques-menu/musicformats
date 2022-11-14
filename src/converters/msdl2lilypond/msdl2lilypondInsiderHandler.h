@@ -33,8 +33,8 @@ class EXP msdl2lilypondInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<msdl2lilypondInsiderHandler> create (
-                            const std::string&           serviceName,
-                            const std::string&           handlerHeader,
+                            const std::string&      serviceName,
+                            const std::string&      handlerHeader,
                             oahHandlerUsedThruKind  handlerUsedThruKind);
 
   protected:
@@ -43,8 +43,8 @@ class EXP msdl2lilypondInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           msdl2lilypondInsiderHandler (
-                            const std::string&           serviceName,
-                            const std::string&           handlerHeader,
+                            const std::string&      serviceName,
+                            const std::string&      handlerHeader,
                             oahHandlerUsedThruKind  handlerUsedThruKind);
 
     virtual               ~msdl2lilypondInsiderHandler ();
@@ -100,7 +100,7 @@ class EXP msdl2lilypondInsiderHandler : public oahInsiderHandler
     // private methods
     // ------------------------------------------------------
 
-    std::string               usageFromUsedThruKind (
+    std::string          usageFromUsedThruKind (
                            oahHandlerUsedThruKind handlerUsedThruKind) const;
   private:
 

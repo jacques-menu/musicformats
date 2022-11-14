@@ -58,7 +58,13 @@ class EXP msrChord : public msrTupletElement
 
     static SMARTP<msrChord> create (
                             int             inputLineNumber,
-                            S_msrMeasure    upLinkToMeasure,
+                            S_msrMeasure&   upLinkToMeasure,
+                            const Rational& chordSoundingWholeNotes,
+                            const Rational& chordDisplayWholeNotes,
+                            msrDurationKind chordGraphicDurationKind);
+
+    static SMARTP<msrChord> create (
+                            int             inputLineNumber,
                             const Rational& chordSoundingWholeNotes,
                             const Rational& chordDisplayWholeNotes,
                             msrDurationKind chordGraphicDurationKind);
@@ -76,7 +82,7 @@ class EXP msrChord : public msrTupletElement
 
                           msrChord (
                             int             inputLineNumber,
-                            S_msrMeasure    upLinkToMeasure,
+                            S_msrMeasure&   upLinkToMeasure,
                             const Rational& chordSoundingWholeNotes,
                             const Rational& chordDisplayWholeNotes,
                             msrDurationKind chordGraphicDurationKind);
@@ -112,23 +118,6 @@ class EXP msrChord : public msrTupletElement
 
     S_msrGraceNotesGroup  getChordDirectUpLinkToGraceNotesGroup () const
                             { return fChordDirectUpLinkToGraceNotesGroup; }
-
-//     // position in measure
-//     void                  setMeasureElementMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string&      context) override
-//                               {
-//                                 setChordMeasurePosition (
-//                                   measure,
-//                                   measurePosition,
-//                                   context);
-//                               }
-//
-//     void                  setChordMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string&      context);
 
     // chord kind
     void                  setChordKind (
@@ -537,7 +526,7 @@ class EXP msrChord : public msrTupletElement
     std::list<S_msrStem>  fChordStems;
 
     // beams
-//    std::list<S_msrBeam>       fChordBeams;
+//    std::list<S_msrBeam>  fChordBeams;
     std::list<S_msrChordBeamLink>
                           fChordBeamLinks;
 
@@ -576,37 +565,39 @@ class EXP msrChord : public msrTupletElement
     std::list<S_msrGlissando>  fChordGlissandos;
 
     // slides
-    std::list<S_msrSlide>      fChordSlides;
+    std::list<S_msrSlide> fChordSlides;
 
     // dynamics
-    std::list<S_msrDynamic>   fChordDynamics;
+    std::list<S_msrDynamic>
+                          fChordDynamics;
     std::list<S_msrOtherDynamic>
                           fChordOtherDynamics;
 
     // slashes
-    std::list<S_msrSlash>      fChordSlashes;
+    std::list<S_msrSlash> fChordSlashes;
 
     // cresc/decresc
     std::list<S_msrCrescDecresc>
                           fChordCrescDecrescs;
 
     // wedges
-    std::list<S_msrWedge>      fChordWedges;
+    std::list<S_msrWedge> fChordWedges;
 
     // segnos
-    std::list<S_msrSegno>      fChordSegnos;
+    std::list<S_msrSegno> fChordSegnos;
 
     // dal segnos
-    std::list<S_msrDalSegno>   fChordDalSegnos;
+    std::list<S_msrDalSegno>
+                          fChordDalSegnos;
 
     // coda
-    std::list<S_msrCoda>       fChordCodas;
+    std::list<S_msrCoda>  fChordCodas;
 
     // octave shift
     S_msrOctaveShift      fChordOctaveShift;
 
     // words
-    std::list<S_msrWords>      fChordWords;
+    std::list<S_msrWords> fChordWords;
 
     // ties
     std::list<S_msrTie>        fChordTies;
@@ -616,10 +607,12 @@ class EXP msrChord : public msrTupletElement
                           fChordSlurLinks;
 
     // ligatures
-    std::list<S_msrLigature>   fChordLigatures;
+    std::list<S_msrLigature>
+
+                          fChordLigatures;
 
     // pedals
-    std::list<S_msrPedal>      fChordPedals;
+    std::list<S_msrPedal> fChordPedals;
 
     // grace notes
 //    S_msrGraceNotesGroup  fChordGraceNotesGroupBefore;
@@ -631,7 +624,8 @@ class EXP msrChord : public msrTupletElement
                           fChordGraceNotesGroupLinkAfter;
 
     // harmony
-    std::list<S_msrHarmony>    fChordHarmoniesList;
+    std::list<S_msrHarmony>
+                          fChordHarmoniesList;
 
     // figured bass
     S_msrFiguredBass      fChordFiguredBass;
@@ -794,7 +788,7 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     static SMARTP<msrChordGraceNotesGroupLink> create (
                             int                  inputLineNumber,
                             S_msrGraceNotesGroup originalGraceNotesGroup,
-                            S_msrChord            upLinkToChord);
+                            S_msrChord           upLinkToChord);
 
     SMARTP<msrChordGraceNotesGroupLink> createChordGraceNotesGroupLinkNewbornClone ();
 
@@ -806,7 +800,7 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
                           msrChordGraceNotesGroupLink (
                             int                  inputLineNumber,
                             S_msrGraceNotesGroup originalGraceNotesGroup,
-                            S_msrChord            upLinkToChord);
+                            S_msrChord           upLinkToChord);
 
     virtual               ~msrChordGraceNotesGroupLink ();
 

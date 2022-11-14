@@ -295,7 +295,8 @@ class EXP lpsrStaffBlock : public lpsrElement
 
     S_msrStaff            fStaff;
 
-    std::list<S_msrElement>    fStaffBlockElements;
+    std::list<S_msrElement>
+                          fStaffBlockElements;
 
     std::string           fStaffBlockInstrumentName;
     std::string           fStaffBlockShortInstrumentName;

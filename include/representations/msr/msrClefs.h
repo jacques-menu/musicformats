@@ -78,19 +78,24 @@ class EXP msrClef : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrClef> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure,
-                            msrClefKind  clefKind,
-                            int          clefStaffNumber);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure,
+                            msrClefKind   clefKind,
+                            int           clefStaffNumber);
+
+    static SMARTP<msrClef> create (
+                            int         inputLineNumber,
+                            msrClefKind clefKind,
+                            int         clefStaffNumber);
 
     // creation from the applications
     // ------------------------------------------------------
 
     static SMARTP<msrClef> createClefFromString (
-                            int           inputLineNumber,
-                            S_msrMeasure  upLinkToMeasure,
+                            int                inputLineNumber,
+                            S_msrMeasure&      upLinkToMeasure,
                             const std::string& clefString,
-                            int           clefLineNumber);
+                            int                clefLineNumber);
 
   protected:
 
@@ -98,10 +103,10 @@ class EXP msrClef : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrClef (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure,
-                            msrClefKind  clefKind,
-                            int          clefStaffNumber);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure,
+                            msrClefKind   clefKind,
+                            int           clefStaffNumber);
 
     virtual               ~msrClef ();
 

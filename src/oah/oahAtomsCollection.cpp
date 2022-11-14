@@ -7740,11 +7740,11 @@ std::ostream& operator << (std::ostream& os, const S_oahStringToIntMapElementAto
 
 //______________________________________________________________________________
 S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
-    const std::string&         longName,
-    const std::string&         shortName,
-    const std::string&         description,
-    const std::string&         valueSpecification,
-    const std::string&         variableName,
+    const std::string&    longName,
+    const std::string&    shortName,
+    const std::string&    description,
+    const std::string&    valueSpecification,
+    const std::string&    variableName,
     std::map<std::string, std::string>&  stringToStringMapVariable)
 {
   oahStringToStringMapElementAtom* o = new
@@ -7760,11 +7760,11 @@ S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
 }
 
 oahStringToStringMapElementAtom::oahStringToStringMapElementAtom (
-    const std::string&         longName,
-    const std::string&         shortName,
-    const std::string&         description,
-    const std::string&         valueSpecification,
-    const std::string&         variableName,
+    const std::string&    longName,
+    const std::string&    shortName,
+    const std::string&    description,
+    const std::string&    valueSpecification,
+    const std::string&    variableName,
     std::map<std::string, std::string>&  stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,
@@ -8089,11 +8089,11 @@ std::ostream& operator << (std::ostream& os, const S_oahStringToStringMapElement
 
 //______________________________________________________________________________
 S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::create (
-    const std::string&         longName,
-    const std::string&         shortName,
-    const std::string&         description,
-    const std::string&         valueSpecification,
-    const std::string&         variableName,
+    const std::string&    longName,
+    const std::string&    shortName,
+    const std::string&    description,
+    const std::string&    valueSpecification,
+    const std::string&    variableName,
     std::multimap<std::string, std::string>&  stringToStringMultiMapVariable)
 {
   oahStringToStringMultiMapElementAtom* o = new
@@ -8109,11 +8109,11 @@ S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::cre
 }
 
 oahStringToStringMultiMapElementAtom::oahStringToStringMultiMapElementAtom (
-    const std::string&         longName,
-    const std::string&         shortName,
-    const std::string&         description,
-    const std::string&         valueSpecification,
-    const std::string&         variableName,
+    const std::string&    longName,
+    const std::string&    shortName,
+    const std::string&    description,
+    const std::string&    valueSpecification,
+    const std::string&    variableName,
     std::multimap<std::string, std::string>&  stringToStringMultiMapVariable)
   : oahAtomStoringAValue (
       longName,

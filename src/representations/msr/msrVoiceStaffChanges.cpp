@@ -30,9 +30,9 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrVoiceStaffChange msrVoiceStaffChange::create (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure,
-  S_msrStaff   staffToChangeTo)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure,
+  S_msrStaff    staffToChangeTo)
 {
   msrVoiceStaffChange* o =
     new msrVoiceStaffChange (
@@ -43,10 +43,21 @@ S_msrVoiceStaffChange msrVoiceStaffChange::create (
   return o;
 }
 
+S_msrVoiceStaffChange msrVoiceStaffChange::create (
+  int           inputLineNumber,
+  S_msrStaff    staffToChangeTo)
+{
+  return
+    msrVoiceStaffChange::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      staffToChangeTo);
+}
+
 msrVoiceStaffChange::msrVoiceStaffChange (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure,
-  S_msrStaff   staffToChangeTo)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure,
+  S_msrStaff    staffToChangeTo)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

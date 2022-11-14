@@ -267,8 +267,8 @@ std::ostream& operator << (std::ostream& os, const S_msrHumdrumScotKeyItem& elt)
 //______________________________________________________________________________
 S_msrKey msrKey::createTraditional (
   int                      inputLineNumber,
-  S_msrMeasure             upLinkToMeasure,
-  msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
+  S_msrMeasure&            upLinkToMeasure,
+  msrQuarterTonesPitchKind keyTonicPitchKind,
   msrModeKind              modeKind,
   int                      keyCancel)
 {
@@ -283,9 +283,24 @@ S_msrKey msrKey::createTraditional (
   return o;
 }
 
+S_msrKey msrKey::createTraditional (
+  int                      inputLineNumber,
+  S_msrMeasure&            upLinkToMeasure,
+  msrQuarterTonesPitchKind keyTonicPitchKind,
+  msrModeKind              modeKind,
+  int                      keyCancel)
+{
+  return
+    msrKey::createTraditional (
+      inputLineNumber,
+      nullptr, // will be set when key is appended to a measure
+      keyTonicQuarterTonesPitchKind, modeKind,
+      keyCancel);
+}
+
 S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure)
 {
   msrKey* o =
     new msrKey (
@@ -294,6 +309,15 @@ S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
   assert (o != nullptr);
 
   return o;
+}
+
+S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
+  int inputLineNumber)
+{
+  return
+    msrKey::createHumdrumScot
+      inputLineNumber,
+      nullptr); // upLinkToMeasure, will be set when key is appended to a measure
 }
 
 msrKey::msrKey ( // for traditional keys
@@ -366,8 +390,8 @@ msrKey::msrKey ( // for traditional keys
 }
 
 msrKey::msrKey ( // for Humdrum/Scot keys
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

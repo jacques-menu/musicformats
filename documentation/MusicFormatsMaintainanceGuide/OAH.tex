@@ -550,10 +550,10 @@ The value is stored in the variable in \\
 \constructor{mfMultiGenerationOutputKindAtom}:
 \begin{lstlisting}[language=CPlusPlus]
 mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
-  const std::string&             longName,
-  const std::string&             shortName,
-  const std::string&             description,
-  const std::string&             variableName,
+  const std::string&        longName,
+  const std::string&        shortName,
+  const std::string&        description,
+  const std::string&        variableName,
   mfMultiGenerationOutputKind& mfMultiGenerationOutputKindVariable)
   : oahAtomImplicitlyStoringAValue (
       longName,
@@ -680,7 +680,7 @@ class   {\tt oahHandler} in \oahBoth{oahBasicTypes} contains:
     // options and arguments handling
     oahElementHelpOnlyKind
                           handleOptionsFromOptionsAndArguments (
-                            std::string             serviceName,
+                            std::string        serviceName,
                             const oahOptionsVector& theOptionsVector);
 
     oahElementHelpOnlyKind
@@ -1341,7 +1341,7 @@ class EXP oahFindableElement : public smartable
     // ------------------------------------------------------
 
     virtual Bool          findStringInFindableElement (
-                            const std::string&          lowerCaseString,
+                            const std::string&     lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const = 0;
 
@@ -1384,7 +1384,7 @@ The \fieldName{fContainingFindableElementInfo} describes the \oahRepr\ element t
 For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oahElement.cpp} creates an instance and appends it to the std::list :
 \begin{lstlisting}[language=Terminal]
 Bool oahHandler::findStringInFindableElement (
-	const std::string&          lowerCaseString,
+	const std::string&     lowerCaseString,
 	std::list<S_oahFindStringMatch>& foundMatchesList,
 	std::ostream&                    os) const
 {

@@ -128,11 +128,11 @@ std::string existingGenerationAPIKinds (
 
 //______________________________________________________________________________
 S_msrGenerationAPIKindAtom msrGenerationAPIKindAtom::create (
-  const std::string&         longName,
-  const std::string&         shortName,
-  const std::string&         description,
-  const std::string&         valueSpecification,
-  const std::string&         variableName,
+  const std::string&    longName,
+  const std::string&    shortName,
+  const std::string&    description,
+  const std::string&    valueSpecification,
+  const std::string&    variableName,
   msrGenerationAPIKind& generationAPIKindVariable)
 {
   msrGenerationAPIKindAtom* o = new
@@ -148,11 +148,11 @@ S_msrGenerationAPIKindAtom msrGenerationAPIKindAtom::create (
 }
 
 msrGenerationAPIKindAtom::msrGenerationAPIKindAtom (
-  const std::string&         longName,
-  const std::string&         shortName,
-  const std::string&         description,
-  const std::string&         valueSpecification,
-  const std::string&         variableName,
+  const std::string&    longName,
+  const std::string&    shortName,
+  const std::string&    description,
+  const std::string&    valueSpecification,
+  const std::string&    variableName,
   msrGenerationAPIKind& generationAPIKindVariable)
   : oahAtomStoringAValue (
       longName,

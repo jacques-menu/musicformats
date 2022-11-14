@@ -107,8 +107,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdlConverterInsiderHandler msdlConverterInsiderHandler::create (
-  const std::string&          serviceName,
-  const std::string&          handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
   // create the insider handler
@@ -123,8 +123,8 @@ S_msdlConverterInsiderHandler msdlConverterInsiderHandler::create (
 }
 
 msdlConverterInsiderHandler::msdlConverterInsiderHandler (
-  const std::string&          serviceName,
-  const std::string&          handlerHeader,
+  const std::string&     serviceName,
+  const std::string&     handlerHeader,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
   : oahInsiderHandler (
       serviceName,
@@ -362,7 +362,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
 
 //______________________________________________________________________________
 void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
-  const std::string&          serviceName,
+  const std::string&     serviceName,
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
 #ifdef TRACING_IS_ENABLED

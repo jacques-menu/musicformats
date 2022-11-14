@@ -37,7 +37,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 /* this class   is purely virtual
 S_oahRegularHandler oahRegularHandler::create (
-  std::string            serviceName,
+  std::string       serviceName,
   const std::string&     handlerHeader,
   S_oahHandler      insiderOahHandler)
 {
@@ -54,7 +54,7 @@ S_oahRegularHandler oahRegularHandler::create (
 */
 
 oahRegularHandler::oahRegularHandler (
-  std::string            serviceName,
+  std::string       serviceName,
   const std::string&     handlerHeader,
   S_oahHandler      insiderOahHandler)
   : oahHandler (

@@ -46,7 +46,7 @@ class EXP msrNote : public msrTupletElement
                             int                        inputLineNumber,
                             S_msrMeasure               upLinkToMeasure,
 
-                            const std::string&         noteMeasureNumber,
+                            const std::string&    noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 
@@ -119,7 +119,7 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createRegularNote (
                             int                      inputLineNumber,
-                            const std::string&            noteMeasureNumber,
+                            const std::string&       noteMeasureNumber,
                             msrQuarterTonesPitchKind quarterTonesPitchKind,
                             msrOctaveKind            noteOctaveKind,
                             const Rational&          soundingWholeNotes,
@@ -157,7 +157,7 @@ class EXP msrNote : public msrTupletElement
                             int                        inputLineNumber,
                             S_msrMeasure               upLinkToMeasure,
 
-                            const std::string&         noteMeasureNumber,
+                            const std::string&    noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 
@@ -230,7 +230,7 @@ class EXP msrNote : public msrTupletElement
 //     void                  setMeasureElementMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const std::string&      context) override
+//                             const std::string& context) override
 //                               {
 //                                 setNoteMeasurePosition (
 //                                   measure,
@@ -241,7 +241,7 @@ class EXP msrNote : public msrTupletElement
 //     void                  setNoteMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const std::string&      context);
+//                             const std::string& context);
 
     // note kind
 
@@ -1041,7 +1041,7 @@ class EXP msrNote : public msrTupletElement
     // beams
     // ------------------------------------------------------
 
-    std::list<S_msrBeam>       fNoteBeams;
+    std::list<S_msrBeam>  fNoteBeams;
 
     // articulations
     // ------------------------------------------------------
@@ -1081,7 +1081,7 @@ class EXP msrNote : public msrTupletElement
     // slides
     // ------------------------------------------------------
 
-    std::list<S_msrSlide>      fNoteSlides;
+    std::list<S_msrSlide> fNoteSlides;
 
     // grace notes
     // ------------------------------------------------------
@@ -1104,14 +1104,15 @@ class EXP msrNote : public msrTupletElement
     // dynamics
     // ------------------------------------------------------
 
-    std::list<S_msrDynamic>    fNoteDynamics;
+    std::list<S_msrDynamic>
+                            fNoteDynamics;
     std::list<S_msrOtherDynamic>
                           fNoteOtherDynamics;
 
     // slashes
     // ------------------------------------------------------
 
-    std::list<S_msrSlash>      fNoteSlashes;
+    std::list<S_msrSlash> fNoteSlashes;
 
     // cresc/decresc
     // ------------------------------------------------------
@@ -1122,22 +1123,23 @@ class EXP msrNote : public msrTupletElement
     // wedges
     // ------------------------------------------------------
 
-    std::list<S_msrWedge>      fNoteWedges;
+    std::list<S_msrWedge> fNoteWedges;
 
     // segnos
     // ------------------------------------------------------
 
-    std::list<S_msrSegno>      fNoteSegnos;
+    std::list<S_msrSegno> fNoteSegnos;
 
     // dal segnos
     // ------------------------------------------------------
 
-    std::list<S_msrDalSegno>   fNoteDalSegnos;
+    std::list<S_msrDalSegno>
+                          fNoteDalSegnos;
 
     // coda
     // ------------------------------------------------------
 
-    std::list<S_msrCoda>       fNoteCodas;
+    std::list<S_msrCoda>  fNoteCodas;
 
     // eyeglasses
     // ------------------------------------------------------
@@ -1162,7 +1164,7 @@ class EXP msrNote : public msrTupletElement
     // words
     // ------------------------------------------------------
 
-    std::list<S_msrWords>      fNoteWords;
+    std::list<S_msrWords> fNoteWords;
 
     // slurs
     // ------------------------------------------------------
@@ -1172,17 +1174,19 @@ class EXP msrNote : public msrTupletElement
     // ligatures
     // ------------------------------------------------------
 
-    std::list<S_msrLigature>   fNoteLigatures;
+    std::list<S_msrLigature>
+                          fNoteLigatures;
 
     // pedals
     // ------------------------------------------------------
 
-    std::list<S_msrPedal>      fNotePedals;
+    std::list<S_msrPedal> fNotePedals;
 
     // harmonies
     // ------------------------------------------------------
 
-    std::list<S_msrHarmony>    fNoteHarmoniesList;
+    std::list<S_msrHarmony>
+                          fNoteHarmoniesList;
 
     // figured bass
     // ------------------------------------------------------

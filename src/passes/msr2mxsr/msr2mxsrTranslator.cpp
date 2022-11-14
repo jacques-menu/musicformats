@@ -4230,7 +4230,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
 */
 
   msrDottedDuration tempoBeatUnit  = elt->getTempoBeatUnit ();
-  std::string            tempoPerMinute = elt->getTempoPerMinute ();
+  std::string       tempoPerMinute = elt->getTempoPerMinute ();
 
   msrTempoParenthesizedKind
     tempoParenthesizedKind =

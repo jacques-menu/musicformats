@@ -32,8 +32,8 @@ namespace MusicFormats
 S_oahInsiderHandler oahInsiderHandler::create (
   const std::string& serviceName,
   const std::string& handlerHeader,
-  const std::string&           handlerDescription,
-  const std::string&           handlerUsage)
+  const std::string&      handlerDescription,
+  const std::string&      handlerUsage)
 {
   // create the insider handler
   oahInsiderHandler* o = new
@@ -51,8 +51,8 @@ S_oahInsiderHandler oahInsiderHandler::create (
 oahInsiderHandler::oahInsiderHandler (
   const std::string& serviceName,
   const std::string& handlerHeader,
-  const std::string&           handlerDescription,
-  const std::string&           handlerUsage)
+  const std::string&      handlerDescription,
+  const std::string&      handlerUsage)
   : oahHandler (
       serviceName,
       handlerHeader,

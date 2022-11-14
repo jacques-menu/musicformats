@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___bsrBasicTypes___
-#define ___bsrBasicTypes___
+#ifndef ___bsrEnumTypes___
+#define ___bsrEnumTypes___
 
 #include <string>
 #include <map>

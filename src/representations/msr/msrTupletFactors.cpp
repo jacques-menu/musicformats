@@ -107,7 +107,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 // S_msrTuplet msrTuplet::create (
 //   int                     inputLineNumber,
 //   S_msrMeasure            upLinkToMeasure,
-//   const std::string&           tupletMeasureNumber,
+//   const std::string&      tupletMeasureNumber,
 //   int                     tupletNumber,
 //   msrTupletBracketKind    tupletBracketKind,
 //   msrTupletLineShapeKind  tupletLineShapeKind,
@@ -137,7 +137,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 // msrTuplet::msrTuplet (
 //   int                     inputLineNumber,
 //   S_msrMeasure            upLinkToMeasure,
-//   const std::string&           tupletMeasureNumber,
+//   const std::string&      tupletMeasureNumber,
 //   int                     tupletNumber,
 //   msrTupletBracketKind    tupletBracketKind,
 //   msrTupletLineShapeKind  tupletLineShapeKind,

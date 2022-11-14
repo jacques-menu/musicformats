@@ -20,7 +20,7 @@
   #include "tracingOah.h"
 #endif
 
-#include "msrMeasures.h"
+// #include "msrMeasures.h"
 
 #include "msrBarChecks.h"
 
@@ -34,8 +34,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrBarCheck msrBarCheck::create (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int           inputLineNumber,
+  S_msrMeasure& upLinkToMeasure)
 {
   msrBarCheck* o =
     new msrBarCheck (
@@ -45,11 +45,11 @@ S_msrBarCheck msrBarCheck::create (
   return o;
 }
 
-S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber (
-  int           inputLineNumber,
-  S_msrMeasure  upLinkToMeasure,
+S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
+  int                inputLineNumber,
+  S_msrMeasure&      upLinkToMeasure,
   const std::string& nextBarOriginalNumber,
-  int           nextBarPuristNumber)
+  int                nextBarPuristNumber)
 {
   msrBarCheck* o =
     new msrBarCheck (

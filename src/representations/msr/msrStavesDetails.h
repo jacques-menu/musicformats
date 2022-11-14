@@ -151,7 +151,14 @@ class EXP msrStaffDetails : public msrMeasureElementLambda
 
     static SMARTP<msrStaffDetails> create (
                             int                 inputLineNumber,
-                            S_msrMeasure        upLinkToMeasure,
+                            S_msrMeasure&       upLinkToMeasure,
+                            msrStaffTypeKind    staffTypeKind,
+                            msrShowFretsKind    showFretsKind,
+                            msrPrintObjectKind  printObjectKind,
+                            msrPrintSpacingKind printSpacingKin);
+
+    static SMARTP<msrStaffDetails> create (
+                            int                 inputLineNumber,
                             msrStaffTypeKind    staffTypeKind,
                             msrShowFretsKind    showFretsKind,
                             msrPrintObjectKind  printObjectKind,
@@ -164,7 +171,7 @@ class EXP msrStaffDetails : public msrMeasureElementLambda
 
                           msrStaffDetails (
                             int                 inputLineNumber,
-                            S_msrMeasure        upLinkToMeasure,
+                            S_msrMeasure&       upLinkToMeasure,
                             msrStaffTypeKind    staffTypeKind,
                             msrShowFretsKind    showFretsKind,
                             msrPrintObjectKind  printObjectKind,

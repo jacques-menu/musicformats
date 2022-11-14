@@ -284,11 +284,11 @@ std::ostream& operator << (std::ostream& os, const S_msrPitchesLanguageAtom& elt
 
 //______________________________________________________________________________
 S_msrRenamePartAtom msrRenamePartAtom::create (
-  const std::string&         longName,
-  const std::string&         shortName,
-  const std::string&         description,
-  const std::string&         valueSpecification,
-  const std::string&         variableName,
+  const std::string&    longName,
+  const std::string&    shortName,
+  const std::string&    description,
+  const std::string&    valueSpecification,
+  const std::string&    variableName,
   std::map<std::string, std::string>&  stringToStringMapVariable)
 {
   msrRenamePartAtom* o = new
@@ -304,11 +304,11 @@ S_msrRenamePartAtom msrRenamePartAtom::create (
 }
 
 msrRenamePartAtom::msrRenamePartAtom (
-  const std::string&         longName,
-  const std::string&         shortName,
-  const std::string&         description,
-  const std::string&         valueSpecification,
-  const std::string&         variableName,
+  const std::string&    longName,
+  const std::string&    shortName,
+  const std::string&    description,
+  const std::string&    valueSpecification,
+  const std::string&    variableName,
   std::map<std::string, std::string>&  stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,

@@ -29,7 +29,7 @@ namespace MusicFormats
 S_msrWords msrWords::create (
   int                        inputLineNumber,
   msrPlacementKind           wordsPlacementKind,
-  const std::string&         wordsContents,
+  const std::string&    wordsContents,
   msrJustifyKind             wordsJustifyKind,
   msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
   msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
@@ -59,7 +59,7 @@ S_msrWords msrWords::create (
 msrWords::msrWords (
   int                        inputLineNumber,
   msrPlacementKind           wordsPlacementKind,
-  const std::string&         wordsContents,
+  const std::string&    wordsContents,
   msrJustifyKind             wordsJustifyKind,
   msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
   msrVerticalAlignmentKind   wordsVerticalAlignmentKind,

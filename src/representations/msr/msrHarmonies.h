@@ -284,7 +284,7 @@ class EXP msrHarmony : public msrMeasureElementLambda
                             S_msrMeasure             upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
-                            const std::string&            harmonyKindText,
+                            const std::string&       harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
                             const Rational&          harmonySoundingWholeNotes,
@@ -309,7 +309,7 @@ class EXP msrHarmony : public msrMeasureElementLambda
                             S_msrMeasure             upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
-                            const std::string&            harmonyKindText,
+                            const std::string&       harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
                             const Rational&          harmonySoundingWholeNotes,
@@ -342,7 +342,7 @@ class EXP msrHarmony : public msrMeasureElementLambda
 //     void                  setMeasureElementMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const std::string&      context) override
+//                             const std::string& context) override
 //                               {
 //                                 setHarmonyMeasurePosition (
 //                                   measure,
@@ -353,7 +353,7 @@ class EXP msrHarmony : public msrMeasureElementLambda
 //     void                  setHarmonyMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const std::string&      context);
+//                             const std::string& context);
 
     // whole notes
     void                  setHarmonyDisplayWholeNotes (

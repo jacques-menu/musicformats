@@ -15,7 +15,7 @@ For example, \method{msrMeasure}{finalizeMeasure} delegates part of the job to m
 void msrMeasure::finalizeMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  std::string                  context)
+  std::string        context)
 {
 	// ... ... ...
 
@@ -394,7 +394,7 @@ void msrVoice::finalizeVoice (
 void msrMeasure::finalizeMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  std::string                  context)
+  std::string        context)
 {
   if (fMeasureHasBeenFinalized) {
     std::stringstream s;
@@ -491,7 +491,7 @@ void msrMeasure::finalizeMeasure (
 void msrMeasure::finalizeRegularMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  std::string                  context)
+  std::string        context)
 {
   // fetch the regular voice
   S_msrVoice
@@ -654,7 +654,7 @@ void msrMeasure::finalizeRegularMeasure (
 void msrMeasure::finalizeHarmonyMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  std::string                  context)
+  std::string        context)
 {
   // fetch the harmonies voice
   S_msrVoice
@@ -758,7 +758,7 @@ void msrMeasure::finalizeHarmonyMeasure (
 void msrMeasure::finalizeFiguredBassMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  std::string                  context)
+  std::string        context)
 {
   // fetch the figured bass voice
   S_msrVoice

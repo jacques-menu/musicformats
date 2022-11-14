@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___lpsrBasicTypes___
-#define ___lpsrBasicTypes___
+#ifndef ___lpsrEnumTypes___
+#define ___lpsrEnumTypes___
 
 #include <list>
 #include <map>

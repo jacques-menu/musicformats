@@ -120,11 +120,11 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msrRenamePartAtom> create (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
   protected:
@@ -133,11 +133,11 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msrRenamePartAtom (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    valueSpecification,
+                            const std::string&    variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
     virtual               ~msrRenamePartAtom ();

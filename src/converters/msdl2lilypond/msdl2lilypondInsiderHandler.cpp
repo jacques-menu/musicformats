@@ -58,8 +58,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdl2lilypondInsiderHandler msdl2lilypondInsiderHandler::create (
-  const std::string&           serviceName,
-  const std::string&           handlerHeader,
+  const std::string&      serviceName,
+  const std::string&      handlerHeader,
   oahHandlerUsedThruKind  handlerUsedThruKind)
 {
   // create the insider handler
@@ -74,8 +74,8 @@ S_msdl2lilypondInsiderHandler msdl2lilypondInsiderHandler::create (
 }
 
 msdl2lilypondInsiderHandler::msdl2lilypondInsiderHandler (
-  const std::string&           serviceName,
-  const std::string&           handlerHeader,
+  const std::string&      serviceName,
+  const std::string&      handlerHeader,
   oahHandlerUsedThruKind  handlerUsedThruKind)
   : oahInsiderHandler (
       serviceName,

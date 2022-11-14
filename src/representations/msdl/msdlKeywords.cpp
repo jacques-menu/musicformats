@@ -652,7 +652,7 @@ msdlKeywordKind msdlKeywordKindFromTokenKind (
 
 msdlKeywordKind msdlKeywordKindFromString (
   msdlKeywordsLanguageKind languageKind,
-  const std::string&            theString)
+  const std::string&       theString)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {

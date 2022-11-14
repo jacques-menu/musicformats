@@ -14,8 +14,6 @@
 
 #include "msrMeasureElements.h"
 
-#include "mfRational.h"
-
 
 namespace MusicFormats
 {

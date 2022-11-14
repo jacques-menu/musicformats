@@ -535,7 +535,7 @@ class EXP msr2mxsrTranslator :
 
     // history
     // ------------------------------------------------------
-    std::string               fTranslatorName;
+    std::string          fTranslatorName;
 
 
     // the MSR score we're visiting
@@ -841,7 +841,7 @@ class EXP msr2mxsrTranslator :
 
     S_msrKey                  fCurrentPartKey;
 
-    std::string               msrModeKindAsMusicXMLString (
+    std::string          msrModeKindAsMusicXMLString (
                                 msrModeKind modeKind);
 
     // time signatures
@@ -1044,15 +1044,15 @@ class EXP msr2mxsrTranslator :
     void                      displayCurrentOnGoingValues ();
 */
 
-    std::string               msrLengthAsTenths (
+    std::string          msrLengthAsTenths (
                                 msrLength length);
-    std::string               S_msrLengthAsTenths (
+    std::string          S_msrLengthAsTenths (
                                 S_msrLength length);
 
-    std::string               msrPlacementKindAsMusicXMLString (
+    std::string          msrPlacementKindAsMusicXMLString (
                                 msrPlacementKind placementKind);
 
-    std::string               msrSpannerTypeKindAsMusicXMLString (
+    std::string          msrSpannerTypeKindAsMusicXMLString (
                                 msrSpannerTypeKind spannerTypeKind);
 };
 

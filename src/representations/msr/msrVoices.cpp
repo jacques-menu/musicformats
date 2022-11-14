@@ -4029,7 +4029,7 @@ S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
 void msrVoice::moveVoiceInitialElementsToRepeatCommonPart (
   int                   inputLineNumber,
   S_msrRepeatCommonPart repeatCommonPart,
-  const std::string&         context)
+  const std::string&    context)
 {
   // move the voice initial elements to the new repeat common part
 #ifdef TRACING_IS_ENABLED
@@ -4073,7 +4073,7 @@ void msrVoice::moveVoiceInitialElementsToRepeatCommonPart (
 void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
   int                   inputLineNumber,
   S_msrRepeatCommonPart repeatCommonPart,
-  const std::string&         context)
+  const std::string&    context)
 {
   // move the voice last segment to repeatCommonPart
 #ifdef TRACING_IS_ENABLED
@@ -4161,7 +4161,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
 void msrVoice::moveAllVoiceContentsToRepeatCommonPart (
   int                   inputLineNumber,
   S_msrRepeatCommonPart repeatCommonPart,
-  const std::string&         context)
+  const std::string&    context)
 {
   moveVoiceInitialElementsToRepeatCommonPart (
     inputLineNumber,
@@ -4254,7 +4254,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
 // void msrVoice::appendMultipleFullBarRestsToInitialVoiceElements (
 //   int                       inputLineNumber,
 //   S_msrMultipleFullBarRests multipleFullBarRests,
-//   const std::string&             context)
+//   const std::string&        context)
 // {
 //   // append multipleFullBarRests to the std::list of initial elements
 // #ifdef TRACING_IS_ENABLED

@@ -665,8 +665,11 @@ class EXP msrPrintLayout : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrPrintLayout> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
+
+    static SMARTP<msrPrintLayout> create (
+                            int           inputLineNumber);
 
   protected:
 
@@ -674,8 +677,8 @@ class EXP msrPrintLayout : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrPrintLayout (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrPrintLayout ();
 
@@ -1068,14 +1071,14 @@ class EXP msrOtherAppearance : public msrElement
     static SMARTP<msrOtherAppearance> create (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const std::string&         otherAppearanceValue);
+                            const std::string&    otherAppearanceValue);
 
   protected:
 
                           msrOtherAppearance (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const std::string&         otherAppearanceValue);
+                            const std::string&    otherAppearanceValue);
 
     virtual               ~msrOtherAppearance ();
 

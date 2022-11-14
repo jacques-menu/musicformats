@@ -94,7 +94,7 @@ class EXP lpsrComment : public lpsrElement
     // private fields
     // ------------------------------------------------------
 
-    std::string              fContents;
+    std::string         fContents;
     lpsrCommentGapAfterwardsKind  fCommentGapKind;
 };
 typedef SMARTP<lpsrComment> S_lpsrComment;

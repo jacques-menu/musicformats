@@ -41,7 +41,12 @@ class EXP msrOctaveShift : public msrMeasureElementLambda
 
     static SMARTP<msrOctaveShift> create (
                             int                inputLineNumber,
-                            S_msrMeasure       upLinkToMeasure,
+                            S_msrMeasure&      upLinkToMeasure,
+                            msrOctaveShiftKind octaveShiftKind,
+                            int                octaveShiftSize);
+
+    static SMARTP<msrOctaveShift> create (
+                            int                inputLineNumber,
                             msrOctaveShiftKind octaveShiftKind,
                             int                octaveShiftSize);
 
@@ -52,7 +57,7 @@ class EXP msrOctaveShift : public msrMeasureElementLambda
 
                           msrOctaveShift (
                             int                inputLineNumber,
-                            S_msrMeasure       upLinkToMeasure,
+                            S_msrMeasure&      upLinkToMeasure,
                             msrOctaveShiftKind octaveShiftKind,
                             int                octaveShiftSize);
 

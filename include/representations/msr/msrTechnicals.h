@@ -390,7 +390,7 @@ class EXP msrTechnicalWithString : public msrElement
                             int                        inputLineNumber,
                             msrTechnicalWithStringKind technicalWithStringKind,
                             msrTechnicalTypeKind       technicalWithStringTypeKind,
-                            const std::string&         technicalWithStringValue,
+                            const std::string&    technicalWithStringValue,
                             msrPlacementKind           technicalWithStringPlacementKind);
 
   protected:
@@ -402,7 +402,7 @@ class EXP msrTechnicalWithString : public msrElement
                             int                        inputLineNumber,
                             msrTechnicalWithStringKind technicalWithStringKind,
                             msrTechnicalTypeKind       technicalWithStringTypeKind,
-                            const std::string&         technicalWithStringValue,
+                            const std::string&    technicalWithStringValue,
                             msrPlacementKind           technicalWithStringPlacementKind);
 
     virtual               ~msrTechnicalWithString ();

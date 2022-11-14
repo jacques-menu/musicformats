@@ -38,6 +38,7 @@ std::string msrRrehearsalKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrRehearsalMarkKind& elt);
 
+//______________________________________________________________________________
 class EXP msrRehearsalMark : public msrMeasureElementLambda
 {
   public:
@@ -47,9 +48,15 @@ class EXP msrRehearsalMark : public msrMeasureElementLambda
 
     static SMARTP<msrRehearsalMark> create (
                             int                  inputLineNumber,
-                            S_msrMeasure         upLinkToMeasure,
+                            S_msrMeasure&        upLinkToMeasure,
                             msrRehearsalMarkKind rehearsalKind,
-                            const std::string&        rehearsalText,
+                            const std::string&   rehearsalText,
+                            msrPlacementKind     rehearsalPlacementKind);
+
+    static SMARTP<msrRehearsalMark> create (
+                            int                  inputLineNumber,
+                            msrRehearsalMarkKind rehearsalKind,
+                            const std::string&   rehearsalText,
                             msrPlacementKind     rehearsalPlacementKind);
 
   protected:
@@ -59,9 +66,9 @@ class EXP msrRehearsalMark : public msrMeasureElementLambda
 
                           msrRehearsalMark (
                             int                  inputLineNumber,
-                            S_msrMeasure         upLinkToMeasure,
+                            S_msrMeasure&        upLinkToMeasure,
                             msrRehearsalMarkKind rehearsalKind,
-                            const std::string&        rehearsalText,
+                            const std::string&   rehearsalText,
                             msrPlacementKind     rehearsalPlacementKind);
 
     virtual               ~msrRehearsalMark ();

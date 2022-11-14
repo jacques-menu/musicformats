@@ -44,10 +44,10 @@ S_msrPartGroup msrPartGroup::create (
   int                      inputLineNumber,
   int                      partGroupNumber,
   int                      partGroupAbsoluteNumber,
-  const std::string&            partGroupName,
-  const std::string&            partGroupNameDisplayText,
-  const std::string&            partGroupAccidentalText,
-  const std::string&            partGroupAbbreviation,
+  const std::string&       partGroupName,
+  const std::string&       partGroupNameDisplayText,
+  const std::string&       partGroupAccidentalText,
+  const std::string&       partGroupAbbreviation,
   msrPartGroupSymbolKind   partGroupSymbolKind,
   int                      partGroupSymbolDefaultX,
   msrPartGroupImplicitKind partGroupImplicitKind,
@@ -78,10 +78,10 @@ S_msrPartGroup msrPartGroup::create (
 S_msrPartGroup msrPartGroup::createImplicitPartGroup (
   int                      partGroupNumber,
   int                      partGroupAbsoluteNumber,
-  const std::string&            partGroupName,
-  const std::string&            partGroupNameDisplayText,
-  const std::string&            partGroupAccidentalText,
-  const std::string&            partGroupAbbreviation,
+  const std::string&       partGroupName,
+  const std::string&       partGroupNameDisplayText,
+  const std::string&       partGroupAccidentalText,
+  const std::string&       partGroupAbbreviation,
   msrPartGroupBarLineKind  partGroupBarLineKind,
   S_msrScore               UpLinkToPartGroupToScore)
 {
@@ -114,7 +114,7 @@ S_msrPartGroup msrPartGroup::create (
   int                      inputLineNumber,
   int                      partGroupNumber,
   int                      partGroupAbsoluteNumber,
-  const std::string&            partGroupName,
+  const std::string&       partGroupName,
   S_msrPartGroup           partGroupUpLinkToPartGroup,
   S_msrScore               UpLinkToPartGroupToScore)
 {
@@ -134,10 +134,10 @@ msrPartGroup::msrPartGroup (
   int                      inputLineNumber,
   int                      partGroupNumber,
   int                      partGroupAbsoluteNumber,
-  const std::string&            partGroupName,
-  const std::string&            partGroupNameDisplayText,
-  const std::string&            partGroupAccidentalText,
-  const std::string&            partGroupAbbreviation,
+  const std::string&       partGroupName,
+  const std::string&       partGroupNameDisplayText,
+  const std::string&       partGroupAccidentalText,
+  const std::string&       partGroupAbbreviation,
   msrPartGroupSymbolKind   partGroupSymbolKind,
   int                      partGroupSymbolDefaultX,
   msrPartGroupImplicitKind partGroupImplicitKind,
@@ -210,7 +210,7 @@ msrPartGroup::msrPartGroup (
   int                      inputLineNumber,
   int                      partGroupNumber,
   int                      partGroupAbsoluteNumber,
-  const std::string&            partGroupName,
+  const std::string&       partGroupName,
   S_msrPartGroup           partGroupUpLinkToPartGroup,
   S_msrScore               UpLinkToPartGroupToScore)
     : msrPartGroupElement (inputLineNumber)

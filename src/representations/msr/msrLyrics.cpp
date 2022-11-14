@@ -43,10 +43,10 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrSyllable msrSyllable::create (
   int                   inputLineNumber,
-  S_msrMeasure          upLinkToMeasure,
+  S_msrMeasure&         upLinkToMeasure,
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
-  const std::string&         syllableStanzaNumber,
+  const std::string&    syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           syllableUpLinkToStanza)
@@ -66,12 +66,36 @@ S_msrSyllable msrSyllable::create (
   return o;
 }
 
+S_msrSyllable msrSyllable::create (
+  int                   inputLineNumber,
+  msrSyllableKind       syllableKind,
+  msrSyllableExtendKind syllableExtendKind,
+  const std::string&    syllableStanzaNumber,
+  const Rational&       syllableWholeNotes,
+  msrTupletFactor       syllableTupletFactor,
+  S_msrStanza           syllableUpLinkToStanza)
+{
+  return
+    msrSyllable::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      syllableKind,
+      syllableExtendKind,
+      syllableStanzaNumber,
+      syllableWholeNotes,
+      syllableTupletFactor,
+      syllableUpLinkToStanza);
+  assert (o != nullptr);
+
+  return o;
+}
+
 S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
   int                   inputLineNumber,
   S_msrMeasure          upLinkToMeasure,
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
-  const std::string&         syllableStanzaNumber,
+  const std::string&    syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           syllableUpLinkToStanza,
@@ -101,7 +125,7 @@ msrSyllable::msrSyllable (
   S_msrMeasure          upLinkToMeasure,
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
-  const std::string&         syllableStanzaNumber,
+  const std::string&    syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           syllableUpLinkToStanza)

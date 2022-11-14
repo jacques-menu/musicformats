@@ -345,7 +345,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
 //_______________________________________________________________________________
  mfMusicformatsErrorKind convertMsdlStream2lilypondWithOptionsAndArguments (
-  std::string             inputSourceName,
+  std::string        inputSourceName,
   std::istream&                inputStream,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -492,7 +492,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
-  std::string             fileName,
+  std::string        fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)

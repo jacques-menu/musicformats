@@ -100,7 +100,7 @@ msdlKeywordKind msdlKeywordKindFromTokenKind (
 
 msdlKeywordKind msdlKeywordKindFromString (
   msdlKeywordsLanguageKind languageKind,
-  const std::string&            theString);
+  const std::string&       theString);
 
 std::string existingKeywordsInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,

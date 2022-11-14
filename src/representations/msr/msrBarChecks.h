@@ -29,14 +29,14 @@ class EXP msrBarCheck : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrBarCheck> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrBarCheck> createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
-                            int           inputLineNumber,
-                            S_msrMeasure  upLinkToMeasure,
+                            int                inputLineNumber,
+                            S_msrMeasure&      upLinkToMeasure,
                             const std::string& nextBarOriginalNumber,
-                            int           nextBarPuristNumber);
+                            int                nextBarPuristNumber);
 
   protected:
 
@@ -44,14 +44,14 @@ class EXP msrBarCheck : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrBarCheck (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int           inputLineNumber,
+                            S_msrMeasure& upLinkToMeasure);
 
                           msrBarCheck (
-                            int           inputLineNumber,
-                            S_msrMeasure  upLinkToMeasure,
+                            int                inputLineNumber,
+                            S_msrMeasure&      upLinkToMeasure,
                             const std::string& nextBarOriginalNumber,
-                            int           nextBarPuristNumber);
+                            int                nextBarPuristNumber);
 
     virtual               ~msrBarCheck ();
 

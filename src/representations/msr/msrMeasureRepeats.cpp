@@ -94,7 +94,7 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
 void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
   int                  inputLineNumber,
   S_msrMeasureRepeat  measureRepeat,
-  std::string               context)
+  std::string          context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
@@ -119,7 +119,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
 void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
   int               inputLineNumber,
   S_msrVoiceElement voiceElement,
-  std::string            context)
+  std::string       context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {

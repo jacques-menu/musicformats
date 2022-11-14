@@ -168,7 +168,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
   int                   inputLineNumber,
   S_msrMultipleFullBarRests multipleFullBarRests,
-  const std::string&         context)
+  const std::string&    context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
@@ -624,7 +624,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
   int                   inputLineNumber,
   S_msrMultipleFullBarRests multipleFullBarRests,
-  const std::string&         context)
+  const std::string&    context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
@@ -1451,7 +1451,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 void msrRepeat::appendMultipleFullBarRestsToRepeat (
   int                   inputLineNumber,
   S_msrMultipleFullBarRests multipleFullBarRests,
-  const std::string&         context)
+  const std::string&    context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {

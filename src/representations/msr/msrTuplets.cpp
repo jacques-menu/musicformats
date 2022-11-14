@@ -41,8 +41,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
-  S_msrMeasure            upLinkToMeasure,
-  const std::string&           tupletMeasureNumber,
+  S_msrMeasure&           upLinkToMeasure,
+  const std::string&      tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
@@ -69,10 +69,37 @@ S_msrTuplet msrTuplet::create (
   return o;
 }
 
+S_msrTuplet msrTuplet::create (
+  int                     inputLineNumber,
+  const std::string&      tupletMeasureNumber,
+  int                     tupletNumber,
+  msrTupletBracketKind    tupletBracketKind,
+  msrTupletLineShapeKind  tupletLineShapeKind,
+  msrTupletShowNumberKind tupletShowNumberKind,
+  msrTupletShowTypeKind   tupletShowTypeKind,
+  msrTupletFactor         tupletFactor,
+  const Rational&         memberNotesSoundingWholeNotes,
+  const Rational&         memberNotesDisplayWholeNotes)
+{
+  return
+    msrTuplet::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when tuplet is appended to a measure
+      tupletMeasureNumber,
+      tupletNumber,
+      tupletBracketKind,
+      tupletLineShapeKind,
+      tupletShowNumberKind,
+      tupletShowTypeKind,
+      tupletFactor,
+      memberNotesSoundingWholeNotes,
+      memberNotesDisplayWholeNotes);
+}
+
 msrTuplet::msrTuplet (
   int                     inputLineNumber,
-  S_msrMeasure            upLinkToMeasure,
-  const std::string&           tupletMeasureNumber,
+  S_msrMeasure&           upLinkToMeasure,
+  const std::string&      tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
@@ -167,40 +194,6 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   return newbornClone;
 }
 
-// void msrTuplet::setTupletMeasurePosition (
-//   const S_msrMeasure measure,
-//   const Rational&    measurePosition,
-//   const std::string&      context)
-// {
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-//     gLogStream <<
-//       "Setting tuplet's position in measure of " << asString () <<
-//       " to " <<
-//       measurePosition <<
-//       " (was " <<
-//       fMeasureElementMeasurePosition <<
-//       ") in measure " <<
-//       measure->asShortString () <<
-//       " (measureElementMeasureNumber: " <<
-//       fetchMeasureElementMeasureNumber () <<
-//       "), context: \"" <<
-//       context <<
-//       "\"" <<
-//       std::endl;
-//   }
-// #endif
-//
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_NO_POSITION,
-//     "measurePosition == msrMoment::K_NO_POSITION");
-//
-//   // set time signature's position in measure
-//   fMeasureElementMeasurePosition = measurePosition;
-// }
-
 S_msrMeasure msrTuplet::fetchMeasureElementUpLinkToMeasure () const
 {
   S_msrMeasure result;
@@ -227,7 +220,7 @@ S_msrMeasure msrTuplet::fetchMeasureElementUpLinkToMeasure () const
 
 // uplink to tuplet
 void msrTuplet::setMeasureElementUpLinkToMeasure (
-  S_msrMeasure measure)
+  S_msrMeasure& measure)
 {
   // sanity check
   mfAssert (
@@ -659,7 +652,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 }
 
 Rational msrTuplet::setTupletMembersMeasurePositions (
-  S_msrMeasure    measure,
+  S_msrMeasure&   measure,
   const Rational& measurePosition)
   // returns the position in measure after the tuplet
 {

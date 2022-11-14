@@ -30,11 +30,11 @@ class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msr2lpsrScoreOutputKindAtom> create (
-                            const std::string&        longName,
-                            const std::string&        shortName,
-                            const std::string&        description,
-                            const std::string&        valueSpecification,
-                            const std::string&        variableName,
+                            const std::string&   longName,
+                            const std::string&   shortName,
+                            const std::string&   description,
+                            const std::string&   valueSpecification,
+                            const std::string&   variableName,
                             lpsrScoreOutputKind& lpsrScoreOutputKindVariable);
 
   protected:
@@ -43,11 +43,11 @@ class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msr2lpsrScoreOutputKindAtom (
-                            const std::string&        longName,
-                            const std::string&        shortName,
-                            const std::string&        description,
-                            const std::string&        valueSpecification,
-                            const std::string&        variableName,
+                            const std::string&   longName,
+                            const std::string&   shortName,
+                            const std::string&   description,
+                            const std::string&   valueSpecification,
+                            const std::string&   variableName,
                             lpsrScoreOutputKind& lpsrScoreOutputKindVariable);
 
     virtual               ~msr2lpsrScoreOutputKindAtom ();

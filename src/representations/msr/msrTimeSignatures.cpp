@@ -439,10 +439,10 @@ std::ostream& operator << (std::ostream& os, const S_msrTimeSignatureItem& elt)
 
 //______________________________________________________________________________
 S_msrTimeSignature msrTimeSignature::create (
-  int           inputLineNumber,
-  S_msrMeasure  upLinkToMeasure,
+  int            inputLineNumber,
+  S_msrMeasure&  upLinkToMeasure,
   msrTimeSignatureSymbolKind
-                timeSignatureSymbolKind)
+                 timeSignatureSymbolKind)
 {
   msrTimeSignature* o =
     new msrTimeSignature (
@@ -453,14 +453,26 @@ S_msrTimeSignature msrTimeSignature::create (
   return o;
 }
 
+S_msrTimeSignature msrTimeSignature::create (
+  int            inputLineNumber,
+  msrTimeSignatureSymbolKind
+                 timeSignatureSymbolKind)
+{
+  return
+    msrTimeSignature::create (
+      inputLineNumber,
+      nullptr, // upLinkToMeasure, will be set when time signagure is appended to a measure
+      timeSignatureSymbolKind);
+}
+
 msrTimeSignature::msrTimeSignature (
   int           inputLineNumber,
-  S_msrMeasure  upLinkToMeasure,
+  S_msrMeasure& upLinkToMeasure,
   msrTimeSignatureSymbolKind
                 timeSignatureSymbolKind)
     : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+      inputLineNumber,
+      upLinkToMeasure)
 {
   fTimeSignatureSymbolKind = timeSignatureSymbolKind;
 
@@ -954,20 +966,6 @@ msrTimeSignature::~msrTimeSignature ()
 {}
 
 void msrTimeSignature::setMeasureElementMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const std::string& context)
-{
-  setTimeSignatureMeasurePosition (
-    measure,
-    measurePosition,
-    context);
-}
-
-void msrTimeSignature::setTimeSignatureMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {

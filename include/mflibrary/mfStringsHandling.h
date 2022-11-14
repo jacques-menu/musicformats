@@ -212,7 +212,7 @@ typedef std::vector<std::string> mfStringsVector;
 
 void mfDisplayStringsVector (
   const mfStringsVector& stringsVector,
-  const std::string&          title,
+  const std::string&     title,
   std::ostream&               os);
 
 //_______________________________________________________________________________
@@ -369,7 +369,7 @@ void mfDisplayStringSet (
 
 //______________________________________________________________________________
 Bool mfFetchValueFromStringToStringMap (
-  const std::string&         theKey,
+  const std::string&    theKey,
   const std::map<std::string, std::string>& stringToStringMap,
   std::string&                    theValue);
 
@@ -377,25 +377,25 @@ std::string mfStringToStringMapAsString (
   const std::map<std::string, std::string>& stringToStringMap);
 
 void mfDisplayStringToStringMap (
-  const std::string&         title,
+  const std::string&    title,
   const std::map<std::string, std::string>& stringToStringMap,
   std::ostream&                   os);
 
 //______________________________________________________________________________
 Bool mfKeyIsInStringToStringMultiMap (
-  const std::string&              theKey,
+  const std::string&         theKey,
   const std::multimap<std::string, std::string>& stringToStringMultiMap);
 
 Bool mfKeyValuePairIsInStringToStringMultiMap (
-  const std::string&              theKey,
+  const std::string&         theKey,
   const std::multimap<std::string, std::string>& stringToStringMultiMap,
-  const std::string&              theValue);
+  const std::string&         theValue);
 
 std::string mfStringToStringMultiMapAsString (
   const std::multimap<std::string, std::string>& stringToStringMultiMap);
 
 void mfDisplayStringToStringMultiMap (
-  const std::string&              title,
+  const std::string&         title,
   const std::multimap<std::string, std::string>& stringToStringMultiMap,
   std::ostream&                        os);
 

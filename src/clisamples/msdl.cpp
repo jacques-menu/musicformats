@@ -242,7 +242,7 @@ mfMusicformatsErrorKind generateCodeFromStandardInput (
 }
 
 mfMusicformatsErrorKind generateCodeFromAFile (
-  std::string              inputFileName,
+  std::string         inputFileName,
   S_oahHandler        handler,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {

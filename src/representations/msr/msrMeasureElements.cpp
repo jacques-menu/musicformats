@@ -105,9 +105,9 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
 }
 
 void msrMeasureElement::setMeasureElementMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const std::string& context)
+  const S_msrMeasure& measure,
+  const Rational&     measurePosition,
+  const std::string&  context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {

@@ -483,7 +483,7 @@ class EXP mfcMultiComponent : public mfcComponent
     // set and get
     // ------------------------------------------------------
 
-    S_mfcOahComponent        getOahComponent () const
+    S_mfcOahComponent     getOahComponent () const
                               { return fOahComponent; }
 
     const std::list<S_mfcRepresentationComponent>&
@@ -544,7 +544,7 @@ class EXP mfcMultiComponent : public mfcComponent
     // protected fields
     // ------------------------------------------------------
 
-    S_mfcOahComponent        fOahComponent;
+    S_mfcOahComponent     fOahComponent;
 
     std::list<S_mfcRepresentationComponent>
                           fRepresentationComponentsList;

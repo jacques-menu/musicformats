@@ -102,6 +102,7 @@
 #include "msrSlashes.h"
 
 #include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 #include "msrMeasuresEnumTypes.h"
 #include "msrMeasures.h"
 

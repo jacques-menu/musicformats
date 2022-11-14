@@ -35,7 +35,7 @@ class EXP oahRegularHandler : public oahHandler
     // ------------------------------------------------------
 
     static SMARTP<oahRegularHandler> create (
-                            std::string            serviceName,
+                            std::string       serviceName,
                             const std::string&     handlerHeader,
                             S_oahHandler      insiderOahHandler);
 */
@@ -46,7 +46,7 @@ class EXP oahRegularHandler : public oahHandler
     // ------------------------------------------------------
 
                           oahRegularHandler (
-                            std::string            serviceName,
+                            std::string       serviceName,
                             const std::string&     handlerHeader,
                             S_oahHandler      insiderOahHandler);
 

@@ -307,7 +307,8 @@ class EXP msr2bsrTranslator :
 
     S_msrHarmony              fCurrentHarmonyClone;
 
-    std::list<S_msrHarmony>        fPendingHarmoniesList;
+    std::list<S_msrHarmony>
+                              fPendingHarmoniesList;
 
 
     // frames
