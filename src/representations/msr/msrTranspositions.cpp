@@ -34,8 +34,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrTransposition msrTransposition::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   int           transposeDiatonic,
   int           transposeChromatic,
   int           transposeOctaveChange,
@@ -63,7 +63,7 @@ S_msrTransposition msrTransposition::create (
   return
     msrTransposition::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when transposition is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       transposeDiatonic,
       transposeChromatic,
       transposeOctaveChange,
@@ -71,8 +71,8 @@ S_msrTransposition msrTransposition::create (
 }
 
 msrTransposition::msrTransposition (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   int           transposeDiatonic,
   int           transposeChromatic,
   int           transposeOctaveChange,

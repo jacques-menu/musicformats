@@ -665,8 +665,8 @@ class EXP msrPrintLayout : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrPrintLayout> create (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrPrintLayout> create (
                             int           inputLineNumber);
@@ -677,8 +677,8 @@ class EXP msrPrintLayout : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrPrintLayout (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrPrintLayout ();
 

@@ -33,8 +33,8 @@ class EXP msrTransposition : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrTransposition> create (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             int           transposeDiatonic,
                             int           transposeChromatic,
                             int           transposeOctaveChange,
@@ -53,8 +53,8 @@ class EXP msrTransposition : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrTransposition (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             int           transposeDiatonic,
                             int           transposeChromatic,
                             int           transposeOctaveChange,

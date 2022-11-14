@@ -22,7 +22,7 @@
 
 #include "mfStringsHandling.h"
 
-// #include "msrMeasures.h"
+#include "msrMeasures.h"
 
 #include "msrBarLines.h"
 
@@ -37,7 +37,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrBarLine msrBarLine::create (
   int                           inputLineNumber,
-  S_msrMeasure&                 upLinkToMeasure,
+  const S_msrMeasure&           upLinkToMeasure,
   msrBarLineLocationKind        barLineLocationKind,
   msrBarLineStyleKind           barLineStyleKind,
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
@@ -83,7 +83,7 @@ S_msrBarLine msrBarLine::create (
   return
     msrBarLine::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when barline is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       barLineLocationKind,
       barLineStyleKind,
       barLineRepeatDirectionKind,
@@ -98,12 +98,12 @@ S_msrBarLine msrBarLine::create (
 
 msrBarLine::msrBarLine (
   int                           inputLineNumber,
-  S_msrMeasure&                 upLinkToMeasure,
+  const S_msrMeasure&           upLinkToMeasure,
   msrBarLineLocationKind        barLineLocationKind,
   msrBarLineStyleKind           barLineStyleKind,
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
   msrBarLineEndingTypeKind      barLineEndingTypeKind,
-  const std::string&       endingNumber,
+  const std::string&            endingNumber,
   int                           barLineTimes,
   msrBarLineCategoryKind        barLineCategoryKind,
   msrBarLineHasSegnoKind        barLineHasSegnoKind,
@@ -142,8 +142,8 @@ msrBarLine::~msrBarLine ()
 {}
 
 S_msrBarLine msrBarLine::createFinalBarLine (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   return
     msrBarLine::create (
@@ -162,8 +162,8 @@ S_msrBarLine msrBarLine::createFinalBarLine (
 }
 
 S_msrBarLine msrBarLine::createDoubleBarLine (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   return
     msrBarLine::create (

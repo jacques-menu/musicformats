@@ -40,8 +40,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrMeasureElementLambda::msrMeasureElementLambda (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (inputLineNumber)
 //       fMeasureElementMeasureMoment (
 //         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),

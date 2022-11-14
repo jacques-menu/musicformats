@@ -688,7 +688,7 @@ S_msrNote msrNote::createNoteNewbornClone (
     newbornClone =
       msrNote::create (
         fInputLineNumber,
-        nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
         fetchMeasureElementMeasureNumber (),
 
@@ -892,7 +892,7 @@ S_msrNote msrNote::createNoteDeepClone (
     noteDeepClone =
       msrNote::create (
         fInputLineNumber,
-        nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
         fetchMeasureElementMeasureNumber (),
 
@@ -1379,7 +1379,7 @@ S_msrNote msrNote::createRestNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1430,7 +1430,7 @@ S_msrNote msrNote::createSkipNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1481,7 +1481,7 @@ S_msrNote msrNote::createGraceSkipNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1534,7 +1534,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1587,7 +1587,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1641,7 +1641,7 @@ S_msrNote msrNote::createRegularNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -2154,7 +2154,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       K_NO_MEASURE_NUMBER, // JMI ???
 
@@ -2201,7 +2201,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 }
 
 // //________________________________________________________________________
-// void msrNote::setNoteMeasurePosition (
+// void msrNote::setMeasureElementMeasurePosition (
 //   const S_msrMeasure measure,
 //   const Rational&    measurePosition,
 //   const std::string&      context)
@@ -2279,10 +2279,10 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //     for (S_msrHarmony harmony : fNoteHarmoniesList) {
 //       // set the harmony position in measure, taking it's offset into account
 //       harmony->
-//         setHarmonyMeasurePosition (
+//         setMeasureElementMeasurePosition (
 //           measure,
 //           measurePosition,
-//           "msrNote::setNoteMeasurePosition()");
+//           "msrNote::setMeasureElementMeasurePosition()");
 //     } // for
 //   }
 //
@@ -2295,7 +2295,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //         setFiguredBassMeasurePosition (
 //           measure,
 //           measurePosition,
-//           "msrNote::setNoteMeasurePosition()");
+//           "msrNote::setMeasureElementMeasurePosition()");
 //     } // for
 //   }
 //
@@ -2307,7 +2307,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //         setDalSegnoMeasurePosition (
 //           measure,
 //           measurePosition,
-//           "msrNote::setNoteMeasurePosition()");
+//           "msrNote::setMeasureElementMeasurePosition()");
 //     } // for
 //   }
 // }

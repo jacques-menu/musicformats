@@ -38,8 +38,8 @@ class EXP msrSegno : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrSegno> create (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             int           staffNumber);
 
     static SMARTP<msrSegno> create (
@@ -52,8 +52,8 @@ class EXP msrSegno : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrSegno (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             int           staffNumber);
 
     virtual               ~msrSegno ();
@@ -110,7 +110,7 @@ class EXP msrDalSegno : public msrMeasureElementLambda
 
     static SMARTP<msrDalSegno> create (
                             int                inputLineNumber,
-                            S_msrMeasure&      upLinkToMeasure,
+                            const S_msrMeasure& upLinkToMeasure,
                             msrDalSegnoKind    dalSegnoKind,
                             const std::string& dalSegnoString,
                             int                staffNumber);
@@ -128,7 +128,7 @@ class EXP msrDalSegno : public msrMeasureElementLambda
 
                           msrDalSegno (
                             int                inputLineNumber,
-                            S_msrMeasure&      upLinkToMeasure,
+                            const S_msrMeasure& upLinkToMeasure,
                             msrDalSegnoKind    dalSegnoKind,
                             const std::string& dalSegnoString,
                             int                staffNumber);

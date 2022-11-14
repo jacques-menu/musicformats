@@ -119,7 +119,7 @@ class EXP msrTempoTuplet : public msrElement
                             int                          tempoTupletNumber,
                             msrTempoTupletBracketKind    tempoTupletBracketKind,
                             msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
-                            msrTupletFactor&             tempoTupletFactor,
+                            msrTupletFactor              tempoTupletFactor,
                             const Rational&              memberNotesDisplayWholeNotes);
 
   protected:
@@ -132,7 +132,7 @@ class EXP msrTempoTuplet : public msrElement
                             int                          tempoTupletNumber,
                             msrTempoTupletBracketKind    tempoTupletBracketKind,
                             msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
-                            msrTupletFactor&             tempoTupletFactor,
+                            msrTupletFactor              tempoTupletFactor,
                             const Rational&              memberNotesDisplayWholeNotes);
 
     virtual               ~msrTempoTuplet ();

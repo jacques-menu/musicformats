@@ -5991,18 +5991,15 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
     case msrTempoTupletTypeKind::kTempoTupletTypeStart:
     	{
 				// create metronome tuplet
-				msrTupletFactor
-					tempoTupletFactor (
-						fCurrentMetronomeNoteActualNotes,
-						fCurrentMetronomeNoteNormalNotes);
-
 				fCurrentMetronomeTuplet =
 					msrTempoTuplet::create (
 						inputLineNumber,
 						fCurrentTempoTupletNumber,
 						fCurrentTempoTupletBracketKind,
 						fCurrentTempoTupletShowNumberKind,
-						tempoTupletFactor,
+						msrTupletFactor (
+							fCurrentMetronomeNoteActualNotes,
+							fCurrentMetronomeNoteNormalNotes),
 						fCurrentMetronomeNoteWholeNotesFromMetronomeType);
 
 				// register the metronome tuplet
@@ -8493,11 +8490,6 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 #endif
 
     // create a syllable
-    msrTupletFactor
-    	syllableTupletFactor (
-				fCurrentNoteActualNotes,
-				fCurrentNoteNormalNotes);
-
     S_msrSyllable
       syllable =
         msrSyllable::create (
@@ -8506,7 +8498,9 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
           fCurrentSyllableExtendKind,
           fCurrentStanzaNumber,
           fCurrentNoteSoundingWholeNotesFromDuration,
-          syllableTupletFactor,
+					msrTupletFactor (
+						fCurrentNoteActualNotes,
+						fCurrentNoteNormalNotes),
           stanza);
 
     // append the lyric texts to the syllable
@@ -18404,11 +18398,6 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
     memberNotesDisplayWholeNotes =
       firstNote->getNoteDisplayWholeNotes ();
 
-	msrTupletFactor
-		tupletTupletFactor (
-			fCurrentNoteActualNotes,
-			fCurrentNoteNormalNotes);
-
   S_msrTuplet
     tuplet =
       msrTuplet::create (
@@ -18419,7 +18408,9 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
         fCurrentTupletLineShapeKind,
         fCurrentTupletShowNumberKind,
         fCurrentTupletShowTypeKind,
-        tupletTupletFactor,
+				msrTupletFactor (
+					fCurrentNoteActualNotes,
+					fCurrentNoteNormalNotes),
         memberNotesSoundingWholeNotes,
         memberNotesDisplayWholeNotes);
 
@@ -21028,7 +21019,7 @@ S_msrNote mxsr2msrTranslator::createNote (
     newNote =
       msrNote::create (
         inputLineNumber,
-        nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
         fCurrentMeasureNumber,
 
@@ -25182,7 +25173,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       harmony =
         msrHarmony::create (
           fCurrentHarmonyInputLineNumber,
-	        nullptr, // will be set when harmony is appended to a measure JMI v0.9.66 PIM
+		      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
           fCurrentHarmonyRootQuarterTonesPitchKind,
 
@@ -25792,10 +25783,6 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
   // if the sounding whole notes is 0/1 (no <duration /> was found), JMI ???
   // it will be set to the next note's sounding whole notes later
 
-  msrTupletFactor
-  	figuredBassTupletFactor (
-  		1, 1); // will be set upon next note handling
-
   S_msrFiguredBass
     figuredBass =
       msrFiguredBass::create (
@@ -25803,7 +25790,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
         fCurrentFiguredBassSoundingWholeNotes,
         fCurrentFiguredBassDisplayWholeNotes,
         fCurrentFiguredBassParenthesesKind,
-        figuredBassTupletFactor);
+				msrTupletFactor (1, 1)); // will be set upon next note handling
 
   // attach pending figures to the figured bass
   if (! fPendingFiguredBassFiguresList.size ()) {

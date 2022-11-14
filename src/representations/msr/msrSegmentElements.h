@@ -69,10 +69,6 @@ class EXP msrSegmentElement : public msrElement
 //     std::string           getSegmentElementMeasureNumber () const
 //                               { return fSegmentElementMeasureNumber; }
 //
-//     void                  setSegmentElementMeasurePosition (
-//                             const Rational& measurePosition,
-//                             const std::string&   context); // v0.9.66 PIM
-//
 //     Rational              getSegmentElementMeasurePosition () const
 //                               { return fSegmentElementMeasurePosition; }
 //

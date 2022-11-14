@@ -209,8 +209,8 @@ class EXP msrTimeSignature : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrTimeSignature (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure,
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
                             msrTimeSignatureSymbolKind
                                           timeSignatureSymbolKind);
 

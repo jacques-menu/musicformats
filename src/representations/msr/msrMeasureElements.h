@@ -144,8 +144,8 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
     void                  doSetMeasureElementSoundingWholeNotes (
-                            const Rational& wholeNotes,
-                            const std::string&   context);
+                            const Rational&    wholeNotes,
+                            const std::string& context);
 
   protected:
 
@@ -162,6 +162,9 @@ class EXP msrMeasureElement : public msrElement
 };
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt);
+
+//______________________________________________________________________________
+extern S_msrMeasure gNullMeasureSmartPointer;
 
 
 }

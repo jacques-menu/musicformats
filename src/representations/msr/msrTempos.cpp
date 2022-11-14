@@ -211,7 +211,7 @@ S_msrTempoTuplet msrTempoTuplet::create (
   int                          tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
-  msrTupletFactor&             tempoTupletFactor,
+  msrTupletFactor              tempoTupletFactor,
   const Rational&              memberNotesDisplayWholeNotes)
 {
   msrTempoTuplet* o =
@@ -231,7 +231,7 @@ msrTempoTuplet::msrTempoTuplet (
   int                          tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
-  msrTupletFactor&             tempoTupletFactor,
+  msrTupletFactor              tempoTupletFactor,
   const Rational&              memberNotesDisplayWholeNotes)
     : msrElement (inputLineNumber)
 {
@@ -1022,7 +1022,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
   return
     msrTempo::createTempoWordsOnly (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tempoWords,
       tempoParenthesizedKind,
       tempoPlacementKind);
@@ -1060,7 +1060,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
   return
     msrTempo::createTempoPerMinute (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when tempo is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tempoBeatUnit,
       tempoPerMinute,
       tempoParenthesizedKind,
@@ -1099,7 +1099,7 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   return
      msrTempo::createTempoBeatUnitEquivalent (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tempoBeatUnit,
       tempoEquivalentBeatUnit,
       tempoParenthesizedKind,
@@ -1147,7 +1147,7 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
   return
     msrTempo::createTempoNotesRelationship (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when tempo notes relationship is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tempoNotesRelationshipLeftElements,
       tempoNotesRelationshipKind,
       tempoNotesRelationshipRightElements,

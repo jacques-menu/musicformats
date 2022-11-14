@@ -203,7 +203,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //     newbornClone =
 //       msrTuplet::create (
 //         fInputLineNumber,
-//         nullptr, // will be set when tuplet is appended to a measure JMI v0.9.66 PIM
+//         gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 //         fetchMeasureElementMeasureNumber (),
 //         fTupletNumber,
 //         fTupletBracketKind,

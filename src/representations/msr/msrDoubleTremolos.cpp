@@ -101,13 +101,11 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
   return
     msrDoubleTremolo::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       doubleTremoloKind,
       doubleDoubleTremoloTypeKind,
       doubleTremoloMarksNumber,
       doubleTremoloPlacementKind);
-  assert (o != nullptr);
-  return o;
 }
 
 msrDoubleTremolo::msrDoubleTremolo (
@@ -158,7 +156,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
     newbornClone =
       msrDoubleTremolo::create (
         fInputLineNumber,
-        nullptr, // will be set when double tremolo is appended to a measure JMI v0.9.66 PIM
+	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fDoubleTremoloKind,
         fDoubleDoubleTremoloTypeKind,
         fDoubleTremoloMarksNumber,
@@ -187,52 +185,52 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 msrDoubleTremolo::~msrDoubleTremolo ()
 {}
 
-void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
-  const S_msrMeasure& measure,
-  const Rational&     measurePosition,
-  const std::string&  context)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    ++gIndenter;
+// void msrDoubleTremolo::setMeasureElementMeasurePosition (
+//   const S_msrMeasure& measure,
+//   const Rational&     measurePosition,
+//   const std::string&  context)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//     ++gIndenter;
+//
+//     gLogStream <<
+//       "Setting measure element position in measure of double tremolo " <<
+//       asString () <<
+//       " to " <<
+//       measurePosition <<
+//       " (was " <<
+//       fMeasureElementMeasurePosition <<
+//       ") in measure " <<
+//       measure->asShortString () <<
+//       " (measureElementMeasureNumber: " <<
+//       fetchMeasureElementMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"" <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measurePosition != msrMoment::K_NO_POSITION,
+//     "measurePosition == msrMoment::K_NO_POSITION");
+//
+//   // set double tremolo's position in measure
+//   fMeasureElementMeasurePosition = measurePosition;
+// }
 
-    gLogStream <<
-      "Setting measure element position in measure of double tremolo " <<
-      asString () <<
-      " to " <<
-      measurePosition <<
-      " (was " <<
-      fMeasureElementMeasurePosition <<
-      ") in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
-
-  // set double tremolo's position in measure
-  fMeasureElementMeasurePosition = measurePosition;
-}
-
-// void msrDoubleTremolo::setDoubleTremoloMeasurePosition ( ??? JMI v0.9.66
+// void msrDoubleTremolo::setMeasureElementMeasurePosition ( ??? JMI v0.9.66
 //   const Rational& measurePosition)
 // {
 //   std::string context =
-//     "setDoubleTremoloMeasurePosition()";
+//     "setMeasureElementMeasurePosition()";
 //
-//   setDoubleTremoloMeasurePosition ( // JMI v0.9.66 CLEAN THAT!!!
+//   setMeasureElementMeasurePosition ( // JMI v0.9.66 CLEAN THAT!!!
 //     measurePosition,
 //     context);
 //

@@ -293,14 +293,14 @@ S_msrKey msrKey::createTraditional (
   return
     msrKey::createTraditional (
       inputLineNumber,
-      nullptr, // will be set when key is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       keyTonicQuarterTonesPitchKind, modeKind,
       keyCancel);
 }
 
 S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrKey* o =
     new msrKey (
@@ -317,7 +317,7 @@ S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
   return
     msrKey::createHumdrumScot
       inputLineNumber,
-      nullptr); // upLinkToMeasure, will be set when key is appended to a measure
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrKey::msrKey ( // for traditional keys
@@ -390,8 +390,8 @@ msrKey::msrKey ( // for traditional keys
 }
 
 msrKey::msrKey ( // for Humdrum/Scot keys
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
@@ -626,7 +626,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
   result =
     msrKey::createTraditional (
       __LINE__,
-      nullptr, // will be set when double tremolo is appended to a measure JMI v0.9.66 PIM
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       keyTonicPitchKind,
       keyModeKind,
       0); // keyCancel JMI

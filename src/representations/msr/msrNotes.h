@@ -231,17 +231,6 @@ class EXP msrNote : public msrTupletElement
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
 //                             const std::string& context) override
-//                               {
-//                                 setNoteMeasurePosition (
-//                                   measure,
-//                                   measurePosition,
-//                                   context);
-//                               }
-//
-//     void                  setNoteMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string& context);
 
     // note kind
 

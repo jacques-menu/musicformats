@@ -142,18 +142,7 @@ class EXP msrSyllable : public msrMeasureElementLambda
 //     void                  setMeasureElementMeasurePosition (
 //                             const S_msrMeasure& measure,
 //                             const Rational&    measurePosition,
-//                             const std::string& context) override
-//                               {
-//                                 setSyllableMeasurePosition (
-//                                   measure,
-//                                   measurePosition,
-//                                   context);
-//                               }
-//
-//     void                  setSyllableMeasurePosition (
-//                             const S_msrMeasure& measure,
-//                             const Rational&    measurePosition,
-//                             const std::string& context);
+//                             const std::string& context) override;
 
     // syllable kind
     msrSyllableKind       getSyllableKind () const

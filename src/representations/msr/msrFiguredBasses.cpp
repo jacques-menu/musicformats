@@ -37,7 +37,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrBassFigure msrBassFigure::create (
   int                     inputLineNumber,
-  S_msrPart               figureUpLinkToPart,
+  S_msrPart&              figureUpLinkToPart,
   msrBassFigurePrefixKind figurePrefixKind,
   int                     figureNumber,
   msrBassFigureSuffixKind figureSuffixKind)
@@ -56,7 +56,7 @@ S_msrBassFigure msrBassFigure::create (
 
 msrBassFigure::msrBassFigure (
   int                     inputLineNumber,
-  S_msrPart               figureUpLinkToPart,
+  S_msrPart&              figureUpLinkToPart,
   msrBassFigurePrefixKind figurePrefixKind,
   int                     figureNumber,
   msrBassFigureSuffixKind figureSuffixKind)
@@ -91,7 +91,7 @@ msrBassFigure::~msrBassFigure ()
 {}
 
 S_msrBassFigure msrBassFigure::createFigureNewbornClone (
-  S_msrPart containingPart)
+  S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -122,7 +122,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
 }
 
 S_msrBassFigure msrBassFigure::createFigureDeepClone (
-  S_msrPart containingPart)
+  S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -332,8 +332,8 @@ std::ostream& operator << (std::ostream& os, const S_msrBassFigure& elt)
 
 //______________________________________________________________________________
 S_msrFiguredBass msrFiguredBass::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrFiguredBass* o =
     new msrFiguredBass (
@@ -349,26 +349,22 @@ S_msrFiguredBass msrFiguredBass::create (
 }
 
 S_msrFiguredBass msrFiguredBass::create (
-  int           inputLineNumber)
+  int                 inputLineNumber)
 {
   return
      msrFiguredBass::create (
-      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
-      upLinkToMeasure,
-      Rational (0, 1),           // figuredBassSoundingWholeNotes
-      Rational (0, 1),           // figuredBassDisplayWholeNotes
-      msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo,
-      msrTupletFactor (1, 1));
+      inputLineNumber,
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 S_msrFiguredBass msrFiguredBass::create (
-  int             inputLineNumber,
-  S_msrMeasure&   upLinkToMeasure,
-  const Rational& figuredBassSoundingWholeNotes,
-  const Rational& figuredBassDisplayWholeNotes,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
+  const Rational&     figuredBassSoundingWholeNotes,
+  const Rational&     figuredBassDisplayWholeNotes,
   msrFiguredBassParenthesesKind
-                  figuredBassParenthesesKind,
-  msrTupletFactor figuredBassTupletFactor)
+                      figuredBassParenthesesKind,
+  msrTupletFactor     figuredBassTupletFactor)
 {
   msrFiguredBass* o =
     new msrFiguredBass (
@@ -394,7 +390,7 @@ S_msrFiguredBass msrFiguredBass::create (
   return
     msrFiguredBass::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       figuredBassSoundingWholeNotes,
       figuredBassDisplayWholeNotes,
       figuredBassParenthesesKind,
@@ -402,13 +398,13 @@ S_msrFiguredBass msrFiguredBass::create (
 }
 
 msrFiguredBass::msrFiguredBass (
-  int             inputLineNumber,
-  S_msrMeasure&   upLinkToMeasure,
-  const Rational& figuredBassSoundingWholeNotes,
-  const Rational& figuredBassDisplayWholeNotes,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
+  const Rational&     figuredBassSoundingWholeNotes,
+  const Rational&     figuredBassDisplayWholeNotes,
   msrFiguredBassParenthesesKind
-                  figuredBassParenthesesKind,
-  msrTupletFactor figuredBassTupletFactor)
+                      figuredBassParenthesesKind,
+  msrTupletFactor     figuredBassTupletFactor)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure),
@@ -455,7 +451,7 @@ msrFiguredBass::~msrFiguredBass ()
 {}
 
 S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
-  S_msrVoice containingVoice)
+  S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -477,7 +473,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
     newbornClone =
       msrFiguredBass::create (
         fInputLineNumber,
-        nullptr, // will be set when figured bass is appended to a measure JMI v0.9.66 PIM
+	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fMeasureElementSoundingWholeNotes,
         fFiguredBassDisplayWholeNotes,
         fFiguredBassParenthesesKind,
@@ -511,7 +507,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
     figuredBassDeepClone =
       msrFiguredBass::create (
         fInputLineNumber,
-        nullptr, // will be set when figured bass is appended to a measure JMI v0.9.66 PIM
+	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fMeasureElementSoundingWholeNotes,
         fFiguredBassDisplayWholeNotes,
         fFiguredBassParenthesesKind,
@@ -521,7 +517,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 }
 
 void msrFiguredBass::appendFigureToFiguredBass (
-  S_msrBassFigure bassFigure)
+  S_msrBassFigure& bassFigure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
