@@ -55,7 +55,7 @@ S_msrRehearsalMark msrRehearsalMark::create (
   return
     msrRehearsalMark::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when rehearsal mark is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       rehearsalKind,
       rehearsalText,
       rehearsalPlacementKind);

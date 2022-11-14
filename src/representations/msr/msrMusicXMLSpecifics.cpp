@@ -1149,8 +1149,8 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureLayout& elt)
 
 //______________________________________________________________________________
 S_msrPrintLayout msrPrintLayout::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrPrintLayout* o =
     new msrPrintLayout (
@@ -1161,18 +1161,18 @@ S_msrPrintLayout msrPrintLayout::create (
 }
 
 S_msrPrintLayout msrPrintLayout::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   return
     msrPrintLayout::create (
       inputLineNumber,
-      nullptr); // upLinkToMeasure, will be set when clef is appended to a measure
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrPrintLayout::msrPrintLayout (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

@@ -173,6 +173,15 @@ S_msrScordatura msrScordatura::create (
   return o;
 }
 
+S_msrScordatura msrScordatura::create (
+  int          inputLineNumber)
+{
+  return
+    msrScordatura::create (
+      inputLineNumber,
+      upLinkToMeasure);
+}
+
 msrScordatura::msrScordatura (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
@@ -285,8 +294,8 @@ std::ostream& operator << (std::ostream& os, const S_msrScordatura& elt)
 
 //______________________________________________________________________________
 S_msrAccordionRegistration msrAccordionRegistration::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   int           highDotsNumber,
   int           middleDotsNumber,
   int           lowDotsNumber)
@@ -309,15 +318,15 @@ S_msrAccordionRegistration msrAccordionRegistration::create (
   return
     msrAccordionRegistration::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when accordion registration is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       highDotsNumber,
       middleDotsNumber,
       lowDotsNumber);
 }
 
 msrAccordionRegistration::msrAccordionRegistration (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   int           highDotsNumber,
   int           middleDotsNumber,
   int           lowDotsNumber)
@@ -417,8 +426,8 @@ std::ostream& operator << (std::ostream& os, const S_msrAccordionRegistration& e
 
 //______________________________________________________________________________
 S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrHarpPedalsTuning* o =
     new msrHarpPedalsTuning (
@@ -438,11 +447,11 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
 }
 
 msrHarpPedalsTuning::msrHarpPedalsTuning (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
-        nullptr) // upLinkToMeasure, will be set when harp pedals tuning is appended to a measure
+        gNullMeasureSmartPointer) // set later in setMeasureElementUpLinkToMeasure()
 {}
 
 msrHarpPedalsTuning::~msrHarpPedalsTuning ()
@@ -680,7 +689,7 @@ S_msrPedal msrPedal::create (
   return
     msrPedal::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when pedal is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       pedalTypeKind,
       pedalLineKind,
       pedalSignKind);
@@ -872,7 +881,7 @@ S_msrDamp msrDamp::create (
   return
     msrDamp::create (
       inputLineNumber,
-      nullptr); // upLinkToMeasure, will be set when damp is appended to a measure
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
   assert (o != nullptr);
   return o;
 }

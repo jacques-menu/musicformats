@@ -79,11 +79,11 @@ std::ostream& operator << (std::ostream& os, const msrChordInKind& elt)
 
 //______________________________________________________________________________
 S_msrChord msrChord::create (
-  int             inputLineNumber,
-  S_msrMeasure&    upLinkToMeasure,
-  const Rational& chordSoundingWholeNotes,
-  const Rational& chordDisplayWholeNotes,
-  msrDurationKind chordGraphicDurationKind)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
+  const Rational&     chordSoundingWholeNotes,
+  const Rational&     chordDisplayWholeNotes,
+  msrDurationKind     chordGraphicDurationKind)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -129,20 +129,17 @@ S_msrChord msrChord::create (
   return
     msrChord::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       chordSoundingWholeNotes, chordDisplayWholeNotes,
       chordGraphicDurationKind);
-  assert (o != nullptr);
-
-  return o;
 }
 
 msrChord::msrChord (
-  int             inputLineNumber,
-  S_msrMeasure    upLinkToMeasure,
-  const Rational& chordSoundingWholeNotes,
-  const Rational& chordDisplayWholeNotes,
-  msrDurationKind chordGraphicDurationKind)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
+  const Rational&     chordSoundingWholeNotes,
+  const Rational&     chordDisplayWholeNotes,
+  msrDurationKind     chordGraphicDurationKind)
     : msrTupletElement (
         inputLineNumber)
 {
@@ -188,7 +185,7 @@ S_msrChord msrChord::createChordNewbornClone (
     newbornClone =
       msrChord::create (
         fInputLineNumber,
-				nullptr, // will be set when chord is appended to a measure JMI v0.9.66 PIM
+	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fMeasureElementSoundingWholeNotes,
         fChordDisplayWholeNotes,
         fChordGraphicDurationKind);
@@ -478,7 +475,7 @@ void msrChord::setChordMembersMeasurePosition (
 
       // set note's position in measure
 //       note->
-//         setNoteMeasurePosition (
+//         setMeasureElementMeasurePosition (
 //           measure,
 //           measurePosition, // they all share the same one
 //           "chord member");
@@ -495,11 +492,11 @@ void msrChord::setChordMembersMeasurePosition (
   if (fChordDalSegnos.size ()) {
     for (S_msrDalSegno dalSegno : fChordDalSegnos) {
       // set the dal segno position in measure
-      dalSegno->
-        setDalSegnoMeasurePosition (
-          measure,
-          measurePosition,
-          "msrChord::setChordMembersMeasurePosition()");
+//       dalSegno->
+//         setDalSegnoMeasurePosition (
+//           measure,
+//           measurePosition,
+//           "msrChord::setChordMembersMeasurePosition()");
     } // for
   }
 }

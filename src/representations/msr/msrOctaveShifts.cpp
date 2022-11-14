@@ -35,7 +35,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrOctaveShift msrOctaveShift::create (
   int                inputLineNumber,
-  S_msrMeasure&      upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)
 {
@@ -57,14 +57,14 @@ S_msrOctaveShift msrOctaveShift::create (
   return
     msrOctaveShift::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       octaveShiftKind,
       octaveShiftSize);
 }
 
 msrOctaveShift::msrOctaveShift (
   int                inputLineNumber,
-  S_msrMeasure&      upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)
     : msrMeasureElementLambda (

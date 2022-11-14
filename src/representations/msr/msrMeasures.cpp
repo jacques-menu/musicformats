@@ -50,9 +50,9 @@ namespace MusicFormats
 int msrMeasure::gGlobalMeasureDebugNumber = 0;
 
 S_msrMeasure msrMeasure::create (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& measureNumber,
-  S_msrSegment  measureUpLinkToSegment)
+  S_msrSegment&      measureUpLinkToSegment)
 {
   msrMeasure* o =
     new msrMeasure (
@@ -65,9 +65,9 @@ S_msrMeasure msrMeasure::create (
 }
 
 msrMeasure::msrMeasure (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& measureNumber,
-  S_msrSegment  measureUpLinkToSegment)
+  S_msrSegment&      measureUpLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
   // sanity check
@@ -2314,7 +2314,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
   // this can lead to set the position in measure of the harmonies
   // attached to the note
 //   note->
-//     setNoteMeasurePosition (
+//     setMeasureElementMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
 //       "appendNoteOrPaddingToMeasure()");
@@ -2406,7 +2406,7 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure (
 
   // set note's position in measure JMI v0.9.66
 //   note->
-//     setNoteMeasurePosition (
+//     setMeasureElementMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
 //       "accountForTupletMemberNoteDurationInMeasure()");
@@ -2598,7 +2598,7 @@ void msrMeasure::appendDoubleTremoloToMeasure (
 
   // register doubleTremolo measure position in measure
   doubleTremolo->
-    setDoubleTremoloMeasurePosition (
+    setMeasureElementMeasurePosition (
       this,
       fCurrentMeasureWholeNotesDuration,
       "msrMeasure::appendDoubleTremoloToMeasure()");
@@ -2610,7 +2610,7 @@ void msrMeasure::appendDoubleTremoloToMeasure (
 
   // copy measure position to first note, that was created beforehand
   doubleTremolo->
-    setDoubleTremoloMeasurePosition (
+    setMeasureElementMeasurePosition (
       this,
       fCurrentMeasureWholeNotesDuration,
       "msrMeasure::appendDoubleTremoloToMeasure()");
@@ -2776,7 +2776,7 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
 
   // set the harmony's position in measure, right now
 //   harmony->
-//     setHarmonyMeasurePosition (
+//     setMeasureElementMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
 //       "msrMeasure::appendHarmonyToMeasure (S_msrChord chord)");
@@ -2838,7 +2838,7 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
 
   // set the harmony's position in measure NO JMI v0.9.66
 //   harmony->
-//     setHarmonyMeasurePosition (
+//     setMeasureElementMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
 //       "msrMeasure::appendHarmonyToMeasureClone (S_msrChord chord)");
@@ -4383,7 +4383,7 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 
   // set current harmony's element position in measure
 //   currentHarmony->
-//     setHarmonyMeasurePosition (
+//     setMeasureElementMeasurePosition (
 //       this,
 //       measurePositionToPadUpTo,
 //       "first harmony in measure");
@@ -5097,7 +5097,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
     // set its position in measure
 //     skipNote->
-//       setNoteMeasurePosition (
+//       setMeasureElementMeasurePosition (
 //         this,
 //         fCurrentMeasureWholeNotesDuration,
 //         "handleSubsequentFiguredBassInFiguredBassMeasure() 8");
@@ -6857,7 +6857,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //
 //     // set its position in measure
 //     skipNote->
-//       setNoteMeasurePosition (
+//       setMeasureElementMeasurePosition (
 //         this,
 //         fCurrentMeasureWholeNotesDuration,
 //         "handleSubsequentHarmonyInHarmoniesMeasure() 2");

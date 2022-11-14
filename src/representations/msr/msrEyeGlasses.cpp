@@ -34,8 +34,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrEyeGlasses msrEyeGlasses::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrEyeGlasses* o =
     new msrEyeGlasses (
@@ -51,12 +51,12 @@ S_msrEyeGlasses msrEyeGlasses::create (
   return
     msrEyeGlasses::create (
       inputLineNumber,
-      upLinkToMeasure);
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrEyeGlasses::msrEyeGlasses (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

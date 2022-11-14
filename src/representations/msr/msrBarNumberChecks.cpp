@@ -35,7 +35,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrBarNumberCheck msrBarNumberCheck::create (
   int                inputLineNumber,
-  S_msrMeasure&      upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   const std::string& nextBarOriginalNumber,
   int                nextBarPuristNumber)
 {
@@ -51,7 +51,7 @@ S_msrBarNumberCheck msrBarNumberCheck::create (
 
 msrBarNumberCheck::msrBarNumberCheck (
   int                inputLineNumber,
-  S_msrMeasure&      upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   const std::string& nextBarOriginalNumber,
   int                nextBarPuristNumber)
     : msrMeasureElementLambda (

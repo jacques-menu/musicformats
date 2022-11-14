@@ -84,7 +84,7 @@ S_msrTuplet msrTuplet::create (
   return
     msrTuplet::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when tuplet is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tupletMeasureNumber,
       tupletNumber,
       tupletBracketKind,
@@ -166,7 +166,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
     newbornClone =
       msrTuplet::create (
         fInputLineNumber,
-        nullptr, // will be set when tuplet is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fetchMeasureElementMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
@@ -727,7 +727,6 @@ if (false) { // JMI
           measure);
 
       note->
-//         setNoteMeasurePosition (
         setMeasureElementMeasurePosition (
           measure,
           currentPosition,

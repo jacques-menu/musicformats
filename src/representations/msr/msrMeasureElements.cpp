@@ -73,8 +73,8 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
 }
 
 void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
-  const Rational& wholeNotes,
-  const std::string&   context)
+  const Rational&    wholeNotes,
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
@@ -373,6 +373,9 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt)
 
   return os;
 }
+
+//______________________________________________________________________________
+S_msrMeasure gNullMeasureSmartPointer;
 
 
 }

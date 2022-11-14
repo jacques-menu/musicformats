@@ -38,15 +38,15 @@ class EXP msrCoda : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrCoda> create (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure,
-                            int           staffNumber,
-                            msrCodaKind   codaKind);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
+                            int                 staffNumber,
+                            msrCodaKind         codaKind);
 
     static SMARTP<msrCoda> create (
-                            int         inputLineNumber,
-                            int         staffNumber,
-                            msrCodaKind codaKind);
+                            int                 inputLineNumber,
+                            int                 staffNumber,
+                            msrCodaKind         codaKind);
 
   protected:
 
@@ -54,10 +54,10 @@ class EXP msrCoda : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrCoda (
-                            int           inputLineNumber,
-                            S_msrMeasure& upLinkToMeasure,
-                            int           staffNumber,
-                            msrCodaKind   codaKind);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure,
+                            int                 staffNumber,
+                            msrCodaKind         codaKind);
 
     virtual               ~msrCoda ();
 

@@ -4339,7 +4339,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
     newbornClone =
       msrHarmony::create (
         fInputLineNumber,
-        nullptr, // will be set when harmony is appended to a measure JMI v0.9.66 PIM
+	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind,
         fHarmonyKindText,
@@ -4384,7 +4384,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
     harmonyDeepClone =
       msrHarmony::create (
         fInputLineNumber,
-        nullptr, // will be set when harmony is appended to a measure JMI v0.9.66 PIM
+	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind, fHarmonyKindText,
         fHarmonyInversion,
@@ -4442,7 +4442,7 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
   fHarmonyUpLinkToNote = note;
 }
 
-// void msrHarmony::setHarmonyMeasurePosition (
+// void msrHarmony::setMeasureElementMeasurePosition (
 //   const S_msrMeasure measure,
 //   const Rational&    measurePosition,
 //   const std::string&      context)
@@ -4453,7 +4453,7 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//      "setHarmonyMeasurePosition(): measure is null");
+//      "setMeasureElementMeasurePosition(): measure is null");
 //
 //   // the offset can be negative, so we merely add it to measurePosition
 //   // to obtain the harmony's actual measurePosition

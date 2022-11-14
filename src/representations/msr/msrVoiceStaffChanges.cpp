@@ -30,8 +30,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrVoiceStaffChange msrVoiceStaffChange::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   S_msrStaff    staffToChangeTo)
 {
   msrVoiceStaffChange* o =
@@ -50,13 +50,13 @@ S_msrVoiceStaffChange msrVoiceStaffChange::create (
   return
     msrVoiceStaffChange::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       staffToChangeTo);
 }
 
 msrVoiceStaffChange::msrVoiceStaffChange (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   S_msrStaff    staffToChangeTo)
     : msrMeasureElementLambda (
         inputLineNumber,
@@ -84,7 +84,7 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
     newbornClone =
       msrVoiceStaffChange::create (
         fInputLineNumber,
-        nullptr, // will be set when voice staff change is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fStaffToChangeTo);
 
   return newbornClone;

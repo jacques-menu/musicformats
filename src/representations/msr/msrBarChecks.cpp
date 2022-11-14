@@ -34,8 +34,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrBarCheck msrBarCheck::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrBarCheck* o =
     new msrBarCheck (
@@ -45,11 +45,20 @@ S_msrBarCheck msrBarCheck::create (
   return o;
 }
 
+S_msrBarCheck msrBarCheck::create (
+  int                 inputLineNumber)
+{
+  return
+    msrBarCheck::create (
+      inputLineNumber,
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+}
+
 S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
-  int                inputLineNumber,
-  S_msrMeasure&      upLinkToMeasure,
-  const std::string& nextBarOriginalNumber,
-  int                nextBarPuristNumber)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
+  const std::string&  nextBarOriginalNumber,
+  int                 nextBarPuristNumber)
 {
   msrBarCheck* o =
     new msrBarCheck (
@@ -62,8 +71,8 @@ S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber ( // JMI superflous??? 
 }
 
 msrBarCheck::msrBarCheck (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
@@ -78,10 +87,10 @@ msrBarCheck::msrBarCheck (
 }
 
 msrBarCheck::msrBarCheck (
-  int           inputLineNumber,
-  S_msrMeasure  upLinkToMeasure,
+  int                inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   const std::string& nextBarOriginalNumber,
-  int           nextBarPuristNumber)
+  int                nextBarPuristNumber)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

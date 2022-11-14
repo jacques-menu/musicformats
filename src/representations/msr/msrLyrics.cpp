@@ -78,7 +78,7 @@ S_msrSyllable msrSyllable::create (
   return
     msrSyllable::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when clef is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       syllableKind,
       syllableExtendKind,
       syllableStanzaNumber,
@@ -199,7 +199,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
     newbornClone =
       msrSyllable::create (
         fInputLineNumber,
-        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fSyllableKind,
         fSyllableExtendKind,
         fSyllableStanzaNumber,
@@ -250,7 +250,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
     syllableDeepClone =
       msrSyllable::create (
         fInputLineNumber,
-        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fSyllableKind,
         fSyllableExtendKind,
         fSyllableStanzaNumber,
@@ -325,7 +325,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
     puristMeasureNumber;
 }
 
-// void msrSyllable::setSyllableMeasurePosition (
+// void msrSyllable::setMeasureElementMeasurePosition (
 //   const S_msrMeasure measure,
 //   const Rational&    measurePosition,
 //   const std::string&      context)
@@ -1094,7 +1094,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableSkipRestNote,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1133,7 +1133,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableSkipRestNote,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1170,7 +1170,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableMeasureEnd,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1215,7 +1215,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         syllableKind,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1254,7 +1254,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableLineBreak,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1297,7 +1297,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllablePageBreak,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,

@@ -30,7 +30,7 @@ class EXP msrBarNumberCheck : public msrMeasureElementLambda
 
     static SMARTP<msrBarNumberCheck> create (
                             int                inputLineNumber,
-                            S_msrMeasure&      upLinkToMeasure,
+                            const S_msrMeasure& upLinkToMeasure,
                             const std::string& nextBarOriginalNumber,
                             int                nextBarPuristNumber);
 
@@ -41,7 +41,7 @@ class EXP msrBarNumberCheck : public msrMeasureElementLambda
 
                           msrBarNumberCheck (
                             int                inputLineNumber,
-                            S_msrMeasure&      upLinkToMeasure,
+                            const S_msrMeasure& upLinkToMeasure,
                             const std::string& nextBarOriginalNumber,
                             int                nextBarPuristNumber);
 

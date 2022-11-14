@@ -166,7 +166,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt)
 //
 //     // set its position in measure
 //     skipNote->
-//       setNoteMeasurePosition (
+//       setMeasureElementMeasurePosition (
 //         this,
 //         fCurrentMeasureWholeNotesDuration,
 //         "handleSubsequentHarmonyInHarmoniesMeasure() 2");

@@ -63,8 +63,8 @@ std::ostream& operator << (std::ostream& os, const msrDalSegnoKind& elt)
 
 //______________________________________________________________________________
 S_msrSegno msrSegno::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   int           staffNumber)
 {
   msrSegno* o =
@@ -88,12 +88,12 @@ S_msrSegno msrSegno::create (
 }
 
 msrSegno::msrSegno (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   int           staffNumber)
     : msrMeasureElementLambda (
         inputLineNumber,
-        nullptr) // upLinkToMeasure, will be set when segno is appended to a measure
+        gNullMeasureSmartPointer) // set later in setMeasureElementUpLinkToMeasure()
 {
   fStaffNumber = staffNumber;
 }
@@ -180,7 +180,7 @@ std::ostream& operator << (std::ostream& os, const S_msrSegno& elt)
 //______________________________________________________________________________
 S_msrDalSegno msrDalSegno::create (
   int                inputLineNumber,
-  S_msrMeasure&      upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   msrDalSegnoKind    dalSegnoKind,
   const std::string& dalSegnoString,
   int                staffNumber)
@@ -205,7 +205,7 @@ S_msrDalSegno msrDalSegno::create (
   return
     msrDalSegno::create (
       inputLineNumber,
-      nullptr, // upLinkToMeasure, will be set when dal segno is appended to a measure
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       dalSegnoKind,
       dalSegnoString,
       staffNumber);
@@ -214,7 +214,7 @@ S_msrDalSegno msrDalSegno::create (
 msrDalSegno::msrDalSegno (
   int                inputLineNumber,
   msrDalSegnoKind    dalSegnoKind,
-  S_msrMeasure&      upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   const std::string& dalSegnoString,
   int                staffNumber)
     : msrMeasureElementLambda (

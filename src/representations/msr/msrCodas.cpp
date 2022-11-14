@@ -58,10 +58,10 @@ std::ostream& operator << (std::ostream& os, const msrCodaKind& elt)
 
 //______________________________________________________________________________
 S_msrCoda msrCoda::create (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
-  int           staffNumber,
-  msrCodaKind   codaKind)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
+  int                 staffNumber,
+  msrCodaKind         codaKind)
 {
   msrCoda* o =
     new msrCoda (
@@ -74,21 +74,21 @@ S_msrCoda msrCoda::create (
 }
 
 S_msrCoda msrCoda::create (
-  int         inputLineNumber,
-  int         staffNumber,
-  msrCodaKind codaKind)
+  int                 inputLineNumber,
+  int                 staffNumber,
+  msrCodaKind         codaKind)
 {
   return
     msrCoda::create (
       inputLineNumber,
-      upLinkToMeasure,
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       staffNumber,
       codaKind);
 }
 
 msrCoda::msrCoda (
-  int           inputLineNumber,
-  S_msrMeasure& upLinkToMeasure,
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure,
   int           staffNumber,
   msrCodaKind   codaKind)
     : msrMeasureElementLambda (

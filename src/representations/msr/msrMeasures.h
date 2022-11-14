@@ -33,9 +33,9 @@ class EXP msrMeasure : public msrSegmentElement
     // ------------------------------------------------------
 
     static SMARTP<msrMeasure> create (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& measureNumber,
-                            S_msrSegment  measureUpLinkToSegment);
+                            S_msrSegment&      measureUpLinkToSegment);
 
     SMARTP<msrMeasure> createMeasureNewbornClone (
                             S_msrSegment containingSegment);
@@ -53,9 +53,9 @@ class EXP msrMeasure : public msrSegmentElement
     // ------------------------------------------------------
 
                           msrMeasure (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& measureNumber,
-                            S_msrSegment  measureUpLinkToSegment);
+                            S_msrSegment&      measureUpLinkToSegment);
 
   public:
 
