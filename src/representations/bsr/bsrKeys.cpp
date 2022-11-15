@@ -75,7 +75,6 @@ S_bsrKey bsrKey::create (
     new bsrKey (
       inputLineNumber, keyKind, numberOfAlterations);
   assert (o != nullptr);
-
   return o;
 }
 

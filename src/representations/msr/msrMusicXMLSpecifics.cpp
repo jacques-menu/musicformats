@@ -1161,8 +1161,7 @@ S_msrPrintLayout msrPrintLayout::create (
 }
 
 S_msrPrintLayout msrPrintLayout::create (
-  int                 inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber)
 {
   return
     msrPrintLayout::create (

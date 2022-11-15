@@ -28,7 +28,6 @@
 
 #include "msrArticulations.h"
 #include "msrGlissandos.h"
-#include "msrMeasures.h"
 #include "msrMusicXMLSpecifics.h"
 #include "msrSlides.h"
 #include "msrTechnicals.h"
@@ -104,7 +103,6 @@ S_msrChord msrChord::create (
       chordSoundingWholeNotes, chordDisplayWholeNotes,
       chordGraphicDurationKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -141,7 +139,8 @@ msrChord::msrChord (
   const Rational&     chordDisplayWholeNotes,
   msrDurationKind     chordGraphicDurationKind)
     : msrTupletElement (
-        inputLineNumber)
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fChordKind = msrChordInKind::kChordIn_NO_;
 
@@ -3100,7 +3099,6 @@ S_msrChordBeamLink msrChordBeamLink::create (
       originalBeam,
       upLinkToChord);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -3322,7 +3320,6 @@ S_msrChordSlurLink msrChordSlurLink::create (
       originalSlur,
       upLinkToChord);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -3544,7 +3541,6 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::create (
       originalGraceNotesGroup,
       upLinkToChord);
   assert (o != nullptr);
-
   return o;
 }
 

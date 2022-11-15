@@ -274,7 +274,6 @@ S_msrVoice msrVoice::create (
       voiceCreateInitialLastSegmentKind,
       voiceUpLinkToStaff);
   assert (o != nullptr);
-
   return o;
 }
 

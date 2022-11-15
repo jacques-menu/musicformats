@@ -30,7 +30,6 @@ S_msrPartGroupElement msrPartGroupElement::create (
     new msrPartGroupElement (
       inputLineNumber);
   assert (o != nullptr);
-
   return o;
 }
 */

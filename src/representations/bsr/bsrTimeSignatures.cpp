@@ -125,7 +125,6 @@ S_bsrTimeSignatureItem bsrTimeSignatureItem::create (
     new bsrTimeSignatureItem (
       inputLineNumber);
   assert (o != nullptr);
-
   return o;
 }
 

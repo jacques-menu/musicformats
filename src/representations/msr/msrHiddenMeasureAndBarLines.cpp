@@ -24,8 +24,6 @@
 
 #include "msrOah.h"
 
-#include "msrMeasures.h"
-
 #include "msrHiddenMeasureAndBarLines.h"
 
 
@@ -34,8 +32,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -54,9 +52,18 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
   return o;
 }
 
+S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
+  int                 inputLineNumber)
+{
+  return
+    msrHiddenMeasureAndBarLine::create (
+      inputLineNumber,
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+}
+
 msrHiddenMeasureAndBarLine::msrHiddenMeasureAndBarLine (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

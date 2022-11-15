@@ -48,7 +48,6 @@ S_oahRegularHandler oahRegularHandler::create (
       handlerHeader,
       insiderOahHandler);
   assert (o != nullptr);
-
   return o;
 }
 */

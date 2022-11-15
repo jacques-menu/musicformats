@@ -11,8 +11,6 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "msrMeasures.h"
-
 #include "msrTupletElements.h"
 
 
@@ -21,9 +19,11 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrTupletElement::msrTupletElement (
-  int inputLineNumber)
-    : msrMeasureElement (
-        inputLineNumber)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
+    : msrMeasureElementLambda (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fPositionInTuplet = -1;
 }

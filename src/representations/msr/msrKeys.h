@@ -159,14 +159,14 @@ class EXP msrKey : public msrMeasureElementLambda
 
     static SMARTP<msrKey> createTraditional (
                             int                      inputLineNumber,
-                            S_msrMeasure&            upLinkToMeasure,
-                            msrQuarterTonesPitchKind keyTonicPitchKind,
+                            const S_msrMeasure&      upLinkToMeasure,
+                            msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
                             msrModeKind              modeKind,
                             int                      keyCancel);
 
     static SMARTP<msrKey> createTraditional (
                             int                      inputLineNumber,
-                            msrQuarterTonesPitchKind keyTonicPitchKind,
+                            msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
                             msrModeKind              modeKind,
                             int                      keyCancel);
 
@@ -191,8 +191,8 @@ class EXP msrKey : public msrMeasureElementLambda
 
                           msrKey ( // for traditional keys
                             int                      inputLineNumber,
-                            S_msrMeasure&            upLinkToMeasure,
-                            msrQuarterTonesPitchKind keyTonicPitchKind,
+                            const S_msrMeasure&      upLinkToMeasure,
+                            msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
                             msrModeKind              modeKind,
                             int                      keyCancel);
 

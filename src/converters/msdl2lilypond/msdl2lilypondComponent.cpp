@@ -64,7 +64,7 @@ S_mfcConverterComponent createMsdl2lilypondConverterComponent ()
     pConverterComponent =
       mfcConverterComponent::create (
         "msdl2lilypond",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the converter's own history

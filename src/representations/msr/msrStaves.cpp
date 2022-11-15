@@ -65,7 +65,6 @@ S_msrStaff msrStaff::create (
       staffNumber,
       staffUpLinkToPart);
   assert (o != nullptr);
-
   return o;
 }
 

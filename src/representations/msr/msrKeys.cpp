@@ -28,8 +28,7 @@
 #endif
 
 #include "msrPitchesNames.h"
-
-#include "msrMeasures.h"
+#include "msrIntervals.h"
 
 #include "msrKeys.h"
 
@@ -77,7 +76,6 @@ S_msrHumdrumScotKeyItem msrHumdrumScotKeyItem::create (
     new msrHumdrumScotKeyItem (
       inputLineNumber);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -267,8 +265,8 @@ std::ostream& operator << (std::ostream& os, const S_msrHumdrumScotKeyItem& elt)
 //______________________________________________________________________________
 S_msrKey msrKey::createTraditional (
   int                      inputLineNumber,
-  S_msrMeasure&            upLinkToMeasure,
-  msrQuarterTonesPitchKind keyTonicPitchKind,
+  const S_msrMeasure&      upLinkToMeasure,
+  msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
   int                      keyCancel)
 {
@@ -276,17 +274,16 @@ S_msrKey msrKey::createTraditional (
     new msrKey (
       inputLineNumber,
       upLinkToMeasure,
-      keyTonicQuarterTonesPitchKind, modeKind,
+      keyTonicQuarterTonesPitchKind,
+      modeKind,
       keyCancel);
   assert (o != nullptr);
-
   return o;
 }
 
 S_msrKey msrKey::createTraditional (
   int                      inputLineNumber,
-  S_msrMeasure&            upLinkToMeasure,
-  msrQuarterTonesPitchKind keyTonicPitchKind,
+  msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
   int                      keyCancel)
 {
@@ -294,7 +291,8 @@ S_msrKey msrKey::createTraditional (
     msrKey::createTraditional (
       inputLineNumber,
       gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
-      keyTonicQuarterTonesPitchKind, modeKind,
+      keyTonicQuarterTonesPitchKind,
+      modeKind,
       keyCancel);
 }
 
@@ -307,7 +305,6 @@ S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
       inputLineNumber,
       upLinkToMeasure);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -315,14 +312,14 @@ S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
   int inputLineNumber)
 {
   return
-    msrKey::createHumdrumScot
+    msrKey::createHumdrumScot (
       inputLineNumber,
       gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrKey::msrKey ( // for traditional keys
   int                      inputLineNumber,
-  S_msrMeasure             upLinkToMeasure,
+  const S_msrMeasure&      upLinkToMeasure,
   msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
   int                      keyCancel)
@@ -587,7 +584,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
   // compute the keyTonicPitchKind from the keyTonic
   msrQuarterTonesPitchKind
-    keyTonicPitchKind =
+    keyQuarterTonesTonicPitchKind =
       quarterTonesPitchKindFromString (
         gGlobalMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind (),
@@ -607,8 +604,8 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       keyTonic <<
       "\"" <<
       std::endl <<
-      "keyTonicPitchKind = \"" <<
-      msrQuarterTonesPitchKindAsString (keyTonicPitchKind) <<
+      "keyQuarterTonesTonicPitchKind = \"" <<
+      msrQuarterTonesPitchKindAsString (keyQuarterTonesTonicPitchKind) <<
       "\"" <<
       std::endl <<
       "keyMode = \"" <<
@@ -627,7 +624,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     msrKey::createTraditional (
       __LINE__,
       gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
-      keyTonicPitchKind,
+      keyQuarterTonesTonicPitchKind,
       keyModeKind,
       0); // keyCancel JMI
 

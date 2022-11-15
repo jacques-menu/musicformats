@@ -173,21 +173,21 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
                             int                 inputLineNumber);
 
     static SMARTP<msrFiguredBass> create (
-                            int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure,
-                            const Rational&     figuredBassSoundingWholeNotes,
-                            const Rational&     figuredBassDisplayWholeNotes,
+                            int                    inputLineNumber,
+                            const S_msrMeasure&    upLinkToMeasure,
+                            const Rational&        figuredBassSoundingWholeNotes,
+                            const Rational&        figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
-                                                figuredBassParenthesesKind,
-                            msrTupletFactor     figuredBassTupletFactor);
+                                                   figuredBassParenthesesKind,
+                            const msrTupletFactor& figuredBassTupletFactor);
 
     static SMARTP<msrFiguredBass> create (
-                            int              inputLineNumber,
-                            const Rational&  figuredBassSoundingWholeNotes,
-                            const Rational&  figuredBassDisplayWholeNotes,
+                            int                    inputLineNumber,
+                            const Rational&        figuredBassSoundingWholeNotes,
+                            const Rational&        figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
-                                             figuredBassParenthesesKind,
-                            msrTupletFactor  figuredBassTupletFactor);
+                                                   figuredBassParenthesesKind,
+                            const msrTupletFactor& figuredBassTupletFactor);
 
     SMARTP<msrFiguredBass> createFiguredBassNewbornClone (
                             S_msrVoice& containingVoice);
@@ -200,13 +200,13 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrFiguredBass (
-                            int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure,
-                            const Rational&     figuredBassSoundingWholeNotes,
-                            const Rational&     figuredBassDisplayWholeNotes,
+                            int                    inputLineNumber,
+                            const S_msrMeasure&    upLinkToMeasure,
+                            const Rational&        figuredBassSoundingWholeNotes,
+                            const Rational&        figuredBassDisplayWholeNotes,
                             msrFiguredBassParenthesesKind
-                                                figuredBassParenthesesKind,
-                            msrTupletFactor     figuredBassTupletFactor);
+                                                   figuredBassParenthesesKind,
+                            const msrTupletFactor& figuredBassTupletFactor);
 
     virtual               ~msrFiguredBass ();
 
@@ -217,14 +217,14 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
 
     // uplinks
     void                  setFiguredBassUpLinkToNote (
-                            S_msrNote& note)
+                            S_msrNote note) // no const alias, call argument may be 'this'
                               { fFiguredBassUpLinkToNote = note; }
 
     S_msrNote             getFiguredBassUpLinkToNote () const
                              { return fFiguredBassUpLinkToNote; }
 
     void                  setFiguredBassUpLinkToVoice (
-                            S_msrVoice voice)
+                            const S_msrVoice& voice)
                               { fFiguredBassUpLinkToVoice = voice; }
 
     S_msrVoice            getFiguredBassUpLinkToVoice () const
@@ -239,8 +239,7 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     void                  setFiguredBassDisplayWholeNotes (
                             const Rational& wholeNotes)
                               {
-                                fFiguredBassDisplayWholeNotes =
-                                  wholeNotes;
+                                fFiguredBassDisplayWholeNotes = wholeNotes;
                               }
 
     Rational              getFiguredBassDisplayWholeNotes () const
@@ -255,7 +254,7 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
                               { return fFiguredBassFiguresList;  }
 
     void                  setFiguredBassTupletFactor (
-                            msrTupletFactor tupletFactor)
+                            const msrTupletFactor& tupletFactor)
                               { fFiguredBassTupletFactor = tupletFactor; }
 
     msrTupletFactor       getFiguredBassTupletFactor () const
@@ -267,7 +266,7 @@ class EXP msrFiguredBass : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     void                  appendFigureToFiguredBass (
-                            S_msrBassFigure& bassFigure);
+                            const S_msrBassFigure& bassFigure);
 
   public:
 

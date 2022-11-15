@@ -1302,7 +1302,8 @@ mfcMultiComponent::mfcMultiComponent (
   }
 #endif
 
-  fComponentEntropicityKind = componentEntropicityKind;
+  fComponentEntropicityKind =
+    mfcMultiComponentEntropicityKind::kComponentEntropicityYes; // JMI v0.9.66 componentEntropicityKind; SUPERFLOUS ???
 
   fComponentUsedFromTheCLIKind = componentUsedFromTheCLIKind;
 

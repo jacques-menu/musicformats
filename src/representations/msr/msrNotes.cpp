@@ -51,7 +51,7 @@ S_msrNote msrNote::create (
   int                        inputLineNumber,
   S_msrMeasure               upLinkToMeasure,
 
-  const std::string&    noteMeasureNumber,
+  const std::string&         noteMeasureNumber,
 
   msrNoteKind                noteKind,
 
@@ -106,7 +106,6 @@ S_msrNote msrNote::create (
       msrNoteHeadFilledKind,
       msrNoteHeadParenthesesKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -114,7 +113,7 @@ msrNote::msrNote (
   int                        inputLineNumber,
   S_msrMeasure               upLinkToMeasure,
 
-  const std::string&    noteMeasureNumber,
+  const std::string&         noteMeasureNumber,
 
   msrNoteKind                noteKind,
 
@@ -139,7 +138,8 @@ msrNote::msrNote (
   msrNoteHeadFilledKind      msrNoteHeadFilledKind,
   msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind)
   : msrTupletElement (
-      inputLineNumber),
+      inputLineNumber,
+      upLinkToMeasure),
     fNoteColorAlphaRGB ("", "")
 {
   fNoteUpLinkToMeasure = upLinkToMeasure;

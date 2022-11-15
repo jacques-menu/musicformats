@@ -332,7 +332,6 @@ S_oahOahGroup oahOahGroup::create (
   oahOahGroup* o = new oahOahGroup (
     serviceName);
   assert (o != nullptr);
-
   return o;
 }
 

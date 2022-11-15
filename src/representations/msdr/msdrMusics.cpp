@@ -38,7 +38,6 @@ S_msdrMusic msdrMusic::create (
       inputLineNumber,
       musicName);
   assert (o != nullptr);
-
   return o;
 }
 

@@ -91,7 +91,7 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
     pGeneratorComponent =
       mfcGeneratorComponent::create (
         "Mikrokosmos3Wandering",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the generators's own history

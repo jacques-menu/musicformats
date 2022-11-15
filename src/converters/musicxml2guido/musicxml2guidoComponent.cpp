@@ -63,7 +63,7 @@ EXP S_mfcConverterComponent createMusicxml2guidoConverterComponent ()
     pConverterComponent =
       mfcConverterComponent::create (
         "musicxml2guido",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the converter's own history

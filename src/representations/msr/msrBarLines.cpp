@@ -22,8 +22,6 @@
 
 #include "mfStringsHandling.h"
 
-#include "msrMeasures.h"
-
 #include "msrBarLines.h"
 
 #include "oahOah.h"

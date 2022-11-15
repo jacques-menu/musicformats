@@ -52,7 +52,6 @@ S_LilyPondIssue34RegularHandler LilyPondIssue34RegularHandler::create (
       insiderOahHandler,
       multiGenerationOutputKind);
   assert (o != nullptr);
-
   return o;
 }
 

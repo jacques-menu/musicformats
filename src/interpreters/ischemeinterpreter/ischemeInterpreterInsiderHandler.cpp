@@ -58,7 +58,6 @@ S_ischemeInterpreterInsiderHandler ischemeInterpreterInsiderHandler::create (
       serviceName,
       handlerHeader);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -429,7 +428,6 @@ S_ischemeInterpreterInsiderOahGroup ischemeInterpreterInsiderOahGroup::create ()
 {
   ischemeInterpreterInsiderOahGroup* o = new ischemeInterpreterInsiderOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

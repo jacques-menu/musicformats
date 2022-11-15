@@ -54,7 +54,6 @@ S_msrGraceNotesGroup msrGraceNotesGroup::create (
       graceNotesGroupIsBeamed,
       graceNotesGroupMeasureNumber);
   assert (o != nullptr);
-
   return o;
 }
 

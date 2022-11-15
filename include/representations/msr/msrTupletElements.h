@@ -14,7 +14,7 @@
 
 #include <list>
 
-#include "msrMeasureElements.h"
+#include "msrMeasureElementLambda.h"
 
 
 namespace MusicFormats
@@ -26,20 +26,21 @@ namespace MusicFormats
   hence class msrTupletElement
 */
 
-class EXP msrTupletElement : public msrMeasureElement
+class EXP msrTupletElement : public msrMeasureElementLambda
 {
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
 
-    // cloning
-    // ------------------------------------------------------
-
   protected:
 
+    // constructors/destructor
+    // ------------------------------------------------------
+
                           msrTupletElement (
-                            int inputLineNumber);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrTupletElement ();
 

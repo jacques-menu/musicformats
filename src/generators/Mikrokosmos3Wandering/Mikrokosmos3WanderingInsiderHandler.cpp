@@ -94,7 +94,6 @@ S_Mikrokosmos3WanderingInsiderHandler Mikrokosmos3WanderingInsiderHandler::creat
       handlerHeader,
       multiGenerationOutputKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -877,7 +876,6 @@ S_Mikrokosmos3WanderingInsiderOahGroup Mikrokosmos3WanderingInsiderOahGroup::cre
 {
   Mikrokosmos3WanderingInsiderOahGroup* o = new Mikrokosmos3WanderingInsiderOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

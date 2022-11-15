@@ -58,7 +58,6 @@ S_msrSegment msrSegment::create (
       inputLineNumber,
       segmentUpLinkToVoice);
   assert (o != nullptr);
-
   return o;
 }
 

@@ -464,7 +464,6 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::create (
       semiTonesPitchKind,
       octaveKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -744,7 +743,6 @@ S_msrSemiTonesPitchAndAbsoluteOctave msrSemiTonesPitchAndAbsoluteOctave::create 
       semiTonesPitchKind,
       absoluteOctave);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -841,7 +839,6 @@ S_msrSemiTonesPitchAndRelativeOctave msrSemiTonesPitchAndRelativeOctave::create 
       semiTonesPitchKind,
       relativeOctave);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -940,7 +937,6 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::create (
       quarterTonesPitchKind,
       octaveKind);
   assert (o != nullptr);
-
   return o;
 }
 

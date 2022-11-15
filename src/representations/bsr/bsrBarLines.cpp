@@ -37,7 +37,6 @@ S_bsrBarLine bsrBarLine::create (
     new bsrBarLine (
       inputLineNumber, barLineKind);
   assert (o != nullptr);
-
   return o;
 }
 

@@ -55,7 +55,6 @@ S_ischemeInterpreterRegularHandler ischemeInterpreterRegularHandler::create (
       handlerHeader,
       insiderOahHandler);
   assert (o != nullptr);
-
   return o;
 }
 

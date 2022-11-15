@@ -132,7 +132,7 @@ class EXP msrScordatura : public msrMeasureElementLambda
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrScordatura> create (
-                            int           inputLineNumber);
+                            int                 inputLineNumber);
 
   protected:
 

@@ -34,14 +34,14 @@ class EXP msrTuplet : public msrTupletElement
 
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
-                            S_msrMeasure&           upLinkToMeasure,
+                            const S_msrMeasure&     upLinkToMeasure,
                             const std::string&      tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            msrTupletFactor         tupletFactor,
+                            const msrTupletFactor&  tupletFactor,
                             const Rational&         memberNotesSoundingWholeNotes,
                             const Rational&         memberNotesDisplayWholeNotes);
 
@@ -53,7 +53,7 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            msrTupletFactor         tupletFactor,
+                            const msrTupletFactor&  tupletFactor,
                             const Rational&         memberNotesSoundingWholeNotes,
                             const Rational&         memberNotesDisplayWholeNotes);
 
@@ -68,14 +68,14 @@ class EXP msrTuplet : public msrTupletElement
 
                           msrTuplet (
                             int                     inputLineNumber,
-                            S_msrMeasure&           upLinkToMeasure,
+                            const S_msrMeasure&     upLinkToMeasure,
                             const std::string&      tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            msrTupletFactor         tupletFactor,
+                            const msrTupletFactor&  tupletFactor,
                             const Rational&         memberNotesSoundingWholeNotes,
                             const Rational&         memberNotesDisplayWholeNotes);
 
@@ -85,6 +85,8 @@ class EXP msrTuplet : public msrTupletElement
 
     // set and get
     // ------------------------------------------------------
+
+    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
 
     // tuplet kind
     void                  setTupletKind (
@@ -210,7 +212,7 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to measure
-    S_msrMeasure          fTupletUpLinkToMeasure;
+    S_msrMeasure          fTupletUpLinkToMeasure; // JMI v0.9.66 SUPERFLOUS ???
 
     msrTupletInKind       fTupletKind;
 

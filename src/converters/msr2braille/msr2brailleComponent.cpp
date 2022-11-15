@@ -68,7 +68,7 @@ S_mfcConverterComponent createMsr2brailleConverterComponent ()
     pConverterComponent =
       mfcConverterComponent::create (
         "msr2braille",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the converter's own history

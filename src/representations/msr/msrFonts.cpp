@@ -76,7 +76,6 @@ S_msrFontSize msrFontSize::create (
     new msrFontSize (
       fontSizeKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -87,7 +86,6 @@ S_msrFontSize msrFontSize::create (
     new msrFontSize (
       numericFontSize);
   assert (o != nullptr);
-
   return o;
 }
 

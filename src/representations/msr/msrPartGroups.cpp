@@ -71,7 +71,6 @@ S_msrPartGroup msrPartGroup::create (
       partGroupUpLinkToPartGroup,
       UpLinkToPartGroupToScore);
   assert (o != nullptr);
-
   return o;
 }
 

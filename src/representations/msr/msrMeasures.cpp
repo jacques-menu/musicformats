@@ -52,7 +52,7 @@ int msrMeasure::gGlobalMeasureDebugNumber = 0;
 S_msrMeasure msrMeasure::create (
   int                inputLineNumber,
   const std::string& measureNumber,
-  S_msrSegment&      measureUpLinkToSegment)
+  S_msrSegment       measureUpLinkToSegment)
 {
   msrMeasure* o =
     new msrMeasure (
@@ -60,7 +60,6 @@ S_msrMeasure msrMeasure::create (
       measureNumber,
       measureUpLinkToSegment);
   assert (o != nullptr);
-
   return o;
 }
 

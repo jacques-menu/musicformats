@@ -226,12 +226,6 @@ class EXP msrNote : public msrTupletElement
     S_msrTuplet           getNoteDirectUpLinkToTuplet () const
                               { return fNoteDirectUpLinkToTuplet; }
 
-//     // position in measure
-//     void                  setMeasureElementMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string& context) override
-
     // note kind
 
     void                  setNoteKind (msrNoteKind noteKind);
