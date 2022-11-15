@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -29,7 +29,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_msdlParserWaeHandler msdlParserWaeHandler::create ()
 {
   msdlParserWaeHandler* o =

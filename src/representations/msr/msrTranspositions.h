@@ -12,7 +12,7 @@
 #ifndef ___msrTranspositions___
 #define ___msrTranspositions___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -25,7 +25,7 @@ class   msrTransposition;
 typedef SMARTP<msrTransposition> S_msrTransposition;
 
 //______________________________________________________________________________
-class EXP msrTransposition : public msrMeasureElementLambda
+class EXP msrTransposition : public msrMeasureElement
 {
   public:
 

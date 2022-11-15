@@ -14,7 +14,7 @@
 #include "mfAssert.h"
 #include "mfIndentedTextOutput.h"
 
-#include "enableAbortToDebugErrors.h"
+#include "waeEnableAbortToDebugErrors.h"
 
 
 namespace MusicFormats

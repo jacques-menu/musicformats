@@ -14,7 +14,7 @@
 
 #include <list>
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -26,7 +26,7 @@ namespace MusicFormats
   hence class msrTupletElement
 */
 
-class EXP msrTupletElement : public msrMeasureElementLambda
+class EXP msrTupletElement : public msrMeasureElement
 {
   public:
 
@@ -49,6 +49,12 @@ class EXP msrTupletElement : public msrMeasureElementLambda
     // set and get
     // ------------------------------------------------------
 
+    void                  setTupletElementUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getTupletElementUpLinkToMeasure () const
+                            { return fTupletElementUpLinkToMeasure; }
+
     void                  setPositionInTuplet (
                             int positionInTuplet)
                               { fPositionInTuplet = positionInTuplet; }
@@ -65,6 +71,8 @@ class EXP msrTupletElement : public msrMeasureElementLambda
       The uplinks to the tuplet and measure element are declared in the sub-classes,
       to allow for separate *.h files, C++ constraint
     */
+
+    S_msrMeasure          fTupletElementUpLinkToMeasure;
 
     int                   fPositionInTuplet;
 };

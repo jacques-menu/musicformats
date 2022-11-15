@@ -12,14 +12,14 @@
 #ifndef ___msrHiddenMeasureAndBarLine___
 #define ___msrHiddenMeasureAndBarLine___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrHiddenMeasureAndBarLine : public msrMeasureElementLambda
+class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
 {
   public:
 

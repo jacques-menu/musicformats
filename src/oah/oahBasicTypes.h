@@ -475,7 +475,7 @@ class EXP oahAtom : public oahElement
     // creation
     // ------------------------------------------------------
 
-/* this class   is purely virtual
+/* this class is purely vir.htual
     static SMARTP<oahAtom> create (
                             const std::string&       longName,
                             const std::string&       shortName,
@@ -591,7 +591,7 @@ class EXP oahAtomExpectingAValue : public oahAtom
 
     // creation
     // ------------------------------------------------------
-/* this class   is purely virtual
+/* this class is purely vir.htual
     static SMARTP<oahAtomExpectingAValue> create (
                             const std::string& longName,
                             const std::string& shortName,
@@ -669,7 +669,7 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
 
     // creation
     // ------------------------------------------------------
-/* this class   is purely virtual
+/* this class is purely vir.htual
     static SMARTP<oahAtomImplicitlyStoringAValue> create (
                             const std::string& longName,
                             const std::string& shortName,
@@ -760,7 +760,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
 
     // creation
     // ------------------------------------------------------
-/* this class   is purely virtual
+/* this class is purely vir.htual
     static SMARTP<oahAtomStoringAValue> create (
                             const std::string& longName,
                             const std::string& shortName,
@@ -850,7 +850,7 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // creation
     // ------------------------------------------------------
 
-/* this class   is purely virtual
+/* this class is purely vir.htual
     static SMARTP<oahPureHelpAtomWithoutAValue> create (
                             const std::string& longName,
                             const std::string& shortName,
@@ -920,7 +920,7 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // creation
     // ------------------------------------------------------
 
-/* this class   is purely virtual
+/* this class is purely vir.htual
     static SMARTP<oahPureHelpAtomExpectingAValue> create (
                             const std::string& longName,
                             const std::string& shortName,
@@ -1401,7 +1401,7 @@ class EXP oahHandler : public oahFindableElement
     // creation
     // ------------------------------------------------------
 
-/* this class   is purely virtual
+/* this class is purely vir.htual
     static SMARTP<oahHandler> create (
                             const std::string& serviceName,
                             const std::string& handlerHeader,

@@ -16,7 +16,7 @@
 
 #include "libmusicxml.h" // for mfMusicformatsErrorKind
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif

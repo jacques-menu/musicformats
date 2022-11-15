@@ -21,7 +21,7 @@
 
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -4204,7 +4204,7 @@ msrHarmony::msrHarmony (
   int                      harmoniesStaffNumber,
   const msrTupletFactor&   harmonyTupletFactor,
   const Rational&          harmonyWholeNotesOffset)
-    : msrMeasureElementLambda (
+    : msrMeasureElement (
         inputLineNumber,
         upLinkToMeasure),
       fHarmonyTupletFactor (
@@ -4469,7 +4469,8 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -4858,7 +4859,8 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony measure number
   os <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << " : " << fetchMeasureElementMeasureNumber () <<
+    "measureElementMeasureNumber" << " : " << fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
     std::endl;
 
   // print the harmony position in measure

@@ -14,7 +14,7 @@
 
 #include <list>
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -129,7 +129,7 @@ std::string msrBarLineRepeatWingedKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrBarLineRepeatWingedKind& elt);
 
-class EXP msrBarLine : public msrMeasureElementLambda
+class EXP msrBarLine : public msrMeasureElement
 {
   public:
 
@@ -200,6 +200,12 @@ class EXP msrBarLine : public msrMeasureElementLambda
     // set and get
     // ------------------------------------------------------
 
+    void                  setBarLineUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getBarLineUpLinkToMeasure () const
+                            { return fBarLineUpLinkToMeasure; }
+
     msrBarLineLocationKind
                           getLocationKind () const
                               { return fLocationKind; }
@@ -252,7 +258,7 @@ class EXP msrBarLine : public msrMeasureElementLambda
     // private services
     // ------------------------------------------------------
 
-    const std::list<int>&      getEndingNumbersList () const
+    const std::list<int>& getEndingNumbersList () const
                               { return fEndingNumbersList; }
 
   public:
@@ -284,6 +290,8 @@ class EXP msrBarLine : public msrMeasureElementLambda
     // private fields
     // ------------------------------------------------------
 
+    S_msrMeasure          fBarLineUpLinkToMeasure;
+
     msrBarLineLocationKind
                           fLocationKind;
 
@@ -311,7 +319,7 @@ class EXP msrBarLine : public msrMeasureElementLambda
     msrBarLineHasCodaKind fBarLineHasCodaKind;
 
     // the numbers extracted from fEndingNumber
-    std::list<int>             fEndingNumbersList;
+    std::list<int>        fEndingNumbersList;
 };
 typedef SMARTP<msrBarLine> S_msrBarLine;
 EXP std::ostream& operator << (std::ostream& os, const S_msrBarLine& elt);

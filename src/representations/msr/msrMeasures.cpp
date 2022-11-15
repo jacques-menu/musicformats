@@ -18,7 +18,7 @@
 #include "mfServiceRunData.h"
 #include "mfStringsHandling.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -4769,7 +4769,8 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
 #endif
 
     fMeasureElementsList.sort (
-      msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition);
+      msrMeasureElement::
+        compareMeasureElementsByIncreasingMeasurePosition);
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
@@ -6442,7 +6443,7 @@ std::string msrMeasure::asString () const
 }
 
 void msrMeasure::displayMeasure (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& context)
 {
   gLogStream <<

@@ -16,7 +16,7 @@
 #include <vector>
 
 #include "msrElements.h"
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrTypesForwardDeclarations.h"
 
@@ -179,6 +179,7 @@ std::string msrHarmonyDegreeTypeKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrHarmonyDegreeTypeKind& elt);
 
+//______________________________________________________________________________
 class EXP msrHarmonyDegree : public msrElement
 {
   public:
@@ -272,7 +273,7 @@ typedef SMARTP<msrHarmonyDegree> S_msrHarmonyDegree;
 EXP std::ostream& operator << (std::ostream& os, const S_msrHarmonyDegree& elt);
 
 //______________________________________________________________________________
-class EXP msrHarmony : public msrMeasureElementLambda
+class EXP msrHarmony : public msrMeasureElement
 {
   public:
 

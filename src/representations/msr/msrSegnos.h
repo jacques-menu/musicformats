@@ -12,7 +12,7 @@
 #ifndef ___msrSegnos___
 #define ___msrSegnos___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -30,7 +30,7 @@ std::string msrDalSegnoKindAsString (
 std::ostream& operator << (std::ostream& os,const msrDalSegnoKind& elt);
 
 //______________________________________________________________________________
-class EXP msrSegno : public msrMeasureElementLambda
+class EXP msrSegno : public msrMeasureElement
 {
   public:
 
@@ -101,7 +101,7 @@ typedef SMARTP<msrSegno> S_msrSegno;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSegno& elt);
 
 //______________________________________________________________________________
-class EXP msrDalSegno : public msrMeasureElementLambda
+class EXP msrDalSegno : public msrMeasureElement
 {
   public:
 

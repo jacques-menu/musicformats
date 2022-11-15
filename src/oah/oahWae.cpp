@@ -11,7 +11,7 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "enableAbortToDebugErrors.h"
+#include "waeEnableAbortToDebugErrors.h"
 
 #include "oahWae.h"
 

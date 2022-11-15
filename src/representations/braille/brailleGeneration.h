@@ -62,7 +62,7 @@ class EXP bsrBrailleGenerator : public smartable
     // creation
     // ------------------------------------------------------
 
-/* this class   is purely virtual
+/* this class is purely vir.htual
     static SMARTP<bsrBrailleGenerator> create (
                             std::ostream& brailleOutputStream);
 */

@@ -151,7 +151,7 @@ class EXP oahFindableElement : public smartable
     // creation from MusicXML
     // ------------------------------------------------------
 
-/* this class   is purely virtual
+/* this class is purely vir.htual
     static SMARTP<oahFindableElement> create ();
 */
 
@@ -214,7 +214,7 @@ class EXP oahElement : public oahFindableElement
 {
   public:
 
-/* this class   is purely virtual
+/* this class is purely vir.htual
     // creation
     // ------------------------------------------------------
 

@@ -12,7 +12,7 @@
 #ifndef ___msrBreaks___
 #define ___msrBreaks___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -29,7 +29,7 @@ std::string msrUserChosenLineBreakKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrUserChosenLineBreakKind& elt);
 
-class EXP msrLineBreak : public msrMeasureElementLambda
+class EXP msrLineBreak : public msrMeasureElement
 {
   public:
 
@@ -123,7 +123,7 @@ std::string msrUserChosenPageBreakKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrUserChosenPageBreakKind& elt);
 
-class EXP msrPageBreak : public msrMeasureElementLambda
+class EXP msrPageBreak : public msrMeasureElement
 {
   public:
 

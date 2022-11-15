@@ -21,7 +21,7 @@
 
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -113,9 +113,8 @@ msrDoubleTremolo::msrDoubleTremolo (
   msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
   int                       doubleTremoloMarksNumber,
   msrPlacementKind          doubleTremoloPlacementKind)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fDoubleTremoloKind          = doubleTremoloKind;
   fDoubleDoubleTremoloTypeKind      = doubleDoubleTremoloTypeKind;
@@ -202,7 +201,8 @@ msrDoubleTremolo::~msrDoubleTremolo ()
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -619,7 +619,8 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (S_msrChord chord)
 void msrDoubleTremolo::setDoubleTremoloMeasureNumber (
   const std::string& measureNumber)
 {
-  fetchMeasureElementMeasureNumber () =  measureNumber;
+  fBarLineUpLinkToMeasure->
+getMeasureNumber () =  measureNumber;
 }
 
 void msrDoubleTremolo::acceptIn (basevisitor* v)

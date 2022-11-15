@@ -204,7 +204,8 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //       msrTuplet::create (
 //         fInputLineNumber,
 //         gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
-//         fetchMeasureElementMeasureNumber (),
+//         fBarLineUpLinkToMeasure->
+getMeasureNumber (),
 //         fTupletNumber,
 //         fTupletBracketKind,
 //         fTupletLineShapeKind,
@@ -221,8 +222,10 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //   newbornClone->fTupletDisplayWholeNotes =
 //     fTupletDisplayWholeNotes;
 //
-//   newbornClone->fetchMeasureElementMeasureNumber () =
-//     fetchMeasureElementMeasureNumber ();
+//   newbornClone->fBarLineUpLinkToMeasure->
+getMeasureNumber () =
+//     fBarLineUpLinkToMeasure->
+getMeasureNumber ();
 //
 //   newbornClone->fMeasureElementMeasurePosition =
 //     fMeasureElementMeasurePosition;
@@ -247,7 +250,8 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -545,7 +549,8 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 // /* too early JMI
 //   // populate chord's measure number
 //   chord->setChordMeasureNumber (
-//     fetchMeasureElementMeasureNumber ());
+//     fBarLineUpLinkToMeasure->
+getMeasureNumber ());
 // */
 // }
 //
@@ -1098,7 +1103,8 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //     ' ' << fMeasureElementSoundingWholeNotes << " tupletSoundingWholeNotes" <<
 //     ", measure ' " <<
 //     ", line " << fInputLineNumber <<
-//     fetchMeasureElementMeasureNumber () <<
+//     fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //     "':";
 //
 //   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
@@ -1172,7 +1178,8 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //     fMeasureElementSoundingWholeNotes << " sounding, " <<
 //     fTupletDisplayWholeNotes << " displayed" <<
 //     ", meas " <<
-//     fetchMeasureElementMeasureNumber () <<
+//     fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //     ", line " << fInputLineNumber <<
 //     std::endl;
 //
@@ -1222,7 +1229,8 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //
 //     std::setw (fieldWidth) <<
 //     "fTupletMeasureNumber" << " : " <<
-//     fetchMeasureElementMeasureNumber () <<
+//     fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fMeasurePosition" << " : " <<
@@ -1314,7 +1322,8 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //     fMeasureElementSoundingWholeNotes << " sounding, " <<
 //     fTupletDisplayWholeNotes << " displayed" <<
 //     ", meas " <<
-//     fetchMeasureElementMeasureNumber () <<
+//     fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //     ", line " << fInputLineNumber <<
 //     std::endl;
 //
@@ -1367,7 +1376,8 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //
 //     std::setw (fieldWidth) <<
 //     "fTupletMeasureNumber" << " : " <<
-//     fetchMeasureElementMeasureNumber () <<
+//     fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fMeasureElementMeasurePosition" << " : " <<

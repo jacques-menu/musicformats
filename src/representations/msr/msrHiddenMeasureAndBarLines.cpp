@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -64,9 +64,8 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 msrHiddenMeasureAndBarLine::msrHiddenMeasureAndBarLine (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {}
 
 msrHiddenMeasureAndBarLine::~msrHiddenMeasureAndBarLine ()

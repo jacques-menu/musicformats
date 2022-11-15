@@ -23,7 +23,7 @@
 
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -56,23 +56,23 @@ const int msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
 int msrPart::gPartsCounter = 0;
 
 S_msrPart msrPart::create (
-  int            inputLineNumber,
-  const std::string&  partID,
-  S_msrPartGroup PartUpLinkToPartGroup)
+  int                  inputLineNumber,
+  const std::string&   partID,
+  const S_msrPartGroup partUpLinkToPartGroup)
 {
   msrPart* o =
     new msrPart (
       inputLineNumber,
       partID,
-      PartUpLinkToPartGroup);
+      partUpLinkToPartGroup);
   assert (o != nullptr);
   return o;
 }
 
 msrPart::msrPart (
-  int            inputLineNumber,
-  const std::string&  partID,
-  S_msrPartGroup PartUpLinkToPartGroup)
+  int                  inputLineNumber,
+  const std::string&   partID,
+  const S_msrPartGroup partUpLinkToPartGroup)
     : msrPartGroupElement (inputLineNumber)
 {
   // replace spaces in partID to set fPartID
@@ -85,15 +85,15 @@ msrPart::msrPart (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    PartUpLinkToPartGroup != nullptr,
-    "PartUpLinkToPartGroup is null");
+    partUpLinkToPartGroup != nullptr,
+    "partUpLinkToPartGroup is null");
     */
 
   // set part number
   fPartAbsoluteNumber = ++gPartsCounter;
 
   // set part's part group upLink
-  fPartUpLinkToPartGroup = PartUpLinkToPartGroup;
+  fPartUpLinkToPartGroup = partUpLinkToPartGroup;
 
   // do other initializations
   initializePart ();
@@ -176,7 +176,7 @@ S_msrScore  msrPart::fetchPartUpLinkToScore () const
   if (fPartUpLinkToPartGroup) {
     result =
       fPartUpLinkToPartGroup->
-        getUpLinkToPartGroupToScore ();
+        getPartGroupUpLinkToScore ();
   }
 
   return result;
@@ -2145,7 +2145,7 @@ void msrPart::setPartInstrumentNamesMaxLengthes ()
   S_msrScore
     score =
       fPartUpLinkToPartGroup->
-        getUpLinkToPartGroupToScore ();
+        getPartGroupUpLinkToScore ();
 
   size_t partInstrumentNameLength =
     fPartInstrumentName.size ();

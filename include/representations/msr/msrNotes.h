@@ -197,10 +197,11 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            S_msrMeasure measure) override;
+    void                  setNoteUpLinkToMeasure (
+                            const S_msrMeasure& measure);
 
-    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
+    S_msrMeasure          getNoteUpLinkToMeasure () const
+                            { return fNoteUpLinkToMeasure; }
 
     // uplink to chord
     void                  setNoteDirectUpLinkToChord (

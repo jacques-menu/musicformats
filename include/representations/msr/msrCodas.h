@@ -12,7 +12,7 @@
 #ifndef ___msrCodas___
 #define ___msrCodas___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -30,7 +30,7 @@ std::string msrCodaKindAsString (
 std::ostream& operator << (std::ostream& os,const msrCodaKind& elt);
 
 //______________________________________________________________________________
-class EXP msrCoda : public msrMeasureElementLambda
+class EXP msrCoda : public msrMeasureElement
 {
   public:
 

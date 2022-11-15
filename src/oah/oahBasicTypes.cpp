@@ -18,7 +18,7 @@
 
 #include "oahWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -1204,7 +1204,7 @@ std::ostream& operator << (std::ostream& os, const S_oahPrefix& elt)
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahAtom oahAtom::create (
   const std::string&       longName,
   const std::string&       shortName,
@@ -1508,7 +1508,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtom& elt)
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahAtomExpectingAValue oahAtomExpectingAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -1669,7 +1669,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtomExpectingAValue& elt
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahAtomImplicitlyStoringAValue oahAtomImplicitlyStoringAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -1896,7 +1896,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtomImplicitlyStoringAVa
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahAtomStoringAValue oahAtomStoringAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -2124,7 +2124,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtomStoringAValue& elt)
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahPureHelpAtomWithoutAValue oahPureHelpAtomWithoutAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -2261,7 +2261,7 @@ std::ostream& operator << (std::ostream& os, const S_oahPureHelpAtomWithoutAValu
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahPureHelpAtomExpectingAValue oahPureHelpAtomExpectingAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -4403,7 +4403,7 @@ int oahHandler::pIncludeFilesMaximumLevel = 10;
 
 // int            getIncludeFilesMaximumLevel ();
 
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahHandler oahHandler::create (
 	const std::string& serviceName,
 	const std::string& handlerHeader,

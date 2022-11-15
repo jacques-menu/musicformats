@@ -266,7 +266,7 @@ std::ostream& operator << (std::ostream& os, const mfcComponenKind& elt);
 //______________________________________________________________________________
 class EXP mfcComponent : public smartable
 {
-/* this class   is purely virtual
+/* this class is purely vir.htual
   public:
 
     // creation
@@ -448,7 +448,7 @@ std::ostream& operator << (std::ostream& os, const mfcMultiComponentEntropicityK
 //______________________________________________________________________________
 class EXP mfcMultiComponent : public mfcComponent
 {
-/* this class   is purely virtual
+/* this class is purely vir.htual
   public:
 
     // creation

@@ -12,7 +12,7 @@
 #ifndef ___msrStaffChanges___
 #define ___msrStaffChanges___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrStaves.h"
 
@@ -21,7 +21,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrVoiceStaffChange : public msrMeasureElementLambda
+class EXP msrVoiceStaffChange : public msrMeasureElement
 {
   public:
 

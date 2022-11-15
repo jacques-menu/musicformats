@@ -19,7 +19,7 @@
 #include "musicxmlWae.h"
 #include "mxsr2msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -570,13 +570,13 @@ void mxsr2msrSkeletonBuilder::showPartsVector (
         ", upLink to: ";
 
       S_msrPartGroup
-        PartUpLinkToPartGroup =
+        partUpLinkToPartGroup =
           part->
             getPartUpLinkToPartGroup ();
 
-      if (PartUpLinkToPartGroup) {
+      if (partUpLinkToPartGroup) {
         gLogStream <<
-          PartUpLinkToPartGroup->
+          partUpLinkToPartGroup->
             getPartGroupCombinedName ();
       }
       else {
@@ -3338,7 +3338,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
       msrPart::create (
         inputLineNumber,
         fCurrentPartID,
-        0); // PartUpLinkToPartGroup will be set later
+        0); // partUpLinkToPartGroup will be set later
 
   // populate it
   part->

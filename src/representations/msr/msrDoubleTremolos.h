@@ -12,7 +12,7 @@
 #ifndef ___msrDoubleTremolos___
 #define ___msrDoubleTremolos___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrPlacements.h"
 
@@ -44,7 +44,7 @@ std::string msrDoubleTremoloKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrDoubleTremoloKind& elt);
 
-class EXP msrDoubleTremolo : public msrMeasureElementLambda
+class EXP msrDoubleTremolo : public msrMeasureElement
 {
   public:
 

@@ -21,15 +21,42 @@ namespace MusicFormats
 msrTupletElement::msrTupletElement (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fPositionInTuplet = -1;
 }
 
 msrTupletElement::~msrTupletElement ()
 {}
+
+void msrTupletElement::setTupletElementUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of tuplet element " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fTupletElementUpLinkToMeasure = measure;
+}
 
 std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt)
 {

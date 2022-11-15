@@ -15,7 +15,7 @@
 #include <list>
 
 #include "msrElements.h"
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrOctaves.h"
 #include "msrPrintObjects.h"
@@ -141,7 +141,7 @@ std::string msrPrintSpacingKindAsString (
 std::ostream& operator << (std::ostream& os, const msrPrintSpacingKind& elt);
 
 //______________________________________________________________________________
-class EXP msrStaffDetails : public msrMeasureElementLambda
+class EXP msrStaffDetails : public msrMeasureElement
 {
   public:
 

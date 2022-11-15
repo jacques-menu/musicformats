@@ -556,7 +556,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&     context);
+                            const std::string&          context);
 
     void                  finalizeMeasureClone (
                             int          inputLineNumber,
@@ -574,17 +574,17 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeRegularMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&     context);
+                            const std::string&          context);
 
     void                  finalizeHarmonyMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&     context);
+                            const std::string&          context);
 
     void                  finalizeFiguredBassMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
-                            const std::string&     context);
+                            const std::string&          context);
 
   public:
 
@@ -607,7 +607,7 @@ class EXP msrMeasure : public msrSegmentElement
     std::string           asShortStringForMeasuresSlices () const override;
 
     void                  displayMeasure (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
@@ -622,6 +622,13 @@ class EXP msrMeasure : public msrSegmentElement
     // upLinks
 
     S_msrSegment          fMeasureUpLinkToSegment;
+
+    // elements
+
+    std::list<S_msrMeasureElement>
+                          fMeasureElementsList;
+
+    Bool                  fMeasureContainsMusic;
 
     // measure lengthes, in whole notes
 
@@ -694,13 +701,6 @@ class EXP msrMeasure : public msrSegmentElement
     // chords handling
 
     S_msrNote             fMeasureLastHandledNote;
-
-    // elements
-
-    std::list<S_msrMeasureElement>
-                          fMeasureElementsList;
-
-    Bool                  fMeasureContainsMusic;
 
     // regular measure ends detection
     msrMeasureEndRegularKind

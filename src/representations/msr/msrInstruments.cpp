@@ -17,7 +17,7 @@
 
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -183,9 +183,8 @@ S_msrScordatura msrScordatura::create (
 msrScordatura::msrScordatura (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {}
 
 msrScordatura::~msrScordatura ()
@@ -328,9 +327,8 @@ msrAccordionRegistration::msrAccordionRegistration (
   int           highDotsNumber,
   int           middleDotsNumber,
   int           lowDotsNumber)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fHighDotsNumber   = highDotsNumber;
   fMiddleDotsNumber = middleDotsNumber;
@@ -447,7 +445,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
 msrHarpPedalsTuning::msrHarpPedalsTuning (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
-    : msrMeasureElementLambda (
+    : msrMeasureElement (
         inputLineNumber,
         gNullMeasureSmartPointer) // set later in setMeasureElementUpLinkToMeasure()
 {}
@@ -699,9 +697,8 @@ msrPedal::msrPedal (
   msrPedalTypeKind pedalTypeKind,
   msrPedalLineKind pedalLineKind,
   msrPedalSignKind pedalSignKind)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fPedalTypeKind = pedalTypeKind;
   fPedalLineKind = pedalLineKind;
@@ -885,9 +882,8 @@ S_msrDamp msrDamp::create (
 msrDamp::msrDamp (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {}
 
 msrDamp::~msrDamp ()
@@ -985,9 +981,8 @@ S_msrDampAll msrDampAll::create (
 msrDampAll::msrDampAll (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {}
 
 msrDampAll::~msrDampAll ()

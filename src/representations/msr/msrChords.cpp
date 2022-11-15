@@ -14,14 +14,12 @@
 #include "visitor.h"
 
 #include "mfAssert.h"
-
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
 
-#include "msrWae.h"
+#include "msrMeasureConstants.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -37,6 +35,8 @@
 #include "oahOah.h"
 
 #include "msrOah.h"
+
+#include "msrWae.h"
 
 #include "msrBrowsers.h"
 
@@ -223,7 +223,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -242,51 +242,38 @@ S_msrChord msrChord::createChordNewbornClone (
 // }
 
 // uplink to measure
-S_msrMeasure msrChord::fetchMeasureElementUpLinkToMeasure () const
-{
-  S_msrMeasure result;
-
-  switch (fChordKind) {
-    case msrChordInKind::kChordIn_NO_:
-      break;
-
-    case msrChordInKind::kChordInMeasure:
-      result = fChordUpLinkToMeasure;
-      break;
-
-    case msrChordInKind::kChordInTuplet:
-      if (fChordDirectUpLinkToTuplet) {
-        result =
-          fChordDirectUpLinkToTuplet->
-            fetchMeasureElementUpLinkToMeasure ();
-      }
-      break;
-
-    case msrChordInKind::kChordInGraceNotesGroup:
-      if (fChordDirectUpLinkToGraceNotesGroup) {
-        result =
-          fChordDirectUpLinkToGraceNotesGroup->
-            getGraceNotesGroupUpLinkToNote ()->
-              fetchMeasureElementUpLinkToMeasure ();
-      }
-      break;
-  } // switch
-
-  return result;
-}
-
-// uplink to measure
-void msrChord::setMeasureElementUpLinkToMeasure (
-  S_msrMeasure measure)
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-
-  fChordUpLinkToMeasure = measure;
-}
+// S_msrMeasure msrChord::fetchMeasureElementUpLinkToMeasure () const
+// {
+//   S_msrMeasure result;
+//
+//   switch (fChordKind) {
+//     case msrChordInKind::kChordIn_NO_:
+//       break;
+//
+//     case msrChordInKind::kChordInMeasure:
+//       result = fChordUpLinkToMeasure;
+//       break;
+//
+//     case msrChordInKind::kChordInTuplet:
+//       if (fChordDirectUpLinkToTuplet) {
+//         result =
+//           fChordDirectUpLinkToTuplet->
+//             fTupletElementUpLinkToMeasure ();
+//       }
+//       break;
+//
+//     case msrChordInKind::kChordInGraceNotesGroup:
+//       if (fChordDirectUpLinkToGraceNotesGroup) {
+//         result =
+//           fChordDirectUpLinkToGraceNotesGroup->
+//             getGraceNotesGroupUpLinkToNote ()->
+//               fTupletElementUpLinkToMeasure ();
+//       }
+//       break;
+//   } // switch
+//
+//   return result;
+// }
 
 // uplink to tuplet
 S_msrTuplet msrChord::fetchChordUpLinkToTuplet () const
@@ -344,7 +331,7 @@ S_msrScore msrChord::fetchChordUpLinkToScore () const
 
   S_msrMeasure
     measure =
-      fetchMeasureElementUpLinkToMeasure ();
+      fTupletElementUpLinkToMeasure ();
 
   if (measure) {
     result =
@@ -588,7 +575,7 @@ void msrChord::addAnotherNoteToChord (
 
   // append the note to the measure's notes flat std::list
   if (false) // JMI
-  fetchMeasureElementUpLinkToMeasure ()->
+  fTupletElementUpLinkToMeasure ()->
     appendNoteToMeasureNotesFlatList (note);
 
 /* JMI
@@ -1532,7 +1519,8 @@ void msrChord::print (std::ostream& os) const
     "fChordDisplayWholeNotes" << " : " << fChordDisplayWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << " : " << fetchMeasureElementMeasureNumber () <<
+    "measureElementMeasureNumber" << " : " << fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
@@ -2335,7 +2323,8 @@ void msrChord::printShort (std::ostream& os) const
     "fChordDisplayWholeNotes" << " : " << fChordDisplayWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << " : " << fetchMeasureElementMeasureNumber () <<
+    "measureElementMeasureNumber" << " : " << fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<

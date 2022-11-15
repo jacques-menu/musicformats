@@ -12,7 +12,7 @@
 #ifndef ___msrRehearsalMarks___
 #define ___msrRehearsalMarks___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrPlacements.h"
 
@@ -39,7 +39,7 @@ std::string msrRrehearsalKindAsString (
 std::ostream& operator << (std::ostream& os, const msrRehearsalMarkKind& elt);
 
 //______________________________________________________________________________
-class EXP msrRehearsalMark : public msrMeasureElementLambda
+class EXP msrRehearsalMark : public msrMeasureElement
 {
   public:
 

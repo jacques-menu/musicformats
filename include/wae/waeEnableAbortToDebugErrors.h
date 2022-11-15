@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___enableAbortToDebugErrorsIfDesired___
-#define ___enableAbortToDebugErrorsIfDesired___
+#ifndef ___waeEnableAbortToDebugErrors___
+#define ___waeEnableAbortToDebugErrors___
 
 
 // comment the following definition if abort on internal errors is desired

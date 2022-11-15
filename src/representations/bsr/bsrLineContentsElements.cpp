@@ -24,7 +24,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_bsrLineContentsElement bsrLineContentsElement::create (
   int inputLineNumber)
 {

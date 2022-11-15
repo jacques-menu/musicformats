@@ -15,7 +15,7 @@
 #include <list>
 
 #include "msrElements.h"
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrMargins.h"
 
@@ -607,7 +607,7 @@ typedef SMARTP<msrMeasureLayout> S_msrMeasureLayout;
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureLayout& elt);
 
 //______________________________________________________________________________
-class EXP msrPrintLayout : public msrMeasureElementLambda
+class EXP msrPrintLayout : public msrMeasureElement
 {
 /*
 <!--

@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -65,9 +65,8 @@ msrOctaveShift::msrOctaveShift (
   const S_msrMeasure& upLinkToMeasure,
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fOctaveShiftKind = octaveShiftKind;
 

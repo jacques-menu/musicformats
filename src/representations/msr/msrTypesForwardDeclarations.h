@@ -187,6 +187,9 @@ typedef SMARTP<msrMeasure> S_msrMeasure;
 class   msrMeasureElement;
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 
+// class   msrMeasureElementWithUpLinkToMeasure;
+// typedef SMARTP<msrMeasureElementWithUpLinkToMeasure> S_msrMeasureElementWithUpLinkToMeasure;
+
 class   msrMeasureLayout;
 typedef SMARTP<msrMeasureLayout> S_msrMeasureLayout;
 
