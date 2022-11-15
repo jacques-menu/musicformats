@@ -124,7 +124,6 @@ S_msrLength msrLength::create (
       lengthUnitKind,
       lengthValue);
   assert (o != nullptr);
-
   return o;
 }
 

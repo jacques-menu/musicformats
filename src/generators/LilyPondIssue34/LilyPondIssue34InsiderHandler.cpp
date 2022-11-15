@@ -94,7 +94,6 @@ S_LilyPondIssue34InsiderHandler LilyPondIssue34InsiderHandler::create (
       handlerHeader,
       multiGenerationOutputKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -879,7 +878,6 @@ S_LilyPondIssue34InsiderOahGroup LilyPondIssue34InsiderOahGroup::create ()
 {
   LilyPondIssue34InsiderOahGroup* o = new LilyPondIssue34InsiderOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

@@ -24,9 +24,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "msrMeasures.h"
-
-// // #include "msrTuplets.h"
+// #include "msrTuplets.h"
 
 #include "oahOah.h"
 
@@ -41,14 +39,14 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
-  S_msrMeasure&           upLinkToMeasure,
+  const S_msrMeasure&     upLinkToMeasure,
   const std::string&      tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
-  msrTupletFactor         tupletFactor,
+  const msrTupletFactor&  tupletFactor,
   const Rational&         memberNotesSoundingWholeNotes,
   const Rational&         memberNotesDisplayWholeNotes)
 {
@@ -77,7 +75,7 @@ S_msrTuplet msrTuplet::create (
   msrTupletLineShapeKind  tupletLineShapeKind,
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
-  msrTupletFactor         tupletFactor,
+  const msrTupletFactor&  tupletFactor,
   const Rational&         memberNotesSoundingWholeNotes,
   const Rational&         memberNotesDisplayWholeNotes)
 {
@@ -98,18 +96,19 @@ S_msrTuplet msrTuplet::create (
 
 msrTuplet::msrTuplet (
   int                     inputLineNumber,
-  S_msrMeasure&           upLinkToMeasure,
+  const S_msrMeasure&     upLinkToMeasure,
   const std::string&      tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
-  msrTupletFactor         tupletFactor,
+  const msrTupletFactor&  tupletFactor,
   const Rational&         memberNotesSoundingWholeNotes,
   const Rational&         memberNotesDisplayWholeNotes)
     : msrTupletElement (
-        inputLineNumber)
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fTupletUpLinkToMeasure = upLinkToMeasure;
 
@@ -216,19 +215,6 @@ S_msrMeasure msrTuplet::fetchMeasureElementUpLinkToMeasure () const
   } // switch
 
   return result;
-}
-
-// uplink to tuplet
-void msrTuplet::setMeasureElementUpLinkToMeasure (
-  S_msrMeasure& measure)
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-
-  fTupletUpLinkToMeasure = measure;
 }
 
 S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const

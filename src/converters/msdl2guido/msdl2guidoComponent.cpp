@@ -61,7 +61,7 @@ S_mfcConverterComponent createMsdl2guidoConverterComponent ()
     pConverterComponent =
       mfcConverterComponent::create (
         "msdl2guido",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the converter's own history

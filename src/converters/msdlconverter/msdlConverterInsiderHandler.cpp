@@ -118,7 +118,6 @@ S_msdlConverterInsiderHandler msdlConverterInsiderHandler::create (
       handlerHeader,
       multiGenerationOutputKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -1007,7 +1006,6 @@ S_msdlConverterInsiderOahGroup msdlConverterInsiderOahGroup::create ()
 {
   msdlConverterInsiderOahGroup* o = new msdlConverterInsiderOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

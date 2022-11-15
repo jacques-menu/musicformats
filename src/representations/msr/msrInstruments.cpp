@@ -24,8 +24,6 @@
 
 #include "mfServiceRunData.h"
 
-#include "msrMeasures.h"
-
 #include "msrInstruments.h"
 
 #include "oahOah.h"
@@ -162,8 +160,8 @@ std::ostream& operator << (std::ostream& os, const S_msrStringTuning& elt)
 
 //______________________________________________________________________________
 S_msrScordatura msrScordatura::create (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrScordatura* o =
     new msrScordatura (
@@ -174,17 +172,17 @@ S_msrScordatura msrScordatura::create (
 }
 
 S_msrScordatura msrScordatura::create (
-  int          inputLineNumber)
+  int                 inputLineNumber)
 {
   return
     msrScordatura::create (
       inputLineNumber,
-      upLinkToMeasure);
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrScordatura::msrScordatura (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
@@ -443,7 +441,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
   return
     msrHarpPedalsTuning::create (
       inputLineNumber,
-      upLinkToMeasure);
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrHarpPedalsTuning::msrHarpPedalsTuning (
@@ -864,8 +862,8 @@ std::ostream& operator << (std::ostream& os, const S_msrPedal& elt)
 
 //______________________________________________________________________________
 S_msrDamp msrDamp::create (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrDamp* o =
     new msrDamp (
@@ -876,19 +874,17 @@ S_msrDamp msrDamp::create (
 }
 
 S_msrDamp msrDamp::create (
-  int          inputLineNumber)
+  int                 inputLineNumber)
 {
   return
     msrDamp::create (
       inputLineNumber,
       gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
-  assert (o != nullptr);
-  return o;
 }
 
 msrDamp::msrDamp (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
@@ -966,8 +962,8 @@ std::ostream& operator << (std::ostream& os, const S_msrDamp& elt)
 
 //______________________________________________________________________________
 S_msrDampAll msrDampAll::create (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
 {
   msrDampAll* o =
     new msrDampAll (
@@ -978,17 +974,17 @@ S_msrDampAll msrDampAll::create (
 }
 
 S_msrDampAll msrDampAll::create (
-  int          inputLineNumber)
+  int                 inputLineNumber)
 {
   return
     msrDampAll::create (
       inputLineNumber,
-      upLinkToMeasure);
+      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrDampAll::msrDampAll (
-  int          inputLineNumber,
-  S_msrMeasure upLinkToMeasure)
+  int                 inputLineNumber,
+  const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

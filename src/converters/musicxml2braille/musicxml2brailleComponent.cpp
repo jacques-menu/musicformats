@@ -71,7 +71,7 @@ EXP S_mfcConverterComponent createMusicxml2brailleConverterComponent ()
     pConverterComponent =
       mfcConverterComponent::create (
         "musicxml2braille",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the converter's own history

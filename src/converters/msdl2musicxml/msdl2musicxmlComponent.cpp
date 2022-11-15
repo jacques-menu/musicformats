@@ -60,7 +60,7 @@ S_mfcConverterComponent createMsdl2musicxmlConverterComponent ()
     pConverterComponent =
       mfcConverterComponent::create (
         "msdl2musicxml",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the converter's own history

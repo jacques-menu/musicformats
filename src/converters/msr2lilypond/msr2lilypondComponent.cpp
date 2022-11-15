@@ -63,7 +63,7 @@ S_mfcConverterComponent createMsr2lilypondConverterComponent ()
     pConverterComponent =
       mfcConverterComponent::create (
         "msr2lilypond",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the converter's own history

@@ -50,7 +50,6 @@ S_msrTempoNote msrTempoNote::create (
       tempoNoteWholeNotes,
       tempoNoteBelongsToATuplet);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -211,7 +210,7 @@ S_msrTempoTuplet msrTempoTuplet::create (
   int                          tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
-  msrTupletFactor              tempoTupletFactor,
+  const msrTupletFactor&       tempoTupletFactor,
   const Rational&              memberNotesDisplayWholeNotes)
 {
   msrTempoTuplet* o =
@@ -231,7 +230,7 @@ msrTempoTuplet::msrTempoTuplet (
   int                          tempoTupletNumber,
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
-  msrTupletFactor              tempoTupletFactor,
+  const msrTupletFactor&       tempoTupletFactor,
   const Rational&              memberNotesDisplayWholeNotes)
     : msrElement (inputLineNumber)
 {
@@ -802,7 +801,6 @@ S_msrTempoNotesRelationshipElements msrTempoNotesRelationshipElements::create (
       inputLineNumber,
       tempoNotesRelationshipElementsKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -1008,7 +1006,6 @@ S_msrTempo msrTempo::createTempoWordsOnly (
       tempoParenthesizedKind,
       tempoPlacementKind);
   assert (o != nullptr);
-
   return o;
 }
 

@@ -42,7 +42,6 @@ S_msdrLayer msdrLayer::create (
       inputLineNumber,
       layerNumber);
   assert (o != nullptr);
-
   return o;
 }
 

@@ -38,7 +38,6 @@ S_displayOahGroup displayOahGroup::create ()
 {
   displayOahGroup* o = new displayOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

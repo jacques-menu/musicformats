@@ -24,7 +24,6 @@
 
 #include "msrOah.h"
 
-#include "msrMeasures.h"
 #include "msrSegnos.h"
 
 
@@ -65,7 +64,7 @@ std::ostream& operator << (std::ostream& os, const msrDalSegnoKind& elt)
 S_msrSegno msrSegno::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  int           staffNumber)
+  int                 staffNumber)
 {
   msrSegno* o =
     new msrSegno (
@@ -77,23 +76,23 @@ S_msrSegno msrSegno::create (
 }
 
 S_msrSegno msrSegno::create (
-  int inputLineNumber,
-  int staffNumber)
+  int                 inputLineNumber,
+  int                 staffNumber)
 {
   return
     msrSegno::create (
       inputLineNumber,
-      nullptr,
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       staffNumber);
 }
 
 msrSegno::msrSegno (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  int           staffNumber)
+  int                 staffNumber)
     : msrMeasureElementLambda (
         inputLineNumber,
-        gNullMeasureSmartPointer) // set later in setMeasureElementUpLinkToMeasure()
+        upLinkToMeasure)
 {
   fStaffNumber = staffNumber;
 }
@@ -179,11 +178,11 @@ std::ostream& operator << (std::ostream& os, const S_msrSegno& elt)
 
 //______________________________________________________________________________
 S_msrDalSegno msrDalSegno::create (
-  int                inputLineNumber,
+  int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrDalSegnoKind    dalSegnoKind,
-  const std::string& dalSegnoString,
-  int                staffNumber)
+  msrDalSegnoKind     dalSegnoKind,
+  const std::string&  dalSegnoString,
+  int                 staffNumber)
 {
   msrDalSegno* o =
     new msrDalSegno (
@@ -197,10 +196,10 @@ S_msrDalSegno msrDalSegno::create (
 }
 
 S_msrDalSegno msrDalSegno::create (
-  int                inputLineNumber,
-  msrDalSegnoKind    dalSegnoKind,
-  const std::string& dalSegnoString,
-  int                staffNumber)
+  int                 inputLineNumber,
+  msrDalSegnoKind     dalSegnoKind,
+  const std::string&  dalSegnoString,
+  int                 staffNumber)
 {
   return
     msrDalSegno::create (
@@ -212,11 +211,11 @@ S_msrDalSegno msrDalSegno::create (
 }
 
 msrDalSegno::msrDalSegno (
-  int                inputLineNumber,
-  msrDalSegnoKind    dalSegnoKind,
+  int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  const std::string& dalSegnoString,
-  int                staffNumber)
+  msrDalSegnoKind     dalSegnoKind,
+  const std::string&  dalSegnoString,
+  int                 staffNumber)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)

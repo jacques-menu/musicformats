@@ -14,8 +14,6 @@
 
 #include "visitor.h"
 
-#include "msrMeasures.h"
-
 #include "msrRehearsalMarks.h"
 
 #include "oahOah.h"
@@ -47,7 +45,6 @@ S_msrRehearsalMark msrRehearsalMark::create (
 
 S_msrRehearsalMark msrRehearsalMark::create (
   int                  inputLineNumber,
-  S_msrMeasure&        upLinkToMeasure,
   msrRehearsalMarkKind rehearsalKind,
   const std::string&   rehearsalText,
   msrPlacementKind     rehearsalPlacementKind)

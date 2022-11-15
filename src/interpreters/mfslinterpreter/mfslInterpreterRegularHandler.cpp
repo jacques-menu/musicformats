@@ -55,7 +55,6 @@ S_mfslInterpreterRegularHandler mfslInterpreterRegularHandler::create (
       handlerHeader,
       insiderOahHandler);
   assert (o != nullptr);
-
   return o;
 }
 

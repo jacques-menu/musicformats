@@ -22,8 +22,6 @@
 
 #include "msrPitchesNames.h"
 
-#include "msrMeasures.h"
-
 #include "msrStavesDetails.h"
 
 #include "oahOah.h"
@@ -233,7 +231,7 @@ S_msrStaffDetails msrStaffDetails::create (
   return
     msrStaffDetails::create (
       inputLineNumber,
-      upLinkToMeasure,
+      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       staffTypeKind,
       showFretsKind,
       printObjectKind,

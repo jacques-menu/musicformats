@@ -43,7 +43,6 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
       inputLineNumber,
       afterGraceNotesGroupContentsUpLinkToVoice);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -259,7 +258,6 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::create (
       afterGraceNotesGroupIsSlashed,
       afterGraceNotesGroupUpLinkToVoice);
   assert (o != nullptr);
-
   return o;
 }
 

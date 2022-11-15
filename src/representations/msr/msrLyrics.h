@@ -68,23 +68,23 @@ class EXP msrSyllable : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrSyllable> create (
-                            int                   inputLineNumber,
-                            S_msrMeasure&         upLinkToMeasure,
-                            msrSyllableKind       syllableKind,
-                            msrSyllableExtendKind syllableExtendKind,
-                            const std::string&    syllableStanzaNumber,
-                            const Rational&       syllableWholeNotes,
-                            msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           syllableUpLinkToStanza);
+                            int                    inputLineNumber,
+                            S_msrMeasure&          upLinkToMeasure,
+                            msrSyllableKind        syllableKind,
+                            msrSyllableExtendKind  syllableExtendKind,
+                            const std::string&     syllableStanzaNumber,
+                            const Rational&        syllableWholeNotes,
+                            const msrTupletFactor& syllableTupletFactor,
+                            S_msrStanza            syllableUpLinkToStanza);
 
     static SMARTP<msrSyllable> create (
-                            int                   inputLineNumber,
-                            msrSyllableKind       syllableKind,
-                            msrSyllableExtendKind syllableExtendKind,
-                            const std::string&    syllableStanzaNumber,
-                            const Rational&       syllableWholeNotes,
-                            msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           syllableUpLinkToStanza);
+                            int                    inputLineNumber,
+                            msrSyllableKind        syllableKind,
+                            msrSyllableExtendKind  syllableExtendKind,
+                            const std::string&     syllableStanzaNumber,
+                            const Rational&        syllableWholeNotes,
+                            const msrTupletFactor& syllableTupletFactor,
+                            S_msrStanza            syllableUpLinkToStanza);
 
     SMARTP<msrSyllable> createSyllableNewbornClone (
                             S_msrPart containingPart); // JMI
@@ -93,15 +93,15 @@ class EXP msrSyllable : public msrMeasureElementLambda
                             S_msrPart containingPart);
 
     static SMARTP<msrSyllable> createWithNextMeasurePuristNumber ( // JMI superflous??? v0.9.66
-                            int                   inputLineNumber,
-                            S_msrMeasure&         upLinkToMeasure,
-                            msrSyllableKind       syllableKind,
-                            msrSyllableExtendKind syllableExtendKind,
-                            const std::string&    syllableStanzaNumber,
-                            const Rational&       syllableWholeNotes,
-                            msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           syllableUpLinkToStanza,
-                            int                   syllableNextMeasurePuristNumber);
+                            int                    inputLineNumber,
+                            S_msrMeasure&          upLinkToMeasure,
+                            msrSyllableKind        syllableKind,
+                            msrSyllableExtendKind  syllableExtendKind,
+                            const std::string&     syllableStanzaNumber,
+                            const Rational&        syllableWholeNotes,
+                            const msrTupletFactor& syllableTupletFactor,
+                            S_msrStanza            syllableUpLinkToStanza,
+                            int                    syllableNextMeasurePuristNumber);
 
   protected:
 
@@ -109,14 +109,14 @@ class EXP msrSyllable : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrSyllable (
-                            int                   inputLineNumber,
-                            S_msrMeasure&         upLinkToMeasure,
-                            msrSyllableKind       syllableKind,
-                            msrSyllableExtendKind syllableExtendKind,
-                            const std::string&    syllableStanzaNumber,
-                            const Rational&       syllableWholeNotes,
-                            msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           syllableUpLinkToStanza);
+                            int                    inputLineNumber,
+                            S_msrMeasure&          upLinkToMeasure,
+                            msrSyllableKind        syllableKind,
+                            msrSyllableExtendKind  syllableExtendKind,
+                            const std::string&     syllableStanzaNumber,
+                            const Rational&        syllableWholeNotes,
+                            const msrTupletFactor& syllableTupletFactor,
+                            S_msrStanza            syllableUpLinkToStanza);
 
     virtual               ~msrSyllable ();
 
@@ -137,12 +137,6 @@ class EXP msrSyllable : public msrMeasureElementLambda
 
     S_msrStanza           getSyllableUpLinkToStanza () const
                               { return fSyllableUpLinkToStanza; }
-
-//     // position in measure
-//     void                  setMeasureElementMeasurePosition (
-//                             const S_msrMeasure& measure,
-//                             const Rational&    measurePosition,
-//                             const std::string& context) override;
 
     // syllable kind
     msrSyllableKind       getSyllableKind () const

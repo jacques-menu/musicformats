@@ -27,8 +27,11 @@ class EXP msrHiddenMeasureAndBarLine : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrHiddenMeasureAndBarLine> create (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
+
+    static SMARTP<msrHiddenMeasureAndBarLine> create (
+                            int                 inputLineNumber);
 
   protected:
 
@@ -36,8 +39,8 @@ class EXP msrHiddenMeasureAndBarLine : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrHiddenMeasureAndBarLine (
-                            int          inputLineNumber,
-                            S_msrMeasure upLinkToMeasure);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     virtual               ~msrHiddenMeasureAndBarLine ();
 

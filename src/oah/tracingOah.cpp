@@ -40,7 +40,6 @@ S_tracingOahGroup tracingOahGroup::create (
   tracingOahGroup* o = new tracingOahGroup (
     handler);
   assert (o != nullptr);
-
   return o;
 }
 

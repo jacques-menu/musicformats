@@ -74,7 +74,7 @@ S_mfcLibraryComponent createLibraryComponent ()
     pLibraryComponent =
       mfcLibraryComponent::create (
         "MusicFormats",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the library's representations std::list

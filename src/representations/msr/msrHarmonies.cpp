@@ -28,8 +28,6 @@
 
 #include "msrPitchesNames.h"
 
-#include "msrMeasures.h"
-
 #include "msrHarmonies.h"
 #include "msrTablatures.h"
 
@@ -56,7 +54,6 @@ S_msrHarmonyInterval msrHarmonyInterval::create (
       harmonyIntervalIntervalKind,
       harmonyIntervalRelativeOctave);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -3586,7 +3583,6 @@ S_msrHarmonyDegree msrHarmonyDegree::create (
       harmonyDegreeAlterationKind,
       harmonyDegreeTypeKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -3822,7 +3818,6 @@ S_msrHarmonyContents msrHarmonyContents::create (
       harmonyContentsRootNote,
       harmonyContentsHarmonyKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -4175,7 +4170,7 @@ S_msrHarmony msrHarmony::create (
   const Rational&          harmonySoundingWholeNotes,
   const Rational&          harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
-  msrTupletFactor          harmonyTupletFactor,
+  const msrTupletFactor&   harmonyTupletFactor,
   const Rational&          harmonyWholeNotesOffset)
 {
   msrHarmony* o =
@@ -4193,7 +4188,6 @@ S_msrHarmony msrHarmony::create (
       harmonyTupletFactor,
       harmonyWholeNotesOffset);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -4208,7 +4202,7 @@ msrHarmony::msrHarmony (
   const Rational&          harmonySoundingWholeNotes,
   const Rational&          harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
-  msrTupletFactor          harmonyTupletFactor,
+  const msrTupletFactor&   harmonyTupletFactor,
   const Rational&          harmonyWholeNotesOffset)
     : msrMeasureElementLambda (
         inputLineNumber,
@@ -4405,7 +4399,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
 }
 
 void msrHarmony::setHarmonyTupletFactor (
-  msrTupletFactor tupletFactor)
+  const msrTupletFactor& tupletFactor)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
@@ -5446,7 +5440,6 @@ S_msrHarmonyStructure msrHarmonyStructure::createBare (
     new msrHarmonyStructure (
       harmonyStructureHarmonyKind);
   assert (o != nullptr);
-
   return o;
 }
 

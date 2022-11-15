@@ -40,7 +40,6 @@ S_outputFileOahGroup outputFileOahGroup::create ()
 {
   outputFileOahGroup* o = new outputFileOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

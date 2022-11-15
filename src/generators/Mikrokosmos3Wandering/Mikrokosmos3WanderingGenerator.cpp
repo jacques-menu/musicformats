@@ -36,7 +36,6 @@ S_Mikrokosmos3WanderingGenerator Mikrokosmos3WanderingGenerator::create ()
   Mikrokosmos3WanderingGenerator* o = new
     Mikrokosmos3WanderingGenerator ();
   assert (o != nullptr);
-
   return o;
 }
 

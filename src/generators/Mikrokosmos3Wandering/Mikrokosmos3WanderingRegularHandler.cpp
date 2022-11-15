@@ -51,7 +51,6 @@ S_Mikrokosmos3WanderingRegularHandler Mikrokosmos3WanderingRegularHandler::creat
       insiderOahHandler,
       multiGenerationOutputKind);
   assert (o != nullptr);
-
   return o;
 }
 

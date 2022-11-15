@@ -40,11 +40,11 @@ class EXP msrSegno : public msrMeasureElementLambda
     static SMARTP<msrSegno> create (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            int           staffNumber);
+                            int                 staffNumber);
 
     static SMARTP<msrSegno> create (
-                            int inputLineNumber,
-                            int staffNumber);
+                            int                 inputLineNumber,
+                            int                 staffNumber);
 
   protected:
 
@@ -54,7 +54,7 @@ class EXP msrSegno : public msrMeasureElementLambda
                           msrSegno (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            int           staffNumber);
+                            int                 staffNumber);
 
     virtual               ~msrSegno ();
 
@@ -109,17 +109,17 @@ class EXP msrDalSegno : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrDalSegno> create (
-                            int                inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            msrDalSegnoKind    dalSegnoKind,
-                            const std::string& dalSegnoString,
-                            int                staffNumber);
+                            msrDalSegnoKind     dalSegnoKind,
+                            const std::string&  dalSegnoString,
+                            int                 staffNumber);
 
     static SMARTP<msrDalSegno> create (
-                            int                inputLineNumber,
-                            msrDalSegnoKind    dalSegnoKind,
-                            const std::string& dalSegnoString,
-                            int                staffNumber);
+                            int                 inputLineNumber,
+                            msrDalSegnoKind     dalSegnoKind,
+                            const std::string&  dalSegnoString,
+                            int                 staffNumber);
 
   protected:
 
@@ -127,11 +127,11 @@ class EXP msrDalSegno : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrDalSegno (
-                            int                inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            msrDalSegnoKind    dalSegnoKind,
-                            const std::string& dalSegnoString,
-                            int                staffNumber);
+                            msrDalSegnoKind     dalSegnoKind,
+                            const std::string&  dalSegnoString,
+                            int                 staffNumber);
 
     virtual               ~msrDalSegno ();
 

@@ -29,10 +29,15 @@ class EXP msrBarNumberCheck : public msrMeasureElementLambda
     // ------------------------------------------------------
 
     static SMARTP<msrBarNumberCheck> create (
-                            int                inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const std::string& nextBarOriginalNumber,
-                            int                nextBarPuristNumber);
+                            const std::string&  nextBarOriginalNumber,
+                            int                 nextBarPuristNumber);
+
+    static SMARTP<msrBarNumberCheck> create (
+                            int                 inputLineNumber,
+                            const std::string&  nextBarOriginalNumber,
+                            int                 nextBarPuristNumber);
 
   protected:
 
@@ -40,10 +45,10 @@ class EXP msrBarNumberCheck : public msrMeasureElementLambda
     // ------------------------------------------------------
 
                           msrBarNumberCheck (
-                            int                inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const std::string& nextBarOriginalNumber,
-                            int                nextBarPuristNumber);
+                            const std::string&  nextBarOriginalNumber,
+                            int                 nextBarPuristNumber);
 
     virtual               ~msrBarNumberCheck ();
 

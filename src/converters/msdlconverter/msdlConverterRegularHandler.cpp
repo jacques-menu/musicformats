@@ -58,7 +58,6 @@ S_msdlConverterRegularHandler msdlConverterRegularHandler::create (
       insiderOahHandler,
       multiGenerationOutputKind);
   assert (o != nullptr);
-
   return o;
 }
 

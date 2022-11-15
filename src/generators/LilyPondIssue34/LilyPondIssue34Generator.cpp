@@ -35,7 +35,6 @@ S_LilyPondIssue34Generator LilyPondIssue34Generator::create ()
   LilyPondIssue34Generator* o = new
     LilyPondIssue34Generator ();
   assert (o != nullptr);
-
   return o;
 }
 

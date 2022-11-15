@@ -58,7 +58,6 @@ S_mfslInterpreterInsiderHandler mfslInterpreterInsiderHandler::create (
       serviceName,
       handlerHeader);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -429,7 +428,6 @@ S_mfslInterpreterInsiderOahGroup mfslInterpreterInsiderOahGroup::create ()
 {
   mfslInterpreterInsiderOahGroup* o = new mfslInterpreterInsiderOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

@@ -43,7 +43,6 @@ S_oahInsiderHandler oahInsiderHandler::create (
       handlerDescription,
       handlerUsage);
   assert (o != nullptr);
-
   return o;
 }
 */

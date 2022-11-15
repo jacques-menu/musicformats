@@ -290,7 +290,7 @@ class EXP msrHarmony : public msrMeasureElementLambda
                             const Rational&          harmonySoundingWholeNotes,
                             const Rational&          harmonyDisplayWholeNotes,
                             int                      harmoniesStaffNumber,
-                            msrTupletFactor          harmonyTupletFactor,
+                            const msrTupletFactor&   harmonyTupletFactor,
                             const Rational&          harmonyWholeNotesOffset);
 
     SMARTP<msrHarmony> createHarmonyNewbornClone (
@@ -315,7 +315,7 @@ class EXP msrHarmony : public msrMeasureElementLambda
                             const Rational&          harmonySoundingWholeNotes,
                             const Rational&          harmonyDisplayWholeNotes,
                             int                      harmoniesStaffNumber,
-                            msrTupletFactor          harmonyTupletFactor,
+                            const msrTupletFactor&   harmonyTupletFactor,
                             const Rational&          harmonyWholeNotesOffset);
 
     virtual               ~msrHarmony ();
@@ -337,12 +337,6 @@ class EXP msrHarmony : public msrMeasureElementLambda
 
     S_msrVoice            getHarmoniesUpLinkToVoice () const
                              { return fHarmoniesUpLinkToVoice; }
-
-//     // position in measure
-//     void                  setMeasureElementMeasurePosition (
-//                             const S_msrMeasure measure,
-//                             const Rational&    measurePosition,
-//                             const std::string& context) override
 
     // whole notes
     void                  setHarmonyDisplayWholeNotes (
@@ -395,7 +389,7 @@ class EXP msrHarmony : public msrMeasureElementLambda
 
     // tuplet factor
     void                  setHarmonyTupletFactor (
-                            msrTupletFactor tupletFactor);
+                            const msrTupletFactor& tupletFactor);
 
     const msrTupletFactor&
                           getHarmonyTupletFactor () const

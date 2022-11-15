@@ -42,7 +42,6 @@ S_waeOahGroup waeOahGroup::create ()
 {
   waeOahGroup* o = new waeOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

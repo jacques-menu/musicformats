@@ -32,8 +32,6 @@
 
 #include "oahEarlyOptions.h"
 
-#include "msrMeasures.h"
-
 #include "msrTimeSignatures.h"
 
 #include "oahOah.h"
@@ -162,7 +160,6 @@ S_msrTimeSignatureItem msrTimeSignatureItem::create (
     new msrTimeSignatureItem (
       inputLineNumber);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -964,38 +961,6 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 msrTimeSignature::~msrTimeSignature ()
 {}
-
-void msrTimeSignature::setMeasureElementMeasurePosition (
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
-      "Setting time signature's position in measure of " <<
-      asString () <<
-      " to " <<
-      measurePosition <<
-      " (was " <<
-      fMeasureElementMeasurePosition <<
-      ") in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      std::endl;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
-
-  // set time signature's position in measure
-  fMeasureElementMeasurePosition = measurePosition;
-}
 
 void msrTimeSignature::appendTimeSignatureItem (
   S_msrTimeSignatureItem timeSignatureItem)

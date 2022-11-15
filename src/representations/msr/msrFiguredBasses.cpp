@@ -20,8 +20,6 @@
 
 #include "mfAssert.h"
 
-#include "msrMeasures.h"
-
 #include "msrFiguredBasses.h"
 
 #include "oahOah.h"
@@ -50,7 +48,6 @@ S_msrBassFigure msrBassFigure::create (
       figureNumber,
       figureSuffixKind);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -344,7 +341,6 @@ S_msrFiguredBass msrFiguredBass::create (
       msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo,
       msrTupletFactor (1, 1));
   assert (o != nullptr);
-
   return o;
 }
 
@@ -358,13 +354,13 @@ S_msrFiguredBass msrFiguredBass::create (
 }
 
 S_msrFiguredBass msrFiguredBass::create (
-  int                 inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure,
-  const Rational&     figuredBassSoundingWholeNotes,
-  const Rational&     figuredBassDisplayWholeNotes,
+  int                    inputLineNumber,
+  const S_msrMeasure&    upLinkToMeasure,
+  const Rational&        figuredBassSoundingWholeNotes,
+  const Rational&        figuredBassDisplayWholeNotes,
   msrFiguredBassParenthesesKind
-                      figuredBassParenthesesKind,
-  msrTupletFactor     figuredBassTupletFactor)
+                         figuredBassParenthesesKind,
+  const msrTupletFactor& figuredBassTupletFactor)
 {
   msrFiguredBass* o =
     new msrFiguredBass (
@@ -375,17 +371,16 @@ S_msrFiguredBass msrFiguredBass::create (
       figuredBassParenthesesKind,
       figuredBassTupletFactor);
   assert (o != nullptr);
-
   return o;
 }
 
 S_msrFiguredBass msrFiguredBass::create (
-  int             inputLineNumber,
-  const Rational& figuredBassSoundingWholeNotes,
-  const Rational& figuredBassDisplayWholeNotes,
+  int                    inputLineNumber,
+  const Rational&        figuredBassSoundingWholeNotes,
+  const Rational&        figuredBassDisplayWholeNotes,
   msrFiguredBassParenthesesKind
-                  figuredBassParenthesesKind,
-  msrTupletFactor figuredBassTupletFactor)
+                         figuredBassParenthesesKind,
+  const msrTupletFactor& figuredBassTupletFactor)
 {
   return
     msrFiguredBass::create (
@@ -398,13 +393,13 @@ S_msrFiguredBass msrFiguredBass::create (
 }
 
 msrFiguredBass::msrFiguredBass (
-  int                 inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure,
-  const Rational&     figuredBassSoundingWholeNotes,
-  const Rational&     figuredBassDisplayWholeNotes,
+  int                    inputLineNumber,
+  const S_msrMeasure&    upLinkToMeasure,
+  const Rational&        figuredBassSoundingWholeNotes,
+  const Rational&        figuredBassDisplayWholeNotes,
   msrFiguredBassParenthesesKind
-                      figuredBassParenthesesKind,
-  msrTupletFactor     figuredBassTupletFactor)
+                         figuredBassParenthesesKind,
+  const msrTupletFactor& figuredBassTupletFactor)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure),
@@ -517,7 +512,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 }
 
 void msrFiguredBass::appendFigureToFiguredBass (
-  S_msrBassFigure& bassFigure)
+  const S_msrBassFigure& bassFigure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {

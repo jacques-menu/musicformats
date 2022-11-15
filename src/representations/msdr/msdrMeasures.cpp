@@ -42,7 +42,6 @@ S_msdrMeasure msdrMeasure::create (
       inputLineNumber,
       measureNumber);
   assert (o != nullptr);
-
   return o;
 }
 

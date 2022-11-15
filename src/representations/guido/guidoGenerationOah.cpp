@@ -49,7 +49,6 @@ S_guidoGenerationOahGroup guidoGenerationOahGroup::create ()
 {
   guidoGenerationOahGroup* o = new guidoGenerationOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

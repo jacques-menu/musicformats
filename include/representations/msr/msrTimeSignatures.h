@@ -221,12 +221,6 @@ class EXP msrTimeSignature : public msrMeasureElementLambda
     // set and get
     // ------------------------------------------------------
 
-    // position in measure
-    void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure& measure,
-                            const Rational&     measurePosition,
-                            const std::string&  context) override;
-
     msrTimeSignatureSymbolKind
                           getTimeSignatureSymbolKind () const
                               { return fTimeSignatureSymbolKind; }

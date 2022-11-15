@@ -26,8 +26,6 @@
   #include "tracingOah.h"
 #endif
 
-#include "msrMeasures.h"
-
 #include "msrLyrics.h"
 
 #include "oahOah.h"
@@ -42,14 +40,14 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrSyllable msrSyllable::create (
-  int                   inputLineNumber,
-  S_msrMeasure&         upLinkToMeasure,
-  msrSyllableKind       syllableKind,
-  msrSyllableExtendKind syllableExtendKind,
-  const std::string&    syllableStanzaNumber,
-  const Rational&       syllableWholeNotes,
-  msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           syllableUpLinkToStanza)
+  int                    inputLineNumber,
+  S_msrMeasure&          upLinkToMeasure,
+  msrSyllableKind        syllableKind,
+  msrSyllableExtendKind  syllableExtendKind,
+  const std::string&     syllableStanzaNumber,
+  const Rational&        syllableWholeNotes,
+  const msrTupletFactor& syllableTupletFactor,
+  S_msrStanza            syllableUpLinkToStanza)
 {
   msrSyllable* o =
     new msrSyllable (
@@ -62,18 +60,17 @@ S_msrSyllable msrSyllable::create (
       syllableTupletFactor,
       syllableUpLinkToStanza);
   assert (o != nullptr);
-
   return o;
 }
 
 S_msrSyllable msrSyllable::create (
-  int                   inputLineNumber,
-  msrSyllableKind       syllableKind,
-  msrSyllableExtendKind syllableExtendKind,
-  const std::string&    syllableStanzaNumber,
-  const Rational&       syllableWholeNotes,
-  msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           syllableUpLinkToStanza)
+  int                    inputLineNumber,
+  msrSyllableKind        syllableKind,
+  msrSyllableExtendKind  syllableExtendKind,
+  const std::string&     syllableStanzaNumber,
+  const Rational&        syllableWholeNotes,
+  const msrTupletFactor& syllableTupletFactor,
+  S_msrStanza            syllableUpLinkToStanza)
 {
   return
     msrSyllable::create (
@@ -85,21 +82,18 @@ S_msrSyllable msrSyllable::create (
       syllableWholeNotes,
       syllableTupletFactor,
       syllableUpLinkToStanza);
-  assert (o != nullptr);
-
-  return o;
 }
 
-S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
-  int                   inputLineNumber,
-  S_msrMeasure          upLinkToMeasure,
-  msrSyllableKind       syllableKind,
-  msrSyllableExtendKind syllableExtendKind,
-  const std::string&    syllableStanzaNumber,
-  const Rational&       syllableWholeNotes,
-  msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           syllableUpLinkToStanza,
-  int                   syllableNextMeasurePuristNumber)
+S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber ( // JMI superflous??? v0.9.66
+  int                    inputLineNumber,
+  S_msrMeasure&          upLinkToMeasure,
+  msrSyllableKind        syllableKind,
+  msrSyllableExtendKind  syllableExtendKind,
+  const std::string&     syllableStanzaNumber,
+  const Rational&        syllableWholeNotes,
+  const msrTupletFactor& syllableTupletFactor,
+  S_msrStanza            syllableUpLinkToStanza,
+  int                    syllableNextMeasurePuristNumber)
 {
   msrSyllable* o =
     msrSyllable::create (
@@ -121,14 +115,14 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
 }
 
 msrSyllable::msrSyllable (
-  int                   inputLineNumber,
-  S_msrMeasure          upLinkToMeasure,
-  msrSyllableKind       syllableKind,
-  msrSyllableExtendKind syllableExtendKind,
-  const std::string&    syllableStanzaNumber,
-  const Rational&       syllableWholeNotes,
-  msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           syllableUpLinkToStanza)
+  int                    inputLineNumber,
+  S_msrMeasure&          upLinkToMeasure,
+  msrSyllableKind        syllableKind,
+  msrSyllableExtendKind  syllableExtendKind,
+  const std::string&     syllableStanzaNumber,
+  const Rational&        syllableWholeNotes,
+  const msrTupletFactor& syllableTupletFactor,
+  S_msrStanza            syllableUpLinkToStanza)
     : msrMeasureElementLambda (
         inputLineNumber,
         upLinkToMeasure)
@@ -856,7 +850,6 @@ S_msrStanza msrStanza::create (
       stanzaNumber,
       stanzaUpLinkToVoice);
   assert (o != nullptr);
-
   return o;
 }
 

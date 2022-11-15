@@ -89,7 +89,7 @@ S_mfcConverterComponent createMsdlConverterConverterComponent ()
     pConverterComponent =
       mfcConverterComponent::create (
         "msdlConverter",
-        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the converter's own history

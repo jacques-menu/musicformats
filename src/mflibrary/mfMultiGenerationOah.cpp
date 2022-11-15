@@ -486,7 +486,6 @@ S_multiGenerationOahGroup mfMultiGenerationOahGroup::create ()
 {
   mfMultiGenerationOahGroup* o = new mfMultiGenerationOahGroup ();
   assert (o != nullptr);
-
   return o;
 }
 

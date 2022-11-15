@@ -126,7 +126,6 @@ S_msrMargin msrMargin::create (
       marginTypeKind,
       marginLength);
   assert (o != nullptr);
-
   return o;
 }
 
@@ -183,7 +182,6 @@ S_msrMarginsGroup msrMarginsGroup::create (
     new msrMarginsGroup (
       marginTypeKind);
   assert (o != nullptr);
-
   return o;
 }
 
