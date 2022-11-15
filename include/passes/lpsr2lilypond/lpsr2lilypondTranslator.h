@@ -1250,12 +1250,12 @@ class EXP lpsr2lilypondTranslator :
 
     // chords
     // ------------------------------------------------------
-    std::list<int>             fPendingChordMemberNotesStringNumbers;
+    std::list<int>        fPendingChordMemberNotesStringNumbers;
 
     Bool                  fOnGoingChord;
     S_msrChord            fCurrentChord;
 
-    std::list<int>             fCurrentChordPendingSlurs;
+    std::list<int>        fCurrentChordPendingSlurs;
 
     void                  generateCodeAheadOfChordContents (
                             S_msrChord chord);

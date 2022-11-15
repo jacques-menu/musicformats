@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -192,7 +192,7 @@ std::ostream& operator << (std::ostream& os, const oahFindStringMatch* elt)
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahFindableElement oahFindableElement::create ()
 {
   oahFindableElement* o =
@@ -232,7 +232,7 @@ std::ostream& operator << (std::ostream& os, const oahFindableElement& elt)
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahElement oahElement::create (
   const std::string&       longName,
   const std::string&       shortName,

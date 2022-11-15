@@ -386,9 +386,8 @@ msrClef::msrClef (
   const S_msrMeasure& upLinkToMeasure,
   msrClefKind         clefKind,
   int                 clefStaffNumber)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fClefKind        = clefKind;
   fClefStaffNumber = clefStaffNumber;

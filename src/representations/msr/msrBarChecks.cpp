@@ -15,12 +15,18 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "mfAssert.h"
+
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
 #include "msrBarChecks.h"
+
+#include "msrMeasureConstants.h"
 
 #include "oahOah.h"
 
@@ -71,9 +77,8 @@ S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber ( // JMI superflous??? 
 msrBarCheck::msrBarCheck (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
@@ -82,16 +87,17 @@ msrBarCheck::msrBarCheck (
       std::endl;
   }
 #endif
+
+  fBarCheckUpLinkToMeasure = upLinkToMeasure;
 }
 
 msrBarCheck::msrBarCheck (
-  int                inputLineNumber,
+  int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  const std::string& nextBarOriginalNumber,
-  int                nextBarPuristNumber)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+  const std::string&  nextBarOriginalNumber,
+  int                 nextBarPuristNumber)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fNextBarOriginalNumber = nextBarOriginalNumber;
   fNextBarPuristNumber   = nextBarPuristNumber;
@@ -112,6 +118,34 @@ msrBarCheck::msrBarCheck (
 
 msrBarCheck::~msrBarCheck ()
 {}
+
+void msrBarCheck::setBarCheckUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of bar check " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fBarCheckUpLinkToMeasure = measure;
+}
 
 void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 {

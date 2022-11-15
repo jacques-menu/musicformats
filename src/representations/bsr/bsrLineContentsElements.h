@@ -10,7 +10,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// this class   is purely virtual
+// this class is purely vir.htual
 class EXP bsrLineContentsElement : public bsrElement
 {
   public:

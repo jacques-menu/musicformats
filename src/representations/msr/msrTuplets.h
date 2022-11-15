@@ -86,7 +86,7 @@ class EXP msrTuplet : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
+//     S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
 
     // tuplet kind
     void                  setTupletKind (

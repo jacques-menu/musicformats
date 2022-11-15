@@ -94,7 +94,8 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
     newbornClone =
       msrTuplet::create (
         fInputLineNumber,
-        fetchMeasureElementMeasureNumber (),
+        fBarLineUpLinkToMeasure->
+getMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
         fTupletLineShapeKind,
@@ -135,7 +136,7 @@ Deep copies of the \msrRepr\ data is not used currently. This can be changed sho
 
 Many classes in \mf\ use single inheritance. For example, in \msr{msrTimeSignature.h}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrTimeSignature : public msrMeasureElementLambda
+class EXP msrTimeSignature : public msrMeasureElement
 {
   public:
 
@@ -188,9 +189,8 @@ msrTimeSignature::msrTimeSignature (
   S_msrMeasure  upLinkToMeasure,
   msrTimeSignatureSymbolKind
                 timeSignatureSymbolKind)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fTimeSignatureSymbolKind = timeSignatureSymbolKind;
 

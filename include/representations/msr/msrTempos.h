@@ -15,7 +15,7 @@
 #include <list>
 
 #include "msrElements.h"
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrTemposEnumTypes.h"
 
@@ -314,11 +314,7 @@ typedef SMARTP<msrTempoNotesRelationshipElements> S_msrTempoNotesRelationshipEle
 EXP std::ostream& operator << (std::ostream& os, const S_msrTempoNotesRelationshipElements& elt);
 
 //______________________________________________________________________________
-// data types
-
-
-//______________________________________________________________________________
-class EXP msrTempo : public msrMeasureElementLambda
+class EXP msrTempo : public msrMeasureElement
 {
   public:
 

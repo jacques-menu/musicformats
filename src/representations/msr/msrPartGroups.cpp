@@ -19,7 +19,7 @@
 
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -53,7 +53,7 @@ S_msrPartGroup msrPartGroup::create (
   msrPartGroupImplicitKind partGroupImplicitKind,
   msrPartGroupBarLineKind  partGroupBarLineKind,
   S_msrPartGroup           partGroupUpLinkToPartGroup,
-  S_msrScore               UpLinkToPartGroupToScore)
+  S_msrScore               partGroupUpLinkToScore)
 {
   msrPartGroup* o =
     new msrPartGroup (
@@ -69,7 +69,7 @@ S_msrPartGroup msrPartGroup::create (
       partGroupImplicitKind,
       partGroupBarLineKind,
       partGroupUpLinkToPartGroup,
-      UpLinkToPartGroupToScore);
+      partGroupUpLinkToScore);
   assert (o != nullptr);
   return o;
 }
@@ -82,7 +82,7 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
   const std::string&       partGroupAccidentalText,
   const std::string&       partGroupAbbreviation,
   msrPartGroupBarLineKind  partGroupBarLineKind,
-  S_msrScore               UpLinkToPartGroupToScore)
+  S_msrScore               partGroupUpLinkToScore)
 {
   msrPartGroup* o =
     new msrPartGroup (
@@ -99,7 +99,7 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
       partGroupBarLineKind,
       nullptr,                            // partGroupUpLinkToPartGroup,
                                           // will be set below
-      UpLinkToPartGroupToScore);
+      partGroupUpLinkToScore);
   assert (o != nullptr);
 
   // the implicit part group it the top-most one:
@@ -115,7 +115,7 @@ S_msrPartGroup msrPartGroup::create (
   int                      partGroupAbsoluteNumber,
   const std::string&       partGroupName,
   S_msrPartGroup           partGroupUpLinkToPartGroup,
-  S_msrScore               UpLinkToPartGroupToScore)
+  S_msrScore               partGroupUpLinkToScore)
 {
   msrPartGroup* o =
     new msrPartGroup (
@@ -124,7 +124,7 @@ S_msrPartGroup msrPartGroup::create (
       partGroupAbsoluteNumber,
       partGroupName,
       partGroupUpLinkToPartGroup,
-      UpLinkToPartGroupToScore);
+      partGroupUpLinkToScore);
   assert (o != nullptr);
   return o;
 }
@@ -142,7 +142,7 @@ msrPartGroup::msrPartGroup (
   msrPartGroupImplicitKind partGroupImplicitKind,
   msrPartGroupBarLineKind  partGroupBarLineKind,
   S_msrPartGroup           partGroupUpLinkToPartGroup,
-  S_msrScore               UpLinkToPartGroupToScore)
+  S_msrScore               partGroupUpLinkToScore)
     : msrPartGroupElement (inputLineNumber)
 {
   // no sanity check on partGroupUpLinkToPartGroup here,
@@ -154,11 +154,11 @@ msrPartGroup::msrPartGroup (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fUpLinkToPartGroupToScore != nullptr,
-    "fUpLinkToPartGroupToScore is null");
+    fPartGroupUpLinkToScore != nullptr,
+    "fPartGroupUpLinkToScore is null");
     */
 
-  fUpLinkToPartGroupToScore     = UpLinkToPartGroupToScore;
+  fPartGroupUpLinkToScore     = partGroupUpLinkToScore;
 
   // other fields
   fPartGroupNumber          = partGroupNumber;
@@ -172,9 +172,9 @@ msrPartGroup::msrPartGroup (
   if (
     partGroupNameLength
       >
-    fUpLinkToPartGroupToScore->getScorePartGroupNamesMaxLength ()
+    fPartGroupUpLinkToScore->getScorePartGroupNamesMaxLength ()
   ) {  // JMI sanity check ???
-    fUpLinkToPartGroupToScore->
+    fPartGroupUpLinkToScore->
       setScorePartGroupNamesMaxLength (
         partGroupNameLength);
   }
@@ -211,7 +211,7 @@ msrPartGroup::msrPartGroup (
   int                      partGroupAbsoluteNumber,
   const std::string&       partGroupName,
   S_msrPartGroup           partGroupUpLinkToPartGroup,
-  S_msrScore               UpLinkToPartGroupToScore)
+  S_msrScore               partGroupUpLinkToScore)
     : msrPartGroupElement (inputLineNumber)
 {
   // no sanity check on partGroupUpLinkToPartGroup here,
@@ -223,11 +223,11 @@ msrPartGroup::msrPartGroup (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fUpLinkToPartGroupToScore != nullptr,
-    "fUpLinkToPartGroupToScore is null");
+    fPartGroupUpLinkToScore != nullptr,
+    "fPartGroupUpLinkToScore is null");
     */
 
-  fUpLinkToPartGroupToScore     = UpLinkToPartGroupToScore;
+  fPartGroupUpLinkToScore     = partGroupUpLinkToScore;
 
   // other fields
   fPartGroupNumber          = partGroupNumber;
@@ -241,9 +241,9 @@ msrPartGroup::msrPartGroup (
   if (
     partGroupNameLength
       >
-    fUpLinkToPartGroupToScore->getScorePartGroupNamesMaxLength ()
+    fPartGroupUpLinkToScore->getScorePartGroupNamesMaxLength ()
   ) {  // JMI sanity check ???
-    fUpLinkToPartGroupToScore->
+    fPartGroupUpLinkToScore->
       setScorePartGroupNamesMaxLength (
         partGroupNameLength);
   }
@@ -390,7 +390,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 
   S_msrScore
     score =
-      fUpLinkToPartGroupToScore;
+      fPartGroupUpLinkToScore;
 
   size_t partGroupInstrumentNameLength =
     fPartGroupInstrumentName.size ();
@@ -985,7 +985,7 @@ void msrPartGroup::registerVoiceInPartGroupAllVoicesList (
   fPartGroupAllVoicesList.push_back (voice);
 
   // register it in the partgroup uplink
-  fUpLinkToPartGroupToScore->
+  fPartGroupUpLinkToScore->
     registerVoiceInScoreAllVoicesList (voice);
 }
 

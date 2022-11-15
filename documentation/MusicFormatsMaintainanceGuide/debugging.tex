@@ -9,7 +9,7 @@ Debugging \mf\ can be quite time-consuming. The trace options available have bee
 
 \Function{catchSignals} at the beginning of the \functionName {main} function can be commented out in order to run a tool under a debugger.
 
-File \wae{enableAbortToDebugErrors.h} contains:
+File \wae{waeEnableAbortToDebugErrors.h} contains:
 \begin{lstlisting}[language=CPlusPlus]
 /*
   MusicFormats Library
@@ -22,8 +22,8 @@ File \wae{enableAbortToDebugErrors.h} contains:
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___enableAbortToDebugErrorsIfDesired___
-#define ___enableAbortToDebugErrorsIfDesired___
+#ifndef ___waeEnableAbortToDebugErrors___
+#define ___waeEnableAbortToDebugErrors___
 
 
 // comment the following definition if abort on internal errors is desired
@@ -144,25 +144,25 @@ Process 28676 launched: '/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2l
 
     [PartGroup "PartGroup_1 ('0', fPartGroupName "Implicit")" (1 part), line 0
       fPartGroupName            : "Implicit"
-      
+
 Process 28676 stopped
 * thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x1)
     frame #0: 0x00000001007b879a xml2ly`MusicFormats::msrPartGroup::printShort(this=0x0000600003e08100, os=0x000000010ca04650) const at msrPartGroups.cpp:1185:13
    1182	      i      = iBegin;
-   1183	
+   1183
    1184	    for ( ; ; ) {
 -> 1185	      (*i)->printShort (os);
    1186	      if (++i == iEnd) break;
    1187	      os << std::endl;
    1188	    } // for
 Target 0: (xml2ly) stopped.
-(lldb) 
+(lldb)
 \end{lstlisting}
 
 \end{itemize}
 
 This bug has thus been introduced between v0.9.60 and v0.9.61.
-Three have been several \code{git push} occurrences leading from v0.9.60 to v0.9.61. 
+Three have been several \code{git push} occurrences leading from v0.9.60 to v0.9.61.
 
 
 % -------------------------------------------------------------------------
@@ -291,7 +291,7 @@ cd libdir && cmake .. -G Xcode   -Wno-dev
 
 ... ... ...
 
-/Users/jacquesmenu/musicformats-git-dev/src/components/mfcLibraryComponent.cpp:12:10: fatal error: 
+/Users/jacquesmenu/musicformats-git-dev/src/components/mfcLibraryComponent.cpp:12:10: fatal error:
       '../../../MusicFormatsVersionNumber.h' file not found
 #include "../../../MusicFormatsVersionNumber.h"
          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -349,9 +349,9 @@ The bug we're after is found to have been introduced at this point:
 
 The changes brought by commit \code{} can be shown with: %%% git show 662454a   git show --stat 662454a
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > git log --patch -1 662454a > patch_662454a.txt 
+jacquesmenu@macmini: ~/musicformats-git-dev > git log --patch -1 662454a > patch_662454a.txt
 
-jacquesmenu@macmini: ~/musicformats-git-dev > ls -sal patch_662454a.txt 
+jacquesmenu@macmini: ~/musicformats-git-dev > ls -sal patch_662454a.txt
 256 -rw-r--r--@ 1 jacquesmenu  staff  80782 May  4 10:59 patch_662454a.txt
 \end{lstlisting}
 

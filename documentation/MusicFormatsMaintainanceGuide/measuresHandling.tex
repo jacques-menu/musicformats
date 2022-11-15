@@ -62,37 +62,37 @@ class   {\tt } contains a std::list of mesure elements:
 The \class{msrMeasureElements} sub-classes instances in {\tt } can be of types:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep 'public msrMeasureElement' *.h
-msrBarChecks.h:class EXP msrBarCheck : public msrMeasureElementLambda
-msrBarLines.h:class EXP msrBarLine : public msrMeasureElementLambda
-msrBarNumberChecks.h:class EXP msrBarNumberCheck : public msrMeasureElementLambda
-msrBreaks.h:class EXP msrLineBreak : public msrMeasureElementLambda
-msrBreaks.h:class EXP msrPageBreak : public msrMeasureElementLambda
-msrClefs.h:class EXP msrClef : public msrMeasureElementLambda
-msrCodas.h:class EXP msrCoda : public msrMeasureElementLambda
-msrDoubleTremolos.h:class EXP msrDoubleTremolo : public msrMeasureElementLambda
-msrEyeGlasses.h:class EXP msrEyeGlasses : public msrMeasureElementLambda
-msrFiguredBasses.h:class EXP msrFiguredBass : public msrMeasureElementLambda
-msrHarmonies.h:class EXP msrHarmony : public msrMeasureElementLambda
-msrHiddenMeasureAndBarLines.h:class EXP msrHiddenMeasureAndBarLine : public msrMeasureElementLambda
-msrInstruments.h:class EXP msrScordatura : public msrMeasureElementLambda
-msrInstruments.h:class EXP msrAccordionRegistration : public msrMeasureElementLambda
-msrInstruments.h:class EXP msrHarpPedalsTuning : public msrMeasureElementLambda
-msrInstruments.h:class EXP msrPedal : public msrMeasureElementLambda
-msrInstruments.h:class EXP msrDamp : public msrMeasureElementLambda
-msrInstruments.h:class EXP msrDampAll : public msrMeasureElementLambda
-msrKeys.h:class EXP msrKey : public msrMeasureElementLambda
-msrLyrics.h:class EXP msrSyllable : public msrMeasureElementLambda
-msrMusicXMLSpecifics.h:class EXP msrPrintLayout : public msrMeasureElementLambda
-msrRehearsalMarks.h:class EXP msrRehearsalMark : public msrMeasureElementLambda
-msrSegnos.h:class EXP msrSegno : public msrMeasureElementLambda
-msrDalSegnos.h:class EXP msrDalSegno : public msrMeasureElementLambda
-msrStavesDetails.h:class EXP msrStaffDetails : public msrMeasureElementLambda
-msrTempos.h:class EXP msrTempo : public msrMeasureElementLambda
-msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElementLambda
-msrTranspositions.h:class EXP msrOctaveShift : public msrMeasureElementLambda
-msrTranspositions.h:class EXP msrTransposition : public msrMeasureElementLambda
-msrTupletElements.h:class EXP msrTupletElement : public msrMeasureElementLambda
-msrVoiceStaffChanges.h:class EXP msrVoiceStaffChange : public msrMeasureElementLambda
+msrBarChecks.h:class EXP msrBarCheck : public msrMeasureElement
+msrBarLines.h:class EXP msrBarLine : public msrMeasureElement
+msrBarNumberChecks.h:class EXP msrBarNumberCheck : public msrMeasureElement
+msrBreaks.h:class EXP msrLineBreak : public msrMeasureElement
+msrBreaks.h:class EXP msrPageBreak : public msrMeasureElement
+msrClefs.h:class EXP msrClef : public msrMeasureElement
+msrCodas.h:class EXP msrCoda : public msrMeasureElement
+msrDoubleTremolos.h:class EXP msrDoubleTremolo : public msrMeasureElement
+msrEyeGlasses.h:class EXP msrEyeGlasses : public msrMeasureElement
+msrFiguredBasses.h:class EXP msrFiguredBass : public msrMeasureElement
+msrHarmonies.h:class EXP msrHarmony : public msrMeasureElement
+msrHiddenMeasureAndBarLines.h:class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
+msrInstruments.h:class EXP msrScordatura : public msrMeasureElement
+msrInstruments.h:class EXP msrAccordionRegistration : public msrMeasureElement
+msrInstruments.h:class EXP msrHarpPedalsTuning : public msrMeasureElement
+msrInstruments.h:class EXP msrPedal : public msrMeasureElement
+msrInstruments.h:class EXP msrDamp : public msrMeasureElement
+msrInstruments.h:class EXP msrDampAll : public msrMeasureElement
+msrKeys.h:class EXP msrKey : public msrMeasureElement
+msrLyrics.h:class EXP msrSyllable : public msrMeasureElement
+msrMusicXMLSpecifics.h:class EXP msrPrintLayout : public msrMeasureElement
+msrRehearsalMarks.h:class EXP msrRehearsalMark : public msrMeasureElement
+msrSegnos.h:class EXP msrSegno : public msrMeasureElement
+msrDalSegnos.h:class EXP msrDalSegno : public msrMeasureElement
+msrStavesDetails.h:class EXP msrStaffDetails : public msrMeasureElement
+msrTempos.h:class EXP msrTempo : public msrMeasureElement
+msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElement
+msrTranspositions.h:class EXP msrOctaveShift : public msrMeasureElement
+msrTranspositions.h:class EXP msrTransposition : public msrMeasureElement
+msrTupletElements.h:class EXP msrTupletElement : public msrMeasureElement
+msrVoiceStaffChanges.h:class EXP msrVoiceStaffChange : public msrMeasureElement
 \end{lstlisting}
 
 
@@ -127,7 +127,8 @@ void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
   // set elem's measure number
   elem->
     setMeasureNumber (
-      fetchMeasureElementMeasureNumber ());
+      fBarLineUpLinkToMeasure->
+getMeasureNumber ());
 
   // set elem's position in measure
   elem->
@@ -176,7 +177,8 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
   // set harmony's measure number
   harmony->
     setMeasureNumber (
-      fetchMeasureElementMeasureNumber ());
+      fBarLineUpLinkToMeasure->
+getMeasureNumber ());
 
   // append the harmony to the measure elements std::list
   // DON'T call 'appendElementToMeasure (harmony)':

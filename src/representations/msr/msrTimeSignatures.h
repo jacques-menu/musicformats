@@ -15,7 +15,7 @@
 #include <vector>
 
 #include "msrElements.h"
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -145,7 +145,7 @@ typedef SMARTP<msrTimeSignatureItem> S_msrTimeSignatureItem;
 EXP std::ostream& operator << (std::ostream& os, const S_msrTimeSignatureItem& elt);
 
 //______________________________________________________________________________
-class EXP msrTimeSignature : public msrMeasureElementLambda
+class EXP msrTimeSignature : public msrMeasureElement
 {
   public:
 

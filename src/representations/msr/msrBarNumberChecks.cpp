@@ -15,12 +15,14 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
 
 #include "msrBarNumberChecks.h"
+
+#include "msrMeasureConstants.h"
 
 #include "oahOah.h"
 
@@ -65,9 +67,8 @@ msrBarNumberCheck::msrBarNumberCheck (
   const S_msrMeasure& upLinkToMeasure,
   const std::string&  nextBarOriginalNumber,
   int                 nextBarPuristNumber)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fNextBarOriginalNumber = nextBarOriginalNumber;
   fNextBarPuristNumber   = nextBarPuristNumber;

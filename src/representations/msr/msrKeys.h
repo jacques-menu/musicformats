@@ -16,7 +16,7 @@
 #include <vector>
 
 #include "msrElements.h"
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrOctaves.h"
 
@@ -150,7 +150,7 @@ class   msrKey;
 typedef SMARTP<msrKey> S_msrKey;
 
 //______________________________________________________________________________
-class EXP msrKey : public msrMeasureElementLambda
+class EXP msrKey : public msrMeasureElement
 {
   public:
 

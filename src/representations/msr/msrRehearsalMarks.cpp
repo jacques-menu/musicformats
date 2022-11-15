@@ -64,9 +64,8 @@ msrRehearsalMark::msrRehearsalMark (
   msrRehearsalMarkKind rehearsalKind,
   const std::string&   rehearsalText,
   msrPlacementKind     rehearsalPlacementKind)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fRehearsalMarkKind = rehearsalKind;
 

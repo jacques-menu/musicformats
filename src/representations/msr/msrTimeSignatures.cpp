@@ -20,7 +20,7 @@
 #include "oahWae.h"
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -467,7 +467,7 @@ msrTimeSignature::msrTimeSignature (
   const S_msrMeasure& upLinkToMeasure,
   msrTimeSignatureSymbolKind
                 timeSignatureSymbolKind)
-    : msrMeasureElementLambda (
+    : msrMeasureElement (
       inputLineNumber,
       upLinkToMeasure)
 {

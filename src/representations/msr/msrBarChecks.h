@@ -14,14 +14,14 @@
 
 #include <list>
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrBarCheck : public msrMeasureElementLambda
+class EXP msrBarCheck : public msrMeasureElement
 {
   public:
 
@@ -68,6 +68,12 @@ class EXP msrBarCheck : public msrMeasureElementLambda
     // set and get
     // ------------------------------------------------------
 
+    void                  setBarCheckUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getBarCheckUpLinkToMeasure () const
+                            { return fBarCheckUpLinkToMeasure; }
+
     std::string           getNextBarOriginalNumber () const
                               { return fNextBarOriginalNumber; }
 
@@ -104,6 +110,8 @@ class EXP msrBarCheck : public msrMeasureElementLambda
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fBarCheckUpLinkToMeasure;
 
     std::string           fNextBarOriginalNumber;
     int                   fNextBarPuristNumber;

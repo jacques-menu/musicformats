@@ -11,7 +11,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -31,7 +31,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_msdlScannerWaeHandler msdlScannerWaeHandler::create ()
 {
   msdlScannerWaeHandler* o =

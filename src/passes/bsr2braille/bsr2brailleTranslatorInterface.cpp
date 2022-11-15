@@ -11,7 +11,7 @@
 
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif

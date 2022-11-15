@@ -13,7 +13,7 @@
 #define ___msrFiguredBasses___
 
 #include "msrElements.h"
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrTypesForwardDeclarations.h"
 
@@ -158,7 +158,7 @@ std::string msrFiguredBassParenthesesKindAsString (
 std::ostream& operator << (std::ostream& os, const msrFiguredBassParenthesesKind& elt);
 
 //______________________________________________________________________________
-class EXP msrFiguredBass : public msrMeasureElementLambda
+class EXP msrFiguredBass : public msrMeasureElement
 {
   public:
 

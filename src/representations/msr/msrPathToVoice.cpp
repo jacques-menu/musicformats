@@ -91,7 +91,7 @@ void msrPathToVoice::initializeFromStaff (S_msrStaff staff)
 
   fScore =
     partGroupUpLinkToPartGroup->
-      getUpLinkToPartGroupToScore ();
+      getPartGroupUpLinkToScore ();
 
   fBook =
     fScore->

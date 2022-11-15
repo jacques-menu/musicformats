@@ -14,12 +14,14 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
 
 #include "msrBreaks.h"
+
+#include "msrMeasureConstants.h"
 
 #include "oahOah.h"
 
@@ -85,9 +87,8 @@ msrLineBreak::msrLineBreak (
   const std::string&  nextBarNumber,
   msrUserChosenLineBreakKind
                       userChosenLineBreakKind)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fNextBarNumber = nextBarNumber;
 
@@ -239,9 +240,8 @@ msrPageBreak::msrPageBreak (
   const S_msrMeasure& upLinkToMeasure,
   msrUserChosenPageBreakKind
                       userChosenPageBreakKind)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {

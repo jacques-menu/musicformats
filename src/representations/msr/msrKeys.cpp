@@ -22,7 +22,7 @@
 
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -323,9 +323,8 @@ msrKey::msrKey ( // for traditional keys
   msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
   int                      keyCancel)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   // this is a traditional key
   fKeyKind = msrKeyKind::kKeyTraditional;
@@ -389,9 +388,8 @@ msrKey::msrKey ( // for traditional keys
 msrKey::msrKey ( // for Humdrum/Scot keys
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   // this is a Humdrum/Scot key
   fKeyKind = msrKeyKind::kKeyHumdrumScot;

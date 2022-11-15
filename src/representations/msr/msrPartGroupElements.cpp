@@ -22,7 +22,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_msrPartGroupElement msrPartGroupElement::create (
   int inputLineNumber)
 {

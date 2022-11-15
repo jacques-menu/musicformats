@@ -12,14 +12,14 @@
 #ifndef ___msrEyeGlasses___
 #define ___msrEyeGlasses___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrEyeGlasses : public msrMeasureElementLambda
+class EXP msrEyeGlasses : public msrMeasureElement
 {
   public:
 
@@ -49,6 +49,12 @@ class EXP msrEyeGlasses : public msrMeasureElementLambda
     // set and get
     // ------------------------------------------------------
 
+    void                  setEyeGlassesUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getEyeGlassesUpLinkToMeasure () const
+                            { return fEyeGlassesUpLinkToMeasure; }
+
   public:
 
     // public services
@@ -77,6 +83,8 @@ class EXP msrEyeGlasses : public msrMeasureElementLambda
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fEyeGlassesUpLinkToMeasure;
 };
 typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;
 EXP std::ostream& operator << (std::ostream& os, const S_msrEyeGlasses& elt);

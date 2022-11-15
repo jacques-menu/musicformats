@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -1159,7 +1159,7 @@ msrTempo::msrTempo (
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElementLambda (
+    : msrMeasureElement (
         inputLineNumber,
         upLinkToMeasure),
       fTempoBeatUnit (),
@@ -1193,7 +1193,7 @@ msrTempo::msrTempo (
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElementLambda (
+    : msrMeasureElement (
         inputLineNumber,
         upLinkToMeasure),
       fTempoBeatUnit (tempoBeatUnit),
@@ -1219,7 +1219,7 @@ msrTempo::msrTempo (
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElementLambda (
+    : msrMeasureElement (
         inputLineNumber,
         upLinkToMeasure),
       fTempoBeatUnit (tempoBeatUnit),
@@ -1249,7 +1249,7 @@ msrTempo::msrTempo (
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElementLambda (
+    : msrMeasureElement (
         inputLineNumber,
         upLinkToMeasure),
       fTempoBeatUnit (),

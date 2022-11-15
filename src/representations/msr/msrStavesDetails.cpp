@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -245,9 +245,8 @@ msrStaffDetails::msrStaffDetails (
   msrShowFretsKind    showFretsKind,
   msrPrintObjectKind  printObjectKind,
   msrPrintSpacingKind printSpacingKind)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fStaffTypeKind    = staffTypeKind;
 

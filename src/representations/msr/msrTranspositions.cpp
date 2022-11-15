@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -75,9 +75,8 @@ msrTransposition::msrTransposition (
   int           transposeChromatic,
   int           transposeOctaveChange,
   Bool          transposeDouble)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fTranspositionDiatonic     = transposeDiatonic;
   fTranspositionChromatic    = transposeChromatic;

@@ -11,7 +11,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -56,9 +56,8 @@ msrVoiceStaffChange::msrVoiceStaffChange (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const S_msrStaff&   staffToChangeTo)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fStaffToChangeTo = staffToChangeTo;
 }

@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -87,11 +87,10 @@ S_msrCoda msrCoda::create (
 msrCoda::msrCoda (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  int           staffNumber,
-  msrCodaKind   codaKind)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+  int                 staffNumber,
+  msrCodaKind         codaKind)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fStaffNumber = staffNumber;
 

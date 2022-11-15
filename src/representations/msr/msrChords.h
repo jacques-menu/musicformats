@@ -94,12 +94,6 @@ class EXP msrChord : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            S_msrMeasure measure) override;
-
-    S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
-
     // uplink to tuplet
     void                  setChordDirectUpLinkToTuplet (
                             const S_msrTuplet& tuplet)

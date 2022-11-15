@@ -16,7 +16,7 @@
 #include <vector>
 
 #include "msrElements.h"
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrTupletFactors.h"
 #include "msrVoices.h"
@@ -60,7 +60,7 @@ std::string msrSyllableExtendKindAsString (
 std::ostream& operator << (std::ostream& os, const msrSyllableExtendKind& elt);
 
 //______________________________________________________________________________
-class EXP msrSyllable : public msrMeasureElementLambda
+class EXP msrSyllable : public msrMeasureElement
 {
   public:
 

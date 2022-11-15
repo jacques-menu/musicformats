@@ -19,6 +19,22 @@ class   msrAfterGraceNotesGroup;
         ^
 
 
+https://cplusplus.com/forum/articles/10627/
+
+If, for example, class A uses class B, then class B is one of class A's dependencies. Whether it can be forward declared or needs to be included depends on how B is used within A:
+
+
+- do nothing if: A makes no references at all to B
+- do nothing if: The only reference to B is in a friend declaration
+- forward declare B if: A contains a B pointer or reference: B* myb;
+- forward declare B if: one or more functions has a B object/pointer/reference
+as a parementer, or as a return type: B MyFunction(B myb);
+- #include "b.h" if: B is a parent class of A
+- #include "b.h" if: A contains a B object: B myb;
+
+A circular dependency is when two (or more) classes depend on each other. For example, class A depends on class B, and class B depends on class A. If you stick to "the right way" and forward declare when you can instead of #including needlessly, this usually isn't a problem. As long as the circle is broken with a forward declaration at some point, you're fine.
+
+
 % -------------------------------------------------------------------------
 \section{Files naming conventions}
 % -------------------------------------------------------------------------
@@ -1315,7 +1331,7 @@ In most cases, there are justs named \methodName{create*}, but a couple of them 
 
 One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to them would be hard to distinguish at first glance otherwise:
 \begin{lstlisting}[language=CPlusPlus]
- class EXP msrTempo : public msrMeasureElementLambda
+ class EXP msrTempo : public msrMeasureElement
 {
  		// ... ... ...
 
@@ -1357,7 +1373,7 @@ One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to th
 
 Another case is that of \class{msrKey} in \msrBoth{msrKeys}, in which the variant chosen is made explicit:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrKey : public msrMeasureElementLambda
+class EXP msrKey : public msrMeasureElement
 {
 		// ... ... ...
 
@@ -1449,7 +1465,7 @@ When a description contains many fields, the ones initialized by the values of t
 msrPart::msrPart (
   int            inputLineNumber,
   std::string         partID,
-  S_msrPartGroup PartUpLinkToPartGroup)
+  S_msrPartGroup partUpLinkToPartGroup)
     : msrPartGroupElement (inputLineNumber)
 {
   // replace spaces in partID to set fPartID
@@ -1462,15 +1478,15 @@ msrPart::msrPart (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    PartUpLinkToPartGroup != nullptr,
-    "PartUpLinkToPartGroup is null");
+    partUpLinkToPartGroup != nullptr,
+    "partUpLinkToPartGroup is null");
     */
 
   // set part number
   fPartAbsoluteNumber = ++gPartsCounter;
 
   // set part's part group upLink
-  fPartUpLinkToPartGroup = PartUpLinkToPartGroup;
+  fPartUpLinkToPartGroup = partUpLinkToPartGroup;
 
   // do other initializations
   initializePart ();
@@ -1713,7 +1729,7 @@ oah/oahBasicTypes.h:    std::multiset<S_oahElement, compareOahElements>
 oah/oahElements.h:struct compareOahElements {
 formats/msr/msrParts.h:    static bool           compareStavesToHaveFiguredBassesBelowCorrespondingPart (
 formats/msr/msrNotes.h:    static bool           compareNotesByIncreasingMeasurePosition (
-formats/msr/msrMeasureElements.h:    static bool           compareMeasureElementsByIncreasingMeasurePosition (
+formats/msr/msrMeasureElementsWithoutUpLinkToMeasure.h:    static bool           compareMeasureElementsByIncreasingMeasurePosition (
 formats/msr/msrStaves.h:    static bool           compareVoicesByIncreasingNumber (
 formats/msr/msrStaves.h:    static bool           compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
 formats/msr/msrStaves.h:    static bool           compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (

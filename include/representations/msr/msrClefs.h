@@ -15,7 +15,7 @@
 #include <list>
 #include <map>
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -70,7 +70,7 @@ class   msrClef;
 typedef SMARTP<msrClef> S_msrClef;
 
 //______________________________________________________________________________
-class EXP msrClef : public msrMeasureElementLambda
+class EXP msrClef : public msrMeasureElement
 {
   public:
 

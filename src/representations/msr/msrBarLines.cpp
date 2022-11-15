@@ -15,14 +15,18 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
 #include "mfStringsHandling.h"
 
 #include "msrBarLines.h"
+
+#include "msrMeasureConstants.h"
 
 #include "oahOah.h"
 
@@ -107,9 +111,8 @@ msrBarLine::msrBarLine (
   msrBarLineHasSegnoKind        barLineHasSegnoKind,
   msrBarLineHasCodaKind         barLineHasCodaKind,
   msrBarLineRepeatWingedKind    barLineRepeatWingedKind)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fLocationKind        = barLineLocationKind;
 
@@ -138,6 +141,34 @@ msrBarLine::msrBarLine (
 
 msrBarLine::~msrBarLine ()
 {}
+
+void msrBarLine::setBarLineUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of bar line " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fBarLineUpLinkToMeasure = measure;
+}
 
 S_msrBarLine msrBarLine::createFinalBarLine (
   int                 inputLineNumber,
@@ -551,8 +582,10 @@ std::string msrBarLine::asShortString () const
   s <<
     "[BarLine " <<
     msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
-    ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
-    ", fMeasureElementMeasurePosition " << fMeasureElementMeasurePosition <<
+    ", measureNumber: " <<
+    fBarLineUpLinkToMeasure->getMeasureNumber () <<
+    ", fMeasureElementMeasurePosition " <<
+    fMeasureElementMeasurePosition <<
 
 /* JMI
     ", " <<
@@ -591,7 +624,8 @@ std::string msrBarLine::asString () const
   s <<
     "[BarLine " <<
     msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
-    ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
+    ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
 
     ", " <<
@@ -633,7 +667,7 @@ void msrBarLine::print (std::ostream& os) const
     ", fBarLineCategoryKind: " <<
     msrBarLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
+    ", fBarLineUpLinkToMeasure: " << fBarLineUpLinkToMeasure->asShortString () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber <<
     std::endl;
@@ -702,7 +736,8 @@ void msrBarLine::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << " : " <<
-    fetchMeasureElementMeasureNumber () <<
+    fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
     std::endl;
 
   --gIndenter;
@@ -719,7 +754,8 @@ void msrBarLine::printShort (std::ostream& os) const
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
     msrBarLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
+    ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber <<
     ']' <<

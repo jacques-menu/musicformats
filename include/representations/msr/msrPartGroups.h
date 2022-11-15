@@ -106,7 +106,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             msrPartGroupImplicitKind partGroupImplicitKind,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
                             S_msrPartGroup           partGroupUpLinkToPartGroup,
-                            S_msrScore               UpLinkToPartGroupToScore);
+                            S_msrScore               partGroupUpLinkToScore);
 
     static SMARTP<msrPartGroup> createImplicitPartGroup (
                             int                      partGroupNumber,
@@ -116,7 +116,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const std::string&       partGroupAccidentalText,
                             const std::string&       partGroupAbbreviation,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
-                            S_msrScore               UpLinkToPartGroupToScore);
+                            S_msrScore               partGroupUpLinkToScore);
 
     SMARTP<msrPartGroup> createPartGroupNewbornClone (
                             S_msrPartGroup partGroupClone,
@@ -132,7 +132,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupAbsoluteNumber,
                             const std::string&       partGroupName,
                             S_msrPartGroup           partGroupUpLinkToPartGroup,
-                            S_msrScore               UpLinkToPartGroupToScore);
+                            S_msrScore               partGroupUpLinkToScore);
 
   protected:
 
@@ -152,7 +152,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             msrPartGroupImplicitKind partGroupImplicitKind,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
                             S_msrPartGroup           partGroupUpLinkToPartGroup,
-                            S_msrScore               UpLinkToPartGroupToScore);
+                            S_msrScore               partGroupUpLinkToScore);
 
                           msrPartGroup (
                             int                      inputLineNumber,
@@ -160,7 +160,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupAbsoluteNumber,
                             const std::string&       partGroupName,
                             S_msrPartGroup           partGroupUpLinkToPartGroup,
-                            S_msrScore               UpLinkToPartGroupToScore);
+                            S_msrScore               partGroupUpLinkToScore);
 
     virtual               ~msrPartGroup ();
 
@@ -180,8 +180,8 @@ class EXP msrPartGroup : public msrPartGroupElement
     S_msrPartGroup        getPartGroupUpLinkToPartGroup () const
                               { return fPartGroupUpLinkToPartGroup; }
 
-    S_msrScore            getUpLinkToPartGroupToScore () const
-                              { return fUpLinkToPartGroupToScore; }
+    S_msrScore            getPartGroupUpLinkToScore () const
+                              { return fPartGroupUpLinkToScore; }
 
     // numbers
     int                   getPartGroupAbsoluteNumber () const
@@ -305,11 +305,11 @@ class EXP msrPartGroup : public msrPartGroupElement
     // ------------------------------------------------------
 
     void                  printPartGroupElementsList (
-                            int      inputLineNumber,
+                            int           inputLineNumber,
                             std::ostream& os) const;
 
     void                  printPartGroupElementsListShort (
-                            int      inputLineNumber,
+                            int           inputLineNumber,
                             std::ostream& os) const;
 
     std::string           asString () const override;
@@ -340,7 +340,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     S_msrPartGroup        fPartGroupUpLinkToPartGroup;
                             // part groups can be nested
 
-    S_msrScore            fUpLinkToPartGroupToScore;
+    S_msrScore            fPartGroupUpLinkToScore;
 
     // numbers
 

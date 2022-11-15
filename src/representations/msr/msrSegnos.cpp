@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -90,9 +90,8 @@ msrSegno::msrSegno (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   int                 staffNumber)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fStaffNumber = staffNumber;
 }
@@ -216,9 +215,8 @@ msrDalSegno::msrDalSegno (
   msrDalSegnoKind     dalSegnoKind,
   const std::string&  dalSegnoString,
   int                 staffNumber)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fDalSegnoKind = dalSegnoKind;
 

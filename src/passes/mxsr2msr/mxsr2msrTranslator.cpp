@@ -18,7 +18,7 @@
 #include "wae.h"
 #include "mxsr2msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -26,10 +26,10 @@
 #include "mxsr2msrComponent.h"
 
 #include "mfAssert.h"
-
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
+
+#include "msrMeasureConstants.h"
 
 #include "oahOah.h"
 
@@ -17069,7 +17069,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
   S_msrMeasure
     chordFirstNoteDirectUpLinkToMeasure =
       chordFirstNote->
-        fetchMeasureElementUpLinkToMeasure ();
+        getNoteUpLinkToMeasure ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChordsDetails ()) {
@@ -17081,7 +17081,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
       std::endl <<
       "+++++++++++++++++" <<
       std::endl << std::endl <<
-      "++++++++++++++++ chordFirstNote->fetchMeasureElementUpLinkToMeasure () =";
+      "++++++++++++++++ chordFirstNote->getNoteUpLinkToMeasure () =";
 
     if (chordFirstNoteDirectUpLinkToMeasure) {
       gLogStream <<
@@ -20113,7 +20113,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //         S_msrMeasure
 //           noteMeasure =
 //             note->
-//               fetchMeasureElementUpLinkToMeasure ();
+//               getNoteUpLinkToMeasure ();
 //
 //         // sanity check
 //         mfAssert (

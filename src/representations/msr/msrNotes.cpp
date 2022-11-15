@@ -21,7 +21,7 @@
 #include "oahWae.h"
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -144,7 +144,8 @@ msrNote::msrNote (
 {
   fNoteUpLinkToMeasure = upLinkToMeasure;
 
-  // JMI v0.9.66 ??? fetchMeasureElementMeasureNumber () = noteMeasureNumber;
+  // JMI v0.9.66 ??? fBarLineUpLinkToMeasure->
+getMeasureNumber () = noteMeasureNumber;
 
   // basic note description
   fNoteKind = noteKind;
@@ -371,72 +372,8 @@ void msrNote::initializeNote ()
 msrNote::~msrNote ()
 {}
 
-//________________________________________________________________________
-S_msrMeasure msrNote::fetchMeasureElementUpLinkToMeasure () const
-{
-  S_msrMeasure result;
-
-  switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
-      break;
-
-    case msrNoteKind::kNoteRegularInMeasure:
-    case msrNoteKind::kNoteRestInMeasure:
-    case msrNoteKind::kNoteSkipInMeasure:
-    case msrNoteKind::kNoteUnpitchedInMeasure:
-      result = fNoteUpLinkToMeasure;
-      break;
-
-    case msrNoteKind::kNoteRegularInChord:
-      if (fNoteDirectUpLinkToChord) {
-        result =
-          fNoteDirectUpLinkToChord->
-            fetchMeasureElementUpLinkToMeasure ();
-      }
-      break;
-
-    case msrNoteKind::kNoteRegularInTuplet:
-    case msrNoteKind::kNoteRestInTuplet:
-    case msrNoteKind::kNoteUnpitchedInTuplet:
-      if (fNoteDirectUpLinkToTuplet) {
-        result =
-          fNoteDirectUpLinkToTuplet->
-            fetchMeasureElementUpLinkToMeasure ();
-      }
-      break;
-
-    case msrNoteKind::kNoteInDoubleTremolo:
-      // JMI
-      break;
-
-    case msrNoteKind::kNoteRegularInGraceNotesGroup:
-    case msrNoteKind::kNoteSkipInGraceNotesGroup:
-    /* JMi
-      if (fNoteDirectUpLinkToGraceNotesGroup) {
-        result =
-          fNoteDirectUpLinkToGraceNotesGroup->
-            getGraceNotesGroupUpLinkToVoice ();
-              / * JMI
-              getGraceNotesGroupUpLinkToNote ()->
-              fetchNoteUpLinkToVoice ();
-              * /
-      }
-    */
-      break;
-
-    case msrNoteKind::kNoteInChordInGraceNotesGroup:
-      break;
-
-    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-      break;
-  } // switch
-
-  return result;
-}
-
-// uplink to measure
-void msrNote::setMeasureElementUpLinkToMeasure (
-  S_msrMeasure measure)
+void msrNote::setNoteUpLinkToMeasure (
+  const S_msrMeasure& measure)
 {
   // sanity check
   mfAssert (
@@ -444,8 +381,87 @@ void msrNote::setMeasureElementUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of note " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
   fNoteUpLinkToMeasure = measure;
 }
+
+//________________________________________________________________________
+// S_msrMeasure msrNote::fetchMeasureElementUpLinkToMeasure () const
+// {
+//   S_msrMeasure result;
+//
+//   switch (fNoteKind) {
+//     case msrNoteKind::kNote_NO_:
+//       break;
+//
+//     case msrNoteKind::kNoteRegularInMeasure:
+//     case msrNoteKind::kNoteRestInMeasure:
+//     case msrNoteKind::kNoteSkipInMeasure:
+//     case msrNoteKind::kNoteUnpitchedInMeasure:
+//       result = fNoteUpLinkToMeasure;
+//       break;
+//
+//     case msrNoteKind::kNoteRegularInChord:
+//       if (fNoteDirectUpLinkToChord) {
+//         result =
+//           fNoteDirectUpLinkToChord->
+//             fMeasureElementUpLinkToMeasure ();
+//       }
+//       break;
+//
+//     case msrNoteKind::kNoteRegularInTuplet:
+//     case msrNoteKind::kNoteRestInTuplet:
+//     case msrNoteKind::kNoteUnpitchedInTuplet:
+//       if (fNoteDirectUpLinkToTuplet) {
+//         result =
+//           fNoteDirectUpLinkToTuplet->
+//             fMeasureElementUpLinkToMeasure ();
+//       }
+//       break;
+//
+//     case msrNoteKind::kNoteInDoubleTremolo:
+//       // JMI
+//       break;
+//
+//     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+//     case msrNoteKind::kNoteSkipInGraceNotesGroup:
+//     /* JMi
+//       if (fNoteDirectUpLinkToGraceNotesGroup) {
+//         result =
+//           fNoteDirectUpLinkToGraceNotesGroup->
+//             getGraceNotesGroupUpLinkToVoice ();
+//               / * JMI
+//               getGraceNotesGroupUpLinkToNote ()->
+//               fetchNoteUpLinkToVoice ();
+//               * /
+//       }
+//     */
+//       break;
+//
+//     case msrNoteKind::kNoteInChordInGraceNotesGroup:
+//       break;
+//
+//     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+//       break;
+//   } // switch
+//
+//   return result;
+// }
 
 // uplink to grace notes group
 S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
@@ -472,7 +488,7 @@ S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
       /* JMI
         result =
           fNoteDirectUpLinkToTuplet->
-            fetchMeasureElementUpLinkToMeasure ()->
+            fMeasureElementUpLinkToMeasure ()->
               fetchMeasureUpLinkToVoice ();
       */
       }
@@ -546,7 +562,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
         S_msrMeasure
           tupletDirectUpLinkToMeasure =
             fNoteDirectUpLinkToTuplet->
-              fetchMeasureElementUpLinkToMeasure ();
+              getMeasureElementUpLinkToMeasure ();
 
         if (tupletDirectUpLinkToMeasure) {
           result =
@@ -690,7 +706,8 @@ S_msrNote msrNote::createNoteNewbornClone (
         fInputLineNumber,
         gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-        fetchMeasureElementMeasureNumber (),
+        fBarLineUpLinkToMeasure->
+getMeasureNumber (),
 
         fNoteKind,
 
@@ -894,7 +911,8 @@ S_msrNote msrNote::createNoteDeepClone (
         fInputLineNumber,
         gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-        fetchMeasureElementMeasureNumber (),
+        fBarLineUpLinkToMeasure->
+getMeasureNumber (),
 
         fNoteKind,
 
@@ -1305,8 +1323,10 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   noteDeepClone->
-    fetchMeasureElementMeasureNumber () =
-      fetchMeasureElementMeasureNumber ();
+    fBarLineUpLinkToMeasure->
+getMeasureNumber () =
+      fBarLineUpLinkToMeasure->
+getMeasureNumber ();
   noteDeepClone->
     fMeasureElementMeasurePosition =
       fMeasureElementMeasurePosition;
@@ -2217,7 +2237,8 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3175,7 +3196,8 @@ void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
 //       asString () <<
 //       " to '" << voicePosition <<
 //       "' in measure '" <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3197,7 +3219,8 @@ void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
 //       asString () <<
 //       " to '" << voicePosition <<
 //       "' in measure '" <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -4712,11 +4735,13 @@ std::string msrNote::noteComplementsAsString () const
 
   s <<
     ", measureElementMeasureNumber: ";
-  if (fetchMeasureElementMeasureNumber () == K_NO_MEASURE_NUMBER) {
+  if (fBarLineUpLinkToMeasure->
+getMeasureNumber () == K_NO_MEASURE_NUMBER) {
     s << "*unknown*";
   }
   else {
-    s << fetchMeasureElementMeasureNumber ();
+    s << fBarLineUpLinkToMeasure->
+getMeasureNumber ();
   }
 
   return s.str ();
@@ -5534,19 +5559,23 @@ void msrNote::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << " : ";
-  if (fetchMeasureElementMeasureNumber () == K_NO_MEASURE_NUMBER) {
+  if (fBarLineUpLinkToMeasure->
+getMeasureNumber () == K_NO_MEASURE_NUMBER) {
     os <<
       "unknown";
   }
-  else if (fetchMeasureElementMeasureNumber ().size ()) {
+  else if (fBarLineUpLinkToMeasure->
+getMeasureNumber ().size ()) {
     os <<
-      fetchMeasureElementMeasureNumber ();
+      fBarLineUpLinkToMeasure->
+getMeasureNumber ();
   }
   else {
     std::stringstream s;
 
     s <<
-      "fetchMeasureElementMeasureNumber () is empty in note " <<
+      "fBarLineUpLinkToMeasure->
+getMeasureNumber () is empty in note " <<
       this->asString () <<
       "'";
 

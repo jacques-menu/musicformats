@@ -21,7 +21,7 @@
 
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -212,7 +212,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         skip =
           msrNote::createGraceSkipNote (
             note->getInputLineNumber (),
-            note->fetchMeasureElementMeasureNumber (),
+            note->fBarLineUpLinkToMeasure->
+getMeasureNumber (),
             note->getMeasureElementSoundingWholeNotes (), // 0/1 JMI
             note->getNoteDisplayWholeNotes (),
             note->getNoteDotsNumber ());
@@ -235,7 +236,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         skip =
           msrNote::createGraceSkipNote (
             chordFirstNote->getInputLineNumber (),
-            chordFirstNote->fetchMeasureElementMeasureNumber (),
+            chordFirstNote->fBarLineUpLinkToMeasure->
+getMeasureNumber (),
             chordFirstNote->getMeasureElementSoundingWholeNotes (), // 0/1 JMI
             chordFirstNote->getNoteDisplayWholeNotes (),
             chordFirstNote->getNoteDotsNumber ());
@@ -427,7 +429,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
     Rational
        voicePosition =
         fGraceNotesGroupUpLinkToNote->
-          fetchMeasureElementUpLinkToMeasure ()->
+          getMeasureElementUpLinkToMeasure ()->
             getMeasureVoicePosition ()
           +
         measurePosition;

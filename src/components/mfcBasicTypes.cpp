@@ -16,7 +16,7 @@
 #include <regex>
 #include "oahWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -899,7 +899,7 @@ std::string mfcComponenKindAsString (
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_mfcComponent mfcComponent::create (
   const std::string&   componentName,
   mfcComponenKind componenKind)
@@ -1252,7 +1252,7 @@ std::string mfcComponentEntropicityKindAsString (
 }
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
   const std::string&   multiComponentName,
   mfcComponenKind componenKind,

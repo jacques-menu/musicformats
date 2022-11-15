@@ -12,7 +12,7 @@
 #ifndef ___msrOctaveShifts___
 #define ___msrOctaveShifts___
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -32,7 +32,7 @@ std::string msrOctaveShiftKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrOctaveShiftKind& elt);
 
-class EXP msrOctaveShift : public msrMeasureElementLambda
+class EXP msrOctaveShift : public msrMeasureElement
 {
   public:
 

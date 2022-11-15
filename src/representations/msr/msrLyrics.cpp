@@ -21,7 +21,7 @@
 
 #include "msrWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -123,9 +123,8 @@ msrSyllable::msrSyllable (
   const Rational&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   S_msrStanza            syllableUpLinkToStanza)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   // sanity check
   mfAssert (
@@ -335,7 +334,8 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<

@@ -15,7 +15,6 @@
 #include "msrElements.h"
 
 #include "mfRational.h"
-// #include "msrMeasures.h" // ???
 
 
 namespace MusicFormats
@@ -23,21 +22,12 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 /*
-  Various elements can found in measures,
+  Various elements can found in measures, JMI v0.9.66
   hence class msrMeasureElement
 */
 
 class EXP msrMeasureElement : public msrElement
 {
-  public:
-
-    // constants
-    // ------------------------------------------------------
-
-    static const std::string K_NO_MEASURE_NUMBER;
-
-    static const Rational K_NO_WHOLE_NOTES;
-
   protected:
 
     // constructors/destructor
@@ -53,8 +43,8 @@ class EXP msrMeasureElement : public msrElement
     // set and get
     // ------------------------------------------------------
     void                  setMeasureElementSoundingWholeNotes (
-                            const Rational& wholeNotes,
-                            const std::string&   context);
+                            const Rational&    wholeNotes,
+                            const std::string& context);
 
     Rational              getMeasureElementSoundingWholeNotes () const
                               { return fMeasureElementSoundingWholeNotes; }
@@ -75,8 +65,8 @@ class EXP msrMeasureElement : public msrElement
                               { return fMeasureElementMeasurePosition; }
 
     void                  setMeasureElementVoicePosition (
-                            const Rational& voicePosition,
-                            const std::string&   context);
+                            const Rational&    voicePosition,
+                            const std::string& context);
 
     Rational              getMeasureElementVoicePosition () const
                               { return fMeasureElementVoicePosition; }
@@ -100,22 +90,6 @@ class EXP msrMeasureElement : public msrElement
     // public services
     // ------------------------------------------------------
 
-    // uplink to measure
-    virtual S_msrMeasure  fetchMeasureElementUpLinkToMeasure () const = 0;
-
-    virtual void          setMeasureElementUpLinkToMeasure (
-                            S_msrMeasure measure) = 0;
-
-    std::string           fetchMeasureElementMeasureNumber () const;
-
-    static bool           compareMeasureElementsByIncreasingMeasurePosition (
-                            const SMARTP<msrMeasureElement>& first,
-                            const SMARTP<msrMeasureElement>& second);
-
-//     virtual void          assignMeasureElementVoicePosition ( // JMI v0.9.66 REMOVE
-//                             Rational&     voicePosition,
-//                             const std::string& context);
-
   public:
 
     // visitors
@@ -124,7 +98,7 @@ class EXP msrMeasureElement : public msrElement
     void                  acceptIn  (basevisitor* v) override;
     void                  acceptOut (basevisitor* v) override;
 
-    void                  browseData (basevisitor* v) override = 0; // JMI ??? v0.9.66
+    void                  browseData (basevisitor* v) override; // JMI ??? v0.9.66
 
   public:
 
@@ -136,7 +110,7 @@ class EXP msrMeasureElement : public msrElement
 
     void                  print (std::ostream& os) const override;
 
-    void                  printSummary (std::ostream& os) const override {}
+    void                  printSummary (std::ostream& os) const override;
 
   protected:
 
@@ -162,9 +136,6 @@ class EXP msrMeasureElement : public msrElement
 };
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt);
-
-//______________________________________________________________________________
-extern S_msrMeasure gNullMeasureSmartPointer;
 
 
 }

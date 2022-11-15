@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -55,13 +55,102 @@ S_msrEyeGlasses msrEyeGlasses::create (
 msrEyeGlasses::msrEyeGlasses (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
-    : msrMeasureElementLambda (
-        inputLineNumber,
-        upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber)
 {}
 
 msrEyeGlasses::~msrEyeGlasses ()
 {}
+
+void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of eyeglasses " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fEyeGlassesUpLinkToMeasure = measure;
+}
+
+void msrEyeGlasses::setMeasureElementMeasurePosition (
+  const S_msrMeasure& measure,
+  const Rational&     measurePosition,
+  const std::string&  context)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+
+    gLogStream <<
+      "Setting measure element position in measure of " <<
+      asString () <<
+      " to '" << measurePosition <<
+      "' (was '" <<
+      fMeasureElementMeasurePosition <<
+      "') in measure " <<
+      measure->asShortString () <<
+      " (measureElementMeasureNumber: " <<
+      fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
+      "), context: \"" <<
+      context <<
+      "\"" <<
+      std::endl;
+  }
+#endif
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
+
+  // set measure element's position in measure
+  fMeasureElementMeasurePosition = measurePosition;
+
+  // compute measure element's position in voice
+// if (false) { // JMI CAFE v0.9.66
+  Rational
+    voicePosition =
+      measure->
+        getMeasureVoicePosition ()
+        +
+      measurePosition;
+
+  // set figured bass's position in voice
+  setMeasureElementVoicePosition (
+    voicePosition,
+    context);
+// }
+
+  // update current position in voice // JMI v0.9.66
+//   S_msrVoice
+//     voice =
+//       measure->
+//         fetchMeasureUpLinkToVoice ();
+//
+//   voice->
+//     incrementCurrentVoicePosition (
+//       fFiguredBassUpLinkToNote->
+//         getMeasureElementSoundingWholeNotes ());
+}
 
 void msrEyeGlasses::acceptIn (basevisitor* v)
 {

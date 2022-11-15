@@ -13,7 +13,7 @@
 #define ___tracingOah___
 
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 
 #ifdef TRACING_IS_ENABLED // encompasses this whole file
 

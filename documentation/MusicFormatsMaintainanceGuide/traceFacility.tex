@@ -12,7 +12,7 @@ One can build the library with or without trace, which applies to the whole code
 \section{Activating the trace}
 % -------------------------------------------------------------------------
 
-Tracing is controlled by {\tt TRACING_IS_ENABLED}, defined or nor in \oah{enableTracingIfDesired.h}:
+Tracing is controlled by {\tt TRACING_IS_ENABLED}, defined or nor in \oah{oahEnableTracingIfDesired.h}:
 
 \begin{lstlisting}[language=CPlusPlus]
 #ifndef ___enableTracingIfDesired___
@@ -28,7 +28,7 @@ Tracing is controlled by {\tt TRACING_IS_ENABLED}, defined or nor in \oah{enable
 
 This file should be included when the trace facility is used:
 \begin{lstlisting}[language=CPlusPlus]
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif

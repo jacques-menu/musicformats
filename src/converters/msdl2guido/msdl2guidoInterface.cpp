@@ -22,7 +22,7 @@
 #include "mxsr2guidoWae.h"
 #include "guidoWae.h" // JMI SAXOSAXO ???
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif

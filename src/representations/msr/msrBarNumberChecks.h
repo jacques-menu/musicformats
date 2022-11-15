@@ -14,14 +14,14 @@
 
 #include <list>
 
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrBarNumberCheck : public msrMeasureElementLambda
+class EXP msrBarNumberCheck : public msrMeasureElement
 {
   public:
 

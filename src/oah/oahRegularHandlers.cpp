@@ -14,7 +14,7 @@
 
 #include "oahWae.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -35,7 +35,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-/* this class   is purely virtual
+/* this class is purely vir.htual
 S_oahRegularHandler oahRegularHandler::create (
   std::string       serviceName,
   const std::string&     handlerHeader,

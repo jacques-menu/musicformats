@@ -15,7 +15,7 @@
 #include <list>
 
 #include "msrElements.h"
-#include "msrMeasureElementLambda.h"
+#include "msrMeasureElements.h"
 
 #include "msrOctaves.h"
 
@@ -121,7 +121,7 @@ std::string msrScordaturaKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrScordaturaKind& elt);
 
-class EXP msrScordatura : public msrMeasureElementLambda
+class EXP msrScordatura : public msrMeasureElement
 {
   public:
 
@@ -191,7 +191,7 @@ typedef SMARTP<msrScordatura> S_msrScordatura;
 EXP std::ostream& operator << (std::ostream& os, const S_msrScordatura& elt);
 
 //______________________________________________________________________________
-class EXP msrAccordionRegistration : public msrMeasureElementLambda
+class EXP msrAccordionRegistration : public msrMeasureElement
 {
   public:
 
@@ -279,7 +279,7 @@ typedef SMARTP<msrAccordionRegistration> S_msrAccordionRegistration;
 EXP std::ostream& operator << (std::ostream& os, const S_msrAccordionRegistration& elt);
 
 //______________________________________________________________________________
-class EXP msrHarpPedalsTuning : public msrMeasureElementLambda
+class EXP msrHarpPedalsTuning : public msrMeasureElement
 {
   public:
 
@@ -391,7 +391,7 @@ std::string msrPedalSignKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrPedalSignKind& elt);
 
-class EXP msrPedal : public msrMeasureElementLambda
+class EXP msrPedal : public msrMeasureElement
 {
   public:
 
@@ -474,7 +474,7 @@ typedef SMARTP<msrPedal> S_msrPedal;
 EXP std::ostream& operator << (std::ostream& os, const S_msrPedal& elt);
 
 //______________________________________________________________________________
-class EXP msrDamp : public msrMeasureElementLambda
+class EXP msrDamp : public msrMeasureElement
 {
   public:
 
@@ -535,7 +535,7 @@ typedef SMARTP<msrDamp> S_msrDamp;
 EXP std::ostream& operator << (std::ostream& os, const S_msrDamp& elt);
 
 //______________________________________________________________________________
-class EXP msrDampAll : public msrMeasureElementLambda
+class EXP msrDampAll : public msrMeasureElement
 {
   public:
 

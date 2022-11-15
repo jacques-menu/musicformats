@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "enableTracingIfDesired.h"
+#include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
@@ -64,8 +64,8 @@ msrMeasureElement::~msrMeasureElement ()
 {}
 
 void msrMeasureElement::setMeasureElementSoundingWholeNotes (
-  const Rational& wholeNotes,
-  const std::string&   context)
+  const Rational&    wholeNotes,
+  const std::string& context)
 {
   doSetMeasureElementSoundingWholeNotes (
     wholeNotes,
@@ -85,7 +85,8 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
       asString () <<
       " to 'WHOLE_NOTES " << wholeNotes << // JMI v0.9.66
       "' in measure '" <<
-      fetchMeasureElementMeasureNumber () <<
+      fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -121,7 +122,8 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
+      fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -166,8 +168,8 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 }
 
 void msrMeasureElement::setMeasureElementVoicePosition (
-  const Rational& voicePosition,
-  const std::string&   context)
+  const Rational&    voicePosition,
+  const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -176,7 +178,8 @@ void msrMeasureElement::setMeasureElementVoicePosition (
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
-      fetchMeasureElementMeasureNumber () <<
+      fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -198,7 +201,8 @@ void msrMeasureElement::setMeasureElementVoicePosition (
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
-      fetchMeasureElementMeasureNumber () <<
+      fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -225,7 +229,8 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 // //       in measure " << JMI v0.9.66
 // //       measure->asShortString () <<
 //       "), measureElementMeasureNumber: " <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -247,7 +252,8 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //       asString () <<
 //       " to '" << voiceMoment <<
 //       "' in measure '" <<
-//       fetchMeasureElementMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->
+getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -263,35 +269,6 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //
 //   fMeasureElementVoiceMoment = voiceMoment;
 // }
-
-std::string msrMeasureElement::fetchMeasureElementMeasureNumber () const
-{
-  S_msrMeasure
-    upLinkToMeasure =
-      fetchMeasureElementUpLinkToMeasure ();
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    upLinkToMeasure != nullptr,
-    "upLinkToMeasure is null");
-
-  return
-    upLinkToMeasure->
-      getMeasureNumber ();
-}
-
-bool msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition (
-  const SMARTP<msrMeasureElement>& first,
-  const SMARTP<msrMeasureElement>& second)
-{
-  return
-    bool (
-      first->getMeasureElementMeasurePosition ()
-        <
-      second->getMeasureElementMeasurePosition ()
-    );
-}
 
 void msrMeasureElement::acceptIn (basevisitor* v)
 {
@@ -345,6 +322,9 @@ void msrMeasureElement::acceptOut (basevisitor* v)
   }
 }
 
+void msrMeasureElement::browseData (basevisitor* v)
+{}
+
 std::string msrMeasureElement::asString () const
 {
   // this is overriden all in actual elements
@@ -362,6 +342,9 @@ void msrMeasureElement::print (std::ostream& os) const
   os << asString () << std::endl;
 }
 
+void msrMeasureElement::printSummary (std::ostream& os) const
+{}
+
 std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt)
 {
   if (elt) {
@@ -373,9 +356,6 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt)
 
   return os;
 }
-
-//______________________________________________________________________________
-S_msrMeasure gNullMeasureSmartPointer;
 
 
 }
