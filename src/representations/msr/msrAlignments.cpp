@@ -61,7 +61,7 @@ std::string msrJustifyKindAsString (
 
   switch (justifyKind) {
     case msrJustifyKind::kJustifyNone:
-      result = "***kJustifyNone***";
+      result = "kJustifyNone***";
       break;
     case msrJustifyKind::kJustifyLeft:
       result = "kJustifyLeft";
@@ -122,7 +122,7 @@ std::string msrHorizontalAlignmentKindAsString (
 
   switch (horizontalAlignmentKind) {
     case msrHorizontalAlignmentKind::kHorizontalAlignmentNone:
-      result = "***kHorizontalAlignmentNone***";
+      result = "kHorizontalAlignmentNone***";
       break;
     case msrHorizontalAlignmentKind::kHorizontalAlignmentLeft:
       result = "kHorizontalAlignmentLeft";
@@ -183,7 +183,7 @@ std::string msrVerticalAlignmentKindAsString (
 
   switch (verticalAlignmentKind) {
     case msrVerticalAlignmentKind::kVerticalAlignmentNone:
-      result = "***kVerticalAlignmentNone***";
+      result = "kVerticalAlignmentNone***";
       break;
     case msrVerticalAlignmentKind::kVerticalAlignmentTop:
       result = "kVerticalAlignmentTop";

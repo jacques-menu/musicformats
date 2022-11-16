@@ -251,7 +251,7 @@ class EXP msrArpeggiato : public msrArticulation
     // public services
     // ------------------------------------------------------
 
-    virtual std::string        arpeggiatoDirectionKindAsString () const;
+    virtual std::string   arpeggiatoDirectionKindAsString () const;
 
   public:
 

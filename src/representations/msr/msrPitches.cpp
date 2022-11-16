@@ -31,7 +31,7 @@ std::string msrDiatonicPitchKindAsString (
 
   switch (diatonicPitchKind) {
     case msrDiatonicPitchKind::kDiatonicPitch_NO_:
-      result = "***kDiatonicPitch_NO_***";
+      result = "kDiatonicPitch_NO_";
       break;
 
     case msrDiatonicPitchKind::kDiatonicPitchA:
@@ -327,7 +327,7 @@ std::string msrSemiTonesPitchKindAsString (
 
   switch (semiTonesPitchKind) {
     case msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch:
-      result = "***kSTP_NoSemiTonesPitch***";
+      result = "kSTP_NoSemiTonesPitch***";
       break;
 
     case msrSemiTonesPitchKind::kSTP_C_TripleFlat:
@@ -511,7 +511,7 @@ std::string semiTonesPitchKindAsFlatsAndSharps (
 
   switch (semiTonesPitchKind) {
     case msrSemiTonesPitchKind::kSTP_NoSemiTonesPitch:
-      result = "***kSTP_NoSemiTonesPitch***";
+      result = "kSTP_NoSemiTonesPitch***";
       break;
 
     case msrSemiTonesPitchKind::kSTP_C_TripleFlat:

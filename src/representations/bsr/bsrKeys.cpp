@@ -43,7 +43,7 @@ std::string bsrKeyKindAsString (
 
   switch (keyKind) {
     case bsrKeyKind::kKeyKindNone:
-      result = "***keyKindNone***";
+      result = "keyKindNone***";
       break;
     case bsrKeyKind::kKeyKindFlats:
       result = "kKeyKindFlats";

@@ -226,7 +226,7 @@ std::string msrFontStyleKindAsString (
 
   switch (fontStyleKind) {
     case msrFontStyleKind::kFontStyleNone:
-      result = "***kFontStyleNone***";
+      result = "kFontStyleNone***";
       break;
     case msrFontStyleKind::kFontStyleNormal:
       result = "kFontStyleNormal";

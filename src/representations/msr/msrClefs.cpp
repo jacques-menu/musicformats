@@ -48,7 +48,7 @@ std::string msrClefKindAsString (
 
   switch (clefKind) {
     case msrClefKind::kClef_NO_:
-      result = "***kClef_NO_***";
+      result = "kClef_NO_";
       break;
     case msrClefKind::kClefTreble:
       result = "kClefTreble";

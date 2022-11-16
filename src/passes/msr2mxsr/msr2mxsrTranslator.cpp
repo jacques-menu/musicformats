@@ -313,7 +313,7 @@ std::string msr2mxsrTranslator::msrModeKindAsMusicXMLString (
 
   switch (modeKind) {
     case msrModeKind::kMode_NO_:
-      result = "***kMode_NO_***";
+      result = "kMode_NO_";
       break;
     case msrModeKind::kModeMajor:
       result = "major";
@@ -6063,9 +6063,9 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
 
         // get theMsrNote's position in tuplet
         size_t
-          notePositionInTuplet =
-            theMsrNote->
-              getPositionInTuplet ();
+          notePositionInTuplet = 0;
+//             theMsrNote->
+//               getPositionInTuplet (); JMI v0.66
 
         // compute the type std::string if relevant
         std::string typeString;

@@ -13,15 +13,15 @@
 
 #include "visitor.h"
 
-#include "mfAssert.h"
-#include "mfRational.h"
-#include "mfServiceRunData.h"
-#include "mfStringsHandling.h"
-
 #include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
+
+#include "mfAssert.h"
+#include "mfRational.h"
+#include "mfServiceRunData.h"
+#include "mfStringsHandling.h"
 
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
@@ -6221,7 +6221,7 @@ std::string msrMeasureFirstInSegmentKindAsString (
 
   switch (measureFirstInSegmentKind) {
     case msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindUnknown:
-      result = "***kMeasureFirstInSegmentKindUnknown***";
+      result = "kMeasureFirstInSegmentKindUnknown***";
       break;
     case msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindYes:
       result = "kMeasureFirstInSegmentKindYes";
@@ -6276,7 +6276,7 @@ std::string msrMeasureEndRegularKindAsString (
 
   switch (measureEndRegularKind) {
     case msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown:
-      result = "***kMeasureEndRegularUnknown***";
+      result = "kMeasureEndRegularUnknown***";
       break;
     case msrMeasureEndRegularKind::kMeasureEndRegularKindYes:
       result = "kMeasureEndRegularYes";

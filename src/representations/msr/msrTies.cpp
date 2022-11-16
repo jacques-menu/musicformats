@@ -34,7 +34,7 @@ std::string msrTieKindAsString (msrTieKind tieKind)
 
   switch (tieKind) {
     case msrTieKind::kTieNone:
-      s << "***kTieNone***";
+      s << "kTieNone***";
       break;
     case msrTieKind::kTieStart:
       s << "kTieStart";

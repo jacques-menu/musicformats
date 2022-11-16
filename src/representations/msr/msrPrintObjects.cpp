@@ -66,7 +66,7 @@ std::string msrPrintObjectKindAsString (
 
   switch (printObjectKind) {
     case msrPrintObjectKind::kPrintObjectNone:
-      result = "***kPrintObjectNone***";
+      result = "kPrintObjectNone***";
       break;
     case msrPrintObjectKind::kPrintObjectYes:
       result = "kPrintObjectYes";

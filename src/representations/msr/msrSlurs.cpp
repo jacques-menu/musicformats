@@ -37,7 +37,7 @@ std::string msrSlurTypeKindAsString (
 
   switch (slurTypeKind) {
     case msrSlurTypeKind::kSlurType_NO_:
-      s << "***kSlurType_NO_***";
+      s << "kSlurType_NO_";
       break;
 
     case msrSlurTypeKind::kSlurTypeRegularStart:

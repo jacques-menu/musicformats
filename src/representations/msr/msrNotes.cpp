@@ -6121,7 +6121,7 @@ void msrNote::print (std::ostream& os) const
       os <<
         std::setw (fieldWidth) <<
         "fPositionInTuplet" << " : " <<
-        fPositionInTuplet <<
+//         fPositionInTuplet <<
         std::endl;
 
       os <<

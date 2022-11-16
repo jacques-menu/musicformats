@@ -38,7 +38,7 @@ std::string msrBeamKindAsString (
 
   switch (beamKind) {
     case msrBeamKind::kBeam_NO_:
-      result = "***kBeam_NO_***";
+      result = "kBeam_NO_";
       break;
     case msrBeamKind::kBeamBegin:
       result = "kBeamBegin";
