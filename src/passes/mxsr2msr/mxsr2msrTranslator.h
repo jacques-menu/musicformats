@@ -2007,7 +2007,7 @@ class EXP mxsr2msrTranslator :
     std::list<S_msrOtherDynamic>   fPendingOtherDynamicxList;
     std::list<S_msrWords>     fPendingWordsList;
     std::list<S_msrSlur>           fPendingSlursList;
-    std::list<S_msrLigature>   
+    std::list<S_msrLigature>
                               fPendingLigaturesList;
     std::list<S_msrWedge>     fPendingWedgesList;
     std::list<S_msrSlash>     fPendingSlashesList;
@@ -2190,7 +2190,8 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fCurrentNoteBelongsToADoubleTremolo; // JMI ???
 
-    msrDoubleTremoloTypeKind        fCurrentDoubleTremoloTypeKind;
+    msrDoubleTremoloTypeKind
+                              fCurrentDoubleTremoloTypeKind;
 
     S_msrSingleTremolo        fCurrentSingleTremolo;
 

@@ -14,6 +14,10 @@
 
 #include "visitor.h"
 
+#include "mfAssert.h"
+
+#include "msrMeasureConstants.h"
+
 #include "msrRehearsalMarks.h"
 
 #include "oahOah.h"
@@ -52,7 +56,7 @@ S_msrRehearsalMark msrRehearsalMark::create (
   return
     msrRehearsalMark::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       rehearsalKind,
       rehearsalText,
       rehearsalPlacementKind);
@@ -76,6 +80,34 @@ msrRehearsalMark::msrRehearsalMark (
 
 msrRehearsalMark::~msrRehearsalMark ()
 {}
+
+void msrRehearsalMark::setRehearsalMarkUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of rehearsal mark " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fRehearsalMarkUpLinkToMeasure = measure;
+}
 
 void msrRehearsalMark::acceptIn (basevisitor* v)
 {

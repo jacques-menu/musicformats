@@ -14,6 +14,8 @@
 
 #include "msrTypesForwardDeclarations.h"
 
+#include "msrTupletElements.h"
+
 #include "msrBeams.h"
 #include "msrCodas.h"
 #include "msrDynamics.h"
@@ -93,6 +95,20 @@ class EXP msrChord : public msrTupletElement
 
     // set and get
     // ------------------------------------------------------
+
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setChordUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getChordUpLinkToMeasure (); }
+
+    void                  setChordUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getChordUpLinkToMeasure () const
+                            { return fChordUpLinkToMeasure; }
 
     // uplink to tuplet
     void                  setChordDirectUpLinkToTuplet (

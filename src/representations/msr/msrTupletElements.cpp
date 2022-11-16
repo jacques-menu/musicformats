@@ -30,6 +30,17 @@ msrTupletElement::msrTupletElement (
 msrTupletElement::~msrTupletElement ()
 {}
 
+void msrTupletElement::setMeasureElementUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  setTupletElementUpLinkToMeasure (measure);
+}
+
+S_msrMeasure msrTupletElement::getMeasureElementUpLinkToMeasure () const
+{
+  return getTupletElementUpLinkToMeasure ();
+}
+
 void msrTupletElement::setTupletElementUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
@@ -56,6 +67,11 @@ void msrTupletElement::setTupletElementUpLinkToMeasure (
 #endif
 
   fTupletElementUpLinkToMeasure = measure;
+}
+
+S_msrMeasure msrTupletElement::getTupletElementUpLinkToMeasure () const
+{
+  return fTupletElementUpLinkToMeasure;
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt)

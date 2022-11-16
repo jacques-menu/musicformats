@@ -20,9 +20,13 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
 #include "oahOah.h"
 
 #include "msrOah.h"
+
+#include "msrMeasureConstants.h"
 
 #include "msrEyeGlasses.h"
 
@@ -49,7 +53,7 @@ S_msrEyeGlasses msrEyeGlasses::create (
   return
     msrEyeGlasses::create (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setEyeGlassesUpLinkToMeasure()
 }
 
 msrEyeGlasses::msrEyeGlasses (
@@ -90,68 +94,67 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
   fEyeGlassesUpLinkToMeasure = measure;
 }
 
-void msrEyeGlasses::setMeasureElementMeasurePosition (
-  const S_msrMeasure& measure,
-  const Rational&     measurePosition,
-  const std::string&  context)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-
-    gLogStream <<
-      "Setting measure element position in measure of " <<
-      asString () <<
-      " to '" << measurePosition <<
-      "' (was '" <<
-      fMeasureElementMeasurePosition <<
-      "') in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      std::endl;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
-
-  // set measure element's position in measure
-  fMeasureElementMeasurePosition = measurePosition;
-
-  // compute measure element's position in voice
-// if (false) { // JMI CAFE v0.9.66
-  Rational
-    voicePosition =
-      measure->
-        getMeasureVoicePosition ()
-        +
-      measurePosition;
-
-  // set figured bass's position in voice
-  setMeasureElementVoicePosition (
-    voicePosition,
-    context);
-// }
-
-  // update current position in voice // JMI v0.9.66
-//   S_msrVoice
-//     voice =
-//       measure->
-//         fetchMeasureUpLinkToVoice ();
+// void msrEyeGlasses::setEyeGlassesMeasurePosition (
+//   const S_msrMeasure& measure,
+//   const Rational&     measurePosition,
+//   const std::string&  context)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //
-//   voice->
-//     incrementCurrentVoicePosition (
-//       fFiguredBassUpLinkToNote->
-//         getMeasureElementSoundingWholeNotes ());
-}
-
+//     gLogStream <<
+//       "Setting measure element position in measure of " <<
+//       asString () <<
+//       " to '" << measurePosition <<
+//       "' (was '" <<
+//       fEyeGlassesMeasurePosition <<
+//       "') in measure " <<
+//       measure->asShortString () <<
+//       " (EyeGlassesMeasureNumber: " <<
+//       fBarLineUpLinkToMeasure->getMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"" <<
+//       std::endl;
+//   }
+// #endif
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measurePosition != msrMoment::K_NO_POSITION,
+//     "measurePosition == msrMoment::K_NO_POSITION");
+//
+//   // set measure element's position in measure
+//   fEyeGlassesMeasurePosition = measurePosition;
+//
+//   // compute measure element's position in voice
+// // if (false) { // JMI CAFE v0.9.66
+//   Rational
+//     voicePosition =
+//       measure->
+//         getMeasureVoicePosition ()
+//         +
+//       measurePosition;
+//
+//   // set figured bass's position in voice
+//   setEyeGlassesVoicePosition (
+//     voicePosition,
+//     context);
+// // }
+//
+//   // update current position in voice // JMI v0.9.66
+// //   S_msrVoice
+// //     voice =
+// //       measure->
+// //         fetchMeasureUpLinkToVoice ();
+// //
+// //   voice->
+// //     incrementCurrentVoicePosition (
+// //       fFiguredBassUpLinkToNote->
+// //         getEyeGlassesSoundingWholeNotes ());
+// }
+//
 void msrEyeGlasses::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {

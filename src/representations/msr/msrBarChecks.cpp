@@ -55,7 +55,7 @@ S_msrBarCheck msrBarCheck::create (
   return
     msrBarCheck::create (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66

@@ -150,7 +150,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
   group->
     setGroupHeaderIsToBeWritten (false);
 
-  // append group to elements std::list
+  // append group to elements list
   group->
     appendGroupToElementsList (this);
 
@@ -187,7 +187,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
   group->
     setGroupHeaderIsToBeWritten (false);
 
-  // prepend group  to elements std::list
+  // prepend group  to elements list
   group->
     appendGroupToElementsList (this);
 

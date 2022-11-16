@@ -16,8 +16,8 @@
 
 #include "visitor.h"
 
+#include "mfAssert.h"
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
@@ -29,6 +29,8 @@
 
 #include "msrPitchesNames.h"
 #include "msrIntervals.h"
+
+#include "msrMeasureConstants.h"
 
 #include "msrKeys.h"
 
@@ -290,7 +292,7 @@ S_msrKey msrKey::createTraditional (
   return
     msrKey::createTraditional (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       keyTonicQuarterTonesPitchKind,
       modeKind,
       keyCancel);
@@ -314,7 +316,7 @@ S_msrKey msrKey::createHumdrumScot ( // for Humdrum/Scot keys
   return
     msrKey::createHumdrumScot (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrKey::msrKey ( // for traditional keys
@@ -410,6 +412,34 @@ msrKey::msrKey ( // for Humdrum/Scot keys
 
 msrKey::~msrKey ()
 {}
+
+void msrKey::setKeyUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of key " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fKeyUpLinkToMeasure = measure;
+}
 
 Bool msrKey::isEqualTo (S_msrKey otherKey) const
 {
@@ -621,7 +651,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
   result =
     msrKey::createTraditional (
       __LINE__,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       keyQuarterTonesTonicPitchKind,
       keyModeKind,
       0); // keyCancel JMI

@@ -20,9 +20,13 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
 #include "oahOah.h"
 
 #include "msrOah.h"
+
+#include "msrMeasureConstants.h"
 
 #include "msrOctaveShifts.h"
 
@@ -55,7 +59,7 @@ S_msrOctaveShift msrOctaveShift::create (
   return
     msrOctaveShift::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       octaveShiftKind,
       octaveShiftSize);
 }
@@ -75,6 +79,34 @@ msrOctaveShift::msrOctaveShift (
 
 msrOctaveShift::~msrOctaveShift ()
 {}
+
+void msrOctaveShift::setOctaveShiftUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of octave shift " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fOctaveShiftUpLinkToMeasure = measure;
+}
 
 void msrOctaveShift::acceptIn (basevisitor* v)
 {

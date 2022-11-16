@@ -26,6 +26,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasureConstants.h"
+
 #include "msrArticulations.h"
 #include "msrGlissandos.h"
 #include "msrPitchesNames.h"
@@ -137,15 +139,14 @@ msrNote::msrNote (
   msrNoteHeadKind            noteHeadKind,
   msrNoteHeadFilledKind      msrNoteHeadFilledKind,
   msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind)
-  : msrTupletElement (
-      inputLineNumber,
-      upLinkToMeasure),
-    fNoteColorAlphaRGB ("", "")
+    : msrTupletElement (
+        inputLineNumber,
+        upLinkToMeasure),
+      fNoteColorAlphaRGB ("", "")
 {
   fNoteUpLinkToMeasure = upLinkToMeasure;
 
-  // JMI v0.9.66 ??? fBarLineUpLinkToMeasure->
-getMeasureNumber () = noteMeasureNumber;
+//   fMeasureElementMeasureNumber = noteMeasureNumber; // JMI ??? v0.9.66
 
   // basic note description
   fNoteKind = noteKind;
@@ -704,10 +705,9 @@ S_msrNote msrNote::createNoteNewbornClone (
     newbornClone =
       msrNote::create (
         fInputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-        fBarLineUpLinkToMeasure->
-getMeasureNumber (),
+        fNoteUpLinkToMeasure->getMeasureNumber (),
 
         fNoteKind,
 
@@ -909,10 +909,9 @@ S_msrNote msrNote::createNoteDeepClone (
     noteDeepClone =
       msrNote::create (
         fInputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-        fBarLineUpLinkToMeasure->
-getMeasureNumber (),
+        fNoteUpLinkToMeasure->getMeasureNumber (),
 
         fNoteKind,
 
@@ -1323,10 +1322,8 @@ getMeasureNumber (),
   // ------------------------------------------------------
 
   noteDeepClone->
-    fBarLineUpLinkToMeasure->
-getMeasureNumber () =
-      fBarLineUpLinkToMeasure->
-getMeasureNumber ();
+    fNoteUpLinkToMeasure->getMeasureNumber () =
+      fNoteUpLinkToMeasure->getMeasureNumber ();
   noteDeepClone->
     fMeasureElementMeasurePosition =
       fMeasureElementMeasurePosition;
@@ -1390,16 +1387,16 @@ getMeasureNumber ();
 }
 
 S_msrNote msrNote::createRestNote (
-  int             inputLineNumber,
-  const std::string&   noteMeasureNumber,
-  const Rational& soundingWholeNotes,
-  const Rational& displayWholeNotes,
-  int             dotsNumber)
+  int                inputLineNumber,
+  const std::string& noteMeasureNumber,
+  const Rational&    soundingWholeNotes,
+  const Rational&    displayWholeNotes,
+  int                dotsNumber)
 {
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1441,16 +1438,16 @@ S_msrNote msrNote::createRestNote (
 }
 
 S_msrNote msrNote::createSkipNote (
-  int             inputLineNumber,
-  const std::string&   noteMeasureNumber,
-  const Rational& soundingWholeNotes,
-  const Rational& displayWholeNotes,
-  int             dotsNumber)
+  int                inputLineNumber,
+  const std::string& noteMeasureNumber,
+  const Rational&    soundingWholeNotes,
+  const Rational&    displayWholeNotes,
+  int                dotsNumber)
 {
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1492,16 +1489,16 @@ S_msrNote msrNote::createSkipNote (
 }
 
 S_msrNote msrNote::createGraceSkipNote (
-  int             inputLineNumber,
-  const std::string&   noteMeasureNumber,
-  const Rational& soundingWholeNotes,
-  const Rational& displayWholeNotes,
-  int             dotsNumber)
+  int                inputLineNumber,
+  const std::string& noteMeasureNumber,
+  const Rational&    soundingWholeNotes,
+  const Rational&    displayWholeNotes,
+  int                dotsNumber)
 {
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1544,17 +1541,17 @@ S_msrNote msrNote::createGraceSkipNote (
 
 //________________________________________________________________________
 S_msrNote msrNote::createRestNoteWithOctave (
-  int             inputLineNumber,
-  const std::string&   noteMeasureNumber,
-  msrOctaveKind   noteOctave,
-  const Rational& soundingWholeNotes,
-  const Rational& displayWholeNotes,
-  int             dotsNumber)
+  int                inputLineNumber,
+  const std::string& noteMeasureNumber,
+  msrOctaveKind      noteOctave,
+  const Rational&    soundingWholeNotes,
+  const Rational&    displayWholeNotes,
+  int                dotsNumber)
 {
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1597,17 +1594,17 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
 //________________________________________________________________________
 S_msrNote msrNote::createSkipNoteWithOctave (
-  int             inputLineNumber,
-  const std::string&   noteMeasureNumber,
-  msrOctaveKind   noteOctave,
-  const Rational& soundingWholeNotes,
-  const Rational& displayWholeNotes,
-  int             dotsNumber)
+  int                inputLineNumber,
+  const std::string& noteMeasureNumber,
+  msrOctaveKind      noteOctave,
+  const Rational&    soundingWholeNotes,
+  const Rational&    displayWholeNotes,
+  int                dotsNumber)
 {
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1661,7 +1658,7 @@ S_msrNote msrNote::createRegularNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       noteMeasureNumber,
 
@@ -1704,7 +1701,7 @@ S_msrNote msrNote::createRegularNote (
 
 //________________________________________________________________________
 S_msrNote msrNote::createRestFromString (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& restString,
   const std::string& restMeasureNumber)
 {
@@ -1843,7 +1840,7 @@ S_msrNote msrNote::createRestFromString (
 
 //________________________________________________________________________
 S_msrNote msrNote::createSkipFromString (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& skipString,
   const std::string& skipMeasureNumber)
 {
@@ -1983,7 +1980,7 @@ S_msrNote msrNote::createSkipFromString (
 
 //________________________________________________________________________
 S_msrNote msrNote::createNoteFromString (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& noteString,
   const std::string& noteMeasureNumber)
 {
@@ -2174,7 +2171,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
       K_NO_MEASURE_NUMBER, // JMI ???
 
@@ -2237,8 +2234,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+//       fNoteUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3196,8 +3192,7 @@ void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
 //       asString () <<
 //       " to '" << voicePosition <<
 //       "' in measure '" <<
-//       fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+//       fNoteUpLinkToMeasure->getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3219,8 +3214,7 @@ getMeasureNumber () <<
 //       asString () <<
 //       " to '" << voicePosition <<
 //       "' in measure '" <<
-//       fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+//       fNoteUpLinkToMeasure->getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3352,7 +3346,7 @@ void msrNote::appendFiguredBassToNoteFiguredBassesList (
     gLogStream <<
       "Append figured bass " <<
       figuredBass->asString () <<
-      " to the figured bass elements std::list of " <<
+      " to the figured bass elements list of " <<
       asString () <<
       ", line " << fInputLineNumber <<
       std::endl;
@@ -4735,13 +4729,11 @@ std::string msrNote::noteComplementsAsString () const
 
   s <<
     ", measureElementMeasureNumber: ";
-  if (fBarLineUpLinkToMeasure->
-getMeasureNumber () == K_NO_MEASURE_NUMBER) {
+  if (fNoteUpLinkToMeasure->getMeasureNumber () == K_NO_MEASURE_NUMBER) {
     s << "*unknown*";
   }
   else {
-    s << fBarLineUpLinkToMeasure->
-getMeasureNumber ();
+    s << fNoteUpLinkToMeasure->getMeasureNumber ();
   }
 
   return s.str ();
@@ -5559,23 +5551,19 @@ void msrNote::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << " : ";
-  if (fBarLineUpLinkToMeasure->
-getMeasureNumber () == K_NO_MEASURE_NUMBER) {
+  if (fNoteUpLinkToMeasure->getMeasureNumber () == K_NO_MEASURE_NUMBER) {
     os <<
       "unknown";
   }
-  else if (fBarLineUpLinkToMeasure->
-getMeasureNumber ().size ()) {
+  else if (fNoteUpLinkToMeasure->getMeasureNumber ().size ()) {
     os <<
-      fBarLineUpLinkToMeasure->
-getMeasureNumber ();
+      fNoteUpLinkToMeasure->getMeasureNumber ();
   }
   else {
     std::stringstream s;
 
     s <<
-      "fBarLineUpLinkToMeasure->
-getMeasureNumber () is empty in note " <<
+      "fNoteUpLinkToMeasure->getMeasureNumber () is empty in note " <<
       this->asString () <<
       "'";
 

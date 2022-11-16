@@ -177,7 +177,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //     multipleFullBarRestsContentsSegment != nullptr,
 //     "multipleFullBarRestsContentsSegment is null");
 
-  // get multiple full-bar rests contents segment measure elements std::list
+  // get multiple full-bar rests contents segment measure elements list
 //   const std::list<S_msrMeasure>&
 //     contentsSegmentElementsList =
 //       multipleFullBarRestsContentsSegment->
@@ -196,7 +196,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //
 //     s <<
 //       "cannot get multiple full-bar rests contents last measure purist number" <<
-//       " because its measure elements std::list is empty" <<
+//       " because its measure elements list is empty" <<
 //       " in voice clone '" <<
 //       asShortString () <<
 //       "' ";

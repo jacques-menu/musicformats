@@ -20,6 +20,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
 #include "msrBarNumberChecks.h"
 
 #include "msrMeasureConstants.h"
@@ -57,7 +59,7 @@ S_msrBarNumberCheck msrBarNumberCheck::create (
   return
     msrBarNumberCheck::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       nextBarOriginalNumber,
       nextBarPuristNumber);
 }
@@ -89,6 +91,34 @@ msrBarNumberCheck::msrBarNumberCheck (
 
 msrBarNumberCheck::~msrBarNumberCheck ()
 {}
+
+void msrBarNumberCheck::setBarNumberCheckUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of bar number check " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fBarNumberCheckUpLinkToMeasure = measure;
+}
 
 void msrBarNumberCheck::acceptIn (basevisitor* v)
 {

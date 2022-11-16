@@ -15,8 +15,8 @@
 
 #include "visitor.h"
 
+#include "mfAssert.h"
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
@@ -25,6 +25,8 @@
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
+
+#include "msrMeasureConstants.h"
 
 #include "msrMusicXMLSpecifics.h"
 
@@ -1166,7 +1168,7 @@ S_msrPrintLayout msrPrintLayout::create (
   return
     msrPrintLayout::create (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrPrintLayout::msrPrintLayout (
@@ -1216,6 +1218,34 @@ void msrPrintLayout::acceptIn (basevisitor* v)
         }
         p->visitStart (elem);
   }
+}
+
+void msrPrintLayout::setPrintLayoutUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of print layout " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fPrintLayoutUpLinkToMeasure = measure;
 }
 
 void msrPrintLayout::acceptOut (basevisitor* v)

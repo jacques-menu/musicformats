@@ -15,14 +15,12 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-const std::string
-  msrMeasureElement::K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
+const std::string K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
 
-const Rational
-  msrMeasureElement::K_NO_WHOLE_NOTES (-444444, 1);
+const Rational    K_NO_WHOLE_NOTES (-444444, 1);
 
 //______________________________________________________________________________
-S_msrMeasure gNullMeasureSmartPointer;
+S_msrMeasure gGlobalNullMeasureSmartPointer;
 
 
 }

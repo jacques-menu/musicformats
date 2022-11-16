@@ -24,6 +24,8 @@
 #include "mfServiceRunData.h"
 #include "mfStringsHandling.h"
 
+#include "msrMeasureConstants.h"
+
 #include "msrTemposEnumTypes.h"
 #include "msrTempos.h"
 
@@ -377,7 +379,7 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
   }
 #endif
 
-  // register tempoTuplet in elements std::list
+  // register tempoTuplet in elements list
   fTempoTupletElements.push_back (tempoTuplet);
 
   // account for tempoTuplet duration
@@ -878,7 +880,7 @@ void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
 
 void msrTempoNotesRelationshipElements::browseData (basevisitor* v)
 {
-  // browse the elements std::list
+  // browse the elements list
   if (fTempoNotesRelationshipElementsList.size ()) {
     for (
       std::list<S_msrElement>::const_iterator i =
@@ -1019,7 +1021,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
   return
     msrTempo::createTempoWordsOnly (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tempoWords,
       tempoParenthesizedKind,
       tempoPlacementKind);
@@ -1057,7 +1059,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
   return
     msrTempo::createTempoPerMinute (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tempoBeatUnit,
       tempoPerMinute,
       tempoParenthesizedKind,
@@ -1096,7 +1098,7 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   return
      msrTempo::createTempoBeatUnitEquivalent (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tempoBeatUnit,
       tempoEquivalentBeatUnit,
       tempoParenthesizedKind,
@@ -1144,7 +1146,7 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
   return
     msrTempo::createTempoNotesRelationship (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tempoNotesRelationshipLeftElements,
       tempoNotesRelationshipKind,
       tempoNotesRelationshipRightElements,
@@ -1160,8 +1162,7 @@ msrTempo::msrTempo (
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
     : msrMeasureElement (
-        inputLineNumber,
-        upLinkToMeasure),
+        inputLineNumber),
       fTempoBeatUnit (),
       fTempoEquivalentBeatUnit ()
 {
@@ -1194,8 +1195,7 @@ msrTempo::msrTempo (
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
     : msrMeasureElement (
-        inputLineNumber,
-        upLinkToMeasure),
+        inputLineNumber),
       fTempoBeatUnit (tempoBeatUnit),
       fTempoEquivalentBeatUnit ()
 {
@@ -1220,8 +1220,7 @@ msrTempo::msrTempo (
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
     : msrMeasureElement (
-        inputLineNumber,
-        upLinkToMeasure),
+        inputLineNumber),
       fTempoBeatUnit (tempoBeatUnit),
       fTempoEquivalentBeatUnit (tempoEquivalentBeatUnit)
 {
@@ -1250,8 +1249,7 @@ msrTempo::msrTempo (
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
     : msrMeasureElement (
-        inputLineNumber,
-        upLinkToMeasure),
+        inputLineNumber),
       fTempoBeatUnit (),
       fTempoEquivalentBeatUnit ()
 {
@@ -1270,6 +1268,34 @@ msrTempo::msrTempo (
 
 msrTempo::~msrTempo ()
 {}
+
+void msrTempo::setTempoUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of tempo " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fTempoUpLinkToMeasure = measure;
+}
 
 void msrTempo::acceptIn (basevisitor* v)
 {

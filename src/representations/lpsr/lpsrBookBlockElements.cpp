@@ -665,7 +665,7 @@ void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
     gLogStream <<
       "Appending score block element  " <<
        scoreBlock-> asString () <<
-       " to LPSR book block elements std::list" <<
+       " to LPSR book block elements list" <<
        std::endl;
   }
 #endif
@@ -682,7 +682,7 @@ void lpsrBookBlock::appendLpsrBookPartBlockToBookBlockElementsList (
     gLogStream <<
       "Appending book part block element  " <<
        bookPartBlock-> asString () <<
-       " to LPSR book block elements std::list" <<
+       " to LPSR book block elements list" <<
        std::endl;
   }
 #endif

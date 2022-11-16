@@ -85,7 +85,7 @@ S_msrBarLine msrBarLine::create (
   return
     msrBarLine::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       barLineLocationKind,
       barLineStyleKind,
       barLineRepeatDirectionKind,
@@ -624,8 +624,7 @@ std::string msrBarLine::asString () const
   s <<
     "[BarLine " <<
     msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
-    ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+    ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
 
     ", " <<
@@ -736,8 +735,7 @@ void msrBarLine::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << " : " <<
-    fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+    fBarLineUpLinkToMeasure->getMeasureNumber () <<
     std::endl;
 
   --gIndenter;
@@ -754,8 +752,7 @@ void msrBarLine::printShort (std::ostream& os) const
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
     msrBarLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+    ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber <<
     ']' <<

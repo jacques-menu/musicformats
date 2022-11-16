@@ -20,6 +20,10 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
+#include "msrMeasureConstants.h"
+
 #include "msrPitchesNames.h"
 
 #include "msrStavesDetails.h"
@@ -33,6 +37,85 @@
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+std::string msrStaffTypeKindAsString (
+  msrStaffTypeKind staffTypeKind)
+{
+  std::string result;
+
+  switch (staffTypeKind) {
+    case msrStaffTypeKind::kStaffTypeRegular:
+      result = "kStaffTypeRegular";
+      break;
+    case msrStaffTypeKind::kStaffTypeOssia:
+      result = "kStaffTypeOssia";
+      break;
+    case msrStaffTypeKind::kStaffTypeCue:
+      result = "kStaffTypeCue";
+      break;
+    case msrStaffTypeKind::kStaffTypeEditorial:
+      result = "kStaffTypeEditorial";
+      break;
+    case msrStaffTypeKind::kStaffTypeAlternate:
+      result = "kStaffTypeAlternate";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrStaffTypeKind& elt)
+{
+  os << msrStaffTypeKindAsString (elt);
+  return os;
+}
+
+std::string msrShowFretsKindAsString (
+  msrShowFretsKind showFretsKind)
+{
+  std::string result;
+
+  switch (showFretsKind) {
+    case msrShowFretsKind::kShowFretsNumbers:
+      result = "kShowFretsNumbers";
+      break;
+    case msrShowFretsKind::kShowFretsLetters:
+      result = "kShowFretsLetters";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrShowFretsKind& elt)
+{
+  os << msrShowFretsKindAsString (elt);
+  return os;
+}
+
+std::string msrPrintSpacingKindAsString (
+  msrPrintSpacingKind printSpacingKind)
+{
+  std::string result;
+
+  switch (printSpacingKind) {
+    case msrPrintSpacingKind::kPrintSpacingYes:
+      result = "kPrintSpacingYes";
+      break;
+    case msrPrintSpacingKind::kPrintSpacingNo:
+      result = "kPrintSpacingNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrPrintSpacingKind& elt)
+{
+  os << msrPrintSpacingKindAsString (elt);
+  return os;
+}
 
 //______________________________________________________________________________
 S_msrStaffTuning msrStaffTuning::create (
@@ -231,7 +314,7 @@ S_msrStaffDetails msrStaffDetails::create (
   return
     msrStaffDetails::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       staffTypeKind,
       showFretsKind,
       printObjectKind,
@@ -260,6 +343,34 @@ msrStaffDetails::msrStaffDetails (
 
 msrStaffDetails::~msrStaffDetails ()
 {}
+
+void msrStaffDetails::setStaffDetailsUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of staff details " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fStaffDetailsUpLinkToMeasure = measure;
+}
 
 void msrStaffDetails::acceptIn (basevisitor* v)
 {
@@ -318,84 +429,6 @@ void msrStaffDetails::browseData (basevisitor* v)
         browser.browse (*(*i));
     } // for
   }
-}
-
-std::string msrStaffTypeKindAsString (
-  msrStaffTypeKind staffTypeKind)
-{
-  std::string result;
-
-  switch (staffTypeKind) {
-    case msrStaffTypeKind::kStaffTypeRegular:
-      result = "kStaffTypeRegular";
-      break;
-    case msrStaffTypeKind::kStaffTypeOssia:
-      result = "kStaffTypeOssia";
-      break;
-    case msrStaffTypeKind::kStaffTypeCue:
-      result = "kStaffTypeCue";
-      break;
-    case msrStaffTypeKind::kStaffTypeEditorial:
-      result = "kStaffTypeEditorial";
-      break;
-    case msrStaffTypeKind::kStaffTypeAlternate:
-      result = "kStaffTypeAlternate";
-      break;
-  } // switch
-
-  return result;
-}
-
-std::ostream& operator << (std::ostream& os, const msrStaffTypeKind& elt)
-{
-  os << msrStaffTypeKindAsString (elt);
-  return os;
-}
-
-std::string msrShowFretsKindAsString (
-  msrShowFretsKind showFretsKind)
-{
-  std::string result;
-
-  switch (showFretsKind) {
-    case msrShowFretsKind::kShowFretsNumbers:
-      result = "kShowFretsNumbers";
-      break;
-    case msrShowFretsKind::kShowFretsLetters:
-      result = "kShowFretsLetters";
-      break;
-  } // switch
-
-  return result;
-}
-
-std::ostream& operator << (std::ostream& os, const msrShowFretsKind& elt)
-{
-  os << msrShowFretsKindAsString (elt);
-  return os;
-}
-
-std::string msrPrintSpacingKindAsString (
-  msrPrintSpacingKind printSpacingKind)
-{
-  std::string result;
-
-  switch (printSpacingKind) {
-    case msrPrintSpacingKind::kPrintSpacingYes:
-      result = "kPrintSpacingYes";
-      break;
-    case msrPrintSpacingKind::kPrintSpacingNo:
-      result = "kPrintSpacingNo";
-      break;
-  } // switch
-
-  return result;
-}
-
-std::ostream& operator << (std::ostream& os, const msrPrintSpacingKind& elt)
-{
-  os << msrPrintSpacingKindAsString (elt);
-  return os;
 }
 
 std::string msrStaffDetails::asShortString () const

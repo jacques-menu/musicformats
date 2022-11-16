@@ -5754,7 +5754,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
     // register stand-alone metronome note
 
     if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
-      // this metronome note belongs to the left elements std::list
+      // this metronome note belongs to the left elements list
 
       if (! fCurrentMetronomeRelationLeftElements) {
         // create the relation left elements
@@ -5769,7 +5769,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
           tempoNote);
     }
     else {
-      // this metronome note belongs to the right elements std::list
+      // this metronome note belongs to the right elements list
 
       if (! fCurrentMetronomeRelationRightElements) {
         // create the relation right elements
@@ -6004,7 +6004,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
 
 				// register the metronome tuplet
 				if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
-					// this metronome tuplet belongs to the left elements std::list
+					// this metronome tuplet belongs to the left elements list
 
 					if (! fCurrentMetronomeRelationLeftElements) {
 						// create the relation left elements
@@ -6019,7 +6019,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
 							fCurrentMetronomeTuplet);
 				}
 				else {
-					// this metronome tuplet belongs to the right elements std::list
+					// this metronome tuplet belongs to the right elements list
 
 					if (! fCurrentMetronomeRelationRightElements) {
 						// create the relation right elements
@@ -21019,7 +21019,7 @@ S_msrNote mxsr2msrTranslator::createNote (
     newNote =
       msrNote::create (
         inputLineNumber,
-	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
         fCurrentMeasureNumber,
 
@@ -22100,7 +22100,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
     figuredBass->
       setFiguredBassUpLinkToNote (newNote);
 
-    // append the figured bass to newNote's figured bass elements std::list
+    // append the figured bass to newNote's figured bass elements list
     newNote->
       appendFiguredBassToNoteFiguredBassesList (
         figuredBass);
@@ -25173,7 +25173,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       harmony =
         msrHarmony::create (
           fCurrentHarmonyInputLineNumber,
-		      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+		      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
           fCurrentHarmonyRootQuarterTonesPitchKind,
 
@@ -25809,7 +25809,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
     // forget about those pending figures
     fPendingFiguredBassFiguresList.clear ();
 
-    // append the figured bass element to the pending figured bass elements std::list
+    // append the figured bass element to the pending figured bass elements list
     fPendingFiguredBassesList.push_back (figuredBass);
   }
 

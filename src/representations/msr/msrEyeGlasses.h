@@ -14,6 +14,8 @@
 
 #include "msrMeasureElements.h"
 
+#include "msrTypesForwardDeclarations.h"
+
 
 namespace MusicFormats
 {
@@ -48,6 +50,14 @@ class EXP msrEyeGlasses : public msrMeasureElement
 
     // set and get
     // ------------------------------------------------------
+
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setEyeGlassesUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getEyeGlassesUpLinkToMeasure (); }
 
     void                  setEyeGlassesUpLinkToMeasure (
                             const S_msrMeasure& measure);

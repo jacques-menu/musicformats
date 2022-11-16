@@ -14,6 +14,8 @@
 
 #include "msrMeasureElements.h"
 
+#include "msrMeasures.h"
+
 #include "msrStaves.h"
 
 
@@ -56,6 +58,20 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setVoiceStaffChangeUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getVoiceStaffChangeUpLinkToMeasure (); }
+
+    void                  setVoiceStaffChangeUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getVoiceStaffChangeUpLinkToMeasure () const
+                            { return fVoiceStaffChangeUpLinkToMeasure; }
+
     S_msrStaff            getStaffToChangeTo () const
                               { return fStaffToChangeTo; }
 
@@ -87,6 +103,8 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fVoiceStaffChangeUpLinkToMeasure;
 
     S_msrStaff            fStaffToChangeTo;
 };

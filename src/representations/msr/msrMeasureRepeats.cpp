@@ -75,7 +75,7 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending segment '" << segment <<
-      "' to measureRepeat element elements std::list '" << asString () <<
+      "' to measureRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -100,7 +100,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending measureRepeat '" << measureRepeat <<
-      "' to measureRepeat element elements std::list '" << asString () <<
+      "' to measureRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -125,7 +125,7 @@ void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending voice element '" << voiceElement <<
-      "' to measureRepeat element elements std::list '" << asString () <<
+      "' to measureRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;

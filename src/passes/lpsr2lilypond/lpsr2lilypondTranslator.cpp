@@ -17313,7 +17313,7 @@ slash = \tweak Flag.stroke-style grace \etc
         std::stringstream s;
 
         fLilypondCodeStream <<
-          "grace notes group elements std::list in '" <<
+          "grace notes group elements list in '" <<
           graceNotesGroup->asString () <<
           "' is empty" <<
           ", line " << graceNotesGroup->getInputLineNumber ();
@@ -17337,7 +17337,7 @@ slash = \tweak Flag.stroke-style grace \etc
     std::stringstream s;
 
     fLilypondCodeStream <<
-      "grace notes group elements std::list in '" <<
+      "grace notes group elements list in '" <<
       graceNotesGroup->asString () <<
       "' is empty" <<
       ", line " << graceNotesGroup->getInputLineNumber ();

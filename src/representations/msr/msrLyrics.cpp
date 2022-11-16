@@ -26,6 +26,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasureConstants.h"
+
 #include "msrLyrics.h"
 
 #include "oahOah.h"
@@ -75,7 +77,7 @@ S_msrSyllable msrSyllable::create (
   return
     msrSyllable::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       syllableKind,
       syllableExtendKind,
       syllableStanzaNumber,
@@ -192,7 +194,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
     newbornClone =
       msrSyllable::create (
         fInputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fSyllableKind,
         fSyllableExtendKind,
         fSyllableStanzaNumber,
@@ -243,7 +245,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
     syllableDeepClone =
       msrSyllable::create (
         fInputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fSyllableKind,
         fSyllableExtendKind,
         fSyllableStanzaNumber,
@@ -269,6 +271,34 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
     fSyllableUpLinkToNote; // TEMP
 
   return syllableDeepClone;
+}
+
+void msrSyllable::setSyllableUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of syllable " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fSyllableUpLinkToMeasure = measure;
 }
 
 void msrSyllable:: setSyllableNextMeasurePuristNumber (
@@ -334,8 +364,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -1087,7 +1116,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableSkipRestNote,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1126,7 +1155,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableSkipRestNote,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1163,7 +1192,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableMeasureEnd,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1208,7 +1237,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         syllableKind,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1247,7 +1276,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableLineBreak,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
@@ -1290,7 +1319,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllablePageBreak,
         msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,

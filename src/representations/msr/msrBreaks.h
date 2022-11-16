@@ -14,6 +14,8 @@
 
 #include "msrMeasureElements.h"
 
+#include "msrTypesForwardDeclarations.h"
+
 
 namespace MusicFormats
 {
@@ -68,6 +70,19 @@ class EXP msrLineBreak : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setLineBreakUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getLineBreakUpLinkToMeasure (); }
+
+    void                  setLineBreakUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getLineBreakUpLinkToMeasure () const
+                            { return fLineBreakUpLinkToMeasure; }
+
     std::string           getNextBarNumber () const
                               { return fNextBarNumber; }
 
@@ -103,6 +118,8 @@ class EXP msrLineBreak : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fLineBreakUpLinkToMeasure;
 
     std::string           fNextBarNumber;
 
@@ -159,6 +176,19 @@ class EXP msrPageBreak : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setPageBreakUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getPageBreakUpLinkToMeasure (); }
+
+    void                  setPageBreakUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getPageBreakUpLinkToMeasure () const
+                            { return fPageBreakUpLinkToMeasure; }
+
     msrUserChosenPageBreakKind
                           getUserChosenPageBreakKind () const
                               { return fUserChosenPageBreakKind; }
@@ -191,6 +221,8 @@ class EXP msrPageBreak : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fPageBreakUpLinkToMeasure;
 
     msrUserChosenPageBreakKind
                           fUserChosenPageBreakKind;

@@ -14,6 +14,8 @@
 
 #include "msrElements.h"
 
+#include "msrElementsBase.h"
+
 #include "mfRational.h"
 
 
@@ -42,6 +44,14 @@ class EXP msrMeasureElement : public msrElement
 
     // set and get
     // ------------------------------------------------------
+
+    // the overrides call a class-specific method that can be called directly
+    virtual void          setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) = 0;
+
+    // the overrides call a class-specific method that can be called directly
+    virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const = 0;
+
     void                  setMeasureElementSoundingWholeNotes (
                             const Rational&    wholeNotes,
                             const std::string& context);
@@ -89,6 +99,10 @@ class EXP msrMeasureElement : public msrElement
 
     // public services
     // ------------------------------------------------------
+
+    static bool           compareMeasureElementsByIncreasingMeasurePosition (
+                            const SMARTP<msrMeasureElement>& first,
+                            const SMARTP<msrMeasureElement>& second);
 
   public:
 

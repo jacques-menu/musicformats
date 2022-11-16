@@ -20,6 +20,10 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
+#include "msrMeasureConstants.h"
+
 #include "oahOah.h"
 
 #include "msrOah.h"
@@ -82,7 +86,7 @@ S_msrSegno msrSegno::create (
   return
     msrSegno::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       staffNumber);
 }
 
@@ -98,6 +102,34 @@ msrSegno::msrSegno (
 
 msrSegno::~msrSegno ()
 {}
+
+void msrSegno::setSegnoUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of segno " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fSegnoUpLinkToMeasure = measure;
+}
 
 void msrSegno::acceptIn (basevisitor* v)
 {
@@ -203,7 +235,7 @@ S_msrDalSegno msrDalSegno::create (
   return
     msrDalSegno::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       dalSegnoKind,
       dalSegnoString,
       staffNumber);
@@ -227,6 +259,34 @@ msrDalSegno::msrDalSegno (
 
 msrDalSegno::~msrDalSegno ()
 {}
+
+void msrDalSegno::setDalSegnoUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of dal segno " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fDalSegnoUpLinkToMeasure = measure;
+}
 
 void msrDalSegno::acceptIn (basevisitor* v)
 {

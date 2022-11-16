@@ -1376,7 +1376,7 @@ formats/msr/msrSegments.h:class EXP msrSegment : public msrVoiceElement
 
 More precisely and for technical reasons, an \class{msrVoice} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    // voice initial elements std::list
+    // voice initial elements list
 
     std::list<S_msrVoiceElement>
                           fVoiceInitialElementsList;
@@ -1799,7 +1799,7 @@ class EXP msrRepeat : public msrVoiceElement
     // upLinks
     S_msrRepeat           fRepeatCommonPartUpLinkToRepeat;
 
-    // elements std::list
+    // elements list
     std::list<S_msrVoiceElement>
                           fRepeatCommonPartElementsList;
 \end{lstlisting}
@@ -1829,7 +1829,7 @@ enum class msrRepeatEndingKind {
     // kind
     msrRepeatEndingKind   fRepeatEndingKind;
 
-    // elements std::list
+    // elements list
     std::list<S_msrVoiceElement>
                           fRepeatEndingElementsList;
 \end{lstlisting}

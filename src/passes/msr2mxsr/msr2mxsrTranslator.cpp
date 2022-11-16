@@ -1214,7 +1214,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     // set its "type" attribute
     creatorElement->add (createMxmlAttribute ("type", "composer"));
 
-    // append it to the composers elements std::list
+    // append it to the composers elements list
     fComposersElementsList.push_back (creatorElement);
   } // for
 
@@ -1236,7 +1236,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     // set its "type" attribute
     creatorElement->add (createMxmlAttribute ("type", "arranger"));
 
-    // append it to the composers elements std::list
+    // append it to the composers elements list
     fComposersElementsList.push_back (creatorElement);
   } // for
 
@@ -1258,7 +1258,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     // set its "type" attribute
     creatorElement->add (createMxmlAttribute ("type", "lyricist"));
 
-    // append it to the composers elements std::list
+    // append it to the composers elements list
     fComposersElementsList.push_back (creatorElement);
   } // for
 
@@ -1280,7 +1280,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     // set its "type" attribute
     creatorElement->add (createMxmlAttribute ("type", "poet"));
 
-    // append it to the composers elements std::list
+    // append it to the composers elements list
     fComposersElementsList.push_back (creatorElement);
   } // for
 
@@ -1302,7 +1302,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     // set its "type" attribute
     creatorElement->add (createMxmlAttribute ("type", "translator"));
 
-    // append it to the composers elements std::list
+    // append it to the composers elements list
     fComposersElementsList.push_back (creatorElement);
   } // for
 
@@ -1324,7 +1324,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     // set its "type" attribute
     creatorElement->add (createMxmlAttribute ("type", "artist"));
 
-    // append it to the composers elements std::list
+    // append it to the composers elements list
     fComposersElementsList.push_back (creatorElement);
   } // for
 
@@ -1340,7 +1340,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
   ) {
     std::string variableValue = (*i);
 
-    // append a software element to the softwares elements std::list
+    // append a software element to the softwares elements list
     fSoftwaresElementsList.push_back (
       createMxmlelement (
       k_software,
@@ -1359,7 +1359,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
   ) {
     std::string variableValue = (*i);
 
-    // append a rights element to the rights elements std::list
+    // append a rights element to the rights elements list
     fRightsElementsList.push_back (
       createMxmlelement (
       k_rights,
@@ -2707,7 +2707,7 @@ if (false) // JMI
   // set its "id" attribute
   fCurrentPartElement->add (createMxmlAttribute ("id", partID));
 
-  // append it to the pending part elements std::list
+  // append it to the pending part elements list
   fPendingPartElementsList.push_back (fCurrentPartElement);
 
   // get the part shortest note's duration
@@ -8096,7 +8096,7 @@ void msr2mxsrTranslator::visitStart (S_msrStanza& elt)
       elt->createStanzaNewbornClone (
         fCurrentVoiceClone);
 
-    // append the stanza clone to the LPSR score elements std::list
+    // append the stanza clone to the LPSR score elements list
     fResultingMusicxmlelement->
       appendStanzaToLpsrScoreElementsList (
         fCurrentStanzaClone);

@@ -20,9 +20,13 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
 #include "oahOah.h"
 
 #include "msrOah.h"
+
+#include "msrMeasureConstants.h"
 
 #include "msrTranspositions.h"
 
@@ -61,7 +65,7 @@ S_msrTransposition msrTransposition::create (
   return
     msrTransposition::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       transposeDiatonic,
       transposeChromatic,
       transposeOctaveChange,
@@ -96,6 +100,34 @@ msrTransposition::msrTransposition (
 
 msrTransposition::~msrTransposition ()
 {}
+
+void msrTransposition::setTranspositionUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of transposition " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fTranspositionUpLinkToMeasure = measure;
+}
 
 Bool msrTransposition::isEqualTo (S_msrTransposition otherTransposition) const
 {

@@ -22,7 +22,10 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
 #include "mfServiceRunData.h"
+
+#include "msrMeasureConstants.h"
 
 #include "msrInstruments.h"
 
@@ -59,7 +62,8 @@ msrStringTuning::msrStringTuning (
   msrDiatonicPitchKind stringTuningDiatonicPitchKind,
   msrAlterationKind    stringTuningAlterationKind,
   msrOctaveKind        stringTuningOctaveKind)
-    : msrElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber)
 {
   fStringTuningNumber = stringTuningNumber;
 
@@ -70,6 +74,34 @@ msrStringTuning::msrStringTuning (
 
 msrStringTuning::~msrStringTuning ()
 {}
+
+void msrStringTuning::setStringTuningUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of string tuning " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fStringTuningUpLinkToMeasure = measure;
+}
 
 void msrStringTuning::acceptIn (basevisitor* v)
 {
@@ -177,7 +209,7 @@ S_msrScordatura msrScordatura::create (
   return
     msrScordatura::create (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrScordatura::msrScordatura (
@@ -189,6 +221,34 @@ msrScordatura::msrScordatura (
 
 msrScordatura::~msrScordatura ()
 {}
+
+void msrScordatura::setScordaturaUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of scordatura " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fScordaturaUpLinkToMeasure = measure;
+}
 
 void msrScordatura::addStringTuningToScordatura (
   S_msrStringTuning stringTuning)
@@ -315,7 +375,7 @@ S_msrAccordionRegistration msrAccordionRegistration::create (
   return
     msrAccordionRegistration::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       highDotsNumber,
       middleDotsNumber,
       lowDotsNumber);
@@ -337,6 +397,34 @@ msrAccordionRegistration::msrAccordionRegistration (
 
 msrAccordionRegistration::~msrAccordionRegistration ()
 {}
+
+void msrAccordionRegistration::setAccordionRegistrationUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of accordion registration " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fAccordionRegistrationUpLinkToMeasure = measure;
+}
 
 void msrAccordionRegistration::acceptIn (basevisitor* v)
 {
@@ -434,20 +522,19 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
 }
 
 S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
-  int           inputLineNumber)
+  int                 inputLineNumber)
 {
   return
     msrHarpPedalsTuning::create (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrHarpPedalsTuning::msrHarpPedalsTuning (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
     : msrMeasureElement (
-        inputLineNumber,
-        gNullMeasureSmartPointer) // set later in setMeasureElementUpLinkToMeasure()
+        inputLineNumber)
 {}
 
 msrHarpPedalsTuning::~msrHarpPedalsTuning ()
@@ -485,6 +572,34 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
     harpPedalsTuningDeepClone = 0; // JMI
 
   return harpPedalsTuningDeepClone;
+}
+
+void msrHarpPedalsTuning::setHarpPedalsTuningUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of harp pedals tuning " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fHarpPedalsTuningUpLinkToMeasure = measure;
 }
 
 void msrHarpPedalsTuning::addPedalTuning (
@@ -685,7 +800,7 @@ S_msrPedal msrPedal::create (
   return
     msrPedal::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       pedalTypeKind,
       pedalLineKind,
       pedalSignKind);
@@ -707,6 +822,34 @@ msrPedal::msrPedal (
 
 msrPedal::~msrPedal ()
 {}
+
+void msrPedal::setPedalUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of pedal " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fPedalUpLinkToMeasure = measure;
+}
 
 void msrPedal::acceptIn (basevisitor* v)
 {
@@ -876,7 +1019,7 @@ S_msrDamp msrDamp::create (
   return
     msrDamp::create (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrDamp::msrDamp (
@@ -888,6 +1031,34 @@ msrDamp::msrDamp (
 
 msrDamp::~msrDamp ()
 {}
+
+void msrDamp::setDampUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of damp " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fDampUpLinkToMeasure = measure;
+}
 
 void msrDamp::acceptIn (basevisitor* v)
 {
@@ -975,7 +1146,7 @@ S_msrDampAll msrDampAll::create (
   return
     msrDampAll::create (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrDampAll::msrDampAll (
@@ -987,6 +1158,34 @@ msrDampAll::msrDampAll (
 
 msrDampAll::~msrDampAll ()
 {}
+
+void msrDampAll::setDampAllUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of dampAll " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fDampAllUpLinkToMeasure = measure;
+}
 
 void msrDampAll::acceptIn (basevisitor* v)
 {

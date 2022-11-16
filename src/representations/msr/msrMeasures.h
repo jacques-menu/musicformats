@@ -14,7 +14,8 @@
 
 #include "msrSegmentElements.h"
 
-#include "msrMeasureElements.h"
+// #include "msrMeasureElements.h"
+#include "msrElementsBase.h"
 
 #include "msrMeasuresEnumTypes.h"
 #include "msrMoments.h"
@@ -208,7 +209,7 @@ class EXP msrMeasure : public msrSegmentElement
     S_msrNote             getMeasureLastHandledNote () const
                               { return fMeasureLastHandledNote; }
 
-    // elements std::list
+    // elements list
 
     const std::list<S_msrMeasureElement>&
                           getMeasureElementsList () const
@@ -299,7 +300,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const Rational& duration,
                             S_msrVoice      voice);
 
-    void                  padUpToMeasurePositionInMeasure (
+    void                  padUpToMeasureMeasurePosition (
                             int             inputLineNumber,
                             const Rational& wholeNotes);
 
@@ -518,7 +519,7 @@ class EXP msrMeasure : public msrSegmentElement
     S_msrElement          getLastElementOfMeasure () const
                               { return fMeasureElementsList.back (); }
 
-     /* JMI
+     /* JMI v0.9.66
     S_msrElement          removeLastElementFromMeasure (
                             int inputLineNumber);
 */
@@ -627,6 +628,9 @@ class EXP msrMeasure : public msrSegmentElement
 
     std::list<S_msrMeasureElement>
                           fMeasureElementsList;
+
+//     std::list<msrElementsBase*>
+//                           fMeasureElementsBaseList;
 
     Bool                  fMeasureContainsMusic;
 
