@@ -196,7 +196,7 @@ std::string bsrBarLineKindAsDebugString ( // JMI of little use??? v0.9.66
 
   switch (barLineKind) {
     case bsrBarLineKind::kBarLineKindNone:
-      result = "***kBarLineKindNone***";
+      result = "kBarLineKindNone***";
       break;
     case bsrBarLineKind::kBarLineKindSpecial:
       result = "kBarLineKindSpecial";

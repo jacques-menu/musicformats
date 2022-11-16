@@ -1547,7 +1547,7 @@ class EXP oahHandler : public oahFindableElement
 
     void                  unknownOptionValueKindError (const std::string& name);
 
-    virtual std::string        handlerServiceAboutInformation () const = 0;
+    virtual std::string   handlerServiceAboutInformation () const = 0;
 
     S_oahElement          fetchElementByNameInHandler (
                             const std::string& name);
@@ -1589,7 +1589,7 @@ class EXP oahHandler : public oahFindableElement
     void                  setOahHandlerFoundAHelpOption (
                             const std::string& context);
 
-    virtual std::string        fetchOutputFileNameFromTheOptions () const;
+    virtual std::string   fetchOutputFileNameFromTheOptions () const;
                             // JMI the MFSL interpreter has no output file... v0.9.62
 
     // quiet mode

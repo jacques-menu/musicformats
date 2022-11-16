@@ -216,7 +216,7 @@ std::string bsrClefKindAsString (
 
   switch (clefKind) {
     case bsrClefKind::kClefKindNone:
-      result = "***kClefKindNone***";
+      result = "kClefKindNone***";
       break;
     case bsrClefKind::kClefKindGTreble:
       result = "kClefKindGTreble";

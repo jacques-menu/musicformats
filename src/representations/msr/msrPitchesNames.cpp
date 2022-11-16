@@ -1775,7 +1775,7 @@ std::string msrDiatonicPitchKindAsStringInLanguage (
 
   switch (diatonicPitchKind) {
     case msrDiatonicPitchKind::kDiatonicPitch_NO_:
-      result = "***kDiatonicPitch_NO_***";
+      result = "kDiatonicPitch_NO_";
       break;
 
     case msrDiatonicPitchKind::kDiatonicPitchA:

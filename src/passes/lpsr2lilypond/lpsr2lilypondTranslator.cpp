@@ -365,7 +365,7 @@ std::string lpsr2lilypondTranslator::msrModeKindAsLilypondString (
 
   switch (modeKind) {
     case msrModeKind::kMode_NO_:
-      result = "***kMode_NO_***";
+      result = "kMode_NO_";
       break;
     case msrModeKind::kModeMajor:
       result = "\\major";

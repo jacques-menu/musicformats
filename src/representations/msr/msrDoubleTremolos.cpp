@@ -48,7 +48,7 @@ std::string msrDoubleTremoloTypeKindAsString (
 
   switch (tremoloTypeKind) {
     case msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_:
-      result = "***kDoubleTremoloType_NO_***";
+      result = "kDoubleTremoloType_NO_";
       break;
     case msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle:
       result = "kDoubleTremoloTypeSingle";

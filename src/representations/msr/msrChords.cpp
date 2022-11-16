@@ -17,8 +17,6 @@
 #include "mfServiceRunData.h"
 #include "mfStringsHandling.h"
 
-#include "msrMeasureConstants.h"
-
 #include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
@@ -26,13 +24,17 @@
 
 #include "mfAssert.h"
 
+// #include "msrMeasureConstants.h"
+
 #include "msrArticulations.h"
 #include "msrGlissandos.h"
 #include "msrMusicXMLSpecifics.h"
 #include "msrSlides.h"
 #include "msrTechnicals.h"
 
-#include "msrChords.h"
+#include "msrMeasureConstants.h"
+
+// #include "msrChords.h"
 
 #include "oahOah.h"
 
@@ -56,7 +58,7 @@ std::string msrChordInKindAsString (
 
   switch (chordInKind) {
     case msrChordInKind::kChordIn_NO_:
-      result = "***kChordIn_NO_***";
+      result = "kChordIn_NO_";
       break;
     case msrChordInKind::kChordInMeasure:
       result = "kChordInMeasure";
@@ -129,7 +131,7 @@ S_msrChord msrChord::create (
   return
     msrChord::create (
       inputLineNumber,
-      gGlobalNullMeasureSmartPointer, // set later in setTupletElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setChordUpLinkToMeasure()
       chordSoundingWholeNotes, chordDisplayWholeNotes,
       chordGraphicDurationKind);
 }
@@ -146,7 +148,7 @@ msrChord::msrChord (
 {
   fChordKind = msrChordInKind::kChordIn_NO_;
 
-//   fTupletElementUpLinkToMeasure = upLinkToMeasure;
+//   fChordUpLinkToMeasure = upLinkToMeasure;
 
   doSetMeasureElementSoundingWholeNotes (
     chordSoundingWholeNotes,
@@ -186,7 +188,7 @@ S_msrChord msrChord::createChordNewbornClone (
     newbornClone =
       msrChord::create (
         fInputLineNumber,
-	      gGlobalNullMeasureSmartPointer, // set later in setTupletElementUpLinkToMeasure()
+	      gGlobalNullMeasureSmartPointer, // set later in setChordUpLinkToMeasure()
         fMeasureElementSoundingWholeNotes,
         fChordDisplayWholeNotes,
         fChordGraphicDurationKind);
@@ -225,7 +227,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fTupletElementUpLinkToMeasure->getMeasureNumber () <<
+//       fChordUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -253,14 +255,14 @@ S_msrChord msrChord::createChordNewbornClone (
 //       break;
 //
 //     case msrChordInKind::kChordInMeasure:
-//       result = fTupletElementUpLinkToMeasure;
+//       result = fChordUpLinkToMeasure;
 //       break;
 //
 //     case msrChordInKind::kChordInTuplet:
 //       if (fChordDirectUpLinkToTuplet) {
 //         result =
 //           fChordDirectUpLinkToTuplet->
-//             fTupletElementUpLinkToMeasure;
+//             fChordUpLinkToMeasure;
 //       }
 //       break;
 //
@@ -269,7 +271,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //         result =
 //           fChordDirectUpLinkToGraceNotesGroup->
 //             getGraceNotesGroupUpLinkToNote ()->
-//               fTupletElementUpLinkToMeasure;
+//               fChordUpLinkToMeasure;
 //       }
 //       break;
 //   } // switch
@@ -361,7 +363,7 @@ S_msrScore msrChord::fetchChordUpLinkToScore () const
 
   S_msrMeasure
     measure =
-      fTupletElementUpLinkToMeasure;
+      fChordUpLinkToMeasure;
 
   if (measure) {
     result =
@@ -459,7 +461,7 @@ void msrChord::setChordMembersMeasurePosition (
   // compute chord's position in voice
   Rational
     voicePosition =
-      fTupletElementUpLinkToMeasure->
+      fChordUpLinkToMeasure->
         getMeasureVoicePosition ()
         +
       measurePosition;
@@ -486,7 +488,7 @@ void msrChord::setChordMembersMeasurePosition (
     for (S_msrNote note : fChordNotesVector) {
       // set note's uplink to measure
       note->
-        setTupletElementUpLinkToMeasure (
+        setNoteUpLinkToMeasure (
           measure);
 
       // set note's position in measure
@@ -543,8 +545,8 @@ void msrChord::addFirstNoteToChord (
 /* JMI too early v0.9.66
   // register note's uplink to measure
   note->
-    setTupletElementUpLinkToMeasure (
-      fTupletElementUpLinkToMeasure);
+    setNoteUpLinkToMeasure (
+      fChordUpLinkToMeasure);
 */
 
   // mark note as belonging to a chord
@@ -605,7 +607,7 @@ void msrChord::addAnotherNoteToChord (
 
   // append the note to the measure's notes flat std::list
   if (false) // JMI
-  fTupletElementUpLinkToMeasure->
+  fChordUpLinkToMeasure->
     appendNoteToMeasureNotesFlatList (note);
 
 /* JMI
@@ -1030,7 +1032,7 @@ void msrChord::finalizeChord (
 
   // we can now set the position in measures for all the chord members JMI v0.9.66
 //   setChordMembersMeasurePosition (
-//     fTupletElementUpLinkToMeasure,
+//     fChordUpLinkToMeasure,
 //     fMeasureElementMeasurePosition);
 }
 
@@ -1522,8 +1524,8 @@ void msrChord::print (std::ostream& os) const
 {
   Rational
     chordMeasureFullLength =
-      fTupletElementUpLinkToMeasure
-        ? fTupletElementUpLinkToMeasure->
+      fChordUpLinkToMeasure
+        ? fChordUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
         : Rational (0, 1); // JMI
 
@@ -1549,7 +1551,7 @@ void msrChord::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << " : " <<
-    fTupletElementUpLinkToMeasure->getMeasureNumber () <<
+    fChordUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
@@ -1563,10 +1565,10 @@ void msrChord::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fTupletElementUpLinkToMeasure" << " : ";
+    "fChordUpLinkToMeasure" << " : ";
   if (fChordDirectUpLinkToTuplet) {
     os <<
-      fTupletElementUpLinkToMeasure->asShortString ();
+      fChordUpLinkToMeasure->asShortString ();
   }
   else {
     os << "[NONE]";
@@ -1588,11 +1590,11 @@ void msrChord::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fPositionInTuplet" << " : " <<
-    fPositionInTuplet <<
+//     fPositionInTuplet <<
     std::endl;
 
   // print simplified position in measure if relevant
-// JMI  if (fTupletElementUpLinkToMeasure) {
+// JMI  if (fChordUpLinkToMeasure) {
     // the chord uplink to measure may not have been set yet
     Rational
       chordPositionBis =
@@ -2325,8 +2327,8 @@ void msrChord::printShort (std::ostream& os) const
 {
   Rational
     chordMeasureFullLength =
-      fTupletElementUpLinkToMeasure
-        ? fTupletElementUpLinkToMeasure->
+      fChordUpLinkToMeasure
+        ? fChordUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
         : Rational (0, 1); // JMI
 
@@ -2352,7 +2354,7 @@ void msrChord::printShort (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << " : " <<
-    fTupletElementUpLinkToMeasure->getMeasureNumber () <<
+    fChordUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
@@ -2373,7 +2375,7 @@ void msrChord::printShort (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fPositionInTuplet" << " : " <<
-    fPositionInTuplet <<
+//     fPositionInTuplet <<
     std::endl;
 
   // print the chord grace notes group link before if any

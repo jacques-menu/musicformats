@@ -1198,26 +1198,15 @@ msrPrintLayout::msrPrintLayout (
 msrPrintLayout::~msrPrintLayout ()
 {}
 
-void msrPrintLayout::acceptIn (basevisitor* v)
+void msrPrintLayout::setMeasureElementUpLinkToMeasure (
+  const S_msrMeasure& measure)
 {
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
-      "% ==> msrPrintLayout::acceptIn ()" <<
-      std::endl;
-  }
+  setPrintLayoutUpLinkToMeasure (measure);
+}
 
-  if (visitor<S_msrPrintLayout>*
-    p =
-      dynamic_cast<visitor<S_msrPrintLayout>*> (v)) {
-        S_msrPrintLayout elem = this;
-
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
-            "% ==> Launching msrPrintLayout::visitStart ()" <<
-            std::endl;
-        }
-        p->visitStart (elem);
-  }
+S_msrMeasure msrPrintLayout::getMeasureElementUpLinkToMeasure () const
+{
+  return getPrintLayoutUpLinkToMeasure ();
 }
 
 void msrPrintLayout::setPrintLayoutUpLinkToMeasure (
@@ -1246,6 +1235,33 @@ void msrPrintLayout::setPrintLayoutUpLinkToMeasure (
 #endif
 
   fPrintLayoutUpLinkToMeasure = measure;
+}
+
+S_msrMeasure msrPrintLayout::getPrintLayoutUpLinkToMeasure () const
+{
+  return fPrintLayoutUpLinkToMeasure;
+}
+
+void msrPrintLayout::acceptIn (basevisitor* v)
+{
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrPrintLayout::acceptIn ()" <<
+      std::endl;
+  }
+
+  if (visitor<S_msrPrintLayout>*
+    p =
+      dynamic_cast<visitor<S_msrPrintLayout>*> (v)) {
+        S_msrPrintLayout elem = this;
+
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrPrintLayout::visitStart ()" <<
+            std::endl;
+        }
+        p->visitStart (elem);
+  }
 }
 
 void msrPrintLayout::acceptOut (basevisitor* v)

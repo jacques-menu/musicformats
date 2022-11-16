@@ -2721,7 +2721,7 @@ std::string msrModeKindAsString (
 
   switch (modeKind) {
     case msrModeKind::kMode_NO_:
-      result = "***kMode_NO_***";
+      result = "kMode_NO_";
       break;
     case msrModeKind::kModeMajor:
       result = "kModeMajor";
@@ -2817,7 +2817,7 @@ std::string msrHarmonyKindAsString (
 
   switch (harmonyKind) {
     case msrHarmonyKind::kHarmony_NO_:
-      result = "***kHarmony_NO_***";
+      result = "kHarmony_NO_";
       break;
 
     // MusicXML harmonies
@@ -4397,6 +4397,34 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
   // JMI popoulate! v0.9.66
 
   return harmonyDeepClone;
+}
+
+void msrHarmony::setHarmonyUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of harmony " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fHarmonyUpLinkToMeasure = measure;
 }
 
 void msrHarmony::setHarmonyTupletFactor (
