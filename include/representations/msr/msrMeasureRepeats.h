@@ -481,7 +481,7 @@ class EXP msrMeasureRepeatElement : public msrElement
     // upLinks
     S_msrMeasureRepeat   fMeasureRepeatElementUpLinkToMeasureRepeat;
 
-    // elements std::list
+    // elements list
     std::list<S_msrVoiceElement>
                           fMeasureRepeatElementsList;
 };

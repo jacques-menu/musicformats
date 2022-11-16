@@ -221,6 +221,20 @@ class EXP msrTimeSignature : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setTimeSignatureUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getTimeSignatureUpLinkToMeasure (); }
+
+    void                  setTimeSignatureUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getTimeSignatureUpLinkToMeasure () const
+                            { return fTimeSignatureUpLinkToMeasure; }
+
     msrTimeSignatureSymbolKind
                           getTimeSignatureSymbolKind () const
                               { return fTimeSignatureSymbolKind; }
@@ -270,6 +284,8 @@ class EXP msrTimeSignature : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fTimeSignatureUpLinkToMeasure;
 
     msrTimeSignatureSymbolKind
                           fTimeSignatureSymbolKind;

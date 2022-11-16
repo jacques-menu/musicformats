@@ -94,9 +94,9 @@ class EXP msrStaffTuning : public msrElement
 
     void                  print (std::ostream& os) const override;
 
-  public:
+  private:
 
-    // fields
+    // private fields
     // ------------------------------------------------------
 
     int                   fStaffTuningLineNumber;
@@ -184,6 +184,20 @@ class EXP msrStaffDetails : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setStaffDetailsUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getStaffDetailsUpLinkToMeasure (); }
+
+    void                  setStaffDetailsUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getStaffDetailsUpLinkToMeasure () const
+                            { return fStaffDetailsUpLinkToMeasure; }
+
     msrStaffTypeKind      getStaffTypeKind () const
                               { return fStaffTypeKind; }
 
@@ -241,6 +255,8 @@ class EXP msrStaffDetails : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fStaffDetailsUpLinkToMeasure;
 
     msrStaffTypeKind      fStaffTypeKind;
 

@@ -121,7 +121,7 @@ class EXP msdrMeasure : public smartable
     // input line number
     int                   fInputLineNumber;
 
-    // measures elements std::list
+    // measures elements list
     std::list<S_msdrLayer>
                           fMeasureLayersList;
 

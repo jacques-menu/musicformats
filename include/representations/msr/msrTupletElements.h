@@ -16,6 +16,10 @@
 
 #include "msrMeasureElements.h"
 
+#include "msrTypesForwardDeclarations.h"
+
+#include "msrMeasures.h"
+
 
 namespace MusicFormats
 {
@@ -49,11 +53,16 @@ class EXP msrTupletElement : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override;
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
+
     void                  setTupletElementUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
-    S_msrMeasure          getTupletElementUpLinkToMeasure () const
-                            { return fTupletElementUpLinkToMeasure; }
+    S_msrMeasure          getTupletElementUpLinkToMeasure () const;
 
     void                  setPositionInTuplet (
                             int positionInTuplet)

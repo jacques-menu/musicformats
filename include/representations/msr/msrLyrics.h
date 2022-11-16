@@ -125,6 +125,20 @@ class EXP msrSyllable : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setSyllableUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getSyllableUpLinkToMeasure (); }
+
+    void                  setSyllableUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getSyllableUpLinkToMeasure () const
+                            { return fSyllableUpLinkToMeasure; }
+
     // upLinks
     void                  setSyllableUpLinkToNote (S_msrNote note)
                               { fSyllableUpLinkToNote = note; }
@@ -212,6 +226,8 @@ class EXP msrSyllable : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fSyllableUpLinkToMeasure;
 
     // upLinks
     S_msrNote             fSyllableUpLinkToNote;

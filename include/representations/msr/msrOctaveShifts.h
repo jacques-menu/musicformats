@@ -32,6 +32,7 @@ std::string msrOctaveShiftKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrOctaveShiftKind& elt);
 
+//______________________________________________________________________________
 class EXP msrOctaveShift : public msrMeasureElement
 {
   public:
@@ -68,6 +69,20 @@ class EXP msrOctaveShift : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setOctaveShiftUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getOctaveShiftUpLinkToMeasure (); }
+
+    void                  setOctaveShiftUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getOctaveShiftUpLinkToMeasure () const
+                            { return fOctaveShiftUpLinkToMeasure; }
+
     msrOctaveShiftKind    getOctaveShiftKind () const
                               { return fOctaveShiftKind; }
 
@@ -102,6 +117,8 @@ class EXP msrOctaveShift : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fOctaveShiftUpLinkToMeasure;
 
     msrOctaveShiftKind    fOctaveShiftKind;
 

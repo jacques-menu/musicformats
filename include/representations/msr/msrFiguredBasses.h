@@ -15,6 +15,8 @@
 #include "msrElements.h"
 #include "msrMeasureElements.h"
 
+#include "msrMeasures.h"
+
 #include "msrTypesForwardDeclarations.h"
 
 #include "msrTupletFactors.h"
@@ -133,7 +135,6 @@ class EXP msrBassFigure : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    // upLinks
     S_msrPart             fFigureUpLinkToPart;
 
     msrBassFigurePrefixKind
@@ -215,7 +216,20 @@ class EXP msrFiguredBass : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplinks
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setFiguredBassUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getFiguredBassUpLinkToMeasure (); }
+
+    void                  setFiguredBassUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getFiguredBassUpLinkToMeasure () const
+                            { return fFiguredBassUpLinkToMeasure; }
+
     void                  setFiguredBassUpLinkToNote (
                             S_msrNote note) // no const alias, call argument may be 'this'
                               { fFiguredBassUpLinkToNote = note; }
@@ -293,8 +307,10 @@ class EXP msrFiguredBass : public msrMeasureElement
     // ------------------------------------------------------
 
     // upLinks
+    S_msrMeasure          fFiguredBassUpLinkToMeasure;
+
     S_msrNote             fFiguredBassUpLinkToNote;
-    S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI
+    S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI v0.9.66
 
     Rational              fFiguredBassDisplayWholeNotes;
 
