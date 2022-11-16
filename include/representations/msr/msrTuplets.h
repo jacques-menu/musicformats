@@ -12,11 +12,11 @@
 #ifndef ___msrTuplets___
 #define ___msrTuplets___
 
-// #include "msrTupletElements.h"
+#include "msrTupletElements.h"
 
 #include "msrTypesForwardDeclarations.h"
 
-#include "msrMeasures.h"
+// #include "msrMeasures.h"
 
 #include "msrTupletsEnumTypes.h"
 

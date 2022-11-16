@@ -184,7 +184,7 @@ class EXP oahFindableElement : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual std::string        asString () const = 0;
+    virtual std::string   asString () const = 0;
 
     virtual void          print (std::ostream& os) const = 0;
 
@@ -336,15 +336,15 @@ class EXP oahElement : public oahFindableElement
     // print
     // ------------------------------------------------------
 
-    virtual std::string        asActualLongNamedOptionString () const
+    virtual std::string   asActualLongNamedOptionString () const
                               { return '-' + fLongName; }
-    virtual std::string        asShortNamedOptionString () const
+    virtual std::string   asShortNamedOptionString () const
                               { return '-' + fShortName; }
 
     std::string           asLongNamedOptionString () const;
 
-    virtual std::string        asString () const override;
-    virtual std::string        asShortString () const;
+    virtual std::string   asString () const override;
+    virtual std::string   asShortString () const;
 
     virtual void          printOptionHeader (std::ostream& os) const;
 

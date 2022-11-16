@@ -14,7 +14,9 @@
 
 #include "msrElements.h"
 
-#include "msrElementsBase.h"
+#include "msrTypesForwardDeclarations.h"
+
+// #include "msrElementsBase.h"
 
 #include "mfRational.h"
 

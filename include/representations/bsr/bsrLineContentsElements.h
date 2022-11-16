@@ -78,7 +78,7 @@ class EXP bsrLineContentsElement : public bsrElement
 
     std::string           asShortString () const override;
 
-    virtual std::string        asDebugString () const = 0;
+    virtual std::string   asDebugString () const = 0;
 
     void                  print (std::ostream& os) const override;
 
