@@ -121,7 +121,7 @@ class EXP bsrLine : public bsrPageElement
 
     std::string           asString () const override;
 
-    virtual std::string        asDebugString () const;
+    virtual std::string   asDebugString () const;
 
     void                  print (std::ostream& os) const override;
 

@@ -84,7 +84,7 @@ class msrNoteEvent : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual std::string        asString () const;
+    virtual std::string   asString () const;
 
     virtual void          print (std::ostream& os) const;
 
@@ -155,7 +155,7 @@ class msrSimultaneousNotesChunk : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual std::string        asString () const;
+    virtual std::string   asString () const;
 
     virtual void          print (std::ostream& os) const;
 
@@ -260,9 +260,9 @@ class EXP msrMeasuresSlice : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual std::string        asShortString () const;
-    virtual std::string        asString () const;
-    virtual std::string        asShortStringForMeasuresSlices () const;
+    virtual std::string   asShortString () const;
+    virtual std::string   asString () const;
+    virtual std::string   asShortStringForMeasuresSlices () const;
 
     virtual void          print (std::ostream& os) const;
 
@@ -366,9 +366,9 @@ class EXP msrMeasuresSlicesSequence : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual std::string        asShortString () const;
+    virtual std::string   asShortString () const;
     std::string           asString () const;
-    virtual std::string        asShortStringForMeasuresSlices () const;
+    virtual std::string   asShortStringForMeasuresSlices () const;
 
     void                  print (std::ostream& os) const;
 

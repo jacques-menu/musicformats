@@ -690,17 +690,14 @@ class EXP msrPrintLayout : public msrMeasureElement
 
     // uplink to measure
     void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setPrintLayoutUpLinkToMeasure (measure); }
+                            const S_msrMeasure& measure) override;
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getPrintLayoutUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
 
     void                  setPrintLayoutUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
-    S_msrMeasure          getPrintLayoutUpLinkToMeasure () const
-                            { return fPrintLayoutUpLinkToMeasure; }
+    S_msrMeasure          getPrintLayoutUpLinkToMeasure () const;
 
     void                  setPageLayout (S_msrPageLayout pageLayout)
                               { fPageLayout = pageLayout; }

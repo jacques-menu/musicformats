@@ -18,7 +18,7 @@
 
 #include "msrTypesForwardDeclarations.h"
 
-#include "msrMeasures.h"
+// #include "msrMeasures.h"
 
 
 namespace MusicFormats
@@ -46,6 +46,8 @@ class EXP msrTupletElement : public msrMeasureElement
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
+//                           msrTupletElement ();
+
     virtual               ~msrTupletElement ();
 
   public:
@@ -53,37 +55,37 @@ class EXP msrTupletElement : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override;
+//     // uplink to measure
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override;
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
+//
+//     void                  setTupletElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getTupletElementUpLinkToMeasure () const;
+//
+//     void                  setPositionInTuplet (
+//                             int positionInTuplet)
+//                               { fPositionInTuplet = positionInTuplet; }
+//
+//     const size_t          getPositionInTuplet () const
+//                               { return fPositionInTuplet; }
+//
+//   protected:
+//
+//     // protected fields
+//     // ------------------------------------------------------
+//
+//     /*
+//       The uplinks to the tuplet and measure element are declared in the sub-classes,
+//       to allow for separate *.h files, C++ constraint
+//     */
+//
+//     S_msrMeasure          fTupletElementUpLinkToMeasure;
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
-
-    void                  setTupletElementUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getTupletElementUpLinkToMeasure () const;
-
-    void                  setPositionInTuplet (
-                            int positionInTuplet)
-                              { fPositionInTuplet = positionInTuplet; }
-
-    const size_t          getPositionInTuplet () const
-                              { return fPositionInTuplet; }
-
-  protected:
-
-    // protected fields
-    // ------------------------------------------------------
-
-    /*
-      The uplinks to the tuplet and measure element are declared in the sub-classes,
-      to allow for separate *.h files, C++ constraint
-    */
-
-    S_msrMeasure          fTupletElementUpLinkToMeasure;
-
-    int                   fPositionInTuplet;
+//     int                   fPositionInTuplet;
 };
 typedef SMARTP<msrTupletElement> S_msrTupletElement;
 EXP std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt);
