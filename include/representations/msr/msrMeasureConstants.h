@@ -28,7 +28,7 @@ extern const std::string K_NO_MEASURE_NUMBER;
 extern const Rational    K_NO_WHOLE_NOTES;
 
 //______________________________________________________________________________
-extern S_msrMeasure gNullMeasureSmartPointer;
+extern S_msrMeasure gGlobalNullMeasureSmartPointer;
 
 
 }

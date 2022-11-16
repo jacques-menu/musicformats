@@ -78,6 +78,20 @@ class EXP msrRehearsalMark : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setRehearsalMarkUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getRehearsalMarkUpLinkToMeasure (); }
+
+    void                  setRehearsalMarkUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getRehearsalMarkUpLinkToMeasure () const
+                            { return fRehearsalMarkUpLinkToMeasure; }
+
     msrRehearsalMarkKind  getRehearsalMarkKind () const
                               { return fRehearsalMarkKind; }
 
@@ -115,6 +129,8 @@ class EXP msrRehearsalMark : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fRehearsalMarkUpLinkToMeasure;
 
     msrRehearsalMarkKind  fRehearsalMarkKind;
 

@@ -12,6 +12,7 @@
 #ifndef ___msrVoices___
 #define ___msrVoices___
 
+#include <map>
 #include <stack>
 
 #include "msrElements.h"
@@ -1304,7 +1305,7 @@ class EXP msrVoice : public msrElement
     // private work fields
     // ------------------------------------------------------
 
-    // voice initial elements std::list
+    // voice initial elements list
 
     std::list<S_msrVoiceElement>
                           fVoiceInitialElementsList;

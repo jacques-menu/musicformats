@@ -12,9 +12,11 @@
 #ifndef ___msrTuplets___
 #define ___msrTuplets___
 
-#include "msrTupletElements.h"
+// #include "msrTupletElements.h"
 
 #include "msrTypesForwardDeclarations.h"
+
+#include "msrMeasures.h"
 
 #include "msrTupletsEnumTypes.h"
 
@@ -86,7 +88,19 @@ class EXP msrTuplet : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-//     S_msrMeasure          fetchMeasureElementUpLinkToMeasure () const override;
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setTupletUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getTupletUpLinkToMeasure (); }
+
+    void                  setTupletUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getTupletUpLinkToMeasure () const
+                            { return fTupletUpLinkToMeasure; }
 
     // tuplet kind
     void                  setTupletKind (
@@ -212,7 +226,7 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to measure
-    S_msrMeasure          fTupletUpLinkToMeasure; // JMI v0.9.66 SUPERFLOUS ???
+    S_msrMeasure          fTupletUpLinkToMeasure;
 
     msrTupletInKind       fTupletKind;
 

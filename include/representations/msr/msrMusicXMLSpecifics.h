@@ -608,6 +608,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrPrintLayout : public msrMeasureElement
+  // include it for MusicXML generation from MSR
 {
 /*
 <!--
@@ -686,6 +687,20 @@ class EXP msrPrintLayout : public msrMeasureElement
 
     // set and get
     // ------------------------------------------------------
+
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setPrintLayoutUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getPrintLayoutUpLinkToMeasure (); }
+
+    void                  setPrintLayoutUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getPrintLayoutUpLinkToMeasure () const
+                            { return fPrintLayoutUpLinkToMeasure; }
 
     void                  setPageLayout (S_msrPageLayout pageLayout)
                               { fPageLayout = pageLayout; }
@@ -776,6 +791,8 @@ class EXP msrPrintLayout : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
+    S_msrMeasure          fPrintLayoutUpLinkToMeasure;
+
     S_msrPageLayout       fPageLayout;
 
     S_msrSystemLayout     fSystemLayout;
@@ -783,7 +800,7 @@ class EXP msrPrintLayout : public msrMeasureElement
     std::list<S_msrStaffLayout>
                           fStaffLayoutsList;
 
-    S_msrSystemDividers   fSystemDividers; // JMI ???
+    S_msrSystemDividers   fSystemDividers; // JMI ??? v0.9.66
 
     float                 fStaffSpacing;
 

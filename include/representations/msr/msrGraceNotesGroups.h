@@ -33,6 +33,7 @@ std::string msrGraceNotesGroupKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrGraceNotesGroupKind& elt);
 
+//______________________________________________________________________________
 class EXP msrGraceNotesGroup : public msrElement
 {
   public:
@@ -114,9 +115,7 @@ class EXP msrGraceNotesGroup : public msrElement
 
     void                  setGraceNotesGroupMeasureNumber (
                             const std::string& measureNumber)
-                              {
-                                fGraceNotesGroupMeasureNumber = measureNumber;
-                              }
+                              { fGraceNotesGroupMeasureNumber = measureNumber; }
 
     std::string           getGraceNotesGroupMeasureNumber () const
                               { return fGraceNotesGroupMeasureNumber; }

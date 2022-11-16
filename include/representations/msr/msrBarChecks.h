@@ -16,6 +16,8 @@
 
 #include "msrMeasureElements.h"
 
+#include "msrTypesForwardDeclarations.h"
+
 
 namespace MusicFormats
 {
@@ -67,6 +69,14 @@ class EXP msrBarCheck : public msrMeasureElement
 
     // set and get
     // ------------------------------------------------------
+
+
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setBarCheckUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getBarCheckUpLinkToMeasure (); }
 
     void                  setBarCheckUpLinkToMeasure (
                             const S_msrMeasure& measure);

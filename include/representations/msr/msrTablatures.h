@@ -34,6 +34,7 @@ std::string msrBarreTypeKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrBarreTypeKind& elt);
 
+//______________________________________________________________________________
 class EXP msrFrameNote : public msrElement
 {
   public:
