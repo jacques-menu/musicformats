@@ -14,8 +14,9 @@
 
 #include <list>
 
-#include "msrElements.h"
 #include "msrMeasureElements.h"
+
+#include "msrMeasures.h"
 
 #include "msrOctaves.h"
 
@@ -24,7 +25,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrStringTuning : public msrElement
+class EXP msrStringTuning : public msrMeasureElement
 {
   public:
 
@@ -56,6 +57,20 @@ class EXP msrStringTuning : public msrElement
 
     // set and get
     // ------------------------------------------------------
+
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setStringTuningUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getStringTuningUpLinkToMeasure (); }
+
+    void                  setStringTuningUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getStringTuningUpLinkToMeasure () const
+                            { return fStringTuningUpLinkToMeasure; }
 
     int                   getStringTuningNumber () const
                               { return fStringTuningNumber; }
@@ -98,6 +113,8 @@ class EXP msrStringTuning : public msrElement
     // private fields
     // ------------------------------------------------------
 
+    S_msrMeasure          fStringTuningUpLinkToMeasure;
+
     int                   fStringTuningNumber;
 
     msrDiatonicPitchKind  fStringTuningDiatonicPitchKind;
@@ -121,6 +138,7 @@ std::string msrScordaturaKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrScordaturaKind& elt);
 
+//______________________________________________________________________________
 class EXP msrScordatura : public msrMeasureElement
 {
   public:
@@ -149,6 +167,20 @@ class EXP msrScordatura : public msrMeasureElement
 
     // set and get
     // ------------------------------------------------------
+
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setScordaturaUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getScordaturaUpLinkToMeasure (); }
+
+    void                  setScordaturaUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getScordaturaUpLinkToMeasure () const
+                            { return fScordaturaUpLinkToMeasure; }
 
     const std::list<S_msrStringTuning>&
                           getScordaturaStringTuningsList () const
@@ -183,6 +215,8 @@ class EXP msrScordatura : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fScordaturaUpLinkToMeasure;
 
     std::list<S_msrStringTuning>
                           fScordaturaStringTuningsList;
@@ -230,6 +264,20 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setAccordionRegistrationUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getAccordionRegistrationUpLinkToMeasure (); }
+
+    void                  setAccordionRegistrationUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getAccordionRegistrationUpLinkToMeasure () const
+                            { return fAccordionRegistrationUpLinkToMeasure; }
+
     int                   getHighDotsNumber () const
                               { return fHighDotsNumber; }
 
@@ -268,6 +316,8 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
+    S_msrMeasure          fAccordionRegistrationUpLinkToMeasure;
+
     // see https://de.wikipedia.org/wiki/Register_%28Akkordeon%29
     // for the meaning of the dots numbers
 
@@ -291,7 +341,7 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrHarpPedalsTuning> create (
-                            int           inputLineNumber);
+                            int                 inputLineNumber);
 
     SMARTP<msrHarpPedalsTuning> createHarpPedalsTuningNewbornClone ();
 
@@ -307,7 +357,7 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
                             const S_msrMeasure& upLinkToMeasure);
 
                           msrHarpPedalsTuning (
-                            int           inputLineNumber);
+                            int                 inputLineNumber);
 
     ~ msrHarpPedalsTuning ();
 
@@ -315,6 +365,20 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
 
     // set and get
     // ------------------------------------------------------
+
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setHarpPedalsTuningUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getHarpPedalsTuningUpLinkToMeasure (); }
+
+    void                  setHarpPedalsTuningUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getHarpPedalsTuningUpLinkToMeasure () const
+                            { return fHarpPedalsTuningUpLinkToMeasure; }
 
     const std::map<msrDiatonicPitchKind, msrAlterationKind>&
                           getHarpPedalsAlterationKindsMap () const
@@ -349,10 +413,12 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
 
     void                  print (std::ostream& os) const override;
 
-  public:
+  private:
 
-    // fields
+    // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fHarpPedalsTuningUpLinkToMeasure;
 
     std::map<msrDiatonicPitchKind, msrAlterationKind>
                           fHarpPedalsAlterationKindsMap;
@@ -430,6 +496,20 @@ class EXP msrPedal : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setPedalUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getPedalUpLinkToMeasure (); }
+
+    void                  setPedalUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getPedalUpLinkToMeasure () const
+                            { return fPedalUpLinkToMeasure; }
+
     msrPedalTypeKind      getPedalTypeKind () const
                               { return fPedalTypeKind; }
 
@@ -465,6 +545,8 @@ class EXP msrPedal : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fPedalUpLinkToMeasure;
 
     msrPedalTypeKind      fPedalTypeKind;
     msrPedalLineKind      fPedalLineKind;
@@ -504,6 +586,20 @@ class EXP msrDamp : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setDampUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getDampUpLinkToMeasure (); }
+
+    void                  setDampUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getDampUpLinkToMeasure () const
+                            { return fDampUpLinkToMeasure; }
+
   public:
 
     // public services
@@ -530,6 +626,9 @@ class EXP msrDamp : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fDampUpLinkToMeasure;
+
 };
 typedef SMARTP<msrDamp> S_msrDamp;
 EXP std::ostream& operator << (std::ostream& os, const S_msrDamp& elt);
@@ -565,6 +664,20 @@ class EXP msrDampAll : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setDampAllUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getDampAllUpLinkToMeasure (); }
+
+    void                  setDampAllUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getDampAllUpLinkToMeasure () const
+                            { return fDampAllUpLinkToMeasure; }
+
   public:
 
     // public services
@@ -591,6 +704,9 @@ class EXP msrDampAll : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fDampAllUpLinkToMeasure;
+
 };
 typedef SMARTP<msrDampAll> S_msrDampAll;
 EXP std::ostream& operator << (std::ostream& os, const S_msrDampAll& elt);

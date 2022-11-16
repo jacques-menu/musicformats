@@ -63,6 +63,20 @@ class EXP msrSegno : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setSegnoUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getSegnoUpLinkToMeasure (); }
+
+    void                  setSegnoUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getSegnoUpLinkToMeasure () const
+                            { return fSegnoUpLinkToMeasure; }
+
     int                   getStaffNumber () const
                               { return fStaffNumber; }
 
@@ -94,6 +108,8 @@ class EXP msrSegno : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fSegnoUpLinkToMeasure;
 
     int                   fStaffNumber;
 };
@@ -140,6 +156,20 @@ class EXP msrDalSegno : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setDalSegnoUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getDalSegnoUpLinkToMeasure (); }
+
+    void                  setDalSegnoUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getDalSegnoUpLinkToMeasure () const
+                            { return fDalSegnoUpLinkToMeasure; }
+
     msrDalSegnoKind       getDalSegnoKind () const
                               { return fDalSegnoKind; }
 
@@ -178,12 +208,13 @@ class EXP msrDalSegno : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
+    S_msrMeasure          fDalSegnoUpLinkToMeasure;
 
-      msrDalSegnoKind     fDalSegnoKind;
+    msrDalSegnoKind       fDalSegnoKind;
 
-      std::string         fDalSegnoString;
+    std::string           fDalSegnoString;
 
-      int                 fStaffNumber;
+    int                   fStaffNumber;
 };
 typedef SMARTP<msrDalSegno> S_msrDalSegno;
 EXP std::ostream& operator << (std::ostream& os, const S_msrDalSegno& elt);

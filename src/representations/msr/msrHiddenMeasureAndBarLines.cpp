@@ -20,6 +20,10 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
+#include "msrMeasureConstants.h"
+
 #include "oahOah.h"
 
 #include "msrOah.h"
@@ -58,7 +62,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
   return
     msrHiddenMeasureAndBarLine::create (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 msrHiddenMeasureAndBarLine::msrHiddenMeasureAndBarLine (
@@ -70,6 +74,34 @@ msrHiddenMeasureAndBarLine::msrHiddenMeasureAndBarLine (
 
 msrHiddenMeasureAndBarLine::~msrHiddenMeasureAndBarLine ()
 {}
+
+void msrHiddenMeasureAndBarLine::setHiddenMeasureAndBarLineUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of hidden measure and bar line " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fHiddenMeasureAndBarLineUpLinkToMeasure = measure;
+}
 
 void msrHiddenMeasureAndBarLine::acceptIn (basevisitor* v)
 {

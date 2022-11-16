@@ -127,8 +127,7 @@ void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
   // set elem's measure number
   elem->
     setMeasureNumber (
-      fBarLineUpLinkToMeasure->
-getMeasureNumber ());
+      fBarLineUpLinkToMeasure->getMeasureNumber ());
 
   // set elem's position in measure
   elem->
@@ -177,10 +176,9 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
   // set harmony's measure number
   harmony->
     setMeasureNumber (
-      fBarLineUpLinkToMeasure->
-getMeasureNumber ());
+      fBarLineUpLinkToMeasure->getMeasureNumber ());
 
-  // append the harmony to the measure elements std::list
+  // append the harmony to the measure elements list
   // DON'T call 'appendElementToMeasure (harmony)':
   // that would override harmony's position in measure,
   // which already has the correct value, thus:
@@ -230,7 +228,7 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
 
   ++gIndenter;
 
-  // append the harmony to the measure elements std::list
+  // append the harmony to the measure elements list
   appendElementToMeasure (harmony);
 
   // fetch harmony sounding whole notes

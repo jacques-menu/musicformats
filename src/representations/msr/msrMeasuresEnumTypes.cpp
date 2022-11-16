@@ -171,7 +171,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt)
 //         fCurrentMeasureWholeNotesDuration,
 //         "handleSubsequentHarmonyInHarmoniesMeasure() 2");
 //
-//     // insert skipNote before currentHarmony in the measure's elements std::list
+//     // insert skipNote before currentHarmony in the measure's elements list
 // #ifdef TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
@@ -186,7 +186,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt)
 //     }
 // #endif
 //
-//     // insert skipNote in the measure elements std::list before (*i)
+//     // insert skipNote in the measure elements list before (*i)
 //     insertElementInMeasureBeforeIterator (
 //       inputLineNumber,
 //       i,

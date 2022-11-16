@@ -128,7 +128,7 @@ class EXP msrRepeatCommonPart : public msrElement
     // upLinks
     S_msrRepeat           fRepeatCommonPartUpLinkToRepeat;
 
-    // elements std::list
+    // elements list
     std::list<S_msrVoiceElement>
                           fRepeatCommonPartElementsList;
 };
@@ -266,7 +266,7 @@ class EXP msrRepeatEnding : public msrElement
     // kind
     msrRepeatEndingKind   fRepeatEndingKind;
 
-    // elements std::list
+    // elements list
     std::list<S_msrVoiceElement>
                           fRepeatEndingElementsList;
 };

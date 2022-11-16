@@ -207,6 +207,20 @@ class EXP msrKey : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setKeyUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getKeyUpLinkToMeasure (); }
+
+    void                  setKeyUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getKeyUpLinkToMeasure () const
+                            { return fKeyUpLinkToMeasure; }
+
     msrKeyKind            getKeyKind () const
                               { return fKeyKind; }
 
@@ -269,6 +283,8 @@ class EXP msrKey : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fKeyUpLinkToMeasure;
 
     msrKeyKind            fKeyKind;
 

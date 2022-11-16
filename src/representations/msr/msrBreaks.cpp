@@ -19,6 +19,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
 #include "msrBreaks.h"
 
 #include "msrMeasureConstants.h"
@@ -76,7 +78,7 @@ S_msrLineBreak msrLineBreak::create (
   return
     msrLineBreak::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       nextBarNumber,
       userChosenLineBreakKind);
 }
@@ -109,6 +111,34 @@ msrLineBreak::msrLineBreak (
 
 msrLineBreak::~msrLineBreak ()
 {}
+
+void msrLineBreak::setLineBreakUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of line break " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fLineBreakUpLinkToMeasure = measure;
+}
 
 void msrLineBreak::acceptIn (basevisitor* v)
 {
@@ -231,7 +261,7 @@ S_msrPageBreak msrPageBreak::create (
   return
     msrPageBreak::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       userChosenPageBreakKind);
 }
 
@@ -260,6 +290,34 @@ msrPageBreak::msrPageBreak (
 
 msrPageBreak::~msrPageBreak ()
 {}
+
+void msrPageBreak::setPageBreakUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of page break " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fPageBreakUpLinkToMeasure = measure;
+}
 
 void msrPageBreak::acceptIn (basevisitor* v)
 {

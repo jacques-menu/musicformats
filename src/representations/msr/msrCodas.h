@@ -14,6 +14,8 @@
 
 #include "msrMeasureElements.h"
 
+#include "msrTypesForwardDeclarations.h"
+
 
 namespace MusicFormats
 {
@@ -66,6 +68,20 @@ class EXP msrCoda : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setCodaUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getCodaUpLinkToMeasure (); }
+
+    void                  setCodaUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getCodaUpLinkToMeasure () const
+                            { return fCodaUpLinkToMeasure; }
+
     int                   getStaffNumber () const
                               { return fStaffNumber; }
 
@@ -100,6 +116,8 @@ class EXP msrCoda : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fCodaUpLinkToMeasure;
 
     int                   fStaffNumber;
 

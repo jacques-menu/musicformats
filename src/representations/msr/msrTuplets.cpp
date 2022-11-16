@@ -24,6 +24,8 @@
 
 #include "mfStringsHandling.h"
 
+#include "msrMeasureConstants.h"
+
 // #include "msrTuplets.h"
 
 #include "oahOah.h"
@@ -82,7 +84,7 @@ S_msrTuplet msrTuplet::create (
   return
     msrTuplet::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       tupletMeasureNumber,
       tupletNumber,
       tupletBracketKind,
@@ -165,9 +167,8 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
     newbornClone =
       msrTuplet::create (
         fInputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
-        fBarLineUpLinkToMeasure->
-getMeasureNumber (),
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        fBarLineUpLinkToMeasure->getMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
         fTupletLineShapeKind,
@@ -184,10 +185,8 @@ getMeasureNumber (),
   newbornClone->fTupletDisplayWholeNotes =
     fTupletDisplayWholeNotes;
 
-  newbornClone->fBarLineUpLinkToMeasure->
-getMeasureNumber () =
-    fBarLineUpLinkToMeasure->
-getMeasureNumber ();
+  newbornClone->fBarLineUpLinkToMeasure->getMeasureNumber () =
+    fBarLineUpLinkToMeasure->getMeasureNumber ();
 
   newbornClone->fMeasureElementMeasurePosition =
     fMeasureElementMeasurePosition;
@@ -220,24 +219,53 @@ getMeasureNumber ();
 //   return result;
 // }
 
-S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
+// S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
+// {
+//   S_msrTuplet result;
+//
+//   switch (fTupletKind) {
+//     case msrTupletInKind::kTupletIn_NO_:
+//       break;
+//
+//     case msrTupletInKind::kTupletInMeasure:
+//       break;
+//
+//     case msrTupletInKind::kTupletInTuplet:
+//       result = fTupletDirectUpLinkToTuplet;
+//       break;
+//   } // switch
+//
+//   return result;
+// }
+
+void msrTuplet::setTupletUpLinkToMeasure (
+  const S_msrMeasure& measure)
 {
-  S_msrTuplet result;
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
 
-  switch (fTupletKind) {
-    case msrTupletInKind::kTupletIn_NO_:
-      break;
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
 
-    case msrTupletInKind::kTupletInMeasure:
-      break;
+    gLogStream <<
+      "==> Setting the uplink to measure of tuplet " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
 
-    case msrTupletInKind::kTupletInTuplet:
-      result = fTupletDirectUpLinkToTuplet;
-      break;
-  } // switch
+    --gIndenter;
+  }
+#endif
 
-  return result;
+  fTupletUpLinkToMeasure = measure;
 }
+
 
 //______________________________________________________________________________
 void msrTuplet::appendNoteToTuplet (
@@ -261,7 +289,7 @@ void msrTuplet::appendNoteToTuplet (
 
   ++gIndenter;
 
-  // append note to elements std::list
+  // append note to elements list
   fTupletElementsList.push_back (note);
 
   // set note's position in tuplet
@@ -322,7 +350,7 @@ void msrTuplet::appendChordToTuplet (S_msrChord chord)
   // set the chord kind
   chord->setChordKind (msrChordInKind::kChordInTuplet);
 
-  // append chord to elements std::list
+  // append chord to elements list
   fTupletElementsList.push_back (chord);
 
   // set chord's position in tuplet
@@ -346,8 +374,7 @@ void msrTuplet::appendChordToTuplet (S_msrChord chord)
 /* too early JMI
   // populate chord's measure number
   chord->setChordMeasureNumber (
-    fBarLineUpLinkToMeasure->
-getMeasureNumber ());
+    fBarLineUpLinkToMeasure->getMeasureNumber ());
 */
 }
 
@@ -376,7 +403,7 @@ void msrTuplet::appendTupletToTuplet (S_msrTuplet tuplet)
   // set the tuplet kind
   tuplet->setTupletKind (msrTupletInKind::kTupletInTuplet);
 
-  // append tuplet to elements std::list
+  // append tuplet to elements list
   fTupletElementsList.push_back (tuplet);
 
   // set tuplet's position in tuplet
@@ -407,7 +434,7 @@ void msrTuplet::appendTupletToTupletClone (S_msrTuplet tuplet)
   // dont' unapply containing tuplet factor,
   // this has been done when building the MSR from MusicXML
 
-  // append tuplet to elements std::list
+  // append tuplet to elements list
   fTupletElementsList.push_back (tuplet);
 
   // set tuplet's position in tuplet
@@ -584,7 +611,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
     if (
       S_msrNote note = dynamic_cast<msrNote*>(&(*lastTupletElement))
     ) {
-      // remove note from tuplet elements std::list
+      // remove note from tuplet elements list
       fTupletElementsList.pop_back ();
 
 /*
@@ -900,8 +927,7 @@ std::string msrTuplet::asString () const
     ' ' << fMeasureElementSoundingWholeNotes << " tupletSoundingWholeNotes" <<
     ", measure ' " <<
     ", line " << fInputLineNumber <<
-    fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+    fBarLineUpLinkToMeasure->getMeasureNumber () <<
     "':";
 
   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
@@ -975,8 +1001,7 @@ void msrTuplet::print (std::ostream& os) const
     fMeasureElementSoundingWholeNotes << " sounding, " <<
     fTupletDisplayWholeNotes << " displayed" <<
     ", meas " <<
-    fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+    fBarLineUpLinkToMeasure->getMeasureNumber () <<
     ", line " << fInputLineNumber <<
     std::endl;
 
@@ -1026,8 +1051,7 @@ getMeasureNumber () <<
 
     std::setw (fieldWidth) <<
     "fTupletMeasureNumber" << " : " <<
-    fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+    fBarLineUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasurePosition" << " : " <<
@@ -1119,8 +1143,7 @@ void msrTuplet::printShort (std::ostream& os)
     fMeasureElementSoundingWholeNotes << " sounding, " <<
     fTupletDisplayWholeNotes << " displayed" <<
     ", meas " <<
-    fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+    fBarLineUpLinkToMeasure->getMeasureNumber () <<
     ", line " << fInputLineNumber <<
     std::endl;
 
@@ -1173,8 +1196,7 @@ getMeasureNumber () <<
 
     std::setw (fieldWidth) <<
     "fTupletMeasureNumber" << " : " <<
-    fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+    fBarLineUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " <<

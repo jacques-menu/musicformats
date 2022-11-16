@@ -17,6 +17,7 @@
 #include "msrTypesForwardDeclarations.h"
 
 #include "msrPartGroups.h"
+#include "msrRepeatsEnumTypes.h"
 #include "msrStavesEnumTypes.h"
 #include "msrStaves.h"
 #include "msrTupletFactors.h"

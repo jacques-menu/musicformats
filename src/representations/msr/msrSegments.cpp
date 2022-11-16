@@ -1700,7 +1700,7 @@ void msrSegment::padUpToMeasurePositionInSegment (
   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF
     // pad last measure up to to this actual wholes notes
     fSegmentLastMeasure->
-      padUpToMeasurePositionInMeasure (
+      padUpToMeasureMeasurePosition (
         inputLineNumber,
         wholeNotes);
   }
@@ -2447,7 +2447,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   // we've got the result
   result = fSegmentLastMeasure;
 
-  // remove it from segment elements std::list too ??? JMI v0.9.63 KAKA
+  // remove it from segment elements list too ??? JMI v0.9.63 KAKA
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
@@ -2463,7 +2463,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       fSegmentElementsList.back ();
 
   if (segmentElementsListLastElement == fSegmentLastMeasure) {
-    // remove it from the elements std::list
+    // remove it from the elements list
     fSegmentElementsList.pop_back ();
   }
   else {

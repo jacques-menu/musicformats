@@ -17,6 +17,8 @@
 
 #include "msrMeasureElements.h"
 
+#include "msrMeasures.h"
+
 
 namespace MusicFormats
 {
@@ -115,6 +117,20 @@ class EXP msrClef : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setClefUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getClefUpLinkToMeasure (); }
+
+    void                  setClefUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getClefUpLinkToMeasure () const
+                            { return fClefUpLinkToMeasure; }
+
     msrClefKind           getClefKind () const
                               { return fClefKind; }
 
@@ -161,6 +177,8 @@ class EXP msrClef : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fClefUpLinkToMeasure;
 
     msrClefKind           fClefKind;
     int                   fClefStaffNumber; // 0 by default in MSR,

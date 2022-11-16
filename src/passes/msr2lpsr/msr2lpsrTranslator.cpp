@@ -531,7 +531,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
           lpsrScoreBlock::create (
             K_MF_NO_INPUT_LINE_NUMBER);
 
-        // append it to the book block elements std::list
+        // append it to the book block elements list
         fCurrentLpsrBookBlock->
           appendLpsrScoreBlockToBookBlockElementsList (
             fCurrentScoreBlock);
@@ -1807,7 +1807,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
           lpsrBookPartBlock::create (
             inputLineNumber);
 
-        // append it to the book block elements std::list
+        // append it to the book block elements list
         fCurrentLpsrBookBlock->
           appendLpsrBookPartBlockToBookBlockElementsList (
             fCurrentBookPartBlock);
@@ -2036,7 +2036,7 @@ void msr2lpsrTranslator::visitStart (S_msrStaff& elt)
                 lpsrScoreBlock::create (
                   K_MF_NO_INPUT_LINE_NUMBER);
 
-              // append it to the book block elements std::list
+              // append it to the book block elements list
               fCurrentLpsrBookBlock->
                 appendLpsrScoreBlockToBookBlockElementsList (
                   fCurrentScoreBlock);
@@ -2166,7 +2166,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
   switch (fCurrentVoiceOriginal->getVoiceKind ()) {
 
     case msrVoiceKind::kVoiceKindRegular:
-      // append the voice clone to the LPSR score elements std::list
+      // append the voice clone to the LPSR score elements list
       fResultingLpsr ->
         appendVoiceToLpsrScoreElementsList (
           fCurrentVoiceClone);
@@ -2190,7 +2190,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
         if (
           true || fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI CAFE
         ) {
-          // append the voice clone to the LPSR score elements std::list
+          // append the voice clone to the LPSR score elements list
           fResultingLpsr ->
             appendVoiceToLpsrScoreElementsList (
               fCurrentVoiceClone);
@@ -2252,7 +2252,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
         if (
           fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI
           ) {
-          // append the voice clone to the LPSR score elements std::list
+          // append the voice clone to the LPSR score elements list
           fResultingLpsr ->
             appendVoiceToLpsrScoreElementsList (
               fCurrentVoiceClone);
@@ -3079,7 +3079,7 @@ void msr2lpsrTranslator::visitStart (S_msrStanza& elt)
       elt->createStanzaNewbornClone (
         fCurrentVoiceClone);
 
-    // append the stanza clone to the LPSR score elements std::list
+    // append the stanza clone to the LPSR score elements list
     fResultingLpsr ->
       appendStanzaToLpsrScoreElementsList (
         fCurrentStanzaClone);

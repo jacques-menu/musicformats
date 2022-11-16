@@ -32,6 +32,8 @@
 
 #include "oahEarlyOptions.h"
 
+#include "msrMeasureConstants.h"
+
 #include "msrTimeSignatures.h"
 
 #include "oahOah.h"
@@ -458,7 +460,7 @@ S_msrTimeSignature msrTimeSignature::create (
   return
     msrTimeSignature::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       timeSignatureSymbolKind);
 }
 
@@ -468,9 +470,10 @@ msrTimeSignature::msrTimeSignature (
   msrTimeSignatureSymbolKind
                 timeSignatureSymbolKind)
     : msrMeasureElement (
-      inputLineNumber,
-      upLinkToMeasure)
+      inputLineNumber)
 {
+  fTimeSignatureUpLinkToMeasure = upLinkToMeasure;
+
   fTimeSignatureSymbolKind = timeSignatureSymbolKind;
 
   fTimeIsCompound = false;
@@ -516,7 +519,7 @@ S_msrTimeSignature msrTimeSignature::createTwoEightsTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -546,7 +549,7 @@ S_msrTimeSignature msrTimeSignature::createThreeEightsTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -576,7 +579,7 @@ S_msrTimeSignature msrTimeSignature::createSixEightsTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -606,7 +609,7 @@ S_msrTimeSignature msrTimeSignature::createTwoQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -636,7 +639,7 @@ S_msrTimeSignature msrTimeSignature::createThreeQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -666,7 +669,7 @@ S_msrTimeSignature msrTimeSignature::createFourQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -696,7 +699,7 @@ S_msrTimeSignature msrTimeSignature::createFiveQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -726,7 +729,7 @@ S_msrTimeSignature msrTimeSignature::createTwoHalvesTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -756,7 +759,7 @@ S_msrTimeSignature msrTimeSignature::createThreeHalvesTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -786,7 +789,7 @@ S_msrTimeSignature msrTimeSignature::createFourHalvesTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -938,7 +941,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   result =
     msrTimeSignature::create (
       inputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -961,6 +964,34 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 msrTimeSignature::~msrTimeSignature ()
 {}
+
+void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of time signature " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fTimeSignatureUpLinkToMeasure = measure;
+}
 
 void msrTimeSignature::appendTimeSignatureItem (
   S_msrTimeSignatureItem timeSignatureItem)

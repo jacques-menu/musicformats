@@ -75,7 +75,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending segment '" << segment <<
-      "' to beatRepeat element elements std::list '" << asString () <<
+      "' to beatRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -100,7 +100,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending beatRepeat '" << beatRepeat <<
-      "' to beatRepeat element elements std::list '" << asString () <<
+      "' to beatRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -125,7 +125,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending voice element '" << voiceElement <<
-      "' to beatRepeat element elements std::list '" << asString () <<
+      "' to beatRepeat element elements list '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;

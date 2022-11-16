@@ -16,7 +16,10 @@
 
 #include "visitor.h"
 
+#include "mfAssert.h"
 #include "mfServiceRunData.h"
+
+#include "msrMeasureConstants.h"
 
 #include "msrWae.h"
 
@@ -376,7 +379,7 @@ S_msrClef msrClef::create (
   return
     msrClef::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       clefKind,
       clefStaffNumber);
 }
@@ -506,6 +509,34 @@ S_msrClef msrClef::createClefFromString (
       clefLineNumber);
 
   return result;
+}
+
+void msrClef::setClefUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of clef " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fClefUpLinkToMeasure = measure;
 }
 
 Bool msrClef::clefIsATablatureClef () const

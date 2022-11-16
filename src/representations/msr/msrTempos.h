@@ -17,6 +17,8 @@
 #include "msrElements.h"
 #include "msrMeasureElements.h"
 
+#include "msrMeasures.h"
+
 #include "msrTemposEnumTypes.h"
 
 #include "msrBeams.h"
@@ -446,6 +448,20 @@ class EXP msrTempo : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setTempoUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getTempoUpLinkToMeasure (); }
+
+    void                  setTempoUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getTempoUpLinkToMeasure () const
+                            { return fTempoUpLinkToMeasure; }
+
     msrTempoKBeatUnitsKind
                           getTempoKind () const
                               { return fTempoKind; }
@@ -527,6 +543,8 @@ class EXP msrTempo : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fTempoUpLinkToMeasure;
 
     // commmon elements
 

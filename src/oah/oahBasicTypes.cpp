@@ -2508,7 +2508,7 @@ void oahSubGroup::appendSubGroupToElementsList (
     gLogStream <<
       "Appending subgroup \"" <<
       fSubGroupHeader <<
-      "\" in the elements std::list in handler \"" <<
+      "\" in the elements list in handler \"" <<
       handler->getHandlerHeader () <<
       "\"" <<
       std::endl;
@@ -2517,7 +2517,7 @@ void oahSubGroup::appendSubGroupToElementsList (
 
   ++gIndenter;
 
-  // append subgroup to elements std::list
+  // append subgroup to elements list
   handler->
     appendElementToElementsList (this);
 
@@ -2532,7 +2532,7 @@ void oahSubGroup::appendSubGroupToElementsList (
     ++i
   ) {
     S_oahAtom atom = (*i);
-    // register atom in the handler elements std::list
+    // register atom in the handler elements list
     atom->
       appendAtomToElementsList (
         handler);
@@ -3520,7 +3520,7 @@ void oahGroup::appendGroupToElementsList (
     gLogStream <<
       "Appending group \"" <<
       fGroupHeader <<
-      "\" to elements std::list in handler \"" <<
+      "\" to elements list in handler \"" <<
       handler->getHandlerHeader () <<
       "\"" <<
       std::endl;
@@ -3535,14 +3535,14 @@ void oahGroup::appendGroupToElementsList (
     handler != nullptr,
     "handler is null");
 
-  // append this group to the elements std::list
+  // append this group to the elements list
   handler->
     appendElementToElementsList (this);
 
   // set group handler upLink
   fUpLinkToHandler = handler;
 
-  // append subgroups to elements std::list
+  // append subgroups to elements list
   for (
     std::list<S_oahSubGroup>::const_iterator
       i = fGroupSubGroupsList.begin ();
@@ -3551,7 +3551,7 @@ void oahGroup::appendGroupToElementsList (
   ) {
     S_oahSubGroup subGroup = (*i);
 
-    // append subgroup to elements std::list
+    // append subgroup to elements list
     subGroup->
       appendSubGroupToElementsList (
         handler);
@@ -3588,7 +3588,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
     registerElementNamesInHandler (
       this);
 
-  // append subgroups to elements std::list
+  // append subgroups to elements list
   for (
     std::list<S_oahSubGroup>::const_iterator
       i = fGroupSubGroupsList.begin ();
@@ -3597,7 +3597,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
   ) {
     S_oahSubGroup subGroup = (*i);
 
-    // append subgroup to elements std::list
+    // append subgroup to elements list
     subGroup->
       registerNamesInSubGroupToTheNamesToElementsMap (
         handler);
@@ -4770,7 +4770,7 @@ void oahHandler::appendElementToElementsList (
   }
 #endif
 
-  // insert element into the registered elements std::list
+  // insert element into the registered elements list
   fHandlerElementsList.push_back (element);
 
   // compute subgroup's header size
@@ -6600,7 +6600,7 @@ void oahHandler::appendGroupToHandler (
   }
 #endif
 
-  // append group to elements std::list
+  // append group to elements list
   group->
     appendGroupToElementsList (this);
 
@@ -6633,7 +6633,7 @@ void oahHandler::prependGroupToHandler (
   }
 #endif
 
-  // prepend group  to elements std::list
+  // prepend group  to elements list
   group->
     appendGroupToElementsList (this);
 

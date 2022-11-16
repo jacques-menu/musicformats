@@ -59,7 +59,7 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
     // set its "type" attribute
     creatorElement->add (createMxmlAttribute ("type", "composer"));
 
-    // append it to the composers elements std::list
+    // append it to the composers elements list
     fComposersElementsList.push_back (creatorElement);
   } // for
 

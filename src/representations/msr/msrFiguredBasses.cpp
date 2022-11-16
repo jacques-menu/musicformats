@@ -20,6 +20,8 @@
 
 #include "mfAssert.h"
 
+#include "msrMeasureConstants.h"
+
 #include "msrFiguredBasses.h"
 
 #include "oahOah.h"
@@ -350,7 +352,7 @@ S_msrFiguredBass msrFiguredBass::create (
   return
      msrFiguredBass::create (
       inputLineNumber,
-      gNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer); // set later in setMeasureElementUpLinkToMeasure()
 }
 
 S_msrFiguredBass msrFiguredBass::create (
@@ -385,7 +387,7 @@ S_msrFiguredBass msrFiguredBass::create (
   return
     msrFiguredBass::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       figuredBassSoundingWholeNotes,
       figuredBassDisplayWholeNotes,
       figuredBassParenthesesKind,
@@ -401,18 +403,19 @@ msrFiguredBass::msrFiguredBass (
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
     : msrMeasureElement (
-        inputLineNumber,
-        upLinkToMeasure),
+        inputLineNumber),
       fFiguredBassTupletFactor (
         figuredBassTupletFactor)
 {
-  /* JMI
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    figuredBassUpLinkToPart != nullptr,
-    "figuredBassUpLinkToPart is null");
+    upLinkToMeasure != nullptr,
+    "upLinkToMeasure is null");
 
+  fFiguredBassUpLinkToMeasure = upLinkToMeasure;
+
+  /* JMI
   // set figuredBass's part upLink
   fFiguredBassUpLinkToPart =
     figuredBassUpLinkToPart;
@@ -468,7 +471,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
     newbornClone =
       msrFiguredBass::create (
         fInputLineNumber,
-	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fMeasureElementSoundingWholeNotes,
         fFiguredBassDisplayWholeNotes,
         fFiguredBassParenthesesKind,
@@ -502,13 +505,41 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
     figuredBassDeepClone =
       msrFiguredBass::create (
         fInputLineNumber,
-	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fMeasureElementSoundingWholeNotes,
         fFiguredBassDisplayWholeNotes,
         fFiguredBassParenthesesKind,
         fFiguredBassTupletFactor);
 
   return figuredBassDeepClone;
+}
+
+void msrFiguredBass::setFiguredBassUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of figured bass " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fFiguredBassUpLinkToMeasure = measure;
 }
 
 void msrFiguredBass::appendFigureToFiguredBass (

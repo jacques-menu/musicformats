@@ -136,7 +136,7 @@ void bsrLine::appendLineElementToLine (S_bsrLineContentsElement lineElement)
   }
 
   if (fASpaceIsNeededInLine) {
-    // append a space to the line elements std::list // JMI appendSpacesToLine ???
+    // append a space to the line elements list // JMI appendSpacesToLine ???
     lineContentsToAppendTo->
       appendLineElementToLineContents (
         bsrSpaces::create (
@@ -312,7 +312,7 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
   }
 
   if (fASpaceIsNeededInLine) {
-    // append a space to the line elements std::list // JMI appendSpacesToLine ???
+    // append a space to the line elements list // JMI appendSpacesToLine ???
     lineContentsToAppendTo->
       appendLineElementToLineContents (
         bsrSpaces::create (

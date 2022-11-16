@@ -67,6 +67,20 @@ class EXP msrTransposition : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
+    // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setTranspositionUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getTranspositionUpLinkToMeasure (); }
+
+    void                  setTranspositionUpLinkToMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getTranspositionUpLinkToMeasure () const
+                            { return fTranspositionUpLinkToMeasure; }
+
     int                   getTranspositionDiatonic () const
                               { return fTranspositionDiatonic; }
 
@@ -110,6 +124,8 @@ class EXP msrTransposition : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fTranspositionUpLinkToMeasure;
 
     int                   fTranspositionDiatonic;
     int                   fTranspositionChromatic;

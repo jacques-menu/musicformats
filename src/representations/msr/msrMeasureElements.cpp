@@ -28,6 +28,8 @@
 #include "msrMeasureElements.h"
 #include "msrMeasures.h"
 
+#include "msrMeasureConstants.h"
+
 #include "msrMoments.h"
 
 #include "oahOah.h"
@@ -39,13 +41,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// constants
-const std::string
-  msrMeasureElement::K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
-
-const Rational
-  msrMeasureElement::K_NO_WHOLE_NOTES (-444444, 1);
-
 msrMeasureElement::msrMeasureElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
@@ -85,8 +80,7 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
       asString () <<
       " to 'WHOLE_NOTES " << wholeNotes << // JMI v0.9.66
       "' in measure '" <<
-      fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+      getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -122,8 +116,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
-      fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+      getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -167,6 +160,18 @@ getMeasureNumber () <<
 //         getMeasureElementSoundingWholeNotes ());
 }
 
+bool msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition (
+  const SMARTP<msrMeasureElement>& first,
+  const SMARTP<msrMeasureElement>& second)
+{
+  return
+    bool (
+      first->getMeasureElementMeasurePosition ()
+        <
+      second->getMeasureElementMeasurePosition ()
+    );
+}
+
 void msrMeasureElement::setMeasureElementVoicePosition (
   const Rational&    voicePosition,
   const std::string& context)
@@ -178,8 +183,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
-      fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+      getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -201,8 +205,7 @@ getMeasureNumber () <<
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
-      fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+      getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -229,8 +232,7 @@ getMeasureNumber () <<
 // //       in measure " << JMI v0.9.66
 // //       measure->asShortString () <<
 //       "), measureElementMeasureNumber: " <<
-//       fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+//       getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -252,8 +254,7 @@ getMeasureNumber () <<
 //       asString () <<
 //       " to '" << voiceMoment <<
 //       "' in measure '" <<
-//       fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+//       getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<

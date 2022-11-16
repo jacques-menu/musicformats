@@ -3223,7 +3223,7 @@ void msr2bsrTranslator::visitStart (S_msrStanza& elt)
       elt->createStanzaNewbornClone (
         fCurrentVoiceClone);
 
-    // append the stanza clone to the BSR score elements std::list
+    // append the stanza clone to the BSR score elements list
     fResultingBsr ->
       appendStanzaToScoreElements (
         fCurrentStanzaClone);

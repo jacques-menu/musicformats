@@ -16,6 +16,10 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
+#include "msrMeasureConstants.h"
+
 #include "msrVoiceStaffChanges.h"
 
 #include "oahOah.h"
@@ -48,7 +52,7 @@ S_msrVoiceStaffChange msrVoiceStaffChange::create (
   return
     msrVoiceStaffChange::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       staffToChangeTo);
 }
 
@@ -81,10 +85,38 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
     newbornClone =
       msrVoiceStaffChange::create (
         fInputLineNumber,
-        gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fStaffToChangeTo);
 
   return newbornClone;
+}
+
+void msrVoiceStaffChange::setVoiceStaffChangeUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of voice staff change " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fVoiceStaffChangeUpLinkToMeasure = measure;
 }
 
 void msrVoiceStaffChange::acceptIn (basevisitor* v)

@@ -26,6 +26,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasureConstants.h"
+
 #include "msrPitchesNames.h"
 
 #include "msrHarmonies.h"
@@ -4205,8 +4207,7 @@ msrHarmony::msrHarmony (
   const msrTupletFactor&   harmonyTupletFactor,
   const Rational&          harmonyWholeNotesOffset)
     : msrMeasureElement (
-        inputLineNumber,
-        upLinkToMeasure),
+        inputLineNumber),
       fHarmonyTupletFactor (
         harmonyTupletFactor)
 {
@@ -4333,7 +4334,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
     newbornClone =
       msrHarmony::create (
         fInputLineNumber,
-	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind,
         fHarmonyKindText,
@@ -4378,7 +4379,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
     harmonyDeepClone =
       msrHarmony::create (
         fInputLineNumber,
-	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind, fHarmonyKindText,
         fHarmonyInversion,
@@ -4469,8 +4470,7 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+//       fHarmonyUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -4859,8 +4859,8 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony measure number
   os <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << " : " << fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+    "measureElementMeasureNumber" << " : " <<
+    fHarmonyUpLinkToMeasure->getMeasureNumber () <<
     std::endl;
 
   // print the harmony position in measure

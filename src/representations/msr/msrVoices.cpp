@@ -1062,7 +1062,7 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
 
   {
 /* JMI
-    // move fVoiceLastSegment to the initial voice elements std::list
+    // move fVoiceLastSegment to the initial voice elements list
     moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
       inputLineNumber,
       "appendSegmentToVoiceClone()");
@@ -1997,7 +1997,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
           getSegmentFirstMeasure ();
 
     if (voiceFirstMeasure) {
-      // get the first measure's elements std::list
+      // get the first measure's elements list
       const std::list<S_msrMeasureElement>&
         firstMeasureElementsList =
           voiceFirstMeasure->
@@ -3485,7 +3485,7 @@ S_msrMeasure msrVoice::fetchVoiceLastMeasure (
 //     std::stringstream s;
 //
 //     s <<
-//       "attempting to fetch voice last measure in an empty measure elements std::list";
+//       "attempting to fetch voice last measure in an empty measure elements list";
 //
 //     msrInternalError (
 //       gGlobalServiceRunData->getInputSourceName (),
@@ -3518,7 +3518,7 @@ S_msrMeasureElement msrVoice::fetchVoiceLastMeasureElement (
     std::stringstream s;
 
     s <<
-      "attempting to fetch voice last element in an empty elements std::list";
+      "attempting to fetch voice last element in an empty elements list";
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4223,7 +4223,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
   }
 #endif
 
-  // is the previous element in the voice elements std::list a repeat?
+  // is the previous element in the voice elements list a repeat?
   S_msrVoiceElement previousElement;
 
   if (fVoiceInitialElementsList.size ()) {
@@ -4445,7 +4445,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
   // is there a voice last segment?
   if (fVoiceLastSegment) {
 
-    // fetch last segment's measure elements std::list
+    // fetch last segment's measure elements list
     std::list<S_msrSegmentElement>
       voiceLastSegmentElementsList =
         fVoiceLastSegment->
@@ -4472,7 +4472,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 
       // let's look at the last measure in detail
 
-      // fetch its elements std::list
+      // fetch its elements list
       const std::list<S_msrMeasureElement>&
         lastMeasureElementsList =
           lastMeasureInLastSegment->
@@ -4522,7 +4522,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
               msrMeasureRepeatContextKind::kMeasureRepeatContextNone,
               "handleVoiceLevelRepeatStart() 3");
 */
-          // append last segment to initial voice elements std::list
+          // append last segment to initial voice elements list
           appendVoiceLastSegmentToInitialVoiceElements (
             inputLineNumber,
             "handleVoiceLevelRepeatStart() 4");
@@ -4564,7 +4564,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       }
 
       else {
-        // the last measure elements std::list is empty,
+        // the last measure elements list is empty,
         // keep it for a new voice last segment
 
         // remove last measure
@@ -4587,7 +4587,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
                 inputLineNumber,
                 "handleVoiceLevelRepeatStart() 55");
 
-        // append the voice last segment to the initial voice elements std::list
+        // append the voice last segment to the initial voice elements list
         appendVoiceLastSegmentToInitialVoiceElements (
           inputLineNumber,
           "handleVoiceLevelRepeatStart() 555");
@@ -5458,7 +5458,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
           inputLineNumber,
           "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 1");
 
-  // fetch lastMeasure's elements std::list
+  // fetch lastMeasure's elements list
   const std::list<S_msrMeasureElement>&
     lastMeasureElementsList =
       lastMeasure->
@@ -5523,7 +5523,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
 
     // it is not empty
 
-    // append last segment to initial voice elements std::list
+    // append last segment to initial voice elements list
     appendVoiceLastSegmentToInitialVoiceElements (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 4");
@@ -5618,7 +5618,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
   }
 #endif
 
-  // fetch lastMeasure's elements std::list
+  // fetch lastMeasure's elements list
   const std::list<S_msrMeasureElement>&
     lastMeasureElementsList =
       lastMeasure->
@@ -5682,7 +5682,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
   else {
     // it is not empty
 
-    // append last segment to initial voice elements std::list
+    // append last segment to initial voice elements list
     appendVoiceLastSegmentToInitialVoiceElements (
       inputLineNumber,
       "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 5");
@@ -6145,7 +6145,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
   else {
     // segmentClone is a voice-level segment
 
-    // move fVoiceLastSegment to the initial voice elements std::list
+    // move fVoiceLastSegment to the initial voice elements list
     moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
       inputLineNumber,
       "handleSegmentCloneEndInVoiceClone()");
@@ -6581,14 +6581,14 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       s.str ());
   }
 
-  // fetch the last segment's measure elements std::list
+  // fetch the last segment's measure elements list
   std::list<S_msrSegmentElement>
     voiceLastSegmentMeasureList =
       fVoiceLastSegment->
         getSegmentElementsList ();
 
   // grab the just created last measure
-  // in the last segment's measure elements std::list,
+  // in the last segment's measure elements list,
   // (i.e. the one containing:
   //   <measure-repeat type="stop"/>)
   // which is the next measure after the measures repeat
@@ -6611,7 +6611,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
         getSegmentLastMeasure (); // JMI v0.9.63
 
 // BOFBOFBOF JMI
-  // remove the next measure from the last segment's measure elements std::list
+  // remove the next measure from the last segment's measure elements list
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
@@ -7261,7 +7261,7 @@ void msrVoice::addEmptyMeasuresToVoice (
 //       {
 //         ++gIndenter;
 //
-//         // move the current voice last segment to the initial elements std::list
+//         // move the current voice last segment to the initial elements list
 //         moveVoiceLastSegmentToInitialVoiceElementsIfRelevant ( //JMI
 //           inputLineNumber,
 //           "addEmptyMeasuresToVoice() 2");
@@ -7909,7 +7909,7 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
           s.str ());
       }
 
-      // append current voice rest measure to the initial voice elements std::list
+      // append current voice rest measure to the initial voice elements list
       appendMeasureRepeatToInitialVoiceElements (
         inputLineNumber,
         fVoicePendingMeasureRepeat,
@@ -8982,7 +8982,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
       // is there a voice last segment?
       if (fVoiceLastSegment) {
 
-        // fetch last segment's measure elements std::list
+        // fetch last segment's measure elements list
         const std::list<S_msrSegmentElement>
           voiceLastSegmentElementsList =
             fVoiceLastSegment->

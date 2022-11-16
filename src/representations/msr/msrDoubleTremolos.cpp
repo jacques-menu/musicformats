@@ -26,6 +26,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasureConstants.h"
+
 #include "msrDoubleTremolos.h"
 
 #include "oahOah.h"
@@ -99,7 +101,7 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
   return
     msrDoubleTremolo::create (
       inputLineNumber,
-      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       doubleTremoloKind,
       doubleDoubleTremoloTypeKind,
       doubleTremoloMarksNumber,
@@ -125,6 +127,37 @@ msrDoubleTremolo::msrDoubleTremolo (
     Rational (-1, 1); // will be set later
 
   fDoubleTremoloNumberOfRepeats = -1; // will be set later
+}
+
+msrDoubleTremolo::~msrDoubleTremolo ()
+{}
+
+void msrDoubleTremolo::setDoubleTremoloUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+    "measure is null");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "==> Setting the uplink to measure of double tremolo " <<
+      asString () <<
+      " to measure " << measure->asString () <<
+      "' in measure '" <<
+      measure->asString () <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif
+
+  fDoubleTremoloUpLinkToMeasure = measure;
 }
 
 S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
@@ -153,7 +186,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
     newbornClone =
       msrDoubleTremolo::create (
         fInputLineNumber,
-	      gNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fDoubleTremoloKind,
         fDoubleDoubleTremoloTypeKind,
         fDoubleTremoloMarksNumber,
@@ -179,9 +212,6 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   return newbornClone;
 }
 
-msrDoubleTremolo::~msrDoubleTremolo ()
-{}
-
 // void msrDoubleTremolo::setMeasureElementMeasurePosition (
 //   const S_msrMeasure& measure,
 //   const Rational&     measurePosition,
@@ -201,8 +231,7 @@ msrDoubleTremolo::~msrDoubleTremolo ()
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fBarLineUpLinkToMeasure->
-getMeasureNumber () <<
+//       fBarLineUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -619,8 +648,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (S_msrChord chord)
 void msrDoubleTremolo::setDoubleTremoloMeasureNumber (
   const std::string& measureNumber)
 {
-  fBarLineUpLinkToMeasure->
-getMeasureNumber () =  measureNumber;
+//   fDoubleTremoloUpLinkToMeasure->getMeasureNumber () =  measureNumber;
 }
 
 void msrDoubleTremolo::acceptIn (basevisitor* v)

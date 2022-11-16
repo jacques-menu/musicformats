@@ -12,11 +12,11 @@
 #ifndef ___msrNotes___
 #define ___msrNotes___
 
-#include <iomanip>
-
-#include "msrTupletElements.h"
+// #include "msrTupletElements.h"
 
 #include "msrTypesForwardDeclarations.h"
+
+#include "msrMeasures.h"
 
 #include "msrNotesEnumTypes.h"
 
@@ -81,41 +81,41 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     static SMARTP<msrNote> createRestNote (
-                            int             inputLineNumber,
-                            const std::string&   noteMeasureNumber,
-                            const Rational& soundingWholeNotes,
-                            const Rational& displayWholeNotes,
-                            int             dotsNumber);
+                            int                inputLineNumber,
+                            const std::string& noteMeasureNumber,
+                            const Rational&    soundingWholeNotes,
+                            const Rational&    displayWholeNotes,
+                            int                dotsNumber);
 
     static SMARTP<msrNote> createRestNoteWithOctave (
-                            int             inputLineNumber,
-                            const std::string&   noteMeasureNumber,
-                            msrOctaveKind   noteOctave,
-                            const Rational& soundingWholeNotes,
-                            const Rational& displayWholeNotes,
-                            int             dotsNumber);
+                            int                inputLineNumber,
+                            const std::string& noteMeasureNumber,
+                            msrOctaveKind      noteOctave,
+                            const Rational&    soundingWholeNotes,
+                            const Rational&    displayWholeNotes,
+                            int                dotsNumber);
 
     static SMARTP<msrNote> createSkipNote (
-                            int             inputLineNumber,
-                            const std::string&   noteMeasureNumber,
-                            const Rational& soundingWholeNotes,
-                            const Rational& displayWholeNotes,
-                            int             dotsNumberr);
+                            int                inputLineNumber,
+                            const std::string& noteMeasureNumber,
+                            const Rational&    soundingWholeNotes,
+                            const Rational&    displayWholeNotes,
+                            int                dotsNumberr);
 
     static SMARTP<msrNote> createSkipNoteWithOctave (
-                            int             inputLineNumber,
-                            const std::string&   noteMeasureNumber,
-                            msrOctaveKind   noteOctave,
-                            const Rational& soundingWholeNotes,
-                            const Rational& displayWholeNotes,
-                            int             dotsNumber);
+                            int                inputLineNumber,
+                            const std::string& noteMeasureNumber,
+                            msrOctaveKind      noteOctave,
+                            const Rational&    soundingWholeNotes,
+                            const Rational&    displayWholeNotes,
+                            int                dotsNumber);
 
     static SMARTP<msrNote> createGraceSkipNote (
-                            int             inputLineNumber,
-                            const std::string&   noteMeasureNumber,
-                            const Rational& soundingWholeNotes,
-                            const Rational& displayWholeNotes,
-                            int             dotsNumber);
+                            int                inputLineNumber,
+                            const std::string& noteMeasureNumber,
+                            const Rational&    soundingWholeNotes,
+                            const Rational&    displayWholeNotes,
+                            int                dotsNumber);
 
     static SMARTP<msrNote> createRegularNote (
                             int                      inputLineNumber,
@@ -127,17 +127,17 @@ class EXP msrNote : public msrTupletElement
                             int                      dotsNumber);
 
     static SMARTP<msrNote> createRestFromString (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& restString,
                             const std::string& restMeasureNumber);
 
     static SMARTP<msrNote> createSkipFromString (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& skipString,
                             const std::string& skipMeasureNumber);
 
     static SMARTP<msrNote> createNoteFromString (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& noteString,
                             const std::string& noteMeasureNumber);
 
@@ -197,6 +197,13 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to measure
+    void                  setMeasureElementUpLinkToMeasure (
+                            const S_msrMeasure& measure) override
+                              { setNoteUpLinkToMeasure (measure); }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                            { return getNoteUpLinkToMeasure (); }
+
     void                  setNoteUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
