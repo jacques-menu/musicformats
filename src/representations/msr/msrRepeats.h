@@ -72,7 +72,7 @@ class EXP msrRepeatCommonPart : public msrElement
     void                  appendVoiceElementToRepeatCommonPart (
                             int               inputLineNumber,
                             const S_msrVoiceElement& voiceElement,
-                            const std::string&     context);
+                            const std::string&          context);
 
     void                  appendSegmentToRepeatCommonPart (
                             int          inputLineNumber,
@@ -87,12 +87,12 @@ class EXP msrRepeatCommonPart : public msrElement
     void                  appendMeasureRepeatToRepeatCommonPart (
                             int                inputLineNumber,
                             const S_msrMeasureRepeat& measureRepeat,
-                            const std::string&      context);
+                            const std::string&           context);
 
     void                  appendMultipleFullBarRestsToRepeatCommonPart (
                             int                   inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRests,
-                            const std::string&    context);
+                            const std::string&         context);
 
     S_msrNote             fetchRepeatCommonPartFirstNonGraceNote () const;
 
@@ -205,7 +205,7 @@ class EXP msrRepeatEnding : public msrElement
     void                  appendVoiceElementToRepeatEnding ( // JMI
                             int               inputLineNumber,
                             const S_msrVoiceElement& voiceElement,
-                            const std::string&     context);
+                            const std::string&          context);
 
     void                  appendSegmentToRepeatEnding (
                             int           inputLineNumber,
@@ -220,12 +220,12 @@ class EXP msrRepeatEnding : public msrElement
     void                  appendMeasureRepeatToRepeatEnding (
                             int                inputLineNumber,
                             const S_msrMeasureRepeat& measureRepeat,
-                            const std::string&      context);
+                            const std::string&           context);
 
     void                  appendMultipleFullBarRestsToRepeatEnding (
                             int                   inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRests,
-                            const std::string&    context);
+                            const std::string&         context);
 
     void                  collectRepeatEndingMeasuresIntoFlatList (
                             int inputLineNumber);
@@ -377,12 +377,12 @@ class EXP msrRepeat : public msrVoiceElement
     void                  appendMeasureRepeatToRepeat (
                             int                inputLineNumber,
                             const S_msrMeasureRepeat& measureRepeat,
-                            const std::string&      context);
+                            const std::string&           context);
 
     void                  appendMultipleFullBarRestsToRepeat (
                             int                   inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRests,
-                            const std::string&    context);
+                            const std::string&         context);
 
     S_msrNote             fetchRepeatFirstNonGraceNote () const;
 

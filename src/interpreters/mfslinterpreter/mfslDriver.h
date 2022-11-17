@@ -140,7 +140,7 @@ class   mfslDriver
     // options blocks
     void                  optionsBlocksStackPush (
                             S_mfslOptionsBlock optionsBlock,
-                            const std::string&      context);
+                            const std::string&           context);
 
     S_mfslOptionsBlock    optionsBlocksStackTop () const;
 
@@ -191,7 +191,7 @@ class   mfslDriver
 
     void                  appendSelectLabelForToolLaunching (
                             const S_mfslChoice choice,
-                            const std::string&      label,
+                            const std::string&           label,
                             Bool               allLabelSelected);
 
     mfMusicformatsErrorKind   launchMfslTool_Pass2 ();
@@ -204,13 +204,13 @@ class   mfslDriver
     // 'select' statements
 //     Bool                  applySelectOptionIfPresent (
 //                             const S_mfslChoice choice,
-//                             const std::string&      label);
+//                             const std::string&           label);
 
     Bool                  applySelectOptionsFinally ();
 
     Bool                  applySelectOption (
                             const S_mfslChoice choice,
-                            const std::string&      label);
+                            const std::string&           label);
 
     // final semantics check
     void                  finalSemanticsCheck ();

@@ -53,9 +53,9 @@ class EXP lpsrSchemeVariable : public lpsrElement
     static SMARTP<lpsrSchemeVariable> create (
                             int               inputLineNumber,
                             lpsrCommentedKind commentedKind,
-                            const std::string&     variableName,
-                            const std::string&     value,
-                            const std::string&     comment,
+                            const std::string&          variableName,
+                            const std::string&          value,
+                            const std::string&          comment,
                             lpsrEndOfLineKind endOfLineKind);
 
   protected:
@@ -66,9 +66,9 @@ class EXP lpsrSchemeVariable : public lpsrElement
                           lpsrSchemeVariable (
                             int               inputLineNumber,
                             lpsrCommentedKind commentedKind,
-                            const std::string&     variableName,
-                            const std::string&     value,
-                            const std::string&     comment,
+                            const std::string&          variableName,
+                            const std::string&          value,
+                            const std::string&          comment,
                             lpsrEndOfLineKind endOfLineKind);
 
     virtual               ~lpsrSchemeVariable ();

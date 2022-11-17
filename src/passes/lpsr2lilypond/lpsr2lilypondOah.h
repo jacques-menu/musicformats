@@ -310,7 +310,7 @@ class EXP msrOctaveEntryVariable : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrOctaveEntryVariable> create (
-                            const std::string&      variableName,
+                            const std::string&           variableName,
                             msrOctaveEntryKind octaveEntryKind);
 
   public:
@@ -319,7 +319,7 @@ class EXP msrOctaveEntryVariable : public smartable
     // ------------------------------------------------------
 
                           msrOctaveEntryVariable (
-                            const std::string&      variableName,
+                            const std::string&           variableName,
                             msrOctaveEntryKind octaveEntryKind);
 
     virtual               ~msrOctaveEntryVariable ();
@@ -377,10 +377,10 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<lilypondAbsoluteOctaveEntryAtom> create (
-                            const std::string&      longName,
-                            const std::string&      shortName,
-                            const std::string&      description,
-                            const std::string&      variableName,
+                            const std::string&           longName,
+                            const std::string&           shortName,
+                            const std::string&           description,
+                            const std::string&           variableName,
                             msrOctaveEntryVariable& octaveEntryKindVariable);
 
   protected:
@@ -389,10 +389,10 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
     // ------------------------------------------------------
 
                           lilypondAbsoluteOctaveEntryAtom (
-                            const std::string&      longName,
-                            const std::string&      shortName,
-                            const std::string&      description,
-                            const std::string&      variableName,
+                            const std::string&           longName,
+                            const std::string&           shortName,
+                            const std::string&           description,
+                            const std::string&           variableName,
                             msrOctaveEntryVariable& octaveEntryKindVariable);
 
     virtual               ~lilypondAbsoluteOctaveEntryAtom ();
@@ -550,11 +550,11 @@ class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
     static SMARTP<lilypondFixedOctaveEntryAtom> create (
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
-                            const std::string&       valueSpecification,
-                            const std::string&       variableName,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
+                            const std::string&            valueSpecification,
+                            const std::string&            variableName,
                             msrOctaveEntryVariable&
                                                 octaveEntryKindVariable,
                             S_msrSemiTonesPitchAndOctave&
@@ -566,11 +566,11 @@ class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
                           lilypondFixedOctaveEntryAtom (
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
-                            const std::string&       valueSpecification,
-                            const std::string&       variableName,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
+                            const std::string&            valueSpecification,
+                            const std::string&            variableName,
                             msrOctaveEntryVariable&
                                                 octaveEntryKindVariable,
                             S_msrSemiTonesPitchAndOctave&
@@ -734,11 +734,11 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lilypondChordsDisplayAtom> create (
-                            const std::string&    shortName,
-                            const std::string&    longName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         shortName,
+                            const std::string&         longName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             std::list<std::pair<std::string, std::string> >&
                                                   lilypondChordsDisplayVariable);
 
@@ -748,11 +748,11 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lilypondChordsDisplayAtom (
-                            const std::string&    shortName,
-                            const std::string&    longName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         shortName,
+                            const std::string&         longName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             std::list<std::pair<std::string, std::string> >&
                                                   lilypondChordsDisplayVariable);
 
@@ -826,11 +826,11 @@ class EXP lilypondLyricsDurationsKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lilypondLyricsDurationsKindAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             lpsrLyricsDurationsKind&
                                               lilypondLyricsDurationsKindVariable);
 
@@ -840,11 +840,11 @@ class EXP lilypondLyricsDurationsKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lilypondLyricsDurationsKindAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             lpsrLyricsDurationsKind&
                                               lilypondLyricsDurationsKindVariable);
 
@@ -914,11 +914,11 @@ class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValu
     // ------------------------------------------------------
 
     static SMARTP<lilypondDynamicsTextSpannersStyleKindAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             lpsrDynamicsTextSpannersStyleKind&
                                               lilypondDynamicsTextSpannersStyleKindVariable);
 
@@ -928,11 +928,11 @@ class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValu
     // ------------------------------------------------------
 
                           lilypondDynamicsTextSpannersStyleKindAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             lpsrDynamicsTextSpannersStyleKind&
                                               lilypondDynamicsTextSpannersStyleKindVariable);
 

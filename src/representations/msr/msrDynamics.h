@@ -66,7 +66,7 @@ class EXP msrDynamic : public msrElement
 
     static SMARTP<msrDynamic> createDynamicFromString (
                             int              inputLineNumber,
-                            const std::string&    dynamicsString,
+                            const std::string&         dynamicsString,
                             msrPlacementKind dynamicPlacementKind);
 
   protected:
@@ -136,7 +136,7 @@ class EXP msrOtherDynamic : public msrElement
 
     static SMARTP<msrOtherDynamic> create (
                             int              inputLineNumber,
-                            const std::string&    otherDynamicString,
+                            const std::string&         otherDynamicString,
                             msrPlacementKind otherDynamicPlacementKind);
 
   protected:
@@ -146,7 +146,7 @@ class EXP msrOtherDynamic : public msrElement
 
                           msrOtherDynamic (
                             int              inputLineNumber,
-                            const std::string&    otherDynamicString,
+                            const std::string&         otherDynamicString,
                             msrPlacementKind otherDynamicPlacementKind);
 
     virtual               ~msrOtherDynamic ();

@@ -32,8 +32,8 @@ class EXP xml2gmnRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<xml2gmnRegularHandler> create (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader,
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader,
                             const S_xml2gmnInsiderHandler&
                                               insiderOahHandler);
 
@@ -43,8 +43,8 @@ class EXP xml2gmnRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           xml2gmnRegularHandler (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader,
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader,
                             const S_xml2gmnInsiderHandler&
                                               insiderOahHandler);
 

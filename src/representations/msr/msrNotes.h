@@ -12,22 +12,40 @@
 #ifndef ___msrNotes___
 #define ___msrNotes___
 
-// #include "msrTupletElements.h"
-
 #include "msrTypesForwardDeclarations.h"
-
-// #include "msrMeasures.h"
 
 #include "msrNotesEnumTypes.h"
 
 #include "msrAccidentals.h"
+#include "msrArticulations.h"
+#include "msrBeams.h"
+#include "msrCodas.h"
 #include "msrChords.h"
 #include "msrColors.h"
+#include "msrDynamics.h"
+#include "msrEyeGlasses.h"
+#include "msrFiguredBasses.h"
+#include "msrGlissandos.h"
+#include "msrHarmonies.h"
+#include "msrInstruments.h"
+#include "msrLyrics.h"
+#include "msrGraceNotesGroups.h"
+#include "msrLigatures.h"
+#include "msrMeasures.h"
 #include "msrOrnaments.h"
 #include "msrParts.h"
 #include "msrPrintObjects.h"
+#include "msrSegnos.h"
+#include "msrSingleTremolos.h"
+#include "msrSlashes.h"
+#include "msrSlides.h"
+#include "msrSlurs.h"
 #include "msrSpanners.h"
+#include "msrStems.h"
+#include "msrTechnicals.h"
 #include "msrTies.h"
+#include "msrTuplets.h"
+#include "msrTupletElements.h"
 #include "msrTupletFactors.h"
 
 
@@ -44,9 +62,9 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> create (
                             int                        inputLineNumber,
-                            const S_msrMeasure&               upLinkToMeasure,
+                            const S_msrMeasure&        upLinkToMeasure,
 
-                            const std::string&    noteMeasureNumber,
+                            const std::string&         noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 
@@ -119,7 +137,7 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createRegularNote (
                             int                      inputLineNumber,
-                            const std::string&       noteMeasureNumber,
+                            const std::string&            noteMeasureNumber,
                             msrQuarterTonesPitchKind quarterTonesPitchKind,
                             msrOctaveKind            noteOctaveKind,
                             const Rational&          soundingWholeNotes,
@@ -155,9 +173,9 @@ class EXP msrNote : public msrTupletElement
 
                           msrNote (
                             int                        inputLineNumber,
-                            const S_msrMeasure&               upLinkToMeasure,
+                            const S_msrMeasure&         upLinkToMeasure,
 
-                            const std::string&    noteMeasureNumber,
+                            const std::string&         noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 

@@ -1020,14 +1020,14 @@ class EXP msrGlyph : public msrElement
     static SMARTP<msrGlyph> create (
                             int              inputLineNumber,
                             msrGlyphTypeKind glyphTypeKind,
-                            const std::string&    glyphValue);
+                            const std::string&         glyphValue);
 
   protected:
 
                           msrGlyph (
                             int              inputLineNumber,
                             msrGlyphTypeKind glyphTypeKind,
-                            const std::string&    glyphValue);
+                            const std::string&         glyphValue);
 
     virtual               ~msrGlyph ();
 
@@ -1085,14 +1085,14 @@ class EXP msrOtherAppearance : public msrElement
     static SMARTP<msrOtherAppearance> create (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const std::string&    otherAppearanceValue);
+                            const std::string&         otherAppearanceValue);
 
   protected:
 
                           msrOtherAppearance (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const std::string&    otherAppearanceValue);
+                            const std::string&         otherAppearanceValue);
 
     virtual               ~msrOtherAppearance ();
 

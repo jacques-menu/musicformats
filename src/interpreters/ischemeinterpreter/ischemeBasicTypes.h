@@ -185,7 +185,7 @@ class EXP ischemeInput : public smartable
                             ischemeDriver&   drv);
 
     void                  enrichNameOptionsBlock (
-                            const std::string&      name,
+                            const std::string&           name,
                             S_ischemeOptionsBlock optionsBlock,
                             ischemeDriver&        drv);
 
@@ -263,7 +263,7 @@ class EXP ischemeInputsTable : public smartable
 //                             const std::string& name);
 
     S_ischemeInput           fetchInputByName (
-                            const std::string&     name,
+                            const std::string&          name,
                             const ischemeDriver& drv);
 
     S_ischemeInput           fetchInputByNameNonConst (
@@ -456,7 +456,7 @@ class EXP ischemeChoice : public smartable
                             ischemeDriver&   drv);
 
     void                  enrichLabelOptionsBlock (
-                            const std::string&      label,
+                            const std::string&           label,
                             S_ischemeOptionsBlock optionsBlock,
                             ischemeDriver&        drv);
 
@@ -541,7 +541,7 @@ class EXP ischemeChoicesTable : public smartable
 //                             const std::string& name);
 
     S_ischemeChoice          fetchChoiceByName (
-                            const std::string&     name,
+                            const std::string&          name,
                             const ischemeDriver& drv);
 
     S_ischemeChoice          fetchChoiceByNameNonConst (

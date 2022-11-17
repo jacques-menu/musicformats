@@ -30,11 +30,11 @@ class EXP msrReplaceClefAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msrReplaceClefAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             std::map<msrClefKind, msrClefKind>&
                                               clefKindToClefKindMapVariable);
 
@@ -44,11 +44,11 @@ class EXP msrReplaceClefAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msrReplaceClefAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             std::map<msrClefKind, msrClefKind>&
                                               clefKindToClefKindMapVariable);
 
