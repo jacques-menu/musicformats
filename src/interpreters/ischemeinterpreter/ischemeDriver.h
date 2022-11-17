@@ -140,7 +140,7 @@ class   ischemeDriver
     // options blocks
     void                  optionsBlocksStackPush (
                             S_ischemeOptionsBlock optionsBlock,
-                            const std::string&      context);
+                            const std::string&           context);
 
     S_ischemeOptionsBlock         optionsBlocksStackTop () const;
 
@@ -191,7 +191,7 @@ class   ischemeDriver
 
     void                  appendSelectLabelForToolLaunching (
                             const S_ischemeChoice choice,
-                            const std::string&      label,
+                            const std::string&           label,
                             Bool               allLabelSelected);
 
     mfMusicformatsErrorKind   launchIschemeTool_Pass2 ();
@@ -204,13 +204,13 @@ class   ischemeDriver
     // 'select' statements
 //     Bool                  applySelectOptionIfPresent (
 //                             const S_ischemeChoice choice,
-//                             const std::string&      label);
+//                             const std::string&           label);
 
     Bool                  applySelectOptionsFinally ();
 
     Bool                  applySelectOption (
                             const S_ischemeChoice choice,
-                            const std::string&      label);
+                            const std::string&           label);
 
     // final semantics check
     void                  finalSemanticsCheck ();

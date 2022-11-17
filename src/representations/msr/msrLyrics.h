@@ -72,7 +72,7 @@ class EXP msrSyllable : public msrMeasureElement
                             const S_msrMeasure&           upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const std::string&          syllableStanzaNumber,
                             const Rational&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             S_msrStanza            syllableUpLinkToStanza);
@@ -81,7 +81,7 @@ class EXP msrSyllable : public msrMeasureElement
                             int                    inputLineNumber,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const std::string&          syllableStanzaNumber,
                             const Rational&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             S_msrStanza            syllableUpLinkToStanza);
@@ -97,7 +97,7 @@ class EXP msrSyllable : public msrMeasureElement
                             const S_msrMeasure&           upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const std::string&          syllableStanzaNumber,
                             const Rational&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             S_msrStanza            syllableUpLinkToStanza,
@@ -113,7 +113,7 @@ class EXP msrSyllable : public msrMeasureElement
                             const S_msrMeasure&           upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const std::string&          syllableStanzaNumber,
                             const Rational&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             S_msrStanza            syllableUpLinkToStanza);

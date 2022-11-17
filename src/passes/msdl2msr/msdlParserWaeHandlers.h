@@ -59,11 +59,11 @@ class EXP msdlParserWaeHandler : public waeHandler
 
     virtual void          unexpectedToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const = 0;
+                            const std::string&         context) const = 0;
 
     virtual void          ignoringToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const = 0;
+                            const std::string&         context) const = 0;
 
     virtual void          inputIsSyntacticallyCorrect () const = 0;
     virtual void          inputIsSyntacticallyIncorrect () const = 0;
@@ -126,11 +126,11 @@ class EXP msdlParserEnglishWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -193,11 +193,11 @@ class EXP msdlParserFrenchWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -260,11 +260,11 @@ class EXP msdlParserItalianWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -327,11 +327,11 @@ class EXP msdlParserGermanWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -394,11 +394,11 @@ class EXP msdlParserSpanishWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -461,11 +461,11 @@ class EXP msdlParserDutchWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const std::string&    context) const override;
+                            const std::string&         context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;

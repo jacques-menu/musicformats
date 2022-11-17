@@ -185,7 +185,7 @@ class EXP mfslInput : public smartable
                             mfslDriver&   drv);
 
     void                  enrichNameOptionsBlock (
-                            const std::string&      name,
+                            const std::string&           name,
                             S_mfslOptionsBlock optionsBlock,
                             mfslDriver&        drv);
 
@@ -263,7 +263,7 @@ class EXP mfslInputsTable : public smartable
 //                             const std::string& name);
 
     S_mfslInput           fetchInputByName (
-                            const std::string&     name,
+                            const std::string&          name,
                             const mfslDriver& drv);
 
     S_mfslInput           fetchInputByNameNonConst (
@@ -456,7 +456,7 @@ class EXP mfslChoice : public smartable
                             mfslDriver&   drv);
 
     void                  enrichLabelOptionsBlock (
-                            const std::string&      label,
+                            const std::string&           label,
                             S_mfslOptionsBlock optionsBlock,
                             mfslDriver&        drv);
 
@@ -541,7 +541,7 @@ class EXP mfslChoicesTable : public smartable
 //                             const std::string& name);
 
     S_mfslChoice          fetchChoiceByName (
-                            const std::string&     name,
+                            const std::string&          name,
                             const mfslDriver& drv);
 
     S_mfslChoice          fetchChoiceByNameNonConst (

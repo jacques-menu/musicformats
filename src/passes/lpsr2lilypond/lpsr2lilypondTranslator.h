@@ -777,10 +777,10 @@ class EXP lpsr2lilypondTranslator :
     // markups
 
     std::string           generateAColumnForMarkup (
-                            const std::string&    theString,
+                            const std::string&         theString,
                             lilypondMarkupColumnKind columnKind);
     std::string           generateMultilineMarkup (
-                            const std::string&    theString,
+                            const std::string&         theString,
                             lilypondMarkupColumnKind columnKind);
 
     // octaves

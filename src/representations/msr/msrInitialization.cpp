@@ -12,6 +12,7 @@
 #include "msrClefs.h"
 #include "msrHarmonies.h"
 #include "msrInitialization.h"
+#include "msrLengths.h"
 #include "msrMargins.h"
 #include "msrPitchesNames.h"
 

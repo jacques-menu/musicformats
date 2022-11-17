@@ -46,7 +46,7 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
-                            const std::string&     graceNotesGroupMeasureNumber);
+                            const std::string&          graceNotesGroupMeasureNumber);
 
     SMARTP<msrGraceNotesGroup> createGraceNotesGroupNewbornClone ();
 
@@ -64,7 +64,7 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
-                            const std::string&     graceNotesGroupMeasureNumber);
+                            const std::string&          graceNotesGroupMeasureNumber);
 
     virtual               ~msrGraceNotesGroup ();
 

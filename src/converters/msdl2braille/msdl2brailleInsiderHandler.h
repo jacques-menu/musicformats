@@ -107,8 +107,8 @@ class EXP msdl2brailleInsiderOahGroup : public oahGroup
   public:
 
     static SMARTP<msdl2brailleInsiderOahGroup> create (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader);
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader);
 
   public:
 
@@ -123,8 +123,8 @@ class EXP msdl2brailleInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           msdl2brailleInsiderOahGroup (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader);
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader);
 
     virtual               ~msdl2brailleInsiderOahGroup ();
 

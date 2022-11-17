@@ -14,23 +14,31 @@
 
 #include "msrTypesForwardDeclarations.h"
 
-// #include "msrTupletElements.h"
-
+#include "msrArticulations.h"
 #include "msrBeams.h"
 #include "msrCodas.h"
 #include "msrDynamics.h"
 #include "msrFiguredBasses.h"
+#include "msrGlissandos.h"
 #include "msrGraceNotesGroups.h"
 #include "msrHarmonies.h"
 #include "msrInstruments.h"
 #include "msrLigatures.h"
+#include "msrMeasures.h"
+#include "msrNotes.h"
 #include "msrOctaveShifts.h"
+#include "msrOrnaments.h"
 #include "msrSegnos.h"
 #include "msrSingleTremolos.h"
 #include "msrSlashes.h"
+#include "msrSlides.h"
 #include "msrSlurs.h"
+#include "msrSpanners.h"
 #include "msrStems.h"
+#include "msrTechnicals.h"
+#include "msrTies.h"
 #include "msrTuplets.h"
+#include "msrTupletElements.h"
 #include "msrWords.h"
 
 

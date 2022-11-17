@@ -39,7 +39,7 @@ class EXP lpsrComment : public lpsrElement
 
     static SMARTP<lpsrComment> create (
                             int                inputLineNumber,
-                            const std::string&      contents,
+                            const std::string&           contents,
                             lpsrCommentGapAfterwardsKind commentGapAfterwardsKind =
                                                  lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
 
@@ -50,7 +50,7 @@ class EXP lpsrComment : public lpsrElement
 
                           lpsrComment (
                             int                inputLineNumber,
-                            const std::string&      contents,
+                            const std::string&           contents,
                             lpsrCommentGapAfterwardsKind commentGapAfterwardsKind =
                                                  lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
 

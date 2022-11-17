@@ -50,10 +50,10 @@ class EXP msrCreditWords : public msrElement
 
     static SMARTP<msrCreditWords> create (
                             int                        inputLineNumber,
-                            const std::string&    creditWordsContents,
+                            const std::string&         creditWordsContents,
                             float                      creditWordsDefaultX,
                             float                      creditWordsDefaultY,
-                            const std::string&    creditWordsFontFamily,
+                            const std::string&         creditWordsFontFamily,
                             float                      creditWordsFontSize,
                             msrFontWeightKind          creditWordsFontWeightKind,
                             msrFontStyleKind           creditWordsFontStyleKind,
@@ -69,10 +69,10 @@ class EXP msrCreditWords : public msrElement
 
                           msrCreditWords (
                             int                        inputLineNumber,
-                            const std::string&    creditWordsContents,
+                            const std::string&         creditWordsContents,
                             float                      creditWordsDefaultX,
                             float                      creditWordsDefaultY,
-                            const std::string&    creditWordsFontFamily,
+                            const std::string&         creditWordsFontFamily,
                             float                      creditWordsFontSize,
                             msrFontWeightKind          creditWordsFontWeightKind,
                             msrFontStyleKind           creditWordsFontStyleKind,

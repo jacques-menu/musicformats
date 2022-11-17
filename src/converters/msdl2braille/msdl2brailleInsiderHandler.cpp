@@ -25,7 +25,6 @@
 #endif
 
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrInitialization.h"

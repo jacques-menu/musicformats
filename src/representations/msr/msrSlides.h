@@ -45,7 +45,7 @@ class EXP msrSlide : public msrElement
                             int              slideNumber,
                             msrSlideTypeKind slideTypeKind,
                             msrLineTypeKind  slideLineTypeKind,
-                            const std::string&    slideTextValue);
+                            const std::string&         slideTextValue);
 
     SMARTP<msrSlide> createSlideNewbornClone ();
 
@@ -61,7 +61,7 @@ class EXP msrSlide : public msrElement
                             int              slideNumber,
                             msrSlideTypeKind slideTypeKind,
                             msrLineTypeKind  slideLineTypeKind,
-                            const std::string&    slideTextValue);
+                            const std::string&         slideTextValue);
 
     virtual               ~msrSlide ();
 

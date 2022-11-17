@@ -32,8 +32,8 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<msdl2guidoRegularHandler> create (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader,
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader,
                             const S_msdl2guidoInsiderHandler&
                                               insiderOahHandler);
 
@@ -43,8 +43,8 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           msdl2guidoRegularHandler (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader,
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader,
                             const S_msdl2guidoInsiderHandler&
                                               insiderOahHandler);
 

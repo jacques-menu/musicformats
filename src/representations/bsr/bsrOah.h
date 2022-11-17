@@ -46,11 +46,11 @@ class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<bsrFacSimileKindAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             bsrFacSimileKind  bsrFacSimileKindVariable);
 
   protected:
@@ -59,11 +59,11 @@ class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           bsrFacSimileKindAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             bsrFacSimileKind  bsrFacSimileKindVariable);
 
     virtual               ~bsrFacSimileKindAtom ();

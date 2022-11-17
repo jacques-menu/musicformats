@@ -42,6 +42,7 @@ std::string msrArticulationKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrArticulationKind& elt);
 
+//______________________________________________________________________________
 class EXP msrArticulation : public msrElement
 {
   public:
@@ -203,7 +204,8 @@ class EXP msrFermata : public msrArticulation
 
     msrFermataShapeKind   fFermataShapeKind;
 
-    msrArticulationFermataType    fFermataTypeKind;
+    msrArticulationFermataType
+                          fFermataTypeKind;
 };
 typedef SMARTP<msrFermata> S_msrFermata;
 EXP std::ostream& operator << (std::ostream& os, const S_msrFermata& elt);
