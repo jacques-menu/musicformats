@@ -281,7 +281,7 @@ int main (int argc, char*  argv[])
     // create a generators insider OAH handler
     // ------------------------------------------------------
 
-    S_Mikrokosmos3WanderingInsiderHandler
+    const S_Mikrokosmos3WanderingInsiderHandler&
       insiderOahHandler =
         Mikrokosmos3WanderingInsiderHandler::create (
           serviceName,

@@ -100,7 +100,7 @@ class EXP msrBook : public msrElement
     // staff layout
 
     void                  setStaffLayout (
-                            S_msrStaffLayout staffLayout)
+                            const S_msrStaffLayout& staffLayout)
                               { fStaffLayout = staffLayout; }
 
     S_msrStaffLayout      getStaffLayout () const
@@ -123,13 +123,13 @@ class EXP msrBook : public msrElement
 //* JMI
     // master voice
     void                  setBookMasterVoice (
-                            S_msrVoice masterVoice);
+                            const S_msrVoice& masterVoice);
 
     S_msrVoice            getBookMasterVoice () const;
 
 /* JMI
     void                  setBookMasterVoice (
-                            S_msrVoice masterVoice)
+                            const S_msrVoice& masterVoice)
                               { fBookMasterVoice = masterVoice; }
 
     S_msrVoice            getBookMasterVoice () const
@@ -252,7 +252,7 @@ class EXP msrBook : public msrElement
     // voices
 
     void                  registerVoiceInBookAllVoicesList (
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
   public:
 
@@ -260,7 +260,7 @@ class EXP msrBook : public msrElement
     // ------------------------------------------------------
 
     void                  addBookElementToBook (
-                            S_msrBookElement bookElement);
+                            const S_msrBookElement& bookElement);
 
     void                  appendCreditToBook (
                             S_msrCredit credit);

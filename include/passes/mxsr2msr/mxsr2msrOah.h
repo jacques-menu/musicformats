@@ -116,7 +116,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // ------------------------------------------------------
 
     static SMARTP<mxsr2msrOahGroup> create (
-                            S_oahHandler handler);
+                            const S_oahHandler& handler);
 
   private:
 
@@ -124,7 +124,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  createTheMxsr2msrPrefixes (
-                            S_oahHandler handler);
+                            const S_oahHandler& handler);
 
     void                  initializeMxsr2msrOahGroup ();
 
@@ -134,7 +134,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           mxsr2msrOahGroup (
-                            S_oahHandler handler);
+                            const S_oahHandler& handler);
 
     virtual               ~mxsr2msrOahGroup ();
 
@@ -218,11 +218,11 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  getIgnoreRedundantTimes () const
                               { return fIgnoreRedundantTimes; }
 
-    S_oahBooleanAtom      getIgnoreRedundantClefsAtom () const
+    const S_oahBooleanAtom&      getIgnoreRedundantClefsAtom () const
                               { return fIgnoreRedundantClefsAtom; }
-    S_oahBooleanAtom      getIgnoreRedundantKeysAtom () const
+    const S_oahBooleanAtom&      getIgnoreRedundantKeysAtom () const
                               { return fIgnoreRedundantKeysAtom; }
-    S_oahBooleanAtom      getIgnoreRedundantTimesAtom () const
+    const S_oahBooleanAtom&      getIgnoreRedundantTimesAtom () const
                               { return fIgnoreRedundantTimesAtom; }
 
     // page and line breaks
@@ -775,7 +775,7 @@ EXP extern S_mxsr2msrOahGroup gGlobalMxsr2msrOahGroup;
 
 //______________________________________________________________________________
 EXP S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
-  S_oahHandler handler);
+  const S_oahHandler& handler);
 
 
 }

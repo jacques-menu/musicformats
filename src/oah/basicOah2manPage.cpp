@@ -27,7 +27,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 basicOah2manPage::basicOah2manPage (
-  const S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&           manPageOutputStream)
     : oah2manPage (
         handler,

@@ -77,7 +77,7 @@ class EXP ischemeOptionsBlock : public smartable
     // ------------------------------------------------------
 
     void                  registerOptionsInOptionsBlock (
-                            S_oahOption option,
+                            const S_oahOption& option,
                             ischemeDriver& drv);
 
   public:
@@ -324,7 +324,8 @@ class EXP ischemeCaseInputStatement : public smartable
     S_ischemeInput           getCaseInputInput () const
                               { return fCaseInputInput; }
 
-    const std::list<std::string>&   getCaseInputCurrentNamesList () const
+    const std::list<std::string>&
+                          getCaseInputCurrentNamesList () const
                               { return fCaseInputCurrentNamesList; }
 
     void                  clearCaseInputCurrentNamesList ()
@@ -601,7 +602,8 @@ class EXP ischemeCaseChoiceStatement : public smartable
     S_ischemeChoice          getCaseChoice () const
                               { return fCaseChoice; }
 
-    const std::list<std::string>&   getCaseCurrentLabelsList () const
+    const std::list<std::string>&
+                          getCaseCurrentLabelsList () const
                               { return fCaseCurrentLabelsList; }
 
     void                  clearCaseCurrentLabelsList ()

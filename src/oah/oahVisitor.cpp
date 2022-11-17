@@ -16,7 +16,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 oahVisitor::oahVisitor (
-  const S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   fVisitedOahHandler = handler;
 }

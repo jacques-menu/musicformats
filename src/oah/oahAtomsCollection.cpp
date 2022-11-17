@@ -2761,7 +2761,7 @@ S_oahTwoBooleansAtom oahTwoBooleansAtom::create (
   const std::string&    description,
   const std::string&    variableName,
   Bool&            booleanVariable,
-  S_oahBooleanAtom secondBooleanAtom)
+  const S_oahBooleanAtom& secondBooleanAtom)
 {
   oahTwoBooleansAtom* o = new
     oahTwoBooleansAtom (
@@ -2781,7 +2781,7 @@ oahTwoBooleansAtom::oahTwoBooleansAtom (
   const std::string&    description,
   const std::string&    variableName,
   Bool&            booleanVariable,
-  S_oahBooleanAtom secondBooleanAtom)
+  const S_oahBooleanAtom& secondBooleanAtom)
   : oahBooleanAtom (
       longName,
       shortName,
@@ -2970,8 +2970,8 @@ S_oahThreeBooleansAtom oahThreeBooleansAtom::create (
   const std::string&    description,
   const std::string&    variableName,
   Bool&            booleanVariable,
-  S_oahBooleanAtom secondBooleanAtom,
-  S_oahBooleanAtom thirdBooleanAtom)
+  const S_oahBooleanAtom& secondBooleanAtom,
+  const S_oahBooleanAtom& thirdBooleanAtom)
 {
   oahThreeBooleansAtom* o = new
     oahThreeBooleansAtom (
@@ -2992,8 +2992,8 @@ oahThreeBooleansAtom::oahThreeBooleansAtom (
   const std::string&    description,
   const std::string&    variableName,
   Bool&            booleanVariable,
-  S_oahBooleanAtom secondBooleanAtom,
-  S_oahBooleanAtom thirdBooleanAtom)
+  const S_oahBooleanAtom& secondBooleanAtom,
+  const S_oahBooleanAtom& thirdBooleanAtom)
   : oahBooleanAtom (
       longName,
       shortName,
@@ -3211,7 +3211,7 @@ oahCombinedBooleansAtom::~oahCombinedBooleansAtom ()
 {}
 
 void oahCombinedBooleansAtom::addBooleanAtom (
-  S_oahBooleanAtom booleanAtom)
+  const S_oahBooleanAtom& booleanAtom)
 {
   // sanity check
   mfAssert (
@@ -3398,7 +3398,7 @@ void oahCombinedBooleansAtom::browseData (basevisitor* v)
       i != fBooleanAtomsList.end ();
       ++i
     ) {
-      S_oahBooleanAtom booleanAtom = (*i);
+      const S_oahBooleanAtom& booleanAtom = (*i);
 
       // browse the boolean atom
       oahBrowser<oahBooleanAtom> browser (v);
@@ -3525,7 +3525,7 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      S_oahBooleanAtom booleanAtom = (*i);
+      const S_oahBooleanAtom& booleanAtom = (*i);
 
       os <<
         booleanAtom-> fetchNames () <<
@@ -3618,8 +3618,8 @@ S_oahCommonPrefixBooleansAtom oahCommonPrefixBooleansAtom::create (
   const std::string& description,
   const std::string& shortSuffixDescriptor,
   const std::string& longSuffixDescriptor,
-  S_oahPrefix   shortNamesPrefix,
-  S_oahPrefix   longNamesPrefix)
+  const S_oahPrefix&   shortNamesPrefix,
+  const S_oahPrefix&   longNamesPrefix)
 {
   oahCommonPrefixBooleansAtom* o = new
     oahCommonPrefixBooleansAtom (
@@ -3640,8 +3640,8 @@ oahCommonPrefixBooleansAtom::oahCommonPrefixBooleansAtom (
   const std::string& description,
   const std::string& shortSuffixDescriptor,
   const std::string& longSuffixDescriptor,
-  S_oahPrefix   shortNamesPrefix,
-  S_oahPrefix   longNamesPrefix)
+  const S_oahPrefix&   shortNamesPrefix,
+  const S_oahPrefix&   longNamesPrefix)
   : oahAtom (
       longName,
       shortName,
@@ -3675,7 +3675,7 @@ oahCommonPrefixBooleansAtom::~oahCommonPrefixBooleansAtom ()
 {}
 
 void oahCommonPrefixBooleansAtom::addBooleanAtom (
-  S_oahBooleanAtom booleanAtom)
+  const S_oahBooleanAtom& booleanAtom)
 {
   // sanity check
   mfAssert (
@@ -3990,7 +3990,7 @@ void oahCommonPrefixBooleansAtom::browseData (basevisitor* v)
       i != fBooleanAtomsList.end ();
       ++i
     ) {
-      S_oahBooleanAtom booleanAtom = (*i);
+      const S_oahBooleanAtom& booleanAtom = (*i);
 
       // browse the boolean atom
       oahBrowser<oahBooleanAtom> browser (v);
@@ -10308,7 +10308,7 @@ std::ostream& operator << (std::ostream& os, const S_oahQueryOptionNameAtom& elt
 //______________________________________________________________________________
 S_oahFindStringResult oahFindStringResult::create (
   const std::string& theString,
-  S_oahElement  theElement)
+  const S_oahElement&  theElement)
 {
   oahFindStringResult* o = new
     oahFindStringResult (
@@ -10320,7 +10320,7 @@ S_oahFindStringResult oahFindStringResult::create (
 
 oahFindStringResult::oahFindStringResult (
   const std::string& theString,
-  S_oahElement  theElement)
+  const S_oahElement&  theElement)
 {
   fTheString  = theString;
   fTheElement = theElement;

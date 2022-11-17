@@ -34,7 +34,7 @@ class EXP tracingOahGroup : public oahGroup
   public:
 
     static SMARTP<tracingOahGroup> create (
-      S_oahHandler handler);
+      const S_oahHandler& handler);
 
   protected:
 
@@ -42,7 +42,7 @@ class EXP tracingOahGroup : public oahGroup
     // ------------------------------------------------------
 
     tracingOahGroup (
-      S_oahHandler handler);
+      const S_oahHandler& handler);
 
     virtual               ~tracingOahGroup ();
 
@@ -52,7 +52,7 @@ class EXP tracingOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  createTheTracePrefixes (
-                            S_oahHandler handler);
+                            const S_oahHandler& handler);
 
     void                  initializeTracingOahGroup ();
 
@@ -116,7 +116,7 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  getTracingOah () const
                               { return fTracingOah; }
 
-    S_oahBooleanAtom      getTracingOahBooleanAtom () const
+    const S_oahBooleanAtom&      getTracingOahBooleanAtom () const
                               { return fTracingOahBooleanAtom; }
 
 // replaced by getEarlyTracingOahDetails()
@@ -142,7 +142,7 @@ class EXP tracingOahGroup : public oahGroup
 //     Bool                  getTracePasses () const
 //                               { return fTracePasses; }
 
-    S_oahBooleanAtom      getTracePassesBooleanAtom () const
+    const S_oahBooleanAtom&      getTracePassesBooleanAtom () const
                               { return fTracePassesBooleanAtom; }
 
     // geometry
@@ -611,7 +611,7 @@ class EXP tracingOahGroup : public oahGroup
 
     Bool                  getTraceHarmonies () const
                               { return fTraceHarmonies; }
-    S_oahBooleanAtom      getTraceHarmoniesBooleanAtom () const
+    const S_oahBooleanAtom&      getTraceHarmoniesBooleanAtom () const
                               { return fTraceHarmoniesBooleanAtom; }
 
     Bool                  getTraceHarmoniesDetails () const
@@ -630,7 +630,7 @@ class EXP tracingOahGroup : public oahGroup
 
     Bool                  getTraceFiguredBass () const
                               { return fTraceFiguredBass; }
-    S_oahBooleanAtom      getTraceFiguredBassBooleanAtom () const
+    const S_oahBooleanAtom&      getTraceFiguredBassBooleanAtom () const
                               { return fTraceFiguredBassBooleanAtom; }
 
     void                  setTraceFiguredBassDetails ()
@@ -1061,7 +1061,7 @@ EXP extern S_tracingOahGroup gGlobalTracingOahGroup;
 
 //______________________________________________________________________________
 EXP S_tracingOahGroup createGlobalTracingOahGroup (
-  S_oahHandler handler);
+  const S_oahHandler& handler);
 
 
 }

@@ -35,7 +35,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   std::string       passDescription2,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler);
+  const S_oahHandler& handler);
 
 
 }

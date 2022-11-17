@@ -66,16 +66,16 @@ class EXP msrChord : public msrTupletElement
                             msrDurationKind     chordGraphicDurationKind);
 
     static SMARTP<msrChord> create (
-                            int             inputLineNumber,
-                            const Rational& chordSoundingWholeNotes,
-                            const Rational& chordDisplayWholeNotes,
-                            msrDurationKind chordGraphicDurationKind);
+                            int                 inputLineNumber,
+                            const Rational&     chordSoundingWholeNotes,
+                            const Rational&     chordDisplayWholeNotes,
+                            msrDurationKind     chordGraphicDurationKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
 
     SMARTP<msrChord> createChordNewbornClone (
-                            S_msrPart containingPart);
+                            const S_msrPart& containingPart);
 
   protected:
 
@@ -98,17 +98,14 @@ class EXP msrChord : public msrTupletElement
 
     // uplink to measure
     void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setChordUpLinkToMeasure (measure); }
+                            const S_msrMeasure& measure) override;
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getChordUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
 
     void                  setChordUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
-    S_msrMeasure          getChordUpLinkToMeasure () const
-                            { return fChordUpLinkToMeasure; }
+    S_msrMeasure          getChordUpLinkToMeasure () const;
 
     // uplink to tuplet
     void                  setChordDirectUpLinkToTuplet (
@@ -329,12 +326,12 @@ class EXP msrChord : public msrTupletElement
 
     // harmony
     void                  appendHarmonyToChord (
-                            S_msrHarmony harmony)
+                            const S_msrHarmony& harmony)
                               { fChordHarmoniesList.push_back (harmony); }
 
     // figured bass
     void                  setChordFiguredBass (
-                            S_msrFiguredBass figuredBass)
+                            const S_msrFiguredBass& figuredBass)
                               { fChordFiguredBass = figuredBass; }
 
     const S_msrFiguredBass&
@@ -351,7 +348,7 @@ class EXP msrChord : public msrTupletElement
 
     // positions in measures
     void                  setChordMembersMeasurePosition (
-                            S_msrMeasure    measure,
+                            const S_msrMeasure&    measure,
                             const Rational& measurePosition);
 
   public:
@@ -371,11 +368,11 @@ class EXP msrChord : public msrTupletElement
     // notes
     void                  addFirstNoteToChord (
                             S_msrNote  note,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     void                  addAnotherNoteToChord (
                             S_msrNote note,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     S_msrNote             fetchChordFirstNonGraceNote () const;
 

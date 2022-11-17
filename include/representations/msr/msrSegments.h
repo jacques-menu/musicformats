@@ -34,13 +34,13 @@ class EXP msrSegment : public msrVoiceElement
 
     static SMARTP<msrSegment> create (
                             int        inputLineNumber,
-                            S_msrVoice segmentUpLinkToVoice);
+                            const S_msrVoice& segmentUpLinkToVoice);
 
     SMARTP<msrSegment> createSegmentNewbornClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
     SMARTP<msrSegment> createSegmentDeepClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
   protected:
 
@@ -49,7 +49,7 @@ class EXP msrSegment : public msrVoiceElement
 
                           msrSegment (
                             int        inputLineNumber,
-                            S_msrVoice segmentUpLinkToVoice);
+                            const S_msrVoice& segmentUpLinkToVoice);
 
     virtual               ~msrSegment ();
 
@@ -171,10 +171,10 @@ class EXP msrSegment : public msrVoiceElement
                             const std::string& nextMeasureNumber);
 
     void                  appendMeasureToSegment (
-                            S_msrMeasure measure);
+                            const S_msrMeasure& measure);
 
     void                  prependMeasureToSegment (
-                            S_msrMeasure measure);
+                            const S_msrMeasure& measure);
 
     void                  appendMultipleFullBarRestsToSegment (
                             S_msrMultipleFullBarRests multipleFullBarRests);
@@ -205,7 +205,7 @@ class EXP msrSegment : public msrVoiceElement
     // staff details
 
     void                  appendStaffDetailsToSegment (
-                            S_msrStaffDetails staffDetails);
+                            const S_msrStaffDetails& staffDetails);
 
     // tempo
 
@@ -241,52 +241,52 @@ class EXP msrSegment : public msrVoiceElement
     // harmonies
 
     void                  appendHarmonyToSegment (
-                            S_msrHarmony harmony);
+                            const S_msrHarmony& harmony);
 
     void                  appendHarmonyToSegmentClone (
-                            S_msrHarmony harmony);
+                            const S_msrHarmony& harmony);
 
     // frames
 
     void                  appendFrameToSegment (
-                            S_msrFrame frame);
+                            const S_msrFrame& frame);
 
     void                  appendFrameToSegmentClone (
-                            S_msrFrame frame);
+                            const S_msrFrame& frame);
 
     // figured bass
 
     void                  appendFiguredBassToSegment (
-                            S_msrFiguredBass figuredBass);
+                            const S_msrFiguredBass& figuredBass);
 
     void                  appendFiguredBassToSegmentClone (
-                            S_msrFiguredBass figuredBass);
+                            const S_msrFiguredBass& figuredBass);
 
     // staff change
 
     void                  appendVoiceStaffChangeToSegment (
-                            S_msrVoiceStaffChange voiceStaffChange);
+                            const S_msrVoiceStaffChange& voiceStaffChange);
 
     // notes
 
     void                  appendNoteToSegment (
-                            S_msrNote       note,
+                            const S_msrNote& note,
                             const Rational& partCurrentMeasurePosition);
 
-    void                  appendNoteToSegmentClone (S_msrNote note);
+    void                  appendNoteToSegmentClone (const S_msrNote& note);
 
     // tremolos
 
     void                  appendDoubleTremoloToSegment (
-                            S_msrDoubleTremolo doubleTremolo);
+                            const S_msrDoubleTremolo& doubleTremolo);
 
     // chords
 
-    void                  appendChordToSegment (S_msrChord chord);
+    void                  appendChordToSegment (const S_msrChord& chord);
 
     // tuplets
 
-    void                  appendTupletToSegment (S_msrTuplet tuplet);
+    void                  appendTupletToSegment (const S_msrTuplet& tuplet);
 
     // bar lines
 
@@ -355,15 +355,15 @@ class EXP msrSegment : public msrVoiceElement
     // other elements
 
     void                  prependOtherElementToSegment (
-                            S_msrMeasureElement elem);
+                            const S_msrMeasureElement& elem);
     void                  appendOtherElementToSegment (
-                            S_msrMeasureElement elem);
+                            const S_msrMeasureElement& elem);
 
     // removing elements
 
     void                  removeNoteFromSegment (
                             int       inputLineNumber,
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  removeElementFromSegment (
                             int          inputLineNumber,

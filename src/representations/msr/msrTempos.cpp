@@ -994,7 +994,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoNotesRelationshipEl
 //______________________________________________________________________________
 S_msrTempo msrTempo::createTempoWordsOnly (
   int               inputLineNumber,
-  S_msrMeasure&     upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   S_msrWords        tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1029,7 +1029,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
 
 S_msrTempo msrTempo::createTempoPerMinute (
   int               inputLineNumber,
-  S_msrMeasure&     upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   std::string       tempoPerMinute,
   msrTempoParenthesizedKind
@@ -1068,7 +1068,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
 
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   int               inputLineNumber,
-  S_msrMeasure&     upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   msrDottedDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
@@ -1107,7 +1107,7 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
 
 S_msrTempo msrTempo::createTempoNotesRelationship (
   int               inputLineNumber,
-  S_msrMeasure&     upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   S_msrTempoNotesRelationshipElements
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
@@ -1156,7 +1156,7 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
-  S_msrMeasure&     upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   S_msrWords        tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1188,7 +1188,7 @@ msrTempo::msrTempo (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
-  S_msrMeasure&     upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   std::string       tempoPerMinute,
   msrTempoParenthesizedKind
@@ -1213,7 +1213,7 @@ msrTempo::msrTempo (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
-  S_msrMeasure&     upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   msrDottedDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
@@ -1238,7 +1238,7 @@ msrTempo::msrTempo (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
-  S_msrMeasure&     upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   S_msrTempoNotesRelationshipElements
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind

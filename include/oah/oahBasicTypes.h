@@ -213,9 +213,9 @@ void optionsNameAndValueVectorsPlusEquals (
 //
 //     static S_oahOptionsNamesAndValuesVector
 //                           mergeOptionsNamesAndValues (
-//                             S_oahOptionsNamesAndValuesVector
+//                             const S_oahOptionsNamesAndValuesVector&
 //                               optionsNamesAndValues1,
-//                             S_oahOptionsNamesAndValuesVector
+//                             const S_oahOptionsNamesAndValuesVector&
 //                               optionsNamesAndValues2);
 //
 //   public:
@@ -244,7 +244,7 @@ void optionsNameAndValueVectorsPlusEquals (
 //                             const std::string& optionValue);
 //
 //     void                  appendOptionNameAndValue (
-//                             S_oahOption
+//                             const S_oahOption&
 //                               option);
 //
 //   public:
@@ -503,7 +503,7 @@ class EXP oahAtom : public oahElement
 
     // uplinks
     void                  setUpLinkToSubGroup (
-                            S_oahSubGroup subGroup);
+                            const S_oahSubGroup& subGroup);
 
     S_oahSubGroup         getUpLinkToSubGroup () const
                               { return fUpLinkToSubGroup; }
@@ -528,7 +528,7 @@ class EXP oahAtom : public oahElement
 
     // atoms handling
     void                  appendAtomToElementsList (
-                            S_oahHandler handler);
+                            const S_oahHandler& handler);
 
     void                  registerAtomAsBeingUsed ();
 
@@ -1001,7 +1001,7 @@ class EXP oahSubGroup : public oahElement
                             const std::string&       shortName,
                             const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahGroup               upLinkToGroup);
+                            const S_oahGroup&        upLinkToGroup);
 
     static SMARTP<oahSubGroup> createWithNames (
                             const std::string&       subGroupHeader,
@@ -1009,7 +1009,7 @@ class EXP oahSubGroup : public oahElement
                             const std::string&       shortName,
                             const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahGroup               upLinkToGroup);
+                            const S_oahGroup&        upLinkToGroup);
 
   protected:
 
@@ -1022,7 +1022,7 @@ class EXP oahSubGroup : public oahElement
                             const std::string&       shortName,
                             const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahGroup               upLinkToGroup);
+                            const S_oahGroup&        upLinkToGroup);
 
     virtual               ~oahSubGroup ();
 
@@ -1032,7 +1032,7 @@ class EXP oahSubGroup : public oahElement
     // ------------------------------------------------------
 
     void                  setUpLinkToGroup (
-                            S_oahGroup group)
+                            const S_oahGroup& group)
                               { fUpLinkToGroup = group; }
 
     S_oahGroup            getUpLinkToGroup () const
@@ -1067,13 +1067,13 @@ class EXP oahSubGroup : public oahElement
     S_oahHandler          fetchSubGroupUpLinkToHandler () const;
 
     void                  appendSubGroupToElementsList (
-                            S_oahHandler handler);
+                            const S_oahHandler& handler);
 
     void                  registerNamesInSubGroupToTheNamesToElementsMap (
-                            S_oahHandler handler);
+                            const S_oahHandler& handler);
 
     void                  appendAtomToSubGroup (
-                            S_oahAtom oahAtom);
+                            const S_oahAtom& oahAtom);
 
     S_oahElement          fetchOptionByNameInSubGroup (
                             const std::string& name);
@@ -1117,13 +1117,13 @@ class EXP oahSubGroup : public oahElement
 
     void                  printSubGroupAndAtomHelp (
                             std::ostream&  os,
-                            S_oahAtom targetAtom) const;
+                            const S_oahAtom& targetAtom) const;
 
     void                  printOptionsSummary (std::ostream& os) const;
 
     void                  printSubGroupSpecificHelpOrOptionsSummary (
                             std::ostream&      os,
-                            S_oahSubGroup subGroup) const;
+                            const S_oahSubGroup& subGroup) const;
 
     Bool                  findStringInSubGroup (
                             const std::string&     lowerCaseString,
@@ -1179,7 +1179,7 @@ class EXP oahGroup : public oahElement
                             const std::string&       shortName,
                             const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahHandler             groupUpLinkToHandler);
+                            const S_oahHandler&             groupUpLinkToHandler);
 
     static SMARTP<oahGroup> createWithNames (
                             const std::string&       header,
@@ -1194,7 +1194,7 @@ class EXP oahGroup : public oahElement
                             const std::string&       shortName,
                             const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahHandler             groupUpLinkToHandler);
+                            const S_oahHandler&             groupUpLinkToHandler);
 
   protected:
 
@@ -1214,7 +1214,7 @@ class EXP oahGroup : public oahElement
                             const std::string&       shortName,
                             const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahHandler             groupUpLinkToHandler);
+                            const S_oahHandler&             groupUpLinkToHandler);
 
     virtual               ~oahGroup ();
 
@@ -1225,7 +1225,7 @@ class EXP oahGroup : public oahElement
 
     // uplink
     void                  setUpLinkToHandler (
-                            S_oahHandler upLinkToHandler);
+                            const S_oahHandler& upLinkToHandler);
 
     S_oahHandler          getUpLinkToHandler () const
                               { return fUpLinkToHandler; }
@@ -1276,13 +1276,13 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
     void                  appendGroupToElementsList (
-                            S_oahHandler handler);
+                            const S_oahHandler& handler);
 
     void                  registerNamesInGroupToTheNamesToElementsMap (
-                            S_oahHandler handler);
+                            const S_oahHandler& handler);
 
     void                  appendSubGroupToGroup (
-                            S_oahSubGroup subGroup);
+                            const S_oahSubGroup& subGroup);
 
     S_oahElement          fetchOptionByNameInGroup (
                             const std::string& name);
@@ -1291,7 +1291,7 @@ class EXP oahGroup : public oahElement
 
     virtual void          handleAtomValue (
                             std::ostream&      os,
-                            S_oahAtom     atom,
+                            const S_oahAtom&     atom,
                             const std::string& theString);
 
     // multiComponent
@@ -1324,18 +1324,18 @@ class EXP oahGroup : public oahElement
 
     void                  printGroupAndSubGroupHelp (
                             std::ostream&      os,
-                            S_oahSubGroup targetSubGroup) const;
+                            const S_oahSubGroup& targetSubGroup) const;
 
     void                  printGroupAndSubGroupAndAtomHelp (
                             std::ostream&      os,
-                            S_oahSubGroup targetSubGroup,
-                            S_oahAtom     targetAtom) const;
+                            const S_oahSubGroup& targetSubGroup,
+                            const S_oahAtom&     targetAtom) const;
 
     void                  printOptionsSummary (std::ostream& os) const;
 
     void                  printGroupAndSubGroupSpecificHelp (
                             std::ostream&      os,
-                            S_oahSubGroup subGroup) const;
+                            const S_oahSubGroup& subGroup) const;
 
     void                  findStringInGroup (
                             const std::string&     lowerCaseString,
@@ -1553,15 +1553,15 @@ class EXP oahHandler : public oahFindableElement
                             const std::string& name);
 
     void                  registerPrefixInHandler (
-                            S_oahPrefix prefix);
+                            const S_oahPrefix& prefix);
 
     void                  appendGroupToHandler (
-                            S_oahGroup group);
+                            const S_oahGroup& group);
     void                  prependGroupToHandler (
-                            S_oahGroup group);
+                            const S_oahGroup& group);
 
     void                  appendElementToElementsList (
-                            S_oahElement element);
+                            const S_oahElement& element);
 
     S_oahPrefix           fetchNameInPrefixesMap (
                             const std::string& prefixName) const;
@@ -1570,7 +1570,7 @@ class EXP oahHandler : public oahFindableElement
                             const std::string& name) const;
 
     void                  registerElementNamesInHandler (
-                            S_oahElement element);
+                            const S_oahElement& element);
 
     // options and arguments handling
     oahElementHelpOnlyKind
@@ -1642,7 +1642,7 @@ class EXP oahHandler : public oahFindableElement
 
     void                  printHandlerAndGroupAndSubGroupSpecificHelp (
                             std::ostream&      os,
-                            S_oahSubGroup subGroup) const;
+                            const S_oahSubGroup& subGroup) const;
 
     void                  printNameIntrospectiveHelp (
                             std::ostream&      os,
@@ -1701,12 +1701,12 @@ class EXP oahHandler : public oahFindableElement
     void                  registerNamesInHandlerToTheNamesToElementsMap ();
 
     void                  registerOahElementUse (
-                            S_oahElement  elementUsed,
+                            const S_oahElement&  elementUsed,
                             const std::string& nameUsed,
                             const std::string& valueUsed);
 
     void                  registerGroupUse (
-                            S_oahGroup    groupUsed,
+                            const S_oahGroup&    groupUsed,
                             const std::string& nameUsed,
                             const std::string& valueUsed)
                               {
@@ -1717,7 +1717,7 @@ class EXP oahHandler : public oahFindableElement
                               }
 
     void                  registerSubGroupUse (
-                            S_oahSubGroup subGroupUsed,
+                            const S_oahSubGroup& subGroupUsed,
                             const std::string& nameUsed,
                             const std::string& valueUsed)
                               {
@@ -1728,12 +1728,12 @@ class EXP oahHandler : public oahFindableElement
                               }
 
     void                  registerAtomUse (
-                            S_oahAtom     atomUsed,
+                            const S_oahAtom&     atomUsed,
                             const std::string& nameUsed,
                             const std::string& valueUsed);
 
     void                  registerOahElementUseInLaunchCommand (
-                            S_oahElement  elementUsed,
+                            const S_oahElement&  elementUsed,
                             const std::string& nameUsed,
                             const std::string& valueUsed);
 
@@ -1774,12 +1774,12 @@ class EXP oahHandler : public oahFindableElement
                             const std::string& valueUsed);
 
     void                  handleKnownOptionsVectorElement (
-                            S_oahElement  element,
+                            const S_oahElement&  element,
                             const std::string& optionNameUsed,
                             const std::string& valueUsed);
 
     void                  handleKnownOptionsVectorAtom (
-                            S_oahAtom     atom,
+                            const S_oahAtom&     atom,
                             const std::string& optionNameUsed,
                             const std::string& valueUsed);
 
@@ -1791,11 +1791,11 @@ class EXP oahHandler : public oahFindableElement
                             const std::string& optionName);
 
     void                  handleKnownArgvAtom (
-                            S_oahAtom     atom,
+                            const S_oahAtom&     atom,
                             const std::string& optionNameUsed);
 
     void                  handleKnownArgvElement (
-                            S_oahElement  element,
+                            const S_oahElement&  element,
                             const std::string& optionNameUsed);
 
     void                  checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI

@@ -442,7 +442,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 // //______________________________________________________________________________
 // void msrTuplet::appendNoteToTuplet (
 //   S_msrNote  note,
-//   S_msrVoice voice)
+//   const S_msrVoice& voice)
 // {
 //   int inputLineNumber =
 //     note->getInputLineNumber ();
@@ -505,7 +505,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //   --gIndenter;
 // }
 //
-// void msrTuplet::appendChordToTuplet (S_msrChord chord)
+// void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
@@ -549,7 +549,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 // */
 // }
 //
-// void msrTuplet::appendTupletToTuplet (S_msrTuplet tuplet)
+// void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
@@ -589,7 +589,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //     tuplet->getTupletDisplayWholeNotes ();
 // }
 //
-// void msrTuplet::appendTupletToTupletClone (S_msrTuplet tuplet)
+// void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 // {
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceTuplets ()) {

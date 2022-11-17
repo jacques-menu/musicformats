@@ -123,7 +123,7 @@ int main (int argc, char* argv[])
     // create an xml2xml insider OAH handler
     // ------------------------------------------------------
 
-    S_xml2xmlInsiderHandler
+    const S_xml2xmlInsiderHandler&
       insiderOahHandler =
         xml2xmlInsiderHandler::create (
           serviceName,

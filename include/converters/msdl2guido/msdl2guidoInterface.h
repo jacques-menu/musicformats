@@ -29,7 +29,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
 EXP mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
   std::string       inputSourceName,
   std::istream&     inputStream,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 
@@ -42,7 +42,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
 
 EXP mfMusicformatsErrorKind msdlFile2guidoWithHandler (
   std::string       fileName,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 
@@ -55,7 +55,7 @@ EXP mfMusicformatsErrorKind convertMsdlString2guidoWithOptionsAndArguments (
 
 EXP mfMusicformatsErrorKind msdlString2guidoWithHandler (
   const char*  buffer,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 

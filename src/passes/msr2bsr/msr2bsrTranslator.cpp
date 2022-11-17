@@ -1650,7 +1650,7 @@ void msr2bsrTranslator::visitEnd (S_msrTempo& elt)
 
 //________________________________________________________________________
 bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkInNeeded (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   bsrNoteOctaveIsNeeded
     result = bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededNo;
@@ -1794,7 +1794,7 @@ bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkInNeeded (
   return result;
 }
 
-void msr2bsrTranslator::createBsrForNote (S_msrNote note)
+void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();

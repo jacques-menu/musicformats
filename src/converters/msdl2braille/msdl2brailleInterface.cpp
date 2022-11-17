@@ -63,7 +63,7 @@ namespace MusicFormats
 mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
   std::string        inputSourceName,
   std::istream&      inputStream,
-  S_oahHandler  handler,
+  const S_oahHandler&  handler,
   std::ostream& out,
   std::ostream& err)
 {
@@ -501,7 +501,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
   // ------------------------------------------------------
 
   // create an insider msdl2braille OAH handler
-  S_msdl2brailleInsiderHandler
+  const S_msdl2brailleInsiderHandler&
     insiderOahHandler =
       msdl2brailleInsiderHandler::create (
         serviceName,
@@ -638,7 +638,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
 
 mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
   std::string        fileName,
-  S_oahHandler  handler,
+  const S_oahHandler&  handler,
   std::ostream& out,
   std::ostream& err)
 {
@@ -704,7 +704,7 @@ EXP mfMusicformatsErrorKind convertMsdlString2brailleWithOptionsAndArguments (
 
 mfMusicformatsErrorKind convertMsdlString2brailleWithHandler (
   const char*   buffer,
-  S_oahHandler  handler,
+  const S_oahHandler&  handler,
   std::ostream& out,
   std::ostream& err)
 {

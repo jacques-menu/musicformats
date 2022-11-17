@@ -92,7 +92,7 @@ class EXP displayOahGroup : public oahGroup
     Bool                  getDisplayCPUusage () const
                               { return fDisplayCPUusage;  }
 
-    S_oahBooleanAtom      getDisplayCPUusageAtom () const
+    const S_oahBooleanAtom&      getDisplayCPUusageAtom () const
                               { return fDisplayCPUusageAtom;  }
 
   public:

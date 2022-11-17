@@ -50,9 +50,9 @@ namespace MusicFormats
 int msrMeasure::gGlobalMeasureDebugNumber = 0;
 
 S_msrMeasure msrMeasure::create (
-  int                inputLineNumber,
-  const std::string& measureNumber,
-  S_msrSegment       measureUpLinkToSegment)
+  int                 inputLineNumber,
+  const std::string&  measureNumber,
+  const S_msrSegment& measureUpLinkToSegment)
 {
   msrMeasure* o =
     new msrMeasure (
@@ -64,9 +64,9 @@ S_msrMeasure msrMeasure::create (
 }
 
 msrMeasure::msrMeasure (
-  int                inputLineNumber,
-  const std::string& measureNumber,
-  S_msrSegment&      measureUpLinkToSegment)
+  int                 inputLineNumber,
+  const std::string&  measureNumber,
+  const S_msrSegment& measureUpLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
   // sanity check
@@ -256,7 +256,7 @@ S_msrScore msrMeasure::fetchMeasureUpLinkToScore () const
 }
 
 S_msrMeasure msrMeasure::createMeasureNewbornClone (
-  S_msrSegment containingSegment)
+  const S_msrSegment& containingSegment)
 {
   // sanity check
   mfAssert (
@@ -356,7 +356,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
 }
 
 S_msrMeasure msrMeasure::createMeasureDeepClone (
-  S_msrSegment containingSegment)
+  const S_msrSegment& containingSegment)
 {
   S_msrVoice
     containingSegmentUpLinkToVoice =
@@ -546,8 +546,8 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 }
 
 S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
-  S_msrSegment  containingSegment,
-  const std::string& measureNumber)
+  const S_msrSegment& containingSegment,
+  const std::string&  measureNumber)
 {
   S_msrVoice
     containingSegmentUpLinkToVoice =
@@ -908,7 +908,7 @@ void msrMeasure::setMeasurePuristNumber (
 //   fMeasureVoicePosition += wholeNotesDelta;
 // }
 
-void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
+void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
 {
   int inputLineNumber =
     elem->getInputLineNumber ();
@@ -965,9 +965,9 @@ if (true) // JMI CAFE v0.9.66
 }
 
 void msrMeasure::insertElementInMeasureBeforeIterator (
-  int                                 inputLineNumber,
+  int                                      inputLineNumber,
   std::list<S_msrMeasureElement>::iterator iter,
-  S_msrMeasureElement                 elem)
+  const S_msrMeasureElement&               elem)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -1013,7 +1013,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 }
 
 void msrMeasure::appendElementAtTheEndOfMeasure (
-  S_msrMeasureElement elem)
+  const S_msrMeasureElement& elem)
 {
   int inputLineNumber =
     elem->getInputLineNumber ();
@@ -1206,7 +1206,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
 void msrMeasure::insertElementAtMeasurePosition (
   int                 inputLineNumber,
   const Rational&     measurePosition,
-  S_msrMeasureElement elem)
+  const S_msrMeasureElement& elem)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -2113,14 +2113,14 @@ void msrMeasure::appendBarCheckToMeasure (S_msrBarCheck barCheck)
 }
 
 void msrMeasure::appendVoiceStaffChangeToMeasure (
-  S_msrVoiceStaffChange voiceStaffChange)
+  const S_msrVoiceStaffChange& voiceStaffChange)
 {
   // append it to the measure elements list
   appendElementToMeasure (voiceStaffChange);
 }
 
 void msrMeasure::appendNoteToMeasure (
-  S_msrNote       note,
+  const S_msrNote&       note,
   const Rational& partCurrentMeasurePosition)
 {
   int inputLineNumber =
@@ -2264,7 +2264,7 @@ void msrMeasure::appendNoteToMeasure (
 }
 
 void msrMeasure::appendNoteOrPaddingToMeasure (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2378,7 +2378,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 }
 
 void msrMeasure::accountForTupletMemberNoteDurationInMeasure (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2424,7 +2424,7 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure (
     noteSoundingWholeNotes);
 }
 
-void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (S_msrNote note)
+void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2493,7 +2493,7 @@ if (false) // JMI kMeasureKindMusicallyEmpty issue, see basic/EmptyMeasureInAVoi
   --gIndenter;
 }
 
-void msrMeasure::appendNoteToMeasureClone (S_msrNote note)
+void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2567,7 +2567,7 @@ void msrMeasure::appendNoteToMeasureClone (S_msrNote note)
 }
 
 void msrMeasure::appendDoubleTremoloToMeasure (
-  S_msrDoubleTremolo doubleTremolo)
+  const S_msrDoubleTremolo& doubleTremolo)
 {
   int inputLineNumber =
     doubleTremolo->getInputLineNumber ();
@@ -2638,7 +2638,7 @@ void msrMeasure::appendDoubleTremoloToMeasure (
   --gIndenter;
 }
 
-void msrMeasure::appendChordToMeasure (S_msrChord chord)
+void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
 {
   int inputLineNumber =
     chord->getInputLineNumber ();
@@ -2669,7 +2669,7 @@ void msrMeasure::appendChordToMeasure (S_msrChord chord)
 //     setChordMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
-//       "msrMeasure::appendChordToMeasure (S_msrChord chord)");
+//       "msrMeasure::appendChordToMeasure (const S_msrChord& chord)");
 
   // append the chord to the measure elements list
   appendElementToMeasure (chord);
@@ -2693,7 +2693,7 @@ void msrMeasure::appendChordToMeasure (S_msrChord chord)
   fMeasureContainsMusic = true;
 }
 
-void msrMeasure::appendTupletToMeasure (S_msrTuplet tuplet)
+void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2724,7 +2724,7 @@ void msrMeasure::appendTupletToMeasure (S_msrTuplet tuplet)
 //     setTupletMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
-//       "msrMeasure::appendTupletToMeasure (S_msrChord chord)");
+//       "msrMeasure::appendTupletToMeasure (const S_msrChord& chord)");
 
   // populate uplink to measure
   tuplet->setMeasureElementUpLinkToMeasure (this);
@@ -2741,7 +2741,7 @@ void msrMeasure::appendTupletToMeasure (S_msrTuplet tuplet)
   --gIndenter;
 }
 
-void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
+void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
 {
   int inputLineNumber =
     harmony->getInputLineNumber ();
@@ -2778,7 +2778,7 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
 //     setMeasureElementMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
-//       "msrMeasure::appendHarmonyToMeasure (S_msrChord chord)");
+//       "msrMeasure::appendHarmonyToMeasure (const S_msrChord& chord)");
 
   // append the harmony to the measure elements list
   // DON'T call 'appendElementToMeasure (harmony)':
@@ -2803,7 +2803,7 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
   --gIndenter;
 }
 
-void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
+void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
 {
   int inputLineNumber =
     harmony->getInputLineNumber ();
@@ -2840,7 +2840,7 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
 //     setMeasureElementMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
-//       "msrMeasure::appendHarmonyToMeasureClone (S_msrChord chord)");
+//       "msrMeasure::appendHarmonyToMeasureClone (const S_msrChord& chord)");
 
   // append the harmony to the measure elements list
   // DON'T call 'appendElementToMeasure (harmony)':
@@ -2866,7 +2866,7 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
 }
 
 void msrMeasure::appendFiguredBassToMeasure (
-  S_msrFiguredBass figuredBass)
+  const S_msrFiguredBass& figuredBass)
 {
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
@@ -2901,7 +2901,7 @@ void msrMeasure::appendFiguredBassToMeasure (
 //     setFiguredBassMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
-//       "msrMeasure::appendFiguredBassToMeasure (S_msrChord chord)");
+//       "msrMeasure::appendFiguredBassToMeasure (const S_msrChord& chord)");
 
 //* JMI
   // append the figured bass to the measure elements list
@@ -2932,7 +2932,7 @@ void msrMeasure::appendFiguredBassToMeasure (
 }
 
 void msrMeasure::appendFiguredBassToMeasureClone (
-  S_msrFiguredBass figuredBass)
+  const S_msrFiguredBass& figuredBass)
 {
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
@@ -2966,7 +2966,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
 //     setFiguredBassMeasurePosition (
 //       this,
 //       fCurrentMeasureWholeNotesDuration,
-//       "msrMeasure::appendFiguredBassToMeasureClone (S_msrChord chord)");
+//       "msrMeasure::appendFiguredBassToMeasureClone (const S_msrChord& chord)");
 
   // get figuredBass sounding whole notes
   Rational
@@ -2988,7 +2988,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
 S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
   int             inputLineNumber,
   const Rational& duration,
-  S_msrVoice      voice)
+  const S_msrVoice&      voice)
 {
 #ifdef TRACING_IS_ENABLED
   if (
@@ -3303,7 +3303,7 @@ void msrMeasure::appendPageBreakToMeasure (S_msrPageBreak pageBreak)
 }
 
 void msrMeasure::appendStaffDetailsToMeasure (
-  S_msrStaffDetails staffDetails)
+  const S_msrStaffDetails& staffDetails)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
@@ -3329,7 +3329,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
   appendElementToMeasure (barNumberCheck);
 }
 
-void msrMeasure::prependOtherElementToMeasure (S_msrMeasureElement elem)
+void msrMeasure::prependOtherElementToMeasure (const S_msrMeasureElement& elem)
 {
   fMeasureElementsList.push_front (elem); // JMI
 
@@ -3337,7 +3337,7 @@ void msrMeasure::prependOtherElementToMeasure (S_msrMeasureElement elem)
   fMeasureContainsMusic = true;
 }
 
-void msrMeasure::appendOtherElementToMeasure  (S_msrMeasureElement elem)
+void msrMeasure::appendOtherElementToMeasure  (const S_msrMeasureElement& elem)
 {
   appendElementToMeasure (elem);
 
@@ -3347,7 +3347,7 @@ void msrMeasure::appendOtherElementToMeasure  (S_msrMeasureElement elem)
 
 void msrMeasure::removeNoteFromMeasure (
   int       inputLineNumber,
-  S_msrNote note)
+  const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -3518,7 +3518,7 @@ void msrMeasure::removeElementFromMeasure (
 }
 
 void msrMeasure::appendNoteToMeasureNotesFlatList (
-  S_msrNote note)
+  const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
@@ -4288,7 +4288,7 @@ void msrMeasure::finalizeRegularMeasure (
 
 void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
   int          inputLineNumber,
-  S_msrVoice   voice,
+  const S_msrVoice&   voice,
   S_msrHarmony currentHarmony)
 {
   // currentHarmony is the first harmony in the measure
@@ -4399,7 +4399,7 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 
 void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
   int          inputLineNumber,
-  S_msrVoice   voice,
+  const S_msrVoice&   voice,
   S_msrHarmony previousHarmony,
   S_msrHarmony currentHarmony)
 {
@@ -4495,7 +4495,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 
 void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
   int          inputLineNumber,
-  S_msrVoice   voice,
+  const S_msrVoice&   voice,
   S_msrHarmony currentHarmony)
 {
   // does currentHarmony overflow the measure?
@@ -4861,7 +4861,7 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
 
 void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
   int           inputLineNumber,
-  S_msrVoice    voice,
+  const S_msrVoice&    voice,
   S_msrHarmony  previousHarmony,
   S_msrHarmony  currentHarmony,
   const std::string& context)
@@ -4942,7 +4942,7 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
 
 void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
   int                     inputLineNumber,
-  S_msrVoice              voice,
+  const S_msrVoice&              voice,
   std::list<S_msrMeasureElement>::iterator&
                           i,
   S_msrFiguredBass previousFiguredBass,
@@ -5023,7 +5023,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
 
 void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
   int                    inputLineNumber,
-  S_msrVoice              voice,
+  const S_msrVoice&              voice,
   std::list<S_msrMeasureElement>::iterator&
                           i,
   S_msrFiguredBass previousFiguredBass,
@@ -5188,7 +5188,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
 void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
   int                     inputLineNumber,
-  S_msrVoice              voice,
+  const S_msrVoice&              voice,
   S_msrFiguredBass currentFiguredBass)
 {
   // does currentFiguredBass overflow the measure?
@@ -5899,8 +5899,8 @@ void msrMeasure::finalizeMeasure (
 
 void msrMeasure::finalizeMeasureClone (
   int          inputLineNumber,
-  S_msrMeasure originalMeasure,
-  S_msrVoice   voiceClone)
+  const S_msrMeasure& originalMeasure,
+  const S_msrVoice&   voiceClone)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {

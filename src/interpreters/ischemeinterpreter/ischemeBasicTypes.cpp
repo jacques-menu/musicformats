@@ -53,7 +53,7 @@ ischemeOptionsBlock::~ischemeOptionsBlock ()
 {}
 
 void ischemeOptionsBlock::registerOptionsInOptionsBlock (
-  S_oahOption option,
+  const S_oahOption& option,
   ischemeDriver& drv)
 {
   if (gGlobalIschemeInterpreterOahGroup->getTraceOptionsBlocks ()) {

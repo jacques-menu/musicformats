@@ -7194,7 +7194,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMidiTempo& elt)
 /* JMI
 void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
   S_msrPart            partClone,
-  S_msrVoice           voiceClone,
+  const S_msrVoice&           voiceClone,
   S_msrGraceNotesGroup skipGraceNotesGroup)
 {
 #ifdef TRACING_IS_ENABLED
@@ -7231,7 +7231,7 @@ void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
       j!=staffAllVoicesVector.end ();
       ++j
     ) {
-      S_msrVoice voice = (*j);
+      const S_msrVoice& voice = (*j);
 
       if (voice != voiceClone) {
         // prepend skip grace notes to voice JMI

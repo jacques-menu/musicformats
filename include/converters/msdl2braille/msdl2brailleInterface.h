@@ -29,7 +29,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
 EXP mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
   std::string       inputSourceName,
   std::istream&     inputStream,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 
@@ -42,7 +42,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
 
 EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
   std::string       fileName,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 
@@ -55,7 +55,7 @@ EXP mfMusicformatsErrorKind convertMsdlString2brailleWithOptionsAndArguments (
 
 EXP mfMusicformatsErrorKind convertMsdlString2brailleWithHandler (
   const char*  buffer,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 

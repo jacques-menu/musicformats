@@ -27,21 +27,21 @@ EXP mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
   const char*  fileName,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler);
+  const S_oahHandler& handler);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMusicxmlFd2brailleWithHandler (
   FILE*        fd,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler);
+  const S_oahHandler& handler);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
   const char*  buffer,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler);
+  const S_oahHandler& handler);
 
 
 }

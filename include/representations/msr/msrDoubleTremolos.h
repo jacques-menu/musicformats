@@ -55,7 +55,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     static SMARTP<msrDoubleTremolo> create (
                             int                       inputLineNumber,
-                            S_msrMeasure&             upLinkToMeasure,
+                            const S_msrMeasure&              upLinkToMeasure,
                             msrDoubleTremoloKind      doubleTremoloKind,
                             msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
                             int                       doubleTremoloMarksNumber,
@@ -81,7 +81,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
                           msrDoubleTremolo (
                             int                       inputLineNumber,
-                            S_msrMeasure&             upLinkToMeasure,
+                            const S_msrMeasure&              upLinkToMeasure,
                             msrDoubleTremoloKind      doubleTremoloKind,
                             msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
                             int                       doubleTremoloMarksNumber,
@@ -173,10 +173,10 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // double tremolo placement
 
     void                  setDoubleTremoloNoteFirstElement (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  setDoubleTremoloChordFirstElement (
-                            S_msrChord chord);
+                            const S_msrChord& chord);
 
     // double tremolo first element
 
@@ -186,10 +186,10 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // double tremolo second element
 
     void                  setDoubleTremoloNoteSecondElement (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  setDoubleTremoloChordSecondElement (
-                            S_msrChord chord);
+                            const S_msrChord& chord);
 
     S_msrElement          getDoubleTremoloSecondElement () const
                               { return fDoubleTremoloSecondElement; }

@@ -53,7 +53,7 @@ mfslOptionsBlock::~mfslOptionsBlock ()
 {}
 
 void mfslOptionsBlock::registerOptionsInOptionsBlock (
-  S_oahOption option,
+  const S_oahOption& option,
   mfslDriver& drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceOptionsBlocks ()) {

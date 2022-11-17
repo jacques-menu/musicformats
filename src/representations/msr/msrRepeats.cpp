@@ -88,7 +88,7 @@ msrRepeatCommonPart::~msrRepeatCommonPart ()
 
 void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
   int           inputLineNumber,
-  S_msrSegment  segment,
+  const S_msrSegment&  segment,
   const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -141,7 +141,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
 
 void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
   int                inputLineNumber,
-  S_msrMeasureRepeat measureRepeat,
+  const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -193,7 +193,7 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
 
 void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
   int               inputLineNumber,
-  S_msrVoiceElement voiceElement,
+  const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -511,9 +511,9 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatCommonPart& elt)
 //______________________________________________________________________________
 S_msrRepeatEnding msrRepeatEnding::create (
   int                 inputLineNumber,
-  const std::string&       repeatEndingNumber, // may be "1, 2"
+  const std::string&  repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind repeatEndingKind,
-  S_msrRepeat         upLinkToRepeat)
+  const S_msrRepeat&  upLinkToRepeat)
 {
   msrRepeatEnding* o =
     new msrRepeatEnding (
@@ -527,9 +527,9 @@ S_msrRepeatEnding msrRepeatEnding::create (
 
 msrRepeatEnding::msrRepeatEnding (
   int                 inputLineNumber,
-  const std::string&       repeatEndingNumber, // may be "1, 2"
+  const std::string&  repeatEndingNumber, // may be "1, 2"
   msrRepeatEndingKind repeatEndingKind,
-  S_msrRepeat         upLinkToRepeat)
+  const S_msrRepeat&  upLinkToRepeat)
     : msrElement (inputLineNumber)
 {
   fRepeatEndingNumber = repeatEndingNumber;
@@ -547,7 +547,7 @@ msrRepeatEnding::~msrRepeatEnding ()
 
 void msrRepeatEnding::appendSegmentToRepeatEnding (
   int           inputLineNumber,
-  S_msrSegment  segment,
+  const S_msrSegment&  segment,
   const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -597,7 +597,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
 
 void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
   int                inputLineNumber,
-  S_msrMeasureRepeat measureRepeat,
+  const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -649,7 +649,7 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
 
 void msrRepeatEnding::appendVoiceElementToRepeatEnding (
   int               inputLineNumber,
-  S_msrVoiceElement voiceElement,
+  const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -944,7 +944,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt)
 S_msrRepeat msrRepeat::create (
   int        inputLineNumber,
   int        repeatTimes,
-  S_msrVoice upLinkToVoice)
+  const S_msrVoice& upLinkToVoice)
 {
   msrRepeat* o =
     new msrRepeat (
@@ -958,7 +958,7 @@ S_msrRepeat msrRepeat::create (
 msrRepeat::msrRepeat (
   int        inputLineNumber,
   int        repeatTimes,
-  S_msrVoice upLinkToVoice)
+  const S_msrVoice& upLinkToVoice)
     : msrVoiceElement (inputLineNumber)
 {
   // sanity check
@@ -982,7 +982,7 @@ msrRepeat::msrRepeat (
 }
 
 S_msrRepeat msrRepeat::createRepeatNewbornClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -1198,7 +1198,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 
 void msrRepeat::appendSegmentToRepeat (
   int           inputLineNumber,
-  S_msrSegment  segment,
+  const S_msrSegment&  segment,
   const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1366,7 +1366,7 @@ void msrRepeat::appendRepeatToRepeat (
 
 void msrRepeat::appendMeasureRepeatToRepeat (
   int                inputLineNumber,
-  S_msrMeasureRepeat measureRepeat,
+  const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
 #ifdef TRACING_IS_ENABLED

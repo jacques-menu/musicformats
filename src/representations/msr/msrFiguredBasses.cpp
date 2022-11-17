@@ -37,7 +37,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrBassFigure msrBassFigure::create (
   int                     inputLineNumber,
-  S_msrPart&              figureUpLinkToPart,
+  const S_msrPart&        figureUpLinkToPart,
   msrBassFigurePrefixKind figurePrefixKind,
   int                     figureNumber,
   msrBassFigureSuffixKind figureSuffixKind)
@@ -55,7 +55,7 @@ S_msrBassFigure msrBassFigure::create (
 
 msrBassFigure::msrBassFigure (
   int                     inputLineNumber,
-  S_msrPart&              figureUpLinkToPart,
+  const S_msrPart&        figureUpLinkToPart,
   msrBassFigurePrefixKind figurePrefixKind,
   int                     figureNumber,
   msrBassFigureSuffixKind figureSuffixKind)
@@ -90,7 +90,7 @@ msrBassFigure::~msrBassFigure ()
 {}
 
 S_msrBassFigure msrBassFigure::createFigureNewbornClone (
-  S_msrPart& containingPart)
+  const S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -121,7 +121,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
 }
 
 S_msrBassFigure msrBassFigure::createFigureDeepClone (
-  S_msrPart& containingPart)
+  const S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -449,7 +449,7 @@ msrFiguredBass::~msrFiguredBass ()
 {}
 
 S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
-  S_msrVoice& containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {

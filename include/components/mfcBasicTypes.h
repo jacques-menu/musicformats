@@ -167,7 +167,9 @@ class EXP mfcVersionDescr : public smartable
     std::string           getVersionDate () const
                               { return fVersionDate; }
 
-    const std::list<std::string>&   getVersionDescriptionItems () const
+    const std::list<std::string>&
+
+                          getVersionDescriptionItems () const
                               { return fVersionDescriptionItems; }
 
   public:
@@ -225,7 +227,7 @@ class EXP mfcVersionsHistory : public smartable
     // ------------------------------------------------------
 
     void                  appendVersionDescrToHistory (
-                            S_mfcVersionDescr versionDescr);
+                            const S_mfcVersionDescr& versionDescr);
 
     S_mfcVersionDescr     fetchMostRecentVersion () const;
 
@@ -320,7 +322,7 @@ class EXP mfcComponent : public smartable
                               }
 
     void                  appendVersionDescrToComponent (
-                            S_mfcVersionDescr versionDescr);
+                            const S_mfcVersionDescr& versionDescr);
 
   public:
 
@@ -508,10 +510,10 @@ class EXP mfcMultiComponent : public mfcComponent
     // ------------------------------------------------------
 
     void                  appendRepresentationToMultiComponent (
-                            S_mfcRepresentationComponent format);
+                            const S_mfcRepresentationComponent& format);
 
     void                  appendPassToMultiComponent (
-                            S_mfcPassComponent pass);
+                            const S_mfcPassComponent& pass);
 
   public:
 
@@ -671,7 +673,7 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
     // ------------------------------------------------------
 
     void                  appendConverterToMultiComponent (
-                            S_mfcConverterComponent format);
+                            const S_mfcConverterComponent& format);
 
   public:
 

@@ -31,7 +31,7 @@ class EXP lpsrPartBlock : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrPartBlock> create (
-                            S_msrPart part);
+                            const S_msrPart& part);
 
   protected:
 
@@ -39,7 +39,7 @@ class EXP lpsrPartBlock : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrPartBlock (
-                            S_msrPart part);
+                            const S_msrPart& part);
 
     virtual               ~lpsrPartBlock ();
 

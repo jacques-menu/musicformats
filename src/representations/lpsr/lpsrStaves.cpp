@@ -127,7 +127,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffgroupBlock& nst
 //______________________________________________________________________________
 S_lpsrNewStaffTuningBlock lpsrNewStaffTuningBlock::create (
   int              inputLineNumber,
-  S_msrStaffTuning staffTuning)
+  const S_msrStaffTuning& staffTuning)
 {
   lpsrNewStaffTuningBlock* o =
     new lpsrNewStaffTuningBlock (
@@ -138,7 +138,7 @@ S_lpsrNewStaffTuningBlock lpsrNewStaffTuningBlock::create (
 
 lpsrNewStaffTuningBlock::lpsrNewStaffTuningBlock (
   int              inputLineNumber,
-  S_msrStaffTuning staffTuning)
+  const S_msrStaffTuning& staffTuning)
     : lpsrElement (inputLineNumber)
 {
   fStaffTuning = staffTuning;
@@ -317,7 +317,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffBlock& nstf)
 
 //______________________________________________________________________________
 S_lpsrStaffBlock lpsrStaffBlock::create (
-  S_msrStaff staff)
+  const S_msrStaff& staff)
 {
   lpsrStaffBlock* o = new lpsrStaffBlock (
     staff);
@@ -326,7 +326,7 @@ S_lpsrStaffBlock lpsrStaffBlock::create (
 }
 
 lpsrStaffBlock::lpsrStaffBlock (
-  S_msrStaff staff)
+  const S_msrStaff& staff)
     : lpsrElement (0) // JMI
 {
   // sanity check
@@ -349,7 +349,7 @@ lpsrStaffBlock::lpsrStaffBlock (
 lpsrStaffBlock::~lpsrStaffBlock ()
 {}
 
-void lpsrStaffBlock::appendVoiceUseToStaffBlock (S_msrVoice voice)
+void lpsrStaffBlock::appendVoiceUseToStaffBlock (const S_msrVoice& voice)
 {
   S_lpsrUseVoiceCommand
     useVoiceCommand =
@@ -360,7 +360,7 @@ void lpsrStaffBlock::appendVoiceUseToStaffBlock (S_msrVoice voice)
   fStaffBlockElements.push_back (useVoiceCommand);
 }
 
-void lpsrStaffBlock::appendLyricsUseToStaffBlock (S_msrStanza stanza)
+void lpsrStaffBlock::appendLyricsUseToStaffBlock (const S_msrStanza& stanza)
 {
   S_lpsrNewLyricsBlock
     newLyricsCommand =

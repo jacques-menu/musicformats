@@ -257,7 +257,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
   return clone;
 }
 
-void msrGraceNotesGroup::appendNoteToGraceNotesGroup (S_msrNote note)
+void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
@@ -285,7 +285,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (S_msrNote note)
   }
 }
 
-void msrGraceNotesGroup::appendChordToGraceNotesGroup (S_msrChord chord)
+void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
@@ -372,7 +372,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
 }
 
 void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
-  S_msrMeasure        measure,
+  const S_msrMeasure& measure,
   const Rational&     measurePosition)
 {
 #ifdef TRACING_IS_ENABLED

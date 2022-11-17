@@ -94,7 +94,7 @@ void msdrLayer::addTimeSignatureToLayer (
 void msdrLayer::addNoteToLayer (
   int       inputLineNumber,
   int       measureNumber,
-  S_msrNote note)
+  const S_msrNote& note)
 {
 }
 
@@ -177,7 +177,7 @@ void msdrLayer::browseData (basevisitor* v)
       i != fMusicStanzasMap.end ();
       ++i
     ) {
-      S_msrStanza stanza = (*i).second;
+      const S_msrStanza& stanza = (*i).second;
 
       if (stanza->getStanzaTextPresent ()) {
         // browse the stanza

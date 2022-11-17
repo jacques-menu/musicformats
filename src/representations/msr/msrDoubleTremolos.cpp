@@ -73,7 +73,7 @@ std::ostream& operator << (std::ostream& os, const msrDoubleTremoloTypeKind& elt
 //______________________________________________________________________________
 S_msrDoubleTremolo msrDoubleTremolo::create (
   int                       inputLineNumber,
-  S_msrMeasure&             upLinkToMeasure,
+  const S_msrMeasure&       upLinkToMeasure,
   msrDoubleTremoloKind      doubleTremoloKind,
   msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
   int                       doubleTremoloMarksNumber,
@@ -110,7 +110,7 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
 
 msrDoubleTremolo::msrDoubleTremolo (
   int                       inputLineNumber,
-  S_msrMeasure&             upLinkToMeasure,
+  const S_msrMeasure&       upLinkToMeasure,
   msrDoubleTremoloKind      doubleTremoloKind,
   msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
   int                       doubleTremoloMarksNumber,
@@ -325,7 +325,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //   } // switch
 // }
 
-void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (S_msrNote note)
+void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
@@ -431,7 +431,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (S_msrNote note)
 }
 
 void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
-  S_msrNote note)
+  const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
@@ -518,7 +518,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 }
 
 void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
-  S_msrChord chord)
+  const S_msrChord& chord)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
@@ -585,7 +585,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
     chordDisplayWholeNotes * 2; // taking the second note into account
 }
 
-void msrDoubleTremolo::setDoubleTremoloChordSecondElement (S_msrChord chord)
+void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& chord)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {

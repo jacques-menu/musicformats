@@ -143,7 +143,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
     void                  appendNoteToSimultaneousNotesChunk (
-                            S_msrNote note)
+                            const S_msrNote& note)
                               { fChunkNotesList.push_back (note); }
 
     static bool           compareSimultaneousNotesChunksByIncreasingMeasurePosition (
@@ -243,11 +243,11 @@ class EXP msrMeasuresSlice : public smartable
 
     void                  appendMeasureToMeasureSlice (
                             int          inputLineNumber,
-                            S_msrMeasure measure);
+                            const S_msrMeasure& measure);
 
     void                  appendSliceMeasuresFrom (
                             int                inputLineNumber,
-                            S_msrMeasuresSlice otherSlice);
+                            const S_msrMeasuresSlice& otherSlice);
 
     void                  collectNonSkipNotesFromMeasuresSliceMeasures ();
 
@@ -350,13 +350,13 @@ class EXP msrMeasuresSlicesSequence : public smartable
     // ------------------------------------------------------
 
     void                  appendMeasuresSliceToSequence (
-                            S_msrMeasuresSlice measuresSlice);
+                            const S_msrMeasuresSlice& measuresSlice);
 
     S_msrMeasuresSlicesSequence
                           mergeWithMeasuresSlicesSequence (
                             int           inputLineNumber,
                             const std::string& measuresOrigin,
-                            S_msrMeasuresSlicesSequence
+                            const S_msrMeasuresSlicesSequence&
                                           otherMeasuresSlicesSequence);
 
     void                  identifySoloNotesAndRests ();

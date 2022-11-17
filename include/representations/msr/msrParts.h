@@ -51,7 +51,7 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrPartGroup partUpLinkToPartGroup);
 
     SMARTP<msrPart> createPartNewbornClone (
-                            S_msrPartGroup partGroupClone);
+                            const S_msrPartGroup& partGroupClone);
 
   protected:
 
@@ -80,7 +80,7 @@ class EXP msrPart : public msrPartGroupElement
     // upLinks
 
     void                  setPartUpLinkToPartGroup (
-                            S_msrPartGroup partGroup)
+                            const S_msrPartGroup& partGroup)
                               { fPartUpLinkToPartGroup = partGroup; }
 
     S_msrPartGroup        getPartUpLinkToPartGroup () const
@@ -178,14 +178,14 @@ class EXP msrPart : public msrPartGroupElement
     // harmonies staff and voice
 
     void                  setPartHarmoniesStaff (
-                            S_msrStaff harmoniesStaff)
+                            const S_msrStaff& harmoniesStaff)
                               { fPartHarmoniesStaff = harmoniesStaff; }
 
     S_msrStaff            getPartHarmoniesStaff () const
                               { return fPartHarmoniesStaff; }
 
     void                  setPartHarmoniesVoice (
-                            S_msrVoice harmoniesVoice)
+                            const S_msrVoice& harmoniesVoice)
                               { fPartHarmoniesVoice = harmoniesVoice; }
 
     S_msrVoice            getPartHarmoniesVoice () const
@@ -194,14 +194,14 @@ class EXP msrPart : public msrPartGroupElement
     // figured bass staff and voice
 
     void                  setPartFiguredBassStaff (
-                            S_msrStaff figuredBassStaff)
+                            const S_msrStaff& figuredBassStaff)
                               { fPartFiguredBassStaff = figuredBassStaff; }
 
     S_msrStaff            getPartFiguredBassStaff () const
                               { return fPartFiguredBassStaff; }
 
     void                  setPartFiguredBassVoice (
-                            S_msrVoice figuredBassVoice)
+                            const S_msrVoice& figuredBassVoice)
                               { fPartFiguredBassVoice = figuredBassVoice; }
 
     S_msrVoice            getPartFiguredBassVoice () const
@@ -281,7 +281,7 @@ class EXP msrPart : public msrPartGroupElement
     // path shortest note
 
     void                  registerShortestNoteInPartIfRelevant (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     // measures
 
@@ -324,7 +324,7 @@ class EXP msrPart : public msrPartGroupElement
     // staff details
 
     void                  appendStaffDetailsToPart (
-                            S_msrStaffDetails staffDetails);
+                            const S_msrStaffDetails& staffDetails);
 
     // tuplets JMI ???
 
@@ -424,14 +424,14 @@ class EXP msrPart : public msrPartGroupElement
                             int inputLineNumber);
 
     void                  addStaffToPartCloneByItsNumber (
-                            S_msrStaff staff);
+                            const S_msrStaff& staff);
 
     S_msrStaff            fetchStaffFromPart (int staffNumber);
 
     // voices
 
     void                  registerVoiceInPartAllVoicesList (
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     // frames
 
@@ -450,12 +450,12 @@ class EXP msrPart : public msrPartGroupElement
                             const std::string& currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
-                            S_msrVoice             figuredBassSupplierVoice,
-                           S_msrFiguredBass figuredBass);
+                            const S_msrVoice&       figuredBassSupplierVoice,
+                            const S_msrFiguredBass& figuredBass);
 
     void                  appendFiguredBassToPartClone (
-                            S_msrVoice              figuredBassSupplierVoice,
-                            S_msrFiguredBass figuredBass);
+                            const S_msrVoice&              figuredBassSupplierVoice,
+                            const S_msrFiguredBass& figuredBass);
 
     // scordaturas
 
@@ -477,12 +477,12 @@ class EXP msrPart : public msrPartGroupElement
     // work around LilyPond issue #34
 
     void                  addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
-                            S_msrVoice           graceNotesGroupOriginVoice,
+                            const S_msrVoice&           graceNotesGroupOriginVoice,
                             S_msrGraceNotesGroup skipGraceNotesGroup);
 
 /*
     void                  appendSkipGraceNotesToVoicesClones ( // JMI ???
-                            S_msrVoice      graceNotesOriginVoice,
+                            const S_msrVoice&      graceNotesOriginVoice,
                             S_msrGraceNotes skipGraceNotes);
 
                             */
@@ -686,7 +686,7 @@ class EXP msrPart : public msrPartGroupElement
     // staves
 
     void                  registerStaffInPart (
-                            S_msrStaff staff);
+                            const S_msrStaff& staff);
 
     // figured bass
 

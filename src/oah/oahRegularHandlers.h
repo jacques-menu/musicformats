@@ -37,7 +37,7 @@ class EXP oahRegularHandler : public oahHandler
     static SMARTP<oahRegularHandler> create (
                             std::string       serviceName,
                             const std::string&     handlerHeader,
-                            S_oahHandler      insiderOahHandler);
+                            const S_oahHandler&      insiderOahHandler);
 */
 
   protected:
@@ -48,7 +48,7 @@ class EXP oahRegularHandler : public oahHandler
                           oahRegularHandler (
                             std::string       serviceName,
                             const std::string&     handlerHeader,
-                            S_oahHandler      insiderOahHandler);
+                            const S_oahHandler&      insiderOahHandler);
 
     virtual               ~oahRegularHandler ();
 
@@ -79,9 +79,9 @@ class EXP oahRegularHandler : public oahHandler
                               }
 
     void                  appendGroupToRegulalHandler (
-                            S_oahGroup group);
+                            const S_oahGroup& group);
     void                  prependGroupToRegularHandler (
-                            S_oahGroup group);
+                            const S_oahGroup& group);
 
   public:
 
@@ -108,7 +108,7 @@ class EXP oahRegularHandler : public oahHandler
 
     void                  registerAtomInRegularSubgroup (
                             const std::string& atomName,
-                            S_oahSubGroup subGroup);
+                            const S_oahSubGroup& subGroup);
 
   protected:
 

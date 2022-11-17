@@ -510,7 +510,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   // ------------------------------------------------------
 
   // create an insider xml2brl OAH handler
-  S_xml2brlInsiderHandler
+  const S_xml2brlInsiderHandler&
     insiderOahHandler =
       xml2brlInsiderHandler::create (
         serviceName,
@@ -627,7 +627,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
   const char*  fileName,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
@@ -678,7 +678,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2brailleWithHandler (
   FILE*        fd,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
@@ -729,7 +729,7 @@ mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
   const char*  buffer,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =

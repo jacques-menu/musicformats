@@ -111,10 +111,10 @@ S_msrChord msrChord::create (
 }
 
 S_msrChord msrChord::create (
-  int             inputLineNumber,
-  const Rational& chordSoundingWholeNotes,
-  const Rational& chordDisplayWholeNotes,
-  msrDurationKind chordGraphicDurationKind)
+  int                 inputLineNumber,
+  const Rational&     chordSoundingWholeNotes,
+  const Rational&     chordDisplayWholeNotes,
+  msrDurationKind     chordGraphicDurationKind)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -166,7 +166,7 @@ msrChord::~msrChord ()
 {}
 
 S_msrChord msrChord::createChordNewbornClone (
-  S_msrPart containingPart)
+  const S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -279,6 +279,17 @@ S_msrChord msrChord::createChordNewbornClone (
 //   return result;
 // }
 
+void  msrChord::setMeasureElementUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  setChordUpLinkToMeasure (measure);
+}
+
+S_msrMeasure  msrChord::getMeasureElementUpLinkToMeasure () const
+{
+  return getChordUpLinkToMeasure ();
+}
+
 void msrChord::setChordUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
@@ -305,6 +316,11 @@ void msrChord::setChordUpLinkToMeasure (
 #endif
 
   fChordUpLinkToMeasure = measure;
+}
+
+S_msrMeasure msrChord::getChordUpLinkToMeasure () const
+{
+  return fChordUpLinkToMeasure;
 }
 
 // uplink to tuplet
@@ -435,8 +451,8 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
 }
 
 void msrChord::setChordMembersMeasurePosition (
-  S_msrMeasure     measure,
-   const Rational& measurePosition)
+  const S_msrMeasure& measure,
+  const Rational&     measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -521,7 +537,7 @@ void msrChord::setChordMembersMeasurePosition (
 
 void msrChord::addFirstNoteToChord (
   S_msrNote  note,
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -578,7 +594,7 @@ void msrChord::addFirstNoteToChord (
 
 void msrChord::addAnotherNoteToChord (
   S_msrNote  note,
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {

@@ -817,7 +817,7 @@ mfcVersionsHistory::~mfcVersionsHistory ()
 {}
 
 void mfcVersionsHistory::appendVersionDescrToHistory (
-  S_mfcVersionDescr versionDescr)
+  const S_mfcVersionDescr& versionDescr)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
@@ -947,7 +947,7 @@ mfcComponent::~mfcComponent ()
 {}
 
 void mfcComponent::appendVersionDescrToComponent (
-  S_mfcVersionDescr versionDescr)
+  const S_mfcVersionDescr& versionDescr)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
@@ -1316,7 +1316,7 @@ mfcMultiComponent::~mfcMultiComponent ()
 {}
 
 void mfcMultiComponent::appendRepresentationToMultiComponent (
-  S_mfcRepresentationComponent format)
+  const S_mfcRepresentationComponent& format)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
@@ -1382,7 +1382,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
 }
 
 void mfcMultiComponent::appendPassToMultiComponent (
-  S_mfcPassComponent pass)
+  const S_mfcPassComponent& pass)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
@@ -2051,7 +2051,7 @@ mfcLibraryComponent::~mfcLibraryComponent ()
 {}
 
 void mfcLibraryComponent::appendConverterToMultiComponent (
-  S_mfcConverterComponent converter)
+  const S_mfcConverterComponent& converter)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {

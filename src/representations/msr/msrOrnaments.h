@@ -69,7 +69,7 @@ class EXP msrOrnament : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setOrnamentUpLinkToNote (S_msrNote note)
+    void                  setOrnamentUpLinkToNote (const S_msrNote& note)
                               { fOrnamentUpLinkToNote = note; }
 
     S_msrNote             getOrnamentUpLinkToNote () const

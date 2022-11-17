@@ -35,7 +35,7 @@ namespace MusicFormats
 S_msr2guidoRegularHandler msr2guidoRegularHandler::create (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msr2guidoInsiderHandler
+  const S_msr2guidoInsiderHandler&
                     insiderOahHandler)
 {
   // create the regular handler
@@ -52,7 +52,7 @@ S_msr2guidoRegularHandler msr2guidoRegularHandler::create (
 msr2guidoRegularHandler::msr2guidoRegularHandler (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msr2guidoInsiderHandler
+  const S_msr2guidoInsiderHandler&
                     insiderOahHandler)
   : oahRegularHandler (
       serviceName,

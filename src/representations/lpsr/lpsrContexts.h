@@ -155,7 +155,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
                             const std::string&      contextName,
-                            S_msrVoice              contextVoice);
+                            const S_msrVoice&              contextVoice);
 
   protected:
 
@@ -166,7 +166,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
                             const std::string&      contextName,
-                            S_msrVoice              contextVoice);
+                            const S_msrVoice&              contextVoice);
 
     virtual               ~lpsrChordNamesContext ();
 
@@ -222,7 +222,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
                             const std::string&      contextName,
-                            S_msrStaff              contextStaff);
+                            const S_msrStaff&       contextStaff);
 
   protected:
 
@@ -233,7 +233,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
                             const std::string&      contextName,
-                            S_msrStaff              contextStaff);
+                            const S_msrStaff&       contextStaff);
 
     virtual               ~lpsrFiguredBassContext ();
 

@@ -62,16 +62,16 @@ class EXP msrBassFigure : public msrElement
 
     static SMARTP<msrBassFigure> create (
                             int                     inputLineNumber,
-                            S_msrPart&              figureUpLinkToPart,
+                            const S_msrPart&               figureUpLinkToPart,
                             msrBassFigurePrefixKind figurePrefixKind,
                             int                     figureNumber,
                             msrBassFigureSuffixKind figureSuffixKind);
 
     SMARTP<msrBassFigure> createFigureNewbornClone (
-                            S_msrPart& containingPart);
+                            const S_msrPart&  containingPart);
 
     SMARTP<msrBassFigure> createFigureDeepClone ( // JMI ???
-                            S_msrPart& containingPart);
+                            const S_msrPart&  containingPart);
 
   protected:
 
@@ -80,7 +80,7 @@ class EXP msrBassFigure : public msrElement
 
                           msrBassFigure (
                             int                     inputLineNumber,
-                            S_msrPart&              figureUpLinkToPart,
+                            const S_msrPart&               figureUpLinkToPart,
                             msrBassFigurePrefixKind figurePrefixKind,
                             int                     figureNumber,
                             msrBassFigureSuffixKind figureSuffixKind);
@@ -191,7 +191,7 @@ class EXP msrFiguredBass : public msrMeasureElement
                             const msrTupletFactor& figuredBassTupletFactor);
 
     SMARTP<msrFiguredBass> createFiguredBassNewbornClone (
-                            S_msrVoice& containingVoice);
+                            const S_msrVoice& containingVoice);
 
     SMARTP<msrFiguredBass> createFiguredBassDeepClone ();
 

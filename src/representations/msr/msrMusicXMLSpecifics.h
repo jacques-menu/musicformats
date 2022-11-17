@@ -757,7 +757,7 @@ class EXP msrPrintLayout : public msrMeasureElement
     // ------------------------------------------------------
 
     void                  appendStaffLayout (
-                            S_msrStaffLayout staffLayout)
+                            const S_msrStaffLayout& staffLayout)
                               {
                                 fStaffLayoutsList.push_back (staffLayout);
                               }

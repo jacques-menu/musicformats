@@ -77,7 +77,7 @@ class EXP basicOah2manPage : virtual public oah2manPage,
   public:
 
                           basicOah2manPage (
-                            const S_oahHandler handler,
+                            const S_oahHandler& handler,
                             std::ostream&           manPageOutputStream);
 
     virtual               ~basicOah2manPage ();

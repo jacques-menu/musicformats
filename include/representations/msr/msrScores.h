@@ -112,7 +112,7 @@ class EXP msrScore : public msrBookElement
     // staff layout
 
     void                  setStaffLayout (
-                            S_msrStaffLayout staffLayout)
+                            const S_msrStaffLayout& staffLayout)
                               { fStaffLayout = staffLayout; }
 
     S_msrStaffLayout      getStaffLayout () const
@@ -135,13 +135,13 @@ class EXP msrScore : public msrBookElement
 //* JMI
     // master voice
     void                  setScoreMasterVoice (
-                            S_msrVoice masterVoice);
+                            const S_msrVoice& masterVoice);
 
     S_msrVoice            getScoreMasterVoice () const;
 
 /* JMI
     void                  setScoreMasterVoice (
-                            S_msrVoice masterVoice)
+                            const S_msrVoice& masterVoice)
                               { fScoreMasterVoice = masterVoice; }
 
     S_msrVoice            getScoreMasterVoice () const
@@ -294,10 +294,10 @@ class EXP msrScore : public msrBookElement
     // voices
 
     void                  registerVoiceInScoreAllVoicesList (
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     void                  addPartGroupToScore (
-                            S_msrPartGroup partGroup);
+                            const S_msrPartGroup& partGroup);
 
     void                  appendCreditToScore (
                             S_msrCredit credit);

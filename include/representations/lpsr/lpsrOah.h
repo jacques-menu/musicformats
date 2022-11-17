@@ -572,7 +572,7 @@ class EXP lpsrOahGroup : public oahGroup
 
     Bool                  getTagline () const
                               { return fTagline; }
-    S_oahBooleanAtom      getTaglineAtom () const
+    const S_oahBooleanAtom&      getTaglineAtom () const
                               { return fTaglineAtom; }
 
     // staves

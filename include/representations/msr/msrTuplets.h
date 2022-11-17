@@ -90,17 +90,14 @@ class EXP msrTuplet : public msrTupletElement
 
     // uplink to measure
     void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setTupletUpLinkToMeasure (measure); }
+                            const S_msrMeasure& measure) override;
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getTupletUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
 
     void                  setTupletUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
-    S_msrMeasure          getTupletUpLinkToMeasure () const
-                            { return fTupletUpLinkToMeasure; }
+    S_msrMeasure          getTupletUpLinkToMeasure () const;
 
     // tuplet kind
     void                  setTupletKind (
@@ -120,7 +117,7 @@ class EXP msrTuplet : public msrTupletElement
 
     // members positions in measures
     Rational              setTupletMembersMeasurePositions (
-                            S_msrMeasure&   measure,
+                            const S_msrMeasure&    measure,
                             const Rational& measurePosition);
                               // returns the position after the tuplet JMI ??? v0.9.66 SUPERFLOUS ???
 
@@ -173,13 +170,13 @@ class EXP msrTuplet : public msrTupletElement
 
     void                  appendNoteToTuplet (
                             S_msrNote  note,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
-    void                  appendChordToTuplet (S_msrChord chord);
+    void                  appendChordToTuplet (const S_msrChord& chord);
 
-    void                  appendTupletToTuplet (S_msrTuplet tuplet);
+    void                  appendTupletToTuplet (const S_msrTuplet& tuplet);
 
-    void                  appendTupletToTupletClone (S_msrTuplet tuplet);
+    void                  appendTupletToTupletClone (const S_msrTuplet& tuplet);
 
     S_msrNote             fetchTupletFirstNonGraceNote () const;
 

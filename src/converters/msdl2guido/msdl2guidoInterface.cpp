@@ -60,7 +60,7 @@ namespace MusicFormats
 mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
   std::string        inputSourceName,
   std::istream&      inputStream,
-  S_oahHandler  handler,
+  const S_oahHandler&  handler,
   std::ostream& out,
   std::ostream& err)
 {
@@ -296,7 +296,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
   // ------------------------------------------------------
 
   // create an insider msdl2guido OAH handler
-  S_msdl2guidoInsiderHandler
+  const S_msdl2guidoInsiderHandler&
     insiderOahHandler =
       msdl2guidoInsiderHandler::create (
         serviceName,
@@ -433,7 +433,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
 
 mfMusicformatsErrorKind msdlFile2guidoWithHandler (
   std::string        fileName,
-  S_oahHandler  handler,
+  const S_oahHandler&  handler,
   std::ostream& out,
   std::ostream& err)
 {
@@ -501,7 +501,7 @@ EXP mfMusicformatsErrorKind convertMsdlString2guidoWithOptionsAndArguments (
 
 mfMusicformatsErrorKind msdlString2guidoWithHandler (
   const char*   buffer,
-  S_oahHandler  handler,
+  const S_oahHandler&  handler,
   std::ostream& out,
   std::ostream& err)
 {

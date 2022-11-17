@@ -37,10 +37,10 @@ class EXP msrPathToVoice : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrPathToVoice> createFromVoice (
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     static SMARTP<msrPathToVoice> createFromStaff (
-                            S_msrStaff staff);
+                            const S_msrStaff& staff);
 
   protected:
 
@@ -78,13 +78,13 @@ class EXP msrPathToVoice : public smartable
     S_msrPart             getPart () const
                               { return fPart; }
 
-    void                  setStaff (S_msrStaff staff)
+    void                  setStaff (const S_msrStaff& staff)
                               { fStaff = staff; }
 
     S_msrStaff            getStaff () const
                               { return fStaff; }
 
-    void                  setVoice (S_msrVoice voice)
+    void                  setVoice (const S_msrVoice& voice)
                               { fVoice = voice; }
 
     S_msrVoice            getVoice () const
@@ -95,7 +95,7 @@ class EXP msrPathToVoice : public smartable
     // public services
     // ------------------------------------------------------
 
-    void                  appendPartGroup (S_msrPartGroup partGroup)
+    void                  appendPartGroup (const S_msrPartGroup& partGroup)
                               {
                                 fPartGroupsList.push_back (partGroup);
                               }
@@ -109,11 +109,11 @@ class EXP msrPathToVoice : public smartable
     Bool                  pathContainsPart (S_msrPart part)
                               { return fPart == part; }
 
-    Bool                  pathContainsPartGroup (S_msrPartGroup partGroup);
+    Bool                  pathContainsPartGroup (const S_msrPartGroup& partGroup);
 
-    Bool                  pathContainsStaff (S_msrStaff staff);
+    Bool                  pathContainsStaff (const S_msrStaff& staff);
 
-    Bool                  pathContainsVoice (S_msrVoice voice);
+    Bool                  pathContainsVoice (const S_msrVoice& voice);
 
 //   public:
 //
@@ -139,9 +139,9 @@ class EXP msrPathToVoice : public smartable
     // private methods
     // ------------------------------------------------------
 
-    void                  initializeFromVoice (S_msrVoice voice);
+    void                  initializeFromVoice (const S_msrVoice& voice);
 
-    void                  initializeFromStaff (S_msrStaff staff);
+    void                  initializeFromStaff (const S_msrStaff& staff);
 
   private:
 

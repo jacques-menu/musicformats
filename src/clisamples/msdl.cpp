@@ -389,7 +389,7 @@ int main (int argc, char*  argv[])
     // create an msdlConverter insider OAH handler
     // ------------------------------------------------------
 
-    S_msdlConverterInsiderHandler
+    const S_msdlConverterInsiderHandler&
       insiderOahHandler =
         msdlConverterInsiderHandler::create (
           serviceName,

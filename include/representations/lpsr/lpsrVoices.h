@@ -32,7 +32,7 @@ class EXP lpsrUseVoiceCommand : public lpsrElement
 
     static SMARTP<lpsrUseVoiceCommand> create (
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
   protected:
 
@@ -41,7 +41,7 @@ class EXP lpsrUseVoiceCommand : public lpsrElement
 
                           lpsrUseVoiceCommand (
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     virtual               ~lpsrUseVoiceCommand ();
 

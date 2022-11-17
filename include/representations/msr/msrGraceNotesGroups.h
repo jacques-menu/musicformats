@@ -74,7 +74,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // ------------------------------------------------------
 
     void                  setGraceNotesGroupUpLinkToNote (
-                            S_msrNote note)
+                            const S_msrNote& note)
                               { fGraceNotesGroupUpLinkToNote = note; }
 
     S_msrNote             getGraceNotesGroupUpLinkToNote () const
@@ -122,7 +122,7 @@ class EXP msrGraceNotesGroup : public msrElement
 
     // positions in measures
     void                  setGraceNotesGroupElementsMeasurePositions (
-                            S_msrMeasure    measure,
+                            const S_msrMeasure&    measure,
                             const Rational& measurePosition);
 
   public:
@@ -136,8 +136,8 @@ class EXP msrGraceNotesGroup : public msrElement
     // part uplink
     S_msrPart             fetchGraceNotesGroupUpLinkToPart () const;
 
-    void                  appendNoteToGraceNotesGroup (S_msrNote note);
-    void                  appendChordToGraceNotesGroup (S_msrChord chord);
+    void                  appendNoteToGraceNotesGroup (const S_msrNote& note);
+    void                  appendChordToGraceNotesGroup (const S_msrChord& chord);
 
     S_msrNote             removeLastNoteFromGraceNotesGroup (
                             int inputLineNumber);

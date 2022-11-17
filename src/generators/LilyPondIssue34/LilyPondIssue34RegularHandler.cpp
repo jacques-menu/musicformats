@@ -39,7 +39,7 @@ namespace MusicFormats
 S_LilyPondIssue34RegularHandler LilyPondIssue34RegularHandler::create (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_LilyPondIssue34InsiderHandler
+  const S_LilyPondIssue34InsiderHandler&
                     insiderOahHandler,
   mfMultiGenerationOutputKind
                     multiGenerationOutputKind)
@@ -58,7 +58,7 @@ S_LilyPondIssue34RegularHandler LilyPondIssue34RegularHandler::create (
 LilyPondIssue34RegularHandler::LilyPondIssue34RegularHandler (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_LilyPondIssue34InsiderHandler
+  const S_LilyPondIssue34InsiderHandler&
                     insiderOahHandler,
   mfMultiGenerationOutputKind
                     multiGenerationOutputKind)

@@ -77,7 +77,7 @@ class EXP mfslOptionsBlock : public smartable
     // ------------------------------------------------------
 
     void                  registerOptionsInOptionsBlock (
-                            S_oahOption option,
+                            const S_oahOption& option,
                             mfslDriver& drv);
 
   public:
@@ -324,7 +324,8 @@ class EXP mfslCaseInputStatement : public smartable
     S_mfslInput           getCaseInputInput () const
                               { return fCaseInputInput; }
 
-    const std::list<std::string>&   getCaseInputCurrentNamesList () const
+    const std::list<std::string>&   
+                          getCaseInputCurrentNamesList () const
                               { return fCaseInputCurrentNamesList; }
 
     void                  clearCaseInputCurrentNamesList ()
@@ -601,7 +602,8 @@ class EXP mfslCaseChoiceStatement : public smartable
     S_mfslChoice          getCaseChoice () const
                               { return fCaseChoice; }
 
-    const std::list<std::string>&   getCaseCurrentLabelsList () const
+    const std::list<std::string>&   
+                          getCaseCurrentLabelsList () const
                               { return fCaseCurrentLabelsList; }
 
     void                  clearCaseCurrentLabelsList ()

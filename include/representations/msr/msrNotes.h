@@ -44,7 +44,7 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> create (
                             int                        inputLineNumber,
-                            S_msrMeasure               upLinkToMeasure,
+                            const S_msrMeasure&               upLinkToMeasure,
 
                             const std::string&    noteMeasureNumber,
 
@@ -72,10 +72,10 @@ class EXP msrNote : public msrTupletElement
                             msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind);
 
     SMARTP<msrNote> createNoteNewbornClone (
-                            S_msrPart containingPart);
+                            const S_msrPart& containingPart);
 
     SMARTP<msrNote> createNoteDeepClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
     // creation from the applications
     // ------------------------------------------------------
@@ -155,7 +155,7 @@ class EXP msrNote : public msrTupletElement
 
                           msrNote (
                             int                        inputLineNumber,
-                            S_msrMeasure               upLinkToMeasure,
+                            const S_msrMeasure&               upLinkToMeasure,
 
                             const std::string&    noteMeasureNumber,
 
@@ -198,17 +198,14 @@ class EXP msrNote : public msrTupletElement
 
     // uplink to measure
     void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setNoteUpLinkToMeasure (measure); }
+                            const S_msrMeasure& measure) override;
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getNoteUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
 
     void                  setNoteUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
-    S_msrMeasure          getNoteUpLinkToMeasure () const
-                            { return fNoteUpLinkToMeasure; }
+    S_msrMeasure          getNoteUpLinkToMeasure () const;
 
     // uplink to chord
     void                  setNoteDirectUpLinkToChord (
@@ -433,7 +430,7 @@ class EXP msrNote : public msrTupletElement
 
     // harmonies
     void                  appendHarmonyToNoteHarmoniesList (
-                            S_msrHarmony harmony);
+                            const S_msrHarmony& harmony);
 
     const std::list<S_msrHarmony>&
                           getNoteHarmoniesList () const
@@ -441,7 +438,7 @@ class EXP msrNote : public msrTupletElement
 
     // figured bass
     void                  appendFiguredBassToNoteFiguredBassesList (
-                            S_msrFiguredBass figuredBass);
+                            const S_msrFiguredBass& figuredBass);
 
     const std::list<S_msrFiguredBass>&
                           getNoteFiguredBassesList () const

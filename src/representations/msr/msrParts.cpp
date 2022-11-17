@@ -182,7 +182,7 @@ S_msrScore  msrPart::fetchPartUpLinkToScore () const
   return result;
 }
 
-S_msrPart msrPart::createPartNewbornClone (S_msrPartGroup partGroupClone)
+S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
@@ -233,7 +233,7 @@ S_msrPart msrPart::createPartNewbornClone (S_msrPartGroup partGroupClone)
 }
 
 void msrPart::registerStaffInPart (
-  S_msrStaff staff)
+  const S_msrStaff& staff)
 {
   int inputLineNumber =
     staff->getInputLineNumber ();
@@ -687,7 +687,7 @@ Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
   return result;
 }
 
-void msrPart::registerShortestNoteInPartIfRelevant (S_msrNote note)
+void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
 {
   // is note the shortest one in this part?
   Rational
@@ -875,7 +875,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
 }
 
 void msrPart::appendStaffDetailsToPart (
-  S_msrStaffDetails staffDetails)
+  const S_msrStaffDetails& staffDetails)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
@@ -1684,7 +1684,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
   return staff;
 }
 
-void msrPart::addStaffToPartCloneByItsNumber (S_msrStaff staff)
+void msrPart::addStaffToPartCloneByItsNumber (const S_msrStaff& staff)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
@@ -1714,7 +1714,7 @@ S_msrStaff msrPart::fetchStaffFromPart (
 }
 
 void msrPart::registerVoiceInPartAllVoicesList (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
   // register voice in this staff
   fPartAllVoicesList.push_back (voice);
@@ -1882,8 +1882,8 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 }
 
 void msrPart::appendFiguredBassToPart (
-  S_msrVoice              figuredBassSupplierVoice,
-  S_msrFiguredBass figuredBass)
+  const S_msrVoice&       figuredBassSupplierVoice,
+  const S_msrFiguredBass& figuredBass)
 {
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
@@ -1938,8 +1938,8 @@ void msrPart::appendFiguredBassToPart (
 }
 
 void msrPart::appendFiguredBassToPartClone (
-  S_msrVoice              figuredBassSupplierVoice,
-  S_msrFiguredBass figuredBass)
+  const S_msrVoice&              figuredBassSupplierVoice,
+  const S_msrFiguredBass& figuredBass)
 {
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
@@ -2059,7 +2059,7 @@ void msrPart::appendHarpPedalsTuningToPart (
 }
 
 void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
-  S_msrVoice           graceNotesGroupOriginVoice,
+  const S_msrVoice&           graceNotesGroupOriginVoice,
   S_msrGraceNotesGroup skipGraceNotesGroup)
 {
 #ifdef TRACING_IS_ENABLED
@@ -2090,7 +2090,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
           getStaffVoiceNumbersToAllVoicesMap ();
 
     for (std::pair<int, S_msrVoice> thePair : staffAllVoicesMap) {
-      S_msrVoice voice = thePair.second;
+      const S_msrVoice& voice = thePair.second;
 
       if (voice != graceNotesGroupOriginVoice) {
         // add skip grace notes group ahead of voice
@@ -2298,7 +2298,7 @@ void msrPart::finalizePartAndAllItsMeasures (
   }
 #endif
 
-  for (S_msrVoice voice : fPartAllVoicesList) {
+  for (const S_msrVoice& voice : fPartAllVoicesList) {
     voice->
       finalizeVoiceAndAllItsMeasures (
         inputLineNumber);
@@ -2871,7 +2871,7 @@ void msrPart::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    for (S_msrVoice voice : fPartAllVoicesList) {
+    for (const S_msrVoice& voice : fPartAllVoicesList) {
       os << "\"" << voice->getVoiceName () << "\"" << std::endl;
     } // for
 

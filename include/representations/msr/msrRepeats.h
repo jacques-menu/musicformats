@@ -71,12 +71,12 @@ class EXP msrRepeatCommonPart : public msrElement
 
     void                  appendVoiceElementToRepeatCommonPart (
                             int               inputLineNumber,
-                            S_msrVoiceElement voiceElement,
+                            const S_msrVoiceElement& voiceElement,
                             const std::string&     context);
 
     void                  appendSegmentToRepeatCommonPart (
                             int          inputLineNumber,
-                            S_msrSegment segment,
+                            const S_msrSegment& segment,
                             const std::string&context);
 
     void                  appendRepeatToRepeatCommonPart (
@@ -86,7 +86,7 @@ class EXP msrRepeatCommonPart : public msrElement
 
     void                  appendMeasureRepeatToRepeatCommonPart (
                             int                inputLineNumber,
-                            S_msrMeasureRepeat measureRepeat,
+                            const S_msrMeasureRepeat& measureRepeat,
                             const std::string&      context);
 
     void                  appendMultipleFullBarRestsToRepeatCommonPart (
@@ -145,9 +145,9 @@ class EXP msrRepeatEnding : public msrElement
 
     static SMARTP<msrRepeatEnding> create (
                             int                 inputLineNumber,
-                            const std::string&       repeatEndingNumber, // may be "1, 2"
+                            const std::string&  repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind repeatEndingKind,
-                            S_msrRepeat         upLinkToRepeat);
+                            const S_msrRepeat&  upLinkToRepeat);
 
   protected:
 
@@ -156,9 +156,9 @@ class EXP msrRepeatEnding : public msrElement
 
                           msrRepeatEnding (
                             int                 inputLineNumber,
-                            const std::string&       repeatEndingNumber, // may be "1, 2"
+                            const std::string&  repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind repeatEndingKind,
-                            S_msrRepeat         upLinkToRepeat);
+                            const S_msrRepeat&  upLinkToRepeat);
 
     virtual               ~msrRepeatEnding ();
 
@@ -204,12 +204,12 @@ class EXP msrRepeatEnding : public msrElement
 
     void                  appendVoiceElementToRepeatEnding ( // JMI
                             int               inputLineNumber,
-                            S_msrVoiceElement voiceElement,
+                            const S_msrVoiceElement& voiceElement,
                             const std::string&     context);
 
     void                  appendSegmentToRepeatEnding (
                             int           inputLineNumber,
-                            S_msrSegment  segment,
+                            const S_msrSegment&  segment,
                             const std::string& context);
 
     void                  appendRepeatToRepeatEnding (
@@ -219,7 +219,7 @@ class EXP msrRepeatEnding : public msrElement
 
     void                  appendMeasureRepeatToRepeatEnding (
                             int                inputLineNumber,
-                            S_msrMeasureRepeat measureRepeat,
+                            const S_msrMeasureRepeat& measureRepeat,
                             const std::string&      context);
 
     void                  appendMultipleFullBarRestsToRepeatEnding (
@@ -284,10 +284,10 @@ class EXP msrRepeat : public msrVoiceElement
     static SMARTP<msrRepeat> create (
                             int        inputLineNumber,
                             int        repeatTimes,
-                            S_msrVoice upLinkToVoice);
+                            const S_msrVoice& upLinkToVoice);
 
     SMARTP<msrRepeat> createRepeatNewbornClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
   protected:
 
@@ -297,7 +297,7 @@ class EXP msrRepeat : public msrVoiceElement
                           msrRepeat (
                             int        inputLineNumber,
                             int        repeatTimes,
-                            S_msrVoice upLinkToVoice);
+                            const S_msrVoice& upLinkToVoice);
 
     virtual               ~msrRepeat ();
 
@@ -366,7 +366,7 @@ class EXP msrRepeat : public msrVoiceElement
 
     void                  appendSegmentToRepeat (
                             int           inputLineNumber,
-                            S_msrSegment  segment,
+                            const S_msrSegment&  segment,
                             const std::string& context);
 
     void                  appendRepeatToRepeat (
@@ -376,7 +376,7 @@ class EXP msrRepeat : public msrVoiceElement
 
     void                  appendMeasureRepeatToRepeat (
                             int                inputLineNumber,
-                            S_msrMeasureRepeat measureRepeat,
+                            const S_msrMeasureRepeat& measureRepeat,
                             const std::string&      context);
 
     void                  appendMultipleFullBarRestsToRepeat (

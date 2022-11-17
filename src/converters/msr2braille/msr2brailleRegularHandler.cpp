@@ -40,7 +40,7 @@ namespace MusicFormats
 S_msr2brailleRegularHandler msr2brailleRegularHandler::create (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msr2brailleInsiderHandler
+  const S_msr2brailleInsiderHandler&
                     insiderOahHandler)
 {
   // create the regular handler
@@ -57,7 +57,7 @@ S_msr2brailleRegularHandler msr2brailleRegularHandler::create (
 msr2brailleRegularHandler::msr2brailleRegularHandler (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msr2brailleInsiderHandler
+  const S_msr2brailleInsiderHandler&
                     insiderOahHandler)
   : oahRegularHandler (
       serviceName,

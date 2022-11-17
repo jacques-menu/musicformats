@@ -2692,7 +2692,7 @@ R"(
 }
 
 /* JMI
-void lpsrScore::appendVoiceUseToStoreCommand (S_msrVoice voice)
+void lpsrScore::appendVoiceUseToStoreCommand (const S_msrVoice& voice)
 {
   S_lpsrUseVoiceCommand
     useVoiceCommand =
@@ -2704,7 +2704,7 @@ void lpsrScore::appendVoiceUseToStoreCommand (S_msrVoice voice)
     appendVoiceUseToParallelMusicBLock (useVoiceCommand);
 }
 
-void lpsrScore::appendLyricsUseToStoreCommand (S_msrStanza stanza)
+void lpsrScore::appendLyricsUseToStoreCommand (const S_msrStanza& stanza)
 {
   S_lpsrNewLyricsBlock
     newLyricsCommand =

@@ -248,14 +248,14 @@ class EXP msr2bsrTranslator :
     bsrNoteValueSizeKind
                               fCurrentNoteValueSizeKind;
 
-    void                      createBsrForNote (S_msrNote note);
+    void                      createBsrForNote (const S_msrNote& note);
 
     // relative octaves
     // ------------------------------------------------------
     S_msrNote                 fRelativeOctaveReference;
                                 // contains absolute octave
 
-    bsrNoteOctaveIsNeeded     brailleOctaveMarkInNeeded (S_msrNote note);
+    bsrNoteOctaveIsNeeded     brailleOctaveMarkInNeeded (const S_msrNote& note);
 
 
 /*
@@ -363,7 +363,7 @@ class EXP msr2bsrTranslator :
 
     void                      finalizeCurrentMeasureClone (
                                 int          inputLineNumber,
-                                S_msrMeasure originalMeasure);
+                                const S_msrMeasure& originalMeasure);
 
     // bar checks
     // ------------------------------------------------------

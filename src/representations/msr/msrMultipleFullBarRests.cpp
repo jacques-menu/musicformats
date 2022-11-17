@@ -40,7 +40,7 @@ namespace MusicFormats
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
   int              inputLineNumber,
   int              multipleFullBarRestsNumber,
-  S_msrSegment     upLinkToSegment)
+  const S_msrSegment&     upLinkToSegment)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
@@ -53,8 +53,8 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
 
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
   int          inputLineNumber,
-  S_msrMeasure restMeasureClone,
-  S_msrSegment upLinkToSegment)
+  const S_msrMeasure& restMeasureClone,
+  const S_msrSegment& upLinkToSegment)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
@@ -68,7 +68,7 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
 msrMultipleFullBarRests::msrMultipleFullBarRests (
   int             inputLineNumber,
   int             multipleFullBarRestsNumber,
-  S_msrSegment    upLinkToSegment)
+  const S_msrSegment&    upLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
   fMultipleFullBarRestsUpLinkToSegment = upLinkToSegment;
@@ -80,8 +80,8 @@ msrMultipleFullBarRests::msrMultipleFullBarRests (
 
 msrMultipleFullBarRests::msrMultipleFullBarRests (
   int          inputLineNumber,
-  S_msrMeasure restMeasureClone,
-  S_msrSegment upLinkToSegment)
+  const S_msrMeasure& restMeasureClone,
+  const S_msrSegment& upLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
   fMultipleFullBarRestsUpLinkToSegment = upLinkToSegment;
@@ -95,7 +95,7 @@ msrMultipleFullBarRests::~msrMultipleFullBarRests ()
 {}
 
 S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNewbornClone (
-  S_msrSegment containingVoice)
+  const S_msrSegment& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
@@ -224,7 +224,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 }
 
 void msrMultipleFullBarRests:: appendMeasureElementToSegmentElement (
-  S_msrMeasureElement elem)
+  const S_msrMeasureElement& elem)
 {
   std::stringstream s;
 
@@ -242,7 +242,7 @@ void msrMultipleFullBarRests:: appendMeasureElementToSegmentElement (
 }
 
 void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
-  S_msrMeasure measure)
+  const S_msrMeasure& measure)
 {
 //   fMultipleFullBarRestsContents->
 //     getMultipleFullBarRestsContentsSegment ()->

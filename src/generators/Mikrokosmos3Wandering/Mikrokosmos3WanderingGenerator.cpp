@@ -166,7 +166,8 @@ S_msrScore Mikrokosmos3WanderingGenerator::createTheScore (
 
 //------------------------------------------------------------------------
 S_msrStaff Mikrokosmos3WanderingGenerator::createStaffInPart (
-  int staffNumber, S_msrPart part)
+  int              staffNumber, 
+  const S_msrPart& part)
 //------------------------------------------------------------------------
 {
   // create the staff
@@ -185,7 +186,7 @@ S_msrStaff Mikrokosmos3WanderingGenerator::createStaffInPart (
 
 //------------------------------------------------------------------------
 S_msrStaff Mikrokosmos3WanderingGenerator::createAndPopulateUpperStaffInPart (
-  S_msrPart            part,
+  const S_msrPart&            part,
   msrGenerationAPIKind generationAPIKind)
 //------------------------------------------------------------------------
 {
@@ -221,7 +222,7 @@ S_msrStaff Mikrokosmos3WanderingGenerator::createAndPopulateUpperStaffInPart (
 
 //------------------------------------------------------------------------
 S_msrStaff Mikrokosmos3WanderingGenerator::createAndPopulateLowerStaffInPart (
-  S_msrPart            part,
+  const S_msrPart&            part,
   msrGenerationAPIKind generationAPIKind)
 //------------------------------------------------------------------------
 {
@@ -308,7 +309,7 @@ if (false) { // JMI TEMP
 S_msrVoice Mikrokosmos3WanderingGenerator::createRegularVoiceInStaff (
   int          inputLineNumber,
   int          voiceNumber,
-  S_msrStaff   staff)
+  const S_msrStaff&   staff)
 //------------------------------------------------------------------------
 {
   // create the functions voice
@@ -332,7 +333,7 @@ S_msrVoice Mikrokosmos3WanderingGenerator::createRegularVoiceInStaff (
 S_msrMeasure Mikrokosmos3WanderingGenerator::createMeasureInVoice (
   int           inputLineNumber,
   const std::string& measureNumber,
-  S_msrVoice    voice)
+  const S_msrVoice&    voice)
 //------------------------------------------------------------------------
 {
   return
@@ -347,7 +348,7 @@ S_msrMeasure Mikrokosmos3WanderingGenerator::createMeasureInVoice (
 //------------------------------------------------------------------------
 // upperVoice1 - Functions API
 void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
-  S_msrVoice upperVoice1)
+  const S_msrVoice& upperVoice1)
 //------------------------------------------------------------------------
 {
   // measure 1
@@ -1059,7 +1060,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 //------------------------------------------------------------------------
 // upperVoice1 - Strings API
 void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
-  S_msrVoice upperVoice1)
+  const S_msrVoice& upperVoice1)
 //------------------------------------------------------------------------
 {
 /* JMI
@@ -1343,7 +1344,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
 //------------------------------------------------------------------------
 // lowerVoice1 - Functions API
 void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
-  S_msrVoice lowerVoice1)
+  const S_msrVoice& lowerVoice1)
 //------------------------------------------------------------------------
 {
   // measure 1
@@ -1869,7 +1870,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 //------------------------------------------------------------------------
 // lowerVoice1 - Strings API
 void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
-  S_msrVoice lowerVoice1)
+  const S_msrVoice& lowerVoice1)
 //------------------------------------------------------------------------
 {
 /* JMI
@@ -2126,7 +2127,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
 //------------------------------------------------------------------------
 // lowerVoice2 - Functions API
 void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
-  S_msrVoice lowerVoice2)
+  const S_msrVoice& lowerVoice2)
 //------------------------------------------------------------------------
 {
   // measure 1
@@ -2350,7 +2351,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
 //------------------------------------------------------------------------
 // lowerVoice2 - Strings API
 void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
-  S_msrVoice lowerVoice2)
+  const S_msrVoice& lowerVoice2)
 //------------------------------------------------------------------------
 {
   // measure 1

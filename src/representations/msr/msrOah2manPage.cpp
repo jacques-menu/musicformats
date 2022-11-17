@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 msrOah2manPage::msrOah2manPage (
-  const S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&           manPageOutputStream)
     : oah2manPage (
         handler,

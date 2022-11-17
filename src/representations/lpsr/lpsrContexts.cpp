@@ -200,7 +200,7 @@ S_lpsrChordNamesContext lpsrChordNamesContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   const std::string&      contextName,
-  S_msrVoice              contextVoice)
+  const S_msrVoice&              contextVoice)
 {
   lpsrChordNamesContext* o =
     new lpsrChordNamesContext (
@@ -216,7 +216,7 @@ lpsrChordNamesContext::lpsrChordNamesContext (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   const std::string&      contextName,
-  S_msrVoice              contextVoice)
+  const S_msrVoice&              contextVoice)
     : lpsrContext (
       inputLineNumber,
       contextExistingKind,
@@ -363,7 +363,7 @@ S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   const std::string&      contextName,
-  S_msrStaff              contextStaff)
+  const S_msrStaff&       contextStaff)
 {
   lpsrFiguredBassContext* o =
     new lpsrFiguredBassContext (
@@ -379,7 +379,7 @@ lpsrFiguredBassContext::lpsrFiguredBassContext (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   const std::string&      contextName,
-  S_msrStaff              contextStaff)
+  const S_msrStaff&       contextStaff)
     : lpsrContext (
       inputLineNumber,
       contextExistingKind,

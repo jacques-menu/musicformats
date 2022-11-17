@@ -80,7 +80,7 @@ menu@macbookprojm > xml2ly -insider -help-trace
 In \lpsrToLilypond{lpsr2lilypondTranslator.cpp}, the trace for the generation of LilyPond code for a regular note in a measure is produced by:
 \begin{lstlisting}[language=CPlusPlus]
 void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();

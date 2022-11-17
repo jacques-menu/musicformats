@@ -33,7 +33,7 @@ S_msdl2guidoManPageGenerateAtom msdl2guidoManPageGenerateAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
 {
   msdl2guidoManPageGenerateAtom* o = new
     msdl2guidoManPageGenerateAtom (
@@ -49,7 +49,7 @@ msdl2guidoManPageGenerateAtom::msdl2guidoManPageGenerateAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
   : oahAtom (
       longName,
       shortName,
@@ -180,7 +180,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2guidoManPageGenerateAt
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -188,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2guidoManPageGenerateAt
 S_msdl2guidoManPageOahGroup gGlobalMsdl2gmnManPageOahGroup;
 
 S_msdl2guidoManPageOahGroup msdl2guidoManPageOahGroup::create (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   msdl2guidoManPageOahGroup* o = new msdl2guidoManPageOahGroup (
     theOah2manPage);
@@ -197,7 +197,7 @@ S_msdl2guidoManPageOahGroup msdl2guidoManPageOahGroup::create (
 }
 
 msdl2guidoManPageOahGroup::msdl2guidoManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
   : oahGroup (
     "Man page",
     "hmp", "help-man-page",
@@ -212,8 +212,7 @@ msdl2guidoManPageOahGroup::~msdl2guidoManPageOahGroup ()
 {}
 
 void msdl2guidoManPageOahGroup::initializeManPageGenerateOptions (
-  S_oahVisitor
-       theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   S_oahSubGroup
     subGroup =
@@ -274,8 +273,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 #endif
 
 void msdl2guidoManPageOahGroup::initializeMsdl2gmnManPageOahGroup (
-  S_oahVisitor
-       theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   // display
   // --------------------------------------
@@ -387,13 +385,13 @@ std::ostream& operator << (std::ostream& os, const S_msdl2guidoManPageOahGroup& 
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msdl2guidoManPageOahGroup createGlobalMsdl2gmnManPageOahGroupHandler (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

@@ -35,7 +35,7 @@ namespace MusicFormats
 S_tracingOahGroup gGlobalTracingOahGroup;
 
 S_tracingOahGroup tracingOahGroup::create (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   tracingOahGroup* o = new tracingOahGroup (
     handler);
@@ -44,7 +44,7 @@ S_tracingOahGroup tracingOahGroup::create (
 }
 
 tracingOahGroup::tracingOahGroup (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
   : oahGroup (
       "OAH Trace",
       "help-trace", "ht",
@@ -63,7 +63,7 @@ tracingOahGroup::tracingOahGroup (
 tracingOahGroup::~tracingOahGroup ()
 {}
 
-void tracingOahGroup::createTheTracePrefixes (S_oahHandler handler)
+void tracingOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
 {
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
@@ -2975,7 +2975,7 @@ std::ostream& operator << (std::ostream& os, const S_tracingOahGroup& elt)
 
 //______________________________________________________________________________
 S_tracingOahGroup createGlobalTracingOahGroup (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<

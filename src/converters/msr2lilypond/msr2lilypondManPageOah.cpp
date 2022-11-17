@@ -33,7 +33,7 @@ S_msr2lilypondManPageGenerateAtom msr2lilypondManPageGenerateAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
 {
   msr2lilypondManPageGenerateAtom* o = new
     msr2lilypondManPageGenerateAtom (
@@ -49,7 +49,7 @@ msr2lilypondManPageGenerateAtom::msr2lilypondManPageGenerateAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
   : oahAtom (
       longName,
       shortName,
@@ -188,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lilypondManPageGenerate
 S_msr2lilypondManPageOahGroup gGlobalMsr2lilypondManPageOahGroup;
 
 S_msr2lilypondManPageOahGroup msr2lilypondManPageOahGroup::create (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   msr2lilypondManPageOahGroup* o = new msr2lilypondManPageOahGroup (
     theOah2manPage);
@@ -197,7 +197,7 @@ S_msr2lilypondManPageOahGroup msr2lilypondManPageOahGroup::create (
 }
 
 msr2lilypondManPageOahGroup::msr2lilypondManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
   : oahGroup (
     "Man page",
     "hmp", "help-man-page",
@@ -212,7 +212,7 @@ msr2lilypondManPageOahGroup::~msr2lilypondManPageOahGroup ()
 {}
 
 void msr2lilypondManPageOahGroup::initializeManPageGenerateOptions (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   S_oahSubGroup
     subGroup =
@@ -273,7 +273,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 #endif
 
 void msr2lilypondManPageOahGroup::initializeMsr2lilypondManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   // display
   // --------------------------------------
@@ -391,7 +391,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lilypondManPageOahGroup
 
 //______________________________________________________________________________
 S_msr2lilypondManPageOahGroup createGlobalMsr2lilypondManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

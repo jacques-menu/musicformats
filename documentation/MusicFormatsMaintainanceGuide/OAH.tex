@@ -822,7 +822,7 @@ void mxsr2msrTranslator::visitStart ( S_grace& elt )
   }
 
 void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
-  S_msrNote newNote)
+  const S_msrNote& newNote)
 
       // create grace notes group
       fPendingGraceNotesGroup =
@@ -948,7 +948,7 @@ An \insider\ handler is always created, and a \regular\ one relying on it is cre
     // create an msdlConverter insider OAH handler
     // ------------------------------------------------------
 
-    S_msdlConverterInsiderHandler
+    const S_msdlConverterInsiderHandler&
       insiderOahHandler =
         msdlConverterInsiderHandler::create (
           serviceName,

@@ -35,8 +35,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrRepeatCoda msrRepeatCoda::create (
   int                 inputLineNumber,
-  S_msrSegment        repeatCodaSegment,
-  S_msrRepeat         upLinkToRepeat)
+  const S_msrSegment& repeatCodaSegment,
+  const S_msrRepeat&  upLinkToRepeat)
 {
   msrRepeatCoda* o =
     new msrRepeatCoda (
@@ -49,8 +49,8 @@ S_msrRepeatCoda msrRepeatCoda::create (
 
 msrRepeatCoda::msrRepeatCoda (
   int                 inputLineNumber,
-  S_msrSegment        repeatCodaSegment,
-  S_msrRepeat         upLinkToRepeat)
+  const S_msrSegment& repeatCodaSegment,
+  const S_msrRepeat&  upLinkToRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -250,7 +250,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatCoda& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

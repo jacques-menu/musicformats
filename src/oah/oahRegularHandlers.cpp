@@ -39,7 +39,7 @@ namespace MusicFormats
 S_oahRegularHandler oahRegularHandler::create (
   std::string       serviceName,
   const std::string&     handlerHeader,
-  S_oahHandler      insiderOahHandler)
+  const S_oahHandler&      insiderOahHandler)
 {
   // create the regular handler
   oahRegularHandler* o = new
@@ -55,7 +55,7 @@ S_oahRegularHandler oahRegularHandler::create (
 oahRegularHandler::oahRegularHandler (
   std::string       serviceName,
   const std::string&     handlerHeader,
-  S_oahHandler      insiderOahHandler)
+  const S_oahHandler&      insiderOahHandler)
   : oahHandler (
       serviceName,
       handlerHeader,
@@ -126,7 +126,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
 }
 
 void oahRegularHandler::appendGroupToRegulalHandler (
-  S_oahGroup group)
+  const S_oahGroup& group)
 {
   // sanity check
   mfAssert (
@@ -163,7 +163,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
 }
 
 void oahRegularHandler::prependGroupToRegularHandler (
-  S_oahGroup group)
+  const S_oahGroup& group)
 {
   // sanity check
   mfAssert (
@@ -201,7 +201,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
 
 void oahRegularHandler::registerAtomInRegularSubgroup (
   const std::string& atomName,
-  S_oahSubGroup subGroup)
+  const S_oahSubGroup& subGroup)
 {
   S_oahElement
     insiderElement =

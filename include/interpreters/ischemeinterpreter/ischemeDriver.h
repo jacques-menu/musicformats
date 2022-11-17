@@ -64,7 +64,8 @@ class   ischemeDriver
 
     void                  appendInputSouce (std::string inputSouce);
 
-    const std::list<std::string>&   getInputSoucesList () const
+    const std::list<std::string>&   
+                          getInputSoucesList () const
                               { return fInputSoucesList; }
 
     bool                  getTraceScanning () const
@@ -148,7 +149,7 @@ class   ischemeDriver
 
     // options
     void                  registerOptionInCurrentOptionsBlock (
-                            S_oahOption option,
+                            const S_oahOption& option,
                             ischemeDriver& drv);
 
     void                  registerOptionsSuppliedChoicesAsUsed (

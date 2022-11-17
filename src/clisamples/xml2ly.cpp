@@ -98,7 +98,7 @@ int xml2ly (
     // create an xml2ly insider OAH handler
     // ------------------------------------------------------
 
-    S_xml2lyInsiderHandler
+    const S_xml2lyInsiderHandler&
       insiderOahHandler =
         xml2lyInsiderHandler::create (
           serviceName,

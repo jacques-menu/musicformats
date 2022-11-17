@@ -284,7 +284,7 @@ class EXP msrHarmony : public msrMeasureElement
 
     static SMARTP<msrHarmony> create (
                             int                      inputLineNumber,
-                            S_msrMeasure             upLinkToMeasure,
+                            const S_msrMeasure&             upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
                             const std::string&       harmonyKindText,
@@ -297,10 +297,10 @@ class EXP msrHarmony : public msrMeasureElement
                             const Rational&          harmonyWholeNotesOffset);
 
     SMARTP<msrHarmony> createHarmonyNewbornClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
     SMARTP<msrHarmony> createHarmonyDeepClone ( // JMI ???
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
   protected:
 
@@ -309,7 +309,7 @@ class EXP msrHarmony : public msrMeasureElement
 
                           msrHarmony (
                             int                      inputLineNumber,
-                            S_msrMeasure             upLinkToMeasure,
+                            const S_msrMeasure&             upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
                             const std::string&       harmonyKindText,
@@ -343,13 +343,13 @@ class EXP msrHarmony : public msrMeasureElement
                             { return fHarmonyUpLinkToMeasure; }
 
     // uplinks
-    void                  setHarmonyUpLinkToNote (S_msrNote note);
+    void                  setHarmonyUpLinkToNote (const S_msrNote& note);
 
     S_msrNote             getHarmonyUpLinkToNote () const
                              { return fHarmonyUpLinkToNote; }
 
     void                  setHarmoniesUpLinkToVoice (
-                            S_msrVoice voice)
+                            const S_msrVoice& voice)
                               { fHarmoniesUpLinkToVoice = voice; }
 
     S_msrVoice            getHarmoniesUpLinkToVoice () const
@@ -414,7 +414,7 @@ class EXP msrHarmony : public msrMeasureElement
 
     // frame
     void                  setHarmonyFrame (
-                            S_msrFrame frame);
+                            const S_msrFrame& frame);
 
     const S_msrFrame&     getHarmonyFrame () const
                               { return fHarmonyFrame; }

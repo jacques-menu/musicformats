@@ -1242,7 +1242,7 @@ oahAtom::~oahAtom ()
 {}
 
 void oahAtom::setUpLinkToSubGroup (
-  S_oahSubGroup subGroup)
+  const S_oahSubGroup& subGroup)
 {
   // sanity check
   mfAssert (
@@ -1282,7 +1282,7 @@ S_oahHandler oahAtom::fetchAtomUpLinkToHandler () const
 }
 
 void oahAtom::appendAtomToElementsList (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -2426,7 +2426,7 @@ S_oahSubGroup oahSubGroup::create (
   const std::string&       shortName,
   const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahGroup               upLinkToGroup)
+  const S_oahGroup&        upLinkToGroup)
 {
   oahSubGroup* o = new
     oahSubGroup (
@@ -2446,7 +2446,7 @@ S_oahSubGroup oahSubGroup::createWithNames (
   const std::string&       shortName,
   const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahGroup               upLinkToGroup)
+  const S_oahGroup&        upLinkToGroup)
 {
   oahSubGroup* o = new
     oahSubGroup (
@@ -2466,7 +2466,7 @@ oahSubGroup::oahSubGroup (
   const std::string&       shortName,
   const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahGroup               upLinkToGroup)
+  const S_oahGroup&        upLinkToGroup)
   : oahElement (
       longName,
       shortName,
@@ -2501,7 +2501,7 @@ S_oahHandler oahSubGroup::fetchSubGroupUpLinkToHandler () const
 }
 
 void oahSubGroup::appendSubGroupToElementsList (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -2542,7 +2542,7 @@ void oahSubGroup::appendSubGroupToElementsList (
 }
 
 void oahSubGroup::registerNamesInSubGroupToTheNamesToElementsMap (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -2582,7 +2582,7 @@ void oahSubGroup::registerNamesInSubGroupToTheNamesToElementsMap (
 }
 
 void oahSubGroup::appendAtomToSubGroup (
-  S_oahAtom atom)
+  const S_oahAtom& atom)
 {
   // sanity check
   mfAssert (
@@ -3152,7 +3152,7 @@ void oahSubGroup::printOptionsSummary (
 
 void oahSubGroup::printSubGroupSpecificHelpOrOptionsSummary (
   std::ostream&      os,
-  S_oahSubGroup subGroup) const
+  const S_oahSubGroup& subGroup) const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -3177,7 +3177,7 @@ void oahSubGroup::printSubGroupSpecificHelpOrOptionsSummary (
 
 void oahSubGroup::printSubGroupAndAtomHelp (
   std::ostream&  os,
-  S_oahAtom targetAtom) const
+  const S_oahAtom& targetAtom) const
 {
   // print the subgroup atoms
   if (fSubGroupAtomsList.size ()) {
@@ -3405,7 +3405,7 @@ S_oahGroup oahGroup::create (
   const std::string&       shortName,
   const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahHandler             groupUpLinkToHandler)
+  const S_oahHandler&      groupUpLinkToHandler)
 {
   oahGroup* o = new
     oahGroup (
@@ -3443,7 +3443,7 @@ S_oahGroup oahGroup::createWithNames (
   const std::string&       shortName,
   const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahHandler             groupUpLinkToHandler)
+  const S_oahHandler&      groupUpLinkToHandler)
 {
   oahGroup* o = new
     oahGroup (
@@ -3486,7 +3486,7 @@ oahGroup::oahGroup (
   const std::string&       shortName,
   const std::string&       description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahHandler             groupUpLinkToHandler)
+  const S_oahHandler&      groupUpLinkToHandler)
   : oahElement (
       longName,
       shortName,
@@ -3507,13 +3507,13 @@ oahGroup::~oahGroup ()
 {}
 
 void oahGroup::setUpLinkToHandler (
-  S_oahHandler upLinkToHandler)
+  const S_oahHandler& upLinkToHandler)
 {
   fUpLinkToHandler = upLinkToHandler;
 }
 
 void oahGroup::appendGroupToElementsList (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -3561,7 +3561,7 @@ void oahGroup::appendGroupToElementsList (
 }
 
 void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -3607,7 +3607,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
 }
 
 void  oahGroup::appendSubGroupToGroup (
-  S_oahSubGroup subGroup)
+  const S_oahSubGroup& subGroup)
 {
   // sanity check
   mfAssert (
@@ -3681,7 +3681,7 @@ void oahGroup::applyElement (std::ostream& os)
 
 void oahGroup::handleAtomValue (
   std::ostream&      os,
-  S_oahAtom     atom,
+  const S_oahAtom&     atom,
   const std::string& theString)
 {
   os <<
@@ -4031,7 +4031,7 @@ void oahGroup::printHelp (std::ostream& os) const
 
 void oahGroup::printGroupAndSubGroupHelp (
   std::ostream&      os,
-  S_oahSubGroup targetSubGroup) const
+  const S_oahSubGroup& targetSubGroup) const
 {
   // print the header and option names
   os <<
@@ -4079,9 +4079,9 @@ void oahGroup::printGroupAndSubGroupHelp (
 }
 
 void oahGroup::printGroupAndSubGroupAndAtomHelp (
-  std::ostream&      os,
-  S_oahSubGroup targetSubGroup,
-  S_oahAtom     targetAtom) const
+  std::ostream&        os,
+  const S_oahSubGroup& targetSubGroup,
+  const S_oahAtom&     targetAtom) const
 {
   // print the target options subgroup
   if (fGroupSubGroupsList.size ()) {
@@ -4152,7 +4152,7 @@ void oahGroup::printOptionsSummary (std::ostream& os) const
 
 void oahGroup::printGroupAndSubGroupSpecificHelp (
   std::ostream&      os,
-  S_oahSubGroup subGroup) const
+  const S_oahSubGroup& subGroup) const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -4527,7 +4527,7 @@ S_oahElement oahHandler::fetchNameInNamesToElementsMap (
 }
 
 void oahHandler::registerElementNamesInHandler (
-  S_oahElement element)
+  const S_oahElement& element)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -4753,7 +4753,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
 }
 
 void oahHandler::appendElementToElementsList (
-  S_oahElement element)
+  const S_oahElement& element)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -5862,7 +5862,7 @@ void oahHandler::printOptionsSummary (std::ostream& os) const
 
 void oahHandler::printHandlerAndGroupAndSubGroupSpecificHelp (
   std::ostream&      os,
-  S_oahSubGroup subGroup) const
+  const S_oahSubGroup& subGroup) const
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -6513,7 +6513,7 @@ std::ostream& operator << (std::ostream& os, const S_oahHandler& elt)
 }
 
 void oahHandler::registerPrefixInHandler (
-  S_oahPrefix prefix)
+  const S_oahPrefix& prefix)
 {
   // sanity check
   mfAssert (
@@ -6580,7 +6580,7 @@ S_oahPrefix oahHandler::fetchNameInPrefixesMap (
 }
 
 void oahHandler::appendGroupToHandler (
-  S_oahGroup group)
+  const S_oahGroup& group)
 {
   // sanity check
   mfAssert (
@@ -6613,7 +6613,7 @@ void oahHandler::appendGroupToHandler (
 }
 
 void oahHandler::prependGroupToHandler (
-  S_oahGroup group)
+  const S_oahGroup& group)
 {
   // sanity check
   mfAssert (
@@ -7057,7 +7057,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
 }
 
 void oahHandler::registerOahElementUse (
-  S_oahElement  elementUsed,
+  const S_oahElement&  elementUsed,
   const std::string& nameUsed,
   const std::string& valueUsed)
 {
@@ -7127,7 +7127,7 @@ void oahHandler::registerOahElementUse (
 }
 
 void oahHandler::registerAtomUse (
-  S_oahAtom     atomUsed,
+  const S_oahAtom&   atomUsed,
   const std::string& nameUsed,
   const std::string& valueUsed)
 {
@@ -7142,7 +7142,7 @@ void oahHandler::registerAtomUse (
 }
 
 void oahHandler::registerOahElementUseInLaunchCommand (
-  S_oahElement  elementUsed,
+  const S_oahElement&  elementUsed,
   const std::string& nameUsed,
   const std::string& valueUsed)
 {
@@ -8827,7 +8827,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 }
 
 void oahHandler::handleKnownOptionsVectorElement (
-  S_oahElement  element,
+  const S_oahElement&  element,
   const std::string& optionNameUsed,
   const std::string& valueUsed)
 {
@@ -8990,7 +8990,7 @@ void oahHandler::handleKnownOptionsVectorElement (
 }
 
 void oahHandler::handleKnownArgvElement (
-  S_oahElement  element,
+  const S_oahElement&  element,
   const std::string& optionNameUsed)
 {
 #ifdef TRACING_IS_ENABLED
@@ -9133,7 +9133,7 @@ void oahHandler::handleKnownArgvElement (
 }
 
 void oahHandler::handleKnownOptionsVectorAtom (
-  S_oahAtom     atom,
+  const S_oahAtom&     atom,
   const std::string& optionNameUsed,
   const std::string& valueUsed)
 {
@@ -9192,7 +9192,7 @@ void oahHandler::handleKnownOptionsVectorAtom (
 }
 
 void oahHandler::handleKnownArgvAtom (
-  S_oahAtom     atom,
+  const S_oahAtom&     atom,
   const std::string& optionNameUsed)
 {
 #ifdef TRACING_IS_ENABLED

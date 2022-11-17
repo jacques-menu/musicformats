@@ -39,7 +39,7 @@ namespace MusicFormats
 S_Mikrokosmos3WanderingRegularHandler Mikrokosmos3WanderingRegularHandler::create (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_Mikrokosmos3WanderingInsiderHandler
+  const S_Mikrokosmos3WanderingInsiderHandler&
                     insiderOahHandler,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
@@ -57,7 +57,7 @@ S_Mikrokosmos3WanderingRegularHandler Mikrokosmos3WanderingRegularHandler::creat
 Mikrokosmos3WanderingRegularHandler::Mikrokosmos3WanderingRegularHandler (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_Mikrokosmos3WanderingInsiderHandler
+  const S_Mikrokosmos3WanderingInsiderHandler&
                     insiderOahHandler,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
   : oahRegularHandler (

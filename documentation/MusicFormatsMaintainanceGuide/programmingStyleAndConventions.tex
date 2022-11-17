@@ -784,7 +784,8 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files > xml2ly -query input-line-num
 Generators such as {\tt Mikrokosmos3Wandering} don't read any input, and the input line numbers the use are the ones in the source code, which is helpful for debugging. For example:
 \begin{lstlisting}[language=CPlusPlus]
 S_msrStaff Mikrokosmos3WanderingGenerator::createStaffInPart (
-  int staffNumber, S_msrPart part)
+  int              staffNumber, 
+  const S_msrPart& part)
 {
   // create the staff
   S_msrStaff
@@ -1879,7 +1880,7 @@ class EXP msrPart : public msrPartGroupElement
     // upLinks
 
     void                  setPartUpLinkToPartGroup (
-                            S_msrPartGroup partGroup)
+                            const S_msrPartGroup& partGroup)
                               { fPartUpLinkToPartGroup = partGroup; }
 
     S_msrPartGroup        getPartUpLinkToPartGroup () const

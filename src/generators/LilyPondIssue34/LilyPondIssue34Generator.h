@@ -68,14 +68,14 @@ class EXP LilyPondIssue34Generator : public smartable
     // the staves
     S_msrStaff            createStaffInPart (
                             int staffNumber,
-                            S_msrPart part);
+                            const S_msrPart& part);
 
     S_msrStaff            createAndPopulateLowerStaffInPart (
-                            S_msrPart            part,
+                            const S_msrPart&            part,
                             msrGenerationAPIKind generationAPIKind);
 
     S_msrStaff            createAndPopulateUpperStaffInPart (
-                            S_msrPart            part,
+                            const S_msrPart&            part,
                             msrGenerationAPIKind generationAPIKind);
 
     // the part
@@ -85,33 +85,33 @@ class EXP LilyPondIssue34Generator : public smartable
     S_msrVoice            createRegularVoiceInStaff (
                             int          inputLineNumber,
                             int          voiceNumber,
-                            S_msrStaff   staff);
+                            const S_msrStaff&   staff);
 
     // the measures
     S_msrMeasure          createMeasureInVoice (
                             int           inputLineNumber,
                             const std::string& measureNumber,
-                            S_msrVoice    voice);
+                            const S_msrVoice&    voice);
 
     // populating the upper voice
     void                  populateUpperVoice1WithTheFunctionsAPI (
-                            S_msrVoice upperVoice1);
+                            const S_msrVoice& upperVoice1);
 
     void                  populateUpperVoice1WithTheStringsAPI (
-                            S_msrVoice upperVoice1);
+                            const S_msrVoice& upperVoice1);
 
     // populating the lower voices
     void                  populateLowerVoice1WithTheFunctionsAPI (
-                            S_msrVoice lowerVoice1);
+                            const S_msrVoice& lowerVoice1);
 
     void                  populateLowerVoice1WithTheStringsAPI (
-                            S_msrVoice lowerVoice1);
+                            const S_msrVoice& lowerVoice1);
 
     void                  populateLowerVoice2WithTheFunctionsAPI (
-                            S_msrVoice lowerVoice2);
+                            const S_msrVoice& lowerVoice2);
 
     void                  populateLowerVoice2WithTheStringsAPI (
-                            S_msrVoice lowerVoice2);
+                            const S_msrVoice& lowerVoice2);
 };
 typedef SMARTP<LilyPondIssue34Generator> S_LilyPondIssue34Generator;
 // JMI EXP std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34Generator& elt);
