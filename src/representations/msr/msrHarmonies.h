@@ -24,7 +24,7 @@
 
 #include "msrDurations.h"
 #include "msrIntervals.h"
-// #include "msrNotes.h"
+#include "msrTablatures.h"
 #include "msrTupletFactors.h"
 #include "msrVoices.h"
 
