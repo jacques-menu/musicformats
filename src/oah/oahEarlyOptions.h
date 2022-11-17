@@ -96,7 +96,8 @@ class EXP oahEarlyOptions
                           getEarlyMultiGenerationOutputKind () const
                               { return fEarlyMultiGenerationOutputKind; }
 
-    const std::list<std::string>&   getEarlyIncludeFileNamesList () const
+    const std::list<std::string>&   
+                          getEarlyIncludeFileNamesList () const
                               { return fEarlyIncludeFileNamesList; }
 
 #ifdef TRACING_IS_ENABLED

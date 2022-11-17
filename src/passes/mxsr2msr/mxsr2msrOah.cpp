@@ -411,7 +411,7 @@ std::ostream& operator << (std::ostream& os, const S_msrReplaceClefAtom& elt)
 S_mxsr2msrOahGroup gGlobalMxsr2msrOahGroup;
 
 S_mxsr2msrOahGroup mxsr2msrOahGroup::create (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   mxsr2msrOahGroup* o = new mxsr2msrOahGroup (
     handler);
@@ -420,7 +420,7 @@ S_mxsr2msrOahGroup mxsr2msrOahGroup::create (
 }
 
 mxsr2msrOahGroup::mxsr2msrOahGroup (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
   : oahGroup (
     "mxsr2msr",
     "help-mxsr-to-msr", "hmxsr2msr",
@@ -436,7 +436,7 @@ mxsr2msrOahGroup::~mxsr2msrOahGroup ()
 {}
 
 void mxsr2msrOahGroup::createTheMxsr2msrPrefixes (
-                            S_oahHandler handler)
+                            const S_oahHandler& handler)
 {
   // the 'ignore-redundant' prefixes
   // --------------------------------------
@@ -2451,7 +2451,7 @@ std::ostream& operator << (std::ostream& os, const S_mxsr2msrOahGroup& elt)
 
 //______________________________________________________________________________
 S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

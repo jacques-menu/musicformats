@@ -58,7 +58,7 @@ class EXP outputFileOahGroup : public oahGroup
     Bool                  getAutoOutputFileName () const
                               { return fAutoOutputFileName; }
 
-    S_oahBooleanAtom      getAutoOutputFileNameAtom () const
+    const S_oahBooleanAtom&      getAutoOutputFileNameAtom () const
                               { return fAutoOutputFileNameAtom; }
 
     void                  setOutputFileName (std::string value)

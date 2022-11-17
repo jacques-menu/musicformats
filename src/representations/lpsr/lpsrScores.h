@@ -311,11 +311,11 @@ class EXP lpsrScore : public lpsrElement
     // ------------------------------------------------------
 
     void                  appendVoiceToLpsrScoreElementsList (
-                            S_msrVoice voice)
+                            const S_msrVoice& voice)
                               { fScoreElementsList.push_back (voice); }
 
     void                  appendStanzaToLpsrScoreElementsList (
-                            S_msrStanza stanza)
+                            const S_msrStanza& stanza)
                               { fScoreElementsList.push_back (stanza); }
 
     void                  appendBookBlockToBookBlocksList (

@@ -45,7 +45,7 @@ class EXP lpsr2lilypondOah2manPage : virtual public oah2manPage,
   public:
 
                           lpsr2lilypondOah2manPage (
-                            const S_oahHandler handler,
+                            const S_oahHandler& handler,
                             std::ostream&           manPageOutputStream);
 
     virtual               ~lpsr2lilypondOah2manPage ();

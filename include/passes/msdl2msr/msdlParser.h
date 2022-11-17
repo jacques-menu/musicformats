@@ -221,10 +221,10 @@ class msdlParser : public smartable
     void                  setCurrentOctaveEntryReference ();
 
     std::string           lilypondOctaveInRelativeEntryMode (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     std::string           lilypondOctaveInFixedEntryMode (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     // note
     Rational              fCurrentNoteSoundingWholeNotes;

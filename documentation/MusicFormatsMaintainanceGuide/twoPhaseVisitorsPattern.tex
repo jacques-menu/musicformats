@@ -405,7 +405,7 @@ void msrStaff::browseData (basevisitor* v)
   // ... ... ...
 
   if (fStaffAllVoicesList.size ()) {
-    for (S_msrVoice voice : fStaffAllVoicesList) {
+    for (const S_msrVoice& voice : fStaffAllVoicesList) {
       // is this voice name in the ignore voices set?
       Bool ignoreVoice (false);
 
@@ -647,7 +647,7 @@ There are cases where we need a deterministic traversal of some data handled by 
 This is what \method{msrPart}{appendStaffDetailsToPart} does:
 \begin{lstlisting}[language=CPlusPlus]
 void msrPart::appendStaffDetailsToPart (
-  S_msrStaffDetails staffDetails)
+  const S_msrStaffDetails& staffDetails)
 {
 	// ... ... ...
 

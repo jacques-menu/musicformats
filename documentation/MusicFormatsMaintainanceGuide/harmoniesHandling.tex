@@ -28,7 +28,7 @@ In \class{msrNote}, there is:
 \begin{lstlisting}[language=CPlusPlus]
     // harmonies
     void                  appendHarmonyToNoteHarmoniesList (
-                            S_msrHarmony harmony);
+                            const S_msrHarmony& harmony);
 
     const std::list<S_msrHarmony>&
                           getNoteHarmoniesList () const
@@ -65,7 +65,7 @@ In \class{msrStaff}, there is:
 \begin{lstlisting}[language=CPlusPlus]
     void                  registerHarmoniesVoiceByItsNumber (
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 \end{lstlisting}
 
 \Class{msrPart} also contains:
@@ -77,12 +77,12 @@ In \class{msrStaff}, there is:
                             std::string currentMeasureNumber);
 
     void                  appendHarmonyToPart (
-                            S_msrVoice  harmonySupplierVoice,
-                            S_msrHarmony harmony);
+                            const S_msrVoice&  harmonySupplierVoice,
+                            const S_msrHarmony& harmony);
 
     void                  appendHarmonyToPartClone (
-                            S_msrVoice   harmonySupplierVoice,
-                            S_msrHarmony harmony);
+                            const S_msrVoice&   harmonySupplierVoice,
+                            const S_msrHarmony& harmony);
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
@@ -101,7 +101,7 @@ This is done in \mxsrToMsrBoth{mxsr2msrSkeletonBuilder.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
   int        inputLineNumber,
-  S_msrPart  part)
+  const S_msrPart&  part)
 {
   // is the harmonies voice already present in part?
   S_msrVoice
@@ -242,7 +242,7 @@ Creating the part harmonies voice is delegated to the part:
 \begin{lstlisting}[language=CPlusPlus]
 S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
   int        inputLineNumber,
-  S_msrPart  part)
+  const S_msrPart&  part)
 {
   // is the harmonies voice already present in part?
   S_msrVoice
@@ -426,7 +426,7 @@ The contents of \fieldName{mxsr2msrTranslator}{fPendingHarmoniesList} is attache
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrTranslator::populateNote (
   int       inputLineNumber,
-  S_msrNote newNote)
+  const S_msrNote& newNote)
 {
 	// ... ... ...
 
@@ -459,7 +459,7 @@ The \class{msrHarmony} instances are populated further in \msr{mxsr2msrTranslato
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrTranslator::handlePendingHarmonies (
   S_msrNote  newNote,
-  S_msrVoice voiceToInsertInto)
+  const S_msrVoice& voiceToInsertInto)
 {
 	// ... ... ...
 
@@ -553,7 +553,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
 \Method{msrNote}{appendHarmonyToNoteHarmoniesList} is where the harmony's note uplink is set:
 \begin{lstlisting}[language=CPlusPlus]
-void msrNote::appendHarmonyToNoteHarmoniesList (S_msrHarmony harmony)
+void msrNote::appendHarmonyToNoteHarmoniesList (const S_msrHarmony& harmony)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -580,7 +580,8 @@ void msrNote::appendHarmonyToNoteHarmoniesList (S_msrHarmony harmony)
 When a harmony is attached to a note that is a chord member, we have to attach it to the chord too, to facilitate setting its \pim\ when setting the chord's one.
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrTranslator::copyNoteHarmoniesToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's harmony if any from the first note to chord
 
@@ -620,7 +621,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 
 Inserting the harmonies in the part harmonies voice is done in \method{msrVoice}{appendNoteToVoice} in \msr{msrNotes.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
-void msrVoice::appendNoteToVoice (S_msrNote note)
+void msrVoice::appendNoteToVoice (const S_msrNote& note)
 {
 	// ... ... ...
 

@@ -31,7 +31,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 brailleGenerationOah2manPage::brailleGenerationOah2manPage (
-  const S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&           manPageOutputStream)
     : oah2manPage (
         handler,

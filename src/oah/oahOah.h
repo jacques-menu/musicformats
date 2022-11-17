@@ -194,7 +194,7 @@ class EXP oahOahGroup : public oahGroup
 //     Bool                  getOahVerboseMode () const
 //                               { return fOahVerboseMode; }
 
-    S_oahBooleanAtom      getOahVerboseModeAtom () const
+    const S_oahBooleanAtom&      getOahVerboseModeAtom () const
                               { return fOahVerboseModeAtom; }
 
     // options and arguments

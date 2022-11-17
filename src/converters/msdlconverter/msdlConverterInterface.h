@@ -27,21 +27,21 @@ namespace MusicFormats
 //   const char*  fileName,
 //   std::ostream&     out,
 //   std::ostream&     err,
-//   S_oahHandler handler);
+//   const S_oahHandler& handler);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
   FILE*        fd,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler);
+  const S_oahHandler& handler);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
   const char*  buffer,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler);
+  const S_oahHandler& handler);
 
 
 }

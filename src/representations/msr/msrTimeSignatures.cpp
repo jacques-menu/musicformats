@@ -439,7 +439,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTimeSignatureItem& elt)
 //______________________________________________________________________________
 S_msrTimeSignature msrTimeSignature::create (
   int            inputLineNumber,
-  S_msrMeasure&  upLinkToMeasure,
+  const S_msrMeasure&  upLinkToMeasure,
   msrTimeSignatureSymbolKind
                  timeSignatureSymbolKind)
 {

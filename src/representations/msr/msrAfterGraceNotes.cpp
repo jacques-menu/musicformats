@@ -36,7 +36,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
   int        inputLineNumber,
-  S_msrVoice afterGraceNotesGroupContentsUpLinkToVoice)
+  const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
 {
   msrAfterGraceNotesGroupContents* o =
     new msrAfterGraceNotesGroupContents (
@@ -48,7 +48,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
 
 msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
   int        inputLineNumber,
-  S_msrVoice afterGraceNotesGroupContentsUpLinkToVoice)
+  const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -79,7 +79,7 @@ S_msrPart msrAfterGraceNotesGroupContents::fetchAfterGraceNotesGroupContentsUpLi
 }
 
 S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGraceNotesGroupContentsNewbornClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
@@ -105,13 +105,13 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
 }
 
 void msrAfterGraceNotesGroupContents::appendNoteToAfterGraceNotesGroupContents (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   fAfterGraceNotesGroupContentsNotesList.push_back (note);
 }
 
 void msrAfterGraceNotesGroupContents::appendNoteToAfterGraceNotesGroupContents (
-  S_msrChord chord)
+  const S_msrChord& chord)
 {
   fAfterGraceNotesGroupContentsNotesList.push_back (chord);
 }
@@ -249,7 +249,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::create (
   int          inputLineNumber,
   S_msrElement afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
-  S_msrVoice   afterGraceNotesGroupUpLinkToVoice)
+  const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)
 {
   msrAfterGraceNotesGroup* o =
     new msrAfterGraceNotesGroup (
@@ -265,7 +265,7 @@ msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
   int          inputLineNumber,
   S_msrElement afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
-  S_msrVoice   afterGraceNotesGroupUpLinkToVoice)
+  const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -310,7 +310,7 @@ S_msrPart msrAfterGraceNotesGroup::fetchAfterGraceNotesGroupUpLinkToPart () cons
 
 S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNewbornClone (
   S_msrNote  noteClone,
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
@@ -346,7 +346,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
 }
 
 void msrAfterGraceNotesGroup::appendNoteToAfterGraceNotesGroupContents (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   fAfterGraceNotesGroupContents->
     appendNoteToAfterGraceNotesGroupContents (

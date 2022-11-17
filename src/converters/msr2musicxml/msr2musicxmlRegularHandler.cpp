@@ -35,7 +35,7 @@ namespace MusicFormats
 S_msr2musicxmlRegularHandler msr2musicxmlRegularHandler::create (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msr2musicxmlInsiderHandler
+  const S_msr2musicxmlInsiderHandler&
                     insiderOahHandler)
 {
   // create the regular handler
@@ -52,7 +52,7 @@ S_msr2musicxmlRegularHandler msr2musicxmlRegularHandler::create (
 msr2musicxmlRegularHandler::msr2musicxmlRegularHandler (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msr2musicxmlInsiderHandler
+  const S_msr2musicxmlInsiderHandler&
                     insiderOahHandler)
   : oahRegularHandler (
       serviceName,
@@ -294,7 +294,7 @@ void msr2musicxmlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
-  
+
   registerAtomInRegularSubgroup ("display-msr-1", subGroup);
   registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
   registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
@@ -1253,7 +1253,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2musicxmlRegularHandler&
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

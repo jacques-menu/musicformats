@@ -17010,7 +17010,7 @@ void mxsr2msrTranslator::visitEnd (S_unpitched& elt)
 //______________________________________________________________________________
 S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
   int                  inputLineNumber,
-  S_msrVoice           voice,
+  const S_msrVoice&           voice,
   S_msrNote            chordFirstNote,
   msrNoteKind noteKind)
 {
@@ -17112,8 +17112,8 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
 /* JMI
 void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
   int        inputLineNumber,
-  S_msrVoice voice,
-  S_msrChord chord)
+  const S_msrVoice& voice,
+  const S_msrChord& chord)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -17173,7 +17173,7 @@ void mxsr2msrTranslator::printVoicesCurrentChordMap ()
       ++gIndenter;
 
       / * JMI
-      S_msrVoice voice = (*i).first;
+      const S_msrVoice& voice = (*i).first;
       S_msrChord chord = (*i).second;
     * /
       gLogStream <<
@@ -17275,7 +17275,8 @@ void mxsr2msrTranslator::printCurrentChord ()
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteArticulationsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's articulations if any from the first note to chord
 
@@ -17302,7 +17303,8 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteTechnicalsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's technicals if any from the first note to chord
 
@@ -17329,7 +17331,8 @@ void mxsr2msrTranslator::copyNoteTechnicalsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's technicals if any from the first note to chord
 
@@ -17356,7 +17359,8 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's technicals if any from the first note to chord
 
@@ -17383,7 +17387,8 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's technicals if any from the first note to chord
 
@@ -17410,7 +17415,8 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteOrnamentsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's ornaments if any from the first note to chord
 
@@ -17438,7 +17444,8 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteSpannersToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's spanners if any from the first note to chord
 
@@ -17466,7 +17473,8 @@ void mxsr2msrTranslator::copyNoteSpannersToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's singleTremolo if any from the first note to chord
 
@@ -17494,7 +17502,8 @@ void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteDynamicsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's dynamics if any from the first note to chord
 
@@ -17528,7 +17537,8 @@ void mxsr2msrTranslator::copyNoteDynamicsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's other dynamics if any from the first note to chord
 
@@ -17562,7 +17572,8 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteWordsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's words if any from the first note to chord
 
@@ -17596,7 +17607,8 @@ void mxsr2msrTranslator::copyNoteWordsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteStemToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's stems if any from the first note to chord
 
@@ -17625,7 +17637,8 @@ void mxsr2msrTranslator::copyNoteStemToChord (
 /*
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteBeamsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's beams if any from the first note to chord
 
@@ -17675,7 +17688,8 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
 */
 
 void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // append link of note's beams if any from the first note to chord
 
@@ -17735,7 +17749,8 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteTieToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's tie if any from the first note to chord
 
@@ -17780,7 +17795,8 @@ void mxsr2msrTranslator::copyNoteTieToChord (
 /*
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteSlursToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's slurs if any from the first note to chord
 
@@ -17815,7 +17831,8 @@ void mxsr2msrTranslator::copyNoteSlursToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::appendNoteSlursLinksToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // append link of note's slurs if any from the first note to chord
 
@@ -17875,7 +17892,8 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteLigaturesToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's ligatures if any from the first note to chord
 
@@ -17903,7 +17921,8 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNotePedalsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's pedals if any from the first note to chord
 
@@ -17932,7 +17951,8 @@ void mxsr2msrTranslator::copyNotePedalsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteSlashesToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's slashes if any from the first note to chord
 
@@ -17966,7 +17986,8 @@ void mxsr2msrTranslator::copyNoteSlashesToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteWedgesToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's wedges if any from the first note to chord
 
@@ -18001,7 +18022,8 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteSegnosToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's segnos if any from the first note to chord
 
@@ -18035,7 +18057,8 @@ void mxsr2msrTranslator::copyNoteSegnosToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteDalSegnosToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's dal segnos if any from the first note to chord
 
@@ -18069,7 +18092,8 @@ void mxsr2msrTranslator::copyNoteDalSegnosToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteCodasToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's codas if any from the first note to chord
 
@@ -18103,7 +18127,8 @@ void mxsr2msrTranslator::copyNoteCodasToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteOctaveShiftToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's wedges if any from the first note to chord
 
@@ -18132,7 +18157,8 @@ void mxsr2msrTranslator::copyNoteOctaveShiftToChord (
 /*
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   S_msrGraceNotesGroup
     graceNotesGroupBefore =
@@ -18182,7 +18208,8 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // add link of note's grace notes groups if any to chord
 
@@ -18255,7 +18282,8 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteHarmoniesToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's harmony if any from the first note to chord
 
@@ -18289,7 +18317,8 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::copyNoteElementsToChord (
-  S_msrNote note, S_msrChord chord)
+  const S_msrNote&  note,
+  const S_msrChord& chord)
 {
   // copy note's articulations if any to the chord
   copyNoteArticulationsToChord (note, chord);
@@ -18366,7 +18395,7 @@ void mxsr2msrTranslator::copyNoteElementsToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
-  S_msrNote firstNote)
+  const S_msrNote& firstNote)
 {
   // firstNote is the first tuplet note,
   // and is currently at the end of the voice
@@ -18632,7 +18661,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentArticulationsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the current articulations if any to the note
   if (fCurrentArticulations.size ()) {
@@ -18672,7 +18701,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the current technicals if any to the note
   if (fCurrentTechnicalsList.size ()) {
@@ -18712,7 +18741,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the current technicals if any to the note
   if (fCurrentTechnicalWithIntegersList.size ()) {
@@ -18752,7 +18781,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the current technicals if any to the note
   if (fCurrentTechnicalWithFloatsList.size ()) {
@@ -18792,7 +18821,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the current technicals if any to the note
   if (fCurrentTechnicalWithStringsList.size ()) {
@@ -18832,7 +18861,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the current ornaments if any to the note
   if (fCurrentOrnamentsList.size ()) {
@@ -18872,7 +18901,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentSpannersToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the current spanners if any to the note
   if (fCurrentSpannersList.size ()) {
@@ -18983,7 +19012,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentSingleTremoloToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the current singleTremolo if any to the note
   if (fCurrentSingleTremolo) {
@@ -19014,7 +19043,7 @@ void mxsr2msrTranslator::attachCurrentSingleTremoloToNote (
 //______________________________________________________________________________
 /* JMI
 void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
-  S_msrChord chord)
+  const S_msrChord& chord)
 {
   if (fCurrentArticulations.size ()) {
 
@@ -19052,7 +19081,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
 /*
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
-  S_msrChord chord)
+  const S_msrChord& chord)
 {
   if (fCurrentOrnamentsList.size ()) {
 
@@ -19089,7 +19118,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingTemposToVoice (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
   // attach the pending tempos if any to the voice
   if (fPendingTemposList.size ()) {
@@ -19117,7 +19146,7 @@ void mxsr2msrTranslator::attachPendingTemposToVoice (
 }
 
 void mxsr2msrTranslator::attachPendingTemposToPart (
-  S_msrPart part)
+  const S_msrPart& part)
 {
   // attach the pending tempos if any to the voice
   if (fPendingTemposList.size ()) {
@@ -19145,7 +19174,7 @@ void mxsr2msrTranslator::attachPendingTemposToPart (
 }
 
 void mxsr2msrTranslator::attachPendingBarLinesToVoice (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
   // attach the pending barlines if any to the voice
   if (fPendingBarLinesList.size ()) {
@@ -19176,7 +19205,7 @@ void mxsr2msrTranslator::attachPendingBarLinesToVoice (
 }
 
 void mxsr2msrTranslator::attachPendingBarLinesToPart (
-  S_msrPart part)
+  const S_msrPart& part)
 {
   // attach the pending barlines if any to the voice
   if (fPendingBarLinesList.size ()) {
@@ -19207,7 +19236,7 @@ void mxsr2msrTranslator::attachPendingBarLinesToPart (
 }
 
 void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
  // attach the pending rehearsals if any to the note
   if (fPendingRehearsalMarksList.size ()) {
@@ -19235,7 +19264,7 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
 }
 
 void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
-  S_msrPart part)
+  const S_msrPart& part)
 {
  // attach the pending rehearsals if any to the note
   if (fPendingRehearsalMarksList.size ()) {
@@ -19263,7 +19292,7 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
 }
 
 void mxsr2msrTranslator::attachLineBreaksToVoice (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
  // attach the pending line breaks if any to the note
   if (fPendingLineBreaksList.size ()) {
@@ -19293,7 +19322,7 @@ void mxsr2msrTranslator::attachLineBreaksToVoice (
 }
 
 void mxsr2msrTranslator::attachLineBreaksToPart (
-  S_msrPart part)
+  const S_msrPart& part)
 {
  // attach the pending line breaks if any to the note
   if (fPendingLineBreaksList.size ()) {
@@ -19323,7 +19352,7 @@ void mxsr2msrTranslator::attachLineBreaksToPart (
 }
 
 void mxsr2msrTranslator::attachPageBreaksToVoice (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
  // attach the pending page breaks if any to the note
   if (fPendingPageBreaksList.size ()) {
@@ -19353,7 +19382,7 @@ void mxsr2msrTranslator::attachPageBreaksToVoice (
 }
 
 void mxsr2msrTranslator::attachPageBreaksToPart (
-  S_msrPart part)
+  const S_msrPart& part)
 {
  // attach the pending page breaks if any to the note
   if (fPendingPageBreaksList.size ()) {
@@ -19384,7 +19413,7 @@ void mxsr2msrTranslator::attachPageBreaksToPart (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingSegnosToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending segno if any to the note
   if (fPendingSegnosList.size ()) {
@@ -19412,7 +19441,7 @@ void mxsr2msrTranslator::attachPendingSegnosToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingDalSegnosToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending dal segno if any to the note
   if (fPendingDalSegnosList.size ()) {
@@ -19439,7 +19468,7 @@ void mxsr2msrTranslator::attachPendingDalSegnosToNote (
 }
 
 void mxsr2msrTranslator::attachPendingDalSegnosToChord (
-  S_msrChord chord)
+  const S_msrChord& chord)
 {
  // attach the pending dal segno if any to the chord
   if (fPendingDalSegnosList.size ()) {
@@ -19467,7 +19496,7 @@ void mxsr2msrTranslator::attachPendingDalSegnosToChord (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingCodasToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending coda if any to the note
   if (fPendingCodasList.size ()) {
@@ -19495,7 +19524,7 @@ void mxsr2msrTranslator::attachPendingCodasToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingCrescDecrescsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending crescDecresc if any to the note
   if (fPendinCrescDecrescsList.size ()) {
@@ -19523,7 +19552,7 @@ void mxsr2msrTranslator::attachPendingCrescDecrescsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingEyeGlassesToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending eyeglasses if any to the note
   if (fPendingEyeGlassesList.size ()) {
@@ -19551,7 +19580,7 @@ void mxsr2msrTranslator::attachPendingEyeGlassesToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingDampsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending damps if any to the note
   if (fPendingDampsList.size ()) {
@@ -19579,7 +19608,7 @@ void mxsr2msrTranslator::attachPendingDampsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingDampAllsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending damp alls if any to the note
   if (fPendingDampAllsList.size ()) {
@@ -19607,7 +19636,7 @@ void mxsr2msrTranslator::attachPendingDampAllsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingOctaveShiftsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending octave shifts if any to the note
   if (fPendingOctaveShiftsList.size ()) {
@@ -19645,7 +19674,7 @@ void mxsr2msrTranslator::attachPendingOctaveShiftsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingScordaturasToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending scordatura if any to the note
   if (fPendingScordaturasList.size ()) {
@@ -19673,7 +19702,7 @@ void mxsr2msrTranslator::attachPendingScordaturasToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingDynamicsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending dynamics if any to the note
   if (fPendingDynamicxList.size ()) {
@@ -19739,7 +19768,7 @@ void mxsr2msrTranslator::attachPendingDynamicsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending other dynamics if any to the note
   if (fPendingOtherDynamicxList.size ()) {
@@ -19805,7 +19834,7 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingWordsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the pending words if any to the note
   if (fPendingWordsList.size ()) {
@@ -19871,7 +19900,7 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingBeamsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the pending beams if any to the note
   if (fPendingBeamsList.size ()) {
@@ -19937,7 +19966,7 @@ void mxsr2msrTranslator::attachPendingBeamsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingSlursToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the pending slurs if any to the note
   if (fPendingSlursList.size ()) {
@@ -19999,7 +20028,7 @@ void mxsr2msrTranslator::attachPendingSlursToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingLigaturesToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int numberOfLigatures =
     fPendingLigaturesList.size ();
@@ -20182,7 +20211,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingPedalsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the pending pedals if any to the note
   if (fPendingPedalsList.size ()) {
@@ -20244,7 +20273,7 @@ void mxsr2msrTranslator::attachPendingPedalsToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingSlashesToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the pending slashes if any to the note
   if (fPendingSlashesList.size ()) {
@@ -20306,7 +20335,7 @@ void mxsr2msrTranslator::attachPendingSlashesToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingWedgesToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the pending wedges if any to the note
   if (fPendingWedgesList.size ()) {
@@ -20372,7 +20401,7 @@ void mxsr2msrTranslator::attachPendingWedgesToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingGlissandosToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending glissandos if any to the note
   if (fPendingGlissandosList.size ()) {
@@ -20452,7 +20481,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                 i != voiceStanzasMap.end ();
                 ++i
               ) {
-                S_msrStanza stanza = (*i).second;
+                const S_msrStanza& stanza = (*i).second;
                 // create a skip syllable
                 S_msrSyllable
                   syllable =
@@ -20487,7 +20516,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingSlidesToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
  // attach the pending slides if any to the note
   if (fPendingSlidesList.size ()) {
@@ -20567,7 +20596,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                 i != voiceStanzasMap.end ();
                 ++i
               ) {
-                S_msrStanza stanza = (*i).second;
+                const S_msrStanza& stanza = (*i).second;
                 // create a skip syllable
                 S_msrSyllable
                   syllable =
@@ -20601,7 +20630,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
 }
 
 void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
 //   JMI
 //   gLogStream <<
@@ -20634,7 +20663,7 @@ void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
 }
 
 void mxsr2msrTranslator::attachPendingPartLevelElementsToPart ( // JMI v0.9.63
-  S_msrPart part)
+  const S_msrPart& part)
 {
   /* JMI
   gLogStream <<
@@ -20668,7 +20697,7 @@ void mxsr2msrTranslator::attachPendingPartLevelElementsToPart ( // JMI v0.9.63
 
 
 void mxsr2msrTranslator::attachPendingNoteLevelElementsToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // attach the pending segnos, if any, to the note
   attachPendingSegnosToNote (note);
@@ -21069,7 +21098,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 //______________________________________________________________________________
 void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
   int       inputLineNumber,
-  S_msrNote newNote)
+  const S_msrNote& newNote)
 {
   // set newNote's color if relevant
   if (fCurrentNoteRGB.size () || fCurrentNoteAlpha.size ()) {
@@ -21222,7 +21251,7 @@ void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
 
 void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
   int       inputLineNumber,
-  S_msrNote newNote)
+  const S_msrNote& newNote)
 {
   // attach the regular pending elements (not dal segnos), if any, to newNote
   // only now because <lyric> follows <glissando> and <slide> in MusicXML JMI ???
@@ -21277,7 +21306,7 @@ void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
 void mxsr2msrTranslator::createAStaffChangeIfNecessary (
   int        inputLineNumber,
   S_msrNote  newNote,
-  S_msrVoice voiceToInsertInto)
+  const S_msrVoice& voiceToInsertInto)
 {
   // is there a staff change?
   fCurrentStaffChangeKind = msrStaffChangeKind::kStaffChange_NO_;
@@ -21932,7 +21961,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 //______________________________________________________________________________
 void mxsr2msrTranslator::handlePendingHarmonies (
   S_msrNote  newNote,
-  S_msrVoice voiceToInsertInto)
+  const S_msrVoice& voiceToInsertInto)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
@@ -22036,7 +22065,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 //______________________________________________________________________________
 void mxsr2msrTranslator::handlePendingFiguredBasses (
   S_msrNote  newNote,
-  S_msrVoice voiceToInsertInto)
+  const S_msrVoice& voiceToInsertInto)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBassDetails ()) {
@@ -22142,7 +22171,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
-  S_msrNote newNote)
+  const S_msrNote& newNote)
 {
   int inputLineNumber =
     newNote->getInputLineNumber ();
@@ -22526,7 +22555,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
-  S_msrVoice currentVoice,
+  const S_msrVoice& currentVoice,
   S_msrNote  newNote)
 {
   int inputLineNumber =
@@ -22665,7 +22694,7 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
           i != voiceStanzasMap.end ();
           ++i
         ) {
-          S_msrStanza stanza = (*i).second;
+          const S_msrStanza& stanza = (*i).second;
 
           //choose the syllable kind
           msrSyllableKind
@@ -22731,7 +22760,7 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleNoteBelongingToAChord (
-  S_msrNote newChordNote)
+  const S_msrNote& newChordNote)
 {
   int inputLineNumber =
     newChordNote->getInputLineNumber ();
@@ -23189,7 +23218,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 //______________________________________________________________________________
 void mxsr2msrTranslator::handlePendingTupletStopIfAny (
   int       inputLineNumber,
-  S_msrNote note)
+  const S_msrNote& note)
 {
   if (fCurrentATupletStopIsPending) {
     // finalize the tuplet, only now
@@ -23214,7 +23243,7 @@ void mxsr2msrTranslator::handlePendingTupletStopIfAny (
 }
 
 void mxsr2msrTranslator::handleNoteBelongingToATuplet (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -23628,7 +23657,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
-  S_msrNote newChordNote)
+  const S_msrNote& newChordNote)
 {
   /*
    The first note of a chord belonging to a tuplet
@@ -23826,7 +23855,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
-  S_msrNote newChordNote)
+  const S_msrNote& newChordNote)
 {
   /*
    The first note of a chord belonging to a tuplet

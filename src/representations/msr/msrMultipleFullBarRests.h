@@ -31,15 +31,15 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     static SMARTP<msrMultipleFullBarRests> create (
                             int             inputLineNumber,
                             int             multipleFullBarRestsNumber,
-                            S_msrSegment    upLinkToSegment);
+                            const S_msrSegment&    upLinkToSegment);
 
     static SMARTP<msrMultipleFullBarRests> create (
                             int          inputLineNumber,
-                            S_msrMeasure restMeasureClone,
-                            S_msrSegment upLinkToSegment);
+                            const S_msrMeasure& restMeasureClone,
+                            const S_msrSegment& upLinkToSegment);
 
     SMARTP<msrMultipleFullBarRests> createMultipleFullBarRestsNewbornClone (
-                              S_msrSegment containingVoice);
+                              const S_msrSegment& containingVoice);
 
   protected:
 
@@ -49,12 +49,12 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
                           msrMultipleFullBarRests (
                             int             inputLineNumber,
                             int             multipleFullBarRestsNumber,
-                            S_msrSegment    upLinkToSegment);
+                            const S_msrSegment&    upLinkToSegment);
 
                           msrMultipleFullBarRests (
                             int          inputLineNumber,
-                            S_msrMeasure restMeasureClone,
-                            S_msrSegment upLinkToSegment);
+                            const S_msrMeasure& restMeasureClone,
+                            const S_msrSegment& upLinkToSegment);
 
     virtual               ~msrMultipleFullBarRests ();
 
@@ -94,10 +94,10 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // ------------------------------------------------------
 
     void                  appendMeasureElementToSegmentElement (
-                            S_msrMeasureElement elem) override;
+                            const S_msrMeasureElement& elem) override;
 
     void                  appendMeasureToMultipleFullBarRests (
-                            S_msrMeasure measure);
+                            const S_msrMeasure& measure);
 
     int                   multipleFullBarRestsContentsMeasuresNumber () const
                             {

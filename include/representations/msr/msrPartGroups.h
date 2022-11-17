@@ -105,8 +105,8 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
-                            S_msrPartGroup           partGroupUpLinkToPartGroup,
-                            S_msrScore               partGroupUpLinkToScore);
+                            const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+                            const S_msrScore&        partGroupUpLinkToScore);
 
     static SMARTP<msrPartGroup> createImplicitPartGroup (
                             int                      partGroupNumber,
@@ -116,10 +116,10 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const std::string&       partGroupAccidentalText,
                             const std::string&       partGroupAbbreviation,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
-                            S_msrScore               partGroupUpLinkToScore);
+                            const S_msrScore&        partGroupUpLinkToScore);
 
     SMARTP<msrPartGroup> createPartGroupNewbornClone (
-                            S_msrPartGroup partGroupClone,
+                            const S_msrPartGroup& partGroupClone,
                               // the upLink for nested part groups
                             S_msrScore     scoreClon);
 
@@ -131,8 +131,8 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
                             const std::string&       partGroupName,
-                            S_msrPartGroup           partGroupUpLinkToPartGroup,
-                            S_msrScore               partGroupUpLinkToScore);
+                            const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+                            const S_msrScore&        partGroupUpLinkToScore);
 
   protected:
 
@@ -151,16 +151,16 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
-                            S_msrPartGroup           partGroupUpLinkToPartGroup,
-                            S_msrScore               partGroupUpLinkToScore);
+                            const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+                            const S_msrScore&        partGroupUpLinkToScore);
 
                           msrPartGroup (
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
                             const std::string&       partGroupName,
-                            S_msrPartGroup           partGroupUpLinkToPartGroup,
-                            S_msrScore               partGroupUpLinkToScore);
+                            const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+                            const S_msrScore&        partGroupUpLinkToScore);
 
     virtual               ~msrPartGroup ();
 
@@ -171,7 +171,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // upLinks
     void                  setPartGroupUpLinkToPartGroup (
-                            S_msrPartGroup partGroup)
+                            const S_msrPartGroup& partGroup)
                               {
                                 fPartGroupUpLinkToPartGroup =
                                   partGroup;
@@ -268,13 +268,13 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     void                  removePartFromPartGroup (
                             int       inputLineNumber,
-                            S_msrPart partToBeRemoved);
+                            const S_msrPart& partToBeRemoved);
 
     void                  prependSubPartGroupToPartGroup (
-                            S_msrPartGroup partGroup);
+                            const S_msrPartGroup& partGroup);
 
     void                  appendSubPartGroupToPartGroup (
-                            S_msrPartGroup partGroup);
+                            const S_msrPartGroup& partGroup);
 
     S_msrPart             fetchPartFromPartGroupByItsPartID (
                             int           inputLineNumber,
@@ -287,7 +287,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     // voices
 
     void                  registerVoiceInPartGroupAllVoicesList (
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
   public:
 
@@ -328,7 +328,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     // ------------------------------------------------------
 
     void                  checkPartGroupElement (
-                            S_msrPartGroupElement partGroupElement) const; // TEMP JMI v0.9.63
+                            const S_msrPartGroupElement& partGroupElement) const; // TEMP JMI v0.9.63
 
   private:
 

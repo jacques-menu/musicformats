@@ -1014,7 +1014,7 @@ class EXP oahTwoBooleansAtom : public oahBooleanAtom
                             const std::string&    description,
                             const std::string&    variableName,
                             Bool&            booleanVariable,
-                            S_oahBooleanAtom secondBooleanAtom);
+                            const S_oahBooleanAtom& secondBooleanAtom);
 
   protected:
 
@@ -1027,7 +1027,7 @@ class EXP oahTwoBooleansAtom : public oahBooleanAtom
                             const std::string&    description,
                             const std::string&    variableName,
                             Bool&            booleanVariable,
-                            S_oahBooleanAtom secondBooleanAtom);
+                            const S_oahBooleanAtom& secondBooleanAtom);
 
     virtual               ~oahTwoBooleansAtom ();
 
@@ -1090,8 +1090,8 @@ class EXP oahThreeBooleansAtom : public oahBooleanAtom
                             const std::string&    description,
                             const std::string&    variableName,
                             Bool&            booleanVariable,
-                            S_oahBooleanAtom secondBooleanAtom,
-                            S_oahBooleanAtom thirdBooleanAtom);
+                            const S_oahBooleanAtom& secondBooleanAtom,
+                            const S_oahBooleanAtom& thirdBooleanAtom);
 
   protected:
 
@@ -1104,8 +1104,8 @@ class EXP oahThreeBooleansAtom : public oahBooleanAtom
                             const std::string&    description,
                             const std::string&    variableName,
                             Bool&            booleanVariable,
-                            S_oahBooleanAtom secondBooleanAtom,
-                            S_oahBooleanAtom thirdBooleanAtom);
+                            const S_oahBooleanAtom& secondBooleanAtom,
+                            const S_oahBooleanAtom& thirdBooleanAtom);
 
     virtual               ~oahThreeBooleansAtom ();
 
@@ -1200,7 +1200,7 @@ class EXP oahCombinedBooleansAtom : public oahAtom
     // ------------------------------------------------------
 
     void                  addBooleanAtom (
-                            S_oahBooleanAtom booleanAtom);
+                            const S_oahBooleanAtom& booleanAtom);
 
     void                  addBooleanAtomByName (
                             const std::string& name);
@@ -1270,8 +1270,8 @@ class EXP oahCommonPrefixBooleansAtom : public oahAtom
                             const std::string& description,
                             const std::string& shortSuffixDescriptor,
                             const std::string& longSuffixDescriptor,
-                            S_oahPrefix   shortNamesPrefix,
-                            S_oahPrefix   longNamesPrefix);
+                            const S_oahPrefix&   shortNamesPrefix,
+                            const S_oahPrefix&   longNamesPrefix);
 
   protected:
 
@@ -1284,8 +1284,8 @@ class EXP oahCommonPrefixBooleansAtom : public oahAtom
                             const std::string& description,
                             const std::string& shortSuffixDescriptor,
                             const std::string& longSuffixDescriptor,
-                            S_oahPrefix   shortNamesPrefix,
-                            S_oahPrefix   longNamesPrefix);
+                            const S_oahPrefix&   shortNamesPrefix,
+                            const S_oahPrefix&   longNamesPrefix);
 
     virtual               ~oahCommonPrefixBooleansAtom ();
 
@@ -1304,7 +1304,7 @@ class EXP oahCommonPrefixBooleansAtom : public oahAtom
     // ------------------------------------------------------
 
     void                  addBooleanAtom (
-                            S_oahBooleanAtom booleanAtom);
+                            const S_oahBooleanAtom& booleanAtom);
 
     void                  addBooleanAtomByName (
                             const std::string& name);
@@ -3372,7 +3372,7 @@ class EXP oahFindStringResult : public smartable // JMI ???
 
     static SMARTP<oahFindStringResult> create (
                             const std::string& theString,
-                            S_oahElement  theElement);
+                            const S_oahElement&  theElement);
 
   protected:
 
@@ -3381,7 +3381,7 @@ class EXP oahFindStringResult : public smartable // JMI ???
 
                           oahFindStringResult (
                             const std::string& theString,
-                            S_oahElement  theElement);
+                            const S_oahElement&  theElement);
 
     virtual               ~oahFindStringResult ();
 

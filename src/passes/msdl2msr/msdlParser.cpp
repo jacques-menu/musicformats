@@ -1052,7 +1052,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
 // --------------------------------------------------------------------------
 
 std::string msdlParser::lilypondOctaveInRelativeEntryMode (
-  S_msrNote note)
+  const S_msrNote& note)
 {
 /*
   int inputLineNumber =
@@ -1175,7 +1175,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
 // --------------------------------------------------------------------------
 
 std::string msdlParser::lilypondOctaveInFixedEntryMode (
-  S_msrNote note)
+  const S_msrNote& note)
 {
 /*
   // generate LilyPond octave relative to fCurrentOctaveEntryReference

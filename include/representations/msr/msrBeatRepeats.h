@@ -35,10 +35,10 @@ class EXP msrBeatRepeatPattern : public msrElement
                             S_msrBeatRepeat upLinkToBeatRepeat);
 
     SMARTP<msrBeatRepeatPattern> createBeatRepeatPatternNewbornClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
     SMARTP<msrBeatRepeatPattern> createBeatRepeatPatternDeepClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
   protected:
 
@@ -58,7 +58,7 @@ class EXP msrBeatRepeatPattern : public msrElement
 
     // segment
     void                  setBeatRepeatPatternSegment (
-                            S_msrSegment beatRepeatPatternSegment);
+                            const S_msrSegment& beatRepeatPatternSegment);
 
     S_msrSegment          getBeatRepeatPatternSegment () const
                               { return fBeatRepeatPatternSegment; }
@@ -123,10 +123,10 @@ class EXP msrBeatRepeatReplicas : public msrElement
                             S_msrBeatRepeat upLinkToBeatRepeat);
 
     SMARTP<msrBeatRepeatReplicas> createBeatRepeatReplicasNewbornClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
     SMARTP<msrBeatRepeatReplicas> createBeatRepeatReplicasDeepClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
   protected:
 
@@ -149,7 +149,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
                             { return fUpLinkToBeatRepeat; }
     // segment
     void                  setBeatRepeatReplicasSegment (
-                            S_msrSegment beatRepeatReplicasSegment);
+                            const S_msrSegment& beatRepeatReplicasSegment);
 
     S_msrSegment          getBeatRepeatReplicasSegment () const
                               { return fBeatRepeatReplicasSegment; }
@@ -235,13 +235,13 @@ class EXP msrBeatRepeat : public msrSegmentElement
                             int        inputLineNumber,
                             int        beatRepeatMeasuresNumber,
                             int        beatRepeatSlashesNumber,
-                            S_msrVoice upLinkToVoice);
+                            const S_msrVoice& upLinkToVoice);
 
     SMARTP<msrBeatRepeat> createBeatRepeatNewbornClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
     SMARTP<msrBeatRepeat> createBeatRepeatDeepClone (
-                            S_msrVoice containingVoice);
+                            const S_msrVoice& containingVoice);
 
   protected:
 
@@ -252,7 +252,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
                             int        inputLineNumber,
                             int        beatRepeatMeasuresNumber,
                             int        beatRepeatSlashesNumber,
-                            S_msrVoice upLinkToVoice);
+                            const S_msrVoice& upLinkToVoice);
 
     virtual               ~msrBeatRepeat ();
 
@@ -309,7 +309,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
     // ------------------------------------------------------
 
     void                  appendMeasureElementToSegmentElement (
-                            S_msrMeasureElement elem) override;
+                            const S_msrMeasureElement& elem) override;
 
     int                   fetchBeatRepeatReplicasNumber () const;
 

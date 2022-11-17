@@ -34,7 +34,7 @@ class EXP msdl2musicxmlRegularHandler : public oahRegularHandler
     static SMARTP<msdl2musicxmlRegularHandler> create (
                             const std::string&     serviceName,
                             const std::string&     handlerHeader,
-                            S_msdl2musicxmlInsiderHandler
+                            const S_msdl2musicxmlInsiderHandler&
                                               insiderOahHandler);
 
   protected:
@@ -45,7 +45,7 @@ class EXP msdl2musicxmlRegularHandler : public oahRegularHandler
                           msdl2musicxmlRegularHandler (
                             const std::string&     serviceName,
                             const std::string&     handlerHeader,
-                            S_msdl2musicxmlInsiderHandler
+                            const S_msdl2musicxmlInsiderHandler&
                                               insiderOahHandler);
 
     virtual               ~msdl2musicxmlRegularHandler ();

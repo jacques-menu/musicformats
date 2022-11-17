@@ -66,7 +66,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   SXMLFile&     sxmlfile,
   std::ostream& out,
   std::ostream& err,
-  S_oahHandler  handler)
+  const S_oahHandler&  handler)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
@@ -340,7 +340,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   // ------------------------------------------------------
 
   // create an insider xml2gmn OAH handler
-  S_xml2gmnInsiderHandler
+  const S_xml2gmnInsiderHandler&
     insiderOahHandler =
       xml2gmnInsiderHandler::create (
         serviceName,
@@ -456,7 +456,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
   const char*  fileName,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
@@ -507,7 +507,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2guidoWithHandler (
   FILE*        fd,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
@@ -558,7 +558,7 @@ mfMusicformatsErrorKind convertMusicxmlString2guidoWithHandler (
   const char*  buffer,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =

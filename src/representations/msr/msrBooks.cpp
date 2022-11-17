@@ -141,21 +141,21 @@ S_msrBook msrBook::createBookNewbornClone ()
 }
 
 void msrBook::setBookMasterVoice (
-  S_msrVoice masterVoice)
+  const S_msrVoice& masterVoice)
 { fBookMasterVoice = masterVoice; }
 
 S_msrVoice msrBook::getBookMasterVoice () const
 { return fBookMasterVoice; }
 
 void msrBook::registerVoiceInBookAllVoicesList (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
   // register voice in this staff
   fBookAllVoicesList.push_back (voice);
 }
 
 void msrBook::addBookElementToBook (
-  S_msrBookElement bookElement)
+  const S_msrBookElement& bookElement)
 {
   if (fBookElementsSet.count (bookElement)) {
     std::stringstream s;
@@ -651,7 +651,7 @@ void msrBook::print (std::ostream& os) const
       iEnd   = fBookAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      S_msrVoice voice = (*i);
+      const S_msrVoice& voice = (*i);
 
       os << voice->getVoiceName () << std::endl;
       if (++i == iEnd) break;
@@ -847,7 +847,7 @@ void msrBook::printShort (std::ostream& os) const
       iEnd   = fBookAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      S_msrVoice voice = (*i);
+      const S_msrVoice& voice = (*i);
 
       os << voice->getVoiceName () << std::endl;
       if (++i == iEnd) break;

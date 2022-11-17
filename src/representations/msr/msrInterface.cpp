@@ -404,7 +404,8 @@ if (false) { // JMI TEMP
 
 //_______________________________________________________________________________
 S_msrStaff createStaffInPart (
-  int staffNumber, S_msrPart part)
+  int              staffNumber, 
+  const S_msrPart& part)
 {
   // create the staff
   S_msrStaff
@@ -424,7 +425,7 @@ S_msrStaff createStaffInPart (
 S_msrVoice createRegularVoiceInStaff (
   int          inputLineNumber,
   int          voiceNumber,
-  S_msrStaff   staff)
+  const S_msrStaff&   staff)
 {
   // create the functions voice
   S_msrVoice
@@ -447,7 +448,7 @@ S_msrVoice createRegularVoiceInStaff (
 S_msrMeasure createMeasureInVoice (
   int        inputLineNumber,
   std::string     measureNumber,
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
   return
     voice->

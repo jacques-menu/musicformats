@@ -68,7 +68,7 @@ msrBeatRepeatElement::~msrBeatRepeatElement ()
 
 void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
   int           inputLineNumber,
-  S_msrSegment  segment,
+  const S_msrSegment&  segment,
   const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -118,7 +118,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
 
 void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
   int               inputLineNumber,
-  S_msrVoiceElement voiceElement,
+  const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -457,7 +457,7 @@ msrBeatRepeatPattern::~msrBeatRepeatPattern ()
 {}
 
 void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
-    S_msrSegment beatRepeatPatternSegment)
+  const S_msrSegment& beatRepeatPatternSegment)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
@@ -652,7 +652,7 @@ msrBeatRepeatReplicas::~msrBeatRepeatReplicas ()
 {}
 
 void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
-  S_msrSegment beatRepeatReplicasSegment)
+  const S_msrSegment& beatRepeatReplicasSegment)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
@@ -821,7 +821,7 @@ S_msrBeatRepeat msrBeatRepeat::create (
   int        inputLineNumber,
   int        beatRepeatMeasuresNumber,
   int        beatRepeatSlashesNumber,
-  S_msrVoice upLinkToVoice)
+  const S_msrVoice& upLinkToVoice)
 {
   msrBeatRepeat* o =
     new msrBeatRepeat (
@@ -837,7 +837,7 @@ msrBeatRepeat::msrBeatRepeat (
   int        inputLineNumber,
   int        beatRepeatMeasuresNumber,
   int        beatRepeatSlashesNumber,
-  S_msrVoice upLinkToVoice)
+  const S_msrVoice& upLinkToVoice)
     : msrSegmentElement (inputLineNumber)
 {
   // sanity check
@@ -867,7 +867,7 @@ msrBeatRepeat::~msrBeatRepeat ()
 {}
 
 S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
@@ -1086,7 +1086,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
 }
 
 void msrBeatRepeat:: appendMeasureElementToSegmentElement (
-  S_msrMeasureElement elem)
+  const S_msrMeasureElement& elem)
 {
   std::stringstream s;
 

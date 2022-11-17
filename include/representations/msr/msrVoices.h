@@ -173,16 +173,16 @@ class EXP msrVoice : public msrElement
                             int          voiceNumber,
                             msrVoiceCreateInitialLastSegmentKind
                                          voiceCreateInitialLastSegmentKind,
-                            S_msrStaff   voiceUpLinkToStaff);
+                            const S_msrStaff&   voiceUpLinkToStaff);
 
     SMARTP<msrVoice> createVoiceNewbornClone (
-                            S_msrStaff containingStaff);
+                            const S_msrStaff& containingStaff);
 
     SMARTP<msrVoice> createVoiceDeepClone (
                             int          inputLineNumber,
                             msrVoiceKind voiceKind,
                             int          voiceNumber,
-                            S_msrStaff   containingStaff);
+                            const S_msrStaff&   containingStaff);
 
     // creation from the API
     // ------------------------------------------------------
@@ -190,17 +190,17 @@ class EXP msrVoice : public msrElement
     static SMARTP<msrVoice> createRegularVoice (
                             int        inputLineNumber,
                             int        voiceNumber,
-                            S_msrStaff voiceUpLinkToStaff);
+                            const S_msrStaff& voiceUpLinkToStaff);
 
     static SMARTP<msrVoice> createHarmoniesVoice (
                             int        inputLineNumber,
                             int        voiceNumber,
-                            S_msrStaff voiceUpLinkToStaff);
+                            const S_msrStaff& voiceUpLinkToStaff);
 
     static SMARTP<msrVoice> createFiguredBassVoice (
                             int        inputLineNumber,
                             int        voiceNumber,
-                            S_msrStaff voiceUpLinkToStaff);
+                            const S_msrStaff& voiceUpLinkToStaff);
 
   protected:
 
@@ -214,7 +214,7 @@ class EXP msrVoice : public msrElement
                             int          voiceNumber,
                             msrVoiceCreateInitialLastSegmentKind
                                          voiceCreateInitialLastSegmentKind,
-                            S_msrStaff   voiceUpLinkToStaff);
+                            const S_msrStaff&   voiceUpLinkToStaff);
 
                           msrVoice (
                             int          inputLineNumber,
@@ -301,10 +301,10 @@ class EXP msrVoice : public msrElement
     // voice last segment
 
     void                  setVoiceLastSegmentInVoiceClone (
-                            S_msrSegment segment);
+                            const S_msrSegment& segment);
 
     void                  appendSegmentToVoiceClone (
-                            S_msrSegment segment);
+                            const S_msrSegment& segment);
 
     S_msrSegment          getVoiceLastSegment () const
                               { return fVoiceLastSegment; }
@@ -475,9 +475,9 @@ class EXP msrVoice : public msrElement
 
     S_msrNote             fetchVoiceFirstNonGraceNote () const;
 
-    void                  registerShortestNoteInVoiceIfRelevant (S_msrNote note);
+    void                  registerShortestNoteInVoiceIfRelevant (const S_msrNote& note);
 
-    void                  registerNoteAsVoiceLastAppendedNote (S_msrNote note);
+    void                  registerNoteAsVoiceLastAppendedNote (const S_msrNote& note);
 
     // harmonies
 
@@ -499,7 +499,7 @@ class EXP msrVoice : public msrElement
     // staff details
 
     void                  appendStaffDetailsToVoice (
-                            S_msrStaffDetails staffDetails);
+                            const S_msrStaffDetails& staffDetails);
 
     // tempo
 
@@ -535,49 +535,49 @@ class EXP msrVoice : public msrElement
     // staff change
 
     void                  appendVoiceStaffChangeToVoice (
-                            S_msrVoiceStaffChange voiceStaffChange);
+                            const S_msrVoiceStaffChange& voiceStaffChange);
 
     // notes
 
-    void                  appendNoteToVoice      (S_msrNote note);
-    void                  appendNoteToVoiceClone (S_msrNote note);
+    void                  appendNoteToVoice      (const S_msrNote& note);
+    void                  appendNoteToVoiceClone (const S_msrNote& note);
 
     // tremolos
 
     void                  appendDoubleTremoloToVoice (
-                            S_msrDoubleTremolo doubleTremolo);
+                            const S_msrDoubleTremolo& doubleTremolo);
 
     // chords
 
-    void                  appendChordToVoice  (S_msrChord chord);
+    void                  appendChordToVoice  (const S_msrChord& chord);
 
     // tuplets
 
-    void                  appendTupletToVoice (S_msrTuplet tuplet);
+    void                  appendTupletToVoice (const S_msrTuplet& tuplet);
 
     // harmonies
 
     void                  appendHarmonyToVoice (
-                            S_msrHarmony harmony);
+                            const S_msrHarmony& harmony);
 
     void                  appendHarmonyToVoiceClone (
-                            S_msrHarmony harmony);
+                            const S_msrHarmony& harmony);
 
     // figured bass
 
     void                  appendFiguredBassToVoice (
-                            S_msrFiguredBass figuredBass);
+                            const S_msrFiguredBass& figuredBass);
 
     void                  appendFiguredBassToVoiceClone (
-                            S_msrFiguredBass figuredBass);
+                            const S_msrFiguredBass& figuredBass);
 
     // frames
 
     void                  appendFrameToVoice (
-                            S_msrFrame frame);
+                            const S_msrFrame& frame);
 
     void                  appendFrameToVoiceClone (
-                            S_msrFrame frame);
+                            const S_msrFrame& frame);
 
     // grace notes
 
@@ -651,9 +651,9 @@ class EXP msrVoice : public msrElement
     // other elements
 
     void                  prependOtherElementToVoice (
-                            S_msrMeasureElement elem);
+                            const S_msrMeasureElement& elem);
     void                  appendOtherElementToVoice (
-                            S_msrMeasureElement elem);
+                            const S_msrMeasureElement& elem);
                             // for other types of elements not known
                             // in this header file, such as LPSR elements
 
@@ -671,7 +671,7 @@ class EXP msrVoice : public msrElement
 
     void                  removeNoteFromVoice (
                             int       inputLineNumber,
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  removeElementFromVoice (
                             int          inputLineNumber,
@@ -688,7 +688,7 @@ class EXP msrVoice : public msrElement
 
     void                  createNewLastSegmentFromItsFirstMeasureForVoice (
                             int           inputLineNumber,
-                            S_msrMeasure  firstMeasure,
+                            const S_msrMeasure&  firstMeasure,
                             const std::string& context);
 
     // repeats
@@ -727,7 +727,7 @@ class EXP msrVoice : public msrElement
 
     void                  handleSegmentCloneEndInVoiceClone (
                             int          inputLineNumber,
-                            S_msrSegment segmentClone);
+                            const S_msrSegment& segmentClone);
 
 /* JMI
     void                  finalizeRepeatEndInVoice (
@@ -798,7 +798,7 @@ class EXP msrVoice : public msrElement
     // measure repeats
 
     void                  appendMeasureRepeatToVoiceElementsList (
-                            S_msrMeasureRepeat beatRepeat);
+                            const S_msrMeasureRepeat& beatRepeat);
 
     void                  appendMeasureRepeatReplicaToVoice (
                             int inputLineNumber);
@@ -810,7 +810,7 @@ class EXP msrVoice : public msrElement
 
     void                  appendMeasureRepeatToVoice (
                             int                inputLineNumber,
-                            S_msrMeasureRepeat beatRepeat);
+                            const S_msrMeasureRepeat& beatRepeat);
 
     void                  appendPendingMeasureRepeatToVoice (
                             int inputLineNumber);
@@ -822,7 +822,7 @@ class EXP msrVoice : public msrElement
 
     void                  handleMeasureRepeatStartInVoiceClone (
                             int                inputLineNumber,
-                            S_msrMeasureRepeat beatRepeat);
+                            const S_msrMeasureRepeat& beatRepeat);
 
     void                  handleMeasureRepeatEndInVoiceClone (
                             int inputLineNumber);
@@ -841,7 +841,7 @@ class EXP msrVoice : public msrElement
 
     void                  appendMeasureRepeatCloneToVoiceClone ( // JMI ???
                             int                inputLineNumber,
-                            S_msrMeasureRepeat beatRepeatClone);
+                            const S_msrMeasureRepeat& beatRepeatClone);
 
     // stanzas
 
@@ -850,10 +850,10 @@ class EXP msrVoice : public msrElement
                             const std::string& stanzaNumber);
 
     void                  addStanzaToVoiceWithoutCatchUp ( // JMI
-                            S_msrStanza stanza);
+                            const S_msrStanza& stanza);
 
     void                  addStanzaToVoice (
-                            S_msrStanza stanza);
+                            const S_msrStanza& stanza);
 
     S_msrStanza           createStanzaInVoiceIfNotYetDone (
                             int           inputLineNumber,
@@ -920,12 +920,12 @@ class EXP msrVoice : public msrElement
     // harmonies
 
     void                  appendHarmonyToHarmoniesVoice (
-                            S_msrHarmony harmony);
+                            const S_msrHarmony& harmony);
 
     // figured bass elements
 
     void                  appendFiguredBassToFiguredBassVoice (
-                            S_msrFiguredBass figuredBass);
+                            const S_msrFiguredBass& figuredBass);
 
     // repeats
 
@@ -1044,7 +1044,7 @@ class EXP msrVoice : public msrElement
 
     void                  appendMeasureRepeatToInitialVoiceElements (
                             int                inputLineNumber,
-                            S_msrMeasureRepeat measureRepeat,
+                            const S_msrMeasureRepeat& measureRepeat,
                             const std::string&      context);
 
     // beats repeats
@@ -1247,14 +1247,14 @@ class EXP msrVoice : public msrElement
     // measures
 
     void                  setVoiceFirstMeasure (
-                            S_msrMeasure measure);
+                            const S_msrMeasure& measure);
 
     const S_msrMeasure    getVoiceFirstMeasure () const
                               { return fVoiceFirstMeasure; }
 
     void                  appendMeasureCloneToVoiceClone (
                             int          inputLineNumber,
-                            S_msrMeasure measureClone);
+                            const S_msrMeasure& measureClone);
 
     // last appended measure
     void                  setVoiceLastAppendedMeasure (

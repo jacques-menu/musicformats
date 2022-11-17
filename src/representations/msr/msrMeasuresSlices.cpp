@@ -353,7 +353,7 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
 
 void msrMeasuresSlice::appendMeasureToMeasureSlice (
   int          inputLineNumber,
-  S_msrMeasure measure)
+  const S_msrMeasure& measure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
@@ -371,7 +371,7 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
 
 void msrMeasuresSlice::appendSliceMeasuresFrom (
   int                inputLineNumber,
-  S_msrMeasuresSlice otherSlice)
+  const S_msrMeasuresSlice& otherSlice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
@@ -1146,7 +1146,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
 }
 
 void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
-  S_msrMeasuresSlice measuresSlice)
+  const S_msrMeasuresSlice& measuresSlice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
@@ -1166,7 +1166,7 @@ void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
 S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSequence (
   int           inputLineNumber,
   const std::string& measuresOrigin,
-  S_msrMeasuresSlicesSequence
+  const S_msrMeasuresSlicesSequence&
                 otherMeasuresSlicesSequence)
 {
   S_msrMeasuresSlicesSequence result;

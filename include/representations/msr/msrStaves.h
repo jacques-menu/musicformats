@@ -45,10 +45,10 @@ class EXP msrStaff : public msrElement
                             int          inputLineNumber,
                             msrStaffKind staffKind,
                             int          staffNumber,
-                            S_msrPart    staffUpLinkToPart);
+                            const S_msrPart&    staffUpLinkToPart);
 
     SMARTP<msrStaff> createStaffNewbornClone (
-                            S_msrPart containingPart);
+                            const S_msrPart& containingPart);
 
   protected:
 
@@ -59,7 +59,7 @@ class EXP msrStaff : public msrElement
                             int          inputLineNumber,
                             msrStaffKind staffKind,
                             int          staffNumber,
-                            S_msrPart    staffUpLinkToPart);
+                            const S_msrPart&    staffUpLinkToPart);
 
     virtual               ~msrStaff ();
 
@@ -166,12 +166,12 @@ class EXP msrStaff : public msrElement
 
     // part shortest note
 
-    void                  registerShortestNoteInStaffIfRelevant (S_msrNote note);
+    void                  registerShortestNoteInStaffIfRelevant (const S_msrNote& note);
 
     // staff details
 
     void                  appendStaffDetailsToStaff (
-                            S_msrStaffDetails staffDetails);
+                            const S_msrStaffDetails& staffDetails);
 
     // clef, key, time signature
 
@@ -216,11 +216,11 @@ class EXP msrStaff : public msrElement
 
     void                  registerVoiceInStaff (
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     void                  registerVoiceInStaffClone (
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     S_msrVoice            fetchRegularVoiceFromStaffByItsNumber (
                             int inputLineNumber,
@@ -479,28 +479,28 @@ class EXP msrStaff : public msrElement
     // voice registration
 
     void                  registerVoiceInStaffAllVoicesList (
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     void                  registerVoiceByItsNumber (
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     void                  registerRegularVoiceByItsNumber (
                             int        inputLineNumber,
-                            S_msrVoice regularVoice,
+                            const S_msrVoice& regularVoice,
                             int        voiceNumber);
 
     void                  registerHarmoniesVoiceByItsNumber (
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     void                  registerFiguredBassVoiceByItsNumber (
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     void                  registerPartLevelVoiceInStaff ( // JMI rename for harmonies and figured bass ???
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     // transposition
 

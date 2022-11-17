@@ -31,7 +31,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
 EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
   std::string       inputSourceName,
   std::istream&     inputStream,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 
@@ -44,7 +44,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
 
 EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
   std::string       fileName,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 
@@ -57,7 +57,7 @@ EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithOptionsAndArguments (
 
 EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithHandler (
   const char*  buffer,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 

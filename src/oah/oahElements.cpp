@@ -763,7 +763,7 @@ bool compareOahElements::operator() (
 
 //______________________________________________________________________________
 S_oahElementUse oahElementUse::create (
-  S_oahElement  elementUsed,
+  const S_oahElement&  elementUsed,
   const std::string& nameUsed,
   const std::string& valueUsed)
 {
@@ -777,7 +777,7 @@ S_oahElementUse oahElementUse::create (
 }
 
 oahElementUse::oahElementUse (
-  S_oahElement  elementUsed,
+  const S_oahElement&  elementUsed,
   const std::string& nameUsed,
   const std::string& valueUsed)
 {

@@ -37,7 +37,7 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_bsrScore translateBsrToFinalizedBsr (
   const S_bsrScore originalBsrScore,
-  S_bsrOahGroup    bsrOpts,
+  const S_bsrOahGroup&    bsrOpts,
   const std::string&    passNumber,
   const std::string&    passDescription)
 {

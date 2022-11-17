@@ -92,7 +92,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
 
     static SMARTP<lpsrNewStaffTuningBlock> create (
                             int              inputLineNumber,
-                            S_msrStaffTuning staffTuning);
+                            const S_msrStaffTuning& staffTuning);
 
   protected:
 
@@ -101,7 +101,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
 
                           lpsrNewStaffTuningBlock (
                             int              inputLineNumber,
-                            S_msrStaffTuning staffTuning);
+                            const S_msrStaffTuning& staffTuning);
 
     virtual               ~lpsrNewStaffTuningBlock ();
 
@@ -212,7 +212,7 @@ class EXP lpsrStaffBlock : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrStaffBlock> create (
-                            S_msrStaff staff);
+                            const S_msrStaff& staff);
 
   protected:
 
@@ -220,7 +220,7 @@ class EXP lpsrStaffBlock : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrStaffBlock (
-                            S_msrStaff staff);
+                            const S_msrStaff& staff);
 
     virtual               ~lpsrStaffBlock ();
 
@@ -262,10 +262,10 @@ class EXP lpsrStaffBlock : public lpsrElement
     // ------------------------------------------------------
 
     void                  appendVoiceUseToStaffBlock (
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 
     void                  appendLyricsUseToStaffBlock (
-                            S_msrStanza stanza);
+                            const S_msrStanza& stanza);
 
     void                  appendElementToStaffBlock (
                             S_msrElement elem)

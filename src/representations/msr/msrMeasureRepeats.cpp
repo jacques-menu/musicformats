@@ -39,7 +39,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrMeasureRepeatElement msrMeasureRepeatElement::create (
   int                 inputLineNumber,
-  S_msrMeasureRepeat upLinkToMeasureRepeat)
+  const S_msrMeasureRepeat& upLinkToMeasureRepeat)
 {
   msrMeasureRepeatElement* o =
     new msrMeasureRepeatElement (
@@ -51,7 +51,7 @@ S_msrMeasureRepeatElement msrMeasureRepeatElement::create (
 
 msrMeasureRepeatElement::msrMeasureRepeatElement (
   int                 inputLineNumber,
-  S_msrMeasureRepeat upLinkToMeasureRepeat)
+  const S_msrMeasureRepeat& upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -68,7 +68,7 @@ msrMeasureRepeatElement::~msrMeasureRepeatElement ()
 
 void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI ???
   int          inputLineNumber,
-  S_msrSegment segment,
+  const S_msrSegment& segment,
   std::string       context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -118,7 +118,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
 
 void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
   int               inputLineNumber,
-  S_msrVoiceElement voiceElement,
+  const S_msrVoiceElement& voiceElement,
   std::string       context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -429,7 +429,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatElement& el
 //______________________________________________________________________________
 S_msrMeasureRepeatPattern msrMeasureRepeatPattern::create (
   int                 inputLineNumber,
-  S_msrMeasureRepeat upLinkToMeasureRepeat)
+  const S_msrMeasureRepeat& upLinkToMeasureRepeat)
 {
   msrMeasureRepeatPattern* o =
     new msrMeasureRepeatPattern (
@@ -441,7 +441,7 @@ S_msrMeasureRepeatPattern msrMeasureRepeatPattern::create (
 
 msrMeasureRepeatPattern::msrMeasureRepeatPattern (
   int                 inputLineNumber,
-  S_msrMeasureRepeat upLinkToMeasureRepeat)
+  const S_msrMeasureRepeat& upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -457,7 +457,7 @@ msrMeasureRepeatPattern::~msrMeasureRepeatPattern ()
 {}
 
 void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
-    S_msrSegment measureRepeatPatternSegment)
+  const S_msrSegment& measureRepeatPatternSegment)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
@@ -624,7 +624,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatPattern& el
 //______________________________________________________________________________
 S_msrMeasureRepeatReplicas msrMeasureRepeatReplicas::create (
   int                 inputLineNumber,
-  S_msrMeasureRepeat upLinkToMeasureRepeat)
+  const S_msrMeasureRepeat& upLinkToMeasureRepeat)
 {
   msrMeasureRepeatReplicas* o =
     new msrMeasureRepeatReplicas (
@@ -636,7 +636,7 @@ S_msrMeasureRepeatReplicas msrMeasureRepeatReplicas::create (
 
 msrMeasureRepeatReplicas::msrMeasureRepeatReplicas (
   int                 inputLineNumber,
-  S_msrMeasureRepeat upLinkToMeasureRepeat)
+  const S_msrMeasureRepeat& upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -652,7 +652,7 @@ msrMeasureRepeatReplicas::~msrMeasureRepeatReplicas ()
 {}
 
 void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
-  S_msrSegment measureRepeatReplicasSegment)
+  const S_msrSegment& measureRepeatReplicasSegment)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
@@ -821,7 +821,7 @@ S_msrMeasureRepeat msrMeasureRepeat::create (
   int        inputLineNumber,
   int        measureRepeatMeasuresNumber,
   int        measureRepeatSlashesNumber,
-  S_msrVoice upLinkToVoice)
+  const S_msrVoice& upLinkToVoice)
 {
   msrMeasureRepeat* o =
     new msrMeasureRepeat (
@@ -837,7 +837,7 @@ msrMeasureRepeat::msrMeasureRepeat (
   int        inputLineNumber,
   int        measureRepeatMeasuresNumber,
   int        measureRepeatSlashesNumber,
-  S_msrVoice upLinkToVoice)
+  const S_msrVoice& upLinkToVoice)
     : msrSegmentElement (inputLineNumber)
 {
   // sanity check
@@ -867,7 +867,7 @@ msrMeasureRepeat::~msrMeasureRepeat ()
 {}
 
 S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
@@ -897,7 +897,7 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
 }
 
 void msrMeasureRepeat::setMeasureRepeatPattern (
-  S_msrMeasureRepeatPattern measureRepeatPattern)
+  const S_msrMeasureRepeatPattern& measureRepeatPattern)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
@@ -926,7 +926,7 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
 }
 
 void msrMeasureRepeat::setMeasureRepeatReplicas (
-  S_msrMeasureRepeatReplicas measureRepeatReplicas)
+  const S_msrMeasureRepeatReplicas& measureRepeatReplicas)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
@@ -1084,7 +1084,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
 }
 
 void msrMeasureRepeat:: appendMeasureElementToSegmentElement (
-  S_msrMeasureElement elem)
+  const S_msrMeasureElement& elem)
 {
   std::stringstream s;
 

@@ -4163,7 +4163,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHarmonyContents& elt)
 //______________________________________________________________________________
 S_msrHarmony msrHarmony::create (
   int                      inputLineNumber,
-  S_msrMeasure             upLinkToMeasure,
+  const S_msrMeasure&      upLinkToMeasure,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
   const std::string&       harmonyKindText,
@@ -4195,7 +4195,7 @@ S_msrHarmony msrHarmony::create (
 
 msrHarmony::msrHarmony (
   int                      inputLineNumber,
-  S_msrMeasure             upLinkToMeasure,
+  const S_msrMeasure&      upLinkToMeasure,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
   const std::string&       harmonyKindText,
@@ -4312,7 +4312,7 @@ msrHarmony::~msrHarmony ()
 {}
 
 S_msrHarmony msrHarmony::createHarmonyNewbornClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -4357,7 +4357,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
 }
 
 S_msrHarmony msrHarmony::createHarmonyDeepClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -4445,7 +4445,7 @@ void msrHarmony::setHarmonyTupletFactor (
   fHarmonyTupletFactor = tupletFactor;
 }
 
-void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
+void msrHarmony::setHarmonyUpLinkToNote (const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -4543,7 +4543,7 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
 //         getMeasureElementSoundingWholeNotes ());
 // }
 
-void msrHarmony::setHarmonyFrame (S_msrFrame frame)
+void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFrames ()) {

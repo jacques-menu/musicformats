@@ -33,7 +33,7 @@ S_xml2gmnManPageGenerateAtom xml2gmnManPageGenerateAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
 {
   xml2gmnManPageGenerateAtom* o = new
     xml2gmnManPageGenerateAtom (
@@ -49,7 +49,7 @@ xml2gmnManPageGenerateAtom::xml2gmnManPageGenerateAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
   : oahAtom (
       longName,
       shortName,
@@ -188,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2gmnManPageGenerateAtom&
 S_xml2gmnManPageOahGroup gGlobalXml2gmnManPageOahGroup;
 
 S_xml2gmnManPageOahGroup xml2gmnManPageOahGroup::create (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   xml2gmnManPageOahGroup* o = new xml2gmnManPageOahGroup (
     theOah2manPage);
@@ -197,7 +197,7 @@ S_xml2gmnManPageOahGroup xml2gmnManPageOahGroup::create (
 }
 
 xml2gmnManPageOahGroup::xml2gmnManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
   : oahGroup (
     "Man page",
     "hmp", "help-man-page",
@@ -212,8 +212,7 @@ xml2gmnManPageOahGroup::~xml2gmnManPageOahGroup ()
 {}
 
 void xml2gmnManPageOahGroup::initializeManPageGenerateOptions (
-  S_oahVisitor
-       theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   S_oahSubGroup
     subGroup =
@@ -274,8 +273,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 #endif
 
 void xml2gmnManPageOahGroup::initializeXml2gmnManPageOahGroup (
-  S_oahVisitor
-       theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   // display
   // --------------------------------------
@@ -393,7 +391,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2gmnManPageOahGroup& elt
 
 //______________________________________________________________________________
 S_xml2gmnManPageOahGroup createGlobalXml2gmnManPageOahGroupHandler (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

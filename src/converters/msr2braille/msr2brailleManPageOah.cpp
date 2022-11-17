@@ -35,7 +35,7 @@ S_msr2brailleManPageGenerateAtom msr2brailleManPageGenerateAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
 {
   msr2brailleManPageGenerateAtom* o = new
     msr2brailleManPageGenerateAtom (
@@ -51,7 +51,7 @@ msr2brailleManPageGenerateAtom::msr2brailleManPageGenerateAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
   : oahAtom (
       longName,
       shortName,
@@ -190,7 +190,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2brailleManPageGenerateA
 S_msr2brailleManPageOahGroup gGlobalXml2brailleManPageOahGroup;
 
 S_msr2brailleManPageOahGroup msr2brailleManPageOahGroup::create (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   msr2brailleManPageOahGroup* o =
     new msr2brailleManPageOahGroup (
@@ -200,7 +200,7 @@ S_msr2brailleManPageOahGroup msr2brailleManPageOahGroup::create (
 }
 
 msr2brailleManPageOahGroup::msr2brailleManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
   : oahGroup (
     "Man page",
     "hmp", "help-man-page",
@@ -215,7 +215,7 @@ msr2brailleManPageOahGroup::~msr2brailleManPageOahGroup ()
 {}
 
 void msr2brailleManPageOahGroup::initializeManPageGenerateOptions (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   S_oahSubGroup
     subGroup =
@@ -262,7 +262,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 #endif
 
 void msr2brailleManPageOahGroup::initializeXml2brailleManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   // display
   // --------------------------------------
@@ -380,7 +380,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2brailleManPageOahGroup&
 
 //______________________________________________________________________________
 S_msr2brailleManPageOahGroup createGlobalXml2brailleManPageOahHandler (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

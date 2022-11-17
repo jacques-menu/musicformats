@@ -94,7 +94,7 @@ class EXP msdrLayer : public smartable
     void                  addNoteToLayer (
                             int       inputLineNumber,
                             int       measureNumber,
-                            S_msrNote note);
+                            const S_msrNote& note);
 
   private:
 

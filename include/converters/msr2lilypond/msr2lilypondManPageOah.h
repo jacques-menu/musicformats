@@ -32,7 +32,7 @@ class EXP msr2lilypondManPageGenerateAtom : public oahAtom
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
-                            S_oahVisitor  theOahVisitor);
+                            const S_oahVisitor&  theOahVisitor);
 
   protected:
 
@@ -43,7 +43,7 @@ class EXP msr2lilypondManPageGenerateAtom : public oahAtom
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
-                            S_oahVisitor  theOahVisitor);
+                            const S_oahVisitor&  theOahVisitor);
 
     virtual               ~msr2lilypondManPageGenerateAtom ();
 
@@ -106,7 +106,7 @@ class EXP msr2lilypondManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     static SMARTP<msr2lilypondManPageOahGroup> create (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
   public:
 
@@ -114,7 +114,7 @@ class EXP msr2lilypondManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeMsr2lilypondManPageOahGroup (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
   public:
 
@@ -122,7 +122,7 @@ class EXP msr2lilypondManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           msr2lilypondManPageOahGroup (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
     virtual               ~msr2lilypondManPageOahGroup ();
 
@@ -148,7 +148,7 @@ class EXP msr2lilypondManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeManPageGenerateOptions (
-                            S_oahVisitor
+                            const S_oahVisitor&
                                  theOah2manPage);
 
 #ifdef TRACING_IS_ENABLED
@@ -188,7 +188,7 @@ EXP extern S_msr2lilypondManPageOahGroup gGlobalMsr2lilypondManPageOahGroup;
 
 //______________________________________________________________________________
 EXP S_msr2lilypondManPageOahGroup createGlobalMsr2lilypondManPageOahGroup (
-  S_oahVisitor theOah2manPage);
+  const S_oahVisitor& theOah2manPage);
 
 
 }

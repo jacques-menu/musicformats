@@ -22,7 +22,7 @@ namespace MusicFormats
 EXP mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   std::string       inputSourceName,
   std::istream&     inputStream,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 
@@ -36,7 +36,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2lilypondWithOptionsAndArguments (
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   std::string       fileName,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 
@@ -49,7 +49,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
   const char*  buffer,
-  S_oahHandler handler,
+  const S_oahHandler& handler,
   std::ostream&     out,
   std::ostream&     err);
 

@@ -23,7 +23,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-S_msrPathToVoice msrPathToVoice::createFromVoice (S_msrVoice voice)
+S_msrPathToVoice msrPathToVoice::createFromVoice (const S_msrVoice& voice)
 {
   msrPathToVoice* o =
     new msrPathToVoice ();
@@ -34,7 +34,7 @@ S_msrPathToVoice msrPathToVoice::createFromVoice (S_msrVoice voice)
   return o;
 }
 
-S_msrPathToVoice msrPathToVoice::createFromStaff (S_msrStaff staff)
+S_msrPathToVoice msrPathToVoice::createFromStaff (const S_msrStaff& staff)
 {
   msrPathToVoice* o =
     new msrPathToVoice ();
@@ -48,7 +48,7 @@ S_msrPathToVoice msrPathToVoice::createFromStaff (S_msrStaff staff)
 msrPathToVoice::msrPathToVoice ()
 {}
 
-void msrPathToVoice::initializeFromVoice (S_msrVoice voice)
+void msrPathToVoice::initializeFromVoice (const S_msrVoice& voice)
 {
   S_msrStaff
     upLinkToStaff =
@@ -59,7 +59,7 @@ void msrPathToVoice::initializeFromVoice (S_msrVoice voice)
   fVoice = voice; // only now
 }
 
-void msrPathToVoice::initializeFromStaff (S_msrStaff staff)
+void msrPathToVoice::initializeFromStaff (const S_msrStaff& staff)
 {
   // leave fVoice as nullptr to indicate all the voices in the staff
 
@@ -101,7 +101,7 @@ void msrPathToVoice::initializeFromStaff (S_msrStaff staff)
 msrPathToVoice::~msrPathToVoice ()
 {}
 
-Bool msrPathToVoice::pathContainsPartGroup (S_msrPartGroup partGroup)
+Bool msrPathToVoice::pathContainsPartGroup (const S_msrPartGroup& partGroup)
 {
   Bool result;
 
@@ -115,7 +115,7 @@ Bool msrPathToVoice::pathContainsPartGroup (S_msrPartGroup partGroup)
   return result;
 }
 
-Bool msrPathToVoice::pathContainsStaff (S_msrStaff staff)
+Bool msrPathToVoice::pathContainsStaff (const S_msrStaff& staff)
 {
   Bool result;
 
@@ -145,7 +145,7 @@ Bool msrPathToVoice::pathContainsStaff (S_msrStaff staff)
   return result;
 }
 
-Bool msrPathToVoice::pathContainsVoice (S_msrVoice voice)
+Bool msrPathToVoice::pathContainsVoice (const S_msrVoice& voice)
 {
   Bool result;
 

@@ -30,7 +30,7 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
-                            S_oahVisitor  theOahVisitor);
+                            const S_oahVisitor&  theOahVisitor);
 
   protected:
 
@@ -41,7 +41,7 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
-                            S_oahVisitor  theOahVisitor);
+                            const S_oahVisitor&  theOahVisitor);
 
     virtual               ~msr2brailleManPageGenerateAtom ();
 
@@ -104,7 +104,7 @@ class EXP msr2brailleManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     static SMARTP<msr2brailleManPageOahGroup> create (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
   public:
 
@@ -112,7 +112,7 @@ class EXP msr2brailleManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeXml2brailleManPageOahGroup (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
   public:
 
@@ -120,7 +120,7 @@ class EXP msr2brailleManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           msr2brailleManPageOahGroup (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
     virtual               ~msr2brailleManPageOahGroup ();
 
@@ -154,7 +154,7 @@ class EXP msr2brailleManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeManPageGenerateOptions (
-                            S_oahVisitor
+                            const S_oahVisitor&
                                  theOah2manPage);
 
 #ifdef TRACING_IS_ENABLED
@@ -195,7 +195,7 @@ EXP extern S_msr2brailleManPageOahGroup gGlobalXml2brailleManPageOahGroup;
 
 //______________________________________________________________________________
 EXP extern S_msr2brailleManPageOahGroup createGlobalXml2brailleManPageOahHandler (
-  S_oahVisitor theOah2manPage);
+  const S_oahVisitor& theOah2manPage);
 
 
 }

@@ -32,7 +32,7 @@ class EXP msr2guidoManPageGenerateAtom : public oahAtom
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
-                            S_oahVisitor  theOahVisitor);
+                            const S_oahVisitor&  theOahVisitor);
 
   protected:
 
@@ -43,7 +43,7 @@ class EXP msr2guidoManPageGenerateAtom : public oahAtom
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
-                            S_oahVisitor  theOahVisitor);
+                            const S_oahVisitor&  theOahVisitor);
 
     virtual               ~msr2guidoManPageGenerateAtom ();
 
@@ -105,7 +105,7 @@ class EXP msr2guidoManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     static SMARTP<msr2guidoManPageOahGroup> create (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
   public:
 
@@ -113,7 +113,7 @@ class EXP msr2guidoManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeMsr2guidoManPageOahGroup (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
   public:
 
@@ -121,7 +121,7 @@ class EXP msr2guidoManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           msr2guidoManPageOahGroup (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
     virtual               ~msr2guidoManPageOahGroup ();
 
@@ -147,7 +147,7 @@ class EXP msr2guidoManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeManPageGenerateOptions (
-                            S_oahVisitor
+                            const S_oahVisitor&
                                  theOah2manPage);
 
 #ifdef TRACING_IS_ENABLED
@@ -187,8 +187,8 @@ EXP extern S_msr2guidoManPageOahGroup gGlobalMsr2guidoManPageOahGroup;
 
 //______________________________________________________________________________
 EXP S_msr2guidoManPageOahGroup createGlobalMsr2guidoManPageOahGroupHandling (
-  S_oahHandler handler,
-  S_oahVisitor theOah2manPage);
+  const S_oahHandler& handler,
+  const S_oahVisitor& theOah2manPage);
 
 
 }

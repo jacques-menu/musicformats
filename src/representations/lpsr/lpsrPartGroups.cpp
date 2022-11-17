@@ -27,7 +27,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrPartGroupBlock lpsrPartGroupBlock::create (
-  S_msrPartGroup partGroup)
+  const S_msrPartGroup& partGroup)
 {
   lpsrPartGroupBlock* o = new lpsrPartGroupBlock (
     partGroup);
@@ -36,7 +36,7 @@ S_lpsrPartGroupBlock lpsrPartGroupBlock::create (
 }
 
 lpsrPartGroupBlock::lpsrPartGroupBlock (
-  S_msrPartGroup partGroup)
+  const S_msrPartGroup& partGroup)
     : lpsrElement (0) // JMI
 {
   fPartGroup = partGroup;

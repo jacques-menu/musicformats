@@ -45,7 +45,7 @@ namespace MusicFormats
 S_mfslInterpreterRegularHandler mfslInterpreterRegularHandler::create (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_mfslInterpreterInsiderHandler
+  const S_mfslInterpreterInsiderHandler&
                     insiderOahHandler)
 {
   // create the regular handler
@@ -61,7 +61,7 @@ S_mfslInterpreterRegularHandler mfslInterpreterRegularHandler::create (
 mfslInterpreterRegularHandler::mfslInterpreterRegularHandler (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_mfslInterpreterInsiderHandler
+  const S_mfslInterpreterInsiderHandler&
                     insiderOahHandler)
   : oahRegularHandler (
       serviceName,
@@ -440,7 +440,7 @@ std::ostream& operator << (std::ostream& os, const S_mfslInterpreterRegularHandl
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

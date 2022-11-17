@@ -34,7 +34,7 @@ class EXP Mikrokosmos3WanderingRegularHandler : public oahRegularHandler
     static SMARTP<Mikrokosmos3WanderingRegularHandler> create (
                             const std::string&     serviceName,
                             const std::string&     handlerHeader,
-                            S_Mikrokosmos3WanderingInsiderHandler
+                            const S_Mikrokosmos3WanderingInsiderHandler&
                                               insiderOahHandler,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 
@@ -46,7 +46,7 @@ class EXP Mikrokosmos3WanderingRegularHandler : public oahRegularHandler
                           Mikrokosmos3WanderingRegularHandler (
                             const std::string&     serviceName,
                             const std::string&     handlerHeader,
-                            S_Mikrokosmos3WanderingInsiderHandler
+                            const S_Mikrokosmos3WanderingInsiderHandler&
                                               insiderOahHandler,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 

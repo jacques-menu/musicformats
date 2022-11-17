@@ -33,7 +33,7 @@ S_msdl2musicxmlManPageGenerateAtom msdl2musicxmlManPageGenerateAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
 {
   msdl2musicxmlManPageGenerateAtom* o = new
     msdl2musicxmlManPageGenerateAtom (
@@ -49,7 +49,7 @@ msdl2musicxmlManPageGenerateAtom::msdl2musicxmlManPageGenerateAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
   : oahAtom (
       longName,
       shortName,
@@ -188,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2musicxmlManPageGenerat
 S_msdl2musicxmlManPageOahGroup gGlobalMsdl2xmlManPageOahGroup;
 
 S_msdl2musicxmlManPageOahGroup msdl2musicxmlManPageOahGroup::create (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   msdl2musicxmlManPageOahGroup* o = new msdl2musicxmlManPageOahGroup (
     theOah2manPage);
@@ -197,7 +197,7 @@ S_msdl2musicxmlManPageOahGroup msdl2musicxmlManPageOahGroup::create (
 }
 
 msdl2musicxmlManPageOahGroup::msdl2musicxmlManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
   : oahGroup (
     "Man page",
     "hmp", "help-man-page",
@@ -212,8 +212,7 @@ msdl2musicxmlManPageOahGroup::~msdl2musicxmlManPageOahGroup ()
 {}
 
 void msdl2musicxmlManPageOahGroup::initializeManPageGenerateOptions (
-  S_oahVisitor
-       theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   S_oahSubGroup
     subGroup =
@@ -274,8 +273,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 #endif
 
 void msdl2musicxmlManPageOahGroup::initializeMsdl2xmlManPageOahGroup (
-  S_oahVisitor
-       theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   // display
   // --------------------------------------
@@ -393,7 +391,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2musicxmlManPageOahGrou
 
 //______________________________________________________________________________
 S_msdl2musicxmlManPageOahGroup createGlobalMsdl2xmlManPageOahGroupHandler (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

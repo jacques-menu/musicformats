@@ -99,7 +99,7 @@ class EXP msrSegmentElement : public msrElement
     // ------------------------------------------------------
 
     virtual void          appendMeasureElementToSegmentElement (
-                            S_msrMeasureElement elem) = 0;
+                            const S_msrMeasureElement& elem) = 0;
 
 //     static bool           compareSegmentElementsByIncreasingMeasurePosition (
 //                             const SMARTP<msrSegmentElement>& first,

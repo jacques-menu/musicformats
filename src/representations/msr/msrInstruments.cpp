@@ -775,7 +775,7 @@ std::ostream& operator << (std::ostream& os, const S_msrHarpPedalsTuning& elt)
 //______________________________________________________________________________
 S_msrPedal msrPedal::create (
   int              inputLineNumber,
-  S_msrMeasure&    upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   msrPedalTypeKind pedalTypeKind,
   msrPedalLineKind pedalLineKind,
   msrPedalSignKind pedalSignKind)
@@ -808,7 +808,7 @@ S_msrPedal msrPedal::create (
 
 msrPedal::msrPedal (
   int              inputLineNumber,
-  S_msrMeasure&    upLinkToMeasure,
+  const S_msrMeasure& upLinkToMeasure,
   msrPedalTypeKind pedalTypeKind,
   msrPedalLineKind pedalLineKind,
   msrPedalSignKind pedalSignKind)

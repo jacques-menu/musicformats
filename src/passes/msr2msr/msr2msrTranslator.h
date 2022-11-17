@@ -760,8 +760,8 @@ class EXP msr2msrTranslator :
 
     /* JMI
     void                      prependSkipGraceNotesGroupToPartOtherVoices (
-                                S_msrPart            partClone,
-                                S_msrVoice           voiceClone,
+                                const S_msrPart&            partClone,
+                                const S_msrVoice&           voiceClone,
                                 S_msrGraceNotesGroup skipGraceNotesGroup);
                                 */
 

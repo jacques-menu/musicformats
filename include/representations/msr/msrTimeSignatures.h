@@ -154,7 +154,7 @@ class EXP msrTimeSignature : public msrMeasureElement
 
     static SMARTP<msrTimeSignature> create (
                             int            inputLineNumber,
-                            S_msrMeasure&  upLinkToMeasure,
+                            const S_msrMeasure&   upLinkToMeasure,
                             msrTimeSignatureSymbolKind
                                            timeSignatureSymbolKind);
 

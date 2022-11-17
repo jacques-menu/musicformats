@@ -325,7 +325,7 @@ class EXP msrTempo : public msrMeasureElement
 
     static SMARTP<msrTempo> createTempoWordsOnly (
                             int               inputLineNumber,
-                            S_msrMeasure&     upLinkToMeasure,
+                            const S_msrMeasure&      upLinkToMeasure,
                             S_msrWords        tempoWords,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
@@ -340,7 +340,7 @@ class EXP msrTempo : public msrMeasureElement
 
     static SMARTP<msrTempo> createTempoPerMinute (
                             int               inputLineNumber,
-                            S_msrMeasure&     upLinkToMeasure,
+                            const S_msrMeasure&      upLinkToMeasure,
                             msrDottedDuration tempoBeatUnit,
                             std::string       tempoPerMinute,
                             msrTempoParenthesizedKind
@@ -357,7 +357,7 @@ class EXP msrTempo : public msrMeasureElement
 
     static SMARTP<msrTempo> createTempoBeatUnitEquivalent (
                             int               inputLineNumber,
-                            S_msrMeasure&     upLinkToMeasure,
+                            const S_msrMeasure&      upLinkToMeasure,
                             msrDottedDuration tempoBeatUnit,
                             msrDottedDuration tempoEquivalentBeatUnit,
                             msrTempoParenthesizedKind
@@ -374,7 +374,7 @@ class EXP msrTempo : public msrMeasureElement
 
     static SMARTP<msrTempo> createTempoNotesRelationship (
                             int               inputLineNumber,
-                            S_msrMeasure&     upLinkToMeasure,
+                            const S_msrMeasure&      upLinkToMeasure,
                             S_msrTempoNotesRelationshipElements
                                               tempoNotesRelationshipLeftElements,
                             msrTempoNotesRelationshipKind
@@ -404,7 +404,7 @@ class EXP msrTempo : public msrMeasureElement
 
                           msrTempo (
                             int               inputLineNumber,
-                            S_msrMeasure&     upLinkToMeasure,
+                            const S_msrMeasure&      upLinkToMeasure,
                             S_msrWords        tempoWords,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
@@ -412,7 +412,7 @@ class EXP msrTempo : public msrMeasureElement
 
                           msrTempo (
                             int               inputLineNumber,
-                            S_msrMeasure&     upLinkToMeasure,
+                            const S_msrMeasure&      upLinkToMeasure,
                             msrDottedDuration tempoBeatUnit,
                             std::string       tempoPerMinute,
                             msrTempoParenthesizedKind
@@ -421,7 +421,7 @@ class EXP msrTempo : public msrMeasureElement
 
                           msrTempo (
                             int               inputLineNumber,
-                            S_msrMeasure&     upLinkToMeasure,
+                            const S_msrMeasure&      upLinkToMeasure,
                             msrDottedDuration tempoBeatUnit,
                             msrDottedDuration tempoEquivalentBeatUnit,
                             msrTempoParenthesizedKind
@@ -430,7 +430,7 @@ class EXP msrTempo : public msrMeasureElement
 
                           msrTempo (
                             int               inputLineNumber,
-                            S_msrMeasure&     upLinkToMeasure,
+                            const S_msrMeasure&      upLinkToMeasure,
                             S_msrTempoNotesRelationshipElements
                                               tempoNotesRelationshipLeftElements,
                             msrTempoNotesRelationshipKind

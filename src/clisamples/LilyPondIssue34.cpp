@@ -280,7 +280,7 @@ int main (int argc, char*  argv[])
     // create a generators insider OAH handler
     // ------------------------------------------------------
 
-    S_LilyPondIssue34InsiderHandler
+    const S_LilyPondIssue34InsiderHandler&
       insiderOahHandler =
         LilyPondIssue34InsiderHandler::create (
           serviceName,

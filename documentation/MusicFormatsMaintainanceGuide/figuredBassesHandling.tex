@@ -89,7 +89,7 @@ In \class{msrNote}, there is:
 \begin{lstlisting}[language=CPlusPlus]
     // figured bass
     void                  appendFiguredBassToNoteFiguredBassesList (
-                            S_msrFiguredBass figuredBass);
+                            const S_msrFiguredBass& figuredBass);
 
     const std::list<S_msrFiguredBass>&
                           getNoteFiguredBassesList () const
@@ -126,7 +126,7 @@ In \class{msrStaff}, there is:
 \begin{lstlisting}[language=CPlusPlus]
      void                  registerFiguredBassVoiceByItsNumber (
                             int        inputLineNumber,
-                            S_msrVoice voice);
+                            const S_msrVoice& voice);
 \end{lstlisting}
 
 \Class{msrPart} also contains:
@@ -138,12 +138,12 @@ In \class{msrStaff}, there is:
                             std::string currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
-                            S_msrVoice             figuredBassSupplierVoice,
+                            const S_msrVoice&             figuredBassSupplierVoice,
                            S_msrFiguredBass figuredBass);
 
     void                  appendFiguredBassToPartClone (
-                            S_msrVoice              figuredBassSupplierVoice,
-                            S_msrFiguredBass figuredBass);
+                            const S_msrVoice&              figuredBassSupplierVoice,
+                            const S_msrFiguredBass& figuredBass);
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
@@ -162,7 +162,7 @@ This is done in \mxsrToMsrBoth{mxsr2msrSkeletonBuilder.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
   int        inputLineNumber,
-  S_msrPart  part)
+  const S_msrPart&  part)
 {
   // is the figured bass voice already present in part?
   S_msrVoice
@@ -314,7 +314,7 @@ Creating the part figured bass voice is delegated to the part:
 \begin{lstlisting}[language=CPlusPlus]
 S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
   int        inputLineNumber,
-  S_msrPart  part)
+  const S_msrPart&  part)
 {
   // is the figured bass voice already present in part?
   S_msrVoice
@@ -480,7 +480,7 @@ The contents of \fieldName{mxsr2msrTranslator}{fPendingFiguredBassesList} is att
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrTranslator::populateNote (
   int       inputLineNumber,
-  S_msrNote newNote)
+  const S_msrNote& newNote)
 {
 	// ... ... ...
 
@@ -513,7 +513,7 @@ In \msr{mxsr2msrTranslator.cpp}, the \class{msrFiguredBass} instances are popula
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrTranslator::handlePendingFiguredBasses (
   S_msrNote  newNote,
-  S_msrVoice voiceToInsertInto)
+  const S_msrVoice& voiceToInsertInto)
 {
 	// ... ... ...
 
@@ -639,7 +639,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 
 \Method{msrVoice}{appendNoteToVoice} in \msr{msrNotes.cpp} inserts the figured bass elements in the part figured bass voice:
 \begin{lstlisting}[language=CPlusPlus]
-void msrVoice::appendNoteToVoice (S_msrNote note)
+void msrVoice::appendNoteToVoice (const S_msrNote& note)
 {
 	// ... ... ...
 

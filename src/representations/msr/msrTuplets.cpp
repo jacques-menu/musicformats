@@ -236,6 +236,17 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 //   return result;
 // }
 
+void msrTuplet::setMeasureElementUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  setTupletUpLinkToMeasure (measure);
+}
+
+S_msrMeasure msrTuplet::getMeasureElementUpLinkToMeasure () const
+{
+  return getTupletUpLinkToMeasure ();
+}
+
 void msrTuplet::setTupletUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
@@ -264,11 +275,15 @@ void msrTuplet::setTupletUpLinkToMeasure (
   fTupletUpLinkToMeasure = measure;
 }
 
+S_msrMeasure msrTuplet::getTupletUpLinkToMeasure () const
+{
+  return fTupletUpLinkToMeasure;
+}
 
 //______________________________________________________________________________
 void msrTuplet::appendNoteToTuplet (
   S_msrNote  note,
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -332,7 +347,7 @@ void msrTuplet::appendNoteToTuplet (
   --gIndenter;
 }
 
-void msrTuplet::appendChordToTuplet (S_msrChord chord)
+void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
@@ -376,7 +391,7 @@ void msrTuplet::appendChordToTuplet (S_msrChord chord)
 */
 }
 
-void msrTuplet::appendTupletToTuplet (S_msrTuplet tuplet)
+void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
@@ -416,7 +431,7 @@ void msrTuplet::appendTupletToTuplet (S_msrTuplet tuplet)
     tuplet->getTupletDisplayWholeNotes ();
 }
 
-void msrTuplet::appendTupletToTupletClone (S_msrTuplet tuplet)
+void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
@@ -667,7 +682,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 }
 
 Rational msrTuplet::setTupletMembersMeasurePositions (
-  S_msrMeasure&   measure,
+  const S_msrMeasure&   measure,
   const Rational& measurePosition)
   // returns the position in measure after the tuplet
 {

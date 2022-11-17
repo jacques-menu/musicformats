@@ -70,7 +70,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
   SXMLFile&     sxmlfile,
   std::ostream& out,
   std::ostream& err,
-  S_oahHandler  handler)
+  const S_oahHandler&  handler)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
@@ -343,7 +343,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithOptionsAndArguments (
   // ------------------------------------------------------
 
   // create an insider xml2xml OAH handler
-  S_xml2xmlInsiderHandler
+  const S_xml2xmlInsiderHandler&
     insiderOahHandler =
       xml2xmlInsiderHandler::create (
         serviceName,
@@ -459,7 +459,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2musicxmlWithHandler (
   const char*  fileName,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
@@ -510,7 +510,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2musicxmlWithHandler (
   FILE*        fd,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
@@ -561,7 +561,7 @@ mfMusicformatsErrorKind convertMusicxmlString2musicxmlWithHandler (
   const char*  buffer,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =

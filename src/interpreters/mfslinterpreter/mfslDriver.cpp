@@ -230,7 +230,7 @@ S_mfslOptionsBlock mfslDriver::optionsBlocksStackTop () const
 }
 
 void mfslDriver::registerOptionInCurrentOptionsBlock (
-  S_oahOption option,
+  const S_oahOption& option,
   mfslDriver& drv)
 {
   S_mfslOptionsBlock
@@ -342,7 +342,7 @@ void mfslDriver::displayOptionsBlocksStack (
 }
 
 void mfslDriver::caseChoiceStatementsStackPush (
-  S_mfslCaseChoiceStatement caseChoiceStatement)
+  const S_mfslCaseChoiceStatement& caseChoiceStatement)
 {
   if (fTraceCaseChoiceStatements) {
     gLogStream <<

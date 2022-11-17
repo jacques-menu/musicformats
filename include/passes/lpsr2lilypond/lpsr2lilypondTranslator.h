@@ -772,7 +772,7 @@ class EXP lpsr2lilypondTranslator :
 
     // comments
     void                  generateInputLineNumberAndOrMeasurePositionAsAComment (
-                            S_msrMeasureElement measureElement);
+                            const S_msrMeasureElement& measureElement);
 
     // markups
 
@@ -810,105 +810,105 @@ class EXP lpsr2lilypondTranslator :
     msrPrintObjectKind    fCurrentNotePrinObjectKind;
 
     std::string           lilypondOctaveInRelativeEntryMode (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     std::string           lilypondOctaveInFixedEntryMode (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     std::string           notePitchAsLilypondString (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     std::string           pitchedRestAsLilypondString (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteBeams (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteSlurDirection (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateNoteSlurs (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteHeadColor (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateNoteLigatures (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateNoteHead (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateSegno (S_msrSegno segno);
     void                  generateCoda (S_msrCoda coda);
 
     void                  generateCodeRightBeforeNote (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNote (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteRegularInMeasure (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteRestInMeasure (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateCodeForNoteSkipInMeasure (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateCodeForNoteUnpitchedInMeasure (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteRegularInChord (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteRegularInTuplet (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateCodeForNoteRestInTuplet (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateCodeForNoteUnpitchedInTuplet (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteRegularInGraceNotesGroup (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateCodeForNoteSkipInGraceNotesGroup (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteInChordInGraceNotesGroup (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteInTupletInGraceNotesGroup (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteInDoubleTremolo (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteScordaturas (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteSlashes (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteWedges (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteSlurLineTypes (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteGlissandoStyles (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateNoteGlissandosWithText (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteSlideLineStyles (
-                            S_msrNote note);
+                            const S_msrNote& note);
     void                  generateNoteSlidesWithText (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateNoteTechnicalsWithStrings (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteWords (
                             const std::list<S_msrWords>& noteWords);
 
     void                  generateCodeRightAfterNote (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     // stems
 
@@ -959,10 +959,10 @@ class EXP lpsr2lilypondTranslator :
     msrPlacementKind      fCurrentSpannerPlacementKind;
 
     void                  generateBeforeNoteSpannersIfAny (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateAfterNoteSpannersIfAny (
-                            S_msrNote note);
+                            const S_msrNote& note);
 
     void                  generateCodeForSpannerBeforeNote (
                             S_msrSpanner spanner);
@@ -1015,7 +1015,7 @@ class EXP lpsr2lilypondTranslator :
                             // to generate it only once
 
     std::string           harmonyAsLilypondString (
-                            S_msrHarmony harmony);
+                            const S_msrHarmony& harmony);
 
     std::string           harmonyDegreeAlterationKindAsLilypondString (
                             msrAlterationKind harmonyDegreeAlterationKind);
@@ -1023,14 +1023,14 @@ class EXP lpsr2lilypondTranslator :
     // frames
 
     std::string           frameAsLilypondString (
-                            S_msrFrame frame);
+                            const S_msrFrame& frame);
 
     // figured bass
 
     std::string           figureAsLilypondString (
                             S_msrBassFigure bassFigure);
     std::string           figuredBassAsLilypondString (
-                            S_msrFiguredBass figuredBass);
+                            const S_msrFiguredBass& figuredBass);
 
     S_msrFiguredBass
                           fCurrentFiguredBass;
@@ -1258,17 +1258,17 @@ class EXP lpsr2lilypondTranslator :
     std::list<int>        fCurrentChordPendingSlurs;
 
     void                  generateCodeAheadOfChordContents (
-                            S_msrChord chord);
+                            const S_msrChord& chord);
 
     void                  generateCodeRightBeforeChordContents (
-                            S_msrChord chord);
+                            const S_msrChord& chord);
     void                  generateCodeForChordInGraceNotesGroupContents (
-                            S_msrChord chord);
+                            const S_msrChord& chord);
     void                  generateCodeRightAfterChordContents (
-                            S_msrChord chord);
+                            const S_msrChord& chord);
 
     void                  generateChordInGraceNotesGroup (
-                            S_msrChord chord);
+                            const S_msrChord& chord);
 
 
     // tuplets

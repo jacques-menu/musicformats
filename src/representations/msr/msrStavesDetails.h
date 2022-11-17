@@ -151,7 +151,7 @@ class EXP msrStaffDetails : public msrMeasureElement
 
     static SMARTP<msrStaffDetails> create (
                             int                 inputLineNumber,
-                            S_msrMeasure&       upLinkToMeasure,
+                            const S_msrMeasure&        upLinkToMeasure,
                             msrStaffTypeKind    staffTypeKind,
                             msrShowFretsKind    showFretsKind,
                             msrPrintObjectKind  printObjectKind,
@@ -171,7 +171,7 @@ class EXP msrStaffDetails : public msrMeasureElement
 
                           msrStaffDetails (
                             int                 inputLineNumber,
-                            S_msrMeasure&       upLinkToMeasure,
+                            const S_msrMeasure&        upLinkToMeasure,
                             msrStaffTypeKind    staffTypeKind,
                             msrShowFretsKind    showFretsKind,
                             msrPrintObjectKind  printObjectKind,
@@ -227,7 +227,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     // ------------------------------------------------------
 
     void                  addStaffTuningToStaffDetails (
-                            S_msrStaffTuning staffTuning)
+                            const S_msrStaffTuning& staffTuning)
                               {
                                 fStaffTuningsList.push_back (staffTuning);
                               }

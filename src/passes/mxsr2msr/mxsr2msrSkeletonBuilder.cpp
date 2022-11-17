@@ -50,7 +50,7 @@ namespace MusicFormats
 S_mxmlPartGroupDescr mxmlPartGroupDescr::create (
   int            startInputLineNumber,
   int            partGroupNumber,
-  S_msrPartGroup partGroup,
+  const S_msrPartGroup& partGroup,
   int            startPosition)
 {
   mxmlPartGroupDescr* o = new
@@ -66,7 +66,7 @@ S_mxmlPartGroupDescr mxmlPartGroupDescr::create (
 mxmlPartGroupDescr::mxmlPartGroupDescr (
   int            startInputLineNumber,
   int            partGroupNumber,
-  S_msrPartGroup partGroup,
+  const S_msrPartGroup& partGroup,
   int            startPosition)
 {
   fStartInputLineNumber   = startInputLineNumber;
@@ -669,7 +669,7 @@ S_mxmlPartGroupDescr mxsr2msrSkeletonBuilder::fetchPartGroupDescrStackTop ()
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
   int                  inputLineNumber,
-  S_mxmlPartGroupDescr partGroupDescr)
+  const S_mxmlPartGroupDescr& partGroupDescr)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -725,7 +725,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStarted (
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
   int                  inputLineNumber,
-  S_mxmlPartGroupDescr partGroupDescr,
+  const S_mxmlPartGroupDescr& partGroupDescr,
   std::list<S_mxmlPartGroupDescr>&
                        startingPartGroupDescrsList)
 {
@@ -806,7 +806,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStartingList (
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
   int                  inputLineNumber,
-  S_mxmlPartGroupDescr partGroupDescr,
+  const S_mxmlPartGroupDescr& partGroupDescr,
   std::list<S_mxmlPartGroupDescr>&
                        stoppingPartGroupDescrsList)
 {
@@ -887,7 +887,7 @@ void mxsr2msrSkeletonBuilder::insertPartGroupDescInStoppingList (
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStoppingAtCurrentPosition (
   int                  inputLineNumber,
-  S_mxmlPartGroupDescr partGroupDescr)
+  const S_mxmlPartGroupDescr& partGroupDescr)
 {
   // fetch the std::list of part group descrs stopping at
   // the same position as partGroupDescr
@@ -936,7 +936,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStoppingAtCurrentPosition 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupDescrAsStopped (
   int                  inputLineNumber,
-  S_mxmlPartGroupDescr partGroupDescr)
+  const S_mxmlPartGroupDescr& partGroupDescr)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -1095,9 +1095,9 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
-  int                  inputLineNumber,
-  S_mxmlPartGroupDescr partGroupDescrToBeStopped,
-  S_mxmlPartGroupDescr containingPartGroupDescr)
+  int                         inputLineNumber,
+  const S_mxmlPartGroupDescr& partGroupDescrToBeStopped,
+  const S_mxmlPartGroupDescr& containingPartGroupDescr)
 {
   // get part groups from descrs
   S_msrPartGroup
@@ -1653,7 +1653,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::fetchFirstRegularVoiceFromStaff (
 // //______________________________________________________________________________
 // S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceHarmoniesVoiceIfNotYetDone ( JMI v0.9.66
 //   int        inputLineNumber,
-//   S_msrVoice voice)
+//   const S_msrVoice& voice)
 // {
 //   // is the harmonies voice already present in voice?
 //   S_msrVoice
@@ -1675,7 +1675,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::fetchFirstRegularVoiceFromStaff (
 
 S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
   int        inputLineNumber,
-  S_msrPart  part)
+  const S_msrPart&  part)
 {
   // is the harmonies voice already present in part?
   S_msrVoice
@@ -1697,7 +1697,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
 
 S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
   int        inputLineNumber,
-  S_msrPart  part)
+  const S_msrPart&  part)
 {
   // is the figured bass voice already present in part?
   S_msrVoice
@@ -3383,7 +3383,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 void mxsr2msrSkeletonBuilder::registerPart (
   int       inputLineNumber,
   int       partPosition,
-  S_msrPart part)
+  const S_msrPart& part)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {

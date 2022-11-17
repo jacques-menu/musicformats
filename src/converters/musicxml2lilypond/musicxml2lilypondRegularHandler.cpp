@@ -43,7 +43,7 @@ namespace MusicFormats
 S_xml2lyRegularHandler xml2lyRegularHandler::create (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_xml2lyInsiderHandler
+  const S_xml2lyInsiderHandler&
                     insiderOahHandler)
 {
   // create the regular handler
@@ -60,7 +60,7 @@ S_xml2lyRegularHandler xml2lyRegularHandler::create (
 xml2lyRegularHandler::xml2lyRegularHandler (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_xml2lyInsiderHandler
+  const S_xml2lyInsiderHandler&
                     insiderOahHandler)
   : oahRegularHandler (
       serviceName,

@@ -3097,7 +3097,7 @@ R"(Set 'opus' to STRING in the LilyPond code \header.)",
     addStringAtom (
       opusAtom);
 
-//   S_oahBooleanAtom JMI v0.9.62
+//   const S_oahBooleanAtom& JMI v0.9.62
 //     opusInTitleAtom =
 //       oahBooleanAtom::create (
 //          "opus-in-title", "oit",

@@ -51,7 +51,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrNote msrNote::create (
   int                        inputLineNumber,
-  S_msrMeasure               upLinkToMeasure,
+  const S_msrMeasure&        upLinkToMeasure,
 
   const std::string&         noteMeasureNumber,
 
@@ -113,7 +113,7 @@ S_msrNote msrNote::create (
 
 msrNote::msrNote (
   int                        inputLineNumber,
-  S_msrMeasure               upLinkToMeasure,
+  const S_msrMeasure&        upLinkToMeasure,
 
   const std::string&         noteMeasureNumber,
 
@@ -373,6 +373,17 @@ void msrNote::initializeNote ()
 msrNote::~msrNote ()
 {}
 
+void msrNote::setMeasureElementUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  setNoteUpLinkToMeasure (measure);
+}
+
+S_msrMeasure msrNote::getMeasureElementUpLinkToMeasure () const
+{
+  return getNoteUpLinkToMeasure ();
+}
+
 void msrNote::setNoteUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
@@ -399,6 +410,11 @@ void msrNote::setNoteUpLinkToMeasure (
 #endif
 
   fNoteUpLinkToMeasure = measure;
+}
+
+S_msrMeasure msrNote::getNoteUpLinkToMeasure () const
+{
+  return fNoteUpLinkToMeasure;
 }
 
 //________________________________________________________________________
@@ -681,7 +697,7 @@ void msrNote::setNoteColorAlphaRGB (
 }
 
 S_msrNote msrNote::createNoteNewbornClone (
-  S_msrPart containingPart)
+  const S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -881,7 +897,7 @@ S_msrNote msrNote::createNoteNewbornClone (
 }
 
 S_msrNote msrNote::createNoteDeepClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -3314,7 +3330,7 @@ void msrNote::appendSyllableToNote (S_msrSyllable syllable)
   fNoteSyllables.push_back (syllable);
 }
 
-void msrNote::appendHarmonyToNoteHarmoniesList (S_msrHarmony harmony)
+void msrNote::appendHarmonyToNoteHarmoniesList (const S_msrHarmony& harmony)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -3339,7 +3355,7 @@ void msrNote::appendHarmonyToNoteHarmoniesList (S_msrHarmony harmony)
 }
 
 void msrNote::appendFiguredBassToNoteFiguredBassesList (
-  S_msrFiguredBass figuredBass)
+  const S_msrFiguredBass& figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {

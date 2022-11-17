@@ -68,14 +68,14 @@ S_msrStaff createStaffInPart (
 S_msrVoice createRegularVoiceInStaff (
   int          inputLineNumber,
   int          voiceNumber,
-  S_msrStaff   staff);
+  const S_msrStaff&   staff);
 
 // measures
 // ------------------------------------------------------
 S_msrMeasure createMeasureInVoice (
   int        inputLineNumber,
   std::string     measureNumber,
-             S_msrVoice voice);
+             const S_msrVoice& voice);
 
 
 }

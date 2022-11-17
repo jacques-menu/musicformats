@@ -38,7 +38,7 @@ class EXP mfServiceRunData : public smartable
 
 //     static SMARTP<mfServiceRunData> create ( // JMI
 //                             const std::string& serviceName,
-//                             S_oahHandler  runOahHandler);
+//                             const S_oahHandler&  runOahHandler);
 
   public:
 
@@ -50,7 +50,7 @@ class EXP mfServiceRunData : public smartable
 
 //                           mfServiceRunData (
 //                             const std::string& serviceName,
-//                             S_oahHandler  runOahHandler);
+//                             const S_oahHandler&  runOahHandler);
 
     virtual               ~mfServiceRunData ();
 

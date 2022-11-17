@@ -52,8 +52,8 @@ S_msrPartGroup msrPartGroup::create (
   int                      partGroupSymbolDefaultX,
   msrPartGroupImplicitKind partGroupImplicitKind,
   msrPartGroupBarLineKind  partGroupBarLineKind,
-  S_msrPartGroup           partGroupUpLinkToPartGroup,
-  S_msrScore               partGroupUpLinkToScore)
+  const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+  const S_msrScore&        partGroupUpLinkToScore)
 {
   msrPartGroup* o =
     new msrPartGroup (
@@ -82,7 +82,7 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
   const std::string&       partGroupAccidentalText,
   const std::string&       partGroupAbbreviation,
   msrPartGroupBarLineKind  partGroupBarLineKind,
-  S_msrScore               partGroupUpLinkToScore)
+  const S_msrScore&        partGroupUpLinkToScore)
 {
   msrPartGroup* o =
     new msrPartGroup (
@@ -114,8 +114,8 @@ S_msrPartGroup msrPartGroup::create (
   int                      partGroupNumber,
   int                      partGroupAbsoluteNumber,
   const std::string&       partGroupName,
-  S_msrPartGroup           partGroupUpLinkToPartGroup,
-  S_msrScore               partGroupUpLinkToScore)
+  const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+  const S_msrScore&        partGroupUpLinkToScore)
 {
   msrPartGroup* o =
     new msrPartGroup (
@@ -141,8 +141,8 @@ msrPartGroup::msrPartGroup (
   int                      partGroupSymbolDefaultX,
   msrPartGroupImplicitKind partGroupImplicitKind,
   msrPartGroupBarLineKind  partGroupBarLineKind,
-  S_msrPartGroup           partGroupUpLinkToPartGroup,
-  S_msrScore               partGroupUpLinkToScore)
+  const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+  const S_msrScore&        partGroupUpLinkToScore)
     : msrPartGroupElement (inputLineNumber)
 {
   // no sanity check on partGroupUpLinkToPartGroup here,
@@ -210,8 +210,8 @@ msrPartGroup::msrPartGroup (
   int                      partGroupNumber,
   int                      partGroupAbsoluteNumber,
   const std::string&       partGroupName,
-  S_msrPartGroup           partGroupUpLinkToPartGroup,
-  S_msrScore               partGroupUpLinkToScore)
+  const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+  const S_msrScore&        partGroupUpLinkToScore)
     : msrPartGroupElement (inputLineNumber)
 {
   // no sanity check on partGroupUpLinkToPartGroup here,
@@ -280,7 +280,7 @@ msrPartGroup::~msrPartGroup ()
 {}
 
 S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
-  S_msrPartGroup partGroupClone,
+  const S_msrPartGroup& partGroupClone,
   S_msrScore     scoreClone)
 {
 #ifdef TRACING_IS_ENABLED
@@ -407,7 +407,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 }
 
 void msrPartGroup::checkPartGroupElement (
-  S_msrPartGroupElement partGroupElement) const // TEMP JMI v0.9.63
+  const S_msrPartGroupElement& partGroupElement) const // TEMP JMI v0.9.63
 {
   // sanity check
   if (
@@ -571,7 +571,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 
 void msrPartGroup::removePartFromPartGroup (
   int       inputLineNumber,
-  S_msrPart partToBeRemoved)
+  const S_msrPart& partToBeRemoved)
 {
   // register part in this part group
 #ifdef TRACING_IS_ENABLED
@@ -637,7 +637,7 @@ void msrPartGroup::removePartFromPartGroup (
 }
 
 void msrPartGroup::prependSubPartGroupToPartGroup (
-  S_msrPartGroup partGroup)
+  const S_msrPartGroup& partGroup)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -659,7 +659,7 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
 }
 
 void msrPartGroup::appendSubPartGroupToPartGroup (
-  S_msrPartGroup partGroup)
+  const S_msrPartGroup& partGroup)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -979,7 +979,7 @@ void msrPartGroup::collectPartGroupPartsList (
 }
 
 void msrPartGroup::registerVoiceInPartGroupAllVoicesList (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
   // register voice in this staff
   fPartGroupAllVoicesList.push_back (voice);
@@ -1265,7 +1265,7 @@ void msrPartGroup::print (std::ostream& os) const
       iEnd   = fPartGroupAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      S_msrVoice voice = (*i);
+      const S_msrVoice& voice = (*i);
 
       os << "\"" << voice->getVoiceName () << "\"" << std::endl;
       if (++i == iEnd) break;

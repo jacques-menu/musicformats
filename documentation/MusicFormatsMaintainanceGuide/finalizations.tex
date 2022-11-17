@@ -157,7 +157,7 @@ void msrPart::finalizePartAndAllItsMeasures (
     i != fPartAllVoicesList.end ();
     ++i
   ) {
-    S_msrVoice voice = (*i);
+    const S_msrVoice& voice = (*i);
 
     voice->
       finalizeVoiceAndAllItsMeasures (

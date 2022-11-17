@@ -30,7 +30,7 @@ class EXP xml2brlManPageGenerateAtom : public oahAtom
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
-                            S_oahVisitor  theOahVisitor);
+                            const S_oahVisitor&  theOahVisitor);
 
   protected:
 
@@ -41,7 +41,7 @@ class EXP xml2brlManPageGenerateAtom : public oahAtom
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
-                            S_oahVisitor  theOahVisitor);
+                            const S_oahVisitor&  theOahVisitor);
 
     virtual               ~xml2brlManPageGenerateAtom ();
 
@@ -104,7 +104,7 @@ class EXP xml2brlManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     static SMARTP<xml2brlManPageOahGroup> create (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
   public:
 
@@ -112,7 +112,7 @@ class EXP xml2brlManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeXml2brlManPageOahGroup (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
   public:
 
@@ -120,7 +120,7 @@ class EXP xml2brlManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           xml2brlManPageOahGroup (
-                            S_oahVisitor theOah2manPage);
+                            const S_oahVisitor& theOah2manPage);
 
     virtual               ~xml2brlManPageOahGroup ();
 
@@ -154,7 +154,7 @@ class EXP xml2brlManPageOahGroup : public oahGroup
     // ------------------------------------------------------
 
     void                  initializeManPageGenerateOptions (
-                            S_oahVisitor
+                            const S_oahVisitor&
                                  theOah2manPage);
 
 #ifdef TRACING_IS_ENABLED
@@ -195,7 +195,7 @@ EXP extern S_xml2brlManPageOahGroup gGlobalXml2brlManPageOahGroup;
 
 //______________________________________________________________________________
 EXP extern S_xml2brlManPageOahGroup createGlobalXml2brlManPageOahHandler (
-  S_oahVisitor theOah2manPage);
+  const S_oahVisitor& theOah2manPage);
 
 
 }

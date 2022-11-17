@@ -26,7 +26,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_lpsrUseVoiceCommand lpsrUseVoiceCommand::create (
   int        inputLineNumber,
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
   lpsrUseVoiceCommand* o =
     new lpsrUseVoiceCommand (
@@ -38,7 +38,7 @@ S_lpsrUseVoiceCommand lpsrUseVoiceCommand::create (
 
 lpsrUseVoiceCommand::lpsrUseVoiceCommand (
   int        inputLineNumber,
-  S_msrVoice voice)
+  const S_msrVoice& voice)
     : lpsrElement (inputLineNumber)
 {
   fVoice  = voice;

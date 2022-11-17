@@ -466,7 +466,7 @@ class EXP msrPedal : public msrMeasureElement
 
                           static SMARTP<msrPedal> create (
                             int              inputLineNumber,
-                            S_msrMeasure&    upLinkToMeasure,
+                            const S_msrMeasure&     upLinkToMeasure,
                             msrPedalTypeKind pedalTypeKind,
                             msrPedalLineKind pedalLineKind,
                             msrPedalSignKind pedalSignKind);
@@ -484,7 +484,7 @@ class EXP msrPedal : public msrMeasureElement
 
                           msrPedal (
                             int              inputLineNumber,
-                            S_msrMeasure&    upLinkToMeasure,
+                            const S_msrMeasure&     upLinkToMeasure,
                             msrPedalTypeKind pedalTypeKind,
                             msrPedalLineKind pedalLineKind,
                             msrPedalSignKind pedalSignKind);

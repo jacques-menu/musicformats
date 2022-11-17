@@ -125,7 +125,7 @@ int main (int argc, char* argv[])
     // create an mfsl insider OAH handler
     // ------------------------------------------------------
 
-    S_mfslInterpreterInsiderHandler
+    const S_mfslInterpreterInsiderHandler&
       insiderOahHandler =
         mfslInterpreterInsiderHandler::create (
           serviceName,

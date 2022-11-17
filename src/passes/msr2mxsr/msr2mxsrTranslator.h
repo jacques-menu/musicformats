@@ -535,7 +535,7 @@ class EXP msr2mxsrTranslator :
 
     // history
     // ------------------------------------------------------
-    std::string          fTranslatorName;
+    std::string               fTranslatorName;
 
 
     // the MSR score we're visiting

@@ -111,43 +111,53 @@ class EXP msrIdentification : public msrElement
                               { return fIdentificationScoreInstrument; }
 
     // composers
-    const std::list<std::string>&   getIdentificationComposersList () const
+    const std::list<std::string>&   
+                          getIdentificationComposersList () const
                               { return fIdentificationComposersList; }
 
     // lyricists
-    const std::list<std::string>&   getIdentificationLyricistsList () const
+    const std::list<std::string>&   
+                          getIdentificationLyricistsList () const
                               { return fIdentificationLyricistsList; }
 
     // arrangers
-    const std::list<std::string>&   getIdentificationArrangersList () const
+    const std::list<std::string>&   
+                          getIdentificationArrangersList () const
                               { return fIdentificationArrangersList; }
 
     // poets
-    const std::list<std::string>&   getIdentificationPoetsList () const
+    const std::list<std::string>&   
+                          getIdentificationPoetsList () const
                               { return fIdentificationPoetsList; }
 
     // translators
-    const std::list<std::string>&   getIdentificationTranslatorsList () const
+    const std::list<std::string>&   
+                          getIdentificationTranslatorsList () const
                               { return fIdentificationTranslatorsList; }
 
     // artists
-    const std::list<std::string>&   getIdentificationArtistsList () const
+    const std::list<std::string>&   
+                          getIdentificationArtistsList () const
                               { return fIdentificationArtistsList; }
 
     // softwares
-    const std::list<std::string>&   getIdentificationSoftwaresList () const
+    const std::list<std::string>&   
+                          getIdentificationSoftwaresList () const
                               { return fIdentificationSoftwaresList; }
 
     // rights
-    const std::list<std::string>&   getIdentificationRightsList () const
+    const std::list<std::string>&   
+                          getIdentificationRightsList () const
                               { return fIdentificationRightsList; }
 
     // sources
-    const std::list<std::string>&   getIdentificationSourcesList () const
+    const std::list<std::string>&   
+                          getIdentificationSourcesList () const
                               { return fIdentificationSourcesList; }
 
     // relations
-    const std::list<std::string>&   getIdentificationRelationsList () const
+    const std::list<std::string>&   
+                          getIdentificationRelationsList () const
                               { return fIdentificationRelationsList; }
 
   public:

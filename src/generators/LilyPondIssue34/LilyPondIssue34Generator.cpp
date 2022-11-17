@@ -165,7 +165,8 @@ S_msrScore LilyPondIssue34Generator::createTheScore (
 
 //------------------------------------------------------------------------
 S_msrStaff LilyPondIssue34Generator::createStaffInPart (
-  int staffNumber, S_msrPart part)
+  int              staffNumber,
+  const S_msrPart& part)
 //------------------------------------------------------------------------
 {
   // create the staff
@@ -184,7 +185,7 @@ S_msrStaff LilyPondIssue34Generator::createStaffInPart (
 
 //------------------------------------------------------------------------
 S_msrStaff LilyPondIssue34Generator::createAndPopulateUpperStaffInPart (
-  S_msrPart            part,
+  const S_msrPart&            part,
   msrGenerationAPIKind generationAPIKind)
 //------------------------------------------------------------------------
 {
@@ -220,7 +221,7 @@ S_msrStaff LilyPondIssue34Generator::createAndPopulateUpperStaffInPart (
 
 //------------------------------------------------------------------------
 S_msrStaff LilyPondIssue34Generator::createAndPopulateLowerStaffInPart (
-  S_msrPart            part,
+  const S_msrPart&            part,
   msrGenerationAPIKind generationAPIKind)
 //------------------------------------------------------------------------
 {
@@ -307,7 +308,7 @@ if (false) { // JMI TEMP v0.9.66
 S_msrVoice LilyPondIssue34Generator::createRegularVoiceInStaff (
   int          inputLineNumber,
   int          voiceNumber,
-  S_msrStaff   staff)
+  const S_msrStaff&   staff)
 //------------------------------------------------------------------------
 {
   // create the functions voice
@@ -331,7 +332,7 @@ S_msrVoice LilyPondIssue34Generator::createRegularVoiceInStaff (
 S_msrMeasure LilyPondIssue34Generator::createMeasureInVoice (
   int           inputLineNumber,
   const std::string& measureNumber,
-  S_msrVoice    voice)
+  const S_msrVoice&    voice)
 //------------------------------------------------------------------------
 {
   return
@@ -346,7 +347,7 @@ S_msrMeasure LilyPondIssue34Generator::createMeasureInVoice (
 //------------------------------------------------------------------------
 // upperVoice1 - Functions API
 void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
-  S_msrVoice upperVoice1)
+  const S_msrVoice& upperVoice1)
 //------------------------------------------------------------------------
 {
   // measure 1
@@ -1058,7 +1059,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
 //------------------------------------------------------------------------
 // upperVoice1 - Strings API
 void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
-  S_msrVoice upperVoice1)
+  const S_msrVoice& upperVoice1)
 //------------------------------------------------------------------------
 {
 /* JMI
@@ -1341,7 +1342,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
 //------------------------------------------------------------------------
 // lowerVoice1 - Functions API
 void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
-  S_msrVoice lowerVoice1)
+  const S_msrVoice& lowerVoice1)
 //------------------------------------------------------------------------
 {
   // measure 1
@@ -1867,7 +1868,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
 //------------------------------------------------------------------------
 // lowerVoice1 - Strings API
 void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
-  S_msrVoice lowerVoice1)
+  const S_msrVoice& lowerVoice1)
 //------------------------------------------------------------------------
 {
 /* JMI
@@ -2123,7 +2124,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
 //------------------------------------------------------------------------
 // lowerVoice2 - Functions API
 void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
-  S_msrVoice lowerVoice2)
+  const S_msrVoice& lowerVoice2)
 //------------------------------------------------------------------------
 {
   // measure 1
@@ -2347,7 +2348,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
 //------------------------------------------------------------------------
 // lowerVoice2 - Strings API
 void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
-  S_msrVoice lowerVoice2)
+  const S_msrVoice& lowerVoice2)
 //------------------------------------------------------------------------
 {
   // measure 1

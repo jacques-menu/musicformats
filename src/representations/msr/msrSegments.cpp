@@ -51,7 +51,7 @@ int msrSegment::gSegmentDebugNumber = 0;
 
 S_msrSegment msrSegment::create (
   int        inputLineNumber,
-  S_msrVoice segmentUpLinkToVoice)
+  const S_msrVoice& segmentUpLinkToVoice)
 {
   msrSegment* o =
     new msrSegment (
@@ -63,7 +63,7 @@ S_msrSegment msrSegment::create (
 
 msrSegment::msrSegment (
   int        inputLineNumber,
-  S_msrVoice segmentUpLinkToVoice)
+  const S_msrVoice& segmentUpLinkToVoice)
     : msrVoiceElement (inputLineNumber)
 {
   // sanity check
@@ -225,7 +225,7 @@ S_msrScore msrSegment::fetchSegmentUpLinkToScore () const
 }
 
 S_msrSegment msrSegment::createSegmentNewbornClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSegments ()) {
@@ -258,7 +258,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
 }
 
 S_msrSegment msrSegment::createSegmentDeepClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSegments ()) {
@@ -1015,7 +1015,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
   --gIndenter;
 }
 
-void msrSegment::appendHarmonyToSegment (S_msrHarmony harmony)
+void msrSegment::appendHarmonyToSegment (const S_msrHarmony& harmony)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -1045,7 +1045,7 @@ void msrSegment::appendHarmonyToSegment (S_msrHarmony harmony)
   --gIndenter;
 }
 
-void msrSegment::appendHarmonyToSegmentClone (S_msrHarmony harmony)
+void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -1069,7 +1069,7 @@ void msrSegment::appendHarmonyToSegmentClone (S_msrHarmony harmony)
 }
 
 void msrSegment::appendFiguredBassToSegment (
-  S_msrFiguredBass figuredBass)
+  const S_msrFiguredBass& figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -1102,7 +1102,7 @@ void msrSegment::appendFiguredBassToSegment (
 }
 
 void msrSegment::appendFiguredBassToSegmentClone (
-  S_msrFiguredBass figuredBass)
+  const S_msrFiguredBass& figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -1318,7 +1318,7 @@ void msrSegment::appendTranspositionToSegment (
 }
 
 void msrSegment::appendStaffDetailsToSegment (
-  S_msrStaffDetails staffDetails)
+  const S_msrStaffDetails& staffDetails)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -1774,7 +1774,7 @@ void msrSegment::appendPaddingNoteToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
+void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 {
   int inputLineNumber =
     measure->getInputLineNumber ();
@@ -1867,7 +1867,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
     measure);
 }
 
-void msrSegment::prependMeasureToSegment (S_msrMeasure measure)
+void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 {
   int inputLineNumber =
     measure->getInputLineNumber ();
@@ -2034,7 +2034,7 @@ void msrSegment::appendBarCheckToSegment (S_msrBarCheck barCheck)
 }
 
 void msrSegment::appendVoiceStaffChangeToSegment (
-  S_msrVoiceStaffChange voiceStaffChange)
+  const S_msrVoiceStaffChange& voiceStaffChange)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaffChanges ()) {
@@ -2061,7 +2061,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 }
 
 void msrSegment::appendNoteToSegment (
-  S_msrNote       note,
+  const S_msrNote&       note,
   const Rational& partCurrentMeasurePosition)
 {
 #ifdef TRACING_IS_ENABLED
@@ -2084,14 +2084,14 @@ void msrSegment::appendNoteToSegment (
       partCurrentMeasurePosition);
 }
 
-void msrSegment::appendNoteToSegmentClone (S_msrNote note)
+void msrSegment::appendNoteToSegmentClone (const S_msrNote& note)
 {
   fSegmentLastMeasure->
     appendNoteToMeasureClone (note);
 }
 
 void msrSegment::appendDoubleTremoloToSegment ( // JMI
-  S_msrDoubleTremolo doubleTremolo)
+  const S_msrDoubleTremolo& doubleTremolo)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
@@ -2114,7 +2114,7 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
     appendDoubleTremoloToMeasure (doubleTremolo);
 }
 
-void msrSegment::appendChordToSegment (S_msrChord chord) // JMI
+void msrSegment::appendChordToSegment (const S_msrChord& chord) // JMI
 {
   // sanity check
   assertSegmentLastMeasureIsNotNull (
@@ -2124,7 +2124,7 @@ void msrSegment::appendChordToSegment (S_msrChord chord) // JMI
     appendChordToMeasure (chord);
 }
 
-void msrSegment::appendTupletToSegment (S_msrTuplet tuplet) // JMI
+void msrSegment::appendTupletToSegment (const S_msrTuplet& tuplet) // JMI
 {
   // sanity check
   assertSegmentLastMeasureIsNotNull (
@@ -2183,7 +2183,7 @@ void msrSegment::prependAfterGraceNotesToSegment (
 */
 
 void msrSegment::prependOtherElementToSegment (
-  S_msrMeasureElement elem)
+  const S_msrMeasureElement& elem)
 {
   // sanity check
   assertSegmentLastMeasureIsNotNull (
@@ -2194,7 +2194,7 @@ void msrSegment::prependOtherElementToSegment (
 }
 
 void msrSegment::appendOtherElementToSegment (
-  S_msrMeasureElement elem)
+  const S_msrMeasureElement& elem)
 {
   // sanity check
   assertSegmentLastMeasureIsNotNull (
@@ -2230,7 +2230,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 
 void msrSegment::removeNoteFromSegment (
   int       inputLineNumber,
-  S_msrNote note)
+  const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {

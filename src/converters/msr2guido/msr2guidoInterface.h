@@ -35,7 +35,7 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
   std::string       passDescription3,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler);
+  const S_oahHandler& handler);
 
 
 }

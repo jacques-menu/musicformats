@@ -35,7 +35,7 @@ class EXP msr2brailleRegularHandler : public oahRegularHandler
     static SMARTP<msr2brailleRegularHandler> create (
                             const std::string&     serviceName,
                             const std::string&     handlerHeader,
-                            S_msr2brailleInsiderHandler
+                            const S_msr2brailleInsiderHandler&
                                               insiderOahHandler);
 
   protected:
@@ -46,7 +46,7 @@ class EXP msr2brailleRegularHandler : public oahRegularHandler
                           msr2brailleRegularHandler (
                             const std::string&     serviceName,
                             const std::string&     handlerHeader,
-                            S_msr2brailleInsiderHandler
+                            const S_msr2brailleInsiderHandler&
                                               insiderOahHandler);
 
     virtual               ~msr2brailleRegularHandler ();

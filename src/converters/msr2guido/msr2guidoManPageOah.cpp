@@ -33,7 +33,7 @@ S_msr2guidoManPageGenerateAtom msr2guidoManPageGenerateAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
 {
   msr2guidoManPageGenerateAtom* o = new
     msr2guidoManPageGenerateAtom (
@@ -49,7 +49,7 @@ msr2guidoManPageGenerateAtom::msr2guidoManPageGenerateAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
   : oahAtom (
       longName,
       shortName,
@@ -188,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2guidoManPageGenerateAto
 S_msr2guidoManPageOahGroup gGlobalMsr2guidoManPageOahGroup;
 
 S_msr2guidoManPageOahGroup msr2guidoManPageOahGroup::create (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   msr2guidoManPageOahGroup* o = new msr2guidoManPageOahGroup (
     theOah2manPage);
@@ -197,7 +197,7 @@ S_msr2guidoManPageOahGroup msr2guidoManPageOahGroup::create (
 }
 
 msr2guidoManPageOahGroup::msr2guidoManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
   : oahGroup (
     "Man page",
     "hmp", "help-man-page",
@@ -212,8 +212,7 @@ msr2guidoManPageOahGroup::~msr2guidoManPageOahGroup ()
 {}
 
 void msr2guidoManPageOahGroup::initializeManPageGenerateOptions (
-  S_oahVisitor
-       theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   S_oahSubGroup
     subGroup =
@@ -274,8 +273,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 #endif
 
 void msr2guidoManPageOahGroup::initializeMsr2guidoManPageOahGroup (
-  S_oahVisitor
-       theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   // display
   // --------------------------------------
@@ -393,7 +391,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2guidoManPageOahGroup& e
 
 //______________________________________________________________________________
 S_msr2guidoManPageOahGroup createGlobalMsr2guidoManPageOahGroupHandler (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

@@ -34,7 +34,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrPartBlock lpsrPartBlock::create (
-  S_msrPart part)
+  const S_msrPart& part)
 {
   lpsrPartBlock* o = new lpsrPartBlock (
     part);
@@ -43,7 +43,7 @@ S_lpsrPartBlock lpsrPartBlock::create (
 }
 
 lpsrPartBlock::lpsrPartBlock (
-  S_msrPart part)
+  const S_msrPart& part)
     : lpsrElement (0) // JMI
 {
   // sanity check

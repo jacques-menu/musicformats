@@ -406,7 +406,7 @@ class EXP oahElementUse : public smartable
     // ------------------------------------------------------
 
     static SMARTP<oahElementUse> create (
-                            S_oahElement  elementUsed,
+                            const S_oahElement&  elementUsed,
                             const std::string& nameUsed,
                             const std::string& valueUsed);
 
@@ -416,7 +416,7 @@ class EXP oahElementUse : public smartable
     // ------------------------------------------------------
 
                           oahElementUse (
-                            S_oahElement  elementUsed,
+                            const S_oahElement&  elementUsed,
                             const std::string& nameUsed,
                             const std::string& valueUsed);
 

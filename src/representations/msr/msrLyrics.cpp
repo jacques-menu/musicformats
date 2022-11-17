@@ -43,7 +43,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrSyllable msrSyllable::create (
   int                    inputLineNumber,
-  S_msrMeasure&          upLinkToMeasure,
+  const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
@@ -88,7 +88,7 @@ S_msrSyllable msrSyllable::create (
 
 S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber ( // JMI superflous??? v0.9.66
   int                    inputLineNumber,
-  S_msrMeasure&          upLinkToMeasure,
+  const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
@@ -118,7 +118,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber ( // JMI superflous
 
 msrSyllable::msrSyllable (
   int                    inputLineNumber,
-  S_msrMeasure&          upLinkToMeasure,
+  const S_msrMeasure&    upLinkToMeasure,
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
@@ -172,7 +172,7 @@ msrSyllable::~msrSyllable ()
 {}
 
 S_msrSyllable msrSyllable::createSyllableNewbornClone (
-  S_msrPart containingPart)
+  const S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -223,7 +223,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
 }
 
 S_msrSyllable msrSyllable::createSyllableDeepClone (
-  S_msrPart containingPart)
+  const S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -401,7 +401,7 @@ void msrSyllable::appendLyricTextToSyllable (const std::string& text)
 }
 
 void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // sanity check
   mfAssert (
@@ -871,7 +871,7 @@ const std::string msrStanza::K_NO_STANZA_NAME   = "Unknown stanza";
 S_msrStanza msrStanza::create (
   int           inputLineNumber,
   const std::string& stanzaNumber,
-  S_msrVoice    stanzaUpLinkToVoice)
+  const S_msrVoice&    stanzaUpLinkToVoice)
 {
   msrStanza* o =
     new msrStanza (
@@ -885,7 +885,7 @@ S_msrStanza msrStanza::create (
 msrStanza::msrStanza (
   int           inputLineNumber,
   const std::string& stanzaNumber,
-  S_msrVoice    stanzaUpLinkToVoice)
+  const S_msrVoice&    stanzaUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
   // set stanza number and kind
@@ -931,7 +931,7 @@ msrStanza::~msrStanza ()
 {}
 
 S_msrStanza msrStanza::createStanzaNewbornClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -978,7 +978,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
 }
 
 S_msrStanza msrStanza::createStanzaDeepClone (
-  S_msrVoice containingVoice)
+  const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {

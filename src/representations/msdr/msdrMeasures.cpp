@@ -156,7 +156,7 @@ void msdrMeasure::browseData (basevisitor* v)
       i != fMusicStanzasMap.end ();
       ++i
     ) {
-      S_msrStanza stanza = (*i).second;
+      const S_msrStanza& stanza = (*i).second;
 
       if (stanza->getStanzaTextPresent ()) {
         // browse the stanza

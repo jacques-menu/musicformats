@@ -45,7 +45,7 @@ namespace MusicFormats
 S_msdlConverterRegularHandler msdlConverterRegularHandler::create (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msdlConverterInsiderHandler
+  const S_msdlConverterInsiderHandler&
                     insiderOahHandler,
   mfMultiGenerationOutputKind
                     multiGenerationOutputKind)
@@ -64,7 +64,7 @@ S_msdlConverterRegularHandler msdlConverterRegularHandler::create (
 msdlConverterRegularHandler::msdlConverterRegularHandler (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msdlConverterInsiderHandler
+  const S_msdlConverterInsiderHandler&
                     insiderOahHandler,
   mfMultiGenerationOutputKind
                     multiGenerationOutputKind)
@@ -460,7 +460,7 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
-  
+
   registerAtomInRegularSubgroup ("display-msr-1", subGroup);
   registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
   registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);

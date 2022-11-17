@@ -64,7 +64,8 @@ class   mfslDriver
 
     void                  appendInputSouce (std::string inputSouce);
 
-    const std::list<std::string>&   getInputSoucesList () const
+    const std::list<std::string>&
+                          getInputSoucesList () const
                               { return fInputSoucesList; }
 
     bool                  getTraceScanning () const
@@ -148,7 +149,7 @@ class   mfslDriver
 
     // options
     void                  registerOptionInCurrentOptionsBlock (
-                            S_oahOption option,
+                            const S_oahOption& option,
                             mfslDriver& drv);
 
     void                  registerOptionsSuppliedChoicesAsUsed (
@@ -161,7 +162,7 @@ class   mfslDriver
 
     // case choice statements
     void                  caseChoiceStatementsStackPush (
-                            S_mfslCaseChoiceStatement caseChoiceStatement);
+                            const S_mfslCaseChoiceStatement& caseChoiceStatement);
 
     S_mfslCaseChoiceStatement
                           caseChoiceStatementsStackTop () const;

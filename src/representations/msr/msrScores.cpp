@@ -149,20 +149,20 @@ S_msrScore msrScore::createScoreNewbornClone ()
 }
 
 void msrScore::setScoreMasterVoice (
-  S_msrVoice masterVoice)
+  const S_msrVoice& masterVoice)
 { fScoreMasterVoice = masterVoice; }
 
 S_msrVoice msrScore::getScoreMasterVoice () const
 { return fScoreMasterVoice; }
 
 void msrScore::registerVoiceInScoreAllVoicesList (
-  S_msrVoice voice)
+  const S_msrVoice& voice)
 {
   // register voice in this staff
   fScoreAllVoicesList.push_back (voice);
 }
 
-void msrScore::addPartGroupToScore (S_msrPartGroup partGroup)
+void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 {
   if (fScorePartGroupsSet.count (partGroup)) {
     std::stringstream s;
@@ -557,7 +557,7 @@ void msrScore::printFull (std::ostream& os) const
       iEnd   = fScoreAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      S_msrVoice voice = (*i);
+      const S_msrVoice& voice = (*i);
 
       os << "\"" << voice->getVoiceName () << "\"" << std::endl;
       if (++i == iEnd) break;

@@ -33,7 +33,7 @@ S_msdl2lilypondManPageGenerateAtom msdl2lilypondManPageGenerateAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
 {
   msdl2lilypondManPageGenerateAtom* o = new
     msdl2lilypondManPageGenerateAtom (
@@ -49,7 +49,7 @@ msdl2lilypondManPageGenerateAtom::msdl2lilypondManPageGenerateAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
   : oahAtom (
       longName,
       shortName,
@@ -180,7 +180,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2lilypondManPageGenerat
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -188,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2lilypondManPageGenerat
 S_msdl2lilypondManPageOahGroup gGlobalMsdl2lyManPageOahGroup;
 
 S_msdl2lilypondManPageOahGroup msdl2lilypondManPageOahGroup::create (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   msdl2lilypondManPageOahGroup* o = new msdl2lilypondManPageOahGroup (
     theOah2manPage);
@@ -197,7 +197,7 @@ S_msdl2lilypondManPageOahGroup msdl2lilypondManPageOahGroup::create (
 }
 
 msdl2lilypondManPageOahGroup::msdl2lilypondManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
   : oahGroup (
     "Man page",
     "hmp", "help-man-page",
@@ -212,7 +212,7 @@ msdl2lilypondManPageOahGroup::~msdl2lilypondManPageOahGroup ()
 {}
 
 void msdl2lilypondManPageOahGroup::initializeManPageGenerateOptions (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   S_oahSubGroup
     subGroup =
@@ -273,7 +273,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 #endif
 
 void msdl2lilypondManPageOahGroup::initializeMsdl2lyManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   // display
   // --------------------------------------
@@ -385,13 +385,13 @@ std::ostream& operator << (std::ostream& os, const S_msdl2lilypondManPageOahGrou
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msdl2lilypondManPageOahGroup createGlobalMsdl2lyManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

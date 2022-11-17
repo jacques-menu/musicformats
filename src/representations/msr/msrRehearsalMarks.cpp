@@ -31,7 +31,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrRehearsalMark msrRehearsalMark::create (
   int                  inputLineNumber,
-  S_msrMeasure&        upLinkToMeasure,
+  const S_msrMeasure&  upLinkToMeasure,
   msrRehearsalMarkKind rehearsalKind,
   const std::string&   rehearsalText,
   msrPlacementKind     rehearsalPlacementKind)
@@ -64,7 +64,7 @@ S_msrRehearsalMark msrRehearsalMark::create (
 
 msrRehearsalMark::msrRehearsalMark (
   int                  inputLineNumber,
-  S_msrMeasure&        upLinkToMeasure,
+  const S_msrMeasure&  upLinkToMeasure,
   msrRehearsalMarkKind rehearsalKind,
   const std::string&   rehearsalText,
   msrPlacementKind     rehearsalPlacementKind)

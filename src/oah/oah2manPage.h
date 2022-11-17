@@ -29,7 +29,7 @@ class EXP oah2manPage : public oahVisitor
   public:
 
     oah2manPage (
-      const S_oahHandler handler,
+      const S_oahHandler& handler,
       std::ostream&           manPageOutputStream);
 
     virtual               ~oah2manPage ();

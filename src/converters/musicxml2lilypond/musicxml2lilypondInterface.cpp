@@ -72,7 +72,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   SXMLFile&     sxmlfile,
   std::ostream& out,
   std::ostream& err,
-  S_oahHandler  handler)
+  const S_oahHandler&  handler)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
@@ -187,7 +187,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 
   try {
 if (false) { // JMI
-    for (S_msrVoice voice: firstMsrScore->getScoreAllVoicesList ()) {
+    for (const S_msrVoice& voice: firstMsrScore->getScoreAllVoicesList ()) {
       gLogStream <<
         "===> firstMsrScore voice: " << voice->getVoiceName () <<
         std::endl;
@@ -483,7 +483,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   // ------------------------------------------------------
 
   // create an insider xml2ly OAH handler
-  S_xml2lyInsiderHandler
+  const S_xml2lyInsiderHandler&
     insiderOahHandler =
       xml2lyInsiderHandler::create (
         serviceName,
@@ -600,7 +600,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
   const char*  fileName,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
@@ -651,7 +651,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2lilypondWithHandler (
   FILE*        fd,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
@@ -702,7 +702,7 @@ mfMusicformatsErrorKind convertMusicxmlString2lilypondWithHandler (
   const char*  buffer,
   std::ostream&     out,
   std::ostream&     err,
-  S_oahHandler handler)
+  const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =

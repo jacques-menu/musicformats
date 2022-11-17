@@ -33,7 +33,7 @@ S_msdl2brailleManPageGenerateAtom msdl2brailleManPageGenerateAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
 {
   msdl2brailleManPageGenerateAtom* o = new
     msdl2brailleManPageGenerateAtom (
@@ -49,7 +49,7 @@ msdl2brailleManPageGenerateAtom::msdl2brailleManPageGenerateAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
-  S_oahVisitor  theOahVisitor)
+  const S_oahVisitor&  theOahVisitor)
   : oahAtom (
       longName,
       shortName,
@@ -180,7 +180,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2brailleManPageGenerate
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -188,7 +188,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2brailleManPageGenerate
 S_msdl2brailleManPageOahGroup gGlobalMsdl2brlManPageOahGroup;
 
 S_msdl2brailleManPageOahGroup msdl2brailleManPageOahGroup::create (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   msdl2brailleManPageOahGroup* o =
     new msdl2brailleManPageOahGroup (
@@ -198,7 +198,7 @@ S_msdl2brailleManPageOahGroup msdl2brailleManPageOahGroup::create (
 }
 
 msdl2brailleManPageOahGroup::msdl2brailleManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
   : oahGroup (
     "Man page",
     "hmp", "help-man-page",
@@ -213,7 +213,7 @@ msdl2brailleManPageOahGroup::~msdl2brailleManPageOahGroup ()
 {}
 
 void msdl2brailleManPageOahGroup::initializeManPageGenerateOptions (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   S_oahSubGroup
     subGroup =
@@ -260,7 +260,7 @@ R"(  Note: the options in this group imply '-tmp, -trace-man-page'.)",
 #endif
 
 void msdl2brailleManPageOahGroup::initializeMsdl2brlManPageOahGroup (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
   // display
   // --------------------------------------
@@ -372,13 +372,13 @@ std::ostream& operator << (std::ostream& os, const S_msdl2brailleManPageOahGroup
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msdl2brailleManPageOahGroup createGlobalMsdl2brlManPageOahHandler (
-  S_oahVisitor theOah2manPage)
+  const S_oahVisitor& theOah2manPage)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

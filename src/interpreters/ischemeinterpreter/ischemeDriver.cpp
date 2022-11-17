@@ -230,7 +230,7 @@ S_ischemeOptionsBlock ischemeDriver::optionsBlocksStackTop () const
 }
 
 void ischemeDriver::registerOptionInCurrentOptionsBlock (
-  S_oahOption option,
+  const S_oahOption& option,
   ischemeDriver& drv)
 {
   S_ischemeOptionsBlock

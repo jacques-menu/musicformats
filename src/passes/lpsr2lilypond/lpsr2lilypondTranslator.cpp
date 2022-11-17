@@ -574,7 +574,7 @@ std::string lpsr2lilypondTranslator::alterationKindAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -691,7 +691,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   // generate LilyPond octave relative to fCurrentOctaveEntryReference
 
@@ -895,7 +895,7 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -1174,7 +1174,7 @@ std::string lpsr2lilypondTranslator::msrDurationKindAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int noteInputLineNumber =
     note->getInputLineNumber ();
@@ -1298,7 +1298,7 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
 }
 
 void lpsr2lilypondTranslator::generateNoteHeadColor (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -1350,7 +1350,7 @@ void lpsr2lilypondTranslator::generateNoteHeadColor (
 }
 
 void lpsr2lilypondTranslator::generateNoteLigatures (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrLigature>&
     noteLigatures =
@@ -1602,7 +1602,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
 }
 
 void lpsr2lilypondTranslator::generateNoteHead (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   if (! note->fetchNoteIsARest ()) { // JMI ???
     msrNoteHeadKind
@@ -1720,7 +1720,7 @@ void lpsr2lilypondTranslator::generateSegno (S_msrSegno segno)
 }
 
 void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   if (! fOnGoingChord) {
     // generate the note codas if any
@@ -1798,7 +1798,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -1944,7 +1944,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2034,7 +2034,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2225,7 +2225,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2296,7 +2296,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2377,7 +2377,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
-  S_msrNote note)
+  const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2465,7 +2465,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2544,7 +2544,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2631,7 +2631,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2699,7 +2699,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
-  S_msrNote note)
+  const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2778,7 +2778,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -2855,7 +2855,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
-  S_msrNote note)
+  const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2930,7 +2930,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -3030,7 +3030,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
 }
 
 void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -3255,7 +3255,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteWords (
 }
 
 void lpsr2lilypondTranslator::generateCodeRightAfterNote (
-  S_msrNote note)
+  const S_msrNote& note)
 {
 /* JMI
   // should a stem direction command be generated?
@@ -4631,7 +4631,7 @@ std::string lpsr2lilypondTranslator::harmonyDegreeAlterationKindAsLilypondString
 }
 
 std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
-  S_msrHarmony harmony)
+  const S_msrHarmony& harmony)
 {
   int inputLineNumber =
     harmony->getInputLineNumber ();
@@ -5084,7 +5084,7 @@ std::string lpsr2lilypondTranslator::figureAsLilypondString (
 }
 
 std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
-  S_msrFiguredBass figuredBass)
+  const S_msrFiguredBass& figuredBass)
 {
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
@@ -5154,7 +5154,7 @@ bool compareFrameNotesByDecreasingStringNumber (
 }
 
 std::string lpsr2lilypondTranslator::frameAsLilypondString (
-  S_msrFrame frame)
+  const S_msrFrame& frame)
 {
 /* JMI
   int inputLineNumber =
@@ -5308,7 +5308,7 @@ std::string lpsr2lilypondTranslator::frameAsLilypondString (
 }
 
 void lpsr2lilypondTranslator::generateInputLineNumberAndOrMeasurePositionAsAComment (
-  S_msrMeasureElement measureElement)
+  const S_msrMeasureElement& measureElement)
 {
   fLilypondCodeStream <<
     " %{ ";
@@ -9683,7 +9683,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
 #endif
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
-    S_msrStanza stanza = elt->getStanza ();
+    const S_msrStanza& stanza = elt->getStanza ();
 
     fLilypondCodeStream <<
       "\\new Lyrics" <<
@@ -16843,7 +16843,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateNoteBeams (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrBeam>&
     noteBeams =
@@ -16929,7 +16929,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateNoteSlurDirection (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrSlur>&
     noteSlurs =
@@ -16972,7 +16972,7 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateNoteSlurs (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrSlur>&
     noteSlurs =
@@ -17652,7 +17652,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroup& elt)
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateBeforeNoteSpannersIfAny (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrSpanner>&
     noteSpanners =
@@ -17696,7 +17696,7 @@ void lpsr2lilypondTranslator::generateBeforeNoteSpannersIfAny (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateAfterNoteSpannersIfAny (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrSpanner>&
     noteSpanners =
@@ -18290,7 +18290,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 }
 
 void lpsr2lilypondTranslator::generateNoteScordaturas (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -18388,7 +18388,7 @@ void lpsr2lilypondTranslator::generateNoteScordaturas (
 }
 
 void lpsr2lilypondTranslator::generateNoteSlashes (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrSlash>&
     noteSlashes =
@@ -18464,7 +18464,7 @@ void lpsr2lilypondTranslator::generateNoteSlashes (
 }
 
 void lpsr2lilypondTranslator::generateNoteWedges (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrWedge>&
     noteWedges =
@@ -18517,7 +18517,7 @@ void lpsr2lilypondTranslator::generateNoteWedges (
 }
 
 void lpsr2lilypondTranslator::generateNoteSlurLineTypes (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrSlur>&
     noteSlurs =
@@ -18569,7 +18569,7 @@ void lpsr2lilypondTranslator::generateNoteSlurLineTypes (
 }
 
 void lpsr2lilypondTranslator::generateNoteGlissandoStyles (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrGlissando>&
     noteGlissandos =
@@ -18622,7 +18622,7 @@ void lpsr2lilypondTranslator::generateNoteGlissandoStyles (
 }
 
 void lpsr2lilypondTranslator::generateNoteGlissandosWithText (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrGlissando>&
     noteGlissandos =
@@ -18669,7 +18669,7 @@ void lpsr2lilypondTranslator::generateNoteGlissandosWithText (
 }
 
 void lpsr2lilypondTranslator::generateNoteSlideLineStyles (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrSlide>&
     noteSlides =
@@ -18723,7 +18723,7 @@ void lpsr2lilypondTranslator::generateNoteSlideLineStyles (
 }
 
 void lpsr2lilypondTranslator::generateNoteSlidesWithText (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   const std::list<S_msrSlide>&
     noteSlides =
@@ -18770,7 +18770,7 @@ void lpsr2lilypondTranslator::generateNoteSlidesWithText (
 }
 
 void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
-  S_msrNote note)
+  const S_msrNote& note)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -20043,7 +20043,7 @@ void lpsr2lilypondTranslator::generateCodeForOctaveShiftAfterNote (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateCodeAheadOfChordContents (
-  S_msrChord chord)
+  const S_msrChord& chord)
 {
   // generate the chord codas if any
   const std::list<S_msrCoda>&
@@ -20075,7 +20075,7 @@ void lpsr2lilypondTranslator::generateCodeAheadOfChordContents (
 }
 
 void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
-  S_msrChord chord)
+  const S_msrChord& chord)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -20352,7 +20352,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
 }
 
 void lpsr2lilypondTranslator::generateCodeForChordInGraceNotesGroupContents (
-  S_msrChord chord)
+  const S_msrChord& chord)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -20396,7 +20396,7 @@ void lpsr2lilypondTranslator::generateCodeForChordInGraceNotesGroupContents (
 }
 
 void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
-  S_msrChord chord)
+  const S_msrChord& chord)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -21048,7 +21048,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   }
 }
 
-void lpsr2lilypondTranslator::generateChordInGraceNotesGroup (S_msrChord chord)
+void lpsr2lilypondTranslator::generateChordInGraceNotesGroup (const S_msrChord& chord)
 {
   generateCodeRightBeforeChordContents (chord);
 

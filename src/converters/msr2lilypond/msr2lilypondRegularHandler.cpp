@@ -43,7 +43,7 @@ namespace MusicFormats
 S_msr2lilypondRegularHandler msr2lilypondRegularHandler::create (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msr2lilypondInsiderHandler
+  const S_msr2lilypondInsiderHandler&
                     insiderOahHandler)
 {
   // create the regular handler
@@ -60,7 +60,7 @@ S_msr2lilypondRegularHandler msr2lilypondRegularHandler::create (
 msr2lilypondRegularHandler::msr2lilypondRegularHandler (
   const std::string&     serviceName,
   const std::string&     handlerHeader,
-  S_msr2lilypondInsiderHandler
+  const S_msr2lilypondInsiderHandler&
                     insiderOahHandler)
   : oahRegularHandler (
       serviceName,

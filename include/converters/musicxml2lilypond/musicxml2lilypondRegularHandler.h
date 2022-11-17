@@ -35,7 +35,7 @@ class EXP xml2lyRegularHandler : public oahRegularHandler
     static SMARTP<xml2lyRegularHandler> create (
                             const std::string&     serviceName,
                             const std::string&     handlerHeader,
-                            S_xml2lyInsiderHandler
+                            const S_xml2lyInsiderHandler&
                                               insiderOahHandler);
 
   protected:
@@ -46,7 +46,7 @@ class EXP xml2lyRegularHandler : public oahRegularHandler
                           xml2lyRegularHandler (
                             const std::string&     serviceName,
                             const std::string&     handlerHeader,
-                            S_xml2lyInsiderHandler
+                            const S_xml2lyInsiderHandler&
                                               insiderOahHandler);
 
     virtual               ~xml2lyRegularHandler ();
