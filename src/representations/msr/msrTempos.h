@@ -73,7 +73,7 @@ class EXP msrTempoNote : public msrElement
     // public services
     // ------------------------------------------------------
 
-    void                  appendBeamToTempoNote (S_msrBeam beam);
+    void                  appendBeamToTempoNote (const S_msrBeam& beam);
 
   public:
 
@@ -182,7 +182,7 @@ class EXP msrTempoTuplet : public msrElement
 
     void                  removeFirstNoteFromTempoTuplet (
                             int            inputLineNumber,
-                            S_msrTempoNote tempoNote);
+                            const S_msrTempo&Note tempoNote);
     */
 
  // JMI   void                  applyDisplayFactorToTempoTupletMembers ();
@@ -285,7 +285,7 @@ class EXP msrTempoNotesRelationshipElements : public msrElement
     std::string           asString () const override;
 
     void                  addElementToTempoNotesRelationshipElements (
-                            S_msrElement element);
+                            const S_msrElement& element);
 
   public:
 
@@ -326,14 +326,14 @@ class EXP msrTempo : public msrMeasureElement
     static SMARTP<msrTempo> createTempoWordsOnly (
                             int               inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
-                            S_msrWords        tempoWords,
+                            const S_msrWords&        tempoWords,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
                             msrPlacementKind  tempoPlacementKind);
 
     static SMARTP<msrTempo> createTempoWordsOnly (
                             int               inputLineNumber,
-                            S_msrWords        tempoWords,
+                            const S_msrWords&        tempoWords,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
                             msrPlacementKind  tempoPlacementKind);
@@ -375,11 +375,11 @@ class EXP msrTempo : public msrMeasureElement
     static SMARTP<msrTempo> createTempoNotesRelationship (
                             int               inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
-                            S_msrTempoNotesRelationshipElements
+                            const S_msrTempoNotesRelationshipElements&
                                               tempoNotesRelationshipLeftElements,
                             msrTempoNotesRelationshipKind
                                               tempoNotesRelationshipKind,
-                            S_msrTempoNotesRelationshipElements
+                            const S_msrTempoNotesRelationshipElements&
                                               tempoNotesRelationshipRightElements,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
@@ -387,11 +387,11 @@ class EXP msrTempo : public msrMeasureElement
 
     static SMARTP<msrTempo> createTempoNotesRelationship (
                             int               inputLineNumber,
-                            S_msrTempoNotesRelationshipElements
+                            const S_msrTempoNotesRelationshipElements&
                                               tempoNotesRelationshipLeftElements,
                             msrTempoNotesRelationshipKind
                                               tempoNotesRelationshipKind,
-                            S_msrTempoNotesRelationshipElements
+                            const S_msrTempoNotesRelationshipElements&
                                               tempoNotesRelationshipRightElements,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
@@ -405,7 +405,7 @@ class EXP msrTempo : public msrMeasureElement
                           msrTempo (
                             int               inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
-                            S_msrWords        tempoWords,
+                            const S_msrWords&        tempoWords,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
                             msrPlacementKind  tempoPlacementKind);
@@ -431,11 +431,11 @@ class EXP msrTempo : public msrMeasureElement
                           msrTempo (
                             int               inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
-                            S_msrTempoNotesRelationshipElements
+                            const S_msrTempoNotesRelationshipElements&
                                               tempoNotesRelationshipLeftElements,
                             msrTempoNotesRelationshipKind
                                               tempoNotesRelationshipKind,
-                            S_msrTempoNotesRelationshipElements
+                            const S_msrTempoNotesRelationshipElements&
                                               tempoNotesRelationshipRightElements,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,

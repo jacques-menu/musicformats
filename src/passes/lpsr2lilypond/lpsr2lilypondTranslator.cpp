@@ -68,7 +68,7 @@ const int commentFieldWidth = 30;
 
 //______________________________________________________________________________
 S_lpsrRepeatDescr lpsrRepeatDescr::create (
-  S_msrRepeat repeat,
+  const S_msrRepeat& repeat,
   int         repeatEndingsNumber)
 {
   lpsrRepeatDescr* o = new
@@ -80,7 +80,7 @@ S_lpsrRepeatDescr lpsrRepeatDescr::create (
 }
 
 lpsrRepeatDescr::lpsrRepeatDescr (
-  S_msrRepeat repeat,
+  const S_msrRepeat& repeat,
   int         repeatEndingsNumber)
 {
   fRepeat = repeat;
@@ -144,8 +144,8 @@ std::ostream& operator << (std::ostream& os, const S_lpsrRepeatDescr& elt)
 
 //________________________________________________________________________
 lpsr2lilypondTranslator::lpsr2lilypondTranslator (
-  S_msrOahGroup&  msrOpts,
-  S_lpsrOahGroup& lpsrOpts,
+  const S_msrOahGroup&  msrOpts,
+  const S_lpsrOahGroup& lpsrOpts,
   std::ostream&        lilypondCodeStream)
   : fLilypondCodeStream (
       lilypondCodeStream)
@@ -162,7 +162,7 @@ lpsr2lilypondTranslator::~lpsr2lilypondTranslator ()
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::translateLpsrToLilypondCode (
-  S_lpsrScore theLpsrScore)
+  const S_lpsrScore& theLpsrScore)
 {
   // the LPSR score we're visiting
   fVisitedLpsrScore = theLpsrScore;
@@ -818,7 +818,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
   int               inputLineNumber,
-  S_msrStringTuning stringTuning)
+  const S_msrStringTuning& stringTuning)
 {
   msrDiatonicPitchKind
     stringTuningDiatonicPitchKind =
@@ -1556,7 +1556,7 @@ std::string lpsr2lilypondTranslator::stemAsLilypondString (
 }
 
 void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
-  S_msrStem stem)
+  const S_msrStem& stem)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStems ()) {
@@ -1694,7 +1694,7 @@ void lpsr2lilypondTranslator::generateNoteHead (
   }
 }
 
-void lpsr2lilypondTranslator::generateCoda (S_msrCoda coda)
+void lpsr2lilypondTranslator::generateCoda (const S_msrCoda& coda)
 {
   switch (coda->getCodaKind ()) {
     case msrCodaKind::kCodaFirst:
@@ -1711,7 +1711,7 @@ void lpsr2lilypondTranslator::generateCoda (S_msrCoda coda)
   fLilypondCodeStream << std::endl;
 }
 
-void lpsr2lilypondTranslator::generateSegno (S_msrSegno segno)
+void lpsr2lilypondTranslator::generateSegno (const S_msrSegno& segno)
 {
   // generate the segno
   fLilypondCodeStream <<
@@ -3329,7 +3329,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateNoteArticulation (
-  S_msrArticulation articulation)
+  const S_msrArticulation& articulation)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
@@ -3585,7 +3585,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateChordArticulation (
-  S_msrArticulation articulation)
+  const S_msrArticulation& articulation)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
@@ -3774,7 +3774,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::technicalAsLilypondString (
-  S_msrTechnical technical)
+  const S_msrTechnical& technical)
 {
   std::string result;
 
@@ -3831,7 +3831,7 @@ std::string lpsr2lilypondTranslator::technicalAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::technicalWithIntegerAsLilypondString (
-  S_msrTechnicalWithInteger technicalWithInteger)
+  const S_msrTechnicalWithInteger& technicalWithInteger)
 {
   std::stringstream s;
 
@@ -3858,7 +3858,7 @@ std::string lpsr2lilypondTranslator::technicalWithIntegerAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::technicalWithFloatAsLilypondString (
-  S_msrTechnicalWithFloat technicalWithFloat)
+  const S_msrTechnicalWithFloat& technicalWithFloat)
 {
   std::stringstream s;
 
@@ -3876,7 +3876,7 @@ std::string lpsr2lilypondTranslator::technicalWithFloatAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::technicalWithStringAsLilypondString (
-  S_msrTechnicalWithString technicalWithString)
+  const S_msrTechnicalWithString& technicalWithString)
 {
   std::string result;
 
@@ -3911,7 +3911,7 @@ std::string lpsr2lilypondTranslator::technicalWithStringAsLilypondString (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateOrnament (
-  S_msrOrnament ornament)
+  const S_msrOrnament& ornament)
 {
   S_msrNote
     ornamentUpLinkToNote =
@@ -4207,7 +4207,7 @@ void lpsr2lilypondTranslator::generateOrnament (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
-  S_msrSpanner spanner)
+  const S_msrSpanner& spanner)
 {
   msrSpannerTypeKind
     spannerTypeKind =
@@ -4281,7 +4281,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
-  S_msrSpanner spanner)
+  const S_msrSpanner& spanner)
 {
   msrSpannerTypeKind
     spannerTypeKind =
@@ -4439,7 +4439,7 @@ std::string lpsr2lilypondTranslator::tupletFactorAsLilypondString (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::dynamicAsLilypondString (
-  S_msrDynamic dynamic)
+  const S_msrDynamic& dynamic)
 {
   std::string result =
     "\\" + msrDynamicKindAsString (dynamic->getDynamicKind ());
@@ -4518,7 +4518,7 @@ void lpsr2lilypondTranslator::transposeDiatonicError (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::singleTremoloDurationAsLilypondString (
-  S_msrSingleTremolo singleTremolo)
+  const S_msrSingleTremolo& singleTremolo)
 {
   int
     singleTremoloMarksNumber =
@@ -4982,7 +4982,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
 }
 
 std::string lpsr2lilypondTranslator::figureAsLilypondString (
-  S_msrBassFigure bassFigure)
+  const S_msrBassFigure& bassFigure)
 {
   std::stringstream s;
 
@@ -6003,7 +6003,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
-  S_msrIdentification          identification,
+  const S_msrIdentification&          identification,
   std::list<std::pair<std::string, std::string> >& nameStringValuePairsList)
 {
   /*
@@ -6331,7 +6331,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::createLilypondHeaderStringValuePairs (
-  S_lpsrHeader                 header,
+  const S_lpsrHeader&                 header,
   std::list<std::pair<std::string, std::string> >& nameStringValuePairsList)
 {
   /*
@@ -6892,7 +6892,7 @@ void lpsr2lilypondTranslator::generatePaper (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
-  S_lpsrPaper                     paper,
+  const S_lpsrPaper&                     paper,
   std::list<std::pair<std::string, msrLength> >& nameLengthValuePairsList)
 {
   Bool
@@ -6942,7 +6942,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
 }
 
 void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
-  S_lpsrPaper                paper,
+  const S_lpsrPaper&                paper,
   std::list<std::pair<std::string, Bool> >& nameBooleanValuePairsList)
 {
   // ragged-last
@@ -7028,7 +7028,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaperPageSize (
-  S_msrPageLayout   pageLayout,
+  const S_msrPageLayout&   pageLayout,
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
@@ -7094,7 +7094,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaperMargins (
-  S_msrPageLayout   pageLayout,
+  const S_msrPageLayout&   pageLayout,
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
@@ -7214,7 +7214,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaperIndents (
-  S_lpsrPaper       pagePaper,
+  const S_lpsrPaper& pagePaper,
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
@@ -7290,7 +7290,7 @@ void lpsr2lilypondTranslator::generatePaperIndents (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaperSpaces (
-  S_lpsrPaper       pagePaper,
+  const S_lpsrPaper& pagePaper,
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
@@ -7366,7 +7366,7 @@ void lpsr2lilypondTranslator::generatePaperSpaces (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaperCounts (
-  S_lpsrPaper       pagePaper,
+  const S_lpsrPaper& pagePaper,
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
@@ -7401,7 +7401,7 @@ void lpsr2lilypondTranslator::generatePaperCounts (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaperBooleans (
-  S_lpsrPaper       pagePaper,
+  const S_lpsrPaper& pagePaper,
   int               fieldWidth)
 {
   // ragged last
@@ -7504,7 +7504,7 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
-  S_lpsrPaper       pagePaper,
+  const S_lpsrPaper& pagePaper,
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
@@ -14667,7 +14667,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
 }
 
 void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsWordsOnly (
-  S_msrTempo tempo)
+  const S_msrTempo& tempo)
 {
   fLilypondCodeStream <<
     "\\tempo ";
@@ -14702,7 +14702,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsWordsOnly (
 }
 
 void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
-  S_msrTempo tempo)
+  const S_msrTempo& tempo)
 {
   int inputLineNumber =
     tempo->getInputLineNumber ();
@@ -14896,7 +14896,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
 }
 
 void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
-  S_msrTempo tempo)
+  const S_msrTempo& tempo)
 {
   int inputLineNumber =
     tempo->getInputLineNumber ();
@@ -15056,7 +15056,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
 }
 
 void lpsr2lilypondTranslator::generateCodeForTempoNotesRelationship (
-  S_msrTempo tempo)
+  const S_msrTempo& tempo)
 {
   msrTempoParenthesizedKind
     tempoParenthesizedKind =
@@ -17115,7 +17115,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateGraceNotesGroup (
-  S_msrGraceNotesGroup graceNotesGroup)
+  const S_msrGraceNotesGroup& graceNotesGroup)
 {
   /*
     1. no slash, no slur: \grace
@@ -19039,7 +19039,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         i!=noteArticulations.end ();
         ++i
       ) {
-        S_msrArticulation articulation = (*i);
+        const S_msrArticulation& articulation = (*i);
         switch (articulation->getArticulationKind ()) {
           case msrArticulationKind::kArticulationFermata: // handle this better JMI
             if (
@@ -19461,7 +19461,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         i!=noteArticulations.end ();
         ++i
       ) {
-        S_msrArticulation articulation = (*i);
+        const S_msrArticulation& articulation = (*i);
 
         switch (articulation->getArticulationKind ()) {
           case msrArticulationKind::kArticulationFermata: // handle this better JMI
@@ -19975,7 +19975,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateCodeForOctaveShiftBeforeNote (
-  S_msrOctaveShift octaveShift)
+  const S_msrOctaveShift& octaveShift)
 {
   msrOctaveShiftKind
     octaveShiftKind =
@@ -20014,7 +20014,7 @@ void lpsr2lilypondTranslator::generateCodeForOctaveShiftBeforeNote (
 }
 
 void lpsr2lilypondTranslator::generateCodeForOctaveShiftAfterNote (
-  S_msrOctaveShift octaveShift)
+  const S_msrOctaveShift& octaveShift)
 {
   msrOctaveShiftKind
     octaveShiftKind =
@@ -20246,7 +20246,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
       i!=chordArticulations.end ();
       ++i
     ) {
-      S_msrArticulation articulation = (*i);
+      const S_msrArticulation& articulation = (*i);
 
       if (
         // arpeggiato?

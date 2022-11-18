@@ -251,7 +251,7 @@ void msrScordatura::setScordaturaUpLinkToMeasure (
 }
 
 void msrScordatura::addStringTuningToScordatura (
-  S_msrStringTuning stringTuning)
+  const S_msrStringTuning& stringTuning)
 {
   fScordaturaStringTuningsList.push_back (
     stringTuning);

@@ -69,7 +69,7 @@ msrTempoNote::msrTempoNote (
 msrTempoNote::~msrTempoNote ()
 {}
 
-void msrTempoNote::appendBeamToTempoNote (S_msrBeam beam)
+void msrTempoNote::appendBeamToTempoNote (const S_msrBeam& beam)
 {
   fTempoNoteBeams.push_back (beam);
 }

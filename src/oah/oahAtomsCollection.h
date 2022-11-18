@@ -42,7 +42,7 @@ class EXP oahAtomAlias : public oahAtom
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
-                            S_oahAtom     originalOahAtom);
+                            const S_oahAtom&     originalOahAtom);
 
   protected:
 
@@ -53,7 +53,7 @@ class EXP oahAtomAlias : public oahAtom
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
-                            S_oahAtom     originalOahAtom);
+                            const S_oahAtom&     originalOahAtom);
 
     virtual               ~oahAtomAlias ();
 
@@ -1761,7 +1761,7 @@ class EXP oahFactorizedStringAtom : public oahAtom // JMI UNUSED !!!
     // ------------------------------------------------------
 
     void                  addStringAtom (
-                            S_oahStringAtom stringAtom);
+                            const S_oahStringAtom& stringAtom);
 
     void                  addStringAtomByName (
                             const std::string& name);

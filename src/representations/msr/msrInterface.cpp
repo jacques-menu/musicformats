@@ -369,7 +369,7 @@ void displayMsrScoreSlices (
 
 //_______________________________________________________________________________
 S_msrPart createPartInScore (
-  S_msrScore theMsrScore)
+  const S_msrScore& theMsrScore)
 {
   // create the part group
   S_msrPartGroup

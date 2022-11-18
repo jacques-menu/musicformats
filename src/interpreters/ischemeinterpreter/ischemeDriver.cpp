@@ -191,7 +191,7 @@ void ischemeDriver::appendInputSouce (std::string inputSouce)
 }
 
 void ischemeDriver::optionsBlocksStackPush (
-  S_ischemeOptionsBlock optionsBlock,
+  const S_ischemeOptionsBlock& optionsBlock,
   const std::string&      context)
 {
   if (fTraceOptionsBlocks) {
@@ -233,7 +233,7 @@ void ischemeDriver::registerOptionInCurrentOptionsBlock (
   const S_oahOption& option,
   ischemeDriver& drv)
 {
-  S_ischemeOptionsBlock
+  const S_ischemeOptionsBlock&
     currentOptionsBlock =
       fOptionsBlocksStack.front ();
 
@@ -342,7 +342,7 @@ void ischemeDriver::displayOptionsBlocksStack (
 }
 
 void ischemeDriver::caseChoiceStatementsStackPush (
-  S_ischemeCaseChoiceStatement caseChoiceStatement)
+  const S_ischemeCaseChoiceStatement& caseChoiceStatement)
 {
   if (fTraceCaseChoiceStatements) {
     gLogStream <<
@@ -422,7 +422,7 @@ void ischemeDriver::displayCaseChoiceStatementsStack (
 }
 
 void ischemeDriver::caseInputStatementsStackPush (
-  S_ischemeCaseInputStatement caseInputStatement)
+  const S_ischemeCaseInputStatement& caseInputStatement)
 {
   if (fTraceCaseInputStatements) {
     gLogStream <<
@@ -743,7 +743,7 @@ void ischemeDriver::appendSelectLabelForToolLaunching (
   }
 
   else {
-    S_ischemeOptionsBlock
+    const S_ischemeOptionsBlock&
       selectOptionsBlock =
         choice->
           getChoiceOptionsBlockForLabel (
@@ -995,7 +995,7 @@ Bool ischemeDriver::applySelectOption (
             choiceName,
             *this);
 
-    S_ischemeOptionsBlock
+    const S_ischemeOptionsBlock&
       selectOptionsBlock =
         optionSuppliedChoice->
           getChoiceOptionsBlockForLabel (
@@ -1153,7 +1153,7 @@ void ischemeDriver::populateTheCommandsList ()
                 getChoiceDefaultLabel ();
 
           // get the options to be used
-          S_ischemeOptionsBlock
+          const S_ischemeOptionsBlock&
             optionsBlockToBeUsed =
               singleChoice->
                 getChoiceOptionsBlockForLabel (

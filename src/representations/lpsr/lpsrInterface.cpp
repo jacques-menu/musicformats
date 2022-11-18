@@ -36,9 +36,9 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 void displayLpsrScoreShort (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts,
+  const S_lpsrScore& theLpsrScore,
+  const S_msrOahGroup&     msrOpts,
+  const S_lpsrOahGroup&    lpsrOpts,
   const std::string&     passDescription)
 {
   // sanity check
@@ -81,9 +81,9 @@ void displayLpsrScoreShort (
 
 //_______________________________________________________________________________
 void displayLpsrScoreFull (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts,
+  const S_lpsrScore& theLpsrScore,
+  const S_msrOahGroup&     msrOpts,
+  const S_lpsrOahGroup&    lpsrOpts,
   const std::string&     passDescription)
 {
   // sanity check

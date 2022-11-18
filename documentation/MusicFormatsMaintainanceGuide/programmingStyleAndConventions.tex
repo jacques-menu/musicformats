@@ -1597,7 +1597,7 @@ class EXP msr2msrTranslator :
     virtual               ~msr2msrTranslator ();
 
     S_msrScore            translateMsrToMsr (
-                            S_msrScore theMsrScore);
+                            const S_msrScore& theMsrScore);
 	// ... ... ...
 
 };
@@ -1605,7 +1605,7 @@ class EXP msr2msrTranslator :
 
 \begin{lstlisting}[language=CPlusPlus]
 S_msrScore msr2msrTranslator::translateMsrToMsr (
-  S_msrScore theMsrScore)
+  const S_msrScore& theMsrScore)
 {
   // sanity check
   mfAssert (
@@ -1639,7 +1639,7 @@ The \functionName{convert*()} functions are the interfaces to the translators, f
 \begin{lstlisting}[language=CPlusPlus]
 S_msrScore translateMsrToMsr (
   S_msrScore        originalMsrScore,
-  S_msrOahGroup     msrOpts,
+  const S_msrOahGroup&     msrOpts,
   S_msr2msrOahGroup msr2msrOpts,
   const std::string&     passNumber,
   const std::string&     passDescription)

@@ -131,7 +131,7 @@ msr2msrTranslator::~msr2msrTranslator ()
 
 //________________________________________________________________________
 S_msrScore msr2msrTranslator::translateMsrToMsr (
-  S_msrScore theMsrScore)
+  const S_msrScore& theMsrScore)
 {
   // sanity check
   mfAssert (

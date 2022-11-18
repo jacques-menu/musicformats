@@ -268,8 +268,8 @@ class EXP msr2lpsrTranslator :
     virtual               ~msr2lpsrTranslator ();
 
     S_lpsrScore           translateMsrToLpsr (
-                            S_msrScore          theMsrScore,
-                            S_mfcMultiComponent multiComponent);
+                            const S_msrScore&          theMsrScore,
+                            const S_mfcMultiComponent& multiComponent);
 
   protected:
 
@@ -567,13 +567,13 @@ class EXP msr2lpsrTranslator :
     Bool                      fMovementTitleKnown;
 
     void                      populateHeaderFromIdentification (
-                                S_lpsrHeader        header,
-                                S_msrIdentification identification);
+                                const S_lpsrHeader&        header,
+                                const S_msrIdentification& identification);
 
     // paper
     // ------------------------------------------------------
     void                      setPaperIndentsIfNeeded (
-                                S_msrScaling scaling);
+                                const S_msrScaling& scaling);
 
     // credits
     // ------------------------------------------------------
@@ -587,11 +587,12 @@ class EXP msr2lpsrTranslator :
 
     // part groups
     // ------------------------------------------------------
-  //  S_msrPartGroup            fCurrentPartGroupClone; JMI
+  //  S_msrPartGroup          fCurrentPartGroupClone; JMI
 
     // partGroup's can be nested, hence this std::stack
     // the current partGroup is the top of the std::stack
-    std::stack<S_msrPartGroup>     fPartGroupsStack;
+    std::stack<S_msrPartGroup>
+                              fPartGroupsStack;
 
     // part groups block are nested as the partGroup's are
     // the current partGroup block is the top of the std::stack
@@ -625,7 +626,8 @@ class EXP msr2lpsrTranslator :
     // ------------------------------------------------------
     S_msrVoice                fCurrentVoiceClone;
     S_msrVoice                fCurrentVoiceOriginal;
-    std::map<S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
+    std::map<S_msrNote, S_msrNote>
+                              fVoiceNotesMap; // JMI
 
     // dal segnos
     // ------------------------------------------------------
@@ -652,7 +654,7 @@ class EXP msr2lpsrTranslator :
     // figured bass
     // ------------------------------------------------------
     Bool                      fOnGoingFiguredBassVoice;
-    S_msrFiguredBass   fCurrentFiguredBassClone;
+    S_msrFiguredBass          fCurrentFiguredBassClone;
 
 
     // segments
@@ -737,7 +739,7 @@ class EXP msr2lpsrTranslator :
     void                      prependSkipGraceNotesGroupToPartOtherVoices (
                                 const S_msrPart&            partClone,
                                 const S_msrVoice&           voiceClone,
-                                S_msrGraceNotesGroup skipGraceNotesGroup);
+                                const S_msrGraceNotesGroup& skipGraceNotesGroup);
                                 */
 
     // chords
@@ -748,7 +750,7 @@ class EXP msr2lpsrTranslator :
 
     // tuplets
     // ------------------------------------------------------
-    std::stack<S_msrTuplet>        fTupletClonesStack;
+    std::stack<S_msrTuplet>   fTupletClonesStack;
 
 
     // slurs

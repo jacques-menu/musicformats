@@ -191,7 +191,7 @@ void mfslDriver::appendInputSouce (std::string inputSouce)
 }
 
 void mfslDriver::optionsBlocksStackPush (
-  S_mfslOptionsBlock optionsBlock,
+  const S_mfslOptionsBlock& optionsBlock,
   const std::string&      context)
 {
   if (fTraceOptionsBlocks) {
@@ -422,7 +422,7 @@ void mfslDriver::displayCaseChoiceStatementsStack (
 }
 
 void mfslDriver::caseInputStatementsStackPush (
-  S_mfslCaseInputStatement caseInputStatement)
+  const S_mfslCaseInputStatement& caseInputStatement)
 {
   if (fTraceCaseInputStatements) {
     gLogStream <<

@@ -271,7 +271,7 @@ S_msrStaff Mikrokosmos3WanderingGenerator::createAndPopulateLowerStaffInPart (
 
 //------------------------------------------------------------------------
 S_msrPart Mikrokosmos3WanderingGenerator::createPartInScore (
-  S_msrScore theMsrScore)
+  const S_msrScore& theMsrScore)
 //------------------------------------------------------------------------
 {
   // create the part group

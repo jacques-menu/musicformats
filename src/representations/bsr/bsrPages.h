@@ -59,19 +59,19 @@ class EXP bsrPage : public bsrElement
     // ------------------------------------------------------
 
     void                  appendFootNotesToPage (
-                            S_bsrFootNotes footNotes)
+                            const S_bsrFootNotes& footNotes)
                               { fPageElementsList.push_back (footNotes); }
 
     void                  appendLineToPage (
-                            S_bsrLine line)
+                            const S_bsrLine& line)
                               { fPageElementsList.push_back (line); }
 
     void                  appendMusicHeadingToPage (
-                            S_bsrMusicHeading musicHeading)
+                            const S_bsrMusicHeading& musicHeading)
                               { fPageElementsList.push_back (musicHeading); }
 
     void                  appendPageHeadingToPage (
-                            S_bsrPageHeading pageHeading)
+                            const S_bsrPageHeading& pageHeading)
                               { fPageElementsList.push_back (pageHeading); }
 
     int                   fetchLineContentsNumber () const;

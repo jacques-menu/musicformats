@@ -41,7 +41,7 @@ class EXP bsrFootNotes : public bsrLine
     // ------------------------------------------------------
 
     void                  appendElementToFootNotes (
-                            S_bsrFootNotesElement footNotesElement)
+                            const S_bsrFootNotesElement& footNotesElement)
                               {
                                 fFootNotesElementsList.push_back (
                                   footNotesElement);

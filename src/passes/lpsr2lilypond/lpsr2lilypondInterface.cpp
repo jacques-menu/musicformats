@@ -37,9 +37,9 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 void translateLpsrToLilypond (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts,
+  const S_lpsrScore& theLpsrScore,
+  const S_msrOahGroup&     msrOpts,
+  const S_lpsrOahGroup&    lpsrOpts,
   const std::string&     passNumber,
   const std::string&     passDescription,
   std::ostream&          lilypondCodeStream)
@@ -104,9 +104,9 @@ void translateLpsrToLilypond (
 }
 
 EXP void translateLpsrToLilypondWithHandler (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts,
+  const S_lpsrScore& theLpsrScore,
+  const S_msrOahGroup&     msrOpts,
+  const S_lpsrOahGroup&    lpsrOpts,
   const std::string&     passNumber,
   const std::string&     passDescription,
   S_oahHandler      handler,

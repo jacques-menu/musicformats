@@ -270,7 +270,7 @@ S_msrStaff LilyPondIssue34Generator::createAndPopulateLowerStaffInPart (
 
 //------------------------------------------------------------------------
 S_msrPart LilyPondIssue34Generator::createPartInScore (
-  S_msrScore theMsrScore)
+  const S_msrScore& theMsrScore)
 //------------------------------------------------------------------------
 {
   // create the part group

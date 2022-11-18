@@ -42,8 +42,8 @@ class EXP lpsrScore : public lpsrElement
 
     static SMARTP<lpsrScore> create (
                             int                 inputLineNumber,
-                            S_msrScore          theMsrScore,
-                            S_mfcMultiComponent multiComponent);
+                            const S_msrScore&          theMsrScore,
+                            const S_mfcMultiComponent& multiComponent);
 
   protected:
 
@@ -52,8 +52,8 @@ class EXP lpsrScore : public lpsrElement
 
                           lpsrScore (
                             int                 inputLineNumber,
-                            S_msrScore          theMsrScore,
-                            S_mfcMultiComponent multiComponent);
+                            const S_msrScore&          theMsrScore,
+                            const S_mfcMultiComponent& multiComponent);
 
     virtual               ~lpsrScore ();
 
@@ -319,7 +319,7 @@ class EXP lpsrScore : public lpsrElement
                               { fScoreElementsList.push_back (stanza); }
 
     void                  appendBookBlockToBookBlocksList (
-                            S_lpsrBookBlock bookBlock)
+                            const S_lpsrBookBlock& bookBlock)
                               { fScoreBookBlocksList.push_back (bookBlock); }
 
     void                  addGlissandoWithTextSchemeFunctionsToScore ();

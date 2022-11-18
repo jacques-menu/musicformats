@@ -329,8 +329,8 @@ Another example is in the \class{lpsr2lilypondTranslator} constructor:
 \begin{lstlisting}[language=CPlusPlus]
 lpsr2lilypondTranslator::lpsr2lilypondTranslator (
   S_lpsrScore     lpsrScore,
-  S_msrOahGroup&  msrOpts,
-  S_lpsrOahGroup& lpsrOpts,
+  const S_msrOahGroup&  msrOpts,
+  const S_lpsrOahGroup& lpsrOpts,
   std::ostream&        lilypondCodeStream)
   : fLilypondCodeStream (
       lilypondCodeStream)

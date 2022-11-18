@@ -37,7 +37,7 @@ class EXP bsrPageElement : public bsrElement
 
 /* JMI
     void                  setUpLinkToBsrPage (
-                            S_bsrPage upLinkToPage);
+                            const S_bsrPage& upLinkToPage);
 
     S_bsrPage             getUpLinkToBsrPage () const;
 */

@@ -41,7 +41,7 @@ class msrNoteEvent : public smartable
 
       static SMARTP<msrNoteEvent> create (
                             const Rational&  noteEventMeasurePosition,
-                            S_msrNote        noteEventNote,
+                            const S_msrNote&        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
   protected:
@@ -51,7 +51,7 @@ class msrNoteEvent : public smartable
 
                           msrNoteEvent (
                             const Rational&  noteEventMeasurePosition,
-                            S_msrNote        noteEventNote,
+                            const S_msrNote&        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
     virtual               ~msrNoteEvent ();

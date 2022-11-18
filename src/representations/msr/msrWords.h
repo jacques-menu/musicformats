@@ -59,7 +59,7 @@ class EXP msrWords : public msrElement
                             msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
                             msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
                             msrFontStyleKind           wordsFontStyleKind,
-                            S_msrFontSize              wordsFontSize,
+                            const S_msrFontSize&              wordsFontSize,
                             msrFontWeightKind          wordsFontWeightKind,
                             msrXMLLangKind             wordsXMLLangKind,
                             int                        wordsStaffNumber);
@@ -77,7 +77,7 @@ class EXP msrWords : public msrElement
                             msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
                             msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
                             msrFontStyleKind           wordsFontStyleKind,
-                            S_msrFontSize              wordsFontSize,
+                            const S_msrFontSize&              wordsFontSize,
                             msrFontWeightKind          wordsFontWeightKind,
                             msrXMLLangKind             wordsXMLLangKind,
                             int                        wordsStaffNumber);

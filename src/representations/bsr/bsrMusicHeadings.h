@@ -68,7 +68,7 @@ class EXP bsrMusicHeading : public bsrLine
                               { return fMusicHeadingTimeSignatureSignature; }
 
     void                  setMusicHeadingTimeSignature (
-                            S_bsrTimeSignature timeSignature)
+                            const S_bsrTimeSignature& timeSignature)
                               { fMusicHeadingTimeSignatureSignature = time; }
 
   public:

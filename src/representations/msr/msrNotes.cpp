@@ -2561,7 +2561,7 @@ Bool msrNote::noteIsAPitchedRest () const
     fetchNoteIsARest () && fNoteDisplayOctaveKind != msrOctaveKind::kOctave_NO_;
 }
 
-void msrNote::setNoteStem (S_msrStem stem)
+void msrNote::setNoteStem (const S_msrStem& stem)
 {
   // register note stem
   fNoteStem = stem;
@@ -2644,7 +2644,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
 #endif
 }
 
-void msrNote::appendBeamToNote (S_msrBeam beam)
+void msrNote::appendBeamToNote (const S_msrBeam& beam)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
@@ -2669,7 +2669,7 @@ if (false) { // JMI, note not yet append to anything....
   fNoteBeams.push_back (beam);
 }
 
-void msrNote::appendArticulationToNote (S_msrArticulation art)
+void msrNote::appendArticulationToNote (const S_msrArticulation& art)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
@@ -2743,7 +2743,7 @@ void msrNote::appendTechnicalToNote (S_msrTechnical technical)
 }
 
 void msrNote::appendTechnicalWithIntegerToNote (
-  S_msrTechnicalWithInteger technicalWithInteger)
+  const S_msrTechnicalWithInteger& technicalWithInteger)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
@@ -2763,7 +2763,7 @@ void msrNote::appendTechnicalWithIntegerToNote (
 }
 
 void msrNote::appendTechnicalWithFloatToNote (
-  S_msrTechnicalWithFloat technicalWithFloat)
+  const S_msrTechnicalWithFloat& technicalWithFloat)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
@@ -2783,7 +2783,7 @@ void msrNote::appendTechnicalWithFloatToNote (
 }
 
 void msrNote::appendTechnicalWithStringToNote (
-  S_msrTechnicalWithString technicalWithString)
+  const S_msrTechnicalWithString& technicalWithString)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
@@ -2863,7 +2863,7 @@ void msrNote::appendGlissandoToNote (S_msrGlissando glissando)
   fNoteGlissandos.push_back (glissando);
 }
 
-void msrNote::appendSlideToNote (S_msrSlide slide)
+void msrNote::appendSlideToNote (const S_msrSlide& slide)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlides ()) {
@@ -2881,7 +2881,7 @@ void msrNote::appendSlideToNote (S_msrSlide slide)
 }
 
 void msrNote::setNoteGraceNotesGroupBefore (
-  S_msrGraceNotesGroup graceNotesGroupBefore)
+  const S_msrGraceNotesGroup& graceNotesGroupBefore)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
@@ -2905,7 +2905,7 @@ void msrNote::setNoteGraceNotesGroupBefore (
 }
 
 void msrNote::setNoteGraceNotesGroupAfter (
-  S_msrGraceNotesGroup graceNotesGroupAfter)
+  const S_msrGraceNotesGroup& graceNotesGroupAfter)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
@@ -2964,7 +2964,7 @@ void msrNote::setNoteSingleTremolo (S_msrSingleTremolo trem)
   fNoteSingleTremolo = trem;
 }
 
-void msrNote::appendDynamicToNote (S_msrDynamic dynamic)
+void msrNote::appendDynamicToNote (const S_msrDynamic& dynamic)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamics ()) {
@@ -2985,12 +2985,12 @@ void msrNote::appendOtherDynamicToNote (S_msrOtherDynamic otherDynamic)
   fNoteOtherDynamics.push_back (otherDynamic);
 }
 
-void msrNote::appendWordsToNote (S_msrWords words)
+void msrNote::appendWordsToNote (const S_msrWords& words)
 {
   fNoteWords.push_back (words);
 }
 
-void msrNote::appendSlurToNote (S_msrSlur slur)
+void msrNote::appendSlurToNote (const S_msrSlur& slur)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
@@ -3004,7 +3004,7 @@ void msrNote::appendSlurToNote (S_msrSlur slur)
   fNoteSlurs.push_back (slur);
 }
 
-void msrNote::appendLigatureToNote (S_msrLigature ligature)
+void msrNote::appendLigatureToNote (const S_msrLigature& ligature)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLigatures ()) {
@@ -3065,7 +3065,7 @@ void msrNote::appendLigatureToNote (S_msrLigature ligature)
     fNoteLigatures.push_back (ligature);
 }
 
-void msrNote::appendPedalToNote (S_msrPedal pedal)
+void msrNote::appendPedalToNote (const S_msrPedal& pedal)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePedals ()) {
@@ -3123,7 +3123,7 @@ void msrNote::appendPedalToNote (S_msrPedal pedal)
     fNotePedals.push_back (pedal);
 }
 
-void msrNote::appendSlashToNote (S_msrSlash slash)
+void msrNote::appendSlashToNote (const S_msrSlash& slash)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlashes ()) {
@@ -3145,17 +3145,17 @@ void msrNote::appendCrescDecrescToNote (
   fNoteCrescDecrescs.push_back (crescDecresc);
 }
 
-void msrNote::appendWedgeToNote (S_msrWedge wedge)
+void msrNote::appendWedgeToNote (const S_msrWedge& wedge)
 {
   fNoteWedges.push_back (wedge);
 }
 
-void msrNote::appendSegnoToNote (S_msrSegno segno)
+void msrNote::appendSegnoToNote (const S_msrSegno& segno)
 {
   fNoteSegnos.push_back (segno);
 }
 
-void msrNote::appendDalSegnoToNote (S_msrDalSegno dalSegno)
+void msrNote::appendDalSegnoToNote (const S_msrDalSegno& dalSegno)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
@@ -3171,7 +3171,7 @@ void msrNote::appendDalSegnoToNote (S_msrDalSegno dalSegno)
   fNoteDalSegnos.push_back (dalSegno);
 }
 
-void msrNote::appendCodaToNote (S_msrCoda coda)
+void msrNote::appendCodaToNote (const S_msrCoda& coda)
 {
   fNoteCodas.push_back (coda);
 }

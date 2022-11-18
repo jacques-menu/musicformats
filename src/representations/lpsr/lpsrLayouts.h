@@ -58,7 +58,7 @@ class EXP lpsrLayout : public lpsrElement
     // ------------------------------------------------------
 
     void                  addSchemeVariable (
-                            S_lpsrSchemeVariable schemeVariable)
+                            const S_lpsrSchemeVariable& schemeVariable)
                               {
                                 fLpsrSchemeVariablesVector.push_back (schemeVariable);
                               }

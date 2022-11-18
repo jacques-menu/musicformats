@@ -315,7 +315,7 @@ class EXP msrMeasure : public msrSegmentElement
     // print layout
 
     void                  appendPrintLayoutToMeasure (
-                            S_msrPrintLayout printLayout);
+                            const S_msrPrintLayout& printLayout);
 
     S_msrPrintLayout      getMeasurePrintLayout () const
                               { return fMeasurePrintLayout; }
@@ -331,13 +331,13 @@ class EXP msrMeasure : public msrSegmentElement
     // time signatures
 
     void                  appendTimeSignatureToMeasure (
-                            S_msrTimeSignature timeSignature);
+                            const S_msrTimeSignature& timeSignature);
 
     void                  setFullMeasureWholeNotesDurationFromTime (
-                            S_msrTimeSignature timeSignature);
+                            const S_msrTimeSignature& timeSignature);
 
     void                  appendTimeSignatureToMeasureClone (
-                            S_msrTimeSignature timeSignature);
+                            const S_msrTimeSignature& timeSignature);
 
     // dal segno
 
@@ -348,7 +348,7 @@ class EXP msrMeasure : public msrSegmentElement
     // transposition
 
     void                  appendTranspositionToMeasure (
-                            S_msrTransposition transpose);
+                            const S_msrTransposition& transpose);
 
     // staff details
 
@@ -358,7 +358,7 @@ class EXP msrMeasure : public msrSegmentElement
     // bar number checks
 
     void                  appendBarNumberCheckToMeasure (
-                            S_msrBarNumberCheck barNumberCheck);
+                            const S_msrBarNumberCheck& barNumberCheck);
 
     // breaks
 
@@ -372,28 +372,28 @@ class EXP msrMeasure : public msrSegmentElement
     // rehearsal marks
 
     void                  appendRehearsalMarkToMeasure (
-                            S_msrRehearsalMark rehearsalMark);
+                            const S_msrRehearsalMark& rehearsalMark);
 
     // octave shifts
 
     void                  appendOctaveShiftToMeasure (
-                            S_msrOctaveShift octaveShift);
+                            const S_msrOctaveShift& octaveShift);
 
     // scordaturas
 
     void                  appendScordaturaToMeasure (
-                            S_msrScordatura scordatura);
+                            const S_msrScordatura& scordatura);
 
     // accordion registration
 
     void                  appendAccordionRegistrationToMeasure (
-                            S_msrAccordionRegistration
+                            const S_msrAccordionRegistration&
                               accordionRegistration);
 
     // harp pedals tuning
 
     void                  appendHarpPedalsTuningToMeasure (
-                            S_msrHarpPedalsTuning
+                            const S_msrHarpPedalsTuning&
                               harpPedalsTuning);
 
     // bar lines
@@ -470,34 +470,31 @@ class EXP msrMeasure : public msrSegmentElement
 
     /* JMI
     void                  addGraceNotesGroupAheadOfMeasure (
-                            S_msrGraceNotesGroup graceNotesGroup);
-
-    void                  appendGraceNotesToMeasure (
-                            S_msrGraceNotes graceNotes);
+                            const S_msrGraceNotesGroup& graceNotesGroup);
 
     void                  appendAfterGraceNotesToMeasure (
-                            S_msrAfterGraceNotes afterGraceNotes);
+                            const S_msrAfterGraceNotes& afterGraceNotes);
 
     void                  prependAfterGraceNotesToMeasure (
-                            S_msrAfterGraceNotes afterGraceNotes);
+                            const S_msrAfterGraceNotes& afterGraceNotes);
                             */
 
     // segno
 
-    void                  appendSegnoToMeasure (S_msrSegno segno);
+    void                  appendSegnoToMeasure (const S_msrSegno& segno);
 
     // coda
 
-    void                  appendCodaToMeasure (S_msrCoda coda);
+    void                  appendCodaToMeasure (const S_msrCoda& coda);
 
     // eyeglasses
 
     void                  appendEyeGlassesToMeasure (
-                            S_msrEyeGlasses eyeGlasses);
+                            const S_msrEyeGlasses& eyeGlasses);
 
     // pedal
 
-    void                  appendPedalToMeasure (S_msrPedal pedal);
+    void                  appendPedalToMeasure (const S_msrPedal& pedal);
 
     // damp
 
@@ -532,7 +529,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  removeElementFromMeasure (
                             int          inputLineNumber,
-                            S_msrElement elem);
+                            const S_msrElement& elem);
 
     // notes flat std::list
 
@@ -731,18 +728,18 @@ class EXP msrMeasure : public msrSegmentElement
     void                  handleFirstHarmonyInHarmoniesMeasure (
                             int          inputLineNumber,
                             const S_msrVoice&   voice,
-                            S_msrHarmony currentHarmony);
+                            const S_msrHarmony& currentHarmony);
 
     void                  handleSubsequentHarmonyInHarmoniesMeasure (
                             int          inputLineNumber,
                             const S_msrVoice&   voice,
-                            S_msrHarmony previousHarmony,
-                            S_msrHarmony currentHarmony);
+                            const S_msrHarmony& previousHarmony,
+                            const S_msrHarmony& currentHarmony);
 
     void                  postHandleCurrentHarmonyInHarmoniesMeasure (
                             int          inputLineNumber,
                             const S_msrVoice&   voice,
-                            S_msrHarmony currentHarmony);
+                            const S_msrHarmony& currentHarmony);
 
     void                  finalizeTheHarmoniesInHarmoniesMeasure (
                             int           inputLineNumber,
@@ -751,8 +748,8 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeHarmonyInHarmoniesMeasure (
                             int           inputLineNumber,
                             const S_msrVoice&    voice,
-                            S_msrHarmony  previousHarmony,
-                            S_msrHarmony  currentHarmony,
+                            const S_msrHarmony&  previousHarmony,
+                            const S_msrHarmony&  currentHarmony,
                             const std::string& context);
 
     // figurd bass
@@ -761,8 +758,8 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrVoice&   voice,
                             std::list<S_msrMeasureElement>::iterator&
                                          i,
-                            S_msrFiguredBass previousFiguredBass,
-                            S_msrFiguredBass currentFiguredBass,
+                            const S_msrFiguredBass& previousFiguredBass,
+                            const S_msrFiguredBass& currentFiguredBass,
                             const Rational&         currentFiguredBassMeasurePosition);
 
     void                  handleSubsequentFiguredBassInFiguredBassMeasure (
@@ -770,14 +767,14 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrVoice&              voice,
                             std::list<S_msrMeasureElement>::iterator&
                                                     i,
-                            S_msrFiguredBass previousFiguredBass,
-                            S_msrFiguredBass currentFiguredBass,
+                            const S_msrFiguredBass& previousFiguredBass,
+                            const S_msrFiguredBass& currentFiguredBass,
                             const Rational&         currentFiguredBassMeasurePosition);
 
     void                  postHandleCurrentFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
                             const S_msrVoice&              voice,
-                            S_msrFiguredBass currentFiguredBass);
+                            const S_msrFiguredBass& currentFiguredBass);
 
     void                  finalizeFiguredBassesInFiguredBassMeasure (
                             int           inputLineNumber,

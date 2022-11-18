@@ -470,7 +470,7 @@ The run date is used for example in \class{lpsrScore}, defined in \lpsrBoth{lpsr
 \begin{lstlisting}[language=CPlusPlus]
 lpsrScore::lpsrScore (
   int                 inputLineNumber,
-  S_msrScore          theMsrScore,
+  const S_msrScore&   theMsrScore,
   S_mfcMultiComponent multiComponent)
     : lpsrElement (inputLineNumber)
 {

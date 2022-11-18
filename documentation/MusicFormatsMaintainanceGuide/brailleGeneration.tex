@@ -19,7 +19,7 @@ Lilypond generation is done in \bsrToBrailleBoth{bsr2brailleTranslator}.
   public:
 
                           bsr2brailleTranslator (
-                            S_bsrScore     bsrScore,
+                            const S_bsrScore&     bsrScore,
                             const S_bsrOahGroup& bsrOpts,
                             std::ostream&       brailleOutputStream);
 
@@ -133,13 +133,13 @@ The base \class{bsrBrailleGenerator} contains:
                             bsrCellKind cellKind) = 0;
 
     void                  generateCodeForCellsList (
-                            S_bsrCellsList cellsList);
+                            const S_bsrCellsList& cellsList);
 
     virtual void          generateCodeForMusicHeading (
-                            S_bsrMusicHeading musicHeading);
+                            const S_bsrMusicHeading& musicHeading);
 
     virtual void          generateCodeForLineContents (
-                            S_bsrLineContents lineContents);
+                            const S_bsrLineContents& lineContents);
 
 		// ... ... ...
 

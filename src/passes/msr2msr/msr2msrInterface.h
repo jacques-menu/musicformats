@@ -23,7 +23,7 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsr (
   S_msrScore        originalMsrScore,
-  S_msrOahGroup     msrOpts,
+  const S_msrOahGroup&     msrOpts,
   S_msr2msrOahGroup msr2msrOpts,
   const std::string&     passNumber,
   const std::string&     passDescription);
@@ -31,7 +31,7 @@ S_msrScore translateMsrToMsr (
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsrAlongPathToVoice (
   S_msrScore        originalMsrScore,
-  S_msrOahGroup     msrOpts,
+  const S_msrOahGroup&     msrOpts,
   S_msr2msrOahGroup msr2msrOpts,
   const std::string&     passNumber,
   const std::string&     passDescription,

@@ -1227,15 +1227,15 @@ void lilypondAbsoluteOctaveEntryAtom::printAtomWithVariableOptionsValues (
 
 //______________________________________________________________________________
 S_lilypondRelativeOctaveEntryAtom lilypondRelativeOctaveEntryAtom::create (
-  const std::string&   shortName,
-  const std::string&   longName,
-  const std::string&   description,
-  const std::string&   valueSpecification,
-  const std::string&   variableName,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   msrOctaveEntryVariable&
-                  octaveEntryKindVariable,
+                     octaveEntryKindVariable,
   S_msrSemiTonesPitchAndOctave&
-                  lilypondRelativeOctaveEntryVariable)
+                     lilypondRelativeOctaveEntryVariable)
 {
   lilypondRelativeOctaveEntryAtom* o = new
     lilypondRelativeOctaveEntryAtom (
@@ -1251,15 +1251,15 @@ S_lilypondRelativeOctaveEntryAtom lilypondRelativeOctaveEntryAtom::create (
 }
 
 lilypondRelativeOctaveEntryAtom::lilypondRelativeOctaveEntryAtom (
-  const std::string&   shortName,
-  const std::string&   longName,
-  const std::string&   description,
-  const std::string&   valueSpecification,
-  const std::string&   variableName,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   msrOctaveEntryVariable&
-                  octaveEntryKindVariable,
+                     octaveEntryKindVariable,
   S_msrSemiTonesPitchAndOctave&
-                  lilypondRelativeOctaveEntryVariable)
+                     lilypondRelativeOctaveEntryVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -1483,15 +1483,15 @@ std::ostream& operator << (std::ostream& os, const S_lilypondRelativeOctaveEntry
 
 //______________________________________________________________________________
 S_lilypondFixedOctaveEntryAtom lilypondFixedOctaveEntryAtom::create (
-  const std::string&       longName,
-  const std::string&       shortName,
-  const std::string&       description,
-  const std::string&       valueSpecification,
-  const std::string&       variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   msrOctaveEntryVariable&
-                      octaveEntryKindVariable,
+                     octaveEntryKindVariable,
   S_msrSemiTonesPitchAndOctave&
-                      lilypondFixedOctaveEntryVariable)
+                     lilypondFixedOctaveEntryVariable)
 {
   lilypondFixedOctaveEntryAtom* o = new
     lilypondFixedOctaveEntryAtom (
@@ -1507,15 +1507,15 @@ S_lilypondFixedOctaveEntryAtom lilypondFixedOctaveEntryAtom::create (
 }
 
 lilypondFixedOctaveEntryAtom::lilypondFixedOctaveEntryAtom (
-  const std::string&       longName,
-  const std::string&       shortName,
-  const std::string&       description,
-  const std::string&       valueSpecification,
-  const std::string&       variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   msrOctaveEntryVariable&
-                      octaveEntryKindVariable,
+                     octaveEntryKindVariable,
   S_msrSemiTonesPitchAndOctave&
-                      lilypondFixedOctaveEntryVariable)
+                     lilypondFixedOctaveEntryVariable)
   : oahAtomExpectingAValue (
       longName,
       shortName,

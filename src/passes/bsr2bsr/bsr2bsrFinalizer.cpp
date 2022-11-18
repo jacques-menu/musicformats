@@ -26,7 +26,7 @@ namespace MusicFormats
 //________________________________________________________________________
 bsr2bsrFinalizer::bsr2bsrFinalizer (
   const S_bsrOahGroup& bsrOpts,
-  S_bsrScore     originalBsrScore)
+  const S_bsrScore&     originalBsrScore)
 {
   fBsrOahGroup = bsrOpts;
 

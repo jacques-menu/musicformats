@@ -136,7 +136,7 @@ class EXP msrSegment : public msrVoiceElement
     // print layout MusicXML specific??? JMI
 
     void                  appendPrintLayoutToSegment (
-                            S_msrPrintLayout printLayout);
+                            const S_msrPrintLayout& printLayout);
 
     // backup and padding
 
@@ -177,7 +177,7 @@ class EXP msrSegment : public msrVoiceElement
                             const S_msrMeasure& measure);
 
     void                  appendMultipleFullBarRestsToSegment (
-                            S_msrMultipleFullBarRests multipleFullBarRests);
+                            const S_msrMultipleFullBarRests& multipleFullBarRests);
 
     // clef, key, time signature
 
@@ -187,9 +187,9 @@ class EXP msrSegment : public msrVoiceElement
     void                  appendKeyToSegment (S_msrKey key);
 
     void                  appendTimeSignatureToSegment (
-                            S_msrTimeSignature timeSignature);
+                            const S_msrTimeSignature& timeSignature);
     void                  appendTimeSignatureToSegmentClone (
-                            S_msrTimeSignature timeSignature);
+                            const S_msrTimeSignature& timeSignature);
 
     // dal segno
 
@@ -200,7 +200,7 @@ class EXP msrSegment : public msrVoiceElement
     // transposition
 
     void                  appendTranspositionToSegment (
-                            S_msrTransposition transpose);
+                            const S_msrTransposition& transpose);
 
     // staff details
 
@@ -214,28 +214,28 @@ class EXP msrSegment : public msrVoiceElement
     // rehearsal marks
 
     void                  appendRehearsalMarkToSegment (
-                            S_msrRehearsalMark rehearsalMark);
+                            const S_msrRehearsalMark& rehearsalMark);
 
     // octave shifts
 
     void                  appendOctaveShiftToSegment (
-                            S_msrOctaveShift octaveShift);
+                            const S_msrOctaveShift& octaveShift);
 
     // scordaturas
 
     void                  appendScordaturaToSegment (
-                            S_msrScordatura scordatura);
+                            const S_msrScordatura& scordatura);
 
     // accordion registration
 
     void                  appendAccordionRegistrationToSegment (
-                            S_msrAccordionRegistration
+                            const S_msrAccordionRegistration&
                               accordionRegistration);
 
     // harp pedals tuning
 
     void                  appendHarpPedalsTuningToSegment (
-                            S_msrHarpPedalsTuning
+                            const S_msrHarpPedalsTuning&
                               harpPedalsTuning);
 
     // harmonies
@@ -291,20 +291,20 @@ class EXP msrSegment : public msrVoiceElement
     // bar lines
 
     void                  appendBarLineToSegment (
-                            S_msrBarLine barLine);
+                            const S_msrBarLine& barLine);
 
     void                  prependBarLineToSegment (
-                            S_msrBarLine barLine);
+                            const S_msrBarLine& barLine);
 
     // bar checks
 
     void                  appendBarCheckToSegment (
-                            S_msrBarCheck barCheck);
+                            const S_msrBarCheck& barCheck);
 
     // bar number checks
 
     void                  appendBarNumberCheckToSegment (
-                            S_msrBarNumberCheck barNumberCheck);
+                            const S_msrBarNumberCheck& barNumberCheck);
 
     // breaks
 
@@ -313,20 +313,20 @@ class EXP msrSegment : public msrVoiceElement
 
     // segno
 
-    void                  appendSegnoToSegment (S_msrSegno segno);
+    void                  appendSegnoToSegment (const S_msrSegno& segno);
 
     // coda
 
-    void                  appendCodaToSegment (S_msrCoda coda);
+    void                  appendCodaToSegment (const S_msrCoda& coda);
 
     // eyeglasses
 
     void                  appendEyeGlassesToSegment (
-                            S_msrEyeGlasses eyeGlasses);
+                            const S_msrEyeGlasses& eyeGlasses);
 
     // pedal
 
-    void                  appendPedalToSegment (S_msrPedal pedal);
+    void                  appendPedalToSegment (const S_msrPedal& pedal);
 
     // damp
 
@@ -340,16 +340,13 @@ class EXP msrSegment : public msrVoiceElement
 
     /* JMI
     void                  addGraceNotesGroupAheadOfSegmentIfNeeded (
-                            S_msrGraceNotesGroup graceNotesGroup);
-
-    void                  appendGraceNotesToSegment (
-                            S_msrGraceNotes graceNotes);
+                            const S_msrGraceNotesGroup& graceNotesGroup);
 
     void                  appendAfterGraceNotesToSegment (
-                            S_msrAfterGraceNotes afterGraceNotes);
+                            const S_msrAfterGraceNotes& afterGraceNotes);
 
     void                  prependAfterGraceNotesToSegment (
-                            S_msrAfterGraceNotes afterGraceNotes);
+                            const S_msrAfterGraceNotes& afterGraceNotes);
                             */
 
     // other elements
@@ -367,7 +364,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  removeElementFromSegment (
                             int          inputLineNumber,
-                            S_msrElement element);
+                            const S_msrElement& element);
 
     S_msrMeasure          removeLastMeasureFromSegment (
                             int           inputLineNumber,

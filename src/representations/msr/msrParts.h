@@ -303,9 +303,9 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendKeyToPart (S_msrKey key);
 
     void                  appendTimeSignatureToPart (
-                            S_msrTimeSignature timeSignature);
+                            const S_msrTimeSignature& timeSignature);
     void                  appendTimeSignatureToPartClone (
-                            S_msrTimeSignature timeSignature);
+                            const S_msrTimeSignature& timeSignature);
 
     // tempo
 
@@ -314,12 +314,12 @@ class EXP msrPart : public msrPartGroupElement
     // rehearsal marks
 
     void                  appendRehearsalMarkToPart (
-                            S_msrRehearsalMark rehearsalMark);
+                            const S_msrRehearsalMark& rehearsalMark);
 
     // transposition
 
     void                  appendTranspositionToPart (
-                            S_msrTransposition transposition);
+                            const S_msrTransposition& transposition);
 
     // staff details
 
@@ -369,10 +369,10 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendRepeatCloneToPart (
                             int         inputLineNumber,
-                            S_msrRepeat repeatCLone);
+                            const S_msrRepeat& repeatCLone);
 
     void                  appendRepeatEndingCloneToPart (
-                            S_msrRepeatEnding repeatEndingCLone);
+                            const S_msrRepeatEnding& repeatEndingCLone);
 
     // multiple full-bar rests
 
@@ -394,7 +394,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendMultipleFullBarRestsCloneToPart (
                             int               inputLineNumber,
-                            S_msrMultipleFullBarRests multipleFullBarRests);
+                            const S_msrMultipleFullBarRests& multipleFullBarRests);
 
     // measure repeats
 
@@ -408,7 +408,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendMeasureRepeatCloneToPart (
                             int               inputLineNumber,
-                            S_msrMultipleFullBarRests multipleFullBarRests);
+                            const S_msrMultipleFullBarRests& multipleFullBarRests);
 
     // staves
 
@@ -460,32 +460,25 @@ class EXP msrPart : public msrPartGroupElement
     // scordaturas
 
     void                  appendScordaturaToPart (
-                            S_msrScordatura scordatura);
+                            const S_msrScordatura& scordatura);
 
     // accordion registration
 
     void                  appendAccordionRegistrationToPart (
-                            S_msrAccordionRegistration
+                            const S_msrAccordionRegistration&
                               accordionRegistration);
 
     // harp pedals tuning
 
     void                  appendHarpPedalsTuningToPart (
-                            S_msrHarpPedalsTuning
+                            const S_msrHarpPedalsTuning&
                               harpPedalsTuning);
 
     // work around LilyPond issue #34
 
     void                  addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
                             const S_msrVoice&           graceNotesGroupOriginVoice,
-                            S_msrGraceNotesGroup skipGraceNotesGroup);
-
-/*
-    void                  appendSkipGraceNotesToVoicesClones ( // JMI ???
-                            const S_msrVoice&      graceNotesOriginVoice,
-                            S_msrGraceNotes skipGraceNotes);
-
-                            */
+                            const S_msrGraceNotesGroup& skipGraceNotesGroup);
 
     // backup
 

@@ -17285,7 +17285,7 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
       note->
         getNoteArticulations ();
 
-  for (S_msrArticulation articulation : noteArticulations) {
+  for (const S_msrArticulation& articulation : noteArticulations) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceArticulations ()) {
       gLogStream <<

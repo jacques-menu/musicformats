@@ -478,8 +478,8 @@ void msr2lpsrTranslator::computeLilypondScoreHeaderTitleAndSubTitle ()
 
 //________________________________________________________________________
 S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
-  S_msrScore          theMsrScore,
-  S_mfcMultiComponent multiComponent)
+  const S_msrScore&          theMsrScore,
+  const S_mfcMultiComponent& multiComponent)
 {
   // sanity check
   mfAssert (
@@ -765,8 +765,8 @@ void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
 
 //________________________________________________________________________
 void msr2lpsrTranslator::populateHeaderFromIdentification (
-  S_lpsrHeader        header,
-  S_msrIdentification identification)
+  const S_lpsrHeader&        header,
+  const S_msrIdentification& identification)
 {
   // sanity check
   mfAssert (
@@ -823,7 +823,7 @@ void msr2lpsrTranslator::populateHeaderFromIdentification (
 
 //________________________________________________________________________
 void msr2lpsrTranslator::setPaperIndentsIfNeeded (
-  S_msrScaling scaling)
+  const S_msrScaling& scaling)
 {
   S_lpsrPaper
     paper =

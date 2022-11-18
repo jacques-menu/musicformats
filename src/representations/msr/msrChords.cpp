@@ -652,7 +652,7 @@ S_msrNote msrChord::fetchChordFirstNonGraceNote () const
   return result;
 }
 
-void msrChord::appendDalSegnoToChord (S_msrDalSegno dalSegno)
+void msrChord::appendDalSegnoToChord (const S_msrDalSegno& dalSegno)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
@@ -668,7 +668,7 @@ void msrChord::appendDalSegnoToChord (S_msrDalSegno dalSegno)
   fChordDalSegnos.push_back (dalSegno);
 }
 
-void msrChord::appendArticulationToChord (S_msrArticulation art)
+void msrChord::appendArticulationToChord (const S_msrArticulation& art)
 {
   msrArticulationKind
     articulationKind =
@@ -676,7 +676,7 @@ void msrChord::appendArticulationToChord (S_msrArticulation art)
         getArticulationKind ();
 
   // don't append the same articulation several times
-  for (S_msrArticulation articulation : fChordArticulations) {
+  for (const S_msrArticulation& articulation : fChordArticulations) {
     if (articulation->getArticulationKind () == articulationKind)
       return;
   } // for
@@ -694,7 +694,7 @@ void msrChord::appendArticulationToChord (S_msrArticulation art)
   fChordArticulations.push_back (art);
 }
 
-void msrChord::appendSpannerToChord (S_msrSpanner span)
+void msrChord::appendSpannerToChord (const S_msrSpanner& span)
 {
   msrSpannerKind
     spannerKind =
@@ -737,7 +737,7 @@ void msrChord::setChordSingleTremolo (S_msrSingleTremolo trem)
   fChordSingleTremolo = trem;
 }
 
-void msrChord::appendTechnicalToChord (S_msrTechnical tech)
+void msrChord::appendTechnicalToChord (const S_msrTechnical& tech)
 {
   msrTechnicalKind
     technicalKind =
@@ -864,7 +864,7 @@ void msrChord::appendTechnicalWithStringToChord (
   fChordTechnicalWithStrings.push_back (tech);
 }
 
-void msrChord::appendOrnamentToChord (S_msrOrnament orn)
+void msrChord::appendOrnamentToChord (const S_msrOrnament& orn)
 {
   msrOrnamentKind
     ornamentKind =
@@ -890,7 +890,7 @@ void msrChord::appendOrnamentToChord (S_msrOrnament orn)
   fChordOrnaments.push_back (orn);
 }
 
-void msrChord::appendGlissandoToChord (S_msrGlissando gliss)
+void msrChord::appendGlissandoToChord (const S_msrGlissando& gliss)
 {
   msrGlissandoTypeKind
     glissandoTypeKind =
@@ -916,7 +916,7 @@ void msrChord::appendGlissandoToChord (S_msrGlissando gliss)
   fChordGlissandos.push_back (gliss);
 }
 
-void msrChord::appendSlideToChord (S_msrSlide slide)
+void msrChord::appendSlideToChord (const S_msrSlide& slide)
 {
   msrSlideTypeKind
     slideTypeKind =
@@ -960,7 +960,7 @@ void msrChord::appendChordSlurLinkToChord (S_msrChordSlurLink chordSlurLink)
   fChordSlurLinks.push_back (chordSlurLink);
 }
 
-void msrChord::appendStemToChord (S_msrStem stem)
+void msrChord::appendStemToChord (const S_msrStem& stem)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStems ()) {
@@ -999,7 +999,7 @@ void msrChord::appendStemToChord (S_msrStem stem)
 }
 
 /* JMI
-void msrChord::appendBeamToChord (S_msrBeam beam)
+void msrChord::appendBeamToChord (const S_msrBeam& beam)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {

@@ -128,7 +128,7 @@ class EXP bsrTranscriptionNotes : public bsrLine
     // ------------------------------------------------------
 
     void                  appendElementToTranscriptionNotes (
-                            S_bsrTranscriptionNotesElement transcriptionNotesElement)
+                            const S_bsrTranscriptionNotesElement& transcriptionNotesElement)
                               {
                                 fTranscriptionNotesElementsList.push_back (
                                   transcriptionNotesElement);

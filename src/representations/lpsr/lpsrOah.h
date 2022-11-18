@@ -300,7 +300,7 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
                             const std::string&          description,
                             const std::string&          valueSpecification,
                             const std::string&          variableName,
-                            S_msrSemiTonesPitchAndOctave&
+                            const S_msrSemiTonesPitchAndOctave&
                                               semiTonesPitchAndOctaveVariable);
 
   protected:
@@ -314,7 +314,7 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
                             const std::string&          description,
                             const std::string&          valueSpecification,
                             const std::string&          variableName,
-                            S_msrSemiTonesPitchAndOctave&
+                            const S_msrSemiTonesPitchAndOctave&
                                               semiTonesPitchAndOctaveVariable);
 
     virtual               ~lpsrTransposeAtom ();
@@ -325,7 +325,7 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setSemiTonesPitchAndOctaveVariable (
-                            S_msrSemiTonesPitchAndOctave value)
+                            const S_msrSemiTonesPitchAndOctave& value)
                               {
                                 fSemiTonesPitchAndOctaveVariable = value;
                               }

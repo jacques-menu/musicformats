@@ -20,14 +20,14 @@ Lilypond generation is done in \lpsrToLilypondBoth{lpsr2lilypondTranslator}.
   public:
 
                           lpsr2lilypondTranslator (
-                            S_msrOahGroup&  msrOpts,
-                            S_lpsrOahGroup& lpsrOpts,
+                            const S_msrOahGroup&  msrOpts,
+                            const S_lpsrOahGroup& lpsrOpts,
                             std::ostream&        lilypondCodeStream);
 
     virtual               ~lpsr2lilypondTranslator ();
 
     void                  translateLpsrToLilypondCode (
-                            S_lpsrScore lpsrScore);
+                            const S_lpsrScore& lpsrScore);
 \end{lstlisting}
 
 It contains these fields among others:

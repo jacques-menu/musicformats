@@ -960,7 +960,7 @@ In \lpsr{lpsrScores.cpp}, \constructor{lpsrScore} stores the multi-component val
 \begin{lstlisting}[language=CPlusPlus]
 lpsrScore::lpsrScore (
   int                 inputLineNumber,
-  S_msrScore          theMsrScore,
+  const S_msrScore&   theMsrScore,
   S_mfcMultiComponent multiComponent)
     : lpsrElement (inputLineNumber)
 {
