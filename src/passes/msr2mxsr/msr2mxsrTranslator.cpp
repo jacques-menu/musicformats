@@ -5777,7 +5777,7 @@ void msr2mxsrTranslator:: appendNoteArticulations (
     std::list<S_msrArticulation>::const_iterator i;
 
     for (i=noteArticulations.begin (); i!=noteArticulations.end (); ++i) {
-      S_msrArticulation articulation = (*i);
+      const S_msrArticulation& articulation = (*i);
 
       msrArticulationKind
         articulationKind =
@@ -6345,7 +6345,7 @@ void msr2mxsrTranslator:: appendStemToNote (
   }
 #endif
 
-  S_msrStem stem = theMsrNote->getNoteStem ();
+  cnost S_msrStem& stem = theMsrNote->getNoteStem ();
 
   if (stem) {
     msrStemKind

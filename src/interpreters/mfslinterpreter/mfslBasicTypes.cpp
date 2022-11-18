@@ -524,9 +524,9 @@ void mfslInput::addName (
 }
 
 void mfslInput::enrichNameOptionsBlock (
-  const std::string&      name,
-  S_mfslOptionsBlock optionsBlock,
-  mfslDriver&        drv)
+  const std::string&        name,
+  const S_mfslOptionsBlock& optionsBlock,
+  mfslDriver&               drv)
 {
   S_mfslOptionsBlock
     nameOptionsBlock =
@@ -783,7 +783,7 @@ mfslInputsTable::~mfslInputsTable ()
 {}
 
 void mfslInputsTable::addInput (
-  S_mfslInput input,
+  const S_mfslInput& input,
   mfslDriver& drv)
 {
   std::string
@@ -1346,7 +1346,7 @@ void mfslChoice::addLabel (
 
 void mfslChoice::enrichLabelOptionsBlock (
   const std::string&      label,
-  S_mfslOptionsBlock optionsBlock,
+  const S_mfslOptionsBlock& optionsBlock,
   mfslDriver&        drv)
 {
   S_mfslOptionsBlock
@@ -1646,7 +1646,7 @@ mfslChoicesTable::~mfslChoicesTable ()
 {}
 
 void mfslChoicesTable::addChoice (
-  S_mfslChoice choice,
+  const S_mfslChoice& choice,
   mfslDriver&  drv)
 {
   std::string
@@ -1838,7 +1838,7 @@ std::ostream& operator << (std::ostream& os, const S_mfslChoicesTable& elt)
 
 //_______________________________________________________________________________
 S_mfslCaseChoiceStatement mfslCaseChoiceStatement::create (
-  S_mfslChoice caseChoice,
+  const S_mfslChoice& caseChoice,
   mfslDriver&  drv)
 {
   mfslCaseChoiceStatement* o =
@@ -1850,7 +1850,7 @@ S_mfslCaseChoiceStatement mfslCaseChoiceStatement::create (
 }
 
 mfslCaseChoiceStatement::mfslCaseChoiceStatement (
-  S_mfslChoice caseChoice,
+  const S_mfslChoice& caseChoice,
   mfslDriver&  drv)
 {
   // sanity check
@@ -2041,7 +2041,7 @@ std::ostream& operator << (std::ostream& os, const S_mfslCaseChoiceStatement& el
 
 //_______________________________________________________________________________
 S_mfslCaseInputStatement mfslCaseInputStatement::create (
-  S_mfslInput caseInput,
+  const S_mfslInput& caseInput,
   mfslDriver& drv)
 {
   mfslCaseInputStatement* o =
@@ -2053,7 +2053,7 @@ S_mfslCaseInputStatement mfslCaseInputStatement::create (
 }
 
 mfslCaseInputStatement::mfslCaseInputStatement (
-  S_mfslInput caseInput,
+  const S_mfslInput& caseInput,
   mfslDriver& drv)
 {
   // sanity check

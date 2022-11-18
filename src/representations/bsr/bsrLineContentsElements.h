@@ -39,7 +39,7 @@ class EXP bsrLineContentsElement : public bsrElement
     // ------------------------------------------------------
 /*
     void                  setUpLinkToBsrLineContents (
-                            S_bsrLineContents lineContents);
+                            const S_bsrLineContents& lineContents);
 */
 
     void                  setSpacesBefore (int value)

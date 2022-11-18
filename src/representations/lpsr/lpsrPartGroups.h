@@ -63,7 +63,7 @@ class EXP lpsrPartGroupBlock : public lpsrElement
     // ------------------------------------------------------
 
     void                  appendElementToPartGroupBlock (
-                            S_msrElement elem)
+                            const S_msrElement& elem)
                               { fPartGroupBlockElements.push_back (elem); }
 
   public:

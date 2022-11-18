@@ -60,7 +60,7 @@ class EXP bsrLineContents : public bsrElement
     // ------------------------------------------------------
 
     void                  setLineContentsUpLinkToLine (
-                            S_bsrLine upLinkToLine);
+                            const S_bsrLine& upLinkToLine);
 
     S_bsrLine             getLineContentsUpLinkToLine () const;
 
@@ -77,10 +77,10 @@ class EXP bsrLineContents : public bsrElement
     // ------------------------------------------------------
 
     void                  appendLineElementToLineContents (
-                            S_bsrLineContentsElement lineElement);
+                            const S_bsrLineContentsElement& lineElement);
 
     void                  insertLineElementBeforeLastElementOfLineContents (
-                            S_bsrLineContentsElement lineElement);
+                            const S_bsrLineContentsElement& lineElement);
 
     S_bsrCellsList        fetchCellsList () const
                               { return buildLineContentsElementsList (); } // JMI ???

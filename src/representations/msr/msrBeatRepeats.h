@@ -32,7 +32,7 @@ class EXP msrBeatRepeatPattern : public msrElement
 
     static SMARTP<msrBeatRepeatPattern> create (
                             int              inputLineNumber,
-                            S_msrBeatRepeat upLinkToBeatRepeat);
+                            const S_msrBeatRepeat& upLinkToBeatRepeat);
 
     SMARTP<msrBeatRepeatPattern> createBeatRepeatPatternNewbornClone (
                             const S_msrVoice& containingVoice);
@@ -47,7 +47,7 @@ class EXP msrBeatRepeatPattern : public msrElement
 
                           msrBeatRepeatPattern (
                             int              inputLineNumber,
-                            S_msrBeatRepeat upLinkToBeatRepeat);
+                            const S_msrBeatRepeat& upLinkToBeatRepeat);
 
     virtual               ~msrBeatRepeatPattern ();
 
@@ -120,7 +120,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
 
     static SMARTP<msrBeatRepeatReplicas> create (
                             int              inputLineNumber,
-                            S_msrBeatRepeat upLinkToBeatRepeat);
+                            const S_msrBeatRepeat& upLinkToBeatRepeat);
 
     SMARTP<msrBeatRepeatReplicas> createBeatRepeatReplicasNewbornClone (
                             const S_msrVoice& containingVoice);
@@ -135,7 +135,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
 
                           msrBeatRepeatReplicas (
                             int              inputLineNumber,
-                            S_msrBeatRepeat upLinkToBeatRepeat);
+                            const S_msrBeatRepeat& upLinkToBeatRepeat);
 
     virtual               ~msrBeatRepeatReplicas ();
 
@@ -274,7 +274,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
 
     // beatRepeat pattern
     void                  setBeatRepeatPattern (
-                            S_msrBeatRepeatPattern
+                            const S_msrBeatRepeat&Pattern
                               beatRepeatPattern);
 
     S_msrBeatRepeatPattern
@@ -283,7 +283,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
 
     // measures repeat replicas
     void                  setBeatRepeatReplicas (
-                            S_msrBeatRepeatReplicas
+                            const S_msrBeatRepeat&Replicas
                               beatRepeatReplicas);
 
     S_msrBeatRepeatReplicas

@@ -159,15 +159,16 @@ class EXP ischemeInput : public smartable
     std::string           getInputNameWithoutTrace ( // JMI
                             ischemeDriver& drv) const;
 
-    ischemeInputNameKind     getInputNameKind () const
+    ischemeInputNameKind
+                          getInputNameKind () const
                               { return fInputNameKind; }
 
-    const std::set<std::string>&    getNamesSet () const
+    std::set<std::string> getNamesSet () const
                               { return fNamesSet; }
 
-    S_ischemeOptionsBlock    getInputOptionsBlockForName (
+    S_ischemeOptionsBlock getInputOptionsBlockForName (
                             const std::string& name,
-                            ischemeDriver&   drv) const;
+                            ischemeDriver&     drv) const;
 
     void                  setInputIsUsedInCaseInputStatements ()
                               { fInputIsUsedInCaseInputStatements = true; }
@@ -186,7 +187,7 @@ class EXP ischemeInput : public smartable
 
     void                  enrichNameOptionsBlock (
                             const std::string&           name,
-                            S_ischemeOptionsBlock optionsBlock,
+                            const S_ischemeOptionsBlock& optionsBlock,
                             ischemeDriver&        drv);
 
   public:
@@ -210,9 +211,9 @@ class EXP ischemeInput : public smartable
 
     std::string           fInputName;
 
-    ischemeInputNameKind     fInputNameKind;
+    ischemeInputNameKind  fInputNameKind;
 
-    std::set<std::string>           fNamesSet;
+    std::set<std::string> fNamesSet;
 
     Bool                  fInputIsUsedInCaseInputStatements;
 
@@ -256,7 +257,7 @@ class EXP ischemeInputsTable : public smartable
     // ------------------------------------------------------
 
     void                  addInput (
-                            S_ischemeInput input,
+                            const S_ischemeInput& input,
                             ischemeDriver& drv);
 
 //     S_ischemeInput          lookupInputByName (
@@ -302,7 +303,7 @@ class EXP ischemeCaseInputStatement : public smartable
     // ------------------------------------------------------
 
     static SMARTP<ischemeCaseInputStatement> create (
-                            S_ischemeInput caseInput,
+                            const S_ischemeInput& caseInput,
                             ischemeDriver& drv);
 
   protected:
@@ -311,7 +312,7 @@ class EXP ischemeCaseInputStatement : public smartable
     // ------------------------------------------------------
 
                           ischemeCaseInputStatement (
-                            S_ischemeInput caseInput,
+                            const S_ischemeInput& caseInput,
                             ischemeDriver& drv);
 
     virtual               ~ischemeCaseInputStatement ();
@@ -362,12 +363,12 @@ class EXP ischemeCaseInputStatement : public smartable
 
     S_ischemeInput           fCaseInputInput;
 
-    std::set<std::string>           fCaseInputNamesSet;
+    std::set<std::string> fCaseInputNamesSet;
     std::list<std::string>          fCaseInputCurrentNamesList;
 
     // checking unused names
-    std::set<std::string>           fUsedNames;
-    std::set<std::string>           fCaseInputUnusedNames;
+    std::set<std::string> fUsedNames;
+    std::set<std::string> fCaseInputUnusedNames;
 };
 typedef SMARTP<ischemeCaseInputStatement> S_ischemeCaseInputStatement;
 EXP std::ostream& operator << (std::ostream& os, const S_ischemeCaseInputStatement& elt);
@@ -436,9 +437,9 @@ class EXP ischemeChoice : public smartable
     std::string           getChoiceDefaultLabel () const
                               { return fChoiceDefaultLabel; }
 
-    S_ischemeOptionsBlock    getChoiceOptionsBlockForLabel (
+    S_ischemeOptionsBlock getChoiceOptionsBlockForLabel (
                             const std::string& label,
-                            ischemeDriver&   drv) const;
+                            ischemeDriver&     drv) const;
 
     void                  setChoiceIsUsedInCaseChoiceStatements ()
                               { fChoiceIsUsedInCaseChoiceStatements = true; }
@@ -457,7 +458,7 @@ class EXP ischemeChoice : public smartable
 
     void                  enrichLabelOptionsBlock (
                             const std::string&           label,
-                            S_ischemeOptionsBlock optionsBlock,
+                            const S_ischemeOptionsBlock& optionsBlock,
                             ischemeDriver&        drv);
 
     void                  registerChoiceDefaultLabel (
@@ -488,7 +489,7 @@ class EXP ischemeChoice : public smartable
     std::string           fChoiceLabel;
     ischemeChoiceLabelKind   fChoiceLabelKind;
 
-    std::set<std::string>           fLabelsSet;
+    std::set<std::string> fLabelsSet;
 
     std::string           fChoiceDefaultLabel;
 
@@ -534,7 +535,7 @@ class EXP ischemeChoicesTable : public smartable
     // ------------------------------------------------------
 
     void                  addChoice (
-                            S_ischemeChoice choice,
+                            const S_ischemeChoice& choice,
                             ischemeDriver&  drv);
 
 //     S_ischemeChoice          lookupChoiceByName (
@@ -580,7 +581,7 @@ class EXP ischemeCaseChoiceStatement : public smartable
     // ------------------------------------------------------
 
     static SMARTP<ischemeCaseChoiceStatement> create (
-                            S_ischemeChoice caseChoice,
+                            const S_ischemeChoice& caseChoice,
                             ischemeDriver&  drv);
 
   protected:
@@ -589,7 +590,7 @@ class EXP ischemeCaseChoiceStatement : public smartable
     // ------------------------------------------------------
 
                           ischemeCaseChoiceStatement (
-                            S_ischemeChoice caseChoice,
+                            const S_ischemeChoice& caseChoice,
                             ischemeDriver&  drv);
 
     virtual               ~ischemeCaseChoiceStatement ();
@@ -640,12 +641,12 @@ class EXP ischemeCaseChoiceStatement : public smartable
 
     S_ischemeChoice          fCaseChoice;
 
-    std::set<std::string>           fCaseLabelsSet;
+    std::set<std::string> fCaseLabelsSet;
     std::list<std::string>          fCaseCurrentLabelsList;
 
     // checking unused labels
-    std::set<std::string>           fUsedLabels;
-    std::set<std::string>           fCaseUnusedLabels;
+    std::set<std::string> fUsedLabels;
+    std::set<std::string> fCaseUnusedLabels;
 };
 typedef SMARTP<ischemeCaseChoiceStatement> S_ischemeCaseChoiceStatement;
 EXP std::ostream& operator << (std::ostream& os, const S_ischemeCaseChoiceStatement& elt);

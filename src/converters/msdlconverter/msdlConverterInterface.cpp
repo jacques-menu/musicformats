@@ -62,7 +62,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
+static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUSED v0.9.66
   SXMLFile&     sxmlfile,
   std::ostream& out,
   std::ostream& err,
@@ -422,7 +422,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
 }
 
 //_______________________________________________________________________________
-static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments (
+static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI UNUSED v0.9.66
   SXMLFile&               sxmlfile,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,

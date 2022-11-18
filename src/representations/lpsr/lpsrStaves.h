@@ -268,7 +268,7 @@ class EXP lpsrStaffBlock : public lpsrElement
                             const S_msrStanza& stanza);
 
     void                  appendElementToStaffBlock (
-                            S_msrElement elem)
+                            const S_msrElement& elem)
                               { fStaffBlockElements.push_back (elem); }
 
   public:

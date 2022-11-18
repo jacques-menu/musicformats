@@ -1447,7 +1447,7 @@ class EXP oahHandler : public oahFindableElement
                               { return fHandlerServiceName; }
 
     void                  setHandlerMultiComponent (
-                            S_mfcMultiComponent multiComponent)
+                            const S_mfcMultiComponent& multiComponent)
                               { fHandlerMultiComponent = multiComponent; }
 
     S_mfcMultiComponent   getHandlerMultiComponent () const
@@ -1841,7 +1841,7 @@ class EXP oahHandler : public oahFindableElement
                           fHandlerPrefixesMap;
 
     // single character names
-    std::set<std::string>           fSingleCharacterNamesSet;
+    std::set<std::string> fSingleCharacterNamesSet;
 
     // groups std::list
     std::list<S_oahGroup>      fHandlerGroupsList;

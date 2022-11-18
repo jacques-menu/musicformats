@@ -154,7 +154,7 @@ Script :
         ++gIndenter;
 
         // create the main options block
-        S_ischemeOptionsBlock
+        const S_ischemeOptionsBlock&
           mainOptionsBlock =
             ischemeOptionsBlock::create (
               "Main options block");
@@ -578,7 +578,7 @@ CaseChoiceAlternative
           CaseChoiceAlternativeDescription =
             s.str ();
 
-        S_ischemeOptionsBlock
+        const S_ischemeOptionsBlock&
           CaseChoiceAlternativeOptionsBlock =
             ischemeOptionsBlock::create (
               CaseChoiceAlternativeDescription);
@@ -777,7 +777,7 @@ CaseInputAlternative
           caseInputAlternativeDescription =
             s.str ();
 
-        S_ischemeOptionsBlock
+        const S_ischemeOptionsBlock&
           caseInputAlternativeOptionsBlock =
             ischemeOptionsBlock::create (
               caseInputAlternativeDescription);

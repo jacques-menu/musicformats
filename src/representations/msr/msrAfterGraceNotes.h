@@ -118,16 +118,16 @@ class EXP msrAfterGraceNotesGroup : public msrElement
 
     static SMARTP<msrAfterGraceNotesGroup> create (
                             int          inputLineNumber,
-                            S_msrElement afterGraceNotesGroupElement,
+                            const S_msrElement& afterGraceNotesGroupElement,
                             Bool         afterGraceNotesGroupIsSlashed,
                             const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice);
 
     SMARTP<msrAfterGraceNotesGroup> createAfterGraceNotesGroupNewbornClone (
-                            S_msrNote  noteClone,
+                            const S_msrNote&  noteClone,
                             const S_msrVoice& containingVoice);
 
     SMARTP<msrVoice> createAfterGraceNotesGroupDeepClone (
-                            S_msrNote  noteClone,
+                            const S_msrNote&  noteClone,
                             const S_msrVoice& containingVoice);
 
   protected:
@@ -137,7 +137,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
 
                           msrAfterGraceNotesGroup (
                             int          inputLineNumber,
-                            S_msrElement afterGraceNotesGroupElement,
+                            const S_msrElement& afterGraceNotesGroupElement,
                             Bool         afterGraceNotesGroupIsSlashed,
                             const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice);
 

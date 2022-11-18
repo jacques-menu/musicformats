@@ -333,11 +333,11 @@ class EXP msr2msrTranslator :
     virtual               ~msr2msrTranslator ();
 
     S_msrScore            translateMsrToMsr (
-                            S_msrScore theMsrScore);
+                            const S_msrScore& theMsrScore);
 
     S_msrScore            translateMsrToMsrAlongPathToVoice (
-                            S_msrScore       theMsrScore,
-                            S_msrPathToVoice pathToVoice);
+                            const S_msrScore&       theMsrScore,
+                            const S_msrPathToVoice& pathToVoice);
 
   protected:
 
@@ -648,7 +648,8 @@ class EXP msr2msrTranslator :
     S_msrVoice                fCurrentVoiceClone;
     S_msrVoice                fCurrentVoiceOriginal;
 
-    std::map<S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
+    std::map<S_msrNote, S_msrNote>
+                              fVoiceNotesMap; // JMI
 
     // dal segnos
     // ------------------------------------------------------
@@ -675,7 +676,7 @@ class EXP msr2msrTranslator :
     // figured bass
     // ------------------------------------------------------
     Bool                      fOnGoingFiguredBassVoice;
-    S_msrFiguredBass   fCurrentFiguredBassClone;
+    S_msrFiguredBass          fCurrentFiguredBassClone;
 
 
     // segments
@@ -762,7 +763,7 @@ class EXP msr2msrTranslator :
     void                      prependSkipGraceNotesGroupToPartOtherVoices (
                                 const S_msrPart&            partClone,
                                 const S_msrVoice&           voiceClone,
-                                S_msrGraceNotesGroup skipGraceNotesGroup);
+                                const S_msrGraceNotesGroup& skipGraceNotesGroup);
                                 */
 
 // JMI    Bool                      fOnGoingNote;
@@ -779,7 +780,7 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
 //    S_msrTuplet             fCurrentTupletClone;
  //   Bool                      fOnGoingTuplet;
-    std::stack<S_msrTuplet>        fTupletClonesStack;
+    std::stack<S_msrTuplet>   fTupletClonesStack;
 
 
     // slurs

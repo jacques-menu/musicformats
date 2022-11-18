@@ -427,7 +427,7 @@ std::string ischemeInput::getInputNameWithoutTrace (ischemeDriver& drv) const
 
 S_ischemeOptionsBlock ischemeInput::getInputOptionsBlockForName (
   const std::string& name,
-  ischemeDriver&   drv) const
+  ischemeDriver&     drv) const
 {
   S_ischemeOptionsBlock result;
 
@@ -525,10 +525,10 @@ void ischemeInput::addName (
 
 void ischemeInput::enrichNameOptionsBlock (
   const std::string&      name,
-  S_ischemeOptionsBlock optionsBlock,
+  const S_ischemeOptionsBlock& optionsBlock,
   ischemeDriver&        drv)
 {
-  S_ischemeOptionsBlock
+  const S_ischemeOptionsBlock&
     nameOptionsBlock =
       fInputNamesToOptionsBlocksMap [
         name];
@@ -651,7 +651,7 @@ void ischemeInput::displayInputNamesToOptionsBlocksMap (std::ostream& os) const
 //     int counter = 0;
     for (std::pair<std::string, S_ischemeOptionsBlock> thePair : fInputNamesToOptionsBlocksMap) {
       std::string        key = thePair.first;
-      S_ischemeOptionsBlock optionsBlock = thePair.second;
+      const S_ischemeOptionsBlock& optionsBlock = thePair.second;
       os <<
         key << ": " <<
         std::endl;
@@ -726,7 +726,7 @@ void ischemeInput::print (std::ostream& os) const
 //     int counter = 0;
     for (std::pair<std::string, S_ischemeOptionsBlock> thePair : fInputNamesToOptionsBlocksMap) {
       std::string        key = thePair.first;
-      S_ischemeOptionsBlock optionsBlock = thePair.second;
+      const S_ischemeOptionsBlock& optionsBlock = thePair.second;
       os <<
         key << ": " <<
         std::endl;
@@ -783,7 +783,7 @@ ischemeInputsTable::~ischemeInputsTable ()
 {}
 
 void ischemeInputsTable::addInput (
-  S_ischemeInput input,
+  const S_ischemeInput& input,
   ischemeDriver& drv)
 {
   std::string
@@ -1248,7 +1248,7 @@ std::string ischemeChoice::getChoiceLabelWithoutTrace (ischemeDriver& drv) const
 
 S_ischemeOptionsBlock ischemeChoice::getChoiceOptionsBlockForLabel (
   const std::string& label,
-  ischemeDriver&   drv) const
+  ischemeDriver&     drv) const
 {
   S_ischemeOptionsBlock result;
 
@@ -1346,10 +1346,10 @@ void ischemeChoice::addLabel (
 
 void ischemeChoice::enrichLabelOptionsBlock (
   const std::string&      label,
-  S_ischemeOptionsBlock optionsBlock,
+  const S_ischemeOptionsBlock& optionsBlock,
   ischemeDriver&        drv)
 {
-  S_ischemeOptionsBlock
+  const S_ischemeOptionsBlock&
     labelOptionsBlock =
       fChoiceLabelsToOptionsBlocksMap [
         label];
@@ -1509,7 +1509,7 @@ void ischemeChoice::displayChoiceLabelsToOptionsBlocksMap (std::ostream& os) con
 //     int counter = 0;
     for (std::pair<std::string, S_ischemeOptionsBlock> thePair : fChoiceLabelsToOptionsBlocksMap) {
       std::string        key = thePair.first;
-      S_ischemeOptionsBlock optionsBlock = thePair.second;
+      const S_ischemeOptionsBlock& optionsBlock = thePair.second;
       os <<
         key << ": " <<
         std::endl;
@@ -1589,7 +1589,7 @@ void ischemeChoice::print (std::ostream& os) const
 //     int counter = 0;
     for (std::pair<std::string, S_ischemeOptionsBlock> thePair : fChoiceLabelsToOptionsBlocksMap) {
       std::string        key = thePair.first;
-      S_ischemeOptionsBlock optionsBlock = thePair.second;
+      const S_ischemeOptionsBlock& optionsBlock = thePair.second;
       os <<
         key << ": " <<
         std::endl;
@@ -1646,7 +1646,7 @@ ischemeChoicesTable::~ischemeChoicesTable ()
 {}
 
 void ischemeChoicesTable::addChoice (
-  S_ischemeChoice choice,
+  const S_ischemeChoice& choice,
   ischemeDriver&  drv)
 {
   std::string
@@ -1838,7 +1838,7 @@ std::ostream& operator << (std::ostream& os, const S_ischemeChoicesTable& elt)
 
 //_______________________________________________________________________________
 S_ischemeCaseChoiceStatement ischemeCaseChoiceStatement::create (
-  S_ischemeChoice caseChoice,
+  const S_ischemeChoice& caseChoice,
   ischemeDriver&  drv)
 {
   ischemeCaseChoiceStatement* o =
@@ -1850,7 +1850,7 @@ S_ischemeCaseChoiceStatement ischemeCaseChoiceStatement::create (
 }
 
 ischemeCaseChoiceStatement::ischemeCaseChoiceStatement (
-  S_ischemeChoice caseChoice,
+  const S_ischemeChoice& caseChoice,
   ischemeDriver&  drv)
 {
   // sanity check
@@ -2041,7 +2041,7 @@ std::ostream& operator << (std::ostream& os, const S_ischemeCaseChoiceStatement&
 
 //_______________________________________________________________________________
 S_ischemeCaseInputStatement ischemeCaseInputStatement::create (
-  S_ischemeInput caseInput,
+  const S_ischemeInput& caseInput,
   ischemeDriver& drv)
 {
   ischemeCaseInputStatement* o =
@@ -2053,7 +2053,7 @@ S_ischemeCaseInputStatement ischemeCaseInputStatement::create (
 }
 
 ischemeCaseInputStatement::ischemeCaseInputStatement (
-  S_ischemeInput caseInput,
+  const S_ischemeInput& caseInput,
   ischemeDriver& drv)
 {
   // sanity check

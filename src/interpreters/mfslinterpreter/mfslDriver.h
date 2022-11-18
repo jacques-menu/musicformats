@@ -139,7 +139,7 @@ class   mfslDriver
 
     // options blocks
     void                  optionsBlocksStackPush (
-                            S_mfslOptionsBlock optionsBlock,
+                            const S_mfslOptionsBlock& optionsBlock,
                             const std::string&           context);
 
     S_mfslOptionsBlock    optionsBlocksStackTop () const;
@@ -174,7 +174,7 @@ class   mfslDriver
 
     // case input statements
     void                  caseInputStatementsStackPush (
-                            S_mfslCaseInputStatement caseInputStatement);
+                            const S_mfslCaseInputStatement& caseInputStatement);
 
     S_mfslCaseInputStatement
                           caseInputStatementsStackTop () const;
@@ -194,7 +194,8 @@ class   mfslDriver
                             const std::string&           label,
                             Bool               allLabelSelected);
 
-    mfMusicformatsErrorKind   launchMfslTool_Pass2 ();
+    mfMusicformatsErrorKind
+                          launchMfslTool_Pass2 ();
 
   private:
 
@@ -263,14 +264,14 @@ class   mfslDriver
     bool                  fNoLaunch;
 
     // known tool names
-    std::set<std::string>           fKnownNames;
+    std::set<std::string> fKnownNames;
 
     // choices handling
     S_mfslChoicesTable    fChoicesTable;
 
     std::multimap<std::string, std::string>
                           fOptionsSuppliedChoicesLabelsMultiMap;
-    std::set<std::string>           fUnusedOptionsSuppliedChoicesSet;
+    std::set<std::string> fUnusedOptionsSuppliedChoicesSet;
 
     // case choice statements
     int                   fCaseChoiceStatementsNumber;
@@ -284,7 +285,7 @@ class   mfslDriver
 
     std::multimap<std::string, std::string>
                           fOptionsSuppliedInputsLabelsMultiMap;
-    std::set<std::string>           fUnusedOptionsSuppliedInputsSet;
+    std::set<std::string> fUnusedOptionsSuppliedInputsSet;
 
     // case input statements
     int                   fCaseInputStatementsNumber;

@@ -140,7 +140,7 @@ class EXP mfcVersionDescr : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfcVersionDescr> create (
-                            S_mfcVersionNumber  versionNumber,
+                            const S_mfcVersionNumber&  versionNumber,
                             const std::string&            versionDate,
                             const std::list<std::string>& versionDescriptionItems);
 
@@ -150,7 +150,7 @@ class EXP mfcVersionDescr : public smartable
     // ------------------------------------------------------
 
                           mfcVersionDescr (
-                            S_mfcVersionNumber  versionNumber,
+                            const S_mfcVersionNumber&  versionNumber,
                             const std::string&            versionDate,
                             const std::list<std::string>& versionDescriptionItems);
 

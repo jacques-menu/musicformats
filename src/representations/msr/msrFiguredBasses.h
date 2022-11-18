@@ -231,7 +231,7 @@ class EXP msrFiguredBass : public msrMeasureElement
                             { return fFiguredBassUpLinkToMeasure; }
 
     void                  setFiguredBassUpLinkToNote (
-                            S_msrNote note) // no const alias, call argument may be 'this'
+                            const S_msrNote& note) // no const alias, call argument may be 'this'
                               { fFiguredBassUpLinkToNote = note; }
 
     S_msrNote             getFiguredBassUpLinkToNote () const

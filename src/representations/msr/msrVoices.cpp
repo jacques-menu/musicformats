@@ -2682,7 +2682,7 @@ void msrVoice::appendTempoToVoice (S_msrTempo tempo)
 }
 
 void msrVoice::appendOctaveShiftToVoice (
-  S_msrOctaveShift octaveShift)
+  const S_msrOctaveShift& octaveShift)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
@@ -3178,7 +3178,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
 }
 
 void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
-  S_msrGraceNotesGroup graceNotesGroup)
+  const S_msrGraceNotesGroup& graceNotesGroup)
 {
   int inputLineNumber =
     graceNotesGroup->getInputLineNumber ();
@@ -9428,7 +9428,7 @@ void msrVoice::appendBarLineToVoice (S_msrBarLine barLine)
   --gIndenter;
 }
 
-void msrVoice::appendSegnoToVoice (S_msrSegno segno)
+void msrVoice::appendSegnoToVoice (const S_msrSegno& segno)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSegnos ()) {
@@ -9449,7 +9449,7 @@ void msrVoice::appendSegnoToVoice (S_msrSegno segno)
     appendSegnoToSegment (segno);
 }
 
-void msrVoice::appendCodaToVoice (S_msrCoda coda)
+void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCodas ()) {
@@ -9492,7 +9492,7 @@ void msrVoice::appendEyeGlassesToVoice (S_msrEyeGlasses eyeGlasses)
     appendEyeGlassesToSegment (eyeGlasses);
 }
 
-void msrVoice::appendPedalToVoice (S_msrPedal pedal)
+void msrVoice::appendPedalToVoice (const S_msrPedal& pedal)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePedals ()) {

@@ -85,7 +85,7 @@ msr2bsrTranslator::~msr2bsrTranslator ()
 
 //________________________________________________________________________
 S_bsrScore msr2bsrTranslator::translateMsrToBsr (
-  S_msrScore theMsrScore)
+  const S_msrScore& theMsrScore)
 {
   // sanity check
   mfAssert (

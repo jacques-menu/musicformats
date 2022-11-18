@@ -724,7 +724,7 @@ namespace iscm {
         ++gIndenter;
 
         // create the main options block
-        S_ischemeOptionsBlock
+        const S_ischemeOptionsBlock&
           mainOptionsBlock =
             ischemeOptionsBlock::create (
               "Main options block");
@@ -1146,7 +1146,7 @@ namespace iscm {
           CaseChoiceAlternativeDescription =
             s.str ();
 
-        S_ischemeOptionsBlock
+        const S_ischemeOptionsBlock&
           CaseChoiceAlternativeOptionsBlock =
             ischemeOptionsBlock::create (
               CaseChoiceAlternativeDescription);
@@ -1337,7 +1337,7 @@ namespace iscm {
           caseInputAlternativeDescription =
             s.str ();
 
-        S_ischemeOptionsBlock
+        const S_ischemeOptionsBlock&
           caseInputAlternativeOptionsBlock =
             ischemeOptionsBlock::create (
               caseInputAlternativeDescription);

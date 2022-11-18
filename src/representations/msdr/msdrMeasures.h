@@ -77,7 +77,7 @@ class EXP msdrMeasure : public smartable
     void                  addLayerToMeasure (
                             int         inputLineNumber,
                             int         layerNumber,
-                            S_msdrLayer layer);
+                            const S_msdrLayer& layer);
 
   private:
 

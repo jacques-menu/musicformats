@@ -108,7 +108,7 @@ class EXP msrHumdrumScotKeyItem : public msrElement
     // ------------------------------------------------------
 
     Bool                  isEqualTo (
-                            S_msrHumdrumScotKeyItem
+                            const S_msrHumdrumScotKeyItem&
                               otherHumdrumScotKeyItem) const;
 
   public:
@@ -257,7 +257,7 @@ class EXP msrKey : public msrMeasureElement
     Bool                  isEqualTo (S_msrKey otherKey) const;
 
     void                  appendHumdrumScotKeyItem (
-                            S_msrHumdrumScotKeyItem item);
+                            const S_msrHumdrumScotKeyItem& item);
 
   public:
 

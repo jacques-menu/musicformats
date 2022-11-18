@@ -62,7 +62,7 @@ class EXP msrSpanner : public msrElement
                             msrSpannerKind     spannerKind,
                             msrSpannerTypeKind spannerTypeKind,
                             msrPlacementKind   spannerPlacementKind,
-                            S_msrNote          spannerUpLinkToNote);
+                            const S_msrNote&          spannerUpLinkToNote);
 
   protected:
 
@@ -75,7 +75,7 @@ class EXP msrSpanner : public msrElement
                             msrSpannerKind     spannerKind,
                             msrSpannerTypeKind spannerTypeKind,
                             msrPlacementKind   spannerPlacementKind,
-                            S_msrNote          spannerUpLinkToNote);
+                            const S_msrNote&          spannerUpLinkToNote);
 
     virtual               ~msrSpanner ();
 
@@ -86,7 +86,7 @@ class EXP msrSpanner : public msrElement
 
     // upLinks
     void                  setSpannerUpLinkToNote (
-                            S_msrNote spannerUpLinkToNote)
+                            const S_msrNote& spannerUpLinkToNote)
                               { fSpannerUpLinkToNote = spannerUpLinkToNote; }
 
     S_msrNote             getSpannerUpLinkToNote () const
@@ -94,7 +94,7 @@ class EXP msrSpanner : public msrElement
 
     // sideLinks
     void                  setSpannerSideLinkToOtherEnd (
-                            S_msrSpanner sideLinkToOtherEnd);
+                            const S_msrSpanner& sideLinkToOtherEnd);
 
     S_msrSpanner          getSpannerSideLinkToOtherEnd () const
                               { return fSpannerSideLinkToOtherEnd; }

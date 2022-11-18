@@ -46,7 +46,7 @@ S_oahAtomAlias oahAtomAlias::create (
   const std::string&    shortName,
   const std::string&    longName,
   const std::string&    description,
-  S_oahAtom originalOahAtom)
+  const S_oahAtom& originalOahAtom)
 {
   oahAtomAlias* o = new
     oahAtomAlias (
@@ -62,7 +62,7 @@ oahAtomAlias::oahAtomAlias (
   const std::string&    shortName,
   const std::string&    longName,
   const std::string&    description,
-  S_oahAtom originalOahAtom)
+  const S_oahAtom& originalOahAtom)
   : oahAtom (
       longName,
       shortName,
@@ -5271,7 +5271,7 @@ oahFactorizedStringAtom::~oahFactorizedStringAtom ()
 {}
 
 void oahFactorizedStringAtom::addStringAtom (
-  S_oahStringAtom stringAtom)
+  const S_oahStringAtom& stringAtom)
 {
   // sanity check
   mfAssert (

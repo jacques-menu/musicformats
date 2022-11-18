@@ -701,7 +701,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionNumber& elt)
 
 //______________________________________________________________________________
 S_mfcVersionDescr mfcVersionDescr::create (
-  S_mfcVersionNumber  versionNumber,
+  const S_mfcVersionNumber&  versionNumber,
   const std::string&       versionDate,
   const std::list<std::string>& versionDescriptionItems)
 {
@@ -715,7 +715,7 @@ S_mfcVersionDescr mfcVersionDescr::create (
 }
 
 mfcVersionDescr::mfcVersionDescr (
-  S_mfcVersionNumber  versionNumber,
+  const S_mfcVersionNumber&  versionNumber,
   const std::string&       versionDate,
   const std::list<std::string>& versionDescriptionItems)
 {

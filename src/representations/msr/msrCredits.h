@@ -219,7 +219,7 @@ class EXP msrCredit : public msrElement
     // ------------------------------------------------------
 
     void                  appendCreditWordsToCredit (
-                            S_msrCreditWords creditWords);
+                            const S_msrCreditWords& creditWords);
 
     std::string           asString () const override;
 

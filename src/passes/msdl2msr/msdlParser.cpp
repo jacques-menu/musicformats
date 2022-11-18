@@ -513,7 +513,7 @@ Bool msdlParser::checkMandatoryTokenKind (
 Bool msdlParser:: checkMandatoryTokenKindsSet (
   const std::string&       fileName,
   int                 lineNumber,
-  S_msdlTokenKindsSet tokenKindsSet,
+  const S_msdlTokenKindsSet& tokenKindsSet,
   const std::string&       context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -708,7 +708,7 @@ Bool msdlParser::checkOptionalTokenKind (
 Bool msdlParser:: checkOptionalTokenKindsSet (
   const std::string&       fileName,
   int                 lineNumber,
-  S_msdlTokenKindsSet tokenKindsSet,
+  const S_msdlTokenKindsSet& tokenKindsSet,
   const std::string&       context)
 {
 #ifdef TRACING_IS_ENABLED

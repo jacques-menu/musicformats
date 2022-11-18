@@ -67,7 +67,7 @@ class EXP msrBook : public msrElement
 
     // identification
     void                  setIdentification (
-                            S_msrIdentification identification)
+                            const S_msrIdentification& identification)
                               { fIdentification = identification; }
 
     S_msrIdentification   getIdentification () const
@@ -75,7 +75,7 @@ class EXP msrBook : public msrElement
 
     // scaling
     void                  setScaling (
-                            S_msrScaling scaling)
+                            const S_msrScaling& scaling)
                               { fScaling = scaling; }
 
     S_msrScaling          getScaling () const
@@ -83,7 +83,7 @@ class EXP msrBook : public msrElement
 
     // page layout
     void                  setPageLayout (
-                            S_msrPageLayout pageLayout)
+                            const S_msrPageLayout& pageLayout)
                               { fPageLayout = pageLayout; }
 
     S_msrPageLayout       getPageLayout () const
@@ -91,7 +91,7 @@ class EXP msrBook : public msrElement
 
     // system layout
     void                  setSystemLayout (
-                            S_msrSystemLayout systemLayout)
+                            const S_msrSystemLayout& systemLayout)
                               { fSystemLayout = systemLayout; }
 
     S_msrSystemLayout     getSystemLayout () const
@@ -109,7 +109,7 @@ class EXP msrBook : public msrElement
     // appearance
 
     void                  setAppearance (
-                            S_msrAppearance appearance)
+                            const S_msrAppearance& appearance)
                               { fAppearance = appearance; }
 
     S_msrAppearance       getAppearance () const
@@ -263,7 +263,7 @@ class EXP msrBook : public msrElement
                             const S_msrBookElement& bookElement);
 
     void                  appendCreditToBook (
-                            S_msrCredit credit);
+                            const S_msrCredit& credit);
 
     void                  fetchIdentificationFromCreditsIfAny (
                             int inputLineNumber);

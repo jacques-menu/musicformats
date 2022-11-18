@@ -69,7 +69,7 @@ class EXP msrElement : public smartable
 
     virtual void          browseDataAlongPathToVoice (
                             basevisitor*     v,
-                            S_msrPathToVoice pathToVoice);
+                            const S_msrPathToVoice& pathToVoice);
 
   public:
 

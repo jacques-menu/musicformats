@@ -214,7 +214,7 @@ class EXP msrHarmonyDegree : public msrElement
     // ------------------------------------------------------
 
     void                  setHarmonyDegreeUpLinkToHarmony (
-                            S_msrHarmony UpLinkToHarmony);
+                            const S_msrHarmony& UpLinkToHarmony);
 
     S_msrHarmony          getHarmonyDegreeUpLinkToHarmony () const
                               { return fHarmonyDegreeUpLinkToHarmony; }
@@ -425,7 +425,7 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     void                  appendHarmonyDegreeToHarmony (
-                            S_msrHarmonyDegree harmonyDegree)
+                            const S_msrHarmonyDegree& harmonyDegree)
                               {
                                 fHarmonyDegreesList.push_back (
                                   harmonyDegree);
@@ -577,9 +577,9 @@ class EXP msrHarmonyInterval : public smartable
     void                  deNormalizeInterval ();
 
     S_msrHarmonyInterval  intervalDifference (
-                            S_msrHarmonyInterval otherHarmonyInterval);
+                            const S_msrHarmonyInterval& otherHarmonyInterval);
     S_msrHarmonyInterval  intervalSum (
-                            S_msrHarmonyInterval otherHarmonyInterval);
+                            const S_msrHarmonyInterval& otherHarmonyInterval);
 
     std::string           asString () const;
     std::string           asShortString () const;
@@ -668,7 +668,7 @@ class EXP msrHarmonyStructure : public smartable
     // ------------------------------------------------------
 
     void                  appendHarmonyIntervalToHarmonyStructure (
-                            S_msrHarmonyInterval harmonyInterval);
+                            const S_msrHarmonyInterval& harmonyInterval);
 
     void                  populateHarmonyStructure ();
 

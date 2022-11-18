@@ -144,8 +144,8 @@ S_msrScore translateMxsrToMsrSkeleton (
 
 //_______________________________________________________________________________
 void displayMsrScoreSkeleton (
-  S_msrOahGroup&  msrOpts,
-  S_msrScore theMsrScore,
+  const S_msrOahGroup&  msrOpts,
+  const S_msrScore& theMsrScore,
   std::string     passNumber,
   std::string     passDescription)
 {

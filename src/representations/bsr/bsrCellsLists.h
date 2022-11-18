@@ -149,10 +149,10 @@ class EXP bsrCellsList : public smartable
                               { fCellsListElements.push_back (cellKind); }
 
     void                  appendCellsListToCellsList (
-                            S_bsrCellsList otherCellsList);
+                            const S_bsrCellsList& otherCellsList);
 
     void                  prependCellsListToCellsList (
-                            S_bsrCellsList otherCellsList);
+                            const S_bsrCellsList& otherCellsList);
 
     int                   fetchCellsNumber () const
                               { return fCellsListElements.size (); }

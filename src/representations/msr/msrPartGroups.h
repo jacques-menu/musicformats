@@ -121,7 +121,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     SMARTP<msrPartGroup> createPartGroupNewbornClone (
                             const S_msrPartGroup& partGroupClone,
                               // the upLink for nested part groups
-                            S_msrScore     scoreClon);
+                            const S_msrScore&     scoreClon);
 
     // creation from the API
     // ------------------------------------------------------

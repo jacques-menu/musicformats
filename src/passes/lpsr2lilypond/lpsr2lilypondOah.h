@@ -141,7 +141,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
 
     void                  setStringToMsrSemiTonesPitchAndOctaveMapVariable (
                             const std::string& partName,
-                            S_msrSemiTonesPitchAndOctave
+                            const S_msrSemiTonesPitchAndOctave&
                                           semiTonesPitchAndOctave)
                               {
                                 fStringToMsrSemiTonesPitchAndOctaveMapVariable [
@@ -241,7 +241,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
 
     void                  setStringToMsrSemiTonesPitchAndOctaveMapVariable (
                             const std::string& partName,
-                            S_msrSemiTonesPitchAndOctave
+                            const S_msrSemiTonesPitchAndOctave&
                                           semiTonesPitchAndOctave)
                               {
                                 fStringToMsrSemiTonesPitchAndOctaveMapVariable [
@@ -455,15 +455,15 @@ class EXP lilypondRelativeOctaveEntryAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lilypondRelativeOctaveEntryAtom> create (
-                            const std::string&   shortName,
-                            const std::string&   longName,
-                            const std::string&   description,
-                            const std::string&   valueSpecification,
-                            const std::string&   variableName,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             msrOctaveEntryVariable&
-                                            octaveEntryKindVariable,
+                                               octaveEntryKindVariable,
                             S_msrSemiTonesPitchAndOctave&
-                                            lilypondRelativeOctaveEntryVariable);
+                                               lilypondRelativeOctaveEntryVariable);
 
   protected:
 
@@ -471,15 +471,15 @@ class EXP lilypondRelativeOctaveEntryAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lilypondRelativeOctaveEntryAtom (
-                            const std::string&   shortName,
-                            const std::string&   longName,
-                            const std::string&   description,
-                            const std::string&   valueSpecification,
-                            const std::string&   variableName,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             msrOctaveEntryVariable&
-                                            octaveEntryKindVariable,
+                                               octaveEntryKindVariable,
                             S_msrSemiTonesPitchAndOctave&
-                                            lilypondRelativeOctaveEntryVariable);
+                                               lilypondRelativeOctaveEntryVariable);
 
     virtual               ~lilypondRelativeOctaveEntryAtom ();
 
@@ -489,7 +489,7 @@ class EXP lilypondRelativeOctaveEntryAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setRelativeOctaveEntryVariableValue (
-                            S_msrSemiTonesPitchAndOctave value)
+                            const S_msrSemiTonesPitchAndOctave& value)
                               {
                                 fSemiTonesPitchAndOctaveVariable = value;
                               }
@@ -550,15 +550,15 @@ class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
     static SMARTP<lilypondFixedOctaveEntryAtom> create (
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
-                            const std::string&            valueSpecification,
-                            const std::string&            variableName,
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             msrOctaveEntryVariable&
-                                                octaveEntryKindVariable,
+                                               octaveEntryKindVariable,
                             S_msrSemiTonesPitchAndOctave&
-                                                lilypondFixedOctaveEntryVariable);
+                                               lilypondFixedOctaveEntryVariable);
 
   protected:
 
@@ -566,15 +566,15 @@ class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
                           lilypondFixedOctaveEntryAtom (
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
-                            const std::string&            valueSpecification,
-                            const std::string&            variableName,
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             msrOctaveEntryVariable&
-                                                octaveEntryKindVariable,
+                                               octaveEntryKindVariable,
                             S_msrSemiTonesPitchAndOctave&
-                                                lilypondFixedOctaveEntryVariable);
+                                               lilypondFixedOctaveEntryVariable);
 
     virtual               ~lilypondFixedOctaveEntryAtom ();
 
@@ -584,7 +584,7 @@ class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
     void                  setFixedOctaveEntryVariableValue (
-                            S_msrSemiTonesPitchAndOctave value)
+                            const S_msrSemiTonesPitchAndOctave& value)
                               { fSemiTonesPitchAndOctaveVariable = value; }
 
     S_msrSemiTonesPitchAndOctave&
@@ -1897,7 +1897,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fShowAllBarNumbers;
 
-    std::set<std::string>           fShowNumbersAtMeasureSet;
+    std::set<std::string> fShowNumbersAtMeasureSet;
     S_oahStringSetElementAtom
                           fShowNumbersAtMeasureAtom;
 
@@ -1925,7 +1925,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     int                   fSeparatorLineEveryNMeasures;
 
-    std::set<std::string>           fBreakLineAfterMeasureNumberSet;
+    std::set<std::string> fBreakLineAfterMeasureNumberSet;
 
     // page and line breaks
     // --------------------------------------
@@ -1934,7 +1934,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // this atom is used by the '-minimal' combined option
     S_oahBooleanAtom      fIgnoreLpsrPageBreaksAtom;
 
-    std::set<std::string>           fBreakPageAfterMeasureNumberSet;
+    std::set<std::string> fBreakPageAfterMeasureNumberSet;
 
 
     // staves

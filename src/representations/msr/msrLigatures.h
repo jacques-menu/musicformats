@@ -88,7 +88,7 @@ class EXP msrLigature : public msrElement
 
     // sideLinks
     void                  setLigatureSideLinkToOtherEnd (
-                            S_msrLigature sideLinkToOtherEnd);
+                            const S_msrLigature& sideLinkToOtherEnd);
 
     S_msrLigature         getLigatureSideLinkToOtherEnd () const
                               { return fLigatureSideLinkToOtherEnd; }

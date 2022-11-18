@@ -33,7 +33,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 bsr2brailleTranslator::bsr2brailleTranslator (
-  S_bsrScore     bsrScore,
+  const S_bsrScore&     bsrScore,
   const S_bsrOahGroup& bsrOpts,
   std::ostream&       brailleOutputStream)
   : fBrailleOutputStream (

@@ -1126,7 +1126,7 @@ void msrSegment::appendFiguredBassToSegmentClone (
     appendFiguredBassToMeasure (figuredBass);
 }
 
-void msrSegment::appendSegnoToSegment (S_msrSegno segno)
+void msrSegment::appendSegnoToSegment (const S_msrSegno& segno)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSegnos ()) {
@@ -1153,7 +1153,7 @@ void msrSegment::appendSegnoToSegment (S_msrSegno segno)
   --gIndenter;
 }
 
-void msrSegment::appendCodaToSegment (S_msrCoda coda)
+void msrSegment::appendCodaToSegment (const S_msrCoda& coda)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCodas ()) {
@@ -1208,7 +1208,7 @@ void msrSegment::appendEyeGlassesToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendPedalToSegment (S_msrPedal pedal)
+void msrSegment::appendPedalToSegment (const S_msrPedal& pedal)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePedals ()) {
@@ -1463,7 +1463,7 @@ void msrSegment::appendBarNumberCheckToSegment (
 }
 
 void msrSegment::appendTempoToSegment (
-  S_msrTempo tempo)
+  const S_msrTempo& tempo)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
@@ -1521,7 +1521,7 @@ void msrSegment::appendRehearsalMarkToSegment (
 }
 
 void msrSegment::appendOctaveShiftToSegment (
-  S_msrOctaveShift octaveShift)
+  const S_msrOctaveShift& octaveShift)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
@@ -2136,7 +2136,7 @@ void msrSegment::appendTupletToSegment (const S_msrTuplet& tuplet) // JMI
 
 /* JMI
 void msrSegment::addGraceNotesGroupAheadOfSegmentIfNeeded (
-  S_msrGraceNotesGroup graceNotesGroup)
+  const S_msrGraceNotesGroup& graceNotesGroup)
 
 {
   // sanity check
@@ -2145,17 +2145,6 @@ void msrSegment::addGraceNotesGroupAheadOfSegmentIfNeeded (
 
   fSegmentMeasuresFlatList.front ()->
     addGraceNotesGroupAheadOfMeasure (graceNotesGroup);
-}
-
-void msrSegment::appendGraceNotesToSegment (
-  S_msrGraceNotes graceNotes)
-{
-  // sanity check
-  assertSegmentLastMeasureIsNotNull (
-    graceNotes->getInputLineNumber ());
-
-  fSegmentLastMeasure->
-    appendGraceNotesToMeasure (graceNotes);
 }
 
 void msrSegment::appendAfterGraceNotesToSegment (

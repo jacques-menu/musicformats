@@ -34,10 +34,10 @@ class EXP msrRepeatCoda : public msrElement
                             const S_msrRepeat&  upLinkToRepeat);
 
     SMARTP<msrRepeatCoda> createRepeatCodaNewbornClone (
-                            S_msrRepeat containingRepeat);
+                            const S_msrRepeat& containingRepeat);
 
     SMARTP<msrRepeatCoda> createRepeatCodaDeepClone (
-                            S_msrRepeat containingRepeat);
+                            const S_msrRepeat& containingRepeat);
 
   protected:
 

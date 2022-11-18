@@ -2069,13 +2069,13 @@ void msrMeasure::prependBarLineToMeasure (S_msrBarLine barLine)
   fMeasureElementsList.push_front (barLine);
 }
 
-void msrMeasure::appendSegnoToMeasure (S_msrSegno segno)
+void msrMeasure::appendSegnoToMeasure (const S_msrSegno& segno)
 {
   // append it to the measure elements list
   appendElementToMeasure (segno);
 }
 
-void msrMeasure::appendCodaToMeasure (S_msrCoda coda)
+void msrMeasure::appendCodaToMeasure (const S_msrCoda& coda)
 {
   // append it to the measure elements list
   appendElementToMeasure (coda);
@@ -2088,7 +2088,7 @@ void msrMeasure::appendEyeGlassesToMeasure (
   appendElementToMeasure (eyeGlasses);
 }
 
-void msrMeasure::appendPedalToMeasure (S_msrPedal pedal)
+void msrMeasure::appendPedalToMeasure (const S_msrPedal& pedal)
 {
   // append it to the measure elements list
   appendElementToMeasure (pedal);
@@ -3255,7 +3255,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
 
 
 void msrMeasure::appendTempoToMeasure (
-  S_msrTempo tempo)
+  const S_msrTempo& tempo)
 {
   appendElementToMeasure (tempo);
 }
@@ -3267,7 +3267,7 @@ void msrMeasure::appendRehearsalMarkToMeasure (
 }
 
 void msrMeasure::appendOctaveShiftToMeasure (
-  S_msrOctaveShift octaveShift)
+  const S_msrOctaveShift& octaveShift)
 {
   appendElementToMeasure (octaveShift);
 }

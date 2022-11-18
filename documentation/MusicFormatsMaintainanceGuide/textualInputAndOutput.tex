@@ -82,9 +82,9 @@ So when and where are {\tt mfIndentedOstream} instances created?
 The parameters to this function\index{functions} are:
 \begin{lstlisting}[language=CPlusPlus]
 EXP void translateLpsrToLilypondWithHandler (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts,
+  const S_lpsrScore& theLpsrScore,
+  const S_msrOahGroup&     msrOpts,
+  const S_lpsrOahGroup&    lpsrOpts,
   const std::string&     passNumber,
   const std::string&     passDescription,
   S_oahHandler      handler,

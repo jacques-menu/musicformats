@@ -32,10 +32,10 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<ischemeInterpreterRegularHandler> create (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader,
-                            S_ischemeInterpreterInsiderHandler
-                                              insiderOahHandler);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
+                            const S_ischemeInterpreterInsiderHandler&
+                                               insiderOahHandler);
 
   protected:
 
@@ -43,10 +43,10 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           ischemeInterpreterRegularHandler (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader,
-                            S_ischemeInterpreterInsiderHandler
-                                              insiderOahHandler);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
+                            const S_ischemeInterpreterInsiderHandler&
+                                               insiderOahHandler);
 
     virtual               ~ischemeInterpreterRegularHandler ();
 

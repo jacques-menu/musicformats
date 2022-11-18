@@ -71,8 +71,8 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
 
     SMARTP<msrDoubleTremolo> createDoubleTremoloNewbornClone (
-                            S_msrElement doubleTremoloFirstElement,
-                            S_msrElement doubleTremoloSecondElement);
+                            const S_msrElement& doubleTremoloFirstElement,
+                            const S_msrElement& doubleTremoloSecondElement);
 
   protected:
 

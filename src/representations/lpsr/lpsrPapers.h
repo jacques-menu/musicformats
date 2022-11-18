@@ -36,8 +36,8 @@ class EXP lpsrPaper : public lpsrElement
 
     static SMARTP<lpsrPaper> create (
                             int             inputLineNumber,
-                            S_msrScaling    scaling,
-                            S_msrPageLayout pageLayout);
+                            const S_msrScaling&    scaling,
+                            const S_msrPageLayout& pageLayout);
 
     SMARTP<lpsrPaper> createPaperNewbornClone ();
 
@@ -48,8 +48,8 @@ class EXP lpsrPaper : public lpsrElement
 
                           lpsrPaper (
                             int             inputLineNumber,
-                            S_msrScaling    scaling,
-                            S_msrPageLayout pageLayout);
+                            const S_msrScaling&    scaling,
+                            const S_msrPageLayout& pageLayout);
 
     virtual               ~lpsrPaper ();
 
