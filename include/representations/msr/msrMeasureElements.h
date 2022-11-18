@@ -85,14 +85,14 @@ class EXP msrMeasureElement : public msrElement
 
 //     void                  setMeasureElementMeasureMoment (
 //                             const msrMoment& measureMoment,
-//                             const std::string&    context);
+//                             const std::string&         context);
 //
 //     const msrMoment&      getMeasureElementMeasureMoment () const
 //                               { return fMeasureElementMeasureMoment; }
 //
 //     void                  setMeasureElementVoiceMoment (
 //                             const msrMoment& voiceMoment,
-//                             const std::string&    context);
+//                             const std::string&         context);
 //
 //     const msrMoment&      getMeasureElementVoiceMoment () const
 //                               { return fMeasureElementVoiceMoment; }

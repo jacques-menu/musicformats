@@ -226,7 +226,7 @@ class EXP msrFrame : public msrElement
     // ------------------------------------------------------
 
     void                  appendFrameNoteToFrame (
-                            S_msrFrameNote frameNote);
+                            const S_msrFrameNote& frameNote);
 
   private:
 

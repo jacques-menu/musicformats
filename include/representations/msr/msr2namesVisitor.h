@@ -48,7 +48,7 @@ class EXP msr2namesVisitor :
     // ------------------------------------------------------
 
                           msr2namesVisitor (
-                            S_msrOahGroup& msrOpts);
+                            const S_msrOahGroup& msrOpts);
 
     virtual               ~msr2namesVisitor ();
 

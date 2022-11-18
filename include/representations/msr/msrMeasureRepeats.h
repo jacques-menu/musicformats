@@ -424,12 +424,12 @@ class EXP msrMeasureRepeatElement : public msrElement
     void                  appendSegmentToMeasureRepeatElementsList (
                             int          inputLineNumber,
                             const S_msrSegment& segment,
-                            const std::string&       context);
+                            const std::string&            context);
 
     void                  appendMeasureRepeatToMeasureRepeatElementsList (
                             int                  inputLineNumber,
                             const S_msrMeasureRepeat&  measureRepeat,
-                            const std::string&     context);
+                            const std::string&          context);
 
 
     void                  appendMultipleFullBarRestsToMeasureRepeatElementsList (
@@ -450,7 +450,7 @@ class EXP msrMeasureRepeatElement : public msrElement
     void                  appendVoiceElementToMeasureRepeatElementsList ( // JMI
                             int               inputLineNumber,
                             const S_msrVoiceElement& voiceElement,
-                            const std::string&       context);
+                            const std::string&            context);
 
   public:
 

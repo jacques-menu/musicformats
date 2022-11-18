@@ -91,13 +91,13 @@ class EXP bsrBrailleGenerator : public smartable
                             bsrCellKind cellKind) = 0;
 
     void                  generateCodeForCellsList (
-                            S_bsrCellsList cellsList);
+                            const S_bsrCellsList& cellsList);
 
     virtual void          generateCodeForMusicHeading (
-                            S_bsrMusicHeading musicHeading);
+                            const S_bsrMusicHeading& musicHeading);
 
     virtual void          generateCodeForLineContents (
-                            S_bsrLineContents lineContents);
+                            const S_bsrLineContents& lineContents);
 
   public:
 
@@ -265,10 +265,10 @@ class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
     // ------------------------------------------------------
 
     void                  generateCodeForMusicHeading (
-                            S_bsrMusicHeading musicHeading) override;
+                            const S_bsrMusicHeading& musicHeading) override;
 
     void                  generateCodeForLineContents (
-                            S_bsrLineContents lineContents) override;
+                            const S_bsrLineContents& lineContents) override;
 
   public:
 

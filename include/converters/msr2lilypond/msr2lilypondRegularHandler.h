@@ -33,8 +33,8 @@ class EXP msr2lilypondRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<msr2lilypondRegularHandler> create (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader,
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader,
                             const S_msr2lilypondInsiderHandler&
                                               insiderOahHandler);
 
@@ -44,8 +44,8 @@ class EXP msr2lilypondRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           msr2lilypondRegularHandler (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader,
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader,
                             const S_msr2lilypondInsiderHandler&
                                               insiderOahHandler);
 

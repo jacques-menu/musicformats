@@ -99,7 +99,7 @@ class EXP msrTransposition : public msrMeasureElement
     // ------------------------------------------------------
 
     Bool                  isEqualTo (
-                            S_msrTransposition otherTransposition) const;
+                            const S_msrTransposition& otherTransposition) const;
 
   public:
 

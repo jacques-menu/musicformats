@@ -81,7 +81,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
     // ------------------------------------------------------
 
     void                  appendLineElementToMeasure (
-                            S_bsrLineContentsElement lineElement);
+                            const S_bsrLineContentsElement& lineElement);
 
     S_bsrCellsList        buildCellsList () const;
 

@@ -79,7 +79,8 @@ class EXP Mikrokosmos3WanderingGenerator : public smartable
                             msrGenerationAPIKind generationAPIKind);
 
     // the part
-    S_msrPart             createPartInScore (S_msrScore theMsrScore);
+    S_msrPart             createPartInScore (
+                            const S_msrScore& theMsrScore);
 
     // the voices
     S_msrVoice            createRegularVoiceInStaff (

@@ -32,8 +32,8 @@ class EXP msdlConverterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<msdlConverterRegularHandler> create (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader,
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader,
                             const S_msdlConverterInsiderHandler&
                                               insiderOahHandler,
                             mfMultiGenerationOutputKind
@@ -45,8 +45,8 @@ class EXP msdlConverterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           msdlConverterRegularHandler (
-                            const std::string&     serviceName,
-                            const std::string&     handlerHeader,
+                            const std::string&          serviceName,
+                            const std::string&          handlerHeader,
                             const S_msdlConverterInsiderHandler&
                                               insiderOahHandler,
                             mfMultiGenerationOutputKind

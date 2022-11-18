@@ -21,7 +21,7 @@ class EXP bsrPageHeading : public bsrLine
     static SMARTP<bsrPageHeading> create (
                             int             inputLineNumber,
                             const std::string&   pageHeadingTitle,
-                            S_bsrPagination pageHeadingPagination,
+                            const S_bsrPagination& pageHeadingPagination,
                             int             pageHeadingNumber);
 
   protected:
@@ -32,7 +32,7 @@ class EXP bsrPageHeading : public bsrLine
                           bsrPageHeading (
                             int             inputLineNumber,
                             const std::string&   pageHeadingTitle,
-                            S_bsrPagination pageHeadingPagination,
+                            const S_bsrPagination& pageHeadingPagination,
                             int             pageHeadingNumber);
 
     virtual               ~bsrPageHeading ();

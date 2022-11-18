@@ -70,7 +70,7 @@ class EXP lpsrBookBlockElement : public lpsrElement
     // ------------------------------------------------------
 
     void                  appendPartGroupBlockToBlockElement (
-                            S_lpsrPartGroupBlock partGroupBlock);
+                            const S_lpsrPartGroupBlock& partGroupBlock);
 
   public:
 
@@ -140,7 +140,7 @@ class EXP lpsrScoreBlock : public lpsrBookBlockElement
     // ------------------------------------------------------
 
     void                  appendPartGroupBlockToScoreBlock (
-                            S_lpsrPartGroupBlock partGroupBlock);
+                            const S_lpsrPartGroupBlock& partGroupBlock);
 
   public:
 
@@ -203,7 +203,7 @@ class EXP lpsrBookPartBlock : public lpsrBookBlockElement
     // ------------------------------------------------------
 
     void                  appendPartGroupBlockToBookPartBlock (
-                            S_lpsrPartGroupBlock partGroupBlock);
+                            const S_lpsrPartGroupBlock& partGroupBlock);
 
   public:
 
@@ -257,14 +257,14 @@ class EXP lpsrBookBlock : public lpsrElement
     // ------------------------------------------------------
 
     void                  setBookBlockHeader (
-                            S_lpsrHeader bookBlockHeader)
+                            const S_lpsrHeader& bookBlockHeader)
                               { fBookBlockHeader = bookBlockHeader; }
 
     S_lpsrHeader          getBookBlockHeader () const
                               { return fBookBlockHeader; }
 
     void                  setBookBlockPaper (
-                            S_lpsrPaper bookBlockPaper)
+                            const S_lpsrPaper& bookBlockPaper)
                               { fBookBlockPaper = bookBlockPaper; }
 
     S_lpsrPaper           getBookBlockPaper () const
@@ -280,10 +280,10 @@ class EXP lpsrBookBlock : public lpsrElement
     // ------------------------------------------------------
 
     void                  appendLpsrScoreBlockToBookBlockElementsList (
-                            S_lpsrScoreBlock scoreBlock);
+                            const S_lpsrScoreBlock& scoreBlock);
 
     void                  appendLpsrBookPartBlockToBookBlockElementsList (
-                            S_lpsrBookPartBlock bookPartBlock);
+                            const S_lpsrBookPartBlock& bookPartBlock);
 
   protected:
 
@@ -291,7 +291,7 @@ class EXP lpsrBookBlock : public lpsrElement
     // ------------------------------------------------------
 
     void                  appendBookBlockElementToBookBlockElementsList (
-                            S_lpsrBookBlockElement bookBlockElement);
+                            const S_lpsrBookBlockElement& bookBlockElement);
 
   public:
 

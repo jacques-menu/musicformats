@@ -96,13 +96,13 @@ class EXP bsrLine : public bsrPageElement
     S_bsrCellsList        buildLineNumberCellsList () const;
 
     void                  appendLineElementToLine (
-                            S_bsrLineContentsElement lineElement);
+                            const S_bsrLineContentsElement& lineElement);
 
     void                  insertElementBeforeLastElementOfLine (
-                            S_bsrLineContentsElement lineElement);
+                            const S_bsrLineContentsElement& lineElement);
 
     void                  appendLineElementToLastMeasureOfLine (
-                            S_bsrLineContentsElement lineElement);
+                            const S_bsrLineContentsElement& lineElement);
 
   public:
 

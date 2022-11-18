@@ -175,7 +175,7 @@ class EXP oahFindableElement : public smartable
     // ------------------------------------------------------
 
     virtual Bool          findStringInFindableElement (
-                            const std::string&     lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const = 0;
 
@@ -219,9 +219,9 @@ class EXP oahElement : public oahFindableElement
     // ------------------------------------------------------
 
     static SMARTP<oahElement> create (
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementValueKind      elementValueKind,
                             oahElementVisibilityKind elementVisibilityKind);
 */
@@ -232,9 +232,9 @@ class EXP oahElement : public oahFindableElement
     // ------------------------------------------------------
 
                           oahElement (
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementValueKind      elementValueKind,
                             oahElementVisibilityKind elementVisibilityKind);
 
@@ -315,7 +315,7 @@ class EXP oahElement : public oahFindableElement
     virtual void          applyElement (std::ostream& os) = 0;
 
     Bool                  findStringInFindableElement (
-                            const std::string&     lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 

@@ -161,28 +161,28 @@ class EXP msrMarginsGroup : public smartable
     // margins
     void                  setLeftMargin (
                             int         inputLineNumber,
-                            S_msrMargin val);
+                            const S_msrMargin& val);
 
     S_msrMargin           getLeftMargin () const
                               { return fLeftMargin; }
 
     void                  setRightMargin (
                             int         inputLineNumber,
-                            S_msrMargin val);
+                            const S_msrMargin& val);
 
     S_msrMargin           getRightMargin () const
                               { return fRightMargin; }
 
     void                  setTopMargin (
                             int         inputLineNumber,
-                            S_msrMargin val);
+                            const S_msrMargin& val);
 
     S_msrMargin           getTopMargin () const
                               { return fTopMargin; }
 
     void                  setBottomMargin (
                             int         inputLineNumber,
-                            S_msrMargin val);
+                            const S_msrMargin& val);
 
     S_msrMargin           getBottomMargin () const
                               { return fBottomMargin; }

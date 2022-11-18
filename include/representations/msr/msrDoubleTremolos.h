@@ -55,7 +55,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     static SMARTP<msrDoubleTremolo> create (
                             int                       inputLineNumber,
-                            const S_msrMeasure&              upLinkToMeasure,
+                            const S_msrMeasure&        upLinkToMeasure,
                             msrDoubleTremoloKind      doubleTremoloKind,
                             msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
                             int                       doubleTremoloMarksNumber,
@@ -71,8 +71,8 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
 
     SMARTP<msrDoubleTremolo> createDoubleTremoloNewbornClone (
-                            S_msrElement doubleTremoloFirstElement,
-                            S_msrElement doubleTremoloSecondElement);
+                            const S_msrElement& doubleTremoloFirstElement,
+                            const S_msrElement& doubleTremoloSecondElement);
 
   protected:
 
@@ -81,7 +81,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
                           msrDoubleTremolo (
                             int                       inputLineNumber,
-                            const S_msrMeasure&              upLinkToMeasure,
+                            const S_msrMeasure&        upLinkToMeasure,
                             msrDoubleTremoloKind      doubleTremoloKind,
                             msrDoubleTremoloTypeKind  doubleDoubleTremoloTypeKind,
                             int                       doubleTremoloMarksNumber,

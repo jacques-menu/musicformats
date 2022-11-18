@@ -51,7 +51,7 @@ struct lpsrRepeatDescr : public smartable
     // ------------------------------------------------------
 
     static SMARTP<lpsrRepeatDescr> create (
-                            S_msrRepeat repeat,
+                            const S_msrRepeat& repeat,
                             int         repeatEndingsNumber);
 
   protected:
@@ -60,7 +60,7 @@ struct lpsrRepeatDescr : public smartable
     // ------------------------------------------------------
 
                           lpsrRepeatDescr (
-                            S_msrRepeat repeat,
+                            const S_msrRepeat& repeat,
                             int         repeatEndingsNumber);
 
     virtual               ~lpsrRepeatDescr ();
@@ -395,14 +395,14 @@ class EXP lpsr2lilypondTranslator :
   public:
 
                           lpsr2lilypondTranslator (
-                            S_msrOahGroup&  msrOpts,
-                            S_lpsrOahGroup& lpsrOpts,
+                            const S_msrOahGroup&  msrOpts,
+                            const S_lpsrOahGroup& lpsrOpts,
                             std::ostream&        lilypondCodeStream);
 
     virtual               ~lpsr2lilypondTranslator ();
 
     void                  translateLpsrToLilypondCode (
-                            S_lpsrScore theLpsrScore);
+                            const S_lpsrScore& theLpsrScore);
 
   protected:
 
@@ -777,10 +777,10 @@ class EXP lpsr2lilypondTranslator :
     // markups
 
     std::string           generateAColumnForMarkup (
-                            const std::string&    theString,
+                            const std::string&         theString,
                             lilypondMarkupColumnKind columnKind);
     std::string           generateMultilineMarkup (
-                            const std::string&    theString,
+                            const std::string&         theString,
                             lilypondMarkupColumnKind columnKind);
 
     // octaves
@@ -836,8 +836,8 @@ class EXP lpsr2lilypondTranslator :
     void                  generateNoteHead (
                             const S_msrNote& note);
 
-    void                  generateSegno (S_msrSegno segno);
-    void                  generateCoda (S_msrCoda coda);
+    void                  generateSegno (const S_msrSegno& segno);
+    void                  generateCoda (const S_msrCoda& coda);
 
     void                  generateCodeRightBeforeNote (
                             const S_msrNote& note);
@@ -919,36 +919,36 @@ class EXP lpsr2lilypondTranslator :
                             msrStemKind stemKind);
 
     void                  generateStemIfNeededAndUpdateCurrentStemKind (
-                            S_msrStem stem);
+                            const S_msrStem& stem);
 
     // articulations
 
     msrDirectionKind      fCurrentArpeggioDirectionKind;
 
     void                  generateNoteArticulation (
-                            S_msrArticulation articulation);
+                            const S_msrArticulation& articulation);
 
     void                  generateChordArticulation (
-                            S_msrArticulation articulation);
+                            const S_msrArticulation& articulation);
 
     // technicals
 
     std::string           technicalAsLilypondString (
-                            S_msrTechnical technical);
+                            const S_msrTechnical& technical);
 
     std::string           technicalWithIntegerAsLilypondString (
-                            S_msrTechnicalWithInteger technicalWithInteger);
+                            const S_msrTechnicalWithInteger& technicalWithInteger);
 
     std::string           technicalWithFloatAsLilypondString (
-                            S_msrTechnicalWithFloat technicalWithFloat);
+                            const S_msrTechnicalWithFloat& technicalWithFloat);
 
     std::string           technicalWithStringAsLilypondString (
-                            S_msrTechnicalWithString technicalWithString);
+                            const S_msrTechnicalWithString& technicalWithString);
 
     // ornaments
 
     void                  generateOrnament (
-                            S_msrOrnament ornament);
+                            const S_msrOrnament& ornament);
 
     // trills
 
@@ -965,9 +965,9 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& note);
 
     void                  generateCodeForSpannerBeforeNote (
-                            S_msrSpanner spanner);
+                            const S_msrSpanner& spanner);
     void                  generateCodeForSpannerAfterNote (
-                            S_msrSpanner spanner);
+                            const S_msrSpanner& spanner);
 
     // tuplets
 
@@ -980,22 +980,22 @@ class EXP lpsr2lilypondTranslator :
     Bool                  fOnGoingChordGraceNotesGroupLink;
 
     void                  generateGraceNotesGroup (
-                            S_msrGraceNotesGroup graceNotesGroup);
+                            const S_msrGraceNotesGroup& graceNotesGroup);
 
     // tremolos
 
     std::string           singleTremoloDurationAsLilypondString (
-                            S_msrSingleTremolo singleTremolo);
+                            const S_msrSingleTremolo& singleTremolo);
 
     // dynamics
 
     std::string           dynamicAsLilypondString (
-                            S_msrDynamic dynamic);
+                            const S_msrDynamic& dynamic);
 
     // std::string tuning
     std::string           stringTuningAsLilypondString (
                             int               inputLineNumber,
-                            S_msrStringTuning stringTuning);
+                            const S_msrStringTuning& stringTuning);
 
     // harp pedals tuning
 
@@ -1028,7 +1028,7 @@ class EXP lpsr2lilypondTranslator :
     // figured bass
 
     std::string           figureAsLilypondString (
-                            S_msrBassFigure bassFigure);
+                            const S_msrBassFigure& bassFigure);
     std::string           figuredBassAsLilypondString (
                             const S_msrFiguredBass& figuredBass);
 
@@ -1078,11 +1078,11 @@ class EXP lpsr2lilypondTranslator :
     void                  generateHeader (S_lpsrHeader header);
 
     void                  generateHeaderIdentificationPart (
-                            S_msrIdentification          identification,
+                            const S_msrIdentification&          identification,
                             std::list<std::pair<std::string, std::string> >& nameValuePairsList);
 
     void                  createLilypondHeaderStringValuePairs (
-                            S_lpsrHeader                 header,
+                            const S_lpsrHeader&                 header,
                             std::list<std::pair<std::string, std::string> >& nameValuePairsList);
 
     std::string           generateStringAsLilypondMarkupOrDoubleQuotedString (
@@ -1093,44 +1093,44 @@ class EXP lpsr2lilypondTranslator :
     void                  generatePaper (S_lpsrPaper paper);
 
     void                  fetchLengthValuesFromPaperPageSize (
-                            S_lpsrPaper                     paper,
+                            const S_lpsrPaper&                     paper,
                             std::list<std::pair<std::string, msrLength> >& nameLengthValuePairsList);
 
     void                  fetchOnOffValuesFromLpsrOptionsGroup (
-                            S_lpsrPaper                paper,
+                            const S_lpsrPaper&                paper,
                             std::list<std::pair<std::string, Bool> >& nameBooleanValuePairsList);
 
     void                  generatePaperPageSize (
-                            S_msrPageLayout   pageLayout,
+                            const S_msrPageLayout&   pageLayout,
                             msrLengthUnitKind defaultLengthUnit,
                             int               fieldWidth);
 
     void                  generatePaperMargins (
-                            S_msrPageLayout   pageLayout,
+                            const S_msrPageLayout&   pageLayout,
                             msrLengthUnitKind defaultLengthUnit,
                             int               fieldWidth);
 
     void                  generatePaperIndents (
-                            S_lpsrPaper       pagePaper,
+                            const S_lpsrPaper&       pagePaper,
                             msrLengthUnitKind defaultLengthUnit,
                             int               fieldWidth);
 
     void                  generatePaperSpaces (
-                            S_lpsrPaper       pagePaper,
+                            const S_lpsrPaper&       pagePaper,
                             msrLengthUnitKind defaultLengthUnit,
                             int               fieldWidth);
 
     void                  generatePaperCounts (
-                            S_lpsrPaper       pagePaper,
+                            const S_lpsrPaper&       pagePaper,
                             msrLengthUnitKind defaultLengthUnit,
                             int               fieldWidth);
 
     void                  generatePaperBooleans (
-                            S_lpsrPaper       pagePaper,
+                            const S_lpsrPaper&       pagePaper,
                             int               fieldWidth);
 
     void                  generatePaperHeadersAndFooters (
-                            S_lpsrPaper       pagePaper,
+                            const S_lpsrPaper&       pagePaper,
                             msrLengthUnitKind defaultLengthUnit,
                             int               fieldWidth);
 
@@ -1149,16 +1149,16 @@ class EXP lpsr2lilypondTranslator :
     // tempos
     // ------------------------------------------------------
     void                  generateCodeForTempoBeatUnitsWordsOnly (
-                            S_msrTempo tempo);
+                            const S_msrTempo& tempo);
 
     void                  generateCodeForTempoBeatUnitsPerMinute (
-                            S_msrTempo tempo);
+                            const S_msrTempo& tempo);
 
     void                  generateCodeForTempoBeatUnitsEquivalence (
-                            S_msrTempo tempo);
+                            const S_msrTempo& tempo);
 
     void                  generateCodeForTempoNotesRelationship (
-                            S_msrTempo tempo);
+                            const S_msrTempo& tempo);
 
     // clefs
     // ------------------------------------------------------
@@ -1244,9 +1244,9 @@ class EXP lpsr2lilypondTranslator :
     // octave shifts
     // ------------------------------------------------------
     void                  generateCodeForOctaveShiftBeforeNote (
-                            S_msrOctaveShift octaveShift);
+                            const S_msrOctaveShift& octaveShift);
     void                  generateCodeForOctaveShiftAfterNote (
-                            S_msrOctaveShift octaveShift);
+                            const S_msrOctaveShift& octaveShift);
 
     // chords
     // ------------------------------------------------------

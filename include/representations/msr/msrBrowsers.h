@@ -66,7 +66,7 @@ template <typename T> class   msrBrowserAlongPathToVoice : public browser <T>
 
                           msrBrowserAlongPathToVoice (
                             basevisitor*     v,
-                            S_msrPathToVoice pathToVoice)
+                            const S_msrPathToVoice& pathToVoice)
                               : fVisitor (v),
                                 fPathToVoice (pathToVoice)
                               {}

@@ -55,7 +55,8 @@ void displayMsrScoreSlices (
 
 // parts
 // ------------------------------------------------------
-S_msrPart createPartInScore (S_msrScore theMsrScore);
+S_msrPart createPartInScore (
+                            const S_msrScore& theMsrScore);
 
 // staves
 // ------------------------------------------------------

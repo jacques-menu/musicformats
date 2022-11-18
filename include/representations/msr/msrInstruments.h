@@ -192,7 +192,7 @@ class EXP msrScordatura : public msrMeasureElement
     // ------------------------------------------------------
 
     void                  addStringTuningToScordatura (
-                            S_msrStringTuning stringTuning);
+                            const S_msrStringTuning& stringTuning);
 
   public:
 

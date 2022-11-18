@@ -97,10 +97,10 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const std::string&       partGroupName,
-                            const std::string&       partGroupNameDisplayText,
-                            const std::string&       partGroupAccidentalText,
-                            const std::string&       partGroupAbbreviation,
+                            const std::string&            partGroupName,
+                            const std::string&            partGroupNameDisplayText,
+                            const std::string&            partGroupAccidentalText,
+                            const std::string&            partGroupAbbreviation,
                             msrPartGroupSymbolKind   partGroupSymbolKind,
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
@@ -111,17 +111,17 @@ class EXP msrPartGroup : public msrPartGroupElement
     static SMARTP<msrPartGroup> createImplicitPartGroup (
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const std::string&       partGroupName,
-                            const std::string&       partGroupNameDisplayText,
-                            const std::string&       partGroupAccidentalText,
-                            const std::string&       partGroupAbbreviation,
+                            const std::string&            partGroupName,
+                            const std::string&            partGroupNameDisplayText,
+                            const std::string&            partGroupAccidentalText,
+                            const std::string&            partGroupAbbreviation,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
                             const S_msrScore&        partGroupUpLinkToScore);
 
     SMARTP<msrPartGroup> createPartGroupNewbornClone (
                             const S_msrPartGroup& partGroupClone,
                               // the upLink for nested part groups
-                            S_msrScore     scoreClon);
+                            const S_msrScore&     scoreClon);
 
     // creation from the API
     // ------------------------------------------------------
@@ -130,7 +130,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const std::string&       partGroupName,
+                            const std::string&            partGroupName,
                             const S_msrPartGroup&    partGroupUpLinkToPartGroup,
                             const S_msrScore&        partGroupUpLinkToScore);
 
@@ -143,10 +143,10 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const std::string&       partGroupName,
-                            const std::string&       partGroupNameDisplayText,
-                            const std::string&       partGroupAccidentalText,
-                            const std::string&       partGroupAbbreviation,
+                            const std::string&            partGroupName,
+                            const std::string&            partGroupNameDisplayText,
+                            const std::string&            partGroupAccidentalText,
+                            const std::string&            partGroupAbbreviation,
                             msrPartGroupSymbolKind   partGroupSymbolKind,
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
@@ -158,7 +158,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
-                            const std::string&       partGroupName,
+                            const std::string&            partGroupName,
                             const S_msrPartGroup&    partGroupUpLinkToPartGroup,
                             const S_msrScore&        partGroupUpLinkToScore);
 

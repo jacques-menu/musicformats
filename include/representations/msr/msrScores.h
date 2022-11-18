@@ -79,7 +79,7 @@ class EXP msrScore : public msrBookElement
 
     // identification
     void                  setIdentification (
-                            S_msrIdentification identification)
+                            const S_msrIdentification& identification)
                               { fIdentification = identification; }
 
     S_msrIdentification   getIdentification () const
@@ -87,7 +87,7 @@ class EXP msrScore : public msrBookElement
 
     // scaling
     void                  setScaling (
-                            S_msrScaling scaling)
+                            const S_msrScaling& scaling)
                               { fScaling = scaling; }
 
     S_msrScaling          getScaling () const
@@ -95,7 +95,7 @@ class EXP msrScore : public msrBookElement
 
     // page layout
     void                  setPageLayout (
-                            S_msrPageLayout pageLayout)
+                            const S_msrPageLayout& pageLayout)
                               { fPageLayout = pageLayout; }
 
     S_msrPageLayout       getPageLayout () const
@@ -103,7 +103,7 @@ class EXP msrScore : public msrBookElement
 
     // system layout
     void                  setSystemLayout (
-                            S_msrSystemLayout systemLayout)
+                            const S_msrSystemLayout& systemLayout)
                               { fSystemLayout = systemLayout; }
 
     S_msrSystemLayout     getSystemLayout () const
@@ -121,7 +121,7 @@ class EXP msrScore : public msrBookElement
     // appearance
 
     void                  setAppearance (
-                            S_msrAppearance appearance)
+                            const S_msrAppearance& appearance)
                               { fAppearance = appearance; }
 
     S_msrAppearance       getAppearance () const
@@ -300,7 +300,7 @@ class EXP msrScore : public msrBookElement
                             const S_msrPartGroup& partGroup);
 
     void                  appendCreditToScore (
-                            S_msrCredit credit);
+                            const S_msrCredit& credit);
 
     S_msrPart             fetchPartFromScoreByItsPartID (
                             int           inputLineNumber,

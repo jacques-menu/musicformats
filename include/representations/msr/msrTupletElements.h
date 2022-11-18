@@ -14,11 +14,12 @@
 
 #include <list>
 
-#include "msrMeasureElements.h"
-
 #include "msrTypesForwardDeclarations.h"
 
+#include "msrMeasureElements.h"
 // #include "msrMeasures.h"
+
+
 
 
 namespace MusicFormats

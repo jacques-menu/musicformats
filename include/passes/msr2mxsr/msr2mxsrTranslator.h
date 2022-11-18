@@ -264,7 +264,7 @@ class EXP msr2mxsrTranslator :
   public:
 
                           msr2mxsrTranslator (
-                            S_msrScore visitedMsrScore);
+                            const S_msrScore& visitedMsrScore);
 
     virtual               ~msr2mxsrTranslator ();
 
@@ -655,21 +655,21 @@ class EXP msr2mxsrTranslator :
                                 Sxmlelement elem);
 
     void                      appendPageMarginsToScoreDefaultsPageLayout (
-                                S_msrMarginsGroup marginsGroup);
+                                const S_msrMarginsGroup& marginsGroup);
 
     void                      populatePageMargins (
                                 Sxmlelement       elem,
-                                S_msrMarginsGroup marginsGroup);
+                                const S_msrMarginsGroup& marginsGroup);
 
     // system layout
     Sxmlelement               fScoreDefaultsSystemLayoutElement;
 
     void                      appendSystemMarginsToScoreDefaultsSystemLayout (
-                                S_msrSystemLayout systemLayout);
+                                const S_msrSystemLayout& systemLayout);
 
     void                      populateSystemMargins (
                                 Sxmlelement       elem,
-                                S_msrSystemLayout systemLayout);
+                                const S_msrSystemLayout& systemLayout);
 
     // staff layouts
     std::list<Sxmlelement>         fScoreDefaultsStaffLayoutElementsList;
@@ -866,53 +866,53 @@ class EXP msr2mxsrTranslator :
     int                       fCurrentCumulatedSkipsVoiceNumber;
 
     void                      appendABackupOrForwardToMeasureIfNeeded (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
     void                      appendABackupToMeasure (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
     void                      appendAForwardToMeasure (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     // directions
     // ------------------------------------------------------
     void                      populateNoteDirections (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
     void                      appendNoteWedges (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
     void                      appendNoteDynamics (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     // spanners
     // ------------------------------------------------------
     void                      appendNoteSpannersBeforeNote (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
     void                      appendNoteSpannersAfterNote (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     void                      appendBasicsToNote (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     // staves
     // ------------------------------------------------------
     void                      appendStaffToNoteIfRelevant (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     // voice
     // ------------------------------------------------------
     void                      appendVoiceToNoteIfRelevant (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     // duration
     // ------------------------------------------------------
     void                      appendDurationToNoteIfRelevant (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     // tuplets
     // ------------------------------------------------------
     void                      appendTimeModificationToNoteIfRelevant (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     void                      appendNoteTupletIfRelevant (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     // notes
     // ------------------------------------------------------
@@ -924,11 +924,11 @@ class EXP msr2mxsrTranslator :
     S_msrStaff                fPreviousMSRNoteStaff;
 
     void                      appendMsrNoteToMesureIfRelevant (
-                                S_msrNote theMsrNote);
+                                const S_msrNote& theMsrNote);
 
     void                      appendNoteToMeasure (
                                 Sxmlelement note,
-                                S_msrNote   theMsrNote);
+                                const S_msrNote&   theMsrNote);
 
     Bool                      fCurrentNoteAwaitsGraceNotes;
     S_msrNote                 fPendingMsrNoteAwaitingGraceNotes;
@@ -1047,7 +1047,7 @@ class EXP msr2mxsrTranslator :
     std::string          msrLengthAsTenths (
                                 msrLength length);
     std::string          S_msrLengthAsTenths (
-                                S_msrLength length);
+                                const S_msrLength& length);
 
     std::string          msrPlacementKindAsMusicXMLString (
                                 msrPlacementKind placementKind);
