@@ -30,11 +30,11 @@ class EXP msrReplaceClefAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msrReplaceClefAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             std::map<msrClefKind, msrClefKind>&
                                               clefKindToClefKindMapVariable);
 
@@ -44,11 +44,11 @@ class EXP msrReplaceClefAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msrReplaceClefAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             std::map<msrClefKind, msrClefKind>&
                                               clefKindToClefKindMapVariable);
 
@@ -548,11 +548,11 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // parts
     // --------------------------------------
 
-    std::set<std::string>           fPartsIgnoreIDSet;
-    std::set<std::string>           fMusicXMLPartsKeepIDSet;
+    std::set<std::string> fPartsIgnoreIDSet;
+    std::set<std::string> fMusicXMLPartsKeepIDSet;
 
-    std::set<std::string>           fMusicXMLMusicXMLPartsIgnoreNameSet;
-    std::set<std::string>           fMusicXMLPartsKeepNameSet;
+    std::set<std::string> fMusicXMLMusicXMLPartsIgnoreNameSet;
+    std::set<std::string> fMusicXMLPartsKeepNameSet;
 
      // for checkOptionsConsistency()
     S_oahStringSetElementAtom
@@ -655,64 +655,64 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     Bool                  fIgnoreMusicXMLWords;
 
-    std::set<std::string>           fBoldWordsSet;
+    std::set<std::string> fBoldWordsSet;
     S_oahStringSetElementAtom
                           fBoldWordsAtom;
 
-    std::set<std::string>           fItalicWordsSet;
+    std::set<std::string> fItalicWordsSet;
     S_oahStringSetElementAtom
                           fItalicWordsAtom;
 
-    std::set<std::string>           fWordsToBePlacedAboveSet;
+    std::set<std::string> fWordsToBePlacedAboveSet;
     S_oahStringSetElementAtom
                           fWordsToBePlacedAboveAtom;
 
-    std::set<std::string>           fWordsToBePlacedBelowSet;
+    std::set<std::string> fWordsToBePlacedBelowSet;
     S_oahStringSetElementAtom
                           fWordsToBePlacedBelowAtom;
 
     Bool                  fAddMsrWordsFromTheMusicXMLLyrics;
 
     // words conversions
-    std::set<std::string>           fWordsToBeConvertedSet;
+    std::set<std::string> fWordsToBeConvertedSet;
 
-    std::set<std::string>           fWordsToTemposSet;
+    std::set<std::string> fWordsToTemposSet;
     S_oahStringSetElementAtom
                           fWordsToTempoAtom;
 
-    std::set<std::string>           fWordsToRehearsalMarkSet;
+    std::set<std::string> fWordsToRehearsalMarkSet;
     S_oahStringSetElementAtom
                           fWordsToRehearsalMarkAtom;
 
-    std::set<std::string>           fWordsToSegnoSet;
+    std::set<std::string> fWordsToSegnoSet;
     S_oahStringSetElementAtom
                           fWordsToSegnoAtom;
 
-    std::set<std::string>           fWordsToDalSegnoSet;
+    std::set<std::string> fWordsToDalSegnoSet;
     S_oahStringSetElementAtom
                           fWordsToDalSegnoAtom;
 
-    std::set<std::string>           fWordsToDalSegnoAlFineSet;
+    std::set<std::string> fWordsToDalSegnoAlFineSet;
     S_oahStringSetElementAtom
                           fWordsToDalSegnoAlFineAtom;
 
-    std::set<std::string>           fWordsToDalSegnoAlCodaSet;
+    std::set<std::string> fWordsToDalSegnoAlCodaSet;
     S_oahStringSetElementAtom
                           fWordsToDalSegnoAlCodaAtom;
 
-    std::set<std::string>           fWordsToCodaFirstSet;
+    std::set<std::string> fWordsToCodaFirstSet;
     S_oahStringSetElementAtom
                           fWordsToCodaFirstAtom;
 
-    std::set<std::string>           fWordsToCodaSecondSet;
+    std::set<std::string> fWordsToCodaSecondSet;
     S_oahStringSetElementAtom
                           fWordsToCodaSecondAtom;
 
-    std::set<std::string>           fWordsToCrescSet;
+    std::set<std::string> fWordsToCrescSet;
     S_oahStringSetElementAtom
                           fWordsToCrescAtom;
 
-    std::set<std::string>           fWordsToDecrescSet;
+    std::set<std::string> fWordsToDecrescSet;
     S_oahStringSetElementAtom
                           fWordsToDecrescAtom;
 

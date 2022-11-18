@@ -164,19 +164,19 @@ class EXP msrPageLayout : public msrElement
     // margins groups
     void                  setOddMarginsGroup (
                             int               inputLineNumber,
-                            S_msrMarginsGroup val);
+                            const S_msrMarginsGroup& val);
     S_msrMarginsGroup     getOddMarginsGroup () const
                               { return fOddMarginsGroup; }
 
     void                  setEvenMarginsGroup (
                             int               inputLineNumber,
-                            S_msrMarginsGroup val);
+                            const S_msrMarginsGroup& val);
     S_msrMarginsGroup     getEvenMarginsGroup () const
                               { return fEvenMarginsGroup; }
 
     void                  setBothMarginsGroup (
                             int               inputLineNumber,
-                            S_msrMarginsGroup val);
+                            const S_msrMarginsGroup& val);
     S_msrMarginsGroup     getBothMarginsGroup () const
                               { return fBothMarginsGroup; }
 
@@ -824,14 +824,14 @@ class EXP msrLineWidth : public msrElement
     static SMARTP<msrLineWidth> create (
                             int                  inputLineNumber,
                             msrLineWidthTypeKind lineWidthTypeKind,
-                            S_msrLength          lineWidthValue);
+                            const S_msrLength&          lineWidthValue);
 
   protected:
 
                           msrLineWidth (
                             int                  inputLineNumber,
                             msrLineWidthTypeKind lineWidthTypeKind,
-                            S_msrLength          lineWidthValue);
+                            const S_msrLength&          lineWidthValue);
 
     virtual               ~msrLineWidth ();
 
@@ -1020,14 +1020,14 @@ class EXP msrGlyph : public msrElement
     static SMARTP<msrGlyph> create (
                             int              inputLineNumber,
                             msrGlyphTypeKind glyphTypeKind,
-                            const std::string&    glyphValue);
+                            const std::string&         glyphValue);
 
   protected:
 
                           msrGlyph (
                             int              inputLineNumber,
                             msrGlyphTypeKind glyphTypeKind,
-                            const std::string&    glyphValue);
+                            const std::string&         glyphValue);
 
     virtual               ~msrGlyph ();
 
@@ -1085,14 +1085,14 @@ class EXP msrOtherAppearance : public msrElement
     static SMARTP<msrOtherAppearance> create (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const std::string&    otherAppearanceValue);
+                            const std::string&         otherAppearanceValue);
 
   protected:
 
                           msrOtherAppearance (
                             int                        inputLineNumber,
                             msrOtherAppearanceTypeKind otherAppearanceTypeKind,
-                            const std::string&    otherAppearanceValue);
+                            const std::string&         otherAppearanceValue);
 
     virtual               ~msrOtherAppearance ();
 
@@ -1298,7 +1298,7 @@ class EXP msrAppearance : public msrElement
                               { fGlyphsList.push_back (glyph); }
 
     void                  appendOtherAppearance (
-                            S_msrOtherAppearance otherAppearance)
+                            const S_msrOtherAppearance& otherAppearance)
                               {
                                 fOtherAppearancesList.push_back (otherAppearance);
                               }

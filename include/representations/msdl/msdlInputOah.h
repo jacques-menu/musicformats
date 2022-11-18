@@ -37,11 +37,11 @@ class EXP msdlKeywordsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msdlKeywordsLanguageAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msdlKeywordsLanguageKind&
                                               msdlKeywordsLanguageKindVariable);
 
@@ -51,11 +51,11 @@ class EXP msdlKeywordsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msdlKeywordsLanguageAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msdlKeywordsLanguageKind&
                                               msdlKeywordsLanguageKindVariable);
 
@@ -267,11 +267,11 @@ class EXP msdlCommentsTypeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msdlCommentsTypeAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msdlCommentsTypeKind&
                                               msdlCommentsTypeKindVariable);
 
@@ -281,11 +281,11 @@ class EXP msdlCommentsTypeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msdlCommentsTypeAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msdlCommentsTypeKind&
                                               msdlCommentsTypeKindVariable);
 
@@ -354,11 +354,11 @@ class EXP msdlUserLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msdlUserLanguageAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msdlUserLanguageKind&
                                               msdlUserLanguageKindVariable);
 
@@ -368,11 +368,11 @@ class EXP msdlUserLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msdlUserLanguageAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msdlUserLanguageKind&
                                               msdlUserLanguageKindVariable);
 
@@ -442,11 +442,11 @@ class EXP msdlPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msdlPitchesLanguageAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msrQuarterTonesPitchesLanguageKind&
                                               msdlPitchesLanguageKindVariable);
 
@@ -456,11 +456,11 @@ class EXP msdlPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msdlPitchesLanguageAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msrQuarterTonesPitchesLanguageKind&
                                               msdlPitchesLanguageKindVariable);
 

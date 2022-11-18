@@ -36,11 +36,11 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrPitchesLanguageAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msrQuarterTonesPitchesLanguageKind&
                                               lpsrPitchesLanguageKindVariable);
 
@@ -50,11 +50,11 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrPitchesLanguageAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             msrQuarterTonesPitchesLanguageKind&
                                               lpsrPitchesLanguageKindVariable);
 
@@ -124,11 +124,11 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrChordsLanguageAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             lpsrChordsLanguageKind&
                                               lpsrChordsLanguageKindVariable);
 
@@ -138,11 +138,11 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrChordsLanguageAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             lpsrChordsLanguageKind&
                                                lpsrChordsLanguageKindVariable);
 
@@ -212,11 +212,11 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrStaffInstrumentNameAtom> create (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
   protected:
@@ -225,11 +225,11 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrStaffInstrumentNameAtom (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
     virtual               ~lpsrStaffInstrumentNameAtom ();
@@ -295,12 +295,12 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrTransposeAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
-                            S_msrSemiTonesPitchAndOctave&
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
+                            const S_msrSemiTonesPitchAndOctave&
                                               semiTonesPitchAndOctaveVariable);
 
   protected:
@@ -309,12 +309,12 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrTransposeAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
-                            S_msrSemiTonesPitchAndOctave&
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
+                            const S_msrSemiTonesPitchAndOctave&
                                               semiTonesPitchAndOctaveVariable);
 
     virtual               ~lpsrTransposeAtom ();
@@ -325,7 +325,7 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setSemiTonesPitchAndOctaveVariable (
-                            S_msrSemiTonesPitchAndOctave value)
+                            const S_msrSemiTonesPitchAndOctave& value)
                               {
                                 fSemiTonesPitchAndOctaveVariable = value;
                               }

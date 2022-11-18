@@ -224,7 +224,7 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
     Bool                  fTraceOptionsBlocks;
 
     // input sources
-    std::set<std::string>           fInputSourcesSet;
+    std::set<std::string> fInputSourcesSet;
     S_oahStringSetElementAtom
                           fInputSourcesSetAtom;
 

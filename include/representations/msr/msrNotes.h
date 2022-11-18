@@ -12,22 +12,40 @@
 #ifndef ___msrNotes___
 #define ___msrNotes___
 
-// #include "msrTupletElements.h"
-
 #include "msrTypesForwardDeclarations.h"
-
-// #include "msrMeasures.h"
 
 #include "msrNotesEnumTypes.h"
 
 #include "msrAccidentals.h"
+#include "msrArticulations.h"
+#include "msrBeams.h"
+#include "msrCodas.h"
 #include "msrChords.h"
 #include "msrColors.h"
+#include "msrDynamics.h"
+#include "msrEyeGlasses.h"
+#include "msrFiguredBasses.h"
+#include "msrGlissandos.h"
+#include "msrHarmonies.h"
+#include "msrInstruments.h"
+#include "msrLyrics.h"
+#include "msrGraceNotesGroups.h"
+#include "msrLigatures.h"
+#include "msrMeasures.h"
 #include "msrOrnaments.h"
 #include "msrParts.h"
 #include "msrPrintObjects.h"
+#include "msrSegnos.h"
+#include "msrSingleTremolos.h"
+#include "msrSlashes.h"
+#include "msrSlides.h"
+#include "msrSlurs.h"
 #include "msrSpanners.h"
+#include "msrStems.h"
+#include "msrTechnicals.h"
 #include "msrTies.h"
+#include "msrTuplets.h"
+#include "msrTupletElements.h"
 #include "msrTupletFactors.h"
 
 
@@ -44,9 +62,9 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> create (
                             int                        inputLineNumber,
-                            const S_msrMeasure&               upLinkToMeasure,
+                            const S_msrMeasure&        upLinkToMeasure,
 
-                            const std::string&    noteMeasureNumber,
+                            const std::string&         noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 
@@ -119,7 +137,7 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createRegularNote (
                             int                      inputLineNumber,
-                            const std::string&       noteMeasureNumber,
+                            const std::string&            noteMeasureNumber,
                             msrQuarterTonesPitchKind quarterTonesPitchKind,
                             msrOctaveKind            noteOctaveKind,
                             const Rational&          soundingWholeNotes,
@@ -146,7 +164,7 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createNoteFromSemiTonesPitchAndOctave (
                             int                          inputLineNumber,
-                            S_msrSemiTonesPitchAndOctave semiTonesPitchAndOctave);
+                            const S_msrSemiTonesPitchAndOctave& semiTonesPitchAndOctave);
 
   protected:
 
@@ -155,9 +173,9 @@ class EXP msrNote : public msrTupletElement
 
                           msrNote (
                             int                        inputLineNumber,
-                            const S_msrMeasure&               upLinkToMeasure,
+                            const S_msrMeasure&         upLinkToMeasure,
 
-                            const std::string&    noteMeasureNumber,
+                            const std::string&         noteMeasureNumber,
 
                             msrNoteKind                noteKind,
 
@@ -396,7 +414,7 @@ class EXP msrNote : public msrTupletElement
 
     // octave shifts
     void                  setNoteOctaveShift (
-                             S_msrOctaveShift octaveShift)
+                             const S_msrOctaveShift& octaveShift)
                                 { fNoteOctaveShift = octaveShift; }
 
     S_msrOctaveShift      getNoteOctaveShift () const
@@ -455,7 +473,7 @@ class EXP msrNote : public msrTupletElement
     // -------------------------------
 
     // stems
-    void                  setNoteStem (S_msrStem stem);
+    void                  setNoteStem (const S_msrStem& stem);
 
     S_msrStem             getNoteStem () const
                               { return fNoteStem; }
@@ -517,13 +535,13 @@ class EXP msrNote : public msrTupletElement
 
     // grace notes
     void                  setNoteGraceNotesGroupBefore (
-                            S_msrGraceNotesGroup graceNotesGroupBefore);
+                            const S_msrGraceNotesGroup& graceNotesGroupBefore);
 
     S_msrGraceNotesGroup  getNoteGraceNotesGroupBefore () const
                               { return fNoteGraceNotesGroupBefore; }
 
     void                  setNoteGraceNotesGroupAfter (
-                            S_msrGraceNotesGroup graceNotesGroupAfter);
+                            const S_msrGraceNotesGroup& graceNotesGroupAfter);
 
     S_msrGraceNotesGroup  getNoteGraceNotesGroupAfter () const
                               { return fNoteGraceNotesGroupAfter; }
@@ -531,7 +549,7 @@ class EXP msrNote : public msrTupletElement
     // after grace notes
     /* JMI
     void                  setNoteAfterGraceNotesGroup (
-                            S_msrAfterGraceNotesGroup afterGraceNotesGroup);
+                            const S_msrAfterGraceNotes&Group afterGraceNotesGroup);
 
     S_msrAfterGraceNotesGroup
                           getNoteAfterGraceNotesGroup () const
@@ -540,13 +558,13 @@ class EXP msrNote : public msrTupletElement
 
     // singleTremolo
     void                  setNoteSingleTremolo (
-                            S_msrSingleTremolo trem);
+                            const S_msrSingleTremolo& trem);
 
     S_msrSingleTremolo    getNoteSingleTremolo () const
                               { return fNoteSingleTremolo; }
 
     // ties
-    void                  setNoteTie (S_msrTie tie)
+    void                  setNoteTie (const S_msrTie& tie)
                               { fNoteTie = tie; }
     S_msrTie              getNoteTie () const
                               { return fNoteTie; }
@@ -758,75 +776,75 @@ class EXP msrNote : public msrTupletElement
     void                  appendSyllableToNote (S_msrSyllable syllable);
 
     // beams
-    void                  appendBeamToNote (S_msrBeam beam);
+    void                  appendBeamToNote (const S_msrBeam& beam);
 
     // articulations
-    void                  appendArticulationToNote (S_msrArticulation art);
+    void                  appendArticulationToNote (const S_msrArticulation& art);
 
     // spanners
-    void                  appendSpannerToNote (S_msrSpanner span);
+    void                  appendSpannerToNote (const S_msrSpanner& span);
 
     // technicals
-    void                  appendTechnicalToNote (S_msrTechnical tech);
+    void                  appendTechnicalToNote (const S_msrTechnical& tech);
 
     void                  appendTechnicalWithIntegerToNote (
-                            S_msrTechnicalWithInteger tech);
+                            const S_msrTechnicalWithInteger& tech);
 
     void                  appendTechnicalWithFloatToNote (
-                            S_msrTechnicalWithFloat tech);
+                            const S_msrTechnicalWithFloat& tech);
 
     void                  appendTechnicalWithStringToNote (
-                            S_msrTechnicalWithString tech);
+                            const S_msrTechnicalWithString& tech);
 
     // ornaments
-    void                  appendOrnamentToNote (S_msrOrnament orn);
+    void                  appendOrnamentToNote (const S_msrOrnament& orn);
 
     // glissandos
     void                  appendGlissandoToNote (S_msrGlissando glissando);
 
     // slides
-    void                  appendSlideToNote (S_msrSlide slide);
+    void                  appendSlideToNote (const S_msrSlide& slide);
 
     // dynamics
     void                  appendDynamicToNote (
-                            S_msrDynamic dynamic);
+                            const S_msrDynamic& dynamic);
     void                  appendOtherDynamicToNote (
-                            S_msrOtherDynamic otherDynamic);
+                            const S_msrOtherDynamic& otherDynamic);
 
     S_msrDynamic          removeFirstDynamics (); // ??? JMI
 
     // words
-    void                  appendWordsToNote (S_msrWords words);
+    void                  appendWordsToNote (const S_msrWords& words);
 
     // slurs
-    void                  appendSlurToNote (S_msrSlur slur);
+    void                  appendSlurToNote (const S_msrSlur& slur);
 
     // ligatures
-    void                  appendLigatureToNote (S_msrLigature ligature);
+    void                  appendLigatureToNote (const S_msrLigature& ligature);
 
     // pedals
-    void                  appendPedalToNote (S_msrPedal pedal);
+    void                  appendPedalToNote (const S_msrPedal& pedal);
 
     //  slashes
-    void                  appendSlashToNote (S_msrSlash slash);
+    void                  appendSlashToNote (const S_msrSlash& slash);
 
     // cresc/decresc
     void                  appendCrescDecrescToNote (
-                            S_msrCrescDecresc crescDecresc);
+                            const S_msrCrescDecresc& crescDecresc);
 
     //  wedges
-    void                  appendWedgeToNote (S_msrWedge wedge);
+    void                  appendWedgeToNote (const S_msrWedge& wedge);
 
     S_msrWedge            removeFirstWedge (); // JMI
 
     // segnos
-    void                  appendSegnoToNote (S_msrSegno segno);
+    void                  appendSegnoToNote (const S_msrSegno& segno);
 
     // dal segnos
-    void                  appendDalSegnoToNote (S_msrDalSegno dalSegno);
+    void                  appendDalSegnoToNote (const S_msrDalSegno& dalSegno);
 
     // codas
-    void                  appendCodaToNote (S_msrCoda coda);
+    void                  appendCodaToNote (const S_msrCoda& coda);
 
     // eyeglasses
     void                  appendEyeGlassesToNote (S_msrEyeGlasses eyeGlasses);

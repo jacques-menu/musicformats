@@ -75,8 +75,8 @@ class   oahOptionOrArgument : public smartable
 
     static SMARTP<oahOptionOrArgument> create (
                             oahOptionOrArgumentKind optionOrArgumentKind,
-                            const std::string&      first,
-                            const std::string&      second);
+                            const std::string&           first,
+                            const std::string&           second);
 
   public:
 
@@ -85,8 +85,8 @@ class   oahOptionOrArgument : public smartable
 
                           oahOptionOrArgument (
                             oahOptionOrArgumentKind optionOrArgumentKind,
-                            const std::string&      first,
-                            const std::string&      second);
+                            const std::string&           first,
+                            const std::string&           second);
 
     virtual               ~oahOptionOrArgument ();
 
@@ -418,7 +418,7 @@ to be developped into :
     std::string           fetchPrefixNames () const;
 
     Bool                  findStringInFindableElement (
-                            const std::string&     lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 
@@ -477,9 +477,9 @@ class EXP oahAtom : public oahElement
 
 /* this class is purely vir.htual
     static SMARTP<oahAtom> create (
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementValueKind atomValueExpectedKind);
 */
 
@@ -489,9 +489,9 @@ class EXP oahAtom : public oahElement
     // ------------------------------------------------------
 
                           oahAtom (
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementValueKind atomValueExpectedKind);
 
     virtual               ~oahAtom ();
@@ -552,7 +552,7 @@ class EXP oahAtom : public oahElement
     void                  printSummary (std::ostream& os) const;
 
     virtual Bool          findStringInAtom (
-                            const std::string&     lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
@@ -996,18 +996,18 @@ class EXP oahSubGroup : public oahElement
     // ------------------------------------------------------
 
     static SMARTP<oahSubGroup> create (
-                            const std::string&       subGroupHeader,
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            subGroupHeader,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahGroup&        upLinkToGroup);
 
     static SMARTP<oahSubGroup> createWithNames (
-                            const std::string&       subGroupHeader,
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            subGroupHeader,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahGroup&        upLinkToGroup);
 
@@ -1017,10 +1017,10 @@ class EXP oahSubGroup : public oahElement
     // ------------------------------------------------------
 
                           oahSubGroup (
-                            const std::string&       subGroupHeader,
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            subGroupHeader,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahGroup&        upLinkToGroup);
 
@@ -1126,7 +1126,7 @@ class EXP oahSubGroup : public oahElement
                             const S_oahSubGroup& subGroup) const;
 
     Bool                  findStringInSubGroup (
-                            const std::string&     lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
@@ -1167,32 +1167,32 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
     static SMARTP<oahGroup> create (
-                            const std::string&       header,
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind);
 
     static SMARTP<oahGroup> create (
-                            const std::string&       header,
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahHandler&             groupUpLinkToHandler);
 
     static SMARTP<oahGroup> createWithNames (
-                            const std::string&       header,
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind);
 
     static SMARTP<oahGroup> createWithNames (
-                            const std::string&       header,
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahHandler&             groupUpLinkToHandler);
 
@@ -1202,17 +1202,17 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
                           oahGroup (
-                            const std::string&       header,
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind);
 
                           oahGroup (
-                            const std::string&       header,
-                            const std::string&       longName,
-                            const std::string&       shortName,
-                            const std::string&       description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahHandler&             groupUpLinkToHandler);
 
@@ -1338,7 +1338,7 @@ class EXP oahGroup : public oahElement
                             const S_oahSubGroup& subGroup) const;
 
     void                  findStringInGroup (
-                            const std::string&     lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
@@ -1447,7 +1447,7 @@ class EXP oahHandler : public oahFindableElement
                               { return fHandlerServiceName; }
 
     void                  setHandlerMultiComponent (
-                            S_mfcMultiComponent multiComponent)
+                            const S_mfcMultiComponent& multiComponent)
                               { fHandlerMultiComponent = multiComponent; }
 
     S_mfcMultiComponent   getHandlerMultiComponent () const
@@ -1649,7 +1649,7 @@ class EXP oahHandler : public oahFindableElement
                             const std::string& name);
 
     Bool                  findStringInFindableElement (
-                            const std::string&     lowerCaseString,
+                            const std::string&          lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 
@@ -1841,7 +1841,7 @@ class EXP oahHandler : public oahFindableElement
                           fHandlerPrefixesMap;
 
     // single character names
-    std::set<std::string>           fSingleCharacterNamesSet;
+    std::set<std::string> fSingleCharacterNamesSet;
 
     // groups std::list
     std::list<S_oahGroup>      fHandlerGroupsList;
@@ -1873,7 +1873,7 @@ class EXP oahHandler : public oahFindableElement
 
 
     void                  includeOptionsAndArgumentsFile ( // JMI ???
-                            const std::string&      includeFileName,
+                            const std::string&           includeFileName,
                             std::ostream&                os);
 
     void                  includeOptionsFromFile (

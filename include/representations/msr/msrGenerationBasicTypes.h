@@ -48,11 +48,11 @@ class EXP msrGenerationAPIKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msrGenerationAPIKindAtom> create (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             msrGenerationAPIKind& generationAPIKindVariable);
 
   protected:
@@ -61,11 +61,11 @@ class EXP msrGenerationAPIKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msrGenerationAPIKindAtom (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             msrGenerationAPIKind& generationAPIKindVariable);
 
     virtual               ~msrGenerationAPIKindAtom ();

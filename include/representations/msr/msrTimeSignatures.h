@@ -107,7 +107,7 @@ class EXP msrTimeSignatureItem : public msrElement
     // ------------------------------------------------------
 
     Bool                  isEqualTo (
-                            S_msrTimeSignatureItem otherTimeSignatureItem) const;
+                            const S_msrTimeSignatureItem& otherTimeSignatureItem) const;
 
     void                  appendBeatsNumber (int beatsNumber);
 
@@ -254,7 +254,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     Bool                  isEqualTo (S_msrTimeSignature otherTimeSignature) const;
 
     void                  appendTimeSignatureItem (
-                            S_msrTimeSignatureItem timeSignatureItem);
+                            const S_msrTimeSignatureItem& timeSignatureItem);
 
     Rational              wholeNotesDurationPerMeasure () const;
 

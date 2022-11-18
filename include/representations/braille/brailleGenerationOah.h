@@ -47,10 +47,10 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<brailleOutputKindAtom> create (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         variableName,
                             bsrBrailleOutputKind& brailleOutputKindVariable,
                             bsrBrailleOutputKind  brailleOutputKindValue);
 
@@ -60,10 +60,10 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // ------------------------------------------------------
 
                           brailleOutputKindAtom (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         variableName,
                             bsrBrailleOutputKind& brailleOutputKindVariable,
                             bsrBrailleOutputKind  brailleOutputKindValue);
 

@@ -76,7 +76,7 @@ class EXP msdrMusic : public smartable
     void                  addMeasureToMusic (
                             int           inputLineNumber,
                             int           measureNumber,
-                            S_msdrMeasure measure);
+                            const S_msdrMeasure& measure);
 
   private:
 

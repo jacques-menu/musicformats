@@ -90,7 +90,7 @@ class EXP msr2summaryVisitor :
     // ------------------------------------------------------
 
                           msr2summaryVisitor (
-                            S_msrOahGroup& msrOpts);
+                            const S_msrOahGroup& msrOpts);
 
     virtual               ~msr2summaryVisitor ();
 

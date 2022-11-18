@@ -72,19 +72,19 @@ class EXP msrSyllable : public msrMeasureElement
                             const S_msrMeasure&           upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const std::string&          syllableStanzaNumber,
                             const Rational&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
-                            S_msrStanza            syllableUpLinkToStanza);
+                            const S_msrStanza&            syllableUpLinkToStanza);
 
     static SMARTP<msrSyllable> create (
                             int                    inputLineNumber,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const std::string&          syllableStanzaNumber,
                             const Rational&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
-                            S_msrStanza            syllableUpLinkToStanza);
+                            const S_msrStanza&            syllableUpLinkToStanza);
 
     SMARTP<msrSyllable> createSyllableNewbornClone (
                             const S_msrPart& containingPart); // JMI
@@ -97,10 +97,10 @@ class EXP msrSyllable : public msrMeasureElement
                             const S_msrMeasure&           upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const std::string&          syllableStanzaNumber,
                             const Rational&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
-                            S_msrStanza            syllableUpLinkToStanza,
+                            const S_msrStanza&            syllableUpLinkToStanza,
                             int                    syllableNextMeasurePuristNumber);
 
   protected:
@@ -113,10 +113,10 @@ class EXP msrSyllable : public msrMeasureElement
                             const S_msrMeasure&           upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
-                            const std::string&     syllableStanzaNumber,
+                            const std::string&          syllableStanzaNumber,
                             const Rational&        syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
-                            S_msrStanza            syllableUpLinkToStanza);
+                            const S_msrStanza&            syllableUpLinkToStanza);
 
     virtual               ~msrSyllable ();
 
@@ -157,7 +157,7 @@ class EXP msrSyllable : public msrMeasureElement
                               { return fSyllableKind; }
 
     // texts std::list
-    const std::list<std::string>&   
+    const std::list<std::string>&
                           getSyllableTextsList ()
                               { return fSyllableTextsList; }
 
@@ -339,7 +339,7 @@ class EXP msrStanza : public msrElement
     // ------------------------------------------------------
 
     void                  appendSyllableToStanza (
-                            S_msrSyllable syllable);
+                            const S_msrSyllable& syllable);
 
     S_msrSyllable         appendRestSyllableToStanza (
                             int             inputLineNumber,

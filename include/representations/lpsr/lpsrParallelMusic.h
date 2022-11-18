@@ -73,7 +73,7 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     // ------------------------------------------------------
 
     void                  appendPartGroupBlockToParallelMusicBLock ( // JMI
-                            S_lpsrPartGroupBlock partGroupBlock)
+                            const S_lpsrPartGroupBlock& partGroupBlock)
                               {
                                 fParallelMusicBLockPartGroupBlocks.push_back (
                                   partGroupBlock);

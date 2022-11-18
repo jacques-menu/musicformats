@@ -39,7 +39,7 @@ class EXP bsrScore : public bsrElement
 
     static SMARTP<bsrScore> create (
                             int            inputLineNumber,
-                            S_msrScore     theMsrScore);
+                            const S_msrScore&     theMsrScore);
 
   protected:
 
@@ -48,7 +48,7 @@ class EXP bsrScore : public bsrElement
 
                           bsrScore (
                             int            inputLineNumber,
-                            S_msrScore     theMsrScore);
+                            const S_msrScore&     theMsrScore);
 
     virtual               ~bsrScore ();
 
@@ -79,7 +79,7 @@ class EXP bsrScore : public bsrElement
                               { fScorePagesList.push_back (page); }
 
     void                  appendTranscriptionNotesElementToScore ( // JMI
-                            S_bsrTranscriptionNotesElement
+                            const S_bsrTranscriptionNotesElement&
                               transcriptionNotesElement)
                               {
                                 fTranscriptionNotes->

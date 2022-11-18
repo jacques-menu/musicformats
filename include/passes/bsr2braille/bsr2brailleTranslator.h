@@ -74,7 +74,7 @@ class EXP bsr2brailleTranslator :
   public:
 
                           bsr2brailleTranslator (
-                            S_bsrScore     bsrScore,
+                            const S_bsrScore&     bsrScore,
                             const S_bsrOahGroup& bsrOpts,
                             std::ostream&       brailleOutputStream);
 

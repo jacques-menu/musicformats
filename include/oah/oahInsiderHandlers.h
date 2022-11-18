@@ -44,10 +44,10 @@ class EXP oahInsiderHandler : public oahHandler
     // ------------------------------------------------------
 
     static SMARTP<oahInsiderHandler> create (
-                            const std::string&      serviceName,
-                            const std::string&      handlerHeader,
-                            const std::string&      handlerDescription,
-                            const std::string&      handlerUsage);
+                            const std::string&           serviceName,
+                            const std::string&           handlerHeader,
+                            const std::string&           handlerDescription,
+                            const std::string&           handlerUsage);
 */
 
   protected:
@@ -56,10 +56,10 @@ class EXP oahInsiderHandler : public oahHandler
     // ------------------------------------------------------
 
                           oahInsiderHandler (
-                            const std::string&      serviceName,
-                            const std::string&      handlerHeader,
-                            const std::string&      handlerDescription,
-                            const std::string&      handlerUsage);
+                            const std::string&           serviceName,
+                            const std::string&           handlerHeader,
+                            const std::string&           handlerDescription,
+                            const std::string&           handlerUsage);
 
     virtual               ~oahInsiderHandler ();
 

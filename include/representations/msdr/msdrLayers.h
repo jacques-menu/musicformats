@@ -79,17 +79,17 @@ class EXP msdrLayer : public smartable
     void                  addClefToLayer (
                             int       inputLineNumber,
                             int       measureNumber,
-                            S_msrClef clef);
+                            const S_msrClef& clef);
 
     void                  addKeyToLayer (
                             int      inputLineNumber,
                             int      measureNumber,
-                            S_msrKey key);
+                            const S_msrKey& key);
 
     void                  addTimeSignatureToLayer (
                             int                inputLineNumber,
                             int                measureNumber,
-                            S_msrTimeSignature timeSignature);
+                            const S_msrTimeSignature& timeSignature);
 
     void                  addNoteToLayer (
                             int       inputLineNumber,

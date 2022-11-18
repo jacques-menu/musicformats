@@ -42,7 +42,7 @@ class EXP oahAtomAlias : public oahAtom
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
-                            S_oahAtom     originalOahAtom);
+                            const S_oahAtom&     originalOahAtom);
 
   protected:
 
@@ -53,7 +53,7 @@ class EXP oahAtomAlias : public oahAtom
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
-                            S_oahAtom     originalOahAtom);
+                            const S_oahAtom&     originalOahAtom);
 
     virtual               ~oahAtomAlias ();
 
@@ -1009,10 +1009,10 @@ class EXP oahTwoBooleansAtom : public oahBooleanAtom
     // ------------------------------------------------------
 
     static SMARTP<oahTwoBooleansAtom> create (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         variableName,
                             Bool&            booleanVariable,
                             const S_oahBooleanAtom& secondBooleanAtom);
 
@@ -1022,10 +1022,10 @@ class EXP oahTwoBooleansAtom : public oahBooleanAtom
     // ------------------------------------------------------
 
                           oahTwoBooleansAtom (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         variableName,
                             Bool&            booleanVariable,
                             const S_oahBooleanAtom& secondBooleanAtom);
 
@@ -1085,10 +1085,10 @@ class EXP oahThreeBooleansAtom : public oahBooleanAtom
     // ------------------------------------------------------
 
     static SMARTP<oahThreeBooleansAtom> create (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         variableName,
                             Bool&            booleanVariable,
                             const S_oahBooleanAtom& secondBooleanAtom,
                             const S_oahBooleanAtom& thirdBooleanAtom);
@@ -1099,10 +1099,10 @@ class EXP oahThreeBooleansAtom : public oahBooleanAtom
     // ------------------------------------------------------
 
                           oahThreeBooleansAtom (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         variableName,
                             Bool&            booleanVariable,
                             const S_oahBooleanAtom& secondBooleanAtom,
                             const S_oahBooleanAtom& thirdBooleanAtom);
@@ -1761,7 +1761,7 @@ class EXP oahFactorizedStringAtom : public oahAtom // JMI UNUSED !!!
     // ------------------------------------------------------
 
     void                  addStringAtom (
-                            S_oahStringAtom stringAtom);
+                            const S_oahStringAtom& stringAtom);
 
     void                  addStringAtomByName (
                             const std::string& name);
@@ -2458,11 +2458,11 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<oahStringToIntMapElementAtom> create (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             std::map<std::string, int>& stringToIntMapVariable);
 
   protected:
@@ -2471,11 +2471,11 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           oahStringToIntMapElementAtom (
-                            const std::string&     longName,
-                            const std::string&     shortName,
-                            const std::string&     description,
-                            const std::string&     valueSpecification,
-                            const std::string&     variableName,
+                            const std::string&          longName,
+                            const std::string&          shortName,
+                            const std::string&          description,
+                            const std::string&          valueSpecification,
+                            const std::string&          variableName,
                             std::map<std::string, int>& stringToIntMapVariable);
 
     virtual               ~oahStringToIntMapElementAtom ();
@@ -2545,11 +2545,11 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<oahStringToStringMapElementAtom> create (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
   protected:
@@ -2558,11 +2558,11 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           oahStringToStringMapElementAtom (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             std::map<std::string, std::string>&  stringToStringMapVariable);
 
     virtual               ~oahStringToStringMapElementAtom ();
@@ -2632,11 +2632,11 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<oahStringToStringMultiMapElementAtom> create (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             std::multimap<std::string, std::string>&  stringToStringMultiMapVariable);
 
   protected:
@@ -2645,11 +2645,11 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           oahStringToStringMultiMapElementAtom (
-                            const std::string&    longName,
-                            const std::string&    shortName,
-                            const std::string&    description,
-                            const std::string&    valueSpecification,
-                            const std::string&    variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             std::multimap<std::string, std::string>&  stringToStringMultiMapVariable);
 
     virtual               ~oahStringToStringMultiMapElementAtom ();
@@ -2926,11 +2926,11 @@ class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<oahLengthUnitKindAtom> create (
-                            const std::string&      longName,
-                            const std::string&      shortName,
-                            const std::string&      description,
-                            const std::string&      valueSpecification,
-                            const std::string&      variableName,
+                            const std::string&           longName,
+                            const std::string&           shortName,
+                            const std::string&           description,
+                            const std::string&           valueSpecification,
+                            const std::string&           variableName,
                             msrLengthUnitKind& lengthUnitKindVariable);
 
   protected:
@@ -2939,11 +2939,11 @@ class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           oahLengthUnitKindAtom (
-                            const std::string&      longName,
-                            const std::string&      shortName,
-                            const std::string&      description,
-                            const std::string&      valueSpecification,
-                            const std::string&      variableName,
+                            const std::string&           longName,
+                            const std::string&           shortName,
+                            const std::string&           description,
+                            const std::string&           valueSpecification,
+                            const std::string&           variableName,
                             msrLengthUnitKind& lengthUnitKindVariable);
 
     virtual               ~oahLengthUnitKindAtom ();

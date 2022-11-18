@@ -189,7 +189,7 @@ class EXP msrStaff : public msrElement
     // rehearsal marks
 
     void                  appendRehearsalMarkToStaff (
-                            S_msrRehearsalMark rehearsalMark);
+                            const S_msrRehearsalMark& rehearsalMark);
 
     // breaks
 
@@ -205,7 +205,7 @@ class EXP msrStaff : public msrElement
     // transposition
 
     void                  appendTranspositionToStaff (
-                            S_msrTransposition transpose);
+                            const S_msrTransposition& transpose);
 
     // voices
 
@@ -297,7 +297,7 @@ class EXP msrStaff : public msrElement
 
     void                  appendMultipleFullBarRestsCloneToStaff (
                             int                       inputLineNumber,
-                            S_msrMultipleFullBarRests multipleFullBarRests);
+                            const S_msrMultipleFullBarRests& multipleFullBarRests);
 
     void                  createBeatRepeatFromItsFirstMeasuresInStaff (
                             int inputLineNumber,
@@ -306,10 +306,10 @@ class EXP msrStaff : public msrElement
 
     void                  appendRepeatCloneToStaff (
                             int         inputLineNumber,
-                            S_msrRepeat repeatCLone);
+                            const S_msrRepeat& repeatCLone);
 
     void                  appendRepeatEndingCloneToStaff (
-                            S_msrRepeatEnding repeatEndingClone);
+                            const S_msrRepeatEnding& repeatEndingClone);
 
     // bar lines
 
@@ -318,23 +318,23 @@ class EXP msrStaff : public msrElement
     // transposition
 
     void                  appendTranspositionToAllStaffVoices ( // JMI
-                            S_msrTransposition transpose);
+                            const S_msrTransposition& transpose);
 
     // scordaturas
 
     void                  appendScordaturaToStaff (
-                            S_msrScordatura scordatura);
+                            const S_msrScordatura& scordatura);
 
     // accordion registration
 
     void                  appendAccordionRegistrationToStaff (
-                            S_msrAccordionRegistration
+                            const S_msrAccordionRegistration&
                               accordionRegistration);
 
     // harp pedals tuning
 
     void                  appendHarpPedalsTuningToStaff (
-                            S_msrHarpPedalsTuning harpPedalsTuning);
+                            const S_msrHarpPedalsTuning& harpPedalsTuning);
 
     // strings
 

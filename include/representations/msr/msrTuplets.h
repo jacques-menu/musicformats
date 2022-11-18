@@ -12,15 +12,14 @@
 #ifndef ___msrTuplets___
 #define ___msrTuplets___
 
-#include "msrTupletElements.h"
-
 #include "msrTypesForwardDeclarations.h"
 
-// #include "msrMeasures.h"
-
+#include "msrMeasures.h"
+#include "msrTuplets.h"
+#include "msrTupletElements.h"
 #include "msrTupletsEnumTypes.h"
-
 #include "msrTupletFactors.h"
+
 
 
 namespace MusicFormats
@@ -37,7 +36,7 @@ class EXP msrTuplet : public msrTupletElement
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
                             const S_msrMeasure&     upLinkToMeasure,
-                            const std::string&      tupletMeasureNumber,
+                            const std::string&           tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
@@ -49,7 +48,7 @@ class EXP msrTuplet : public msrTupletElement
 
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
-                            const std::string&      tupletMeasureNumber,
+                            const std::string&           tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
@@ -71,7 +70,7 @@ class EXP msrTuplet : public msrTupletElement
                           msrTuplet (
                             int                     inputLineNumber,
                             const S_msrMeasure&     upLinkToMeasure,
-                            const std::string&      tupletMeasureNumber,
+                            const std::string&           tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
@@ -169,7 +168,7 @@ class EXP msrTuplet : public msrTupletElement
     S_msrTuplet           fetchTupletUpLinkToTuplet () const;
 
     void                  appendNoteToTuplet (
-                            S_msrNote  note,
+                            const S_msrNote&  note,
                             const S_msrVoice& voice);
 
     void                  appendChordToTuplet (const S_msrChord& chord);

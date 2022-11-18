@@ -84,7 +84,7 @@ class EXP msr2bsrTranslator :
     virtual               ~msr2bsrTranslator ();
 
     S_bsrScore            translateMsrToBsr (
-                            S_msrScore theMsrScore);
+                            const S_msrScore& theMsrScore);
 
   protected:
 
@@ -286,7 +286,7 @@ class EXP msr2bsrTranslator :
     // paper
     // ------------------------------------------------------
     void                      setPaperIndentsIfNeeded (
-                                S_msrScaling scaling);
+                                const S_msrScaling& scaling);
 
     // credits
     // ------------------------------------------------------
@@ -425,7 +425,7 @@ class EXP msr2bsrTranslator :
     // ------------------------------------------------------
 //    S_msrTuplet             fCurrentTupletClone;
  //   Bool                      fOnGoingTuplet;
-    std::stack<S_msrTuplet>        fTupletClonesStack;
+    std::stack<S_msrTuplet>   fTupletClonesStack;
 
 
     // stanzas

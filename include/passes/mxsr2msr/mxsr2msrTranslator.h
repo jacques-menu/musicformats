@@ -544,7 +544,7 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
                           mxsr2msrTranslator (
-                            S_msrScore scoreSkeleton);
+                            const S_msrScore& scoreSkeleton);
 
     virtual               ~mxsr2msrTranslator ();
 
@@ -1321,12 +1321,12 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
     void                      attachPendingHarmoniesToNote (
                                 int        inputLineNumber,
-                                S_msrNote  newNote,
+                                const S_msrNote&  newNote,
                                 const S_msrVoice& voiceToInsertInto);
 
     void                      attachPendingFiguredBassesToNote (
                                 int        inputLineNumber,
-                                S_msrNote  newNote,
+                                const S_msrNote&  newNote,
                                 const S_msrVoice& voiceToInsertInto);
 
     S_msrNote                 createNote (
@@ -1345,7 +1345,7 @@ class EXP mxsr2msrTranslator :
 
     void                      createAStaffChangeIfNecessary (
                                 int        inputLineNumber,
-                                S_msrNote  newNote,
+                                const S_msrNote&  newNote,
                                 const S_msrVoice& voiceToInsertInto);
 
 
@@ -1538,7 +1538,7 @@ class EXP mxsr2msrTranslator :
 
     std::list<S_msrBeam>      fPendingMetronomeBeamsList; // std::stack JMI ???
     void                      attachCurrentMetronomeBeamsToMetronomeNote (
-                                S_msrTempoNote tempoNote);
+                                const S_msrTempo&Note tempoNote);
 
     msrTempoTupletTypeKind    fCurrentTempoTupletTypeKind;
     msrTempoTupletBracketKind fCurrentTempoTupletBracketKind;
@@ -1687,7 +1687,7 @@ class EXP mxsr2msrTranslator :
 
     void                      handleLyricsForNoteAfterNoteItselfIsHandled (
                                 const S_msrVoice& currentVoice,
-                                S_msrNote  newNote);
+                                const S_msrNote&  newNote);
 
     // harmonies handling
     // ------------------------------------------------------
@@ -1697,7 +1697,7 @@ class EXP mxsr2msrTranslator :
     std::list<S_msrHarmony>
                               fPendingHarmoniesList;
     void                      handlePendingHarmonies (
-                                S_msrNote  newNote,
+                                const S_msrNote&  newNote,
                                 const S_msrVoice& voiceToInsertInto);
 
     int                       fCurrentHarmonyInputLineNumber;
@@ -1737,7 +1737,7 @@ class EXP mxsr2msrTranslator :
     std::list<S_msrFiguredBass>
                               fPendingFiguredBassesList;
     void                      handlePendingFiguredBasses (
-                                S_msrNote  newNote,
+                                const S_msrNote&  newNote,
                                 const S_msrVoice& voiceToInsertInto);
 
     Bool                      fOnGoingFiguredBass;
@@ -1815,28 +1815,28 @@ class EXP mxsr2msrTranslator :
     S_msrBarLine              fCurrentRepeatEndingStartBarLine; // std::stack ??? JMI
 
     void                      handleRepeatStart (
-                                S_msrBarLine& barLine);
+                                const S_msrBarLine&& barLine);
 
     void                      handleRepeatEnd (
-                                S_msrBarLine& barLine);
+                                const S_msrBarLine&& barLine);
 
     void                      handleRepeatEndingStart (
-                                S_msrBarLine& barLine);
+                                const S_msrBarLine&& barLine);
 
-/* JMI
+/* JMI v0.9.66
     void                      handleRepeatHookedEndingStart (
                                 S_barline     elt,
-                                S_msrBarLine& barLine);
+                                const S_msrBarLine&& barLine);
 */
     void                      handleRepeatHookedEndingEnd (
-                                S_msrBarLine& barLine);
-    /* JMI
+                                const S_msrBarLine&& barLine);
+/* JMI v0.9.66
     void                      handleRepeatHooklessEndingStart (
                                 S_barline     elt,
-                                S_msrBarLine& barLine);
+                                const S_msrBarLine&& barLine);
 */
     void                      handleRepeatHooklessEndingEnd (
-                                S_msrBarLine& barLine);
+                                const S_msrBarLine&& barLine);
 
     // notes/rests handling
     // ------------------------------------------------------
@@ -1956,7 +1956,7 @@ class EXP mxsr2msrTranslator :
     // notes
     void                      handleNoteItself (
                                 int        inputLineNumber,
-                                S_msrNote  newNote);
+                                const S_msrNote&  newNote);
 
     // detailed notes handling
     void                      handleNonChordNorTupletNoteOrRest (
@@ -2063,7 +2063,7 @@ class EXP mxsr2msrTranslator :
 																const S_msrNote&  note,
 																const S_msrChord& chord);
 //    void                      copyNoteSlursToChord (
-//                                S_msrNote note, S_msrChord chord);
+//                                const S_msrNote& note, S_msrChord chord);
     void                      appendNoteSlursLinksToChord (
 																const S_msrNote&  note,
 																const S_msrChord& chord);
@@ -2098,7 +2098,7 @@ class EXP mxsr2msrTranslator :
 																const S_msrChord& chord);
 
 //    void                      copyNoteGraceNotesGroupsToChord (
-//                                S_msrNote note, S_msrChord chord);
+//                                const S_msrNote& note, S_msrChord chord);
     void                      addNoteGraceNotesGroupsLinksToChord (
 																const S_msrNote&  note,
 																const S_msrChord& chord);
@@ -2132,7 +2132,7 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote& note);
 
 //    void                      attachCurrentTechnicalsToChord ( // JMI
- //                               S_msrChord chord);
+ //                               const S_msrChord& chord);
 
     void                      copyNoteTechnicalsToChord (
 																const S_msrNote&  note,
@@ -2156,7 +2156,7 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote& note);
 
 //    void                      attachCurrentOrnamentsToChord ( // JMI
- //                               S_msrChord chord);
+ //                               const S_msrChord& chord);
 
     void                      copyNoteOrnamentsToChord (
 																const S_msrNote&  note,
@@ -2248,7 +2248,7 @@ class EXP mxsr2msrTranslator :
     S_msrChord                createChordFromItsFirstNote (
                                 int                  inputLineNumber,
                                 const S_msrVoice&           voice,
-                                S_msrNote            chordFirstNote,
+                                const S_msrNote&            chordFirstNote,
                                 msrNoteKind noteKind);
 
 /* JMI
