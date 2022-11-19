@@ -175,16 +175,20 @@ class EXP msrStaff : public msrElement
 
     // clef, key, time signature
 
-    void                  appendClefToStaff (S_msrClef clef);
+    void                  appendClefToStaff (
+                            const S_msrClef& clef);
 
     void                  appendKeyToStaff (S_msrKey  key);
 
-    void                  appendTimeSignatureToStaff (S_msrTimeSignature timeSignature);
-    void                  appendTimeSignatureToStaffClone (S_msrTimeSignature timeSignature);
+    void                  appendTimeSignatureToStaff (
+                            const S_msrTimeSignature& timeSignature);
+    void                  appendTimeSignatureToStaffClone (
+                            const S_msrTimeSignature& timeSignature);
 
     // tempo
 
-    void                  appendTempoToStaff (S_msrTempo tempo);
+    void                  appendTempoToStaff (
+                            const S_msrTempo& tempo);
 
     // rehearsal marks
 
@@ -193,8 +197,10 @@ class EXP msrStaff : public msrElement
 
     // breaks
 
-    void                  appendLineBreakToStaff (S_msrLineBreak lineBreak);
-    void                  appendPageBreakToStaff (S_msrPageBreak pageBreak);
+    void                  appendLineBreakToStaff (
+                            const S_msrLineBreak& lineBreak);
+    void                  appendPageBreakToStaff (
+                            const S_msrPageBreak& pageBreak);
 
     // dal segno
 
@@ -313,7 +319,8 @@ class EXP msrStaff : public msrElement
 
     // bar lines
 
-    void                  appendBarLineToStaff (S_msrBarLine barLine);
+    void                  appendBarLineToStaff (
+                            const S_msrBarLine& barLine);
 
     // transposition
 
@@ -442,17 +449,20 @@ class EXP msrStaff : public msrElement
 
     // clef, key, time signature
 
-    void                  setStaffCurrentClef (S_msrClef clef);
+    void                  setStaffCurrentClef (
+                            const S_msrClef& clef);
 
     S_msrClef             getStaffCurrentClef () const
                               { return fStaffCurrentClef; }
 
-    void                  setStaffCurrentKey (S_msrKey key);
+    void                  setStaffCurrentKey (
+                            const S_msrKey& key);
 
     S_msrKey              getStaffCurrentKey  () const
                               { return fStaffCurrentKey; }
 
-    void                  setStaffCurrentTime (S_msrTimeSignature timeSignature);
+    void                  setStaffCurrentTime (
+                            const S_msrTimeSignature& timeSignature);
 
     S_msrTimeSignature    getStaffCurrentTime () const
                               { return fStaffCurrentTimeSignature; }
@@ -504,8 +514,8 @@ class EXP msrStaff : public msrElement
 
     // transposition
 
-    S_msrTransposition        getStaffCurrentTranspose () const
-                              { return fStaffCurrentTranspose; }
+    S_msrTransposition        getStaffCurrentTransposition () const
+                              { return fStaffCurrentTransposition; }
 
     // voices ordering in staves
 
@@ -545,7 +555,7 @@ class EXP msrStaff : public msrElement
 
     // transposition
 
-    S_msrTransposition    fStaffCurrentTranspose;
+    S_msrTransposition    fStaffCurrentTransposition;
 };
 typedef SMARTP<msrStaff> S_msrStaff;
 EXP std::ostream& operator << (std::ostream& os, const S_msrStaff& elt);

@@ -936,17 +936,20 @@ class EXP msr2mxsrTranslator :
 
     // stems
     // ------------------------------------------------------
-    void                      appendStemToNote (S_msrNote theMsrNote);
+    void                      appendStemToNote (
+                                const S_msrNote& theMsrNote);
 
     // beams
     // ------------------------------------------------------
-    void                      appendBeamsToNote (S_msrNote theMsrNote);
+    void                      appendBeamsToNote (
+                                const S_msrNote& theMsrNote);
 
     // note notations
     // ------------------------------------------------------
     Sxmlelement               fCurrentNoteNotationsElement;
 
-    void                      appendNoteNotationsToNote (S_msrNote theMsrNote);
+    void                      appendNoteNotationsToNote (
+                                const S_msrNote& theMsrNote);
 
     void                      appendToNoteNotations (
                                 Sxmlelement      elem,
@@ -954,13 +957,15 @@ class EXP msr2mxsrTranslator :
 
     // lyrics
     // ------------------------------------------------------
-    void                      appendNoteLyricsToNote (S_msrNote theMsrNote);
+    void                      appendNoteLyricsToNote (
+                                const S_msrNote& theMsrNote);
 
     // note notations ornaments
     // ------------------------------------------------------
     Sxmlelement               fCurrentNoteNotationsOrnamentsElement;
 
-    void                      appendNoteOrnaments (S_msrNote theMsrNote);
+    void                      appendNoteOrnaments (
+                                const S_msrNote& theMsrNote);
 
     void                      appendToNoteNotationsOrnaments (
                                 Sxmlelement      elem,
@@ -970,7 +975,8 @@ class EXP msr2mxsrTranslator :
     // ------------------------------------------------------
     Sxmlelement               fCurrentNoteNotationsArticulationsElement;
 
-    void                      appendNoteArticulations (S_msrNote theMsrNote);
+    void                      appendNoteArticulations (
+                                const S_msrNote& theMsrNote);
 
     void                      appendToNoteNotationsArticulations (
                                 Sxmlelement      elem,
@@ -981,10 +987,14 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fCurrentNoteNotationsTechnicalsElement;
 
-    void                      appendNoteTechnicals (S_msrNote theMsrNote);
-    void                      appendNoteTechnicalWithIntegers (S_msrNote theMsrNote);
-    void                      appendNoteTechnicalWithFloats (S_msrNote theMsrNote);
-    void                      appendNoteTechnicalWithStrings (S_msrNote theMsrNote);
+    void                      appendNoteTechnicals (
+                                const S_msrNote& theMsrNote);
+    void                      appendNoteTechnicalWithIntegers (
+                                const S_msrNote& theMsrNote);
+    void                      appendNoteTechnicalWithFloats (
+                                const S_msrNote& theMsrNote);
+    void                      appendNoteTechnicalWithStrings (
+                                const S_msrNote& theMsrNote);
 
     void                      appendToNoteNotationsTechnicals (
                                 Sxmlelement      elem,
@@ -993,12 +1003,14 @@ class EXP msr2mxsrTranslator :
     // note ties
     // ------------------------------------------------------
 
-    void                      appendNoteTieIfAny (S_msrNote theMsrNote);
+    void                      appendNoteTieIfAny (
+                                const S_msrNote& theMsrNote);
 
     //note slurs
     // ------------------------------------------------------
 
-    void                      appendNoteSlursIfAny (S_msrNote theMsrNote);
+    void                      appendNoteSlursIfAny (
+                                const S_msrNote& theMsrNote);
 
 /*
     // glissandos

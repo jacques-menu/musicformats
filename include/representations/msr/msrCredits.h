@@ -203,7 +203,8 @@ class EXP msrCredit : public msrElement
     int                   getCreditPageNumber () const
                               { return fCreditPageNumber; }
 
-    void                   setCreditTypeKind (msrCreditTypeKind creditTypeKind)
+    void                  setCreditTypeKind (
+                            msrCreditTypeKind creditTypeKind)
                               { fCreditTypeKind = creditTypeKind; }
 
     msrCreditTypeKind     getCreditTypeKind () const
@@ -247,7 +248,7 @@ class EXP msrCredit : public msrElement
 
     int                   fCreditPageNumber;
 
-    msrCreditTypeKind      fCreditTypeKind;
+    msrCreditTypeKind     fCreditTypeKind;
 
     std::vector<S_msrCreditWords>
                           fCreditWordsList;

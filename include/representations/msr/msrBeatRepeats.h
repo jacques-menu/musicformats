@@ -274,7 +274,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
 
     // beatRepeat pattern
     void                  setBeatRepeatPattern (
-                            const S_msrBeatRepeat&Pattern
+                            const S_msrBeatRepeatPattern&
                               beatRepeatPattern);
 
     S_msrBeatRepeatPattern
@@ -283,7 +283,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
 
     // measures repeat replicas
     void                  setBeatRepeatReplicas (
-                            const S_msrBeatRepeat&Replicas
+                            const S_msrBeatRepeatReplicas&
                               beatRepeatReplicas);
 
     S_msrBeatRepeatReplicas

@@ -319,7 +319,7 @@ class EXP msrChord : public msrTupletElement
                             const S_msrChordGraceNotesGroupLink&
                                     chordChordGraceNotesGroupLinkBefore);
 
-    S_msrChordGraceNotesGroupLink
+    const S_msrChordGraceNotesGroupLink&
                           getChordGraceNotesGroupLinkBefore () const
                               { return fChordGraceNotesGroupLinkBefore; }
 
@@ -328,7 +328,7 @@ class EXP msrChord : public msrTupletElement
                             const S_msrChordGraceNotesGroupLink&
                                     chordChordGraceNotesGroupLinkAfter);
 
-    S_msrChordGraceNotesGroupLink
+    const S_msrChordGraceNotesGroupLink&
                           getChordGraceNotesGroupLinkAfter () const
                               { return fChordGraceNotesGroupLinkAfter; }
 
@@ -385,13 +385,16 @@ class EXP msrChord : public msrTupletElement
     S_msrNote             fetchChordFirstNonGraceNote () const;
 
     // articulations
-    void                  appendArticulationToChord (const S_msrArticulation& art);
+    void                  appendArticulationToChord (
+                            const S_msrArticulation& art);
 
     // spanners
-    void                  appendSpannerToChord (const S_msrSpanner& span);
+    void                  appendSpannerToChord (
+                            const S_msrSpanner& span);
 
     // technicals
-    void                  appendTechnicalToChord (const S_msrTechnical& tech);
+    void                  appendTechnicalToChord (
+                            const S_msrTechnical& tech);
 
     void                  appendTechnicalWithIntegerToChord (
                             const S_msrTechnicalWithInteger& tech);
@@ -403,16 +406,20 @@ class EXP msrChord : public msrTupletElement
                             const S_msrTechnicalWithString& tech);
 
     // ornaments
-    void                  appendOrnamentToChord (const S_msrOrnament& orn);
+    void                  appendOrnamentToChord (
+                            const S_msrOrnament& orn);
 
     // glissandos
-    void                  appendGlissandoToChord (const S_msrGlissando& gliss);
+    void                  appendGlissandoToChord (
+                            const S_msrGlissando& gliss);
 
     // slides
-    void                  appendSlideToChord (const S_msrSlide& slide);
+    void                  appendSlideToChord (
+                            const S_msrSlide& slide);
 
     // dynamics
-    void                  appendDynamicToChord (const S_msrDynamic& dynamic)
+    void                  appendDynamicToChord (
+                            const S_msrDynamic& dynamic)
                               { fChordDynamics.push_back (dynamic); }
 
     // other dynamics
@@ -421,7 +428,8 @@ class EXP msrChord : public msrTupletElement
                               { fChordOtherDynamics.push_back (otherDynamic); }
 
     // slashes
-    void                  appendSlashToChord (const S_msrSlash& slash)
+    void                  appendSlashToChord (
+                            const S_msrSlash& slash)
                               { fChordSlashes.push_back (slash); }
 
     // cresc/decresc
@@ -430,26 +438,32 @@ class EXP msrChord : public msrTupletElement
                               { fChordCrescDecrescs.push_back (crescDecresc); }
 
     // wedges
-    void                  appendWedgeToChord (const S_msrWedge& wedge)
+    void                  appendWedgeToChord (
+                            const S_msrWedge& wedge)
                               { fChordWedges.push_back (wedge); }
 
     // segnos
-    void                  appendSegnoToChord (const S_msrSegno& segno)
+    void                  appendSegnoToChord (
+                            const S_msrSegno& segno)
                               { fChordSegnos.push_back (segno); }
 
     // dal segnos
-    void                  appendDalSegnoToChord (const S_msrDalSegno& dalSegno);
+    void                  appendDalSegnoToChord (
+                            const S_msrDalSegno& dalSegno);
 
     // codas
-    void                  appendCodaToChord (const S_msrCoda& coda)
+    void                  appendCodaToChord (
+                              const S_msrCoda& coda)
                               { fChordCodas.push_back (coda); }
 
     // words
-    void                  appendWordsToChord (const S_msrWords& words)
+    void                  appendWordsToChord (
+                            const S_msrWords& words)
                               { fChordWords.push_back (words); }
 
     // ties
-    void                  appendTieToChord (const S_msrTie& tie)
+    void                  appendTieToChord (
+                            const S_msrTie& tie)
                               { fChordTies.push_back (tie); }
 
     // slurs
@@ -458,7 +472,8 @@ class EXP msrChord : public msrTupletElement
                             const S_msrChordSlurLink& chordSlurLink);
 
     // stems
-    void                  appendStemToChord (const S_msrStem& stem);
+    void                  appendStemToChord (
+                            const S_msrStem& stem);
 
     // beams
 //    void                  appendBeamToChord (const S_msrBeam& beam);
@@ -466,11 +481,13 @@ class EXP msrChord : public msrTupletElement
                             const S_msrChordBeamLink& chordBeamLink);
 
     // ligatures
-    void                  appendLigatureToChord (const S_msrLigature& ligature)
+    void                  appendLigatureToChord (
+                            const S_msrLigature& ligature)
                               { fChordLigatures.push_back (ligature); }
 
     // pedals
-    void                  appendPedalToChord (const S_msrPedal& pedal)
+    void                  appendPedalToChord (
+                            const S_msrPedal& pedal)
                               { fChordPedals.push_back (pedal);  }
 
     // tuplet members
@@ -574,10 +591,12 @@ class EXP msrChord : public msrTupletElement
                           fChordTechnicalWithStrings;
 
     // ornaments
-    std::list<S_msrOrnament>   fChordOrnaments;
+    std::list<S_msrOrnament>
+                          fChordOrnaments;
 
     // glissandos
-    std::list<S_msrGlissando>  fChordGlissandos;
+    std::list<S_msrGlissando>
+                          fChordGlissandos;
 
     // slides
     std::list<S_msrSlide> fChordSlides;
@@ -615,7 +634,7 @@ class EXP msrChord : public msrTupletElement
     std::list<S_msrWords> fChordWords;
 
     // ties
-    std::list<S_msrTie>        fChordTies;
+    std::list<S_msrTie>   fChordTies;
 
     // slurs
     std::list<S_msrChordSlurLink>

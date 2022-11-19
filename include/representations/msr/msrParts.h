@@ -298,9 +298,11 @@ class EXP msrPart : public msrPartGroupElement
 
     // clef, key, time signature
 
-    void                  appendClefToPart (S_msrClef clef);
+    void                  appendClefToPart (
+                            const S_msrClef& clef);
 
-    void                  appendKeyToPart (S_msrKey key);
+    void                  appendKeyToPart (
+                            const S_msrKey& key);
 
     void                  appendTimeSignatureToPart (
                             const S_msrTimeSignature& timeSignature);
@@ -309,7 +311,8 @@ class EXP msrPart : public msrPartGroupElement
 
     // tempo
 
-    void                  appendTempoToPart (S_msrTempo tempo);
+    void                  appendTempoToPart (
+                            const S_msrTempo& tempo);
 
     // rehearsal marks
 
@@ -330,7 +333,8 @@ class EXP msrPart : public msrPartGroupElement
 
     // bar lines
 
-    void                  appendBarLineToPart (S_msrBarLine barLine);
+    void                  appendBarLineToPart (
+                            const S_msrBarLine& barLine);
 
     void                  insertHiddenMeasureAndBarLineInPartClone (
                             int             inputLineNumber,
@@ -338,8 +342,10 @@ class EXP msrPart : public msrPartGroupElement
 
     // breaks
 
-    void                  appendLineBreakToPart (S_msrLineBreak lineBreak);
-    void                  appendPageBreakToPart (S_msrPageBreak pageBreak);
+    void                  appendLineBreakToPart (
+                            const S_msrLineBreak& lineBreak);
+    void                  appendPageBreakToPart (
+                            const S_msrPageBreak& pageBreak);
 
     // repeats
 
@@ -372,7 +378,7 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrRepeat& repeatCLone);
 
     void                  appendRepeatEndingCloneToPart (
-                            const S_msrRepeatEnding& repeatEndingCLone);
+                            const S_msrRepeatEnding& repeatEndingClone);
 
     // multiple full-bar rests
 
@@ -627,7 +633,7 @@ class EXP msrPart : public msrPartGroupElement
                                   measureNumber;
                               }
 
-    const std::string          getPartCurrentMeasureNumber () const
+    const std::string     getPartCurrentMeasureNumber () const
                               { return fPartCurrentMeasureNumber; }
 
     // clef, key, time signature
@@ -638,7 +644,8 @@ class EXP msrPart : public msrPartGroupElement
     S_msrKey              getPartCurrentKey  () const
                               { return fPartCurrentKey; }
 
-    void                  setPartCurrentTime (S_msrTimeSignature timeSignature)
+    void                  setPartCurrentTime (
+                            const S_msrTimeSignature& timeSignature)
                               { fPartCurrentTimeSignature = time; }
 
     S_msrTimeSignature    getPartCurrentTime () const

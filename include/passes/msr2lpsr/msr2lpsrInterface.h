@@ -25,12 +25,12 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 EXP extern S_lpsrScore translateMsrToLpsr (
-  S_msrScore          originalMsrScore,
-  S_msrOahGroup       msrOpts,
-  S_lpsrOahGroup      lpsrOpts,
-  std::string         passNumber,
-  std::string         passDescription,
-  S_mfcMultiComponent multiComponent);
+  const S_msrScore&          originalMsrScore,
+  const S_msrOahGroup&       msrOpts,
+  const S_lpsrOahGroup&      lpsrOpts,
+  std::string                passNumber,
+  std::string                passDescription,
+  const S_mfcMultiComponent& multiComponent);
 
 
 }
