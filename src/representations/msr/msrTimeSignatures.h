@@ -251,7 +251,8 @@ class EXP msrTimeSignature : public msrMeasureElement
     // public services
     // ------------------------------------------------------
 
-    Bool                  isEqualTo (S_msrTimeSignature otherTimeSignature) const;
+    Bool                  isEqualTo (
+                            S_msrTimeSignature otherTimeSignature) const;
 
     void                  appendTimeSignatureItem (
                             const S_msrTimeSignatureItem& timeSignatureItem);

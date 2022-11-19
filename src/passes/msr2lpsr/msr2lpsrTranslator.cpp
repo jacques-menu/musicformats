@@ -5140,7 +5140,7 @@ void msr2lpsrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
 #endif
 
   if (fOnGoingChord) {
-    S_msrChordGraceNotesGroupLink
+    const S_msrChordGraceNotesGroupLink&
       chordChordGraceNotesGroupLink =
         msrChordGraceNotesGroupLink::create (
           elt->getInputLineNumber (),
@@ -7195,7 +7195,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMidiTempo& elt)
 void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
   S_msrPart            partClone,
   const S_msrVoice&           voiceClone,
-  S_msrGraceNotesGroup skipGraceNotesGroup)
+  const S_msrGraceNotesGroup& skipGraceNotesGroup)
 {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {

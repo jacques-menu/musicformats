@@ -410,7 +410,7 @@ void msrChord::setChordDisplayWholeNotes (
 
 void msrChord::setChordGraceNotesGroupLinkBefore (
   int     inputLineNumber,
-  S_msrChordGraceNotesGroupLink
+  const S_msrChordGraceNotesGroupLink&
           chordChordGraceNotesGroupLinkBefore)
 {
 #ifdef TRACING_IS_ENABLED
@@ -431,7 +431,7 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
 
 void msrChord::setChordGraceNotesGroupLinkAfter (
   int     inputLineNumber,
-  S_msrChordGraceNotesGroupLink
+  const S_msrChordGraceNotesGroupLink&
           chordChordGraceNotesGroupLinkAfter)
 {
 #ifdef TRACING_IS_ENABLED
@@ -536,7 +536,7 @@ void msrChord::setChordMembersMeasurePosition (
 }
 
 void msrChord::addFirstNoteToChord (
-  S_msrNote  note,
+  const S_msrNote&  note,
   const S_msrVoice& voice)
 {
 #ifdef TRACING_IS_ENABLED
@@ -593,7 +593,7 @@ void msrChord::addFirstNoteToChord (
 }
 
 void msrChord::addAnotherNoteToChord (
-  S_msrNote  note,
+  const S_msrNote&  note,
   const S_msrVoice& voice)
 {
 #ifdef TRACING_IS_ENABLED
@@ -652,7 +652,8 @@ S_msrNote msrChord::fetchChordFirstNonGraceNote () const
   return result;
 }
 
-void msrChord::appendDalSegnoToChord (const S_msrDalSegno& dalSegno)
+void msrChord::appendDalSegnoToChord (
+  const S_msrDalSegno& dalSegno)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
@@ -668,7 +669,8 @@ void msrChord::appendDalSegnoToChord (const S_msrDalSegno& dalSegno)
   fChordDalSegnos.push_back (dalSegno);
 }
 
-void msrChord::appendArticulationToChord (const S_msrArticulation& art)
+void msrChord::appendArticulationToChord (
+  const S_msrArticulation& art)
 {
   msrArticulationKind
     articulationKind =
@@ -694,7 +696,8 @@ void msrChord::appendArticulationToChord (const S_msrArticulation& art)
   fChordArticulations.push_back (art);
 }
 
-void msrChord::appendSpannerToChord (const S_msrSpanner& span)
+void msrChord::appendSpannerToChord (
+  const S_msrSpanner& span)
 {
   msrSpannerKind
     spannerKind =
@@ -722,7 +725,8 @@ void msrChord::appendSpannerToChord (const S_msrSpanner& span)
   fChordSpanners.push_back (span);
 }
 
-void msrChord::setChordSingleTremolo (S_msrSingleTremolo trem)
+void msrChord::setChordSingleTremolo (
+  const S_msrSingleTremolo& trem)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
@@ -737,7 +741,8 @@ void msrChord::setChordSingleTremolo (S_msrSingleTremolo trem)
   fChordSingleTremolo = trem;
 }
 
-void msrChord::appendTechnicalToChord (const S_msrTechnical& tech)
+void msrChord::appendTechnicalToChord (
+  const S_msrTechnical& tech)
 {
   msrTechnicalKind
     technicalKind =
@@ -769,7 +774,7 @@ void msrChord::appendTechnicalToChord (const S_msrTechnical& tech)
 }
 
 void msrChord::appendTechnicalWithIntegerToChord (
-  S_msrTechnicalWithInteger tech)
+  const S_msrTechnicalWithInteger& tech)
 {
   msrTechnicalWithIntegerKind
     technicalWithIntegerKind =
@@ -801,7 +806,7 @@ void msrChord::appendTechnicalWithIntegerToChord (
 }
 
 void msrChord::appendTechnicalWithFloatToChord (
-  S_msrTechnicalWithFloat tech)
+  const S_msrTechnicalWithFloat& tech)
 {
   msrTechnicalWithFloatKind
     technicalWithFloatKind =
@@ -833,7 +838,7 @@ void msrChord::appendTechnicalWithFloatToChord (
 }
 
 void msrChord::appendTechnicalWithStringToChord (
-  S_msrTechnicalWithString tech)
+  const S_msrTechnicalWithString& tech)
 {
   msrTechnicalWithStringKind
     technicalWithStringKind =
@@ -864,7 +869,8 @@ void msrChord::appendTechnicalWithStringToChord (
   fChordTechnicalWithStrings.push_back (tech);
 }
 
-void msrChord::appendOrnamentToChord (const S_msrOrnament& orn)
+void msrChord::appendOrnamentToChord (
+  const S_msrOrnament& orn)
 {
   msrOrnamentKind
     ornamentKind =
@@ -890,7 +896,8 @@ void msrChord::appendOrnamentToChord (const S_msrOrnament& orn)
   fChordOrnaments.push_back (orn);
 }
 
-void msrChord::appendGlissandoToChord (const S_msrGlissando& gliss)
+void msrChord::appendGlissandoToChord (
+  const S_msrGlissando& gliss)
 {
   msrGlissandoTypeKind
     glissandoTypeKind =
@@ -916,7 +923,8 @@ void msrChord::appendGlissandoToChord (const S_msrGlissando& gliss)
   fChordGlissandos.push_back (gliss);
 }
 
-void msrChord::appendSlideToChord (const S_msrSlide& slide)
+void msrChord::appendSlideToChord (
+  const S_msrSlide& slide)
 {
   msrSlideTypeKind
     slideTypeKind =
@@ -946,7 +954,8 @@ void msrChord::appendSlideToChord (const S_msrSlide& slide)
   fChordSlides.push_back (slide);
 }
 
-void msrChord::appendChordSlurLinkToChord (S_msrChordSlurLink chordSlurLink)
+void msrChord::appendChordSlurLinkToChord (
+  const S_msrChordSlurLink& chordSlurLink)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
@@ -960,7 +969,8 @@ void msrChord::appendChordSlurLinkToChord (S_msrChordSlurLink chordSlurLink)
   fChordSlurLinks.push_back (chordSlurLink);
 }
 
-void msrChord::appendStemToChord (const S_msrStem& stem)
+void msrChord::appendStemToChord (
+  const S_msrStem& stem)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStems ()) {
@@ -1015,7 +1025,8 @@ void msrChord::appendBeamToChord (const S_msrBeam& beam)
 }
 */
 
-void msrChord::appendChordBeamLinkToChord (S_msrChordBeamLink chordBeamLink)
+void msrChord::appendChordBeamLinkToChord (
+  const S_msrChordBeamLink& chordBeamLink)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
@@ -3125,8 +3136,8 @@ std::ostream& operator << (std::ostream& os, const S_msrChord& elt)
 //______________________________________________________________________________
 S_msrChordBeamLink msrChordBeamLink::create (
   int        inputLineNumber,
-  S_msrBeam  originalBeam,
-  S_msrChord upLinkToChord)
+  const S_msrBeam&  originalBeam,
+  const S_msrChord& upLinkToChord)
 {
   msrChordBeamLink* o =
     new msrChordBeamLink (
@@ -3139,8 +3150,8 @@ S_msrChordBeamLink msrChordBeamLink::create (
 
 msrChordBeamLink::msrChordBeamLink (
   int        inputLineNumber,
-  S_msrBeam  originalBeam,
-  S_msrChord upLinkToChord)
+  const S_msrBeam&  originalBeam,
+  const S_msrChord& upLinkToChord)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -3346,8 +3357,8 @@ std::ostream& operator << (std::ostream& os, const S_msrChordBeamLink& elt)
 //______________________________________________________________________________
 S_msrChordSlurLink msrChordSlurLink::create (
   int        inputLineNumber,
-  S_msrSlur  originalSlur,
-  S_msrChord upLinkToChord)
+  const S_msrSlur&  originalSlur,
+  const S_msrChord& upLinkToChord)
 {
   msrChordSlurLink* o =
     new msrChordSlurLink (
@@ -3360,8 +3371,8 @@ S_msrChordSlurLink msrChordSlurLink::create (
 
 msrChordSlurLink::msrChordSlurLink (
   int        inputLineNumber,
-  S_msrSlur  originalSlur,
-  S_msrChord upLinkToChord)
+  const S_msrSlur&  originalSlur,
+  const S_msrChord& upLinkToChord)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -3567,8 +3578,8 @@ std::ostream& operator << (std::ostream& os, const S_msrChordSlurLink& elt)
 //______________________________________________________________________________
 S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::create (
   int                  inputLineNumber,
-  S_msrGraceNotesGroup originalGraceNotesGroup,
-  S_msrChord           upLinkToChord)
+  const S_msrGraceNotesGroup& originalGraceNotesGroup,
+  const S_msrChord&           upLinkToChord)
 {
   msrChordGraceNotesGroupLink* o =
     new msrChordGraceNotesGroupLink (
@@ -3581,8 +3592,8 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::create (
 
 msrChordGraceNotesGroupLink::msrChordGraceNotesGroupLink (
   int                  inputLineNumber,
-  S_msrGraceNotesGroup originalGraceNotesGroup,
-  S_msrChord           upLinkToChord)
+  const S_msrGraceNotesGroup& originalGraceNotesGroup,
+  const S_msrChord&           upLinkToChord)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -3625,7 +3636,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
     "containingVoice is null");
 */
 
-  S_msrChordGraceNotesGroupLink
+  const S_msrChordGraceNotesGroupLink&
     newbornClone =
       msrChordGraceNotesGroupLink::create (
         fInputLineNumber,

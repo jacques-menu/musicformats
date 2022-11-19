@@ -240,14 +240,14 @@ std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroupCont
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::create (
   int          inputLineNumber,
-  S_msrElement afterGraceNotesGroupElement,
+  const S_msrElement& afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
   const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)
 {
@@ -263,7 +263,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::create (
 
 msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
   int          inputLineNumber,
-  S_msrElement afterGraceNotesGroupElement,
+  const S_msrElement& afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
   const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)
     : msrElement (inputLineNumber)
@@ -309,7 +309,7 @@ S_msrPart msrAfterGraceNotesGroup::fetchAfterGraceNotesGroupUpLinkToPart () cons
 }
 
 S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNewbornClone (
-  S_msrNote  noteClone,
+  const S_msrNote&  noteClone,
   const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
@@ -466,7 +466,7 @@ std::ostream& operator << (std::ostream& os, const S_msrAfterGraceNotesGroup& el
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

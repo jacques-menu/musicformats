@@ -28,7 +28,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 msr2namesVisitor::msr2namesVisitor (
-  S_msrOahGroup& msrOpts)
+  const S_msrOahGroup& msrOpts)
 {
   fMsrOahGroup = msrOpts;
 

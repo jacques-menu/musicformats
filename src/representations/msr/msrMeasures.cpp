@@ -1622,7 +1622,7 @@ void msrMeasure::setMeasureKind (
 }
 
 void msrMeasure::appendPrintLayoutToMeasure (
-  S_msrPrintLayout printLayout)
+  const S_msrPrintLayout& printLayout)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
@@ -1645,7 +1645,8 @@ void msrMeasure::appendPrintLayoutToMeasure (
   fMeasurePrintLayout = printLayout;
 }
 
-void msrMeasure::appendClefToMeasure (S_msrClef clef)
+void msrMeasure::appendClefToMeasure (
+  const S_msrClef& clef)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
@@ -1665,7 +1666,8 @@ void msrMeasure::appendClefToMeasure (S_msrClef clef)
   appendElementToMeasure (clef);
 }
 
-void msrMeasure::appendKeyToMeasure (S_msrKey key)
+void msrMeasure::appendKeyToMeasure (
+  const S_msrKey& key)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
@@ -1686,7 +1688,7 @@ void msrMeasure::appendKeyToMeasure (S_msrKey key)
 }
 
 void msrMeasure::appendTimeSignatureToMeasure (
-  S_msrTimeSignature timeSignature)
+  const S_msrTimeSignature& timeSignature)
 {
   // sanity check
   mfAssert (
@@ -1732,7 +1734,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
 }
 
 void msrMeasure::appendTimeSignatureToMeasureClone (
-  S_msrTimeSignature timeSignature)
+  const S_msrTimeSignature& timeSignature)
 {
   // sanity check
   mfAssert (
@@ -1812,7 +1814,7 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
 }
 
 void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
-  S_msrTimeSignature timeSignature)
+  const S_msrTimeSignature& timeSignature)
 {
   // sanity check
   mfAssert (
@@ -1948,7 +1950,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
 }
 
 void msrMeasure::appendTranspositionToMeasure (
-  S_msrTransposition transpose)
+  const S_msrTransposition& transposition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
@@ -1959,8 +1961,8 @@ void msrMeasure::appendTranspositionToMeasure (
           getSegmentUpLinkToVoice ();
 
     gLogStream <<
-      "Appending transpose " <<
-      transpose->asShortString () <<
+      "Appending transposition " <<
+      transposition->asShortString () <<
       " to measure " <<
       this->asShortString () <<
       " in voice \"" <<
@@ -1971,7 +1973,7 @@ void msrMeasure::appendTranspositionToMeasure (
 #endif
 
   // append it to the measure elements list
-  appendElementToMeasure (transpose);
+  appendElementToMeasure (transposition);
 }
 
 void msrMeasure::printMeasurePendingMeasureElementsList ()
@@ -2007,7 +2009,8 @@ void msrMeasure::printMeasurePendingMeasureElementsList ()
     std::endl << std::endl;
 }
 
-void msrMeasure::appendBarLineToMeasure (S_msrBarLine barLine)
+void msrMeasure::appendBarLineToMeasure (
+  const S_msrBarLine& barLine)
 {
   // fetch the voice
   S_msrVoice
@@ -2063,50 +2066,57 @@ void msrMeasure::appendBarLineToMeasure (S_msrBarLine barLine)
   fMeasureElementsList.push_back (barLine);
 }
 
-void msrMeasure::prependBarLineToMeasure (S_msrBarLine barLine)
+void msrMeasure::prependBarLineToMeasure (
+  const S_msrBarLine& barLine)
 {
   // append it to the measure elements list
   fMeasureElementsList.push_front (barLine);
 }
 
-void msrMeasure::appendSegnoToMeasure (const S_msrSegno& segno)
+void msrMeasure::appendSegnoToMeasure (
+  const S_msrSegno& segno)
 {
   // append it to the measure elements list
   appendElementToMeasure (segno);
 }
 
-void msrMeasure::appendCodaToMeasure (const S_msrCoda& coda)
+void msrMeasure::appendCodaToMeasure (
+  const S_msrCoda& coda)
 {
   // append it to the measure elements list
   appendElementToMeasure (coda);
 }
 
 void msrMeasure::appendEyeGlassesToMeasure (
-  S_msrEyeGlasses eyeGlasses)
+  const S_msrEyeGlasses& eyeGlasses)
 {
   // append it to the measure elements list
   appendElementToMeasure (eyeGlasses);
 }
 
-void msrMeasure::appendPedalToMeasure (const S_msrPedal& pedal)
+void msrMeasure::appendPedalToMeasure (
+  const S_msrPedal& pedal)
 {
   // append it to the measure elements list
   appendElementToMeasure (pedal);
 }
 
-void msrMeasure::appendDampToMeasure (S_msrDamp damp)
+void msrMeasure::appendDampToMeasure (
+  const S_msrDamp& damp)
 {
   // append it to the measure elements list
   appendElementToMeasure (damp);
 }
 
-void msrMeasure::appendDampAllToMeasure (S_msrDampAll dampAll)
+void msrMeasure::appendDampAllToMeasure (
+  const S_msrDampAll& dampAll)
 {
   // append it to the measure elements list
   appendElementToMeasure (dampAll);
 }
 
-void msrMeasure::appendBarCheckToMeasure (S_msrBarCheck barCheck)
+void msrMeasure::appendBarCheckToMeasure (
+  const S_msrBarCheck& barCheck)
 {
   // append it to the measure elements list
   appendElementToMeasure (barCheck);
@@ -3261,7 +3271,7 @@ void msrMeasure::appendTempoToMeasure (
 }
 
 void msrMeasure::appendRehearsalMarkToMeasure (
-  S_msrRehearsalMark rehearsalMark)
+  const S_msrRehearsalMark& rehearsalMark)
 {
   appendElementToMeasure (rehearsalMark);
 }
@@ -3273,31 +3283,33 @@ void msrMeasure::appendOctaveShiftToMeasure (
 }
 
 void msrMeasure::appendScordaturaToMeasure (
-  S_msrScordatura scordatura)
+  const S_msrScordatura& scordatura)
 {
   appendElementToMeasure (scordatura);
 }
 
 void msrMeasure::appendAccordionRegistrationToMeasure (
-  S_msrAccordionRegistration
+  const S_msrAccordionRegistration&
     accordionRegistration)
 {
   appendElementToMeasure (accordionRegistration);
 }
 
 void msrMeasure::appendHarpPedalsTuningToMeasure (
-  S_msrHarpPedalsTuning
+  const S_msrHarpPedalsTuning&
     harpPedalsTuning)
 {
   appendElementToMeasure (harpPedalsTuning);
 }
 
-void msrMeasure::appendLineBreakToMeasure (S_msrLineBreak lineBreak)
+void msrMeasure::appendLineBreakToMeasure (
+  const  S_msrLineBreak& lineBreak)
 {
   appendElementToMeasure (lineBreak);
 }
 
-void msrMeasure::appendPageBreakToMeasure (S_msrPageBreak pageBreak)
+void msrMeasure::appendPageBreakToMeasure (
+  const S_msrPageBreak& pageBreak)
 {
   appendElementToMeasure (pageBreak);
 }
@@ -3324,12 +3336,13 @@ void msrMeasure::appendStaffDetailsToMeasure (
 }
 
 void msrMeasure::appendBarNumberCheckToMeasure (
-  S_msrBarNumberCheck barNumberCheck)
+  const S_msrBarNumberCheck& barNumberCheck)
 {
   appendElementToMeasure (barNumberCheck);
 }
 
-void msrMeasure::prependOtherElementToMeasure (const S_msrMeasureElement& elem)
+void msrMeasure::prependOtherElementToMeasure (
+  const S_msrMeasureElement& elem)
 {
   fMeasureElementsList.push_front (elem); // JMI
 
@@ -3337,7 +3350,8 @@ void msrMeasure::prependOtherElementToMeasure (const S_msrMeasureElement& elem)
   fMeasureContainsMusic = true;
 }
 
-void msrMeasure::appendOtherElementToMeasure  (const S_msrMeasureElement& elem)
+void msrMeasure::appendOtherElementToMeasure  (
+  const S_msrMeasureElement& elem)
 {
   appendElementToMeasure (elem);
 
@@ -3441,7 +3455,7 @@ void msrMeasure::removeNoteFromMeasure (
 
 void msrMeasure::removeElementFromMeasure (
   int          inputLineNumber,
-  S_msrElement element)
+  const S_msrElement& element)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -4289,7 +4303,7 @@ void msrMeasure::finalizeRegularMeasure (
 void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
   int          inputLineNumber,
   const S_msrVoice&   voice,
-  S_msrHarmony currentHarmony)
+  const S_msrHarmony& currentHarmony)
 {
   // currentHarmony is the first harmony in the measure
 
@@ -4400,8 +4414,8 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
   int          inputLineNumber,
   const S_msrVoice&   voice,
-  S_msrHarmony previousHarmony,
-  S_msrHarmony currentHarmony)
+  const S_msrHarmony& previousHarmony,
+  const S_msrHarmony& currentHarmony)
 {
   // currentHarmony is a subsequent harmony in the measure,
   // occurring after previousHarmony
@@ -4496,7 +4510,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
   int          inputLineNumber,
   const S_msrVoice&   voice,
-  S_msrHarmony currentHarmony)
+  const S_msrHarmony& currentHarmony)
 {
   // does currentHarmony overflow the measure?
 
@@ -4862,8 +4876,8 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
 void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
   int           inputLineNumber,
   const S_msrVoice&    voice,
-  S_msrHarmony  previousHarmony,
-  S_msrHarmony  currentHarmony,
+  const S_msrHarmony&  previousHarmony,
+  const S_msrHarmony&  currentHarmony,
   const std::string& context)
 {
   // handle the currentHarmony
@@ -4945,8 +4959,8 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
   const S_msrVoice&              voice,
   std::list<S_msrMeasureElement>::iterator&
                           i,
-  S_msrFiguredBass previousFiguredBass,
-  S_msrFiguredBass currentFiguredBass,
+  const S_msrFiguredBass& previousFiguredBass,
+  const S_msrFiguredBass& currentFiguredBass,
   const Rational&         currentFiguredBassMeasurePosition)
 {
   // currentFiguredBass is the first figured bass in the measure
@@ -5026,8 +5040,8 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
   const S_msrVoice&              voice,
   std::list<S_msrMeasureElement>::iterator&
                           i,
-  S_msrFiguredBass previousFiguredBass,
-  S_msrFiguredBass currentFiguredBass,
+  const S_msrFiguredBass& previousFiguredBass,
+  const S_msrFiguredBass& currentFiguredBass,
   const Rational&         currentFiguredBassMeasurePosition)
 {
   // this is a subsequent figured bass in the measure
@@ -5189,7 +5203,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
   int                     inputLineNumber,
   const S_msrVoice&              voice,
-  S_msrFiguredBass currentFiguredBass)
+  const S_msrFiguredBass& currentFiguredBass)
 {
   // does currentFiguredBass overflow the measure?
 

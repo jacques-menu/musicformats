@@ -684,7 +684,7 @@ class EXP msr2lpsrTranslator :
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    std::list<S_msrNote>           fOnGoingNotesStack;
+    std::list<S_msrNote>      fOnGoingNotesStack;
     void                      displayOnGoingNotesStack (const std::string& context);
 
     Bool                      fOnGoingNonGraceNote;

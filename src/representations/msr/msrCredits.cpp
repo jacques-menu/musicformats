@@ -301,7 +301,7 @@ msrCredit::~msrCredit ()
 {}
 
 void msrCredit::appendCreditWordsToCredit (
-  S_msrCreditWords creditWords)
+  const S_msrCreditWords& creditWords)
 {
   fCreditWordsList.push_back (creditWords);
 }

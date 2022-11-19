@@ -130,7 +130,7 @@ bsrBrailleGenerator::~bsrBrailleGenerator ()
 {}
 
 void bsrBrailleGenerator::generateCodeForCellsList (
-  S_bsrCellsList cellsList)
+  const S_bsrCellsList& cellsList)
 {
   const std::list<bsrCellKind>&
     cellsListElements =
@@ -150,7 +150,7 @@ void bsrBrailleGenerator::generateCodeForCellsList (
 }
 
 void bsrBrailleGenerator::generateCodeForMusicHeading (
-  S_bsrMusicHeading musicHeading)
+  const S_bsrMusicHeading& musicHeading)
 {
   this->
     generateCodeForCellsList (
@@ -159,7 +159,7 @@ void bsrBrailleGenerator::generateCodeForMusicHeading (
 }
 
 void bsrBrailleGenerator::generateCodeForLineContents (
-  S_bsrLineContents lineContents)
+  const S_bsrLineContents& lineContents)
 {
   this->
     generateCodeForCellsList (
@@ -190,7 +190,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrBrailleGenerator& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -358,7 +358,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrAsciiBrailleGenerator& e
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -556,7 +556,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrUTF8BrailleGenerator& el
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -615,7 +615,7 @@ std::string bsrUTF8DebugBrailleGenerator::asString () const
 }
 
 void bsrUTF8DebugBrailleGenerator::generateCodeForMusicHeading (
-  S_bsrMusicHeading musicHeading)
+  const S_bsrMusicHeading& musicHeading)
 {
   this->
     generateCodeForCellsList (
@@ -636,7 +636,7 @@ void bsrUTF8DebugBrailleGenerator::generateCodeForMusicHeading (
 }
 
 void bsrUTF8DebugBrailleGenerator::generateCodeForLineContents (
-  S_bsrLineContents lineContents)
+  const S_bsrLineContents& lineContents)
 {
   this->
     generateCodeForCellsList (
@@ -679,7 +679,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrUTF8DebugBrailleGenerato
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -900,7 +900,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrUTF16BigEndianBrailleGen
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -1123,7 +1123,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrUTF16SmallEndianBrailleG
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

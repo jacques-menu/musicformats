@@ -208,7 +208,7 @@ bsrCellsList::~bsrCellsList ()
 {}
 
 void bsrCellsList::appendCellsListToCellsList (
-  S_bsrCellsList otherCellsList)
+  const S_bsrCellsList& otherCellsList)
 {
   if (otherCellsList) {
     if (otherCellsList->fCellsListElements.size ()) {
@@ -226,7 +226,7 @@ void bsrCellsList::appendCellsListToCellsList (
 }
 
 void bsrCellsList::prependCellsListToCellsList (
-  S_bsrCellsList otherCellsList)
+  const S_bsrCellsList& otherCellsList)
 {
   if (otherCellsList) {
     if (otherCellsList->fCellsListElements.size ()) {
@@ -378,7 +378,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrCellsList& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

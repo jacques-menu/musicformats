@@ -129,7 +129,8 @@ void msrTransposition::setTranspositionUpLinkToMeasure (
   fTranspositionUpLinkToMeasure = measure;
 }
 
-Bool msrTransposition::isEqualTo (S_msrTransposition otherTransposition) const
+Bool msrTransposition::isEqualTo (
+  const S_msrTransposition& otherTransposition) const
 {
   if (! otherTransposition) {
     return false;

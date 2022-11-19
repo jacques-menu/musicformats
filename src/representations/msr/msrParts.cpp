@@ -898,7 +898,8 @@ void msrPart::appendStaffDetailsToPart (
   } // for
 }
 
-void msrPart::appendClefToPart (S_msrClef clef)
+void msrPart::appendClefToPart (
+  const S_msrClef& clef)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
@@ -931,7 +932,8 @@ void msrPart::appendClefToPart (S_msrClef clef)
   --gIndenter;
 }
 
-void msrPart::appendKeyToPart (S_msrKey key)
+void msrPart::appendKeyToPart (
+  const S_msrKey& key)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
@@ -967,7 +969,8 @@ void msrPart::appendKeyToPart (S_msrKey key)
   --gIndenter;
 }
 
-void msrPart::appendTimeSignatureToPart (S_msrTimeSignature timeSignature)
+void msrPart::appendTimeSignatureToPart (
+  const S_msrTimeSignature& timeSignature)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
@@ -1003,7 +1006,8 @@ void msrPart::appendTimeSignatureToPart (S_msrTimeSignature timeSignature)
   --gIndenter;
 }
 
-void msrPart::appendTimeSignatureToPartClone (S_msrTimeSignature timeSignature)
+void msrPart::appendTimeSignatureToPartClone (
+  const S_msrTimeSignature& timeSignature)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
@@ -1029,7 +1033,8 @@ void msrPart::appendTimeSignatureToPartClone (S_msrTimeSignature timeSignature)
   --gIndenter;
 }
 
-void msrPart::appendTempoToPart (S_msrTempo tempo)
+void msrPart::appendTempoToPart (
+  const S_msrTempo& tempo)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
@@ -1049,7 +1054,7 @@ void msrPart::appendTempoToPart (S_msrTempo tempo)
 }
 
 void msrPart::appendRehearsalMarkToPart (
-  S_msrRehearsalMark rehearsalMark)
+  const S_msrRehearsalMark& rehearsalMark)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
@@ -1069,7 +1074,8 @@ void msrPart::appendRehearsalMarkToPart (
 }
 
 
-void msrPart::appendLineBreakToPart (S_msrLineBreak lineBreak)
+void msrPart::appendLineBreakToPart (
+  const S_msrLineBreak& lineBreak)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
@@ -1088,7 +1094,8 @@ void msrPart::appendLineBreakToPart (S_msrLineBreak lineBreak)
   } // for
 }
 
-void msrPart::appendPageBreakToPart (S_msrPageBreak pageBreak)
+void msrPart::appendPageBreakToPart (
+  const S_msrPageBreak& pageBreak)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
@@ -1136,7 +1143,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
 }
 
 void msrPart::appendTranspositionToPart (
-  S_msrTransposition transposition)
+  const S_msrTransposition& transposition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
@@ -1319,7 +1326,7 @@ void msrPart::finalizeRepeatEndInPart (
 
 void msrPart::appendRepeatCloneToPart (
   int         inputLineNumber,
-  S_msrRepeat repeatCLone)
+  const S_msrRepeat& repeatCLone)
 {
   for (S_msrStaff staff : fPartAllStavesList) {
     switch (staff->getStaffKind ()) {
@@ -1351,11 +1358,11 @@ void msrPart::appendRepeatCloneToPart (
 }
 
 void msrPart::appendRepeatEndingCloneToPart (
-  S_msrRepeatEnding repeatEndingCLone)
+  const S_msrRepeatEnding& repeatEndingClone)
 {
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendRepeatEndingCloneToStaff (repeatEndingCLone);
+      appendRepeatEndingCloneToStaff (repeatEndingClone);
   } // for
 }
 
@@ -1487,7 +1494,7 @@ void msrPart::appendPendingMultipleFullBarRestsToPart (
 
 void msrPart::appendMultipleFullBarRestsCloneToPart (
   int               inputLineNumber,
-  S_msrMultipleFullBarRests multipleFullBarRests)
+  const S_msrMultipleFullBarRests& multipleFullBarRests)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
@@ -1508,7 +1515,8 @@ void msrPart::appendMultipleFullBarRestsCloneToPart (
   } // for
 }
 
-void msrPart::appendBarLineToPart (S_msrBarLine barLine)
+void msrPart::appendBarLineToPart (
+  const S_msrBarLine& barLine)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
@@ -1994,7 +2002,7 @@ void msrPart::appendFiguredBassToPartClone (
 }
 
 void msrPart::appendScordaturaToPart (
-  S_msrScordatura scordatura)
+  const S_msrScordatura& scordatura)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
@@ -2015,7 +2023,7 @@ void msrPart::appendScordaturaToPart (
 }
 
 void msrPart::appendAccordionRegistrationToPart (
-  S_msrAccordionRegistration
+  const S_msrAccordionRegistration&
     accordionRegistration)
 {
 #ifdef TRACING_IS_ENABLED
@@ -2037,7 +2045,7 @@ void msrPart::appendAccordionRegistrationToPart (
 }
 
 void msrPart::appendHarpPedalsTuningToPart (
-  S_msrHarpPedalsTuning
+  const S_msrHarpPedalsTuning&
     harpPedalsTuning)
 {
 #ifdef TRACING_IS_ENABLED
@@ -2060,7 +2068,7 @@ void msrPart::appendHarpPedalsTuningToPart (
 
 void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
   const S_msrVoice&           graceNotesGroupOriginVoice,
-  S_msrGraceNotesGroup skipGraceNotesGroup)
+  const S_msrGraceNotesGroup& skipGraceNotesGroup)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =

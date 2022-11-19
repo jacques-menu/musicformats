@@ -512,7 +512,7 @@ void mxsr2msrTranslator::populateNote (
 In \msr{mxsr2msrTranslator.cpp}, the \class{msrFiguredBass} instances are populated further and attached to the note by \method{mxsr2msrTranslator}{handlePendingFiguredBasses}:
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrTranslator::handlePendingFiguredBasses (
-  S_msrNote  newNote,
+  const S_msrNote&  newNote,
   const S_msrVoice& voiceToInsertInto)
 {
 	// ... ... ...

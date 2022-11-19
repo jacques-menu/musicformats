@@ -441,7 +441,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 //
 // //______________________________________________________________________________
 // void msrTuplet::appendNoteToTuplet (
-//   S_msrNote  note,
+//   const S_msrNote&  note,
 //   const S_msrVoice& voice)
 // {
 //   int inputLineNumber =

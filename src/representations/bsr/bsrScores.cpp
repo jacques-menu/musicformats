@@ -31,7 +31,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_bsrScore bsrScore::create (
   int            inputLineNumber,
-  S_msrScore     theMsrScore)
+  const S_msrScore&     theMsrScore)
 {
   bsrScore* o = new bsrScore (
     inputLineNumber, theMsrScore);
@@ -41,7 +41,7 @@ S_bsrScore bsrScore::create (
 
 bsrScore::bsrScore (
   int            inputLineNumber,
-  S_msrScore     theMsrScore)
+  const S_msrScore&     theMsrScore)
     : bsrElement (inputLineNumber)
 {
   fMsrScore = theMsrScore;

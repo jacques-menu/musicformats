@@ -70,7 +70,7 @@ msrLigature::~msrLigature ()
 {}
 
 void msrLigature::setLigatureSideLinkToOtherEnd (
-  S_msrLigature sideLinkToOtherEnd)
+  const S_msrLigature& sideLinkToOtherEnd)
 {
   // sanity check
   mfAssert (

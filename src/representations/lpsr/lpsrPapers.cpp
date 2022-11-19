@@ -34,9 +34,9 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_lpsrPaper lpsrPaper::create (
-  int             inputLineNumber,
-  S_msrScaling    scaling,
-  S_msrPageLayout pageLayout)
+  int                    inputLineNumber,
+  const S_msrScaling&    scaling,
+  const S_msrPageLayout& pageLayout)
 {
   lpsrPaper* o =
     new lpsrPaper (
@@ -48,9 +48,9 @@ S_lpsrPaper lpsrPaper::create (
 }
 
 lpsrPaper::lpsrPaper (
-  int             inputLineNumber,
-  S_msrScaling    scaling,
-  S_msrPageLayout pageLayout)
+  int                    inputLineNumber,
+  const S_msrScaling&    scaling,
+  const S_msrPageLayout& pageLayout)
     : lpsrElement (inputLineNumber)
 {
   // sanity checks

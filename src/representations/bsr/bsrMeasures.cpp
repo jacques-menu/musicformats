@@ -94,7 +94,7 @@ S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
 }
 
 void bsrMeasure::appendLineElementToMeasure (
-  S_bsrLineContentsElement lineElement)
+  const S_bsrLineContentsElement& lineElement)
 {
   fMeasureLineElementsList.push_back (lineElement);
 }

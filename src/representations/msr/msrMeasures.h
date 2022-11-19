@@ -322,11 +322,13 @@ class EXP msrMeasure : public msrSegmentElement
 
     // clefs
 
-    void                  appendClefToMeasure (S_msrClef clef);
+    void                  appendClefToMeasure (
+                            const S_msrClef& clef);
 
     // keys
 
-    void                  appendKeyToMeasure (S_msrKey key);
+    void                  appendKeyToMeasure (
+                            const S_msrKey& key);
 
     // time signatures
 
@@ -348,7 +350,7 @@ class EXP msrMeasure : public msrSegmentElement
     // transposition
 
     void                  appendTranspositionToMeasure (
-                            const S_msrTransposition& transpose);
+                            const S_msrTransposition& transpostion);
 
     // staff details
 
@@ -362,12 +364,15 @@ class EXP msrMeasure : public msrSegmentElement
 
     // breaks
 
-    void                  appendLineBreakToMeasure (S_msrLineBreak lineBreak);
-    void                  appendPageBreakToMeasure (S_msrPageBreak pageBreak);
+    void                  appendLineBreakToMeasure (
+                            const S_msrLineBreak& lineBreak);
+    void                  appendPageBreakToMeasure (
+                            const S_msrPageBreak& pageBreak);
 
     // tempo
 
-    void                  appendTempoToMeasure (S_msrTempo tempo);
+    void                  appendTempoToMeasure (
+                            const S_msrTempo& tempo);
 
     // rehearsal marks
 
@@ -398,12 +403,15 @@ class EXP msrMeasure : public msrSegmentElement
 
     // bar lines
 
-    void                  appendBarLineToMeasure (S_msrBarLine barLine);
-    void                  prependBarLineToMeasure (S_msrBarLine barLine);
+    void                  appendBarLineToMeasure (
+                            const S_msrBarLine& barLine);
+    void                  prependBarLineToMeasure (
+                            const S_msrBarLine& barLine);
 
     // bar checks
 
-    void                  appendBarCheckToMeasure (S_msrBarCheck barCheck);
+    void                  appendBarCheckToMeasure (
+                            const S_msrBarCheck& barCheck);
 
     // staff change
 
@@ -425,7 +433,8 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendPaddingNoteAtTheEndOfMeasure (
                             const S_msrNote& paddingNote);
 
-    void                  appendNoteToMeasureClone (const S_msrNote& note);
+    void                  appendNoteToMeasureClone (
+                            const S_msrNote& note);
 
     // tremolos
 
@@ -481,11 +490,13 @@ class EXP msrMeasure : public msrSegmentElement
 
     // segno
 
-    void                  appendSegnoToMeasure (const S_msrSegno& segno);
+    void                  appendSegnoToMeasure (
+                            const S_msrSegno& segno);
 
     // coda
 
-    void                  appendCodaToMeasure (const S_msrCoda& coda);
+    void                  appendCodaToMeasure (
+                            const S_msrCoda& coda);
 
     // eyeglasses
 
@@ -494,15 +505,18 @@ class EXP msrMeasure : public msrSegmentElement
 
     // pedal
 
-    void                  appendPedalToMeasure (const S_msrPedal& pedal);
+    void                  appendPedalToMeasure (
+                            const S_msrPedal& pedal);
 
     // damp
 
-    void                  appendDampToMeasure (S_msrDamp damp);
+    void                  appendDampToMeasure (
+                            const S_msrDamp& damp);
 
     // damp all
 
-    void                  appendDampAllToMeasure (S_msrDampAll dampAll);
+    void                  appendDampAllToMeasure (
+                            const S_msrDampAll& dampAll);
 
     // other elements
 
@@ -717,7 +731,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // notes flat std::list
     // this is used to identify solo notes and rests in measures slices
-    std::list<S_msrNote>       fMeasureNotesFlatList;
+    std::list<S_msrNote>  fMeasureNotesFlatList;
 
   private:
 

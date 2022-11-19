@@ -405,7 +405,7 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
 
 void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
   int            inputLineNumber,
-  S_msrTempoNote tempoNote)
+  const S_msrTempoNote& tempoNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
@@ -819,7 +819,7 @@ msrTempoNotesRelationshipElements::~msrTempoNotesRelationshipElements ()
 {}
 
 void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElements (
-  S_msrElement element)
+  const S_msrElement& element)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()){
@@ -995,7 +995,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempoNotesRelationshipEl
 S_msrTempo msrTempo::createTempoWordsOnly (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  S_msrWords        tempoWords,
+  const S_msrWords& tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1013,7 +1013,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
 
 S_msrTempo msrTempo::createTempoWordsOnly (
   int               inputLineNumber,
-  S_msrWords        tempoWords,
+  const S_msrWords& tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1108,11 +1108,11 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
 S_msrTempo msrTempo::createTempoNotesRelationship (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  S_msrTempoNotesRelationshipElements
+  const S_msrTempoNotesRelationshipElements&
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
                     tempoNotesRelationshipKind,
-  S_msrTempoNotesRelationshipElements
+  const S_msrTempoNotesRelationshipElements&
                     tempoNotesRelationshipRightElements,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1133,11 +1133,11 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
 
 S_msrTempo msrTempo::createTempoNotesRelationship (
   int               inputLineNumber,
-  S_msrTempoNotesRelationshipElements
+  const S_msrTempoNotesRelationshipElements&
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
                     tempoNotesRelationshipKind,
-  S_msrTempoNotesRelationshipElements
+  const S_msrTempoNotesRelationshipElements&
                     tempoNotesRelationshipRightElements,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1157,7 +1157,7 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
 msrTempo::msrTempo (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  S_msrWords        tempoWords,
+  const S_msrWords& tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1239,11 +1239,11 @@ msrTempo::msrTempo (
 msrTempo::msrTempo (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  S_msrTempoNotesRelationshipElements
+  const S_msrTempoNotesRelationshipElements&
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
                     tempoNotesRelationshipKind,
-  S_msrTempoNotesRelationshipElements
+  const S_msrTempoNotesRelationshipElements&
                     tempoNotesRelationshipRightElements,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,

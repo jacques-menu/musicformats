@@ -57,7 +57,7 @@ namespace MusicFormats
 {
 //________________________________________________________________________
 msr2mxsrTranslator::msr2mxsrTranslator (
-  S_msrScore visitedMsrScore)
+  const S_msrScore& visitedMsrScore)
 {
   // the MSR score we're visiting
   fVisitedMsrScore = visitedMsrScore;
@@ -167,7 +167,7 @@ std::string msr2mxsrTranslator::msrLengthAsTenths (
 }
 
 std::string msr2mxsrTranslator::S_msrLengthAsTenths (
-  S_msrLength length)
+  const S_msrLength& length)
 {
   return msrLengthAsTenths (* length);
 }
@@ -175,7 +175,7 @@ std::string msr2mxsrTranslator::S_msrLengthAsTenths (
 //______________________________________________________________________________
 void msr2mxsrTranslator::populatePageMargins (
   Sxmlelement       elem,
-  S_msrMarginsGroup marginsGroup)
+  const S_msrMarginsGroup& marginsGroup)
 {
   // left margin
   S_msrMargin leftMargin = marginsGroup->getLeftMargin ();
@@ -239,7 +239,7 @@ void msr2mxsrTranslator::populatePageMargins (
 }
 
 void msr2mxsrTranslator::appendPageMarginsToScoreDefaultsPageLayout (
-  S_msrMarginsGroup marginsGroup)
+  const S_msrMarginsGroup& marginsGroup)
 {
   // create a page margins element
   Sxmlelement
@@ -266,7 +266,7 @@ void msr2mxsrTranslator::appendPageMarginsToScoreDefaultsPageLayout (
 //______________________________________________________________________________
 void msr2mxsrTranslator::populateSystemMargins (
   Sxmlelement       elem,
-  S_msrSystemLayout systemLayout)
+  const S_msrSystemLayout& systemLayout)
 {
   // left margin
   S_msrMargin leftMargin = systemLayout->getLeftMargin ();
@@ -300,7 +300,7 @@ void msr2mxsrTranslator::populateSystemMargins (
 }
 
 void msr2mxsrTranslator::appendSystemMarginsToScoreDefaultsSystemLayout (
-  S_msrSystemLayout systemLayout)
+  const S_msrSystemLayout& systemLayout)
 {
   // JMI
 }
@@ -601,7 +601,7 @@ void msr2mxsrTranslator::appendToMeasureDirection (
 //________________________________________________________________________
 void msr2mxsrTranslator::appendNoteToMeasure (
   Sxmlelement note,
-  S_msrNote   theMsrNote)
+  const S_msrNote&   theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -4721,7 +4721,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTuplet& elt)
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteWedges (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWedges ()) {
@@ -4777,7 +4777,7 @@ void msr2mxsrTranslator:: appendNoteWedges (
 
 //________________________________________________________________________
 void msr2mxsrTranslator::appendNoteDynamics (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamics ()) {
@@ -4907,7 +4907,7 @@ void msr2mxsrTranslator::appendNoteDynamics (
 
 //________________________________________________________________________
 void msr2mxsrTranslator::appendABackupToMeasure (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
   int inputLineNumber =
     theMsrNote->getInputLineNumber ();
@@ -5023,7 +5023,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendAForwardToMeasure (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
   int inputLineNumber =
      theMsrNote->getInputLineNumber ();
@@ -5119,7 +5119,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -5284,7 +5284,7 @@ fCurrentCumulatedSkipsVoiceNumber
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: populateNoteDirections (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -5316,7 +5316,7 @@ void msr2mxsrTranslator:: populateNoteDirections (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteOrnaments (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceOrnaments ()) {
@@ -5429,7 +5429,7 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteTechnicals (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
@@ -5533,7 +5533,7 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
@@ -5611,7 +5611,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
@@ -5680,7 +5680,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
@@ -5757,7 +5757,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteArticulations (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
@@ -5900,7 +5900,7 @@ void msr2mxsrTranslator:: appendNoteArticulations (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteTieIfAny (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTies ()) {
@@ -5949,7 +5949,7 @@ void msr2mxsrTranslator:: appendNoteTieIfAny (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteSlursIfAny (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
@@ -6032,7 +6032,7 @@ void msr2mxsrTranslator:: appendNoteSlursIfAny (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
@@ -6123,7 +6123,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSpanners ()) {
@@ -6230,7 +6230,7 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSpanners ()) {
@@ -6334,7 +6334,7 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendStemToNote (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStems ()) {
@@ -6345,7 +6345,7 @@ void msr2mxsrTranslator:: appendStemToNote (
   }
 #endif
 
-  cnost S_msrStem& stem = theMsrNote->getNoteStem ();
+  S_msrStem stem = theMsrNote->getNoteStem ();
 
   if (stem) {
     msrStemKind
@@ -6378,7 +6378,7 @@ void msr2mxsrTranslator:: appendStemToNote (
 
 //________________________________________________________________________
 void msr2mxsrTranslator::appendBeamsToNote (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
@@ -6440,7 +6440,7 @@ void msr2mxsrTranslator::appendBeamsToNote (
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -6496,7 +6496,7 @@ void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
 
 //________________________________________________________________________
 void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -6549,7 +6549,8 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteNotationsToNote (S_msrNote theMsrNote)
+void msr2mxsrTranslator:: appendNoteNotationsToNote (
+                                const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -6597,7 +6598,7 @@ void msr2mxsrTranslator:: appendNoteNotationsToNote (S_msrNote theMsrNote)
 
 //________________________________________________________________________
 void msr2mxsrTranslator:: appendNoteLyricsToNote (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -6760,7 +6761,7 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
 
 //________________________________________________________________________
 void msr2mxsrTranslator::appendBasicsToNote (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
   int inputLineNumber =
     theMsrNote->getInputLineNumber ();
@@ -6936,7 +6937,7 @@ void msr2mxsrTranslator::appendBasicsToNote (
 
 //________________________________________________________________________
 void msr2mxsrTranslator::appendDurationToNoteIfRelevant (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
   int inputLineNumber =
     theMsrNote->getInputLineNumber ();
@@ -7073,7 +7074,7 @@ void msr2mxsrTranslator::appendDurationToNoteIfRelevant (
 }
 
 void msr2mxsrTranslator::appendTimeModificationToNoteIfRelevant (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -7151,7 +7152,7 @@ void msr2mxsrTranslator::appendTimeModificationToNoteIfRelevant (
 
 //________________________________________________________________________
 void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
-  S_msrNote theMsrNote)
+  const S_msrNote& theMsrNote)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {

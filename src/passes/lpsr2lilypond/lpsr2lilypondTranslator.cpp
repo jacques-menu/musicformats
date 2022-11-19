@@ -20102,7 +20102,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
 */
 
   // generate the chord's grace notes before if any,
-  S_msrChordGraceNotesGroupLink
+  const S_msrChordGraceNotesGroupLink&
     chordGraceNotesGroupLinkBefore =
       chord->getChordGraceNotesGroupLinkBefore ();
 
@@ -20470,7 +20470,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
 */
 
   // generate the chord's grace notes after if any
-  S_msrChordGraceNotesGroupLink
+  const S_msrChordGraceNotesGroupLink&
     chordGraceNotesGroupLinkAfter =
       chord->getChordGraceNotesGroupLinkAfter ();
 

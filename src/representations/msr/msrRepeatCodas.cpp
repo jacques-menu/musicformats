@@ -74,7 +74,7 @@ msrRepeatCoda::~msrRepeatCoda ()
 {}
 
 S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
-  S_msrRepeat containingRepeat)
+  const S_msrRepeat& containingRepeat)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -110,7 +110,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
 }
 
 S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
-  S_msrRepeat containingRepeat)
+  const S_msrRepeat& containingRepeat)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {

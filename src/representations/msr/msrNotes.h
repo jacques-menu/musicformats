@@ -770,22 +770,28 @@ class EXP msrNote : public msrTupletElement
 
     // tuplet members
     void                  determineTupletMemberSoundingFromDisplayWholeNotes (
-                            int actualNotes, int normalNotes);
+                            int actualNotes,
+                            int normalNotes);
 
     // lyrics
-    void                  appendSyllableToNote (S_msrSyllable syllable);
+    void                  appendSyllableToNote (
+                            const S_msrSyllable& syllable);
 
     // beams
-    void                  appendBeamToNote (const S_msrBeam& beam);
+    void                  appendBeamToNote (
+                            const S_msrBeam& beam);
 
     // articulations
-    void                  appendArticulationToNote (const S_msrArticulation& art);
+    void                  appendArticulationToNote (
+                            const S_msrArticulation& art);
 
     // spanners
-    void                  appendSpannerToNote (const S_msrSpanner& span);
+    void                  appendSpannerToNote (
+                            const S_msrSpanner& span);
 
     // technicals
-    void                  appendTechnicalToNote (const S_msrTechnical& tech);
+    void                  appendTechnicalToNote (
+                            const S_msrTechnical& tech);
 
     void                  appendTechnicalWithIntegerToNote (
                             const S_msrTechnicalWithInteger& tech);
@@ -797,13 +803,16 @@ class EXP msrNote : public msrTupletElement
                             const S_msrTechnicalWithString& tech);
 
     // ornaments
-    void                  appendOrnamentToNote (const S_msrOrnament& orn);
+    void                  appendOrnamentToNote (
+                            const S_msrOrnament& orn);
 
     // glissandos
-    void                  appendGlissandoToNote (S_msrGlissando glissando);
+    void                  appendGlissandoToNote (
+                            const S_msrGlissando& glissando);
 
     // slides
-    void                  appendSlideToNote (const S_msrSlide& slide);
+    void                  appendSlideToNote (
+                            const S_msrSlide& slide);
 
     // dynamics
     void                  appendDynamicToNote (
@@ -814,49 +823,62 @@ class EXP msrNote : public msrTupletElement
     S_msrDynamic          removeFirstDynamics (); // ??? JMI
 
     // words
-    void                  appendWordsToNote (const S_msrWords& words);
+    void                  appendWordsToNote (
+                            const S_msrWords& words);
 
     // slurs
-    void                  appendSlurToNote (const S_msrSlur& slur);
+    void                  appendSlurToNote (
+                            const S_msrSlur& slur);
 
     // ligatures
-    void                  appendLigatureToNote (const S_msrLigature& ligature);
+    void                  appendLigatureToNote (
+                            const S_msrLigature& ligature);
 
     // pedals
-    void                  appendPedalToNote (const S_msrPedal& pedal);
+    void                  appendPedalToNote (
+                            const S_msrPedal& pedal);
 
     //  slashes
-    void                  appendSlashToNote (const S_msrSlash& slash);
+    void                  appendSlashToNote (
+                            const S_msrSlash& slash);
 
     // cresc/decresc
     void                  appendCrescDecrescToNote (
                             const S_msrCrescDecresc& crescDecresc);
 
     //  wedges
-    void                  appendWedgeToNote (const S_msrWedge& wedge);
+    void                  appendWedgeToNote (
+                            const S_msrWedge& wedge);
 
     S_msrWedge            removeFirstWedge (); // JMI
 
     // segnos
-    void                  appendSegnoToNote (const S_msrSegno& segno);
+    void                  appendSegnoToNote (
+                            const S_msrSegno& segno);
 
     // dal segnos
-    void                  appendDalSegnoToNote (const S_msrDalSegno& dalSegno);
+    void                  appendDalSegnoToNote (
+                            const S_msrDalSegno& dalSegno);
 
     // codas
-    void                  appendCodaToNote (const S_msrCoda& coda);
+    void                  appendCodaToNote (
+                            const S_msrCoda& coda);
 
     // eyeglasses
-    void                  appendEyeGlassesToNote (S_msrEyeGlasses eyeGlasses);
+    void                  appendEyeGlassesToNote (
+                            const S_msrEyeGlasses& eyeGlasses);
 
     // damps
-    void                  appendDampToNote (S_msrDamp damp);
+    void                  appendDampToNote (
+                            const S_msrDamp& damp);
 
     // damp alls
-    void                  appendDampAllToNote (S_msrDampAll dampAll);
+    void                  appendDampAllToNote (
+                            const S_msrDampAll& dampAll);
 
     // scordaturas
-    void                  appendScordaturaToNote (S_msrScordatura scordatura);
+    void                  appendScordaturaToNote (
+                            const S_msrScordatura& scordatura);
 
     static bool           compareNotesByIncreasingMeasurePosition (
                             const SMARTP<msrNote>& first,
@@ -1077,12 +1099,14 @@ class EXP msrNote : public msrTupletElement
     // ornaments
     // ------------------------------------------------------
 
-    std::list<S_msrOrnament>   fNoteOrnaments;
+    std::list<S_msrOrnament>
+                          fNoteOrnaments;
 
     // glissandos
     // ------------------------------------------------------
 
-    std::list<S_msrGlissando>  fNoteGlissandos;
+    std::list<S_msrGlissando>
+                          fNoteGlissandos;
 
     // slides
     // ------------------------------------------------------

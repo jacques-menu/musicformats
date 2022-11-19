@@ -218,7 +218,7 @@ lpsrScoreBlock::~lpsrScoreBlock ()
 {}
 
 void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
-  S_lpsrPartGroupBlock partGroupBlock)
+  const S_lpsrPartGroupBlock& partGroupBlock)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -429,7 +429,7 @@ lpsrBookPartBlock::~lpsrBookPartBlock ()
 {}
 
 void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
-  S_lpsrPartGroupBlock partGroupBlock)
+  const S_lpsrPartGroupBlock& partGroupBlock)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -619,7 +619,7 @@ lpsrBookBlock::~lpsrBookBlock ()
 
 /* JMI
 void lpsrBookBlock::appendPartGroupBlockToBlock (
-  S_lpsrPartGroupBlock partGroupBlock)
+  const S_lpsrPartGroupBlock& partGroupBlock)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -640,7 +640,7 @@ void lpsrBookBlock::appendPartGroupBlockToBlock (
 */
 
 void lpsrBookBlock::appendBookBlockElementToBookBlockElementsList (
-  S_lpsrBookBlockElement bookBlockElement)
+  const S_lpsrBookBlockElement& bookBlockElement)
 {
 /* JMI
 #ifdef TRACING_IS_ENABLED
@@ -658,7 +658,7 @@ void lpsrBookBlock::appendBookBlockElementToBookBlockElementsList (
 }
 
 void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
-  S_lpsrScoreBlock scoreBlock)
+  const S_lpsrScoreBlock& scoreBlock)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
@@ -671,11 +671,11 @@ void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
 #endif
 
   appendBookBlockElementToBookBlockElementsList (
-      scoreBlock);
+    scoreBlock);
 }
 
 void lpsrBookBlock::appendLpsrBookPartBlockToBookBlockElementsList (
-  S_lpsrBookPartBlock bookPartBlock)
+  const S_lpsrBookPartBlock& bookPartBlock)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {

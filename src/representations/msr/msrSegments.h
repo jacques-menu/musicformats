@@ -181,10 +181,13 @@ class EXP msrSegment : public msrVoiceElement
 
     // clef, key, time signature
 
-    void                  appendClefToSegment  (S_msrClef clef);
-    void                  prependClefToSegment (S_msrClef clef);
+    void                  appendClefToSegment (
+                            const S_msrClef& clef);
+    void                  prependClefToSegment (
+                            const S_msrClef& clef);
 
-    void                  appendKeyToSegment (S_msrKey key);
+    void                  appendKeyToSegment (
+                            const S_msrKey& key);
 
     void                  appendTimeSignatureToSegment (
                             const S_msrTimeSignature& timeSignature);
@@ -209,7 +212,8 @@ class EXP msrSegment : public msrVoiceElement
 
     // tempo
 
-    void                  appendTempoToSegment (S_msrTempo tempo);
+    void                  appendTempoToSegment (
+                            const S_msrTempo& tempo);
 
     // rehearsal marks
 
@@ -308,8 +312,10 @@ class EXP msrSegment : public msrVoiceElement
 
     // breaks
 
-    void                  appendLineBreakToSegment (S_msrLineBreak lineBreak);
-    void                  appendPageBreakToSegment (S_msrPageBreak pageBreak);
+    void                  appendLineBreakToSegment (
+                            const S_msrLineBreak& lineBreak);
+    void                  appendPageBreakToSegment (
+                            const S_msrPageBreak& pageBreak);
 
     // segno
 
@@ -330,11 +336,13 @@ class EXP msrSegment : public msrVoiceElement
 
     // damp
 
-    void                  appendDampToSegment (S_msrDamp damp);
+    void                  appendDampToSegment (
+                            const S_msrDamp& damp);
 
     // damp all
 
-    void                  appendDampAllToSegment (S_msrDampAll dampAll);
+    void                  appendDampAllToSegment (
+                            const S_msrDampAll& dampAll);
 
     // grace notes
 

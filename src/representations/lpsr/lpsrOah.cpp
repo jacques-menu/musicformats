@@ -892,13 +892,13 @@ std::ostream& operator << (std::ostream& os, const S_lpsrStaffInstrumentNameAtom
 
 //______________________________________________________________________________
 S_lpsrTransposeAtom lpsrTransposeAtom::create (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   S_msrSemiTonesPitchAndOctave&
-                    semiTonesPitchAndOctaveVariable)
+                     semiTonesPitchAndOctaveVariable)
 {
   lpsrTransposeAtom* o = new
     lpsrTransposeAtom (
@@ -913,13 +913,13 @@ S_lpsrTransposeAtom lpsrTransposeAtom::create (
 }
 
 lpsrTransposeAtom::lpsrTransposeAtom (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   S_msrSemiTonesPitchAndOctave&
-                    semiTonesPitchAndOctaveVariable)
+                     semiTonesPitchAndOctaveVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,

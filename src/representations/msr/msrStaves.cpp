@@ -265,19 +265,19 @@ void msrStaff::initializeStaff ()
     }
   }
 
-  // get the initial transpose from the part if any
+  // get the initial transposition from the part if any
   {
     S_msrTransposition
-      transpose =
+      transposition =
         fStaffUpLinkToPart->
           getPartCurrentTransposition ();
 
-    if (transpose) {
+    if (transposition) {
 #ifdef TRACING_IS_ENABLED
       if ( gGlobalTracingOahGroup->getTraceTranspositions ()) {
         gLogStream <<
-          "Appending part transpose '" << transpose->asString () <<
-          "' as initial transpose to staff \"" <<
+          "Appending part transposition '" << transposition->asString () <<
+          "' as initial transposition to staff \"" <<
           fStaffName <<
           "\" in part " <<
           fStaffUpLinkToPart->getPartCombinedName () <<
@@ -285,9 +285,9 @@ void msrStaff::initializeStaff ()
       }
 #endif
 
-      fStaffCurrentTranspose = transpose;
+      fStaffCurrentTransposition = transposition;
 
-      appendTranspositionToAllStaffVoices (transpose);
+      appendTranspositionToAllStaffVoices (transposition);
     }
   }
 
@@ -431,18 +431,20 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
     */
 }
 
-void msrStaff::setStaffCurrentClef (S_msrClef clef)
+void msrStaff::setStaffCurrentClef  (
+  const S_msrClef& clef)
 {
   fStaffCurrentClef = clef;
 };
 
-void msrStaff::setStaffCurrentKey (S_msrKey key)
+void msrStaff::setStaffCurrentKey (
+  const S_msrKey& key)
 {
   fStaffCurrentKey = key;
 };
 
-void msrStaff::setStaffCurrentTime (S_msrTimeSignature timeSignature)
-{
+void msrStaff::setStaffCurrentTime (
+  const S_msrTimeSignature& timeSignature){
   fStaffCurrentTimeSignature = time;
 };
 
@@ -1567,7 +1569,8 @@ void msrStaff::registerVoiceInStaffClone (
   --gIndenter;
 }
 
-void msrStaff::appendClefToStaff (S_msrClef clef)
+void msrStaff::appendClefToStaff  (
+  const S_msrClef& clef)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
@@ -1689,8 +1692,8 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
   --gIndenter;
 }
 
-void msrStaff::appendTimeSignatureToStaff (S_msrTimeSignature timeSignature)
-{
+void msrStaff::appendTimeSignatureToStaff (
+  const S_msrTimeSignature& timeSignature){
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
@@ -1750,8 +1753,8 @@ void msrStaff::appendTimeSignatureToStaff (S_msrTimeSignature timeSignature)
   --gIndenter;
 }
 
-void msrStaff::appendTimeSignatureToStaffClone (S_msrTimeSignature timeSignature)
-{
+void msrStaff::appendTimeSignatureToStaffClone (
+  const S_msrTimeSignature& timeSignature){
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
@@ -1778,7 +1781,8 @@ void msrStaff::appendTimeSignatureToStaffClone (S_msrTimeSignature timeSignature
   --gIndenter;
 }
 
-void msrStaff::appendTempoToStaff (S_msrTempo tempo)
+void msrStaff::appendTempoToStaff (
+  const S_msrTempo& tempo)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
@@ -1798,7 +1802,7 @@ void msrStaff::appendTempoToStaff (S_msrTempo tempo)
 }
 
 void msrStaff::appendRehearsalMarkToStaff (
-  S_msrRehearsalMark rehearsalMark)
+  const S_msrRehearsalMark& rehearsalMark)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
@@ -1817,7 +1821,8 @@ void msrStaff::appendRehearsalMarkToStaff (
   } // for
 }
 
-void msrStaff::appendLineBreakToStaff (S_msrLineBreak lineBreak)
+void msrStaff::appendLineBreakToStaff  (
+  const S_msrLineBreak& lineBreak)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
@@ -1836,7 +1841,8 @@ void msrStaff::appendLineBreakToStaff (S_msrLineBreak lineBreak)
   } // for
 }
 
-void msrStaff::appendPageBreakToStaff (S_msrPageBreak pageBreak)
+void msrStaff::appendPageBreakToStaff (
+  const S_msrPageBreak& pageBreak)
 {
  #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
@@ -2210,7 +2216,7 @@ void msrStaff::appendPendingMultipleFullBarRestsToStaff (
 
 void msrStaff::appendMultipleFullBarRestsCloneToStaff (
   int               inputLineNumber,
-  S_msrMultipleFullBarRests multipleFullBarRests)
+  const S_msrMultipleFullBarRests& multipleFullBarRests)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
@@ -2234,7 +2240,7 @@ void msrStaff::appendMultipleFullBarRestsCloneToStaff (
 
 void msrStaff::appendRepeatCloneToStaff (
   int         inputLineNumber,
-  S_msrRepeat repeatCLone)
+  const S_msrRepeat& repeatCLone)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -2255,7 +2261,7 @@ void msrStaff::appendRepeatCloneToStaff (
 }
 
 void msrStaff::appendRepeatEndingCloneToStaff (
-  S_msrRepeatEnding repeatEndingClone)
+  const S_msrRepeatEnding& repeatEndingClone)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -2280,7 +2286,8 @@ void msrStaff::appendRepeatEndingCloneToStaff (
   --gIndenter;
 }
 
-void msrStaff::appendBarLineToStaff (S_msrBarLine barLine)
+void msrStaff::appendBarLineToStaff (
+  const S_msrBarLine& barLine)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
@@ -2305,13 +2312,13 @@ void msrStaff::appendBarLineToStaff (S_msrBarLine barLine)
 }
 
 void msrStaff::appendTranspositionToStaff (
-  S_msrTransposition transpose)
+  const S_msrTransposition& transposition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
     gLogStream <<
-      "Setting transpose '" <<
-      transpose->asString () <<
+      "Setting transposition '" <<
+      transposition->asString () <<
       "' in staff " <<
       fStaffName <<
       "\" in part " <<
@@ -2320,20 +2327,20 @@ void msrStaff::appendTranspositionToStaff (
   }
 #endif
 
-  // set staff transpose
+  // set staff transposition
   Bool doAppendTransposeToStaff (true);
 
-  if (! fStaffCurrentTranspose) {
+  if (! fStaffCurrentTransposition) {
     doAppendTransposeToStaff = true; // JMI ???
   }
 
   else {
-    if (transpose->isEqualTo (fStaffCurrentTranspose)) {
+    if (transposition->isEqualTo (fStaffCurrentTransposition)) {
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
         gLogStream <<
           "Transpose '" <<
-          transpose->asString () <<
+          transposition->asString () <<
           "' ignored because it is already present in staff " <<
           fStaffName <<
           "\" in part " <<
@@ -2347,11 +2354,11 @@ void msrStaff::appendTranspositionToStaff (
   }
 
   if (doAppendTransposeToStaff) {
-    // register transpose as current staff transpose
-    fStaffCurrentTranspose = transpose;
+    // register transposition as current staff transposition
+    fStaffCurrentTransposition = transposition;
 
     // cascade it to all voices
-    appendTranspositionToAllStaffVoices (transpose);
+    appendTranspositionToAllStaffVoices (transposition);
   }
 }
 
@@ -2414,16 +2421,16 @@ void msrStaff::appendStaffDetailsToStaff (
 }
 
 void msrStaff::appendTranspositionToAllStaffVoices (
-  S_msrTransposition transpose)
+  const S_msrTransposition& transposition)
 {
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
-      appendTranspositionToVoice (transpose);
+      appendTranspositionToVoice (transposition);
   } // for
 }
 
 void msrStaff::appendScordaturaToStaff (
-  S_msrScordatura scordatura)
+  const S_msrScordatura& scordatura)
 {
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->
@@ -2433,7 +2440,7 @@ void msrStaff::appendScordaturaToStaff (
 }
 
 void msrStaff::appendAccordionRegistrationToStaff (
-  S_msrAccordionRegistration
+  const S_msrAccordionRegistration&
     accordionRegistration)
 {
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
@@ -2444,7 +2451,7 @@ void msrStaff::appendAccordionRegistrationToStaff (
 }
 
 void msrStaff::appendHarpPedalsTuningToStaff (
-  S_msrHarpPedalsTuning harpPedalsTuning)
+  const S_msrHarpPedalsTuning& harpPedalsTuning)
 {
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
     voice->

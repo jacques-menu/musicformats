@@ -103,7 +103,8 @@ S_bsrLine bsrLine::createLineNewbornClone ()
   return newbornClone;
 }
 
-void bsrLine::appendLineElementToLine (S_bsrLineContentsElement lineElement)
+void bsrLine::appendLineElementToLine (
+  const S_bsrLineContentsElement& lineElement)
 {
   S_bsrLineContents
     lineContentsToAppendTo;
@@ -150,7 +151,7 @@ void bsrLine::appendLineElementToLine (S_bsrLineContentsElement lineElement)
 }
 
 void bsrLine::insertElementBeforeLastElementOfLine (
-  S_bsrLineContentsElement lineElement)
+  const S_bsrLineContentsElement& lineElement)
 {
   S_bsrLineContents
     lineContentsToAppendTo;
@@ -279,7 +280,7 @@ void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
 }
 
 void bsrLine::appendLineElementToLastMeasureOfLine (
-  S_bsrLineContentsElement lineElement)
+  const S_bsrLineContentsElement& lineElement)
 {
   S_bsrLineContents
     lineContentsToAppendTo;
@@ -571,7 +572,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrLine& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

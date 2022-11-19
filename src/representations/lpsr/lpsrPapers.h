@@ -35,7 +35,7 @@ class EXP lpsrPaper : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrPaper> create (
-                            int             inputLineNumber,
+                            int                    inputLineNumber,
                             const S_msrScaling&    scaling,
                             const S_msrPageLayout& pageLayout);
 
@@ -47,7 +47,7 @@ class EXP lpsrPaper : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrPaper (
-                            int             inputLineNumber,
+                            int                    inputLineNumber,
                             const S_msrScaling&    scaling,
                             const S_msrPageLayout& pageLayout);
 

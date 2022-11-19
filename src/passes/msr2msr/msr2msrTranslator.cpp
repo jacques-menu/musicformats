@@ -162,8 +162,8 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
 
 //________________________________________________________________________
 S_msrScore msr2msrTranslator::translateMsrToMsrAlongPathToVoice (
-  S_msrScore       theMsrScore,
-  S_msrPathToVoice pathToVoice)
+  const S_msrScore&       theMsrScore,
+  const S_msrPathToVoice& pathToVoice)
 {
   // sanity checks
   mfAssert (
@@ -3854,7 +3854,7 @@ void msr2msrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
 #endif
 
   if (fOnGoingChord) {
-    S_msrChordGraceNotesGroupLink
+    const S_msrChordGraceNotesGroupLink&
       chordChordGraceNotesGroupLink =
         msrChordGraceNotesGroupLink::create (
           elt->getInputLineNumber (),
@@ -5810,7 +5810,7 @@ void msr2msrTranslator::visitEnd (S_msrMidiTempo& elt)
 void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
   S_msrPart            partClone,
   const S_msrVoice&           voiceClone,
-  S_msrGraceNotesGroup skipGraceNotesGroup)
+  const S_msrGraceNotesGroup& skipGraceNotesGroup)
 {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {

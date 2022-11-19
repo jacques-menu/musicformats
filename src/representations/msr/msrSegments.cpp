@@ -600,7 +600,7 @@ void msrSegment::setNextMeasureNumberInSegment (
 }
 
 void msrSegment::appendPrintLayoutToSegment (
-  S_msrPrintLayout printLayout)
+  const S_msrPrintLayout& printLayout)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
@@ -653,7 +653,8 @@ void msrSegment::appendPrintLayoutToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendClefToSegment (S_msrClef clef)
+void msrSegment::appendClefToSegment  (
+  const S_msrClef& clef)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
@@ -706,7 +707,8 @@ void msrSegment::appendClefToSegment (S_msrClef clef)
   --gIndenter;
 }
 
-void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
+void msrSegment::prependClefToSegment  (
+  const S_msrClef& clef) // JMI
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
@@ -881,7 +883,8 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
   --gIndenter;
 }
 
-void msrSegment::appendKeyToSegment (S_msrKey key)
+void msrSegment::appendKeyToSegment (
+  const S_msrKey& key)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
@@ -908,7 +911,8 @@ void msrSegment::appendKeyToSegment (S_msrKey key)
   --gIndenter;
 }
 
-void msrSegment::appendTimeSignatureToSegment (S_msrTimeSignature timeSignature)
+void msrSegment::appendTimeSignatureToSegment (
+  const S_msrTimeSignature& timeSignature)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
@@ -945,8 +949,8 @@ void msrSegment::appendTimeSignatureToSegment (S_msrTimeSignature timeSignature)
   --gIndenter;
 }
 
-void msrSegment::appendTimeSignatureToSegmentClone (S_msrTimeSignature timeSignature)
-{
+void msrSegment::appendTimeSignatureToSegmentClone (
+  const S_msrTimeSignature& timeSignature){
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
@@ -1181,7 +1185,7 @@ void msrSegment::appendCodaToSegment (const S_msrCoda& coda)
 }
 
 void msrSegment::appendEyeGlassesToSegment (
-  S_msrEyeGlasses eyeGlasses)
+  const S_msrEyeGlasses& eyeGlasses)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceEyeGlasses ()) {
@@ -1235,7 +1239,8 @@ void msrSegment::appendPedalToSegment (const S_msrPedal& pedal)
   --gIndenter;
 }
 
-void msrSegment::appendDampToSegment (S_msrDamp damp)
+void msrSegment::appendDampToSegment (
+  const S_msrDamp& damp)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDamps ()) {
@@ -1262,7 +1267,8 @@ void msrSegment::appendDampToSegment (S_msrDamp damp)
   --gIndenter;
 }
 
-void msrSegment::appendDampAllToSegment (S_msrDampAll dampAll)
+void msrSegment::appendDampAllToSegment (
+  const S_msrDampAll& dampAll)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDampAlls ()) {
@@ -1290,12 +1296,12 @@ void msrSegment::appendDampAllToSegment (S_msrDampAll dampAll)
 }
 
 void msrSegment::appendTranspositionToSegment (
-  S_msrTransposition transpose)
+  const S_msrTransposition& transposition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
     gLogStream <<
-      "Appending transpose " <<
+      "Appending transposition " <<
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1306,13 +1312,13 @@ void msrSegment::appendTranspositionToSegment (
 
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    transpose->getInputLineNumber ());
+    transposition->getInputLineNumber ());
 
   ++gIndenter;
 
   // append it to this segment
   fSegmentLastMeasure->
-    appendTranspositionToMeasure (transpose);
+    appendTranspositionToMeasure (transposition);
 
   --gIndenter;
 }
@@ -1379,7 +1385,8 @@ void msrSegment::appendStaffDetailsToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendLineBreakToSegment (S_msrLineBreak lineBreak)
+void msrSegment::appendLineBreakToSegment (
+  const S_msrLineBreak& lineBreak)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
@@ -1407,7 +1414,8 @@ void msrSegment::appendLineBreakToSegment (S_msrLineBreak lineBreak)
   --gIndenter;
 }
 
-void msrSegment::appendPageBreakToSegment (S_msrPageBreak pageBreak)
+void msrSegment::appendPageBreakToSegment (
+  const S_msrPageBreak& pageBreak)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
@@ -1435,7 +1443,7 @@ void msrSegment::appendPageBreakToSegment (S_msrPageBreak pageBreak)
 }
 
 void msrSegment::appendBarNumberCheckToSegment (
-  S_msrBarNumberCheck barNumberCheck)
+  const S_msrBarNumberCheck& barNumberCheck)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarNumberChecks ()) {
@@ -1493,7 +1501,7 @@ void msrSegment::appendTempoToSegment (
 }
 
 void msrSegment::appendRehearsalMarkToSegment (
-  S_msrRehearsalMark rehearsalMark)
+  const S_msrRehearsalMark& rehearsalMark)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
@@ -1550,7 +1558,7 @@ void msrSegment::appendOctaveShiftToSegment (
 }
 
 void msrSegment::appendScordaturaToSegment (
-  S_msrScordatura scordatura)
+  const S_msrScordatura& scordatura)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceScordaturas ()) {
@@ -1579,7 +1587,7 @@ void msrSegment::appendScordaturaToSegment (
 }
 
 void msrSegment::appendAccordionRegistrationToSegment (
-  S_msrAccordionRegistration
+  const S_msrAccordionRegistration&
     accordionRegistration)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1610,7 +1618,7 @@ void msrSegment::appendAccordionRegistrationToSegment (
 }
 
 void msrSegment::appendHarpPedalsTuningToSegment (
-  S_msrHarpPedalsTuning
+  const S_msrHarpPedalsTuning&
     harpPedalsTuning)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1938,7 +1946,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 }
 
 void msrSegment::appendMultipleFullBarRestsToSegment (
-  S_msrMultipleFullBarRests multipleFullBarRests)
+  const S_msrMultipleFullBarRests& multipleFullBarRests)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
@@ -1956,7 +1964,8 @@ void msrSegment::appendMultipleFullBarRestsToSegment (
   fSegmentElementsList.push_back (multipleFullBarRests);
 }
 
-void msrSegment::prependBarLineToSegment (S_msrBarLine barLine)
+void msrSegment::prependBarLineToSegment (
+  const S_msrBarLine& barLine)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
@@ -1984,7 +1993,7 @@ void msrSegment::prependBarLineToSegment (S_msrBarLine barLine)
 }
 
 void msrSegment::appendBarLineToSegment (
-  S_msrBarLine barLine)
+  const S_msrBarLine& barLine)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
@@ -2011,7 +2020,8 @@ void msrSegment::appendBarLineToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendBarCheckToSegment (S_msrBarCheck barCheck)
+void msrSegment::appendBarCheckToSegment (
+  const S_msrBarCheck& barCheck)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarChecks ()) {
@@ -2264,7 +2274,7 @@ void msrSegment::removeNoteFromSegment (
 
 void msrSegment::removeElementFromSegment (
   int          inputLineNumber,
-  S_msrElement element)
+  const S_msrElement& element)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSegments ()) {

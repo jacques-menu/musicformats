@@ -282,7 +282,7 @@ S_msrMeasure msrTuplet::getTupletUpLinkToMeasure () const
 
 //______________________________________________________________________________
 void msrTuplet::appendNoteToTuplet (
-  S_msrNote  note,
+  const S_msrNote&  note,
   const S_msrVoice& voice)
 {
   int inputLineNumber =
