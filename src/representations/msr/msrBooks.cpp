@@ -187,7 +187,8 @@ void msrBook::addBookElementToBook (
   }
 }
 
-void msrBook::appendCreditToBook (S_msrCredit credit)
+void msrBook::appendCreditToBook (
+  const S_msrCredit& credit)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCredits ()) {
@@ -202,7 +203,7 @@ void msrBook::appendCreditToBook (S_msrCredit credit)
   fCreditsList.push_back (credit);
 }
 
-void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
+void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.66
   int inputLineNumber)
 {
 /* JMI

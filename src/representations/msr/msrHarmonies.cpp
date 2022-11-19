@@ -149,7 +149,7 @@ void msrHarmonyInterval::deNormalizeInterval ()
 }
 
 S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
-  S_msrHarmonyInterval otherHarmonyInterval)
+  const S_msrHarmonyInterval& otherHarmonyInterval)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
@@ -1463,7 +1463,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 }
 
 S_msrHarmonyInterval msrHarmonyInterval::intervalSum (
-  S_msrHarmonyInterval otherHarmonyInterval)
+  const S_msrHarmonyInterval& otherHarmonyInterval)
 {
   msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_NO_;
   int             resultRelativeOctave = 0;
@@ -3614,7 +3614,7 @@ msrHarmonyDegree::~msrHarmonyDegree ()
 {}
 
 void msrHarmonyDegree::setHarmonyDegreeUpLinkToHarmony (
-  S_msrHarmony UpLinkToHarmony)
+  const S_msrHarmony& UpLinkToHarmony)
 {
   // sanity check
   mfAssert (
@@ -6379,7 +6379,7 @@ msrHarmonyStructure::~msrHarmonyStructure ()
 {}
 
 void msrHarmonyStructure::appendHarmonyIntervalToHarmonyStructure (
-  S_msrHarmonyInterval harmonyInterval)
+  const S_msrHarmonyInterval& harmonyInterval)
 {
   // set the input line number and harmony item number // JMI
 

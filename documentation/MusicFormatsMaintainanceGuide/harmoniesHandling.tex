@@ -458,7 +458,7 @@ void mxsr2msrTranslator::populateNote (
 The \class{msrHarmony} instances are populated further in \msr{mxsr2msrTranslator.cpp} and attached to the note by \method{msrNote}{appendHarmonyToNoteHarmoniesList}: %%%JMI
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrTranslator::handlePendingHarmonies (
-  S_msrNote  newNote,
+  const S_msrNote&  newNote,
   const S_msrVoice& voiceToInsertInto)
 {
 	// ... ... ...

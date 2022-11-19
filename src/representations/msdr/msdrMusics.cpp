@@ -69,7 +69,7 @@ msdrMusic::~msdrMusic ()
 void msdrMusic::addMeasureToMusic (
   int           inputLineNumber,
   int           measureNumber,
-  S_msdrMeasure measure)
+  const S_msdrMeasure& measure)
 {
 }
 

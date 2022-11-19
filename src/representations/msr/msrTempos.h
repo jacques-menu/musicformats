@@ -182,7 +182,7 @@ class EXP msrTempoTuplet : public msrElement
 
     void                  removeFirstNoteFromTempoTuplet (
                             int            inputLineNumber,
-                            const S_msrTempo&Note tempoNote);
+                            const S_msrTempoNote& tempoNote);
     */
 
  // JMI   void                  applyDisplayFactorToTempoTupletMembers ();

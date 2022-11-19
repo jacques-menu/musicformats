@@ -108,13 +108,13 @@ S_bsrLine bsrLineContents::getUpLinkToBsrLine () const
 */
 
 void bsrLineContents::appendLineElementToLineContents (
-  S_bsrLineContentsElement lineElement)
+  const S_bsrLineContentsElement& lineElement)
 {
   fLineContentsLineElementsList.push_back (lineElement);
 }
 
 void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
-  S_bsrLineContentsElement lineElement)
+  const S_bsrLineContentsElement& lineElement)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {

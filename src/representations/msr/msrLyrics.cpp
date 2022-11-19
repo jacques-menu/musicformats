@@ -49,7 +49,7 @@ S_msrSyllable msrSyllable::create (
   const std::string&     syllableStanzaNumber,
   const Rational&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
-  S_msrStanza            syllableUpLinkToStanza)
+  const S_msrStanza&     syllableUpLinkToStanza)
 {
   msrSyllable* o =
     new msrSyllable (
@@ -72,7 +72,7 @@ S_msrSyllable msrSyllable::create (
   const std::string&     syllableStanzaNumber,
   const Rational&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
-  S_msrStanza            syllableUpLinkToStanza)
+  const S_msrStanza&     syllableUpLinkToStanza)
 {
   return
     msrSyllable::create (
@@ -94,7 +94,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber ( // JMI superflous
   const std::string&     syllableStanzaNumber,
   const Rational&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
-  S_msrStanza            syllableUpLinkToStanza,
+  const S_msrStanza&     syllableUpLinkToStanza,
   int                    syllableNextMeasurePuristNumber)
 {
   msrSyllable* o =
@@ -124,7 +124,7 @@ msrSyllable::msrSyllable (
   const std::string&     syllableStanzaNumber,
   const Rational&        syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
-  S_msrStanza            syllableUpLinkToStanza)
+  const S_msrStanza&     syllableUpLinkToStanza)
     : msrMeasureElement (
         inputLineNumber)
 {
@@ -1034,7 +1034,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
 }
 
 void msrStanza::appendSyllableToStanza (
-  S_msrSyllable syllable)
+  const S_msrSyllable& syllable)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {

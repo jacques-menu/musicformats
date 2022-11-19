@@ -73,7 +73,7 @@ msdrMeasure::~msdrMeasure ()
 void msdrMeasure::addLayerToMeasure (
   int         inputLineNumber,
   int         layerNumber,
-  S_msdrLayer layer)
+  const S_msdrLayer& layer)
 {
 }
 

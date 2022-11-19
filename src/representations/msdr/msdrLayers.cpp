@@ -73,21 +73,21 @@ msdrLayer::~msdrLayer ()
 void msdrLayer::addClefToLayer (
   int       inputLineNumber,
   int       measureNumber,
-  S_msrClef clef)
+  const S_msrClef& clef)
 {
 }
 
 void msdrLayer::addKeyToLayer (
   int      inputLineNumber,
   int      measureNumber,
-  S_msrKey key)
+  const S_msrKey& key)
 {
 }
 
 void msdrLayer::addTimeSignatureToLayer (
   int                inputLineNumber,
   int                measureNumber,
-  S_msrTimeSignature timeSignature)
+  const S_msrTimeSignature& timeSignature)
 {
 }
 

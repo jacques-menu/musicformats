@@ -74,7 +74,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_bsrTempo bsrTempo::create (
   int        inputLineNumber,
-  S_msrTempo mTempo)
+  const S_msrTempo& mTempo)
 {
   bsrTempo* o =
     new bsrTempo (
@@ -85,7 +85,7 @@ S_bsrTempo bsrTempo::create (
 
 bsrTempo::bsrTempo (
   int        inputLineNumber,
-  S_msrTempo mTempo)
+  const S_msrTempo& mTempo)
     : bsrLineContentsElement (inputLineNumber)
 {
   fMsrTempo  = mTempo;

@@ -262,7 +262,7 @@ msrFrame::~msrFrame ()
 {}
 
 void msrFrame::appendFrameNoteToFrame (
-  S_msrFrameNote frameNote)
+  const S_msrFrameNote& frameNote)
 {
   int inputLineNumber =
     frameNote->getInputLineNumber ();

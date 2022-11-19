@@ -64,7 +64,7 @@ S_msrSpanner msrSpanner::create (
   msrSpannerKind     spannerKind,
   msrSpannerTypeKind spannerTypeKind,
   msrPlacementKind   spannerPlacementKind,
-  S_msrNote          spannerUpLinkToNote)
+  const S_msrNote&   spannerUpLinkToNote)
 {
   msrSpanner* o =
     new msrSpanner (
@@ -84,7 +84,7 @@ msrSpanner::msrSpanner (
   msrSpannerKind     spannerKind,
   msrSpannerTypeKind spannerTypeKind,
   msrPlacementKind   spannerPlacementKind,
-  S_msrNote          spannerUpLinkToNote)
+  const S_msrNote&   spannerUpLinkToNote)
     : msrElement (inputLineNumber)
 {
   fSpannerUpLinkToNote = spannerUpLinkToNote;
@@ -102,7 +102,7 @@ msrSpanner::~msrSpanner ()
 {}
 
 void msrSpanner::setSpannerSideLinkToOtherEnd (
-  S_msrSpanner sideLinkToOtherEnd)
+  const S_msrSpanner& sideLinkToOtherEnd)
 {
   // sanity check
   mfAssert (

@@ -184,7 +184,8 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
   fPartGroupsList.push_back (partGroup);
 }
 
-void msrScore::appendCreditToScore (S_msrCredit credit)
+void msrScore::appendCreditToScore (
+  const S_msrCredit& credit)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCredits ()) {

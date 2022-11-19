@@ -47,7 +47,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 mxsr2msrTranslator::mxsr2msrTranslator (
-  S_msrScore scoreSkeleton)
+  const S_msrScore& scoreSkeleton)
 {
   // initialize note data to a neutral state
   initializeNoteData ();
@@ -5651,7 +5651,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
 }
 
 void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
-  S_msrTempoNote tempoNote)
+  const S_msrTempoNote& tempoNote)
 {
   // attach the current articulations if any to the note
   if (fPendingMetronomeBeamsList.size ()) {
@@ -17009,10 +17009,10 @@ void mxsr2msrTranslator::visitEnd (S_unpitched& elt)
 
 //______________________________________________________________________________
 S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
-  int                  inputLineNumber,
-  const S_msrVoice&           voice,
-  S_msrNote            chordFirstNote,
-  msrNoteKind noteKind)
+  int               inputLineNumber,
+  const S_msrVoice& voice,
+  const S_msrNote&  chordFirstNote,
+  msrNoteKind       noteKind)
 {
   int firstNoteInputLineNumber =
     chordFirstNote->getInputLineNumber ();
@@ -18232,7 +18232,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
 #endif
 
     // create the grace notes group link
-    S_msrChordGraceNotesGroupLink
+    const S_msrChordGraceNotesGroupLink&
       chordChordGraceNotesGroupLink =
         msrChordGraceNotesGroupLink::create (
           chord->getInputLineNumber (),
@@ -18265,7 +18265,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
 #endif
 
     // create the grace notes group link
-    S_msrChordGraceNotesGroupLink
+    const S_msrChordGraceNotesGroupLink&
       chordChordGraceNotesGroupLink =
         msrChordGraceNotesGroupLink::create (
           chord->getInputLineNumber (),
@@ -21305,7 +21305,7 @@ void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
 //______________________________________________________________________________
 void mxsr2msrTranslator::createAStaffChangeIfNecessary (
   int        inputLineNumber,
-  S_msrNote  newNote,
+  const S_msrNote&  newNote,
   const S_msrVoice& voiceToInsertInto)
 {
   // is there a staff change?
@@ -21411,7 +21411,7 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleNoteItself (
   int        inputLineNumber,
-  S_msrNote  newNote)
+  const S_msrNote&  newNote)
 {
   // handle the note itself
   if (fCurrentNoteBelongsToAChord) {
@@ -21960,7 +21960,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handlePendingHarmonies (
-  S_msrNote  newNote,
+  const S_msrNote&  newNote,
   const S_msrVoice& voiceToInsertInto)
 {
 #ifdef TRACING_IS_ENABLED
@@ -22064,7 +22064,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handlePendingFiguredBasses (
-  S_msrNote  newNote,
+  const S_msrNote&  newNote,
   const S_msrVoice& voiceToInsertInto)
 {
 #ifdef TRACING_IS_ENABLED
@@ -22556,7 +22556,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
   const S_msrVoice& currentVoice,
-  S_msrNote  newNote)
+  const S_msrNote&  newNote)
 {
   int inputLineNumber =
     newNote->getInputLineNumber ();
@@ -24135,7 +24135,7 @@ void mxsr2msrTranslator::displayLastHandledTupletInVoiceMap (const std::string& 
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleRepeatStart (
-  S_msrBarLine& barLine)
+  const S_msrBarLine& barLine)
 {
   int inputLineNumber =
     barLine->getInputLineNumber ();
@@ -24170,7 +24170,7 @@ void mxsr2msrTranslator::handleRepeatStart (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleRepeatEnd (
-  S_msrBarLine& barLine)
+  const S_msrBarLine& barLine)
 {
   int inputLineNumber =
     barLine->getInputLineNumber ();
@@ -24213,7 +24213,7 @@ void mxsr2msrTranslator::handleRepeatEnd (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleRepeatEndingStart (
-  S_msrBarLine& barLine)
+  const S_msrBarLine& barLine)
 {
   int inputLineNumber =
     barLine->getInputLineNumber ();
@@ -24262,7 +24262,7 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
-  S_msrBarLine& barLine)
+  const S_msrBarLine& barLine)
 {
   int inputLineNumber =
     barLine->
@@ -24314,7 +24314,7 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
-  S_msrBarLine& barLine)
+  const S_msrBarLine& barLine)
 {
   /*
   The discontinue value is typically used for the last ending in a set,

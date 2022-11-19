@@ -56,7 +56,7 @@ std::string msrNoteEventKindAsString (
 //______________________________________________________________________________
 S_msrNoteEvent msrNoteEvent::create (
   const Rational&  noteEventMeasurePosition,
-  S_msrNote        noteEventNote,
+  const S_msrNote& noteEventNote,
   msrNoteEventKind noteEventKind)
 {
   msrNoteEvent* o = new
@@ -70,7 +70,7 @@ S_msrNoteEvent msrNoteEvent::create (
 
 msrNoteEvent::msrNoteEvent (
   const Rational& noteEventMeasurePosition,
-  S_msrNote        noteEventNote,
+  const S_msrNote& noteEventNote,
   msrNoteEventKind noteEventKind)
 {
   fNoteEventMeasurePosition = noteEventMeasurePosition;

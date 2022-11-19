@@ -103,7 +103,7 @@ msrHumdrumScotKeyItem::~msrHumdrumScotKeyItem ()
 {}
 
 Bool msrHumdrumScotKeyItem::isEqualTo (
-  S_msrHumdrumScotKeyItem
+  const S_msrHumdrumScotKeyItem&
     otherHumdrumScotKeyItem) const
 {
   if (! otherHumdrumScotKeyItem) {
@@ -500,7 +500,7 @@ Bool msrKey::isEqualTo (S_msrKey otherKey) const
 }
 
 void msrKey::appendHumdrumScotKeyItem (
-  S_msrHumdrumScotKeyItem item)
+  const S_msrHumdrumScotKeyItem& item)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {

@@ -39,7 +39,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrBeatRepeatElement msrBeatRepeatElement::create (
   int                 inputLineNumber,
-  S_msrBeatRepeat upLinkToBeatRepeat)
+  const S_msrBeatRepeat& upLinkToBeatRepeat)
 {
   msrBeatRepeatElement* o =
     new msrBeatRepeatElement (
@@ -51,7 +51,7 @@ S_msrBeatRepeatElement msrBeatRepeatElement::create (
 
 msrBeatRepeatElement::msrBeatRepeatElement (
   int                 inputLineNumber,
-  S_msrBeatRepeat upLinkToBeatRepeat)
+  const S_msrBeatRepeat& upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -429,7 +429,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatElement& elt)
 //______________________________________________________________________________
 S_msrBeatRepeatPattern msrBeatRepeatPattern::create (
   int                 inputLineNumber,
-  S_msrBeatRepeat upLinkToBeatRepeat)
+  const S_msrBeatRepeat& upLinkToBeatRepeat)
 {
   msrBeatRepeatPattern* o =
     new msrBeatRepeatPattern (
@@ -441,7 +441,7 @@ S_msrBeatRepeatPattern msrBeatRepeatPattern::create (
 
 msrBeatRepeatPattern::msrBeatRepeatPattern (
   int                 inputLineNumber,
-  S_msrBeatRepeat upLinkToBeatRepeat)
+  const S_msrBeatRepeat& upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -624,7 +624,7 @@ std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatPattern& elt)
 //______________________________________________________________________________
 S_msrBeatRepeatReplicas msrBeatRepeatReplicas::create (
   int                 inputLineNumber,
-  S_msrBeatRepeat upLinkToBeatRepeat)
+  const S_msrBeatRepeat& upLinkToBeatRepeat)
 {
   msrBeatRepeatReplicas* o =
     new msrBeatRepeatReplicas (
@@ -636,7 +636,7 @@ S_msrBeatRepeatReplicas msrBeatRepeatReplicas::create (
 
 msrBeatRepeatReplicas::msrBeatRepeatReplicas (
   int                 inputLineNumber,
-  S_msrBeatRepeat upLinkToBeatRepeat)
+  const S_msrBeatRepeat& upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -897,7 +897,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
 }
 
 void msrBeatRepeat::setBeatRepeatPattern (
-  S_msrBeatRepeatPattern beatRepeatPattern)
+  const S_msrBeatRepeatPattern& beatRepeatPattern)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
@@ -926,7 +926,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
 }
 
 void msrBeatRepeat::setBeatRepeatReplicas (
-  S_msrBeatRepeatReplicas beatRepeatReplicas)
+  const S_msrBeatRepeatReplicas& beatRepeatReplicas)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {

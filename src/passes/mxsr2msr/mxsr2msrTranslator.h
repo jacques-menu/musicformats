@@ -1538,7 +1538,7 @@ class EXP mxsr2msrTranslator :
 
     std::list<S_msrBeam>      fPendingMetronomeBeamsList; // std::stack JMI ???
     void                      attachCurrentMetronomeBeamsToMetronomeNote (
-                                const S_msrTempo&Note tempoNote);
+                                const S_msrTempoNote& tempoNote);
 
     msrTempoTupletTypeKind    fCurrentTempoTupletTypeKind;
     msrTempoTupletBracketKind fCurrentTempoTupletBracketKind;
@@ -1815,28 +1815,28 @@ class EXP mxsr2msrTranslator :
     S_msrBarLine              fCurrentRepeatEndingStartBarLine; // std::stack ??? JMI
 
     void                      handleRepeatStart (
-                                const S_msrBarLine&& barLine);
+                                const S_msrBarLine& barLine);
 
     void                      handleRepeatEnd (
-                                const S_msrBarLine&& barLine);
+                                const S_msrBarLine& barLine);
 
     void                      handleRepeatEndingStart (
-                                const S_msrBarLine&& barLine);
+                                const S_msrBarLine& barLine);
 
 /* JMI v0.9.66
     void                      handleRepeatHookedEndingStart (
                                 S_barline     elt,
-                                const S_msrBarLine&& barLine);
+                                const S_msrBarLine& barLine);
 */
     void                      handleRepeatHookedEndingEnd (
-                                const S_msrBarLine&& barLine);
+                                const S_msrBarLine& barLine);
 /* JMI v0.9.66
     void                      handleRepeatHooklessEndingStart (
                                 S_barline     elt,
-                                const S_msrBarLine&& barLine);
+                                const S_msrBarLine& barLine);
 */
     void                      handleRepeatHooklessEndingEnd (
-                                const S_msrBarLine&& barLine);
+                                const S_msrBarLine& barLine);
 
     // notes/rests handling
     // ------------------------------------------------------
@@ -2150,7 +2150,8 @@ class EXP mxsr2msrTranslator :
     // ornaments handling
     // ------------------------------------------------------
 
-    std::list<S_msrOrnament>       fCurrentOrnamentsList;
+    std::list<S_msrOrnament>
+                              fCurrentOrnamentsList;
 
     void                      attachCurrentOrnamentsToNote (
                                 const S_msrNote& note);
@@ -2204,7 +2205,8 @@ class EXP mxsr2msrTranslator :
     // glissandos handling
     // ------------------------------------------------------
 
-    std::list<S_msrGlissando>      fPendingGlissandosList;
+    std::list<S_msrGlissando>
+                              fPendingGlissandosList;
 
     // slides handling
     // ------------------------------------------------------
@@ -2246,10 +2248,10 @@ class EXP mxsr2msrTranslator :
     Bool                      fOnGoingChord;
 
     S_msrChord                createChordFromItsFirstNote (
-                                int                  inputLineNumber,
-                                const S_msrVoice&           voice,
-                                const S_msrNote&            chordFirstNote,
-                                msrNoteKind noteKind);
+																int               inputLineNumber,
+																const S_msrVoice& voice,
+																const S_msrNote&  chordFirstNote,
+																msrNoteKind       noteKind);
 
 /* JMI
     void                      registerVoiceCurrentChordInMap (
@@ -2297,7 +2299,7 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fCurrentNoteBelongsToATuplet;
 
-    std::list<S_msrTuplet>         fTupletsStack;
+    std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (const std::string& context);
 
     Bool                      fCurrentATupletStopIsPending;

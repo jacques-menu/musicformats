@@ -184,7 +184,8 @@ msrTimeSignatureItem::msrTimeSignatureItem (
 msrTimeSignatureItem::~msrTimeSignatureItem ()
 {}
 
-Bool msrTimeSignatureItem::isEqualTo (S_msrTimeSignatureItem otherTimeSignatureItem) const
+Bool msrTimeSignatureItem::isEqualTo (
+  const S_msrTimeSignatureItem& otherTimeSignatureItem) const
 {
   if (! otherTimeSignatureItem) {
     return false;
@@ -994,7 +995,7 @@ void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
 }
 
 void msrTimeSignature::appendTimeSignatureItem (
-  S_msrTimeSignatureItem timeSignatureItem)
+  const S_msrTimeSignatureItem& timeSignatureItem)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {

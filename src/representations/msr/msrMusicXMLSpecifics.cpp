@@ -350,7 +350,7 @@ msrPageLayout::~msrPageLayout ()
 
 void msrPageLayout::setOddMarginsGroup (
   int               inputLineNumber,
-  S_msrMarginsGroup val)
+  const S_msrMarginsGroup& val)
 {
   if (fBothMarginsGroup) {
     std::stringstream s;
@@ -371,7 +371,7 @@ void msrPageLayout::setOddMarginsGroup (
 
 void msrPageLayout::setEvenMarginsGroup (
   int               inputLineNumber,
-  S_msrMarginsGroup val)
+  const S_msrMarginsGroup& val)
 {
   if (fBothMarginsGroup) {
     std::stringstream s;
@@ -392,7 +392,7 @@ void msrPageLayout::setEvenMarginsGroup (
 
 void msrPageLayout::setBothMarginsGroup (
   int               inputLineNumber,
-  S_msrMarginsGroup val)
+  const S_msrMarginsGroup& val)
 {
   if (fOddMarginsGroup || fEvenMarginsGroup) {
     std::stringstream s;
@@ -1451,7 +1451,7 @@ std::ostream& operator << (std::ostream& os, const S_msrPrintLayout& elt)
 S_msrLineWidth msrLineWidth::create (
   int                  inputLineNumber,
   msrLineWidthTypeKind lineWidthTypeKind,
-  S_msrLength          lineWidthValue)
+  const S_msrLength&   lineWidthValue)
 {
   msrLineWidth* o =
     new msrLineWidth (
@@ -1465,7 +1465,7 @@ S_msrLineWidth msrLineWidth::create (
 msrLineWidth::msrLineWidth (
   int                  inputLineNumber,
   msrLineWidthTypeKind lineWidthTypeKind,
-  S_msrLength          lineWidthValue)
+  const S_msrLength&   lineWidthValue)
     : msrElement (inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED

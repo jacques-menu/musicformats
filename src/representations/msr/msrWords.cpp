@@ -34,7 +34,7 @@ S_msrWords msrWords::create (
   msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
   msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
   msrFontStyleKind           wordsFontStyleKind,
-  S_msrFontSize              wordsFontSize,
+  const S_msrFontSize&       wordsFontSize,
   msrFontWeightKind          wordsFontWeightKind,
   msrXMLLangKind             wordsXMLLangKind,
   int                        wordsStaffNumber)
@@ -64,7 +64,7 @@ msrWords::msrWords (
   msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
   msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
   msrFontStyleKind           wordsFontStyleKind,
-  S_msrFontSize              wordsFontSize,
+  const S_msrFontSize&       wordsFontSize,
   msrFontWeightKind          wordsFontWeightKind,
   msrXMLLangKind             wordsXMLLangKind,
   int                        wordsStaffNumber)

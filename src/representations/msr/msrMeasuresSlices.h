@@ -165,7 +165,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
     Rational              fChunkMeasurePosition;
-    std::list<S_msrNote>       fChunkNotesList;
+    std::list<S_msrNote>  fChunkNotesList;
     Rational              fChunkDurationWholeNotes;
 };
 typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
@@ -280,7 +280,7 @@ class EXP msrMeasuresSlice : public smartable
     std::vector<S_msrMeasure>  fSliceMeasuresVector;
 
     // notes flat std::list
-    std::list<S_msrNote>       fSliceNotesFlatList;
+    std::list<S_msrNote>  fSliceNotesFlatList;
 
     // note events std::list
     std::list<S_msrNoteEvent>  fSliceNoteEventsList;

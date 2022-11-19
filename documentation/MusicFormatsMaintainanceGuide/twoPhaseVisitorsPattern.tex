@@ -595,7 +595,7 @@ They are handled in \mxsrToMsr{mxsr2msrTranslator} and \lpsrToLilypondBoth{lpsr2
 
 \mf\ never uses C++ STL stacks, because they cannot be iterated over:
 \begin{lstlisting}[language=CPlusPlus]
-    std::list<S_msrTuplet>         fOnGoingTupletsStack;
+    std::list<S_msrTuplet>    fOnGoingTupletsStack;
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]

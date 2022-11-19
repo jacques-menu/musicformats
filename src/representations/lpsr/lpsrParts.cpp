@@ -315,14 +315,14 @@ bool lpsrPartBlock::compareElementsToHaveHarmoniesAboveCorrespondingStaff (
 }
 
 void lpsrPartBlock::appendStaffBlockToPartBlock (
-  S_lpsrStaffBlock staffBlock)
+  const S_lpsrStaffBlock& staffBlock)
 {
   fPartBlockElementsList.push_back (staffBlock);
 }
 
 void lpsrPartBlock::appendChordNamesContextToPartBlock (
   int                     inputLineNumber,
-  S_lpsrChordNamesContext chordNamesContext)
+  const S_lpsrChordNamesContext& chordNamesContext)
 {
   // appent chordNamesContext to the part block elements list
   fPartBlockElementsList.push_back (chordNamesContext);
@@ -391,7 +391,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
 }
 
 void lpsrPartBlock::appendFiguredBassContextToPartBlock (
-  S_lpsrFiguredBassContext context)
+  const S_lpsrFiguredBassContext& context)
 {
   fPartBlockElementsList.push_back (context);
 }

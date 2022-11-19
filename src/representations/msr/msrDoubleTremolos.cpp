@@ -118,10 +118,10 @@ msrDoubleTremolo::msrDoubleTremolo (
     : msrMeasureElement (
         inputLineNumber)
 {
-  fDoubleTremoloKind          = doubleTremoloKind;
-  fDoubleDoubleTremoloTypeKind      = doubleDoubleTremoloTypeKind;
-  fDoubleTremoloMarksNumber   = doubleTremoloMarksNumber;
-  fDoubleTremoloPlacementKind = doubleTremoloPlacementKind;
+  fDoubleTremoloKind           = doubleTremoloKind;
+  fDoubleDoubleTremoloTypeKind = doubleDoubleTremoloTypeKind;
+  fDoubleTremoloMarksNumber    = doubleTremoloMarksNumber;
+  fDoubleTremoloPlacementKind  = doubleTremoloPlacementKind;
 
   fDoubleTremoloSoundingWholeNotes =
     Rational (-1, 1); // will be set later
@@ -161,8 +161,8 @@ void msrDoubleTremolo::setDoubleTremoloUpLinkToMeasure (
 }
 
 S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
-  S_msrElement doubleTremoloFirstElement,
-  S_msrElement doubleTremoloSecondElement)
+  const S_msrElement& doubleTremoloFirstElement,
+  const S_msrElement& doubleTremoloSecondElement)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {

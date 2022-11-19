@@ -2176,7 +2176,7 @@ S_msrNote msrNote::createNoteFromString (
 //________________________________________________________________________
 S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
   int                          inputLineNumber,
-  S_msrSemiTonesPitchAndOctave semiTonesPitchAndOctave)
+  const S_msrSemiTonesPitchAndOctave& semiTonesPitchAndOctave)
 {
   // sanity check
   mfAssert (
@@ -2588,7 +2588,8 @@ void msrNote::setNoteBelongsToAChord ()
 }
 
 void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
-  int actualNotes, int normalNotes)
+  int actualNotes,
+  int normalNotes)
 {
   /* JMI
   Type indicates the graphic note type, Valid values (from shortest to longest) are 1024th, 512th, 256th, 128th, 64th, 32nd, 16th, eighth, quarter, half, whole, breve, long, and maxima. The size attribute indicates full, cue, or large size, with full the default for regular notes and cue the default for cue and grace notes.
@@ -2644,7 +2645,8 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
 #endif
 }
 
-void msrNote::appendBeamToNote (const S_msrBeam& beam)
+void msrNote::appendBeamToNote (
+  const S_msrBeam& beam)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
@@ -2669,7 +2671,8 @@ if (false) { // JMI, note not yet append to anything....
   fNoteBeams.push_back (beam);
 }
 
-void msrNote::appendArticulationToNote (const S_msrArticulation& art)
+void msrNote::appendArticulationToNote (
+  const S_msrArticulation& art)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
@@ -2685,7 +2688,8 @@ void msrNote::appendArticulationToNote (const S_msrArticulation& art)
   fNoteArticulations.push_back (art);
 }
 
-void msrNote::appendSpannerToNote (S_msrSpanner spanner)
+void msrNote::appendSpannerToNote (
+  const S_msrSpanner& spanner)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSpanners ()) {
@@ -2724,7 +2728,8 @@ void msrNote::appendSpannerToNote (S_msrSpanner spanner)
   fNoteSpanners.push_back (spanner);
 }
 
-void msrNote::appendTechnicalToNote (S_msrTechnical technical)
+void msrNote::appendTechnicalToNote (
+  const S_msrTechnical& technical)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
@@ -2802,7 +2807,8 @@ void msrNote::appendTechnicalWithStringToNote (
     technicalWithString);
 }
 
-void msrNote::appendOrnamentToNote (S_msrOrnament ornament)
+void msrNote::appendOrnamentToNote (
+  const S_msrOrnament& ornament)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceOrnaments ()) {
@@ -2846,7 +2852,8 @@ void msrNote::appendOrnamentToNote (S_msrOrnament ornament)
     setOrnamentUpLinkToNote (this);
 }
 
-void msrNote::appendGlissandoToNote (S_msrGlissando glissando)
+void msrNote::appendGlissandoToNote (
+  const S_msrGlissando& glissando)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
@@ -2863,7 +2870,8 @@ void msrNote::appendGlissandoToNote (S_msrGlissando glissando)
   fNoteGlissandos.push_back (glissando);
 }
 
-void msrNote::appendSlideToNote (const S_msrSlide& slide)
+void msrNote::appendSlideToNote (
+  const S_msrSlide& slide)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlides ()) {
@@ -2946,7 +2954,8 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
 }
 */
 
-void msrNote::setNoteSingleTremolo (S_msrSingleTremolo trem)
+void msrNote::setNoteSingleTremolo (
+  const S_msrSingleTremolo& trem)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
@@ -2964,7 +2973,8 @@ void msrNote::setNoteSingleTremolo (S_msrSingleTremolo trem)
   fNoteSingleTremolo = trem;
 }
 
-void msrNote::appendDynamicToNote (const S_msrDynamic& dynamic)
+void msrNote::appendDynamicToNote (
+  const S_msrDynamic& dynamic)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamics ()) {
@@ -2980,17 +2990,20 @@ void msrNote::appendDynamicToNote (const S_msrDynamic& dynamic)
 
   fNoteDynamics.push_back (dynamic);
 }
-void msrNote::appendOtherDynamicToNote (S_msrOtherDynamic otherDynamic)
+void msrNote::appendOtherDynamicToNote (
+  const S_msrOtherDynamic& otherDynamic)
 {
   fNoteOtherDynamics.push_back (otherDynamic);
 }
 
-void msrNote::appendWordsToNote (const S_msrWords& words)
+void msrNote::appendWordsToNote (
+  const S_msrWords& words)
 {
   fNoteWords.push_back (words);
 }
 
-void msrNote::appendSlurToNote (const S_msrSlur& slur)
+void msrNote::appendSlurToNote (
+  const S_msrSlur& slur)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
@@ -3004,7 +3017,8 @@ void msrNote::appendSlurToNote (const S_msrSlur& slur)
   fNoteSlurs.push_back (slur);
 }
 
-void msrNote::appendLigatureToNote (const S_msrLigature& ligature)
+void msrNote::appendLigatureToNote (
+  const S_msrLigature& ligature)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLigatures ()) {
@@ -3065,7 +3079,8 @@ void msrNote::appendLigatureToNote (const S_msrLigature& ligature)
     fNoteLigatures.push_back (ligature);
 }
 
-void msrNote::appendPedalToNote (const S_msrPedal& pedal)
+void msrNote::appendPedalToNote (
+  const S_msrPedal& pedal)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePedals ()) {
@@ -3123,7 +3138,8 @@ void msrNote::appendPedalToNote (const S_msrPedal& pedal)
     fNotePedals.push_back (pedal);
 }
 
-void msrNote::appendSlashToNote (const S_msrSlash& slash)
+void msrNote::appendSlashToNote (
+  const S_msrSlash& slash)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlashes ()) {
@@ -3140,22 +3156,25 @@ void msrNote::appendSlashToNote (const S_msrSlash& slash)
 }
 
 void msrNote::appendCrescDecrescToNote (
-  S_msrCrescDecresc crescDecresc)
+  const S_msrCrescDecresc& crescDecresc)
 {
   fNoteCrescDecrescs.push_back (crescDecresc);
 }
 
-void msrNote::appendWedgeToNote (const S_msrWedge& wedge)
+void msrNote::appendWedgeToNote (
+  const S_msrWedge& wedge)
 {
   fNoteWedges.push_back (wedge);
 }
 
-void msrNote::appendSegnoToNote (const S_msrSegno& segno)
+void msrNote::appendSegnoToNote (
+  const S_msrSegno& segno)
 {
   fNoteSegnos.push_back (segno);
 }
 
-void msrNote::appendDalSegnoToNote (const S_msrDalSegno& dalSegno)
+void msrNote::appendDalSegnoToNote (
+  const S_msrDalSegno& dalSegno)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
@@ -3171,27 +3190,32 @@ void msrNote::appendDalSegnoToNote (const S_msrDalSegno& dalSegno)
   fNoteDalSegnos.push_back (dalSegno);
 }
 
-void msrNote::appendCodaToNote (const S_msrCoda& coda)
+void msrNote::appendCodaToNote (
+  const S_msrCoda& coda)
 {
   fNoteCodas.push_back (coda);
 }
 
-void msrNote::appendEyeGlassesToNote (S_msrEyeGlasses eyeGlasses)
+void msrNote::appendEyeGlassesToNote (
+  const S_msrEyeGlasses& eyeGlasses)
 {
   fNoteEyeGlasses.push_back (eyeGlasses);
 }
 
-void msrNote::appendDampToNote (S_msrDamp damp)
+void msrNote::appendDampToNote (
+  const S_msrDamp&  damp)
 {
   fNoteDamps.push_back (damp);
 }
 
-void msrNote::appendDampAllToNote (S_msrDampAll dampAll)
+void msrNote::appendDampAllToNote (
+  const S_msrDampAll& dampAll)
 {
   fNoteDampAlls.push_back (dampAll);
 }
 
-void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
+void msrNote::appendScordaturaToNote (
+  const S_msrScordatura& scordatura)
 {
   fNoteScordaturas.push_back (scordatura);
 }
@@ -3314,7 +3338,8 @@ S_msrWedge msrNote::removeFirstWedge () // JMI
   return wedge;
 }
 
-void msrNote::appendSyllableToNote (S_msrSyllable syllable)
+void msrNote::appendSyllableToNote (
+  const S_msrSyllable& syllable)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -3330,7 +3355,8 @@ void msrNote::appendSyllableToNote (S_msrSyllable syllable)
   fNoteSyllables.push_back (syllable);
 }
 
-void msrNote::appendHarmonyToNoteHarmoniesList (const S_msrHarmony& harmony)
+void msrNote::appendHarmonyToNoteHarmoniesList (
+  const S_msrHarmony& harmony)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {

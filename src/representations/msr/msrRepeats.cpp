@@ -59,7 +59,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrRepeatCommonPart msrRepeatCommonPart::create (
   int         inputLineNumber,
-  S_msrRepeat upLinkToRepeat)
+  const S_msrRepeat& upLinkToRepeat)
 {
   msrRepeatCommonPart* o =
     new msrRepeatCommonPart (
@@ -71,7 +71,7 @@ S_msrRepeatCommonPart msrRepeatCommonPart::create (
 
 msrRepeatCommonPart::msrRepeatCommonPart (
   int         inputLineNumber,
-  S_msrRepeat upLinkToRepeat)
+  const S_msrRepeat& upLinkToRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -114,7 +114,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
 
 void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
   int           inputLineNumber,
-  S_msrRepeat   repeat,
+  const S_msrRepeat& repeat,
   const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -167,7 +167,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 
 void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
   int                   inputLineNumber,
-  S_msrMultipleFullBarRests multipleFullBarRests,
+  const S_msrMultipleFullBarRests& multipleFullBarRests,
   const std::string&    context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -572,7 +572,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
 
 void msrRepeatEnding::appendRepeatToRepeatEnding (
   int           inputLineNumber,
-  S_msrRepeat   repeat,
+  const S_msrRepeat& repeat,
   const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -623,7 +623,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 
 void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
   int                   inputLineNumber,
-  S_msrMultipleFullBarRests multipleFullBarRests,
+  const S_msrMultipleFullBarRests& multipleFullBarRests,
   const std::string&    context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1012,7 +1012,7 @@ msrRepeat::~msrRepeat ()
 {}
 
 void msrRepeat::setRepeatCommonPart (
-  S_msrRepeatCommonPart repeatCommonPart)
+  const S_msrRepeatCommonPart& repeatCommonPart)
 {
   // sanity check
   mfAssert (
@@ -1042,7 +1042,7 @@ void msrRepeat::setRepeatCommonPart (
 
 void msrRepeat::addRepeatEndingToRepeat (
   int               inputLineNumber,
-  S_msrRepeatEnding repeatEnding)
+  const S_msrRepeatEnding& repeatEnding)
 {
   // sanity check
   mfAssert (
@@ -1282,7 +1282,7 @@ void msrRepeat::appendSegmentToRepeat (
 
 void msrRepeat::appendRepeatToRepeat (
   int           inputLineNumber,
-  S_msrRepeat   repeat,
+  const S_msrRepeat& repeat,
   const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1450,7 +1450,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 
 void msrRepeat::appendMultipleFullBarRestsToRepeat (
   int                   inputLineNumber,
-  S_msrMultipleFullBarRests multipleFullBarRests,
+  const S_msrMultipleFullBarRests& multipleFullBarRests,
   const std::string&    context)
 {
 #ifdef TRACING_IS_ENABLED

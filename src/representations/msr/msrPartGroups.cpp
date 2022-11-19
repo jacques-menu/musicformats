@@ -281,7 +281,7 @@ msrPartGroup::~msrPartGroup ()
 
 S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   const S_msrPartGroup& partGroupClone,
-  S_msrScore     scoreClone)
+  const S_msrScore&     scoreClone)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {

@@ -227,7 +227,8 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
 
 One such call is:
 \begin{lstlisting}[language=CPlusPlus]
-void msrSegment::appendKeyToSegment (S_msrKey key)
+void msrSegment::appendKeyToSegment (
+  const S_msrKey& key)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
