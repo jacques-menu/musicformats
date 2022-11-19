@@ -295,13 +295,13 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrTransposeAtom> create (
-                            const std::string&          longName,
-                            const std::string&          shortName,
-                            const std::string&          description,
-                            const std::string&          valueSpecification,
-                            const std::string&          variableName,
-                            const S_msrSemiTonesPitchAndOctave&
-                                              semiTonesPitchAndOctaveVariable);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            S_msrSemiTonesPitchAndOctave&
+                                               semiTonesPitchAndOctaveVariable);
 
   protected:
 
@@ -309,13 +309,13 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrTransposeAtom (
-                            const std::string&          longName,
-                            const std::string&          shortName,
-                            const std::string&          description,
-                            const std::string&          valueSpecification,
-                            const std::string&          variableName,
-                            const S_msrSemiTonesPitchAndOctave&
-                                              semiTonesPitchAndOctaveVariable);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            S_msrSemiTonesPitchAndOctave&
+                                               semiTonesPitchAndOctaveVariable);
 
     virtual               ~lpsrTransposeAtom ();
 

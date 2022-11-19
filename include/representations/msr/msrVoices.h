@@ -456,9 +456,11 @@ class EXP msrVoice : public msrElement
 
     // clef, key, time signature
 
-    void                  appendClefToVoice (S_msrClef clef);
+    void                  appendClefToVoice (
+                            const S_msrClef& clef);
 
-    void                  appendKeyToVoice  (S_msrKey  key);
+    void                  appendKeyToVoice  (
+                            const S_msrKey&  key);
 
     void                  appendTimeSignatureToVoice (
                             const S_msrTimeSignature& timeSignature);
@@ -475,9 +477,11 @@ class EXP msrVoice : public msrElement
 
     S_msrNote             fetchVoiceFirstNonGraceNote () const;
 
-    void                  registerShortestNoteInVoiceIfRelevant (const S_msrNote& note);
+    void                  registerShortestNoteInVoiceIfRelevant (
+                            const S_msrNote& note);
 
-    void                  registerNoteAsVoiceLastAppendedNote (const S_msrNote& note);
+    void                  registerNoteAsVoiceLastAppendedNote (
+                            const S_msrNote& note);
 
     // harmonies
 
@@ -503,7 +507,8 @@ class EXP msrVoice : public msrElement
 
     // tempo
 
-    void                  appendTempoToVoice (S_msrTempo tempo);
+    void                  appendTempoToVoice (
+                            const S_msrTempo& tempo);
 
     // rehearsal marks
 
@@ -539,8 +544,10 @@ class EXP msrVoice : public msrElement
 
     // notes
 
-    void                  appendNoteToVoice      (const S_msrNote& note);
-    void                  appendNoteToVoiceClone (const S_msrNote& note);
+    void                  appendNoteToVoice      (
+                            const S_msrNote& note);
+    void                  appendNoteToVoiceClone (
+                            const S_msrNote& note);
 
     // tremolos
 
@@ -549,11 +556,13 @@ class EXP msrVoice : public msrElement
 
     // chords
 
-    void                  appendChordToVoice  (const S_msrChord& chord);
+    void                  appendChordToVoice  (
+                            const S_msrChord& chord);
 
     // tuplets
 
-    void                  appendTupletToVoice (const S_msrTuplet& tuplet);
+    void                  appendTupletToVoice (
+                            const S_msrTuplet& tuplet);
 
     // harmonies
 
@@ -612,21 +621,27 @@ class EXP msrVoice : public msrElement
 
     // breaks
 
-    void                  appendLineBreakToVoice (S_msrLineBreak lineBreak);
-    void                  appendPageBreakToVoice (S_msrPageBreak pageBreak);
+    void                  appendLineBreakToVoice (
+                            const S_msrLineBreak& lineBreak);
+    void                  appendPageBreakToVoice (
+                            const S_msrPageBreak& pageBreak);
 
     // bar lines
 
-    void                  prependBarLineToVoice (S_msrBarLine barLine);
-    void                  appendBarLineToVoice (S_msrBarLine barLine);
+    void                  prependBarLineToVoice (
+                            const S_msrBarLine& barLine);
+    void                  appendBarLineToVoice (
+                            const S_msrBarLine& barLine);
 
     // segno
 
-    void                  appendSegnoToVoice (const S_msrSegno& segno);
+    void                  appendSegnoToVoice (
+                            const S_msrSegno& segno);
 
     // coda
 
-    void                  appendCodaToVoice (const S_msrCoda& coda);
+    void                  appendCodaToVoice (
+                            const S_msrCoda& coda);
 
     // eyeglasses
 
@@ -635,15 +650,18 @@ class EXP msrVoice : public msrElement
 
     // pedal
 
-    void                  appendPedalToVoice (const S_msrPedal& pedal);
+    void                  appendPedalToVoice (
+                            const S_msrPedal& pedal);
 
     // damp
 
-    void                  appendDampToVoice (S_msrDamp damp);
+    void                  appendDampToVoice (
+                            const S_msrDamp& damp);
 
     // damp all
 
-    void                  appendDampAllToVoice (S_msrDampAll dampAll);
+    void                  appendDampAllToVoice (
+                            const S_msrDampAll& dampAll);
 
     // other elements
 
@@ -880,7 +898,9 @@ class EXP msrVoice : public msrElement
 
     // beams begin, continue and end check
 
-    void                  checkBeamNumber (S_msrBeam beam, S_msrNote note);
+    void                  checkBeamNumber (
+                            const S_msrBeam beam,
+                            const S_msrNote note);
 
     // finalization
 
@@ -978,7 +998,7 @@ class EXP msrVoice : public msrElement
 
     void                  handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
                             int         inputLineNumber,
-                            const S_msrRepeat& currentRepeat);
+                            S_msrRepeat& currentRepeat);
 
     void                  handleVoiceLevelRepeatEndingStartWithExplicitStart (
                             int inputLineNumber);
@@ -1179,7 +1199,8 @@ class EXP msrVoice : public msrElement
 
     // clef, key, time signature
 
-    void                  setVoiceCurrentClef (S_msrClef clef);
+    void                  setVoiceCurrentClef (
+                            const S_msrClef& clef);
 
     S_msrClef             getVoiceCurrentClef () const
                               { return fVoiceCurrentClef; }
@@ -1187,7 +1208,8 @@ class EXP msrVoice : public msrElement
     S_msrClef             getVoiceFirstClef () const
                               { return fVoiceFirstClef; }
 
-    void                  setVoiceCurrentKey (S_msrKey key);
+    void                  setVoiceCurrentKey (
+                            const S_msrKey& key);
 
     S_msrKey              getVoiceCurrentKey  () const
                               { return fVoiceCurrentKey; }
@@ -1200,7 +1222,7 @@ class EXP msrVoice : public msrElement
 
     // current measure number
 
-    const std::string          getVoiceCurrentMeasureNumber () const
+    const std::string     getVoiceCurrentMeasureNumber () const
                               { return fVoiceCurrentMeasureNumber; }
 
     // ordinal measure number
