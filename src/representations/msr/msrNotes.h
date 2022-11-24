@@ -218,7 +218,8 @@ class EXP msrNote : public msrTupletElement
     void                  setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure) override;
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override;
 
     void                  setNoteUpLinkToMeasure (
                             const S_msrMeasure& measure);

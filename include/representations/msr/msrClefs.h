@@ -122,8 +122,9 @@ class EXP msrClef : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setClefUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getClefUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getClefUpLinkToMeasure (); }
 
     void                  setClefUpLinkToMeasure (
                             const S_msrMeasure& measure);

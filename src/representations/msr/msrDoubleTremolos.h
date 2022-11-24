@@ -100,8 +100,9 @@ class EXP msrDoubleTremolo : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setDoubleTremoloUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getDoubleTremoloUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getDoubleTremoloUpLinkToMeasure (); }
 
     void                  setDoubleTremoloUpLinkToMeasure (
                             const S_msrMeasure& measure);

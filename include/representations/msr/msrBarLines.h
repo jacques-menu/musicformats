@@ -206,8 +206,9 @@ class EXP msrBarLine : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setBarLineUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getBarLineUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getBarLineUpLinkToMeasure (); }
 
     void                  setBarLineUpLinkToMeasure (
                             const S_msrMeasure& measure);

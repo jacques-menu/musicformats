@@ -140,8 +140,7 @@ msrNote::msrNote (
   msrNoteHeadFilledKind      msrNoteHeadFilledKind,
   msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind)
     : msrTupletElement (
-        inputLineNumber,
-        upLinkToMeasure),
+        inputLineNumber),
       fNoteColorAlphaRGB ("", "")
 {
   fNoteUpLinkToMeasure = upLinkToMeasure;
@@ -379,9 +378,10 @@ void msrNote::setMeasureElementUpLinkToMeasure (
   setNoteUpLinkToMeasure (measure);
 }
 
-S_msrMeasure msrNote::getMeasureElementUpLinkToMeasure () const
+void msrNote::getMeasureElementUpLinkToMeasure (
+  S_msrMeasure& upLinkToMeasure) const
 {
-  return getNoteUpLinkToMeasure ();
+  upLinkToMeasure = getNoteUpLinkToMeasure ();
 }
 
 void msrNote::setNoteUpLinkToMeasure (
@@ -576,10 +576,15 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
       if (fNoteDirectUpLinkToTuplet) {
+        S_msrMeasure upLinkToMeasure;
+
+        fNoteDirectUpLinkToTuplet->
+          getMeasureElementUpLinkToMeasure (
+            upLinkToMeasure);
+
         S_msrMeasure
           tupletDirectUpLinkToMeasure =
-            fNoteDirectUpLinkToTuplet->
-              getMeasureElementUpLinkToMeasure ();
+            upLinkToMeasure;
 
         if (tupletDirectUpLinkToMeasure) {
           result =

@@ -37,34 +37,38 @@ namespace MusicFormats
 //     // creation from MusicXML
 //     // ------------------------------------------------------
 //
-//   protected:
+// //   protected:
 //
-//     // constructors/destructor
-//     // ------------------------------------------------------
+//       // constructors/destructor
+//       // ------------------------------------------------------
 //
 //                           msrTupletElement (
-//                             int                 inputLineNumber,
-//                             const S_msrMeasure& upLinkToMeasure);
+//                             int                 inputLineNumber);
 //
-// //                           msrTupletElement ();
+// //                           msrTupletElement (
+// //                             int                 inputLineNumber,
+// //                             const S_msrMeasure& upLinkToMeasure);
+//
+//                           msrTupletElement ();
 //
 //     virtual               ~msrTupletElement ();
 //
 //   public:
 //
-//     // set and get
-//     // ------------------------------------------------------
+//       // set and get
+//       // ------------------------------------------------------
 //
-//     // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override;
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
-//
-//     void                  setTupletElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getTupletElementUpLinkToMeasure () const;
+//       // uplink to measure
+// //     void                  setMeasureElementUpLinkToMeasure (
+// //                             const S_msrMeasure& measure) override;
+// //
+// //     void                  getMeasureElementUpLinkToMeasure (
+// //                             S_msrMeasure& upLinkToMeasure) const override;
+// //
+// //     void                  setTupletElementUpLinkToMeasure (
+// //                             const S_msrMeasure& measure);
+// //
+// //     S_msrMeasure          getTupletElementUpLinkToMeasure () const;
 //
 //     void                  setPositionInTuplet (
 //                             int positionInTuplet)
@@ -75,21 +79,21 @@ namespace MusicFormats
 //
 //   protected:
 //
-//     // protected fields
-//     // ------------------------------------------------------
+//       // protected fields
+//       // ------------------------------------------------------
 //
 //     /*
 //       The uplinks to the tuplet and measure element are declared in the sub-classes,
 //       to allow for separate *.h files, C++ constraint
 //     */
 //
-//     S_msrMeasure          fTupletElementUpLinkToMeasure;
+// //     S_msrMeasure          fTupletElementUpLinkToMeasure;
 //
 //     int                   fPositionInTuplet;
 // };
 // typedef SMARTP<msrTupletElement> S_msrTupletElement;
 // EXP std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt);
-//
+
 
 }
 

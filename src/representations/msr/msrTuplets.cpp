@@ -107,8 +107,7 @@ msrTuplet::msrTuplet (
   const Rational&         memberNotesSoundingWholeNotes,
   const Rational&         memberNotesDisplayWholeNotes)
     : msrTupletElement (
-        inputLineNumber,
-        upLinkToMeasure)
+        inputLineNumber)
 {
   fTupletUpLinkToMeasure = upLinkToMeasure;
 
@@ -242,9 +241,10 @@ void msrTuplet::setMeasureElementUpLinkToMeasure (
   setTupletUpLinkToMeasure (measure);
 }
 
-S_msrMeasure msrTuplet::getMeasureElementUpLinkToMeasure () const
+void msrTuplet::getMeasureElementUpLinkToMeasure (
+  S_msrMeasure& upLinkToMeasure) const
 {
-  return getTupletUpLinkToMeasure ();
+  upLinkToMeasure = getTupletUpLinkToMeasure ();
 }
 
 void msrTuplet::setTupletUpLinkToMeasure (

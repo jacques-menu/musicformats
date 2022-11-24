@@ -108,7 +108,8 @@ class EXP msrChord : public msrTupletElement
     void                  setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure) override;
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override;
 
     void                  setChordUpLinkToMeasure (
                             const S_msrMeasure& measure);

@@ -143,12 +143,11 @@ msrChord::msrChord (
   const Rational&     chordDisplayWholeNotes,
   msrDurationKind     chordGraphicDurationKind)
     : msrTupletElement (
-        inputLineNumber,
-        upLinkToMeasure)
+        inputLineNumber)
 {
   fChordKind = msrChordInKind::kChordIn_NO_;
 
-//   fChordUpLinkToMeasure = upLinkToMeasure;
+  fChordUpLinkToMeasure = upLinkToMeasure;
 
   doSetMeasureElementSoundingWholeNotes (
     chordSoundingWholeNotes,
@@ -285,9 +284,10 @@ void  msrChord::setMeasureElementUpLinkToMeasure (
   setChordUpLinkToMeasure (measure);
 }
 
-S_msrMeasure  msrChord::getMeasureElementUpLinkToMeasure () const
+void msrChord::getMeasureElementUpLinkToMeasure (
+  S_msrMeasure& upLinkToMeasure) const
 {
-  return getChordUpLinkToMeasure ();
+  upLinkToMeasure = getChordUpLinkToMeasure ();
 }
 
 void msrChord::setChordUpLinkToMeasure (

@@ -63,8 +63,9 @@ class EXP msrBarNumberCheck : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setBarNumberCheckUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getBarNumberCheckUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getBarNumberCheckUpLinkToMeasure (); }
 
     void                  setBarNumberCheckUpLinkToMeasure (
                             const S_msrMeasure& measure);

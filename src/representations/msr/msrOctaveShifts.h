@@ -74,8 +74,9 @@ class EXP msrOctaveShift : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setOctaveShiftUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getOctaveShiftUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getOctaveShiftUpLinkToMeasure (); }
 
     void                  setOctaveShiftUpLinkToMeasure (
                             const S_msrMeasure& measure);

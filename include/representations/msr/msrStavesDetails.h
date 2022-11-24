@@ -189,8 +189,9 @@ class EXP msrStaffDetails : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setStaffDetailsUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getStaffDetailsUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getStaffDetailsUpLinkToMeasure (); }
 
     void                  setStaffDetailsUpLinkToMeasure (
                             const S_msrMeasure& measure);

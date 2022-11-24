@@ -21,63 +21,68 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrTupletElement::msrTupletElement (
-  int                 inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure)
+  int                 inputLineNumber)
     : msrMeasureElement (
         inputLineNumber)
 {
   fPositionInTuplet = -1;
 }
-
-// msrTupletElement::msrTupletElement ()
-// {}
+// msrTupletElement::msrTupletElement (
+//   int                 inputLineNumber,
+//   const S_msrMeasure& upLinkToMeasure)
+//     : msrMeasureElement (
+//         inputLineNumber)
+// {
+//   fPositionInTuplet = -1;
+// }
 
 msrTupletElement::~msrTupletElement ()
 {}
 
-void msrTupletElement::setMeasureElementUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-  setTupletElementUpLinkToMeasure (measure);
-}
-
-S_msrMeasure msrTupletElement::getMeasureElementUpLinkToMeasure () const
-{
-  return getTupletElementUpLinkToMeasure ();
-}
-
-void msrTupletElement::setTupletElementUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
-    ++gIndenter;
-
-    gLogStream <<
-      "==> Setting the uplink to measure of tuplet element " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif
-
-  fTupletElementUpLinkToMeasure = measure;
-}
-
-S_msrMeasure msrTupletElement::getTupletElementUpLinkToMeasure () const
-{
-  return fTupletElementUpLinkToMeasure;
-}
+// void msrTupletElement::setMeasureElementUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+//   setTupletElementUpLinkToMeasure (measure);
+// }
+//
+// void msrTupletElement::getMeasureElementUpLinkToMeasure (
+//   S_msrMeasure& upLinkToMeasure) const
+// {
+//   upLinkToMeasure = getTupletElementUpLinkToMeasure ();
+// }
+//
+// void msrTupletElement::setTupletElementUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+//     ++gIndenter;
+//
+//     gLogStream <<
+//       "==> Setting the uplink to measure of tuplet element " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif
+//
+//   fTupletElementUpLinkToMeasure = measure;
+// }
+//
+// S_msrMeasure msrTupletElement::getTupletElementUpLinkToMeasure () const
+// {
+//   return fTupletElementUpLinkToMeasure;
+// }
 
 std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt)
 {
