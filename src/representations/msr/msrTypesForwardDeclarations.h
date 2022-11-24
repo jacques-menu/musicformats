@@ -20,10 +20,6 @@ using namespace MusicXML2;
 namespace MusicFormats
 {
 
-/*
-#include "msrTypesForwardDeclarations.h"
-*/
-
 //______________________________________________________________________________
 class   msrAccordionRegistration;
 typedef SMARTP<msrAccordionRegistration> S_msrAccordionRegistration;
