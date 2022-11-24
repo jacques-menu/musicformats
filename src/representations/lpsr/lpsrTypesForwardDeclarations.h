@@ -43,6 +43,9 @@ typedef SMARTP<lpsrBookPartBlock> S_lpsrBookPartBlock;
 class   lpsrChordNamesContext;
 typedef SMARTP<lpsrChordNamesContext> S_lpsrChordNamesContext;
 
+class   lpsrElement;
+typedef SMARTP<lpsrElement> S_lpsrElement;
+
 class   lpsrFiguredBassContext;
 typedef SMARTP<lpsrFiguredBassContext> S_lpsrFiguredBassContext;
 

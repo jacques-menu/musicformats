@@ -9,6 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <ostream>
+
 #include "msrMeasuresEnumTypes.h"
 
 
