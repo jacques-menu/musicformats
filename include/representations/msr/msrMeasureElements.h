@@ -16,7 +16,7 @@
 
 #include "msrTypesForwardDeclarations.h"
 
-// #include "msrElementsBase.h"
+#include "msrMeasures.h" // WINDOVE
 
 #include "mfRational.h"
 

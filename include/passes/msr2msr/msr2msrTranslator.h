@@ -15,9 +15,9 @@
 #include <map>
 #include <vector>
 
-// libmusicxml2
 #include "visitor.h"
 
+#include "msrTypesForwardDeclarations.h"
 
 
 namespace MusicFormats
