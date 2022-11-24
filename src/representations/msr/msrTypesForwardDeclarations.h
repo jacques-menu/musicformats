@@ -373,6 +373,9 @@ typedef SMARTP<msrTransposition> S_msrTransposition;
 class   msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
 
+class   msrTupletElement;
+typedef SMARTP<msrTupletElement> S_msrTupletElement;
+
 class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
 

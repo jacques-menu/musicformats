@@ -37,6 +37,30 @@ A circular dependency is when two (or more) classes depend on each other. For ex
 common prefixes
 
 
+
+
+https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2027?view=msvc-170
+
+
+It is possible to declare a pointer to a declared but undefined type. But C++ does not allow a reference to an undefined type.
+The following sample generates C2027.
+C++
+
+Copy
+// C2027_b.cpp
+class A;
+A& CreateA();
+
+class B;
+B* CreateB();
+
+int main() {
+   CreateA();   // C2027
+   CreateB();   // OK
+}
+
+
+
 % -------------------------------------------------------------------------
 \section{Files naming conventions}
 % -------------------------------------------------------------------------

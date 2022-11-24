@@ -17,8 +17,7 @@
 #include "msrTypesForwardDeclarations.h"
 
 #include "msrMeasureElements.h"
-// #include "msrMeasures.h"
-
+#include "msrMeasures.h"
 
 
 
@@ -31,31 +30,31 @@ namespace MusicFormats
   hence class msrTupletElement
 */
 
-class EXP msrTupletElement : public msrMeasureElement
-{
-  public:
-
-    // creation from MusicXML
-    // ------------------------------------------------------
-
-  protected:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          msrTupletElement (
-                            int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure);
-
-//                           msrTupletElement ();
-
-    virtual               ~msrTupletElement ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
+// class EXP msrTupletElement : public msrMeasureElement
+// {
+//   public:
+//
+//     // creation from MusicXML
+//     // ------------------------------------------------------
+//
+//   protected:
+//
+//     // constructors/destructor
+//     // ------------------------------------------------------
+//
+//                           msrTupletElement (
+//                             int                 inputLineNumber,
+//                             const S_msrMeasure& upLinkToMeasure);
+//
+// //                           msrTupletElement ();
+//
+//     virtual               ~msrTupletElement ();
+//
+//   public:
+//
+//     // set and get
+//     // ------------------------------------------------------
+//
 //     // uplink to measure
 //     void                  setMeasureElementUpLinkToMeasure (
 //                             const S_msrMeasure& measure) override;
@@ -85,12 +84,12 @@ class EXP msrTupletElement : public msrMeasureElement
 //     */
 //
 //     S_msrMeasure          fTupletElementUpLinkToMeasure;
-
+//
 //     int                   fPositionInTuplet;
-};
-typedef SMARTP<msrTupletElement> S_msrTupletElement;
-EXP std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt);
-
+// };
+// typedef SMARTP<msrTupletElement> S_msrTupletElement;
+// EXP std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt);
+//
 
 }
 

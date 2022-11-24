@@ -908,7 +908,8 @@ void msrMeasure::setMeasurePuristNumber (
 //   fMeasureVoicePosition += wholeNotesDelta;
 // }
 
-void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
+void msrMeasure::appendElementToMeasure (
+  const S_msrMeasureElement& elem)
 {
   int inputLineNumber =
     elem->getInputLineNumber ();
@@ -2032,11 +2033,21 @@ void msrMeasure::appendBarLineToMeasure (
   }
 #endif
 
-  // register barLine's measure number
+  // populate elem uplink to measure
   barLine->
-    getMeasureElementUpLinkToMeasure ()->
+    setMeasureElementUpLinkToMeasure (this);
+
+  // register barLine's measure number if already possible JMI v0.9.66 ???
+  S_msrMeasure
+    upLinkToMeasure =
+      barLine->
+        getMeasureElementUpLinkToMeasure ();
+
+  if (upLinkToMeasure) {
+    upLinkToMeasure->
       setMeasureNumber (
         fMeasureNumber);
+  }
 
   // set barLine's position in measure if relevant
   switch (voice->getVoiceKind ()) {

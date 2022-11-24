@@ -306,8 +306,8 @@ void msrTuplet::appendNoteToTuplet (
   fTupletElementsList.push_back (note);
 
   // set note's position in tuplet
-//   note->setPositionInTuplet (
-//     fTupletElementsList.size ());
+  note->setPositionInTuplet (
+    fTupletElementsList.size ());
 
   // register note's uplink to tuplet
   note->
@@ -367,12 +367,8 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
   fTupletElementsList.push_back (chord);
 
   // set chord's position in tuplet
-//   chord->setPositionInTuplet (
-//     fTupletElementsList.size ());
-
-  // set chord's position in tuplet
-//   chord->setPositionInTuplet (
-//     fTupletElementsList.size ());
+  chord->setPositionInTuplet (
+    fTupletElementsList.size ());
 
   // DO NOT account for the chord duration,
   // since its first note has been accounted for already
@@ -420,8 +416,8 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
   fTupletElementsList.push_back (tuplet);
 
   // set tuplet's position in tuplet
-//   tuplet->setPositionInTuplet (
-//     fTupletElementsList.size ());
+  tuplet->setPositionInTuplet (
+    fTupletElementsList.size ());
 
   // account for tuplet duration
   fMeasureElementSoundingWholeNotes +=
@@ -451,8 +447,8 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
   fTupletElementsList.push_back (tuplet);
 
   // set tuplet's position in tuplet
-//   tuplet->setPositionInTuplet (
-//     fTupletElementsList.size ());
+  tuplet->setPositionInTuplet (
+    fTupletElementsList.size ());
 
   // account for tuplet duration
   fMeasureElementSoundingWholeNotes +=
@@ -1135,7 +1131,7 @@ void msrTuplet::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fPositionInTuplet" << " : " <<
-//     fPositionInTuplet <<
+    fPositionInTuplet <<
     std::endl;
 
   os << ']' << std::endl;

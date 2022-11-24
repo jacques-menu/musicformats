@@ -6063,9 +6063,9 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
 
         // get theMsrNote's position in tuplet
         size_t
-          notePositionInTuplet = 0;
-//             theMsrNote->
-//               getPositionInTuplet (); JMI v0.66
+          notePositionInTuplet =
+            theMsrNote->
+              getPositionInTuplet (); // JMI v0.9.66
 
         // compute the type std::string if relevant
         std::string typeString;

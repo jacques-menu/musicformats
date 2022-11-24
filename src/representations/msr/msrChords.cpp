@@ -1617,7 +1617,7 @@ void msrChord::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fPositionInTuplet" << " : " <<
-//     fPositionInTuplet <<
+    fPositionInTuplet <<
     std::endl;
 
   // print simplified position in measure if relevant
@@ -2402,7 +2402,7 @@ void msrChord::printShort (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fPositionInTuplet" << " : " <<
-//     fPositionInTuplet <<
+    fPositionInTuplet <<
     std::endl;
 
   // print the chord grace notes group link before if any

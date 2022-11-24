@@ -666,38 +666,54 @@ void msrBarLine::print (std::ostream& os) const
     ", fBarLineCategoryKind: " <<
     msrBarLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    ", fBarLineUpLinkToMeasure: " << fBarLineUpLinkToMeasure->asShortString () <<
-    ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  const int fieldWidth = 24;
+  const int fieldWidth = 33;
+
+  os << std::left <<
+    "fBarLineUpLinkToMeasure" << " : ";
+    if (fBarLineUpLinkToMeasure) {
+      os <<  std::endl;
+      ++gIndenter;
+      os <<
+        fBarLineUpLinkToMeasure;
+      --gIndenter;
+    }
+    else {
+      os << "[NONE]" << std::endl;
+    }
 
   os << std::left <<
     std::setw (fieldWidth) <<
+    "fMeasureElementMeasurePosition" << " : " <<
+    fMeasureElementMeasurePosition <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
     "fLocationKind" << " : " <<
-    msrBarLineLocationKindAsString (fLocationKind) <<
+    fLocationKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fStyleKind" << " : " <<
-    msrBarLineStyleKindAsString (fStyleKind) <<
+    fStyleKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fRepeatDirectionKind" << " : " <<
-    msrBarLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
+    fRepeatDirectionKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fRepeatWingedKind" << " : " <<
-    msrBarLineRepeatWingedKindAsString (fRepeatWingedKind) <<
+    fRepeatWingedKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fEndingTypeKind" << " : " <<
-    msrBarLineEndingTypeKindAsString (fEndingTypeKind) <<
+    fEndingTypeKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fEndingNumber" << " : " <<
@@ -712,20 +728,17 @@ void msrBarLine::print (std::ostream& os) const
 /* JMI
     std::setw (fieldWidth) <<
     "fBarLineCategoryKind" << " : " <<
-    msrBarLineCategoryKindAsString (
-      fBarLineCategoryKind) <<
+    fBarLineCategoryKind <<
     std::endl <<
 */
 
     std::setw (fieldWidth) <<
     "fBarLineHasSegnoKind" << " : " <<
-    msrBarLineHasSegnoKindAsString (
-      fBarLineHasSegnoKind) <<
+    fBarLineHasSegnoKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fBarLineHasCodaKind" << " : " <<
-    msrBarLineHasCodaKindAsString (
-      fBarLineHasCodaKind) <<
+    fBarLineHasCodaKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
