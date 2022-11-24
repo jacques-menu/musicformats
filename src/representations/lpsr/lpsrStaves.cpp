@@ -126,7 +126,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffgroupBlock& nst
 
 //______________________________________________________________________________
 S_lpsrNewStaffTuningBlock lpsrNewStaffTuningBlock::create (
-  int              inputLineNumber,
+  int                     inputLineNumber,
   const S_msrStaffTuning& staffTuning)
 {
   lpsrNewStaffTuningBlock* o =
@@ -137,7 +137,7 @@ S_lpsrNewStaffTuningBlock lpsrNewStaffTuningBlock::create (
 }
 
 lpsrNewStaffTuningBlock::lpsrNewStaffTuningBlock (
-  int              inputLineNumber,
+  int                     inputLineNumber,
   const S_msrStaffTuning& staffTuning)
     : lpsrElement (inputLineNumber)
 {

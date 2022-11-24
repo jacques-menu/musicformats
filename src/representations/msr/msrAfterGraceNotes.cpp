@@ -35,7 +35,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
 {
   msrAfterGraceNotesGroupContents* o =
@@ -47,7 +47,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
 }
 
 msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
