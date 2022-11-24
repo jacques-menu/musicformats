@@ -41,6 +41,7 @@
 #include "msrMeasureRepeats.h"
 #include "msrRehearsalMarks.h"
 #include "msrRepeats.h"
+#include "msrRepeatConstants.h"
 #include "msrStaves.h"
 #include "msrTempos.h"
 #include "msrVoiceStaffChanges.h"
@@ -5377,7 +5378,7 @@ void msrVoice::handleRepeatEndInVoice (
 }
 
 void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
-  int         inputLineNumber,
+  int          inputLineNumber,
   S_msrRepeat& currentRepeat)
 {
 #ifdef TRACING_IS_ENABLED
@@ -5831,9 +5832,9 @@ void msrVoice::handleRepeatEndingStartInVoice (
           case 0:
             // this the first ending of a voice-level repeat without start
             // -------------------------------------
-//             handleVoiceLevelRepeatEndingStartWithoutExplicitStart ( BOUFFE
-//               inputLineNumber,
-//               nullptr);
+            handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
+              inputLineNumber,
+              gGlobalNullRepeatSmartPointer); // set later in XXX() JMI v0.9.66
             break;
 
           case 1:

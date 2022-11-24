@@ -997,7 +997,7 @@ class EXP msrVoice : public msrElement
                             int           repeatTimes);
 
     void                  handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
-                            int         inputLineNumber,
+                            int          inputLineNumber,
                             S_msrRepeat& currentRepeat);
 
     void                  handleVoiceLevelRepeatEndingStartWithExplicitStart (
