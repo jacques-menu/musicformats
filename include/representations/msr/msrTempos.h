@@ -453,8 +453,9 @@ class EXP msrTempo : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setTempoUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getTempoUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getTempoUpLinkToMeasure (); }
 
     void                  setTempoUpLinkToMeasure (
                             const S_msrMeasure& measure);

@@ -15,7 +15,6 @@
 #include "msrTypesForwardDeclarations.h"
 
 #include "msrMeasures.h"
-#include "msrTuplets.h"
 #include "msrTupletElements.h"
 #include "msrTupletsEnumTypes.h"
 #include "msrTupletFactors.h"
@@ -24,6 +23,50 @@
 
 namespace MusicFormats
 {
+
+class EXP msrTupletElement : public msrMeasureElement
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+//   protected:
+
+      // constructors/destructor
+      // ------------------------------------------------------
+
+                          msrTupletElement (
+                            int                 inputLineNumber);
+
+    virtual               ~msrTupletElement ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    void                  setPositionInTuplet (
+                            int positionInTuplet)
+                              { fPositionInTuplet = positionInTuplet; }
+
+    const size_t          getPositionInTuplet () const
+                              { return fPositionInTuplet; }
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    /*
+      The uplinks to the tuplet and measure element are declared in the sub-classes,
+      to allow for separate *.h files, C++ constraint
+    */
+
+    int                   fPositionInTuplet;
+};
+typedef SMARTP<msrTupletElement> S_msrTupletElement;
+EXP std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt);
 
 //______________________________________________________________________________
 class EXP msrTuplet : public msrTupletElement
@@ -91,7 +134,8 @@ class EXP msrTuplet : public msrTupletElement
     void                  setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure) override;
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override;
 
     void                  setTupletUpLinkToMeasure (
                             const S_msrMeasure& measure);

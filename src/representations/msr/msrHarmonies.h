@@ -333,8 +333,9 @@ class EXP msrHarmony : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setHarmonyUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getHarmonyUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getHarmonyUpLinkToMeasure (); }
 
     void                  setHarmonyUpLinkToMeasure (
                             const S_msrMeasure& measure);

@@ -212,8 +212,9 @@ class EXP msrKey : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setKeyUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getKeyUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getKeyUpLinkToMeasure (); }
 
     void                  setKeyUpLinkToMeasure (
                             const S_msrMeasure& measure);

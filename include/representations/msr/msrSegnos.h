@@ -68,8 +68,9 @@ class EXP msrSegno : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setSegnoUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getSegnoUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getSegnoUpLinkToMeasure (); }
 
     void                  setSegnoUpLinkToMeasure (
                             const S_msrMeasure& measure);
@@ -161,8 +162,9 @@ class EXP msrDalSegno : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setDalSegnoUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getDalSegnoUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getDalSegnoUpLinkToMeasure (); }
 
     void                  setDalSegnoUpLinkToMeasure (
                             const S_msrMeasure& measure);

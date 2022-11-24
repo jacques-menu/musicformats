@@ -221,8 +221,9 @@ class EXP msrFiguredBass : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setFiguredBassUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getFiguredBassUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getFiguredBassUpLinkToMeasure (); }
 
     void                  setFiguredBassUpLinkToMeasure (
                             const S_msrMeasure& measure);

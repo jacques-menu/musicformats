@@ -82,7 +82,7 @@ void msrElement::acceptOut (basevisitor* v)
 }
 
 void msrElement::browseDataAlongPathToVoice (
-  basevisitor*     v,
+  basevisitor*            v,
   const S_msrPathToVoice& pathToVoice)
 {
   /*

@@ -75,12 +75,17 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
+    S_msrMeasure upLinkToMeasure;
+
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
     gLogStream <<
       "==> Setting measure element sounding whole notes of " <<
       asString () <<
       " to 'WHOLE_NOTES " << wholeNotes << // JMI v0.9.66
       "' in measure '" <<
-      getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
+      upLinkToMeasure->getMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -106,6 +111,10 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+    S_msrMeasure upLinkToMeasure;
+
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
 
     gLogStream <<
       "Setting measure element position in measure of " <<
@@ -116,7 +125,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
-      getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
+      upLinkToMeasure->getMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -178,12 +187,17 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+    S_msrMeasure upLinkToMeasure;
+
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
     gLogStream <<
       "Setting measure element position in voice of " <<
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
-      getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
+      upLinkToMeasure->getMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -200,12 +214,17 @@ void msrMeasureElement::setMeasureElementVoicePosition (
   // set measure element position in voice
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+    S_msrMeasure upLinkToMeasure;
+
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
     gLogStream <<
       "Setting measure element position in voice of " <<
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
-      getMeasureElementUpLinkToMeasure ()->getMeasureNumber () <<
+      upLinkToMeasure->getMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<

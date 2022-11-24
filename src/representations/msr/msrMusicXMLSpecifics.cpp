@@ -1204,9 +1204,10 @@ void msrPrintLayout::setMeasureElementUpLinkToMeasure (
   setPrintLayoutUpLinkToMeasure (measure);
 }
 
-S_msrMeasure msrPrintLayout::getMeasureElementUpLinkToMeasure () const
+void msrPrintLayout::getMeasureElementUpLinkToMeasure (
+  S_msrMeasure& upLinkToMeasure) const
 {
-  return getPrintLayoutUpLinkToMeasure ();
+  upLinkToMeasure = getPrintLayoutUpLinkToMeasure ();
 }
 
 void msrPrintLayout::setPrintLayoutUpLinkToMeasure (

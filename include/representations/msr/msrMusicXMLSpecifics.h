@@ -692,7 +692,8 @@ class EXP msrPrintLayout : public msrMeasureElement
     void                  setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure) override;
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override;
 
     void                  setPrintLayoutUpLinkToMeasure (
                             const S_msrMeasure& measure);

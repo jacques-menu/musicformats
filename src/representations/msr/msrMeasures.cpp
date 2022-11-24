@@ -943,10 +943,15 @@ void msrMeasure::appendElementToMeasure (
     setMeasureElementUpLinkToMeasure (this);
 
   // set elem's measure number
+  S_msrMeasure upLinkToMeasure;
+
   elem->
-    getMeasureElementUpLinkToMeasure ()->
-      setMeasureNumber (
-        fMeasureNumber);
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
+  upLinkToMeasure->
+    setMeasureNumber (
+      fMeasureNumber);
 
   // set elem's position in measure
   elem->
@@ -991,10 +996,15 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 #endif
 
   // set elem's measure number
+  S_msrMeasure upLinkToMeasure;
+
   elem->
-    getMeasureElementUpLinkToMeasure ()->
-      setMeasureNumber (
-        fMeasureNumber);
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
+  upLinkToMeasure->
+    setMeasureNumber (
+      fMeasureNumber);
 
   // set elem's position in measure
   elem->
@@ -1308,10 +1318,15 @@ void msrMeasure::insertElementAtMeasurePosition (
   }
 
   // set elem's measure number
+  S_msrMeasure upLinkToMeasure;
+
   elem->
-    getMeasureElementUpLinkToMeasure ()->
-      setMeasureNumber (
-        fMeasureNumber);
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
+  upLinkToMeasure->
+    setMeasureNumber (
+      fMeasureNumber);
 
   // set elem's position in measure
   elem->
@@ -2038,10 +2053,11 @@ void msrMeasure::appendBarLineToMeasure (
     setMeasureElementUpLinkToMeasure (this);
 
   // register barLine's measure number if already possible JMI v0.9.66 ???
-  S_msrMeasure
-    upLinkToMeasure =
-      barLine->
-        getMeasureElementUpLinkToMeasure ();
+  S_msrMeasure upLinkToMeasure;
+
+  barLine->
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
 
   if (upLinkToMeasure) {
     upLinkToMeasure->
@@ -2325,10 +2341,15 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
     setMeasureElementUpLinkToMeasure (this);
 
   // set note's measure number
+  S_msrMeasure upLinkToMeasure;
+
   note->
-    getMeasureElementUpLinkToMeasure ()->
-      setMeasureNumber (
-        fMeasureNumber);
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
+  upLinkToMeasure->
+    setMeasureNumber (
+      fMeasureNumber);
 
   // set the note's position in measure,
   // this can lead to set the position in measure of the harmonies
@@ -2789,10 +2810,15 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   ++gIndenter;
 
   // set harmony's measure number
+  S_msrMeasure upLinkToMeasure;
+
   harmony->
-    getMeasureElementUpLinkToMeasure ()->
-      setMeasureNumber (
-        fMeasureNumber);
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
+  upLinkToMeasure->
+    setMeasureNumber (
+      fMeasureNumber);
 
   // set the harmony's position in measure, right now
 //   harmony->
@@ -2851,10 +2877,15 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
   ++gIndenter;
 
   // set harmony's measure number
+  S_msrMeasure upLinkToMeasure;
+
   harmony->
-    getMeasureElementUpLinkToMeasure ()->
-      setMeasureNumber (
-        fMeasureNumber);
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
+  upLinkToMeasure->
+    setMeasureNumber (
+      fMeasureNumber);
 
   // set the harmony's position in measure NO JMI v0.9.66
 //   harmony->
@@ -2912,10 +2943,15 @@ void msrMeasure::appendFiguredBassToMeasure (
   ++gIndenter;
 
   // set figuredBass's measure number
+  S_msrMeasure upLinkToMeasure;
+
   figuredBass->
-    getMeasureElementUpLinkToMeasure ()->
-      setMeasureNumber (
-        fMeasureNumber);
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
+  upLinkToMeasure->
+    setMeasureNumber (
+      fMeasureNumber);
 
   // set the figuredBass's position in measure
 //   figuredBass->

@@ -226,8 +226,9 @@ class EXP msrTimeSignature : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setTimeSignatureUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getTimeSignatureUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getTimeSignatureUpLinkToMeasure (); }
 
     void                  setTimeSignatureUpLinkToMeasure (
                             const S_msrMeasure& measure);

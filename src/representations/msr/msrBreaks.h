@@ -74,8 +74,9 @@ class EXP msrLineBreak : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setLineBreakUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getLineBreakUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getLineBreakUpLinkToMeasure (); }
 
     void                  setLineBreakUpLinkToMeasure (
                             const S_msrMeasure& measure);
@@ -180,8 +181,9 @@ class EXP msrPageBreak : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setPageBreakUpLinkToMeasure (measure); }
 
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                            { return getPageBreakUpLinkToMeasure (); }
+    void                  getMeasureElementUpLinkToMeasure (
+                            S_msrMeasure& upLinkToMeasure) const override
+                            { upLinkToMeasure = getPageBreakUpLinkToMeasure (); }
 
     void                  setPageBreakUpLinkToMeasure (
                             const S_msrMeasure& measure);
