@@ -19,17 +19,13 @@
 
 #include "msrBookElements.h"
 
+#include "msrBooks.h"
 #include "msrCredits.h"
 #include "msrIdentification.h"
-
-#include "msrMeasuresSlices.h"
-
-#include "msrScaling.h"
-
-#include "msrMusicXMLSpecifics.h"
-
-#include "msrBooks.h"
+#include "msrMusicXMLBasicTypes.h"
 #include "msrPartGroups.h"
+#include "msrScaling.h"
+#include "msrMeasuresSlices.h"
 #include "msrVoices.h"
 
 

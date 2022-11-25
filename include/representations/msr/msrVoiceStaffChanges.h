@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrStaffChanges___
-#define ___msrStaffChanges___
+#ifndef ___msrVoiceStaffChange___
+#define ___msrVoiceStaffChange___
 
 #include "msrMeasureElements.h"
 

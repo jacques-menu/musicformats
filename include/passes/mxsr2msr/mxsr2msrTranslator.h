@@ -1181,7 +1181,7 @@ class EXP mxsr2msrTranslator :
 
     std::string               fCurrentDisplayText;
 
-    S_msrPrintLayout          fCurrentPrintLayout;
+    S_msrMusicXMLPrintLayout  fCurrentMusicXMLPrintLayout;
 
     Bool                      fOnGoingPrint;
 

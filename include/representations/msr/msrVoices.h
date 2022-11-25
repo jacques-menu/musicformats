@@ -422,8 +422,8 @@ class EXP msrVoice : public msrElement
                             int voiceNumber);
 
     // print layout MusicXML specific??? JMI
-     void                 appendPrintLayoutToVoice (
-                            const S_msrPrintLayout& printLayout);
+     void                 appendMusicXMLPrintLayoutToVoice (
+                            const S_msrMusicXMLPrintLayout& musicXMLPrintLayout);
 
     // measures
 
