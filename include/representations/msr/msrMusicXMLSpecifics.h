@@ -15,9 +15,10 @@
 #include <list>
 
 #include "msrElements.h"
+#include "msrMargins.h"
+#include "msrMeasures.h"
 #include "msrMeasureElements.h"
 
-#include "msrMargins.h"
 
 
 namespace MusicFormats
@@ -151,12 +152,12 @@ class EXP msrPageLayout : public msrElement
     // ------------------------------------------------------
 
     // page size
-    void                  setPageHeight (S_msrLength val)
+    void                  setPageHeight (const S_msrLength& val)
                               { fPageHeight = val; }
     S_msrLength           getPageHeight () const
                               { return fPageHeight; }
 
-    void                  setPageWidth (S_msrLength val)
+    void                  setPageWidth (const S_msrLength& val)
                               { fPageWidth = val; }
     S_msrLength           getPageWidth () const
                               { return fPageWidth; }
@@ -268,12 +269,12 @@ class EXP msrSystemLayout : public msrElement
                               { return fRightMargin; }
 
     // distances
-    void                  setSystemDistance (S_msrLength val)
+    void                  setSystemDistance (const S_msrLength& val)
                               { fSystemDistance = val; }
     S_msrLength           getSystemDistance () const
                               { return fSystemDistance; }
 
-    void                  setTopSystemDistance (S_msrLength val)
+    void                  setTopSystemDistance (const S_msrLength& val)
                               { fTopSystemDistance = val; }
     S_msrLength           getTopSystemDistance () const
                               { return fTopSystemDistance; }
@@ -484,7 +485,7 @@ class EXP msrStaffLayout : public msrElement
                               { return fStaffNumber; }
 
     // staff distance
-    void                  setStaffDistance (S_msrLength val)
+    void                  setStaffDistance (const S_msrLength& val)
                               { fStaffDistance = val; }
     S_msrLength           getStaffDistance () const
                               { return fStaffDistance; }
@@ -566,7 +567,7 @@ class EXP msrMeasureLayout : public msrElement
     // ------------------------------------------------------
 
     // measure distance
-    void                  setMeasureDistance (S_msrLength val)
+    void                  setMeasureDistance (const S_msrLength& val)
                               { fMeasureDistance = val; }
     S_msrLength           getMeasureDistance () const
                               { return fMeasureDistance; }

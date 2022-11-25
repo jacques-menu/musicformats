@@ -13,6 +13,8 @@
 #define ___msrAfterGraceNotes___
 
 #include "msrElements.h"
+#include "msrMeasureElements.h"
+#include "msrParts.h"
 #include "msrVoices.h"
 
 
@@ -28,7 +30,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrAfterGraceNotesGroupContents> create (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice);
 
     SMARTP<msrAfterGraceNotesGroupContents> createAfterGraceNotesGroupContentsNewbornClone (
@@ -43,7 +45,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // ------------------------------------------------------
 
                           msrAfterGraceNotesGroupContents (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice);
 
     virtual               ~msrAfterGraceNotesGroupContents ();

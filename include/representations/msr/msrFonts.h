@@ -21,10 +21,8 @@
 namespace MusicFormats
 {
 
-// fonts
 //______________________________________________________________________________
 // data types
-// ------------------------------------------------------
 
 enum class msrFontSizeKind {
   kFontSizeNone,
@@ -37,8 +35,37 @@ enum class msrFontSizeKind {
 std::string msrFontSizeKindAsString (
   msrFontSizeKind fontSizeKind);
 
+enum class msrFontStyleKind {
+  kFontStyleNone,
+  kFontStyleNormal, KFontStyleItalic
+};
+
+std::string msrFontStyleKindAsString (
+  msrFontStyleKind fontStyleKind);
+
+std::ostream& operator << (std::ostream& os, const msrFontStyleKind& elt);
+
+msrFontStyleKind msrFontStyleKindFromString (
+  int                inputLineNumber,
+  const std::string& fontStyleString);
+
+enum class msrFontWeightKind {
+  kFontWeightNone,
+  kFontWeightNormal, kFontWeightBold
+};
+
+std::string msrFontWeightKindAsString (
+  msrFontWeightKind fontWeightKind);
+
+std::ostream& operator << (std::ostream& os, const msrFontWeightKind& elt);
+
+msrFontWeightKind msrFontWeightKindFromString (
+  int                inputLineNumber,
+  const std::string& fontWeightString);
+
 std::ostream& operator << (std::ostream& os, const msrFontSizeKind& elt);
 
+//______________________________________________________________________________
 class EXP msrFontSize : public smartable
 {
   public:
@@ -82,6 +109,8 @@ class EXP msrFontSize : public smartable
 
     std::string           fontSizeAsString () const;
 
+    std::string           asString () const;
+
   public:
 
     // ------------------------------------------------------
@@ -101,34 +130,6 @@ class EXP msrFontSize : public smartable
 };
 typedef SMARTP<msrFontSize> S_msrFontSize;
 EXP std::ostream& operator << (std::ostream& os, const S_msrFontSize& elt);
-
-enum class msrFontStyleKind {
-  kFontStyleNone,
-  kFontStyleNormal, KFontStyleItalic
-};
-
-std::string msrFontStyleKindAsString (
-  msrFontStyleKind fontStyleKind);
-
-std::ostream& operator << (std::ostream& os, const msrFontStyleKind& elt);
-
-msrFontStyleKind msrFontStyleKindFromString (
-  int           inputLineNumber,
-  const std::string& fontStyleString);
-
-enum class msrFontWeightKind {
-  kFontWeightNone,
-  kFontWeightNormal, kFontWeightBold
-};
-
-std::string msrFontWeightKindAsString (
-  msrFontWeightKind fontWeightKind);
-
-std::ostream& operator << (std::ostream& os, const msrFontWeightKind& elt);
-
-msrFontWeightKind msrFontWeightKindFromString (
-  int           inputLineNumber,
-  const std::string& fontWeightString);
 
 
 }

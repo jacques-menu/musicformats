@@ -51,7 +51,7 @@ namespace MusicFormats
 2022-11-24T08:40:38.8477149Z mfslScanner.ll(564,11): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [D:\a\musicformats\musicformats\build\libdir\libmusicformats.vcxproj]
 */
 
-  #define strerror strerror_s
+//   #define strerror strerror_s // needs 2 arguments...
 
 #endif
 

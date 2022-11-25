@@ -20,10 +20,6 @@ using namespace MusicXML2;
 namespace MusicFormats
 {
 
-/*
-#include "lpsrTypesForwardDeclarations.h"
-*/
-
 //______________________________________________________________________________
 class   lpsrBarCommand;
 typedef SMARTP<lpsrBarCommand> S_lpsrBarCommand;

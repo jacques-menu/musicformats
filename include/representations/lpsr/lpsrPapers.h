@@ -71,33 +71,33 @@ class EXP lpsrPaper : public lpsrElement
                             { return fPageLayout; }
 
     // indents
-    void                  setHorizontalShift (S_msrLength value)
+    void                  setHorizontalShift (const S_msrLength& value)
                               { fHorizontalShift = value; }
     S_msrLength           getHorizontalShift () const
                               { return fHorizontalShift; }
 
-    void                  setIndent (S_msrLength value)
+    void                  setIndent (const S_msrLength& value)
                               { fIndent = value; }
     S_msrLength           getIndent () const
                               { return fIndent; }
 
-    void                  setShortIndent (S_msrLength value)
+    void                  setShortIndent (const S_msrLength& value)
                               { fShortIndent = value; }
     S_msrLength           getShortIndent () const
                               { return fShortIndent; }
 
     // spaces
-    void                  setMarkupSystemSpacingPadding (S_msrLength val)
+    void                  setMarkupSystemSpacingPadding (const S_msrLength& val)
                               { fMarkupSystemSpacingPadding = val; }
     S_msrLength           getMarkupSystemSpacingPadding () const
                               { return fMarkupSystemSpacingPadding; }
 
-    void                  setBetweenSystemSpace (S_msrLength val)
+    void                  setBetweenSystemSpace (const S_msrLength& val)
                               { fBetweenSystemSpace = val; }
     S_msrLength           getBetweenSystemSpace () const
                               { return fBetweenSystemSpace; }
 
-    void                  setPageTopSpacing (S_msrLength val)
+    void                  setPageTopSpacing (const S_msrLength& val)
                               { fPageTopSpacing = val; }
     S_msrLength           getPageTopSpacing () const
                               { return fPageTopSpacing; }
