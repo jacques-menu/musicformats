@@ -135,8 +135,8 @@ class EXP msrSegment : public msrVoiceElement
 
     // print layout MusicXML specific??? JMI
 
-    void                  appendPrintLayoutToSegment (
-                            const S_msrPrintLayout& printLayout);
+    void                  appendMusicXMLPrintLayoutToSegment (
+                            const S_msrMusicXMLPrintLayout& musicXMLPrintLayout);
 
     // backup and padding
 

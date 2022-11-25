@@ -184,8 +184,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
     const std::set<std::string>&    getMusicXMLPartsKeepIDSet () const
                               { return fMusicXMLPartsKeepIDSet; }
 
-    const std::set<std::string>&    getMusicXMLMusicXMLPartsIgnoreNameSet () const
-                              { return fMusicXMLMusicXMLPartsIgnoreNameSet; }
+    const std::set<std::string>&    getMusicXMLPartsIgnoreNameSet () const
+                              { return fMusicXMLPartsIgnoreNameSet; }
     const std::set<std::string>&    getMusicXMLPartsKeepNameSet () const
                               { return fMusicXMLPartsKeepNameSet; }
 
@@ -551,7 +551,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     std::set<std::string> fPartsIgnoreIDSet;
     std::set<std::string> fMusicXMLPartsKeepIDSet;
 
-    std::set<std::string> fMusicXMLMusicXMLPartsIgnoreNameSet;
+    std::set<std::string> fMusicXMLPartsIgnoreNameSet;
     std::set<std::string> fMusicXMLPartsKeepNameSet;
 
      // for checkOptionsConsistency()
@@ -568,7 +568,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // staves
     // --------------------------------------
 
-    std::set<int>              fMusicXMLMusicXMLStavesIgnoreNumberSet;
+    std::set<int>              fMusicXMLStavesIgnoreNumberSet;
     std::set<int>              fMusicXMLStavesKeepNumberSet;
 
      // for checkOptionsConsistency()
@@ -580,7 +580,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // voices
     // --------------------------------------
 
-    std::set<int>              fMusicXMLMusicXMLVoicesIgnoreNumberSet;
+    std::set<int>              fMusicXMLVoicesIgnoreNumberSet;
     std::set<int>              fMusicXMLVoicesKeepNumberSet;
 
      // for checkOptionsConsistency()
