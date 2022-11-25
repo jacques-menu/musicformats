@@ -599,13 +599,13 @@ void msrSegment::setNextMeasureNumberInSegment (
   --gIndenter;
 }
 
-void msrSegment::appendPrintLayoutToSegment (
-  const S_msrPrintLayout& printLayout)
+void msrSegment::appendMusicXMLPrintLayoutToSegment (
+  const S_msrMusicXMLPrintLayout& musicXMLPrintLayout)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
+  if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
-      "Appending print layout " << printLayout->asString () <<
+      "Appending print layout " << musicXMLPrintLayout->asString () <<
       " to segment " << asString () <<
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -641,14 +641,14 @@ void msrSegment::appendPrintLayoutToSegment (
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
-      printLayout->getInputLineNumber (),
+      musicXMLPrintLayout->getInputLineNumber (),
       __FILE__, __LINE__,
       s.str ());
   }
 
   // register print layout in segments's current measure
   fSegmentLastMeasure->
-    appendPrintLayoutToMeasure (printLayout);
+    appendMusicXMLPrintLayoutToMeasure (musicXMLPrintLayout);
 
   --gIndenter;
 }

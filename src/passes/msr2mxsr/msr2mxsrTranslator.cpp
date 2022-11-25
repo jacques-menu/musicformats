@@ -1566,7 +1566,7 @@ void msr2mxsrTranslator::visitStart (S_msrSystemLayout& elt)
     systemLayoutElement =
       createMxmlelement (k_system_layout, "");
 
-  if (fOnGoingPrintLayout) {
+  if (fOnGoingMusicXMLPrintLayout) {
     // append it to the current print element
     fCurrentPrintElement->push (
       systemLayoutElement);
@@ -1676,7 +1676,7 @@ void msr2mxsrTranslator::visitStart (S_msrStaffLayout& elt)
       staffDistanceElement);
   }
 
-  if (fOnGoingPrintLayout) {
+  if (fOnGoingMusicXMLPrintLayout) {
     // append it to the current print element
     fCurrentPrintElement->push (
       staffLayoutElement);
@@ -1711,7 +1711,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureLayout& elt)
   }
 #endif
 
-  if (fOnGoingPrintLayout) {
+  if (fOnGoingMusicXMLPrintLayout) {
     // create a measure layout element
     Sxmlelement
       measureLayoutElement =
@@ -3243,11 +3243,11 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
   }
 
   // is there a print element to be appended?
-  S_msrPrintLayout
-    measurePrintLayout =
-      elt->getMeasurePrintLayout ();
+  S_msrMusicXMLPrintLayout
+    measureMusicXMLPrintLayout =
+      elt->getMeasureMusicXMLPrintLayout ();
 
-  if (measurePrintLayout) {
+  if (measureMusicXMLPrintLayout) {
     if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create a print comment
       std::stringstream s;
@@ -3352,7 +3352,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrPrintLayout& elt)
+void msr2mxsrTranslator::visitStart (S_msrMusicXMLPrintLayout& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -3360,14 +3360,14 @@ void msr2mxsrTranslator::visitStart (S_msrPrintLayout& elt)
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrPrintLayout '" <<
+      "--> Start visiting msrMusicXMLPrintLayout '" <<
       "', line " << inputLineNumber <<
       std::endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
+  if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
       std::endl <<
 //      "', voice \"" <<
@@ -3413,10 +3413,10 @@ void msr2mxsrTranslator::visitStart (S_msrPrintLayout& elt)
     fCurrentPrintElement->add (createMxmlAttribute ("page-number", s.str ()));
   }
 
-  fOnGoingPrintLayout = true;
+  fOnGoingMusicXMLPrintLayout = true;
 }
 
-void msr2mxsrTranslator::visitEnd (S_msrPrintLayout& elt)
+void msr2mxsrTranslator::visitEnd (S_msrMusicXMLPrintLayout& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -3424,7 +3424,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPrintLayout& elt)
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrPrintLayout '" <<
+      "--> End visiting msrMusicXMLPrintLayout '" <<
       "', line " << inputLineNumber <<
       std::endl;
   }
@@ -3433,7 +3433,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPrintLayout& elt)
   // forget about the current print layout element
   fCurrentPrintElement = nullptr;
 
-  fOnGoingPrintLayout = false;
+  fOnGoingMusicXMLPrintLayout = false;
 }
 
 //________________________________________________________________________

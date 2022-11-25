@@ -1835,13 +1835,13 @@ void msrVoice::setVoiceCurrentTimeSignature (
   fVoiceCurrentTimeSignature = timeSignature;
 };
 
-void msrVoice::appendPrintLayoutToVoice (
-  const S_msrPrintLayout& printLayout)
+void msrVoice::appendMusicXMLPrintLayoutToVoice (
+  const S_msrMusicXMLPrintLayout& musicXMLPrintLayout)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
+  if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
-      "Appending print layout '" << printLayout->asString () <<
+      "Appending print layout '" << musicXMLPrintLayout->asString () <<
       "' to voice \"" << getVoiceName () << "\"" <<
       std::endl;
   }
@@ -1850,7 +1850,7 @@ void msrVoice::appendPrintLayoutToVoice (
   ++gIndenter;
 
   fVoiceLastSegment->
-    appendPrintLayoutToSegment (printLayout);
+    appendMusicXMLPrintLayoutToSegment (musicXMLPrintLayout);
 
   --gIndenter;
 }

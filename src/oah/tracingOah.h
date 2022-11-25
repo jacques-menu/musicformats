@@ -58,7 +58,7 @@ class EXP tracingOahGroup : public oahGroup
 
     void                  initializeOptionsTraceAndDisplayOptions ();
 
-    void                  initializePrintLayoutstracingOah ();
+    void                  initializeMusicXMLPrintLayoutstracingOah ();
 
     void                  initializeRepeatsToSlashestracingOah ();
 
@@ -210,8 +210,8 @@ class EXP tracingOahGroup : public oahGroup
     // print layouts
     // --------------------------------------
 
-    Bool                  getTracePrintLayouts () const
-                              { return fTracePrintLayouts; }
+    Bool                  getTraceMusicXMLPrintLayouts () const
+                              { return fTraceMusicXMLPrintLayouts; }
 
     // segments and measures
     // --------------------------------------
@@ -809,7 +809,7 @@ class EXP tracingOahGroup : public oahGroup
     // print layouts
     // --------------------------------------
 
-    Bool                  fTracePrintLayouts;
+    Bool                  fTraceMusicXMLPrintLayouts;
 
     // segments and measures
     // --------------------------------------

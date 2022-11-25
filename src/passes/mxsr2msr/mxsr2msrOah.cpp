@@ -583,8 +583,8 @@ There can be several occurrences of this option.
 All the parts not ignored are kept.
 This option is incompatible with '-mkpn, -msr-keep-musicxml-part-name'.)",
       "PART_NAME",
-      "fMusicXMLMusicXMLPartsIgnoreNameSet",
-      fMusicXMLMusicXMLPartsIgnoreNameSet);
+      "fMusicXMLPartsIgnoreNameSet",
+      fMusicXMLPartsIgnoreNameSet);
 
   subGroup->
     appendAtomToSubGroup (
@@ -650,8 +650,8 @@ There can be several occurrences of this option.
 All the staves not ignored are kept.
 This option is incompatible with '-mkpn, -msr-keep-musicxml-staff-number'.)",
       "STAFF_NUMBER",
-      "fMusicXMLMusicXMLStavesIgnoreNumberSet",
-      fMusicXMLMusicXMLStavesIgnoreNumberSet);
+      "fMusicXMLStavesIgnoreNumberSet",
+      fMusicXMLStavesIgnoreNumberSet);
 
   subGroup->
     appendAtomToSubGroup (
@@ -699,8 +699,8 @@ There can be several occurrences of this option.
 All the voices not ignored are kept.
 This option is incompatible with '-mkpn, -msr-keep-musicxml-voice-number'.)",
       "VOICE_NUMBER",
-      "fMusicXMLMusicXMLVoicesIgnoreNumberSet",
-      fMusicXMLMusicXMLVoicesIgnoreNumberSet);
+      "fMusicXMLVoicesIgnoreNumberSet",
+      fMusicXMLVoicesIgnoreNumberSet);
 
   subGroup->
     appendAtomToSubGroup (
@@ -1591,7 +1591,7 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
     oahError (s.str ());
   }
 
-  if (fMusicXMLMusicXMLPartsIgnoreNameSet.size () > 0 && fMusicXMLPartsKeepNameSet.size () > 0) {
+  if (fMusicXMLPartsIgnoreNameSet.size () > 0 && fMusicXMLPartsKeepNameSet.size () > 0) {
     std::stringstream s;
 
     s <<
@@ -2044,15 +2044,15 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   gLogStream << std::left <<
     std::setw (valueFieldWidth) << "parts ignored names" << " : ";
 
-  if (! fMusicXMLMusicXMLPartsIgnoreNameSet.size ()) {
+  if (! fMusicXMLPartsIgnoreNameSet.size ()) {
     gLogStream <<
       "[NONE]";
   }
   else {
     for (
       std::set<std::string> ::const_iterator i =
-        fMusicXMLMusicXMLPartsIgnoreNameSet.begin ();
-      i != fMusicXMLMusicXMLPartsIgnoreNameSet.end ();
+        fMusicXMLPartsIgnoreNameSet.begin ();
+      i != fMusicXMLPartsIgnoreNameSet.end ();
       ++i
   ) {
         gLogStream <<

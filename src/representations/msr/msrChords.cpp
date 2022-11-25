@@ -28,13 +28,10 @@
 
 #include "msrArticulations.h"
 #include "msrGlissandos.h"
-#include "msrMusicXMLSpecifics.h"
+#include "msrMeasureConstants.h"
+#include "msrMusicXMLBasicTypes.h"
 #include "msrSlides.h"
 #include "msrTechnicals.h"
-
-#include "msrMeasureConstants.h"
-
-// #include "msrChords.h"
 
 #include "oahOah.h"
 

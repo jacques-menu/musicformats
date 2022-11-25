@@ -59,7 +59,7 @@ class EXP msr2mxsrTranslator :
 
   // print layouts
 
-  public visitor<S_msrPrintLayout>,
+  public visitor<S_msrMusicXMLPrintLayout>,
 
   // part groups
 
@@ -379,8 +379,8 @@ class EXP msr2mxsrTranslator :
     virtual void          visitEnd   (S_msrRehearsalMark& elt);
 */
     // print layouts
-    virtual void          visitStart (S_msrPrintLayout& elt);
-    virtual void          visitEnd   (S_msrPrintLayout& elt);
+    virtual void          visitStart (S_msrMusicXMLPrintLayout& elt);
+    virtual void          visitEnd   (S_msrMusicXMLPrintLayout& elt);
 
     // chords
     virtual void          visitStart (S_msrChord& elt);
@@ -675,7 +675,7 @@ class EXP msr2mxsrTranslator :
     std::list<Sxmlelement>         fScoreDefaultsStaffLayoutElementsList;
 
     // measure print layout
-    Sxmlelement               fCurrentMeasurePrintLayoutElement; // not used JMI
+    Sxmlelement               fCurrentMeasureMusicXMLPrintLayoutElement; // not used JMI
 
     // appearance
     // ------------------------------------------------------
@@ -854,7 +854,7 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fCurrentPrintElement;
 
-    Bool                      fOnGoingPrintLayout;
+    Bool                      fOnGoingMusicXMLPrintLayout;
 
     // backup and forward
     // ------------------------------------------------------

@@ -411,8 +411,8 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
     fCurrentMeasureWholeNotesDuration;
 
   // measure print layout, MusicXML specific
-  measureDeepClone->fMeasurePrintLayout =
-    fMeasurePrintLayout;
+  measureDeepClone->fMeasureMusicXMLPrintLayout =
+    fMeasureMusicXMLPrintLayout;
 
   // measure longest note
   measureDeepClone->fMeasureLongestNote = // JMI ???
@@ -1637,13 +1637,13 @@ void msrMeasure::setMeasureKind (
   fMeasureKind = measureKind;
 }
 
-void msrMeasure::appendPrintLayoutToMeasure (
-  const S_msrPrintLayout& printLayout)
+void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
+  const S_msrMusicXMLPrintLayout& musicXMLPrintLayout)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
+  if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
-      "Appending print layout " << printLayout->asString () <<
+      "Appending print layout " << musicXMLPrintLayout->asString () <<
       " to measure " <<
       this->asShortString () <<
       ", in voice \"" <<
@@ -1655,10 +1655,10 @@ void msrMeasure::appendPrintLayoutToMeasure (
 #endif
 
   // append it to the measure elements list
-  prependOtherElementToMeasure (printLayout);
+  prependOtherElementToMeasure (musicXMLPrintLayout);
 
   // register it for MusicXML generation from MSR
-  fMeasurePrintLayout = printLayout;
+  fMeasureMusicXMLPrintLayout = musicXMLPrintLayout;
 }
 
 void msrMeasure::appendClefToMeasure (

@@ -18,8 +18,13 @@
 // #include "msrElementsBase.h"
 
 #include "msrMeasuresEnumTypes.h"
+#include "msrMeasureElements.h"
+#include "msrMusicXMLPrintLayouts.h"
 #include "msrMoments.h"
+#include "msrNotes.h"
+#include "msrMusicXMLPrintLayouts.h"
 #include "msrSegments.h"
+#include "msrSegmentElements.h"
 
 
 namespace MusicFormats
@@ -314,11 +319,12 @@ class EXP msrMeasure : public msrSegmentElement
 
     // print layout
 
-    void                  appendPrintLayoutToMeasure (
-                            const S_msrPrintLayout& printLayout);
+    void                  appendMusicXMLPrintLayoutToMeasure (
+                            const S_msrMusicXMLPrintLayout& musicXMLPrintLayout);
 
-    S_msrPrintLayout      getMeasurePrintLayout () const
-                              { return fMeasurePrintLayout; }
+    S_msrMusicXMLPrintLayout
+                          getMeasureMusicXMLPrintLayout () const
+                              { return fMeasureMusicXMLPrintLayout; }
 
     // clefs
 
@@ -679,7 +685,8 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure print layout, MusicXML specific
 
-    S_msrPrintLayout      fMeasurePrintLayout;
+    S_msrMusicXMLPrintLayout
+                          fMeasureMusicXMLPrintLayout;
 
 /* JMI
     // measure shortest note

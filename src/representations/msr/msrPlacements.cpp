@@ -24,7 +24,7 @@ namespace MusicFormats
 // placement
 //______________________________________________________________________________
 msrPlacementKind msrPlacementKindFromString (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& placementString)
 {
   msrPlacementKind result = msrPlacementKind::kPlacement_NO_; // default value

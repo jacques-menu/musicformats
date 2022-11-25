@@ -787,7 +787,7 @@ void mxsr2msrTranslator::visitEnd (S_system_layout& elt)
 
   if (fOnGoingPrint) {
     // set the current print layout's system layout
-    fCurrentPrintLayout->
+    fCurrentMusicXMLPrintLayout->
       setSystemLayout (
         fCurrentSystemLayout);
   }
@@ -1439,7 +1439,7 @@ From DalSegno.xml: JMI there is no <staff-distance /> ...
 
   if (fOnGoingPrint) {
     // append it to the current print layout
-    fCurrentPrintLayout->
+    fCurrentMusicXMLPrintLayout->
       appendStaffLayout (
         fCurrentStaffLayout);
   }
@@ -2387,14 +2387,14 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
   }
 
   // is this part name in the parts ignore names set?
-  if (gGlobalMxsr2msrOahGroup->getMusicXMLMusicXMLPartsIgnoreNameSet ().size ()) {
+  if (gGlobalMxsr2msrOahGroup->getMusicXMLPartsIgnoreNameSet ().size ()) {
     std::set<std::string>::iterator
       it =
-        gGlobalMxsr2msrOahGroup->getMusicXMLMusicXMLPartsIgnoreNameSet ().find (
+        gGlobalMxsr2msrOahGroup->getMusicXMLPartsIgnoreNameSet ().find (
           fCurrentPart->
             getPartName ());
 
-    if (it != gGlobalMxsr2msrOahGroup->getMusicXMLMusicXMLPartsIgnoreNameSet ().end ()) {
+    if (it != gGlobalMxsr2msrOahGroup->getMusicXMLPartsIgnoreNameSet ().end ()) {
       // the simplest way to ignore this part
       // is to remove it from its part-group
       // now that is has been completely built and populated
@@ -9095,8 +9095,8 @@ Staff spacing between multiple staves is measured in
   */
 
   // create a print layout
-  fCurrentPrintLayout =
-     msrPrintLayout::create (
+  fCurrentMusicXMLPrintLayout =
+     msrMusicXMLPrintLayout::create (
       inputLineNumber);
 
   // handle 'staff-spacing' if present
@@ -9111,7 +9111,7 @@ Staff spacing between multiple staves is measured in
     float value;
     s >> value;
 
-    fCurrentPrintLayout->setStaffSpacing (value);
+    fCurrentMusicXMLPrintLayout->setStaffSpacing (value);
   }
 
   // handle 'new-system' if present
@@ -9119,7 +9119,7 @@ Staff spacing between multiple staves is measured in
   const std::string newSystem = elt->getAttributeValue ("new-system");
 
   if (newSystem.size ()) {
-    fCurrentPrintLayout->setNewSystem ();
+    fCurrentMusicXMLPrintLayout->setNewSystem ();
 
     if (newSystem == "yes") {
       // create a line break
@@ -9166,7 +9166,7 @@ Staff spacing between multiple staves is measured in
     const std::string newPage = elt->getAttributeValue ("new-page");
 
     if (newPage.size ()) {
-      fCurrentPrintLayout->setNewPage ();
+      fCurrentMusicXMLPrintLayout->setNewPage ();
 
       if (newPage == "yes") { // JMI
         // create a page break
@@ -9213,7 +9213,7 @@ Staff spacing between multiple staves is measured in
   const int blankPage = elt->getAttributeIntValue ("blank-page", 0);
 
   if (blankPage > 0) {
-    fCurrentPrintLayout->setBlankPage (blankPage);
+    fCurrentMusicXMLPrintLayout->setBlankPage (blankPage);
   }
 
   // handle 'page-number' if present
@@ -9221,7 +9221,7 @@ Staff spacing between multiple staves is measured in
   const int pageNumber = elt->getAttributeIntValue ("page-number", 0);
 
   if (pageNumber > 0) {
-    fCurrentPrintLayout->setPageNumber (pageNumber);
+    fCurrentMusicXMLPrintLayout->setPageNumber (pageNumber);
   }
 
   fCurrentDisplayText = "";
@@ -9251,11 +9251,11 @@ void mxsr2msrTranslator::visitEnd (S_print& elt)
         inputLineNumber);
 
   voiceOneInStaffOne->
-    appendPrintLayoutToVoice (
-      fCurrentPrintLayout);
+    appendMusicXMLPrintLayoutToVoice (
+      fCurrentMusicXMLPrintLayout);
 
   // forget about the current print layout
-  fCurrentPrintLayout = nullptr;
+  fCurrentMusicXMLPrintLayout = nullptr;
 
   fOnGoingPrint = false;
 }
