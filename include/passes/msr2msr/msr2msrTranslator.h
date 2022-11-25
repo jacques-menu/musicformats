@@ -19,8 +19,29 @@
 
 #include "msrTypesForwardDeclarations.h"
 
+#include "msrAfterGraceNotes.h"
+#include "msrBarChecks.h"
+#include "msrChords.h"
+#include "msrCredits.h"
+#include "msrDoubleTremolos.h"
+#include "msrElements.h"
+#include "msrFiguredBasses.h"
+#include "msrGraceNotesGroups.h"
+#include "msrHarmonies.h"
+#include "msrIdentification.h"
 #include "msrLyrics.h"
+#include "msrMeasures.h"
+#include "msrMultipleFullBarRests.h"
+#include "msrNotes.h"
+#include "msrParts.h"
+#include "msrSegments.h"
 #include "msrSegnos.h"
+#include "msrScores.h"
+#include "msrStaves.h"
+#include "msrStavesDetails.h"
+#include "msrStems.h"
+#include "msrTuplets.h"
+#include "msrVoices.h"
 
 
 namespace MusicFormats
