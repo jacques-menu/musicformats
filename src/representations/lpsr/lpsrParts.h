@@ -12,10 +12,11 @@
 #ifndef ___lpsrParts___
 #define ___lpsrParts___
 
+#include "msrElements.h"
 #include "msrParts.h"
 
 #include "lpsrContexts.h"
-
+#include "lpsrElements.h"
 #include "lpsrStaves.h"
 
 
