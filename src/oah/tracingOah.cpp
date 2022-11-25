@@ -95,7 +95,7 @@ void tracingOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
   --gIndenter;
 }
 
-void tracingOahGroup::initializePrintLayoutstracingOah ()
+void tracingOahGroup::initializeMusicXMLPrintLayoutstracingOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -111,16 +111,16 @@ R"()",
   // print layouts
 
   S_oahTwoBooleansAtom
-    tracePrintLayoutsAtom =
+    traceMusicXMLPrintLayoutsAtom =
       oahTwoBooleansAtom::create (
         "trace-print-layouts", "tpl",
 R"(Print layouts)",
-        "fTracePrintLayouts",
-        fTracePrintLayouts,
+        "fTraceMusicXMLPrintLayouts",
+        fTraceMusicXMLPrintLayouts,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      tracePrintLayoutsAtom);
+      traceMusicXMLPrintLayoutsAtom);
 }
 
 void tracingOahGroup::initializeOthertracingOah ()
@@ -2361,7 +2361,7 @@ void tracingOahGroup::initializeTracingOahGroup ()
   initializeBooksToVoicestracingOah ();
 
   // print layouts
-  initializePrintLayoutstracingOah ();
+  initializeMusicXMLPrintLayoutstracingOah ();
 
   // segments
   initializeSegmentstracingOah ();

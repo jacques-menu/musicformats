@@ -17,7 +17,9 @@
 
 #include "msrIdentification.h"
 
-#include "msrMusicXMLSpecifics.h"
+#include "msrMusicXMLBasicTypes.h"
+#include "msrMusicXMLPrintLayouts.h"
+
 #include "msrScaling.h"
 
 #include "msrCredits.h"

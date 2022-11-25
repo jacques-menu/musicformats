@@ -18,7 +18,7 @@
 
 #include "msrAlignments.h"
 #include "msrFonts.h"
-#include "msrMusicXMLSpecifics.h"
+#include "msrMusicXMLBasicTypes.h"
 
 
 namespace MusicFormats

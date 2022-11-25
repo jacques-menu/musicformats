@@ -27,9 +27,7 @@ using namespace MusicXML2;
 namespace MusicFormats
 {
 
-// length units
 //______________________________________________________________________________
-
 enum class msrLengthUnitKind {
   kUnitInch, kUnitCentimeter, kUnitMillimeter
 };
@@ -46,9 +44,7 @@ extern std::map<std::string, msrLengthUnitKind>
 
 void initializeMsrLengthUnitKindsMap ();
 
-// lengths
 //______________________________________________________________________________
-
 class EXP msrLength : public smartable
 {
   public:

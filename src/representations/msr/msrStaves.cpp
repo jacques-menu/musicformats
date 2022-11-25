@@ -2695,7 +2695,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
 #endif
 
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
-    // ??? JMI v0.9.66
+    S_msrVoice foo = voice; // ??? JMI v0.9.66
   } // for
 }
 
