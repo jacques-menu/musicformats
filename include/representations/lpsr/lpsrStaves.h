@@ -17,6 +17,7 @@
 #include "lpsrElements.h"
 
 #include "msrStaves.h"
+#include "msrElements.h"
 #include "msrStavesDetails.h"
 #include "msrVoices.h"
 
@@ -91,7 +92,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
     // ------------------------------------------------------
 
     static SMARTP<lpsrNewStaffTuningBlock> create (
-                            int              inputLineNumber,
+                            int                     inputLineNumber,
                             const S_msrStaffTuning& staffTuning);
 
   protected:
@@ -100,7 +101,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
     // ------------------------------------------------------
 
                           lpsrNewStaffTuningBlock (
-                            int              inputLineNumber,
+                            int                     inputLineNumber,
                             const S_msrStaffTuning& staffTuning);
 
     virtual               ~lpsrNewStaffTuningBlock ();
@@ -140,7 +141,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
     // fields
     // ------------------------------------------------------
 
-    S_msrStaffTuning fStaffTuning;
+    S_msrStaffTuning      fStaffTuning;
 };
 typedef SMARTP<lpsrNewStaffTuningBlock> S_lpsrNewStaffTuningBlock;
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffTuningBlock& elt);

@@ -19,6 +19,9 @@
 
 #include "msrTypesForwardDeclarations.h"
 
+#include "msrLyrics.h"
+#include "msrSegnos.h"
+
 
 namespace MusicFormats
 {
@@ -36,8 +39,8 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrHiddenMeasureAndBarLineDescr> create (
-      int           inputLineNumber,
-      S_msrDalSegno dalSegno);
+                            int           inputLineNumber,
+                            S_msrDalSegno dalSegno);
 
   protected:
 
@@ -45,8 +48,8 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     // ------------------------------------------------------
 
     msrHiddenMeasureAndBarLineDescr (
-      int           inputLineNumber,
-      S_msrDalSegno dalSegno);
+                            int           inputLineNumber,
+                            S_msrDalSegno dalSegno);
 
     virtual               ~msrHiddenMeasureAndBarLineDescr ();
 

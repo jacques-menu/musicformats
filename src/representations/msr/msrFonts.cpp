@@ -68,6 +68,120 @@ std::ostream& operator << (std::ostream& os, const  msrFontSizeKind& elt)
   return os;
 }
 
+// font style
+//______________________________________________________________________________
+msrFontStyleKind msrFontStyleKindFromString (
+  int                inputLineNumber,
+  const std::string& fontStyleString)
+{
+  msrFontStyleKind result = msrFontStyleKind::kFontStyleNone; // default value
+
+  if      (fontStyleString == "normal")
+    result = msrFontStyleKind::kFontStyleNormal;
+  else if (fontStyleString == "italic")
+    result = msrFontStyleKind::KFontStyleItalic;
+  else {
+    if (fontStyleString.size ()) {
+      std::stringstream s;
+
+      s <<
+        "style value " << fontStyleString <<
+        " should be 'normal' or 'italic'";
+
+      msrError (
+        gGlobalServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        s.str ());
+    }
+  }
+
+  return result;
+}
+
+std::string msrFontStyleKindAsString (
+  msrFontStyleKind fontStyleKind)
+{
+  std::string result;
+
+  switch (fontStyleKind) {
+    case msrFontStyleKind::kFontStyleNone:
+      result = "kFontStyleNone***";
+      break;
+    case msrFontStyleKind::kFontStyleNormal:
+      result = "kFontStyleNormal";
+      break;
+    case msrFontStyleKind::KFontStyleItalic:
+      result = "KFontStyleItalic";
+      break;
+    } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrFontStyleKind& elt)
+{
+  os << msrFontStyleKindAsString (elt);
+  return os;
+}
+
+// font weight
+//______________________________________________________________________________
+msrFontWeightKind msrFontWeightKindFromString (
+  int                inputLineNumber,
+  const std::string& fontWeightString)
+{
+  msrFontWeightKind result = msrFontWeightKind::kFontWeightNone; // default value
+
+  if      (fontWeightString == "normal")
+    result = msrFontWeightKind::kFontWeightNormal;
+  else if (fontWeightString == "bold")
+    result = msrFontWeightKind::kFontWeightBold;
+  else {
+    if (fontWeightString.size ()) {
+      std::stringstream s;
+
+      s <<
+        "font weight value " << fontWeightString <<
+        " should be 'normal' or 'bold'";
+
+      msrError (
+        gGlobalServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        s.str ());
+    }
+  }
+
+  return result;
+}
+
+std::string msrFontWeightKindAsString (
+  msrFontWeightKind fontWeightKind)
+{
+  std::string result;
+
+  switch (fontWeightKind) {
+    case msrFontWeightKind::kFontWeightNone:
+      result = "kFontWeightNone";
+      break;
+    case msrFontWeightKind::kFontWeightNormal:
+      result = "kFontWeightNormal";
+      break;
+    case msrFontWeightKind::kFontWeightBold:
+      result = "kFontWeightBold";
+      break;
+    } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrFontWeightKind& elt)
+{
+  os << msrFontWeightKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrFontSize msrFontSize::create (
   msrFontSizeKind fontSizeKind)
@@ -166,8 +280,10 @@ float msrFontSize::getFontNumericSize () const
   return result;
 }
 
-void msrFontSize::print (std::ostream& os) const
+std::string msrFontSize::asString () const
 {
+  std::string result;
+
   switch (fFontSizeKind) {
     case msrFontSizeKind::kFontSizeNone:
     case msrFontSizeKind::kFontSizeXXSmall:
@@ -177,128 +293,27 @@ void msrFontSize::print (std::ostream& os) const
     case msrFontSizeKind::kFontSizeLarge:
     case msrFontSizeKind::kFontSizeXLarge:
     case msrFontSizeKind::kFontSizeXXLarge:
-      os <<
+      result =
         msrFontSizeKindAsString (fFontSizeKind);
       break;
 
     case msrFontSizeKind::kFontSizeNumeric:
-      os <<
+      result =
         fFontNumericSize;
       break;
-    } // switch
-}
-
-// font style
-//______________________________________________________________________________
-msrFontStyleKind msrFontStyleKindFromString (
-  int           inputLineNumber,
-  const std::string& fontStyleString)
-{
-  msrFontStyleKind result = msrFontStyleKind::kFontStyleNone; // default value
-
-  if      (fontStyleString == "normal")
-    result = msrFontStyleKind::kFontStyleNormal;
-  else if (fontStyleString == "italic")
-    result = msrFontStyleKind::KFontStyleItalic;
-  else {
-    if (fontStyleString.size ()) {
-      std::stringstream s;
-
-      s <<
-        "style value " << fontStyleString <<
-        " should be 'normal' or 'italic'";
-
-      msrError (
-        gGlobalServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        __FILE__, __LINE__,
-        s.str ());
-    }
-  }
+  } // switch
 
   return result;
 }
 
-std::string msrFontStyleKindAsString (
-  msrFontStyleKind fontStyleKind)
+void msrFontSize::print (std::ostream& os) const
 {
-  std::string result;
-
-  switch (fontStyleKind) {
-    case msrFontStyleKind::kFontStyleNone:
-      result = "kFontStyleNone***";
-      break;
-    case msrFontStyleKind::kFontStyleNormal:
-      result = "kFontStyleNormal";
-      break;
-    case msrFontStyleKind::KFontStyleItalic:
-      result = "KFontStyleItalic";
-      break;
-    } // switch
-
-  return result;
+  os << asString () << std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const msrFontStyleKind& elt)
+std::ostream& operator << (std::ostream& os, const S_msrFontSize& elt)
 {
-  os << msrFontStyleKindAsString (elt);
-  return os;
-}
-
-// font weight
-//______________________________________________________________________________
-msrFontWeightKind msrFontWeightKindFromString (
-  int           inputLineNumber,
-  const std::string& fontWeightString)
-{
-  msrFontWeightKind result = msrFontWeightKind::kFontWeightNone; // default value
-
-  if      (fontWeightString == "normal")
-    result = msrFontWeightKind::kFontWeightNormal;
-  else if (fontWeightString == "bold")
-    result = msrFontWeightKind::kFontWeightBold;
-  else {
-    if (fontWeightString.size ()) {
-      std::stringstream s;
-
-      s <<
-        "font weight value " << fontWeightString <<
-        " should be 'normal' or 'bold'";
-
-      msrError (
-        gGlobalServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        __FILE__, __LINE__,
-        s.str ());
-    }
-  }
-
-  return result;
-}
-
-std::string msrFontWeightKindAsString (
-  msrFontWeightKind fontWeightKind)
-{
-  std::string result;
-
-  switch (fontWeightKind) {
-    case msrFontWeightKind::kFontWeightNone:
-      result = "kFontWeightNone";
-      break;
-    case msrFontWeightKind::kFontWeightNormal:
-      result = "kFontWeightNormal";
-      break;
-    case msrFontWeightKind::kFontWeightBold:
-      result = "kFontWeightBold";
-      break;
-    } // switch
-
-  return result;
-}
-
-std::ostream& operator << (std::ostream& os, const msrFontWeightKind& elt)
-{
-  os << msrFontWeightKindAsString (elt);
+  os << elt->asString ();
   return os;
 }
 

@@ -17,6 +17,8 @@
 
 #include "msr2msrTranslator.h"
 
+#include "lpsrStaves.h"
+
 
 namespace MusicFormats
 {

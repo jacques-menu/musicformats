@@ -44,6 +44,7 @@ std::string msrWordsFontWeightKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrWordsFontWeightKind& elt);
 
+//______________________________________________________________________________
 class EXP msrWords : public msrElement
 {
   public:
@@ -59,7 +60,7 @@ class EXP msrWords : public msrElement
                             msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
                             msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
                             msrFontStyleKind           wordsFontStyleKind,
-                            const S_msrFontSize&              wordsFontSize,
+                            const S_msrFontSize&       wordsFontSize,
                             msrFontWeightKind          wordsFontWeightKind,
                             msrXMLLangKind             wordsXMLLangKind,
                             int                        wordsStaffNumber);
@@ -77,7 +78,7 @@ class EXP msrWords : public msrElement
                             msrHorizontalAlignmentKind wordsHorizontalAlignmentKind,
                             msrVerticalAlignmentKind   wordsVerticalAlignmentKind,
                             msrFontStyleKind           wordsFontStyleKind,
-                            const S_msrFontSize&              wordsFontSize,
+                            const S_msrFontSize&       wordsFontSize,
                             msrFontWeightKind          wordsFontWeightKind,
                             msrXMLLangKind             wordsXMLLangKind,
                             int                        wordsStaffNumber);
