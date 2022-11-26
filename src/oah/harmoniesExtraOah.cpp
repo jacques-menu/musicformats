@@ -27,7 +27,6 @@
 
 #include "oahOah.h"
 
-// #include "msrPitchesNames.h"
 #include "msrHarmonies.h"
 
 #include "lpsrOah.h"

@@ -46,6 +46,7 @@
 #include "musicxml2lilypondRegularHandler.h"
 
 #include "musicxml2lilypondInterface.h"
+#include "xml2lyInterface.h"
 
 #include "mfcLibraryComponent.h"
 

@@ -12,11 +12,6 @@
 #ifndef ___msrMeasures___
 #define ___msrMeasures___
 
-#include "msrSegmentElements.h"
-
-// #include "msrMeasureElements.h"
-// #include "msrElementsBase.h"
-
 #include "msrMeasuresEnumTypes.h"
 #include "msrMeasureElements.h"
 #include "msrMusicXMLPrintLayouts.h"

@@ -177,6 +177,9 @@ message (STATUS "-----> MF_SRC_DIR: ${MF_SRC_DIR}")
 set (MF_CLI_SAMPLES_DIR ${MF_SRC_DIR}/clisamples)
 message (STATUS "-----> MF_CLI_SAMPLES_DIR: ${MF_CLI_SAMPLES_DIR}")
 
+# set (MF_CLI_SERVICES_DIR ${MF_SRC_DIR}/services)
+# message (STATUS "-----> MF_CLI_SERVICES_DIR: ${MF_CLI_SERVICES_DIR}")
+
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mflibrary components oah wae manpage services)
 
@@ -218,12 +221,6 @@ endforeach ()
 message (STATUS "-----> PUBLIC_HEADERS: ${PUBLIC_HEADERS}")
 message (STATUS "-----> SOURCES: ${SOURCES}")
 
-# set (PUBLIC_HEADERS     "${LXML_SRC_DIR}/interface/libmusicxml.h" "${LXML_SRC_DIR}/interface/exports.h")
-# set (SOURCES ${SOURCES} "${LXML_SRC_DIR}/interface/libmusicxml.cpp" "${LXML_SRC_DIR}/interface/musicxml2guido.cpp")
-#
-# set (LXML_SRC_DIR  ${LXML_SRC_DIR} ${LXML_SRC_DIR}/interface)
-# message (STATUS "-----> LXML_SRC_DIR: ${LXML_SRC_DIR}")
-
 file (GLOB CORE_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES})
 # message (STATUS "-----> CORE_SOURCES: ${CORE_SOURCES}")
 
@@ -247,7 +244,7 @@ message (STATUS "-----> INCLUDES: ${INCLUDES}")
 # set includes
 #===============================================================
 
-include_directories( ${INCLUDES})
+include_directories (${INCLUDES})
 set_source_files_properties (${CORE_HEADERS} PROPERTIES HEADER_FILE_ONLY TRUE)
 
 

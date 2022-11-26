@@ -597,9 +597,9 @@ EXP mfMusicformatsErrorKind musicxmlFile2lilypond (
 }
 
 mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
-  const char*  fileName,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         fileName,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   SXMLFile
@@ -648,9 +648,9 @@ EXP mfMusicformatsErrorKind musicxmlFd2lilypond (
 }
 
 mfMusicformatsErrorKind convertMusicxmlFd2lilypondWithHandler (
-  FILE*        fd,
-  std::ostream&     out,
-  std::ostream&     err,
+  FILE*               fd,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   SXMLFile
@@ -699,9 +699,9 @@ EXP mfMusicformatsErrorKind musicxmlString2lilypond (
 }
 
 mfMusicformatsErrorKind convertMusicxmlString2lilypondWithHandler (
-  const char*  buffer,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         buffer,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   SXMLFile

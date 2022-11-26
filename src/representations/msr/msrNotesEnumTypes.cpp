@@ -14,12 +14,8 @@
 #include "visitor.h"
 
 #include "mfAssert.h"
-
 #include "mfServiceRunData.h"
 #include "mfStringsHandling.h"
-
-#include "oahWae.h"
-#include "msrWae.h"
 
 #include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
@@ -32,11 +28,11 @@
 #include "msrSlides.h"
 #include "msrTechnicals.h"
 
-// #include "msrNotes.h"
-
 #include "oahOah.h"
-
 #include "msrOah.h"
+
+#include "oahWae.h"
+#include "msrWae.h"
 
 #include "oahEarlyOptions.h"
 

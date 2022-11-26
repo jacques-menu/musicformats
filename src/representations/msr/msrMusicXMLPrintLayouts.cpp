@@ -1,4 +1,3 @@
-// #include "msrMusicXMLSpecifics.h"
 /*
   MusicFormats Library
   Copyright (C) Jacques Menu 2016-2022
@@ -10,29 +9,20 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include <iostream>
-// #include <sstream>
-// #include <iomanip>      // std::setw, std::setprecision, ...
-
 #include "visitor.h"
 
+#include "mfAssert.h"
 #include "mfIndentedTextOutput.h"
-// #include "mfServiceRunData.h"
 #include "mfStringsHandling.h"
 
-// #include "msrWae.h"
+#include "oahEnableTracingIfDesired.h"
+#ifdef TRACING_IS_ENABLED
+  #include "tracingOah.h"
+#endif
 
-// #include "oahEnableTracingIfDesired.h"
-// #ifdef TRACING_IS_ENABLED
-//   #include "tracingOah.h"
-// #endif
-
-#include "mfAssert.h"
 #include "msrBrowsers.h"
 #include "msrMeasureConstants.h"
 #include "msrMusicXMLPrintLayouts.h"
-
-// #include "oahOah.h"
 
 #include "msrOah.h"
 

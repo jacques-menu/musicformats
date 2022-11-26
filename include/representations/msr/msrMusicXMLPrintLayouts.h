@@ -14,10 +14,6 @@
 
 #include <list>
 
-// #include "msrElements.h"
-// #include "msrMargins.h"
-// #include "msrMeasures.h"
-// #include "msrMeasureElements.h"
 #include "msrMeasureElements.h"
 #include "msrMusicXMLBasicTypes.h"
 

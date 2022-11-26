@@ -9,32 +9,25 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include <iostream>
-// #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
-//
+
 #include "visitor.h"
-//
+
 #include "mfAssert.h"
 #include "mfServiceRunData.h"
 #include "mfStringsHandling.h"
-//
+
 #include "msrWae.h"
-//
-// #include "oahEnableTracingIfDesired.h"
-// #ifdef TRACING_IS_ENABLED
-//   #include "tracingOah.h"
-// #endif
-//
+
+#include "oahEnableTracingIfDesired.h"
+#ifdef TRACING_IS_ENABLED
+  #include "tracingOah.h"
+#endif
+
 #include "msrBrowsers.h"
 #include "msrMeasureConstants.h"
 #include "msrMusicXMLBasicTypes.h"
-// #include "msrMusicXMLPrintLayouts.h"
-//
-//
 #include "msrOah.h"
-// #include "oahOah.h"
-//
 
 
 namespace MusicFormats

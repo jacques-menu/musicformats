@@ -27,13 +27,13 @@ EXP int xml2ly_BIS (
 
 //_______________________________________________________________________________
 EXP int xml2ly (
-  FILE*    fd,
+  FILE*         fd,
   std::ostream& out,
   std::ostream& err);
 
 //_______________________________________________________________________________
 EXP int xml2ly (
-  const char* buffer,
+  const char*      buffer,
   std::ostream&    out,
   std::ostream&    err);
 
