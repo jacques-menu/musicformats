@@ -29,20 +29,17 @@
 #include "msrMeasureConstants.h"
 
 #include "msrArticulations.h"
+#include "msrBrowsers.h"
 #include "msrGlissandos.h"
 #include "msrPitchesNames.h"
 #include "msrSlides.h"
 #include "msrTechnicals.h"
-
-// #include "msrNotes.h"
 
 #include "oahOah.h"
 
 #include "msrOah.h"
 
 #include "oahEarlyOptions.h"
-
-#include "msrBrowsers.h"
 
 
 namespace MusicFormats

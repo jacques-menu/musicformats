@@ -19,18 +19,13 @@
 #endif
 
 #include "mfAssert.h"
-
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
 
-// #include "msrTuplets.h"
+#include "msrBrowsers.h"
 
 #include "oahOah.h"
-
 #include "msrOah.h"
-
-#include "msrBrowsers.h"
 
 
 namespace MusicFormats

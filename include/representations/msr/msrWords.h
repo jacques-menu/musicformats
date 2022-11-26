@@ -12,11 +12,8 @@
 #ifndef ___msrWords___
 #define ___msrWords___
 
-// #include "msrTypesForwardDeclarations.h"
-
-#include "msrElements.h"
-
 #include "msrAlignments.h"
+#include "msrElements.h"
 #include "msrFonts.h"
 #include "msrMusicXMLBasicTypes.h"
 #include "msrPlacements.h"

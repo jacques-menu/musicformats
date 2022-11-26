@@ -15,13 +15,10 @@
 #include <vector>
 
 #include "msrElements.h"
-#include "msrVoiceElements.h"
-
-#include "msrRepeatsEnumTypes.h"
-
 #include "msrMeasureRepeats.h"
-// #include "msrNotes.h"
 #include "msrMultipleFullBarRests.h"
+#include "msrRepeatsEnumTypes.h"
+#include "msrVoiceElements.h"
 
 
 namespace MusicFormats

@@ -12,8 +12,6 @@
 #ifndef ___msrChords___
 #define ___msrChords___
 
-// #include "msrTypesForwardDeclarations.h"
-
 #include "msrArticulations.h"
 #include "msrBeams.h"
 #include "msrCodas.h"
