@@ -407,11 +407,11 @@ msrFiguredBass::msrFiguredBass (
       fFiguredBassTupletFactor (
         figuredBassTupletFactor)
 {
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    upLinkToMeasure != nullptr,
-    "upLinkToMeasure is null");
+//   // sanity check JMI v0.9.66
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     upLinkToMeasure != nullptr,
+//     "upLinkToMeasure is null");
 
   fFiguredBassUpLinkToMeasure = upLinkToMeasure;
 

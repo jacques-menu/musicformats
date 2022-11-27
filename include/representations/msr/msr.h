@@ -90,7 +90,7 @@
 #include "msrChords.h"
 
 #include "msrTupletElements.h"
-#include "msrTuplets.h"
+#include "msrTupletElementsAndTuplets.h"
 
 #include "msrLyrics.h"
 

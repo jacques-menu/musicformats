@@ -6,7 +6,7 @@ alias zrc='. ${HOME}/.zrc'
 #	my actual work directory
 #----------------------------------------------
 
-MY_WORK_DIR=${HOME}
+MY_WORK_DIR=${HOME}/JMI_Developpement
 
 # dev branch
 #----------------------------------------------

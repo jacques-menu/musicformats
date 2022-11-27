@@ -450,6 +450,23 @@ std::string lpsr2lilypondTranslator::msrQuarterTonesPitchesLanguageKindAsLilypon
   return result;
 }
 
+//________________________________________________________________________
+std::string lpsrContextTypeKindAsLilypondString (
+  lpsrContextTypeKind contextTypeKind)
+{
+  std::string result;
+
+  switch (contextTypeKind) {
+    case lpsrContextTypeKind::kContextChordNames:
+      result = "ChordNames";
+      break;
+    case lpsrContextTypeKind::kContextFiguredBass:
+      result = "FiguredBass";
+      break;
+  } // switch
+
+  return result;
+}
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
@@ -5140,6 +5157,24 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
   s << ' ';
 
   return s.str ();
+}
+
+//________________________________________________________________________
+std::string lpsr2lilypondTranslator::lpsrContextTypeKindAsLilypondString (
+  lpsrContextTypeKind contextTypeKind)
+{
+  std::string result;
+
+  switch (contextTypeKind) {
+    case lpsrContextTypeKind::kContextChordNames:
+      result = "ChordNames";
+      break;
+    case lpsrContextTypeKind::kContextFiguredBass:
+      result = "FiguredBass";
+      break;
+  } // switch
+
+  return result;
 }
 
 //________________________________________________________________________
@@ -9865,13 +9900,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
 #endif
 
   std::string
-    lpsrContextTypeKindAsString =
-      elt->getlpsrContextTypeKindAsString (),
     contextName =
       elt->getContextName ();
 
   fLilypondCodeStream <<
-    "\\context " << lpsrContextTypeKindAsString <<
+    "\\context " <<
+		lpsrContextTypeKindAsLilypondString (
+			elt->getContextTypeKind ()) <<
     " = \"" << contextName << "\"" <<
     std::endl;
 
@@ -9967,13 +10002,12 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
 #endif
 
   std::string
-    lpsrContextTypeKindAsString =
-      elt->getlpsrContextTypeKindAsString (),
     contextName =
       elt->getContextName ();
 
   fLilypondCodeStream <<
-    "\\context " << lpsrContextTypeKindAsString <<
+		lpsrContextTypeKindAsLilypondString (
+			elt->getContextTypeKind ()) <<
     " = \"" << contextName << "\"" <<
     std::endl;
 

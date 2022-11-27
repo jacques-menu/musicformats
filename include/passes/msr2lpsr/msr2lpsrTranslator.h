@@ -32,7 +32,7 @@
 #include "msrNotes.h"
 #include "msrParts.h"
 #include "msrPartGroups.h"
-#include "msrTuplets.h"
+#include "msrTupletElementsAndTuplets.h"
 #include "msrSegments.h"
 #include "msrScores.h"
 #include "msrStaves.h"

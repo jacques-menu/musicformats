@@ -35,7 +35,7 @@
 #include "msrStems.h"
 #include "msrTechnicals.h"
 #include "msrTies.h"
-#include "msrTuplets.h"
+#include "msrTupletElementsAndTuplets.h"
 #include "msrTupletElements.h"
 #include "msrWords.h"
 

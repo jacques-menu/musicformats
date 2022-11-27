@@ -287,7 +287,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     virtual void          appendMeasureElementToSegmentElement (
                             const S_msrMeasureElement& elem) override
-                              { appendElementToMeasure (elem); }
+                              { appendMeasureElementToMeasure (elem); }
 
     // lengthes
 
@@ -581,7 +581,7 @@ class EXP msrMeasure : public msrSegmentElement
     // private services
     // ------------------------------------------------------
 
-    void                  appendElementToMeasure (
+    void                  appendMeasureElementToMeasure (
                             const S_msrMeasureElement& elem);
 
     void                  finalizeRegularMeasure (
