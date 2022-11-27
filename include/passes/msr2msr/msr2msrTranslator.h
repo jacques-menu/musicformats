@@ -40,7 +40,7 @@
 #include "msrStaves.h"
 #include "msrStavesDetails.h"
 #include "msrStems.h"
-#include "msrTuplets.h"
+#include "msrTupletElementsAndTuplets.h"
 #include "msrVoices.h"
 
 

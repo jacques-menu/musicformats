@@ -200,7 +200,7 @@ S_lpsrChordNamesContext lpsrChordNamesContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   const std::string&      contextName,
-  const S_msrVoice&              contextVoice)
+  const S_msrVoice&       contextVoice)
 {
   lpsrChordNamesContext* o =
     new lpsrChordNamesContext (
@@ -216,7 +216,7 @@ lpsrChordNamesContext::lpsrChordNamesContext (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
   const std::string&      contextName,
-  const S_msrVoice&              contextVoice)
+  const S_msrVoice&       contextVoice)
     : lpsrContext (
       inputLineNumber,
       contextExistingKind,

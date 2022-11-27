@@ -12,27 +12,26 @@
 #ifndef ___lpsr2lilypondTranslator___
 #define ___lpsr2lilypondTranslator___
 
-// libmusicxml2
 #include "visitor.h"
-
-#include "msrPitchesNames.h"
 
 #include "msrTypesForwardDeclarations.h"
 #include "lpsrTypesForwardDeclarations.h"
 
 #include "msrDirections.h"
+#include "msrHiddenMeasureAndBarLines.h"
 #include "msrInstruments.h"
 #include "msrKeys.h"
+#include "msrPitchesNames.h"
 #include "msrPlacements.h"
 #include "msrPrintObjects.h"
 #include "msrRepeats.h"
 #include "msrStems.h"
 #include "msrTupletFactors.h"
 
+#include "lpsrContexts.h"
+
 #include "msrOah.h"
 #include "lpsrOah.h"
-
-#include "msrHiddenMeasureAndBarLines.h"
 
 
 namespace MusicFormats
@@ -1035,6 +1034,11 @@ class EXP lpsr2lilypondTranslator :
     S_msrFiguredBass
                           fCurrentFiguredBass;
     size_t                fCurrentFiguredBassFiguresCounter;
+
+    // contexts
+
+    std::string           lpsrContextTypeKindAsLilypondString (
+                            lpsrContextTypeKind contextTypeKind);
 
   private:
 

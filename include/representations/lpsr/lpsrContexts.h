@@ -72,7 +72,7 @@ class EXP lpsrContext : public lpsrElement
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
                             lpsrContextTypeKind     contextTypeKind,
-                            const std::string&           contextName);
+                            const std::string&      contextName);
 
     virtual               ~lpsrContext ();
 
@@ -111,14 +111,14 @@ class EXP lpsrContext : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    std::string           getlpsrContextTypeKindAsString () const
+    std::string           getLpsrContextTypeKindAsString () const
                               {
                                 return
                                   lpsrContextTypeKindAsString (
                                     fContextTypeKind);
                               }
 
-    std::string           getlpsrContextExistingKindAsString () const
+    std::string           getLpsrContextExistingKindAsString () const
                               {
                                 return
                                   lpsrContextExistingKindAsString (
@@ -154,8 +154,8 @@ class EXP lpsrChordNamesContext : public lpsrContext
     static SMARTP<lpsrChordNamesContext> create (
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
-                            const std::string&           contextName,
-                            const S_msrVoice&              contextVoice);
+                            const std::string&      contextName,
+                            const S_msrVoice&       contextVoice);
 
   protected:
 
@@ -165,8 +165,8 @@ class EXP lpsrChordNamesContext : public lpsrContext
                           lpsrChordNamesContext (
                             int                     inputLineNumber,
                             lpsrContextExistingKind contextExistingKind,
-                            const std::string&           contextName,
-                            const S_msrVoice&              contextVoice);
+                            const std::string&      contextName,
+                            const S_msrVoice&       contextVoice);
 
     virtual               ~lpsrChordNamesContext ();
 
