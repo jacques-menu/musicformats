@@ -127,15 +127,15 @@ class EXP msrMeasure : public msrSegmentElement
     Rational              getFullMeasureWholeNotesDuration () const
                               {  return fFullMeasureWholeNotesDuration; }
 
-    void                  setCurrentMeasureWholeNotesDuration (
+    void                  setMeasureWholeNotesDuration (
                             int             inputLineNumber,
                             const Rational& wholeNotes);
-    void                  incrementCurrentMeasureWholeNotesDuration (
+    void                  incrementMeasureWholeNotesDuration (
                             int             inputLineNumber,
                             const Rational& wholeNotesDelta);
 
-    Rational              getCurrentMeasureWholeNotesDuration () const
-                              { return fCurrentMeasureWholeNotesDuration; }
+    Rational              getMeasureWholeNotesDuration () const
+                              { return fMeasureWholeNotesDuration; }
 
     // measure kind
 
@@ -423,7 +423,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendNoteToMeasure (
                             const S_msrNote& note,
-                            const Rational& partCurrentMeasurePosition);
+                            const Rational&  partCurrentMeasurePosition);
 
     void                  appendNoteOrPaddingToMeasure (
                             const S_msrNote& note);
@@ -674,6 +674,14 @@ class EXP msrMeasure : public msrSegmentElement
 
     int                   fMeasureEndInputLineNumber;
 
+    // measure lengthes, in whole notes
+
+    Rational              fMeasureWholeNotesDuration;
+                            // this increases when musical elements
+                            // are appended to the measure
+
+    std::string           measureWholeNotesDurationAsMsrString ();
+
     // first measure in voice?
 
     Bool                  fMeasureFirstInVoice;
@@ -815,20 +823,31 @@ class EXP msrMeasure : public msrSegmentElement
                             const Rational&     measurePosition,
                             const S_msrMeasureElement& elem);
 
+    void                  handleEmptyMeasure (
+                            int               inputLineNumber,
+                            const S_msrVoice& voice);
+
+    void                  handleRegularMeasure (
+                            int               inputLineNumber,
+                            const S_msrVoice& voice);
+
+    void                  handleIncompleteMeasure (
+                            int               inputLineNumber,
+                            const S_msrVoice& voice,
+                            msrMeasureRepeatContextKind
+                                              measureRepeatContextKind,
+                            const Rational&   newWholeNotesSinceLastRegularMeasureEnd);
+
+    void                  handleOverFullMeasure (
+                            int               inputLineNumber,
+                            const S_msrVoice& voice);
+
     void                  printMeasurePendingMeasureElementsList ();
 
   private:
 
     // private work fields
     // ------------------------------------------------------
-
-    // measure lengthes, in whole notes
-
-    Rational              fCurrentMeasureWholeNotesDuration;
-                            // this increases when musical elements
-                            // are appended to the measure
-
-    std::string           currentMeasureWholeNotesDurationAsMsrString ();
 
     // pending measure elements, which may have to be delayed
     // because of <backup />

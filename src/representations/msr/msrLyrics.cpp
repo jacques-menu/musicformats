@@ -356,7 +356,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
-//       "Setting syllable's position in measure of " << asString () <<
+//       "Setting syllable's measure position of " << asString () <<
 //       " to " <<
 //       measurePosition <<
 //       " (was " <<
@@ -378,7 +378,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //     measurePosition != msrMoment::K_NO_POSITION,
 //     "measurePosition == msrMoment::K_NO_POSITION");
 //
-//   // set syllable's position in measure
+//   // set syllable's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
 // }
 
@@ -924,7 +924,7 @@ void msrStanza::initializeStanza ()
 
   fStanzaTextPresent = false;
 
-  fStanzaCurrentMeasureWholeNotesDuration = Rational (0, 1);
+  fStanzaMeasureWholeNotesDuration = Rational (0, 1);
 }
 
 msrStanza::~msrStanza ()
@@ -1090,7 +1090,7 @@ void msrStanza::appendSyllableToStanza (
           getMeasureElementSoundingWholeNotes ();
 
   // update the stanza's current measure whole notes
-  fStanzaCurrentMeasureWholeNotesDuration +=syllableSoundingWholeNotes;
+  fStanzaMeasureWholeNotesDuration +=syllableSoundingWholeNotes;
   */
 }
 
@@ -1204,7 +1204,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
   appendSyllableToStanza (syllable);
 
   // reset current measure whole notes
-  fStanzaCurrentMeasureWholeNotesDuration = Rational (0, 1);
+  fStanzaMeasureWholeNotesDuration = Rational (0, 1);
 
   --gIndenter;
 
@@ -1340,7 +1340,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
   return syllable;
 }
 
-void msrStanza::padUpToCurrentMeasureWholeNotesDurationInStanza (
+void msrStanza::padUpToMeasureWholeNotesDurationInStanza (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {

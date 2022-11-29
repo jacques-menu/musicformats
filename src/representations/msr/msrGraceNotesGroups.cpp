@@ -419,7 +419,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
 }
 */
 
-  // set the grace notes group's elements' position in measure
+  // set the grace notes group's elements' measure position
   if (fGraceNotesGroupElementsList.size ()) {
   /* JMI
   if (false) { // JMI
@@ -438,7 +438,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
       "setGraceNotesGroupElementsMeasurePositions()";
 
     for (S_msrMeasureElement measureElement : fGraceNotesGroupElementsList) {
-      // set measure element's position in measure
+      // set measure element's measure position
       measureElement->
         setMeasureElementMeasurePosition (
           measure,
@@ -446,7 +446,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
           context);
 
 /* JMI
-      // set measure element's position in measure
+      // set measure element's measure position
   if (false) { // JMI
       measureElement->
         setMeasureElementVoicePosition (

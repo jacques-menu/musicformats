@@ -148,7 +148,7 @@ void msrPart::initializePart ()
   // multiple full-bar rests
   fPartContainsMultipleFullBarRests = false;
 
-  // current position in measure
+  // current measure position
   fPartCurrentMeasurePosition = Rational (0, 1);
 
   // part shortest note duration
@@ -334,7 +334,7 @@ void msrPart::setPartCurrentMeasurePosition (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
-      "Setting part current position in measure to " <<
+      "Setting part current measure position to " <<
       measurePosition <<
       " in part " <<
       getPartCombinedName () <<
@@ -346,7 +346,7 @@ void msrPart::setPartCurrentMeasurePosition (
     std::stringstream s;
 
     s <<
-      "cannot set part current position in measure to " <<
+      "cannot set part current measure position to " <<
       measurePosition <<
       " in part " <<
       getPartCombinedName () <<
@@ -372,7 +372,7 @@ void msrPart::incrementPartCurrentMeasurePosition (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
-      "Incrementing part current position in measure by " <<
+      "Incrementing part current measure position by " <<
       duration <<
       " in part " <<
       getPartCombinedName () <<
@@ -390,7 +390,7 @@ void msrPart::decrementPartCurrentMeasurePosition (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
-      "Decrementing part current position in measure by " <<
+      "Decrementing part current measure position by " <<
       duration <<
       " in part " <<
       getPartCombinedName () <<
@@ -404,7 +404,7 @@ void msrPart::decrementPartCurrentMeasurePosition (
     std::stringstream s;
 
     s <<
-      "cannot decrement part current position in measure by " <<
+      "cannot decrement part current measure position by " <<
       duration <<
       " in part " <<
       getPartCombinedName () <<
@@ -422,7 +422,7 @@ void msrPart::decrementPartCurrentMeasurePosition (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
-      "The new part current position in measure is " <<
+      "The new part current measure position is " <<
       fPartCurrentMeasurePosition <<
       " in part " <<
       getPartCombinedName () <<
@@ -2135,7 +2135,7 @@ void msrPart::finalizeLastAppendedMeasureInPart (
 
   ++gIndenter;
 
-  // reset current position in measure
+  // reset current measure position
   fPartCurrentMeasurePosition = Rational (0, 1);
 
   // finalize current measure in all staves

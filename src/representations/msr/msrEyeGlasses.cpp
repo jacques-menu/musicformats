@@ -103,7 +103,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //
 //     gLogStream <<
-//       "Setting measure element position in measure of " <<
+//       "Setting measure element measure position of " <<
 //       asString () <<
 //       " to '" << measurePosition <<
 //       "' (was '" <<
@@ -125,7 +125,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //     measurePosition != msrMoment::K_NO_POSITION,
 //     "measurePosition == msrMoment::K_NO_POSITION");
 //
-//   // set measure element's position in measure
+//   // set measure element's measure position
 //   fEyeGlassesMeasurePosition = measurePosition;
 //
 //   // compute measure element's position in voice

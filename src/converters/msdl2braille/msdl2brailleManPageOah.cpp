@@ -232,7 +232,7 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       msdl2brailleManPageGenerateAtom::create (
-        "generate-man-page", "gmp",
+        "generate-man-page", "gmanpage",
         regex_replace (
 R"(Write man page data for EXECUTABLE to standard output.)",
           std::regex ("EXECUTABLE"),

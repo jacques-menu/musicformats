@@ -85,7 +85,7 @@ bool msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition (
   const SMARTP<msrNoteEvent>& second)
 {
   // stop events should be smaller than
-  // start events with the same position in measure
+  // start events with the same measure position
   bool result = false;
 
   Rational
@@ -523,11 +523,11 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
     --gIndenter;
   } // for
 
-  // sort the slice notes flat std::list by position in measure
+  // sort the slice notes flat std::list by measure position
   fSliceNotesFlatList.sort (
     msrNote::compareNotesByIncreasingMeasurePosition);
 
-  // sort the slice notes events std::list by position in measure
+  // sort the slice notes events std::list by measure position
   fSliceNoteEventsList.sort (
     msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition);
 

@@ -2217,7 +2217,8 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             chordNamesContext =
               lpsrChordNamesContext::create (
                 inputLineNumber,
-                lpsrContextExistingKind::kExistingContextYes,
+//                 lpsrContextUseExistingKind::kUseExistingContextYes,
+                lpsrContextUseExistingKind::kUseExistingContextNo, // default value JMI v0.9.64
                 voiceName,
 // JMI                fCurrentVoiceOriginal->getHarmoniesVoiceRegularVoiceBackwardLink ());
                 fCurrentVoiceOriginal);
@@ -2279,7 +2280,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             figuredBassContext =
               lpsrFiguredBassContext::create (
                 inputLineNumber,
-                lpsrContextExistingKind::kExistingContextYes,
+                lpsrContextUseExistingKind::kUseExistingContextNo, // default value JMI v0.9.64
                 voiceName,
                 fCurrentVoiceOriginal-> getVoiceUpLinkToStaff ());
 

@@ -4742,7 +4742,7 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
     elt->createChordNewbornClone (
       fCurrentPartClone);
 
-  // set fCurrentChordClone's position in measure  // JMI ??? v0.9.66
+  // set fCurrentChordClone's measure position  // JMI ??? v0.9.66
 //   fCurrentMeasureClone->
 //     setChordMeasurePosition (
 //       Rational (FOO, 1),

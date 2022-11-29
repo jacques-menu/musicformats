@@ -545,7 +545,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
         fTupletDisplayWholeNotes -= // JMI
           note->getNoteDisplayWholeNotes ();
 
-        // don't update measure number nor position in measure: // JMI
+        // don't update measure number nor measure position: // JMI
         // they have not been set yet
 
         // return from function
@@ -677,7 +677,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 Rational msrTuplet::setTupletMembersMeasurePositions (
   const S_msrMeasure&   measure,
   const Rational& measurePosition)
-  // returns the position in measure after the tuplet
+  // returns the measure position after the tuplet
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -699,7 +699,7 @@ Rational msrTuplet::setTupletMembersMeasurePositions (
     measurePosition != msrMoment::K_NO_POSITION,
     "measurePosition == msrMoment::K_NO_POSITION");
 
-  // set tuplet's position in measure
+  // set tuplet's measure position
   fMeasureElementMeasurePosition = measurePosition;
 
 if (false) { // JMI
@@ -716,7 +716,7 @@ if (false) { // JMI
     measurePosition != msrMoment::K_NO_POSITION,
     "measurePosition == msrMoment::K_NO_POSITION");
 
-  // set tuplet's position in measure
+  // set tuplet's measure position
   fMeasureElementMeasurePosition = measurePosition;
 
   // update current position in voice
@@ -733,13 +733,13 @@ if (false) { // JMI
   // current position
   Rational currentPosition = measurePosition;
 
-  // compute position in measure for the tuplets elements
+  // compute measure position for the tuplets elements
   for (
     std::list<S_msrTupletElement>::const_iterator i = fTupletElementsList.begin ();
     i != fTupletElementsList.end ();
     ++i
   ) {
-    // set tuplet element position in measure
+    // set tuplet element measure position
 
     if (
       S_msrNote note = dynamic_cast<msrNote*>(&(*(*i)))
@@ -858,7 +858,7 @@ void msrTuplet::finalizeTuplet (
 #endif
 
 / * JMI v0.9.66
-  // we can now set the position in measure for all the tuplet members
+  // we can now set the measure position for all the tuplet members
   setTupletMembersMeasurePositions (
     fMeasureElementMeasurePosition);
   * /
@@ -1071,7 +1071,7 @@ void msrTuplet::print (std::ostream& os) const
 /* JMI ???
   os << std::left <<
     std::setw (fieldWidth) <<
-    "(position in measure" << " : ";
+    "(measure position" << " : ";
   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
     os << "???)";
   }
@@ -1216,7 +1216,7 @@ void msrTuplet::printShort (std::ostream& os)
 /* JMI ???
   os << std::left <<
     std::setw (fieldWidth) <<
-    "(position in measure" << " : ";
+    "(measure position" << " : ";
   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
     os << "???)";
   }

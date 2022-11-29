@@ -245,7 +245,7 @@ R"(Write the contents of the OAH data to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       msdl2musicxmlManPageGenerateAtom::create (
-        "generate-man-page", "gmp",
+        "generate-man-page", "gmanpage",
         regex_replace (
 R"(Write man page data for EXECUTABLE to standard output.)",
           std::regex ("EXECUTABLE"),

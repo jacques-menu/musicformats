@@ -43,40 +43,40 @@ std::ostream& operator << (std::ostream& os, const lpsrContextTypeKind& elt)
   return os;
 }
 
-std::string lpsrContextExistingKindAsString (
-  lpsrContextExistingKind contextExistingKind)
+std::string lpsrContextUseExistingKindAsString (
+  lpsrContextUseExistingKind contextUseExistingKind)
 {
   std::string result;
 
-  switch (contextExistingKind) {
-    case lpsrContextExistingKind::kExistingContextYes:
-      result = "kExistingContextYes";
+  switch (contextUseExistingKind) {
+    case lpsrContextUseExistingKind::kUseExistingContextYes:
+      result = "kUseExistingContextYes";
       break;
-    case lpsrContextExistingKind::kExistingContextNo:
-      result = "kExistingContextNo";
+    case lpsrContextUseExistingKind::kUseExistingContextNo:
+      result = "kUseExistingContextNo";
       break;
   } // switch
 
   return result;
 }
 
-std::ostream& operator << (std::ostream& os, const lpsrContextExistingKind& elt)
+std::ostream& operator << (std::ostream& os, const lpsrContextUseExistingKind& elt)
 {
-  os << lpsrContextExistingKindAsString (elt);
+  os << lpsrContextUseExistingKindAsString (elt);
   return os;
 }
 
 //______________________________________________________________________________
 S_lpsrContext lpsrContext::create (
   int                     inputLineNumber,
-  lpsrContextExistingKind contextExistingKind,
+  lpsrContextUseExistingKind contextUseExistingKind,
   lpsrContextTypeKind     contextTypeKind,
   const std::string&      contextName)
 {
   lpsrContext* o =
     new lpsrContext (
       inputLineNumber,
-      contextExistingKind,
+      contextUseExistingKind,
       contextTypeKind,
       contextName);
   assert (o != nullptr);
@@ -85,12 +85,12 @@ S_lpsrContext lpsrContext::create (
 
 lpsrContext::lpsrContext (
   int                     inputLineNumber,
-  lpsrContextExistingKind contextExistingKind,
+  lpsrContextUseExistingKind contextUseExistingKind,
   lpsrContextTypeKind     contextTypeKind,
   const std::string&      contextName)
     : lpsrElement (inputLineNumber)
 {
-  fContextExistingKind = contextExistingKind;
+  fContextUseExistingKind = contextUseExistingKind;
   fContextTypeKind = contextTypeKind;
   fContextName = contextName;
 }
@@ -158,7 +158,7 @@ void lpsrContext::print (std::ostream& os) const
   os <<
     "[Context" <<
     ", fContextTypeKind: " << fContextTypeKind <<
-    ", fContextExistingKind: " << fContextExistingKind;
+    ", fContextUseExistingKind: " << fContextUseExistingKind;
 
   if (fContextName.size ()) {
     os << ' ' << fContextName;
@@ -198,14 +198,14 @@ void lpsrContext::print (std::ostream& os) const
 //______________________________________________________________________________
 S_lpsrChordNamesContext lpsrChordNamesContext::create (
   int                     inputLineNumber,
-  lpsrContextExistingKind contextExistingKind,
+  lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&      contextName,
   const S_msrVoice&       contextVoice)
 {
   lpsrChordNamesContext* o =
     new lpsrChordNamesContext (
       inputLineNumber,
-      contextExistingKind,
+      contextUseExistingKind,
       contextName,
       contextVoice);
   assert (o != nullptr);
@@ -214,16 +214,16 @@ S_lpsrChordNamesContext lpsrChordNamesContext::create (
 
 lpsrChordNamesContext::lpsrChordNamesContext (
   int                     inputLineNumber,
-  lpsrContextExistingKind contextExistingKind,
+  lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&      contextName,
   const S_msrVoice&       contextVoice)
     : lpsrContext (
       inputLineNumber,
-      contextExistingKind,
+      contextUseExistingKind,
       lpsrContextTypeKind::kContextChordNames,
       contextName)
 {
-  fContextExistingKind = contextExistingKind;
+  fContextUseExistingKind = contextUseExistingKind;
 
   fContextName = contextName;
 
@@ -305,9 +305,9 @@ void lpsrChordNamesContext::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "contextExistingKind" << " : " <<
-    lpsrContextExistingKindAsString (
-      fContextExistingKind) <<
+    "contextUseExistingKind" << " : " <<
+    lpsrContextUseExistingKindAsString (
+      fContextUseExistingKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
     "contextName" << " : \"" << fContextName << "\"" <<
@@ -361,14 +361,14 @@ std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt)
 //______________________________________________________________________________
 S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
   int                     inputLineNumber,
-  lpsrContextExistingKind contextExistingKind,
+  lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&      contextName,
   const S_msrStaff&       contextStaff)
 {
   lpsrFiguredBassContext* o =
     new lpsrFiguredBassContext (
       inputLineNumber,
-      contextExistingKind,
+      contextUseExistingKind,
       contextName,
       contextStaff);
   assert (o != nullptr);
@@ -377,16 +377,16 @@ S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
 
 lpsrFiguredBassContext::lpsrFiguredBassContext (
   int                     inputLineNumber,
-  lpsrContextExistingKind contextExistingKind,
+  lpsrContextUseExistingKind contextUseExistingKind,
   const std::string&      contextName,
   const S_msrStaff&       contextStaff)
     : lpsrContext (
       inputLineNumber,
-      contextExistingKind,
+      contextUseExistingKind,
       lpsrContextTypeKind::kContextFiguredBass,
       contextName)
 {
-  fContextExistingKind = contextExistingKind;
+  fContextUseExistingKind = contextUseExistingKind;
 
   fContextName = contextName;
 
@@ -468,9 +468,9 @@ void lpsrFiguredBassContext::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fContextExistingKind" << " : " <<
-    lpsrContextExistingKindAsString (
-      fContextExistingKind) <<
+    "fContextUseExistingKind" << " : " <<
+    lpsrContextUseExistingKindAsString (
+      fContextUseExistingKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fContextName" << " : \"" << fContextName << "\"" <<

@@ -3666,7 +3666,7 @@ and when debugging EXECUTABLE.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "generate-positions-in-measures", "gpim",
+        "generate-measure-positions", "gmp",
         regex_replace (
 R"(Generate after each note and barLine a comment containing
 its position in the measure.

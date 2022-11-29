@@ -40,14 +40,14 @@ std::string lpsrContextTypeKindAsString (
 
 std::ostream& operator << (std::ostream& os, const lpsrContextTypeKind& elt);
 
-enum class lpsrContextExistingKind {
-  kExistingContextYes, kExistingContextNo
+enum class lpsrContextUseExistingKind {
+  kUseExistingContextYes, kUseExistingContextNo
 };
 
-std::string lpsrContextExistingKindAsString (
-  lpsrContextExistingKind contextExistingKind);
+std::string lpsrContextUseExistingKindAsString (
+  lpsrContextUseExistingKind contextUseExistingKind);
 
-std::ostream& operator << (std::ostream& os, const lpsrContextExistingKind& elt);
+std::ostream& operator << (std::ostream& os, const lpsrContextUseExistingKind& elt);
 
 //______________________________________________________________________________
 class EXP lpsrContext : public lpsrElement
@@ -59,7 +59,7 @@ class EXP lpsrContext : public lpsrElement
 
     static SMARTP<lpsrContext> create (
                             int                     inputLineNumber,
-                            lpsrContextExistingKind contextExistingKind,
+                            lpsrContextUseExistingKind contextUseExistingKind,
                             lpsrContextTypeKind     contextTypeKind,
                             const std::string&           contextName);
 
@@ -70,7 +70,7 @@ class EXP lpsrContext : public lpsrElement
 
                           lpsrContext (
                             int                     inputLineNumber,
-                            lpsrContextExistingKind contextExistingKind,
+                            lpsrContextUseExistingKind contextUseExistingKind,
                             lpsrContextTypeKind     contextTypeKind,
                             const std::string&      contextName);
 
@@ -81,9 +81,9 @@ class EXP lpsrContext : public lpsrElement
     // set and get
     // ------------------------------------------------------
 
-    lpsrContextExistingKind
-                          getContextExistingKind () const
-                              { return fContextExistingKind; }
+    lpsrContextUseExistingKind
+                          getContextUseExistingKind () const
+                              { return fContextUseExistingKind; }
 
     lpsrContextTypeKind   getContextTypeKind () const
                               { return fContextTypeKind; }
@@ -118,11 +118,11 @@ class EXP lpsrContext : public lpsrElement
                                     fContextTypeKind);
                               }
 
-    std::string           getLpsrContextExistingKindAsString () const
+    std::string           getLpsrContextUseExistingKindAsString () const
                               {
                                 return
-                                  lpsrContextExistingKindAsString (
-                                    fContextExistingKind);
+                                  lpsrContextUseExistingKindAsString (
+                                    fContextUseExistingKind);
                               }
 
     void                  print (std::ostream& os) const override;
@@ -132,8 +132,8 @@ class EXP lpsrContext : public lpsrElement
     // fields
     // ------------------------------------------------------
 
-    lpsrContextExistingKind
-                          fContextExistingKind;
+    lpsrContextUseExistingKind
+                          fContextUseExistingKind;
     lpsrContextTypeKind   fContextTypeKind;
     std::string           fContextName;
 
@@ -153,7 +153,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
 
     static SMARTP<lpsrChordNamesContext> create (
                             int                     inputLineNumber,
-                            lpsrContextExistingKind contextExistingKind,
+                            lpsrContextUseExistingKind contextUseExistingKind,
                             const std::string&      contextName,
                             const S_msrVoice&       contextVoice);
 
@@ -164,7 +164,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
 
                           lpsrChordNamesContext (
                             int                     inputLineNumber,
-                            lpsrContextExistingKind contextExistingKind,
+                            lpsrContextUseExistingKind contextUseExistingKind,
                             const std::string&      contextName,
                             const S_msrVoice&       contextVoice);
 
@@ -220,7 +220,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
 
     static SMARTP<lpsrFiguredBassContext> create (
                             int                     inputLineNumber,
-                            lpsrContextExistingKind contextExistingKind,
+                            lpsrContextUseExistingKind contextUseExistingKind,
                             const std::string&           contextName,
                             const S_msrStaff&       contextStaff);
 
@@ -231,7 +231,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
 
                           lpsrFiguredBassContext (
                             int                     inputLineNumber,
-                            lpsrContextExistingKind contextExistingKind,
+                            lpsrContextUseExistingKind contextUseExistingKind,
                             const std::string&           contextName,
                             const S_msrStaff&       contextStaff);
 

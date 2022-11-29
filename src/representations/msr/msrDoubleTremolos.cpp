@@ -222,7 +222,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //     ++gIndenter;
 //
 //     gLogStream <<
-//       "Setting measure element position in measure of double tremolo " <<
+//       "Setting measure element measure position of double tremolo " <<
 //       asString () <<
 //       " to " <<
 //       measurePosition <<
@@ -247,7 +247,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //     measurePosition != msrMoment::K_NO_POSITION,
 //     "measurePosition == msrMoment::K_NO_POSITION");
 //
-//   // set double tremolo's position in measure
+//   // set double tremolo's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
 // }
 

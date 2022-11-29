@@ -1653,7 +1653,7 @@ R"(Measures details)",
   S_oahTwoBooleansAtom
     traceMeasurePositionsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-positions-in-measures", "tpim",
+        "trace-measures-positions", "tmp",
 R"(Positions in measures)",
         "fTraceMeasurePositions",
         fTraceMeasurePositions,
@@ -2969,7 +2969,7 @@ std::ostream& operator << (std::ostream& os, const S_tracingOahGroup& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

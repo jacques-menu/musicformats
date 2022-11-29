@@ -667,7 +667,7 @@ std::string msrFiguredBass::asString () const
   s << ']';
   }
 
-  // print the figured bass position in measure
+  // print the figured bass measure position
   s <<
     ", measurePosition: " << fMeasureElementMeasurePosition;
 
@@ -764,7 +764,7 @@ void msrFiguredBass::print (std::ostream& os) const
     os << "[EMPTY]" << std::endl;
   }
 
-  // print the figured bass position in measure
+  // print the figured bass measure position
   os <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<

@@ -117,7 +117,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       upLinkToMeasure);
 
     gLogStream <<
-      "Setting measure element position in measure of " <<
+      "Setting measure element measure position of " <<
       asString () <<
       " to '" << measurePosition <<
       "' (was '" <<
@@ -139,7 +139,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
     measurePosition != msrMoment::K_NO_POSITION,
     "measurePosition == msrMoment::K_NO_POSITION");
 
-  // set measure element's position in measure
+  // set measure element's measure position
   fMeasureElementMeasurePosition = measurePosition;
 
   // compute measure element's position in voice
@@ -152,9 +152,9 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       measurePosition;
 
   // set figured bass's position in voice
-  setMeasureElementVoicePosition (
-    voicePosition,
-    context);
+//   setMeasureElementVoicePosition ( // JMI v0.9.66
+//     voicePosition,
+//     context);
 // }
 
   // update current position in voice // JMI v0.9.66

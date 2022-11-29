@@ -66,6 +66,8 @@ enum msrMeasureFirstInSegmentKind {
 std::string msrMeasureFirstInSegmentKindAsString (
   msrMeasureFirstInSegmentKind measureFirstInSegmentKind);
 
+std::ostream& operator << (std::ostream& os, const msrMeasureFirstInSegmentKind& elt);
+
 enum msrMeasureRepeatContextKind {
   kMeasureRepeatContext_NO_,
   kMeasureRepeatContextNone,
@@ -80,6 +82,8 @@ enum msrMeasureRepeatContextKind {
 std::string msrMeasureRepeatContextKindAsString (
   msrMeasureRepeatContextKind measureRepeatContextKind);
 
+std::ostream& operator << (std::ostream& os, const msrMeasureRepeatContextKind& elt);
+
 enum msrMeasureEndRegularKind {
   kMeasureEndRegularKindUnknown,
   kMeasureEndRegularKindYes,
@@ -88,6 +92,8 @@ enum msrMeasureEndRegularKind {
 
 std::string msrMeasureEndRegularKindAsString (
   msrMeasureEndRegularKind measureEndRegularKind);
+
+std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt);
 
 
 }

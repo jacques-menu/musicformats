@@ -396,7 +396,7 @@ class EXP msrStanza : public msrElement
                             int inputLineNumber,
                             int nextMeasurePuristNumber);
 
-    void                  padUpToCurrentMeasureWholeNotesDurationInStanza ( // JMI
+    void                  padUpToMeasureWholeNotesDurationInStanza ( // JMI
                             int             inputLineNumber,
                             const Rational& wholeNotes);
 
@@ -443,7 +443,7 @@ class EXP msrStanza : public msrElement
     Bool                  fStanzaTextPresent;
 
     // current measure whole notes
-    Rational              fStanzaCurrentMeasureWholeNotesDuration;
+    Rational              fStanzaMeasureWholeNotesDuration;
 };
 typedef SMARTP<msrStanza> S_msrStanza;
 EXP std::ostream& operator << (std::ostream& os, const S_msrStanza& elt);
