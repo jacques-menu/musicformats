@@ -212,7 +212,7 @@ S_msrChord msrChord::createChordNewbornClone (
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
-//       "Setting chord's position in measure of " <<
+//       "Setting chord's measure position of " <<
 //       asString () <<
 //       " to " <<
 //       measurePosition <<
@@ -235,7 +235,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //     measurePosition != msrMoment::K_NO_POSITION,
 //     "measurePosition == msrMoment::K_NO_POSITION");
 //
-//   // set chord's position in measure
+//   // set chord's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
 // }
 
@@ -477,10 +477,10 @@ void msrChord::setChordMembersMeasurePosition (
         +
       measurePosition;
 
-  // set chord's position in voice
-  setMeasureElementVoicePosition (
-    voicePosition,
-    context);
+//   // set chord's position in voice
+//   setMeasureElementVoicePosition (
+//     voicePosition,
+//     context);
 
   // update current position in voice
   S_msrVoice
@@ -494,7 +494,7 @@ void msrChord::setChordMembersMeasurePosition (
         getMeasureElementSoundingWholeNotes ());
 }
 
-  // set the chord's elements' position in measure
+  // set the chord's elements' measure position
   if (fChordNotesVector.size ()) {
     for (S_msrNote note : fChordNotesVector) {
       // set note's uplink to measure
@@ -502,7 +502,7 @@ void msrChord::setChordMembersMeasurePosition (
         setNoteUpLinkToMeasure (
           measure);
 
-      // set note's position in measure
+      // set note's measure position
 //       note->
 //         setMeasureElementMeasurePosition (
 //           measure,
@@ -520,7 +520,7 @@ void msrChord::setChordMembersMeasurePosition (
   // are there dal segnos attached to this chord?
   if (fChordDalSegnos.size ()) {
     for (S_msrDalSegno dalSegno : fChordDalSegnos) {
-      // set the dal segno position in measure
+      // set the dal segno measure position
 //       dalSegno->
 //         setDalSegnoMeasurePosition (
 //           measure,
@@ -1052,7 +1052,7 @@ void msrChord::finalizeChord (
   }
 #endif
 
-  // we can now set the position in measures for all the chord members JMI v0.9.66
+  // we can now set the measure positions for all the chord members JMI v0.9.66
 //   setChordMembersMeasurePosition (
 //     fChordUpLinkToMeasure,
 //     fMeasureElementMeasurePosition);
@@ -1615,7 +1615,7 @@ void msrChord::print (std::ostream& os) const
     fPositionInTuplet <<
     std::endl;
 
-  // print simplified position in measure if relevant
+  // print simplified measure position if relevant
 // JMI  if (fChordUpLinkToMeasure) {
     // the chord uplink to measure may not have been set yet
     Rational

@@ -3016,9 +3016,9 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
 
   // get the current measure whole notes
   Rational
-    currentMeasureWholeNotesDuration =
+    measureWholeNotesDuration =
       fCurrentMeasureClone->
-        getCurrentMeasureWholeNotesDuration ();
+        getMeasureWholeNotesDuration ();
 
   // get the full current measure whole notes
   Rational
@@ -3033,7 +3033,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       "' in voice \"" << voice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl <<
-      "currentMeasureWholeNotesDuration = " << currentMeasureWholeNotesDuration <<
+      "measureWholeNotesDuration = " << measureWholeNotesDuration <<
       std::endl;
   }
 #endif
@@ -3043,13 +3043,13 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       msrMeasure::kUnknownMeasure; // JMI
  // JMI     fMeasureKind = kFullMeasure; // may be changed afterwards
 
-  if (currentMeasureWholeNotesDuration == measureFullLength ) {
+  if (measureWholeNotesDuration == measureFullLength ) {
     // this measure is full
     measureKind =
       msrMeasure::kFullMeasure;
   }
 
-  else if (currentMeasureWholeNotesDuration < measureFullLength) {
+  else if (measureWholeNotesDuration < measureFullLength) {
     / *
     if (fSegmentElementsList.size () == 1) { // JMI
       // this is the first measure in the segment
@@ -3069,7 +3069,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       msrMeasure::kUpbeatMeasure; // JMI
   }
 
-  else if (currentMeasureWholeNotesDuration > measureFullLength) {
+  else if (measureWholeNotesDuration > measureFullLength) {
     // this measure is overfull
     measureKind =
       msrMeasure::kOverfullMeasure;

@@ -2511,7 +2511,7 @@ void msrVoice::padUpToMeasurePositionInVoice (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
-      "Padding up to position in measure '" <<
+      "Padding up to measure position '" <<
       wholeNotesMeasurePosition <<
       "' whole notes in voice \"" <<
       getVoiceName () <<
@@ -2540,7 +2540,7 @@ void msrVoice::padUpToMeasurePositionInVoice (
       const S_msrStanza& stanza = thePair.second;
 
       stanza->
-        padUpToCurrentMeasureWholeNotesDurationInStanza (
+        padUpToMeasureWholeNotesDurationInStanza (
           inputLineNumber,
           wholeNotesMeasurePosition);
     } // for
@@ -2831,7 +2831,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
     part =
       fetchVoiceUpLinkToPart ();
 
-  // fetch the part current position in measure
+  // fetch the part current measure position
   Rational
     partCurrentMeasurePosition =
       part->
@@ -3108,7 +3108,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
   fVoiceLastSegment->
     appendChordToSegment (chord);
 
-  // account for chord duration in the part current position in measure
+  // account for chord duration in the part current measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
       incrementPartCurrentMeasurePosition (
@@ -3174,7 +3174,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
   fVoiceLastSegment->
     appendTupletToSegment (tuplet);
 
-  // account for tuplet duration in the part's current position in measure
+  // account for tuplet duration in the part's current measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
       incrementPartCurrentMeasurePosition (
@@ -4494,17 +4494,17 @@ void msrVoice::handleVoiceLevelRepeatStart (
         // the last measure is not empty
 
         Rational
-          currentMeasureWholeNotesDuration =
-            lastMeasureInLastSegment->getCurrentMeasureWholeNotesDuration ();
+          measureWholeNotesDuration =
+            lastMeasureInLastSegment->getMeasureWholeNotesDuration ();
         Rational
           fullMeasureWholeNotesDuration =
             lastMeasureInLastSegment->getFullMeasureWholeNotesDuration ();
 
         // is there a measure splitting?
         if ( // JMI better criterion???
-          currentMeasureWholeNotesDuration.getNumerator () > 0
+          measureWholeNotesDuration.getNumerator () > 0
             &&
-          currentMeasureWholeNotesDuration
+          measureWholeNotesDuration
             <
           fullMeasureWholeNotesDuration
         ) {
@@ -4517,8 +4517,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
               "' upon a repeat start in voice \"" <<
               getVoiceName () <<
               "\"" <<
-              ", currentMeasureWholeNotesDuration: " <<
-              currentMeasureWholeNotesDuration <<
+              ", measureWholeNotesDuration: " <<
+              measureWholeNotesDuration <<
               ", fullMeasureWholeNotesDuration: " <<
               fullMeasureWholeNotesDuration <<
               ", line " << inputLineNumber <<
@@ -5230,7 +5230,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
 
   // is there a measure splitting?
   if (
-    voiceLastMeasure->getCurrentMeasureWholeNotesDuration ()
+    voiceLastMeasure->getMeasureWholeNotesDuration ()
       ==
     voiceLastMeasure->getFullMeasureWholeNotesDuration ()
   ) {
@@ -9613,7 +9613,7 @@ void msrVoice::removeNoteFromVoice (
       inputLineNumber,
       note);
 
-  // update the part current position in measure
+  // update the part current measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
       decrementPartCurrentMeasurePosition (

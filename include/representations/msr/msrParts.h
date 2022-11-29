@@ -213,7 +213,7 @@ class EXP msrPart : public msrPartGroupElement
                           getPartStaveNumbersToStavesMap () const
                               { return fPartStaveNumbersToStavesMap; }
 
-    // staff position in measure
+    // staff measure position
 
     void                  setPartCurrentMeasurePosition (
                             int             inputLineNumber,
@@ -703,7 +703,7 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrStaffDetails     fCurrentPartStaffDetails;
 
-    // position in measure
+    // measure position
 
     Rational              fPartCurrentMeasurePosition;
 };

@@ -4470,7 +4470,7 @@ void msrHarmony::setHarmonyUpLinkToNote (const S_msrNote& note)
 //   const Rational&    measurePosition,
 //   const std::string&      context)
 // {
-//   // set the harmony position in measure, taking it's offset into account
+//   // set the harmony measure position, taking it's offset into account
 //
 //   // sanity check
 //   mfAssert (
@@ -4490,7 +4490,7 @@ void msrHarmony::setHarmonyUpLinkToNote (const S_msrNote& note)
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
-//       "Setting harmony's position in measure of " << asString () <<
+//       "Setting harmony's measure position of " << asString () <<
 //       " to " <<
 //       measurePosition <<
 //       " (was " <<
@@ -4528,7 +4528,7 @@ void msrHarmony::setHarmonyUpLinkToNote (const S_msrNote& note)
 //     measurePosition != msrMoment::K_NO_POSITION,
 //     "measurePosition == msrMoment::K_NO_POSITION");
 //
-//   // set harmony's position in measure
+//   // set harmony's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
 //
 //   // update current position in voice
@@ -4891,7 +4891,7 @@ void msrHarmony::print (std::ostream& os) const
     fHarmonyUpLinkToMeasure->getMeasureNumber () <<
     std::endl;
 
-  // print the harmony position in measure
+  // print the harmony measure position
   os <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<

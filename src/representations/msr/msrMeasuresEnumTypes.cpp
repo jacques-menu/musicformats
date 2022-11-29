@@ -148,6 +148,99 @@ std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt)
   return os;
 }
 
+std::string msrMeasureFirstInSegmentKindAsString (
+  msrMeasureFirstInSegmentKind measureFirstInSegmentKind)
+{
+  std::string result;
+
+  switch (measureFirstInSegmentKind) {
+    case msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindUnknown:
+      result = "kMeasureFirstInSegmentKindUnknown";
+      break;
+    case msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindYes:
+      result = "kMeasureFirstInSegmentKindYes";
+      break;
+    case msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindNo:
+      result = "kMeasureFirstInSegmentKindNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrMeasureFirstInSegmentKind& elt)
+{
+  os << msrMeasureFirstInSegmentKindAsString (elt);
+  return os;
+}
+
+std::string msrMeasureRepeatContextKindAsString (
+  msrMeasureRepeatContextKind measureRepeatContextKind)
+{
+  std::string result;
+
+  switch (measureRepeatContextKind) {
+    case msrMeasureRepeatContextKind::kMeasureRepeatContext_NO_:
+      result = "kMeasureRepeatContext_NO_";
+      break;
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextNone:
+      result = "kMeasureRepeatContextNone";
+      break;
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextCommonPartLastMeasure:
+      result = "kMeasureRepeatContextCommonPartLastMeasure";
+      break;
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextHookedEndingLastMeasure:
+      result = "kMeasureRepeatContextHookedEndingLastMeasure";
+      break;
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextHooklessEndingLastMeasure:
+      result = "kMeasureRepeatContextHooklessEndingLastMeasure";
+      break;
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextNextMeasureAfterCommonPart:
+      result = "kMeasureRepeatContextNextMeasureAfterCommonPart";
+      break;
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextNextMeasureAfterHookedEnding:
+      result = "kMeasureRepeatContextNextMeasureAfterHookedEnding";
+      break;
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextNextMeasureAfterHooklessEnding:
+      result = "kMeasureRepeatContextNextMeasureAfterHooklessEnding";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrMeasureRepeatContextKind& elt)
+{
+  os << msrMeasureRepeatContextKindAsString (elt);
+  return os;
+}
+
+std::string msrMeasureEndRegularKindAsString (
+  msrMeasureEndRegularKind measureEndRegularKind)
+{
+  std::string result;
+
+  switch (measureEndRegularKind) {
+    case msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown:
+      result = "kMeasureEndRegularKindUnknown";
+      break;
+    case msrMeasureEndRegularKind::kMeasureEndRegularKindYes:
+      result = "kMeasureEndRegularKindYes";
+      break;
+    case msrMeasureEndRegularKind::kMeasureEndRegularKindNo:
+      result = "kMeasureEndRegularKindNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt)
+{
+  os << msrMeasureEndRegularKindAsString (elt);
+  return os;
+}
+
 
 }
 
@@ -166,11 +259,11 @@ std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt)
 //           measurePositionsDelta,
 //           voice);
 //
-//     // set its position in measure
+//     // set its measure position
 //     skipNote->
 //       setMeasureElementMeasurePosition (
 //         this,
-//         fCurrentMeasureWholeNotesDuration,
+//         fMeasureWholeNotesDuration,
 //         "handleSubsequentHarmonyInHarmoniesMeasure() 2");
 //
 //     // insert skipNote before currentHarmony in the measure's elements list

@@ -391,13 +391,13 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
     tempoTuplet->getTempoTupletDisplayWholeNotes ();
     * /
 
-  // don't populate tempoTuplet's measure number nor position in measure,
+  // don't populate tempoTuplet's measure number nor measure position,
   // this will be done in setTupletMembersMeasureNumber ()
   / * JMI
   tempoTuplet->setTempoTupletMeasureNumber (
     fTempoTupletMeasureNumber);
 
-  // populate tempoTuplet's position in measure
+  // populate tempoTuplet's measure position
   tempoTuplet->setTempoTupletMeasurePosition (
     fTempoTupletMeasurePosition);
     * /
@@ -436,7 +436,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
         fTempoTupletDisplayWholeNotes -= // JMI
           tempoNote->getTempoNoteWholeNotes ();
 
-        // don't update measure number nor position in measure: // JMI
+        // don't update measure number nor measure position: // JMI
         // they have not been set yet
 
         // return from function
@@ -741,7 +741,7 @@ void msrTempoTuplet::print (std::ostream& os) const
 /* JMI ???
   os << std::left <<
     std::setw (fieldWidth) <<
-    "(position in measure" << " : ";
+    "(measure position" << " : ";
   if (fTempoTupletMeasurePosition.getNumerator () < 0) {
     os << "???)";
   }

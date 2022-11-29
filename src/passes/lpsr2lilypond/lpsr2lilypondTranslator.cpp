@@ -5355,9 +5355,9 @@ void lpsr2lilypondTranslator::generateInputLineNumberAndOrMeasurePositionAsAComm
   }
 
   if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
-    // generate the position in measure as a comment
+    // generate the measure position as a comment
     fLilypondCodeStream <<
-      "pim: " <<
+      "memp: " <<
       measureElement->getMeasureElementMeasurePosition () <<
       ' ';
   }
@@ -9899,12 +9899,24 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
   }
 #endif
 
+  switch (elt->getContextUseExistingKind ()) {
+    case lpsrContextUseExistingKind::kUseExistingContextYes:
+			fLilypondCodeStream <<
+				"%{ Use existing context here %}" << // JMI ??? v0.9.66
+				std::endl;
+      break;
+    case lpsrContextUseExistingKind::kUseExistingContextNo:
+			fLilypondCodeStream <<
+				"\\context ";
+      break;
+  } // switch
+
   std::string
     contextName =
       elt->getContextName ();
 
   fLilypondCodeStream <<
-    "\\context " <<
+//     "\\context " << // JMI ??? v0.9.66
 		lpsrContextTypeKindAsLilypondString (
 			elt->getContextTypeKind ()) <<
     " = \"" << contextName << "\"" <<
@@ -10000,6 +10012,28 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
     }
   }
 #endif
+
+  fLilypondCodeStream <<
+  	"%{" <<
+  	std::endl <<
+		"visitStart (S_lpsrFiguredBassContext& elt), elt = " <<
+		std::endl <<
+		elt <<
+  	"%}" <<
+  	std::endl <<
+    std::endl;
+
+  switch (elt->getContextUseExistingKind ()) {
+    case lpsrContextUseExistingKind::kUseExistingContextYes:
+			fLilypondCodeStream <<
+				"%{ Use existing context here %}" << // JMI ??? v0.9.66
+				std::endl;
+      break;
+    case lpsrContextUseExistingKind::kUseExistingContextNo:
+			fLilypondCodeStream <<
+				"\\context ";
+      break;
+  } // switch
 
   std::string
     contextName =
@@ -12215,7 +12249,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       std::setw (commentFieldWidth) <<
       "" <<
       "% start of " <<
-      msrMeasureKindAsString (elt->getMeasureKind ()) <<
+      elt->getMeasureKind () <<
       " measure " <<
       measureNumber <<
       ", line " << inputLineNumber <<
@@ -12441,7 +12475,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           upbeatDuration =
             wholeNotesAsLilypondString (
               inputLineNumber,
-              elt->getCurrentMeasureWholeNotesDuration ());
+              elt->getMeasureWholeNotesDuration ());
 
         fLilypondCodeStream <<
           "\\partial " << upbeatDuration <<
@@ -12460,7 +12494,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           upbeatDuration =
             wholeNotesAsLilypondString (
               inputLineNumber,
-              elt->getCurrentMeasureWholeNotesDuration ());
+              elt->getMeasureWholeNotesDuration ());
 
         fLilypondCodeStream <<
           "\\partial " << upbeatDuration <<
@@ -12476,8 +12510,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       {
         Rational
-          currentMeasureWholeNotesDuration =
-            elt->getCurrentMeasureWholeNotesDuration ();
+          measureWholeNotesDuration =
+            elt->getMeasureWholeNotesDuration ();
 
         Rational
           fullMeasureWholeNotesDuration =
@@ -12486,7 +12520,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         // we should set the score current measure whole notes in this case
         Rational
           ratioToFullMeasureWholeNotesDuration =
-            currentMeasureWholeNotesDuration / fullMeasureWholeNotesDuration;
+            measureWholeNotesDuration / fullMeasureWholeNotesDuration;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
@@ -12499,8 +12533,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             ", line = " << inputLineNumber <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% currentMeasureWholeNotesDuration" << " = " <<
-            currentMeasureWholeNotesDuration <<
+            "% measureWholeNotesDuration" << " = " <<
+            measureWholeNotesDuration <<
             std::endl <<
             std::setw (fieldWidth) <<
             "% fullMeasureWholeNotesDuration" << " = " <<
@@ -12532,7 +12566,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           /* JMI
           fLilypondCodeStream <<
             "\\set Score.measureLength = #(ly:make-moment " <<
-            currentMeasureWholeNotesDuration.toString () <<
+            measureWholeNotesDuration.toString () <<
             ")" <<
             std::endl;
     */
@@ -12800,7 +12834,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         std::setw (commentFieldWidth) <<
         "" <<
         "% end of " <<
-        msrMeasureKindAsString (elt->getMeasureKind ()) <<
+        elt->getMeasureKind () <<
         " measure " <<
         measureNumber <<
         ", line " << inputLineNumber <<

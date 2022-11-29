@@ -228,7 +228,7 @@ function bit ()
 	# execute the SCRIPT
 
 # 	echo "--> Executing ${SCRIPT}"
-  zsh ${SCRIPT} $@
+  zsh ${SCRIPT} $@   #   > ${LOGFILE} 2&>1
 
 	# filter out log results
 
@@ -375,31 +375,31 @@ function renam ()
 function grh ()
 {
 #  set -x
-  grep -r "$1" * | grep '\.h'
+  grep -r "$1" **/* | grep '\.h'
 }
 
 function grc ()
 {
 #  set -x
-  grep -r "$1" * | grep '\.c'
+  grep -r "$1" **/* | grep '\.c'
 }
 
 function grx ()
 {
 #  set -x
-  grep -r "$1" * | grep '\.xml'
+  grep -r "$1" **/* | grep '\.xml'
 }
 
 function grly ()
 {
 #  set -x
-  grep -r "$1" * | grep '\.ly'
+  grep -r "$1" **/* | grep '\.ly'
 }
 
 function grt ()
 {
 #  set -x
-  grep -r "$1" * | grep '\.tex'
+  grep -r "$1" **/* | grep '\.tex'
 }
 
 

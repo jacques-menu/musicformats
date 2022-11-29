@@ -2244,7 +2244,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
-//       "Setting note's position in measure of " << asString () <<
+//       "Setting note's measure position of " << asString () <<
 //       " to " <<
 //       measurePosition <<
 //       " (was " <<
@@ -2266,7 +2266,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //     measurePosition != msrMoment::K_NO_POSITION,
 //     "measurePosition == msrMoment::K_NO_POSITION");
 //
-//   // set note's position in measure
+//   // set note's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
 //
 // //   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
@@ -2312,7 +2312,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //   if (fNoteHarmoniesList.size ()) {
 //     std::list<S_msrHarmony>::const_iterator i;
 //     for (S_msrHarmony harmony : fNoteHarmoniesList) {
-//       // set the harmony position in measure, taking it's offset into account
+//       // set the harmony measure position, taking it's offset into account
 //       harmony->
 //         setMeasureElementMeasurePosition (
 //           measure,
@@ -2325,7 +2325,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //   if (fNoteFiguredBassesList.size ()) {
 //     std::list<S_msrFiguredBass>::const_iterator i;
 //     for (S_msrFiguredBass figuredBass : fNoteFiguredBassesList) {
-//       // set the figured bass element position in measure
+//       // set the figured bass element measure position
 //       figuredBass->
 //         setFiguredBassMeasurePosition (
 //           measure,
@@ -2337,7 +2337,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //   // are there dal segnos attached to this note?
 //   if (fNoteDalSegnos.size ()) {
 //     for (S_msrDalSegno dalSegno : fNoteDalSegnos) {
-//       // set the dal segno position in measure
+//       // set the dal segno measure position
 //       dalSegno->
 //         setDalSegnoMeasurePosition (
 //           measure,
@@ -5268,17 +5268,21 @@ void msrNote::printNoteEssentials (std::ostream& os) const
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes);
             */
-          nonSoundingNoteEssentialsAsString ();
+//           nonSoundingNoteEssentialsAsString (); // JMI v0.9.66
+//           soundingNoteEssentialsAsString ();
+          asShortStringWithRawWholeNotes ();
       }
       else {
         os <<
           "r" <<
-          nonSoundingNoteEssentialsAsString ();
+//           nonSoundingNoteEssentialsAsString (); // JMI v0.9.66
+//           soundingNoteEssentialsAsString ();
+          asShortStringWithRawWholeNotes ();
       }
       os << std::endl;
 
-      os <<
-        nonSoundingNoteEssentialsAsString ();
+//       os <<
+//         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
@@ -5619,7 +5623,7 @@ void msrNote::print (std::ostream& os) const
   }
   os << std::endl;
 
-  // print position in measure
+  // print measure position
   os << std::left <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " <<
@@ -7119,7 +7123,7 @@ void msrNote::printShort (std::ostream& os) const
 
   const int fieldWidth = 44;
 
-  // print position in measure
+  // print measure position
   os << std::left <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " <<
