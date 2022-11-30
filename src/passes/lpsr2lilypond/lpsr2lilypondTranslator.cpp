@@ -12469,7 +12469,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindAnacrusis:
-      if (elt->getMeasureFirstInVoice ()) {
+      if (elt->getMeasureIsFirstInVoice ()) {
         // only generate '\partial' at the beginning of a voice // this code SUPERFLOUS??? JMI v0.9.66
         std::string
           upbeatDuration =
@@ -12485,7 +12485,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
       if (
-      	elt->getMeasureFirstInVoice ()
+      	elt->getMeasureIsFirstInVoice ()
           &&
         elt->fetchMeasureUpLinkToScore ()->getScoreNumberOfMeasures () > 1
       ) {
@@ -12517,7 +12517,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           fullMeasureWholeNotesDuration =
             elt->getFullMeasureWholeNotesDuration ();
 
-        // we should set the score current measure whole notes in this case
+        // we should set the score measure whole notes in this case
         Rational
           ratioToFullMeasureWholeNotesDuration =
             measureWholeNotesDuration / fullMeasureWholeNotesDuration;
@@ -12527,7 +12527,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           int fieldWidth = 27;
 
           fLilypondCodeStream << std::left <<
-            "% Setting the current measure whole notes for measure " <<
+            "% Setting the measure whole notes for measure " <<
             std::setw (fieldWidth) <<
             measureNumber <<
             ", line = " << inputLineNumber <<

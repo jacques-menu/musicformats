@@ -353,7 +353,7 @@ class EXP msrChord : public msrTupletElement
     S_msrOctaveShift      getChordOctaveShift () const
                             { return fChordOctaveShift; }
 
-    // positions in measures
+    // measure positions
     void                  setChordMembersMeasurePosition (
                             const S_msrMeasure&    measure,
                             const Rational& measurePosition);

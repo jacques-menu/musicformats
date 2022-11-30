@@ -215,19 +215,19 @@ class EXP msrPart : public msrPartGroupElement
 
     // staff measure position
 
-    void                  setPartCurrentMeasurePosition (
+    void                  setPartMeasurePosition (
                             int             inputLineNumber,
                             const Rational& measurePosition);
 
-    void                  incrementPartCurrentMeasurePosition (
+    void                  incrementPartMeasurePosition (
                             int             inputLineNumber,
                             const Rational& duration);
-    void                  decrementPartCurrentMeasurePosition (
+    void                  decrementPartMeasurePosition (
                             int             inputLineNumber,
                             const Rational& duration);
 
-    Rational              getPartCurrentMeasurePosition () const
-                              { return fPartCurrentMeasurePosition; }
+    Rational              getPartMeasurePosition () const
+                              { return fPartMeasurePosition; }
 
     // part shortest note
 
@@ -705,7 +705,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // measure position
 
-    Rational              fPartCurrentMeasurePosition;
+    Rational              fPartMeasurePosition;
 };
 typedef SMARTP<msrPart> S_msrPart;
 EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);

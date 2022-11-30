@@ -64,7 +64,7 @@ class EXP msrNote : public msrTupletElement
                             int                        inputLineNumber,
                             const S_msrMeasure&        upLinkToMeasure,
 
-                            const std::string&         noteMeasureNumber,
+//                             const std::string&         noteMeasureNumber, JMI v0.9.66
 
                             msrNoteKind                noteKind,
 
@@ -137,7 +137,7 @@ class EXP msrNote : public msrTupletElement
 
     static SMARTP<msrNote> createRegularNote (
                             int                      inputLineNumber,
-                            const std::string&            noteMeasureNumber,
+                            const std::string&       noteMeasureNumber,
                             msrQuarterTonesPitchKind quarterTonesPitchKind,
                             msrOctaveKind            noteOctaveKind,
                             const Rational&          soundingWholeNotes,
@@ -163,7 +163,7 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     static SMARTP<msrNote> createNoteFromSemiTonesPitchAndOctave (
-                            int                          inputLineNumber,
+                            int                                 inputLineNumber,
                             const S_msrSemiTonesPitchAndOctave& semiTonesPitchAndOctave);
 
   protected:
@@ -173,9 +173,9 @@ class EXP msrNote : public msrTupletElement
 
                           msrNote (
                             int                        inputLineNumber,
-                            const S_msrMeasure&         upLinkToMeasure,
+                            const S_msrMeasure&        upLinkToMeasure,
 
-                            const std::string&         noteMeasureNumber,
+//                             const std::string&         noteMeasureNumber, JMI v0.9.66
 
                             msrNoteKind                noteKind,
 

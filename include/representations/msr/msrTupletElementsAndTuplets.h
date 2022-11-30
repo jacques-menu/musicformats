@@ -157,7 +157,7 @@ class EXP msrTuplet : public msrTupletElement
     S_msrTuplet           getTupletDirectUpLinkToTuplet () const
                               { return fTupletDirectUpLinkToTuplet; }
 
-    // members positions in measures
+    // members measure positions
     Rational              setTupletMembersMeasurePositions (
                             const S_msrMeasure&    measure,
                             const Rational& measurePosition);

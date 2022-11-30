@@ -1570,7 +1570,7 @@ void msr2lilypondRegularHandler::createOutputRegularGroup ()
 
   registerAtomInRegularSubgroup ("notes-comments", subGroup);
 
-  registerAtomInRegularSubgroup ("generate-moments-in-measures", subGroup);
+  registerAtomInRegularSubgroup ("generate-measure-moments", subGroup);
   registerAtomInRegularSubgroup ("generate-positions-in-measures", subGroup);
 
   registerAtomInRegularSubgroup ("all-bar-numbers", subGroup);

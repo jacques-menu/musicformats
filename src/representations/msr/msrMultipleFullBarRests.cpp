@@ -282,7 +282,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
       setVoiceFirstMeasure (measure);
 
     measure->
-      setMeasureFirstInVoice ();
+      setMeasureIsFirstInVoice ();
   }
 
   // register measure as the last one in the segment

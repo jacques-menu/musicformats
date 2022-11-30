@@ -703,7 +703,7 @@ Rational msrTuplet::setTupletMembersMeasurePositions (
   fMeasureElementMeasurePosition = measurePosition;
 
 if (false) { // JMI
-  // compute tuplet's position in voice
+  // compute tuplet's voice position
   Rational
      voicePosition =
       fTupletUpLinkToMeasure->getMeasureVoicePosition ()
@@ -719,7 +719,7 @@ if (false) { // JMI
   // set tuplet's measure position
   fMeasureElementMeasurePosition = measurePosition;
 
-  // update current position in voice
+  // update current voice position
   S_msrVoice
     voice =
       fTupletUpLinkToMeasure->

@@ -882,7 +882,7 @@ class EXP msrVoice : public msrElement
 
     // strings
 
-    // position in voice
+    // voice position
 
     void                  incrementCurrentVoicePosition (
                             const Rational& delta)
@@ -1055,7 +1055,7 @@ class EXP msrVoice : public msrElement
 //     void                  appendMultipleFullBarRestsToInitialVoiceElements (
 //                             int                       inputLineNumber,
 //                             const S_msrMultipleFullBarRests& multipleFullBarRests,
-//                             const std::string&             context);
+//                             const std::string&        context);
 
     // measure repeats
 
@@ -1413,7 +1413,7 @@ class EXP msrVoice : public msrElement
 
     Bool                  fVoiceContainsMeasureRepeats;
 
-    // current position in voice
+    // current voice position
 
     Rational              fCurrentVoicePosition;
     msrMoment             fCurrentVoiceMoment;

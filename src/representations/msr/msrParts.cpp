@@ -149,7 +149,7 @@ void msrPart::initializePart ()
   fPartContainsMultipleFullBarRests = false;
 
   // current measure position
-  fPartCurrentMeasurePosition = Rational (0, 1);
+  fPartMeasurePosition = Rational (0, 1);
 
   // part shortest note duration
   fPartShortestNoteDuration = Rational (INT_MAX, 1);
@@ -327,7 +327,7 @@ void msrPart::registerStaffInPart (
   } // switch
 }
 
-void msrPart::setPartCurrentMeasurePosition (
+void msrPart::setPartMeasurePosition (
   int             inputLineNumber,
   const Rational& measurePosition)
 {
@@ -359,15 +359,15 @@ void msrPart::setPartCurrentMeasurePosition (
       s.str ());
   }
 
-  fPartCurrentMeasurePosition =
+  fPartMeasurePosition =
     measurePosition;
 }
 
-void msrPart::incrementPartCurrentMeasurePosition (
+void msrPart::incrementPartMeasurePosition (
   int             inputLineNumber,
   const Rational& duration)
 {
-  fPartCurrentMeasurePosition += duration;
+  fPartMeasurePosition += duration;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
@@ -377,13 +377,13 @@ void msrPart::incrementPartCurrentMeasurePosition (
       " in part " <<
       getPartCombinedName () <<
       ", thus setting it to " <<
-      fPartCurrentMeasurePosition <<
+      fPartMeasurePosition <<
       std::endl;
   }
 #endif
 }
 
-void msrPart::decrementPartCurrentMeasurePosition (
+void msrPart::decrementPartMeasurePosition (
   int             inputLineNumber,
   const Rational& duration)
 {
@@ -398,9 +398,9 @@ void msrPart::decrementPartCurrentMeasurePosition (
   }
 #endif
 
-  fPartCurrentMeasurePosition -= duration;
+  fPartMeasurePosition -= duration;
 
-  if (fPartCurrentMeasurePosition.getNumerator () < 0) {
+  if (fPartMeasurePosition.getNumerator () < 0) {
     std::stringstream s;
 
     s <<
@@ -409,7 +409,7 @@ void msrPart::decrementPartCurrentMeasurePosition (
       " in part " <<
       getPartCombinedName () <<
       " since that sets it to " <<
-      fPartCurrentMeasurePosition <<
+      fPartMeasurePosition <<
       ", which is negative ";
 
     msrInternalError (
@@ -423,7 +423,7 @@ void msrPart::decrementPartCurrentMeasurePosition (
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "The new part current measure position is " <<
-      fPartCurrentMeasurePosition <<
+      fPartMeasurePosition <<
       " in part " <<
       getPartCombinedName () <<
       std::endl;
@@ -797,11 +797,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
 #endif
 
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
-      ||
-    gGlobalTracingOahGroup->getTraceMeasurePositions ()
-  ) {
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "===> fPartMeasuresWholeNotesDurationsVector contents: " <<
       std::endl;
@@ -830,11 +826,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
 
     // allow for polymetrics in non-MusicXML contexts? JMI
 #ifdef TRACING_IS_ENABLED
-    if (
-      gGlobalTracingOahGroup->getTraceMeasures ()
-        ||
-      gGlobalTracingOahGroup->getTraceMeasurePositions ()
-    ) {
+    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "The measure with ordinal number " <<
         measureOrdinalNumber <<
@@ -855,11 +847,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
       wholeNotesDuration;
 
 #ifdef TRACING_IS_ENABLED
-    if (
-      gGlobalTracingOahGroup->getTraceMeasures ()
-        ||
-      gGlobalTracingOahGroup->getTraceMeasurePositions ()
-    ) {
+    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "The measure with ordinal number " <<
         measureOrdinalNumber <<
@@ -1119,7 +1107,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
   const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<
@@ -2115,7 +2103,7 @@ void msrPart::handleBackupInPart (
   const Rational& backupStepLength)
 {
   // account for backup in part
-  decrementPartCurrentMeasurePosition (
+  decrementPartMeasurePosition (
     inputLineNumber,
     backupStepLength);
 }
@@ -2136,7 +2124,7 @@ void msrPart::finalizeLastAppendedMeasureInPart (
   ++gIndenter;
 
   // reset current measure position
-  fPartCurrentMeasurePosition = Rational (0, 1);
+  fPartMeasurePosition = Rational (0, 1);
 
   // finalize current measure in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -2663,8 +2651,8 @@ void msrPart::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartCurrentMeasurePosition" << " : " <<
-    fPartCurrentMeasurePosition <<
+    "fPartMeasurePosition" << " : " <<
+    fPartMeasurePosition <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -3242,8 +3230,8 @@ void msrPart::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartCurrentMeasurePosition" << " : " <<
-    fPartCurrentMeasurePosition <<
+    "fPartMeasurePosition" << " : " <<
+    fPartMeasurePosition <<
     std::endl;
 
   // print all the staves

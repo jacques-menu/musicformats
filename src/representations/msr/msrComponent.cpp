@@ -116,7 +116,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
           mfcVersionNumber::createFromString ("0.9.66"),
           "October 6, 2022",
           std::list<std::string> {
-            "Finalized the computation of positions in measures",
+            "Finalized the computation of measure positions",
             "Finalized the '-display-msr-*' options"
           }
       ));

@@ -62,7 +62,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   const std::string&   context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Setting measure element sounding whole notes of " <<
       asString () <<

@@ -69,7 +69,7 @@ class EXP msrSyllable : public msrMeasureElement
 
     static SMARTP<msrSyllable> create (
                             int                    inputLineNumber,
-                            const S_msrMeasure&           upLinkToMeasure,
+                            const S_msrMeasure&          upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
                             const std::string&          syllableStanzaNumber,
@@ -94,7 +94,7 @@ class EXP msrSyllable : public msrMeasureElement
 
     static SMARTP<msrSyllable> createWithNextMeasurePuristNumber ( // JMI superflous??? v0.9.66
                             int                    inputLineNumber,
-                            const S_msrMeasure&           upLinkToMeasure,
+                            const S_msrMeasure&          upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
                             const std::string&          syllableStanzaNumber,
@@ -110,7 +110,7 @@ class EXP msrSyllable : public msrMeasureElement
 
                           msrSyllable (
                             int                    inputLineNumber,
-                            const S_msrMeasure&           upLinkToMeasure,
+                            const S_msrMeasure&          upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
                             const std::string&          syllableStanzaNumber,
@@ -442,7 +442,7 @@ class EXP msrStanza : public msrElement
 
     Bool                  fStanzaTextPresent;
 
-    // current measure whole notes
+    // measure whole notes
     Rational              fStanzaMeasureWholeNotesDuration;
 };
 typedef SMARTP<msrStanza> S_msrStanza;

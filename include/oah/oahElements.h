@@ -219,9 +219,9 @@ class EXP oahElement : public oahFindableElement
     // ------------------------------------------------------
 
     static SMARTP<oahElement> create (
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementValueKind      elementValueKind,
                             oahElementVisibilityKind elementVisibilityKind);
 */
@@ -232,9 +232,9 @@ class EXP oahElement : public oahFindableElement
     // ------------------------------------------------------
 
                           oahElement (
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementValueKind      elementValueKind,
                             oahElementVisibilityKind elementVisibilityKind);
 

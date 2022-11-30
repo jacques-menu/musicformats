@@ -991,7 +991,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
   const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<
@@ -1655,7 +1655,7 @@ void msrSegment::padUpToMeasurePositionInSegment (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
-      "Padding up to current whole notes '" << wholeNotes <<
+      "Padding up to whole notes '" << wholeNotes <<
       "' in segment '" <<
       fSegmentAbsoluteNumber <<
       ", segmentDebugNumber: '" <<
@@ -1862,7 +1862,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       setVoiceFirstMeasure (measure);
 
     measure->
-      setMeasureFirstInVoice ();
+      setMeasureIsFirstInVoice ();
   }
 
   // append measure to the segment
@@ -1937,7 +1937,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
   }
 
   measure->
-    setMeasureFirstInVoice ();
+    setMeasureIsFirstInVoice ();
 
   // prepend measure to the segment
   fSegmentElementsList.push_front (measure);
@@ -2072,7 +2072,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 
 void msrSegment::appendNoteToSegment (
   const S_msrNote&       note,
-  const Rational& partCurrentMeasurePosition)
+  const Rational& partMeasurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -2091,7 +2091,7 @@ void msrSegment::appendNoteToSegment (
   fSegmentLastMeasure->
     appendNoteToMeasure (
       note,
-      partCurrentMeasurePosition);
+      partMeasurePosition);
 }
 
 void msrSegment::appendNoteToSegmentClone (const S_msrNote& note)

@@ -120,7 +120,7 @@ class EXP msrGraceNotesGroup : public msrElement
     std::string           getGraceNotesGroupMeasureNumber () const
                               { return fGraceNotesGroupMeasureNumber; }
 
-    // positions in measures
+    // measure positions
     void                  setGraceNotesGroupElementsMeasurePositions (
                             const S_msrMeasure&    measure,
                             const Rational& measurePosition);

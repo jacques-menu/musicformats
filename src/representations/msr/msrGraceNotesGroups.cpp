@@ -395,19 +395,19 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
     context);
 
   if (false) { // JMI
-  // compute chord's position in voice
+  // compute chord's voice position
   Rational
      voicePosition =
       fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
         +
       measurePosition;
 
-  // set chord's position in voice
+  // set chord's voice position
   setMeasureElementVoicePosition (
     voicePosition,
     context);
 
-  // update current position in voice
+  // update current voice position
   S_msrVoice
     voice =
       measure->
@@ -423,7 +423,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
   if (fGraceNotesGroupElementsList.size ()) {
   /* JMI
   if (false) { // JMI
-    // compute chord's position in voice
+    // compute chord's voice position
     Rational
        voicePosition =
         fGraceNotesGroupUpLinkToNote->

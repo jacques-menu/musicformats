@@ -681,7 +681,7 @@ std::string msrFiguredBass::asString () const
   }
 */
 
-  // print the figured bass position in voice
+  // print the figured bass voice position
 //   s <<
 //     ", voicePosition: " << fMeasureElementVoicePosition;
 
@@ -770,7 +770,7 @@ void msrFiguredBass::print (std::ostream& os) const
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
     std::endl;
 
-//   // print the figured bass position in voice
+//   // print the figured bass voice position
 //   os <<
 //     std::setw (fieldWidth) <<
 //     "fMeasureElementVoicePosition" << " : " << fMeasureElementVoicePosition <<
