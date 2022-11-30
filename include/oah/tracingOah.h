@@ -236,13 +236,30 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  getTraceMeasuresDetails () const
                               { return fTraceMeasuresDetails; }
 
+    std::set<int>         getTraceDetailedMeasureNumbersSet () const
+                              { return fTraceDetailedMeasureNumbersSet; }
+
+    // positions
     Bool                  getTraceMeasurePositions () const
                               { return fTraceMeasurePositions; }
-    Bool                  getTraceMomentsInMeasures () const
-                              { return fTraceMomentsInMeasures; }
+    void                  setTraceMeasurePositions ()
+                              { fTraceMeasurePositions = true; }
 
-    std::set<int>              getTraceDetailedMeasureNumbersSet () const
-                              { return fTraceDetailedMeasureNumbersSet; }
+    Bool                  getTraceVoicePositions () const
+                              { return fTraceVoicePositions; }
+    void                  setTraceVoicePositions ()
+                              { fTraceVoicePositions = true; }
+
+    // moments
+    Bool                  getTraceMeasureMoments () const
+                              { return fTraceMeasureMoments; }
+    void                  setTraceMeasureMoments ()
+                              { fTraceMeasureMoments = true; }
+
+    Bool                  getTraceVoiceMoments () const
+                              { return fTraceVoiceMoments; }
+    void                  setTraceVoiceMoments ()
+                              { fTraceVoiceMoments = true; }
 
     // measures slices
     Bool                  getTraceMeasuresSlices () const
@@ -823,10 +840,16 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  fTraceMeasures;
     Bool                  fTraceMeasuresDetails;
 
-    Bool                  fTraceMeasurePositions;
-    Bool                  fTraceMomentsInMeasures;
+    std::set<int>         fTraceDetailedMeasureNumbersSet;
 
-    std::set<int>              fTraceDetailedMeasureNumbersSet;
+
+    // positions
+    Bool                  fTraceMeasurePositions;
+    Bool                  fTraceVoicePositions;
+
+    // moments
+    Bool                  fTraceMeasureMoments;
+    Bool                  fTraceVoiceMoments;
 
 
     // measures slices

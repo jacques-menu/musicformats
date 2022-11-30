@@ -3660,7 +3660,7 @@ and when debugging EXECUTABLE.)",
         "fOriginalMeasureNumbers",
         fOriginalMeasureNumbers));
 
-  // generate positions in measures
+  // generate measure positions
   // --------------------------------------
 
   subGroup->
@@ -3676,21 +3676,21 @@ This is useful when debugging EXECUTABLE.)",
         "fGenerateMeasurePositions",
         fGenerateMeasurePositions));
 
-  // generate moments in measures
+  // generate measure moments
   // --------------------------------------
 
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "generate-moments-in-measures", "gmim",
+        "generate-measure-moments", "gmim",
         regex_replace (
 R"(Generate after each note and barLine a comment containing
 its moment in the measure.
 This is useful when debugging EXECUTABLE.)",
           std::regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
-        "fGenerateMomentsInMeasures",
-        fGenerateMomentsInMeasures));
+        "fGenerateMeasureMoments",
+        fGenerateMeasureMoments));
 
   // non-print notes head color
   // --------------------------------------
@@ -5290,8 +5290,8 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
       fGenerateMeasurePositions <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fGenerateMomentsInMeasures" << " : " <<
-      fGenerateMomentsInMeasures <<
+    std::setw (valueFieldWidth) << "fGenerateMeasureMoments" << " : " <<
+      fGenerateMeasureMoments <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fNonPrintNotesHeadColorRGB" << " : " <<
@@ -5917,8 +5917,8 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
       fGenerateMeasurePositions <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fGenerateMomentsInMeasures" << " : " <<
-      fGenerateMomentsInMeasures <<
+    std::setw (fieldWidth) << "fGenerateMeasureMoments" << " : " <<
+      fGenerateMeasureMoments <<
       std::endl <<
 
     std::setw (fieldWidth) << "fNonPrintNotesHeadColorRGB" << " : " <<

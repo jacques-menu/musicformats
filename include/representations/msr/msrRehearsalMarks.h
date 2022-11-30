@@ -48,7 +48,7 @@ class EXP msrRehearsalMark : public msrMeasureElement
 
     static SMARTP<msrRehearsalMark> create (
                             int                  inputLineNumber,
-                            const S_msrMeasure&         upLinkToMeasure,
+                            const S_msrMeasure&        upLinkToMeasure,
                             msrRehearsalMarkKind rehearsalKind,
                             const std::string&   rehearsalText,
                             msrPlacementKind     rehearsalPlacementKind);
@@ -66,7 +66,7 @@ class EXP msrRehearsalMark : public msrMeasureElement
 
                           msrRehearsalMark (
                             int                  inputLineNumber,
-                            const S_msrMeasure&         upLinkToMeasure,
+                            const S_msrMeasure&        upLinkToMeasure,
                             msrRehearsalMarkKind rehearsalKind,
                             const std::string&   rehearsalText,
                             msrPlacementKind     rehearsalPlacementKind);

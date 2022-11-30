@@ -262,20 +262,20 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //     context);
 //
 //   if (false) { // JMI
-//   // compute double tremolo's position in voice
+//   // compute double tremolo's voice position
 //   Rational
 //      voicePosition =
 //       fDoubleTremoloUpLinkToMeasure->getMeasureVoicePosition ()
 //         +
 //       measurePosition;
 //
-//   // set double tremolo's position in voice
+//   // set double tremolo's voice position
 //   setMeasureElementVoicePosition (
 //     voicePosition,
 //     context);
 // }
 //
-//   // update current position in voice
+//   // update current voice position
 //   S_msrVoice
 //     voice =
 //       fDoubleTremoloUpLinkToMeasure->

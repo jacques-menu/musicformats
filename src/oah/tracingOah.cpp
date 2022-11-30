@@ -1648,13 +1648,13 @@ R"(Measures details)",
     addBooleanAtom (
       traceMeasuresDetailsBooleanAtom);
 
-  // positions in measures
+  // measure positions
 
   S_oahTwoBooleansAtom
     traceMeasurePositionsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-measures-positions", "tmp",
-R"(Positions in measures)",
+        "trace-measure-positions", "tmp",
+R"(Measure positions)",
         "fTraceMeasurePositions",
         fTraceMeasurePositions,
         fTracePassesBooleanAtom);
@@ -1665,22 +1665,56 @@ R"(Positions in measures)",
     addBooleanAtom (
       traceMeasurePositionsBooleanAtom);
 
-  // moments in measures
+  // voice positions
 
   S_oahTwoBooleansAtom
-    traceMomentsInMeasuresBooleanAtom =
+    traceVoicePositionsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-moments-in-measures", "tmim",
-R"(Moments in measures)",
-        "fTraceMomentsInMeasures",
-        fTraceMomentsInMeasures,
+        "trace-voice-positions", "tvp",
+R"(Voice positions)",
+        "fTraceVoicePositions",
+        fTraceVoicePositions,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      traceMomentsInMeasuresBooleanAtom);
+      traceVoicePositionsBooleanAtom);
   measuresMultiplexBooleansAtom->
     addBooleanAtom (
-      traceMomentsInMeasuresBooleanAtom);
+      traceVoicePositionsBooleanAtom);
+
+  // measure moments
+
+  S_oahTwoBooleansAtom
+    traceMeasureMomentsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-measure-moments", "tmm",
+R"(Measure moments)",
+        "fTraceMeasureMoments",
+        fTraceMeasureMoments,
+        fTracePassesBooleanAtom);
+  subGroup->
+    appendAtomToSubGroup (
+      traceMeasureMomentsBooleanAtom);
+  measuresMultiplexBooleansAtom->
+    addBooleanAtom (
+      traceMeasureMomentsBooleanAtom);
+
+  // voice moments
+
+  S_oahTwoBooleansAtom
+    traceVoiceMomentsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-measure-moments", "tvm",
+R"(Voice moments)",
+        "fTraceVoiceMoments",
+        fTraceVoiceMoments,
+        fTracePassesBooleanAtom);
+  subGroup->
+    appendAtomToSubGroup (
+      traceVoiceMomentsBooleanAtom);
+  measuresMultiplexBooleansAtom->
+    addBooleanAtom (
+      traceVoiceMomentsBooleanAtom);
 
   // fTraceDetailedMeasureNumbersSet is empty
 }
@@ -2581,8 +2615,19 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     std::setw (fieldWidth) << "fTtraceMeasuresDetails" << " : " <<
     fTraceMeasuresDetails <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceMeasurePositions" << " : " <<
+
+    std::setw (fieldWidth) << "fTraceMeasurePositions" << " : " <<
     fTraceMeasurePositions <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceVoicePositions" << " : " <<
+    fTraceVoicePositions <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fTraceMeasureMoments" << " : " <<
+    fTraceMeasureMoments <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceVoiceMoments" << " : " <<
+    fTraceVoiceMoments <<
     std::endl;
 
   gLogStream << std::left <<

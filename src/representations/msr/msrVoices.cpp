@@ -625,7 +625,7 @@ void msrVoice::initializeVoice (
   // measures repests
   fVoiceContainsMeasureRepeats = false;
 
-    // position in voice
+    // voice position
   fCurrentVoicePosition = Rational (0, 1);
   fCurrentVoiceMoment = msrMoment (Rational (0,1), Rational (0,1));
 
@@ -1388,7 +1388,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
       firstMeasure);
 
     firstMeasure->
-      setMeasureFirstInVoice ();
+      setMeasureIsFirstInVoice ();
   }
 
 #ifdef TRACING_IS_ENABLED
@@ -1971,7 +1971,7 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
   const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<
@@ -2554,7 +2554,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   const Rational& backupTargetMeasureElementMeasurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Backup by a '" <<
       backupTargetMeasureElementMeasurePosition <<
@@ -2610,7 +2610,7 @@ void msrVoice::appendPaddingNoteToVoice (
   // account for padding note's duration in staff
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartCurrentMeasurePosition (
+      incrementPartMeasurePosition (
         inputLineNumber,
         forwardStepLength);
 
@@ -2833,9 +2833,9 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 
   // fetch the part current measure position
   Rational
-    partCurrentMeasurePosition =
+    partMeasurePosition =
       part->
-        getPartCurrentMeasurePosition ();
+        getPartMeasurePosition ();
 
   if (! fVoiceLastSegment) {
     std::stringstream s;
@@ -2862,7 +2862,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   fVoiceLastSegment->
     appendNoteToSegment (
       note,
-      partCurrentMeasurePosition);
+      partMeasurePosition);
 
   // is this note the shortest one in this voice?
   this->
@@ -2874,7 +2874,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 
   // account for note's duration in staff
   part->
-    incrementPartCurrentMeasurePosition (
+    incrementPartMeasurePosition (
       inputLineNumber,
       note->getMeasureElementSoundingWholeNotes ());
 
@@ -3111,7 +3111,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
   // account for chord duration in the part current measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartCurrentMeasurePosition (
+      incrementPartMeasurePosition (
         chord->getInputLineNumber (),
         chord->getMeasureElementSoundingWholeNotes ());
 
@@ -3177,7 +3177,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
   // account for tuplet duration in the part's current measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartCurrentMeasurePosition (
+      incrementPartMeasurePosition (
         tuplet->getInputLineNumber (),
         tuplet->getMeasureElementSoundingWholeNotes ());
 
@@ -7224,12 +7224,12 @@ void msrVoice::addEmptyMeasuresToVoice (
     setNoteOccupiesAFullMeasure ();
 
   // append it to emptyMeasure
-  Rational partCurrentMeasurePosition; // needs to be supplied
+  Rational partMeasurePosition; // needs to be supplied
 
   emptyMeasure->
     appendNoteToMeasure (
       wholeMeasureRestNote,
-      partCurrentMeasurePosition);
+      partMeasurePosition);
 
   // append emptyMeasure to the voice last segment
 #ifdef TRACING_IS_ENABLED
@@ -9616,7 +9616,7 @@ void msrVoice::removeNoteFromVoice (
   // update the part current measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      decrementPartCurrentMeasurePosition (
+      decrementPartMeasurePosition (
         inputLineNumber,
         note->
           getMeasureElementSoundingWholeNotes ());

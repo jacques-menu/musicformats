@@ -104,10 +104,10 @@ class msdlParser : public smartable
                             const std::string& context);
 
     Bool                  checkMandatoryTokenKindsSet (
-                            const std::string&            fileName,
+                            const std::string&       fileName,
                             int                 lineNumber,
                             const S_msdlTokenKindsSet& tokenKindsSet,
-                            const std::string&            context);
+                            const std::string&       context);
 
     Bool                  checkOptionalTokenKind (
                             const std::string& fileName,
@@ -116,10 +116,10 @@ class msdlParser : public smartable
                             const std::string& context);
 
     Bool                  checkOptionalTokenKindsSet (
-                            const std::string&            fileName,
+                            const std::string&       fileName,
                             int                 lineNumber,
                             const S_msdlTokenKindsSet& tokenKindsSet,
-                            const std::string&            context);
+                            const std::string&       context);
 
   private:
 

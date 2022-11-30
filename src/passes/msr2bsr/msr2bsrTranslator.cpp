@@ -3014,13 +3014,13 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       fCurrentMeasureClone->
         getMeasureNumber ();
 
-  // get the current measure whole notes
+  // get the measure whole notes
   Rational
     measureWholeNotesDuration =
       fCurrentMeasureClone->
         getMeasureWholeNotesDuration ();
 
-  // get the full current measure whole notes
+  // get the full measure whole notes
   Rational
     measureFullLength =
       fCurrentMeasureClone->

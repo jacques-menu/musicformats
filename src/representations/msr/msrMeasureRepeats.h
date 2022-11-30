@@ -424,7 +424,7 @@ class EXP msrMeasureRepeatElement : public msrElement
     void                  appendSegmentToMeasureRepeatElementsList (
                             int          inputLineNumber,
                             const S_msrSegment& segment,
-                            const std::string&            context);
+                            const std::string&       context);
 
     void                  appendMeasureRepeatToMeasureRepeatElementsList (
                             int                  inputLineNumber,
@@ -435,7 +435,7 @@ class EXP msrMeasureRepeatElement : public msrElement
     void                  appendMultipleFullBarRestsToMeasureRepeatElementsList (
                             int                         inputLineNumber,
                             const S_msrMeasureRepeat& measureRepeat,
-                            const std::string&            context);
+                            const std::string&       context);
 
     S_msrNote             fetchMeasureRepeatElementFirstNonGraceNote () const;
 
@@ -450,7 +450,7 @@ class EXP msrMeasureRepeatElement : public msrElement
     void                  appendVoiceElementToMeasureRepeatElementsList ( // JMI
                             int               inputLineNumber,
                             const S_msrVoiceElement& voiceElement,
-                            const std::string&            context);
+                            const std::string&       context);
 
   public:
 

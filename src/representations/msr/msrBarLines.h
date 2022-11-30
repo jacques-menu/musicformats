@@ -140,12 +140,12 @@ class EXP msrBarLine : public msrMeasureElement
 
     static SMARTP<msrBarLine> create (
                             int                           inputLineNumber,
-                            const S_msrMeasure&           upLinkToMeasure,
+                            const S_msrMeasure&          upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const std::string&            endingNumber,
+                            const std::string&       endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,
@@ -158,7 +158,7 @@ class EXP msrBarLine : public msrMeasureElement
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const std::string&            endingNumber,
+                            const std::string&       endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,
@@ -183,12 +183,12 @@ class EXP msrBarLine : public msrMeasureElement
 
                           msrBarLine (
                             int                           inputLineNumber,
-                            const S_msrMeasure&           upLinkToMeasure,
+                            const S_msrMeasure&          upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const std::string&            endingNumber,
+                            const std::string&       endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,

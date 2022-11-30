@@ -124,7 +124,7 @@ void msrMeasure::initializeMeasure ()
   fMeasureFirstInSegmentKind = kMeasureFirstInSegmentKindUnknown;
 
   // measure 'first in voice'
-  fMeasureFirstInVoice = false; // default value
+  fMeasureIsFirstInVoice = false; // default value
 
   // single-measure rest?
   fMeasureIsAFullBarRest = false;
@@ -161,13 +161,13 @@ void msrMeasure::initializeMeasure ()
   // repeat context
   fMeasureRepeatContextKind = msrMeasureRepeatContextKind::kMeasureRepeatContext_NO_;
 
-  // current measure whole notes duration
+  // measure whole notes duration
   // initialize measure whole notes
   setMeasureWholeNotesDuration (
     fInputLineNumber,
     Rational (0, 1)); // ready to receive the first note
 
-  // position in voice
+  // voice position
   fMeasureVoicePosition =
     fMeasureUpLinkToSegment->
       getSegmentUpLinkToVoice ()->
@@ -880,7 +880,7 @@ void msrMeasure::setMeasurePuristNumber (
 // #ifdef TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
-//         "Incrementing the measure position in voice " <<
+//         "Incrementing the measure voice position " <<
 //         this->asShortString () <<
 //         " by " <<
 //         wholeNotesDelta <<
@@ -1002,7 +1002,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
   fMeasureElementsList.insert (
     iter, elem);
 
-  // account for elem's duration in current measure whole notes
+  // account for elem's duration in measure whole notes
   incrementMeasureWholeNotesDuration (
     inputLineNumber,
     elem->
@@ -1321,7 +1321,7 @@ void msrMeasure::insertElementAtMeasurePosition (
       measurePosition,
       "insertElementAtMeasurePosition()");
 
-  // account for elem's duration in current measure whole notes
+  // account for elem's duration in measure whole notes
   incrementMeasureWholeNotesDuration (
     inputLineNumber,
     elem->
@@ -1352,7 +1352,7 @@ void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
   fNextMeasureNumber = nextMeasureNumber;
 }
 
-void msrMeasure::setMeasureFirstInVoice ()
+void msrMeasure::setMeasureIsFirstInVoice ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -1371,7 +1371,7 @@ void msrMeasure::setMeasureFirstInVoice ()
   }
 #endif
 
-  fMeasureFirstInVoice = true;
+  fMeasureIsFirstInVoice = true;
 }
 
 std::string msrMeasure::fullMeasureWholeNotesDurationAsMsrString ()
@@ -1410,13 +1410,9 @@ void msrMeasure::setMeasureWholeNotesDuration (
       wholeNotes;
 
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceWholeNotes ()
-      ||
-    gGlobalTracingOahGroup->getTraceMeasurePositions ()
-  ) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
-      "Setting current measure whole notes duration of  " <<
+      "Setting measure whole notes duration of  " <<
       this->asShortString () <<
       " to '"  <<
       rationalisedMeasureWholeNotesDuration <<
@@ -1464,9 +1460,9 @@ void msrMeasure::incrementMeasureWholeNotesDuration (
       fMeasureWholeNotesDuration + wholeNotesDelta;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
-      "Incrementing current whole notes duration of measure " <<
+      "Incrementing whole notes duration of measure " <<
       this->asShortString ()<<
       " from '"  <<
       fMeasureWholeNotesDuration <<
@@ -1516,7 +1512,7 @@ void msrMeasure::setMeasureKind (
   msrMeasureKind measureKind)
 {
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
         "Setting measure kind of measure " <<
         this->asShortString ()<<
@@ -1784,7 +1780,7 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
   const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<
@@ -2103,23 +2099,19 @@ void msrMeasure::appendVoiceStaffChangeToMeasure (
 
 void msrMeasure::appendNoteToMeasure (
   const S_msrNote& note,
-  const Rational&  partCurrentMeasurePosition)
+  const Rational&  partMeasurePosition)
 {
   int inputLineNumber =
     note->getInputLineNumber ();
 
   Rational
     positionsDelta =
-      partCurrentMeasurePosition
+      partMeasurePosition
         -
       fMeasureWholeNotesDuration;
 
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceNotes ()
-      ||
-    gGlobalTracingOahGroup->getTraceMeasurePositions ()
-  ) {
+  if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Appending note " << note->asShortString () <<
       " to measure " <<
@@ -2129,8 +2121,8 @@ void msrMeasure::appendNoteToMeasure (
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
-      ", partCurrentMeasurePosition: " <<
-      partCurrentMeasurePosition <<
+      ", partMeasurePosition: " <<
+      partMeasurePosition <<
       ", fMeasureWholeNotesDuration: " <<
       fMeasureWholeNotesDuration <<
       ", positionsDelta: " <<
@@ -2175,8 +2167,8 @@ void msrMeasure::appendNoteToMeasure (
     std::stringstream s;
 
     s <<
-      "partCurrentMeasurePosition " <<
-      partCurrentMeasurePosition <<
+      "partMeasurePosition " <<
+      partMeasurePosition <<
       " is smaller than fMeasureWholeNotesDuration " <<
       fMeasureWholeNotesDuration <<
       "' in measure " <<
@@ -2188,8 +2180,8 @@ void msrMeasure::appendNoteToMeasure (
       "\"" <<
       ", fMeasureWholeNotesDuration " <<
       fMeasureWholeNotesDuration <<
-      ", partCurrentMeasurePosition " <<
-      partCurrentMeasurePosition <<
+      ", partMeasurePosition " <<
+      partMeasurePosition <<
       ", positionsDelta " << positionsDelta <<
       ", line " << inputLineNumber;
 
@@ -2340,11 +2332,7 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure (
     note->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceNotes ()
-      ||
-    gGlobalTracingOahGroup->getTraceMeasurePositions ()
-  ) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Accounting for the duration of tuplet member note " <<
       note->asShortString () <<
@@ -2853,11 +2841,11 @@ void msrMeasure::padUpToMeasureMeasurePosition (
         getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) { // JMI
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     this->print (gLogStream);
 
     gLogStream <<
-      "Padding from current measure whole notes '" <<
+      "Padding from measure whole notes '" <<
       fMeasureWholeNotesDuration <<
       "' to '" << wholeNotes <<
       "' in measure " <<
@@ -2929,7 +2917,7 @@ void msrMeasure::padUpToMeasureMeasurePosition (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
-        "No need to pad from current measure whole notes '" <<
+        "No need to pad from measure whole notes '" <<
         fMeasureWholeNotesDuration <<
         "' to '" <<
         wholeNotes <<
@@ -2952,7 +2940,7 @@ void msrMeasure::padUpToMeasureMeasurePosition (
     std::stringstream s;
 
     s <<
-        "Cannot pad from current measure whole notes '" <<
+        "Cannot pad from measure whole notes '" <<
         fMeasureWholeNotesDuration <<
         "' to '" <<
         wholeNotes <<
@@ -2973,7 +2961,7 @@ void msrMeasure::padUpToMeasureMeasurePosition (
   }
 }
 
-void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ???
+void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9.66
   int             inputLineNumber,
   const Rational& backupTargetMeasureElementMeasurePosition)
 {
@@ -3164,7 +3152,7 @@ void msrMeasure::appendOtherElementToMeasure  (
 }
 
 void msrMeasure::removeNoteFromMeasure (
-  int       inputLineNumber,
+  int              inputLineNumber,
   const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
@@ -3195,7 +3183,7 @@ void msrMeasure::removeNoteFromMeasure (
       // found note, erase it
       i = fMeasureElementsList.erase (i);
 
-      // update current measure whole notes
+      // update measure whole notes
       setMeasureWholeNotesDuration (
         inputLineNumber,
         fMeasureWholeNotesDuration
@@ -3258,7 +3246,7 @@ void msrMeasure::removeNoteFromMeasure (
 }
 
 void msrMeasure::removeElementFromMeasure (
-  int          inputLineNumber,
+  int                 inputLineNumber,
   const S_msrElement& element)
 {
 #ifdef TRACING_IS_ENABLED
@@ -3302,7 +3290,7 @@ void msrMeasure::removeElementFromMeasure (
       // found element, erase it
       i = fMeasureElementsList.erase (i);
 
-      // update current measure whole notes
+      // update measure whole notes
       setMeasureWholeNotesDuration (
         inputLineNumber,
         fMeasureWholeNotesDuration
@@ -3543,14 +3531,14 @@ void msrMeasure::handleEmptyMeasure (
     voice->
       displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
-        "determineMeasureKindAndPuristNumber() 2 measure has 0 current measure whole notes");
+        "determineMeasureKindAndPuristNumber() 2 measure has 0 measure whole notes");
 
     std::stringstream s;
 
     s <<
       "measure " <<
       this->asShortString () <<
-      " has 0 current measure whole notes" <<
+      " has 0 measure whole notes" <<
       ", " <<
       asString () <<
       ", line " << inputLineNumber;
@@ -3636,11 +3624,7 @@ void msrMeasure::handleIncompleteMeasure (
     }
 #endif
 
-  if (
-    fMeasureFirstInVoice
-      &&
-    fetchMeasureUpLinkToScore ()->getScoreNumberOfMeasures () > 1
-  ) {
+  if (fMeasureIsFirstInVoice) {
     // this is an anacrusis
 
     // set it's measure kind
@@ -4180,7 +4164,7 @@ void msrMeasure::finalizeRegularMeasure (
 }
 
 void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
-  int          inputLineNumber,
+  int                 inputLineNumber,
   const S_msrVoice&   voice,
   const S_msrHarmony& currentHarmony)
 {
@@ -4291,7 +4275,7 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 }
 
 void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
-  int          inputLineNumber,
+  int                 inputLineNumber,
   const S_msrVoice&   voice,
   const S_msrHarmony& previousHarmony,
   const S_msrHarmony& currentHarmony)
@@ -4387,7 +4371,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 }
 
 void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
-  int          inputLineNumber,
+  int                 inputLineNumber,
   const S_msrVoice&   voice,
   const S_msrHarmony& currentHarmony)
 {
@@ -4606,7 +4590,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 }
 
 void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& context)
 {
   // running this method for each and every measure in turn
@@ -4753,11 +4737,11 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
 }
 
 void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
-  int           inputLineNumber,
-  const S_msrVoice&    voice,
-  const S_msrHarmony&  previousHarmony,
-  const S_msrHarmony&  currentHarmony,
-  const std::string& context)
+  int                 inputLineNumber,
+  const S_msrVoice&   voice,
+  const S_msrHarmony& previousHarmony,
+  const S_msrHarmony& currentHarmony,
+  const std::string&  context)
 {
   // handle the currentHarmony
 #ifdef TRACING_IS_ENABLED
@@ -4835,7 +4819,7 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
 
 void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
   int                     inputLineNumber,
-  const S_msrVoice&              voice,
+  const S_msrVoice&       voice,
   std::list<S_msrMeasureElement>::iterator&
                           i,
   const S_msrFiguredBass& previousFiguredBass,
@@ -4915,8 +4899,8 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
 }
 
 void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
-  int                    inputLineNumber,
-  const S_msrVoice&              voice,
+  int                     inputLineNumber,
+  const S_msrVoice&       voice,
   std::list<S_msrMeasureElement>::iterator&
                           i,
   const S_msrFiguredBass& previousFiguredBass,
@@ -5081,7 +5065,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
 void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
   int                     inputLineNumber,
-  const S_msrVoice&              voice,
+  const S_msrVoice&       voice,
   const S_msrFiguredBass& currentFiguredBass)
 {
   // does currentFiguredBass overflow the measure?
@@ -5231,7 +5215,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 }
 
 void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& context)
 {
   // running this method for each and every measure in turn
@@ -5435,7 +5419,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
 void msrMeasure::finalizeHarmonyMeasure (
   int                         inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  const std::string&     context)
+  const std::string&          context)
 {
   // fetch the harmonies voice
   S_msrVoice
@@ -5536,7 +5520,7 @@ void msrMeasure::finalizeHarmonyMeasure (
 void msrMeasure::finalizeFiguredBassMeasure (
   int                         inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
-  const std::string&     context)
+  const std::string&          context)
 {
   // fetch the figured bass voice
   S_msrVoice
@@ -5764,7 +5748,7 @@ void msrMeasure::finalizeMeasure (
         break;
     } // switch
 
-    // position in voice
+    // voice position
     Rational
       voicePosition =
         fetchMeasureUpLinkToVoice ()->
@@ -5791,7 +5775,7 @@ void msrMeasure::finalizeMeasure (
 }
 
 void msrMeasure::finalizeMeasureClone (
-  int          inputLineNumber,
+  int                 inputLineNumber,
   const S_msrMeasure& originalMeasure,
   const S_msrVoice&   voiceClone)
 {
@@ -6001,7 +5985,7 @@ void msrMeasure::finalizeMeasureClone (
 //       break;
 //   } // switch
 
-  // position in voice
+  // voice position
   Rational
     voicePosition =
       fetchMeasureUpLinkToVoice ()->
@@ -6416,8 +6400,8 @@ void msrMeasure::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureFirstInVoice" << " : " <<
-    fMeasureFirstInVoice <<
+    "fMeasureIsFirstInVoice" << " : " <<
+    fMeasureIsFirstInVoice <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureFirstInSegmentKind" << " : " <<
@@ -6658,8 +6642,8 @@ void msrMeasure::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureFirstInVoice" << " : " <<
-    fMeasureFirstInVoice <<
+    "fMeasureIsFirstInVoice" << " : " <<
+    fMeasureIsFirstInVoice <<
     std::endl <<
 
     std::setw (fieldWidth) <<

@@ -1866,7 +1866,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
   const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<

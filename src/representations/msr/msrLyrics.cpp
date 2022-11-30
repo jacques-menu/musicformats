@@ -1089,7 +1089,7 @@ void msrStanza::appendSyllableToStanza (
         getSyllableUpLinkToNote ()->
           getMeasureElementSoundingWholeNotes ();
 
-  // update the stanza's current measure whole notes
+  // update the stanza's measure whole notes
   fStanzaMeasureWholeNotesDuration +=syllableSoundingWholeNotes;
   */
 }
@@ -1203,7 +1203,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
   // append syllable to this stanza
   appendSyllableToStanza (syllable);
 
-  // reset current measure whole notes
+  // reset measure whole notes
   fStanzaMeasureWholeNotesDuration = Rational (0, 1);
 
   --gIndenter;

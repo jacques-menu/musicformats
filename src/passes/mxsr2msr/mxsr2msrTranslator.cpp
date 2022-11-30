@@ -4907,11 +4907,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
             fCurrentDirectionStaffNumber);
 
 #ifdef TRACING_IS_ENABLED
-      if (
-        gGlobalTracingOahGroup->getTraceWords ()
-          ||
-        gGlobalTracingOahGroup->getTraceDalSegnos ()
-      ) {
+      if (gGlobalTracingOahGroup->getTraceWords ()) {
         gLogStream <<
           "Converting words '" <<
           wordsValue <<
@@ -4983,11 +4979,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
             fCurrentDirectionStaffNumber);
 
 #ifdef TRACING_IS_ENABLED
-      if (
-        gGlobalTracingOahGroup->getTraceWords ()
-          ||
-        gGlobalTracingOahGroup->getTraceDalSegnos ()
-      ) {
+      if (gGlobalTracingOahGroup->getTraceWords ()) {
         gLogStream <<
           "Converting words '" <<
           wordsValue <<
@@ -21050,7 +21042,7 @@ S_msrNote mxsr2msrTranslator::createNote (
         inputLineNumber,
 	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-        fCurrentMeasureNumber,
+//         fCurrentMeasureNumber, // v0.9.66
 
         msrNoteKind::kNote_NO_,
           // will be set by 'setNoteKind()' when it becomes known later

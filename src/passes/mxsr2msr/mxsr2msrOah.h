@@ -568,8 +568,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // staves
     // --------------------------------------
 
-    std::set<int>              fMusicXMLStavesIgnoreNumberSet;
-    std::set<int>              fMusicXMLStavesKeepNumberSet;
+    std::set<int>         fMusicXMLStavesIgnoreNumberSet;
+    std::set<int>         fMusicXMLStavesKeepNumberSet;
 
      // for checkOptionsConsistency()
     S_oahIntSetElementAtom
@@ -580,8 +580,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // voices
     // --------------------------------------
 
-    std::set<int>              fMusicXMLVoicesIgnoreNumberSet;
-    std::set<int>              fMusicXMLVoicesKeepNumberSet;
+    std::set<int>         fMusicXMLVoicesIgnoreNumberSet;
+    std::set<int>         fMusicXMLVoicesKeepNumberSet;
 
      // for checkOptionsConsistency()
     S_oahIntSetElementAtom

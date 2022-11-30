@@ -469,7 +469,7 @@ void msrChord::setChordMembersMeasurePosition (
 //     context);
 
   if (false) { // JMI CAFE
-  // compute chord's position in voice
+  // compute chord's voice position
   Rational
     voicePosition =
       fChordUpLinkToMeasure->
@@ -477,12 +477,12 @@ void msrChord::setChordMembersMeasurePosition (
         +
       measurePosition;
 
-//   // set chord's position in voice
+//   // set chord's voice position
 //   setMeasureElementVoicePosition (
 //     voicePosition,
 //     context);
 
-  // update current position in voice
+  // update current voice position
   S_msrVoice
     voice =
       measure->
@@ -509,7 +509,7 @@ void msrChord::setChordMembersMeasurePosition (
 //           measurePosition, // they all share the same one
 //           "chord member");
 
-//    JMI   set note's position in voice v0.9.66
+//    JMI   set note's voice position v0.9.66
 //       note->
 //         setMeasureElementVoicePosition (
 //           voicePosition,

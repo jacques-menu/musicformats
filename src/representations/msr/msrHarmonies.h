@@ -284,10 +284,10 @@ class EXP msrHarmony : public msrMeasureElement
 
     static SMARTP<msrHarmony> create (
                             int                      inputLineNumber,
-                            const S_msrMeasure&             upLinkToMeasure,
+                            const S_msrMeasure&            upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
-                            const std::string&            harmonyKindText,
+                            const std::string&       harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
                             const Rational&          harmonySoundingWholeNotes,
@@ -309,10 +309,10 @@ class EXP msrHarmony : public msrMeasureElement
 
                           msrHarmony (
                             int                      inputLineNumber,
-                            const S_msrMeasure&             upLinkToMeasure,
+                            const S_msrMeasure&            upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
-                            const std::string&            harmonyKindText,
+                            const std::string&       harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
                             const Rational&          harmonySoundingWholeNotes,

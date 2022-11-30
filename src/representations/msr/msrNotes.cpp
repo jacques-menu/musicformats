@@ -50,7 +50,7 @@ S_msrNote msrNote::create (
   int                        inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
 
-  const std::string&         noteMeasureNumber,
+//   const std::string&         noteMeasureNumber, // JMI v0.9.66
 
   msrNoteKind                noteKind,
 
@@ -80,7 +80,7 @@ S_msrNote msrNote::create (
       inputLineNumber,
       upLinkToMeasure,
 
-      noteMeasureNumber,
+//       noteMeasureNumber, // JMI v0.9.66
 
       noteKind,
 
@@ -112,7 +112,7 @@ msrNote::msrNote (
   int                        inputLineNumber,
   const S_msrMeasure&        upLinkToMeasure,
 
-  const std::string&         noteMeasureNumber,
+//   const std::string&         noteMeasureNumber, // JMI v0.9.66
 
   msrNoteKind                noteKind,
 
@@ -725,7 +725,7 @@ S_msrNote msrNote::createNoteNewbornClone (
         fInputLineNumber,
         gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-        fNoteUpLinkToMeasure->getMeasureNumber (),
+//         fNoteUpLinkToMeasure->getMeasureNumber (), // JMI v0.9.66
 
         fNoteKind,
 
@@ -929,7 +929,7 @@ S_msrNote msrNote::createNoteDeepClone (
         fInputLineNumber,
         gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-        fNoteUpLinkToMeasure->getMeasureNumber (),
+//         fNoteUpLinkToMeasure->getMeasureNumber (), // v0.9.66
 
         fNoteKind,
 
@@ -1416,7 +1416,7 @@ S_msrNote msrNote::createRestNote (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-      noteMeasureNumber,
+//       noteMeasureNumber, // JMI v0.9.66
 
       msrNoteKind::kNoteRestInMeasure, // noteKind
 
@@ -1467,7 +1467,7 @@ S_msrNote msrNote::createSkipNote (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-      noteMeasureNumber,
+      // noteMeasureNumber, // JMI v0.9.66
 
       msrNoteKind::kNoteSkipInMeasure, // noteKind
 
@@ -1494,7 +1494,7 @@ S_msrNote msrNote::createSkipNote (
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSkipNotes () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
     gLogStream <<
       "Creating skip note " <<
       o->asString () <<
@@ -1518,7 +1518,7 @@ S_msrNote msrNote::createGraceSkipNote (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-      noteMeasureNumber,
+//       noteMeasureNumber, // JMI v0.9.66
 
       msrNoteKind::kNoteSkipInGraceNotesGroup, // noteKind
 
@@ -1545,7 +1545,7 @@ S_msrNote msrNote::createGraceSkipNote (
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSkipNotes () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
     gLogStream <<
       "Creating grace skip note " <<
       o->asString () <<
@@ -1571,7 +1571,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-      noteMeasureNumber,
+//       noteMeasureNumber, // JMI v0.9.66
 
       msrNoteKind::kNoteRestInMeasure, // noteKind
 
@@ -1624,7 +1624,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-      noteMeasureNumber,
+//       noteMeasureNumber, // JMI v0.9.66
 
       msrNoteKind::kNoteSkipInMeasure, // noteKind
 
@@ -1678,7 +1678,7 @@ S_msrNote msrNote::createRegularNote (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-      noteMeasureNumber,
+//       noteMeasureNumber, // JMI v0.9.66
 
       msrNoteKind::kNoteRegularInMeasure, // noteKind
 
@@ -2177,7 +2177,7 @@ S_msrNote msrNote::createNoteFromString (
 
 //________________________________________________________________________
 S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
-  int                          inputLineNumber,
+  int                                 inputLineNumber,
   const S_msrSemiTonesPitchAndOctave& semiTonesPitchAndOctave)
 {
   // sanity check
@@ -2191,7 +2191,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-      K_NO_MEASURE_NUMBER, // JMI ???
+//       K_NO_MEASURE_NUMBER, // JMI ???  // v0.9.66
 
       msrNoteKind::kNoteRegularInMeasure, // noteKind
 
@@ -2279,19 +2279,19 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //     fNoteUpLinkToMeasure != nullptr,
 //     "fNoteUpLinkToMeasure is null");
 //
-//   // compute note's position in voice
+//   // compute note's voice position
 //   Rational
 //      voicePosition =
 //       fNoteUpLinkToMeasure->getMeasureVoicePosition ()
 //         +
 //       measurePosition;
 //
-//   // set note's position in voice
+//   // set note's voice position
 //   msrMeasureElement::setMeasureElementVoicePosition (
 //     voicePosition,
 //     context);
 //
-//   // update current position in voice
+//   // update current voice position
 //   S_msrVoice
 //     voice =
 //       fNoteUpLinkToMeasure->
@@ -3230,7 +3230,7 @@ void msrNote::appendScordaturaToNote (
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
-//       "Assigning note position in voice of " <<
+//       "Assigning note voice position of " <<
 //       asString () <<
 //       " to '" << voicePosition <<
 //       "' in measure '" <<
@@ -3248,11 +3248,11 @@ void msrNote::appendScordaturaToNote (
 //     voicePosition != msrMoment::K_NO_POSITION,
 //     "voicePosition == msrMoment::K_NO_POSITION");
 //
-//   // set measure element position in voice
+//   // set measure element voice position
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
-//       "Setting note position in voice of " <<
+//       "Setting note voice position of " <<
 //       asString () <<
 //       " to '" << voicePosition <<
 //       "' in measure '" <<

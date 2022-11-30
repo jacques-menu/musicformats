@@ -1856,7 +1856,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
 
   // handle the hidden measure and barLine elements
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     displayPartHiddenMeasureAndBarLineDescrList ();
   }
 #endif

@@ -4514,7 +4514,7 @@ void msrHarmony::setHarmonyUpLinkToNote (const S_msrNote& note)
 //     fHarmonyUpLinkToNote != nullptr,
 //     "fHarmonyUpLinkToNote is null");
 //
-//   // compute harmony's position in voice
+//   // compute harmony's voice position
 //   Rational
 //     voicePosition =
 //       measure->
@@ -4531,7 +4531,7 @@ void msrHarmony::setHarmonyUpLinkToNote (const S_msrNote& note)
 //   // set harmony's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
 //
-//   // update current position in voice
+//   // update current voice position
 //   S_msrVoice
 //     voice =
 //       measure->
@@ -4897,7 +4897,7 @@ void msrHarmony::print (std::ostream& os) const
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
     std::endl;
 
-  // print the harmony bass position in voice
+  // print the harmony bass voice position
 //   os <<
 //     std::setw (fieldWidth) <<
 //     "fMeasureElementVoicePosition" << " : " << fMeasureElementVoicePosition <<

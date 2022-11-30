@@ -1326,10 +1326,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getGenerateMeasurePositions () const
                               { return fGenerateMeasurePositions; }
 
-    void                  setGenerateMomentsInMeasures ()
-                              { fGenerateMomentsInMeasures = true; }
-    Bool                  getGenerateMomentsInMeasures () const
-                              { return fGenerateMomentsInMeasures; }
+    void                  setGenerateMeasureMoments ()
+                              { fGenerateMeasureMoments = true; }
+    Bool                  getGenerateMeasureMoments () const
+                              { return fGenerateMeasureMoments; }
 
     const msrColorRGB&    getNonPrintNotesHeadColorRGB () const
                               { return fNonPrintNotesHeadColorRGB; }
@@ -1905,7 +1905,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahFloatAtom        fBarNumbersSizeAtom;
 
     Bool                  fBoxAroundAllBarNumbers;
-    std::set<int>              fBoxAroundBarNumberSet;
+    std::set<int>         fBoxAroundBarNumberSet;
 
     // bar number checks
     // --------------------------------------
@@ -1996,7 +1996,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fOriginalMeasureNumbers;
 
     Bool                  fGenerateMeasurePositions;
-    Bool                  fGenerateMomentsInMeasures;
+    Bool                  fGenerateMeasureMoments;
 
     // for MusicXML's <note print-object="no">
     msrColorRGB           fNonPrintNotesHeadColorRGB; // #(rgb-color 1.0 0.9 0.5)

@@ -66,7 +66,7 @@ class EXP msrMeasureElement : public msrElement
 
     // the overrides call a class-specific method that can be called directly,
     // such occurrence are more explicit when debugging
-    // the computations of positions in measures
+    // the computations of measure positions
     virtual void          setMeasureElementMeasurePosition (
                             const S_msrMeasure& measure,
                             const Rational&     measurePosition,

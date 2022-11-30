@@ -477,9 +477,9 @@ class EXP oahAtom : public oahElement
 
 /* this class is purely vir.htual
     static SMARTP<oahAtom> create (
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementValueKind atomValueExpectedKind);
 */
 
@@ -489,9 +489,9 @@ class EXP oahAtom : public oahElement
     // ------------------------------------------------------
 
                           oahAtom (
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementValueKind atomValueExpectedKind);
 
     virtual               ~oahAtom ();
@@ -996,18 +996,18 @@ class EXP oahSubGroup : public oahElement
     // ------------------------------------------------------
 
     static SMARTP<oahSubGroup> create (
-                            const std::string&            subGroupHeader,
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       subGroupHeader,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahGroup&        upLinkToGroup);
 
     static SMARTP<oahSubGroup> createWithNames (
-                            const std::string&            subGroupHeader,
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       subGroupHeader,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahGroup&        upLinkToGroup);
 
@@ -1017,10 +1017,10 @@ class EXP oahSubGroup : public oahElement
     // ------------------------------------------------------
 
                           oahSubGroup (
-                            const std::string&            subGroupHeader,
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       subGroupHeader,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahGroup&        upLinkToGroup);
 
@@ -1167,32 +1167,32 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
     static SMARTP<oahGroup> create (
-                            const std::string&            header,
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       header,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind);
 
     static SMARTP<oahGroup> create (
-                            const std::string&            header,
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       header,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahHandler&             groupUpLinkToHandler);
 
     static SMARTP<oahGroup> createWithNames (
-                            const std::string&            header,
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       header,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind);
 
     static SMARTP<oahGroup> createWithNames (
-                            const std::string&            header,
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       header,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahHandler&             groupUpLinkToHandler);
 
@@ -1202,17 +1202,17 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
                           oahGroup (
-                            const std::string&            header,
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       header,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind);
 
                           oahGroup (
-                            const std::string&            header,
-                            const std::string&            longName,
-                            const std::string&            shortName,
-                            const std::string&            description,
+                            const std::string&       header,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementVisibilityKind optionVisibilityKind,
                             const S_oahHandler&             groupUpLinkToHandler);
 

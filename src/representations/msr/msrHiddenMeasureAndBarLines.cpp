@@ -40,7 +40,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
   const S_msrMeasure& upLinkToMeasure)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating hiddenMeasureAndBarLine" <<
       ", line " << inputLineNumber <<

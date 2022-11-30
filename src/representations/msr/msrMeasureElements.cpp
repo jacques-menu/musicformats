@@ -117,7 +117,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       upLinkToMeasure);
 
     gLogStream <<
-      "Setting measure element measure position of " <<
+      "Setting measure position of " <<
       asString () <<
       " to '" << measurePosition <<
       "' (was '" <<
@@ -142,7 +142,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   // set measure element's measure position
   fMeasureElementMeasurePosition = measurePosition;
 
-  // compute measure element's position in voice
+  // compute measure element's voice position
 // if (false) { // JMI CAFE v0.9.66
   Rational
     voicePosition =
@@ -151,13 +151,13 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
         +
       measurePosition;
 
-  // set figured bass's position in voice
+  // set figured bass's voice position
 //   setMeasureElementVoicePosition ( // JMI v0.9.66
 //     voicePosition,
 //     context);
 // }
 
-  // update current position in voice // JMI v0.9.66
+  // update current voice position // JMI v0.9.66
 //   S_msrVoice
 //     voice =
 //       measure->
@@ -186,14 +186,14 @@ void msrMeasureElement::setMeasureElementVoicePosition (
   const std::string& context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
     gLogStream <<
-      "Setting measure element position in voice of " <<
+      "Setting voice position of " <<
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
@@ -211,16 +211,16 @@ void msrMeasureElement::setMeasureElementVoicePosition (
     voicePosition != msrMoment::K_NO_POSITION,
     "voicePosition == msrMoment::K_NO_POSITION");
 
-  // set measure element position in voice
+  // set measure element voice position
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+  if (gGlobalTracingOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
     getMeasureElementUpLinkToMeasure (
       upLinkToMeasure);
 
     gLogStream <<
-      "Setting measure element position in voice of " <<
+      "Setting measure element voice position of " <<
       asString () <<
       " to '" << voicePosition <<
       "' in measure '" <<
@@ -240,7 +240,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   const std::string&    context)
 // {
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasureMoments ()) {
 //     gLogStream <<
 //       "Setting measure element moment in measure of " <<
 //       asString () <<
@@ -267,9 +267,9 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   const std::string&    context)
 // {
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasureMoments ()) {
 //     gLogStream <<
-//       "Setting measure element moment in voice of " <<
+//       "Setting measure element voice moment of " <<
 //       asString () <<
 //       " to '" << voiceMoment <<
 //       "' in measure '" <<
