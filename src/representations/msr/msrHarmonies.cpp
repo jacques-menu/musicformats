@@ -4672,6 +4672,19 @@ std::string msrHarmony::asString () const
     ", fHarmonyKind: " <<
     msrHarmonyKindAsShortString (fHarmonyKind) <<
 
+    ", measureElementMeasureNumber: " <<
+    fHarmonyUpLinkToMeasure->getMeasureNumber () <<
+
+    ", fMeasureElementMeasurePosition: " <<
+    fMeasureElementMeasurePosition <<
+
+  // print the harmony bass voice position
+//   os <<
+//     std::setw (fieldWidth) <<
+//     "fMeasureElementVoicePosition" << " : " <<
+//     fMeasureElementVoicePosition <<
+//     std::endl;
+
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes <<
     ", fHarmonyDisplayWholeNotes: " <<
@@ -4766,6 +4779,27 @@ void msrHarmony::print (std::ostream& os) const
   ++gIndenter;
 
   const int fieldWidth = 44;
+
+  // print the harmony measure number
+  os <<
+    std::setw (fieldWidth) <<
+    "measureElementMeasureNumber" << " : " <<
+    fHarmonyUpLinkToMeasure->getMeasureNumber () <<
+    std::endl;
+
+  // print the harmony measure position
+  os <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementMeasurePosition" << " : " <<
+    fMeasureElementMeasurePosition <<
+    std::endl;
+
+  // print the harmony bass voice position
+//   os <<
+//     std::setw (fieldWidth) <<
+//     "fMeasureElementVoicePosition" << " : " <<
+//     fMeasureElementVoicePosition <<
+//     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -4883,25 +4917,6 @@ void msrHarmony::print (std::ostream& os) const
     os << "[NONE]";
   }
   os << std::endl;
-
-  // print the harmony measure number
-  os <<
-    std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << " : " <<
-    fHarmonyUpLinkToMeasure->getMeasureNumber () <<
-    std::endl;
-
-  // print the harmony measure position
-  os <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
-    std::endl;
-
-  // print the harmony bass voice position
-//   os <<
-//     std::setw (fieldWidth) <<
-//     "fMeasureElementVoicePosition" << " : " << fMeasureElementVoicePosition <<
-//     std::endl;
 
   // print the harmony note uplink
   os <<
