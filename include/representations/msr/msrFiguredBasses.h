@@ -52,6 +52,15 @@ std::string msrBassFigureSuffixKindAsString (
 
 std::ostream& operator << (std::ostream& os,const msrBassFigureSuffixKind& elt);
 
+enum class msrFiguredBassParenthesesKind {
+  kFiguredBassParenthesesYes, kFiguredBassParenthesesNo
+};
+
+std::string msrFiguredBassParenthesesKindAsString (
+  msrFiguredBassParenthesesKind figuredBassParenthesesKind);
+
+std::ostream& operator << (std::ostream& os, const msrFiguredBassParenthesesKind& elt);
+
 //______________________________________________________________________________
 class EXP msrBassFigure : public msrElement
 {
@@ -145,18 +154,6 @@ class EXP msrBassFigure : public msrElement
 };
 typedef SMARTP<msrBassFigure> S_msrBassFigure;
 EXP std::ostream& operator << (std::ostream& os, const S_msrBassFigure& elt);
-
-//______________________________________________________________________________
-// data types
-
-enum class msrFiguredBassParenthesesKind {
-  kFiguredBassParenthesesYes, kFiguredBassParenthesesNo
-};
-
-std::string msrFiguredBassParenthesesKindAsString (
-  msrFiguredBassParenthesesKind figuredBassParenthesesKind);
-
-std::ostream& operator << (std::ostream& os, const msrFiguredBassParenthesesKind& elt);
 
 //______________________________________________________________________________
 class EXP msrFiguredBass : public msrMeasureElement

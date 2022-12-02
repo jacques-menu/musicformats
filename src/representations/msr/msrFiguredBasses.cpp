@@ -35,6 +35,115 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+std::string msrFiguredBassParenthesesKindAsString (
+  msrFiguredBassParenthesesKind figuredBassParenthesesKind)
+{
+  std::string result;
+
+  switch (figuredBassParenthesesKind) {
+    case msrFiguredBassParenthesesKind::kFiguredBassParenthesesYes:
+      result = "kFiguredBassParenthesesYes";
+      break;
+    case msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo:
+      result = "kFiguredBassParenthesesNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrFiguredBassParenthesesKind& elt)
+{
+  os << msrFiguredBassParenthesesKindAsString (elt);
+  return os;
+}
+
+std::string msrBassFigurePrefixKindAsString (
+  msrBassFigurePrefixKind figurePrefixKind)
+{
+  std::string result;
+
+  switch (figurePrefixKind) {
+    case msrBassFigurePrefixKind::kBassFigurePrefix_NO_:
+      result = "kBassFigurePrefix_NO_";
+      break;
+    case msrBassFigurePrefixKind::kBassFigurePrefixDoubleFlat:
+      result = "kBassFigurePrefixDoubleFlat";
+      break;
+    case msrBassFigurePrefixKind::kBassFigurePrefixFlat:
+      result = "kBassFigurePrefixFlat";
+      break;
+    case msrBassFigurePrefixKind::kBassFigurePrefixFlatFlat:
+      result = "kBassFigurePrefixFlatFlat";
+      break;
+    case msrBassFigurePrefixKind::kBassFigurePrefixNatural:
+      result = "kBassFigurePrefixNatural";
+      break;
+    case msrBassFigurePrefixKind::kBassFigurePrefixSharpSharp:
+      result = "kBassFigurePrefixSharpSharp";
+      break;
+    case msrBassFigurePrefixKind::kBassFigurePrefixSharp:
+      result = "kBassFigurePrefixSharp";
+      break;
+    case msrBassFigurePrefixKind::kBassFigurePrefixDoubleSharp:
+      result = "kBassFigurePrefixDoubleSharp";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrBassFigurePrefixKind& elt)
+{
+  os << msrBassFigurePrefixKindAsString (elt);
+  return os;
+}
+
+std::string msrBassFigureSuffixKindAsString (
+  msrBassFigureSuffixKind figureSuffixKind)
+{
+  std::string result;
+
+  switch (figureSuffixKind) {
+    case msrBassFigureSuffixKind::kBassFigureSuffix_NO_:
+      result = "kBassFigureSuffix_NO_";
+      break;
+    case msrBassFigureSuffixKind::kBassFigureSuffixDoubleFlat:
+      result = "kBassFigureSuffixDoubleFlat";
+      break;
+    case msrBassFigureSuffixKind::kBassFigureSuffixFlat:
+      result = "kBassFigureSuffixFlat";
+      break;
+    case msrBassFigureSuffixKind::kBassFigureSuffixFlatFlat:
+      result = "kBassFigureSuffixFlatFlat";
+      break;
+    case msrBassFigureSuffixKind::kBassFigureSuffixNatural:
+      result = "kBassFigureSuffixNatural";
+      break;
+    case msrBassFigureSuffixKind::kBassFigureSuffixSharpSharp:
+      result = "kBassFigureSuffixSharpSharp";
+      break;
+    case msrBassFigureSuffixKind::kBassFigureSuffixSharp:
+      result = "kBassFigureSuffixSharp";
+      break;
+    case msrBassFigureSuffixKind::kBassFigureSuffixDoubleSharp:
+      result = "kBassFigureSuffixDoubleSharp sharp";
+      break;
+    case msrBassFigureSuffixKind::kBassFigureSuffixSlash:
+      result = "kBassFigureSuffixSlash";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrBassFigureSuffixKind& elt)
+{
+  os << msrBassFigureSuffixKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrBassFigure msrBassFigure::create (
   int                     inputLineNumber,
   const S_msrPart&        figureUpLinkToPart,
@@ -151,91 +260,6 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   return figureDeepClone;
 }
 
-std::string msrBassFigurePrefixKindAsString (
-  msrBassFigurePrefixKind figurePrefixKind)
-{
-  std::string result;
-
-  switch (figurePrefixKind) {
-    case msrBassFigurePrefixKind::kBassFigurePrefix_NO_:
-      result = "kBassFigurePrefix_NO_";
-      break;
-    case msrBassFigurePrefixKind::kBassFigurePrefixDoubleFlat:
-      result = "kBassFigurePrefixDoubleFlat";
-      break;
-    case msrBassFigurePrefixKind::kBassFigurePrefixFlat:
-      result = "kBassFigurePrefixFlat";
-      break;
-    case msrBassFigurePrefixKind::kBassFigurePrefixFlatFlat:
-      result = "kBassFigurePrefixFlatFlat";
-      break;
-    case msrBassFigurePrefixKind::kBassFigurePrefixNatural:
-      result = "kBassFigurePrefixNatural";
-      break;
-    case msrBassFigurePrefixKind::kBassFigurePrefixSharpSharp:
-      result = "kBassFigurePrefixSharpSharp";
-      break;
-    case msrBassFigurePrefixKind::kBassFigurePrefixSharp:
-      result = "kBassFigurePrefixSharp";
-      break;
-    case msrBassFigurePrefixKind::kBassFigurePrefixDoubleSharp:
-      result = "kBassFigurePrefixDoubleSharp";
-      break;
-  } // switch
-
-  return result;
-}
-
-std::ostream& operator << (std::ostream& os, const msrBassFigurePrefixKind& elt)
-{
-  os << msrBassFigurePrefixKindAsString (elt);
-  return os;
-}
-
-std::string msrBassFigureSuffixKindAsString (
-  msrBassFigureSuffixKind figureSuffixKind)
-{
-  std::string result;
-
-  switch (figureSuffixKind) {
-    case msrBassFigureSuffixKind::kBassFigureSuffix_NO_:
-      result = "kBassFigureSuffix_NO_";
-      break;
-    case msrBassFigureSuffixKind::kBassFigureSuffixDoubleFlat:
-      result = "kBassFigureSuffixDoubleFlat";
-      break;
-    case msrBassFigureSuffixKind::kBassFigureSuffixFlat:
-      result = "kBassFigureSuffixFlat";
-      break;
-    case msrBassFigureSuffixKind::kBassFigureSuffixFlatFlat:
-      result = "kBassFigureSuffixFlatFlat";
-      break;
-    case msrBassFigureSuffixKind::kBassFigureSuffixNatural:
-      result = "kBassFigureSuffixNatural";
-      break;
-    case msrBassFigureSuffixKind::kBassFigureSuffixSharpSharp:
-      result = "kBassFigureSuffixSharpSharp";
-      break;
-    case msrBassFigureSuffixKind::kBassFigureSuffixSharp:
-      result = "kBassFigureSuffixSharp";
-      break;
-    case msrBassFigureSuffixKind::kBassFigureSuffixDoubleSharp:
-      result = "kBassFigureSuffixDoubleSharp sharp";
-      break;
-    case msrBassFigureSuffixKind::kBassFigureSuffixSlash:
-      result = "kBassFigureSuffixSlash";
-      break;
-  } // switch
-
-  return result;
-}
-
-std::ostream& operator << (std::ostream& os, const msrBassFigureSuffixKind& elt)
-{
-  os << msrBassFigureSuffixKindAsString (elt);
-  return os;
-}
-
 void msrBassFigure::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
@@ -291,11 +315,9 @@ std::string msrBassFigure::asString () const
     "[BassFigure" <<
     " '" << fFigureNumber <<
     "', prefix: " <<
-    msrBassFigurePrefixKindAsString (
-      fFigurePrefixKind) <<
+    fFigurePrefixKind <<
     ", suffix: " <<
-    msrBassFigureSuffixKindAsString (
-      fFigureSuffixKind) <<
+    fFigureSuffixKind <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -548,8 +570,8 @@ void msrFiguredBass::appendFigureToFiguredBass (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
     gLogStream <<
-      "Appending bass figure '" << bassFigure->asString () <<
-      "' to figured-bass element '" <<
+      "Appending bass figure " << bassFigure->asString () <<
+      " to figured-bass element '" <<
       asString () <<
       "'" <<
       std::endl;
@@ -612,29 +634,14 @@ void msrFiguredBass::browseData (basevisitor* v)
   } // for
 }
 
-std::string msrFiguredBassParenthesesKindAsString (
-  msrFiguredBassParenthesesKind figuredBassParenthesesKind)
-{
-  std::string result;
-
-  switch (figuredBassParenthesesKind) {
-    case msrFiguredBassParenthesesKind::kFiguredBassParenthesesYes:
-      result = "kFiguredBassParenthesesYes";
-      break;
-    case msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo:
-      result = "kFiguredBassParenthesesNo";
-      break;
-  } // switch
-
-  return result;
-}
-
 std::string msrFiguredBass::asString () const
 {
   std::stringstream s;
 
   s <<
     "[FiguredBass" <<
+    ", fMeasureElementMeasurePosition: " <<
+    fMeasureElementMeasurePosition <<
     ", fMeasureElementSoundingWholeNotes: " <<
     wholeNotesAsMsrString (
       fInputLineNumber,
@@ -645,8 +652,7 @@ std::string msrFiguredBass::asString () const
       fFiguredBassDisplayWholeNotes) <<
 
     ", fFiguredBassParenthesesKind: " <<
-    msrFiguredBassParenthesesKindAsString (
-      fFiguredBassParenthesesKind) <<
+    fFiguredBassParenthesesKind <<
 
     ", fFiguredBassTupletFactor: " <<
     fFiguredBassTupletFactor.asString ();
@@ -703,6 +709,22 @@ void msrFiguredBass::print (std::ostream& os) const
 
   const int fieldWidth = 36;
 
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementMeasurePosition" << " : " <<
+    fMeasureElementMeasurePosition <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasureElementSoundingWholeNotes" << " : " <<
+    fMeasureElementSoundingWholeNotes <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fFiguredBassDisplayWholeNotes" << " : " <<
+    fFiguredBassDisplayWholeNotes <<
+    std::endl;
+
   os <<
     std::setw (fieldWidth) <<
     "fFiguredBassUpLinkToNote" << " : ";
@@ -727,19 +749,8 @@ void msrFiguredBass::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << " : " <<
-    fMeasureElementSoundingWholeNotes <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fFiguredBassDisplayWholeNotes" << " : " <<
-    fFiguredBassDisplayWholeNotes <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
     "fFiguredBassParenthesesKind" << " : " <<
-    msrFiguredBassParenthesesKindAsString (
-      fFiguredBassParenthesesKind) <<
+    fFiguredBassParenthesesKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<

@@ -2724,6 +2724,18 @@ void msrMeasure::appendFiguredBassToMeasure (
 
   ++gIndenter;
 
+  // get the measure position of the note
+  Rational
+    measurePosition =
+      figuredBass->
+        getFiguredBassUpLinkToNote ()->
+          getMeasureElementMeasurePosition ();
+
+  // pad up to it
+  padUpToMeasurePosition (
+    inputLineNumber,
+    measurePosition);
+
   // append harmony to the measure elements list
   appendMeasureElementToMeasure (figuredBass);
 
@@ -2830,9 +2842,9 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
   return skipNote;
 }
 
-void msrMeasure::padUpToMeasureMeasurePosition (
+void msrMeasure::padUpToMeasurePosition (
   int             inputLineNumber,
-  const Rational& wholeNotes)
+  const Rational& measurePositionToPadUpTo)
 {
   // fetch the measure voice
   S_msrVoice
@@ -2847,7 +2859,7 @@ void msrMeasure::padUpToMeasureMeasurePosition (
     gLogStream <<
       "Padding from measure whole notes '" <<
       fMeasureWholeNotesDuration <<
-      "' to '" << wholeNotes <<
+      "' to '" << measurePositionToPadUpTo <<
       "' in measure " <<
       this->asShortString () <<
       " in segment " <<
@@ -2862,16 +2874,16 @@ void msrMeasure::padUpToMeasureMeasurePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    wholeNotes.getNumerator () >= 0,
-    "wholeNotes.getNumerator () is negative in padUpToMeasureMeasurePosition()");
+    measurePositionToPadUpTo.getNumerator () >= 0,
+    "measurePositionToPadUpTo.getNumerator () is negative in padUpToMeasurePosition()");
 
-  if (fMeasureWholeNotesDuration < wholeNotes) {
+  if (fMeasureWholeNotesDuration < measurePositionToPadUpTo) {
     ++gIndenter;
 
-    // appending a padding rest or skip to this measure to reach wholeNotes
+    // appending a padding rest or skip to this measure to reach measurePositionToPadUpTo
     Rational
       missingDuration =
-        wholeNotes - fMeasureWholeNotesDuration;
+        measurePositionToPadUpTo - fMeasureWholeNotesDuration;
 
     // create a padding skip note
     S_msrNote
@@ -2888,7 +2900,7 @@ void msrMeasure::padUpToMeasureMeasurePosition (
         " (missingDuration " << missingDuration <<
         " whole notes) to skip from length '" <<
         fMeasureWholeNotesDuration <<
-        " to length '" << wholeNotes << "'"
+        " to length '" << measurePositionToPadUpTo << "'"
         " in measure " <<
         this->asShortString () <<
         " in voice \"" <<
@@ -2913,14 +2925,14 @@ void msrMeasure::padUpToMeasureMeasurePosition (
     --gIndenter;
   }
 
-  else if (fMeasureWholeNotesDuration == wholeNotes) {
+  else if (fMeasureWholeNotesDuration == measurePositionToPadUpTo) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
         "No need to pad from measure whole notes '" <<
         fMeasureWholeNotesDuration <<
         "' to '" <<
-        wholeNotes <<
+        measurePositionToPadUpTo <<
         "' since they are equal in measure " <<
         this->asShortString () <<
         " in segment " <<
@@ -2943,7 +2955,7 @@ void msrMeasure::padUpToMeasureMeasurePosition (
         "Cannot pad from measure whole notes '" <<
         fMeasureWholeNotesDuration <<
         "' to '" <<
-        wholeNotes <<
+        measurePositionToPadUpTo <<
         "' since the former is larger than the latter in measure " <<
         this->asShortString () <<
         " in segment " <<
@@ -2959,6 +2971,215 @@ void msrMeasure::padUpToMeasureMeasurePosition (
  //     __FILE__, __LINE__,
       s.str ());
   }
+}
+
+// void msrMeasure::padUpToMeasurePosition (
+//   int             inputLineNumber,
+//   const Rational& measurePositionToPadUpTo)
+// {
+//   // fetch the voice
+//   S_msrVoice
+//     measureVoice =
+//       fMeasureUpLinkToSegment->
+//         getSegmentUpLinkToVoice ();
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//     gLogStream <<
+//       "Padding up to position '" <<
+//       measurePositionToPadUpTo <<
+//       "' in measure " <<
+//       this->asShortString () <<
+//       " in segment " <<
+//       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+//       " in voice \"" <<
+//       measureVoice->getVoiceName () <<
+//       "\", line " << inputLineNumber <<
+//       std::endl;
+//   }
+// #endif
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+//     displayMeasure (
+//       inputLineNumber,
+//       "padUpToMeasurePosition() 1");
+//   }
+// #endif
+//
+//   ++gIndenter;
+//
+//   if (fMeasureWholeNotesDuration < measurePositionToPadUpTo) {
+//     // appending a rest to this measure to reach measurePositionToPadUpTo
+//     Rational
+//       missingDuration =
+//         measurePositionToPadUpTo - fMeasureWholeNotesDuration;
+//
+// #ifdef TRACING_IS_ENABLED
+//     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//       gLogStream <<
+//        "Creating a padding note for measure debug number " <<
+//        fMeasureDebugNumber <<
+//        ", missingDuration: " << missingDuration <<
+//        " in voice \"" << measureVoice->getVoiceName () <<
+//        "\", measure: " <<
+//         this->asShortString () <<
+//        ", measureWholeNotesDuration: " <<
+//        fMeasureWholeNotesDuration <<
+//        std::endl;
+//    }
+// #endif
+//
+//     // create a padding skip note
+//     S_msrNote
+//       paddingNote =
+//         createPaddingSkipNoteForVoice (
+//           inputLineNumber,
+//           missingDuration,
+//           measureVoice);
+//
+// #ifdef TRACING_IS_ENABLED
+//     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//       gLogStream <<
+//        "Appending padding note " << paddingNote->asString () <<
+//        " (" << missingDuration << " whole notes)" <<
+//        " to finalize \"" << measureVoice->getVoiceName () <<
+//        "\" measure: " <<
+//        this->asShortString () <<
+//        ", measureWholeNotesDuration: " <<
+//        fMeasureWholeNotesDuration <<
+//        std::endl;
+//    }
+// #endif
+//
+//     // append the paddingNote to the measure
+//     appendNoteOrPaddingToMeasure (paddingNote);
+//
+//     // this measure contains music
+//     fMeasureContainsMusic = true;
+//   }
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+//     displayMeasure (
+//       inputLineNumber,
+//       "padUpToMeasurePosition() 2");
+//   }
+// #endif
+//
+//   --gIndenter;
+// }
+
+void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
+  int             inputLineNumber,
+  const Rational& measurePositionToPadUpTo)
+{
+  // fetch the voice
+  S_msrVoice
+    measureVoice =
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+    gLogStream <<
+      "Padding up from position " <<
+      fMeasureWholeNotesDuration <<
+      " to position '" <<
+      measurePositionToPadUpTo <<
+      "' at the end of measure " <<
+      this->asString () <<
+      " in segment " <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+      " in voice \"" <<
+      measureVoice->getVoiceName () <<
+      "\", line " << inputLineNumber <<
+      std::endl;
+  }
+#endif
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+    displayMeasure (
+      inputLineNumber,
+      "padUpToPositionAtTheEndOfTheMeasure() 1");
+  }
+#endif
+
+  ++gIndenter;
+
+  if (fMeasureWholeNotesDuration < measurePositionToPadUpTo) {
+    // appending a rest to this measure to reach measurePositionToPadUpTo
+    Rational
+      missingDuration =
+        measurePositionToPadUpTo - fMeasureWholeNotesDuration;
+
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+      gLogStream <<
+        "Creating a padding note" <<
+        ", missingDuration: " << missingDuration <<
+        " at the end of measure " <<
+        this->asString () <<
+        " in voice \"" << measureVoice->getVoiceName () << "\",  " <<
+        ", measureWholeNotesDuration: " <<
+        fMeasureWholeNotesDuration <<
+        ", line " << inputLineNumber <<
+        std::endl;
+   }
+#endif
+
+//     gLogStream << JMI
+//       std::endl << std::endl <<
+//       "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" <<
+//       std::endl << std::endl;
+//     this->
+//       print (gLogStream);
+//     gLogStream <<
+//       std::endl << std::endl <<
+//       "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" <<
+//       std::endl << std::endl;
+
+    // create a padding skip note
+    S_msrNote
+      paddingNote =
+        createPaddingSkipNoteForVoice (
+          inputLineNumber,
+          missingDuration,
+          measureVoice);
+
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+      gLogStream <<
+       "Appending padding note " << paddingNote->asString () <<
+       " (" << missingDuration << " whole notes)" <<
+       " to finalize \"" << measureVoice->getVoiceName () <<
+       "\" measure: " <<
+       this->asShortString () <<
+       " measureWholeNotesDuration: " <<
+       fMeasureWholeNotesDuration <<
+       std::endl;
+   }
+#endif
+
+    // append the rest to the measure elements list
+    // only now to make it possible to remove it afterwards
+    // if it happens to be the first note of a chord JMI
+    appendPaddingNoteAtTheEndOfMeasure (paddingNote);
+
+    // this measure contains music
+    fMeasureContainsMusic = true;
+  }
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+    displayMeasure (
+      inputLineNumber,
+      "padUpToPositionAtTheEndOfTheMeasure() 2");
+  }
+#endif
+
+  --gIndenter;
 }
 
 void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9.66
@@ -3009,7 +3230,7 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
       fFullMeasureWholeNotesDuration - backupTargetMeasureElementMeasurePosition;
 
   // pad up to it
-  padUpToMeasureMeasurePosition (
+  padUpToMeasurePosition (
     inputLineNumber,
     measurePosition);
 }
@@ -3782,215 +4003,6 @@ void msrMeasure::handleOverFullMeasure (
     setWholeNotesSinceLastRegularMeasureEnd (
       inputLineNumber,
       0);
-}
-
-void msrMeasure::padUpToMeasurePosition (
-  int             inputLineNumber,
-  const Rational& measurePositionToPadUpTo)
-{
-  // fetch the voice
-  S_msrVoice
-    measureVoice =
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ();
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
-      "Padding up to position '" <<
-      measurePositionToPadUpTo <<
-      "' in measure " <<
-      this->asShortString () <<
-      " in segment " <<
-      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      " in voice \"" <<
-      measureVoice->getVoiceName () <<
-      "\", line " << inputLineNumber <<
-      std::endl;
-  }
-#endif
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-    displayMeasure (
-      inputLineNumber,
-      "padUpToMeasurePosition() 1");
-  }
-#endif
-
-  ++gIndenter;
-
-  if (fMeasureWholeNotesDuration < measurePositionToPadUpTo) {
-    // appending a rest to this measure to reach measurePositionToPadUpTo
-    Rational
-      missingDuration =
-        measurePositionToPadUpTo - fMeasureWholeNotesDuration;
-
-#ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-      gLogStream <<
-       "Creating a padding note for measure debug number " <<
-       fMeasureDebugNumber <<
-       ", missingDuration: " << missingDuration <<
-       " in voice \"" << measureVoice->getVoiceName () <<
-       "\", measure: " <<
-        this->asShortString () <<
-       ", measureWholeNotesDuration: " <<
-       fMeasureWholeNotesDuration <<
-       std::endl;
-   }
-#endif
-
-    // create a padding skip note
-    S_msrNote
-      paddingNote =
-        createPaddingSkipNoteForVoice (
-          inputLineNumber,
-          missingDuration,
-          measureVoice);
-
-#ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-      gLogStream <<
-       "Appending padding note " << paddingNote->asString () <<
-       " (" << missingDuration << " whole notes)" <<
-       " to finalize \"" << measureVoice->getVoiceName () <<
-       "\" measure: " <<
-       this->asShortString () <<
-       ", measureWholeNotesDuration: " <<
-       fMeasureWholeNotesDuration <<
-       std::endl;
-   }
-#endif
-
-    // append the paddingNote to the measure
-    appendNoteOrPaddingToMeasure (paddingNote);
-
-    // this measure contains music
-    fMeasureContainsMusic = true;
-  }
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-    displayMeasure (
-      inputLineNumber,
-      "padUpToMeasurePosition() 2");
-  }
-#endif
-
-  --gIndenter;
-}
-
-void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
-  int             inputLineNumber,
-  const Rational& measurePositionToPadUpTo)
-{
-  // fetch the voice
-  S_msrVoice
-    measureVoice =
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ();
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
-      "Padding up from position " <<
-      fMeasureWholeNotesDuration <<
-      " to position '" <<
-      measurePositionToPadUpTo <<
-      "' at the end of measure " <<
-      this->asString () <<
-      " in segment " <<
-      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      " in voice \"" <<
-      measureVoice->getVoiceName () <<
-      "\", line " << inputLineNumber <<
-      std::endl;
-  }
-#endif
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-    displayMeasure (
-      inputLineNumber,
-      "padUpToPositionAtTheEndOfTheMeasure() 1");
-  }
-#endif
-
-  ++gIndenter;
-
-  if (fMeasureWholeNotesDuration < measurePositionToPadUpTo) {
-    // appending a rest to this measure to reach measurePositionToPadUpTo
-    Rational
-      missingDuration =
-        measurePositionToPadUpTo - fMeasureWholeNotesDuration;
-
-#ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-      gLogStream <<
-        "Creating a padding note" <<
-        ", missingDuration: " << missingDuration <<
-        " at the end of measure " <<
-        this->asString () <<
-        " in voice \"" << measureVoice->getVoiceName () << "\",  " <<
-        ", measureWholeNotesDuration: " <<
-        fMeasureWholeNotesDuration <<
-        ", line " << inputLineNumber <<
-        std::endl;
-   }
-#endif
-
-//     gLogStream << JMI
-//       std::endl << std::endl <<
-//       "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" <<
-//       std::endl << std::endl;
-//     this->
-//       print (gLogStream);
-//     gLogStream <<
-//       std::endl << std::endl <<
-//       "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" <<
-//       std::endl << std::endl;
-
-    // create a padding skip note
-    S_msrNote
-      paddingNote =
-        createPaddingSkipNoteForVoice (
-          inputLineNumber,
-          missingDuration,
-          measureVoice);
-
-#ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-      gLogStream <<
-       "Appending padding note " << paddingNote->asString () <<
-       " (" << missingDuration << " whole notes)" <<
-       " to finalize \"" << measureVoice->getVoiceName () <<
-       "\" measure: " <<
-       this->asShortString () <<
-       " measureWholeNotesDuration: " <<
-       fMeasureWholeNotesDuration <<
-       std::endl;
-   }
-#endif
-
-    // append the rest to the measure elements list
-    // only now to make it possible to remove it afterwards
-    // if it happens to be the first note of a chord JMI
-    appendPaddingNoteAtTheEndOfMeasure (paddingNote);
-
-    // this measure contains music
-    fMeasureContainsMusic = true;
-  }
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-    displayMeasure (
-      inputLineNumber,
-      "padUpToPositionAtTheEndOfTheMeasure() 2");
-  }
-#endif
-
-  --gIndenter;
 }
 
 void msrMeasure::finalizeRegularMeasure (

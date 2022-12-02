@@ -1708,7 +1708,7 @@ void msrSegment::padUpToMeasurePositionInSegment (
   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF
     // pad last measure up to to this actual wholes notes
     fSegmentLastMeasure->
-      padUpToMeasureMeasurePosition (
+      padUpToMeasurePosition (
         inputLineNumber,
         wholeNotes);
   }

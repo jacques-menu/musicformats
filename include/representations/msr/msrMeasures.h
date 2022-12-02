@@ -300,9 +300,13 @@ class EXP msrMeasure : public msrSegmentElement
                             const Rational& duration,
                             const S_msrVoice&      voice);
 
-    void                  padUpToMeasureMeasurePosition (
+    void                  padUpToMeasurePosition (
                             int             inputLineNumber,
-                            const Rational& wholeNotes);
+                            const Rational& measurePositionToPadUpTo);
+
+    void                  padUpToPositionAtTheEndOfTheMeasure (
+                            int             inputLineNumber,
+                            const Rational& measurePositionToPadUpTo);
 
     void                  backupByWholeNotesStepLengthInMeasure (
                             int             inputLineNumber,
@@ -557,14 +561,6 @@ class EXP msrMeasure : public msrSegmentElement
                             int     inputLineNumber,
                             msrMeasureRepeatContextKind
                                     measureRepeatContextKind);
-
-    void                  padUpToMeasurePosition (
-                            int             inputLineNumber,
-                            const Rational& measurePositionToPadUpTo);
-
-    void                  padUpToPositionAtTheEndOfTheMeasure (
-                            int             inputLineNumber,
-                            const Rational& measurePositionToPadUpTo);
 
     void                  finalizeMeasure (
                             int                         inputLineNumber,
