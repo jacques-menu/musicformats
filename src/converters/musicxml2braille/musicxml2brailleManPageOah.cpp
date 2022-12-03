@@ -167,7 +167,7 @@ void xml2brlManPageGenerateAtom::generateManPageData (std::ostream& os) const
 
 void xml2brlManPageGenerateAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   // nothing to print here
 }

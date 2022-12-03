@@ -261,13 +261,13 @@ class EXP msrPartGroup : public msrPartGroupElement
     // ------------------------------------------------------
 
     S_msrPart             appendPartToPartGroupByItsPartID ( // JMI superflous
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& partID);
 
     void                  appendPartToPartGroup (S_msrPart part);
 
     void                  removePartFromPartGroup (
-                            int       inputLineNumber,
+                            int              inputLineNumber,
                             const S_msrPart& partToBeRemoved);
 
     void                  prependSubPartGroupToPartGroup (
@@ -277,11 +277,11 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const S_msrPartGroup& partGroup);
 
     S_msrPart             fetchPartFromPartGroupByItsPartID (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& partID);
 
     void                  collectPartGroupPartsList (
-                            int    inputLineNumber,
+                            int                   inputLineNumber,
                             std::list<S_msrPart>& partsList);
 
     // voices
@@ -391,7 +391,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // voices
 
-    std::list<S_msrVoice>      fPartGroupAllVoicesList;
+    std::list<S_msrVoice> fPartGroupAllVoicesList;
 
     // measures slices sequence
 

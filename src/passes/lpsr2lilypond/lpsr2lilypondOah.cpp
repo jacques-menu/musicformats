@@ -234,7 +234,7 @@ void lilypondScoreOutputKindAtom::print (std::ostream& os) const
 
 void lilypondScoreOutputKindAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -569,7 +569,7 @@ void lilypondTransposePartNameAtom::print (std::ostream& os) const
 
 void lilypondTransposePartNameAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -925,7 +925,7 @@ void lilypondTransposePartIDAtom::print (std::ostream& os) const
 
 void lilypondTransposePartIDAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -1030,7 +1030,7 @@ void msrOctaveEntryVariable::print (std::ostream& os) const
 
 void msrOctaveEntryVariable::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -1215,7 +1215,7 @@ void lilypondAbsoluteOctaveEntryAtom::print (std::ostream& os) const
 
 void lilypondAbsoluteOctaveEntryAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
 //   os << std::left << // JMI CAFE
 //     std::setw (valueFieldWidth) <<
@@ -1449,7 +1449,7 @@ void lilypondRelativeOctaveEntryAtom::print (std::ostream& os) const
 
 void lilypondRelativeOctaveEntryAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -1664,7 +1664,7 @@ void lilypondFixedOctaveEntryAtom::print (std::ostream& os) const
 
 void lilypondFixedOctaveEntryAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -1909,7 +1909,7 @@ void lilypondAccidentalStyleKindAtom::print (std::ostream& os) const
 
 void lilypondAccidentalStyleKindAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -2258,7 +2258,7 @@ void lilypondChordsDisplayAtom::print (std::ostream& os) const
 
 void lilypondChordsDisplayAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -2520,7 +2520,7 @@ void lilypondLyricsDurationsKindAtom::print (std::ostream& os) const
 
 void lilypondLyricsDurationsKindAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -2761,7 +2761,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::print (std::ostream& os) const
 
 void lilypondDynamicsTextSpannersStyleKindAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -4966,7 +4966,7 @@ void lpsr2lilypondOahGroup::browseData (basevisitor* v)
 
 void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os <<
     "The LilyPond lilypond are:" <<
@@ -6480,7 +6480,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::print (std::ostream& os) const
 
 void lilypondBreakPageAfterMeasureNumberAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<

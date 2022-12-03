@@ -131,6 +131,10 @@ std::string msrBarLineRepeatWingedKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrBarLineRepeatWingedKind& elt);
 
+//______________________________________________________________________________
+class EXP msrBarLine;
+typedef   SMARTP<msrBarLine> S_msrBarLine;
+
 class EXP msrBarLine : public msrMeasureElement
 {
   public:
@@ -138,14 +142,15 @@ class EXP msrBarLine : public msrMeasureElement
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<msrBarLine> create (
+//     static SMARTP<msrBarLine> create (
+    static S_msrBarLine create (
                             int                           inputLineNumber,
-                            const S_msrMeasure&          upLinkToMeasure,
+                            const S_msrMeasure&           upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const std::string&       endingNumber,
+                            const std::string&            endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,
@@ -158,7 +163,7 @@ class EXP msrBarLine : public msrMeasureElement
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const std::string&       endingNumber,
+                            const std::string&            endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,
@@ -183,12 +188,12 @@ class EXP msrBarLine : public msrMeasureElement
 
                           msrBarLine (
                             int                           inputLineNumber,
-                            const S_msrMeasure&          upLinkToMeasure,
+                            const S_msrMeasure&           upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
                             msrBarLineEndingTypeKind      barLineEndingTypeKind,
-                            const std::string&       endingNumber,
+                            const std::string&            endingNumber,
                             int                           barLineTimes,
                             msrBarLineCategoryKind        barLineCategoryKind,
                             msrBarLineHasSegnoKind        barLineHasSegnoKind,

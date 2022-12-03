@@ -3887,15 +3887,14 @@ void msrVoice::displayVoiceMeasuresFlatList (
       i      = iBegin;
 
     int counter = 0;
-    for ( ; ; ) {
+    for (S_msrMeasure measure :fVoiceMeasuresFlatList) {
       ++counter;
-
-      S_msrMeasure measure = (*i);
 
       // print the measure
 #ifdef TRACING_IS_ENABLED
-//      if (gGlobalTracingOahGroup->getTraceMeasures ()) { // CAFE JMI
-        gLogStream << measure->asShortStringForMeasuresSlices ();
+//      if (gGlobalTracingOahGroup->getTraceMeasures ()) { // CAFE JMI v0.9.66
+        gLogStream <<
+          measure->asShortStringForMeasuresSlices ();
 //      }
 //      else {
 //        gLogStream << measure->getMeasureNumber ();
@@ -3906,12 +3905,12 @@ void msrVoice::displayVoiceMeasuresFlatList (
 
       if (++i == iEnd) break;
 
-      if (counter % 8 == 1) {
-        gLogStream << ' ';
-      }
-      else {
+//       if (counter % 8 == 1) {
+//         gLogStream << ' ';
+//       }
+//       else {
         gLogStream << std::endl;
-      }
+//       }
     } // for
     gLogStream << std::endl;
 

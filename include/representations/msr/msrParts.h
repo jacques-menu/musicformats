@@ -286,14 +286,14 @@ class EXP msrPart : public msrPartGroupElement
     // measures
 
     void                  createAMeasureAndAppendItToPart (
-                            int           inputLineNumber,
-                            int           previousMeasureEndInputLineNumber,
+                            int                inputLineNumber,
+                            int                previousMeasureEndInputLineNumber,
                             const std::string& measureNumber,
                             msrMeasureImplicitKind
-                                          measureImplicitKind);
+                                               measureImplicitKind);
 
     void                  setNextMeasureNumberInPart (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& nextMeasureNumber);
 
     // clef, key, time signature
@@ -353,18 +353,17 @@ class EXP msrPart : public msrPartGroupElement
                             int inputLineNumber);
 
     void                  handleRepeatEndInPart (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& measureNumber,
-                            int           repeatTimes);
+                            int                repeatTimes);
 
     void                  handleRepeatEndingStartInPart (
                             int inputLineNumber);
 
     void                  handleRepeatEndingEndInPart (
-                            int           inputLineNumber,
-                            const std::string& repeatEndingNumber, // may be "1, 2"
-                            msrRepeatEndingKind
-                                          repeatEndingKind);
+                            int                 inputLineNumber,
+                            const std::string&  repeatEndingNumber, // may be "1, 2"
+                            msrRepeatEndingKind repeatEndingKind);
 
     /* JMI ???
     void                  finalizeRepeatEndInPart (
@@ -374,7 +373,7 @@ class EXP msrPart : public msrPartGroupElement
                             */
 
     void                  appendRepeatCloneToPart (
-                            int         inputLineNumber,
+                            int                inputLineNumber,
                             const S_msrRepeat& repeatCLone);
 
     void                  appendRepeatEndingCloneToPart (
@@ -394,12 +393,12 @@ class EXP msrPart : public msrPartGroupElement
                             int replicatasNumber);
 
     void                  addEmptyMeasuresToPart (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& previousMeasureNumber,
-                            int           multipleFullBarRestsNumber);
+                            int                multipleFullBarRestsNumber);
 
     void                  appendMultipleFullBarRestsCloneToPart (
-                            int               inputLineNumber,
+                            int                              inputLineNumber,
                             const S_msrMultipleFullBarRests& multipleFullBarRests);
 
     // measure repeats
@@ -412,9 +411,9 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendPendingMeasureRepeatToPart (
                             int inputLineNumber);
 
-    void                  appendMeasureRepeatCloneToPart (
-                            int               inputLineNumber,
-                            const S_msrMultipleFullBarRests& multipleFullBarRests);
+//     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED v0.9.66
+//                             int                              inputLineNumber,
+//                             const S_msrMultipleFullBarRests& multipleFullBarRests);
 
     // staves
 
@@ -446,13 +445,13 @@ class EXP msrPart : public msrPartGroupElement
     // harmonies
 
     S_msrVoice            createPartHarmoniesVoice (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& currentMeasureNumber);
 
     // figured bass
 
     S_msrVoice            createPartFiguredBassVoice (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
@@ -460,7 +459,7 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrFiguredBass& figuredBass);
 
     void                  appendFiguredBassToPartClone (
-                            const S_msrVoice&              figuredBassSupplierVoice,
+                            const S_msrVoice&       figuredBassSupplierVoice,
                             const S_msrFiguredBass& figuredBass);
 
     // scordaturas
@@ -511,7 +510,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  printPartMeasuresWholeNotesDurationsVector (
                             std::ostream& os,
-                            int      fieldWidth) const;
+                            int           fieldWidth) const;
 
     void                  print (std::ostream& os) const override;
 
@@ -556,13 +555,14 @@ class EXP msrPart : public msrPartGroupElement
 
     // staves
 
-    std::list<S_msrStaff>      fPartAllStavesList;
+    std::list<S_msrStaff> fPartAllStavesList;
 
-    std::list<S_msrStaff>      fPartRegularStavesList;
+    std::list<S_msrStaff> fPartRegularStavesList;
 
-    std::list<S_msrStaff>      fPartNonHarmoniesNorFiguredBassStavesList;
+    std::list<S_msrStaff> fPartNonHarmoniesNorFiguredBassStavesList;
 
-    std::map<int, S_msrStaff>  fPartStaveNumbersToStavesMap;
+    std::map<int, S_msrStaff>
+                          fPartStaveNumbersToStavesMap;
 
     // harmonies
 
@@ -576,7 +576,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // voices
 
-    std::list<S_msrVoice>      fPartAllVoicesList;
+    std::list<S_msrVoice> fPartAllVoicesList;
 
     // measures
 
@@ -584,7 +584,7 @@ class EXP msrPart : public msrPartGroupElement
 
     size_t                fPartNumberOfMeasures;
 
-    std::vector<Rational>      fPartMeasuresWholeNotesDurationsVector; // SUPERFLOUS ??? JMI NOEL
+    std::vector<Rational> fPartMeasuresWholeNotesDurationsVector; // SUPERFLOUS ??? JMI v0.9.66
 
     // clef, key, time signature
 

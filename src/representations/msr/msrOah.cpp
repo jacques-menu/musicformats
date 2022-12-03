@@ -42,11 +42,11 @@ const std::string K_MSR_GENERATION_API_KIND_LONG_NAME  = "msr-generation-api-kin
 const std::string K_MSR_GENERATION_API_KIND_SHORT_NAME = "msr-gen-api";
 
 S_msrPitchesLanguageAtom msrPitchesLanguageAtom::create (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   msrQuarterTonesPitchesLanguageKind&
                      quarterTonesPitchesLanguageKind)
 {
@@ -63,11 +63,11 @@ S_msrPitchesLanguageAtom msrPitchesLanguageAtom::create (
 }
 
 msrPitchesLanguageAtom::msrPitchesLanguageAtom (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   msrQuarterTonesPitchesLanguageKind&
                      quarterTonesPitchesLanguageKind)
   : oahAtomStoringAValue (
@@ -255,7 +255,7 @@ void msrPitchesLanguageAtom::print (std::ostream& os) const
 
 void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -284,12 +284,13 @@ std::ostream& operator << (std::ostream& os, const S_msrPitchesLanguageAtom& elt
 
 //______________________________________________________________________________
 S_msrRenamePartAtom msrRenamePartAtom::create (
-  const std::string&    longName,
-  const std::string&    shortName,
-  const std::string&    description,
-  const std::string&    valueSpecification,
-  const std::string&    variableName,
-  std::map<std::string, std::string>&  stringToStringMapVariable)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::map<std::string, std::string>&
+                     stringToStringMapVariable)
 {
   msrRenamePartAtom* o = new
     msrRenamePartAtom (
@@ -304,12 +305,13 @@ S_msrRenamePartAtom msrRenamePartAtom::create (
 }
 
 msrRenamePartAtom::msrRenamePartAtom (
-  const std::string&    longName,
-  const std::string&    shortName,
-  const std::string&    description,
-  const std::string&    valueSpecification,
-  const std::string&    variableName,
-  std::map<std::string, std::string>&  stringToStringMapVariable)
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  std::map<std::string, std::string>&
+                     stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -588,7 +590,7 @@ void msrRenamePartAtom::print (std::ostream& os) const
 
 void msrRenamePartAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<

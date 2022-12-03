@@ -3686,7 +3686,7 @@ void msrNote::browseData (basevisitor* v)
     } // for
   }
 
-  // browse the figured bass elements if any
+  // browse the figured basses if any
   if (fNoteFiguredBassesList.size ()) {
     std::list<S_msrFiguredBass>::const_iterator i;
     for (

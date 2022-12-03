@@ -1483,22 +1483,27 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
         fCurrentVoiceClone);
 
   if (fOnGoingNonGraceNote) {
-    // append the figured bass to the current non-grace note clone
+    // register this note as the figured bass note uplink
+    fCurrentFiguredBassClone->
+      setFiguredBassUpLinkToNote (fCurrentNonGraceNoteClone);
+
+    // register the figured bass in the current non-grace note clone
     fCurrentNonGraceNoteClone->
       appendFiguredBassToNoteFiguredBassesList (
         fCurrentFiguredBassClone);
 
-    // don't append the figured bass to the part figured bass,  JMI ???
+    // don't append the figured bass to the part figured bass,  JMI ??? v0.9.66
     // this will be done below
   }
 
-  /* JMI
+  //* JMI
   else if (fOnGoingChord) {
     // register the figured bass in the current chord clone
     fCurrentChordClone->
-      setChordFiguredBass (fCurrentFiguredBassClone); // JMI
+      setChordFiguredBass (
+        fCurrentFiguredBassClone); // JMI ??? v0.9.66
   }
-  */
+  //*/
 
   else if (fOnGoingFiguredBassVoice) { // JMI
     /*
@@ -1508,6 +1513,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
         fCurrentVoiceClone,
         fCurrentFiguredBassClone);
         */
+
     // append the figured bass to the current voice clone
     fCurrentVoiceClone->
       appendFiguredBassToVoiceClone (
@@ -4066,7 +4072,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
     gLogStream <<
-      "FAA fCurrentNonGraceNoteClone = " <<
+      "FAA fCurrentNonGraceNoteClone: " <<
       std::endl;
     if (fCurrentNonGraceNoteClone) {
       gLogStream <<

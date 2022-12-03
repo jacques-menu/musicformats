@@ -2518,7 +2518,7 @@ void tracingOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void tracingOahGroup::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {}
 
 void tracingOahGroup::printtracingOahValues (int fieldWidth)

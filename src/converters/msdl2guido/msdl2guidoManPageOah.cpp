@@ -167,7 +167,7 @@ void msdl2guidoManPageGenerateAtom::generateManPageData (std::ostream& os) const
 
 void msdl2guidoManPageGenerateAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   // nothing to print here
 }

@@ -298,7 +298,8 @@ class EXP msr2bsrTranslator :
   //  S_msrPartGroup            fCurrentPartGroupClone; JMI
 
     // the current partGroup is the top of the std::stack
-    std::stack<S_msrPartGroup>     fPartGroupsStack;
+    std::stack<S_msrPartGroup>
+                              fPartGroupsStack;
 
 
      // harmonies

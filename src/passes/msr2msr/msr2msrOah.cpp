@@ -280,7 +280,7 @@ void msrIgnorePartAtom::print (std::ostream& os) const
 
 void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -573,7 +573,7 @@ void msrKeepPartAtom::print (std::ostream& os) const
 
 void msrKeepPartAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<

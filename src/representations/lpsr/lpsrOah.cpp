@@ -255,7 +255,7 @@ void lpsrPitchesLanguageAtom::print (std::ostream& os) const
 
 void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -492,7 +492,7 @@ void lpsrChordsLanguageAtom::print (std::ostream& os) const
 
 void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -825,7 +825,7 @@ void lpsrStaffInstrumentNameAtom::print (std::ostream& os) const
 
 void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -1072,7 +1072,7 @@ void lpsrTransposeAtom::print (std::ostream& os) const
 
 void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<

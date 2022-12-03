@@ -3,62 +3,6 @@
 % -------------------------------------------------------------------------
 \chapter{Programming style and conventions}
 % -------------------------------------------------------------------------
-/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:3374:23: error: member access into incomplete type 'MusicFormats::msrTempo'
-      ", line " << elt->getInputLineNumber () <<
-                      ^
-/Users/jacquesmenu/musicformats-git-dev/src/representations/msr/msrTypesForwardDeclarations.h:307:9: note: forward declaration of 'MusicFormats::msrTempo'
-class   msrTempo;
-        ^
-
-
-/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:5319:7: error: incomplete type 'MusicFormats::msrAfterGraceNotesGroup' named in nested name specifier
-      msrAfterGraceNotesGroup::create (
-      ^~~~~~~~~~~~~~~~~~~~~~~~~
-/Users/jacquesmenu/musicformats-git-dev/src/representations/msr/msrTypesForwardDeclarations.h:31:9: note: forward declaration of 'MusicFormats::msrAfterGraceNotesGroup'
-class   msrAfterGraceNotesGroup;
-        ^
-
-
-https://cplusplus.com/forum/articles/10627/
-
-If, for example, class A uses class B, then class B is one of class A's dependencies. Whether it can be forward declared or needs to be included depends on how B is used within A:
-
-
-- do nothing if: A makes no references at all to B
-- do nothing if: The only reference to B is in a friend declaration
-- forward declare B if: A contains a B pointer or reference: B* myb;
-- forward declare B if: one or more functions has a B object/pointer/reference
-as a parementer, or as a return type: B MyFunction(B myb);
-- #include "b.h" if: B is a parent class of A
-- #include "b.h" if: A contains a B object: B myb;
-
-A circular dependency is when two (or more) classes depend on each other. For example, class A depends on class B, and class B depends on class A. If you stick to "the right way" and forward declare when you can instead of #including needlessly, this usually isn't a problem. As long as the circle is broken with a forward declaration at some point, you're fine.
-
-common prefixes
-
-
-
-
-https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2027?view=msvc-170
-
-
-It is possible to declare a pointer to a declared but undefined type. But C++ does not allow a reference to an undefined type.
-The following sample generates C2027.
-C++
-
-Copy
-// C2027_b.cpp
-class A;
-A& CreateA();
-
-class B;
-B* CreateB();
-
-int main() {
-   CreateA();   // C2027
-   CreateB();   // OK
-}
-
 
 
 % -------------------------------------------------------------------------
@@ -320,7 +264,7 @@ Comments containg {\tt JMI} indicates that the code may have to be reconsidered 
 \section{Exported symbols}
 % -------------------------------------------------------------------------
 
-The classes and functions\index{functions} that need to be exported from the \mf\ library in the Windows sense are marked as such with an {\tt EXP} specification:
+The classes and functions\index{functions} that need to be exported from the \mf\ library in the Windows meaning are marked as such with an {\tt EXP} specification:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP smartable {
 	// ... ... ...
@@ -329,6 +273,40 @@ class EXP smartable {
 
 \begin{lstlisting}[language=CPlusPlus]
 EXP S_mxsrOahGroup createGlobalMxsrOahGroup ();
+\end{lstlisting}
+
+\code{EXP} is defined in \interface{exports.h} and is non-blank only when building on \Windows:
+\begin{lstlisting}[language=CPlusPlus]
+#if defined(WIN32) // && !defined (GCC)
+
+# ifdef MSVC
+#  pragma warning (disable : 4267)
+#  pragma warning (disable : 4275)
+#  pragma warning (disable : 4251)
+#  pragma warning (disable : 4786)
+#  pragma warning (disable : 4251)
+#  pragma warning (disable : 4275)
+# endif
+
+# ifdef LIBMUSICXML_EXPORTS
+#  define EXP __declspec(dllexport)
+
+# elif defined(LIBMUSICXML_STATIC)
+#  define EXP
+
+# else
+#  define EXP __declspec(dllimport)
+# endif
+
+#else
+
+# ifdef LIBMUSICXML_EXPORTS
+#  define EXP	__attribute__ ((visibility("default")))
+# else
+#  define EXP
+# endif
+
+#endif
 \end{lstlisting}
 
 
@@ -488,25 +466,62 @@ These can be uncommented to obtain development-time tracing information, without
 
 
 % -------------------------------------------------------------------------
-\section{Identifiers naming conventions}
+\section{Identifiers choice conventions}
 % -------------------------------------------------------------------------
 
 The following rules apply:
 \begin{itemize}
-\item all enumeration type names describing variants in classes end in '{\tt Kind}';%%%JMI
-\item all enumeration constants start with '{\tt k}';
-\item all classes names have a prefix indicating which part of \mf\ there belong to, such as \class{msrTimeSignature}, {\tt oahAtomStoringAValue} and {\tt msdlKeywordsLanguageAtom};
-\item all classes member fields start with '{\tt f}';
-\item all global variables start with '{\tt gGlobal}';
-\item all variables private to methods start with '{\tt pPrivate}';
-\item some {\tt K_*} constants are defined with {\tt \#define} because creating global constants variables and accessing them would be too cumbersome, such as:
-\begin{lstlisting}[language=CPlusPlus]
-    \#define msrPart::K_PART_HARMONIES_STAFF_NUMBER       10
-    \#define msrPart::K_PART_HARMONIES_VOICE_NUMBER       11
 
-    \#define msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER  20
-    \#define msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER  21
+\item all enumeration type names describing variants in classes end in '{\tt Kind}';%%%JMI
+\item all enumeration constants start with '{\tt k}'. common prefixes are used to help locate all occurences of constants of the given type in a text editor, as:
+\begin{lstlisting}[language=CPlusPlus]
+enum class msrBassFigurePrefixKind {
+  kBassFigurePrefix_NO_,
+  kBassFigurePrefixDoubleFlat, kBassFigurePrefixFlat, kBassFigurePrefixFlatFlat,
+  kBassFigurePrefixNatural,
+  kBassFigurePrefixSharpSharp, kBassFigurePrefixSharp, kBassFigurePrefixDoubleSharp
+};
 \end{lstlisting}
+
+\item all classes names have a prefix indicating which part of \mf\ there belong to, such as \class{msrTimeSignature}, {\tt oahAtomStoringAValue} and {\tt msdlKeywordsLanguageAtom};
+
+\item all classes member fields start with '{\tt f}';
+
+\item all global variables start with '{\tt gGlobal}';
+
+\item all variables private to methods start with '{\tt pPrivate}';
+
+\item some {\tt K_*} constants are declared as static class constant members, such as in \msr{msrParts.h}:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+class EXP msrPart : public msrPartGroupElement
+{
+  public:
+
+    // constants
+    // ------------------------------------------------------
+
+    static const int K_PART_HARMONIES_STAFF_NUMBER;
+    static const int K_PART_HARMONIES_VOICE_NUMBER;
+
+    static const int K_PART_FIGURED_BASS_STAFF_NUMBER;
+    static const int K_PART_FIGURED_BASS_VOICE_NUMBER;
+    
+   // ... ... ...
+};
+\end{lstlisting}
+
+with the definition in \msr{msrParts.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+// constants
+const int msrPart::K_PART_HARMONIES_STAFF_NUMBER = 10;
+const int msrPart::K_PART_HARMONIES_VOICE_NUMBER = 11;
+
+const int msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
+const int msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
+\end{lstlisting}
+
 \end{itemize}
 
 When a field is an STL container, such a {\tt std::vector}, {\tt std::list}, {\tt std::map} or {\tt set}, this in indicated as part of the identifier, such as:
@@ -703,7 +718,7 @@ class   __declspec(dllexport) CExampleExport : public CObject
 
 \end{itemize}
 
-\mf\ uses symbol \code{EXP}, supplied by \libmusicxmlsamples. \\
+\mf\ uses symbol \code{EXP}, supplied by \libmusicxmlSamples. \\
 It is defined in \elements{exports.h} to be empty except on Windows, where it is a default visibility attribute:
 \begin{lstlisting}[language=CPlusPlus]
 #ifndef __exports__
@@ -1799,6 +1814,61 @@ bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
 \section{Mutually dependent classes}
 % -------------------------------------------------------------------------
 
+\CPlusplus\ has some constraints on how such classes can be defined, see for example \url{https://cplusplus.com/forum/articles/10627/}. \mf\ sticks to having one header file per important class, with one exception.
+
+
+%/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:3374:23: error: member access into incomplete type 'MusicFormats::msrTempo'
+%      ", line " << elt->getInputLineNumber () <<
+%                      ^
+%/Users/jacquesmenu/musicformats-git-dev/src/representations/msr/msrTypesForwardDeclarations.h:307:9: note: forward declaration of 'MusicFormats::msrTempo'
+%class   msrTempo;
+%        ^
+%
+%
+%/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:5319:7: error: incomplete type 'MusicFormats::msrAfterGraceNotesGroup' named in nested name specifier
+%      msrAfterGraceNotesGroup::create (
+%      ^~~~~~~~~~~~~~~~~~~~~~~~~
+%/Users/jacquesmenu/musicformats-git-dev/src/representations/msr/msrTypesForwardDeclarations.h:31:9: note: forward declaration of 'MusicFormats::msrAfterGraceNotesGroup'
+%class   msrAfterGraceNotesGroup;
+%        ^
+
+
+%If, for example, class A uses class B, then class B is one of class A's dependencies. Whether it can be forward declared or needs to be included depends on how B is used within A:
+%
+%
+%- do nothing if: A makes no references at all to B
+%- do nothing if: The only reference to B is in a friend declaration
+%- forward declare B if: A contains a B pointer or reference: B* myb;
+%- forward declare B if: one or more functions has a B object/pointer/reference
+%as a parementer, or as a return type: B MyFunction(B myb);
+%- #include "b.h" if: B is a parent class of A
+%- #include "b.h" if: A contains a B object: B myb;
+%
+%A circular dependency is when two (or more) classes depend on each other. For example, class A depends on class B, and class B depends on class A. If you stick to "the right way" and forward declare when you can instead of #including needlessly, this usually isn't a problem. As long as the circle is broken with a forward declaration at some point, you're fine.
+
+
+%https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2027?view=msvc-170
+%
+%
+%It is possible to declare a pointer to a declared but undefined type. But C++ does not allow a reference to an undefined type.
+%The following sample generates C2027.
+%C++
+%
+%Copy
+%// C2027_b.cpp
+%class A;
+%A& CreateA();
+%
+%class B;
+%B* CreateB();
+%
+%int main() {
+%   CreateA();   // C2027
+%   CreateB();   // OK
+%}
+
+
+
 In some cases, two classes have to know about each other, such as \className{msrPartGroup} and \className{msrPartGroupElement}. This is because \Main{part group}s can be nested: a part group contains part group element, which can be staves as well as other part groups. This loop can be seen in red in \figureRef{The MSR classes hierarchy}.
 
 
@@ -1812,16 +1882,39 @@ class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 \end{lstlisting}
 
-All you can do with a forward declared type is to declare a pointer or reference to said type.
+All one can do with a forward declared type is to declare a {\it pointer} or {\it reference} to said type. In particular, this precludes a forward declared type to be that of a class member or the return type of a class method.
 
 %%%JMI I had a similar error message which i resolved by moving the #includes lower down the header file so that the class definition and method definition that the other #includes desire come earlier than the other header includes.
+
+There are many such pre-declations in \mf. We thus use a couple of \fileName{*EnumTypes*} files to contain most of them, in order to avoid numerous header file includes:
+\begin{lstlisting}[language=CPlusPlus]
+jacquesmenu@macstudio-1:~/JMI_Developpement/musicformats-git-dev/src > look EnumTypes
+./representations/msdl/msdlEnumTypes.h
+./representations/msdl/msdlEnumTypes.cpp
+./representations/msr/msrTupletsEnumTypes.h
+./representations/msr/msrTemposEnumTypes.h
+./representations/msr/msrTupletsEnumTypes.cpp
+./representations/msr/msrMeasuresEnumTypes.cpp
+./representations/msr/msrTemposEnumTypes.cpp
+./representations/msr/msrStavesEnumTypes.h
+./representations/msr/msrNotesEnumTypes.h
+./representations/msr/msrNotesEnumTypes.cpp
+./representations/msr/msrStavesEnumTypes.cpp
+./representations/msr/msrMeasuresEnumTypes.h
+./representations/msr/msrRepeatsEnumTypes.cpp
+./representations/msr/msrRepeatsEnumTypes.h
+./representations/lpsr/lpsrEnumTypes.cpp
+./representations/lpsr/lpsrEnumTypes.h
+./representations/bsr/bsrEnumTypes.cpp
+./representations/bsr/bsrEnumTypes.h
+\end{lstlisting}
 
 
 % -------------------------------------------------------------------------
 \subsection{Simple mutual dependency using separate header files}
 % -------------------------------------------------------------------------
 
-Another approach, used by \mf, is to have classes declarations in separate header files as much as possible.
+\mf, has classes declarations in separate header files as much as possible.
 
 In the case of part groups, \msr{msrPartGroups.h} contains:
 \begin{lstlisting}[language=CPlusPlus]
@@ -1881,6 +1974,7 @@ class EXP msrPartGroupElement : public msrElement
 
     /*
       The part group uplink is declared in the sub-classes,
+      i.e. msrPart and msrPartGroup,
       to allow for separate *.h files, C++ constraint
     */
 };

@@ -78,7 +78,7 @@ class EXP xml2lyManPageGenerateAtom : public oahAtom
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 

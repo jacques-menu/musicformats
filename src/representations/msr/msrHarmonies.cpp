@@ -4780,18 +4780,27 @@ void msrHarmony::print (std::ostream& os) const
 
   const int fieldWidth = 44;
 
-  // print the harmony measure number
-  os <<
-    std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << " : " <<
-    fHarmonyUpLinkToMeasure->getMeasureNumber () <<
-    std::endl;
-
   // print the harmony measure position
   os <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << " : " <<
     fMeasureElementMeasurePosition <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasureElementSoundingWholeNotes" << " : " <<
+    fMeasureElementSoundingWholeNotes <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fHarmonyDisplayWholeNotes" << " : " <<
+    fHarmonyDisplayWholeNotes <<
+    std::endl;
+
+  // print the harmony measure number
+  os <<
+    std::setw (fieldWidth) <<
+    "measureElementMeasureNumber" << " : " <<
+    fHarmonyUpLinkToMeasure->getMeasureNumber () <<
     std::endl;
 
   // print the harmony bass voice position
@@ -4812,15 +4821,6 @@ void msrHarmony::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fHarmonyKind" << " : " <<
     msrHarmonyKindAsString (fHarmonyKind) <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << " : " <<
-    fMeasureElementSoundingWholeNotes <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fHarmonyDisplayWholeNotes" << " : " <<
-    fHarmonyDisplayWholeNotes <<
     std::endl;
 
   // print the harmony whole notes offset

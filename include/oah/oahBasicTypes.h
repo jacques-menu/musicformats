@@ -558,7 +558,7 @@ class EXP oahAtom : public oahElement
 
     virtual void          printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
 
 		const std::string 					containingFindableElementAsString () const override;
 
@@ -735,7 +735,7 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
 
     virtual void          printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   protected:
 
@@ -828,7 +828,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
 
     virtual void          printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
 
     // protected fields
@@ -900,7 +900,7 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   protected:
 
@@ -1132,10 +1132,10 @@ class EXP oahSubGroup : public oahElement
 
     void                  printSubGroupOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
     void                  printSubGroupOptionsValuesAll (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
 
 		const std::string 					containingFindableElementAsString () const override;
 
@@ -1344,10 +1344,10 @@ class EXP oahGroup : public oahElement
 
     void                  printGroupOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
     void                  printGroupOptionsValuesAll (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
 
 		const std::string 					containingFindableElementAsString () const override;
 

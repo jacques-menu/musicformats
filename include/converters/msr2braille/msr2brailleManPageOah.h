@@ -76,7 +76,7 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 

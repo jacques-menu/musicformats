@@ -169,7 +169,7 @@ void msr2brailleManPageGenerateAtom::generateManPageData (std::ostream& os) cons
 
 void msr2brailleManPageGenerateAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   // nothing to print here
 }

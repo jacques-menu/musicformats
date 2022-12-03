@@ -110,7 +110,7 @@ template <typename T> class   msrBrowser : public browser <T>
 \section{A first example: counting notes in MusicMXL data}
 % -------------------------------------------------------------------------
 
-In \libmusicxmlsamples{countnotes.cpp}, counting the notes in \mxml\ data needs only see {\tt S_note} nodes. class   {\tt countnotes} thus inherits only from a visitor for this type of node, and all the other node types are simply ignored.
+In \libmusicxmlSamples{countnotes.cpp}, counting the notes in \mxml\ data needs only see {\tt S_note} nodes. class   {\tt countnotes} thus inherits only from a visitor for this type of node, and all the other node types are simply ignored.
 
 \VisitorMethod{countnotes}{visitStart} only has to increment the notes count:
 \begin{lstlisting}[language=CPlusPlus,caption={{\tt countnotes.cpp}}]

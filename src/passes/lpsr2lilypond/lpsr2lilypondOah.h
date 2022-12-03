@@ -89,7 +89,7 @@ class EXP lilypondScoreOutputKindAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -188,7 +188,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -288,7 +288,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -355,7 +355,7 @@ class EXP msrOctaveEntryVariable : public smartable
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
 
   private:
 
@@ -433,7 +433,7 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -525,7 +525,7 @@ class EXP lilypondRelativeOctaveEntryAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -621,7 +621,7 @@ class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -712,7 +712,7 @@ class EXP lilypondAccidentalStyleKindAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -804,7 +804,7 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -892,7 +892,7 @@ class EXP lilypondLyricsDurationsKindAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -987,7 +987,7 @@ class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValu
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -1737,7 +1737,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     virtual void          printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
 
   private:
 
@@ -2181,7 +2181,7 @@ class EXP lilypondBreakPageAfterMeasureNumberAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 

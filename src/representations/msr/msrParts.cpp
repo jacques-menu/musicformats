@@ -562,11 +562,11 @@ std::string msrPart::getPartCombinedName () const
 }
 
 void msrPart::createAMeasureAndAppendItToPart (
-  int           inputLineNumber,
-  int           previousMeasureEndInputLineNumber,
+  int                inputLineNumber,
+  int                previousMeasureEndInputLineNumber,
   const std::string& measureNumber,
   msrMeasureImplicitKind
-                measureImplicitKind)
+                     measureImplicitKind)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -599,7 +599,7 @@ void msrPart::createAMeasureAndAppendItToPart (
 }
 
 void msrPart::setNextMeasureNumberInPart (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& nextMeasureNumber)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1191,9 +1191,9 @@ void msrPart::handleRepeatStartInPart (
 }
 
 void msrPart::handleRepeatEndInPart (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& measureNumber,
-  int           repeatTimes)
+  int                repeatTimes)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -1247,10 +1247,9 @@ void msrPart::handleRepeatEndingStartInPart (
 }
 
 void msrPart::handleRepeatEndingEndInPart (
-  int           inputLineNumber,
-  const std::string& repeatEndingNumber, // may be "1, 2"
-  msrRepeatEndingKind
-                repeatEndingKind)
+  int                 inputLineNumber,
+  const std::string&  repeatEndingNumber, // may be "1, 2"
+  msrRepeatEndingKind repeatEndingKind)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
@@ -1313,7 +1312,7 @@ void msrPart::finalizeRepeatEndInPart (
 */
 
 void msrPart::appendRepeatCloneToPart (
-  int         inputLineNumber,
+  int                inputLineNumber,
   const S_msrRepeat& repeatCLone)
 {
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1431,9 +1430,9 @@ void msrPart::replicateLastAppendedMeasureInPart (
 }
 
 void msrPart::addEmptyMeasuresToPart (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& previousMeasureNumber,
-  int           multipleFullBarRestsNumber)
+  int                multipleFullBarRestsNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
@@ -1481,7 +1480,7 @@ void msrPart::appendPendingMultipleFullBarRestsToPart (
 }
 
 void msrPart::appendMultipleFullBarRestsCloneToPart (
-  int               inputLineNumber,
+  int                              inputLineNumber,
   const S_msrMultipleFullBarRests& multipleFullBarRests)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1721,7 +1720,7 @@ void msrPart::registerVoiceInPartAllVoicesList (
 }
 
 S_msrVoice msrPart::createPartHarmoniesVoice (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& currentMeasureNumber)
 {
   if (fPartHarmoniesVoice) {
@@ -1798,9 +1797,8 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
   return fPartHarmoniesVoice;
 }
 
-
 S_msrVoice msrPart::createPartFiguredBassVoice (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& currentMeasureNumber)
 {
   if (fPartFiguredBassVoice) {
@@ -1934,7 +1932,7 @@ void msrPart::appendFiguredBassToPart (
 }
 
 void msrPart::appendFiguredBassToPartClone (
-  const S_msrVoice&              figuredBassSupplierVoice,
+  const S_msrVoice&       figuredBassSupplierVoice,
   const S_msrFiguredBass& figuredBass)
 {
   int inputLineNumber =
@@ -2539,7 +2537,7 @@ std::string msrPart::asString () const
 
 void msrPart::printPartMeasuresWholeNotesDurationsVector (
   std::ostream& os,
-  int      fieldWidth) const
+  int           fieldWidth) const
 {
   os << std::left <<
     std::setw (fieldWidth) <<
