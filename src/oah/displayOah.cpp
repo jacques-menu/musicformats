@@ -233,7 +233,7 @@ void displayOahGroup::browseData (basevisitor* v)
 
 void displayOahGroup::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << " : " <<

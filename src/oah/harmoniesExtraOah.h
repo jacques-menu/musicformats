@@ -86,7 +86,7 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -169,7 +169,7 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -249,7 +249,7 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -329,7 +329,7 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 

@@ -230,7 +230,7 @@ void bsrFacSimileKindAtom::print (std::ostream& os) const
 
 void bsrFacSimileKindAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -428,7 +428,7 @@ void bsrTextsLanguageAtom::print (std::ostream& os) const
 
 void bsrTextsLanguageAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<

@@ -946,6 +946,7 @@ void msrMeasure::appendMeasureElementToMeasure (
       fMeasureWholeNotesDuration,
       "appendMeasureElementToMeasure()");
 
+  // append elem to the measure elements list
   fMeasureElementsList.push_back (elem);
 
   // take elem's sounding whole notes into account
@@ -2774,24 +2775,6 @@ void msrMeasure::appendFiguredBassToMeasureClone (
 
   // append the figuredBass to the measure elements list
   appendMeasureElementToMeasure (figuredBass);
-
-  // set the figuredBass's measure position
-//   figuredBass->
-//     setFiguredBassMeasurePosition (
-//       this,
-//       fMeasureWholeNotesDuration,
-//       "msrMeasure::appendFiguredBassToMeasureClone (const S_msrChord& chord)");
-
-//   // get figuredBass sounding whole notes
-//   Rational
-//     figuredBassSoundingWholeNotes =
-//       figuredBass->
-//         getMeasureElementSoundingWholeNotes ();
-//
-//   // account for figuredBass duration in measure whole notes
-//   incrementMeasureWholeNotesDuration (
-//     inputLineNumber,
-//     figuredBassSoundingWholeNotes);
 
   // this measure contains music
   fMeasureContainsMusic = true;
@@ -6280,7 +6263,8 @@ std::string msrMeasure::asShortStringForMeasuresSlices () const
     for ( ; ; ) {
       S_msrMeasureElement measureElement = (*i);
 
-      s << measureElement->asShortStringForMeasuresSlices ();
+      s <<
+        measureElement->asShortStringForMeasuresSlices ();
       if (++i == iEnd) break;
       s << ", ";
     } // for

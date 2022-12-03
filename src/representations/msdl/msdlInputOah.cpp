@@ -253,7 +253,7 @@ void msdlKeywordsLanguageAtom::print (std::ostream& os) const
 
 void msdlKeywordsLanguageAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -916,7 +916,7 @@ void msdlCommentsTypeAtom::print (std::ostream& os) const
 
 void msdlCommentsTypeAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -1161,7 +1161,7 @@ void msdlUserLanguageAtom::print (std::ostream& os) const
 
 void msdlUserLanguageAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -1405,7 +1405,7 @@ void msdlPitchesLanguageAtom::print (std::ostream& os) const
 
 void msdlPitchesLanguageAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<

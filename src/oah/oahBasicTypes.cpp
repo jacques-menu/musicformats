@@ -1488,7 +1488,7 @@ Bool oahAtom::findStringInAtom (
 
 void oahAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os <<
     "Atom values ???:" <<
@@ -1874,7 +1874,7 @@ void oahAtomImplicitlyStoringAValue::printHelp (std::ostream& os) const
 
 void oahAtomImplicitlyStoringAValue::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os <<
     "AtomWithVariable values:" <<
@@ -2102,7 +2102,7 @@ void oahAtomStoringAValue::printHelp (std::ostream& os) const
 
 void oahAtomStoringAValue::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os <<
     "AtomWithVariable values:" <<
@@ -2243,7 +2243,7 @@ void oahPureHelpAtomWithoutAValue::print (std::ostream& os) const
 
 void oahPureHelpAtomWithoutAValue::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   // nothing to print here
 }
@@ -3248,7 +3248,7 @@ Bool oahSubGroup::findStringInSubGroup (
 
 void oahSubGroup::printSubGroupOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   if (true || fNumberOfUserChoseAtomsInThisSubGroup > 0) {
     // print the header
@@ -3326,7 +3326,7 @@ void oahSubGroup::printSubGroupOptionsValues (
 
 void oahSubGroup::printSubGroupOptionsValuesAll (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   // print the header
   os <<
@@ -4224,7 +4224,7 @@ void oahGroup::printGroupAndSubGroupSpecificHelp (
 
 void oahGroup::printGroupOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   if (true || fNumberOfUserChoseAtomsInThisGroup > 0) {
     // print the header
@@ -4280,7 +4280,7 @@ void oahGroup::printGroupOptionsValues (
 
 void oahGroup::printGroupOptionsValuesAll (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   // print the header
   os <<

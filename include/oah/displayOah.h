@@ -134,7 +134,7 @@ class EXP displayOahGroup : public oahGroup
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
 
   private:
 

@@ -536,6 +536,21 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
   return figuredBassDeepClone;
 }
 
+void msrFiguredBass::setFiguredBassUpLinkToNote (
+  const S_msrNote& note)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+    gLogStream <<
+      "==> Setting the uplink to note of figured bass " <<
+      asString () <<
+      " to note " << note->asString () <<
+      std::endl;
+  }
+#endif
+  fFiguredBassUpLinkToNote = note;
+}
+
 void msrFiguredBass::setFiguredBassUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
@@ -546,7 +561,7 @@ void msrFiguredBass::setFiguredBassUpLinkToMeasure (
     "measure is null");
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
     ++gIndenter;
 
     gLogStream <<

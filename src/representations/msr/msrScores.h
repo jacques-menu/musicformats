@@ -415,7 +415,7 @@ class EXP msrScore : public msrBookElement
 
     // voices
 
-    std::list<S_msrVoice>      fScoreAllVoicesList;
+    std::list<S_msrVoice> fScoreAllVoicesList;
 
     // measures slices sequence
 

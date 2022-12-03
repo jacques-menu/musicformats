@@ -167,7 +167,7 @@ void msdl2brailleManPageGenerateAtom::generateManPageData (std::ostream& os) con
 
 void msdl2brailleManPageGenerateAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   // nothing to print here
 }

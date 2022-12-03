@@ -1067,7 +1067,7 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
   assertSegmentLastMeasureIsNotNull (
     harmony->getInputLineNumber ());
 
-  // append it to this segment
+  // append harmony to this segment
   fSegmentLastMeasure->
     appendHarmonyToMeasureClone (harmony);
 }
@@ -1125,7 +1125,7 @@ void msrSegment::appendFiguredBassToSegmentClone (
   assertSegmentLastMeasureIsNotNull (
     figuredBass->getInputLineNumber ());
 
-  // append it to this segment
+  // append figuredBass to this segment
   fSegmentLastMeasure->
     appendFiguredBassToMeasure (figuredBass);
 }

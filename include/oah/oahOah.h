@@ -74,7 +74,7 @@ class EXP insiderOahAtom : public oahAtom
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
 
     // private fields
@@ -139,7 +139,7 @@ class EXP regularOahAtom : public oahAtom
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const override;
+                            int           valueFieldWidth) const override;
 
   private:
 
@@ -292,7 +292,7 @@ class EXP oahOahGroup : public oahGroup
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
 
   private:
 

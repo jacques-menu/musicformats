@@ -153,7 +153,7 @@ void insiderOahAtom::print (std::ostream& os) const
 
 void insiderOahAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -301,7 +301,7 @@ void regularOahAtom::print (std::ostream& os) const
 
 void regularOahAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
@@ -815,7 +815,7 @@ void oahOahGroup::browseData (basevisitor* v)
 
 void oahOahGroup::printAtomWithVariableOptionsValues ( // JMIJMIJMI
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
   /* JMI

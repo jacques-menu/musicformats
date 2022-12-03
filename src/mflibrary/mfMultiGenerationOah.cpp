@@ -452,7 +452,7 @@ void mfMultiGenerationOutputKindAtom::print (std::ostream& os) const
 
 void mfMultiGenerationOutputKindAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
-  int      valueFieldWidth) const
+  int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<

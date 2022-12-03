@@ -758,7 +758,7 @@ class EXP tracingOahGroup : public oahGroup
 
     virtual void          printAtomWithVariableOptionsValues (
                             std::ostream& os,
-                            int      valueFieldWidth) const;
+                            int           valueFieldWidth) const;
 
   private:
 

@@ -1260,8 +1260,9 @@ A part in MSR is composed of voices, stored in:
 \begin{lstlisting}[language=CPlusPlus]
     // staves
 
-    std::map<int, S_msrStaff>  getPartStaveNumbersToStavesMap;
-    std::list<S_msrStaff>      fPartAllStavesList;
+    std::map<int, S_msrStaff>  
+                          getPartStaveNumbersToStavesMap;
+    std::list<S_msrStaff> fPartAllStavesList;
 
     // harmonies
 
@@ -1275,7 +1276,7 @@ A part in MSR is composed of voices, stored in:
 
     // voices
 
-    std::list<S_msrVoice>      fPartAllVoicesList;
+    std::list<S_msrVoice> fPartAllVoicesList;
 \end{lstlisting}
 
 
@@ -1301,11 +1302,11 @@ A stave contains at most 4 numbered voices, stored in:
 
     // harmonies and figured bass elements should be placed %%%JMI
     // in the first regular voice of the staff, hence:
-    std::list<S_msrVoice>      fStaffRegularVoicesList;
+    std::list<S_msrVoice> fStaffRegularVoicesList;
 
     // we need to sort the voices by increasing voice numbers,
     // but with harmonies voices right before the corresponding regular voices
-    std::list<S_msrVoice>      fStaffAllVoicesList;
+    std::list<S_msrVoice> fStaffAllVoicesList;
 \end{lstlisting}
 
 

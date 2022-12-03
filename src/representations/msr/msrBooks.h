@@ -374,7 +374,7 @@ class EXP msrBook : public msrElement
 
     // voices
 
-    std::list<S_msrVoice>      fBookAllVoicesList;
+    std::list<S_msrVoice> fBookAllVoicesList;
 };
 typedef SMARTP<msrBook> S_msrBook;
 EXP std::ostream& operator << (std::ostream& os, const S_msrBook& elt);

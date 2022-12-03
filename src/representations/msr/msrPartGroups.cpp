@@ -433,7 +433,7 @@ void msrPartGroup::checkPartGroupElement (
 }
 
 S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& partID)
 {
   // sanity check
@@ -570,7 +570,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 }
 
 void msrPartGroup::removePartFromPartGroup (
-  int       inputLineNumber,
+  int              inputLineNumber,
   const S_msrPart& partToBeRemoved)
 {
   // register part in this part group
@@ -837,7 +837,7 @@ void msrPartGroup::printPartGroupElementsListShort (
 }
 
 S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& partID)
 {
   S_msrPart result;
@@ -924,7 +924,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 }
 
 void msrPartGroup::collectPartGroupPartsList (
-  int              inputLineNumber,
+  int                   inputLineNumber,
   std::list<S_msrPart>& partsList)
 {
   for (

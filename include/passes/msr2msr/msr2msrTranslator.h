@@ -646,7 +646,8 @@ class EXP msr2msrTranslator :
 
     // partGroup's can be nested, hence this std::stack
     // the current partGroup is the top of the std::stack
-    std::stack<S_msrPartGroup>     fPartGroupsStack;
+    std::stack<S_msrPartGroup>
+                              fPartGroupsStack;
 
 
     // parts
@@ -727,7 +728,7 @@ class EXP msr2msrTranslator :
     // notes
     // ------------------------------------------------------
 
-    S_msrNote                 fCurrentNoteClone;
+//     S_msrNote                 fCurrentNoteClone; // JMI UNUSED v0.9.66
 
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,

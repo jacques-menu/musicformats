@@ -406,11 +406,11 @@ class EXP msrStaff : public msrElement
 
     // we need to sort the voices by increasing voice numbers,
     // but with harmonies voices right before the corresponding regular voices
-    std::list<S_msrVoice>      fStaffAllVoicesList;
+    std::list<S_msrVoice> fStaffAllVoicesList;
 
     // harmonies and figured bass elements should be placed
     // in the first regular voice of the staff, hence:
-    std::list<S_msrVoice>      fStaffRegularVoicesList;
+    std::list<S_msrVoice> fStaffRegularVoicesList;
 
     // the mapping of all the voices in the staff,
     // including harmonies and figured bass voices
