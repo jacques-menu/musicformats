@@ -363,7 +363,8 @@ class EXP mfslCaseInputStatement : public smartable
     S_mfslInput           fCaseInputInput;
 
     std::set<std::string> fCaseInputNamesSet;
-    std::list<std::string>          fCaseInputCurrentNamesList;
+    std::list<std::string>          
+                          fCaseInputCurrentNamesList;
 
     // checking unused names
     std::set<std::string> fUsedNames;
@@ -641,7 +642,8 @@ class EXP mfslCaseChoiceStatement : public smartable
     S_mfslChoice          fCaseChoice;
 
     std::set<std::string> fCaseLabelsSet;
-    std::list<std::string>          fCaseCurrentLabelsList;
+    std::list<std::string>          
+                          fCaseCurrentLabelsList;
 
     // checking unused labels
     std::set<std::string> fUsedLabels;

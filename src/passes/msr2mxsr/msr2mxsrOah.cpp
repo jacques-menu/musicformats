@@ -272,20 +272,20 @@ void msr2mxsrOahGroup::printMsr2mxsrOahValues (int valueFieldWidth)
 
   gLogStream << std::left <<
     std::setw (valueFieldWidth) <<
-    "fWorkCreditTypeTitle" << " : " <<
+    "fWorkCreditTypeTitle" << ": " <<
     fWorkCreditTypeTitle <<
     std::endl <<
     std::setw (valueFieldWidth) <<
-    "fWorkNumber" << " : " <<
+    "fWorkNumber" << ": " <<
     fWorkNumber <<
     std::endl <<
 
     std::setw (valueFieldWidth) <<
-    "fMovementTitle" << " : " <<
+    "fMovementTitle" << ": " <<
     fMovementTitle <<
     std::endl <<
     std::setw (valueFieldWidth) <<
-    "fMovementNumber" << " : " <<
+    "fMovementNumber" << ": " <<
     fMovementNumber <<
     std::endl;
 

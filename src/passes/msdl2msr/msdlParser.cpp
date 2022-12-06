@@ -1160,7 +1160,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream <<
       "lilypondOctaveInRelativeEntryMode() 2" <<
-      ", result = " << s.str () <<
+      ", result: " << s.str () <<
       std::endl << std::endl;
   }
 #endif

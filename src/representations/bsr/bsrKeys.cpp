@@ -362,16 +362,16 @@ void bsrKey::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "keyKind" << " : " << bsrKeyKindAsString (fKeyKind) <<
+    "keyKind" << ": " << bsrKeyKindAsString (fKeyKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "numberOfAlterations" << " : " << fNumberOfAlterations <<
+    "numberOfAlterations" << ": " << fNumberOfAlterations <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "keyCellsList" << " : " << fKeyCellsList->asShortString () <<
+    "keyCellsList" << ": " << fKeyCellsList->asShortString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "spacesBefore" << " : " << fSpacesBefore <<
+    "spacesBefore" << ": " << fSpacesBefore <<
     std::endl;
 
   --gIndenter;

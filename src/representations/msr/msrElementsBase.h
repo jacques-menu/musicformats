@@ -22,16 +22,16 @@ namespace MusicXML2
 
 class msrElementsBase
 {
-	public:
-		virtual ~msrElementsBase () {}
+  public:
+    virtual ~msrElementsBase () {}
 };
 
 template<class C> class msrElementsBaseVisitor : virtual public msrElementsBase
 {
     public:
-		virtual ~msrElementsBaseVisitor() {}
-		virtual void visitStart( C& elt ) {};
-		virtual void visitEnd  ( C& elt ) {};
+    virtual ~msrElementsBaseVisitor() {}
+    virtual void visitStart( C& elt ) {};
+    virtual void visitEnd  ( C& elt ) {};
 };
 
 

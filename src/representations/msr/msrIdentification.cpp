@@ -624,7 +624,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationComposersList.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationComposersList" << " : " <<
+      "fIdentificationComposersList" << ": " <<
       std::endl;
 
     for (
@@ -643,7 +643,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationLyricistsList.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationLyricistsList" << " : " <<
+      "fIdentificationLyricistsList" << ": " <<
       std::endl;
 
     for (
@@ -662,7 +662,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationArrangersList.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationArrangersList" << " : " <<
+      "fIdentificationArrangersList" << ": " <<
       std::endl;
 
     for (
@@ -681,7 +681,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationPoetsList.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationPoetsList" << " : " <<
+      "fIdentificationPoetsList" << ": " <<
       std::endl;
 
     for (
@@ -700,7 +700,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationTranslatorsList.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationTranslatorsList" << " : " <<
+      "fIdentificationTranslatorsList" << ": " <<
       std::endl;
 
     for (
@@ -719,7 +719,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationSoftwaresList.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationSoftwaresList" << " : " <<
+      "fIdentificationSoftwaresList" << ": " <<
       std::endl;
 
     for (
@@ -738,7 +738,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationRightsList.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationRightsList" << " : " <<
+      "fIdentificationRightsList" << ": " <<
       std::endl;
 
     for (
@@ -757,7 +757,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationSourcesList.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationSourcesList" << " : " <<
+      "fIdentificationSourcesList" << ": " <<
       std::endl;
 
     for (
@@ -776,7 +776,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationRelationsList.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationRelationsList" << " : " <<
+      "fIdentificationRelationsList" << ": " <<
       std::endl;
 
     for (

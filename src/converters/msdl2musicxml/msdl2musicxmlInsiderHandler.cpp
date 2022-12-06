@@ -545,7 +545,7 @@ void msdl2musicxmlInsiderOahGroup::printMsdl2xmlInsiderOahGroupValues (
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass1" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass1" << ": " <<
     fQuitAfterPass1 <<
     std::endl;
 

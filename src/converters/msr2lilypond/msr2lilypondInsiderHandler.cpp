@@ -660,10 +660,10 @@ void msr2lilypondInsiderOahGroup::printMsr2lilypondInsiderOahGroupValues (int fi
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
     fQuitAfterPass2a <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << ": " <<
     fQuitAfterPass2b <<
     std::endl;
 

@@ -197,13 +197,13 @@ void bsrPagination::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "printPageNumber" << " : " << fPrintPageNumber <<
+    "printPageNumber" << ": " << fPrintPageNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "braillePageNumber" << " : " << fBraillePageNumber <<
+    "braillePageNumber" << ": " << fBraillePageNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "paginationCellsList" << " : " << fPaginationCellsList <<
+    "paginationCellsList" << ": " << fPaginationCellsList <<
     std::endl;
 
   --gIndenter;

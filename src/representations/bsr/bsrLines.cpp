@@ -468,11 +468,11 @@ std::string bsrLine::asString () const
 
   s <<
     "Line" <<
-    ", printLineNumber" << " : " << fPrintLineNumber <<
-    ", brailleLineNumber" << " : " << fBrailleLineNumber <<
-    ", cellsPerLine" << " : " << fCellsPerLine <<
+    ", printLineNumber" << ": " << fPrintLineNumber <<
+    ", brailleLineNumber" << ": " << fBrailleLineNumber <<
+    ", cellsPerLine" << ": " << fCellsPerLine <<
     ", lineContents: " << fLineContentsList.size () <<
-    ", cellsNumber" << " : " << fetchCellsNumber () <<
+    ", cellsNumber" << ": " << fetchCellsNumber () <<
     ", line " << fInputLineNumber;
 
   return s.str ();
@@ -484,11 +484,11 @@ std::string bsrLine::asDebugString () const
 
   s <<
     "L" <<
-    ", printLineNumber" << " : " << fPrintLineNumber <<
-    ", brailleLineNumber" << " : " << fBrailleLineNumber <<
-    ", cellsPerLine" << " : " << fCellsPerLine <<
+    ", printLineNumber" << ": " << fPrintLineNumber <<
+    ", brailleLineNumber" << ": " << fBrailleLineNumber <<
+    ", cellsPerLine" << ": " << fCellsPerLine <<
     ", lineContents: " << fLineContentsList.size () <<
-    ", cellsNumber" << " : " << fetchCellsNumber ();
+    ", cellsNumber" << ": " << fetchCellsNumber ();
 
   return s.str ();
 }
@@ -513,20 +513,20 @@ void bsrLine::print (std::ostream& os) const
   os << std::left <<
   /* JMI
     std::setw (fieldWidth) <<
-    "printLineNumber" << " : " << fPrintLineNumber <<
+    "printLineNumber" << ": " << fPrintLineNumber <<
     std::endl <<
     */
     std::setw (fieldWidth) <<
-    "brailleLineNumber" << " : " << fBrailleLineNumber <<
+    "brailleLineNumber" << ": " << fBrailleLineNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "cellsPerLine" << " : " << fCellsPerLine <<
+    "cellsPerLine" << ": " << fCellsPerLine <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "lineNumberCellsList" << " : " << buildLineNumberCellsList () <<
+    "lineNumberCellsList" << ": " << buildLineNumberCellsList () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "cellsNumber" << " : " << fetchCellsNumber () <<
+    "cellsNumber" << ": " << fetchCellsNumber () <<
     std::endl;
   os << std::endl;
 
@@ -556,7 +556,7 @@ void bsrLine::print (std::ostream& os) const
     }
     else {
       os <<
-        " : " << "[EMPTY]" <<
+        ": " << "[EMPTY]" <<
       std::endl;
     }
   }

@@ -924,7 +924,7 @@ S_msrNote msrNote::createNoteDeepClone (
     */
 
   S_msrNote
-    noteDeepClone =
+    deepClone =
       msrNote::create (
         fInputLineNumber,
         gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
@@ -957,50 +957,50 @@ S_msrNote msrNote::createNoteDeepClone (
   // basic note description
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteOctaveShift = // JMI
+  deepClone->fNoteOctaveShift = // JMI
     fNoteOctaveShift;
 
   // accidentals
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteAccidentalKind =
+  deepClone->fNoteAccidentalKind =
     fNoteAccidentalKind;
 
-  noteDeepClone->fNoteEditorialAccidentalKind =
+  deepClone->fNoteEditorialAccidentalKind =
     fNoteEditorialAccidentalKind;
 
-  noteDeepClone->fNoteCautionaryAccidentalKind =
+  deepClone->fNoteCautionaryAccidentalKind =
     fNoteCautionaryAccidentalKind;
 
   // chord member?
   // ------------------------------------------------------
 
-  noteDeepClone->
+  deepClone->
     fNoteBelongsToAChord =
       fNoteBelongsToAChord;
 
   // tuplet member?
   // ------------------------------------------------------
 
-  noteDeepClone->
+  deepClone->
     fNoteBelongsToATuplet =
       fNoteBelongsToATuplet;
 
   // note measure information
   // ------------------------------------------------------
 
-  noteDeepClone->
+  deepClone->
     fNoteOccupiesAFullMeasure =
       fNoteOccupiesAFullMeasure;
 
   // multiple rest member?
   // ------------------------------------------------------
 
-  noteDeepClone->
+  deepClone->
     fNoteBelongsToAMultipleFullBarRests =
       fNoteBelongsToAMultipleFullBarRests;
 
-  noteDeepClone->
+  deepClone->
     fNoteMultipleFullBarRestsSequenceNumber =
       fNoteMultipleFullBarRestsSequenceNumber;
 
@@ -1012,7 +1012,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrSyllable>::const_iterator i;
     for (i=fNoteSyllables.begin (); i!=fNoteSyllables.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteSyllables.push_back ((*i));
     } // for
   }
@@ -1021,7 +1021,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // stem
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteStem = // JMI
+  deepClone->fNoteStem = // JMI
     // share this data
     fNoteStem;
 
@@ -1032,7 +1032,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrBeam>::const_iterator i;
     for (i=fNoteBeams.begin (); i!=fNoteBeams.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteBeams.push_back ((*i));
     } // for
   }
@@ -1047,7 +1047,7 @@ S_msrNote msrNote::createNoteDeepClone (
       ++i
   ) {
     // share this data
-    noteDeepClone->
+    deepClone->
       fNoteArticulations.push_back ((*i));
   } // for
 
@@ -1061,7 +1061,7 @@ S_msrNote msrNote::createNoteDeepClone (
       ++i
   ) {
     // share this data
-    noteDeepClone->
+    deepClone->
       fNoteSpanners.push_back ((*i));
   } // for
 
@@ -1076,7 +1076,7 @@ S_msrNote msrNote::createNoteDeepClone (
       ++i
   ) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteTechnicals.push_back ((*i));
     } // for
   }
@@ -1089,7 +1089,7 @@ S_msrNote msrNote::createNoteDeepClone (
       ++i
   ) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteTechnicalWithIntegers.push_back ((*i));
     } // for
   }
@@ -1102,7 +1102,7 @@ S_msrNote msrNote::createNoteDeepClone (
       ++i
   ) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteTechnicalWithStrings.push_back ((*i));
     } // for
   }
@@ -1114,7 +1114,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrOrnament>::const_iterator i;
     for (i=fNoteOrnaments.begin (); i!=fNoteOrnaments.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteOrnaments.push_back ((*i));
     } // for
   }
@@ -1126,7 +1126,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrGlissando>::const_iterator i;
     for (i=fNoteGlissandos.begin (); i!=fNoteGlissandos.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteGlissandos.push_back ((*i));
     } // for
   }
@@ -1138,7 +1138,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrSlide>::const_iterator i;
     for (i=fNoteSlides.begin (); i!=fNoteSlides.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteSlides.push_back ((*i));
     } // for
   }
@@ -1146,29 +1146,29 @@ S_msrNote msrNote::createNoteDeepClone (
   // grace notes
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteGraceNotesGroupBefore =
+  deepClone->fNoteGraceNotesGroupBefore =
     fNoteGraceNotesGroupBefore;
-  noteDeepClone->fNoteGraceNotesGroupAfter =
+  deepClone->fNoteGraceNotesGroupAfter =
     fNoteGraceNotesGroupAfter;
 
 /* JMI
   // after grace notes
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteAfterGraceNotesGroup =
+  deepClone->fNoteAfterGraceNotesGroup =
     fNoteAfterGraceNotesGroup;
 */
 
   // single tremolo
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteSingleTremolo =
+  deepClone->fNoteSingleTremolo =
     fNoteSingleTremolo;
 
   // tie
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteTie = // JMI
+  deepClone->fNoteTie = // JMI
     // share this data
     fNoteTie;
 
@@ -1179,7 +1179,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrDynamic>::const_iterator i;
     for (i=fNoteDynamics.begin (); i!=fNoteDynamics.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteDynamics.push_back ((*i));
     } // for
   }
@@ -1188,7 +1188,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrOtherDynamic>::const_iterator i;
     for (i=fNoteOtherDynamics.begin (); i!=fNoteOtherDynamics.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteOtherDynamics.push_back ((*i));
     } // for
   }
@@ -1200,7 +1200,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrSlash>::const_iterator i;
     for (i=fNoteSlashes.begin (); i!=fNoteSlashes.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteSlashes.push_back ((*i));
     } // for
   }
@@ -1211,7 +1211,7 @@ S_msrNote msrNote::createNoteDeepClone (
   {
     for (S_msrCrescDecresc crescDecresc : fNoteCrescDecrescs) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteCrescDecrescs.push_back (crescDecresc);
     } // for
   }
@@ -1223,7 +1223,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrWedge>::const_iterator i;
     for (i=fNoteWedges.begin (); i!=fNoteWedges.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteWedges.push_back ((*i));
     } // for
   }
@@ -1235,7 +1235,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrEyeGlasses>::const_iterator i;
     for (i=fNoteEyeGlasses.begin (); i!=fNoteEyeGlasses.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteEyeGlasses.push_back ((*i));
     } // for
   }
@@ -1247,7 +1247,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrDamp>::const_iterator i;
     for (i=fNoteDamps.begin (); i!=fNoteDamps.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteDamps.push_back ((*i));
     } // for
   }
@@ -1259,7 +1259,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrDampAll>::const_iterator i;
     for (i=fNoteDampAlls.begin (); i!=fNoteDampAlls.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteDampAlls.push_back ((*i));
     } // for
   }
@@ -1271,7 +1271,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrScordatura>::const_iterator i;
     for (i=fNoteScordaturas.begin (); i!=fNoteScordaturas.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteScordaturas.push_back ((*i));
     } // for
   }
@@ -1283,7 +1283,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrWords>::const_iterator i;
     for (i=fNoteWords.begin (); i!=fNoteWords.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteWords.push_back ((*i));
     } // for
   }
@@ -1295,7 +1295,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrSlur>::const_iterator i;
     for (i=fNoteSlurs.begin (); i!=fNoteSlurs.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteSlurs.push_back ((*i));
     } // for
   }
@@ -1307,7 +1307,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrLigature>::const_iterator i;
     for (i=fNoteLigatures.begin (); i!=fNoteLigatures.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNoteLigatures.push_back ((*i));
     } // for
   }
@@ -1319,7 +1319,7 @@ S_msrNote msrNote::createNoteDeepClone (
     std::list<S_msrPedal>::const_iterator i;
     for (i=fNotePedals.begin (); i!=fNotePedals.end (); ++i) {
       // share this data
-      noteDeepClone->
+      deepClone->
         fNotePedals.push_back ((*i));
     } // for
   }
@@ -1327,81 +1327,81 @@ S_msrNote msrNote::createNoteDeepClone (
   // harmonies
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteHarmoniesList = // JMI ???
+  deepClone->fNoteHarmoniesList = // JMI ???
     fNoteHarmoniesList;
 
   // figured bass elements
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteFiguredBassesList = // JMI ???
+  deepClone->fNoteFiguredBassesList = // JMI ???
     fNoteFiguredBassesList;
 
   // note measure information
   // ------------------------------------------------------
 
-  noteDeepClone->
+  deepClone->
     fNoteUpLinkToMeasure->getMeasureNumber () =
       fNoteUpLinkToMeasure->getMeasureNumber ();
-  noteDeepClone->
+  deepClone->
     fMeasureElementMeasurePosition =
       fMeasureElementMeasurePosition;
-  noteDeepClone->
+  deepClone->
     fMeasureElementVoicePosition =
       fMeasureElementVoicePosition;
 
-  noteDeepClone->
+  deepClone->
     fNoteOccupiesAFullMeasure =
       fNoteOccupiesAFullMeasure;
 
   // note redundant information (for speed)
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteIsStemless =
+  deepClone->fNoteIsStemless =
     fNoteIsStemless;
 
-  noteDeepClone->fNoteIsAChordsFirstMemberNote =
+  deepClone->fNoteIsAChordsFirstMemberNote =
     fNoteIsAChordsFirstMemberNote;
 
-  noteDeepClone->fNoteIsFirstNoteInADoubleTremolo =
+  deepClone->fNoteIsFirstNoteInADoubleTremolo =
     fNoteIsFirstNoteInADoubleTremolo;
-  noteDeepClone->fNoteIsSecondNoteInADoubleTremolo =
+  deepClone->fNoteIsSecondNoteInADoubleTremolo =
     fNoteIsSecondNoteInADoubleTremolo;
 
-  noteDeepClone->fNoteTrillOrnament =
+  deepClone->fNoteTrillOrnament =
     fNoteTrillOrnament;
-  noteDeepClone->fNoteIsFollowedByGraceNotesGroup =
+  deepClone->fNoteIsFollowedByGraceNotesGroup =
     fNoteIsFollowedByGraceNotesGroup;
 
-  noteDeepClone->fNoteDashesOrnament =
+  deepClone->fNoteDashesOrnament =
     fNoteDashesOrnament;
 
-  noteDeepClone->fNoteWavyLineSpannerStart =
+  deepClone->fNoteWavyLineSpannerStart =
     fNoteWavyLineSpannerStart;
-  noteDeepClone->fNoteWavyLineSpannerStop =
+  deepClone->fNoteWavyLineSpannerStop =
     fNoteWavyLineSpannerStop;
 
-  noteDeepClone->fNoteDelayedTurnOrnament =
+  deepClone->fNoteDelayedTurnOrnament =
     fNoteDelayedTurnOrnament;
-  noteDeepClone->fNoteDelayedInvertedTurnOrnament =
+  deepClone->fNoteDelayedInvertedTurnOrnament =
     fNoteDelayedInvertedTurnOrnament;
 
   // note color
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteColorAlphaRGB =
+  deepClone->fNoteColorAlphaRGB =
     fNoteColorAlphaRGB;
-  noteDeepClone->fNoteColorAlphaRGBHasBenSet =
+  deepClone->fNoteColorAlphaRGBHasBenSet =
     fNoteColorAlphaRGBHasBenSet;
 
   // solo note or rest?
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteSoloNoteOrRestInVoiceKind =
+  deepClone->fNoteSoloNoteOrRestInVoiceKind =
     fNoteSoloNoteOrRestInVoiceKind;
-  noteDeepClone->fNoteSoloNoteOrRestInStaffKind =
+  deepClone->fNoteSoloNoteOrRestInStaffKind =
     fNoteSoloNoteOrRestInStaffKind;
 
-  return noteDeepClone;
+  return deepClone;
 }
 
 S_msrNote msrNote::createRestNote (
@@ -3201,7 +3201,7 @@ void msrNote::appendHarmonyToNoteHarmoniesList (
     gLogStream <<
       "Appending harmony " <<
       harmony->asString () <<
-      " to the harmonies std::list of " <<
+      " to the harmonies list of " <<
       asString () <<
       ", line " << fInputLineNumber <<
       std::endl;
@@ -3216,6 +3216,10 @@ void msrNote::appendHarmonyToNoteHarmoniesList (
       "appendHarmonyToNoteHarmoniesList()");
 
   fNoteHarmoniesList.push_back (harmony);
+
+//   // register this note as the harmony upLink // JMI v0.9.66 JMI v0.9.66 JMI v0.9.66 MERDUM
+//   harmony->
+//     setHarmonyUpLinkToNote (this);
 }
 
 void msrNote::appendFiguredBassToNoteFiguredBassesList (
@@ -3226,20 +3230,25 @@ void msrNote::appendFiguredBassToNoteFiguredBassesList (
     gLogStream <<
       "Append figured bass " <<
       figuredBass->asString () <<
-      " to the figured bass elements list of " <<
+      " to the figured bass list of " <<
       asString () <<
       ", line " << fInputLineNumber <<
       std::endl;
   }
 #endif
 
-  // update the figured bass whole notes if it belongs to a tuplet ??? utf8.xml
+  // set the figured bass's whole notes duration
+  // change the figured bass whole notes if it belongs to a tuplet ??? utf8.xml JMI v0.9.66
+  figuredBass->
+    setMeasureElementSoundingWholeNotes (
+      fMeasureElementSoundingWholeNotes,
+      "appendFiguredBassToNoteFiguredBassesList()");
 
   fNoteFiguredBassesList.push_back (figuredBass);
 
-  // register this note as the figuredBass upLink
-  figuredBass->
-    setFiguredBassUpLinkToNote (this);
+//   // register this note as the figured bass upLink // JMI v0.9.66 JMI v0.9.66 JMI v0.9.66 MERDUM
+//   figuredBass->
+//     setFiguredBassUpLinkToNote (this);
 }
 
 void msrNote::acceptIn (basevisitor* v)
@@ -4640,7 +4649,7 @@ std::string msrNote::soundingNoteEssentialsAsString () const
   std::stringstream s;
 
   s <<
-    "[sounding " <<
+    "sounding " <<
     notePitchAsString () <<
     noteSoundingWholeNotesAsMsrString ();
 
@@ -4652,8 +4661,7 @@ std::string msrNote::soundingNoteEssentialsAsString () const
     ' ' <<
     fNoteOctaveKind <<
 //     ",++++ " << // JMI KAKA
-    noteComplementsAsString () <<
-    ']';
+    noteComplementsAsString ();
 
   return s.str ();
 }
@@ -4791,25 +4799,25 @@ std::string msrNote::asString () const
 
     case msrNoteKind::kNoteRegularInMeasure:
       s <<
-        "kNoteRegularInMeasure " <<
+        "kNoteRegularInMeasure: " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       s <<
-        "kNoteInDoubleTremolo " <<
+        "kNoteInDoubleTremolo: " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       s <<
-        "kNoteRegularInGraceNotesGroup " <<
+        "kNoteRegularInGraceNotesGroup: " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       s <<
-        "kNoteSkipInGraceNotesGroup " <<
+        "kNoteSkipInGraceNotesGroup: " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
@@ -4822,13 +4830,13 @@ std::string msrNote::asString () const
 
     case msrNoteKind::kNoteRegularInChord:
       s <<
-        "kNoteRegularInChord " <<
+        "kNoteRegularInChord: " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       s <<
-        "kNoteRegularInTuplet " <<
+        "kNoteRegularInTuplet: " <<
         soundingNoteEssentialsAsString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -4842,7 +4850,7 @@ std::string msrNote::asString () const
 
     case msrNoteKind::kNoteRestInTuplet:
       s <<
-        "kNoteRestInTuplet " <<
+        "kNoteRestInTuplet: " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
@@ -4865,7 +4873,7 @@ std::string msrNote::asString () const
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       s <<
-        "kNoteUnpitchedInTuplet " <<
+        "kNoteUnpitchedInTuplet: " <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -4879,8 +4887,6 @@ std::string msrNote::asString () const
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
       break;
   } // switch
-  s << ", ";
-
 
 /* JMI
   s << std::left <<
@@ -4958,8 +4964,8 @@ std::string msrNote::asShortStringForMeasuresSlices () const
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
-//       s <<
-//         "kNoteRestInMeasure, "; JMI
+      s <<
+        "kNoteRestInMeasure: ";
 
       if (fNoteOccupiesAFullMeasure) {
         s <<
@@ -4989,50 +4995,50 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       s <<
-        "unpitched " <<
+        "unpitched :" <<
         nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
       s <<
-// JMI        "kNoteRegularInMeasure " <<
+       "kNoteRegularInMeasure: " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       s <<
-        "kNoteInDoubleTremolo " <<
+        "kNoteInDoubleTremolo: " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       s <<
-        "kNoteRegularInGraceNotesGroup " <<
+        "kNoteRegularInGraceNotesGroup: " <<
         nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       s <<
-        "kNoteSkipInGraceNotesGroup " <<
+        "kNoteSkipInGraceNotesGroup :" <<
         nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       s <<
-        "kNoteInChordInGraceNotesGroup " <<
+        "kNoteInChordInGraceNotesGroup: " <<
         soundingNoteEssentialsAsStringForMeasuresSlices () <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       s <<
-// JMI        "kNoteRegularInChord " <<
+       "kNoteRegularInChord: " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       s <<
-        "kNoteRegularInTuplet " <<
+        "kNoteRegularInTuplet: " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5046,13 +5052,13 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
     case msrNoteKind::kNoteRestInTuplet:
       s <<
-        "kNoteRestInTuplet " <<
+        "kNoteRestInTuplet: " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       s <<
-        "kNoteInTupletInGraceNotesGroup " <<
+        "kNoteInTupletInGraceNotesGroup: " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5064,12 +5070,12 @@ std::string msrNote::asShortStringForMeasuresSlices () const
             */
 
       s <<
-        ", noteTupletFactor " << fNoteTupletFactor.asString ();
+        ", noteTupletFactor: " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       s <<
-        "kNoteUnpitchedInTuplet " <<
+        "kNoteUnpitchedInTuplet: " <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5080,7 +5086,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
             fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
       s <<
-        ", noteTupletFactor " << fNoteTupletFactor.asString ();
+        ", noteTupletFactor: " << fNoteTupletFactor.asString ();
       break;
   } // switch
 
@@ -5271,13 +5277,13 @@ void msrNote::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteIsACueNoteKind" << " : " <<
+    "fNoteIsACueNoteKind" << ": " <<
     fNoteIsACueNoteKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteOctaveShift" << " : ";
+    "fNoteOctaveShift" << ": ";
   if (fNoteOctaveShift) {
     os << std::endl;
     ++gIndenter;
@@ -5293,103 +5299,103 @@ void msrNote::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNotePrintObjectKind" << " : " <<
+    "fNotePrintObjectKind" << ": " <<
     fNotePrintObjectKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteHeadKind" << " : " <<
+    "fNoteHeadKind" << ": " <<
     fNoteHeadKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteHeadFilledKind" << " : " <<
+    "fNoteHeadFilledKind" << ": " <<
     fNoteHeadFilledKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteHeadParenthesesKind" << " : " <<
+    "fNoteHeadParenthesesKind" << ": " <<
     fNoteHeadParenthesesKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteAccidentalKind" << " : " <<
+    "fNoteAccidentalKind" << ": " <<
     fNoteAccidentalKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteEditorialAccidentalKind" << " : " <<
+    "fNoteEditorialAccidentalKind" << ": " <<
     fNoteEditorialAccidentalKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteCautionaryAccidentalKind" << " : " <<
+    "fNoteCautionaryAccidentalKind" << ": " <<
     fNoteCautionaryAccidentalKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToAChord" << " : " <<
+    "fNoteBelongsToAChord" << ": " <<
     fNoteBelongsToAChord <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToATuplet" << " : " <<
+    "fNoteBelongsToATuplet" << ": " <<
     fNoteBelongsToATuplet <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteOccupiesAFullMeasure" << " : " <<
+    "fNoteOccupiesAFullMeasure" << ": " <<
     fNoteOccupiesAFullMeasure <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToAMultipleFullBarRests" << " : " <<
+    "fNoteBelongsToAMultipleFullBarRests" << ": " <<
     fNoteBelongsToAMultipleFullBarRests <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteMultipleFullBarRestsSequenceNumber" << " : " <<
+    "fNoteMultipleFullBarRestsSequenceNumber" << ": " <<
     fNoteMultipleFullBarRestsSequenceNumber <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteIsStemless" << " : " <<
+    "fNoteIsStemless" << ": " <<
     fNoteIsStemless <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteIsAChordsFirstMemberNote" << " : " <<
+    "fNoteIsAChordsFirstMemberNote" << ": " <<
     fNoteIsAChordsFirstMemberNote <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteIsFirstNoteInADoubleTremolo" << " : " <<
+    "fNoteIsFirstNoteInADoubleTremolo" << ": " <<
     fNoteIsFirstNoteInADoubleTremolo <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteIsSecondNoteInADoubleTremolo" << " : " <<
+    "fNoteIsSecondNoteInADoubleTremolo" << ": " <<
     fNoteIsSecondNoteInADoubleTremolo <<
     std::endl;
 
   os <<
     std::setw (fieldWidth) <<
-    "fNoteTrillOrnament" << " : ";
+    "fNoteTrillOrnament" << ": ";
   if (fNoteTrillOrnament) {
     os << std::endl;
     ++gIndenter;
@@ -5405,37 +5411,37 @@ void msrNote::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteIsFollowedByGraceNotesGroup" << " : " <<
+    "fNoteIsFollowedByGraceNotesGroup" << ": " <<
     fNoteIsFollowedByGraceNotesGroup <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteColorAlphaRGB" << " : " <<
+    "fNoteColorAlphaRGB" << ": " <<
     fNoteColorAlphaRGB <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteColorAlphaRGBHasBenSet" << " : " <<
+    "fNoteColorAlphaRGBHasBenSet" << ": " <<
     fNoteColorAlphaRGBHasBenSet <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteSoloNoteOrRestInVoiceKind" << " : " <<
+    "fNoteSoloNoteOrRestInVoiceKind" << ": " <<
     fNoteSoloNoteOrRestInVoiceKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteSoloNoteOrRestInStaffKind" << " : " <<
+    "fNoteSoloNoteOrRestInStaffKind" << ": " <<
     fNoteSoloNoteOrRestInStaffKind <<
     std::endl;
 
   os <<
     std::setw (fieldWidth) <<
-    "fNoteIsACueNoteKind" << " : " <<
+    "fNoteIsACueNoteKind" << ": " <<
     fNoteIsACueNoteKind <<
     std::endl;
 
@@ -5444,7 +5450,7 @@ void msrNote::print (std::ostream& os) const
   // print measure number
   os << std::left <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << " : ";
+    "measureElementMeasureNumber" << ": ";
   if (fNoteUpLinkToMeasure->getMeasureNumber () == K_NO_MEASURE_NUMBER) {
     os <<
       "unknown";
@@ -5472,18 +5478,18 @@ void msrNote::print (std::ostream& os) const
   // print measure position
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << " : " <<
+    "fMeasureElementMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition <<
     std::endl;
 
   // print position from beginning of voice
 //   os << std::left <<
 //     std::setw (fieldWidth) <<
-//     "fMeasureElementVoicePosition" << " : " <<
+//     "fMeasureElementVoicePosition" << ": " <<
 //     fMeasureElementVoicePosition <<
 //     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "fMeasureElementVoiceMoment" << " : " <<
+//     "fMeasureElementVoiceMoment" << ": " <<
 //     std::endl;
 //   ++gIndenter;
 //   os <<
@@ -5493,7 +5499,7 @@ void msrNote::print (std::ostream& os) const
   // print note uplink to measure
   os <<
     std::setw (fieldWidth) <<
-    "fNoteUpLinkToMeasure" << " : ";
+    "fNoteUpLinkToMeasure" << ": ";
 
   if (fNoteUpLinkToMeasure) {
     os << std::endl;
@@ -5515,7 +5521,7 @@ void msrNote::print (std::ostream& os) const
   // print note uplink to chord
   os <<
     std::setw (fieldWidth) <<
-    "fNoteDirectUpLinkToChord" << " : ";
+    "fNoteDirectUpLinkToChord" << ": ";
 
   if (fNoteDirectUpLinkToChord) {
     os <<
@@ -5523,7 +5529,7 @@ void msrNote::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]";
+      ": " << "[NONE]";
   }
   os << std::endl;
 
@@ -5548,7 +5554,7 @@ void msrNote::print (std::ostream& os) const
   // print note uplink to tuplet
   os <<
     std::setw (fieldWidth) <<
-    "fNoteDirectUpLinkToTuplet" << " : ";
+    "fNoteDirectUpLinkToTuplet" << ": ";
 
   if (fNoteDirectUpLinkToTuplet) {
     os <<
@@ -5556,7 +5562,7 @@ void msrNote::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]";
+      ": " << "[NONE]";
   }
   os << std::endl;
 
@@ -5572,11 +5578,11 @@ void msrNote::print (std::ostream& os) const
     case msrNoteKind::kNoteRegularInChord:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << " : " <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
         fMeasureElementSoundingWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << " : " <<
+        "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl;
       break;
@@ -5585,7 +5591,7 @@ void msrNote::print (std::ostream& os) const
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       os <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << " : " <<
+        "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl;
       break;
@@ -5596,15 +5602,15 @@ void msrNote::print (std::ostream& os) const
     case msrNoteKind::kNoteUnpitchedInTuplet:
       os <<
         std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << " : " <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
         fMeasureElementSoundingWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << " : " <<
+        "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "tupletSoundingWholeNotes" << " : ";
+        "tupletSoundingWholeNotes" << ": ";
 
         if (fNoteDirectUpLinkToTuplet) {
           os <<
@@ -5621,7 +5627,7 @@ void msrNote::print (std::ostream& os) const
 
       os <<
         std::setw (fieldWidth) <<
-        "fNoteTupletFactor" << " : " <<
+        "fNoteTupletFactor" << ": " <<
         std::endl;
 
       ++gIndenter;
@@ -5643,7 +5649,7 @@ void msrNote::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "measureFullLength" << " : ";
+    "measureFullLength" << ": ";
   if (measureFullLength.getNumerator () == 0) {
     os <<
       "unknown, there's no time signature";
@@ -5657,32 +5663,32 @@ void msrNote::print (std::ostream& os) const
   // chord member?
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToAChord" << " : " <<
+    "fNoteBelongsToAChord" << ": " <<
     fNoteBelongsToAChord <<
     std::endl;
 
   // tuplet member?
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToATuplet" << " : " <<
+    "fNoteBelongsToATuplet" << ": " <<
     fNoteBelongsToATuplet <<
     std::endl;
 
   // note occupied a full measure?
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteOccupiesAFullMeasure" << " : " <<
+    "fNoteOccupiesAFullMeasure" << ": " <<
     fNoteOccupiesAFullMeasure <<
     std::endl;
 
   // multiple rest member?
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToAMultipleFullBarRests" << " : " <<
+    "fNoteBelongsToAMultipleFullBarRests" << ": " <<
     fNoteBelongsToAMultipleFullBarRests <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteMultipleFullBarRestsSequenceNumber" << " : " <<
+    "fNoteMultipleFullBarRestsSequenceNumber" << ": " <<
     fNoteMultipleFullBarRestsSequenceNumber <<
     std::endl;
 
@@ -5701,7 +5707,7 @@ void msrNote::print (std::ostream& os) const
       --gIndenter;
     }
     else {
-      os << " : " <<
+      os << ": " <<
         "[NONE]" <<
         std::endl;
     }
@@ -5710,46 +5716,46 @@ void msrNote::print (std::ostream& os) const
   // note head
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteHeadKind" << " : " <<
+    "fNoteHeadKind" << ": " <<
     fNoteHeadKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteHeadFilledKind" << " : " <<
+    "fNoteHeadFilledKind" << ": " <<
     fNoteHeadFilledKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteHeadParenthesesKind" << " : " <<
+    "fNoteHeadParenthesesKind" << ": " <<
     fNoteHeadParenthesesKind <<
     std::endl;
 
   // accidentals
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteAccidentalKind" << " : " <<
+    "fNoteAccidentalKind" << ": " <<
     fNoteAccidentalKind <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteEditorialAccidentalKind" << " : " <<
+    "fNoteEditorialAccidentalKind" << ": " <<
     fNoteEditorialAccidentalKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteCautionaryAccidentalKind" << " : " <<
+    "fNoteCautionaryAccidentalKind" << ": " <<
     fNoteCautionaryAccidentalKind <<
     std::endl;
 
   // cue note???
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteIsACueNoteKind" << " : " <<
+    "fNoteIsACueNoteKind" << ": " <<
     fNoteIsACueNoteKind <<
     std::endl;
 
   // short cuts for efficiency
   os << std::left <<
     std::setw (fieldWidth) <<
-    "noteIsAGraceNote" << " : " <<
+    "noteIsAGraceNote" << ": " <<
     getNoteIsAGraceNote () <<
     std::endl;
 
@@ -5761,7 +5767,7 @@ void msrNote::print (std::ostream& os) const
     os <<
       std::setw (fieldWidth) <<
       "fNoteIsStemless" <<
-      " : " <<
+      ": " <<
       fNoteIsStemless <<
       std::endl;
 // JMI  }
@@ -5770,7 +5776,7 @@ void msrNote::print (std::ostream& os) const
     os <<
       std::setw (fieldWidth) <<
       "fNoteIsAChordsFirstMemberNote" <<
-      " : " <<
+      ": " <<
       fNoteIsAChordsFirstMemberNote <<
       std::endl;
  // JMI }
@@ -5779,7 +5785,7 @@ void msrNote::print (std::ostream& os) const
     os <<
       std::setw (fieldWidth) <<
       "fNoteIsFirstNoteInADoubleTremolo" <<
-      " : " <<
+      ": " <<
       fNoteIsFirstNoteInADoubleTremolo <<
       std::endl;
 // JMI  }
@@ -5787,14 +5793,14 @@ void msrNote::print (std::ostream& os) const
     os <<
       std::setw (fieldWidth) <<
       "fNoteIsSecondNoteInADoubleTremolo" <<
-      " : " <<
+      ": " <<
       fNoteIsSecondNoteInADoubleTremolo <<
       std::endl;
 // JMI  }
 
   os <<
     std::setw (fieldWidth) <<
-    "fNoteDashesOrnament" << " : ";
+    "fNoteDashesOrnament" << ": ";
   if (fNoteDashesOrnament) {
     os << std::endl;
     ++gIndenter;
@@ -5810,7 +5816,7 @@ void msrNote::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fNoteDelayedTurnOrnament" << " : ";
+    "fNoteDelayedTurnOrnament" << ": ";
   if (fNoteDelayedTurnOrnament) {
     os << std::endl;
     ++gIndenter;
@@ -5826,7 +5832,7 @@ void msrNote::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fNoteDelayedInvertedTurnOrnament" << " : ";
+    "fNoteDelayedInvertedTurnOrnament" << ": ";
   if (fNoteDelayedInvertedTurnOrnament) {
     os << std::endl;
     ++gIndenter;
@@ -5842,7 +5848,7 @@ void msrNote::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fNoteWavyLineSpannerStart" << " : ";
+    "fNoteWavyLineSpannerStart" << ": ";
   if (fNoteWavyLineSpannerStart) {
     os << std::endl;
     ++gIndenter;
@@ -5858,7 +5864,7 @@ void msrNote::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fNoteWavyLineSpannerStop" << " : ";
+    "fNoteWavyLineSpannerStop" << ": ";
   if (fNoteWavyLineSpannerStop) {
     os << std::endl;
     ++gIndenter;
@@ -5876,7 +5882,7 @@ void msrNote::print (std::ostream& os) const
     os <<
       std::setw (fieldWidth) <<
       "fNoteIsFollowedByGraceNotesGroup" <<
-      " : " <<
+      ": " <<
       fNoteIsFollowedByGraceNotesGroup <<
       std::endl;
   }
@@ -5963,11 +5969,11 @@ void msrNote::print (std::ostream& os) const
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << " : " <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
         fMeasureElementSoundingWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << " : " <<
+        "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
@@ -5993,7 +5999,7 @@ void msrNote::print (std::ostream& os) const
         "\"" <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "noteTupletNoteSoundingWholeNotesAsMsrString" << " : ";
+        "noteTupletNoteSoundingWholeNotesAsMsrString" << ": ";
           */
 
       if (fNoteDirectUpLinkToTuplet) {
@@ -6013,7 +6019,7 @@ void msrNote::print (std::ostream& os) const
 
       os <<
         std::setw (fieldWidth) <<
-        "fPositionInTuplet" << " : " <<
+        "fPositionInTuplet" << ": " <<
         fPositionInTuplet <<
         std::endl;
 
@@ -6029,7 +6035,7 @@ void msrNote::print (std::ostream& os) const
   // print the octave shift if any
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteOctaveShift" << " : ";
+    "fNoteOctaveShift" << ": ";
   if (fNoteOctaveShift) {
     os << std::endl;
     ++gIndenter;
@@ -6044,7 +6050,7 @@ void msrNote::print (std::ostream& os) const
   // print the stem if any
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteStem" << " : ";
+    "fNoteStem" << ": ";
   if (fNoteStem) {
     os << std::endl;
     ++gIndenter;
@@ -6061,29 +6067,29 @@ void msrNote::print (std::ostream& os) const
   // print the note color
   os <<
     std::setw (fieldWidth) <<
-    "fNoteColorAlphaRGB" << " : " <<
+    "fNoteColorAlphaRGB" << ": " <<
     fNoteColorAlphaRGB.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteColorAlphaRGBHasBenSet" << " : " <<
+    "fNoteColorAlphaRGBHasBenSet" << ": " <<
     fNoteColorAlphaRGBHasBenSet <<
     std::endl;
 
   // solo note or rest?
   os <<
     std::setw (fieldWidth) <<
-    "fNoteSoloNoteOrRestInVoiceKind" << " : " <<
+    "fNoteSoloNoteOrRestInVoiceKind" << ": " <<
     fNoteSoloNoteOrRestInVoiceKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteSoloNoteOrRestInStaffKind" << " : " <<
+    "fNoteSoloNoteOrRestInStaffKind" << ": " <<
     fNoteSoloNoteOrRestInStaffKind <<
     std::endl;
 
   // print the tie if any
   os <<
     std::setw (fieldWidth) <<
-    "fNoteTie" << " : ";
+    "fNoteTie" << ": ";
   if (fNoteTie) {
     os << std::endl;
     ++gIndenter;
@@ -6119,7 +6125,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6146,7 +6152,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6173,7 +6179,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6200,7 +6206,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6227,7 +6233,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6254,7 +6260,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6281,7 +6287,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6308,7 +6314,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6335,7 +6341,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6362,7 +6368,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6381,7 +6387,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6408,7 +6414,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6435,7 +6441,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6461,7 +6467,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6488,7 +6494,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6515,7 +6521,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6542,7 +6548,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6569,7 +6575,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6596,7 +6602,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6623,7 +6629,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6650,7 +6656,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6677,7 +6683,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6704,7 +6710,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6731,7 +6737,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6758,7 +6764,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6785,7 +6791,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6812,7 +6818,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6843,7 +6849,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6874,7 +6880,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6902,7 +6908,7 @@ void msrNote::print (std::ostream& os) const
       os <<
         syllable->getSyllableKind () <<
           syllable->getSyllableExtendKind () <<
-        " : ";
+        ": ";
 
       msrSyllable::writeTextsList (
         syllable->getSyllableTextsList (),
@@ -6927,7 +6933,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6946,7 +6952,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " <<
+    os << ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -6971,14 +6977,14 @@ void msrNote::printShort (std::ostream& os) const
   // print measure position
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << " : " <<
+    "fMeasureElementMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition <<
     std::endl;
 
   // print position from beginning of voice
 //   os << std::left <<
 //     std::setw (fieldWidth) <<
-//     "fMeasureElementVoicePosition" << " : " <<
+//     "fMeasureElementVoicePosition" << ": " <<
 //     fMeasureElementVoicePosition <<
 //     std::endl;
 
@@ -6993,11 +6999,11 @@ void msrNote::printShort (std::ostream& os) const
     case msrNoteKind::kNoteRegularInChord:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << " : " <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
         fMeasureElementSoundingWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << " : " <<
+        "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl;
       break;
@@ -7006,7 +7012,7 @@ void msrNote::printShort (std::ostream& os) const
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       os <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << " : " <<
+        "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl;
       break;
@@ -7014,11 +7020,11 @@ void msrNote::printShort (std::ostream& os) const
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << " : " <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
         fMeasureElementSoundingWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << " : " <<
+        "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
@@ -7034,15 +7040,15 @@ void msrNote::printShort (std::ostream& os) const
     case msrNoteKind::kNoteUnpitchedInTuplet:
       os <<
         std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << " : " <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
         fMeasureElementSoundingWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fNoteDisplayWholeNotes" << " : " <<
+        "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "tupletSoundingWholeNotes" << " : ";
+        "tupletSoundingWholeNotes" << ": ";
 
         if (fNoteDirectUpLinkToTuplet) {
           os <<
@@ -7059,7 +7065,7 @@ void msrNote::printShort (std::ostream& os) const
 
       os <<
         std::setw (fieldWidth) <<
-        "fNoteTupletFactor" << " : " <<
+        "fNoteTupletFactor" << ": " <<
         std::endl;
 
       ++gIndenter;

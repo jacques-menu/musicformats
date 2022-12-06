@@ -2683,15 +2683,15 @@ void msrHarmonyInterval::print (std::ostream& os) const
   os << std::left <<
   /* JMI
     std::setw (fieldWidth) <<
-    "harmonyIntervalNumber" << " : " << fHarmonyIntervalNumber <<
+    "harmonyIntervalNumber" << ": " << fHarmonyIntervalNumber <<
     std::endl <<
     */
     std::setw (fieldWidth) <<
-    "harmonyIntervalIntervalKind" << " : " <<
+    "harmonyIntervalIntervalKind" << ": " <<
       msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "harmonyIntervalRelativeOctave" << " : " << fHarmonyIntervalRelativeOctave <<
+    "harmonyIntervalRelativeOctave" << ": " << fHarmonyIntervalRelativeOctave <<
   /* JMI
     ", line: " << fInputLineNumber <<
     */
@@ -2793,7 +2793,7 @@ msrModeKind modeKindFromString (
       "mode std::string \"" <<
       modeString <<
       "\" is unknown" <<
-      ", line = " << inputLineNumber;
+      ", line: " << inputLineNumber;
 
     msrError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3899,7 +3899,7 @@ std::string msrHarmonyContents::harmonyContentsAsString () const
   s <<
     "HarmonyContents" <<
     ", " <<
-    msrHarmonyKindAsString (fHarmonyContentsHarmonyKind) <<
+    fHarmonyContentsHarmonyKind <<
     ", " <<
     mfSingularOrPlural (
       fHarmonyElementsVector.size (), "harmony element", "harmony elements");
@@ -3926,7 +3926,7 @@ msrSemiTonesPitchKind msrHarmonyContents::bassSemiTonesPitchKindForHarmonyInvers
       "Sorry, inversion number '" <<
       inversionNumber <<
       "' does not exist for harmony notes '" <<
-      msrHarmonyKindAsString (fHarmonyContentsHarmonyKind) <<
+      fHarmonyContentsHarmonyKind <<
       "', line " << inputLineNumber;
 
     msrInternalError (
@@ -3959,8 +3959,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
         getLpsrQuarterTonesPitchesLanguageKind ()) <<
       /* JMI
     "' (" <<
-    msrSemiTonesPitchKindAsString (
-      rootSemiTonesPitchKind) <<
+    rootSemiTonesPitchKind <<
     ")" <<
     */
     "' in language '" <<
@@ -4032,7 +4031,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
             noteQuarterTonesPitchKind,
             gGlobalLpsrOahGroup->
               getLpsrQuarterTonesPitchesLanguageKind ()) <<
-          " : " <<
+          ": " <<
           msrIntervalKindAsString (intervalKind) <<
           std::endl;
 
@@ -4110,12 +4109,12 @@ void msrHarmonyContents::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "harmonyContentsRootNote" << " : " <<
-    msrSemiTonesPitchKindAsString (fHarmonyContentsRootNote) <<
+    "fHarmonyContentsRootNote" << ": " <<
+    fHarmonyContentsRootNote <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "harmonyContentsHarmonyKind" << " : " <<
-    msrHarmonyKindAsString (fHarmonyContentsHarmonyKind) <<
+    "fHarmonyContentsHarmonyKind" << ": " <<
+    fHarmonyContentsHarmonyKind <<
     std::endl;
 
   if (fHarmonyElementsVector.size ()) {
@@ -4334,7 +4333,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
     newbornClone =
       msrHarmony::create (
         fInputLineNumber,
-	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind,
         fHarmonyKindText,
@@ -4376,10 +4375,10 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
     "containingVoice is null");
 
   S_msrHarmony
-    harmonyDeepClone =
+    deepClone =
       msrHarmony::create (
         fInputLineNumber,
-	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind, fHarmonyKindText,
         fHarmonyInversion,
@@ -4391,12 +4390,12 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
         fHarmonyTupletFactor,
         fHarmonyWholeNotesOffset);
 
-  harmonyDeepClone->setHarmoniesUpLinkToVoice (
+  deepClone->setHarmoniesUpLinkToVoice (
     containingVoice);
 
   // JMI popoulate! v0.9.66
 
-  return harmonyDeepClone;
+  return deepClone;
 }
 
 void msrHarmony::setHarmonyUpLinkToMeasure (
@@ -4445,13 +4444,15 @@ void msrHarmony::setHarmonyTupletFactor (
   fHarmonyTupletFactor = tupletFactor;
 }
 
-void msrHarmony::setHarmonyUpLinkToNote (const S_msrNote& note)
+void msrHarmony::setHarmonyUpLinkToNote (
+  const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
-      "Setting harmony " << asShortString ()  <<
-      " note uplink to " << note->asString () <<
+      "==> Setting the uplink to note of harmony " <<
+      asString () <<
+      " to note " << note->asString () <<
       std::endl;
   }
 #endif
@@ -4664,24 +4665,31 @@ std::string msrHarmony::asString () const
 
   s <<
     "[Harmony" <<
+    ", fMeasureElementMeasurePosition: " <<
+    fMeasureElementMeasurePosition <<
     ", fHarmonyRootQuarterTonesPitchKind: " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyRootQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     ", fHarmonyKind: " <<
-    msrHarmonyKindAsShortString (fHarmonyKind) <<
+    fHarmonyKind;
 
-    ", measureElementMeasureNumber: " <<
-    fHarmonyUpLinkToMeasure->getMeasureNumber () <<
+  s <<
+    ", fHarmonyUpLinkToMeasure: ";
+    if (fHarmonyUpLinkToMeasure) {
+      s <<
+        fHarmonyUpLinkToMeasure->getMeasureNumber ();
+    }
+    else {
+      s << "[NONE]";
+    }
 
-    ", fMeasureElementMeasurePosition: " <<
-    fMeasureElementMeasurePosition <<
-
+  s <<
   // print the harmony bass voice position
 //   os <<
 //     std::setw (fieldWidth) <<
-//     "fMeasureElementVoicePosition" << " : " <<
+//     "fMeasureElementVoicePosition" << ": " <<
 //     fMeasureElementVoicePosition <<
 //     std::endl;
 
@@ -4783,50 +4791,57 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony measure position
   os <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << " : " <<
+    "fMeasureElementMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << " : " <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
     fMeasureElementSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fHarmonyDisplayWholeNotes" << " : " <<
+    "fHarmonyDisplayWholeNotes" << ": " <<
     fHarmonyDisplayWholeNotes <<
     std::endl;
 
   // print the harmony measure number
   os <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << " : " <<
-    fHarmonyUpLinkToMeasure->getMeasureNumber () <<
+    "measureElementMeasureNumber" << ": ";
+  if (fHarmonyUpLinkToMeasure) {
+    os <<
+      fHarmonyUpLinkToMeasure->getMeasureNumber ();
+  }
+  else {
+    os << "[NONE]";
+  }
+  os <<
     std::endl;
 
   // print the harmony bass voice position
 //   os <<
 //     std::setw (fieldWidth) <<
-//     "fMeasureElementVoicePosition" << " : " <<
+//     "fMeasureElementVoicePosition" << ": " <<
 //     fMeasureElementVoicePosition <<
 //     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "harmonyRoot" << " : " <<
+    "harmonyRoot" << ": " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyRootQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fHarmonyKind" << " : " <<
-    msrHarmonyKindAsString (fHarmonyKind) <<
+    "fHarmonyKind" << ": " <<
+    fHarmonyKind <<
     std::endl;
 
   // print the harmony whole notes offset
   os <<
     std::setw (fieldWidth) <<
-    "fHarmonyWholeNotesOffset" << " : " << fHarmonyWholeNotesOffset <<
+    "fHarmonyWholeNotesOffset" << ": " << fHarmonyWholeNotesOffset <<
     std::endl;
 
   os <<
@@ -4837,7 +4852,7 @@ void msrHarmony::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fHarmonyBassQuarterTonesPitchKind" << " : " <<
+    "fHarmonyBassQuarterTonesPitchKind" << ": " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyBassQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
@@ -4846,7 +4861,7 @@ void msrHarmony::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fHarmonyInversion" << " : ";
+    "fHarmonyInversion" << ": ";
   if (fHarmonyInversion == K_HARMONY_NO_INVERSION) {
     os << "[NONE]";
   }
@@ -4883,7 +4898,7 @@ void msrHarmony::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " <<
+      ": " <<
       "[NONE]" <<
       std::endl;
   }
@@ -4891,7 +4906,7 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmonies staff number
   os <<
     std::setw (fieldWidth) <<
-    "fHarmoniesStaffNumber" << " : ";
+    "fHarmoniesStaffNumber" << ": ";
   if (fHarmoniesStaffNumber == msrStaff::K_NO_STAFF_NUMBER) {
     os << "[NONE]";
   }
@@ -4903,13 +4918,13 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony tuplet factor
   os <<
     std::setw (fieldWidth) <<
-    "fHarmonyTupletFactor" << " : " << fHarmonyTupletFactor.asString () <<
+    "fHarmonyTupletFactor" << ": " << fHarmonyTupletFactor.asString () <<
     std::endl;
 
   // print the harmony frame
   os <<
     std::setw (fieldWidth) <<
-    "fHarmonyFrame" << " : ";
+    "fHarmonyFrame" << ": ";
   if (fHarmonyFrame) {
     os << fHarmonyFrame;
   }
@@ -4921,7 +4936,7 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony note uplink
   os <<
     std::setw (fieldWidth) <<
-    "fHarmonyUpLinkToNote" << " : ";
+    "fHarmonyUpLinkToNote" << ": ";
   if (fHarmonyUpLinkToNote) {
     os <<
       std::endl <<
@@ -5012,7 +5027,7 @@ void printHarmonyDetails (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         os <<
-          "==> inversion = " << inversion <<
+          "==> inversion: " << inversion <<
           ", initial invertedHarmonyStructure:" <<
           std::endl;
 
@@ -5108,8 +5123,7 @@ void printHarmonyDetails (
             /* JMI
           ", octave " << relativeOctave <<
           " (" <<
-          msrSemiTonesPitchKindAsString (
-            noteSemiTonesPitchKind) <<
+          noteSemiTonesPitchKind <<
           ")" <<
           */
           std::endl;
@@ -5194,7 +5208,7 @@ void printHarmonyAnalysis (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         os <<
-          "==> inversion = " << inversion <<
+          "==> inversion: " << inversion <<
           ", initial invertedHarmonyStructure:" <<
           std::endl;
 
@@ -5275,7 +5289,7 @@ void printHarmonyAnalysis (
               noteQuarterTonesPitchKind,
               gGlobalLpsrOahGroup->
                 getLpsrQuarterTonesPitchesLanguageKind ()) <<
-            " : " <<
+            ": " <<
             msrIntervalKindAsString (intervalKind) <<
             std::endl;
 
@@ -5416,7 +5430,7 @@ void printHarmonyAnalysis (
                 gGlobalLpsrOahGroup->
                   getLpsrQuarterTonesPitchesLanguageKind ()) <<
 
-              " : " <<
+              ": " <<
 
               std::setw (fieldWidth2) << // JMI
               msrIntervalKindAsString (innerIntervalKind) <<
@@ -6469,7 +6483,7 @@ S_msrHarmonyInterval msrHarmonyStructure::bassHarmonyIntervalForHarmonyInversion
       "Sorry, inversion number '" <<
       inversionNumber <<
       "' does not exist for harmony intervals '" <<
-      msrHarmonyKindAsString (fHarmonyStructureHarmonyKind) <<
+      fHarmonyStructureHarmonyKind <<
       "', line " << inputLineNumber;
 
     msrInternalError (
@@ -6630,7 +6644,7 @@ std::string msrHarmonyStructure::harmonyStructureAsString () const
   s <<
     "HarmonyStructure" <<
     ", " <<
-    msrHarmonyKindAsString (fHarmonyStructureHarmonyKind) <<
+    fHarmonyStructureHarmonyKind <<
     ", " <<
     mfSingularOrPlural (
       fHarmonyStructureIntervals.size (), "item", "items");
@@ -6642,8 +6656,8 @@ void msrHarmonyStructure::print (std::ostream& os) const
 {
   os <<
     "HarmonyStructure" <<
-    ", harmonyStructureHarmonyKind: " <<
-    msrHarmonyKindAsString (fHarmonyStructureHarmonyKind) <<
+    ", fHarmonyContentsHarmonyKind: " <<
+    fHarmonyStructureHarmonyKind <<
     ", " <<
     mfSingularOrPlural (
       fHarmonyStructureIntervals.size (), "interval", "intervals") <<

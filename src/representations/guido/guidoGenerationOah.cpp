@@ -235,15 +235,15 @@ void guidoGenerationOahGroup::printGuidoGenerationOahGroupValues (
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "fGenerateGuidoComments" << " : " <<
+    "fGenerateGuidoComments" << ": " <<
     fGenerateGuidoComments <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fGenerateGuidoStem" << " : " <<
+    "fGenerateGuidoStem" << ": " <<
     fGenerateGuidoStem <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fGenerateGuidoBars" << " : " <<
+    "fGenerateGuidoBars" << ": " <<
     fGenerateGuidoBars <<
     std::endl;
 

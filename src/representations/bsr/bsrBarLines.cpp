@@ -260,10 +260,10 @@ void bsrBarLine::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "barLineKind" << " : " << bsrBarLineKindAsString (fBarLineKind) <<
+    "barLineKind" << ": " << bsrBarLineKindAsString (fBarLineKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "barLineCellsList" << " : " << fBarLineCellsList->asShortString () <<
+    "barLineCellsList" << ": " << fBarLineCellsList->asShortString () <<
     std::endl;
 
   --gIndenter;

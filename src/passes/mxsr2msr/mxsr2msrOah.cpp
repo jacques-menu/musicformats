@@ -331,10 +331,10 @@ void msrReplaceClefAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "variableName" << " : " <<
+    "variableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fClefKindToClefKindMapVariable" << " : " <<
+    "fClefKindToClefKindMapVariable" << ": " <<
     std::endl;
 
   if (! fClefKindToClefKindMapVariable.size ()) {
@@ -366,7 +366,7 @@ void msrReplaceClefAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fClefKindToClefKindMapVariable.size ()) {
     os <<
@@ -2000,7 +2000,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // parts ignored IDs
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "parts ignored IDs" << " : ";
+    std::setw (valueFieldWidth) << "parts ignored IDs" << ": ";
 
   if (! fPartsIgnoreIDSet.size ()) {
     gLogStream <<
@@ -2021,7 +2021,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // parts kept IDs
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "parts kept IDs" << " : ";
+    std::setw (valueFieldWidth) << "parts kept IDs" << ": ";
 
   if (! fMusicXMLPartsKeepIDSet.size ()) {
     gLogStream <<
@@ -2042,7 +2042,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // parts ignored names
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "parts ignored names" << " : ";
+    std::setw (valueFieldWidth) << "parts ignored names" << ": ";
 
   if (! fMusicXMLPartsIgnoreNameSet.size ()) {
     gLogStream <<
@@ -2063,7 +2063,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   // parts kept names
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "parts kept names" << " : ";
+    std::setw (valueFieldWidth) << "parts kept names" << ": ";
 
   if (! fMusicXMLPartsKeepNameSet.size ()) {
     gLogStream <<
@@ -2095,15 +2095,15 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreRedundantClefs" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantClefs" << ": " <<
     fIgnoreRedundantClefs <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fIgnoreRedundantKeys" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantKeys" << ": " <<
     fIgnoreRedundantKeys <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fIgnoreRedundantTimes" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantTimes" << ": " <<
     fIgnoreRedundantTimes <<
     std::endl;
 
@@ -2119,7 +2119,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnorePageBreaksInMusicXML" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnorePageBreaksInMusicXML" << ": " <<
     fIgnorePageBreaksInMusicXML <<
     std::endl <<
 
@@ -2135,7 +2135,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreLineBreaksInMusicXML" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreLineBreaksInMusicXML" << ": " <<
     fIgnoreLineBreaksInMusicXML <<
     std::endl <<
 
@@ -2154,15 +2154,15 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
 /* JMI
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreRedundantClefs" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantClefs" << ": " <<
     fIgnoreRedundantClefs <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fIgnoreRedundantKeys" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantKeys" << ": " <<
     fIgnoreRedundantKeys <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fIgnoreRedundantTimes" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRedundantTimes" << ": " <<
     fIgnoreRedundantTimes <<
     std::endl;
 */
@@ -2178,41 +2178,41 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fDelayRestsDynamics" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsDynamics" << ": " <<
     fDelayRestsDynamics <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDelayRestsWords" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsWords" << ": " <<
     fDelayRestsWords <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDelayRestsSlurs" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsSlurs" << ": " <<
     fDelayRestsSlurs <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDelayRestsLigatures" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsLigatures" << ": " <<
     fDelayRestsLigatures <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDelayRestsPedals" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsPedals" << ": " <<
     fDelayRestsPedals <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDelayRestsSlashes" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsSlashes" << ": " <<
     fDelayRestsSlashes <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDelayRestsWedges" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayRestsWedges" << ": " <<
     fDelayRestsWedges <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fSlashAllGraceNotes" << " : " <<
+    std::setw (valueFieldWidth) << "fSlashAllGraceNotes" << ": " <<
     fSlashAllGraceNotes <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fSlurAllGraceNotes" << " : " <<
+    std::setw (valueFieldWidth) << "fSlurAllGraceNotes" << ": " <<
     fSlurAllGraceNotes <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fBeamAllGraceNotes" << " : " <<
+    std::setw (valueFieldWidth) << "fBeamAllGraceNotes" << ": " <<
     fBeamAllGraceNotes <<
     std::endl;
 
@@ -2228,7 +2228,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreArticulations" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreArticulations" << ": " <<
     fIgnoreArticulations <<
     std::endl;
 
@@ -2244,7 +2244,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreOrnaments" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreOrnaments" << ": " <<
     fIgnoreOrnaments <<
     std::endl;
 
@@ -2260,12 +2260,12 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreMusicXMLWords" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreMusicXMLWords" << ": " <<
     fIgnoreMusicXMLWords <<
     std::endl <<
 
     std::setw (valueFieldWidth) <<
-    "fAddMsrWordsFromTheMusicXMLLyrics" << " : " <<
+    "fAddMsrWordsFromTheMusicXMLLyrics" << ": " <<
     fAddMsrWordsFromTheMusicXMLLyrics <<
     std::endl;
 
@@ -2281,7 +2281,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreTies" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreTies" << ": " <<
     fIgnoreTies <<
     std::endl;
 
@@ -2297,7 +2297,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreDynamics" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreDynamics" << ": " <<
     fIgnoreDynamics <<
     std::endl;
 
@@ -2313,7 +2313,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreSlurs" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreSlurs" << ": " <<
     fIgnoreSlurs <<
     std::endl;
 
@@ -2329,7 +2329,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreWedges" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreWedges" << ": " <<
     fIgnoreWedges <<
     std::endl;
 
@@ -2345,7 +2345,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream <<
-    std::setw (valueFieldWidth) << "fIgnoreLyrics" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreLyrics" << ": " <<
     fIgnoreLyrics <<
     std::endl;
 
@@ -2361,7 +2361,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreHarmonies" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreHarmonies" << ": " <<
     fIgnoreHarmonies <<
     std::endl;
 
@@ -2377,7 +2377,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreFiguredBasses" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreFiguredBasses" << ": " <<
     fIgnoreFiguredBasses <<
     std::endl;
 
@@ -2393,10 +2393,10 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fAllDynamicsBelow" << " : " <<
+    std::setw (valueFieldWidth) << "fAllDynamicsBelow" << ": " <<
     fAllDynamicsBelow <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fAllWedgesBelow" << " : " <<
+    std::setw (valueFieldWidth) << "fAllWedgesBelow" << ": " <<
     fAllWedgesBelow <<
     std::endl;
 
@@ -2412,7 +2412,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fCubase" << " : " <<
+    std::setw (valueFieldWidth) << "fCubase" << ": " <<
     fCubase <<
     std::endl;
 

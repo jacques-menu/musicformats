@@ -270,25 +270,25 @@ void mxsrOahGroup::printMxsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fTraceEncoding" << " : " <<
+    std::setw (fieldWidth) << "fTraceEncoding" << ": " <<
     fTraceEncoding <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTraceDivisions" << " : " <<
+    std::setw (fieldWidth) << "fTraceDivisions" << ": " <<
     fTraceDivisions <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTraceBackup" << " : " <<
+    std::setw (fieldWidth) << "fTraceBackup" << ": " <<
     fTraceBackup <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceForward" << " : " <<
+    std::setw (fieldWidth) << "fTraceForward" << ": " <<
     fTraceForward <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTraceMxsr" << " : " <<
+    std::setw (fieldWidth) << "fTraceMxsr" << ": " <<
     fTraceMxsr <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceMxsrVisitors" << " : " <<
+    std::setw (fieldWidth) << "fTraceMxsrVisitors" << ": " <<
     fTraceMxsrVisitors <<
     std::endl;
 

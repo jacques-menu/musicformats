@@ -186,7 +186,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
     newbornClone =
       msrDoubleTremolo::create (
         fInputLineNumber,
-	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
         fDoubleTremoloKind,
         fDoubleDoubleTremoloTypeKind,
         fDoubleTremoloMarksNumber,
@@ -871,27 +871,27 @@ void msrDoubleTremolo::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "doubleTremoloSoundingWholeNotes" << " : " <<
+    "doubleTremoloSoundingWholeNotes" << ": " <<
     fDoubleTremoloSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "doubleTremoloMarksNumber" << " : " <<
+    "doubleTremoloMarksNumber" << ": " <<
     fDoubleTremoloMarksNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "doubleTremoloElementsDuration" << " : " <<
+    "doubleTremoloElementsDuration" << ": " <<
     fDoubleTremoloElementsDuration <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "numberOfRepeats" << " : " <<
+    "numberOfRepeats" << ": " <<
     fDoubleTremoloNumberOfRepeats <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "placement" << " : " <<
+    "placement" << ": " <<
     doubleTremoloPlacementKindAsString () <<
     std::endl;
 

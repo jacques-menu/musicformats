@@ -128,7 +128,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
     "containingRepeat is null");
 
   S_msrRepeatCoda
-    repeatCodaDeepClone = 0; // JMI
+    deepClone = nullptr; // JMI v0.9.66
     /* JMI
       msrRepeatCoda::create (
         fInputLineNumber,
@@ -139,17 +139,17 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
     */
 
   // segment
-  repeatCodaDeepClone->fRepeatCodaSegment =
+  deepClone->fRepeatCodaSegment =
     fRepeatCodaSegment->
       createSegmentDeepClone (
         fRepeatCodaUpLinkToRepeat->
           getRepeatUpLinkToVoice ());
 
   // upLinks
-  repeatCodaDeepClone->fRepeatCodaUpLinkToRepeat =
+  deepClone->fRepeatCodaUpLinkToRepeat =
     containingRepeat;
 
-  return repeatCodaDeepClone;
+  return deepClone;
 }
 
 /* JMI

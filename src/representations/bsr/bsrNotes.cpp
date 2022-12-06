@@ -1347,29 +1347,29 @@ void bsrNote::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fNoteValueKind" << " : " << fNoteValueKind <<
+    "fNoteValueKind" << ": " << fNoteValueKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteDotsNumber" << " : " << fNoteDotsNumber <<
+    "fNoteDotsNumber" << ": " << fNoteDotsNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteOctaveKind" << " : " <<  fNoteOctaveKind <<
+    "fNoteOctaveKind" << ": " <<  fNoteOctaveKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteValueSizeIsNeeded" << " : " << fNoteValueSizeIsNeeded <<
+    "fNoteValueSizeIsNeeded" << ": " << fNoteValueSizeIsNeeded <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteOctaveIsNeeded" << " : " << fNoteOctaveIsNeeded <<
+    "fNoteOctaveIsNeeded" << ": " << fNoteOctaveIsNeeded <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fAccidentalKind" << " : " << fAccidentalKind <<
+    "fAccidentalKind" << ": " << fAccidentalKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "cellsList" << " : " <<
+    "cellsList" << ": " <<
     buildCellsList ()->asShortString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSpacesBefore" << " : " << fSpacesBefore <<
+    "fSpacesBefore" << ": " << fSpacesBefore <<
     std::endl;
 
   --gIndenter;

@@ -178,10 +178,10 @@ void bsrScore::printFull (std::ostream& os) const
   // print the lines and pages maximum lengthes JMI
   os <<
     std::setw (fieldWidth) <<
-    "BrailleLineLength" << " : " << fBrailleLineLength <<
+    "BrailleLineLength" << ": " << fBrailleLineLength <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "BraillePageLength" << " : " << fBraillePageLength <<
+    "BraillePageLength" << ": " << fBraillePageLength <<
     std::endl;
   os << std::endl;
         */
@@ -212,7 +212,7 @@ void bsrScore::printFull (std::ostream& os) const
     }
     else {
       os <<
-        " : " <<
+        ": " <<
          "[NONE]" <<
       std::endl;
     }
@@ -253,10 +253,10 @@ void bsrScore::printShort (std::ostream& os) const
   // print the lines and pages maximum lengthes JMI
   os <<
     std::setw (fieldWidth) <<
-    "BrailleLineLength" << " : " << fBrailleLineLength <<
+    "BrailleLineLength" << ": " << fBrailleLineLength <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "BraillePageLength" << " : " << fBraillePageLength <<
+    "BraillePageLength" << ": " << fBraillePageLength <<
     std::endl;
   os << std::endl;
         */
@@ -287,7 +287,7 @@ void bsrScore::printShort (std::ostream& os) const
     }
     else {
       os <<
-        " : " <<
+        ": " <<
          "[EMPTY]" <<
       std::endl;
     }

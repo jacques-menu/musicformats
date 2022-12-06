@@ -899,7 +899,7 @@ std::string mfcComponenKindAsString (
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_mfcComponent mfcComponent::create (
   const std::string&   componentName,
   mfcComponenKind componenKind)
@@ -1252,7 +1252,7 @@ std::string mfcComponentEntropicityKindAsString (
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
   const std::string&   multiComponentName,
   mfcComponenKind componenKind,

@@ -229,11 +229,11 @@ void msrRepeatDescr::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fRepeatDescrRepeat" << " : " <<
+    "fRepeatDescrRepeat" << ": " <<
     fRepeatDescrRepeat <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fRepeatDescrStartInputLineNumber" << " : " <<
+    "fRepeatDescrStartInputLineNumber" << ": " <<
     fRepeatDescrStartInputLineNumber <<
     std::endl;
 }
@@ -775,7 +775,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
     gLogStream <<
       "****" <<
-      " BEFORE voiceDeepClone = " <<
+      " BEFORE deepClone = " <<
       std::endl;
 
     print (gLogStream);
@@ -788,7 +788,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 #endif
 
   S_msrVoice
-    voiceDeepClone =
+    deepClone =
       msrVoice::create (
         fInputLineNumber,
         voiceKind,
@@ -799,57 +799,57 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         containingStaff);
 
   // voice numbers
-  voiceDeepClone->fRegularVoiceStaffSequentialNumber =
+  deepClone->fRegularVoiceStaffSequentialNumber =
     fRegularVoiceStaffSequentialNumber;
 
   // voice name
   if (false) { // JMI
-    voiceDeepClone->fVoiceName =
+    deepClone->fVoiceName =
       fVoiceName;
   }
 
 /* JMI
   // set voice name // JMI
-  voiceDeepClone->
+  deepClone->
     setVoiceNameFromNumber (
       fInputLineNumber,
       voiceNumber);
 */
 
   // counters
-  voiceDeepClone->fVoiceActualNotesCounter =
+  deepClone->fVoiceActualNotesCounter =
     fVoiceActualNotesCounter;
 
-  voiceDeepClone->fVoiceRestsCounter =
+  deepClone->fVoiceRestsCounter =
     fVoiceRestsCounter;
 
-  voiceDeepClone->fVoiceSkipsCounter =
+  deepClone->fVoiceSkipsCounter =
     fVoiceSkipsCounter;
 
-  voiceDeepClone->fVoiceActualHarmoniesCounter =
+  deepClone->fVoiceActualHarmoniesCounter =
     fVoiceActualHarmoniesCounter;
 
-  voiceDeepClone->fVoiceActualFiguredBassesCounter =
+  deepClone->fVoiceActualFiguredBassesCounter =
     fVoiceActualFiguredBassesCounter;
 
   // measures
-  voiceDeepClone->fVoiceCurrentMeasureNumber =
+  deepClone->fVoiceCurrentMeasureNumber =
     fVoiceCurrentMeasureNumber;
-  voiceDeepClone->fVoiceCurrentMeasureOrdinalNumber =
+  deepClone->fVoiceCurrentMeasureOrdinalNumber =
     fVoiceCurrentMeasureOrdinalNumber;
-  voiceDeepClone->fVoiceCurrentMeasurePuristNumber =
+  deepClone->fVoiceCurrentMeasurePuristNumber =
     fVoiceCurrentMeasurePuristNumber;
 
   // musically empty voices
-  voiceDeepClone->fMusicHasBeenInsertedInVoice =
+  deepClone->fMusicHasBeenInsertedInVoice =
     fMusicHasBeenInsertedInVoice;
 
   // regular measure ends detection
-  voiceDeepClone->fWholeNotesSinceLastRegularMeasureEnd =
+  deepClone->fWholeNotesSinceLastRegularMeasureEnd =
     fWholeNotesSinceLastRegularMeasureEnd;
 
   // incomplete measures after repeats detection
-  voiceDeepClone->fCurrentVoiceRepeatPhaseKind =
+  deepClone->fCurrentVoiceRepeatPhaseKind =
     fCurrentVoiceRepeatPhaseKind;
 
   // initial elements
@@ -881,7 +881,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         // create the repeat deep clone
         elementDeepClone =
           repeat->createRepeatDeepClone (
-            voiceDeepClone);
+            deepClone);
             */
       }
 
@@ -891,7 +891,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       ) {
         elementDeepClone =
           segment->createSegmentDeepClone (
-            voiceDeepClone);
+            deepClone);
       }
 
       else {
@@ -910,7 +910,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       }
 
       // append the element deep clone to the voice deep clone
-      voiceDeepClone->
+      deepClone->
         fVoiceInitialElementsList.push_back (
           elementDeepClone);
     } // for
@@ -930,14 +930,14 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
   // last segment
   if (fVoiceLastSegment) { // JMI
-    voiceDeepClone->fVoiceLastSegment =
+    deepClone->fVoiceLastSegment =
       fVoiceLastSegment->
         createSegmentDeepClone (
-          voiceDeepClone);
+          deepClone);
 
-    if (! voiceDeepClone->fVoiceFirstSegment) {
-      voiceDeepClone->fVoiceFirstSegment =
-        voiceDeepClone->fVoiceLastSegment;
+    if (! deepClone->fVoiceFirstSegment) {
+      deepClone->fVoiceFirstSegment =
+        deepClone->fVoiceLastSegment;
     }
   }
   else {
@@ -953,42 +953,42 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   }
 
   // multiple full-bar rests
-  voiceDeepClone->fVoiceContainsMultipleFullBarRests =
+  deepClone->fVoiceContainsMultipleFullBarRests =
     fVoiceContainsMultipleFullBarRests;
 
   // measures reeats
-  voiceDeepClone->fVoiceContainsMeasureRepeats =
+  deepClone->fVoiceContainsMeasureRepeats =
     fVoiceContainsMeasureRepeats;
 
   // stanzas
   for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
     const S_msrStanza& stanza = thePair.second;
 
-    voiceDeepClone->
+    deepClone->
       addStanzaToVoiceWithoutCatchUp ( // JMI
         stanza->
           createStanzaDeepClone (
-            voiceDeepClone));
+            deepClone));
   } // for
 
   // upLinks
-  voiceDeepClone->fVoiceUpLinkToStaff =
+  deepClone->fVoiceUpLinkToStaff =
     containingStaff;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoicesDetails ()) {
     gLogStream <<
       "****" <<
-      " AFTER voiceDeepClone = " <<
+      " AFTER deepClone = " <<
       std::endl <<
-      voiceDeepClone <<
+      deepClone <<
       std::endl <<
       "****" <<
       std::endl;
   }
 #endif
 
-  return voiceDeepClone;
+  return deepClone;
 }
 
 void msrVoice::setVoiceLastSegmentInVoiceClone (
@@ -1752,7 +1752,7 @@ S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
         ", name \"" << stanzaName << "\"" <<
         ", in voice \"" << getVoiceName () << "\"" <<
         ", line " << inputLineNumber <<
-        ", fVoiceStanzasMap.size () = " << fVoiceStanzasMap.size () <<
+        ", fVoiceStanzasMap.size (): " << fVoiceStanzasMap.size () <<
         std::endl;
     }
 #endif
@@ -1801,7 +1801,7 @@ S_msrStanza msrVoice::fetchStanzaInVoice (
       ", name \"" << stanzaName << "\"" <<
       ", not found in voice \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
-      ", fVoiceStanzasMap.size () = " << fVoiceStanzasMap.size () <<
+      ", fVoiceStanzasMap.size (): " << fVoiceStanzasMap.size () <<
       std::endl;
 
     msrInternalError (
@@ -3827,7 +3827,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 //   }
 //   else {
 //     os <<
-//       " : " << "[EMPTY]";
+//       ": " << "[EMPTY]";
 //   }
 //   os << std::endl;
 //
@@ -3867,7 +3867,7 @@ void msrVoice::displayVoiceMeasuresFlatList (
 
   gLogStream <<
     std::setw (fieldWidth) <<
-    "fVoiceMeasuresFlatList" << " : ";
+    "fVoiceMeasuresFlatList" << ": ";
   if (voiceMeasuresFlatListSize) {
     gLogStream <<
       mfSingularOrPlural (
@@ -10530,7 +10530,7 @@ void msrVoice::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVoiceUpLinkToStaff" << " : " <<
+    "fVoiceUpLinkToStaff" << ": " <<
     fVoiceUpLinkToStaff->getStaffName () <<
     std::endl <<
 
@@ -10541,17 +10541,17 @@ void msrVoice::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fVoiceCurrentMeasureOrdinalNumber" << " : " <<
+    "fVoiceCurrentMeasureOrdinalNumber" << ": " <<
     fVoiceCurrentMeasureOrdinalNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fVoiceCurrentMeasurePuristNumber" << " : " <<
+    "fVoiceCurrentMeasurePuristNumber" << ": " <<
     fVoiceCurrentMeasurePuristNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fRegularVoiceStaffSequentialNumber" << " : " <<
+    "fRegularVoiceStaffSequentialNumber" << ": " <<
     regularVoiceStaffSequentialNumberAsString () <<
     std::endl;
 
@@ -10559,21 +10559,21 @@ void msrVoice::print (std::ostream& os) const
   // regular measure ends detection
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fWholeNotesSinceLastRegularMeasureEnd" << " : " <<
+    "fWholeNotesSinceLastRegularMeasureEnd" << ": " <<
     fWholeNotesSinceLastRegularMeasureEnd <<
     std::endl;
 
   // incomplete measures after repeats detection
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fCurrentVoiceRepeatPhaseKind" << " : " <<
+    "fCurrentVoiceRepeatPhaseKind" << ": " <<
     msrVoiceRepeatPhaseKindAsString (
       fCurrentVoiceRepeatPhaseKind) <<
     std::endl;
 
   // print the voice first clef, and the current clef, key and time signature
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceFirstClef" << " : ";
+    std::setw (fieldWidth) << "fVoiceFirstClef" << ": ";
   if (fVoiceFirstClef) {
     os <<
       fVoiceFirstClef;
@@ -10582,7 +10582,7 @@ void msrVoice::print (std::ostream& os) const
     os << "null" << std::endl;
   }
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceCurrentClef" << " : ";
+    std::setw (fieldWidth) << "fVoiceCurrentClef" << ": ";
   if (fVoiceCurrentClef) {
     os <<
       fVoiceCurrentClef;
@@ -10592,7 +10592,7 @@ void msrVoice::print (std::ostream& os) const
   }
 
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceCurrentKey" << " : ";
+    std::setw (fieldWidth) << "fVoiceCurrentKey" << ": ";
   if (fVoiceCurrentKey) {
     os <<
       fVoiceCurrentKey;
@@ -10602,7 +10602,7 @@ void msrVoice::print (std::ostream& os) const
   }
 
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceCurrentTimeSignature" << " : ";
+    std::setw (fieldWidth) << "fVoiceCurrentTimeSignature" << ": ";
   if (fVoiceCurrentTimeSignature) {
     os << std::endl;
     ++gIndenter;
@@ -10620,7 +10620,7 @@ void msrVoice::print (std::ostream& os) const
 // JMI
   // print the regular voice harmonies voice name if any
   os << std::left <<
-    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToHarmoniesVoice" << " : ";
+    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
   if (fRegularVoiceForwardLinkToHarmoniesVoice) {
     os <<
       fRegularVoiceForwardLinkToHarmoniesVoice->getVoiceName ();
@@ -10633,7 +10633,7 @@ void msrVoice::print (std::ostream& os) const
 
   // print the figured bass voice name if any
   os << std::left <<
-    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToFiguredBassVoice" << " : ";
+    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
   if (fRegularVoiceForwardLinkToFiguredBassVoice) {
     os <<
       fRegularVoiceForwardLinkToFiguredBassVoice->getVoiceName ();
@@ -10646,10 +10646,10 @@ void msrVoice::print (std::ostream& os) const
 //
 
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceShortestNoteDuration" << " : " <<
+    std::setw (fieldWidth) << "fVoiceShortestNoteDuration" << ": " <<
     fVoiceShortestNoteDuration <<
     std::endl <<
-    std::setw (fieldWidth) << "fVoiceShortestNoteTupletFactor" << " : " <<
+    std::setw (fieldWidth) << "fVoiceShortestNoteTupletFactor" << ": " <<
     std::endl;
 
   ++gIndenter;
@@ -10658,31 +10658,31 @@ void msrVoice::print (std::ostream& os) const
   --gIndenter;
 
   os << std::left <<
-    std::setw (fieldWidth) << "fVoiceHasBeenFinalized" << " : " <<
+    std::setw (fieldWidth) << "fVoiceHasBeenFinalized" << ": " <<
     fVoiceHasBeenFinalized <<
     std::endl;
 
   os << std::left <<
-    std::setw (fieldWidth) << "fCurrentVoicePosition" << " : " <<
+    std::setw (fieldWidth) << "fCurrentVoicePosition" << ": " <<
     fCurrentVoicePosition <<
     std::endl <<
-    std::setw (fieldWidth) << "fCurrentVoiceMoment" << " : " <<
+    std::setw (fieldWidth) << "fCurrentVoiceMoment" << ": " <<
     fCurrentVoiceMoment;
 
   os << std::left <<
-    std::setw (fieldWidth) << "fMusicHasBeenInsertedInVoice" << " : " <<
+    std::setw (fieldWidth) << "fMusicHasBeenInsertedInVoice" << ": " <<
     fMusicHasBeenInsertedInVoice <<
     std::endl <<
-    std::setw (fieldWidth) << "fVoiceContainsMultipleFullBarRests" << " : " <<
+    std::setw (fieldWidth) << "fVoiceContainsMultipleFullBarRests" << ": " <<
     fVoiceContainsMultipleFullBarRests <<
     std::endl <<
-    std::setw (fieldWidth) << "fVoiceContainsMeasureRepeats" << " : " <<
+    std::setw (fieldWidth) << "fVoiceContainsMeasureRepeats" << ": " <<
     fVoiceContainsMeasureRepeats <<
     std::endl;
 
   // print the voice first segment if any
   os <<
-    std::setw (fieldWidth) << "fVoiceFirstSegment" << " : ";
+    std::setw (fieldWidth) << "fVoiceFirstSegment" << ": ";
   if (fVoiceFirstSegment) {
     os <<
       "'" <<
@@ -10697,7 +10697,7 @@ void msrVoice::print (std::ostream& os) const
 
   // print the voice last appended measure if any
   os <<
-    std::setw (fieldWidth) << "fVoiceLastAppendedMeasure" << " : ";
+    std::setw (fieldWidth) << "fVoiceLastAppendedMeasure" << ": ";
   if (fVoiceLastAppendedMeasure) {
     os <<
       "'" <<
@@ -10712,7 +10712,7 @@ void msrVoice::print (std::ostream& os) const
 
   // print the voice first measure if any
   os <<
-    std::setw (fieldWidth) << "fVoiceFirstMeasure" << " : ";
+    std::setw (fieldWidth) << "fVoiceFirstMeasure" << ": ";
   if (fVoiceFirstMeasure) {
     os <<
       "'" <<
@@ -10734,7 +10734,7 @@ void msrVoice::print (std::ostream& os) const
 
     os <<
       std::setw (fieldWidth) <<
-      "fVoiceFirstNonGraceNote" << " : ";
+      "fVoiceFirstNonGraceNote" << ": ";
     if (voiceFirstNonGraceNote) {
       os <<
         voiceFirstNonGraceNote->asShortString ();
@@ -10749,7 +10749,7 @@ void msrVoice::print (std::ostream& os) const
   // print the voice last appended note
   os <<
     std::setw (fieldWidth) <<
-    "fVoiceLastAppendedNote" << " : ";
+    "fVoiceLastAppendedNote" << ": ";
   if (fVoiceLastAppendedNote) {
     os << gTab <<
       fVoiceLastAppendedNote->asShortString ();
@@ -10771,7 +10771,7 @@ void msrVoice::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fVoiceInitialElementsList" << " : ";
+    "fVoiceInitialElementsList" << ": ";
 
   if (voiceInitialElementsListSize) {
     os <<
@@ -10803,7 +10803,7 @@ void msrVoice::print (std::ostream& os) const
   // print the last segment
   os <<
     std::setw (fieldWidth) <<
-    "fVoiceLastSegment" << " : ";
+    "fVoiceLastSegment" << ": ";
 
   if (fVoiceLastSegment) {
     ++gIndenter;
@@ -10825,7 +10825,7 @@ void msrVoice::print (std::ostream& os) const
   // print the stanzas if any
   os <<
     std::setw (fieldWidth) <<
-    "fVoiceStanzasMap" << " : ";
+    "fVoiceStanzasMap" << ": ";
 
   if (fVoiceStanzasMap.size ()) {
     os << std::endl;
@@ -10869,7 +10869,7 @@ void msrVoice::printShort (std::ostream& os) const
 
   // print the regular voice harmonies voice name if any
   os << std::left <<
-    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToHarmoniesVoice" << " : ";
+    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
   if (fRegularVoiceForwardLinkToHarmoniesVoice) {
     os <<
       fRegularVoiceForwardLinkToHarmoniesVoice->getVoiceName ();
@@ -10882,7 +10882,7 @@ void msrVoice::printShort (std::ostream& os) const
 
   // print the figured bass voice name if any
   os << std::left <<
-    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToFiguredBassVoice" << " : ";
+    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
   if (fRegularVoiceForwardLinkToFiguredBassVoice) {
     os <<
       fRegularVoiceForwardLinkToFiguredBassVoice->getVoiceName ();
@@ -10928,10 +10928,10 @@ void msrVoice::printShort (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fVoiceInitialElementsList";
   if (voiceInitialElementsListSize) {
-    os << " : " <<  voiceInitialElementsListSize << " elements";
+    os << ": " <<  voiceInitialElementsListSize << " elements";
   }
   else {
-    os << " : " << "[EMPTY]";
+    os << ": " << "[EMPTY]";
   }
 
   if (voiceInitialElementsListSize) {

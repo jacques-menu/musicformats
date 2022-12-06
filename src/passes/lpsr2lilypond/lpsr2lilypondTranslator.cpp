@@ -99,7 +99,7 @@ std::string lpsrRepeatDescr::asString ()
   std::stringstream s;
 
   s <<
-  	"[lpsrRepeatDescr"
+    "[lpsrRepeatDescr"
     ", fRepeatEndingsNumber: " <<
     fRepeatEndingsNumber <<
     ", fRepeatEndingsCounter: " <<
@@ -117,15 +117,15 @@ void lpsrRepeatDescr::print (std::ostream& os)
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fRepeatEndingsNumber" << " : " <<
+    "fRepeatEndingsNumber" << ": " <<
     fRepeatEndingsNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fRepeatEndingsCounter" << " : " <<
+    "fRepeatEndingsCounter" << ": " <<
     fRepeatEndingsCounter <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fEndOfRepeatHasBeenGenerated" << " : " <<
+    "fEndOfRepeatHasBeenGenerated" << ": " <<
     fEndOfRepeatHasBeenGenerated <<
     std::endl;
 }
@@ -652,24 +652,20 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "% noteAboluteDiatonicOrdinal" <<
-      " = " <<
+      "% noteAboluteDiatonicOrdinal: " <<
       noteAboluteDiatonicOrdinal <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "% referenceDiatonicPitchAsString" <<
-      " = " <<
+      "% referenceDiatonicPitchAsString: " <<
       referenceDiatonicPitchKindAsString <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "% referenceAbsoluteOctave" <<
-       " = " <<
+      "% referenceAbsoluteOctave: " <<
       msrOctaveKindAsString (referenceAbsoluteOctave) <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "% referenceAboluteDiatonicOrdinal" <<
-      " = " <<
+      "% referenceAboluteDiatonicOrdinal: " <<
       referenceAboluteDiatonicOrdinal <<
       std::endl << std::endl;
   }
@@ -698,7 +694,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream <<
       "lilypondOctaveInRelativeEntryMode() 2" <<
-      ", result = " << s.str () <<
+      ", result: " << s.str () <<
       std::endl << std::endl;
   }
 #endif
@@ -981,30 +977,25 @@ std::stringstream s;
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "% noteQuarterTonesPitchKindAsString" <<
-      " = " <<
+      "% noteQuarterTonesPitchKindAsString: " <<
       noteQuarterTonesPitchKindAsString <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "% quarterTonesDisplayPitchKindAsString" <<
-      " = " <<
+      "% quarterTonesDisplayPitchKindAsString: " <<
       quarterTonesDisplayPitchKindAsString <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "% noteAbsoluteOctave" <<
-      " = " <<
+      "% noteAbsoluteOctave: " <<
       msrOctaveKindAsString (noteAbsoluteOctave) <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "% noteAbsoluteDisplayOctave" <<
-      " = " <<
+      "% noteAbsoluteDisplayOctave: " <<
       msrOctaveKindAsString (noteAbsoluteDisplayOctave) <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "% line" <<
-      " = " <<
+      "% line " <<
       inputLineNumber <<
       std::endl;
   }
@@ -1251,30 +1242,25 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "% noteQuarterTonesPitchKindAsString" <<
-      " = " <<
+      "% noteQuarterTonesPitchKindAsString: " <<
       noteQuarterTonesPitchKindAsString <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "% quarterTonesDisplayPitch" <<
-      " = " <<
+      "% quarterTonesDisplayPitch: " <<
       quarterTonesDisplayPitchKindAsString <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "% noteAbsoluteOctave" <<
-      " = " <<
+      "% noteAbsoluteOctave: " <<
       msrOctaveKindAsString (noteAbsoluteOctave) <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "% noteAbsoluteDisplayOctave" <<
-      " = " <<
+      "% noteAbsoluteDisplayOctave: " <<
       msrOctaveKindAsString (noteAbsoluteDisplayOctave) <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "% line" <<
-      " = " <<
+      "% line: " <<
       noteInputLineNumber <<
       std::endl;
   }
@@ -2498,21 +2484,21 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
           getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
-			std::stringstream s;
+      std::stringstream s;
 
-			s <<
-				std::endl <<
-				"% --> generating code for noteRegularInTuplet " <<
-				note->asString () <<
-				", line " << inputLineNumber <<
-				std::endl;
+      s <<
+        std::endl <<
+        "% --> generating code for noteRegularInTuplet " <<
+        note->asString () <<
+        ", line " << inputLineNumber <<
+        std::endl;
 
-				if (traceNotes) {
-					gLogStream << s.str ();
-				}
+        if (traceNotes) {
+          gLogStream << s.str ();
+        }
 
-				if (generateMsrVisitingInformation) {
-					fLilypondCodeStream << s.str ();
+        if (generateMsrVisitingInformation) {
+          fLilypondCodeStream << s.str ();
       }
     }
   }
@@ -3253,7 +3239,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteWords (
           }
         else {
           s <<
-						gIndenter.indentMultiLineStringWithCurrentOffset (
+            gIndenter.indentMultiLineStringWithCurrentOffset (
               generateAColumnForMarkup (
                 wordsContents,
                 lilypondMarkupColumnKind::kMarkupColumnKindLeftAligned));
@@ -4442,14 +4428,14 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::tupletFactorAsLilypondString (
-	const msrTupletFactor& tupletFactor)
+  const msrTupletFactor& tupletFactor)
 {
   std::stringstream s;
 
   s <<
     tupletFactor.getTupletActualNotes () <<
-		'/' <<
-		tupletFactor.getTupletNormalNotes ();
+    '/' <<
+    tupletFactor.getTupletNormalNotes ();
 
   return s.str ();
 }
@@ -6014,7 +6000,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
 
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "title" << " = " << "\"" << title << "\"" <<
+    "title" << " = \"" << title << "\"" <<
     std::endl;
 
   // generate the name-value pairs
@@ -7092,8 +7078,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
-      "paper-height" <<
-      " = " <<
+      "paper-height = " <<
       std::setprecision (3) << paperHeight.getLengthValue () <<
       lengthUnitAsLilypondString (paperHeight.getLengthUnitKind ()) <<
       std::endl;
@@ -7119,8 +7104,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
-      "paper-width" <<
-      " = " <<
+      "paper-width = " <<
       std::setprecision (3) << paperWidth.getLengthValue () <<
       lengthUnitAsLilypondString (paperWidth.getLengthUnitKind ()) <<
       std::endl;
@@ -7158,8 +7142,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
-      "left-margin" <<
-      " = " <<
+      "left-margin = " <<
       std::setprecision (3) << leftMargin.getLengthValue () <<
       lengthUnitAsLilypondString (leftMargin.getLengthUnitKind ()) <<
       std::endl;
@@ -7185,8 +7168,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
-      "right-margin" <<
-      " = " <<
+      "right-margin = " <<
       std::setprecision (3) << rightMargin.getLengthValue () <<
       lengthUnitAsLilypondString (rightMargin.getLengthUnitKind ()) <<
       std::endl;
@@ -7212,8 +7194,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
-      "top-margin" <<
-      " = " <<
+      "top-margin = " <<
       std::setprecision (3) << topMargin.getLengthValue () <<
       lengthUnitAsLilypondString (topMargin.getLengthUnitKind ()) <<
       std::endl;
@@ -7239,8 +7220,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
-      "bottom-margin" <<
-      " = " <<
+      "bottom-margin = " <<
       std::setprecision (3) << bottomMargin.getLengthValue () <<
       lengthUnitAsLilypondString (bottomMargin.getLengthUnitKind ()) <<
       std::endl;
@@ -7263,7 +7243,7 @@ void lpsr2lilypondTranslator::generatePaperIndents (
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "horizontal-shift" << " = ";
+    "horizontal-shift = ";
   if (horizontalShift) {
     fLilypondCodeStream <<
       std::setprecision (3) << horizontalShift->getLengthValue () <<
@@ -7286,7 +7266,7 @@ void lpsr2lilypondTranslator::generatePaperIndents (
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "indent" << " = ";
+    "indent = ";
   if (indent) {
     fLilypondCodeStream <<
       std::setprecision (3) << indent->getLengthValue () <<
@@ -7309,7 +7289,7 @@ void lpsr2lilypondTranslator::generatePaperIndents (
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "short-indent" << " = ";
+    "short-indent = ";
   if (shortIndent) {
     fLilypondCodeStream <<
       std::setprecision (3) << shortIndent->getLengthValue () <<
@@ -7339,7 +7319,7 @@ void lpsr2lilypondTranslator::generatePaperSpaces (
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "markup-system-spacing-padding" << " = ";
+    "markup-system-spacing-padding = ";
   if (markupSystemPpacingPadding) {
     fLilypondCodeStream <<
       std::setprecision (3) << markupSystemPpacingPadding->getLengthValue () <<
@@ -7362,7 +7342,7 @@ void lpsr2lilypondTranslator::generatePaperSpaces (
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "between-system-space" << " = ";
+    "between-system-space = ";
   if (betweenSystemSpace) {
     fLilypondCodeStream <<
       std::setprecision (3) << betweenSystemSpace->getLengthValue () <<
@@ -7385,7 +7365,7 @@ void lpsr2lilypondTranslator::generatePaperSpaces (
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "page-top-space" << " = ";
+    "page-top-space = ";
   if (pageTopSpace) {
     fLilypondCodeStream <<
       std::setprecision (3) << pageTopSpace->getLengthValue () <<
@@ -7415,7 +7395,7 @@ void lpsr2lilypondTranslator::generatePaperCounts (
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "page-count" << " = " <<
+    "page-count = " <<
     pageCount <<
     std::endl;
 
@@ -7429,7 +7409,7 @@ void lpsr2lilypondTranslator::generatePaperCounts (
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "system-count" << " = " <<
+    "system-count = " <<
     systemCount <<
     std::endl;
 }
@@ -7452,7 +7432,7 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
     case mfOnOffKind::kMfOnOffOff:
       fLilypondCodeStream << std::left <<
         std::setw (fieldWidth) <<
-        "ragged-last" << " = ";
+        "ragged-last = ";
       if (mfOnOffKindAsBool (raggedLast)) {
         fLilypondCodeStream << "##t";
       }
@@ -7476,7 +7456,7 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
     case mfOnOffKind::kMfOnOffOff:
       fLilypondCodeStream << std::left <<
         std::setw (fieldWidth) <<
-        "ragged-bottom" << " = ";
+        "ragged-bottom = ";
       if (mfOnOffKindAsBool (raggedBottom)) {
         fLilypondCodeStream << "##t";
       }
@@ -7500,7 +7480,7 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
     case mfOnOffKind::kMfOnOffOff:
       fLilypondCodeStream << std::left <<
         std::setw (fieldWidth) <<
-        "ragged-last-bottom" << " = ";
+        "ragged-last-bottom = ";
       if (mfOnOffKindAsBool (raggedLastBottom)) {
         fLilypondCodeStream << "##t";
       }
@@ -7524,7 +7504,7 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
     case mfOnOffKind::kMfOnOffOff:
       fLilypondCodeStream << std::left <<
         std::setw (fieldWidth) <<
-        "ragged-right" << " = ";
+        "ragged-right = ";
       if (mfOnOffKindAsBool (raggedRight)) {
         fLilypondCodeStream << "##t";
       }
@@ -7548,7 +7528,7 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
 
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "oddHeaderMarkup" << " = ";
+    "oddHeaderMarkup = ";
   if (oddHeaderMarkup.size ()) {
     fLilypondCodeStream <<
       oddHeaderMarkup;
@@ -7563,7 +7543,7 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
 
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "evenHeaderMarkup" << " = ";
+    "evenHeaderMarkup = ";
   if (evenHeaderMarkup.size ()) {
     fLilypondCodeStream <<
       evenHeaderMarkup;
@@ -7578,7 +7558,7 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
 
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "oddFooterMarkup" << " = ";
+    "oddFooterMarkup = ";
   if (oddFooterMarkup.size ()) {
     fLilypondCodeStream <<
       oddFooterMarkup;
@@ -7593,7 +7573,7 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
 
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "evenFooterMarkup" << " = ";
+    "evenFooterMarkup = ";
   if (evenFooterMarkup.size ()) {
     fLilypondCodeStream <<
       evenFooterMarkup;
@@ -7780,7 +7760,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
 
   // ChordNames context
   if (fVisitedLpsrScore->getJazzChordsDisplayIsNeeded ()) {
-		gIndenter.indentMultiLineString (
+    gIndenter.indentMultiLineString (
 R"(\context {
   \ChordNames
   chordNameExceptions = \chExceptions
@@ -7792,7 +7772,7 @@ R"(\context {
   }
   chordNoteNamer = #lower-extension
 })",
-			fLilypondCodeStream);
+      fLilypondCodeStream);
   }
 }
 
@@ -9133,10 +9113,10 @@ if (true)
 
   // generate ledger lines coloring code if needed
   if (fVisitedLpsrScore->getColoredLedgerLinesIsNeeded ()) {
-		gIndenter.indentMultiLineString (
+    gIndenter.indentMultiLineString (
 R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
   \override LedgerLineSpanner.after-line-breaking = #grob::display-objects)",
-			fLilypondCodeStream);
+      fLilypondCodeStream);
   }
 
   // generate merge rests if needed
@@ -9901,13 +9881,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
 
   switch (elt->getContextUseExistingKind ()) {
     case lpsrContextUseExistingKind::kUseExistingContextYes:
-			fLilypondCodeStream <<
-				"%{ Use existing context here %}" << // JMI ??? v0.9.66
-				std::endl;
+      fLilypondCodeStream <<
+        "%{ Use existing context here %}" << // JMI ??? v0.9.66
+        std::endl;
       break;
     case lpsrContextUseExistingKind::kUseExistingContextNo:
-			fLilypondCodeStream <<
-				"\\context ";
+      fLilypondCodeStream <<
+        "\\context ";
       break;
   } // switch
 
@@ -9917,8 +9897,8 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
 
   fLilypondCodeStream <<
 //     "\\context " << // JMI ??? v0.9.66
-		lpsrContextTypeKindAsLilypondString (
-			elt->getContextTypeKind ()) <<
+    lpsrContextTypeKindAsLilypondString (
+      elt->getContextTypeKind ()) <<
     " = \"" << contextName << "\"" <<
     std::endl;
 
@@ -10014,24 +9994,24 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
 #endif
 
   fLilypondCodeStream <<
-  	"%{" <<
-  	std::endl <<
-		"visitStart (S_lpsrFiguredBassContext& elt), elt = " <<
-		std::endl <<
-		elt <<
-  	"%}" <<
-  	std::endl <<
+    "%{" <<
+    std::endl <<
+    "visitStart (S_lpsrFiguredBassContext& elt), elt = " <<
+    std::endl <<
+    elt <<
+    "%}" <<
+    std::endl <<
     std::endl;
 
   switch (elt->getContextUseExistingKind ()) {
     case lpsrContextUseExistingKind::kUseExistingContextYes:
-			fLilypondCodeStream <<
-				"%{ Use existing context here %}" << // JMI ??? v0.9.66
-				std::endl;
+      fLilypondCodeStream <<
+        "%{ Use existing context here %}" << // JMI ??? v0.9.66
+        std::endl;
       break;
     case lpsrContextUseExistingKind::kUseExistingContextNo:
-			fLilypondCodeStream <<
-				"\\context ";
+      fLilypondCodeStream <<
+        "\\context ";
       break;
   } // switch
 
@@ -10040,8 +10020,8 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
       elt->getContextName ();
 
   fLilypondCodeStream <<
-		lpsrContextTypeKindAsLilypondString (
-			elt->getContextTypeKind ()) <<
+    lpsrContextTypeKindAsLilypondString (
+      elt->getContextTypeKind ()) <<
     " = \"" << contextName << "\"" <<
     std::endl;
 
@@ -11854,40 +11834,57 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-  fCurrentFiguredBass = elt;
+  // handle the figured bass only when attached to a note in a regular voice,
+  // since it needs to be attached to the latter
+  Bool doHandleFiguredBass;
 
-  if (fOnGoingNotesStack.size () > 0) {
-#ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
-      fLilypondCodeStream <<
-        "%{ fOnGoingNotesStack.size () S_msrFiguredBass JMI " <<
-        fCurrentFiguredBass->asString () <<
-        " %}" <<
-        std::endl;
-    }
-#endif
-  }
+  switch (fCurrentVoice->getVoiceKind ()) {
+    case msrVoiceKind::kVoiceKindRegular:
+      doHandleFiguredBass = true;
+      break;
 
-  else if (fOnGoingChord) { // JMI
-  }
+    case msrVoiceKind::kVoiceKindDynamics:
+    case msrVoiceKind::kVoiceKindHarmonies:
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      break;
+  } // switch
 
-  else if (fOnGoingFiguredBassVoice) {
-    fLilypondCodeStream <<
-      figuredBassAsLilypondString (elt) <<
-      ' ';
+  if (doHandleFiguredBass) {
+		fCurrentFiguredBass = elt;
 
-    // generate the input line number as comment if relevant
-    if (
-      gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
-        ||
-      gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
-    ) {
-      generateInputLineNumberAndOrMeasurePositionAsAComment (
-        fCurrentFiguredBass);
-    }
-  }
+		if (fOnGoingNotesStack.size () > 0) {
+	#ifdef TRACING_IS_ENABLED
+			if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+				fLilypondCodeStream <<
+					"%{ fOnGoingNotesStack.size () S_msrFiguredBass JMI " <<
+					fCurrentFiguredBass->asString () <<
+					" %}" <<
+					std::endl;
+			}
+	#endif
+		}
 
-  fCurrentFiguredBassFiguresCounter = 0;
+		else if (fOnGoingChord) { // JMI
+		}
+
+		else if (fOnGoingFiguredBassVoice) {
+			fLilypondCodeStream <<
+				figuredBassAsLilypondString (elt) <<
+				' ';
+
+			// generate the input line number as comment if relevant
+			if (
+				gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
+					||
+				gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
+			) {
+				generateInputLineNumberAndOrMeasurePositionAsAComment (
+					fCurrentFiguredBass);
+			}
+		}
+
+		fCurrentFiguredBassFiguresCounter = 0;
+	}
 }
 
 void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
@@ -12347,7 +12344,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       "% <!--=== measure '" << measureNumber << "' start, " <<
       ", measureEndRegularKind = '" << measureEndRegularKind <<
       ", measurePuristNumber = '" << measurePuristNumber <<
-      ", fOnGoingMultipleFullBarRests = " << fOnGoingMultipleFullBarRests <<
+      ", fOnGoingMultipleFullBarRests: " << fOnGoingMultipleFullBarRests <<
       ", line " << inputLineNumber <<
       " ===-->" <<
       std::endl;
@@ -12386,7 +12383,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone: // JMI v0.9.63
-			++fCurrentVoiceMeasuresCounter;
+      ++fCurrentVoiceMeasuresCounter;
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart:
@@ -12485,7 +12482,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
       if (
-      	elt->getMeasureIsFirstInVoice ()
+        elt->getMeasureIsFirstInVoice ()
           &&
         elt->fetchMeasureUpLinkToScore ()->getScoreNumberOfMeasures () > 1
       ) {
@@ -12530,18 +12527,18 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             "% Setting the measure whole notes for measure " <<
             std::setw (fieldWidth) <<
             measureNumber <<
-            ", line = " << inputLineNumber <<
+            ", line: " << inputLineNumber <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% measureWholeNotesDuration" << " = " <<
+            "% measureWholeNotesDuration = " <<
             measureWholeNotesDuration <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% fullMeasureWholeNotesDuration" << " = " <<
+            "% fullMeasureWholeNotesDuration = " <<
             fullMeasureWholeNotesDuration <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% ratioToFullMeasureWholeNotesDuration" << " = " <<
+            "% ratioToFullMeasureWholeNotesDuration = " <<
             ratioToFullMeasureWholeNotesDuration <<
             std::endl << std::endl;
         }
@@ -12754,9 +12751,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     gLogStream <<
       std::endl <<
       "% <!--=== measure '" << measureNumber << "' end, " <<
-			", measureEndRegularKind: " << measureEndRegularKind <<
+      ", measureEndRegularKind: " << measureEndRegularKind <<
       ", measurePuristNumber: '" << measurePuristNumber << "'" <<
-      ", fOnGoingMultipleFullBarRests = " << fOnGoingMultipleFullBarRests <<
+      ", fOnGoingMultipleFullBarRests: " << fOnGoingMultipleFullBarRests <<
       "', line " << inputLineNumber <<
       " ===-->" <<
       std::endl;
@@ -21454,7 +21451,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
   fLilypondCodeStream <<
     "\\tuplet " <<
-	  tupletFactorAsLilypondString (elt->getTupletFactor ()) <<
+    tupletFactorAsLilypondString (elt->getTupletFactor ()) <<
     " {" <<
     std::endl;
 
@@ -23285,13 +23282,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
-      "% repeatPatternMeasuresNumber" << " = " << repeatPatternMeasuresNumber <<
+      "% repeatPatternMeasuresNumber" << ": " << repeatPatternMeasuresNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "% repeatReplicasMeasuresNumber" << " = " << repeatReplicasMeasuresNumber <<
+      "% repeatReplicasMeasuresNumber" << ": " << repeatReplicasMeasuresNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "% replicasNumber" << " = " << replicasNumber <<
+      "% replicasNumber" << ": " << replicasNumber <<
       std::endl;
   }
 #endif
@@ -23869,7 +23866,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "left-margin" << " = " <<
+    "left-margin = " <<
     std::setprecision (3) << leftMarginValue <<
     leftMarginUnitString <<
     std::endl;
@@ -23906,7 +23903,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "right-margin" << " = " <<
+    "right-margin = " <<
     std::setprecision (3) << rightMarginValue <<
     rightMarginUnitString <<
     std::endl;
@@ -23943,7 +23940,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "top-margin" << " = " <<
+    "top-margin = " <<
     std::setprecision (3) << topMarginValue <<
     topMarginUnitString <<
     std::endl;
@@ -23980,7 +23977,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   }
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "bottom-margin" << " = " <<
+    "bottom-margin = " <<
     std::setprecision (3) << bottomMarginValue <<
     bottomMarginUnitString <<
     std::endl;

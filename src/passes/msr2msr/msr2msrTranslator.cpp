@@ -100,11 +100,11 @@ void msrHiddenMeasureAndBarLineDescr::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "inputLineNumber" << " : " <<
+    "inputLineNumber" << ": " <<
     fInputLineNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "dalSegno" << " : " <<
+    "dalSegno" << ": " <<
     fDalSegno->asString () <<
     std::endl;
 }
@@ -283,11 +283,11 @@ void msr2msrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
 
       gLogStream << std::left <<
         std::setw (fieldWidth) <<
-        "inputLineNumber" << " : " <<
+        "inputLineNumber" << ": " <<
         hiddenMeasureAndBarLineDescr->getInputLineNumber () <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "dalSegno" << " : " <<
+        "dalSegno" << ": " <<
         dalSegno <<
         std::endl;
 
@@ -1301,89 +1301,107 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
+      ", fCurrentHarmonyClone: " << fCurrentHarmonyClone <<
       ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }
 #endif
 
-  // create a harmony new born clone
-  fCurrentHarmonyClone =
-    elt->
-      createHarmonyNewbornClone (
-        fCurrentVoiceClone);
+  // handle the harmony only when attached to a note in a regular voice,
+  // since it needs to be attached to the latter
+  Bool doHandleHarmony;
 
-  if (fOnGoingNonGraceNote) {
-    // register this note as the harmony note uplink
-    fCurrentHarmonyClone->
-      setHarmonyUpLinkToNote (fCurrentNonGraceNoteClone);
+  switch (fCurrentVoiceClone->getVoiceKind ()) {
+    case msrVoiceKind::kVoiceKindRegular:
+      doHandleHarmony = true;
+      break;
 
-    // register the harmony in the current non-grace note clone
-    fCurrentNonGraceNoteClone->
-      appendHarmonyToNoteHarmoniesList (
-        fCurrentHarmonyClone);
+    case msrVoiceKind::kVoiceKindDynamics:
+    case msrVoiceKind::kVoiceKindHarmonies:
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      break;
+  } // switch
 
-    // don't append the harmony to the part harmony,
-    // this has been done in pass2b // JMI ??? v0.9.66
-  }
+  if (doHandleHarmony) {
+    // create a harmony new born clone
+    fCurrentHarmonyClone =
+      elt->
+        createHarmonyNewbornClone (
+          fCurrentVoiceClone);
 
-  else if (fOnGoingChord) {
-    // register the harmony in the current chord clone
-    fCurrentChordClone->
-      appendHarmonyToChord (
-        fCurrentHarmonyClone); // JMI
-  }
+    if (fOnGoingNonGraceNote) {
+      // register fCurrentNonGraceNoteClone as the harmony note uplink
+      fCurrentHarmonyClone->
+        setHarmonyUpLinkToNote (
+          fCurrentNonGraceNoteClone);
 
-  else if (fOnGoingHarmoniesVoice) {
-  /* JMI
-    // get the harmony whole notes offset
-    Rational
-      harmonyWholeNotesOffset =
-        elt->getHarmonyWholeNotesOffset ();
+      // register the harmony in the current non-grace note clone
+      fCurrentNonGraceNoteClone->
+        appendHarmonyToNoteHarmoniesList (
+          fCurrentHarmonyClone);
 
-    // is harmonyWholeNotesOffset not equal to 0?
-    if (harmonyWholeNotesOffset.getNumerator () != 0) {
-      // create skip with duration harmonyWholeNotesOffset
-      S_msrNote
-        skip =
-          msrNote::createSkipNote (
-            elt->                getInputLineNumber (),
-            "666", // JMI elt->                getHarmoniesMeasureNumber (),
-            elt->                getHarmonyDisplayWholeNotes (), // would be 0/1 otherwise JMI
-            elt->                getHarmonyDisplayWholeNotes (),
-            0, // JMI elt->                getHarmonyDotsNumber (),
-            fCurrentVoiceClone-> getRegularVoiceStaffSequentialNumber (), // JMI
-            fCurrentVoiceClone-> getVoiceNumber ());
-
-      // append it to the current voice clone
-      // to 'push' the harmony aside
-      fCurrentVoiceClone->
-        appendNoteToVoice (skip);
+      // don't append the harmony to the part harmony,
+      // this has been done in pass2b // JMI ??? v0.9.66
     }
-*/
 
-    // append the harmony to the current voice clone
-    fCurrentVoiceClone->
-      appendHarmonyToVoiceClone (
-        fCurrentHarmonyClone);
+    else if (fOnGoingChord) {
+      // append the harmony clone to the current voice clone
+      fCurrentChordClone->
+        appendHarmonyToChord (
+          fCurrentHarmonyClone); // JMI v0.9.66
+    }
+
+    else if (fOnGoingHarmoniesVoice) {
+    /* JMI
+      // get the harmony whole notes offset
+      Rational
+        harmonyWholeNotesOffset =
+          elt->getHarmonyWholeNotesOffset ();
+
+      // is harmonyWholeNotesOffset not equal to 0?
+      if (harmonyWholeNotesOffset.getNumerator () != 0) {
+        // create skip with duration harmonyWholeNotesOffset
+        S_msrNote
+          skip =
+            msrNote::createSkipNote (
+              elt->                getInputLineNumber (),
+              "666", // JMI elt->                getHarmoniesMeasureNumber (),
+              elt->                getHarmonyDisplayWholeNotes (), // would be 0/1 otherwise JMI
+              elt->                getHarmonyDisplayWholeNotes (),
+              0, // JMI elt->                getHarmonyDotsNumber (),
+              fCurrentVoiceClone-> getRegularVoiceStaffSequentialNumber (), // JMI
+              fCurrentVoiceClone-> getVoiceNumber ());
+
+        // append it to the current voice clone
+        // to 'push' the harmony aside
+        fCurrentVoiceClone->
+          appendNoteToVoice (skip);
+      }
+  */
+
+      // append the harmony clone to the current voice clone
+      fCurrentVoiceClone->
+        appendHarmonyToVoiceClone (
+          fCurrentHarmonyClone);
+    }
+
+    else {
+      std::stringstream s;
+
+      s <<
+        "harmony is out of context, cannot be handled: " <<
+        elt->asShortString ();
+
+      msr2msrInternalError (
+        gGlobalServiceRunData->getInputSourceName (),
+        elt->getInputLineNumber (),
+        __FILE__, __LINE__,
+        s.str ());
+    }
+
+    fOnGoingHarmony = true;
   }
-
-  else {
-    std::stringstream s;
-
-    s <<
-      "harmony is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
-
-    msr2msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
-      __FILE__, __LINE__,
-      s.str ());
-  }
-
-  fOnGoingHarmony = true;
 }
 
 void msr2msrTranslator::visitStart (S_msrHarmonyDegree& elt)
@@ -1421,11 +1439,12 @@ void msr2msrTranslator::visitEnd (S_msrHarmony& elt)
   }
 #endif
 
+  // forget about current harmony clone
   fCurrentHarmonyClone = nullptr;
+
   fOnGoingHarmony = false;
 }
 
-//________________________________________________________________________
 void msr2msrTranslator::visitStart (S_msrFrame& elt)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1470,69 +1489,85 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
-      ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
+      ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
+      ", fOnGoingChord: " << fOnGoingChord <<
+      ", fOnGoingFiguredBassVoice: " << fOnGoingFiguredBassVoice <<
+      ", fOnGoingFiguredBass: " << fOnGoingFiguredBass <<
+      ", fCurrentFiguredBassClone: " << fCurrentFiguredBassClone <<
+      ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }
 #endif
 
-  // create a figured bass element new born clone
-  fCurrentFiguredBassClone =
-    elt->
-      createFiguredBassNewbornClone (
-        fCurrentVoiceClone);
+  // handle the figured bass only when attached to a note in a regular voice,
+  // since it needs to be attached to the latter
+  Bool doHandleFiguredBass;
 
-  if (fOnGoingNonGraceNote) {
-    // register this note as the figured bass note uplink
-    fCurrentFiguredBassClone->
-      setFiguredBassUpLinkToNote (fCurrentNonGraceNoteClone);
+  switch (fCurrentVoiceClone->getVoiceKind ()) {
+    case msrVoiceKind::kVoiceKindRegular:
+      doHandleFiguredBass = true;
+      break;
 
-    // register the figured bass in the current non-grace note clone
-    fCurrentNonGraceNoteClone->
-      appendFiguredBassToNoteFiguredBassesList (
-        fCurrentFiguredBassClone);
+    case msrVoiceKind::kVoiceKindDynamics:
+    case msrVoiceKind::kVoiceKindHarmonies:
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      break;
+  } // switch
 
-    // don't append the figured bass to the part figured bass,  JMI ??? v0.9.66
-    // this will be done below
-  }
+  if (doHandleFiguredBass) {
+    // create a figured bass element new born clone
+    fCurrentFiguredBassClone =
+      elt->
+        createFiguredBassNewbornClone (
+          fCurrentVoiceClone);
 
-  //* JMI
-  else if (fOnGoingChord) {
-    // register the figured bass in the current chord clone
-    fCurrentChordClone->
-      setChordFiguredBass (
-        fCurrentFiguredBassClone); // JMI ??? v0.9.66
-  }
-  //*/
+    if (fOnGoingNonGraceNote) {
+      // register fCurrentNonGraceNoteClone as the figured bass note uplink
+      fCurrentFiguredBassClone->
+        setFiguredBassUpLinkToNote (
+          fCurrentNonGraceNoteClone);
 
-  else if (fOnGoingFiguredBassVoice) { // JMI
-    /*
-    // register the figured bass in the part clone figured bass
-    fCurrentPartClone->
-      appendFiguredBassToPartClone (
-        fCurrentVoiceClone,
-        fCurrentFiguredBassClone);
-        */
+      // register the figured bass in the current non-grace note clone
+      fCurrentNonGraceNoteClone->
+        appendFiguredBassToNoteFiguredBassesList (
+          fCurrentFiguredBassClone);
 
-    // append the figured bass to the current voice clone
-    fCurrentVoiceClone->
-      appendFiguredBassToVoiceClone (
-        fCurrentFiguredBassClone);
-  }
+      // don't append the figured bass to the part figured bass, JMI ??? v0.9.66
+      // this will be done below
+    }
 
-  else {
-    std::stringstream s;
+    //* JMI
+    else if (fOnGoingChord) {
+      // register the figured bass in the current chord clone
+      fCurrentChordClone->
+        setChordFiguredBass (
+          fCurrentFiguredBassClone); // JMI ??? v0.9.66
+    }
+    //*/
 
-    s <<
-      "figured bass is out of context, cannot be handled:'" <<
-      elt->asShortString () <<
-      "'";
+    else if (fOnGoingFiguredBassVoice) {
+      // append the figured bass clone to the current voice clone
+      fCurrentVoiceClone->
+        appendFiguredBassToVoiceClone (
+          fCurrentFiguredBassClone);
+    }
 
-    msr2msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
-      __FILE__, __LINE__,
-      s.str ());
+    else {
+      std::stringstream s;
+
+      s <<
+        "figured bass is out of context, cannot be handled: " <<
+        elt->asShortString ();
+
+      msr2msrInternalError (
+        gGlobalServiceRunData->getInputSourceName (),
+        elt->getInputLineNumber (),
+        __FILE__, __LINE__,
+        s.str ());
+    }
+
+    fOnGoingFiguredBass = true;
   }
 }
 
@@ -1568,7 +1603,10 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
   }
 #endif
 
+  // forget about current figured bass clone
   fCurrentFiguredBassClone = nullptr;
+
+  fOnGoingFiguredBass = true;
 }
 
 //________________________________________________________________________
@@ -3994,19 +4032,26 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
 
     default:
       fCurrentNonGraceNoteClone = noteClone;
+#ifdef TRACING_IS_ENABLED
+      if (true || gGlobalTracingOahGroup->getTraceNotes ()) {
+        gLogStream <<
+          "===> fCurrentNonGraceNoteClone = " <<
+          fCurrentNonGraceNoteClone->asString () <<
+          std::endl;
+      }
+#endif
 
       if (! fFirstNoteCloneInVoice) {
         fFirstNoteCloneInVoice =
           fCurrentNonGraceNoteClone;
 
 #ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceNotes ()) {
+        if (true || gGlobalTracingOahGroup->getTraceNotes ()) {
           gLogStream <<
-            "The first note of voice clone RJIRWR '" <<
+            "The first note of voice clone JMI v0.9.66 " <<
             fCurrentVoiceClone->getVoiceName () <<
-            "' is '" <<
+            " is " <<
             fFirstNoteCloneInVoice->asShortString () <<
-             "'" <<
             std::endl;
         }
 #endif

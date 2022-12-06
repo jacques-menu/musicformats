@@ -78,9 +78,9 @@ S_bsrCellsList bsrNumber::numberValueAsCellsList () const
 /* JMI
     gLogStream << // JMI
       "% ==> numberValueAsCellsList ()" <<
-      ", n = " << n <<
-      ", div = " << div <<
-      ", mod = " << mod <<
+      ", n: " << n <<
+      ", div: " << div <<
+      ", mod: " << mod <<
       std::endl;
 */
 
@@ -273,18 +273,18 @@ void bsrNumber::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    ", numberValue" << " : " << fNumberValue <<
+    ", numberValue" << ": " << fNumberValue <<
     std::endl <<
     std::setw (fieldWidth) <<
-    ", numberSignIsNeeded" << " : " <<
+    ", numberSignIsNeeded" << ": " <<
     bsrNumberSignIsNeededKindAsString (
       fNumberSignIsNeededKind) <<
     std::setw (fieldWidth) <<
-    ", numberCellsList" << " : " <<
+    ", numberCellsList" << ": " <<
     fNumberCellsList->asShortString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "spacesBefore" << " : " << fSpacesBefore <<
+    "spacesBefore" << ": " << fSpacesBefore <<
     std::endl;
 
   --gIndenter;

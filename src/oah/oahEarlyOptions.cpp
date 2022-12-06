@@ -547,7 +547,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
 
       for (size_t i = 0; i < argumentsNumber; ++i) {
         gLogStream <<
-          i << " : " << argumentsVector [i] <<
+          i << ": " << argumentsVector [i] <<
             std::endl;
       } // for
 
@@ -659,26 +659,26 @@ void oahEarlyOptions::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "EarlyInsiderOption" << " : " << fEarlyInsiderOption <<
+    "EarlyInsiderOption" << ": " << fEarlyInsiderOption <<
     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "EarlyRegularOption" << " : " << fEarlyRegularOption <<
+//     "EarlyRegularOption" << ": " << fEarlyRegularOption <<
 //     std::endl <<
 
     std::setw (fieldWidth) <<
-    "EarlyQuietOption" << " : " << fEarlyQuietOption <<
+    "EarlyQuietOption" << ": " << fEarlyQuietOption <<
     std::endl;
 
 #ifdef TRACING_IS_ENABLED
   os << std::left <<
     std::setw (fieldWidth) <<
-    "EarlyOahVerboseMode" << " : " << fEarlyOahVerboseMode <<
+    "EarlyOahVerboseMode" << ": " << fEarlyOahVerboseMode <<
     std::endl;
 #endif
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "EarlyIncludeFileNamesList" << " : " <<
+    "EarlyIncludeFileNamesList" << ": " <<
     std::endl;
 
   if (fEarlyIncludeFileNamesList.size ()) {
@@ -702,21 +702,21 @@ void oahEarlyOptions::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "TraceEarlyOptions" << " : " << fTraceEarlyOptions <<
+    "TraceEarlyOptions" << ": " << fTraceEarlyOptions <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "EarlyTracingOah" << " : " << fEarlyTracingOah <<
+    "EarlyTracingOah" << ": " << fEarlyTracingOah <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "EarlyTracingOahDetails" << " : " << fEarlyTracingOahDetails <<
+    "EarlyTracingOahDetails" << ": " << fEarlyTracingOahDetails <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "EarlyTraceComponents" << " : " << fEarlyTraceComponents <<
+    "EarlyTraceComponents" << ": " << fEarlyTraceComponents <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "EarlyTracePasses" << " : " << fEarlyTracePasses <<
+    "EarlyTracePasses" << ": " << fEarlyTracePasses <<
     std::endl;
 
 #endif

@@ -330,15 +330,15 @@ void bsrDynamic::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "dynamicKind" << " : " <<
+    "dynamicKind" << ": " <<
     msrDynamicKindAsString (fDynamicKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "noteCellsList" << " : " <<
+    "noteCellsList" << ": " <<
     fDynamicsCellsList->asShortString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "spacesBefore" << " : " << fSpacesBefore <<
+    "spacesBefore" << ": " << fSpacesBefore <<
     std::endl;
 
   --gIndenter;

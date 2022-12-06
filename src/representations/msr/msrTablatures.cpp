@@ -188,16 +188,16 @@ void msrFrameNote::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fFrameNoteStringNumber" << " : " << fFrameNoteStringNumber <<
+    "fFrameNoteStringNumber" << ": " << fFrameNoteStringNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fFrameNoteFretNumber" << " : " << fFrameNoteFretNumber <<
+    "fFrameNoteFretNumber" << ": " << fFrameNoteFretNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fFrameNoteFingering" << " : " << fFrameNoteFingering <<
+    "fFrameNoteFingering" << ": " << fFrameNoteFingering <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fFrameNoteBarreTypeKind" << " : " << fFrameNoteBarreTypeKind <<
+    "fFrameNoteBarreTypeKind" << ": " << fFrameNoteBarreTypeKind <<
     std::endl;
 
   --gIndenter;
@@ -436,16 +436,16 @@ void msrFrame::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fFrameStringsNumber" << " = " << fFrameStringsNumber <<
+    "fFrameStringsNumber" << ": " << fFrameStringsNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fFrameFretsNumber" << " = " << fFrameFretsNumber <<
+    "fFrameFretsNumber" << ": " << fFrameFretsNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fFrameFirstFretNumber" << " = " << fFrameFirstFretNumber <<
+    "fFrameFirstFretNumber" << ": " << fFrameFirstFretNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fFrameContainsFingerings" << " = " << fFrameContainsFingerings <<
+    "fFrameContainsFingerings" << ": " << fFrameContainsFingerings <<
     std::endl;
 
   // print frame notes if any
@@ -501,13 +501,13 @@ void msrFrame::print (std::ostream& os) const
 
       os << std::left <<
         std::setw (fieldWidth) <<
-        "barreStartString" << " : " << barre.getBarreStartString () <<
+        "barreStartString" << ": " << barre.getBarreStartString () <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "barreStopString" << " : " << barre.getBarreStopString () <<
+        "barreStopString" << ": " << barre.getBarreStopString () <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "barreFretNumber" << " : " << barre.getBarreFretNumber () <<
+        "barreFretNumber" << ": " << barre.getBarreFretNumber () <<
         std::endl;
 
       --gIndenter;

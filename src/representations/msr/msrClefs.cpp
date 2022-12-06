@@ -189,7 +189,7 @@ msrClefKind msrClefKindFromString (
       "clef std::string \"" <<
       clefString <<
       "\" is unknown" <<
-      ", line = " << inputLineNumber;
+      ", line: " << inputLineNumber;
 
     msrError (
       gGlobalServiceRunData->getInputSourceName (),

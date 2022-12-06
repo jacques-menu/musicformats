@@ -715,17 +715,17 @@ void msrWedge::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "wedgeNienteKind" << " : " <<
+    "wedgeNienteKind" << ": " <<
     msrWedgeNienteKindAsString (
       fWedgeNienteKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wedgeLineTypeKind" << " : " <<
+    "wedgeLineTypeKind" << ": " <<
     msrLineTypeKindAsString (
       fWedgeLineTypeKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wedgePlacementKind" << " : " <<
+    "wedgePlacementKind" << ": " <<
     msrPlacementKindAsString (
       fWedgePlacementKind) <<
     std::endl;

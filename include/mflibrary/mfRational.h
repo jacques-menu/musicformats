@@ -54,7 +54,7 @@ class EXP Rational
 
     void                  setNumerator (long int num)
                               { fNumerator = num; }
-    long int              getNumerator ()	const
+    long int              getNumerator ()  const
                               { return fNumerator; }
 
     void                  setDenominator (long int denom)
@@ -112,9 +112,9 @@ class EXP Rational
     Bool                  operator != (const Rational &pos) const
                               {return !(*this == pos);}
 
-    Bool                  operator >	(double num) const;
+    Bool                  operator >  (double num) const;
     Bool                  operator >= (double num) const;
-    Bool                  operator <	(double num) const;
+    Bool                  operator <  (double num) const;
     Bool                  operator <= (double num) const;
     Bool                  operator == (double) const;
 
@@ -126,9 +126,9 @@ class EXP Rational
                           operator int () const;
 
     std::string           toString () const;
-    double	              toDouble () const;
-    float	                toFloat () const;
-    int		                toInt () const;
+    double                toDouble () const;
+    float                  toFloat () const;
+    int                    toInt () const;
 
   public:
 

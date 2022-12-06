@@ -933,7 +933,7 @@ void LilyPondIssue34InsiderOahGroup::printLilyPondIssue34InsiderOahGroupValues (
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "msrGenerationAPIKind" << " : " <<
+    "msrGenerationAPIKind" << ": " <<
     msrGenerationAPIKindAsString (fGenerationAPIKind) <<
     std::endl;
 
@@ -950,7 +950,7 @@ void LilyPondIssue34InsiderOahGroup::printLilyPondIssue34InsiderOahGroupValues (
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "mfMultiGenerationOutputKind" << " : " <<
+    "mfMultiGenerationOutputKind" << ": " <<
     mfMultiGenerationOutputKindAsString (fMultiGenerationOutputKind) <<
     std::endl;
 

@@ -508,7 +508,7 @@ int consumeDecimalNumber (
 
   if (debugMode) {
     gLogStream <<
-      "--> consumeDecimalNumber: result = " << result <<
+      "--> consumeDecimalNumber: result: " << result <<
       ", *remainingStringIterator = |" << *remainingStringIterator <<
       "|" <<
       std::endl;
@@ -579,8 +579,8 @@ std::set<int> mfDecipherNaturalNumbersSetSpecification (
       if (debugMode) {
         gLogStream <<
           "--> mfDecipherNaturalNumbersSetSpecification" <<
-          ", intervalStartNumber = " << intervalStartNumber <<
-          ", intervalEndNumber = " << intervalEndNumber <<
+          ", intervalStartNumber: " << intervalStartNumber <<
+          ", intervalEndNumber: " << intervalEndNumber <<
           ": *cursor = |" << *cursor << "|" <<
           std::endl;
       }
@@ -657,7 +657,7 @@ std::string consumeString (
 
   if (debugMode) {
     gLogStream <<
-      "--> consumeString: result = " << result <<
+      "--> consumeString: result: " << result <<
       ", *remainingStringIterator = |" << *remainingStringIterator <<
       "|" <<
       std::endl;
@@ -702,7 +702,7 @@ std::set<std::string> mfDecipherStringsSetSpecification (
     if (debugMode) {
       gLogStream <<
         "--> mfDecipherStringsSetSpecification" <<
-        ", currentString = " << currentString <<
+        ", currentString: " << currentString <<
         ": *cursor = |" << *cursor << "|" <<
         std::endl;
     }
@@ -1293,13 +1293,13 @@ void mfSplitStringIntoChunks (
 
 #ifdef DEBUG_SPLITTING
       gLogStream <<
-        "theStringSize = " << theStringSize <<
+        "theStringSize: " << theStringSize <<
         std::endl <<
-        "currentPosition = " << currentPosition <<
+        "currentPosition: " << currentPosition <<
         std::endl <<
         "remainder = |" << remainder << "|" <<
         std::endl <<
-        "chunkLength = " << chunkLength <<
+        "chunkLength: " << chunkLength <<
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
@@ -1337,15 +1337,15 @@ void mfSplitStringIntoChunks (
           currentPosition);
 
       gLogStream <<
-        "theStringSize = " << theStringSize <<
+        "theStringSize: " << theStringSize <<
         std::endl <<
-        "currentPosition = " << currentPosition <<
+        "currentPosition: " << currentPosition <<
         std::endl <<
         "remainder = |" << remainder << "|" <<
         std::endl <<
-        "found = " << found <<
+        "found: " << found <<
         std::endl <<
-        "chunkLength = " << chunkLength <<
+        "chunkLength: " << chunkLength <<
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
@@ -1405,13 +1405,13 @@ void mfSplitRegularStringAtEndOfLines (
 
 #ifdef DEBUG_SPLITTING
       gLogStream <<
-        "theStringSize = " << theStringSize <<
+        "theStringSize: " << theStringSize <<
         std::endl <<
-        "currentPosition = " << currentPosition <<
+        "currentPosition: " << currentPosition <<
         std::endl <<
         "remainder = |" << remainder << "|" <<
         std::endl <<
-        "chunkLength = " << chunkLength <<
+        "chunkLength: " << chunkLength <<
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
@@ -1449,15 +1449,15 @@ void mfSplitRegularStringAtEndOfLines (
           currentPosition);
 
       gLogStream <<
-        "theStringSize = " << theStringSize <<
+        "theStringSize: " << theStringSize <<
         std::endl <<
-        "currentPosition = " << currentPosition <<
+        "currentPosition: " << currentPosition <<
         std::endl <<
         "remainder = |" << remainder << "|" <<
         std::endl <<
-        "found = " << found <<
+        "found: " << found <<
         std::endl <<
-        "chunkLength = " << chunkLength <<
+        "chunkLength: " << chunkLength <<
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
@@ -1530,13 +1530,13 @@ void mfSplitHTMLStringContainingEndOfLines (
 
 #ifdef DEBUG_SPLITTING
       gLogStream <<
-        "theStringSize = " << theStringSize <<
+        "theStringSize: " << theStringSize <<
         std::endl <<
-        "currentPosition = " << currentPosition <<
+        "currentPosition: " << currentPosition <<
         std::endl <<
         "remainder = |" << remainder << "|" <<
         std::endl <<
-        "chunkLength = " << chunkLength <<
+        "chunkLength: " << chunkLength <<
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;
@@ -1574,15 +1574,15 @@ void mfSplitHTMLStringContainingEndOfLines (
           currentPosition);
 
       gLogStream <<
-        "theStringSize = " << theStringSize <<
+        "theStringSize: " << theStringSize <<
         std::endl <<
-        "currentPosition = " << currentPosition <<
+        "currentPosition: " << currentPosition <<
         std::endl <<
         "remainder = |" << remainder << "|" <<
         std::endl <<
-        "found = " << found <<
+        "found: " << found <<
         std::endl <<
-        "chunkLength = " << chunkLength <<
+        "chunkLength: " << chunkLength <<
         std::endl <<
         "chunk = \"" << chunk << "\"" <<
         std::endl << std::endl;

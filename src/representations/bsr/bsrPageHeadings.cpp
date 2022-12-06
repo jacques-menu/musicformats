@@ -255,13 +255,13 @@ void bsrPageHeading::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
     std::endl;
   }
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "pageHeadingNumber" << " : " << fPageHeadingNumber <<
+    "pageHeadingNumber" << ": " << fPageHeadingNumber <<
     std::endl;
 
   --gIndenter;

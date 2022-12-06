@@ -198,7 +198,7 @@ msrPartGroup::msrPartGroup (
       "--------------------------------------------" <<
       std::endl <<
       "Creating part group '" << fPartGroupNumber << "'" <<
-      ", partGroupAbsoluteNumber = " << fPartGroupAbsoluteNumber <<
+      ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -269,7 +269,7 @@ msrPartGroup::msrPartGroup (
       "--------------------------------------------" <<
       std::endl <<
       "Creating part group '" << fPartGroupNumber << "'" <<
-      ", partGroupAbsoluteNumber = " << fPartGroupAbsoluteNumber <<
+      ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -1194,7 +1194,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartGroupUpLinkToPartGroup" << " : ";
+    "fPartGroupUpLinkToPartGroup" << ": ";
   if (fPartGroupUpLinkToPartGroup) {
     os <<
       "\"" <<
@@ -1224,25 +1224,25 @@ void msrPartGroup::print (std::ostream& os) const
     "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartGroupSymbolDefaultX" << " : " <<
+    "fPartGroupSymbolDefaultX" << ": " <<
     fPartGroupSymbolDefaultX <<
       std::endl <<
     std::setw (fieldWidth) <<
-    "fPartGroupSymbolKind" << " : " <<
+    "fPartGroupSymbolKind" << ": " <<
     msrPartGroupSymbolKindAsString (
       fPartGroupSymbolKind) <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartGroupImplicitKind" << " : " <<
+    "fPartGroupImplicitKind" << ": " <<
     msrPartGroupImplicitKindAsString (
       fPartGroupImplicitKind) <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartGroupBarLineKind" << " : " <<
+    "fPartGroupBarLineKind" << ": " <<
     msrPartGroupBarLineKindAsString (
       fPartGroupBarLineKind) <<
     std::endl;
@@ -1255,7 +1255,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartGroupAllVoicesList" << " : ";
+    "fPartGroupAllVoicesList" << ": ";
   if (partGroupAllVoicesListSize) {
     os << std::endl;
     ++gIndenter;
@@ -1350,7 +1350,7 @@ void msrPartGroup::printSummary (std::ostream& os) const
     "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartGroupSymbolDefaultX" << " : " <<
+    "fPartGroupSymbolDefaultX" << ": " <<
     fPartGroupSymbolDefaultX <<
       std::endl <<
     std::setw (fieldWidth) <<
@@ -1361,13 +1361,13 @@ void msrPartGroup::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartGroupImplicit" << " : " <<
+    "fPartGroupImplicit" << ": " <<
     msrPartGroupImplicitKindAsString (
       fPartGroupImplicitKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartGroupBarLine" << " : " <<
+    "fPartGroupBarLine" << ": " <<
     msrPartGroupBarLineKindAsString (
       fPartGroupBarLineKind) <<
     std::endl;

@@ -69,9 +69,9 @@ namespace MusicFormats
 // #ifdef TRACING_IS_ENABLED
 //     if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //       gLogStream <<
-//         "--> currentOption : " << currentOption <<
+//         "--> currentOption: " << currentOption <<
 //         std::endl <<
-//         "--> currString 222   : " << currString <<
+//         "--> currString 222: " << currString <<
 //         std::endl << std::endl;
 //     }
 // #endif
@@ -214,7 +214,7 @@ EXP void displayStringPairVector (
 //   #ifdef TRACING_IS_ENABLED
 //       if (getEarlyTracingOah ()) {
 //         gLogStream << "--> curOption: " << curOption << std::endl;
-//         gLogStream << "--> str      : " << str << std::endl;
+//         gLogStream << "--> str     : " << str << std::endl;
 //       }
 //   #endif
 //
@@ -352,9 +352,9 @@ EXP void displayStringPairVector (
 // #ifdef TRACING_IS_ENABLED
 //       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //         gLogStream <<
-//           "--> currentOption : " << currentOption <<
+//           "--> currentOption: " << currentOption <<
 //           std::endl <<
-//           "--> currString    : " << currString <<
+//           "--> currString  : " << currString <<
 //           std::endl << std::endl;
 //       }
 // #endif
@@ -458,16 +458,16 @@ void oahOptionOrArgument::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fOptionOrArgumentKind" << " : " <<
+    "fOptionOrArgumentKind" << ": " <<
     oahOptionOrArgumentKindAsString (
       fOptionOrArgumentKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fFirst" << " : " << fFirst <<
+    "fFirst" << ": " << fFirst <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSecond" << " : " << fSecond <<
+    "fSecond" << ": " << fSecond <<
     std::endl;
 
   --gIndenter;
@@ -1073,11 +1073,11 @@ std::string oahPrefix::fetchPrefixNames () const
 }
 
 Bool oahPrefix::findStringInFindableElement (
-	const std::string&     lowerCaseString,
-	std::list<S_oahFindStringMatch>& foundMatchesList,
-	std::ostream&                    os) const
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
 {
-	Bool result;
+  Bool result;
 
   // does this element's short name match?
   Bool prefixNameMatches =
@@ -1095,7 +1095,7 @@ Bool oahPrefix::findStringInFindableElement (
     // append the match to foundStringsList
     foundMatchesList.push_back (
       oahFindStringMatch::create (
-      	fetchPrefixNames (),
+        fetchPrefixNames (),
         fPrefixDescription,
         containingFindableElementAsString ()));
 
@@ -1112,15 +1112,15 @@ void oahPrefix::printPrefixEssentials (
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "prefixName" << " : " <<
+    "prefixName" << ": " <<
     fPrefixName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "prefixErsatz" << " : " <<
+    "prefixErsatz" << ": " <<
     fPrefixErsatz <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "prefixDescription" << " : " <<
+    "prefixDescription" << ": " <<
     fPrefixDescription <<
     std::endl;
 }
@@ -1171,9 +1171,9 @@ void oahPrefix::printHelp (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fPrefixDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fPrefixDescription,
+      os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -1183,12 +1183,12 @@ void oahPrefix::printHelp (std::ostream& os) const
 
 const std::string oahPrefix::containingFindableElementAsString () const
 {
-	std::stringstream s;
+  std::stringstream s;
 
-	s <<
+  s <<
     "Prefix:"; // JMI v0.9.66
 
-	return s.str ();
+  return s.str ();
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahPrefix& elt)
@@ -1204,7 +1204,7 @@ std::ostream& operator << (std::ostream& os, const S_oahPrefix& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahAtom oahAtom::create (
   const std::string&       longName,
   const std::string&       shortName,
@@ -1304,10 +1304,10 @@ void oahAtom::appendAtomToElementsList (
   // since this would create an ambiguity
   switch (fElementValueKind) {
     case oahElementValueKind::kElementValueUnknown:
-    	handler->
-				unknownOptionValueKindError (
-					fetchNamesBetweenQuotes ());
-    	break;
+      handler->
+        unknownOptionValueKindError (
+          fetchNamesBetweenQuotes ());
+      break;
 
     case oahElementValueKind::kElementValueWithout:
     case oahElementValueKind::kElementValueImplicit:
@@ -1434,7 +1434,7 @@ void oahAtom::print (std::ostream& os) const
     os, fieldWidth);
 
   os << std::left <<
-    std::setw (fieldWidth) << "elementHelpOnlyKind" << " : " <<
+    std::setw (fieldWidth) << "elementHelpOnlyKind" << ": " <<
     oahElementHelpOnlyKindAsString (fElementHelpOnlyKind) <<
     std::endl;
 
@@ -1462,7 +1462,7 @@ void oahAtom::printSummary (std::ostream& os) const
 
 const std::string oahAtom::containingFindableElementAsString () const
 {
-	std::stringstream s;
+  std::stringstream s;
 
   s << std::left <<
     "Atom in subgroup \"" <<
@@ -1471,13 +1471,13 @@ const std::string oahAtom::containingFindableElementAsString () const
     fUpLinkToSubGroup->getUpLinkToGroup ()->getGroupHeader () <<
     "\"";
 
-	return s.str ();
+  return s.str ();
 }
 
 Bool oahAtom::findStringInAtom (
-	const std::string&     lowerCaseString,
-	std::list<S_oahFindStringMatch>& foundMatchesList,
-	std::ostream&                    os) const
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
 {
   return
     findStringInFindableElement (
@@ -1508,7 +1508,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtom& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahAtomExpectingAValue oahAtomExpectingAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -1669,7 +1669,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtomExpectingAValue& elt
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahAtomImplicitlyStoringAValue oahAtomImplicitlyStoringAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -1788,7 +1788,7 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentials (
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl;
   if (fSetByAnOption) {
@@ -1808,7 +1808,7 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentialsShort (
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl;
   if (fSetByAnOption) {
@@ -1864,9 +1864,9 @@ void oahAtomImplicitlyStoringAValue::printHelp (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -1896,7 +1896,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtomImplicitlyStoringAVa
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahAtomStoringAValue oahAtomStoringAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -2009,16 +2009,16 @@ void oahAtomStoringAValue::printAtomWithVariableEssentials (
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fValueSpecification" << " : " <<
+    "fValueSpecification" << ": " <<
     fValueSpecification <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << " : " <<
+    "fSetByAnOption" << ": " <<
     fSetByAnOption <<
     std::endl;
 }
@@ -2032,16 +2032,16 @@ void oahAtomStoringAValue::printAtomWithVariableEssentialsShort (
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fValueSpecification" << " : " <<
+    "fValueSpecification" << ": " <<
     fValueSpecification <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << " : " <<
+    "fSetByAnOption" << ": " <<
     fSetByAnOption <<
     std::endl;
 }
@@ -2092,9 +2092,9 @@ void oahAtomStoringAValue::printHelp (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -2124,7 +2124,7 @@ std::ostream& operator << (std::ostream& os, const S_oahAtomStoringAValue& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahPureHelpAtomWithoutAValue oahPureHelpAtomWithoutAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -2261,7 +2261,7 @@ std::ostream& operator << (std::ostream& os, const S_oahPureHelpAtomWithoutAValu
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahPureHelpAtomExpectingAValue oahPureHelpAtomExpectingAValue::create (
   const std::string& longName,
   const std::string& shortName,
@@ -2377,11 +2377,11 @@ void oahPureHelpAtomExpectingAValue::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fValueSpecification" << " : " <<
+    "fValueSpecification" << ": " <<
     fValueSpecification <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fHelpAtomExpectingAValueServiceName" << " : " <<
+    "fHelpAtomExpectingAValueServiceName" << ": " <<
     fHelpAtomExpectingAValueServiceName <<
     std::endl;
 
@@ -2399,9 +2399,9 @@ void oahPureHelpAtomExpectingAValue::printHelp (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -2765,7 +2765,7 @@ void oahSubGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "elementVisibilityKind" << " : " <<
+    "elementVisibilityKind" << ": " <<
       oahElementVisibilityKindAsString (
         fElementVisibilityKind) <<
     std::endl << std::endl;
@@ -2898,7 +2898,7 @@ void oahSubGroup::printSubGroupHeader (std::ostream& os) const
 
 void oahSubGroup::printSubGroupHeaderWithHeaderWidth (
   std::ostream& os,
-  int      subGroupHeaderWidth) const
+  int           subGroupHeaderWidth) const
 {
   // print the header and option names
   os << std::left <<
@@ -2938,9 +2938,9 @@ void oahSubGroup::printHelp (std::ostream& os) const
   if (fDescription.size ()) {
     ++gIndenter;
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     --gIndenter;
 
@@ -2992,7 +2992,7 @@ void oahSubGroup::printHelp (std::ostream& os) const
 
 void oahSubGroup::printHelpWithHeaderWidth (
   std::ostream& os,
-  int      subGroupHeaderWidth) const
+  int           subGroupHeaderWidth) const
 {
   // print the header and option names
   printSubGroupHeaderWithHeaderWidth (
@@ -3008,9 +3008,9 @@ void oahSubGroup::printHelpWithHeaderWidth (
   if (fDescription.size ()) {
     ++gIndenter;
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     --gIndenter;
 
@@ -3067,9 +3067,9 @@ void oahSubGroup::printSubGroupHelp (std::ostream& os) const
   if (fDescription.size ()) {
     ++gIndenter;
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     --gIndenter;
   }
@@ -3142,9 +3142,9 @@ void oahSubGroup::printOptionsSummary (
   if (fDescription.size ()) {
     ++gIndenter;
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     --gIndenter;
   }
@@ -3204,20 +3204,20 @@ void oahSubGroup::printSubGroupAndAtomHelp (
 
 const std::string oahSubGroup::containingFindableElementAsString () const
 {
-	std::stringstream s;
+  std::stringstream s;
 
   s << std::left <<
     "Subgroup in group \"" <<
     fUpLinkToGroup->getGroupHeader () <<
     "\"";
 
-	return s.str ();
+  return s.str ();
 }
 
 Bool oahSubGroup::findStringInSubGroup (
-	const std::string&     lowerCaseString,
-	std::list<S_oahFindStringMatch>& foundMatchesList,
-	std::ostream&                    os) const
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
 {
   Bool result;
 
@@ -3681,7 +3681,7 @@ void oahGroup::applyElement (std::ostream& os)
 
 void oahGroup::handleAtomValue (
   std::ostream&      os,
-  const S_oahAtom&     atom,
+  const S_oahAtom&   atom,
   const std::string& theString)
 {
   os <<
@@ -3971,9 +3971,9 @@ void oahGroup::printHelp (std::ostream& os) const
     if (fDescription.size ()) {
       ++gIndenter;
 
-			gIndenter.indentMultiLineString (
-				fDescription,
-				os);
+      gIndenter.indentMultiLineString (
+        fDescription,
+        os);
 
       --gIndenter;
     }
@@ -4045,9 +4045,9 @@ void oahGroup::printGroupAndSubGroupHelp (
   if (fDescription.size ()) {
     ++gIndenter;
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     --gIndenter;
   }
@@ -4120,9 +4120,9 @@ void oahGroup::printOptionsSummary (std::ostream& os) const
   if (fDescription.size ()) {
     ++gIndenter;
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     --gIndenter;
   }
@@ -4151,7 +4151,7 @@ void oahGroup::printOptionsSummary (std::ostream& os) const
 }
 
 void oahGroup::printGroupAndSubGroupSpecificHelp (
-  std::ostream&      os,
+  std::ostream&        os,
   const S_oahSubGroup& subGroup) const
 {
 #ifdef TRACING_IS_ENABLED
@@ -4187,9 +4187,9 @@ void oahGroup::printGroupAndSubGroupSpecificHelp (
     if (fDescription.size ()) {
       ++gIndenter;
 
-			gIndenter.indentMultiLineString (
-				fDescription,
-				os);
+      gIndenter.indentMultiLineString (
+        fDescription,
+        os);
 
       --gIndenter;
     }
@@ -4326,20 +4326,20 @@ void oahGroup::printGroupOptionsValuesAll (
 
 const std::string oahGroup::containingFindableElementAsString () const
 {
-	std::stringstream s;
+  std::stringstream s;
 
   s << std::left <<
     "Group in handler \"" <<
     fUpLinkToHandler->getHandlerHeader () <<
     "\"";
 
-	return s.str ();
+  return s.str ();
 }
 
 void oahGroup::findStringInGroup (
-	const std::string&     lowerCaseString,
-	std::list<S_oahFindStringMatch>& foundMatchesList,
-	std::ostream&                    os) const
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
 {
   switch (fElementVisibilityKind) { // JMI remove???
     case oahElementVisibilityKind::kElementVisibilityNone:
@@ -4403,12 +4403,12 @@ int oahHandler::pIncludeFilesMaximumLevel = 10;
 
 // int            getIncludeFilesMaximumLevel ();
 
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahHandler oahHandler::create (
-	const std::string& serviceName,
-	const std::string& handlerHeader,
-	const std::string& handlerDescription,
-	const std::string& handlerUsage)
+  const std::string& serviceName,
+  const std::string& handlerHeader,
+  const std::string& handlerDescription,
+  const std::string& handlerUsage)
 {
   oahHandler* o = new
     oahHandler (
@@ -4422,10 +4422,10 @@ S_oahHandler oahHandler::create (
 */
 
 oahHandler::oahHandler (
-	const std::string& serviceName,
-	const std::string& handlerHeader,
-	const std::string& handlerDescription,
-	const std::string& handlerUsage)
+  const std::string& serviceName,
+  const std::string& handlerHeader,
+  const std::string& handlerDescription,
+  const std::string& handlerUsage)
 {
   fHandlerServiceName = serviceName;
 
@@ -4610,13 +4610,13 @@ void oahHandler::registerElementNamesInHandler (
     std::string       name    = thePair.first;
     S_oahElement element = thePair.second;
 
-// 		gLogStream << // JMI v0.9.65
-// 			"--> name: " << name <<
-// 			std::endl <<
-// 			"--> elementLongName: " << elementLongName <<
-// 			std::endl <<
-// 			"--> elementShortName: " << elementShortName <<
-// 			std::endl;
+//     gLogStream << // JMI v0.9.65
+//       "--> name: " << name <<
+//       std::endl <<
+//       "--> elementLongName: " << elementLongName <<
+//       std::endl <<
+//       "--> elementShortName: " << elementShortName <<
+//       std::endl;
 
     // is elementLongName already in the elements names std::map?
     if (name == elementLongName) {
@@ -4631,7 +4631,7 @@ void oahHandler::registerElementNamesInHandler (
           fHandlerHeader <<
           "\"";
 
-// 			gLogStream << s.str () << std::endl ; abort (); // JMI TEST v0.9.65
+//       gLogStream << s.str () << std::endl ; abort (); // JMI TEST v0.9.65
 
 //       oahInternalError (s.str ()); // JMI TEMP v0.9.65
 //       oahInternalWarning (s.str ());
@@ -4651,7 +4651,7 @@ void oahHandler::registerElementNamesInHandler (
           fHandlerHeader <<
           "\"";
 
-// 			gLogStream << s.str () << std::endl ; abort (); // JMI TEST v0.9.65
+//       gLogStream << s.str () << std::endl ; abort (); // JMI TEST v0.9.65
 
 //         oahInternalError (s.str ()); // JMI TEMP v0.9.65
 //         oahInternalWarning (s.str ());
@@ -5529,37 +5529,37 @@ void oahHandler::printHandlerEssentials (
     "handlerServiceName:" <<
     std::endl;
   ++gIndenter;
-	gIndenter.indentMultiLineString (
-		fHandlerServiceName,
-		os);
+  gIndenter.indentMultiLineString (
+    fHandlerServiceName,
+    os);
   --gIndenter;
 
   os << std::left <<
     "handlerHeader:" <<
     std::endl;
   ++gIndenter;
-	gIndenter.indentMultiLineString (
-		fHandlerHeader,
-		os);
+  gIndenter.indentMultiLineString (
+    fHandlerHeader,
+    os);
   --gIndenter;
 
   os << std::left <<
     "handlerDescription:" <<
     std::endl;
   ++gIndenter;
-	gIndenter.indentMultiLineString (
-		fHandlerDescription,
-		os);
+  gIndenter.indentMultiLineString (
+    fHandlerDescription,
+    os);
   --gIndenter;
 
   os << std::left <<
     "handlerUsage:" <<
     std::endl;
   ++gIndenter;
-	gIndenter.indentMultiLineString (
-		fHandlerUsage,
-		os);
-	--gIndenter;
+  gIndenter.indentMultiLineString (
+    fHandlerUsage,
+    os);
+  --gIndenter;
 }
 
 void oahHandler::print (std::ostream& os) const
@@ -5601,16 +5601,16 @@ void oahHandler::print (std::ostream& os) const
   ++gIndenter;
 
   os << std::left <<
-    std::setw (fieldWidth) << "fLaunchCommandAsSupplied" << " : " <<
+    std::setw (fieldWidth) << "fLaunchCommandAsSupplied" << ": " <<
     fLaunchCommandAsSupplied <<
     std::endl <<
-    std::setw (fieldWidth) << "fLaunchCommandWithLongOptionsNames" << " : " <<
+    std::setw (fieldWidth) << "fLaunchCommandWithLongOptionsNames" << ": " <<
     fLaunchCommandWithLongOptionsNames <<
     std::endl <<
-    std::setw (fieldWidth) << "fLaunchCommandWithShortOptionsNames" << " : " <<
+    std::setw (fieldWidth) << "fLaunchCommandWithShortOptionsNames" << ": " <<
     fLaunchCommandWithShortOptionsNames <<
     std::endl <<
-    std::setw (fieldWidth) << "fLaunchOptionsAndOrArgumentsAlreadyMet" << " : " <<
+    std::setw (fieldWidth) << "fLaunchOptionsAndOrArgumentsAlreadyMet" << ": " <<
     fLaunchOptionsAndOrArgumentsAlreadyMet <<
     std::endl;
 
@@ -5619,12 +5619,12 @@ void oahHandler::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "oahHandlerFoundAHelpOption" << " : " <<
+    "oahHandlerFoundAHelpOption" << ": " <<
     fOahHandlerFoundAHelpOption <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fHandlerUsedThruKind" << " : " <<
+    "fHandlerUsedThruKind" << ": " <<
     oahHandlerUsedThruKindAsString (
       fHandlerUsedThruKind) <<
     std::endl;
@@ -5677,12 +5677,12 @@ void oahHandler::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "oahHandlerFoundAHelpOption" << " : " <<
+    "oahHandlerFoundAHelpOption" << ": " <<
     fOahHandlerFoundAHelpOption <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fHandlerUsedThruKind" << " : " <<
+    "fHandlerUsedThruKind" << ": " <<
     oahHandlerUsedThruKindAsString (
       fHandlerUsedThruKind) <<
     std::endl;
@@ -5772,9 +5772,9 @@ void oahHandler::printHelp (std::ostream& os) const
 {
   // print the options handler description
   ++gIndenter;
-	gIndenter.indentMultiLineString (
-		fHandlerDescription,
-		os);
+  gIndenter.indentMultiLineString (
+    fHandlerDescription,
+    os);
   --gIndenter;
 
   // print the options handler usage
@@ -5830,9 +5830,9 @@ void oahHandler::printHelp (std::ostream& os) const
 void oahHandler::printOptionsSummary (std::ostream& os) const
 {
   // print the options handler description
-	gIndenter.indentMultiLineString (
-		fHandlerDescription,
-		os);
+  gIndenter.indentMultiLineString (
+    fHandlerDescription,
+    os);
 
   // print the options handler help header and option names
   os <<
@@ -6098,22 +6098,22 @@ void oahHandler::printNameIntrospectiveHelp (
 
 const std::string oahHandler::containingFindableElementAsString () const
 {
-	std::stringstream s;
+  std::stringstream s;
 
   s << std::left <<
     "Handler in service \"" <<
     fHandlerServiceName <<
     "\"";
 
-	return s.str ();
+  return s.str ();
 }
 
 Bool oahHandler::findStringInFindableElement (
-	const std::string&     lowerCaseString,
-	std::list<S_oahFindStringMatch>& foundMatchesList,
-	std::ostream&                    os) const
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
 {
-	Bool result;
+  Bool result;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -6780,9 +6780,9 @@ void oahHandler::printKnownSingleCharacterOptions (std::ostream& os) const
 //
 //   ++gIndenter;
 //
-// 	gIndenter.indentMultiLineString ( JMI v0.9.66
-// 		foundString,
-// 		os);
+//   gIndenter.indentMultiLineString ( JMI v0.9.66
+//     foundString,
+//     os);
 //   os  <<
 //     fHandlerServiceName <<
 //     gIndenter.indentMultiLineString (
@@ -6982,9 +6982,9 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
     // handle the valued atom using the default value
     switch (fPendingArgvAtomExpectingAValue->getElementValueKind ()) {
     case oahElementValueKind::kElementValueUnknown:
-			unknownOptionValueKindError (
-				lastOptionNameFound);
-    	break;
+      unknownOptionValueKindError (
+        lastOptionNameFound);
+      break;
 
       case oahElementValueKind::kElementValueWithout:
       case oahElementValueKind::kElementValueImplicit:
@@ -7142,9 +7142,9 @@ void oahHandler::registerAtomUse (
 }
 
 void oahHandler::registerOahElementUseInLaunchCommand (
-  const S_oahElement&  elementUsed,
-  const std::string& nameUsed,
-  const std::string& valueUsed)
+  const S_oahElement& elementUsed,
+  const std::string&  nameUsed,
+  const std::string&  valueUsed)
 {
   // sanity check
 //   if (false) // JMI
@@ -7318,7 +7318,7 @@ void oahHandler::registerArgumentUseInLaunchCommand (
 
 void oahHandler::handleOptionPrefixName (
   const std::string& prefixName,
-  size_t equalsSignPosition,
+  size_t             equalsSignPosition,
   const std::string& stringAfterEqualsSign)
 {
 #ifdef TRACING_IS_ENABLED
@@ -7496,7 +7496,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
-      "clusterElementsListSize = " << clusterElementsListSize <<
+      "clusterElementsListSize: " << clusterElementsListSize <<
       std::endl;
 
     gLogStream <<
@@ -7547,7 +7547,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
-      "optionNameSize = " << optionNameSize <<
+      "optionNameSize: " << optionNameSize <<
       std::endl;
   }
 #endif
@@ -8633,10 +8633,10 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
             }
 #endif
             switch (atomValueKind) {
-							case oahElementValueKind::kElementValueUnknown:
-								unknownOptionValueKindError (
-									atomExpectingAValue->fetchNamesBetweenQuotes ());
-								break;
+              case oahElementValueKind::kElementValueUnknown:
+                unknownOptionValueKindError (
+                  atomExpectingAValue->fetchNamesBetweenQuotes ());
+                break;
 
               case oahElementValueKind::kElementValueWithout:
                 {
@@ -8827,9 +8827,9 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 }
 
 void oahHandler::handleKnownOptionsVectorElement (
-  const S_oahElement&  element,
-  const std::string& optionNameUsed,
-  const std::string& valueUsed)
+  const S_oahElement& element,
+  const std::string&  optionNameUsed,
+  const std::string&  valueUsed)
 {
 
 #ifdef TRACING_IS_ENABLED
@@ -8990,8 +8990,8 @@ void oahHandler::handleKnownOptionsVectorElement (
 }
 
 void oahHandler::handleKnownArgvElement (
-  const S_oahElement&  element,
-  const std::string& optionNameUsed)
+  const S_oahElement& element,
+  const std::string&  optionNameUsed)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
@@ -9133,7 +9133,7 @@ void oahHandler::handleKnownArgvElement (
 }
 
 void oahHandler::handleKnownOptionsVectorAtom (
-  const S_oahAtom&     atom,
+  const S_oahAtom&   atom,
   const std::string& optionNameUsed,
   const std::string& valueUsed)
 {
@@ -9151,9 +9151,9 @@ void oahHandler::handleKnownOptionsVectorAtom (
 
   switch (atom->getElementValueKind ()) {
     case oahElementValueKind::kElementValueUnknown:
-			unknownOptionValueKindError (
-				optionNameUsed);
-    	break;
+      unknownOptionValueKindError (
+        optionNameUsed);
+      break;
 
     case oahElementValueKind::kElementValueWithout:
     case oahElementValueKind::kElementValueImplicit:
@@ -9192,7 +9192,7 @@ void oahHandler::handleKnownOptionsVectorAtom (
 }
 
 void oahHandler::handleKnownArgvAtom (
-  const S_oahAtom&     atom,
+  const S_oahAtom&   atom,
   const std::string& optionNameUsed)
 {
 #ifdef TRACING_IS_ENABLED
@@ -9224,9 +9224,9 @@ void oahHandler::handleKnownArgvAtom (
 
   switch (atom->getElementValueKind ()) {
     case oahElementValueKind::kElementValueUnknown:
-			unknownOptionValueKindError (
-				optionNameUsed);
-    	break;
+      unknownOptionValueKindError (
+        optionNameUsed);
+      break;
 
     case oahElementValueKind::kElementValueWithout:
     case oahElementValueKind::kElementValueImplicit:
@@ -9450,8 +9450,8 @@ void oahHandler::handleOptionNameCommon (
 
 
 // void oahHandler::analyzeOptionsAndArguments (
-//   std::string         serviceName,
-//   const oahOptionsAndArguments& optionsAndArguments)
+//    std::string                   serviceName,
+//    const oahOptionsAndArguments& optionsAndArguments)
 // {
 //   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //     gLogStream <<
@@ -9584,8 +9584,8 @@ void oahHandler::handleOptionNameCommon (
 //
 
 void oahHandler::includeOptionsAndArgumentsFile (
-  const std::string&      includeFileName,
-  std::ostream&                os)
+  const std::string& includeFileName,
+  std::ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
@@ -9675,7 +9675,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
 
 //______________________________________________________________________________
 void oahHandler::includeOptionsFromFile (
-  std::istream&                inputStream,
+  std::istream&           inputStream,
   oahOptionsAndArguments& optionsAndArguments)
 {
 #ifdef TRACING_IS_ENABLED

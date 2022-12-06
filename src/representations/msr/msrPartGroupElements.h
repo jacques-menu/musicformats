@@ -35,7 +35,7 @@ class EXP msrPartGroupElement : public msrElement
     // creation from MusicXML
     // ------------------------------------------------------
 
-/* this class is purely vir.htual
+/* this class is purely virtual
     static SMARTP<msrPartGroupElement> create (
                             int inputLineNumber);
 */

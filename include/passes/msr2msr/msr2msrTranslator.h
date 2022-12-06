@@ -670,11 +670,35 @@ class EXP msr2msrTranslator :
 
     // voices
     // ------------------------------------------------------
+
     S_msrVoice                fCurrentVoiceClone;
     S_msrVoice                fCurrentVoiceOriginal;
 
     std::map<S_msrNote, S_msrNote>
                               fVoiceNotesMap; // JMI
+
+    // segments
+    // ------------------------------------------------------
+
+    // the current segment clone is the one at the top of the std::stack
+    S_msrSegment              fCurrentSegmentClone;
+
+
+    // measures
+    // ------------------------------------------------------
+
+    S_msrMeasure              fCurrentMeasureClone;
+
+    // multiple full-bar rests compression
+//     S_msrMeasure              fCurrentRestMeasure;
+
+    S_msrMultipleFullBarRests fCurrentMultipleFullBarRestsClone;
+    Bool                      fOnGoingMultipleFullBarRests;
+
+    // bar checks
+    // ------------------------------------------------------
+    S_msrBarCheck             fLastBarCheck;
+
 
     // dal segnos
     // ------------------------------------------------------
@@ -701,28 +725,9 @@ class EXP msr2msrTranslator :
     // figured bass
     // ------------------------------------------------------
     Bool                      fOnGoingFiguredBassVoice;
+
+    Bool                      fOnGoingFiguredBass;
     S_msrFiguredBass          fCurrentFiguredBassClone;
-
-
-    // segments
-    // ------------------------------------------------------
-    // the current segment clone is the one at the top of the std::stack
-    S_msrSegment              fCurrentSegmentClone;
-
-
-    // measures
-    // ------------------------------------------------------
-    S_msrMeasure              fCurrentMeasureClone;
-
-    // multiple full-bar rests compression
-//     S_msrMeasure              fCurrentRestMeasure;
-
-    S_msrMultipleFullBarRests fCurrentMultipleFullBarRestsClone;
-    Bool                      fOnGoingMultipleFullBarRests;
-
-    // bar checks
-    // ------------------------------------------------------
-    S_msrBarCheck             fLastBarCheck;
 
 
     // notes

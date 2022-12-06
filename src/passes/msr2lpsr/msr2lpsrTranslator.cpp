@@ -548,24 +548,24 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   // browse the visited score with the browser
   browser.browse (*fVisitedMsrScore);
 
-	// display the LPSR score if requested
-	// ------------------------------------------------------
+  // display the LPSR score if requested
+  // ------------------------------------------------------
 
-	if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
-		displayLpsrScoreShort (
-			fResultingLpsr,
-			gGlobalMsrOahGroup,
-			gGlobalLpsrOahGroup,
-			"Display the LPSR");
-	}
+  if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
+    displayLpsrScoreShort (
+      fResultingLpsr,
+      gGlobalMsrOahGroup,
+      gGlobalLpsrOahGroup,
+      "Display the LPSR");
+  }
 
-	if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
-		displayLpsrScoreFull (
-			fResultingLpsr,
-			gGlobalMsrOahGroup,
-			gGlobalLpsrOahGroup,
-			"Display the LPSR");
-	}
+  if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
+    displayLpsrScoreFull (
+      fResultingLpsr,
+      gGlobalMsrOahGroup,
+      gGlobalLpsrOahGroup,
+      "Display the LPSR");
+  }
 
   // forget about the visited MSR score
   fVisitedMsrScore = nullptr;
@@ -658,11 +658,11 @@ void msr2lpsrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
 
       gLogStream << std::left <<
         std::setw (fieldWidth) <<
-        "inputLineNumber" << " : " <<
+        "inputLineNumber" << ": " <<
         hiddenMeasureAndBarLineDescr->getInputLineNumber () <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "dalSegno" << " : " <<
+        "dalSegno" << ": " <<
         dalSegno <<
         std::endl;
 
@@ -896,42 +896,42 @@ void msr2lpsrTranslator::setPaperIndentsIfNeeded (
 
     gLogStream << std::left <<
       std::setw (fieldWidth) <<
-      "scorePartGroupNamesMaxLength" << " : " <<
+      "scorePartGroupNamesMaxLength" << ": " <<
       scorePartGroupNamesMaxLength <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "scorePartNamesMaxLength" << " : " <<
+      "scorePartNamesMaxLength" << ": " <<
       scorePartNamesMaxLength <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "scoreInstrumentNamesMaxLength" << " : " <<
+      "scoreInstrumentNamesMaxLength" << ": " <<
       scoreInstrumentNamesMaxLength <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "scoreInstrumentAbbreviationsMaxLength" << " : " <<
+      "scoreInstrumentAbbreviationsMaxLength" << ": " <<
       scoreInstrumentAbbreviationsMaxLength <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "maxValue" << " : " <<
+      "maxValue" << ": " <<
       maxValue <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "maxShortValue" << " : " <<
+      "maxShortValue" << ": " <<
       maxShortValue <<
       /* JMI
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "charactersPerCemtimeter" << " : " <<
+      "charactersPerCemtimeter" << ": " <<
       charactersPerCemtimeter <<
       */
       std::endl;
 /*
     gLogStream << std::left <<
       std::setw (fieldWidth) <<
-      "paperWidth" << " : ";
+      "paperWidth" << ": ";
     if (paperWidth) {
       gLogStream << paperWidth;
     }
@@ -1332,10 +1332,10 @@ void msr2lpsrTranslator::visitStart (S_msrCredit& elt)
     getMsrScore ()->
       appendCreditToScore (fCurrentCredit);
 
-	/* this variable is not used yet
+  /* this variable is not used yet
   int
     creditPageNumber = elt->getCreditPageNumber ();
-	*/
+  */
 
   msrCreditTypeKind
     creditTypeKind = elt->getCreditTypeKind ();
@@ -1403,7 +1403,7 @@ void msr2lpsrTranslator::visitStart (S_msrCreditWords& elt)
       elt);
       */
 
-	/* the following variables are for further use:
+  /* the following variables are for further use:
 
     std::string
       creditWordsContents =
@@ -1448,7 +1448,7 @@ void msr2lpsrTranslator::visitStart (S_msrCreditWords& elt)
     msrXMLLangKind
       creditWordsXMLLang =
         elt->getCreditWordsXMLLang ();
-	*/
+  */
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrCreditWords& elt)
@@ -2457,7 +2457,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
     // register the harmony clone in the current chord clone
     fCurrentChordClone->
       appendHarmonyToChord (
-      	fCurrentHarmonyClone); // JMI
+        fCurrentHarmonyClone); // JMI
   }
 
   else if (fOnGoingHarmoniesVoice) {
@@ -2596,62 +2596,79 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
-      ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
+      ", fOnGoingFiguredBassVoice: " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }
 #endif
 
-  // create a figured bass new born clone
-  fCurrentFiguredBassClone =
-    elt->
-      createFiguredBassNewbornClone (
-        fCurrentVoiceClone);
+  // handle the figured bass only when attached to a note in a regular voice,
+  // since it needs to be attached to the latter
+  Bool doHandleFiguredBass;
 
-  if (fOnGoingNonGraceNote) {
-    // append the figured bass to the current non-grace note clone
-    fCurrentNonGraceNoteClone->
-      appendFiguredBassToNoteFiguredBassesList (
-        fCurrentFiguredBassClone);
+  switch (fCurrentVoiceClone->getVoiceKind ()) {
+    case msrVoiceKind::kVoiceKindRegular:
+      doHandleFiguredBass = true;
+      break;
 
-    // don't append the figured bass to the part figured bass,  JMI ???
-    // this will be done below
-  }
+    case msrVoiceKind::kVoiceKindDynamics:
+    case msrVoiceKind::kVoiceKindHarmonies:
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      break;
+  } // switch
 
-  else if (fOnGoingChord) {
-    // register the figured bass element clone in the current chord clone
-    fCurrentChordClone->
-      setChordFiguredBass (fCurrentFiguredBassClone); // JMI
-  }
+  if (doHandleFiguredBass) {
+		// create a figured bass new born clone
+		fCurrentFiguredBassClone =
+			elt->
+				createFiguredBassNewbornClone (
+					fCurrentVoiceClone);
 
-  else if (fOnGoingFiguredBassVoice) { // JMI
-    /*
-    // register the figured bass in the part clone figured bass
-    fCurrentPartClone->
-      appendFiguredBassToPartClone (
-        fCurrentVoiceClone,
-        fCurrentFiguredBassClone);
-        */
-    // append the figured bass to the current voice clone
-    fCurrentVoiceClone->
-      appendFiguredBassToVoiceClone (
-        fCurrentFiguredBassClone);
-  }
+		if (fOnGoingNonGraceNote) {
+			// append the figured bass to the current non-grace note clone
+			fCurrentNonGraceNoteClone->
+				appendFiguredBassToNoteFiguredBassesList (
+					fCurrentFiguredBassClone);
 
-  else {
-    std::stringstream s;
+			// don't append the figured bass to the part figured bass,  JMI ???
+			// this will be done below
+		}
 
-    s <<
-      "figured bass is out of context, cannot be handled:'" <<
-      elt->asShortString () <<
-      "'";
+		else if (fOnGoingChord) {
+			// register the figured bass element clone in the current chord clone
+			fCurrentChordClone->
+				setChordFiguredBass (fCurrentFiguredBassClone); // JMI
+		}
 
-    msr2lpsrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
-      __FILE__, __LINE__,
-      s.str ());
-  }
+		else if (fOnGoingFiguredBassVoice) { // JMI
+			/*
+			// register the figured bass in the part clone figured bass
+			fCurrentPartClone->
+				appendFiguredBassToPartClone (
+					fCurrentVoiceClone,
+					fCurrentFiguredBassClone);
+					*/
+			// append the figured bass to the current voice clone
+			fCurrentVoiceClone->
+				appendFiguredBassToVoiceClone (
+					fCurrentFiguredBassClone);
+		}
+
+		else {
+			std::stringstream s;
+
+			s <<
+				"figured bass is out of context, cannot be handled:'" <<
+				elt->asShortString () <<
+				"'";
+
+			msr2lpsrInternalError (
+				gGlobalServiceRunData->getInputSourceName (),
+				elt->getInputLineNumber (),
+				__FILE__, __LINE__,
+				s.str ());
+		}
+	}
 }
 
 void msr2lpsrTranslator::visitStart (S_msrBassFigure& elt)
@@ -2882,69 +2899,69 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindRegular:
-    	{
-				// don't create a bar check for the last measure of the score
-				// is it is not full time-signature wise
+      {
+        // don't create a bar check for the last measure of the score
+        // is it is not full time-signature wise
 
-				Rational
-					fullMeasureWholeNotesDuration =
-						fCurrentMeasureClone->
-							getFullMeasureWholeNotesDuration (),
-					wholeNotesDurationPerMeasure =
-						fCurrentVoiceClone->
-							getVoiceCurrentTimeSignature ()->
-								wholeNotesDurationPerMeasure ();
+        Rational
+          fullMeasureWholeNotesDuration =
+            fCurrentMeasureClone->
+              getFullMeasureWholeNotesDuration (),
+          wholeNotesDurationPerMeasure =
+            fCurrentVoiceClone->
+              getVoiceCurrentTimeSignature ()->
+                wholeNotesDurationPerMeasure ();
 
 #ifdef TRACING_IS_ENABLED
-				if (
-					gGlobalTracingOahGroup->getTraceBarChecks ()
-						||
-					gGlobalTracingOahGroup->getTraceBarNumberChecks ()
-				) {
-					gLogStream <<
-						"--> kMeasureKindRegular" <<
-						", fullMeasureWholeNotesDuration: " <<
-						fullMeasureWholeNotesDuration <<
-						"', wholeNotesDurationPerMeasure: " <<
-						wholeNotesDurationPerMeasure <<
-						std::endl;
-				}
+        if (
+          gGlobalTracingOahGroup->getTraceBarChecks ()
+            ||
+          gGlobalTracingOahGroup->getTraceBarNumberChecks ()
+        ) {
+          gLogStream <<
+            "--> kMeasureKindRegular" <<
+            ", fullMeasureWholeNotesDuration: " <<
+            fullMeasureWholeNotesDuration <<
+            "', wholeNotesDurationPerMeasure: " <<
+            wholeNotesDurationPerMeasure <<
+            std::endl;
+        }
 #endif
 
-				doCreateABarCheckAndABarNumberCheck =
-					fullMeasureWholeNotesDuration	== wholeNotesDurationPerMeasure;
-			}
+        doCreateABarCheckAndABarNumberCheck =
+          fullMeasureWholeNotesDuration  == wholeNotesDurationPerMeasure;
+      }
       break;
 
     case msrMeasureKind::kMeasureKindAnacrusis:
-    	{
-				Rational
-					fullMeasureWholeNotesDuration =
-						fCurrentMeasureClone->
-							getFullMeasureWholeNotesDuration (),
-					wholeNotesDurationPerMeasure =
-						fCurrentVoiceClone->
-							getVoiceCurrentTimeSignature ()->
-								wholeNotesDurationPerMeasure ();
+      {
+        Rational
+          fullMeasureWholeNotesDuration =
+            fCurrentMeasureClone->
+              getFullMeasureWholeNotesDuration (),
+          wholeNotesDurationPerMeasure =
+            fCurrentVoiceClone->
+              getVoiceCurrentTimeSignature ()->
+                wholeNotesDurationPerMeasure ();
 
 #ifdef TRACING_IS_ENABLED
-				if (
-					gGlobalTracingOahGroup->getTraceBarChecks ()
-						||
-					gGlobalTracingOahGroup->getTraceBarNumberChecks ()
-				) {
-					gLogStream <<
-						"--> kMeasureKindAnacrusis" <<
-						", fullMeasureWholeNotesDuration: " <<
-						fullMeasureWholeNotesDuration <<
-						"', wholeNotesDurationPerMeasure: " <<
-						wholeNotesDurationPerMeasure <<
-						std::endl;
-				}
+        if (
+          gGlobalTracingOahGroup->getTraceBarChecks ()
+            ||
+          gGlobalTracingOahGroup->getTraceBarNumberChecks ()
+        ) {
+          gLogStream <<
+            "--> kMeasureKindAnacrusis" <<
+            ", fullMeasureWholeNotesDuration: " <<
+            fullMeasureWholeNotesDuration <<
+            "', wholeNotesDurationPerMeasure: " <<
+            wholeNotesDurationPerMeasure <<
+            std::endl;
+        }
 #endif
 
-	      doCreateABarCheckAndABarNumberCheck = true;
-	    }
+        doCreateABarCheckAndABarNumberCheck = true;
+      }
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
@@ -3049,7 +3066,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       barNumberCheck_ =
         msrBarNumberCheck::create (
           inputLineNumber,
-					fCurrentMeasureClone,
+          fCurrentMeasureClone,
           nextMeasureNumber,
           voiceCurrentMeasurePuristNumber);
 
@@ -3413,7 +3430,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
       rehearsalMark =
         msrRehearsalMark::create (
           elt->getInputLineNumber (),
-					fCurrentMeasureClone,
+          fCurrentMeasureClone,
           msrRehearsalMarkKind::kRehearsalMarkNone,
           elt->tempoWordsListAsString (" "), //JMI ???
           elt->getTempoPlacementKind ());
@@ -4381,7 +4398,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
         tempo =
           msrTempo::createTempoWordsOnly (
             inputLineNumber,
-		        fCurrentMeasureClone,
+            fCurrentMeasureClone,
             elt,
             msrTempoParenthesizedKind::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
@@ -4411,7 +4428,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
         rehearsalMark =
           msrRehearsalMark::create (
             inputLineNumber,
-						fCurrentMeasureClone,
+            fCurrentMeasureClone,
             msrRehearsalMarkKind::kRehearsalMarkNone,
             elt->getWordsContents (),
             elt->getWordsPlacementKind ()); // above ??? JMI

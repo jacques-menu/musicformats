@@ -328,9 +328,9 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 /* JMI
           gLogStream << // JMI
             "% ==> bsrTempo::buildCellsList ()" <<
-            ", tempoPerMinuteString = " << tempoPerMinuteString <<
-            ", perMinuteMin = " << perMinuteMin <<
-            ", perMinuteMax = " << perMinuteMax <<
+            ", tempoPerMinuteString: " << tempoPerMinuteString <<
+            ", perMinuteMin: " << perMinuteMin <<
+            ", perMinuteMax: " << perMinuteMax <<
             std::endl;
             */
 
@@ -509,15 +509,15 @@ void bsrTempo::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "tempoKind" << " : " <<
+    "tempoKind" << ": " <<
     msrTempoBeatUnitsKindAsString (fMsrTempo->getTempoKind ()) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "tempoCellsList" << " : " <<
+    "tempoCellsList" << ": " <<
     fTempoCellsList->asShortString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "spacesBefore" << " : " << fSpacesBefore <<
+    "spacesBefore" << ": " << fSpacesBefore <<
     std::endl;
 
   --gIndenter;

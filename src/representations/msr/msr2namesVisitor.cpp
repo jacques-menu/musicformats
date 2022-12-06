@@ -288,7 +288,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "staffNumber" << " : " <<
+    "staffNumber" << ": " <<
     elt->getStaffNumber () <<
     std::endl <<
 
@@ -347,11 +347,11 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "voiceNumber" << " : " <<
+    "voiceNumber" << ": " <<
     elt->getVoiceNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "musicHasBeenInsertedInVoice" << " : " <<
+    "musicHasBeenInsertedInVoice" << ": " <<
     elt->getMusicHasBeenInsertedInVoice () <<
     std::endl;
 

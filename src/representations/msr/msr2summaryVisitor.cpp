@@ -296,13 +296,13 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "partGroupSymbolKind" << " : " <<
+    "partGroupSymbolKind" << ": " <<
     msrPartGroupSymbolKindAsString (
       elt->getPartGroupSymbolKind  ()) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "partGroupSymbolDefaultX" << " : " <<
+    "partGroupSymbolDefaultX" << ": " <<
     elt->getPartGroupSymbolDefaultX  () <<
     std::endl <<
 
@@ -387,7 +387,7 @@ void msr2summaryVisitor::visitStart (S_msrPart& elt)
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "partNumberOfMeasures" << " : " <<
+    "partNumberOfMeasures" << ": " <<
     elt->getPartNumberOfMeasures () <<
     std::endl << std::endl;
 }
@@ -433,7 +433,7 @@ void msr2summaryVisitor::visitStart (S_msrStaff& elt)
   // print the staff number
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "staffNumber" << " : " <<
+    "staffNumber" << ": " <<
     elt->getStaffNumber () <<
     std::endl <<
 
@@ -492,23 +492,23 @@ void msr2summaryVisitor::visitStart (S_msrVoice& elt)
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "voiceNumber" << " : " <<
+    "voiceNumber" << ": " <<
     elt->getVoiceNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "regularVoiceStaffSequentialNumber" << " : " <<
+    "regularVoiceStaffSequentialNumber" << ": " <<
     elt->getRegularVoiceStaffSequentialNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "voiceActualNotesCounter" << " : " <<
+    "voiceActualNotesCounter" << ": " <<
     elt->getVoiceActualNotesCounter () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "voiceActualHarmoniesCounter" << " : " <<
+    "voiceActualHarmoniesCounter" << ": " <<
     elt->getVoiceActualHarmoniesCounter () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "musicHasBeenInsertedInVoice" << " : " <<
+    "musicHasBeenInsertedInVoice" << ": " <<
     elt->getMusicHasBeenInsertedInVoice () <<
     std::endl;
 

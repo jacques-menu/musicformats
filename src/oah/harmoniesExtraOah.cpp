@@ -892,7 +892,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
     gLogStream <<
       "--> rootName = \"" << rootName << "\", " <<
       "--> harmonyName = \"" << harmonyName << "\"" <<
-      "--> inversion = " << inversion <<
+      "--> inversion: " << inversion <<
       std::endl;
   }
 #endif

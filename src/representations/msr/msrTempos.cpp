@@ -136,7 +136,7 @@ std::string msrTempoNote::asString () const
 
   s <<
     "Tempo note" <<
-    ", tempoNoteWholeNotes = " << fTempoNoteWholeNotes <<
+    ", tempoNoteWholeNotes: " << fTempoNoteWholeNotes <<
     ", tempoNoteBelongsToATuplet = " <<
     fTempoNoteBelongsToATuplet;
 
@@ -156,10 +156,10 @@ void msrTempoNote::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "tempoNoteWholeNotes" << " : " << fTempoNoteWholeNotes <<
+    "tempoNoteWholeNotes" << ": " << fTempoNoteWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "tempoNoteBelongsToATuplet" << " : " <<
+    "tempoNoteBelongsToATuplet" << ": " <<
     fTempoNoteBelongsToATuplet <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -184,7 +184,7 @@ void msrTempoNote::print (std::ostream& os) const
     }
     else {
       os <<
-        " : " <<
+        ": " <<
        "[NONE]" <<
         std::endl;
     }
@@ -725,23 +725,23 @@ void msrTempoTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "TempoTupletBracketKind" << " : " <<
+    "TempoTupletBracketKind" << ": " <<
     msrTempoTupletBracketKindAsString (
       fTempoTupletBracketKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "TempoTupletShowNumberKind" << " : " <<
+    "TempoTupletShowNumberKind" << ": " <<
     fTempoTupletShowNumberKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "MemberNotesDisplayWholeNotes" << " : " <<
+    "MemberNotesDisplayWholeNotes" << ": " <<
     fMemberNotesDisplayWholeNotes <<
     std::endl << std::endl;
 
 /* JMI ???
   os << std::left <<
     std::setw (fieldWidth) <<
-    "(measure position" << " : ";
+    "(measure position" << ": ";
   if (fTempoTupletMeasurePosition.getNumerator () < 0) {
     os << "???)";
   }
@@ -771,7 +771,7 @@ void msrTempoTuplet::print (std::ostream& os) const
     }
   else {
     os << std::left <<
-      " : " << "[EMPTY]" <<
+      ": " << "[EMPTY]" <<
       std::endl;
   }
 
@@ -901,7 +901,7 @@ std::string msrTempoNotesRelationshipElements::asString () const
 
   s <<
     "TempoNotesRelationshipElements" <<
-    ", fTempoNotesRelationshipElementsKind = " << fTempoNotesRelationshipElementsKind;
+    ", fTempoNotesRelationshipElementsKind: " << fTempoNotesRelationshipElementsKind;
 
   return s.str ();
 }
@@ -970,7 +970,7 @@ void msrTempoNotesRelationshipElements::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
       std::endl;
   }
 
@@ -1475,7 +1475,7 @@ void msrTempo::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-   "fTempoKind" << " : " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
+   "fTempoKind" << ": " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
     std::endl;
 
   os << std::left <<
@@ -1501,7 +1501,7 @@ void msrTempo::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[EMPTY]" <<
+      ": " << "[EMPTY]" <<
       std::endl;
   }
 
@@ -1523,12 +1523,12 @@ void msrTempo::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTempoEquivalentBeatUnit"  << " : " <<
+    "fTempoEquivalentBeatUnit"  << ": " <<
     fTempoEquivalentBeatUnit <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "tempoParenthesizedKind"  << " : " <<
+    "tempoParenthesizedKind"  << ": " <<
     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
     std::endl;
 
@@ -1537,7 +1537,7 @@ void msrTempo::print (std::ostream& os) const
     "fTempoNotesRelationshipLeftElements";
   if (fTempoNotesRelationshipLeftElements) {
     os <<
-      " : " <<
+      ": " <<
       std::endl;
 
     ++gIndenter;
@@ -1548,13 +1548,13 @@ void msrTempo::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " << "[NONE]" <<
+    os << ": " << "[NONE]" <<
     std::endl;
   }
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTempoNotesRelationshipKind" << " : " <<
+    "fTempoNotesRelationshipKind" << ": " <<
     msrTempoNotesRelationshipKindAsString (
       fTempoNotesRelationshipKind) <<
     std::endl;
@@ -1575,13 +1575,13 @@ void msrTempo::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " << "[NONE]" <<
+    os << ": " << "[NONE]" <<
     std::endl;
   }
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTempoPlacementKind" << " : " <<
+    "fTempoPlacementKind" << ": " <<
     msrPlacementKindAsString (
       fTempoPlacementKind) <<
     std::endl;

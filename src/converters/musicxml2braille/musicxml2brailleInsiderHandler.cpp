@@ -797,13 +797,13 @@ void xml2brlInsiderOahGroup::printXml2brlInsiderOahGroupValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
     fQuitAfterPass2a <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << ": " <<
     fQuitAfterPass2b <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass3" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
     fQuitAfterPass3 <<
     std::endl;
 

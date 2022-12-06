@@ -126,10 +126,10 @@ void msrMoment::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fWrittenPositionInMeseasure" << " : " << fWrittenPositionInMeseasure <<
+    "fWrittenPositionInMeseasure" << ": " << fWrittenPositionInMeseasure <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSoundingRelativeOffset" << " : " << fSoundingRelativeOffset <<
+    "fSoundingRelativeOffset" << ": " << fSoundingRelativeOffset <<
     std::endl;
 
   --gIndenter;

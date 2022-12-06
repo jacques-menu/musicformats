@@ -376,7 +376,7 @@ namespace iscm {
     else
       {
         symbol_kind_type yykind = yysym.kind ();
-        yyo << (yykind < YYNTOKENS ? "token" : "nterm")
+        yyo << (yykind < YYNTOKENS ? "token": "nterm")
             << ' ' << yysym.name () << " ("
             << yysym.location << ": ";
         switch (yykind)
@@ -915,7 +915,7 @@ namespace iscm {
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
-            "====> choice " << choiceName << " : " << "..." <<
+            "====> choice " << choiceName << ": " << "..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
         }

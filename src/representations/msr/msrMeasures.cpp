@@ -371,54 +371,54 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 
   // create deep clone
   S_msrMeasure
-    measureDeepClone =
+    deepClone =
       msrMeasure::create (
         fInputLineNumber,
         fMeasureNumber,
         containingSegment);
 
   // measure numbers
-  measureDeepClone->
+  deepClone->
     setMeasureOrdinalNumberInVoice (
       containingSegmentUpLinkToVoice->
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
-  measureDeepClone->fMeasurePuristNumber =
+  deepClone->fMeasurePuristNumber =
     fMeasurePuristNumber;
 
-  measureDeepClone->fMeasureDebugNumber =
+  deepClone->fMeasureDebugNumber =
     fMeasureDebugNumber;
 
   // measure lengthes, in whole notes
-  measureDeepClone->fFullMeasureWholeNotesDuration =
+  deepClone->fFullMeasureWholeNotesDuration =
     fFullMeasureWholeNotesDuration;
 
-  measureDeepClone->fMeasureWholeNotesDuration = // JMI ???
+  deepClone->fMeasureWholeNotesDuration = // JMI ???
     fMeasureWholeNotesDuration;
 
   // measure print layout, MusicXML specific
-  measureDeepClone->fMeasureMusicXMLPrintLayout =
+  deepClone->fMeasureMusicXMLPrintLayout =
     fMeasureMusicXMLPrintLayout;
 
   // measure longest note
-  measureDeepClone->fMeasureLongestNote = // JMI ???
+  deepClone->fMeasureLongestNote = // JMI ???
     fMeasureLongestNote;
 
   // measure kind
-  measureDeepClone->fMeasureKind =
+  deepClone->fMeasureKind =
     fMeasureKind;
 
   // next measure number
-  measureDeepClone->fNextMeasureNumber =
+  deepClone->fNextMeasureNumber =
     fNextMeasureNumber;
 
   // measure 'first in segment' kind
-  measureDeepClone->fMeasureFirstInSegmentKind =
+  deepClone->fMeasureFirstInSegmentKind =
     fMeasureFirstInSegmentKind;
 
     // multiple full-bar rest?
 
-  measureDeepClone->fMeasureIsAFullBarRest =
+  deepClone->fMeasureIsAFullBarRest =
     fMeasureIsAFullBarRest;
 
   // elements
@@ -456,8 +456,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       S_msrMeasureElement element = (*i);
 
       // handlle deep cloning
-      S_msrMeasureElement
-        elementDeepClone;
+      S_msrMeasureElement elementDeepClone;
 
       if (
         S_msrNote note = dynamic_cast<msrNote*>(&(*element))
@@ -469,7 +468,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 
 /* JMI
         // append the element deep clone to the measure deep clone
-        measureDeepClone->
+        deepClone->
           appendMeasureElementToMeasure (
             elementDeepClone);
 */
@@ -501,7 +500,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       }
 
       // append the element deep clone to the measure deep clone
-      measureDeepClone->
+      deepClone->
         appendMeasureElementToMeasure (
           elementDeepClone);
     } // for
@@ -528,7 +527,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 
   // fMeasureUpLinkToSegment JMI ???
 
-  return measureDeepClone;
+  return deepClone;
 }
 
 S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
@@ -6361,52 +6360,52 @@ void msrMeasure::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fullMeasureWholeNotesDuration" << " : " <<
+    "fullMeasureWholeNotesDuration" << ": " <<
     fFullMeasureWholeNotesDuration <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureOrdinalNumberInVoice" << " : " <<
+    "fMeasureOrdinalNumberInVoice" << ": " <<
     fMeasureOrdinalNumberInVoice <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasurePuristNumber" << " : " <<
+    "fMeasurePuristNumber" << ": " <<
     fMeasurePuristNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasureDebugNumber" << " : " <<
+    "fMeasureDebugNumber" << ": " <<
     fMeasureDebugNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureEndInputLineNumber" << " : " <<
+    "fMeasureEndInputLineNumber" << ": " <<
     fMeasureEndInputLineNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureEndRegularKind" << " : " <<
+    "fMeasureEndRegularKind" << ": " <<
     msrMeasureEndRegularKindAsString (
       fMeasureEndRegularKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasureRepeatContextKind" << " : " <<
+    "fMeasureRepeatContextKind" << ": " <<
     msrMeasureRepeatContextKindAsString (
       fMeasureRepeatContextKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureIsFirstInVoice" << " : " <<
+    "fMeasureIsFirstInVoice" << ": " <<
     fMeasureIsFirstInVoice <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasureFirstInSegmentKind" << " : " <<
+    "fMeasureFirstInSegmentKind" << ": " <<
     msrMeasureFirstInSegmentKindAsString (
       fMeasureFirstInSegmentKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureUpLinkToSegment" << " : " <<
+    "fMeasureUpLinkToSegment" << ": " <<
     fMeasureUpLinkToSegment->asShortString () <<
     std::endl;
 
@@ -6432,7 +6431,7 @@ void msrMeasure::print (std::ostream& os) const
   // print the voice current clef, key and time signature
   os << std::left <<
     std::setw (fieldWidth) <<
-    "voiceCurrentClef" << " : ";
+    "voiceCurrentClef" << ": ";
   if (voiceCurrentClef) {
     os <<
       voiceCurrentClef;
@@ -6443,7 +6442,7 @@ void msrMeasure::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "voiceCurrentKey" << " : ";
+    "voiceCurrentKey" << ": ";
   if (voiceCurrentKey) {
     os <<
       voiceCurrentKey;
@@ -6454,7 +6453,7 @@ void msrMeasure::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "voiceCurrentTimeSignature" << " : ";
+    "voiceCurrentTimeSignature" << ": ";
   if (voiceCurrentTimeSignature) {
     os << std::endl;
     ++gIndenter;
@@ -6472,11 +6471,11 @@ void msrMeasure::print (std::ostream& os) const
     /* JMI
 
     std::setw (fieldWidth) <<
-    "measureWholeNotesDurationAsMsrString" << " : " <<
+    "measureWholeNotesDurationAsMsrString" << ": " <<
     measureWholeNotesDurationAsMsrString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fullMeasureWholeNotesDurationAsMsrString" << " : " <<
+    "fullMeasureWholeNotesDurationAsMsrString" << ": " <<
     fullMeasureWholeNotesDurationAsMsrString () <<
     std::endl <<
       */
@@ -6484,18 +6483,18 @@ void msrMeasure::print (std::ostream& os) const
 /* JMI
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureShortestNoteDuration" << " : " <<
+    "fMeasureShortestNoteDuration" << ": " <<
     fMeasureShortestNoteDuration <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasureShortestNoteTupletFactor" << " : " <<
+    "fMeasureShortestNoteTupletFactor" << ": " <<
     fMeasureShortestNoteTupletFactor <<
     std::endl;
 */
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureLongestNote" << " : ";
+    "fMeasureLongestNote" << ": ";
   if (fMeasureLongestNote) {
     os <<
       fMeasureLongestNote->asShortString ();
@@ -6508,35 +6507,35 @@ void msrMeasure::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureContainsMusic" << " : " <<
+    "fMeasureContainsMusic" << ": " <<
     fMeasureContainsMusic <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureKindAndPuristNumberHaveBeenDetermined" << " : " <<
+    "fMeasureKindAndPuristNumberHaveBeenDetermined" << ": " <<
     fMeasureKindAndPuristNumberHaveBeenDetermined <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureVoicePosition" << " : " <<
+    "fMeasureVoicePosition" << ": " <<
     fMeasureVoicePosition <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasureVoiceMoment" << " : " <<
+    "fMeasureVoiceMoment" << ": " <<
     fMeasureVoiceMoment.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureHasBeenFinalized" << " : " <<
+    "fMeasureHasBeenFinalized" << ": " <<
     fMeasureHasBeenFinalized <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasureFinalizationContext" << " : " <<
+    "fMeasureFinalizationContext" << ": " <<
     fMeasureFinalizationContext <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureIsAFullBarRest" << " : " <<
+    "fMeasureIsAFullBarRest" << ": " <<
     fMeasureIsAFullBarRest <<
     std::endl;
 
@@ -6554,7 +6553,7 @@ void msrMeasure::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fMeasureElementsList" << " : " <<
+    "fMeasureElementsList" << ": " <<
     mfSingularOrPlural (
       measureElementsListSize, "element", "elements") <<
     std::endl;
@@ -6638,32 +6637,32 @@ void msrMeasure::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureIsFirstInVoice" << " : " <<
+    "fMeasureIsFirstInVoice" << ": " <<
     fMeasureIsFirstInVoice <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureOrdinalNumberInVoice" << " : " <<
+    "fMeasureOrdinalNumberInVoice" << ": " <<
     fMeasureOrdinalNumberInVoice <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasurePuristNumber" << " : " <<
+    "fMeasurePuristNumber" << ": " <<
     fMeasurePuristNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasureDebugNumber" << " : " <<
+    "fMeasureDebugNumber" << ": " <<
     fMeasureDebugNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureEndInputLineNumber" << " : " <<
+    "fMeasureEndInputLineNumber" << ": " <<
     fMeasureEndInputLineNumber <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fullMeasureWholeNotesDuration" << " : " <<
+    "fullMeasureWholeNotesDuration" << ": " <<
     fFullMeasureWholeNotesDuration <<
     std::endl;
 
@@ -6673,7 +6672,7 @@ void msrMeasure::printShort (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fMeasureElementsList" << " : " <<
+    "fMeasureElementsList" << ": " <<
     mfSingularOrPlural (
       measureElementsListSize, "element", "elements") <<
     std::endl;

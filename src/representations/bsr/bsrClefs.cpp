@@ -343,13 +343,13 @@ void bsrClef::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fClefKind" << " : " << fClefKind <<
+    "fClefKind" << ": " << fClefKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fClefCellsList" << " : " << fClefCellsList <<
+    "fClefCellsList" << ": " << fClefCellsList <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSpacesBefore" << " : " << fSpacesBefore <<
+    "fSpacesBefore" << ": " << fSpacesBefore <<
     std::endl;
 
   --gIndenter;

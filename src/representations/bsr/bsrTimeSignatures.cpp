@@ -138,7 +138,7 @@ bsrTimeSignatureItem::bsrTimeSignatureItem (
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Creating time signature item" <<
-      ", line = " << inputLineNumber <<
+      ", line: " << inputLineNumber <<
       std::endl;
   }
 #endif
@@ -815,7 +815,7 @@ std::string bsrTimeSignature::asString () const
 
   s <<
     "Time" <<
-    ", timeKind " << " : " <<
+    ", timeKind " << ": " <<
     bsrTimeSignatureKindAsString (fTimeKind) <<
     ", timeCellsList: " << fetchCellsList ()->asString () <<
     ", spacesBefore: " << fSpacesBefore <<
@@ -855,11 +855,11 @@ void bsrTimeSignature::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "timeKind " << " : " <<
+    "timeKind " << ": " <<
     bsrTimeSignatureKindAsString (fTimeKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "timeSignatureItemsVector" << " : ";
+    "timeSignatureItemsVector" << ": ";
 
   if (timeSignatureItemsVectorSize) {
     os << std::endl;
@@ -888,10 +888,10 @@ void bsrTimeSignature::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "timeCellsList" << " : " << fetchCellsList ()->asString () <<
+    "timeCellsList" << ": " << fetchCellsList ()->asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "spacesBefore" << " : " << fSpacesBefore <<
+    "spacesBefore" << ": " << fSpacesBefore <<
    std::endl;
 
   --gIndenter;

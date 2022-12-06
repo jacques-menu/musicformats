@@ -583,16 +583,16 @@ void msdl2brailleInsiderOahGroup::printMsdl2brlInsiderOahGroupValues (
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass1" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass1" << ": " <<
     fQuitAfterPass1 <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2" << ": " <<
     fQuitAfterPass2 <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass3" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
     fQuitAfterPass3 <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass4" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass4" << ": " <<
     fQuitAfterPass4 <<
     std::endl;
 

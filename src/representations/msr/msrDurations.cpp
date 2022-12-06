@@ -683,11 +683,11 @@ void msrDuration::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "durationKind" << " : " <<
+    "durationKind" << ": " <<
     msrDurationKindAsString (fDurationKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "dotsNumber" << " : " << fDotsNumber <<
+    "dotsNumber" << ": " << fDotsNumber <<
     std::endl;
 };
 
@@ -931,11 +931,11 @@ void msrDottedDuration::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "durationKind" << " : " <<
+    "durationKind" << ": " <<
     msrDurationKindAsString (fDurationKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "dotsNumber" << " : " << fDotsNumber <<
+    "dotsNumber" << ": " << fDotsNumber <<
     std::endl;
 };
 
@@ -966,7 +966,7 @@ std::string wholeNotesAsMsrString (
     denominator  = wholeNotes.getDenominator ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
+  if (true || gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numerator:   " << numerator <<
       std::endl <<
@@ -985,7 +985,7 @@ std::string wholeNotesAsMsrString (
 
     s <<
       "numerator is not positive in wholeNotesAsMsrString()" <<
-      ", wholeNotes = " << wholeNotes;
+      ", wholeNotes: " << wholeNotes;
 
  //   msrError ( JMI
     msrWarning (
@@ -1045,9 +1045,9 @@ std::string wholeNotesAsMsrString (
   int  numeratorDots = msrNumberOfDots (numerator);
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
+  if (true || gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
-      "--> numeratorDots " << " : " << numeratorDots <<
+      "--> numeratorDots " << ": " << numeratorDots <<
       std::endl << std::endl;
   }
 #endif
@@ -1131,9 +1131,9 @@ std::string wholeNotesAsMsrString (
   }
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
+  if (true || gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
-      "--> denominatorDurationLog" << " : " <<
+      "--> denominatorDurationLog" << ": " <<
       denominatorDurationLog <<
       std::endl << std::endl;
   }
@@ -1160,10 +1160,10 @@ std::string wholeNotesAsMsrString (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
         gLogStream <<
-          "--> numerator" << " : " <<
+          "--> numerator" << ": " <<
           numerator <<
           std::endl <<
-          "--> denominatorDurationLog " << " : " <<
+          "--> denominatorDurationLog " << ": " <<
           denominatorDurationLog <<
           std::endl << std::endl;
       }
@@ -1177,13 +1177,13 @@ std::string wholeNotesAsMsrString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
-      "--> numerator" << " : " <<
+      "--> numerator: " <<
       numerator <<
       std::endl <<
-      "--> denominatorDurationLog" << " : " <<
+      "--> denominatorDurationLog: " <<
       denominatorDurationLog <<
       std::endl <<
-      "--> numeratorDots " << " : " <<
+      "--> numeratorDots: " <<
       numeratorDots <<
       std::endl << std::endl;
   }
@@ -1207,10 +1207,10 @@ std::string wholeNotesAsMsrString (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
-        "--> denominatorDurationLog" << " : " <<
+        "--> denominatorDurationLog" << ": " <<
         denominatorDurationLog <<
         std::endl <<
-        "--> multiplyingFactor " << " : " <<
+        "--> multiplyingFactor " << ": " <<
         multiplyingFactor <<
         std::endl << std::endl;
     }
@@ -1237,10 +1237,10 @@ std::string wholeNotesAsMsrString (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
-        "--> denominatorDurationLog" << " : " <<
+        "--> denominatorDurationLog" << ": " <<
         denominatorDurationLog <<
         std::endl <<
-        "--> multiplyingFactor " << " : " <<
+        "--> multiplyingFactor " << ": " <<
         multiplyingFactor <<
         std::endl << std::endl;
     }
@@ -1256,10 +1256,10 @@ std::string wholeNotesAsMsrString (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
         gLogStream <<
-          "--> denominatorDurationLog" << " : " <<
+          "--> denominatorDurationLog" << ": " <<
           denominatorDurationLog <<
           std::endl <<
-          "--> multiplyingFactor " << " : " <<
+          "--> multiplyingFactor " << ": " <<
           multiplyingFactor <<
           std::endl << std::endl;
       }
@@ -1271,16 +1271,16 @@ std::string wholeNotesAsMsrString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
-      "--> numerator " << " : " <<
+      "--> numerator " << ": " <<
       numerator <<
       std::endl <<
-      "--> numeratorDots " << " : " <<
+      "--> numeratorDots " << ": " <<
       numeratorDots <<
       std::endl <<
-      "--> denominatorDurationLog" << " : " <<
+      "--> denominatorDurationLog" << ": " <<
       denominatorDurationLog <<
       std::endl <<
-      "--> multiplyingFactor " << " : " <<
+      "--> multiplyingFactor " << ": " <<
       multiplyingFactor <<
       std::endl << std::endl;
   }
@@ -1335,7 +1335,7 @@ std::string wholeNotesAsMsrString (
     gLogStream <<
       "--> wholeNotesAsMsrString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
-      ", numeratorDots" << " : " << numeratorDots <<
+      ", numeratorDots" << ": " << numeratorDots <<
       std::endl;
   }
 #endif

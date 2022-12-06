@@ -433,16 +433,16 @@ void mfMultiGenerationOutputKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMultiGenerationOutputKindVariable" << " : " <<
+    "fMultiGenerationOutputKindVariable" << ": " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindVariable) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMultiGenerationOutputKindValue" << " : " <<
+    "fMultiGenerationOutputKindValue" << ": " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindValue) <<
     std::endl;
@@ -457,7 +457,7 @@ void mfMultiGenerationOutputKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindVariable);
   if (fSetByAnOption) {
@@ -676,7 +676,7 @@ void mfMultiGenerationOahGroup::printMultiGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream <<
-    std::setw (fieldWidth) << "fMultiGenerationOutputKind" << " : " <<
+    std::setw (fieldWidth) << "fMultiGenerationOutputKind" << ": " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKind) <<
     std::endl;

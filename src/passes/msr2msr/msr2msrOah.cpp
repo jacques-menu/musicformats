@@ -252,10 +252,10 @@ void msrIgnorePartAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "variableName" << " : " <<
+    "variableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fStringSetVariable" << " : " <<
+    "fStringSetVariable" << ": " <<
     std::endl;
 
   if (! fStringSetVariable.size ()) {
@@ -285,7 +285,7 @@ void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fStringSetVariable.size ()) {
     os <<
@@ -545,10 +545,10 @@ void msrKeepPartAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "variableName" << " : " <<
+    "variableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fStringSetVariable" << " : " <<
+    "fStringSetVariable" << ": " <<
     std::endl;
 
   if (! fStringSetVariable.size ()) {
@@ -578,7 +578,7 @@ void msrKeepPartAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fStringSetVariable.size ()) {
     os <<
@@ -1060,7 +1060,7 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream << std::left <<
     std::setw (valueFieldWidth) <<
-    "fAvoidMsr2msr" << " : " <<
+    "fAvoidMsr2msr" << ": " <<
     fAvoidMsr2msr <<
     std::endl;
 
@@ -1078,7 +1078,7 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream << std::left <<
     std::setw (valueFieldWidth) <<
-    "fExpandToHarmonyBandBook" << " : " <<
+    "fExpandToHarmonyBandBook" << ": " <<
     fExpandToHarmonyBandBook <<
     std::endl;
 
@@ -1140,12 +1140,12 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream << std::left <<
     std::setw (valueFieldWidth) <<
-    "fCoalesceEmptyMeasures" << " : " <<
+    "fCoalesceEmptyMeasures" << ": " <<
     fCoalesceEmptyMeasures <<
     std::endl <<
 
     std::setw (valueFieldWidth) <<
-    "fMergeStaffCommonRests" << " : " <<
+    "fMergeStaffCommonRests" << ": " <<
     fMergeStaffCommonRests <<
     std::endl;
 
@@ -1163,7 +1163,7 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
   gLogStream << std::left <<
     std::setw (valueFieldWidth) <<
-    "fCreateImplicitInitialRepeatBarLine" << " : " <<
+    "fCreateImplicitInitialRepeatBarLine" << ": " <<
     fCreateImplicitInitialRepeatBarLine <<
     std::endl;
 

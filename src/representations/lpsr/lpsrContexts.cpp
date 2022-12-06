@@ -305,7 +305,7 @@ void lpsrChordNamesContext::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "contextUseExistingKind" << " : " <<
+    "contextUseExistingKind" << ": " <<
     lpsrContextUseExistingKindAsString (
       fContextUseExistingKind) <<
     std::endl <<
@@ -339,7 +339,7 @@ void lpsrChordNamesContext::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
     std::endl;
   }
 
@@ -468,7 +468,7 @@ void lpsrFiguredBassContext::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fContextUseExistingKind" << " : " <<
+    "fContextUseExistingKind" << ": " <<
     lpsrContextUseExistingKindAsString (
       fContextUseExistingKind) <<
     std::endl <<
@@ -502,7 +502,7 @@ void lpsrFiguredBassContext::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[EMPTY]" <<
+      ": " << "[EMPTY]" <<
     std::endl;
   }
 

@@ -344,7 +344,8 @@ class EXP msrHarmony : public msrMeasureElement
                             { return fHarmonyUpLinkToMeasure; }
 
     // uplinks
-    void                  setHarmonyUpLinkToNote (const S_msrNote& note);
+    void                  setHarmonyUpLinkToNote (
+                            const S_msrNote& note);
 
     S_msrNote             getHarmonyUpLinkToNote () const
                              { return fHarmonyUpLinkToNote; }

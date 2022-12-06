@@ -617,13 +617,13 @@ void msr2guidoInsiderOahGroup::printMsr2guidoInsiderOahGroupValues (int fieldWid
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "generateComments" << " : " << fGenerateComments <<
+    "generateComments" << ": " << fGenerateComments <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "generateStem" << " : " << fGenerateStem <<
+    "generateStem" << ": " << fGenerateStem <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "generateBars" << " : " << fGenerateBars <<
+    "generateBars" << ": " << fGenerateBars <<
     std::endl;
 
   --gIndenter;
@@ -638,10 +638,10 @@ void msr2guidoInsiderOahGroup::printMsr2guidoInsiderOahGroupValues (int fieldWid
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
     fQuitAfterPass2a <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << ": " <<
     fQuitAfterPass2b <<
     std::endl;
 

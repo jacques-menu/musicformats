@@ -41,9 +41,9 @@ std::string msrStaffKindAsStringForPrint (
 // data types
 
 enum class msrStaffChangeKind {
-	kStaffChange_NO_,
-	kStaffChangeChordMemberNote,
-	kStaffChangeOtherNote
+  kStaffChange_NO_,
+  kStaffChangeChordMemberNote,
+  kStaffChangeOtherNote
 };
 
 std::string msrStaffChangeKindAsString (

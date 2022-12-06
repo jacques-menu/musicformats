@@ -251,18 +251,18 @@ void msrStaffTuning::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffTuningLineNumber" << " : " <<
+    "fStaffTuningLineNumber" << ": " <<
     fStaffTuningLineNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fStaffTuningQuarterTonesPitchKind" << " : " <<
+    "fStaffTuningQuarterTonesPitchKind" << ": " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fStaffTuningQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fStaffTuningOctaveKind" << " : " <<
+    "fStaffTuningOctaveKind" << ": " <<
     fStaffTuningOctaveKind <<
     std::endl;
 
@@ -470,11 +470,11 @@ void msrStaffDetails::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "staffTypeKind" << " : " <<
+    "staffTypeKind" << ": " <<
     msrStaffTypeKindAsString (fStaffTypeKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "staffLinesNumber" << " : " << fStaffLinesNumber <<
+    "staffLinesNumber" << ": " << fStaffLinesNumber <<
     std::endl;
 
   // print the staff tunings if any
@@ -500,21 +500,21 @@ void msrStaffDetails::print (std::ostream& os) const
   else {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "staffTunings" << " : " << "[EMPTY]" <<
+      "staffTunings" << ": " << "[EMPTY]" <<
       std::endl;
   }
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "showFretsKind" << " : " <<
+    "showFretsKind" << ": " <<
     msrShowFretsKindAsString (fShowFretsKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "printObjectKind" << " : " <<
+    "printObjectKind" << ": " <<
     msrPrintObjectKindAsString (fPrintObjectKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "printSpacingKind" << " : " <<
+    "printSpacingKind" << ": " <<
     msrPrintSpacingKindAsString (fPrintSpacingKind) <<
     std::endl;
 

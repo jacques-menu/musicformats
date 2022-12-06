@@ -283,7 +283,7 @@ void msrTechnical::print (std::ostream& os) const
     "Technical " <<
     asString () <<
     ", line " << fInputLineNumber <<
-//    ", accidental mark" << " = " << technicalAccidentalMarkKindAsString () <<
+//    ", accidental mark" << ": " << technicalAccidentalMarkKindAsString () <<
     std::endl;
 }
 
@@ -408,11 +408,11 @@ void msrTechnicalWithInteger::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTechnicalWithIntegerValue" << " : " << fTechnicalWithIntegerValue <<
+    "fTechnicalWithIntegerValue" << ": " << fTechnicalWithIntegerValue <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTechnicalWithIntegerPlacementKind" << " : " << fTechnicalWithIntegerPlacementKind <<
+    "fTechnicalWithIntegerPlacementKind" << ": " << fTechnicalWithIntegerPlacementKind <<
     std::endl <<
     ']' <<
     std::endl;
@@ -541,11 +541,11 @@ void msrTechnicalWithFloat::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTechnicalWithFloatValue" << " : " << fTechnicalWithFloatValue <<
+    "fTechnicalWithFloatValue" << ": " << fTechnicalWithFloatValue <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTechnicalWithFloatPlacementKind" << " : " << fTechnicalWithFloatPlacementKind <<
+    "fTechnicalWithFloatPlacementKind" << ": " << fTechnicalWithFloatPlacementKind <<
     std::endl <<
     ']' <<
     std::endl <<

@@ -154,13 +154,13 @@ void bsrSpaces::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "numberOfSpaces" << " : " << fNumberOfSpaces <<
+    "numberOfSpaces" << ": " << fNumberOfSpaces <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "spacesCellsList" << " : " << fSpacesCellsList <<
+    "spacesCellsList" << ": " << fSpacesCellsList <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "spacesBefore" << " : " << fSpacesBefore <<
+    "spacesBefore" << ": " << fSpacesBefore <<
     std::endl;
 
   --gIndenter;

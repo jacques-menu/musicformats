@@ -185,15 +185,15 @@ void msrOrnament::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fOrnamentPlacementKind" << " : " <<
+    "fOrnamentPlacementKind" << ": " <<
     msrPlacementKindAsString (fOrnamentPlacementKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fOrnamentAccidentalKind" << " : " <<
+    "fOrnamentAccidentalKind" << ": " <<
     msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fOrnamentUpLinkToNote" << " : " <<
+    "fOrnamentUpLinkToNote" << ": " <<
     fOrnamentUpLinkToNote->asShortString () <<
     std::endl;
 

@@ -216,11 +216,11 @@ void bsrFacSimileKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fBsrFacSimileKindVariable" << " : " <<
+    "fBsrFacSimileKindVariable" << ": " <<
     bsrFacSimileKindAsString (
       fBsrFacSimileKindVariable) <<
     std::endl;
@@ -235,7 +235,7 @@ void bsrFacSimileKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     bsrFacSimileKindAsString (
       fBsrFacSimileKindVariable);
   if (fSetByAnOption) {
@@ -415,10 +415,10 @@ void bsrTextsLanguageAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fBsrTextsLanguageKindVariable" << " : " <<
+    "fBsrTextsLanguageKindVariable" << ": " <<
     bsrTextsLanguageKindAsString (
       fBsrTextsLanguageKindVariable) <<
     std::endl;
@@ -433,7 +433,7 @@ void bsrTextsLanguageAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     bsrTextsLanguageKindAsString (
       fBsrTextsLanguageKindVariable);
   if (fSetByAnOption) {
@@ -835,17 +835,17 @@ void bsrOahGroup::printBsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fDisplayFirstBsrShort" << " : " <<
+    std::setw (fieldWidth) << "fDisplayFirstBsrShort" << ": " <<
     fDisplayFirstBsrShort <<
     std::endl <<
-    std::setw (fieldWidth) << "fDisplayFirstBsrFull" << " : " <<
+    std::setw (fieldWidth) << "fDisplayFirstBsrFull" << ": " <<
     fDisplayFirstBsrFull <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fDisplaySecondBsrShort" << " : " <<
+    std::setw (fieldWidth) << "fDisplaySecondBsrShort" << ": " <<
     fDisplaySecondBsrShort <<
     std::endl <<
-    std::setw (fieldWidth) << "fDisplaySecondBsrFull" << " : " <<
+    std::setw (fieldWidth) << "fDisplaySecondBsrFull" << ": " <<
     fDisplaySecondBsrFull <<
     std::endl;
 
@@ -862,25 +862,25 @@ void bsrOahGroup::printBsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fTraceBsr" << " : " <<
+    std::setw (fieldWidth) << "fTraceBsr" << ": " <<
     fTraceBsr <<
     std::endl <<
-    std::setw (fieldWidth) << "fTracePages" << " : " <<
+    std::setw (fieldWidth) << "fTracePages" << ": " <<
     fTracePages <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceLines" << " : " <<
+    std::setw (fieldWidth) << "fTraceLines" << ": " <<
     fTraceLines <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceSpaces" << " : " <<
+    std::setw (fieldWidth) << "fTraceSpaces" << ": " <<
     fTraceSpaces <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceNumbers" << " : " <<
+    std::setw (fieldWidth) << "fTraceNumbers" << ": " <<
     fTraceNumbers <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceParallels" << " : " <<
+    std::setw (fieldWidth) << "fTraceParallels" << ": " <<
     fTraceParallels <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceBsrVisitors" << " : " <<
+    std::setw (fieldWidth) << "fTraceBsrVisitors" << ": " <<
     fTraceBsrVisitors <<
     std::endl;
 

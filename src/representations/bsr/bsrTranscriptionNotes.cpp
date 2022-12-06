@@ -259,7 +259,7 @@ void bsrTranscriptionNotes::print (std::ostream& os) const
   if (transcriptionNotesElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
       std::setw (fieldWidth) <<
-      "transcriptionNotesElementsList" << " : " <<
+      "transcriptionNotesElementsList" << ": " <<
       std::endl;
 
     if (transcriptionNotesElementsListSize) {

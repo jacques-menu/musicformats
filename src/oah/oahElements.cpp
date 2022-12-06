@@ -108,13 +108,13 @@ std::string oahElementHelpOnlyKindAsString (
 
 //______________________________________________________________________________
 S_oahFindStringMatch oahFindStringMatch::create (
-	const std::string& elementName,
-	const std::string& foundString,
-	const std::string& containingFindableElementInfo)
+  const std::string& elementName,
+  const std::string& foundString,
+  const std::string& containingFindableElementInfo)
 {
   oahFindStringMatch* o = new
     oahFindStringMatch (
-    	elementName,
+      elementName,
       foundString,
       containingFindableElementInfo);
   assert (o != nullptr);
@@ -122,12 +122,12 @@ S_oahFindStringMatch oahFindStringMatch::create (
 }
 
 oahFindStringMatch::oahFindStringMatch (
-	const std::string& elementName,
-	const std::string& foundString,
-	const std::string& containingFindableElementInfo)
+  const std::string& elementName,
+  const std::string& foundString,
+  const std::string& containingFindableElementInfo)
     : fElementName (elementName),
-    	fFoundString (foundString),
-    	fContainingFindableElementInfo (containingFindableElementInfo)
+      fFoundString (foundString),
+      fContainingFindableElementInfo (containingFindableElementInfo)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -156,12 +156,12 @@ void oahFindStringMatch::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fElementName" << " : " << fElementName <<
+    "fElementName" << ": " << fElementName <<
     std::endl <<
-    "fFoundString" << " : " << fFoundString <<
+    "fFoundString" << ": " << fFoundString <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fContainingFindableElementInfo" << " : " << fContainingFindableElementInfo <<
+    "fContainingFindableElementInfo" << ": " << fContainingFindableElementInfo <<
     std::endl;
 
   --gIndenter;
@@ -192,7 +192,7 @@ std::ostream& operator << (std::ostream& os, const oahFindStringMatch* elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahFindableElement oahFindableElement::create ()
 {
   oahFindableElement* o =
@@ -232,7 +232,7 @@ std::ostream& operator << (std::ostream& os, const oahFindableElement& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahElement oahElement::create (
   const std::string&       longName,
   const std::string&       shortName,
@@ -278,13 +278,13 @@ oahElement::oahElement ()
   fDescription = "";
 
   fElementValueKind =
-  	oahElementValueKind::kElementValueUnknown; // default value JMI v0.9.66
+    oahElementValueKind::kElementValueUnknown; // default value JMI v0.9.66
 
   fElementHelpOnlyKind =
     oahElementHelpOnlyKind::kElementHelpOnlyNo; // default value
 
   fElementVisibilityKind =
-  	oahElementVisibilityKind::kElementVisibilityNone; // default value;
+    oahElementVisibilityKind::kElementVisibilityNone; // default value;
 }
 
 oahElement::~oahElement ()
@@ -502,9 +502,9 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 // }
 
 Bool oahElement::findStringInFindableElement (
-	const std::string&     lowerCaseString,
-	std::list<S_oahFindStringMatch>& foundMatchesList,
-	std::ostream&                    os) const
+  const std::string&     lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
 {
   Bool result;
 
@@ -512,7 +512,7 @@ Bool oahElement::findStringInFindableElement (
     // append the match to foundStringsList
     foundMatchesList.push_back (
       oahFindStringMatch::create (
-      	fetchNames (),
+        fetchNames (),
         fDescription,
         containingFindableElementAsString ()));
 
@@ -523,7 +523,7 @@ Bool oahElement::findStringInFindableElement (
 }
 
 Bool oahElement::elementMatchesString (
-	const std::string& lowerCaseString) const
+  const std::string& lowerCaseString) const
 {
   // does this element's long name match?
   Bool longNameMatches =
@@ -537,8 +537,8 @@ Bool oahElement::elementMatchesString (
   Bool descriptionMatches =
     mfStringToLowerCase (fDescription).find (lowerCaseString) != std::string::npos;
 
-	return
-		shortNameMatches || longNameMatches || descriptionMatches;
+  return
+    shortNameMatches || longNameMatches || descriptionMatches;
 }
 
 std::string oahElement::asLongNamedOptionString () const
@@ -597,9 +597,9 @@ void oahElement::printOptionHeader (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -611,43 +611,43 @@ void oahElement::printOahElementEssentials (
 {
   os << std::left <<
     std::setw (fieldWidth) <<
-    "longName" << " : " <<
+    "longName" << ": " <<
     "\"" << fLongName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "shortName" << " : " <<
+    "shortName" << ": " <<
     "\"" << fShortName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "description" << " : " <<
+    "description" << ": " <<
     "\"" << fDescription << "\"" <<
     std::endl <<
 
 /* JMI
   ++gIndenter;
-	gIndenter.indentMultiLineString (
-		fDescription,
-		os);
+  gIndenter.indentMultiLineString (
+    fDescription,
+    os);
   --gIndenter;
 */
 
     std::setw (fieldWidth) <<
-    "fElementValueKind" << " : " <<
+    "fElementValueKind" << ": " <<
     oahElementValueKindAsString (fElementValueKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fElementHelpOnlyKind" << " : " <<
+    "fElementHelpOnlyKind" << ": " <<
     oahElementHelpOnlyKindAsString (fElementHelpOnlyKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fElementVisibilityKind" << " : " <<
+    "fElementVisibilityKind" << ": " <<
     oahElementVisibilityKindAsString (fElementVisibilityKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMultipleOccurrencesAllowed" << " : " <<
+    "fMultipleOccurrencesAllowed" << ": " <<
     fMultipleOccurrencesAllowed <<
     std::endl;
 }
@@ -658,7 +658,7 @@ void oahElement::printOahElementEssentialsShort (
 {
   os << std::left <<
     std::setw (fieldWidth) <<
-    fetchNames () << " : " <<
+    fetchNames () << ": " <<
     fDescription <<
     std::endl;
 }
@@ -691,9 +691,9 @@ void oahElement::printHelp (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -701,13 +701,13 @@ void oahElement::printHelp (std::ostream& os) const
 
 const std::string oahElement::containingFindableElementAsString () const
 {
-	std::stringstream s;
+  std::stringstream s;
 
-	s <<
-		fetchNames () << " : " <<
+  s <<
+    fetchNames () << ": " <<
     fDescription;
 
-	return s.str ();
+  return s.str ();
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahElement& elt)

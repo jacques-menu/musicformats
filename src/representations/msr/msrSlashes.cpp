@@ -248,17 +248,17 @@ void msrSlash::print (std::ostream& os) const
   // print the voice upLink
   os << std::left <<
     std::setw (fieldWidth) <<
-    "slashTypeKind" << " : " <<
+    "slashTypeKind" << ": " <<
     msrSlashTypeKindAsString (
       fSlashTypeKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "useDotsKind" << " : " <<
+    "useDotsKind" << ": " <<
     msrUseDotsKindAsString (
       fUseDotsKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "slashUseStemsKind" << " : " <<
+    "slashUseStemsKind" << ": " <<
     msrSlashUseStemsKindAsString (
       fSlashUseStemsKind) <<
     std::endl;

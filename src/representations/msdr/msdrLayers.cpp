@@ -275,7 +275,7 @@ void msdrLayer::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVoiceUpLinkToStaff" << " : " <<
+    "fVoiceUpLinkToStaff" << ": " <<
     fVoiceUpLinkToStaff->getStaffName () <<
     std::endl <<
 
@@ -286,17 +286,17 @@ void msdrLayer::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fVoiceCurrentMeasureOrdinalNumber" << " : " <<
+    "fVoiceCurrentMeasureOrdinalNumber" << ": " <<
     fVoiceCurrentMeasureOrdinalNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fVoiceCurrentMeasurePuristNumber" << " : " <<
+    "fVoiceCurrentMeasurePuristNumber" << ": " <<
     fVoiceCurrentMeasurePuristNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "regularVoiceStaffSequentialNumber" << " : " <<
+    "regularVoiceStaffSequentialNumber" << ": " <<
     regularVoiceStaffSequentialNumberAsString () <<
     std::endl;
 
@@ -304,14 +304,14 @@ void msdrLayer::print (std::ostream& os) const
   // regular measure ends detection
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fWholeNotesSinceLastRegularMeasureEnd" << " : " <<
+    "fWholeNotesSinceLastRegularMeasureEnd" << ": " <<
     fWholeNotesSinceLastRegularMeasureEnd <<
     std::endl;
 
   // incomplete measures after repeats detection
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fCurrentVoiceRepeatPhaseKind" << " : " <<
+    "fCurrentVoiceRepeatPhaseKind" << ": " <<
     msrVoiceRepeatPhaseKindAsString (
       fCurrentVoiceRepeatPhaseKind) <<
     std::endl;
@@ -367,11 +367,11 @@ void msdrLayer::printShort (std::ostream& os) const
     "voiceMeasuresFlatList";
   if (voiceMeasuresFlatListSize) {
     os <<
-      " : " <<  voiceMeasuresFlatListSize << " elements";
+      ": " <<  voiceMeasuresFlatListSize << " elements";
   }
   else {
     os <<
-      " : " << "[EMPTY]";
+      ": " << "[EMPTY]";
   }
   os << std::endl;
 

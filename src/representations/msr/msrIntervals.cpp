@@ -4417,7 +4417,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
           msrSemiTonesPitchKindAsString (semiTonesPitchKind) <<
           '(' << msrSemiTonesPitchKindAsString (semiTonesPitchKind) << ")" <<
           "' is not supported"
-          ", line = " << inputLineNumber;
+          ", line: " << inputLineNumber;
 
         msrUnsupported (
           gGlobalServiceRunData->getInputSourceName (),
@@ -7309,7 +7309,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
               getMsrQuarterTonesPitchesLanguageKind ()) <<
           '(' << msrQuarterTonesPitchKindAsString (quarterTonesPitchKind) << ")" <<
           "' is not supported"
-          ", line = " << inputLineNumber;
+          ", line: " << inputLineNumber;
 
         msrUnsupported (
           gGlobalServiceRunData->getInputSourceName (),

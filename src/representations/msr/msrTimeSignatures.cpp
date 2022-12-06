@@ -175,7 +175,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Creating time signature item" <<
-      ", line = " << inputLineNumber <<
+      ", line: " << inputLineNumber <<
       std::endl;
   }
 #endif
@@ -1269,20 +1269,20 @@ void msrTimeSignature::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "timeSignatureSymbolKind" << " : " <<
+    "timeSignatureSymbolKind" << ": " <<
     msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTimeIsCompound" << " : " <<
+    "fTimeIsCompound" << ": " <<
     fTimeIsCompound <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "timeSignatureItemsVector.size()" << " : " <<
+    "timeSignatureItemsVector.size()" << ": " <<
     mfSingularOrPlural (
       fTimeSignatureItemsVector.size (), "item", "items") <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTimeSignatureItemsVector" << " : ";
+    "fTimeSignatureItemsVector" << ": ";
 
   if (fTimeSignatureItemsVector.size ()) {
     os << std::endl;

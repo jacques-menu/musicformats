@@ -188,7 +188,8 @@ class EXP mfcVersionDescr : public smartable
 
     S_mfcVersionNumber    fVersionNumber;
     std::string           fVersionDate;
-    std::list<std::string>          fVersionDescriptionItems;
+    std::list<std::string>          
+                          fVersionDescriptionItems;
 };
 typedef SMARTP<mfcVersionDescr> S_mfcVersionDescr;
 EXP std::ostream& operator << (std::ostream& os, const S_mfcVersionDescr& elt);
@@ -268,7 +269,7 @@ std::ostream& operator << (std::ostream& os, const mfcComponenKind& elt);
 //______________________________________________________________________________
 class EXP mfcComponent : public smartable
 {
-/* this class is purely vir.htual
+/* this class is purely virtual
   public:
 
     // creation
@@ -450,7 +451,7 @@ std::ostream& operator << (std::ostream& os, const mfcMultiComponentEntropicityK
 //______________________________________________________________________________
 class EXP mfcMultiComponent : public mfcComponent
 {
-/* this class is purely vir.htual
+/* this class is purely virtual
   public:
 
     // creation

@@ -420,51 +420,51 @@ void msrScore::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "partGroupsListSize" << " : " <<
+    "partGroupsListSize" << ": " <<
     partGroupsListSize <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScoreNumberOfMeasures" << " : " <<
+    "fScoreNumberOfMeasures" << ": " <<
     fScoreNumberOfMeasures <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScorePartGroupNamesMaxLength" <<  " : " <<
+    "fScorePartGroupNamesMaxLength" <<  ": " <<
     fScorePartGroupNamesMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fScorePartNamesMaxLength" <<  " : " <<
+    "fScorePartNamesMaxLength" <<  ": " <<
     fScorePartNamesMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fScoreInstrumentNamesMaxLength" <<  " : " <<
+    "fScoreInstrumentNamesMaxLength" <<  ": " <<
     fScoreInstrumentNamesMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fScoreInstrumentAbbreviationsMaxLength" <<  " : " <<
+    "fScoreInstrumentAbbreviationsMaxLength" <<  ": " <<
     fScoreInstrumentAbbreviationsMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fIinhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
+    "fIinhibitGraceNotesGroupsBeforeBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
     std::endl<<
     std::setw (fieldWidth) <<
-    "fIinhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
+    "fIinhibitGraceNotesGroupsAfterBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fIinhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
+    "fIinhibitMeasureRepeatReplicasBrowsing" <<  ": " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fIinhibitMultipleFullBarRestsBrowsing" <<  " : " <<
+    "fIinhibitMultipleFullBarRestsBrowsing" <<  ": " <<
     fInhibitMultipleFullBarRestsBrowsing <<
     std::endl<<
     std::endl;
@@ -538,7 +538,7 @@ void msrScore::printFull (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
       std::endl;
   }
   os << std::endl;
@@ -570,7 +570,7 @@ void msrScore::printFull (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
       std::endl;
   }
 
@@ -612,12 +612,12 @@ void msrScore::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "partGroupsListSize" << " : " <<
+    "partGroupsListSize" << ": " <<
     partGroupsListSize <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScoreNumberOfMeasures" << " : " <<
+    "fScoreNumberOfMeasures" << ": " <<
     fScoreNumberOfMeasures <<
     std::endl;
 
@@ -684,7 +684,7 @@ void msrScore::printShort (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
       std::endl;
   }
   os << std::endl;
@@ -738,41 +738,41 @@ void msrScore::printSummary (std::ostream& os) const
   // print global information
   os << std::left <<
     std::setw (fieldWidth) <<
-    "partGroupsListSize" << " : " <<
+    "partGroupsListSize" << ": " <<
     partGroupsListSize <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScoreNumberOfMeasures" << " : " <<
+    "fScoreNumberOfMeasures" << ": " <<
     fScoreNumberOfMeasures <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScoreInstrumentNamesMaxLength" <<  " : " <<
+    "fScoreInstrumentNamesMaxLength" <<  ": " <<
     fScoreInstrumentNamesMaxLength <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScoreInstrumentAbbreviationsMaxLength" <<  " : " <<
+    "fScoreInstrumentAbbreviationsMaxLength" <<  ": " <<
     fScoreInstrumentAbbreviationsMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
+    "fInhibitGraceNotesGroupsBeforeBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
     std::endl<<
     std::setw (fieldWidth) <<
-    "fInhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
+    "fInhibitGraceNotesGroupsAfterBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
+    "fInhibitMeasureRepeatReplicasBrowsing" <<  ": " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
+    "fInhibitMultipleFullBarRestsBrowsing" <<  ": " <<
     fInhibitMultipleFullBarRestsBrowsing <<
     std::endl<<
     std::endl;

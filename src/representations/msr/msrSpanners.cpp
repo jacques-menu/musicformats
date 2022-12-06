@@ -203,7 +203,7 @@ void msrSpanner::print (std::ostream& os) const
 {
   os <<
     "[Spanner" <<
-    ", fSpannerNumber = " << fSpannerNumber <<
+    ", fSpannerNumber: " << fSpannerNumber <<
     ", fSpannerKind: " << fSpannerKind <<
     ", line " << fInputLineNumber <<
     std::endl;
@@ -214,13 +214,13 @@ void msrSpanner::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fSpannerPlacementKind" << " : " << fSpannerPlacementKind <<
+    "fSpannerPlacementKind" << ": " << fSpannerPlacementKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSpannerTypeKind" << " : " << fSpannerTypeKind <<
+    "fSpannerTypeKind" << ": " << fSpannerTypeKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSpannerUpLinkToNote" << " : " << fSpannerUpLinkToNote->asShortString () <<
+    "fSpannerUpLinkToNote" << ": " << fSpannerUpLinkToNote->asShortString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fSpannerBeginText" << " : \"" << fSpannerBeginText <<
@@ -237,7 +237,7 @@ void msrSpanner::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fSpannerUpLinkToNote" << " : " << // JMI v0.9.66
+    "fSpannerUpLinkToNote" << ": " << // JMI v0.9.66
     std::endl;
   ++gIndenter;
     os <<
@@ -255,7 +255,7 @@ void msrSpanner::print (std::ostream& os) const
   }
   else {
     os <<
-    " : " << "[NONE]" <<
+    ": " << "[NONE]" <<
     std::endl;
   }
 

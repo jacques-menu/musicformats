@@ -113,26 +113,26 @@ void mxmlPartGroupDescr::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "partGroupNumber" << " : " <<
+    "partGroupNumber" << ": " <<
     fPartGroupNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "partGroup" << " : " <<
+    "partGroup" << ": " <<
     fPartGroup <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "startPosition" << " : " <<
+    "startPosition" << ": " <<
     fStartPosition <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "startInputLineNumber" << " : " <<
+    "startInputLineNumber" << ": " <<
     fStartInputLineNumber <<
     std::endl <<
-    "stopPosition" << " : " <<
+    "stopPosition" << ": " <<
     fStopPosition <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "stopInputLineNumber" << " : " <<
+    "stopInputLineNumber" << ": " <<
     fStopInputLineNumber <<
     std::endl;
 }
@@ -611,7 +611,7 @@ void mxsr2msrSkeletonBuilder::showPartGroupsData (
   gLogStream <<
     std::endl <<
     context <<
-    ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
+    ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
     ", line " << inputLineNumber <<
     ":" <<
     std::endl <<
@@ -1026,7 +1026,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
     gLogStream <<
       "Adding part group descr for '" << fCurrentPartGroupNumber <<
       "' to visitor's part groups data" <<
-      ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
+      ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -1195,7 +1195,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       "Appending implicit part group '" <<
       fImplicitPartGroup->getPartGroupNumber () <<
       "' to MSR score" <<
-      ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
+      ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -1220,7 +1220,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       "Adding implicit part group descr for '" <<
       fCurrentPartGroupNumber <<
       "' to the part groups data" <<
-      ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
+      ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -3046,7 +3046,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
       "', type: \"" <<
       msrPartGroupTypeKindAsString (
         fCurrentPartGroupTypeKind) << "\""  <<
-      ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
+      ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -3313,7 +3313,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
     "--------------------------------------------" <<
     std::endl <<
     "Handling score part name \"" << fCurrentPartID << "\"" <<
-    ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
+    ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
     ", line " << inputLineNumber <<
     std::endl;
   }
@@ -3391,7 +3391,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
       "Registering part " <<
       part->getPartCombinedName () <<
       " in the parts data" <<
-      ", partPosition = " << partPosition <<
+      ", partPosition: " << partPosition <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -4047,7 +4047,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
     gLogStream <<
       std::endl <<
       "visitEnd (S_lyric& )" <<
-      ", line = " << inputLineNumber <<
+      ", line: " << inputLineNumber <<
       ", with:" <<
       std::endl;
 
@@ -4064,7 +4064,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
 
       gLogStream << std::left <<
         std::setw (fieldWidth) <<
-        "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
+        "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
         std::endl;
 
       --gIndenter;
@@ -4101,7 +4101,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_harmony" <<
-      ", harmoniesVoicesCounter = " << fHarmoniesVoicesCounter <<
+      ", harmoniesVoicesCounter: " << fHarmoniesVoicesCounter <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }
@@ -4125,7 +4125,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_figured_bass" <<
-      ", figuredBassVoicesCounter = " << fFiguredBassVoicesCounter <<
+      ", figuredBassVoicesCounter: " << fFiguredBassVoicesCounter <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }

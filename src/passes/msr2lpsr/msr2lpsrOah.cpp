@@ -233,7 +233,7 @@ void msr2lpsrScoreOutputKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "variableName" << " : " <<
+    "variableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -253,7 +253,7 @@ void msr2lpsrScoreOutputKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     lpsrScoreOutputKindAsString (
       fLpsrScoreOutputKindVariable);
   if (fSetByAnOption) {
@@ -521,7 +521,7 @@ void msr2lpsrOahGroup::printMsr2lpsrOahValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "scoreOutputKind" << " : " <<
+    std::setw (valueFieldWidth) << "scoreOutputKind" << ": " <<
     lpsrScoreOutputKindAsString (fScoreOutputKind) <<
     std::endl;
 
@@ -538,7 +538,7 @@ void msr2lpsrOahGroup::printMsr2lpsrOahValues (int valueFieldWidth)
 
   gLogStream << std::left <<
     std::setw (valueFieldWidth) <<
-    "fCreateImplicitInitialRepeatBarLine" << " : " <<
+    "fCreateImplicitInitialRepeatBarLine" << ": " <<
     fCreateImplicitInitialRepeatBarLine <<
     std::endl;
 

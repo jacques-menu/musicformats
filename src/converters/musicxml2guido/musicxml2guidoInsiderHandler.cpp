@@ -710,13 +710,13 @@ void xml2gmnInsiderOahGroup::printXml2gmnInsiderOahGroupValues (int fieldWidth)
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "generateComments" << " : " << fGenerateComments <<
+    "generateComments" << ": " << fGenerateComments <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "generateStem" << " : " << fGenerateStem <<
+    "generateStem" << ": " << fGenerateStem <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "generateBars" << " : " << fGenerateBars <<
+    "generateBars" << ": " << fGenerateBars <<
     std::endl;
 
   --gIndenter;
@@ -732,13 +732,13 @@ void xml2gmnInsiderOahGroup::printXml2gmnInsiderOahGroupValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
     fQuitAfterPass2a <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << ": " <<
     fQuitAfterPass2b <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass3" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
     fQuitAfterPass3 <<
     std::endl;
 

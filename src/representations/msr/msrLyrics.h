@@ -239,7 +239,8 @@ class EXP msrSyllable : public msrMeasureElement
     msrSyllableKind       fSyllableKind;
 
     // texts std::list
-    std::list<std::string>          fSyllableTextsList;
+    std::list<std::string>          
+                          fSyllableTextsList;
 
     // extend kind
     msrSyllableExtendKind fSyllableExtendKind;

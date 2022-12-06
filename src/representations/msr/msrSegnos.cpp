@@ -363,22 +363,22 @@ void msrDalSegno::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "dalSegnoKind" << " : " << msrDalSegnoKindAsString (fDalSegnoKind) <<
+    "dalSegnoKind" << ": " << msrDalSegnoKindAsString (fDalSegnoKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
     "dalSegnoString" << " : \"" << fDalSegnoString << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "staffNumber" << " : " << fStaffNumber <<
+    "staffNumber" << ": " << fStaffNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "measurePosition" << " : " << fMeasureElementMeasurePosition <<
+    "measurePosition" << ": " << fMeasureElementMeasurePosition <<
     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "voicePosition" << " : " << fMeasureElementVoicePosition <<
+//     "voicePosition" << ": " << fMeasureElementVoicePosition <<
 //     std::endl <<
     std::setw (fieldWidth) <<
-    "line" << " : " << fInputLineNumber <<
+    "line" << ": " << fInputLineNumber <<
     std::endl;
 
   --gIndenter;

@@ -3067,11 +3067,11 @@ void msrStaff::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffNumber" << " : " <<
+    "fStaffNumber" << ": " <<
     staffNumberAsString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fStaffUpLinkToPart" << " : " <<
+    "fStaffUpLinkToPart" << ": " <<
     fStaffUpLinkToPart->getPartCombinedName () <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -3086,10 +3086,10 @@ void msrStaff::print (std::ostream& os) const
 
   // staff shortest note
   os << std::left <<
-    std::setw (fieldWidth) << "fStaffShortestNoteDuration" << " : " <<
+    std::setw (fieldWidth) << "fStaffShortestNoteDuration" << ": " <<
     fStaffShortestNoteDuration <<
     std::endl <<
-    std::setw (fieldWidth) << "fStaffShortestNoteTupletFactor" << " : " <<
+    std::setw (fieldWidth) << "fStaffShortestNoteTupletFactor" << ": " <<
     fStaffShortestNoteTupletFactor <<
     std::endl;
 
@@ -3098,7 +3098,7 @@ void msrStaff::print (std::ostream& os) const
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fStaffCurrentClef" << " : ";
+      "fStaffCurrentClef" << ": ";
 
     if (fStaffCurrentClef) {
       os <<
@@ -3119,7 +3119,7 @@ void msrStaff::print (std::ostream& os) const
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fStaffCurrentKey" << " : ";
+      "fStaffCurrentKey" << ": ";
 
     if (fStaffCurrentKey) {
       os <<
@@ -3141,7 +3141,7 @@ void msrStaff::print (std::ostream& os) const
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fStaffCurrentTimeSignature" << " : ";
+      "fStaffCurrentTimeSignature" << ": ";
 
     if (fStaffCurrentTimeSignature) {
       os <<
@@ -3168,7 +3168,7 @@ void msrStaff::print (std::ostream& os) const
     else {
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fCurrentStaffStaffDetails" << " : " << "[NONE]";
+        "fCurrentStaffStaffDetails" << ": " << "[NONE]";
     }
     os << std::endl;
   }
@@ -3177,7 +3177,7 @@ void msrStaff::print (std::ostream& os) const
   // print the staff 'all voices' std::list
   os << std::left <<
     std::setw (fieldWidth) <<
-    "Voice names in fStaffAllVoicesList" << " : ";
+    "Voice names in fStaffAllVoicesList" << ": ";
 
   if (fStaffAllVoicesList.size ()) {
     os << std::endl;
@@ -3197,7 +3197,7 @@ void msrStaff::print (std::ostream& os) const
   // print the staff 'regular voices' std::list
   os << std::left <<
     std::setw (fieldWidth) <<
-    "Voice names in fStaffRegularVoicesList" << " : ";
+    "Voice names in fStaffRegularVoicesList" << ": ";
 
   if (fStaffRegularVoicesList.size ()) {
     os << std::endl;
@@ -3217,7 +3217,7 @@ void msrStaff::print (std::ostream& os) const
 
       os <<
         voiceNumber <<
-        " : " <<
+        ": " <<
         voice->asShortString () <<
         std::endl;
 
@@ -3244,7 +3244,7 @@ void msrStaff::print (std::ostream& os) const
   // print the staff 'voice numbers to all voices' std::map
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffVoiceNumbersToAllVoicesMap" << " : ";
+    "fStaffVoiceNumbersToAllVoicesMap" << ": ";
 
   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
     os << std::endl;
@@ -3263,7 +3263,7 @@ void msrStaff::print (std::ostream& os) const
 
       os <<
         voiceNumber <<
-        " : " <<
+        ": " <<
         voice->asShortString () <<
         std::endl;
 
@@ -3289,7 +3289,7 @@ void msrStaff::print (std::ostream& os) const
   // print the staff 'voice numbers to regular voices' std::map
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffVoiceNumbersToRegularVoicesMap" << " : ";
+    "fStaffVoiceNumbersToRegularVoicesMap" << ": ";
 
   if (fStaffVoiceNumbersToRegularVoicesMap.size ()) {
     os << std::endl;
@@ -3308,7 +3308,7 @@ void msrStaff::print (std::ostream& os) const
 
       os <<
         voiceNumber <<
-        " : " <<
+        ": " <<
         "Voice \"" << voice->getVoiceName () <<
         "\", line " << voice->getInputLineNumber () <<
         std::endl;
@@ -3340,7 +3340,7 @@ void msrStaff::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fStaffMeasuresFlatListsVector" << " : ";
+    "fStaffMeasuresFlatListsVector" << ": ";
   if (staffMeasuresFlatListsVectorSize) {
     os <<
       staffMeasuresFlatListsVectorSize << " elements";
@@ -3396,7 +3396,7 @@ void msrStaff::print (std::ostream& os) const
   // print the staff measures slices sequence
   os <<
     std::setw (fieldWidth) <<
-    "fStaffMeasuresSlicesSequence" << " : ";
+    "fStaffMeasuresSlicesSequence" << ": ";
 
   if (fStaffMeasuresSlicesSequence) {
     os << std::endl;

@@ -89,7 +89,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Creating Humdrum/Scot key item" <<
-      ", line = " << inputLineNumber <<
+      ", line: " << inputLineNumber <<
       std::endl;
   }
 #endif

@@ -817,9 +817,9 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
     ++gIndenter;
 
     gLogStream <<
-      "% fTupletFactor = " << fTupletFactor.asString () <<
+      "% fTupletFactor: " << fTupletFactor.asString () <<
       std::endl <<
-      "% containingTupletFactor = " << containingTupletFactor.asString () <<
+      "% containingTupletFactor: " << containingTupletFactor.asString () <<
       std::endl;
 
     --gIndenter;
@@ -1017,61 +1017,61 @@ void msrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletBracketKind" << " : " <<
+    "fTupletBracketKind" << ": " <<
     msrTupletBracketKindAsString (
       fTupletBracketKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletLineShapeKind" << " : " <<
+    "fTupletLineShapeKind" << ": " <<
     msrTupletLineShapeKindAsString (
       fTupletLineShapeKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletShowNumberKind" << " : " <<
+    "fTupletShowNumberKind" << ": " <<
     msrTupletShowNumberKindAsString (
       fTupletShowNumberKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletShowTypeKind" << " : " <<
+    "fTupletShowTypeKind" << ": " <<
     msrTupletShowTypeKindAsString (
       fTupletShowTypeKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMemberNotesSoundingWholeNotes" << " : " <<
+    "fMemberNotesSoundingWholeNotes" << ": " <<
     fMemberNotesSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMemberNotesDisplayWholeNotes" << " : " <<
+    "fMemberNotesDisplayWholeNotes" << ": " <<
     fMemberNotesDisplayWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTupletSoundingWholeNotes" << " : " <<
+    "fTupletSoundingWholeNotes" << ": " <<
     fMeasureElementSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletDisplayWholeNotes" << " : " <<
+    "fTupletDisplayWholeNotes" << ": " <<
     fTupletDisplayWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTupletMeasureNumber" << " : " <<
+    "fTupletMeasureNumber" << ": " <<
     fTupletUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << " : " <<
+    "fMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fVoicePosition" << " : " <<
+    "fVoicePosition" << ": " <<
     fMeasureElementVoicePosition <<
     std::endl << std::endl;
 
 /* JMI ???
   os << std::left <<
     std::setw (fieldWidth) <<
-    "(measure position" << " : ";
+    "(measure position" << ": ";
   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
     os << "???)";
   }
@@ -1103,7 +1103,7 @@ void msrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletUpLinkToMeasure" << " : ";
+    "fTupletUpLinkToMeasure" << ": ";
   if (fTupletUpLinkToMeasure) {
     os <<
       fTupletUpLinkToMeasure->asShortString ();
@@ -1115,7 +1115,7 @@ void msrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletDirectUpLinkToTuplet" << " : ";
+    "fTupletDirectUpLinkToTuplet" << ": ";
   if (fTupletDirectUpLinkToTuplet) {
     os <<
       fTupletDirectUpLinkToTuplet->asShortString ();
@@ -1127,7 +1127,7 @@ void msrTuplet::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fPositionInTuplet" << " : " <<
+    "fPositionInTuplet" << ": " <<
     fPositionInTuplet <<
     std::endl;
 
@@ -1160,22 +1160,22 @@ void msrTuplet::printShort (std::ostream& os)
 /*
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletBracketKind" << " : " <<
+    "fTupletBracketKind" << ": " <<
     msrTupletBracketKindAsString (
       fTupletBracketKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletLineShapeKind" << " : " <<
+    "fTupletLineShapeKind" << ": " <<
     msrTupletLineShapeKindAsString (
       fTupletLineShapeKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletShowNumberKind" << " : " <<
+    "fTupletShowNumberKind" << ": " <<
     msrTupletShowNumberKindAsString (
       fTupletShowNumberKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletShowTypeKind" << " : " <<
+    "fTupletShowTypeKind" << ": " <<
     msrTupletShowTypeKindAsString (
       fTupletShowTypeKind) <<
     std::endl <<
@@ -1183,40 +1183,40 @@ void msrTuplet::printShort (std::ostream& os)
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMemberNotesSoundingWholeNotes" << " : " <<
+    "fMemberNotesSoundingWholeNotes" << ": " <<
     fMemberNotesSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMemberNotesDisplayWholeNotes" << " : " <<
+    "fMemberNotesDisplayWholeNotes" << ": " <<
     fMemberNotesDisplayWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTupletSoundingWholeNotes" << " : " <<
+    "fTupletSoundingWholeNotes" << ": " <<
     fMeasureElementSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletDisplayWholeNotes" << " : " <<
+    "fTupletDisplayWholeNotes" << ": " <<
     fTupletDisplayWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTupletMeasureNumber" << " : " <<
+    "fTupletMeasureNumber" << ": " <<
     fTupletUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << " : " <<
+    "fMeasureElementMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition <<
 //     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "fMeasureElementVoicePosition" << " : " <<
+//     "fMeasureElementVoicePosition" << ": " <<
 //     fMeasureElementVoicePosition <<
     std::endl << std::endl;
 
 /* JMI ???
   os << std::left <<
     std::setw (fieldWidth) <<
-    "(measure position" << " : ";
+    "(measure position" << ": ";
   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
     os << "???)";
   }
@@ -1256,7 +1256,7 @@ void msrTuplet::printShort (std::ostream& os)
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletUpLinkToMeasure" << " : ";
+    "fTupletUpLinkToMeasure" << ": ";
   if (fTupletUpLinkToMeasure) {
     os <<
       fTupletUpLinkToMeasure->asShortString ();
@@ -1268,7 +1268,7 @@ void msrTuplet::printShort (std::ostream& os)
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletDirectUpLinkToTuplet" << " : ";
+    "fTupletDirectUpLinkToTuplet" << ": ";
   if (fTupletDirectUpLinkToTuplet) {
     os <<
       fTupletDirectUpLinkToTuplet->asShortString ();

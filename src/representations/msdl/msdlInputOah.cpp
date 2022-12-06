@@ -239,7 +239,7 @@ void msdlKeywordsLanguageAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
     "fMsdlKeywordsLanguageKindVariable" << " : \"" <<
@@ -373,11 +373,11 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
 
   ++gIndenter;
 
-	gIndenter.indentMultiLineString (
+  gIndenter.indentMultiLineString (
     existingKeywordsInLanguage (
       keywordsLanguageKind,
       K_MF_NAMES_LIST_MAX_LENGTH),
-		gLogStream);
+    gLogStream);
 
   --gIndenter;
 }
@@ -585,11 +585,11 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
 
   ++gIndenter;
 
-	gIndenter.indentMultiLineString (
+  gIndenter.indentMultiLineString (
     existingTokensInLanguage (
       keywordsLanguageKind,
       K_MF_NAMES_LIST_MAX_LENGTH),
-		gLogStream);
+    gLogStream);
 
   --gIndenter;
 }
@@ -902,7 +902,7 @@ void msdlCommentsTypeAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
     "fMsdlCommentsTypeKindVariable" << " : \"" <<
@@ -1146,7 +1146,7 @@ void msdlUserLanguageAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -1391,11 +1391,11 @@ void msdlPitchesLanguageAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMsrQuarterTonesPitchesLanguageKindVariable" << " : " <<
+    "fMsrQuarterTonesPitchesLanguageKindVariable" << ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable) <<
     std::endl;
@@ -1410,7 +1410,7 @@ void msdlPitchesLanguageAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
   if (fSetByAnOption) {
@@ -1776,10 +1776,10 @@ void msdlInputOahGroup::printMsdlInputOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fDisplayMsdl" << " : " <<
+    std::setw (fieldWidth) << "fDisplayMsdl" << ": " <<
     fDisplayMsdl <<
     std::endl <<
-    std::setw (fieldWidth) << "fDisplayMsdlShort" << " : " <<
+    std::setw (fieldWidth) << "fDisplayMsdlShort" << ": " <<
     fDisplayMsdlShort <<
     std::endl;
 

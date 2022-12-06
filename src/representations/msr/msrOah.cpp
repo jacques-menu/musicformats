@@ -241,11 +241,11 @@ void msrPitchesLanguageAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMsrQuarterTonesPitchesLanguageKindVariable" << " : " <<
+    "fMsrQuarterTonesPitchesLanguageKindVariable" << ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable) <<
     std::endl;
@@ -260,7 +260,7 @@ void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
   if (fSetByAnOption) {
@@ -563,10 +563,10 @@ void msrRenamePartAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fStringToStringMapVariable" << " : " <<
+    "fStringToStringMapVariable" << ": " <<
     std::endl;
 
   if (! fStringToStringMapVariable.size ()) {
@@ -595,7 +595,7 @@ void msrRenamePartAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fStringToStringMapVariable.size ()) {
     os <<
@@ -680,7 +680,7 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "trace-msr", "tmsr",
 R"(Write a trace of the LPSR graphs visiting activity to standard error.)",
         "fTraceMsr",
@@ -690,7 +690,7 @@ R"(Write a trace of the LPSR graphs visiting activity to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "trace-msr-visitors", "tmsrvis",
 R"(Write a trace of the MSR graphs visiting activity to standard error.)",
         "fTraceMsrVisitors",
@@ -724,7 +724,7 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-part-groups", "dpg",
 R"(Write the structure of the part groups to standard error.)",
         "fDisplayPartGroups",
@@ -734,7 +734,7 @@ R"(Write the structure of the part groups to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-skeleton", "dmsrskel",
 R"(Write the contents of the MSR skeleton data to standard error.)",
         "fDisplayMsrSkeleton",
@@ -742,9 +742,9 @@ R"(Write the contents of the MSR skeleton data to standard error.)",
 
   // display first MSR
 
-  S_oahBooleanAtom
+  S_oahBooleanAtomWithTracePasses
     displayFirstMsrShortBooleanAtom =
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-1-short", "dmsr1short",
 R"(Write the contents of the first MSR data, short version, to standard error.)",
         "fDisplayFirstMsrShort",
@@ -761,9 +761,9 @@ R"(Write the contents of the first MSR data, short version, to standard error.
 This option is an alias for '-display-msr-1-short, -dmsr1short'.)",
         displayFirstMsrShortBooleanAtom));
 
-  S_oahBooleanAtom
+  S_oahBooleanAtomWithTracePasses
     displayFirstMsrFullBooleanAtom =
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-1-full", "dmsr1full",
   R"(Write the contents of the first MSR data, full version, to standard error.)",
         "fDisplayFirstMsrFull",
@@ -777,7 +777,7 @@ This option is an alias for '-display-msr-1-short, -dmsr1short'.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-1-slices", "dmsr1slices",
 R"(Write the contents of the first MSR data slices to standard error.)",
         "fDisplayFirstMsrShortSlices",
@@ -785,9 +785,9 @@ R"(Write the contents of the first MSR data slices to standard error.)",
 
   // display second MSR
 
-  S_oahBooleanAtom
+  S_oahBooleanAtomWithTracePasses
     displaySecondMsrShortBooleanAtom =
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-2-short", "dmsr2short",
 R"(Write the contents of the second MSR data, short version, to standard error.)",
         "fDisplaySecondMsrShort",
@@ -806,7 +806,7 @@ This option is an alias for '-display-msr-2-short, -dmsr2short'.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-2-full", "dmsr2full",
 R"(Write the contents of the second MSR data, full version, to standard error.)",
         "fDisplaySecondMsrFull",
@@ -816,7 +816,7 @@ R"(Write the contents of the second MSR data, full version, to standard error.)"
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-2-slices", "dmsr2slices",
 R"(Write the contents of the second MSR data slices to standard error.)",
         "fDisplaySecondMsrShortSlices",
@@ -826,7 +826,7 @@ R"(Write the contents of the second MSR data slices to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-1-names", "dmsr1names",
 R"(Only write a view of the names in the first MSR to standard error.
 This implies that no LilyPond code is generated.)",
@@ -837,7 +837,7 @@ This implies that no LilyPond code is generated.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-2-names", "dmsr2names",
 R"(Only write a view of the names in the second MSR to standard error.
 This implies that no LilyPond code is generated.)",
@@ -848,7 +848,7 @@ This implies that no LilyPond code is generated.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-1-summary", "dmsr1sum",
 R"(Only write a summary of the first MSR to standard error.
 This implies that no LilyPond code is generated.)",
@@ -859,7 +859,7 @@ This implies that no LilyPond code is generated.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
+      oahBooleanAtomWithTracePasses::create (
         "display-msr-2-summary", "dmsr2sum",
 R"(Only write a summary of the second MSR to standard error.
 This implies that no LilyPond code is generated.)",
@@ -1256,44 +1256,44 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fTraceMsr" << " : " <<
+    std::setw (valueFieldWidth) << "fTraceMsr" << ": " <<
     fTraceMsr <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fTraceMsrVisitors" << " : " <<
+    std::setw (valueFieldWidth) << "fTraceMsrVisitors" << ": " <<
     fTraceMsrVisitors <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayPartGroups" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayPartGroups" << ": " <<
     fDisplayPartGroups <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayFirstMsrShort" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrShort" << ": " <<
     fDisplayFirstMsrShort <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplaySecondMsrShort" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrShort" << ": " <<
     fDisplaySecondMsrShort <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayFirstMsrFull" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrFull" << ": " <<
     fDisplayFirstMsrFull <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplaySecondMsrFull" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrFull" << ": " <<
     fDisplaySecondMsrFull <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayFirstMsrShortNames" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrShortNames" << ": " <<
     fDisplayFirstMsrShortNames <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplaySecondMsrShortNames" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrShortNames" << ": " <<
     fDisplaySecondMsrShortNames <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayFirstMsrShortSummary" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrShortSummary" << ": " <<
     fDisplayFirstMsrShortSummary <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplaySecondMsrShortSummary" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrShortSummary" << ": " <<
     fDisplaySecondMsrShortSummary <<
     std::endl;
 
@@ -1309,7 +1309,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "msrPitchesLanguage" << " : " <<
+    std::setw (valueFieldWidth) << "msrPitchesLanguage" << ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKind) <<
     std::endl;
@@ -1328,7 +1328,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
   // parts renaming
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "parts renaming" << " : ";
+    std::setw (valueFieldWidth) << "parts renaming" << ": ";
 
   if (! fMsrPartsRenamingMap.size ()) {
     gLogStream <<
@@ -1361,7 +1361,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   gLogStream << std::left <<
     std::setw (valueFieldWidth) <<
-    "fCreateSingleLineStavesAsRythmic" << " : " <<
+    "fCreateSingleLineStavesAsRythmic" << ": " <<
     fCreateSingleLineStavesAsRythmic <<
     std::endl;
 
@@ -1378,7 +1378,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   gLogStream << std::left <<
     std::setw (valueFieldWidth) <<
-    "fCreateVoicesStaffRelativeNumbers" << " : " <<
+    "fCreateVoicesStaffRelativeNumbers" << ": " <<
     fCreateVoicesStaffRelativeNumbers <<
     std::endl;
 
@@ -1394,7 +1394,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fShowHarmoniesVoices" << " : " <<
+    std::setw (valueFieldWidth) << "fShowHarmoniesVoices" << ": " <<
     fShowHarmoniesVoices <<
     std::endl;
 
@@ -1410,7 +1410,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fShowFiguredBassVoices" << " : " <<
+    std::setw (valueFieldWidth) << "fShowFiguredBassVoices" << ": " <<
     fShowFiguredBassVoices <<
     std::endl;
 

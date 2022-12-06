@@ -543,7 +543,7 @@ void msdl2guidoInsiderOahGroup::printMsdl2gmnInsiderOahGroupValues (
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass1" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass1" << ": " <<
     fQuitAfterPass1 <<
     std::endl;
 

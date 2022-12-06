@@ -514,51 +514,51 @@ void msrBook::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "bookElementsListSize" << " : " <<
+    "bookElementsListSize" << ": " <<
     bookElementsListSize <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fBookNumberOfMeasures" << " : " <<
+    "fBookNumberOfMeasures" << ": " <<
     fBookNumberOfMeasures <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fBookPartGroupNamesMaxLength" <<  " : " <<
+    "fBookPartGroupNamesMaxLength" <<  ": " <<
     fBookElementNamesMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fBookCreditTypePartNamesMaxLength" <<  " : " <<
+    "fBookCreditTypePartNamesMaxLength" <<  ": " <<
     fBookElementNamesMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fBookInstrumentNamesMaxLength" <<  " : " <<
+    "fBookInstrumentNamesMaxLength" <<  ": " <<
     fBookInstrumentNamesMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fBookInstrumentAbbreviationsMaxLength" <<  " : " <<
+    "fBookInstrumentAbbreviationsMaxLength" <<  ": " <<
     fBookInstrumentAbbreviationsMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
+    "fInhibitGraceNotesGroupsBeforeBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
     std::endl<<
     std::setw (fieldWidth) <<
-    "fInhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
+    "fInhibitGraceNotesGroupsAfterBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
+    "fInhibitMeasureRepeatReplicasBrowsing" <<  ": " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
+    "fInhibitMultipleFullBarRestsBrowsing" <<  ": " <<
     fInhibitMultipleFullBarRestsBrowsing <<
     std::endl<<
     std::endl;
@@ -632,7 +632,7 @@ void msrBook::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
       std::endl;
   }
   os << std::endl;
@@ -664,7 +664,7 @@ void msrBook::print (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
       std::endl;
   }
 
@@ -706,53 +706,53 @@ void msrBook::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "bookElementsListSize" << " : " <<
+    "bookElementsListSize" << ": " <<
     bookElementsListSize <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fBookNumberOfMeasures" << " : " <<
+    "fBookNumberOfMeasures" << ": " <<
     fBookNumberOfMeasures <<
     std::endl;
 
 /*
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBookPartGroupNamesMaxLength" <<  " : " <<
+    "fBookPartGroupNamesMaxLength" <<  ": " <<
     fBookElementNamesMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fBookCreditTypePartNamesMaxLength" <<  " : " <<
+    "fBookCreditTypePartNamesMaxLength" <<  ": " <<
     fBookElementNamesMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fBookInstrumentNamesMaxLength" <<  " : " <<
+    "fBookInstrumentNamesMaxLength" <<  ": " <<
     fBookInstrumentNamesMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fBookInstrumentAbbreviationsMaxLength" <<  " : " <<
+    "fBookInstrumentAbbreviationsMaxLength" <<  ": " <<
     fBookInstrumentAbbreviationsMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "inhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
+    "inhibitGraceNotesGroupsBeforeBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
     std::endl<<
     std::setw (fieldWidth) <<
-    "fInhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
+    "fInhibitGraceNotesGroupsAfterBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
+    "fInhibitMeasureRepeatReplicasBrowsing" <<  ": " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
+    "fInhibitMultipleFullBarRestsBrowsing" <<  ": " <<
     fInhibitMultipleFullBarRestsBrowsing <<
     std::endl<<
     std::endl;
@@ -828,7 +828,7 @@ void msrBook::printShort (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
       std::endl;
   }
   os << std::endl;
@@ -860,7 +860,7 @@ void msrBook::printShort (std::ostream& os) const
   }
   else {
     os <<
-      " : " << "[NONE]" <<
+      ": " << "[NONE]" <<
       std::endl;
   }
 */
@@ -904,41 +904,41 @@ void msrBook::printSummary (std::ostream& os) const
   // print global information
   os << std::left <<
     std::setw (fieldWidth) <<
-    "bookElementsListSize" << " : " <<
+    "bookElementsListSize" << ": " <<
     bookElementsListSize <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fBookNumberOfMeasures" << " : " <<
+    "fBookNumberOfMeasures" << ": " <<
     fBookNumberOfMeasures <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fBookInstrumentNamesMaxLength" <<  " : " <<
+    "fBookInstrumentNamesMaxLength" <<  ": " <<
     fBookInstrumentNamesMaxLength <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fBookInstrumentAbbreviationsMaxLength" <<  " : " <<
+    "fBookInstrumentAbbreviationsMaxLength" <<  ": " <<
     fBookInstrumentAbbreviationsMaxLength <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitGraceNotesGroupsBeforeBrowsing" <<  " : " <<
+    "fInhibitGraceNotesGroupsBeforeBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsBeforeBrowsing <<
     std::endl<<
     std::setw (fieldWidth) <<
-    "fInhibitGraceNotesGroupsAfterBrowsing" <<  " : " <<
+    "fInhibitGraceNotesGroupsAfterBrowsing" <<  ": " <<
     fInhibitGraceNotesGroupsAfterBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMeasureRepeatReplicasBrowsing" <<  " : " <<
+    "fInhibitMeasureRepeatReplicasBrowsing" <<  ": " <<
     fInhibitMeasureRepeatReplicasBrowsing <<
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
+    "fInhibitMultipleFullBarRestsBrowsing" <<  ": " <<
     fInhibitMultipleFullBarRestsBrowsing <<
     std::endl<<
     std::endl;
