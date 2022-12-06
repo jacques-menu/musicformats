@@ -276,13 +276,13 @@ S_msrSegment msrSegment::createSegmentDeepClone (
     "containingVoice is null");
 
   S_msrSegment
-    segmentDeepClone =
+    deepClone =
       msrSegment::create (
         fInputLineNumber,
         containingVoice);
 
   // absolute number
-  segmentDeepClone->fSegmentAbsoluteNumber =
+  deepClone->fSegmentAbsoluteNumber =
     fSegmentAbsoluteNumber;
 
   // keep debug number fSegmentDebugNumber unchanged
@@ -309,7 +309,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
 //         S_msrMeasure measure = dynamic_cast<msrRepeat*>(&(*(measureElement)))
 //       ) {
 
-//       segmentDeepClone->
+//       deepClone->
 //         appendMeasureToSegment (
 //           measureElement->
 //             createMeasureDeepClone (this));
@@ -327,10 +327,10 @@ S_msrSegment msrSegment::createSegmentDeepClone (
   }
 
   // upLinks
-  segmentDeepClone->fSegmentUpLinkToVoice =
+  deepClone->fSegmentUpLinkToVoice =
     containingVoice;
 
-  return segmentDeepClone;
+  return deepClone;
 }
 
 /* JMI
@@ -2743,7 +2743,7 @@ void msrSegment::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fSegmentUpLinkToVoice" << " : " <<
+    "fSegmentUpLinkToVoice" << ": " <<
     "\"" <<
     fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
@@ -2752,17 +2752,17 @@ void msrSegment::print (std::ostream& os) const
 /* JMI
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fSegmentShortestNoteDuration" << " : " <<
+    "fSegmentShortestNoteDuration" << ": " <<
     fSegmentShortestNoteDuration <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSegmentShortestNoteTupletFactor" << " : " <<
+    "fSegmentShortestNoteTupletFactor" << ": " <<
     fSegmentShortestNoteTupletFactor <<
     std::endl;
 */
 
   os <<
-    "fSegmentFirstMeasure" << " : ";
+    "fSegmentFirstMeasure" << ": ";
   if (fSegmentFirstMeasure) {
     os << std::endl;
     ++gIndenter;
@@ -2774,7 +2774,7 @@ void msrSegment::print (std::ostream& os) const
   }
 
   os <<
-    "fSegmentLastMeasure" << " : ";
+    "fSegmentLastMeasure" << ": ";
   if (fSegmentLastMeasure) {
     os << std::endl;
     ++gIndenter;
@@ -2788,7 +2788,7 @@ void msrSegment::print (std::ostream& os) const
   if (! fSegmentElementsList.size ()) {
     os <<
       std::setw (fieldWidth) <<
-      "fSegmentElementsList" << " : " << "[EMPTY]" <<
+      "fSegmentElementsList" << ": " << "[EMPTY]" <<
       std::endl;
   }
 
@@ -2832,7 +2832,7 @@ void msrSegment::printShort (std::ostream& os) const
   if (! fSegmentElementsList.size ()) {
     os <<
       std::setw (fieldWidth) <<
-      "fSegmentElementsList" << " : " << "[EMPTY]" <<
+      "fSegmentElementsList" << ": " << "[EMPTY]" <<
       std::endl;
   }
 

@@ -340,50 +340,50 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fTraceScanning" << " : " <<
+    std::setw (fieldWidth) << "fTraceScanning" << ": " <<
       fTraceScanning <<
       std::endl <<
-    std::setw (fieldWidth) << "fDisplayTokens" << " : " <<
+    std::setw (fieldWidth) << "fDisplayTokens" << ": " <<
       fDisplayTokens <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fTraceParsing" << " : " <<
+    std::setw (fieldWidth) << "fTraceParsing" << ": " <<
       fTraceParsing <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fDisplayToolAndInput" << " : " <<
+    std::setw (fieldWidth) << "fDisplayToolAndInput" << ": " <<
       fDisplayToolAndInput <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fDisplayOptions" << " : " <<
+    std::setw (fieldWidth) << "fDisplayOptions" << ": " <<
       fDisplayOptions <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fTraceInputs" << " : " <<
+    std::setw (fieldWidth) << "fTraceInputs" << ": " <<
       fTraceInputs <<
       std::endl <<
-    std::setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
+    std::setw (fieldWidth) << "fTraceCaseInputStatements" << ": " <<
       fTraceCaseInputStatements <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fTraceChoices" << " : " <<
+    std::setw (fieldWidth) << "fTraceChoices" << ": " <<
       fTraceChoices <<
       std::endl <<
-    std::setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
+    std::setw (fieldWidth) << "fTraceCaseChoiceStatements" << ": " <<
       fTraceCaseChoiceStatements <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
+    std::setw (fieldWidth) << "fTraceCaseChoiceStatements" << ": " <<
       fTraceCaseChoiceStatements <<
       std::endl <<
-    std::setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
+    std::setw (fieldWidth) << "fTraceCaseInputStatements" << ": " <<
       fTraceCaseInputStatements <<
       std::endl <<
-    std::setw (fieldWidth) << "fNoLaunch" << " : " <<
+    std::setw (fieldWidth) << "fNoLaunch" << ": " <<
       fNoLaunch <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fTraceOptionsBlocks" << " : " <<
+    std::setw (fieldWidth) << "fTraceOptionsBlocks" << ": " <<
       fTraceOptionsBlocks <<
       std::endl;
 
@@ -399,14 +399,14 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fSelectChoiceToLabelsMultiMap" << " : ";
+    std::setw (fieldWidth) << "fSelectChoiceToLabelsMultiMap" << ": ";
 
   ++gIndenter;
 
   if (fSelectChoiceToLabelsMultiMap.size ()) {
     for (std::pair<std::string, std::string> thePair : fSelectChoiceToLabelsMultiMap) {
       gLogStream <<
-        thePair.first << " : " << thePair.second <<
+        thePair.first << ": " << thePair.second <<
         std::endl;
     } // for
   }

@@ -259,23 +259,33 @@ class EXP msrIdentification : public msrElement
     std::string           fIdentificationScoreInstrument;
 
     // creators
-    std::list<std::string>          fIdentificationComposersList;
-    std::list<std::string>          fIdentificationLyricistsList;
-    std::list<std::string>          fIdentificationArrangersList;
+    std::list<std::string>          
+                          fIdentificationComposersList;
+    std::list<std::string>          
+                          fIdentificationLyricistsList;
+    std::list<std::string>          
+                          fIdentificationArrangersList;
 
-    std::list<std::string>          fIdentificationPoetsList;
-    std::list<std::string>          fIdentificationTranslatorsList;
-    std::list<std::string>          fIdentificationArtistsList;
+    std::list<std::string>          
+                          fIdentificationPoetsList;
+    std::list<std::string>          
+                          fIdentificationTranslatorsList;
+    std::list<std::string>          
+                          fIdentificationArtistsList;
 
-    std::list<std::string>          fIdentificationSoftwaresList;
+    std::list<std::string>          
+                          fIdentificationSoftwaresList;
 
     // rights
-    std::list<std::string>          fIdentificationRightsList;
+    std::list<std::string>          
+                          fIdentificationRightsList;
     // sources
-    std::list<std::string>          fIdentificationSourcesList;
+    std::list<std::string>          
+                          fIdentificationSourcesList;
 
     // relations
-    std::list<std::string>          fIdentificationRelationsList;
+    std::list<std::string>          
+                          fIdentificationRelationsList;
 };
 typedef SMARTP<msrIdentification> S_msrIdentification;
 EXP std::ostream& operator << (std::ostream& os, const S_msrIdentification& elt);

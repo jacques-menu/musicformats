@@ -212,42 +212,42 @@ void msrWords::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "placement" << " : " <<
+    "placement" << ": " <<
     msrPlacementKindAsString (fWordsPlacementKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "wordsJustifyKind" << " : " <<
+    "wordsJustifyKind" << ": " <<
     msrJustifyKindAsString (fWordsJustifyKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsHorizontalAlignmentKind" << " : " <<
+    "wordsHorizontalAlignmentKind" << ": " <<
     msrHorizontalAlignmentKindAsString (fWordsHorizontalAlignmentKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsVerticalAlignmentKind" << " : " <<
+    "wordsVerticalAlignmentKind" << ": " <<
     msrVerticalAlignmentKindAsString (fWordsVerticalAlignmentKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "wordsFontStyle" << " : " <<
+    "wordsFontStyle" << ": " <<
     msrFontStyleKindAsString (fWordsFontStyleKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsFontSize" << " : " <<
+    "wordsFontSize" << ": " <<
     fWordsFontSize->fontSizeAsString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsFontWeight" << " : " <<
+    "wordsFontWeight" << ": " <<
     msrFontWeightKindAsString (fWordsFontWeightKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsFontXMLLang" << " : " <<
+    "wordsFontXMLLang" << ": " <<
     msrXMLLangKindAsString (fWordsXMLLangKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "wordsStaffNumber" << " : " <<
+    "wordsStaffNumber" << ": " <<
     fWordsStaffNumber <<
     std::endl;
 

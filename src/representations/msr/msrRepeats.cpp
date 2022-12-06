@@ -766,7 +766,7 @@ void msrRepeatEnding::print (std::ostream& os) const
   os <<
     std::endl <<
     "[RepeatEnding" <<
-    ", repeatEndingKind" << " : " <<
+    ", repeatEndingKind" << ": " <<
     msrRepeatEndingKindAsString (
       fRepeatEndingKind) <<
     ", line " << fInputLineNumber <<
@@ -787,10 +787,10 @@ void msrRepeatEnding::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "repeatEndingNumber" <<  " : " <<fRepeatEndingNumber <<
+    "repeatEndingNumber" <<  ": " <<fRepeatEndingNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "repeatEndingInternalNumber" <<  " : " <<fRepeatEndingInternalNumber <<
+    "repeatEndingInternalNumber" <<  ": " <<fRepeatEndingInternalNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "repeat upLink" << " : '" <<
@@ -860,11 +860,11 @@ void msrRepeatEnding::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "repeatEndingNumber" <<  " : " <<fRepeatEndingNumber <<
+    "repeatEndingNumber" <<  ": " <<fRepeatEndingNumber <<
     / * JMI
     std::endl <<
     std::setw (fieldWidth) <<
-    "repeatEndingInternalNumber" <<  " : " <<fRepeatEndingInternalNumber <<
+    "repeatEndingInternalNumber" <<  ": " <<fRepeatEndingInternalNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "repeat upLink: " << " : '" <<
@@ -1764,12 +1764,12 @@ void msrRepeat::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-   "fRepeatExplicitStartKind" << " : " <<
+   "fRepeatExplicitStartKind" << ": " <<
     msrRepeatExplicitStartKindAsString (
       fRepeatExplicitStartKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "repeat ending(s)" << " : " <<
+    "repeat ending(s)" << ": " <<
     fRepeatEndings.size () <<
     std::endl;
 
@@ -1778,7 +1778,7 @@ void msrRepeat::print (std::ostream& os) const
 //     // print the current repeat build phase
 //     os << std::left <<
 //       std::setw (fieldWidth) <<
-//       "fCurrentRepeatBuildPhaseKind" << " : " <<
+//       "fCurrentRepeatBuildPhaseKind" << ": " <<
 //       repeatBuildPhaseKindAsString (
 //         fCurrentRepeatBuildPhaseKind) <<
 //       std::endl;
@@ -1790,7 +1790,7 @@ void msrRepeat::print (std::ostream& os) const
   // print the immediately preceding and following repeats
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fImmediatelyPrecedingRepeat" << " : ";
+    "fImmediatelyPrecedingRepeat" << ": ";
   if (fImmediatelyPrecedingRepeat) {
     os <<
       fImmediatelyPrecedingRepeat->asShortString ();
@@ -1802,7 +1802,7 @@ void msrRepeat::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fImmediatelyFollowingRepeat" << " : ";
+    "fImmediatelyFollowingRepeat" << ": ";
   if (fImmediatelyFollowingRepeat) {
     os <<
       fImmediatelyFollowingRepeat->asShortString ();
@@ -1815,7 +1815,7 @@ void msrRepeat::print (std::ostream& os) const
   // print the repeat common part
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fRepeatCommonPart" << " : ";
+    "fRepeatCommonPart" << ": ";
   if (fRepeatCommonPart) {
     os <<
       fRepeatCommonPart <<
@@ -1883,7 +1883,7 @@ void msrRepeat::printShort (std::ostream& os) const
   // short print the repeat common part
   os <<
     std::setw (fieldWidth) <<
-    "fRepeatCommonPart" << " : ";
+    "fRepeatCommonPart" << ": ";
   if (fRepeatCommonPart) {
     os << std::endl;
     ++gIndenter;
@@ -1900,7 +1900,7 @@ void msrRepeat::printShort (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fRepeatEndings" << " : ";
+    "fRepeatEndings" << ": ";
   if (repeatEndingsSize) {
     os << '(' << repeatEndingsSize << ")";
   }

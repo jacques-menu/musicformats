@@ -529,24 +529,24 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fTraceTokens" << " : " <<
+    std::setw (fieldWidth) << "fTraceTokens" << ": " <<
       fTraceTokens <<
       std::endl <<
-    std::setw (fieldWidth) << "fTraceTokensDetails" << " : " <<
+    std::setw (fieldWidth) << "fTraceTokensDetails" << ": " <<
       fTraceTokensDetails <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fTraceSyntax" << " : " <<
+    std::setw (fieldWidth) << "fTraceSyntax" << ": " <<
       fTraceSyntax <<
       std::endl <<
-    std::setw (fieldWidth) << "fTraceSyntaxDetails" << " : " <<
+    std::setw (fieldWidth) << "fTraceSyntaxDetails" << ": " <<
       fTraceSyntaxDetails <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fTraceSyntaxErrorRecovery" << " : " <<
+    std::setw (fieldWidth) << "fTraceSyntaxErrorRecovery" << ": " <<
       fTraceSyntaxErrorRecovery <<
       std::endl <<
-    std::setw (fieldWidth) << "fTraceSyntaxErrorRecoveryDetails" << " : " <<
+    std::setw (fieldWidth) << "fTraceSyntaxErrorRecoveryDetails" << ": " <<
       fTraceSyntaxErrorRecoveryDetails <<
       std::endl;
 
@@ -561,16 +561,16 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fMsdlUserLanguageKind" << " : " <<
+    std::setw (fieldWidth) << "fMsdlUserLanguageKind" << ": " <<
       msdlUserLanguageKindAsString (
         fMsdlUserLanguageKind) <<
       std::endl <<
-    std::setw (fieldWidth) << "fMsdlKeywordsInputLanguageKind" << " : " <<
+    std::setw (fieldWidth) << "fMsdlKeywordsInputLanguageKind" << ": " <<
       msdlKeywordsLanguageKindAsString (
         fMsdlKeywordsInputLanguageKind) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fMsdlQuarterTonesPitchesLanguageKind" << " : " <<
+    std::setw (fieldWidth) << "fMsdlQuarterTonesPitchesLanguageKind" << ": " <<
       msrQuarterTonesPitchesLanguageKindAsString (
         fMsdlQuarterTonesPitchesLanguageKind) <<
       std::endl;
@@ -586,19 +586,19 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fLexicalAnalysisOnly" << " : " <<
+    std::setw (fieldWidth) << "fLexicalAnalysisOnly" << ": " <<
       fLexicalAnalysisOnly <<
       std::endl <<
-    std::setw (fieldWidth) << "fIgnoreSeparatorTokens" << " : " <<
+    std::setw (fieldWidth) << "fIgnoreSeparatorTokens" << ": " <<
       fIgnoreSeparatorTokens <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fMsdlKeywordsConversionLanguageKind" << " : " <<
+    std::setw (fieldWidth) << "fMsdlKeywordsConversionLanguageKind" << ": " <<
       msdlKeywordsLanguageKindAsString (
         fMsdlKeywordsConversionLanguageKind) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fMsdlCommentsTypeKind" << " : " <<
+    std::setw (fieldWidth) << "fMsdlCommentsTypeKind" << ": " <<
       msdlCommentsTypeKindAsString (
         fMsdlCommentsTypeKind) <<
       std::endl;
@@ -614,7 +614,7 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fQuitOnLexicalErrors" << " : " <<
+    std::setw (fieldWidth) << "fQuitOnLexicalErrors" << ": " <<
       fQuitOnLexicalErrors <<
       std::endl;
 

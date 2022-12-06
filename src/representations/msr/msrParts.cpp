@@ -2541,7 +2541,7 @@ void msrPart::printPartMeasuresWholeNotesDurationsVector (
 {
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartMeasuresWholeNotesDurationsVector" << " : " ;
+    "fPartMeasuresWholeNotesDurationsVector" << ": " ;
 
   if (fPartNumberOfMeasures == 0) {
     os << "[EMPTY]" << std::endl;
@@ -2557,7 +2557,7 @@ void msrPart::printPartMeasuresWholeNotesDurationsVector (
       os << std::left <<
         "ordinal number " <<
         std::setw (3) << std::right <<
-        j << " : " <<
+        j << ": " <<
         std::setw (4) <<
         fPartMeasuresWholeNotesDurationsVector [ i ].toString () <<
         std::endl;
@@ -2584,7 +2584,7 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fUpLinkToPartGroup" << " : ";
+    "fUpLinkToPartGroup" << ": ";
   if (fPartUpLinkToPartGroup) {
     // it may be empty
     os <<
@@ -2625,7 +2625,7 @@ void msrPart::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartAbsoluteNumber" << " : " <<
+    "fPartAbsoluteNumber" << ": " <<
     fPartAbsoluteNumber <<
     std::endl <<
 
@@ -2639,17 +2639,17 @@ void msrPart::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartNumberOfMeasures" << " : " <<
+    "fPartNumberOfMeasures" << ": " <<
     fPartNumberOfMeasures <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartContainsMultipleFullBarRests" << " : " <<
+    "fPartContainsMultipleFullBarRests" << ": " <<
     fPartContainsMultipleFullBarRests <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartMeasurePosition" << " : " <<
+    "fPartMeasurePosition" << ": " <<
     fPartMeasurePosition <<
     std::endl <<
 
@@ -2660,7 +2660,7 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartHarmoniesStaff" << " : ";
+    "fPartHarmoniesStaff" << ": ";
     if (fPartHarmoniesStaff) {
       os <<
         fPartHarmoniesStaff->asShortString ();
@@ -2672,7 +2672,7 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartHarmoniesVoice" << " : ";
+    "fPartHarmoniesVoice" << ": ";
     if (fPartHarmoniesVoice) {
       os <<
         fPartHarmoniesVoice->asShortString ();
@@ -2684,7 +2684,7 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartFiguredBassStaff" << " : ";
+    "fPartFiguredBassStaff" << ": ";
     if (fPartFiguredBassStaff) {
       os <<
         fPartFiguredBassStaff->asShortString ();
@@ -2696,7 +2696,7 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartFiguredBassVoice" << " : ";
+    "fPartFiguredBassVoice" << ": ";
     if (fPartFiguredBassVoice) {
       os <<
         fPartFiguredBassVoice->asShortString ();
@@ -2711,7 +2711,7 @@ void msrPart::print (std::ostream& os) const
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fPartCurrentClef" << " : ";
+      "fPartCurrentClef" << ": ";
 
     if (fPartCurrentClef) {
       os <<
@@ -2733,7 +2733,7 @@ void msrPart::print (std::ostream& os) const
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fPartCurrentKey" << " : ";
+      "fPartCurrentKey" << ": ";
 
     if (fPartCurrentKey) {
       os <<
@@ -2755,7 +2755,7 @@ void msrPart::print (std::ostream& os) const
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fPartCurrentTimeSignature" << " : ";
+      "fPartCurrentTimeSignature" << ": ";
 
     if (fPartCurrentTimeSignature) {
       os <<
@@ -2772,12 +2772,12 @@ void msrPart::print (std::ostream& os) const
 #endif
 
   os << std::left <<
-    std::setw (fieldWidth) << "fPartShortestNoteDuration" << " : " <<
+    std::setw (fieldWidth) << "fPartShortestNoteDuration" << ": " <<
     fPartShortestNoteDuration <<
     std::endl;
 
   os << std::left <<
-    std::setw (fieldWidth) << "fPartShortestNoteTupletFactor" << " : " <<
+    std::setw (fieldWidth) << "fPartShortestNoteTupletFactor" << ": " <<
     std::endl;
 
   ++gIndenter;
@@ -2790,7 +2790,7 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartAllStavesList" << " : ";
+    "fPartAllStavesList" << ": ";
 
   if (partAllStavesListSize) {
     os << std::endl;
@@ -2813,7 +2813,7 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartRegularStavesList" << " : ";
+    "fPartRegularStavesList" << ": ";
 
   if (partRegularStavesListSize) {
     os << std::endl;
@@ -2836,7 +2836,7 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartNonHarmoniesNorFiguredBassStavesList" << " : ";
+    "fPartNonHarmoniesNorFiguredBassStavesList" << ": ";
 
   if (partNonHarmoniesNorFiguredBassStavesListSize) {
     os << std::endl;
@@ -2859,7 +2859,7 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "Voice names in fPartAllVoicesList" << " : ";
+    "Voice names in fPartAllVoicesList" << ": ";
 
   if (partAllVoicesListSize) {
     os << std::endl;
@@ -2880,7 +2880,7 @@ void msrPart::print (std::ostream& os) const
   // print the part harmonies staff if any
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartHarmoniesStaff" << " : ";
+    "fPartHarmoniesStaff" << ": ";
   if (fPartHarmoniesStaff) {
     os << std::endl;
     ++gIndenter;
@@ -2896,7 +2896,7 @@ void msrPart::print (std::ostream& os) const
   // print the part figured bass staff if any
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartFiguredBassStaff" << " : ";
+    "fPartFiguredBassStaff" << ": ";
   if (fPartFiguredBassStaff) {
     os << std::endl;
 
@@ -2976,7 +2976,7 @@ void msrPart::print (std::ostream& os) const
   // print the part measures slices sequence
   os <<
     std::setw (fieldWidth) <<
-    "fPartMeasuresSlicesSequence" << " : ";
+    "fPartMeasuresSlicesSequence" << ": ";
 
   if (fPartMeasuresSlicesSequence) {
     os << std::endl;
@@ -3011,7 +3011,7 @@ void msrPart::printShort (std::ostream& os) const
 /*
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fUpLinkToPartGroup" << " : ";
+    "fUpLinkToPartGroup" << ": ";
   if (fPartUpLinkToPartGroup) {
     // it may be empty
     os <<
@@ -3035,7 +3035,7 @@ void msrPart::printShort (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartAbsoluteNumber" << " : " <<
+    "fPartAbsoluteNumber" << ": " <<
     fPartAbsoluteNumber <<
     std::endl <<
 
@@ -3046,7 +3046,7 @@ void msrPart::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartHarmoniesStaff" << " : ";
+    "fPartHarmoniesStaff" << ": ";
     if (fPartHarmoniesStaff) {
       os <<
         fPartHarmoniesStaff->asShortString ();
@@ -3058,7 +3058,7 @@ void msrPart::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartHarmoniesVoice" << " : ";
+    "fPartHarmoniesVoice" << ": ";
     if (fPartHarmoniesVoice) {
       os <<
         fPartHarmoniesVoice->asShortString ();
@@ -3070,7 +3070,7 @@ void msrPart::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartFiguredBassStaff" << " : ";
+    "fPartFiguredBassStaff" << ": ";
     if (fPartFiguredBassStaff) {
       os <<
         fPartFiguredBassStaff->asShortString ();
@@ -3082,7 +3082,7 @@ void msrPart::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartFiguredBassVoice" << " : ";
+    "fPartFiguredBassVoice" << ": ";
     if (fPartFiguredBassVoice) {
       os <<
         fPartFiguredBassVoice->asShortString ();
@@ -3190,7 +3190,7 @@ void msrPart::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartAbsoluteNumber" << " : " <<
+    "fPartAbsoluteNumber" << ": " <<
     fPartAbsoluteNumber <<
     std::endl <<
 
@@ -3218,17 +3218,17 @@ void msrPart::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartNumberOfMeasures" << " : " <<
+    "fPartNumberOfMeasures" << ": " <<
     fPartNumberOfMeasures <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartContainsMultipleFullBarRests" << " : " <<
+    "fPartContainsMultipleFullBarRests" << ": " <<
     fPartContainsMultipleFullBarRests <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartMeasurePosition" << " : " <<
+    "fPartMeasurePosition" << ": " <<
     fPartMeasurePosition <<
     std::endl;
 
@@ -3236,7 +3236,7 @@ void msrPart::printSummary (std::ostream& os) const
   if (fPartAllStavesList.size ()) {
     os <<
       std::setw (fieldWidth) <<
-      "fPartAllStavesList" << " : " <<
+      "fPartAllStavesList" << ": " <<
       std::endl;
 
     ++gIndenter;
@@ -3252,7 +3252,7 @@ void msrPart::printSummary (std::ostream& os) const
   if (fPartHarmoniesStaff) {
     os <<
       std::setw (fieldWidth) <<
-      "fPartHarmoniesStaff" << " : " <<
+      "fPartHarmoniesStaff" << ": " <<
       std::endl;
 
     ++gIndenter;
@@ -3266,7 +3266,7 @@ void msrPart::printSummary (std::ostream& os) const
   if (fPartFiguredBassStaff) {
     os <<
       std::setw (fieldWidth) <<
-      "fPartFiguredBassStaff" << " : " <<
+      "fPartFiguredBassStaff" << ": " <<
       std::endl;
 
     ++gIndenter;

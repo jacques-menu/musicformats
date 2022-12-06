@@ -263,37 +263,37 @@ void msr2bsrOahGroup::printMsr2bsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fNoBrailleHeadings" << " : " <<
+    std::setw (fieldWidth) << "fNoBrailleHeadings" << ": " <<
       fNoBrailleHeadings <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fNoTempos" << " : " <<
+    std::setw (fieldWidth) << "fNoTempos" << ": " <<
       fNoTempos <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fNoPageNumbers" << " : " <<
+    std::setw (fieldWidth) << "fNoPageNumbers" << ": " <<
       fNoPageNumbers <<
       std::endl <<
-    std::setw (fieldWidth) << "fNoLineNumbers" << " : " <<
+    std::setw (fieldWidth) << "fNoLineNumbers" << ": " <<
       fNoLineNumbers <<
       std::endl <<
-    std::setw (fieldWidth) << "fNoMeasureNumbers" << " : " <<
+    std::setw (fieldWidth) << "fNoMeasureNumbers" << ": " <<
       fNoMeasureNumbers <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fNoBrailleLyrics" << " : " <<
+    std::setw (fieldWidth) << "fNoBrailleLyrics" << ": " <<
       fNoBrailleLyrics <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fBrailleRunDate" << " : " <<
+    std::setw (fieldWidth) << "fBrailleRunDate" << ": " <<
       fBrailleRunDate <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fFacSimileKind" << " : " <<
+    std::setw (fieldWidth) << "fFacSimileKind" << ": " <<
       bsrFacSimileKindAsString (fFacSimileKind) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fIncludeClefs" << " : " <<
+    std::setw (fieldWidth) << "fIncludeClefs" << ": " <<
       fIncludeClefs <<
       std::endl;
 

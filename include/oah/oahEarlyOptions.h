@@ -175,7 +175,8 @@ class EXP oahEarlyOptions
     mfMultiGenerationOutputKind
                           fEarlyMultiGenerationOutputKind;
 
-    std::list<std::string>          fEarlyIncludeFileNamesList;
+    std::list<std::string>          
+                          fEarlyIncludeFileNamesList;
 
 #ifdef TRACING_IS_ENABLED
 

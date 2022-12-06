@@ -594,7 +594,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "upLinkToGraceNotesGroupToNote" << " : ";
+    "upLinkToGraceNotesGroupToNote" << ": ";
     if (fGraceNotesGroupUpLinkToNote) {
       os <<
         fGraceNotesGroupUpLinkToNote->asShortString ();
@@ -607,27 +607,27 @@ void msrGraceNotesGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsSlashed" << " : " <<
+    "fGraceNotesGroupIsSlashed" << ": " <<
     fGraceNotesGroupIsSlashed <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsTied" << " : " <<
+    "fGraceNotesGroupIsTied" << ": " <<
     fGraceNotesGroupIsTied <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsBeamed" << " : " <<
+    "fGraceNotesGroupIsBeamed" << ": " <<
     fGraceNotesGroupIsBeamed <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsFollowedByNotes" << " : " <<
+    "fGraceNotesGroupIsFollowedByNotes" << ": " <<
     fGraceNotesGroupIsFollowedByNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupMeasureNumber" << " : " <<
+    "fGraceNotesGroupMeasureNumber" << ": " <<
     fGraceNotesGroupMeasureNumber <<
     std::endl;
 
@@ -656,7 +656,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
   }
   else {
     os <<
-       " : " <<
+       ": " <<
        "[NONE]" <<
       std::endl;
   }
@@ -684,7 +684,7 @@ void msrGraceNotesGroup::printShort (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "upLinkToGraceNotesGroupToNote" << " : ";
+    "upLinkToGraceNotesGroupToNote" << ": ";
     if (fGraceNotesGroupUpLinkToNote) {
       os <<
         fGraceNotesGroupUpLinkToNote->asShortString ();
@@ -697,29 +697,29 @@ void msrGraceNotesGroup::printShort (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsSlashed" << " : " <<
+    "fGraceNotesGroupIsSlashed" << ": " <<
     fGraceNotesGroupIsSlashed <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsTied" << " : " <<
+    "fGraceNotesGroupIsTied" << ": " <<
     fGraceNotesGroupIsTied <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsBeamed" << " : " <<
+    "fGraceNotesGroupIsBeamed" << ": " <<
     fGraceNotesGroupIsBeamed <<
     std::endl;
 
 /*
   os <<
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsFollowedByNotes" << " : " <<
+    "fGraceNotesGroupIsFollowedByNotes" << ": " <<
     fGraceNotesGroupIsFollowedByNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupMeasureNumber" << " : " <<
+    "fGraceNotesGroupMeasureNumber" << ": " <<
     fGraceNotesGroupMeasureNumber <<
     std::endl;
 */
@@ -747,7 +747,7 @@ void msrGraceNotesGroup::printShort (std::ostream& os) const
   }
   else {
     os <<
-       " : " <<
+       ": " <<
        "[EMPTY]" <<
       std::endl;
   }

@@ -176,9 +176,9 @@ std::string bsrPage::asString () const
 
   s <<
     "Page" <<
-    ", printPageNumber" << " : " << fPrintPageNumber <<
-    ", braillePageNumber" << " : " << fBraillePageNumber <<
-    ", linesPerPage" << " : " << fLinesPerPage <<
+    ", printPageNumber" << ": " << fPrintPageNumber <<
+    ", braillePageNumber" << ": " << fBraillePageNumber <<
+    ", linesPerPage" << ": " << fLinesPerPage <<
     ", elements: " << fPageElementsList.size () <<
     ", line " << fInputLineNumber;
 
@@ -202,14 +202,14 @@ void bsrPage::print (std::ostream& os) const
   os << std::left <<
   /* JMI
     std::setw (fieldWidth) <<
-    "printPageNumber" << " : " << fPrintPageNumber <<
+    "printPageNumber" << ": " << fPrintPageNumber <<
     std::endl <<
     */
     std::setw (fieldWidth) <<
-    "braillePageNumber" << " : " << fBraillePageNumber <<
+    "braillePageNumber" << ": " << fBraillePageNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "linesPerPage" << " : " << fLinesPerPage <<
+    "linesPerPage" << ": " << fLinesPerPage <<
     std::endl;
   os << std::endl;
 
@@ -241,7 +241,7 @@ void bsrPage::print (std::ostream& os) const
     }
     else {
       os <<
-        " : " << "[EMPTY]" <<
+        ": " << "[EMPTY]" <<
       std::endl;
     }
   }

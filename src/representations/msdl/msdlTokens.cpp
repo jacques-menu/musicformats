@@ -302,7 +302,7 @@ std::string msdlTokenKindAsMsdlString (
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
     gLogStream <<
       "==> msdlTokenKindAsMsdlString()" <<
-      ", tokenKind" << " : " << msdlTokenKindAsString (tokenKind) <<
+      ", tokenKind" << ": " << msdlTokenKindAsString (tokenKind) <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       std::endl;
   }
@@ -1607,7 +1607,7 @@ std::string msdlToken::asMsdlString (
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
     gLogStream <<
       "==> asMsdlString()" <<
-      ", tokenKind" << " : " << msdlTokenKindAsString (fTokenKind) <<
+      ", tokenKind" << ": " << msdlTokenKindAsString (fTokenKind) <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind) <<
       std::endl;
   }

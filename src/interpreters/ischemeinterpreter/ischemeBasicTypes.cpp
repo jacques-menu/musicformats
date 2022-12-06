@@ -119,12 +119,12 @@ void ischemeOptionsBlock::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fOptionsBlockName" << " : " << fOptionsBlockName <<
+    "fOptionsBlockName" << ": " << fOptionsBlockName <<
     std::endl;
 
   // print the options blocks options name and value std::vector
   gLogStream <<
-    "fOptionsBlockOptionsVector" << " : " <<
+    "fOptionsBlockOptionsVector" << ": " <<
     std::endl;
 
   ++gIndenter;
@@ -687,7 +687,7 @@ void ischemeInput::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fInputNameKind" << " : " << fInputNameKind << "" <<
+    "fInputNameKind" << ": " << fInputNameKind << "" <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fInputName" << " : \"" << fInputName << "\"" <<
@@ -1545,7 +1545,7 @@ void ischemeChoice::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fChoiceLabelKind" << " : " << fChoiceLabelKind << "" <<
+    "fChoiceLabelKind" << ": " << fChoiceLabelKind << "" <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fChoiceLabel" << " : \"" << fChoiceLabel << "\"" <<
@@ -2003,7 +2003,7 @@ void ischemeCaseChoiceStatement::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fCaseChoice " << " : " <<
+    "fCaseChoice " << ": " <<
     std::endl;
 
   ++gIndenter;
@@ -2013,7 +2013,7 @@ void ischemeCaseChoiceStatement::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fCaseUnusedLabels" << " : " <<
+    "fCaseUnusedLabels" << ": " <<
     std::endl;
 
   ++gIndenter;
@@ -2206,7 +2206,7 @@ void ischemeCaseInputStatement::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fCaseInputInput " << " : " <<
+    "fCaseInputInput " << ": " <<
     std::endl;
 
   ++gIndenter;
@@ -2216,7 +2216,7 @@ void ischemeCaseInputStatement::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fCaseInputUnusedNames" << " : " <<
+    "fCaseInputUnusedNames" << ": " <<
     std::endl;
 
   ++gIndenter;

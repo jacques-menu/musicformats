@@ -112,7 +112,7 @@ void mfServiceRunData::print (std::ostream& os) const
   // --------------------------------------
 
   os << std::left <<
-    std::setw (fieldWidth) << "Service name" << " : " <<
+    std::setw (fieldWidth) << "Service name" << ": " <<
     fServiceName <<
     std::endl;
 
@@ -120,7 +120,7 @@ void mfServiceRunData::print (std::ostream& os) const
 //   // --------------------------------------
 //
 //   os << std::left <<
-//     std::setw (fieldWidth) << "OAH handler" << " : " <<
+//     std::setw (fieldWidth) << "OAH handler" << ": " <<
 //     fRunOahHandler->getHandlerHeader () <<
 //     std::endl;
 
@@ -128,7 +128,7 @@ void mfServiceRunData::print (std::ostream& os) const
   // --------------------------------------
 
   os << std::left <<
-    std::setw (fieldWidth) << "fInputSourceName" << " : " << // JMIJMIJMI in oahHandler???
+    std::setw (fieldWidth) << "fInputSourceName" << ": " << // JMIJMIJMI in oahHandler???
     fInputSourceName <<
     std::endl;
 
@@ -142,10 +142,10 @@ void mfServiceRunData::print (std::ostream& os) const
   ++gIndenter;
 
   os << std::left <<
-    std::setw (fieldWidth) << "fRunDateFull" << " : " <<
+    std::setw (fieldWidth) << "fRunDateFull" << ": " <<
     fRunDateFull <<
     std::endl <<
-    std::setw (fieldWidth) << "fRunDateYYYYMMDD" << " : " <<
+    std::setw (fieldWidth) << "fRunDateYYYYMMDD" << ": " <<
     fRunDateYYYYMMDD <<
     std::endl;
 

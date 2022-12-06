@@ -7988,7 +7988,7 @@ void msr2mxsrTranslator::visitStart (S_msrFiguredBass& elt)
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
-      ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
+      ", fOnGoingFiguredBassVoice: " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }
@@ -9642,8 +9642,8 @@ void msr2mxsrTranslator::visitStart (S_msrBeam& elt)
     gLogStream <<
       "--> Start visiting msrBeam" <<
       ", line " << elt->getInputLineNumber () <<
-// JMI      ", fOnGoingNonGraceNote = " << fOnGoingNonGraceNote <<
-// JMI      ", fOnGoingChord = " << fOnGoingChord <<
+// JMI      ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
+// JMI      ", fOnGoingChord: " << fOnGoingChord <<
       std::endl;
   }
 #endif

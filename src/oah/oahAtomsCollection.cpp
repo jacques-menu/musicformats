@@ -46,7 +46,7 @@ S_oahAtomAlias oahAtomAlias::create (
   const std::string&    shortName,
   const std::string&    longName,
   const std::string&    description,
-  const S_oahAtom& originalOahAtom)
+  const S_oahAtom&      originalOahAtom)
 {
   oahAtomAlias* o = new
     oahAtomAlias (
@@ -62,7 +62,7 @@ oahAtomAlias::oahAtomAlias (
   const std::string&    shortName,
   const std::string&    longName,
   const std::string&    description,
-  const S_oahAtom& originalOahAtom)
+  const S_oahAtom&      originalOahAtom)
   : oahAtom (
       longName,
       shortName,
@@ -432,9 +432,9 @@ void oahMacroAtom::printHelp (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
   }
 
   os <<
@@ -466,9 +466,9 @@ void oahMacroAtom::printHelp (std::ostream& os) const
 
       ++gIndenter;
 
-			gIndenter.indentMultiLineString (
-				atom-> getDescription (),
-				os);
+      gIndenter.indentMultiLineString (
+        atom-> getDescription (),
+        os);
 
       --gIndenter;
 
@@ -575,12 +575,12 @@ void oahOptionsUsageAtom::printOptionsUsage (std::ostream& os) const
 
   ++gIndenter;
 
-// 	gIndenter.indentMultiLineString (
-// 		foundString,
-// 		os);
-	gIndenter.indentMultiLineString (
-		regex_replace (
-			regex_replace (
+//   gIndenter.indentMultiLineString (
+//     foundString,
+//     os);
+  gIndenter.indentMultiLineString (
+    regex_replace (
+      regex_replace (
 R"(In EXECUTABLE_NAME, '-' as an argument, represents standard input.
 
 Most options have a short and a long name for commodity.
@@ -605,15 +605,15 @@ provided the values immediately follow the atoms that need them.
 Using options that attempt to create files, such as '-output-file-name, -o',
 leads to an error if the environment is read-only access,
 as is the case of https://libmusicxml.grame.fr .)",
-				std::regex ("OPTION_NAME_HELP_NAMES"),
-				gGlobalOahOahGroup->
-					getOptionNameHelpAtom ()->
-						fetchNamesBetweenQuotes ()
-				),
-			std::regex ("EXECUTABLE_NAME"),
-			fHelpAtomWithoutAValueServiceName
-			),
-		os);
+        std::regex ("OPTION_NAME_HELP_NAMES"),
+        gGlobalOahOahGroup->
+          getOptionNameHelpAtom ()->
+            fetchNamesBetweenQuotes ()
+        ),
+      std::regex ("EXECUTABLE_NAME"),
+      fHelpAtomWithoutAValueServiceName
+      ),
+    os);
 
   --gIndenter;
 
@@ -1195,7 +1195,7 @@ S_oahVersionAtom oahVersionAtom::create (
   const std::string&  shortName,
   const std::string&  description,
   const std::string&  serviceName,
-  oahVersionKind versionKind)
+  oahVersionKind      versionKind)
 {
   oahVersionAtom* o = new
     oahVersionAtom (
@@ -1213,7 +1213,7 @@ oahVersionAtom::oahVersionAtom (
   const std::string&  shortName,
   const std::string&  description,
   const std::string&  serviceName,
-  oahVersionKind versionKind)
+  oahVersionKind      versionKind)
   : oahPureHelpAtomWithoutAValue (
       longName,
       shortName,
@@ -1992,7 +1992,7 @@ void oahContactAtom::print (std::ostream& os) const
 
 void oahContactAtom::printContact (std::ostream& os) const
 {
-	gIndenter.indentMultiLineString (
+  gIndenter.indentMultiLineString (
     regex_replace (
 R"(To contact the maintainers of EXECUTABLE_NAME:
   Create an issue at https://github.com/jacques-menu/musicformats,
@@ -2000,7 +2000,7 @@ R"(To contact the maintainers of EXECUTABLE_NAME:
   You should sign up for GitHub for that.)",
         std::regex ("EXECUTABLE_NAME"),
         fHelpAtomWithoutAValueServiceName),
-		os);
+    os);
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahContactAtom& elt)
@@ -2330,7 +2330,7 @@ S_oahOnOffAtom oahOnOffAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfOnOffKind& onOffKindVariable)
+  mfOnOffKind&       onOffKindVariable)
 {
   oahOnOffAtom* o = new
     oahOnOffAtom (
@@ -2350,7 +2350,7 @@ oahOnOffAtom::oahOnOffAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfOnOffKind& onOffKindVariable)
+  mfOnOffKind&       onOffKindVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -2505,16 +2505,16 @@ void oahOnOffAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fOnOffKindVariable" << " : " <<
+    "fOnOffKindVariable" << ": " <<
     fOnOffKindVariable <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << " : " <<
+    "fSetByAnOption" << ": " <<
     fSetByAnOption <<
     std::endl;
 
@@ -2528,7 +2528,7 @@ void oahOnOffAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fOnOffKindVariable;
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -2557,7 +2557,7 @@ S_oahBooleanAtom oahBooleanAtom::create (
   const std::string& shortName,
   const std::string& description,
   const std::string& variableName,
-  Bool&         booleanVariable)
+  Bool&              booleanVariable)
 {
   oahBooleanAtom* o = new
     oahBooleanAtom (
@@ -2575,7 +2575,7 @@ oahBooleanAtom::oahBooleanAtom (
   const std::string& shortName,
   const std::string& description,
   const std::string& variableName,
-  Bool&         booleanVariable)
+  Bool&              booleanVariable)
   : oahAtom (
       longName,
       shortName,
@@ -2708,16 +2708,16 @@ void oahBooleanAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBooleanVariable" << " : " <<
+    "fBooleanVariable" << ": " <<
     fBooleanVariable <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << " : " <<
+    "fSetByAnOption" << ": " <<
     fSetByAnOption <<
     std::endl;
 
@@ -2731,7 +2731,7 @@ void oahBooleanAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fBooleanVariable;
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -2755,12 +2755,189 @@ std::ostream& operator << (std::ostream& os, const S_oahBooleanAtom& elt)
 }
 
 //______________________________________________________________________________
+S_oahBooleanAtomWithTracePasses oahBooleanAtomWithTracePasses::create (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& variableName,
+  Bool&              booleanVariable)
+{
+  oahBooleanAtomWithTracePasses* o = new
+    oahBooleanAtomWithTracePasses (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable);
+  assert (o != nullptr);
+  return o;
+}
+
+oahBooleanAtomWithTracePasses::oahBooleanAtomWithTracePasses (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& variableName,
+  Bool&              booleanVariable)
+  : oahBooleanAtom (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable)
+{}
+
+oahBooleanAtomWithTracePasses::~oahBooleanAtomWithTracePasses ()
+{}
+
+void oahBooleanAtomWithTracePasses::applyElement (std::ostream& os)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahBooleanAtomWithTracePasses" <<
+      std::endl;
+  }
+#endif
+
+  setBooleanVariable (true);
+
+  gGlobalOahEarlyOptions.setEarlyTracePasses ();
+}
+
+void oahBooleanAtomWithTracePasses::acceptIn (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahBooleanAtomWithTracePasses::acceptIn ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahBooleanAtomWithTracePasses>*
+    p =
+      dynamic_cast<visitor<S_oahBooleanAtomWithTracePasses>*> (v)) {
+        S_oahBooleanAtomWithTracePasses elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahBooleanAtomWithTracePasses::visitStart ()" <<
+            std::endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void oahBooleanAtomWithTracePasses::acceptOut (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahBooleanAtomWithTracePasses::acceptOut ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahBooleanAtomWithTracePasses>*
+    p =
+      dynamic_cast<visitor<S_oahBooleanAtomWithTracePasses>*> (v)) {
+        S_oahBooleanAtomWithTracePasses elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahBooleanAtomWithTracePasses::visitEnd ()" <<
+            std::endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void oahBooleanAtomWithTracePasses::browseData (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahBooleanAtomWithTracePasses::browseData ()" <<
+      std::endl;
+  }
+#endif
+}
+
+void oahBooleanAtomWithTracePasses::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "BooleanAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fBooleanVariable" << ": " <<
+    fBooleanVariable <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fVariableName" << ": " <<
+    fVariableName <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fSetByAnOption" << ": " <<
+    fSetByAnOption <<
+    std::endl;
+
+  --gIndenter;
+}
+
+void oahBooleanAtomWithTracePasses::printAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    fVariableName <<
+    ": " <<
+    fBooleanVariable;
+
+  if (fSetByAnOption) { // JMIJMIJMI
+    os <<
+      ", set by an option";
+  }
+
+  os << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahBooleanAtomWithTracePasses& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahTwoBooleansAtom oahTwoBooleansAtom::create (
-  const std::string&    longName,
-  const std::string&    shortName,
-  const std::string&    description,
-  const std::string&    variableName,
-  Bool&            booleanVariable,
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
   const S_oahBooleanAtom& secondBooleanAtom)
 {
   oahTwoBooleansAtom* o = new
@@ -2776,11 +2953,11 @@ S_oahTwoBooleansAtom oahTwoBooleansAtom::create (
 }
 
 oahTwoBooleansAtom::oahTwoBooleansAtom (
-  const std::string&    longName,
-  const std::string&    shortName,
-  const std::string&    description,
-  const std::string&    variableName,
-  Bool&            booleanVariable,
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
   const S_oahBooleanAtom& secondBooleanAtom)
   : oahBooleanAtom (
       longName,
@@ -2909,24 +3086,24 @@ void oahTwoBooleansAtom::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fDescription" << " : " <<
+    "fDescription" << ": " <<
     std::endl;
 
-	++gIndenter;
+  ++gIndenter;
 
-	gIndenter.indentMultiLineString (
-		fDescription,
-		os);
+  gIndenter.indentMultiLineString (
+    fDescription,
+    os);
 
-	--gIndenter;
+  --gIndenter;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "booleanVariable" << " : " <<
+    "booleanVariable" << ": " <<
     fBooleanVariable <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "secondBooleanAtom" << " : " <<
+    "secondBooleanAtom" << ": " <<
     fSecondBooleanAtom <<
     std::endl;
 
@@ -2940,7 +3117,7 @@ void oahTwoBooleansAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fBooleanVariable;
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -2964,12 +3141,201 @@ std::ostream& operator << (std::ostream& os, const S_oahTwoBooleansAtom& elt)
 }
 
 //______________________________________________________________________________
+S_oahTwoBooleansAtomWithTracePasses oahTwoBooleansAtomWithTracePasses::create (
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
+  const S_oahBooleanAtom& secondBooleanAtom)
+{
+  oahTwoBooleansAtomWithTracePasses* o = new
+    oahTwoBooleansAtomWithTracePasses (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable,
+      secondBooleanAtom);
+  assert (o != nullptr);
+  return o;
+}
+
+oahTwoBooleansAtomWithTracePasses::oahTwoBooleansAtomWithTracePasses (
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
+  const S_oahBooleanAtom& secondBooleanAtom)
+  : oahTwoBooleansAtom (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable,
+      secondBooleanAtom)
+{}
+
+oahTwoBooleansAtomWithTracePasses::~oahTwoBooleansAtomWithTracePasses ()
+{}
+
+void oahTwoBooleansAtomWithTracePasses::applyElement (std::ostream& os)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahTwoBooleansAtomWithTracePasses" <<
+      std::endl;
+  }
+#endif
+
+  setTwoBooleansVariables (true);
+
+  gGlobalOahEarlyOptions.setEarlyTracePasses ();
+}
+
+void oahTwoBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahTwoBooleansAtomWithTracePasses::acceptIn ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahTwoBooleansAtomWithTracePasses>*
+    p =
+      dynamic_cast<visitor<S_oahTwoBooleansAtomWithTracePasses>*> (v)) {
+        S_oahTwoBooleansAtomWithTracePasses elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahTwoBooleansAtomWithTracePasses::visitStart ()" <<
+            std::endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void oahTwoBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahTwoBooleansAtomWithTracePasses::acceptOut ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahTwoBooleansAtomWithTracePasses>*
+    p =
+      dynamic_cast<visitor<S_oahTwoBooleansAtomWithTracePasses>*> (v)) {
+        S_oahTwoBooleansAtomWithTracePasses elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahTwoBooleansAtomWithTracePasses::visitEnd ()" <<
+            std::endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void oahTwoBooleansAtomWithTracePasses::browseData (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahTwoBooleansAtomWithTracePasses::browseData ()" <<
+      std::endl;
+  }
+#endif
+}
+
+void oahTwoBooleansAtomWithTracePasses::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "TwoBooleansAtomWithTracePasses:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fDescription" << ": " <<
+    std::endl;
+
+  ++gIndenter;
+
+  gIndenter.indentMultiLineString (
+    fDescription,
+    os);
+
+  --gIndenter;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "booleanVariable" << ": " <<
+    fBooleanVariable <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "secondBooleanAtom" << ": " <<
+    fSecondBooleanAtom <<
+    std::endl;
+
+  --gIndenter;
+}
+
+void oahTwoBooleansAtomWithTracePasses::printAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    fVariableName <<
+    ": " <<
+    fBooleanVariable;
+
+  if (fSetByAnOption) { // JMIJMIJMI
+    os <<
+      ", set by an option";
+  }
+
+  os << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahTwoBooleansAtomWithTracePasses& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahThreeBooleansAtom oahThreeBooleansAtom::create (
-  const std::string&    longName,
-  const std::string&    shortName,
-  const std::string&    description,
-  const std::string&    variableName,
-  Bool&            booleanVariable,
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
   const S_oahBooleanAtom& secondBooleanAtom,
   const S_oahBooleanAtom& thirdBooleanAtom)
 {
@@ -2987,11 +3353,11 @@ S_oahThreeBooleansAtom oahThreeBooleansAtom::create (
 }
 
 oahThreeBooleansAtom::oahThreeBooleansAtom (
-  const std::string&    longName,
-  const std::string&    shortName,
-  const std::string&    description,
-  const std::string&    variableName,
-  Bool&            booleanVariable,
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
   const S_oahBooleanAtom& secondBooleanAtom,
   const S_oahBooleanAtom& thirdBooleanAtom)
   : oahBooleanAtom (
@@ -3124,28 +3490,28 @@ void oahThreeBooleansAtom::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fDescription" << " : " <<
+    "fDescription" << ": " <<
     std::endl;
 
   ++gIndenter;
 
-	gIndenter.indentMultiLineString (
-		fDescription,
-		os);
+  gIndenter.indentMultiLineString (
+    fDescription,
+    os);
 
-	--gIndenter;
+  --gIndenter;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBooleanVariable" << " : " <<
+    "fBooleanVariable" << ": " <<
     fBooleanVariable <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSecondBooleanAtom" << " : " <<
+    "fSecondBooleanAtom" << ": " <<
     fSecondBooleanAtom <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fThirdBooleanAtom" << " : " <<
+    "fThirdBooleanAtom" << ": " <<
     fThirdBooleanAtom <<
     std::endl;
 
@@ -3159,7 +3525,7 @@ void oahThreeBooleansAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fBooleanVariable;
 
   if (fSetByAnOption) {
@@ -3417,7 +3783,7 @@ void oahCombinedBooleansAtom::printCombinedBooleansEssentials (
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "valueSpecification" << " : " <<
+    "valueSpecification" << ": " <<
     fValueSpecification <<
     std::endl;
     */
@@ -3433,7 +3799,7 @@ void oahCombinedBooleansAtom::printCombinedBooleansEssentialsShort (
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "valueSpecification" << " : " <<
+    "valueSpecification" << ": " <<
     fValueSpecification <<
     std::endl;
     */
@@ -3454,7 +3820,7 @@ void oahCombinedBooleansAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBooleanAtomsList" << " : ";
+    "fBooleanAtomsList" << ": ";
 
   if (! fBooleanAtomsList.size ()) {
     os <<
@@ -3500,9 +3866,9 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
   }
 
   os <<
@@ -3534,9 +3900,9 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
 
       ++gIndenter;
 
-			gIndenter.indentMultiLineString (
-				booleanAtom-> getDescription (),
-				os);
+      gIndenter.indentMultiLineString (
+        booleanAtom-> getDescription (),
+        os);
 
       --gIndenter;
 
@@ -3618,8 +3984,8 @@ S_oahCommonPrefixBooleansAtom oahCommonPrefixBooleansAtom::create (
   const std::string& description,
   const std::string& shortSuffixDescriptor,
   const std::string& longSuffixDescriptor,
-  const S_oahPrefix&   shortNamesPrefix,
-  const S_oahPrefix&   longNamesPrefix)
+  const S_oahPrefix& shortNamesPrefix,
+  const S_oahPrefix& longNamesPrefix)
 {
   oahCommonPrefixBooleansAtom* o = new
     oahCommonPrefixBooleansAtom (
@@ -3640,8 +4006,8 @@ oahCommonPrefixBooleansAtom::oahCommonPrefixBooleansAtom (
   const std::string& description,
   const std::string& shortSuffixDescriptor,
   const std::string& longSuffixDescriptor,
-  const S_oahPrefix&   shortNamesPrefix,
-  const S_oahPrefix&   longNamesPrefix)
+  const S_oahPrefix& shortNamesPrefix,
+  const S_oahPrefix& longNamesPrefix)
   : oahAtom (
       longName,
       shortName,
@@ -4013,16 +4379,16 @@ void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
     os, fieldWidth);
 
   os << std::left <<
-    "shortSuffixDescriptor" << " : " <<
+    "shortSuffixDescriptor" << ": " <<
     fShortSuffixDescriptor <<
     std::endl <<
-    "longSuffixDescriptor" << " : " <<
+    "longSuffixDescriptor" << ": " <<
     fLongSuffixDescriptor <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "shortNamesPrefix" << " : ";
+    "shortNamesPrefix" << ": ";
   if (fShortNamesPrefix) {
     os << fShortNamesPrefix;
   }
@@ -4032,7 +4398,7 @@ void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "longNamesPrefix" << " : ";
+    "longNamesPrefix" << ": ";
   if (fLongNamesPrefix) {
     os << fLongNamesPrefix;
   }
@@ -4042,7 +4408,7 @@ void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBooleanAtomsList" << " : ";
+    "fBooleanAtomsList" << ": ";
 
   if (! fBooleanAtomsList.size ()) {
     os << "[EMPTY]";
@@ -4082,9 +4448,9 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -4235,7 +4601,7 @@ S_oahIntegerAtom oahIntegerAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  int&          integerVariable)
+  int&               integerVariable)
 {
   oahIntegerAtom* o = new
     oahIntegerAtom (
@@ -4255,7 +4621,7 @@ oahIntegerAtom::oahIntegerAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  int&          integerVariable)
+  int&               integerVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -4444,7 +4810,7 @@ void oahIntegerAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "integerVariable" << " : " <<
+    "integerVariable" << ": " <<
     fIntegerVariable <<
     std::endl;
 
@@ -4458,7 +4824,7 @@ void oahIntegerAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fIntegerVariable;
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -4488,8 +4854,8 @@ S_oahTwoIntegersAtom oahTwoIntegersAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  int&          integerVariable,
-  int&          integerSecondaryVariable)
+  int&               integerVariable,
+  int&               integerSecondaryVariable)
 {
   oahTwoIntegersAtom* o = new
     oahTwoIntegersAtom (
@@ -4510,8 +4876,8 @@ oahTwoIntegersAtom::oahTwoIntegersAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  int&          integerVariable,
-  int&          integerSecondaryVariable)
+  int&               integerVariable,
+  int&               integerSecondaryVariable)
   : oahIntegerAtom (
       longName,
       shortName,
@@ -4722,11 +5088,11 @@ void oahTwoIntegersAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "integerVariable" << " : " <<
+    "integerVariable" << ": " <<
     fIntegerVariable <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "integerSecondaryVariable" << " : " <<
+    "integerSecondaryVariable" << ": " <<
     fIntegerSecondaryVariable <<
     std::endl;
 
@@ -4740,7 +5106,7 @@ void oahTwoIntegersAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fIntegerVariable <<
     ' ' <<
     fIntegerSecondaryVariable;
@@ -4772,7 +5138,7 @@ S_oahFloatAtom oahFloatAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  float&        floatVariable)
+  float&             floatVariable)
 {
   oahFloatAtom* o = new
     oahFloatAtom (
@@ -4792,7 +5158,7 @@ oahFloatAtom::oahFloatAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  float&        floatVariable)
+  float&             floatVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -4983,7 +5349,7 @@ void oahFloatAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "floatVariable" << " : " <<
+    "floatVariable" << ": " <<
     fFloatVariable <<
     std::endl;
 
@@ -4997,7 +5363,7 @@ void oahFloatAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fFloatVariable;
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -5184,7 +5550,7 @@ void oahStringAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStringVariable" << " : " <<
+    "fStringVariable" << ": " <<
     "\"" << fStringVariable << "\"" <<
     std::endl;
 
@@ -5198,7 +5564,7 @@ void oahStringAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     '[' << fStringVariable << ']';
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -5488,16 +5854,16 @@ void oahFactorizedStringAtom::print (std::ostream& os) const
     os, fieldWidth);
 
   os << std::left <<
-    "atomNameDescriptor" << " : " <<
+    "atomNameDescriptor" << ": " <<
     fAtomNameDescriptor <<
     std::endl <<
-    "stringValueDescriptor" << " : " <<
+    "stringValueDescriptor" << ": " <<
     fStringValueDescriptor <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStringAtomsList" << " : ";
+    "fStringAtomsList" << ": ";
 
   if (! fStringAtomsList.size ()) {
     os << "[EMPTY]";
@@ -5541,9 +5907,9 @@ void oahFactorizedStringAtom::printHelp (std::ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-		gIndenter.indentMultiLineString (
-			fDescription,
-			os);
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
   }
 
   os <<
@@ -5799,11 +6165,11 @@ void oahStringWithDefaultValueAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStringVariable" << " : " <<
+    "fStringVariable" << ": " <<
     "\"" << fStringVariable << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fDefaultStringValue" << " : " <<
+    "fDefaultStringValue" << ": " <<
     "\"" << fDefaultStringValue << "\"" <<
     std::endl;
 
@@ -5817,7 +6183,7 @@ void oahStringWithDefaultValueAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fStringVariable;
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -6027,11 +6393,11 @@ void oahStringWithRegexAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "stringVariable" << " : " <<
+    "stringVariable" << ": " <<
     "\"" << fStringVariable << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fRegexString" << " : " <<
+    "fRegexString" << ": " <<
     "\"" << fRegexString << "\"" <<
     std::endl;
 
@@ -6045,7 +6411,7 @@ void oahStringWithRegexAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fStringVariable;
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -6078,7 +6444,7 @@ S_oahRationalAtom oahRationalAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  Rational&     rationalVariable)
+  Rational&          rationalVariable)
 {
   oahRationalAtom* o = new
     oahRationalAtom (
@@ -6098,7 +6464,7 @@ oahRationalAtom::oahRationalAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  Rational&     rationalVariable)
+  Rational&          rationalVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -6291,7 +6657,7 @@ void oahRationalAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "rationalVariable" << " : " <<
+    "rationalVariable" << ": " <<
     fRationalVariable <<
     std::endl;
 
@@ -6305,7 +6671,7 @@ void oahRationalAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fRationalVariable;
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -6507,7 +6873,7 @@ void oahNaturalNumbersSetElementAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNaturalNumbersSetVariable" << " : " <<
+    "fNaturalNumbersSetVariable" << ": " <<
     std::endl;
 
   if (! fNaturalNumbersSetVariable.size ()) {
@@ -6546,7 +6912,7 @@ void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fNaturalNumbersSetVariable.size ()) {
     os <<
@@ -6594,7 +6960,7 @@ S_oahColorRGBAtom oahColorRGBAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  msrColorRGB&  colorRGBVariable)
+  msrColorRGB&       colorRGBVariable)
 {
   oahColorRGBAtom* o = new
     oahColorRGBAtom (
@@ -6614,7 +6980,7 @@ oahColorRGBAtom::oahColorRGBAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  msrColorRGB&  colorRGBVariable)
+  msrColorRGB&       colorRGBVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -6743,7 +7109,7 @@ void oahColorRGBAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "colorRGBVariable" << " : " <<
+    "colorRGBVariable" << ": " <<
     fColorRGBVariable.asString () <<
     std::endl;
 
@@ -6757,7 +7123,7 @@ void oahColorRGBAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fColorRGBVariable.asString ();
   if (fSetByAnOption) {
     os <<
@@ -7061,7 +7427,7 @@ void oahIntSetElementAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fIntSetVariable.size ()) {
     os <<
@@ -7103,12 +7469,12 @@ std::ostream& operator << (std::ostream& os, const S_oahIntSetElementAtom& elt)
 
 //______________________________________________________________________________
 S_oahStringSetElementAtom oahStringSetElementAtom::create (
-  const std::string& longName,
-  const std::string& shortName,
-  const std::string& description,
-  const std::string& valueSpecification,
-  const std::string& variableName,
-  std::set<std::string>&  stringSetVariable)
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
+  std::set<std::string>& stringSetVariable)
 {
   oahStringSetElementAtom* o = new
     oahStringSetElementAtom (
@@ -7123,12 +7489,12 @@ S_oahStringSetElementAtom oahStringSetElementAtom::create (
 }
 
 oahStringSetElementAtom::oahStringSetElementAtom (
-  const std::string& longName,
-  const std::string& shortName,
-  const std::string& description,
-  const std::string& valueSpecification,
-  const std::string& variableName,
-  std::set<std::string>&  stringSetVariable)
+  const std::string&     longName,
+  const std::string&     shortName,
+  const std::string&     description,
+  const std::string&     valueSpecification,
+  const std::string&     variableName,
+  std::set<std::string>& stringSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -7319,7 +7685,7 @@ void oahStringSetElementAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStringSetVariable" << " : " <<
+    "fStringSetVariable" << ": " <<
     std::endl;
 
   if (! fStringSetVariable.size ()) {
@@ -7348,7 +7714,7 @@ void oahStringSetElementAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fStringSetVariable.size ()) {
     os <<
@@ -7662,7 +8028,7 @@ void oahStringToIntMapElementAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStringToIntMapVariable" << " : " <<
+    "fStringToIntMapVariable" << ": " <<
     std::endl;
 
   if (! fStringToIntMapVariable.size ()) {
@@ -7692,7 +8058,7 @@ void oahStringToIntMapElementAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fStringToIntMapVariable.size ()) {
     os <<
@@ -7740,12 +8106,12 @@ std::ostream& operator << (std::ostream& os, const S_oahStringToIntMapElementAto
 
 //______________________________________________________________________________
 S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
-    const std::string&    longName,
-    const std::string&    shortName,
-    const std::string&    description,
-    const std::string&    valueSpecification,
-    const std::string&    variableName,
-    std::map<std::string, std::string>&  stringToStringMapVariable)
+  const std::string&                  longName,
+  const std::string&                  shortName,
+  const std::string&                  description,
+  const std::string&                  valueSpecification,
+  const std::string&                  variableName,
+  std::map<std::string, std::string>& stringToStringMapVariable)
 {
   oahStringToStringMapElementAtom* o = new
     oahStringToStringMapElementAtom (
@@ -7760,12 +8126,12 @@ S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
 }
 
 oahStringToStringMapElementAtom::oahStringToStringMapElementAtom (
-    const std::string&    longName,
-    const std::string&    shortName,
-    const std::string&    description,
-    const std::string&    valueSpecification,
-    const std::string&    variableName,
-    std::map<std::string, std::string>&  stringToStringMapVariable)
+  const std::string&                  longName,
+  const std::string&                  shortName,
+  const std::string&                  description,
+  const std::string&                  valueSpecification,
+  const std::string&                  variableName,
+  std::map<std::string, std::string>& stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -8006,7 +8372,7 @@ void oahStringToStringMapElementAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStringToStringMapVariable" << " : ";
+    "fStringToStringMapVariable" << ": ";
 
   if (! fStringToStringMapVariable.size ()) {
     os << "[EMPTY]" << std::endl;
@@ -8041,7 +8407,7 @@ void oahStringToStringMapElementAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fStringToStringMapVariable.size ()) {
     os <<
@@ -8089,12 +8455,12 @@ std::ostream& operator << (std::ostream& os, const S_oahStringToStringMapElement
 
 //______________________________________________________________________________
 S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::create (
-    const std::string&    longName,
-    const std::string&    shortName,
-    const std::string&    description,
-    const std::string&    valueSpecification,
-    const std::string&    variableName,
-    std::multimap<std::string, std::string>&  stringToStringMultiMapVariable)
+  const std::string&                       longName,
+  const std::string&                       shortName,
+  const std::string&                       description,
+  const std::string&                       valueSpecification,
+  const std::string&                       variableName,
+  std::multimap<std::string, std::string>& stringToStringMultiMapVariable)
 {
   oahStringToStringMultiMapElementAtom* o = new
     oahStringToStringMultiMapElementAtom (
@@ -8109,12 +8475,12 @@ S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::cre
 }
 
 oahStringToStringMultiMapElementAtom::oahStringToStringMultiMapElementAtom (
-    const std::string&    longName,
-    const std::string&    shortName,
-    const std::string&    description,
-    const std::string&    valueSpecification,
-    const std::string&    variableName,
-    std::multimap<std::string, std::string>&  stringToStringMultiMapVariable)
+  const std::string&                       longName,
+  const std::string&                       shortName,
+  const std::string&                       description,
+  const std::string&                       valueSpecification,
+  const std::string&                       variableName,
+  std::multimap<std::string, std::string>& stringToStringMultiMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -8355,7 +8721,7 @@ void oahStringToStringMultiMapElementAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStringToStringMultiMapVariable" << " : ";
+    "fStringToStringMultiMapVariable" << ": ";
 
   if (! fStringToStringMultiMapVariable.size ()) {
     os << "[EMPTY]" << std::endl;
@@ -8390,7 +8756,7 @@ void oahStringToStringMultiMapElementAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fStringToStringMultiMapVariable.size ()) {
     os <<
@@ -8445,7 +8811,7 @@ S_oahStringAndIntegerAtom oahStringAndIntegerAtom::create (
   const std::string& stringVariableName,
   std::string&       stringVariable,
   const std::string& integerVariableName,
-  int&          integerVariable)
+  int&               integerVariable)
 {
   oahStringAndIntegerAtom* o = new
     oahStringAndIntegerAtom (
@@ -8469,7 +8835,7 @@ oahStringAndIntegerAtom::oahStringAndIntegerAtom (
   const std::string& stringVariableName,
   std::string&       stringVariable,
   const std::string& integerVariableName,
-  int&          integerVariable)
+  int&               integerVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -8701,20 +9067,20 @@ void oahStringAndIntegerAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "stringVariableName" << " : " <<
+    "stringVariableName" << ": " <<
     "\"" << fStringVariableName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "stringVariable" << " : " <<
+    "stringVariable" << ": " <<
     "\"" << fStringVariable << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "integerVariableName" << " : " <<
+    "integerVariableName" << ": " <<
     fIntegerVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "integerVariable" << " : " <<
+    "integerVariable" << ": " <<
     fIntegerVariable <<
     std::endl;
 
@@ -8728,13 +9094,13 @@ void oahStringAndIntegerAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fStringVariableName <<
-    " : " <<
+    ": " <<
     "\"" << fStringVariable << "\"" <<
     std::endl <<
 
     std::setw (valueFieldWidth) <<
     fIntegerVariableName <<
-    " : " <<
+    ": " <<
     "\"" << fIntegerVariable << "\"";
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -8765,8 +9131,8 @@ S_oahStringAndTwoIntegersAtom oahStringAndTwoIntegersAtom::create ( // UNUSED JM
   const std::string&  valueSpecification,
   const std::string&  variableName,
   std::string&        stringVariable,
-  int&           primaryIntegerVariable,
-  int&           secondaryIntegerVariable)
+  int&                primaryIntegerVariable,
+  int&                secondaryIntegerVariable)
 {
   oahStringAndTwoIntegersAtom* o = new
     oahStringAndTwoIntegersAtom (
@@ -8789,8 +9155,8 @@ oahStringAndTwoIntegersAtom::oahStringAndTwoIntegersAtom (
   const std::string&  valueSpecification,
   const std::string&  variableName,
   std::string&        stringVariable,
-  int&           primaryIntegerVariable,
-  int&           secondaryIntegerVariable)
+  int&                primaryIntegerVariable,
+  int&                secondaryIntegerVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -9049,11 +9415,11 @@ void oahStringAndTwoIntegersAtom::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     std::setw (fieldWidth) <<
-    "stringVariable" << " : " <<
+    "stringVariable" << ": " <<
     "\"" << fStringVariable << "\"" <<
-    "primaryIntegerVariable" << " : " <<
+    "primaryIntegerVariable" << ": " <<
     fPrimaryIntegerVariable <<
-    "secondaryIntegerVariable" << " : " <<
+    "secondaryIntegerVariable" << ": " <<
     fSecondaryIntegerVariable <<
     std::endl;
 
@@ -9067,21 +9433,21 @@ void oahStringAndTwoIntegersAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     "\"" << fStringVariable << "\"" <<
     std::endl <<
     std::setw (valueFieldWidth) <<
-    "stringVariable" << " : " <<
+    "stringVariable" << ": " <<
     "\"" << fStringVariable << "\"" <<
     std::endl <<
     std::setw (valueFieldWidth) <<
     "primaryIntegerVariable" <<
-    " : " <<
+    ": " <<
     fPrimaryIntegerVariable <<
     std::endl <<
     std::setw (valueFieldWidth) <<
     "secondaryIntegerVariable" <<
-    " : " <<
+    ": " <<
     fSecondaryIntegerVariable;
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -9106,11 +9472,11 @@ std::ostream& operator << (std::ostream& os, const S_oahStringAndTwoIntegersAtom
 
 //______________________________________________________________________________
 S_oahLengthUnitKindAtom oahLengthUnitKindAtom::create (
-  const std::string&      shortName,
-  const std::string&      longName,
-  const std::string&      description,
-  const std::string&      valueSpecification,
-  const std::string&      variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   msrLengthUnitKind& lengthUnitKindVariable)
 {
   oahLengthUnitKindAtom* o = new
@@ -9126,11 +9492,11 @@ S_oahLengthUnitKindAtom oahLengthUnitKindAtom::create (
 }
 
 oahLengthUnitKindAtom::oahLengthUnitKindAtom (
-  const std::string&      shortName,
-  const std::string&      longName,
-  const std::string&      description,
-  const std::string&      valueSpecification,
-  const std::string&      variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   msrLengthUnitKind& lengthUnitKindVariable)
   : oahAtomStoringAValue (
       longName,
@@ -9301,7 +9667,7 @@ void oahLengthUnitKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "optionsLengthUnitKindVariable" << " : " <<
+    "optionsLengthUnitKindVariable" << ": " <<
     msrLengthUnitKindAsString (
       fLengthUnitKindVariable) <<
     std::endl;
@@ -9316,7 +9682,7 @@ void oahLengthUnitKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     msrLengthUnitKindAsString (
       fLengthUnitKindVariable);
 
@@ -9347,7 +9713,7 @@ S_oahLengthAtom oahLengthAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  msrLength&    lengthVariable)
+  msrLength&         lengthVariable)
 {
   oahLengthAtom* o = new
     oahLengthAtom (
@@ -9367,7 +9733,7 @@ oahLengthAtom::oahLengthAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  msrLength&    lengthVariable)
+  msrLength&         lengthVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -9588,7 +9954,7 @@ void oahLengthAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "optionsLengthVariable" << " : " <<
+    "optionsLengthVariable" << ": " <<
     fLengthVariable.asString () <<
     std::endl;
 
@@ -9602,7 +9968,7 @@ void oahLengthAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fLengthVariable.asString ();
 
   if (fSetByAnOption) { // JMIJMIJMI
@@ -9632,7 +9998,7 @@ S_oahMidiTempoAtom oahMidiTempoAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  msrMidiTempo& midiTempoVariable)
+  msrMidiTempo&      midiTempoVariable)
 {
   oahMidiTempoAtom* o = new
     oahMidiTempoAtom (
@@ -9652,7 +10018,7 @@ oahMidiTempoAtom::oahMidiTempoAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  msrMidiTempo& midiTempoVariable)
+  msrMidiTempo&      midiTempoVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -9900,7 +10266,7 @@ void oahMidiTempoAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     fMidiTempoVariable.asString ();
   if (fSetByAnOption) {
     os <<
@@ -10307,8 +10673,8 @@ std::ostream& operator << (std::ostream& os, const S_oahQueryOptionNameAtom& elt
 
 //______________________________________________________________________________
 S_oahFindStringResult oahFindStringResult::create (
-  const std::string& theString,
-  const S_oahElement&  theElement)
+  const std::string&  theString,
+  const S_oahElement& theElement)
 {
   oahFindStringResult* o = new
     oahFindStringResult (
@@ -10319,8 +10685,8 @@ S_oahFindStringResult oahFindStringResult::create (
 }
 
 oahFindStringResult::oahFindStringResult (
-  const std::string& theString,
-  const S_oahElement&  theElement)
+  const std::string&  theString,
+  const S_oahElement& theElement)
 {
   fTheString  = theString;
   fTheElement = theElement;
@@ -10477,24 +10843,24 @@ void oahFindStringAtom::applyAtomWithValue (
     int counter = 0;
 
     for ( ; ; ) {
-    	oahFindStringMatch* theFindStringMatch = (*i);
+      oahFindStringMatch* theFindStringMatch = (*i);
 
-    	// sanity check
-    	mfAssert (
-				__FILE__, __LINE__,
-    		theFindStringMatch != nullptr,
-    		"theFindStringMatch is null");
+      // sanity check
+      mfAssert (
+        __FILE__, __LINE__,
+        theFindStringMatch != nullptr,
+        "theFindStringMatch is null");
 
       std::string
-      	elementName =
-      		theFindStringMatch->
-      			getElementName (),
-      	foundString =
-      		theFindStringMatch->
-      			getFoundString (),
-				containingFindableElementInfo =
-					theFindStringMatch->
-						getContainingFindableElementInfo ();
+        elementName =
+          theFindStringMatch->
+            getElementName (),
+        foundString =
+          theFindStringMatch->
+            getFoundString (),
+        containingFindableElementInfo =
+          theFindStringMatch->
+            getContainingFindableElementInfo ();
 
       ++counter;
 
@@ -10509,9 +10875,9 @@ void oahFindStringAtom::applyAtomWithValue (
       // indent a bit more for readability
       gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-			gIndenter.indentMultiLineString (
-				foundString,
-				os);
+      gIndenter.indentMultiLineString (
+        foundString,
+        os);
 
       // unindent a bit more for readability
       gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);

@@ -118,38 +118,38 @@ float msrScaling::fetchGlobalStaffSize () const
 
       gLogStream << std::left <<
         std::setw (fieldWidth) <<
-        "optionsGlobalStaffSize" << " : " <<
+        "optionsGlobalStaffSize" << ": " <<
         optionsGlobalStaffSize <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "defaultTenthsToMillimetersRatio" << " : " <<
+        "defaultTenthsToMillimetersRatio" << ": " <<
         defaultTenthsToMillimetersRatio <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "millimetersOverTenths" << " : " <<
+        "millimetersOverTenths" << ": " <<
         millimetersOverTenths <<
         std::endl <<
 
         std::setw (fieldWidth) <<
-        "optionsStaffGlobalSizeDefaultValue" << " : " <<
+        "optionsStaffGlobalSizeDefaultValue" << ": " <<
         optionsStaffGlobalSizeDefaultValue <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "optionsGlobalStaffSize" << " : " <<
+        "optionsGlobalStaffSize" << ": " <<
         optionsGlobalStaffSize <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "staffGlobalSizeHasBeenSet" << " : " <<
+        "staffGlobalSizeHasBeenSet" << ": " <<
         staffGlobalSizeHasBeenSet <<
         std::endl <<
 
         std::setw (fieldWidth) <<
-        "ratio" << " : " <<
+        "ratio" << ": " <<
         ratio <<
         std::endl <<
 
         std::setw (fieldWidth) <<
-        "result" << " : " <<
+        "result" << ": " <<
         result <<
         std::endl;
 
@@ -242,11 +242,11 @@ void msrScaling::print (std::ostream& os) const
   // relative to absolute lengths conversion
   os << std::left <<
     std::setw (fieldWidth) <<
-    "millimeters" << " : " <<
+    "millimeters" << ": " <<
     std::setprecision (2) << fMillimeters <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "tenths" << " : " <<
+    "tenths" << ": " <<
     std::setprecision (2) << fTenths <<
     std::endl;
 

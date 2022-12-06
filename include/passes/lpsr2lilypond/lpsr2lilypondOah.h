@@ -1086,7 +1086,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  getNoSetGlobalStaffSize () const
                               { return fNoSetGlobalStaffSize; }
-    const S_oahBooleanAtom&      getNoSetGlobalStaffSizeAtom () const
+    const S_oahBooleanAtom&
+                          getNoSetGlobalStaffSizeAtom () const
                               { return fNoSetGlobalStaffSizeAtom; }
 
     // languages
@@ -1094,7 +1095,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  getUseLilypondDefaultLanguages () const
                               { return fUseLilypondDefaultLanguages; }
-    const S_oahBooleanAtom&      getUseLilypondDefaultLanguagesAtom () const
+    const S_oahBooleanAtom&
+                          getUseLilypondDefaultLanguagesAtom () const
                               { return fUseLilypondDefaultLanguagesAtom; }
 
     // identification
@@ -1152,7 +1154,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  getNoBookBlock () const
                               { return fNoBookBlock; }
-    const S_oahBooleanAtom&      getNoBookBlockAtom () const
+    const S_oahBooleanAtom&
+                          getNoBookBlockAtom () const
                               { return fNoBookBlockAtom; }
 
     // header block
@@ -1160,7 +1163,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  getNoHeaderBlock () const
                               { return fNoHeaderBlock; }
-    const S_oahBooleanAtom&      getNoHeaderBlockAtom () const
+    const S_oahBooleanAtom&
+                          getNoHeaderBlockAtom () const
                               { return fNoHeaderBlockAtom; }
 
     // layout block
@@ -1168,12 +1172,14 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  getNoLayoutScoreContext () const
                               { return fNoLayoutScoreContext; }
-    const S_oahBooleanAtom&      getNoLayoutScoreContextAtom () const
+    const S_oahBooleanAtom&
+                          getNoLayoutScoreContextAtom () const
                               { return fNoLayoutScoreContextAtom; }
 
     Bool                  getNoLayoutVoiceContext () const
                               { return fNoLayoutVoiceContext; }
-    const S_oahBooleanAtom&      getNoLayoutVoiceContextAtom () const
+    const S_oahBooleanAtom&
+                          getNoLayoutVoiceContextAtom () const
                               { return fNoLayoutVoiceContextAtom; }
 
     Bool                  getNoTopLevelLayoutBlock () const
@@ -1184,7 +1190,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  getNoPaperBlock () const
                               { return fNoPaperBlock; }
-    const S_oahBooleanAtom&      getNoPaperBlockAtom () const
+    const S_oahBooleanAtom&
+                          getNoPaperBlockAtom () const
                               { return fNoPaperBlockAtom; }
 
     // parts
@@ -1308,7 +1315,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getInputLineNumbers () const
                               { return fInputLineNumbers; }
 
-    const S_oahBooleanAtom&      getInputLineNumbersAtom () const
+    const S_oahBooleanAtom&
+                          getInputLineNumbersAtom () const
                               { return fInputLineNumbersAtom; }
 
     void                  setNotesComments ()

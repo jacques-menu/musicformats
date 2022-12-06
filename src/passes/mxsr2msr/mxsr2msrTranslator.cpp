@@ -444,7 +444,7 @@ void mxsr2msrTranslator::printVoicesLastMetNoteMap (
 void mxsr2msrTranslator::checkStep (
   int           inputLineNumber,
   const std::string& stepValue,
-	const std::string& markup)
+  const std::string& markup)
 {
   if (stepValue.size () == 1) {
     char firstChar = stepValue [0];
@@ -453,7 +453,7 @@ void mxsr2msrTranslator::checkStep (
       std::stringstream s;
 
       s <<
-      	markup <<
+        markup <<
         " value " << firstChar <<
         " is not a letter from A to G";
 
@@ -469,7 +469,7 @@ void mxsr2msrTranslator::checkStep (
     std::stringstream s;
 
     s <<
-			markup <<
+      markup <<
       " value '" << stepValue <<
       "' should be a single letter from A to G";
 
@@ -2145,6 +2145,8 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
+
+//   gLogStream << elt; //JMI v0.9.66 create MusicFormats's own smart pointer type ???
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5046,7 +5048,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         coda =
           msrCoda::create (
             inputLineNumber,
-						fCurrentDirectionStaffNumber,
+            fCurrentDirectionStaffNumber,
             msrCodaKind::kCodaSecond);
 
 #ifdef TRACING_IS_ENABLED
@@ -5382,10 +5384,10 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
   if (parentheses.size ()) {
     if (parentheses == "yes")
       fCurrentMetronomeParenthesedKind =
-      	msrTempoParenthesizedKind::kTempoParenthesizedYes;
+        msrTempoParenthesizedKind::kTempoParenthesizedYes;
     else if (parentheses == "no")
       fCurrentMetronomeParenthesedKind =
-      	msrTempoParenthesizedKind::kTempoParenthesizedNo;
+        msrTempoParenthesizedKind::kTempoParenthesizedNo;
     else {
       std::stringstream s;
 
@@ -5936,11 +5938,11 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "fCurrentTempoTupletTypeKind: " <<
-			fCurrentTempoTupletTypeKind <<
+      fCurrentTempoTupletTypeKind <<
       "fCurrentTempoTupletBracketKind: " <<
-			fCurrentTempoTupletBracketKind <<
+      fCurrentTempoTupletBracketKind <<
       "fCurrentTempoTupletShowNumberKind: " <<
-			fCurrentTempoTupletShowNumberKind <<
+      fCurrentTempoTupletShowNumberKind <<
       std::endl;
   }
 #endif
@@ -5981,50 +5983,50 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
       break;
 
     case msrTempoTupletTypeKind::kTempoTupletTypeStart:
-    	{
-				// create metronome tuplet
-				fCurrentMetronomeTuplet =
-					msrTempoTuplet::create (
-						inputLineNumber,
-						fCurrentTempoTupletNumber,
-						fCurrentTempoTupletBracketKind,
-						fCurrentTempoTupletShowNumberKind,
-						msrTupletFactor (
-							fCurrentMetronomeNoteActualNotes,
-							fCurrentMetronomeNoteNormalNotes),
-						fCurrentMetronomeNoteWholeNotesFromMetronomeType);
+      {
+        // create metronome tuplet
+        fCurrentMetronomeTuplet =
+          msrTempoTuplet::create (
+            inputLineNumber,
+            fCurrentTempoTupletNumber,
+            fCurrentTempoTupletBracketKind,
+            fCurrentTempoTupletShowNumberKind,
+            msrTupletFactor (
+              fCurrentMetronomeNoteActualNotes,
+              fCurrentMetronomeNoteNormalNotes),
+            fCurrentMetronomeNoteWholeNotesFromMetronomeType);
 
-				// register the metronome tuplet
-				if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
-					// this metronome tuplet belongs to the left elements list
+        // register the metronome tuplet
+        if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
+          // this metronome tuplet belongs to the left elements list
 
-					if (! fCurrentMetronomeRelationLeftElements) {
-						// create the relation left elements
-						fCurrentMetronomeRelationLeftElements =
-							msrTempoNotesRelationshipElements::create (
-								inputLineNumber,
-								msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsLeft);
-					}
+          if (! fCurrentMetronomeRelationLeftElements) {
+            // create the relation left elements
+            fCurrentMetronomeRelationLeftElements =
+              msrTempoNotesRelationshipElements::create (
+                inputLineNumber,
+                msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsLeft);
+          }
 
-					fCurrentMetronomeRelationLeftElements->
-						addElementToTempoNotesRelationshipElements (
-							fCurrentMetronomeTuplet);
-				}
-				else {
-					// this metronome tuplet belongs to the right elements list
+          fCurrentMetronomeRelationLeftElements->
+            addElementToTempoNotesRelationshipElements (
+              fCurrentMetronomeTuplet);
+        }
+        else {
+          // this metronome tuplet belongs to the right elements list
 
-					if (! fCurrentMetronomeRelationRightElements) {
-						// create the relation right elements
-						fCurrentMetronomeRelationRightElements =
-							msrTempoNotesRelationshipElements::create (
-								inputLineNumber,
-								msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsRight);
-					}
+          if (! fCurrentMetronomeRelationRightElements) {
+            // create the relation right elements
+            fCurrentMetronomeRelationRightElements =
+              msrTempoNotesRelationshipElements::create (
+                inputLineNumber,
+                msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsRight);
+          }
 
-					fCurrentMetronomeRelationRightElements->
-						addElementToTempoNotesRelationshipElements (
-							fCurrentMetronomeTuplet);
-				}
+          fCurrentMetronomeRelationRightElements->
+            addElementToTempoNotesRelationshipElements (
+              fCurrentMetronomeTuplet);
+        }
       }
       break;
 
@@ -8080,16 +8082,16 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 
     gLogStream << std::left <<
       std::setw (fieldWidth) <<
-      "line " << " = " << inputLineNumber <<
+      "line " << ": " << inputLineNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
+      "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentSyllabic" << " = " << fCurrentSyllabic <<
+      "fCurrentSyllabic" << ": " << fCurrentSyllabic <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentLyricTextsList" << " = ";
@@ -8282,13 +8284,13 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
       gLogStream << std::left <<
         std::setw (fieldWidth) <<
-        "fCurrentMusicXMLStaffNumber" << " = " << fCurrentMusicXMLStaffNumber <<
+        "fCurrentMusicXMLStaffNumber" << ": " << fCurrentMusicXMLStaffNumber <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fCurrentStaffNumberToInsertInto" << " = " << fCurrentStaffNumberToInsertInto <<
+        "fCurrentStaffNumberToInsertInto" << ": " << fCurrentStaffNumberToInsertInto <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
+        "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
         std::endl <<
         std::setw (fieldWidth) <<
         "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
@@ -8333,7 +8335,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       gLogStream << std::left <<
         std::setw (fieldWidth) <<
         "fCurrentLigatureKind" << " = \"" <<
-				fCurrentLigatureKind <<
+        fCurrentLigatureKind <<
         "\"" <<
         std::endl;
 
@@ -8393,7 +8395,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     gLogStream <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       msrSyllableKindAsString (fCurrentSyllableKind) <<
-      ", line = " << inputLineNumber <<
+      ", line: " << inputLineNumber <<
       ", with:" <<
       std::endl;
 
@@ -8410,13 +8412,13 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
       gLogStream << std::left <<
         std::setw (fieldWidth) <<
-        "fCurrentMusicXMLStaffNumber" << " = " << fCurrentMusicXMLStaffNumber <<
+        "fCurrentMusicXMLStaffNumber" << ": " << fCurrentMusicXMLStaffNumber <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fCurrentStaffNumberToInsertInto" << " = " << fCurrentStaffNumberToInsertInto <<
+        "fCurrentStaffNumberToInsertInto" << ": " << fCurrentStaffNumberToInsertInto <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
+        "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
         std::endl <<
         std::setw (fieldWidth) <<
         "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
@@ -8490,9 +8492,9 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
           fCurrentSyllableExtendKind,
           fCurrentStanzaNumber,
           fCurrentNoteSoundingWholeNotesFromDuration,
-					msrTupletFactor (
-						fCurrentNoteActualNotes,
-						fCurrentNoteNormalNotes),
+          msrTupletFactor (
+            fCurrentNoteActualNotes,
+            fCurrentNoteNormalNotes),
           stanza);
 
     // append the lyric texts to the syllable
@@ -8933,11 +8935,11 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
 
     gLogStream <<
       std::setw (fieldWidth) <<
-      "fCurrentMultipleFullBarRestsHasBeenCreated " << " : " <<
+      "fCurrentMultipleFullBarRestsHasBeenCreated " << ": " <<
       fCurrentMultipleFullBarRestsHasBeenCreated <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fRemainingExpectedMultipleFullBarRests" << " : " <<
+      "fRemainingExpectedMultipleFullBarRests" << ": " <<
       fRemainingExpectedMultipleFullBarRests <<
       std::endl << std::endl;
 
@@ -9004,15 +9006,15 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
 
     gLogStream <<
       std::setw (fieldWidth) <<
-      "fCurrentMultipleFullBarRestsHasBeenCreated " << " : " <<
+      "fCurrentMultipleFullBarRestsHasBeenCreated " << ": " <<
       fCurrentMultipleFullBarRestsHasBeenCreated <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fRemainingExpectedMultipleFullBarRests" << " : " <<
+      "fRemainingExpectedMultipleFullBarRests" << ": " <<
       fRemainingExpectedMultipleFullBarRests <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fOnGoingMultipleFullBarRests " << " : " <<
+      "fOnGoingMultipleFullBarRests " << ": " <<
       fOnGoingMultipleFullBarRests <<
       std::endl;
 
@@ -9119,7 +9121,7 @@ Staff spacing between multiple staves is measured in
       if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
         gLogStream <<
           "Creating a line break, " <<
-          "line = " << inputLineNumber <<
+          "line: " << inputLineNumber <<
           std::endl;
       }
 #endif
@@ -9166,7 +9168,7 @@ Staff spacing between multiple staves is measured in
         if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
           gLogStream <<
             "Creating a page break, " <<
-            "line = " << inputLineNumber <<
+            "line: " << inputLineNumber <<
             std::endl;
         }
   #endif
@@ -10315,9 +10317,9 @@ Controls whether or not spacing is left for an invisible note or object. It is u
     elt->getAttributeValue ("print-object");
 
 //   gLogStream << // JMI TEST v0.9.65
-// 		"fCurrentNotePrintObjectKind = " <<
-// 		fCurrentNotePrintObjectKind <<
-// 		std::endl;
+//     "fCurrentNotePrintObjectKind = " <<
+//     fCurrentNotePrintObjectKind <<
+//     std::endl;
 
   fCurrentNotePrintObjectKind =
     msrPrintObjectKindFromString (
@@ -10597,7 +10599,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       s.str ());
   }
 
-//  gLogStream << "=== mxsr2msrTranslator::visitStart (S_duration& elt), fCurrentDuration = " << fCurrentDuration << std::endl; JMI
+//  gLogStream << "=== mxsr2msrTranslator::visitStart (S_duration& elt), fCurrentDuration: " << fCurrentDuration << std::endl; JMI
 }
 
 void mxsr2msrTranslator::visitStart (S_instrument& elt)
@@ -16810,9 +16812,9 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
       "slideNumber: " <<
       slideNumber <<
       "slideType: " <<
-			slideTypeKind <<
+      slideTypeKind <<
       "slideLineType: " <<
-			slideLineTypeKind <<
+      slideLineTypeKind <<
       std::endl;
   }
 #endif
@@ -17335,14 +17337,14 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
 
   for (S_msrTechnicalWithInteger technicalWithInteger : noteTechnicalWithIntegers) {
 #ifdef TRACING_IS_ENABLED
-		if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
-			gLogStream <<
-				"Copying technical '" <<
-				technicalWithInteger->getTechnicalWithIntegerKind () <<
-				"' from note " << note->asString () <<
-				" to chord" <<
-				std::endl;
-			}
+    if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
+      gLogStream <<
+        "Copying technical '" <<
+        technicalWithInteger->getTechnicalWithIntegerKind () <<
+        "' from note " << note->asString () <<
+        " to chord" <<
+        std::endl;
+      }
 #endif
 
     chord->appendTechnicalWithIntegerToChord (technicalWithInteger);
@@ -18429,9 +18431,9 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
         fCurrentTupletLineShapeKind,
         fCurrentTupletShowNumberKind,
         fCurrentTupletShowTypeKind,
-				msrTupletFactor (
-					fCurrentNoteActualNotes,
-					fCurrentNoteNormalNotes),
+        msrTupletFactor (
+          fCurrentNoteActualNotes,
+          fCurrentNoteNormalNotes),
         memberNotesSoundingWholeNotes,
         memberNotesDisplayWholeNotes);
 
@@ -20627,10 +20629,10 @@ void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
 //   JMI
 //   gLogStream <<
 //     "attachPendingVoiceLevelElementsToVoice()" <<
-//     ", fPendingTemposList.size () = " << fPendingTemposList.size () <<
-//     ", fPendingBarLinesList.size () = " << fPendingBarLinesList.size () <<
-//     ", fPendingLineBreaksList.size () = " << fPendingLineBreaksList.size () <<
-//     ", fPendingPageBreaksList.size () = " << fPendingPageBreaksList.size () <<
+//     ", fPendingTemposList.size (): " << fPendingTemposList.size () <<
+//     ", fPendingBarLinesList.size (): " << fPendingBarLinesList.size () <<
+//     ", fPendingLineBreaksList.size (): " << fPendingLineBreaksList.size () <<
+//     ", fPendingPageBreaksList.size (): " << fPendingPageBreaksList.size () <<
 //     std::endl;
 //     */
 //
@@ -20660,10 +20662,10 @@ void mxsr2msrTranslator::attachPendingPartLevelElementsToPart ( // JMI v0.9.63
   /* JMI
   gLogStream <<
     "attachPendingPartLevelElementsToPart()" <<
-    ", fPendingTemposList.size () = " << fPendingTemposList.size () <<
-    ", fPendingBarLinesList.size () = " << fPendingBarLinesList.size () <<
-    ", fPendingLineBreaksList.size () = " << fPendingLineBreaksList.size () <<
-    ", fPendingPageBreaksList.size () = " << fPendingPageBreaksList.size () <<
+    ", fPendingTemposList.size (): " << fPendingTemposList.size () <<
+    ", fPendingBarLinesList.size (): " << fPendingBarLinesList.size () <<
+    ", fPendingLineBreaksList.size (): " << fPendingLineBreaksList.size () <<
+    ", fPendingPageBreaksList.size (): " << fPendingPageBreaksList.size () <<
     std::endl;
     */
 
@@ -20875,12 +20877,12 @@ S_msrNote mxsr2msrTranslator::createNote (
       fCurrentNoteSoundingWholeNotesFromDuration <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentNoteGraphicDuration" << " : " <<
+      "fCurrentNoteGraphicDuration" << ": " <<
         msrDurationKindAsString (
           fCurrentNoteGraphicDurationKind) <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentNoteDotsNumber" << " : " <<
+      "fCurrentNoteDotsNumber" << ": " <<
         fCurrentNoteDotsNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
@@ -21040,7 +21042,7 @@ S_msrNote mxsr2msrTranslator::createNote (
     newNote =
       msrNote::create (
         inputLineNumber,
-	      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+        gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
 //         fCurrentMeasureNumber, // v0.9.66
 
@@ -22131,9 +22133,9 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
     S_msrVoice
       partFiguredBassVoice =
 //         voiceToInsertInto->
-//         	fetchVoiceUpLinkToPart ()->
+//           fetchVoiceUpLinkToPart ()->
         fCurrentPart->
-        		getPartFiguredBassVoice ();
+            getPartFiguredBassVoice ();
 
     // sanity check
     mfAssert (
@@ -22266,16 +22268,16 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
       std::setw (fieldWidth) << "voice" << " : \"" <<
       currentVoice->getVoiceName () << "\"" <<
       std::endl <<
-      std::setw (fieldWidth) << "line:" << " : " <<
+      std::setw (fieldWidth) << "line:" << ": " <<
       inputLineNumber <<
       std::endl <<
-      std::setw (fieldWidth) << "fCurrentNoteIsAGraceNote" << " : " <<
+      std::setw (fieldWidth) << "fCurrentNoteIsAGraceNote" << ": " <<
       fCurrentNoteIsAGraceNote <<
       std::endl;
 
     if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
       gLogStream <<
-        std::setw (fieldWidth) << "fPendingGraceNotesGroup" << " : " <<
+        std::setw (fieldWidth) << "fPendingGraceNotesGroup" << ": " <<
         std::endl <<
         "======================= handleNonChordNorTupletNoteOrRest()" <<
         ", line " << inputLineNumber <<
@@ -22596,10 +22598,10 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentStanzaNumber" << " = " << fCurrentStanzaNumber <<
+      "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentStanzaName" << " = " << fCurrentStanzaName << "\"" <<
+      "fCurrentStanzaName" << ": " << fCurrentStanzaName << "\"" <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentLyricTextsList" << " = ";
@@ -25194,7 +25196,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       harmony =
         msrHarmony::create (
           fCurrentHarmonyInputLineNumber,
-		      gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
+          gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
           fCurrentHarmonyRootQuarterTonesPitchKind,
 
@@ -25811,7 +25813,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
         fCurrentFiguredBassSoundingWholeNotes,
         fCurrentFiguredBassDisplayWholeNotes,
         fCurrentFiguredBassParenthesesKind,
-				msrTupletFactor (1, 1)); // will be set upon next note handling
+        msrTupletFactor (1, 1)); // will be set upon next note handling
 
   // attach pending figures to the figured bass
   if (! fPendingFiguredBassFiguresList.size ()) {
@@ -26082,7 +26084,7 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
     S_msrDamp
       damp =
         msrDamp::create (
-					inputLineNumber);
+          inputLineNumber);
 
     // append it to the pending damps std::list
     fPendingDampsList.push_back (damp);
@@ -26116,7 +26118,7 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
     S_msrDampAll
       dampAll =
         msrDampAll::create (
-					inputLineNumber);
+          inputLineNumber);
 
     // append it to the pending damp alls std::list
     fPendingDampAllsList.push_back (dampAll);
@@ -26258,7 +26260,7 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
 
   fCurrentScordatura =
     msrScordatura::create (
-			inputLineNumber);
+      inputLineNumber);
 }
 
 void mxsr2msrTranslator::visitStart (S_accord& elt)

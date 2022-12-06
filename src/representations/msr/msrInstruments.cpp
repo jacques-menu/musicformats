@@ -158,20 +158,20 @@ void msrStringTuning::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "stringTuningNumber" << " : " << fStringTuningNumber <<
+    "stringTuningNumber" << ": " << fStringTuningNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "stringTuningDiatonicPitchKind" << " : " <<
+    "stringTuningDiatonicPitchKind" << ": " <<
     msrDiatonicPitchKindAsString (
       fStringTuningDiatonicPitchKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "stringTuningAlterationKind" << " : " <<
+    "stringTuningAlterationKind" << ": " <<
     msrAlterationKindAsString (
       fStringTuningAlterationKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "stringTuningOctaveKind" << " : " <<
+    "stringTuningOctaveKind" << ": " <<
     msrOctaveKindAsString (fStringTuningOctaveKind) <<
     std::endl << std::endl;
 
@@ -569,7 +569,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
 #endif
 
   S_msrHarpPedalsTuning
-    harpPedalsTuningDeepClone = 0; // JMI
+    harpPedalsTuningDeepClone = nullptr; // JMI v0.9.66
 
   return harpPedalsTuningDeepClone;
 }

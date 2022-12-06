@@ -231,7 +231,8 @@ class   ischemeDriver
     std::string           fScriptName;
 
     // the names of the input sources
-    std::list<std::string>          fInputSoucesList;
+    std::list<std::string>          
+                          fInputSoucesList;
 
     // scanning
     bool                  fTraceScanning;

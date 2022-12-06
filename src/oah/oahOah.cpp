@@ -157,7 +157,7 @@ void insiderOahAtom::printAtomWithVariableOptionsValues (
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
-    "insider" <<  " : " <<
+    "insider" <<  ": " <<
     "fOptionHasBeenSelected: " <<
     fOptionHasBeenSelected <<
     std::endl;
@@ -305,7 +305,7 @@ void regularOahAtom::printAtomWithVariableOptionsValues (
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
-    "regular" <<  " : " <<
+    "regular" <<  ": " <<
     "fOptionHasBeenSelected: " <<
     fOptionHasBeenSelected <<
     std::endl;
@@ -828,7 +828,7 @@ void oahOahGroup::printAtomWithVariableOptionsValues ( // JMIJMIJMI
     std::endl <<
 */
 
-    std::setw (valueFieldWidth) << "tracingOahVisitors" << " : " <<
+    std::setw (valueFieldWidth) << "tracingOahVisitors" << ": " <<
     fTracingOahVisitors <<
     std::endl;
 }
@@ -852,7 +852,7 @@ void oahOahGroup::printOahOahValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fShowOptionsAndArguments" << " : " <<
+    std::setw (valueFieldWidth) << "fShowOptionsAndArguments" << ": " <<
     fShowOptionsAndArguments <<
     std::endl;
 
@@ -868,15 +868,15 @@ void oahOahGroup::printOahOahValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fReverseNamesDisplayOrder" << " : " <<
+    std::setw (valueFieldWidth) << "fReverseNamesDisplayOrder" << ": " <<
     fReverseNamesDisplayOrder <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplaySourceCodePositions" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplaySourceCodePositions" << ": " <<
     fDisplaySourceCodePositions <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fTracingOahVisitors" << " : " <<
+    std::setw (valueFieldWidth) << "fTracingOahVisitors" << ": " <<
     fTracingOahVisitors <<
     std::endl;
 

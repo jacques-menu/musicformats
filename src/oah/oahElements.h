@@ -32,7 +32,7 @@ EXP extern const int K_OAH_FIELD_WIDTH;
 // ------------------------------------------------------
 
 enum class oahElementValueKind {
-	kElementValueUnknown,		// default value
+  kElementValueUnknown,    // default value
   kElementValueWithout,   // i.e. -cpu, -minimal, -cubase, groups and subgroups elements
   kElementValueImplicit,  // for oahBoolean
   kElementValueMandatory, // i.e. -global-staff-size 30
@@ -45,7 +45,7 @@ std::string oahElementValueKindAsString (
 std::ostream& operator << (std::ostream& os, const oahElementValueKind& elt);
 
 enum class oahElementVisibilityKind {
-	kElementVisibilityNone, // default value
+  kElementVisibilityNone, // default value
   kElementVisibilityWhole,
   kElementVisibilityHeaderOnly,
   kElementVisibilityHidden
@@ -84,7 +84,7 @@ class   oahFindStringMatch : public smartable
     // ------------------------------------------------------
 
     static SMARTP<oahFindStringMatch> create (
-    												const std::string& elementName,
+                            const std::string& elementName,
                             const std::string& foundString,
                             const std::string& containingFindableElementInfo);
 
@@ -94,7 +94,7 @@ class   oahFindStringMatch : public smartable
     // ------------------------------------------------------
 
                           oahFindStringMatch (
-    												const std::string& elementName,
+                            const std::string& elementName,
                             const std::string& foundString,
                             const std::string& containingFindableElementInfo);
 
@@ -111,7 +111,7 @@ class   oahFindStringMatch : public smartable
     const std::string&    getFoundString () const
                               { return fFoundString; }
 
-    const std::string&			    getContainingFindableElementInfo () const
+    const std::string&          getContainingFindableElementInfo () const
                               { return fContainingFindableElementInfo; }
 
   public:
@@ -131,9 +131,9 @@ class   oahFindStringMatch : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::string			          fElementName;
-    std::string			          fFoundString;
-		std::string           fContainingFindableElementInfo;
+    std::string                fElementName;
+    std::string                fFoundString;
+    std::string           fContainingFindableElementInfo;
 };
 typedef SMARTP<oahFindStringMatch> S_oahFindStringMatch;
 EXP std::ostream& operator << (std::ostream& os, const S_oahFindStringMatch& elt);
@@ -151,7 +151,7 @@ class EXP oahFindableElement : public smartable
     // creation from MusicXML
     // ------------------------------------------------------
 
-/* this class is purely vir.htual
+/* this class is purely virtual
     static SMARTP<oahFindableElement> create ();
 */
 
@@ -188,7 +188,7 @@ class EXP oahFindableElement : public smartable
 
     virtual void          print (std::ostream& os) const = 0;
 
-		virtual const std::string 	containingFindableElementAsString () const = 0;
+    virtual const std::string   containingFindableElementAsString () const = 0;
 
   private:
 
@@ -214,7 +214,7 @@ class EXP oahElement : public oahFindableElement
 {
   public:
 
-/* this class is purely vir.htual
+/* this class is purely virtual
     // creation
     // ------------------------------------------------------
 
@@ -319,8 +319,8 @@ class EXP oahElement : public oahFindableElement
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 
-		Bool									elementMatchesString (
-														const std::string& lowerCaseString) const;
+    Bool                  elementMatchesString (
+                            const std::string& lowerCaseString) const;
   public:
 
     // visitors
@@ -360,7 +360,7 @@ class EXP oahElement : public oahFindableElement
 
     virtual void          printHelp (std::ostream& os) const;
 
-		const std::string 					containingFindableElementAsString () const override;
+    const std::string     containingFindableElementAsString () const override;
 
   protected:
 

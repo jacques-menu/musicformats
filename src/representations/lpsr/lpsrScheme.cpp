@@ -194,16 +194,16 @@ void lpsrSchemeVariable::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "variableName" << " : " <<
+    "variableName" << ": " <<
     "\"" << variableName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "variableValue" << " : " <<
+    "variableValue" << ": " <<
     "\"" << variableValue << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCommentedKind" << " : " <<
+    "fCommentedKind" << ": " <<
     fCommentedKind <<
     std::endl <<
 
@@ -212,7 +212,7 @@ void lpsrSchemeVariable::print (std::ostream& os) const
   // quotesKindAsString ??? JMI
 
     std::setw (fieldWidth) <<
-    "fEndOfLineKind" << " : " <<
+    "fEndOfLineKind" << ": " <<
     lpsrEndOfLineKindAsString (fEndOfLineKind) <<
     std::endl <<
     ']';

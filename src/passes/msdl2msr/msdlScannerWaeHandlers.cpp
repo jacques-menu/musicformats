@@ -31,7 +31,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_msdlScannerWaeHandler msdlScannerWaeHandler::create ()
 {
   msdlScannerWaeHandler* o =

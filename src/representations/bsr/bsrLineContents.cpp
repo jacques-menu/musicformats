@@ -333,7 +333,7 @@ void bsrLineContents::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "cellsNumber" << " : " << fetchCellsNumber () <<
+    "cellsNumber" << ": " << fetchCellsNumber () <<
     std::endl;
   os << std::endl;
 
@@ -363,7 +363,7 @@ void bsrLineContents::print (std::ostream& os) const
     }
     else {
       os <<
-        " : " << "[NONE]" <<
+        ": " << "[NONE]" <<
       std::endl;
     }
   }

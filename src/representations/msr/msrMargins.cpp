@@ -383,7 +383,7 @@ void msrMarginsGroup::print (std::ostream& os) const
   // margins
   os << std::left <<
     std::setw (fieldWidth) <<
-    "leftMargin" << " : ";
+    "leftMargin" << ": ";
     if (fLeftMargin) {
       os << fLeftMargin;
     }
@@ -394,7 +394,7 @@ void msrMarginsGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "rightMargin" << " : ";
+    "rightMargin" << ": ";
     if (fRightMargin) {
       os << fRightMargin;
     }
@@ -405,7 +405,7 @@ void msrMarginsGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "topMargin" << " : ";
+    "topMargin" << ": ";
     if (fTopMargin) {
       os << fTopMargin;
     }
@@ -416,7 +416,7 @@ void msrMarginsGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "bottomMargin" << " : ";
+    "bottomMargin" << ": ";
     if (fBottomMargin) {
       os << fBottomMargin;
     }

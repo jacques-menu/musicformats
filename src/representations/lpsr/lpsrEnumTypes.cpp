@@ -174,7 +174,7 @@ std::string wholeNotesAsLilypondString (
 
     s1 <<
       "numerator is not positive in wholeNotesAsLilypondString()" <<
-      ", wholeNotes = " << wholeNotes;
+      ", wholeNotes: " << wholeNotes;
 
     std::string message = s1.str ();
 
@@ -190,7 +190,7 @@ std::string wholeNotesAsLilypondString (
     s2 <<
       "%{ " <<
       message <<
-      ", line = " << inputLineNumber <<
+      ", line: " << inputLineNumber <<
       " ???%}";
 
     return s2.str ();
@@ -245,7 +245,7 @@ std::string wholeNotesAsLilypondString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
-      "--> numeratorDots " << " : " << numeratorDots <<
+      "--> numeratorDots " << ": " << numeratorDots <<
       std::endl << std::endl;
   }
 #endif
@@ -367,7 +367,7 @@ std::string wholeNotesAsLilypondString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
-      "--> denominatorDurationLog" << " : " <<
+      "--> denominatorDurationLog" << ": " <<
       denominatorDurationLog <<
       std::endl << std::endl;
   }
@@ -394,10 +394,10 @@ std::string wholeNotesAsLilypondString (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
         gLogStream <<
-          "--> numerator" << " : " <<
+          "--> numerator" << ": " <<
           numerator <<
           std::endl <<
-          "--> denominatorDurationLog " << " : " <<
+          "--> denominatorDurationLog " << ": " <<
           denominatorDurationLog <<
           std::endl << std::endl;
       }
@@ -411,13 +411,13 @@ std::string wholeNotesAsLilypondString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
-      "--> numerator" << " : " <<
+      "--> numerator" << ": " <<
       numerator <<
       std::endl <<
-      "--> denominatorDurationLog" << " : " <<
+      "--> denominatorDurationLog" << ": " <<
       denominatorDurationLog <<
       std::endl <<
-      "--> numeratorDots " << " : " <<
+      "--> numeratorDots " << ": " <<
       numeratorDots <<
       std::endl << std::endl;
   }
@@ -433,10 +433,10 @@ std::string wholeNotesAsLilypondString (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
-        "--> denominatorDurationLog" << " : " <<
+        "--> denominatorDurationLog" << ": " <<
         denominatorDurationLog <<
         std::endl <<
-        "--> multiplyingFactor " << " : " <<
+        "--> multiplyingFactor " << ": " <<
         multiplyingFactor <<
         std::endl << std::endl;
     }
@@ -463,10 +463,10 @@ std::string wholeNotesAsLilypondString (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
-        "--> denominatorDurationLog" << " : " <<
+        "--> denominatorDurationLog" << ": " <<
         denominatorDurationLog <<
         std::endl <<
-        "--> multiplyingFactor " << " : " <<
+        "--> multiplyingFactor " << ": " <<
         multiplyingFactor <<
         std::endl << std::endl;
     }
@@ -482,10 +482,10 @@ std::string wholeNotesAsLilypondString (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
         gLogStream <<
-          "--> denominatorDurationLog" << " : " <<
+          "--> denominatorDurationLog" << ": " <<
           denominatorDurationLog <<
           std::endl <<
-          "--> multiplyingFactor " << " : " <<
+          "--> multiplyingFactor " << ": " <<
           multiplyingFactor <<
           std::endl << std::endl;
       }
@@ -497,16 +497,16 @@ std::string wholeNotesAsLilypondString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
-      "--> numerator " << " : " <<
+      "--> numerator " << ": " <<
       numerator <<
       std::endl <<
-      "--> numeratorDots " << " : " <<
+      "--> numeratorDots " << ": " <<
       numeratorDots <<
       std::endl <<
-      "--> denominatorDurationLog" << " : " <<
+      "--> denominatorDurationLog" << ": " <<
       denominatorDurationLog <<
       std::endl <<
-      "--> multiplyingFactor " << " : " <<
+      "--> multiplyingFactor " << ": " <<
       multiplyingFactor <<
       std::endl << std::endl;
   }
@@ -561,7 +561,7 @@ std::string wholeNotesAsLilypondString (
     gLogStream <<
       "--> wholeNotesAsLilypondString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
-      ", numeratorDots" << " : " << numeratorDots <<
+      ", numeratorDots" << ": " << numeratorDots <<
       std::endl;
   }
 #endif
@@ -1322,7 +1322,7 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
       "dynamics text spanners style std::string \"" <<
       dynamicsTextSpannersStyleKindString <<
       "\" is unknown" <<
-      ", line = " << inputLineNumber;
+      ", line: " << inputLineNumber;
 
     lpsrError (
       gGlobalServiceRunData->getInputSourceName (),

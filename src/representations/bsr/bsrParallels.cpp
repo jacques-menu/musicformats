@@ -153,10 +153,10 @@ void bsrParallel::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "printParallelNumber" << " : " << fPrintParallelNumber <<
+    "printParallelNumber" << ": " << fPrintParallelNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "brailleParallelNumber" << " : " << fBrailleParallelNumber <<
+    "brailleParallelNumber" << ": " << fBrailleParallelNumber <<
     std::endl;
 
   // print the parallel elements if any
@@ -186,7 +186,7 @@ void bsrParallel::print (std::ostream& os) const
     }
     else {
       os <<
-        " : " << "[EMPTY]" <<
+        ": " << "[EMPTY]" <<
       std::endl;
     }
   }

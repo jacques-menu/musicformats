@@ -674,7 +674,7 @@ void msrBarLine::print (std::ostream& os) const
   const int fieldWidth = 33;
 
   os << std::left <<
-    "fBarLineUpLinkToMeasure" << " : ";
+    "fBarLineUpLinkToMeasure" << ": ";
     if (fBarLineUpLinkToMeasure) {
       os <<  std::endl;
       ++gIndenter;
@@ -688,66 +688,66 @@ void msrBarLine::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << " : " <<
+    "fMeasureElementMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fLocationKind" << " : " <<
+    "fLocationKind" << ": " <<
     fLocationKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fStyleKind" << " : " <<
+    "fStyleKind" << ": " <<
     fStyleKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fRepeatDirectionKind" << " : " <<
+    "fRepeatDirectionKind" << ": " <<
     fRepeatDirectionKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fRepeatWingedKind" << " : " <<
+    "fRepeatWingedKind" << ": " <<
     fRepeatWingedKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEndingTypeKind" << " : " <<
+    "fEndingTypeKind" << ": " <<
     fEndingTypeKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fEndingNumber" << " : " <<
+    "fEndingNumber" << ": " <<
     fEndingNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fBarLineTimes" << " : " <<
+    "fBarLineTimes" << ": " <<
     fBarLineTimes <<
     std::endl <<
 
 /* JMI
     std::setw (fieldWidth) <<
-    "fBarLineCategoryKind" << " : " <<
+    "fBarLineCategoryKind" << ": " <<
     fBarLineCategoryKind <<
     std::endl <<
 */
 
     std::setw (fieldWidth) <<
-    "fBarLineHasSegnoKind" << " : " <<
+    "fBarLineHasSegnoKind" << ": " <<
     fBarLineHasSegnoKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fBarLineHasCodaKind" << " : " <<
+    "fBarLineHasCodaKind" << ": " <<
     fBarLineHasCodaKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "endingNumbersList" << " : " <<
+    "endingNumbersList" << ": " <<
     endingNumbersListAsString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << " : " <<
+    "measureElementMeasureNumber" << ": " <<
     fBarLineUpLinkToMeasure->getMeasureNumber () <<
     std::endl;
 

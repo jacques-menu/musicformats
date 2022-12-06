@@ -316,11 +316,11 @@ void msrGenerationAPIKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fGenerationAPIKindVariable" << " : " <<
+    "fGenerationAPIKindVariable" << ": " <<
     msrGenerationAPIKindAsString (
       fGenerationAPIKindVariable) <<
     std::endl;
@@ -334,7 +334,7 @@ void msrGenerationAPIKindAtom::printAtomWithVariableOptionsValues (
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
-    fVariableName << " : " <<
+    fVariableName << ": " <<
     msrGenerationAPIKindAsString (
       fGenerationAPIKindVariable);
   if (fSetByAnOption) {

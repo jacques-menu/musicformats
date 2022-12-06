@@ -203,10 +203,10 @@ std::string msrTransposition::asString () const
 
   s <<
     "[Transpose" <<
-    ", fTranspositionDiatonic = " << fTranspositionDiatonic <<
-    ", fTranspositionChromatic = " << fTranspositionChromatic <<
-    ", fTranspositionOctaveChange = " << fTranspositionOctaveChange <<
-    ", fTranspositionDouble = " << fTranspositionDouble <<
+    ", fTranspositionDiatonic: " << fTranspositionDiatonic <<
+    ", fTranspositionChromatic: " << fTranspositionChromatic <<
+    ", fTranspositionOctaveChange: " << fTranspositionOctaveChange <<
+    ", fTranspositionDouble: " << fTranspositionDouble <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -226,16 +226,16 @@ void msrTransposition::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
+    "fTranspositionDiatonic" << ": " << fTranspositionDiatonic <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
+    "fTranspositionChromatic" << ": " << fTranspositionChromatic <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
+    "fTranspositionOctaveChange" << ": " << fTranspositionOctaveChange <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTranspositionDouble" << " = " << fTranspositionDouble <<
+    "fTranspositionDouble" << ": " << fTranspositionDouble <<
     std::endl << std::endl;
 
   --gIndenter;

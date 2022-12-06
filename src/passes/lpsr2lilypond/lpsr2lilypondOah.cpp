@@ -219,7 +219,7 @@ void lilypondScoreOutputKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -542,10 +542,10 @@ void lilypondTransposePartNameAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fStringToMsrSemiTonesPitchAndOctaveMapVariable" << " : " <<
+    "fStringToMsrSemiTonesPitchAndOctaveMapVariable" << ": " <<
     std::endl;
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
@@ -574,7 +574,7 @@ void lilypondTransposePartNameAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (fSetByAnOption) {
     os <<
@@ -898,10 +898,10 @@ void lilypondTransposePartIDAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fStringToMsrSemiTonesPitchAndOctaveMapVariable" << " : " <<
+    "fStringToMsrSemiTonesPitchAndOctaveMapVariable" << ": " <<
     std::endl;
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
@@ -930,7 +930,7 @@ void lilypondTransposePartIDAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (fSetByAnOption) {
     os <<
@@ -1020,7 +1020,7 @@ void msrOctaveEntryVariable::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fOctaveEntryKind" << " : " <<
+    "fOctaveEntryKind" << ": " <<
     msrOctaveEntryKindAsString (
       fOctaveEntryKind) <<
     std::endl;
@@ -1035,7 +1035,7 @@ void msrOctaveEntryVariable::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     msrOctaveEntryKindAsString (
       fOctaveEntryKind) <<
     std::endl;
@@ -1205,7 +1205,7 @@ void lilypondAbsoluteOctaveEntryAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "octaveEntryKindVariable" << " : " <<
+    "octaveEntryKindVariable" << ": " <<
     msrOctaveEntryKindAsString (
       fOctaveEntryKindVariable.getOctaveEntryKind ()) <<
     std::endl;
@@ -1220,7 +1220,7 @@ void lilypondAbsoluteOctaveEntryAtom::printAtomWithVariableOptionsValues (
 //   os << std::left << // JMI CAFE
 //     std::setw (valueFieldWidth) <<
 //     fOctaveEntryKindVariable.getVariableName () <<
-//     " : " <<
+//     ": " <<
 //     "- no possible value here -" <<
 //     std::endl;
 }
@@ -1439,7 +1439,7 @@ void lilypondRelativeOctaveEntryAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "octaveEntryKindVariable" << " : " <<
+    "octaveEntryKindVariable" << ": " <<
     msrOctaveEntryKindAsString (
       fOctaveEntryKindVariable.getOctaveEntryKind ()) <<
     std::endl;
@@ -1454,7 +1454,7 @@ void lilypondRelativeOctaveEntryAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fOctaveEntryKindVariable <<
-    " : ";
+    ": ";
 
   if (fSemiTonesPitchAndOctaveVariable) {
     os << std::endl;
@@ -1654,7 +1654,7 @@ void lilypondFixedOctaveEntryAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "octaveEntryKindVariable" << " : " <<
+    "octaveEntryKindVariable" << ": " <<
     msrOctaveEntryKindAsString (
       fOctaveEntryKindVariable.getOctaveEntryKind ()) <<
     std::endl;
@@ -1669,7 +1669,7 @@ void lilypondFixedOctaveEntryAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fOctaveEntryKindVariable <<
-    " : ";
+    ": ";
 
   if (fSemiTonesPitchAndOctaveVariable) {
     os << std::endl;
@@ -1894,7 +1894,7 @@ void lilypondAccidentalStyleKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -1914,7 +1914,7 @@ void lilypondAccidentalStyleKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     lpsrAccidentalStyleKindAsString (
       fLpsrAccidentalStyleKindVariable);
 
@@ -2229,7 +2229,7 @@ void lilypondChordsDisplayAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
     "fStringsPairListVariable" << " : '" <<
@@ -2263,7 +2263,7 @@ void lilypondChordsDisplayAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (fStringsPairListVariable.size ()) {
     os << std::endl;
@@ -2506,11 +2506,11 @@ void lilypondLyricsDurationsKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fLpsrLyricsDurationsKindVariable" << " : " <<
+    "fLpsrLyricsDurationsKindVariable" << ": " <<
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable) <<
     std::endl;
@@ -2525,7 +2525,7 @@ void lilypondLyricsDurationsKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable);
 
@@ -2747,11 +2747,11 @@ void lilypondDynamicsTextSpannersStyleKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fLpsrdDynamicsTextSpannersStyleKindVariable" << " : " <<
+    "fLpsrdDynamicsTextSpannersStyleKindVariable" << ": " <<
     lpsrDynamicsTextSpannersStyleKindAsString (
       fLpsrdDynamicsTextSpannersStyleKindVariable) <<
     std::endl;
@@ -2766,7 +2766,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::printAtomWithVariableOptionsValu
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     lpsrDynamicsTextSpannersStyleKindAsString (
       fLpsrdDynamicsTextSpannersStyleKindVariable);
 
@@ -4984,7 +4984,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "lilyPondVersion" << " : " <<
+    std::setw (valueFieldWidth) << "lilyPondVersion" << ": " <<
     fLilypondVersion <<
     std::endl;
 
@@ -5000,63 +5000,63 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
 
   // MusicXML informations
   os << std::left <<
-    std::setw (valueFieldWidth) << "fRights" << " : " <<
+    std::setw (valueFieldWidth) << "fRights" << ": " <<
       fRights <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fComposer" << " : " <<
+    std::setw (valueFieldWidth) << "fComposer" << ": " <<
       fComposer <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fArranger" << " : " <<
+    std::setw (valueFieldWidth) << "fArranger" << ": " <<
       fArranger <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fPoet" << " : " <<
+    std::setw (valueFieldWidth) << "fPoet" << ": " <<
       fPoet <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fLyricist" << " : " <<
+    std::setw (valueFieldWidth) << "fLyricist" << ": " <<
       fLyricist <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fSoftware" << " : " <<
+    std::setw (valueFieldWidth) << "fSoftware" << ": " <<
       fSoftware <<
       std::endl;
 
   // LilyPond informations
   os << std::left <<
-    std::setw (valueFieldWidth) << "fDedication" << " : " <<
+    std::setw (valueFieldWidth) << "fDedication" << ": " <<
       fDedication <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fPiece" << " : " <<
+    std::setw (valueFieldWidth) << "fPiece" << ": " <<
       fPiece <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fOpus" << " : " <<
+    std::setw (valueFieldWidth) << "fOpus" << ": " <<
       fOpus <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fTitle" << " : " <<
+    std::setw (valueFieldWidth) << "fTitle" << ": " <<
       fTitle <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fSubTitle" << " : " <<
+    std::setw (valueFieldWidth) << "fSubTitle" << ": " <<
       fSubTitle <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fSubSubTitle" << " : " <<
+    std::setw (valueFieldWidth) << "fSubSubTitle" << ": " <<
       fSubSubTitle <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fHeaderInstrument" << " : " <<
+    std::setw (valueFieldWidth) << "fHeaderInstrument" << ": " <<
       fHeaderInstrument <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fHeaderMeter" << " : " <<
+    std::setw (valueFieldWidth) << "fHeaderMeter" << ": " <<
       fHeaderMeter <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fTagline" << " : " <<
+    std::setw (valueFieldWidth) << "fTagline" << ": " <<
       fTagline <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fCopyright" << " : " <<
+    std::setw (valueFieldWidth) << "fCopyright" << ": " <<
       fCopyright <<
       std::endl;
 
@@ -5069,7 +5069,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   // part names transposition
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "part names transposition" << " : ";
+    std::setw (valueFieldWidth) << "part names transposition" << ": ";
 
   if (! fPartNamesTranspositionMap.size ()) {
     gLogStream << "[NONE]";
@@ -5083,7 +5083,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
     ) {
       gLogStream <<
         "Part name \"" << ((*i).first) <<
-        " = " <<
+        "\" = " <<
         ((*i).second->asString ()) <<
         "\" ";
     } // for
@@ -5092,7 +5092,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   // part IDs transposition
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fPartIDsTranspositionMap" << " : ";
+    std::setw (valueFieldWidth) << "fPartIDsTranspositionMap" << ": ";
 
   if (! fPartIDsTranspositionMap.size ()) {
     gLogStream << "[EMPTY]";
@@ -5106,7 +5106,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
     ) {
       gLogStream <<
         "Part ID \"" << ((*i).first) <<
-        " = " <<
+        "\" = " <<
         ((*i).second->asString ()) <<
         "\" ";
     } // for
@@ -5121,10 +5121,10 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fAmbitusEngraver" << " : " <<
+    std::setw (valueFieldWidth) << "fAmbitusEngraver" << ": " <<
       fAmbitusEngraver <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fCustosEngraver" << " : " <<
+    std::setw (valueFieldWidth) << "fCustosEngraver" << ": " <<
       fCustosEngraver <<
       std::endl;
 
@@ -5140,7 +5140,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fCommentClefChanges" << " : " <<
+    std::setw (valueFieldWidth) << "fCommentClefChanges" << ": " <<
       fCommentClefChanges <<
       std::endl;
 
@@ -5156,7 +5156,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fCommentClefChanges" << " : " <<
+    std::setw (valueFieldWidth) << "fCommentClefChanges" << ": " <<
       fCommentClefChanges <<
       std::endl;
 
@@ -5172,7 +5172,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fNumericalTimeSignature" << " : " <<
+    std::setw (valueFieldWidth) << "fNumericalTimeSignature" << ": " <<
       fNumericalTimeSignature <<
       std::endl;
 
@@ -5192,7 +5192,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
       fetchOctaveEntryVariableValue ();
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "octaveEntryKind" << " : " <<
+    std::setw (valueFieldWidth) << "octaveEntryKind" << ": " <<
     msrOctaveEntryKindAsString (
       octaveEntryKind) <<
     std::endl;
@@ -5202,7 +5202,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
       if (fRelativeOctaveEntrySemiTonesPitchAndOctave) {
         os << std::left <<
           std::setw (valueFieldWidth) <<
-          "relativeOctaveEntrySemiTonesPitchAndOctave" << " : ";
+          "relativeOctaveEntrySemiTonesPitchAndOctave" << ": ";
 /* JMI
         if (fSetByAnOption) {
           os <<
@@ -5221,7 +5221,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
       if (fFixedOctaveEntrySemiTonesPitchAndOctave) {
         os << std::left <<
           std::setw (valueFieldWidth) <<
-          "fixedOctaveEntrySemiTonesPitchAndOctave" << " : ";
+          "fixedOctaveEntrySemiTonesPitchAndOctave" << ": ";
 /* JMI
         if (fSetByAnOption) {
           os <<
@@ -5237,64 +5237,64 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   } // switch
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fInputLineNumbers" << " : " <<
+    std::setw (valueFieldWidth) << "fInputLineNumbers" << ": " <<
       fAllDurations <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fNoAutoBeaming" << " : " <<
+    std::setw (valueFieldWidth) << "fNoAutoBeaming" << ": " <<
       fNoAutoBeaming <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fNoBeams" << " : " <<
+    std::setw (valueFieldWidth) << "fNoBeams" << ": " <<
       fNoBeams <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fRomanStringNumbers" << " : " <<
+    std::setw (valueFieldWidth) << "fRomanStringNumbers" << ": " <<
       fRomanStringNumbers <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fAvoidOpenStrings" << " : " <<
+    std::setw (valueFieldWidth) << "fAvoidOpenStrings" << ": " <<
       fAvoidOpenStrings <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fAccidentalStyleKind" << " : " <<
+    std::setw (valueFieldWidth) << "fAccidentalStyleKind" << ": " <<
       lpsrAccidentalStyleKindAsString (fAccidentalStyleKind) <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fLyricsDurationsKind" << " : " <<
+    std::setw (valueFieldWidth) << "fLyricsDurationsKind" << ": " <<
       lpsrLyricsDurationsKindAsString (fLyricsDurationsKind) <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fCompressFullBarRestsInLilypond" << " : " <<
+    std::setw (valueFieldWidth) << "fCompressFullBarRestsInLilypond" << ": " <<
       fCompressFullBarRestsInLilypond <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fMergeStaffCommonRests" << " : " <<
+    std::setw (valueFieldWidth) << "fMergeStaffCommonRests" << ": " <<
       fMergeStaffCommonRests <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fMultipleFullBarRestsExpandLimit" << " : " <<
+    std::setw (valueFieldWidth) << "fMultipleFullBarRestsExpandLimit" << ": " <<
       fMultipleFullBarRestsExpandLimit <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fInputLineNumbers" << " : " <<
+    std::setw (valueFieldWidth) << "fInputLineNumbers" << ": " <<
       fInputLineNumbers <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fNotesComments" << " : " <<
+    std::setw (valueFieldWidth) << "fNotesComments" << ": " <<
       fNotesComments <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fOriginalMeasureNumbers" << " : " <<
+    std::setw (valueFieldWidth) << "fOriginalMeasureNumbers" << ": " <<
       fOriginalMeasureNumbers <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fGenerateMeasurePositions" << " : " <<
+    std::setw (valueFieldWidth) << "fGenerateMeasurePositions" << ": " <<
       fGenerateMeasurePositions <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fGenerateMeasureMoments" << " : " <<
+    std::setw (valueFieldWidth) << "fGenerateMeasureMoments" << ": " <<
       fGenerateMeasureMoments <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fNonPrintNotesHeadColorRGB" << " : " <<
+    std::setw (valueFieldWidth) << "fNonPrintNotesHeadColorRGB" << ": " <<
       fNonPrintNotesHeadColorRGB.asString () <<
       std::endl;
 
@@ -5310,10 +5310,10 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fShowAllBarNumbers" << " : " <<
+    std::setw (valueFieldWidth) << "fShowAllBarNumbers" << ": " <<
     fShowAllBarNumbers <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fBoxAroundAllBarNumbers" << " : " <<
+    std::setw (valueFieldWidth) << "fBoxAroundAllBarNumbers" << ": " <<
     fBoxAroundAllBarNumbers <<
     std::endl;
 
@@ -5338,7 +5338,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   os << std::endl;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "boxAroundBarNumberSet" << " : ";
+    std::setw (valueFieldWidth) << "boxAroundBarNumberSet" << ": ";
   if (! fBoxAroundBarNumberSet.size ()) {
     os << "[EMPTY]";
   }
@@ -5367,15 +5367,15 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreLpsrLineBreaks" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreLpsrLineBreaks" << ": " <<
       fIgnoreLpsrLineBreaks <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fBreakLinesAtIncompleteRightMeasures" << " : " <<
+    std::setw (valueFieldWidth) << "fBreakLinesAtIncompleteRightMeasures" << ": " <<
       fBreakLinesAtIncompleteRightMeasures <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fSeparatorLineEveryNMeasures" << " : " <<
+    std::setw (valueFieldWidth) << "fSeparatorLineEveryNMeasures" << ": " <<
       fSeparatorLineEveryNMeasures <<
       std::endl;
 
@@ -5391,7 +5391,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fIgnoreLpsrPageBreaks" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreLpsrPageBreaks" << ": " <<
     fIgnoreLpsrPageBreaks <<
     std::endl;
 
@@ -5407,14 +5407,14 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fModernTab" << " : " <<
+    std::setw (valueFieldWidth) << "fModernTab" << ": " <<
     fModernTab <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fTabFullNotation" << " : " <<
+    std::setw (valueFieldWidth) << "fTabFullNotation" << ": " <<
     fTabFullNotation <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fKeepStaffSize" << " : " <<
+    std::setw (valueFieldWidth) << "fKeepStaffSize" << ": " <<
     fKeepStaffSize <<
     std::endl;
 
@@ -5431,7 +5431,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fConnectArpeggios" << " : " <<
+    std::setw (valueFieldWidth) << "fConnectArpeggios" << ": " <<
     fConnectArpeggios <<
     std::endl;
 
@@ -5448,7 +5448,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fIndentTuplets" << " : " <<
+    std::setw (valueFieldWidth) << "fIndentTuplets" << ": " <<
     fIndentTuplets <<
     std::endl;
 
@@ -5465,13 +5465,13 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fKeepRepeatBarLines" << " : " <<
+    std::setw (valueFieldWidth) << "fKeepRepeatBarLines" << ": " <<
     fKeepRepeatBarLines <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fRepeatBrackets" << " : " <<
+    std::setw (valueFieldWidth) << "fRepeatBrackets" << ": " <<
     fRepeatBrackets <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fIgnoreRepeatNumbers" << " : " <<
+    std::setw (valueFieldWidth) << "fIgnoreRepeatNumbers" << ": " <<
     fIgnoreRepeatNumbers <<
     std::endl;
 
@@ -5488,7 +5488,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   gLogStream <<
-    std::setw (valueFieldWidth) << "fAddLilypondStanzasNumbers" << " : " <<
+    std::setw (valueFieldWidth) << "fAddLilypondStanzasNumbers" << ": " <<
     fAddLilypondStanzasNumbers <<
     std::endl;
 
@@ -5504,7 +5504,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fDelayedOrnamentsFraction" << " : " <<
+    std::setw (valueFieldWidth) << "fDelayedOrnamentsFraction" << ": " <<
     fDelayedOrnamentsFraction <<
     std::endl;
 
@@ -5521,7 +5521,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "chordsDisplayList" << " : ";
+    std::setw (valueFieldWidth) << "chordsDisplayList" << ": ";
 
   if (fChordsDisplayList.size ()) {
     os << std::endl;
@@ -5553,10 +5553,10 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   os << std::endl;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fJazzChordsDisplay" << " : " <<
+    std::setw (valueFieldWidth) << "fJazzChordsDisplay" << ": " <<
     fJazzChordsDisplay <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fJazzChordsDisplayLilypondCode" << " : " <<
+    std::setw (valueFieldWidth) << "fJazzChordsDisplayLilypondCode" << ": " <<
     fJazzChordsDisplayLilypondCode <<
     std::endl;
 
@@ -5573,7 +5573,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fJazzFonts" << " : " <<
+    std::setw (valueFieldWidth) << "fJazzFonts" << ": " <<
     fJazzFonts <<
     std::endl;
 
@@ -5590,51 +5590,51 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fXml2lyInfos" << " : " <<
+    std::setw (valueFieldWidth) << "fXml2lyInfos" << ": " <<
       fXml2lyInfos <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fLilypondComments" << " : " <<
+    std::setw (valueFieldWidth) << "fLilypondComments" << ": " <<
       fLilypondComments <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fGlobal" << " : " <<
+    std::setw (valueFieldWidth) << "fGlobal" << ": " <<
       fGlobal <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fNoPaperBlock" << " : " <<
+    std::setw (valueFieldWidth) << "fNoPaperBlock" << ": " <<
       fNoPaperBlock <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayMusic" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayMusic" << ": " <<
       fDisplayMusic <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fNoLilypondCode" << " : " <<
+    std::setw (valueFieldWidth) << "fNoLilypondCode" << ": " <<
       fNoLilypondCode <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fNoLilypondLyrics" << " : " <<
+    std::setw (valueFieldWidth) << "fNoLilypondLyrics" << ": " <<
       fNoLilypondLyrics <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fLilypondRunDate" << " : " <<
+    std::setw (valueFieldWidth) << "fLilypondRunDate" << ": " <<
       fLilypondRunDate <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fDraftMode" << " : " <<
+    std::setw (valueFieldWidth) << "fDraftMode" << ": " <<
       fDraftMode <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fPointAndClickOff" << " : " <<
+    std::setw (valueFieldWidth) << "fPointAndClickOff" << ": " <<
       fPointAndClickOff <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fGenerateStemsDirections" << " : " <<
+    std::setw (valueFieldWidth) << "fGenerateStemsDirections" << ": " <<
       fGenerateStemsDirections <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fWhiteNoteHeads" << " : " <<
+    std::setw (valueFieldWidth) << "fWhiteNoteHeads" << ": " <<
       fWhiteNoteHeads <<
       std::endl;
 
@@ -5651,7 +5651,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fJianpu" << " : " <<
+    std::setw (valueFieldWidth) << "fJianpu" << ": " <<
       fJianpu <<
       std::endl;
 
@@ -5667,11 +5667,11 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fMidiTempo" << " : " <<
+    std::setw (valueFieldWidth) << "fMidiTempo" << ": " <<
       fMidiTempo.asString () <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fNoMidi" << " : " <<
+    std::setw (valueFieldWidth) << "fNoMidi" << ": " <<
       fNoMidi <<
       std::endl;
 
@@ -5698,10 +5698,10 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fGlobalStaffSize" << " : " <<
+    std::setw (fieldWidth) << "fGlobalStaffSize" << ": " <<
     fGlobalStaffSize <<
     std::endl <<
-    std::setw (fieldWidth) << "fStaffGlobalSizeDefaultValue" << " : " <<
+    std::setw (fieldWidth) << "fStaffGlobalSizeDefaultValue" << ": " <<
     fStaffGlobalSizeDefaultValue <<
     std::endl;
 
@@ -5717,60 +5717,60 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
 
   // MusicXML informations
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fRights" << " : " <<
+    std::setw (fieldWidth) << "fRights" << ": " <<
       fRights <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fComposer" << " : " <<
+    std::setw (fieldWidth) << "fComposer" << ": " <<
       fComposer <<
       std::endl <<
-    std::setw (fieldWidth) << "fArranger" << " : " <<
+    std::setw (fieldWidth) << "fArranger" << ": " <<
       fArranger <<
       std::endl <<
-    std::setw (fieldWidth) << "fPoet" << " : " <<
+    std::setw (fieldWidth) << "fPoet" << ": " <<
       fPoet <<
       std::endl <<
-    std::setw (fieldWidth) << "fLyricist" << " : " <<
+    std::setw (fieldWidth) << "fLyricist" << ": " <<
       fLyricist <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fSoftware" << " : " <<
+    std::setw (fieldWidth) << "fSoftware" << ": " <<
       fSoftware <<
       std::endl <<
 
   // LilyPond informations
-    std::setw (fieldWidth) << "fDedication" << " : " <<
+    std::setw (fieldWidth) << "fDedication" << ": " <<
       fDedication <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fPiece" << " : " <<
+    std::setw (fieldWidth) << "fPiece" << ": " <<
       fPiece <<
       std::endl <<
-    std::setw (fieldWidth) << "fOpus" << " : " <<
+    std::setw (fieldWidth) << "fOpus" << ": " <<
       fOpus <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fTitle" << " : " <<
+    std::setw (fieldWidth) << "fTitle" << ": " <<
       fTitle <<
       std::endl <<
-    std::setw (fieldWidth) << "fSubTitle" << " : " <<
+    std::setw (fieldWidth) << "fSubTitle" << ": " <<
       fSubTitle <<
       std::endl <<
-    std::setw (fieldWidth) << "fSubSubTitle" << " : " <<
+    std::setw (fieldWidth) << "fSubSubTitle" << ": " <<
       fSubSubTitle <<
       std::endl <<
-    std::setw (fieldWidth) << "fHeaderInstrument" << " : " <<
+    std::setw (fieldWidth) << "fHeaderInstrument" << ": " <<
       fHeaderInstrument <<
       std::endl <<
-    std::setw (fieldWidth) << "fHeaderMeter" << " : " <<
+    std::setw (fieldWidth) << "fHeaderMeter" << ": " <<
       fHeaderMeter <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fTagline" << " : " <<
+    std::setw (fieldWidth) << "fTagline" << ": " <<
       fTagline <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fCopyright" << " : " <<
+    std::setw (fieldWidth) << "fCopyright" << ": " <<
       fCopyright <<
       std::endl;
 
@@ -5786,10 +5786,10 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fAmbitusEngraver" << " : " <<
+    std::setw (fieldWidth) << "fAmbitusEngraver" << ": " <<
       fAmbitusEngraver <<
       std::endl <<
-    std::setw (fieldWidth) << "fCustosEngraver" << " : " <<
+    std::setw (fieldWidth) << "fCustosEngraver" << ": " <<
       fCustosEngraver <<
       std::endl;
 
@@ -5805,10 +5805,10 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fNoInitialTrebleClef" << " : " <<
+    std::setw (fieldWidth) << "fNoInitialTrebleClef" << ": " <<
       fNoInitialTrebleClef <<
       std::endl <<
-    std::setw (fieldWidth) << "fCommentClefChanges" << " : " <<
+    std::setw (fieldWidth) << "fCommentClefChanges" << ": " <<
       fCommentClefChanges <<
       std::endl;
 
@@ -5824,7 +5824,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fNoInitialCMajorKey" << " : " <<
+    std::setw (fieldWidth) << "fNoInitialCMajorKey" << ": " <<
       fNoInitialCMajorKey <<
       std::endl;
 
@@ -5840,10 +5840,10 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fNoInitialCommonTimeSignature" << " : " <<
+    std::setw (fieldWidth) << "fNoInitialCommonTimeSignature" << ": " <<
       fNoInitialCommonTimeSignature <<
       std::endl <<
-    std::setw (fieldWidth) << "fNumericalTimeSignature" << " : " <<
+    std::setw (fieldWidth) << "fNumericalTimeSignature" << ": " <<
       fNumericalTimeSignature <<
       std::endl;
 
@@ -5859,69 +5859,69 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fOctaveEntryVariable" << " : " <<
+    std::setw (fieldWidth) << "fOctaveEntryVariable" << ": " <<
       msrOctaveEntryKindAsString (
         fOctaveEntryVariable.getOctaveEntryKind ()) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fAllDurations" << " : " <<
+    std::setw (fieldWidth) << "fAllDurations" << ": " <<
       fAllDurations <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fNoAutoBeaming" << " : " <<
+    std::setw (fieldWidth) << "fNoAutoBeaming" << ": " <<
       fNoAutoBeaming <<
       std::endl <<
-    std::setw (fieldWidth) << "fNoBeams" << " : " <<
+    std::setw (fieldWidth) << "fNoBeams" << ": " <<
       fNoBeams <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fRomanStringNumbers" << " : " <<
+    std::setw (fieldWidth) << "fRomanStringNumbers" << ": " <<
       fRomanStringNumbers <<
       std::endl <<
-    std::setw (fieldWidth) << "fAvoidOpenStrings" << " : " <<
+    std::setw (fieldWidth) << "fAvoidOpenStrings" << ": " <<
       fAvoidOpenStrings <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fAccidentalStyleKind" << " : " <<
+    std::setw (fieldWidth) << "fAccidentalStyleKind" << ": " <<
       lpsrAccidentalStyleKindAsString (fAccidentalStyleKind) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fLyricsDurationsKind" << " : " <<
+    std::setw (fieldWidth) << "fLyricsDurationsKind" << ": " <<
       lpsrLyricsDurationsKindAsString (fLyricsDurationsKind) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fCompressFullBarRestsInLilypond" << " : " <<
+    std::setw (fieldWidth) << "fCompressFullBarRestsInLilypond" << ": " <<
       fCompressFullBarRestsInLilypond <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fMergeStaffCommonRests" << " : " <<
+    std::setw (fieldWidth) << "fMergeStaffCommonRests" << ": " <<
       fMergeStaffCommonRests <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fMultipleFullBarRestsExpandLimit" << " : " <<
+    std::setw (fieldWidth) << "fMultipleFullBarRestsExpandLimit" << ": " <<
       fMultipleFullBarRestsExpandLimit <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fInputLineNumbers" << " : " <<
+    std::setw (fieldWidth) << "fInputLineNumbers" << ": " <<
       fInputLineNumbers <<
       std::endl <<
-    std::setw (fieldWidth) << "fNotesComments" << " : " <<
+    std::setw (fieldWidth) << "fNotesComments" << ": " <<
       fNotesComments <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fOriginalMeasureNumbers" << " : " <<
+    std::setw (fieldWidth) << "fOriginalMeasureNumbers" << ": " <<
       fOriginalMeasureNumbers <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fGenerateMeasurePositions" << " : " <<
+    std::setw (fieldWidth) << "fGenerateMeasurePositions" << ": " <<
       fGenerateMeasurePositions <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fGenerateMeasureMoments" << " : " <<
+    std::setw (fieldWidth) << "fGenerateMeasureMoments" << ": " <<
       fGenerateMeasureMoments <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fNonPrintNotesHeadColorRGB" << " : " <<
+    std::setw (fieldWidth) << "fNonPrintNotesHeadColorRGB" << ": " <<
       fNonPrintNotesHeadColorRGB.asString () <<
       std::endl;
 
@@ -5937,15 +5937,15 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fShowAllBarNumbers" << " : " <<
+    std::setw (fieldWidth) << "fShowAllBarNumbers" << ": " <<
     fShowAllBarNumbers <<
     std::endl <<
-    std::setw (fieldWidth) << "fBoxAroundAllBarNumbers" << " : " <<
+    std::setw (fieldWidth) << "fBoxAroundAllBarNumbers" << ": " <<
     fBoxAroundAllBarNumbers <<
     std::endl;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fResetMeasureElementMeasureNumberMap" << " : ";
+    std::setw (fieldWidth) << "fResetMeasureElementMeasureNumberMap" << ": ";
   if (! fResetMeasureElementMeasureNumberMap.size ()) {
     gLogStream << "[EMPTY]";
   }
@@ -5963,7 +5963,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   gLogStream << std::endl;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fBoxAroundBarNumberSet" << " : ";
+    std::setw (fieldWidth) << "fBoxAroundBarNumberSet" << ": ";
   if (! fBoxAroundBarNumberSet.size ()) {
     gLogStream << "[EMPTY]";
   }
@@ -5992,15 +5992,15 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fIgnoreLpsrLineBreaks" << " : " <<
+    std::setw (fieldWidth) << "fIgnoreLpsrLineBreaks" << ": " <<
       fIgnoreLpsrLineBreaks <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fBreakLinesAtIncompleteRightMeasures" << " : " <<
+    std::setw (fieldWidth) << "fBreakLinesAtIncompleteRightMeasures" << ": " <<
       fBreakLinesAtIncompleteRightMeasures <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fSeparatorLineEveryNMeasures" << " : " <<
+    std::setw (fieldWidth) << "fSeparatorLineEveryNMeasures" << ": " <<
       fSeparatorLineEveryNMeasures <<
       std::endl;
 
@@ -6016,7 +6016,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fIgnoreLpsrPageBreaks" << " : " <<
+    std::setw (fieldWidth) << "fIgnoreLpsrPageBreaks" << ": " <<
     fIgnoreLpsrPageBreaks <<
     std::endl;
 
@@ -6032,10 +6032,10 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fModernTab" << " : " <<
+    std::setw (fieldWidth) << "fModernTab" << ": " <<
     fModernTab <<
     std::endl <<
-    std::setw (fieldWidth) << "fTabFullNotation" << " : " <<
+    std::setw (fieldWidth) << "fTabFullNotation" << ": " <<
     fTabFullNotation <<
     std::endl;
 
@@ -6052,7 +6052,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fConnectArpeggios" << " : " <<
+    std::setw (fieldWidth) << "fConnectArpeggios" << ": " <<
     fConnectArpeggios <<
     std::endl;
 
@@ -6069,7 +6069,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fIndentTuplets" << " : " <<
+    std::setw (fieldWidth) << "fIndentTuplets" << ": " <<
     fIndentTuplets <<
     std::endl;
 
@@ -6086,13 +6086,13 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fKeepRepeatBarLines" << " : " <<
+    std::setw (fieldWidth) << "fKeepRepeatBarLines" << ": " <<
     fKeepRepeatBarLines <<
     std::endl <<
-    std::setw (fieldWidth) << "fRepeatBrackets" << " : " <<
+    std::setw (fieldWidth) << "fRepeatBrackets" << ": " <<
     fRepeatBrackets <<
     std::endl <<
-    std::setw (fieldWidth) << "fIgnoreRepeatNumbers" << " : " <<
+    std::setw (fieldWidth) << "fIgnoreRepeatNumbers" << ": " <<
     fIgnoreRepeatNumbers <<
     std::endl;
 
@@ -6109,7 +6109,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fDelayedOrnamentsFraction" << " : " <<
+    std::setw (fieldWidth) << "fDelayedOrnamentsFraction" << ": " <<
     fDelayedOrnamentsFraction <<
     std::endl;
 
@@ -6126,10 +6126,10 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fJazzChordsDisplay" << " : " <<
+    std::setw (fieldWidth) << "fJazzChordsDisplay" << ": " <<
     fJazzChordsDisplay <<
     std::endl <<
-    std::setw (fieldWidth) << "fJazzChordsDisplayLilypondCode" << " : " <<
+    std::setw (fieldWidth) << "fJazzChordsDisplayLilypondCode" << ": " <<
     fJazzChordsDisplayLilypondCode <<
     std::endl;
 
@@ -6146,7 +6146,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fJazzFonts" << " : " <<
+    std::setw (fieldWidth) << "fJazzFonts" << ": " <<
     fJazzFonts <<
     std::endl;
 
@@ -6163,59 +6163,59 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fXml2lyInfos" << " : " <<
+    std::setw (fieldWidth) << "fXml2lyInfos" << ": " <<
       fXml2lyInfos <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fLilypondComments" << " : " <<
+    std::setw (fieldWidth) << "fLilypondComments" << ": " <<
       fLilypondComments <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fGlobal" << " : " <<
+    std::setw (fieldWidth) << "fGlobal" << ": " <<
       fGlobal <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fDisplayMusic" << " : " <<
+    std::setw (fieldWidth) << "fDisplayMusic" << ": " <<
       fDisplayMusic <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fNoLilypondCode" << " : " <<
+    std::setw (fieldWidth) << "fNoLilypondCode" << ": " <<
       fNoLilypondCode <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fNoLilypondLyrics" << " : " <<
+    std::setw (fieldWidth) << "fNoLilypondLyrics" << ": " <<
       fNoLilypondLyrics <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fLilypondRunDate" << " : " <<
+    std::setw (fieldWidth) << "fLilypondRunDate" << ": " <<
       fLilypondRunDate <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fDraftMode" << " : " <<
+    std::setw (fieldWidth) << "fDraftMode" << ": " <<
       fDraftMode <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fPointAndClickOff" << " : " <<
+    std::setw (fieldWidth) << "fPointAndClickOff" << ": " <<
       fPointAndClickOff <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fGenerateStemsDirections" << " : " <<
+    std::setw (fieldWidth) << "fGenerateStemsDirections" << ": " <<
       fGenerateStemsDirections <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fWhiteNoteHeads" << " : " <<
+    std::setw (fieldWidth) << "fWhiteNoteHeads" << ": " <<
       fWhiteNoteHeads <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fGenerateCommentedOutVariables" << " : " <<
+    std::setw (fieldWidth) << "fGenerateCommentedOutVariables" << ": " <<
       fGenerateCommentedOutVariables <<
       std::endl <<
 
-//     std::setw (fieldWidth) << "fGenerateMsrVisitingInformation" << " : " <<
+//     std::setw (fieldWidth) << "fGenerateMsrVisitingInformation" << ": " <<
 //       fGenerateMsrVisitingInformation <<
 //       std::endl <<
 
-    std::setw (fieldWidth) << "fGenerateLpsrVisitingInformation" << " : " <<
+    std::setw (fieldWidth) << "fGenerateLpsrVisitingInformation" << ": " <<
       fGenerateLpsrVisitingInformation <<
       std::endl;
 
@@ -6232,7 +6232,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fJianpu" << " : " <<
+    std::setw (fieldWidth) << "fJianpu" << ": " <<
       fJianpu <<
       std::endl;
 
@@ -6248,11 +6248,11 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fMidiTempo" << " : " <<
+    std::setw (fieldWidth) << "fMidiTempo" << ": " <<
       fMidiTempo.asString () <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fNoMidi" << " : " <<
+    std::setw (fieldWidth) << "fNoMidi" << ": " <<
       fNoMidi <<
       std::endl;
 
@@ -6455,7 +6455,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fStringSetVariable" << " : " <<
+    "fStringSetVariable" << ": " <<
     std::endl;
 
   if (! fStringSetVariable.size ()) {
@@ -6485,7 +6485,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::printAtomWithVariableOptionsValues
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fStringSetVariable.size ()) {
     os <<

@@ -290,7 +290,7 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
             "octave indication \"" <<
             octaveIndication <<
             "\" should contain only commas and quotes" <<
-            ", line = " << inputLineNumber;
+            ", line: " << inputLineNumber;
 
           msrInternalError (
             gGlobalServiceRunData->getInputSourceName (),
@@ -709,11 +709,11 @@ void msrSemiTonesPitchAndOctave::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fSemiTonesPitchKind" << " : " <<
+    "fSemiTonesPitchKind" << ": " <<
       msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fOctaveKind: " << " : " <<
+    "fOctaveKind: " << ": " <<
     msrOctaveKindAsString (fOctaveKind) <<
     std::endl;
 
@@ -807,11 +807,11 @@ void msrSemiTonesPitchAndAbsoluteOctave::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "semiTonesPitchKind" << " : " <<
+    "semiTonesPitchKind" << ": " <<
       msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "absoluteOctave" << " : " << fAbsoluteOctave <<
+    "absoluteOctave" << ": " << fAbsoluteOctave <<
     std::endl;
 
   --gIndenter;
@@ -903,11 +903,11 @@ void msrSemiTonesPitchAndRelativeOctave::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "semiTonesPitchKind" << " : " <<
+    "semiTonesPitchKind" << ": " <<
       msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "relativeOctave" << " : " << fRelativeOctave <<
+    "relativeOctave" << ": " << fRelativeOctave <<
     std::endl;
 
   --gIndenter;
@@ -1048,7 +1048,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
           msrQuarterTonesPitchKindAsString (
             quarterTonesPitchKind) <<
         "\", " <<
-        "--> octaveKind = " << msrOctaveKindAsString (octaveKind) <<
+        "--> octaveKind: " << msrOctaveKindAsString (octaveKind) <<
         std::endl;
     }
 #endif
@@ -1184,11 +1184,11 @@ void msrQuarterTonesPitchAndOctave::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "quarterTonesPitchKind" << " : " <<
+    "quarterTonesPitchKind" << ": " <<
       msrQuarterTonesPitchKindAsString (fQuarterTonesPitchKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "octave: " << " : " <<
+    "octave: " << ": " <<
     msrOctaveKindAsString (fOctaveKind) <<
     std::endl;
 

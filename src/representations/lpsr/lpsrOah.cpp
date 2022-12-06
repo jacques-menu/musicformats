@@ -241,11 +241,11 @@ void lpsrPitchesLanguageAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMsrQuarterTonesPitchesLanguageKindVariable" << " : " <<
+    "fMsrQuarterTonesPitchesLanguageKindVariable" << ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable) <<
     std::endl;
@@ -260,7 +260,7 @@ void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
   if (fSetByAnOption) {
@@ -479,10 +479,10 @@ void lpsrChordsLanguageAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fLpsrChordsLanguageKindVariable" << " : " <<
+    "fLpsrChordsLanguageKindVariable" << ": " <<
     lpsrChordsLanguageKindAsString (
       fLpsrChordsLanguageKindVariable) <<
     std::endl;
@@ -497,7 +497,7 @@ void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     lpsrChordsLanguageKindAsString (
       fLpsrChordsLanguageKindVariable);
   if (fSetByAnOption) {
@@ -798,10 +798,10 @@ void lpsrStaffInstrumentNameAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fStringToStringMapVariable" << " : " <<
+    "fStringToStringMapVariable" << ": " <<
     std::endl;
 
   if (! fStringToStringMapVariable.size ()) {
@@ -830,7 +830,7 @@ void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
 
   if (! fStringToStringMapVariable.size ()) {
     os <<
@@ -1077,7 +1077,7 @@ void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : ";
+    ": ";
   if (fSemiTonesPitchAndOctaveVariable) {
     os << std::endl;
     ++gIndenter;
@@ -2082,23 +2082,23 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fTraceLpsr" << " : " <<
+    std::setw (fieldWidth) << "fTraceLpsr" << ": " <<
     fTraceLpsr <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTraceLilypondVersion" << " : " <<
+    std::setw (fieldWidth) << "fTraceLilypondVersion" << ": " <<
     fTraceLilypondVersion <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTraceLpsrVisitors" << " : " <<
+    std::setw (fieldWidth) << "fTraceLpsrVisitors" << ": " <<
     fTraceLpsrVisitors <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTraceLpsrBlocks" << " : " <<
+    std::setw (fieldWidth) << "fTraceLpsrBlocks" << ": " <<
     fTraceLpsrBlocks <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTraceSchemeFunctions" << " : " <<
+    std::setw (fieldWidth) << "fTraceSchemeFunctions" << ": " <<
     fTraceSchemeFunctions <<
     std::endl;
 
@@ -2114,10 +2114,10 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fDisplayLpsrShort" << " : " <<
+    std::setw (fieldWidth) << "fDisplayLpsrShort" << ": " <<
     fDisplayLpsrShort <<
     std::endl <<
-    std::setw (fieldWidth) << "fDisplayLpsrFull" << " : " <<
+    std::setw (fieldWidth) << "fDisplayLpsrFull" << ": " <<
     fDisplayLpsrFull <<
     std::endl;
 
@@ -2133,66 +2133,66 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fAllPaperVariables" << " : " <<
+    std::setw (fieldWidth) << "fAllPaperVariables" << ": " <<
     fAllPaperVariables <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fLengthUnitKind" << " : " <<
+    std::setw (fieldWidth) << "fLengthUnitKind" << ": " <<
     msrLengthUnitKindAsString (fLengthUnitKind) <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fPaperHeight" << " : " <<
+    std::setw (fieldWidth) << "fPaperHeight" << ": " <<
     fPaperHeight.asString () <<
     std::endl <<
-    std::setw (fieldWidth) << "fPaperWidth" << " : " <<
+    std::setw (fieldWidth) << "fPaperWidth" << ": " <<
     fPaperWidth.asString () <<
     std::endl <<
 
-    std::setw (fieldWidth) << "paperfPaperLeftMarginLeftMargin" << " : " <<
+    std::setw (fieldWidth) << "paperfPaperLeftMarginLeftMargin" << ": " <<
     fPaperLeftMargin.asString () <<
     std::endl <<
-    std::setw (fieldWidth) << "fPaperRightMargin" << " : " <<
+    std::setw (fieldWidth) << "fPaperRightMargin" << ": " <<
     fPaperRightMargin.asString () <<
     std::endl <<
-    std::setw (fieldWidth) << "fPaperTopMargin" << " : " <<
+    std::setw (fieldWidth) << "fPaperTopMargin" << ": " <<
     fPaperTopMargin.asString () <<
     std::endl <<
-    std::setw (fieldWidth) << "fPaperBottomMargin" << " : " <<
+    std::setw (fieldWidth) << "fPaperBottomMargin" << ": " <<
     fPaperBottomMargin.asString () <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fPaperIndent" << " : " <<
+    std::setw (fieldWidth) << "fPaperIndent" << ": " <<
     fPaperIndent.asString () <<
     std::endl <<
-    std::setw (fieldWidth) << "fPaperShortIndent" << " : " <<
+    std::setw (fieldWidth) << "fPaperShortIndent" << ": " <<
     fPaperShortIndent.asString () <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fMarkupSystemSpacingPadding" << " : " <<
+    std::setw (fieldWidth) << "fMarkupSystemSpacingPadding" << ": " <<
     fMarkupSystemSpacingPadding.asString () <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fRaggedBottom" << " : " <<
+    std::setw (fieldWidth) << "fRaggedBottom" << ": " <<
     fRaggedBottom <<
     std::endl <<
-    std::setw (fieldWidth) << "fRaggedLast" << " : " <<
+    std::setw (fieldWidth) << "fRaggedLast" << ": " <<
     fRaggedLast <<
     std::endl <<
-    std::setw (fieldWidth) << "fRaggedLastBottom" << " : " <<
+    std::setw (fieldWidth) << "fRaggedLastBottom" << ": " <<
     fRaggedLastBottom <<
     std::endl <<
-    std::setw (fieldWidth) << "fRaggedRight" << " : " <<
+    std::setw (fieldWidth) << "fRaggedRight" << ": " <<
     fRaggedRight <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTagline" << " : " <<
+    std::setw (fieldWidth) << "fTagline" << ": " <<
     fTagline <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fPageCount" << " : " <<
+    std::setw (fieldWidth) << "fPageCount" << ": " <<
     fPageCount <<
     std::endl <<
-    std::setw (fieldWidth) << "fSystemCount" << " : " <<
+    std::setw (fieldWidth) << "fSystemCount" << ": " <<
     fSystemCount <<
     std::endl;
 
@@ -2241,7 +2241,7 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fConvertMusicXMLTemposToMsrRehearsalMarks" << " : " <<
+    std::setw (fieldWidth) << "fConvertMusicXMLTemposToMsrRehearsalMarks" << ": " <<
     fConvertMusicXMLTemposToMsrRehearsalMarks <<
     std::endl << std::endl;
 
@@ -2257,14 +2257,14 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fConvertLpsrWordsToTempo" << " : " <<
+    std::setw (fieldWidth) << "fConvertLpsrWordsToTempo" << ": " <<
     fConvertLpsrWordsToTempo <<
     std::endl <<
-    std::setw (fieldWidth) << "fAddLpsrWordsFromTheLyrics" << " : " <<
+    std::setw (fieldWidth) << "fAddLpsrWordsFromTheLyrics" << ": " <<
     fAddLpsrWordsFromTheLyrics <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fConvertLpsrWordsToRehearsalMarks" << " : " <<
+    std::setw (fieldWidth) << "fConvertLpsrWordsToRehearsalMarks" << ": " <<
     fConvertLpsrWordsToRehearsalMarks <<
     std::endl;
 
@@ -2280,12 +2280,12 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fLpsrQuarterTonesPitchesLanguageKind" << " : " <<
+    std::setw (fieldWidth) << "fLpsrQuarterTonesPitchesLanguageKind" << ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fLpsrQuarterTonesPitchesLanguageKind) <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fLpsrChordsLanguageKind" << " : " <<
+    std::setw (fieldWidth) << "fLpsrChordsLanguageKind" << ": " <<
     lpsrChordsLanguageKindAsString (
       fLpsrChordsLanguageKind) <<
     std::endl;
@@ -2302,7 +2302,7 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fTranspositionSemiTonesPitchAndOctave" << " : ";
+    std::setw (fieldWidth) << "fTranspositionSemiTonesPitchAndOctave" << ": ";
 
     if (fTranspositionSemiTonesPitchAndOctave) {
       gLogStream <<

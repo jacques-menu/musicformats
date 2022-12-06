@@ -88,10 +88,10 @@ void msrTupletFactor::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletActualNotes" << " : " << fTupletActualNotes <<
+    "fTupletActualNotes" << ": " << fTupletActualNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletNormalNotes" << " : " << fTupletNormalNotes <<
+    "fTupletNormalNotes" << ": " << fTupletNormalNotes <<
     std::endl;
 
   --gIndenter;

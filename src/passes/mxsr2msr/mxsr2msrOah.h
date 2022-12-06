@@ -218,11 +218,14 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  getIgnoreRedundantTimes () const
                               { return fIgnoreRedundantTimes; }
 
-    const S_oahBooleanAtom&      getIgnoreRedundantClefsAtom () const
+    const S_oahBooleanAtom&
+                          getIgnoreRedundantClefsAtom () const
                               { return fIgnoreRedundantClefsAtom; }
-    const S_oahBooleanAtom&      getIgnoreRedundantKeysAtom () const
+    const S_oahBooleanAtom&
+                          getIgnoreRedundantKeysAtom () const
                               { return fIgnoreRedundantKeysAtom; }
-    const S_oahBooleanAtom&      getIgnoreRedundantTimesAtom () const
+    const S_oahBooleanAtom&
+                          getIgnoreRedundantTimesAtom () const
                               { return fIgnoreRedundantTimesAtom; }
 
     // page and line breaks

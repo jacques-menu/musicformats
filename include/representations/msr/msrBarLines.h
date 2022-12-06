@@ -132,9 +132,6 @@ std::string msrBarLineRepeatWingedKindAsString (
 std::ostream& operator << (std::ostream& os, const msrBarLineRepeatWingedKind& elt);
 
 //______________________________________________________________________________
-class EXP msrBarLine;
-typedef   SMARTP<msrBarLine> S_msrBarLine;
-
 class EXP msrBarLine : public msrMeasureElement
 {
   public:
@@ -142,8 +139,7 @@ class EXP msrBarLine : public msrMeasureElement
     // creation from MusicXML
     // ------------------------------------------------------
 
-//     static SMARTP<msrBarLine> create (
-    static S_msrBarLine create (
+    static SMARTP<msrBarLine> create (
                             int                           inputLineNumber,
                             const S_msrMeasure&           upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,

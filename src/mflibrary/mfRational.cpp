@@ -204,8 +204,8 @@ Rational Rational::operator * (int num) const
 Rational Rational::operator / (int num) const
 {
   Rational result (
-	    fNumerator,
-	    fDenominator * num);
+      fNumerator,
+      fDenominator * num);
 
   result.rationalise ();
 
@@ -215,27 +215,27 @@ Rational Rational::operator / (int num) const
 Rational& Rational::operator += (const Rational &pos)
 {
   if (fDenominator == pos.fDenominator) {
-		fNumerator += pos.fNumerator;
-	}
-	else {
-		fNumerator = fNumerator * pos.fDenominator + pos.fNumerator * fDenominator;
-		fDenominator *= pos.fDenominator;
-	}
+    fNumerator += pos.fNumerator;
+  }
+  else {
+    fNumerator = fNumerator * pos.fDenominator + pos.fNumerator * fDenominator;
+    fDenominator *= pos.fDenominator;
+  }
 
   return (*this);
 }
 
 Rational& Rational::operator -= (const Rational &pos)
 {
-	if (fDenominator == pos.fDenominator) {
-		fNumerator -= pos.fNumerator;
-	}
-	else {
-		fNumerator = fNumerator * pos.fDenominator - pos.fNumerator * fDenominator;
-		fDenominator *= pos.fDenominator;
+  if (fDenominator == pos.fDenominator) {
+    fNumerator -= pos.fNumerator;
+  }
+  else {
+    fNumerator = fNumerator * pos.fDenominator - pos.fNumerator * fDenominator;
+    fDenominator *= pos.fDenominator;
   }
 
-	return (*this);
+  return (*this);
 }
 
 Rational& Rational::operator *= (const Rational &pos)
@@ -278,8 +278,8 @@ Bool Rational::operator < (const Rational &pos) const
 Bool Rational::operator == (const Rational &pos) const
 {
   // a/b < c/d if and only if a * d < b * c.
-	return
-	  ((fNumerator * pos.fDenominator) == (fDenominator * pos.fNumerator));
+  return
+    ((fNumerator * pos.fDenominator) == (fDenominator * pos.fNumerator));
 }
 
 Bool Rational::operator > (double num) const

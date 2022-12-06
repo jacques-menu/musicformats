@@ -1552,7 +1552,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 
         s <<
           "cannot convert msrDiatonicPitchKind::kDiatonicPitch_NO_ to a quarter tones pitch"
-          ", line = " << inputLineNumber;
+          ", line: " << inputLineNumber;
 
         msrInternalError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -1604,7 +1604,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 
             s <<
               "'A' alteration has not been set"
-              ", line = " << inputLineNumber;
+              ", line: " << inputLineNumber;
 
             msrInternalError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -1657,7 +1657,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 
             s <<
               "'B' alteration has not been set"
-              ", line = " << inputLineNumber;
+              ", line: " << inputLineNumber;
 
             msrInternalError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -1712,7 +1712,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 
             s <<
               "'C' alteration has not been set"
-              ", line = " << inputLineNumber;
+              ", line: " << inputLineNumber;
 
             msrInternalError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -1765,7 +1765,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 
             s <<
               "'D' alteration has not been set"
-              ", line = " << inputLineNumber;
+              ", line: " << inputLineNumber;
 
             msrInternalError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -1818,7 +1818,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 
             s <<
               "'E' alteration has not been set"
-              ", line = " << inputLineNumber;
+              ", line: " << inputLineNumber;
 
             msrInternalError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -1871,7 +1871,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 
             s <<
               "'F' alteration has not been set"
-              ", line = " << inputLineNumber;
+              ", line: " << inputLineNumber;
 
             msrInternalError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -1924,7 +1924,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromDiatonicPitchAndAlteration (
 
             s <<
               "'G' alteration has not been set"
-              ", line = " << inputLineNumber;
+              ", line: " << inputLineNumber;
 
             msrInternalError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -2051,7 +2051,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
 
         s <<
           "cannot get the diatonic pitch of a rest"
-          ", line = " << inputLineNumber;
+          ", line: " << inputLineNumber;
 
         msrInternalError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -2066,7 +2066,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
 
         s <<
           "cannot get the diatonic pitch of a skip"
-          ", line = " << inputLineNumber;
+          ", line: " << inputLineNumber;
 
         msrInternalError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -2084,7 +2084,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
 
         s <<
           "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_NO_"
-          ", line = " << inputLineNumber;
+          ", line: " << inputLineNumber;
 
         msrInternalError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -2221,7 +2221,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
 
         s <<
           "cannot get the alteration kind of a rest"
-          ", line = " << inputLineNumber;
+          ", line: " << inputLineNumber;
 
         msrInternalError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -2236,7 +2236,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
 
         s <<
           "cannot get the alteration kind of a skip"
-          ", line = " << inputLineNumber;
+          ", line: " << inputLineNumber;
 
         msrInternalError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -2254,7 +2254,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
 
         s <<
           "cannot get the diatonic pitch of a msrQuarterTonesPitchKind::kQTP_NO_"
-          ", line = " << inputLineNumber;
+          ", line: " << inputLineNumber;
 
         msrInternalError (
           gGlobalServiceRunData->getInputSourceName (),

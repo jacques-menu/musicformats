@@ -1242,7 +1242,7 @@ void msrBeatRepeat::print (std::ostream& os) const
 
     os <<
       std::setw (fieldWidth) <<
-      "fCurrentBeatRepeatBuildPhaseKind" << " : " <<
+      "fCurrentBeatRepeatBuildPhaseKind" << ": " <<
       msrBeatRepeatBuildPhaseKindAsString (
         fCurrentBeatRepeatBuildPhaseKind) <<
       std::endl;

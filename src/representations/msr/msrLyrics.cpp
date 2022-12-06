@@ -242,7 +242,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
     "containingPart is null");
 
   S_msrSyllable
-    syllableDeepClone =
+    deepClone =
       msrSyllable::create (
         fInputLineNumber,
         gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
@@ -259,7 +259,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
     i!=fSyllableTextsList.end ();
     ++i
   ) {
-    syllableDeepClone->
+    deepClone->
       appendLyricTextToSyllable ((*i));
   } // for
 
@@ -267,10 +267,10 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   // nor 'newbornClone->fSyllableUpLinkToNote',
   // this will be done by the caller
 
-  syllableDeepClone->fSyllableUpLinkToNote =
+  deepClone->fSyllableUpLinkToNote =
     fSyllableUpLinkToNote; // TEMP
 
-  return syllableDeepClone;
+  return deepClone;
 }
 
 void msrSyllable::setSyllableUpLinkToMeasure (
@@ -775,7 +775,7 @@ void msrSyllable::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "syllableTextsList" << " : ";
+    "syllableTextsList" << ": ";
 
   writeTextsList (
     fSyllableTextsList,
@@ -784,11 +784,11 @@ void msrSyllable::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "syllableKind" << " : " <<
+    "syllableKind" << ": " <<
     msrSyllableKindAsString (fSyllableKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "syllableExtendKind" << " : " <<
+    "syllableExtendKind" << ": " <<
     msrSyllableExtendKindAsString (
       fSyllableExtendKind) <<
     std::endl <<
@@ -800,26 +800,26 @@ void msrSyllable::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSyllableWholeNotes" << " : " <<
+    "fSyllableWholeNotes" << ": " <<
     fSyllableWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSyllableTupletFactor" << " : " <<
+    "fSyllableTupletFactor" << ": " <<
     fSyllableTupletFactor.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSyllableNextMeasurePuristNumber" << " : " <<
+    "fSyllableNextMeasurePuristNumber" << ": " <<
     fSyllableNextMeasurePuristNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "syllableUpLinkToNote" << " : " <<
+    "syllableUpLinkToNote" << ": " <<
     syllableUpLinkToNoteAsString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "syllableUpLinkToStanza" << " : " <<
+    "syllableUpLinkToStanza" << ": " <<
     fSyllableUpLinkToStanza->getStanzaName () <<
     std::endl;
 
@@ -1103,7 +1103,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
     gLogStream <<
       "Appending 'Rest' syllable" <<
       " to stanza " << getStanzaName () <<
-      ", whole notes = " << wholeNotes <<
+      ", whole notes: " << wholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -1142,7 +1142,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
     gLogStream <<
       "Appending 'Skip' syllable " <<
       " to stanza " << getStanzaName () <<
-      ", whole notes = " << wholeNotes <<
+      ", whole notes: " << wholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -1224,7 +1224,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
       msrSyllableKindAsString (syllableKind) <<
       "' syllable" <<
       " to stanza " << getStanzaName () <<
-      ", whole notes = " << wholeNotes <<
+      ", whole notes: " << wholeNotes <<
       ", line " << inputLineNumber <<
       std::endl;
   }

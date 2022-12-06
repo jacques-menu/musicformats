@@ -696,10 +696,10 @@ void msr2brailleInsiderOahGroup::printXml2brailleInsiderOahGroupValues (int fiel
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass2a" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
     fQuitAfterPass2a <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2b" << " : " <<
+    std::setw (fieldWidth) << "fQuitAfterPass2b" << ": " <<
     fQuitAfterPass2b <<
     std::endl;
 

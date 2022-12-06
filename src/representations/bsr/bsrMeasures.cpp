@@ -345,22 +345,22 @@ void bsrMeasure::print (std::ostream& os) const
   // print the measure numbers
   os << std::left <<
     std::setw (fieldWidth) <<
-    "printMeasureNumber" << " : " << fPrintMeasureNumber <<
+    "printMeasureNumber" << ": " << fPrintMeasureNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "brailleMeasureNumber" << " : " << fBrailleMeasureNumber <<
+    "brailleMeasureNumber" << ": " << fBrailleMeasureNumber <<
     std::endl;
 
   // print the number of cells
   os << std::left <<
     std::setw (fieldWidth) <<
-    "cellsNumber" << " : " << fetchCellsNumber () <<
+    "cellsNumber" << ": " << fetchCellsNumber () <<
     std::endl;
 
   // print spaces needs
   os << std::left <<
     std::setw (fieldWidth) <<
-    "spacesBefore" << " : " <<
+    "spacesBefore" << ": " <<
     fSpacesBefore <<
     std::endl;
 
@@ -394,7 +394,7 @@ void bsrMeasure::print (std::ostream& os) const
     }
     else {
       os <<
-        " : " << "[EMPTY]" <<
+        ": " << "[EMPTY]" <<
       std::endl;
     }
   }

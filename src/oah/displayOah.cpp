@@ -236,32 +236,32 @@ void displayOahGroup::printAtomWithVariableOptionsValues (
   int           valueFieldWidth) const
 {
   os << std::left <<
-    std::setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << ": " <<
     fDisplayOptionsAndArguments <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayEarlyOptionsValues" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayEarlyOptionsValues" << ": " <<
     fDisplayEarlyOptionsValues <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayOptionsValues" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValues" << ": " <<
     fDisplayOptionsValues <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << ": " <<
     fDisplayOptionsValuesAll <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayOahHandler" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandler" << ": " <<
     fDisplayOahHandler <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayOahHandlerSummary" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandlerSummary" << ": " <<
     fDisplayOahHandlerSummary <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayOahHandlerEssentials" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandlerEssentials" << ": " <<
     fDisplayOahHandlerEssentials <<
     std::endl <<
 
     // CPU usage
-    std::setw (valueFieldWidth) << "fDisplayCPUusage" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayCPUusage" << ": " <<
     fDisplayCPUusage <<
     std::endl;
 
@@ -287,32 +287,32 @@ void displayOahGroup::printDisplayOptionsValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsAndArguments" << ": " <<
     fDisplayOptionsAndArguments <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayEarlyOptionsValues" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayEarlyOptionsValues" << ": " <<
     fDisplayEarlyOptionsValues <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayOptionsValues" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValues" << ": " <<
     fDisplayOptionsValues <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << ": " <<
     fDisplayOptionsValuesAll <<
     std::endl <<
 
-    std::setw (valueFieldWidth) << "fDisplayOahHandler" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandler" << ": " <<
     fDisplayOahHandler <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayOahHandlerSummary" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandlerSummary" << ": " <<
     fDisplayOahHandlerSummary <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayOahHandlerEssentials" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayOahHandlerEssentials" << ": " <<
     fDisplayOahHandlerEssentials <<
     std::endl <<
 
     // CPU usage
-    std::setw (valueFieldWidth) << "fDisplayCPUusage" << " : " <<
+    std::setw (valueFieldWidth) << "fDisplayCPUusage" << ": " <<
     fDisplayCPUusage <<
     std::endl;
 

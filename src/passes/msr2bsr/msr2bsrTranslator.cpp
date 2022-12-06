@@ -2748,9 +2748,9 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
     gLogStream <<
       "--> Start visiting msrHarmony '" <<
       elt->asString () <<
-      ", fOnGoingNote = " << fOnGoingNote <<
-      ", fOnGoingChord = " << fOnGoingChord <<
-      ", fOnGoingHarmoniesVoice = " << fOnGoingHarmoniesVoice <<
+      ", fOnGoingNote: " << fOnGoingNote <<
+      ", fOnGoingChord: " << fOnGoingChord <<
+      ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }
@@ -2795,9 +2795,9 @@ void msr2bsrTranslator::visitStart (S_msrHarmonyDegree& elt)
     gLogStream <<
       "--> Start visiting S_msrHarmonyDegree '" <<
       elt->asString () <<
-      ", fOnGoingNote = " << fOnGoingNote <<
-      ", fOnGoingChord = " << fOnGoingChord <<
-      ", fOnGoingHarmoniesVoice = " << fOnGoingHarmoniesVoice <<
+      ", fOnGoingNote: " << fOnGoingNote <<
+      ", fOnGoingChord: " << fOnGoingChord <<
+      ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       "', line " << elt->getInputLineNumber () <<
       std::endl;
   }
@@ -3033,7 +3033,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       "' in voice \"" << voice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl <<
-      "measureWholeNotesDuration = " << measureWholeNotesDuration <<
+      "measureWholeNotesDuration: " << measureWholeNotesDuration <<
       std::endl;
   }
 #endif
@@ -5234,8 +5234,8 @@ void msr2bsrTranslator::visitStart (S_msrBeam& elt)
     gLogStream <<
       "--> Start visiting msrBeam" <<
       ", line " << elt->getInputLineNumber () <<
-// JMI      ", fOnGoingNote = " << fOnGoingNote <<
-// JMI      ", fOnGoingChord = " << fOnGoingChord <<
+// JMI      ", fOnGoingNote: " << fOnGoingNote <<
+// JMI      ", fOnGoingChord: " << fOnGoingChord <<
       std::endl;
   }
 #endif

@@ -208,7 +208,7 @@ void msrGeneratorsOahGroup::printMsrGeneratorsOahValues (
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "gnerationAPIKind" << " : " <<
+    std::setw (fieldWidth) << "gnerationAPIKind" << ": " <<
       msrGenerationAPIKindAsString (fGenerationAPIKind) <<
       std::endl;
 

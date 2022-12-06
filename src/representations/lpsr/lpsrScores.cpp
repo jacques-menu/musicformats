@@ -2901,127 +2901,127 @@ void lpsrScore::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fJianpuFileIncludeIsNeeded" << " : " <<
+    "fJianpuFileIncludeIsNeeded" << ": " <<
     fJianpuFileIncludeIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScmAndAccregSchemeModulesAreNeeded" << " : " <<
+    "fScmAndAccregSchemeModulesAreNeeded" << ": " <<
     fScmAndAccregSchemeModulesAreNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTongueSchemeFunctionIsNeeded" << " : " <<
+    "fTongueSchemeFunctionIsNeeded" << ": " <<
     fTongueSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCustomShortBarLineSchemeFunctionIsNeeded" << " : " <<
+    "fCustomShortBarLineSchemeFunctionIsNeeded" << ": " <<
     fCustomShortBarLineSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEditorialAccidentalSchemeFunctionIsNeeded" << " : " <<
+    "fEditorialAccidentalSchemeFunctionIsNeeded" << ": " <<
     fEditorialAccidentalSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fDynamicsSchemeFunctionIsNeeded" << " : " <<
+    "fDynamicsSchemeFunctionIsNeeded" << ": " <<
     fDynamicsSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTupletsCurvedBracketsSchemeFunctionIsNeeded" << " : " <<
+    "fTupletsCurvedBracketsSchemeFunctionIsNeeded" << ": " <<
     fTupletsCurvedBracketsSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fAfterSchemeFunctionIsNeeded" << " : " <<
+    "fAfterSchemeFunctionIsNeeded" << ": " <<
     fAfterSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTempoNotesRelationshipSchemeFunctionIsNeeded" << " : " <<
+    "fTempoNotesRelationshipSchemeFunctionIsNeeded" << ": " <<
     fTempoNotesRelationshipSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGlissandoWithTextSchemeFunctionsIsNeeded" << " : " <<
+    "fGlissandoWithTextSchemeFunctionsIsNeeded" << ": " <<
     fGlissandoWithTextSchemeFunctionsIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fOtherDynamicSchemeFunctionIsNeeded" << " : " <<
+    "fOtherDynamicSchemeFunctionIsNeeded" << ": " <<
     fOtherDynamicSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fAutoVoicesSchemeFunctionIsNeeded" << " : " <<
+    "fAutoVoicesSchemeFunctionIsNeeded" << ": " <<
     fAutoVoicesSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSchleiferSchemeFunctionIsNeeded" << " : " <<
+    "fSchleiferSchemeFunctionIsNeeded" << ": " <<
     fSchleiferSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fScoopSchemeFunctionIsNeeded" << " : " <<
+    "fScoopSchemeFunctionIsNeeded" << ": " <<
     fScoopSchemeFunctionIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fDampMarkupIsNeeded" << " : " <<
+    "fDampMarkupIsNeeded" << ": " <<
     fDampMarkupIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fDampAllMarkupIsNeeded" << " : " <<
+    "fDampAllMarkupIsNeeded" << ": " <<
     fDampAllMarkupIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fWhiteNoteHeadsIsNeeded" << " : " <<
+    "fWhiteNoteHeadsIsNeeded" << ": " <<
     fWhiteNoteHeadsIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fBoxAroundNextBarNumberIsNeeded" << " : " <<
+    "fBoxAroundNextBarNumberIsNeeded" << ": " <<
     fBoxAroundNextBarNumberIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fJazzChordsDisplayIsNeeded" << " : " <<
+    "fJazzChordsDisplayIsNeeded" << ": " <<
     fJazzChordsDisplayIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fColoredLedgerLinesIsNeeded" << " : " <<
+    "fColoredLedgerLinesIsNeeded" << ": " <<
     fColoredLedgerLinesIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fHiddenMeasureAndBarLineIsNeeded" << " : " <<
+    "fHiddenMeasureAndBarLineIsNeeded" << ": " <<
     fHiddenMeasureAndBarLineIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMergeStaffCommonRestsIsNeeded" << " : " <<
+    "fMergeStaffCommonRestsIsNeeded" << ": " <<
     fMergeStaffCommonRestsIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTextSpannerWithCenteredTextIsNeeded" << " : " <<
+    "fTextSpannerWithCenteredTextIsNeeded" << ": " <<
     fTextSpannerWithCenteredTextIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMergeMultipleFullBarRestsIsNeeded" << " : " <<
+    "fMergeMultipleFullBarRestsIsNeeded" << ": " <<
     fMergeMultipleFullBarRestsIsNeeded <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded" << " : " <<
+    "fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded" << ": " <<
     fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded <<
     std::endl << std::endl;
 

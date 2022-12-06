@@ -126,7 +126,7 @@ std::string msrMidiTempo::asString () const
   s <<
     "[MidiTempo" <<
     ", midiTempoDuration = \"" << fMidiTempoDuration << "\"" <<
-    ", midiTempoPerSecond = " << fMidiTempoPerSecond <<
+    ", midiTempoPerSecond: " << fMidiTempoPerSecond <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -143,10 +143,10 @@ void msrMidiTempo::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "midiTempoDuration" << " = " << fMidiTempoDuration <<
+    "midiTempoDuration" << ": " << fMidiTempoDuration <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "midiTempoPerSecond" << " = " << fMidiTempoPerSecond <<
+    "midiTempoPerSecond" << ": " << fMidiTempoPerSecond <<
     std::endl << std::endl;
 
   --gIndenter;

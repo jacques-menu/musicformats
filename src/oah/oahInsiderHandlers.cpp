@@ -28,7 +28,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-/* this class is purely vir.htual
+/* this class is purely virtual
 S_oahInsiderHandler oahInsiderHandler::create (
   const std::string& serviceName,
   const std::string& handlerHeader,

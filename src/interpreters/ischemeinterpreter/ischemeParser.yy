@@ -342,7 +342,7 @@ ChoiceDeclaration
 
         if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
-            "====> choice " << choiceName << " : " << "..." <<
+            "====> choice " << choiceName << ": " << "..." <<
             ", line " << drv.getScannerLocation () <<
             std::endl;
         }

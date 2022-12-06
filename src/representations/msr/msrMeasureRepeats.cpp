@@ -1214,7 +1214,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
 
     os <<
       std::setw (fieldWidth) <<
-      "fCurrentMeasureRepeatBuildPhaseKind" << " : " <<
+      "fCurrentMeasureRepeatBuildPhaseKind" << ": " <<
       measureRepeatBuildPhaseKindAsString (
         fCurrentMeasureRepeatBuildPhaseKind) <<
       std::endl;

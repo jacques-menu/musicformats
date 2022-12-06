@@ -567,7 +567,7 @@ void msrPageLayout::print (std::ostream& os) const
   // page size
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPageHeight" << " : ";
+    "fPageHeight" << ": ";
     if (fPageHeight) {
       os << fPageHeight;
     }
@@ -578,7 +578,7 @@ void msrPageLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPageWidth" << " : ";
+    "fPageWidth" << ": ";
     if (fPageWidth) {
       os << fPageWidth;
     }
@@ -590,7 +590,7 @@ void msrPageLayout::print (std::ostream& os) const
   // margins groups
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fOddMarginsGroup" << " : ";
+    "fOddMarginsGroup" << ": ";
     if (fOddMarginsGroup) {
       os << fOddMarginsGroup;
     }
@@ -600,7 +600,7 @@ void msrPageLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fEvenMarginsGroup" << " : ";
+    "fEvenMarginsGroup" << ": ";
     if (fEvenMarginsGroup) {
       os << fEvenMarginsGroup;
     }
@@ -610,7 +610,7 @@ void msrPageLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBothMarginsGroup" << " : ";
+    "fBothMarginsGroup" << ": ";
     if (fBothMarginsGroup) {
       os << fBothMarginsGroup;
     }
@@ -734,7 +734,7 @@ void msrSystemLayout::print (std::ostream& os) const
   // margins
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fLeftMargin" << " : ";
+    "fLeftMargin" << ": ";
     if (fLeftMargin) {
       os << fLeftMargin;
     }
@@ -745,7 +745,7 @@ void msrSystemLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fRightMargin" << " : ";
+    "fRightMargin" << ": ";
     if (fRightMargin) {
       os << fRightMargin;
     }
@@ -757,7 +757,7 @@ void msrSystemLayout::print (std::ostream& os) const
   // distances
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fSystemDistance" << " : ";
+    "fSystemDistance" << ": ";
     if (fSystemDistance) {
       os << fSystemDistance;
     }
@@ -768,7 +768,7 @@ void msrSystemLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTopSystemDistance" << " : ";
+    "fTopSystemDistance" << ": ";
     if (fTopSystemDistance) {
       os << fTopSystemDistance;
     }
@@ -885,10 +885,10 @@ void msrSystemDividers::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fLeftDivider" << " : " << fLeftDivider <<
+    "fLeftDivider" << ": " << fLeftDivider <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fRightDivider" << " : " << fRightDivider <<
+    "fRightDivider" << ": " << fRightDivider <<
     std::endl;
 
   --gIndenter;
@@ -1003,13 +1003,13 @@ void msrStaffLayout::print (std::ostream& os) const
   // staff number
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffNumber" << " : " << fStaffNumber <<
+    "fStaffNumber" << ": " << fStaffNumber <<
     std::endl;
 
   // staff distance
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffDistance" << " : ";
+    "fStaffDistance" << ": ";
   if (fStaffDistance) {
     os << fStaffDistance;
   }
@@ -1122,7 +1122,7 @@ void msrMeasureLayout::print (std::ostream& os) const
   // measure distance
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureDistance" << " : " << fMeasureDistance <<
+    "fMeasureDistance" << ": " << fMeasureDistance <<
     std::endl;
 
   --gIndenter;
@@ -1259,11 +1259,11 @@ void msrLineWidth::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fLineWidthTypeKind" << " : " << fLineWidthTypeKind <<
+    "fLineWidthTypeKind" << ": " << fLineWidthTypeKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fLineWidthValue" <<  " : ";
+    "fLineWidthValue" <<  ": ";
     if (fLineWidthValue) {
       os << fLineWidthValue;
     }
@@ -1399,11 +1399,11 @@ void msrNoteSize::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteSizeTypeKind" << " : " << fNoteSizeTypeKind <<
+    "fNoteSizeTypeKind" << ": " << fNoteSizeTypeKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteSizeValue" <<  " : " << fNoteSizeValue <<
+    "fNoteSizeValue" <<  ": " << fNoteSizeValue <<
     std::endl;
 
   --gIndenter;
@@ -1533,11 +1533,11 @@ void msrDistance::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fDistanceTypeKind" << " : " << fDistanceTypeKind <<
+    "fDistanceTypeKind" << ": " << fDistanceTypeKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fDistanceValue" <<  " : " << fDistanceValue <<
+    "fDistanceValue" <<  ": " << fDistanceValue <<
     std::endl;
 
   --gIndenter;
@@ -1667,7 +1667,7 @@ void msrGlyph::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "glyphTypeKind" << " : " << fGlyphTypeKind <<
+    "glyphTypeKind" << ": " << fGlyphTypeKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1801,11 +1801,11 @@ void msrOtherAppearance::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fOtherAppearanceTypeKind" << " : " << fOtherAppearanceTypeKind <<
+    "fOtherAppearanceTypeKind" << ": " << fOtherAppearanceTypeKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fOtherAppearanceValue" <<  " : " << fOtherAppearanceValue <<
+    "fOtherAppearanceValue" <<  ": " << fOtherAppearanceValue <<
     std::endl;
 
   --gIndenter;
@@ -1966,7 +1966,7 @@ void msrAppearance::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "lineWidthsList" << " : " <<
+    "lineWidthsList" << ": " <<
     mfSingularOrPlural (
       lineWidthsListSize, "element", "elements") <<
     std::endl;
@@ -1994,7 +1994,7 @@ void msrAppearance::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "noteSizesList" << " : " <<
+    "noteSizesList" << ": " <<
     mfSingularOrPlural (
       noteSizesListSize, "element", "elements") <<
     std::endl;
@@ -2022,7 +2022,7 @@ void msrAppearance::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "distancesList" << " : " <<
+    "distancesList" << ": " <<
     mfSingularOrPlural (
       distancesListSize, "element", "elements") <<
     std::endl;
@@ -2050,7 +2050,7 @@ void msrAppearance::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "glyphsList" << " : " <<
+    "glyphsList" << ": " <<
     mfSingularOrPlural (
       glyphsListSize, "element", "elements") <<
     std::endl;
@@ -2078,7 +2078,7 @@ void msrAppearance::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "otherAppearancesList" << " : " <<
+    "otherAppearancesList" << ": " <<
     mfSingularOrPlural (
       otherAppearancesListSize, "element", "elements") <<
     std::endl;

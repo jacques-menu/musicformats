@@ -209,11 +209,11 @@ void msrCreditWords::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCreditWordsDefaultX" << " : " <<
+    "fCreditWordsDefaultX" << ": " <<
     fCreditWordsDefaultX <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fCreditWordsDefaultY" << " : " <<
+    "fCreditWordsDefaultY" << ": " <<
     fCreditWordsDefaultY <<
     std::endl <<
 
@@ -223,31 +223,31 @@ void msrCreditWords::print (std::ostream& os) const
     "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fCreditWordsFontSize" << " : " <<
+    "fCreditWordsFontSize" << ": " <<
     fCreditWordsFontSize <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fCreditWordsFontWeightKind" << " : " <<
+    "fCreditWordsFontWeightKind" << ": " <<
     msrFontWeightKindAsString (
       fCreditWordsFontWeightKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fCreditWordsFontStyleKind" << " : " <<
+    "fCreditWordsFontStyleKind" << ": " <<
     msrFontStyleKindAsString (fCreditWordsFontStyleKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCreditWordsJustifyKind" << " : " <<
+    "fCreditWordsJustifyKind" << ": " <<
     msrJustifyKindAsString (fCreditWordsJustifyKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCreditWordsHorizontalAlignmentKind" << " : " <<
+    "fCreditWordsHorizontalAlignmentKind" << ": " <<
     msrHorizontalAlignmentKindAsString (
       fCreditWordsHorizontalAlignmentKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fCreditWordsVerticalAlignmentKind" << " : " <<
+    "fCreditWordsVerticalAlignmentKind" << ": " <<
     msrVerticalAlignmentKindAsString (
       fCreditWordsVerticalAlignmentKind) <<
     std::endl <<
@@ -407,10 +407,10 @@ void msrCredit::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fCreditPageNumber" << " : " << fCreditPageNumber <<
+    "fCreditPageNumber" << ": " << fCreditPageNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fCreditTypeKind" << " : " << fCreditTypeKind <<
+    "fCreditTypeKind" << ": " << fCreditTypeKind <<
     std::endl;
 
   if (fCreditWordsList.size ()) {

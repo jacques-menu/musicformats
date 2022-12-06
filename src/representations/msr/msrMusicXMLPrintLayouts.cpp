@@ -224,7 +224,7 @@ void msrMusicXMLPrintLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPageLayout" << " : ";
+    "fPageLayout" << ": ";
     if (fPageLayout) {
       os << fPageLayout;
     }
@@ -234,7 +234,7 @@ void msrMusicXMLPrintLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fSystemLayout" << " : ";
+    "fSystemLayout" << ": ";
     if (fSystemLayout) {
       os << fSystemLayout;
     }
@@ -248,7 +248,7 @@ void msrMusicXMLPrintLayout::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "staffLayoutsList" << " : " <<
+    "staffLayoutsList" << ": " <<
     mfSingularOrPlural (
       staffLayoutsListSize, "element", "elements") <<
     std::endl;
@@ -271,7 +271,7 @@ void msrMusicXMLPrintLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "systemDividers" << " : ";
+    "systemDividers" << ": ";
     if (fSystemDividers) {
       os << fSystemDividers;
     }
@@ -281,26 +281,26 @@ void msrMusicXMLPrintLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffSpacing" << " : " << fStaffSpacing <<
+    "fStaffSpacing" << ": " << fStaffSpacing <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNewSystem" << " : " << fNewSystem <<
+    "fNewSystem" << ": " << fNewSystem <<
     std::endl;
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNewPage" << " : " << fNewPage <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fBlankPage" << " : " << fBlankPage <<
+    "fNewPage" << ": " << fNewPage <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPageNumber" << " : " << fPageNumber <<
+    "fBlankPage" << ": " << fBlankPage <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPageNumber" << ": " << fPageNumber <<
     std::endl;
 
   --gIndenter;

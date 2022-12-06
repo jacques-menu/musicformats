@@ -203,7 +203,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondDedication.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondDedication" << " : " <<
+      "fLilypondDedication" << ": " <<
       fLilypondDedication <<
       std::endl;
 
@@ -213,7 +213,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondPiece.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondPiece" << " : " <<
+      "fLilypondPiece" << ": " <<
       fLilypondPiece <<
       std::endl;
 
@@ -223,7 +223,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondOpus.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondOpus" << " : " <<
+      "fLilypondOpus" << ": " <<
       fLilypondOpus <<
       std::endl;
 
@@ -233,7 +233,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondTitle.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondTitle" << " : " <<
+      "fLilypondTitle" << ": " <<
       fLilypondTitle <<
       std::endl;
 
@@ -243,7 +243,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondSubTitle.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondSubTitle" << " : " <<
+      "fLilypondSubTitle" << ": " <<
       fLilypondSubTitle <<
       std::endl;
 
@@ -253,7 +253,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondSubSubTitle.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondSubSubTitle" << " : " <<
+      "fLilypondSubSubTitle" << ": " <<
       fLilypondSubSubTitle <<
       std::endl;
 
@@ -263,7 +263,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondInstrument.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondInstrument" << " : " <<
+      "fLilypondInstrument" << ": " <<
       fLilypondInstrument <<
       std::endl;
 
@@ -273,7 +273,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondMeter.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondMeter" << " : " <<
+      "fLilypondMeter" << ": " <<
       fLilypondMeter <<
       std::endl;
 
@@ -283,7 +283,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondCopyright.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondCopyright" << " : " <<
+      "fLilypondCopyright" << ": " <<
       fLilypondCopyright <<
       std::endl;
 
@@ -293,7 +293,7 @@ void lpsrHeader::print (std::ostream& os) const
   if (fLilypondTagline.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fLilypondTagline" << " : " <<
+      "fLilypondTagline" << ": " <<
       fLilypondTagline <<
       std::endl;
 

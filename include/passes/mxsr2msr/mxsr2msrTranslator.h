@@ -1336,9 +1336,9 @@ class EXP mxsr2msrTranslator :
                                 int       inputLineNumber,
                                 const S_msrNote& newNote);
 
-		// harmonies and figured bass elements need
-		// the position of the note  in its measure
-		// to be known when they are inserted in their own measure
+    // harmonies and figured bass elements need
+    // the position of the note  in its measure
+    // to be known when they are inserted in their own measure
     void                      populateNoteAfterNoteItselfIsHandled (
                                 int       inputLineNumber,
                                 const S_msrNote& newNote);
@@ -1668,7 +1668,8 @@ class EXP mxsr2msrTranslator :
     msrSyllableKind           fCurrentSyllableKind;
     msrSyllableKind           fFirstSyllableInSlurKind;
     msrSyllableKind           fFirstSyllableInLigatureKind;
-    std::list<std::string>              fCurrentLyricTextsList;
+    std::list<std::string>          
+                              fCurrentLyricTextsList;
 
     msrSyllableExtendKind     fCurrentSyllableExtendKind;
     Bool                      fOnGoingSyllableExtend;
@@ -1868,7 +1869,7 @@ class EXP mxsr2msrTranslator :
     msrPrintObjectKind        fCurrentNotePrintObjectKind;
 
     // note heads
-    msrNoteHeadKind  			  	fCurrentNoteHeadKind;
+    msrNoteHeadKind            fCurrentNoteHeadKind;
     msrNoteHeadFilledKind     fCurrentNoteHeadFilledKind;
     msrNoteHeadParenthesesKind
                               fCurrentNoteHeadParenthesesKind;
@@ -1996,8 +1997,8 @@ class EXP mxsr2msrTranslator :
                                 */
 
     void                      copyNoteArticulationsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     // dynamics, words and wedges remain pending until the next note
     // (they precede the note in MusicXML but follow it in LilyPond)
@@ -2045,67 +2046,67 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     void                      copyNoteElementsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     void                      copyNoteDynamicsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
     void                      copyNoteOtherDynamicsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     void                      copyNoteWordsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     void                      copyNoteTieToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 //    void                      copyNoteSlursToChord (
 //                                const S_msrNote& note, S_msrChord chord);
     void                      appendNoteSlursLinksToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
     void                      copyNoteLigaturesToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     void                      copyNotePedalsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     void                      copyNoteSlashesToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     void                      copyNoteWedgesToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     void                      copyNoteSegnosToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
     void                      copyNoteDalSegnosToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
     void                      copyNoteCodasToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     void                      copyNoteOctaveShiftToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
 //    void                      copyNoteGraceNotesGroupsToChord (
 //                                const S_msrNote& note, S_msrChord chord);
     void                      addNoteGraceNotesGroupsLinksToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     void                      copyNoteHarmoniesToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     // technicals handling
     // ------------------------------------------------------
@@ -2135,17 +2136,17 @@ class EXP mxsr2msrTranslator :
  //                               const S_msrChord& chord);
 
     void                      copyNoteTechnicalsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
     void                      copyNoteTechnicalWithIntegersToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
     void                      copyNoteTechnicalWithFloatsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
     void                      copyNoteTechnicalWithStringsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     // ornaments handling
     // ------------------------------------------------------
@@ -2160,8 +2161,8 @@ class EXP mxsr2msrTranslator :
  //                               const S_msrChord& chord);
 
     void                      copyNoteOrnamentsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     // spanners handling
     // ------------------------------------------------------
@@ -2174,8 +2175,8 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote& note);
 
     void                      copyNoteSpannersToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     // stems handling
     // ------------------------------------------------------
@@ -2183,8 +2184,8 @@ class EXP mxsr2msrTranslator :
     std::vector<S_msrStem>         fPendingStemsVector; // std::stack JMI ???
 
     void                      copyNoteStemToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     // beams handling
     // ------------------------------------------------------
@@ -2195,12 +2196,12 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote& note);
                                 /*
     void                      copyNoteBeamsToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
                                 */
     void                      appendNoteBeamsLinksToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     // glissandos handling
     // ------------------------------------------------------
@@ -2229,8 +2230,8 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote& note);
 
     void                      copyNoteSingleTremoloToChord (
-																const S_msrNote&  note,
-																const S_msrChord& chord);
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
 
     // chords handling
     // ------------------------------------------------------
@@ -2248,10 +2249,10 @@ class EXP mxsr2msrTranslator :
     Bool                      fOnGoingChord;
 
     S_msrChord                createChordFromItsFirstNote (
-																int               inputLineNumber,
-																const S_msrVoice& voice,
-																const S_msrNote&  chordFirstNote,
-																msrNoteKind       noteKind);
+                                int               inputLineNumber,
+                                const S_msrVoice& voice,
+                                const S_msrNote&  chordFirstNote,
+                                msrNoteKind       noteKind);
 
 /* JMI
     void                      registerVoiceCurrentChordInMap (

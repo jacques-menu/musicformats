@@ -37,7 +37,7 @@ class EXP oahInsiderHandler : public oahHandler
   are actually held by the insider handler.
 */
 {
-/* this class is purely vir.htual
+/* this class is purely virtual
   public:
 
     // creation

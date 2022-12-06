@@ -208,13 +208,13 @@ void waeOahGroup::printWaeOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream <<
-    std::setw (fieldWidth) << "fQuiet" << " : " <<
+    std::setw (fieldWidth) << "fQuiet" << ": " <<
     fQuiet <<
     std::endl <<
-    std::setw (fieldWidth) << "fDontShowErrors" << " : " <<
+    std::setw (fieldWidth) << "fDontShowErrors" << ": " <<
     fDontShowErrors <<
     std::endl <<
-    std::setw (fieldWidth) << "fDontQuitOnErrors" << " : " <<
+    std::setw (fieldWidth) << "fDontQuitOnErrors" << ": " <<
     fDontQuitOnErrors <<
     std::endl;
 

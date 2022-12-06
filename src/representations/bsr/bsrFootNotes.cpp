@@ -129,7 +129,7 @@ void bsrFootNotes::print (std::ostream& os) const
   if (footNotesElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
       std::setw (fieldWidth) <<
-      "footNotesElementsList" << " : " <<
+      "footNotesElementsList" << ": " <<
       std::endl;
 
     if (footNotesElementsListSize) {

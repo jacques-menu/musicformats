@@ -39,13 +39,13 @@ std::string msdlIgnoreSeparatorTokensKindAsString (
   msdlIgnoreSeparatorTokensKind ignoreSeparatorTokensKind);
 void displayStreamState (const std::ios& stream) {
   gLogStream <<
-    "good () : " << stream.good () <<
+    "good (): " << stream.good () <<
     std::endl <<
-    "eof ()  : " << stream.eof () <<
+    "eof (): " << stream.eof () <<
     std::endl <<
-    "fail () : " << stream.fail () <<
+    "fail (): " << stream.fail () <<
     std::endl <<
-    "bad ()  : " << stream.bad () <<
+    "bad (): " << stream.bad () <<
     std::endl;
 }
 
@@ -339,20 +339,20 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
     gLogStream << std::left <<
       std::setw (fieldWidth) <<
-      "fNextCharacterIsAvailable: " << " : " <<
+      "fNextCharacterIsAvailable: " << ": " <<
       fNextCharacterIsAvailable <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentPositionInInput" << " : " << fCurrentPositionInInput <<
+      "fCurrentPositionInInput" << ": " << fCurrentPositionInInput <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentPositionInLine" << " : " << fCurrentPositionInLine <<
+      "fCurrentPositionInLine" << ": " << fCurrentPositionInLine <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentCharacter" << " : '" << currentCharacterAsString () <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fNextCharacterIsAvailable" << " : " << fNextCharacterIsAvailable <<
+      "fNextCharacterIsAvailable" << ": " << fNextCharacterIsAvailable <<
       std::endl;
 
     --gIndenter;
@@ -629,7 +629,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
 #ifdef TRACING_IS_ENABLED
     if (fTraceTokensDetails) {
       gLogStream <<
-        "--- fetchNextToken(): onceMore = " << onceMore <<
+        "--- fetchNextToken(): onceMore: " << onceMore <<
         std::endl;
     }
 #endif
@@ -676,20 +676,20 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
     gLogStream << std::left <<
       std::setw (fieldWidth) <<
-      "fNextCharacterIsAvailable: " << " : " <<
+      "fNextCharacterIsAvailable: " << ": " <<
       fNextCharacterIsAvailable <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentPositionInInput" << " : " << fCurrentPositionInInput <<
+      "fCurrentPositionInInput" << ": " << fCurrentPositionInInput <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentPositionInLine" << " : " << fCurrentPositionInLine <<
+      "fCurrentPositionInLine" << ": " << fCurrentPositionInLine <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentCharacter" << " : '" << currentCharacterAsString () <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fNextCharacterIsAvailable" << " : " << fNextCharacterIsAvailable <<
+      "fNextCharacterIsAvailable" << ": " << fNextCharacterIsAvailable <<
       std::endl;
 
     --gIndenter;
@@ -1469,17 +1469,17 @@ void msdlScanner::scanAllTheInputAtOnce (
 
           gLogStream << std::left <<
             std::setw (fieldWidth) <<
-            "fCurrentTokenPositionInInput" << " : " << fCurrentTokenPositionInInput <<
+            "fCurrentTokenPositionInInput" << ": " << fCurrentTokenPositionInInput <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "fCurrentCharacter" << " : " << currentCharacterAsString () <<
+            "fCurrentCharacter" << ": " << currentCharacterAsString () <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "fNextCharacterIsAvailable" << " : " << fNextCharacterIsAvailable <<
+            "fNextCharacterIsAvailable" << ": " << fNextCharacterIsAvailable <<
             std::endl <<
 
             std::setw (fieldWidth) <<
-            "fCurrentToken" << " : " <<
+            "fCurrentToken" << ": " <<
             std::endl;
 
           ++gIndenter;
@@ -1586,7 +1586,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 
         gLogStream << std::left <<
           std::setw (fieldWidth) <<
-          "fCurrentToken" << " : " <<
+          "fCurrentToken" << ": " <<
           std::endl;
 
         ++gIndenter;
@@ -1597,17 +1597,17 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 
         gLogStream << std::left <<
           std::setw (fieldWidth) <<
-          "fCurrentTokenPositionInInput" << " : " << fCurrentTokenPositionInInput <<
+          "fCurrentTokenPositionInInput" << ": " << fCurrentTokenPositionInInput <<
           std::endl <<
           std::setw (fieldWidth) <<
           "fCurrentCharacter" << " : '" << currentCharacterAsString () <<
           std::endl <<
           std::setw (fieldWidth) <<
-          "fNextCharacterIsAvailable" << " : " << fNextCharacterIsAvailable <<
+          "fNextCharacterIsAvailable" << ": " << fNextCharacterIsAvailable <<
           std::endl <<
 
           std::setw (fieldWidth) <<
-          "fCurrentToken" << " : " <<
+          "fCurrentToken" << ": " <<
           std::endl;
 
         ++gIndenter;

@@ -1886,7 +1886,39 @@ All one can do with a forward declared type is to declare a {\it pointer} or {\i
 
 %%%JMI I had a similar error message which i resolved by moving the #includes lower down the header file so that the class definition and method definition that the other #includes desire come earlier than the other header includes.
 
-There are many such pre-declations in \mf. We thus use a couple of \fileName{*EnumTypes*} files to contain most of them, in order to avoid numerous header file includes:
+As a matter of taste, \mf\ follows \libmusicxml\ by declaring the \functionName{create} static class methods this way:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+class EXP msrBarLine : public msrMeasureElement
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static SMARTP<msrBarLine> create (
+\end{lstlisting}
+
+As an alternative, the same could be written as follows, at the cost of an extra pre-declaration for each class:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrBarLine;
+typedef   SMARTP<msrBarLine> S_msrBarLine;
+
+class EXP msrBarLine : public msrMeasureElement
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static S_msrBarLine create (...)
+    
+  // ... ... ...
+};
+\end{lstlisting}
+
+
+There are many classes pre-declations in \mf. We thus use a couple of \fileName{*EnumTypes*} files to contain most of them, in order to avoid numerous header files includes:
 \begin{lstlisting}[language=CPlusPlus]
 jacquesmenu@macstudio-1:~/JMI_Developpement/musicformats-git-dev/src > look EnumTypes
 ./representations/msdl/msdlEnumTypes.h
@@ -1914,9 +1946,48 @@ jacquesmenu@macstudio-1:~/JMI_Developpement/musicformats-git-dev/src > look Enum
 \subsection{Simple mutual dependency using separate header files}
 % -------------------------------------------------------------------------
 
-\mf, has classes declarations in separate header files as much as possible.
+A \className{msrPartGroupElement} is either a \className{msrPart} or another \className{msrPartGroupElement}, since the latter can be nested.
+ 
+A \className{msrPartGroupElement} cannot contain an uplink to an instance of \className{S_msrPartGroup}: pre-declaring \type{S_msrPartGroup}:
+\begin{lstlisting}[language=CPlusPlus]
+class   msrPartGroup;
+typedef SMARTP<msrPartGroup> S_msrPartGroup;
+\end{lstlisting}
 
-In the case of part groups, \msr{msrPartGroups.h} contains:
+and using it as the type of a class member common to all \className{msrPartGroupElement} \subClass es leads to the following error:
+\begin{lstlisting}[language=Terminal]
+error: member access into incomplete type 'MusicFormats::msrPartGroup'
+\end{lstlisting}
+
+So \msr{msrPartGroupsElements.h} contains only:
+\begin{lstlisting}[language=CPlusPlus]
+/*
+  Parts and part groups can be found in part groups,
+  hence class   msrPartGroupElement
+*/
+
+class EXP msrPartGroupElement : public msrElement
+/*
+  a purely virtual common ancestor to the msrPartGroup and msrPart classes,
+  which can be inside an msrPartGroup
+*/
+{
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    /*
+      The part group uplink is declared in the sub-classes,
+      i.e. msrPart and msrPartGroup,
+      to allow for separate *.h files, C++ constraint
+    */
+};
+\end{lstlisting}
+
+Then a \className{msrPartGroup}, a \subClass\ of \className{msrPartGroupElement} declared in \msr{msrPartGroups.h}, can contain such an uplink to a \className{msrPartGroup} instance:
 \begin{lstlisting}[language=CPlusPlus]
 #include "msrPartGroupElements.h"
 
@@ -1952,35 +2023,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
 \Type{S_msrPartGroup} is used in the declaration of field \fieldName{fPartGroupElementsList}, hence its pre-declaration.
 
-Then, \msr{msrPartGroupsElements.h} contains:
-\begin{lstlisting}[language=CPlusPlus]
-/*
-  Parts and part groups can be found in part groups,
-  hence class   msrPartGroupElement
-*/
-
-class EXP msrPartGroupElement : public msrElement
-/*
-  a purely virtual common ancestor to the msrPartGroup and msrPart classes,
-  which can be inside an msrPartGroup
-*/
-{
-	// ... ... ...
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    /*
-      The part group uplink is declared in the sub-classes,
-      i.e. msrPart and msrPartGroup,
-      to allow for separate *.h files, C++ constraint
-    */
-};
-\end{lstlisting}
-
-These classes are used by \class{msrPart} in \msr{msrParts} this way:
+\Class{msrPart}, another \subClass of \className{msrPartGroupElement}, in defined in \msr{msrParts.h} this way:
 \begin{lstlisting}[language=CPlusPlus]
 #include "msrPartGroupElements.h"
 
@@ -2018,12 +2061,15 @@ class EXP msrPart : public msrPartGroupElement
 };
 \end{lstlisting}
 
+%This works fine since \field{msrPart}{fPartUpLinkToPartGroup} is defined in \msr{msrParts.h} itself. %%% JMI
+This rather complex situation is depicted at the top of \figureRef{The MSR classes hierarchy}.
+
 
 % -------------------------------------------------------------------------
 \subsection{More complex mutual dependencies}
 % -------------------------------------------------------------------------
 
-This is the case of notes, chords, tuplets and grace notes groups:
+The case of notes, chords, tuplets and grace notes groups is more intricate:
 \begin{itemize}
 \item a note can be standalone in a measure;
 \item a note can be part of:
@@ -2055,7 +2101,7 @@ This is the case of notes, chords, tuplets and grace notes groups:
 \item a double tremolo is standalone in a measure.
 \end{itemize}
 
-\Class{msrDoubleTremolo} is a sub-class   of \className{msrMeasureElement}.
+\Class{msrDoubleTremolo} is a \subClass\ of \className{msrMeasureElement}.
 
 Regarding classes \className{msrNote}, \className{msrChord} and \className{msrTuplet}:
 \begin{itemize}
@@ -2068,10 +2114,12 @@ This leads to the following hierarchy:
 \begin{itemize}
 \item \className{msrNote}, \className{msrChord} and \className{msrTuplet} are direct sub-classes of \class{msrTupletElement}
 
-\item \class{msrTupletElement} is a direct sub-class   of \className{msrMeasureElement}.
+\item \class{msrTupletElement} is a direct \subClass\ of \className{msrMeasureElement}.
 \end{itemize}
 
 This rather complex situation is depicted at the bottom of \figureRef{The MSR classes hierarchy}.
+
+But then, the mutual dependency of need a more complex representation.
 
 
 % -------------------------------------------------------------------------

@@ -364,7 +364,8 @@ class EXP ischemeCaseInputStatement : public smartable
     S_ischemeInput           fCaseInputInput;
 
     std::set<std::string> fCaseInputNamesSet;
-    std::list<std::string>          fCaseInputCurrentNamesList;
+    std::list<std::string>          
+                          fCaseInputCurrentNamesList;
 
     // checking unused names
     std::set<std::string> fUsedNames;
@@ -642,7 +643,8 @@ class EXP ischemeCaseChoiceStatement : public smartable
     S_ischemeChoice          fCaseChoice;
 
     std::set<std::string> fCaseLabelsSet;
-    std::list<std::string>          fCaseCurrentLabelsList;
+    std::list<std::string>          
+                          fCaseCurrentLabelsList;
 
     // checking unused labels
     std::set<std::string> fUsedLabels;

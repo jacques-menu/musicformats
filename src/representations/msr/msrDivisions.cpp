@@ -83,7 +83,7 @@ void msrDivisions::initializeDivisions ()
   if (gGlobalMxsrOahGroup->getTraceDivisions () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     gLogStream <<
       "Initializing divisions" <<
-      ", divisionsPerQuarterNote = " << fDivisionsPerQuarterNote <<
+      ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
       ", line " << fInputLineNumber <<
       std::endl;
   }
@@ -261,10 +261,10 @@ std::string msrDivisions::divisionsAsMsrString (
      "--> divisionsAsMsrString ():" <<
       std::endl <<
       gTab << std::setw (fieldWidth) <<
-      "inputLineNumber" << " = " << inputLineNumber <<
+      "inputLineNumber" << ": " << inputLineNumber <<
       std::endl <<
       gTab << std::setw (fieldWidth) <<
-      "divisions" << " = " << divisions <<
+      "divisions" << ": " << divisions <<
       std::endl;
   }
 #endif
@@ -311,13 +311,13 @@ std::string msrDivisions::divisionsAsMsrString (
 
         gLogStream <<
             gTab << std::setw (fieldWidth) <<
-          "divisions" << " = " << divisions <<
+          "divisions" << ": " << divisions <<
           std::endl << std::endl <<
             gTab << std::setw (fieldWidth) <<
-          "baseDurationDivisions" << " = " << baseDurationDivisions <<
+          "baseDurationDivisions" << ": " << baseDurationDivisions <<
           std::endl <<
             gTab << std::setw (fieldWidth) <<
-          "result" << " = " << result <<
+          "result" << ": " << result <<
           std::endl << std::endl;
       }
 #endif
@@ -346,16 +346,16 @@ std::string msrDivisions::divisionsAsMsrString (
 
       gLogStream <<
         gTab << std::setw (fieldWidth) <<
-        "divisions" << " = " << divisions <<
+        "divisions" << ": " << divisions <<
         std::endl <<
         gTab << std::setw (fieldWidth) <<
-      "baseDurationDivisions" << " = " << baseDurationDivisions <<
+      "baseDurationDivisions" << ": " << baseDurationDivisions <<
         std::endl <<
         gTab << std::setw (fieldWidth) <<
-      "nextDivisionsInList" << " = " << nextDivisionsInList <<
+      "nextDivisionsInList" << ": " << nextDivisionsInList <<
         std::endl <<
         gTab << std::setw (fieldWidth) <<
-      "remainingDivisions" << " = " << remainingDivisions <<
+      "remainingDivisions" << ": " << remainingDivisions <<
         std::endl << std::endl;
     }
 #endif
@@ -372,13 +372,13 @@ std::string msrDivisions::divisionsAsMsrString (
 
         gLogStream <<
           gTab << std::setw (fieldWidth) <<
-          "divisions" << " = " << divisions <<
+          "divisions" << ": " << divisions <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
-          "baseDurationDivisions" << " = " << baseDurationDivisions <<
+          "baseDurationDivisions" << ": " << baseDurationDivisions <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
-          "r" << " = " << r <<
+          "r" << ": " << r <<
           std::endl << std::endl;
       }
 #endif
@@ -401,19 +401,19 @@ std::string msrDivisions::divisionsAsMsrString (
 
           gLogStream <<
             gTab << std::setw (fieldWidth) <<
-            "divisions" << " = " << divisions <<
+            "divisions" << ": " << divisions <<
             std::endl <<
             gTab << std::setw (fieldWidth) <<
-            "baseDurationDivisions" << " = " << baseDurationDivisions <<
+            "baseDurationDivisions" << ": " << baseDurationDivisions <<
             std::endl <<
             gTab << std::setw (fieldWidth) <<
-            "nextDivisionsInList" << " = " << nextDivisionsInList <<
+            "nextDivisionsInList" << ": " << nextDivisionsInList <<
             std::endl <<
             gTab << std::setw (fieldWidth) <<
-            "remainingDivisions" << " = " << remainingDivisions <<
+            "remainingDivisions" << ": " << remainingDivisions <<
             std::endl <<
             gTab << std::setw (fieldWidth) <<
-            "dotsNumber" << " = " << dotsNumber <<
+            "dotsNumber" << ": " << dotsNumber <<
             std::endl << std::endl;
         }
 #endif
@@ -429,19 +429,19 @@ std::string msrDivisions::divisionsAsMsrString (
 
         gLogStream <<
           gTab << std::setw (fieldWidth) <<
-          "divisions" << " = " << divisions <<
+          "divisions" << ": " << divisions <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
-          "baseDurationDivisions" << " = " << baseDurationDivisions <<
+          "baseDurationDivisions" << ": " << baseDurationDivisions <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
-          "nextDivisionsInList" << " = " << nextDivisionsInList <<
+          "nextDivisionsInList" << ": " << nextDivisionsInList <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
-          "remainingDivisions" << " = " << remainingDivisions <<
+          "remainingDivisions" << ": " << remainingDivisions <<
           std::endl <<
           gTab << std::setw (fieldWidth) <<
-          "dotsNumber" << " = " << dotsNumber <<
+          "dotsNumber" << ": " << dotsNumber <<
           std::endl << std::endl;
       }
 #endif

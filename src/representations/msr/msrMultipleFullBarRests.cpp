@@ -372,7 +372,7 @@ std::string msrMultipleFullBarRests::asString () const
         "full-bar rests");
 
   s <<
-    ", fMultipleFullBarRestsUpLinkToSegment" << " : ";
+    ", fMultipleFullBarRestsUpLinkToSegment" << ": ";
 
   if (fMultipleFullBarRestsUpLinkToSegment) {
     s <<
@@ -438,7 +438,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
   const int fieldWidth = 41;
 
   os <<
-    "fMultipleFullBarRestsUpLinkToSegment" << " : ";
+    "fMultipleFullBarRestsUpLinkToSegment" << ": ";
 
   if (fMultipleFullBarRestsUpLinkToSegment) {
     os <<
@@ -453,12 +453,12 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMultipleFullBarRestsNumber" << " : " <<
+    "fMultipleFullBarRestsNumber" << ": " <<
     fMultipleFullBarRestsNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMultipleFullBarRestsLastMeasurePuristNumber" << " : " <<
+    "fMultipleFullBarRestsLastMeasurePuristNumber" << ": " <<
     fMultipleFullBarRestsLastMeasurePuristNumber <<
     std::endl <<
 
@@ -469,14 +469,14 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "multipleFullBarRestsMeasureSoundingNotes" << " : " <<
+    "multipleFullBarRestsMeasureSoundingNotes" << ": " <<
     fetchMultipleFullBarRestsMeasureSoundingNotes () <<
     std::endl;
 
   // print the segment upLink
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMultipleFullBarRestsUpLinkToSegment" << " : ";
+    "fMultipleFullBarRestsUpLinkToSegment" << ": ";
   if (fMultipleFullBarRestsUpLinkToSegment) {
     os << std::endl;
     ++gIndenter;
@@ -494,7 +494,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
   // print the full-bar rests measures std::list
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fFullBarRestsMeasuresList" << " : ";
+    "fFullBarRestsMeasuresList" << ": ";
 
   if (fFullBarRestsMeasuresList.size ()) {
     os << std::endl;

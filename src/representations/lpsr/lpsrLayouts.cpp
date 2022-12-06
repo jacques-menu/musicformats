@@ -113,7 +113,7 @@ void lpsrLayout::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-   "layoutGlobalStaffSize" << " : " << fLayoutGlobalStaffSize <<
+   "layoutGlobalStaffSize" << ": " << fLayoutGlobalStaffSize <<
     std::endl;
 
   --gIndenter;

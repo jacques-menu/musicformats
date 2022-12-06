@@ -222,7 +222,7 @@ void brailleOutputKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fVariableName" << " : " <<
+    "fVariableName" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -248,7 +248,7 @@ void brailleOutputKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     bsrBrailleOutputKindAsString (
       fBrailleOutputKindVariable);
   if (fSetByAnOption) {
@@ -450,11 +450,11 @@ void brailleUTFKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBrailleOutputKindVariable" << " : " <<
+    "fBrailleOutputKindVariable" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fBsrUTFKindVariable" << " : " <<
+    "fBsrUTFKindVariable" << ": " <<
     bsrUTFKindAsString (
       fBsrUTFKindVariable) <<
     std::endl;
@@ -672,7 +672,7 @@ void brailleByteOrderingKindAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fBsrUTFKindVariable" << " : " <<
+    "fBsrUTFKindVariable" << ": " <<
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -692,7 +692,7 @@ void brailleByteOrderingKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : " <<
+    ": " <<
     bsrByteOrderingKindAsString (
       fBsrByteOrderingKindVariable);
   if (fSetByAnOption) {
@@ -1117,33 +1117,33 @@ void brailleGenerationOahGroup::printBrailleGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fBrailleUTFKind" << " : " <<
+    std::setw (fieldWidth) << "fBrailleUTFKind" << ": " <<
       bsrUTFKindAsString (fBrailleUTFKind) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fByteOrderingKind" << " : " <<
+    std::setw (fieldWidth) << "fByteOrderingKind" << ": " <<
       bsrByteOrderingKindAsString (fByteOrderingKind) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fUseEncodingInFileName" << " : " <<
+    std::setw (fieldWidth) << "fUseEncodingInFileName" << ": " <<
       fUseEncodingInFileName <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fCellsPerLine" << " : " <<
+    std::setw (fieldWidth) << "fCellsPerLine" << ": " <<
       fCellsPerLine <<
       std::endl <<
-    std::setw (fieldWidth) << "fMeasuresPerLine" << " : " <<
+    std::setw (fieldWidth) << "fMeasuresPerLine" << ": " <<
       fMeasuresPerLine <<
       std::endl <<
-    std::setw (fieldWidth) << "fLinesPerPage" << " : " <<
+    std::setw (fieldWidth) << "fLinesPerPage" << ": " <<
       fLinesPerPage <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fXml2brlInfos" << " : " <<
+    std::setw (fieldWidth) << "fXml2brlInfos" << ": " <<
       fXml2brlInfos <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fNoBrailleCode" << " : " <<
+    std::setw (fieldWidth) << "fNoBrailleCode" << ": " <<
       fNoBrailleCode <<
       std::endl;
 

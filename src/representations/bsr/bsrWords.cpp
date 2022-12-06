@@ -316,13 +316,13 @@ void bsrWords::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "wordContents" << " : " << fWordContents <<
+    "wordContents" << ": " << fWordContents <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordCellsList" << " : " << fWordCellsList <<
+    "wordCellsList" << ": " << fWordCellsList <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "spacesBefore" << " : " << fSpacesBefore <<
+    "spacesBefore" << ": " << fSpacesBefore <<
     std::endl;
 
   --gIndenter;

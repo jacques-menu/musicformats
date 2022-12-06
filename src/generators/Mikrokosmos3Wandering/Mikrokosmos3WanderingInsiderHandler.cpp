@@ -931,7 +931,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::printMikrokosmos3WanderingInsiderOahG
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "msrGenerationAPIKind" << " : " <<
+    "msrGenerationAPIKind" << ": " <<
     msrGenerationAPIKindAsString (fGenerationAPIKind) <<
     std::endl;
 
@@ -948,7 +948,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::printMikrokosmos3WanderingInsiderOahG
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "mfMultiGenerationOutputKind" << " : " <<
+    "mfMultiGenerationOutputKind" << ": " <<
     mfMultiGenerationOutputKindAsString (fMultiGenerationOutputKind) <<
     std::endl;
 
