@@ -445,6 +445,47 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
     chordChordGraceNotesGroupLinkAfter;
 }
 
+void msrChord::setMeasureElementMeasurePosition (
+  const S_msrMeasure& measure,
+  const Rational&     measurePosition,
+  const std::string&  context)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+    S_msrMeasure upLinkToMeasure;
+
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
+    gLogStream <<
+      "Setting measure position of " <<
+      asString () <<
+      " to '" << measurePosition <<
+      "' (was '" <<
+      fMeasureElementMeasurePosition <<
+      "') in measure " <<
+      measure->asShortString () <<
+      " (measureElementMeasureNumber: " <<
+      upLinkToMeasure->getMeasureNumber () <<
+      "), context: \"" <<
+      context <<
+      "\"" <<
+      std::endl;
+  }
+#endif
+
+  // handle the chord itself
+  msrMeasureElement::setMeasureElementMeasurePosition (
+    measure,
+    measurePosition,
+    context);
+
+  // handle its members
+  setChordMembersMeasurePosition (
+    measure,
+    measurePosition);
+}
+
 void msrChord::setChordMembersMeasurePosition (
   const S_msrMeasure& measure,
   const Rational&     measurePosition)
@@ -452,10 +493,10 @@ void msrChord::setChordMembersMeasurePosition (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
-      "Setting chord members positions in measure of " << asString () <<
+      "Setting chord members measure positions of " << asString () <<
       " to '" <<
       measurePosition <<
-      "'" <<
+      ", fChordNotesVector.size(): " << fChordNotesVector.size () <<
       std::endl;
   }
 #endif
@@ -463,71 +504,37 @@ void msrChord::setChordMembersMeasurePosition (
   std::string context =
     "setChordMembersMeasurePosition()";
 
-//   setChordMeasurePosition (
-//     measure,
-//     measurePosition,
-//     context);
-
-  if (false) { // JMI CAFE
-  // compute chord's voice position
-  Rational
-    voicePosition =
-      fChordUpLinkToMeasure->
-        getMeasureVoicePosition ()
-        +
-      measurePosition;
-
-//   // set chord's voice position
-//   setMeasureElementVoicePosition (
-//     voicePosition,
-//     context);
-
-  // update current voice position
-  S_msrVoice
-    voice =
-      measure->
-        fetchMeasureUpLinkToVoice ();
-
-  voice->
-    incrementCurrentVoicePosition (
-      fChordNotesVector [0]->
-        getMeasureElementSoundingWholeNotes ());
-}
-
   // set the chord's elements' measure position
-  if (fChordNotesVector.size ()) {
-    for (S_msrNote note : fChordNotesVector) {
-      // set note's uplink to measure
-      note->
-        setNoteUpLinkToMeasure (
-          measure);
+  for (S_msrNote note : fChordNotesVector) {
+    // set note's uplink to measure
+    note->
+      setNoteUpLinkToMeasure (
+        measure);
 
-      // set note's measure position
-//       note->
-//         setMeasureElementMeasurePosition (
-//           measure,
-//           measurePosition, // they all share the same one
-//           "chord member");
+    // set note's measure position // JMI v0.9.66
+    note->
+      setMeasureElementMeasurePosition (
+        measure,
+        measurePosition, // they all share the same one
+        "setChordMembersMeasurePosition()");
 
-//    JMI   set note's voice position v0.9.66
+//    // set note's voice position JMI v0.9.66
 //       note->
 //         setMeasureElementVoicePosition (
 //           voicePosition,
 //           context); // they all share the same one
-    } // for
-  }
+  } // for
 
-  // are there dal segnos attached to this chord?
-  if (fChordDalSegnos.size ()) {
-    for (S_msrDalSegno dalSegno : fChordDalSegnos) {
-      // set the dal segno measure position
-//       dalSegno->
-//         setDalSegnoMeasurePosition (
-//           measure,
-//           measurePosition,
-//           "msrChord::setChordMembersMeasurePosition()");
-    } // for
-  }
+//   // are there dal segnos attached to this chord?
+//   if (fChordDalSegnos.size ()) {
+//     for (S_msrDalSegno dalSegno : fChordDalSegnos) {
+//       // set the dal segno measure position
+// //       dalSegno->
+// //         setDalSegnoMeasurePosition (
+// //           measure,
+// //           measurePosition,
+// //           "msrChord::setChordMembersMeasurePosition()"); // JMI v0.9.66
+//     } // for
 }
 
 void msrChord::addFirstNoteToChord (
@@ -546,7 +553,7 @@ void msrChord::addFirstNoteToChord (
   }
 #endif
 
-  // append note to chord notes
+  // append note to chord notes vector
   fChordNotesVector.push_back (note);
 
   // register note's uplink to chord
@@ -607,6 +614,7 @@ void msrChord::addAnotherNoteToChord (
 //   print (gLogStream); // JMI v0.9.66
 //   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 
+  // append note to chord notes vector
   fChordNotesVector.push_back (note);
 
   // register note's uplink to chord
@@ -617,7 +625,7 @@ void msrChord::addAnotherNoteToChord (
   note->setNoteBelongsToAChord ();
 
   // append the note to the measure's notes flat std::list
-  if (false) // JMI
+  if (false) // JMI v0.9.66
   fChordUpLinkToMeasure->
     appendNoteToMeasureNotesFlatList (note);
 
@@ -1053,9 +1061,9 @@ void msrChord::finalizeChord (
 #endif
 
   // we can now set the measure positions for all the chord members JMI v0.9.66
-//   setChordMembersMeasurePosition (
-//     fChordUpLinkToMeasure,
-//     fMeasureElementMeasurePosition);
+  setChordMembersMeasurePosition (
+    fChordUpLinkToMeasure,
+    fMeasureElementMeasurePosition);
 }
 
 void msrChord::acceptIn (basevisitor* v)
@@ -1566,6 +1574,8 @@ void msrChord::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
+    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition <<
+    std::setw (fieldWidth) <<
     "fMeasureElementSoundingWholeNotes" << ": " << fMeasureElementSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -1574,9 +1584,6 @@ void msrChord::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << ": " <<
     fChordUpLinkToMeasure->getMeasureNumber () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<

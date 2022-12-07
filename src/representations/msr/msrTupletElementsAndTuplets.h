@@ -293,7 +293,6 @@ class EXP msrTuplet : public msrTupletElement
     Rational              fMemberNotesSoundingWholeNotes;
     Rational              fMemberNotesDisplayWholeNotes;
 
-// JMI    Rational              fTupletSoundingWholeNotes;
     // display whole notes
     Rational              fTupletDisplayWholeNotes;
 

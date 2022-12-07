@@ -4300,7 +4300,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
         +
       previousHarmonySoundingWholeNotes;
 
-  // compute the positions in measure delta
+  // compute the measure positions delta
   // between previousHarmony and currentHarmony
   Rational
     measurePositionsDelta =
@@ -4920,7 +4920,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         +
       previousFiguredBassSoundingWholeNotes;
 
-  // compute the positions in measure delta
+  // compute the measure positions delta
   Rational
     measurePositionsDelta =
       currentFiguredBassMeasurePosition

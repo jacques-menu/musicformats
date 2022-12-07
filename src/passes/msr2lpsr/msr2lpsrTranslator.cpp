@@ -2164,7 +2164,6 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
       fCurrentVoiceClone);
 
   switch (fCurrentVoiceOriginal->getVoiceKind ()) {
-
     case msrVoiceKind::kVoiceKindRegular:
       // append the voice clone to the LPSR score elements list
       fResultingLpsr ->
@@ -2340,6 +2339,9 @@ void msr2lpsrTranslator::visitEnd (S_msrVoice& elt)
       fOnGoingFiguredBassVoice = false;
       break;
   } // switch
+
+  // forget about the current voice clone
+  fCurrentVoiceClone = nullptr;
 }
 
 //________________________________________________________________________
@@ -6141,7 +6143,7 @@ void msr2lpsrTranslator::visitEnd (S_msrChord& elt)
     finalizeChord (
       inputLineNumber);
 
-  // forget about it
+  // forget about the current chord clone
   fCurrentChordClone = nullptr;
 
   fOnGoingChord = false;

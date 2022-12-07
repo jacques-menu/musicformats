@@ -260,6 +260,11 @@ There are cases where the data should be sorted prior to being browsed, such as 
 \section{Selectively inhibiting data browsing}
 % -------------------------------------------------------------------------
 
+
+% -------------------------------------------------------------------------
+\subsection{Inhibiting data browsing in the code}
+% -------------------------------------------------------------------------
+
 In some cases, it is desirable not to browse part of the data. This is the case when a given class   contains non-normalized data, i.e. data that occurs elsewhere and will be browsed in another class   instance.
 
 For example, \class{msrMultipleFullBarRests} contains \class{msrMeasure} instances. \class{msrScore} contains:
@@ -397,6 +402,11 @@ void msrNote::browseData (basevisitor* v)
   // ... ... ...
 }
 \end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Inhibiting data browsing by options}
+% -------------------------------------------------------------------------
 
 Choosing which elements to browse can be more selective:
 \begin{lstlisting}[language=Terminal]

@@ -142,14 +142,14 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   // set measure element's measure position
   fMeasureElementMeasurePosition = measurePosition;
 
-  // compute measure element's voice position
-// if (false) { // JMI CAFE v0.9.66
-  Rational
-    voicePosition =
-      measure->
-        getMeasureVoicePosition ()
-        +
-      measurePosition;
+//   // compute measure element's voice position
+// // if (false) { // JMI CAFE v0.9.66
+//   Rational
+//     voicePosition =
+//       measure->
+//         getMeasureVoicePosition ()
+//         +
+//       measurePosition;
 
   // set figured bass's voice position
 //   setMeasureElementVoicePosition ( // JMI v0.9.66
@@ -242,7 +242,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasureMoments ()) {
 //     gLogStream <<
-//       "Setting measure element moment in measure of " <<
+//       "Setting measure element measure moment of " <<
 //       asString () <<
 //       " to '" << measureMoment <<
 //       "' (was '" <<

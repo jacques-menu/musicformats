@@ -91,7 +91,6 @@ msrTempos.h:class EXP msrTempo : public msrMeasureElement
 msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElement
 msrTranspositions.h:class EXP msrOctaveShift : public msrMeasureElement
 msrTranspositions.h:class EXP msrTransposition : public msrMeasureElement
-msrTupletElements.h:class EXP msrTupletElement : public msrMeasureElement
 msrVoiceStaffChanges.h:class EXP msrVoiceStaffChange : public msrMeasureElement
 \end{lstlisting}
 
@@ -129,7 +128,7 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
     setMeasureNumber (
       fBarLineUpLinkToMeasure->getMeasureNumber ());
 
-  // set elem's position in measure
+  // set elem's measure position
   elem->
     setMeasureElementMeasurePosition (
       this,
@@ -180,7 +179,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
 
   // append the harmony to the measure elements list
   // DON'T call 'appendElementToMeasure (harmony)':
-  // that would override harmony's position in measure,
+  // that would override harmony's measure position,
   // which already has the correct value, thus:
   fMeasureElementsList.push_back (harmony);
 
