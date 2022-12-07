@@ -131,7 +131,7 @@ class EXP msrIdentification : public msrElement
 
 		// ... ... ...
 
-    std::list<std::string>          
+    std::list<std::string>
                           fSoftwaresList;
 
 	// ... ... ...
@@ -914,7 +914,7 @@ class EXP msrTempo : public msrMeasureElement
 
     S_msrTempoNotesRelationshipElements
                           fTempoNotesRelationshipLeftElements;
-    msrTempoNotesRelationshipKind  
+    msrTempoNotesRelationshipKind
                           fTempoNotesRelationshipKind;
     S_msrTempoNotesRelationshipElements
                           fTempoNotesRelationshipRightElements;
@@ -1261,7 +1261,7 @@ A part in MSR is composed of voices, stored in:
 \begin{lstlisting}[language=CPlusPlus]
     // staves
 
-    std::map<int, S_msrStaff>  
+    std::map<int, S_msrStaff>
                           getPartStaveNumbersToStavesMap;
     std::list<S_msrStaff> fPartAllStavesList;
 
@@ -1463,7 +1463,6 @@ msrTempos.h:class EXP msrTempo : public msrMeasureElement
 msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElement
 msrTranspositions.h:class EXP msrOctaveShift : public msrMeasureElement
 msrTranspositions.h:class EXP msrTransposition : public msrMeasureElement
-msrTupletElements.h:class EXP msrTupletElement : public msrMeasureElement
 msrVoiceStaffChanges.h:class EXP msrVoiceStaffChange : public msrMeasureElement
 \end{lstlisting}
 
@@ -1914,34 +1913,34 @@ enum class msrNoteKind {
 \end{lstlisting}
 
 
-% -------------------------------------------------------------------------
-\section{Articulations}\label{Articulations}
-% -------------------------------------------------------------------------
-
-
-% -------------------------------------------------------------------------
-\section{Ornaments}\label{Ornaments}
-% -------------------------------------------------------------------------
-
-
-% -------------------------------------------------------------------------
-\section{Ties}\label{Ties}
-% -------------------------------------------------------------------------
-
-
-% -------------------------------------------------------------------------
-\section{Dynamics}\label{Dynamics}
-% -------------------------------------------------------------------------
-
-
-% -------------------------------------------------------------------------
-\section{Beams}\label{Beams}
-% -------------------------------------------------------------------------
-
-
-% -------------------------------------------------------------------------
-\section{Slurs}\label{Slurs}
-% -------------------------------------------------------------------------
+%% -------------------------------------------------------------------------
+%\section{Articulations}\label{Articulations}
+%% -------------------------------------------------------------------------
+%
+%
+%% -------------------------------------------------------------------------
+%\section{Ornaments}\label{Ornaments}
+%% -------------------------------------------------------------------------
+%
+%
+%% -------------------------------------------------------------------------
+%\section{Ties}\label{Ties}
+%% -------------------------------------------------------------------------
+%
+%
+%% -------------------------------------------------------------------------
+%\section{Dynamics}\label{Dynamics}
+%% -------------------------------------------------------------------------
+%
+%
+%% -------------------------------------------------------------------------
+%\section{Beams}\label{Beams}
+%% -------------------------------------------------------------------------
+%
+%
+%% -------------------------------------------------------------------------
+%\section{Slurs}\label{Slurs}
+%% -------------------------------------------------------------------------
 
 
 % -------------------------------------------------------------------------
@@ -2193,7 +2192,7 @@ Extensions are described by enumeration type {\tt }:
     msrSyllableKind       fSyllableKind;
 
     // texts std::list
-    std::list<std::string>          
+    std::list<std::string>
                           fSyllableTextsList;
 
     // extend kind

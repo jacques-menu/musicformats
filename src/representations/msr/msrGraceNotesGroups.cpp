@@ -378,7 +378,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
-      "Setting grace notes group elements' positions in measure of " << asString () <<
+      "Setting grace notes group elements' measure positions of " << asString () <<
       " to '" <<
       measurePosition <<
       "'" <<

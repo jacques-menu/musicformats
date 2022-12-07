@@ -33,8 +33,8 @@ class EXP xml2lyInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<xml2lyInsiderHandler> create (
-                            const std::string&           serviceName,
-                            const std::string&           handlerHeader,
+                            const std::string&      serviceName,
+                            const std::string&      handlerHeader,
                             oahHandlerUsedThruKind  handlerUsedThruKind);
 
   protected:
@@ -43,8 +43,8 @@ class EXP xml2lyInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           xml2lyInsiderHandler (
-                            const std::string&           serviceName,
-                            const std::string&           handlerHeader,
+                            const std::string&      serviceName,
+                            const std::string&      handlerHeader,
                             oahHandlerUsedThruKind  handlerUsedThruKind);
 
     virtual               ~xml2lyInsiderHandler ();

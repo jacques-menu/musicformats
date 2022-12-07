@@ -310,10 +310,10 @@ void msrTuplet::appendNoteToTuplet (
   note->
     setNoteDirectUpLinkToTuplet (this);
 
-  // register note's uplink to measure // JMI ???
-  note->
-    setMeasureElementUpLinkToMeasure (
-      fTupletUpLinkToMeasure);
+//   // register note's uplink to measure // JMI v0.9.66 ???
+//   note->
+//     setMeasureElementUpLinkToMeasure (
+//       fTupletUpLinkToMeasure);
 
   // account for note duration in tuplet duration
   fMeasureElementSoundingWholeNotes +=
@@ -682,7 +682,7 @@ Rational msrTuplet::setTupletMembersMeasurePositions (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
-      "Setting tuplet members positions in measure of " << asString () <<
+      "Setting tuplet members measure positions of " << asString () <<
       " to '" <<
       measurePosition <<
       "'" <<
@@ -1017,6 +1017,25 @@ void msrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
+    "fMemberNotesSoundingWholeNotes" << ": " <<
+    fMemberNotesSoundingWholeNotes <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMemberNotesDisplayWholeNotes" << ": " <<
+    fMemberNotesDisplayWholeNotes <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTupletDisplayWholeNotes" << ": " <<
+    fTupletDisplayWholeNotes <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
     "fTupletBracketKind" << ": " <<
     msrTupletBracketKindAsString (
       fTupletBracketKind) <<
@@ -1036,32 +1055,9 @@ void msrTuplet::print (std::ostream& os) const
     msrTupletShowTypeKindAsString (
       fTupletShowTypeKind) <<
     std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fMemberNotesSoundingWholeNotes" << ": " <<
-    fMemberNotesSoundingWholeNotes <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMemberNotesDisplayWholeNotes" << ": " <<
-    fMemberNotesDisplayWholeNotes <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fTupletSoundingWholeNotes" << ": " <<
-    fMeasureElementSoundingWholeNotes <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fTupletDisplayWholeNotes" << ": " <<
-    fTupletDisplayWholeNotes <<
-    std::endl <<
-
     std::setw (fieldWidth) <<
     "fTupletMeasureNumber" << ": " <<
     fTupletUpLinkToMeasure->getMeasureNumber () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fVoicePosition" << ": " <<
@@ -1191,10 +1187,6 @@ void msrTuplet::printShort (std::ostream& os)
     fMemberNotesDisplayWholeNotes <<
     std::endl <<
 
-    std::setw (fieldWidth) <<
-    "fTupletSoundingWholeNotes" << ": " <<
-    fMeasureElementSoundingWholeNotes <<
-    std::endl <<
     std::setw (fieldWidth) <<
     "fTupletDisplayWholeNotes" << ": " <<
     fTupletDisplayWholeNotes <<
