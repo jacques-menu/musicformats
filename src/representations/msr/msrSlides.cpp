@@ -202,7 +202,7 @@ void msrSlide::print (std::ostream& os) const
     "fSlideLineTypeKind" << fSlideLineTypeKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSlideTextValue" << " : \"" << fSlideTextValue << "\"" <<
+    "fSlideTextValue" << ": \"" << fSlideTextValue << "\"" <<
     std::endl;
 
   --gIndenter;

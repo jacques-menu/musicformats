@@ -547,7 +547,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationWorkNumber.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationWorkNumber" << " : \"" <<
+      "fIdentificationWorkNumber" << ": \"" <<
       fIdentificationWorkNumber <<
       "\"" <<
       std::endl;
@@ -558,7 +558,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationWorkCreditTypeTitle.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationWorkCreditTypeTitle" << " : \"" <<
+      "fIdentificationWorkCreditTypeTitle" << ": \"" <<
       fIdentificationWorkCreditTypeTitle <<
       "\"" <<
       std::endl;
@@ -569,7 +569,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationOpus.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationOpus" << " : \"" <<
+      "fIdentificationOpus" << ": \"" <<
       fIdentificationOpus <<
       "\"" <<
       std::endl;
@@ -580,7 +580,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationMovementNumber.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationMovementNumber" << " : \"" <<
+      "fIdentificationMovementNumber" << ": \"" <<
       fIdentificationMovementNumber <<
       "\"" <<
       std::endl;
@@ -591,7 +591,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationMovementTitle.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationMovementTitle" << " : \"" <<
+      "fIdentificationMovementTitle" << ": \"" <<
       fIdentificationMovementTitle <<
       "\"" <<
       std::endl;
@@ -602,7 +602,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationEncodingDate.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationEncodingDate" << " : \"" <<
+      "fIdentificationEncodingDate" << ": \"" <<
       fIdentificationEncodingDate <<
       "\"" <<
       std::endl;
@@ -613,7 +613,7 @@ void msrIdentification::print (std::ostream& os) const
   if (fIdentificationMiscellaneousField.size ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "fIdentificationMiscellaneousField" << " : \"" <<
+      "fIdentificationMiscellaneousField" << ": \"" <<
       fIdentificationMiscellaneousField <<
       "\"" <<
       std::endl;

@@ -794,7 +794,7 @@ void msrSyllable::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSyllableStanzaNumber" << " : \"" <<
+    "fSyllableStanzaNumber" << ": \"" <<
     fSyllableStanzaNumber <<
     "\"" <<
     std::endl <<

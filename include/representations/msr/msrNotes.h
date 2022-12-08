@@ -250,6 +250,17 @@ class EXP msrNote : public msrTupletElement
     S_msrTuplet           getNoteDirectUpLinkToTuplet () const
                               { return fNoteDirectUpLinkToTuplet; }
 
+    // measure positions
+    // this override calls setNoteAttachedElementsMeasurePosition()
+    void                  setMeasureElementMeasurePosition (
+                            const S_msrMeasure& measure,
+                            const Rational&     measurePosition,
+                            const std::string&  context) override;
+
+    void                  setNoteAttachedElementsMeasurePosition (
+                            const S_msrMeasure&    measure,
+                            const Rational& measurePosition);
+
     // note kind
 
     void                  setNoteKind (msrNoteKind noteKind);
@@ -927,11 +938,10 @@ class EXP msrNote : public msrTupletElement
     std::string           noteDisplayWholeNotesAsMsrString () const;
 
     // graphic duration
-    std::string           noteGraphicDurationAsMsrString () const;
     std::string           noteGraphicDurationAsMusicXMLString () const;
 
-    std::string           tupletNoteGraphicDurationAsMsrString ( // JMI
-                            int actualNotes, int normalNotes) const;
+//     std::string           tupletNoteGraphicDurationAsMsrString ( // JMI v0.9.66
+//                             int actualNotes, int normalNotes) const;
 
     // note as std::string
     std::string           notePitchAndSoundingWholeNotesAsString () const
@@ -960,7 +970,7 @@ class EXP msrNote : public msrTupletElement
 
     std::string           asMinimalString () const;
 
-    void                  printNoteEssentials (std::ostream& os) const;
+    std::string           noteEssentialsAsSting () const;
 
     void                  print (std::ostream& os) const override;
 

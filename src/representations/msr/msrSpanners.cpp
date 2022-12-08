@@ -223,15 +223,15 @@ void msrSpanner::print (std::ostream& os) const
     "fSpannerUpLinkToNote" << ": " << fSpannerUpLinkToNote->asShortString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSpannerBeginText" << " : \"" << fSpannerBeginText <<
+    "fSpannerBeginText" << ": \"" << fSpannerBeginText <<
     "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSpannerMiddleText" << " : \"" << fSpannerMiddleText <<
+    "fSpannerMiddleText" << ": \"" << fSpannerMiddleText <<
     "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSpannerEndText" << " : \"" << fSpannerEndText <<
+    "fSpannerEndText" << ": \"" << fSpannerEndText <<
     "\"" <<
     std::endl;
 

@@ -259,7 +259,7 @@ void msdrMeasure::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "voiceCurrentMeasureNumber" << " : \"" <<
+    "voiceCurrentMeasureNumber" << ": \"" <<
     fVoiceCurrentMeasureNumber <<
     "\"" <<
     std::endl <<

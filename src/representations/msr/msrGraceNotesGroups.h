@@ -122,8 +122,8 @@ class EXP msrGraceNotesGroup : public msrElement
 
     // measure positions
     void                  setGraceNotesGroupElementsMeasurePositions (
-                            const S_msrMeasure&    measure,
-                            const Rational& measurePosition);
+                            const S_msrMeasure& measure,
+                            const Rational&     measurePosition);
 
   public:
 

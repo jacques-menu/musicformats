@@ -310,10 +310,10 @@ void lpsrChordNamesContext::print (std::ostream& os) const
       fContextUseExistingKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "contextName" << " : \"" << fContextName << "\"" <<
+    "contextName" << ": \"" << fContextName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "contextVoice" << " : \"" << fContextVoice->getVoiceName () << "\"" <<
+    "contextVoice" << ": \"" << fContextVoice->getVoiceName () << "\"" <<
     std::endl;
 
   os <<
@@ -473,10 +473,10 @@ void lpsrFiguredBassContext::print (std::ostream& os) const
       fContextUseExistingKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fContextName" << " : \"" << fContextName << "\"" <<
+    "fContextName" << ": \"" << fContextName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "contextStaff" << " : \"" << fContextStaff->getStaffName () << "\"" <<
+    "contextStaff" << ": \"" << fContextStaff->getStaffName () << "\"" <<
     std::endl;
 
   os <<

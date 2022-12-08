@@ -3075,12 +3075,12 @@ void msrStaff::print (std::ostream& os) const
     fStaffUpLinkToPart->getPartCombinedName () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fStaffInstrumentName" << " : \"" <<
+    "fStaffInstrumentName" << ": \"" <<
     fStaffInstrumentName <<
     "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fStaffInstrumentAbbreviation" << " : \"" <<
+    "fStaffInstrumentAbbreviation" << ": \"" <<
     fStaffInstrumentAbbreviation <<
     std::endl;
 

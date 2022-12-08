@@ -10251,7 +10251,7 @@ void oahMidiTempoAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "midiTempoVariable" << " : \"" <<
+    "midiTempoVariable" << ": \"" <<
     fMidiTempoVariable.asString () <<
     "\"" <<
     std::endl;

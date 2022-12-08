@@ -4846,7 +4846,7 @@ void msrHarmony::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fHarmonyKindText" << " : \"" <<
+    "fHarmonyKindText" << ": \"" <<
     fHarmonyKindText <<
     "\"" <<
     std::endl <<

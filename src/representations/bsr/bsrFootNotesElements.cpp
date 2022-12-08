@@ -128,7 +128,7 @@ void bsrFootNotesElement::print (std::ostream& os) const
   ++gIndenter;
 
   os <<
-    "footNoteText " << " : \"" << fFootNoteText << "\"" <<
+    "footNoteText " << ": \"" << fFootNoteText << "\"" <<
     std::endl;
 
   --gIndenter;

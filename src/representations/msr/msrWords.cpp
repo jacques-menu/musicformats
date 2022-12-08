@@ -208,7 +208,7 @@ void msrWords::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "wordsContents" << " : \"" << fWordsContents << "\"" <<
+    "wordsContents" << ": \"" << fWordsContents << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<

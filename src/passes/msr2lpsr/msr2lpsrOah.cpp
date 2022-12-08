@@ -237,7 +237,7 @@ void msr2lpsrScoreOutputKindAtom::print (std::ostream& os) const
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fLpsrScoreOutputKindVariable" << " : \"" <<
+    "fLpsrScoreOutputKindVariable" << ": \"" <<
     lpsrScoreOutputKindAsString (
       fLpsrScoreOutputKindVariable) <<
     "\"" <<

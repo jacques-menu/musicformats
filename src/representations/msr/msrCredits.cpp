@@ -203,7 +203,7 @@ void msrCreditWords::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fCreditWordsContents" << " : \"" <<
+    "fCreditWordsContents" << ": \"" <<
     fCreditWordsContents <<
     "\"" <<
     std::endl <<
@@ -218,7 +218,7 @@ void msrCreditWords::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCreditWordsFontFamily" << " : \"" <<
+    "fCreditWordsFontFamily" << ": \"" <<
     fCreditWordsFontFamily <<
     "\"" <<
     std::endl <<
@@ -253,7 +253,7 @@ void msrCreditWords::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCreditWordsXMLLang" << " : \"" <<
+    "fCreditWordsXMLLang" << ": \"" <<
     msrXMLLangKindAsString (fCreditWordsXMLLang) <<
     "\"" <<
     std::endl;

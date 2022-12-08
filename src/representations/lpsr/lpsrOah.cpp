@@ -2211,7 +2211,7 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
     fetchNamesBetweenQuotes () <<
-    " :";
+    ": ";
   if (! fAddEmptyMeasuresStringToIntMap.size ()) {
     gLogStream << "[EMPTY]";
   }
