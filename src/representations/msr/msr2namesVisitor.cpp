@@ -160,22 +160,22 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "partGroupName" << " : \"" <<
+    "partGroupName" << ": \"" <<
     elt->getPartGroupName  () << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "partGroupNameDisplayText" << " : \"" <<
+    "partGroupNameDisplayText" << ": \"" <<
     elt->getPartGroupNameDisplayText  () << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "partGroupAbbrevation" << " : \"" <<
+    "partGroupAbbrevation" << ": \"" <<
     elt->getPartGroupAbbreviation  () << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "partGroupInstrumentName" << " : \"" <<
+    "partGroupInstrumentName" << ": \"" <<
       elt->getPartGroupInstrumentName () << "\"" <<
     std::endl << std::endl;
 }
@@ -220,27 +220,27 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
 
   gLogStream << std::left <<
     std::setw (fieldWidth) <<
-    "partID" << " : \"" <<
+    "partID" << ": \"" <<
     elt->getPartID () << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "partMsrName" << " : \"" <<
+    "partMsrName" << ": \"" <<
     elt->getPartMsrName () << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "partName" << " : \"" <<
+    "partName" << ": \"" <<
     elt->getPartName  () << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "partAbbrevation" << " : \"" <<
+    "partAbbrevation" << ": \"" <<
     elt->getPartAbbreviation () << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "partInstrumentName" << " : \"" <<
+    "partInstrumentName" << ": \"" <<
     elt->getPartInstrumentName () << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "partInstrumentAbbreviation" << " : \"" <<
+    "partInstrumentAbbreviation" << ": \"" <<
     elt->getPartInstrumentAbbreviation () << "\"" <<
     std::endl;
 

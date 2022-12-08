@@ -2597,30 +2597,30 @@ void msrPart::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartID" << " : \"" <<
+    "fPartID" << ": \"" <<
     fPartID << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartMsrName" << " : \"" <<
+    "fPartMsrName" << ": \"" <<
     fPartMsrName << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartName" << " : \"" <<
+    "fPartName" << ": \"" <<
     fPartName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartNameDisplayText" << " : \"" <<
+    "fPartNameDisplayText" << ": \"" <<
     fPartNameDisplayText << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartAbbrevation" << " : \"" <<
+    "fPartAbbrevation" << ": \"" <<
     fPartAbbreviation << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartAbbreviationDisplayText" << " : \"" <<
+    "fPartAbbreviationDisplayText" << ": \"" <<
     fPartAbbreviationDisplayText << "\"" <<
     std::endl <<
 
@@ -2630,11 +2630,11 @@ void msrPart::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartInstrumentName" << " : \"" <<
+    "fPartInstrumentName" << ": \"" <<
     fPartInstrumentName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartInstrumentAbbreviation" << " : \"" <<
+    "fPartInstrumentAbbreviation" << ": \"" <<
     fPartInstrumentAbbreviation << "\"" <<
     std::endl <<
 
@@ -2654,7 +2654,7 @@ void msrPart::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartHarmoniesStaff" << " : \"" <<
+    "fPartHarmoniesStaff" << ": \"" <<
     fPartHarmoniesStaff->asShortString () << "\"" <<
     std::endl;
 
@@ -3025,12 +3025,12 @@ void msrPart::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartID" << " : \"" <<
+    "fPartID" << ": \"" <<
     fPartID << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartMsrName" << " : \"" <<
+    "fPartMsrName" << ": \"" <<
     fPartMsrName << "\"" <<
     std::endl <<
 
@@ -3040,7 +3040,7 @@ void msrPart::printShort (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartName" << " : \"" <<
+    "fPartName" << ": \"" <<
     fPartName << "\"" <<
     std::endl;
 
@@ -3175,17 +3175,17 @@ void msrPart::printSummary (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartID" << " : \"" <<
+    "fPartID" << ": \"" <<
     fPartID << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartMsrName" << " : \"" <<
+    "fPartMsrName" << ": \"" <<
     fPartMsrName << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartName" << " : \"" <<
+    "fPartName" << ": \"" <<
     fPartName << "\"" <<
     std::endl <<
 
@@ -3195,25 +3195,25 @@ void msrPart::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartNameDisplayText" << " : \"" <<
+    "fPartNameDisplayText" << ": \"" <<
     fPartNameDisplayText << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartAbbrevation" << " : \"" <<
+    "fPartAbbrevation" << ": \"" <<
     fPartAbbreviation << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartAbbreviationDisplayText" << " : \"" <<
+    "fPartAbbreviationDisplayText" << ": \"" <<
     fPartAbbreviationDisplayText << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartInstrumentName" << " : \"" <<
+    "fPartInstrumentName" << ": \"" <<
     fPartInstrumentName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartInstrumentAbbreviation" << " : \"" <<
+    "fPartInstrumentAbbreviation" << ": \"" <<
     fPartInstrumentAbbreviation << "\"" <<
     std::endl <<
 

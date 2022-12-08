@@ -1519,7 +1519,7 @@ void msrTempo::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "tempoPerMinute" << " : \"" << fTempoPerMinute << "\"" <<
+    "tempoPerMinute" << ": \"" << fTempoPerMinute << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<

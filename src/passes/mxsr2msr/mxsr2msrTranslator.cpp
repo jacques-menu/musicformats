@@ -22265,7 +22265,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
     const int fieldWidth = 25;
 
     gLogStream << std::left <<
-      std::setw (fieldWidth) << "voice" << " : \"" <<
+      std::setw (fieldWidth) << "voice" << ": \"" <<
       currentVoice->getVoiceName () << "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<

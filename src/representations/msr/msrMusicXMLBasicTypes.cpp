@@ -1671,7 +1671,7 @@ void msrGlyph::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGlyphValue" <<  " : \"" << fGlyphValue << "\"" <<
+    "fGlyphValue" <<  ": \"" << fGlyphValue << "\"" <<
     std::endl;
 
   --gIndenter;

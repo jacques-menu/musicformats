@@ -255,7 +255,7 @@ void msdrMusic::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fVoiceCurrentMeasureNumber" << " : \"" <<
+    "fVoiceCurrentMeasureNumber" << ": \"" <<
     fVoiceCurrentMeasureNumber <<
     "\"" <<
     std::endl <<

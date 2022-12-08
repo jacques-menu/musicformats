@@ -821,7 +821,7 @@ void oahOahGroup::printAtomWithVariableOptionsValues ( // JMIJMIJMI
   /* JMI
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : \"" <<
+    ": \"" <<
     oahOptionalValuesStyleKindAsString (
       fOahOptionalValuesStyleKindVariable) <<
     "\"" <<

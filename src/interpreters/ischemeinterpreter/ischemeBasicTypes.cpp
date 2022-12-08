@@ -683,14 +683,14 @@ void ischemeInput::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fInputName" << " : \"" << fInputName << "\"" <<
+    "fInputName" << ": \"" << fInputName << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fInputNameKind" << ": " << fInputNameKind << "" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fInputName" << " : \"" << fInputName << "\"" <<
+    "fInputName" << ": \"" << fInputName << "\"" <<
     std::endl;
 
   size_t
@@ -1541,14 +1541,14 @@ void ischemeChoice::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fChoiceName" << " : \"" << fChoiceName << "\"" <<
+    "fChoiceName" << ": \"" << fChoiceName << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fChoiceLabelKind" << ": " << fChoiceLabelKind << "" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fChoiceLabel" << " : \"" << fChoiceLabel << "\"" <<
+    "fChoiceLabel" << ": \"" << fChoiceLabel << "\"" <<
     std::endl;
 
   size_t
@@ -1573,7 +1573,7 @@ void ischemeChoice::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fChoiceDefaultLabel" << " : \"" << fChoiceDefaultLabel << "\"" <<
+    "fChoiceDefaultLabel" << ": \"" << fChoiceDefaultLabel << "\"" <<
     std::endl;
 
   size_t

@@ -2235,80 +2235,66 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
   return o;
 }
 
-// //________________________________________________________________________
-// void msrNote::setMeasureElementMeasurePosition (
-//   const S_msrMeasure measure,
-//   const Rational&    measurePosition,
-//   const std::string&      context)
-// {
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-//     gLogStream <<
-//       "Setting note's measure position of " << asString () <<
-//       " to " <<
-//       measurePosition <<
-//       " (was " <<
-//       fMeasureElementMeasurePosition <<
-//       ") in measure " <<
-//       measure->asShortString () <<
-//       " (measureElementMeasureNumber: " <<
-//       fNoteUpLinkToMeasure->getMeasureNumber () <<
-//       "), context: \"" <<
-//       context <<
-//       "\"" <<
-//       std::endl;
-//   }
-// #endif
-//
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_NO_POSITION,
-//     "measurePosition == msrMoment::K_NO_POSITION");
-//
-//   // set note's measure position
-//   fMeasureElementMeasurePosition = measurePosition;
-//
-// //   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-// //   print (gLogStream); // JMI v0.9.66
-// //   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-//
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     fNoteUpLinkToMeasure != nullptr,
-//     "fNoteUpLinkToMeasure is null");
-//
-//   // compute note's voice position
-//   Rational
-//      voicePosition =
-//       fNoteUpLinkToMeasure->getMeasureVoicePosition ()
-//         +
-//       measurePosition;
-//
-//   // set note's voice position
-//   msrMeasureElement::setMeasureElementVoicePosition (
-//     voicePosition,
-//     context);
-//
-//   // update current voice position
-//   S_msrVoice
-//     voice =
-//       fNoteUpLinkToMeasure->
-//         fetchMeasureUpLinkToVoice ();
-//
-//   voice->
-//     incrementCurrentVoicePosition (
-//       fMeasureElementSoundingWholeNotes);
-//
-//   // are there harmonies attached to this note?
+//________________________________________________________________________
+void msrNote::setMeasureElementMeasurePosition (
+  const S_msrMeasure& measure,
+  const Rational&     measurePosition,
+  const std::string&  context)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+    S_msrMeasure upLinkToMeasure;
+
+    getMeasureElementUpLinkToMeasure (
+      upLinkToMeasure);
+
+    gLogStream <<
+      "Setting measure position of " <<
+      asString () <<
+      " to '" << measurePosition <<
+      "' (was '" <<
+      fMeasureElementMeasurePosition <<
+      "') in measure " <<
+      measure->asShortString () <<
+      " (measureElementMeasureNumber: " <<
+      upLinkToMeasure->getMeasureNumber () <<
+      "), context: \"" <<
+      context <<
+      "\"" <<
+      std::endl;
+  }
+#endif
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
+
+  // handle the chord itself
+  msrMeasureElement::setMeasureElementMeasurePosition (
+    measure,
+    measurePosition,
+    context);
+
+  setNoteAttachedElementsMeasurePosition (
+    measure,
+    measurePosition);
+}
+
+void msrNote::setNoteAttachedElementsMeasurePosition (
+  const S_msrMeasure& measure,
+  const Rational&     measurePosition);
+{
 // // JMI v0.9.66
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//     gLogStream << "fNoteHarmoniesList.size (): " << fNoteHarmoniesList.size () << std::endl;
-//   }
-// #endif
-//
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+    gLogStream << "fNoteHarmoniesList.size (): " <<
+      fNoteHarmoniesList.size () <<
+      std::endl;
+  }
+#endif
+
 //   if (fNoteHarmoniesList.size ()) {
 //     std::list<S_msrHarmony>::const_iterator i;
 //     for (S_msrHarmony harmony : fNoteHarmoniesList) {
@@ -2320,7 +2306,15 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //           "msrNote::setMeasureElementMeasurePosition()");
 //     } // for
 //   }
-//
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+    gLogStream << "fNoteFiguredBassesList.size (): " <<
+      fNoteFiguredBassesList.size () <<
+      std::endl;
+  }
+#endif
+
 //   // are there figured bass elements attached to this note?
 //   if (fNoteFiguredBassesList.size ()) {
 //     std::list<S_msrFiguredBass>::const_iterator i;
@@ -2333,7 +2327,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //           "msrNote::setMeasureElementMeasurePosition()");
 //     } // for
 //   }
-//
+
 //   // are there dal segnos attached to this note?
 //   if (fNoteDalSegnos.size ()) {
 //     for (S_msrDalSegno dalSegno : fNoteDalSegnos) {
@@ -2345,7 +2339,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //           "msrNote::setMeasureElementMeasurePosition()");
 //     } // for
 //   }
-// }
+}
 
 void msrNote::setNoteOccupiesAFullMeasure ()
 {
@@ -2357,7 +2351,7 @@ std::string msrNote::noteSoundingWholeNotesAsMsrString () const
   std::string result;
 
   if (fMeasureElementSoundingWholeNotes.getNumerator () == 0)
-    result = " ***no sounding whole notes***";
+    result = "[0 WHOLE NOTES]";
   else
     result =
       wholeNotesAsMsrString (
@@ -3802,16 +3796,6 @@ std::string msrNote::noteDisplayPitchKindAsString () const
   return s.str ();
 }
 
-std::string msrNote::noteGraphicDurationAsMsrString () const
-{
-  std::string
-    result =
-      msrDurationKindAsString (
-        fNoteGraphicDurationKind);
-
-  return result;
-}
-
 std::string msrNote::noteGraphicDurationAsMusicXMLString () const
 {
   std::string
@@ -3822,16 +3806,16 @@ std::string msrNote::noteGraphicDurationAsMusicXMLString () const
   return result;
 }
 
-std::string msrNote::tupletNoteGraphicDurationAsMsrString ( // JMI
-  int actualNotes, int normalNotes) const
-{
-  return
-    wholeNotesAsMsrString (
-      fInputLineNumber,
-      fMeasureElementSoundingWholeNotes
-        *
-      Rational (actualNotes, normalNotes));
-}
+// std::string msrNote::tupletNoteGraphicDurationAsMsrString ( // JMI v0.9.66
+//   int actualNotes, int normalNotes) const
+// {
+//   return
+//     wholeNotesAsMsrString (
+//       fInputLineNumber,
+//       fMeasureElementSoundingWholeNotes
+//         *
+//       Rational (actualNotes, normalNotes));
+// }
 
 std::string msrNote::noteDiatonicPitchKindAsString (
   int inputLineNumber) const
@@ -3928,7 +3912,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
         "kNoteRegularInGraceNotesGroup" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", " <<
         fNoteOctaveKind;
 
@@ -3956,7 +3940,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
         "kNoteInChordInGraceNotesGroup" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", " <<
         fNoteOctaveKind;
 
@@ -3986,7 +3970,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
         "kNoteRegularInTuplet" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", " <<
         fNoteOctaveKind <<
         ", fMeasureElementSoundingWholeNotes: " <<
@@ -4007,7 +3991,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
         "kNoteRestInTuplet" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
         ", fNoteDisplayWholeNotes: " <<
@@ -4026,7 +4010,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
         "kNoteInTupletInGraceNotesGroup" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString ();
+        fNoteGraphicDurationKind;
 
       if (! fetchNoteIsARest ()) {
         s <<
@@ -4050,7 +4034,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
     case msrNoteKind::kNoteUnpitchedInTuplet:
       s <<
         "kNoteUnpitchedInTuplet " <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
         ", fNoteDisplayWholeNotes: " <<
@@ -4138,7 +4122,7 @@ std::string msrNote::asShortString () const
             fetchNoteUpLinkToVoice ();
 
         s <<
-          ", voice: ";
+          ", voiceNumber: ";
         if (voice) {
           s <<
             voice->getVoiceNumber ();
@@ -4157,7 +4141,7 @@ std::string msrNote::asShortString () const
         }
 
         s <<
-          ", staff: ";
+          ", staffNumber: ";
         if (staff) {
           s <<
             staff->getStaffNumber ();
@@ -4187,7 +4171,7 @@ std::string msrNote::asShortString () const
         "kNoteRegularInGraceNotesGroup" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", " <<
         fNoteOctaveKind;
 
@@ -4211,7 +4195,7 @@ std::string msrNote::asShortString () const
         "kNoteInChordInGraceNotesGroup " <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", " <<
         fNoteOctaveKind;
 
@@ -4239,7 +4223,7 @@ std::string msrNote::asShortString () const
         "kNoteRegularInTuplet" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
         ", fNoteDisplayWholeNotes: " <<
@@ -4268,7 +4252,7 @@ std::string msrNote::asShortString () const
         "kNoteRestInTuplet" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
         ", fNoteDisplayWholeNotes: " <<
@@ -4295,7 +4279,7 @@ std::string msrNote::asShortString () const
         "kNoteInTupletInGraceNotesGroup" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
         ", fNoteDisplayWholeNotes: " <<
@@ -4441,7 +4425,7 @@ std::string msrNote::asMinimalString () const
         "kNoteRegularInGraceNotesGroup" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", " <<
         fNoteOctaveKind;
 
@@ -4465,7 +4449,7 @@ std::string msrNote::asMinimalString () const
         "kNoteInChordInGraceNotesGroup " <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", " <<
         fNoteOctaveKind;
 
@@ -4493,7 +4477,7 @@ std::string msrNote::asMinimalString () const
         "kNoteRegularInTuplet" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
         ", fNoteDisplayWholeNotes: " <<
@@ -4514,7 +4498,7 @@ std::string msrNote::asMinimalString () const
         "kNoteRestInTuplet" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
         ", fNoteDisplayWholeNotes: " <<
@@ -4533,7 +4517,7 @@ std::string msrNote::asMinimalString () const
         "kNoteInTupletInGraceNotesGroup" <<
         ", " <<
         notePitchAsString () <<
-        noteGraphicDurationAsMsrString () <<
+        fNoteGraphicDurationKind <<
         ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
         ", fNoteDisplayWholeNotes: " <<
@@ -4649,7 +4633,7 @@ std::string msrNote::soundingNoteEssentialsAsString () const
   std::stringstream s;
 
   s <<
-    "sounding " <<
+    "noteSoundingWholeNotes " <<
     notePitchAsString () <<
     noteSoundingWholeNotesAsMsrString ();
 
@@ -4660,7 +4644,7 @@ std::string msrNote::soundingNoteEssentialsAsString () const
   s <<
     ' ' <<
     fNoteOctaveKind <<
-//     ",++++ " << // JMI KAKA
+//     ",++++ " << // JMI KAKA v0.9.66
     noteComplementsAsString ();
 
   return s.str ();
@@ -4720,8 +4704,6 @@ std::string msrNote::nonSoundingNoteEssentialsAsString () const
     ",---- " << // JMI KAKA
     noteComplementsAsString () <<
     ']';
-
-  return ""; // JMI KAKA
 
   return s.str ();
 }
@@ -5097,97 +5079,87 @@ std::string msrNote::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrNote::printNoteEssentials (std::ostream& os) const
+std::string msrNote::noteEssentialsAsSting () const
 {
-  os <<
+  std::stringstream s;
+
+  s <<
     "fNoteKind: ";
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_NO_:
-      os <<
-        "*noNote*";
+      s <<
+        "[kNote_NO_]";
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
-      os <<
+      s <<
         "kNoteRestInMeasure: ";
 
       if (fNoteOccupiesAFullMeasure) {
-        os <<
+        s <<
           "R" <<
-          /* JMI
-          multipleFullBarRestsWholeNotesAsMsrString (
-            fInputLineNumber,
-            fMeasureElementSoundingWholeNotes);
-            */
-//           nonSoundingNoteEssentialsAsString (); // JMI v0.9.66
-//           soundingNoteEssentialsAsString ();
           asShortStringWithRawWholeNotes ();
       }
       else {
-        os <<
+        s <<
           "r" <<
-//           nonSoundingNoteEssentialsAsString (); // JMI v0.9.66
-//           soundingNoteEssentialsAsString ();
           asShortStringWithRawWholeNotes ();
       }
-      os << std::endl;
-
-//       os <<
-//         nonSoundingNoteEssentialsAsString ();
-      break;
+      s << std::endl;
+        break;
 
     case msrNoteKind::kNoteSkipInMeasure:
-      os <<
+      s <<
         "kNoteSkipInMeasure: " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
-      os <<
+      s <<
         "kNoteUnpitchedInMeasure: " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
-      os <<
+      s <<
         "kNoteRegularInMeasure: " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
-      os <<
+      s <<
         "kNoteInDoubleTremolo: " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
-      os <<
+      s <<
         "kNoteRegularInGraceNotesGroup " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
-      os <<
+      s <<
         "kNoteSkipInGraceNotesGroup: " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
-      os <<
+      s <<
         "kNoteInChordInGraceNotesGroup: " <<
         nonSoundingNoteEssentialsAsString () <<
         ", fNoteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteRegularInChord:
-      os <<
+      s <<
         "kNoteRegularInChord: " <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
-      os <<
+      s <<
         "kNoteRegularInTuplet: " <<
         soundingNoteEssentialsAsString ();
 /* JMI
@@ -5201,13 +5173,13 @@ void msrNote::printNoteEssentials (std::ostream& os) const
       break;
 
     case msrNoteKind::kNoteRestInTuplet:
-      os <<
+      s <<
         "kNoteRestInTuplet: " <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-      os <<
+      s <<
         "kNoteInTupletInGraceNotesGroup " <<
         nonSoundingNoteEssentialsAsString ();
 /* JMI
@@ -5219,12 +5191,12 @@ void msrNote::printNoteEssentials (std::ostream& os) const
             fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
 
-      os <<
+      s <<
         ", fNoteTupletFactor: " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
-      os <<
+      s <<
         "kNoteUnpitchedInTuplet: " <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
@@ -5235,45 +5207,37 @@ void msrNote::printNoteEssentials (std::ostream& os) const
             fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
             fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
-      os <<
+      s <<
         ", noteTupletFactor: " << fNoteTupletFactor.asString ();
       break;
   } // switch
 
-  os <<
-    ", line " << fInputLineNumber <<
-    std::endl;
+  return s.str ();
 }
 
 void msrNote::print (std::ostream& os) const
 {
   os <<
-    "[Note ";
-
-  // print the note essentials
-  printNoteEssentials (os);
+    "[Note" <<
+    ", " <<
+    noteEssentialsAsSting () <<
+    ", line " << fInputLineNumber <<
+    std::endl;
 
   ++gIndenter;
 
-/* JMI
-  os << std::left <<
-    ", measurePosition: ";
-    / * JMI
-  if (fMeasureElementMeasurePosition == msrMoment::K_NO_POSITION_MEASURE_NUMBER) {
-    os << "unknown (" << fMeasureElementMeasurePosition << ")";
-  }
-  else {
-    os << fMeasureElementMeasurePosition;
-  }
-  * /
-  os << fMeasureElementMeasurePosition;
-
-  os <<
-    ", voicePosition: " <<
-    fMeasureElementVoicePosition;
-*/
-
   const int fieldWidth = 44;
+
+  // print measure position and sounding whole notes
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes <<
+    std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -5419,9 +5383,7 @@ void msrNote::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fNoteColorAlphaRGB" << ": " <<
     fNoteColorAlphaRGB <<
-    std::endl;
-
-  os << std::left <<
+    std::endl <<
     std::setw (fieldWidth) <<
     "fNoteColorAlphaRGBHasBenSet" << ": " <<
     fNoteColorAlphaRGBHasBenSet <<
@@ -5451,36 +5413,47 @@ void msrNote::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "measureElementMeasureNumber" << ": ";
-  if (fNoteUpLinkToMeasure->getMeasureNumber () == K_NO_MEASURE_NUMBER) {
-    os <<
-      "unknown";
-  }
-  else if (fNoteUpLinkToMeasure->getMeasureNumber ().size ()) {
-    os <<
-      fNoteUpLinkToMeasure->getMeasureNumber ();
+  if (fNoteUpLinkToMeasure) {
+    std::string
+      measureNumber =
+        fNoteUpLinkToMeasure->
+          getMeasureNumber ();
+
+    if (measureNumber == K_NO_MEASURE_NUMBER) {
+      os << "[UNKNOWN]";
+    }
+    else {
+      os << measureNumber;
+    }
   }
   else {
-    std::stringstream s;
-
-    s <<
-      "fNoteUpLinkToMeasure->getMeasureNumber () is empty in note " <<
-      this->asString () <<
-      "'";
-
-// JMI     msrInternalError (
-    msrInternalWarning (
-      gGlobalServiceRunData->getInputSourceName (),
-      fInputLineNumber,
-      s.str ());
+    os << "[NONE]";
   }
-  os << std::endl;
 
-  // print measure position
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition <<
-    std::endl;
+
+//   if (fNoteUpLinkToMeasure->getMeasureNumber () == K_NO_MEASURE_NUMBER) {
+//     os <<
+//       "[UNKNOWN]";
+//   }
+//   else if (fNoteUpLinkToMeasure->getMeasureNumber ().size ()) {
+//     os <<
+//       fNoteUpLinkToMeasure->getMeasureNumber ();
+//   }
+//   else {
+//     std::stringstream s;
+//
+//     s <<
+//       "fNoteUpLinkToMeasure->getMeasureNumber () is empty in note " <<
+//       this->asString () <<
+//       "'";
+//
+// // JMI     msrInternalError (
+//     msrInternalWarning (
+//       gGlobalServiceRunData->getInputSourceName (),
+//       fInputLineNumber,
+//       s.str ());
+//   }
+  os << std::endl;
 
   // print position from beginning of voice
 //   os << std::left <<
@@ -5522,22 +5495,19 @@ void msrNote::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fNoteDirectUpLinkToChord" << ": ";
-
   if (fNoteDirectUpLinkToChord) {
     os <<
       fNoteDirectUpLinkToChord->asShortString ();
   }
   else {
-    os <<
-      ": " << "[NONE]";
+    os << "[NONE]";
   }
   os << std::endl;
 
   // print note uplink to grace notes group
   os <<
     std::setw (fieldWidth) <<
-    "fNoteDirectUpLinkToGraceNotesGroup" << " :";
-
+    "fNoteDirectUpLinkToGraceNotesGroup" << ": ";
   if (fNoteDirectUpLinkToGraceNotesGroup) {
     os << std::endl;
     ++gIndenter;
@@ -5546,8 +5516,7 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os <<
-      ' ' << "[NONE]";
+    os << "[NONE]";
   }
   os << std::endl;
 
@@ -5895,7 +5864,7 @@ void msrNote::print (std::ostream& os) const
     case msrNoteKind::kNoteRestInMeasure:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "noteSoundingWholeNotesAsMsrString" << " : \"" <<
+        "noteSoundingWholeNotesAsMsrString" << ": \"" <<
         noteSoundingWholeNotesAsMsrString () <<
         "\"" <<
         std::endl;
@@ -5904,7 +5873,7 @@ void msrNote::print (std::ostream& os) const
     case msrNoteKind::kNoteSkipInMeasure:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "noteSoundingWholeNotesAsMsrString" << " : \"" <<
+        "noteSoundingWholeNotesAsMsrString" << ": \"" <<
         noteSoundingWholeNotesAsMsrString () <<
         "\"" <<
         std::endl;
@@ -5913,22 +5882,22 @@ void msrNote::print (std::ostream& os) const
     case msrNoteKind::kNoteUnpitchedInMeasure:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "noteSoundingWholeNotesAsMsrString" << " : \"" <<
+        "noteSoundingWholeNotesAsMsrString" << ": \"" <<
         noteSoundingWholeNotesAsMsrString () <<
         "\"" <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "noteDisplayWholeNotesAsMsrString" << " : \"" <<
+        "noteDisplayWholeNotesAsMsrString" << ": \"" <<
         noteDisplayWholeNotesAsMsrString () <<
         "\"" <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "noteGraphicDurationAsMsrString" << " : \"" <<
-        noteGraphicDurationAsMsrString () <<
+        "fNoteGraphicDurationKind" << ": \"" <<
+        fNoteGraphicDurationKind <<
         "\"" <<
         std::setw (fieldWidth) <<
-        "noteGraphicDurationAsMusicXMLString" << " : \"" <<
-        noteGraphicDurationAsMsrString () <<
+        "noteGraphicDurationAsMusicXMLString" << ": \"" <<
+        fNoteGraphicDurationKind <<
         "\"" <<
         std::endl;
       break;
@@ -5936,18 +5905,18 @@ void msrNote::print (std::ostream& os) const
     case msrNoteKind::kNoteRegularInMeasure:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "noteSoundingWholeNotesAsMsrString" << " : \"" <<
+        "noteSoundingWholeNotesAsMsrString" << ": \"" <<
         noteSoundingWholeNotesAsMsrString () <<
         "\"" <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "noteDisplayWholeNotesAsMsrString" << " : \"" <<
+        "noteDisplayWholeNotesAsMsrString" << ": \"" <<
         noteDisplayWholeNotesAsMsrString () <<
         "\"" <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "noteGraphicDurationAsMsrString" << " : \"" <<
-        noteGraphicDurationAsMsrString () <<
+        "fNoteGraphicDurationKind" << ": \"" <<
+        fNoteGraphicDurationKind <<
         "\"" <<
         std::endl;
       break;
@@ -5960,8 +5929,8 @@ void msrNote::print (std::ostream& os) const
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "noteGraphicDurationAsMsrString" << " : \"" <<
-        noteGraphicDurationAsMsrString () <<
+        "fNoteGraphicDurationKind" << ": \"" <<
+        fNoteGraphicDurationKind <<
         "\"" <<
         std::endl;
       break;
@@ -5977,8 +5946,8 @@ void msrNote::print (std::ostream& os) const
         fNoteDisplayWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "noteGraphicDurationAsMsrString" << " : \"" <<
-        noteGraphicDurationAsMsrString () <<
+        "fNoteGraphicDurationKind" << ": \"" <<
+        fNoteGraphicDurationKind <<
         "\"" <<
         std::endl;
       break;
@@ -5994,7 +5963,7 @@ void msrNote::print (std::ostream& os) const
       /* JMI KAKA
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fNoteTupletNoteGraphicDurationAsMsrString" << " : \"" <<
+        "fNoteTupletNoteGraphicDurationAsMsrString" << ": \"" <<
         fNoteTupletNoteGraphicDurationAsMsrString <<
         "\"" <<
         std::endl <<
@@ -6025,8 +5994,8 @@ void msrNote::print (std::ostream& os) const
 
       os <<
         std::setw (fieldWidth) <<
-        "noteGraphicDurationAsMsrString" << " : \"" <<
-        noteGraphicDurationAsMsrString () <<
+        "fNoteGraphicDurationKind" << ": \"" <<
+        fNoteGraphicDurationKind <<
         "\"" <<
         std::endl;
       break;
@@ -6965,20 +6934,25 @@ void msrNote::print (std::ostream& os) const
 void msrNote::printShort (std::ostream& os) const
 {
   os <<
-    "[Note " ;
-
-  // print the note essentials
-  printNoteEssentials (os);
+    "[Note" <<
+    ", " <<
+    noteEssentialsAsSting () <<
+    ", line " << fInputLineNumber <<
+    std::endl;
 
   ++gIndenter;
 
   const int fieldWidth = 44;
 
-  // print measure position
+  // print measure position and sounding whole notes
   os << std::left <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes <<
     std::endl;
 
   // print position from beginning of voice
@@ -6999,10 +6973,6 @@ void msrNote::printShort (std::ostream& os) const
     case msrNoteKind::kNoteRegularInChord:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << ": " <<
-        fMeasureElementSoundingWholeNotes <<
-        std::endl <<
-        std::setw (fieldWidth) <<
         "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl;
@@ -7020,16 +6990,12 @@ void msrNote::printShort (std::ostream& os) const
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << ": " <<
-        fMeasureElementSoundingWholeNotes <<
-        std::endl <<
-        std::setw (fieldWidth) <<
         "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "noteGraphicDurationAsMsrString" << " : \"" <<
-        noteGraphicDurationAsMsrString () <<
+        "fNoteGraphicDurationKind" << ": \"" <<
+        fNoteGraphicDurationKind <<
         "\"" <<
         std::endl;
       break;
@@ -7039,10 +7005,6 @@ void msrNote::printShort (std::ostream& os) const
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
     case msrNoteKind::kNoteUnpitchedInTuplet:
       os <<
-        std::setw (fieldWidth) <<
-        "fMeasureElementSoundingWholeNotes" << ": " <<
-        fMeasureElementSoundingWholeNotes <<
-        std::endl <<
         std::setw (fieldWidth) <<
         "fNoteDisplayWholeNotes" << ": " <<
         fNoteDisplayWholeNotes <<

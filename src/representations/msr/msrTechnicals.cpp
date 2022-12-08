@@ -687,10 +687,10 @@ void msrTechnicalWithString::print (std::ostream& os) const
     ", fTechnicalWithStringPlacementKind " << fTechnicalWithStringPlacementKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTechnicalWithStringValue" << " : \"" << fTechnicalWithStringValue << "\"" <<
+    "fTechnicalWithStringValue" << ": \"" << fTechnicalWithStringValue << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    ", fTechnicalWithStringPlacementKind" << " : \"" << fTechnicalWithStringPlacementKind <<
+    ", fTechnicalWithStringPlacementKind" << ": \"" << fTechnicalWithStringPlacementKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<

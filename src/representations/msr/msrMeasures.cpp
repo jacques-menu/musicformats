@@ -6541,7 +6541,7 @@ void msrMeasure::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fNextMeasureNumber" << " : \"" <<
+    "fNextMeasureNumber" << ": \"" <<
     fNextMeasureNumber <<
     "\"" <<
     std::endl;

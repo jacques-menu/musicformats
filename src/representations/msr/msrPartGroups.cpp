@@ -1187,7 +1187,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartGroupName" << " : \"" <<
+    "fPartGroupName" << ": \"" <<
     fPartGroupName <<
     "\"" <<
     std::endl;
@@ -1209,17 +1209,17 @@ void msrPartGroup::print (std::ostream& os) const
 
   os << std::left <<
    std::setw (fieldWidth) <<
-    "fPartGroupNameDisplayText" << " : \"" <<
+    "fPartGroupNameDisplayText" << ": \"" <<
     fPartGroupNameDisplayText <<
     "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartGroupAccidentalText" << " : \"" <<
+    "fPartGroupAccidentalText" << ": \"" <<
     fPartGroupAccidentalText <<
     "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartGroupAbbrevation" << " : \"" <<
+    "fPartGroupAbbrevation" << ": \"" <<
     fPartGroupAbbreviation <<
     "\"" <<
     std::endl <<
@@ -1309,7 +1309,7 @@ void msrPartGroup::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartGroupName" << " : \"" <<
+    "fPartGroupName" << ": \"" <<
     fPartGroupName <<
     "\"" <<
     std::endl << std::endl;
@@ -1340,12 +1340,12 @@ void msrPartGroup::printSummary (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartGroupName" << " : \"" <<
+    "fPartGroupName" << ": \"" <<
     fPartGroupName <<
     "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fPartGroupAbbrevation" << " : \"" <<
+    "fPartGroupAbbrevation" << ": \"" <<
     fPartGroupAbbreviation <<
     "\"" <<
     std::endl <<
@@ -1354,7 +1354,7 @@ void msrPartGroup::printSummary (std::ostream& os) const
     fPartGroupSymbolDefaultX <<
       std::endl <<
     std::setw (fieldWidth) <<
-    "fPartGroupSymbolKind" << " : \"" <<
+    "fPartGroupSymbolKind" << ": \"" <<
     msrPartGroupSymbolKindAsString (
       fPartGroupSymbolKind) <<
     "\"" <<

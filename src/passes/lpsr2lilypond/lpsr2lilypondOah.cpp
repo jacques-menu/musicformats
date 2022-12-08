@@ -223,7 +223,7 @@ void lilypondScoreOutputKindAtom::print (std::ostream& os) const
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fLpsrScoreOutputKindVariable" << " : \"" <<
+    "fLpsrScoreOutputKindVariable" << ": \"" <<
     lpsrScoreOutputKindAsString (
       fLpsrScoreOutputKindVariable) <<
     "\"" <<
@@ -239,7 +239,7 @@ void lilypondScoreOutputKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : \"" <<
+    ": \"" <<
     lpsrScoreOutputKindAsString (
       fLpsrScoreOutputKindVariable) <<
     "\"";
@@ -1898,7 +1898,7 @@ void lilypondAccidentalStyleKindAtom::print (std::ostream& os) const
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fLpsrAccidentalStyleKindVariable" << " : \"" <<
+    "fLpsrAccidentalStyleKindVariable" << ": \"" <<
     lpsrAccidentalStyleKindAsString (
       fLpsrAccidentalStyleKindVariable) <<
     "\"" <<
@@ -5320,7 +5320,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fetchNamesBetweenQuotes () <<
-    " :";
+    ": ";
   if (! fResetMeasureElementMeasureNumberMap.size ()) {
     os << " empty";
   }

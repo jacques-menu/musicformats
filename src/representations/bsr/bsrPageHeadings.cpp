@@ -239,7 +239,7 @@ void bsrPageHeading::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "pageHeadingTitle" << " : \"" << fPageHeadingTitle << "\"" <<
+    "pageHeadingTitle" << ": \"" << fPageHeadingTitle << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
     "pageHeadingPagination" <<

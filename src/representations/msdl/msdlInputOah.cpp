@@ -242,7 +242,7 @@ void msdlKeywordsLanguageAtom::print (std::ostream& os) const
     "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fMsdlKeywordsLanguageKindVariable" << " : \"" <<
+    "fMsdlKeywordsLanguageKindVariable" << ": \"" <<
     msdlKeywordsLanguageKindAsString (
       fMsdlKeywordsLanguageKindVariable) <<
     "\"" <<
@@ -258,7 +258,7 @@ void msdlKeywordsLanguageAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : \"" <<
+    ": \"" <<
     msdlKeywordsLanguageKindAsString (
       fMsdlKeywordsLanguageKindVariable) <<
     "\"";
@@ -905,7 +905,7 @@ void msdlCommentsTypeAtom::print (std::ostream& os) const
     "fVariableName" << ": " <<
     fVariableName <<
     std::setw (fieldWidth) <<
-    "fMsdlCommentsTypeKindVariable" << " : \"" <<
+    "fMsdlCommentsTypeKindVariable" << ": \"" <<
     msdlCommentsTypeKindAsString (
       fMsdlCommentsTypeKindVariable) <<
     "\"" <<
@@ -921,7 +921,7 @@ void msdlCommentsTypeAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : \"" <<
+    ": \"" <<
     msdlCommentsTypeKindAsString (
       fMsdlCommentsTypeKindVariable) <<
     "\"";
@@ -1150,7 +1150,7 @@ void msdlUserLanguageAtom::print (std::ostream& os) const
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMsdlUserLanguageVariable" << " : \"" <<
+    "fMsdlUserLanguageVariable" << ": \"" <<
     msdlUserLanguageKindAsString (
       fMsdlUserLanguageVariable) <<
     "\"" <<
@@ -1166,7 +1166,7 @@ void msdlUserLanguageAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : \"" <<
+    ": \"" <<
     msdlUserLanguageKindAsString (
       fMsdlUserLanguageVariable) <<
     "\"";
@@ -1795,13 +1795,13 @@ void msdlInputOahGroup::printMsdlInputOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "msdlQuarterTonesPitchesLanguage" << " : \"" <<
+    std::setw (fieldWidth) << "msdlQuarterTonesPitchesLanguage" << ": \"" <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsdlQuarterTonesPitchesLanguageKind) <<
     "\"" <<
     std::endl <<
 
-    std::setw (fieldWidth) << "msdlKeywordsLanguage" << " : \"" <<
+    std::setw (fieldWidth) << "msdlKeywordsLanguage" << ": \"" <<
     msdlKeywordsLanguageKindAsString (
       fMsdlKeywordsLanguageKind) <<
     "\"" <<

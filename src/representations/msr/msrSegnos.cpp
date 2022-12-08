@@ -366,7 +366,7 @@ void msrDalSegno::print (std::ostream& os) const
     "dalSegnoKind" << ": " << msrDalSegnoKindAsString (fDalSegnoKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "dalSegnoString" << " : \"" << fDalSegnoString << "\"" <<
+    "dalSegnoString" << ": \"" << fDalSegnoString << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
     "staffNumber" << ": " << fStaffNumber <<

@@ -226,13 +226,13 @@ void brailleOutputKindAtom::print (std::ostream& os) const
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fBrailleOutputKindVariable" << " : \"" <<
+    "fBrailleOutputKindVariable" << ": \"" <<
     bsrBrailleOutputKindAsString (
       fBrailleOutputKindVariable) <<
       "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fBrailleOutputKindValue" << " : \"" <<
+    "fBrailleOutputKindValue" << ": \"" <<
     bsrBrailleOutputKindAsString (
       fBrailleOutputKindValue) <<
       "\"" <<
@@ -469,7 +469,7 @@ void brailleUTFKindAtom::printAtomWithVariableOptionsValues (
   os << std::left <<
     std::setw (valueFieldWidth) <<
     fVariableName <<
-    " : \"" <<
+    ": \"" <<
     bsrUTFKindAsString (
       fBsrUTFKindVariable) <<
     "\"";
@@ -676,7 +676,7 @@ void brailleByteOrderingKindAtom::print (std::ostream& os) const
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fBsrByteOrderingKindVariable" << " : \"" <<
+    "fBsrByteOrderingKindVariable" << ": \"" <<
     bsrByteOrderingKindAsString (
       fBsrByteOrderingKindVariable) <<
       "\"" <<

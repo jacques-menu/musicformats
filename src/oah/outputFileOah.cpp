@@ -211,11 +211,11 @@ void outputFileOahGroup::printOutputFileOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fOutputFileName" << " : \"" <<
+    std::setw (fieldWidth) << "fOutputFileName" << ": \"" <<
     fOutputFileName <<
     "\"" <<
     std::endl <<
-    std::setw (fieldWidth) << "fAutoOutputFileName" << " : \"" <<
+    std::setw (fieldWidth) << "fAutoOutputFileName" << ": \"" <<
     fAutoOutputFileName <<
     "\"" <<
     std::endl;

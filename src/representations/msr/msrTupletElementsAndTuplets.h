@@ -157,11 +157,16 @@ class EXP msrTuplet : public msrTupletElement
     S_msrTuplet           getTupletDirectUpLinkToTuplet () const
                               { return fTupletDirectUpLinkToTuplet; }
 
-    // members measure positions
-    Rational              setTupletMembersMeasurePositions (
-                            const S_msrMeasure&    measure,
-                            const Rational& measurePosition);
-                              // returns the position after the tuplet JMI ??? v0.9.66 SUPERFLOUS ???
+    // measure positions
+    // this override calls setTupletMembersMeasurePositions()
+    void                  setMeasureElementMeasurePosition (
+                            const S_msrMeasure& measure,
+                            const Rational&     measurePosition,
+                            const std::string&  context) override;
+
+    void                  setTupletMembersMeasurePositions (
+                            const S_msrMeasure& measure,
+                            const Rational&     measurePosition);
 
     // number
     int                   getTupletNumber () const

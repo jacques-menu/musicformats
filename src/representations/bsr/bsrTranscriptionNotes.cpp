@@ -137,7 +137,7 @@ void bsrTranscriptionNotesElement::print (std::ostream& os) const
   ++gIndenter;
 
   os <<
-    "transcriptionNoteText " << " : \"" << fTranscriptionNoteText << "\"" <<
+    "transcriptionNoteText " << ": \"" << fTranscriptionNoteText << "\"" <<
     std::endl;
 
   --gIndenter;

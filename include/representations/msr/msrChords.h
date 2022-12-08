@@ -361,8 +361,8 @@ class EXP msrChord : public msrTupletElement
                             const std::string&  context) override;
 
     void                  setChordMembersMeasurePosition (
-                            const S_msrMeasure&    measure,
-                            const Rational& measurePosition);
+                            const S_msrMeasure& measure,
+                            const Rational&     measurePosition);
 
   public:
 

@@ -354,7 +354,7 @@ void lpsrPaper::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fOddHeaderMarkup" << " : \"" <<
+    "fOddHeaderMarkup" << ": \"" <<
     fOddHeaderMarkup <<
     "\"" <<
     std::endl;
@@ -533,7 +533,7 @@ void lpsrPaper::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "oddHeaderMarkup" << " : \"" <<
+    "oddHeaderMarkup" << ": \"" <<
     fOddHeaderMarkup <<
     "\"" <<
     std::endl;
