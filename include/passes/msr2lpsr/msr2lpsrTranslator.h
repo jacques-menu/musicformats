@@ -685,6 +685,8 @@ class EXP msr2lpsrTranslator :
     // figured bass
     // ------------------------------------------------------
     Bool                      fOnGoingFiguredBassVoice;
+
+    Bool                      fOnGoingFiguredBass;
     S_msrFiguredBass          fCurrentFiguredBassClone;
 
 

@@ -1668,7 +1668,7 @@ class EXP mxsr2msrTranslator :
     msrSyllableKind           fCurrentSyllableKind;
     msrSyllableKind           fFirstSyllableInSlurKind;
     msrSyllableKind           fFirstSyllableInLigatureKind;
-    std::list<std::string>          
+    std::list<std::string>
                               fCurrentLyricTextsList;
 
     msrSyllableExtendKind     fCurrentSyllableExtendKind;
@@ -1682,7 +1682,7 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fCurrentStanzaHasText;
 
-    std::list<S_msrSyllable>       fCurrentNoteSyllables;
+    std::list<S_msrSyllable>  fCurrentNoteSyllables;
 
     Bool                      fLastHandledNoteInVoiceHasLyrics;
 
@@ -2111,7 +2111,7 @@ class EXP mxsr2msrTranslator :
     // technicals handling
     // ------------------------------------------------------
 
-    std::list<S_msrTechnical>      fCurrentTechnicalsList;
+    std::list<S_msrTechnical> fCurrentTechnicalsList;
     std::list<S_msrTechnicalWithInteger>
                               fCurrentTechnicalWithIntegersList;
     std::list<S_msrTechnicalWithFloat>
@@ -2169,7 +2169,7 @@ class EXP mxsr2msrTranslator :
 
     S_msrSpanner              fCurrentWavyLineSpannerStart;
 
-    std::list<S_msrSpanner>        fCurrentSpannersList;
+    std::list<S_msrSpanner>   fCurrentSpannersList;
 
     void                      attachCurrentSpannersToNote (
                                 const S_msrNote& note);
@@ -2181,7 +2181,7 @@ class EXP mxsr2msrTranslator :
     // stems handling
     // ------------------------------------------------------
 
-    std::vector<S_msrStem>         fPendingStemsVector; // std::stack JMI ???
+    std::vector<S_msrStem>    fPendingStemsVector; // std::stack JMI ???
 
     void                      copyNoteStemToChord (
                                 const S_msrNote&  note,
@@ -2343,9 +2343,9 @@ class EXP mxsr2msrTranslator :
     Bool                      fOnGoingSlur;
     Bool                      fOnGoingSlurHasStanza;
 
-    std::list<S_msrSlur>           fSlurStartsStack;
+    std::list<S_msrSlur>      fSlurStartsStack;
     void                      displaySlurStartsStack (
-                                  const std::string& context);
+                                const std::string& context);
 
     // ligatures handling
     // ------------------------------------------------------
