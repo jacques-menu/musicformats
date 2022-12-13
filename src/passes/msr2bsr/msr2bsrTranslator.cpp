@@ -2756,7 +2756,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif
 
-  // create a harmony new born clone
+  // create a harmony new-born clone
   fCurrentHarmonyClone =
     elt->createHarmonyNewbornClone (
       fCurrentVoiceClone);

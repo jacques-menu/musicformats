@@ -11,7 +11,7 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "ischemeWae.h"
 
 #include "waeOah.h"

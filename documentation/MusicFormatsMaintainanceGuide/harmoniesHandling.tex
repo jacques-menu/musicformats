@@ -307,7 +307,7 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
   fCurrentHarmonyDegreeValue           = -1;
   fCurrentHarmonyDegreeAlterationKind  = msrAlterationKind::kAlterationNatural;
 
-  fCurrentHarmonyWholeNotesOffset = rational (0, 1);
+  fCurrentHarmonyWholeNotesOffset = Rational (0, 1);
 
   fOnGoingHarmony = true;
 }
@@ -364,9 +364,9 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
           fCurrentHarmonyBassQuarterTonesPitchKind,
 
-          rational (1, 1),            // harmonySoundingWholeNotes,
+          Rational (1, 1),            // harmonySoundingWholeNotes,
                                       // will be set upon next note handling
-          rational (1, 1),            // harmonyDisplayWholeNotes,
+          Rational (1, 1),            // harmonyDisplayWholeNotes,
                                       // will be set upon next note handling
           fCurrentHarmoniesStaffNumber,
           msrTupletFactor (1, 1),     // will be set upon next note handling
@@ -463,7 +463,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 {
 	// ... ... ...
 
-  rational
+  Rational
     newNoteSoundingWholeNotes =
       newNote->
         getMeasureElementSoundingWholeNotes (),
@@ -675,7 +675,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif
 
-  // create a harmony new born clone
+  // create a harmony new-born clone
   fCurrentHarmonyClone =
     elt->
       createHarmonyNewbornClone (
@@ -700,7 +700,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingHarmoniesVoice) {
   /* JMI
     // get the harmony whole notes offset
-    rational
+    Rational
       harmonyWholeNotesOffset =
         elt->getHarmonyWholeNotesOffset ();
 
@@ -735,9 +735,8 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
     std::stringstream s;
 
     s <<
-      "harmony is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "harmony is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -796,7 +795,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif
 
-  // create a harmony new born clone
+  // create a harmony new-born clone
   fCurrentHarmonyClone =
     elt->
       createHarmonyNewbornClone (
@@ -821,7 +820,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingHarmoniesVoice) {
   /* JMI
     // get the harmony whole notes offset
-    rational
+    Rational
       harmonyWholeNotesOffset =
         elt->getHarmonyWholeNotesOffset ();
 
@@ -856,9 +855,8 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
     std::stringstream s;
 
     s <<
-      "harmony is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "harmony is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),

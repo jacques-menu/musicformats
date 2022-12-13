@@ -3910,7 +3910,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
   if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
     if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBasses ()) {
 #ifdef TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+      if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
         gLogStream <<
           "Ignoring the figured bass elements" <<
           ", line " <<

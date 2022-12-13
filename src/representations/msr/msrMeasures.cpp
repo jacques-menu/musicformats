@@ -2635,7 +2635,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
     harmony->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+  if (true || gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Appending harmony " << harmony->asString () <<
       " to measure " <<
@@ -2664,13 +2664,14 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   --gIndenter;
 }
 
-void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
+void msrMeasure::appendHarmonyToMeasureClone (
+  const S_msrHarmony& harmony)
 {
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+  if (true || gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Appending harmony " << harmony->asString () <<
       " to measure clone " <<
@@ -2681,7 +2682,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureWholeNotesDuration = " <<
+      "\", fMeasureWholeNotesDuration = " <<
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2706,9 +2707,9 @@ void msrMeasure::appendFiguredBassToMeasure (
     figuredBass->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (true || gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
-      "Appending figured bass element " << figuredBass->asString () <<
+      "Appending figured bass " << figuredBass->asString () <<
       " to measure " <<
       this->asShortString () <<
       " in voice \"" <<
@@ -2752,7 +2753,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
     figuredBass->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (true || gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Appending figured bass " << figuredBass->asString () <<
       " to measure clone " <<
@@ -2763,7 +2764,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureWholeNotesDuration = " <<
+      "\", fMeasureWholeNotesDuration = " <<
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -5534,7 +5535,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
     "figuredBassPart is null");
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Finalizing figured bass measure " <<
       this->asShortString () <<
@@ -5551,7 +5552,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
   ++gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBassDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeFiguredBassMeasure() 1");
@@ -5601,7 +5602,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
     measureRepeatContextKind);
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBassDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeFiguredBassMeasure() 2");

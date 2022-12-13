@@ -52,6 +52,8 @@
 
 #include "msr2lilypondInsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -235,6 +237,8 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
+
+  initializeWAE ();
 
   initializeMSR ();
   initializeLPSR ();

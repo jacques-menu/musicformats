@@ -33,7 +33,7 @@
 #include "oahWae.h"
 #include "displayOah.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 
 #include "msrGenerationOah.h"
 

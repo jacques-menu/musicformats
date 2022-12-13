@@ -4448,7 +4448,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
   const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+  if (true || gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "==> Setting the uplink to note of harmony " <<
       asString () <<
@@ -4665,6 +4665,7 @@ std::string msrHarmony::asString () const
 
   s <<
     "[Harmony" <<
+    ", " << std::hex << std::showbase << this << std::dec <<
     ", fMeasureElementMeasurePosition: " <<
     fMeasureElementMeasurePosition <<
     ", fHarmonyRootQuarterTonesPitchKind: " <<
@@ -4675,15 +4676,36 @@ std::string msrHarmony::asString () const
     ", fHarmonyKind: " <<
     fHarmonyKind;
 
+  // print the harmony uplink to note
+  s <<
+    ", fHarmonyUpLinkToNote: ";
+  if (fHarmonyUpLinkToNote) {
+    s <<
+      fHarmonyUpLinkToNote->asString ();
+  }
+  else {
+    s << "[NONE]";
+  }
+
   s <<
     ", fHarmonyUpLinkToMeasure: ";
     if (fHarmonyUpLinkToMeasure) {
       s <<
-        fHarmonyUpLinkToMeasure->getMeasureNumber ();
+        fHarmonyUpLinkToMeasure->asString ();
     }
     else {
       s << "[NONE]";
     }
+
+//   s <<
+//     ", fHarmonyUpLinkToVoice: ";
+//     if (fHarmonyUpLinkToVoice) {
+//       s <<
+//         fHarmonyUpLinkToVoice->asString ();
+//     }
+//     else {
+//       s << "[NONE]";
+//     }
 
   s <<
   // print the harmony bass voice position
@@ -4761,15 +4783,6 @@ std::string msrHarmony::asString () const
     s << "[NONE]";
   }
 
-  // print the harmony note uplink
-  s << ", fHarmonyUpLinkToNote: ";
-  if (fHarmonyUpLinkToNote) {
-    s << fHarmonyUpLinkToNote;
-  }
-  else {
-    s << "[NONE]";
-  }
-
   s <<
     ", line " << fInputLineNumber <<
     ']';
@@ -4804,6 +4817,46 @@ void msrHarmony::print (std::ostream& os) const
     fHarmonyDisplayWholeNotes <<
     std::endl;
 
+  // print the harmony uplink to note
+  os <<
+    std::setw (fieldWidth) <<
+    "fHarmonyUpLinkToNote" << ": ";
+  if (fHarmonyUpLinkToNote) {
+    os <<
+      std::endl <<
+      gTab << fHarmonyUpLinkToNote->asString ();
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  // print the harmony uplink to measure
+  os <<
+    std::setw (fieldWidth) <<
+    "fHarmonyUpLinkToMeasure" << ": ";
+  if (fHarmonyUpLinkToMeasure) {
+    os <<
+      fHarmonyUpLinkToMeasure->asString ();
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  // print the harmony uplink to voice
+//   os <<
+//     std::setw (fieldWidth) <<
+//     "fHarmonyUpLinkToVoice" << ": ";
+//   if (fHarmonyUpLinkToVoice) {
+//     os <<
+//       fHarmonyUpLinkToVoice->asString ();
+//   }
+//   else {
+//     os << "[NONE]";
+//   }
+//   os << std::endl;
+
   // print the harmony measure number
   os <<
     std::setw (fieldWidth) <<
@@ -4815,8 +4868,7 @@ void msrHarmony::print (std::ostream& os) const
   else {
     os << "[NONE]";
   }
-  os <<
-    std::endl;
+  os << std::endl;
 
   // print the harmony bass voice position
 //   os <<
@@ -4927,20 +4979,6 @@ void msrHarmony::print (std::ostream& os) const
     "fHarmonyFrame" << ": ";
   if (fHarmonyFrame) {
     os << fHarmonyFrame;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
-
-  // print the harmony note uplink
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmonyUpLinkToNote" << ": ";
-  if (fHarmonyUpLinkToNote) {
-    os <<
-      std::endl <<
-      gTab << fHarmonyUpLinkToNote->asString ();
   }
   else {
     os << "[NONE]";

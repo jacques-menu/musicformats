@@ -50,6 +50,8 @@
 
 #include "msr2brailleInsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -200,6 +202,8 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
+
+  initializeWAE ();
 
   initializeMSR ();
   initializeBSR ();

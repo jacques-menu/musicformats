@@ -118,8 +118,8 @@ void msdlParserEnglishWaeHandler::stringExpectedAsOpus () const
 }
 
 void msdlParserEnglishWaeHandler::unexpectedToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -130,8 +130,8 @@ void msdlParserEnglishWaeHandler::unexpectedToken (
 }
 
 void msdlParserEnglishWaeHandler::ignoringToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -242,8 +242,8 @@ void msdlParserFrenchWaeHandler::stringExpectedAsOpus () const
 }
 
 void msdlParserFrenchWaeHandler::unexpectedToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
 
   gLogStream <<
@@ -255,8 +255,8 @@ void msdlParserFrenchWaeHandler::unexpectedToken (
 }
 
 void msdlParserFrenchWaeHandler::ignoringToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -367,8 +367,8 @@ void msdlParserItalianWaeHandler::stringExpectedAsOpus () const
 }
 
 void msdlParserItalianWaeHandler::unexpectedToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -379,8 +379,8 @@ void msdlParserItalianWaeHandler::unexpectedToken (
 }
 
 void msdlParserItalianWaeHandler::ignoringToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -491,8 +491,8 @@ void msdlParserGermanWaeHandler::stringExpectedAsOpus () const
 }
 
 void msdlParserGermanWaeHandler::unexpectedToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -503,8 +503,8 @@ void msdlParserGermanWaeHandler::unexpectedToken (
 }
 
 void msdlParserGermanWaeHandler::ignoringToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -616,8 +616,8 @@ void msdlParserSpanishWaeHandler::stringExpectedAsOpus () const
 }
 
 void msdlParserSpanishWaeHandler::unexpectedToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -628,8 +628,8 @@ void msdlParserSpanishWaeHandler::unexpectedToken (
 }
 
 void msdlParserSpanishWaeHandler::ignoringToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -741,8 +741,8 @@ void msdlParserDutchWaeHandler::stringExpectedAsOpus () const
 }
 
 void msdlParserDutchWaeHandler::unexpectedToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<
@@ -753,8 +753,8 @@ void msdlParserDutchWaeHandler::unexpectedToken (
 }
 
 void msdlParserDutchWaeHandler::ignoringToken (
-  const msdlToken& theToken,
-  const std::string&    context) const
+  const msdlToken&   theToken,
+  const std::string& context) const
 {
   gLogStream <<
     "### " << context << ": " <<

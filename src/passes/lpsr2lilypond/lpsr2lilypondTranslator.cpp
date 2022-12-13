@@ -40,7 +40,7 @@
 #include "lpsrScores.h"
 #include "lpsrVoices.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "lpsr2lilypondWae.h"
 
 #include "oahEnableTracingIfDesired.h"
@@ -11854,7 +11854,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 
 		if (fOnGoingNotesStack.size () > 0) {
 	#ifdef TRACING_IS_ENABLED
-			if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+			if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
 				fLilypondCodeStream <<
 					"%{ fOnGoingNotesStack.size () S_msrFiguredBass JMI " <<
 					fCurrentFiguredBass->asString () <<

@@ -2425,28 +2425,31 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
     gLogStream <<
       "--> Start visiting msrHarmony '" <<
       elt->asString () <<
+      ", fCurrentVoiceClone->getVoiceKind (): " << fCurrentVoiceClone->getVoiceKind () <<
       ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
+      ", fCurrentHarmonyClone: " << fCurrentHarmonyClone <<
       ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }
 #endif
 
-  // create a harmony new born clone
+  // create a harmony new-born clone
   fCurrentHarmonyClone =
     elt->
       createHarmonyNewbornClone (
         fCurrentVoiceClone);
 
   if (fOnGoingNonGraceNote) {
-    // register this note as the harmony note upLink
+    // register fCurrentNonGraceNoteClone as the harmony note upLink
     fCurrentHarmonyClone->
-      setHarmonyUpLinkToNote (fCurrentNonGraceNoteClone);
+      setHarmonyUpLinkToNote (
+      	fCurrentNonGraceNoteClone);
 
-    // register the harmony in the current non-grace note clone
+    // append the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
       appendHarmonyToNoteHarmoniesList (
         fCurrentHarmonyClone);
@@ -2459,38 +2462,11 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
     // register the harmony clone in the current chord clone
     fCurrentChordClone->
       appendHarmonyToChord (
-        fCurrentHarmonyClone); // JMI
+        fCurrentHarmonyClone); // JMI ??? v0.9.66
   }
 
   else if (fOnGoingHarmoniesVoice) {
-  /* JMI
-    // get the harmony whole notes offset
-    Rational
-      harmonyWholeNotesOffset =
-        elt->getHarmonyWholeNotesOffset ();
-
-    // is harmonyWholeNotesOffset not equal to 0?
-    if (harmonyWholeNotesOffset.getNumerator () != 0) {
-      // create skip with duration harmonyWholeNotesOffset
-      S_msrNote
-        skip =
-          msrNote::createSkipNote (
-            elt->                getInputLineNumber (),
-            "666", // JMI elt->                getHarmoniesMeasureNumber (),
-            elt->                getHarmonyDisplayWholeNotes (), // would be 0/1 otherwise JMI
-            elt->                getHarmonyDisplayWholeNotes (),
-            0, // JMI elt->                getHarmonyDotsNumber (),
-            fCurrentVoiceClone-> getRegularVoiceStaffSequentialNumber (), // JMI
-            fCurrentVoiceClone-> getVoiceNumber ());
-
-      // append it to the current voice clone
-      // to 'push' the harmony aside
-      fCurrentVoiceClone->
-        appendNoteToVoice (skip);
-    }
-*/
-
-    // append the harmony to the current voice clone
+    // append the harmony clone to the current voice clone
     fCurrentVoiceClone->
       appendHarmonyToVoiceClone (
         fCurrentHarmonyClone);
@@ -2500,9 +2476,8 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
     std::stringstream s;
 
     s <<
-      "harmony is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "harmony is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -2549,7 +2524,9 @@ void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
   }
 #endif
 
+  // forget about current harmony clone
   fCurrentHarmonyClone = nullptr;
+
   fOnGoingHarmony = false;
 }
 
@@ -2577,9 +2554,8 @@ void msr2lpsrTranslator::visitStart (S_msrFrame& elt)
     std::stringstream s;
 
     s <<
-      "frame is out of context, cannot be handled:'" <<
-      elt->asShortString () <<
-      "'";
+      "frame is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -2597,80 +2573,68 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
     gLogStream <<
       "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
-      "'" <<
+      ", fCurrentVoiceClone->getVoiceKind (): " << fCurrentVoiceClone->getVoiceKind () <<
+      ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
+      ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingFiguredBassVoice: " << fOnGoingFiguredBassVoice <<
+      ", fOnGoingFiguredBass: " << fOnGoingFiguredBass <<
+      ", fCurrentFiguredBassClone: " << fCurrentFiguredBassClone <<
+      ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }
 #endif
 
-  // handle the figured bass only when attached to a note in a regular voice,
-  // since it needs to be attached to the latter
-  Bool doHandleFiguredBass;
+	// create a figured bass new-born clone
+	fCurrentFiguredBassClone =
+		elt->
+			createFiguredBassNewbornClone (
+				fCurrentVoiceClone);
 
-  switch (fCurrentVoiceClone->getVoiceKind ()) {
-    case msrVoiceKind::kVoiceKindRegular:
-      doHandleFiguredBass = true;
-      break;
+	if (fOnGoingNonGraceNote) {
+    // register fCurrentNonGraceNoteClone as the figured bass's note upLink
+    fCurrentFiguredBassClone->
+      setFiguredBassUpLinkToNote (
+      	fCurrentNonGraceNoteClone);
 
-    case msrVoiceKind::kVoiceKindDynamics:
-    case msrVoiceKind::kVoiceKindHarmonies:
-    case msrVoiceKind::kVoiceKindFiguredBass:
-      break;
-  } // switch
+		// append the figured bass to the current non-grace note clone
+		fCurrentNonGraceNoteClone->
+			appendFiguredBassToNoteFiguredBassesList (
+				fCurrentFiguredBassClone);
 
-  if (doHandleFiguredBass) {
-		// create a figured bass new born clone
-		fCurrentFiguredBassClone =
-			elt->
-				createFiguredBassNewbornClone (
-					fCurrentVoiceClone);
-
-		if (fOnGoingNonGraceNote) {
-			// append the figured bass to the current non-grace note clone
-			fCurrentNonGraceNoteClone->
-				appendFiguredBassToNoteFiguredBassesList (
-					fCurrentFiguredBassClone);
-
-			// don't append the figured bass to the part figured bass,  JMI ???
-			// this will be done below
-		}
-
-		else if (fOnGoingChord) {
-			// register the figured bass element clone in the current chord clone
-			fCurrentChordClone->
-				setChordFiguredBass (fCurrentFiguredBassClone); // JMI
-		}
-
-		else if (fOnGoingFiguredBassVoice) { // JMI
-			/*
-			// register the figured bass in the part clone figured bass
-			fCurrentPartClone->
-				appendFiguredBassToPartClone (
-					fCurrentVoiceClone,
-					fCurrentFiguredBassClone);
-					*/
-			// append the figured bass to the current voice clone
-			fCurrentVoiceClone->
-				appendFiguredBassToVoiceClone (
-					fCurrentFiguredBassClone);
-		}
-
-		else {
-			std::stringstream s;
-
-			s <<
-				"figured bass is out of context, cannot be handled:'" <<
-				elt->asShortString () <<
-				"'";
-
-			msr2lpsrInternalError (
-				gGlobalServiceRunData->getInputSourceName (),
-				elt->getInputLineNumber (),
-				__FILE__, __LINE__,
-				s.str ());
-		}
+		// don't append the figured bass to the part figured bass,  JMI ???
+		// this will be done below
 	}
+
+	else if (fOnGoingChord) {
+		// register the figured bass element clone in the current chord clone
+		fCurrentChordClone->
+			setChordFiguredBass (
+				fCurrentFiguredBassClone); // JMI v0.9.66
+	}
+
+	else if (fOnGoingFiguredBassVoice) { // JMI
+		// append the figured bass clone to the current voice clone
+		fCurrentVoiceClone->
+			appendFiguredBassToVoiceClone (
+				fCurrentFiguredBassClone);
+	}
+
+	else {
+		std::stringstream s;
+
+		s <<
+			"figured bass is out of context, cannot be handled: " <<
+			elt->asShortString ();
+
+		msr2lpsrInternalError (
+			gGlobalServiceRunData->getInputSourceName (),
+			elt->getInputLineNumber (),
+			__FILE__, __LINE__,
+			s.str ());
+	}
+
+  fOnGoingFiguredBass = true;
 }
 
 void msr2lpsrTranslator::visitStart (S_msrBassFigure& elt)
@@ -2686,10 +2650,26 @@ void msr2lpsrTranslator::visitStart (S_msrBassFigure& elt)
   }
 #endif
 
-  // append the bass figure to the current figured bass
-  fCurrentFiguredBassClone->
-    appendFigureToFiguredBass (
-      elt);
+	if (fOnGoingFiguredBass) {
+		// append the bass figure to the current figured bass
+		fCurrentFiguredBassClone->
+			appendFigureToFiguredBass (
+				elt);
+  }
+
+  else {
+    std::stringstream s;
+
+    s <<
+      "bass figure is out of context, cannot be handled: " <<
+      elt->asShortString ();
+
+    msr2lpsrInternalError (
+      gGlobalServiceRunData->getInputSourceName (),
+      elt->getInputLineNumber (),
+      __FILE__, __LINE__,
+      s.str ());
+  }
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
@@ -2706,6 +2686,7 @@ void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
 #endif
 
   fCurrentFiguredBassClone = nullptr;
+  fOnGoingFiguredBass = false;
 }
 
 //________________________________________________________________________
@@ -3237,9 +3218,8 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
     std::stringstream s;
 
     s <<
-      "syllable is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "' ";
+      "syllable is out of context, cannot be handled: " <<
+      elt->asShortString ();;
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3524,9 +3504,8 @@ void msr2lpsrTranslator::visitStart (S_msrArticulation& elt)
     std::stringstream s;
 
     s <<
-      "articulation is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "articulation is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3585,9 +3564,8 @@ void msr2lpsrTranslator::visitStart (S_msrFermata& elt)
     std::stringstream s;
 
     s <<
-      "fermata is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "fermata is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3623,9 +3601,8 @@ void msr2lpsrTranslator::visitStart (S_msrArpeggiato& elt)
     std::stringstream s;
 
     s <<
-      "arpeggiato is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "arpeggiato is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3661,9 +3638,8 @@ void msr2lpsrTranslator::visitStart (S_msrNonArpeggiato& elt)
     std::stringstream s;
 
     s <<
-      "nonArpeggiato is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "' ";
+      "nonArpeggiato is out of context, cannot be handled: " <<
+      elt->asShortString ();;
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3697,9 +3673,8 @@ void msr2lpsrTranslator::visitStart (S_msrTechnical& elt)
     std::stringstream s;
 
     s <<
-      "technical is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "technical is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3785,9 +3760,8 @@ void msr2lpsrTranslator::visitStart (S_msrTechnicalWithInteger& elt)
     std::stringstream s;
 
     s <<
-      "technicalWithInteger is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "technicalWithInteger is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3833,9 +3807,8 @@ void msr2lpsrTranslator::visitStart (S_msrTechnicalWithFloat& elt)
     std::stringstream s;
 
     s <<
-      "technicalWithFloat is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "technicalWithFloat is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3881,9 +3854,8 @@ void msr2lpsrTranslator::visitStart (S_msrTechnicalWithString& elt)
     std::stringstream s;
 
     s <<
-      "technicalWithString is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "technicalWithString is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -3947,9 +3919,8 @@ void msr2lpsrTranslator::visitStart (S_msrOrnament& elt)
     std::stringstream s;
 
     s <<
-      "ornament is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "ornament is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4027,9 +3998,8 @@ void msr2lpsrTranslator::visitStart (S_msrSpanner& elt)
     std::stringstream s;
 
     s <<
-      "spanner is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "spanner is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4075,9 +4045,8 @@ void msr2lpsrTranslator::visitStart (S_msrGlissando& elt)
     std::stringstream s;
 
     s <<
-      "glissando is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "glissando is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4129,9 +4098,8 @@ void msr2lpsrTranslator::visitStart (S_msrSlide& elt)
     std::stringstream s;
 
     s <<
-      "slide is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "slide is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4177,9 +4145,8 @@ void msr2lpsrTranslator::visitStart (S_msrSingleTremolo& elt)
     std::stringstream s;
 
     s <<
-      "singleTremolo is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "singleTremolo is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4300,9 +4267,8 @@ void msr2lpsrTranslator::visitStart (S_msrDynamic& elt)
     std::stringstream s;
 
     s <<
-      "dynamic is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "dynamic is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4348,9 +4314,8 @@ void msr2lpsrTranslator::visitStart (S_msrOtherDynamic& elt)
     std::stringstream s;
 
     s <<
-      "otherDynamic is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "otherDynamic is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4470,9 +4435,8 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
     std::stringstream s;
 
     s <<
-      "words is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "words is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4562,9 +4526,8 @@ void msr2lpsrTranslator::visitStart (S_msrSlur& elt)
     std::stringstream s;
 
     s <<
-      "slur is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "slur is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4631,9 +4594,8 @@ void msr2lpsrTranslator::visitStart (S_msrChordSlurLink& elt)
     std::stringstream s;
 
     s <<
-      "slur link is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "slur link is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4684,9 +4646,8 @@ void msr2lpsrTranslator::visitStart (S_msrLigature& elt)
     std::stringstream s;
 
     s <<
-      "ligature is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "ligature is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4732,9 +4693,8 @@ void msr2lpsrTranslator::visitStart (S_msrSlash& elt)
     std::stringstream s;
 
     s <<
-      "slash is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "slash is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4768,9 +4728,8 @@ void msr2lpsrTranslator::visitStart (S_msrCrescDecresc& elt)
     std::stringstream s;
 
     s <<
-      "cresc/decresc is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "cresc/decresc is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4816,9 +4775,8 @@ void msr2lpsrTranslator::visitStart (S_msrWedge& elt)
     std::stringstream s;
 
     s <<
-      "wedge is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "wedge is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -4928,9 +4886,8 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       std::stringstream s;
 
       s <<
-        "graceNotesGroup is out of context, fOnGoingNotesStack.size () == 0, cannot be handled: '" <<
-        elt->asShortString () <<
-        "'";
+        "graceNotesGroup is out of context, fOnGoingNotesStack.size () == 0, cannot be handled: " <<
+        elt->asShortString ();
 
       msr2lpsrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -5189,9 +5146,8 @@ void msr2lpsrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
     std::stringstream s;
 
     s <<
-      "grace notes group link is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "grace notes group link is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -5807,9 +5763,8 @@ void msr2lpsrTranslator::visitStart (S_msrOctaveShift& elt)
     std::stringstream s;
 
     s <<
-      "octaveShift is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "octaveShift is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -5893,9 +5848,8 @@ void msr2lpsrTranslator::visitStart (S_msrStem& elt)
     std::stringstream s;
 
     s <<
-      "stem is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "stem is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -6019,9 +5973,8 @@ void msr2lpsrTranslator::visitStart (S_msrChordBeamLink& elt)
     std::stringstream s;
 
     s <<
-      "beam link is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "beam link is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -6274,9 +6227,8 @@ void msr2lpsrTranslator::visitStart (S_msrTie& elt)
     std::stringstream s;
 
     s <<
-      "tie is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "tie is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -6324,9 +6276,8 @@ void msr2lpsrTranslator::visitStart (S_msrSegno& elt)
     std::stringstream s;
 
     s <<
-      "segno is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "segno is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -6364,9 +6315,8 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
     std::stringstream s;
 
     s <<
-      "dal segno is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
+      "dal segno is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -6433,8 +6383,7 @@ void msr2lpsrTranslator::visitStart (S_msrCoda& elt)
     std::stringstream s;
 
     s <<
-      "coda is out of context, cannot be handled: '" << elt->asShortString () <<
-      "'";
+      "coda is out of context, cannot be handled: " << elt->asShortString ();
 
     msr2lpsrInternalError (
       gGlobalServiceRunData->getInputSourceName (),

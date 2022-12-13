@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "lpsr2lilypondWae.h"
 
 #include "waeOah.h"

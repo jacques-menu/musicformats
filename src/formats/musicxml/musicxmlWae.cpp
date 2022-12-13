@@ -12,7 +12,7 @@
 #include "mfIndentedTextOutput.h"
 
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "musicxmlWae.h"
 
 #include "waeOah.h"

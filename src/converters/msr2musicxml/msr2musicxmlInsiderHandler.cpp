@@ -47,6 +47,8 @@
 
 #include "msr2musicxmlInsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -193,6 +195,8 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
+
+  initializeWAE ();
 
   initializeMSR ();
 

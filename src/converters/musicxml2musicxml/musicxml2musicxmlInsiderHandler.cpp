@@ -48,6 +48,8 @@
 
 #include "musicxml2musicxmlInsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -194,6 +196,8 @@ void xml2xmlInsiderHandler::createTheXml2xmlOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
+
+  initializeWAE ();
 
   initializeMSR ();
 

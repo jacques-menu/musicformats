@@ -12,6 +12,8 @@
 #ifndef ___msdrScannerHandler___
 #define ___msdrScannerHandler___
 
+#include "msdlKeywords.h"
+
 #include "waeHandlers.h"
 
 

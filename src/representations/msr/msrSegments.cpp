@@ -1076,7 +1076,7 @@ void msrSegment::appendFiguredBassToSegment (
   const S_msrFiguredBass& figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Appending figured bass " <<
       figuredBass->asString () <<
@@ -1109,7 +1109,7 @@ void msrSegment::appendFiguredBassToSegmentClone (
   const S_msrFiguredBass& figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Appending figured bass " <<
       figuredBass->asString () <<
@@ -1127,7 +1127,7 @@ void msrSegment::appendFiguredBassToSegmentClone (
 
   // append figuredBass to this segment
   fSegmentLastMeasure->
-    appendFiguredBassToMeasure (figuredBass);
+    appendFiguredBassToMeasureClone (figuredBass);
 }
 
 void msrSegment::appendSegnoToSegment (const S_msrSegno& segno)

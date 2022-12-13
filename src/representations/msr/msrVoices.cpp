@@ -1618,7 +1618,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 //     msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + fVoiceNumber;
 //
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+//   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
 //     gLogStream <<
 //       "Creating figured bass voice for regular voice \"" <<
 //       getVoiceName () <<
@@ -2323,7 +2323,7 @@ void msrVoice::appendFiguredBassToFiguredBassVoice (
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
-      "Appending figured bass element " << figuredBass->asString () <<
+      "Appending figured bass " << figuredBass->asString () <<
       " to figured bass voice \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2349,7 +2349,7 @@ void msrVoice::appendHarmonyToVoiceClone (const S_msrHarmony& harmony)
     harmony->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+  if (true || gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Appending harmony " << harmony->asString () <<
       " to voice clone \"" << getVoiceName () << "\"" <<
@@ -2371,8 +2371,6 @@ void msrVoice::appendHarmonyToVoiceClone (const S_msrHarmony& harmony)
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
-      break;
-
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindFiguredBass:
       {
@@ -2404,9 +2402,9 @@ void msrVoice::appendFiguredBassToVoice (
     figuredBass->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
-      "Appending figured bass element " << figuredBass->asString () <<
+      "Appending figured bass " << figuredBass->asString () <<
       " to voice \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2456,9 +2454,9 @@ void msrVoice::appendFiguredBassToVoiceClone (
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
 
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (true || gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
-      "Appending figured bass element " << figuredBass->asString () <<
+      "Appending figured bass " << figuredBass->asString () <<
       " to voice clone \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
@@ -2478,8 +2476,6 @@ void msrVoice::appendFiguredBassToVoiceClone (
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
-      break;
-
     case msrVoiceKind::kVoiceKindRegular:
     case msrVoiceKind::kVoiceKindHarmonies:
       {

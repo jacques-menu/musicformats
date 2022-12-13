@@ -46,10 +46,10 @@ Rational::Rational (
   rationalise ();
 }
 
-Rational::Rational(const Rational& pos)
+Rational::Rational(const Rational& rat)
 {
-  fNumerator   = pos.fNumerator;
-  fDenominator = pos.fDenominator;
+  fNumerator   = rat.fNumerator;
+  fDenominator = rat.fDenominator;
 }
 
 Rational::Rational (const std::string &theString)
@@ -146,44 +146,44 @@ Rational Rational::opposite () const
   return result;
 }
 
-Rational Rational::operator + (const Rational &pos) const
+Rational Rational::operator + (const Rational &rat) const
 {
   Rational result (
-    fNumerator * pos.fDenominator + pos.fNumerator * fDenominator,
-    fDenominator * pos.fDenominator);
+    fNumerator * rat.fDenominator + rat.fNumerator * fDenominator,
+    fDenominator * rat.fDenominator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::operator - (const Rational &pos) const
+Rational Rational::operator - (const Rational &rat) const
 {
   Rational result (
-    fNumerator * pos.fDenominator - pos.fNumerator * fDenominator,
-    fDenominator * pos.fDenominator);
+    fNumerator * rat.fDenominator - rat.fNumerator * fDenominator,
+    fDenominator * rat.fDenominator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::operator * (const Rational &pos) const
+Rational Rational::operator * (const Rational &rat) const
 {
   Rational result (
-    fNumerator * pos.fNumerator,
-    fDenominator * pos.fDenominator);
+    fNumerator * rat.fNumerator,
+    fDenominator * rat.fDenominator);
 
   result.rationalise ();
 
   return result;
 }
 
-Rational Rational::operator / (const Rational &pos) const
+Rational Rational::operator / (const Rational &rat) const
 {
   Rational result (
-  fNumerator * pos.fDenominator,
-  fDenominator * pos.fNumerator);
+  fNumerator * rat.fDenominator,
+  fDenominator * rat.fNumerator);
 
   result.rationalise ();
 
@@ -212,74 +212,82 @@ Rational Rational::operator / (int num) const
   return result;
 }
 
-Rational& Rational::operator += (const Rational &pos)
+Rational& Rational::operator += (const Rational &rat)
 {
-  if (fDenominator == pos.fDenominator) {
-    fNumerator += pos.fNumerator;
+  if (fDenominator == rat.fDenominator) {
+    fNumerator += rat.fNumerator;
   }
   else {
-    fNumerator = fNumerator * pos.fDenominator + pos.fNumerator * fDenominator;
-    fDenominator *= pos.fDenominator;
+    fNumerator = fNumerator * rat.fDenominator + rat.fNumerator * fDenominator;
+    fDenominator *= rat.fDenominator;
   }
+
+  rationalise ();
 
   return (*this);
 }
 
-Rational& Rational::operator -= (const Rational &pos)
+Rational& Rational::operator -= (const Rational &rat)
 {
-  if (fDenominator == pos.fDenominator) {
-    fNumerator -= pos.fNumerator;
+  if (fDenominator == rat.fDenominator) {
+    fNumerator -= rat.fNumerator;
   }
   else {
-    fNumerator = fNumerator * pos.fDenominator - pos.fNumerator * fDenominator;
-    fDenominator *= pos.fDenominator;
+    fNumerator = fNumerator * rat.fDenominator - rat.fNumerator * fDenominator;
+    fDenominator *= rat.fDenominator;
   }
 
+  rationalise ();
+
   return (*this);
 }
 
-Rational& Rational::operator *= (const Rational &pos)
+Rational& Rational::operator *= (const Rational &rat)
 {
-  fNumerator   *= pos.fNumerator;
-  fDenominator *= pos.fDenominator;
+  fNumerator   *= rat.fNumerator;
+  fDenominator *= rat.fDenominator;
+
+  rationalise ();
 
   return (*this);
 }
 
-Rational& Rational::operator /= (const Rational &pos)
+Rational& Rational::operator /= (const Rational &rat)
 {
-  fNumerator   *= pos.fDenominator;
-  fDenominator *= pos.fNumerator;
+  fNumerator   *= rat.fDenominator;
+  fDenominator *= rat.fNumerator;
+
+  rationalise ();
 
   return (*this);
 }
 
-Rational& Rational::operator = (const Rational& pos) {
-  fNumerator   = pos.fNumerator;
-  fDenominator = pos.fDenominator;
+Rational& Rational::operator = (const Rational& rat) {
+  fNumerator   = rat.fNumerator;
+  fDenominator = rat.fDenominator;
 
   return (*this);
 }
 
-Bool Rational::operator > (const Rational &pos) const
+Bool Rational::operator > (const Rational &rat) const
 {
   // a/b > c/d if and only if a * d > b * c.
   return
-    ((fNumerator * pos.fDenominator) > (fDenominator * pos.fNumerator));
+    ((fNumerator * rat.fDenominator) > (fDenominator * rat.fNumerator));
 }
 
-Bool Rational::operator < (const Rational &pos) const
+Bool Rational::operator < (const Rational &rat) const
 {
   // a/b < c/d if and only if a * d < b * c.
   return
-    ((fNumerator * pos.fDenominator) < (fDenominator * pos.fNumerator));
+    ((fNumerator * rat.fDenominator) < (fDenominator * rat.fNumerator));
 }
 
-Bool Rational::operator == (const Rational &pos) const
+Bool Rational::operator == (const Rational &rat) const
 {
   // a/b < c/d if and only if a * d < b * c.
   return
-    ((fNumerator * pos.fDenominator) == (fDenominator * pos.fNumerator));
+    ((fNumerator * rat.fDenominator) == (fDenominator * rat.fNumerator));
 }
 
 Bool Rational::operator > (double num) const
@@ -402,9 +410,9 @@ void Rational::print (std::ostream& os) const
   os << "[Rational " << fNumerator << '/' << fDenominator << ']';
 }
 
-std::ostream& operator << (std::ostream& os, const Rational& pos)
+std::ostream& operator << (std::ostream& os, const Rational& rat)
 {
-  pos.print (os);
+  rat.print (os);
   return os;
 }
 

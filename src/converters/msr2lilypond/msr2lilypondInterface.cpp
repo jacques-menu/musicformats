@@ -18,7 +18,7 @@
 
 #include "lpsrScores.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"
 

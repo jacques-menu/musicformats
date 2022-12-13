@@ -13,7 +13,7 @@
 
 #include "oahEarlyOptions.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "mxsr2msrWae.h"
 
 #include "waeOah.h"

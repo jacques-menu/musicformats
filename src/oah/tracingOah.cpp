@@ -926,31 +926,31 @@ R"()",
 
   // figured bass
 
-  fTraceFiguredBassBooleanAtom =
+  fTraceFiguredBassesBooleanAtom =
     oahTwoBooleansAtomWithTracePasses::create (
-      "trace-figured-bass", "tfigbass",
+      "trace-figured-basses", "tfigbasses",
 R"(<figured-bass> in MusicXML, \figuremode in LilyPond)",
-      "fTraceFiguredBass",
-      fTraceFiguredBass,
+      "fTraceFiguredBasses",
+      fTraceFiguredBasses,
       fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      fTraceFiguredBassBooleanAtom);
+      fTraceFiguredBassesBooleanAtom);
 
   // figured bass elements details
 
   S_oahThreeBooleansAtom
-    traceFiguredBasseAtomDetails =
+    traceFiguredBasseseAtomDetails =
       oahThreeBooleansAtom::create (
         "trace-figured-bass-details", "tfigbassd",
 R"(<figured-bass> in MusicXML, \figuremode in LilyPond, with more details)",
-        "fTraceFiguredBassDetails",
-        fTraceFiguredBassDetails,
-        fTraceFiguredBassBooleanAtom,
+        "fTraceFiguredBassesDetails",
+        fTraceFiguredBassesDetails,
+        fTraceFiguredBassesBooleanAtom,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      traceFiguredBasseAtomDetails);
+      traceFiguredBasseseAtomDetails);
 }
 
 void tracingOahGroup::initializeCreditsToWordstracingOah ()
@@ -2902,11 +2902,11 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     std::endl <<
 
     // figured bass
-    std::setw (fieldWidth) << "fTraceFiguredBass" << ": " <<
-    fTraceFiguredBass <<
+    std::setw (fieldWidth) << "fTraceFiguredBasses" << ": " <<
+    fTraceFiguredBasses <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceFiguredBassDetails" << ": " <<
-    fTraceFiguredBassDetails <<
+    std::setw (fieldWidth) << "fTraceFiguredBassesDetails" << ": " <<
+    fTraceFiguredBassesDetails <<
     std::endl <<
 
     // frames

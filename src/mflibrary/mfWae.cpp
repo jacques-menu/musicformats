@@ -11,7 +11,7 @@
 
 #include "oahEarlyOptions.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "mfWae.h"
 
 #include "waeOah.h"
@@ -23,7 +23,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 void mfWarning (
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeWarning (
@@ -35,7 +35,7 @@ void mfWarning (
 
 void mfError (
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeError (
@@ -57,7 +57,7 @@ void mfError (
 //______________________________________________________________________________
 void mfInternalWarning (
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
+  int                sourceCodeLineNumber,
   const std::string& message)
 {
   waeInternalWarning (

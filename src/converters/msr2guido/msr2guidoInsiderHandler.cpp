@@ -47,6 +47,8 @@
 
 #include "msr2guidoInsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -193,6 +195,8 @@ void msr2guidoInsiderHandler::createTheMsr2guidoOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
+
+  initializeWAE ();
 
   initializeMSR ();
 

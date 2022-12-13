@@ -13,7 +13,7 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "oahWae.h"
 #include "lpsrWae.h"
 

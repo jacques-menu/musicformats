@@ -9,28 +9,16 @@
   https://github.com/jacques-menu/musicformats
 */
 
-/*
-#include <climits>      // INT_MIN, INT_MAX
-
-#include <regex>
-
-
-
-#include "msr2summaryVisitor.h"
-*/
-
 #include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
 
+#include "mfStringsHandling.h"
+
+#include "oahEarlyOptions.h"
 #include "oahOah.h"
-
-#include "msrOah.h"
-#include "msr2lpsrOah.h"
-
-#include "msdlKeywords.h"
-#include "msdlTokens.h"
+#include "waeOah.h"
 
 #include "waeHandlers.h"
 
@@ -52,6 +40,291 @@ waeHandler::waeHandler ()
 
 waeHandler::~waeHandler ()
 {}
+
+//______________________________________________________________________________
+void waeHandler::waeWarning (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message)
+{
+  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    int saveIndent = gIndenter.getIndentation ();
+
+    gIndenter.resetToZero ();
+
+    gLogStream <<
+      "*** " << context << " warning *** " <<
+      inputSourceName << ":" << inputLineNumber << ": " <<message <<
+      std::endl;
+
+    fWarningsInputLineNumbers.insert (inputLineNumber);
+
+    gIndenter.setIndentation (saveIndent);
+  }
+}
+
+void waeHandler::waeInternalWarning (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message)
+{
+  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    int saveIndent = gIndenter.getIndentation ();
+
+    gIndenter.resetToZero ();
+
+    gLogStream <<
+      "*** " << context << " INTERNAL warning *** " <<
+      inputSourceName << ":" << inputLineNumber << ": " <<message <<
+      std::endl;
+
+    fWarningsInputLineNumbers.insert (
+      inputLineNumber);
+
+    gIndenter.setIndentation (saveIndent);
+  }
+}
+
+//______________________________________________________________________________
+void waeHandler::waeErrorWithoutException (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message)
+{
+  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+      gLogStream <<
+        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        ' ';
+    }
+
+    if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
+      int saveIndent = gIndenter.getIndentation ();
+
+      gIndenter.resetToZero ();
+
+      gLogStream <<
+        "### " << context << " ERROR ### " <<
+        message <<
+        std::endl;
+
+      gIndenter.setIndentation (saveIndent);
+    }
+  }
+}
+
+void waeHandler::waeErrorWithoutException (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message)
+{
+  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+      gLogStream <<
+        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        ' ';
+    }
+
+    if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
+      int saveIndent = gIndenter.getIndentation ();
+
+      gIndenter.resetToZero ();
+
+      gLogStream <<
+        "### " << context << " ERROR ### " <<
+        inputSourceName << ":" << inputLineNumber << ": " << message <<
+        std::endl;
+
+      gIndenter.setIndentation (saveIndent);
+
+      fErrorsInputLineNumbers.insert (
+        inputLineNumber);
+    }
+  }
+}
+
+void waeHandler::waeError (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message)
+{
+  waeErrorWithoutException (
+    context,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+  throw mfException (message);
+}
+
+void waeHandler::waeError (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message)
+{
+  waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+  throw mfException (message);
+}
+
+void waeHandler::waeErrorWithException (
+  const std::string& context,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except)
+{
+  waeErrorWithoutException (
+    context,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+abort (); // JMI
+
+  throw *except;
+}
+
+void waeHandler::waeErrorWithException (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except)
+{
+  waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+abort (); // JMI
+
+  throw *except;
+}
+
+//______________________________________________________________________________
+void waeHandler::waeInternalError (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message)
+{
+  waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+  throw mfException (message);
+}
+
+void waeHandler::waeInternalErrorWithException (
+  const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& message,
+  S_mfException      except)
+{
+  waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+  throw *except;
+}
+
+//______________________________________________________________________________
+void waeHandler::displayWarningsAndErrorsInputLineNumbers ()
+{
+
+  gIndenter.resetToZero ();
+
+  size_t warningsInputLineNumbersSize =
+    fWarningsInputLineNumbers.size ();
+
+  if (
+    warningsInputLineNumbersSize
+      &&
+    ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+  ) {
+    gLogStream <<
+      std::endl <<
+      mfSingularOrPluralWithoutNumber (
+        warningsInputLineNumbersSize, "A warning message has", "Warning messages have") <<
+      " been issued for input " <<
+      mfSingularOrPluralWithoutNumber (
+        warningsInputLineNumbersSize, "line", "lines") <<
+      ' ';
+
+    std::set<int>::const_iterator
+      iBegin = fWarningsInputLineNumbers.begin (),
+      iEnd   = fWarningsInputLineNumbers.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      gLogStream << (*i);
+      if (++i == iEnd) break;
+      gLogStream << ", ";
+    } // for
+
+    gLogStream << std::endl;
+  }
+
+  size_t errorsInputLineNumbersSize =
+    fErrorsInputLineNumbers.size ();
+
+  if (errorsInputLineNumbersSize) {
+    gLogStream <<
+      std::endl <<
+      mfSingularOrPluralWithoutNumber (
+        errorsInputLineNumbersSize, "An error message has", "Error messages have") <<
+      " been issued for input " <<
+      mfSingularOrPluralWithoutNumber (
+        errorsInputLineNumbersSize, "line", "lines") <<
+      ' ';
+
+    std::set<int>::const_iterator
+      iBegin = fErrorsInputLineNumbers.begin (),
+      iEnd   = fErrorsInputLineNumbers.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      gLogStream << (*i);
+      if (++i == iEnd) break;
+      gLogStream << ", ";
+    } // for
+
+    gLogStream << std::endl;
+  }
+}
 
 std::string waeHandler::asString () const
 {
@@ -78,9 +351,17 @@ std::ostream& operator << (std::ostream& os, const S_waeHandler& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
+//________________________________________________________________________
+EXP S_waeHandler gGlobalWaeHandler;
 
-} // namespace
+EXP void initializeWAE ()
+{
+  gGlobalWaeHandler = waeHandler::create ();
+}
+
+
+}

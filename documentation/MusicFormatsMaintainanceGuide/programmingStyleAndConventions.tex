@@ -614,7 +614,7 @@ class EXP mxsr2msrException: public mfException
 typedef SMARTP<musicxmlException> S_musicxmlException;
 \end{lstlisting}
 
-There are warning and error reporting functions\index{functions} in \waeBoth{wae.h}.
+There are warning and error reporting functions\index{functions} in \waeBoth{waeInterface.h}.
 Examples are:
 \begin{lstlisting}[language=CPlusPlus]
 void oahAtomExpectingAValue::applyElement (std::ostream& os)
@@ -1312,9 +1312,9 @@ void msrHarmonyStructure::printAllHarmoniesStructures (std::ostream& os)
 % -------------------------------------------------------------------------
 
 \mf\ uses rationals for notes sounding and display whole notes and measure positionss, among others.
-class   {\tt rational} is defined by \libmusicxml\ in \libBoth{rational}:
+class   {\tt Rational} is defined by \libmusicxml\ in \libBoth{Rational}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP rational {
+class EXP Rational {
 
    private:
 
@@ -1326,9 +1326,9 @@ class EXP rational {
 
     public:
 
-        rational(long int num = 0, long int denom = 1);
-        rational(const rational& d);
-        rational(const std::string &str);
+        Rational(long int num = 0, long int denom = 1);
+        Rational(const Rational& d);
+        Rational(const std::string &str);
 
 	// ... ... ...
 };
