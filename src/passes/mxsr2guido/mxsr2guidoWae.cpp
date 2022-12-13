@@ -11,7 +11,7 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "mxsr2guidoWae.h"
 
 #include "waeOah.h"

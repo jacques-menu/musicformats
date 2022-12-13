@@ -15,7 +15,7 @@
 
 #include "xml_tree_browser.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "mxsr2msrWae.h"
 
 #include "oahEnableTracingIfDesired.h"
@@ -10548,7 +10548,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
   else if (fOnGoingFiguredBass) {
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+    if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
       gLogStream <<
         "fCurrentDivisionsPerQuarterNote: " <<
         fCurrentDivisionsPerQuarterNote <<
@@ -10563,7 +10563,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+    if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
       gLogStream <<
         "fCurrentFiguredBassSoundingWholeNotes: " <<
         fCurrentFiguredBassSoundingWholeNotes <<
@@ -10578,7 +10578,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+    if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
       gLogStream <<
         "fCurrentFiguredBassDisplayWholeNotes: " <<
         fCurrentFiguredBassDisplayWholeNotes <<
@@ -22003,7 +22003,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
         newNoteSoundingWholeNotes,
         "mxsr2msrTranslator::handlePendingHarmonies()");
 
-    // set the harmony's display whole notes JMI useless???
+    // set the harmony's display whole notes JMI useless??? v0.9.66
     harmony->
       setHarmonyDisplayWholeNotes (
         newNoteDisplayWholeNotes);
@@ -22062,7 +22062,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
   const S_msrVoice& voiceToInsertInto)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBassDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBassesDetails ()) {
     gLogStream <<
       "handlePendingFiguredBasses(), newNote: " <<
       std::endl;
@@ -22101,13 +22101,13 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
       since the current sounding whole notes of the latter is needed for that
     */
 
-    // set the figured bass element's sounding whole notes
+    // set the figured bass sounding whole notes
     figuredBass->
       setMeasureElementSoundingWholeNotes (
         newNoteSoundingWholeNotes,
-        "handlePendingFiguredBasses()");
+        "mxsr2msrTranslator::handlePendingFiguredBasses()");
 
-    // set the figured bass element's display whole notes JMI useless???
+    // set the figured bass element's display whole notes JMI useless??? v0.9.66
     figuredBass->
       setFiguredBassDisplayWholeNotes (
         newNoteDisplayWholeNotes);
@@ -22133,7 +22133,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
     S_msrVoice
       partFiguredBassVoice =
 //         voiceToInsertInto->
-//           fetchVoiceUpLinkToPart ()->
+//           fetchVoiceUpLinkToPart ()-> // JMI v0.9.66
         fCurrentPart->
             getPartFiguredBassVoice ();
 
@@ -25794,7 +25794,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
 
   // create the figured bass element
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a figured bass" <<
       ", line " << inputLineNumber << ":" <<
@@ -26420,7 +26420,7 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
 
 /* JMI
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+    if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
       gLogStream <<
         "--> figured bass" <<
         ", line " << inputLineNumber << ":" <<

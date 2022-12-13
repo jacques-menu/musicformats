@@ -40,7 +40,7 @@ class EXP Rational
                             long int num   = 0,
                             long int denom = 1);
 
-                          Rational (const Rational& pos);
+                          Rational (const Rational& rat);
 
                           Rational (const std::string &theString);
 
@@ -75,22 +75,22 @@ class EXP Rational
     Rational              inverse () const;
     Rational              opposite () const;
 
-    Rational              operator + (const Rational &pos) const;
-    Rational              operator - (const Rational &pos) const;
+    Rational              operator + (const Rational &rat) const;
+    Rational              operator - (const Rational &rat) const;
     //! Useful for notes with dots.
-    Rational              operator * (const Rational &pos) const;
-    Rational              operator / (const Rational &pos) const;
-    // (i.e. pos * 3/2 or pos * 7/4)
+    Rational              operator * (const Rational &rat) const;
+    Rational              operator / (const Rational &rat) const;
+    // (i.e. rat * 3/2 or rat * 7/4)
 
     Rational              operator * (int num) const;
     Rational              operator / (int num) const;
 
-    Rational&             operator += (const Rational &pos);
-    Rational&             operator -= (const Rational &pos);
+    Rational&             operator += (const Rational &rat);
+    Rational&             operator -= (const Rational &rat);
     //! Useful for notes with dots.
-    Rational&             operator *= (const Rational &pos);
-    Rational&             operator /= (const Rational &pos);
-    // (i.e. pos * 3/2 or pos * 7/4)
+    Rational&             operator *= (const Rational &rat);
+    Rational&             operator /= (const Rational &rat);
+    // (i.e. rat * 3/2 or rat * 7/4)
 
     Rational&             operator *= (long int num)
                               { fNumerator *= num; return *this; }
@@ -99,18 +99,18 @@ class EXP Rational
 
     // comparisons
 
-    Rational&             operator = (const Rational& pos);
+    Rational&             operator = (const Rational& rat);
 
-    Bool                  operator >  (const Rational &pos) const;
-    Bool                  operator >= (const Rational &pos) const
-                              {return !(*this < pos);}
-    Bool                  operator <  (const Rational &pos) const;
-    Bool                  operator <= (const Rational &pos) const
-                              {return !(*this > pos);}
+    Bool                  operator >  (const Rational &rat) const;
+    Bool                  operator >= (const Rational &rat) const
+                              {return !(*this < rat);}
+    Bool                  operator <  (const Rational &rat) const;
+    Bool                  operator <= (const Rational &rat) const
+                              {return !(*this > rat);}
 
-    Bool                  operator == (const Rational &pos) const;
-    Bool                  operator != (const Rational &pos) const
-                              {return !(*this == pos);}
+    Bool                  operator == (const Rational &rat) const;
+    Bool                  operator != (const Rational &rat) const
+                              {return !(*this == rat);}
 
     Bool                  operator >  (double num) const;
     Bool                  operator >= (double num) const;
@@ -127,8 +127,8 @@ class EXP Rational
 
     std::string           toString () const;
     double                toDouble () const;
-    float                  toFloat () const;
-    int                    toInt () const;
+    float                 toFloat () const;
+    int                   toInt () const;
 
   public:
 
@@ -146,7 +146,7 @@ class EXP Rational
     // private methods
     // ------------------------------------------------------
 
-    // Used to "rationalise" Rational.
+    // 'rationalise' Rational values
     void                  rationalise ();
 
   private:

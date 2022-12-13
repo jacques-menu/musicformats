@@ -12,11 +12,9 @@
 #ifndef ___waeHandlers___
 #define ___waeHandlers___
 
-#include <list>
-
 #include "smartpointer.h"
 
-#include "msdlKeywords.h"
+#include "mfExceptions.h"
 
 
 using namespace MusicXML2;
@@ -53,7 +51,82 @@ class EXP waeHandler : public smartable
     // public services
     // ------------------------------------------------------
 
-  public:
+    virtual void          waeWarning (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& message);
+
+    virtual void          waeInternalWarning (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& message);
+
+
+    virtual void          waeErrorWithoutException (
+                            const std::string& context,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message);
+
+    virtual void          waeErrorWithoutException (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message);
+
+    virtual void          waeError (
+                            const std::string& context,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message);
+
+    virtual void          waeError (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message);
+
+    virtual void          waeErrorWithException (
+                            const std::string& context,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            S_mfException      except);
+
+    virtual void          waeErrorWithException (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            S_mfException      except);
+
+
+    virtual void          waeInternalError (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message);
+
+    virtual void          waeInternalErrorWithException (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            S_mfException      except);
+
+    virtual void          displayWarningsAndErrorsInputLineNumbers ();
 
     // print
     // ------------------------------------------------------
@@ -62,15 +135,21 @@ class EXP waeHandler : public smartable
 
     void                  print (std::ostream& os) const;
 
-  private:
+  protected:
 
-    // private fields
+    // protected fields
     // ------------------------------------------------------
+
+    std::set<int>         fWarningsInputLineNumbers;
+    std::set<int>         fErrorsInputLineNumbers;
 };
 typedef SMARTP<waeHandler> S_waeHandler;
 EXP std::ostream& operator << (std::ostream& os, const S_waeHandler& elt);
 
+//________________________________________________________________________
+extern EXP S_waeHandler gGlobalWaeHandler;
 
+EXP void initializeWAE ();
 }
 
 

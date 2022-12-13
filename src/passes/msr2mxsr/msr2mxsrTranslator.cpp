@@ -7835,7 +7835,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif
 
-  // create a harmony new born clone
+  // create a harmony new-born clone
   fCurrentHarmonyClone =
     elt->
       createMxmlHarmonyNewbornClone (
@@ -7994,7 +7994,7 @@ void msr2mxsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-  // create a figured bass new born clone
+  // create a figured bass new-born clone
   fCurrentFiguredBassClone =
     elt->
       createMxmlFiguredBassNewbornClone (

@@ -47,6 +47,8 @@
 
 #include "msdl2guidoInsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -194,6 +196,8 @@ void msdl2guidoInsiderHandler::createTheMsdl2gmnOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
+
+  initializeWAE ();
 
   initializeMSR ();
 

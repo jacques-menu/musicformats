@@ -13,7 +13,7 @@
 
 #include "waeEnableAbortToDebugErrors.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "bsr2bsrWae.h"
 
 

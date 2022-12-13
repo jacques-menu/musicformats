@@ -42,14 +42,14 @@ Other data are computed by the MSR private methods. For example, in \msr{msrVoic
     // fVoiceShortestNoteDuration and fVoiceShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    rational              fVoiceShortestNoteDuration;
+    Rational              fVoiceShortestNoteDuration;
     msrTupletFactor       fVoiceShortestNoteTupletFactor;
 \end{lstlisting}
 
 There are also data that varies during the lifetime of the object, while it is being populated for example.
 One such case is \class{msrMeasure}:
 \begin{lstlisting}[language=CPlusPlus]
-    rational              fCurrentMeasureWholeNotesDuration;
+    Rational              fCurrentMeasureWholeNotesDuration;
                             // this increases when musical elements
                             // are appended to the measure
 \end{lstlisting}
@@ -61,7 +61,7 @@ It is a \MainIt{very fine-grained} representation of scores:
 \item some informations it contains are present as such in the textual formats;
 \item others are computed when the representation is populated, such as, in \msr{msrVoices.h}:
 \begin{lstlisting}[language=CPlusPlus]
-    rational              fVoiceShortestNoteDuration;
+    Rational              fVoiceShortestNoteDuration;
 \end{lstlisting}
 \end{itemize}
 This information is used when generating \mxml\ output to set the \musicXmlMarkup{divisions} value.
@@ -209,12 +209,12 @@ class EXP msrLength : public smartable
 \section{Positions in measures and moments}\label{Positions in measures and moments}
 % -------------------------------------------------------------------------
 
-Such positions are represented by rational numbers such as {\tt 3/8}, {\tt 1/1} being a whole note.
+Such positions are represented by Rational numbers such as {\tt 3/8}, {\tt 1/1} being a whole note.
 
 \Class{msrMoment} stores a position in a measure, with a relative offset since harmonies can be placed on a note during its sounding time:
 \begin{lstlisting}[language=CPlusPlus]
-    rational              fWrittenPositionInMeseasure;
-    rational              fSoundingRelativeOffset;
+    Rational              fWrittenPositionInMeseasure;
+    Rational              fSoundingRelativeOffset;
 \end{lstlisting}
 
 
@@ -285,7 +285,7 @@ enum class msrNoteEventKind {
 
 \Class{msrNoteEvent} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    rational              fNoteEventMeasurePosition;
+    Rational              fNoteEventMeasurePosition;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 
@@ -339,18 +339,18 @@ msrSpanners.h:    S_msrSpanner          fSpannerSideLinkToOtherEnd; // two-way
 \section{Sounding and displayed durations}\label{Sounding and displayed durations}
 % -------------------------------------------------------------------------
 
-All durations are represented by rational numbers whose denominators are powers of 2, such as {\tt rational (3, 16}, and relative to the duration of a whole note.
+All durations are represented by Rational numbers whose denominators are powers of 2, such as {\tt Rational (3, 16}, and relative to the duration of a whole note.
 
 This information is a field of \class{msrMeasureElement}:
 \begin{lstlisting}[language=CPlusPlus]
-    rational              fMeasureElementSoundingWholeNotes;
+    Rational              fMeasureElementSoundingWholeNotes;
 \end{lstlisting}
 
 In a tuplet, the sounding durations is different than the written durations, so we store the sounding
 
 \begin{lstlisting}[language=CPlusPlus]
     // whole notes
-    rational              fNoteDisplayWholeNotes;
+    Rational              fNoteDisplayWholeNotes;
 
     int                   fNoteDotsNumber;
 
@@ -773,7 +773,7 @@ class EXP msrTempoNote : public msrElement
 
     static SMARTP<msrTempoNote> create (
                             int             inputLineNumber,
-                            const rational& tempoNoteWholeNotes,
+                            const Rational& tempoNoteWholeNotes,
                             Bool            tempoNoteBelongsToATuplet);
 
   protected:
@@ -783,7 +783,7 @@ class EXP msrTempoNote : public msrElement
 
                           msrTempoNote (
                             int             inputLineNumber,
-                            const rational& tempoNoteWholeNotes,
+                            const Rational& tempoNoteWholeNotes,
                             Bool            tempoNoteBelongsToATuplet);
 
 		// ... ... ...
@@ -793,7 +793,7 @@ class EXP msrTempoNote : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    rational              fTempoNoteWholeNotes;
+    Rational              fTempoNoteWholeNotes;
 
     std::list<S_msrBeam>  fTempoNoteBeams;
 
@@ -845,7 +845,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      rational                     memberNotesDisplayWholeNotes);
+      Rational                     memberNotesDisplayWholeNotes);
 
   protected:
 
@@ -858,7 +858,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      rational                     memberNotesDisplayWholeNotes);
+      Rational                     memberNotesDisplayWholeNotes);
 
 		// ... ... ...
 
@@ -877,9 +877,9 @@ class EXP msrTempoTuplet : public msrElement
 
     msrTupletFactor       fTempoTupletFactor;
 
-    rational              fMemberNotesDisplayWholeNotes;
+    Rational              fMemberNotesDisplayWholeNotes;
 
-    rational              fTempoTupletDisplayWholeNotes;
+    Rational              fTempoTupletDisplayWholeNotes;
 
     std::list<S_msrElement>
                           fTempoTupletElements;
@@ -2010,10 +2010,10 @@ class EXP msrTupletFactor
                                   fTupletActualNotes == fTupletNormalNotes;
                               }
 
-    rational              asRational () const
+    Rational              asRational () const
                             {
                               return
-                                rational (
+                                Rational (
                                   fTupletActualNotes,
                                   fTupletNormalNotes);
                             }
@@ -2202,7 +2202,7 @@ Extensions are described by enumeration type {\tt }:
     std::string           fSyllableStanzaNumber;
 
     // syllable whole notes
-    rational              fSyllableWholeNotes;
+    Rational              fSyllableWholeNotes;
 
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;

@@ -1821,7 +1821,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
   int partFiguredBassStaffNumber =
     msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
 
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating figured bass staff for part \"" <<
       getPartCombinedName () <<
@@ -1841,7 +1841,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
     msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating figured bass voice for part \"" <<
       getPartCombinedName () <<
@@ -1888,7 +1888,7 @@ void msrPart::appendFiguredBassToPart (
     case msrVoiceKind::kVoiceKindRegular:
       // append the figured bass to the part figured bass voice
 #ifdef TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+      if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
         gLogStream <<
           "Appending figured bass " <<
           figuredBass->asString () <<
@@ -1944,7 +1944,7 @@ void msrPart::appendFiguredBassToPartClone (
     case msrVoiceKind::kVoiceKindFiguredBass:
       // append the figured bass to the part figured bass voice
 #ifdef TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+      if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
         gLogStream <<
           "Appending figured bass " <<
           figuredBass->asString () <<

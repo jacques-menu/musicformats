@@ -29,7 +29,7 @@
 
 #include "msrScores.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 
 #include "Mikrokosmos3WanderingGenerator.h"
 

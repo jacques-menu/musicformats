@@ -286,7 +286,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
   if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
     if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBasses ()) {
 #ifdef TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+      if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
         gLogStream <<
           "Ignoring the figured bass elements" <<
           ", line " <<
@@ -394,8 +394,8 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
   fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefix_NO_;
   fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffix_NO_;
 
-  fCurrentFiguredBassSoundingWholeNotes = rational (0, 1);
-  fCurrentFiguredBassDisplayWholeNotes  = rational (0, 1);
+  fCurrentFiguredBassSoundingWholeNotes = Rational (0, 1);
+  fCurrentFiguredBassDisplayWholeNotes  = Rational (0, 1);
 
   fOnGoingFiguredBass = true;
 }
@@ -424,7 +424,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
 
   // create the figured bass element
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a figured bass" <<
       ", line " << inputLineNumber << ":" <<
@@ -517,7 +517,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 {
 	// ... ... ...
 
-  rational
+  Rational
     newNoteSoundingWholeNotes =
       newNote->
         getMeasureElementSoundingWholeNotes (),
@@ -687,7 +687,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-  // create a figured bass element new born clone
+  // create a figured bass element new-born clone
   fCurrentFiguredBassClone =
     elt->
       createFiguredBassNewbornClone (
@@ -729,9 +729,8 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
     std::stringstream s;
 
     s <<
-      "figured bass is out of context, cannot be handled:'" <<
-      elt->asShortString () <<
-      "'";
+      "figured bass is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -782,7 +781,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-  // create a figured bass new born clone
+  // create a figured bass new-born clone
   fCurrentFiguredBassClone =
     elt->
       createFiguredBassNewbornClone (
@@ -824,9 +823,8 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
     std::stringstream s;
 
     s <<
-      "figured bass is out of context, cannot be handled:'" <<
-      elt->asShortString () <<
-      "'";
+      "figured bass is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -882,7 +880,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-  // create a figured bass new born clone
+  // create a figured bass new-born clone
   fCurrentFiguredBassClone =
     elt->
       createFiguredBassNewbornClone (
@@ -924,9 +922,8 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
     std::stringstream s;
 
     s <<
-      "figured bass is out of context, cannot be handled:'" <<
-      elt->asShortString () <<
-      "'";
+      "figured bass is out of context, cannot be handled: " <<
+      elt->asShortString ();
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),

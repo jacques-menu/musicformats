@@ -22,7 +22,7 @@
 
 #include "msrMoments.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "oahWae.h"
 
 #include "oahEnableTracingIfDesired.h"

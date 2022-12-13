@@ -17,7 +17,7 @@
 #include "mfExceptions.h"
 #include "mfStringsHandling.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 
 #include "oahEnableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED

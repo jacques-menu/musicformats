@@ -184,7 +184,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   fMeasureElementsList.push_back (harmony);
 
   // get harmony sounding whole notes
-  rational
+  Rational
     harmonySoundingWholeNotes =
       harmony->
         getMeasureElementSoundingWholeNotes ();
@@ -231,7 +231,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
   appendElementToMeasure (harmony);
 
   // fetch harmony sounding whole notes
-  rational
+  Rational
     harmonySoundingWholeNotes =
       harmony->
         getMeasureElementSoundingWholeNotes ();

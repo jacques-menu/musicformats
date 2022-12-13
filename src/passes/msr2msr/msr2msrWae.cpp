@@ -16,7 +16,7 @@
 
 #include "oahEarlyOptions.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 #include "msr2msrWae.h"
 
 #include "oahOah.h"

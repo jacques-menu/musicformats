@@ -258,8 +258,8 @@ class EXP msrNote : public msrTupletElement
                             const std::string&  context) override;
 
     void                  setNoteAttachedElementsMeasurePosition (
-                            const S_msrMeasure&    measure,
-                            const Rational& measurePosition);
+                            const S_msrMeasure& measure,
+                            const Rational&     measurePosition);
 
     // note kind
 
@@ -426,8 +426,8 @@ class EXP msrNote : public msrTupletElement
 
     // octave shifts
     void                  setNoteOctaveShift (
-                             const S_msrOctaveShift& octaveShift)
-                                { fNoteOctaveShift = octaveShift; }
+                            const S_msrOctaveShift& octaveShift)
+                              { fNoteOctaveShift = octaveShift; }
 
     S_msrOctaveShift      getNoteOctaveShift () const
                               { return fNoteOctaveShift; }
@@ -1070,7 +1070,8 @@ class EXP msrNote : public msrTupletElement
     // note lyrics
     // ------------------------------------------------------
 
-    std::list<S_msrSyllable>   fNoteSyllables;
+    std::list<S_msrSyllable>
+                          fNoteSyllables;
 
     // stem
     // ------------------------------------------------------
@@ -1091,12 +1092,14 @@ class EXP msrNote : public msrTupletElement
     // spanners
     // ------------------------------------------------------
 
-    std::list<S_msrSpanner>    fNoteSpanners;
+    std::list<S_msrSpanner>
+                          fNoteSpanners;
 
     // technicals
     // ------------------------------------------------------
 
-    std::list<S_msrTechnical>  fNoteTechnicals;
+    std::list<S_msrTechnical>
+                          fNoteTechnicals;
 
     std::list<S_msrTechnicalWithInteger>
                           fNoteTechnicalWithIntegers;
@@ -1146,7 +1149,7 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     std::list<S_msrDynamic>
-                            fNoteDynamics;
+                          fNoteDynamics;
     std::list<S_msrOtherDynamic>
                           fNoteOtherDynamics;
 
@@ -1185,22 +1188,25 @@ class EXP msrNote : public msrTupletElement
     // eyeglasses
     // ------------------------------------------------------
 
-    std::list<S_msrEyeGlasses> fNoteEyeGlasses;
+    std::list<S_msrEyeGlasses>
+                          fNoteEyeGlasses;
 
     // damps
     // ------------------------------------------------------
 
-    std::list<S_msrDamp>       fNoteDamps;
+    std::list<S_msrDamp>  fNoteDamps;
 
     // damp alls
     // ------------------------------------------------------
 
-    std::list<S_msrDampAll>    fNoteDampAlls;
+    std::list<S_msrDampAll>
+                          fNoteDampAlls;
 
     // scordaturas
     // ------------------------------------------------------
 
-    std::list<S_msrScordatura> fNoteScordaturas;
+    std::list<S_msrScordatura>
+                          fNoteScordaturas;
 
     // words
     // ------------------------------------------------------
@@ -1210,7 +1216,7 @@ class EXP msrNote : public msrTupletElement
     // slurs
     // ------------------------------------------------------
 
-    std::list<S_msrSlur>       fNoteSlurs;
+    std::list<S_msrSlur>  fNoteSlurs;
 
     // ligatures
     // ------------------------------------------------------

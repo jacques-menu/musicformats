@@ -125,12 +125,12 @@ class EXP msdlParserEnglishWaeHandler : public msdlParserWaeHandler
     void                  stringExpectedAsOpus () const override;
 
     void                  unexpectedToken (
-                            const msdlToken& theToken,
-                            const std::string&         context) const override;
+                            const msdlToken&   theToken,
+                            const std::string& context) const override;
 
     void                  ignoringToken (
-                            const msdlToken& theToken,
-                            const std::string&         context) const override;
+                            const msdlToken&   theToken,
+                            const std::string& context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;

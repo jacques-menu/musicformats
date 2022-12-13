@@ -55,6 +55,8 @@
 
 #include "musicxml2lilypondInsiderHandler.h"
 
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -253,6 +255,8 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
 
   // initialize the library
   // ------------------------------------------------------
+
+  initializeWAE ();
 
   initializeMSR ();
   initializeLPSR ();

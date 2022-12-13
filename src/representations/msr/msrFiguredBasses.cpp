@@ -185,7 +185,7 @@ msrBassFigure::msrBassFigure (
   fFigureSuffixKind = figureSuffixKind;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating bass figure " <<
       asString () <<
@@ -201,7 +201,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
   const S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a newborn clone of bass figure " <<
       asString () <<
@@ -231,7 +231,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   const S_msrPart& containingPart)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a deep clone of bass figure " <<
       asString () <<
@@ -455,7 +455,7 @@ msrFiguredBass::msrFiguredBass (
   fMeasureElementMeasurePosition = Rational (0, 1);
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating figuredBass " <<
       asString () <<
@@ -471,7 +471,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
   const S_msrVoice& containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a newborn clone of figured bass " <<
       asShortString () <<
@@ -506,7 +506,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
  // S_msrPart containingPart) // JMI v0.9.66
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a deep clone of figuredBass " <<
       asString () <<
@@ -541,7 +541,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
   const S_msrNote& note)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (true || gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "==> Setting the uplink to note of figured bass " <<
       asString () <<
@@ -569,7 +569,7 @@ void msrFiguredBass::setFiguredBassUpLinkToMeasure (
     "measure is null");
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     ++gIndenter;
 
     gLogStream <<
@@ -591,7 +591,7 @@ void msrFiguredBass::appendFigureToFiguredBass (
   const S_msrBassFigure& bassFigure)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Appending bass figure " << bassFigure->asString () <<
       " to figured-bass element '" <<
@@ -663,6 +663,7 @@ std::string msrFiguredBass::asString () const
 
   s <<
     "[FiguredBass" <<
+    ", " << std::hex << std::showbase << this << std::dec <<
     ", fMeasureElementMeasurePosition: " <<
     fMeasureElementMeasurePosition <<
     ", fMeasureElementSoundingWholeNotes: " <<
@@ -693,6 +694,16 @@ std::string msrFiguredBass::asString () const
     else {
       s << "[NONE]";
     }
+
+  s <<
+    ", fFiguredBassUpLinkToVoice" << ": ";
+  if (fFiguredBassUpLinkToVoice) {
+    s << fFiguredBassUpLinkToVoice->asString ();
+  }
+  else {
+    s << "[NONE]";
+  }
+  s << std::endl;
 
   s <<
     ", fFiguredBassParenthesesKind: " <<
@@ -774,6 +785,17 @@ void msrFiguredBass::print (std::ostream& os) const
     "fFiguredBassUpLinkToNote" << ": ";
   if (fFiguredBassUpLinkToNote) {
     os << fFiguredBassUpLinkToNote->asString ();
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fFiguredBassUpLinkToMeasure" << ": ";
+  if (fFiguredBassUpLinkToMeasure) {
+    os << fFiguredBassUpLinkToMeasure->asString ();
   }
   else {
     os << "[NONE]";
