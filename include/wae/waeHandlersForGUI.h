@@ -9,12 +9,10 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___waeHandlers___
-#define ___waeHandlers___
+#ifndef ___waeHandlersForGUI___
+#define ___waeHandlersForGUI___
 
-#include "smartpointer.h"
-
-#include "mfExceptions.h"
+#include "waeHandlers.h"
 
 
 using namespace MusicXML2;
@@ -23,23 +21,23 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-class EXP waeHandler : public smartable
+class EXP waeHandlerForGUI : public waeHandler
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<waeHandler> create ();
+    static SMARTP<waeHandlerForGUI> create ();
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          waeHandler ();
+                          waeHandlerForGUI ();
 
-    virtual               ~waeHandler ();
+    virtual               ~waeHandlerForGUI ();
 
   public:
 
@@ -51,105 +49,97 @@ class EXP waeHandler : public smartable
     // public services
     // ------------------------------------------------------
 
-    virtual void          waeWarning (
+    void                  waeWarning (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
-                            const std::string& message);
+                            const std::string& message) override;
 
-    virtual void          waeInternalWarning (
+    void                  waeInternalWarning (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
-                            const std::string& message);
+                            const std::string& message) override;
 
 
-    virtual void          waeErrorWithoutException (
+    void                  waeErrorWithoutException (
                             const std::string& context,
                             const std::string& sourceCodeFileName,
                             int                sourceCodeLineNumber,
-                            const std::string& message);
+                            const std::string& message) override;
 
-    virtual void          waeErrorWithoutException (
-                            const std::string& context,
-                            const std::string& inputSourceName,
-                            int                inputLineNumber,
-                            const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
-                            const std::string& message);
-
-    virtual void          waeError (
-                            const std::string& context,
-                            const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
-                            const std::string& message);
-
-    virtual void          waeError (
+    void                  waeErrorWithoutException (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
                             const std::string& sourceCodeFileName,
                             int                sourceCodeLineNumber,
-                            const std::string& message);
+                            const std::string& message) override;
 
-    virtual void          waeErrorWithException (
+    void                  waeError (
+                            const std::string& context,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message) override;
+
+    void                  waeError (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message) override;
+
+    void                  waeErrorWithException (
                             const std::string& context,
                             const std::string& sourceCodeFileName,
                             int                sourceCodeLineNumber,
                             const std::string& message,
-                            S_mfException      except);
+                            S_mfException      except) override;
 
-    virtual void          waeErrorWithException (
-                            const std::string& context,
-                            const std::string& inputSourceName,
-                            int                inputLineNumber,
-                            const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
-                            const std::string& message,
-                            S_mfException      except);
-
-
-    virtual void          waeInternalError (
-                            const std::string& context,
-                            const std::string& inputSourceName,
-                            int                inputLineNumber,
-                            const std::string& sourceCodeFileName,
-                            int                sourceCodeLineNumber,
-                            const std::string& message);
-
-    virtual void          waeInternalErrorWithException (
+    void                  waeErrorWithException (
                             const std::string& context,
                             const std::string& inputSourceName,
                             int                inputLineNumber,
                             const std::string& sourceCodeFileName,
                             int                sourceCodeLineNumber,
                             const std::string& message,
-                            S_mfException      except);
+                            S_mfException      except) override;
 
-    virtual void          displayWarningsAndErrorsInputLineNumbers ();
+
+    void                  waeInternalError (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message) override;
+
+    void                  waeInternalErrorWithException (
+                            const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& sourceCodeFileName,
+                            int                sourceCodeLineNumber,
+                            const std::string& message,
+                            S_mfException      except) override;
+
+    void                  displayWarningsAndErrorsInputLineNumbers () override;
 
     // print
     // ------------------------------------------------------
 
-    std::string           asString () const;
-
     void                  print (std::ostream& os) const;
 
-  protected:
+  private:
 
-    // protected fields
+    // private fields
     // ------------------------------------------------------
-
-    std::set<int>         fWarningsInputLineNumbers;
-    std::set<int>         fErrorsInputLineNumbers;
 };
-typedef SMARTP<waeHandler> S_waeHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_waeHandler& elt);
+typedef SMARTP<waeHandlerForGUI> S_waeHandlerForGUI;
+EXP std::ostream& operator << (std::ostream& os, const S_waeHandlerForGUI& elt);
 
-//________________________________________________________________________
-extern EXP S_waeHandler gGlobalWaeHandler;
 
-EXP void initializeWAE ();
 }
 
 

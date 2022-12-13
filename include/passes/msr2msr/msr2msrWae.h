@@ -18,7 +18,7 @@
 
 #include "mfExceptions.h"
 
-#include "wae.h"
+#include "waeInterface.h"
 
 
 namespace MusicFormats

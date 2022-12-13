@@ -645,19 +645,19 @@ class EXP tracingOahGroup : public oahGroup
     // figured bass elements
     // --------------------------------------
 
-    void                  setTraceFiguredBass ()
-                              { fTraceFiguredBass = true; }
+    void                  setTraceFiguredBasses ()
+                              { fTraceFiguredBasses = true; }
 
-    Bool                  getTraceFiguredBass () const
-                              { return fTraceFiguredBass; }
+    Bool                  getTraceFiguredBasses () const
+                              { return fTraceFiguredBasses; }
     const S_oahBooleanAtom&
-                          getTraceFiguredBassBooleanAtom () const
-                              { return fTraceFiguredBassBooleanAtom; }
+                          getTraceFiguredBassesBooleanAtom () const
+                              { return fTraceFiguredBassesBooleanAtom; }
 
-    void                  setTraceFiguredBassDetails ()
-                              { fTraceFiguredBassDetails = true; }
-    Bool                  getTraceFiguredBassDetails () const
-                              { return fTraceFiguredBassDetails; }
+    void                  setTraceFiguredBassesDetails ()
+                              { fTraceFiguredBassesDetails = true; }
+    Bool                  getTraceFiguredBassesDetails () const
+                              { return fTraceFiguredBassesDetails; }
 
     // instruments
     // --------------------------------------
@@ -1044,10 +1044,10 @@ class EXP tracingOahGroup : public oahGroup
     // figured bass elements
     // --------------------------------------
 
-    Bool                  fTraceFiguredBass;
-    S_oahBooleanAtom      fTraceFiguredBassBooleanAtom;
+    Bool                  fTraceFiguredBasses;
+    S_oahBooleanAtom      fTraceFiguredBassesBooleanAtom;
 
-    Bool                  fTraceFiguredBassDetails;
+    Bool                  fTraceFiguredBassesDetails;
 
     // instruments
     // --------------------------------------
