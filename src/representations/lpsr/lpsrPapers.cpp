@@ -202,7 +202,7 @@ void lpsrPaper::browseData (basevisitor* v)
 #endif
 }
 
-void lpsrPaper::print (std::ostream& os) const
+void lpsrPaper::printFull (std::ostream& os) const
 {
   os <<
     "Paper" <<
@@ -383,7 +383,7 @@ void lpsrPaper::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lpsrPaper::printShort (std::ostream& os) const
+void lpsrPaper::print (std::ostream& os) const
 {
   os <<
     "Paper" <<

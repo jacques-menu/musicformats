@@ -841,7 +841,7 @@ void msrSegment::prependClefToSegment  (
     gLogStream << "THIS:" << std::endl;
     gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
-    this->printShort (gLogStream);
+    gLogStream << this;
     --gIndenter;
 
     gLogStream << std::endl;
@@ -849,7 +849,7 @@ void msrSegment::prependClefToSegment  (
     gLogStream << "fSegmentFirstMeasure:" << std::endl;
     gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
-    fSegmentFirstMeasure->printShort (gLogStream);
+    gLogStream << fSegmentFirstMeasure;
     --gIndenter;
 
     gLogStream << std::endl;
@@ -857,7 +857,7 @@ void msrSegment::prependClefToSegment  (
     gLogStream << "fSegmentLastMeasure:" << std::endl;
     gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
-    fSegmentLastMeasure->printShort (gLogStream);
+    gLogStream << fSegmentLastMeasure;
     --gIndenter;
 
     gLogStream << std::endl;
@@ -865,7 +865,7 @@ void msrSegment::prependClefToSegment  (
     gLogStream << "segmentElementsListLastElement:" << std::endl;
     gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
-    segmentElementsListFirstElement->printShort (gLogStream);
+    gLogStream << segmentElementsListFirstElement;
     --gIndenter;
 
     abort (); // JMI
@@ -2485,7 +2485,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
     gLogStream << "THIS:" << std::endl;
     gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
-    this->printShort (gLogStream);
+    gLogStream << this;
     --gIndenter;
 
     gLogStream << std::endl;
@@ -2493,7 +2493,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
     gLogStream << "fSegmentLastMeasure:" << std::endl;
     gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
-    fSegmentLastMeasure->printShort (gLogStream);
+    gLogStream << fSegmentLastMeasure;
     --gIndenter;
 
     gLogStream << std::endl;
@@ -2501,7 +2501,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
     gLogStream << "segmentElementsListLastElement:" << std::endl;
     gLogStream << "----------------------------" << std::endl;
     ++gIndenter;
-    segmentElementsListLastElement->printShort (gLogStream);
+    gLogStream << segmentElementsListLastElement;
     --gIndenter;
 
     abort (); // JMI
@@ -2724,7 +2724,7 @@ void msrSegment::displaySegment (
     std::endl << std::endl;
 }
 
-void msrSegment::print (std::ostream& os) const
+void msrSegment::printFull (std::ostream& os) const
 {
   os <<
     "[Segment '" <<
@@ -2812,7 +2812,7 @@ void msrSegment::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrSegment::printShort (std::ostream& os) const
+void msrSegment::print (std::ostream& os) const
 {
   os <<
     "[Segment '" <<
@@ -2845,7 +2845,7 @@ void msrSegment::printShort (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for

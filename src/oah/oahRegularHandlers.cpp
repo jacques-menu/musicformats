@@ -114,7 +114,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
 
   ++gIndenter;
 
-//  this->printShort (gLogStream);
+//  this->print (gLogStream); JMI v0.9.66
   this->printHelp (gOutputStream); // JMI
 
   gLogStream <<

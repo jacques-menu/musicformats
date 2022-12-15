@@ -2097,7 +2097,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 //           "++++++++++ fetchVoiceFirstNonGraceNote(), this voice: ++++++++++" <<
 //           std::endl;
 //         ++gIndenter;
-//          printShort (gLogStream);
+//         gLogStream << this;;
 //         --gIndenter;
 //       }
 // #endif
@@ -3675,9 +3675,9 @@ void msrVoice::displayVoiceRepeatsStack (
         std::endl;
 
       ++gIndenter;
-      (*i)->
-        getRepeatDescrRepeat ()->
-          printShort (gLogStream);
+      gLogStream <<
+        (*i)->
+          getRepeatDescrRepeat ();
       --gIndenter;
 
       --n;
@@ -3728,9 +3728,9 @@ void msrVoice::displayVoiceRepeatsStackSummary (
         std::endl;
 
       ++gIndenter;
-      (*i)->
-        getRepeatDescrRepeat ()->
-          printShort (gLogStream);
+      gLogStream <<
+        (*i)->
+          getRepeatDescrRepeat ();
       --gIndenter;
 
       --n;
@@ -10487,7 +10487,7 @@ void msrVoice::displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice
     context);
 }
 
-void msrVoice::print (std::ostream& os) const
+void msrVoice::printFull (std::ostream& os) const
 {
   os <<
     '[' <<
@@ -10847,7 +10847,7 @@ void msrVoice::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrVoice::printShort (std::ostream& os) const
+void msrVoice::print (std::ostream& os) const
 {
   os <<
     '[' <<
@@ -10865,7 +10865,8 @@ void msrVoice::printShort (std::ostream& os) const
 
   // print the regular voice harmonies voice name if any
   os << std::left <<
-    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
+    std::setw (fieldWidth) <<
+    "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
   if (fRegularVoiceForwardLinkToHarmoniesVoice) {
     os <<
       fRegularVoiceForwardLinkToHarmoniesVoice->getVoiceName ();
@@ -10878,7 +10879,8 @@ void msrVoice::printShort (std::ostream& os) const
 
   // print the figured bass voice name if any
   os << std::left <<
-    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
+    std::setw (fieldWidth) <<
+    "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
   if (fRegularVoiceForwardLinkToFiguredBassVoice) {
     os <<
       fRegularVoiceForwardLinkToFiguredBassVoice->getVoiceName ();
@@ -10942,7 +10944,7 @@ void msrVoice::printShort (std::ostream& os) const
 
     for ( ; ; ) {
       // print the element
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -10968,7 +10970,7 @@ void msrVoice::printShort (std::ostream& os) const
       std::endl;
 
     ++gIndenter;
-    fVoiceLastSegment->printShort (os);
+    os << fVoiceLastSegment;
     os << std::endl;
     --gIndenter;
   }
@@ -10990,7 +10992,7 @@ void msrVoice::printShort (std::ostream& os) const
     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       const S_msrStanza& stanza = thePair.second;
 
-      stanza->printShort (os);
+      os << stanza;
     } // for
 
     --gIndenter;

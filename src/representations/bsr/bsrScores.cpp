@@ -221,7 +221,7 @@ void bsrScore::printFull (std::ostream& os) const
   --gIndenter;
 }
 
-void bsrScore::printShort (std::ostream& os) const
+void bsrScore::print (std::ostream& os) const
 {
   os <<
     "BSR Score" <<
@@ -230,8 +230,7 @@ void bsrScore::printShort (std::ostream& os) const
   ++gIndenter;
 
   // print the MSR structure (without the voices)
-  fMsrScore->
-    printShort (os);
+  os << fMsrScore;
   os << std::endl;
 
   // print the transcription notes if any
@@ -278,7 +277,7 @@ void bsrScore::printShort (std::ostream& os) const
         iEnd   = fScorePagesList.end (),
         i      = iBegin;
       for ( ; ; ) {
-        (*i)->printShort (os);
+        os << (*i);
         if (++i == iEnd) break;
         // no std::endl here
       } // for

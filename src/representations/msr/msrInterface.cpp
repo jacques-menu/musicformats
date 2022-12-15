@@ -178,7 +178,7 @@ void displayMsrScoreFull (
     separator <<
     std::endl << std::endl;
 
-  theMsrScore->printShort (gLogStream);
+  gLogStream << theMsrScore;
 
   // register time spent
   clock_t endClock = clock ();
@@ -404,7 +404,7 @@ if (false) { // JMI TEMP
 
 //_______________________________________________________________________________
 S_msrStaff createStaffInPart (
-  int              staffNumber, 
+  int              staffNumber,
   const S_msrPart& part)
 {
   // create the staff

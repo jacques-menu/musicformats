@@ -513,8 +513,7 @@ class EXP msrPart : public msrPartGroupElement
                             int           fieldWidth) const;
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
     void                  printSummary (std::ostream& os) const override;
 

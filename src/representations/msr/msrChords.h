@@ -525,8 +525,7 @@ class EXP msrChord : public msrTupletElement
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 
@@ -681,7 +680,7 @@ class EXP msrChordBeamLink : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrChordBeamLink> create (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrBeam&  originalBeam,
                             const S_msrChord& upLinkToChord);
 
@@ -693,7 +692,7 @@ class EXP msrChordBeamLink : public msrElement
     // ------------------------------------------------------
 
                           msrChordBeamLink (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrBeam&  originalBeam,
                             const S_msrChord& upLinkToChord);
 
@@ -729,8 +728,7 @@ class EXP msrChordBeamLink : public msrElement
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 
@@ -753,7 +751,7 @@ class EXP msrChordSlurLink : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrChordSlurLink> create (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrSlur&  originalSlur,
                             const S_msrChord& upLinkToChord);
 
@@ -765,7 +763,7 @@ class EXP msrChordSlurLink : public msrElement
     // ------------------------------------------------------
 
                           msrChordSlurLink (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrSlur&  originalSlur,
                             const S_msrChord& upLinkToChord);
 
@@ -802,8 +800,6 @@ class EXP msrChordSlurLink : public msrElement
 
     void                  print (std::ostream& os) const override;
 
-    void                  printShort (std::ostream& os) const override;
-
   private:
 
     // private fields
@@ -825,7 +821,7 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrChordGraceNotesGroupLink> create (
-                            int                  inputLineNumber,
+                            int                         inputLineNumber,
                             const S_msrGraceNotesGroup& originalGraceNotesGroup,
                             const S_msrChord&           upLinkToChord);
 
@@ -837,7 +833,7 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     // ------------------------------------------------------
 
                           msrChordGraceNotesGroupLink (
-                            int                  inputLineNumber,
+                            int                         inputLineNumber,
                             const S_msrGraceNotesGroup& originalGraceNotesGroup,
                             const S_msrChord&           upLinkToChord);
 
@@ -873,8 +869,6 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
 
   private:
 

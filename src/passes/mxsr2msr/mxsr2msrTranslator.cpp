@@ -7159,7 +7159,7 @@ void mxsr2msrTranslator::displayTupletsStack (
         std::endl;
 
       ++gIndenter;
-      tuplet->printShort (gLogStream);
+      gLogStream << tuplet;
       --gIndenter;
 
       --n;

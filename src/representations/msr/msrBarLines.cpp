@@ -659,7 +659,7 @@ std::string msrBarLine::asString () const
   return s.str ();
 }
 
-void msrBarLine::print (std::ostream& os) const
+void msrBarLine::printFull (std::ostream& os) const
 {
   os <<
     "[BarLine" <<
@@ -758,13 +758,12 @@ void msrBarLine::print (std::ostream& os) const
     std::endl;
 }
 
-void msrBarLine::printShort (std::ostream& os) const
+void msrBarLine::print (std::ostream& os) const
 {
   os <<
     "[BarLine" <<
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
-    msrBarLineCategoryKindAsString (
-      fBarLineCategoryKind) <<
+    fBarLineCategoryKind <<
     ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber <<

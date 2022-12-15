@@ -147,11 +147,11 @@ Process 28676 launched: '/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2l
 
 Process 28676 stopped
 * thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x1)
-    frame #0: 0x00000001007b879a xml2ly`MusicFormats::msrPartGroup::printShort(this=0x0000600003e08100, os=0x000000010ca04650) const at msrPartGroups.cpp:1185:13
+    frame #0: 0x00000001007b879a xml2ly`MusicFormats::msrPartGroup::print(this=0x0000600003e08100, os=0x000000010ca04650) const at msrPartGroups.cpp:1185:13
    1182	      i      = iBegin;
    1183
    1184	    for ( ; ; ) {
--> 1185	      (*i)->printShort (os);
+-> 1185	      os << (*i);
    1186	      if (++i == iEnd) break;
    1187	      os << std::endl;
    1188	    } // for

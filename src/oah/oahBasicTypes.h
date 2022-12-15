@@ -446,7 +446,6 @@ to be developped into :
                             std::ostream& os) const;
 
     void                  print (std::ostream& os) const override;
-    virtual void          printShort (std::ostream& os) const;
 
     virtual void          printHelp (std::ostream& os) const;
 
@@ -549,7 +548,8 @@ class EXP oahAtom : public oahElement
     // ------------------------------------------------------
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
+
     void                  printSummary (std::ostream& os) const;
 
     virtual Bool          findStringInAtom (
@@ -648,7 +648,7 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // ------------------------------------------------------
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   protected:
 
@@ -730,7 +730,6 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
                             int fieldWidth) const;
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
 
     void                  printHelp (std::ostream& os) const override;
 
@@ -823,7 +822,6 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
                             int fieldWidth) const;
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
 
     void                  printHelp (std::ostream& os) const override;
 
@@ -1097,7 +1095,7 @@ class EXP oahSubGroup : public oahElement
     // ------------------------------------------------------
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
+
     void                  printSummary (std::ostream& os) const;
 
     void                  printHelp (std::ostream& os) const override;
@@ -1149,7 +1147,7 @@ class EXP oahSubGroup : public oahElement
 
     std::string           fSubGroupHeader;
 
-    std::list<S_oahAtom>       fSubGroupAtomsList;
+    std::list<S_oahAtom>  fSubGroupAtomsList;
 
     // protected work fields
     // ------------------------------------------------------
@@ -1314,7 +1312,7 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
+
     void                  printSummary (std::ostream& os) const;
 
     void                  printGroupHeader (std::ostream& os) const;
@@ -1632,7 +1630,7 @@ class EXP oahHandler : public oahFindableElement
 //     void                  displayArgumentsVector (std::ostream& os) const; JMI v0.9.65
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const;
+    void                  printFull (std::ostream& os) const override;
 
     void                  printSummary (std::ostream& os) const;
 

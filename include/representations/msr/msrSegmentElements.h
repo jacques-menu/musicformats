@@ -128,7 +128,6 @@ class EXP msrSegmentElement : public msrElement
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override = 0;
 
     void                  printSummary (std::ostream& os) const override {}
 

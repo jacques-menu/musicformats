@@ -114,8 +114,7 @@ class EXP msrRepeatCommonPart : public msrElement
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 
@@ -245,8 +244,7 @@ class EXP msrRepeatEnding : public msrElement
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 
@@ -405,12 +403,11 @@ class EXP msrRepeat : public msrVoiceElement
     std::string           asString () const override;
 
     void                  displayRepeat (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 

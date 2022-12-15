@@ -221,9 +221,9 @@ function bit ()
 
   LOGFILE_NAME=${SCRIPT_NAME}.log
   LOGFILE=${BUILD_DIR}/${LOGFILE_NAME}
-# 	echo
-# 	echo "==> LOGFILE = ${LOGFILE}"
-# 	echo
+	echo
+	echo "==> LOGFILE = ${LOGFILE}"
+	echo
 
 	# execute the SCRIPT
 
@@ -256,6 +256,8 @@ function bit ()
 
 alias cmakall='pushd . ; cd ${BUILD_DIR}/libdir; cmake .. -DALL=on -DAPPLEDEBUG=on ; popd'
 #cmake .. -DLILY=on -DBRAILLE=on
+
+alias cbit=’clear; bit’
 
 
 # version number

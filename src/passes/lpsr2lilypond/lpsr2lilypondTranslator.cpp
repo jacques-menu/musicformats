@@ -11840,12 +11840,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 
   switch (fCurrentVoice->getVoiceKind ()) {
     case msrVoiceKind::kVoiceKindRegular:
-      doHandleFiguredBass = true;
+//       doHandleFiguredBass = true;
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
     case msrVoiceKind::kVoiceKindHarmonies:
+    	break;
+
     case msrVoiceKind::kVoiceKindFiguredBass:
+      doHandleFiguredBass = true;
       break;
   } // switch
 

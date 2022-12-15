@@ -309,11 +309,6 @@ void lpsrHeader::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lpsrHeader::printShort (std::ostream& os) const
-{
-  print (os); // JMI
-}
-
 std::ostream& operator << (std::ostream& os, const S_lpsrHeader& elt)
 {
   if (elt) {
@@ -322,7 +317,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrHeader& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

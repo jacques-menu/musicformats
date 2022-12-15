@@ -478,8 +478,8 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
       "'" <<
       std::endl;
 
-    this->printShort (gLogStream);
-    part->printShort (gLogStream);
+    gLogStream << this;
+    gLogStream << part;
   }
 #endif
 
@@ -552,8 +552,8 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
       " to part group " << asString () <<
       std::endl;
 
-    this->printShort (gLogStream);
-    part->printShort (gLogStream);
+    gLogStream << this;
+    gLogStream << part;
   }
 #endif
 
@@ -582,8 +582,8 @@ void msrPartGroup::removePartFromPartGroup (
       " from part group " << asString () <<
       std::endl;
 
-    this->printShort (gLogStream);
-    partToBeRemoved->printShort (gLogStream);
+    gLogStream << this;
+    gLogStream << partToBeRemoved;
   }
 #endif
 
@@ -645,8 +645,8 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
       "Prepending (sub-)part group " << partGroup->getPartGroupNumber () <<
       " to part group " << getPartGroupNumber ()  << std::endl;
 
-    this->printShort (gLogStream);
-    partGroup->printShort (gLogStream);
+    gLogStream << this;
+    gLogStream << partGroup;
   }
 #endif
 
@@ -667,8 +667,8 @@ void msrPartGroup::appendSubPartGroupToPartGroup (
       "Appending (sub-)part group " << partGroup->getPartGroupNumber () <<
       " to part group " << getPartGroupNumber ()  << std::endl;
 
-    this->printShort (gLogStream);
-    partGroup->printShort (gLogStream);
+    gLogStream << this;
+    gLogStream << partGroup;
   }
 #endif
 
@@ -791,8 +791,7 @@ void msrPartGroup::printPartGroupElementsListShort (
 
         ++gIndenter;
 
-        nestedPartGroup->
-          printShort (gLogStream);
+        gLogStream << nestedPartGroup;
 
         --gIndenter;
       }
@@ -805,8 +804,7 @@ void msrPartGroup::printPartGroupElementsListShort (
         // this is a part
         ++gIndenter;
 
-        part->
-          printShort (gLogStream);
+        gLogStream << part;
 
         --gIndenter;
       }
@@ -1170,7 +1168,7 @@ std::string msrPartGroup::asString () const
   return s.str ();
 }
 
-void msrPartGroup::print (std::ostream& os) const
+void msrPartGroup::printFull (std::ostream& os) const
 {
   os <<
     "[PartGroup" " \"" << getPartGroupCombinedName () <<
@@ -1292,7 +1290,7 @@ void msrPartGroup::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrPartGroup::printShort (std::ostream& os) const
+void msrPartGroup::print(std::ostream& os) const
 {
   os <<
     "[PartGroup" " \"" << getPartGroupCombinedName () <<

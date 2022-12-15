@@ -1154,17 +1154,6 @@ void oahPrefix::print (std::ostream& os) const
   os << ']';
 }
 
-void oahPrefix::printShort (std::ostream& os) const
-{
-  os <<
-    "[oahPrefix" <<
-    std::endl;
-
-  printPrefixEssentials (os);
-
-  os << ']';
-}
-
 void oahPrefix::printHelp (std::ostream& os) const
 {
   if (fPrefixDescription.size ()) {
@@ -1420,7 +1409,7 @@ void oahAtom::browseData (basevisitor* v)
 #endif
 }
 
-void oahAtom::print (std::ostream& os) const
+void oahAtom::printFull (std::ostream& os) const
 {
   const int fieldWidth = 19;
 
@@ -1434,14 +1423,14 @@ void oahAtom::print (std::ostream& os) const
     os, fieldWidth);
 
   os << std::left <<
-    std::setw (fieldWidth) << "elementHelpOnlyKind" << ": " <<
+    std::setw (fieldWidth) << "fElementHelpOnlyKind" << ": " <<
     oahElementHelpOnlyKindAsString (fElementHelpOnlyKind) <<
     std::endl;
 
   --gIndenter;
 }
 
-void oahAtom::printShort (std::ostream& os) const
+void oahAtom::print (std::ostream& os) const
 {
   const int fieldWidth = 19;
 
@@ -1625,7 +1614,7 @@ void oahAtomExpectingAValue::applyAtomWithDefaultValue (std::ostream& os)
   oahInternalError (s.str ());
 }
 
-void oahAtomExpectingAValue::print (std::ostream& os) const
+void oahAtomExpectingAValue::printFull (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -1641,7 +1630,7 @@ void oahAtomExpectingAValue::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahAtomExpectingAValue::printShort (std::ostream& os) const
+void oahAtomExpectingAValue::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -1824,7 +1813,7 @@ void oahAtomImplicitlyStoringAValue::print (std::ostream& os) const
   const int fieldWidth = 19;
 
   os <<
-    "AtomWithVariable:";
+    "AtomWithVariable";
   if (fSetByAnOption) {
     os <<
       ", set by an option";
@@ -1837,21 +1826,6 @@ void oahAtomImplicitlyStoringAValue::print (std::ostream& os) const
     os, fieldWidth);
 
   --gIndenter;
-}
-
-void oahAtomImplicitlyStoringAValue::printShort (std::ostream& os) const
-{
-  const int fieldWidth = 19;
-
-  os <<
-    "AtomWithVariable: ";
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
-  }
-
-  printAtomWithVariableEssentialsShort (
-    os, fieldWidth);
 }
 
 void oahAtomImplicitlyStoringAValue::printHelp (std::ostream& os) const
@@ -2051,7 +2025,7 @@ void oahAtomStoringAValue::print (std::ostream& os) const
   const int fieldWidth = 19;
 
   os <<
-    "AtomWithVariable:";
+    "AtomWithVariable";
   if (fSetByAnOption) {
     os <<
       ", set by an option";
@@ -2064,21 +2038,6 @@ void oahAtomStoringAValue::print (std::ostream& os) const
     os, fieldWidth);
 
   --gIndenter;
-}
-
-void oahAtomStoringAValue::printShort (std::ostream& os) const
-{
-  const int fieldWidth = 19;
-
-  os <<
-    "AtomWithVariable: ";
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
-  }
-
-  printAtomWithVariableEssentialsShort (
-    os, fieldWidth);
 }
 
 void oahAtomStoringAValue::printHelp (std::ostream& os) const
@@ -2765,9 +2724,8 @@ void oahSubGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "elementVisibilityKind" << ": " <<
-      oahElementVisibilityKindAsString (
-        fElementVisibilityKind) <<
+    "fElementVisibilityKind" << ": " <<
+		fElementVisibilityKind <<
     std::endl << std::endl;
 
   os <<
@@ -2797,34 +2755,6 @@ void oahSubGroup::print (std::ostream& os) const
   }
 
   --gIndenter;
-}
-
-void oahSubGroup::printShort (std::ostream& os) const
-{
-  const int fieldWidth = 27;
-
-  os <<
-   "SubGroup: " ;
-
-  oahElement::printOahElementEssentialsShort (
-    os, fieldWidth);
-
-  if (fSubGroupAtomsList.size ()) {
-    ++gIndenter;
-
-    std::list<S_oahAtom>::const_iterator
-      iBegin = fSubGroupAtomsList.begin (),
-      iEnd   = fSubGroupAtomsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      // print the atom
-      (*i)->printShort (os);
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    --gIndenter;
-  }
 }
 
 void oahSubGroup::printSummary (std::ostream& os) const
@@ -3860,36 +3790,6 @@ void oahGroup::print (std::ostream& os) const
   }
 
   --gIndenter;
-}
-
-void oahGroup::printShort (std::ostream& os) const
-{
-  const int fieldWidth = 27;
-
-  os <<
-    "Group: ";
-
-  oahElement::printOahElementEssentialsShort (
-    os, fieldWidth);
-
-  if (fGroupSubGroupsList.size ()) {
-    os << std::endl;
-
-    ++gIndenter;
-
-    std::list<S_oahSubGroup>::const_iterator
-      iBegin = fGroupSubGroupsList.begin (),
-      iEnd   = fGroupSubGroupsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      // print the options subgroup
-      (*i)->printShort (os);
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    --gIndenter;
-  }
 }
 
 void oahGroup::printSummary (std::ostream& os) const
@@ -5562,7 +5462,7 @@ void oahHandler::printHandlerEssentials (
   --gIndenter;
 }
 
-void oahHandler::print (std::ostream& os) const
+void oahHandler::printFull (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
@@ -5619,14 +5519,13 @@ void oahHandler::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "oahHandlerFoundAHelpOption" << ": " <<
+    "fOahHandlerFoundAHelpOption" << ": " <<
     fOahHandlerFoundAHelpOption <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fHandlerUsedThruKind" << ": " <<
-    oahHandlerUsedThruKindAsString (
-      fHandlerUsedThruKind) <<
+		fHandlerUsedThruKind <<
     std::endl;
 
   // print the options prefixes if any
@@ -5662,7 +5561,7 @@ void oahHandler::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahHandler::printShort (std::ostream& os) const
+void oahHandler::print (std::ostream& os) const
 {
   const int fieldWidth = 27;
 
@@ -5677,14 +5576,13 @@ void oahHandler::printShort (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "oahHandlerFoundAHelpOption" << ": " <<
+    "fOahHandlerFoundAHelpOption" << ": " <<
     fOahHandlerFoundAHelpOption <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fHandlerUsedThruKind" << ": " <<
-    oahHandlerUsedThruKindAsString (
-      fHandlerUsedThruKind) <<
+		fHandlerUsedThruKind <<
     std::endl;
 
 /* JMI
@@ -5711,7 +5609,7 @@ void oahHandler::printShort (std::ostream& os) const
       i      = iBegin;
     for ( ; ; ) {
       // print the options group
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for

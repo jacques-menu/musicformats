@@ -293,8 +293,7 @@ class EXP msrBarLine : public msrMeasureElement
     std::string           asShortString () const override;
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 

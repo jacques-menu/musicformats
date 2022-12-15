@@ -620,8 +620,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 
@@ -762,7 +761,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrHarmony& currentHarmony);
 
     void                  finalizeTheHarmoniesInHarmoniesMeasure (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  finalizeHarmonyInHarmoniesMeasure (

@@ -190,8 +190,7 @@ class EXP lpsrPaper : public lpsrElement
     // ------------------------------------------------------
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
 
   private:

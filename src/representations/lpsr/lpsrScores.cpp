@@ -3091,7 +3091,7 @@ void lpsrScore::printFull (std::ostream& os) const
   --gIndenter;
 }
 
-void lpsrScore::printShort (std::ostream& os) const
+void lpsrScore::print (std::ostream& os) const
 {
   os <<
     "LPSR Score, short version" <<
@@ -3106,8 +3106,7 @@ void lpsrScore::printShort (std::ostream& os) const
   ++gIndenter;
 
   // print the MSR structure (without the voices)
-  fMsrScore->
-    printShort (os);
+  os << fMsrScore;
   os << std::endl;
 
   os <<
@@ -3117,14 +3116,14 @@ void lpsrScore::printShort (std::ostream& os) const
   ++gIndenter;
 
   // print LPSR basic information
-  fScoreHeader->printShort (os);
+  os << fScoreHeader;
   os << std::endl;
 
-  fScorePaper->printShort (os);
+  os << fScorePaper;
   os << std::endl;
 
   if (fScoreLayout) {
-    fScoreLayout->printShort (os);
+    os << fScoreLayout;
     os << std::endl;
   }
 
@@ -3143,7 +3142,7 @@ void lpsrScore::printShort (std::ostream& os) const
       iEnd   = fScoreElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -3164,7 +3163,7 @@ void lpsrScore::printShort (std::ostream& os) const
       iEnd   = fScoreBookBlocksList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for

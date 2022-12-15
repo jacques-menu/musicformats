@@ -89,7 +89,7 @@ msrPartGroupElement::~msrPartGroupElement ()
 //       group =
 //         dynamic_cast<msrPartGroup*>(&(*element))
 //   ) {
-//     group->print (os);
+//     os << group;
 //   }
 //
 //   else if (
@@ -98,42 +98,7 @@ msrPartGroupElement::~msrPartGroupElement ()
 //       subGroup =
 //         dynamic_cast<msrPart*>(&(*element))
 //   ) {
-//     group->print (os);
-//   }
-//
-//   else {
-//     std::stringstream s;
-//
-//     s <<
-//       "part group element is neither a part group nor a part";
-//
-//     msrInternalError (s.str ());
-//   }
-// }
-//
-// void msrPartGroupElement::printShort (std::ostream& os) const
-// {
-// //   os << // JMI
-// //     "PartGroupElement" <<
-// //     ", line " << fInputLineNumber <<
-// //     std::endl;
-//
-//   if (
-//     // part group?
-//     S_msrPartGroup
-//       group =
-//         dynamic_cast<msrPartGroup*>(&(*element))
-//   ) {
-//     group->printShort (os);
-//   }
-//
-//   else if (
-//     // part?
-//     S_msrPart
-//       subGroup =
-//         dynamic_cast<msrPart*>(&(*element))
-//   ) {
-//     group->printShort (os);
+//     os << group;
 //   }
 //
 //   else {

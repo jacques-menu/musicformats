@@ -348,7 +348,7 @@ void msrMeasureElement::browseData (basevisitor* v)
 std::string msrMeasureElement::asString () const
 {
   // this is overriden all in actual elements
-  return "??? msrMeasureElement::asString () ???";
+  return "[??? msrMeasureElement ???]";
 }
 
 std::string msrMeasureElement::asShortString () const

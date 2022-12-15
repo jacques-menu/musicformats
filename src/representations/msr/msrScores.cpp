@@ -597,7 +597,7 @@ void msrScore::printFull (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrScore::printShort (std::ostream& os) const
+void msrScore::print(std::ostream& os) const
 {
   os <<
     "MSR Score, short version" <<
@@ -696,7 +696,7 @@ void msrScore::printShort (std::ostream& os) const
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       // no std::endl here
     } // for

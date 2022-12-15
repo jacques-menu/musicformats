@@ -156,8 +156,6 @@ class EXP lpsrHeader : public lpsrElement
 
     void                  print (std::ostream& os) const override;
 
-    void                  printShort (std::ostream& os) const override;
-
   private:
 
     // private fields

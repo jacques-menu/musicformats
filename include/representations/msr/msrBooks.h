@@ -293,8 +293,7 @@ class EXP msrBook : public msrElement
     // ------------------------------------------------------
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
     void                  printSummary (std::ostream& os) const override;
 

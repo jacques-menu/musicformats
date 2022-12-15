@@ -63,6 +63,12 @@ std::string oahElementValueKindAsString (
   return result;
 }
 
+std::ostream& operator << (std::ostream& os, const oahElementValueKind& elt)
+{
+	os << oahElementValueKindAsString (elt);
+	return os;
+}
+
 std::string oahElementVisibilityKindAsString (
   oahElementVisibilityKind elementVisibilityKind)
 {
@@ -89,6 +95,12 @@ std::string oahElementVisibilityKindAsString (
   return result;
 }
 
+std::ostream& operator << (std::ostream& os, const oahElementVisibilityKind& elt)
+{
+	os << oahElementVisibilityKindAsString (elt);
+	return os;
+}
+
 std::string oahElementHelpOnlyKindAsString (
   oahElementHelpOnlyKind elementHelpOnlyKind)
 {
@@ -104,6 +116,12 @@ std::string oahElementHelpOnlyKindAsString (
   } // switch
 
   return result;
+}
+
+std::ostream& operator << (std::ostream& os, const oahElementHelpOnlyKind& elt)
+{
+	os << oahElementHelpOnlyKindAsString (elt);
+	return os;
 }
 
 //______________________________________________________________________________
@@ -666,19 +684,10 @@ void oahElement::printOahElementEssentialsShort (
 void oahElement::print (std::ostream& os) const
 {
   os <<
-    "??? oahElement ???" <<
+    "[??? oahElement ???]" <<
     std::endl;
 
-  printOahElementEssentials (os, 40); // JMI
-}
-
-void oahElement::printShort (std::ostream& os) const
-{
-  os <<
-    "??? oahElement ???" <<
-    std::endl;
-
-  printOahElementEssentials (os, 40); // JMI
+  printOahElementEssentials (os, 40); // JMI v0.9.66
 }
 
 void oahElement::printHelp (std::ostream& os) const

@@ -3049,7 +3049,7 @@ std::string msrStaff::asString () const
   return s.str ();
 }
 
-void msrStaff::print (std::ostream& os) const
+void msrStaff::printFull (std::ostream& os) const
 {
   os <<
     "[Staff \"" << fStaffName <<
@@ -3226,7 +3226,7 @@ void msrStaff::print (std::ostream& os) const
       os <<
 //         "voiceKind: " << JMI
 //         msrVoiceKindAsString (voice->getVoiceKind ()) <<
-        "regularVoiceStaffSequentialNumber: " <<
+        "getRegularVoiceStaffSequentialNumber: " <<
         voice->getRegularVoiceStaffSequentialNumber () <<
         std::endl;
 
@@ -3272,7 +3272,7 @@ void msrStaff::print (std::ostream& os) const
       os <<
 //         "voiceKind: " << JMI
 //         msrVoiceKindAsString (voice->getVoiceKind ()) <<
-        "regularVoiceStaffSequentialNumber: " <<
+        "getRegularVoiceStaffSequentialNumber: " <<
         voice->getRegularVoiceStaffSequentialNumber () <<
         std::endl;
 
@@ -3318,7 +3318,7 @@ void msrStaff::print (std::ostream& os) const
       os <<
 //        "voiceKind: " << JMI
 //        msrVoiceKindAsString (voice->getVoiceKind ()) <<
-        "regularVoiceStaffSequentialNumber: " <<
+        "getRegularVoiceStaffSequentialNumber: " <<
         voice->getRegularVoiceStaffSequentialNumber () <<
         std::endl;
 
@@ -3432,7 +3432,7 @@ void msrStaff::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrStaff::printShort (std::ostream& os) const
+void msrStaff::print (std::ostream& os) const
 {
   os <<
     "[Staff \"" << fStaffName <<
@@ -3458,7 +3458,7 @@ void msrStaff::printShort (std::ostream& os) const
     for ( ; ; ) {
       const S_msrVoice& voice = (*i).second;
 
-      voice->printShort (os);
+      os << voice;
 
       if (++i == iEnd) break;
 

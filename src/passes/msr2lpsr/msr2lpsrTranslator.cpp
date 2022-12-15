@@ -708,7 +708,7 @@ void msr2lpsrTranslator::displayOnGoingNotesStack (
         std::endl;
 
       ++gIndenter;
-      note->printShort (gLogStream);
+      gLogStream << note;
       --gIndenter;
 
       --n;
@@ -4905,7 +4905,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       "fCurrentNonGraceNoteClone: ";
 
     if (fCurrentNonGraceNoteClone) {
-      fCurrentNonGraceNoteClone->printShort (
+      fCurrentNonGraceNoteClone->print (
         gLogStream);
     }
     else {
@@ -5039,8 +5039,7 @@ void msr2lpsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       "fCurrentNonGraceNoteClone: ";
 
     if (fCurrentNonGraceNoteClone) {
-      fCurrentNonGraceNoteClone->printShort (
-        gLogStream);
+      gLogStream << fCurrentNonGraceNoteClone;
     }
     else {
       gLogStream <<

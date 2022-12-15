@@ -5649,7 +5649,7 @@ void msrMeasure::finalizeMeasure (
         "staff:" <<
         std::endl;
       ++gIndenter;
-      staff->printShort (gLogStream);
+      gLogStream << staff;
       gLogStream << std::endl;
       --gIndenter;
     }
@@ -6341,7 +6341,7 @@ void msrMeasure::displayMeasure (
     std::endl << std::endl;
 }
 
-void msrMeasure::print (std::ostream& os) const
+void msrMeasure::printFull (std::ostream& os) const
 {
   os <<
     "[Measure '" <<
@@ -6618,7 +6618,7 @@ void msrMeasure::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrMeasure::printShort (std::ostream& os) const
+void msrMeasure::print (std::ostream& os) const
 {
   os <<
     "[Measure '" <<
@@ -6687,7 +6687,7 @@ void msrMeasure::printShort (std::ostream& os) const
       iEnd   = fMeasureElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for

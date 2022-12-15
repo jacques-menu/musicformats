@@ -337,11 +337,10 @@ class EXP msrBeatRepeat : public msrSegmentElement
     std::string           asString () const override;
 
     void                  displayBeatRepeat (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
 
   private:
 
