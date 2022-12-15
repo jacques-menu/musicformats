@@ -127,11 +127,10 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     std::string           asString () const override;
 
     void                  displayMultipleFullBarRests (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
 
   private:
 

@@ -420,11 +420,8 @@ class EXP lpsrScore : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (std::ostream& os) const override
-                              { printShort (os); }
-
-    void                  printShort (std::ostream& os) const override;
-    void                  printFull (std::ostream& os) const;
+    void                  print (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 

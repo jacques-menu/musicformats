@@ -297,7 +297,7 @@ std::string msrBeatRepeatElement::asString () const
   return s.str ();
 }
 
-void msrBeatRepeatElement::print (std::ostream& os) const
+void msrBeatRepeatElement::printFull (std::ostream& os) const
 {
   os <<
     "BeatRepeatElement" <<
@@ -354,7 +354,7 @@ void msrBeatRepeatElement::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msrBeatRepeatElement::printShort (std::ostream& os)
+void msrBeatRepeatElement::print (std::ostream& os)
 {
   os <<
     "BeatRepeatElement" <<
@@ -402,7 +402,7 @@ void msrBeatRepeatElement::printShort (std::ostream& os)
 
     for ( ; ; ) {
       // print the element
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -1249,10 +1249,10 @@ void msrBeatRepeat::print (std::ostream& os) const
   }
 #endif
 
-  // print the measures repeat pattern
+  // print the beat repeat pattern
   if (! fBeatRepeatPattern) {
     os <<
-      "measures repeat pattern: [NONE]" <<
+      "fBeatRepeatPattern: [NONE]" <<
       std::endl;
   }
 
@@ -1261,10 +1261,10 @@ void msrBeatRepeat::print (std::ostream& os) const
       fBeatRepeatPattern;
   }
 
-  // print the measures repeat replicas
+  // print the beat repeat replicas
   if (! fBeatRepeatReplicas) {
     os <<
-      "measures repeat replicas: [NONE]" <<
+      "fBeatRepeatReplicas: [NONE]" <<
       std::endl;
   }
 
@@ -1276,11 +1276,6 @@ void msrBeatRepeat::print (std::ostream& os) const
   --gIndenter;
 
   os << ']' << std::endl;
-}
-
-void msrBeatRepeat::printShort (std::ostream& os) const
-{
-  print (os);
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrBeatRepeat& elt)

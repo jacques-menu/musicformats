@@ -267,7 +267,8 @@ From this, the following other descriptions are derived:
     std::list<S_msrNote>  fSliceNotesFlatList;
 
     // note events std::list
-    std::list<S_msrNoteEvent>  fSliceNoteEventsList;
+    std::list<S_msrNoteEvent>
+                          fSliceNoteEventsList;
 
     // simultaneous notes chunks std::list
     std::list<S_msrSimultaneousNotesChunk>
@@ -380,7 +381,7 @@ There is a standard set of methods to print the contents of the descriptions in 
 
 There are also more specific methods such as:
 \begin{lstlisting}[language=CPlusPlus]
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
     void                  printSummary (std::ostream& os) const override;
 \end{lstlisting}

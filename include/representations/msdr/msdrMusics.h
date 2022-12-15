@@ -102,12 +102,11 @@ class EXP msdrMusic : public smartable
     std::string           asString () const;
 
     void                  displayMusic (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context) const;
 
     void                  print (std::ostream& os) const;
-
-    void                  printShort (std::ostream& os) const;
+    void                  printFull (std::ostream& os) const;
 
   private:
 

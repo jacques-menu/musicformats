@@ -338,11 +338,10 @@ class EXP msrMeasureRepeat : public msrSegmentElement
     std::string           asString () const override;
 
     void                  displayMeasureRepeat (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -470,8 +469,6 @@ class EXP msrMeasureRepeatElement : public msrElement
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
 
   private:
 

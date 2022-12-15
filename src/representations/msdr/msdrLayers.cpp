@@ -21,11 +21,9 @@
 #endif
 
 
-
 #include "msdrLayers.h"
 
 #include "oahOah.h"
-
 #include "msrOah.h"
 
 
@@ -34,7 +32,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdrLayer msdrLayer::create (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& layerNumber)
 {
   msdrLayer* o =
@@ -46,7 +44,7 @@ S_msdrLayer msdrLayer::create (
 }
 
 msdrLayer::msdrLayer (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& layerNumber)
 {
 #ifdef TRACING_IS_ENABLED
@@ -71,29 +69,29 @@ msdrLayer::~msdrLayer ()
 {}
 
 void msdrLayer::addClefToLayer (
-  int       inputLineNumber,
-  int       measureNumber,
+  int              inputLineNumber,
+  int              measureNumber,
   const S_msrClef& clef)
 {
 }
 
 void msdrLayer::addKeyToLayer (
-  int      inputLineNumber,
-  int      measureNumber,
+  int             inputLineNumber,
+  int             measureNumber,
   const S_msrKey& key)
 {
 }
 
 void msdrLayer::addTimeSignatureToLayer (
-  int                inputLineNumber,
-  int                measureNumber,
+  int                       inputLineNumber,
+  int                       measureNumber,
   const S_msrTimeSignature& timeSignature)
 {
 }
 
 void msdrLayer::addNoteToLayer (
-  int       inputLineNumber,
-  int       measureNumber,
+  int              inputLineNumber,
+  int              measureNumber,
   const S_msrNote& note)
 {
 }
@@ -239,7 +237,7 @@ void msdrLayer::displayLayer (
     std::endl << std::endl;
 }
 
-void msdrLayer::print (std::ostream& os) const
+void msdrLayer::printFull (std::ostream& os) const
 {
   os <<
     "MSDR measure '" << fLayerNumber <<
@@ -322,7 +320,7 @@ void msdrLayer::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msdrLayer::printShort (std::ostream& os) const
+void msdrLayer::print (std::ostream& os) const
 {
   os <<
     "MSDR layer '" <<

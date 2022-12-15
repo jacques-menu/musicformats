@@ -1462,7 +1462,7 @@ std::string msrTempo::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrTempo::print (std::ostream& os) const
+void msrTempo::printFull (std::ostream& os) const
 {
   os <<
     "[Tempo" <<
@@ -1591,7 +1591,7 @@ void msrTempo::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrTempo::printShort (std::ostream& os) const
+void msrTempo::print (std::ostream& os) const
 {
   os << asString () << std::endl;
 }

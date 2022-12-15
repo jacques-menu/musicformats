@@ -909,13 +909,13 @@ void msrMeasuresSlice::print (std::ostream& os) const
   ++gIndenter;
 
   os <<
-    "sliceMeasureNumber: " << fSliceMeasureNumber <<
+    "fSliceMeasureNumber: " << fSliceMeasureNumber <<
     std::endl;
 
   // print the slice measures std::vector
   if (sliceMeasuresVectorSize) {
     os <<
-      "sliceMeasuresVector: " <<
+      "fSliceMeasuresVector: " <<
       std::endl;
 
     ++gIndenter;
@@ -949,7 +949,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
 
   if (sliceNotesFlatListSize) {
     os <<
-      "sliceNotesFlatList: " <<
+      "fSliceNotesFlatList: " <<
       std::endl;
 
     ++gIndenter;
@@ -981,7 +981,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
 
   if (sliceNoteEventsListSize) {
     os <<
-      "sliceNoteEventsList: " <<
+      "fSliceNoteEventsList: " <<
       std::endl;
 
     ++gIndenter;
@@ -1013,7 +1013,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
 
   if (sliceSimultaneousNotesChunksListSize) {
     os <<
-      "sliceSimultaneousNotesChunksList: " <<
+      "fSliceSimultaneousNotesChunksList: " <<
       std::endl;
 
     ++gIndenter;
@@ -1042,11 +1042,6 @@ void msrMeasuresSlice::print (std::ostream& os) const
   --gIndenter;
 
   os << ']' << std::endl;
-}
-
-void msrMeasuresSlice::printShort (std::ostream& os) const
-{
-  print (os);
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlice& elt)
@@ -1323,7 +1318,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
       std::endl;
 
     ++gIndenter;
-    this->printShort (gLogStream);
+    gLogStream << this;
     --gIndenter;
   }
 #endif
@@ -1410,11 +1405,6 @@ void msrMeasuresSlicesSequence::print (std::ostream& os) const
   }
 
   os << ']' << std::endl;
-}
-
-void msrMeasuresSlicesSequence::printShort (std::ostream& os) const
-{
-  print (os);
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlicesSequence& elt)

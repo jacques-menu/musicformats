@@ -5216,7 +5216,7 @@ std::string msrNote::noteEssentialsAsSting () const
   return s.str ();
 }
 
-void msrNote::print (std::ostream& os) const
+void msrNote::printFull (std::ostream& os) const
 {
   os <<
     "[Note" <<
@@ -6928,7 +6928,7 @@ void msrNote::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrNote::printShort (std::ostream& os) const
+void msrNote::print (std::ostream& os) const
 {
   os <<
     "[Note" <<
@@ -7043,7 +7043,7 @@ void msrNote::printShort (std::ostream& os) const
 //
 //     ++gIndenter;
 //
-//     fNoteGraceNotesGroupBefore->printShort (os);
+//     os << fNoteGraceNotesGroupBefore;
 //
 //     --gIndenter;
 //   }
@@ -7721,7 +7721,7 @@ void msrNote::printShort (std::ostream& os) const
 //
 //     ++gIndenter;
 //
-//     fNoteGraceNotesGroupAfter->printShort (os);
+//     os << fNoteGraceNotesGroupAfter;
 //
 //     --gIndenter;
 //   }

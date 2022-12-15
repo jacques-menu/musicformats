@@ -2567,7 +2567,7 @@ void msrPart::printPartMeasuresWholeNotesDurationsVector (
   }
 }
 
-void msrPart::print (std::ostream& os) const
+void msrPart::printFull (std::ostream& os) const
 {
   os <<
     "[Part" << ' ' << fPartMsrName <<
@@ -2993,7 +2993,7 @@ void msrPart::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrPart::printShort (std::ostream& os) const
+void msrPart::print (std::ostream& os) const
 {
   os <<
     "[Part" << ' ' << fPartMsrName <<
@@ -3119,29 +3119,29 @@ void msrPart::printShort (std::ostream& os) const
         staffKind =
           staff->getStaffKind ();
 
-      switch (staffKind) { // JMI
+      switch (staffKind) { // JMI v0.9.66
         case msrStaffKind::kStaffKindRegular:
-          staff->printShort (os);
+          os << staff;
           break;
 
         case msrStaffKind::kStaffKindTablature:
-          staff->printShort (os);
+          os << staff;
           break;
 
         case msrStaffKind::kStaffKindHarmonies:
-          staff->printShort (os);
+          os << staff;
           break;
 
         case msrStaffKind::kStaffKindFiguredBass:
-          staff->printShort (os);
+          os << staff;
           break;
 
         case msrStaffKind::kStaffKindDrum:
-          staff->printShort (os);
+          os << staff;
           break;
 
         case msrStaffKind::kStaffKindRythmic:
-          staff->printShort (os);
+          os << staff;
           break;
       } // switch
 

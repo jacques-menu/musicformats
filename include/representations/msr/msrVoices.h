@@ -698,7 +698,7 @@ class EXP msrVoice : public msrElement
     // segments
 
     void                  createNewLastSegmentForVoice (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  createNewLastSegmentFromItsFirstMeasureForVoice (
@@ -927,11 +927,11 @@ class EXP msrVoice : public msrElement
     // voice last segment
 
     void                  appendVoiceLastSegmentToInitialVoiceElements (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     // harmonies
@@ -947,7 +947,7 @@ class EXP msrVoice : public msrElement
     // repeats
 
     S_msrRepeat           createARepeatAndStackIt (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     S_msrRepeat           createARepeatCloneAndStackIt (
@@ -1094,16 +1094,15 @@ class EXP msrVoice : public msrElement
     std::string           asString () const override;
 
     virtual void          displayVoice (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context) const;
 
     void                  displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 
@@ -1243,7 +1242,7 @@ class EXP msrVoice : public msrElement
     // measure purist number
 
     void                  incrementVoiceCurrentMeasurePuristNumber (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  setVoiceCurrentMeasurePuristNumber (
@@ -1288,31 +1287,31 @@ class EXP msrVoice : public msrElement
     // ------------------------------------------------------
 
     void                  displayVoiceRepeatsStackSummary (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  displayVoiceRepeatsStack (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  displayVoiceRepeatsStackAndVoice (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  displayVoiceMultipleFullBarRests (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  displayVoiceMultipleFullBarRestsAndVoice (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  displayVoiceMeasureRepeat (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  displayVoiceMeasureRepeatAndVoice (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  displayVoiceMeasuresFlatList (

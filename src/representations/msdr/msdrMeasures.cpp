@@ -218,7 +218,7 @@ void msdrMeasure::displayMeasure (
     std::endl << std::endl;
 }
 
-void msdrMeasure::print (std::ostream& os) const
+void msdrMeasure::printFull (std::ostream& os) const
 {
   os <<
     "MSDR measure \"" << fMeasureNumber <<
@@ -301,7 +301,7 @@ void msdrMeasure::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msdrMeasure::printShort (std::ostream& os) const
+void msdrMeasure::print (std::ostream& os) const
 {
   os <<
     "MSDR measure number '" <<

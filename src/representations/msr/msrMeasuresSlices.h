@@ -266,8 +266,6 @@ class EXP msrMeasuresSlice : public smartable
 
     virtual void          print (std::ostream& os) const;
 
-    virtual void          printShort (std::ostream& os) const;
-
   protected:
 
     // protected fields
@@ -283,7 +281,9 @@ class EXP msrMeasuresSlice : public smartable
     std::list<S_msrNote>  fSliceNotesFlatList;
 
     // note events std::list
-    std::list<S_msrNoteEvent>  fSliceNoteEventsList;
+    std::list<S_msrNoteEvent>
+
+                          fSliceNoteEventsList;
 
     // simultaneous notes chunks std::list
     std::list<S_msrSimultaneousNotesChunk>
@@ -371,8 +371,6 @@ class EXP msrMeasuresSlicesSequence : public smartable
     virtual std::string   asShortStringForMeasuresSlices () const;
 
     void                  print (std::ostream& os) const;
-
-    virtual void          printShort (std::ostream& os) const;
 
   private:
 

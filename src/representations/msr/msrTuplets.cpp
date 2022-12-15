@@ -1002,7 +1002,7 @@ std::string msrTuplet::asString () const
   return s.str ();
 }
 
-void msrTuplet::print (std::ostream& os) const
+void msrTuplet::printFull (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
@@ -1015,7 +1015,7 @@ void msrTuplet::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 30;
+  const int fieldWidth = 36;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1045,7 +1045,6 @@ void msrTuplet::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fTupletFactor" << ": " <<
     fTupletFactor <<
-    std::endl <<
 
     std::setw (fieldWidth) <<
     "fTupletNumber" << ": " <<
@@ -1148,7 +1147,7 @@ void msrTuplet::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msrTuplet::printShort (std::ostream& os)
+void msrTuplet::print (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
@@ -1161,7 +1160,7 @@ void msrTuplet::printShort (std::ostream& os)
 
   ++gIndenter;
 
-  const int fieldWidth = 44;
+  const int fieldWidth = 36;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1190,7 +1189,6 @@ void msrTuplet::printShort (std::ostream& os)
     std::setw (fieldWidth) <<
     "fTupletFactor" << ": " <<
     fTupletFactor <<
-    std::endl <<
 
     std::setw (fieldWidth) <<
     "fTupletNumber" << ": " <<
@@ -1221,7 +1219,7 @@ void msrTuplet::printShort (std::ostream& os)
     for ( ; ; ) {
       S_msrTupletElement tupletElement = (*i);
 
-      tupletElement->printShort (os);
+      os << tupletElement;
 
       if (++i == iEnd) break;
       os << std::endl;

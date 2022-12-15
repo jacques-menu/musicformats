@@ -261,8 +261,7 @@ class EXP msrTuplet : public msrTupletElement
     std::string           asString () const override;
 
     void                  print (std::ostream& os) const override;
-
-    virtual void          printShort (std::ostream& os);
+    void                  printFull (std::ostream& os) const override;
 
   private:
 

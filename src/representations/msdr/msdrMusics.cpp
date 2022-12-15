@@ -214,7 +214,7 @@ void msdrMusic::displayMusic (
     std::endl << std::endl;
 }
 
-void msdrMusic::print (std::ostream& os) const
+void msdrMusic::printFull (std::ostream& os) const
 {
   os <<
     "MSDR music \"" << fMusicName <<
@@ -297,7 +297,7 @@ void msdrMusic::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msdrMusic::printShort (std::ostream& os) const
+void msdrMusic::print (std::ostream& os) const
 {
   os <<
     "MSDR music \"" << fMusicName <<

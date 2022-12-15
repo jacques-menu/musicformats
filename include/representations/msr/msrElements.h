@@ -82,8 +82,8 @@ class EXP msrElement : public smartable
     virtual std::string   asShortStringForMeasuresSlices () const;
 
     virtual void          print (std::ostream& os) const;
-
-    virtual void          printShort (std::ostream& os) const;
+    virtual void          printFull (std::ostream& os) const
+                              { print (os); }
 
     virtual void          printSummary (std::ostream& os) const;
 

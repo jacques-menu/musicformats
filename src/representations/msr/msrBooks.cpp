@@ -498,7 +498,7 @@ void msrBook::browseData (basevisitor* v)
   }
 }
 
-void msrBook::print (std::ostream& os) const
+void msrBook::printFull (std::ostream& os) const
 {
   os <<
     "[MSR book" <<
@@ -691,7 +691,7 @@ void msrBook::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrBook::printShort (std::ostream& os) const
+void msrBook::print (std::ostream& os) const
 {
   os <<
     "[MSR book, short version" <<
@@ -872,7 +872,7 @@ void msrBook::printShort (std::ostream& os) const
       iEnd   = fBookElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       // no std::endl here
     } // for

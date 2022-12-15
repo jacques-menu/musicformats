@@ -156,7 +156,7 @@ class EXP msrSegment : public msrVoiceElement
     // measures
 
     S_msrMeasure          fetchLastMeasureFromSegment (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     S_msrMeasure          createAMeasureAndAppendItToSegment (
@@ -375,7 +375,7 @@ class EXP msrSegment : public msrVoiceElement
                             const S_msrElement& element);
 
     S_msrMeasure          removeLastMeasureFromSegment (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  finalizeAllTheMeasuresOfSegment (
@@ -400,12 +400,11 @@ class EXP msrSegment : public msrVoiceElement
     std::string           asString () const override;
 
     void                  displaySegment (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context);
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 

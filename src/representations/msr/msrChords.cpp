@@ -106,10 +106,10 @@ S_msrChord msrChord::create (
 }
 
 S_msrChord msrChord::create (
-  int                 inputLineNumber,
-  const Rational&     chordSoundingWholeNotes,
-  const Rational&     chordDisplayWholeNotes,
-  msrDurationKind     chordGraphicDurationKind)
+  int             inputLineNumber,
+  const Rational& chordSoundingWholeNotes,
+  const Rational& chordDisplayWholeNotes,
+  msrDurationKind chordGraphicDurationKind)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -1550,7 +1550,7 @@ std::string msrChord::asShortString () const
   return s.str ();
 }
 
-void msrChord::print (std::ostream& os) const
+void msrChord::printFull (std::ostream& os) const
 {
   Rational
     chordMeasureFullLength =
@@ -2352,7 +2352,7 @@ void msrChord::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrChord::printShort (std::ostream& os) const
+void msrChord::print (std::ostream& os) const
 {
   Rational
     chordMeasureFullLength =
@@ -2691,7 +2691,7 @@ void msrChord::printShort (std::ostream& os) const
 
       std::list<S_msrChordBeamLink>::const_iterator i;
       for (i=fChordBeamLinks.begin (); i!=fChordBeamLinks.end (); ++i) {
-        (*i)->printShort(os);
+        os << (*i);
       } // for
 
       --gIndenter;
@@ -3050,7 +3050,7 @@ void msrChord::printShort (std::ostream& os) const
         i      = iBegin;
 
       for ( ; ; ) {
-        (*i)->printShort (os);
+        os << (*i);
         if (++i == iEnd) break;
         os << std::endl;
       } // for
@@ -3075,7 +3075,7 @@ void msrChord::printShort (std::ostream& os) const
     if (fChordGraceNotesGroupBefore) {
       os << std::endl;
       ++gIndenter;
-      fChordGraceNotesGroupBefore->printShort (os);
+      os << fChordGraceNotesGroupBefore;
       --gIndenter;
     }
     else {
@@ -3092,7 +3092,7 @@ void msrChord::printShort (std::ostream& os) const
     if (fChordGraceNotesGroupAfter) {
       os << std::endl;
       ++gIndenter;
-      fChordGraceNotesGroupAfter->printShort (os);
+      os << fChordGraceNotesGroupAfter;
       --gIndenter;
     }
     else {
@@ -3137,7 +3137,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChord& elt)
 
 //______________________________________________________________________________
 S_msrChordBeamLink msrChordBeamLink::create (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrBeam&  originalBeam,
   const S_msrChord& upLinkToChord)
 {
@@ -3151,7 +3151,7 @@ S_msrChordBeamLink msrChordBeamLink::create (
 }
 
 msrChordBeamLink::msrChordBeamLink (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrBeam&  originalBeam,
   const S_msrChord& upLinkToChord)
     : msrElement (inputLineNumber)
@@ -3263,9 +3263,9 @@ std::string msrChordBeamLink::asShortString () const
 
   s <<
     "[ChordBeamLink" <<
-    ", originalBeam \"" <<
+    ", fOriginalBeam \"" <<
     fOriginalBeam->asShortString () <<
-    ", upLinkToChord \"" <<
+    ", fUpLinkToChord \"" <<
     fUpLinkToChord->asShortString () <<
     ", line " << fInputLineNumber <<
     ']';
@@ -3279,14 +3279,41 @@ std::string msrChordBeamLink::asString () const
 
   s <<
     "[ChordBeamLink" <<
-    ", originalBeam \"" <<
+    ", fOriginalBeam \"" <<
     fOriginalBeam->asString () <<
-    ", upLinkToChord \"" <<
+    ", fUpLinkToChord \"" <<
     fUpLinkToChord->asString () <<
     ", line " << fInputLineNumber <<
     ']';
 
   return s.str ();
+}
+
+void msrChordBeamLink::printFull (std::ostream& os) const
+{
+  os <<
+    "[ChordBeamLink" <<
+    ", line " << fInputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 33;
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fOriginalBeam:" <<
+    std::endl;
+
+  ++gIndenter;
+  os <<
+    fOriginalBeam; // <<
+    fUpLinkToChord->asString ();
+  --gIndenter;
+
+  --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 void msrChordBeamLink::print (std::ostream& os) const
@@ -3302,38 +3329,11 @@ void msrChordBeamLink::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "originalBeam:" <<
+    "originalBfOriginalBeameam:" <<
     std::endl;
 
   ++gIndenter;
-  os <<
-    fOriginalBeam; // <<
-    fUpLinkToChord->asString ();
-  --gIndenter;
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
-void msrChordBeamLink::printShort (std::ostream& os) const
-{
-  os <<
-    "[ChordBeamLink" <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-  ++gIndenter;
-
-  const int fieldWidth = 33;
-
-  os <<
-    std::setw (fieldWidth) <<
-    "originalBeam:" <<
-    std::endl;
-
-  ++gIndenter;
-  fOriginalBeam->printShort (os);
+  os << fOriginalBeam;
   os <<
     fUpLinkToChord->asShortString () <<
     std::endl;
@@ -3358,7 +3358,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChordBeamLink& elt)
 
 //______________________________________________________________________________
 S_msrChordSlurLink msrChordSlurLink::create (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrSlur&  originalSlur,
   const S_msrChord& upLinkToChord)
 {
@@ -3372,7 +3372,7 @@ S_msrChordSlurLink msrChordSlurLink::create (
 }
 
 msrChordSlurLink::msrChordSlurLink (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrSlur&  originalSlur,
   const S_msrChord& upLinkToChord)
     : msrElement (inputLineNumber)
@@ -3537,34 +3537,6 @@ void msrChordSlurLink::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrChordSlurLink::printShort (std::ostream& os) const
-{
-  os <<
-    "[ChordSlurLink" <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-  ++gIndenter;
-
-  const int fieldWidth = 33;
-
-  os <<
-    std::setw (fieldWidth) <<
-    "originalSlur:" <<
-    std::endl;
-
-  ++gIndenter;
-  fOriginalSlur->printShort (os);
-  os <<
-    fUpLinkToChord->asShortString () <<
-    std::endl;
-  --gIndenter;
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
 std::ostream& operator << (std::ostream& os, const S_msrChordSlurLink& elt)
 {
   if (elt) {
@@ -3579,7 +3551,7 @@ std::ostream& operator << (std::ostream& os, const S_msrChordSlurLink& elt)
 
 //______________________________________________________________________________
 S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::create (
-  int                  inputLineNumber,
+  int                         inputLineNumber,
   const S_msrGraceNotesGroup& originalGraceNotesGroup,
   const S_msrChord&           upLinkToChord)
 {
@@ -3723,9 +3695,9 @@ std::string msrChordGraceNotesGroupLink::asString () const
 
   s <<
     "[chordGraceNotesGroupLink" <<
-    ", originalGraceNotesGroup \"" <<
+    ", fOriginalGraceNotesGroup \"" <<
     fOriginalGraceNotesGroup->asString () <<
-    ", upLinkToChord \"" <<
+    ", fUpLinkToChord \"" <<
     fUpLinkToChord->asString () <<
     ", line " << fInputLineNumber <<
     ']';
@@ -3746,41 +3718,13 @@ void msrChordGraceNotesGroupLink::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "originalGraceNotesGroup" <<
+    "fOriginalGraceNotesGroup" <<
     std::endl;
 
   ++gIndenter;
   os <<
     fOriginalGraceNotesGroup <<
     fUpLinkToChord->asString () <<
-    std::endl;
-  --gIndenter;
-
-  --gIndenter;
-
-  os << ']' << std::endl;
-}
-
-void msrChordGraceNotesGroupLink::printShort (std::ostream& os) const
-{
-  os <<
-    "[ChordGraceNotesGroupLink" <<
-    ", line " << fInputLineNumber <<
-    std::endl;
-
-  ++gIndenter;
-
-  const int fieldWidth = 33;
-
-  os <<
-    std::setw (fieldWidth) <<
-    "originalGraceNotesGroup" <<
-    std::endl;
-
-  ++gIndenter;
-  fOriginalGraceNotesGroup->printShort (os);
-  os <<
-    fUpLinkToChord->asShortString () <<
     std::endl;
   --gIndenter;
 

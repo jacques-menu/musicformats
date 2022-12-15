@@ -173,21 +173,6 @@ void oahAtomAlias::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahAtomAlias::printShort (std::ostream& os) const
-{
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
-
-  os <<
-    "AtomAlias: ";
-
-  oahElement::printOahElementEssentialsShort (
-    os, fieldWidth);
-
-  os <<
-    fOriginalOahAtom->fetchNames () <<
-    std::endl;
-}
-
 void oahAtomAlias::printAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
@@ -361,7 +346,7 @@ void oahMacroAtom::browseData (basevisitor* v)
   } // for
 }
 
-void oahMacroAtom::print (std::ostream& os) const
+void oahMacroAtom::printFull (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -395,7 +380,7 @@ void oahMacroAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahMacroAtom::printShort (std::ostream& os) const
+void oahMacroAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 

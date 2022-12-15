@@ -102,7 +102,7 @@ void displayBsrScoreFull (
     separator <<
     std::endl << std::endl;
 
-  bsrScore->printShort (gLogStream);
+  gLogStream << bsrScore;
 
   gLogStream <<
     separator <<

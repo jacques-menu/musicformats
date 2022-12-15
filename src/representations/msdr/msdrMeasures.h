@@ -103,12 +103,11 @@ class EXP msdrMeasure : public smartable
     std::string           asString () const;
 
     void                  displayMeasure (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& context) const;
 
     void                  print (std::ostream& os) const;
-
-    void                  printShort (std::ostream& os) const;
+    void                  printFull (std::ostream& os) const;
 
   private:
 

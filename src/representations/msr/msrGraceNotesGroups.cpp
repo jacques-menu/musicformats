@@ -576,7 +576,7 @@ std::string msrGraceNotesGroup::asString () const
   return s.str ();
 }
 
-void msrGraceNotesGroup::print (std::ostream& os) const
+void msrGraceNotesGroup::printFull (std::ostream& os) const
 {
   os <<
     "[GraceNotesGroup" <<
@@ -666,10 +666,10 @@ void msrGraceNotesGroup::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrGraceNotesGroup::printShort (std::ostream& os) const
+void msrGraceNotesGroup::print (std::ostream& os) const
 {
   os <<
-    "GraceNotesGroup" <<
+    "[GraceNotesGroup" <<
     ", graceNotesGroupKind: " <<
     msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
     ", line " << fInputLineNumber <<
@@ -738,7 +738,7 @@ void msrGraceNotesGroup::printShort (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -751,6 +751,8 @@ void msrGraceNotesGroup::printShort (std::ostream& os) const
        "[EMPTY]" <<
       std::endl;
   }
+
+  os << ']' << std::endl;
 
   --gIndenter;
 }

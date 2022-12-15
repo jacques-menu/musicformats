@@ -62,7 +62,7 @@ void displayLpsrScoreShort (
     separator <<
     std::endl << std::endl;
 
-  theLpsrScore->printShort (gLogStream);
+  gLogStream << theLpsrScore;
 
   gLogStream <<
     separator <<

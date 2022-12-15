@@ -118,11 +118,6 @@ void msrElement::print (std::ostream& os) const
   os << asString () << std::endl;
 }
 
-void msrElement::printShort (std::ostream& os) const
-{
-  print (os);
-}
-
 void msrElement::printSummary (std::ostream& os) const
 {
   print (os);

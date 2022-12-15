@@ -297,7 +297,7 @@ std::string msrMeasureRepeatElement::asString () const
   return s.str ();
 }
 
-void msrMeasureRepeatElement::print (std::ostream& os) const
+void msrMeasureRepeatElement::printFull (std::ostream& os) const
 {
   os <<
     "MeasureRepeatElement" <<
@@ -354,7 +354,7 @@ void msrMeasureRepeatElement::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msrMeasureRepeatElement::printShort (std::ostream& os) const
+void msrMeasureRepeatElement::print (std::ostream& os) const
 {
   os <<
     "MeasureRepeatElement" <<
@@ -402,7 +402,7 @@ void msrMeasureRepeatElement::printShort (std::ostream& os) const
 
     for ( ; ; ) {
       // print the element
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -1224,7 +1224,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
   // print the measures repeat pattern
   if (! fMeasureRepeatPattern) {
     os <<
-      "measures repeat pattern: [NONE]" <<
+      "fMeasureRepeatPattern: [NONE]" <<
       std::endl;
   }
 
@@ -1236,7 +1236,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
   // print the measures repeat replicas
   if (! fMeasureRepeatReplicas) {
     os <<
-      "measures repeat replicas: [NONE]" <<
+      "fMeasureRepeatReplicas: [NONE]" <<
       std::endl;
   }
 
@@ -1248,11 +1248,6 @@ void msrMeasureRepeat::print (std::ostream& os) const
   --gIndenter;
 
   os << ']' << std::endl;
-}
-
-void msrMeasureRepeat::printShort (std::ostream& os) const
-{
-  print (os);
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeat& elt)

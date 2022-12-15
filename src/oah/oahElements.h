@@ -187,8 +187,11 @@ class EXP oahFindableElement : public smartable
     virtual std::string   asString () const = 0;
 
     virtual void          print (std::ostream& os) const = 0;
+    virtual void          printFull (std::ostream& os) const
+    													{ print (os); }
 
-    virtual const std::string   containingFindableElementAsString () const = 0;
+    virtual const std::string
+    											containingFindableElementAsString () const = 0;
 
   private:
 
@@ -356,7 +359,6 @@ class EXP oahElement : public oahFindableElement
                             int fieldWidth) const;
 
     virtual void          print (std::ostream& os) const override;
-    virtual void          printShort (std::ostream& os) const;
 
     virtual void          printHelp (std::ostream& os) const;
 

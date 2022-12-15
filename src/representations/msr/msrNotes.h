@@ -832,7 +832,7 @@ class EXP msrNote : public msrTupletElement
     void                  appendOtherDynamicToNote (
                             const S_msrOtherDynamic& otherDynamic);
 
-    S_msrDynamic          removeFirstDynamics (); // ??? JMI
+    S_msrDynamic          removeFirstDynamics (); // ??? JMI v0.9.66
 
     // words
     void                  appendWordsToNote (
@@ -862,7 +862,7 @@ class EXP msrNote : public msrTupletElement
     void                  appendWedgeToNote (
                             const S_msrWedge& wedge);
 
-    S_msrWedge            removeFirstWedge (); // JMI
+    S_msrWedge            removeFirstWedge (); // JMI v0.9.66
 
     // segnos
     void                  appendSegnoToNote (
@@ -973,8 +973,7 @@ class EXP msrNote : public msrTupletElement
     std::string           noteEssentialsAsSting () const;
 
     void                  print (std::ostream& os) const override;
-
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
   private:
 

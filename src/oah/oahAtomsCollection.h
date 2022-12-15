@@ -88,7 +88,6 @@ class EXP oahAtomAlias : public oahAtom
     // ------------------------------------------------------
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
                             std::ostream& os,
@@ -167,7 +166,7 @@ class EXP oahMacroAtom : public oahAtom
     // ------------------------------------------------------
 
     void                  print (std::ostream& os) const override;
-    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const override;
 
     void                  printHelp (std::ostream& os) const override;
 

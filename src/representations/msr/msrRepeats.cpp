@@ -373,7 +373,7 @@ std::string msrRepeatCommonPart::asString () const
   return s.str ();
 }
 
-void msrRepeatCommonPart::print (std::ostream& os) const
+void msrRepeatCommonPart::printFull (std::ostream& os) const
 {
   os <<
     "[RepeatCommonPart" <<
@@ -383,7 +383,7 @@ void msrRepeatCommonPart::print (std::ostream& os) const
   ++gIndenter;
 
   os <<
-    "repeat upLink: '" <<
+    "fRepeatCommonPartUpLinkToRepeat: '" <<
     fRepeatCommonPartUpLinkToRepeat->
       asShortString () <<
       "'" <<
@@ -432,7 +432,7 @@ void msrRepeatCommonPart::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrRepeatCommonPart::printShort (std::ostream& os) const
+void msrRepeatCommonPart::print (std::ostream& os) const
 {
   os <<
     "[RepeatCommonPart" <<
@@ -458,7 +458,7 @@ void msrRepeatCommonPart::printShort (std::ostream& os) const
     fRepeatCommonPartElementsList.size ();
 
   os <<
-    "repeatCommonPartElementsList: ";
+    "repeatCommonPartElementsListSize: ";
   if (repeatCommonPartElementsListSize) {
     os <<
       '(' <<
@@ -483,7 +483,7 @@ void msrRepeatCommonPart::printShort (std::ostream& os) const
 
     for ( ; ; ) {
       // short print the element
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -761,7 +761,7 @@ std::string msrRepeatEnding::asString () const
   return s.str ();
 }
 
-void msrRepeatEnding::print (std::ostream& os) const
+void msrRepeatEnding::printFull (std::ostream& os) const
 {
   os <<
     std::endl <<
@@ -842,7 +842,7 @@ void msrRepeatEnding::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrRepeatEnding::printShort (std::ostream& os) const
+void msrRepeatEnding::print (std::ostream& os) const
 {
   os <<
     "[RepeatEnding" <<
@@ -914,7 +914,7 @@ void msrRepeatEnding::printShort (std::ostream& os) const
 
     for ( ; ; ) {
       // print the element
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -1750,7 +1750,7 @@ void msrRepeat::displayRepeat (
     std::endl << std::endl;
 }
 
-void msrRepeat::print (std::ostream& os) const
+void msrRepeat::printFull (std::ostream& os) const
 {
   os <<
     "[Repeat" <<
@@ -1863,7 +1863,7 @@ void msrRepeat::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrRepeat::printShort (std::ostream& os) const
+void msrRepeat::print (std::ostream& os) const
 {
   os <<
     "[Repeat" <<
@@ -1887,7 +1887,7 @@ void msrRepeat::printShort (std::ostream& os) const
   if (fRepeatCommonPart) {
     os << std::endl;
     ++gIndenter;
-    fRepeatCommonPart->printShort (os);
+    os << fRepeatCommonPart;
     --gIndenter;
   }
   else {
@@ -1919,7 +1919,7 @@ void msrRepeat::printShort (std::ostream& os) const
 
     for ( ; ; ) {
       // short print the repeat ending
-      (*i)->printShort (os);
+      os << (*i);
       if (++i == iEnd) break;
   // JMI    os << std::endl;
     } // for

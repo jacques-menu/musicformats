@@ -469,7 +469,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "multipleFullBarRestsMeasureSoundingNotes" << ": " <<
+    "fetchMultipleFullBarRestsMeasureSoundingNotes" << ": " <<
     fetchMultipleFullBarRestsMeasureSoundingNotes () <<
     std::endl;
 
@@ -481,7 +481,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    os << "fMultipleFullBarRestsUpLinkToSegment" << std::endl; // KAKA
+    os << "fMultipleFullBarRestsUpLinkToSegment" << std::endl; // KAKA v0.9.66
 
     --gIndenter;
   }
@@ -514,11 +514,6 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
   os << ']' << std::endl;
 
   --gIndenter;
-}
-
-void msrMultipleFullBarRests::printShort (std::ostream& os) const
-{
-  print (os);
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrMultipleFullBarRests& elt)
