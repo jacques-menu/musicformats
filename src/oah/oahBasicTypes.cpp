@@ -49,7 +49,7 @@ namespace MusicFormats
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //     gLogStream <<
-//       "Converting argc/argv to a std::string std::pair std::vector" <<
+//       "Converting argc/argv to a string pair vector" <<
 //       std::endl;
 //   }
 // #endif
@@ -127,7 +127,7 @@ EXP void displayStringPairVector (
     stringPairVector.size ();
 
   os <<
-    "The std::string std::pair std::vector contains " <<
+    "The string pair vector contains " <<
     mfSingularOrPlural (
       stringPairVectorSize, "element", "elements");
 
@@ -178,7 +178,7 @@ EXP void displayStringPairVector (
 //   char             *argv[],
 //   oahOptionsVector& theOptionsVector)
 // {
-//   // create a strings std::vector from the elements in argv
+//   // create a strings vector from the elements in argv
 //   std::vector<std::string> stringsVector;
 //
 //   argvElements2stringsVector (argc, argv, stringsVector);
@@ -254,7 +254,7 @@ EXP void displayStringPairVector (
 //   std::ostream&             os)
 // {
 //   os <<
-//     "The options std::vector contains " <<
+//     "The options vector contains " <<
 //     mfSingularOrPlural (
 //       theOptionsVector.size (), "element", "elements");
 //
@@ -312,7 +312,7 @@ EXP void displayStringPairVector (
 //       std::endl;
 //   }
 // #endif
-//   // create a strings std::vector from the elements in argv
+//   // create a strings vector from the elements in argv
 //   std::vector<std::string> stringsVector;
 //
 //   argvElements2stringsVector (
@@ -674,7 +674,7 @@ void optionsNameAndValueVectorsPlusEquals (
 // void oahOptionsNamesAndValuesVector::displayOptionsVector (std::ostream& os) const
 // {
 //   os <<
-//     "The option name and values std::vector contains " <<
+//     "The option name and values vector contains " <<
 //     mfSingularOrPlural (
 //       fOptionsVector.size (), "element", "elements");
 //
@@ -843,7 +843,7 @@ void oahOptionsAndArguments::appendOptionNameAndValue (
 void oahOptionsAndArguments::displayOptionsVector (std::ostream& os) const
 {
   os <<
-    "The option name and values std::vector contains " <<
+    "The option name and values vector contains " <<
     mfSingularOrPlural (
       fOptionsVector.size (), "element", "elements");
 
@@ -2508,7 +2508,7 @@ void oahSubGroup::registerNamesInSubGroupToTheNamesToElementsMap (
     gLogStream <<
       "Registering the names in subgroup \"" <<
       fSubGroupHeader <<
-      "\" in the names to elements std::map in handler \"" <<
+      "\" in the names to elements map in handler \"" <<
       handler->getHandlerHeader () <<
       "\"" <<
       std::endl;
@@ -2549,7 +2549,7 @@ void oahSubGroup::appendAtomToSubGroup (
     atom != nullptr,
     "atom is null");
 
-  // append atom to atoms std::list
+  // append atom to atoms list
   fSubGroupAtomsList.push_back (
     atom);
 
@@ -3498,7 +3498,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
     gLogStream <<
       "Registering the names in group \"" <<
       fGroupHeader <<
-      "\" in the names to elements std::map in handler \"" <<
+      "\" in the names to elements map in handler \"" <<
       handler->getHandlerHeader () <<
       "\"" <<
       std::endl;
@@ -4393,14 +4393,14 @@ S_oahPrefix oahHandler::fetchNameInHandlerPrefixesMap (
 {
   S_oahPrefix result;
 
-  // is name known in prefixes std::map?
+  // is name known in prefixes map?
   std::map<std::string, S_oahPrefix>::const_iterator
     it =
       fHandlerPrefixesMap.find (
         name);
 
   if (it != fHandlerPrefixesMap.end ()) {
-    // yes, name is known in the std::map
+    // yes, name is known in the map
     result = (*it).second;
   }
 
@@ -4412,14 +4412,14 @@ S_oahElement oahHandler::fetchNameInNamesToElementsMap (
 {
   S_oahElement result;
 
-  // is name known in the names to elements std::map?
+  // is name known in the names to elements map?
   std::map<std::string, S_oahElement>::const_iterator
     it =
       fHandlerNamesToElementsMap.find (
         name);
 
   if (it != fHandlerNamesToElementsMap.end ()) {
-    // yes, name is known in the std::map
+    // yes, name is known in the map
     result = (*it).second;
   }
 
@@ -4518,7 +4518,7 @@ void oahHandler::registerElementNamesInHandler (
 //       "--> elementShortName: " << elementShortName <<
 //       std::endl;
 
-    // is elementLongName already in the elements names std::map?
+    // is elementLongName already in the elements names map?
     if (name == elementLongName) {
       std::stringstream s;
 
@@ -4537,7 +4537,7 @@ void oahHandler::registerElementNamesInHandler (
 //       oahInternalWarning (s.str ());
     }
 
-    // is elementShortName already in the elements names std::map?
+    // is elementShortName already in the elements names map?
     if (name == elementShortName) {
       if (elementShortName.size ()) {
         std::stringstream s;
@@ -4570,7 +4570,7 @@ void oahHandler::registerElementNamesInHandler (
       elementShortName);
   }
 
-  // register element's names in names to elements std::map
+  // register element's names in names to elements map
   if (elementLongNameSize) {
     fHandlerNamesToElementsMap [elementLongName] = element;
 
@@ -4612,7 +4612,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
     gLogStream <<
       "Registering the names in handler \"" <<
       fHandlerHeader <<
-      "\" in its names to elements std::map" <<
+      "\" in its names to elements map" <<
       std::endl;
   }
 #endif
@@ -4644,7 +4644,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
       gLogStream <<
         "All the names in handler \"" <<
         fHandlerHeader <<
-        "\" have been registered in the names to elements std::map" <<
+        "\" have been registered in the names to elements map" <<
         std::endl;
   }
 #endif
@@ -4713,7 +4713,7 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
         ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
-        " in handler arguments std::vector for " <<
+        " in handler arguments vector for " <<
         fHandlerServiceName <<
         ":" <<
         std::endl;
@@ -4730,7 +4730,7 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
 #endif
 
     oahInternalWarning (
-      "the arguments std::vector should be empty with options and arguments???");
+      "the arguments vector should be empty with options and arguments???");
   }
 
   else {
@@ -4803,7 +4803,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
-      "Checking no input source in argument std::vector in \"" <<
+      "Checking no input source in argument vector in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
@@ -4832,7 +4832,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
         ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
-        " in handler arguments std::vector for " <<
+        " in handler arguments vector for " <<
         fHandlerServiceName <<
         ":" <<
         std::endl;
@@ -4891,7 +4891,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
-      "Checking no or one input source in argument std::vector in \"" <<
+      "Checking no or one input source in argument vector in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
@@ -4920,7 +4920,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
         ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
-        " in handler arguments std::vector for " <<
+        " in handler arguments vector for " <<
         fHandlerServiceName <<
         ":" <<
         std::endl;
@@ -5006,7 +5006,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
-      "Checking single input source in argument std::vector in \"" <<
+      "Checking single input source in argument vector in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
@@ -5035,7 +5035,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
         ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
-        " in handler arguments std::vector for " <<
+        " in handler arguments vector for " <<
         fHandlerServiceName <<
         ":" <<
         std::endl;
@@ -5098,7 +5098,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
 
         mfDisplayStringsVector (
           argumentsVector,
-          "The arguments std::vector",
+          "The arguments vector",
           gLogStream);
 
         throw mfOahException (message);
@@ -5179,7 +5179,7 @@ void oahHandler::enforceHandlerQuietness ()
 void oahHandler::displayNamesToElementsMap ()
 {
   gLogStream <<
-    "The names to elements std::map contains " <<
+    "The names to elements map contains " <<
     mfSingularOrPlural (
       fHandlerNamesToElementsMap.size (), "element", "elements");
 
@@ -5221,7 +5221,7 @@ void oahHandler::displayNamesToElementsMap ()
 void oahHandler::displayNamesToElementsMapShort (std::ostream& os) const
 {
   gLogStream <<
-    "The names to elements std::map contains (short version) " <<
+    "The names to elements map contains (short version) " <<
     mfSingularOrPlural (
       fHandlerNamesToElementsMap.size (), "element", "elements");
 
@@ -5260,7 +5260,7 @@ void oahHandler::displayNamesToElementsMapShort (std::ostream& os) const
 void oahHandler::displayElementUsesList (std::ostream& os) const
 {
   gLogStream <<
-    "The handler elements uses std::list contains " <<
+    "The handler elements uses list contains " <<
     mfSingularOrPlural (
       fElementUsesList.size (), "element", "elements");
 
@@ -5849,8 +5849,8 @@ void oahHandler::printNameIntrospectiveHelp (
     suffixHelpHasBeenProvided = true;
   }
 
-  // second, check whether mame is known in the names to elements std::map
-  // is name known in the elements std::map?
+  // second, check whether mame is known in the names to elements map
+  // is name known in the elements map?
   S_oahElement
     element =
       fetchNameInNamesToElementsMap (name);
@@ -6370,7 +6370,7 @@ void oahHandler::printIncludeFileNamesStack (
     fIncludeFileNamesStack.size ();
 
   os <<
-    "The include file names std::stack contains " <<
+    "The include file names stack contains " <<
     mfSingularOrPlural (
       includeFileNamesStackSize, "element", "elements");
 
@@ -6433,14 +6433,14 @@ void oahHandler::registerPrefixInHandler (
 
   std::string prefixName = prefix->getPrefixName ();
 
-  // is prefixName already known in prefixes std::map?
+  // is prefixName already known in prefixes map?
   std::map<std::string, S_oahPrefix>::const_iterator
     it =
       fHandlerPrefixesMap.find (
         prefixName);
 
   if (it != fHandlerPrefixesMap.end ()) {
-    // prefixName is already known in the std::map
+    // prefixName is already known in the map
     std::stringstream s;
 
     s <<
@@ -6453,7 +6453,7 @@ void oahHandler::registerPrefixInHandler (
     oahError (s.str ());
   }
 
-  // register prefix in the options prefixes std::map
+  // register prefix in the options prefixes map
   fHandlerPrefixesMap [prefix->getPrefixName ()] =
     prefix;
 }
@@ -6463,14 +6463,14 @@ S_oahPrefix oahHandler::fetchNameInPrefixesMap (
 {
   S_oahPrefix result;
 
-  // is prefixName already known in prefixes std::map?
+  // is prefixName already known in prefixes map?
   std::map<std::string, S_oahPrefix>::const_iterator
     it =
       fHandlerPrefixesMap.find (
         prefixName);
 
   if (it != fHandlerPrefixesMap.end ()) {
-    // prefixName is already known in the std::map
+    // prefixName is already known in the map
     result = (*it).second;
   }
 
@@ -6502,7 +6502,7 @@ void oahHandler::appendGroupToHandler (
   group->
     appendGroupToElementsList (this);
 
-  // append group to groups std::list
+  // append group to groups list
   fHandlerGroupsList.push_back (group);
 
   // set the group upLink to this handler
@@ -6535,7 +6535,7 @@ void oahHandler::prependGroupToHandler (
   group->
     appendGroupToElementsList (this);
 
-  // prepend group to the groups std::list
+  // prepend group to the groups list
   fHandlerGroupsList.push_front (group);
 
   // set the group upLink to this handler
@@ -6695,7 +6695,7 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
   size_t handlerElementsMapSize =
     fHandlerNamesToElementsMap.size ();
 
-  // print the names to elements std::map
+  // print the names to elements map
   os <<
     "The " <<
     handlerElementsMapSize <<
@@ -6739,7 +6739,7 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
 
   --gIndenter;
 
-  // create a std::list of the options std::map elements names
+  // create a list of the options map elements names
   std::list<std::string> optionsMapElementsNamesList;
 
   size_t optionsMapElementsNamesListSize =
@@ -7230,7 +7230,7 @@ void oahHandler::handleOptionPrefixName (
   }
 #endif
 
-  // split stringAfterEqualsSign into a std::list of strings
+  // split stringAfterEqualsSign into a list of strings
   // using the comma as separator
   std::list<std::string> chunksList;
 
@@ -7620,7 +7620,7 @@ void oahHandler::handleOptionsVectorOptionName (
     trailerAfterFirstDash =
       optionName.substr (1, std::string::npos);
 
-  // is optionName known in options std::map?
+  // is optionName known in options map?
   S_oahElement
     element =
       fetchNameInNamesToElementsMap (optionName);
@@ -7954,7 +7954,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
 
   oahElementHelpOnlyKind result;
 
-  // register all this handler's names in the names to elements std::map
+  // register all this handler's names in the names to elements map
   registerNamesInHandlerToTheNamesToElementsMap ();
 
   // initialize the history
@@ -7970,7 +7970,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
 
   initializeHandlerMultiComponent ();
 
-  // create the elements uses std::list from the options and arguments
+  // create the elements uses list from the options and arguments
   createElementUsesListFromOptionsAndArguments ( // (pass 2)
     serviceName);
 
@@ -7982,7 +7982,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
 //   }
 // #endif
 
-  // apply the options in the elements uses std::list
+  // apply the options in the elements uses list
   result =
     applyOptionsFromElementUsesList (); // (pass 3)
 
@@ -8068,7 +8068,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
   // register service name
   fHandlerServiceName = std::string (argv [0]);
 
-  // register all this handler's names in the names to elements std::map
+  // register all this handler's names in the names to elements map
   registerNamesInHandlerToTheNamesToElementsMap ();
 
   // initialize the history
@@ -8084,11 +8084,11 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
 
   initializeHandlerMultiComponent ();
 
-  // create the elements uses std::list from argc/argv (pass 2)
+  // create the elements uses list from argc/argv (pass 2)
   createElementUsesListFromArgcArgv (
     argc, argv);
 
-  // apply the options in the elements uses std::list
+  // apply the options in the elements uses list
   result =
     applyOptionsFromElementUsesList (); // (pass 3)
 
@@ -8123,7 +8123,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
-      "Creating atom uses std::list from options and arguments in \"" <<
+      "Creating atom uses list from options and arguments in \"" <<
       fHandlerHeader <<
       "\"" <<
       std::endl;
@@ -8238,7 +8238,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       this->printHelp (gOutputStream);
 
       gLogStream <<
-        "Creating atom uses std::list from argc/argv in \"" <<
+        "Creating atom uses list from argc/argv in \"" <<
         fHandlerHeader <<
         "\"" <<
         std::endl;
@@ -8334,7 +8334,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
         }
 #endif
 
-        // append it to the arguments std::vector
+        // append it to the arguments vector
         fOptionsAndArguments.appendArgument (
           currentString);
       }
@@ -8393,7 +8393,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
-      "Applying options from elements uses std::list in \"" <<
+      "Applying options from elements uses list in \"" <<
       fHandlerHeader << "\"" <<
       std::endl;
   }
@@ -8631,7 +8631,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
         std::stringstream s;
 
         s <<
-          "Element from the from the atom uses std::list for \"" <<
+          "Element from the from the atom uses list for \"" <<
           nameUsed <<
           "\" is null";
 
@@ -8762,14 +8762,14 @@ void oahHandler::handleKnownOptionsVectorElement (
         element);
 
   if (it != fHandlerCommandLineElementsMultiset.end ()) {
-    // yes, element is known in the std::list
+    // yes, element is known in the list
     if (! element->getMultipleOccurrencesAllowed ()) {
       std::stringstream s;
 
       s <<
         "options and arguments element \"" <<
         element->fetchNames () <<
-        "\" is already present in the options std::vector";
+        "\" is already present in the options vector";
 
       oahWarning (s.str ());
       // JMIJMIJMI
@@ -8923,7 +8923,7 @@ void oahHandler::handleKnownArgvElement (
         element);
 
   if (it != fHandlerCommandLineElementsMultiset.end ()) {
-    // yes, element is known in the std::list
+    // yes, element is known in the list
     if (! element->getMultipleOccurrencesAllowed ()) {
       std::stringstream s;
 
@@ -9300,7 +9300,7 @@ void oahHandler::handleOptionNameCommon (
   }
 
   else {
-    // is optionName known in options std::map?
+    // is optionName known in options map?
     S_oahElement
       element =
         fetchNameInNamesToElementsMap (optionName);

@@ -491,7 +491,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
 
   os << std::endl;
 
-  // print the full-bar rests measures std::list
+  // print the full-bar rests measures list
   os << std::left <<
     std::setw (fieldWidth) <<
     "fFullBarRestsMeasuresList" << ": ";

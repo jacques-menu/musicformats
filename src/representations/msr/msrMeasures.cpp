@@ -924,19 +924,15 @@ void msrMeasure::appendMeasureElementToMeasure (
 #endif
 
   // populate elem uplink to measure
-  elem->
-    setMeasureElementUpLinkToMeasure (this);
-
-  // set elem's measure number
-  S_msrMeasure upLinkToMeasure;
+  S_msrMeasure upLinkToMeasure = this;
 
   elem->
-    getMeasureElementUpLinkToMeasure (
-      upLinkToMeasure);
+    setMeasureElementUpLinkToMeasure (upLinkToMeasure);
 
-  upLinkToMeasure->
-    setMeasureNumber (
-      fMeasureNumber);
+//   // set elem's measure number JMI v0.9.66
+//   upLinkToMeasure->
+//     setMeasureNumber (
+//       fMeasureNumber);
 
   // set elem's measure position
   elem->
@@ -1118,14 +1114,14 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         }
 #endif
 
-        // fetch iterator to std::list end
+        // fetch iterator to list end
         std::list<S_msrMeasureElement>::iterator it =
             fMeasureElementsList.end ();
 
-        // fetch iterator to std::list last element
+        // fetch iterator to list last element
         --it;
 
-        // insert elem before it in std::list
+        // insert elem before it in list
         // (will increment this measure's whole notes duration)
         insertElementInMeasureBeforeIterator (
           inputLineNumber,
@@ -1404,30 +1400,13 @@ void msrMeasure::setMeasureWholeNotesDuration (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
-  // rationalise the measure whole notes duration
-  Rational
-    rationalisedMeasureWholeNotesDuration =
-      wholeNotes;
-
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Setting measure whole notes duration of  " <<
       this->asShortString () <<
-      " to '"  <<
-      rationalisedMeasureWholeNotesDuration <<
-      "'";
-
-    if (
-      rationalisedMeasureWholeNotesDuration.getDenominator ()
-        !=
-      wholeNotes.getDenominator ()
-    ) {
-      gLogStream <<
-        " (rationalised from '" << wholeNotes << "')";
-    }
-
-    gLogStream <<
+      " to "  <<
+      wholeNotes <<
       " in voice \"" <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
@@ -1440,7 +1419,7 @@ void msrMeasure::setMeasureWholeNotesDuration (
 
   // set measure whole notes
   fMeasureWholeNotesDuration =
-    rationalisedMeasureWholeNotesDuration;
+    wholeNotes;
 }
 
 void msrMeasure::incrementMeasureWholeNotesDuration (
@@ -1466,24 +1445,10 @@ void msrMeasure::incrementMeasureWholeNotesDuration (
       this->asShortString ()<<
       " from '"  <<
       fMeasureWholeNotesDuration <<
-      "' by '"  <<
+      "' by "  <<
       wholeNotesDelta <<
-      "' to '"  <<
+      " to "  <<
       newMeasureWholeNotesDuration <<
-      "'";
-
-/* JMI
-    if (
-      newMeasureWholeNotesDuration.getDenominator ()
-        !=
-      wholeNotes.getDenominator ()
-    ) {
-      gLogStream <<
-        " (rationalised from '" << wholeNotes << "')";
-    }
-*/
-
-    gLogStream <<
       " in voice \"" <<
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
@@ -2275,7 +2240,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 
   appendMeasureElementToMeasure (note);
 
-  // append it to the measure notes flat std::list if relevant
+  // append it to the measure notes flat list if relevant
   switch (note->getNoteKind ()) {
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
@@ -2325,7 +2290,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
   --gIndenter;
 }
 
-void msrMeasure::accountForTupletMemberNoteDurationInMeasure (
+void msrMeasure::accountForTupletMemberNoteDurationInMeasure ( // JMI v0.9.66 RENAME??? USELESS ACTUALLY
   const S_msrNote& note)
 {
   int inputLineNumber =
@@ -2359,7 +2324,7 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure (
     noteSoundingWholeNotes =
       note->getMeasureElementSoundingWholeNotes ();
 
-  // append it to the measure notes flat std::list
+  // append it to the measure notes flat list
   appendNoteToMeasureNotesFlatList (note);
 
   // account for note duration in measure whole notes
@@ -2615,7 +2580,7 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
 //       "msrMeasure::appendTupletToMeasure (const S_msrChord& chord)");
 
   // populate uplink to measure
-  tuplet->setMeasureElementUpLinkToMeasure (this);
+//   tuplet->setMeasureElementUpLinkToMeasure (this);
 
   // append the tuplet to the measure elements list
   appendMeasureElementToMeasure (tuplet);
@@ -3535,7 +3500,7 @@ void msrMeasure::appendNoteToMeasureNotesFlatList (
     gLogStream <<
       "Appending note " <<
       note->asShortStringForMeasuresSlices () <<
-      " to the notes flat std::list of measure " <<
+      " to the notes flat list of measure " <<
       this->asShortString () <<
       std::endl;
   }
@@ -6581,7 +6546,7 @@ void msrMeasure::printFull (std::ostream& os) const
 
   os << std::endl;
 
-  // print measure notes flat std::list
+  // print measure notes flat list
   size_t
     measureNotesFlatListSize =
       fMeasureNotesFlatList.size ();

@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <iomanip>  // for std::setw()
+#include <iomanip>  // for setw()
 #include <cstdlib>  // for stod()
 
 
@@ -279,7 +279,7 @@ void msdlParser::displayTokenKindsSetsStack (const std::string& context)
 
   gLogStream <<
     std::endl <<
-    context << ": tokens std::stack contents (" <<
+    context << ": tokens stack contents (" <<
     mfSingularOrPlural (
       tokensSetsStackSize, "set", "sets") <<
     "):" <<
@@ -348,7 +348,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
     gLogStream <<
       std::endl <<
       "-->isCurrentTokenKindInSetsStack()" <<
-      context << ": tokens std::stack contents (" <<
+      context << ": tokens stack contents (" <<
       mfSingularOrPlural (
         tokensSetsStackSize, "set", "sets") <<
       "):" <<
@@ -358,8 +358,8 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
   }
 #endif
 
-  // the std::stack cannot be empty JMI ???
-  // since msdlTokenKind::kTokenEOF is in the set at the bottom of the std::stack
+  // the stack cannot be empty JMI ???
+  // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
 
   if (tokensSetsStackSize) {
     std::list<S_msdlTokenKindsSet>::const_iterator
@@ -464,11 +464,11 @@ Bool msdlParser::checkMandatoryTokenKind (
 
     else {
       // consume tokens if needed until one is found that is either
-      // tokenKind or in the stopperTokensSet sets in the std::stack,
+      // tokenKind or in the stopperTokensSet sets in the stack,
       // in order to re-synchronize the parser with a token it is expecting
 
-      // the std::stack cannot be empty
-      // since msdlTokenKind::kTokenEOF is in the set at the bottom of the std::stack
+      // the stack cannot be empty
+      // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
 
       while (true) {
         // let's ignore fCurrentToken
@@ -554,11 +554,11 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
 
     else {
       // consume tokens if needed until one is found that is either
-      // tokenKind or in the stopperTokensSet sets in the std::stack,
+      // tokenKind or in the stopperTokensSet sets in the stack,
       // in order to re-synchronize the parser with a token it is expecting
 
-      // the std::stack cannot be empty
-      // since msdlTokenKind::kTokenEOF is in the set at the bottom of the std::stack
+      // the stack cannot be empty
+      // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
 
       while (true) {
         // let's ignore fCurrentToken
@@ -639,11 +639,11 @@ Bool msdlParser::checkOptionalTokenKind (
       // no
 
       // consume tokens until one is found that is either
-      // tokenKind or in the stopperTokensSet sets in the std::stack,
+      // tokenKind or in the stopperTokensSet sets in the stack,
       // in order to re-synchronize the parser with a token it is expecting
 
-      // the std::stack cannot be empty
-      // since msdlTokenKind::kTokenEOF is in the set at the bottom of the std::stack
+      // the stack cannot be empty
+      // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
 
       std::list<S_msdlTokenKindsSet>::const_iterator
         iBegin = fMsdlTokensSetsStack.begin (),
@@ -653,7 +653,7 @@ Bool msdlParser::checkOptionalTokenKind (
       ++gIndenter;
 
       // this loop cannot run forever
-      // since msdlTokenKind::kTokenEOF is in the set at the bottom of the std::stack
+      // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
       for ( ; ; ) {
         fetchNextToken ();
 
@@ -752,11 +752,11 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
 
       else {
         // consume tokens if needed until one is found that is either
-        // tokenKind or in the stopperTokensSet sets in the std::stack,
+        // tokenKind or in the stopperTokensSet sets in the stack,
         // in order to re-synchronize the parser with a token it is expecting
 
-        // the std::stack cannot be empty
-        // since msdlTokenKind::kTokenEOF is in the set at the bottom of the std::stack
+        // the stack cannot be empty
+        // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
 
         while (false) { // JMI BLARK
           // let's ignore fCurrentToken

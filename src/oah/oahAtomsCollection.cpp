@@ -3533,6 +3533,200 @@ std::ostream& operator << (std::ostream& os, const S_oahThreeBooleansAtom& elt)
 }
 
 //______________________________________________________________________________
+S_oahThreeBooleansAtomWithTracePasses oahThreeBooleansAtomWithTracePasses::create (
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
+  const S_oahBooleanAtom& secondBooleanAtom,
+  const S_oahBooleanAtom& thirdBooleanAtom)
+{
+  oahThreeBooleansAtomWithTracePasses* o = new
+    oahThreeBooleansAtomWithTracePasses (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable,
+      secondBooleanAtom,
+      thirdBooleanAtom);
+  assert (o != nullptr);
+  return o;
+}
+
+oahThreeBooleansAtomWithTracePasses::oahThreeBooleansAtomWithTracePasses (
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
+  const S_oahBooleanAtom& secondBooleanAtom,
+  const S_oahBooleanAtom& thirdBooleanAtom)
+  : oahThreeBooleansAtom (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable,
+      secondBooleanAtom,
+      thirdBooleanAtom)
+{}
+
+oahThreeBooleansAtomWithTracePasses::~oahThreeBooleansAtomWithTracePasses ()
+{}
+
+void oahThreeBooleansAtomWithTracePasses::applyElement (std::ostream& os)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahThreeBooleansAtomWithTracePasses" <<
+      std::endl;
+  }
+#endif
+
+  setThreeBooleansVariables (true);
+}
+
+void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahThreeBooleansAtomWithTracePasses::acceptIn ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahThreeBooleansAtomWithTracePasses>*
+    p =
+      dynamic_cast<visitor<S_oahThreeBooleansAtomWithTracePasses>*> (v)) {
+        S_oahThreeBooleansAtomWithTracePasses elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahThreeBooleansAtomWithTracePasses::visitStart ()" <<
+            std::endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void oahThreeBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahThreeBooleansAtomWithTracePasses::acceptOut ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahThreeBooleansAtomWithTracePasses>*
+    p =
+      dynamic_cast<visitor<S_oahThreeBooleansAtomWithTracePasses>*> (v)) {
+        S_oahThreeBooleansAtomWithTracePasses elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahThreeBooleansAtomWithTracePasses::visitEnd ()" <<
+            std::endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void oahThreeBooleansAtomWithTracePasses::browseData (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahThreeBooleansAtomWithTracePasses::browseData ()" <<
+      std::endl;
+  }
+#endif
+}
+
+void oahThreeBooleansAtomWithTracePasses::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "oahThreeBooleansAtomWithTracePasses:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fDescription" << ": " <<
+    std::endl;
+
+  ++gIndenter;
+
+  gIndenter.indentMultiLineString (
+    fDescription,
+    os);
+
+  --gIndenter;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fBooleanVariable" << ": " <<
+    fBooleanVariable <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fSecondBooleanAtom" << ": " <<
+    fSecondBooleanAtom <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fThirdBooleanAtom" << ": " <<
+    fThirdBooleanAtom <<
+    std::endl;
+
+  --gIndenter;
+}
+
+void oahThreeBooleansAtomWithTracePasses::printAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    fVariableName <<
+    ": " <<
+    fBooleanVariable;
+
+  if (fSetByAnOption) {
+    os <<
+      ", set by an option";
+  }
+  os << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahThreeBooleansAtomWithTracePasses& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahCombinedBooleansAtom oahCombinedBooleansAtom::create (
   const std::string& longName,
   const std::string& shortName,
@@ -3588,14 +3782,14 @@ void oahCombinedBooleansAtom::addBooleanAtomByName (
     handler != nullptr,
     "handler is null");
 
-  // is name known in options std::map?
+  // is name known in options map?
   S_oahElement
     element =
       handler->
         fetchNameInNamesToElementsMap (name);
 
   if (! element) {
-    // no, name is unknown in the std::map
+    // no, name is unknown in the map
     handler->
       printOptionsSummary ();
 
@@ -3641,7 +3835,7 @@ void oahCombinedBooleansAtom::setCombinedBooleanVariables (Bool value)
   }
 #endif
 
-  // set the value of the atoms in the std::list
+  // set the value of the atoms in the list
   if (fBooleanAtomsList.size ()) {
     for (
       std::list<S_oahBooleanAtom>::const_iterator i =
@@ -4056,7 +4250,8 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
 
         booleanAtom->print (s);
 
-        oahError (s.str ());
+//         oahError (s.str ());
+        oahWarning (s.str ());
       }
 
       else if (found != 0) {
@@ -4096,7 +4291,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
           oahError (s.str ());
         }
         else {
-          // register this boolean atom's suffix in the std::list
+          // register this boolean atom's suffix in the list
           fLongNamesSuffixes.push_back (booleanAtomLongNameSuffix);
         }
       }
@@ -4153,7 +4348,8 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
 
       booleanAtom->print (s);
 
-      oahError (s.str ());
+//       oahError (s.str ());
+      oahWarning (s.str ());
     }
 
     else {
@@ -4176,13 +4372,13 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
         oahError (s.str ());
       }
       else {
-        // register this boolean atom's suffix in the std::list
+        // register this boolean atom's suffix in the list
         fShortNamesSuffixes.push_back (booleanAtomShortNameSuffix);
       }
     }
   }
 
-  // append the boolean atom to the std::list
+  // append the boolean atom to the list
   fBooleanAtomsList.push_back (
     booleanAtom);
 
@@ -4206,14 +4402,14 @@ void oahCommonPrefixBooleansAtom::addBooleanAtomByName (
     handler != nullptr,
     "handler is null");
 
-  // is name known in options std::map?
+  // is name known in options map?
   S_oahElement
     element =
       handler->
         fetchNameInNamesToElementsMap (name);
 
   if (! element) {
-    // no, name is unknown in the std::map
+    // no, name is unknown in the map
     handler->
       printOptionsSummary ();
 
@@ -4564,7 +4760,7 @@ void oahCommonPrefixBooleansAtom::printAtomWithVariableOptionsValues (
   int           valueFieldWidth) const
 {
   // nothing to do, these options values will be printed
-  // by the boolean atoms in the std::list
+  // by the boolean atoms in the list
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahCommonPrefixBooleansAtom& elt)
@@ -5665,11 +5861,11 @@ void oahFactorizedStringAtom::addStringAtom (
 #endif
   }
   else {
-    // register this std::string atom's suffix in the std::list
+    // register this std::string atom's suffix in the list
     fAtomNamesList.push_back (stringAtomShortName);
   }
 
-  // append the std::string atom to the std::list
+  // append the std::string atom to the list
   fStringAtomsList.push_back (
     stringAtom);
 
@@ -5693,14 +5889,14 @@ void oahFactorizedStringAtom::addStringAtomByName (
     handler != nullptr,
     "handler is null");
 
-  // is name known in options std::map?
+  // is name known in options map?
   S_oahElement
     element =
       handler->
         fetchNameInNamesToElementsMap (name);
 
   if (! element) {
-    // no, name is unknown in the std::map
+    // no, name is unknown in the map
     handler->
       printOptionsSummary ();
 
@@ -5953,7 +6149,7 @@ void oahFactorizedStringAtom::printAtomWithVariableOptionsValues (
   int           valueFieldWidth) const
 {
   // nothing to do, these options values will be printed
-  // by the std::string atoms in the std::list
+  // by the std::string atoms in the list
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahFactorizedStringAtom& elt)
@@ -7519,7 +7715,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
   }
 #endif
 
-  // is this part name in the part renaming std::map?
+  // is this part name in the part renaming map?
   std::set<std::string>::iterator
     it =
       fStringSetVariable.find (partName);
@@ -7795,7 +7991,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   }
 #endif
 
-  // theString contains the std::string int std::map specification
+  // theString contains the std::string int map specification
   // decipher it to extract duration and perSecond values
 
 #ifdef TRACING_IS_ENABLED
@@ -8144,7 +8340,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   }
 #endif
 
-  // theString contains the std::string std::string std::map specification
+  // theString contains the std::string std::string map specification
   // decipher it to extract duration and perSecond values
 
 #ifdef TRACING_IS_ENABLED
@@ -9509,7 +9705,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
 #endif
 
   // theString contains the score output kind:
-  // is it in the score output kinds std::map?
+  // is it in the score output kinds map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -9525,7 +9721,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
         theString);
 
   if (it == gGlobalMsrLengthUnitKindsMap.end ()) {
-    // no, score output kind is unknown in the std::map
+    // no, score output kind is unknown in the map
 
     std::stringstream s;
 
@@ -9791,14 +9987,14 @@ void oahLengthAtom::applyAtomWithValue (
 
     std::string lengthUnitName = sm [ 3 ];
 
-    // is lengthUnitName known in the length unit names std::map?
+    // is lengthUnitName known in the length unit names map?
     std::map<std::string, msrLengthUnitKind>::const_iterator
       it =
         gGlobalMsrLengthUnitKindsMap.find (
           lengthUnitName);
 
     if (it == gGlobalMsrLengthUnitKindsMap.end ()) {
-      // no, length unit name is unknown in the std::map
+      // no, length unit name is unknown in the map
 
       std::stringstream s;
 
@@ -10785,7 +10981,7 @@ void oahFindStringAtom::applyAtomWithValue (
   }
 #endif
 
-  // a strings std::list to collect the results
+  // a strings list to collect the results
   std::list<S_oahFindStringMatch> foundMatchesList;
 
   // delegate this to the handler

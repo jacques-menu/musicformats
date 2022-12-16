@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // for 'std::setw()'
+#include <iomanip>      // for 'setw()'
 
 #include "visitor.h"
 
@@ -682,7 +682,7 @@ void msrBook::printFull (std::ostream& os) const
   }
   else {
     os <<
-      "There are no part groups in the std::list" <<
+      "There are no part groups in the list" <<
       std::endl;
   }
 
@@ -879,7 +879,7 @@ void msrBook::print (std::ostream& os) const
   }
   else {
     os <<
-      "There are no part groups in the std::list" <<
+      "There are no part groups in the list" <<
       std::endl;
   }
 

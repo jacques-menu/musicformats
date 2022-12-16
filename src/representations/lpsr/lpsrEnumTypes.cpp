@@ -196,24 +196,6 @@ std::string wholeNotesAsLilypondString (
     return s2.str ();
   }
 
-// JMI
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-//     gLogStream <<
-//       "--> wholeNotes rationalised: " << wholeNotes <<
-//       std::endl;
-//   }
-// #endif
-//
-//   Bool
-//     rationalHasBeenSimplified =
-//       wholeNotes.getNumerator () != numerator; // denominators could be used too
-//
-//   if (rationalHasBeenSimplified) {
-//     numerator    = wholeNotes.getNumerator (),
-//     denominator  = wholeNotes.getDenominator ();
-//   }
-
   Bool
     integralNumberOfWholeNotes = denominator == 1;
 
@@ -1142,7 +1124,7 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
     pitchesNamesMapPTR =
       &getNederlandsPitchesNamesMap (); // default LilyPond value
 
-  // is quarterTonesPitchName in the part renaming std::map?
+  // is quarterTonesPitchName in the part renaming map?
   switch (languageKind) {
     case msrQuarterTonesPitchesLanguageKind::kQTPNederlands:
       pitchesNamesMapPTR = &getNederlandsPitchesNamesMap ();

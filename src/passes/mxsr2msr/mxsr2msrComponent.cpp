@@ -63,7 +63,7 @@ S_mfcPassComponent createMxsr2msrComponent ()
           mfcVersionNumber::createFromString ("0.9.52"),
           "January 29, 2022",
           std::list<std::string> {
-            "Moved barlines to a pending std::list instead of being appended to the part at once",
+            "Moved barlines to a pending list instead of being appended to the part at once",
             "Fixed a long-standing issue in barlines handling at the beginning of repeat alternatives"
           }
       ));

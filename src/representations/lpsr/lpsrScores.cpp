@@ -516,7 +516,7 @@ R"(
         schemeModulesDescription,
         schemeModulesCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeModulesName] =
     schemeFunction;
 }
@@ -563,7 +563,7 @@ R"(
         schemeModulesDescription,
         schemeModulesCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeModulesName] =
     schemeFunction;
 }
@@ -625,7 +625,7 @@ R"(
         schemeModulesDescription,
         schemeModulesCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeModulesName] =
     schemeFunction;
 }
@@ -687,7 +687,7 @@ tongue =
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -743,7 +743,7 @@ editorialAccidental =
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -796,7 +796,7 @@ ffffff = #(make-dynamic-script "ffffff")
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -847,7 +847,7 @@ tupletsCurvedBrackets = {
             (edge-height (ly:grob-property grob 'edge-height
                            '(0.7 . 0.7)))
             (pad 1.0))
-       (std::list
+       (list
         ; first cp
         (cons
          (+ (car x-pos) 0.5)
@@ -897,7 +897,7 @@ tupletsCurvedBrackets = {
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -952,7 +952,7 @@ after =
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -1065,7 +1065,7 @@ tempoNotesRelationship =
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -1116,7 +1116,7 @@ R"(
           (broken-beams (ly:spanner-broken-into orig-grob))
           (stil (ly:line-spanner::print grob)))
     (if (or (null? broken-beams)
-            (and (std::pair? broken-beams)
+            (and (pair? broken-beams)
                  (or
                     always-add-text
                     (equal? grob (car broken-beams)))))
@@ -1258,7 +1258,7 @@ glissandoTextOff = \revert Glissando.stencil
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -1291,11 +1291,11 @@ otherDynamic =
 #(define-event-function (parser location text) (markup?)
    (if (std::string? text)
        (let* ((underscores-replaced
-               (std::string-std::map
+               (std::string-map
                 (lambda (x) (if (eq? x #\_) #\space x))
                 text))
               (split-text (std::string-split underscores-replaced #\space))
-              (formatted (std::map
+              (formatted (map
                           (lambda (word)
                             (if (std::string-match "^[mrzfps]*$" word)
                                 (markup #:dynamic word)
@@ -1327,7 +1327,7 @@ otherDynamic =
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -1400,7 +1400,7 @@ et al."
 
 #(define (make-self-telling-voice-props-set n)
    (make-sequential-music
-     (std::list
+     (list
        (make-property-set 'globalVoiceNumber n)
        (make-voice-props-set n))))
 
@@ -1459,7 +1459,7 @@ voiceFour = #(make-self-telling-voice-props-set 3)
 
 % Maintained on Staff level, to decide whether to change
 % grob directions at a given point.
-#(set-object-property! 'busyEvents 'translation-type? std::list?)
+#(set-object-property! 'busyEvents 'translation-type? list?)
 
 % Nonexistent?
 #(define (event-is-of-type? event type)
@@ -1497,8 +1497,8 @@ voiceFour = #(make-self-telling-voice-props-set 3)
                    (prepend! event (ly:context-property staff 'busyEvents))
                    (let* ((busy-events (ly:context-property staff 'busyEvents))
                           (busy-voices
-                            (std::map event-origin-voice-number busy-events))
-                          (unique-busy-voices (uniq-std::list (sort busy-voices <)))
+                            (map event-origin-voice-number busy-events))
+                          (unique-busy-voices (uniq-list (sort busy-voices <)))
                           (one-voice (eqv? 1 (length unique-busy-voices))))
                      ;(ly:message "Formatting pass, unique busy voices: ~s"
                      ;            unique-busy-voices)
@@ -1613,10 +1613,10 @@ schleifer =
      }
      \once \override Slur $'control-points = $(lambda (grob)
                                                 (let* ((coords (ly:slur::calc-control-points grob))
-                                                       (point-0 (std::list-ref coords 0))
-                                                       (point-1 (std::list-ref coords 1))
-                                                       (point-2 (std::list-ref coords 2))
-                                                       (point-3 (std::list-ref coords 3)))
+                                                       (point-0 (list-ref coords 0))
+                                                       (point-1 (list-ref coords 1))
+                                                       (point-2 (list-ref coords 2))
+                                                       (point-3 (list-ref coords 3)))
                                                   (set-car! point-0 (+ (car point-0) 2))
                                                   (set-car! point-1 (+ (car point-1) 1.5))
                                                   (set-car! point-2 (+ (car point-2) -1))
@@ -1648,7 +1648,7 @@ schleifer =
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -1720,7 +1720,7 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -1783,7 +1783,7 @@ damp = \markup {
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -1840,7 +1840,7 @@ dampAll = \markup
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -1902,7 +1902,7 @@ whiteNoteHeads =
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -1957,7 +1957,7 @@ boxAroundNextBarNumber = {
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2018,7 +2018,7 @@ chExceptionMusic = {)###" <<
   s <<
     '}' <<
     std::endl << std::endl <<
-R"###(% Convert music to std::list and prepend to existing exceptions.
+R"###(% Convert music to list and prepend to existing exceptions.
 chExceptions = #( append
                   ( sequential-music-to-chord-exceptions chExceptionMusic #t)
                   ignatzekExceptions))###" <<
@@ -2052,7 +2052,7 @@ R"(
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2129,7 +2129,7 @@ R"(
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2188,7 +2188,7 @@ R"(
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2316,7 +2316,7 @@ R"(
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2391,8 +2391,8 @@ TextSpannerWithCenteredText =
                       ; make complete stencil combining left and right parts
                       ; and text
                       (full-stil
-                       (std::stack-stencils X RIGHT padding
-                         (std::list
+                       (stack-stencils X RIGHT padding
+                         (list
                           path-left-part-stil
                           (centered-stencil text-stil)
                           path-right-part-stil)))
@@ -2432,7 +2432,7 @@ R"(
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2455,9 +2455,9 @@ R"###(
 % thanks to jean@abou-samra.fr
 
 #(define (append-merge x l r)
-   "Add x to the head of std::list l, merging skips,
+   "Add x to the head of list l, merging skips,
 and if r is true also merging multiple full-bar rests."
-   (if (and (std::pair? l)
+   (if (and (pair? l)
             (ly:music? x)
             (ly:music? (car l))
             (or (and (music-is-of-type? x 'skip-event)
@@ -2465,7 +2465,7 @@ and if r is true also merging multiple full-bar rests."
                 (and r
                      (music-is-of-type? x 'multi-measure-rest)
                      (music-is-of-type? (car l) 'multi-measure-rest)))
-            (not (std::pair? (ly:music-property (car l) 'articulations))))
+            (not (pair? (ly:music-property (car l) 'articulations))))
        (let ((total
               (ly:moment-add
                (ly:music-duration-length (car l))
@@ -2480,7 +2480,7 @@ mergeSkips = #(define-music-function
                (parser location rests-also music) ((boolean?) ly:music?)
                "Merge successive skips in sequential music,
   optionally merge full-measure rests as well."
-               (music-std::map
+               (music-map
                 (lambda (m)
                   (if (music-is-of-type? m 'sequential-music)
                       (ly:music-set-property! m
@@ -2525,7 +2525,7 @@ R"(
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2601,7 +2601,7 @@ R"(
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2648,7 +2648,7 @@ R"(
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2686,7 +2686,7 @@ R"(
         schemeFunctionDescription,
         schemeFunctionCode);
 
-  // register it in the Scheme functions std::map
+  // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
 }
@@ -2811,7 +2811,7 @@ void lpsrScore::browseData (basevisitor* v)
   }
 
   {
-    // browse the Scheme function std::map
+    // browse the Scheme function map
     for (
       std::map<std::string, S_lpsrSchemeFunction>::const_iterator i =
         fScoreSchemeFunctionsMap.begin ();
@@ -2843,7 +2843,7 @@ void lpsrScore::browseData (basevisitor* v)
   }
 
   {
-    // browse the voices and stanzas std::list
+    // browse the voices and stanzas list
     for (
       std::list<S_msrElement>::const_iterator i = fScoreElementsList.begin ();
       i != fScoreElementsList.end ();
@@ -2856,7 +2856,7 @@ void lpsrScore::browseData (basevisitor* v)
   }
 
   {
-    // browse the score blocks std::list
+    // browse the score blocks list
     for (
       std::list<S_lpsrBookBlock>::const_iterator i = fScoreBookBlocksList.begin ();
       i != fScoreBookBlocksList.end ();

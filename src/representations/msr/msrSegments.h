@@ -95,7 +95,7 @@ class EXP msrSegment : public msrVoiceElement
     S_msrMeasure          getSegmentLastMeasure () const
                               { return fSegmentLastMeasure; }
 
-    // measures flat std::list
+    // measures flat list
 
     const std::list<S_msrMeasure>&
                           getSegmentMeasuresFlatList () const
@@ -434,9 +434,10 @@ class EXP msrSegment : public msrVoiceElement
     std::list<S_msrSegmentElement>
                           fSegmentElementsList;
 
-    // measures flat std::list
+    // measures flat list
     // including those not in non-measure segment elements,
-    std::list<S_msrMeasure>    fSegmentMeasuresFlatList;
+    std::list<S_msrMeasure>    
+                          fSegmentMeasuresFlatList;
 
     // debug number, unique for every msrSegment instance
     static int            gSegmentDebugNumber;

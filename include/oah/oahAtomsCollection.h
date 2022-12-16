@@ -107,7 +107,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahAtomAlias& elt);
 class EXP oahMacroAtom : public oahAtom
 {
 /*
-  a std::list of atoms
+  a list of atoms
 */
 
   public:
@@ -1303,10 +1303,87 @@ typedef SMARTP<oahThreeBooleansAtom> S_oahThreeBooleansAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahThreeBooleansAtom& elt);
 
 //______________________________________________________________________________
+class EXP oahThreeBooleansAtomWithTracePasses : public oahThreeBooleansAtom
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahThreeBooleansAtomWithTracePasses> create (
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
+                            Bool&                   booleanVariable,
+                            const S_oahBooleanAtom& secondBooleanAtom,
+                            const S_oahBooleanAtom& thirdBooleanAtom);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahThreeBooleansAtomWithTracePasses (
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
+                            Bool&                   booleanVariable,
+                            const S_oahBooleanAtom& secondBooleanAtom,
+                            const S_oahBooleanAtom& thirdBooleanAtom);
+
+    virtual               ~oahThreeBooleansAtomWithTracePasses ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyElement (std::ostream& os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    void                  print (std::ostream& os) const override;
+
+    void                  printAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    S_oahBooleanAtom      fSecondBooleanAtom;
+    S_oahBooleanAtom      fThirdBooleanAtom;
+};
+typedef SMARTP<oahThreeBooleansAtomWithTracePasses> S_oahThreeBooleansAtomWithTracePasses;
+EXP std::ostream& operator << (std::ostream& os, const S_oahThreeBooleansAtom& elt);
+
+//______________________________________________________________________________
 class EXP oahCombinedBooleansAtom : public oahAtom
 {
 /*
-  an atom controlling a std::list of boolean atoms as in 'xml2ly -query minimal'
+  an atom controlling a list of boolean atoms as in 'xml2ly -query minimal'
   without any controlled boolean variable of its own
 */
 
@@ -1401,7 +1478,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahCombinedBooleansAtom
 class EXP oahCommonPrefixBooleansAtom : public oahAtom
 {
 /*
-  an atom controlling a std::list of boolean atoms
+  an atom controlling a list of boolean atoms
   whose names share a common prefix, as in 'xml2ly -insider -query ticat'
   without any controlled boolean variable of its own
 */
@@ -1866,7 +1943,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahStringAtom& elt);
 class EXP oahFactorizedStringAtom : public oahAtom // JMI UNUSED !!!
 {
 /*
-  an atom factorizing a std::list of std::string atoms
+  an atom factorizing a list of std::string atoms
   such as -set-variable-in-header in LilyPond generation
 */
 

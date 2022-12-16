@@ -216,7 +216,7 @@ class   mfslDriver
     // final semantics check
     void                  finalSemanticsCheck ();
 
-    // populate commands std::list
+    // populate commands list
     void                  populateTheCommandsList ();
 
   private:
@@ -231,7 +231,7 @@ class   mfslDriver
     std::string           fScriptName;
 
     // the names of the input sources
-    std::list<std::string>          
+    std::list<std::string>
                           fInputSoucesList;
 
     // scanning
@@ -303,8 +303,8 @@ class   mfslDriver
     std::list<S_mfslOptionsBlock>
                           fSelectedOptionsBlocksList;
 
-    // commands std::list
-    std::list<std::string>          
+    // commands list
+    std::list<std::string>
                           fCommandsList;
 };
 

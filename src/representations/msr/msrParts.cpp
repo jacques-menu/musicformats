@@ -111,7 +111,7 @@ void msrPart::initializePart ()
   }
 #endif
 
-  // is this part name in the part renaming std::map?
+  // is this part name in the part renaming map?
   std::map<std::string, std::string>::const_iterator
     it =
       gGlobalMsrOahGroup->getMsrPartsRenamingMap ().find (fPartID);
@@ -259,19 +259,19 @@ void msrPart::registerStaffInPart (
   }
 #endif
 
-  // register staff in the all staves std::list
+  // register staff in the all staves list
   fPartAllStavesList.push_back (staff);
 
-  // register its number in the staves numbers to staves std::map
+  // register its number in the staves numbers to staves map
   fPartStaveNumbersToStavesMap [staffNumber] = staff;
 
   switch (staffKind) {
     case msrStaffKind::kStaffKindRegular:
-      // register staff in the regular staves std::list
+      // register staff in the regular staves list
       fPartRegularStavesList.push_back (staff);
 
       // register staff in the
-      // non harmonies nor figured bass staves std::list
+      // non harmonies nor figured bass staves list
       fPartNonHarmoniesNorFiguredBassStavesList.push_back (staff);
       break;
 
@@ -279,7 +279,7 @@ void msrPart::registerStaffInPart (
     case msrStaffKind::kStaffKindDrum:
     case msrStaffKind::kStaffKindRythmic:
       // register staff in the
-      // non harmonies nor figured bass staves std::list
+      // non harmonies nor figured bass staves list
       fPartNonHarmoniesNorFiguredBassStavesList.push_back (staff);
       break;
 
@@ -498,7 +498,7 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
 
 void msrPart::setPartMsrName (const std::string& partMsrName)
 {
-  // is this part name in the part renaming std::map?
+  // is this part name in the part renaming map?
   std::map<std::string, std::string>::const_iterator
     it =
       gGlobalMsrOahGroup->getMsrPartsRenamingMap ().find (fPartMsrName);
@@ -2212,7 +2212,7 @@ void msrPart::finalizePart (
     s <<
       "Part " <<
       getPartCombinedName () <<
-      " appears in the part std::list, but doesn't contain any stave";
+      " appears in the part list, but doesn't contain any stave";
 
     msrWarning (
       gGlobalServiceRunData->getInputSourceName (),
@@ -2784,7 +2784,7 @@ void msrPart::printFull (std::ostream& os) const
   os << fPartShortestNoteTupletFactor << std::endl;
   --gIndenter;
 
-  // print the staves std::list
+  // print the staves list
   size_t partAllStavesListSize =
     fPartAllStavesList.size ();
 
@@ -2807,7 +2807,7 @@ void msrPart::printFull (std::ostream& os) const
     os << "[NONE]" << std::endl;
   }
 
-  // print the regular staves std::list
+  // print the regular staves list
   size_t partRegularStavesListSize =
     fPartRegularStavesList.size ();
 
@@ -2830,7 +2830,7 @@ void msrPart::printFull (std::ostream& os) const
     os << "[NONE]" << std::endl;
   }
 
-  // print the non harmonies nor figured bass staves std::list
+  // print the non harmonies nor figured bass staves list
   size_t partNonHarmoniesNorFiguredBassStavesListSize =
     fPartNonHarmoniesNorFiguredBassStavesList.size ();
 
@@ -2910,7 +2910,7 @@ void msrPart::printFull (std::ostream& os) const
 
   os << std::endl;
 
-  // print the part measures whole notes durations std::vector
+  // print the part measures whole notes durations vector
   printPartMeasuresWholeNotesDurationsVector (
     os,
     fieldWidth);
@@ -3092,7 +3092,7 @@ void msrPart::print (std::ostream& os) const
     }
   os << std::endl;
 
-  // print the part measure' whole notes durations std::vector
+  // print the part measure' whole notes durations vector
   printPartMeasuresWholeNotesDurationsVector (
     os,
     fieldWidth);

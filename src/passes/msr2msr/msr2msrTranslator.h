@@ -51,7 +51,7 @@ namespace MusicFormats
 struct msrHiddenMeasureAndBarLineDescr : public smartable
 {
 /*
- * positions represent the order in which the parts appear in <part-std::list />
+ * positions represent the order in which the parts appear in <part-list />
 */
 
   public:
@@ -644,8 +644,8 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
   //  S_msrPartGroup            fCurrentPartGroupClone; JMI
 
-    // partGroup's can be nested, hence this std::stack
-    // the current partGroup is the top of the std::stack
+    // partGroup's can be nested, hence this stack
+    // the current partGroup is the top of the stack
     std::stack<S_msrPartGroup>
                               fPartGroupsStack;
 
@@ -680,7 +680,7 @@ class EXP msr2msrTranslator :
     // segments
     // ------------------------------------------------------
 
-    // the current segment clone is the one at the top of the std::stack
+    // the current segment clone is the one at the top of the stack
     S_msrSegment              fCurrentSegmentClone;
 
 

@@ -607,7 +607,7 @@ void msrHarpPedalsTuning::addPedalTuning (
   msrDiatonicPitchKind diatonicPitchKind,
   msrAlterationKind    alterationKind)
 {
-  // is diatonicPitch in the part renaming std::map?
+  // is diatonicPitch in the part renaming map?
   std::map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
     it =
       fHarpPedalsAlterationKindsMap.find (diatonicPitchKind);

@@ -21,7 +21,7 @@ static S_mfcConverterComponent pConverterComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the converter's representations std::list
+  // populate the converter's representations list
   pConverterComponent->
     appendRepresentationToMultiComponent (
       createMxsrRepresentationComponent ());
@@ -29,7 +29,7 @@ static void populateMultiComponent ()
     appendRepresentationToMultiComponent (
       createMsrRepresentationComponent ());
 
-  // populate the converter's passes std::list
+  // populate the converter's passes list
   pConverterComponent->
     appendPassToMultiComponent (
       createMxsr2msrComponent ());

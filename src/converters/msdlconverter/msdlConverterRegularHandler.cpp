@@ -1299,6 +1299,8 @@ void msdlConverterRegularHandler::createTupletsRegularGroup ()
 #ifdef TRACING_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-tuplets", subGroup);
 #endif
+
+  registerAtomInRegularSubgroup ("display-tuplets", subGroup);
 }
 
 void msdlConverterRegularHandler::createLyricsRegularGroup ()

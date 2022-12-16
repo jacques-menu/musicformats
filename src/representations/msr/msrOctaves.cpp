@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip>      // std::setw()), set::precision(), ...
+#include <iomanip>      // setw()), set::precision(), ...
 
 #include <regex>
 

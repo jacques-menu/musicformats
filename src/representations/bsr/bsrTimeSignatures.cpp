@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <iomanip>      // std::setw()), set::precision(), ...
+#include <iomanip>      // setw()), set::precision(), ...
 #include <sstream>
 
 #include "visitor.h"
@@ -303,7 +303,7 @@ std::string bsrTimeSignatureItem::asString () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time signature item beats numbers std::vector is empty");
+        "time signature item beats numbers vector is empty");
         */
       break;
 
@@ -459,7 +459,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 gGlobalServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
-                "time signature item beats numbers std::vector is empty");
+                "time signature item beats numbers vector is empty");
                 */
               break;
 
@@ -651,7 +651,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 gGlobalServiceRunData->getInputSourceName (),
                 fInputLineNumber,
                 __FILE__, __LINE__,
-                "time signature item beats numbers std::vector is empty");
+                "time signature item beats numbers vector is empty");
                 */
               break;
 

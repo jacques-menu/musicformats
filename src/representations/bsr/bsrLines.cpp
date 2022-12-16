@@ -126,7 +126,7 @@ void bsrLine::appendLineElementToLine (
         break;
     } // switch
 
-    // append it to the line contents std::list
+    // append it to the line contents list
     fLineContentsList.push_back (lineContentsToAppendTo);
   }
   else {
@@ -163,7 +163,7 @@ void bsrLine::insertElementBeforeLastElementOfLine (
         lineElement->getInputLineNumber (),
         bsrLineContentsKind::kLineContentsRegular);
 
-    // append it to the line contents std::list
+    // append it to the line contents list
     fLineContentsList.push_back (lineContentsToAppendTo);
   }
   else {
@@ -302,7 +302,7 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
         break;
     } // switch
 
-    // append it to the line contents std::list
+    // append it to the line contents list
     fLineContentsList.push_back (lineContentsToAppendTo);
   }
   else {

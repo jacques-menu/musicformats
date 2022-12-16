@@ -92,6 +92,25 @@ void tracingOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
     registerPrefixInHandler (
       fLongTracePrefix);
 
+//   // the 'display' prefixes
+//   // --------------------------------------
+//
+//  fShortDisplayPrefix =
+//     oahPrefix::create (
+//       "t", "t",
+//       "'-t=abc,wxyz' is equivalent to '-tabc, -twxyz'");
+//   handler->
+//     registerPrefixInHandler (
+//       fShortDisplayPrefix);
+//
+//   fLongDisplayPrefix =
+//     oahPrefix::create (
+//       "trace-", "trace",
+//       "'-trace=abc,yz' is equivalent to '-trace-abc, -trace-yz'");
+//   handler->
+//     registerPrefixInHandler (
+//       fLongDisplayPrefix);
+//
   --gIndenter;
 }
 
@@ -1133,7 +1152,20 @@ R"(Tuplets)",
     addBooleanAtom (
       traceTupletsBooleanAtom);
 
-  // tuplets details
+//   S_oahTwoBooleansAtomWithTracePasses
+//     displayTupletsBooleanAtom =
+//       oahTwoBooleansAtomWithTracePasses::create (
+//         "display-tuplets", "dtups",
+// R"(Tuplets)",
+//         "fDisplayTuplets",
+//         fDisplayTuplets,
+//         traceTupletsBooleanAtom);
+//   subGroup->
+//     appendAtomToSubGroup (
+//       displayTupletsBooleanAtom);
+//   chordsAndTupletsMultiplexBooleansAtom->
+//     addBooleanAtom (
+//       displayTupletsBooleanAtom);
 
   S_oahThreeBooleansAtom
     traceTupletsDetailsBooleanAtom =
@@ -2545,74 +2577,74 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     std::endl <<
 
     // history
-    std::setw (fieldWidth) << "fTtracecomponents" << ": " <<
+    std::setw (fieldWidth) << "fTracecomponents" << ": " <<
     fTraceComponents <<
     std::endl <<
 
     // passes
-    std::setw (fieldWidth) << "fTtracePasses" << ": " <<
+    std::setw (fieldWidth) << "fTracePasses" << ": " <<
     fTracePasses <<
     std::endl <<
 
     // for tests, hidden
-    std::setw (fieldWidth) << "fTtraceForTests" << ": " <<
+    std::setw (fieldWidth) << "fTraceForTests" << ": " <<
     fTraceForTests <<
     std::endl <<
 
     // score
-    std::setw (fieldWidth) << "fTtraceScores" << ": " <<
+    std::setw (fieldWidth) << "fTraceScores" << ": " <<
     fTraceScores <<
     std::endl <<
 
     // identification
-    std::setw (fieldWidth) << "fTtraceIdentification" << ": " <<
+    std::setw (fieldWidth) << "fTraceIdentification" << ": " <<
     fTraceIdentification <<
     std::endl <<
 
     // credits
-    std::setw (fieldWidth) << "fTtraceCredits" << ": " <<
+    std::setw (fieldWidth) << "fTraceCredits" << ": " <<
     fTraceCredits <<
     std::endl <<
 
     // scaling
-    std::setw (fieldWidth) << "fTtraceGeometry" << ": " <<
+    std::setw (fieldWidth) << "fTraceGeometry" << ": " <<
     fTraceGeometry <<
     std::endl <<
 
     // part groups
-    std::setw (fieldWidth) << "fTtracePartGroups" << ": " <<
+    std::setw (fieldWidth) << "fTracePartGroups" << ": " <<
     fTracePartGroups <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtracePartGroupsDetails" << ": " <<
+    std::setw (fieldWidth) << "fTracePartGroupsDetails" << ": " <<
     fTracePartGroupsDetails <<
     std::endl <<
 
     // parts
-    std::setw (fieldWidth) << "fTtraceParts" << ": " <<
+    std::setw (fieldWidth) << "fTraceParts" << ": " <<
     fTraceParts <<
     std::endl <<
 
     // staves
-    std::setw (fieldWidth) << "fTtraceStaves" << ": " <<
+    std::setw (fieldWidth) << "fTraceStaves" << ": " <<
     fTraceStaves <<
     std::endl <<
 
     // voices
-    std::setw (fieldWidth) << "fTtraceVoices" << ": " <<
+    std::setw (fieldWidth) << "fTraceVoices" << ": " <<
     fTraceVoices <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceVoicesDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceVoicesDetails" << ": " <<
     fTraceVoicesDetails <<
     std::endl <<
 
     // measures
-    std::setw (fieldWidth) << "fTtraceMeasuresNumbers" << ": " <<
+    std::setw (fieldWidth) << "fTraceMeasuresNumbers" << ": " <<
     fTraceMeasuresNumbers <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceMeasures" << ": " <<
+    std::setw (fieldWidth) << "fTraceMeasures" << ": " <<
     fTraceMeasures <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceMeasuresDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceMeasuresDetails" << ": " <<
     fTraceMeasuresDetails <<
     std::endl <<
 
@@ -2631,7 +2663,7 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     std::endl;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fTtraceDetailedMeasureNumbersSet" << ": " <<
+    std::setw (fieldWidth) << "fTraceDetailedMeasureNumbersSet" << ": " <<
     std::endl;
 
   if (fTraceDetailedMeasureNumbersSet.size ()) {
@@ -2658,246 +2690,250 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
 
     // segments
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fTtraceSegments" << ": " <<
+    std::setw (fieldWidth) << "fTraceSegments" << ": " <<
     fTraceSegments <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceSegmentsDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceSegmentsDetails" << ": " <<
     fTraceSegmentsDetails <<
     std::endl <<
 
     // clefs
-    std::setw (fieldWidth) << "fTtraceClefs" << ": " <<
+    std::setw (fieldWidth) << "fTraceClefs" << ": " <<
     fTraceClefs <<
     std::endl <<
 
     // keys
-    std::setw (fieldWidth) << "fTtraceKeys" << ": " <<
+    std::setw (fieldWidth) << "fTraceKeys" << ": " <<
     fTraceKeys <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceKeysDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceKeysDetails" << ": " <<
     fTraceKeysDetails <<
     std::endl <<
 
     // time signatures
-    std::setw (fieldWidth) << "fTtraceTimeSignatures" << ": " <<
+    std::setw (fieldWidth) << "fTraceTimeSignatures" << ": " <<
     fTraceTimeSignatures <<
     std::endl <<
 
     // tempos
-    std::setw (fieldWidth) << "fTtraceTempos" << ": " <<
+    std::setw (fieldWidth) << "fTraceTempos" << ": " <<
     fTraceTempos <<
     std::endl <<
 
     // rehearsal marks
-    std::setw (fieldWidth) << "fTtraceRehearsals" << ": " <<
+    std::setw (fieldWidth) << "fTraceRehearsals" << ": " <<
     fTraceRehearsalMarks <<
     std::endl <<
 
     // line breaks
-    std::setw (fieldWidth) << "fTtraceLineBreaks" << ": " <<
+    std::setw (fieldWidth) << "fTraceLineBreaks" << ": " <<
     fTraceLineBreaks <<
     std::endl <<
 
     // page and line breaks
-    std::setw (fieldWidth) << "fTtracePageBreaks" << ": " <<
+    std::setw (fieldWidth) << "fTracePageBreaks" << ": " <<
     fTracePageBreaks <<
     std::endl <<
 
     // staff changes
-    std::setw (fieldWidth) << "fTtraceStaffChanges" << ": " <<
+    std::setw (fieldWidth) << "fTraceStaffChanges" << ": " <<
     fTraceStaffChanges <<
     std::endl <<
 
     // transpositions
-    std::setw (fieldWidth) << "fTtraceTranspositions" << ": " <<
+    std::setw (fieldWidth) << "fTraceTranspositions" << ": " <<
     fTraceTranspositions <<
     std::endl <<
 
     // octave shifts
-    std::setw (fieldWidth) << "fTtraceOctaveShifts" << ": " <<
+    std::setw (fieldWidth) << "fTraceOctaveShifts" << ": " <<
     fTraceOctaveShifts <<
     std::endl <<
 
     // bar lines
-    std::setw (fieldWidth) << "fTtraceBarLines" << ": " <<
+    std::setw (fieldWidth) << "fTraceBarLines" << ": " <<
     fTraceBarLines <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceBarLinesDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceBarLinesDetails" << ": " <<
     fTraceBarLinesDetails <<
     std::endl <<
 
     // bar checks
-    std::setw (fieldWidth) << "fTtraceBarChecks" << ": " <<
+    std::setw (fieldWidth) << "fTraceBarChecks" << ": " <<
     fTraceBarChecks <<
     std::endl <<
 
     // bar number checks
-    std::setw (fieldWidth) << "fTtraceBarNumberChecks" << ": " <<
+    std::setw (fieldWidth) << "fTraceBarNumberChecks" << ": " <<
     fTraceBarNumberChecks <<
     std::endl <<
 
     // repeats
-    std::setw (fieldWidth) << "fTtraceRepeats" << ": " <<
+    std::setw (fieldWidth) << "fTraceRepeats" << ": " <<
     fTraceRepeats <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceRepeatsDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceRepeatsDetails" << ": " <<
     fTraceRepeatsDetails <<
     std::endl <<
 
     // measure repeats
-    std::setw (fieldWidth) << "fTtraceMeasureRepeats" << ": " <<
+    std::setw (fieldWidth) << "fTraceMeasureRepeats" << ": " <<
     fTraceMeasureRepeats <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceMeasureRepeatsDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceMeasureRepeatsDetails" << ": " <<
     fTraceMeasureRepeatsDetails <<
     std::endl <<
 
     // multiple full-bar rests
-    std::setw (fieldWidth) << "fTtraceMultipleFullBarRests" << ": " <<
+    std::setw (fieldWidth) << "fTraceMultipleFullBarRests" << ": " <<
     fTraceMultipleFullBarRests <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceMultipleFullBarRestsDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceMultipleFullBarRestsDetails" << ": " <<
     fTraceMultipleFullBarRestsDetails <<
     std::endl <<
 
     // slashes
-    std::setw (fieldWidth) << "fTtraceSlashes" << ": " <<
+    std::setw (fieldWidth) << "fTraceSlashes" << ": " <<
     fTraceSlashes <<
     std::endl <<
 
     // notes
-    std::setw (fieldWidth) << "fTtraceNotes" << ": " <<
+    std::setw (fieldWidth) << "fTraceNotes" << ": " <<
     fTraceNotes <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceNotesDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceNotesDetails" << ": " <<
     fTraceNotesDetails <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceWholeNotes" << ": " <<
+    std::setw (fieldWidth) << "fTraceWholeNotes" << ": " <<
     fTraceWholeNotes <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceWholeNotesDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceWholeNotesDetails" << ": " <<
     fTraceWholeNotesDetails <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceRestNotes" << ": " <<
+    std::setw (fieldWidth) << "fTraceRestNotes" << ": " <<
     fTraceRestNotes <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceSkipNotes" << ": " <<
+    std::setw (fieldWidth) << "fTraceSkipNotes" << ": " <<
     fTraceSkipNotes <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceNotesOctaveEntry" << ": " <<
+    std::setw (fieldWidth) << "fTraceNotesOctaveEntry" << ": " <<
     fTraceNotesOctaveEntry <<
     std::endl <<
 
     // stems
-    std::setw (fieldWidth) << "fTtraceStems" << ": " <<
+    std::setw (fieldWidth) << "fTraceStems" << ": " <<
     fTraceStems <<
     std::endl <<
 
     // beams
-    std::setw (fieldWidth) << "fTtraceBeams" << ": " <<
+    std::setw (fieldWidth) << "fTraceBeams" << ": " <<
     fTraceBeams <<
     std::endl <<
 
     // articulations
-    std::setw (fieldWidth) << "fTtraceArticulations" << ": " <<
+    std::setw (fieldWidth) << "fTraceArticulations" << ": " <<
     fTraceArticulations <<
     std::endl <<
 
     // technicals
-    std::setw (fieldWidth) << "fTtraceTechnicals" << ": " <<
+    std::setw (fieldWidth) << "fTraceTechnicals" << ": " <<
     fTraceTechnicals <<
     std::endl <<
 
     // ornaments
-    std::setw (fieldWidth) << "fTtraceOrnaments" << ": " <<
+    std::setw (fieldWidth) << "fTraceOrnaments" << ": " <<
     fTraceOrnaments <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceOrnamentsDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceOrnamentsDetails" << ": " <<
     fTraceOrnamentsDetails <<
     std::endl <<
 
     // dynamics
-    std::setw (fieldWidth) << "fTtraceGraceDynamics" << ": " <<
+    std::setw (fieldWidth) << "fTraceGraceDynamics" << ": " <<
     fTraceDynamics <<
     std::endl <<
 
     // spanners
-    std::setw (fieldWidth) << "fTtraceSpanners" << ": " <<
+    std::setw (fieldWidth) << "fTraceSpanners" << ": " <<
     fTraceSpanners <<
     std::endl <<
 
     // words
-    std::setw (fieldWidth) << "fTtraceWords" << ": " <<
+    std::setw (fieldWidth) << "fTraceWords" << ": " <<
     fTraceWords <<
     std::endl <<
 
     // tremolos
-    std::setw (fieldWidth) << "fTtraceTremolos" << ": " <<
+    std::setw (fieldWidth) << "fTraceTremolos" << ": " <<
     fTraceTremolos <<
     std::endl <<
 
     // chords
-    std::setw (fieldWidth) << "fTtraceChords" << ": " <<
+    std::setw (fieldWidth) << "fTraceChords" << ": " <<
     fTraceChords <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceChordsDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceChordsDetails" << ": " <<
     fTraceChordsDetails <<
     std::endl <<
 
     // tuplets
-    std::setw (fieldWidth) << "fTtraceTuplets" << ": " <<
+    std::setw (fieldWidth) << "fTraceTuplets" << ": " <<
     fTraceTuplets <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceTupletsDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceTupletsDetails" << ": " <<
     fTraceTupletsDetails <<
     std::endl <<
 
+//     std::setw (fieldWidth) << "fDisplayTuplets" << ": " <<
+//     fDisplayTuplets <<
+//     std::endl <<
+
     // glissandos
-    std::setw (fieldWidth) << "fTtraceGlissandos" << ": " <<
+    std::setw (fieldWidth) << "fTraceGlissandos" << ": " <<
     fTraceGlissandos <<
     std::endl <<
 
     // eyeglases
-    std::setw (fieldWidth) << "fTtraceEyeGlasses" << ": " <<
+    std::setw (fieldWidth) << "fTraceEyeGlasses" << ": " <<
     fTraceEyeGlasses <<
     std::endl <<
 
     // damps
-    std::setw (fieldWidth) << "fTtraceDamps" << ": " <<
+    std::setw (fieldWidth) << "fTraceDamps" << ": " <<
     fTraceDamps <<
     std::endl <<
 
     // dampalls
-    std::setw (fieldWidth) << "fTtraceDampAlls" << ": " <<
+    std::setw (fieldWidth) << "fTraceDampAlls" << ": " <<
     fTraceDampAlls <<
     std::endl <<
 
     // slides
-    std::setw (fieldWidth) << "fTtraceSlides" << ": " <<
+    std::setw (fieldWidth) << "fTraceSlides" << ": " <<
     fTraceSlides <<
     std::endl <<
 
     // grace notes
-    std::setw (fieldWidth) << "fTtraceGraceNotes" << ": " <<
+    std::setw (fieldWidth) << "fTraceGraceNotes" << ": " <<
     fTraceGraceNotes <<
     std::endl <<
 
     // lyrics
-    std::setw (fieldWidth) << "fTtraceLyrics" << ": " <<
+    std::setw (fieldWidth) << "fTraceLyrics" << ": " <<
     fTraceLyrics <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceLyricsDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceLyricsDetails" << ": " <<
     fTraceLyricsDetails <<
     std::endl <<
 
     // harmonies
-    std::setw (fieldWidth) << "fTtraceHarmonies" << ": " <<
+    std::setw (fieldWidth) << "fTraceHarmonies" << ": " <<
     fTraceHarmonies <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceHarmoniesDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceHarmoniesDetails" << ": " <<
     fTraceHarmoniesDetails <<
     std::endl <<
-    std::setw (fieldWidth) << "fTtraceExtraHarmonies" << ": " <<
+    std::setw (fieldWidth) << "fTraceExtraHarmonies" << ": " <<
     fTraceExtraHarmonies <<
     std::endl <<
 
@@ -2915,22 +2951,22 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     std::endl <<
 
     // ties
-    std::setw (fieldWidth) << "fTtraceTies" << ": " <<
+    std::setw (fieldWidth) << "fTraceTies" << ": " <<
     fTraceTies <<
     std::endl <<
 
     // slurs
-    std::setw (fieldWidth) << "fTtraceSlurs" << ": " <<
+    std::setw (fieldWidth) << "fTraceSlurs" << ": " <<
     fTraceSlurs <<
     std::endl <<
 
     // ligatures
-    std::setw (fieldWidth) << "fTtraceLigatures" << ": " <<
+    std::setw (fieldWidth) << "fTraceLigatures" << ": " <<
     fTraceLigatures <<
     std::endl <<
 
     // pedals
-    std::setw (fieldWidth) << "fTtracePedals" << ": " <<
+    std::setw (fieldWidth) << "fTracePedals" << ": " <<
     fTracePedals <<
     std::endl <<
 
@@ -2940,22 +2976,22 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     std::endl <<
 
     // wedges
-    std::setw (fieldWidth) << "fTtraceWedges" << ": " <<
+    std::setw (fieldWidth) << "fTraceWedges" << ": " <<
     fTraceWedges <<
     std::endl <<
 
     // staff details
-    std::setw (fieldWidth) << "fTtraceStaffDetails" << ": " <<
+    std::setw (fieldWidth) << "fTraceStaffDetails" << ": " <<
     fTraceStaffDetails <<
     std::endl <<
 
     // scordaturas
-    std::setw (fieldWidth) << "fTtraceScordaturas" << ": " <<
+    std::setw (fieldWidth) << "fTraceScordaturas" << ": " <<
     fTraceScordaturas <<
     std::endl <<
 
     // segnos
-    std::setw (fieldWidth) << "fTtraceSegnos" << ": " <<
+    std::setw (fieldWidth) << "fTraceSegnos" << ": " <<
     fTraceSegnos <<
     std::endl <<
 
@@ -2965,39 +3001,39 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     std::endl <<
 
     // codas
-    std::setw (fieldWidth) << "fTtraceCodas" << ": " <<
+    std::setw (fieldWidth) << "fTraceCodas" << ": " <<
     fTraceCodas <<
     std::endl <<
 
     // accordion registrations
-    std::setw (fieldWidth) << "fTtraceAccordionRegistrations" << ": " <<
+    std::setw (fieldWidth) << "fTraceAccordionRegistrations" << ": " <<
     fTraceAccordionRegistrations <<
     std::endl <<
 
     // harp pedals
-    std::setw (fieldWidth) << "fTtraceHarpPedals" << ": " <<
+    std::setw (fieldWidth) << "fTraceHarpPedals" << ": " <<
     fTraceHarpPedals <<
     std::endl <<
 
     // harp pedals tuning
-    std::setw (fieldWidth) << "fTtraceHarpPedalsTunings" << ": " <<
+    std::setw (fieldWidth) << "fTraceHarpPedalsTunings" << ": " <<
     fTraceHarpPedalsTunings <<
     std::endl <<
 
     // extra harmonies
-    std::setw (fieldWidth) << "fTtraceExtraHarmonies" << ": " <<
+    std::setw (fieldWidth) << "fTraceExtraHarmonies" << ": " <<
     fTraceExtraHarmonies <<
     std::endl <<
 
 /* JMI
     // msrStreams
-    std::setw (fieldWidth) << "fTtraceMsrStreams" << ": " <<
+    std::setw (fieldWidth) << "fTraceMsrStreams" << ": " <<
     fTraceMsrStreams <<
     std::endl <<
 */
 
     // midi
-    std::setw (fieldWidth) << "fTtraceMidi" << ": " <<
+    std::setw (fieldWidth) << "fTraceMidi" << ": " <<
     fTraceMidi <<
     std::endl;
 
@@ -3074,7 +3110,7 @@ R"()",
           "trace-detailed", "tdetail",
 R"('measureNumbersSet' has a form such as '0,2-14,^8-10',
 where '^' excludes the corresponding numbers interval
-and 0 applies to the '<part-std::list>' and anacrusis if present.
+and 0 applies to the '<part-list>' and anacrusis if present.
 The measure numbers should be those of the produced score,
 since MusicXML measure numbers are arbitrary strings.
 Generate a detailed trace of the activity and print additional

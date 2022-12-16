@@ -334,13 +334,13 @@ S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
   // protect library against multiple initializations
   if (! gGlobalLilyPondIssue34OahGroup) {
 
-    // initialize the generation API kinds std::map
+    // initialize the generation API kinds map
     // ------------------------------------------------------
 
     initializeMsrGenerationAPI ();
 
 
-    // initialize the multi-generation output kinds std::map
+    // initialize the multi-generation output kinds map
     // ------------------------------------------------------
 
     initializeMultiGenerationOutputKindsMap ();

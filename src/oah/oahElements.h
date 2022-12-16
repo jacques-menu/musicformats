@@ -72,7 +72,7 @@ std::ostream& operator << (std::ostream& os, const oahElementHelpOnlyKind& elt);
   the oahElement that has been found to contain it
   in a OAH oahFindableElement's hierarchy
 
-  In the std::pair:
+  In the pair:
     - first is the std::string that has been found
     - second is the description of the oahElement in which it has been found
 */

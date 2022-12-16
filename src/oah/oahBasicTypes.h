@@ -62,7 +62,7 @@ std::ostream& operator << (std::ostream& os, const oahOptionOrArgumentKind& elt)
 /*
   A type to hold options and their values if any or arguments
 
-  In the std::pair:
+  In the pair:
     - first is the name of the option, such as '-x'
     - second is the value of the option
 */
@@ -1233,7 +1233,7 @@ class EXP oahGroup : public oahElement
     std::string           getGroupHeader () const
                               { return fGroupHeader; }
 
-    // groups std::list
+    // groups list
     const std::list<S_oahSubGroup>&
                           getGroupSubGroupsList () const
                               { return fGroupSubGroupsList; }
@@ -1836,17 +1836,17 @@ class EXP oahHandler : public oahFindableElement
     // usage
     std::string           fHandlerUsage;
 
-    // prefixes std::map
+    // prefixes map
     std::map<std::string, S_oahPrefix>
                           fHandlerPrefixesMap;
 
     // single character names
     std::set<std::string> fSingleCharacterNamesSet;
 
-    // groups std::list
+    // groups list
     std::list<S_oahGroup> fHandlerGroupsList;
 
-    // elements std::map
+    // elements map
     std::map<std::string, S_oahElement>
                           fHandlerNamesToElementsMap;
 

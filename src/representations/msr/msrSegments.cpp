@@ -2529,7 +2529,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   }
 #endif
 
-  // remove the last measure from the segments measures flat std::list
+  // remove the last measure from the segments measures flat list
   fSegmentMeasuresFlatList.pop_back ();
 
   // don't forget about fSegmentLastMeasure now,

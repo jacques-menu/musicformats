@@ -601,7 +601,7 @@ void mxsr2msrTranslator::visitEnd ( S_system_layout& elt )
 
 In more complex cases, the visiting order leads to have several on-going elements simultaneously. This is the case with \class{msrTuplet}, which can be nested.
 
-They are handled in \mxsrToMsr{mxsr2msrTranslator} and \lpsrToLilypondBoth{lpsr2lilypondTranslator}, for example, using a std::stack to keep track of them.
+They are handled in \mxsrToMsr{mxsr2msrTranslator} and \lpsrToLilypondBoth{lpsr2lilypondTranslator}, for example, using a stack to keep track of them.
 
 \mf\ never uses C++ STL stacks, because they cannot be iterated over:
 \begin{lstlisting}[language=CPlusPlus]
@@ -630,7 +630,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
 	// ... ... ...
 
-  // push the tuplet on the tuplets std::stack
+  // push the tuplet on the tuplets stack
   fOnGoingTupletsStack (elt);
 
 	// ... ... ...
@@ -640,7 +640,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 {
 	// ... ... ...
 
-  // pop the tuplet from the tuplets std::stack
+  // pop the tuplet from the tuplets stack
   fOnGoingTupletsStack ();
 
 	// ... ... ...

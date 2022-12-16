@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // std::setw()), set::precision(), ...
+#include <iomanip>      // setw()), set::precision(), ...
 
 #include "mfAssert.h"
 #include "mfBool.h"
@@ -122,7 +122,7 @@ void ischemeOptionsBlock::print (std::ostream& os) const
     "fOptionsBlockName" << ": " << fOptionsBlockName <<
     std::endl;
 
-  // print the options blocks options name and value std::vector
+  // print the options blocks options name and value vector
   gLogStream <<
     "fOptionsBlockOptionsVector" << ": " <<
     std::endl;
@@ -883,7 +883,7 @@ S_ischemeInput ischemeInputsTable::fetchInputByNameNonConst (
       std::endl;
   }
 
-  // is this inputName in the inputs std::map?
+  // is this inputName in the inputs map?
   std::map<std::string, S_ischemeInput>::const_iterator
     it =
       fInputsMap.find (name);
@@ -1746,7 +1746,7 @@ S_ischemeChoice ischemeChoicesTable::fetchChoiceByNameNonConst (
       std::endl;
   }
 
-  // is this choiceName in the choices std::map?
+  // is this choiceName in the choices map?
   std::map<std::string, S_ischemeChoice>::const_iterator
     it =
       fChoicesMap.find (name);
@@ -1939,7 +1939,7 @@ void ischemeCaseChoiceStatement::registerCaseChoiceLabel (
 
   fUsedLabels.insert (label);
 
-  // register label in the current labels std::list
+  // register label in the current labels list
   fCaseCurrentLabelsList.push_back (label);
 
   // label is no longer unused
@@ -2142,7 +2142,7 @@ void ischemeCaseInputStatement::registerCaseInputName (
 
   fUsedNames.insert (name);
 
-  // register name in the current names std::list
+  // register name in the current names list
   fCaseInputCurrentNamesList.push_back (name);
 
   // name is no longer unused

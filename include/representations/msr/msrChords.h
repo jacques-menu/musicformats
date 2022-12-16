@@ -546,7 +546,7 @@ class EXP msrChord : public msrTupletElement
     // sounding whole notes
     // no need for 'Rational fChordSoundingWholeNotes;',
     // since fChordNotesVector [0] contains this information,
-    // as do all the other elements in this std::vector
+    // as do all the other elements in this vector
 
     // display whole notes
     Rational              fChordDisplayWholeNotes;

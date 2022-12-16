@@ -297,7 +297,7 @@ class EXP msr2bsrTranslator :
     // ------------------------------------------------------
   //  S_msrPartGroup            fCurrentPartGroupClone; JMI
 
-    // the current partGroup is the top of the std::stack
+    // the current partGroup is the top of the stack
     std::stack<S_msrPartGroup>
                               fPartGroupsStack;
 
@@ -350,7 +350,7 @@ class EXP msr2bsrTranslator :
     // segments
     // ------------------------------------------------------
     // segments can be imbedded in others,
-    // the current segment clone is the one at the top of the std::stack
+    // the current segment clone is the one at the top of the stack
     std::stack<S_msrSegment>       fCurrentSegmentClonesStack;
 
 
@@ -442,7 +442,7 @@ class EXP msr2bsrTranslator :
 
 
     // part groups block
-    // the current partGroup block is the top of the std::stack
+    // the current partGroup block is the top of the stack
     std::stack<S_bsrPartGroupBlock>
                               fPartGroupBlocksStack;
                               */

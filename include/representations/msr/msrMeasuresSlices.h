@@ -218,19 +218,19 @@ class EXP msrMeasuresSlice : public smartable
     int                   getSliceSize () const
                               { return fSliceMeasuresVector.size (); }
 
-    // notes flat std::list
+    // notes flat list
 
     const std::list<S_msrNote>&
                           getSliceNotesFlatList () const
                               { return fSliceNotesFlatList; }
 
-    // note events std::list
+    // note events list
 
     const std::list<S_msrNoteEvent>&
                           getSliceNoteEventsList () const
                               { return fSliceNoteEventsList; }
 
-    // simultaneous notes chunks std::list
+    // simultaneous notes chunks list
 
     const std::list<S_msrSimultaneousNotesChunk>&
                           getSliceSimultaneousNotesChunksList () const
@@ -277,15 +277,15 @@ class EXP msrMeasuresSlice : public smartable
     // the measures in the slice
     std::vector<S_msrMeasure>  fSliceMeasuresVector;
 
-    // notes flat std::list
+    // notes flat list
     std::list<S_msrNote>  fSliceNotesFlatList;
 
-    // note events std::list
+    // note events list
     std::list<S_msrNoteEvent>
 
                           fSliceNoteEventsList;
 
-    // simultaneous notes chunks std::list
+    // simultaneous notes chunks list
     std::list<S_msrSimultaneousNotesChunk>
                           fSliceSimultaneousNotesChunksList;
 };

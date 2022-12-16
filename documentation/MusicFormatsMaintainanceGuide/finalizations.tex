@@ -198,7 +198,7 @@ void msrPart::finalizePart (
     s <<
       "Part " <<
       getPartCombinedName () <<
-      " appears in the part std::list, but doesn't contain any stave";
+      " appears in the part list, but doesn't contain any stave";
 
     musicxmlWarning (
       gGlobalServiceRunData->getInputSourceName (),
@@ -243,7 +243,7 @@ void msrPart::finalizePart (
 \section{Finalizing staves}
 % -------------------------------------------------------------------------
 
-\Method{msrStaff}{finalizeStaff} \cascade\ s to \method{msrVoice}{finalizeVoice} and collects the staff measusres slices:
+\Method{msrStaff}{finalizeStaff} \cascade\ s to \method{msrVoice}{finalizeVoice} and collects the staff measures slices:
 \begin{lstlisting}[language=CPlusPlus]
 void msrStaff::finalizeStaff (int inputLineNumber)
 {
@@ -297,7 +297,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 \section{Finalizing voices}
 % -------------------------------------------------------------------------
 
-\Method{msrVoice}{finalizeVoice} handles pending repeats if any and collects the voice measures into a flat std::list. It does not, however, \cascade\ to finalizing the voice repeats and measures.
+\Method{msrVoice}{finalizeVoice} handles pending repeats if any and collects the voice measures into a flat list. It does not, however, \cascade\ to finalizing the voice repeats and measures.
 \begin{lstlisting}[language=CPlusPlus]
 void msrVoice::finalizeVoice (
   int inputLineNumber)
@@ -363,13 +363,13 @@ void msrVoice::finalizeVoice (
       s.str ());
   }
 
-  // are there pending repeats in the voice repeats std::stack???
+  // are there pending repeats in the voice repeats stack???
   unsigned int voicePendingRepeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
 	// ... ... ...
 
-  // collect the voice measures into the flat std::list
+  // collect the voice measures into the flat list
   collectVoiceMeasuresIntoFlatList (
     inputLineNumber);
 

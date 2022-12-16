@@ -111,6 +111,11 @@ class EXP tracingOahGroup : public oahGroup
     S_oahPrefix           getLongTracePrefix () const
                               { return fLongTracePrefix; }
 
+//     S_oahPrefix           getShortDisplayPrefix () const
+//                               { return fShortDisplayPrefix; }
+//     S_oahPrefix           getLongDisplayPrefix () const
+//                               { return fLongDisplayPrefix; }
+
     void                  setTracingOah ()
                               { fTracingOah = true; }
     Bool                  getTracingOah () const
@@ -572,6 +577,12 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  getTraceTupletsDetails () const
                               { return fTraceTupletsDetails; }
 
+//     void                  setDisplayTuplets ()
+//                               { fDisplayTuplets = true; }
+//     Bool                  getDisplayTuplets () const
+//                               { return fDisplayTuplets; }
+//
+
     // inter-notes
     // --------------------------------------
 
@@ -776,6 +787,9 @@ class EXP tracingOahGroup : public oahGroup
 
     S_oahPrefix           fShortTracePrefix;
     S_oahPrefix           fLongTracePrefix;
+
+//     S_oahPrefix           fShortDisplayPrefix;
+//     S_oahPrefix           fLongDisplayPrefix;
 
     Bool                  fTracingOah;
                             // unused, only for the help
@@ -1006,8 +1020,11 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  fTraceChords;
     Bool                  fTraceChordsDetails;
     // tuplets
+
     Bool                  fTraceTuplets;
     Bool                  fTraceTupletsDetails;
+
+//     Bool                  fDisplayTuplets;
 
     // inter-notes
     // --------------------------------------

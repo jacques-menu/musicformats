@@ -157,7 +157,7 @@ class EXP msrSyllable : public msrMeasureElement
     msrSyllableKind       getSyllableKind () const
                               { return fSyllableKind; }
 
-    // texts std::list
+    // texts list
     const std::list<std::string>&
                           getSyllableTextsList ()
                               { return fSyllableTextsList; }
@@ -238,8 +238,8 @@ class EXP msrSyllable : public msrMeasureElement
     // syllable kind
     msrSyllableKind       fSyllableKind;
 
-    // texts std::list
-    std::list<std::string>          
+    // texts list
+    std::list<std::string>
                           fSyllableTextsList;
 
     // extend kind

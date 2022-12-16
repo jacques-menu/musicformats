@@ -1324,7 +1324,7 @@ void lpsr2lilypondTranslator::generateNoteHeadColor (
         noteB = noteRGB.substr (4, 2);
 
       fLilypondCodeStream <<
-        "\\once \\override NoteHead.color = #(std::map (lambda (x) (/ x 255)) "
+        "\\once \\override NoteHead.color = #(map (lambda (x) (/ x 255)) "
         "'(" <<
         "#X" << noteRGB [0] << noteRGB [1] <<
         ' ' <<
@@ -1482,7 +1482,7 @@ void lpsr2lilypondTranslator::generateNoteLigatures (
                 break;
             } // switch
 
-            // generate the code the edge-height std::pair of values
+            // generate the code the edge-height pair of values
             fLilypondCodeStream <<
               std::endl <<
               "\\once \\override Staff.LigatureBracket.edge-height = #'(" <<
@@ -8988,7 +8988,7 @@ if (true)
       }
 
       else {
-        // yes, split the name into a chunks std::list
+        // yes, split the name into a chunks list
         // and generate a \markup{} // JMI ???
         fLilypondCodeStream <<
           std::endl <<
@@ -9035,7 +9035,7 @@ if (true)
       }
 
       else {
-        // yes, split the name into a chunks std::list
+        // yes, split the name into a chunks list
         // and generate a \markup{} // JMI ???
         fLilypondCodeStream <<
           std::endl <<
@@ -9527,7 +9527,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
             partName);
 
       if (it != gGlobalLpsr2lilypondOahGroup->getPartNamesTranspositionMap ().end ()) {
-        // partName is present in the std::map,
+        // partName is present in the map,
         // fetch the semitones pitch and octave
         semiTonesPitchAndOctave =
           (*it).second;
@@ -9549,7 +9549,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
           partID);
 
     if (it != gGlobalLpsr2lilypondOahGroup->getPartIDsTranspositionMap ().end ()) {
-      // partID is present in the std::map,
+      // partID is present in the map,
       // fetch the semitones pitch and octave
       semiTonesPitchAndOctave =
         (*it).second;
@@ -11288,6 +11288,16 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
         fLilypondCodeStream << s.str ();
       }
     }
+  }
+#endif
+
+#ifdef TRACING_IS_ENABLED
+  if (true || gGlobalTracingOahGroup->getTraceVoices ()) {
+    gLogStream <<
+      std::endl <<
+      "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
+      ", line " << elt->getInputLineNumber () << " ===-->" <<
+      std::endl;
   }
 #endif
 
@@ -13801,7 +13811,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
                   }
 
                   else {
-                    // Alternatively, for each item in the std::list, using the more concise format (step . alter) specifies that the same alteration should hold in all octaves.
+                    // Alternatively, for each item in the list, using the more concise format (step . alter) specifies that the same alteration should hold in all octaves.
 
                       fLilypondCodeStream <<
                         '(' <<
@@ -13826,7 +13836,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
                   gGlobalServiceRunData->getInputSourceName (),
                   elt->getInputLineNumber (),
                   __FILE__, __LINE__,
-                  "Humdrum/Scot key items std::vector is empty");
+                  "Humdrum/Scot key items vector is empty");
               }
             }
             break;
@@ -13993,7 +14003,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
             timeSignatureItem =
               timeSignatureItemsVector [0]; // the only element;
 
-          // fetch the time signature item beat numbers std::vector
+          // fetch the time signature item beat numbers vector
           const std::vector<int>&
             beatsNumbersVector =
               timeSignatureItem->
@@ -14024,13 +14034,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
           fLilypondCodeStream <<
             "\\compoundMeter #`(";
 
-          // handle all the time signature items in the std::vector
+          // handle all the time signature items in the vector
           for (int i = 0; i < timesItemsNumber; ++i) {
             S_msrTimeSignatureItem
               timeSignatureItem =
                 timeSignatureItemsVector [i];
 
-            // fetch the time signature item beat numbers std::vector
+            // fetch the time signature item beat numbers vector
             const std::vector<int>&
               beatsNumbersVector =
                 timeSignatureItem->
@@ -14043,7 +14053,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
             fLilypondCodeStream <<
               "(";
 
-            // then generate all beats numbers in the std::vector
+            // then generate all beats numbers in the vector
             for (int j = 0; j < beatsNumbersNumber; ++j) {
               fLilypondCodeStream <<
                 beatsNumbersVector [j] <<
@@ -14083,7 +14093,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
             gGlobalServiceRunData->getInputSourceName (),
             elt->getInputLineNumber (),
             __FILE__, __LINE__,
-            "time signature items std::vector is empty");
+            "time signature items vector is empty");
         }
       }
     }
@@ -20432,7 +20442,7 @@ void lpsr2lilypondTranslator::generateCodeForChordInGraceNotesGroupContents (
   }
 #endif
 
-  // get the chord notes std::vector
+  // get the chord notes vector
   const std::vector<S_msrNote>&
     chordNotesVector =
       chord->getChordNotesVector ();
@@ -20477,7 +20487,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   }
 #endif
 
-  // get the chord notes std::vector
+  // get the chord notes vector
   const std::vector<S_msrNote>&
     chordNotesVector =
       chord->getChordNotesVector ();
@@ -21458,10 +21468,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
     " {" <<
     std::endl;
 
-  // push the tuplet on the tuplets std::stack
-  fOnGoingTupletsStack.push (elt);
-
   ++gIndenter; // decremented in visitEnd (S_msrTuplet& elt)
+
+  // push the tuplet on the tuplets stack
+  fOnGoingTupletsStack.push (elt);
 
   // force durations to be displayed explicitly
   // at the beginning of the tuplet
@@ -21499,14 +21509,19 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif
 
-  --gIndenter; // incremented in visitStart (S_msrTuplet& elt)
-
   if (gGlobalLpsr2lilypondOahGroup->getIndentTuplets ()) {
     fLilypondCodeStream << std::endl;
   }
 
   fLilypondCodeStream <<
-    '}' <<
+    std::endl;
+
+  --gIndenter; // incremented in visitStart (S_msrTuplet& elt)
+
+  fLilypondCodeStream <<
+    '}';
+
+  fLilypondCodeStream <<
     std::endl;
 
   // get line shape kind
@@ -21524,7 +21539,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
       break;
   } // switch
 
-  // pop the tuplet from the tuplets std::stack
+  // pop the tuplet from the tuplets stack
   fOnGoingTupletsStack.pop ();
 
 /* JMI

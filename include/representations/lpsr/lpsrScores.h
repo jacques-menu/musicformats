@@ -454,7 +454,7 @@ class EXP lpsrScore : public lpsrElement
     std::list<S_msrElement>
                           fScoreElementsList;
 
-    // score LPSR book blocks std::list
+    // score LPSR book blocks list
     std::list<S_lpsrBookBlock> fScoreBookBlocksList;
     S_lpsrScoreBlock      fScoreScoreBlock; // JMI ???
 
@@ -527,7 +527,7 @@ class EXP lpsrScore : public lpsrElement
     // private work fields
     // ------------------------------------------------------
 
-    // the Scheme functions std::map
+    // the Scheme functions map
     std::map<std::string, S_lpsrSchemeFunction>
                           fScoreSchemeFunctionsMap;
 };

@@ -513,7 +513,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
     setBookBlockHeader (
       fCurrentLpsrScoreHeader);
 
-  // append it to the current book blocks std::list
+  // append it to the current book blocks list
   fResultingLpsr->
     appendBookBlockToBookBlocksList (
       fCurrentLpsrBookBlock);
@@ -685,7 +685,7 @@ void msr2lpsrTranslator::displayOnGoingNotesStack (
   gLogStream <<
     std::endl <<
     ">>++++++++++++++++ " <<
-    "The on-going notes std::stack contains " <<
+    "The on-going notes stack contains " <<
     onGoingNotesStackSize <<
     " elements" <<
     " (" << context << "):" <<
@@ -1040,7 +1040,7 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
   }
 
 /* JMI
-  // push it onto this visitors's std::stack,
+  // push it onto this visitors's stack,
   // making it the current partGroup
   fPartGroupBlocksStack.push (
     partGroupBlock);
@@ -1066,19 +1066,19 @@ void msr2lpsrTranslator::visitEnd (S_msrScore& elt)
     elt->getScaling ());
 
 /* JMI
-  // get top level partgroup block from the std::stack
+  // get top level partgroup block from the stack
   S_lpsrPartGroupBlock
     partGroupBlock =
       fPartGroupBlocksStack.top ();
 
-  // pop it from the std::stack
+  // pop it from the stack
   fPartGroupBlocksStack.top ();
 
-  // the std::stack should now be empty
+  // the stack should now be empty
   if (fPartGroupBlocksStack.size ()) {
     msr2lpsrInternalError (
       1,
-      "the partGroup block std::stack is not exmpty at the end of the visit");
+      "the partGroup block stack is not exmpty at the end of the visit");
   }
    */
 }
@@ -1477,7 +1477,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 #endif
 
   // create a partGroup clone
-  // current partGroup clone, i.e. the top of the std::stack,
+  // current partGroup clone, i.e. the top of the stack,
   // is the upLink of the new one if it exists
   S_msrPartGroup
     partGroupClone =
@@ -1487,14 +1487,14 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
           : nullptr,
         fResultingLpsr->getMsrScore ());
 
-  // push it onto this visitors's std::stack,
+  // push it onto this visitors's stack,
   // making it the current partGroup block
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Pushing part group clone " <<
       partGroupClone->getPartGroupCombinedName () <<
-      " onto std::stack" <<
+      " onto stack" <<
       std::endl;
   }
 #endif
@@ -1514,7 +1514,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
       lpsrPartGroupBlock::create (
         partGroupClone);
 
-  // push it onto this visitors's std::stack,
+  // push it onto this visitors's stack,
   // making it the current partGroup block
   fPartGroupBlocksStack.push (
     partGroupBlock);
@@ -1527,7 +1527,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 */
 
   // don't append the partgroup block to the score/bookpart block now:
-  // this will be done when it gets popped from the std::stack
+  // this will be done when it gets popped from the stack
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
@@ -1548,7 +1548,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
   if (fPartGroupsStack.size () == 1) {
     // add the current partgroup clone to the MSR score clone
-    // if it is the top-level one, i.e it's alone in the std::stack
+    // if it is the top-level one, i.e it's alone in the stack
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -1569,13 +1569,13 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
   else {
 
-    // pop current partGroup from this visitors's std::stack
+    // pop current partGroup from this visitors's stack
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
       gLogStream <<
         "Popping part group clone " <<
         fPartGroupsStack.top ()->getPartGroupCombinedName () <<
-        " from std::stack" <<
+        " from stack" <<
         std::endl;
     }
 #endif
@@ -1595,7 +1595,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
   if (fPartGroupBlocksStack.size () == 1) {
     // add the current partgroup clone to the LPSR score's parallel music
-    // if it is the top-level one, i.e it's alone in the std::stack
+    // if it is the top-level one, i.e it's alone in the stack
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -1624,7 +1624,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
             "fCurrentScoreBlock is null");
 
           // append the current partgroup block to the current score block
-          // if it is the top-level one, i.e it's alone in the std::stack JMI
+          // if it is the top-level one, i.e it's alone in the stack JMI
           // JMI BOF if (fPartGroupBlocksStack.size () == 1)
 #ifdef TRACING_IS_ENABLED
           if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
@@ -1667,7 +1667,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
             "fCurrentBookPartBlock is null");
 
           // append the current partgroup block to the current bookpart block
-          // if it is the top-level one, i.e it's alone in the std::stack JMI
+          // if it is the top-level one, i.e it's alone in the stack JMI
           // JMI BOF if (fPartGroupBlocksStack.size () == 1)
 #ifdef TRACING_IS_ENABLED
           if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
@@ -1689,13 +1689,13 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
         break;
     } // switch
 
-    // pop current partGroup block from this visitors's std::stack,
+    // pop current partGroup block from this visitors's stack,
     // only now to restore the appearence order
     fPartGroupBlocksStack.pop ();
   }
 
   else {
-    // pop current partGroup block from this visitors's std::stack
+    // pop current partGroup block from this visitors's stack
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
       gLogStream <<
@@ -1703,7 +1703,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
         currentPartGroupBlock->
           getPartGroup ()->
             getPartGroupCombinedName () <<
-        " from std::stack" <<
+        " from stack" <<
         std::endl;
     }
 #endif
@@ -1782,7 +1782,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
     gLogStream <<
       "Appending part block " <<
       fPartGroupsStack.top ()->getPartGroupCombinedName () <<
-      " to part group blocks std::stack top" <<
+      " to part group blocks stack top" <<
       std::endl;
   }
 #endif
@@ -2147,6 +2147,16 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
   }
 #endif
 
+#ifdef TRACING_IS_ENABLED
+  if (true || gGlobalTracingOahGroup->getTraceVoices ()) {
+    gLogStream <<
+      std::endl <<
+      "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
+      ", line " << elt->getInputLineNumber () << " ===-->" <<
+      std::endl;
+  }
+#endif
+
   fCurrentVoiceOriginal = elt;
 
   ++gIndenter;
@@ -2303,7 +2313,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
       break;
   } // switch
 
-  // clear the voice notes std::map
+  // clear the voice notes map
   fVoiceNotesMap.clear ();
 
   fFirstNoteCloneInVoice = nullptr;
@@ -3152,13 +3162,13 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
         fCurrentNonGraceNoteClone);
 
     if (gGlobalLpsrOahGroup->getAddLpsrWordsFromTheLyrics ()) {
-      // get the syllable texts std::list
+      // get the syllable texts list
       const std::list<std::string>&
         syllableTextsList =
           elt->getSyllableTextsList ();
 
       if (syllableTextsList.size ()) {
-        // build a single words value from the texts std::list
+        // build a single words value from the texts list
         // JMI create an msrWords instance for each???
         std::string wordsValue =
           elt->syllableTextsListAsString();
@@ -5205,7 +5215,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
         createNoteNewbornClone (
           fCurrentPartClone);
 
-  // register clone in this tranlastors' voice notes std::map and ongoing notes std::stack
+  // register clone in this tranlastors' voice notes map and ongoing notes stack
   fVoiceNotesMap [elt] = noteClone; // JMI XXL
   fOnGoingNotesStack.push_front (noteClone);
 
@@ -6124,7 +6134,7 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
     gLogStream <<
       "++> pushing tuplet '" <<
       tupletClone->asString () <<
-      "' to tuplets std::stack" <<
+      "' to tuplets stack" <<
       std::endl;
   }
 #endif
@@ -6158,7 +6168,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
     gLogStream <<
       "Popping tuplet '" <<
       elt->asString () <<
-      "' from tuplets std::stack" <<
+      "' from tuplets stack" <<
       std::endl;
   }
 #endif
@@ -6172,7 +6182,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
       gLogStream <<
         "Adding nested tuplet '" <<
       elt->asString () <<
-        "' to std::stack top tuplet '" <<
+        "' to stack top tuplet '" <<
       fTupletClonesStack.top ()->asString () <<
       "'" <<
       std::endl;
@@ -6343,7 +6353,7 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
         measurePosition);
 */
 
-  // register it in the hidden measure and barLine descr std::list
+  // register it in the hidden measure and barLine descr list
   fPartHiddenMeasureAndBarLineDescrList.push_back (
     msrHiddenMeasureAndBarLineDescr::create (
       inputLineNumber,

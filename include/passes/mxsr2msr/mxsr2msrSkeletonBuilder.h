@@ -25,7 +25,7 @@ namespace MusicFormats
 struct mxmlPartGroupDescr : public smartable
 {
 /*
-  positions represent the order in which the parts appear in <part-std::list />
+  positions represent the order in which the parts appear in <part-list />
 */
 
   public:
@@ -455,7 +455,7 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      createImplicitPartGroup ();
 
     // part groups numbers can be re-used, they're no identifier
-    // we use a std::map to access them by part group number
+    // we use a map to access them by part group number
     int                       fPartGroupsCounter;
     std::vector<S_mxmlPartGroupDescr>
                               fPartGroupDescsVector;

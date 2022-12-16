@@ -620,13 +620,13 @@ class EXP msr2lpsrTranslator :
     // ------------------------------------------------------
   //  S_msrPartGroup          fCurrentPartGroupClone; JMI
 
-    // partGroup's can be nested, hence this std::stack
-    // the current partGroup is the top of the std::stack
+    // partGroup's can be nested, hence this stack
+    // the current partGroup is the top of the stack
     std::stack<S_msrPartGroup>
                               fPartGroupsStack;
 
     // part groups block are nested as the partGroup's are
-    // the current partGroup block is the top of the std::stack
+    // the current partGroup block is the top of the stack
     std::stack<S_lpsrPartGroupBlock>
                               fPartGroupBlocksStack;
 
@@ -692,7 +692,7 @@ class EXP msr2lpsrTranslator :
 
     // segments
     // ------------------------------------------------------
-    // the current segment clone is the one at the top of the std::stack
+    // the current segment clone is the one at the top of the stack
     S_msrSegment              fCurrentSegmentClone;
 
 

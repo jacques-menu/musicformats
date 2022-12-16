@@ -107,7 +107,7 @@ When building \mf\ with:
 cd build
 make
 \end{lstlisting}
-a \cmake\ \cache\ is created in file {\tt build/libdir/CMakeCache.txt}, containing the std::list of all the C++ files in the library, including those of the embedded \libmusicxml.
+a \cmake\ \cache\ is created in file {\tt build/libdir/CMakeCache.txt}, containing the list of all the C++ files in the library, including those of the embedded \libmusicxml.
 
 Adding individual files in fine, but adding new folders in the {\tt src} hierarchy implies to update variable {\tt SRC_FOLDERS} in {\tt build/CMakeLists.txt} accordingly and to remove the {\tt build/libdir/CMakeCache.txt} \cache.
 
@@ -193,7 +193,7 @@ The few uses of {\tt auto} declarations are in range-based {\tt for} loops over 
           msrHarmonyStructure::create (
             e);
 
-      // register it in the std::map
+      // register it in the map
       gGlobalHarmonyStructuresMap [e] =
         harmonyStructure;
     } // for
@@ -506,7 +506,7 @@ class EXP msrPart : public msrPartGroupElement
 
     static const int K_PART_FIGURED_BASS_STAFF_NUMBER;
     static const int K_PART_FIGURED_BASS_VOICE_NUMBER;
-    
+
    // ... ... ...
 };
 \end{lstlisting}
@@ -524,7 +524,7 @@ const int msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
 
 \end{itemize}
 
-When a field is an STL container, such a {\tt std::vector}, {\tt std::list}, {\tt std::map} or {\tt set}, this in indicated as part of the identifier, such as:
+When a field is an STL container, such a {\tt vector}, {\tt list}, {\tt map} or {\tt set}, this in indicated as part of the identifier, such as:
 \begin{lstlisting}[language=CPlusPlus]
     std::map<std::string, std::string>   fPartsRenamingMap;
 \end{lstlisting}
@@ -823,7 +823,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files > xml2ly -query input-line-num
 Generators such as {\tt Mikrokosmos3Wandering} don't read any input, and the input line numbers the use are the ones in the source code, which is helpful for debugging. For example:
 \begin{lstlisting}[language=CPlusPlus]
 S_msrStaff Mikrokosmos3WanderingGenerator::createStaffInPart (
-  int              staffNumber, 
+  int              staffNumber,
   const S_msrPart& part)
 {
   // create the staff
@@ -1245,7 +1245,7 @@ void initializeHarmonyStructuresMap ()
           msrHarmonyStructure::create (
             e);
 
-      // register it in the std::map
+      // register it in the map
       gGlobalHarmonyStructuresMap [e] =
         harmonyStructure;
     } // for
@@ -1321,7 +1321,7 @@ class EXP Rational {
         long int fNumerator;
         long int fDenominator;
 
-        // Used by rationalize()
+        // Used by rationalise()
         long int gcd(long int a, long int b);
 
     public:
@@ -1912,7 +1912,7 @@ class EXP msrBarLine : public msrMeasureElement
     // ------------------------------------------------------
 
     static S_msrBarLine create (...)
-    
+
   // ... ... ...
 };
 \end{lstlisting}
@@ -1947,7 +1947,7 @@ jacquesmenu@macstudio-1:~/JMI_Developpement/musicformats-git-dev/src > look Enum
 % -------------------------------------------------------------------------
 
 A \className{msrPartGroupElement} is either a \className{msrPart} or another \className{msrPartGroupElement}, since the latter can be nested.
- 
+
 A \className{msrPartGroupElement} cannot contain an uplink to an instance of \className{S_msrPartGroup}: pre-declaring \type{S_msrPartGroup}:
 \begin{lstlisting}[language=CPlusPlus]
 class   msrPartGroup;

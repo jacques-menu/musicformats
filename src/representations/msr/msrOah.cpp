@@ -96,7 +96,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the pitches languages std::map?
+  // is it in the pitches languages map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -112,7 +112,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
         theString);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
 
     std::stringstream s;
 
@@ -412,7 +412,7 @@ void msrRenamePartAtom::applyAtomWithValue (
   }
 #endif
 
-  // is this part name in the part renaming std::map?
+  // is this part name in the part renaming map?
   std::map<std::string, std::string>::iterator
     it =
       fStringToStringMapVariable.find (oldPartName);
@@ -1150,13 +1150,13 @@ void msrOahGroup::initializeMsrOahGroup ()
 //______________________________________________________________________________
 Bool msrOahGroup::setMsrQuarterTonesPitchesLanguage (const std::string& language)
 {
-  // is language in the pitches languages std::map?
+  // is language in the pitches languages map?
   std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     return false;
   }
 

@@ -341,7 +341,7 @@ class   mfslDriver
 		std::string           fScriptName;
 
     // the names of the input sources
-    std::list<std::string>          
+    std::list<std::string>
                           fInputSoucesList;
 
 
@@ -904,7 +904,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl >
 
 The \mfslInterp\ uses a variant of the \MainIt{stopper sets} method that was present in the early Pascal and Pascal-S converters. The latter passed a set of tokens not to be overtaken to the procedures in charge of accepting the various statements in the language. Strangely enough, this was not done for declarations.
 
-We use a std::stack of tokens sets that grows and shrinks in parallel with the accepting functions\index{functions}, to know more contextual informations when deciding wether to consume a token or not. The corresponding term is {it shift}
+We use a stack of tokens sets that grows and shrinks in parallel with the accepting functions\index{functions}, to know more contextual informations when deciding wether to consume a token or not. The corresponding term is {it shift}
 when building the analysis tables in LR technology.
 
 

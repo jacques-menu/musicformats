@@ -334,12 +334,12 @@ S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
   // protect library against multiple initializations
   if (! gGlobalMikrokosmos3WanderingOahGroup) {
 
-    // initialize the generation API kinds std::map
+    // initialize the generation API kinds map
     // ------------------------------------------------------
 
     initializeMsrGenerationAPI ();
 
-    // initialize the generated output kinds std::map
+    // initialize the generated output kinds map
     // ------------------------------------------------------
 
     initializeMultiGenerationOutputKindsMap ();

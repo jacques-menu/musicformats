@@ -48,14 +48,14 @@ The output of the help  goes to \standardOutput, so that the user can pipe it in
     A {\tt oahPrefix} contains the prefix name, the ersatz by which to replace it,
     and a description.
 
-\item a \class{oahHandler} contains a std::list of {\tt oahGroup}'s, each handled
-    in a std::pair of {\tt .h/.cpp} files such as \msr{msrOah.h} and \msr{msrOah.cpp},
-    and a std::list of options prefixes.
+\item a \class{oahHandler} contains a list of {\tt oahGroup}'s, each handled
+    in a pair of {\tt .h/.cpp} files such as \msr{msrOah.h} and \msr{msrOah.cpp},
+    and a list of options prefixes.
 
-\item a \class{oahGroup} contains a std::list of {\tt oahSubGroup}'s
+\item a \class{oahGroup} contains a list of {\tt oahSubGroup}'s
     and an upLink to the containing {\tt oahHandler}.
 
-\item a \class{oahSubGroup} contains a std::list of {\tt oahAtom}'s
+\item a \class{oahSubGroup} contains a list of {\tt oahAtom}'s
     and an upLink to the containing {\tt oahGroup}.
 
 \item each \class{oahAtom} contains an atomic option and the corresponding help,
@@ -93,11 +93,11 @@ The output of the help  goes to \standardOutput, so that the user can pipe it in
 \item a class   such as \class{lpsrPitchesLanguageAtom} is used
     to supply a std::string value to be converted into an internal enumerated type;
 
-\item a \class{oahCombinedBooleansAtom} contains a std::list of boolean atoms
+\item a \class{oahCombinedBooleansAtom} contains a list of boolean atoms
     to manipulate several such atoms as a single one,
     see the '\class{cubase}' combined booleans atom in \mxsrToMsr{mxsr2msrOah.cpp};
 
-\item \class{oahMultiplexBooleansAtom} contains a std::list of boolean atoms
+\item \class{oahMultiplexBooleansAtom} contains a list of boolean atoms
     sharing a common prefix to display such atoms in a compact manner,
     see the '{\tt ignore-redundant-clefs}' multiplex booleans atom in \mxsrToMsr{mxsr2msrOah.cpp};
 
@@ -256,7 +256,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
 };
 \end{lstlisting}
 
-The \field{oahAtomStoringAValue}{fSetByAnOption} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahColorRGBAtom}, for example. It is not used for data structures such as sets, lists and std::vector, since this is indicated by their size.
+The \field{oahAtomStoringAValue}{fSetByAnOption} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahColorRGBAtom}, for example. It is not used for data structures such as sets, lists and vector, since this is indicated by their size.
 
 \fieldName{fSetByAnOption} is set in \methodName{set*Variable} methods, as in \method{oahIntegerAtom}{setIntegerVariable}\\
 in \oah{oahAtomsCollection.cpp}:
@@ -584,9 +584,9 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
     uncontracted options are handled;
 
 \item options handling works in two passes:
-    \item the first one creates a std::list of \class{oahElementUse} instances from
+    \item the first one creates a list of \class{oahElementUse} instances from
         \argcargv\ or an options and arguments;
-    \item the second one traverses this std::list to apply the options that are used.
+    \item the second one traverses this list to apply the options that are used.
 
 \item the options are applied by \virtualMethod{applyElement}, \virtualMethod{applyAtomWithValue} and
     \virtualMethod{applyAtomWithDefaultValue};
@@ -1033,8 +1033,8 @@ EXP mfMusicformatsErrorKind musicxmlfile2musicxml (
 
 This is done using a two-pass scheme:
 \begin{itemize}
-\item first, a std::list of the options uses is built;
-\item then, the options and their arguments, if any, im this std::list are applied.
+\item first, a list of the options uses is built;
+\item then, the options and their arguments, if any, im this list are applied.
 \end{itemize}
 
 class   {\tt oahHandler} contains:
@@ -1214,7 +1214,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
         std::stringstream s;
 
         s <<
-          "Element from the from the atom uses std::list for \"" <<
+          "Element from the from the atom uses list for \"" <<
           nameUsed <<
           "\" is null";
 
@@ -1363,7 +1363,7 @@ class EXP oahFindableElement : public smartable
 };
 \end{lstlisting}
 
-When matches are found, there are stored in a std::list of instances of \className{oahFindStringMatch}:
+When matches are found, there are stored in a list of instances of \className{oahFindStringMatch}:
 \begin{lstlisting}[language=Terminal]
 class   oahFindStringMatch : public smartable
 {
@@ -1381,7 +1381,7 @@ class   oahFindStringMatch : public smartable
 
 The \fieldName{fContainingFindableElementInfo} describes the \oahRepr\ element that the std::string was found in, either in its option name(s) or in its description.
 
-For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oahElement.cpp} creates an instance and appends it to the std::list :
+For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oahElement.cpp} creates an instance and appends it to the list :
 \begin{lstlisting}[language=Terminal]
 Bool oahHandler::findStringInFindableElement (
 	const std::string&     lowerCaseString,
@@ -1909,14 +1909,14 @@ void oahLengthAtom::applyAtomWithValue (
 
     std::string lengthUnitName = sm [ 3 ];
 
-    // is lengthUnitName known in the length unit names std::map?
+    // is lengthUnitName known in the length unit names map?
     std::map<std::string, msrLengthUnitKind>::const_iterator
       it =
         gGlobalMsrLengthUnitKindsMap.find (
           lengthUnitName);
 
     if (it == gGlobalMsrLengthUnitKindsMap.end ()) {
-      // no, length unit name is unknown in the std::map
+      // no, length unit name is unknown in the map
 
       std::stringstream s;
 

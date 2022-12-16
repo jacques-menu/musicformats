@@ -1843,7 +1843,7 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     // std::map<S_msrVoice, S_msrNote> seems buggy in g++ 4.9.x,
-    // so we use a std::pair containing the staff and voice numbers:
+    // so we use a pair containing the staff and voice numbers:
     std::map<std::pair<int, int>, S_msrNote>
                               fVoicesLastMetNoteMap;
 
@@ -2240,7 +2240,7 @@ class EXP mxsr2msrTranslator :
 
 /* JMI
  //    std::map<S_msrVoice, S_msrChord> // seems buggy in g++ 4.9.x, so
-    // we use a std::pair containing the staff and voice numbers:
+    // we use a pair containing the staff and voice numbers:
     std::map<std::pair<int, int>, S_msrChord>
                               fVoicesCurrentChordMap;
                               */
@@ -2301,11 +2301,12 @@ class EXP mxsr2msrTranslator :
     Bool                      fCurrentNoteBelongsToATuplet;
 
     std::list<S_msrTuplet>    fTupletsStack;
-    void                      displayTupletsStack (const std::string& context);
+    void                      displayTupletsStack (
+    														const std::string& context);
 
     Bool                      fCurrentATupletStopIsPending;
 
-    void                      createTupletWithItsFirstNoteAndPushItToTupletsStack (
+    void                      createAndPushTupletUponItsFirstNote (
                                 const S_msrNote& note);
 
     void                      handlePendingTupletStopIfAny (
@@ -2319,7 +2320,7 @@ class EXP mxsr2msrTranslator :
                                 int inputLineNumber);
 
     // std::map<S_msrVoice, S_msrTuplet> seems buggy in g++ 4.9.x, so
-    // we use a std::pair containing the staff and voice numbers:
+    // we use a pair containing the staff and voice numbers:
 //     std::map<S_msrVoice, S_msrTuplet>
     std::map<std::pair<int, int>, S_msrTuplet>
                               fLastHandledTupletInVoiceMap;

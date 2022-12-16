@@ -792,10 +792,10 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeTool_Pass2 ()
     fCaseChoiceStatementsStack.size () == 0,
     "fCaseChoiceStatementsStack should be empty after parsing");
 
-  // populate the commands std::list with the options gathered in the script
+  // populate the commands list with the options gathered in the script
   populateTheCommandsList ();
 
-  // display the commands std::list
+  // display the commands list
   if (fDisplayToolAndInput) {
     gLogStream <<
       "====> The " <<
@@ -820,7 +820,7 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeTool_Pass2 ()
     --gIndenter;
   }
 
-  // execute the commands in the std::list
+  // execute the commands in the list
   if (fNoLaunch) {
     gLogStream <<
       "====> The " <<
@@ -1110,7 +1110,7 @@ void ischemeDriver::populateTheCommandsList ()
               optionsBlock->
                 asOptionsString ();
 
-          // append it to the commands std::list
+          // append it to the commands list
           fCommandsList.push_back (
             toolAndInputAsString
               +
@@ -1166,7 +1166,7 @@ void ischemeDriver::populateTheCommandsList ()
               optionsBlockToBeUsed->
                 asOptionsString ();
 
-          // append it to the commands std::list
+          // append it to the commands list
           fCommandsList.push_back (
             toolAndInputAsString
               +

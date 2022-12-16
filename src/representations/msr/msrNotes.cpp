@@ -2576,7 +2576,7 @@ void msrNote::appendTechnicalToNote (
   }
 #endif
 
-  // append the technical to the note technicals std::list
+  // append the technical to the note technicals list
   fNoteTechnicals.push_back (technical);
 }
 
@@ -2595,7 +2595,7 @@ void msrNote::appendTechnicalWithIntegerToNote (
   }
 #endif
 
-  // append the technical with integer to the note technicals with integers std::list
+  // append the technical with integer to the note technicals with integers list
   fNoteTechnicalWithIntegers.push_back (
     technicalWithInteger);
 }
@@ -2615,7 +2615,7 @@ void msrNote::appendTechnicalWithFloatToNote (
   }
 #endif
 
-  // append the technical with float to the note technicals with floats std::list
+  // append the technical with float to the note technicals with floats list
   fNoteTechnicalWithFloats.push_back (
     technicalWithFloat);
 }
@@ -2635,7 +2635,7 @@ void msrNote::appendTechnicalWithStringToNote (
   }
 #endif
 
-  // append the technical with std::string to the note technicals with strings std::list
+  // append the technical with std::string to the note technicals with strings list
   fNoteTechnicalWithStrings.push_back (
     technicalWithString);
 }
@@ -2654,7 +2654,7 @@ void msrNote::appendOrnamentToNote (
   }
 #endif
 
-  // append the ornament to the note ornaments std::list
+  // append the ornament to the note ornaments list
   fNoteOrnaments.push_back (ornament);
 
   switch (ornament->getOrnamentKind ()) {
@@ -2699,7 +2699,7 @@ void msrNote::appendGlissandoToNote (
   }
 #endif
 
-  // append the glissando to the note glissandos std::list
+  // append the glissando to the note glissandos list
   fNoteGlissandos.push_back (glissando);
 }
 
@@ -2717,7 +2717,7 @@ void msrNote::appendSlideToNote (
   }
 #endif
 
-  // append the slide to the note glissandos std::list
+  // append the slide to the note glissandos list
   fNoteSlides.push_back (slide);
 }
 

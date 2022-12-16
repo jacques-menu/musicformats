@@ -10,7 +10,7 @@
 */
 
 
-#include <iomanip>      // std::setw()), set::precision(), ...
+#include <iomanip>      // setw()), set::precision(), ...
 #include <sstream>
 
 #include "visitor.h"

@@ -575,7 +575,7 @@ std::string existingTokensInLanguage (
 
   std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
-  // select the relevant keywords names std::map
+  // select the relevant keywords names map
   switch (keywordsLanguageKind) {
     case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
@@ -1985,7 +1985,7 @@ std::string msdlTokensList::asString () const
   std::stringstream s;
 
   s <<
-    "MSDL tokens std::list" <<
+    "MSDL tokens list" <<
     mfSingularOrPluralWithoutNumber (
       fTokensList.size (), "element", "elements");
 

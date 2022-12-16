@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // std::setw()), set::precision(), ...
+#include <iomanip>      // setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
 
@@ -330,7 +330,7 @@ std::string msrTimeSignatureItem::asString () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time signature item beats numbers std::vector is empty");
+        "time signature item beats numbers vector is empty");
         */
       s <<
         "beats numbers: [NONE]";
@@ -383,7 +383,7 @@ std::string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time signature item beats numbers std::vector is empty");
+        "time signature item beats numbers vector is empty");
         */
       s <<
         "beats numbers: [NONE]";
@@ -1026,7 +1026,7 @@ void msrTimeSignature::appendTimeSignatureItem (
     fTimeIsCompound = true;
   }
 
-  // append the time signature item to the std::vector
+  // append the time signature item to the vector
   fTimeSignatureItemsVector.insert (
     fTimeSignatureItemsVector.end (), timeSignatureItem);
 }
@@ -1081,7 +1081,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
       gGlobalServiceRunData->getInputSourceName (),
       fInputLineNumber,
       __FILE__, __LINE__,
-      "time signature items std::vector is empty");
+      "time signature items vector is empty");
   }
 
   // return result
@@ -1173,7 +1173,7 @@ std::string msrTimeSignature::asString () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time  items std::vector is empty");
+        "time  items vector is empty");
     }
   }
 
@@ -1247,7 +1247,7 @@ std::string msrTimeSignature::asShortStringForMeasuresSlices () const
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
         __FILE__, __LINE__,
-        "time  items std::vector is empty");
+        "time  items vector is empty");
     }
   }
 

@@ -183,7 +183,7 @@ class   msdlScanner : public smartable
     msdlKeywordsLanguageKind
                           fKeywordsInputLanguageKind;
 
-    // tokens std::list
+    // tokens list
     Bool                  fAppendTokensToList;
     msdlTokensList        fTokensList;
 

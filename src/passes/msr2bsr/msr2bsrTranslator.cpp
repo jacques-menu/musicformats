@@ -2714,7 +2714,7 @@ void msr2bsrTranslator::visitStart (S_msrSegment& elt)
       elt->createSegmentNewbornClone (
         fCurrentVoiceClone);
 
-  // push it onto the segment clones std::stack
+  // push it onto the segment clones stack
   fCurrentSegmentClonesStack.push (
     segmentClone);
 
@@ -3295,13 +3295,13 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
         fCurrentNonGraceNoteClone);
 
     if (gGlobalBsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
-      // get the syllable texts std::list
+      // get the syllable texts list
       const std::list<std::string>&
         syllableTextsList =
           elt->getSyllableTextsList ();
 
       if (syllableTextsList.size ()) {
-        // build a single words value from the texts std::list
+        // build a single words value from the texts list
         // JMI create an msrWords instance for each???
         std::string wordsValue =
           elt->syllableTextsListAsString();
@@ -4623,7 +4623,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
       elt->createNoteNewbornClone (
         fCurrentPartClone);
 
-  // register clone in this tranlastors' voice notes std::map
+  // register clone in this tranlastors' voice notes map
   fVoiceNotesMap [elt] = noteClone; // JMI XXL
 
   // don't register grace notes as the current note clone,
@@ -5380,7 +5380,7 @@ void msr2bsrTranslator::visitStart (S_msrTuplet& elt)
     gLogStream <<
       "++> pushing tuplet '" <<
       tupletClone->asString () <<
-      "' to tuplets std::stack" <<
+      "' to tuplets stack" <<
       std::endl;
   }
 #endif
@@ -5413,7 +5413,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
     gLogStream <<
       "Popping tuplet '" <<
       elt->asString () <<
-      "' from tuplets std::stack" <<
+      "' from tuplets stack" <<
       std::endl;
   }
 #endif
@@ -5427,7 +5427,7 @@ void msr2bsrTranslator::visitEnd (S_msrTuplet& elt)
       gLogStream <<
         "Adding nested tuplet '" <<
       elt->asString () <<
-        "' to std::stack top tuplet '" <<
+        "' to stack top tuplet '" <<
       fTupletClonesStack.top ()->asString () <<
       "'" <<
       std::endl;

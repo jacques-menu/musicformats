@@ -101,7 +101,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
   }
 #endif
 
-  // is this part name in the part renaming std::map?
+  // is this part name in the part renaming map?
   std::set<std::string>::iterator
     it =
       fStringSetVariable.find (partName);
@@ -323,7 +323,7 @@ std::ostream& operator << (std::ostream& os, const S_msrIgnorePartAtom& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -394,7 +394,7 @@ void msrKeepPartAtom::applyAtomWithValue (
   }
 #endif
 
-  // is this part name in the part renaming std::map?
+  // is this part name in the part renaming map?
   std::set<std::string>::iterator
     it =
       fStringSetVariable.find (partName);
@@ -616,7 +616,7 @@ std::ostream& operator << (std::ostream& os, const S_msrKeepPartAtom& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -1181,7 +1181,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2msrOahGroup& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

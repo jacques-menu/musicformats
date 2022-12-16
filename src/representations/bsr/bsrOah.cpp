@@ -722,13 +722,13 @@ void bsrOahGroup::initializeBsrOahGroup ()
 //______________________________________________________________________________
 Bool bsrOahGroup::setBsrTextsLanguage (const std::string& language)
 {
-  // is language in the chords languages std::map?
+  // is language in the chords languages map?
   std::map<std::string, bsrTextsLanguageKind>::const_iterator
     it =
       gGlobalBsrTextsLanguageKindsMap.find (language);
 
   if (it == gGlobalBsrTextsLanguageKindsMap.end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     return false;
   }
 

@@ -383,7 +383,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
   }
 #endif
 
-  // is this part name in the part renaming std::map?
+  // is this part name in the part renaming map?
   std::map<std::string, S_msrSemiTonesPitchAndOctave>::iterator
     it =
       fStringToMsrSemiTonesPitchAndOctaveMapVariable.find (partName);
@@ -739,7 +739,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   }
 #endif
 
-  // is this part name in the part renaming std::map?
+  // is this part name in the part renaming map?
   std::map<std::string, S_msrSemiTonesPitchAndOctave>::iterator
     it =
       fStringToMsrSemiTonesPitchAndOctaveMapVariable.find (partID);
@@ -1290,7 +1290,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
   // theString contains the relative reference note
 
 /* JMI
-  // is it in the score output kinds std::map?
+  // is it in the score output kinds map?
 
   std::map<std::string, msrOctaveEntryKind>::const_iterator
     it =
@@ -1298,7 +1298,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
         theString);
 
   if (it == gGlobalMsrOctaveEntryKindsMap.end ()) {
-    // no, octave entry kind is unknown in the std::map
+    // no, octave entry kind is unknown in the map
 
     printOptionsSummary (gLogStream);
 
@@ -1752,7 +1752,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the accidental styles std::map?
+  // is it in the accidental styles map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1768,7 +1768,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
         theString);
 
   if (it == gGlobalLpsrAccidentalStyleKindsMap.end ()) {
-    // no, accidental style is unknown in the std::map
+    // no, accidental style is unknown in the map
     std::stringstream s;
 
     s <<
@@ -2362,7 +2362,7 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the lyrics alignment kinds std::map?
+  // is it in the lyrics alignment kinds map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2378,7 +2378,7 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
         theString);
 
   if (it == gGlobalLpsrLyricsDurationsKindsMap.end ()) {
-    // no, lyrics alignment kind is unknown in the std::map
+    // no, lyrics alignment kind is unknown in the map
     std::stringstream s;
 
     s <<
@@ -2605,7 +2605,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
 #endif
 
   // theString contains the dynamics text spanners style name:
-  // is it in the lyrics alignment kinds std::map?
+  // is it in the lyrics alignment kinds map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2621,7 +2621,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
         theString);
 
   if (it == getLpsrDynamicsTextSpannersStyleKindsMap ().end ()) {
-    // no, dynamics text spanners style kind is unknown in the std::map
+    // no, dynamics text spanners style kind is unknown in the map
     std::stringstream s;
 
     s <<

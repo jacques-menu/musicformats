@@ -238,10 +238,8 @@ class EXP msrTuplet : public msrTupletElement
                             const msrTupletFactor& containingTupletFactor);
 
     // finalization
-    /* JMI
-    void                  finalizeTuplet (
-                            int inputLineNumber);
-*/
+//     void                  finalizeTuplet (
+//                             int inputLineNumber);
 
   public:
 

@@ -103,7 +103,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // upLinks
     S_msrVoice            fAfterGraceNotesGroupContentsUpLinkToVoice;
 
-    // the notes std::list
+    // the notes list
     std::list<S_msrMeasureElement>
                           fAfterGraceNotesGroupContentsNotesList;
 };

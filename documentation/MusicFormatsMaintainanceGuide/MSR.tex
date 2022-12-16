@@ -255,7 +255,7 @@ Another view of the music is time-oriented, i.e., what are are notes being playe
 
 MSR stores descriptions of so-called 'measures slice' through \class{msrMeasuresSlice}, defined in \msr{msrMeasuresSlice.h}. Then a time-oriented view of a voice, staff or part is a sequence of such measure slices, defined in \class{msrMeasuresSlicesSequence}.%%%JMI
 
-An \class{msrMeasuresSlice} contains basically a slice measures std::vector:
+An \class{msrMeasuresSlice} contains basically a slice measures vector:
 \begin{lstlisting}[language=CPlusPlus]
     // the measures in the slice
     std::vector<S_msrMeasure>  fSliceMeasuresVector;
@@ -263,14 +263,14 @@ An \class{msrMeasuresSlice} contains basically a slice measures std::vector:
 
 From this, the following other descriptions are derived:
 \begin{lstlisting}[language=CPlusPlus]
-    // notes flat std::list
+    // notes flat list
     std::list<S_msrNote>  fSliceNotesFlatList;
 
-    // note events std::list
+    // note events list
     std::list<S_msrNoteEvent>
                           fSliceNoteEventsList;
 
-    // simultaneous notes chunks std::list
+    // simultaneous notes chunks list
     std::list<S_msrSimultaneousNotesChunk>
                           fSliceSimultaneousNotesChunksList;
 \end{lstlisting}
@@ -1198,7 +1198,7 @@ Books handling is presented at \sectionRef{Books handling}.
 
 There is no such concept in MusicXML, but MSR uses it for completeness, creating an implicit \class{msrBook} instance if needed.
 
-An \class{msrBook} contains a std::list and a set of {\tt S_msrBookElement}:
+An \class{msrBook} contains a list and a set of {\tt S_msrBookElement}:
 \begin{lstlisting}[language=CPlusPlus]
     // book elements
     std::set<S_msrBookElement> fBookElementsSet;
@@ -1219,7 +1219,7 @@ formats/msr/msrScores.h:class EXP msrScore : public msrBookElement
 
 Scores handling is presented at \sectionRef{Scores handling}.
 
-A score in MSR is the usual music score concept. It contains a set and a std::list of {\tt S_msrPartGroup}:
+A score in MSR is the usual music score concept. It contains a set and a list of {\tt S_msrPartGroup}:
 \begin{lstlisting}[language=CPlusPlus]
     // part groups
     std::set<S_msrPartGroup>   fScorePartGroupsSet;
@@ -1244,7 +1244,7 @@ formats/msr/msrParts.h:class EXP msrPart : public msrPartGroupElement
 formats/msr/msrPartGroups.h:class EXP msrPartGroup : public msrPartGroupElement
 \end{lstlisting}
 
-which are stored in a std::list:
+which are stored in a list:
 \begin{lstlisting}[language=CPlusPlus]
     // allowing for both parts and (sub-)part groups as elements
     std::list<S_msrPartGroupElement>
@@ -1390,7 +1390,7 @@ More precisely and for technical reasons, an \class{msrVoice} contains:
     // not yet stored in fVoiceInitialElementsList,
     // it is thus logically the end of the latter,
     // and is created implicitly for every voice.
-    // It is needed 'outside' of the 'std::list<S_msrElement>'
+    // It is needed 'outside' of the 'list<S_msrElement>'
     // because it is not a mere S_msrElement, but a S_msrSegment
     S_msrSegment          fVoiceLastSegment;
 
@@ -1468,7 +1468,7 @@ msrVoiceStaffChanges.h:class EXP msrVoiceStaffChange : public msrMeasureElement
 \end{lstlisting}
 
 
-In order to perform a time-wise analysis of the scores, MSR contains \class{msrMeasusre} linear flat lists, without the \class{msrRepeat} and such being represented.\\
+In order to perform a time-wise analysis of the scores, MSR contains \class{msrmeasure} linear flat lists, without the \class{msrRepeat} and such being represented.\\
 This is used when identifying rest notes that are not 'heard' simultaneously with other notes or rests: this way, the rest can ignore the current voice number and be placed in the vertical middle of the staff.
 
 Apart from the cloning methods, only one method creates measures, namely\\
@@ -1723,7 +1723,8 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     S_msrSegment          fMultipleFullBarRestsUpLinkToSegment;
 
     int                   fMultipleFullBarRestsNumber; // supplied by MusicXML
-    std::list<S_msrMeasure>    fFullBarRestsMeasuresList;
+    std::list<S_msrMeasure>
+                          fFullBarRestsMeasuresList;
 
     int                   fMultipleFullBarRestsLastMeasurePuristNumber;
 
@@ -1791,7 +1792,7 @@ class EXP msrRepeat : public msrVoiceElement
 };
 \end{lstlisting}
 
-\Class{msrRepeatCommonPart} contains a std::list of \class{msrVoiceElement}:
+\Class{msrRepeatCommonPart} contains a list of \class{msrVoiceElement}:
 \begin{lstlisting}[language=CPlusPlus]
   private:
 
@@ -1814,7 +1815,7 @@ enum class msrRepeatEndingKind {
 };
 \end{lstlisting}
 
-\Class{msrRepeatEnding} contains a std::list of \class{msrVoiceElement} too, as well as a \enumType{msrRepeatEndingKind} field:
+\Class{msrRepeatEnding} contains a list of \class{msrVoiceElement} too, as well as a \enumType{msrRepeatEndingKind} field:
 \begin{lstlisting}[language=CPlusPlus]
   private:
 
@@ -2192,7 +2193,7 @@ Extensions are described by enumeration type {\tt }:
     // syllable kind
     msrSyllableKind       fSyllableKind;
 
-    // texts std::list
+    // texts list
     std::list<std::string>
                           fSyllableTextsList;
 

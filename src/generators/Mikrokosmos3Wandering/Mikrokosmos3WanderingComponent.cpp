@@ -22,7 +22,7 @@ static S_mfcGeneratorComponent pGeneratorComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the generator's representations std::list
+  // populate the generator's representations list
   pGeneratorComponent->
     appendRepresentationToMultiComponent (
       createMsrRepresentationComponent ());
@@ -36,7 +36,7 @@ static void populateMultiComponent ()
     appendRepresentationToMultiComponent (
       createMxsrRepresentationComponent ());
 
-  // populate the converter's passes std::list
+  // populate the converter's passes list
   pGeneratorComponent->
     appendPassToMultiComponent (
       createMsr2msrComponent ());

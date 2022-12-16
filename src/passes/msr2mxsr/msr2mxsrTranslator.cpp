@@ -843,7 +843,7 @@ void msr2mxsrTranslator::visitStart (S_msrScore& elt)
   // append it to the identification encoding
   appendToScoreIdentificationEncoding (encodingDateElement);
 
-  // create the part std::list element
+  // create the part list element
   fScorePartListElement = createMxmlelement (k_part_list, "");
 }
 
@@ -975,11 +975,11 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
   }
 
   if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
-    // create an part-std::list comment
+    // create an part-list comment
     std::stringstream s;
     s <<
       " ===== " <<
-      "PART-std::list" <<
+      "PART-list" <<
       " ===== ";
     Sxmlelement comment = createMxmlelement (kComment, s.str ());
 
@@ -987,7 +987,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
     fResultingMusicxmlelement->push (comment);
   }
 
-  // append the part std::list element to the score part wise element
+  // append the part list element to the score part wise element
   fResultingMusicxmlelement->push (fScorePartListElement);
 
   // append the pending parts elements to the score part wise element
@@ -2198,7 +2198,7 @@ void msr2mxsrTranslator::visitStart (S_msrCredit& elt)
   fCurrentScoreCreditElement->add (
     createMxmlIntegerAttribute ("page", elt->getCreditPageNumber ()));
 
-  // append the credit element to the credit elements pending std::list
+  // append the credit element to the credit elements pending list
   fPendingScoreCreditElementsList.push_back (fCurrentScoreCreditElement);
 }
 
@@ -2430,7 +2430,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
             " ========== ";
           Sxmlelement comment = createMxmlelement (kComment, s.str ());
 
-          // append it to the current part std::list element
+          // append it to the current part list element
           fScorePartListElement->push (comment);
         }
 
@@ -2515,10 +2515,10 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
             k_group_barline,
             groupBarLineString));
 
-        // append the part group element to the part std::list element
+        // append the part group element to the part list element
         fScorePartListElement->push (scorePartGroupElement);
 
-        // push the part group element onto the std::stack
+        // push the part group element onto the stack
         fPartGroupElementsStack.push (scorePartGroupElement);
       }
       break;
@@ -2567,11 +2567,11 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
             " ========== ";
           Sxmlelement comment = createMxmlelement (kComment, s.str ());
 
-          // append it to the current part std::list element
+          // append it to the current part list element
           fScorePartListElement->push (comment);
         }
 
-        // fetch the top-most part group element on the std::stack
+        // fetch the top-most part group element on the stack
         Sxmlelement
           partGroupElementsStackTop =
             fPartGroupElementsStack.top ();
@@ -2605,10 +2605,10 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
         // set it's "type" attribute
         scorePartGroupElement->add (createMxmlAttribute ("type", "stop"));
 
-        // append the part group element to the part std::list element
+        // append the part group element to the part list element
         fScorePartListElement->push (scorePartGroupElement);
 
-        // pop the part group element from the std::stack
+        // pop the part group element from the stack
         fPartGroupElementsStack.pop ();
       }
       break;
@@ -2673,7 +2673,7 @@ if (false) // JMI
   // set it's "id" attribute
   fScorePartElement->add (createMxmlAttribute ("id", partID));
 
-  // append it to the part std::list element
+  // append it to the part list element
   fScorePartListElement->push (fScorePartElement);
 
   // append a part name element to the score part element
@@ -2829,7 +2829,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPart& elt)
 
   --gIndenter;
 
-  // forget about measure elements in the std::map
+  // forget about measure elements in the map
   fPartMeasureNumbersToElementsMap.clear ();
 
   // forget about the current part element
@@ -3030,6 +3030,16 @@ void msr2mxsrTranslator::visitStart (S_msrVoice& elt)
         elt <<
         std::endl << std::endl;
     }
+#endif
+
+#ifdef TRACING_IS_ENABLED
+  if (true || gGlobalTracingOahGroup->getTraceVoices ()) {
+    gLogStream <<
+      std::endl <<
+      "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
+      ", line " << elt->getInputLineNumber () << " ===-->" <<
+      std::endl;
+  }
 #endif
 
 /*
@@ -3238,7 +3248,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
     // append it to the current part element
     fCurrentPartElement->push (fCurrentMeasureElement);
 
-    // register it in the part measures std::map
+    // register it in the part measures map
     fPartMeasureNumbersToElementsMap [measureNumber] = fCurrentMeasureElement;
   }
 
@@ -4157,7 +4167,7 @@ void msr2mxsrTranslator::visitStart (S_msrTimeSignature& elt)
               timeSignatureItem =
                 timeSignatureItemsVector [0]; // the only element;
 
-            // fetch the time signature item beat numbers std::vector
+            // fetch the time signature item beat numbers vector
             const std::vector<int>&
               beatsNumbersVector =
                 timeSignatureItem->
@@ -8169,13 +8179,13 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
         fCurrentNonGraceNoteClone);
 
     if (gGlobalLpsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
-      // get the syllable texts std::list
+      // get the syllable texts list
       const std::list<std::string>&
         syllableTextsList =
           elt->getSyllableTextsList ();
 
       if (syllableTextsList.size ()) {
-        // build a single words value from the texts std::list
+        // build a single words value from the texts list
         // JMI create an msrWords instance for each???
         std::string wordsValue =
           elt->syllableTextsListAsString();
@@ -9117,7 +9127,7 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
     / * JMI
       std::string wordsContents = elt->getWordsContents ();
 
-      // is this words contents in the std::string to dal segno kind std::map?
+      // is this words contents in the std::string to dal segno kind map?
       const std::map<std::string, msrDalSegno::msrDalSegnoKind>&
         converStringToDalSegnoMap =
           gGlobalMxsr2msrOahGroup->
@@ -10588,8 +10598,8 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
   int aIndex = fOrder [a->getType ()];
   int bIndex = fOrder [b->getType ()];
 
-  if (aIndex == 0) return false; // wrong a element: reject to end of std::list
-  if (bIndex == 0) return true;   // wrong b element: reject to end of std::list
+  if (aIndex == 0) return false; // wrong a element: reject to end of list
+  if (bIndex == 0) return true;   // wrong b element: reject to end of list
 
   return aIndex < bIndex;
 }
@@ -10657,7 +10667,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
           timeSignatureItem =
             timeSignatureItemsVector [0]; // the only element;
 
-        // fetch the time signature item beat numbers std::vector
+        // fetch the time signature item beat numbers vector
         const std::vector<int>&
           beatsNumbersVector =
             timeSignatureItem->
@@ -10689,13 +10699,13 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
         fOutputStream <<
           "\\compoundMeter #`(";
 
-        // handle all the time signature items in the std::vector
+        // handle all the time signature items in the vector
         for (int i = 0; i < timesItemsNumber; ++i) {
           S_msrTimeSignatureItem
             timeSignatureItem =
               timeSignatureItemsVector [i];
 
-          // fetch the time signature item beat numbers std::vector
+          // fetch the time signature item beat numbers vector
           const std::vector<int>&
             beatsNumbersVector =
               timeSignatureItem->
@@ -10708,7 +10718,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
           fOutputStream <<
             "(";
 
-          // then generate all beats numbers in the std::vector
+          // then generate all beats numbers in the vector
           for (int j = 0; j < beatsNumbersNumber; ++j) {
             fOutputStream <<
               beatsNumbersVector [j] <<
@@ -10742,7 +10752,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
           gGlobalServiceRunData->getInputSourceName (),
           elt->getInputLineNumber (),
           __FILE__, __LINE__,
-          "time signature items std::vector is empty");
+          "time signature items vector is empty");
       }
     }
   }

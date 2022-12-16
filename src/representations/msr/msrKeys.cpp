@@ -518,7 +518,7 @@ void msrKey::appendHumdrumScotKeyItem (
     fKeyItemsOctavesAreSpecified = true;
   }
 
-  // append the item to the std::vector
+  // append the item to the vector
   fHumdrumScotKeyItemsVector.insert (
     fHumdrumScotKeyItemsVector.end (), item);
 }

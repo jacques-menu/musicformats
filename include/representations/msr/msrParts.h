@@ -207,7 +207,7 @@ class EXP msrPart : public msrPartGroupElement
     S_msrVoice            getPartFiguredBassVoice () const
                               { return fPartFiguredBassVoice; }
 
-    // staves std::map
+    // staves map
 
     const std::map<int, S_msrStaff>&
                           getPartStaveNumbersToStavesMap () const

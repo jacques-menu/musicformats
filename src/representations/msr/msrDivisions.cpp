@@ -236,7 +236,7 @@ void msrDivisions::printDurationKindsDivisions (std::ostream& os)
 
   else
     os <<
-      "an empty std::list";
+      "an empty list";
 
   os << std::endl;
 
@@ -298,7 +298,7 @@ std::string msrDivisions::divisionsAsMsrString (
     }
 
     if ((*i).second <= divisions) {
-      // found base duration in std::list
+      // found base duration in list
       baseDurationKind      = (*i).first;
       baseDurationDivisions = (*i).second;
 
@@ -334,7 +334,7 @@ std::string msrDivisions::divisionsAsMsrString (
   if (divisions > baseDurationDivisions) {
     // divisions is not a power of 2 of a quarter note
 
-    // the next element in the std::list is half as long as (*i)
+    // the next element in the list is half as long as (*i)
     int remainingDivisions =
       divisions - baseDurationDivisions;
     int nextDivisionsInList =
@@ -388,7 +388,7 @@ std::string msrDivisions::divisionsAsMsrString (
     }
 
     else {
-      dotsNumber = 1; // account for next element in the std::list
+      dotsNumber = 1; // account for next element in the list
 
       while (remainingDivisions > nextDivisionsInList) {
         ++dotsNumber;
