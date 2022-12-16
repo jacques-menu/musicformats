@@ -365,7 +365,7 @@ Compiling {\tt HelloWorld.msdl} to \mxml, we get:
 
 Compiling {\tt HelloWorld.msdl} to Guido, we get:
 \begin{lstlisting}[language=Guido]
-{[ \staff<1> \std::set<autoHideTiedAccidentals="on"> \title<""> \barFormat<style= "system", range="1"> \bar<hidden="true"> \beamsOff c0/2.. \beamsOff d2/8 ]
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<""> \barFormat<style= "system", range="1"> \bar<hidden="true"> \beamsOff c0/2.. \beamsOff d2/8 ]
   }
 \end{lstlisting}
 
@@ -486,7 +486,7 @@ The language-dependent keywords leads to a recursive descent parser, since {\tt 
 
 The \msdLangConv\ uses a variant of the \MainIt{stopper sets} method that was present in the early Pascal and Pascal-S converters. The latter passed a set of tokens not to be overtaken to the procedures in charge of accepting the various statements in the language. Strangely enough, this was not done for declarations.
 
-We use a std::stack of tokens sets that grows and shrinks in parallel with the accepting functions\index{functions}, to know more contextual informations when deciding wether to consume a token or not. The corresponding term is {it shift}
+We use a stack of tokens sets that grows and shrinks in parallel with the accepting functions\index{functions}, to know more contextual informations when deciding wether to consume a token or not. The corresponding term is {it shift}
 when building the analysis tables in LR technology.
 
 

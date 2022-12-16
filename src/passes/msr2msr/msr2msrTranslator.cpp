@@ -310,7 +310,7 @@ void msr2msrTranslator::displayOnGoingNotesStack (
   gLogStream <<
     std::endl <<
     ">>++++++++++++++++ " <<
-    "The on-going notes std::stack contains " <<
+    "The on-going notes stack contains " <<
     onGoingNotesStackSize <<
     " elements" <<
     " (" << context << "):" <<
@@ -697,7 +697,7 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
 #endif
 
   // create a partGroup clone
-  // current partGroup clone, i.e. the top of the std::stack,
+  // current partGroup clone, i.e. the top of the stack,
   // is the upLink of the new one if it exists
   S_msrPartGroup
     partGroupClone =
@@ -707,14 +707,14 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
           : nullptr,
         fResultingNewMsrScore);
 
-  // push it onto this visitors's std::stack,
+  // push it onto this visitors's stack,
   // making it the current partGroup
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Pushing part group clone " <<
       partGroupClone->getPartGroupCombinedName () <<
-      " onto std::stack" <<
+      " onto stack" <<
       std::endl;
   }
 #endif
@@ -735,14 +735,14 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
   }
 #endif
 
-  // fetch the current part group at the top of the std::stack
+  // fetch the current part group at the top of the stack
   S_msrPartGroup
     currentPartGroup =
       fPartGroupsStack.top ();
 
   if (fPartGroupsStack.size () == 1) {
     // add the current partgroup clone to the MSR score clone
-    // since it's alone in the std::stack
+    // since it's alone in the stack
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
@@ -767,13 +767,13 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
         currentPartGroup);
   }
 
-  // pop current partGroup from this visitors's std::stack
+  // pop current partGroup from this visitors's stack
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Popping part group clone " <<
       fPartGroupsStack.top ()->getPartGroupCombinedName () <<
-      " from std::stack" <<
+      " from stack" <<
       std::endl;
   }
 #endif
@@ -1092,6 +1092,16 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
   }
 #endif
 
+#ifdef TRACING_IS_ENABLED
+  if (true || gGlobalTracingOahGroup->getTraceVoices ()) {
+    gLogStream <<
+      std::endl <<
+      "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
+      ", line " << elt->getInputLineNumber () << " ===-->" <<
+      std::endl;
+  }
+#endif
+
   fCurrentVoiceOriginal = elt;
 
   ++gIndenter;
@@ -1178,7 +1188,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
       break;
   } // switch
 
-  // clear the voice notes std::map
+  // clear the voice notes map
   fVoiceNotesMap.clear ();
 
   fFirstNoteCloneInVoice = nullptr;
@@ -1996,13 +2006,13 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
         fCurrentNonGraceNoteClone);
 
 //     if (gGlobalMsr2msrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) { JMI ???
-//       // get the syllable texts std::list
+//       // get the syllable texts list
 //       const std::list<std::string>&
 //         syllableTextsList =
 //           elt->getSyllableTextsList ();
 //
 //       if (syllableTextsList.size ()) {
-//         // build a single words value from the texts std::list
+//         // build a single words value from the texts list
 //         // JMI create an msrWords instance for each???
 //         std::string wordsValue =
 //           elt->syllableTextsListAsString();
@@ -3898,7 +3908,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
         createNoteNewbornClone (
           fCurrentPartClone);
 
-  // register clone in this tranlastors' voice notes std::map and ongoing notes std::stack
+  // register clone in this tranlastors' voice notes map and ongoing notes stack
   fVoiceNotesMap [elt] = noteClone; // JMI XXL
   fOnGoingNotesStack.push_front (noteClone);
 
@@ -4809,7 +4819,7 @@ void msr2msrTranslator::visitStart (S_msrTuplet& elt)
     gLogStream <<
       "++> pushing tuplet '" <<
       tupletClone->asString () <<
-      "' to tuplets std::stack" <<
+      "' to tuplets stack" <<
       std::endl;
   }
 #endif
@@ -4833,7 +4843,7 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
     gLogStream <<
       "Popping tuplet '" <<
       elt->asString () <<
-      "' from tuplets std::stack" <<
+      "' from tuplets stack" <<
       std::endl;
   }
 #endif
@@ -4847,7 +4857,7 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
       gLogStream <<
         "Adding nested tuplet '" <<
       elt->asString () <<
-        "' to std::stack top tuplet '" <<
+        "' to stack top tuplet '" <<
       fTupletClonesStack.top ()->asString () <<
       "'" <<
       std::endl;
@@ -5014,7 +5024,7 @@ void msr2msrTranslator::visitStart (S_msrDalSegno& elt)
         measurePosition);
 */
 
-  // register it in the hidden measure and barLine descr std::list
+  // register it in the hidden measure and barLine descr list
   fPartHiddenMeasureAndBarLineDescrList.push_back (
     msrHiddenMeasureAndBarLineDescr::create (
       inputLineNumber,
@@ -5857,7 +5867,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //     else {
 //       std::string wordsContents = elt->getWordsContents ();
 //
-//       // is this words contents in the std::string to dal segno kind std::map?
+//       // is this words contents in the std::string to dal segno kind map?
 //       const std::map<std::string, msrDalSegno::msrDalSegnoKind>&
 //         converStringToDalSegnoMap =
 //           gGlobalMsr2msrOahGroup->

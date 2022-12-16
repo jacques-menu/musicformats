@@ -627,7 +627,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       */
   }
 
-  // is this voice number already in the regular voices std::map?
+  // is this voice number already in the regular voices map?
   std::map<int, S_msrVoice>::const_iterator
     it =
       fStaffVoiceNumbersToRegularVoicesMap.find (voiceNumber);
@@ -788,7 +788,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering voice \"" << voice->getVoiceName () <<
-      "\" in all voices std::list of staff " << fStaffName <<
+      "\" in all voices list of staff " << fStaffName <<
       std::endl;
   }
 #endif
@@ -804,7 +804,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
         s <<
           "Voice \"" <<
           knownVoice->getVoiceName () <<
-          "\" is already present in the staff's all voices std::list";
+          "\" is already present in the staff's all voices list";
 
         gLogStream <<
           std::endl <<
@@ -830,7 +830,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
         s <<
           "A voice with the same name as \"" <<
           knownVoice->getVoiceName () <<
-          "\" is already present in the staff's all voices std::list";
+          "\" is already present in the staff's all voices list";
 
         gLogStream <<
           std::endl <<
@@ -852,7 +852,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
     } // for
   }
 
-  // register voice in this staff's 'all voices' std::list
+  // register voice in this staff's 'all voices' list
   fStaffAllVoicesList.push_back (voice);
 
   // register it in the part uplink
@@ -882,13 +882,13 @@ void msrStaff::registerVoiceByItsNumber (
 
   ++gIndenter;
 
-  // register it in the 'all voices' std::list
+  // register it in the 'all voices' list
   registerVoiceInStaffAllVoicesList (voice); // JMI v0.9.63 NASTY bug???
 
-  // register voice in the 'numbers to all voices' std::map
+  // register voice in the 'numbers to all voices' map
   fStaffVoiceNumbersToAllVoicesMap [voiceNumber] = voice;
 
-  // sort the all voices std::list if necessary
+  // sort the all voices list if necessary
   switch (voice->getVoiceKind ()) {
     case msrVoiceKind::kVoiceKindRegular:
       // set regularVoice staff sequential number
@@ -896,10 +896,10 @@ void msrStaff::registerVoiceByItsNumber (
         setRegularVoiceStaffSequentialNumber (
           fStaffRegularVoicesCounter);
 
-      // register it in 'regular voices' std::list
+      // register it in 'regular voices' list
       fStaffRegularVoicesList.push_back (voice);
 
-      // register voice in the 'numbers to regular voices' std::map
+      // register voice in the 'numbers to regular voices' map
       fStaffVoiceNumbersToRegularVoicesMap [voiceNumber] = voice;
       break;
 
@@ -960,7 +960,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
       regularVoice->asShortString () <<
       " by it's number '" << voiceNumber <<
       "\" in staff " << fStaffName <<
-      "'s regular voices std::list with sequential number '" <<
+      "'s regular voices list with sequential number '" <<
       fStaffRegularVoicesCounter <<
       "'" <<
       std::endl;
@@ -976,7 +976,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
         s <<
           "Voice \"" <<
           knownVoice->getVoiceName () <<
-          "\" is already present in the staff's all voices std::list";
+          "\" is already present in the staff's all voices list";
 
         gLogStream <<
           std::endl <<
@@ -1002,7 +1002,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
         s <<
           "A voice with the same name as \"" <<
           knownVoice->getVoiceName () <<
-          "\" is already present in the staff's all voices std::list";
+          "\" is already present in the staff's all voices list";
 
         gLogStream <<
           std::endl <<
@@ -1098,7 +1098,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
   }
 #endif
 
-  // search std::list ??? JMI
+  // search list ??? JMI
   for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
 #ifdef TRACING_IS_ENABLED
     int        number = thePair.first;
@@ -2688,7 +2688,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
     gLogStream <<
       "Collecting measures from the staff voices into staff \"" <<
       fStaffName <<
-      "s measures flat std::list std::vector" <<
+      "'s measures flat list vector" <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -3174,7 +3174,7 @@ void msrStaff::printFull (std::ostream& os) const
   }
 #endif
 
-  // print the staff 'all voices' std::list
+  // print the staff 'all voices' list
   os << std::left <<
     std::setw (fieldWidth) <<
     "Voice names in fStaffAllVoicesList" << ": ";
@@ -3194,7 +3194,7 @@ void msrStaff::printFull (std::ostream& os) const
     os << "[EMPTY]" << std::endl;
   }
 
-  // print the staff 'regular voices' std::list
+  // print the staff 'regular voices' list
   os << std::left <<
     std::setw (fieldWidth) <<
     "Voice names in fStaffRegularVoicesList" << ": ";
@@ -3241,7 +3241,7 @@ void msrStaff::printFull (std::ostream& os) const
 
   os << std::endl;
 
-  // print the staff 'voice numbers to all voices' std::map
+  // print the staff 'voice numbers to all voices' map
   os << std::left <<
     std::setw (fieldWidth) <<
     "fStaffVoiceNumbersToAllVoicesMap" << ": ";
@@ -3286,7 +3286,7 @@ void msrStaff::printFull (std::ostream& os) const
     os << "[EMPTY]" << std::endl;
   }
 
-  // print the staff 'voice numbers to regular voices' std::map
+  // print the staff 'voice numbers to regular voices' map
   os << std::left <<
     std::setw (fieldWidth) <<
     "fStaffVoiceNumbersToRegularVoicesMap" << ": ";
@@ -3334,7 +3334,7 @@ void msrStaff::printFull (std::ostream& os) const
 
   os << std::endl;
 
-  // print the staff measures flat std::list std::vector
+  // print the staff measures flat list vector
   size_t staffMeasuresFlatListsVectorSize =
     fStaffMeasuresFlatListsVector.size ();
 
@@ -3356,7 +3356,7 @@ void msrStaff::printFull (std::ostream& os) const
       const std::list<S_msrMeasure>&
         measuresList = (*i);
 
-      // print the measurs std::list
+      // print the measurs list
       if (staffMeasuresFlatListsVectorSize) {
         ++gIndenter;
 
@@ -3493,7 +3493,7 @@ void msrStaff::printSummary (std::ostream& os) const
 /* JMI
   if (fStaffTuningsList.size ()) {
     os <<
-      "fStaff tunings std::list:" <<
+      "fStaff tunings list:" <<
       std::endl;
 
     std::list<S_msrStaffTuning>::const_iterator

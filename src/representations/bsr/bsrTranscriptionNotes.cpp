@@ -10,7 +10,7 @@
 */
 
 #include <sstream>
-#include <iomanip> // for 'std::setw()'
+#include <iomanip> // for 'setw()'
 
 #include "visitor.h"
 

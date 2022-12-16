@@ -98,7 +98,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the keywords languages std::map?
+  // is it in the keywords languages map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -113,7 +113,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
       gGlobalMsdlKeywordsLanguageKindsMap.find (theString);
 
   if (it == gGlobalMsdlKeywordsLanguageKindsMap.end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     std::stringstream s;
 
     s <<
@@ -330,14 +330,14 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
   std::ostream&      os)
 {
   // theString contains the language name:
-  // is it in the keywords languages std::map?
+  // is it in the keywords languages map?
 
   std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
       gGlobalMsdlKeywordsLanguageKindsMap.find (theString);
 
   if (it == gGlobalMsdlKeywordsLanguageKindsMap.end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     std::stringstream s;
 
     s <<
@@ -542,14 +542,14 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
   std::ostream&      os)
 {
   // theString contains the language name:
-  // is it in the keywords languages std::map?
+  // is it in the keywords languages map?
 
   std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
       gGlobalMsdlKeywordsLanguageKindsMap.find (theString);
 
   if (it == gGlobalMsdlKeywordsLanguageKindsMap.end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     std::stringstream s;
 
     s <<
@@ -761,7 +761,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the keywords languages std::map?
+  // is it in the keywords languages map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -776,7 +776,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
       gGlobalMsdlCommentsTypeKindsMap.find (theString);
 
   if (it == gGlobalMsdlCommentsTypeKindsMap.end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     std::stringstream s;
 
     s <<
@@ -1001,7 +1001,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the User languages std::map?
+  // is it in the User languages map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1017,7 +1017,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
         theString);
 
   if (it == gGlobalMsdlUserLanguageKindsMap.end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
 
     std::stringstream s;
 
@@ -1246,7 +1246,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the pitches languages std::map?
+  // is it in the pitches languages map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1262,7 +1262,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
         theString);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
 
     std::stringstream s;
 
@@ -1648,13 +1648,13 @@ void msdlInputOahGroup::initializeMsdlInputOahGroup (
 //______________________________________________________________________________
 Bool msdlInputOahGroup::setMsdlKeywordsLanguage (std::string language)
 {
-  // is language in the keywords languages std::map?
+  // is language in the keywords languages map?
   std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
       gGlobalMsdlKeywordsLanguageKindsMap.find (language);
 
   if (it == gGlobalMsdlKeywordsLanguageKindsMap.end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     return false;
   }
 
@@ -1666,13 +1666,13 @@ Bool msdlInputOahGroup::setMsdlKeywordsLanguage (std::string language)
 //______________________________________________________________________________
 Bool msdlInputOahGroup::setMsdlQuarterTonesPitchesLanguage (std::string language)
 {
-  // is language in the note names languages std::map?
+  // is language in the note names languages map?
   std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     return false;
   }
 

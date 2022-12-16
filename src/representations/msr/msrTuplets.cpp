@@ -315,10 +315,11 @@ void msrTuplet::appendNoteToTuplet (
 //     setMeasureElementUpLinkToMeasure (
 //       fTupletUpLinkToMeasure);
 
-  // account for note duration in tuplet duration
+  // account for note duration in tuplet sounding duration
   fMeasureElementSoundingWholeNotes +=
     note->getMeasureElementSoundingWholeNotes ();
 
+  // account for note duration in tuplet displaly duration
   fTupletDisplayWholeNotes += // JMI
     note->getNoteDisplayWholeNotes ();
 
@@ -331,15 +332,15 @@ void msrTuplet::appendNoteToTuplet (
     registerShortestNoteInVoiceIfRelevant (note);
 
   // fetch voice last measure
-  S_msrMeasure
-    voiceLastMeasure =
-      voice->fetchVoiceLastMeasure (
-        inputLineNumber);
-
-  // account for the duration of note in voice last measure
-  voiceLastMeasure->
-    accountForTupletMemberNoteDurationInMeasure (
-      note);
+//   S_msrMeasure
+//     voiceLastMeasure =
+//       voice->fetchVoiceLastMeasure (
+//         inputLineNumber);
+//
+//   // account for the duration of note in voice last measure
+//   voiceLastMeasure->
+//     accountForTupletMemberNoteDurationInMeasure (
+//       note);
 
   --gIndenter;
 }
@@ -942,18 +943,28 @@ std::string msrTuplet::asString () const
     fTupletFactor.asString () <<
     ' ' << fMeasureElementSoundingWholeNotes << " tupletSoundingWholeNotes" <<
     ", measure ' " <<
-    ", line " << fInputLineNumber <<
-    fTupletUpLinkToMeasure->getMeasureNumber () <<
-    "':";
+    ", line " << fInputLineNumber;
 
+  s <<
+    ", getMeasureNumber: ";
+  if (fTupletUpLinkToMeasure) {
+    s <<
+      fTupletUpLinkToMeasure->getMeasureNumber ();
+  }
+  else {
+    s << "[UNKNOWN]";
+  }
+
+  s <<
+    ", fMeasureElementMeasurePosition: ";
   if (fMeasureElementMeasurePosition.getNumerator () < 0) {
-    s << "?";
+    s << "???";
   }
   else {
     s << fMeasureElementMeasurePosition;
   }
 
-  s << "[[";
+  s << '[';
 
   if (fTupletElementsList.size ()) {
     std::list<S_msrTupletElement>::const_iterator
@@ -997,7 +1008,7 @@ std::string msrTuplet::asString () const
     } // for
   }
 
-  s << "]]" << ']';
+  s << ']' << ']';
 
   return s.str ();
 }
@@ -1178,6 +1189,7 @@ void msrTuplet::print (std::ostream& os) const
     fTupletDisplayWholeNotes <<
     std::endl <<
 
+    std::setw (fieldWidth) <<
     "fMemberNotesSoundingWholeNotes" << ": " <<
     fMemberNotesSoundingWholeNotes <<
     std::endl <<
@@ -1193,16 +1205,19 @@ void msrTuplet::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fTupletNumber" << ": " <<
     fTupletNumber <<
-    std::endl <<
+    std::endl;
 
+  os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletMeasureNumber" << ": " <<
-    fTupletUpLinkToMeasure->getMeasureNumber () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition <<
-    std::endl << std::endl;
+    "fTupletMeasureNumber" << ": ";
+    if (fTupletUpLinkToMeasure) {
+      os <<
+        fTupletUpLinkToMeasure->getMeasureNumber ();
+    }
+    else {
+      os << "[UNKNOWN]";
+    }
+  os << std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<

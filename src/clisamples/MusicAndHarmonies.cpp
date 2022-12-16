@@ -211,7 +211,7 @@ static Sxmlelement makePart (int count) {
 }
 
 //------------------------------------------------------------------------
-// creates the part std::list element
+// creates the part list element
 //------------------------------------------------------------------------
 static Sxmlelement makePartList() {
   Sxmlelement partlist = factory::instance().create(k_part_list);

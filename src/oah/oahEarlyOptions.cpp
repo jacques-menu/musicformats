@@ -538,7 +538,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
         ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
-        " in handler arguments std::vector for " <<
+        " in handler arguments vector for " <<
         gGlobalServiceRunData->getServiceName () <<
         ":" <<
         std::endl;

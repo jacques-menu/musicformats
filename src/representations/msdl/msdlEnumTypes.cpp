@@ -88,7 +88,7 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const std::string& theStrin
         theString);
 
   if (it == gGlobalMsdlUserLanguageKindsMap.end ()) {
-    // no, User language kind is unknown in the std::map
+    // no, User language kind is unknown in the map
     std::stringstream s;
 
     s <<
@@ -180,7 +180,7 @@ msdlCommentsTypeKind msdlCommentsTypeKindFromString (const std::string& theStrin
         theString);
 
   if (it == gGlobalMsdlCommentsTypeKindsMap.end ()) {
-    // no, keywords language kind is unknown in the std::map
+    // no, keywords language kind is unknown in the map
     std::stringstream s;
 
     s <<

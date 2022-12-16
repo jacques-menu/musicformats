@@ -10,7 +10,7 @@
 */
 
 #include <iostream>
-#include <iomanip>  // for std::setw()
+#include <iomanip>  // for setw()
 #include <cstdlib>  // for stod()
 
 #include "mfServiceRunData.h"
@@ -129,7 +129,7 @@ msdlScanner::msdlScanner (std::istream& inputStream)
   fKeywordsInputLanguageKind =
     gGlobalMsdl2msrOahGroup->getMsdlKeywordsInputLanguageKind ();
 
-  // tokens std::list
+  // tokens list
   fAppendTokensToList = false;
 
   // warnings and errors
@@ -696,7 +696,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
   }
 #endif
 
-  // should the current token be appended to the tokens std::list?
+  // should the current token be appended to the tokens list?
   if (fAppendTokensToList) {
     fTokensList.appendTokenToTokensList (fCurrentToken);
   }

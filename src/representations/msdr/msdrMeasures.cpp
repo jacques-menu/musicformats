@@ -337,7 +337,7 @@ void msdrMeasure::print (std::ostream& os) const
   const int fieldWidth = 41;
 
 #ifdef TRACING_IS_ENABLED
-  // print the voice measures flat std::list
+  // print the voice measures flat list
   size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();
 

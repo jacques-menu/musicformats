@@ -2182,7 +2182,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 
   // sanity check
   if (! fCurrentPart) {
-    // fetch fMsrScore's part std::list
+    // fetch fMsrScore's part list
     std::list<S_msrPart> partsList;
 
     fMsrScore->
@@ -2191,7 +2191,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
         partsList);
 
     if (partsList.size () == 1) {
-      // there's only one part in the part std::list,
+      // there's only one part in the part list,
       // assume this is the one
       fCurrentPart =
         partsList.front ();
@@ -2205,7 +2205,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
       s <<
         "part 'id' is empty, using '" <<
         partID <<
-        "' since it is the only part in the <part-std::list />";
+        "' since it is the only part in the <part-list />";
 
       mxsr2msrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -2265,7 +2265,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   // cross staff chords
   fCurrentNoteIsCrossStaves = false; // needed ??? JMI
 
-  // get this part's staves std::map
+  // get this part's staves map
   std::map<int, S_msrStaff>
     partStavesMap =
       fCurrentPart->
@@ -2871,7 +2871,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
       s.str ());
   }
 
-  // is this clef sign in the replace clef std::map?
+  // is this clef sign in the replace clef map?
   const std::map<msrClefKind, msrClefKind>&
     replaceClefKindToClefKindMapVariable =
       gGlobalMxsr2msrOahGroup->
@@ -3107,7 +3107,7 @@ void mxsr2msrTranslator::visitStart (S_key_step& elt)
     setKeyItemDiatonicPitchKind (
       keyDiatonicPitchKind);
 
-  // insert it into the items std::vector
+  // insert it into the items vector
   fCurrentHumdrumScotKeyItemsVector.
     insert (
       fCurrentHumdrumScotKeyItemsVector.end (),
@@ -3197,7 +3197,7 @@ If the cancel attribute is
   by the cancel element. It is no by default.
 */
 
-  // fetch Humdrum/Scot item with 'number' in the std::vector
+  // fetch Humdrum/Scot item with 'number' in the vector
   S_msrHumdrumScotKeyItem item;
 
   try {
@@ -3545,7 +3545,7 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
 
   int beatType = (int)(*elt);
 
-  // extract the numbers std::list from the beat type
+  // extract the numbers list from the beat type
   std::list<int>
     beatNumbers =
       mfExtractNumbersFromString (
@@ -3583,7 +3583,7 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
       "beat type doesn't contain any beats numbers");
   }
 
-  // append the time signature item to the current time signature items std::vector
+  // append the time signature item to the current time signature items vector
   fCurrentTimeSignatureItemsVector.insert (
     fCurrentTimeSignatureItemsVector.end (),
     timeSignatureItem);
@@ -4233,7 +4233,7 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
         fPendingWordsList.pop_front();
       } // while
 
-      // append the tempo to the pending tempos std::list
+      // append the tempo to the pending tempos list
       fPendingTemposList.push_back (fCurrentMetronomeTempo);
 
       fCurrentMetronomeTempo = nullptr;
@@ -4568,7 +4568,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
     }
 #endif
 
-  // append the octave shift to the pending octave shifts std::list
+  // append the octave shift to the pending octave shifts list
   fPendingOctaveShiftsList.push_back (octaveShift);
 }
 
@@ -4853,7 +4853,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       }
 #endif
 
-      // append the rehearsalMark to the pending tempos std::list
+      // append the rehearsalMark to the pending tempos list
       fPendingRehearsalMarksList.push_back (rehearsalMark);
 
       wordsHasBeenHandled = true;
@@ -4888,7 +4888,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       }
 #endif
 
-      // append dal segno to the pending tempos std::list
+      // append dal segno to the pending tempos list
       fPendingSegnosList.push_back (segno);
 
       wordsHasBeenHandled = true;
@@ -5032,7 +5032,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       }
 #endif
 
-      // append it to the pending codas std::list
+      // append it to the pending codas list
       fPendingCodasList.push_back (coda);
 
       wordsHasBeenHandled = true;
@@ -5070,7 +5070,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       }
 #endif
 
-      // append it to the pending codas std::list
+      // append it to the pending codas list
       fPendingCodasList.push_back (coda);
 
       wordsHasBeenHandled = true;
@@ -5116,7 +5116,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
             inputLineNumber,
             msrCrescDecrescKind::kCrescDecrescCrescendo);
 
-      // append the rehearsalMark to the pending tempos std::list
+      // append the rehearsalMark to the pending tempos list
       fPendinCrescDecrescsList.push_back (crescDecresc);
 
       wordsHasBeenHandled = true;
@@ -5162,7 +5162,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
             inputLineNumber,
             msrCrescDecrescKind::kCrescDecrescDecrescendo);
 
-      // append the rehearsalMark to the pending tempos std::list
+      // append the rehearsalMark to the pending tempos list
       fPendinCrescDecrescsList.push_back (crescDecresc);
 
       wordsHasBeenHandled = true;
@@ -5462,7 +5462,7 @@ void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
 
   // there can be several <beat-unit/> in a <metronome/> markup,
   if (fCurrentMetronomeBeatUnitsVector.size () < 2) {
-    // register beat unit in in dotted durations std::list
+    // register beat unit in in dotted durations list
     fCurrentMetronomeBeatUnitsVector.push_back (
       msrDottedDuration (
         beatUnitDurationKind,
@@ -6207,14 +6207,14 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       fCurrentMetronomeTempo->
         appendWordsToTempo (words);
 
-       // remove it from the std::list
+       // remove it from the list
       fPendingWordsList.pop_front ();
     } // while
   }
 
 /* if (true) { // JMI
 */
-  // append the tempo to the pending tempos std::list
+  // append the tempo to the pending tempos list
   fPendingTemposList.push_back (fCurrentMetronomeTempo);
   /*
 }
@@ -6812,6 +6812,16 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
   }
 #endif
 
+#ifdef TRACING_IS_ENABLED
+  if (true || gGlobalTracingOahGroup->getTraceVoices ()) {
+    gLogStream <<
+      std::endl <<
+      "<!--=== voice \"" << "elt->getVoiceName ()" << "\"" <<
+      ", line " << elt->getInputLineNumber () << " ===-->" <<
+      std::endl;
+  }
+#endif
+
   fCurrentMusicXMLVoiceNumber = int(*elt);
 
   // the voice number can be out of 1..4 range
@@ -7105,7 +7115,7 @@ void mxsr2msrTranslator::displaySlurStartsStack (
   gLogStream <<
     std::endl <<
     ">>++++++++++++++++ " <<
-    "The slurs starts std::stack contains:" <<
+    "The slurs starts stack contains:" <<
     std::endl;
 
   if (fSlurStartsStack.size ()) {
@@ -7139,7 +7149,7 @@ void mxsr2msrTranslator::displayTupletsStack (
   gLogStream <<
     std::endl <<
     ">>++++++++++++++++ " <<
-    "The tuplets std::stack contains " << tupletsStackSize << " elements:" <<
+    "The tuplets stack contains " << tupletsStackSize << " elements:" <<
     std::endl;
 
   if (tupletsStackSize) {
@@ -7256,7 +7266,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
               fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStart;
 
   /* JMI BUGGED?
-              // the std::stack top is in fact a phrasing slur start
+              // the stack top is in fact a phrasing slur start
   #ifdef TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceSlurs ()) {
                 gLogStream <<
@@ -7295,14 +7305,14 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
       }
 
       else if (fCurrentSlurType == "continue") {
-        // the current slur continue kind depends on that of the std::stack's top
+        // the current slur continue kind depends on that of the stack's top
         switch (fSlurStartsStack.front ()->getSlurTypeKind ()) {
           case msrSlurTypeKind::kSlurTypeRegularStart:
             fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularContinue;
             break;
 
           case msrSlurTypeKind::kSlurTypePhrasingStart:
-            // the std::stack top is in fact a phrasing slur start
+            // the stack top is in fact a phrasing slur start
             fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypePhrasingContinue;
             break;
 
@@ -7333,19 +7343,19 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
             // the current slur stop is regular
             fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
 
-            // pop the top element off the std::stack
+            // pop the top element off the stack
             fSlurStartsStack.pop_front ();
             break;
     */
           case 2:
-            // the current slur stop kind depends on that of the std::stack's top
+            // the current slur stop kind depends on that of the stack's top
             switch (fSlurStartsStack.front ()->getSlurTypeKind ()) {
               case msrSlurTypeKind::kSlurTypeRegularStart:
                 fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
                 break;
 
               case msrSlurTypeKind::kSlurTypePhrasingStart:
-                // the std::stack top is in fact a phrasing slur start
+                // the stack top is in fact a phrasing slur start
   #ifdef TRACING_IS_ENABLED
                 if (gGlobalTracingOahGroup->getTraceSlurs ()) {
                   gLogStream <<
@@ -7362,7 +7372,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
                 ; // should not occur
             } // switch
 
-            // pop the top element off the std::stack
+            // pop the top element off the stack
             fSlurStartsStack.pop_front ();
             break;
 
@@ -7452,7 +7462,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt)
 
       fPendingSlursList.push_back (slur);
 
-      // push slurs starts onto the std::stack
+      // push slurs starts onto the stack
       switch (fCurrentSlurTypeKind) {
         case msrSlurTypeKind::kSlurTypeRegularStart:
         case msrSlurTypeKind::kSlurTypePhrasingStart:
@@ -7611,7 +7621,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
         ligatureLineTypeKind,
         fCurrentDirectionPlacementKind);
 
-  // append it to the pending ligatures std::list
+  // append it to the pending ligatures list
   fPendingLigaturesList.push_back (ligature);
 
   switch (fCurrentLigatureKind) {
@@ -8059,7 +8069,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 
   // color JMI
 
-  // there can be several <text/>'s and <elision/> in a row, hence the std::list
+  // there can be several <text/>'s and <elision/> in a row, hence the list
   fCurrentLyricTextsList.push_back (textValue);
 
 #ifdef TRACING_IS_ENABLED
@@ -8129,7 +8139,7 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
 
   // color JMI
 
-  // there can be several <text/>'s and <elision/> in a row, hence the std::list
+  // there can be several <text/>'s and <elision/> in a row, hence the list
   fCurrentLyricTextsList.push_back (elisionValue);
 
   fCurrentStanzaHasText = true;
@@ -8514,7 +8524,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     // will be called in handleLyrics(),
     // after the note has been created
 
-    // append syllable to current note's syllables std::list
+    // append syllable to current note's syllables list
     fCurrentNoteSyllables.push_back (
       syllable);
 
@@ -8878,7 +8888,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
           fCurrentMeasureNumber);
 
     if (it != addEmptyMeasuresStringToIntMap.end ()) {
-      // fCurrentMeasureNumber is present in the std::map,
+      // fCurrentMeasureNumber is present in the map,
       // fetch the number of empty measures to add
       std::stringstream s;
 
@@ -9435,7 +9445,7 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
           inputLineNumber,
           fCurrentDirectionStaffNumber);
 
-    // append it to the pending segnos std::list
+    // append it to the pending segnos list
     fPendingSegnosList.push_back (segno);
   }
 
@@ -9508,7 +9518,7 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
           fCurrentDirectionStaffNumber,
           codaKind);
 
-    // append it to the pending codas std::list
+    // append it to the pending codas list
     fPendingCodasList.push_back (coda);
   }
 
@@ -9551,7 +9561,7 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
         msrEyeGlasses::create (
           inputLineNumber);
 
-    // append it to the pending eyeglasses std::list
+    // append it to the pending eyeglasses list
     fPendingEyeGlassesList.push_back (eyeGlasses);
   }
 
@@ -9680,7 +9690,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
         pedalSignKind);
 
   if (fOnGoingDirectionType) {
-    // append it to the pending pedals std::list
+    // append it to the pending pedals list
     fPendingPedalsList.push_back (pedal);
   }
   else {
@@ -11088,7 +11098,7 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
     std::stringstream s;
 
     s <<
-      "stem \"" << fCurrentBeamValue <<
+      "stem \"" << stem <<
       "\" is unknown";
 
     mxsr2msrError (
@@ -11158,7 +11168,7 @@ void mxsr2msrTranslator::visitStart (S_beam& elt)
   // number
 
   fCurrentBeamNumber =
-    elt->getAttributeIntValue ("number", 0);
+    elt->getAttributeIntValue ("number", 1); // default value
 
   S_msrBeam
     beam =
@@ -16146,7 +16156,7 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
 
   /*
     // there can be several <beat-unit/> in a <metronome/> markup,
-    // register beat unit in in dotted durations std::list
+    // register beat unit in in dotted durations list
     fCurrentMetronomeBeatUnitsVector.push_back (
       msrDottedDuration (
         fCurrentNoteNormalTypeDuration,
@@ -16721,7 +16731,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
     gLogStream <<
       "Appending glissando '" <<
       glissando->asString () <<
-      "' to the glissandos pending std::list" <<
+      "' to the glissandos pending list" <<
       std::endl;
   }
 #endif
@@ -16835,7 +16845,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
     gLogStream <<
       "Appending slide '" <<
       slide->asString () <<
-      "' to the slides pending std::list" <<
+      "' to the slides pending list" <<
       std::endl;
   }
 #endif
@@ -18388,7 +18398,7 @@ void mxsr2msrTranslator::copyNoteElementsToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
+void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
   const S_msrNote& firstNote)
 {
   // firstNote is the first tuplet note,
@@ -18445,7 +18455,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
         fCurrentStaffNumberToInsertInto, // fCurrentMusicXMLStaffNumber,
         fCurrentMusicXMLVoiceNumber);
 
-  // add note as first note of the std::stack top tuplet
+  // add note as first note of the stack top tuplet
   tuplet->
     appendNoteToTuplet (
       firstNote,
@@ -18458,9 +18468,8 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
       "Adding first note " <<
       firstNote->
         asShortString () <<
-      " to tuplet '" <<
+      " to tuplet " <<
       tuplet->asString () <<
-       "'" <<
       std::endl;
   }
 #endif
@@ -18478,7 +18487,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
     gLogStream <<
       "++> pushing tuplet '" <<
       tuplet->asString () <<
-      "' to tuplets std::stack" <<
+      "' to tuplets stack" <<
       std::endl;
   }
 #endif
@@ -18488,7 +18497,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
-      "############## createTupletWithItsFirstNoteAndPushItToTupletsStack() 1");
+      "############## createAndPushTupletUponItsFirstNote() 1");
   }
 #endif
 
@@ -18518,7 +18527,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTupletsDetails ()) {
     displayLastHandledTupletInVoiceMap (
-      "############## createTupletWithItsFirstNoteAndPushItToTupletsStack() 2");
+      "############## createAndPushTupletUponItsFirstNote() 2");
   }
 #endif
 }
@@ -18539,7 +18548,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
-      "############## Before  finalizeTupletAndPopItFromTupletsStack()");
+      "############## Before finalizeTupletAndPopItFromTupletsStack()");
   }
 #endif
 
@@ -18551,25 +18560,25 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
         fCurrentStaffNumberToInsertInto, // fCurrentMusicXMLStaffNumber ??? JMI
         fCurrentMusicXMLVoiceNumber);
 
-  // get tuplet from top of tuplet std::stack
+  // get tuplet from top of tuplet stack
   S_msrTuplet
     tuplet =
       fTupletsStack.front ();
 
-/*  // set note displayed divisions JMI
+/*  // set note displayed divisions JMI v0.9.66
   note->
     applyTupletMemberDisplayFactor (
       fCurrentNoteActualNotes,
       fCurrentNoteNormalNotes);
 */
 
-/* JMI
+/* JMI v0.9.66
   // add lastNote to the tuplet
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "==> adding last note " << lastNote->asString () <<
-      " to tuplets std::stack top " <<
+      " to tuplets stack top " <<
       fTupletsStack.front ()->asString () <<
       std::endl;
   }
@@ -18578,7 +18587,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
   tuplet->appendNoteToTuplet (lastNote);
 */
 
-  // pop from the tuplets std::stack
+  // pop from the tuplets stack
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
@@ -18589,7 +18598,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
       tuplet;
     --gIndenter;
     gLogStream <<
-      " from tuplets std::stack" <<
+      " from tuplets stack" <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -18604,7 +18613,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
       gLogStream <<
         "=== adding nested tuplet '" <<
       tuplet->asString () <<
-        "' to current std::stack top tuplet '" <<
+        "' to current stack top tuplet '" <<
       fTupletsStack.front ()->asString () <<
       "'" <<
       ", line " << inputLineNumber <<
@@ -18996,7 +19005,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
       }
     } // while
 
-    // append delayed stop spanner if any again to the std::list
+    // append delayed stop spanner if any again to the list
     if (delayedStopSpanner) {
       fCurrentSpannersList.push_back (
         delayedStopSpanner);
@@ -19309,7 +19318,7 @@ void mxsr2msrTranslator::attachLineBreaksToVoice (
       voice->
         appendLineBreakToVoice (lineBreak);
 
-      // remove it from the std::list
+      // remove it from the list
       fPendingLineBreaksList.pop_front ();
     } // while
   }
@@ -19339,7 +19348,7 @@ void mxsr2msrTranslator::attachLineBreaksToPart (
       part->
         appendLineBreakToPart (lineBreak);
 
-      // remove it from the std::list
+      // remove it from the list
       fPendingLineBreaksList.pop_front ();
     } // while
   }
@@ -19369,7 +19378,7 @@ void mxsr2msrTranslator::attachPageBreaksToVoice (
       voice->
         appendPageBreakToVoice (pageBreak);
 
-      // remove it from the std::list
+      // remove it from the list
       fPendingPageBreaksList.pop_front ();
     } // while
   }
@@ -19399,7 +19408,7 @@ void mxsr2msrTranslator::attachPageBreaksToPart (
       part->
         appendPageBreakToPart (pageBreak);
 
-      // remove it from the std::list
+      // remove it from the list
       fPendingPageBreaksList.pop_front ();
     } // while
   }
@@ -20435,7 +20444,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                 fCurrentStaffNumberToInsertInto, // JMI fCurrentMusicXMLStaffNumber,
                 fCurrentMusicXMLVoiceNumber);
 
-          // get the voice's stanzas std::map
+          // get the voice's stanzas map
           const std::map<std::string, S_msrStanza>&
             voiceStanzasMap =
               voice->
@@ -20487,7 +20496,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                       fCurrentNoteSoundingWholeNotesFromDuration,
                       stanza);
 
-                // append syllable to current note's syllables std::list
+                // append syllable to current note's syllables list
                 fCurrentNoteSyllables.push_back (
                   syllable);
 
@@ -20550,7 +20559,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                 fCurrentStaffNumberToInsertInto, // JMI fCurrentMusicXMLStaffNumber,
                 fCurrentMusicXMLVoiceNumber);
 
-          // get the voice's stanzas std::map
+          // get the voice's stanzas map
           const std::map<std::string, S_msrStanza>&
             voiceStanzasMap =
               voice->
@@ -20602,7 +20611,7 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                       fCurrentNoteSoundingWholeNotesFromDuration,
                       stanza);
 
-                // append syllable to current note's syllables std::list
+                // append syllable to current note's syllables list
                 fCurrentNoteSyllables.push_back (
                   syllable);
 
@@ -21906,7 +21915,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
   // CAUTION JMI v0.9.66
   // permuted the order of populateNote() and handleNoteItself()
-  // to have newNote's harmonies std::list already populated if relevant
+  // to have newNote's harmonies list already populated if relevant
   // when newNote is appended to the voice,
   // so as to compute the harmonies positions in the measure.
 
@@ -22019,7 +22028,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     harmony->
       setHarmonyUpLinkToNote (newNote);
 
-    // append the harmony to newNote's harmonies std::list
+    // append the harmony to newNote's harmonies list
     newNote->
       appendHarmonyToNoteHarmoniesList (
         harmony);
@@ -22051,7 +22060,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     // don't append the harmony to the part harmonies voice,
     // this will be done when the note itself is appended to the voice
 
-    // remove the harmony from the std::list
+    // remove the harmony from the list
     fPendingHarmoniesList.pop_front ();
   } // while
 }
@@ -22158,7 +22167,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
     // don't append the figured bass to the part figured bass voice
     // before the note itself has been appended to the voice
 
-    // remove the figured bass from the std::list
+    // remove the figured bass from the list
     fPendingFiguredBassesList.pop_front ();
   } // while
 }
@@ -22677,7 +22686,7 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
       if (
         ! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)
       ) {
-        // get the current voice's stanzas std::map
+        // get the current voice's stanzas map
         const std::map<std::string, S_msrStanza>&
           voiceStanzasMap =
             currentVoice->
@@ -23324,7 +23333,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         */
 
         // create the tuplet
-        createTupletWithItsFirstNoteAndPushItToTupletsStack (
+        createAndPushTupletUponItsFirstNote (
           note);
 
         // swith to continuation mode
@@ -23341,14 +23350,14 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             currentTuplet =
               fTupletsStack.front ();
 
-          // populate the tuplet at the top of the std::stack
+          // populate the tuplet at the top of the stack
 #ifdef TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceTuplets ()) {
             gLogStream <<
               "--> kTupletTypeContinue: adding tuplet member note '" <<
               note->
                 asShortString () <<
-              "' to std::stack top tuplet '" <<
+              "' to stack top tuplet '" <<
               currentTuplet->asString () <<
               "', line " << inputLineNumber <<
               std::endl;
@@ -23394,7 +23403,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             "tuplet member note " <<
             note->
               asShortString () <<
-            " cannot be added, tuplets std::stack is empty";
+            " cannot be added, tuplets stack is empty";
 
           mxsr2msrInternalError (
             gGlobalServiceRunData->getInputSourceName (),
@@ -23418,7 +23427,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                 "tuplet member note " <<
                 note->
                   asShortString () <<
-                " cannot be added, tuplets std::stack is empty";
+                " cannot be added, tuplets stack is empty";
 
               mxsr2msrInternalError (
                 gGlobalServiceRunData->getInputSourceName (),
@@ -23436,14 +23445,14 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                 currentTuplet =
                   fTupletsStack.front ();
 
-              // populate the tuplet at the top of the std::stack
+              // populate the tuplet at the top of the stack
 #ifdef TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceTuplets ()) {
                 gLogStream <<
                   "--> kTupletTypeStop: adding outer-most tuplet member note " <<
                   note->
                     asShortString () <<
-                  "' to std::stack top tuplet '" <<
+                  "' to stack top tuplet '" <<
                   currentTuplet->asString () <<
                   ", line " << inputLineNumber <<
                   std::endl;
@@ -23504,7 +23513,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
               }
     //*/
 
-              // don't pop the inner-most tuplet from the std::stack yet
+              // don't pop the inner-most tuplet from the stack yet
 
         //      fCurrentATupletStopIsPending = true;
             }
@@ -23541,14 +23550,14 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
                 currentTuplet =
                   fTupletsStack.front ();
 
-              // populate the tuplet at the top of the std::stack
+              // populate the tuplet at the top of the stack
 #ifdef TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceTuplets ()) {
                 gLogStream <<
                   "--> kTupletTypeStop: adding nested tuplet member note " <<
                   note->
                     asShortString () <<
-                  "' to std::stack top tuplet '" <<
+                  "' to stack top tuplet '" <<
                   currentTuplet->asString () <<
                   ", line " << inputLineNumber <<
                   std::endl;
@@ -23626,7 +23635,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         }
 
         // create the tuplet
-        createTupletWithItsFirstNoteAndPushItToTupletsStack (
+        createAndPushTupletUponItsFirstNote (
           note);
 
         // the tuplet stop is not to be handled later
@@ -23710,7 +23719,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
   if (! fOnGoingChord) {
     // this is the second note of the chord to be created,
 
-    // fetch the current tuplet, i.e. the top of the std::stack
+    // fetch the current tuplet, i.e. the top of the stack
     S_msrTuplet currentTuplet;
 
     /* JMI
@@ -23725,7 +23734,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         "handleNoteBelongingToAChordInATuplet():" <<
         std::endl <<
         " a tuplet member chord " <<
-        "cannot be added, tuplets std::stack is empty";
+        "cannot be added, tuplets stack is empty";
 
       mxsr2msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -23795,7 +23804,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       gLogStream <<
         "Adding chord '" <<
         fCurrentChord->asString () <<
-        "' to std::stack top tuplet '" <<
+        "' to stack top tuplet '" <<
         currentTuplet->asString () <<
         "', line " << inputLineNumber <<
         std::endl;
@@ -23991,7 +24000,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
         "handleNoteBelongingToAChordInGraceNotes():" <<
         std::endl <<
         "tuplet member chord " << chord->asString () <<
-        "cannot be added, tuplets std::stack is empty";
+        "cannot be added, tuplets stack is empty";
 
       mxsr2msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -24041,7 +24050,7 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
-      "Handling tuplets pending on tuplet std::stack" <<
+      "Handling tuplets pending on tuplet stack" <<
       ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
       ", fCurrentMusicXMLStaffNumber: " <<
@@ -24066,13 +24075,13 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
         fCurrentMusicXMLVoiceNumber);
 */
 
-  // handle tuplets pending on the tuplet std::stack
+  // handle tuplets pending on the tuplet stack
   while (fTupletsStack.size ()) {
     S_msrTuplet
       pendingTuplet =
         fTupletsStack.front ();
 
-    // finalize the tuplet, thus popping it off the std::stack
+    // finalize the tuplet, thus popping it off the stack
     finalizeTupletAndPopItFromTupletsStack (
       inputLineNumber);
   } // while
@@ -24446,7 +24455,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
         rehearsalValue,
         fCurrentDirectionPlacementKind);
 
-  // append the rehearsalMark to the pending tempos std::list
+  // append the rehearsalMark to the pending tempos list
   fPendingRehearsalMarksList.push_back (rehearsalMark);
 }
 
@@ -24727,10 +24736,10 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
   }
 */
 
-  // harmony use std::stack degrees
+  // harmony use stack degrees
   // ----------------------------------
 
-  std::string kindStackDegrees = elt->getAttributeValue ("std::stack-degrees");
+  std::string kindStackDegrees = elt->getAttributeValue ("stack-degrees");
 
 /* JMI
   if      (kindStackDegrees == "yes")
@@ -24742,7 +24751,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
       std::stringstream s;
 
       s <<
-        "kind std::stack-degrees " << kindStackDegrees <<
+        "kind stack-degrees " << kindStackDegrees <<
         "\" is unknown";
 
       mxsr2msrError (
@@ -25040,7 +25049,7 @@ void mxsr2msrTranslator::visitEnd (S_degree& elt)
         fCurrentHarmonyDegreeAlterationKind,
         fCurrentHarmonyDegreeTypeKind);
 
-  // register it in current harmony degrees std::list
+  // register it in current harmony degrees list
   fCurrentHarmonyDegreesList.push_back (
     harmonyDegree);
 }
@@ -25239,12 +25248,12 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
           setHarmonyDegreeUpLinkToHarmony (
             harmony);
 
-        // append it to harmony's degrees std::list
+        // append it to harmony's degrees list
         harmony->
           appendHarmonyDegreeToHarmony (
             harmonyDegree);
 
-        // remove it from the std::list
+        // remove it from the list
         fCurrentHarmonyDegreesList.pop_front ();
       } // while
     }
@@ -25254,7 +25263,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       harmony->setHarmonyFrame (fCurrentFrame);
     }
 
-    // append the harmony to the pending harmonies std::list
+    // append the harmony to the pending harmonies list
     fPendingHarmoniesList.push_back (harmony);
   }
 
@@ -25486,7 +25495,7 @@ void mxsr2msrTranslator::visitEnd (S_frame_note& elt)
         fCurrentFrameNoteFingering,
         fCurrentFrameNoteBarreTypeKind);
 
-  // append the frame note to the pending frame notes std::list
+  // append the frame note to the pending frame notes list
   fPendingFramesNotesList.push_back (frameNote);
 
   fOnGoingFrameNote = false;
@@ -25526,7 +25535,7 @@ void mxsr2msrTranslator::visitEnd (S_frame& elt)
       fCurrentFrame->
         appendFrameNoteToFrame (frameNote);
 
-      // remove it from the std::list
+      // remove it from the list
       fPendingFramesNotesList.pop_front ();
     } // while
   }
@@ -25773,7 +25782,7 @@ void mxsr2msrTranslator::visitEnd (S_figure& elt)
         fCurrentFigureNumber,
         fCurrentFigureSuffixKind);
 
-  // append it to the pending figures std::list
+  // append it to the pending figures list
   fPendingFiguredBassFiguresList.push_back (
     bassFigure);
 }
@@ -26086,7 +26095,7 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
         msrDamp::create (
           inputLineNumber);
 
-    // append it to the pending damps std::list
+    // append it to the pending damps list
     fPendingDampsList.push_back (damp);
   }
 }
@@ -26120,7 +26129,7 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
         msrDampAll::create (
           inputLineNumber);
 
-    // append it to the pending damp alls std::list
+    // append it to the pending damp alls list
     fPendingDampAllsList.push_back (dampAll);
   }
 }
@@ -26342,7 +26351,7 @@ void mxsr2msrTranslator::visitEnd (S_scordatura& elt)
   }
 #endif
 
-  // append the current scordatura to the pending scordatura std::list
+  // append the current scordatura to the pending scordatura list
   fPendingScordaturasList.push_back (fCurrentScordatura);
 
   // forget about this scordatura
@@ -26677,7 +26686,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       }
 //     #endif
 //
-//       // append the rehearsalMark to the pending tempos std::list
+//       // append the rehearsalMark to the pending tempos list
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
@@ -26711,7 +26720,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       }
 //     #endif
 //
-//       // append dal segno to the pending tempos std::list
+//       // append dal segno to the pending tempos list
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
@@ -26742,7 +26751,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //   }
 // #endif
 //
-//   // append dal segno al fine to the pending tempos std::list
+//   // append dal segno al fine to the pending tempos list
 //   fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
@@ -26776,7 +26785,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //   }
 // #endif
 //
-//   // append dal segno al coda to the pending tempos std::list
+//   // append dal segno al coda to the pending tempos list
 //   fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 // void mxsr2msrTranslator::convertWordsToCoda (
@@ -26809,7 +26818,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       }
 //     #endif
 //
-//       // append coda to the pending tempos std::list
+//       // append coda to the pending tempos list
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
@@ -26843,7 +26852,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       }
 //     #endif
 //
-//       // append the rehearsalMark to the pending tempos std::list
+//       // append the rehearsalMark to the pending tempos list
 //       fPendinCrescDecrescsList.push_back (crescDecresc);
 // }
 // void mxsr2msrTranslator::convertWordsToDecresc (
@@ -26876,7 +26885,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       }
 //     #endif
 //
-//       // append the rehearsalMark to the pending tempos std::list
+//       // append the rehearsalMark to the pending tempos list
 //       fPendinCrescDecrescsList.push_back (crescDecresc);
 // }
 

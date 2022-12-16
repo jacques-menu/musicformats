@@ -10,7 +10,7 @@
 */
 
 #include <climits>      // INT_MIN, INT_MAX
-#include <iomanip>      // for 'std::setw()'
+#include <iomanip>      // for 'setw()'
 
 #include "visitor.h"
 

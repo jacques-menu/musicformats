@@ -97,7 +97,7 @@ The formats supported by \mf\ are:
 {Format} & {Description} \tabularnewline[0.5ex]
 \hline\\[-3.0ex]
 %
-\mxml\ & a text containg markups such as \musicXmlMarkup{part-std::list}, \musicXmlMarkup{time} and \musicXmlMarkup{note};
+\mxml\ & a text containg markups such as \musicXmlMarkup{part-list}, \musicXmlMarkup{time} and \musicXmlMarkup{note};
 \tabularnewline
 
 \guido\ & a text containg markups such as {\tt $\backslash$barFormat}, {\tt $\backslash$tempo} and {\tt $\backslash$crescEnd};
@@ -117,7 +117,7 @@ Jianpu \lily\ & a text containg \lily\ commands and the use of \lilyJianpu\ (\ur
 \msdlLang\ & a text describing a score in the \msdlLang\ language.
 \tabularnewline
 
-%\midi\ & binary data containg markups such as \musicXmlMarkup{part-std::list}, \musicXmlMarkup{time} and \musicXmlMarkup{note};
+%\midi\ & binary data containg markups such as \musicXmlMarkup{part-list}, \musicXmlMarkup{time} and \musicXmlMarkup{note};
 %\tabularnewline
 
 \end{longtable}
@@ -141,7 +141,7 @@ The representations used by \mf\ are:
 MSR & Music Score Representation, in terms of part groups, parts, staves, voices, notes, etc. This is the heart of the multi-format converters provided by \mf;
 \tabularnewline
 
-\mxsrRepr & a tree representing the \mxml\ markups such as \musicXmlMarkup{part-std::list}, \musicXmlMarkup{time} and \musicXmlMarkup{note};
+\mxsrRepr & a tree representing the \mxml\ markups such as \musicXmlMarkup{part-list}, \musicXmlMarkup{time} and \musicXmlMarkup{note};
 \tabularnewline
 
 LPSR & LilyPond Score Representation, i.e. MSR plus LilyPond-specific items such as {\tt $\backslash$score} blocks;
@@ -266,14 +266,14 @@ jacquesmenu@macmini > MusicAndHarmonies | more
             <software>MusicFormats Library's MusicAndHarmonies generator</software>
         </encoding>
     </identification>
-    <part-std::list>
+    <part-list>
         <score-part id="P1">
             <part-name>Part name</part-name>
             <score-instrument id="I1">
                 <instrument-name>Any instr.</instrument-name>
             </score-instrument>
         </score-part>
-    </part-std::list>
+    </part-list>
     <part id="P1">
         <measure number="1">
             <attributes>

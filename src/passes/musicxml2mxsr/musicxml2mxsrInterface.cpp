@@ -13,7 +13,7 @@
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 #include <regex>
 
-#include <iomanip> // for std::setw()
+#include <iomanip> // for setw()
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -128,7 +128,7 @@ std::string uncompressMXLFile (
   // JMI
 #else
   {
-    // build shell command to std::list the contents of the uncompress file
+    // build shell command to list the contents of the uncompress file
     std::stringstream s1;
 
     s1 <<
@@ -163,7 +163,7 @@ std::string uncompressMXLFile (
       std::stringstream s;
 
       s <<
-        "Cannot std::list the contents of compressed file '" <<
+        "Cannot list the contents of compressed file '" <<
         mxlFileName <<
         "' with 'popen ()'";
 
@@ -177,7 +177,7 @@ std::string uncompressMXLFile (
     else {
       std::string contentsList;
 
-      // read the std::list from inputStream
+      // read the list from inputStream
       char tampon [1024];
 
       while (
@@ -216,7 +216,7 @@ std::string uncompressMXLFile (
 
       --gIndenter;
 
-      // analyze the contents std::list
+      // analyze the contents list
       std::list<std::string> linesList;
 
       std::istringstream inputStream (contentsList);

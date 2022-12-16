@@ -3,10 +3,10 @@
 (make-music
  'SequentialMusic
  'elements
- (std::list (make-music
+ (list (make-music
         'KeyChangeEvent
         'pitch-alist
-        (std::list (cons 5 0)
+        (list (cons 5 0)
               (cons 6 0)
               (cons 0 1/2)
               (cons 1 0)
@@ -15,7 +15,7 @@
               (cons 4 1/2))
         'tonic
         (ly:make-pitch -1 5))
-       
+
        (make-music
         'ContextSpeccedMusic
         'context-type
@@ -28,10 +28,10 @@
          'grob-value
          'numbered
          'grob-property-path
-         (std::list (quote style))
+         (list (quote style))
          'symbol
          'TimeSignature))
-       
+
        (make-music
         'TimeSignatureMusic
         'beat-structure
@@ -40,7 +40,7 @@
         4
         'numerator
         2)
-       
+
        (make-music
         'ContextSpeccedMusic
         'context-type
@@ -49,7 +49,7 @@
         (make-music
          'SequentialMusic
          'elements
-         (std::list (make-music
+         (list (make-music
                 'PropertySet
                 'value
                 "clefs.G"
@@ -83,21 +83,21 @@
                 'ApplyContext
                 'procedure
                 ly:set-middle-C!))))
-       
+
        (make-music
         'GraceMusic
         'element
         (make-music
          'SequentialMusic
          'elements
-         (std::list (make-music
+         (list (make-music
                 'SequentialMusic
                 'elements
                 '())
                (make-music
                 'SequentialMusic
                 'elements
-                (std::list (make-music
+                (list (make-music
                        'SkipEvent
                        'duration
                        (ly:make-duration 4))
@@ -113,7 +113,7 @@
                 'SequentialMusic
                 'elements
                 '()))))
-       
+
        (make-music
         'ContextSpeccedMusic
         'context-type
@@ -126,19 +126,19 @@
          'grob-value
          1
          'grob-property-path
-         (std::list (quote direction))
+         (list (quote direction))
          'symbol
          'Stem))
-       
+
        (make-music
         'NoteEvent
         'duration
         (ly:make-duration 1)
         'pitch
         (ly:make-pitch 2 0 1/2))
-       
+
        (make-music (quote BarCheck))
-       
+
        (make-music
         'ApplyContext
         'procedure
@@ -150,10 +150,10 @@
 (make-music
  'SequentialMusic
  'elements
- (std::list (make-music
+ (list (make-music
         'KeyChangeEvent
         'pitch-alist
-        (std::list (cons 5 0)
+        (list (cons 5 0)
               (cons 6 0)
               (cons 0 1/2)
               (cons 1 0)
@@ -162,7 +162,7 @@
               (cons 4 1/2))
         'tonic
         (ly:make-pitch -1 5))
-       
+
        (make-music
         'ContextSpeccedMusic
         'context-type
@@ -175,10 +175,10 @@
          'grob-value
          'numbered
          'grob-property-path
-         (std::list (quote style))
+         (list (quote style))
          'symbol
          'TimeSignature))
-       
+
        (make-music
         'TimeSignatureMusic
         'beat-structure
@@ -187,7 +187,7 @@
         4
         'numerator
         2)
-       
+
        (make-music
         'ContextSpeccedMusic
         'context-type
@@ -196,7 +196,7 @@
         (make-music
          'SequentialMusic
          'elements
-         (std::list (make-music
+         (list (make-music
                 'PropertySet
                 'value
                 "clefs.G"
@@ -230,21 +230,21 @@
                 'ApplyContext
                 'procedure
                 ly:set-middle-C!))))
-       
+
        (make-music
         'GraceMusic
         'element
         (make-music
          'SequentialMusic
          'elements
-         (std::list (make-music
+         (list (make-music
                 'SequentialMusic
                 'elements
                 '())
                (make-music
                 'SequentialMusic
                 'elements
-                (std::list (make-music
+                (list (make-music
                        'SkipEvent
                        'duration
                        (ly:make-duration 4))
@@ -260,11 +260,11 @@
                 'SequentialMusic
                 'elements
                 '()))))
-       
+
        (make-music
         'SequentialMusic
         'elements
-        (std::list (make-music
+        (list (make-music
                'ContextSpeccedMusic
                'context-type
                'Bottom
@@ -272,7 +272,7 @@
                (make-music
                 'RevertProperty
                 'grob-property-path
-                (std::list (quote stencil))
+                (list (quote stencil))
                 'symbol
                 'Arpeggio))
               (make-music
@@ -283,7 +283,7 @@
                (make-music
                 'RevertProperty
                 'grob-property-path
-                (std::list (quote X-extent))
+                (list (quote X-extent))
                 'symbol
                 'Arpeggio))
               (make-music
@@ -294,7 +294,7 @@
                (make-music
                 'RevertProperty
                 'grob-property-path
-                (std::list (quote arpeggio-direction))
+                (list (quote arpeggio-direction))
                 'symbol
                 'Arpeggio))
               (make-music
@@ -305,10 +305,10 @@
                (make-music
                 'RevertProperty
                 'grob-property-path
-                (std::list (quote dash-definition))
+                (list (quote dash-definition))
                 'symbol
                 'Arpeggio))))
-       
+
        (make-music
         'ContextSpeccedMusic
         'context-type
@@ -321,14 +321,14 @@
          'grob-value
          -1
          'grob-property-path
-         (std::list (quote direction))
+         (list (quote direction))
          'symbol
          'Stem))
-       
+
        (make-music
         'EventChord
         'elements
-        (std::list (make-music
+        (list (make-music
                'NoteEvent
                'duration
                (ly:make-duration 2)
@@ -347,7 +347,7 @@
                'pitch
                (ly:make-pitch 1 5))
               (make-music (quote ArpeggioEvent))))
-       
+
        (make-music
         'SkipEvent
         'duration
@@ -362,10 +362,10 @@
 (make-music
  'SequentialMusic
  'elements
- (std::list (make-music
+ (list (make-music
         'KeyChangeEvent
         'pitch-alist
-        (std::list (cons 5 0)
+        (list (cons 5 0)
               (cons 6 0)
               (cons 0 1/2)
               (cons 1 0)
@@ -374,7 +374,7 @@
               (cons 4 1/2))
         'tonic
         (ly:make-pitch -1 5))
-       
+
        (make-music
         'ContextSpeccedMusic
         'context-type
@@ -387,10 +387,10 @@
          'grob-value
          'numbered
          'grob-property-path
-         (std::list (quote style))
+         (list (quote style))
          'symbol
          'TimeSignature))
-       
+
        (make-music
         'TimeSignatureMusic
         'beat-structure
@@ -399,7 +399,7 @@
         4
         'numerator
         2)
-       
+
        (make-music
         'ContextSpeccedMusic
         'context-type
@@ -408,7 +408,7 @@
         (make-music
          'SequentialMusic
          'elements
-         (std::list (make-music
+         (list (make-music
                 'PropertySet
                 'value
                 "clefs.F"
@@ -442,21 +442,21 @@
                 'ApplyContext
                 'procedure
                 ly:set-middle-C!))))
-       
+
        (make-music
         'GraceMusic
         'element
         (make-music
          'SequentialMusic
          'elements
-         (std::list (make-music
+         (list (make-music
                 'SequentialMusic
                 'elements
                 '())
                (make-music
                 'SequentialMusic
                 'elements
-                (std::list (make-music
+                (list (make-music
                        'ContextSpeccedMusic
                        'context-type
                        'Bottom
@@ -468,7 +468,7 @@
                         'grob-value
                         1
                         'grob-property-path
-                        (std::list (quote direction))
+                        (list (quote direction))
                         'symbol
                         'Stem))
                       (make-music
@@ -483,13 +483,13 @@
                         'grob-value
                         1
                         'grob-property-path
-                        (std::list (quote direction))
+                        (list (quote direction))
                         'symbol
                         'Slur))
                       (make-music
                        'NoteEvent
                        'articulations
-                       (std::list (make-music
+                       (list (make-music
                               'BeamEvent
                               'span-direction
                               -1)
@@ -510,7 +510,7 @@
                       (make-music
                        'NoteEvent
                        'articulations
-                       (std::list (make-music
+                       (list (make-music
                               'BeamEvent
                               'span-direction
                               1))
@@ -522,7 +522,7 @@
                 'SequentialMusic
                 'elements
                 '()))))
-       
+
        (make-music
         'ContextSpeccedMusic
         'context-type
@@ -535,14 +535,14 @@
          'grob-value
          -1
          'grob-property-path
-         (std::list (quote direction))
+         (list (quote direction))
          'symbol
          'Stem))
-       
+
        (make-music
         'NoteEvent
         'articulations
-        (std::list (make-music
+        (list (make-music
                'BeamEvent
                'span-direction
                -1)
@@ -554,25 +554,25 @@
         (ly:make-duration 3)
         'pitch
         (ly:make-pitch -1 5))
-       
+
        (make-music
         'NoteEvent
         'pitch
         (ly:make-pitch -1 4)
         'duration
         (ly:make-duration 3))
-       
+
        (make-music
         'NoteEvent
         'pitch
         (ly:make-pitch -1 3)
         'duration
         (ly:make-duration 3))
-       
+
        (make-music
         'NoteEvent
         'articulations
-        (std::list (make-music
+        (list (make-music
                'BeamEvent
                'span-direction
                1))
@@ -580,7 +580,7 @@
         (ly:make-duration 3)
         'pitch
         (ly:make-pitch -1 2))
-       
+
        (make-music (quote BarCheck))
        (make-music
         'ApplyContext

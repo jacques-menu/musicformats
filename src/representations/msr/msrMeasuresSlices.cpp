@@ -409,7 +409,7 @@ if (true) // JMI
   size_t otherSliceSize = otherSlice->getSliceSize ();
 
   if (otherSliceSize) {
-    // get the other slices std::vector
+    // get the other slices vector
     const std::vector<S_msrMeasure>&
       otherMeasuresVector =
         otherSlice->
@@ -452,7 +452,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
     ++gIndenter;
 
-    // append the measure's notes to the slices sequence notes flat std::list
+    // append the measure's notes to the slices sequence notes flat list
     for (
       std::list<S_msrNote>::const_iterator i = measureNotesFlatList.begin ();
       i != measureNotesFlatList.end ();
@@ -488,10 +488,10 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
             note->
               getMeasureElementMeasurePosition ();
 
-        // append note to the slice notes flat std::list
+        // append note to the slice notes flat list
         fSliceNotesFlatList.push_back (note);
 
-        // append a note start event to the slice notes events std::list
+        // append a note start event to the slice notes events list
         S_msrNoteEvent
           noteStartEvent =
             msrNoteEvent::create (
@@ -501,7 +501,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
         fSliceNoteEventsList.push_back (noteStartEvent);
 
-        // append a note stop event to the slice notes events std::list
+        // append a note stop event to the slice notes events list
         Rational
           noteEndMeasurePosition =
             noteMeasurePosition
@@ -523,18 +523,18 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
     --gIndenter;
   } // for
 
-  // sort the slice notes flat std::list by measure position
+  // sort the slice notes flat list by measure position
   fSliceNotesFlatList.sort (
     msrNote::compareNotesByIncreasingMeasurePosition);
 
-  // sort the slice notes events std::list by measure position
+  // sort the slice notes events list by measure position
   fSliceNoteEventsList.sort (
     msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition);
 
-  // build the simultaneous notes chunks std::list
+  // build the simultaneous notes chunks list
   buildTheSimutaneousNotesChunksList ();
 
-  // identify the solo notes and rests in measusre slice
+  // identify the solo notes and rests in measure slice
   identifySoloNotesAndRestsInMeasuresSlice ();
 }
 
@@ -543,7 +543,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
-      "Building the simultaneous notes chunks std::list in " <<
+      "Building the simultaneous notes chunks list in " <<
       asShortStringForMeasuresSlices () <<
       std::endl;
   }
@@ -573,7 +573,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
         msrSimultaneousNotesChunk::create (
           noteEventMeasurePosition);
 
-      // append it to the simultaneous notes chunks std::list
+      // append it to the simultaneous notes chunks list
       fSliceSimultaneousNotesChunksList.push_back (
         currentSimultaneousNotesChunk);
 
@@ -912,7 +912,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
     "fSliceMeasureNumber: " << fSliceMeasureNumber <<
     std::endl;
 
-  // print the slice measures std::vector
+  // print the slice measures vector
   if (sliceMeasuresVectorSize) {
     os <<
       "fSliceMeasuresVector: " <<
@@ -943,7 +943,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
     --gIndenter;
   }
 
-  // print the slice notes flat std::list
+  // print the slice notes flat list
   size_t sliceNotesFlatListSize =
     fSliceNotesFlatList.size ();
 
@@ -975,7 +975,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
     --gIndenter;
   }
 
-  // print the slice notes events std::list
+  // print the slice notes events list
   size_t sliceNoteEventsListSize =
     fSliceNoteEventsList.size ();
 
@@ -1007,7 +1007,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
     --gIndenter;
   }
 
-  // print the simultaneous notes chunks std::list
+  // print the simultaneous notes chunks list
   size_t sliceSimultaneousNotesChunksListSize =
     fSliceSimultaneousNotesChunksList.size ();
 
@@ -1250,7 +1250,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       if (sequenceSize) {
         // the two measures slices sequences have the same non null size
 
-        // get the other sequence's measures slices std::vector
+        // get the other sequence's measures slices vector
         const std::vector<S_msrMeasuresSlice>&
           otherMeasuresSlicesVector =
             otherMeasuresSlicesSequence->

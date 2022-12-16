@@ -294,7 +294,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   }
 #endif
 
-  // don't check partGroupClone against 0, since the partGroup std::stack JMI
+  // don't check partGroupClone against 0, since the partGroup stack JMI
   // that it comes from may be empty
 /* JMI
   // sanity check

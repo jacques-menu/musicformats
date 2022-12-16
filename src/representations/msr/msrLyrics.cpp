@@ -389,7 +389,7 @@ void msrSyllable::appendLyricTextToSyllable (const std::string& text)
     gLogStream <<
       "Appending text \"" <<
       text <<
-      "\" to the texts std::list of syllable '" <<
+      "\" to the texts list of syllable '" <<
       asString () <<
       "'" <<
       std::endl;

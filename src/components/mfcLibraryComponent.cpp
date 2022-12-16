@@ -77,7 +77,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
-    // populate the library's representations std::list
+    // populate the library's representations list
     pLibraryComponent->
       appendRepresentationToMultiComponent (
         createMsrRepresentationComponent ());
@@ -91,7 +91,7 @@ S_mfcLibraryComponent createLibraryComponent ()
       appendRepresentationToMultiComponent (
         createMxsrRepresentationComponent ());
 
-    // populate the library's passes std::list
+    // populate the library's passes list
     pLibraryComponent->
       appendPassToMultiComponent (
         createMsr2msrComponent ());
@@ -125,7 +125,7 @@ S_mfcLibraryComponent createLibraryComponent ()
       appendPassToMultiComponent (
         createMxsr2guidoComponent ());
 
-    // populate the library's converters std::list
+    // populate the library's converters list
     pLibraryComponent->
       appendConverterToMultiComponent (
         createMusicxml2lilypondConverterComponent ());
@@ -261,7 +261,7 @@ S_mfcLibraryComponent createLibraryComponent ()
           "December 12, 2021",
           std::list<std::string> {
             "Finalized MusicXML data encoding check against UTF-8",
-            "Added a std::list of the converters to the library component",
+            "Added a list of the converters to the library component",
             "Redistributed WAE files in the code base",
             "Added the ' -mf-version, -mfv' and '-mf-history, -mfhist' options",
             "Finalized early options handling"

@@ -41,7 +41,7 @@ namespace MusicFormats
 struct lpsrRepeatDescr : public smartable
 {
 /*
- * positions represent the order in which the parts appear in <part-std::list />
+ * positions represent the order in which the parts appear in <part-list />
 */
 
   public:

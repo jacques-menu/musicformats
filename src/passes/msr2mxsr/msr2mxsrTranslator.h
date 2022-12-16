@@ -710,7 +710,7 @@ class EXP msr2mxsrTranslator :
 
     std::list<Sxmlelement>         fPendingScoreCreditElementsList;
 
-    // part std::list
+    // part list
     // ------------------------------------------------------
 
     Sxmlelement               fScorePartListElement;
@@ -754,8 +754,8 @@ class EXP msr2mxsrTranslator :
     // part groups
     // ------------------------------------------------------
 
-    // partGroup's can be nested, hence this std::stack
-    // the current partGroup is the top of the std::stack
+    // partGroup's can be nested, hence this stack
+    // the current partGroup is the top of the stack
     std::stack<Sxmlelement>        fPartGroupElementsStack;
 
     // parts

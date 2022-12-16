@@ -73,7 +73,7 @@ class   mfcVersionDescr : public smartable
 
     S_mfcVersionNumber    fVersionNumber;
     std::string           fVersionDate;
-    std::list<std::string>          
+    std::list<std::string>
                           fVersionDescriptionItems;
 };
 \end{lstlisting}
@@ -83,7 +83,7 @@ class   mfcVersionDescr : public smartable
 \section{Versions histories}\label{Versions histories}
 % -------------------------------------------------------------------------
 
-An instance of \className{mfcVersionsHistory} is essentially a std::list of \className{mfcVersionsHistory} instances:
+An instance of \className{mfcVersionsHistory} is essentially a list of \className{mfcVersionsHistory} instances:
 \begin{lstlisting}[language=CPlusPlus]
 class   mfcVersionsHistory : public smartable
 {
@@ -422,7 +422,7 @@ The conversion of \mxml\ to \mxsrRepr does not belong to \mf\, since it is provi
 
 In that case, the formats and passes components used by the multi-component should be created as well.
 
-For example, the formats and passes used by the \fileName{musicxml2braille} converter are appended to the atoms versions std::list in its history in \function{createMusicxml2brailleConverterComponent} in \\
+For example, the formats and passes used by the \fileName{musicxml2braille} converter are appended to the atoms versions list in its history in \function{createMusicxml2brailleConverterComponent} in \\
 \musicxmlToBraille{musicxml2brailleConverterComponent.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
@@ -468,7 +468,7 @@ S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
           }
       ));
 
-    // populate the converter's formats std::list
+    // populate the converter's formats list
     pConverterComponent->
       appendRepresentationToMultiComponent (
         createMxsrRepresentationComponent ());

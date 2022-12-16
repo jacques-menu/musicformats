@@ -780,7 +780,7 @@ std::list<int> mfExtractNumbersFromString (
           ++cursor;
         } // while
 
-        // append the number to the std::list
+        // append the number to the list
         foundNumbers.push_back (n);
       }
       else {
@@ -1318,7 +1318,7 @@ void mfSplitStringIntoChunks (
             currentPosition,
             chunkLength);
 
-      // append it to the chunks std::list
+      // append it to the chunks list
       chunksList.push_back (
         chunk);
 
@@ -1430,7 +1430,7 @@ void mfSplitRegularStringAtEndOfLines (
             currentPosition,
             chunkLength);
 
-      // append it to the chunks std::list
+      // append it to the chunks list
       chunksList.push_back (
         chunk);
 
@@ -1555,7 +1555,7 @@ void mfSplitHTMLStringContainingEndOfLines (
             currentPosition,
             chunkLength);
 
-      // append it to the chunks std::list
+      // append it to the chunks list
       chunksList.push_back (
         chunk);
 

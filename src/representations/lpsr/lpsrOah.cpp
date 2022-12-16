@@ -96,7 +96,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the pitches languages std::map?
+  // is it in the pitches languages map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -112,7 +112,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
         theString);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
 
     std::stringstream s;
 
@@ -338,7 +338,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the chords languages std::map?
+  // is it in the chords languages map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -353,7 +353,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
       gGlobalLpsrChordsLanguageKindsMap.find (theString);
 
   if (it == gGlobalLpsrChordsLanguageKindsMap.end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     std::stringstream s;
 
     s <<
@@ -647,7 +647,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   }
 #endif
 
-  // is this part name in the part renaming std::map?
+  // is this part name in the part renaming map?
   std::map<std::string, std::string>::iterator
     it =
       fStringToStringMapVariable.find (partName);
@@ -947,7 +947,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
 #endif
 
   // theString contains the language name:
-  // is it in the chords languages std::map?
+  // is it in the chords languages map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1945,13 +1945,13 @@ void lpsrOahGroup::initializeLpsrOahGroup ()
 //______________________________________________________________________________
 Bool lpsrOahGroup::setLpsrQuarterTonesPitchesLanguage (std::string language)
 {
-  // is language in the note names languages std::map?
+  // is language in the note names languages map?
   std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
   if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     return false;
   }
 
@@ -1963,13 +1963,13 @@ Bool lpsrOahGroup::setLpsrQuarterTonesPitchesLanguage (std::string language)
 //______________________________________________________________________________
 Bool lpsrOahGroup::setLpsrChordsLanguageKind (std::string language)
 {
-  // is language in the chords languages std::map?
+  // is language in the chords languages map?
   std::map<std::string, lpsrChordsLanguageKind>::const_iterator
     it =
       gGlobalLpsrChordsLanguageKindsMap.find (language);
 
   if (it == gGlobalLpsrChordsLanguageKindsMap.end ()) {
-    // no, language is unknown in the std::map
+    // no, language is unknown in the map
     return false;
   }
 

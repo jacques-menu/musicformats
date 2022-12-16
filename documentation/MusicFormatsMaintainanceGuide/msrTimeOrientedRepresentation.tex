@@ -6,8 +6,8 @@
 
 In order to represent the music according to simultaneous sounding time, MSR builds:
 \begin{itemize}
-\item a flat std::list of measures at the voice and staff levels;
-\item from this, a std::vector of measures slices at the voice, staff, part, part group and score levels.
+\item a flat list of measures at the voice and staff levels;
+\item from this, a vector of measures slices at the voice, staff, part, part group and score levels.
 \end{itemize}
 
 The source files are in \msrBoth{msrMeasuresSlices}.
@@ -47,7 +47,7 @@ class   msrNoteEvent : public smartable
 \section{Simultaneous notes chunks}
 % -------------------------------------------------------------------------
 
-Such a chunk is a set of notes or rests played simultaneously, i.e. that start and stop at the same time. The set is stored as a std::list actually:
+Such a chunk is a set of notes or rests played simultaneously, i.e. that start and stop at the same time. The set is stored as a list actually:
 \begin{lstlisting}[language=CPlusPlus]
 class   msrSimultaneousNotesChunk : public smartable
 {
@@ -86,14 +86,14 @@ class EXP msrMeasuresSlice : public smartable
     // the measures in the slice
     std::vector<S_msrMeasure>  fSliceMeasuresVector;
 
-    // notes flat std::list
+    // notes flat list
     std::list<S_msrNote>  fSliceNotesFlatList;
 
-    // note events std::list
+    // note events list
     std::list<S_msrNoteEvent>
                           fSliceNoteEventsList;
 
-    // simultaneous notes chunks std::list
+    // simultaneous notes chunks list
     std::list<S_msrSimultaneousNotesChunk>
                           fSliceSimultaneousNotesChunksList;
 };
@@ -105,7 +105,7 @@ class EXP msrMeasuresSlice : public smartable
 \section{Measures slices sequences}
 % -------------------------------------------------------------------------
 
-A \class{msrMeasuresSlicesSequence} contains a std::vector of {\tt S_msrMeasuresSlice} instances:
+A \class{msrMeasuresSlicesSequence} contains a vector of {\tt S_msrMeasuresSlice} instances:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP msrMeasuresSlicesSequence : public smartable
 {

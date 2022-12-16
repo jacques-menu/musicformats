@@ -624,7 +624,7 @@ void msrChord::addAnotherNoteToChord (
   // mark note as belonging to a chord
   note->setNoteBelongsToAChord ();
 
-  // append the note to the measure's notes flat std::list
+  // append the note to the measure's notes flat list
   if (false) // JMI v0.9.66
   fChordUpLinkToMeasure->
     appendNoteToMeasureNotesFlatList (note);
@@ -1561,7 +1561,7 @@ void msrChord::printFull (std::ostream& os) const
 
   os <<
     "[Chord" <<
-    ", chordKind: " << fChordKind <<
+    ", fChordKind: " << fChordKind <<
     ", " <<
     mfSingularOrPlural (
       fChordNotesVector.size (), "note", "notes") <<
@@ -1582,7 +1582,7 @@ void msrChord::printFull (std::ostream& os) const
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << ": " <<
+    "getMeasureNumber()" << ": " <<
     fChordUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
 //     std::setw (fieldWidth) <<
@@ -1621,25 +1621,6 @@ void msrChord::printFull (std::ostream& os) const
     "fPositionInTuplet" << ": " <<
     fPositionInTuplet <<
     std::endl;
-
-  // print simplified measure position if relevant
-// JMI  if (fChordUpLinkToMeasure) {
-    // the chord uplink to measure may not have been set yet
-    Rational
-      chordPositionBis =
-        fMeasureElementMeasurePosition;
-
-    if (
-      chordPositionBis.getNumerator ()
-        !=
-      fMeasureElementMeasurePosition.getNumerator ()
-    ) {
-      // print rationalised Rational view
-      os << std::left <<
-        std::setw (fieldWidth) <<
-        "chordPositionBis" << ": " << chordPositionBis <<
-        std::endl;
-    }
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -2380,11 +2361,21 @@ void msrChord::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
-    std::endl <<
+    std::endl;
+
+  os << std::left <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << ": " <<
-    fChordUpLinkToMeasure->getMeasureNumber () <<
-    std::endl <<
+    "measureElementMeasureNumber" << ": ";
+    if (fChordUpLinkToMeasure) {
+      os <<
+        fChordUpLinkToMeasure->getMeasureNumber ();
+    }
+    else {
+      os << "[UNKNOWN]";
+    }
+  os << std::endl;
+
+  os << std::left <<
     std::setw (fieldWidth) <<
     "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition <<
     std::endl <<

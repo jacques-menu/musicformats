@@ -1686,7 +1686,7 @@ msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString 
         theString);
 
   if (it == pQuarterTonesPitchesLanguageKindsMap.end ()) {
-    // no, Pitches language kind is unknown in the std::map
+    // no, Pitches language kind is unknown in the map
     std::stringstream s;
 
     s <<
@@ -1866,7 +1866,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
 
   std::map<msrQuarterTonesPitchKind, std::string>* pitchesNamesMapPTR;
 
-  // select the relevant pitch names std::map
+  // select the relevant pitch names map
   switch (languageKind) {
     case msrQuarterTonesPitchesLanguageKind::kQTPNederlands:
       pitchesNamesMapPTR = &pNederlandsPitchesNamesMap;
@@ -1909,7 +1909,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
       break;
   } // switch
 
-  // is quarterTonesPitchName present in the std::map?
+  // is quarterTonesPitchName present in the map?
   if (pitchesNamesMapPTR->size ()) {
     std::map<msrQuarterTonesPitchKind, std::string>::const_iterator
       iBegin = pitchesNamesMapPTR->begin (),

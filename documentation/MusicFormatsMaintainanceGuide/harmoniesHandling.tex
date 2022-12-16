@@ -393,12 +393,12 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
 				// ... ... ...
 
-        // append it to harmony's degrees std::list
+        // append it to harmony's degrees list
         harmony->
           appendHarmonyDegreeToHarmony (
             harmonyDegree);
 
-        // remove it from the std::list
+        // remove it from the list
         fCurrentHarmonyDegreesList.pop_front ();
       } // while
     }
@@ -408,7 +408,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
       harmony->setHarmonyFrame (fCurrentFrame);
     }
 
-    // append the harmony to the pending harmonies std::list
+    // append the harmony to the pending harmonies list
     fPendingHarmoniesList.push_back (harmony);
   }
 
@@ -540,7 +540,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     // don't append the harmony to the part harmonies voice // BLARK
     // before the note itself has been appended to the voice
 
-    // remove the harmony from the std::list
+    // remove the harmony from the list
     fPendingHarmoniesList.pop_front ();
   } // while
 }
@@ -560,7 +560,7 @@ void msrNote::appendHarmonyToNoteHarmoniesList (const S_msrHarmony& harmony)
     gLogStream <<
       "Appending harmony " <<
       harmony->asString () <<
-      " to the harmonies std::list of " <<
+      " to the harmonies list of " <<
       asString () <<
       ", line " << fInputLineNumber <<
       std::endl;

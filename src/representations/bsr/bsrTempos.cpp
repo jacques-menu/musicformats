@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // std::setw()), set::precision(), ...
+#include <iomanip>      // setw()), set::precision(), ...
 #include <iostream>
 #include <sstream>
 #include <regex>

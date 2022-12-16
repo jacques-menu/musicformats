@@ -186,7 +186,7 @@ S_msdlConverterOahGroup createGlobalMsdlConverterOahGroup ()
   // protect library against multiple initializations
   if (! gGlobalMsdlConverterOahGroup) {
 
-    // initialize the generated output kinds std::map
+    // initialize the generated output kinds map
     // ------------------------------------------------------
 
     initializeMultiGenerationOutputKindsMap ();

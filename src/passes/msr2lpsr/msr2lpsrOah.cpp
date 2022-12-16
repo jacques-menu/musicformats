@@ -90,7 +90,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
 #endif
 
   // theString contains the score output kind:
-  // is it in the score output kinds std::map?
+  // is it in the score output kinds map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -106,7 +106,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
         theString);
 
   if (it == gGlobalLpsrScoreOutputKindsMap.end ()) {
-    // no, score output kind is unknown in the std::map
+    // no, score output kind is unknown in the map
 
     std::stringstream s;
 

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // for 'std::setw()'
+#include <iomanip>      // for 'setw()'
 
 #include "visitor.h"
 
@@ -588,7 +588,7 @@ void msrScore::printFull (std::ostream& os) const
   }
   else {
     os <<
-      "There are no part groups in the std::list" <<
+      "There are no part groups in the list" <<
       std::endl;
   }
 
@@ -703,7 +703,7 @@ void msrScore::print(std::ostream& os) const
   }
   else {
     os <<
-      "There are no part groups in the std::list" <<
+      "There are no part groups in the list" <<
       std::endl;
   }
 
@@ -781,7 +781,7 @@ void msrScore::printSummary (std::ostream& os) const
   // it is the only element in fPartGroupsList JMI single variable
   if (partGroupsListSize) {
     os <<
-      "Part groups std::list:" <<
+      "Part groups list:" <<
       std::endl;
 
     ++gIndenter;

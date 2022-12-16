@@ -595,7 +595,7 @@ std::string msrTempoTuplet::asString () const
     ' ' << fTempoTupletDisplayWholeNotes << " display whole notes" <<
     ":";
 
-  s << "[[";
+  s << '[';
 
   if (fTempoTupletElements.size ()) {
     std::list<S_msrElement>::const_iterator
@@ -632,7 +632,7 @@ std::string msrTempoTuplet::asString () const
     } // for
   }
 
-  s << "]]";
+  s << ']';
 
   return s.str ();
 }
@@ -657,7 +657,7 @@ std::string msrTempoTuplet::asString () const
     s << fTempoTupletMeasurePosition;
   }
 
-  s << "[[";
+  s << '[';
 
   if (fTempoTupletElements.size ()) {
     std::list<S_msrElement>::const_iterator
@@ -700,7 +700,7 @@ std::string msrTempoTuplet::asString () const
     } // for
   }
 
-  s << "]]";
+  s << ']';
 
   return s.str ();
 }

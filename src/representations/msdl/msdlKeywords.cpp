@@ -52,7 +52,7 @@ msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (const std::string& 
         theString);
 
   if (it == gGlobalMsdlKeywordsLanguageKindsMap.end ()) {
-    // no, keywords language kind is unknown in the std::map
+    // no, keywords language kind is unknown in the map
     std::stringstream s;
 
     s <<
@@ -505,7 +505,7 @@ std::string msdlKeywordKindAsMsdlString (
 
   std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
-  // select the relevant keywords names std::map
+  // select the relevant keywords names map
   switch (languageKind) {
     case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
@@ -532,7 +532,7 @@ std::string msdlKeywordKindAsMsdlString (
   } // switch
 
   if (keywordsNamesMapPTR) {
-    // is keywordKind present in the std::map?
+    // is keywordKind present in the map?
     if (keywordsNamesMapPTR->size ()) {
       std::map<msdlKeywordKind, std::string>::const_iterator
         iBegin = (*keywordsNamesMapPTR).begin (),
@@ -668,7 +668,7 @@ msdlKeywordKind msdlKeywordKindFromString (
 
   std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
-  // select the relevant keywords names std::map
+  // select the relevant keywords names map
   switch (languageKind) {
     case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
@@ -695,7 +695,7 @@ msdlKeywordKind msdlKeywordKindFromString (
   } // switch
 
   if (keywordsNamesMapPTR) {
-    // is theString present in the std::map?
+    // is theString present in the map?
     if (keywordsNamesMapPTR->size ()) {
       std::map<msdlKeywordKind, std::string>::const_iterator
         iBegin = (*keywordsNamesMapPTR).begin (),
@@ -733,7 +733,7 @@ std::string existingKeywordsInLanguage (
 
   std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
-  // select the relevant keywords names std::map
+  // select the relevant keywords names map
   switch (keywordsLanguageKind) {
     case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur

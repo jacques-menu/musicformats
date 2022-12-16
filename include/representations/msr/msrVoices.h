@@ -391,7 +391,7 @@ class EXP msrVoice : public msrElement
     Bool                  getVoiceContainsMeasureRepeats () const
                               { return fVoiceContainsMeasureRepeats; }
 
-    // measures flat std::list
+    // measures flat list
 
     const std::list<S_msrMeasure>&
                           getVoiceMeasuresFlatList () const
@@ -1147,11 +1147,12 @@ class EXP msrVoice : public msrElement
     // fVoiceCurrentMeasure contains the last measure appended to the voice
     S_msrMeasure          fVoiceLastAppendedMeasure;
 
-    // measures flat std::list
+    // measures flat list
     // i.e. without segments nor repeats,
     // gathered from fVoiceInitialElementsList and fVoiceLastSegment
     // by finalizeMeasure()
-    std::list<S_msrMeasure>    fVoiceMeasuresFlatList;
+    std::list<S_msrMeasure>    
+                          fVoiceMeasuresFlatList;
 
     // measures slices sequence
     S_msrMeasuresSlicesSequence
@@ -1382,7 +1383,7 @@ class EXP msrVoice : public msrElement
     int                   fVoiceFirstMeasurePuristNumber;
 // JMI    int                   fVoiceLastMeasurePuristNumber;
 
-    // a std::stack is needed to handle pending repeats, which can be nested
+    // a stack is needed to handle pending repeats, which can be nested
     std::list<S_msrRepeatDescr>
                           fVoicePendingRepeatDescrsStack;
 

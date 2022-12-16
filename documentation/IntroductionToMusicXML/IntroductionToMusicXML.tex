@@ -291,7 +291,7 @@ The syntactical aspects of \mxml\ are quite simple and regular, which makes it e
 
 \mxml\ data is made of so-called markups (the 'M' in 'XML'), delimited by an \MainIt{start-tag} and a \MainIt{stop-tag}.
 
-The start-tag is introduced by a '{\tt <}' and closed by a '{\tt >}', as in '\musicXmlMarkup{<part-std::list>}'. The stop-tag is introduced by a '{\tt </}' and closed by a '{\tt >}', as in '\musicXmlMarkup{</part-std::list>}'.
+The start-tag is introduced by a '{\tt <}' and closed by a '{\tt >}', as in '\musicXmlMarkup{<part-list>}'. The stop-tag is introduced by a '{\tt </}' and closed by a '{\tt >}', as in '\musicXmlMarkup{</part-list>}'.
 
 \sep
 
@@ -363,7 +363,7 @@ The syntax of \mxml\ data quite regular and simple, and it is easy to program le
 
   \item 0 or more '{\tt <credit>}' elements;
 
-  \item a '{\tt <part-std::list>}' element containing the various '{\tt <score-part>}'s in the score;
+  \item a '{\tt <part-list>}' element containing the various '{\tt <score-part>}'s in the score;
   \end{itemize}
 
 \item a sequence of '{\tt <part>}' elements in the order they appear in the score, each one containing the measures in the given part, in order.
@@ -375,11 +375,11 @@ Here is how the score header is actually defined in \gitschemafile{score.mod}:
 	The score-header entity contains basic score metadata
 	about the work and movement, score-wide defaults for
 	layout and fonts, credits that appear on the first page,
-	and the part std::list.
+	and the part list.
 -->
 <!ENTITY % score-header
 	"(work?, movement-number?, movement-title?,
-	  identification?, defaults?, credit*, part-std::list)">
+	  identification?, defaults?, credit*, part-list)">
 \end{lstlisting}
 
 
@@ -424,7 +424,7 @@ As is usual in computer science, this minimal example is named \gitmxmlfile{basi
 
 The first line specifies the character encoding of the contents below, here UTF-8. Then the '{\tt !DOCTYPE}' element at lines 2 to 4 tells us that this file contains partwise data conforming to DTD 3.0.
 
-Then the '{\tt <part-std::list>}' element at lines 7 to 11 contains a std::list of '{\tt <score-part>}'s with their '{\tt id}' attribute, here '{\tt P1}' alone.
+Then the '{\tt <part-list>}' element at lines 7 to 11 contains a list of '{\tt <score-part>}'s with their '{\tt id}' attribute, here '{\tt P1}' alone.
 
 After this, we find the sequence of '{\tt part}'s with their '{\tt id}' attribute, here '{\tt P1}' alone, and, inside it, the single '{\tt <measure>}' sub-element whose attribute '{\tt number}' contains '{\tt 1}'.
 
@@ -446,11 +446,11 @@ The nesting of elements, such as '{\tt <key>}' containing a '{\tt <fifths>}' ele
     <work-title>Hello World!</work-title>
     </work>
   <!-- A very minimal MusicXML example -->
-  <part-std::list>
+  <part-list>
     <score-part id="P1">
       <part-name>Music</part-name>
     </score-part>
-  </part-std::list>
+  </part-list>
   <part id="P1">
 <!--=========================================================-->
     <measure number="1">
@@ -833,7 +833,7 @@ Part groups are used to structure complex scores, mimicking the way large orches
 
 \sep
 
-A '{\tt <part-group>}' element has a '{\tt type}' attribute, whose value can be '{\tt start}' or '{\tt stop}'. A~part group is thus delimited by a std::pair of '{\tt <part-group>}' elements, the first one of type '{\tt start}', and the second one of type '{\tt stop}'.
+A '{\tt <part-group>}' element has a '{\tt type}' attribute, whose value can be '{\tt start}' or '{\tt stop}'. A~part group is thus delimited by a pair of '{\tt <part-group>}' elements, the first one of type '{\tt start}', and the second one of type '{\tt stop}'.
 
 The '{\tt id}' attribute of the '{\tt <score-part>}' element is used to reference the part later in the \mxml\ data. Often, is has the form '{\tt Pn}', where '{\tt n}' is a number.
 
@@ -847,7 +847,7 @@ For example, \gitmxmlfile{partgroups/NestedPartGroups.xml} contains:\\
 \includegraphics[scale=0.7]{NestedPartGroups.png}
 
 \begin{lstlisting}[language=MusicXML, caption={Nested part groups example}]
-  <part-std::list>
+  <part-list>
     <score-part id="P1">
       <part-name>Violin</part-name>
     </score-part>
@@ -873,7 +873,7 @@ For example, \gitmxmlfile{partgroups/NestedPartGroups.xml} contains:\\
     <score-part id="P5">
       <part-name>English horn</part-name>
     </score-part>
-  </part-std::list>
+  </part-list>
 \end{lstlisting}
 
 \sep
@@ -2592,11 +2592,11 @@ The interested reader is urged to try and import this file into their favorite s
 For example, consider:
 \begin{lstlisting}[language=MusicXML]
 <score-partwise version="3.1">
-    <part-std::list>
+    <part-list>
         <score-part id="P1">
             <part-name>Music</part-name>
         </score-part>
-    </part-std::list>
+    </part-list>
     <part id="P1">
         <measure number="1">
             <attributes>

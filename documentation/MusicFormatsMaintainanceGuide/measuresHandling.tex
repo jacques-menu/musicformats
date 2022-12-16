@@ -11,7 +11,7 @@ Measures are presented at \sectionRef{Measures}.
 \section{Voices contents}
 % -------------------------------------------------------------------------
 
-\Class{msrVoice} contain a std::list of the first elements and a last segment:
+\Class{msrVoice} contains a list of the first elements and a last segment:
 \begin{lstlisting}[language=CPlusPlus]
     std::list<S_msrVoiceElement>
                           fVoiceInitialElementsList;
@@ -40,13 +40,14 @@ formats/msr/msrMultipleFullBarRests.h:class EXP msrMultipleFullBarRests : public
 formats/msr/msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \end{lstlisting}
 
-\Class{msrSegment} contains a std::list of measures:
+\Class{msrSegment} contains a list of measures:
 \begin{lstlisting}[language=CPlusPlus]
     // the measures in the segment contain the mmusic
-    std::list<S_msrMeasure>    fSegmentElementsList;
+    std::list<S_msrMeasure>    
+                          fSegmentElementsList;
 \end{lstlisting}
 
-class   {\tt } contains a std::list of mesure elements:
+class   {\tt } contains a list of mesure elements:
 \begin{lstlisting}[language=CPlusPlus]
     // elements
 

@@ -6437,7 +6437,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
   } // switch
 
 /* JMI
-  // register harmony intervals in std::map
+  // register harmony intervals in map
   gGlobalHarmonyStructuresMap [fHarmonyStructureHarmonyKind] = this;
   */
 }
@@ -6781,7 +6781,7 @@ void initializeHarmonyStructuresMap ()
           msrHarmonyStructure::create (
             e);
 
-      // register it in the std::map
+      // register it in the map
       gGlobalHarmonyStructuresMap [e] =
         harmonyStructure;
     } // for

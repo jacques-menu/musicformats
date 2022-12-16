@@ -15,7 +15,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/Anacrus
 \end{lstlisting}
 
 This option needs lilypond-Jianpu to be accessible to LilyPond. This is available at \url{https://github.com/nybbs2003/lilypond-Jianpu/jianpu10a.ly}.
-          
+
 The key in this example is C major. The resulting \fileName{MinimalScore_Jianpu.ly} leads to:\\
 \includegraphics[scale=1]{../graphics/Anacrusis_Jianpu.png}
 
@@ -47,8 +47,8 @@ The \code{o*} indicate the octave, and notes pitches and rests use \lily\ syntax
 \mf's \xmlToGmn\ is a \multiPass\ converter when \xmlToGuido\, a part of \libmusicxml, has two passes and only usea a \mxsrRepr\ representation.
 
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2gmn basic/Anacrusis.xml 
-{[ \staff<1> \std::set<autoHideTiedAccidentals="on"> \title<""> \auto<autoInstrPos="on"> \instr<"Voice"> \barFormat<style= "system", range="1"> \bar<hidden="true"> \key<0> \meter<"3/4", autoMeasuresNum="system"> \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \bar<hidden="true"> \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \stemsDown \beamsOff c2/4 \bar<hidden="true"> \stemsDown \beamsOff c/2 _/4 ]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2gmn basic/Anacrusis.xml
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<""> \auto<autoInstrPos="on"> \instr<"Voice"> \barFormat<style= "system", range="1"> \bar<hidden="true"> \key<0> \meter<"3/4", autoMeasuresNum="system"> \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \bar<hidden="true"> \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \stemsDown \beamsOff c2/4 \bar<hidden="true"> \stemsDown \beamsOff c/2 _/4 ]
   }
 \end{lstlisting}
 
@@ -71,7 +71,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat basic/Anacrusis.
     </work>
 
 	<!-- ... ... ... />
-	
+
   </score-partwise>
 \end{lstlisting}
 
@@ -100,7 +100,7 @@ from "basic/Anacrusis.xml"
     </work>
 
 	<!-- ... ... ... />
-	
+
     <part id="P1">
         <measure number="0">
             <attributes>
@@ -119,7 +119,7 @@ from "basic/Anacrusis.xml"
             </attributes>
 
 	<!-- ... ... ... />
-	
+
   </score-partwise>
 \end{lstlisting}
 

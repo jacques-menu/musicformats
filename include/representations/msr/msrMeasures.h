@@ -255,7 +255,7 @@ class EXP msrMeasure : public msrSegmentElement
     const msrMoment&      getMeasureVoiceMoment () const
                               { return fMeasureVoiceMoment; }
 
-    // notes flat std::list
+    // notes flat list
 
     const std::list<S_msrNote>&
                           getMeasureNotesFlatList () const
@@ -550,7 +550,7 @@ class EXP msrMeasure : public msrSegmentElement
                             int                 inputLineNumber,
                             const S_msrElement& elem);
 
-    // notes flat std::list
+    // notes flat list
 
     void                  appendNoteToMeasureNotesFlatList (
                             const S_msrNote& note);
@@ -734,7 +734,7 @@ class EXP msrMeasure : public msrSegmentElement
     Rational              fMeasureVoicePosition;
     msrMoment             fMeasureVoiceMoment;
 
-    // notes flat std::list
+    // notes flat list
     // this is used to identify solo notes and rests in measures slices
     std::list<S_msrNote>  fMeasureNotesFlatList;
 

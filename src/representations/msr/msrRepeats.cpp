@@ -41,7 +41,7 @@ namespace MusicFormats
 /*
   Repeats in MusicXML are applied to all voices in all staves of the current part
 
-  The currentRepeat in each voice is the top of the voice repeats std::stack
+  The currentRepeat in each voice is the top of the voice repeats stack
 
   A repeat is recognized in MusicXML either by:
 

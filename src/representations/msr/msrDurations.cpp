@@ -11,7 +11,7 @@
 
 #include <sstream>
 #include <climits>      // INT_MIN, INT_MAX
-#include <iomanip>      // std::setw()), set::precision(), ...
+#include <iomanip>      // setw()), set::precision(), ...
 
 #include "mfServiceRunData.h"
 
@@ -997,34 +997,12 @@ std::string wholeNotesAsMsrString (
     return "???";
   }
 
-//  JMI ???
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
-//     gLogStream <<
-//       "--> wholeNotes rationalised: " << wholeNotes <<
-//       std::endl;
-//   }
-// #endif
-//
-//   Bool
-//     rationalHasBeenSimplified =
-//       wholeNotes.getNumerator () != numerator; // denominators could be used too
-//
-//   if (rationalHasBeenSimplified) {
-//     numerator    = wholeNotes.getNumerator (),
-//     denominator  = wholeNotes.getDenominator ();
-//   }
-
   Bool
     integralNumberOfWholeNotes = denominator == 1;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
-//       "--> rationalHasBeenSimplified: " <<
-//       rationalHasBeenSimplified <<
-//       std::endl <<
       "--> integralNumberOfWholeNotes: " <<
       integralNumberOfWholeNotes <<
       std::endl << std::endl;
@@ -1104,15 +1082,7 @@ std::string wholeNotesAsMsrString (
         " is no power of two between 1 and 128" <<
    //     " is no power of 2 between 1 and 1024" <<
         ", whole notes duration " <<
-        numerator << '/' << denominator;
-//
-//       if (rationalHasBeenSimplified) {
-//         s <<
-//           " (" << numerator << '/' << denominator << ")" <<
-//         std::endl;
-//       }
-
-      s <<
+        numerator << '/' << denominator <<
         " cannot be represented as a dotted power of 2" <<
         ", " <<
         result <<

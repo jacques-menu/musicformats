@@ -243,7 +243,7 @@ S_msrGeneratorsOahGroup createGlobalMsrGeneratorsOahGroup ()
   // protect library against multiple initializations
   if (! gGlobalMsrGeneratorsOahGroup) {
 
-    // initialize the generation API kinds std::map
+    // initialize the generation API kinds map
     // ------------------------------------------------------
 
     initializeMsrGenerationAPI ();

@@ -140,7 +140,8 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     S_msrSegment          fMultipleFullBarRestsUpLinkToSegment;
 
     int                   fMultipleFullBarRestsNumber; // supplied by MusicXML
-    std::list<S_msrMeasure>    fFullBarRestsMeasuresList;
+    std::list<S_msrMeasure>    
+                          fFullBarRestsMeasuresList;
 
     int                   fMultipleFullBarRestsLastMeasurePuristNumber;
 

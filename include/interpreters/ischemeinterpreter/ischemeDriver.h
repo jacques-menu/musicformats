@@ -216,7 +216,7 @@ class   ischemeDriver
     // final semantics check
     void                  finalSemanticsCheck ();
 
-    // populate commands std::list
+    // populate commands list
     void                  populateTheCommandsList ();
 
   private:
@@ -231,7 +231,7 @@ class   ischemeDriver
     std::string           fScriptName;
 
     // the names of the input sources
-    std::list<std::string>          
+    std::list<std::string>
                           fInputSoucesList;
 
     // scanning
@@ -303,7 +303,7 @@ class   ischemeDriver
     std::list<S_ischemeOptionsBlock>
                           fSelectedOptionsBlocksList;
 
-    // commands std::list
+    // commands list
     std::list<std::string>
                           fCommandsList;
 };

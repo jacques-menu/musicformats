@@ -257,7 +257,7 @@ void extraShowAllHarmoniesContentsAtom::applyAtomWithValue (
 #endif
 
   // theString contains the pitch name in the current language
-  // is it in the accidental styles std::map?
+  // is it in the accidental styles map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -505,7 +505,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
 #endif
 
   // theString contains the pitch name in the current language
-  // is it in the accidental styles std::map?
+  // is it in the accidental styles map?
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
@@ -802,7 +802,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
 #endif
 
   // theString contains the pitch name in the current language
-  // is it in the accidental styles std::map?
+  // is it in the accidental styles map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

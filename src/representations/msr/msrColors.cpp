@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // std::setw()), set::precision(), ...
+#include <iomanip>      // setw()), set::precision(), ...
 #include <sstream>
 #include <regex>
 
@@ -165,7 +165,7 @@ std::string msrColorRGB::asString (int precision) const
     fG <<
     "," <<
     fB <<
-    "]]";
+    ']';
 
   return s.str ();
 }

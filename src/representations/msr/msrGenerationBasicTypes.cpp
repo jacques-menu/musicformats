@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <iomanip>      // std::setw()), set::precision(), ...
+#include <iomanip>      // setw()), set::precision(), ...
 
 #include "visitor.h"
 #include "oahWae.h"
@@ -172,7 +172,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
   std::ostream&      os)
 {
   // theString contains the output kind name:
-  // is it in the  output kinds std::map?
+  // is it in the  output kinds map?
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -189,7 +189,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
         theString);
 
   if (it == gGlobalGenerationAPIKindsMap.end ()) {
-    // no, optional values style kind is unknown in the std::map
+    // no, optional values style kind is unknown in the map
     std::stringstream s;
 
     s <<

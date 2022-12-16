@@ -161,7 +161,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   }
 #endif
 
-  // is originalClefName in the replace clef std::map?
+  // is originalClefName in the replace clef map?
   msrClefKind
     originalClefKind =
       msrClefKindFromString (
@@ -1611,7 +1611,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToBold (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fBoldWordsSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1633,7 +1633,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToItalic (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fItalicWordsSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1655,7 +1655,7 @@ Bool mxsr2msrOahGroup::wordsIsToBePlacedAbove (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToBePlacedAboveSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1677,7 +1677,7 @@ Bool mxsr2msrOahGroup::wordsIsToBePlacedBelow (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToBePlacedBelowSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1700,7 +1700,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToTempo (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToTemposSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1722,7 +1722,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToRehearsalMark (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToRehearsalMarkSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1744,7 +1744,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToSegno (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToSegnoSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1766,7 +1766,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegno (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToDalSegnoSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1788,7 +1788,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegnoAlFine (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToDalSegnoAlFineSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1810,7 +1810,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegnoAlCoda (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToDalSegnoAlCodaSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1832,7 +1832,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCodaFirst (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToCodaFirstSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1854,7 +1854,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCodaSecond (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToCodaSecondSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1876,7 +1876,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCresc (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToCrescSet.size ()) {
     std::set<std::string>::const_iterator
       it =
@@ -1898,7 +1898,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDecresc (
 {
   Bool result;
 
-  // is wordsValue in the std::string to dal segno kind std::map?
+  // is wordsValue in the std::string to dal segno kind map?
   if (fWordsToDecrescSet.size ()) {
     std::set<std::string>::const_iterator
       it =

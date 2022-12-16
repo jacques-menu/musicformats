@@ -154,7 +154,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
   group->
     appendGroupToElementsList (this);
 
-  // append group to groups std::list
+  // append group to groups list
   fHandlerGroupsList.push_back (group);
 
   // set the group upLink to this handler
@@ -191,7 +191,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
   group->
     appendGroupToElementsList (this);
 
-  // prepend group to the groups std::list
+  // prepend group to the groups list
   fHandlerGroupsList.push_front (group);
 
   // set the group upLink to this handler

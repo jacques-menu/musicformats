@@ -3111,7 +3111,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
         chord->getInputLineNumber (),
         chord->getMeasureElementSoundingWholeNotes ());
 
-  // get the chord's notes std::vector
+  // get the chord's notes vector
   const std::vector<S_msrNote>&
     chordNotesVector =
       chord->
@@ -3548,7 +3548,7 @@ void msrVoice::pushRepeatOntoRepeatDescrsStack (
     gLogStream <<
       "Pushing repeat '" <<
       repeat->asShortString () <<
-      "' onto the repeats std::stack in voice \"" <<
+      "' onto the repeats stack in voice \"" <<
       getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
@@ -3601,7 +3601,7 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
     s <<
       "cannot pop repeat '" <<
       repeat->asShortString () <<
-      "' from the std::stack since it is not at the top" <<
+      "' from the stack since it is not at the top" <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -3617,7 +3617,7 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
     gLogStream <<
       "Popping repeat '" <<
       repeat->asString () <<
-      "' from the repeat std::stack in voice \"" <<
+      "' from the repeat stack in voice \"" <<
       getVoiceName () <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
@@ -3625,7 +3625,7 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
   }
 #endif
 
-  // pop it from repeats std::stack
+  // pop it from repeats stack
   fVoicePendingRepeatDescrsStack.pop_front ();
 
 #ifdef TRACING_IS_ENABLED
@@ -3650,9 +3650,9 @@ void msrVoice::displayVoiceRepeatsStack (
 
   gLogStream <<
     std::endl <<
-    ">>++++++++++++++++ Displaying voice repeats std::stack " << context <<
+    ">>++++++++++++++++ Displaying voice repeats stack " << context <<
     std::endl <<
-    "The voice repeats std::stack contains " <<
+    "The voice repeats stack contains " <<
     mfSingularOrPlural (repeatDescrsStackSize, "element", "elements") <<
     ", line " << inputLineNumber <<
     ":" <<
@@ -3704,7 +3704,7 @@ void msrVoice::displayVoiceRepeatsStackSummary (
 
   gLogStream <<
     std::endl <<
-    "The voice repeats std::stack contains " <<
+    "The voice repeats stack contains " <<
     mfSingularOrPlural (repeatDescrsStackSize, "element", "elements") <<
     " - " << context <<
     ", line " << inputLineNumber <<
@@ -3809,7 +3809,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 }
 
 // v0.9.62
-//   // print the voice measures flat std::list
+//   // print the voice measures flat list
 //   size_t voiceMeasuresFlatListSize =
 //     fVoiceMeasuresFlatList.size ();
 //
@@ -3984,7 +3984,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
         2, // repeatTimes, default value JMI
         this);
 
-  // push it onto the voice's repeat descrs std::stack
+  // push it onto the voice's repeat descrs stack
   pushRepeatOntoRepeatDescrsStack (
     inputLineNumber,
     result,
@@ -4023,7 +4023,7 @@ S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
       repeat->
         createRepeatNewbornClone (this);
 
-  // push it onto the voice's repeat descrs std::stack
+  // push it onto the voice's repeat descrs stack
   pushRepeatOntoRepeatDescrsStack (
     inputLineNumber,
     result,
@@ -4216,7 +4216,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
   const S_msrRepeat& repeat,
   const std::string& context)
 {
-  // append repeat to the std::list of initial elements
+  // append repeat to the list of initial elements
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
@@ -4262,7 +4262,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
 //   const S_msrMultipleFullBarRests& multipleFullBarRests,
 //   const std::string&        context)
 // {
-//   // append multipleFullBarRests to the std::list of initial elements
+//   // append multipleFullBarRests to the list of initial elements
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
 //     gLogStream <<
@@ -4285,7 +4285,7 @@ void msrVoice::appendMeasureRepeatToInitialVoiceElements (
   const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
-  // append measureRepeat to the std::list of initial elements
+  // append measureRepeat to the list of initial elements
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
@@ -4307,7 +4307,7 @@ void msrVoice::appendVoiceLastSegmentToInitialVoiceElements (
   int           inputLineNumber,
   const std::string& context)
 {
-  // append segment to the std::list of initial elements
+  // append segment to the list of initial elements
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSegments ()) {
     gLogStream <<
@@ -4355,7 +4355,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
       }
 #endif
 
-      // append segment to the std::list of initial elements
+      // append segment to the list of initial elements
       fVoiceInitialElementsList.push_back (
         fVoiceLastSegment);
 
@@ -4408,7 +4408,7 @@ void msrVoice::appendRepeatCloneToInitialVoiceElements (
   const S_msrRepeat&   repeatCLone,
   const std::string& context)
 {
-  // append repeatCLone to the std::list of initial elements
+  // append repeatCLone to the list of initial elements
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
@@ -4622,7 +4622,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
     // no voice last segment JMI ???
   }
 
-  // create the repeat and std::stack it
+  // create the repeat and stack it
   S_msrRepeat
     newRepeat =
       createARepeatAndStackIt (
@@ -4874,7 +4874,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
     setCurrentRepeatBuildPhaseKind (
       msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted);
 
-  // append newRepeat to the std::list of initial elements
+  // append newRepeat to the list of initial elements
   appendRepeatToInitialVoiceElements (
     inputLineNumber,
     newRepeat,
@@ -4978,13 +4978,13 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
           inputLineNumber,
           "handleVoiceLevelContainingRepeatEndWithoutStart() 1");
 
-  // fetch the top of the repeats std::stack
+  // fetch the top of the repeats stack
   S_msrRepeat
     repeatsStackTopRepeat =
       fVoicePendingRepeatDescrsStack.front ()->
         getRepeatDescrRepeat ();
 
-  // pop it from the repeats std::stack
+  // pop it from the repeats stack
   popRepeatFromRepeatDescrsStack (
     inputLineNumber,
     repeatsStackTopRepeat,
@@ -4997,7 +4997,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       repeatsStackTopRepeat,
       "handleVoiceLevelContainingRepeatEndWithoutStart() 3");
 
-  // append newRepeat to the std::list of initial elements
+  // append newRepeat to the list of initial elements
   appendRepeatToInitialVoiceElements (
     inputLineNumber,
     newRepeat,
@@ -5033,7 +5033,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
     setCurrentRepeatBuildPhaseKind (
       msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted);
 
-  // append newRepeat to the std::list of initial elements
+  // append newRepeat to the list of initial elements
   appendRepeatToInitialVoiceElements (
     inputLineNumber,
     newRepeat,
@@ -5102,7 +5102,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       fVoicePendingRepeatDescrsStack.front ()->
         getRepeatDescrRepeat ();
 
-  // pop it from the repeats std::stack
+  // pop it from the repeats stack
   popRepeatFromRepeatDescrsStack (
     inputLineNumber,
     currentRepeat,
@@ -5167,7 +5167,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
     setCurrentRepeatBuildPhaseKind (
       msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted);
 
-  // append currentRepeat to the std::list of initial elements
+  // append currentRepeat to the list of initial elements
   appendRepeatToInitialVoiceElements (
     inputLineNumber,
     currentRepeat,
@@ -5300,7 +5300,7 @@ void msrVoice::handleRepeatEndInVoice (
 
           case 1:
             {
-              // fetch the top of the repeats std::stack
+              // fetch the top of the repeats stack
               S_msrRepeat
                 repeatsStackTopRepeat =
                   fVoicePendingRepeatDescrsStack.front ()->
@@ -5407,7 +5407,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   }
 
   else {
-    // create the repeat and std::stack it
+    // create the repeat and stack it
     std::stringstream s1;
 
     s1 <<
@@ -5751,7 +5751,7 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
           }
 #endif
 
-          // move voice last segment to the std::list of initial elements
+          // move voice last segment to the list of initial elements
           moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
             inputLineNumber,
             "nestContentsIntoNewRepeatInVoice() 1");
@@ -5921,7 +5921,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
               std::stringstream s;
 
               s <<
-                "repeats std::stack is empty when attempting to handle a repeat ending start in voice clone '" <<
+                "repeats stack is empty when attempting to handle a repeat ending start in voice clone '" <<
                 asShortString () <<
                 "' ";
 
@@ -6198,7 +6198,7 @@ void msrVoice::finalizeRepeatEndInVoice (
           std::stringstream s;
 
           s <<
-            "repeats std::stack is empty when attempting to finalize a repeat in voice '" <<
+            "repeats stack is empty when attempting to finalize a repeat in voice '" <<
             asShortString () <<
             "' ";
 
@@ -6839,7 +6839,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
           setMeasureRepeatPattern (
             measureRepeatPattern);
 
-        // append the measures repeat to the std::list of initial elements
+        // append the measures repeat to the list of initial elements
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
           gLogStream <<
@@ -7496,7 +7496,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
 //           finalizeLastAppendedMeasureInVoice (
 //             inputLineNumber);
 //
-//           // move voice last segment to the std::list of initial elements
+//           // move voice last segment to the list of initial elements
 //           moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
 //             inputLineNumber,
 //             "handleMultipleFullBarRestsStartInVoiceClone() 2");
@@ -7762,13 +7762,13 @@ void msrVoice::appendRepeatCloneToVoiceClone (
         }
 #endif
 
-        // push the repeat clone onto the voice's repeat descrs std::stack
+        // push the repeat clone onto the voice's repeat descrs stack
         pushRepeatOntoRepeatDescrsStack (
           inputLineNumber,
           repeatCLone,
           "appendRepeatCloneToVoiceClone() 2");
 
-        // append it to the std::list of initial elements
+        // append it to the list of initial elements
         appendRepeatCloneToInitialVoiceElements (
           inputLineNumber,
           repeatCLone,
@@ -8333,7 +8333,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
     std::stringstream s;
 
     s <<
-      "repeats std::stack is empty when attempting to handle a hooked repeat ending end in voice '" <<
+      "repeats stack is empty when attempting to handle a hooked repeat ending end in voice '" <<
       asShortString () <<
       "' ";
 
@@ -8438,7 +8438,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
     std::stringstream s;
 
     s <<
-      "repeats std::stack is empty when attempting to handle a hookless repeat ending end in voice '" <<
+      "repeats stack is empty when attempting to handle a hookless repeat ending end in voice '" <<
       asShortString () <<
       "' ";
 
@@ -8513,13 +8513,13 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
   }
 #endif
 
-  // append currentRepeat to the std::list of initial elements
+  // append currentRepeat to the list of initial elements
   appendRepeatCloneToInitialVoiceElements (
     inputLineNumber,
     currentRepeat,
     "handleHooklessRepeatEndingEndInVoice() 3");
 
-  // pop it from the voice's repeat descrs std::stack
+  // pop it from the voice's repeat descrs stack
   popRepeatFromRepeatDescrsStack (
     inputLineNumber,
     currentRepeat,
@@ -8606,7 +8606,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
     std::stringstream s;
 
     s <<
-      "repeats std::stack is empty when attempting to handle repeat common part start '" <<
+      "repeats stack is empty when attempting to handle repeat common part start '" <<
       "' in voice clone '" <<
       asShortString () <<
       "' ";
@@ -8685,7 +8685,7 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
     std::stringstream s;
 
     s <<
-      "repeats std::stack is empty when attempting to handle repeat ending '" <<
+      "repeats stack is empty when attempting to handle repeat ending '" <<
  //     repeatEnding->asShortString () <<
       "' in voice clone '" <<
       asShortString () <<
@@ -8764,7 +8764,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
     std::stringstream s;
 
     s <<
-      "repeats std::stack is empty when attempting to handle hooked repeat ending '" <<
+      "repeats stack is empty when attempting to handle hooked repeat ending '" <<
  //     repeatEnding->asShortString () <<
       "' in voice clone '" <<
       asShortString () <<
@@ -8854,7 +8854,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
     std::stringstream s;
 
     s <<
-      "repeats std::stack is empty when attempting to handle hookless repeat ending '" <<
+      "repeats stack is empty when attempting to handle hookless repeat ending '" <<
  //     repeatEnding->asShortString () <<
       "' in voice clone '" <<
       asShortString () <<
@@ -9001,7 +9001,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
           finalizeLastAppendedMeasureInVoice (
             inputLineNumber);
 
-          // move current last segment to the std::list of initial elements
+          // move current last segment to the list of initial elements
           moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
             inputLineNumber,
             "handleRepeatStartInVoiceClone() 2");
@@ -9016,7 +9016,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
         }
       }
 
-      // create the repeat clone and std::stack it
+      // create the repeat clone and stack it
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceRepeats ()) {
         gLogStream <<
@@ -9091,7 +9091,7 @@ void msrVoice::handleRepeatEndInVoiceClone (
               std::stringstream s;
 
               s <<
-                "repeats std::stack is empty when attempting to handle a repeat end in voice clone '" <<
+                "repeats stack is empty when attempting to handle a repeat end in voice clone '" <<
                 asShortString () <<
                 "' ";
 
@@ -9119,13 +9119,13 @@ void msrVoice::handleRepeatEndInVoiceClone (
                   currentRepeat->
                     getRepeatCommonPart ();
 
-              // append currentRepeat to the std::list of initial elements
+              // append currentRepeat to the list of initial elements
               appendRepeatToInitialVoiceElements (
                 inputLineNumber,
                 currentRepeat,
                 "handleRepeatEndInVoiceClone() 2");
 
-              // pop currentRepeat from the voice's repeat descrs std::stack
+              // pop currentRepeat from the voice's repeat descrs stack
               popRepeatFromRepeatDescrsStack (
                 inputLineNumber,
                 currentRepeat,
@@ -9152,13 +9152,13 @@ void msrVoice::handleRepeatEndInVoiceClone (
                   currentRepeat->
                     getRepeatCommonPart ();
 
-              // append currentRepeat to the std::list of initial elements
+              // append currentRepeat to the list of initial elements
               appendRepeatCloneToInitialVoiceElements (
                 inputLineNumber,
                 currentRepeat,
                 "handleRepeatEndInVoiceClone() 4");
 
-              // pop currentRepeat from the voice's repeat descrs std::stack
+              // pop currentRepeat from the voice's repeat descrs stack
               popRepeatFromRepeatDescrsStack (
                 inputLineNumber,
                 currentRepeat,
@@ -9348,7 +9348,7 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
           std::stringstream s;
 
           s <<
-            "repeats std::stack is empty when attempting to append a " <<
+            "repeats stack is empty when attempting to append a " <<
             msrRepeatEndingKindAsString (
               repeatEndingClone->getRepeatEndingKind ()) <<
             " repeat ending to voice '" <<
@@ -9774,7 +9774,7 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
       gLogStream <<
         "Collecting measures from the initial elements into voice \"" <<
         getVoiceName () <<
-        "s measures flat std::list" <<
+        "s measures flat list" <<
         ", line " << inputLineNumber <<
         std::endl;
     }
@@ -9788,7 +9788,7 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
       gLogStream <<
         "Collecting measures from the last segment into voice \"" <<
         getVoiceName () <<
-        "s measures flat std::list" <<
+        "s measures flat list" <<
         ", line " << inputLineNumber <<
         std::endl;
     }
@@ -9897,7 +9897,7 @@ void msrVoice::finalizeVoice (
       s.str ());
   }
 
-  // are there pending repeats in the voice repeats std::stack???
+  // are there pending repeats in the voice repeats stack???
   size_t voicePendingRepeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
@@ -9920,7 +9920,7 @@ void msrVoice::finalizeVoice (
       ' ' <<
       mfSingularOrPluralWithoutNumber (
         voicePendingRepeatDescrsStackSize, "repeat", "repeats") <<
-      " pending in the voice repeats std::stack in voice \"" <<
+      " pending in the voice repeats stack in voice \"" <<
       asShortString () <<
       "\" ";
 
@@ -9930,7 +9930,7 @@ void msrVoice::finalizeVoice (
       s.str ());
   }
 
-  // collect the voice measures into the flat std::list
+  // collect the voice measures into the flat list
   collectVoiceMeasuresIntoFlatList (
     inputLineNumber);
 
@@ -10047,7 +10047,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       s.str ());
   }
 
-  // are there pending repeats in the voice repeats std::stack???
+  // are there pending repeats in the voice repeats stack???
   size_t voicePendingRepeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
@@ -10070,7 +10070,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       ' ' <<
       mfSingularOrPluralWithoutNumber (
         voicePendingRepeatDescrsStackSize, "repeat", "repeats") <<
-      " pending in the voice repeats std::stack in voice \"" <<
+      " pending in the voice repeats stack in voice \"" <<
       asShortString () <<
       "\" ";
 
@@ -10080,7 +10080,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       s.str ());
   }
 
-  // collect the voice measures into the flat std::list
+  // collect the voice measures into the flat list
   collectVoiceMeasuresIntoFlatList (
     inputLineNumber);
 
@@ -10175,7 +10175,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
 
     case msrBeamKind::kBeamBegin:
       if (noteBeamNumbersStackSize) {
-        // the std::stack is not empty
+        // the stack is not empty
         int voiceBeamNumbersStackTop =
           fVoiceBeamNumbersStack.top ();
 
@@ -10204,7 +10204,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
 
     case msrBeamKind::kBeamContinue:
       if (! noteBeamNumbersStackSize) {
-        // the std::stack is empty
+        // the stack is empty
         std::stringstream s;
 
         s <<
@@ -10223,7 +10223,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
           s.str ());
       }
       else {
-        // the std::stack is not empty
+        // the stack is not empty
         int voiceBeamNumbersStackTop =
           fVoiceBeamNumbersStack.top ();
 
@@ -10250,7 +10250,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
 
     case msrBeamKind::kBeamEnd:
       if (noteBeamNumbersStackSize) {
-        // the std::stack is not empty
+        // the stack is not empty
         int voiceBeamNumbersStackTop =
           fVoiceBeamNumbersStack.top ();
 
@@ -10758,7 +10758,7 @@ void msrVoice::printFull (std::ostream& os) const
 
   os << std::endl;
 
-  // print the voice measures flat std::list
+  // print the voice measures flat list
   displayVoiceMeasuresFlatList (fieldWidth);
 
   // print the voice initial elements

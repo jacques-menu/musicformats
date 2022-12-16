@@ -425,7 +425,7 @@ class EXP msrStaff : public msrElement
     Rational              fStaffShortestNoteDuration;
     msrTupletFactor       fStaffShortestNoteTupletFactor;
 
-    // measures flat std::list
+    // measures flat vector
     // i.e. without segments nor repeats,
     // gathered from the staff's voices fVoiceInitialElementsList and fVoiceLastSegment
     // by finalizeMeasure()
