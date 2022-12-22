@@ -45,14 +45,14 @@ msrMeasureElement::msrMeasureElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 //       fMeasureElementMeasureMoment (
-//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
+//         msrMoment::K_MEASURE_POSITION_UNKNOWN, msrMoment::K_MEASURE_POSITION_UNKNOWN),
 //       fMeasureElementVoiceMoment (
-//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
+//         msrMoment::K_MEASURE_POSITION_UNKNOWN, msrMoment::K_MEASURE_POSITION_UNKNOWN)
 {
   fMeasureElementSoundingWholeNotes = Rational (0, 1),
 
-  fMeasureElementMeasurePosition = msrMoment::K_NO_POSITION;
-  fMeasureElementVoicePosition   = msrMoment::K_NO_POSITION;
+  fMeasureElementMeasurePosition = msrMoment::K_MEASURE_POSITION_UNKNOWN;
+  fMeasureElementVoicePosition   = msrMoment::K_MEASURE_POSITION_UNKNOWN;
 }
 
 msrMeasureElement::~msrMeasureElement ()
@@ -98,8 +98,8 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    wholeNotes != K_NO_WHOLE_NOTES,
-    "wholeNotes == K_NO_WHOLE_NOTES");
+    wholeNotes != K_WHOLE_NOTES_UNKNOWN,
+    "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
 
   fMeasureElementSoundingWholeNotes = wholeNotes;
 }
@@ -136,8 +136,8 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+    "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 
   // set measure element's measure position
   fMeasureElementMeasurePosition = measurePosition;
@@ -208,8 +208,8 @@ void msrMeasureElement::setMeasureElementVoicePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    voicePosition != msrMoment::K_NO_POSITION,
-    "voicePosition == msrMoment::K_NO_POSITION");
+    voicePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+    "voicePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 
   // set measure element voice position
 #ifdef TRACING_IS_ENABLED
@@ -284,8 +284,8 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     voiceMoment != msrMoment::K_NO_MOMENT,
-//     "voiceMoment == msrMoment::K_NO_MOMENT");
+//     voiceMoment != msrMoment::K_MOMENT_UNKNOWN,
+//     "voiceMoment == msrMoment::K_MOMENT_UNKNOWN");
 //
 //   fMeasureElementVoiceMoment = voiceMoment;
 // }

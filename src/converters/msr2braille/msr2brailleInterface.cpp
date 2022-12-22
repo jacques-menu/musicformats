@@ -113,8 +113,8 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
     // display the first BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplayFirstBsrShort ()) {
-      displayBsrScoreShort (
+    if (gGlobalBsrOahGroup->getDisplayFirstBsr ()) {
+      displayBsrScore (
         firstBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
@@ -157,8 +157,8 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
     // display the finalized BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplaySecondBsrShort ()) {
-      displayBsrScoreShort (
+    if (gGlobalBsrOahGroup->getDisplaySecondBsr ()) {
+      displayBsrScore (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
@@ -296,7 +296,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
     }
   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 

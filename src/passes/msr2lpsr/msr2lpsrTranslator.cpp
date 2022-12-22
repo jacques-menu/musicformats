@@ -493,20 +493,20 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   // create another MSR score component of the LPSR score
   fCurrentMsrScoreClone =
     msrScore::create (
-      K_MF_NO_INPUT_LINE_NUMBER,
+      K_MF_INPUT_LINE_UNKNOWN,
       "msrScore::create()");
 
   // create the resulting LPSR score
   fResultingLpsr =
     lpsrScore::create (
-      K_MF_NO_INPUT_LINE_NUMBER,
+      K_MF_INPUT_LINE_UNKNOWN,
       fCurrentMsrScoreClone,
       multiComponent);
 
   // create the current book block
   fCurrentLpsrBookBlock =
     lpsrBookBlock::create (
-      K_MF_NO_INPUT_LINE_NUMBER);
+      K_MF_INPUT_LINE_UNKNOWN);
 
   // set its header to that of the visited LPSR score JMI ???
   fCurrentLpsrBookBlock->
@@ -529,7 +529,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
         // create the current score block
         fCurrentScoreBlock =
           lpsrScoreBlock::create (
-            K_MF_NO_INPUT_LINE_NUMBER);
+            K_MF_INPUT_LINE_UNKNOWN);
 
         // append it to the book block elements list
         fCurrentLpsrBookBlock->
@@ -551,8 +551,8 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   // display the LPSR score if requested
   // ------------------------------------------------------
 
-  if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
-    displayLpsrScoreShort (
+  if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
+    displayLpsrScore (
       fResultingLpsr,
       gGlobalMsrOahGroup,
       gGlobalLpsrOahGroup,
@@ -1341,7 +1341,7 @@ void msr2lpsrTranslator::visitStart (S_msrCredit& elt)
     creditTypeKind = elt->getCreditTypeKind ();
 
   switch (creditTypeKind) {
-    case msrCreditTypeKind::kCreditType_NO_:
+    case msrCreditTypeKind::kCreditType_UNKNOWN:
       break;
 
     case msrCreditTypeKind::kCreditTypeNumber:
@@ -2034,7 +2034,7 @@ void msr2lpsrTranslator::visitStart (S_msrStaff& elt)
               // create the current score block
               fCurrentScoreBlock =
                 lpsrScoreBlock::create (
-                  K_MF_NO_INPUT_LINE_NUMBER);
+                  K_MF_INPUT_LINE_UNKNOWN);
 
               // append it to the book block elements list
               fCurrentLpsrBookBlock->
@@ -2447,7 +2447,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif
 
-  // create a harmony new-born clone
+  // create a harmony newborn clone
   fCurrentHarmonyClone =
     elt->
       createHarmonyNewbornClone (
@@ -2461,7 +2461,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
 
     // append the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendHarmonyToNoteHarmoniesList (
+      appendHarmonyToNote (
         fCurrentHarmonyClone);
 
     // don't append the harmony to the part harmony,
@@ -2595,7 +2595,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-	// create a figured bass new-born clone
+	// create a figured bass newborn clone
 	fCurrentFiguredBassClone =
 		elt->
 			createFiguredBassNewbornClone (
@@ -3191,7 +3191,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
           words =
             msrWords::create (
               inputLineNumber,
-              msrPlacementKind::kPlacement_NO_,                // default value
+              msrPlacementKind::kPlacement_UNKNOWN,                // default value
               wordsValue,
               msrJustifyKind::kJustifyNone,                  // default value
               msrHorizontalAlignmentKind::kHorizontalAlignmentNone,      // default value
@@ -3396,7 +3396,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
 #endif
 
   switch (elt->getTempoKind ()) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
       break;
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -3984,7 +3984,7 @@ void msr2lpsrTranslator::visitStart (S_msrSpanner& elt)
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
       break;
-    case msrSpannerTypeKind::kSpannerType_NO_:
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
       break;
   } // switch
 
@@ -4254,7 +4254,7 @@ void msr2lpsrTranslator::visitStart (S_msrDynamic& elt)
       case msrDynamicKind::kDynamicSFFZ:
       case msrDynamicKind::kDynamicSFZP:
       case msrDynamicKind::kDynamicN:
-      case msrDynamicKind::kDynamic_NO_:
+      case msrDynamicKind::kDynamic_UNKNOWN:
         knownToLilyPondNatively = false;
 
       default:
@@ -5368,7 +5368,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 
   switch (noteKind) {
 
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -6141,6 +6141,7 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 
   fTupletClonesStack.push (tupletClone);
 
+	// is Scheme support needed?
   switch (elt->getTupletLineShapeKind ()) {
     case msrTupletLineShapeKind::kTupletLineShapeStraight:
       break;

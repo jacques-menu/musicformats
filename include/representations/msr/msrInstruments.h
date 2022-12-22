@@ -434,7 +434,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrHarpPedalsTuning& el
 // data types
 
 enum class msrPedalTypeKind {
-  kPedalType_NO_,
+  kPedalType_UNKNOWN,
   kPedalTypeStart, kPedalTypeContinue, kPedalTypeChange, kPedalTypeStop
 };
 

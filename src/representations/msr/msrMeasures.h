@@ -300,7 +300,7 @@ class EXP msrMeasure : public msrSegmentElement
                             const Rational& duration,
                             const S_msrVoice&      voice);
 
-    void                  padUpToMeasurePosition (
+    void                  padUpToMeasurePositionInMeasure (
                             int             inputLineNumber,
                             const Rational& measurePositionToPadUpTo);
 

@@ -60,7 +60,7 @@ R"(These options control the way LilyPondIssue34 works.)",
     msrGenerationAPIKind::kMsrFunctionsAPIKind;
 
   fMultiGenerationOutputKind =
-    mfMultiGenerationOutputKind::kGeneration_NO_;
+    mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
 
   // initialize it
   initializeLilyPondIssue34OahGroup ();
@@ -127,7 +127,7 @@ void LilyPondIssue34OahGroup::initializeMultiGenerationOutputOptions ()
 //
 //   const mfMultiGenerationOutputKind
 //     multiGenerationKindDefaultValue =
-//       mfMultiGenerationOutputKind::kGeneration_NO_; // default value
+//       mfMultiGenerationOutputKind::kGeneration_UNKNOWN; // default value
 //
 //   fMultiGenerationOutputKindAtom =
 //     mfMultiGenerationOutputKindAtom::create (
@@ -177,7 +177,7 @@ void LilyPondIssue34OahGroup::enforceGroupQuietness ()
 void LilyPondIssue34OahGroup::checkGroupOptionsConsistency ()
 {
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       {
         std::stringstream s;
 

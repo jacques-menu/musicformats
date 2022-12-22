@@ -21,7 +21,7 @@ EXP std::string mfMusicFormatsErrorAsString (
   std::string result;
 
   switch (err) {
-    case mfMusicformatsErrorKind::kMusicformatsError_NO_:
+    case mfMusicformatsErrorKind::kMusicformatsError_NONE:
       result = "no error";
       break;
     case mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile:

@@ -1280,7 +1280,7 @@ void lpsrScore::addOtherDynamicSchemeFunctionToScore ()
 
     schemeFunctionDescription =
 R"(
-% \\otherDynamic to handle any std::string as a dynamic.
+% \\otherDynamic to handle any string as a dynamic.
 )",
 
     schemeFunctionCode =

@@ -1109,8 +1109,8 @@ std::string msrBeatRepeatKindAsString (
   std::string result;
 
   switch (beatRepeatKind) {
-    case msrBeatRepeatKind::kBeatRepeat_NO_:
-      result = "kBeatRepeat_NO_";
+    case msrBeatRepeatKind::kBeatRepeat_UNKNOWN:
+      result = "kBeatRepeat_UNKNOWN";
       break;
     case msrBeatRepeatKind::kBeatRepeatStart:
       result = "kBeatRepeatStart";

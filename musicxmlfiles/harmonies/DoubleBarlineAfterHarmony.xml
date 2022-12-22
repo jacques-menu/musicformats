@@ -58,7 +58,7 @@
 			</note>
 			<note>
 				<pitch>
-					<step>E</step>
+					<step>F</step>
 					<octave>4</octave>
 				</pitch>
 				<duration>512</duration>
@@ -76,7 +76,7 @@
 			</note>
 			<note>
 				<pitch>
-					<step>E</step>
+					<step>G</step>
 					<octave>4</octave>
 				</pitch>
 				<duration>512</duration>
@@ -104,7 +104,8 @@
 			</harmony>
 			<note>
 				<pitch>
-					<step>F</step>
+					<step>B</step>
+					<alter>-1</alter>
 					<octave>4</octave>
 				</pitch>
 				<duration>768</duration>

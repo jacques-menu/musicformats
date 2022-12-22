@@ -230,29 +230,29 @@ void xml2brlRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-short", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1-slices", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-slices", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1-names", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-names", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-names", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-names", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1-summary", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-summary", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-summary", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
-  registerAtomInRegularSubgroup ("display-bsr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-bsr-1-short", subGroup);
-  registerAtomInRegularSubgroup ("display-bsr-1-full", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr1", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr1", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr1-full", subGroup);
 
-  registerAtomInRegularSubgroup ("display-bsr-2", subGroup);
-  registerAtomInRegularSubgroup ("display-bsr-2-short", subGroup);
-  registerAtomInRegularSubgroup ("display-bsr-2-full", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr2", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr2", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr2-full", subGroup);
 
 #ifdef TRACING_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-mxsr", subGroup);

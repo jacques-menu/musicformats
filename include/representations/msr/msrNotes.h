@@ -227,28 +227,28 @@ class EXP msrNote : public msrTupletElement
     S_msrMeasure          getNoteUpLinkToMeasure () const;
 
     // uplink to chord
-    void                  setNoteDirectUpLinkToChord (
+    void                  setNoteShortcutUpLinkToChord (
                             const S_msrChord& chord)
-                              { fNoteDirectUpLinkToChord = chord; }
+                              { fNoteShortcutUpLinkToChord = chord; }
 
-    S_msrChord            getNoteDirectUpLinkToChord () const
-                              { return fNoteDirectUpLinkToChord; }
+    S_msrChord            getNoteShortcutUpLinkToChord () const
+                              { return fNoteShortcutUpLinkToChord; }
 
     // uplink to grace notes group
-    void                  setNoteDirectUpLinkToGraceNotesGroup (
+    void                  setNoteShortcutUpLinkToGraceNotesGroup (
                             const S_msrGraceNotesGroup& graceNotesGroup)
-                              { fNoteDirectUpLinkToGraceNotesGroup = graceNotesGroup; }
+                              { fNoteShortcutUpLinkToGraceNotesGroup = graceNotesGroup; }
 
-    S_msrGraceNotesGroup  getNoteDirectUpLinkToGraceNotesGroup () const
-                              { return fNoteDirectUpLinkToGraceNotesGroup; }
+    S_msrGraceNotesGroup  getNoteShortcutUpLinkToGraceNotesGroup () const
+                              { return fNoteShortcutUpLinkToGraceNotesGroup; }
 
     // uplink to tuplet
-    void                  setNoteDirectUpLinkToTuplet (
+    void                  setNoteShortcutUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
-                              { fNoteDirectUpLinkToTuplet = tuplet; }
+                              { fNoteShortcutUpLinkToTuplet = tuplet; }
 
-    S_msrTuplet           getNoteDirectUpLinkToTuplet () const
-                              { return fNoteDirectUpLinkToTuplet; }
+    S_msrTuplet           getNoteShortcutUpLinkToTuplet () const
+                              { return fNoteShortcutUpLinkToTuplet; }
 
     // measure positions
     // this override calls setNoteAttachedElementsMeasurePosition()
@@ -459,7 +459,7 @@ class EXP msrNote : public msrTupletElement
                               }
 
     // harmonies
-    void                  appendHarmonyToNoteHarmoniesList (
+    void                  appendHarmonyToNote (
                             const S_msrHarmony& harmony);
 
     const std::list<S_msrHarmony>&
@@ -983,14 +983,13 @@ class EXP msrNote : public msrTupletElement
     // upLinks
     // ------------------------------------------------------
 
-    // uplink to measure
     S_msrMeasure          fNoteUpLinkToMeasure;
 
-    S_msrChord            fNoteDirectUpLinkToChord;
+    S_msrChord            fNoteShortcutUpLinkToChord;
 
-    S_msrGraceNotesGroup  fNoteDirectUpLinkToGraceNotesGroup;
+    S_msrGraceNotesGroup  fNoteShortcutUpLinkToGraceNotesGroup;
 
-    S_msrTuplet           fNoteDirectUpLinkToTuplet;
+    S_msrTuplet           fNoteShortcutUpLinkToTuplet;
 
     // basic note description
     // ------------------------------------------------------

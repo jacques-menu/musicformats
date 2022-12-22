@@ -160,7 +160,7 @@ R"(Usage: LilyPondIssue34 [option]*
     std::endl;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       s <<
         "The help below is available whichever output is produced";
       break;
@@ -190,7 +190,7 @@ std::string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
   size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should not occur
       break;
 
@@ -218,7 +218,7 @@ std::string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
   std::string headPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should only occur if the run is a pure help one
       headPart =
 R"(What LilyPondIssue34 does:
@@ -256,7 +256,7 @@ R"(
   std::string specificPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -411,7 +411,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
   */
 
   switch (mfMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -574,9 +574,9 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
 
     // add the output file name suffix
     switch (fMultiGenerationOutputKind) {
-      case mfMultiGenerationOutputKind::kGeneration_NO_:
+      case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
         // should not occur
-        outputFileName = "___kGeneration_NO____";
+        outputFileName = "___kGeneration_UNKNOWN____";
         break;
 
       case mfMultiGenerationOutputKind::kGenerationLilypond:
@@ -891,7 +891,7 @@ R"(Options that are used by LilyPondIssue34 are grouped here.)",
 // JMI  fGenerationAPIKind = msrGenerationAPIKind::kMsrFunctionsAPIKind; // default value
   fGenerationAPIKind = msrGenerationAPIKind::kMsrStringsAPIKind; // default value
 
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_NO_;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
 
   initializeLilyPondIssue34InsiderOahGroup ();
 }

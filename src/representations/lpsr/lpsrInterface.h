@@ -26,16 +26,16 @@ namespace MusicFormats
 S_msrScore createScore ();
 
 //_______________________________________________________________________________
-EXP void displayLpsrScoreShort (
-  const S_lpsrScore& theLpsrScore,
-  const S_msrOahGroup&     msrOpts,
-  const S_lpsrOahGroup&    lpsrOpts,
+EXP void displayLpsrScore (
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
   const std::string&     passDescription);
 
 EXP void displayLpsrScoreFull (
-  const S_lpsrScore& theLpsrScore,
-  const S_msrOahGroup&     msrOpts,
-  const S_lpsrOahGroup&    lpsrOpts,
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
   const std::string&     passDescription);
 
 

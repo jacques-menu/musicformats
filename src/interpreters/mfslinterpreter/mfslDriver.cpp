@@ -770,7 +770,7 @@ mfMusicformatsErrorKind mfslDriver::launchMfslTool_Pass2 ()
 {
   mfMusicformatsErrorKind
     result =
-      mfMusicformatsErrorKind::kMusicformatsError_NO_;
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   mfAssert (
     __FILE__, __LINE__,

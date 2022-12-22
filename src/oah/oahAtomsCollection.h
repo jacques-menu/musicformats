@@ -409,7 +409,7 @@ EXP std::ostream& operator << (std::ostream& os, const S_oahAboutAtom& elt);
 
 //______________________________________________________________________________
 enum class oahVersionKind {
-  kOahVersionShort, kOahVersionFull
+  kOahVersion, kOahVersionFull
 };
 
 std::string oahVersionKindAsString (
@@ -1451,7 +1451,7 @@ class EXP oahCombinedBooleansAtom : public oahAtom
     virtual void          printCombinedBooleansEssentials (
                             std::ostream& os,
                             int fieldWidth) const;
-    virtual void          printCombinedBooleansEssentialsShort (
+    virtual void          printCombinedBooleansEssentialsFull (
                             std::ostream& os,
                             int fieldWidth) const;
 

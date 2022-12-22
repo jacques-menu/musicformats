@@ -140,7 +140,7 @@ void LilyPondIssue34RegularHandler::createRegularHandlerGroups ()
   */
 
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -460,25 +460,25 @@ void LilyPondIssue34RegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-slices", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-short", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-slices", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1-names", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-names", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-names", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-names", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1-summary", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-summary", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-summary", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
   // atoms from the insider handler depending on the generated output kind
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -495,14 +495,14 @@ void LilyPondIssue34RegularHandler::createOahRegularGroup ()
       break;
 
     case mfMultiGenerationOutputKind::kGenerationBraille:
-      registerAtomInRegularSubgroup ("display-bsr-1", subGroup);
-      registerAtomInRegularSubgroup ("display-bsr-2", subGroup);
+      registerAtomInRegularSubgroup ("display-bsr1", subGroup);
+      registerAtomInRegularSubgroup ("display-bsr2", subGroup);
 
-      registerAtomInRegularSubgroup ("display-bsr-1-short", subGroup);
-      registerAtomInRegularSubgroup ("display-bsr-2-short", subGroup);
+      registerAtomInRegularSubgroup ("display-bsr1", subGroup);
+      registerAtomInRegularSubgroup ("display-bsr2", subGroup);
 
-      registerAtomInRegularSubgroup ("display-bsr-1-details", subGroup);
-      registerAtomInRegularSubgroup ("display-bsr-2-details", subGroup);
+      registerAtomInRegularSubgroup ("display-bsr1-details", subGroup);
+      registerAtomInRegularSubgroup ("display-bsr2-details", subGroup);
       break;
 
     case mfMultiGenerationOutputKind::kGenerationMusicXML:

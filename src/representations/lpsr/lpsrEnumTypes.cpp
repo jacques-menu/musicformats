@@ -1170,7 +1170,7 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
   s << (*pitchesNamesMapPTR) [quarterTonesPitchKind];
 
   switch (semiTonesPitchAndOctave->getOctaveKind ()) {
-    case msrOctaveKind::kOctave_NO_:
+    case msrOctaveKind::kOctave_UNKNOWN:
       s << "*** noOctave ***";
       break;
     case msrOctaveKind::kOctave0:
@@ -1301,7 +1301,7 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
     std::stringstream s;
 
     s <<
-      "dynamics text spanners style std::string \"" <<
+      "dynamics text spanners style string \"" <<
       dynamicsTextSpannersStyleKindString <<
       "\" is unknown" <<
       ", line: " << inputLineNumber;

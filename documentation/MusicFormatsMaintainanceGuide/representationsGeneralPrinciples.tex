@@ -6,17 +6,24 @@
 
 
 % -------------------------------------------------------------------------
-\section{Trees vs graphs}
+\section{Trees vs graphs, denormalization}
 % -------------------------------------------------------------------------
-%%%JMI
+
+In databases, \denorm\ means that some data is present in several places. This is usually done for speed, at the cost of making updates more complex, since no such place should be ignored in an update.
+
+A music score can be represented as a tree of elements, but performing conversions of such representations needs \Main{shortcut}s to be more practical. \mf\ used the term \link\ for that.
+
 
 % -------------------------------------------------------------------------
 \section{Denormalization}
 % -------------------------------------------------------------------------
 
-In databases, \denorm\ means that some data is present in several places. This is usually done for speed, at the cost of making updates more complex, since no such place should be ignored in an update.
 
-MSR uses \denorm\ explicitly, with smart pointers to class   instances being stored in other instances.
+% -------------------------------------------------------------------------
+\subsection{Descriptions sharing}
+% -------------------------------------------------------------------------
+
+MSR uses \denorm\ explicitly, with smart pointers to class instances being stored in other instances.
 
 In particular, \class{msrChord} contains elements that are actually detained by the notes it is composed of:
 \begin{lstlisting}[language=CPlusPlus]
@@ -39,6 +46,53 @@ It can use whichever occurrence of any given denormalized data safely, though.
 
 
 % -------------------------------------------------------------------------
+\subsection{Multiple voices}
+% -------------------------------------------------------------------------
+
+Another aspect to account for is that of \Main{dynamics}, \Main{lyrics}, \Main{harmonies} and \Main{figured bass}. 
+
+\lily\ supplies specific support to have them outside of notes, chords and other sound-producing score elements.\
+This provides flexibility when combining a score's staves and voices in various ways depending on the needs .
+
+\mf\ has explicit voice kinds for this, declared in \msr{msrVoices.h}:
+\begin{lstlisting}[language=CPlusPlus]
+enum class msrVoiceKind {
+  kVoiceKindRegular,
+  kVoiceKindDynamics,
+  kVoiceKindHarmonies,  // for MusicXML <harmony/>, LilyPond ChordNames
+  kVoiceKindFiguredBass // for MusicXML <figured-bass/>, LilyPond FiguredBass
+};
+\end{lstlisting}
+
+In \msrRepr, for example, a harmony is both attached to a note in a regular voice and an element of a harmony voice:
+\begin{lstlisting}[language=CPlusPlus]
+    std::list<S_msrHarmony>
+                          fNoteHarmoniesList;
+\end{lstlisting}
+
+An \className{msrNote} instance will thus be browsed twice, when those two voices are. The ones attached to a note are browsed this way:
+\begin{lstlisting}[language=CPlusPlus]
+void msrNote::browseData (basevisitor* v)
+{
+	// ... ... ...
+	
+  // browse the harmonies if any
+  if (fNoteHarmoniesList.size ()) {
+    ++gIndenter;
+    for (S_msrHarmony harmony : fNoteHarmoniesList) {
+      // browse the harmony
+      msrBrowser<msrHarmony> browser (v);
+      browser.browse (*harmony);
+    } // for
+    --gIndenter;
+  }
+	
+	// ... ... ...
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
 \section{Newborn clones}
 % -------------------------------------------------------------------------
 
@@ -46,8 +100,8 @@ The multi-pass structure of the converters build with {\tt musicformat} leads to
 
 Depending of the kind of description, both possibilities are used:
 \begin{itemize}
-\item the description is used as is if it is shallow, i.e. t doesn't contains smart-pointers to data;
-\item otherwise, a new description is built, sharing some some non smart-pointers fieds with the existing one. This newborn clone is then populated with whatever is needed.
+\item the description is used as is if it is {\it shallow}, i.e. it doesn't contain smart-pointers to data -- it is {\it self-contained};
+\item otherwise, a new description is built, sharing some smart-pointers fieds with the existing one if needed. This newborn clone is then populated when it is is inserted in the representation being built.
 \end{itemize}
 
 For example, in \msrToLpsr{}, the \smartPointerType{S_msrBarLine} values found in the MSR data are used also in the LPSR data:
@@ -106,6 +160,50 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
         fMemberNotesDisplayWholeNotes);
 
   return newbornClone;
+}
+\end{lstlisting}
+
+Such a newborn clone is created and used this way in \method{}{}:
+\begin{lstlisting}[language=CPlusPlus]
+void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrTuplet" <<
+      ", line " << elt->getInputLineNumber () <<
+      std::endl;
+  }
+#endif
+
+  // create the tuplet clone
+  S_msrTuplet
+    tupletClone =
+      elt->createTupletNewbornClone ();
+
+  // register it in this visitor
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+    gLogStream <<
+      "++> pushing tuplet '" <<
+      tupletClone->asString () <<
+      "' to tuplets stack" <<
+      std::endl;
+  }
+#endif
+
+  fTupletClonesStack.push (tupletClone);
+
+	// is Scheme support needed?
+  switch (elt->getTupletLineShapeKind ()) {
+    case msrTupletLineShapeKind::kTupletLineShapeStraight:
+      break;
+    case msrTupletLineShapeKind::kTupletLineShapeCurved:
+      fResultingLpsr->
+        // this score needs the 'tuplets curved brackets' Scheme function
+        setTupletsCurvedBracketsSchemeFunctionIsNeeded ();
+      break;
+  } // switch
 }
 \end{lstlisting}
 
@@ -326,7 +424,7 @@ Forgetting to define those \methodName{visit*} methods causes \MainIt{no error m
 The visitors trace options are useful to detect such cases:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2ly -find visitors
-3 occurrences of std::string "visitors" have been found:
+3 occurrences of string "visitors" have been found:
    1:
     -tmxmltvis, -trace-mxsr-visitors
     Write a trace of the MusicXML tree visiting activity to standard error.

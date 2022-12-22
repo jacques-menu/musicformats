@@ -164,7 +164,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       "Quitting after creating the first MSR as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // convert the first MSR into a second MSR (pass 2)
@@ -199,7 +199,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       "Quitting after creating the second MSR as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // the first BSR score
@@ -232,8 +232,8 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     // display the first BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplayFirstBsrShort ()) {
-      displayBsrScoreShort (
+    if (gGlobalBsrOahGroup->getDisplayFirstBsr ()) {
+      displayBsrScore (
         firstBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
@@ -258,7 +258,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       "Quitting after creating the first BSR as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // the finalized BSR score
@@ -290,8 +290,8 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     // display the finalized BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplaySecondBsrShort ()) {
-      displayBsrScoreShort (
+    if (gGlobalBsrOahGroup->getDisplaySecondBsr ()) {
+      displayBsrScore (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
@@ -316,7 +316,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       "Quitting after creating the finalized BSR as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   {
@@ -441,7 +441,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     }
   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________
@@ -546,7 +546,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NONE; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -585,7 +585,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
     out,
     err);
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________

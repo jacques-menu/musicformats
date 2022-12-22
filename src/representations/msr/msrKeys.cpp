@@ -94,9 +94,9 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
   }
 #endif
 
-  fKeyDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_NO_;
-  fKeyAlterationKind    = msrAlterationKind::kAlteration_NO_;
-  fKeyOctaveKind        = msrOctaveKind::kOctave_NO_;
+  fKeyDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
+  fKeyAlterationKind    = msrAlterationKind::kAlteration_UNKNOWN;
+  fKeyOctaveKind        = msrOctaveKind::kOctave_UNKNOWN;
 }
 
 msrHumdrumScotKeyItem::~msrHumdrumScotKeyItem ()
@@ -344,7 +344,7 @@ msrKey::msrKey ( // for traditional keys
   fKeyTonicQuarterTonesPitchKind = keyTonicQuarterTonesPitchKind;
 
   switch (fModeKind) {
-    case msrModeKind::kMode_NO_:
+    case msrModeKind::kMode_UNKNOWN:
       break;
     case msrModeKind::kModeMajor:
       break;
@@ -514,7 +514,7 @@ void msrKey::appendHumdrumScotKeyItem (
 #endif
 
   // have key items octaves been specified?
-  if (item->getKeyItemOctaveKind () != msrOctaveKind::kOctave_NO_) {
+  if (item->getKeyItemOctaveKind () != msrOctaveKind::kOctave_UNKNOWN) {
     fKeyItemsOctavesAreSpecified = true;
   }
 
@@ -537,7 +537,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating traditional key from std::string \"" <<
+      "Creating traditional key from string \"" <<
       keyString <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -572,7 +572,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for traditional key std::string \"" << keyString <<
+      " for traditional key string \"" << keyString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;
@@ -596,7 +596,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     std::stringstream s;
 
     s <<
-      "traditional key std::string \"" << keyString <<
+      "traditional key string \"" << keyString <<
       "\" is ill-formed";
 
     msrError (

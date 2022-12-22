@@ -28,35 +28,35 @@ S_msrBook createBook ();
 S_msrScore createScore ();
 
 //_______________________________________________________________________________
-void displayMsrScoreShort (
-  S_msrScore     theMsrScore,
+void displayMsrScore (
+  S_msrScore          theMsrScore,
   const std::string&  passDescription);
 
 void displayMsrScoreFull (
-  S_msrScore     theMsrScore,
+  S_msrScore          theMsrScore,
   const std::string&  passDescription);
 
 //______________________________________________________________________________
 EXP void displayMsrScoreSummary (
-  S_msrScore     theMsrScore,
-  S_msrOahGroup& msrOpts,
+  S_msrScore          theMsrScore,
+  S_msrOahGroup&      msrOpts,
   const std::string&  passDescription);
 
 //______________________________________________________________________________
 EXP void displayMsrScoreNames (
-  S_msrScore     theMsrScore,
-  S_msrOahGroup& msrOpts,
+  S_msrScore          theMsrScore,
+  S_msrOahGroup&      msrOpts,
   const std::string&  passDescription);
 
 //_______________________________________________________________________________
 void displayMsrScoreSlices (
-  S_msrScore    theMsrScore,
+  S_msrScore         theMsrScore,
   const std::string& passDescription);
 
 // parts
 // ------------------------------------------------------
 S_msrPart createPartInScore (
-                            const S_msrScore& theMsrScore);
+  const S_msrScore& theMsrScore);
 
 // staves
 // ------------------------------------------------------
@@ -67,16 +67,16 @@ S_msrStaff createStaffInPart (
 // voices
 // ------------------------------------------------------
 S_msrVoice createRegularVoiceInStaff (
-  int          inputLineNumber,
-  int          voiceNumber,
-  const S_msrStaff&   staff);
+  int               inputLineNumber,
+  int               voiceNumber,
+  const S_msrStaff& staff);
 
 // measures
 // ------------------------------------------------------
 S_msrMeasure createMeasureInVoice (
-  int        inputLineNumber,
-  std::string     measureNumber,
-             const S_msrVoice& voice);
+  int               inputLineNumber,
+  std::string       measureNumber,
+  const S_msrVoice& voice);
 
 
 }

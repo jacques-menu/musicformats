@@ -354,7 +354,7 @@ class EXP oahElement : public oahFindableElement
     virtual void          printOahElementEssentials (
                             std::ostream& os,
                             int fieldWidth) const;
-    virtual void          printOahElementEssentialsShort (
+    virtual void          printOahElementEssentialsFull (
                             std::ostream& os,
                             int fieldWidth) const;
 

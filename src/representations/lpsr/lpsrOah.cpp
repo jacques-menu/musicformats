@@ -602,7 +602,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for part rename std::string '" << theString <<
+      " for part rename string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
@@ -961,7 +961,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
   S_msrSemiTonesPitchAndOctave
     semiTonesPitchAndOctave =
       msrSemiTonesPitchAndOctave::createFromString (
-        K_MF_NO_INPUT_LINE_NUMBER,
+        K_MF_INPUT_LINE_UNKNOWN,
         theString);
 
   // set the transpose atom variable value
@@ -1211,23 +1211,15 @@ R"()",
   // display LPSR
 
   S_oahBooleanAtom
-    displayLpsrShortBooleanAtom =
+    DisplayLpsrBooleanAtom =
       oahBooleanAtom::create (
-        "display-lpsr-short", "dlpsrshort",
-R"(Write the contents of the LPSR data, short version, to standard error.)",
-        "fDisplayLpsrShort",
-        fDisplayLpsrShort);
-  subGroup->
-    appendAtomToSubGroup (
-      displayLpsrShortBooleanAtom);
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahAtomAlias::create (
         "display-lpsr", "dlpsr",
-R"(Write the contents of the LPSR data, short version, to standard error.
-This option is an alias for '-display-lpsr-short, -dlpsrshort'.)",
-        displayLpsrShortBooleanAtom));
+R"(Write the contents of the LPSR data to standard error.)",
+        "fDisplayLpsr",
+        fDisplayLpsr);
+  subGroup->
+    appendAtomToSubGroup (
+      DisplayLpsrBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
@@ -1989,7 +1981,7 @@ void lpsrOahGroup::enforceGroupQuietness ()
   fTraceSchemeFunctions = false;
 #endif
 
-  fDisplayLpsrShort = false;
+  fDisplayLpsr = false;
   fDisplayLpsrFull = false;
 }
 
@@ -2114,8 +2106,8 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (fieldWidth) << "fDisplayLpsrShort" << ": " <<
-    fDisplayLpsrShort <<
+    std::setw (fieldWidth) << "fDisplayLpsr" << ": " <<
+    fDisplayLpsr <<
     std::endl <<
     std::setw (fieldWidth) << "fDisplayLpsrFull" << ": " <<
     fDisplayLpsrFull <<

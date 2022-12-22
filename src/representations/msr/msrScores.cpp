@@ -713,10 +713,10 @@ void msrScore::print(std::ostream& os) const
 void msrScore::printSummary (std::ostream& os) const
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
+  if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
     os << "MSR score summary";
   }
-  else if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) { // JMI
+  else if (gGlobalLpsrOahGroup->getDisplayLpsr ()) { // JMI
     os << "MSR full score";
   }
   else {

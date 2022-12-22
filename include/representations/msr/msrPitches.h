@@ -24,7 +24,7 @@ namespace MusicFormats
 // diatonic pitches
 //______________________________________________________________________________
 enum class msrDiatonicPitchKind {
-  kDiatonicPitch_NO_,
+  kDiatonicPitch_UNKNOWN,
 
   // starting at C for LilyPond relative octave calculations
   kDiatonicPitchC,
@@ -96,7 +96,7 @@ std::ostream& operator << (std::ostream& os, const msrSemiTonesPitchKind& elt);
 // quarter tones pitches
 //______________________________________________________________________________
 enum class msrQuarterTonesPitchKind {
-  kQTP_NO_,
+  kQTP_UNKNOWN,
 
   kQTP_Rest, kQTP_Skip,
 
@@ -151,7 +151,7 @@ std::ostream& operator << (std::ostream& os, const msrQuarterTonesPitchKind& elt
 // alterations
 //______________________________________________________________________________
 enum class msrAlterationKind {
-  kAlteration_NO_,
+  kAlteration_UNKNOWN,
 
   kAlterationTripleFlat, kAlterationDoubleFlat, kAlterationSesquiFlat,
   kAlterationFlat, kAlterationSemiFlat,

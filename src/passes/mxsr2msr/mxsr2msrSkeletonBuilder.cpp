@@ -155,7 +155,7 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
   // the MSR score we're building
   fMsrScore =
     msrScore::create (
-      K_MF_NO_INPUT_LINE_NUMBER,
+      K_MF_INPUT_LINE_UNKNOWN,
       "msrScore::create()");
 
   // score handling
@@ -180,8 +180,8 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
   fPartNumberOfMeasures = 0;
 
   // lyrics handling
-  fCurrentStanzaNumber = msrStanza::K_NO_STANZA_NUMBER; // JMI
-  fCurrentStanzaName = msrStanza::K_NO_STANZA_NAME; // JMI
+  fCurrentStanzaNumber = msrStanza::K_STANZA_NUMBER_UNKNOWN; // JMI
+  fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN; // JMI
 
   // harmonies handling
 //   fThereAreHarmoniesToBeAttachedToCurrentNote = false;
@@ -2451,7 +2451,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
 
   msrCreditTypeKind
     creditTypeKind =
-      msrCreditTypeKind::kCreditType_NO_; // default value
+      msrCreditTypeKind::kCreditType_UNKNOWN; // default value
 
   if      (creditTypeValue == "page number")
     creditTypeKind = msrCreditTypeKind::kCreditTypeNumber;
@@ -3838,8 +3838,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
   fCurrentVoiceMusicXMLNumber = 1;
 
   // lyrics
-  fCurrentStanzaNumber = msrStanza::K_NO_STANZA_NUMBER;
-  fCurrentStanzaName = msrStanza::K_NO_STANZA_NAME;
+  fCurrentStanzaNumber = msrStanza::K_STANZA_NUMBER_UNKNOWN;
+  fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN;
 
   fOnGoingNote = true;
 }
@@ -4006,7 +4006,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 
         s <<
           "lyric name is empty, using \"" <<
-          msrStanza::K_NO_STANZA_NAME <<
+          msrStanza::K_STANZA_NAME_UNKNOWN <<
           "\" by default";
 
         musicxmlWarning (
@@ -4016,7 +4016,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
       }
 #endif
 
-      fCurrentStanzaName = msrStanza::K_NO_STANZA_NAME;
+      fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN;
     }
 
     else {

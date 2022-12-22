@@ -1000,7 +1000,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
 
       fCurrentOctaveEntryReference =
         msrNote::createNoteFromSemiTonesPitchAndOctave (
-          K_MF_NO_INPUT_LINE_NUMBER,
+          K_MF_INPUT_LINE_UNKNOWN,
           gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave ());
       break;
   } // switch
@@ -1014,7 +1014,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
     // option '-rel, -relative' has been used:
     fCurrentOctaveEntryReference =
       msrNote::createNoteFromSemiTonesPitchAndOctave (
-        K_MF_NO_INPUT_LINE_NUMBER,
+        K_MF_INPUT_LINE_UNKNOWN,
         gGlobalLpsr2lilypondOahGroup->
           getRelativeOctaveEntrySemiTonesPitchAndOctave ());
   }
@@ -1167,7 +1167,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
   return s.str ();
 */
 
-  return std::string ("");
+  return std::string (""); // JMI v0.9.66
 }
 
 // --------------------------------------------------------------------------
@@ -3157,7 +3157,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
   // there should be a pitch name
   msrQuarterTonesPitchKind
-    noteQuarterTonesPitchKind = msrQuarterTonesPitchKind::kQTP_NO_;
+    noteQuarterTonesPitchKind = msrQuarterTonesPitchKind::kQTP_UNKNOWN;
 
   if (checkMandatoryTokenKind (
     __FILE__, __LINE__,
@@ -3365,7 +3365,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
 
 msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet)
 {
-  msrOctaveKind result = msrOctaveKind::kOctave_NO_;
+  msrOctaveKind result = msrOctaveKind::kOctave_UNKNOWN;
 
   if (stopperTokensSet->getTokenKindsSetSize ()) {
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
@@ -3504,7 +3504,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
   ++gIndenter;
 
   // there should be an integer or a name such as "maxima"
-  msrDurationKind durationKind = msrDurationKind::kDuration_NO_;
+  msrDurationKind durationKind = msrDurationKind::kDuration_UNKNOWN;
 
   if (
     checkOptionalTokenKindsSet (
@@ -3559,7 +3559,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
 
     // sanity check
     switch (durationKind) {
-      case msrDurationKind::kDuration_NO_:
+      case msrDurationKind::kDuration_UNKNOWN:
         fParserWaeHandler->
           malformedNoteDuration ();
         break;

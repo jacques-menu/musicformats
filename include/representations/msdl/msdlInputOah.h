@@ -559,11 +559,11 @@ class EXP msdlInputOahGroup : public oahGroup
     Bool                  getDisplayMsdl () const
                               { return fDisplayMsdl; }
 
-    void                  setDisplayMsdlShort ()
-                              { fDisplayMsdlShort = true; }
+    void                  setDisplayMsdlFull ()
+                              { fDisplayMsdlFull = true; }
 
-    Bool                  getDisplayMsdlShort () const
-                              { return fDisplayMsdlShort; }
+    Bool                  getDisplayMsdlFull () const
+                              { return fDisplayMsdlFull; }
 
     msrQuarterTonesPitchesLanguageKind
                           getMsdlQuarterTonesPitchesLanguageKind () const
@@ -625,7 +625,7 @@ class EXP msdlInputOahGroup : public oahGroup
     // --------------------------------------
 
     Bool                  fDisplayMsdl;
-    Bool                  fDisplayMsdlShort;
+    Bool                  fDisplayMsdlFull;
 
     // keywords languages
     // --------------------------------------

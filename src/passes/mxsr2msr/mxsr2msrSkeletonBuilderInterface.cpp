@@ -95,7 +95,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 
   // display the first MSR score skeleton if requested
   if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
-    displayMsrScoreShort (
+    displayMsrScore (
       scoreSkeleton,
       "Display the first MSR score skeleton");
   }

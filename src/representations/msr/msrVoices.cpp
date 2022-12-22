@@ -252,7 +252,7 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatDescr& elt)
 
 //______________________________________________________________________________
 // constants
-const int msrVoice::K_NO_VOICE_NUMBER                      = -99;
+const int msrVoice::K_VOICE_NUMBER_UNKNOWN                      = -99;
 const int msrVoice::K_VOICE_HARMONIES_VOICE_BASE_NUMBER    =  20;
 const int msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER =  40;
 
@@ -1103,7 +1103,7 @@ void msrVoice::setVoiceLastAppendedMeasure (
         measure->asString ();
     }
     else {
-      gLogStream << "null";
+      gLogStream << "[NONE]";
     }
 
     gLogStream <<
@@ -2877,7 +2877,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   // register whether music (i.e. not just skips)
   // has been inserted into the voice
   switch (note->getNoteKind ()) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -3012,7 +3012,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
   // register whether music (i.e. not just skips)
   // has been inserted into the voice
   switch (note->getNoteKind ()) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -3237,11 +3237,11 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
 
   // get the voice first note's uplink to chord
   S_msrChord
-    firstNoteDirectUpLinkToChord =
+    firstNoteShortcutUpLinkToChord =
       voiceFirstNote->
-        getNoteDirectUpLinkToChord ();
+        getNoteShortcutUpLinkToChord ();
 
-  if (firstNoteDirectUpLinkToChord) {
+  if (firstNoteShortcutUpLinkToChord) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
       gLogStream <<
@@ -3249,14 +3249,14 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         graceNotesGroup->asString () <<
         "' to the first chord of voice \"" << getVoiceName () <<
         "\", i.e. '" <<
-        firstNoteDirectUpLinkToChord->asShortString () <<
+        firstNoteShortcutUpLinkToChord->asShortString () <<
         "'" <<
         std::endl;
     }
 #endif
 
 /*
-    firstNoteDirectUpLinkToChord->
+    firstNoteShortcutUpLinkToChord->
       setChordGraceNotesGroupBefore (
         graceNotesGroup);
         */
@@ -3267,10 +3267,10 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         msrChordGraceNotesGroupLink::create (
           graceNotesGroup->getInputLineNumber (),
           graceNotesGroup,
-          firstNoteDirectUpLinkToChord);
+          firstNoteShortcutUpLinkToChord);
 
     // register it in the chord
-    firstNoteDirectUpLinkToChord->
+    firstNoteShortcutUpLinkToChord->
       setChordGraceNotesGroupLinkBefore (
         inputLineNumber,
         chordChordGraceNotesGroupLink);
@@ -4093,7 +4093,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
     }
     else {
       gLogStream <<
-        "null";
+        "[NONE]";
     }
 
     gLogStream <<
@@ -10155,7 +10155,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       fVoiceBeamNumbersStack.size ();
 
   switch (beamKind) {
-    case msrBeamKind::kBeam_NO_:
+    case msrBeamKind::kBeam_UNKNOWN:
       {
         std::stringstream s;
 
@@ -10575,7 +10575,7 @@ void msrVoice::printFull (std::ostream& os) const
       fVoiceFirstClef;
   }
   else {
-    os << "null" << std::endl;
+    os << "[NONE]" << std::endl;
   }
   os << std::left <<
     std::setw (fieldWidth) << "fVoiceCurrentClef" << ": ";
@@ -10584,7 +10584,7 @@ void msrVoice::printFull (std::ostream& os) const
       fVoiceCurrentClef;
   }
   else {
-    os << "null" << std::endl;
+    os << "[NONE]" << std::endl;
   }
 
   os << std::left <<
@@ -10594,7 +10594,7 @@ void msrVoice::printFull (std::ostream& os) const
       fVoiceCurrentKey;
   }
   else {
-    os << "null" << std::endl;
+    os << "[NONE]" << std::endl;
   }
 
   os << std::left <<
@@ -10609,7 +10609,7 @@ void msrVoice::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "null" << std::endl;
+    os << "[NONE]" << std::endl;
   }
 #endif
 
@@ -10812,7 +10812,7 @@ void msrVoice::printFull (std::ostream& os) const
   }
   else {
     os <<
-      "null" <<
+      "[NONE]" <<
       std::endl;
   }
 

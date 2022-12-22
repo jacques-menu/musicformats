@@ -41,7 +41,7 @@ typedef SMARTP<msrHarmony> S_msrHarmony;
 // harmonies
 //______________________________________________________________________________
 enum class msrHarmonyKind {
-  kHarmony_NO_,
+  kHarmony_UNKNOWN,
 
   // MusicXML harmonies
 
@@ -91,7 +91,7 @@ enum class msrHarmonyKind {
   // aliases
   // ------------------------------------
 
-  AllFirst = kHarmony_NO_,
+  AllFirst = kHarmony_UNKNOWN,
   AllLast  = kHarmonyNone,
 
   TrueHarmoniesFirst = kHarmonyMajor,
@@ -116,7 +116,7 @@ std::string existingHarmonyKinds (size_t namesListMaxLength);
 std::string existingHarmonyKindsNames (size_t namesListMaxLength);
 
 // constant
-EXP extern const int K_HARMONY_NO_INVERSION;
+EXP extern const int K_HARMONY_INVERSION_NONE;
 
 EXP extern std::map<std::string, msrHarmonyKind>
   gGlobalHarmonyKindsMap;

@@ -667,7 +667,7 @@ SXMLFile createSXMLFileFromString (
     if (gtracingOah->fTracePasses) {
       gLogStream <<
         std::endl <<
-        "Reading MusicXML data from a std::string " << buffer.size () << " characters long" <<
+        "Reading MusicXML data from a string " << buffer.size () << " characters long" <<
         std::endl;
     }
 #endif

@@ -22,7 +22,7 @@ namespace MusicFormats
 // placements
 //______________________________________________________________________________
 enum class msrPlacementKind {
-  kPlacement_NO_,
+  kPlacement_UNKNOWN,
   kPlacementAbove, kPlacementBelow
 };
 

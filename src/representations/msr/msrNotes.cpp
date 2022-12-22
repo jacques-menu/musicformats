@@ -169,7 +169,7 @@ msrNote::msrNote (
 
   fNoteDisplayWholeNotes  = noteDisplayWholeNotes;
 
-  // only now, to be able to display the note as a std::string
+  // only now, to be able to display the note as a string
   doSetMeasureElementSoundingWholeNotes (
     noteSoundingWholeNotes,
     "msrNote::msrNote()");
@@ -183,7 +183,7 @@ void msrNote::initializeNote ()
   // rests handling
   // ------------------------------------------------------
 
-  if (fetchNoteIsARest () && fNoteDisplayOctaveKind != msrOctaveKind::kOctave_NO_) {
+  if (fetchNoteIsARest () && fNoteDisplayOctaveKind != msrOctaveKind::kOctave_UNKNOWN) {
     // this note is a pitched rest:
     // copy the display octave to the note octave, // JMI
     // to be used in octave relative code generation
@@ -219,7 +219,7 @@ void msrNote::initializeNote ()
       std::endl <<
       "Initializing a note" <<
       ", kind: ";
-    if (fNoteKind == msrNoteKind::kNote_NO_)
+    if (fNoteKind == msrNoteKind::kNote_UNKNOWN)
       gLogStream <<
         "not yet known";
     else
@@ -420,7 +420,7 @@ S_msrMeasure msrNote::getNoteUpLinkToMeasure () const
 //   S_msrMeasure result;
 //
 //   switch (fNoteKind) {
-//     case msrNoteKind::kNote_NO_:
+//     case msrNoteKind::kNote_UNKNOWN:
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInMeasure:
@@ -431,9 +431,9 @@ S_msrMeasure msrNote::getNoteUpLinkToMeasure () const
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInChord:
-//       if (fNoteDirectUpLinkToChord) {
+//       if (fNoteShortcutUpLinkToChord) {
 //         result =
-//           fNoteDirectUpLinkToChord->
+//           fNoteShortcutUpLinkToChord->
 //             fMeasureElementUpLinkToMeasure ();
 //       }
 //       break;
@@ -441,9 +441,9 @@ S_msrMeasure msrNote::getNoteUpLinkToMeasure () const
 //     case msrNoteKind::kNoteRegularInTuplet:
 //     case msrNoteKind::kNoteRestInTuplet:
 //     case msrNoteKind::kNoteUnpitchedInTuplet:
-//       if (fNoteDirectUpLinkToTuplet) {
+//       if (fNoteShortcutUpLinkToTuplet) {
 //         result =
-//           fNoteDirectUpLinkToTuplet->
+//           fNoteShortcutUpLinkToTuplet->
 //             fMeasureElementUpLinkToMeasure ();
 //       }
 //       break;
@@ -455,9 +455,9 @@ S_msrMeasure msrNote::getNoteUpLinkToMeasure () const
 //     case msrNoteKind::kNoteRegularInGraceNotesGroup:
 //     case msrNoteKind::kNoteSkipInGraceNotesGroup:
 //     /* JMi
-//       if (fNoteDirectUpLinkToGraceNotesGroup) {
+//       if (fNoteShortcutUpLinkToGraceNotesGroup) {
 //         result =
-//           fNoteDirectUpLinkToGraceNotesGroup->
+//           fNoteShortcutUpLinkToGraceNotesGroup->
 //             getGraceNotesGroupUpLinkToVoice ();
 //               / * JMI
 //               getGraceNotesGroupUpLinkToNote ()->
@@ -483,14 +483,14 @@ S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
   S_msrGraceNotesGroup result;
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteRegularInChord:
-      result = fNoteDirectUpLinkToGraceNotesGroup;
+      result = fNoteShortcutUpLinkToGraceNotesGroup;
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
@@ -498,10 +498,10 @@ S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
 
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
-      if (fNoteDirectUpLinkToTuplet) {
+      if (fNoteShortcutUpLinkToTuplet) {
       /* JMI
         result =
-          fNoteDirectUpLinkToTuplet->
+          fNoteShortcutUpLinkToTuplet->
             fMeasureElementUpLinkToMeasure ()->
               fetchMeasureUpLinkToVoice ();
       */
@@ -514,9 +514,9 @@ S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMi
-      if (fNoteDirectUpLinkToGraceNotesGroup) {
+      if (fNoteShortcutUpLinkToGraceNotesGroup) {
         result =
-          fNoteDirectUpLinkToGraceNotesGroup->
+          fNoteShortcutUpLinkToGraceNotesGroup->
             getGraceNotesGroupUpLinkToVoice ();
               / * JMI
               getGraceNotesGroupUpLinkToNote ()->
@@ -553,7 +553,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
 #endif
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
@@ -572,20 +572,20 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
 
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
-      if (fNoteDirectUpLinkToTuplet) {
+      if (fNoteShortcutUpLinkToTuplet) {
         S_msrMeasure upLinkToMeasure;
 
-        fNoteDirectUpLinkToTuplet->
+        fNoteShortcutUpLinkToTuplet->
           getMeasureElementUpLinkToMeasure (
             upLinkToMeasure);
 
         S_msrMeasure
-          tupletDirectUpLinkToMeasure =
+          tupletShortcutUpLinkToMeasure =
             upLinkToMeasure;
 
-        if (tupletDirectUpLinkToMeasure) {
+        if (tupletShortcutUpLinkToMeasure) {
           result =
-            tupletDirectUpLinkToMeasure->
+            tupletShortcutUpLinkToMeasure->
               fetchMeasureUpLinkToVoice ();
         }
       }
@@ -597,9 +597,9 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMi
-      if (fNoteDirectUpLinkToGraceNotesGroup) {
+      if (fNoteShortcutUpLinkToGraceNotesGroup) {
         result =
-          fNoteDirectUpLinkToGraceNotesGroup->
+          fNoteShortcutUpLinkToGraceNotesGroup->
             getGraceNotesGroupUpLinkToVoice ();
               / * JMI
               getGraceNotesGroupUpLinkToNote ()->
@@ -1420,18 +1420,18 @@ S_msrNote msrNote::createRestNote (
 
       msrNoteKind::kNoteRestInMeasure, // noteKind
 
-      msrQuarterTonesPitchKind::kQTP_NO_,
-      msrOctaveKind::kOctave_NO_, // noteOctave,
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN,
+      msrOctaveKind::kOctave_UNKNOWN, // noteOctave,
 
       soundingWholeNotes,
       displayWholeNotes,
 
       dotsNumber,
 
-      msrDurationKind::kDuration_NO_, // noteGraphicDuration
+      msrDurationKind::kDuration_UNKNOWN, // noteGraphicDuration
 
-      msrQuarterTonesPitchKind::kQTP_NO_, // noteDisplayQuarterTonesPitch
-      msrOctaveKind::kOctave_NO_, // noteDisplayOctave,
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN, // noteDisplayQuarterTonesPitch
+      msrOctaveKind::kOctave_UNKNOWN, // noteDisplayOctave,
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -1471,18 +1471,18 @@ S_msrNote msrNote::createSkipNote (
 
       msrNoteKind::kNoteSkipInMeasure, // noteKind
 
-      msrQuarterTonesPitchKind::kQTP_NO_,
-      msrOctaveKind::kOctave_NO_, // noteOctave,
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN,
+      msrOctaveKind::kOctave_UNKNOWN, // noteOctave,
 
       soundingWholeNotes,
       displayWholeNotes,
 
       dotsNumber,
 
-      msrDurationKind::kDuration_NO_, // noteGraphicDuration
+      msrDurationKind::kDuration_UNKNOWN, // noteGraphicDuration
 
-      msrQuarterTonesPitchKind::kQTP_NO_, // noteDisplayQuarterTonesPitch
-      msrOctaveKind::kOctave_NO_, // noteDisplayOctave,
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN, // noteDisplayQuarterTonesPitch
+      msrOctaveKind::kOctave_UNKNOWN, // noteDisplayOctave,
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -1522,18 +1522,18 @@ S_msrNote msrNote::createGraceSkipNote (
 
       msrNoteKind::kNoteSkipInGraceNotesGroup, // noteKind
 
-      msrQuarterTonesPitchKind::kQTP_NO_,
-      msrOctaveKind::kOctave_NO_, // noteOctave,
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN,
+      msrOctaveKind::kOctave_UNKNOWN, // noteOctave,
 
       soundingWholeNotes,
       displayWholeNotes,
 
       dotsNumber,
 
-      msrDurationKind::kDuration_NO_, // noteGraphicDuration
+      msrDurationKind::kDuration_UNKNOWN, // noteGraphicDuration
 
-      msrQuarterTonesPitchKind::kQTP_NO_, // noteDisplayQuarterTonesPitch
-      msrOctaveKind::kOctave_NO_, // noteDisplayOctave,
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN, // noteDisplayQuarterTonesPitch
+      msrOctaveKind::kOctave_UNKNOWN, // noteDisplayOctave,
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -1583,10 +1583,10 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
       dotsNumber,
 
-      msrDurationKind::kDuration_NO_, // noteGraphicDuration
+      msrDurationKind::kDuration_UNKNOWN, // noteGraphicDuration
 
       msrQuarterTonesPitchKind::kQTP_Rest,  // noteQuarterTonesDisplayPitchKind
-      msrOctaveKind::kOctave_NO_,  // noteDisplayOctaveKind
+      msrOctaveKind::kOctave_UNKNOWN,  // noteDisplayOctaveKind
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -1636,7 +1636,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 
       dotsNumber,
 
-      msrDurationKind::kDuration_NO_, // noteGraphicDuration JMI ???
+      msrDurationKind::kDuration_UNKNOWN, // noteGraphicDuration JMI ???
 
       msrQuarterTonesPitchKind::kQTP_Skip,  // noteQuarterTonesDisplayPitchKind
       noteOctave,
@@ -1730,7 +1730,7 @@ S_msrNote msrNote::createRestFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating rest from std::string \"" <<
+      "Creating rest from string \"" <<
       restString <<
       "\", restMeasureNumber: '" <<
       restMeasureNumber <<
@@ -1769,7 +1769,7 @@ S_msrNote msrNote::createRestFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for rest std::string \"" << restString <<
+      " for rest string \"" << restString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;
@@ -1869,7 +1869,7 @@ S_msrNote msrNote::createSkipFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating skip from std::string \"" <<
+      "Creating skip from string \"" <<
       skipString <<
       "\", skipMeasureNumber: '" <<
       skipMeasureNumber <<
@@ -1908,7 +1908,7 @@ S_msrNote msrNote::createSkipFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for skip std::string \"" << skipString <<
+      " for skip string \"" << skipString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;
@@ -2009,7 +2009,7 @@ S_msrNote msrNote::createNoteFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating note from std::string \"" <<
+      "Creating note from string \"" <<
       noteString <<
       "\", noteMeasureNumber: '" <<
       noteMeasureNumber <<
@@ -2053,7 +2053,7 @@ S_msrNote msrNote::createNoteFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for note std::string \"" << noteString <<
+      " for note string \"" << noteString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;
@@ -2191,7 +2191,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
 
-//       K_NO_MEASURE_NUMBER, // JMI ???  // v0.9.66
+//       K_MEASURE_NUMBER_UNKNOWN, // JMI ???  // v0.9.66
 
       msrNoteKind::kNoteRegularInMeasure, // noteKind
 
@@ -2206,10 +2206,10 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 
       0, // dotsNumber,
 
-      msrDurationKind::kDuration_NO_, // noteGraphicDuration
+      msrDurationKind::kDuration_UNKNOWN, // noteGraphicDuration
 
-      msrQuarterTonesPitchKind::kQTP_NO_, // noteDisplayQuarterTonesPitch
-      msrOctaveKind::kOctave_NO_, // noteDisplayOctave,
+      msrQuarterTonesPitchKind::kQTP_UNKNOWN, // noteDisplayQuarterTonesPitch
+      msrOctaveKind::kOctave_UNKNOWN, // noteDisplayOctave,
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -2268,8 +2268,8 @@ void msrNote::setMeasureElementMeasurePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+    "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 
   // handle the chord itself
   msrMeasureElement::setMeasureElementMeasurePosition (
@@ -2391,7 +2391,7 @@ msrDiatonicPitchKind msrNote::noteDiatonicPitchKind (
 Bool msrNote::noteIsAPitchedRest () const
 {
   return
-    fetchNoteIsARest () && fNoteDisplayOctaveKind != msrOctaveKind::kOctave_NO_;
+    fetchNoteIsARest () && fNoteDisplayOctaveKind != msrOctaveKind::kOctave_UNKNOWN;
 }
 
 void msrNote::setNoteStem (const S_msrStem& stem)
@@ -2550,7 +2550,7 @@ void msrNote::appendSpannerToNote (
           break;
         case msrSpannerTypeKind::kSpannerTypeContinue:
           break;
-        case msrSpannerTypeKind::kSpannerType_NO_:
+        case msrSpannerTypeKind::kSpannerType_UNKNOWN:
           // JMI ???
           break;
       } // switch
@@ -2626,7 +2626,7 @@ void msrNote::appendTechnicalWithStringToNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
-      "Adding technical with std::string'" <<
+      "Adding technical with string'" <<
       technicalWithString->asString () <<
       " to note " <<
       asString () <<
@@ -2635,7 +2635,7 @@ void msrNote::appendTechnicalWithStringToNote (
   }
 #endif
 
-  // append the technical with std::string to the note technicals with strings list
+  // append the technical with string to the note technicals with strings list
   fNoteTechnicalWithStrings.push_back (
     technicalWithString);
 }
@@ -3076,8 +3076,8 @@ void msrNote::appendScordaturaToNote (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     voicePosition != msrMoment::K_NO_POSITION,
-//     "voicePosition == msrMoment::K_NO_POSITION");
+//     voicePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+//     "voicePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 //
 //   // set measure element voice position
 // #ifdef TRACING_IS_ENABLED
@@ -3188,7 +3188,7 @@ void msrNote::appendSyllableToNote (
   fNoteSyllables.push_back (syllable);
 }
 
-void msrNote::appendHarmonyToNoteHarmoniesList (
+void msrNote::appendHarmonyToNote (
   const S_msrHarmony& harmony)
 {
 #ifdef TRACING_IS_ENABLED
@@ -3208,7 +3208,7 @@ void msrNote::appendHarmonyToNoteHarmoniesList (
   harmony->
     setMeasureElementSoundingWholeNotes (
       fMeasureElementSoundingWholeNotes,
-      "appendHarmonyToNoteHarmoniesList()");
+      "appendHarmonyToNote()");
 
   fNoteHarmoniesList.push_back (harmony);
 
@@ -3424,7 +3424,7 @@ void msrNote::browseData (basevisitor* v)
     --gIndenter;
   }
 
-  // browse the technicals with std::string if any
+  // browse the technicals with string if any
   if (fNoteTechnicalWithStrings.size ()) {
     ++gIndenter;
     std::list<S_msrTechnicalWithString>::const_iterator i;
@@ -3680,36 +3680,33 @@ void msrNote::browseData (basevisitor* v)
 
   // browse the harmonies if any
   if (fNoteHarmoniesList.size ()) {
-    std::list<S_msrHarmony>::const_iterator i;
-    for (
-      i=fNoteHarmoniesList.begin (); i!=fNoteHarmoniesList.end (); ++i
-    ) {
+    ++gIndenter;
+    for (S_msrHarmony harmony : fNoteHarmoniesList) {
       // browse the harmony
       msrBrowser<msrHarmony> browser (v);
-      browser.browse (*(*i));
+      browser.browse (*harmony);
     } // for
+    --gIndenter;
   }
 
   // browse the figured basses if any
   if (fNoteFiguredBassesList.size ()) {
-    std::list<S_msrFiguredBass>::const_iterator i;
-    for (
-      i=fNoteFiguredBassesList.begin (); i!=fNoteFiguredBassesList.end (); ++i
-    ) {
+    ++gIndenter;
+    for (S_msrFiguredBass figuredBass : fNoteFiguredBassesList) {
       // browse the figured bass
       msrBrowser<msrFiguredBass> browser (v);
-      browser.browse (*(*i));
+      browser.browse (*figuredBass);
     } // for
+    --gIndenter;
   }
 
   // browse the syllables if any
   if (fNoteSyllables.size ()) {
     ++gIndenter;
-    std::list<S_msrSyllable>::const_iterator i;
-    for (i=fNoteSyllables.begin (); i!=fNoteSyllables.end (); ++i) {
+    for (S_msrSyllable syllable : fNoteSyllables) {
       // browse the syllable
       msrBrowser<msrSyllable> browser (v);
-      browser.browse (*(*i));
+      browser.browse (*syllable);
     } // for
     --gIndenter;
   }
@@ -3756,7 +3753,7 @@ std::string msrNote::notePitchAsString () const
   std::stringstream s;
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteRegularInMeasure:
@@ -3835,7 +3832,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
   s << '[';
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       s <<
         "***noNote***";
       break;
@@ -4060,9 +4057,9 @@ std::string msrNote::asShortString () const
   s << '[';
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       s <<
-        "kNote_NO_" <<
+        "kNote_UNKNOWN" <<
         ":" <<
         noteSoundingWholeNotesAsMsrString ();
 
@@ -4234,8 +4231,8 @@ std::string msrNote::asShortString () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ());
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
         ", " <<
         fNoteOctaveKind;
@@ -4263,8 +4260,8 @@ std::string msrNote::asShortString () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ());
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4290,8 +4287,8 @@ std::string msrNote::asShortString () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ());
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
 
       if (! fetchNoteIsARest ()) {
@@ -4320,8 +4317,8 @@ std::string msrNote::asShortString () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ());
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4347,9 +4344,9 @@ std::string msrNote::asMinimalString () const
   s << '[';
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       s <<
-        "kNote_NO_" <<
+        "kNote_UNKNOWN" <<
         ":" <<
         noteSoundingWholeNotesAsMsrString ();
 
@@ -4609,7 +4606,7 @@ std::string msrNote::noteComplementsAsString () const
         fNoteUpLinkToMeasure->
           getMeasureNumber ();
 
-    if (measureNumber == K_NO_MEASURE_NUMBER) {
+    if (measureNumber == K_MEASURE_NUMBER_UNKNOWN) {
       s << "[UNKNOWN]";
     }
     else {
@@ -4739,7 +4736,7 @@ std::string msrNote::asString () const
     ", fNoteKind: ";
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       s <<
         "*noNote*";
       break;
@@ -4826,8 +4823,8 @@ std::string msrNote::asString () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
       break;
 
@@ -4846,8 +4843,8 @@ std::string msrNote::asString () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
 
       s <<
@@ -4863,8 +4860,8 @@ std::string msrNote::asString () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
       s <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
@@ -4875,7 +4872,7 @@ std::string msrNote::asString () const
   s << std::left <<
     ", measurePosition: ";
     / * JMI
-  if (fMeasureElementMeasurePosition == msrMoment::K_NO_POSITION_MEASURE_NUMBER) {
+  if (fMeasureElementMeasurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN_MEASURE_NUMBER) {
     s << "unknown (" << fMeasureElementMeasurePosition << ")";
   }
   else {
@@ -4941,7 +4938,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
   s << '[';
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       s <<
         "*noNote*";
       break;
@@ -5028,8 +5025,8 @@ std::string msrNote::asShortStringForMeasuresSlices () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
       break;
 
@@ -5048,8 +5045,8 @@ std::string msrNote::asShortStringForMeasuresSlices () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
 
       s <<
@@ -5065,8 +5062,8 @@ std::string msrNote::asShortStringForMeasuresSlices () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
       s <<
         ", noteTupletFactor: " << fNoteTupletFactor.asString ();
@@ -5088,9 +5085,9 @@ std::string msrNote::noteEssentialsAsSting () const
     "fNoteKind: ";
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       s <<
-        "[kNote_NO_]";
+        "[kNote_UNKNOWN]";
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -5168,8 +5165,8 @@ std::string msrNote::noteEssentialsAsSting () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
       break;
 
@@ -5188,8 +5185,8 @@ std::string msrNote::noteEssentialsAsSting () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
 
       s <<
@@ -5205,8 +5202,8 @@ std::string msrNote::noteEssentialsAsSting () const
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
-            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
       s <<
         ", noteTupletFactor: " << fNoteTupletFactor.asString ();
@@ -5420,7 +5417,7 @@ void msrNote::printFull (std::ostream& os) const
         fNoteUpLinkToMeasure->
           getMeasureNumber ();
 
-    if (measureNumber == K_NO_MEASURE_NUMBER) {
+    if (measureNumber == K_MEASURE_NUMBER_UNKNOWN) {
       os << "[UNKNOWN]";
     }
     else {
@@ -5432,7 +5429,7 @@ void msrNote::printFull (std::ostream& os) const
   }
 
 
-//   if (fNoteUpLinkToMeasure->getMeasureNumber () == K_NO_MEASURE_NUMBER) {
+//   if (fNoteUpLinkToMeasure->getMeasureNumber () == K_MEASURE_NUMBER_UNKNOWN) {
 //     os <<
 //       "[UNKNOWN]";
 //   }
@@ -5495,10 +5492,10 @@ void msrNote::printFull (std::ostream& os) const
   // print note uplink to chord
   os <<
     std::setw (fieldWidth) <<
-    "fNoteDirectUpLinkToChord" << ": ";
-  if (fNoteDirectUpLinkToChord) {
+    "fNoteShortcutUpLinkToChord" << ": ";
+  if (fNoteShortcutUpLinkToChord) {
     os <<
-      fNoteDirectUpLinkToChord->asShortString ();
+      fNoteShortcutUpLinkToChord->asShortString ();
   }
   else {
     os << "[NONE]";
@@ -5508,12 +5505,12 @@ void msrNote::printFull (std::ostream& os) const
   // print note uplink to grace notes group
   os <<
     std::setw (fieldWidth) <<
-    "fNoteDirectUpLinkToGraceNotesGroup" << ": ";
-  if (fNoteDirectUpLinkToGraceNotesGroup) {
+    "fNoteShortcutUpLinkToGraceNotesGroup" << ": ";
+  if (fNoteShortcutUpLinkToGraceNotesGroup) {
     os << std::endl;
     ++gIndenter;
     os <<
-      fNoteDirectUpLinkToGraceNotesGroup->asShortString ();
+      fNoteShortcutUpLinkToGraceNotesGroup->asShortString ();
     --gIndenter;
   }
   else {
@@ -5524,11 +5521,11 @@ void msrNote::printFull (std::ostream& os) const
   // print note uplink to tuplet
   os <<
     std::setw (fieldWidth) <<
-    "fNoteDirectUpLinkToTuplet" << ": ";
+    "fNoteShortcutUpLinkToTuplet" << ": ";
 
-  if (fNoteDirectUpLinkToTuplet) {
+  if (fNoteShortcutUpLinkToTuplet) {
     os <<
-      fNoteDirectUpLinkToTuplet->asShortString ();
+      fNoteShortcutUpLinkToTuplet->asShortString ();
   }
   else {
     os <<
@@ -5538,7 +5535,7 @@ void msrNote::printFull (std::ostream& os) const
 
   // print sounding and displayed whole notes
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
@@ -5582,11 +5579,11 @@ void msrNote::printFull (std::ostream& os) const
         std::setw (fieldWidth) <<
         "tupletSoundingWholeNotes" << ": ";
 
-        if (fNoteDirectUpLinkToTuplet) {
+        if (fNoteShortcutUpLinkToTuplet) {
           os <<
             wholeNotesAsMsrString (
               fInputLineNumber,
-              getNoteDirectUpLinkToTuplet ()->
+              getNoteShortcutUpLinkToTuplet ()->
                 getMeasureElementSoundingWholeNotes ());
         }
         else {
@@ -5859,7 +5856,7 @@ void msrNote::printFull (std::ostream& os) const
 
   // print whole notes durations as MSR strings
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -5972,12 +5969,12 @@ void msrNote::printFull (std::ostream& os) const
         "noteTupletNoteSoundingWholeNotesAsMsrString" << ": ";
           */
 
-      if (fNoteDirectUpLinkToTuplet) {
+      if (fNoteShortcutUpLinkToTuplet) {
         os <<
           "\"" <<
           wholeNotesAsMsrString (
             fInputLineNumber,
-            getNoteDirectUpLinkToTuplet ()->
+            getNoteShortcutUpLinkToTuplet ()->
               getMeasureElementSoundingWholeNotes ()) <<
           "\"";
       }
@@ -6235,7 +6232,7 @@ void msrNote::printFull (std::ostream& os) const
       std::endl;
   }
 
-  // print the technicals with std::string if any
+  // print the technicals with string if any
   os <<
     std::setw (fieldWidth) <<
     "fNoteTechnicalWithStrings";
@@ -6961,7 +6958,7 @@ void msrNote::print (std::ostream& os) const
 
   // print sounding and displayed whole notes
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteUnpitchedInMeasure:
@@ -7009,11 +7006,11 @@ void msrNote::print (std::ostream& os) const
         std::setw (fieldWidth) <<
         "tupletSoundingWholeNotes" << ": ";
 
-        if (fNoteDirectUpLinkToTuplet) {
+        if (fNoteShortcutUpLinkToTuplet) {
           os <<
             wholeNotesAsMsrString (
               fInputLineNumber,
-              getNoteDirectUpLinkToTuplet ()->
+              getNoteShortcutUpLinkToTuplet ()->
                 getMeasureElementSoundingWholeNotes ());
         }
         else {
@@ -7033,6 +7030,38 @@ void msrNote::print (std::ostream& os) const
       --gIndenter;
       break;
     } // switch
+
+  // print the octave shift if any
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fNoteOctaveShift" << ": ";
+  if (fNoteOctaveShift) {
+    os << std::endl;
+    ++gIndenter;
+    os <<
+      fNoteOctaveShift;
+    --gIndenter;
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  // print the stem if any
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fNoteStem" << ": ";
+  if (fNoteStem) {
+    os << std::endl;
+    ++gIndenter;
+
+    os <<
+      fNoteStem;
+
+    --gIndenter;
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
 
 //   // print the grace notes group before if any
 //   if (fNoteGraceNotesGroupBefore) {
@@ -7180,7 +7209,7 @@ void msrNote::print (std::ostream& os) const
 //     --gIndenter;
 //   }
 //
-//   // print the technicals with std::string if any
+//   // print the technicals with string if any
 //   if (fNoteTechnicalWithStrings.size ()) {
 //     os <<
 //       std::setw (fieldWidth) <<
@@ -7753,29 +7782,29 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
   S_msrTuplet result;
 
   switch (fNoteKind) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteUnpitchedInMeasure:
-      result = fNoteDirectUpLinkToTuplet;
+      result = fNoteShortcutUpLinkToTuplet;
       break;
 
     case msrNoteKind::kNoteRegularInChord:
-      if (fNoteDirectUpLinkToChord) {
+      if (fNoteShortcutUpLinkToChord) {
         result =
-          fNoteDirectUpLinkToChord->
+          fNoteShortcutUpLinkToChord->
             fetchChordUpLinkToTuplet ();
       }
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
-      if (fNoteDirectUpLinkToTuplet) {
+      if (fNoteShortcutUpLinkToTuplet) {
         result =
-          fNoteDirectUpLinkToTuplet->
+          fNoteShortcutUpLinkToTuplet->
             fetchTupletUpLinkToTuplet ();
       }
       break;
@@ -7786,9 +7815,9 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     / * JMi
-      if (fNoteDirectUpLinkToGraceNotesGroup) {
+      if (fNoteShortcutUpLinkToGraceNotesGroup) {
         result =
-          fNoteDirectUpLinkToGraceNotesGroup->
+          fNoteShortcutUpLinkToGraceNotesGroup->
             getGraceNotesGroupUpLinkToVoice ();
               / * JMI
               getGraceNotesGroupUpLinkToNote ()->
@@ -7799,20 +7828,20 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
-      if (fNoteDirectUpLinkToChord) {
+      if (fNoteShortcutUpLinkToChord) {
         result =
-          fNoteDirectUpLinkToChord->
-            getChordDirectUpLinkToGraceNotesGroup ()->
+          fNoteShortcutUpLinkToChord->
+            getChordShortcutUpLinkToGraceNotesGroup ()->
               fetchGraceNoteGroupUpLinkToTuplet ();
       }
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       / * cannot happen ??? JMI
-      if (fNoteDirectUpLinkToTuplet) {
+      if (fNoteShortcutUpLinkToTuplet) {
         result =
-          fNoteDirectUpLinkToTuplet->
-            getTupletDirectUpLinkToTuplet ()->
+          fNoteShortcutUpLinkToTuplet->
+            getTupletShortcutUpLinkToTuplet ()->
               fetchUpLinkToTupletToVoice ();
       }
       * /

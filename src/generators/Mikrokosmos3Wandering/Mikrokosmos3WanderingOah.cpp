@@ -60,7 +60,7 @@ R"(These options control the way Mikrokosmos3Wandering works.)",
     msrGenerationAPIKind::kMsrFunctionsAPIKind;
 
   fMultiGenerationOutputKind =
-    mfMultiGenerationOutputKind::kGeneration_NO_;
+    mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
 
   // initialize it
   initializeMikrokosmos3WanderingOahGroup ();
@@ -127,7 +127,7 @@ void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions ()
 //
 //   const mfMultiGenerationOutputKind
 //     multiGenerationKindDefaultValue =
-//       mfMultiGenerationOutputKind::kGeneration_NO_; // default value
+//       mfMultiGenerationOutputKind::kGeneration_UNKNOWN; // default value
 //
 //   fMultiGenerationOutputKindAtom =
 //     mfMultiGenerationOutputKindAtom::create (
@@ -177,7 +177,7 @@ void Mikrokosmos3WanderingOahGroup::enforceGroupQuietness ()
 void Mikrokosmos3WanderingOahGroup::checkGroupOptionsConsistency ()
 {
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       {
         std::stringstream s;
 

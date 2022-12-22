@@ -146,7 +146,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       "Quitting after creating the MSR skeleton in pass 2a of xmlFile2brailleWithHandler as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // populate the MSR skeleton from MusicXML data (pass 2b)
@@ -177,7 +177,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       "Quitting after pass 2b as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // convert the first MSR score into a second MSR (pass 3)
@@ -212,7 +212,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       "Quitting after pass 3 as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // the first BSR score
@@ -245,8 +245,8 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     // display the first BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplayFirstBsrShort ()) {
-      displayBsrScoreShort (
+    if (gGlobalBsrOahGroup->getDisplayFirstBsr ()) {
+      displayBsrScore (
         firstBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
@@ -289,8 +289,8 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     // display the finalized BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplaySecondBsrShort ()) {
-      displayBsrScoreShort (
+    if (gGlobalBsrOahGroup->getDisplaySecondBsr ()) {
+      displayBsrScore (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
@@ -428,7 +428,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     }
   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________
@@ -555,7 +555,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NONE; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -593,7 +593,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
     err,
     handler);
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________

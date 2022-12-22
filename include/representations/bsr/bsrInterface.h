@@ -30,7 +30,7 @@ namespace MusicFormats
 // ------------------------------------------------------
 
 //_______________________________________________________________________________
-EXP void displayBsrScoreShort (
+EXP void displayBsrScore (
   S_bsrScore    bsrScore,
   S_msrOahGroup msrOpts,
   S_bsrOahGroup bsrOpts,

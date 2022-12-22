@@ -86,7 +86,7 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
 {
   msrPartGroup* o =
     new msrPartGroup (
-      K_MF_NO_INPUT_LINE_NUMBER,
+      K_MF_INPUT_LINE_UNKNOWN,
       partGroupNumber,
       partGroupAbsoluteNumber,
       partGroupName,
@@ -680,7 +680,7 @@ void msrPartGroup::appendSubPartGroupToPartGroup (
   fPartGroupElementsList.push_back (partGroup);
 }
 
-void msrPartGroup::printPartGroupElementsList (
+void msrPartGroup::printPartGroupElementsListFull (
   int      inputLineNumber,
   std::ostream& os) const
 {
@@ -759,7 +759,7 @@ void msrPartGroup::printPartGroupElementsList (
   }
 }
 
-void msrPartGroup::printPartGroupElementsListShort (
+void msrPartGroup::printPartGroupElementsList (
   int      inputLineNumber,
   std::ostream& os) const
 {
@@ -850,7 +850,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
     ++gIndenter;
 
 //     printPartGroupElementsList ( JMI v0.9.66
-    printPartGroupElementsListShort (
+    printPartGroupElementsList (
       inputLineNumber,
       gLogStream);
 
@@ -1313,7 +1313,7 @@ void msrPartGroup::print(std::ostream& os) const
     std::endl << std::endl;
 
   // print the part group elements if any
-  printPartGroupElementsListShort (
+  printPartGroupElementsList (
     fInputLineNumber,
     gLogStream);
 

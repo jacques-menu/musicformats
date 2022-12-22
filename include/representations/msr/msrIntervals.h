@@ -21,7 +21,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 // intervals
 enum class msrIntervalKind {
-  kInterval_NO_,
+  kInterval_UNKNOWN,
 
   kIntervalDiminishedUnisson, kIntervalPerfectUnisson,
   kIntervalAugmentedUnisson,

@@ -25,7 +25,7 @@ namespace MusicFormats
 // data types
 
 enum class msrArticulationKind {
-  kArticulation_NO_,
+  kArticulation_UNKNOWN,
   kArticulationAccent, kArticulationBreathMark, kArticulationCaesura,
   kArticulationSpiccato,
   kArticulationStaccato, kArticulationStaccatissimo,

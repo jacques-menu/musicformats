@@ -258,10 +258,10 @@ class EXP msrOahGroup : public oahGroup
     Bool                  getDisplayMsrSkeleton () const
                               { return fDisplayMsrSkeleton; }
 
-    void                  setDisplayFirstMsrShort ()
-                              { fDisplayFirstMsrShort = true; }
-    Bool                  getDisplayFirstMsrShort () const
-                              { return fDisplayFirstMsrShort; }
+    void                  setDisplayFirstMsr ()
+                              { fDisplayFirstMsr = true; }
+    Bool                  getDisplayFirstMsr () const
+                              { return fDisplayFirstMsr; }
 
     void                  setDisplayFirstMsrFull ()
                               { fDisplayFirstMsrFull = true; }
@@ -269,14 +269,14 @@ class EXP msrOahGroup : public oahGroup
                               { return fDisplayFirstMsrFull; }
 
     void                  setDisplayFirstMsrSlices ()
-                              { fDisplayFirstMsrShortSlices = true; }
+                              { fDisplayFirstMsrSlices = true; }
     Bool                  getDisplayFirstMsrSlices () const
-                              { return fDisplayFirstMsrShortSlices; }
+                              { return fDisplayFirstMsrSlices; }
 
-    void                  setDisplaySecondMsrShort ()
-                              { fDisplaySecondMsrShort = true; }
-    Bool                  getDisplaySecondMsrShort () const
-                              { return fDisplaySecondMsrShort; }
+    void                  setDisplaySecondMsr ()
+                              { fDisplaySecondMsr = true; }
+    Bool                  getDisplaySecondMsr () const
+                              { return fDisplaySecondMsr; }
 
     void                  setDisplaySecondMsrFull ()
                               { fDisplaySecondMsrFull = true; }
@@ -286,39 +286,39 @@ class EXP msrOahGroup : public oahGroup
     Bool                  getDisplayMsr () const // JMI ???
                               {
                                 return
-                                  fDisplayFirstMsrShort || fDisplaySecondMsrShort;
+                                  fDisplayFirstMsr || fDisplaySecondMsrFull;
                               }
 
     void                  setDisplaySecondMsrSlices ()
-                              { fDisplaySecondMsrShortSlices = true; }
+                              { fDisplaySecondMsrSlices = true; }
     Bool                  getDisplaySecondMsrSlices () const
-                              { return fDisplaySecondMsrShortSlices; }
+                              { return fDisplaySecondMsrSlices; }
 
     Bool                  getDisplayMsrFull () const // JMI ???
                               {
                                 return
-                                  fDisplayFirstMsrFull || fDisplaySecondMsrFull;
+                                  fDisplayFirstMsr || fDisplaySecondMsrFull;
                               }
 
     void                  setDisplayFirstMsrNames ()
-                              { fDisplayFirstMsrShortNames = true; }
+                              { fDisplayFirstMsrNames = true; }
     Bool                  getDisplayFirstMsrNames () const
-                              { return fDisplayFirstMsrShortNames; }
+                              { return fDisplayFirstMsrNames; }
 
     void                  setDisplaySecondMsrNames ()
-                              { fDisplaySecondMsrShortNames = true; }
+                              { fDisplaySecondMsrNames = true; }
     Bool                  getDisplaySecondMsrNames () const
-                              { return fDisplaySecondMsrShortNames; }
+                              { return fDisplaySecondMsrNames; }
 
     void                  setDisplayFirstMsrSummary ()
-                              { fDisplayFirstMsrShortSummary = true; }
+                              { fDisplayFirstMsrSummary = true; }
     Bool                  getDisplayFirstMsrSummary () const
-                              { return fDisplayFirstMsrShortSummary; }
+                              { return fDisplayFirstMsrSummary; }
 
     void                  setDisplaySecondMsrSummary ()
-                              { fDisplaySecondMsrShortSummary = true; }
+                              { fDisplaySecondMsrSummary = true; }
     Bool                  getDisplaySecondMsrSummary () const
-                              { return fDisplaySecondMsrShortSummary; }
+                              { return fDisplaySecondMsrSummary; }
 
 
     // languages
@@ -447,27 +447,28 @@ class EXP msrOahGroup : public oahGroup
 
     Bool                  fDisplayMsrSkeleton;
 
-    Bool                  fDisplayFirstMsrShort;
+    Bool                  fDisplayFirstMsr;
     Bool                  fDisplayFirstMsrFull;
 
-    Bool                  fDisplaySecondMsrShort;
+    Bool                  fDisplaySecondMsr;
     Bool                  fDisplaySecondMsrFull;
 
-    Bool                  fDisplayFirstMsrShortSlices;
-    Bool                  fDisplaySecondMsrShortSlices;
+    Bool                  fDisplayFirstMsrSlices;
+    Bool                  fDisplaySecondMsrSlices;
 
-    Bool                  fDisplayFirstMsrShortNames;
-    Bool                  fDisplaySecondMsrShortNames;
+    Bool                  fDisplayFirstMsrNames;
+    Bool                  fDisplaySecondMsrNames;
 
-    Bool                  fDisplayFirstMsrShortSummary;
-    Bool                  fDisplaySecondMsrShortSummary;
+    Bool                  fDisplayFirstMsrSummary;
+    Bool                  fDisplaySecondMsrSummary;
 
     // languages
     msrQuarterTonesPitchesLanguageKind
                           fMsrQuarterTonesPitchesLanguageKind;
 
     // parts
-    std::map<std::string, std::string>   fMsrPartsRenamingMap;
+    std::map<std::string, std::string>
+                          fMsrPartsRenamingMap;
 
     // staves
     Bool                  fCreateSingleLineStavesAsRythmic;

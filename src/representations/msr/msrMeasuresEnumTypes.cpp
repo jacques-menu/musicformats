@@ -180,8 +180,8 @@ std::string msrMeasureRepeatContextKindAsString (
   std::string result;
 
   switch (measureRepeatContextKind) {
-    case msrMeasureRepeatContextKind::kMeasureRepeatContext_NO_:
-      result = "kMeasureRepeatContext_NO_";
+    case msrMeasureRepeatContextKind::kMeasureRepeatContext_UNKNOWN:
+      result = "kMeasureRepeatContext_UNKNOWN";
       break;
     case msrMeasureRepeatContextKind::kMeasureRepeatContextNone:
       result = "kMeasureRepeatContextNone";

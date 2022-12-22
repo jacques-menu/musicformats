@@ -243,20 +243,20 @@ class EXP bsrOahGroup : public oahGroup
 
     // display
 
-    void                  setDisplayFirstBsrShort ()
-                              { fDisplayFirstBsrShort = true; }
-    Bool                  getDisplayFirstBsrShort  () const
-                              { return fDisplayFirstBsrShort; }
+    void                  setDisplayFirstBsr ()
+                              { fDisplayFirstBsr = true; }
+    Bool                  getDisplayFirstBsr  () const
+                              { return fDisplayFirstBsr; }
 
     void                  setDisplayFirstBsrFull ()
                               { fDisplayFirstBsrFull = true; }
     Bool                  getDisplayFirstBsrFull () const
                               { return fDisplayFirstBsrFull; }
 
-    void                  setDisplaySecondBsrShort ()
-                              { fDisplaySecondBsrShort = true; }
-    Bool                  getDisplaySecondBsrShort () const
-                              { return fDisplaySecondBsrShort; }
+    void                  setDisplaySecondBsr ()
+                              { fDisplaySecondBsr = true; }
+    Bool                  getDisplaySecondBsr () const
+                              { return fDisplaySecondBsr; }
 
     void                  setDisplaySecondBsrFull ()
                               { fDisplaySecondBsrFull = true; }
@@ -266,9 +266,9 @@ class EXP bsrOahGroup : public oahGroup
     Bool                  getDisplayBsrShort () const
                               {
                                 return
-                                  fDisplayFirstBsrShort
+                                  fDisplayFirstBsr
                                     ||
-                                 fDisplaySecondBsrShort ;
+                                 fDisplaySecondBsr ;
                               }
 
     Bool                  getDisplayBsrFull () const
@@ -386,10 +386,10 @@ class EXP bsrOahGroup : public oahGroup
 
     // display
 
-    Bool                  fDisplayFirstBsrShort;
+    Bool                  fDisplayFirstBsr;
     Bool                  fDisplayFirstBsrFull;
 
-    Bool                  fDisplaySecondBsrShort;
+    Bool                  fDisplaySecondBsr;
     Bool                  fDisplaySecondBsrFull;
 
     // languages

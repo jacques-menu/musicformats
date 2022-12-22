@@ -10,10 +10,9 @@ The useful options here are:
 \begin{itemize}
 \item \optionBoth{trace-harmonies}{tharms}
 \item \optionBoth{display-msr-skeleton}{dmsrskel}
-\item \optionBoth{display-msr-1}{dmsr1}
-\item \optionBoth{display-msr-1-short}{dmsr1s} and \optionBoth{display-msr-1-details}{dmsr1d}
-\item \optionBoth{display-msr-2msr2}{dmsr2}
-\item \optionBoth{display-msr-2-short}{msr2s} and \optionBoth{display-msr-2-details}{dmsr2d}
+\item \optionBoth{display-msr1}{dmsr1}
+\item \optionBoth{display-msr2}{dmsr2}
+\item \optionBoth{display-lpsr-2}{dlpsr}
 \end{itemize}
 
 Harmonies need special treatment since we need to determine their position in a harmony  voice. This is different than \mxml, where they are simply \drawn\ at the current music position, so to say.
@@ -27,7 +26,7 @@ They are handled this way:
 In \class{msrNote}, there is:
 \begin{lstlisting}[language=CPlusPlus]
     // harmonies
-    void                  appendHarmonyToNoteHarmoniesList (
+    void                  appendHarmonyToNote (
                             const S_msrHarmony& harmony);
 
     const std::list<S_msrHarmony>&
@@ -297,12 +296,12 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
 
   fCurrentHarmonyInputLineNumber       = inputLineNumber;
 
-  fCurrentHarmonyRootDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_NO_;
+  fCurrentHarmonyRootDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
   fCurrentHarmonyRootAlterationKind    = msrAlterationKind::kAlterationNatural;
-  fCurrentHarmonyKind                  = msrHarmonyKind::kHarmony_NO_;
+  fCurrentHarmonyKind                  = msrHarmonyKind::kHarmony_UNKNOWN;
   fCurrentHarmonyKindText              = "";
-  fCurrentHarmonyInversion             = K_HARMONY_NO_INVERSION;
-  fCurrentHarmonyBassDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_NO_;
+  fCurrentHarmonyInversion             = K_HARMONY_INVERSION_NONE;
+  fCurrentHarmonyBassDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN;
   fCurrentHarmonyBassAlterationKind    = msrAlterationKind::kAlterationNatural;
   fCurrentHarmonyDegreeValue           = -1;
   fCurrentHarmonyDegreeAlterationKind  = msrAlterationKind::kAlterationNatural;
@@ -455,7 +454,7 @@ void mxsr2msrTranslator::populateNote (
 \subsection{Populating {\tt msrHarmony} instances}\className{msrHarmony}
 % -------------------------------------------------------------------------
 
-The \class{msrHarmony} instances are populated further in \msr{mxsr2msrTranslator.cpp} and attached to the note by \method{msrNote}{appendHarmonyToNoteHarmoniesList}: %%%JMI
+The \class{msrHarmony} instances are populated further in \msr{mxsr2msrTranslator.cpp} and attached to the note by \method{msrNote}{appendHarmonyToNote}: %%%JMI
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrTranslator::handlePendingHarmonies (
   const S_msrNote&  newNote,
@@ -510,7 +509,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
     // attach the harmony to newNote
     newNote->
-      appendHarmonyToNoteHarmoniesList (
+      appendHarmonyToNote (
         harmony);
 
     // get the part harmonies voice
@@ -551,9 +550,9 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 \subsection{First {\tt S_harmony} visit}\className{msrHarmony}
 % -------------------------------------------------------------------------
 
-\Method{msrNote}{appendHarmonyToNoteHarmoniesList} is where the harmony's note uplink is set:
+\Method{msrNote}{appendHarmonyToNote} is where the harmony's note uplink is set:
 \begin{lstlisting}[language=CPlusPlus]
-void msrNote::appendHarmonyToNoteHarmoniesList (const S_msrHarmony& harmony)
+void msrNote::appendHarmonyToNote (const S_msrHarmony& harmony)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -675,7 +674,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif
 
-  // create a harmony new-born clone
+  // create a harmony newborn clone
   fCurrentHarmonyClone =
     elt->
       createHarmonyNewbornClone (
@@ -684,7 +683,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   if (fOnGoingNonGraceNote) {
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendHarmonyToNoteHarmoniesList (
+      appendHarmonyToNote (
         fCurrentHarmonyClone);
 
     // don't append the harmony to the part harmony,
@@ -795,7 +794,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif
 
-  // create a harmony new-born clone
+  // create a harmony newborn clone
   fCurrentHarmonyClone =
     elt->
       createHarmonyNewbornClone (
@@ -804,7 +803,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   if (fOnGoingNonGraceNote) {
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendHarmonyToNoteHarmoniesList (
+      appendHarmonyToNote (
         fCurrentHarmonyClone);
 
     // don't append the harmony to the part harmony,

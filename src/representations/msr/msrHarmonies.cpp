@@ -164,7 +164,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
   }
 #endif
 
-  msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_NO_;
+  msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_UNKNOWN;
 
   S_msrHarmonyInterval
     operand1 =
@@ -252,7 +252,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 
   // compute resulting interval Kind
   switch (intervalKind1) {
-    case msrIntervalKind::kInterval_NO_:
+    case msrIntervalKind::kInterval_UNKNOWN:
       break;
 
     case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -1465,7 +1465,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 S_msrHarmonyInterval msrHarmonyInterval::intervalSum (
   const S_msrHarmonyInterval& otherHarmonyInterval)
 {
-  msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_NO_;
+  msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_UNKNOWN;
   int             resultRelativeOctave = 0;
 
   msrIntervalKind
@@ -1491,7 +1491,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalSum (
   }
 
   switch (intervalKind1) {
-    case msrIntervalKind::kInterval_NO_:
+    case msrIntervalKind::kInterval_UNKNOWN:
       break;
 
     case msrIntervalKind::kIntervalDiminishedUnisson:
@@ -2720,8 +2720,8 @@ std::string msrModeKindAsString (
   std::string result;
 
   switch (modeKind) {
-    case msrModeKind::kMode_NO_:
-      result = "kMode_NO_";
+    case msrModeKind::kMode_UNKNOWN:
+      result = "kMode_UNKNOWN";
       break;
     case msrModeKind::kModeMajor:
       result = "kModeMajor";
@@ -2766,7 +2766,7 @@ msrModeKind modeKindFromString (
   const std::string& modeString)
 {
   // no CamelCase here, these strings are used in the command line options
-  msrModeKind result = msrModeKind::kMode_NO_;
+  msrModeKind result = msrModeKind::kMode_UNKNOWN;
 
   if      (modeString == "major")
     result = msrModeKind::kModeMajor;
@@ -2808,7 +2808,7 @@ msrModeKind modeKindFromString (
 // harmonies
 //______________________________________________________________________________
 // constant
-const int K_HARMONY_NO_INVERSION = -1;
+const int K_HARMONY_INVERSION_NONE = -1;
 
 std::string msrHarmonyKindAsString (
   msrHarmonyKind harmonyKind)
@@ -2816,8 +2816,8 @@ std::string msrHarmonyKindAsString (
   std::string result;
 
   switch (harmonyKind) {
-    case msrHarmonyKind::kHarmony_NO_:
-      result = "kHarmony_NO_";
+    case msrHarmonyKind::kHarmony_UNKNOWN:
+      result = "kHarmony_UNKNOWN";
       break;
 
     // MusicXML harmonies
@@ -2978,7 +2978,7 @@ std::string msrHarmonyKindAsShortString (
   std::string result;
 
   switch (harmonyKind) {
-    case msrHarmonyKind::kHarmony_NO_:
+    case msrHarmonyKind::kHarmony_UNKNOWN:
       result = "noHarmony";
       break;
 
@@ -3134,7 +3134,7 @@ std::string msrHarmonyKindShortName (
   std::string result;
 
   switch (harmonyKind) {
-    case msrHarmonyKind::kHarmony_NO_:
+    case msrHarmonyKind::kHarmony_UNKNOWN:
       result = "noHarmony";
       break;
 
@@ -3287,7 +3287,7 @@ std::string msrHarmonyKindShortName (
 msrHarmonyKind msrHarmonyKindFromString (
   const std::string& theString)
 {
-  msrHarmonyKind result = msrHarmonyKind::kHarmony_NO_;
+  msrHarmonyKind result = msrHarmonyKind::kHarmony_UNKNOWN;
 
   // MusicXML harmonies
 
@@ -4012,7 +4012,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
         msrSemiTonesPitchKind
           noteSemiTonesPitchKind =
             noteAtIntervalFromSemiTonesPitch (
-              K_MF_NO_INPUT_LINE_NUMBER,
+              K_MF_INPUT_LINE_UNKNOWN,
               intervalKind,
               rootSemiTonesPitchKind);
 
@@ -4266,7 +4266,7 @@ msrHarmony::msrHarmony (
           fHarmonyRootQuarterTonesPitchKind);
 
     // is this compatible with bass quartertones pitch if specified?
-    if (fHarmonyBassQuarterTonesPitchKind != msrQuarterTonesPitchKind::kQTP_NO_) {
+    if (fHarmonyBassQuarterTonesPitchKind != msrQuarterTonesPitchKind::kQTP_UNKNOWN) {
       if (
         invertedHarmonyBassQuarterTonesPitchKind
           !=
@@ -4526,8 +4526,8 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_NO_POSITION,
-//     "measurePosition == msrMoment::K_NO_POSITION");
+//     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+//     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 //
 //   // set harmony's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
@@ -4729,14 +4729,14 @@ std::string msrHarmony::asString () const
     fHarmonyKindText << "\"";
 
   s << ", fHarmonyInversion: ";
-  if (fHarmonyInversion == K_HARMONY_NO_INVERSION) {
+  if (fHarmonyInversion == K_HARMONY_INVERSION_NONE) {
     s << "[NONE]";
   }
   else {
     s << fHarmonyInversion;
   }
 
-  if (fHarmonyBassQuarterTonesPitchKind != msrQuarterTonesPitchKind::kQTP_NO_) {
+  if (fHarmonyBassQuarterTonesPitchKind != msrQuarterTonesPitchKind::kQTP_UNKNOWN) {
     s <<
       ", fHarmonyBassQuarterTonesPitchKind: " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
@@ -4764,7 +4764,7 @@ std::string msrHarmony::asString () const
   // print the harmonies staff number
   s <<
     ", fHarmoniesStaffNumber: ";
-  if (fHarmoniesStaffNumber == msrStaff::K_NO_STAFF_NUMBER)
+  if (fHarmoniesStaffNumber == msrStaff::K_STAFF_NUMBER_UNKNOWN)
     s << "[NONE]";
   else
     s << fHarmoniesStaffNumber;
@@ -4816,6 +4816,114 @@ void msrHarmony::print (std::ostream& os) const
     "fHarmonyDisplayWholeNotes" << ": " <<
     fHarmonyDisplayWholeNotes <<
     std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fHarmonyRootQuarterTonesPitchKind" << ": " <<
+    msrQuarterTonesPitchKindAsStringInLanguage (
+      fHarmonyRootQuarterTonesPitchKind,
+      gGlobalMsrOahGroup->
+        getMsrQuarterTonesPitchesLanguageKind ()) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fHarmonyKind" << ": " <<
+    fHarmonyKind <<
+    std::endl;
+
+  // print the harmony whole notes offset
+  os <<
+    std::setw (fieldWidth) <<
+    "fHarmonyWholeNotesOffset" << ": " << fHarmonyWholeNotesOffset <<
+    std::endl;
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fHarmonyKindText" << ": \"" <<
+    fHarmonyKindText <<
+    "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fHarmonyBassQuarterTonesPitchKind" << ": " <<
+    msrQuarterTonesPitchKindAsStringInLanguage (
+      fHarmonyBassQuarterTonesPitchKind,
+      gGlobalMsrOahGroup->
+        getMsrQuarterTonesPitchesLanguageKind ()) <<
+    std::endl;
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fHarmonyInversion" << ": ";
+  if (fHarmonyInversion == K_HARMONY_INVERSION_NONE) {
+    os << "[NONE]";
+  }
+  else {
+    os << fHarmonyInversion;
+  }
+  os << std::endl;
+
+  // print harmony degrees if any
+  os <<
+    std::setw (fieldWidth) <<
+    "fHarmonyDegreesList";
+
+  if (fHarmonyDegreesList.size ()) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_msrHarmonyDegree>::const_iterator
+      iBegin = fHarmonyDegreesList.begin (),
+      iEnd   = fHarmonyDegreesList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      os <<
+        (*i)->asString ();
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    os << std::endl;
+
+    --gIndenter;
+  }
+  else {
+    os <<
+      ": " <<
+      "[NONE]" <<
+      std::endl;
+  }
+
+  // print the harmonies staff number
+  os <<
+    std::setw (fieldWidth) <<
+    "fHarmoniesStaffNumber" << ": ";
+  if (fHarmoniesStaffNumber == msrStaff::K_STAFF_NUMBER_UNKNOWN) {
+    os << "[NONE]";
+  }
+  else {
+    os << fHarmoniesStaffNumber;
+  }
+  os << std::endl;
+
+  // print the harmony tuplet factor
+  os <<
+    std::setw (fieldWidth) <<
+    "fHarmonyTupletFactor" << ": " << fHarmonyTupletFactor.asString () <<
+    std::endl;
+
+  // print the harmony frame
+  os <<
+    std::setw (fieldWidth) <<
+    "fHarmonyFrame" << ": ";
+  if (fHarmonyFrame) {
+    os << fHarmonyFrame;
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << std::endl;
 
   // print the harmony uplink to note
   os <<
@@ -4876,114 +4984,6 @@ void msrHarmony::print (std::ostream& os) const
 //     "fMeasureElementVoicePosition" << ": " <<
 //     fMeasureElementVoicePosition <<
 //     std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "harmonyRoot" << ": " <<
-    msrQuarterTonesPitchKindAsStringInLanguage (
-      fHarmonyRootQuarterTonesPitchKind,
-      gGlobalMsrOahGroup->
-        getMsrQuarterTonesPitchesLanguageKind ()) <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fHarmonyKind" << ": " <<
-    fHarmonyKind <<
-    std::endl;
-
-  // print the harmony whole notes offset
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmonyWholeNotesOffset" << ": " << fHarmonyWholeNotesOffset <<
-    std::endl;
-
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmonyKindText" << ": \"" <<
-    fHarmonyKindText <<
-    "\"" <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fHarmonyBassQuarterTonesPitchKind" << ": " <<
-    msrQuarterTonesPitchKindAsStringInLanguage (
-      fHarmonyBassQuarterTonesPitchKind,
-      gGlobalMsrOahGroup->
-        getMsrQuarterTonesPitchesLanguageKind ()) <<
-    std::endl;
-
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmonyInversion" << ": ";
-  if (fHarmonyInversion == K_HARMONY_NO_INVERSION) {
-    os << "[NONE]";
-  }
-  else {
-    os << fHarmonyInversion;
-  }
-  os << std::endl;
-
-  // print harmony degrees if any
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmonyDegreesList";
-
-  if (fHarmonyDegreesList.size ()) {
-    os << std::endl;
-
-    ++gIndenter;
-
-    std::list<S_msrHarmonyDegree>::const_iterator
-      iBegin = fHarmonyDegreesList.begin (),
-      iEnd   = fHarmonyDegreesList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      os <<
-        (*i)->asString ();
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    os << std::endl;
-
-    --gIndenter;
-  }
-  else {
-    os <<
-      ": " <<
-      "[NONE]" <<
-      std::endl;
-  }
-
-  // print the harmonies staff number
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmoniesStaffNumber" << ": ";
-  if (fHarmoniesStaffNumber == msrStaff::K_NO_STAFF_NUMBER) {
-    os << "[NONE]";
-  }
-  else {
-    os << fHarmoniesStaffNumber;
-  }
-  os << std::endl;
-
-  // print the harmony tuplet factor
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmonyTupletFactor" << ": " << fHarmonyTupletFactor.asString () <<
-    std::endl;
-
-  // print the harmony frame
-  os <<
-    std::setw (fieldWidth) <<
-    "fHarmonyFrame" << ": ";
-  if (fHarmonyFrame) {
-    os << fHarmonyFrame;
-  }
-  else {
-    os << "[NONE]";
-  }
-  os << std::endl;
 
   --gIndenter;
 
@@ -5139,7 +5139,7 @@ void printHarmonyDetails (
         msrSemiTonesPitchKind
           noteSemiTonesPitchKind =
             noteAtIntervalFromSemiTonesPitch (
-              K_MF_NO_INPUT_LINE_NUMBER,
+              K_MF_INPUT_LINE_UNKNOWN,
               intervalKind,
               rootSemiTonesPitchKind);
 
@@ -5308,7 +5308,7 @@ void printHarmonyAnalysis (
           msrSemiTonesPitchKind
             noteSemiTonesPitchKind =
               noteAtIntervalFromSemiTonesPitch (
-                K_MF_NO_INPUT_LINE_NUMBER,
+                K_MF_INPUT_LINE_UNKNOWN,
                 intervalKind,
                 rootSemiTonesPitchKind);
 
@@ -5385,7 +5385,7 @@ void printHarmonyAnalysis (
           msrSemiTonesPitchKind
             noteSemiTonesPitchKind1 =
               noteAtIntervalFromSemiTonesPitch (
-                K_MF_NO_INPUT_LINE_NUMBER,
+                K_MF_INPUT_LINE_UNKNOWN,
                 intervalKind1,
                 rootSemiTonesPitchKind);
 
@@ -5416,7 +5416,7 @@ void printHarmonyAnalysis (
             msrSemiTonesPitchKind
               noteSemiTonesPitchKind2 =
                 noteAtIntervalFromSemiTonesPitch (
-                  K_MF_NO_INPUT_LINE_NUMBER,
+                  K_MF_INPUT_LINE_UNKNOWN,
                   intervalKind2,
                   rootSemiTonesPitchKind);
 
@@ -5583,7 +5583,7 @@ void msrHarmonyStructure::populateHarmonyStructure ()
 {
   // append harmony items to harmony intervals
   switch (fHarmonyStructureHarmonyKind) {
-    case msrHarmonyKind::kHarmony_NO_:
+    case msrHarmonyKind::kHarmony_UNKNOWN:
       break;
 
     // MusicXML harmonies

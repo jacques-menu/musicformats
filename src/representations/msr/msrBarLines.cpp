@@ -338,8 +338,8 @@ std::string msrBarLineCategoryKindAsString (
   std::string result;
 
   switch (barLineCategoryKind) {
-    case msrBarLineCategoryKind::kBarLineCategory_NO_:
-      result = "kBarLineCategory_NO_";
+    case msrBarLineCategoryKind::kBarLineCategory_UNKNOWN:
+      result = "kBarLineCategory_UNKNOWN";
       break;
     case msrBarLineCategoryKind::kBarLineCategoryStandalone:
       result = "kBarLineCategoryStandalone";

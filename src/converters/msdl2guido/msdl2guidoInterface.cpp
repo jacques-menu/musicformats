@@ -162,7 +162,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       "Quitting after creating the first MSR in pass 1 of convertMsdlStream2guidoWithHandler as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // convert the first MSR into a second MSR (pass 2)
@@ -236,7 +236,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________
@@ -341,7 +341,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NONE; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -380,7 +380,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
     out,
     err);
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________

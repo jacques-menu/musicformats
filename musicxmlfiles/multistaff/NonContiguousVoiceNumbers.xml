@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
+	<work>
+    <work-title>Non-contiguous Voice Numbers</work-title>
+	</work>
   <identification>
     <encoding>
       <software>MuseScore 2.0.3</software>
@@ -38,7 +41,7 @@
     <lyric-font font-family="FreeSerif" font-size="11"/>
     </defaults>
   <credit page="1">
-    <credit-words default-x="1167.23" default-y="1432.45" justify="right" valign="bottom" font-size="12">IJHolmes</credit-words>
+    <credit-words default-x="1167.23" default-y="1432.45" justify="right" valign="bottom" font-size="12">I.J. Holmes</credit-words>
     </credit>
   <credit page="1">
     <credit-words default-x="611.96" default-y="1527.21" justify="center" valign="top" font-size="24">Organ example 1</credit-words>

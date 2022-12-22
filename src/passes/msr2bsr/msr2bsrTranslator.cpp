@@ -110,7 +110,7 @@ S_bsrScore msr2bsrTranslator::translateMsrToBsr (
   // create the resulting BSR score
   fResultingBsr =
     bsrScore::create (
-      K_MF_NO_INPUT_LINE_NUMBER,
+      K_MF_INPUT_LINE_UNKNOWN,
       fVisitedMsrScore);
 
   // create a msrScore browser
@@ -790,7 +790,7 @@ void msr2bsrTranslator::visitStart (S_msrClef& elt)
     msrClefKind mClefKind = elt->getClefKind ();
 
     switch (mClefKind) {
-      case msrClefKind::kClef_NO_:
+      case msrClefKind::kClef_UNKNOWN:
         bClefKind = bsrClefKind::kClefKindNone;
         break;
       case msrClefKind::kClefTreble:
@@ -942,7 +942,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_C_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindNaturals;
@@ -971,7 +971,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_C_Sharp:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1010,7 +1010,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_D_Flat:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1039,7 +1039,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_D_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1080,7 +1080,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_E_Flat:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1109,7 +1109,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_E_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1151,7 +1151,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_F_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1180,7 +1180,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_F_Sharp:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1221,7 +1221,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_G_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1262,7 +1262,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_A_Flat:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1291,7 +1291,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_A_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1332,7 +1332,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_B_Flat:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
@@ -1361,7 +1361,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
         case msrSemiTonesPitchKind::kSTP_B_Natural:
           switch (mModeKind) {
-            case msrModeKind::kMode_NO_:
+            case msrModeKind::kMode_UNKNOWN:
               break;
             case msrModeKind::kModeMajor:
               theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
@@ -1875,7 +1875,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
         {
           switch (wordsPlacementKind) {
-            case msrPlacementKind::kPlacement_NO_:
+            case msrPlacementKind::kPlacement_UNKNOWN:
               break;
             case msrPlacementKind::kPlacementAbove:
               break;
@@ -1963,7 +1963,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
   if (note->fetchNoteIsARest ()) {
     switch (noteGraphicDurationKind) {
-      case msrDurationKind::kDuration_NO_:
+      case msrDurationKind::kDuration_UNKNOWN:
         break;
 
       case msrDurationKind::kDuration1024th:
@@ -2009,12 +2009,12 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
   else {
     switch (noteDiatonicPitchKind) {
-      case msrDiatonicPitchKind::kDiatonicPitch_NO_:
+      case msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN:
         break;
 
       case msrDiatonicPitchKind::kDiatonicPitchA:
         switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_NO_:
+          case msrDurationKind::kDuration_UNKNOWN:
             break;
 
           case msrDurationKind::kDuration1024th:
@@ -2060,7 +2060,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchB:
         switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_NO_:
+          case msrDurationKind::kDuration_UNKNOWN:
             break;
 
           case msrDurationKind::kDuration1024th:
@@ -2106,7 +2106,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchC:
         switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_NO_:
+          case msrDurationKind::kDuration_UNKNOWN:
             break;
 
           case msrDurationKind::kDuration1024th:
@@ -2152,7 +2152,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchD:
         switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_NO_:
+          case msrDurationKind::kDuration_UNKNOWN:
             break;
 
           case msrDurationKind::kDuration1024th:
@@ -2198,7 +2198,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchE:
         switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_NO_:
+          case msrDurationKind::kDuration_UNKNOWN:
             break;
 
           case msrDurationKind::kDuration1024th:
@@ -2244,7 +2244,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchF:
         switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_NO_:
+          case msrDurationKind::kDuration_UNKNOWN:
             break;
 
           case msrDurationKind::kDuration1024th:
@@ -2290,7 +2290,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
       case msrDiatonicPitchKind::kDiatonicPitchG:
         switch (noteGraphicDurationKind) {
-          case msrDurationKind::kDuration_NO_:
+          case msrDurationKind::kDuration_UNKNOWN:
             break;
 
           case msrDurationKind::kDuration1024th:
@@ -2756,7 +2756,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif
 
-  // create a harmony new-born clone
+  // create a harmony newborn clone
   fCurrentHarmonyClone =
     elt->createHarmonyNewbornClone (
       fCurrentVoiceClone);
@@ -2768,7 +2768,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
 
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendHarmonyToNoteHarmoniesList (
+      appendHarmonyToNote (
         fCurrentHarmonyClone);
 
   // don't append the harmony to the part harmony,
@@ -3324,7 +3324,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
           words =
             msrWords::create (
               inputLineNumber,
-              msrPlacementKind::kPlacement_NO_,                // default value
+              msrPlacementKind::kPlacement_UNKNOWN,                // default value
               wordsValue,
               msrJustifyKind::kJustifyNone,                  // default value
               msrVerticalAlignmentKind::kVerticalAlignmentNone,        // default value
@@ -3789,7 +3789,7 @@ void msr2bsrTranslator::visitStart (S_msrSpanner& elt)
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
       break;
-    case msrSpannerTypeKind::kSpannerType_NO_:
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
       break;
   } // switch
 
@@ -4762,7 +4762,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
   switch (elt->getNoteKind ()) {
 
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:

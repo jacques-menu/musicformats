@@ -32,8 +32,8 @@ std::string msrDynamicKindAsString (
   std::string result;
 
   switch (dynamicKind) {
-    case msrDynamicKind::kDynamic_NO_:
-      result = "*msrDynamicKind::kDynamic_NO_*";
+    case msrDynamicKind::kDynamic_UNKNOWN:
+      result = "*kDynamic_UNKNOWN*";
       break;
 
     case msrDynamicKind::kDynamicF:
@@ -130,7 +130,7 @@ std::ostream& operator << (std::ostream& os, const msrDynamicKind& elt)
 
 msrDynamicKind dynamicFromString (const std::string& theString)
 {
-  msrDynamicKind result = msrDynamicKind::kDynamic_NO_;
+  msrDynamicKind result = msrDynamicKind::kDynamic_UNKNOWN;
 
   if (theString == "f") {
     result = msrDynamicKind::kDynamicF;
@@ -240,7 +240,7 @@ S_msrDynamic msrDynamic::createDynamicFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamicss ()) {
     gLogStream <<
-      "Creating dynamic from std::string \"" <<
+      "Creating dynamic from string \"" <<
       dynamicsString <<
       "\", dynamicsMeasureNumber: '" << dynamicsMeasureNumber <<
       "', line " << inputLineNumber <<

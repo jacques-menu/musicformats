@@ -1479,7 +1479,7 @@ R"()",
       oahBooleanAtom::create (
         "display-msdl", "dmsdl",
 R"(Write the contents of the MSDR data to standard error.)",
-        "displayMsdl",
+        "fDisplayMsdl",
         fDisplayMsdl));
 
   // display MSDR short
@@ -1487,10 +1487,10 @@ R"(Write the contents of the MSDR data to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "display-msdl-short", "dmsdls",
-R"(Write the contents of the MSDR data, short version, to standard error.)",
-        "displayMsdlShort",
-        fDisplayMsdlShort));
+        "display-msdl-full", "dmsdlfull",
+R"(Write the contents of the MSDR data, full version, to standard error.)",
+        "fDisplayMsdlFull",
+        fDisplayMsdlFull));
 }
 
 void msdlInputOahGroup::initializeMsdlLanguagesOptions (
@@ -1683,10 +1683,7 @@ Bool msdlInputOahGroup::setMsdlQuarterTonesPitchesLanguage (std::string language
 
 //______________________________________________________________________________
 void msdlInputOahGroup::enforceGroupQuietness ()
-{
-  fDisplayMsdl = false;
-  fDisplayMsdlShort = false;
-}
+{}
 
 //______________________________________________________________________________
 void msdlInputOahGroup::checkGroupOptionsConsistency ()
@@ -1779,8 +1776,8 @@ void msdlInputOahGroup::printMsdlInputOahValues (int fieldWidth)
     std::setw (fieldWidth) << "fDisplayMsdl" << ": " <<
     fDisplayMsdl <<
     std::endl <<
-    std::setw (fieldWidth) << "fDisplayMsdlShort" << ": " <<
-    fDisplayMsdlShort <<
+    std::setw (fieldWidth) << "fDisplayMsdlFull" << ": " <<
+    fDisplayMsdlFull <<
     std::endl;
 
   --gIndenter;

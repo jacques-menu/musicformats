@@ -69,7 +69,7 @@ std::string msrMeasureFirstInSegmentKindAsString (
 std::ostream& operator << (std::ostream& os, const msrMeasureFirstInSegmentKind& elt);
 
 enum msrMeasureRepeatContextKind {
-  kMeasureRepeatContext_NO_,
+  kMeasureRepeatContext_UNKNOWN,
   kMeasureRepeatContextNone,
   kMeasureRepeatContextCommonPartLastMeasure,
   kMeasureRepeatContextHookedEndingLastMeasure,

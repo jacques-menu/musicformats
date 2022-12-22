@@ -29,8 +29,8 @@ std::string msrSpannerTypeKindAsString (
   std::string result;
 
   switch (spannerTypeKind) {
-    case msrSpannerTypeKind::kSpannerType_NO_:
-      result = "kSpannerType_NO_";
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
+      result = "kSpannerType_UNKNOWN";
       break;
     case msrSpannerTypeKind::kSpannerTypeStart:
       result = "kSpannerTypeStart";

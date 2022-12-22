@@ -144,7 +144,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
       "Quitting after creating the MSR skeleton in pass 2a of xmlFile2musicxmlWithHandler as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // populate the MSR skeleton from MusicXML data (pass 2b)
@@ -175,7 +175,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
       "Quitting after pass 2b as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // convert the first MSR score into a second MSR (pass 3)
@@ -210,7 +210,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
       "Quitting after pass 3 as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // convert the second MSR into an MXSR (pass 4)
@@ -261,7 +261,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________
@@ -388,7 +388,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NONE; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -426,7 +426,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithOptionsAndArguments (
     err,
     handler);
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________

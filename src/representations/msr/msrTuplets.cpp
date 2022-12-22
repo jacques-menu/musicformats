@@ -108,7 +108,7 @@ msrTuplet::msrTuplet (
 {
   fTupletUpLinkToMeasure = upLinkToMeasure;
 
-  fTupletKind = msrTupletInKind::kTupletIn_NO_;
+  fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN;
 
   fTupletNumber = tupletNumber;
 
@@ -194,7 +194,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 //   S_msrMeasure result;
 //
 //   switch (fTupletKind) {
-//     case msrTupletInKind::kTupletIn_NO_:
+//     case msrTupletInKind::kTupletIn_UNKNOWN:
 //       break;
 //
 //     case msrTupletInKind::kTupletInMeasure:
@@ -202,9 +202,9 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 //       break;
 //
 //     case msrTupletInKind::kTupletInTuplet:
-//       if (fTupletDirectUpLinkToTuplet) {
+//       if (fTupletShortcutUpLinkToTuplet) {
 //         result =
-//           fTupletDirectUpLinkToTuplet->
+//           fTupletShortcutUpLinkToTuplet->
 //             fetchMeasureElementUpLinkToMeasure ();
 //       }
 //       break;
@@ -218,14 +218,14 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 //   S_msrTuplet result;
 //
 //   switch (fTupletKind) {
-//     case msrTupletInKind::kTupletIn_NO_:
+//     case msrTupletInKind::kTupletIn_UNKNOWN:
 //       break;
 //
 //     case msrTupletInKind::kTupletInMeasure:
 //       break;
 //
 //     case msrTupletInKind::kTupletInTuplet:
-//       result = fTupletDirectUpLinkToTuplet;
+//       result = fTupletShortcutUpLinkToTuplet;
 //       break;
 //   } // switch
 //
@@ -308,7 +308,7 @@ void msrTuplet::appendNoteToTuplet (
 
   // register note's uplink to tuplet
   note->
-    setNoteDirectUpLinkToTuplet (this);
+    setNoteShortcutUpLinkToTuplet (this);
 
 //   // register note's uplink to measure // JMI v0.9.66 ???
 //   note->
@@ -737,8 +737,8 @@ void msrTuplet::setTupletMembersMeasurePositions (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+    "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 
   // set tuplet's measure position
   fMeasureElementMeasurePosition = measurePosition;
@@ -1137,10 +1137,10 @@ void msrTuplet::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletDirectUpLinkToTuplet" << ": ";
-  if (fTupletDirectUpLinkToTuplet) {
+    "fTupletShortcutUpLinkToTuplet" << ": ";
+  if (fTupletShortcutUpLinkToTuplet) {
     os <<
-      fTupletDirectUpLinkToTuplet->asShortString ();
+      fTupletShortcutUpLinkToTuplet->asShortString ();
   }
   else {
     os << "[NONE]";
@@ -1260,10 +1260,10 @@ void msrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletDirectUpLinkToTuplet" << ": ";
-  if (fTupletDirectUpLinkToTuplet) {
+    "fTupletShortcutUpLinkToTuplet" << ": ";
+  if (fTupletShortcutUpLinkToTuplet) {
     os <<
-      fTupletDirectUpLinkToTuplet->asShortString ();
+      fTupletShortcutUpLinkToTuplet->asShortString ();
   }
   else {
     os << "[NONE]";

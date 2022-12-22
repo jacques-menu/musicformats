@@ -23,9 +23,9 @@ namespace MusicFormats
 {
 
 // ------------------------------------------------------
-extern const std::string K_NO_MEASURE_NUMBER;
+extern const std::string K_MEASURE_NUMBER_UNKNOWN;
 
-extern const Rational    K_NO_WHOLE_NOTES;
+extern const Rational    K_WHOLE_NOTES_UNKNOWN;
 
 //______________________________________________________________________________
 extern S_msrMeasure gGlobalNullMeasureSmartPointer;

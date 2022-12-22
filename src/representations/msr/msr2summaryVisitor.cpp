@@ -805,7 +805,7 @@ void msr2summaryVisitor::visitStart (S_msrNote& elt)
   }
 
   switch (elt->getNoteKind ()) {
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
     case msrNoteKind::kNoteRestInMeasure:
       ++fScoreRestNotesCounter;
@@ -851,7 +851,7 @@ void msr2summaryVisitor::visitEnd (S_msrNote& elt)
   }
 
   switch (elt->getNoteKind ()) { // JMI
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
     case msrNoteKind::kNoteRestInMeasure:
       break;

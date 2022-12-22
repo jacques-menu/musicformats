@@ -122,8 +122,8 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_NO_POSITION,
-//     "measurePosition == msrMoment::K_NO_POSITION");
+//     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+//     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 //
 //   // set measure element's measure position
 //   fEyeGlassesMeasurePosition = measurePosition;

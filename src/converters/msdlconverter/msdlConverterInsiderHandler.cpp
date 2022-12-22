@@ -183,7 +183,7 @@ R"(Usage: msdl [option]*
     std::endl;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       s <<
         "The help below is available whichever output is produced";
       break;
@@ -213,7 +213,7 @@ std::string msdlConverterInsiderHandler::msdlConverterAboutInformation (
   size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should not occur
       break;
 
@@ -241,7 +241,7 @@ std::string msdlConverterInsiderHandler::msdlConverterAboutInformation (
   std::string headPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should only occur if the run is a pure help one
       {
         std::stringstream headPartStream;
@@ -279,7 +279,7 @@ R"(
   std::string specificPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -453,7 +453,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
   */
 
   switch (mfMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::kGeneration_NO_:
+    case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -567,7 +567,7 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
   if (MSDR_STANDARD_INPUT_NAME == std::string ("-")) {
     checkSingleInputSourceInArgumentsVector ();
   }
-  else if (MSDR_STANDARD_INPUT_NAME == std::string ("")) {
+  else if (MSDR_STANDARD_INPUT_NAME == std::string ("")) { // JMI v0.9.66
     checkNoOrOneInputSourceInArgumentsVector ();
   }
   else {
@@ -711,9 +711,9 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
   // and add the output file name suffix
   if (! outputFileNameHasBeenSet) {
     switch (fMultiGenerationOutputKind) {
-      case mfMultiGenerationOutputKind::kGeneration_NO_:
+      case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
         // should not occur
-        outputFileName = "___kGeneration_NO____";
+        outputFileName = "___kGeneration_UNKNOWN____";
         break;
 
       case mfMultiGenerationOutputKind::kGenerationLilypond:
@@ -1016,7 +1016,7 @@ msdlConverterInsiderOahGroup::msdlConverterInsiderOahGroup ()
 R"(Options that are used by msdlConverter are grouped here.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_NO_;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN;
 
   initializemsdlConverterInsiderOahGroup ();
 }
