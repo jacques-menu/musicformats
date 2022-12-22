@@ -96,8 +96,8 @@ S_msrScore createScore ()
 }
 
 //_______________________________________________________________________________
-void displayMsrScoreShort (
-  S_msrScore    theMsrScore,
+void displayMsrScore (
+  S_msrScore         theMsrScore,
   const std::string& passDescription)
 {
   // sanity check
@@ -117,7 +117,7 @@ void displayMsrScoreShort (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription << ", short version" <<
+    "Pass (optional): " << passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl <<
@@ -153,7 +153,7 @@ void displayMsrScoreShort (
 
 //_______________________________________________________________________________
 void displayMsrScoreFull (
-  S_msrScore    theMsrScore,
+  S_msrScore         theMsrScore,
   const std::string& passDescription)
 {
   // sanity check
@@ -210,8 +210,8 @@ void displayMsrScoreFull (
 
 //_______________________________________________________________________________
 void displayMsrScoreSummary (
-  S_msrScore     theMsrScore,
-  S_msrOahGroup& msrOpts,
+  S_msrScore          theMsrScore,
+  S_msrOahGroup&      msrOpts,
   const std::string&  passDescription)
 {
   // sanity check
@@ -261,8 +261,8 @@ void displayMsrScoreSummary (
 
 //_______________________________________________________________________________
 void displayMsrScoreNames (
-  S_msrScore     theMsrScore,
-  S_msrOahGroup& msrOpts,
+  S_msrScore          theMsrScore,
+  S_msrOahGroup&      msrOpts,
   const std::string&  passDescription)
 {
   // sanity check
@@ -312,7 +312,7 @@ void displayMsrScoreNames (
 
 //_______________________________________________________________________________
 void displayMsrScoreSlices (
-  S_msrScore    theMsrScore,
+  S_msrScore         theMsrScore,
   const std::string& passDescription)
 {
   // sanity check
@@ -423,9 +423,9 @@ S_msrStaff createStaffInPart (
 
 //_______________________________________________________________________________
 S_msrVoice createRegularVoiceInStaff (
-  int          inputLineNumber,
-  int          voiceNumber,
-  const S_msrStaff&   staff)
+  int               inputLineNumber,
+  int               voiceNumber,
+  const S_msrStaff& staff)
 {
   // create the functions voice
   S_msrVoice
@@ -446,8 +446,8 @@ S_msrVoice createRegularVoiceInStaff (
 
 //_______________________________________________________________________________
 S_msrMeasure createMeasureInVoice (
-  int        inputLineNumber,
-  std::string     measureNumber,
+  int               inputLineNumber,
+  std::string       measureNumber,
   const S_msrVoice& voice)
 {
   return
@@ -466,7 +466,7 @@ S_msrMeasure createMeasureInVoice (
   {
     // create the measure
 
-    std::string measure1number = "1"; // the measure number is a std::string;
+    std::string measure1number = "1"; // the measure number is a string;
 
     S_msrMeasure
       measure1 =

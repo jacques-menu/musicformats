@@ -29,7 +29,7 @@ namespace MusicFormats
 // octaves
 //______________________________________________________________________________
 enum class msrOctaveKind {
-  kOctave_NO_,
+  kOctave_UNKNOWN,
 
   kOctave0, kOctave1, kOctave2, kOctave3,
   kOctave4, // that of middle C

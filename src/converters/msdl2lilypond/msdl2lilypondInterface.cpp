@@ -163,7 +163,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       "Quitting after pass 1 as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // the LPSR score
@@ -201,7 +201,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       "Quitting after pass 2b as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // convert the LPSR to LilyPond code (pass 3)
@@ -340,7 +340,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     outputFileStream.close ();
   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________
@@ -448,7 +448,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NONE; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -487,7 +487,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     out,
     err);
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________

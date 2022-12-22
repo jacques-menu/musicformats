@@ -63,7 +63,7 @@ std::string msrTempoNotesRelationshipElementsKindAsString (
 std::ostream& operator << (std::ostream& os, const msrTempoNotesRelationshipElementsKind& elt);
 
 enum class msrTempoKBeatUnitsKind {
-  kTempoBeatUnits_NO_,
+  kTempoBeatUnits_UNKNOWN,
   kTempoBeatUnitsWordsOnly,
   kTempoBeatUnitsPerMinute,
   kTempoBeatUnitsEquivalence,

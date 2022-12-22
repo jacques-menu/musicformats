@@ -52,8 +52,8 @@ std::string msrChordInKindAsString (
   std::string result;
 
   switch (chordInKind) {
-    case msrChordInKind::kChordIn_NO_:
-      result = "kChordIn_NO_";
+    case msrChordInKind::kChordIn_UNKNOWN:
+      result = "kChordIn_UNKNOWN";
       break;
     case msrChordInKind::kChordInMeasure:
       result = "kChordInMeasure";
@@ -140,7 +140,7 @@ msrChord::msrChord (
     : msrTupletElement (
         inputLineNumber)
 {
-  fChordKind = msrChordInKind::kChordIn_NO_;
+  fChordKind = msrChordInKind::kChordIn_UNKNOWN;
 
   fChordUpLinkToMeasure = upLinkToMeasure;
 
@@ -232,8 +232,8 @@ S_msrChord msrChord::createChordNewbornClone (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_NO_POSITION,
-//     "measurePosition == msrMoment::K_NO_POSITION");
+//     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+//     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 //
 //   // set chord's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
@@ -245,7 +245,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //   S_msrMeasure result;
 //
 //   switch (fChordKind) {
-//     case msrChordInKind::kChordIn_NO_:
+//     case msrChordInKind::kChordIn_UNKNOWN:
 //       break;
 //
 //     case msrChordInKind::kChordInMeasure:
@@ -253,17 +253,17 @@ S_msrChord msrChord::createChordNewbornClone (
 //       break;
 //
 //     case msrChordInKind::kChordInTuplet:
-//       if (fChordDirectUpLinkToTuplet) {
+//       if (fChordShortcutUpLinkToTuplet) {
 //         result =
-//           fChordDirectUpLinkToTuplet->
+//           fChordShortcutUpLinkToTuplet->
 //             fChordUpLinkToMeasure;
 //       }
 //       break;
 //
 //     case msrChordInKind::kChordInGraceNotesGroup:
-//       if (fChordDirectUpLinkToGraceNotesGroup) {
+//       if (fChordShortcutUpLinkToGraceNotesGroup) {
 //         result =
-//           fChordDirectUpLinkToGraceNotesGroup->
+//           fChordShortcutUpLinkToGraceNotesGroup->
 //             getGraceNotesGroupUpLinkToNote ()->
 //               fChordUpLinkToMeasure;
 //       }
@@ -324,22 +324,22 @@ S_msrTuplet msrChord::fetchChordUpLinkToTuplet () const
   S_msrTuplet result;
 
   switch (fChordKind) {
-    case msrChordInKind::kChordIn_NO_:
+    case msrChordInKind::kChordIn_UNKNOWN:
       break;
 
     case msrChordInKind::kChordInMeasure:
       break;
 
     case msrChordInKind::kChordInTuplet:
-      result = fChordDirectUpLinkToTuplet;
+      result = fChordShortcutUpLinkToTuplet;
       break;
 
     case msrChordInKind::kChordInGraceNotesGroup:
-      if (fChordDirectUpLinkToGraceNotesGroup) {
+      if (fChordShortcutUpLinkToGraceNotesGroup) {
         result =
-          fChordDirectUpLinkToGraceNotesGroup->
+          fChordShortcutUpLinkToGraceNotesGroup->
             getGraceNotesGroupUpLinkToNote ()->
-              getNoteDirectUpLinkToTuplet ();
+              getNoteShortcutUpLinkToTuplet ();
       }
       break;
   } // switch
@@ -353,14 +353,14 @@ S_msrGraceNotesGroup msrChord::fetchChordUpLinkToGraceNotesGroup () const
   S_msrGraceNotesGroup result;
 
   switch (fChordKind) {
-    case msrChordInKind::kChordIn_NO_:
+    case msrChordInKind::kChordIn_UNKNOWN:
       break;
     case msrChordInKind::kChordInMeasure:
       break;
     case msrChordInKind::kChordInTuplet:
       break;
     case msrChordInKind::kChordInGraceNotesGroup:
-      result = fChordDirectUpLinkToGraceNotesGroup; // JMI
+      result = fChordShortcutUpLinkToGraceNotesGroup; // JMI
       break;
   } // switch
 
@@ -558,7 +558,7 @@ void msrChord::addFirstNoteToChord (
 
   // register note's uplink to chord
   note->
-    setNoteDirectUpLinkToChord (this);
+    setNoteShortcutUpLinkToChord (this);
 
 /* JMI too early v0.9.66
   // register note's uplink to measure
@@ -619,7 +619,7 @@ void msrChord::addAnotherNoteToChord (
 
   // register note's uplink to chord
   note->
-    setNoteDirectUpLinkToChord (this);
+    setNoteShortcutUpLinkToChord (this);
 
   // mark note as belonging to a chord
   note->setNoteBelongsToAChord ();
@@ -862,7 +862,7 @@ void msrChord::appendTechnicalWithStringToChord (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
-      "Appending technical with std::string '" <<
+      "Appending technical with string '" <<
       tech->asString () <<
       "' to chord" <<
       std::endl;
@@ -1595,7 +1595,7 @@ void msrChord::printFull (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fChordUpLinkToMeasure" << ": ";
-  if (fChordDirectUpLinkToTuplet) {
+  if (fChordShortcutUpLinkToTuplet) {
     os <<
       fChordUpLinkToMeasure->asShortString ();
   }
@@ -1606,10 +1606,10 @@ void msrChord::printFull (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fChordDirectUpLinkToTuplet" << ": ";
-  if (fChordDirectUpLinkToTuplet) {
+    "fChordShortcutUpLinkToTuplet" << ": ";
+  if (fChordShortcutUpLinkToTuplet) {
     os <<
-      fChordDirectUpLinkToTuplet->asShortString ();
+      fChordShortcutUpLinkToTuplet->asShortString ();
   }
   else {
     os << "[NONE]";
@@ -2388,8 +2388,8 @@ void msrChord::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fChordDirectUpLinkToTuplet" << ": " <<
-    fChordDirectUpLinkToTuplet <<
+    "fChordShortcutUpLinkToTuplet" << ": " <<
+    fChordShortcutUpLinkToTuplet <<
     std::endl;
 
   os <<

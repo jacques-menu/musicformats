@@ -162,7 +162,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
       "Quitting after creating the MSR skeleton in pass 1 of convertMsdlStream2musicxmlWithHandler as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // convert the MSR into a second MSR (pass 2)
@@ -236,7 +236,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________
@@ -341,7 +341,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NONE; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -380,7 +380,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
     out,
     err);
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________

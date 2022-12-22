@@ -137,8 +137,8 @@ S_msrScore translateMsrToMsr (
   // display the resulting second MSR score if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayMsrScoreShort (
+  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
+    displayMsrScore (
       resultingNewMsrScore,
       "Display the second MSR as text");
   }
@@ -264,8 +264,8 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // display the resulting new MSR score if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayMsrScoreShort (
+  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
+    displayMsrScore (
       resultingNewMsrScore,
       "Display the second MSR as text");
   }

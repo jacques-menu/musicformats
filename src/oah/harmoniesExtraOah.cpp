@@ -534,7 +534,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for Harmony details std::string '" << theString <<
+      " for Harmony details string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
@@ -834,7 +834,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for Harmony analysis std::string '" << theString <<
+      " for Harmony analysis string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
@@ -970,7 +970,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
       msrHarmonyKindFromString (
         harmonyName);
 
-  if (harmonyKind == msrHarmonyKind::kHarmony_NO_) {
+  if (harmonyKind == msrHarmonyKind::kHarmony_UNKNOWN) {
     std::stringstream s;
 
     s <<

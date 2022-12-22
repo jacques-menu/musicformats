@@ -266,7 +266,7 @@ float msrFontSize::getFontNumericSize () const
 
         msrInternalError (
           gGlobalServiceRunData->getInputSourceName (),
-          K_MF_NO_INPUT_LINE_NUMBER, // JMI
+          K_MF_INPUT_LINE_UNKNOWN, // JMI
           __FILE__, __LINE__,
           s.str ());
       }

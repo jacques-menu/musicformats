@@ -25,7 +25,7 @@ namespace MusicFormats
 // tremolo types
 //______________________________________________________________________________
 enum class msrDoubleTremoloTypeKind {
-  kDoubleTremoloType_NO_,
+  kDoubleTremoloType_UNKNOWN,
   kDoubleTremoloTypeSingle, kDoubleTremoloTypeStart, kDoubleTremoloTypeStop
 };
 

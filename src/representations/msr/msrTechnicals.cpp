@@ -96,8 +96,8 @@ std::string msrTechnicalTypeKindAsString (
   std::string result;
 
   switch (technicalTypeKind) {
-    case msrTechnicalTypeKind::kTechnicalType_NO_:
-      result = "kTechnicalType_NO_";
+    case msrTechnicalTypeKind::kTechnicalType_UNKNOWN:
+      result = "kTechnicalType_UNKNOWN";
       break;
     case msrTechnicalTypeKind::kTechnicalTypeStart:
       result = "kTechnicalTypeStart";

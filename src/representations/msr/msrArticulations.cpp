@@ -59,8 +59,8 @@ std::string msrArticulationKindAsString (
   std::string result;
 
   switch (articulationKind) {
-    case msrArticulationKind::kArticulation_NO_:
-      result = "kArticulation_NO_";
+    case msrArticulationKind::kArticulation_UNKNOWN:
+      result = "kArticulation_UNKNOWN";
       break;
 
     case msrArticulationKind::kArticulationAccent:
@@ -228,7 +228,7 @@ msrFermata::msrFermata (
     : msrArticulation (
       inputLineNumber,
       msrArticulationKind::kArticulationFermata,
-      msrPlacementKind::kPlacement_NO_) // temporary, JMI TEMP
+      msrPlacementKind::kPlacement_UNKNOWN) // temporary, JMI TEMP
 {
   fFermataShapeKind = fermataShapeKind;
   fFermataTypeKind  = fermataTypeKind;

@@ -47,8 +47,8 @@ std::string msrDoubleTremoloTypeKindAsString (
   std::string result;
 
   switch (tremoloTypeKind) {
-    case msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_:
-      result = "kDoubleTremoloType_NO_";
+    case msrDoubleTremoloTypeKind::kDoubleTremoloType_UNKNOWN:
+      result = "kDoubleTremoloType_UNKNOWN";
       break;
     case msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle:
       result = "kDoubleTremoloTypeSingle";
@@ -244,8 +244,8 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_NO_POSITION,
-//     "measurePosition == msrMoment::K_NO_POSITION");
+//     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+//     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 //
 //   // set double tremolo's measure position
 //   fMeasureElementMeasurePosition = measurePosition;

@@ -478,12 +478,12 @@ R"(Display EXECUTABLE_NAME's version.)",
           std::regex ("EXECUTABLE_NAME"),
           serviceName),
         serviceName,
-        oahVersionKind::kOahVersionShort));
+        oahVersionKind::kOahVersion));
 
   subGroup->
     appendAtomToSubGroup (
       oahVersionAtom::create (
-        "version-full", "vf",
+        "version-full", "vfull",
         regex_replace (
 R"(Display EXECUTABLE_NAME's version.)",
           std::regex ("EXECUTABLE_NAME"),
@@ -597,8 +597,8 @@ R"(Print help about OPTION_NAME.)",
 
   fFindStringAtom =
     oahFindStringAtom::create (
-      "find", "", // "find-std::string" ??? JMI
-R"(Find std::string STRING in the help.
+      "find", "", // "find-string" ??? JMI v0.9.66
+R"(Find string STRING in the help.
 The search is case insensitive, and a '-' is added in front of options name for clarity.)",
       "STRING",
       serviceName);
@@ -614,7 +614,7 @@ The search is case insensitive, and a '-' is added in front of options name for 
       K_INCLUDE_OPTION_LONG_NAME, K_INCLUDE_OPTION_SHORT_NAME,
       regex_replace (
 R"(Include the options and arguments contained in FILENAME.
-FILENAME is a std::string and should be a path to a text file.
+FILENAME is a string and should be a path to a text file.
 Such a file is expected to hold at most one option or argument per line.
 A '#' starts a comment that spans to the end of the line.
 Comments and empty lines are ignored and can be used at will.

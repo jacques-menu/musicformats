@@ -599,7 +599,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
       case msdlTokenKind::k_TokenEOF:
         break;
 
-      case msdlTokenKind::kToken_NO_:
+      case msdlTokenKind::kToken_UNKNOWN:
         // should not occur
         break;
 
@@ -964,7 +964,7 @@ void msdlScanner::acceptAName ()
 #endif
 
   switch (keyWordKind) {
-    case msdlKeywordKind::kKeyword_NO_: // no, it is a name
+    case msdlKeywordKind::kKeyword_UNKNOWN: // no, it is a name
       fCurrentTokenKind = msdlTokenKind::kTokenName;
       fCurrentTokenDescription.setString (nameString);
       break;
@@ -1447,7 +1447,7 @@ void msdlScanner::scanAllTheInputAtOnce (
     int numberOfTokens = 0;
 
     try {
-      msdlTokenKind tokenKind = msdlTokenKind::kToken_NO_;
+      msdlTokenKind tokenKind = msdlTokenKind::kToken_UNKNOWN;
 
       // fetch the first input character
       fetchNextCharacter ();
@@ -1563,7 +1563,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
   int numberOfTokens = 0;
 
   try {
-    msdlTokenKind tokenKind = msdlTokenKind::kToken_NO_;
+    msdlTokenKind tokenKind = msdlTokenKind::kToken_UNKNOWN;
 
     // fetch the first input character
     fetchNextCharacter ();
@@ -1696,7 +1696,7 @@ void msdlScanner::scanWholeInputAtOnce ()
 
   // do the job
   switch (keywordsConversionLanguageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
       scanAllTheInputAtOnce (
         ignoreSeparatorTokensKind);
       break;

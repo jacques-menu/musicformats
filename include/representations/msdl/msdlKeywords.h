@@ -26,7 +26,7 @@ enum class msdlTokenKind;
 // the MSDL keywords languages
 //______________________________________________________________________________
 enum class msdlKeywordsLanguageKind {
-  kKeywordsLanguage_NO_,
+  kKeywordsLanguage_UNKNOWN,
 
   kKeywordsLanguageEnglish, // MSDL default
   kKeywordsLanguageFrench,
@@ -54,7 +54,7 @@ void initializeMsdlKeywordsLanguageKindsMap ();
 // the MSDL keywords
 //______________________________________________________________________________
 enum class msdlKeywordKind {
-  kKeyword_NO_,
+  kKeyword_UNKNOWN,
 
   kKeywordTitle,
   kKeywordComposer,

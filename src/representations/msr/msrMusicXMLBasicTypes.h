@@ -37,7 +37,7 @@ EXP msrXMLLangKind msrXMLLangKindFromString (
   const std::string& XMLLangString);
 
 enum class msrOtherAppearanceTypeKind { // JMI which values??? v0.9.62
-  kOtherAppearanceType_NO_
+  kOtherAppearanceType_UNKNOWN
 };
 
 std::string msrOtherAppearanceTypeKindAsString (
@@ -46,7 +46,7 @@ std::string msrOtherAppearanceTypeKindAsString (
 std::ostream& operator << (std::ostream& os, const msrOtherAppearanceTypeKind& elt);
 
 enum class msrLineWidthTypeKind {
-  kLineWidthType_NO_,
+  kLineWidthType_UNKNOWN,
   kLineWidthTypeBeam, kLineWidthTypeBracket, kLineWidthTypeDashes,
   kLineWidthTypeEnclosure,
   kLineWidthTypeEnding,
@@ -67,7 +67,7 @@ std::string msrLineWidthTypeKindAsString (
 std::ostream& operator << (std::ostream& os, const msrLineWidthTypeKind& elt);
 
 enum class msrNoteSizeTypeKind {
-  kNote_NO_SizeType,
+  kNoteSizeType_UNKNOWN,
   kNoteSizeTypeCue, kNoteSizeTypeGrace, kNoteSizeTypeLarge
 };
 
@@ -77,7 +77,7 @@ std::string msrNoteSizeTypeKindAsString (
 std::ostream& operator << (std::ostream& os, const msrNoteSizeTypeKind& elt);
 
 enum class msrDistanceTypeKind {
-  kDistanceType_NO_,
+  kDistanceType_UNKNOWN,
   kDistanceTypeHyphen, kDistanceTypeBeam
 };
 
@@ -87,7 +87,7 @@ std::string msrDistanceTypeKindAsString (
 std::ostream& operator << (std::ostream& os, const msrDistanceTypeKind& elt);
 
 enum class msrGlyphTypeKind {
-  kGlyphType_NO_,
+  kGlyphType_UNKNOWN,
   kGlyphTypeQuarterRest,
   kGlyphTypeGClefOttavaBassa,
   kGlyphTypeCClef, kGlyphTypeFClef,

@@ -39,7 +39,7 @@ std::string msdlTokenKindAsString (
   std::stringstream s;
 
   switch (tokenKind) {
-    case msdlTokenKind::kToken_NO_:
+    case msdlTokenKind::kToken_UNKNOWN:
       s << "*noToken*";
       break;
 
@@ -311,7 +311,7 @@ std::string msdlTokenKindAsMsdlString (
   std::string result;
 
   switch (tokenKind) {
-    case msdlTokenKind::kToken_NO_:
+    case msdlTokenKind::kToken_UNKNOWN:
       result = "*NoToken*";
       break;
 
@@ -483,11 +483,11 @@ std::string msdlTokenKindAsMsdlString (
 msdlTokenKind msdlTokenKindFromKeywordKind (
   msdlKeywordKind keywordKind)
 {
-  msdlTokenKind result = msdlTokenKind::kToken_NO_;
+  msdlTokenKind result = msdlTokenKind::kToken_UNKNOWN;
 
   switch (keywordKind) {
-    case msdlKeywordKind::kKeyword_NO_:
-      result = msdlTokenKind::kToken_NO_;
+    case msdlKeywordKind::kKeyword_UNKNOWN:
+      result = msdlTokenKind::kToken_UNKNOWN;
       break;
 
     case msdlKeywordKind::kKeywordTitle:
@@ -577,7 +577,7 @@ std::string existingTokensInLanguage (
 
   // select the relevant keywords names map
   switch (keywordsLanguageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
       // should not occur
       break;
 
@@ -977,7 +977,7 @@ msdlTokenDescription::~msdlTokenDescription ()
 
 msdlKeywordKind msdlTokenDescription::getKeywordKind () const
 {
-  msdlKeywordKind result = msdlKeywordKind::kKeyword_NO_;
+  msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN;
 
   switch (fTokenDescriptionKind) {
     case msdlTokenDescriptionKind::kTokenKeyword:
@@ -1367,7 +1367,7 @@ std::ostream& operator << (std::ostream& os, const msdlTokenDescription& elt)
 
 //_______________________________________________________________________________
 msdlToken::msdlToken ()
-    : fTokenKind (msdlTokenKind::kToken_NO_)
+    : fTokenKind (msdlTokenKind::kToken_UNKNOWN)
 {
   initializeToken ();
 }
@@ -1441,7 +1441,7 @@ std::string msdlToken::asString () const
     ' ';
 
   switch (fTokenKind) {
-    case msdlTokenKind::kToken_NO_:
+    case msdlTokenKind::kToken_UNKNOWN:
       // should not occur
       break;
 
@@ -1616,7 +1616,7 @@ std::string msdlToken::asMsdlString (
   std::stringstream s;
 
   switch (fTokenKind) {
-    case msdlTokenKind::kToken_NO_:
+    case msdlTokenKind::kToken_UNKNOWN:
       // should not occur
       break;
 
@@ -1797,7 +1797,7 @@ void msdlToken::print (std::ostream& os) const
     std::endl;
 
   switch (fTokenKind) {
-    case msdlTokenKind::kToken_NO_:
+    case msdlTokenKind::kToken_UNKNOWN:
       // should not occur
       break;
 

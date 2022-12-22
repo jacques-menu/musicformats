@@ -51,7 +51,7 @@ namespace MusicFormats
 //   std::string result;
 //
 //   switch (tempoKind) {
-//     case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
+//     case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
 //       result = "_";
 //       break;
 //     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -105,7 +105,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
   if (! gGlobalMsr2bsrOahGroup->getNoTempos ()) {
     switch (fMsrTempo->getTempoKind ()) {
-      case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
+      case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
         break;
 
       case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -153,7 +153,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             noteValueKind = bsrNoteValueKind::kNoteValueNone;
 
           switch (durationKind) {
-            case msrDurationKind::kDuration_NO_:
+            case msrDurationKind::kDuration_UNKNOWN:
               break;
 
             case msrDurationKind::kDuration1024th: // JMI
@@ -244,7 +244,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
             gLogStream <<
               "There are " << smSize << " matches" <<
-              " for Rational std::string '" << tempoPerMinuteString <<
+              " for Rational string '" << tempoPerMinuteString <<
               "' with std::regex '" << regularExpression <<
               "'" <<
               std::endl;
@@ -288,7 +288,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
               gLogStream <<
                 "There are " << smSize << " matches" <<
-                " for Rational std::string '" << tempoPerMinuteString <<
+                " for Rational string '" << tempoPerMinuteString <<
                 "' with std::regex '" << regularExpression <<
                 "'" <<
                 std::endl;
@@ -464,7 +464,7 @@ std::string bsrTempo::asDebugString () const
     "[TEMPO ";
 
   switch (fMsrTempo->getTempoKind ()) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
       s << "_";
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:

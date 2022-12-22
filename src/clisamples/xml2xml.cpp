@@ -434,7 +434,7 @@ int main (int argc, char* argv[])
   // over!
   // ------------------------------------------------------
 
-  if (err != mfMusicformatsErrorKind::kMusicformatsError_NO_) {
+  if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
     gLogStream <<
       "### Conversion from MusicXML back to MusicXML failed ###" <<
       std::endl;

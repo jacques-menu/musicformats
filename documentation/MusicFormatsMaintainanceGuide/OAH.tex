@@ -91,7 +91,7 @@ The output of the help  goes to \standardOutput, so that the user can pipe it in
     in the \CLI\ or in option vectors (\API);
 
 \item a class   such as \class{lpsrPitchesLanguageAtom} is used
-    to supply a std::string value to be converted into an internal enumerated type;
+    to supply a string value to be converted into an internal enumerated type;
 
 \item a \class{oahCombinedBooleansAtom} contains a list of boolean atoms
     to manipulate several such atoms as a single one,
@@ -231,7 +231,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     virtual void          printAtomWithVariableEssentials (
                             std::ostream& os,
                             int fieldWidth) const;
-    virtual void          printAtomWithVariableEssentialsShort (
+    virtual void          printAtomWithVariableEssentials (
                             std::ostream& os,
                             int fieldWidth) const;
 
@@ -349,7 +349,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
 The default \lily\ version number is \code{2.22.0}. Another can be chosen with the \optionNameBoth{lilypond-version}{lpv} option:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -find lilypond-version
-1 occurrence of std::string "lilypond-version" has been found:
+1 occurrence of string "lilypond-version" has been found:
    1:
     -lilypond-version, -lpv
     Set the Lilypond '\version' to STRING in the Lilypond code.
@@ -853,7 +853,7 @@ jacquesmenu@macmini > xml2ly -query cpu
 Option {\tt -find} searches the OAH tree ignoring letter cases:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -find grace
-5 occurrences of std::string "grace" have been found:
+5 occurrences of string "grace" have been found:
    1:
     -hgraces-group, -help-grace-notes-group
 
@@ -1379,7 +1379,7 @@ class   oahFindStringMatch : public smartable
 };
 \end{lstlisting}
 
-The \fieldName{fContainingFindableElementInfo} describes the \oahRepr\ element that the std::string was found in, either in its option name(s) or in its description.
+The \fieldName{fContainingFindableElementInfo} describes the \oahRepr\ element that the string was found in, either in its option name(s) or in its description.
 
 For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oahElement.cpp} creates an instance and appends it to the list :
 \begin{lstlisting}[language=Terminal]
@@ -1880,7 +1880,7 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
 };
 \end{lstlisting}
 
-\Method{oahLengthAtom}{applyAtomWithValue} in \oah{oahAtomsCollection.cpp} deciphers the std::string supplied by the user and stores it the \class{msrLength} variable:
+\Method{oahLengthAtom}{applyAtomWithValue} in \oah{oahAtomsCollection.cpp} deciphers the string supplied by the user and stores it the \class{msrLength} variable:
 \begin{lstlisting}[language=CPlusPlus]
 void oahLengthAtom::applyAtomWithValue (
   const std::string& theString,

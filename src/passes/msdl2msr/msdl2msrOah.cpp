@@ -331,7 +331,7 @@ when performing lexical analysis of the whole input at once.)",
 
   // MSDL keywords translation language
 
-  fMsdlKeywordsConversionLanguageKind = msdlKeywordsLanguageKind::kKeywordsLanguage_NO_;
+  fMsdlKeywordsConversionLanguageKind = msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN;
 
   subGroup->
     appendAtomToSubGroup (

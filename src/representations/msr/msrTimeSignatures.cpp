@@ -826,7 +826,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating time from std::string \"" <<
+      "Creating time from string \"" <<
       timeString <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -863,7 +863,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for time std::string \"" << timeString <<
+      " for time string \"" << timeString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;

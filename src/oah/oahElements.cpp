@@ -629,6 +629,16 @@ void oahElement::printOahElementEssentials (
 {
   os << std::left <<
     std::setw (fieldWidth) <<
+    fetchNames () << ": " <<
+    fDescription <<
+    std::endl;
+}
+void oahElement::printOahElementEssentialsFull (
+  std::ostream& os,
+  int fieldWidth) const
+{
+  os << std::left <<
+    std::setw (fieldWidth) <<
     "longName" << ": " <<
     "\"" << fLongName << "\"" <<
     std::endl <<
@@ -667,17 +677,6 @@ void oahElement::printOahElementEssentials (
     std::setw (fieldWidth) <<
     "fMultipleOccurrencesAllowed" << ": " <<
     fMultipleOccurrencesAllowed <<
-    std::endl;
-}
-
-void oahElement::printOahElementEssentialsShort (
-  std::ostream& os,
-  int fieldWidth) const
-{
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    fetchNames () << ": " <<
-    fDescription <<
     std::endl;
 }
 

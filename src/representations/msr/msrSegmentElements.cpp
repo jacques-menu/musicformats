@@ -34,24 +34,24 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // constants
-const std::string   msrSegmentElement::K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
+const std::string   msrSegmentElement::K_MEASURE_NUMBER_UNKNOWN = "K_MEASURE_NUMBER_UNKNOWN";
 
-const Rational msrSegmentElement::K_NO_WHOLE_NOTES (-444444, 1);
+const Rational msrSegmentElement::K_WHOLE_NOTES_UNKNOWN (-444444, 1);
 
 msrSegmentElement::msrSegmentElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 //       fSegmentElementMeasureMoment (
-//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
+//         msrMoment::K_MEASURE_POSITION_UNKNOWN, msrMoment::K_MEASURE_POSITION_UNKNOWN),
 //       fSegmentElementVoiceMoment (
-//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
+//         msrMoment::K_MEASURE_POSITION_UNKNOWN, msrMoment::K_MEASURE_POSITION_UNKNOWN)
 {
   fSegmentElementSoundingWholeNotes = Rational (0, 1);
 
-//   fSegmentElementMeasureNumber = K_NO_MEASURE_NUMBER;
+//   fSegmentElementMeasureNumber = K_MEASURE_NUMBER_UNKNOWN;
 
-//   fSegmentElementMeasurePosition = msrMoment::K_NO_POSITION;
-//   fSegmentElementVoicePosition   = msrMoment::K_NO_POSITION;
+//   fSegmentElementMeasurePosition = msrMoment::K_MEASURE_POSITION_UNKNOWN;
+//   fSegmentElementVoicePosition   = msrMoment::K_MEASURE_POSITION_UNKNOWN;
 }
 
 msrSegmentElement::~msrSegmentElement ()
@@ -79,8 +79,8 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    wholeNotes != K_NO_WHOLE_NOTES,
-    "wholeNotes == K_NO_WHOLE_NOTES");
+    wholeNotes != K_WHOLE_NOTES_UNKNOWN,
+    "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
 
   fSegmentElementSoundingWholeNotes = wholeNotes;
 }

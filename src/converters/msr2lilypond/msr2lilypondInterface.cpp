@@ -245,7 +245,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
     }
   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 

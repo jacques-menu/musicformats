@@ -405,7 +405,7 @@ int xml2ly (
   // over!
   // ------------------------------------------------------
 
-  if (err != mfMusicformatsErrorKind::kMusicformatsError_NO_) {
+  if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
     gLogStream <<
       "### Conversion from MusicXML to LilyPond failed ###" <<
       std::endl;

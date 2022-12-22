@@ -1344,7 +1344,7 @@ void msrTempo::acceptOut (basevisitor* v)
 void msrTempo::browseData (basevisitor* v)
 {
   switch (fTempoKind) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN:
       break;
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:

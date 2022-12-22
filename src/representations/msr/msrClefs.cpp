@@ -47,8 +47,8 @@ std::string msrClefKindAsString (
   std::string result;
 
   switch (clefKind) {
-    case msrClefKind::kClef_NO_:
-      result = "kClef_NO_";
+    case msrClefKind::kClef_UNKNOWN:
+      result = "kClef_UNKNOWN";
       break;
     case msrClefKind::kClefTreble:
       result = "kClefTreble";
@@ -134,7 +134,7 @@ msrClefKind msrClefKindFromString (
   int           inputLineNumber,
   const std::string& clefString)
 {
-  msrClefKind result = msrClefKind::kClef_NO_;
+  msrClefKind result = msrClefKind::kClef_UNKNOWN;
 
   if      (clefString == "treble")
     result = msrClefKind::kClefTreble;
@@ -186,7 +186,7 @@ msrClefKind msrClefKindFromString (
     std::stringstream s;
 
     s <<
-      "clef std::string \"" <<
+      "clef string \"" <<
       clefString <<
       "\" is unknown" <<
       ", line: " << inputLineNumber;
@@ -402,7 +402,7 @@ msrClef::~msrClef ()
 S_msrClef msrClef::createClefFromString (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  const std::string& clefString,
+  const std::string&  clefString,
   int                 clefLineNumber)
 {
   /*
@@ -414,7 +414,7 @@ S_msrClef msrClef::createClefFromString (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating clef from std::string \"" <<
+      "Creating clef from string \"" <<
       clefString <<
       "', line " << inputLineNumber <<
       std::endl;
@@ -447,7 +447,7 @@ S_msrClef msrClef::createClefFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for clef std::string \"" << clefString <<
+      " for clef string \"" << clefString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;

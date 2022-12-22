@@ -79,7 +79,7 @@ S_msrTie msrTie::create (
     msrTie::create (
       inputLineNumber,
       tieKind,
-      msrPlacementKind::kPlacement_NO_);
+      msrPlacementKind::kPlacement_UNKNOWN);
 }
 
 msrTie::msrTie (

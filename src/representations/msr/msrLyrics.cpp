@@ -375,8 +375,8 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != msrMoment::K_NO_POSITION,
-//     "measurePosition == msrMoment::K_NO_POSITION");
+//     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
+//     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 //
 //   // set syllable's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
@@ -496,7 +496,7 @@ std::string msrSyllable::syllableWholeNotesAsMsrString () const
 
   if (fSyllableUpLinkToNote) { // JMI
     switch (fSyllableUpLinkToNote->getNoteKind ()) {
-      case msrNoteKind::kNote_NO_:
+      case msrNoteKind::kNote_UNKNOWN:
       case msrNoteKind::kNoteRestInMeasure:
       case msrNoteKind::kNoteUnpitchedInMeasure:
       case msrNoteKind::kNoteRegularInMeasure:
@@ -865,8 +865,8 @@ std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)
 
 //______________________________________________________________________________
 // constants
-const std::string msrStanza::K_NO_STANZA_NUMBER = "-1";
-const std::string msrStanza::K_NO_STANZA_NAME   = "Unknown stanza";
+const std::string msrStanza::K_STANZA_NUMBER_UNKNOWN = "-1";
+const std::string msrStanza::K_STANZA_NAME_UNKNOWN   = "Unknown stanza";
 
 S_msrStanza msrStanza::create (
   int           inputLineNumber,

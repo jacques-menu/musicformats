@@ -28,7 +28,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 // data types
 enum class msrBassFigurePrefixKind {
-  kBassFigurePrefix_NO_,
+  kBassFigurePrefix_UNKNOWN,
   kBassFigurePrefixDoubleFlat, kBassFigurePrefixFlat, kBassFigurePrefixFlatFlat,
   kBassFigurePrefixNatural,
   kBassFigurePrefixSharpSharp, kBassFigurePrefixSharp, kBassFigurePrefixDoubleSharp
@@ -40,7 +40,7 @@ std::string msrBassFigurePrefixKindAsString (
 std::ostream& operator << (std::ostream& os,const msrBassFigurePrefixKind& elt);
 
 enum class msrBassFigureSuffixKind {
-  kBassFigureSuffix_NO_,
+  kBassFigureSuffix_UNKNOWN,
   kBassFigureSuffixDoubleFlat, kBassFigureSuffixFlat, kBassFigureSuffixFlatFlat,
   kBassFigureSuffixNatural,
   kBassFigureSuffixSharpSharp, kBassFigureSuffixSharp, kBassFigureSuffixDoubleSharp,

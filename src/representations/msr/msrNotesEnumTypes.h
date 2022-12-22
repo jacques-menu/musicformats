@@ -55,7 +55,7 @@ namespace MusicFormats
 */
 
 enum class msrNoteKind {
-  kNote_NO_,
+  kNote_UNKNOWN,
 
   // in measures
   kNoteRegularInMeasure,

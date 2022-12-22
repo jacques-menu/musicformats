@@ -120,7 +120,7 @@ std::string msdlKeywordsLanguageKindAsString (
   std::string result;
 
   switch (languageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_: // default value
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN: // default value
       result = "*noKeywordsLanguage*";
       break;
 
@@ -406,7 +406,7 @@ std::string msdlKeywordKindAsString (
   std::string result;
 
   switch (keywordKind) {
-    case msdlKeywordKind::kKeyword_NO_:
+    case msdlKeywordKind::kKeyword_UNKNOWN:
       result = "*noKeywordKind*";
       break;
 
@@ -507,7 +507,7 @@ std::string msdlKeywordKindAsMsdlString (
 
   // select the relevant keywords names map
   switch (languageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
       // should not occur
       break;
 
@@ -564,7 +564,7 @@ std::string msdlKeywordKindAsMsdlString (
 msdlKeywordKind msdlKeywordKindFromTokenKind (
   msdlTokenKind tokenKind)
 {
-  msdlKeywordKind result = msdlKeywordKind::kKeyword_NO_;
+  msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN;
 
   switch (tokenKind) {
     // language-dependent keywords
@@ -664,13 +664,13 @@ msdlKeywordKind msdlKeywordKindFromString (
   }
 #endif
 
-  msdlKeywordKind result = msdlKeywordKind::kKeyword_NO_;
+  msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN;
 
   std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
   // select the relevant keywords names map
   switch (languageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
       // should not occur
       break;
 
@@ -735,7 +735,7 @@ std::string existingKeywordsInLanguage (
 
   // select the relevant keywords names map
   switch (keywordsLanguageKind) {
-    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_UNKNOWN:
       // should not occur
       break;
 

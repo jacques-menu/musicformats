@@ -24,8 +24,10 @@ namespace MusicFormats
 // moments
 //______________________________________________________________________________
 // constants
-const Rational  msrMoment::K_NO_POSITION (-987, 1);
-const msrMoment msrMoment::K_NO_MOMENT   (K_NO_POSITION, K_NO_POSITION);
+const Rational
+  msrMoment::K_MEASURE_POSITION_UNKNOWN (-987, 1);
+const msrMoment
+  msrMoment::K_MOMENT_UNKNOWN(K_MEASURE_POSITION_UNKNOWN, K_MEASURE_POSITION_UNKNOWN);
 
 msrMoment::msrMoment ()
 {

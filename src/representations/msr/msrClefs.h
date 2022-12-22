@@ -27,7 +27,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 
 enum class msrClefKind {
-  kClef_NO_,
+  kClef_UNKNOWN,
 
   kClefTreble,
   kClefSoprano, kClefMezzoSoprano, kClefAlto, kClefTenor, kClefBaritone, kClefBass,

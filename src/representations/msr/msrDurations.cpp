@@ -29,7 +29,7 @@ msrDurationKind msrDurationKindFromMusicXMLString (
   int           inputLineNumber,
   const std::string& durationString)
 {
-  msrDurationKind result = msrDurationKind::kDuration_NO_;
+  msrDurationKind result = msrDurationKind::kDuration_UNKNOWN;
 
   if      (durationString == "maxima") {
     result = msrDurationKind::kDurationMaxima;
@@ -94,7 +94,7 @@ EXP msrDurationKind msrDurationKindFromInteger (
   int inputLineNumber,
   int durationInteger)
 {
-  msrDurationKind result = msrDurationKind::kDuration_NO_;
+  msrDurationKind result = msrDurationKind::kDuration_UNKNOWN;
 
   switch (durationInteger) {
     case 1:
@@ -141,7 +141,7 @@ msrDurationKind msrDurationKindFromString (
   int           inputLineNumber,
   const std::string& durationString)
 {
-  msrDurationKind result = msrDurationKind::kDuration_NO_;
+  msrDurationKind result = msrDurationKind::kDuration_UNKNOWN;
 
   if      (durationString == "maxima") {
     result = msrDurationKind::kDurationMaxima;
@@ -257,7 +257,7 @@ Rational msrDurationKindAsWholeNotes (msrDurationKind durationKind)
   Rational result;
 
   switch (durationKind) {
-    case msrDurationKind::kDuration_NO_:
+    case msrDurationKind::kDuration_UNKNOWN:
       result = Rational (0, 1);
       break;
 
@@ -310,7 +310,7 @@ Rational msrDurationKindAsWholeNotes (msrDurationKind durationKind)
 
 msrDurationKind wholeNotesAsDurationKind (Rational wholeNotes)
 {
-  msrDurationKind result = msrDurationKind::kDuration_NO_;
+  msrDurationKind result = msrDurationKind::kDuration_UNKNOWN;
 
   if (wholeNotes.getNumerator () == 1) {
     switch (wholeNotes.getDenominator ()) {
@@ -376,7 +376,7 @@ std::string msrDurationKindAsMusicXMLType (msrDurationKind durationKind)
   std::string result;
 
   switch (durationKind) {
-    case msrDurationKind::kDuration_NO_:
+    case msrDurationKind::kDuration_UNKNOWN:
       result = "noDuration";
       break;
 
@@ -432,8 +432,8 @@ std::string msrDurationKindAsString_INTERNAL (msrDurationKind durationKind) // J
   std::string result;
 
   switch (durationKind) {
-    case msrDurationKind::kDuration_NO_:
-      result = "kDuration_NO_";
+    case msrDurationKind::kDuration_UNKNOWN:
+      result = "kDuration_UNKNOWN";
       break;
 
     case msrDurationKind::kDuration1024th:
@@ -488,7 +488,7 @@ std::string msrDurationKindAsString (msrDurationKind durationKind)
   std::string result;
 
   switch (durationKind) {
-    case msrDurationKind::kDuration_NO_:
+    case msrDurationKind::kDuration_UNKNOWN:
       result = "???NoDuration???";
       break;
 
@@ -549,7 +549,7 @@ std::ostream& operator << (std::ostream& os, const msrDurationKind& elt)
 //______________________________________________________________________________
 msrDuration::msrDuration ()
 {
-  fDurationKind = msrDurationKind::kDuration_NO_;
+  fDurationKind = msrDurationKind::kDuration_UNKNOWN;
   fDotsNumber   = 0;
 }
 
@@ -797,7 +797,7 @@ int msrNumberOfDots (int n)
 //______________________________________________________________________________
 msrDottedDuration::msrDottedDuration ()
 {
-  fDurationKind = msrDurationKind::kDuration_NO_;
+  fDurationKind = msrDurationKind::kDuration_UNKNOWN;
   fDotsNumber   = 0;
 }
 

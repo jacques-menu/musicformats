@@ -2,6 +2,7 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.0">
+  <movement-title>Curved Tuplets</movement-title>
   <identification>
     <encoding>
       <software>Frescobaldi 2.18.1</software>

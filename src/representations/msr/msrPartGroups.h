@@ -308,7 +308,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int           inputLineNumber,
                             std::ostream& os) const;
 
-    void                  printPartGroupElementsListShort (
+    void                  printPartGroupElementsListFull (
                             int           inputLineNumber,
                             std::ostream& os) const;
 

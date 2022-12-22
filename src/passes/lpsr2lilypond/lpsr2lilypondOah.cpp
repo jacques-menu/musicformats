@@ -341,7 +341,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for part transpose std::string '" << theString <<
+      " for part transpose string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
@@ -403,7 +403,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
   else {
     fStringToMsrSemiTonesPitchAndOctaveMapVariable [partName] =
       msrSemiTonesPitchAndOctave::createFromString (
-        K_MF_NO_INPUT_LINE_NUMBER,
+        K_MF_INPUT_LINE_UNKNOWN,
         destinationPitchName);
 
     fSetByAnOption = true;
@@ -697,7 +697,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for part transpose std::string '" << theString <<
+      " for part transpose string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
@@ -759,7 +759,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   else {
     fStringToMsrSemiTonesPitchAndOctaveMapVariable [partID] =
       msrSemiTonesPitchAndOctave::createFromString (
-        K_MF_NO_INPUT_LINE_NUMBER,
+        K_MF_INPUT_LINE_UNKNOWN,
         destinationPitchName);
 
     fSetByAnOption = true;
@@ -1335,7 +1335,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
   // set relative octave reference value
   setRelativeOctaveEntryVariableValue (
     msrSemiTonesPitchAndOctave::createFromString (
-      K_MF_NO_INPUT_LINE_NUMBER,
+      K_MF_INPUT_LINE_UNKNOWN,
       theString));
 }
 
@@ -1550,7 +1550,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
   // set fixed octave reference value
   setFixedOctaveEntryVariableValue (
     msrSemiTonesPitchAndOctave::createFromString (
-      K_MF_NO_INPUT_LINE_NUMBER,
+      K_MF_INPUT_LINE_UNKNOWN,
       theString));
 }
 
@@ -2055,7 +2055,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for chords display std::string '" << theString <<
+      " for chords display string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "':" <<
       std::endl;
@@ -2943,7 +2943,7 @@ thus overriding the ones that may be present in the MSR data.)",
 
   appendSubGroupToGroup (subGroup);
 
-  // the 'identification' monoplex std::string atom
+  // the 'identification' monoplex string atom
   // --------------------------------------
 
   S_oahFactorizedStringAtom
@@ -3516,7 +3516,7 @@ This is handy when the MusicXML data contains beam in vocal voices)",
         "fNoBeams",
         fNoBeams));
 
-  // std::string numbers
+  // string numbers
   // --------------------------------------
 
   subGroup->
@@ -3524,7 +3524,7 @@ This is handy when the MusicXML data contains beam in vocal voices)",
       oahBooleanAtom::create (
         "roman-std::string-numbers", "rsn",
 R"(Generate '\romanStringNumbers' in each voice
-for LilyPond to generate roman instead of arabic std::string numbers.)",
+for LilyPond to generate roman instead of arabic string numbers.)",
         "fRomanStringNumbers",
         fRomanStringNumbers));
 
@@ -4679,7 +4679,7 @@ R"()",
         regex_replace (
 R"(Generate a '\tempo' command in the \midi block.
 MIDI_TEMPO_SPEC should be of the form DURATION=PER_SECOND .
-DURATION is a std::string such as '8.', and PER_SECOND is an integer.
+DURATION is a string such as '8.', and PER_SECOND is an integer.
 There can be spaces around the '='.
 The default is 'DEFAULT_VALUE'.)",
           std::regex ("EXECUTABLE"),
@@ -6386,7 +6386,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for reset measure number std::string '" << theString <<
+      " for reset measure number string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "':" <<
       std::endl;

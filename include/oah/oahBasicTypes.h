@@ -725,7 +725,7 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     virtual void          printAtomWithVariableEssentials (
                             std::ostream& os,
                             int fieldWidth) const;
-    virtual void          printAtomWithVariableEssentialsShort (
+    virtual void          printAtomWithVariableEssentialsFull (
                             std::ostream& os,
                             int fieldWidth) const;
 
@@ -817,7 +817,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     virtual void          printAtomWithVariableEssentials (
                             std::ostream& os,
                             int fieldWidth) const;
-    virtual void          printAtomWithVariableEssentialsShort (
+    virtual void          printAtomWithVariableEssentialsFull (
                             std::ostream& os,
                             int fieldWidth) const;
 

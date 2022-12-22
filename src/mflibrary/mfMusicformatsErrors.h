@@ -22,7 +22,7 @@ namespace MusicFormats
 {
 
 enum class mfMusicformatsErrorKind {
-  kMusicformatsError_NO_,
+  kMusicformatsError_NONE,
   kMusicformatsErrorInvalidFile,
   kMusicformatsErrorInvalidOption,
   kMusicformatsErrorUnsupported

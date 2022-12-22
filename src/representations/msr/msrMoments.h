@@ -33,9 +33,9 @@ class EXP msrMoment
     // constants
     // ------------------------------------------------------
 
-    static const Rational  K_NO_POSITION;
+    static const Rational  K_MEASURE_POSITION_UNKNOWN;
 
-    static const msrMoment K_NO_MOMENT;
+    static const msrMoment K_MOMENT_UNKNOWN;
 
   public:
 

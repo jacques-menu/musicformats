@@ -361,7 +361,7 @@ int main (int argc, char* argv[])
 
   mfMusicformatsErrorKind
     err =
-      mfMusicformatsErrorKind::kMusicformatsError_NO_;
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   try {
     err =
@@ -406,7 +406,7 @@ int main (int argc, char* argv[])
   // ------------------------------------------------------
 
   switch (err) {
-    case mfMusicformatsErrorKind::kMusicformatsError_NO_:
+    case mfMusicformatsErrorKind::kMusicformatsError_NONE:
       return 0;
       break;
     case mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile:

@@ -34,9 +34,9 @@ class EXP msrSegmentElement : public msrElement
     // constants
     // ------------------------------------------------------
 
-    static const std::string K_NO_MEASURE_NUMBER;
+    static const std::string K_MEASURE_NUMBER_UNKNOWN;
 
-    static const Rational K_NO_WHOLE_NOTES;
+    static const Rational K_WHOLE_NOTES_UNKNOWN;
 
   protected:
 

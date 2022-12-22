@@ -21,7 +21,7 @@ namespace MusicFormats
 // measure styles
 //______________________________________________________________________________
 enum class msrSlashTypeKind {
-  kSlashType_NO_,
+  kSlashType_UNKNOWN,
   kSlashTypeStart, kSlashTypeStop
 };
 
@@ -31,7 +31,7 @@ std::string msrSlashTypeKindAsString (
 std::ostream& operator << (std::ostream& os, const msrSlashTypeKind& elt);
 
 enum class msrUseDotsKind {
-  kUseDots_NO_,
+  kUseDots_UNKNOWN,
   kUseDotsYes, kUseDotsNo
 };
 
@@ -45,7 +45,7 @@ msrUseDotsKind msrUseDotsFromString (
   const std::string& useDotsString);
 
 enum class msrSlashUseStemsKind {
-  kSlashUseStems_NO_,
+  kSlashUseStems_UNKNOWN,
   kSlashUseStemsYes, kSlashUseStemsNo
 };
 

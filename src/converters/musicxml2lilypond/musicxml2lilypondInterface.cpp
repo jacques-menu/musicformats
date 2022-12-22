@@ -146,7 +146,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       "Quitting after creating the MSR skeleton in pass 2a of sxmlFile2lilypondWithHandler as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // populate the MSR skeleton from MusicXML data (pass 2b)
@@ -177,7 +177,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       "Quitting after pass 2b as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // convert the first MSR score into a second MSR (pass 3)
@@ -235,7 +235,7 @@ else {
       "Quitting after pass 3 as requested" <<
       std::endl;
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
   // the LPSR score
@@ -401,7 +401,7 @@ else {
     outputFileStream.close ();
   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________
@@ -529,7 +529,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NONE; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -567,7 +567,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
     err,
     handler);
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________

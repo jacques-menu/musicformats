@@ -63,8 +63,8 @@ std::string msrSlashTypeKindAsString (
   std::string result;
 
   switch (slashTypeKind) {
-    case msrSlashTypeKind::kSlashType_NO_:
-      result = "kSlashType_NO_";
+    case msrSlashTypeKind::kSlashType_UNKNOWN:
+      result = "kSlashType_UNKNOWN";
       break;
     case msrSlashTypeKind::kSlashTypeStart:
       result = "kSlashTypeStart";
@@ -89,8 +89,8 @@ std::string msrUseDotsKindAsString (
   std::string result;
 
   switch (useDotsKind) {
-    case msrUseDotsKind::kUseDots_NO_:
-      result = "kUseDots_NO_";
+    case msrUseDotsKind::kUseDots_UNKNOWN:
+      result = "kUseDots_UNKNOWN";
       break;
     case msrUseDotsKind::kUseDotsYes:
       result = "kUseDotsYes";
@@ -115,8 +115,8 @@ std::string msrSlashUseStemsKindAsString (
   std::string result;
 
   switch (slashUseStemsKind) {
-    case msrSlashUseStemsKind::kSlashUseStems_NO_:
-      result = "kSlashUseStems_NO_";
+    case msrSlashUseStemsKind::kSlashUseStems_UNKNOWN:
+      result = "kSlashUseStems_UNKNOWN";
       break;
     case msrSlashUseStemsKind::kSlashUseStemsYes:
       result = "kSlashUseStemsYes";

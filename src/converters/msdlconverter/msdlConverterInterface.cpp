@@ -140,7 +140,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //       "Quitting after creating the MSR skeleton in pass 2a of sxmlFile2lilypondWithHandler as requested" <<
 //       std::endl;
 //
-//     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+//     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 //   }
 //
 //   // populate the MSR skeleton from MusicXML data (pass 2b)
@@ -171,7 +171,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //       "Quitting after pass 2b as requested" <<
 //       std::endl;
 //
-//     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+//     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 //   }
 //
 //   // convert the first MSR score into a second MSR (pass 3)
@@ -229,7 +229,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //       "Quitting after pass 3 as requested" <<
 //       std::endl;
 //
-//     return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+//     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 //   }
 //
 //   // the LPSR score
@@ -263,8 +263,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //     // display the LPSR score if requested
 //     // ------------------------------------------------------
 //
-//     if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
-//       displayLpsrScoreShort (
+//     if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
+//       displayLpsrScore (
 //         theLpsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalLpsrOahGroup,
@@ -418,7 +418,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //     }
 //   }
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________
@@ -547,7 +547,7 @@ static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI
 //     // have help options been used?
 //     switch (helpOnlyKind) {
 //       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-//         return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
+//         return mfMusicformatsErrorKind::kMusicformatsError_NONE; // quit now
 //         break;
 //       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
 //         // go ahead
@@ -585,7 +585,7 @@ static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI
 //     err,
 //     handler);
 
-  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
+  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
 //_______________________________________________________________________________

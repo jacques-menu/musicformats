@@ -610,7 +610,7 @@ lpsrBookBlock::lpsrBookBlock (
       inputLineNumber);
 
   // don't create the book block element paper
-  // it will be created as a new-born clone of the one in the lpsrScore
+  // it will be created as a newborn clone of the one in the lpsrScore
   // when the scaling is handled in visitStart (S_msrScaling&)
 }
 

@@ -144,7 +144,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
   // create the resulting MSR score
   fResultingNewMsrScore =
     msrScore::create (
-      K_MF_NO_INPUT_LINE_NUMBER,
+      K_MF_INPUT_LINE_UNKNOWN,
       "msrScore::create()");
 
   // create a msrScore browser
@@ -181,7 +181,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsrAlongPathToVoice (
   // create the resulting MSR score
   fResultingNewMsrScore =
     msrScore::create (
-      K_MF_NO_INPUT_LINE_NUMBER,
+      K_MF_INPUT_LINE_UNKNOWN,
       "msrScore::create()");
 
   // create a msrScore browser
@@ -1322,7 +1322,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif
 
-  // create a harmony new-born clone
+  // create a harmony newborn clone
   fCurrentHarmonyClone =
     elt->
       createHarmonyNewbornClone (
@@ -1336,7 +1336,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
 
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendHarmonyToNoteHarmoniesList (
+      appendHarmonyToNote (
         fCurrentHarmonyClone);
 
     // don't append the harmony to the part harmony,
@@ -1467,7 +1467,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-  // create a figured bass element new-born clone
+  // create a figured bass element newborn clone
   fCurrentFiguredBassClone =
     elt->
       createFiguredBassNewbornClone (
@@ -2035,7 +2035,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //           words =
 //             msrWords::create (
 //               inputLineNumber,
-//               msrPlacementKind::kPlacement_NO_,                      // default value
+//               msrPlacementKind::kPlacement_UNKNOWN,                      // default value
 //               wordsValue,
 //               msrJustifyKind::kJustifyNone,                         // default value
 //               msrHorizontalAlignmentKind::kHorizontalAlignmentNone, // default value
@@ -2734,7 +2734,7 @@ void msr2msrTranslator::visitStart (S_msrSpanner& elt)
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
       break;
-    case msrSpannerTypeKind::kSpannerType_NO_:
+    case msrSpannerTypeKind::kSpannerType_UNKNOWN:
       break;
   } // switch
 
@@ -4067,7 +4067,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
   switch (noteKind) {
 
-    case msrNoteKind::kNote_NO_:
+    case msrNoteKind::kNote_UNKNOWN:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -5867,7 +5867,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //     else {
 //       std::string wordsContents = elt->getWordsContents ();
 //
-//       // is this words contents in the std::string to dal segno kind map?
+//       // is this words contents in the string to dal segno kind map?
 //       const std::map<std::string, msrDalSegno::msrDalSegnoKind>&
 //         converStringToDalSegnoMap =
 //           gGlobalMsr2msrOahGroup->

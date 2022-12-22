@@ -131,13 +131,13 @@ Reverting to \mf\ previous versions show that:
 jacquesmenu@macmini: ~/Desktop > lldb -- xml2ly  fullbarrests/FullBarRestWithoutBarLine.xml -display-lpsr-short -aofn
 (lldb) target create "xml2ly"
 Current executable set to 'xml2ly' (x86_64).
-(lldb) settings set -- target.run-args  "fullbarrests/FullBarRestWithoutBarLine.xml" "-display-lpsr-short" "-aofn"
+(lldb) settings set -- target.run-args  "fullbarrests/FullBarRestWithoutBarLine.xml" "-display-lpsr" "-aofn"
 (lldb) r
 Process 28676 launched: '/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2ly' (x86_64)
         The measure with ordinal number 3 is now registered with a duration of 1/1 in part Part_POne (partID "P1", partName "Soprano"), fPartMeasuresWholeNotesDurationsVector.size () = 2
         The measure with ordinal number 4 is now registered with a duration of 1/1 in part Part_POne (partID "P1", partName "Soprano"), fPartMeasuresWholeNotesDurationsVector.size () = 2
 %--------------------------------------------------------------
-  Pass (ptional): displaying the LPSR as text, short version
+  Pass (ptional): displaying the LPSR as text
 %--------------------------------------------------------------
 
 ... ... ...

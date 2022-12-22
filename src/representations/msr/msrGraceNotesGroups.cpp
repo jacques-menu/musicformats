@@ -277,7 +277,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 
   // register note's grace notes groups upLink
   note->
-    setNoteDirectUpLinkToGraceNotesGroup (this);
+    setNoteShortcutUpLinkToGraceNotesGroup (this);
 
   // is this grace note tied?
   if (note->getNoteTie ()) {

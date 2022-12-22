@@ -47,7 +47,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // constant
-const int msrStaff::K_NO_STAFF_NUMBER = -777;
+const int msrStaff::K_STAFF_NUMBER_UNKNOWN = -777;
 
 // global variable
 int msrStaff::gStaffMaxRegularVoices = 4;

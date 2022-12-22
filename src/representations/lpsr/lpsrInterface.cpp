@@ -35,10 +35,10 @@
 namespace MusicFormats
 {
 //_______________________________________________________________________________
-void displayLpsrScoreShort (
-  const S_lpsrScore& theLpsrScore,
-  const S_msrOahGroup&     msrOpts,
-  const S_lpsrOahGroup&    lpsrOpts,
+void displayLpsrScore (
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
   const std::string&     passDescription)
 {
   // sanity check
@@ -57,7 +57,7 @@ void displayLpsrScoreShort (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription << ", short version" <<
+    "Pass (optional): " << passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl;
@@ -73,7 +73,7 @@ void displayLpsrScoreShort (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    "Display the LPSR as text, short version",
+    "Display the LPSR as text",
     mfTimingItemKind::kOptional,
     startClock,
     endClock);
@@ -81,9 +81,9 @@ void displayLpsrScoreShort (
 
 //_______________________________________________________________________________
 void displayLpsrScoreFull (
-  const S_lpsrScore& theLpsrScore,
-  const S_msrOahGroup&     msrOpts,
-  const S_lpsrOahGroup&    lpsrOpts,
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
   const std::string&     passDescription)
 {
   // sanity check

@@ -150,12 +150,12 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletKind; }
 
     // uplink to tuplet
-    void                  setTupletDirectUpLinkToTuplet (
+    void                  setTupletShortcutUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
-                              { fTupletDirectUpLinkToTuplet = tuplet; }
+                              { fTupletShortcutUpLinkToTuplet = tuplet; }
 
-    S_msrTuplet           getTupletDirectUpLinkToTuplet () const
-                              { return fTupletDirectUpLinkToTuplet; }
+    S_msrTuplet           getTupletShortcutUpLinkToTuplet () const
+                              { return fTupletShortcutUpLinkToTuplet; }
 
     // measure positions
     // this override calls setTupletMembersMeasurePositions()
@@ -272,7 +272,7 @@ class EXP msrTuplet : public msrTupletElement
     msrTupletInKind       fTupletKind;
 
     // uplink to tuplet
-    S_msrTuplet           fTupletDirectUpLinkToTuplet;
+    S_msrTuplet           fTupletShortcutUpLinkToTuplet;
 
     // number
     int                   fTupletNumber;

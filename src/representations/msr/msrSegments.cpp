@@ -127,7 +127,7 @@ void msrSegment::setSegmentFirstMeasure (
         measure->asString ();
     }
     else {
-      gLogStream << "null";
+      gLogStream << "[NONE]";
     }
 
     gLogStream <<
@@ -158,7 +158,7 @@ void msrSegment::setSegmentLastMeasure (
         measure->asString ();
     }
     else {
-      gLogStream << "null";
+      gLogStream << "[NONE]";
     }
 
     gLogStream <<
@@ -1708,7 +1708,7 @@ void msrSegment::padUpToMeasurePositionInSegment (
   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF
     // pad last measure up to to this actual wholes notes
     fSegmentLastMeasure->
-      padUpToMeasurePosition (
+      padUpToMeasurePositionInMeasure (
         inputLineNumber,
         wholeNotes);
   }
@@ -2770,7 +2770,7 @@ void msrSegment::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "null" << std::endl;
+    os << "[NONE]" << std::endl;
   }
 
   os <<
@@ -2782,7 +2782,7 @@ void msrSegment::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "null" << std::endl;
+    os << "[NONE]" << std::endl;
   }
 
   if (! fSegmentElementsList.size ()) {

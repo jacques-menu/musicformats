@@ -433,10 +433,10 @@ class EXP lpsrOahGroup : public oahGroup
     // display
     // --------------------------------------
 
-    void                  setDisplayLpsrShort ()
-                              { fDisplayLpsrShort = true; }
-    Bool                  getDisplayLpsrShort () const
-                              { return fDisplayLpsrShort; }
+    void                  setDisplayLpsr ()
+                              { fDisplayLpsr = true; }
+    Bool                  getDisplayLpsr () const
+                              { return fDisplayLpsr; }
 
     void                  setDisplayLpsrFull ()
                               { fDisplayLpsrFull = true; }
@@ -737,7 +737,7 @@ class EXP lpsrOahGroup : public oahGroup
     // display
     // --------------------------------------
 
-    Bool                  fDisplayLpsrShort;
+    Bool                  fDisplayLpsr;
     Bool                  fDisplayLpsrFull;
 
     // paper
@@ -849,7 +849,8 @@ class EXP lpsrOahGroup : public oahGroup
                           fLpsrChordsLanguageKind;
 
     // staves instrument names
-    std::map<std::string, std::string>   fLpsrStavesInstrumentsNamesMap;
+    std::map<std::string, std::string>   
+                          fLpsrStavesInstrumentsNamesMap;
     S_lpsrStaffInstrumentNameAtom
                           fLpsrStavesInstrumentsNamesMapAtom;
 

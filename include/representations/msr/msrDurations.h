@@ -24,7 +24,7 @@ namespace MusicFormats
 // durations
 //______________________________________________________________________________
 enum class msrDurationKind {
-  kDuration_NO_,
+  kDuration_UNKNOWN,
 
   // from longest to shortest for the algorithms
   kDurationMaxima, kDurationLonga, kDurationBreve,

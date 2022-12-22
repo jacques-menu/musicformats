@@ -57,7 +57,7 @@ EXP msrGenerationAPIKind msrGenerationAPIKindFromString (
     std::stringstream s;
 
     s <<
-      "the std::string \"" <<
+      "the string \"" <<
       theString <<
       "\" is no valid generation API kind";
 

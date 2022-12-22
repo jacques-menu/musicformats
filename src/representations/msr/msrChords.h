@@ -47,7 +47,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 
 enum class msrChordInKind {
-  kChordIn_NO_,
+  kChordIn_UNKNOWN,
 
   kChordInMeasure,
   kChordInTuplet,
@@ -115,23 +115,23 @@ class EXP msrChord : public msrTupletElement
     S_msrMeasure          getChordUpLinkToMeasure () const;
 
     // uplink to tuplet
-    void                  setChordDirectUpLinkToTuplet (
+    void                  setChordShortcutUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
-                              { fChordDirectUpLinkToTuplet = tuplet; }
+                              { fChordShortcutUpLinkToTuplet = tuplet; }
 
-    S_msrTuplet           getChordDirectUpLinkToTuplet () const
-                            { return fChordDirectUpLinkToTuplet; }
+    S_msrTuplet           getChordShortcutUpLinkToTuplet () const
+                            { return fChordShortcutUpLinkToTuplet; }
 
     // uplink to grace notes group
-    void                  setChordDirectUpLinkToGraceNotesGroup (
+    void                  setChordShortcutUpLinkToGraceNotesGroup (
                             const S_msrGraceNotesGroup& graceNotesGroup)
                               {
-                                fChordDirectUpLinkToGraceNotesGroup =
+                                fChordShortcutUpLinkToGraceNotesGroup =
                                   graceNotesGroup;
                               }
 
-    S_msrGraceNotesGroup  getChordDirectUpLinkToGraceNotesGroup () const
-                            { return fChordDirectUpLinkToGraceNotesGroup; }
+    S_msrGraceNotesGroup  getChordShortcutUpLinkToGraceNotesGroup () const
+                            { return fChordShortcutUpLinkToGraceNotesGroup; }
 
     // chord kind
     void                  setChordKind (
@@ -536,10 +536,10 @@ class EXP msrChord : public msrTupletElement
     S_msrMeasure          fChordUpLinkToMeasure;
 
     // uplink to tuplet
-    S_msrTuplet           fChordDirectUpLinkToTuplet;
+    S_msrTuplet           fChordShortcutUpLinkToTuplet;
 
     // uplink to grace notes group
-    S_msrGraceNotesGroup  fChordDirectUpLinkToGraceNotesGroup;
+    S_msrGraceNotesGroup  fChordShortcutUpLinkToGraceNotesGroup;
 
     msrChordInKind        fChordKind;
 

@@ -36,8 +36,8 @@ std::string msrSlurTypeKindAsString (
   std::stringstream s;
 
   switch (slurTypeKind) {
-    case msrSlurTypeKind::kSlurType_NO_:
-      s << "kSlurType_NO_";
+    case msrSlurTypeKind::kSlurType_UNKNOWN:
+      s << "kSlurType_UNKNOWN";
       break;
 
     case msrSlurTypeKind::kSlurTypeRegularStart:
@@ -101,7 +101,7 @@ S_msrSlur msrSlur::create (
       slurNumber,
       slurTypeKind,
       slurLineTypeKind,
-      msrPlacementKind::kPlacement_NO_);
+      msrPlacementKind::kPlacement_UNKNOWN);
 }
 
 msrSlur::msrSlur (

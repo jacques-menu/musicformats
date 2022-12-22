@@ -33,7 +33,7 @@
 namespace MusicFormats
 {
 //_______________________________________________________________________________
-void displayBsrScoreShort (
+void displayBsrScore (
   S_bsrScore    bsrScore,
   S_msrOahGroup msrOpts,
   S_bsrOahGroup bsrOpts,
@@ -55,7 +55,7 @@ void displayBsrScoreShort (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription << ", short version" <<
+    "Pass (optional): " << passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl <<
@@ -68,7 +68,7 @@ void displayBsrScoreShort (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    "Display the BSR as text, short version",
+    "Display the BSR as text",
     mfTimingItemKind::kOptional,
     startClock,
     endClock);

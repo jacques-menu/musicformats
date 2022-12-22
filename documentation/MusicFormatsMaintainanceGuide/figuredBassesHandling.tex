@@ -11,13 +11,13 @@ The useful options here are:
 \item \optionBoth{trace-figured-bass}{tfigbass}
 \item \optionBoth{display-msr-skeleton}{dmsrskel}
 
-\item \optionBoth{display-msr-1-short}{dmsr1short}
-\item \optionBoth{display-msr-1}{dmsr1}, an alias for the one above
-\item \optionBoth{display-msr-1-full}{dmsr1full}
+\item \optionBoth{display-msr1-short}{dmsr1short}
+\item \optionBoth{display-msr1}{dmsr1}, an alias for the one above
+\item \optionBoth{display-msr1-full}{dmsr1full}
 
-\item \optionBoth{display-msr-2-short}{dmsr2short}
-\item \optionBoth{display-msr-2}{dmsr2}, an alias for the one above
-\item \optionBoth{display-msr-2-full}{dmsr2full}
+\item \optionBoth{display-msr2-short}{dmsr2short}
+\item \optionBoth{display-msr2}{dmsr2}, an alias for the one above
+\item \optionBoth{display-msr2-full}{dmsr2full}
 
 \item \optionBoth{display-lpsr-short}{dlpsrshort}
 \item \optionBoth{display-lpsr}{dlpsr}, an alias for the one above
@@ -391,8 +391,8 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
 
   fCurrentFigureNumber = -1;
 
-  fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefix_NO_;
-  fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffix_NO_;
+  fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN;
+  fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN;
 
   fCurrentFiguredBassSoundingWholeNotes = Rational (0, 1);
   fCurrentFiguredBassDisplayWholeNotes  = Rational (0, 1);
@@ -687,7 +687,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-  // create a figured bass element new-born clone
+  // create a figured bass element newborn clone
   fCurrentFiguredBassClone =
     elt->
       createFiguredBassNewbornClone (
@@ -781,7 +781,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-  // create a figured bass new-born clone
+  // create a figured bass newborn clone
   fCurrentFiguredBassClone =
     elt->
       createFiguredBassNewbornClone (
@@ -880,7 +880,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   }
 #endif
 
-  // create a figured bass new-born clone
+  // create a figured bass newborn clone
   fCurrentFiguredBassClone =
     elt->
       createFiguredBassNewbornClone (

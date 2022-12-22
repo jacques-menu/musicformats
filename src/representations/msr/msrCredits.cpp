@@ -34,8 +34,8 @@ std::string msrCreditTypeKindAsString (
   std::string result;
 
   switch (creditTypeKind) {
-    case msrCreditTypeKind::kCreditType_NO_:
-      result = "kCreditType_NO_";
+    case msrCreditTypeKind::kCreditType_UNKNOWN:
+      result = "kCreditType_UNKNOWN";
       break;
     case msrCreditTypeKind::kCreditTypeNumber:
       result = "kCreditTypeNumber";
@@ -294,7 +294,7 @@ msrCredit::msrCredit (
 {
   fCreditPageNumber = creditPageNumber;
 
-  fCreditTypeKind = msrCreditTypeKind::kCreditType_NO_;  // default value
+  fCreditTypeKind = msrCreditTypeKind::kCreditType_UNKNOWN;  // default value
 }
 
 msrCredit::~msrCredit ()

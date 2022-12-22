@@ -206,10 +206,81 @@ class EXP msrLength : public smartable
 
 
 % -------------------------------------------------------------------------
-\section{Positions in measures and moments}\label{Positions in measures and moments}
+\section{Sounding and displayed durations}\label{Sounding and displayed durations}
 % -------------------------------------------------------------------------
 
-Such positions are represented by Rational numbers such as {\tt 3/8}, {\tt 1/1} being a whole note.
+All durations are represented by Rational numbers whose denominators are powers of 2, such as {\tt Rational (3, 16}, and relative to the duration of a whole note.
+
+This information is a field of \class{msrMeasureElement}:
+\begin{lstlisting}[language=CPlusPlus]
+    Rational              fMeasureElementSoundingWholeNotes;
+\end{lstlisting}
+
+In a tuplet, the sounding durations are different than the written durations, so we store the written duration in \class{msrNote}:
+
+\begin{lstlisting}[language=CPlusPlus]
+    // whole notes
+    Rational              fNoteDisplayWholeNotes;
+
+    int                   fNoteDotsNumber;
+
+    msrDurationKind       fNoteGraphicDurationKind;
+
+    msrTupletFactor       fNoteTupletFactor;
+
+    msrQuarterTonesPitchKind
+                          fNoteQuarterTonesDisplayPitchKind;
+    msrOctaveKind         fNoteDisplayOctaveKind;
+                                // for unpitched notes
+                                // and pitched rests
+\end{lstlisting}
+
+\EnumType{msrDurationKind} is declared in \msr{msrDurations.h}:
+\begin{lstlisting}[language=CPlusPlus]
+enum class msrDurationKind {
+  kDuration_UNKNOWN,
+
+  // from longest to shortest for the algorithms
+  kDurationMaxima, kDurationLonga, kDurationBreve,
+  kDurationWhole, kDurationHalf,
+  kDurationQuarter,
+  kDurationEighth, kDuration16th, kDuration32nd, kDuration64th,
+  kDuration128th, kDuration256th, kDuration512th, kDuration1024th
+};
+\end{lstlisting}
+
+% -------------------------------------------------------------------------
+\section{Measure positions and moments}\label{Measure positions and moments}
+% -------------------------------------------------------------------------
+
+Measure positions are represented by \code{Rational} numbers such as {\tt 3/8}, {\tt 1/1} being a whole note.
+
+Measure positions are stored in \field{msrMeasureElement}{fMeasureElementMeasurePosition} in \class{msrMeasureElement}, defined in \msrBoth{msrMeasureElement}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrMeasureElement : public msrElement
+{
+	// ... ... ...
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    /*
+      The uplink to measure is declared in the sub-classes,
+      to allow for separate *.h files, C++ constraint
+    */
+
+    Rational              fMeasureElementSoundingWholeNotes;
+
+    std::string           fBarLineUpLinkToMeasure->getMeasureNumber ();
+
+    Rational              fMeasureElementMeasurePosition;
+    Rational              fMeasureElementVoicePosition;
+};
+\end{lstlisting}
+
+\lily\ represents grace notes positions with a so-called {\it moment}, that complement the measure position with a relative offset. Grace notes durations are not accounted for in the whole notes duration of measures.
 
 \Class{msrMoment} stores a position in a measure, with a relative offset since harmonies can be placed on a note during its sounding time:
 \begin{lstlisting}[language=CPlusPlus]
@@ -307,7 +378,7 @@ wedges {\tt <} and {\tt >} be handled as spanners, or simply as being attached t
 // spanner types
 //______________________________________________________________________________
 enum class msrSpannerTypeKind {
-  kSpannerType_NO_,
+  kSpannerType_UNKNOWN,
 
   kSpannerTypeStart, kSpannerTypeContinue, kSpannerTypeStop
 };
@@ -315,55 +386,47 @@ enum class msrSpannerTypeKind {
 
 
 % -------------------------------------------------------------------------
-\section{Uplinks and sidelinks}\label{Uplinks and sidelinks}
+\section{Uplinks, direct uplinks and sidelinks}\label{Uplinks, direct uplinks and sidelinks}
 % -------------------------------------------------------------------------
 
-An uplink is a direct pointer from one class   instance to one that contains it. \class{msrNote} contains:
+An \upLink\ is a direct pointer from one class instance to one that contains it. Some are are a link to the containing class instance, whilst others are \shortcut\ links higher in the graph for speed. For example, \class{msrNote} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    S_msrChord            fNoteDirectUpLinkToChord;
-    S_msrGraceNotesGroup  fNoteDirectUpLinkToGraceNotesGroup;
-    S_msrTuplet           fNoteDirectUpLinkToTuplet;
-    S_msrMeasure          fMeasureElementUpLinkToMeasure;
+    // upLinks
+    // ------------------------------------------------------
+
+    S_msrMeasure          fNoteUpLinkToMeasure;
+
+    S_msrChord            fNoteShortcutUpLinkToChord;
+
+    S_msrGraceNotesGroup  fNoteShortcutUpLinkToGraceNotesGroup;
+
+    S_msrTuplet           fNoteShortcutUpLinkToTuplet;
 \end{lstlisting}
 
-A sidelink is used in ligatures and spanners, so that each end of the structure can reference the other one:
+A \sideLink\ is used in ligatures and spanners, so that each end of the structure can reference the other one.
+
+For example, \mf\ defines \enumType{msrLigatureKind} in \msr{msrLigatures.h}:
 \begin{lstlisting}[language=CPlusPlus]
-msrLigatures.h:    S_msrLigature         fLigatureSideLinkToOtherEnd; // two-way
+enum class msrLigatureKind {
+  kLigatureNone,
+  kLigatureStart, kLigatureContinue, kLigatureStop
+};
 \end{lstlisting}
 
+\Class{msrLigature} contains:
 \begin{lstlisting}[language=CPlusPlus]
-msrSpanners.h:    S_msrSpanner          fSpannerSideLinkToOtherEnd; // two-way
+  private:
+
+    // sideLinks
+    // ------------------------------------------------------
+    S_msrLigature         fLigatureSideLinkToOtherEnd; // two-way
 \end{lstlisting}
 
-
-% -------------------------------------------------------------------------
-\section{Sounding and displayed durations}\label{Sounding and displayed durations}
-% -------------------------------------------------------------------------
-
-All durations are represented by Rational numbers whose denominators are powers of 2, such as {\tt Rational (3, 16}, and relative to the duration of a whole note.
-
-This information is a field of \class{msrMeasureElement}:
+\EnumType{} is declared in \msr{msrSpanners.h}:
 \begin{lstlisting}[language=CPlusPlus]
-    Rational              fMeasureElementSoundingWholeNotes;
-\end{lstlisting}
-
-In a tuplet, the sounding durations is different than the written durations, so we store the sounding
-
-\begin{lstlisting}[language=CPlusPlus]
-    // whole notes
-    Rational              fNoteDisplayWholeNotes;
-
-    int                   fNoteDotsNumber;
-
-    msrDurationKind       fNoteGraphicDurationKind;
-
-    msrTupletFactor       fNoteTupletFactor;
-
-    msrQuarterTonesPitchKind
-                          fNoteQuarterTonesDisplayPitchKind;
-    msrOctaveKind         fNoteDisplayOctaveKind;
-                                // for unpitched notes
-                                // and pitched rests
+enum class msrSpannerKind {
+  kSpannerDashes, kSpannerWavyLine
+};
 \end{lstlisting}
 
 
@@ -484,7 +547,7 @@ All pitches data is represented internally as quater tones pitches, and conversi
 // diatonic pitches
 //______________________________________________________________________________
 enum class msrDiatonicPitchKind {
-  kDiatonicPitch_NO_,
+  kDiatonicPitch_UNKNOWN,
 
   // starting at C for LilyPond relative octave calculations
   kDiatonicPitchC,
@@ -547,7 +610,7 @@ enum class msrSemiTonesPitchKind {
 // quarter tones pitches
 //______________________________________________________________________________
 enum class msrQuarterTonesPitchKind {
-  kQTP_NO_,
+  kQTP_UNKNOWN,
 
   kQTP_Rest, kQTP_Skip,
 
@@ -605,7 +668,7 @@ They are represented with enumeration type {\tt }:
 // octaves
 //______________________________________________________________________________
 enum class msrOctaveKind {
-  kOctave_NO_,
+  kOctave_UNKNOWN,
 
   kOctave0, kOctave1, kOctave2, kOctave3,
   kOctave4, // that of middle C
@@ -634,7 +697,7 @@ enum class msrOctaveEntryKind {
 // durations
 //______________________________________________________________________________
 enum class msrDurationKind {
-  kDuration_NO_,
+  kDuration_UNKNOWN,
 
   // from longest to shortest for the algorithms
   kDurationMaxima, kDurationLonga, kDurationBreve, kDurationWhole, kDurationHalf,
@@ -651,7 +714,7 @@ enum class msrDurationKind {
 // alterations
 //______________________________________________________________________________
 enum class msrAlterationKind {
-  kAlteration_NO_,
+  kAlteration_UNKNOWN,
 
   kAlterationTripleFlat, kAlterationDoubleFlat, kAlterationSesquiFlat,
   kAlterationFlat, kAlterationSemiFlat,
@@ -705,7 +768,7 @@ They are represented in MSR with the \enumType{msrDurationKind} enumeration type
 // durations
 //______________________________________________________________________________
 enum class msrDurationKind {
-  kDuration_NO_,
+  kDuration_UNKNOWN,
 
   // from longest to shortest for the algorithms
   kDurationMaxima, kDurationLonga, kDurationBreve, kDurationWhole, kDurationHalf,
@@ -735,7 +798,7 @@ class EXP msrTempo : public msrMeasureElement
     // ------------------------------------------------------
 
     enum class msrTempoKBeatUnitsKind {
-      kTempoBeatUnits_NO_,
+      kTempoBeatUnits_UNKNOWN,
       kTempoBeatUnitsWordsOnly,
       kTempoBeatUnitsPerMinute,
       kTempoBeatUnitsEquivalence,
@@ -950,7 +1013,7 @@ Clefs are distinguished using \enumType{msrClefKind}:
 //______________________________________________________________________________
 
 enum class msrClefKind {
-  kClef_NO_,
+  kClef_UNKNOWN,
 
   kClefTreble,
   kClefSoprano, kClefMezzoSoprano, kClefAlto, kClefTenor, kClefBaritone, kClefBass,
@@ -1883,7 +1946,7 @@ For example, at \figureRef{Three segments in a voice}, there are three segments:
 \class{msrNote} thus uses enumeration type \enumType{msrNoteKind}, defined in \msr{msrBasicTypes.h}, to distinguish them:
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrNoteKind {
-  kNote_NO_,
+  kNote_UNKNOWN,
 
   // in measures
   kNoteRegularInMeasure,
@@ -1962,7 +2025,7 @@ A chord contains notes only, and can occur in measures, tuplets and grace notes 
 //______________________________________________________________________________
 
 enum class msrChordInKind {
-  kChordIn_NO_,
+  kChordIn_UNKNOWN,
 
   kChordInMeasure,
   kChordInTuplet,
@@ -1987,7 +2050,7 @@ A tuplet can contain:
 Tuplets can occur in measures and other tuplets, hence \enumType{msrTupletInKind}:
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrTupletInKind {
-  kTupletIn_NO_,
+  kTupletIn_UNKNOWN,
 
   kTupletInMeasure,
   kTupletInTuplet

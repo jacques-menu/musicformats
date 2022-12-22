@@ -15,9 +15,9 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-const std::string K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
+const std::string K_MEASURE_NUMBER_UNKNOWN = "K_MEASURE_NUMBER_UNKNOWN";
 
-const Rational    K_NO_WHOLE_NOTES (-444444, 1);
+const Rational    K_WHOLE_NOTES_UNKNOWN (-444444, 1);
 
 //______________________________________________________________________________
 S_msrMeasure gGlobalNullMeasureSmartPointer;

@@ -278,7 +278,7 @@ jacquesmenu@macmini: ~ >  xml2ly -help-midi
             'DURATION = PER_SECOND'
             or
             "DURATION = PER_SECOND" .
-            DURATION is a std::string such as '8.', and PER_SECOND is an integer.
+            DURATION is a :string such as '8.', and PER_SECOND is an integer.
             The single or double quotes are used to allow spaces around the '=' sign,
             otherwise they can be dispensed with.
             Using double quotes allows for shell variables substitutions, as in:
@@ -328,7 +328,7 @@ Choosing one option of the other is a matter of taste. To be honest, \optionName
 
 
 % -------------------------------------------------------------------------
-\section{Searching the help for a std::string}
+\section{Searching the help for a string}
 % -------------------------------------------------------------------------
 
 The \mf\ \service s have a great number of options. \Option{find} comes in handy to search the available help:
@@ -336,13 +336,13 @@ The \mf\ \service s have a great number of options. \Option{find} comes in handy
 jacquesmenu@macmini > xml2ly -query find
 --- Help for atom "find" in subgroup "Options and help"
     -find STRING
-          Find std::string STRING in the help.
+          Find string STRING in the help.
           The search is case insensitive, and a '-' is added in front of options names for clarity.
 \end{lstlisting}
 
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -find output-file-name
-2 occurrences of std::string "output-file-name" have been found:
+2 occurrences of string "output-file-name" have been found:
    1:
     Atom in subgroup "Files" in group "Files group"
     -output-file-name, -o
@@ -827,7 +827,7 @@ What xml2ly does:
 The \lpsrRepr\ built in pass 4 and used in pass 5 to create the LilyPond output can be displayed with the following options:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -find display-lpsr
-3 occurrences of std::string "display-lpsr" have been found:
+3 occurrences of string "display-lpsr" have been found:
    1:
     -display-lpsr, -dlpsr
     Write the contents of the LPSR data with a summary of it MSR component to standard error.
@@ -835,8 +835,8 @@ jacquesmenu@macmini > xml2ly -find display-lpsr
     -display-lpsr-full, -dlpsrfull
     Write the contents of the LPSR data with its full MSR component to standard error.
    3:
-    -display-lpsr-short, -dlpsrshort
-    Write the contents of the LPSR data, short version, to standard error.
+    -display-lpsr-short, -dlpsrs
+    Write the contents of the LPSR data to standard error.
 \end{lstlisting}
 
 The resulting output is large of course, since \lpsrRepr\ represents the score in great detail.
@@ -853,7 +853,7 @@ jacquesmenu@macmini > xml2ly -query include
 --- Help for atom "include" in subgroup "Options and help"
     -include, -inc FILENAME
           Include the options and arguments contained in FILENAME.
-          FILENAME is a std::string and should be a path to a text file.
+          FILENAME is a string and should be a path to a text file.
           Such a file is expected to hold at most one option or argument per line.
           A '#' starts a comment that spans to the end of the line.
           Comments and empty lines are ignored and can be used at will.

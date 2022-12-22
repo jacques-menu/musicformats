@@ -110,6 +110,16 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
             "Removed extraneous '(' in tempo beat units equivalence code generation"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.66"),
+          "December 18, 2022",
+          std::list<std::string> {
+            "Fixed octave shift LilyPond code generation"
+          }
+      ));
   }
 
   return pPassComponent;

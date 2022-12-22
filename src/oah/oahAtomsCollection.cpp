@@ -387,7 +387,7 @@ void oahMacroAtom::print (std::ostream& os) const
   os <<
     "MacroAtom: ";
 
-  oahElement::printOahElementEssentialsShort (
+  oahElement::printOahElementEssentials (
     os, fieldWidth);
 
   std::list<S_oahAtom>::const_iterator
@@ -473,7 +473,7 @@ void oahMacroAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
-  oahElement::printOahElementEssentialsShort (
+  oahElement::printOahElementEssentials (
     os, valueFieldWidth);
 
   ++gIndenter;
@@ -1157,8 +1157,8 @@ std::string oahVersionKindAsString (
   std::string result;
 
   switch (versionKind) {
-    case oahVersionKind::kOahVersionShort:
-      result = "kOahVersionShort";
+    case oahVersionKind::kOahVersion:
+      result = "kOahVersion";
       break;
     case oahVersionKind::kOahVersionFull:
       result = "kOahVersionFull";
@@ -1226,7 +1226,7 @@ void oahVersionAtom::applyElement (std::ostream& os)
   gIndenter.resetToZero ();
 
   switch (fVersionKind) {
-    case oahVersionKind::kOahVersionShort:
+    case oahVersionKind::kOahVersion:
       printVersionShort (os);
       break;
     case oahVersionKind::kOahVersionFull:
@@ -3968,12 +3968,12 @@ void oahCombinedBooleansAtom::printCombinedBooleansEssentials (
     */
 }
 
-void oahCombinedBooleansAtom::printCombinedBooleansEssentialsShort (
+void oahCombinedBooleansAtom::printCombinedBooleansEssentialsFull (
   std::ostream& os,
   int fieldWidth) const
 {
 /* JMI
-  printAtomWithVariableNameEssentialsShort (
+  printAtomWithVariableNameEssentials (
     os, fieldWidth);
 
   os << std::left <<
@@ -4574,7 +4574,7 @@ void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
     os << fShortNamesPrefix;
   }
   else {
-    os << "null" << std::endl;
+    os << "[NONE]" << std::endl;
   }
 
   os << std::left <<
@@ -4584,7 +4584,7 @@ void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
     os << fLongNamesPrefix;
   }
   else {
-    os << "null" << std::endl;
+    os << "[NONE]" << std::endl;
   }
 
   os << std::left <<
@@ -4837,7 +4837,7 @@ void oahIntegerAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for integer std::string \"" << theString <<
+      " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\"" <<
       std::endl;
@@ -5097,7 +5097,7 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for integer std::string \"" << theString <<
+      " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\"" <<
       std::endl;
@@ -5375,7 +5375,7 @@ void oahFloatAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for float std::string \"" << theString <<
+      " for float string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\"" <<
       std::endl;
@@ -5622,7 +5622,7 @@ void oahStringAtom::setStringVariable (const std::string& value)
     gLogStream <<
       "Setting option '" <<
       fetchNames () <<
-      "' std::string variable to \"" <<
+      "' string variable to \"" <<
      value <<
       "\"" <<
       std::endl;
@@ -5861,11 +5861,11 @@ void oahFactorizedStringAtom::addStringAtom (
 #endif
   }
   else {
-    // register this std::string atom's suffix in the list
+    // register this string atom's suffix in the list
     fAtomNamesList.push_back (stringAtomShortName);
   }
 
-  // append the std::string atom to the list
+  // append the string atom to the list
   fStringAtomsList.push_back (
     stringAtom);
 
@@ -5910,12 +5910,12 @@ void oahFactorizedStringAtom::addStringAtomByName (
     // name is known, let's handle it
 
     if (
-      // std::string atom?
+      // string atom?
       S_oahStringAtom
         atom =
           dynamic_cast<oahStringAtom*>(&(*element))
       ) {
-      // add the std::string atom
+      // add the string atom
       addStringAtom (atom);
     }
 
@@ -5923,7 +5923,7 @@ void oahFactorizedStringAtom::addStringAtomByName (
       handler->
         unknownOptionNameError (
           name,
-          "in factorized std::string atom, not the name of an atom");
+          "in factorized string atom, not the name of an atom");
     }
   }
 }
@@ -5933,7 +5933,7 @@ void oahFactorizedStringAtom::applyElement (std::ostream& os) // JMI
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "Applying monoplex std::string atom '" <<
+      "Applying monoplex string atom '" <<
       fetchNames () <<
       "' which is a oahFactorizedStringAtom" <<
       std::endl;
@@ -6005,7 +6005,7 @@ void oahFactorizedStringAtom::browseData (basevisitor* v)
   }
 #endif
 
-  // browse the std::string atoms
+  // browse the string atoms
   if (fStringAtomsList.size ()) {
     for (
       std::list<S_oahStringAtom>::const_iterator i = fStringAtomsList.begin ();
@@ -6014,7 +6014,7 @@ void oahFactorizedStringAtom::browseData (basevisitor* v)
     ) {
       S_oahStringAtom stringAtom = (*i);
 
-      // browse the std::string atom
+      // browse the string atom
       oahBrowser<oahStringAtom> browser (v);
       browser.browse (*(stringAtom));
     } // for
@@ -6149,7 +6149,7 @@ void oahFactorizedStringAtom::printAtomWithVariableOptionsValues (
   int           valueFieldWidth) const
 {
   // nothing to do, these options values will be printed
-  // by the std::string atoms in the list
+  // by the string atoms in the list
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahFactorizedStringAtom& elt)
@@ -6263,7 +6263,7 @@ void oahStringWithDefaultValueAtom::setStringVariable (const std::string& value)
     gLogStream <<
       "Setting option '" <<
       fetchNames () <<
-      "' std::string variable to \"" <<
+      "' string variable to \"" <<
      value <<
       "\"" <<
       std::endl;
@@ -6491,7 +6491,7 @@ void oahStringWithRegexAtom::setStringVariable (const std::string& value)
     gLogStream <<
       "Setting option '" <<
       fetchNames () <<
-      "' std::string variable to \"" <<
+      "' string variable to \"" <<
      value <<
       "\"" <<
       std::endl;
@@ -6683,7 +6683,7 @@ void oahRationalAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for Rational std::string \"" << theString <<
+      " for Rational string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\"" <<
       std::endl;
@@ -7402,7 +7402,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for reset measure number std::string \"" << theString <<
+      " for reset measure number string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;
@@ -7991,7 +7991,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   }
 #endif
 
-  // theString contains the std::string int map specification
+  // theString contains the string int map specification
   // decipher it to extract duration and perSecond values
 
 #ifdef TRACING_IS_ENABLED
@@ -8004,7 +8004,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
 
   std::string regularExpression (
     "[[:space:]]*"
-    "([[:w:]]+)"     // std::string
+    "([[:w:]]+)"     // string
     "[[:space:]]*"
     ":"
     "[[:space:]]*"
@@ -8025,7 +8025,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for " <<
       fetchNamesBetweenQuotes () <<
-      " std::string \"" << theString <<
+      " string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;
@@ -8340,7 +8340,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   }
 #endif
 
-  // theString contains the std::string std::string map specification
+  // theString contains the string string map specification // JMI v0.9.66
   // decipher it to extract duration and perSecond values
 
 #ifdef TRACING_IS_ENABLED
@@ -8353,11 +8353,11 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
 
   std::string regularExpression (
     "[[:space:]]*"
-    "([[:w:]]+)"      // std::string
+    "([[:w:]]+)"      // string
     "[[:space:]]*"
     ":"
     "[[:space:]]*"
-    "([[:w:]]+)"      // std::string
+    "([[:w:]]+)"      // string
     "[[:space:]]*"
     );
 
@@ -8374,7 +8374,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for " <<
       fetchNamesBetweenQuotes () <<
-      " std::string \"" << theString <<
+      " string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;
@@ -8689,7 +8689,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
   }
 #endif
 
-  // theString contains the std::string std::string std::multimap specification
+  // theString contains the string string std::multimap specification
   // decipher it to extract duration and perSecond values
 
 #ifdef TRACING_IS_ENABLED
@@ -8702,11 +8702,11 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
 
   std::string regularExpression (
     "[[:space:]]*"
-    "([[:w:]]+)"      // std::string
+    "([[:w:]]+)"      // string
     "[[:space:]]*"
     ":"
     "[[:space:]]*"
-    "([[:w:]]+)"      // std::string
+    "([[:w:]]+)"      // string
     "[[:space:]]*"
     );
 
@@ -8723,7 +8723,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
       "There are " << smSize << " matches" <<
       " for " <<
       fetchNamesBetweenQuotes () <<
-      " std::string \"" << theString <<
+      " string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;
@@ -9042,11 +9042,11 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-  // theString contains the std::string and integer values
+  // theString contains the string and integer values
 
   // check whether it is well-formed
   std::string regularExpression (
-    "(.+)"           // std::string
+    "(.+)"           // string
     "[[:space:]]+"
     ":"
     "[[:space:]]+"
@@ -9064,7 +9064,7 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for integer std::string \"" << theString <<
+      " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\"" <<
       std::endl;
@@ -9131,7 +9131,7 @@ void oahStringAndIntegerAtom::setStringVariable (const std::string& value)
     gLogStream <<
       "Setting option '" <<
       fetchNames () <<
-      "' std::string variable to \"" <<
+      "' string variable to \"" <<
       value <<
       "\"" <<
       std::endl;
@@ -9361,11 +9361,11 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-  // theString contains the std::string and integer values
+  // theString contains the string and integer values
 
   // check whether it is well-formed
   std::string regularExpression (
-    "([[:alpha:]]+)" // std::string
+    "([[:alpha:]]+)" // string
     "[[:space:]]+"
     "([[:digit:]]+)" // integer value
     "[[:space:]]+"
@@ -9383,7 +9383,7 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for integer std::string \"" << theString <<
+      " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\"" <<
       std::endl;
@@ -9438,7 +9438,7 @@ void oahStringAndTwoIntegersAtom::setStringVariable (const std::string& value)
     gLogStream <<
       "Setting option '" <<
       fetchNames () <<
-      "' std::string variable to '" <<
+      "' string variable to '" <<
       value <<
       "'" <<
       std::endl;
@@ -9961,7 +9961,7 @@ void oahLengthAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for integer std::string \"" << theString <<
+      " for integer string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\"" <<
       std::endl;
@@ -10273,7 +10273,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for MIDI tempo std::string \"" << theString <<
+      " for MIDI tempo string \"" << theString <<
       "\" with std::regex \"" << regularExpression <<
       "\":" <<
       std::endl;
@@ -11002,7 +11002,7 @@ void oahFindStringAtom::applyAtomWithValue (
   os <<
     mfSingularOrPlural (
       foundMatchesListSize, "occurrence", "occurrences") <<
-    " of std::string \"" <<
+    " of string \"" <<
     theString <<
     "\" " <<
     mfSingularOrPluralWithoutNumber (

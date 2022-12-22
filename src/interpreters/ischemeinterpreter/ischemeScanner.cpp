@@ -3042,7 +3042,7 @@ mfMusicformatsErrorKind launchIschemeInterpreter ()
 {
   mfMusicformatsErrorKind
     result =
-      mfMusicformatsErrorKind::kMusicformatsError_NO_;
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   // the driver
   ischemeDriver

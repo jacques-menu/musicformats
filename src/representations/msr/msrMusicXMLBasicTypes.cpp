@@ -114,8 +114,8 @@ std::string msrOtherAppearanceTypeKindAsString (
   std::string result;
 
   switch (otherAppearanceTypeKind) {
-    case msrOtherAppearanceTypeKind::kOtherAppearanceType_NO_:
-      result = "kOtherAppearanceType_NO_";
+    case msrOtherAppearanceTypeKind::kOtherAppearanceType_UNKNOWN:
+      result = "kOtherAppearanceType_UNKNOWN";
       break;
   } // switch
 
@@ -134,8 +134,8 @@ std::string msrLineWidthTypeKindAsString (
   std::string result;
 
   switch (lineWidthTypeKind) {
-    case msrLineWidthTypeKind::kLineWidthType_NO_:
-      result = "kLineWidthType_NO_";
+    case msrLineWidthTypeKind::kLineWidthType_UNKNOWN:
+      result = "kLineWidthType_UNKNOWN";
       break;
     case msrLineWidthTypeKind::kLineWidthTypeBeam:
       result = "kLineWidthTypeBeam";
@@ -211,8 +211,8 @@ std::string msrNoteSizeTypeKindAsString (
   std::string result;
 
   switch (noteSizeTypeKind) {
-    case msrNoteSizeTypeKind::kNote_NO_SizeType:
-      result = "kNote_NO_SizeType";
+    case msrNoteSizeTypeKind::kNoteSizeType_UNKNOWN:
+      result = "kNoteSizeType_UNKNOWN";
       break;
     case msrNoteSizeTypeKind::kNoteSizeTypeCue:
       result = "kNoteSizeTypeCue";
@@ -240,8 +240,8 @@ std::string msrDistanceTypeKindAsString (
   std::string result;
 
   switch (distanceTypeKind) {
-    case msrDistanceTypeKind::kDistanceType_NO_:
-      result = "kDistanceType_NO_";
+    case msrDistanceTypeKind::kDistanceType_UNKNOWN:
+      result = "kDistanceType_UNKNOWN";
       break;
     case msrDistanceTypeKind::kDistanceTypeHyphen:
       result = "kDistanceTypeHyphen";
@@ -266,8 +266,8 @@ std::string msrGlyphTypeKindAsString (
   std::string result;
 
   switch (glyphTypeKind) {
-    case msrGlyphTypeKind::kGlyphType_NO_:
-      result = "kGlyphType_NO_";
+    case msrGlyphTypeKind::kGlyphType_UNKNOWN:
+      result = "kGlyphType_UNKNOWN";
       break;
     case msrGlyphTypeKind::kGlyphTypeQuarterRest:
       result = "kGlyphTypeQuarterRest";

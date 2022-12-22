@@ -64,8 +64,8 @@ std::string msrBassFigurePrefixKindAsString (
   std::string result;
 
   switch (figurePrefixKind) {
-    case msrBassFigurePrefixKind::kBassFigurePrefix_NO_:
-      result = "kBassFigurePrefix_NO_";
+    case msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN:
+      result = "kBassFigurePrefix_UNKNOWN";
       break;
     case msrBassFigurePrefixKind::kBassFigurePrefixDoubleFlat:
       result = "kBassFigurePrefixDoubleFlat";
@@ -105,8 +105,8 @@ std::string msrBassFigureSuffixKindAsString (
   std::string result;
 
   switch (figureSuffixKind) {
-    case msrBassFigureSuffixKind::kBassFigureSuffix_NO_:
-      result = "kBassFigureSuffix_NO_";
+    case msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN:
+      result = "kBassFigureSuffix_UNKNOWN";
       break;
     case msrBassFigureSuffixKind::kBassFigureSuffixDoubleFlat:
       result = "kBassFigureSuffixDoubleFlat";

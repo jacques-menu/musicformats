@@ -1437,7 +1437,7 @@ void oahAtom::print (std::ostream& os) const
   os <<
     "Atom: ";
 
-  oahElement::printOahElementEssentialsShort (
+  oahElement::printOahElementEssentials (
     os, fieldWidth);
 }
 
@@ -1637,7 +1637,7 @@ void oahAtomExpectingAValue::print (std::ostream& os) const
   os <<
     "oahAtomExpectingAValue: ";
 
-  printOahElementEssentialsShort (
+  printOahElementEssentials (
     os, fieldWidth);
 
   os <<
@@ -1788,11 +1788,11 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentials (
   }
 }
 
-void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentialsShort (
+void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentialsFull (
   std::ostream& os,
   int fieldWidth) const
 {
-  printOahElementEssentialsShort (
+  printOahElementEssentials (
     os, fieldWidth);
 
   os << std::left <<
@@ -1997,11 +1997,11 @@ void oahAtomStoringAValue::printAtomWithVariableEssentials (
     std::endl;
 }
 
-void oahAtomStoringAValue::printAtomWithVariableEssentialsShort (
+void oahAtomStoringAValue::printAtomWithVariableEssentialsFull (
   std::ostream& os,
   int fieldWidth) const
 {
-  printOahElementEssentialsShort (
+  printOahElementEssentials (
     os, fieldWidth);
 
   os << std::left <<
@@ -5300,7 +5300,7 @@ void oahHandler::displayElementUsesList (std::ostream& os) const
       }
       else {
         gLogStream <<
-          "null" <<
+          "[NONE]" <<
           std::endl;
       }
 
@@ -9873,7 +9873,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for version std::string '" << theString <<
+      " for version string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl <<
@@ -9929,7 +9929,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "There are " << smSize << " matches" <<
-        " for chord details std::string '" << theString <<
+        " for chord details string '" << theString <<
         "' with std::regex '" << regularExpression <<
         "'" <<
         std::endl <<

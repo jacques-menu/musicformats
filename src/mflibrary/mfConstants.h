@@ -21,7 +21,7 @@ namespace MusicFormats
 // input line numbers
 //______________________________________________________________________________
 
-EXP extern const int K_MF_NO_INPUT_LINE_NUMBER;
+EXP extern const int K_MF_INPUT_LINE_UNKNOWN;
 
 // names lists max length
 // ------------------------------------------------------

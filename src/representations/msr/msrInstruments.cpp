@@ -330,7 +330,7 @@ void msrScordatura::print (std::ostream& os) const
   }
   else {
     os <<
-      " : no std::string tunings" <<
+      " : no string tunings" <<
       std::endl;
   }
 
@@ -904,8 +904,8 @@ std::string msrPedalTypeKindAsString (
   std::string result;
 
   switch (pedalTypeKind) {
-    case msrPedalTypeKind::kPedalType_NO_:
-      result = "kPedalType_NO_";
+    case msrPedalTypeKind::kPedalType_UNKNOWN:
+      result = "kPedalType_UNKNOWN";
       break;
     case msrPedalTypeKind::kPedalTypeStart:
       result = "kPedalTypeStart";

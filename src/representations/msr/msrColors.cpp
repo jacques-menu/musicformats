@@ -65,7 +65,7 @@ msrColorRGB::msrColorRGB (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for RGB color std::string '" << theString <<
+      " for RGB color string '" << theString <<
       "' with std::regex '" << regularExpression <<
       "'" <<
       std::endl;
@@ -88,7 +88,7 @@ msrColorRGB::msrColorRGB (
     std::stringstream s;
 
     s <<
-      "msrColorRGB std::string '" << theString <<
+      "msrColorRGB string '" << theString <<
       "' is ill-formed";
 
     oahError (s.str ());

@@ -306,21 +306,21 @@ void xml2xmlRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-short", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1-slices", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-slices", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1-names", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-names", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-names", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-names", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-1-summary", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-summary", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-summary", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
 #ifdef TRACING_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-mxsr", subGroup);
