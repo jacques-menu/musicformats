@@ -16,9 +16,9 @@
 
 #include "bsrEnumTypes.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahBasicTypes.h"
@@ -287,7 +287,7 @@ class EXP bsrOahGroup : public oahGroup
     // trace
     // --------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     // BSR
     void                  setTraceBsr ()
                               { fTraceBsr = true; }
@@ -356,7 +356,7 @@ class EXP bsrOahGroup : public oahGroup
 
     void                  initializeBsrLanguagesOptions ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     void                  initializeBsrtracingOah ();
 #endif
 
@@ -399,7 +399,7 @@ class EXP bsrOahGroup : public oahGroup
     // trace
     // --------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
 
     // BSR
     Bool                  fTraceBsr;

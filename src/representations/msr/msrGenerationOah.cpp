@@ -17,9 +17,9 @@
 
 #include "mfConstants.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahOah.h"
@@ -105,7 +105,7 @@ R"()",
 
 void msrGeneratorsOahGroup::initializeMsrGeneratorsOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 // JMI  initializeMsrGeneratorstracingOah ();
@@ -127,7 +127,7 @@ void msrGeneratorsOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrGeneratorsOahGroup::acceptIn ()" <<
@@ -140,7 +140,7 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrGeneratorsOahGroup>*> (v)) {
         S_msrGeneratorsOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrGeneratorsOahGroup::visitStart ()" <<
@@ -153,7 +153,7 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
 
 void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrGeneratorsOahGroup::acceptOut ()" <<
@@ -166,7 +166,7 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrGeneratorsOahGroup>*> (v)) {
         S_msrGeneratorsOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrGeneratorsOahGroup::visitEnd ()" <<
@@ -179,7 +179,7 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
 
 void msrGeneratorsOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrGeneratorsOahGroup::browseData ()" <<
@@ -232,7 +232,7 @@ std::ostream& operator << (std::ostream& os, const S_msrGeneratorsOahGroup& elt)
 //______________________________________________________________________________
 S_msrGeneratorsOahGroup createGlobalMsrGeneratorsOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msrGenerators OAH group" <<

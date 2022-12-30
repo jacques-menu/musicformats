@@ -23,9 +23,9 @@
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "lpsrScores.h"
@@ -90,7 +90,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     // start the clock
     clock_t startClock = clock ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       std::string separator =
         "%--------------------------------------------------------------";
@@ -212,7 +212,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "msdlStream2lilypond() outputFileName = \"" <<
@@ -223,7 +223,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "msdlStream2lilypond() output goes to standard output" <<
@@ -259,7 +259,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   }
 
   else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "msdlStream2lilypond() output goes to file \"" <<
@@ -270,7 +270,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #endif
 
     // open output file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<
@@ -368,7 +368,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
@@ -389,7 +389,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<
@@ -498,7 +498,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
   std::ostream&           err)
 {
   // open input file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
@@ -545,7 +545,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   std::ostream& err)
 {
   // open input file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<

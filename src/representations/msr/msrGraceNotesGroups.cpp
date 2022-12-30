@@ -21,9 +21,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrGraceNotesGroups.h"
@@ -85,7 +85,7 @@ msrGraceNotesGroup::~msrGraceNotesGroup ()
 
 S_msrGraceNotesGroup msrGraceNotesGroup::createGraceNotesGroupNewbornClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Creating a newborn clone of grace notes group '" <<
@@ -162,7 +162,7 @@ std::ostream& operator << (std::ostream& os, const msrGraceNotesGroupKind& elt)
 
 S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Creating a skip clone of grace notes group '" <<
@@ -198,7 +198,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
       S_msrNote note = dynamic_cast<msrNote*>(&(*(*i)))
     ) {
       // create grace skip note with same duration as note
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
         gLogStream <<
           "Creating a skip grace note" <<
@@ -259,7 +259,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 
 void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Appending note " <<
@@ -287,7 +287,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 
 void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Appending chord " <<
@@ -310,7 +310,7 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Removing last note from grace notes group " <<
@@ -328,7 +328,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
     fGraceNotesGroupElementsList.size () != 0,
     "fGraceNotesGroupElementsList.size () == 0");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Removing last note from grace notes '" <<
@@ -354,7 +354,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
       "removeLastNoteFromGraceNotesGroup (): grace notes group element should be a note");
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "This last note from grace notes '" <<
@@ -375,7 +375,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
   const S_msrMeasure& measure,
   const Rational&     measurePosition)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting grace notes group elements' measure positions of " << asString () <<

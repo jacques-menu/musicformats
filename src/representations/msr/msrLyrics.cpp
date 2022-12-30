@@ -21,9 +21,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrMeasureConstants.h"
@@ -153,7 +153,7 @@ msrSyllable::msrSyllable (
 
   fSyllableNextMeasurePuristNumber = -1;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a syllable containing:" <<
@@ -174,7 +174,7 @@ msrSyllable::~msrSyllable ()
 S_msrSyllable msrSyllable::createSyllableNewbornClone (
   const S_msrPart& containingPart)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a newborn clone of syllable '" <<
@@ -225,7 +225,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
 S_msrSyllable msrSyllable::createSyllableDeepClone (
   const S_msrPart& containingPart)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a newborn clone of syllable '" <<
@@ -282,7 +282,7 @@ void msrSyllable::setSyllableUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -304,7 +304,7 @@ void msrSyllable::setSyllableUpLinkToMeasure (
 void msrSyllable:: setSyllableNextMeasurePuristNumber (
   int puristMeasureNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Setting syllable next measure purist number to " <<
@@ -353,7 +353,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //   const Rational&    measurePosition,
 //   const std::string&      context)
 // {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Setting syllable's measure position of " << asString () <<
@@ -384,7 +384,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 
 void msrSyllable::appendLyricTextToSyllable (const std::string& text)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending text \"" <<
@@ -424,7 +424,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
     appendSyllableToNote (this);
 
   // set it upLink to note
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Setting syllable note upLink for:" <<
@@ -914,7 +914,7 @@ void msrStanza::initializeStanza ()
         mfMakeSingleWordFromString (
           fStanzaNumber));
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Initializing stanza " << getStanzaName () <<
@@ -933,7 +933,7 @@ msrStanza::~msrStanza ()
 S_msrStanza msrStanza::createStanzaNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a newborn clone of stanza \"" <<
@@ -980,7 +980,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
 S_msrStanza msrStanza::createStanzaDeepClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a deep clone of stanza \"" <<
@@ -1036,7 +1036,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
 void msrStanza::appendSyllableToStanza (
   const S_msrSyllable& syllable)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending syllable '" << syllable->asString () <<
@@ -1098,7 +1098,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending 'Rest' syllable" <<
@@ -1137,7 +1137,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending 'Skip' syllable " <<
@@ -1175,7 +1175,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
 S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending 'Measure end' syllable " <<
@@ -1217,7 +1217,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
   msrSyllableKind syllableKind,
   const Rational& wholeNotes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending '" <<
@@ -1258,7 +1258,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
   int inputLineNumber,
   int nextMeasurePuristNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending a 'LineBreak' syllable" <<
@@ -1301,7 +1301,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
   int inputLineNumber,
   int nextMeasurePuristNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending a 'PageBreak' syllable" <<
@@ -1351,7 +1351,7 @@ void msrStanza::appendPaddingNoteToStanza (
   int             inputLineNumber,
   const Rational& forwardStepLength)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending padding note" <<

@@ -11,9 +11,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -76,7 +76,7 @@ msrRepeatCoda::~msrRepeatCoda ()
 S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
   const S_msrRepeat& containingRepeat)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of a " <<
@@ -112,7 +112,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
 S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
   const S_msrRepeat& containingRepeat)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of a " <<

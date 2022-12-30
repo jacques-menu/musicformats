@@ -24,7 +24,7 @@ EXP S_generalOahGroup createGlobalGeneralOahGroup ();
 \begin{lstlisting}[language=CPlusPlus]
 S_generalOahGroup createGlobalGeneralOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global general OAH group" <<
@@ -109,7 +109,7 @@ void initializeMsrBasicTypes ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       gLogStream <<
         "Initializing MSR basic types handling" <<
@@ -195,7 +195,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -246,7 +246,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   appendGroupToHandler (
     createGlobalLpsr2lilypondOahGroup ());
 
-#ifdef EXTRA_OAH_IS_ENABLED
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());

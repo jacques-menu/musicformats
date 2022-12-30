@@ -17,9 +17,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -84,7 +84,7 @@ void msrStringTuning::setStringTuningUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -231,7 +231,7 @@ void msrScordatura::setScordaturaUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -407,7 +407,7 @@ void msrAccordionRegistration::setAccordionRegistrationUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -542,7 +542,7 @@ msrHarpPedalsTuning::~msrHarpPedalsTuning ()
 
 S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningNewbornClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of a " <<
@@ -559,7 +559,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningNewbornClone ()
 
 S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of a " <<
@@ -583,7 +583,7 @@ void msrHarpPedalsTuning::setHarpPedalsTuningUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -832,7 +832,7 @@ void msrPedal::setPedalUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -1041,7 +1041,7 @@ void msrDamp::setDampUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -1168,7 +1168,7 @@ void msrDampAll::setDampAllUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 

@@ -12,10 +12,10 @@
 #ifndef ___msdl2musicxmlOah2manPage___
 #define ___msdl2musicxmlOah2manPage___
 
-#include "basicOah2manPage.h"
+#include "oahBasicOah2manPage.h"
 #include "msrOah2manPage.h"
 #include "lpsrOah2manPage.h"
-#include "harmoniesExtraOah2manPage.h"
+#include "oahHarmoniesExtraOah2manPage.h"
 #include "oahOah2manPage.h"
 
 

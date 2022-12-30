@@ -24,7 +24,7 @@ S_mfcOahComponent createOahComponent ()
   // protect library against multiple initializations
   if (! pOahComponent) {
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the OAH component" <<

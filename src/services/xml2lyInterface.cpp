@@ -7,47 +7,32 @@
 */
 
 #include <cstring>      // memset
-#include <iomanip>      // setw()), set::precision(), ...
-#include <fstream>      // std::ifstream, ...
 
 #ifndef WIN32
 #include <signal.h>
 #endif
 
-#include "mfServiceRunData.h"
 #include "mfBool.h"
-#include "mfStringsHandling.h"
+#include "mfMusicformatsErrors.h"
 #include "mfTiming.h"
-
+//
 #include "waeInterface.h"
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
-#endif
+#include "oahDisplayOah.h"
 
-#include "oahBasicTypes.h"
-
-#include "oahOah.h"
-#include "waeOah.h"
-#include "displayOah.h"
-
-#include "oahBasicTypes.h" // for testIncludeOptionsFromFile()
 #include "oahEarlyOptions.h"
-
-#include "mfcLibraryComponent.h"
-#include "musicxml2lilypondComponent.h"
 
 #include "musicxml2lilypondInsiderHandler.h"
 #include "musicxml2lilypondRegularHandler.h"
 
 #include "musicxml2lilypondInterface.h"
 
-#include "mfcLibraryComponent.h"
+#include "xml2lyInterface.h"
 
 
-using namespace MusicFormats;
+namespace MusicFormats
+{
 
 //_______________________________________________________________________________
 #ifndef WIN32
@@ -107,7 +92,7 @@ void allowCoreDumps ()
 }
 
 //_______________________________________________________________________________
-int xml2ly_BIS (
+EXP int xml2ly (
   int   argc,
   char* argv[])
 {
@@ -154,7 +139,7 @@ int xml2ly_BIS (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " xml2ly()" <<
@@ -262,7 +247,7 @@ int xml2ly_BIS (
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -308,7 +293,7 @@ int xml2ly_BIS (
   // welcome message
   // ------------------------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     int
       outputFileNameSize =
@@ -390,7 +375,7 @@ int xml2ly_BIS (
   // acknoledge end of command line analysis
   // ------------------------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       "The command line options and arguments have been analyzed" <<
@@ -406,7 +391,7 @@ int xml2ly_BIS (
   try {
     if (inputSourceName == "-") {
       // MusicXML data comes from standard input
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream << "Reading standard input" << std::endl;
       }
@@ -422,7 +407,7 @@ int xml2ly_BIS (
 
     else {
       // MusicXML data comes from a file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "Reading file \"" <<
@@ -487,4 +472,7 @@ int xml2ly_BIS (
   }
 
   return 0;
+}
+
+
 }

@@ -18,9 +18,9 @@
 #include "mfStringsHandling.h"
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -77,7 +77,7 @@ oahAtomAlias::~oahAtomAlias ()
 
 void oahAtomAlias::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahAtomAlias" <<
@@ -90,7 +90,7 @@ void oahAtomAlias::applyElement (std::ostream& os)
 
 void oahAtomAlias::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomAlias::acceptIn ()" <<
@@ -103,7 +103,7 @@ void oahAtomAlias::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahAtomAlias>*> (v)) {
         S_oahAtomAlias elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtomAlias::visitStart ()" <<
@@ -116,7 +116,7 @@ void oahAtomAlias::acceptIn (basevisitor* v)
 
 void oahAtomAlias::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomAlias::acceptOut ()" <<
@@ -129,7 +129,7 @@ void oahAtomAlias::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahAtomAlias>*> (v)) {
         S_oahAtomAlias elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtomAlias::visitEnd ()" <<
@@ -142,7 +142,7 @@ void oahAtomAlias::acceptOut (basevisitor* v)
 
 void oahAtomAlias::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomAlias::browseData ()" <<
@@ -237,7 +237,7 @@ void oahMacroAtom::appendAtomToMacro (S_oahAtom atom)
 
 void oahMacroAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahMacroAtom" <<
@@ -272,7 +272,7 @@ void oahMacroAtom::applyElement (std::ostream& os)
 
 void oahMacroAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahMacroAtom::acceptIn ()" <<
@@ -285,7 +285,7 @@ void oahMacroAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahMacroAtom>*> (v)) {
         S_oahMacroAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahMacroAtom::visitStart ()" <<
@@ -298,7 +298,7 @@ void oahMacroAtom::acceptIn (basevisitor* v)
 
 void oahMacroAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahMacroAtom::acceptOut ()" <<
@@ -311,7 +311,7 @@ void oahMacroAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahMacroAtom>*> (v)) {
         S_oahMacroAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahMacroAtom::visitEnd ()" <<
@@ -324,7 +324,7 @@ void oahMacroAtom::acceptOut (basevisitor* v)
 
 void oahMacroAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahMacroAtom::browseData ()" <<
@@ -534,7 +534,7 @@ oahOptionsUsageAtom::~oahOptionsUsageAtom ()
 
 void oahOptionsUsageAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -607,7 +607,7 @@ as is the case of https://libmusicxml.grame.fr .)",
 
 void oahOptionsUsageAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahOptionsUsageAtom::acceptIn ()" <<
@@ -620,7 +620,7 @@ void oahOptionsUsageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahOptionsUsageAtom>*> (v)) {
         S_oahOptionsUsageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahOptionsUsageAtom::visitStart ()" <<
@@ -633,7 +633,7 @@ void oahOptionsUsageAtom::acceptIn (basevisitor* v)
 
 void oahOptionsUsageAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahOptionsUsageAtom::acceptOut ()" <<
@@ -646,7 +646,7 @@ void oahOptionsUsageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahOptionsUsageAtom>*> (v)) {
         S_oahOptionsUsageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahOptionsUsageAtom::visitEnd ()" <<
@@ -659,7 +659,7 @@ void oahOptionsUsageAtom::acceptOut (basevisitor* v)
 
 void oahOptionsUsageAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahOptionsUsageAtom::browseData ()" <<
@@ -730,7 +730,7 @@ oahHelpAtom::~oahHelpAtom ()
 
 void oahHelpAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -752,7 +752,7 @@ void oahHelpAtom::applyElement (std::ostream& os)
 
 void oahHelpAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHelpAtom::acceptIn ()" <<
@@ -765,7 +765,7 @@ void oahHelpAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahHelpAtom>*> (v)) {
         S_oahHelpAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahHelpAtom::visitStart ()" <<
@@ -778,7 +778,7 @@ void oahHelpAtom::acceptIn (basevisitor* v)
 
 void oahHelpAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHelpAtom::acceptOut ()" <<
@@ -791,7 +791,7 @@ void oahHelpAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahHelpAtom>*> (v)) {
         S_oahHelpAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahHelpAtom::visitEnd ()" <<
@@ -804,7 +804,7 @@ void oahHelpAtom::acceptOut (basevisitor* v)
 
 void oahHelpAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHelpAtom::browseData ()" <<
@@ -882,7 +882,7 @@ oahHelpSummaryAtom::~oahHelpSummaryAtom ()
 
 void oahHelpSummaryAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -904,7 +904,7 @@ void oahHelpSummaryAtom::applyElement (std::ostream& os)
 
 void oahHelpSummaryAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHelpSummaryAtom::acceptIn ()" <<
@@ -917,7 +917,7 @@ void oahHelpSummaryAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahHelpSummaryAtom>*> (v)) {
         S_oahHelpSummaryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahHelpSummaryAtom::visitStart ()" <<
@@ -930,7 +930,7 @@ void oahHelpSummaryAtom::acceptIn (basevisitor* v)
 
 void oahHelpSummaryAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHelpSummaryAtom::acceptOut ()" <<
@@ -943,7 +943,7 @@ void oahHelpSummaryAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahHelpSummaryAtom>*> (v)) {
         S_oahHelpSummaryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahHelpSummaryAtom::visitEnd ()" <<
@@ -956,7 +956,7 @@ void oahHelpSummaryAtom::acceptOut (basevisitor* v)
 
 void oahHelpSummaryAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHelpSummaryAtom::browseData ()" <<
@@ -1034,7 +1034,7 @@ oahAboutAtom::~oahAboutAtom ()
 
 void oahAboutAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahAboutAtom" <<
@@ -1053,7 +1053,7 @@ void oahAboutAtom::applyElement (std::ostream& os)
 
 void oahAboutAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAboutAtom::acceptIn ()" <<
@@ -1066,7 +1066,7 @@ void oahAboutAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahAboutAtom>*> (v)) {
         S_oahAboutAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAboutAtom::visitStart ()" <<
@@ -1079,7 +1079,7 @@ void oahAboutAtom::acceptIn (basevisitor* v)
 
 void oahAboutAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAboutAtom::acceptOut ()" <<
@@ -1092,7 +1092,7 @@ void oahAboutAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahAboutAtom>*> (v)) {
         S_oahAboutAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAboutAtom::visitEnd ()" <<
@@ -1105,7 +1105,7 @@ void oahAboutAtom::acceptOut (basevisitor* v)
 
 void oahAboutAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAboutAtom::browseData ()" <<
@@ -1213,7 +1213,7 @@ oahVersionAtom::~oahVersionAtom ()
 
 void oahVersionAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahVersionAtom" <<
@@ -1239,7 +1239,7 @@ void oahVersionAtom::applyElement (std::ostream& os)
 
 void oahVersionAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahVersionAtom::acceptIn ()" <<
@@ -1252,7 +1252,7 @@ void oahVersionAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahVersionAtom>*> (v)) {
         S_oahVersionAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahVersionAtom::visitStart ()" <<
@@ -1265,7 +1265,7 @@ void oahVersionAtom::acceptIn (basevisitor* v)
 
 void oahVersionAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahVersionAtom::acceptOut ()" <<
@@ -1278,7 +1278,7 @@ void oahVersionAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahVersionAtom>*> (v)) {
         S_oahVersionAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahVersionAtom::visitEnd ()" <<
@@ -1291,7 +1291,7 @@ void oahVersionAtom::acceptOut (basevisitor* v)
 
 void oahVersionAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahVersionAtom::browseData ()" <<
@@ -1398,7 +1398,7 @@ oahLibraryVersionAtom::~oahLibraryVersionAtom ()
 
 void oahLibraryVersionAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahLibraryVersionAtom" <<
@@ -1417,7 +1417,7 @@ void oahLibraryVersionAtom::applyElement (std::ostream& os)
 
 void oahLibraryVersionAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLibraryVersionAtom::acceptIn ()" <<
@@ -1430,7 +1430,7 @@ void oahLibraryVersionAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahLibraryVersionAtom>*> (v)) {
         S_oahLibraryVersionAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahLibraryVersionAtom::visitStart ()" <<
@@ -1443,7 +1443,7 @@ void oahLibraryVersionAtom::acceptIn (basevisitor* v)
 
 void oahLibraryVersionAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLibraryVersionAtom::acceptOut ()" <<
@@ -1456,7 +1456,7 @@ void oahLibraryVersionAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahLibraryVersionAtom>*> (v)) {
         S_oahLibraryVersionAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahLibraryVersionAtom::visitEnd ()" <<
@@ -1469,7 +1469,7 @@ void oahLibraryVersionAtom::acceptOut (basevisitor* v)
 
 void oahLibraryVersionAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLibraryVersionAtom::browseData ()" <<
@@ -1558,7 +1558,7 @@ oahHistoryAtom::~oahHistoryAtom ()
 
 void oahHistoryAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahHistoryAtom" <<
@@ -1577,7 +1577,7 @@ void oahHistoryAtom::applyElement (std::ostream& os)
 
 void oahHistoryAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHistoryAtom::acceptIn ()" <<
@@ -1590,7 +1590,7 @@ void oahHistoryAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahHistoryAtom>*> (v)) {
         S_oahHistoryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahHistoryAtom::visitStart ()" <<
@@ -1603,7 +1603,7 @@ void oahHistoryAtom::acceptIn (basevisitor* v)
 
 void oahHistoryAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHistoryAtom::acceptOut ()" <<
@@ -1616,7 +1616,7 @@ void oahHistoryAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahHistoryAtom>*> (v)) {
         S_oahHistoryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahHistoryAtom::visitEnd ()" <<
@@ -1629,7 +1629,7 @@ void oahHistoryAtom::acceptOut (basevisitor* v)
 
 void oahHistoryAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHistoryAtom::browseData ()" <<
@@ -1718,7 +1718,7 @@ oahLibraryHistoryAtom::~oahLibraryHistoryAtom ()
 
 void oahLibraryHistoryAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahLibraryHistoryAtom" <<
@@ -1737,7 +1737,7 @@ void oahLibraryHistoryAtom::applyElement (std::ostream& os)
 
 void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLibraryHistoryAtom::acceptIn ()" <<
@@ -1750,7 +1750,7 @@ void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahLibraryHistoryAtom>*> (v)) {
         S_oahLibraryHistoryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahLibraryHistoryAtom::visitStart ()" <<
@@ -1763,7 +1763,7 @@ void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
 
 void oahLibraryHistoryAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLibraryHistoryAtom::acceptOut ()" <<
@@ -1776,7 +1776,7 @@ void oahLibraryHistoryAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahLibraryHistoryAtom>*> (v)) {
         S_oahLibraryHistoryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahLibraryHistoryAtom::visitEnd ()" <<
@@ -1789,7 +1789,7 @@ void oahLibraryHistoryAtom::acceptOut (basevisitor* v)
 
 void oahLibraryHistoryAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLibraryHistoryAtom::browseData ()" <<
@@ -1879,7 +1879,7 @@ oahContactAtom::~oahContactAtom ()
 
 void oahContactAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahContactAtom" <<
@@ -1898,7 +1898,7 @@ void oahContactAtom::applyElement (std::ostream& os)
 
 void oahContactAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahContactAtom::acceptIn ()" <<
@@ -1911,7 +1911,7 @@ void oahContactAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahContactAtom>*> (v)) {
         S_oahContactAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahContactAtom::visitStart ()" <<
@@ -1924,7 +1924,7 @@ void oahContactAtom::acceptIn (basevisitor* v)
 
 void oahContactAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahContactAtom::acceptOut ()" <<
@@ -1937,7 +1937,7 @@ void oahContactAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahContactAtom>*> (v)) {
         S_oahContactAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahContactAtom::visitEnd ()" <<
@@ -1950,7 +1950,7 @@ void oahContactAtom::acceptOut (basevisitor* v)
 
 void oahContactAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahContactAtom::browseData ()" <<
@@ -2035,7 +2035,7 @@ oahDisplayPrefixes::~oahDisplayPrefixes ()
 
 void oahDisplayPrefixes::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahDisplayPrefixes" <<
@@ -2054,7 +2054,7 @@ void oahDisplayPrefixes::applyElement (std::ostream& os)
 
 void oahDisplayPrefixes::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplayPrefixes::acceptIn ()" <<
@@ -2067,7 +2067,7 @@ void oahDisplayPrefixes::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayPrefixes>*> (v)) {
         S_oahDisplayPrefixes elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahDisplayPrefixes::visitStart ()" <<
@@ -2080,7 +2080,7 @@ void oahDisplayPrefixes::acceptIn (basevisitor* v)
 
 void oahDisplayPrefixes::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplayPrefixes::acceptOut ()" <<
@@ -2093,7 +2093,7 @@ void oahDisplayPrefixes::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayPrefixes>*> (v)) {
         S_oahDisplayPrefixes elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahDisplayPrefixes::visitEnd ()" <<
@@ -2106,7 +2106,7 @@ void oahDisplayPrefixes::acceptOut (basevisitor* v)
 
 void oahDisplayPrefixes::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplayPrefixes::browseData ()" <<
@@ -2189,7 +2189,7 @@ oahDisplaySingleCharacterOptions::~oahDisplaySingleCharacterOptions ()
 
 void oahDisplaySingleCharacterOptions::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahDisplaySingleCharacterOptions" <<
@@ -2208,7 +2208,7 @@ void oahDisplaySingleCharacterOptions::applyElement (std::ostream& os)
 
 void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplaySingleCharacterOptions::acceptIn ()" <<
@@ -2221,7 +2221,7 @@ void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplaySingleCharacterOptions>*> (v)) {
         S_oahDisplaySingleCharacterOptions elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahDisplaySingleCharacterOptions::visitStart ()" <<
@@ -2234,7 +2234,7 @@ void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
 
 void oahDisplaySingleCharacterOptions::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplaySingleCharacterOptions::acceptOut ()" <<
@@ -2247,7 +2247,7 @@ void oahDisplaySingleCharacterOptions::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplaySingleCharacterOptions>*> (v)) {
         S_oahDisplaySingleCharacterOptions elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahDisplaySingleCharacterOptions::visitEnd ()" <<
@@ -2260,7 +2260,7 @@ void oahDisplaySingleCharacterOptions::acceptOut (basevisitor* v)
 
 void oahDisplaySingleCharacterOptions::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplaySingleCharacterOptions::browseData ()" <<
@@ -2353,7 +2353,7 @@ void oahOnOffAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -2389,7 +2389,7 @@ void oahOnOffAtom::applyAtomWithValue (
 
 void oahOnOffAtom::setOnOffKindVariable (mfOnOffKind value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     if (fLongName == K_TRACE_OAH_LONG_OPTION_NAME) {
       // get the options handler
@@ -2414,7 +2414,7 @@ void oahOnOffAtom::setOnOffKindVariable (mfOnOffKind value)
 
 void oahOnOffAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahOnOffAtom::acceptIn ()" <<
@@ -2427,7 +2427,7 @@ void oahOnOffAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahOnOffAtom>*> (v)) {
         S_oahOnOffAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahOnOffAtom::visitStart ()" <<
@@ -2440,7 +2440,7 @@ void oahOnOffAtom::acceptIn (basevisitor* v)
 
 void oahOnOffAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahOnOffAtom::acceptOut ()" <<
@@ -2453,7 +2453,7 @@ void oahOnOffAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahOnOffAtom>*> (v)) {
         S_oahOnOffAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahOnOffAtom::visitEnd ()" <<
@@ -2466,7 +2466,7 @@ void oahOnOffAtom::acceptOut (basevisitor* v)
 
 void oahOnOffAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahOnOffAtom::browseData ()" <<
@@ -2577,7 +2577,7 @@ oahBooleanAtom::~oahBooleanAtom ()
 
 void oahBooleanAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -2592,7 +2592,7 @@ void oahBooleanAtom::applyElement (std::ostream& os)
 
 void oahBooleanAtom::setBooleanVariable (Bool value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     if (fLongName == K_TRACE_OAH_LONG_OPTION_NAME) {
       // get the options handler
@@ -2617,7 +2617,7 @@ void oahBooleanAtom::setBooleanVariable (Bool value)
 
 void oahBooleanAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahBooleanAtom::acceptIn ()" <<
@@ -2630,7 +2630,7 @@ void oahBooleanAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahBooleanAtom>*> (v)) {
         S_oahBooleanAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahBooleanAtom::visitStart ()" <<
@@ -2643,7 +2643,7 @@ void oahBooleanAtom::acceptIn (basevisitor* v)
 
 void oahBooleanAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahBooleanAtom::acceptOut ()" <<
@@ -2656,7 +2656,7 @@ void oahBooleanAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahBooleanAtom>*> (v)) {
         S_oahBooleanAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahBooleanAtom::visitEnd ()" <<
@@ -2669,7 +2669,7 @@ void oahBooleanAtom::acceptOut (basevisitor* v)
 
 void oahBooleanAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahBooleanAtom::browseData ()" <<
@@ -2777,7 +2777,7 @@ oahBooleanAtomWithTracePasses::~oahBooleanAtomWithTracePasses ()
 
 void oahBooleanAtomWithTracePasses::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -2794,7 +2794,7 @@ void oahBooleanAtomWithTracePasses::applyElement (std::ostream& os)
 
 void oahBooleanAtomWithTracePasses::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahBooleanAtomWithTracePasses::acceptIn ()" <<
@@ -2807,7 +2807,7 @@ void oahBooleanAtomWithTracePasses::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahBooleanAtomWithTracePasses>*> (v)) {
         S_oahBooleanAtomWithTracePasses elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahBooleanAtomWithTracePasses::visitStart ()" <<
@@ -2820,7 +2820,7 @@ void oahBooleanAtomWithTracePasses::acceptIn (basevisitor* v)
 
 void oahBooleanAtomWithTracePasses::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahBooleanAtomWithTracePasses::acceptOut ()" <<
@@ -2833,7 +2833,7 @@ void oahBooleanAtomWithTracePasses::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahBooleanAtomWithTracePasses>*> (v)) {
         S_oahBooleanAtomWithTracePasses elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahBooleanAtomWithTracePasses::visitEnd ()" <<
@@ -2846,7 +2846,7 @@ void oahBooleanAtomWithTracePasses::acceptOut (basevisitor* v)
 
 void oahBooleanAtomWithTracePasses::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahBooleanAtomWithTracePasses::browseData ()" <<
@@ -2959,7 +2959,7 @@ oahTwoBooleansAtom::~oahTwoBooleansAtom ()
 
 void oahTwoBooleansAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -2974,7 +2974,7 @@ void oahTwoBooleansAtom::applyElement (std::ostream& os)
 
 void oahTwoBooleansAtom::setTwoBooleansVariables (Bool value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -2995,7 +2995,7 @@ void oahTwoBooleansAtom::setTwoBooleansVariables (Bool value)
 
 void oahTwoBooleansAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahTwoBooleansAtom::acceptIn ()" <<
@@ -3008,7 +3008,7 @@ void oahTwoBooleansAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahTwoBooleansAtom>*> (v)) {
         S_oahTwoBooleansAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahTwoBooleansAtom::visitStart ()" <<
@@ -3021,7 +3021,7 @@ void oahTwoBooleansAtom::acceptIn (basevisitor* v)
 
 void oahTwoBooleansAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahTwoBooleansAtom::acceptOut ()" <<
@@ -3034,7 +3034,7 @@ void oahTwoBooleansAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahTwoBooleansAtom>*> (v)) {
         S_oahTwoBooleansAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahTwoBooleansAtom::visitEnd ()" <<
@@ -3047,7 +3047,7 @@ void oahTwoBooleansAtom::acceptOut (basevisitor* v)
 
 void oahTwoBooleansAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahTwoBooleansAtom::browseData ()" <<
@@ -3167,7 +3167,7 @@ oahTwoBooleansAtomWithTracePasses::~oahTwoBooleansAtomWithTracePasses ()
 
 void oahTwoBooleansAtomWithTracePasses::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -3184,7 +3184,7 @@ void oahTwoBooleansAtomWithTracePasses::applyElement (std::ostream& os)
 
 void oahTwoBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahTwoBooleansAtomWithTracePasses::acceptIn ()" <<
@@ -3197,7 +3197,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahTwoBooleansAtomWithTracePasses>*> (v)) {
         S_oahTwoBooleansAtomWithTracePasses elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahTwoBooleansAtomWithTracePasses::visitStart ()" <<
@@ -3210,7 +3210,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
 
 void oahTwoBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahTwoBooleansAtomWithTracePasses::acceptOut ()" <<
@@ -3223,7 +3223,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahTwoBooleansAtomWithTracePasses>*> (v)) {
         S_oahTwoBooleansAtomWithTracePasses elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahTwoBooleansAtomWithTracePasses::visitEnd ()" <<
@@ -3236,7 +3236,7 @@ void oahTwoBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
 
 void oahTwoBooleansAtomWithTracePasses::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahTwoBooleansAtomWithTracePasses::browseData ()" <<
@@ -3362,7 +3362,7 @@ oahThreeBooleansAtom::~oahThreeBooleansAtom ()
 
 void oahThreeBooleansAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -3377,7 +3377,7 @@ void oahThreeBooleansAtom::applyElement (std::ostream& os)
 
 void oahThreeBooleansAtom::setThreeBooleansVariables (Bool value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -3399,7 +3399,7 @@ void oahThreeBooleansAtom::setThreeBooleansVariables (Bool value)
 
 void oahThreeBooleansAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahThreeBooleansAtom::acceptIn ()" <<
@@ -3412,7 +3412,7 @@ void oahThreeBooleansAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahThreeBooleansAtom>*> (v)) {
         S_oahThreeBooleansAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahThreeBooleansAtom::visitStart ()" <<
@@ -3425,7 +3425,7 @@ void oahThreeBooleansAtom::acceptIn (basevisitor* v)
 
 void oahThreeBooleansAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahThreeBooleansAtom::acceptOut ()" <<
@@ -3438,7 +3438,7 @@ void oahThreeBooleansAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahThreeBooleansAtom>*> (v)) {
         S_oahThreeBooleansAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahThreeBooleansAtom::visitEnd ()" <<
@@ -3451,7 +3451,7 @@ void oahThreeBooleansAtom::acceptOut (basevisitor* v)
 
 void oahThreeBooleansAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahThreeBooleansAtom::browseData ()" <<
@@ -3578,7 +3578,7 @@ oahThreeBooleansAtomWithTracePasses::~oahThreeBooleansAtomWithTracePasses ()
 
 void oahThreeBooleansAtomWithTracePasses::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -3593,7 +3593,7 @@ void oahThreeBooleansAtomWithTracePasses::applyElement (std::ostream& os)
 
 void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahThreeBooleansAtomWithTracePasses::acceptIn ()" <<
@@ -3606,7 +3606,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahThreeBooleansAtomWithTracePasses>*> (v)) {
         S_oahThreeBooleansAtomWithTracePasses elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahThreeBooleansAtomWithTracePasses::visitStart ()" <<
@@ -3619,7 +3619,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
 
 void oahThreeBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahThreeBooleansAtomWithTracePasses::acceptOut ()" <<
@@ -3632,7 +3632,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahThreeBooleansAtomWithTracePasses>*> (v)) {
         S_oahThreeBooleansAtomWithTracePasses elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahThreeBooleansAtomWithTracePasses::visitEnd ()" <<
@@ -3645,7 +3645,7 @@ void oahThreeBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
 
 void oahThreeBooleansAtomWithTracePasses::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahThreeBooleansAtomWithTracePasses::browseData ()" <<
@@ -3823,7 +3823,7 @@ void oahCombinedBooleansAtom::addBooleanAtomByName (
 
 void oahCombinedBooleansAtom::setCombinedBooleanVariables (Bool value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -3861,7 +3861,7 @@ void oahCombinedBooleansAtom::setCombinedBooleanVariables (Bool value)
 
 void oahCombinedBooleansAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -3876,7 +3876,7 @@ void oahCombinedBooleansAtom::applyElement (std::ostream& os)
 
 void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahCombinedBooleansAtom::acceptIn ()" <<
@@ -3889,7 +3889,7 @@ void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahCombinedBooleansAtom>*> (v)) {
         S_oahCombinedBooleansAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahCombinedBooleansAtom::visitStart ()" <<
@@ -3902,7 +3902,7 @@ void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
 
 void oahCombinedBooleansAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahCombinedBooleansAtom::acceptOut ()" <<
@@ -3915,7 +3915,7 @@ void oahCombinedBooleansAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahCombinedBooleansAtom>*> (v)) {
         S_oahCombinedBooleansAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahCombinedBooleansAtom::visitEnd ()" <<
@@ -3928,7 +3928,7 @@ void oahCombinedBooleansAtom::acceptOut (basevisitor* v)
 
 void oahCombinedBooleansAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahCombinedBooleansAtom::browseData ()" <<
@@ -4443,7 +4443,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtomByName (
 
 void oahCommonPrefixBooleansAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -4458,7 +4458,7 @@ void oahCommonPrefixBooleansAtom::applyElement (std::ostream& os)
 
 void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahCommonPrefixBooleansAtom::acceptIn ()" <<
@@ -4471,7 +4471,7 @@ void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahCommonPrefixBooleansAtom>*> (v)) {
         S_oahCommonPrefixBooleansAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahCommonPrefixBooleansAtom::visitStart ()" <<
@@ -4484,7 +4484,7 @@ void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
 
 void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahCommonPrefixBooleansAtom::acceptOut ()" <<
@@ -4497,7 +4497,7 @@ void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahCommonPrefixBooleansAtom>*> (v)) {
         S_oahCommonPrefixBooleansAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahCommonPrefixBooleansAtom::visitEnd ()" <<
@@ -4510,7 +4510,7 @@ void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
 
 void oahCommonPrefixBooleansAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahCommonPrefixBooleansAtom::browseData ()" <<
@@ -4833,7 +4833,7 @@ void oahIntegerAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -4877,7 +4877,7 @@ void oahIntegerAtom::applyAtomWithValue (
 
 void oahIntegerAtom::setIntegerVariable (int value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -4895,7 +4895,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
 
 void oahIntegerAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahIntegerAtom::acceptIn ()" <<
@@ -4908,7 +4908,7 @@ void oahIntegerAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahIntegerAtom>*> (v)) {
         S_oahIntegerAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahIntegerAtom::visitStart ()" <<
@@ -4921,7 +4921,7 @@ void oahIntegerAtom::acceptIn (basevisitor* v)
 
 void oahIntegerAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahIntegerAtom::acceptOut ()" <<
@@ -4934,7 +4934,7 @@ void oahIntegerAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahIntegerAtom>*> (v)) {
         S_oahIntegerAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahIntegerAtom::visitEnd ()" <<
@@ -4947,7 +4947,7 @@ void oahIntegerAtom::acceptOut (basevisitor* v)
 
 void oahIntegerAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahIntegerAtom::browseData ()" <<
@@ -5093,7 +5093,7 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -5145,7 +5145,7 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
 
 void oahTwoIntegersAtom::setIntegerVariable (int value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -5163,7 +5163,7 @@ void oahTwoIntegersAtom::setIntegerVariable (int value)
 
 void oahTwoIntegersAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahTwoIntegersAtom::acceptIn ()" <<
@@ -5176,7 +5176,7 @@ void oahTwoIntegersAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahTwoIntegersAtom>*> (v)) {
         S_oahTwoIntegersAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahTwoIntegersAtom::visitStart ()" <<
@@ -5189,7 +5189,7 @@ void oahTwoIntegersAtom::acceptIn (basevisitor* v)
 
 void oahTwoIntegersAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahTwoIntegersAtom::acceptOut ()" <<
@@ -5202,7 +5202,7 @@ void oahTwoIntegersAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahTwoIntegersAtom>*> (v)) {
         S_oahTwoIntegersAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahTwoIntegersAtom::visitEnd ()" <<
@@ -5215,7 +5215,7 @@ void oahTwoIntegersAtom::acceptOut (basevisitor* v)
 
 void oahTwoIntegersAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahTwoIntegersAtom::browseData ()" <<
@@ -5371,7 +5371,7 @@ void oahFloatAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -5416,7 +5416,7 @@ void oahFloatAtom::applyAtomWithValue (
 
 void oahFloatAtom::setFloatVariable (float value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -5434,7 +5434,7 @@ void oahFloatAtom::setFloatVariable (float value)
 
 void oahFloatAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahFloatAtom::acceptIn ()" <<
@@ -5447,7 +5447,7 @@ void oahFloatAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahFloatAtom>*> (v)) {
         S_oahFloatAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahFloatAtom::visitStart ()" <<
@@ -5460,7 +5460,7 @@ void oahFloatAtom::acceptIn (basevisitor* v)
 
 void oahFloatAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahFloatAtom::acceptOut ()" <<
@@ -5473,7 +5473,7 @@ void oahFloatAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahFloatAtom>*> (v)) {
         S_oahFloatAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahFloatAtom::visitEnd ()" <<
@@ -5486,7 +5486,7 @@ void oahFloatAtom::acceptOut (basevisitor* v)
 
 void oahFloatAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahFloatAtom::browseData ()" <<
@@ -5617,7 +5617,7 @@ void oahStringAtom::applyAtomWithValue (
 
 void oahStringAtom::setStringVariable (const std::string& value)
   {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -5635,7 +5635,7 @@ void oahStringAtom::setStringVariable (const std::string& value)
 
 void oahStringAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringAtom::acceptIn ()" <<
@@ -5648,7 +5648,7 @@ void oahStringAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahStringAtom>*> (v)) {
         S_oahStringAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringAtom::visitStart ()" <<
@@ -5661,7 +5661,7 @@ void oahStringAtom::acceptIn (basevisitor* v)
 
 void oahStringAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringAtom::acceptOut ()" <<
@@ -5674,7 +5674,7 @@ void oahStringAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahStringAtom>*> (v)) {
         S_oahStringAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringAtom::visitEnd ()" <<
@@ -5687,7 +5687,7 @@ void oahStringAtom::acceptOut (basevisitor* v)
 
 void oahStringAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringAtom::browseData ()" <<
@@ -5847,7 +5847,7 @@ void oahFactorizedStringAtom::addStringAtom (
     stringAtom->getShortName ();
 
   if (stringAtomShortName.size () == 0) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyOahVerboseMode ()) {
       std::stringstream s;
 
@@ -5930,7 +5930,7 @@ void oahFactorizedStringAtom::addStringAtomByName (
 
 void oahFactorizedStringAtom::applyElement (std::ostream& os) // JMI
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Applying monoplex string atom '" <<
@@ -5945,7 +5945,7 @@ void oahFactorizedStringAtom::applyElement (std::ostream& os) // JMI
 
 void oahFactorizedStringAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahFactorizedStringAtom::acceptIn ()" <<
@@ -5958,7 +5958,7 @@ void oahFactorizedStringAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahFactorizedStringAtom>*> (v)) {
         S_oahFactorizedStringAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahFactorizedStringAtom::visitStart ()" <<
@@ -5971,7 +5971,7 @@ void oahFactorizedStringAtom::acceptIn (basevisitor* v)
 
 void oahFactorizedStringAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahFactorizedStringAtom::acceptOut ()" <<
@@ -5984,7 +5984,7 @@ void oahFactorizedStringAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahFactorizedStringAtom>*> (v)) {
         S_oahFactorizedStringAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahFactorizedStringAtom::visitEnd ()" <<
@@ -5997,7 +5997,7 @@ void oahFactorizedStringAtom::acceptOut (basevisitor* v)
 
 void oahFactorizedStringAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahFactorizedStringAtom::browseData ()" <<
@@ -6215,7 +6215,7 @@ void oahStringWithDefaultValueAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -6232,7 +6232,7 @@ void oahStringWithDefaultValueAtom::applyAtomWithValue (
 
 void oahStringWithDefaultValueAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringWithDefaultValueAtom::acceptIn ()" <<
@@ -6245,7 +6245,7 @@ void oahStringWithDefaultValueAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahStringWithDefaultValueAtom>*> (v)) {
         S_oahStringWithDefaultValueAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringWithDefaultValueAtom::visitStart ()" <<
@@ -6258,7 +6258,7 @@ void oahStringWithDefaultValueAtom::acceptIn (basevisitor* v)
 
 void oahStringWithDefaultValueAtom::setStringVariable (const std::string& value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -6276,7 +6276,7 @@ void oahStringWithDefaultValueAtom::setStringVariable (const std::string& value)
 
 void oahStringWithDefaultValueAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringWithDefaultValueAtom::acceptOut ()" <<
@@ -6289,7 +6289,7 @@ void oahStringWithDefaultValueAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahStringWithDefaultValueAtom>*> (v)) {
         S_oahStringWithDefaultValueAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringWithDefaultValueAtom::visitEnd ()" <<
@@ -6302,7 +6302,7 @@ void oahStringWithDefaultValueAtom::acceptOut (basevisitor* v)
 
 void oahStringWithDefaultValueAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringWithDefaultValueAtom::browseData ()" <<
@@ -6441,7 +6441,7 @@ void oahStringWithRegexAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -6460,7 +6460,7 @@ void oahStringWithRegexAtom::applyAtomWithValue (
 
 void oahStringWithRegexAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringWithRegexAtom::acceptIn ()" <<
@@ -6473,7 +6473,7 @@ void oahStringWithRegexAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahStringWithRegexAtom>*> (v)) {
         S_oahStringWithRegexAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringWithRegexAtom::visitStart ()" <<
@@ -6486,7 +6486,7 @@ void oahStringWithRegexAtom::acceptIn (basevisitor* v)
 
 void oahStringWithRegexAtom::setStringVariable (const std::string& value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -6504,7 +6504,7 @@ void oahStringWithRegexAtom::setStringVariable (const std::string& value)
 
 void oahStringWithRegexAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringWithRegexAtom::acceptOut ()" <<
@@ -6517,7 +6517,7 @@ void oahStringWithRegexAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahStringWithRegexAtom>*> (v)) {
         S_oahStringWithRegexAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringWithRegexAtom::visitEnd ()" <<
@@ -6530,7 +6530,7 @@ void oahStringWithRegexAtom::acceptOut (basevisitor* v)
 
 void oahStringWithRegexAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringWithRegexAtom::browseData ()" <<
@@ -6679,7 +6679,7 @@ void oahRationalAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -6717,7 +6717,7 @@ void oahRationalAtom::applyAtomWithValue (
       rationalValue =
         Rational (numerator, denominator);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "rationalValue = " <<
@@ -6742,7 +6742,7 @@ void oahRationalAtom::applyAtomWithValue (
 
 void oahRationalAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahRationalAtom::acceptIn ()" <<
@@ -6755,7 +6755,7 @@ void oahRationalAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahRationalAtom>*> (v)) {
         S_oahRationalAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahRationalAtom::visitStart ()" <<
@@ -6768,7 +6768,7 @@ void oahRationalAtom::acceptIn (basevisitor* v)
 
 void oahRationalAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahRationalAtom::acceptOut ()" <<
@@ -6781,7 +6781,7 @@ void oahRationalAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahRationalAtom>*> (v)) {
         S_oahRationalAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahRationalAtom::visitEnd ()" <<
@@ -6794,7 +6794,7 @@ void oahRationalAtom::acceptOut (basevisitor* v)
 
 void oahRationalAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahRationalAtom::browseData ()" <<
@@ -6928,7 +6928,7 @@ void oahNaturalNumbersSetElementAtom::applyAtomWithValue (
 
 void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahNaturalNumbersSetElementAtom::acceptIn ()" <<
@@ -6941,7 +6941,7 @@ void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahNaturalNumbersSetElementAtom>*> (v)) {
         S_oahNaturalNumbersSetElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahNaturalNumbersSetElementAtom::visitStart ()" <<
@@ -6954,7 +6954,7 @@ void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
 
 void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahNaturalNumbersSetElementAtom::acceptOut ()" <<
@@ -6967,7 +6967,7 @@ void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahNaturalNumbersSetElementAtom>*> (v)) {
         S_oahNaturalNumbersSetElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahNaturalNumbersSetElementAtom::visitEnd ()" <<
@@ -6980,7 +6980,7 @@ void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
 
 void oahNaturalNumbersSetElementAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahNaturalNumbersSetElementAtom::browseData ()" <<
@@ -7188,7 +7188,7 @@ void oahColorRGBAtom::applyAtomWithValue (
 
 void oahColorRGBAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahColorRGBAtom::acceptIn ()" <<
@@ -7201,7 +7201,7 @@ void oahColorRGBAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahColorRGBAtom>*> (v)) {
         S_oahColorRGBAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahColorRGBAtom::visitStart ()" <<
@@ -7214,7 +7214,7 @@ void oahColorRGBAtom::acceptIn (basevisitor* v)
 
 void oahColorRGBAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahColorRGBAtom::acceptOut ()" <<
@@ -7227,7 +7227,7 @@ void oahColorRGBAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahColorRGBAtom>*> (v)) {
         S_oahColorRGBAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahColorRGBAtom::visitEnd ()" <<
@@ -7240,7 +7240,7 @@ void oahColorRGBAtom::acceptOut (basevisitor* v)
 
 void oahColorRGBAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahColorRGBAtom::browseData ()" <<
@@ -7376,7 +7376,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
   // theString contains the bar number specification
   // decipher it to extract duration and perSecond values
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling atom '" <<
@@ -7398,7 +7398,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -7437,7 +7437,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
     s >> lilypondMeasureNumber;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "lilypondMeasureNumber = " <<
@@ -7452,7 +7452,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
 
 void oahIntSetElementAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahIntSetElementAtom::acceptIn ()" <<
@@ -7465,7 +7465,7 @@ void oahIntSetElementAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahIntSetElementAtom>*> (v)) {
         S_oahIntSetElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahIntSetElementAtom::visitStart ()" <<
@@ -7478,7 +7478,7 @@ void oahIntSetElementAtom::acceptIn (basevisitor* v)
 
 void oahIntSetElementAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahIntSetElementAtom::acceptOut ()" <<
@@ -7491,7 +7491,7 @@ void oahIntSetElementAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahIntSetElementAtom>*> (v)) {
         S_oahIntSetElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahIntSetElementAtom::visitEnd ()" <<
@@ -7504,7 +7504,7 @@ void oahIntSetElementAtom::acceptOut (basevisitor* v)
 
 void oahIntSetElementAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahIntSetElementAtom::browseData ()" <<
@@ -7695,7 +7695,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahStringSetElementAtom'" <<
@@ -7707,7 +7707,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
 
   std::string partName = theString;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> partName = \"" << partName << "\", " <<
@@ -7740,7 +7740,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
 
 void oahStringSetElementAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringSetElementAtom::acceptIn ()" <<
@@ -7753,7 +7753,7 @@ void oahStringSetElementAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahStringSetElementAtom>*> (v)) {
         S_oahStringSetElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringSetElementAtom::visitStart ()" <<
@@ -7766,7 +7766,7 @@ void oahStringSetElementAtom::acceptIn (basevisitor* v)
 
 void oahStringSetElementAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringSetElementAtom::acceptOut ()" <<
@@ -7779,7 +7779,7 @@ void oahStringSetElementAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahStringSetElementAtom>*> (v)) {
         S_oahStringSetElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringSetElementAtom::visitEnd ()" <<
@@ -7792,7 +7792,7 @@ void oahStringSetElementAtom::acceptOut (basevisitor* v)
 
 void oahStringSetElementAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringSetElementAtom::browseData ()" <<
@@ -7983,7 +7983,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahStringToIntMapElementAtom'" <<
@@ -7994,7 +7994,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   // theString contains the string int map specification
   // decipher it to extract duration and perSecond values
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahStringToIntMapElementAtom'" <<
@@ -8019,7 +8019,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -8064,7 +8064,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
     s >> lilypondMeasureNumber;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "musicxmlMeasureNumber = " <<
@@ -8083,7 +8083,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
 
 void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringToIntMapElementAtom::acceptIn ()" <<
@@ -8096,7 +8096,7 @@ void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahStringToIntMapElementAtom>*> (v)) {
         S_oahStringToIntMapElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringToIntMapElementAtom::visitStart ()" <<
@@ -8109,7 +8109,7 @@ void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
 
 void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringToIntMapElementAtom::acceptOut ()" <<
@@ -8122,7 +8122,7 @@ void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahStringToIntMapElementAtom>*> (v)) {
         S_oahStringToIntMapElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringToIntMapElementAtom::visitEnd ()" <<
@@ -8135,7 +8135,7 @@ void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
 
 void oahStringToIntMapElementAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringToIntMapElementAtom::browseData ()" <<
@@ -8332,7 +8332,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahStringToStringMapElementAtom'" <<
@@ -8343,7 +8343,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   // theString contains the string string map specification // JMI v0.9.66
   // decipher it to extract duration and perSecond values
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahStringToStringMapElementAtom'" <<
@@ -8368,7 +8368,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -8408,7 +8408,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
     key   = sm [1],
     value = sm [2];
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "key = " <<
@@ -8427,7 +8427,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
 
 void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringToStringMapElementAtom::acceptIn ()" <<
@@ -8440,7 +8440,7 @@ void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahStringToStringMapElementAtom>*> (v)) {
         S_oahStringToStringMapElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringToStringMapElementAtom::visitStart ()" <<
@@ -8453,7 +8453,7 @@ void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
 
 void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringToStringMapElementAtom::acceptOut ()" <<
@@ -8466,7 +8466,7 @@ void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahStringToStringMapElementAtom>*> (v)) {
         S_oahStringToStringMapElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringToStringMapElementAtom::visitEnd ()" <<
@@ -8479,7 +8479,7 @@ void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
 
 void oahStringToStringMapElementAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringToStringMapElementAtom::browseData ()" <<
@@ -8681,7 +8681,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahStringToStringMultiMapElementAtom'" <<
@@ -8692,7 +8692,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
   // theString contains the string string std::multimap specification
   // decipher it to extract duration and perSecond values
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahStringToStringMultiMapElementAtom'" <<
@@ -8717,7 +8717,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -8757,7 +8757,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
     key   = sm [1],
     value = sm [2];
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "key = " <<
@@ -8776,7 +8776,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
 
 void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringToStringMultiMapElementAtom::acceptIn ()" <<
@@ -8789,7 +8789,7 @@ void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahStringToStringMultiMapElementAtom>*> (v)) {
         S_oahStringToStringMultiMapElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringToStringMultiMapElementAtom::visitStart ()" <<
@@ -8802,7 +8802,7 @@ void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
 
 void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringToStringMultiMapElementAtom::acceptOut ()" <<
@@ -8815,7 +8815,7 @@ void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahStringToStringMultiMapElementAtom>*> (v)) {
         S_oahStringToStringMultiMapElementAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringToStringMultiMapElementAtom::visitEnd ()" <<
@@ -8828,7 +8828,7 @@ void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
 
 void oahStringToStringMultiMapElementAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringToStringMultiMapElementAtom::browseData ()" <<
@@ -9060,7 +9060,7 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -9108,7 +9108,7 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
 
 void oahStringAndIntegerAtom::setIntegerVariable (int value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -9126,7 +9126,7 @@ void oahStringAndIntegerAtom::setIntegerVariable (int value)
 
 void oahStringAndIntegerAtom::setStringVariable (const std::string& value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -9144,7 +9144,7 @@ void oahStringAndIntegerAtom::setStringVariable (const std::string& value)
 
 void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringAndIntegerAtom::acceptIn ()" <<
@@ -9157,7 +9157,7 @@ void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahStringAndIntegerAtom>*> (v)) {
         S_oahStringAndIntegerAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringAndIntegerAtom::visitStart ()" <<
@@ -9170,7 +9170,7 @@ void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
 
 void oahStringAndIntegerAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringAndIntegerAtom::acceptOut ()" <<
@@ -9183,7 +9183,7 @@ void oahStringAndIntegerAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahStringAndIntegerAtom>*> (v)) {
         S_oahStringAndIntegerAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringAndIntegerAtom::visitEnd ()" <<
@@ -9196,7 +9196,7 @@ void oahStringAndIntegerAtom::acceptOut (basevisitor* v)
 
 void oahStringAndIntegerAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringAndIntegerAtom::browseData ()" <<
@@ -9379,7 +9379,7 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -9433,7 +9433,7 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
 
 void oahStringAndTwoIntegersAtom::setStringVariable (const std::string& value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -9451,7 +9451,7 @@ void oahStringAndTwoIntegersAtom::setStringVariable (const std::string& value)
 
 void oahStringAndTwoIntegersAtom::setPrimaryIntegerVariable (int value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -9469,7 +9469,7 @@ void oahStringAndTwoIntegersAtom::setPrimaryIntegerVariable (int value)
 
 void oahStringAndTwoIntegersAtom::setSecondaryIntegerVariable (int value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -9487,7 +9487,7 @@ void oahStringAndTwoIntegersAtom::setSecondaryIntegerVariable (int value)
 
 void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringAndTwoIntegersAtom::acceptIn ()" <<
@@ -9500,7 +9500,7 @@ void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahStringAndTwoIntegersAtom>*> (v)) {
         S_oahStringAndTwoIntegersAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringAndTwoIntegersAtom::visitStart ()" <<
@@ -9513,7 +9513,7 @@ void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
 
 void oahStringAndTwoIntegersAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringAndTwoIntegersAtom::acceptOut ()" <<
@@ -9526,7 +9526,7 @@ void oahStringAndTwoIntegersAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahStringAndTwoIntegersAtom>*> (v)) {
         S_oahStringAndTwoIntegersAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahStringAndTwoIntegersAtom::visitEnd ()" <<
@@ -9539,7 +9539,7 @@ void oahStringAndTwoIntegersAtom::acceptOut (basevisitor* v)
 
 void oahStringAndTwoIntegersAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahStringAndTwoIntegersAtom::browseData ()" <<
@@ -9696,7 +9696,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahLengthUnitKindAtom'" <<
@@ -9707,7 +9707,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
   // theString contains the score output kind:
   // is it in the score output kinds map?
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahLengthUnitKindAtom'" <<
@@ -9750,7 +9750,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
 
 void oahLengthUnitKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLengthUnitKindAtom::acceptIn ()" <<
@@ -9763,7 +9763,7 @@ void oahLengthUnitKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahLengthUnitKindAtom>*> (v)) {
         S_oahLengthUnitKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahLengthUnitKindAtom::visitStart ()" <<
@@ -9776,7 +9776,7 @@ void oahLengthUnitKindAtom::acceptIn (basevisitor* v)
 
 void oahLengthUnitKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLengthUnitKindAtom::acceptOut ()" <<
@@ -9789,7 +9789,7 @@ void oahLengthUnitKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahLengthUnitKindAtom>*> (v)) {
         S_oahLengthUnitKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahLengthUnitKindAtom::visitEnd ()" <<
@@ -9802,7 +9802,7 @@ void oahLengthUnitKindAtom::acceptOut (basevisitor* v)
 
 void oahLengthUnitKindAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLengthUnitKindAtom::browseData ()" <<
@@ -9932,7 +9932,7 @@ void oahLengthAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahLengthAtom'" <<
@@ -9957,7 +9957,7 @@ void oahLengthAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -10037,7 +10037,7 @@ void oahLengthAtom::applyAtomWithValue (
 
 void oahLengthAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLengthAtom::acceptIn ()" <<
@@ -10050,7 +10050,7 @@ void oahLengthAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahLengthAtom>*> (v)) {
         S_oahLengthAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahLengthAtom::visitStart ()" <<
@@ -10063,7 +10063,7 @@ void oahLengthAtom::acceptIn (basevisitor* v)
 
 void oahLengthAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLengthAtom::acceptOut ()" <<
@@ -10076,7 +10076,7 @@ void oahLengthAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahLengthAtom>*> (v)) {
         S_oahLengthAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahLengthAtom::visitEnd ()" <<
@@ -10089,7 +10089,7 @@ void oahLengthAtom::acceptOut (basevisitor* v)
 
 void oahLengthAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahLengthAtom::browseData ()" <<
@@ -10216,7 +10216,7 @@ oahMidiTempoAtom::~oahMidiTempoAtom ()
 void oahMidiTempoAtom::setMidiTempoVariable (
   const msrMidiTempo& value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting midi tempo atom variable to " <<
@@ -10233,7 +10233,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahMidiTempoAtom'" <<
@@ -10244,7 +10244,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
   // theString contains the midi tempo specification
   // decipher it to extract duration and perSecond values
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'oahMidiTempoAtom'" <<
@@ -10269,7 +10269,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -10310,7 +10310,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
     s >> midiTempoPerSecond;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "midiTempoDuration  = " <<
@@ -10334,7 +10334,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
 
 void oahMidiTempoAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahMidiTempoAtom::acceptIn ()" <<
@@ -10347,7 +10347,7 @@ void oahMidiTempoAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahMidiTempoAtom>*> (v)) {
         S_oahMidiTempoAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahMidiTempoAtom::visitStart ()" <<
@@ -10360,7 +10360,7 @@ void oahMidiTempoAtom::acceptIn (basevisitor* v)
 
 void oahMidiTempoAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahMidiTempoAtom::acceptOut ()" <<
@@ -10373,7 +10373,7 @@ void oahMidiTempoAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahMidiTempoAtom>*> (v)) {
         S_oahMidiTempoAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahMidiTempoAtom::visitEnd ()" <<
@@ -10386,7 +10386,7 @@ void oahMidiTempoAtom::acceptOut (basevisitor* v)
 
 void oahMidiTempoAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahMidiTempoAtom::browseData ()" <<
@@ -10525,7 +10525,7 @@ void oahOptionNameHelpAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -10553,7 +10553,7 @@ void oahOptionNameHelpAtom::applyAtomWithDefaultValue (std::ostream& os)
 
 void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahOptionNameHelpAtom::acceptIn ()" <<
@@ -10566,7 +10566,7 @@ void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahOptionNameHelpAtom>*> (v)) {
         S_oahOptionNameHelpAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahOptionNameHelpAtom::visitStart ()" <<
@@ -10579,7 +10579,7 @@ void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
 
 void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahOptionNameHelpAtom::acceptOut ()" <<
@@ -10592,7 +10592,7 @@ void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahOptionNameHelpAtom>*> (v)) {
         S_oahOptionNameHelpAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahOptionNameHelpAtom::visitEnd ()" <<
@@ -10605,7 +10605,7 @@ void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
 
 void oahOptionNameHelpAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahOptionNameHelpAtom::browseData ()" <<
@@ -10717,7 +10717,7 @@ void oahQueryOptionNameAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -10736,7 +10736,7 @@ void oahQueryOptionNameAtom::applyAtomWithValue (
 
 void oahQueryOptionNameAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahQueryOptionNameAtom::acceptIn ()" <<
@@ -10749,7 +10749,7 @@ void oahQueryOptionNameAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahQueryOptionNameAtom>*> (v)) {
         S_oahQueryOptionNameAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahQueryOptionNameAtom::visitStart ()" <<
@@ -10762,7 +10762,7 @@ void oahQueryOptionNameAtom::acceptIn (basevisitor* v)
 
 void oahQueryOptionNameAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahQueryOptionNameAtom::acceptOut ()" <<
@@ -10775,7 +10775,7 @@ void oahQueryOptionNameAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahQueryOptionNameAtom>*> (v)) {
         S_oahQueryOptionNameAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahQueryOptionNameAtom::visitEnd ()" <<
@@ -10788,7 +10788,7 @@ void oahQueryOptionNameAtom::acceptOut (basevisitor* v)
 
 void oahQueryOptionNameAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahQueryOptionNameAtom::browseData ()" <<
@@ -10971,7 +10971,7 @@ void oahFindStringAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -11080,7 +11080,7 @@ void oahFindStringAtom::applyAtomWithValue (
 
 void oahFindStringAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahFindStringAtom::acceptIn ()" <<
@@ -11093,7 +11093,7 @@ void oahFindStringAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahFindStringAtom>*> (v)) {
         S_oahFindStringAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahFindStringAtom::visitStart ()" <<
@@ -11106,7 +11106,7 @@ void oahFindStringAtom::acceptIn (basevisitor* v)
 
 void oahFindStringAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahFindStringAtom::acceptOut ()" <<
@@ -11119,7 +11119,7 @@ void oahFindStringAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahFindStringAtom>*> (v)) {
         S_oahFindStringAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahFindStringAtom::visitEnd ()" <<
@@ -11132,7 +11132,7 @@ void oahFindStringAtom::acceptOut (basevisitor* v)
 
 void oahFindStringAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahFindStringAtom::browseData ()" <<
@@ -11245,7 +11245,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::applyAtomWithValue (
   std::ostream&      os)
 {
   // nothing to do, this option has already be applied early JMIJMIJMI
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling option name '" <<
@@ -11264,7 +11264,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::applyAtomWithValue (
 
 void oahIncludeOptionsAndArgumentsFileAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahIncludeOptionsAndArgumentsFileAtom::acceptIn ()" <<
@@ -11277,7 +11277,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahIncludeOptionsAndArgumentsFileAtom>*> (v)) {
         S_oahIncludeOptionsAndArgumentsFileAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahIncludeOptionsAndArgumentsFileAtom::visitStart ()" <<
@@ -11290,7 +11290,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptIn (basevisitor* v)
 
 void oahIncludeOptionsAndArgumentsFileAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahIncludeOptionsAndArgumentsFileAtom::acceptOut ()" <<
@@ -11303,7 +11303,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahIncludeOptionsAndArgumentsFileAtom>*> (v)) {
         S_oahIncludeOptionsAndArgumentsFileAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahIncludeOptionsAndArgumentsFileAtom::visitEnd ()" <<
@@ -11316,7 +11316,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::acceptOut (basevisitor* v)
 
 void oahIncludeOptionsAndArgumentsFileAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahIncludeOptionsAndArgumentsFileAtom::browseData ()" <<

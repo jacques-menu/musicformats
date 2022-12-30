@@ -212,7 +212,7 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
       msrDurationKindAsWholeNotes (
         durationKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) { // JMI
     gLogStream <<
       "=== rationalFromDurationKindAndDotsNumber()" <<
@@ -234,7 +234,7 @@ EXP Rational rationalFromDurationKindAndDotsNumber (
 
       increment *= Rational (1,2);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) { // JMI
     gLogStream <<
       "=== rationalFromDurationKindAndDotsNumber()" <<
@@ -573,7 +573,7 @@ Rational msrDuration::dottedDurationAsWholeNotes (
       msrDurationKindAsWholeNotes (
         fDurationKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) { // JMI
     print (gLogStream);
 
@@ -597,7 +597,7 @@ Rational msrDuration::dottedDurationAsWholeNotes (
 
       increment *= Rational (1,2);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) { // JMI
     gLogStream <<
       "=== dottedDurationAsWholeNotes()" <<
@@ -627,7 +627,7 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       msrDurationKindAsWholeNotes (
         fDurationKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) {
     gLogStream <<
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
@@ -645,7 +645,7 @@ Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       result *=
         Rational (3, 2);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) {
     gLogStream <<
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
@@ -821,7 +821,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
       msrDurationKindAsWholeNotes (
         fDurationKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) { // JMI
     print (gLogStream);
 
@@ -845,7 +845,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
 
       increment *= Rational (1,2);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) { // JMI
     gLogStream <<
       "=== dottedDurationAsWholeNotes()" <<
@@ -875,7 +875,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       msrDurationKindAsWholeNotes (
         fDurationKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) {
     gLogStream <<
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
@@ -893,7 +893,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
       result *=
         Rational (3, 2);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false) {
     gLogStream <<
       "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
@@ -951,7 +951,7 @@ std::string wholeNotesAsMsrString (
   const Rational& wholeNotes,
   int&            dotsNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> wholeNotesAsMsrString() 1 -------------------------------------" <<
@@ -965,7 +965,7 @@ std::string wholeNotesAsMsrString (
     numerator    = wholeNotes.getNumerator (),
     denominator  = wholeNotes.getDenominator ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numerator:   " << numerator <<
@@ -1000,7 +1000,7 @@ std::string wholeNotesAsMsrString (
   Bool
     integralNumberOfWholeNotes = denominator == 1;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> integralNumberOfWholeNotes: " <<
@@ -1022,7 +1022,7 @@ std::string wholeNotesAsMsrString (
 
   int  numeratorDots = msrNumberOfDots (numerator);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numeratorDots " << ": " << numeratorDots <<
@@ -1073,7 +1073,7 @@ std::string wholeNotesAsMsrString (
       result = s.str ();
     }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream s;
 
@@ -1100,7 +1100,7 @@ std::string wholeNotesAsMsrString (
     return result;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> denominatorDurationLog" << ": " <<
@@ -1114,7 +1114,7 @@ std::string wholeNotesAsMsrString (
     // adapt the duration to avoid even numerators if can be,
     // since dotted durations cannot be recognized otherwise
     // 6/1 thus becomes 3 \breve, hence '\longa.'
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> integralNumberOfWholeNotes,"
@@ -1127,7 +1127,7 @@ std::string wholeNotesAsMsrString (
       numerator /= 2;
       denominatorDurationLog -= 1;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
         gLogStream <<
           "--> numerator" << ": " <<
@@ -1144,7 +1144,7 @@ std::string wholeNotesAsMsrString (
     numeratorDots = msrNumberOfDots (numerator);
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numerator: " <<
@@ -1164,7 +1164,7 @@ std::string wholeNotesAsMsrString (
 
   if (numeratorDots >= 0 && denominatorDurationLog >= numeratorDots) {
     // take the dots into account
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> taking the dots into account" <<
@@ -1174,7 +1174,7 @@ std::string wholeNotesAsMsrString (
 
     denominatorDurationLog -= numeratorDots;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> denominatorDurationLog" << ": " <<
@@ -1188,7 +1188,7 @@ std::string wholeNotesAsMsrString (
   }
   else {
     // set the multiplying factor
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> setting the multiplying factor" <<
@@ -1204,7 +1204,7 @@ std::string wholeNotesAsMsrString (
     /* JMI
     multiplyingFactor = numerator;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> denominatorDurationLog" << ": " <<
@@ -1223,7 +1223,7 @@ std::string wholeNotesAsMsrString (
       // adapt multiplying factor
       multiplyingFactor /= 2;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
         gLogStream <<
           "--> denominatorDurationLog" << ": " <<
@@ -1238,7 +1238,7 @@ std::string wholeNotesAsMsrString (
     */
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numerator " << ": " <<
@@ -1300,7 +1300,7 @@ std::string wholeNotesAsMsrString (
 
   std::string result = s.str ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> wholeNotesAsMsrString() 2 -------------------------------------" <<

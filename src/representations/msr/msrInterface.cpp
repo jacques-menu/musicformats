@@ -21,9 +21,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahOah.h"
@@ -223,7 +223,7 @@ void displayMsrScoreSummary (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -274,7 +274,7 @@ void displayMsrScoreNames (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";

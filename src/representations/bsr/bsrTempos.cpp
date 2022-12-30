@@ -18,9 +18,9 @@
 
 #include "bsrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -240,7 +240,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
           size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
             gLogStream <<
               "There are " << smSize << " matches" <<
@@ -284,7 +284,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
             size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
             if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
               gLogStream <<
                 "There are " << smSize << " matches" <<
@@ -387,7 +387,7 @@ int bsrTempo::fetchCellsNumber() const
 
 void bsrTempo::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTempo::acceptIn ()" <<
@@ -400,7 +400,7 @@ void bsrTempo::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTempo>*> (v)) {
         S_bsrTempo elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTempo::visitStart ()" <<
@@ -413,7 +413,7 @@ void bsrTempo::acceptIn (basevisitor* v)
 
 void bsrTempo::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTempo::acceptOut ()" <<
@@ -426,7 +426,7 @@ void bsrTempo::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTempo>*> (v)) {
         S_bsrTempo elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTempo::visitEnd ()" <<

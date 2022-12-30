@@ -660,7 +660,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> End visiting S_accordion_registration" <<
@@ -883,7 +883,7 @@ void initializeBSR ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       gLogStream <<
         "Initializing BSR basic types handling" <<

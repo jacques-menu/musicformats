@@ -81,7 +81,7 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
   // protect library against multiple initializations
   if (! pGeneratorComponent) {
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Creating the LilyPondIssue34 component" <<

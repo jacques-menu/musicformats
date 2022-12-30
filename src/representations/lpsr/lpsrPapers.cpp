@@ -15,9 +15,9 @@
 
 #include "lpsrPapers.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -121,7 +121,7 @@ lpsrPaper::~lpsrPaper ()
 
 void lpsrPaper::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPaper::acceptIn ()" <<
@@ -134,7 +134,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPaper>*> (v)) {
         S_lpsrPaper elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPaper::visitStart ()" <<
@@ -147,7 +147,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
 
 void lpsrPaper::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPaper::acceptOut ()" <<
@@ -160,7 +160,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPaper>*> (v)) {
         S_lpsrPaper elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPaper::visitEnd ()" <<
@@ -173,7 +173,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
 
 void lpsrPaper::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPaper::browseData ()" <<
@@ -193,7 +193,7 @@ void lpsrPaper::browseData (basevisitor* v)
     browser.browse (*fPageLayout);
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrPaper::browseData ()" <<

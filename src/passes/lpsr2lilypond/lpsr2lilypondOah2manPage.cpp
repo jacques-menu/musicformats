@@ -13,9 +13,9 @@
 
 #include "lpsr2lilypondOah2manPage.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 
@@ -39,7 +39,7 @@ lpsr2lilypondOah2manPage::~lpsr2lilypondOah2manPage ()
 //________________________________________________________________________
 void lpsr2lilypondOah2manPage::visitStart (S_lilypondScoreOutputKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -68,7 +68,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondScoreOutputKindAtom& elt)
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondScoreOutputKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -82,7 +82,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondScoreOutputKindAtom& elt)
 //________________________________________________________________________
 void lpsr2lilypondOah2manPage::visitStart (S_lilypondTransposePartNameAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -111,7 +111,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondTransposePartNameAtom& elt)
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondTransposePartNameAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -125,7 +125,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondTransposePartNameAtom& elt)
 //________________________________________________________________________
 void lpsr2lilypondOah2manPage::visitStart (S_lilypondAbsoluteOctaveEntryAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -154,7 +154,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondAbsoluteOctaveEntryAtom& el
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAbsoluteOctaveEntryAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -168,7 +168,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAbsoluteOctaveEntryAtom& elt)
 //________________________________________________________________________
 void lpsr2lilypondOah2manPage::visitStart (S_lilypondRelativeOctaveEntryAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -197,7 +197,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondRelativeOctaveEntryAtom& el
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondRelativeOctaveEntryAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -211,7 +211,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondRelativeOctaveEntryAtom& elt)
 //________________________________________________________________________
 void lpsr2lilypondOah2manPage::visitStart (S_lilypondFixedOctaveEntryAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -240,7 +240,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondFixedOctaveEntryAtom& elt)
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondFixedOctaveEntryAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -254,7 +254,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondFixedOctaveEntryAtom& elt)
 //________________________________________________________________________
 void lpsr2lilypondOah2manPage::visitStart (S_lilypondAccidentalStyleKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -282,7 +282,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondAccidentalStyleKindAtom& el
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAccidentalStyleKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -296,7 +296,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondAccidentalStyleKindAtom& elt)
 //________________________________________________________________________
 void lpsr2lilypondOah2manPage::visitStart (S_lilypondChordsDisplayAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -325,7 +325,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondChordsDisplayAtom& elt)
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondChordsDisplayAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -339,7 +339,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondChordsDisplayAtom& elt)
 //________________________________________________________________________
 void lpsr2lilypondOah2manPage::visitStart (S_lilypondLyricsDurationsKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -369,7 +369,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_lilypondLyricsDurationsKindAtom& el
 
 void lpsr2lilypondOah2manPage::visitEnd (S_lilypondLyricsDurationsKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -383,7 +383,7 @@ void lpsr2lilypondOah2manPage::visitEnd (S_lilypondLyricsDurationsKindAtom& elt)
 //________________________________________________________________________
 void lpsr2lilypondOah2manPage::visitStart (S_oahMidiTempoAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -412,7 +412,7 @@ void lpsr2lilypondOah2manPage::visitStart (S_oahMidiTempoAtom& elt)
 
 void lpsr2lilypondOah2manPage::visitEnd (S_oahMidiTempoAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<

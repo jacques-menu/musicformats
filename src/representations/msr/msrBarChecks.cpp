@@ -17,9 +17,9 @@
 
 #include "mfAssert.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -80,7 +80,7 @@ msrBarCheck::msrBarCheck (
     : msrMeasureElement (
         inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
     gLogStream <<
       "Creating a bar check without next bar number" <<
@@ -102,7 +102,7 @@ msrBarCheck::msrBarCheck (
   fNextBarOriginalNumber = nextBarOriginalNumber;
   fNextBarPuristNumber   = nextBarPuristNumber;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
     gLogStream <<
       "Creating a bar check" <<
@@ -128,7 +128,7 @@ void msrBarCheck::setBarCheckUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -149,7 +149,7 @@ void msrBarCheck::setBarCheckUpLinkToMeasure (
 
 void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
     gLogStream <<
       "Setting bar check next bar number to '" <<

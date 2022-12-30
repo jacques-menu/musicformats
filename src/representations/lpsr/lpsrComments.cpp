@@ -11,8 +11,8 @@
 
 #include "visitor.h"
 
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "lpsrComments.h"
@@ -53,7 +53,7 @@ lpsrComment::~lpsrComment ()
 
 void lpsrComment::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrComment::acceptIn ()" <<
@@ -66,7 +66,7 @@ void lpsrComment::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrComment>*> (v)) {
         S_lpsrComment elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrComment::visitStart ()" <<
@@ -79,7 +79,7 @@ void lpsrComment::acceptIn (basevisitor* v)
 
 void lpsrComment::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrComment::acceptOut ()" <<
@@ -92,7 +92,7 @@ void lpsrComment::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrComment>*> (v)) {
         S_lpsrComment elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrComment::visitEnd ()" <<

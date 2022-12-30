@@ -14,9 +14,9 @@
 
 #include "msdlKeywords.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "waeOah.h"
@@ -491,7 +491,7 @@ std::string msdlKeywordKindAsMsdlString (
   msdlKeywordsLanguageKind languageKind,
   msdlKeywordKind          keywordKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
     gLogStream <<
       "--> msdlKeywordKindAsMsdlString()" <<
@@ -549,7 +549,7 @@ std::string msdlKeywordKindAsMsdlString (
     }
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
     gLogStream <<
       "<-- msdlKeywordKindAsMsdlString()" <<
@@ -654,7 +654,7 @@ msdlKeywordKind msdlKeywordKindFromString (
   msdlKeywordsLanguageKind languageKind,
   const std::string&       theString)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
     gLogStream <<
       "--> msdlKeywordKindFromString()" <<
@@ -712,7 +712,7 @@ msdlKeywordKind msdlKeywordKindFromString (
     }
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokensDetails ()) {
     gLogStream <<
       "<-- msdlKeywordKindFromString()" <<
@@ -811,7 +811,7 @@ void initializeMSDLKeywords ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       gLogStream <<
         "Initializing MSR basic types handling" <<

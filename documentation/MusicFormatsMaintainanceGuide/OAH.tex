@@ -263,7 +263,7 @@ in \oah{oahAtomsCollection.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahIntegerAtom::setIntegerVariable (int value)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -364,10 +364,10 @@ jacquesmenu@macmini > xml2ly -find lilypond-version
 The classes derived from \className{oahAtomStoringAValue} are:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grh 'public oahAtomStoringAValue'
-oah/harmoniesExtraOah.h:class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
-oah/harmoniesExtraOah.h:class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
-oah/harmoniesExtraOah.h:class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
-oah/harmoniesExtraOah.h:class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
+oah/oahHarmoniesExtraOah.h:class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
+oah/oahHarmoniesExtraOah.h:class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
+oah/oahHarmoniesExtraOah.h:class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
+oah/oahHarmoniesExtraOah.h:class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahIntegerAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahFloatAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahStringAtom : public oahAtomStoringAValue
@@ -1174,7 +1174,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
           }
 
           else {
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
             if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
               gLogStream <<
                 "**** Handling atom not expecting a value:" <<
@@ -1711,7 +1711,7 @@ Then in \method{oahHistoryAtom}{printHistory}, the call to \methodName{printVers
 \begin{lstlisting}[language=CPlusPlus]
 void oahHistoryAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahHistoryAtom" <<
@@ -2023,19 +2023,19 @@ jacquesmenu@macmini > xml2ly -query show-harmony-analysis
 
 This is done in \oahBoth{harmoniesExtraOah}. It suffices to call \function{createGlobalHarmoniesExtraOahGroup}:
 \begin{lstlisting}[language=CPlusPlus]
-#ifdef EXTRA_OAH_IS_ENABLED
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
 #endif
 \end{lstlisting}
 
-Macro {\tt EXTRA_OAH_IS_ENABLED} is defined or not in \oah{enableHarmoniesExtraOahIfDesired.h}:
+Macro {\tt OAH_HARMONIES_EXTRA_IS_ENABLED} is defined or not in \oah{mfEnableHarmoniesExtraIfDesired.h}:
 \begin{lstlisting}[language=CPlusPlus]
 // comment the following definition if no extra options are wanted
 
-#ifndef EXTRA_OAH_IS_ENABLED
-  #define EXTRA_OAH_IS_ENABLED
+#ifndef OAH_HARMONIES_EXTRA_IS_ENABLED
+  #define OAH_HARMONIES_EXTRA_IS_ENABLED
 #endif
 \end{lstlisting}
 
@@ -2095,7 +2095,7 @@ class EXP generalOahGroup : public oahGroup
 
 There are also harmonies-specific options grouped in \oahBoth{harmoniesExtraOah}. They are available as icing on the cake\index{Main}{icing on the cake} independently of any conversion activity:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src/oah > grep class   harmoniesExtraOah.h
+jacquesmenu@macmini: ~/musicformats-git-dev/src/oah > grep class   oahHarmoniesExtraOah.h
 class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
 class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
 class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue

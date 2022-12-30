@@ -17,14 +17,14 @@
 
 #include "oahWae.h"
 
-#include "enableHarmoniesExtraOahIfDesired.h"
-#ifdef EXTRA_OAH_IS_ENABLED
-  #include "harmoniesExtraOah.h"
+#include "mfEnableHarmoniesExtraIfDesired.h"
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
+  #include "oahHarmoniesExtraOah.h"
 #endif
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -36,8 +36,8 @@
 
 #include "oahOah.h"
 #include "waeOah.h"
-#include "outputFileOah.h"
-#include "displayOah.h"
+#include "mfOutputFileOah.h"
+#include "oahDisplayOah.h"
 
 #include "mxsrOah.h"
 #include "mxsr2msrOah.h"
@@ -90,7 +90,7 @@ R"(
 Usage: xml2brl [[option]* [MusicXMLFile|-] [[option]*
 )")
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Initializing xml2brl insider options handler \"" <<
@@ -153,7 +153,7 @@ R"(What xml2brl does:
 //______________________________________________________________________________
 void xml2brlInsiderHandler::createTheXml2brlPrefixes ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Creating the xml2brl prefixes" <<
@@ -168,7 +168,7 @@ void xml2brlInsiderHandler::createTheXml2brlPrefixes ()
 void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
   const std::string& serviceName)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Creating the xml2brl insider option groups" <<
@@ -190,7 +190,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -245,7 +245,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
   appendGroupToHandler (
     createGlobalBrailleGenerationOahGroup ());
 
-#ifdef EXTRA_OAH_IS_ENABLED
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
@@ -259,7 +259,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
       serviceName,
       fHandlerHeader));
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     // print the options handler initial state
     gLogStream <<
@@ -281,7 +281,7 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
 //______________________________________________________________________________
 void xml2brlInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Checking options and arguments from argc/argv in \"" <<
@@ -297,7 +297,7 @@ void xml2brlInsiderHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -385,7 +385,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         }
       }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
@@ -445,7 +445,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         } // switch
       }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
@@ -471,7 +471,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
           break;
       } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3 = " <<
@@ -499,7 +499,7 @@ void xml2brlInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void xml2brlInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -525,7 +525,7 @@ void xml2brlInsiderHandler::enforceHandlerQuietness ()
   gGlobalBrailleGenerationOahGroup->
     enforceGroupQuietness ();
 
-#ifdef EXTRA_OAH_IS_ENABLED
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
   gGlobalHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -542,7 +542,7 @@ void xml2brlInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2brlInsiderOahGroup::acceptIn ()" <<
@@ -555,7 +555,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_xml2brlInsiderOahGroup>*> (v)) {
         S_xml2brlInsiderOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2brlInsiderOahGroup::visitStart ()" <<
@@ -568,7 +568,7 @@ void xml2brlInsiderOahGroup::acceptIn (basevisitor* v)
 
 void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2brlInsiderOahGroup::acceptOut ()" <<
@@ -581,7 +581,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_xml2brlInsiderOahGroup>*> (v)) {
         S_xml2brlInsiderOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2brlInsiderOahGroup::visitEnd ()" <<
@@ -594,7 +594,7 @@ void xml2brlInsiderOahGroup::acceptOut (basevisitor* v)
 
 void xml2brlInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2brlInsiderOahGroup::browseData ()" <<
@@ -696,7 +696,7 @@ xml2brlInsiderOahGroup::~xml2brlInsiderOahGroup ()
 //_______________________________________________________________________________
 void xml2brlInsiderOahGroup::initializeXml2brlInsiderOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream << std::left <<
       "Initializing \"" <<
@@ -715,7 +715,7 @@ void xml2brlInsiderOahGroup::initializeXml2brlInsiderOahGroup ()
 //_______________________________________________________________________________
 void xml2brlInsiderOahGroup::createInsiderQuitSubGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream << std::left <<
       "Creating insider quit subgroup in \"" <<
@@ -821,7 +821,7 @@ S_xml2brlInsiderOahGroup createGlobalXml2brlOahGroup (
   const std::string& serviceName,
   const std::string& handlerHeader)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global xml2brl OAH group" <<

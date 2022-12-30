@@ -15,9 +15,9 @@
 #include "mfBool.h"
 #include "mfStringsHandling.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahOah.h"
@@ -2249,7 +2249,7 @@ std::ostream& operator << (std::ostream& os, const S_mfslCaseInputStatement& elt
 //   static Bool pPrivateThisMethodHasBeenRun (false);
 //
 //   if (! pPrivateThisMethodHasBeenRun) {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
 //       gLogStream <<
 //         "Initializing MFSL basic types handling" <<

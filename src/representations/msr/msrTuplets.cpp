@@ -13,9 +13,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -128,7 +128,7 @@ msrTuplet::msrTuplet (
 
   fTupletDisplayWholeNotes          = Rational (0, 1);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Creating tuplet:" <<
@@ -148,7 +148,7 @@ msrTuplet::~msrTuplet ()
 
 S_msrTuplet msrTuplet::createTupletNewbornClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Creating a newborn clone of tuplet " <<
@@ -253,7 +253,7 @@ void msrTuplet::setTupletUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -285,7 +285,7 @@ void msrTuplet::appendNoteToTuplet (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Appending note " <<
@@ -347,7 +347,7 @@ void msrTuplet::appendNoteToTuplet (
 
 void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Appending chord " <<
@@ -387,7 +387,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 
 void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Appending tuplet " <<
@@ -427,7 +427,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 
 void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Appending tuplet " <<
@@ -496,7 +496,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 {
   S_msrNote result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Removing first note from tuplet " <<
@@ -601,7 +601,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 {
   S_msrNote result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Removing last note from tuplet " <<
@@ -661,7 +661,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
       s.str ());
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "This last note from tuplet " <<
@@ -680,7 +680,7 @@ void msrTuplet::setMeasureElementMeasurePosition (
   const Rational&     measurePosition,
   const std::string&  context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -720,7 +720,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
   const S_msrMeasure& measure,
   const Rational&     measurePosition)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting tuplet members measure positions of " << asString () <<
@@ -819,7 +819,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
   int containingTupletNormalNotes)
   */
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "unapplySoundingFactorToTupletMembers ()" <<
@@ -858,7 +858,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
 void msrTuplet::finalizeTuplet (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Finalizing tuplet " <<

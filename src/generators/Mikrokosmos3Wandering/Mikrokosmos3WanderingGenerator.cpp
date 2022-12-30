@@ -13,9 +13,9 @@
 
 #include "Mikrokosmos3WanderingGenerator.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrParts.h"
@@ -23,7 +23,7 @@
 
 #include "oahOah.h"
 #include "msrOah.h"
-#include "displayOah.h"
+#include "oahDisplayOah.h"
 
 
 namespace MusicFormats

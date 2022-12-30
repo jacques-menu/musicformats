@@ -22,9 +22,9 @@
 #include "bsr2bsrWae.h"
 #include "bsr2brailleWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "waeOah.h"
@@ -67,7 +67,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   std::ostream&     err,
   const S_oahHandler& handler)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Translating an MSR score to braille in \"" <<
@@ -183,7 +183,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         handler->
           fetchOutputFileNameFromTheOptions ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2braille() outputFileName = \"" <<
@@ -194,7 +194,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 #endif
 
     if (! outputFileName.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2braille() output goes to standard output" <<
@@ -222,7 +222,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
     }
 
     else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2braille() output goes to file \"" <<
@@ -233,7 +233,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
 #endif
 
       // open output file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         err <<
           std::endl <<

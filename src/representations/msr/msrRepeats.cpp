@@ -19,9 +19,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrRepeatsEnumTypes.h"
@@ -91,7 +91,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
   const S_msrSegment&  segment,
   const std::string& context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSegments ()) {
     gLogStream <<
       "Appending segment '" <<
@@ -117,7 +117,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
   const S_msrRepeat& repeat,
   const std::string& context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending repeat '" <<
@@ -144,7 +144,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
   const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
       "Appending measures repeat '" <<
@@ -170,7 +170,7 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
   const S_msrMultipleFullBarRests& multipleFullBarRests,
   const std::string&    context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Appending multiple full-bar rests " <<
@@ -196,7 +196,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
   const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending voice element '" <<
@@ -550,7 +550,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
   const S_msrSegment&  segment,
   const std::string& context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending segment '" << segment <<
@@ -575,7 +575,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
   const S_msrRepeat& repeat,
   const std::string& context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending repeat '" << repeat <<
@@ -600,7 +600,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
   const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending measures repeat '" <<
@@ -626,7 +626,7 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
   const S_msrMultipleFullBarRests& multipleFullBarRests,
   const std::string&    context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending multiple full-bar rests " <<
@@ -652,7 +652,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
   const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending voice element '" << voiceElement <<
@@ -984,7 +984,7 @@ msrRepeat::msrRepeat (
 S_msrRepeat msrRepeat::createRepeatNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of a repeat" <<
@@ -1020,7 +1020,7 @@ void msrRepeat::setRepeatCommonPart (
     repeatCommonPart != nullptr,
     "repeatCommonPart is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Setting repeat common part containing " <<
@@ -1050,7 +1050,7 @@ void msrRepeat::addRepeatEndingToRepeat (
     repeatEnding != nullptr,
     "repeatEnding is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Adding ending '" <<
@@ -1063,7 +1063,7 @@ void msrRepeat::addRepeatEndingToRepeat (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
@@ -1187,7 +1187,7 @@ void msrRepeat::addRepeatEndingToRepeat (
     setRepeatEndingInternalNumber (
       ++ fRepeatEndingsInternalCounter);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
@@ -1201,7 +1201,7 @@ void msrRepeat::appendSegmentToRepeat (
   const S_msrSegment&  segment,
   const std::string& context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending segment '" <<
@@ -1271,7 +1271,7 @@ void msrRepeat::appendSegmentToRepeat (
       break;
   } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     displayRepeat (
       inputLineNumber,
@@ -1285,7 +1285,7 @@ void msrRepeat::appendRepeatToRepeat (
   const S_msrRepeat& repeat,
   const std::string& context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending repeat '" <<
@@ -1355,7 +1355,7 @@ void msrRepeat::appendRepeatToRepeat (
       break;
   } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     displayRepeat (
       inputLineNumber,
@@ -1369,7 +1369,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
   const S_msrMeasureRepeat& measureRepeat,
   const std::string&      context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending measures repeat '" <<
@@ -1439,7 +1439,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
       break;
   } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     displayRepeat (
       inputLineNumber,
@@ -1453,7 +1453,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
   const S_msrMultipleFullBarRests& multipleFullBarRests,
   const std::string&    context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending multiple full-bar rests " <<
@@ -1522,7 +1522,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
       break;
   } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     displayRepeat (
       inputLineNumber,
@@ -1773,7 +1773,7 @@ void msrRepeat::printFull (std::ostream& os) const
     fRepeatEndings.size () <<
     std::endl;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
 //     // print the current repeat build phase
 //     os << std::left <<

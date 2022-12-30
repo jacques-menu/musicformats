@@ -21,7 +21,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-EXP int xml2ly_BIS (
+EXP int xml2ly (
   int   argc,
   char* argv[]);
 
@@ -33,9 +33,9 @@ EXP int xml2ly (
 
 //_______________________________________________________________________________
 EXP int xml2ly (
-  const char*      buffer,
-  std::ostream&    out,
-  std::ostream&    err);
+  const char*   buffer,
+  std::ostream& out,
+  std::ostream& err);
 
 
 }

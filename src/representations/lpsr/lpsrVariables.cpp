@@ -46,7 +46,7 @@ lpsrVariableUseCommand::~lpsrVariableUseCommand()
 
 void lpsrVariableUseCommand::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrVariableUseCommand::acceptIn()" <<
@@ -59,7 +59,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrVariableUseCommand>*> (v)) {
         S_lpsrVariableUseCommand elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrVariableUseCommand::visitStart()" <<
@@ -72,7 +72,7 @@ void lpsrVariableUseCommand::acceptIn (basevisitor* v)
 
 void lpsrVariableUseCommand::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrVariableUseCommand::acceptOut()" <<
@@ -85,7 +85,7 @@ void lpsrVariableUseCommand::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrVariableUseCommand>*> (v)) {
         S_lpsrVariableUseCommand elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrVariableUseCommand::visitEnd()" <<

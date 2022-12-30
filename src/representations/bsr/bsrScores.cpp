@@ -60,7 +60,7 @@ bsrScore::~bsrScore ()
 
 void bsrScore::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrScore::acceptIn ()" <<
@@ -73,7 +73,7 @@ void bsrScore::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrScore>*> (v)) {
         S_bsrScore elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrScore::visitStart ()" <<
@@ -86,7 +86,7 @@ void bsrScore::acceptIn (basevisitor* v)
 
 void bsrScore::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrScore::acceptOut ()" <<
@@ -99,7 +99,7 @@ void bsrScore::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrScore>*> (v)) {
         S_bsrScore elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrScore::visitEnd ()" <<
@@ -112,7 +112,7 @@ void bsrScore::acceptOut (basevisitor* v)
 
 void bsrScore::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrScore::browseData ()" <<
@@ -137,7 +137,7 @@ void bsrScore::browseData (basevisitor* v)
     browser.browse (*(*i));
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% <== bsrScore::browseData ()" <<

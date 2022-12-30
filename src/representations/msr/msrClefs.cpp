@@ -411,7 +411,7 @@ S_msrClef msrClef::createClefFromString (
 
   S_msrClef result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating clef from string \"" <<
@@ -427,7 +427,7 @@ S_msrClef msrClef::createClefFromString (
     "[[:space:]]*"
     );
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "regularExpression = " <<
@@ -443,7 +443,7 @@ S_msrClef msrClef::createClefFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -490,7 +490,7 @@ S_msrClef msrClef::createClefFromString (
         inputLineNumber,
         clefName);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "clefName = \"" <<
@@ -520,7 +520,7 @@ void msrClef::setClefUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 

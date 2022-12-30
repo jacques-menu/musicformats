@@ -15,9 +15,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -39,7 +39,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating hiddenMeasureAndBarLine" <<
@@ -84,7 +84,7 @@ void msrHiddenMeasureAndBarLine::setHiddenMeasureAndBarLineUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 

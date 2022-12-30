@@ -17,9 +17,9 @@
 
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfConstants.h"
@@ -83,7 +83,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrReplaceClefAtom'" <<
@@ -94,7 +94,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   // theString contains the replace clef specification
   // decipher it to extract the old and new clef names
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> theString = \"" << theString << "\", " <<
@@ -115,7 +115,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -127,7 +127,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 #endif
 
   if (smSize == 3) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
@@ -152,7 +152,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     originalClefName    = sm [1],
     destinationClefName = sm [2];
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> originalClefName = \"" << originalClefName << "\", " <<
@@ -199,7 +199,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
 void msrReplaceClefAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrReplaceClefAtom::acceptIn ()" <<
@@ -212,7 +212,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrReplaceClefAtom>*> (v)) {
         S_msrReplaceClefAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitStart ()" <<
@@ -225,7 +225,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
 
 void msrReplaceClefAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrReplaceClefAtom::acceptOut ()" <<
@@ -238,7 +238,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrReplaceClefAtom>*> (v)) {
         S_msrReplaceClefAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitEnd ()" <<
@@ -251,7 +251,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
 
 void msrReplaceClefAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrReplaceClefAtom::browseData ()" <<
@@ -479,7 +479,7 @@ void mxsr2msrOahGroup::createTheMxsr2msrPrefixes (
 
 void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeMxsr2msrTraceOptions ();
@@ -526,7 +526,7 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
   initializeCombinedOptionsOptions ();
 }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
 void mxsr2msrOahGroup::initializeMxsr2msrTraceOptions ()
 {
   S_oahSubGroup
@@ -1566,7 +1566,7 @@ void mxsr2msrOahGroup::enforceGroupQuietness ()
 //______________________________________________________________________________
 void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Checking the consistency of mxsr2msrOahGroup group \"" <<
@@ -1918,7 +1918,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDecresc (
 //______________________________________________________________________________
 void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsr2msrOahGroup::acceptIn ()" <<
@@ -1931,7 +1931,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_mxsr2msrOahGroup>*> (v)) {
         S_mxsr2msrOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitStart ()" <<
@@ -1944,7 +1944,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 
 void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsr2msrOahGroup::acceptOut ()" <<
@@ -1957,7 +1957,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_mxsr2msrOahGroup>*> (v)) {
         S_mxsr2msrOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitEnd ()" <<
@@ -1970,7 +1970,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 
 void mxsr2msrOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsr2msrOahGroup::browseData ()" <<
@@ -2418,7 +2418,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   --gIndenter;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 
@@ -2453,7 +2453,7 @@ std::ostream& operator << (std::ostream& os, const S_mxsr2msrOahGroup& elt)
 S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
   const S_oahHandler& handler)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global mxsr2msr OAH group" <<

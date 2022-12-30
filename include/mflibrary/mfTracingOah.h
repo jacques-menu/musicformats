@@ -13,9 +13,9 @@
 #define ___tracingOah___
 
 
-#include "oahEnableTracingIfDesired.h"
+#include "mfEnableTracingIfDesired.h"
 
-#ifdef TRACING_IS_ENABLED // encompasses this whole file
+#ifdef OAH_TRACING_IS_ENABLED // encompasses this whole file
 
 
 #include <set>

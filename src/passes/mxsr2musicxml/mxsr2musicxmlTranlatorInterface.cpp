@@ -19,9 +19,9 @@
 
 #include "mxsr2musicxmlWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahEarlyOptions.h"
@@ -51,7 +51,7 @@ EXP void translateMxsrToMusicXML (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -68,7 +68,7 @@ EXP void translateMxsrToMusicXML (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "translateMxsrToMusicXML() outputFileName = \"" <<
@@ -84,7 +84,7 @@ EXP void translateMxsrToMusicXML (
   // insert the MXSR into it
   sxmlfile->set (theMxsr);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "xmlFile2musicxml() outputFileName = \"" <<
@@ -95,7 +95,7 @@ EXP void translateMxsrToMusicXML (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2musicxml() output goes to standard output" <<
@@ -109,7 +109,7 @@ EXP void translateMxsrToMusicXML (
   }
 
   else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2musicxml() output goes to file \"" <<
@@ -122,7 +122,7 @@ EXP void translateMxsrToMusicXML (
     // open output file
     std::ofstream outputFileStream;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<

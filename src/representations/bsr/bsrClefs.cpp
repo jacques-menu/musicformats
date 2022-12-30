@@ -15,9 +15,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "bsrClefs.h"
@@ -51,7 +51,7 @@ bsrClef::bsrClef (
 
   fClefCellsList = buildCellsList ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
     gLogStream <<
       "Creating bsrClef '" <<
@@ -155,7 +155,7 @@ int bsrClef::fetchCellsNumber() const
 
 void bsrClef::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrClef::acceptIn ()" <<
@@ -168,7 +168,7 @@ void bsrClef::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrClef>*> (v)) {
         S_bsrClef elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrClef::visitStart ()" <<
@@ -181,7 +181,7 @@ void bsrClef::acceptIn (basevisitor* v)
 
 void bsrClef::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrClef::acceptOut ()" <<
@@ -194,7 +194,7 @@ void bsrClef::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrClef>*> (v)) {
         S_bsrClef elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrClef::visitEnd ()" <<

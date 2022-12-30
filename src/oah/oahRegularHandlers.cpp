@@ -14,9 +14,9 @@
 
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -63,7 +63,7 @@ oahRegularHandler::oahRegularHandler (
       insiderOahHandler->getHandlerUsage ())
 {
   // create the insider handler
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the insider handler for \"" <<
@@ -85,7 +85,7 @@ oahRegularHandler::~oahRegularHandler ()
 
 void oahRegularHandler::initializeOahRegularHandler ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing the regular handler \"" <<
@@ -103,7 +103,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
   // createRegularHandlerGroups() is executed
   // in the sub-classes for code homogeneity
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
   // print the options handler initial state
   gLogStream <<
@@ -134,7 +134,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
     group != nullptr,
     "group is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Appending group \"" <<
@@ -171,7 +171,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
     group != nullptr,
     "group is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Prepending group \"" <<

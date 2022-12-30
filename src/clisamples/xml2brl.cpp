@@ -21,16 +21,16 @@
 #include "waeInterface.h"
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahBasicTypes.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
-#include "displayOah.h"
+#include "oahDisplayOah.h"
 
 #include "oahEarlyOptions.h"
 
@@ -105,7 +105,7 @@ int main (int argc, char* argv[])
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " xml2brl()" <<
@@ -207,7 +207,7 @@ int main (int argc, char* argv[])
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -252,7 +252,7 @@ int main (int argc, char* argv[])
   // welcome message
   // ------------------------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     int
       outputFileNameSize =
@@ -334,7 +334,7 @@ int main (int argc, char* argv[])
   // acknoledge end of command line analysis
   // ------------------------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       "The command line options and arguments have been analyzed" <<
@@ -350,7 +350,7 @@ int main (int argc, char* argv[])
   try {
     if (inputSourceName == "-") {
       // MusicXML data comes from standard input
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
           gLogStream << "Reading standard input" << std::endl;
       }
@@ -365,7 +365,7 @@ int main (int argc, char* argv[])
     }
     else {
       // MusicXML data comes from a file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
           gLogStream <<
             "Reading file \"" <<

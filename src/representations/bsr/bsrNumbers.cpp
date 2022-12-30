@@ -151,7 +151,7 @@ int bsrNumber::fetchCellsNumber() const
 
 void bsrNumber::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrNumber::acceptIn ()" <<
@@ -164,7 +164,7 @@ void bsrNumber::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrNumber>*> (v)) {
         S_bsrNumber elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrNumber::visitStart ()" <<
@@ -177,7 +177,7 @@ void bsrNumber::acceptIn (basevisitor* v)
 
 void bsrNumber::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrNumber::acceptOut ()" <<
@@ -190,7 +190,7 @@ void bsrNumber::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrNumber>*> (v)) {
         S_bsrNumber elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrNumber::visitEnd ()" <<

@@ -11,14 +11,14 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
-#include "enableHarmoniesExtraOahIfDesired.h"
-#ifdef EXTRA_OAH_IS_ENABLED
-  #include "harmoniesExtraOah.h"
+#include "mfEnableHarmoniesExtraIfDesired.h"
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
+  #include "oahHarmoniesExtraOah.h"
 #endif
 
 #include "mfStringsHandling.h"
@@ -74,7 +74,7 @@ msr2lilypondRegularHandler::msr2lilypondRegularHandler (
   // create the regular handler groups
   createRegularHandlerGroups ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
   // print the options handler initial state
   gLogStream <<
@@ -91,7 +91,7 @@ msr2lilypondRegularHandler::~msr2lilypondRegularHandler ()
 
 void msr2lilypondRegularHandler::createRegularHandlerGroups ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the regular handler groups for \"" << fHandlerHeader << "\"" <<
@@ -162,7 +162,7 @@ void msr2lilypondRegularHandler::createRegularHandlerGroups ()
 
   createMidiRegularGroup ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "All the regular handler groups for \"" <<
@@ -204,7 +204,7 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_LONG_OPTION_NAME, subGroup);
 #endif
@@ -252,7 +252,7 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-lpsr", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_OAH_LONG_OPTION_NAME, subGroup);
   registerAtomInRegularSubgroup (K_TRACE_OAH_DETAILS_LONG_OPTION_NAME, subGroup);
 
@@ -961,7 +961,7 @@ void msr2lilypondRegularHandler::createChordsRegularGroup ()
 
   // atoms
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-chords", subGroup);
 #endif
 
@@ -1265,7 +1265,7 @@ void msr2lilypondRegularHandler::createHarmoniesRegularGroup ()
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 
-#ifdef EXTRA_OAH_IS_ENABLED
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
   registerAtomInRegularSubgroup ("show-harmonies-structures", subGroup);
   registerAtomInRegularSubgroup ("show-all-harmonies-contents", subGroup);
   registerAtomInRegularSubgroup ("show-harmony-details", subGroup);
@@ -1637,7 +1637,7 @@ void msr2lilypondRegularHandler::createMidiRegularGroup ()
 //______________________________________________________________________________
 void msr2lilypondRegularHandler::checkOptionsAndArguments () const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<

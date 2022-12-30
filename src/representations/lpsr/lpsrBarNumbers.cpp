@@ -46,7 +46,7 @@ lpsrBarNumberCheck::~lpsrBarNumberCheck ()
 
 void lpsrBarNumberCheck::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBarNumberCheck::acceptIn ()" <<
@@ -59,7 +59,7 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBarNumberCheck>*> (v)) {
         S_lpsrBarNumberCheck elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBarNumberCheck::visitStart ()" <<
@@ -72,7 +72,7 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
 
 void lpsrBarNumberCheck::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBarNumberCheck::acceptOut ()" <<
@@ -85,7 +85,7 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBarNumberCheck>*> (v)) {
         S_lpsrBarNumberCheck elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBarNumberCheck::visitEnd ()" <<
@@ -139,7 +139,7 @@ lpsrBarCommand::~lpsrBarCommand ()
 
 void lpsrBarCommand::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBarCommand::acceptIn ()" <<
@@ -152,7 +152,7 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBarCommand>*> (v)) {
         S_lpsrBarCommand elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBarCommand::visitStart ()" <<
@@ -165,7 +165,7 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
 
 void lpsrBarCommand::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrBarCommand::acceptOut ()" <<
@@ -178,7 +178,7 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrBarCommand>*> (v)) {
         S_lpsrBarCommand elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrBarCommand::visitEnd ()" <<

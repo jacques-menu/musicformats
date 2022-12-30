@@ -75,7 +75,7 @@ Rational::Rational (const std::string &theString)
       numerator   = sm [1],
       denominator = sm [2];
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (false) {
       gLogStream <<
         "--> numerator = \"" << numerator << "\", " <<

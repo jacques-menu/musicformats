@@ -49,7 +49,7 @@ ischemeDriver::ischemeDriver ()
 
   if (fScriptName == "-") {
     // iScheme data comes from standard input
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream << "Reading standard input" << std::endl;
     }
@@ -58,7 +58,7 @@ ischemeDriver::ischemeDriver ()
 
   else {
     // iScheme data comes from a file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Reading file \"" << fScriptName << "\"" <<

@@ -22,9 +22,9 @@
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -68,7 +68,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
   std::ostream& err,
   const S_oahHandler&  handler)
 {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
 //     gLogStream <<
 //       std::endl <<
@@ -289,7 +289,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //         handler->
 //           fetchOutputFileNameFromTheOptions ();
 //
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 //       err <<
 //         "xmlFile2lilypond() outputFileName = \"" <<
@@ -300,7 +300,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 // #endif
 //
 //     if (! outputFileName.size ()) {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 //         err <<
 //           "xmlFile2lilypond() output goes to standard output" <<
@@ -336,7 +336,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //     }
 //
 //     else {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 //         err <<
 //           "xmlFile2lilypond() output goes to file \"" <<
@@ -347,7 +347,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 // #endif
 //
 //       // open output file
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
 //         err <<
 //           std::endl <<
@@ -440,7 +440,7 @@ static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI
 //   }
 //
 //   else {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 //   err <<
 //     "xmlFile2musicxml(), sxmlfile is NULL" <<
@@ -468,7 +468,7 @@ static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI
 //
 //   // print the options and arguments
 //   // ------------------------------------------------------
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 //     gLogStream <<
 //       handlerOptionsAndArguments;
@@ -488,7 +488,7 @@ static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI
 //   Bool insiderOption =
 //     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 //
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 //     gLogStream <<
 //       serviceName << " main()" <<

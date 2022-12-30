@@ -12,9 +12,9 @@
 #ifndef ___msr2lilypondInsiderHandler___
 #define ___msr2lilypondInsiderHandler___
 
-#include "enableHarmoniesExtraOahIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "harmoniesExtraOah.h"
+#include "mfEnableHarmoniesExtraIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "oahHarmoniesExtraOah.h"
 #endif
 
 #include "oahAtomsCollection.h"

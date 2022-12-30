@@ -22,9 +22,9 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2guidoWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahEarlyOptions.h"
@@ -118,7 +118,7 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
       std::endl <<

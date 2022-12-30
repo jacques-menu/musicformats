@@ -13,9 +13,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -71,7 +71,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
   const S_msrSegment&  segment,
   const std::string& context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending segment '" << segment <<
@@ -96,7 +96,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
   S_msrBeatRepeat beatRepeat,
   const std::string&   context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending beatRepeat '" << beatRepeat <<
@@ -121,7 +121,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
   const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending voice element '" << voiceElement <<
@@ -459,7 +459,7 @@ msrBeatRepeatPattern::~msrBeatRepeatPattern ()
 void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
   const S_msrSegment& beatRepeatPatternSegment)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Setting measures repeat pattern segment containing " <<
@@ -654,7 +654,7 @@ msrBeatRepeatReplicas::~msrBeatRepeatReplicas ()
 void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
   const S_msrSegment& beatRepeatReplicasSegment)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Setting measures repeat replicas segment containing " <<
@@ -869,7 +869,7 @@ msrBeatRepeat::~msrBeatRepeat ()
 S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of measures repeat '" <<
@@ -899,7 +899,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
 void msrBeatRepeat::setBeatRepeatPattern (
   const S_msrBeatRepeatPattern& beatRepeatPattern)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Setting measures repeat pattern containing " <<
@@ -928,7 +928,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
 void msrBeatRepeat::setBeatRepeatReplicas (
   const S_msrBeatRepeatReplicas& beatRepeatReplicas)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Setting measures repeat replicas containing " <<
@@ -1066,7 +1066,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
     score->getInhibitBeatRepeatReplicasBrowsing ();
 
   if (inhibitBeatRepeatReplicasBrowsing) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalMsrOahGroup->getTraceMsrVisitors () || gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
       gLogStream <<
         "% ==> visiting measures repeat replicas is inhibited" <<
@@ -1235,7 +1235,7 @@ void msrBeatRepeat::print (std::ostream& os) const
 
   ++gIndenter;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     // print the current measures repeat build phase
     const int fieldWidth = 36;

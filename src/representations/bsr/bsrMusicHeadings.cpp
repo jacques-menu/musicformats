@@ -85,7 +85,7 @@ S_bsrCellsList bsrMusicHeading::buildCellsList () const
 
 void bsrMusicHeading::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrMusicHeading::acceptIn ()" <<
@@ -98,7 +98,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrMusicHeading>*> (v)) {
         S_bsrMusicHeading elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrMusicHeading::visitStart ()" <<
@@ -111,7 +111,7 @@ void bsrMusicHeading::acceptIn (basevisitor* v)
 
 void bsrMusicHeading::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrMusicHeading::acceptOut ()" <<
@@ -124,7 +124,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrMusicHeading>*> (v)) {
         S_bsrMusicHeading elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrMusicHeading::visitEnd ()" <<
@@ -137,7 +137,7 @@ void bsrMusicHeading::acceptOut (basevisitor* v)
 
 void bsrMusicHeading::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrScore::browseData ()" <<
@@ -163,7 +163,7 @@ void bsrMusicHeading::browseData (basevisitor* v)
     browser.browse (*fMusicHeadingTimeSignatureSignature);
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% <== bsrScore::browseData ()" <<

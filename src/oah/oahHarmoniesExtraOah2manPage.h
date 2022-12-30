@@ -12,11 +12,11 @@
 #ifndef ___harmoniesExtraOah2manPage___
 #define ___harmoniesExtraOah2manPage___
 
-#include "enableHarmoniesExtraOahIfDesired.h"
+#include "mfEnableHarmoniesExtraIfDesired.h"
 
-#ifdef EXTRA_OAH_IS_ENABLED
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
 
-#include "harmoniesExtraOah.h"
+#include "oahHarmoniesExtraOah.h"
 
 #include "oah2manPage.h"
 

@@ -16,9 +16,9 @@
 
 #include "libmusicxml.h" // for mfMusicformatsErrorKind
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -31,7 +31,7 @@
 
 #include "oahOah.h"
 #include "oahWae.h"
-#include "displayOah.h"
+#include "oahDisplayOah.h"
 
 #include "waeInterface.h"
 
@@ -216,7 +216,7 @@ int main (int argc, char*  argv[])
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<
@@ -236,7 +236,7 @@ int main (int argc, char*  argv[])
       gGlobalOahEarlyOptions.
         getEarlyMultiGenerationOutputKind ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> multiGenerationOutputKind: " <<
@@ -464,7 +464,7 @@ int main (int argc, char*  argv[])
       gGlobalMsrGeneratorsOahGroup->
         getGenerationAPIKind ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> generationAPIKind: " <<
@@ -479,7 +479,7 @@ int main (int argc, char*  argv[])
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -595,7 +595,7 @@ int main (int argc, char*  argv[])
       break;
   } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
       gLogStream <<

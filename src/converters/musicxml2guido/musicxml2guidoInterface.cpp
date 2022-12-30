@@ -24,9 +24,9 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2guidoWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -68,7 +68,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   std::ostream& err,
   const S_oahHandler&  handler)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
       std::endl <<
@@ -280,7 +280,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   }
 
   else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   err <<
     "xmlFile2guido(), sxmlfile is NULL" <<
@@ -308,7 +308,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       handlerOptionsAndArguments;
@@ -327,7 +327,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<

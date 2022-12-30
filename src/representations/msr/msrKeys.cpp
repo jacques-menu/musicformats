@@ -22,9 +22,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrPitchesNames.h"
@@ -85,7 +85,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Creating Humdrum/Scot key item" <<
@@ -121,7 +121,7 @@ Bool msrHumdrumScotKeyItem::isEqualTo (
 void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
   msrDiatonicPitchKind diatonicPitchKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Setting Humdrum/Scot key item diatonic pitch to '" <<
@@ -137,7 +137,7 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
 void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
   msrAlterationKind alterationKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Setting Humdrum/Scot key item alteration to '" <<
@@ -152,7 +152,7 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
 
 void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Setting Humdrum/Scot key item octave to '" <<
@@ -376,7 +376,7 @@ msrKey::msrKey ( // for traditional keys
   // initialization in all cases
   fKeyItemsOctavesAreSpecified = false;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Creating traditional key '" <<
@@ -399,7 +399,7 @@ msrKey::msrKey ( // for Humdrum/Scot keys
   // initialization in all cases
   fKeyItemsOctavesAreSpecified = false;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Creating Humdrum/Scot key '" <<
@@ -422,7 +422,7 @@ void msrKey::setKeyUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -502,7 +502,7 @@ Bool msrKey::isEqualTo (S_msrKey otherKey) const
 void msrKey::appendHumdrumScotKeyItem (
   const S_msrHumdrumScotKeyItem& item)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Append item '" <<
@@ -534,7 +534,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
   S_msrKey result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating traditional key from string \"" <<
@@ -552,7 +552,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     "[[:space:]]*"
     );
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "regularExpression = " <<
@@ -568,7 +568,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -625,7 +625,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
         inputLineNumber,
         keyMode);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "keyTonic = \"" <<

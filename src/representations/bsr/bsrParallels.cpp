@@ -43,7 +43,7 @@ bsrParallel::bsrParallel (
 
 bsrParallel::~bsrParallel ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceParallels ()) {
     gLogStream <<
       "Creating bsrParallel '" <<
@@ -57,7 +57,7 @@ bsrParallel::~bsrParallel ()
 
 void bsrParallel::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrParallel::acceptIn ()" <<
@@ -70,7 +70,7 @@ void bsrParallel::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrParallel>*> (v)) {
         S_bsrParallel elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrParallel::visitStart ()" <<
@@ -83,7 +83,7 @@ void bsrParallel::acceptIn (basevisitor* v)
 
 void bsrParallel::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrParallel::acceptOut ()" <<
@@ -96,7 +96,7 @@ void bsrParallel::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrParallel>*> (v)) {
         S_bsrParallel elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrParallel::visitEnd ()" <<

@@ -21,9 +21,9 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2musicxmlWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahOah.h"
@@ -90,7 +90,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
     // start the clock
     clock_t startClock = clock ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       std::string separator =
         "%--------------------------------------------------------------";
@@ -264,7 +264,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
     gLogStream <<
       handlerOptionsAndArguments;
@@ -283,7 +283,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<
@@ -391,7 +391,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
   std::ostream&           err)
 {
   // open input file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
@@ -438,7 +438,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
   std::ostream&     err)
 {
   // open input file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<

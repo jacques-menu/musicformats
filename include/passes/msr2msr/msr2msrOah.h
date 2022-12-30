@@ -289,7 +289,7 @@ class EXP msr2msrOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     void                  initializMsr2msrTraceOptions ();
 #endif
 

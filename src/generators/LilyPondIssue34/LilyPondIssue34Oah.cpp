@@ -18,9 +18,9 @@
 
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahOah.h"
@@ -156,7 +156,7 @@ void LilyPondIssue34OahGroup::initializeMultiGenerationOutputOptions ()
 
 void LilyPondIssue34OahGroup::initializeLilyPondIssue34OahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 // JMI  initializeLilyPondIssue34tracingOah ();
@@ -203,7 +203,7 @@ void LilyPondIssue34OahGroup::checkGroupOptionsConsistency ()
 
 void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34OahGroup::acceptIn ()" <<
@@ -216,7 +216,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_LilyPondIssue34OahGroup>*> (v)) {
         S_LilyPondIssue34OahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitStart ()" <<
@@ -229,7 +229,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
 
 void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34OahGroup::acceptOut ()" <<
@@ -242,7 +242,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_LilyPondIssue34OahGroup>*> (v)) {
         S_LilyPondIssue34OahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitEnd ()" <<
@@ -255,7 +255,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
 
 void LilyPondIssue34OahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34OahGroup::browseData ()" <<
@@ -323,7 +323,7 @@ std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34OahGroup& el
 //______________________________________________________________________________
 S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global LilyPondIssue34 OAH group" <<

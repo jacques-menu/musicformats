@@ -13,9 +13,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -100,7 +100,7 @@ void msrMeasure::initializeMeasure ()
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Initializing measure '" <<
@@ -265,7 +265,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
       containingSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating a newborn clone of measure " <<
@@ -349,7 +349,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       containingSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating a deep clone of measure " <<
@@ -427,7 +427,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
     fMeasureElementsList.size ();
 
   if (numberOfMeasureElements) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         mfSingularOrPluralWithoutNumber (
@@ -477,7 +477,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       else if (
         S_msrTimeSignature timeSignature = dynamic_cast<msrTimeSignature*>(&(*element))
         ) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
           gLogStream <<
             "Sharing time " <<
@@ -507,7 +507,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   }
 
   else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "There are no elements in measure to be deep copied" <<
@@ -539,7 +539,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
       containingSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating a copy with notes only of measure " <<
@@ -600,7 +600,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
     fMeasureElementsList.size ();
 
   if (numberOfMeasureElements) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         mfSingularOrPluralWithoutNumber (
@@ -653,7 +653,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
       else if (
         S_msrTimeSignature timeSignature = dynamic_cast<msrTimeSignature*>(&(*element))
         ) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
           gLogStream <<
             "Sharing time " <<
@@ -685,7 +685,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
   }
 
   else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "There are no elements in measure to be deep copied" <<
@@ -708,7 +708,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
 void msrMeasure::setMeasureShortestNoteDuration (
   const Rational& duration)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (
     gGlobalTracingOahGroup->getTraceNotes ()
       ||
@@ -729,7 +729,7 @@ void msrMeasure::setMeasureShortestNoteDuration (
 void msrMeasure::setMeasureShortestNoteTupletFactor (
   const msrTupletFactor& noteTupletFactor)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (
     gGlobalTracingOahGroup->getTraceNotes ()
       ||
@@ -751,7 +751,7 @@ void msrMeasure::setMeasureShortestNoteTupletFactor (
 void msrMeasure::setMeasureEndRegularKind (
   msrMeasureEndRegularKind measureEndRegularKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "Setting regular kind of measure '" <<
@@ -776,7 +776,7 @@ void msrMeasure::setMeasureEndRegularKind (
 void msrMeasure::setMeasureRepeatContextKind (
   msrMeasureRepeatContextKind measureRepeatContextKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "Setting repeat context kind of measure '" <<
@@ -801,7 +801,7 @@ void msrMeasure::setMeasureRepeatContextKind (
 void msrMeasure::setMeasureNumber (
   const std::string& measureNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "Setting measure element measure number of measure '" <<
@@ -826,7 +826,7 @@ void msrMeasure::setMeasureNumber (
 void msrMeasure::setMeasureOrdinalNumberInVoice (
   int measureOrdinalNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "Setting ordinal number of measure '" <<
@@ -851,7 +851,7 @@ void msrMeasure::setMeasureOrdinalNumberInVoice (
 void msrMeasure::setMeasurePuristNumber (
   int measurePuristNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "Setting purist number of measure '" <<
@@ -876,7 +876,7 @@ void msrMeasure::setMeasurePuristNumber (
 // void msrMeasure::incrementMeasureVoicePosition (
 // Rational wholeNotesDelta)
 // {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
 //         "Incrementing the measure voice position " <<
@@ -905,7 +905,7 @@ void msrMeasure::appendMeasureElementToMeasure (
     elem != nullptr,
     "appendMeasureElementToMeasure(): elem is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Appending element " <<
@@ -956,7 +956,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
   std::list<S_msrMeasureElement>::iterator iter,
   const S_msrMeasureElement&               elem)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting element " <<
@@ -1017,7 +1017,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
   int inputLineNumber =
     elem->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()
       ||
     gGlobalTracingOahGroup->getTraceBarLines ()
@@ -1065,7 +1065,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
 #endif
 
   if (! fMeasureElementsList.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "fMeasureElementsList is empty " <<
@@ -1089,7 +1089,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       lastMeasureElement =
         fMeasureElementsList.back ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "fMeasureElementsList is NOT empty " <<
@@ -1106,7 +1106,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
             dynamic_cast<msrBarLine*>(&(*lastMeasureElement))
     ) {
       if (true || barLine->barLineIsAFinalBar ()) { // JMI
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (
           gGlobalTracingOahGroup->getTraceMeasures ()
             ||
@@ -1139,7 +1139,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       }
 
       else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (
           gGlobalTracingOahGroup->getTraceMeasures ()
             ||
@@ -1158,7 +1158,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     }
 
     else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (
         gGlobalTracingOahGroup->getTraceMeasures ()
           ||
@@ -1176,7 +1176,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     }
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     typedef std::list<S_msrMeasureElement>::iterator iter_type;
 
@@ -1207,7 +1207,7 @@ void msrMeasure::insertElementAtMeasurePosition (
   const Rational&     measurePosition,
   const S_msrMeasureElement& elem)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Inserting element " <<
@@ -1332,7 +1332,7 @@ void msrMeasure::insertElementAtMeasurePosition (
 
 void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Setting next measure number to '" <<
@@ -1356,7 +1356,7 @@ void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
 
 void msrMeasure::setMeasureIsFirstInVoice ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Setting measure " <<
@@ -1387,7 +1387,7 @@ std::string msrMeasure::fullMeasureWholeNotesDurationAsMsrString ()
 void msrMeasure::setFullMeasureWholeNotesDuration (
   const Rational& wholeNotes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Setting full whole notes duration of measure " <<
@@ -1406,7 +1406,7 @@ void msrMeasure::setMeasureWholeNotesDuration (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Setting measure whole notes duration of  " <<
@@ -1444,7 +1444,7 @@ void msrMeasure::incrementMeasureWholeNotesDuration (
     newMeasureWholeNotesDuration =
       fMeasureWholeNotesDuration + wholeNotesDelta;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Incrementing whole notes duration of measure " <<
@@ -1482,7 +1482,7 @@ std::string msrMeasure::measureWholeNotesDurationAsMsrString ()
 void msrMeasure::setMeasureKind (
   msrMeasureKind measureKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
         "Setting measure kind of measure " <<
@@ -1524,7 +1524,7 @@ void msrMeasure::setMeasureKind (
       break;
 
     case msrMeasureKind::kMeasureKindOvercomplete:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
         gLogStream <<
           "!!! Setting measure kind of measure " <<
@@ -1557,7 +1557,7 @@ void msrMeasure::setMeasureKind (
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
         gLogStream <<
           "??? Setting measure kind of measure " <<
@@ -1594,7 +1594,7 @@ void msrMeasure::setMeasureKind (
 void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
   const S_msrMusicXMLPrintLayout& musicXMLPrintLayout)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
       "Appending print layout " << musicXMLPrintLayout->asString () <<
@@ -1618,7 +1618,7 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
 void msrMeasure::appendClefToMeasure (
   const S_msrClef& clef)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
     gLogStream <<
       "Appending clef " << clef->asString () <<
@@ -1639,7 +1639,7 @@ void msrMeasure::appendClefToMeasure (
 void msrMeasure::appendKeyToMeasure (
   const S_msrKey& key)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Appending key " << key->asString () <<
@@ -1666,7 +1666,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
     timeSignature != nullptr,
     "timeSignature is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending time signature '" <<
@@ -1712,7 +1712,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
     timeSignature != nullptr,
     "timeSignature is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending time signature:" <<
@@ -1750,7 +1750,7 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
   int             inputLineNumber,
   const Rational& measurePosition)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
@@ -1792,7 +1792,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
     timeSignature != nullptr,
     "timeSignature is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if ( // JMI
     gGlobalTracingOahGroup->getTraceWholeNotes ()
       ||
@@ -1839,7 +1839,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
             timeSignature->
               wholeNotesDurationPerMeasure ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
           gLogStream <<
             "There are " <<
@@ -1871,7 +1871,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
         setFullMeasureWholeNotesDuration (
           wholeNotesPerMeasure);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
           gLogStream <<
             "Measure " <<
@@ -1894,7 +1894,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
 
       // this measure is senza misura
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
         gLogStream <<
           "Measure " <<
@@ -1922,7 +1922,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
 void msrMeasure::appendTranspositionToMeasure (
   const S_msrTransposition& transposition)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
     // fetch the voice
     S_msrVoice
@@ -1988,7 +1988,7 @@ void msrMeasure::appendBarLineToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Appending barLine " <<
@@ -2081,7 +2081,7 @@ void msrMeasure::appendNoteToMeasure (
         -
       fMeasureWholeNotesDuration;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Appending note " << note->asShortString () <<
@@ -2225,7 +2225,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Appending note or padding '" << note->asShortString () <<
@@ -2302,7 +2302,7 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure ( // JMI v0.9.66 RE
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Accounting for the duration of tuplet member note " <<
@@ -2344,7 +2344,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Appending padding note " << note->asString () <<
@@ -2407,7 +2407,7 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
 //   int inputLineNumber =
 //     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Appending note '" << note->asShortString () <<
@@ -2476,7 +2476,7 @@ void msrMeasure::appendDoubleTremoloToMeasure (
 //   int inputLineNumber =
 //     doubleTremolo->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Appending double tremolo '" <<
@@ -2510,7 +2510,7 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
   // populate uplink to measure
   chord->setMeasureElementUpLinkToMeasure (this);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending chord '" << chord->asString () <<
@@ -2554,7 +2554,7 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
 
 void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int inputLineNumber =
     tuplet->getInputLineNumber ();
 
@@ -2605,7 +2605,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Appending harmony " << harmony->asString () <<
@@ -2643,7 +2643,7 @@ void msrMeasure::appendHarmonyToMeasureClone (
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Appending harmony " << harmony->asString () <<
@@ -2679,7 +2679,7 @@ void msrMeasure::appendFiguredBassToMeasure (
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Appending figured bass " << figuredBass->asString () <<
@@ -2725,7 +2725,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
   int inputLineNumber =
     figuredBass->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Appending figured bass " << figuredBass->asString () <<
@@ -2760,7 +2760,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
   const Rational& duration,
   const S_msrVoice&      voice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (
     gGlobalTracingOahGroup->getTraceMeasurePositions ()
       ||
@@ -2808,7 +2808,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //       fMeasureUpLinkToSegment->
 //         getSegmentUpLinkToVoice ();
 //
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     this->print (gLogStream);
 //
@@ -2849,7 +2849,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //           missingDuration,
 //           measureVoice);
 //
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceNotes ()) {
 //       gLogStream <<
 //         "Appending skip " << paddingNote->asString () <<
@@ -2882,7 +2882,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //   }
 //
 //   else if (fMeasureWholeNotesDuration == measurePositionToPadUpTo) {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceNotes ()) {
 //       gLogStream <<
 //         "No need to pad from measure whole notes '" <<
@@ -2939,7 +2939,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Padding up to position '" <<
@@ -2955,7 +2955,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -2971,7 +2971,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
       missingDuration =
         measurePositionToPadUpTo - fMeasureWholeNotesDuration;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
        "Creating a padding note for measure debug number " <<
@@ -2994,7 +2994,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
           missingDuration,
           measureVoice);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
        "Appending padding note " << paddingNote->asString () <<
@@ -3015,7 +3015,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
     fMeasureContainsMusic = true;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -3036,7 +3036,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Padding up from position " <<
@@ -3054,7 +3054,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -3070,7 +3070,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       missingDuration =
         measurePositionToPadUpTo - fMeasureWholeNotesDuration;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
         "Creating a padding note" <<
@@ -3104,7 +3104,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
           missingDuration,
           measureVoice);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
        "Appending padding note " << paddingNote->asString () <<
@@ -3127,7 +3127,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
     fMeasureContainsMusic = true;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -3154,7 +3154,7 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (
     gGlobalTracingOahGroup->getTraceMeasurePositions ()
       ||
@@ -3195,7 +3195,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
   int             inputLineNumber,
   const Rational& forwardStepLength)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Appending padding skip note" <<
@@ -3286,7 +3286,7 @@ void msrMeasure::appendPageBreakToMeasure (
 void msrMeasure::appendStaffDetailsToMeasure (
   const S_msrStaffDetails& staffDetails)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     gLogStream <<
       "Appending staff details '" << staffDetails->asShortString () <<
@@ -3332,7 +3332,7 @@ void msrMeasure::removeNoteFromMeasure (
   int              inputLineNumber,
   const S_msrNote& note)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Removing note '" <<
@@ -3381,7 +3381,7 @@ void msrMeasure::removeNoteFromMeasure (
     segmentVoicePart =
       fetchMeasureUpLinkToPart ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       std::endl << std::endl <<
@@ -3426,7 +3426,7 @@ void msrMeasure::removeElementFromMeasure (
   int                 inputLineNumber,
   const S_msrElement& element)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Removing element:" <<
@@ -3503,7 +3503,7 @@ void msrMeasure::removeElementFromMeasure (
 void msrMeasure::appendNoteToMeasureNotesFlatList (
   const S_msrNote& note)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Appending note " <<
@@ -3576,7 +3576,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         +
       fMeasureWholeNotesDuration;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Determining the measure kind and purist number of measure " <<
@@ -3606,7 +3606,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
       getVoiceCurrentMeasurePuristNumber ());
 
   // determine the measure kind
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (true || gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "--> determineMeasureKindAndPuristNumber()" <<
@@ -3679,7 +3679,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
 
   fMeasureKindAndPuristNumberHaveBeenDetermined = true;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -3694,7 +3694,7 @@ void msrMeasure::handleEmptyMeasure (
   int               inputLineNumber,
   const S_msrVoice& voice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (true || gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "--> handleEmptyMeasure()" <<
@@ -3703,7 +3703,7 @@ void msrMeasure::handleEmptyMeasure (
     }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     voice->
       displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
@@ -3754,7 +3754,7 @@ void msrMeasure::handleRegularMeasure (
   int               inputLineNumber,
   const S_msrVoice& voice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (true || gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "--> handleRegularMeasure()" <<
@@ -3792,7 +3792,7 @@ void msrMeasure::handleIncompleteMeasure (
                     measureRepeatContextKind,
   const Rational&   newWholeNotesSinceLastRegularMeasureEnd)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (true || gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "--> handleIncompleteMeasure()" <<
@@ -3848,7 +3848,7 @@ void msrMeasure::handleIncompleteMeasure (
         {
           std::stringstream s;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
             displayMeasure (
               inputLineNumber,
@@ -3933,7 +3933,7 @@ void msrMeasure::handleOverFullMeasure (
   int               inputLineNumber,
   const S_msrVoice& voice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (true || gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "--> handleOverFullMeasure()" <<
@@ -3996,7 +3996,7 @@ void msrMeasure::finalizeRegularMeasure (
     gLogStream << std::endl;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Finalizing regular measure " <<
@@ -4021,7 +4021,7 @@ void msrMeasure::finalizeRegularMeasure (
           inputLineNumber,
           fMeasureOrdinalNumberInVoice - 1);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "===> measureWholeNotesDurationFromPartMeasuresVector: " <<
@@ -4033,7 +4033,7 @@ void msrMeasure::finalizeRegularMeasure (
 
   ++gIndenter;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -4099,7 +4099,7 @@ void msrMeasure::finalizeRegularMeasure (
         ==
       fFullMeasureWholeNotesDuration
     ) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasures ()) {
         gLogStream <<
           "Note '" <<
@@ -4120,7 +4120,7 @@ void msrMeasure::finalizeRegularMeasure (
     }
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -4182,7 +4182,7 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
   }
 */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "--> handleFirstHarmonyInHarmoniesMeasure() 1" <<
@@ -4205,7 +4205,7 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
           voice);
 
     // insert skipNote before currentHarmony in the measure's elements list
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Inserting first padding note " <<
@@ -4232,7 +4232,7 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 //       measurePositionToPadUpTo,
 //       "first harmony in measure");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
       displayMeasure (
         inputLineNumber,
@@ -4282,7 +4282,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
         -
       measurePositionFollowingPreviousHarmony;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "---> handleSubsequentHarmonyInHarmoniesMeasure() 1" <<
@@ -4326,7 +4326,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
           voice);
 
     // insert skipNote before currentHarmony in the measure's elements list
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Inserting first padding note " <<
@@ -4346,7 +4346,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 //       i,
 //       skipNote);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
       displayMeasure (
         inputLineNumber,
@@ -4364,7 +4364,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
           -
         previousHarmony->getMeasureElementMeasurePosition ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Setting the sounding whole notes duration of harmony " <<
@@ -4421,7 +4421,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
         -
       fFullMeasureWholeNotesDuration;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "--> postHandleCurrentHarmonyInHarmoniesMeasure():" <<
@@ -4500,7 +4500,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
           wholeNotesDelta);
 
       // take wholeNotesDelta into account in measure whole notes duration
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
         gLogStream <<
           "Incrementing the sounding whole notes of measure " <<
@@ -4542,7 +4542,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
           - // the delta is positive
         measureOverflowWholeNotes;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Reducing the sounding whole notes of harmony FII " <<
@@ -4584,7 +4584,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
   else {
     // the currentHarmony reaches the end of the measure,
     // i.e. there are not notes after the one that bears it
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Harmony " <<
@@ -4614,7 +4614,7 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Finalizing harmonies in harmonies measure " <<
@@ -4630,7 +4630,7 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
 #endif
 
   if (fMeasureElementsList.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
       displayMeasure (
         inputLineNumber,
@@ -4642,7 +4642,7 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
     // and may have a non-null offset:
     // we thus have to sort them in the measure by increasing position,
     // taking their offset into account
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Sorting the elements in harmonies measure " <<
@@ -4661,7 +4661,7 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
       msrMeasureElement::
         compareMeasureElementsByIncreasingMeasurePosition);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
       displayMeasure (
         inputLineNumber,
@@ -4738,7 +4738,7 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
     }
     */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
       displayMeasure (
         inputLineNumber,
@@ -4756,7 +4756,7 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
   const std::string&  context)
 {
   // handle the currentHarmony
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Finalizing harmony " <<
@@ -4786,7 +4786,7 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
         getMeasureElementSoundingWholeNotes (),
       "msrMeasure::finalizeHarmonyInHarmoniesMeasure()");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // get the currentHarmony's note uplink position in the measure
   Rational
     currentUpLinkToHarmonyToNoteMeasurePosition =
@@ -4859,7 +4859,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
   }
 */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "handleFirstFiguredBassInFiguredBassMeasure() 5" <<
@@ -4880,7 +4880,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
           voice);
 
     // insert skipNote before currentFiguredBass in the measure's elements list
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Inserting first padding note " <<
@@ -4900,7 +4900,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
       i,
       skipNote);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       displayMeasure (
         inputLineNumber,
@@ -4945,7 +4945,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         -
       measurePositionFollowingPreviousFiguredBass;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "handleSubsequentFiguredBassInFiguredBassMeasure() 7" <<
@@ -4992,7 +4992,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 //         "handleSubsequentFiguredBassInFiguredBassMeasure() 8");
 
     // insert skipNote before currentFiguredBass in the measure's elements list
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Inserting subsequent padding note " <<
@@ -5035,7 +5035,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
           + // the delta is negative
         measurePositionsDelta;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Reducing the sounding whole notes of figured bass FOO " <<
@@ -5106,7 +5106,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
       currentFiguredBass->
         getFiguredBassUpLinkToNote ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "postHandleCurrentFiguredBassInFiguredBassMeasure() 1" <<
@@ -5127,7 +5127,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
         -
       fFullMeasureWholeNotesDuration;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "postHandleCurrentFiguredBassInFiguredBassMeasure() 2" <<
@@ -5186,7 +5186,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
           - // the delta is positive
         measureOverflowWholeNotes;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
         "Reducing the sounding whole notes of figured bass FII " <<
@@ -5239,7 +5239,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Finalizing harmonies in figured bass measure " <<
@@ -5255,7 +5255,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
 #endif
 
   if (fMeasureElementsList.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       displayMeasure (
         inputLineNumber,
@@ -5267,7 +5267,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
     // and may have a non-null offset:
     // we thus have to sort them in the measure by increasing position,
     // taking their offset into account
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Sorting the elements in figured bass measure " <<
@@ -5285,7 +5285,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
     fMeasureElementsList.sort (
       msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       displayMeasure (
         inputLineNumber,
@@ -5324,7 +5324,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
         currentFiguredBass = figuredBass;
 
         // handle the currentFiguredBass
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
           gLogStream <<
             "finalizeFiguredBassesInFiguredBassMeasure() 3" <<
@@ -5349,7 +5349,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
             currentFiguredBass->
               getFiguredBassUpLinkToNote ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         // get the currentFiguredBass's note uplink position in the measure
         Rational
           currentFiguredBassUpLinkToNoteMeasurePosition =
@@ -5418,7 +5418,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
     }
     */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       displayMeasure (
         inputLineNumber,
@@ -5450,7 +5450,7 @@ void msrMeasure::finalizeHarmonyMeasure (
     harmoniesPart != nullptr,
     "harmoniesPart is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Finalizing harmonies measure " <<
@@ -5467,7 +5467,7 @@ void msrMeasure::finalizeHarmonyMeasure (
 
   ++gIndenter;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -5475,7 +5475,7 @@ void msrMeasure::finalizeHarmonyMeasure (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // get the harmoniesPart number of measures
   int
     harmoniesPartNumberOfMeasures =
@@ -5518,7 +5518,7 @@ void msrMeasure::finalizeHarmonyMeasure (
     inputLineNumber,
     measureRepeatContextKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -5551,7 +5551,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
     figuredBassPart != nullptr,
     "figuredBassPart is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Finalizing figured bass measure " <<
@@ -5568,7 +5568,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
 
   ++gIndenter;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -5576,7 +5576,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // get the figuredBassPart number of measures
   int
     figuredBassPartNumberOfMeasures =
@@ -5618,7 +5618,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
     inputLineNumber,
     measureRepeatContextKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -5651,7 +5651,7 @@ void msrMeasure::finalizeMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
       gLogStream <<
         std::endl <<
@@ -5684,7 +5684,7 @@ void msrMeasure::finalizeMeasure (
         fMeasureUpLinkToSegment->
           getSegmentUpLinkToVoice ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "Finalizing measure " <<
@@ -5701,7 +5701,7 @@ void msrMeasure::finalizeMeasure (
     }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     if (fMeasureWholeNotesDuration.getNumerator () == 0) {
       std::stringstream s;
@@ -5725,7 +5725,7 @@ void msrMeasure::finalizeMeasure (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -5791,7 +5791,7 @@ void msrMeasure::finalizeMeasureClone (
   const S_msrMeasure& originalMeasure,
   const S_msrVoice&   voiceClone)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Finalizing measure clone " <<
@@ -5806,7 +5806,7 @@ void msrMeasure::finalizeMeasureClone (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     if (fMeasureWholeNotesDuration.getNumerator () == 0) {
       std::stringstream s;
@@ -5830,7 +5830,7 @@ void msrMeasure::finalizeMeasureClone (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -5913,7 +5913,7 @@ void msrMeasure::finalizeMeasureClone (
       originalMeasure->getMeasureKind ();
 
   if (fMeasureKind != originalMeasureMeasureKind) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
       this->
         displayMeasure (
@@ -6021,7 +6021,7 @@ void msrMeasure::finalizeMeasureClone (
   fMeasureHasBeenFinalized = true;
   fMeasureFinalizationContext = "finalizeMeasureClone()";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -6230,8 +6230,8 @@ std::string msrMeasure::asShortStringForMeasuresSlices () const
 
   s <<
     fMeasureNumber <<
-    " (" << voice->getVoiceName () <<
-    "): [";
+    ": " << voice->getVoiceName () <<
+    " [";
 /* JMI
 // JMI    ", measureKind: " <<
     ": [";
@@ -6428,7 +6428,7 @@ void msrMeasure::printFull (std::ostream& os) const
     std::endl;
 
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // fetch the voice
   S_msrVoice
     voice =
@@ -6756,7 +6756,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         "handleSubsequentHarmonyInHarmoniesMeasure() 2");
 //
 //     // insert skipNote before currentHarmony in the measure's elements list
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
 //         "Inserting subsequent padding note " <<
@@ -6799,7 +6799,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //           + // the delta is negative
 //         measurePositionsDelta;
 //
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
 //         "Reducing the sounding whole notes of harmony FOO " <<

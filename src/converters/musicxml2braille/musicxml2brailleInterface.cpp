@@ -26,9 +26,9 @@
 #include "bsr2bsrWae.h"
 #include "bsr2brailleWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -74,7 +74,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   std::ostream&        err,
   S_oahHandler         handler)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
       std::endl <<
@@ -315,7 +315,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         handler->
           fetchOutputFileNameFromTheOptions ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2braille() outputFileName = \"" <<
@@ -326,7 +326,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 #endif
 
     if (! outputFileName.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2braille() output goes to standard output" <<
@@ -354,7 +354,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     }
 
     else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2braille() output goes to file \"" <<
@@ -365,7 +365,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 #endif
 
       // open output file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         err <<
           std::endl <<
@@ -450,7 +450,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   }
 
   else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   err <<
     "xmlFile2braille(), sxmlfile is NULL" <<
@@ -478,7 +478,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       handlerOptionsAndArguments;
@@ -497,7 +497,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<

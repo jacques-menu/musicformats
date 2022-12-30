@@ -19,9 +19,9 @@
 
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfConstants.h"
@@ -89,7 +89,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msdlKeywordsLanguageAtom'" <<
@@ -100,7 +100,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the keywords languages map?
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msdlKeywordsLanguageAtom'" <<
@@ -141,7 +141,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
 
 void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlKeywordsLanguageAtom::acceptIn ()" <<
@@ -154,7 +154,7 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlKeywordsLanguageAtom>*> (v)) {
         S_msdlKeywordsLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitStart ()" <<
@@ -167,7 +167,7 @@ void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
 
 void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlKeywordsLanguageAtom::acceptOut ()" <<
@@ -180,7 +180,7 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlKeywordsLanguageAtom>*> (v)) {
         S_msdlKeywordsLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlKeywordsLanguageAtom::visitEnd ()" <<
@@ -193,7 +193,7 @@ void msdlKeywordsLanguageAtom::acceptOut (basevisitor* v)
 
 void msdlKeywordsLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlKeywordsLanguageAtom::browseData ()" <<
@@ -384,7 +384,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
 
 void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptIn ()" <<
@@ -397,7 +397,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayMsdlKeywordsInLanguageAtom>*> (v)) {
         S_oahDisplayMsdlKeywordsInLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitStart ()" <<
@@ -410,7 +410,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
 
 void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::acceptOut ()" <<
@@ -423,7 +423,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayMsdlKeywordsInLanguageAtom>*> (v)) {
         S_oahDisplayMsdlKeywordsInLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahDisplayMsdlKeywordsInLanguageAtom::visitEnd ()" <<
@@ -436,7 +436,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::acceptOut (basevisitor* v)
 
 void oahDisplayMsdlKeywordsInLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplayMsdlKeywordsInLanguageAtom::browseData ()" <<
@@ -596,7 +596,7 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
 
 void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptIn ()" <<
@@ -609,7 +609,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayMsdlTokensInLanguageAtom>*> (v)) {
         S_oahDisplayMsdlTokensInLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitStart ()" <<
@@ -622,7 +622,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
 
 void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::acceptOut ()" <<
@@ -635,7 +635,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahDisplayMsdlTokensInLanguageAtom>*> (v)) {
         S_oahDisplayMsdlTokensInLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahDisplayMsdlTokensInLanguageAtom::visitEnd ()" <<
@@ -648,7 +648,7 @@ void oahDisplayMsdlTokensInLanguageAtom::acceptOut (basevisitor* v)
 
 void oahDisplayMsdlTokensInLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahDisplayMsdlTokensInLanguageAtom::browseData ()" <<
@@ -752,7 +752,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msdlCommentsTypeAtom'" <<
@@ -763,7 +763,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the keywords languages map?
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msdlCommentsTypeAtom'" <<
@@ -804,7 +804,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
 
 void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlCommentsTypeAtom::acceptIn ()" <<
@@ -817,7 +817,7 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlCommentsTypeAtom>*> (v)) {
         S_msdlCommentsTypeAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlCommentsTypeAtom::visitStart ()" <<
@@ -830,7 +830,7 @@ void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
 
 void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlCommentsTypeAtom::acceptOut ()" <<
@@ -843,7 +843,7 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlCommentsTypeAtom>*> (v)) {
         S_msdlCommentsTypeAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlCommentsTypeAtom::visitEnd ()" <<
@@ -856,7 +856,7 @@ void msdlCommentsTypeAtom::acceptOut (basevisitor* v)
 
 void msdlCommentsTypeAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlCommentsTypeAtom::browseData ()" <<
@@ -992,7 +992,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msdlUserLanguageAtom'" <<
@@ -1003,7 +1003,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the User languages map?
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msdlUserLanguageAtom'" <<
@@ -1046,7 +1046,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
 
 void msdlUserLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlUserLanguageAtom::acceptIn ()" <<
@@ -1059,7 +1059,7 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlUserLanguageAtom>*> (v)) {
         S_msdlUserLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlUserLanguageAtom::visitStart ()" <<
@@ -1072,7 +1072,7 @@ void msdlUserLanguageAtom::acceptIn (basevisitor* v)
 
 void msdlUserLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlUserLanguageAtom::acceptOut ()" <<
@@ -1085,7 +1085,7 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlUserLanguageAtom>*> (v)) {
         S_msdlUserLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlUserLanguageAtom::visitEnd ()" <<
@@ -1098,7 +1098,7 @@ void msdlUserLanguageAtom::acceptOut (basevisitor* v)
 
 void msdlUserLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlUserLanguageAtom::browseData ()" <<
@@ -1237,7 +1237,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msdlPitchesLanguageAtom'" <<
@@ -1248,7 +1248,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the pitches languages map?
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msdlPitchesLanguageAtom'" <<
@@ -1291,7 +1291,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
 
 void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlPitchesLanguageAtom::acceptIn ()" <<
@@ -1304,7 +1304,7 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlPitchesLanguageAtom>*> (v)) {
         S_msdlPitchesLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlPitchesLanguageAtom::visitStart ()" <<
@@ -1317,7 +1317,7 @@ void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
 
 void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlPitchesLanguageAtom::acceptOut ()" <<
@@ -1330,7 +1330,7 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlPitchesLanguageAtom>*> (v)) {
         S_msdlPitchesLanguageAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlPitchesLanguageAtom::visitEnd ()" <<
@@ -1343,7 +1343,7 @@ void msdlPitchesLanguageAtom::acceptOut (basevisitor* v)
 
 void msdlPitchesLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlPitchesLanguageAtom::browseData ()" <<
@@ -1694,7 +1694,7 @@ void msdlInputOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdlInputOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlInputOahGroup::acceptIn ()" <<
@@ -1707,7 +1707,7 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlInputOahGroup>*> (v)) {
         S_msdlInputOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlInputOahGroup::visitStart ()" <<
@@ -1720,7 +1720,7 @@ void msdlInputOahGroup::acceptIn (basevisitor* v)
 
 void msdlInputOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlInputOahGroup::acceptOut ()" <<
@@ -1733,7 +1733,7 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlInputOahGroup>*> (v)) {
         S_msdlInputOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlInputOahGroup::visitEnd ()" <<
@@ -1746,7 +1746,7 @@ void msdlInputOahGroup::acceptOut (basevisitor* v)
 
 void msdlInputOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlInputOahGroup::browseData ()" <<
@@ -1823,7 +1823,7 @@ std::ostream& operator << (std::ostream& os, const S_msdlInputOahGroup& elt)
 S_msdlInputOahGroup createGlobalMsdlInputOahGroup (
   const std::string& serviceName)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global MSDR OAH group" <<

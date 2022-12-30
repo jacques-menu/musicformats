@@ -58,7 +58,7 @@ S_mfcLibraryComponent createLibraryComponent ()
   // protect library against multiple initializations
   if (! pLibraryComponent) {
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Creating the MusicFormats library component" <<

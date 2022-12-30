@@ -48,7 +48,7 @@ lpsrLayout::~lpsrLayout ()
 
 void lpsrLayout::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrLayout::acceptIn ()" <<
@@ -61,7 +61,7 @@ void lpsrLayout::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrLayout>*> (v)) {
         S_lpsrLayout elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrLayout::visitStart ()" <<
@@ -74,7 +74,7 @@ void lpsrLayout::acceptIn (basevisitor* v)
 
 void lpsrLayout::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrLayout::acceptOut ()" <<
@@ -87,7 +87,7 @@ void lpsrLayout::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrLayout>*> (v)) {
         S_lpsrLayout elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrLayout::visitEnd ()" <<

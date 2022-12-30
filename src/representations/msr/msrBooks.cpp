@@ -18,9 +18,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahOah.h"
@@ -88,7 +88,7 @@ msrBook::~msrBook ()
 
 S_msrBook msrBook::createBookNewbornClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBooks ()) {
     gLogStream <<
       "Creating a newborn clone of a score" <<
@@ -190,7 +190,7 @@ void msrBook::addBookElementToBook (
 void msrBook::appendCreditToBook (
   const S_msrCredit& credit)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCredits ()) {
     gLogStream <<
       "Appending credit '" <<
@@ -276,7 +276,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
 
               switch (topCreditsCounter) {
                 case 1:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
                   if (gGlobalTracingOahGroup->getTraceCredits ()) {
                     gLogStream <<
                       "Using credit words '" <<
@@ -293,7 +293,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                   break;
 
                 case 2:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
                   if (gGlobalTracingOahGroup->getTraceCredits ()) {
                     gLogStream <<
                       "Using credit words '" <<
@@ -322,7 +322,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
 
               switch (bottomCreditsCounter) {
                 case 1:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
                   if (gGlobalTracingOahGroup->getTraceCredits ()) {
                     gLogStream <<
                       "Using credit words '" <<
@@ -339,7 +339,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                   break;
 
                 case 2:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
                   if (gGlobalTracingOahGroup->getTraceCredits ()) {
                     gLogStream <<
                       "Using credit words '" <<

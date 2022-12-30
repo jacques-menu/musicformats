@@ -21,9 +21,9 @@
 #include "oahWae.h"
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrMeasureConstants.h"
@@ -213,7 +213,7 @@ void msrNote::initializeNote ()
   // note lyrics
   // ------------------------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
     gLogStream <<
       std::endl <<
@@ -390,7 +390,7 @@ void msrNote::setNoteUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -543,7 +543,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
 {
   S_msrVoice result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "--> fetchNoteUpLinkToVoice() for note: " <<
@@ -676,7 +676,7 @@ S_msrScore msrNote::fetchUpLinkToNoteToScore () const
 
 void msrNote::setNoteKind (msrNoteKind noteKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Setting the kind of note " <<
@@ -701,7 +701,7 @@ void msrNote::setNoteColorAlphaRGB (
 S_msrNote msrNote::createNoteNewbornClone (
   const S_msrPart& containingPart)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating a newborn clone of note " <<
@@ -901,7 +901,7 @@ S_msrNote msrNote::createNoteNewbornClone (
 S_msrNote msrNote::createNoteDeepClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating a deep clone of note " <<
@@ -1442,7 +1442,7 @@ S_msrNote msrNote::createRestNote (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRestNotes ()) {
     gLogStream <<
       "Creating rest note " <<
@@ -1493,7 +1493,7 @@ S_msrNote msrNote::createSkipNote (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
     gLogStream <<
       "Creating skip note " <<
@@ -1544,7 +1544,7 @@ S_msrNote msrNote::createGraceSkipNote (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
     gLogStream <<
       "Creating grace skip note " <<
@@ -1597,7 +1597,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRestNotes ()) {
     gLogStream <<
       "Creating rest note " <<
@@ -1650,7 +1650,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
     gLogStream <<
       "Creating skip note with octave " <<
@@ -1704,7 +1704,7 @@ S_msrNote msrNote::createRegularNote (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating regular note " <<
@@ -1727,7 +1727,7 @@ S_msrNote msrNote::createRestFromString (
 
   S_msrNote result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating rest from string \"" <<
@@ -1749,7 +1749,7 @@ S_msrNote msrNote::createRestFromString (
     "[[:space:]]*"
     );
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "regularExpression = " <<
@@ -1765,7 +1765,7 @@ S_msrNote msrNote::createRestFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -1805,7 +1805,7 @@ S_msrNote msrNote::createRestFromString (
 
   size_t dotsNumber = restDots.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "restDuration = \"" <<
@@ -1836,7 +1836,7 @@ S_msrNote msrNote::createRestFromString (
        msrDurationKindAsWholeNotes (
          restDurationKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "durationKindFromMslpString = " <<
@@ -1866,7 +1866,7 @@ S_msrNote msrNote::createSkipFromString (
 
   S_msrNote result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating skip from string \"" <<
@@ -1888,7 +1888,7 @@ S_msrNote msrNote::createSkipFromString (
     "[[:space:]]*"
     );
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "regularExpression = " <<
@@ -1904,7 +1904,7 @@ S_msrNote msrNote::createSkipFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -1944,7 +1944,7 @@ S_msrNote msrNote::createSkipFromString (
 
   size_t dotsNumber = skipDots.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "skipDuration = \"" <<
@@ -1975,7 +1975,7 @@ S_msrNote msrNote::createSkipFromString (
        msrDurationKindAsWholeNotes (
          skipDurationKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "durationKindFromMslpString = " <<
@@ -2006,7 +2006,7 @@ S_msrNote msrNote::createNoteFromString (
 
   S_msrNote result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating note from string \"" <<
@@ -2033,7 +2033,7 @@ S_msrNote msrNote::createNoteFromString (
     "[[:space:]]*"
     );
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "regularExpression = " <<
@@ -2049,7 +2049,7 @@ S_msrNote msrNote::createNoteFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -2091,7 +2091,7 @@ S_msrNote msrNote::createNoteFromString (
 
   size_t dotsNumber = noteDots.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "notePitch = \"" <<
@@ -2147,7 +2147,7 @@ S_msrNote msrNote::createNoteFromString (
        msrDurationKindAsWholeNotes (
          noteDurationKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "quarterTonesPitchKind = " <<
@@ -2220,7 +2220,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream <<
       "Creating note " <<
@@ -2241,7 +2241,7 @@ void msrNote::setMeasureElementMeasurePosition (
   const Rational&     measurePosition,
   const std::string&  context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -2287,7 +2287,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
   const Rational&     measurePosition)
 {
 // // JMI v0.9.66
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream << "fNoteHarmoniesList.size (): " <<
       fNoteHarmoniesList.size () <<
@@ -2308,7 +2308,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 //     } // for
 //   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream << "fNoteFiguredBassesList.size (): " <<
       fNoteFiguredBassesList.size () <<
@@ -2406,7 +2406,7 @@ void msrNote::setNoteStem (const S_msrStem& stem)
 
 void msrNote::setNoteBelongsToAChord ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Setting note " <<
@@ -2446,7 +2446,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       </note>
   */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Determining tuplet sounding from display whole notes" <<
@@ -2468,7 +2468,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
     actualNotes,
     "determineTupletMemberSoundingFromDisplayWholeNotes()");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "The result is: '" <<
@@ -2481,7 +2481,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
 void msrNote::appendBeamToNote (
   const S_msrBeam& beam)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
     gLogStream <<
       "Adding beam " <<
@@ -2507,7 +2507,7 @@ if (false) { // JMI, note not yet append to anything....
 void msrNote::appendArticulationToNote (
   const S_msrArticulation& art)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
     gLogStream <<
       "Adding articulation " <<
@@ -2524,7 +2524,7 @@ void msrNote::appendArticulationToNote (
 void msrNote::appendSpannerToNote (
   const S_msrSpanner& spanner)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSpanners ()) {
     gLogStream <<
       "Appending spanner '" <<
@@ -2564,7 +2564,7 @@ void msrNote::appendSpannerToNote (
 void msrNote::appendTechnicalToNote (
   const S_msrTechnical& technical)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
       "Adding technical " <<
@@ -2583,7 +2583,7 @@ void msrNote::appendTechnicalToNote (
 void msrNote::appendTechnicalWithIntegerToNote (
   const S_msrTechnicalWithInteger& technicalWithInteger)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
       "Adding technical with integer " <<
@@ -2603,7 +2603,7 @@ void msrNote::appendTechnicalWithIntegerToNote (
 void msrNote::appendTechnicalWithFloatToNote (
   const S_msrTechnicalWithFloat& technicalWithFloat)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
       "Adding technical with float " <<
@@ -2623,7 +2623,7 @@ void msrNote::appendTechnicalWithFloatToNote (
 void msrNote::appendTechnicalWithStringToNote (
   const S_msrTechnicalWithString& technicalWithString)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
       "Adding technical with string'" <<
@@ -2643,7 +2643,7 @@ void msrNote::appendTechnicalWithStringToNote (
 void msrNote::appendOrnamentToNote (
   const S_msrOrnament& ornament)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceOrnaments ()) {
     gLogStream <<
       "Adding ornament '" <<
@@ -2688,7 +2688,7 @@ void msrNote::appendOrnamentToNote (
 void msrNote::appendGlissandoToNote (
   const S_msrGlissando& glissando)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
     gLogStream <<
       "Adding glissando " <<
@@ -2706,7 +2706,7 @@ void msrNote::appendGlissandoToNote (
 void msrNote::appendSlideToNote (
   const S_msrSlide& slide)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlides ()) {
     gLogStream <<
       "Adding slide " <<
@@ -2724,7 +2724,7 @@ void msrNote::appendSlideToNote (
 void msrNote::setNoteGraceNotesGroupBefore (
   const S_msrGraceNotesGroup& graceNotesGroupBefore)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Attaching grace notes group '" <<
@@ -2748,7 +2748,7 @@ void msrNote::setNoteGraceNotesGroupBefore (
 void msrNote::setNoteGraceNotesGroupAfter (
   const S_msrGraceNotesGroup& graceNotesGroupAfter)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Attaching grace notes group '" <<
@@ -2772,7 +2772,7 @@ void msrNote::setNoteGraceNotesGroupAfter (
 /* JMI
 void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesGroup)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Attaching afterGraceNotesGroup '" << afterGraceNotesGroup->asString () <<
@@ -2790,7 +2790,7 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
 void msrNote::setNoteSingleTremolo (
   const S_msrSingleTremolo& trem)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Adding singleTremolo " <<
@@ -2809,7 +2809,7 @@ void msrNote::setNoteSingleTremolo (
 void msrNote::appendDynamicToNote (
   const S_msrDynamic& dynamic)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamics ()) {
     gLogStream <<
       "Attaching dynamic " <<
@@ -2838,7 +2838,7 @@ void msrNote::appendWordsToNote (
 void msrNote::appendSlurToNote (
   const S_msrSlur& slur)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
     gLogStream <<
       "Adding slur '" << slur <<
@@ -2853,7 +2853,7 @@ void msrNote::appendSlurToNote (
 void msrNote::appendLigatureToNote (
   const S_msrLigature& ligature)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLigatures ()) {
     gLogStream <<
       "Appending ligature " << ligature << " to note " << asString () <<
@@ -2872,7 +2872,7 @@ void msrNote::appendLigatureToNote (
       // it may happen that a given note has a 'ligature start'
       // and a 'ligature stop' in sequence, ignore both
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceLigatures ()) {
         std::stringstream s;
 
@@ -2890,7 +2890,7 @@ void msrNote::appendLigatureToNote (
 #endif
 
       // remove 'ligature start'
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceLigatures ()) {
         gLogStream <<
           "Removing last ligature (start) for note '" <<
@@ -2915,7 +2915,7 @@ void msrNote::appendLigatureToNote (
 void msrNote::appendPedalToNote (
   const S_msrPedal& pedal)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePedals ()) {
     gLogStream <<
       "Appending pedal " << pedal << " to note " << asString () <<
@@ -2932,7 +2932,7 @@ void msrNote::appendPedalToNote (
       // it may happen that a given note has a 'pedal start'
       // and a 'pedal stop' in sequence, ignore both            // JMI ???
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTracePedals ()) {
         std::stringstream s;
 
@@ -2950,7 +2950,7 @@ void msrNote::appendPedalToNote (
 #endif
 
       // rmeove 'pedal start'
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTracePedals ()) {
         gLogStream <<
           "Removing last pedal (start) for note '" <<
@@ -2974,7 +2974,7 @@ void msrNote::appendPedalToNote (
 void msrNote::appendSlashToNote (
   const S_msrSlash& slash)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlashes ()) {
     gLogStream <<
       "Appending slash '" <<
@@ -3009,7 +3009,7 @@ void msrNote::appendSegnoToNote (
 void msrNote::appendDalSegnoToNote (
   const S_msrDalSegno& dalSegno)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
     gLogStream <<
       "Appending dal segno " <<
@@ -3058,7 +3058,7 @@ void msrNote::appendScordaturaToNote (
 //   Rational&     voicePosition,
 //   const std::string& context)
 // {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Assigning note voice position of " <<
@@ -3080,7 +3080,7 @@ void msrNote::appendScordaturaToNote (
 //     "voicePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 //
 //   // set measure element voice position
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Setting note voice position of " <<
@@ -3101,7 +3101,7 @@ void msrNote::appendScordaturaToNote (
 //   voicePosition +=
 //     fMeasureElementSoundingWholeNotes;
 //
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Position in voice becomes " <<
@@ -3128,7 +3128,7 @@ bool msrNote::compareNotesByIncreasingMeasurePosition (
 
 S_msrDynamic msrNote::removeFirstDynamics () // JMI
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamics ()) {
     gLogStream <<
       "Removing first dynamic from note '" <<
@@ -3151,7 +3151,7 @@ S_msrDynamic msrNote::removeFirstDynamics () // JMI
 
 S_msrWedge msrNote::removeFirstWedge () // JMI
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWedges ()) {
     gLogStream <<
       "Removing first wedge from note '" <<
@@ -3174,7 +3174,7 @@ S_msrWedge msrNote::removeFirstWedge () // JMI
 void msrNote::appendSyllableToNote (
   const S_msrSyllable& syllable)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending syllable " <<
@@ -3191,7 +3191,7 @@ void msrNote::appendSyllableToNote (
 void msrNote::appendHarmonyToNote (
   const S_msrHarmony& harmony)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Appending harmony " <<
@@ -3220,7 +3220,7 @@ void msrNote::appendHarmonyToNote (
 void msrNote::appendFiguredBassToNoteFiguredBassesList (
   const S_msrFiguredBass& figuredBass)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Append figured bass " <<
@@ -3306,7 +3306,7 @@ void msrNote::browseData (basevisitor* v)
             getInhibitGraceNotesGroupsBeforeBrowsing ();
 
       if (inhibitGraceNotesGroupsBeforeBrowsing) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (
           gGlobalMsrOahGroup->getTraceMsrVisitors ()
             ||
@@ -3725,7 +3725,7 @@ void msrNote::browseData (basevisitor* v)
           score->getInhibitGraceNotesGroupsAfterBrowsing ();
 
       if (inhibitGraceNotesGroupsAfterBrowsing) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (
           gGlobalMsrOahGroup->getTraceMsrVisitors ()
             ||

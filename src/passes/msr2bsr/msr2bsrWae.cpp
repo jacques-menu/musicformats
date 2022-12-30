@@ -12,7 +12,7 @@
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 
-#include "waeEnableAbortToDebugErrors.h"
+#include "mfEnableAbortToDebugErrors.h"
 
 #include "oahEarlyOptions.h"
 

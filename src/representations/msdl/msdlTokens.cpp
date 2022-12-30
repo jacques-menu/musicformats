@@ -9,9 +9,9 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfStringsHandling.h"
@@ -298,7 +298,7 @@ std::string msdlTokenKindAsMsdlString (
   msdlTokenKind            tokenKind,
   msdlKeywordsLanguageKind languageKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
     gLogStream <<
       "==> msdlTokenKindAsMsdlString()" <<
@@ -705,7 +705,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
     } // for
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
     gLogStream <<
       "<== createClone()" <<
@@ -898,7 +898,7 @@ EXP S_msdlTokenKindsSet operator+ (
     addTokenKind (
       aTokenKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
     gLogStream <<
       "<== S_msdlTokenKindsSet operator+()" <<
@@ -920,7 +920,7 @@ EXP S_msdlTokenKindsSet operator+ (
 
   result += anotherTokenKindsSet;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (false && gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
     gLogStream <<
       "<== S_msdlTokenKindsSet operator+()" <<
@@ -1603,7 +1603,7 @@ std::string msdlToken::asMsdlString (
   msdlKeywordsLanguageKind languageKind,
   msdlCommentsTypeKind     commentsTypeKind) const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsdl2msrOahGroup->getTraceTokens ()) {
     gLogStream <<
       "==> asMsdlString()" <<

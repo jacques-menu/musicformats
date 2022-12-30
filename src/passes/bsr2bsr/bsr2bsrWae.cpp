@@ -11,7 +11,7 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "waeEnableAbortToDebugErrors.h"
+#include "mfEnableAbortToDebugErrors.h"
 
 #include "waeInterface.h"
 #include "bsr2bsrWae.h"

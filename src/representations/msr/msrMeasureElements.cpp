@@ -13,9 +13,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -71,7 +71,7 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
   const Rational&    wholeNotes,
   const std::string& context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -109,7 +109,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   const Rational&     measurePosition,
   const std::string&  context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -185,7 +185,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
   const Rational&    voicePosition,
   const std::string& context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -212,7 +212,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
     "voicePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
 
   // set measure element voice position
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -239,7 +239,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   const msrMoment& measureMoment,
 //   const std::string&    context)
 // {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasureMoments ()) {
 //     gLogStream <<
 //       "Setting measure element measure moment of " <<
@@ -266,7 +266,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   const msrMoment& voiceMoment,
 //   const std::string&    context)
 // {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasureMoments ()) {
 //     gLogStream <<
 //       "Setting measure element voice moment of " <<
@@ -292,7 +292,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 
 void msrMeasureElement::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureElement::acceptIn ()" <<
@@ -305,7 +305,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
         S_msrMeasureElement elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureElement::visitStart ()" <<
@@ -318,7 +318,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
 
 void msrMeasureElement::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureElement::acceptOut ()" <<
@@ -331,7 +331,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
         S_msrMeasureElement elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureElement::visitEnd ()" <<

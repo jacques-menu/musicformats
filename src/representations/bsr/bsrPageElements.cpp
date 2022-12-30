@@ -69,7 +69,7 @@ S_bsrLine bsrPageElement::getUpLinkToBsrLine () const
 
 void bsrPageElement::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPageElement::acceptIn ()" <<
@@ -82,7 +82,7 @@ void bsrPageElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrPageElement>*> (v)) {
         S_bsrPageElement elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPageElement::visitStart ()" <<
@@ -95,7 +95,7 @@ void bsrPageElement::acceptIn (basevisitor* v)
 
 void bsrPageElement::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPageElement::acceptOut ()" <<
@@ -108,7 +108,7 @@ void bsrPageElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrPageElement>*> (v)) {
         S_bsrPageElement elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPageElement::visitEnd ()" <<

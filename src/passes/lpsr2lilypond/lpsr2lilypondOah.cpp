@@ -17,9 +17,9 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfConstants.h"
@@ -110,7 +110,7 @@ void lilypondScoreOutputKindAtom::applyAtomWithValue (
 {
   // JMI ???
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondScoreOutputKindAtom'" <<
@@ -121,7 +121,7 @@ void lilypondScoreOutputKindAtom::applyAtomWithValue (
 
 void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondScoreOutputKindAtom::acceptIn ()" <<
@@ -134,7 +134,7 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondScoreOutputKindAtom>*> (v)) {
         S_lilypondScoreOutputKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondScoreOutputKindAtom::visitStart ()" <<
@@ -147,7 +147,7 @@ void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
 
 void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondScoreOutputKindAtom::acceptOut ()" <<
@@ -160,7 +160,7 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondScoreOutputKindAtom>*> (v)) {
         S_lilypondScoreOutputKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondScoreOutputKindAtom::visitEnd ()" <<
@@ -173,7 +173,7 @@ void lilypondScoreOutputKindAtom::acceptOut (basevisitor* v)
 
 void lilypondScoreOutputKindAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondScoreOutputKindAtom::browseData ()" <<
@@ -310,7 +310,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondTransposePartNameAtom'" <<
@@ -337,7 +337,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -349,7 +349,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
 #endif
 
   if (smSize == 3) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
@@ -374,7 +374,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
     partName             = sm [1],
     destinationPitchName = sm [2];
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> partName = \"" << partName << "\", " <<
@@ -412,7 +412,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
 
 void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondTransposePartNameAtom::acceptIn ()" <<
@@ -425,7 +425,7 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondTransposePartNameAtom>*> (v)) {
         S_lilypondTransposePartNameAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondTransposePartNameAtom::visitStart ()" <<
@@ -438,7 +438,7 @@ void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
 
 void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondTransposePartNameAtom::acceptOut ()" <<
@@ -451,7 +451,7 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondTransposePartNameAtom>*> (v)) {
         S_lilypondTransposePartNameAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondTransposePartNameAtom::visitEnd ()" <<
@@ -464,7 +464,7 @@ void lilypondTransposePartNameAtom::acceptOut (basevisitor* v)
 
 void lilypondTransposePartNameAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondTransposePartNameAtom::browseData ()" <<
@@ -669,7 +669,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondTransposePartIDAtom'" <<
@@ -693,7 +693,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -705,7 +705,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
 #endif
 
   if (smSize == 3) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
@@ -730,7 +730,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
     partID               = sm [1],
     destinationPitchName = sm [2];
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> partID = \"" << partID << "\", " <<
@@ -768,7 +768,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
 
 void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondTransposePartIDAtom::acceptIn ()" <<
@@ -781,7 +781,7 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondTransposePartIDAtom>*> (v)) {
         S_lilypondTransposePartIDAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondTransposePartIDAtom::visitStart ()" <<
@@ -794,7 +794,7 @@ void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
 
 void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondTransposePartIDAtom::acceptOut ()" <<
@@ -807,7 +807,7 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondTransposePartIDAtom>*> (v)) {
         S_lilypondTransposePartIDAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondTransposePartIDAtom::visitEnd ()" <<
@@ -820,7 +820,7 @@ void lilypondTransposePartIDAtom::acceptOut (basevisitor* v)
 
 void lilypondTransposePartIDAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondTransposePartIDAtom::browseData ()" <<
@@ -1100,7 +1100,7 @@ lilypondAbsoluteOctaveEntryAtom::~lilypondAbsoluteOctaveEntryAtom ()
 
 void lilypondAbsoluteOctaveEntryAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () <<
@@ -1116,7 +1116,7 @@ void lilypondAbsoluteOctaveEntryAtom::applyElement (std::ostream& os)
 
 void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::acceptIn ()" <<
@@ -1129,7 +1129,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondAbsoluteOctaveEntryAtom>*> (v)) {
         S_lilypondAbsoluteOctaveEntryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondAbsoluteOctaveEntryAtom::visitStart ()" <<
@@ -1142,7 +1142,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
 
 void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::acceptOut ()" <<
@@ -1155,7 +1155,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondAbsoluteOctaveEntryAtom>*> (v)) {
         S_lilypondAbsoluteOctaveEntryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondAbsoluteOctaveEntryAtom::visitEnd ()" <<
@@ -1168,7 +1168,7 @@ void lilypondAbsoluteOctaveEntryAtom::acceptOut (basevisitor* v)
 
 void lilypondAbsoluteOctaveEntryAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondAbsoluteOctaveEntryAtom::browseData ()" <<
@@ -1279,7 +1279,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondRelativeOctaveEntryAtom'" <<
@@ -1341,7 +1341,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
 
 void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::acceptIn ()" <<
@@ -1354,7 +1354,7 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondRelativeOctaveEntryAtom>*> (v)) {
         S_lilypondRelativeOctaveEntryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondRelativeOctaveEntryAtom::visitStart ()" <<
@@ -1367,7 +1367,7 @@ void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
 
 void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::acceptOut ()" <<
@@ -1380,7 +1380,7 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondRelativeOctaveEntryAtom>*> (v)) {
         S_lilypondRelativeOctaveEntryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondRelativeOctaveEntryAtom::visitEnd ()" <<
@@ -1393,7 +1393,7 @@ void lilypondRelativeOctaveEntryAtom::acceptOut (basevisitor* v)
 
 void lilypondRelativeOctaveEntryAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondRelativeOctaveEntryAtom::browseData ()" <<
@@ -1533,7 +1533,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondFixedOctaveEntryAtom'" <<
@@ -1556,7 +1556,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
 
 void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondFixedOctaveEntryAtom::acceptIn ()" <<
@@ -1569,7 +1569,7 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondFixedOctaveEntryAtom>*> (v)) {
         S_lilypondFixedOctaveEntryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondFixedOctaveEntryAtom::visitStart ()" <<
@@ -1582,7 +1582,7 @@ void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
 
 void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondFixedOctaveEntryAtom::acceptOut ()" <<
@@ -1595,7 +1595,7 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondFixedOctaveEntryAtom>*> (v)) {
         S_lilypondFixedOctaveEntryAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondFixedOctaveEntryAtom::visitEnd ()" <<
@@ -1608,7 +1608,7 @@ void lilypondFixedOctaveEntryAtom::acceptOut (basevisitor* v)
 
 void lilypondFixedOctaveEntryAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondFixedOctaveEntryAtom::browseData ()" <<
@@ -1743,7 +1743,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondAccidentalStyleKindAtom'" <<
@@ -1754,7 +1754,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the accidental styles map?
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondAccidentalStyleKindAtom'" <<
@@ -1796,7 +1796,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
 
 void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondAccidentalStyleKindAtom::acceptIn ()" <<
@@ -1809,7 +1809,7 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondAccidentalStyleKindAtom>*> (v)) {
         S_lilypondAccidentalStyleKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondAccidentalStyleKindAtom::visitStart ()" <<
@@ -1822,7 +1822,7 @@ void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
 
 void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondAccidentalStyleKindAtom::acceptOut ()" <<
@@ -1835,7 +1835,7 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondAccidentalStyleKindAtom>*> (v)) {
         S_lilypondAccidentalStyleKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondAccidentalStyleKindAtom::visitEnd ()" <<
@@ -1848,7 +1848,7 @@ void lilypondAccidentalStyleKindAtom::acceptOut (basevisitor* v)
 
 void lilypondAccidentalStyleKindAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondAccidentalStyleKindAtom::browseData ()" <<
@@ -1984,7 +1984,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondChordsDisplayAtom'" <<
@@ -2030,7 +2030,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
   // theString contains a specification such as:
   //   '<c ees ges bes> \super {"-7(" {\small\raise #0.5 \flat} "5)"}'
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondChordsDisplayAtom'" <<
@@ -2051,7 +2051,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -2086,7 +2086,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
   std::string chordContents     = sm [1];
   std::string chordsDisplaycode = sm [2];
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "FAA chordContents  = " <<
@@ -2105,7 +2105,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
 
 void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondChordsDisplayAtom::acceptIn ()" <<
@@ -2118,7 +2118,7 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondChordsDisplayAtom>*> (v)) {
         S_lilypondChordsDisplayAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondChordsDisplayAtom::visitStart ()" <<
@@ -2131,7 +2131,7 @@ void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
 
 void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondChordsDisplayAtom::acceptOut ()" <<
@@ -2144,7 +2144,7 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondChordsDisplayAtom>*> (v)) {
         S_lilypondChordsDisplayAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondChordsDisplayAtom::visitEnd ()" <<
@@ -2157,7 +2157,7 @@ void lilypondChordsDisplayAtom::acceptOut (basevisitor* v)
 
 void lilypondChordsDisplayAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondChordsDisplayAtom::browseData ()" <<
@@ -2353,7 +2353,7 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondLyricsDurationsKindAtom'" <<
@@ -2364,7 +2364,7 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the lyrics alignment kinds map?
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondLyricsDurationsKindAtom'" <<
@@ -2406,7 +2406,7 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
 
 void lilypondLyricsDurationsKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondLyricsDurationsKindAtom::acceptIn ()" <<
@@ -2419,7 +2419,7 @@ void lilypondLyricsDurationsKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondLyricsDurationsKindAtom>*> (v)) {
         S_lilypondLyricsDurationsKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondLyricsDurationsKindAtom::visitStart ()" <<
@@ -2432,7 +2432,7 @@ void lilypondLyricsDurationsKindAtom::acceptIn (basevisitor* v)
 
 void lilypondLyricsDurationsKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondLyricsDurationsKindAtom::acceptOut ()" <<
@@ -2445,7 +2445,7 @@ void lilypondLyricsDurationsKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondLyricsDurationsKindAtom>*> (v)) {
         S_lilypondLyricsDurationsKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondLyricsDurationsKindAtom::visitEnd ()" <<
@@ -2458,7 +2458,7 @@ void lilypondLyricsDurationsKindAtom::acceptOut (basevisitor* v)
 
 void lilypondLyricsDurationsKindAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondLyricsDurationsKindAtom::browseData ()" <<
@@ -2596,7 +2596,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondDynamicsTextSpannersStyleKindAtom'" <<
@@ -2607,7 +2607,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
   // theString contains the dynamics text spanners style name:
   // is it in the lyrics alignment kinds map?
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondDynamicsTextSpannersStyleKindAtom'" <<
@@ -2649,7 +2649,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
 
 void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::acceptIn ()" <<
@@ -2662,7 +2662,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lilypondDynamicsTextSpannersStyleKindAtom>*> (v)) {
         S_lilypondDynamicsTextSpannersStyleKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondDynamicsTextSpannersStyleKindAtom::visitStart ()" <<
@@ -2675,7 +2675,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
 
 void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::acceptOut ()" <<
@@ -2688,7 +2688,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lilypondDynamicsTextSpannersStyleKindAtom>*> (v)) {
         S_lilypondDynamicsTextSpannersStyleKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lilypondDynamicsTextSpannersStyleKindAtom::visitEnd ()" <<
@@ -2701,7 +2701,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::acceptOut (basevisitor* v)
 
 void lilypondDynamicsTextSpannersStyleKindAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lilypondDynamicsTextSpannersStyleKindAtom::browseData ()" <<
@@ -3780,7 +3780,7 @@ RESET_NUMBER_SPEC can be:
 'OLD = NEW'
 or
 "OLD = NEW" .
-OLD is the MusicXML original measure number (a std::string),
+OLD is the MusicXML original measure number (a string),
 that can be generated in the LilyPond code in '| % ...' comments
 with option '-show-musicxml-measure-numbers, -smxmlmn'.
 NEW is a LilyPond (integer) measure number.
@@ -3893,7 +3893,7 @@ and don't generate an empty \myPageBreak.)",
       oahStringsSetElementAtom::create (
         "break-page-after-measure-number", "bpamn",
 R"(Generate a '\pageBreak' command after measure NUMBER in the LilyPond code.
-NUMBER is a MusicXML measure number (a std::string), to be found in the latter.
+NUMBER is a MusicXML measure number (a string), to be found in the latter.
 This comes in handy when scanning several movements from a single PDF score.
 There can be several occurrences of this option.)",
         "NUMBER",
@@ -3946,7 +3946,7 @@ Nothing special is done by default.)",
       oahStringsSetElementAtom::create (
         "break-line-after-measure-number", "blamn",
 R"(Generate a '\break' command after measure NUMBER in the LilyPond code.
-NUMBER is a MusicXML measure number (a std::string), to be found in the latter.
+NUMBER is a MusicXML measure number (a string), to be found in the latter.
 This comes in handy when scanning several movements from a single PDF score.
 There can be several occurrences of this option.)",
         "NUMBER",
@@ -4903,7 +4903,7 @@ void lpsr2lilypondOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsr2lilypondOahGroup::acceptIn ()" <<
@@ -4916,7 +4916,7 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsr2lilypondOahGroup>*> (v)) {
         S_lpsr2lilypondOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsr2lilypondOahGroup::visitStart ()" <<
@@ -4929,7 +4929,7 @@ void lpsr2lilypondOahGroup::acceptIn (basevisitor* v)
 
 void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsr2lilypondOahGroup::acceptOut ()" <<
@@ -4942,7 +4942,7 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsr2lilypondOahGroup>*> (v)) {
         S_lpsr2lilypondOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsr2lilypondOahGroup::visitEnd ()" <<
@@ -4955,7 +4955,7 @@ void lpsr2lilypondOahGroup::acceptOut (basevisitor* v)
 
 void lpsr2lilypondOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsr2lilypondOahGroup::browseData ()" <<
@@ -6276,7 +6276,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsr2lilypondOahGroup& elt)
 //______________________________________________________________________________
 S_lpsr2lilypondOahGroup createGlobalLpsr2lilypondOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     gLogStream <<
       "Initializing LilyPond OAH handling" <<
@@ -6346,7 +6346,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondBreakPageAfterMeasureNumberAtom'" <<
@@ -6357,7 +6357,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
   // theString contains the midi tempo specification
   // decipher it to extract duration and perSecond values
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lilypondBreakPageAfterMeasureNumberAtom'" <<
@@ -6382,7 +6382,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -6423,7 +6423,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
     s >> lilypondMeasureNumber;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     os <<
       "musicxmlMeasureNumber  = " <<

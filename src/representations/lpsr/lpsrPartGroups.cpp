@@ -47,7 +47,7 @@ lpsrPartGroupBlock::~lpsrPartGroupBlock ()
 
 void lpsrPartGroupBlock::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartGroupBlock::acceptIn ()" <<
@@ -60,7 +60,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPartGroupBlock>*> (v)) {
         S_lpsrPartGroupBlock elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPartGroupBlock::visitStart ()" <<
@@ -73,7 +73,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
 
 void lpsrPartGroupBlock::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartGroupBlock::acceptOut ()" <<
@@ -86,7 +86,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPartGroupBlock>*> (v)) {
         S_lpsrPartGroupBlock elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPartGroupBlock::visitEnd ()" <<
@@ -99,7 +99,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
 
 void lpsrPartGroupBlock::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartGroupBlock::browseData ()" <<
@@ -117,7 +117,7 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
     browser.browse (*(*i));
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrPartGroupBlock::browseData ()" <<
