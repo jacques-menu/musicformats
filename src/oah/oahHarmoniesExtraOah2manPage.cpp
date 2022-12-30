@@ -9,19 +9,19 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "enableHarmoniesExtraOahIfDesired.h"
+#include "mfEnableHarmoniesExtraIfDesired.h"
 
-#ifdef EXTRA_OAH_IS_ENABLED
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 #include <cmath>
 #include <string>
 
-#include "harmoniesExtraOah2manPage.h"
+#include "oahHarmoniesExtraOah2manPage.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 
@@ -45,7 +45,7 @@ harmoniesExtraOah2manPage::~harmoniesExtraOah2manPage ()
 //________________________________________________________________________
 void harmoniesExtraOah2manPage::visitStart (S_extraShowAllHarmoniesStructuresAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -75,7 +75,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraShowAllHarmoniesStructuresAto
 
 void harmoniesExtraOah2manPage::visitEnd (S_extraShowAllHarmoniesStructuresAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -89,7 +89,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraShowAllHarmoniesStructuresAtom&
 //________________________________________________________________________
 void harmoniesExtraOah2manPage::visitStart (S_extraShowAllHarmoniesContentsAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -119,7 +119,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraShowAllHarmoniesContentsAtom&
 
 void harmoniesExtraOah2manPage::visitEnd (S_extraShowAllHarmoniesContentsAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -133,7 +133,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraShowAllHarmoniesContentsAtom& e
 //________________________________________________________________________
 void harmoniesExtraOah2manPage::visitStart (S_extraShowHarmonyDetailsAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -163,7 +163,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraShowHarmonyDetailsAtom& elt)
 
 void harmoniesExtraOah2manPage::visitEnd (S_extraShowHarmonyDetailsAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -177,7 +177,7 @@ void harmoniesExtraOah2manPage::visitEnd (S_extraShowHarmonyDetailsAtom& elt)
 //________________________________________________________________________
 void harmoniesExtraOah2manPage::visitStart (S_extraShowHarmonyAnalysisAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -207,7 +207,7 @@ void harmoniesExtraOah2manPage::visitStart (S_extraShowHarmonyAnalysisAtom& elt)
 
 void harmoniesExtraOah2manPage::visitEnd (S_extraShowHarmonyAnalysisAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<

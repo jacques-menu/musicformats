@@ -16,9 +16,9 @@
 
 #include "lpsrEnumTypes.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahAtomsCollection.h"
@@ -403,7 +403,7 @@ class EXP lpsrOahGroup : public oahGroup
     // trace
     // --------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     void                  setTraceLpsr ()
                               { fTraceLpsr = true; }
     Bool                  getTraceLpsr () const
@@ -696,7 +696,7 @@ class EXP lpsrOahGroup : public oahGroup
     // private methods
     // ------------------------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     void                  initializeLpsrtracingOah ();
 #endif
 
@@ -722,7 +722,7 @@ class EXP lpsrOahGroup : public oahGroup
     // trace
     // --------------------------------------
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     Bool                  fTraceLpsr;
 
     Bool                  fTraceLilypondVersion;

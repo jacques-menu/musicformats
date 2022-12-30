@@ -16,9 +16,9 @@
 
 #include "lpsrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -128,7 +128,7 @@ std::string wholeNotesAsLilypondString (
 {
   // this algorithm is inspired by musicxml2ly
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "--> wholeNotesAsLilypondString() 1 -------------------------------------" <<
@@ -143,7 +143,7 @@ std::string wholeNotesAsLilypondString (
     numerator    = wholeNotes.getNumerator (),
     denominator  = wholeNotes.getDenominator ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "--> numerator:   " << numerator <<
@@ -199,7 +199,7 @@ std::string wholeNotesAsLilypondString (
   Bool
     integralNumberOfWholeNotes = denominator == 1;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
 //       "--> rationalHasBeenSimplified: " <<
@@ -224,7 +224,7 @@ std::string wholeNotesAsLilypondString (
 
   int  numeratorDots = lpsrNumberOfDots (numerator);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numeratorDots " << ": " << numeratorDots <<
@@ -311,7 +311,7 @@ std::string wholeNotesAsLilypondString (
       result = s.str ();
     }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       std::stringstream s;
 
@@ -346,7 +346,7 @@ std::string wholeNotesAsLilypondString (
     return result;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> denominatorDurationLog" << ": " <<
@@ -360,7 +360,7 @@ std::string wholeNotesAsLilypondString (
     // adapt the duration to avoid even numerators if can be,
     // since dotted durations cannot be recognized otherwise
     // 6/1 thus becomes 3\breve, hence \longa.
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> integralNumberOfWholeNotes,"
@@ -373,7 +373,7 @@ std::string wholeNotesAsLilypondString (
       numerator /= 2;
       denominatorDurationLog -= 1;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
         gLogStream <<
           "--> numerator" << ": " <<
@@ -390,7 +390,7 @@ std::string wholeNotesAsLilypondString (
     numeratorDots = lpsrNumberOfDots (numerator);
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numerator" << ": " <<
@@ -412,7 +412,7 @@ std::string wholeNotesAsLilypondString (
     // take the dots into account
     denominatorDurationLog -= numeratorDots;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> denominatorDurationLog" << ": " <<
@@ -426,7 +426,7 @@ std::string wholeNotesAsLilypondString (
   }
   else {
     // set the multiplying factor
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> setting the multiplying factor" <<
@@ -442,7 +442,7 @@ std::string wholeNotesAsLilypondString (
     /* JMI
     multiplyingFactor = numerator;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
       gLogStream <<
         "--> denominatorDurationLog" << ": " <<
@@ -461,7 +461,7 @@ std::string wholeNotesAsLilypondString (
       // adapt multiplying factor
       multiplyingFactor /= 2;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
         gLogStream <<
           "--> denominatorDurationLog" << ": " <<
@@ -476,7 +476,7 @@ std::string wholeNotesAsLilypondString (
     */
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "--> numerator " << ": " <<
@@ -538,7 +538,7 @@ std::string wholeNotesAsLilypondString (
 
   std::string result = s.str ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> wholeNotesAsLilypondString() 2 -------------------------------------" <<
@@ -1205,7 +1205,7 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
       break;
   } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     s <<
       " %{ " <<

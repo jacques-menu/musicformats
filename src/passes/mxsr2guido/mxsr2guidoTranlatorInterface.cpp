@@ -18,10 +18,10 @@
 
 #include "mxsr2guidoWae.h"
 
-#include "oahEnableTracingIfDesired.h"
+#include "mfEnableTracingIfDesired.h"
 
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -57,7 +57,7 @@ void translateMxsrToGuido (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -87,7 +87,7 @@ void translateMxsrToGuido (
   Sguidoelement
     guidoData = v.convert (theMxsr);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "xmlFile2gmn() outputFileName = \"" <<
@@ -98,7 +98,7 @@ void translateMxsrToGuido (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2gmn() output goes to standard output" <<
@@ -113,7 +113,7 @@ void translateMxsrToGuido (
   }
 
   else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2gmn() output goes to file \"" <<
@@ -126,7 +126,7 @@ void translateMxsrToGuido (
     // open output file
     std::ofstream outputFileStream;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<

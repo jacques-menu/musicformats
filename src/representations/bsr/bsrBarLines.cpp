@@ -15,9 +15,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "bsrBarLines.h"
@@ -49,7 +49,7 @@ bsrBarLine::bsrBarLine (
 
   fBarLineCellsList = buildCellsList ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Creating bsrBarLine '" <<
@@ -110,7 +110,7 @@ int bsrBarLine::fetchCellsNumber() const
 
 void bsrBarLine::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrBarLine::acceptIn ()" <<
@@ -123,7 +123,7 @@ void bsrBarLine::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrBarLine>*> (v)) {
         S_bsrBarLine elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrBarLine::visitStart ()" <<
@@ -136,7 +136,7 @@ void bsrBarLine::acceptIn (basevisitor* v)
 
 void bsrBarLine::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrBarLine::acceptOut ()" <<
@@ -149,7 +149,7 @@ void bsrBarLine::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrBarLine>*> (v)) {
         S_bsrBarLine elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrBarLine::visitEnd ()" <<

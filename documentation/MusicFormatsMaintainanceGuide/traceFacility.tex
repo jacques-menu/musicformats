@@ -12,15 +12,15 @@ One can build the library with or without trace, which applies to the whole code
 \section{Activating the trace}
 % -------------------------------------------------------------------------
 
-Tracing is controlled by {\tt TRACING_IS_ENABLED}, defined or nor in \oah{oahEnableTracingIfDesired.h}:
+Tracing is controlled by {\tt OAH_TRACING_IS_ENABLED}, defined or nor in \oah{mfEnableTracingIfDesired.h}:
 
 \begin{lstlisting}[language=CPlusPlus]
 #ifndef ___enableTracingIfDesired___
 #define ___enableTracingIfDesired___
 
-#ifndef TRACING_IS_ENABLED
+#ifndef OAH_TRACING_IS_ENABLED
   // comment the following definition if no tracing is desired
-  #define TRACING_IS_ENABLED
+  #define OAH_TRACING_IS_ENABLED
 #endif
 
 #endif
@@ -28,15 +28,15 @@ Tracing is controlled by {\tt TRACING_IS_ENABLED}, defined or nor in \oah{oahEna
 
 This file should be included when the trace facility is used:
 \begin{lstlisting}[language=CPlusPlus]
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 \end{lstlisting}
 
 The files \oahBoth{tracingOah} contain the options to the trace facility itself.
 
-Be sure to build \mf\ with \code{TRACING_IS_ENABLED} both active and commented out before creating a new \code{v*} \version\ \branch, to check that variables scopes are fine.
+Be sure to build \mf\ with \code{OAH_TRACING_IS_ENABLED} both active and commented out before creating a new \code{v*} \version\ \branch, to check that variables scopes are fine.
 
 For example, {\tt xml2ly -insider -help-trace}\fileName{xml2ly}\option{insider} produces:
 \begin{lstlisting}[language=Terminal]
@@ -85,7 +85,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     std::stringstream s;
 

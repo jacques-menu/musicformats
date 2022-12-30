@@ -15,9 +15,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 
@@ -102,7 +102,7 @@ float msrScaling::fetchGlobalStaffSize () const
 
     result = optionsGlobalStaffSize * ratio;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     const float
       optionsStaffGlobalSizeDefaultValue =
         gGlobalLpsrOahGroup->getStaffGlobalSizeDefaultValue ();
@@ -158,7 +158,7 @@ float msrScaling::fetchGlobalStaffSize () const
 #endif
 
     if (result < 1.0 || result > 100.0) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceGeometry ()) {
         std::stringstream s;
 

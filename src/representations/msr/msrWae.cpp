@@ -11,7 +11,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "waeEnableAbortToDebugErrors.h"
+#include "mfEnableAbortToDebugErrors.h"
 
 #include "oahEarlyOptions.h"
 

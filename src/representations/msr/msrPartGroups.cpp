@@ -19,9 +19,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrPartGroups.h"
@@ -192,7 +192,7 @@ msrPartGroup::msrPartGroup (
 
   fPartGroupBarLineKind     = partGroupBarLineKind;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "--------------------------------------------" <<
@@ -263,7 +263,7 @@ msrPartGroup::msrPartGroup (
   fPartGroupBarLineKind     = partGroupBarLineKind;
 */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "--------------------------------------------" <<
@@ -283,7 +283,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   const S_msrPartGroup& partGroupClone,
   const S_msrScore&     scoreClone)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "--------------------------------------------" <<
@@ -468,7 +468,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
         this);
 
   // register it in this part group
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Appending part " <<
@@ -490,7 +490,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 
   fPartGroupElementsList.push_back (part);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
     gLogStream <<
       std::endl <<
@@ -544,7 +544,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 {
   // register part in this part group
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Adding part " <<
@@ -574,7 +574,7 @@ void msrPartGroup::removePartFromPartGroup (
   const S_msrPart& partToBeRemoved)
 {
   // register part in this part group
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Removing part " <<
@@ -639,7 +639,7 @@ void msrPartGroup::removePartFromPartGroup (
 void msrPartGroup::prependSubPartGroupToPartGroup (
   const S_msrPartGroup& partGroup)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Prepending (sub-)part group " << partGroup->getPartGroupNumber () <<
@@ -661,7 +661,7 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
 void msrPartGroup::appendSubPartGroupToPartGroup (
   const S_msrPartGroup& partGroup)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Appending (sub-)part group " << partGroup->getPartGroupNumber () <<
@@ -840,7 +840,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 {
   S_msrPart result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
     gLogStream <<
       "fetchPartFromPartGroupByItsPartID(" << partID <<

@@ -17,15 +17,15 @@
 
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
-#include "outputFileOah.h"
+#include "mfOutputFileOah.h"
 
 #include "brailleGenerationOah.h"
 
@@ -96,7 +96,7 @@ brailleOutputKindAtom::~brailleOutputKindAtom ()
 
 void brailleOutputKindAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> handling atom '" <<
@@ -124,7 +124,7 @@ void brailleOutputKindAtom::applyElement (std::ostream& os)
 
 void brailleOutputKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleOutputKindAtom::acceptIn ()" <<
@@ -137,7 +137,7 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_brailleOutputKindAtom>*> (v)) {
         S_brailleOutputKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleOutputKindAtom::visitStart ()" <<
@@ -150,7 +150,7 @@ void brailleOutputKindAtom::acceptIn (basevisitor* v)
 
 void brailleOutputKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleOutputKindAtom::acceptOut ()" <<
@@ -163,7 +163,7 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_brailleOutputKindAtom>*> (v)) {
         S_brailleOutputKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleOutputKindAtom::visitEnd ()" <<
@@ -176,7 +176,7 @@ void brailleOutputKindAtom::acceptOut (basevisitor* v)
 
 void brailleOutputKindAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleOutputKindAtom::browseData ()" <<
@@ -315,7 +315,7 @@ void brailleUTFKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> handling atom '" << fetchNames () << "; which is of type 'brailleUTFKindAtom'" <<
@@ -352,7 +352,7 @@ void brailleUTFKindAtom::applyAtomWithValue (
 
 void brailleUTFKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleUTFKindAtom::acceptIn ()" <<
@@ -365,7 +365,7 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_brailleUTFKindAtom>*> (v)) {
         S_brailleUTFKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleUTFKindAtom::visitStart ()" <<
@@ -378,7 +378,7 @@ void brailleUTFKindAtom::acceptIn (basevisitor* v)
 
 void brailleUTFKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleUTFKindAtom::acceptOut ()" <<
@@ -391,7 +391,7 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_brailleUTFKindAtom>*> (v)) {
         S_brailleUTFKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleUTFKindAtom::visitEnd ()" <<
@@ -404,7 +404,7 @@ void brailleUTFKindAtom::acceptOut (basevisitor* v)
 
 void brailleUTFKindAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleUTFKindAtom::browseData ()" <<
@@ -537,7 +537,7 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> handling atom '" << fetchNames () << "; which is of type 'brailleByteOrderingKindAtom'" <<
@@ -574,7 +574,7 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
 
 void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleByteOrderingKindAtom::acceptIn ()" <<
@@ -587,7 +587,7 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_brailleByteOrderingKindAtom>*> (v)) {
         S_brailleByteOrderingKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleByteOrderingKindAtom::visitStart ()" <<
@@ -600,7 +600,7 @@ void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
 
 void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleByteOrderingKindAtom::acceptOut ()" <<
@@ -613,7 +613,7 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_brailleByteOrderingKindAtom>*> (v)) {
         S_brailleByteOrderingKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleByteOrderingKindAtom::visitEnd ()" <<
@@ -626,7 +626,7 @@ void brailleByteOrderingKindAtom::acceptOut (basevisitor* v)
 
 void brailleByteOrderingKindAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleByteOrderingKindAtom::browseData ()" <<
@@ -999,7 +999,7 @@ R"(Generate UTF-8 debug braille as output.)",
 
 void brailleGenerationOahGroup::initializeBrailleGenerationOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 // JMI  initializeBsr2brailletracingOah ();
@@ -1037,7 +1037,7 @@ void brailleGenerationOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void brailleGenerationOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleGenerationOahGroup::acceptIn ()" <<
@@ -1050,7 +1050,7 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_brailleGenerationOahGroup>*> (v)) {
         S_brailleGenerationOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleGenerationOahGroup::visitStart ()" <<
@@ -1063,7 +1063,7 @@ void brailleGenerationOahGroup::acceptIn (basevisitor* v)
 
 void brailleGenerationOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleGenerationOahGroup::acceptOut ()" <<
@@ -1076,7 +1076,7 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_brailleGenerationOahGroup>*> (v)) {
         S_brailleGenerationOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching brailleGenerationOahGroup::visitEnd ()" <<
@@ -1089,7 +1089,7 @@ void brailleGenerationOahGroup::acceptOut (basevisitor* v)
 
 void brailleGenerationOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> brailleGenerationOahGroup::browseData ()" <<
@@ -1167,7 +1167,7 @@ std::ostream& operator << (std::ostream& os, const S_brailleGenerationOahGroup& 
 //______________________________________________________________________________
 S_brailleGenerationOahGroup createGlobalBrailleGenerationOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global bsr2braille OAH group" <<

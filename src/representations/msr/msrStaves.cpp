@@ -13,9 +13,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -92,7 +92,7 @@ msrStaff::msrStaff (
   // do other initializations
   initializeStaff ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     gLogStream <<
       "Creating staff \"" << asString () <<
@@ -224,7 +224,7 @@ void msrStaff::initializeStaff ()
           getPartCurrentClef ();
 
     if (clef) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceClefs ()) {
         gLogStream <<
           "Appending part clef '" << clef->asString () <<
@@ -249,7 +249,7 @@ void msrStaff::initializeStaff ()
           getPartCurrentKey ();
 
     if (key) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceKeys ()) {
         gLogStream <<
           "Appending part key '" << key->asString () <<
@@ -273,7 +273,7 @@ void msrStaff::initializeStaff ()
           getPartCurrentTransposition ();
 
     if (transposition) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if ( gGlobalTracingOahGroup->getTraceTranspositions ()) {
         gLogStream <<
           "Appending part transposition '" << transposition->asString () <<
@@ -311,7 +311,7 @@ msrStaff::~msrStaff ()
 S_msrStaff msrStaff::createStaffNewbornClone (
   const S_msrPart& containingPart)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     gLogStream <<
       "Creating a newborn clone of staff \"" <<
@@ -414,7 +414,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
         fStaffShortestNoteTupletFactor);
 */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
         "The new shortest note in staff \"" << fStaffName << "\"" <<
@@ -502,7 +502,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
   msrMeasureImplicitKind
                 measureImplicitKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating measure '" <<
@@ -534,7 +534,7 @@ void msrStaff::setNextMeasureNumberInStaff (
   int           inputLineNumber,
   const std::string& nextMeasureNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Setting next measure number to '" <<
@@ -555,7 +555,7 @@ void msrStaff::setNextMeasureNumberInStaff (
       voice != nullptr,
       "voice is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "Propagating the setting of next measure number '" <<
@@ -582,7 +582,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
 {
   ++fStaffRegularVoicesCounter;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Creating regular voice with number '" <<
@@ -678,7 +678,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
 
 /*
     case msrVoiceKind::kVoiceKindHarmonies:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         gLogStream <<
           "Creating harmonies voice number '" <<
@@ -696,7 +696,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         gLogStream <<
           "Creating figured bass voice number '" <<
@@ -750,7 +750,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
 void msrStaff::setStaffShortestNoteDuration (
   const Rational& duration)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
         "The new shortest note duration in staff \"" <<
@@ -767,7 +767,7 @@ void msrStaff::setStaffShortestNoteDuration (
 void msrStaff::setStaffShortestNoteTupletFactor (
   const msrTupletFactor& noteTupletFactor)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
         "The new shortest note tuplet factor in part \"" <<
@@ -784,7 +784,7 @@ void msrStaff::setStaffShortestNoteTupletFactor (
 void msrStaff::registerVoiceInStaffAllVoicesList (
   const S_msrVoice& voice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering voice \"" << voice->getVoiceName () <<
@@ -868,7 +868,7 @@ void msrStaff::registerVoiceByItsNumber (
 {
   int voiceNumber = voice->getVoiceNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering voice named \"" << voice->getVoiceName () <<
@@ -907,7 +907,7 @@ void msrStaff::registerVoiceByItsNumber (
       break;
 
     case msrVoiceKind::kVoiceKindHarmonies:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         gLogStream <<
           "Sorting the voices in staff \"" <<
@@ -926,7 +926,7 @@ void msrStaff::registerVoiceByItsNumber (
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         gLogStream <<
           "Sorting the voices in staff \"" <<
@@ -953,7 +953,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
   const S_msrVoice& regularVoice,
   int        voiceNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering regular voice " <<
@@ -1037,7 +1037,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
   int        inputLineNumber,
   const S_msrVoice& voice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering harmonies voice " <<
@@ -1060,7 +1060,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
   int        inputLineNumber,
   const S_msrVoice& voice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering figured bass voice " <<
@@ -1085,7 +1085,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
 {
   S_msrVoice result; // JMI avoid repetitive messages! v0.9.66
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Fetching voice number '" <<
@@ -1100,7 +1100,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
 
   // search list ??? JMI
   for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     int        number = thePair.first;
 #endif
     const S_msrVoice& voice  = thePair.second;
@@ -1110,7 +1110,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
         ==
       voiceNumber
     ) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         gLogStream <<
           "Voice number '" << voiceNumber <<
@@ -1132,7 +1132,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
 void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Assigning sequential numbers to the regular voices in staff \"" <<
@@ -1169,7 +1169,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
 
       ++voiceSequentialCounter;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         gLogStream <<
           "Voice \"" <<
@@ -1197,7 +1197,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 {
   S_msrVoice result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Fetching first regular voice in staff \"" <<
@@ -1235,7 +1235,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       result->getRegularVoiceStaffSequentialNumber () == 1,
       "result->getRegularVoiceStaffSequentialNumber () is not equal to 1");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceVoices ()) {
       gLogStream <<
         "The first regular voice in staff \"" <<
@@ -1247,7 +1247,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 #endif
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "--> result = \"" <<
@@ -1270,7 +1270,7 @@ void msrStaff::registerVoiceInStaff (
     voice != nullptr,
     "voice is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering voice \"" << voice->getVoiceName () <<
@@ -1424,7 +1424,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
   } // switch
 
   // register voice in this staff
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering voice \"" << voice->getVoiceName () <<
@@ -1493,7 +1493,7 @@ void msrStaff::registerVoiceInStaffClone (
       voice->getVoiceKind ();
 
   // register voice in this staff
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering voice \"" << voice->getVoiceName () <<
@@ -1572,7 +1572,7 @@ void msrStaff::registerVoiceInStaffClone (
 void msrStaff::appendClefToStaff  (
   const S_msrClef& clef)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
     gLogStream <<
       "Appending clef '" << clef->asString () <<
@@ -1613,7 +1613,7 @@ void msrStaff::appendClefToStaff  (
   }
 
   else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceClefs ()) {
       gLogStream <<
         "Clef '" <<
@@ -1632,7 +1632,7 @@ void msrStaff::appendClefToStaff  (
 
 void msrStaff::appendKeyToStaff (S_msrKey  key)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Appending key " << key->asString () <<
@@ -1660,7 +1660,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
 
     else {
       if (key->isEqualTo (fStaffCurrentKey)) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceKeys ()) {
           gLogStream <<
             "Key '" <<
@@ -1694,7 +1694,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
 
 void msrStaff::appendTimeSignatureToStaff (
   const S_msrTimeSignature& timeSignature){
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending time '" << timeSignature->asString () <<
@@ -1721,7 +1721,7 @@ void msrStaff::appendTimeSignatureToStaff (
 
     else {
       if (timeSignature->isEqualTo (fStaffCurrentTimeSignature)) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
           gLogStream <<
             "Time '" <<
@@ -1755,7 +1755,7 @@ void msrStaff::appendTimeSignatureToStaff (
 
 void msrStaff::appendTimeSignatureToStaffClone (
   const S_msrTimeSignature& timeSignature){
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending time '" << timeSignature->asString () <<
@@ -1784,7 +1784,7 @@ void msrStaff::appendTimeSignatureToStaffClone (
 void msrStaff::appendTempoToStaff (
   const S_msrTempo& tempo)
 {
- #ifdef TRACING_IS_ENABLED
+ #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "Appending tempo " << tempo->asString () <<
@@ -1804,7 +1804,7 @@ void msrStaff::appendTempoToStaff (
 void msrStaff::appendRehearsalMarkToStaff (
   const S_msrRehearsalMark& rehearsalMark)
 {
- #ifdef TRACING_IS_ENABLED
+ #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
     gLogStream <<
       "Appending rehearsal mark " << rehearsalMark->asString () <<
@@ -1824,7 +1824,7 @@ void msrStaff::appendRehearsalMarkToStaff (
 void msrStaff::appendLineBreakToStaff  (
   const S_msrLineBreak& lineBreak)
 {
- #ifdef TRACING_IS_ENABLED
+ #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
     gLogStream <<
       "Appending line break " << lineBreak->asString () <<
@@ -1844,7 +1844,7 @@ void msrStaff::appendLineBreakToStaff  (
 void msrStaff::appendPageBreakToStaff (
   const S_msrPageBreak& pageBreak)
 {
- #ifdef TRACING_IS_ENABLED
+ #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
     gLogStream <<
       "Appending page break " << pageBreak->asString () <<
@@ -1865,7 +1865,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
   int             inputLineNumber,
   const Rational& measurePosition)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
@@ -1896,7 +1896,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
 void msrStaff::nestContentsIntoNewRepeatInStaff (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Nesting contents into new repeat in staff \"" <<
@@ -1918,7 +1918,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
 void msrStaff::handleRepeatStartInStaff (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling repeat start in staff \"" <<
@@ -1946,7 +1946,7 @@ void msrStaff::handleRepeatEndInStaff (
   const std::string& measureNumber,
   int           repeatTimes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling a repeat end in staff \"" <<
@@ -1974,7 +1974,7 @@ void msrStaff::handleRepeatEndInStaff (
 void msrStaff::handleRepeatEndingStartInStaff (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling a repeat ending start in staff \"" <<
@@ -2003,7 +2003,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
   msrRepeatEndingKind
                     repeatEndingKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling a " <<
@@ -2037,7 +2037,7 @@ void msrStaff::finalizeRepeatEndInStaff (
   const std::string& measureNumber,
   int           repeatTimes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Finalizing a repeat upon its end in staff \"" <<
@@ -2068,7 +2068,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
   int measureRepeatMeasuresNumber,
   int measureRepeatSlashes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a measures repeat from it's first measure in staff \"" <<
@@ -2091,7 +2091,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
 void msrStaff::appendPendingMeasureRepeatToStaff (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending the pending measures repeat to staff \"" <<
@@ -2113,7 +2113,7 @@ void msrStaff::appendMultipleFullBarRestsToStaff (
   int inputLineNumber,
   int multipleFullBarRestsMeasuresNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Appending a multiple full-bar rest for " <<
@@ -2142,7 +2142,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
   int inputLineNumber,
   int replicatasNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Replicating last appended measure in staff \"" <<
@@ -2166,7 +2166,7 @@ void msrStaff::addEmptyMeasuresToStaff (
   const std::string& previousMeasureNumber,
   int           emptyMeasuresNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Adding " <<
@@ -2196,7 +2196,7 @@ void msrStaff::addEmptyMeasuresToStaff (
 void msrStaff::appendPendingMultipleFullBarRestsToStaff (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Appending the pending multiple rest to staff \"" <<
@@ -2218,7 +2218,7 @@ void msrStaff::appendMultipleFullBarRestsCloneToStaff (
   int               inputLineNumber,
   const S_msrMultipleFullBarRests& multipleFullBarRests)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Appending multiple rest '" <<
@@ -2242,7 +2242,7 @@ void msrStaff::appendRepeatCloneToStaff (
   int         inputLineNumber,
   const S_msrRepeat& repeatCLone)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending repeat clone to staff \"" <<
@@ -2263,7 +2263,7 @@ void msrStaff::appendRepeatCloneToStaff (
 void msrStaff::appendRepeatEndingCloneToStaff (
   const S_msrRepeatEnding& repeatEndingClone)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending a repeat ending clone to staff \"" <<
@@ -2289,7 +2289,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
 void msrStaff::appendBarLineToStaff (
   const S_msrBarLine& barLine)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Appending barLine " << barLine->asString () <<
@@ -2314,7 +2314,7 @@ void msrStaff::appendBarLineToStaff (
 void msrStaff::appendTranspositionToStaff (
   const S_msrTransposition& transposition)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
     gLogStream <<
       "Setting transposition '" <<
@@ -2336,7 +2336,7 @@ void msrStaff::appendTranspositionToStaff (
 
   else {
     if (transposition->isEqualTo (fStaffCurrentTransposition)) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
         gLogStream <<
           "Transpose '" <<
@@ -2365,7 +2365,7 @@ void msrStaff::appendTranspositionToStaff (
 void msrStaff::appendStaffDetailsToStaff (
   const S_msrStaffDetails& staffDetails)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
     gLogStream <<
       "Appending staff details '" <<
@@ -2401,7 +2401,7 @@ void msrStaff::appendStaffDetailsToStaff (
       ;
   } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     gLogStream <<
       "Setting staff kind to '" <<
@@ -2463,7 +2463,7 @@ void msrStaff::appendHarpPedalsTuningToStaff (
 void msrStaff::finalizeLastAppendedMeasureInStaff (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Finalizing last appended measure in staff \"" <<
@@ -2643,7 +2643,7 @@ bool msrStaff::compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
 
 void msrStaff::finalizeStaff (int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     gLogStream <<
       "Finalizing staff \"" <<
@@ -2656,7 +2656,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
   ++gIndenter;
 
   // finalize the voices
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Finalizing the voices in staff \"" <<
@@ -2683,7 +2683,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
   int inputLineNumber)
 {
   // collect measures from the staff voices
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Collecting measures from the staff voices into staff \"" <<
@@ -2702,7 +2702,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
 void msrStaff::collectStaffMeasuresSlices (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     size_t
       staffVoiceNumbersToAllVoicesMapSize =
@@ -2737,7 +2737,7 @@ void msrStaff::collectStaffMeasuresSlices (
 
   // populate it
   for (const S_msrVoice& voice : fStaffAllVoicesList) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
       gLogStream <<
         "---> voice \"" <<
@@ -2755,7 +2755,7 @@ void msrStaff::collectStaffMeasuresSlices (
         voice->
           getVoiceMeasuresSlicesSequence ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
       gLogStream <<
         "---> voiceMeasuresSlicesSequence";
@@ -2791,7 +2791,7 @@ void msrStaff::collectStaffMeasuresSlices (
     --gIndenter;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "---> staffMeasuresSlicesSequence:" <<
@@ -2883,7 +2883,7 @@ void msrStaff::browseData (basevisitor* v)
   }
   */
 
-#ifdef TRACING_IS_ENABLED // JMI
+#ifdef OAH_TRACING_IS_ENABLED // JMI
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
     gLogStream <<
       "++++++++ fStaffAllVoicesList.size(): " <<
@@ -2950,7 +2950,7 @@ void msrStaff::browseData (basevisitor* v)
           gGlobalMsr2msrOahGroup->
             getIgnoreMsrVoicesSet ();
 
-#ifdef TRACING_IS_ENABLED // JMI
+#ifdef OAH_TRACING_IS_ENABLED // JMI
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         mfDisplayStringSet (
           "ignoreMsrVoicesSet",
@@ -2964,7 +2964,7 @@ void msrStaff::browseData (basevisitor* v)
           gGlobalMsr2msrOahGroup->
             getKeepMsrVoicesSet ();
 
-#ifdef TRACING_IS_ENABLED // JMI
+#ifdef OAH_TRACING_IS_ENABLED // JMI
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         mfDisplayStringSet (
           "keepMsrVoicesSet",
@@ -3011,7 +3011,7 @@ void msrStaff::browseData (basevisitor* v)
         browser.browse (*voice);
       }
       else {
-#ifdef TRACING_IS_ENABLED // JMI
+#ifdef OAH_TRACING_IS_ENABLED // JMI
         if (gGlobalTracingOahGroup->getTraceVoices ()) {
           gLogStream <<
             "Ignoring voice \"" <<
@@ -3094,7 +3094,7 @@ void msrStaff::printFull (std::ostream& os) const
     std::endl;
 
   // print current the staff clef if any
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
@@ -3115,7 +3115,7 @@ void msrStaff::printFull (std::ostream& os) const
 #endif
 
   // print the current staff key if any
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
@@ -3137,7 +3137,7 @@ void msrStaff::printFull (std::ostream& os) const
 #endif
 
   // print the current staff time if any
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     os << std::left <<
       std::setw (fieldWidth) <<
@@ -3158,7 +3158,7 @@ void msrStaff::printFull (std::ostream& os) const
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaffDetails ()) {
     // print the staff details if any
     if (fCurrentStaffStaffDetails) {

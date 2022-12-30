@@ -17,9 +17,9 @@
 #include "mfServiceRunData.h"
 #include "mfStringsHandling.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -83,7 +83,7 @@ S_msrChord msrChord::create (
   const Rational&     chordDisplayWholeNotes,
   msrDurationKind     chordGraphicDurationKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Creating a chord" <<
@@ -111,7 +111,7 @@ S_msrChord msrChord::create (
   const Rational& chordDisplayWholeNotes,
   msrDurationKind chordGraphicDurationKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Creating a chord" <<
@@ -162,7 +162,7 @@ msrChord::~msrChord ()
 S_msrChord msrChord::createChordNewbornClone (
   const S_msrPart& containingPart)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Creating a newborn clone of chord '" <<
@@ -209,7 +209,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //   const Rational&    measurePosition,
 //   const std::string&      context)
 // {
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Setting chord's measure position of " <<
@@ -294,7 +294,7 @@ void msrChord::setChordUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -388,7 +388,7 @@ S_msrScore msrChord::fetchChordUpLinkToScore () const
 void msrChord::setChordDisplayWholeNotes (
    const Rational& wholeNotes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Setting chord displayed whole notes to '" <<
@@ -408,7 +408,7 @@ void msrChord::setChordGraceNotesGroupLinkBefore (
   const S_msrChordGraceNotesGroupLink&
           chordChordGraceNotesGroupLinkBefore)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Setting chord grace notes groups before in " <<
@@ -429,7 +429,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
   const S_msrChordGraceNotesGroupLink&
           chordChordGraceNotesGroupLinkAfter)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Setting chord grace notes groups after in " <<
@@ -450,7 +450,7 @@ void msrChord::setMeasureElementMeasurePosition (
   const Rational&     measurePosition,
   const std::string&  context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -490,7 +490,7 @@ void msrChord::setChordMembersMeasurePosition (
   const S_msrMeasure& measure,
   const Rational&     measurePosition)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting chord members measure positions of " << asString () <<
@@ -541,7 +541,7 @@ void msrChord::addFirstNoteToChord (
   const S_msrNote&  note,
   const S_msrVoice& voice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Adding first note '" <<
@@ -598,7 +598,7 @@ void msrChord::addAnotherNoteToChord (
   const S_msrNote&  note,
   const S_msrVoice& voice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Adding another note '" <<
@@ -658,7 +658,7 @@ S_msrNote msrChord::fetchChordFirstNonGraceNote () const
 void msrChord::appendDalSegnoToChord (
   const S_msrDalSegno& dalSegno)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos ()) {
     gLogStream <<
       "Appending dal segno " <<
@@ -686,7 +686,7 @@ void msrChord::appendArticulationToChord (
       return;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
     gLogStream <<
       "Appending articulation '" <<
@@ -713,7 +713,7 @@ void msrChord::appendSpannerToChord (
       return;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSpanners ()) {
     gLogStream <<
       "Appending spanner '" <<
@@ -731,7 +731,7 @@ void msrChord::appendSpannerToChord (
 void msrChord::setChordSingleTremolo (
   const S_msrSingleTremolo& trem)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Adding singleTremolo '" <<
@@ -763,7 +763,7 @@ void msrChord::appendTechnicalToChord (
         return;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending technical '" <<
@@ -795,7 +795,7 @@ void msrChord::appendTechnicalWithIntegerToChord (
         return;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending technical with integer '" <<
@@ -827,7 +827,7 @@ void msrChord::appendTechnicalWithFloatToChord (
         return;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending technical with integer '" <<
@@ -859,7 +859,7 @@ void msrChord::appendTechnicalWithStringToChord (
         return;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending technical with string '" <<
@@ -886,7 +886,7 @@ void msrChord::appendOrnamentToChord (
         return;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending ornament '" <<
@@ -913,7 +913,7 @@ void msrChord::appendGlissandoToChord (
       return;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending glissando '" <<
@@ -944,7 +944,7 @@ void msrChord::appendSlideToChord (
         return;
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending slide '" <<
@@ -960,7 +960,7 @@ void msrChord::appendSlideToChord (
 void msrChord::appendChordSlurLinkToChord (
   const S_msrChordSlurLink& chordSlurLink)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
     gLogStream <<
       "Adding slur link '" << chordSlurLink->asString() <<
@@ -975,7 +975,7 @@ void msrChord::appendChordSlurLinkToChord (
 void msrChord::appendStemToChord (
   const S_msrStem& stem)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStems ()) {
     gLogStream <<
       "Adding stem '" << stem->asString() <<
@@ -1014,7 +1014,7 @@ void msrChord::appendStemToChord (
 /* JMI
 void msrChord::appendBeamToChord (const S_msrBeam& beam)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
     gLogStream <<
       "Appending beam '" <<
@@ -1031,7 +1031,7 @@ void msrChord::appendBeamToChord (const S_msrBeam& beam)
 void msrChord::appendChordBeamLinkToChord (
   const S_msrChordBeamLink& chordBeamLink)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
     gLogStream <<
       "Adding beam link '" << chordBeamLink->asString() <<
@@ -1046,7 +1046,7 @@ void msrChord::appendChordBeamLinkToChord (
 void msrChord::finalizeChord (
   int inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Finalizing chord '" <<
@@ -1125,7 +1125,7 @@ void msrChord::browseData (basevisitor* v)
           getInhibitChordsInGraceNotesGroupsBrowsing ();
 
     if (inhibitChordsInGraceNotesGroupsBrowsing) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (
         gGlobalMsrOahGroup->getTraceMsrVisitors ()
           ||
@@ -1418,7 +1418,7 @@ void msrChord::browseData (basevisitor* v)
 void msrChord::applyTupletMemberDisplayFactorToChordMembers (
   int actualNotes, int normalNotes)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Applying tuplet member sounding factor '" <<
@@ -1898,7 +1898,7 @@ void msrChord::printFull (std::ostream& os) const
     }
   }
 */
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // print the beam links if any
   size_t chordBeamLinksSize = fChordBeamLinks.size ();
 
@@ -2246,7 +2246,7 @@ void msrChord::printFull (std::ostream& os) const
     os << std::endl;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // print the slur links if any
   size_t chordSlurLinksSize = fChordSlurLinks.size ();
 
@@ -2668,7 +2668,7 @@ void msrChord::print (std::ostream& os) const
   }
 */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // print the beam links if any
   size_t chordBeamLinksSize = fChordBeamLinks.size ();
 
@@ -2745,7 +2745,7 @@ void msrChord::print (std::ostream& os) const
     }
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // print the slur links if any
   size_t chordSlurLinksSize = fChordSlurLinks.size ();
 
@@ -3169,7 +3169,7 @@ msrChordBeamLink::~msrChordBeamLink ()
 
 S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Creating a newborn clone of grace notes group link '" <<
@@ -3390,7 +3390,7 @@ msrChordSlurLink::~msrChordSlurLink ()
 
 S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Creating a newborn clone of grace notes group link '" <<
@@ -3583,7 +3583,7 @@ msrChordGraceNotesGroupLink::~msrChordGraceNotesGroupLink ()
 
 S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotesGroupLinkNewbornClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Creating a newborn clone of grace notes group link '" <<

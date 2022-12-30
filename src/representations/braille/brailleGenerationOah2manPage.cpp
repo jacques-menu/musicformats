@@ -17,9 +17,9 @@
 
 #include "brailleGenerationOah2manPage.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 
@@ -44,7 +44,7 @@ brailleGenerationOah2manPage::~brailleGenerationOah2manPage ()
 //________________________________________________________________________
 void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -73,7 +73,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
 
 void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -87,7 +87,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
 //________________________________________________________________________
 void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -116,7 +116,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
 
 void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -130,7 +130,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
 //________________________________________________________________________
 void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -159,7 +159,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& el
 
 void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<

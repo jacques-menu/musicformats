@@ -19,9 +19,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrScores.h"
@@ -30,7 +30,7 @@
 
 #include "msrOah.h"
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   #include "lpsrOah.h"
 #endif
 
@@ -96,7 +96,7 @@ msrScore::~msrScore ()
 
 S_msrScore msrScore::createScoreNewbornClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceScores ()) {
     gLogStream <<
       "Creating a newborn clone of a score" <<
@@ -187,7 +187,7 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 void msrScore::appendCreditToScore (
   const S_msrCredit& credit)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCredits ()) {
     gLogStream <<
       "Appending credit '" <<
@@ -206,7 +206,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 {
   S_msrPart result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
     gLogStream <<
       "fetchPartFromScoreByItsPartID(" << partID << "), fPartGroupsList contains:" <<
@@ -712,7 +712,7 @@ void msrScore::print(std::ostream& os) const
 
 void msrScore::printSummary (std::ostream& os) const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
     os << "MSR score summary";
   }

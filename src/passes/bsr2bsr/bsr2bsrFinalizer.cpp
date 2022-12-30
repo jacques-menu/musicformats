@@ -53,7 +53,7 @@ void bsr2bsrFinalizer::translateBsrToFinalizedBsr ()
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrScore& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrScore" <<
@@ -71,7 +71,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrScore& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrScore& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrScore" <<
@@ -84,7 +84,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrScore& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrSpaces& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrSpaces" <<
@@ -100,7 +100,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrSpaces& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrSpaces& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrSpaces" <<
@@ -113,7 +113,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrSpaces& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrBarLine& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrBarLine" <<
@@ -129,7 +129,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrBarLine& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotes& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrTranscriptionNotes" <<
@@ -141,7 +141,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotes& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotes& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrTranscriptionNotes" <<
@@ -154,7 +154,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotes& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotesElement& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrTranscriptionNotesElement" <<
@@ -171,7 +171,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotesElement& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotesElement& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -184,7 +184,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotesElement& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrPage& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrPage '" <<
@@ -203,7 +203,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPage& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrPage& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrPage '" <<
@@ -218,7 +218,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPage& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrPageHeading& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrPageHeading '" <<
@@ -239,7 +239,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPageHeading& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrPageHeading& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrPageHeading '" <<
@@ -256,7 +256,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPageHeading& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrMusicHeading& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrMusicHeading '" <<
@@ -277,7 +277,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMusicHeading& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrMusicHeading& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrMusicHeading '" <<
@@ -294,7 +294,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMusicHeading& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrFootNotes& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrFootNotes '" <<
@@ -315,7 +315,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrFootNotes& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrFootNotes& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrFootNotes '" <<
@@ -332,7 +332,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrFootNotes& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrLine& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrLine '" <<
@@ -351,7 +351,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLine& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrLine& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrLine '" <<
@@ -366,7 +366,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLine& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrLineContents& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrLineContents '" <<
@@ -387,7 +387,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLineContents& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrLineContents& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrLineContents '" <<
@@ -402,7 +402,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLineContents& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrMeasure '" <<
@@ -422,7 +422,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrMeasure& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrMeasure '" <<
@@ -437,7 +437,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMeasure& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrNumber& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrNumber '" <<
@@ -454,7 +454,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNumber& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrNumber& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrNumber '" <<
@@ -469,7 +469,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNumber& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrWords& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrWords '" <<
@@ -486,7 +486,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrWords& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrWords& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrWords '" <<
@@ -501,7 +501,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrWords& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrClef& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrClef '" <<
@@ -518,7 +518,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrClef& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrClef& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrClef '" <<
@@ -533,7 +533,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrClef& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrKey& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrKey '" <<
@@ -556,7 +556,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrKey& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrKey& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrKey '" <<
@@ -571,7 +571,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrKey& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrTimeSignature& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrTimeSignature " <<
@@ -593,7 +593,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTimeSignature& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrTimeSignature& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrTimeSignature " <<
@@ -607,7 +607,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTimeSignature& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrTempo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrTempo " <<
@@ -631,7 +631,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTempo& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrTempo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrTempo " <<
@@ -645,7 +645,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTempo& elt)
 //________________________________________________________________________
 void bsr2bsrFinalizer::visitStart (S_bsrNote& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrNote " <<
@@ -661,7 +661,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNote& elt)
 
 void bsr2bsrFinalizer::visitEnd (S_bsrNote& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrNote " <<

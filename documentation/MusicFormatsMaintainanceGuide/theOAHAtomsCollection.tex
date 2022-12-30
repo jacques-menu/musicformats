@@ -95,7 +95,7 @@ Applying the macro atom is done in \method{oahMacroAtom}{applyElement}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahMacroAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahMacroAtom" <<

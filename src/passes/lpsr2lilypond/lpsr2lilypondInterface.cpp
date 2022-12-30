@@ -18,9 +18,9 @@
 
 #include "lpsr2lilypondWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "lpsr2lilypondOah.h"
@@ -56,7 +56,7 @@ void translateLpsrToLilypond (
   std::string separator =
     "%--------------------------------------------------------------";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       std::endl <<
@@ -118,7 +118,7 @@ EXP void translateLpsrToLilypondWithHandler (
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "xmlFile2lilypond() outputFileName = \"" <<
@@ -129,7 +129,7 @@ EXP void translateLpsrToLilypondWithHandler (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
@@ -165,7 +165,7 @@ EXP void translateLpsrToLilypondWithHandler (
   }
 
   else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2lilypond() output goes to file \"" <<
@@ -176,7 +176,7 @@ EXP void translateLpsrToLilypondWithHandler (
 #endif
 
     // open output file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<

@@ -15,9 +15,9 @@
 #include "mfIndentedTextOutput.h"
 #include "mfStringsHandling.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrBrowsers.h"
@@ -58,7 +58,7 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
     : msrMeasureElement (
         inputLineNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
@@ -100,7 +100,7 @@ void msrMusicXMLPrintLayout::setMusicXMLPrintLayoutUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 

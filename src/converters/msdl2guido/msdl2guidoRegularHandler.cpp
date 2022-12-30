@@ -11,9 +11,9 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfStringsHandling.h"
@@ -66,7 +66,7 @@ msdl2guidoRegularHandler::msdl2guidoRegularHandler (
   // create the regular handler groups
   createRegularHandlerGroups ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     // print the options handler initial state
     gLogStream <<
@@ -92,7 +92,7 @@ msdl2guidoRegularHandler::~msdl2guidoRegularHandler ()
 
 void msdl2guidoRegularHandler::createRegularHandlerGroups ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the regular handler groups for \"" <<
@@ -152,7 +152,7 @@ void msdl2guidoRegularHandler::createRegularHandlerGroups ()
 
   createOutputRegularGroup ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "All the regular handler groups for \"" <<
@@ -267,7 +267,7 @@ void msdl2guidoRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_LONG_OPTION_NAME, subGroup);
 #endif
@@ -311,7 +311,7 @@ void msdl2guidoRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-summary", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_OAH_LONG_OPTION_NAME, subGroup);
   registerAtomInRegularSubgroup (K_TRACE_OAH_DETAILS_LONG_OPTION_NAME, subGroup);
 
@@ -848,7 +848,7 @@ void msdl2guidoRegularHandler::createChordsRegularGroup ()
 
   // atoms
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-chords", subGroup);
 #endif
 }
@@ -1046,7 +1046,7 @@ void msdl2guidoRegularHandler::createTupletsRegularGroup ()
 
   // atoms
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-tuplets", subGroup);
 #endif
 
@@ -1186,7 +1186,7 @@ void msdl2guidoRegularHandler::createOutputRegularGroup ()
 //______________________________________________________________________________
 void msdl2guidoRegularHandler::checkOptionsAndArguments () const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<

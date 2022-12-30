@@ -69,7 +69,7 @@ template <typename T> class   oahBrowser : public browser <T>
     virtual void          browse (T& t)
                               {
 /* JMI
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
                               if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
                                 gOutputStream <<
                                   std::endl <<
@@ -93,7 +93,7 @@ template <typename T> class   oahBrowser : public browser <T>
     virtual void          enter (T& t)
                               {
 /* JMI
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
                           if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
                             gOutputStream <<
                               std::endl <<
@@ -109,7 +109,7 @@ template <typename T> class   oahBrowser : public browser <T>
     virtual void          leave (T& t)
                               {
 /* JMI
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
                                 if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
                                   gOutputStream <<
                                     std::endl <<

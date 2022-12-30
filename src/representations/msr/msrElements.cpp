@@ -98,7 +98,7 @@ void msrElement::browseDataAlongPathToVoice (
 std::string msrElement::asString () const
 {
   // this is overriden all in actual elements
-  return "??? msrElement::asString () ???";
+  return "[??? msrElement::asString () ???]";
 }
 
 std::string msrElement::asShortString () const

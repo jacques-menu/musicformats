@@ -115,7 +115,7 @@ lpsrSchemeVariable::~lpsrSchemeVariable ()
 
 void lpsrSchemeVariable::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrSchemeVariable::acceptIn ()" <<
@@ -128,7 +128,7 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrSchemeVariable>*> (v)) {
         S_lpsrSchemeVariable elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrSchemeVariable::visitStart ()" <<
@@ -141,7 +141,7 @@ void lpsrSchemeVariable::acceptIn (basevisitor* v)
 
 void lpsrSchemeVariable::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrSchemeVariable::acceptOut ()" <<
@@ -154,7 +154,7 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrSchemeVariable>*> (v)) {
         S_lpsrSchemeVariable elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrSchemeVariable::visitEnd ()" <<
@@ -258,7 +258,7 @@ lpsrSchemeFunction::~lpsrSchemeFunction ()
 
 void lpsrSchemeFunction::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrSchemeFunction::acceptIn ()" <<
@@ -271,7 +271,7 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrSchemeFunction>*> (v)) {
         S_lpsrSchemeFunction elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrSchemeFunction::visitStart ()" <<
@@ -284,7 +284,7 @@ void lpsrSchemeFunction::acceptIn (basevisitor* v)
 
 void lpsrSchemeFunction::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrSchemeFunction::acceptOut ()" <<
@@ -297,7 +297,7 @@ void lpsrSchemeFunction::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrSchemeFunction>*> (v)) {
         S_lpsrSchemeFunction elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrSchemeFunction::visitEnd ()" <<

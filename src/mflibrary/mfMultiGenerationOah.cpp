@@ -16,9 +16,9 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -305,7 +305,7 @@ mfMultiGenerationOutputKindAtom::~mfMultiGenerationOutputKindAtom ()
 
 void mfMultiGenerationOutputKindAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> handling atom '" <<
@@ -333,7 +333,7 @@ void mfMultiGenerationOutputKindAtom::applyElement (std::ostream& os)
 
 void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptIn ()" <<
@@ -346,7 +346,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_mfMultiGenerationOutputKindAtom>*> (v)) {
         S_mfMultiGenerationOutputKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitStart ()" <<
@@ -359,7 +359,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
 
 void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptOut ()" <<
@@ -372,7 +372,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_mfMultiGenerationOutputKindAtom>*> (v)) {
         S_mfMultiGenerationOutputKindAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitEnd ()" <<
@@ -385,7 +385,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
 
 void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::browseData ()" <<
@@ -596,7 +596,7 @@ void mfMultiGenerationOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptIn ()" <<
@@ -609,7 +609,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_multiGenerationOahGroup>*> (v)) {
         S_multiGenerationOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitStart ()" <<
@@ -622,7 +622,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
 
 void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptOut ()" <<
@@ -635,7 +635,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_multiGenerationOahGroup>*> (v)) {
         S_multiGenerationOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitEnd ()" <<
@@ -648,7 +648,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
 
 void mfMultiGenerationOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfMultiGenerationOahGroup::browseData ()" <<
@@ -701,7 +701,7 @@ std::ostream& operator << (std::ostream& os, const S_multiGenerationOahGroup& el
 //______________________________________________________________________________
 S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating multi generator OAH group" <<

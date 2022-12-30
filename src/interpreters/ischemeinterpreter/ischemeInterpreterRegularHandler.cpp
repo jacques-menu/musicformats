@@ -14,9 +14,9 @@
 // WAE
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfStringsHandling.h"
@@ -93,7 +93,7 @@ ischemeInterpreterRegularHandler::ischemeInterpreterRegularHandler (
   --gIndenter;
 */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     // JMI ???
   }
@@ -105,7 +105,7 @@ ischemeInterpreterRegularHandler::~ischemeInterpreterRegularHandler ()
 
 void ischemeInterpreterRegularHandler::createRegularHandlerGroups ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the regular handler groups for \"" <<
@@ -124,7 +124,7 @@ void ischemeInterpreterRegularHandler::createRegularHandlerGroups ()
 
   createWarningAndErrorsRegularGroup ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "All the regular handler groups for \"" <<
@@ -293,7 +293,7 @@ void ischemeInterpreterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME, subGroup);
 #endif
 
@@ -316,7 +316,7 @@ void ischemeInterpreterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("show-options-and-arguments", subGroup);
 
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_OAH_LONG_OPTION_NAME, subGroup);
   registerAtomInRegularSubgroup (K_TRACE_OAH_DETAILS_LONG_OPTION_NAME, subGroup);
 
@@ -363,7 +363,7 @@ void ischemeInterpreterRegularHandler::createWarningAndErrorsRegularGroup ()
 //______________________________________________________________________________
 void ischemeInterpreterRegularHandler::checkOptionsAndArguments () const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<

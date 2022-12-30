@@ -13,13 +13,13 @@
 
 #include "mfStringsHandling.h"
 
-#include "oahEnableTracingIfDesired.h"
+#include "mfEnableTracingIfDesired.h"
 
-#ifdef TRACING_IS_ENABLED // encompasses this whole file
+#ifdef OAH_TRACING_IS_ENABLED // encompasses this whole file
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "tracingOah.h"
+#include "mfTracingOah.h"
 
 #include "oahOah.h"
 

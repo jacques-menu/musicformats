@@ -77,7 +77,7 @@ S_mfcConverterComponent createMsdlConverterConverterComponent ()
   // protect library against multiple initializations
   if (! pConverterComponent) {
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating the msdlConverter component" <<

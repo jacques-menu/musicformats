@@ -20,9 +20,9 @@
 #include "oahWae.h"
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -171,7 +171,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
 {
   fTimeSignatureBeatValue = -1;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Creating time signature item" <<
@@ -220,7 +220,7 @@ Bool msrTimeSignatureItem::isEqualTo (
 
 void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending beat number '" <<
@@ -239,7 +239,7 @@ void msrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 
 void msrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Setting beat value to '" <<
@@ -823,7 +823,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
   S_msrTimeSignature result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating time from string \"" <<
@@ -843,7 +843,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     "[[:space:]]*"
     );
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "regularExpression = " <<
@@ -859,7 +859,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -897,7 +897,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
     beatsNumber   = sm [1],
     beatsDuration = sm [2];
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "beatsNumber = \"" <<
@@ -926,7 +926,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       s >> integerValue;
     }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "integerBeatsNumber = " <<
@@ -975,7 +975,7 @@ void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -997,7 +997,7 @@ void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
 void msrTimeSignature::appendTimeSignatureItem (
   const S_msrTimeSignatureItem& timeSignatureItem)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Append item '" <<

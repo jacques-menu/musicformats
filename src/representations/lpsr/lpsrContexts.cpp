@@ -100,7 +100,7 @@ lpsrContext::~lpsrContext ()
 
 void lpsrContext::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrContext::acceptIn ()" <<
@@ -113,7 +113,7 @@ void lpsrContext::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrContext>*> (v)) {
         S_lpsrContext elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrContext::visitStart ()" <<
@@ -126,7 +126,7 @@ void lpsrContext::acceptIn (basevisitor* v)
 
 void lpsrContext::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrContext::acceptOut ()" <<
@@ -139,7 +139,7 @@ void lpsrContext::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrContext>*> (v)) {
         S_lpsrContext elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrContext::visitEnd ()" <<
@@ -235,7 +235,7 @@ lpsrChordNamesContext::~lpsrChordNamesContext ()
 
 void lpsrChordNamesContext::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrChordNamesContext::acceptIn ()" <<
@@ -248,7 +248,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrChordNamesContext>*> (v)) {
         S_lpsrChordNamesContext elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrChordNamesContext::visitStart ()" <<
@@ -261,7 +261,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
 
 void lpsrChordNamesContext::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrChordNamesContext::acceptOut ()" <<
@@ -274,7 +274,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrChordNamesContext>*> (v)) {
         S_lpsrChordNamesContext elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrChordNamesContext::visitEnd ()" <<
@@ -398,7 +398,7 @@ lpsrFiguredBassContext::~lpsrFiguredBassContext ()
 
 void lpsrFiguredBassContext::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrFiguredBassContext::acceptIn ()" <<
@@ -411,7 +411,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrFiguredBassContext>*> (v)) {
         S_lpsrFiguredBassContext elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrFiguredBassContext::visitStart ()" <<
@@ -424,7 +424,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
 
 void lpsrFiguredBassContext::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrFiguredBassContext::acceptOut ()" <<
@@ -437,7 +437,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrFiguredBassContext>*> (v)) {
         S_lpsrFiguredBassContext elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrFiguredBassContext::visitEnd ()" <<

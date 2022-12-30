@@ -12,9 +12,9 @@
 #ifndef ___enableCaughtExceptionsDisplayIfDesired___
 #define ___enableCaughtExceptionsDisplayIfDesired___
 
-#ifndef CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
+#ifndef MF_CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
   // comment the following definition if no display is desired
-  //#define CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
+  //#define MF_CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
 #endif
 
 #endif

@@ -27,7 +27,7 @@ void initializeLPSR ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (
       gGlobalOahEarlyOptions.getEarlyTracingOah ()
         &&

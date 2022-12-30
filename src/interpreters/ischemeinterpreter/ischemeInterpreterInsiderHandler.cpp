@@ -17,11 +17,11 @@
 // WAE
 #include "oahWae.h"
 
-#include "enableHarmoniesExtraOahIfDesired.h"
+#include "mfEnableHarmoniesExtraIfDesired.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -31,7 +31,7 @@
 // OAH
 #include "oahOah.h"
 #include "waeOah.h"
-#include "displayOah.h"
+#include "oahDisplayOah.h"
 
 // early options
 #include "oahEarlyOptions.h"
@@ -76,7 +76,7 @@ R"(
 )",
       usageInformation ())
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing \"" <<
@@ -147,7 +147,7 @@ R"(What ischeme does:
 //______________________________________________________________________________
 void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the ischeme prefixes in \"" <<
@@ -164,7 +164,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterPrefixes ()
 void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
   const std::string& serviceName)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the \"" <<
@@ -186,7 +186,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -217,7 +217,7 @@ void ischemeInterpreterInsiderHandler::createTheIschemeInterpreterOptionGroups (
 //______________________________________________________________________________
 void ischemeInterpreterInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<
@@ -246,7 +246,7 @@ void ischemeInterpreterInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void ischemeInterpreterInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -299,7 +299,7 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::acceptIn ()" <<
@@ -312,7 +312,7 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_ischemeInterpreterInsiderOahGroup>*> (v)) {
         S_ischemeInterpreterInsiderOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching ischemeInterpreterInsiderOahGroup::visitStart ()" <<
@@ -325,7 +325,7 @@ void ischemeInterpreterInsiderOahGroup::acceptIn (basevisitor* v)
 
 void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::acceptOut ()" <<
@@ -338,7 +338,7 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_ischemeInterpreterInsiderOahGroup>*> (v)) {
         S_ischemeInterpreterInsiderOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching ischemeInterpreterInsiderOahGroup::visitEnd ()" <<
@@ -351,7 +351,7 @@ void ischemeInterpreterInsiderOahGroup::acceptOut (basevisitor* v)
 
 void ischemeInterpreterInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> ischemeInterpreterInsiderOahGroup::browseData ()" <<
@@ -447,7 +447,7 @@ ischemeInterpreterInsiderOahGroup::~ischemeInterpreterInsiderOahGroup ()
 //_______________________________________________________________________________
 void ischemeInterpreterInsiderOahGroup::initializeIschemeInterpreterInsiderOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream << std::left <<
       "Initializing \"" <<
@@ -475,7 +475,7 @@ void ischemeInterpreterInsiderOahGroup::printIschemeInterpreterInsiderOahGroupVa
 //______________________________________________________________________________
 S_ischemeInterpreterInsiderOahGroup createGlobalIschemeInterpreterInsiderOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global ischeme insider OAH group" <<

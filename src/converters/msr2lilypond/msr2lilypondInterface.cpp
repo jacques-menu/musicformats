@@ -22,9 +22,9 @@
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msr2lilypondComponent.h"
@@ -61,7 +61,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   std::ostream&     err,
   const S_oahHandler& handler)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Translating an MSR score to LilyPond in \"" <<
@@ -116,7 +116,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
         handler->
           fetchOutputFileNameFromTheOptions ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2lilypond() outputFileName = \"" <<
@@ -127,7 +127,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 #endif
 
     if (! outputFileName.size ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2lilypond() output goes to standard output" <<
@@ -163,7 +163,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
     }
 
     else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         err <<
           "xmlFile2lilypond() output goes to file \"" <<
@@ -174,7 +174,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
 #endif
 
       // open output file
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         err <<
           std::endl <<

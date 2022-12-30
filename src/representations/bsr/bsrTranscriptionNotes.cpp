@@ -61,7 +61,7 @@ S_bsrCellsList bsrTranscriptionNotesElement::buildCellsList () const
 
 void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTranscriptionNotesElement::acceptIn ()" <<
@@ -74,7 +74,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTranscriptionNotesElement>*> (v)) {
         S_bsrTranscriptionNotesElement elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTranscriptionNotesElement::visitStart ()" <<
@@ -87,7 +87,7 @@ void bsrTranscriptionNotesElement::acceptIn (basevisitor* v)
 
 void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTranscriptionNotesElement::acceptOut ()" <<
@@ -100,7 +100,7 @@ void bsrTranscriptionNotesElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTranscriptionNotesElement>*> (v)) {
         S_bsrTranscriptionNotesElement elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTranscriptionNotesElement::visitEnd ()" <<
@@ -179,7 +179,7 @@ bsrTranscriptionNotes::~bsrTranscriptionNotes ()
 
 void bsrTranscriptionNotes::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTranscriptionNotes::acceptIn ()" <<
@@ -192,7 +192,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTranscriptionNotes>*> (v)) {
         S_bsrTranscriptionNotes elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTranscriptionNotes::visitStart ()" <<
@@ -205,7 +205,7 @@ void bsrTranscriptionNotes::acceptIn (basevisitor* v)
 
 void bsrTranscriptionNotes::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTranscriptionNotes::acceptOut ()" <<
@@ -218,7 +218,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTranscriptionNotes>*> (v)) {
         S_bsrTranscriptionNotes elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTranscriptionNotes::visitEnd ()" <<

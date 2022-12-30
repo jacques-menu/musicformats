@@ -11,9 +11,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfcLibraryComponent.h"
@@ -499,7 +499,7 @@ R"(
 \include "jianpu10a.ly"
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Including Jianpu definition file '" << schemeModulesName << "'" <<
@@ -546,7 +546,7 @@ R"(
 #(use-modules (scm accreg))
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Using Scheme modules '" << schemeModulesName << "'" <<
@@ -608,7 +608,7 @@ R"(
 )";
 
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Including Jianpu definition file '" << schemeModulesName << "'" <<
@@ -670,7 +670,7 @@ tongue =
      script))
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -726,7 +726,7 @@ editorialAccidental =
   #})
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -779,7 +779,7 @@ fffff = #(make-dynamic-script "fffff")
 ffffff = #(make-dynamic-script "ffffff")
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -880,7 +880,7 @@ tupletsCurvedBrackets = {
 }
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -935,7 +935,7 @@ after =
    #})
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1048,7 +1048,7 @@ tempoNotesRelationship =
      #}))
 )!";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1241,7 +1241,7 @@ glissandoTextOn =
 glissandoTextOff = \revert Glissando.stencil
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1310,7 +1310,7 @@ otherDynamic =
        #}))
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1631,7 +1631,7 @@ schleifer =
  )
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1703,7 +1703,7 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
 %}
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1766,7 +1766,7 @@ damp = \markup {
 }
 )!";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1823,7 +1823,7 @@ dampAll = \markup
 }
 )!";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1885,7 +1885,7 @@ whiteNoteHeads =
    )
 )!";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1940,7 +1940,7 @@ boxAroundNextBarNumber = {
 }
 )!";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2035,7 +2035,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2112,7 +2112,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2171,7 +2171,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2299,7 +2299,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2415,7 +2415,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2508,7 +2508,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2584,7 +2584,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2631,7 +2631,7 @@ R"(
 #(define modTimeAsString (strftime "%d/%m/%Y - %H:%M:%S" (localtime modTimeSignature)))
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -2669,7 +2669,7 @@ R"(
 \pointAndClickOff
 )";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -2720,7 +2720,7 @@ void lpsrScore::appendLyricsUseToStoreCommand (const S_msrStanza& stanza)
 
 void lpsrScore::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrScore::acceptIn ()" <<
@@ -2733,7 +2733,7 @@ void lpsrScore::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrScore>*> (v)) {
         S_lpsrScore elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrScore::visitStart ()" <<
@@ -2746,7 +2746,7 @@ void lpsrScore::acceptIn (basevisitor* v)
 
 void lpsrScore::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrScore::acceptOut ()" <<
@@ -2759,7 +2759,7 @@ void lpsrScore::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrScore>*> (v)) {
         S_lpsrScore elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrScore::visitEnd ()" <<
@@ -2772,7 +2772,7 @@ void lpsrScore::acceptOut (basevisitor* v)
 
 void lpsrScore::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrScore::browseData ()" <<
@@ -2868,7 +2868,7 @@ void lpsrScore::browseData (basevisitor* v)
     } // for
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrScore::browseData ()" <<

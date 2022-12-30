@@ -12,12 +12,12 @@
 #ifndef ___msdl2brailleOah2manPage___
 #define ___msdl2brailleOah2manPage___
 
-#include "basicOah2manPage.h"
+#include "oahBasicOah2manPage.h"
 
 #include "msrOah2manPage.h"
 #include "bsrOah2manPage.h"
 #include "brailleGenerationOah2manPage.h"
-#include "harmoniesExtraOah2manPage.h"
+#include "oahHarmoniesExtraOah2manPage.h"
 #include "oahOah2manPage.h"
 
 

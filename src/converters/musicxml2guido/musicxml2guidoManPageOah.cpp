@@ -14,9 +14,9 @@
 
 #include <regex>
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 
@@ -64,7 +64,7 @@ xml2gmnManPageGenerateAtom::~xml2gmnManPageGenerateAtom ()
 
 void xml2gmnManPageGenerateAtom::applyElement (std::ostream& os)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a xml2gmnManPageGenerateAtom" <<
@@ -77,7 +77,7 @@ void xml2gmnManPageGenerateAtom::applyElement (std::ostream& os)
 
 void xml2gmnManPageGenerateAtom::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageGenerateAtom::acceptIn ()" <<
@@ -90,7 +90,7 @@ void xml2gmnManPageGenerateAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_xml2gmnManPageGenerateAtom>*> (v)) {
         S_xml2gmnManPageGenerateAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnManPageGenerateAtom::visitStart ()" <<
@@ -103,7 +103,7 @@ void xml2gmnManPageGenerateAtom::acceptIn (basevisitor* v)
 
 void xml2gmnManPageGenerateAtom::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageGenerateAtom::acceptOut ()" <<
@@ -116,7 +116,7 @@ void xml2gmnManPageGenerateAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_xml2gmnManPageGenerateAtom>*> (v)) {
         S_xml2gmnManPageGenerateAtom elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnManPageGenerateAtom::visitEnd ()" <<
@@ -129,7 +129,7 @@ void xml2gmnManPageGenerateAtom::acceptOut (basevisitor* v)
 
 void xml2gmnManPageGenerateAtom::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageGenerateAtom::browseData ()" <<
@@ -253,7 +253,7 @@ R"(Write man page data for EXECUTABLE to standard output.)",
         fOahVisitor));
 }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
 void xml2gmnManPageOahGroup::initializeManPagetracingOah ()
 {
   S_oahSubGroup
@@ -280,7 +280,7 @@ void xml2gmnManPageOahGroup::initializeXml2gmnManPageOahGroup (
   initializeManPageGenerateOptions (
     theOah2manPage);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeManPagetracingOah ();
@@ -302,7 +302,7 @@ void xml2gmnManPageOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void xml2gmnManPageOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageOahGroup::acceptIn ()" <<
@@ -315,7 +315,7 @@ void xml2gmnManPageOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_xml2gmnManPageOahGroup>*> (v)) {
         S_xml2gmnManPageOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnManPageOahGroup::visitStart ()" <<
@@ -328,7 +328,7 @@ void xml2gmnManPageOahGroup::acceptIn (basevisitor* v)
 
 void xml2gmnManPageOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageOahGroup::acceptOut ()" <<
@@ -341,7 +341,7 @@ void xml2gmnManPageOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_xml2gmnManPageOahGroup>*> (v)) {
         S_xml2gmnManPageOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnManPageOahGroup::visitEnd ()" <<
@@ -354,7 +354,7 @@ void xml2gmnManPageOahGroup::acceptOut (basevisitor* v)
 
 void xml2gmnManPageOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnManPageOahGroup::browseData ()" <<
@@ -393,7 +393,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2gmnManPageOahGroup& elt
 S_xml2gmnManPageOahGroup createGlobalXml2gmnManPageOahGroupHandler (
   const S_oahVisitor& theOah2manPage)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global xml2gmnManPage OAH group" <<

@@ -17,14 +17,14 @@
 // WAE
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
-#include "enableHarmoniesExtraOahIfDesired.h"
-#ifdef EXTRA_OAH_IS_ENABLED
-  #include "harmoniesExtraOah.h"
+#include "mfEnableHarmoniesExtraIfDesired.h"
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
+  #include "oahHarmoniesExtraOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -38,10 +38,10 @@
 // OAH
 #include "oahOah.h"
 #include "waeOah.h"
-#include "displayOah.h"
+#include "oahDisplayOah.h"
 
-#include "outputFileOah.h"
-#include "harmoniesExtraOah.h"
+#include "mfOutputFileOah.h"
+#include "oahHarmoniesExtraOah.h"
 
 
 // MSDL
@@ -140,7 +140,7 @@ R"(
       fMultiGenerationOutputKind (
         multiGenerationOutputKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing \"" <<
@@ -346,7 +346,7 @@ R"(
 //______________________________________________________________________________
 void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msdlConverter prefixes in \"" <<
@@ -364,7 +364,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
   const std::string&     serviceName,
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the \"" <<
@@ -386,7 +386,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -544,7 +544,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
       break;
   } // switch
 
-#ifdef EXTRA_OAH_IS_ENABLED
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
@@ -554,7 +554,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
 //______________________________________________________________________________
 void msdlConverterInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<
@@ -579,7 +579,7 @@ void msdlConverterInsiderHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -609,7 +609,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       autoOutputFileNameAtom->
         getSetByAnOption ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions()" <<
@@ -679,7 +679,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
         }
       }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
@@ -689,7 +689,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
@@ -795,7 +795,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
     } // switch
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "outputFileName: " <<
@@ -814,7 +814,7 @@ void msdlConverterInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void msdlConverterInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -828,7 +828,7 @@ void msdlConverterInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
-#ifdef EXTRA_OAH_IS_ENABLED
+#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
   gGlobalHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -878,7 +878,7 @@ void msdlConverterInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptIn ()" <<
@@ -891,7 +891,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdlConverterInsiderOahGroup>*> (v)) {
         S_msdlConverterInsiderOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlConverterInsiderOahGroup::visitStart ()" <<
@@ -904,7 +904,7 @@ void msdlConverterInsiderOahGroup::acceptIn (basevisitor* v)
 
 void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlConverterInsiderOahGroup::acceptOut ()" <<
@@ -917,7 +917,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdlConverterInsiderOahGroup>*> (v)) {
         S_msdlConverterInsiderOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdlConverterInsiderOahGroup::visitEnd ()" <<
@@ -930,7 +930,7 @@ void msdlConverterInsiderOahGroup::acceptOut (basevisitor* v)
 
 void msdlConverterInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdlConverterInsiderOahGroup::browseData ()" <<
@@ -1027,7 +1027,7 @@ msdlConverterInsiderOahGroup::~msdlConverterInsiderOahGroup ()
 //_______________________________________________________________________________
 void msdlConverterInsiderOahGroup::initializemsdlConverterInsiderOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream << std::left <<
       "Initializing \"" <<
@@ -1072,7 +1072,7 @@ void msdlConverterInsiderOahGroup::printmsdlConverterInsiderOahGroupValues (int 
 //______________________________________________________________________________
 S_msdlConverterInsiderOahGroup createGlobalmsdlConverterInsiderOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdlConverter insider OAH group" <<

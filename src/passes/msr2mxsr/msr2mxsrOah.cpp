@@ -16,9 +16,9 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfStringsHandling.h"
@@ -59,7 +59,7 @@ R"(These options control the way MSR data is translated to an MXSR.)",
 msr2mxsrOahGroup::~msr2mxsrOahGroup ()
 {}
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
 void msr2mxsrOahGroup::initializMsr2mxsrTraceOptions ()
 {
   // JMI
@@ -165,7 +165,7 @@ R"(Set the movement number to STRING in the MusicXML output.)",
 
 void msr2mxsrOahGroup::initializeMsr2mxsrOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializMsr2mxsrTraceOptions ();
@@ -191,7 +191,7 @@ void msr2mxsrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msr2mxsrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2mxsrOahGroup::acceptIn ()" <<
@@ -204,7 +204,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2mxsrOahGroup>*> (v)) {
         S_msr2mxsrOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2mxsrOahGroup::visitStart ()" <<
@@ -217,7 +217,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
 
 void msr2mxsrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2mxsrOahGroup::acceptOut ()" <<
@@ -230,7 +230,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2mxsrOahGroup>*> (v)) {
         S_msr2mxsrOahGroup elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2mxsrOahGroup::visitEnd ()" <<
@@ -243,7 +243,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
 
 void msr2mxsrOahGroup::browseData (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2mxsrOahGroup::browseData ()" <<
@@ -310,7 +310,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2mxsrOahGroup& elt)
 //______________________________________________________________________________
 S_msr2mxsrOahGroup createGlobalMsr2mxsrOahGroup ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2mxsr OAH group" <<

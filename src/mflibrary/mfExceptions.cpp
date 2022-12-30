@@ -13,7 +13,7 @@
 
 #include "mfExceptions.h"
 
-#include "enebleCaughtExceptionsDisplay.h"
+#include "mfEnableCaughtExceptionsDisplay.h"
 
 
 namespace MusicFormats
@@ -22,7 +22,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 EXP void mfDisplayException (std::exception& e, std::ostream& os)
 {
-#ifdef CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
+#ifdef MF_CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
   os <<
     "std::exception caught: " <<
     e.what () <<

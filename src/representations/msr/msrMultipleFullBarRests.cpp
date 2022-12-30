@@ -19,9 +19,9 @@
 
 #include "msrWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "msrMultipleFullBarRests.h"
@@ -97,7 +97,7 @@ msrMultipleFullBarRests::~msrMultipleFullBarRests ()
 S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNewbornClone (
   const S_msrSegment& containingVoice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Creating a newborn clone of multiple full-bar rests '" <<
@@ -143,7 +143,7 @@ Rational msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes 
 void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
   const std::string& nextMeasureNumber)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Setting multiple full-bar rests next measure number to '" <<
@@ -208,7 +208,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //       s.str ());
 //   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Setting multiple full-bar rests last measure purist number to '" <<
@@ -248,7 +248,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
 //     getMultipleFullBarRestsContentsSegment ()->
 //       appendMeasureToSegment (
 //         measureClone);
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Appending measure "<<

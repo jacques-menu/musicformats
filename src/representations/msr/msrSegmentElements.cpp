@@ -13,9 +13,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -61,7 +61,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   const Rational& wholeNotes,
   const std::string&   context)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Setting measure element sounding whole notes of " <<
@@ -87,7 +87,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 
 void msrSegmentElement::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegmentElement::acceptIn ()" <<
@@ -100,7 +100,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
         S_msrSegmentElement elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegmentElement::visitStart ()" <<
@@ -113,7 +113,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
 
 void msrSegmentElement::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegmentElement::acceptOut ()" <<
@@ -126,7 +126,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
         S_msrSegmentElement elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegmentElement::visitEnd ()" <<

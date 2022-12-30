@@ -267,7 +267,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         "handleSubsequentHarmonyInHarmoniesMeasure() 2");
 //
 //     // insert skipNote before currentHarmony in the measure's elements list
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
 //         "Inserting subsequent padding note " <<
@@ -310,7 +310,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //           + // the delta is negative
 //         measurePositionsDelta;
 //
-// #ifdef TRACING_IS_ENABLED
+// #ifdef OAH_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
 //         "Reducing the sounding whole notes of harmony FOO " <<

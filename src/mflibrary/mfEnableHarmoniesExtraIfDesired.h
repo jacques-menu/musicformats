@@ -9,12 +9,15 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___enableTracingIfDesired___
-#define ___enableTracingIfDesired___
+#ifndef ___enableHarmoniesExtraOahIfDesired___
+#define ___enableHarmoniesExtraOahIfDesired___
 
-#ifndef TRACING_IS_ENABLED
-  // comment the following definition if no tracing is desired
-  #define TRACING_IS_ENABLED
+
+// comment the following definition if no extra options are wanted
+
+#ifndef OAH_HARMONIES_EXTRA_IS_ENABLED
+  #define OAH_HARMONIES_EXTRA_IS_ENABLED
 #endif
+
 
 #endif

@@ -13,9 +13,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfStringsHandling.h"
@@ -63,7 +63,7 @@ bsrLine::bsrLine (
 
   fASpaceIsNeededInLine = true;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceLines ()) {
     gLogStream <<
       "Creating bsrLine '" <<
@@ -80,7 +80,7 @@ bsrLine::~bsrLine ()
 
 S_bsrLine bsrLine::createLineNewbornClone ()
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceLines ()) {
     gLogStream <<
       "Creating a newborn clone of line " <<
@@ -176,7 +176,7 @@ void bsrLine::insertElementBeforeLastElementOfLine (
 
 void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceSpaces () || gGlobalBsrOahGroup->getTraceLines ()) {
     gLogStream <<
       "Appending spaces '" <<
@@ -193,7 +193,7 @@ void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
 
 void bsrLine::appendKeyToLine (S_bsrKey key)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Appending key " <<
@@ -210,7 +210,7 @@ void bsrLine::appendKeyToLine (S_bsrKey key)
 
 void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending time signature '" <<
@@ -228,7 +228,7 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 
 void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignature)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Inserting time signature '" <<
@@ -246,7 +246,7 @@ void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignatur
 
 void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "Appending tempo " <<
@@ -263,7 +263,7 @@ void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 
 void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures () || gGlobalBsrOahGroup->getTraceLines ()) {
     gLogStream <<
       "Appending measure '" <<
@@ -328,7 +328,7 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
 
 void bsrLine::appendNoteToLine (S_bsrNote note)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Appending note '" <<
@@ -400,7 +400,7 @@ int bsrLine::fetchCellsNumber () const
 
 void bsrLine::acceptIn (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrLine::acceptIn ()" <<
@@ -413,7 +413,7 @@ void bsrLine::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrLine>*> (v)) {
         S_bsrLine elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrLine::visitStart ()" <<
@@ -426,7 +426,7 @@ void bsrLine::acceptIn (basevisitor* v)
 
 void bsrLine::acceptOut (basevisitor* v)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrLine::acceptOut ()" <<
@@ -439,7 +439,7 @@ void bsrLine::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrLine>*> (v)) {
         S_bsrLine elem = this;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrLine::visitEnd ()" <<

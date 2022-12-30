@@ -23,7 +23,7 @@ S_mfcPassComponent createMxsr2guidoComponent ()
   // protect library against multiple initializations
   if (! pPassComponent) {
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Initializing mxsr2guido pass component" <<

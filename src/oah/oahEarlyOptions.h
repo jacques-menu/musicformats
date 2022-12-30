@@ -37,7 +37,7 @@ EXP extern const std::string K_QUIET_OPTION_SHORT_NAME;
 EXP extern const std::string K_INCLUDE_OPTION_LONG_NAME;
 EXP extern const std::string K_INCLUDE_OPTION_SHORT_NAME;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
 
 // trace early options
 EXP extern const std::string K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME;
@@ -100,7 +100,7 @@ class EXP oahEarlyOptions
                           getEarlyIncludeFileNamesList () const
                               { return fEarlyIncludeFileNamesList; }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
 
     void                  setTraceEarlyOptions ();
     Bool                  getTraceEarlyOptions () const
@@ -178,7 +178,7 @@ class EXP oahEarlyOptions
     std::list<std::string>          
                           fEarlyIncludeFileNamesList;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
 
     Bool                  fTraceEarlyOptions;
 

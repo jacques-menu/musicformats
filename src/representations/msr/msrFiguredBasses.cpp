@@ -13,9 +13,9 @@
 
 #include "visitor.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfAssert.h"
@@ -184,7 +184,7 @@ msrBassFigure::msrBassFigure (
   fFigureNumber     = figureNumber;
   fFigureSuffixKind = figureSuffixKind;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating bass figure " <<
@@ -200,7 +200,7 @@ msrBassFigure::~msrBassFigure ()
 S_msrBassFigure msrBassFigure::createFigureNewbornClone (
   const S_msrPart& containingPart)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a newborn clone of bass figure " <<
@@ -230,7 +230,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
 S_msrBassFigure msrBassFigure::createFigureDeepClone (
   const S_msrPart& containingPart)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a deep clone of bass figure " <<
@@ -454,7 +454,7 @@ msrFiguredBass::msrFiguredBass (
   // until this is computed in msrMeasure::finalizeFiguredBassesInFiguredBassMeasure()
   fMeasureElementMeasurePosition = Rational (0, 1);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating figuredBass " <<
@@ -470,7 +470,7 @@ msrFiguredBass::~msrFiguredBass ()
 S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a newborn clone of figured bass " <<
@@ -505,7 +505,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
 S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
  // S_msrPart containingPart) // JMI v0.9.66
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a deep clone of figuredBass " <<
@@ -540,7 +540,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 void msrFiguredBass::setFiguredBassUpLinkToNote (
   const S_msrNote& note)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "==> Setting the uplink to note of figured bass " <<
@@ -568,7 +568,7 @@ void msrFiguredBass::setFiguredBassUpLinkToMeasure (
     measure != nullptr,
     "measure is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     ++gIndenter;
 
@@ -590,7 +590,7 @@ void msrFiguredBass::setFiguredBassUpLinkToMeasure (
 void msrFiguredBass::appendFigureToFiguredBass (
   const S_msrBassFigure& bassFigure)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Appending bass figure " << bassFigure->asString () <<

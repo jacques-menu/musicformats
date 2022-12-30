@@ -11,12 +11,12 @@
 
 #include "mfStringsHandling.h"
 
-#include "enableHarmoniesExtraOahIfDesired.h"
+#include "mfEnableHarmoniesExtraIfDesired.h"
 #include "oahWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "oahEarlyOptions.h"
@@ -58,7 +58,7 @@ oahInsiderHandler::oahInsiderHandler (
       handlerDescription,
       handlerUsage)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing \"" <<

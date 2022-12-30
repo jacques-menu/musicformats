@@ -43,9 +43,9 @@
 #include "waeInterface.h"
 #include "lpsr2lilypondWae.h"
 
-#include "oahEnableTracingIfDesired.h"
-#ifdef TRACING_IS_ENABLED
-  #include "tracingOah.h"
+#include "mfEnableTracingIfDesired.h"
+#ifdef OAH_TRACING_IS_ENABLED
+  #include "mfTracingOah.h"
 #endif
 
 #include "mfConstants.h"
@@ -245,7 +245,7 @@ if (false) // JMI
       break;
   } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream <<
       "lpsr2lilypondTranslator()" <<
@@ -333,7 +333,7 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
     // the first note in the voice will become the initial reference
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream <<
       "setCurrentOctaveEntryReferenceFromTheLilypondOah()" <<
@@ -475,7 +475,7 @@ std::string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
 {
   std::string result;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     fLilypondCodeStream <<
       std::endl <<
@@ -643,7 +643,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
         +
       (int) referenceDiatonicPitchKind - (int) msrDiatonicPitchKind::kDiatonicPitchC;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     int fieldWidth = 28;
 
@@ -690,7 +690,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
     } // while
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream <<
       "lilypondOctaveInRelativeEntryMode() 2" <<
@@ -728,7 +728,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
   int absoluteOctavesDifference =
     (int) noteAbsoluteOctave - (int) referenceAbsoluteOctave;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream << std::left <<
       "% noteAbsoluteOctave = " <<
@@ -856,7 +856,7 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
         stringTuningDiatonicPitchKind,
         stringTuningAlterationKind);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceScordaturas ()) {
     int
       getStringTuningNumber =
@@ -964,7 +964,7 @@ std::stringstream s;
       note->getNoteOctaveKind ();
 
   // should an absolute octave be generated?
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     msrOctaveKind
       noteAbsoluteDisplayOctave =
@@ -1004,7 +1004,7 @@ std::stringstream s;
   switch (gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue ()) {
     case msrOctaveEntryKind::kOctaveEntryRelative:
       if (! fCurrentOctaveEntryReference) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
           gLogStream <<
             "notePitchAsLilypondString() 2: fCurrentOctaveEntryReference is null" <<
@@ -1023,7 +1023,7 @@ std::stringstream s;
         // fCurrentOctaveEntryReference will be set to note later
       }
       else {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
           gLogStream <<
             "notePitchAsLilypondString() 3: fCurrentOctaveEntryReference is '" <<
@@ -1085,7 +1085,7 @@ std::stringstream s;
       break;
   } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream << std::endl;
   }
@@ -1228,7 +1228,7 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
     noteAbsoluteDisplayOctave =
       note->getNoteDisplayOctaveKind ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     // in MusicXML, octave number is 4 for the octave starting with middle C
     msrOctaveKind
@@ -1402,7 +1402,7 @@ void lpsr2lilypondTranslator::generateNoteLigatures (
                 ;
             } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
             if (gGlobalTracingOahGroup->getTraceLigatures ()) {
               gLogStream <<
                 "Ligature vertical flipping factore for note '" <<
@@ -1561,7 +1561,7 @@ std::string lpsr2lilypondTranslator::stemAsLilypondString (
 void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
   const S_msrStem& stem)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStems ()) {
     gLogStream <<
       "--> generateStemIfNeededAndUpdateCurrentStemKind" <<
@@ -1585,7 +1585,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
       gGlobalLpsr2lilypondOahGroup->getGenerateStemsDirections ()
        // JMI msrStemKind::kStemNeutral ???
     ) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceStems ()) {
         gLogStream <<
           "--> fCurrentStemKind switches from " <<
@@ -1806,7 +1806,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -1952,7 +1952,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -2042,7 +2042,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -2233,7 +2233,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -2304,7 +2304,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -2382,7 +2382,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
 void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
   const S_msrNote& note)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int inputLineNumber =
     note->getInputLineNumber ();
 
@@ -2473,7 +2473,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -2552,7 +2552,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -2639,7 +2639,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -2704,7 +2704,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
 void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
   const S_msrNote& note)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int inputLineNumber =
     note->getInputLineNumber ();
 
@@ -2786,7 +2786,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -2860,7 +2860,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
 void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
   const S_msrNote& note)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int inputLineNumber =
     note->getInputLineNumber ();
 
@@ -2938,7 +2938,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -3038,7 +3038,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
   int inputLineNumber =
     note->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceNotes =
@@ -3334,7 +3334,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
 void lpsr2lilypondTranslator::generateNoteArticulation (
   const S_msrArticulation& articulation)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
     gLogStream <<
       "generateNoteArticulation()" <<
@@ -3590,7 +3590,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
 void lpsr2lilypondTranslator::generateChordArticulation (
   const S_msrArticulation& articulation)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
     gLogStream <<
       "generateChordArticulation()" <<
@@ -4558,7 +4558,7 @@ std::string lpsr2lilypondTranslator::singleTremoloDurationAsLilypondString (
       1 + ((int) singleTremoloNoteDurationKind - (int) msrDurationKind::kDurationEighth);
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "singleTremoloDurationAsLilypondString()" <<
@@ -5457,7 +5457,7 @@ R"(
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -5532,7 +5532,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrScore& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -5575,7 +5575,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScore& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrIdentification& elt) // JMI
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -5607,7 +5607,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrIdentification& elt) // JMI
 
 void lpsr2lilypondTranslator::visitEnd (S_msrIdentification& elt) // JMI
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -5661,7 +5661,7 @@ std::string lpsr2lilypondTranslator::nameAsLilypondString (
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeVariable& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -5730,7 +5730,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeVariable& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeVariable& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -5784,7 +5784,7 @@ std::string lpsr2lilypondTranslator::lengthUnitAsLilypondString (
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrHeader& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -5837,7 +5837,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrHeader& elt)
 
   --gIndenter; // incremented in visitStart (S_lpsrHeader&)
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -6032,7 +6032,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     over those found in the identification
   */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int fieldWidth =
     identification -> maxIdentificationNamesLength ();
 #endif
@@ -6323,7 +6323,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     } // for
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     fLilypondCodeStream <<
       "% --> The identification nameStringValuePairsList contains:" <<
@@ -6770,7 +6770,7 @@ void lpsr2lilypondTranslator::generatePaper (
     }
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     fLilypondCodeStream <<
       "% --> The paper nameLengthValuePairsList contains:" <<
@@ -6811,7 +6811,7 @@ void lpsr2lilypondTranslator::generatePaper (
     }
   } // for
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     fLilypondCodeStream <<
       "% --> The paper nameLengthValuePairsList contains:" <<
@@ -7587,7 +7587,7 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrPaper& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -7627,7 +7627,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPaper& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrPaper& elt) // superflous ??? JMI
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -7664,7 +7664,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPaper& elt) // superflous ??? JMI
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -7778,7 +7778,7 @@ R"(\context {
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -7906,7 +7906,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrBookBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -7950,7 +7950,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBookBlock& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8005,7 +8005,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrScoreBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8045,7 +8045,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScoreBlock& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8097,7 +8097,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrBookPartBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8137,7 +8137,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBookPartBlock& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8186,7 +8186,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8242,7 +8242,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8300,7 +8300,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
     partGroup =
       elt->getPartGroup ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8422,7 +8422,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           break;
       } // switch
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTracePartGroups ()) {
          fLilypondCodeStream <<
           " %{ " <<
@@ -8585,7 +8585,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8657,7 +8657,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
     part =
       elt->getPart ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8770,7 +8770,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
     part =
       elt->getPart ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -8826,7 +8826,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9156,7 +9156,7 @@ R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9209,7 +9209,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffgroupBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9247,7 +9247,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffgroupBlock& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffgroupBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9286,7 +9286,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffgroupBlock& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9320,7 +9320,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffBlock& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9356,7 +9356,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffBlock& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9498,7 +9498,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
     part->getPartName ();
 
   // should a transposition be generated?
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
     gLogStream <<
       std::endl <<
@@ -9561,7 +9561,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
   if (doTransposeCurrentPart) {
     // generate the transposition
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
       gLogStream <<
         std::endl <<
@@ -9635,7 +9635,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrUseVoiceCommand& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9668,7 +9668,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrUseVoiceCommand& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9744,7 +9744,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrNewLyricsBlock& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9781,7 +9781,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewLyricsBlock& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrVariableUseCommand& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9815,7 +9815,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrVariableUseCommand& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrVariableUseCommand& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9850,7 +9850,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrVariableUseCommand& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9931,7 +9931,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrChordNamesContext& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -9964,7 +9964,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrChordNamesContext& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10054,7 +10054,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrFiguredBassContext& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10087,7 +10087,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrFiguredBassContext& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrBarCommand& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10119,7 +10119,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrBarCommand& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrBarCommand& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10152,7 +10152,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBarCommand& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrComment& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10191,7 +10191,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrComment& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrComment& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10224,7 +10224,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrComment& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeFunction& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10265,7 +10265,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrSchemeFunction& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeFunction& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10299,7 +10299,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeFunction& elt)
 /* JMI
 void lpsr2lilypondTranslator::visitStart (S_lpsrMelismaCommand& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10340,7 +10340,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrMelismaCommand& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrMelismaCommand& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10374,7 +10374,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrMelismaCommand& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrScore& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10406,7 +10406,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScore& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrScore& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10439,7 +10439,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScore& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrScaling& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10471,7 +10471,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScaling& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrScaling& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10504,7 +10504,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScaling& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrPageLayout& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10559,7 +10559,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageLayout& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrPageLayout& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10592,7 +10592,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageLayout& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrSystemLayout& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10624,7 +10624,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSystemLayout& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrSystemLayout& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10657,7 +10657,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSystemLayout& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrStaffLayout& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10689,7 +10689,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffLayout& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrStaffLayout& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10722,7 +10722,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaffLayout& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrAppearance& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10754,7 +10754,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAppearance& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrAppearance& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10787,7 +10787,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAppearance& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrCredit& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10819,7 +10819,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCredit& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrCredit& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10851,7 +10851,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCredit& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrCreditWords& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10883,7 +10883,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCreditWords& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrCreditWords& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10916,7 +10916,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCreditWords& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10950,7 +10950,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -10988,7 +10988,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
     partCombinedName =
       elt->getPartCombinedName ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11018,7 +11018,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       std::endl <<
@@ -11037,7 +11037,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11074,7 +11074,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11110,7 +11110,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11146,7 +11146,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrStaffTuning& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11213,7 +11213,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffTuning& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrStaffDetails& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11260,7 +11260,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffDetails& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11291,7 +11291,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       std::endl <<
@@ -11429,7 +11429,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   // center bar number?
   if (gGlobalLpsr2lilypondOahGroup->getBoxAroundBarNumberSet ().size ()) {
     // yes, center the boxed bar number
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
       gLogStream <<
         std::endl <<
@@ -11536,7 +11536,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 {
   --gIndenter; // incremented in visitStart (S_msrVoice& elt)
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11632,7 +11632,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11684,7 +11684,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11723,7 +11723,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 
   if (fOnGoingNotesStack.size () > 0) {
   /* JMI
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       fLilypondCodeStream <<
         "%{ fOnGoingNotesStack.size () S_msrHarmony JMI " <<
@@ -11759,7 +11759,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11790,7 +11790,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
 #endif
 
   if (fOnGoingNotesStack.size () > 0) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceFrames ()) {
       fLilypondCodeStream <<
         "%{ " << elt->asString () << " %}" <<
@@ -11807,7 +11807,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -11866,7 +11866,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 		fCurrentFiguredBass = elt;
 
 		if (fOnGoingNotesStack.size () > 0) {
-	#ifdef TRACING_IS_ENABLED
+	#ifdef OAH_TRACING_IS_ENABLED
 			if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
 				fLilypondCodeStream <<
 					"%{ fOnGoingNotesStack.size () S_msrFiguredBass JMI " <<
@@ -11903,7 +11903,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
 {
 /* JMI
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -12034,7 +12034,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -12106,7 +12106,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -12152,7 +12152,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -12214,13 +12214,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     measurePuristNumber =
       elt->getMeasurePuristNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   msrMeasureEndRegularKind
     measureEndRegularKind =
       elt-> getMeasureEndRegularKind ();
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -12281,7 +12281,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       it != gGlobalLpsr2lilypondOahGroup->getBoxAroundBarNumberSet ().end ()
     ) {
       // yes, generate a box around the bar number
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
         gLogStream <<
           std::endl <<
@@ -12314,7 +12314,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       int lilypondMeasureNumber = (*it).second;
 
       if (std::to_string (lilypondMeasureNumber) != measureNumber) {
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
           gLogStream <<
             std::endl <<
@@ -12333,7 +12333,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           std::endl;
       }
       else {
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
           gLogStream <<
             std::endl <<
@@ -12350,7 +12350,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     }
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       std::endl <<
@@ -12532,7 +12532,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           ratioToFullMeasureWholeNotesDuration =
             measureWholeNotesDuration / fullMeasureWholeNotesDuration;
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
           int fieldWidth = 27;
 
@@ -12719,13 +12719,13 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     measurePuristNumber =
       elt->getMeasurePuristNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   msrMeasureEndRegularKind
     measureEndRegularKind =
       elt-> getMeasureEndRegularKind ();
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -12759,7 +12759,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       std::endl <<
@@ -12874,7 +12874,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
     if (it != gGlobalLpsr2lilypondOahGroup->getBreakLineAfterMeasureNumberSet ().end ()) {
       // yes, generate a line break command
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
           gLogStream <<
             std::endl <<
@@ -12892,7 +12892,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
   /* JMI
     else {
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
      if (gGlobalTracingOahGroup->getTraceLineBreaks ()) { // JMI
         gLogStream <<
           std::endl <<
@@ -12916,7 +12916,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
     if (it != gGlobalLpsr2lilypondOahGroup->getBreakPageAfterMeasureNumberSet ().end ()) {
       // yes, generate a page break command
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
           gLogStream <<
             std::endl <<
@@ -12934,7 +12934,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
   /* JMI
     else {
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
      if (gGlobalTracingOahGroup->getTracePageBreaks ()) { // JMI
         gLogStream <<
           std::endl <<
@@ -12957,7 +12957,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -13023,7 +13023,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -13073,7 +13073,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -13130,7 +13130,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           fLilypondCodeStream <<
             ' ';
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableSingle %} ";
@@ -13156,7 +13156,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           fLilypondCodeStream <<
             " -- ";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableBegin %} ";
@@ -13182,7 +13182,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           fLilypondCodeStream <<
             " -- ";
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableMiddle %} ";
@@ -13208,7 +13208,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           fLilypondCodeStream <<
             ' ';
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableEnd %} ";
@@ -13224,7 +13224,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           fLilypondCodeStream <<
             elt->syllableWholeNotesAsMsrString () <<
             ' ';
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
             " %{ kSyllableOnRestNote %} ";
@@ -13236,7 +13236,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsDurationsKind ()) {
             case lpsrLyricsDurationsKind::kLyricsDurationsImplicit:
               // LilyPond ignores the skip durations when \lyricsto is used
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceLyrics ()) {
                 fLilypondCodeStream <<
                   " %{ NOTHING for kSyllableSkipRestNote " <<
@@ -13250,7 +13250,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
                 "\\skip" <<
                 elt->syllableWholeNotesAsMsrString () <<
                 ' ';
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceLyrics ()) {
                 fLilypondCodeStream <<
                 " %{ lpsrLyricsDurationsKind::kLyricsDurationsExplicit %} ";
@@ -13268,7 +13268,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
                 "\\skip" <<
                 elt->syllableWholeNotesAsMsrString () <<
                 ' ';
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceLyrics ()) {
                 fLilypondCodeStream <<
                   " %{ syllableSkipNonRestNote lyricsDurationsImplicit %} ";
@@ -13280,7 +13280,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
                 "\\skip" <<
                 elt->syllableWholeNotesAsMsrString () <<
                 ' ';
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceLyrics ()) {
                 fLilypondCodeStream <<
                 " %{ syllableSkipNonRestNote lyricsDurationsExplicit %} ";
@@ -13332,7 +13332,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 
       switch (elt->getSyllableExtendKind ()) {
         case msrSyllableExtendKind::kSyllableExtendNone:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableExtendNone %} ";
@@ -13341,7 +13341,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           break;
 
         case msrSyllableExtendKind::kSyllableExtendEmpty:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableExtendEmpty %} ";
@@ -13362,7 +13362,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
                 "__ ";
               break;
           } // switch
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableExtendSingle %} ";
@@ -13383,7 +13383,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
                 "__ ";
               break;
           } // switch
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableExtendStart %} ";
@@ -13392,7 +13392,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           break;
 
         case msrSyllableExtendKind::kSyllableExtendContinue:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableExtendContinue %} ";
@@ -13401,7 +13401,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           break;
 
         case msrSyllableExtendKind::kSyllableExtendStop:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ kSyllableExtendStop %} ";
@@ -13425,7 +13425,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -13460,7 +13460,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -13526,7 +13526,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
       ) {
         // this is a clef change, comment it
 
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceClefs ()) {
           gLogStream <<
             "Commenting clef change from " <<
@@ -13644,7 +13644,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -13679,7 +13679,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -13852,7 +13852,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrKey& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -13887,7 +13887,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrKey& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -14104,7 +14104,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -14138,7 +14138,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrTransposition& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -14612,7 +14612,7 @@ If the double element is present, it indicates that the music is doubled one oct
         transpositionOctaveKind);
 
 /* JMI
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
     fLilypondCodeStream << // JMI
       "Handlling transpose '" <<
@@ -14647,7 +14647,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTransposition& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -14680,7 +14680,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTransposition& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15189,7 +15189,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoNotesRelationship (
 
 void lpsr2lilypondTranslator::visitStart (S_msrTempoNotesRelationshipElements& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15227,7 +15227,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNotesRelationshipElements& e
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTempoNotesRelationshipElements& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15266,7 +15266,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoNotesRelationshipElements& elt
 
 void lpsr2lilypondTranslator::visitStart (S_msrTempoNote& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15305,7 +15305,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNote& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrTempoTuplet& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15347,7 +15347,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoTuplet& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTempoTuplet& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15382,7 +15382,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoTuplet& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTempo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15415,7 +15415,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempo& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrArticulation& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15450,7 +15450,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArticulation& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrArticulation& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15483,7 +15483,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArticulation& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrFermata& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15560,7 +15560,7 @@ Articulations can be attached to rests as well as notes but they cannot be attac
 
 void lpsr2lilypondTranslator::visitEnd (S_msrFermata& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15593,7 +15593,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFermata& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrArpeggiato& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15628,7 +15628,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArpeggiato& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrArpeggiato& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15661,7 +15661,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArpeggiato& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrNonArpeggiato& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15696,7 +15696,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNonArpeggiato& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrNonArpeggiato& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15729,7 +15729,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNonArpeggiato& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrTechnical& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15764,7 +15764,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnical& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTechnical& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15797,7 +15797,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnical& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithInteger& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15834,7 +15834,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithInteger& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15867,7 +15867,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithFloat& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15904,7 +15904,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithFloat& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15937,7 +15937,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithString& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -15972,7 +15972,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithString& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithString& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16005,7 +16005,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithString& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrOrnament& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16040,7 +16040,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOrnament& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrOrnament& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16073,7 +16073,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOrnament& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrGlissando& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16108,7 +16108,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGlissando& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrGlissando& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16141,7 +16141,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGlissando& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrSlide& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16176,7 +16176,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlide& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrSlide& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16209,7 +16209,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlide& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrSingleTremolo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16244,7 +16244,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSingleTremolo& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrSingleTremolo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16277,7 +16277,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSingleTremolo& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16310,7 +16310,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
   int numberOfRepeats =
     elt->getDoubleTremoloNumberOfRepeats ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     fLilypondCodeStream <<
       "% visitStart (S_msrDoubleTremolo&)" <<
@@ -16347,7 +16347,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrDoubleTremolo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16386,7 +16386,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDoubleTremolo& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrDynamic& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16418,7 +16418,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDynamic& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrDynamic& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16451,7 +16451,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDynamic& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrOtherDynamic& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16483,7 +16483,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOtherDynamic& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrOtherDynamic& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16516,7 +16516,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOtherDynamic& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrWords& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16548,7 +16548,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWords& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrWords& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16581,7 +16581,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWords& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrSlur& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16614,7 +16614,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlur& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrSlur& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16648,7 +16648,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlur& elt)
 /*
 void lpsr2lilypondTranslator::visitStart (S_msrChordSlurLink& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16681,7 +16681,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordSlurLink& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrChordSlurLink& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16716,7 +16716,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordSlurLink& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrLigature& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16748,7 +16748,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLigature& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16781,7 +16781,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrCrescDecresc& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16824,7 +16824,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCrescDecresc& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16857,7 +16857,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrWedge& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16889,7 +16889,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWedge& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -16935,7 +16935,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
     ) {
       S_msrBeam beam = (*i);
 
- #ifdef TRACING_IS_ENABLED
+ #ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceBeams ()) {
         gLogStream <<
           "Considering to generate LilyPond code for beam " <<
@@ -16953,7 +16953,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
         case msrBeamKind::kBeamBegin:
           if (beam->getBeamNumber () == 1) {
             if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
- #ifdef TRACING_IS_ENABLED
+ #ifdef OAH_TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceBeams ()) {
                 gLogStream <<
                   "Generating LilyPond code for beam " <<
@@ -17023,7 +17023,7 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
     ) {
       S_msrSlur slur = (*i);
 
- #ifdef TRACING_IS_ENABLED
+ #ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceSlurs ()) {
         gLogStream <<
           "Considering to generate LilyPond code for slur direction " <<
@@ -17066,7 +17066,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
     ) {
       S_msrSlur slur = (*i);
 
- #ifdef TRACING_IS_ENABLED
+ #ifdef OAH_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceSlurs ()) {
         gLogStream <<
           "Considering to generate LilyPond code for slur " <<
@@ -17087,7 +17087,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           break;
 
         case msrSlurTypeKind::kSlurTypeRegularStart:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceSlurs ()) {
             gLogStream <<
               "Generating LilyPond code for slur regular start " <<
@@ -17112,7 +17112,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           break;
 
         case msrSlurTypeKind::kSlurTypeRegularStop:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceSlurs ()) {
             gLogStream <<
               "Generating LilyPond code for slur regular stop " <<
@@ -17142,7 +17142,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           break;
 
         case msrSlurTypeKind::kSlurTypePhrasingStart:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceSlurs ()) {
             gLogStream <<
               "Generating LilyPond code for slur phrasing start " <<
@@ -17167,7 +17167,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           break;
 
         case msrSlurTypeKind::kSlurTypePhrasingStop:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceSlurs ()) {
             gLogStream <<
               "Generating LilyPond code for slur phrasing stop " <<
@@ -17202,7 +17202,7 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
     4. no slash but slur: \appoggiatura, LilyPond will slur it JMI
   */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     fLilypondCodeStream <<
       "% --> generating code for grace notes group " <<
@@ -17435,7 +17435,7 @@ slash = \tweak Flag.stroke-style grace \etc
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrGraceNotesGroup& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -17476,7 +17476,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -17512,7 +17512,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -17547,7 +17547,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -17583,7 +17583,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroup& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -17620,7 +17620,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroup& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroupContents& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -17661,7 +17661,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroupContents& elt
 
 void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -17697,7 +17697,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroup& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -17822,7 +17822,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -17925,7 +17925,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
         // in chords in grace notes groups
         case msrNoteKind::kNoteInChordInGraceNotesGroup:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
@@ -17982,7 +17982,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
                   std::endl;
               }
 
-  #ifdef TRACING_IS_ENABLED
+  #ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
       gLogStream <<
         "% ==> returning from visitStart (S_msrNote&)" <<
@@ -17995,7 +17995,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
           }
           */
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
@@ -18013,7 +18013,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
       case msrNoteKind::kNoteSkipInMeasure:
         if (elt->getNoteShortcutUpLinkToGraceNotesGroup ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
@@ -18032,7 +18032,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
@@ -18049,7 +18049,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         break;
 
       case msrNoteKind::kNoteInChordInGraceNotesGroup:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
@@ -18072,7 +18072,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
   // is this note to be ignored?
   if (noteIsToBeIgnored) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       std::stringstream s;
 
@@ -18090,7 +18090,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
     return;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     std::stringstream s;
 
@@ -18933,7 +18933,7 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
 
 void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -18984,7 +18984,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                   getInhibitMultipleFullBarRestsBrowsing ();
 
             if (inhibitMultipleFullBarRestsBrowsing) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
               if (
                 gGlobalTracingOahGroup->getTraceNotes ()
                   ||
@@ -18996,7 +18996,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
                 gLogStream <<
                   "% ==> returning from visitEnd (S_msrNote&)" <<
@@ -19011,7 +19011,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 
       case msrNoteKind::kNoteSkipInMeasure:
         if (elt->getNoteShortcutUpLinkToGraceNotesGroup ()) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
@@ -19029,7 +19029,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
@@ -19049,7 +19049,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   }
 
   if (noteIsToBeIgnored) {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       std::stringstream s;
 
@@ -19721,7 +19721,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrOctaveShift& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -19753,7 +19753,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOctaveShift& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrOctaveShift& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -19786,7 +19786,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOctaveShift& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrAccordionRegistration& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -19857,7 +19857,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAccordionRegistration& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrHarpPedalsTuning& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -19924,7 +19924,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarpPedalsTuning& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrStem& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -19956,7 +19956,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStem& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrStem& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -19989,7 +19989,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStem& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrBeam& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -20021,7 +20021,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBeam& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -20157,7 +20157,7 @@ void lpsr2lilypondTranslator::generateCodeAheadOfChordContents (
 void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
   const S_msrChord& chord)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     fLilypondCodeStream <<
       "% --> generateCodeRightBeforeChordContents() for chord " <<
@@ -20403,7 +20403,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
       firstChordStem != nullptr,
       "firstChordStem is null");
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceStems ()) {
       fLilypondCodeStream <<
         "% --> generateCodeRightBeforeChordContents() for chord " <<
@@ -20434,7 +20434,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
 void lpsr2lilypondTranslator::generateCodeForChordInGraceNotesGroupContents (
   const S_msrChord& chord)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     fLilypondCodeStream <<
       "% --> generateCodeForChordInGraceNotesGroupContents() for chord " <<
@@ -20478,7 +20478,7 @@ void lpsr2lilypondTranslator::generateCodeForChordInGraceNotesGroupContents (
 void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   const S_msrChord& chord)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     fLilypondCodeStream <<
       std::endl <<
@@ -21148,7 +21148,7 @@ void lpsr2lilypondTranslator::generateChordInGraceNotesGroup (const S_msrChord& 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21184,7 +21184,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (fOnGoingGraceNotesGroup) {
     int chordInputLineNumber =
       elt->getInputLineNumber ();
@@ -21226,7 +21226,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -21300,7 +21300,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21482,7 +21482,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21553,7 +21553,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -21607,7 +21607,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTie& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21640,7 +21640,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTie& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrSegno& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21672,7 +21672,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegno& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21715,7 +21715,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrCoda& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21748,7 +21748,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCoda& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrEyeGlasses& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21783,7 +21783,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrEyeGlasses& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrScordatura& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21875,7 +21875,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21947,7 +21947,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrDamp& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -21982,7 +21982,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDamp& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrDampAll& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22018,7 +22018,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDampAll& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22221,7 +22221,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrBarLine& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22258,7 +22258,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22292,7 +22292,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
   int nextBarPuristNumber =
     elt->getNextBarPuristNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     fLilypondCodeStream <<
       "% nextBarPuristNumber: " <<
@@ -22341,7 +22341,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrBarCheck& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22377,7 +22377,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22410,7 +22410,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
     return;
   }
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     fLilypondCodeStream <<
       "%, fOnGoingMultipleFullBarRests: " <<
@@ -22459,7 +22459,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrBarNumberCheck& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22492,7 +22492,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarNumberCheck& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22562,7 +22562,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrLineBreak& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22595,7 +22595,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLineBreak& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22649,7 +22649,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrPageBreak& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22682,7 +22682,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageBreak& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22759,7 +22759,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22821,7 +22821,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrRepeatCommonPart& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22853,7 +22853,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatCommonPart& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -22886,7 +22886,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23022,7 +23022,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23087,7 +23087,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
   } // switch
 
 /* JMI
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     fLilypondCodeStream <<
       "% ===**** fRepeatDescrsStack.back () = '" <<
@@ -23133,7 +23133,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23219,7 +23219,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrRehearsalMark& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23252,7 +23252,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRehearsalMark& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23281,7 +23281,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   int repeatReplicasMeasuresNumber =
     elt->fetchMeasureRepeatReplicasMeasuresNumber ();
 #endif
@@ -23289,7 +23289,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
   int replicasNumber =
     elt->fetchMeasureRepeatReplicasNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     int repeatPatternMeasuresNumber =
       elt->fetchMeasureRepeatPatternMeasuresNumber ();
@@ -23337,7 +23337,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23388,7 +23388,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23419,7 +23419,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23450,7 +23450,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23497,7 +23497,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23531,7 +23531,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRests& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23600,7 +23600,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRests& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23639,7 +23639,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   fRemainingMultipleFullBarRestsNumber =
     elt->getMultipleFullBarRestsNumber ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       std::endl <<
@@ -23654,7 +23654,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     multipleFullBarRestsMeasureSoundingNotes =
       elt->fetchMultipleFullBarRestsMeasureSoundingNotes ();
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       std::endl <<
@@ -23672,7 +23672,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
         inputLineNumber,
         multipleFullBarRestsMeasureSoundingNotes);
 
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       std::endl <<
@@ -23745,7 +23745,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
@@ -23820,7 +23820,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
 {
-#ifdef TRACING_IS_ENABLED
+#ifdef OAH_TRACING_IS_ENABLED
   {
     Bool
       traceLpsrVisitors =
