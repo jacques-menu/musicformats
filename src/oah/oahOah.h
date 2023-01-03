@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -14,11 +14,88 @@
 
 #include "exports.h"
 
+#include "mfLanguages.h"
+
 #include "oahAtomsCollection.h"
 
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+class EXP languageOahAtom : public oahAtomStoringAValue
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<languageOahAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            mfLanguageKind&    languageKindVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          languageOahAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            mfLanguageKind&    languageKindVariable);
+
+    virtual               ~languageOahAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const std::string& theString,
+                            std::ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+    // print
+    // ------------------------------------------------------
+
+    void                  print (std::ostream& os) const override;
+
+    void                  printAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+
+    // private fields
+    // ------------------------------------------------------
+
+//     mfLanguageKind&       fLanguageKindVariable;
+
+    Bool                  fOptionHasBeenSelected;
+};
+typedef SMARTP<languageOahAtom> S_languageOahAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_languageOahAtom& elt);
 
 //______________________________________________________________________________
 class EXP insiderOahAtom : public oahAtom
@@ -302,6 +379,9 @@ class EXP oahOahGroup : public oahGroup
 
     // command line
     std::string           fOahOahGroupServiceName;
+
+    // language
+    mfLanguageKind        fLanguageKind;
 
     // trace early options
 

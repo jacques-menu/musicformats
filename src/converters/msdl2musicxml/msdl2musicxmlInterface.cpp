@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -59,11 +59,11 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
-  std::string        inputSourceName,
-  std::istream&      inputStream,
-  const S_oahHandler&  handler,
-  std::ostream& out,
-  std::ostream& err)
+  std::string         inputSourceName,
+  std::istream&       inputStream,
+  const S_oahHandler& handler,
+  std::ostream&       out,
+  std::ostream&       err)
 {
   // register the input source name
   gGlobalServiceRunData->setInputSourceName (
@@ -99,7 +99,9 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        "Pass 1: Creating a first MSR from the MSDL input" <<
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 () <<
+        ": " <<
+        "Creating a first MSR from the MSDL input" <<
         std::endl <<
         separator <<
         std::endl;
@@ -120,7 +122,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-      "Pass 1",
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -176,8 +178,8 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        "Pass 2",
-        "Convert the first MSR into a second MSR");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -198,7 +200,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        "Pass 3",
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -224,7 +226,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
       secondMxsr,
       outputFileName,
       err,
-      "Pass 4",
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
       "Convert the MXSR into MusicXML text");
   }
   catch (mxsr2musicxmlException& e) {
@@ -241,8 +243,8 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
-  std::string        inputSourceName,
-  std::istream&                inputStream,
+  std::string             inputSourceName,
+  std::istream&           inputStream,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -385,7 +387,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
-  std::string        fileName,
+  std::string             fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -432,10 +434,10 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
 }
 
 EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
-  std::string       fileName,
+  std::string         fileName,
   const S_oahHandler& handler,
-  std::ostream&     out,
-  std::ostream&     err)
+  std::ostream&       out,
+  std::ostream&       err)
 {
   // open input file
 #ifdef OAH_TRACING_IS_ENABLED
@@ -500,9 +502,9 @@ EXP mfMusicformatsErrorKind msdlString2musicxmlWithOptionsAndArguments (
 }
 
 EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithHandler (
-  const char*  buffer,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         buffer,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   std::stringstream

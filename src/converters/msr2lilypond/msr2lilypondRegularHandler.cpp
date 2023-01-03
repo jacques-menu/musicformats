@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -16,8 +16,8 @@
   #include "mfTracingOah.h"
 #endif
 
-#include "mfEnableHarmoniesExtraIfDesired.h"
-#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
+#include "mfEnableHarmoniesExtra.h"
+#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 
@@ -100,6 +100,8 @@ void msr2lilypondRegularHandler::createRegularHandlerGroups ()
 #endif
 
   createInformationsRegularGroup ();
+
+  createDisplayRegularGroup ();
 
   createFilesRegularGroup ();
 
@@ -200,6 +202,8 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
     appendSubGroupToGroup (subGroup);
 
   // atoms from the insider handler
+
+  registerAtomInRegularSubgroup (K_LANGUAGE_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
@@ -320,13 +324,45 @@ void msr2lilypondRegularHandler::createInformationsRegularGroup ()
 
   // atoms from the insider handler
 
+  registerAtomInRegularSubgroup ("about", subGroup);
   registerAtomInRegularSubgroup ("version", subGroup);
   registerAtomInRegularSubgroup ("version-full", subGroup);
   registerAtomInRegularSubgroup ("history", subGroup);
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
-  registerAtomInRegularSubgroup ("about", subGroup);
   registerAtomInRegularSubgroup ("contact", subGroup);
+}
+
+void msr2lilypondRegularHandler::createDisplayRegularGroup ()
+{
+  // group
+
+  S_oahGroup
+    group =
+      oahGroup::create (
+        "Display group",
+        "help-display-group", "hdisplay-group",
+        "",
+        oahElementVisibilityKind::kElementVisibilityWhole);
+  appendGroupToRegulalHandler (group);
+
+  // subgroup
+
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Display",
+        "help-display", "hdisplay",
+        "",
+        oahElementVisibilityKind::kElementVisibilityWhole,
+        group);
+  group->
+    appendSubGroupToGroup (subGroup);
+
+  // atoms from the insider handler
+
+  registerAtomInRegularSubgroup ("language", subGroup);
+
   registerAtomInRegularSubgroup ("display-prefixes", subGroup);
   registerAtomInRegularSubgroup ("display-single-character-options", subGroup);
 
@@ -1265,7 +1301,7 @@ void msr2lilypondRegularHandler::createHarmoniesRegularGroup ()
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 
-#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
+#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   registerAtomInRegularSubgroup ("show-harmonies-structures", subGroup);
   registerAtomInRegularSubgroup ("show-all-harmonies-contents", subGroup);
   registerAtomInRegularSubgroup ("show-harmony-details", subGroup);

@@ -33,11 +33,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2guidoWithHandler (
           theMsrScore,
-          "Pass 2",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
           "Convert the MSR score into a second MSR",
-          "Pass 3",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
           "Convert the second MSR into an MXSR",
-          "Pass 4",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
           "Convert the MXSR into Guido text",
           std::cout,
           std::cerr,

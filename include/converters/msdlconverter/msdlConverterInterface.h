@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -24,23 +24,23 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 // EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI
-//   const char*  fileName,
-//   std::ostream&     out,
-//   std::ostream&     err,
+//   const char*         fileName,
+//   std::ostream&       out,
+//   std::ostream&       err,
 //   const S_oahHandler& handler);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
-  FILE*        fd,
-  std::ostream&     out,
-  std::ostream&     err,
+  FILE*               fd,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
-  const char*  buffer,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         buffer,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler);
 
 

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -106,22 +106,22 @@ msdlParser::msdlParser (std::istream& inputStream)
   // warnings and errors
   switch (gGlobalMsdl2msrOahGroup->getMsdlUserLanguageKind ()) {
     case msdlUserLanguageKind::kUserLanguageEnglish:
-      fParserWaeHandler = msdlParserEnglishWaeHandler::create ();
+      fParserWaeHandler = msdlParserWaeHandlerEnglish::create ();
       break;
     case msdlUserLanguageKind::kUserLanguageFrench:
-      fParserWaeHandler = msdlParserFrenchWaeHandler::create ();
+      fParserWaeHandler = msdlParserWaeHandlerFrench::create ();
       break;
     case msdlUserLanguageKind::kUserLanguageItalian:
-      fParserWaeHandler = msdlParserItalianWaeHandler::create ();
+      fParserWaeHandler = msdlParserWaeHandlerItalian::create ();
       break;
     case msdlUserLanguageKind::kUserLanguageGerman:
-      fParserWaeHandler = msdlParserGermanWaeHandler::create ();
+      fParserWaeHandler = msdlParserWaeHandlerGerman::create ();
       break;
     case msdlUserLanguageKind::kUserLanguageSpanish:
-      fParserWaeHandler = msdlParserSpanishWaeHandler::create ();
+      fParserWaeHandler = msdlParserWaeHandlerSpanish::create ();
       break;
     case msdlUserLanguageKind::kUserLanguageDutch:
-      fParserWaeHandler = msdlParserDutchWaeHandler::create ();
+      fParserWaeHandler = msdlParserWaeHandlerDutch::create ();
       break;
   } // switch
 

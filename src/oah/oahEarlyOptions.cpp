@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -19,6 +19,14 @@
   #include "mfTracingOah.h"
 #endif
 
+#include "mfWaeHandlersDutch.h"
+#include "mfWaeHandlersEnglish.h"
+#include "mfWaeHandlersFrench.h"
+#include "mfWaeHandlersGerman.h"
+#include "mfWaeHandlersItalian.h"
+#include "mfWaeHandlersSpanish.h"
+
+#include "oahWae.h"
 #include "oahEarlyOptions.h"
 
 #include "waeOah.h"
@@ -35,6 +43,17 @@ oahEarlyOptions gGlobalOahEarlyOptions;
 
 oahEarlyOptions::oahEarlyOptions ()
 {
+  // cannot use method setEarlyLanguageKind() in constructor
+
+  // english is the default language
+  fEarlyLanguageKind =
+    mfLanguageKind::kMusicFormatsLanguageEnglish;
+//     mfLanguageKind::kMusicFormatsLanguageFrench;
+
+  fMfWaeHandler =
+    mfWaeHandlerEnglish::create ();
+//     mfWaeHandlerFrench::create ();
+
 #ifdef DEBUG_EARLY_OPTIONS
   std::cerr << // JMI
     "Enforcing fTraceEarlyOptions" <<
@@ -54,6 +73,57 @@ oahEarlyOptions::oahEarlyOptions ()
 
 oahEarlyOptions::~oahEarlyOptions ()
 {}
+
+//_______________________________________________________________________________
+const std::string K_LANGUAGE_OPTION_LONG_NAME  = "language";
+const std::string K_LANGUAGE_OPTION_SHORT_NAME = "lang";
+
+void oahEarlyOptions::setEarlyLanguageKind (
+  mfLanguageKind languageKind)
+{
+#ifdef OAH_TRACING_IS_ENABLED
+  if (fTraceEarlyOptions) {
+    gLogStream <<
+      "Setting fEarlyLanguageKind to " <<
+      languageKind <<
+      std::endl;
+  }
+#endif
+
+  fEarlyLanguageKind = languageKind;
+
+  switch (fEarlyLanguageKind) {
+    case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN:
+      {
+        std::stringstream s;
+
+        s <<
+          "Attempt at setting fEarlyLanguageKind to kMusicFormatsLanguage_UNKNOWN" <<
+          std::endl;
+
+        oahError (s.str ());
+      }
+      break;
+    case mfLanguageKind::kMusicFormatsLanguageEnglish: // default value
+      fMfWaeHandler = mfWaeHandlerEnglish::create ();
+      break;
+    case mfLanguageKind::kMusicFormatsLanguageFrench:
+      fMfWaeHandler = mfWaeHandlerFrench::create ();
+      break;
+    case mfLanguageKind::kMusicFormatsLanguageItalian:
+      fMfWaeHandler = mfWaeHandlerItalian::create ();
+      break;
+    case mfLanguageKind::kMusicFormatsLanguageGerman:
+      fMfWaeHandler = mfWaeHandlerGerman::create ();
+      break;
+    case mfLanguageKind::kMusicFormatsLanguageSpanish:
+      fMfWaeHandler = mfWaeHandlerSpanish::create ();
+      break;
+    case mfLanguageKind::kMusicFormatsLanguageDutch:
+      fMfWaeHandler = mfWaeHandlerDutch::create ();
+      break;
+  } // switch
+}
 
 //_______________________________________________________________________________
 const std::string K_INSIDER_OPTION_LONG_NAME  = "insider";
@@ -117,7 +187,7 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
 #ifdef OAH_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
-      "Setting fEarlyInsiderOption" <<
+      "Setting fEarlyMultiGenerationOutputKind" <<
       std::endl;
   }
 #endif
@@ -285,6 +355,17 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
   const std::string& optionValue)
 {
   // this is OAH handling pass 1
+  if (
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_LANGUAGE_OPTION_LONG_NAME)
+      ||
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_LANGUAGE_OPTION_SHORT_NAME)
+  ) {
+    setEarlyLanguageKind (
+      mfLanguageKindFromString (optionValue));
+  }
+
   if (
     isEarlyOptionRecognized (
       argumentWithoutDashToBeUsed, K_INSIDER_OPTION_LONG_NAME)
@@ -505,9 +586,17 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
 #endif
 
       // apply argumentWithoutDashToBeUsed early if it is known as such
+
+      // fetch the option value if any
+      std::string optionValue;
+
+      if (i < argc - 1) { // JMI v0.9.66
+        optionValue = std::string (argv [i + 1]);
+      }
+
       gGlobalOahEarlyOptions.applyEarlyOptionIfRelevant (
         argumentWithoutDashToBeUsed,
-        "basic/HelloWorld.xml");
+        optionValue);
     }
   } // for
 }
@@ -655,30 +744,32 @@ void oahEarlyOptions::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 26;
+  const int fieldWidth = 32;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "EarlyInsiderOption" << ": " << fEarlyInsiderOption <<
+    "fEarlyLanguageKind" << ": " << fEarlyLanguageKind <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fEarlyInsiderOption" << ": " << fEarlyInsiderOption <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "EarlyRegularOption" << ": " << fEarlyRegularOption <<
 //     std::endl <<
 
     std::setw (fieldWidth) <<
-    "EarlyQuietOption" << ": " << fEarlyQuietOption <<
-    std::endl;
+    "fEarlyQuietOption" << ": " << fEarlyQuietOption <<
+    std::endl <<
 
-#ifdef OAH_TRACING_IS_ENABLED
-  os << std::left <<
     std::setw (fieldWidth) <<
-    "EarlyOahVerboseMode" << ": " << fEarlyOahVerboseMode <<
+    "fEarlyMultiGenerationOutputKind" << ": " << fEarlyMultiGenerationOutputKind <<
     std::endl;
-#endif
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "EarlyIncludeFileNamesList" << ": " <<
+    "fEarlyIncludeFileNamesList" << ": " <<
     std::endl;
 
   if (fEarlyIncludeFileNamesList.size ()) {
@@ -702,21 +793,29 @@ void oahEarlyOptions::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "TraceEarlyOptions" << ": " << fTraceEarlyOptions <<
+    "fTraceEarlyOptions" << ": " << fTraceEarlyOptions <<
+    std::endl;
+
+#ifdef OAH_TRACING_IS_ENABLED
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fEarlyOahVerboseMode" << ": " << fEarlyOahVerboseMode <<
+    std::endl;
+#endif
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fEarlyTracingOah" << ": " << fEarlyTracingOah <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fEarlyTracingOahDetails" << ": " << fEarlyTracingOahDetails <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "EarlyTracingOah" << ": " << fEarlyTracingOah <<
+    "fEarlyTraceComponents" << ": " << fEarlyTraceComponents <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "EarlyTracingOahDetails" << ": " << fEarlyTracingOahDetails <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "EarlyTraceComponents" << ": " << fEarlyTraceComponents <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "EarlyTracePasses" << ": " << fEarlyTracePasses <<
+    "fEarlyTracePasses" << ": " << fEarlyTracePasses <<
     std::endl;
 
 #endif

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -42,8 +42,6 @@
 #include "msr2msrTranslator.h"
 
 #include "mxsr2msrTranslatorInterface.h"
-
-
 
 
 namespace MusicFormats
@@ -140,13 +138,17 @@ S_msrScore translateMsrToMsr (
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
     displayMsrScore (
       resultingNewMsrScore,
-      "Display the second MSR as text");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheSecondMSRAsText ());
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
     displayMsrScoreFull (
       resultingNewMsrScore,
-      "Display the second MSR as text");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheSecondMSRAsText ()
+      	+
+      ", "
+        +
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion ());
   }
 
   // display the populated MSR score summary if requested
@@ -157,7 +159,7 @@ S_msrScore translateMsrToMsr (
     displayMsrScoreSummary (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      "Display a summary of the second MSR");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayASummaryOfTheSecondMSR ());
   }
 
   // display the populated MSR score names if requested
@@ -168,7 +170,7 @@ S_msrScore translateMsrToMsr (
     displayMsrScoreNames (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      "Display the names in the second MSR");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheNamesInTheSecondMSR ());
   }
   return resultingNewMsrScore;
 }
@@ -284,7 +286,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     displayMsrScoreSummary (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      "Display a summary of the second MSR");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayASummaryOfTheSecondMSR ());
   }
 
   // display the populated MSR score names if requested
@@ -295,7 +297,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     displayMsrScoreNames (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      "Display the names in the second MSR");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheNamesInTheSecondMSR ());
   }
   return resultingNewMsrScore;
 }

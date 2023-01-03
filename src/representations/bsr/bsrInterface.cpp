@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -55,7 +55,9 @@ void displayBsrScore (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    ": "<<
+    passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl <<
@@ -97,7 +99,11 @@ void displayBsrScoreFull (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription << ", full version" <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    ": "<<
+    passDescription <<
+    ", " <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
@@ -113,7 +119,11 @@ void displayBsrScoreFull (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    "Display the BSR as text, full version",
+    std::string ("Display the BSR as text")
+      +
+    ", "
+      +
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion (),
     mfTimingItemKind::kOptional,
     startClock,
     endClock);

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -63,10 +63,10 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
-  SXMLFile&     sxmlfile,
-  std::ostream& out,
-  std::ostream& err,
-  const S_oahHandler&  handler)
+  SXMLFile&           sxmlfile,
+  std::ostream&       out,
+  std::ostream&       err,
+  const S_oahHandler& handler)
 {
 #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
@@ -119,7 +119,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       translateMxsrToMsrSkeleton (
         originalMxsr,
         gGlobalMsrOahGroup,
-        "Pass 2a",
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2a (),
         "Create the skeleton of the first MSR from the originalMxsr");
   }
   catch (mxsr2msrException& e) {
@@ -151,8 +151,8 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     populateMsrSkeletonFromMxsr (
       originalMxsr,
       firstMsrScore,
-        "Pass 2b",
-        "Populate the MSR skeleton from MusicXML data");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2b (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->populateTheMSRSqueletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -186,8 +186,8 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        "Pass 3",
-        "Convert the first MSR into a second MSR");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -220,7 +220,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        "Pass 4",
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -246,7 +246,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       secondMxsr,
       outputFileName,
       err,
-      "Pass 5",
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
       "Convert the MXSR into Guido text");
   }
   catch (mxsr2msrException& e) {
@@ -437,8 +437,8 @@ EXP mfMusicformatsErrorKind musicxmlFile2guido (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML file");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
     return
@@ -453,17 +453,17 @@ EXP mfMusicformatsErrorKind musicxmlFile2guido (
 }
 
 mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
-  const char*  fileName,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         fileName,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML file");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
     return
@@ -488,8 +488,8 @@ EXP mfMusicformatsErrorKind musicxmlFd2guido (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML descriptor");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -504,17 +504,17 @@ EXP mfMusicformatsErrorKind musicxmlFd2guido (
 }
 
 mfMusicformatsErrorKind convertMusicxmlFd2guidoWithHandler (
-  FILE*        fd,
-  std::ostream&     out,
-  std::ostream&     err,
+  FILE*               fd,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML descriptor");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -539,8 +539,8 @@ EXP mfMusicformatsErrorKind musicxmlString2guido (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML buffer");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2guido() even if sxmlfile is null,
   // to handle the help options if any
@@ -555,17 +555,17 @@ EXP mfMusicformatsErrorKind musicxmlString2guido (
 }
 
 mfMusicformatsErrorKind convertMusicxmlString2guidoWithHandler (
-  const char*  buffer,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         buffer,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML buffer");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2guido() even if sxmlfile is null,
   // to handle the help options if any

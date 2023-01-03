@@ -245,7 +245,7 @@ LilyPond code will be written to Anacrusis.ly
 The command line options and arguments have been analyzed
 
 %--------------------------------------------------------------
-  Pass 1: Create an MXSR reading a MusicXML file
+  Pass 1: Create an MXSR from a MusicXML file
 %--------------------------------------------------------------
 % MusicXML data uses UTF-8 encoding
 
@@ -270,7 +270,7 @@ The command line options and arguments have been analyzed
 Opening file 'Anacrusis.ly' for writing
 
 %--------------------------------------------------------------
-  Pass 5: Convert the LPSR score to LilyPond code
+  Pass 5: Convert the LPSR into LilyPond code
 %--------------------------------------------------------------
 Timing information:
 
@@ -278,12 +278,12 @@ Activity  Description                                             Kind       CPU
 --------  ------------------------------------------------------  ---------  ---------
 
           Handle the options and arguments from argc/argv         mandatory    0.02798
-Pass 1    Create an MXSR reading a MusicXML file                  mandatory    0.00420
+Pass 1    Create an MXSR from a MusicXML file                  mandatory    0.00420
 Pass 2a   Create an MSR skeleton from the MXSR                    mandatory    0.00191
 Pass 2b   Populate the MSR skeleton from MusicXML data            mandatory    0.00314
 Pass 3    Convert the first MSR into a second MSR                 mandatory    0.00069
 Pass 4    Convert the second MSR into an LPSR                     mandatory    0.00090
-Pass 5    Convert the LPSR score to LilyPond code                 mandatory    0.00156
+Pass 5    Convert the LPSR into LilyPond code                 mandatory    0.00156
 
 Total (sec)  Mandatory  Optional
 -----------  ---------  ---------

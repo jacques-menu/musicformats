@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -19,6 +19,8 @@
   #include "mfTracingOah.h"
 #endif
 
+#include "mfConstants.h"
+
 #include "oahEarlyOptions.h"
 
 #include "oahOah.h"
@@ -26,6 +28,175 @@
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+S_languageOahAtom languageOahAtom::create (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  mfLanguageKind&    languageKindVariable)
+{
+  languageOahAtom* o = new
+    languageOahAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName,
+      languageKindVariable);
+  assert (o != nullptr);
+  return o;
+}
+
+languageOahAtom::languageOahAtom (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  mfLanguageKind&    languageKindVariable)
+  : oahAtomStoringAValue (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName)
+//       ,
+//     fLanguageKindVariable (
+//       languageKindVariable)
+{}
+
+languageOahAtom::~languageOahAtom ()
+{}
+
+void languageOahAtom::applyAtomWithValue (
+  const std::string& theString,
+  std::ostream&      os)
+{
+#ifdef OAH_TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a languageOahAtom" <<
+      std::endl;
+  }
+#endif
+
+//   fLanguageKindVariable = mfLanguageKindFromString (theString);
+//
+//   gGlobalOahEarlyOptions.setEarlyLanguageKind (
+//     mfLanguageKindFromString (theString));
+
+  fOptionHasBeenSelected = true;
+
+  // do nothing more, choosing the insider OAH handler has been done already
+}
+
+void languageOahAtom::acceptIn (basevisitor* v)
+{
+#ifdef OAH_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> languageOahAtom::acceptIn ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_languageOahAtom>*
+    p =
+      dynamic_cast<visitor<S_languageOahAtom>*> (v)) {
+        S_languageOahAtom elem = this;
+
+#ifdef OAH_TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching languageOahAtom::visitStart ()" <<
+            std::endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void languageOahAtom::acceptOut (basevisitor* v)
+{
+#ifdef OAH_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> languageOahAtom::acceptOut ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_languageOahAtom>*
+    p =
+      dynamic_cast<visitor<S_languageOahAtom>*> (v)) {
+        S_languageOahAtom elem = this;
+
+#ifdef OAH_TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching languageOahAtom::visitEnd ()" <<
+            std::endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void languageOahAtom::browseData (basevisitor* v)
+{
+#ifdef OAH_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> languageOahAtom::browseData ()" <<
+      std::endl;
+  }
+#endif
+}
+
+void languageOahAtom::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "languageOahAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  --gIndenter;
+}
+
+void languageOahAtom::printAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    "language" <<  ": " <<
+    "fOptionHasBeenSelected: " <<
+    fOptionHasBeenSelected <<
+    std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_languageOahAtom& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  return os;
+}
 
 //______________________________________________________________________________
 S_insiderOahAtom insiderOahAtom::create (
@@ -58,7 +229,6 @@ insiderOahAtom::~insiderOahAtom ()
 
 void insiderOahAtom::applyElement (std::ostream& os)
 {
-
 #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
@@ -206,7 +376,6 @@ regularOahAtom::~regularOahAtom ()
 
 void regularOahAtom::applyElement (std::ostream& os)
 {
-
 #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
@@ -364,6 +533,36 @@ R"()",
       this);
 
   appendSubGroupToGroup (subGroup);
+
+  // the 'language' option
+
+  mfLanguageKind
+    mfLanguageKindDefaultValue =
+      mfLanguageKind::kMusicFormatsLanguageEnglish; // default value
+
+  subGroup->
+    appendAtomToSubGroup (
+      languageOahAtom::create (
+        K_LANGUAGE_OPTION_LONG_NAME, K_LANGUAGE_OPTION_SHORT_NAME,
+        regex_replace (
+          regex_replace (
+            regex_replace (
+R"(Use LANGUAGE for the basic user interaction and passes trace.
+The options names and descriptions are in english only,
+as well as the tracing messages, meant for developers and maintainers.
+The NUMBER languages available are:
+LANGUAGE_KINDS.
+The default is 'DEFAULT_VALUE'.)",
+            std::regex ("NUMBER"),
+            std::to_string (gGlobalMusicFormatsLanguageKindsMap.size ())),
+          std::regex ("LANGUAGE_KINDS"),
+          existingMusicFormatsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+        std::regex ("DEFAULT_VALUE"),
+        mfLanguageKindAsString (
+          mfLanguageKindDefaultValue)),
+      "LANGUAGE",
+      "fLanguageKind",
+      fLanguageKind));
 
   // the 'insider' option
 

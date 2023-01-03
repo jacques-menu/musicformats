@@ -1,0 +1,260 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2023
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
+#include "mfWaeHandlersFrench.h"
+
+
+namespace MusicFormats
+{
+
+//_______________________________________________________________________________
+S_mfWaeHandlerFrench mfWaeHandlerFrench::create ()
+{
+  mfWaeHandlerFrench* o =
+    new mfWaeHandlerFrench ();
+  assert (o != nullptr);
+  return o;
+}
+
+mfWaeHandlerFrench::mfWaeHandlerFrench ()
+{}
+
+mfWaeHandlerFrench::~mfWaeHandlerFrench ()
+{}
+
+std::string mfWaeHandlerFrench::asString () const
+{
+  std::stringstream s;
+
+  s <<
+    "Gestionnaire d'avertissements et d'erreurs de MusicFormats pour le français";
+
+  return s.str ();
+}
+
+void mfWaeHandlerFrench::print (std::ostream& os) const
+{
+  os <<
+    "mfWaeHandlerFrench" <<
+    std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_mfWaeHandlerFrench& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  return os;
+}
+
+//_______________________________________________________________________________
+// pass numbers
+
+std::string mfWaeHandlerFrench::pass1 () const
+{
+  return "Passe 1";
+}
+
+std::string mfWaeHandlerFrench::pass2 () const
+{
+  return "Passe 2";
+}
+std::string mfWaeHandlerFrench::pass2a () const
+{
+  return "Passe 2a";
+}
+std::string mfWaeHandlerFrench::pass2b () const
+{
+  return "Passe 2b";
+}
+
+std::string mfWaeHandlerFrench::pass3 () const
+{
+  return "Passe 3";
+}
+std::string mfWaeHandlerFrench::pass3a () const
+{
+  return "Passe 3a";
+}
+std::string mfWaeHandlerFrench::pass3b () const
+{
+  return "Passe 3b";
+}
+
+std::string mfWaeHandlerFrench::pass4 () const
+{
+  return "Passe 4";
+}
+std::string mfWaeHandlerFrench::pass4a () const
+{
+  return "Passe 4a";
+}
+std::string mfWaeHandlerFrench::pass4b () const
+{
+  return "Passe 4b";
+}
+
+std::string mfWaeHandlerFrench::pass5 () const
+{
+  return "Passe 5";
+}
+
+std::string mfWaeHandlerFrench::passOptional () const
+{
+  return "Passe (optionelle)";
+}
+
+std::string mfWaeHandlerFrench::fullVersion () const
+{
+  return "version complète";
+}
+std::string mfWaeHandlerFrench::summary () const
+{
+  return "sommaire";
+}
+std::string mfWaeHandlerFrench::names () const
+{
+  return "noms";
+}
+std::string mfWaeHandlerFrench::slices () const
+{
+  return "tranches";
+}
+
+//_______________________________________________________________________________
+// OAH
+
+std::string mfWaeHandlerFrench::handleOptionsAndArgumentsFromArgcArgv () const
+{
+  return "Traitement des options et arguments de argc/argv";
+}
+
+//_______________________________________________________________________________
+// passes
+
+std::string mfWaeHandlerFrench::createAnMXSRFromAMusicXMLFile () const
+{
+  return "Création d'un MXSR à partir d'un fichier MusicXML";
+}
+std::string mfWaeHandlerFrench::createAnMXSRFromAMusicXMLDescriptor () const
+{
+  return "Création d'un MXSR à partir d'un descripteor MusicXML";
+}
+std::string mfWaeHandlerFrench::createAnMXSRFromAMusicXMLBuffer () const
+{
+  return "Création d'un MXSR à partir d'un tampon MusicXML";
+}
+
+std::string mfWaeHandlerFrench::createAnMSRSqueletonFromTheMXSR () const
+{
+  return "Création d'un squelette de MSR à partir du MXSR";
+}
+
+std::string mfWaeHandlerFrench::populateTheMSRSqueletonFromMusicXMLData () const
+{
+  return "Garnissage du squelette de MSR avec les données MusicXML";
+}
+
+std::string mfWaeHandlerFrench::convertTheFirstMSRIntoASecondMSR () const
+{
+  return "Conversion du premier MSR en un second MSR";
+}
+
+std::string mfWaeHandlerFrench::convertTheSecondMSRIntoAnLPSR () const
+{
+  return "Conversion du second MSR en un LPSR";
+}
+
+std::string mfWaeHandlerFrench::convertTheLPSRIntoLilyPondCode () const
+{
+  return "Conversion du LPSR en du code LilyPond";
+}
+
+//_______________________________________________________________________________
+// display
+
+std::string mfWaeHandlerFrench::displayTheFirstMSRSkeletonAsText () const
+{
+  return "Affichage du squelette du premier MSR en texte";
+}
+std::string mfWaeHandlerFrench::displayTheFirstMSRAsText () const
+{
+  return "Affichage du premier MSR en texte";
+}
+std::string mfWaeHandlerFrench::displayTheSecondMSRAsText () const
+{
+  return "Affichage du second MSR en texte";
+}
+std::string mfWaeHandlerFrench::displayTheLPSRAsText () const
+{
+  return "Affichage du LPSR en texte";
+}
+
+std::string mfWaeHandlerFrench::displayTheNamesInTheFirstMSR () const
+{
+  return "Affichage des noms du premier MSR";
+}
+std::string mfWaeHandlerFrench::displayTheNamesInTheSecondMSR () const
+{
+  return "Affichage des noms du second MSR";
+}
+
+std::string mfWaeHandlerFrench::displayASummaryOfTheFirstMSR () const
+{
+  return "Affichage du résumé du premier MSR";
+}
+std::string mfWaeHandlerFrench::displayASummaryOfTheSecondMSR () const
+{
+  return "Affichage du résumé du second MSR";
+}
+
+//_______________________________________________________________________________
+// timing
+
+std::string mfWaeHandlerFrench::timingInformation () const
+{
+  return "Consommation de temps";
+}
+std::string mfWaeHandlerFrench::activity () const
+{
+  return "Activité";
+}
+std::string mfWaeHandlerFrench::description () const
+{
+  return "Description";
+}
+std::string mfWaeHandlerFrench::kind () const
+{
+  return "Genre";
+}
+std::string mfWaeHandlerFrench::CPUSeconds () const
+{
+  return "CPU (sec)";
+}
+std::string mfWaeHandlerFrench::mandatory () const
+{
+  return "obligatoire";
+}
+std::string mfWaeHandlerFrench::optional () const
+{
+  return "optionel";
+}
+std::string mfWaeHandlerFrench::totalSeconds () const
+{
+  return "Total (sec)";
+}
+
+
+} // namespace

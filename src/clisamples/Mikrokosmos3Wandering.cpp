@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -491,7 +491,9 @@ int main (int argc, char*  argv[])
       separator <<
       std::endl <<
       gTab <<
-      "Pass 1: Creating the MSR score with the " <<
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 () <<
+      ": " <<
+      "Creating the MSR score with the " <<
       msrGenerationAPIKindAsString (theGenerationAPIKind) <<
       std::endl <<
       separator <<
@@ -515,7 +517,7 @@ int main (int argc, char*  argv[])
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "Pass 1",
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
     "Create the MSR score",
     mfTimingItemKind::kMandatory,
     startClock,
@@ -540,10 +542,10 @@ int main (int argc, char*  argv[])
       err =
         msrScore2lilypondWithHandler (
           theMsrScore,
-          "Pass 2",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
           "Convert the MSR into an LPSR",
-          "Pass 3",
-          "Convert the LPSR into LilyPond code",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
           gOutputStream,
           gLogStream,
           handler);
@@ -553,11 +555,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2brailleWithHandler (
           theMsrScore,
-          "Pass 2a",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2a (),
           "Create the first BSR from the MSR",
-          "Pass 2b",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2b (),
           "Create the finalized BSR from the first BSR",
-          "Pass 3",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
           "Convert the BSR into Braille text",
           gOutputStream,
           gLogStream,
@@ -568,11 +570,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2musicxmlWithHandler (
           theMsrScore,
-          "Pass 2",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
           "Convert the MSR score into a second MSR",
-          "Pass 3",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
           "Convert the second MSR into an MXSR",
-          "Pass 4",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
           "Convert the MXSR into MusicXML text",
           gOutputStream,
           gLogStream,
@@ -583,11 +585,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2guidoWithHandler (
           theMsrScore,
-          "Pass 2",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
           "Convert the MSR score into a second MSR",
-          "Pass 3",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
           "Convert the second MSR into an MXSR",
-          "Pass 4",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
           "Convert the MXSR into Guido text",
           gOutputStream,
           gLogStream,

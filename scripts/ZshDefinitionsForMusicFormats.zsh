@@ -221,9 +221,9 @@ function bit ()
 
   LOGFILE_NAME=${SCRIPT_NAME}.log
   LOGFILE=${BUILD_DIR}/${LOGFILE_NAME}
-	echo
-	echo "==> LOGFILE = ${LOGFILE}"
-	echo
+# 	echo
+# 	echo "==> LOGFILE = ${LOGFILE}"
+# 	echo
 
 	# execute the SCRIPT
 
@@ -885,12 +885,20 @@ function addReleases ()
 
 #----------------------------------------------
 
+function wclf ()
+{
+  cd "${SRC_DIR}"
+  echo "SRC_DIR = ${SRC_DIR}"
+
+  wc -l **/* | sort -n     # grep -v ‘wc: ’ |
+}
+
 function wcl ()
 {
   cd "${SRC_DIR}"
   echo "SRC_DIR = ${SRC_DIR}"
 
-  wc -l **/* | sort -n
+  wc -l **/* | sort -n | tail -n 20
 }
 
 function wcla ()

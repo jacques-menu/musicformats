@@ -1,9 +1,12 @@
 /*
-
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
-  This file is provided as an example of the MusicXML Library use.
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
 */
 
 #include <cstring>      // memset
@@ -12,10 +15,13 @@
 #include <signal.h>
 #endif
 
+#include "mfInitialization.h" // for languages, before early options handling
+
 #include "mfBool.h"
 #include "mfMusicformatsErrors.h"
+#include "mfcComponents.h"
 #include "mfTiming.h"
-//
+
 #include "waeInterface.h"
 #include "oahWae.h"
 
@@ -63,34 +69,6 @@ static void catchSignals ()
 static void catchSignals ()  {}
 #endif
 
-void allowCoreDumps ()
-{
-//_______________________________________________________________________________
-// #include <unistd.h>
-// #include <signal.h>
-// #include <sys/resource.h>
-// #include <stdio.h>
-
-//   pid_t pid = getpid();
-//
-//   struct rlimit l;
-//   int ret = getrlimit(RLIMIT_CORE, &l);
-//
-//   printf ("--> getrlimit returned %d\n", ret);
-//   printf ("--> rlim_cur = %llu\n", l.rlim_cur);
-//   printf ("--> rlim_max = %llu\n", l.rlim_max);
-//
-//   l.rlim_cur = l.rlim_max;
-//   printf ("--> setrlimit returned %d\n", setrlimit(RLIMIT_CORE, &l));
-//
-//   bool killMyself = false;
-//
-//   if (killMyself) {
-//     printf ("Time to kill myself\n");
-//     kill (pid, SIGBUS);
-//   }
-}
-
 //_______________________________________________________________________________
 EXP int xml2ly (
   int   argc,
@@ -100,11 +78,6 @@ EXP int xml2ly (
   // ------------------------------------------------------
 
 // JMI  catchSignals ();
-
-  // core dumps
-  // ------------------------------------------------------
-
-  allowCoreDumps ();
 
   // the service name
   // ------------------------------------------------------
@@ -125,6 +98,10 @@ EXP int xml2ly (
 //   gLogStream <<
 //     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<
 //     std::endl;
+
+  // initialize common things
+  // ------------------------------------------------------
+  initializeMusicFormats ();
 
   // apply early options if any
   // ------------------------------------------------------

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -52,30 +52,9 @@ std::string mfMultiGenerationOutputKindAsString (
   // no CamelCase here, these strings are used in the command line options
   std::string result;
 
-//   switch (multiGenerationOutputKind) {
-//     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
-//       result = "*noGenerateOutputKind*";
-//       break;
-//     case mfMultiGenerationOutputKind::kGenerationLilypond:
-//       result = "LilyPond output";
-//       break;
-//     case mfMultiGenerationOutputKind::kGenerationBraille:
-//       result = "braille output";
-//       break;
-//     case mfMultiGenerationOutputKind::kGenerationMusicXML:
-//       result = "MusicXML output";
-//       break;
-//     case mfMultiGenerationOutputKind::kGenerationGuido:
-//       result = "Guido output";
-//       break;
-//     case mfMultiGenerationOutputKind::kGenerationMidi:
-//       result = "MIDI output";
-//       break;
-//   } // switch
-
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::kGeneration_UNKNOWN:
-      result = "no output generation";
+      result = "*UNKNOWN*";
       break;
     case mfMultiGenerationOutputKind::kGenerationLilypond:
       result = "LilyPond";
@@ -95,6 +74,12 @@ std::string mfMultiGenerationOutputKindAsString (
   } // switch
 
   return result;
+}
+
+std::ostream& operator << (std::ostream& os, const mfMultiGenerationOutputKind& elt)
+{
+  os << mfMultiGenerationOutputKindAsString (elt);
+  return os;
 }
 
 EXP mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
@@ -256,14 +241,14 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 
 //______________________________________________________________________________
 S_mfMultiGenerationOutputKindAtom mfMultiGenerationOutputKindAtom::create (
-  const std::string&   longName,
-  const std::string&   shortName,
-  const std::string&   description,
-  const std::string&   variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& variableName,
   mfMultiGenerationOutputKind&
-                  multiGenerationOutputKindVariable,
+                     multiGenerationOutputKindVariable,
   mfMultiGenerationOutputKind
-                  multiGenerationOutputKindValue)
+                     multiGenerationOutputKindValue)
 {
   mfMultiGenerationOutputKindAtom* o = new
     mfMultiGenerationOutputKindAtom (
@@ -278,14 +263,14 @@ S_mfMultiGenerationOutputKindAtom mfMultiGenerationOutputKindAtom::create (
 }
 
 mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
-  const std::string&   longName,
-  const std::string&   shortName,
-  const std::string&   description,
-  const std::string&   variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& variableName,
   mfMultiGenerationOutputKind&
-                  multiGenerationOutputKindVariable,
+                     multiGenerationOutputKindVariable,
   mfMultiGenerationOutputKind
-                  multiGenerationOutputKindValue)
+                     multiGenerationOutputKindValue)
   : oahAtomImplicitlyStoringAValue (
       longName,
       shortName,

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -45,25 +45,25 @@ class EXP mfTimingItem : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfTimingItem> createTimingItem (
-      const std::string&  activity,
-      const std::string&  description,
-      mfTimingItemKind kind,
-      clock_t        startClock,
-      clock_t        endClock);
+                          const std::string& activity,
+                          const std::string& description,
+                          mfTimingItemKind   kind,
+                          clock_t            startClock,
+                          clock_t            endClock);
 
-    mfTimingItem (
-      const std::string&  activity,
-      const std::string&  description,
-      mfTimingItemKind kind,
-      clock_t        startClock,
-      clock_t        endClock);
+                        mfTimingItem (
+                          const std::string& activity,
+                          const std::string& description,
+                          mfTimingItemKind   kind,
+                          clock_t            startClock,
+                          clock_t            endClock);
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    mfTimingItemKind     getKind () const
+    mfTimingItemKind      getKind () const
                               { return fKind; }
 
     std::string           getActivity () const
@@ -81,7 +81,7 @@ class EXP mfTimingItem : public smartable
     // private fields
     // ------------------------------------------------------
 
-    mfTimingItemKind     fKind;
+    mfTimingItemKind      fKind;
 
     std::string           fActivity;
     std::string           fDescription;
@@ -89,7 +89,7 @@ class EXP mfTimingItem : public smartable
     clock_t               fStartClock;
     clock_t               fEndClock;
 };
-typedef SMARTP<mfTimingItem> S_timingItem;
+typedef SMARTP<mfTimingItem> S_mfTimingItem;
 
 //______________________________________________________________________________
 class EXP mfTimingItemsList {
@@ -117,10 +117,10 @@ class EXP mfTimingItemsList {
 
     // add an item
     void                  appendTimingItem (
-                            const std::string&          activity,
-                            const std::string&          description,
-                            mfTimingItemKind kind,
-                            clock_t           startClock,
+                            const std::string& activity,
+                            const std::string& description,
+                            mfTimingItemKind   kind,
+                            clock_t            startClock,
                             clock_t            endClock);
 
   public:
@@ -146,7 +146,8 @@ class EXP mfTimingItemsList {
     // private fields
     // ------------------------------------------------------
 
-    std::list<S_timingItem>    fTimingItemsList;
+    std::list<S_mfTimingItem>
+                          fTimingItemsList;
 };
 EXP std::ostream& operator << (std::ostream& os, const mfTimingItemsList& tim);
 

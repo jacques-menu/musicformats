@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -14,6 +14,9 @@
 #include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
+
+#include "mfEnableSanityChecks.h"
+
 #include "oahWae.h"
 
 #include "mfEnableTracingIfDesired.h"
@@ -834,11 +837,13 @@ void mfcVersionsHistory::appendVersionDescrToHistory (
 
 S_mfcVersionDescr mfcVersionsHistory::fetchMostRecentVersion () const
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fVersionsList.size () > 0,
     "fVersionsList is empty");
+#endif
 
   return fVersionsList.back ();
 }
@@ -1333,11 +1338,13 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     format != nullptr,
     "format is null");
+#endif
 
   switch (fComponentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:
@@ -1394,11 +1401,13 @@ void mfcMultiComponent::appendPassToMultiComponent (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     pass != nullptr,
     "pass is null");
+#endif
 
   switch (fComponentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:
@@ -2068,11 +2077,13 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     converter != nullptr,
     "converter is null");
+#endif
 
   switch (fComponentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:

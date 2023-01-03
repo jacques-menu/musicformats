@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -59,11 +59,11 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
-  std::string        inputSourceName,
-  std::istream&      inputStream,
-  const S_oahHandler&  handler,
-  std::ostream& out,
-  std::ostream& err)
+  std::string         inputSourceName,
+  std::istream&       inputStream,
+  const S_oahHandler& handler,
+  std::ostream&       out,
+  std::ostream&       err)
 {
   // register the input source name
   gGlobalServiceRunData->setInputSourceName (
@@ -99,7 +99,9 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        "Pass 1: Creating an MSR from the MSDL input" <<
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 () <<
+        ": " <<
+        "Creating a first MSR from the MSDL input" <<
         std::endl <<
         separator <<
         std::endl;
@@ -121,7 +123,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-      "Pass 1",
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -179,7 +181,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theMsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        "Pass 2",
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
         "Convert the MSR into an LPSR",
         createMsdl2lilypondConverterComponent ());
   }
@@ -238,14 +240,14 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         out,
         gIndenter);
 
-    // convert the LPSR score to LilyPond code
+    // convert the LPSR into LilyPond code
     try {
       translateLpsrToLilypond (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        "Pass 3",
-        "Convert the LPSR score to LilyPond code",
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
     }
     catch (lpsr2lilypondException& e) {
@@ -308,14 +310,14 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         outputFileStream,
         gIndenter);
 
-    // convert the LPSR score to LilyPond code
+    // convert the LPSR into LilyPond code
     try {
       translateLpsrToLilypond (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        "Pass 4",
-        "Convert the LPSR score to LilyPond code",
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
     }
     catch (lpsr2lilypondException& e) {
@@ -345,8 +347,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
 //_______________________________________________________________________________
  mfMusicformatsErrorKind convertMsdlStream2lilypondWithOptionsAndArguments (
-  std::string        inputSourceName,
-  std::istream&                inputStream,
+  std::string             inputSourceName,
+  std::istream&           inputStream,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -492,7 +494,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
-  std::string        fileName,
+  std::string             fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -539,10 +541,10 @@ EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
 }
 
 mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
-  std::string        fileName,
-  const S_oahHandler&  handler,
-  std::ostream& out,
-  std::ostream& err)
+  std::string         fileName,
+  const S_oahHandler& handler,
+  std::ostream&       out,
+  std::ostream&       err)
 {
   // open input file
 #ifdef OAH_TRACING_IS_ENABLED
@@ -607,10 +609,10 @@ EXP mfMusicformatsErrorKind convertMsdlString2lilypondWithOptionsAndArguments (
 }
 
 mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
-  const char*   buffer,
-  const S_oahHandler&  handler,
-  std::ostream& out,
-  std::ostream& err)
+  const char*         buffer,
+  const S_oahHandler& handler,
+  std::ostream&       out,
+  std::ostream&       err)
 {
   std::stringstream
     inputStream (
