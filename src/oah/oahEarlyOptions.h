@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -16,13 +16,19 @@
 
 #include "oahBasicTypes.h"
 
+#include "mfLanguages.h"
 #include "mfMultiGenerationOah.h"
+#include "mfWaeHandlers.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// language
+EXP extern const std::string K_LANGUAGE_OPTION_LONG_NAME;
+EXP extern const std::string K_LANGUAGE_OPTION_SHORT_NAME;
+
 // insider
 EXP extern const std::string K_INSIDER_OPTION_LONG_NAME;
 EXP extern const std::string K_INSIDER_OPTION_SHORT_NAME;
@@ -81,6 +87,14 @@ class EXP oahEarlyOptions
     // set and get
     // ------------------------------------------------------
 
+    void                  setEarlyLanguageKind (
+                            mfLanguageKind languageKind);
+    mfLanguageKind        getEarlyLanguageKind () const
+                              { return fEarlyLanguageKind; }
+
+    S_mfWaeHandler        getMfWaeHandler () const
+                              { return fMfWaeHandler; }
+
     void                  setEarlyInsiderOption ();
     Bool                  getEarlyInsiderOption () const
                               { return fEarlyInsiderOption; }
@@ -96,7 +110,7 @@ class EXP oahEarlyOptions
                           getEarlyMultiGenerationOutputKind () const
                               { return fEarlyMultiGenerationOutputKind; }
 
-    const std::list<std::string>&   
+    const std::list<std::string>&
                           getEarlyIncludeFileNamesList () const
                               { return fEarlyIncludeFileNamesList; }
 
@@ -167,6 +181,9 @@ class EXP oahEarlyOptions
     // fields
     // ------------------------------------------------------
 
+    mfLanguageKind        fEarlyLanguageKind;
+    S_mfWaeHandler        fMfWaeHandler;
+
     Bool                  fEarlyInsiderOption;
 //     Bool                  fEarlyRegularOption;
 
@@ -175,7 +192,7 @@ class EXP oahEarlyOptions
     mfMultiGenerationOutputKind
                           fEarlyMultiGenerationOutputKind;
 
-    std::list<std::string>          
+    std::list<std::string>
                           fEarlyIncludeFileNamesList;
 
 #ifdef OAH_TRACING_IS_ENABLED

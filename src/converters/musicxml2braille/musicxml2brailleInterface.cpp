@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -69,10 +69,10 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
-  SXMLFile&            sxmlfile,
-  std::ostream&        out,
-  std::ostream&        err,
-  S_oahHandler         handler)
+  SXMLFile&     sxmlfile,
+  std::ostream& out,
+  std::ostream& err,
+  S_oahHandler  handler)
 {
 #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
@@ -125,8 +125,8 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       translateMxsrToMsrSkeleton (
         theMxsr,
         gGlobalMsrOahGroup,
-        "Pass 2a",
-        "Create an MSR skeleton from the MXSR");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2a (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMSRSqueletonFromTheMXSR ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -156,8 +156,8 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     populateMsrSkeletonFromMxsr (
       theMxsr,
       firstMsrScore,
-        "Pass 2b",
-        "Populate the MSR skeleton from MusicXML data");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2b (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->populateTheMSRSqueletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -191,8 +191,8 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        "Pass 3",
-        "Convert the first MSR into a second MSR");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -230,7 +230,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           secondMsrScore,
           gGlobalMsrOahGroup,
           gGlobalBsrOahGroup,
-          "Pass 4a",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4a (),
           "Create a first BSR from the MSR");
     }
     catch (msr2bsrException& e) {
@@ -274,7 +274,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         translateBsrToFinalizedBsr (
           firstBsrScore,
           gGlobalBsrOahGroup,
-          "Pass 4b",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4b (),
           "Create the finalized BSR from the first BSR");
     }
     catch (bsr2finalizedBsrException& e) {
@@ -339,7 +339,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          "Pass 5",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
           "Convert the finalized BSR into braille",
           out);
       }
@@ -401,7 +401,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          "Pass 4",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
           "Convert the finalized BSR into braille",
           brailleCodeFileOutputStream);
       }
@@ -608,8 +608,8 @@ EXP mfMusicformatsErrorKind musicxmlFile2braille (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML file");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
     return
@@ -624,17 +624,17 @@ EXP mfMusicformatsErrorKind musicxmlFile2braille (
 }
 
 mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
-  const char*  fileName,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         fileName,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML file");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
     return
@@ -659,8 +659,8 @@ EXP mfMusicformatsErrorKind musicxmlFd2braille (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML descriptor");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -675,17 +675,17 @@ EXP mfMusicformatsErrorKind musicxmlFd2braille (
 }
 
 mfMusicformatsErrorKind convertMusicxmlFd2brailleWithHandler (
-  FILE*        fd,
-  std::ostream&     out,
-  std::ostream&     err,
+  FILE*               fd,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML descriptor");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -710,8 +710,8 @@ EXP mfMusicformatsErrorKind musicxmlString2braille (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML buffer");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2braille() even if sxmlfile is null,
   // to handle the help options if any
@@ -726,17 +726,17 @@ EXP mfMusicformatsErrorKind musicxmlString2braille (
 }
 
 mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
-  const char*  buffer,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         buffer,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   SXMLFile
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        "Pass 1",
-        "Create an MXSR reading a MusicXML buffer");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2braille() even if sxmlfile is null,
   // to handle the help options if any

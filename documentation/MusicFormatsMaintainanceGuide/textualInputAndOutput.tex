@@ -106,7 +106,7 @@ When writing to \standardOutput, the indented output stream is constructed above
         out,
         gIndenter);
 
-    // convert the LPSR score to LilyPond code
+    // convert the LPSR into LilyPond code
     try {
       translateLpsrToLilypond (
         theLpsrScore,
@@ -132,7 +132,7 @@ When writing to a file, an {\tt std::ofstream} is instantiated to write to the f
         outputFileStream,
         gIndenter);
 
-    // convert the LPSR score to LilyPond code
+    // convert the LPSR into LilyPond code
     try {
       translateLpsrToLilypond (
         theLpsrScore,
@@ -211,8 +211,8 @@ To debug this:
 // CAUTION: DON'T USE THIS IN PRODUCTION CODE,
 // since that could kill a session on a web server, for example
 
-#ifndef ABORT_TO_DEBUG_ERRORS
-  //#define ABORT_TO_DEBUG_ERRORS
+#ifndef MF_ABORT_TO_DEBUG_ERRORS
+  //#define MF_ABORT_TO_DEBUG_ERRORS
 #endif
 \end{lstlisting}
 

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -13,6 +13,8 @@
 
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
+
+#include "oahEarlyOptions.h"
 
 
 namespace MusicFormats
@@ -45,12 +47,12 @@ std::ostream& operator << (std::ostream& os, const mfTimingItemKind& elt)
 //______________________________________________________________________________
 mfTimingItemsList mfTimingItemsList::gGlobalTimingItemsList;
 
-S_timingItem mfTimingItem::createTimingItem (
-  const std::string&  activity,
-  const std::string&  description,
-  mfTimingItemKind kind,
-  clock_t        startClock,
-  clock_t        endClock)
+S_mfTimingItem mfTimingItem::createTimingItem (
+  const std::string& activity,
+  const std::string& description,
+  mfTimingItemKind   kind,
+  clock_t            startClock,
+  clock_t            endClock)
 {
   mfTimingItem* o = new mfTimingItem (
     activity,
@@ -63,11 +65,11 @@ S_timingItem mfTimingItem::createTimingItem (
 }
 
 mfTimingItem::mfTimingItem (
-  const std::string&  activity,
-  const std::string&  description,
-  mfTimingItemKind kind,
-  clock_t        startClock,
-  clock_t        endClock)
+  const std::string& activity,
+  const std::string& description,
+  mfTimingItemKind   kind,
+  clock_t            startClock,
+  clock_t            endClock)
 {
   fActivity    = activity;
   fDescription = description;
@@ -83,13 +85,13 @@ mfTimingItemsList::~mfTimingItemsList ()
 {}
 
 void mfTimingItemsList::appendTimingItem (
-  const std::string&     activity,
-  const std::string&     description,
-  mfTimingItemKind kind,
-  clock_t           startClock,
+  const std::string& activity,
+  const std::string& description,
+  mfTimingItemKind   kind,
+  clock_t            startClock,
   clock_t            endClock)
 {
-  S_timingItem
+  S_mfTimingItem
     mfTimingItem =
       mfTimingItem::createTimingItem (
         activity,
@@ -117,23 +119,26 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     totalOptionalClock  = 0;
 
   os << std::left <<
-    std::setw (activityWidth) << "Activity" << "  " <<
-    std::setw (descriptionWidth) << "Description" << "  " <<
-    std::setw (kindWidth)     << "Kind" << "  " <<
-    std::setw (secondsWidth)  << "CPU (sec)" << std::endl <<
+    std::setw (activityWidth) <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->activity () <<
+    "  " <<
+    std::setw (descriptionWidth) <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->description () <<
+    "  " <<
+    std::setw (kindWidth)     <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->kind () <<
+    "  " <<
+    std::setw (secondsWidth)  <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->CPUSeconds () <<
+    std::endl <<
+
     std::setw (activityWidth) << mfReplicateString ("-", activityWidth) << "  " <<
     std::setw (descriptionWidth) << mfReplicateString ("-", descriptionWidth) << "  " <<
     std::setw (kindWidth) << mfReplicateString ("-", kindWidth) << "  " <<
     std::setw (secondsWidth) << mfReplicateString ("-", secondsWidth) <<
     std::endl << std::endl;
 
-  for (
-    std::list<S_timingItem>::const_iterator i=fTimingItemsList.begin ();
-    i!=fTimingItemsList.end ();
-    ++i
-  ) {
-    S_timingItem theTimingItem = (*i);
-
+  for (S_mfTimingItem theTimingItem : fTimingItemsList) {
     clock_t timingItemClock =
       theTimingItem->getEndClock () - theTimingItem->getStartClock ();
     totalClock += timingItemClock;
@@ -145,11 +150,15 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     switch (theTimingItem->getKind ()) {
       case mfTimingItemKind::kMandatory:
         totalMandatoryClock += timingItemClock;
-        os << std::setw (kindWidth) << "mandatory";
+        os << std::setw (kindWidth) <<
+        std::setw (descriptionWidth) <<
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->mandatory ();
         break;
       case mfTimingItemKind::kOptional:
         totalOptionalClock += timingItemClock;
-        os << std::setw (kindWidth) << "optional";
+        os << std::setw (kindWidth) <<
+        std::setw (descriptionWidth) <<
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->optional ();
         break;
     } // switch
 
@@ -171,11 +180,14 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
     totalsPrecision          =  secondsPrecision;
 
   os << std::left <<
-    std::setw (totalClockWidth)            << "Total (sec)" <<
+    std::setw (totalClockWidth) <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->totalSeconds () <<
     "  " <<
-    std::setw (totalMandatoryClockWidth)   << "Mandatory" <<
+    std::setw (totalMandatoryClockWidth) <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->mandatory () <<
     "  " <<
-    std::setw (totalOptionalClockWidth)    << "Optional" <<
+    std::setw (totalOptionalClockWidth) <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->optional () <<
     std::endl <<
 
     std::setw (totalClockWidth) <<
@@ -207,7 +219,9 @@ void mfTimingItemsList::printWithContext (
   std::ostream&      os) const
 {
   os << std::left <<
-    "Timing information for " << context << ":" <<
+    "Timing information for " <<
+    context <<
+    ":" <<
     std::endl << std::endl;
 
   doPrint (os);
@@ -216,7 +230,8 @@ void mfTimingItemsList::printWithContext (
 void mfTimingItemsList::print (std::ostream& os) const
 {
   os << std::left <<
-    "Timing information:" <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->timingInformation () <<
+    ":" <<
     std::endl << std::endl;
 
   doPrint (os);

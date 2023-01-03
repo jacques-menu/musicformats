@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -53,6 +53,7 @@
 
 #include "msr2lpsrTranslator.h"
 
+#include "oahEarlyOptions.h"
 #include "oahOah.h"
 
 #include "msrOah.h"
@@ -556,7 +557,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
       fResultingLpsr,
       gGlobalMsrOahGroup,
       gGlobalLpsrOahGroup,
-      "Display the LPSR");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ());
   }
 
   if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
@@ -564,7 +565,11 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
       fResultingLpsr,
       gGlobalMsrOahGroup,
       gGlobalLpsrOahGroup,
-      "Display the LPSR");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ()
+      	+
+      ", "
+        +
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion ());
   }
 
   // forget about the visited MSR score

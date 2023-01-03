@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -52,15 +52,15 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
-  S_msrScore   theMsrScore,
-  std::string       passNumber1,
-  std::string       passDescription1,
-  std::string       passNumber2,
-  std::string       passDescription2,
-  std::string       passNumber3,
-  std::string       passDescription3,
-  std::ostream&     out,
-  std::ostream&     err,
+  S_msrScore          theMsrScore,
+  std::string         passNumber1,
+  std::string         passDescription1,
+  std::string         passNumber2,
+  std::string         passDescription2,
+  std::string         passNumber3,
+  std::string         passDescription3,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
   // has quiet mode been requested?

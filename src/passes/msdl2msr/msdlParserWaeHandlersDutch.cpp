@@ -1,26 +1,13 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
-
-// #include "mfEnableTracingIfDesired.h"
-// #ifdef OAH_TRACING_IS_ENABLED
-//   #include "mfTracingOah.h"
-// #endif
-//
-// #include "oahOah.h"
-//
-// #include "msrOah.h"
-// #include "msr2lpsrOah.h"
-//
-// #include "msdlKeywords.h"
-// #include "msdlTokens.h"
 
 #include "msdlParserWaeHandlersDutch.h"
 
@@ -29,49 +16,49 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-S_msdlParserDutchWaeHandler msdlParserDutchWaeHandler::create ()
+S_msdlParserWaeHandlerDutch msdlParserWaeHandlerDutch::create ()
 {
-  msdlParserDutchWaeHandler* o =
-    new msdlParserDutchWaeHandler ();
+  msdlParserWaeHandlerDutch* o =
+    new msdlParserWaeHandlerDutch ();
   assert (o != nullptr);
   return o;
 }
 
-msdlParserDutchWaeHandler::msdlParserDutchWaeHandler ()
+msdlParserWaeHandlerDutch::msdlParserWaeHandlerDutch ()
 {}
 
-msdlParserDutchWaeHandler::~msdlParserDutchWaeHandler ()
+msdlParserWaeHandlerDutch::~msdlParserWaeHandlerDutch ()
 {}
 
-void msdlParserDutchWaeHandler::multipleIdentifications () const
+void msdlParserWaeHandlerDutch::multipleIdentifications () const
 {
   gLogStream <<
     "### only one identification section is possible, ahead of the specfication ###" <<
     std::endl;
 }
 
-void msdlParserDutchWaeHandler::stringExpectedAsTitle () const
+void msdlParserWaeHandlerDutch::stringExpectedAsTitle () const
 {
   gLogStream <<
     "### a string is expected as title ###" <<
     std::endl;
 }
 
-void msdlParserDutchWaeHandler::stringExpectedAsComposer () const
+void msdlParserWaeHandlerDutch::stringExpectedAsComposer () const
 {
   gLogStream <<
     "### a string is expected as composer ###" <<
     std::endl;
 }
 
-void msdlParserDutchWaeHandler::stringExpectedAsOpus () const
+void msdlParserWaeHandlerDutch::stringExpectedAsOpus () const
 {
   gLogStream <<
     "### a string is expected as opus ###" <<
     std::endl;
 }
 
-void msdlParserDutchWaeHandler::unexpectedToken (
+void msdlParserWaeHandlerDutch::unexpectedToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
@@ -83,7 +70,7 @@ void msdlParserDutchWaeHandler::unexpectedToken (
     std::endl;
 }
 
-void msdlParserDutchWaeHandler::ignoringToken (
+void msdlParserWaeHandlerDutch::ignoringToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
@@ -95,7 +82,7 @@ void msdlParserDutchWaeHandler::ignoringToken (
     std::endl;
 }
 
-void msdlParserDutchWaeHandler::inputIsSyntacticallyCorrect () const
+void msdlParserWaeHandlerDutch::inputIsSyntacticallyCorrect () const
 {
   gLogStream <<
     "The MSDL input is syntactically correct" <<
@@ -103,28 +90,28 @@ void msdlParserDutchWaeHandler::inputIsSyntacticallyCorrect () const
     std::endl;
 }
 
-void msdlParserDutchWaeHandler::inputIsSyntacticallyIncorrect () const
+void msdlParserWaeHandlerDutch::inputIsSyntacticallyIncorrect () const
 {
   gLogStream <<
     "### The MSDL input is syntactically incorrect ###" <<
     std::endl;
 }
 
-void msdlParserDutchWaeHandler::mixedCommasAndQuotesInOctaveIndication () const
+void msdlParserWaeHandlerDutch::mixedCommasAndQuotesInOctaveIndication () const
 {
   gLogStream <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
     std::endl;
 }
 
-void msdlParserDutchWaeHandler::malformedNoteDuration () const
+void msdlParserWaeHandlerDutch::malformedNoteDuration () const
 {
   gLogStream <<
     "### Malformed note duration ###" <<
     std::endl;
 }
 
-std::string msdlParserDutchWaeHandler::asString () const
+std::string msdlParserWaeHandlerDutch::asString () const
 {
   std::stringstream s;
 
@@ -134,14 +121,14 @@ std::string msdlParserDutchWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserDutchWaeHandler::print (std::ostream& os) const
+void msdlParserWaeHandlerDutch::print (std::ostream& os) const
 {
   os <<
-    "msdlParserDutchWaeHandler" <<
+    "msdlParserWaeHandlerDutch" <<
     std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_msdlParserDutchWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserWaeHandlerDutch& elt)
 {
   if (elt) {
     elt->print (os);

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -83,7 +83,7 @@ R"()",
   appendSubGroupToGroup (subGroup);
 
   const msrGenerationAPIKind
-    msrGenerationAPIKindDefaultValue =
+    generationAPIKindDefaultValue =
       msrGenerationAPIKind::kMsrFunctionsAPIKind; // default value
 
   fGenerationAPIKindAtom =
@@ -102,7 +102,7 @@ The default is 'DEFAULT_VALUE'.)",
           existingGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         std::regex ("DEFAULT_VALUE"),
         msrGenerationAPIKindAsString (
-          msrGenerationAPIKindDefaultValue)),
+          generationAPIKindDefaultValue)),
       "GENERATION_API",
       "msrGenerationAPIKind",
       fGenerationAPIKind);

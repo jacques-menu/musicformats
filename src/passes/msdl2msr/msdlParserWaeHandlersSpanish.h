@@ -1,18 +1,16 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msdrParserHandlersSpanish___
-#define ___msdrParserHandlersSpanish___
-
-// #include "msdlTokens.h"
+#ifndef ___msdlParserHandlersSpanish___
+#define ___msdlParserHandlersSpanish___
 
 #include "msdlParserWaeHandlers.h"
 
@@ -21,23 +19,23 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-class EXP msdlParserSpanishWaeHandler : public msdlParserWaeHandler
+class EXP msdlParserWaeHandlerSpanish : public msdlParserWaeHandler
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlParserSpanishWaeHandler> create ();
+    static SMARTP<msdlParserWaeHandlerSpanish> create ();
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlParserSpanishWaeHandler ();
+                          msdlParserWaeHandlerSpanish ();
 
-    virtual               ~msdlParserSpanishWaeHandler ();
+    virtual               ~msdlParserWaeHandlerSpanish ();
 
   public:
 
@@ -84,8 +82,8 @@ class EXP msdlParserSpanishWaeHandler : public msdlParserWaeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<msdlParserSpanishWaeHandler> S_msdlParserSpanishWaeHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_msdlParserSpanishWaeHandler& elt);
+typedef SMARTP<msdlParserWaeHandlerSpanish> S_msdlParserWaeHandlerSpanish;
+EXP std::ostream& operator << (std::ostream& os, const S_msdlParserWaeHandlerSpanish& elt);
 
 
 }

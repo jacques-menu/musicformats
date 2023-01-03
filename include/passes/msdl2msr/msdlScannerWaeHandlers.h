@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -84,23 +84,23 @@ typedef SMARTP<msdlScannerWaeHandler> S_msdlScannerWaeHandler;
 EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandler& elt);
 
 //________________________________________________________________________
-class EXP msdlScannerEnglishWaeHandler : public msdlScannerWaeHandler
+class EXP msdlScannerWaeHandlerEnglish : public msdlScannerWaeHandler
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlScannerEnglishWaeHandler> create ();
+    static SMARTP<msdlScannerWaeHandlerEnglish> create ();
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlScannerEnglishWaeHandler ();
+                          msdlScannerWaeHandlerEnglish ();
 
-    virtual               ~msdlScannerEnglishWaeHandler ();
+    virtual               ~msdlScannerWaeHandlerEnglish ();
 
   public:
 
@@ -141,27 +141,27 @@ class EXP msdlScannerEnglishWaeHandler : public msdlScannerWaeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<msdlScannerEnglishWaeHandler> S_msdlScannerEnglishWaeHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerEnglishWaeHandler& elt);
+typedef SMARTP<msdlScannerWaeHandlerEnglish> S_msdlScannerWaeHandlerEnglish;
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerEnglish& elt);
 
 //________________________________________________________________________
-class EXP msdlScannerFrenchWaeHandler : public msdlScannerWaeHandler
+class EXP msdlScannerWaeHandlerFrench : public msdlScannerWaeHandler
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlScannerFrenchWaeHandler> create ();
+    static SMARTP<msdlScannerWaeHandlerFrench> create ();
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlScannerFrenchWaeHandler ();
+                          msdlScannerWaeHandlerFrench ();
 
-    virtual               ~msdlScannerFrenchWaeHandler ();
+    virtual               ~msdlScannerWaeHandlerFrench ();
 
   public:
 
@@ -202,27 +202,27 @@ class EXP msdlScannerFrenchWaeHandler : public msdlScannerWaeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<msdlScannerFrenchWaeHandler> S_msdlScannerFrenchWaeHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerFrenchWaeHandler& elt);
+typedef SMARTP<msdlScannerWaeHandlerFrench> S_msdlScannerWaeHandlerFrench;
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerFrench& elt);
 
 //________________________________________________________________________
-class EXP msdlScannerItalianWaeHandler : public msdlScannerWaeHandler
+class EXP msdlScannerWaeHandlerItalian : public msdlScannerWaeHandler
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlScannerItalianWaeHandler> create ();
+    static SMARTP<msdlScannerWaeHandlerItalian> create ();
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlScannerItalianWaeHandler ();
+                          msdlScannerWaeHandlerItalian ();
 
-    virtual               ~msdlScannerItalianWaeHandler ();
+    virtual               ~msdlScannerWaeHandlerItalian ();
 
   public:
 
@@ -263,27 +263,27 @@ class EXP msdlScannerItalianWaeHandler : public msdlScannerWaeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<msdlScannerItalianWaeHandler> S_msdlScannerItalianWaeHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerItalianWaeHandler& elt);
+typedef SMARTP<msdlScannerWaeHandlerItalian> S_msdlScannerWaeHandlerItalian;
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerItalian& elt);
 
 //________________________________________________________________________
-class EXP msdlScannerGermanWaeHandler : public msdlScannerWaeHandler
+class EXP msdlScannerWaeHandlerGerman : public msdlScannerWaeHandler
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlScannerGermanWaeHandler> create ();
+    static SMARTP<msdlScannerWaeHandlerGerman> create ();
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlScannerGermanWaeHandler ();
+                          msdlScannerWaeHandlerGerman ();
 
-    virtual               ~msdlScannerGermanWaeHandler ();
+    virtual               ~msdlScannerWaeHandlerGerman ();
 
   public:
 
@@ -324,27 +324,27 @@ class EXP msdlScannerGermanWaeHandler : public msdlScannerWaeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<msdlScannerGermanWaeHandler> S_msdlScannerGermanWaeHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerGermanWaeHandler& elt);
+typedef SMARTP<msdlScannerWaeHandlerGerman> S_msdlScannerWaeHandlerGerman;
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerGerman& elt);
 
 //________________________________________________________________________
-class EXP msdlScannerSpanishWaeHandler : public msdlScannerWaeHandler
+class EXP msdlScannerWaeHandlerSpanish : public msdlScannerWaeHandler
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlScannerSpanishWaeHandler> create ();
+    static SMARTP<msdlScannerWaeHandlerSpanish> create ();
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlScannerSpanishWaeHandler ();
+                          msdlScannerWaeHandlerSpanish ();
 
-    virtual               ~msdlScannerSpanishWaeHandler ();
+    virtual               ~msdlScannerWaeHandlerSpanish ();
 
   public:
 
@@ -385,27 +385,27 @@ class EXP msdlScannerSpanishWaeHandler : public msdlScannerWaeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<msdlScannerSpanishWaeHandler> S_msdlScannerSpanishWaeHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerSpanishWaeHandler& elt);
+typedef SMARTP<msdlScannerWaeHandlerSpanish> S_msdlScannerWaeHandlerSpanish;
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerSpanish& elt);
 
 //________________________________________________________________________
-class EXP msdlScannerDutchWaeHandler : public msdlScannerWaeHandler
+class EXP msdlScannerWaeHandlerDutch : public msdlScannerWaeHandler
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlScannerDutchWaeHandler> create ();
+    static SMARTP<msdlScannerWaeHandlerDutch> create ();
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlScannerDutchWaeHandler ();
+                          msdlScannerWaeHandlerDutch ();
 
-    virtual               ~msdlScannerDutchWaeHandler ();
+    virtual               ~msdlScannerWaeHandlerDutch ();
 
   public:
 
@@ -446,8 +446,8 @@ class EXP msdlScannerDutchWaeHandler : public msdlScannerWaeHandler
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<msdlScannerDutchWaeHandler> S_msdlScannerDutchWaeHandler;
-EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerDutchWaeHandler& elt);
+typedef SMARTP<msdlScannerWaeHandlerDutch> S_msdlScannerWaeHandlerDutch;
+EXP std::ostream& operator << (std::ostream& os, const S_msdlScannerWaeHandlerDutch& elt);
 
 
 }

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -57,7 +57,9 @@ void displayLpsrScore (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    ": "<<
+    passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl;
@@ -73,7 +75,7 @@ void displayLpsrScore (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    "Display the LPSR as text",
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText (),
     mfTimingItemKind::kOptional,
     startClock,
     endClock);
@@ -102,7 +104,11 @@ void displayLpsrScoreFull (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription << ", full version" <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    ": "<<
+    passDescription <<
+    ", " <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
@@ -118,7 +124,11 @@ void displayLpsrScoreFull (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    "Display the LPSR as text, full version",
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ()
+      +
+    ", "
+      +
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion (),
     mfTimingItemKind::kOptional,
     startClock,
     endClock);

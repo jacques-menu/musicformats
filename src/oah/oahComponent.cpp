@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -56,6 +56,16 @@ S_mfcOahComponent createOahComponent ()
           "October 4, 2022",
           std::list<std::string> {
             "Added oahElementValueKind::kElementValueUnknown to fix an initialization issue"
+          }
+      ));
+
+    pOahComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.66"),
+          "January 3, 2023",
+          std::list<std::string> {
+            "Added the '-language, -lang' option"
           }
       ));
   }

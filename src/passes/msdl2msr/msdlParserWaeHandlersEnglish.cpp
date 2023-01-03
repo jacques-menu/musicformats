@@ -1,26 +1,13 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
-
-// #include "mfEnableTracingIfDesired.h"
-// #ifdef OAH_TRACING_IS_ENABLED
-//   #include "mfTracingOah.h"
-// #endif
-//
-// #include "oahOah.h"
-//
-// #include "msrOah.h"
-// #include "msr2lpsrOah.h"
-//
-// #include "msdlKeywords.h"
-// #include "msdlTokens.h"
 
 #include "msdlParserWaeHandlersEnglish.h"
 
@@ -29,49 +16,49 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-S_msdlParserEnglishWaeHandler msdlParserEnglishWaeHandler::create ()
+S_msdlParserWaeHandlerEnglish msdlParserWaeHandlerEnglish::create ()
 {
-  msdlParserEnglishWaeHandler* o =
-    new msdlParserEnglishWaeHandler ();
+  msdlParserWaeHandlerEnglish* o =
+    new msdlParserWaeHandlerEnglish ();
   assert (o != nullptr);
   return o;
 }
 
-msdlParserEnglishWaeHandler::msdlParserEnglishWaeHandler ()
+msdlParserWaeHandlerEnglish::msdlParserWaeHandlerEnglish ()
 {}
 
-msdlParserEnglishWaeHandler::~msdlParserEnglishWaeHandler ()
+msdlParserWaeHandlerEnglish::~msdlParserWaeHandlerEnglish ()
 {}
 
-void msdlParserEnglishWaeHandler::multipleIdentifications () const
+void msdlParserWaeHandlerEnglish::multipleIdentifications () const
 {
   gLogStream <<
     "### only one identification section is possible, ahead of the specfication ###" <<
     std::endl;
 }
 
-void msdlParserEnglishWaeHandler::stringExpectedAsTitle () const
+void msdlParserWaeHandlerEnglish::stringExpectedAsTitle () const
 {
   gLogStream <<
     "### a string is expected as title ###" <<
     std::endl;
 }
 
-void msdlParserEnglishWaeHandler::stringExpectedAsComposer () const
+void msdlParserWaeHandlerEnglish::stringExpectedAsComposer () const
 {
   gLogStream <<
     "### a string is expected as composer ###" <<
     std::endl;
 }
 
-void msdlParserEnglishWaeHandler::stringExpectedAsOpus () const
+void msdlParserWaeHandlerEnglish::stringExpectedAsOpus () const
 {
   gLogStream <<
     "### a string is expected as opus ###" <<
     std::endl;
 }
 
-void msdlParserEnglishWaeHandler::unexpectedToken (
+void msdlParserWaeHandlerEnglish::unexpectedToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
@@ -83,7 +70,7 @@ void msdlParserEnglishWaeHandler::unexpectedToken (
     std::endl;
 }
 
-void msdlParserEnglishWaeHandler::ignoringToken (
+void msdlParserWaeHandlerEnglish::ignoringToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
@@ -95,35 +82,35 @@ void msdlParserEnglishWaeHandler::ignoringToken (
     std::endl;
 }
 
-void msdlParserEnglishWaeHandler::inputIsSyntacticallyCorrect () const
+void msdlParserWaeHandlerEnglish::inputIsSyntacticallyCorrect () const
 {
   gLogStream <<
     "The MSDL input is syntactically correct" <<
     std::endl;
 }
 
-void msdlParserEnglishWaeHandler::inputIsSyntacticallyIncorrect () const
+void msdlParserWaeHandlerEnglish::inputIsSyntacticallyIncorrect () const
 {
   gLogStream <<
     "### The MSDL input is syntactically incorrect ###" <<
     std::endl;
 }
 
-void msdlParserEnglishWaeHandler::mixedCommasAndQuotesInOctaveIndication () const
+void msdlParserWaeHandlerEnglish::mixedCommasAndQuotesInOctaveIndication () const
 {
   gLogStream <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
     std::endl;
 }
 
-void msdlParserEnglishWaeHandler::malformedNoteDuration () const
+void msdlParserWaeHandlerEnglish::malformedNoteDuration () const
 {
   gLogStream <<
     "### Malformed note duration ###" <<
     std::endl;
 }
 
-std::string msdlParserEnglishWaeHandler::asString () const
+std::string msdlParserWaeHandlerEnglish::asString () const
 {
   std::stringstream s;
 
@@ -133,14 +120,14 @@ std::string msdlParserEnglishWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserEnglishWaeHandler::print (std::ostream& os) const
+void msdlParserWaeHandlerEnglish::print (std::ostream& os) const
 {
   os <<
-    "msdlParserEnglishWaeHandler" <<
+    "msdlParserWaeHandlerEnglish" <<
     std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_msdlParserEnglishWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserWaeHandlerEnglish& elt)
 {
   if (elt) {
     elt->print (os);

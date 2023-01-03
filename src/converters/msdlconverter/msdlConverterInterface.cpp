@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -63,10 +63,10 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUSED v0.9.66
-  SXMLFile&     sxmlfile,
-  std::ostream& out,
-  std::ostream& err,
-  const S_oahHandler&  handler)
+  SXMLFile&           sxmlfile,
+  std::ostream&       out,
+  std::ostream&       err,
+  const S_oahHandler& handler)
 {
 // #ifdef OAH_TRACING_IS_ENABLED
 //   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
@@ -119,8 +119,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //       translateMxsrToMsrSkeleton (
 //         theMxsr,
 //         gGlobalMsrOahGroup,
-//         "Pass 2a",
-//         "Create an MSR skeleton from the MXSR");
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2a (),
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMSRSqueletonFromTheMXSR ());
 //   }
 //   catch (mxsr2msrException& e) {
 //     mfDisplayException (e, gOutputStream);
@@ -150,8 +150,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //     populateMsrSkeletonFromMxsr (
 //       theMxsr,
 //       firstMsrScore,
-//         "Pass 2b",
-//         "Populate the MSR skeleton from MusicXML data");
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2b (),
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->populateTheMSRSqueletonFromMusicXMLData ());
 //   }
 //   catch (mxsr2msrException& e) {
 //     mfDisplayException (e, gOutputStream);
@@ -196,8 +196,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           firstMsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalMsr2msrOahGroup,
-//           "Pass 3",
-//           "Convert the first MSR into a second MSR",
+//           gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+//           gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR (),
 //           pathToVoice);
 //     } // for
 // }
@@ -207,8 +207,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //         firstMsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalMsr2msrOahGroup,
-//         "Pass 3",
-//         "Convert the first MSR into a second MSR");
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
 // }
 //   }
 //   catch (mxsr2msrException& e) {
@@ -247,8 +247,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           secondMsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
-//           "Pass 4",
-//           "Convert the second MSR into an LPSR",
+//           gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
+//           gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheSecondMSRIntoAnLPSR (),
 //           createMsdl2lilypondConverterComponent ());
 //     }
 //     catch (msr2lpsrException& e) {
@@ -268,7 +268,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //         theLpsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalLpsrOahGroup,
-//         "Display the LPSR");
+//       	 gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ());
 //     }
 //
 //     if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
@@ -276,7 +276,11 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //         theLpsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalLpsrOahGroup,
-//         "Display the LPSR");
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ()
+//       	   +
+//         ", " <<
+//       	   +
+//        gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion ());
 //     }
 //   }
 //
@@ -315,14 +319,14 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           out,
 //           gIndenter);
 //
-//       // convert the LPSR score to LilyPond code
+//       // convert the LPSR into LilyPond code
 //       try {
 //         translateLpsrToLilypond (
 //           theLpsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
-//           "Pass 5",
-//           "Convert the LPSR score to LilyPond code",
+//           gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
+//           gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
 //           lilypondStandardOutputStream);
 //       }
 //       catch (lpsr2lilypondException& e) {
@@ -385,14 +389,14 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           outputFileStream,
 //           gIndenter);
 //
-//       // convert the LPSR score to LilyPond code
+//       // convert the LPSR into LilyPond code
 //       try {
 //         translateLpsrToLilypond (
 //           theLpsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
-//           "Pass 5",
-//           "Convert the LPSR score to LilyPond code",
+//           gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
+//           gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
 //           lilypondFileOutputStream);
 //       }
 //       catch (lpsr2lilypondException& e) {
@@ -599,8 +603,8 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromFile (
 //         fileName,
-//         "Pass 1",
-//         "Create an MXSR reading a MusicXML file");
+		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
 //
 //   if (sxmlfile) {
 //     return
@@ -615,17 +619,17 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
 }
 
 mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
-  const char*  fileName,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         fileName,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
 //   SXMLFile
 //     sxmlfile =
 //       createSXMLFileFromFile (
 //         fileName,
-//         "Pass 1",
-//         "Create an MXSR reading a MusicXML file");
+		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
 //
 //   if (sxmlfile) {
 //     return
@@ -650,8 +654,8 @@ EXP mfMusicformatsErrorKind msdlFd2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromFd (
 //         fd,
-//         "Pass 1",
-//         "Create an MXSR reading a MusicXML descriptor");
+		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
 //     return
@@ -666,17 +670,17 @@ EXP mfMusicformatsErrorKind msdlFd2lilypond (
 }
 
 mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
-  FILE*        fd,
-  std::ostream&     out,
-  std::ostream&     err,
+  FILE*               fd,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
 //   SXMLFile
 //     sxmlfile =
 //       createSXMLFileFromFd (
 //         fd,
-//         "Pass 1",
-//         "Create an MXSR reading a MusicXML descriptor");
+		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
 //     return
@@ -701,8 +705,8 @@ EXP mfMusicformatsErrorKind msdlString2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromString (
 //         buffer,
-//         "Pass 1",
-//         "Create an MXSR reading a MusicXML buffer");
+		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
 //
 //   // call xmlFile2lilypond() even if sxmlfile is null,
 //   // to handle the help options if any
@@ -717,17 +721,17 @@ EXP mfMusicformatsErrorKind msdlString2lilypond (
 }
 
 mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
-  const char*  buffer,
-  std::ostream&     out,
-  std::ostream&     err,
+  const char*         buffer,
+  std::ostream&       out,
+  std::ostream&       err,
   const S_oahHandler& handler)
 {
 //   SXMLFile
 //     sxmlfile =
 //       createSXMLFileFromString (
 //         buffer,
-//         "Pass 1",
-//         "Create an MXSR reading a MusicXML buffer");
+		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+//         "Create an MXSR from a MusicXML buffer");
 //
 //   // call xmlFile2lilypond() even if sxmlfile is null,
 //   // to handle the help options if any

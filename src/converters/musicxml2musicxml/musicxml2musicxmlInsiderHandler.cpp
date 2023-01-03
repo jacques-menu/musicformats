@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -18,13 +18,13 @@
   #include "mfTracingOah.h"
 #endif
 
-#include "mfEnableHarmoniesExtraIfDesired.h"
-#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
+#include "mfEnableHarmoniesExtra.h"
+#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 
+#include "mfInitialization.h"
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
 
 #include "msrInitialization.h"
@@ -197,6 +197,8 @@ void xml2xmlInsiderHandler::createTheXml2xmlOptionGroups (
   // initialize the library
   // ------------------------------------------------------
 
+  initializeMusicFormats ();
+
   initializeWAE ();
 
   initializeMSR ();
@@ -225,7 +227,7 @@ void xml2xmlInsiderHandler::createTheXml2xmlOptionGroups (
   appendGroupToHandler (
     createGlobalMsr2mxsrOahGroup ());
 
-#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
+#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   // create the extra OAH group
   appendGroupToHandler (
     createGlobalHarmoniesExtraOahGroup ());
@@ -406,7 +408,7 @@ void xml2xmlInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
-#ifdef OAH_HARMONIES_EXTRA_IS_ENABLED
+#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   gGlobalHarmoniesExtraOahGroup->
     enforceGroupQuietness ();
 #endif

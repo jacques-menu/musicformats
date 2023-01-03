@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -117,7 +117,9 @@ void displayMsrScore (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    ": "<<
+    passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl <<
@@ -173,7 +175,11 @@ void displayMsrScoreFull (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription << ", full version" <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    ": "<<
+    passDescription <<
+    ", " <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
@@ -233,7 +239,11 @@ void displayMsrScoreSummary (
       separator <<
       std::endl <<
       gTab <<
-      "Pass (optional): " << passDescription  << ", summary" <<
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+      ": "<<
+      passDescription <<
+      ", " <<
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->summary () <<
       std::endl <<
       separator <<
       std::endl << std::endl;
@@ -284,7 +294,11 @@ void displayMsrScoreNames (
       separator <<
       std::endl <<
       gTab <<
-      "Pass (optional): " << passDescription << ", names" <<
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+      ": "<<
+      passDescription <<
+      ", " <<
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->names () <<
       std::endl <<
       separator <<
       std::endl << std::endl;
@@ -332,7 +346,11 @@ void displayMsrScoreSlices (
     separator <<
     std::endl <<
     gTab <<
-    "Pass (optional): " << passDescription << ", slices" <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    ": "<<
+    passDescription <<
+    ", " <<
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->slices () <<
     std::endl <<
     separator <<
     std::endl << std::endl;

@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -123,6 +123,8 @@ void msdlConverterRegularHandler::createRegularHandlerGroups ()
 #endif
 
   createInformationsRegularGroup ();
+
+  createDisplayRegularGroup ();
 
   createMsdlRegularGroup ();
 
@@ -255,14 +257,42 @@ void msdlConverterRegularHandler::createInformationsRegularGroup ()
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
   registerAtomInRegularSubgroup ("contact", subGroup);
+}
+
+void msdlConverterRegularHandler::createDisplayRegularGroup ()
+{
+  // group
+
+  S_oahGroup
+    group =
+      oahGroup::create (
+        "Display group",
+        "help-display-group", "hdisplay-group",
+        "",
+        oahElementVisibilityKind::kElementVisibilityWhole);
+  appendGroupToRegulalHandler (group);
+
+  // subgroup
+
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Display",
+        "help-display", "hdisplay",
+        "",
+        oahElementVisibilityKind::kElementVisibilityWhole,
+        group);
+  group->
+    appendSubGroupToGroup (subGroup);
+
+  // atoms from the insider handler
+
+  registerAtomInRegularSubgroup ("language", subGroup);
+
   registerAtomInRegularSubgroup ("display-prefixes", subGroup);
   registerAtomInRegularSubgroup ("display-single-character-options", subGroup);
 
   registerAtomInRegularSubgroup ("display-cpu-usage", subGroup);
-
-  registerAtomInRegularSubgroup ("display-options-handler", subGroup);
-  registerAtomInRegularSubgroup ("display-options-handler-summary", subGroup);
-  registerAtomInRegularSubgroup ("display-options-handler-essentials", subGroup);
 }
 
 void msdlConverterRegularHandler::createMsdlRegularGroup ()
@@ -429,6 +459,8 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
     appendSubGroupToGroup (subGroup);
 
   // atoms from the insider handler
+
+  registerAtomInRegularSubgroup (K_LANGUAGE_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);

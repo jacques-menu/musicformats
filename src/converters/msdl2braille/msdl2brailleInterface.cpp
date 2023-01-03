@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -12,6 +12,8 @@
 #include <iostream>
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
                         // std::ifstream, std::ifstream::open(), std::ifstream::close()
+
+#include "mfEnableSanityChecks.h"
 
 #include "mfBool.h"
 #include "mfServiceRunData.h"
@@ -61,11 +63,11 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
-  std::string        inputSourceName,
-  std::istream&      inputStream,
-  const S_oahHandler&  handler,
-  std::ostream& out,
-  std::ostream& err)
+  std::string         inputSourceName,
+  std::istream&       inputStream,
+  const S_oahHandler& handler,
+  std::ostream&       out,
+  std::ostream&       err)
 {
   // register the input source name
   gGlobalServiceRunData->setInputSourceName (
@@ -101,7 +103,9 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        "Pass 1: Creating a first MSR from the MSDL input" <<
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 () <<
+        ": " <<
+        "Creating a first MSR from the MSDL input" <<
         std::endl <<
         separator <<
         std::endl;
@@ -122,12 +126,13 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-      "Pass 1",
+    gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
       endClock);
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
     // sanity check
     if (! firstMsrScore) {
       std::stringstream s;
@@ -145,6 +150,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
       throw msdl2msrException (message);
     }
+#endif
   }
   catch (msdl2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -178,8 +184,8 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        "Pass 2",
-        "Convert the first MSR into a second MSR");
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
+        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -217,7 +223,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           secondMsrScore,
           gGlobalMsrOahGroup,
           gGlobalBsrOahGroup,
-          "Pass 3",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
           "Create a first BSR from the MSR");
     }
     catch (msr2bsrException& e) {
@@ -275,7 +281,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         translateBsrToFinalizedBsr (
           firstBsrScore,
           gGlobalBsrOahGroup,
-          "Pass 4",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
           "Create the finalized BSR from the first BSR");
     }
     catch (bsr2finalizedBsrException& e) {
@@ -352,7 +358,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          "Pass 5",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
           "Convert the finalized BSR into braille",
           out);
       }
@@ -414,7 +420,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          "Pass 4",
+          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
           "Convert the finalized BSR into braille",
           brailleCodeFileOutputStream);
       }
@@ -446,8 +452,8 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
 
 //_______________________________________________________________________________
 mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
-  std::string        inputSourceName,
-  std::istream&                inputStream,
+  std::string             inputSourceName,
+  std::istream&           inputStream,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -590,7 +596,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
-  std::string        fileName,
+  std::string             fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -637,10 +643,10 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
 }
 
 mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
-  std::string        fileName,
-  const S_oahHandler&  handler,
-  std::ostream& out,
-  std::ostream& err)
+  std::string         fileName,
+  const S_oahHandler& handler,
+  std::ostream&       out,
+  std::ostream&       err)
 {
   // open input file
 #ifdef OAH_TRACING_IS_ENABLED

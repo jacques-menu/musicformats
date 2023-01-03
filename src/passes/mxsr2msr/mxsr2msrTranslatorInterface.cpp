@@ -1,10 +1,10 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
@@ -119,13 +119,17 @@ void populateMsrSkeletonFromMxsr (
   if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
     displayMsrScore (
       scoreSkeletonToBePopulated,
-      "Display the first MSR as text");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheFirstMSRAsText ());
   }
 
   if (gGlobalMsrOahGroup->getDisplayFirstMsrFull ()) {
     displayMsrScoreFull (
       scoreSkeletonToBePopulated,
-      "Display the first MSR as text");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheFirstMSRAsText ()
+      	+
+      ", "
+        +
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion () );
   }
 
   // display the populated MSR score summary if requested
@@ -136,7 +140,7 @@ void populateMsrSkeletonFromMxsr (
     displayMsrScoreSummary (
       scoreSkeletonToBePopulated,
       gGlobalMsrOahGroup,
-      "Display a summary of the first MSR");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayASummaryOfTheFirstMSR ());
   }
 
   // display the populated MSR score names if requested
@@ -147,7 +151,7 @@ void populateMsrSkeletonFromMxsr (
     displayMsrScoreNames (
       scoreSkeletonToBePopulated,
       gGlobalMsrOahGroup,
-      "Display the names in the first MSR");
+      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheNamesInTheFirstMSR ());
   }
 }
 

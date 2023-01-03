@@ -1,26 +1,13 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
-  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
   https://github.com/jacques-menu/musicformats
 */
-
-// #include "mfEnableTracingIfDesired.h"
-// #ifdef OAH_TRACING_IS_ENABLED
-//   #include "mfTracingOah.h"
-// #endif
-//
-// #include "oahOah.h"
-//
-// #include "msrOah.h"
-// #include "msr2lpsrOah.h"
-//
-// #include "msdlKeywords.h"
-// #include "msdlTokens.h"
 
 #include "msdlParserWaeHandlersSpanish.h"
 
@@ -29,49 +16,49 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-S_msdlParserSpanishWaeHandler msdlParserSpanishWaeHandler::create ()
+S_msdlParserWaeHandlerSpanish msdlParserWaeHandlerSpanish::create ()
 {
-  msdlParserSpanishWaeHandler* o =
-    new msdlParserSpanishWaeHandler ();
+  msdlParserWaeHandlerSpanish* o =
+    new msdlParserWaeHandlerSpanish ();
   assert (o != nullptr);
   return o;
 }
 
-msdlParserSpanishWaeHandler::msdlParserSpanishWaeHandler ()
+msdlParserWaeHandlerSpanish::msdlParserWaeHandlerSpanish ()
 {}
 
-msdlParserSpanishWaeHandler::~msdlParserSpanishWaeHandler ()
+msdlParserWaeHandlerSpanish::~msdlParserWaeHandlerSpanish ()
 {}
 
-void msdlParserSpanishWaeHandler::multipleIdentifications () const
+void msdlParserWaeHandlerSpanish::multipleIdentifications () const
 {
   gLogStream <<
     "### only one identification section is possible, ahead of the specfication ###" <<
     std::endl;
 }
 
-void msdlParserSpanishWaeHandler::stringExpectedAsTitle () const
+void msdlParserWaeHandlerSpanish::stringExpectedAsTitle () const
 {
   gLogStream <<
     "### a string is expected as title ###" <<
     std::endl;
 }
 
-void msdlParserSpanishWaeHandler::stringExpectedAsComposer () const
+void msdlParserWaeHandlerSpanish::stringExpectedAsComposer () const
 {
   gLogStream <<
     "### a string is expected as composer ###" <<
     std::endl;
 }
 
-void msdlParserSpanishWaeHandler::stringExpectedAsOpus () const
+void msdlParserWaeHandlerSpanish::stringExpectedAsOpus () const
 {
   gLogStream <<
     "### a string is expected as opus ###" <<
     std::endl;
 }
 
-void msdlParserSpanishWaeHandler::unexpectedToken (
+void msdlParserWaeHandlerSpanish::unexpectedToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
@@ -83,7 +70,7 @@ void msdlParserSpanishWaeHandler::unexpectedToken (
     std::endl;
 }
 
-void msdlParserSpanishWaeHandler::ignoringToken (
+void msdlParserWaeHandlerSpanish::ignoringToken (
   const msdlToken&   theToken,
   const std::string& context) const
 {
@@ -95,7 +82,7 @@ void msdlParserSpanishWaeHandler::ignoringToken (
     std::endl;
 }
 
-void msdlParserSpanishWaeHandler::inputIsSyntacticallyCorrect () const
+void msdlParserWaeHandlerSpanish::inputIsSyntacticallyCorrect () const
 {
   gLogStream <<
     "The MSDL input is syntactically correct" <<
@@ -103,28 +90,28 @@ void msdlParserSpanishWaeHandler::inputIsSyntacticallyCorrect () const
     std::endl;
 }
 
-void msdlParserSpanishWaeHandler::inputIsSyntacticallyIncorrect () const
+void msdlParserWaeHandlerSpanish::inputIsSyntacticallyIncorrect () const
 {
   gLogStream <<
     "### The MSDL input is syntactically incorrect ###" <<
     std::endl;
 }
 
-void msdlParserSpanishWaeHandler::mixedCommasAndQuotesInOctaveIndication () const
+void msdlParserWaeHandlerSpanish::mixedCommasAndQuotesInOctaveIndication () const
 {
   gLogStream <<
     "### Commas and quotes cannot be mixed in octave inditations ###" <<
     std::endl;
 }
 
-void msdlParserSpanishWaeHandler::malformedNoteDuration () const
+void msdlParserWaeHandlerSpanish::malformedNoteDuration () const
 {
   gLogStream <<
     "### Malformed note duration ###" <<
     std::endl;
 }
 
-std::string msdlParserSpanishWaeHandler::asString () const
+std::string msdlParserWaeHandlerSpanish::asString () const
 {
   std::stringstream s;
 
@@ -134,14 +121,14 @@ std::string msdlParserSpanishWaeHandler::asString () const
   return s.str ();
 }
 
-void msdlParserSpanishWaeHandler::print (std::ostream& os) const
+void msdlParserWaeHandlerSpanish::print (std::ostream& os) const
 {
   os <<
-    "msdlParserSpanishWaeHandler" <<
+    "msdlParserWaeHandlerSpanish" <<
     std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_msdlParserSpanishWaeHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_msdlParserWaeHandlerSpanish& elt)
 {
   if (elt) {
     elt->print (os);
