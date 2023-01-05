@@ -99,7 +99,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 () <<
+        gWaeHandler->pass1 () <<
         ": " <<
         "Creating a first MSR from the MSDL input" <<
         std::endl <<
@@ -123,7 +123,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+    gWaeHandler->pass1 (),
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -181,7 +181,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theMsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
+        gWaeHandler->pass2 (),
         "Convert the MSR into an LPSR",
         createMsdl2lilypondConverterComponent ());
   }
@@ -246,8 +246,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
+        gWaeHandler->pass3 (),
+        gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
     }
     catch (lpsr2lilypondException& e) {
@@ -276,7 +276,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<
-        "Opening file '" << outputFileName << "' for writing" <<
+        gWaeHandler->openingLilypondFileForWriting (outputFileName) <<
         std::endl;
     }
 #endif
@@ -290,9 +290,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       std::stringstream s;
 
       s <<
-        "Could not open LilyPond output file \"" <<
-        outputFileName <<
-        "\" for writing - quitting";
+        gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
 
       std::string message = s.str ();
 
@@ -316,8 +314,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
+        gWaeHandler->pass4 (),
+        gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
     }
     catch (lpsr2lilypondException& e) {
@@ -334,7 +332,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     if (gtracingOah->fTracePasses) {
       gLogStream <<
         std::endl <<
-        "Closing file \"" << outputFileName << "\"" <<
+        gWaeHandler->closingLilypondFile (outputFileName) <<
         std::endl;
     }
 #endif
@@ -494,7 +492,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
-  std::string             fileName,
+  std::string             inputFileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -504,23 +502,21 @@ EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
-      "Opening file \"" << fileName << "\" for writing" <<
+      gWaeHandler->openingLilypondFileForWriting (inputFileName) <<
       std::endl;
   }
 #endif
 
   std::ifstream
     inputStream (
-      fileName.c_str (),
+      inputFileName.c_str (),
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
     std::stringstream s;
 
     s <<
-      "Could not open MSDL input file \"" <<
-      fileName <<
-      "\" for reading - quitting";
+      gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
 
     std::string message = s.str ();
 
@@ -533,7 +529,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
 
   return
     convertMsdlStream2lilypondWithOptionsAndArguments (
-      fileName,
+      inputFileName,
       inputStream,
       handlerOptionsAndArguments,
       out,
@@ -541,7 +537,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
 }
 
 mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
-  std::string         fileName,
+  std::string         inputFileName,
   const S_oahHandler& handler,
   std::ostream&       out,
   std::ostream&       err)
@@ -551,23 +547,21 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
-      "Opening file \"" << fileName << "\" for writing" <<
+      gWaeHandler->openingLilypondFileForWriting (inputFileName) <<
       std::endl;
   }
 #endif
 
   std::ifstream
     inputStream (
-      fileName.c_str (),
+      inputFileName.c_str (),
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
     std::stringstream s;
 
     s <<
-      "Could not open MSDL input file \"" <<
-      fileName <<
-      "\" for reading - quitting";
+      gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
 
     std::string message = s.str ();
 
@@ -580,7 +574,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
 
   return
     convertMsdlStream2lilypondWithHandler (
-      fileName, inputStream, handler, out, err);
+      inputFileName, inputStream, handler, out, err);
 }
 
 //_______________________________________________________________________________

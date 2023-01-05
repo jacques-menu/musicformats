@@ -119,17 +119,17 @@ void populateMsrSkeletonFromMxsr (
   if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
     displayMsrScore (
       scoreSkeletonToBePopulated,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheFirstMSRAsText ());
+      gWaeHandler->displayTheFirstMSRAsText ());
   }
 
   if (gGlobalMsrOahGroup->getDisplayFirstMsrFull ()) {
     displayMsrScoreFull (
       scoreSkeletonToBePopulated,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheFirstMSRAsText ()
+      gWaeHandler->displayTheFirstMSRAsText ()
       	+
       ", "
         +
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion () );
+      gWaeHandler->fullVersion () );
   }
 
   // display the populated MSR score summary if requested
@@ -140,7 +140,7 @@ void populateMsrSkeletonFromMxsr (
     displayMsrScoreSummary (
       scoreSkeletonToBePopulated,
       gGlobalMsrOahGroup,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayASummaryOfTheFirstMSR ());
+      gWaeHandler->displayASummaryOfTheFirstMSR ());
   }
 
   // display the populated MSR score names if requested
@@ -151,7 +151,7 @@ void populateMsrSkeletonFromMxsr (
     displayMsrScoreNames (
       scoreSkeletonToBePopulated,
       gGlobalMsrOahGroup,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheNamesInTheFirstMSR ());
+      gWaeHandler->displayTheNamesInTheFirstMSR ());
   }
 }
 

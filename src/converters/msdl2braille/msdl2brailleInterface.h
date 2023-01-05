@@ -41,7 +41,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
   std::ostream&                 err);
 
 EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
-  std::string         fileName,
+  std::string         inputFileName,
   const S_oahHandler& handler,
   std::ostream&       out,
   std::ostream&       err);

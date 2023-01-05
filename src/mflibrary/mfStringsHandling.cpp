@@ -147,13 +147,13 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 std::string mfReplicateString (
-  std::string str,
-  int    times)
+  std::string theString,
+  int         times)
 {
   std::string result;
 
   for (int i = 0; i < times; ++i)
-    result += str;
+    result += theString;
 
   return result;
 }
@@ -161,11 +161,11 @@ std::string mfReplicateString (
 //______________________________________________________________________________
 /* JMI
 std::string replaceSubstringInString (
-  std::string str,
+  std::string theString,
   std::string subString,
   std::string ersatz)
 {
-  std::string result = str;
+  std::string result = theString;
 
   size_t found = result.find (subString);
 
@@ -179,8 +179,8 @@ std::string replaceSubstringInString (
 
 //_______________________________________________________________________________
 EXP void mfDisplayArgcAndArgv (
-  int      argc,
-  char*    argv[],
+  int           argc,
+  char*         argv[],
   std::ostream& os)
 {
   os <<
@@ -205,7 +205,7 @@ EXP void mfDisplayArgcAndArgv (
 void mfDisplayStringsVector (
   const mfStringsVector& stringsVector,
   const std::string&     title,
-  std::ostream&               os)
+  std::ostream&          os)
 {
   os <<
     title <<
@@ -409,9 +409,9 @@ std::string mfInt2EnglishWord (int n)
 }
 
 //______________________________________________________________________________
-std::string mfStringNumbersToEnglishWords (std::string str)
+std::string mfStringNumbersToEnglishWords (std::string theString)
 {
-  if (! str.size ()) {
+  if (! theString.size ()) {
     return "NONE";
   }
 
@@ -419,19 +419,12 @@ std::string mfStringNumbersToEnglishWords (std::string str)
     kInitialState, kWorkingOnDigits, kWorkingOnNonDigits };
 
   std::vector<std::string> chunks;
-  std::vector<int>    states;
+  std::vector<int>         states;
 
   workState state = kInitialState;
 
-  std::string::const_iterator
-    iBegin = str.begin (),
-    iEnd   = str.end (),
-    i      = iBegin;
-
-  for ( ; ; ) {
-    char ch = (*i);
-
-    if( isdigit(ch)) {
+  for (char theChar : theString) {
+    if( isdigit (theChar)) {
       // digit
       if (state != kWorkingOnDigits) {
         // create a new chunck for digits
@@ -439,7 +432,7 @@ std::string mfStringNumbersToEnglishWords (std::string str)
         states.push_back (kWorkingOnDigits);
         state = kWorkingOnDigits;
       }
-      chunks.back().push_back(ch);
+      chunks.back().push_back (theChar);
     }
     else {
       // non digit
@@ -449,9 +442,8 @@ std::string mfStringNumbersToEnglishWords (std::string str)
         states.push_back (kWorkingOnNonDigits);
         state = kWorkingOnNonDigits;
       }
-      chunks.back().push_back(ch);
+      chunks.back().push_back (theChar);
     }
-    if (++i == iEnd) break;
   } // for
 
   std::string result = "";
@@ -478,7 +470,7 @@ std::string mfStringNumbersToEnglishWords (std::string str)
 int consumeDecimalNumber (
   std::string::const_iterator  theStringIterator,
   std::string::const_iterator& remainingStringIterator,
-  Bool                    debugMode)
+  Bool                         debugMode)
 {
   std::string::const_iterator cursor = theStringIterator;
   int    result = 0;
@@ -520,7 +512,7 @@ int consumeDecimalNumber (
 //______________________________________________________________________________
 std::set<int> mfDecipherNaturalNumbersSetSpecification (
   const std::string& theString,
-  Bool          debugMode)
+  Bool               debugMode)
 {
   // A naturalNumbersSetSpecification sample is: "7,15-19,^16-17"
 
@@ -632,11 +624,11 @@ std::set<int> mfDecipherNaturalNumbersSetSpecification (
 std::string consumeString (
   std::string::const_iterator  theStringIterator,
   std::string::const_iterator& remainingStringIterator,
-  Bool                    debugMode)
+  Bool                         debugMode)
 {
   std::string result;
 
-/* JMI
+/* JMI v0.9.66 ???
   std::string::const_iterator cursor = theStringIterator;
 
   while ((*cursor) != ',') {
@@ -670,13 +662,13 @@ std::string consumeString (
 //______________________________________________________________________________
 std::set<std::string> mfDecipherStringsSetSpecification (
   const std::string& theString,
-  Bool          debugMode)
+  Bool               debugMode)
 {
   // A integersSetSpecification sample is: "FOO,159,haLLo"
 
   std::set<std::string> result;
 
-/* JMI
+/* JMI v0.9.66 ???
   if (debugMode) {
     gLogStream <<
       "--> mfDecipherStringsSetSpecification, theString = |" << theString <<
@@ -746,7 +738,7 @@ std::set<std::string> mfDecipherStringsSetSpecification (
 //______________________________________________________________________________
 std::list<int> mfExtractNumbersFromString (
   const std::string& theString, // can contain "1, 2, 17"
-  Bool          debugMode)
+  Bool               debugMode)
 {
   std::list<int> foundNumbers;
 
@@ -833,8 +825,8 @@ std::string& mfRightTrim (std::string& s)
 //______________________________________________________________________________
 std::pair<std::string, std::string> mfExtractNamesPairFromString (
   const std::string& theString, // can contain "P1 = Bassoon"
-  char          separator,
-  Bool          debugMode)
+  char               separator,
+  Bool               debugMode)
 {
   std::string name1;
   std::string name2;
@@ -940,26 +932,22 @@ std::string mfDoubleQuoteStringIfNonAlpha (
   Bool   stringShouldBeDoubleQuoted (false);
 
   if (theString.size ()) {
-    for (
-      std::string::const_iterator i = theString.begin ();
-      i != theString.end ();
-      ++i
-    ) {
-
+    for (char theChar : theString) {
       if (
-        ((*i) >= 'a' && (*i) <= 'z')
+        (theChar >= 'a' && theChar <= 'z')
           ||
-        ((*i) >= 'A' && (*i) <= 'Z')) {
-        // (*i) is a letter
-        result += (*i);
+        (theChar >= 'A' && theChar <= 'Z')
+      ) {
+        // theChar is a letter
+        result += theChar;
       }
 
       else {
-        // (*i) is not a letter
-        if ((*i) == ' ')
+        // theChar is not a letter
+        if (theChar == ' ')
           result += ' '; // TEMP JMI
         else
-          result += (*i);
+          result += theChar;
 
         stringShouldBeDoubleQuoted = true;
       }
@@ -980,29 +968,25 @@ std::string mfQuoteStringIfNonAlpha (
 {
   std::string result;
 
-  Bool   stringShouldBeQuoted (false);
+  Bool stringShouldBeQuoted (false);
 
   if (theString.size ()) {
-    for (
-      std::string::const_iterator i = theString.begin ();
-      i != theString.end ();
-      ++i
-    ) {
-
+    for (char theChar : theString) {
       if (
-        ((*i) >= 'a' && (*i) <= 'z')
+        (theChar >= 'a' && theChar <= 'z')
           ||
-        ((*i) >= 'A' && (*i) <= 'Z')) {
-        // (*i) is a letter
-        result += (*i);
+        (theChar >= 'A' && theChar <= 'Z')
+      ) {
+        // theChar is a letter
+        result += theChar;
       }
 
       else {
-        // (*i) is not a letter
-        if ((*i) == ' ')
+        // theChar is not a letter
+        if (theChar == ' ')
           result += ' '; // TEMP JMI
         else
-          result += (*i);
+          result += theChar;
 
         stringShouldBeQuoted = true;
       }
@@ -1024,26 +1008,26 @@ std::string mfDoubleQuoteString (
   std::string result;
 
   if (theString.size ()) {
-    for (char const &c : theString) {
+    for (char const &theChar : theString) {
       if (
-        ((c >= 'a') && (c <= 'z'))
+        ((theChar >= 'a') && (theChar))
           ||
-        ((c >= 'A') && (c <= 'Z'))
+        ((theChar) && (theChar))
       ) {
-        // c is a letter
-        result += c;
+        // theChar is a letter
+        result += theChar;
       }
 
       else {
-        // c is not a letter
-        if (c == ' ') {
+        // theChar is not a letter
+        if (theChar == ' ') {
           result += ' '; // TEMP JMI
         }
-        else if (c == '"') {
+        else if (theChar == '"') {
           result += "\\\"";
         }
         else {
-          result += c;
+          result += theChar;
         }
       }
     } // for
@@ -1059,26 +1043,26 @@ std::string mfQuoteString (
   std::string result;
 
   if (theString.size ()) {
-    for (char const &c : theString) {
+    for (char const& theChar : theString) {
       if (
-        ((c >= 'a') && (c <= 'z'))
+        ((theChar >= 'a') && (theChar <= 'z'))
           ||
-        ((c >= 'A') && (c <= 'Z'))
+        ((theChar >= 'A') && (theChar <= 'Z'))
       ) {
-        // c is a letter
-        result += c;
+        // theChar is a letter
+        result += theChar;
       }
 
       else {
-        // c is not a letter
-        if (c == ' ') {
+        // theChar is not a letter
+        if (theChar == ' ') {
           result += ' '; // TEMP JMI
         }
-        else if (c == '\'') {
+        else if (theChar == '\'') {
           result += "\\\'";
         }
         else {
-          result += c;
+          result += theChar;
         }
       }
     } // for
@@ -1096,10 +1080,11 @@ std::string mfStringToLowerCase (
   for_each (
     result.begin(),
     result.end(),
-    [] (char & c) {
-      c = ::tolower (c);
+    [] (char& theChar)
+      {
+        theChar = ::tolower (theChar);
       }
-    );
+  ); // for_each
 
   return result;
 }
@@ -1112,18 +1097,19 @@ std::string mfStringToUpperCase (
   for_each (
     result.begin(),
     result.end(),
-    [] (char & c) {
-      c = ::toupper (c);
+    [] (char& theChar)
+      {
+        theChar = ::toupper (theChar);
       }
-    );
+  ); // for_each
 
   return result;
 }
 
 //______________________________________________________________________________
 void mfTrimString (
-  std::string&     theString,
-  const char* toBeRemoved)
+  std::string& theString,
+  const char*  toBeRemoved)
 {
   theString.erase (
     0,
@@ -1136,9 +1122,12 @@ void mfTrimString (
 std::string trimSpaces (const std::string& line) // KEEP ??? JMI
 {
   const char* WhiteSpace = " \t\v\r\n";
+
   size_t start = line.find_first_not_of(WhiteSpace);
-  size_t end = line.find_last_not_of(WhiteSpace);
-  return start == end ? std::string() : line.substr(start, end - start + 1);
+  size_t end   = line.find_last_not_of(WhiteSpace);
+
+  return
+    start == end ? std::string() : line.substr(start, end - start + 1);
 }
 
 //______________________________________________________________________________
@@ -1153,7 +1142,9 @@ std::string mfBooleanAsString (Bool value)
 
 //______________________________________________________________________________
 std::string mfSingularOrPlural (
-  int number, std::string singularName, std::string pluralName)
+  int         number,
+  std::string singularName,
+  std::string pluralName)
 {
   std::stringstream s;
 
@@ -1173,7 +1164,9 @@ std::string mfSingularOrPlural (
 }
 
 std::string mfSingularOrPluralWithoutNumber (
-  int number, std::string singularName, std::string pluralName)
+  int         number,
+  std::string singularName,
+  std::string pluralName)
 {
   std::stringstream s;
 
@@ -1250,8 +1243,8 @@ void mfConvertHTMLEntitiesToPlainCharacters (std::string& s)
 
 //______________________________________________________________________________
 void mfSplitStringIntoChunks (
-  std::string        theString,
-  std::string        theSeparator,
+  std::string             theString,
+  std::string             theSeparator,
   std::list<std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
@@ -1356,7 +1349,7 @@ void mfSplitStringIntoChunks (
 
 //______________________________________________________________________________
 void mfSplitRegularStringAtEndOfLines (
-  std::string        theString,
+  std::string             theString,
   std::list<std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
@@ -1469,7 +1462,7 @@ void mfSplitRegularStringAtEndOfLines (
 
 //______________________________________________________________________________
 void mfSplitHTMLStringContainingEndOfLines (
-  std::string        theString,
+  std::string             theString,
   std::list<std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
@@ -1496,7 +1489,7 @@ void mfSplitHTMLStringContainingEndOfLines (
 
 // JMI  std::string lookedFor     = "&#xd;";
   std::string       lookedFor     = "\n";
-  size_t lookedForSize = lookedFor.size ();
+  size_t            lookedForSize = lookedFor.size ();
 
   std::map<std::string, std::string>::const_iterator i;
 
@@ -1633,13 +1626,9 @@ std::string mfMakeSingleWordFromString (const std::string& theString)
   std::string result;
 
   if (theString.size ()) {
-    for (
-      std::string::const_iterator i = theString.begin ();
-      i != theString.end ();
-      ++i
-    ) {
-      if (isalnum (*i)) {
-        result.push_back ((*i));
+    for (char theChar : theString) {
+      if (isalnum (theChar)) {
+        result.push_back (theChar);
       }
     } // for
   }
@@ -1649,7 +1638,7 @@ std::string mfMakeSingleWordFromString (const std::string& theString)
 
 //______________________________________________________________________________
 Bool mfStringIsInStringSet (
-  const std::string&      theString,
+  const std::string&           theString,
   const std::set<std::string>& stringSet)
 {
   Bool result (false);
@@ -1695,20 +1684,23 @@ std::string mfStringSetAsString (
     stringSet.size ();
 
   if (stringSetSize) {
-    std::set<std::string>::const_iterator
-      iBegin = stringSet.begin (),
-      iEnd   = stringSet.end (),
-      i      = iBegin;
-
     size_t nextToLast =
       stringSetSize - 1;
 
     size_t count = 0;
 
-    for ( ; ; ) {
+    for (
+      std::set<std::string>::const_iterator
+        i    = stringSet.begin (),
+        iEnd = stringSet.end ();
+      i != iEnd;
+      ++i
+    ) {
+      std::string theString = (*i);
+
       ++count;
 
-      s << "\"" << (*i) << "\"";
+      s << "\"" << theString << "\"";
       if (++i == iEnd) break;
 
       if (count == nextToLast) {
@@ -1726,9 +1718,9 @@ std::string mfStringSetAsString (
 }
 
 void mfDisplayStringSet (
-  const std::string&      title,
+  const std::string&           title,
   const std::set<std::string>& stringSet,
-  std::ostream&           os)
+  std::ostream&                os)
 {
   // print the title
   os << title << ":";
@@ -1742,20 +1734,23 @@ void mfDisplayStringSet (
 
     ++gIndenter;
 
-    std::set<std::string>::const_iterator
-      iBegin = stringSet.begin (),
-      iEnd   = stringSet.end (),
-      i      = iBegin;
-
     size_t nextToLast =
       stringSetSize - 1;
 
     size_t count = 0;
 
-    for ( ; ; ) {
+    for (
+      std::set<std::string>::const_iterator
+        i    = stringSet.begin (),
+        iEnd = stringSet.end ();
+      i != iEnd;
+      ++i
+    ) {
+      std::string theString = (*i);
+
       ++count;
 
-      os << "\"" << (*i) << "\"";
+      os << "\"" << theString << "\"";
       if (++i == iEnd) break;
 
       if (count == nextToLast) {
@@ -1777,9 +1772,9 @@ void mfDisplayStringSet (
 
 //______________________________________________________________________________
 Bool mfFetchValueFromStringToStringMap (
-  const std::string&    theKey,
+  const std::string&                        theKey,
   const std::map<std::string, std::string>& stringToStringMap,
-  std::string&                    theValue)
+  std::string&                              theValue)
 {
   Bool result (false);
 
@@ -1810,20 +1805,23 @@ std::string mfStringToStringMapAsString (
     stringToStringMap.size ();
 
   if (stringToStringMapSize) {
-    std::map<std::string, std::string>::const_iterator
-      iBegin = stringToStringMap.begin (),
-      iEnd   = stringToStringMap.end (),
-      i      = iBegin;
-
     size_t nextToLast =
       stringToStringMapSize - 1;
 
     size_t count = 0;
 
-    for ( ; ; ) {
+    for (
+     std::map<std::string, std::string>::const_iterator
+        i    = stringToStringMap.begin (),
+        iEnd = stringToStringMap.end ();
+      i != iEnd;
+      ++i
+    ) {
+      std::pair thePair = (*i);
+
       std::string
-        key   = (*i).first,
-        value = (*i).second;
+        key   = thePair.first,
+        value = thePair.second;
 
       ++count;
 
@@ -1846,9 +1844,9 @@ std::string mfStringToStringMapAsString (
 }
 
 void mfDisplayStringToStringMap (
-  const std::string&    title,
+  const std::string&                        title,
   const std::map<std::string, std::string>& stringToStringMap,
-  std::ostream&                   os)
+  std::ostream&                             os)
 {
   // print the title
   os << title << ":";
@@ -1862,20 +1860,23 @@ void mfDisplayStringToStringMap (
 
     ++gIndenter;
 
-    std::map<std::string, std::string>::const_iterator
-      iBegin = stringToStringMap.begin (),
-      iEnd   = stringToStringMap.end (),
-      i      = iBegin;
-
     size_t nextToLast =
       stringToStringMapSize - 1;
 
     size_t count = 0;
 
-    for ( ; ; ) {
+    for (
+     std::map<std::string, std::string>::const_iterator
+        i    = stringToStringMap.begin (),
+        iEnd = stringToStringMap.end ();
+      i != iEnd;
+      ++i
+    ) {
+      std::pair thePair = (*i);
+
       std::string
-        key   = (*i).first,
-        value = (*i).second;
+        key   = thePair.first,
+        value = thePair.second;
 
       ++count;
 
@@ -1902,7 +1903,7 @@ void mfDisplayStringToStringMap (
 
 //______________________________________________________________________________
 Bool mfKeyIsInStringToStringMultiMap (
-  const std::string&         theKey,
+  const std::string&                             theKey,
   const std::multimap<std::string, std::string>& stringToStringMultiMap)
 {
   const std::multimap<std::string, std::string>::const_iterator it =
@@ -1913,9 +1914,9 @@ Bool mfKeyIsInStringToStringMultiMap (
 }
 
 Bool mfKeyValuePairIsInStringToStringMultiMap (
-  const std::string&         theKey,
+  const std::string&                             theKey,
   const std::multimap<std::string, std::string>& stringToStringMultiMap,
-  const std::string&         theValue)
+  const std::string&                             theValue)
 {
   Bool result (false);
 
@@ -1959,20 +1960,23 @@ std::string mfStringToStringMultiMapAsString (
     stringToStringMultiMap.size ();
 
   if (stringToStringMultiMapSize) {
-    std::multimap<std::string, std::string>::const_iterator
-      iBegin = stringToStringMultiMap.begin (),
-      iEnd   = stringToStringMultiMap.end (),
-      i      = iBegin;
-
     size_t nextToLast =
       stringToStringMultiMapSize - 1;
 
     size_t count = 0;
 
-    for ( ; ; ) {
+    for (
+     std::multimap<std::string, std::string>::const_iterator
+        i    = stringToStringMultiMap.begin (),
+        iEnd = stringToStringMultiMap.end ();
+      i != iEnd;
+      ++i
+    ) {
+      std::pair thePair = (*i);
+
       std::string
-        key   = (*i).first,
-        value = (*i).second;
+        key   = thePair.first,
+        value = thePair.second;
 
       ++count;
 
@@ -1995,9 +1999,9 @@ std::string mfStringToStringMultiMapAsString (
 }
 
 void mfDisplayStringToStringMultiMap (
-  const std::string&         title,
+  const std::string&                             title,
   const std::multimap<std::string, std::string>& stringToStringMultiMap,
-  std::ostream&                        os)
+  std::ostream&                                  os)
 {
   // print the title
   os << title << ":";
@@ -2011,20 +2015,23 @@ void mfDisplayStringToStringMultiMap (
 
     ++gIndenter;
 
-    std::multimap<std::string, std::string>::const_iterator
-      iBegin = stringToStringMultiMap.begin (),
-      iEnd   = stringToStringMultiMap.end (),
-      i      = iBegin;
-
     size_t nextToLast =
       stringToStringMultiMapSize - 1;
 
     size_t count = 0;
 
-    for ( ; ; ) {
+    for (
+     std::multimap<std::string, std::string>::const_iterator
+        i    = stringToStringMultiMap.begin (),
+        iEnd = stringToStringMultiMap.end ();
+      i != iEnd;
+      ++i
+    ) {
+      std::pair thePair = (*i);
+
       std::string
-        key   = (*i).first,
-        value = (*i).second;
+        key   = thePair.first,
+        value = thePair.second;
 
       ++count;
 
@@ -2049,6 +2056,97 @@ void mfDisplayStringToStringMultiMap (
   os << std::endl;
 }
 
+//______________________________________________________________________________
+int countTwoBytesWideCharactersInString (const std::string theString)
+{
+/*
+  If theString contains non-diacritic characters (UTF-8),
+  that fouls std::setw() which accounts two characters for them
+
+  This is horrible custom code until C++20 std::format is more portable JMI v0.9.66
+*/
+
+  int result = 0;
+
+  for_each (
+    theString.begin(),
+    theString.end(),
+    [&result] (const char theChar) // capture result by reference in lambda body
+      {
+        if (
+          // to be augmented when other 1-byte characters appear later in the code...
+          (theChar == ' ')
+            ||
+          (theChar == ',')
+            ||
+          (theChar == ':')
+            ||
+          (theChar == '.')
+            ||
+          (theChar == '-')
+            ||
+          (theChar == '(')
+            ||
+          (theChar == ')')
+            ||
+          (theChar == '[')
+            ||
+          (theChar == ']')
+            ||
+          (theChar == '/')
+            ||
+          (theChar == '\\')
+            ||
+          (theChar == '\'')
+            ||
+          (theChar == '"')
+            ||
+          (theChar >= 'a' && theChar <= 'z')
+            ||
+          (theChar >= 'A' && theChar <= 'Z')
+        ) {
+          // theChar is 1-byte large
+        }
+
+        else {
+          // theChar is 2-bytes large
+          result += 1;
+        }
+      }
+  ); // for_each
+
+  return result / 2;
+    // because a 2-byte character's second byte is also seen in the loop above...
+}
+
 
 }
+
+//     switch (wchar (theChar)) { JMI v0.9.66
+//       case 'à':
+//       case 'â':
+//       case 'ä':
+//
+//       case 'é':
+//       case 'è':
+//       case 'ê':
+//       case 'ë':
+//
+//       case 'ì':
+//       case 'î':
+//       case 'ï':
+//
+//       case 'ò':
+//       case 'ô':
+//       case 'ö':
+//
+//       case 'ù':
+//       case 'û':
+//       case 'ü':
+//         result += 1;
+//         break;
+//
+//       default:
+//         ;
+//     } // switch
 

@@ -271,5 +271,264 @@ std::string mfWaeHandler::totalSeconds () const
   return "Total (sec)";
 }
 
+//_______________________________________________________________________________
+// options files
+
+std::string mfWaeHandler::openingOptionsFileForReading (
+  const std::string& optionsFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Opening options file " <<
+    "\"" << optionsFileName << "\"" <<
+    " for reading";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::openingIncludeFileForReading (
+  const std::string& includeFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Opening include file " <<
+    "\"" << includeFileName << "\"" <<
+    " for reading";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::cannotOpenOptionsFileForReading (
+  const std::string& optionsFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Cannot open LilyPond file " <<
+    "\"" << optionsFileName << "\"" <<
+    " for reading - quitting";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::closingOptionsFile (
+  const std::string& optionsFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Closing options file " <<
+    "\"" << optionsFileName << "\"";
+
+  return s.str ();
+}
+
+//_______________________________________________________________________________
+// output files
+
+std::string mfWaeHandler::openingLilypondFileForWriting (
+  const std::string& inputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Opening LilyPond file " <<
+    "\"" << inputFileName << "\"" <<
+    " for writing";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::openingBrailleMusicFileForWriting (
+  const std::string& inputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Opening Braille music file " <<
+    "\"" << inputFileName << "\"" <<
+    " for writing";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::openingMusicXMLFileForWriting (
+  const std::string& inputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Opening MusicXML file " <<
+    "\"" << inputFileName << "\"" <<
+    " for writing";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::openingGuidoFileForWriting (
+  const std::string& inputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Opening Guido file " <<
+    "\"" << inputFileName << "\"" <<
+    " for writing";
+
+  return s.str ();
+}
+
+
+std::string mfWaeHandler::cannotOpenLilypondFileForWriting (
+  const std::string& outputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Cannot open LilyPond file " <<
+    "\"" << outputFileName << "\"" <<
+    " for writing - quitting";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::cannotOpenBrailleMusicFileForWriting (
+  const std::string& outputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Cannot open Braille music file " <<
+    "\"" << outputFileName << "\"" <<
+    " for writing - quitting";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::cannotOpenMusicXMLFileForWriting (
+  const std::string& outputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Cannot open MusicXML file " <<
+    "\"" << outputFileName << "\"" <<
+    " for writing - quitting";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::cannotOpenGuidoFileForWriting (
+  const std::string& outputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Cannot open Guido file " <<
+    "\"" << outputFileName << "\"" <<
+    " for writing - quitting";
+
+  return s.str ();
+}
+
+
+std::string mfWaeHandler::closingLilypondFile (
+  const std::string& outputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Closing LilyPond file " <<
+    "\"" << outputFileName << "\"";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::closingBrailleMusicFile (
+  const std::string& outputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Closing Braille music file " <<
+    "\"" << outputFileName << "\"";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::closingMusicXMLFile (
+  const std::string& outputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Closing MusicXML file " <<
+    "\"" << outputFileName << "\"";
+
+  return s.str ();
+}
+
+std::string mfWaeHandler::closingGuidoFile (
+  const std::string& outputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Closing Guido file " <<
+    "\"" << outputFileName << "\"";
+
+  return s.str ();
+}
+
+//_______________________________________________________________________________
+// include files
+
+std::string mfWaeHandler::cannotOpenIncludeFileForReading (
+  const std::string& includeFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Cannot open include file " <<
+    "\"" << includeFileName << "\"";
+
+  return s.str ();
+}
+
+
+//_______________________________________________________________________________
+// scripts
+
+std::string mfWaeHandler::cannotOpenScriptForWriting (
+  const std::string& scriptName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Cannot open script " <<
+    "\"" << scriptName << "\"";
+
+  return s.str ();
+}
+
+
+//_______________________________________________________________________________
+// MSDL
+
+std::string mfWaeHandler::cannotOpenMSDLFileForReading (
+  const std::string& inputFileName) const
+{
+  std::stringstream s;
+
+  s <<
+    "Cannot open MSDL file " <<
+    "\"" << inputFileName << "\"" <<
+    " for writing - quitting";
+
+  return s.str ();
+}
+
 
 } // namespace

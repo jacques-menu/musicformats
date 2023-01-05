@@ -103,7 +103,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 () <<
+        gWaeHandler->pass1 () <<
         ": " <<
         "Creating a first MSR from the MSDL input" <<
         std::endl <<
@@ -126,7 +126,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+    gWaeHandler->pass1 (),
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -184,8 +184,8 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
+        gWaeHandler->pass2 (),
+        gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -223,7 +223,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           secondMsrScore,
           gGlobalMsrOahGroup,
           gGlobalBsrOahGroup,
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+          gWaeHandler->pass3 (),
           "Create a first BSR from the MSR");
     }
     catch (msr2bsrException& e) {
@@ -281,7 +281,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         translateBsrToFinalizedBsr (
           firstBsrScore,
           gGlobalBsrOahGroup,
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
+          gWaeHandler->pass4 (),
           "Create the finalized BSR from the first BSR");
     }
     catch (bsr2finalizedBsrException& e) {
@@ -358,7 +358,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
+          gWaeHandler->pass5 (),
           "Convert the finalized BSR into braille",
           out);
       }
@@ -388,7 +388,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         err <<
           std::endl <<
-          "Opening file \"" << outputFileName << "\" for writing" <<
+          gWaeHandler->openingBrailleMusicFileForWriting (outputFileName) <<
           std::endl;
       }
 #endif
@@ -402,9 +402,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         std::stringstream s;
 
         s <<
-          "Could not open Braille output file \"" <<
-          outputFileName <<
-          "\" for writing - quitting";
+          gWaeHandler->cannotOpenBrailleMusicFileForWriting (outputFileName);
 
         std::string message = s.str ();
 
@@ -420,7 +418,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
+          gWaeHandler->pass4 (),
           "Convert the finalized BSR into braille",
           brailleCodeFileOutputStream);
       }
@@ -438,7 +436,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       if (gtracingOah->fTracePasses) {
         gLogStream <<
           std::endl <<
-          "Closing file \"" << outputFileName << "\"" <<
+          gWaeHandler->openingMusicXMLFileForWriting (outputFileName) <<
           std::endl;
       }
 #endif
@@ -596,7 +594,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
-  std::string             fileName,
+  std::string             inputFileName, // JMI v0.9.66 ??? output ???
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -606,23 +604,21 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
-      "Opening file \"" << fileName << "\" for writing" <<
+      gWaeHandler->openingBrailleMusicFileForWriting (inputFileName) <<
       std::endl;
   }
 #endif
 
   std::ifstream
     inputStream (
-      fileName.c_str (),
+      inputFileName,
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
     std::stringstream s;
 
     s <<
-      "Could not open MSDL input file \"" <<
-      fileName <<
-      "\" for reading - quitting";
+      gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
 
     std::string message = s.str ();
 
@@ -635,7 +631,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
 
   return
     convertMsdlStream2brailleWithOptionsAndArguments (
-      fileName,
+      inputFileName,
       inputStream,
       handlerOptionsAndArguments,
       out,
@@ -643,7 +639,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
 }
 
 mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
-  std::string         fileName,
+  std::string         inputFileName, // JMI v0.9.66 ??? output ???
   const S_oahHandler& handler,
   std::ostream&       out,
   std::ostream&       err)
@@ -653,23 +649,21 @@ mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
-      "Opening file \"" << fileName << "\" for writing" <<
+      gWaeHandler->openingBrailleMusicFileForWriting (inputFileName) <<
       std::endl;
   }
 #endif
 
   std::ifstream
     inputStream (
-      fileName.c_str (),
+      inputFileName.c_str (),
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
     std::stringstream s;
 
     s <<
-      "Could not open MSDL input file \"" <<
-      fileName <<
-      "\" for reading - quitting";
+      gWaeHandler->cannotOpenBrailleMusicFileForWriting (inputFileName);
 
     std::string message = s.str ();
 
@@ -682,7 +676,7 @@ mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
 
   return
     convertMsdlStream2brailleWithHandler (
-      fileName, inputStream, handler, out, err);
+      inputFileName, inputStream, handler, out, err);
 }
 
 //_______________________________________________________________________________

@@ -237,7 +237,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         err <<
           std::endl <<
-          "Opening file \"" << outputFileName << "\" for writing" <<
+          gWaeHandler->openingBrailleMusicFileForWriting (outputFileName) <<
           std::endl;
       }
 #endif
@@ -251,9 +251,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         std::stringstream s;
 
         s <<
-          "Could not open Braille output file \"" <<
-          outputFileName <<
-          "\" for writing - quitting";
+          gWaeHandler->cannotOpenBrailleMusicFileForWriting (outputFileName);
 
         std::string message = s.str ();
 
@@ -287,7 +285,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
       if (gtracingOah->fTracePasses) {
         gLogStream <<
           std::endl <<
-          "Closing file \"" << outputFileName << "\"" <<
+          gWaeHandler->closingBrailleMusicFile (outputFileName) <<
           std::endl;
       }
 #endif

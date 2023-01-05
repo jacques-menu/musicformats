@@ -557,7 +557,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
       fResultingLpsr,
       gGlobalMsrOahGroup,
       gGlobalLpsrOahGroup,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ());
+      gWaeHandler->displayTheLPSRAsText ());
   }
 
   if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
@@ -565,11 +565,11 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
       fResultingLpsr,
       gGlobalMsrOahGroup,
       gGlobalLpsrOahGroup,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ()
+      gWaeHandler->displayTheLPSRAsText ()
       	+
       ", "
         +
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion ());
+      gWaeHandler->fullVersion ());
   }
 
   // forget about the visited MSR score

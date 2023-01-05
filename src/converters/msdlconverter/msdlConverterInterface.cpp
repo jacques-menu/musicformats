@@ -119,8 +119,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //       translateMxsrToMsrSkeleton (
 //         theMxsr,
 //         gGlobalMsrOahGroup,
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2a (),
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMSRSqueletonFromTheMXSR ());
+//         gWaeHandler->pass2a (),
+//         gWaeHandler->createAnMSRSqueletonFromTheMXSR ());
 //   }
 //   catch (mxsr2msrException& e) {
 //     mfDisplayException (e, gOutputStream);
@@ -150,8 +150,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //     populateMsrSkeletonFromMxsr (
 //       theMxsr,
 //       firstMsrScore,
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2b (),
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->populateTheMSRSqueletonFromMusicXMLData ());
+//         gWaeHandler->pass2b (),
+//         gWaeHandler->populateTheMSRSqueletonFromMusicXMLData ());
 //   }
 //   catch (mxsr2msrException& e) {
 //     mfDisplayException (e, gOutputStream);
@@ -196,8 +196,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           firstMsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalMsr2msrOahGroup,
-//           gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
-//           gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR (),
+//           gWaeHandler->pass3 (),
+//           gWaeHandler->convertTheFirstMSRIntoASecondMSR (),
 //           pathToVoice);
 //     } // for
 // }
@@ -207,8 +207,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //         firstMsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalMsr2msrOahGroup,
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
+//         gWaeHandler->pass3 (),
+//         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
 // }
 //   }
 //   catch (mxsr2msrException& e) {
@@ -247,8 +247,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           secondMsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
-//           gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
-//           gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheSecondMSRIntoAnLPSR (),
+//           gWaeHandler->pass4 (),
+//           gWaeHandler->convertTheSecondMSRIntoAnLPSR (),
 //           createMsdl2lilypondConverterComponent ());
 //     }
 //     catch (msr2lpsrException& e) {
@@ -268,7 +268,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //         theLpsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalLpsrOahGroup,
-//       	 gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ());
+//       	 gWaeHandler->displayTheLPSRAsText ());
 //     }
 //
 //     if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
@@ -276,11 +276,11 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //         theLpsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalLpsrOahGroup,
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ()
+//         gWaeHandler->displayTheLPSRAsText ()
 //       	   +
 //         ", " <<
 //       	   +
-//        gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion ());
+//        gWaeHandler->fullVersion ());
 //     }
 //   }
 //
@@ -325,8 +325,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           theLpsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
-//           gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
-//           gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
+//           gWaeHandler->pass5 (),
+//           gWaeHandler->convertTheLPSRIntoLilyPondCode (),
 //           lilypondStandardOutputStream);
 //       }
 //       catch (lpsr2lilypondException& e) {
@@ -355,7 +355,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
 //         err <<
 //           std::endl <<
-//           "Opening file '" << outputFileName << "' for writing" <<
+// 		       gWaeHandler->openingLilypondFileForWriting (outputFileName) <<
 //           std::endl;
 //       }
 // #endif
@@ -369,9 +369,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //         std::stringstream s;
 //
 //         s <<
-//           "Could not open LilyPond output file \"" <<
-//           outputFileName <<
-//           "\" for writing - quitting";
+//           gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
 //
 //         std::string message = s.str ();
 //
@@ -395,8 +393,8 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           theLpsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
-//           gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
-//           gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
+//           gWaeHandler->pass5 (),
+//           gWaeHandler->convertTheLPSRIntoLilyPondCode (),
 //           lilypondFileOutputStream);
 //       }
 //       catch (lpsr2lilypondException& e) {
@@ -413,7 +411,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //       if (gtracingOah->fTracePasses) {
 //         gLogStream <<
 //           std::endl <<
-//           "Closing file \"" << outputFileName << "\"" <<
+//           gWaeHandler->closingLilypondFile (outputFileName) <<
 //           std::endl;
 //       }
 // #endif
@@ -603,8 +601,8 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromFile (
 //         fileName,
-		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
+		//     gWaeHandler->pass1 (),
+//         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 //
 //   if (sxmlfile) {
 //     return
@@ -628,8 +626,8 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
 //     sxmlfile =
 //       createSXMLFileFromFile (
 //         fileName,
-		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
+		//     gWaeHandler->pass1 (),
+//         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 //
 //   if (sxmlfile) {
 //     return
@@ -654,8 +652,8 @@ EXP mfMusicformatsErrorKind msdlFd2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromFd (
 //         fd,
-		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
+		//     gWaeHandler->pass1 (),
+//         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
 //     return
@@ -679,8 +677,8 @@ mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
 //     sxmlfile =
 //       createSXMLFileFromFd (
 //         fd,
-		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
+		//     gWaeHandler->pass1 (),
+//         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
 //     return
@@ -705,8 +703,8 @@ EXP mfMusicformatsErrorKind msdlString2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromString (
 //         buffer,
-		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-//         gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
+		//     gWaeHandler->pass1 (),
+//         gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 //
 //   // call xmlFile2lilypond() even if sxmlfile is null,
 //   // to handle the help options if any
@@ -730,7 +728,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //     sxmlfile =
 //       createSXMLFileFromString (
 //         buffer,
-		//     gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+		//     gWaeHandler->pass1 (),
 //         "Create an MXSR from a MusicXML buffer");
 //
 //   // call xmlFile2lilypond() even if sxmlfile is null,

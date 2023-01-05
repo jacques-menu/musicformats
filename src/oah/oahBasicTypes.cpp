@@ -6117,7 +6117,7 @@ void oahHandler::includeOptionsFileInHandler (
 #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
-      "Opening options file \"" << optionsFileName << "\" for reading" <<
+      gWaeHandler->openingOptionsFileForReading (optionsFileName) <<
       std::endl;
   }
 #endif
@@ -6131,9 +6131,7 @@ void oahHandler::includeOptionsFileInHandler (
     std::stringstream s;
 
     s <<
-      "Could not open options file \"" <<
-      optionsFileName <<
-      "\" for reading - quitting";
+      gWaeHandler->cannotOpenOptionsFileForReading (optionsFileName);
 
     std::string message = s.str ();
 
@@ -6153,7 +6151,7 @@ void oahHandler::includeOptionsFileInHandler (
 #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
-      "Closing options file \"" << optionsFileName << "\"" <<
+			gWaeHandler->closingOptionsFile (optionsFileName) <<
       std::endl;
   }
 #endif
@@ -8020,7 +8018,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
       oahElementHelpOnlyKind::kElementHelpOnlyNo;
 
   std::string optionsAndArgumentsPassDescription =
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->handleOptionsAndArgumentsFromArgcArgv ();
+    gWaeHandler->handleOptionsAndArgumentsFromArgcArgv ();
 
 #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
@@ -9522,9 +9520,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
 #ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     os <<
-      "Opening options and arguments file \"" <<
-      includeFileName <<
-      "\" for reading" <<
+      gWaeHandler->openingIncludeFileForReading (includeFileName) <<
       std::endl;
   }
 #endif
@@ -9538,9 +9534,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
     std::stringstream s;
 
     s <<
-      "Could not open options and arguments file \"" <<
-      includeFileName <<
-      "\" for reading - quitting";
+      gWaeHandler->cannotOpenIncludeFileForReading (includeFileName);
 
     std::string message = s.str ();
 

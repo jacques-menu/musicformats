@@ -138,17 +138,17 @@ S_msrScore translateMsrToMsr (
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
     displayMsrScore (
       resultingNewMsrScore,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheSecondMSRAsText ());
+      gWaeHandler->displayTheSecondMSRAsText ());
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
     displayMsrScoreFull (
       resultingNewMsrScore,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheSecondMSRAsText ()
+      gWaeHandler->displayTheSecondMSRAsText ()
       	+
       ", "
         +
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion ());
+      gWaeHandler->fullVersion ());
   }
 
   // display the populated MSR score summary if requested
@@ -159,7 +159,7 @@ S_msrScore translateMsrToMsr (
     displayMsrScoreSummary (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayASummaryOfTheSecondMSR ());
+      gWaeHandler->displayASummaryOfTheSecondMSR ());
   }
 
   // display the populated MSR score names if requested
@@ -170,7 +170,7 @@ S_msrScore translateMsrToMsr (
     displayMsrScoreNames (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheNamesInTheSecondMSR ());
+      gWaeHandler->displayTheNamesInTheSecondMSR ());
   }
   return resultingNewMsrScore;
 }
@@ -286,7 +286,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     displayMsrScoreSummary (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayASummaryOfTheSecondMSR ());
+      gWaeHandler->displayASummaryOfTheSecondMSR ());
   }
 
   // display the populated MSR score names if requested
@@ -297,7 +297,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     displayMsrScoreNames (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheNamesInTheSecondMSR ());
+      gWaeHandler->displayTheNamesInTheSecondMSR ());
   }
   return resultingNewMsrScore;
 }

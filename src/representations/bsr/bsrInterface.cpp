@@ -55,7 +55,7 @@ void displayBsrScore (
     separator <<
     std::endl <<
     gTab <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    gWaeHandler->passOptional () <<
     ": "<<
     passDescription <<
     std::endl <<
@@ -99,11 +99,11 @@ void displayBsrScoreFull (
     separator <<
     std::endl <<
     gTab <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    gWaeHandler->passOptional () <<
     ": "<<
     passDescription <<
     ", " <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion () <<
+    gWaeHandler->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
@@ -123,7 +123,7 @@ void displayBsrScoreFull (
       +
     ", "
       +
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion (),
+    gWaeHandler->fullVersion (),
     mfTimingItemKind::kOptional,
     startClock,
     endClock);

@@ -2886,7 +2886,7 @@ void lpsrScore::printFull (std::ostream& os) const
       +
     ", "
       +
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion () <<
+    gWaeHandler->fullVersion () <<
     std::endl << std::endl;
 
   // sanity check

@@ -126,7 +126,7 @@ EXP void translateMxsrToMusicXML (
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<
-        "Opening file '" << outputFileName << "' for writing" <<
+        gWaeHandler->openingMusicXMLFileForWriting (outputFileName) <<
         std::endl;
     }
 #endif
@@ -140,9 +140,7 @@ EXP void translateMxsrToMusicXML (
       std::stringstream s;
 
       s <<
-        "Could not open MusicXML output file \"" <<
-        outputFileName <<
-        "\" for writing - quitting";
+        gWaeHandler->cannotOpenMusicXMLFileForWriting (outputFileName);
 
       std::string message = s.str ();
 
@@ -167,7 +165,7 @@ EXP void translateMxsrToMusicXML (
     if (gtracingOah->fTracePasses) {
       err <<
         std::endl <<
-        "Closing file \"" << outputFileName << "\"" <<
+        gWaeHandler->closingMusicXMLFile (outputFileName) <<
         std::endl;
     }
 #endif

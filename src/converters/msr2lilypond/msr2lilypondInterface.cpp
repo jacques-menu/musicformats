@@ -178,7 +178,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         err <<
           std::endl <<
-          "Opening file '" << outputFileName << "' for writing" <<
+          gWaeHandler->openingLilypondFileForWriting (outputFileName) <<
           std::endl;
       }
 #endif
@@ -192,9 +192,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
         std::stringstream s;
 
         s <<
-          "Could not open LilyPond output file \"" <<
-          outputFileName <<
-          "\" for writing - quitting";
+          gWaeHandler->cannotOpenLilypondFileForWriting (outputFileName);
 
         std::string message = s.str ();
 
@@ -236,7 +234,7 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
       if (gtracingOah->fTracePasses) {
         gLogStream <<
           std::endl <<
-          "Closing file \"" << outputFileName << "\"" <<
+          gWaeHandler->closingLilypondFile (outputFileName) <<
           std::endl;
       }
 #endif
