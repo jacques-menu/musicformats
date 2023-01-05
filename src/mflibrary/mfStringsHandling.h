@@ -204,8 +204,8 @@ struct mfStringSpaceReplacer
 
 //______________________________________________________________________________
 std::string mfReplicateString (
-  std::string str,
-  int    times);
+  std::string theString,
+  int         times);
 
 //______________________________________________________________________________
 typedef std::vector<std::string> mfStringsVector;
@@ -213,7 +213,7 @@ typedef std::vector<std::string> mfStringsVector;
 void mfDisplayStringsVector (
   const mfStringsVector& stringsVector,
   const std::string&     title,
-  std::ostream&               os);
+  std::ostream&          os);
 
 //_______________________________________________________________________________
 EXP void mfDisplayArgcAndArgv (
@@ -242,7 +242,7 @@ typedef std::vector<mfStringsPair> mfStringsPairVector;
 
 EXP void displayStringPairVector (
   const mfStringsPairVector& theOptionAndValueVector,
-  std::ostream&                   os);
+  std::ostream&              os);
 
 //______________________________________________________________________________
 char* mfCharStarCat (
@@ -259,7 +259,7 @@ std::string mfStringNumbersToEnglishWords (std::string str);
 //______________________________________________________________________________
 std::set<int> mfDecipherNaturalNumbersSetSpecification (
   const std::string& theSpecification,
-  Bool          debugMode = false);
+  Bool               debugMode = false);
 
 //______________________________________________________________________________
 std::set<std::string> mfDecipherStringsSetSpecification (
@@ -269,7 +269,7 @@ std::set<std::string> mfDecipherStringsSetSpecification (
 //______________________________________________________________________________
 std::list<int> mfExtractNumbersFromString (
   const std::string& theString, // can contain "1, 2, 17"
-  Bool          debugMode = false);
+  Bool               debugMode = false);
 
 //______________________________________________________________________________
 // from http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
@@ -286,8 +286,8 @@ EXP inline std::string& mfTrimFromBothEnds (std::string& s) {
 //______________________________________________________________________________
 std::pair<std::string, std::string> mfExtractNamesPairFromString (
   const std::string& theString, // may contain "P1 = Bassoon"
-  char          separator,
-  Bool          debugMode = false);
+  char               separator,
+  Bool               debugMode = false);
 
 //______________________________________________________________________________
 std::string mfDoubleQuoteStringIfNonAlpha (
@@ -313,15 +313,19 @@ EXP extern std::string mfBooleanAsString (Bool value);
 
 //______________________________________________________________________________
 void mfTrimString (
-  std::string&     theString,
-  const char* toBeRemoved = " \t\n\r\f\v");
+  std::string& theString,
+  const char*  toBeRemoved = " \t\n\r\f\v");
 
 //______________________________________________________________________________
 std::string mfSingularOrPlural (
-  int number, std::string singularName, std::string pluralName);
+  int         number,
+  std::string singularName,
+  std::string pluralName);
 
 std::string mfSingularOrPluralWithoutNumber (
-  int number, std::string singularName, std::string pluralName);
+  int         number,
+  std::string singularName,
+  std::string pluralName);
 
 //______________________________________________________________________________
 std::string mfEscapeDoubleQuotes (std::string s);
@@ -331,28 +335,28 @@ void mfConvertHTMLEntitiesToPlainCharacters (std::string& s);
 
 //______________________________________________________________________________
 void mfSplitStringIntoChunks (
-  std::string        theString,
-  std::string        theSeparator,
+  std::string             theString,
+  std::string             theSeparator,
   std::list<std::string>& chunksList);
 
 void mfSplitRegularStringAtEndOfLines (
-  std::string        theString,
+  std::string             theString,
   std::list<std::string>& chunksList);
 
 void mfSplitHTMLStringContainingEndOfLines ( // JMI
-  std::string        theString,
+  std::string             theString,
   std::list<std::string>& chunksList);
 
 //______________________________________________________________________________
 std::string mfBaseName (const std::string& filename);
-  // wait until c++17 for a standard library containing basename()...
+  // wait until C++17 for a standard library containing basename()... JMI v0.9.66
 
 //______________________________________________________________________________
 std::string  mfMakeSingleWordFromString (const std::string& theString);
 
 //______________________________________________________________________________
 Bool mfStringIsInStringSet (
-  const std::string&      theString,
+  const std::string&           theString,
   const std::set<std::string>& stringSet);
 
 void mfStringSetMinusEquals (
@@ -363,41 +367,44 @@ std::string mfStringSetAsString (
   const std::set<std::string>& stringSet);
 
 void mfDisplayStringSet (
-  const std::string&      title,
+  const std::string&           title,
   const std::set<std::string>& stringSet,
-  std::ostream&           os);
+  std::ostream&                os);
 
 //______________________________________________________________________________
 Bool mfFetchValueFromStringToStringMap (
-  const std::string&    theKey,
+  const std::string&                        theKey,
   const std::map<std::string, std::string>& stringToStringMap,
-  std::string&                    theValue);
+  std::string&                              theValue);
 
 std::string mfStringToStringMapAsString (
   const std::map<std::string, std::string>& stringToStringMap);
 
 void mfDisplayStringToStringMap (
-  const std::string&    title,
+  const std::string&                        title,
   const std::map<std::string, std::string>& stringToStringMap,
-  std::ostream&                   os);
+  std::ostream&                             os);
 
 //______________________________________________________________________________
 Bool mfKeyIsInStringToStringMultiMap (
-  const std::string&         theKey,
+  const std::string&                             theKey,
   const std::multimap<std::string, std::string>& stringToStringMultiMap);
 
 Bool mfKeyValuePairIsInStringToStringMultiMap (
-  const std::string&         theKey,
+  const std::string&                             theKey,
   const std::multimap<std::string, std::string>& stringToStringMultiMap,
-  const std::string&         theValue);
+  const std::string&                             theValue);
 
 std::string mfStringToStringMultiMapAsString (
   const std::multimap<std::string, std::string>& stringToStringMultiMap);
 
 void mfDisplayStringToStringMultiMap (
-  const std::string&         title,
+  const std::string&                             title,
   const std::multimap<std::string, std::string>& stringToStringMultiMap,
-  std::ostream&                        os);
+  std::ostream&                                  os);
+
+//______________________________________________________________________________
+int countTwoBytesWideCharactersInString (const std::string theString);
 
 
 }

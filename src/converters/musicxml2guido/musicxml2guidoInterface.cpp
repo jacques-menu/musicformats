@@ -119,7 +119,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       translateMxsrToMsrSkeleton (
         originalMxsr,
         gGlobalMsrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2a (),
+        gWaeHandler->pass2a (),
         "Create the skeleton of the first MSR from the originalMxsr");
   }
   catch (mxsr2msrException& e) {
@@ -151,8 +151,8 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     populateMsrSkeletonFromMxsr (
       originalMxsr,
       firstMsrScore,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2b (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->populateTheMSRSqueletonFromMusicXMLData ());
+        gWaeHandler->pass2b (),
+        gWaeHandler->populateTheMSRSqueletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -186,8 +186,8 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
+        gWaeHandler->pass3 (),
+        gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -220,7 +220,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
+        gWaeHandler->pass4 (),
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -246,7 +246,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       secondMxsr,
       outputFileName,
       err,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
+      gWaeHandler->pass5 (),
       "Convert the MXSR into Guido text");
   }
   catch (mxsr2msrException& e) {
@@ -437,8 +437,8 @@ EXP mfMusicformatsErrorKind musicxmlFile2guido (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
     return
@@ -462,8 +462,8 @@ mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
     return
@@ -488,8 +488,8 @@ EXP mfMusicformatsErrorKind musicxmlFd2guido (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -513,8 +513,8 @@ mfMusicformatsErrorKind convertMusicxmlFd2guidoWithHandler (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -539,8 +539,8 @@ EXP mfMusicformatsErrorKind musicxmlString2guido (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2guido() even if sxmlfile is null,
   // to handle the help options if any
@@ -564,8 +564,8 @@ mfMusicformatsErrorKind convertMusicxmlString2guidoWithHandler (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2guido() even if sxmlfile is null,
   // to handle the help options if any

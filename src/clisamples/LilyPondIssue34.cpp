@@ -488,7 +488,7 @@ int main (int argc, char*  argv[])
       separator <<
       std::endl <<
       gTab <<
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 () <<
+      gWaeHandler->pass1 () <<
       ": " <<
       "Creating the MSR score with the " <<
       msrGenerationAPIKindAsString (theGenerationAPIKind) <<
@@ -514,7 +514,7 @@ int main (int argc, char*  argv[])
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+    gWaeHandler->pass1 (),
     "Create the MSR score",
     mfTimingItemKind::kMandatory,
     startClock,
@@ -539,10 +539,10 @@ int main (int argc, char*  argv[])
       err =
         msrScore2lilypondWithHandler (
           theMsrScore,
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
+          gWaeHandler->pass2 (),
           "Convert the MSR into an LPSR",
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheLPSRIntoLilyPondCode (),
+          gWaeHandler->pass3 (),
+          gWaeHandler->convertTheLPSRIntoLilyPondCode (),
           gOutputStream,
           gLogStream,
           handler);
@@ -552,11 +552,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2brailleWithHandler (
           theMsrScore,
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2a (),
+          gWaeHandler->pass2a (),
           "Create the first BSR from the MSR",
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2b (),
+          gWaeHandler->pass2b (),
           "Create the finalized BSR from the first BSR",
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+          gWaeHandler->pass3 (),
           "Convert the BSR into Braille text",
           gOutputStream,
           gLogStream,
@@ -567,11 +567,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2musicxmlWithHandler (
           theMsrScore,
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
+          gWaeHandler->pass2 (),
           "Convert the MSR score into a second MSR",
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+          gWaeHandler->pass3 (),
           "Convert the second MSR into an MXSR",
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
+          gWaeHandler->pass4 (),
           "Convert the MXSR into MusicXML text",
           gOutputStream,
           gLogStream,
@@ -582,11 +582,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2guidoWithHandler (
           theMsrScore,
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
+          gWaeHandler->pass2 (),
           "Convert the MSR score into a second MSR",
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+          gWaeHandler->pass3 (),
           "Convert the second MSR into an MXSR",
-          gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
+          gWaeHandler->pass4 (),
           "Convert the MXSR into Guido text",
           gOutputStream,
           gLogStream,

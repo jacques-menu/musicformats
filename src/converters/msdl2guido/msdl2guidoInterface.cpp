@@ -98,7 +98,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 () <<
+        gWaeHandler->pass1 () <<
         ": " <<
         "Creating a first MSR from the MSDL input" <<
         std::endl <<
@@ -122,7 +122,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+    gWaeHandler->pass1 (),
       "Create the MSR score from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -178,8 +178,8 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
+        gWaeHandler->pass2 (),
+        gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -200,7 +200,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
+        gWaeHandler->pass3 (),
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -226,7 +226,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       theMxsr,
       outputFileName,
       err,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
+      gWaeHandler->pass4 (),
       "Convert  the MXSR into Guido text");
   }
   catch (mxsr2guidoException& e) {
@@ -387,7 +387,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
-  std::string             fileName,
+  std::string             inputFileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
   std::ostream&           err)
@@ -397,23 +397,21 @@ EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
-      "Opening MSDL file \"" << fileName << "\" for reading" <<
+      gWaeHandler->openingGuidoFileForWriting (inputFileName) <<
       std::endl;
   }
 #endif
 
   std::ifstream
     inputStream (
-      fileName.c_str (),
+      inputFileName.c_str (),
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
     std::stringstream s;
 
     s <<
-      "Could not open MSDL input file \"" <<
-      fileName <<
-      "\" for reading - quitting";
+      gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
 
     std::string message = s.str ();
 
@@ -426,7 +424,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
 
   return
     convertMsdlStream2guidoWithOptionsAndArguments (
-      fileName,
+      inputFileName,
       inputStream,
       handlerOptionsAndArguments,
       out,
@@ -434,7 +432,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
 }
 
 mfMusicformatsErrorKind msdlFile2guidoWithHandler (
-  std::string         fileName,
+  std::string         inputFileName,
   const S_oahHandler& handler,
   std::ostream&       out,
   std::ostream&       err)
@@ -444,23 +442,21 @@ mfMusicformatsErrorKind msdlFile2guidoWithHandler (
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
-      "Opening file \"" << fileName << "\" for writing" <<
+      gWaeHandler->openingGuidoFileForWriting (inputFileName) <<
       std::endl;
   }
 #endif
 
   std::ifstream
     inputStream (
-      fileName.c_str (),
+      inputFileName.c_str (),
       std::ifstream::in);
 
   if (! inputStream.is_open ()) {
     std::stringstream s;
 
     s <<
-      "Could not open MSDL input file \"" <<
-      fileName <<
-      "\" for reading - quitting";
+      gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
 
     std::string message = s.str ();
 
@@ -473,7 +469,7 @@ mfMusicformatsErrorKind msdlFile2guidoWithHandler (
 
   return
     convertMsdlStream2guidoWithHandler (
-      fileName, inputStream, handler, out, err);
+      inputFileName, inputStream, handler, out, err);
 }
 
 //_______________________________________________________________________________

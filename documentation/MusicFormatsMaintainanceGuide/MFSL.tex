@@ -411,8 +411,8 @@ void mfslDriver::scanBegin ()
 
       if (errorString != nullptr) {
         s <<
-          "cannot open " <<
-          fScriptName << ": " <<
+          gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
+          ": " <<
           errorString <<
           std::endl;
 

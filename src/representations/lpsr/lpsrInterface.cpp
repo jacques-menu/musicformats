@@ -57,7 +57,7 @@ void displayLpsrScore (
     separator <<
     std::endl <<
     gTab <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    gWaeHandler->passOptional () <<
     ": "<<
     passDescription <<
     std::endl <<
@@ -75,7 +75,7 @@ void displayLpsrScore (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText (),
+    gWaeHandler->displayTheLPSRAsText (),
     mfTimingItemKind::kOptional,
     startClock,
     endClock);
@@ -104,11 +104,11 @@ void displayLpsrScoreFull (
     separator <<
     std::endl <<
     gTab <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    gWaeHandler->passOptional () <<
     ": "<<
     passDescription <<
     ", " <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion () <<
+    gWaeHandler->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
@@ -124,11 +124,11 @@ void displayLpsrScoreFull (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheLPSRAsText ()
+    gWaeHandler->displayTheLPSRAsText ()
       +
     ", "
       +
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion (),
+    gWaeHandler->fullVersion (),
     mfTimingItemKind::kOptional,
     startClock,
     endClock);

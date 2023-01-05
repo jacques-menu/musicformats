@@ -3390,11 +3390,11 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
       break;
 
     case msrArticulationKind::kArticulationArpeggiato:
-      // this is handled in chordArticulationAsLilyponString ()
+      // this is handled in chordArticulationAsLilypondString ()
       doGeneratePlacement = false;
       break;
     case msrArticulationKind::kArticulationNonArpeggiato:
-      // this is handled in chordArticulationAsLilyponString ()
+      // this is handled in chordArticulationAsLilypondString ()
       doGeneratePlacement = false;
       break;
 
@@ -3549,10 +3549,10 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
       break;
 
     case msrArticulationKind::kArticulationArpeggiato:
-      // this is handled in chordArticulationAsLilyponString ()
+      // this is handled in chordArticulationAsLilypondString ()
       break;
     case msrArticulationKind::kArticulationNonArpeggiato:
-      // this is handled in chordArticulationAsLilyponString ()
+      // this is handled in chordArticulationAsLilypondString ()
       break;
     case msrArticulationKind::kArticulationDoit:
       fLilypondCodeStream <<
@@ -3798,7 +3798,7 @@ std::string lpsr2lilypondTranslator::technicalAsLilypondString (
       result = "\\flageolet"; // JMI "\\once\\override Staff.NoteHead.style = #'harmonic-mixed";
       break;
     case msrTechnicalKind::kTechnicalHeel:
-      result = "\\lheel"; // rheel??? JMI
+      result = "\\heel"; // rheel??? JMI
       break;
     case msrTechnicalKind::kTechnicalHole:
       result = "%{ \\Hole??? %}";

@@ -130,7 +130,7 @@ void translateMxsrToGuido (
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<
-        "Opening file '" << outputFileName << "' for writing" <<
+        gWaeHandler->openingGuidoFileForWriting (outputFileName) <<
         std::endl;
     }
 #endif
@@ -144,9 +144,7 @@ void translateMxsrToGuido (
       std::stringstream s;
 
       s <<
-        "Could not open Guido output file \"" <<
-        outputFileName <<
-        "\" for writing - quitting";
+        gWaeHandler->cannotOpenGuidoFileForWriting (outputFileName);
 
       std::string message = s.str ();
 
@@ -167,7 +165,7 @@ void translateMxsrToGuido (
     if (gtracingOah->fTracePasses) {
       err <<
         std::endl <<
-        "Closing file \"" << outputFileName << "\"" <<
+        gWaeHandler->closingGuidoFile (outputFileName) <<
         std::endl;
     }
 #endif

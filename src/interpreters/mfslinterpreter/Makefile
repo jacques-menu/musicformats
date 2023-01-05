@@ -39,7 +39,7 @@ mfslInterpreterCodeByFlexAndBison : $(GENERATED_FILES)
 # ---------------------------------------------------------------------------
 
 mfslScanner.cpp : $(MAKEFILE) mfslScanner.ll
-  $(FLEX) -omfslScanner.cpp mfslScanner.ll
+	$(FLEX) -omfslScanner.cpp mfslScanner.ll
 
 
 mfslParser.h mfslParser.cpp : $(MAKEFILE) mfslParser.yy
@@ -50,4 +50,4 @@ mfslParser.h mfslParser.cpp : $(MAKEFILE) mfslParser.yy
 # ---------------------------------------------------------------------------
 
 clean:
-  rm -f $(GENERATED_FILES) mfslParser.output location.hh mfslScanner.log
+	rm -f $(GENERATED_FILES) mfslParser.output location.hh mfslScanner.log

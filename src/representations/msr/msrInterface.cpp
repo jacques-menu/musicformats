@@ -117,7 +117,7 @@ void displayMsrScore (
     separator <<
     std::endl <<
     gTab <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    gWaeHandler->passOptional () <<
     ": "<<
     passDescription <<
     std::endl <<
@@ -175,11 +175,11 @@ void displayMsrScoreFull (
     separator <<
     std::endl <<
     gTab <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    gWaeHandler->passOptional () <<
     ": "<<
     passDescription <<
     ", " <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->fullVersion () <<
+    gWaeHandler->fullVersion () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
@@ -239,11 +239,11 @@ void displayMsrScoreSummary (
       separator <<
       std::endl <<
       gTab <<
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+      gWaeHandler->passOptional () <<
       ": "<<
       passDescription <<
       ", " <<
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->summary () <<
+      gWaeHandler->summary () <<
       std::endl <<
       separator <<
       std::endl << std::endl;
@@ -294,11 +294,11 @@ void displayMsrScoreNames (
       separator <<
       std::endl <<
       gTab <<
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+      gWaeHandler->passOptional () <<
       ": "<<
       passDescription <<
       ", " <<
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->names () <<
+      gWaeHandler->names () <<
       std::endl <<
       separator <<
       std::endl << std::endl;
@@ -346,11 +346,11 @@ void displayMsrScoreSlices (
     separator <<
     std::endl <<
     gTab <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    gWaeHandler->passOptional () <<
     ": "<<
     passDescription <<
     ", " <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->slices () <<
+    gWaeHandler->slices () <<
     std::endl <<
     separator <<
     std::endl << std::endl;

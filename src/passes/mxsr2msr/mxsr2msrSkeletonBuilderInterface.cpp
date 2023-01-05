@@ -97,7 +97,7 @@ S_msrScore translateMxsrToMsrSkeleton (
   if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
     displayMsrScore (
       scoreSkeleton,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->displayTheFirstMSRSkeletonAsText ());
+      gWaeHandler->displayTheFirstMSRSkeletonAsText ());
   }
 
   // register time spent
@@ -166,7 +166,7 @@ void displayMsrScoreSkeleton (
     separator <<
     std::endl <<
     gTab <<
-    gGlobalOahEarlyOptions.getMfWaeHandler ()->passOptional () <<
+    gWaeHandler->passOptional () <<
     ": "<<
     passDescription <<
     std::endl <<

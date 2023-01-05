@@ -38,6 +38,8 @@
   #define YY_NO_UNISTD_H
 #endif
 
+#include "oahEarlyOptions.h"
+
 
 /* ---------------------------------------------------------------------- */
 /* choices global to yylex() */
@@ -564,8 +566,8 @@ void mfslDriver::scanBegin ()
 
       if (errorString != nullptr) {
         s <<
-          "cannot open " <<
-          fScriptName << ": " <<
+          gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
+          ": " <<
           errorString <<
           std::endl;
 

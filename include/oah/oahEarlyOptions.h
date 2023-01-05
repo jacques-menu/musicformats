@@ -215,6 +215,8 @@ EXP std::ostream& operator << (std::ostream& os, const oahEarlyOptions& elt);
 
 EXP extern oahEarlyOptions gGlobalOahEarlyOptions;
 
+// useful shortcut macro
+#define gWaeHandler gGlobalOahEarlyOptions.getMfWaeHandler ()
 
 }
 

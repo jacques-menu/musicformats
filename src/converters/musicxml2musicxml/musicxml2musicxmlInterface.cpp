@@ -123,8 +123,8 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
       translateMxsrToMsrSkeleton (
         originalMxsr,
         gGlobalMsrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2a (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMSRSqueletonFromTheMXSR ());
+        gWaeHandler->pass2a (),
+        gWaeHandler->createAnMSRSqueletonFromTheMXSR ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -154,7 +154,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
     populateMsrSkeletonFromMxsr (
       originalMxsr,
       firstMsrScore,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->pass2b (),
+      gWaeHandler->pass2b (),
       "Populate the MSR skeletonfrom MusicXML data");
   }
   catch (mxsr2msrException& e) {
@@ -189,8 +189,8 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass3 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->convertTheFirstMSRIntoASecondMSR ());
+        gWaeHandler->pass3 (),
+        gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -223,7 +223,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass4 (),
+        gWaeHandler->pass4 (),
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -249,7 +249,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
       secondMxsr,
       outputFileName,
       err,
-      gGlobalOahEarlyOptions.getMfWaeHandler ()->pass5 (),
+      gWaeHandler->pass5 (),
       "Convert the MXSR into MusicXML text");
   }
   catch (mxsr2musicxmlException& e) {
@@ -440,8 +440,8 @@ EXP mfMusicformatsErrorKind musicxmlFile2musicxml (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
     return
@@ -465,8 +465,8 @@ mfMusicformatsErrorKind convertMusicxmlFile2musicxmlWithHandler (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLFile ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
     return
@@ -491,8 +491,8 @@ EXP mfMusicformatsErrorKind musicxmlFd2musicxml (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -516,8 +516,8 @@ mfMusicformatsErrorKind convertMusicxmlFd2musicxmlWithHandler (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLDescriptor ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
     return
@@ -542,8 +542,8 @@ EXP mfMusicformatsErrorKind musicxmlString2musicxml (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2musicxml() even if sxmlfile is null,
   // to handle the help options if any
@@ -567,8 +567,8 @@ mfMusicformatsErrorKind convertMusicxmlString2musicxmlWithHandler (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
-        gGlobalOahEarlyOptions.getMfWaeHandler ()->createAnMXSRFromAMusicXMLBuffer ());
+        gWaeHandler->pass1 (),
+        gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2musicxml() even if sxmlfile is null,
   // to handle the help options if any

@@ -121,6 +121,63 @@ class EXP mfWaeHandler : public waeHandler
     virtual std::string   optional () const;
     virtual std::string   totalSeconds () const;
 
+    // options files
+
+    virtual std::string   openingOptionsFileForReading (
+                            const std::string& optionsFileName) const;
+    virtual std::string   openingIncludeFileForReading (
+                            const std::string& includeFileName) const;
+
+    virtual std::string   cannotOpenOptionsFileForReading (
+                            const std::string& optionsFileName) const;
+
+    virtual std::string   closingOptionsFile (
+                            const std::string& optionsFileName) const;
+
+    // output files
+
+    virtual std::string   openingLilypondFileForWriting (
+                            const std::string& inputFileName) const;
+    virtual std::string   openingBrailleMusicFileForWriting (
+                            const std::string& inputFileName) const;
+    virtual std::string   openingMusicXMLFileForWriting (
+                            const std::string& inputFileName) const;
+    virtual std::string   openingGuidoFileForWriting (
+                            const std::string& inputFileName) const;
+
+    virtual std::string   cannotOpenLilypondFileForWriting (
+                            const std::string& inputFileName) const;
+    virtual std::string   cannotOpenBrailleMusicFileForWriting (
+                            const std::string& inputFileName) const;
+    virtual std::string   cannotOpenMusicXMLFileForWriting (
+                            const std::string& inputFileName) const;
+    virtual std::string   cannotOpenGuidoFileForWriting (
+                            const std::string& inputFileName) const;
+
+    virtual std::string   closingLilypondFile (
+                            const std::string& outputFileName) const;
+    virtual std::string   closingBrailleMusicFile (
+                            const std::string& outputFileName) const;
+    virtual std::string   closingMusicXMLFile (
+                            const std::string& outputFileName) const;
+    virtual std::string   closingGuidoFile (
+                            const std::string& outputFileName) const;
+
+    // include files
+
+    virtual std::string   cannotOpenIncludeFileForReading (
+                            const std::string& includeFileName) const;
+
+    // scripts
+
+    virtual std::string   cannotOpenScriptForWriting (
+                            const std::string& scriptName) const;
+
+    // MSDL
+
+    virtual std::string   cannotOpenMSDLFileForReading (
+                            const std::string& inputFileName) const;
+
   public:
 
     // print

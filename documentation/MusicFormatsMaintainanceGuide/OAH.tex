@@ -1009,7 +1009,7 @@ EXP mfMusicformatsErrorKind musicxmlfile2musicxml (
 	  sxmlfile =
 	    createSXMLFileFromFile (
 	      fileName,
-	    gGlobalOahEarlyOptions.getMfWaeHandler ()->pass1 (),
+	    gWaeHandler->pass1 (),
 	      "Create an MXSR from a MusicXML file");
 
 	if (sxmlfile) {
