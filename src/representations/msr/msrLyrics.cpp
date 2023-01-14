@@ -11,20 +11,19 @@
 
 #include <iomanip>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
 #include "mfAssert.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrMeasureConstants.h"
 
@@ -128,11 +127,13 @@ msrSyllable::msrSyllable (
     : msrMeasureElement (
         inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     syllableUpLinkToStanza != nullptr,
     "syllableUpLinkToStanza is null");
+#endif
 
   // set syllable's stanza upLink
   fSyllableUpLinkToStanza =
@@ -153,7 +154,7 @@ msrSyllable::msrSyllable (
 
   fSyllableNextMeasurePuristNumber = -1;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a syllable containing:" <<
@@ -174,7 +175,7 @@ msrSyllable::~msrSyllable ()
 S_msrSyllable msrSyllable::createSyllableNewbornClone (
   const S_msrPart& containingPart)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a newborn clone of syllable '" <<
@@ -184,11 +185,13 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
+#endif
 
   S_msrSyllable
     newbornClone =
@@ -225,7 +228,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
 S_msrSyllable msrSyllable::createSyllableDeepClone (
   const S_msrPart& containingPart)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a newborn clone of syllable '" <<
@@ -235,11 +238,13 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
+#endif
 
   S_msrSyllable
     deepClone =
@@ -276,13 +281,15 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 void msrSyllable::setSyllableUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -304,7 +311,7 @@ void msrSyllable::setSyllableUpLinkToMeasure (
 void msrSyllable:: setSyllableNextMeasurePuristNumber (
   int puristMeasureNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Setting syllable next measure purist number to " <<
@@ -353,7 +360,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //   const Rational&    measurePosition,
 //   const std::string&      context)
 // {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Setting syllable's measure position of " << asString () <<
@@ -372,11 +379,13 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 //   }
 // #endif
 //
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+// #endif
 //
 //   // set syllable's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
@@ -384,7 +393,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 
 void msrSyllable::appendLyricTextToSyllable (const std::string& text)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending text \"" <<
@@ -403,11 +412,13 @@ void msrSyllable::appendLyricTextToSyllable (const std::string& text)
 void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
   const S_msrNote& note)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     note != nullptr,
     "note is empty");
+#endif
 
   fSyllableUpLinkToNote = note;
 
@@ -424,7 +435,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
     appendSyllableToNote (this);
 
   // set it upLink to note
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Setting syllable note upLink for:" <<
@@ -891,11 +902,13 @@ msrStanza::msrStanza (
   // set stanza number and kind
   fStanzaNumber = stanzaNumber;
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     stanzaUpLinkToVoice != nullptr,
     "stanzaUpLinkToVoice is null");
+#endif
 
   // set stanza's voice upLink
   fStanzaUpLinkToVoice =
@@ -914,7 +927,7 @@ void msrStanza::initializeStanza ()
         mfMakeSingleWordFromString (
           fStanzaNumber));
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Initializing stanza " << getStanzaName () <<
@@ -933,7 +946,7 @@ msrStanza::~msrStanza ()
 S_msrStanza msrStanza::createStanzaNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a newborn clone of stanza \"" <<
@@ -945,11 +958,13 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrStanza
     newbornClone =
@@ -980,7 +995,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
 S_msrStanza msrStanza::createStanzaDeepClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Creating a deep clone of stanza \"" <<
@@ -992,11 +1007,13 @@ S_msrStanza msrStanza::createStanzaDeepClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrStanza
     stanzaDeepClone =
@@ -1036,7 +1053,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
 void msrStanza::appendSyllableToStanza (
   const S_msrSyllable& syllable)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending syllable '" << syllable->asString () <<
@@ -1098,7 +1115,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending 'Rest' syllable" <<
@@ -1137,7 +1154,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending 'Skip' syllable " <<
@@ -1175,7 +1192,7 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
 S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
   int inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending 'Measure end' syllable " <<
@@ -1217,7 +1234,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
   msrSyllableKind syllableKind,
   const Rational& wholeNotes)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending '" <<
@@ -1258,7 +1275,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
   int inputLineNumber,
   int nextMeasurePuristNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending a 'LineBreak' syllable" <<
@@ -1301,7 +1318,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
   int inputLineNumber,
   int nextMeasurePuristNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending a 'PageBreak' syllable" <<
@@ -1351,7 +1368,7 @@ void msrStanza::appendPaddingNoteToStanza (
   int             inputLineNumber,
   const Rational& forwardStepLength)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending padding note" <<

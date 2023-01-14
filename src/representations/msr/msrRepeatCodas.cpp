@@ -9,12 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
@@ -53,19 +52,23 @@ msrRepeatCoda::msrRepeatCoda (
   const S_msrRepeat&  upLinkToRepeat)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     repeatCodaSegment != nullptr,
     "repeatCodaSegment is null");
+#endif
 
   fRepeatCodaSegment = repeatCodaSegment;
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     upLinkToRepeat != nullptr,
     "upLinkToRepeat is null");
+#endif
 
   fRepeatCodaUpLinkToRepeat = upLinkToRepeat;
 }
@@ -76,7 +79,7 @@ msrRepeatCoda::~msrRepeatCoda ()
 S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
   const S_msrRepeat& containingRepeat)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of a " <<
@@ -85,11 +88,13 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingRepeat != nullptr,
     "containingRepeat is null");
+#endif
 
   S_msrRepeatCoda
     newbornClone = 0; // JMI
@@ -112,7 +117,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
 S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
   const S_msrRepeat& containingRepeat)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of a " <<
@@ -121,11 +126,13 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingRepeat != nullptr,
     "containingRepeat is null");
+#endif
 
   S_msrRepeatCoda
     deepClone = nullptr; // JMI v0.9.66

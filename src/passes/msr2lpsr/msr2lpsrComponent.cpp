@@ -23,7 +23,7 @@ S_mfcPassComponent createMsr2lpsrComponent ()
   // protect library against multiple initializations
   if (! pPassComponent) {
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the msr2lpsr pass component" <<

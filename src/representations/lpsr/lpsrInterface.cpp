@@ -12,18 +12,17 @@
 #include <iostream>
 #include <fstream>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfTiming.h"
 
 #include "lpsrScores.h"
 
 #include "lpsrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahEarlyOptions.h"
 
@@ -41,11 +40,13 @@ void displayLpsrScore (
   const S_lpsrOahGroup&  lpsrOpts,
   const std::string&     passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
     "theLpsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
@@ -74,7 +75,7 @@ void displayLpsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
     gWaeHandler->displayTheLPSRAsText (),
     mfTimingItemKind::kOptional,
     startClock,
@@ -88,11 +89,13 @@ void displayLpsrScoreFull (
   const S_lpsrOahGroup&  lpsrOpts,
   const std::string&     passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
     "theLpsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
@@ -123,11 +126,9 @@ void displayLpsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
     gWaeHandler->displayTheLPSRAsText ()
-      +
-    ", "
-      +
+      + ", " +
     gWaeHandler->fullVersion (),
     mfTimingItemKind::kOptional,
     startClock,

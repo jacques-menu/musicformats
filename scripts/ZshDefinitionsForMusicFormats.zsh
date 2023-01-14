@@ -234,7 +234,7 @@ function bit ()
 
   egrep \
     --colour=always \
-    -i 'BUILD|error|warning|Undefined|referenced from|duplicate symbol|unknown|undeclared|In file included from|const' \
+    -i 'BUILD|error|warning|Undefined|referenced from|duplicate symbol|unknown|undeclared|In file included from|const|unterminated|expected' \
     ${LOGFILE} \
     | \
     egrep -v 'forward' | egrep -v 'build' | egrep -v 'Build' | grep -v 'TARGET'

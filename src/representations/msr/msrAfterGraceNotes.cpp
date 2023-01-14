@@ -9,12 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -51,11 +50,13 @@ msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
   const S_msrVoice& afterGraceNotesGroupContentsUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     afterGraceNotesGroupContentsUpLinkToVoice != nullptr,
     "afterGraceNotesGroupContentsUpLinkToVoice is null");
+#endif
 
   // set after notes contents's voice upLink
   fAfterGraceNotesGroupContentsUpLinkToVoice =
@@ -81,7 +82,7 @@ S_msrPart msrAfterGraceNotesGroupContents::fetchAfterGraceNotesGroupContentsUpLi
 S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGraceNotesGroupContentsNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Creating a newborn clone of after grace notes group" <<
@@ -89,11 +90,13 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrAfterGraceNotesGroupContents
     newbornClone =
@@ -268,11 +271,13 @@ msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
   const S_msrVoice&   afterGraceNotesGroupUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     afterGraceNotesGroupUpLinkToVoice != nullptr,
     "afterGraceNotesGroupUpLinkToVoice is null");
+#endif
 
   // set after gracenotes group voice upLink
   fAfterGraceNotesGroupUpLinkToVoice =
@@ -312,7 +317,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
   const S_msrNote&  noteClone,
   const S_msrVoice& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "Creating a newborn clone of after grace notes group '" <<
@@ -322,17 +327,18 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     noteClone != nullptr,
     "noteClone is null");
 
-  // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrAfterGraceNotesGroup
     newbornClone =

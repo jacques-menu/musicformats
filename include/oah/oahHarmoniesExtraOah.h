@@ -13,7 +13,7 @@
 #define ___harmoniesExtraOah___
 
 
-#include "mfEnableHarmoniesExtra.h"
+#include "mfEnableHarmoniesExtraSetting.h"
 
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
 

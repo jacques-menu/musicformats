@@ -68,7 +68,7 @@ S_bsrLine bsrLineContentsElement::getUpLinkToBsrLine () const
 
 void bsrLineContentsElement::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrLineContentsElement::acceptIn ()" <<
@@ -81,7 +81,7 @@ void bsrLineContentsElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrLineContentsElement>*> (v)) {
         S_bsrLineContentsElement elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrLineContentsElement::visitStart ()" <<
@@ -94,7 +94,7 @@ void bsrLineContentsElement::acceptIn (basevisitor* v)
 
 void bsrLineContentsElement::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrLineContentsElement::acceptOut ()" <<
@@ -107,7 +107,7 @@ void bsrLineContentsElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrLineContentsElement>*> (v)) {
         S_bsrLineContentsElement elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrLineContentsElement::visitEnd ()" <<

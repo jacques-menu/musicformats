@@ -16,12 +16,10 @@
 
 #include "libmusicxml.h" // for mfMusicformatsErrorKind
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfServiceRunData.h"
+#include "mfPasses.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
 
@@ -216,7 +214,7 @@ int main (int argc, char*  argv[])
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<
@@ -236,7 +234,7 @@ int main (int argc, char*  argv[])
       gGlobalOahEarlyOptions.
         getEarlyMultiGenerationOutputKind ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> multiGenerationOutputKind: " <<
@@ -464,7 +462,7 @@ int main (int argc, char*  argv[])
       gGlobalMsrGeneratorsOahGroup->
         getGenerationAPIKind ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> generationAPIKind: " <<
@@ -479,7 +477,7 @@ int main (int argc, char*  argv[])
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -488,7 +486,7 @@ int main (int argc, char*  argv[])
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->pass1 () <<
+      gWaeHandler->pass (mfPassIDKind::kMfPassID_1) <<
       ": " <<
       "Creating the MSR score with the " <<
       msrGenerationAPIKindAsString (theGenerationAPIKind) <<
@@ -514,7 +512,7 @@ int main (int argc, char*  argv[])
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gWaeHandler->pass1 (),
+    gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
     "Create the MSR score",
     mfTimingItemKind::kMandatory,
     startClock,
@@ -539,9 +537,9 @@ int main (int argc, char*  argv[])
       err =
         msrScore2lilypondWithHandler (
           theMsrScore,
-          gWaeHandler->pass2 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
           "Convert the MSR into an LPSR",
-          gWaeHandler->pass3 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
           gWaeHandler->convertTheLPSRIntoLilyPondCode (),
           gOutputStream,
           gLogStream,
@@ -552,11 +550,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2brailleWithHandler (
           theMsrScore,
-          gWaeHandler->pass2a (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_2a),
           "Create the first BSR from the MSR",
-          gWaeHandler->pass2b (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_2b),
           "Create the finalized BSR from the first BSR",
-          gWaeHandler->pass3 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
           "Convert the BSR into Braille text",
           gOutputStream,
           gLogStream,
@@ -567,11 +565,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2musicxmlWithHandler (
           theMsrScore,
-          gWaeHandler->pass2 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
           "Convert the MSR score into a second MSR",
-          gWaeHandler->pass3 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
           "Convert the second MSR into an MXSR",
-          gWaeHandler->pass4 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
           "Convert the MXSR into MusicXML text",
           gOutputStream,
           gLogStream,
@@ -582,11 +580,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2guidoWithHandler (
           theMsrScore,
-          gWaeHandler->pass2 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
           "Convert the MSR score into a second MSR",
-          gWaeHandler->pass3 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
           "Convert the second MSR into an MXSR",
-          gWaeHandler->pass4 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
           "Convert the MXSR into Guido text",
           gOutputStream,
           gLogStream,
@@ -597,7 +595,7 @@ int main (int argc, char*  argv[])
       break;
   } // switch
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
       gLogStream <<

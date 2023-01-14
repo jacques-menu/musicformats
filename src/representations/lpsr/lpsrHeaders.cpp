@@ -13,10 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "lpsrHeaders.h"
 
@@ -99,7 +96,7 @@ size_t lpsrHeader::maxLilypondVariablesNamesLength ()
 
 void lpsrHeader::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrHeader::acceptIn ()" <<
@@ -112,7 +109,7 @@ void lpsrHeader::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrHeader>*> (v)) {
         S_lpsrHeader elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrHeader::visitStart ()" <<
@@ -125,7 +122,7 @@ void lpsrHeader::acceptIn (basevisitor* v)
 
 void lpsrHeader::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrHeader::acceptOut ()" <<
@@ -138,7 +135,7 @@ void lpsrHeader::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrHeader>*> (v)) {
         S_lpsrHeader elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrHeader::visitEnd ()" <<
@@ -329,7 +326,7 @@ void lpsrHeader::appendRight (
   int    inputLineNumber,
   std::string value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending right \"" <<
@@ -347,7 +344,7 @@ void lpsrHeader::appendComposer (
   int    inputLineNumber,
   std::string value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending composer \"" <<
@@ -365,7 +362,7 @@ void lpsrHeader::appendArranger (
   int    inputLineNumber,
   std::string value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending arranger \"" <<
@@ -383,7 +380,7 @@ void lpsrHeader::appendLyricist (
   int    inputLineNumber,
   std::string value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending lyricist \"" <<
@@ -401,7 +398,7 @@ void lpsrHeader::appendPoet (
   int    inputLineNumber,
   std::string value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending poet \"" <<
@@ -418,7 +415,7 @@ void lpsrHeader::appendPoet (
 void lpsrHeader::removeAllPoets (
   int    inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Removing all poets from lpsrHeader" <<
@@ -434,7 +431,7 @@ void lpsrHeader::appendTranslator (
   int    inputLineNumber,
   std::string value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending translator \"" <<
@@ -452,7 +449,7 @@ void lpsrHeader::appendArtist (
   int    inputLineNumber,
   std::string value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending artist \"" <<
@@ -470,7 +467,7 @@ void lpsrHeader::appendSoftware (
   int    inputLineNumber,
   std::string value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending software \"" <<

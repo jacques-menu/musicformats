@@ -47,11 +47,8 @@ class EXP mfWaeHandlerSpanish : public mfWaeHandler
     // public services
     // ------------------------------------------------------
 
-    // pass numbers
-
-    // OAH
-
-    // passes
+    // use default (english) versions in mfWaeHandlers.h/.cpp
+    // until they are overridden here
 
   public:
 

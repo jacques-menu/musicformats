@@ -22,12 +22,9 @@
 
 #include "musicxml2mxsrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "mfTiming.h"
 #include "mfStringsHandling.h"
@@ -226,7 +223,7 @@ std::string uncompressMXLFile (
 
         if (inputStream.eof ()) break;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         {
           gLogStream <<
             "*** currentLine:" <<
@@ -272,7 +269,7 @@ std::string uncompressMXLFile (
         regex_match (currentLine, sm, e);
 
         if (sm.size ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) { // JMI ???
             gLogStream <<
               "There are " << sm.size () - 1 << " match(es) " <<
@@ -448,7 +445,7 @@ void checkSXMLFile (
   SXMLFile      sxmlfile,
   const std::string& context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
       std::endl <<
@@ -466,7 +463,7 @@ void checkSXMLFile (
   // get the xmlDecl
   TXMLDecl * xmlDecl = sxmlfile->getXMLDecl ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
       std::endl <<
@@ -479,7 +476,7 @@ void checkSXMLFile (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // get the docType
   TDocType * docType = sxmlfile->getDocType ();
 
@@ -498,7 +495,7 @@ void checkSXMLFile (
   // get the encoding type
   std::string encoding = xmlDecl->getEncoding ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
       "% MusicXML data uses " <<
@@ -525,7 +522,7 @@ SXMLFile createSXMLFileFromFile (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -592,7 +589,7 @@ SXMLFile createSXMLFileFromFd (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -712,7 +709,7 @@ EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
 
   std::string fileNameAsString = fileName;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -814,7 +811,7 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -849,7 +846,7 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
   // get the xmlDecl
   TXMLDecl *xmlDecl = sxmlfile->getXMLDecl ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
       std::endl <<
@@ -862,7 +859,7 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // get the docType
   TDocType * docType = sxmlfile->getDocType ();
 
@@ -884,7 +881,7 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
 //   // should the encoding be converted to UTF-8?
 //   std::string desiredEncoding = "UTF-8";
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
 //     gLogStream <<
 //       "% MusicXML data uses \"" <<
@@ -936,7 +933,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -990,7 +987,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
   const std::string& passNumber,
   const std::string& passDescription)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";

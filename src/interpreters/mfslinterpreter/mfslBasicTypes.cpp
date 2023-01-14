@@ -11,14 +11,13 @@
 
 #include <iomanip>      // setw()), set::precision(), ...
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "mfAssert.h"
 #include "mfBool.h"
 #include "mfStringsHandling.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 
@@ -533,11 +532,13 @@ void mfslInput::enrichNameOptionsBlock (
       fInputNamesToOptionsBlocksMap [
         name];
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     nameOptionsBlock != nullptr,
     "nameOptionsBlock is null");
+#endif
 
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
     gLogStream <<
@@ -1354,11 +1355,13 @@ void mfslChoice::enrichLabelOptionsBlock (
       fChoiceLabelsToOptionsBlocksMap [
         label];
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     labelOptionsBlock != nullptr,
     "labelOptionsBlock is null");
+#endif
 
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
     gLogStream <<
@@ -1853,11 +1856,13 @@ mfslCaseChoiceStatement::mfslCaseChoiceStatement (
   const S_mfslChoice& caseChoice,
   mfslDriver&  drv)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     caseChoice != nullptr,
     "caseChoice is null");
+#endif
 
   fCaseChoice = caseChoice;
 
@@ -2056,11 +2061,13 @@ mfslCaseInputStatement::mfslCaseInputStatement (
   const S_mfslInput& caseInput,
   mfslDriver& drv)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     caseInput != nullptr,
     "caseInput is null");
+#endif
 
   fCaseInputInput = caseInput;
 
@@ -2249,7 +2256,7 @@ std::ostream& operator << (std::ostream& os, const S_mfslCaseInputStatement& elt
 //   static Bool pPrivateThisMethodHasBeenRun (false);
 //
 //   if (! pPrivateThisMethodHasBeenRun) {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
 //       gLogStream <<
 //         "Initializing MFSL basic types handling" <<

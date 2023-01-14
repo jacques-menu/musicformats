@@ -14,10 +14,7 @@
 
 #include <regex>
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 
 #include "oahEarlyOptions.h"
@@ -64,7 +61,7 @@ msr2guidoManPageGenerateAtom::~msr2guidoManPageGenerateAtom ()
 
 void msr2guidoManPageGenerateAtom::applyElement (std::ostream& os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a msr2guidoManPageGenerateAtom" <<
@@ -77,7 +74,7 @@ void msr2guidoManPageGenerateAtom::applyElement (std::ostream& os)
 
 void msr2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageGenerateAtom::acceptIn ()" <<
@@ -90,7 +87,7 @@ void msr2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2guidoManPageGenerateAtom>*> (v)) {
         S_msr2guidoManPageGenerateAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2guidoManPageGenerateAtom::visitStart ()" <<
@@ -103,7 +100,7 @@ void msr2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
 
 void msr2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageGenerateAtom::acceptOut ()" <<
@@ -116,7 +113,7 @@ void msr2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2guidoManPageGenerateAtom>*> (v)) {
         S_msr2guidoManPageGenerateAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2guidoManPageGenerateAtom::visitEnd ()" <<
@@ -129,7 +126,7 @@ void msr2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
 
 void msr2guidoManPageGenerateAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageGenerateAtom::browseData ()" <<
@@ -253,7 +250,7 @@ R"(Write man page data for EXECUTABLE to standard output.)",
         fOahVisitor));
 }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void msr2guidoManPageOahGroup::initializeManPagetracingOah ()
 {
   S_oahSubGroup
@@ -280,7 +277,7 @@ void msr2guidoManPageOahGroup::initializeMsr2guidoManPageOahGroup (
   initializeManPageGenerateOptions (
     theOah2manPage);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeManPagetracingOah ();
@@ -302,7 +299,7 @@ void msr2guidoManPageOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msr2guidoManPageOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageOahGroup::acceptIn ()" <<
@@ -315,7 +312,7 @@ void msr2guidoManPageOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2guidoManPageOahGroup>*> (v)) {
         S_msr2guidoManPageOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2guidoManPageOahGroup::visitStart ()" <<
@@ -328,7 +325,7 @@ void msr2guidoManPageOahGroup::acceptIn (basevisitor* v)
 
 void msr2guidoManPageOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageOahGroup::acceptOut ()" <<
@@ -341,7 +338,7 @@ void msr2guidoManPageOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2guidoManPageOahGroup>*> (v)) {
         S_msr2guidoManPageOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2guidoManPageOahGroup::visitEnd ()" <<
@@ -354,7 +351,7 @@ void msr2guidoManPageOahGroup::acceptOut (basevisitor* v)
 
 void msr2guidoManPageOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2guidoManPageOahGroup::browseData ()" <<
@@ -393,7 +390,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2guidoManPageOahGroup& e
 S_msr2guidoManPageOahGroup createGlobalMsr2guidoManPageOahGroupHandler (
   const S_oahVisitor& theOah2manPage)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2guidoManPage OAH group" <<

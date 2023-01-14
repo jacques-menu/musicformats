@@ -9,10 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <string.h>     // strncat
-
-#include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
+#include <string.h>     // strncat
+#include <sstream>
+
+#include "mfEnableSanityChecksSetting.h"
 
 #include <map>
 
@@ -257,11 +258,13 @@ char* mfCharStarCat (
       "], destinationSize - strlen (destination) - 1: [" << destinationSize - strlen (destination) - 1 <<
       ']';
 
-    // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
     mfAssert (
       __FILE__, __LINE__,
       false,
       s.str ());
+#endif
   }
 
   return
@@ -2075,6 +2078,10 @@ int countTwoBytesWideCharactersInString (const std::string theString)
       {
         if (
           // to be augmented when other 1-byte characters appear later in the code...
+          (theChar >= 'a' && theChar <= 'z')
+            ||
+          (theChar >= 'A' && theChar <= 'Z')
+            ||
           (theChar == ' ')
             ||
           (theChar == ',')
@@ -2100,10 +2107,6 @@ int countTwoBytesWideCharactersInString (const std::string theString)
           (theChar == '\'')
             ||
           (theChar == '"')
-            ||
-          (theChar >= 'a' && theChar <= 'z')
-            ||
-          (theChar >= 'A' && theChar <= 'Z')
         ) {
           // theChar is 1-byte large
         }

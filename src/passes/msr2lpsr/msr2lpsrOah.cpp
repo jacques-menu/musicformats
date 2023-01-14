@@ -17,10 +17,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -81,7 +78,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'" <<
@@ -92,7 +89,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
   // theString contains the score output kind:
   // is it in the score output kinds map?
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msr2lpsrScoreOutputKindAtom'" <<
@@ -135,7 +132,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
 
 void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptIn ()" <<
@@ -148,7 +145,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2lpsrScoreOutputKindAtom>*> (v)) {
         S_msr2lpsrScoreOutputKindAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitStart ()" <<
@@ -161,7 +158,7 @@ void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
 
 void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::acceptOut ()" <<
@@ -174,7 +171,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2lpsrScoreOutputKindAtom>*> (v)) {
         S_msr2lpsrScoreOutputKindAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lpsrScoreOutputKindAtom::visitEnd ()" <<
@@ -187,7 +184,7 @@ void msr2lpsrScoreOutputKindAtom::acceptOut (basevisitor* v)
 
 void msr2lpsrScoreOutputKindAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrScoreOutputKindAtom::browseData ()" <<
@@ -299,7 +296,7 @@ R"(These options control the way MSR data is translated to LPSR.)",
 msr2lpsrOahGroup::~msr2lpsrOahGroup ()
 {}
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void msr2lpsrOahGroup::initializMsr2lpsrTraceOptions ()
 {}
 #endif
@@ -407,7 +404,7 @@ R"()",
 
 void msr2lpsrOahGroup::initializeMsr2lpsrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializMsr2lpsrTraceOptions ();
@@ -441,7 +438,7 @@ void msr2lpsrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msr2lpsrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrOahGroup::acceptIn ()" <<
@@ -454,7 +451,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2lpsrOahGroup>*> (v)) {
         S_msr2lpsrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lpsrOahGroup::visitStart ()" <<
@@ -467,7 +464,7 @@ void msr2lpsrOahGroup::acceptIn (basevisitor* v)
 
 void msr2lpsrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrOahGroup::acceptOut ()" <<
@@ -480,7 +477,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2lpsrOahGroup>*> (v)) {
         S_msr2lpsrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2lpsrOahGroup::visitEnd ()" <<
@@ -493,7 +490,7 @@ void msr2lpsrOahGroup::acceptOut (basevisitor* v)
 
 void msr2lpsrOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2lpsrOahGroup::browseData ()" <<
@@ -562,7 +559,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2lpsrOahGroup& elt)
 //______________________________________________________________________________
 S_msr2lpsrOahGroup createGlobalMsr2lpsrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2lpsr OAH group" <<

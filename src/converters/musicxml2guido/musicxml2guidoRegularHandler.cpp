@@ -11,10 +11,7 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfStringsHandling.h"
 
@@ -66,7 +63,7 @@ xml2gmnRegularHandler::xml2gmnRegularHandler (
   // create the regular handler groups
   createRegularHandlerGroups ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
   // print the options handler initial state
   gLogStream <<
@@ -92,7 +89,7 @@ xml2gmnRegularHandler::~xml2gmnRegularHandler ()
 
 void xml2gmnRegularHandler::createRegularHandlerGroups ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the regular handler groups for \"" <<
@@ -102,7 +99,7 @@ void xml2gmnRegularHandler::createRegularHandlerGroups ()
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -163,7 +160,7 @@ void xml2gmnRegularHandler::createRegularHandlerGroups ()
 
   createOutputRegularGroup ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "All the regular handler groups for \"" <<
@@ -312,7 +309,7 @@ void xml2gmnRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_LONG_OPTION_NAME, subGroup);
 #endif
@@ -338,7 +335,7 @@ void xml2gmnRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-skeleton", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
@@ -356,7 +353,7 @@ void xml2gmnRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr1-summary", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-mxsr", subGroup);
   registerAtomInRegularSubgroup ("trace-mxsr-visitors", subGroup);
 
@@ -1284,7 +1281,7 @@ void xml2gmnRegularHandler::createOutputRegularGroup ()
 //______________________________________________________________________________
 void xml2gmnRegularHandler::checkOptionsAndArguments () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<

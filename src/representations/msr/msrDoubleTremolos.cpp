@@ -11,20 +11,19 @@
 
 #include <iomanip>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
 #include "mfAssert.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrMeasureConstants.h"
 
@@ -135,13 +134,15 @@ msrDoubleTremolo::~msrDoubleTremolo ()
 void msrDoubleTremolo::setDoubleTremoloUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -164,7 +165,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   const S_msrElement& doubleTremoloFirstElement,
   const S_msrElement& doubleTremoloSecondElement)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Creating a newborn clone of a double tremolo" <<
@@ -172,15 +173,18 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     doubleTremoloFirstElement != nullptr,
     "doubleTremoloFirstElement is null");
+
   mfAssert (
     __FILE__, __LINE__,
     doubleTremoloSecondElement != nullptr,
     "doubleTremoloSecondElement is null");
+#endif
 
   S_msrDoubleTremolo
     newbornClone =
@@ -217,7 +221,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //   const Rational&     measurePosition,
 //   const std::string&  context)
 // {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     ++gIndenter;
 //
@@ -241,11 +245,13 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //   }
 // #endif
 //
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+// #endif
 //
 //   // set double tremolo's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
@@ -327,7 +333,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 
 void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Setting note " << note->asShortString () <<
@@ -415,7 +421,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
   fDoubleTremoloNumberOfRepeats =
     numberOfRepeatsAsRational.getNumerator ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Setting notes double tremolo number of repeats to '" <<
@@ -433,7 +439,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
 void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
   const S_msrNote& note)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Setting note " << note->asShortString () <<
@@ -466,7 +472,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
   // check that expected double tremolo sounding whole notes
   // match the known double tremolo sounding whole notes
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Checking notes double tremolo second note duration" <<
@@ -520,7 +526,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
   const S_msrChord& chord)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Setting chord " << chord->asString () <<
@@ -587,7 +593,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
 
 void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& chord)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
       "Setting chord " << chord->asString () <<

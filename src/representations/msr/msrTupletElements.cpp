@@ -11,6 +11,8 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
+// #include "mfEnableSanityChecksSetting.h" JMI
+
 #include "mfAssert.h"
 
 #include "msrTupletElements.h"
@@ -54,13 +56,15 @@ msrTupletElement::~msrTupletElement ()
 // void msrTupletElement::setTupletElementUpLinkToMeasure (
 //   const S_msrMeasure& measure)
 // {
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
 //     "measure is null");
+// #endif
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
 //     ++gIndenter;
 //

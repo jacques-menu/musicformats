@@ -11,12 +11,11 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
@@ -61,7 +60,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   const Rational& wholeNotes,
   const std::string&   context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Setting measure element sounding whole notes of " <<
@@ -76,18 +75,20 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     wholeNotes != K_WHOLE_NOTES_UNKNOWN,
     "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
+#endif
 
   fSegmentElementSoundingWholeNotes = wholeNotes;
 }
 
 void msrSegmentElement::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegmentElement::acceptIn ()" <<
@@ -100,7 +101,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
         S_msrSegmentElement elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegmentElement::visitStart ()" <<
@@ -113,7 +114,7 @@ void msrSegmentElement::acceptIn (basevisitor* v)
 
 void msrSegmentElement::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrSegmentElement::acceptOut ()" <<
@@ -126,7 +127,7 @@ void msrSegmentElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrSegmentElement>*> (v)) {
         S_msrSegmentElement elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrSegmentElement::visitEnd ()" <<

@@ -14,15 +14,12 @@
 #include "visitor.h"
 
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrBrowsers.h"
 #include "msrMeasureConstants.h"
@@ -1163,7 +1160,7 @@ msrLineWidth::msrLineWidth (
   const S_msrLength&   lineWidthValue)
     : msrElement (inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
@@ -1310,7 +1307,7 @@ msrNoteSize::msrNoteSize (
   float               noteSizeValue)
     : msrElement (inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
@@ -1444,7 +1441,7 @@ msrDistance::msrDistance (
   S_msrLength         distanceValue)
     : msrElement (inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
@@ -1578,7 +1575,7 @@ msrGlyph::msrGlyph (
   const std::string&    glyphValue)
     : msrElement (inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
@@ -1712,7 +1709,7 @@ msrOtherAppearance::msrOtherAppearance (
   const std::string&    otherAppearanceValue)
     : msrElement (inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
       "Creating a print layout " <<
@@ -1840,7 +1837,7 @@ msrAppearance::msrAppearance (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMusicXMLPrintLayouts ()) {
     gLogStream <<
       "Creating an appearance" <<

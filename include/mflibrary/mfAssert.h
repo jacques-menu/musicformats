@@ -23,8 +23,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 EXP void mfAssert (
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
-  Bool          condition,
+  int                sourceCodeLineNumber,
+  Bool               condition,
   const std::string& messageIfFalse);
 
 

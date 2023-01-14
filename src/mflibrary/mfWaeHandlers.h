@@ -51,9 +51,12 @@ class EXP mfWaeHandler : public waeHandler
     // public services
     // ------------------------------------------------------
 
+    // default versions are in english, sub-classes override them for other languages
+
     // pass numbers
 
-    // default versions are in english, sub-classes override them for other languages
+    virtual std::string   pass (mfPassIDKind passIDKind) const;
+
     virtual std::string   pass1 () const;
 
     virtual std::string   pass2 () const;
@@ -109,6 +112,10 @@ class EXP mfWaeHandler : public waeHandler
 
     virtual std::string   displayASummaryOfTheFirstMSR () const;
     virtual std::string   displayASummaryOfTheSecondMSR () const;
+
+    virtual std::string   displayTheBSRAsText () const;
+    virtual std::string   displayTheFirstBSRAsText () const;
+    virtual std::string   displayTheFinalizedBSRAsText () const;
 
     // timing
 

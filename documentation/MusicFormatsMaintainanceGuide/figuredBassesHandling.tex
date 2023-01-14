@@ -9,7 +9,7 @@ Figured bass elements are presented at \sectionRef{Figured bass elements}.
 The useful options here are:
 \begin{itemize}
 \item \optionBoth{trace-figured-bass}{tfigbass}
-\item \optionBoth{display-msr-skeleton}{dmsrskel}
+\item \optionBoth{display-msr1-skeleton}{dmsrskel}
 
 \item \optionBoth{display-msr1-short}{dmsr1short}
 \item \optionBoth{display-msr1}{dmsr1}, an alias for the one above
@@ -254,7 +254,7 @@ Field{mxsr2msrSkeletonBuilder}{fThereAreFiguredBassToBeAttachedToCurrentNote} it
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_figured_bass" <<
@@ -285,7 +285,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
   // are there figured bass attached to the current note?
   if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
     if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBasses ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
         gLogStream <<
           "Ignoring the figured bass elements" <<
@@ -347,7 +347,7 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_figured_bass" <<
@@ -413,7 +413,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> End visiting S_figured_bass" <<
@@ -423,7 +423,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
 #endif
 
   // create the figured bass element
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a figured bass" <<
@@ -567,7 +567,8 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
         voiceToInsertInto->
           getRegularVoiceForwardLinkToFiguredBassVoice ();
 
-    // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
     mfAssert (
       __FILE__, __LINE__,
       voiceFiguredBassVoice != nullptr,
@@ -612,7 +613,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %    for (i=noteHarmoniesList.begin (); i!=noteHarmoniesList.end (); ++i) {
 %      S_msrHarmony harmony = (*i);
 %
-%#ifdef OAH_TRACING_IS_ENABLED
+%#ifdef MF_TRACING_IS_ENABLED
 %      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 %        gLogStream <<
 %          "Copying harmony '" <<
@@ -675,7 +676,7 @@ In \msrToMsr{msr2msrTranslator.cpp}, a newborn clone of the figured bass element
 \begin{lstlisting}[language=CPlusPlus]
 void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrFiguredBass '" <<
@@ -745,7 +746,7 @@ There are only fields updates upon the second visit:
 \begin{lstlisting}[language=CPlusPlus]
 void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrFiguredBass '" <<
@@ -769,7 +770,7 @@ The same occurs in \msrToLpsr{msr2lpsrTranslator.cpp}: a newborn clone of the fi
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrFiguredBass '" <<
@@ -839,7 +840,7 @@ Here too, there are only fields updates upon the second visit of \smartPointerTy
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrFiguredBass '" <<
@@ -868,7 +869,7 @@ The \lily\ code is generated only if the figured bass element belongs to a figur
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrFiguredBass '" <<

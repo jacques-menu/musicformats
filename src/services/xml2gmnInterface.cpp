@@ -100,7 +100,7 @@ EXP int xml2gmn (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " xml2gmn()" <<
@@ -202,7 +202,7 @@ EXP int xml2gmn (
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -247,7 +247,7 @@ EXP int xml2gmn (
   // welcome message
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     int
       outputFileNameSize =
@@ -329,7 +329,7 @@ EXP int xml2gmn (
   // acknoledge end of command line analysis
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       "The command line options and arguments have been analyzed" <<
@@ -357,7 +357,7 @@ EXP int xml2gmn (
   try {
     if (inputSourceName == "-") {
       // MusicXML data comes from standard input
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         gLogStream << "Reading standard input" << std::endl;
       }
@@ -373,7 +373,7 @@ EXP int xml2gmn (
 
     else {
       // MusicXML data comes from a file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
         gLogStream << "Reading file \"" << inputSourceName << "\"" << std::endl;
       }

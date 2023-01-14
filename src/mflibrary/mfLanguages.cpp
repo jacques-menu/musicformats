@@ -13,10 +13,7 @@
 
 #include "mfConstants.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfBool.h"
 
@@ -202,7 +199,7 @@ void initializeMusicFormatsLanguages ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (
       gGlobalOahEarlyOptions.getEarlyTracingOah ()
         &&

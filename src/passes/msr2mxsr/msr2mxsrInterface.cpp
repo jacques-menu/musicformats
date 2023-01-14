@@ -12,14 +12,13 @@
 #include <iostream>
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 #include "mfTiming.h"
@@ -46,16 +45,18 @@ Sxmlelement translateMsrToMxsr (
   std::string           passDescription,
   mfTimingItemKind mfTimingItemKind)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -92,7 +93,7 @@ Sxmlelement translateMsrToMxsr (
     startClock,
     endClock);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
       std::endl <<

@@ -9,13 +9,14 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___enableTracingIfDesired___
-#define ___enableTracingIfDesired___
+#ifndef ___mfEnableSanityChecksSetting___
+#define ___mfEnableSanityChecksSetting___
 
-#ifndef OAH_TRACING_IS_ENABLED
-  // comment the following definition if no tracing is desired
 
-  #define OAH_TRACING_IS_ENABLED
+#ifndef MF_SANITY_CHECKS_ARE_ENABLED
+  // uncomment the following definition if abort on internal errors is desired
+  #define MF_SANITY_CHECKS_ARE_ENABLED
 #endif
+
 
 #endif

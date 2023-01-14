@@ -14,10 +14,7 @@
 
 #include <regex>
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 
 #include "oahOah.h"
@@ -66,7 +63,7 @@ msr2brailleManPageGenerateAtom::~msr2brailleManPageGenerateAtom ()
 
 void msr2brailleManPageGenerateAtom::applyElement (std::ostream& os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a msr2brailleManPageGenerateAtom" <<
@@ -79,7 +76,7 @@ void msr2brailleManPageGenerateAtom::applyElement (std::ostream& os)
 
 void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleManPageGenerateAtom::acceptIn ()" <<
@@ -92,7 +89,7 @@ void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2brailleManPageGenerateAtom>*> (v)) {
         S_msr2brailleManPageGenerateAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2brailleManPageGenerateAtom::visitStart ()" <<
@@ -105,7 +102,7 @@ void msr2brailleManPageGenerateAtom::acceptIn (basevisitor* v)
 
 void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleManPageGenerateAtom::acceptOut ()" <<
@@ -118,7 +115,7 @@ void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2brailleManPageGenerateAtom>*> (v)) {
         S_msr2brailleManPageGenerateAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2brailleManPageGenerateAtom::visitEnd ()" <<
@@ -131,7 +128,7 @@ void msr2brailleManPageGenerateAtom::acceptOut (basevisitor* v)
 
 void msr2brailleManPageGenerateAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleManPageGenerateAtom::browseData ()" <<
@@ -242,7 +239,7 @@ R"(Write man page data for EXECUTABLE to standard output.)",
         fOah2manPage));
 }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void msr2brailleManPageOahGroup::initializeManPagetracingOah ()
 {
   S_oahSubGroup
@@ -269,7 +266,7 @@ void msr2brailleManPageOahGroup::initializeXml2brailleManPageOahGroup (
   initializeManPageGenerateOptions (
     theOah2manPage);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeManPagetracingOah ();
@@ -291,7 +288,7 @@ void msr2brailleManPageOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleManPageOahGroup::acceptIn ()" <<
@@ -304,7 +301,7 @@ void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2brailleManPageOahGroup>*> (v)) {
         S_msr2brailleManPageOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2brailleManPageOahGroup::visitStart ()" <<
@@ -317,7 +314,7 @@ void msr2brailleManPageOahGroup::acceptIn (basevisitor* v)
 
 void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleManPageOahGroup::acceptOut ()" <<
@@ -330,7 +327,7 @@ void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2brailleManPageOahGroup>*> (v)) {
         S_msr2brailleManPageOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2brailleManPageOahGroup::visitEnd ()" <<
@@ -343,7 +340,7 @@ void msr2brailleManPageOahGroup::acceptOut (basevisitor* v)
 
 void msr2brailleManPageOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleManPageOahGroup::browseData ()" <<
@@ -382,7 +379,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2brailleManPageOahGroup&
 S_msr2brailleManPageOahGroup createGlobalXml2brailleManPageOahHandler (
   const S_oahVisitor& theOah2manPage)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global xml2blrManPage OAH group" <<

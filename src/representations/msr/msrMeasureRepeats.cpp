@@ -11,12 +11,11 @@
 
 #include <iomanip>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -54,11 +53,13 @@ msrMeasureRepeatElement::msrMeasureRepeatElement (
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     upLinkToMeasureRepeat != nullptr,
     "upLinkToMeasureRepeat is null");
+#endif
 
   fMeasureRepeatElementUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
 }
@@ -71,7 +72,7 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
   const S_msrSegment& segment,
   std::string       context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending segment '" << segment <<
@@ -82,11 +83,13 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     segment != nullptr,
     "segment is null");
+#endif
 
   fMeasureRepeatElementsList.push_back (segment);
 }
@@ -96,7 +99,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
   S_msrMeasureRepeat  measureRepeat,
   std::string          context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending measureRepeat '" << measureRepeat <<
@@ -107,11 +110,13 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measureRepeat != nullptr,
     "measureRepeat is null");
+#endif
 
   fMeasureRepeatElementsList.push_back (measureRepeat);
 }
@@ -121,7 +126,7 @@ void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
   const S_msrVoiceElement& voiceElement,
   std::string       context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending voice element '" << voiceElement <<
@@ -132,11 +137,13 @@ void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     voiceElement != nullptr,
     "voiceElement is null");
+#endif
 
   fMeasureRepeatElementsList.push_back (voiceElement);
 }
@@ -444,11 +451,13 @@ msrMeasureRepeatPattern::msrMeasureRepeatPattern (
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     upLinkToMeasureRepeat != nullptr,
     "upLinkToMeasureRepeat is null");
+#endif
 
   fUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
 }
@@ -459,7 +468,7 @@ msrMeasureRepeatPattern::~msrMeasureRepeatPattern ()
 void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
   const S_msrSegment& measureRepeatPatternSegment)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
       "Setting measures repeat pattern segment containing " <<
@@ -471,11 +480,13 @@ void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatPatternSegment != nullptr,
     "measureRepeatPatternSegment is null");
+#endif
 
   fMeasureRepeatPatternSegment =
     measureRepeatPatternSegment;
@@ -639,11 +650,13 @@ msrMeasureRepeatReplicas::msrMeasureRepeatReplicas (
   const S_msrMeasureRepeat& upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     upLinkToMeasureRepeat != nullptr,
     "upLinkToMeasureRepeat is null");
+#endif
 
   fUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
 }
@@ -654,7 +667,7 @@ msrMeasureRepeatReplicas::~msrMeasureRepeatReplicas ()
 void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
   const S_msrSegment& measureRepeatReplicasSegment)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
       "Setting measures repeat replicas segment containing " <<
@@ -666,11 +679,13 @@ void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatReplicasSegment != nullptr,
     "measureRepeatReplicasSegment is null");
+#endif
 
   fMeasureRepeatReplicasSegment =
     measureRepeatReplicasSegment;
@@ -840,19 +855,23 @@ msrMeasureRepeat::msrMeasureRepeat (
   const S_msrVoice& upLinkToVoice)
     : msrSegmentElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatMeasuresNumber > 0,
     "measureRepeatMeasuresNumber is not positive");
+#endif
 
   fMeasureRepeatMeasuresNumber = measureRepeatMeasuresNumber;
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatSlashesNumber > 0,
     "measureRepeatSlashesNumber is not positive");
+#endif
 
   fMeasureRepeatSlashesNumber  = measureRepeatSlashesNumber;
 
@@ -869,7 +888,7 @@ msrMeasureRepeat::~msrMeasureRepeat ()
 S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of measures repeat '" <<
@@ -879,11 +898,13 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrMeasureRepeat
     newbornClone =
@@ -899,7 +920,7 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
 void msrMeasureRepeat::setMeasureRepeatPattern (
   const S_msrMeasureRepeatPattern& measureRepeatPattern)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
       "Setting measures repeat pattern containing " <<
@@ -912,11 +933,13 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatPattern != nullptr,
     "measureRepeatPattern is null");
+#endif
 
   fMeasureRepeatPattern = measureRepeatPattern;
 
@@ -928,7 +951,7 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
 void msrMeasureRepeat::setMeasureRepeatReplicas (
   const S_msrMeasureRepeatReplicas& measureRepeatReplicas)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
       "Setting measures repeat replicas containing " <<
@@ -941,11 +964,13 @@ void msrMeasureRepeat::setMeasureRepeatReplicas (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatReplicas != nullptr,
     "measureRepeatReplicas is null");
+#endif
 
   fMeasureRepeatReplicas = measureRepeatReplicas;
 
@@ -959,11 +984,13 @@ int msrMeasureRepeat::fetchMeasureRepeatReplicasNumber () const
   int patternMeasuresNumber =
     fetchMeasureRepeatPatternMeasuresNumber ();
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     patternMeasuresNumber > 0,
     "patternMeasuresNumber is not positive");
+#endif
 
   return
     fetchMeasureRepeatReplicasMeasuresNumber ()
@@ -973,11 +1000,13 @@ int msrMeasureRepeat::fetchMeasureRepeatReplicasNumber () const
 
 int msrMeasureRepeat::fetchMeasureRepeatPatternMeasuresNumber () const
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fMeasureRepeatPattern != nullptr,
     "fMeasureRepeatPattern is null");
+#endif
 
   return
     fMeasureRepeatPattern->
@@ -986,11 +1015,13 @@ int msrMeasureRepeat::fetchMeasureRepeatPatternMeasuresNumber () const
 
 int msrMeasureRepeat::fetchMeasureRepeatReplicasMeasuresNumber () const
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fMeasureRepeatReplicas != nullptr,
     "fMeasureRepeatReplicas is null");
+#endif
 
   return
     fMeasureRepeatReplicas->
@@ -1065,7 +1096,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
     score->getInhibitMeasureRepeatReplicasBrowsing ();
 
   if (inhibitMeasureRepeatReplicasBrowsing) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalMsrOahGroup->getTraceMsrVisitors () || gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
       gLogStream <<
         "% ==> visiting measures repeat replicas is inhibited" <<
@@ -1207,7 +1238,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     // print the current measures repeat build phase
     const int fieldWidth = 36;

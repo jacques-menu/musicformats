@@ -43,13 +43,13 @@ A typical use of exceptions in \lpsrToLilypond{lpsr2lilypondInterface.cpp} is:
 \end{lstlisting}
 
 
-One finds in \wae{mfEnableAbortToDebugErrors.h} the {\tt MF_ABORT_TO_DEBUG_ERRORS} macro to help debugging the code base:
+One finds in \wae{mfEnableAbortToDebugErrorsSetting.h} the {\tt MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED} macro to help debugging the code base:
 \begin{lstlisting}[language=CPlusPlus]
 // comment the following definition if abort on internal errors is desired
 // CAUTION: DON'T USE THIS IN PRODUCTION CODE,
 // since that could kill a session on a \Web\ server, for example
 
-#ifndef MF_ABORT_TO_DEBUG_ERRORS
-  #define MF_ABORT_TO_DEBUG_ERRORS
+#ifndef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+  #define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 #endif
 \end{lstlisting}

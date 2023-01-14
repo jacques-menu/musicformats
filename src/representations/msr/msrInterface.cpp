@@ -12,8 +12,10 @@
 #include <iostream>
 #include <fstream>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfTiming.h"
 
 #include "msr2namesVisitor.h"
@@ -21,10 +23,7 @@
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -100,11 +99,13 @@ void displayMsrScore (
   S_msrScore         theMsrScore,
   const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock =  clock ();
@@ -129,7 +130,7 @@ void displayMsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -158,11 +159,13 @@ void displayMsrScoreFull (
   S_msrScore         theMsrScore,
   const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
@@ -190,7 +193,7 @@ void displayMsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -220,16 +223,18 @@ void displayMsrScoreSummary (
   S_msrOahGroup&      msrOpts,
   const std::string&  passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -262,7 +267,7 @@ void displayMsrScoreSummary (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -275,16 +280,18 @@ void displayMsrScoreNames (
   S_msrOahGroup&      msrOpts,
   const std::string&  passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -317,7 +324,7 @@ void displayMsrScoreNames (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -329,11 +336,13 @@ void displayMsrScoreSlices (
   S_msrScore         theMsrScore,
   const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
@@ -361,7 +370,7 @@ void displayMsrScoreSlices (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,

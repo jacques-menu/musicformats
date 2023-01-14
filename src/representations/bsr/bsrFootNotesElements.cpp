@@ -52,7 +52,7 @@ bsrFootNotesElement::~bsrFootNotesElement ()
 
 void bsrFootNotesElement::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrFootNotesElement::acceptIn ()" <<
@@ -65,7 +65,7 @@ void bsrFootNotesElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrFootNotesElement>*> (v)) {
         S_bsrFootNotesElement elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrFootNotesElement::visitStart ()" <<
@@ -78,7 +78,7 @@ void bsrFootNotesElement::acceptIn (basevisitor* v)
 
 void bsrFootNotesElement::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrFootNotesElement::acceptOut ()" <<
@@ -91,7 +91,7 @@ void bsrFootNotesElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrFootNotesElement>*> (v)) {
         S_bsrFootNotesElement elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrFootNotesElement::visitEnd ()" <<

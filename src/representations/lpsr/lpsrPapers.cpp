@@ -11,14 +11,13 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
+// #include "mfEnableSanityChecksSetting.h" JMI
+
 #include "visitor.h"
 
 #include "lpsrPapers.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
@@ -53,7 +52,8 @@ lpsrPaper::lpsrPaper (
   const S_msrPageLayout& pageLayout)
     : lpsrElement (inputLineNumber)
 {
-  // sanity checks
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 
   // those always fail, without any consequences... Why??? JMI
 //   mfAssert (
@@ -64,6 +64,7 @@ lpsrPaper::lpsrPaper (
 //     __FILE__, __LINE__,
 //     pageLayout != nullptr,
 //     "pageLayout is null");
+// #endif
 
   fScaling = scaling;
   fPageLayout = pageLayout;
@@ -121,7 +122,7 @@ lpsrPaper::~lpsrPaper ()
 
 void lpsrPaper::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPaper::acceptIn ()" <<
@@ -134,7 +135,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPaper>*> (v)) {
         S_lpsrPaper elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPaper::visitStart ()" <<
@@ -147,7 +148,7 @@ void lpsrPaper::acceptIn (basevisitor* v)
 
 void lpsrPaper::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPaper::acceptOut ()" <<
@@ -160,7 +161,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPaper>*> (v)) {
         S_lpsrPaper elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPaper::visitEnd ()" <<
@@ -173,7 +174,7 @@ void lpsrPaper::acceptOut (basevisitor* v)
 
 void lpsrPaper::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPaper::browseData ()" <<
@@ -193,7 +194,7 @@ void lpsrPaper::browseData (basevisitor* v)
     browser.browse (*fPageLayout);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrPaper::browseData ()" <<

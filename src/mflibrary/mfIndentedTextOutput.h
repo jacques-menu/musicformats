@@ -12,6 +12,7 @@
 #ifndef ___mfIndentedTextOutput___
 #define ___mfIndentedTextOutput___
 
+#include <cassert>
 #include <sstream>   // for std::stringbuf
 
 #include "exports.h"
@@ -149,19 +150,19 @@ class EXP mfIndentedStreamBuf: public std::stringbuf
 {
   private:
 
-    std::ostream&              fOutputSteam;
+    std::ostream&         fOutputSteam;
     mfOutputIndenter&     fOutputIndenter;
 
   public:
 
     // constructor
                           mfIndentedStreamBuf (
-                            std::ostream&   outputStream,
+                            std::ostream&     outputStream,
                             mfOutputIndenter& theIndenter)
-                            : fOutputSteam (
-                                outputStream),
-                              fOutputIndenter (
-                                theIndenter)
+                              : fOutputSteam (
+                                  outputStream),
+                                fOutputIndenter (
+                                  theIndenter)
                               {}
 
     // indentation
@@ -197,7 +198,7 @@ Usage:
     // ------------------------------------------------------
 
     static SMARTP<mfIndentedOstream> create (
-                            std::ostream&        theOStream,
+                            std::ostream&     theOStream,
                             mfOutputIndenter& theIndenter)
                               {
                                 mfIndentedOstream* o = new mfIndentedOstream (
@@ -212,13 +213,13 @@ Usage:
     // ------------------------------------------------------
 
                           mfIndentedOstream (
-                            std::ostream&        theOStream,
+                            std::ostream&     theOStream,
                             mfOutputIndenter& theIndenter)
-                            : std::ostream (
-                                & fIndentedStreamBuf),
-                              fIndentedStreamBuf (
-                                theOStream,
-                                theIndenter)
+                              : std::ostream (
+                                  & fIndentedStreamBuf),
+                                fIndentedStreamBuf (
+                                  theOStream,
+                                  theIndenter)
                               {}
 
     virtual               ~mfIndentedOstream () {};
@@ -248,7 +249,7 @@ Usage:
     // ------------------------------------------------------
 
     // mfIndentedOstream just uses an mfIndentedStreamBuf
-    mfIndentedStreamBuf     fIndentedStreamBuf;
+    mfIndentedStreamBuf  fIndentedStreamBuf;
 
 };
 typedef SMARTP<mfIndentedOstream> S_indentedOstream;

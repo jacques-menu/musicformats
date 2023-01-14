@@ -12,16 +12,15 @@
 #include <iostream>
 #include <fstream>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfTiming.h"
 
 #include "bsrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahEarlyOptions.h"
 
@@ -39,11 +38,13 @@ void displayBsrScore (
   S_bsrOahGroup bsrOpts,
   const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     bsrScore != nullptr,
     "bsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
@@ -69,8 +70,8 @@ void displayBsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    "Display the BSR as text",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+    gWaeHandler->displayTheBSRAsText (), // JMI ??? v0.9.66
     mfTimingItemKind::kOptional,
     startClock,
     endClock);
@@ -83,11 +84,13 @@ void displayBsrScoreFull (
   S_bsrOahGroup bsrOpts,
   const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     bsrScore != nullptr,
     "bsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
@@ -118,11 +121,9 @@ void displayBsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    std::string ("Display the BSR as text")
-      +
-    ", "
-      +
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+    gWaeHandler->displayTheBSRAsText ()
+      + ", " +
     gWaeHandler->fullVersion (),
     mfTimingItemKind::kOptional,
     startClock,

@@ -15,10 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 
 #include "msdrLayers.h"
@@ -47,7 +44,7 @@ msdrLayer::msdrLayer (
   int                inputLineNumber,
   const std::string& layerNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Creating MSDR music \"" << asString () << "\"" <<
@@ -298,7 +295,7 @@ void msdrLayer::printFull (std::ostream& os) const
     regularVoiceStaffSequentialNumberAsString () <<
     std::endl;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // regular measure ends detection
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -355,7 +352,7 @@ void msdrLayer::print (std::ostream& os) const
 
   const int fieldWidth = 41;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // print the voice measures flat list
   size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();

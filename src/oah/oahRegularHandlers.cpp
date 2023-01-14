@@ -12,12 +12,11 @@
 #include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -28,7 +27,6 @@
 #include "oahEarlyOptions.h"
 
 #include "oahRegularHandlers.h"
-
 
 
 namespace MusicFormats
@@ -63,7 +61,7 @@ oahRegularHandler::oahRegularHandler (
       insiderOahHandler->getHandlerUsage ())
 {
   // create the insider handler
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the insider handler for \"" <<
@@ -85,7 +83,7 @@ oahRegularHandler::~oahRegularHandler ()
 
 void oahRegularHandler::initializeOahRegularHandler ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing the regular handler \"" <<
@@ -103,7 +101,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
   // createRegularHandlerGroups() is executed
   // in the sub-classes for code homogeneity
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
   // print the options handler initial state
   gLogStream <<
@@ -128,13 +126,15 @@ void oahRegularHandler::initializeOahRegularHandler ()
 void oahRegularHandler::appendGroupToRegulalHandler (
   const S_oahGroup& group)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     group != nullptr,
     "group is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Appending group \"" <<
@@ -165,13 +165,15 @@ void oahRegularHandler::appendGroupToRegulalHandler (
 void oahRegularHandler::prependGroupToRegularHandler (
   const S_oahGroup& group)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     group != nullptr,
     "group is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Prepending group \"" <<

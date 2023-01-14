@@ -9,16 +9,15 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfcLibraryComponent.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -102,7 +101,8 @@ lpsrScore::lpsrScore (
   const S_mfcMultiComponent& multiComponent)
     : lpsrElement (inputLineNumber)
 {
-  // sanity checks
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
@@ -112,6 +112,7 @@ lpsrScore::lpsrScore (
     __FILE__, __LINE__,
     multiComponent != nullptr,
     "multiComponent is null");
+#endif
 
   fMsrScore = theMsrScore;
 
@@ -501,7 +502,7 @@ R"(
 \include "jianpu10a.ly"
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Including Jianpu definition file '" << schemeModulesName << "'" <<
@@ -548,7 +549,7 @@ R"(
 #(use-modules (scm accreg))
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Using Scheme modules '" << schemeModulesName << "'" <<
@@ -610,7 +611,7 @@ R"(
 )";
 
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Including Jianpu definition file '" << schemeModulesName << "'" <<
@@ -672,7 +673,7 @@ tongue =
      script))
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -728,7 +729,7 @@ editorialAccidental =
   #})
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -781,7 +782,7 @@ fffff = #(make-dynamic-script "fffff")
 ffffff = #(make-dynamic-script "ffffff")
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -882,7 +883,7 @@ tupletsCurvedBrackets = {
 }
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -937,7 +938,7 @@ after =
    #})
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1050,7 +1051,7 @@ tempoNotesRelationship =
      #}))
 )!";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1243,7 +1244,7 @@ glissandoTextOn =
 glissandoTextOff = \revert Glissando.stencil
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1312,7 +1313,7 @@ otherDynamic =
        #}))
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1633,7 +1634,7 @@ schleifer =
  )
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1705,7 +1706,7 @@ scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
 %}
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -1768,7 +1769,7 @@ damp = \markup {
 }
 )!";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1825,7 +1826,7 @@ dampAll = \markup
 }
 )!";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1887,7 +1888,7 @@ whiteNoteHeads =
    )
 )!";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -1942,7 +1943,7 @@ boxAroundNextBarNumber = {
 }
 )!";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2037,7 +2038,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2114,7 +2115,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2173,7 +2174,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2301,7 +2302,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2417,7 +2418,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2510,7 +2511,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2586,7 +2587,7 @@ R"(
 
   schemeFunctionCode = s.str ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
@@ -2633,7 +2634,7 @@ R"(
 #(define modTimeAsString (strftime "%d/%m/%Y - %H:%M:%S" (localtime modTimeSignature)))
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -2671,7 +2672,7 @@ R"(
 \pointAndClickOff
 )";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme functions for '" << schemeFunctionName << "'" <<
@@ -2722,7 +2723,7 @@ void lpsrScore::appendLyricsUseToStoreCommand (const S_msrStanza& stanza)
 
 void lpsrScore::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrScore::acceptIn ()" <<
@@ -2735,7 +2736,7 @@ void lpsrScore::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrScore>*> (v)) {
         S_lpsrScore elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrScore::visitStart ()" <<
@@ -2748,7 +2749,7 @@ void lpsrScore::acceptIn (basevisitor* v)
 
 void lpsrScore::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrScore::acceptOut ()" <<
@@ -2761,7 +2762,7 @@ void lpsrScore::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrScore>*> (v)) {
         S_lpsrScore elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrScore::visitEnd ()" <<
@@ -2774,7 +2775,7 @@ void lpsrScore::acceptOut (basevisitor* v)
 
 void lpsrScore::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrScore::browseData ()" <<
@@ -2870,7 +2871,7 @@ void lpsrScore::browseData (basevisitor* v)
     } // for
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrScore::browseData ()" <<
@@ -2883,17 +2884,17 @@ void lpsrScore::printFull (std::ostream& os) const
 {
   os <<
     std::string ("LPSR Score")
-      +
-    ", "
-      +
+      + ", " +
     gWaeHandler->fullVersion () <<
     std::endl << std::endl;
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fMsrScore != nullptr,
     "fMsrScore is null");
+#endif
 
   ++gIndenter;
 
@@ -3103,11 +3104,13 @@ void lpsrScore::print (std::ostream& os) const
     "LPSR Score, short version" <<
     std::endl << std::endl;
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fMsrScore != nullptr,
     "fMsrScore is null");
+#endif
 
   ++gIndenter;
 

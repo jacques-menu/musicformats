@@ -16,8 +16,9 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-#include "msrScores.h"
+#include "mfPasses.h"
 #include "msrPathToVoice.h"
+#include "msrScores.h"
 
 #include "lpsrScores.h"
 
@@ -27,12 +28,9 @@
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "musicxml2lilypondComponent.h"
@@ -74,7 +72,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   std::ostream&       err,
   const S_oahHandler& handler)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
       std::endl <<
@@ -125,7 +123,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       translateMxsrToMsrSkeleton (
         theMxsr,
         gGlobalMsrOahGroup,
-        gWaeHandler->pass2a (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_2a),
         gWaeHandler->createAnMSRSqueletonFromTheMXSR ());
   }
   catch (mxsr2msrException& e) {
@@ -156,7 +154,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     populateMsrSkeletonFromMxsr (
       theMxsr,
       firstMsrScore,
-        gWaeHandler->pass2b (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_2b),
         gWaeHandler->populateTheMSRSqueletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
@@ -202,7 +200,7 @@ if (false) { // JMI
           firstMsrScore,
           gGlobalMsrOahGroup,
           gGlobalMsr2msrOahGroup,
-          gWaeHandler->pass3 (),
+          gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
           gWaeHandler->convertTheFirstMSRIntoASecondMSR (),
           pathToVoice);
     } // for
@@ -213,7 +211,7 @@ else {
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gWaeHandler->pass3 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
 }
   }
@@ -252,7 +250,7 @@ else {
         secondMsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->pass4 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
         gWaeHandler->convertTheSecondMSRIntoAnLPSR (),
         createMusicxml2lilypondConverterComponent ());
   }
@@ -273,7 +271,7 @@ else {
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "xmlFile2lilypond() outputFileName = \"" <<
@@ -284,7 +282,7 @@ else {
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
@@ -305,7 +303,7 @@ else {
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->pass5 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_5),
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
     }
@@ -320,7 +318,7 @@ else {
   }
 
   else {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2lilypond() output goes to file \"" <<
@@ -331,7 +329,7 @@ else {
 #endif
 
     // open output file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<
@@ -373,7 +371,7 @@ else {
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->pass5 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_5),
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
     }
@@ -421,7 +419,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   }
 
   else {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   err <<
     "xmlFile2musicxml(), sxmlfile is NULL" <<
@@ -449,7 +447,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       handlerOptionsAndArguments;
@@ -468,7 +466,7 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<
@@ -604,7 +602,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        gWaeHandler->pass1 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
@@ -630,7 +628,7 @@ EXP mfMusicformatsErrorKind musicxmlFd2lilypond (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gWaeHandler->pass1 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
@@ -655,7 +653,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2lilypondWithHandler (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gWaeHandler->pass1 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
@@ -681,7 +679,7 @@ EXP mfMusicformatsErrorKind musicxmlString2lilypond (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gWaeHandler->pass1 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2lilypond() even if sxmlfile is null,
@@ -706,7 +704,7 @@ mfMusicformatsErrorKind convertMusicxmlString2lilypondWithHandler (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gWaeHandler->pass1 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2lilypond() even if sxmlfile is null,

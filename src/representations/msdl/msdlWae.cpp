@@ -11,7 +11,7 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "mfEnableAbortToDebugErrors.h"
+#include "mfEnableAbortToDebugErrorsSetting.h"
 
 #include "waeInterface.h"
 #include "msdlWae.h"
@@ -75,7 +75,7 @@ EXP void msdlInternalError (
     sourceCodeLineNumber,
     message);
 
-#ifdef MF_ABORT_TO_DEBUG_ERRORS
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
 #endif
 

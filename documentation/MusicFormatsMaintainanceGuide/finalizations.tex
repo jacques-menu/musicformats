@@ -132,7 +132,7 @@ A typical example of \cascading finalization is \method{msrPart}{finalizePartAnd
 void msrPart::finalizePartAndAllItsMeasures (
   int inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "Finalizing part clone " <<
@@ -142,7 +142,7 @@ void msrPart::finalizePartAndAllItsMeasures (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Finalizing all the measures of part \"" <<
@@ -180,7 +180,7 @@ void msrPart::finalizePartAndAllItsMeasures (
 void msrPart::finalizePart (
   int inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "Finalizing part " <<
@@ -247,7 +247,7 @@ void msrPart::finalizePart (
 \begin{lstlisting}[language=CPlusPlus]
 void msrStaff::finalizeStaff (int inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     gLogStream <<
       "Finalizing staff \"" <<
@@ -260,7 +260,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
   ++gIndenter;
 
   // finalize the voices
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Finalizing the voices in staff \"" <<
@@ -529,7 +529,7 @@ void msrMeasure::finalizeRegularMeasure (
         getPartMeasuresWholeNotesDurationsVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Finalizing regular measure " <<
@@ -548,7 +548,7 @@ void msrMeasure::finalizeRegularMeasure (
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -612,7 +612,7 @@ void msrMeasure::finalizeRegularMeasure (
         ==
       fFullMeasureWholeNotesDuration
     ) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasures ()) {
         gLogStream <<
           "Note '" <<
@@ -633,7 +633,7 @@ void msrMeasure::finalizeRegularMeasure (
     }
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -673,7 +673,7 @@ void msrMeasure::finalizeHarmonyMeasure (
     harmoniesPart != nullptr,
     "harmoniesPart is null");
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Finalizing harmonies measure " <<
@@ -690,7 +690,7 @@ void msrMeasure::finalizeHarmonyMeasure (
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -698,7 +698,7 @@ void msrMeasure::finalizeHarmonyMeasure (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // get the harmoniesPart number of measures
   int
     harmoniesPartNumberOfMeasures =
@@ -737,7 +737,7 @@ void msrMeasure::finalizeHarmonyMeasure (
     inputLineNumber,
     measureRepeatContextKind);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -777,7 +777,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
     figuredBassPart != nullptr,
     "figuredBassPart is null");
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Finalizing figured bass measure " <<
@@ -794,7 +794,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
@@ -802,7 +802,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // get the figuredBassPart number of measures
   int
     figuredBassPartNumberOfMeasures =
@@ -841,7 +841,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
     inputLineNumber,
     measureRepeatContextKind);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,

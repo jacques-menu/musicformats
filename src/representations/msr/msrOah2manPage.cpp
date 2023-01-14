@@ -15,10 +15,7 @@
 
 #include "msrOah2manPage.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 
 #include "oahOah.h"
@@ -42,7 +39,7 @@ msrOah2manPage::~msrOah2manPage ()
 //________________________________________________________________________
 void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -72,7 +69,7 @@ void msrOah2manPage::visitStart (S_msrRenamePartAtom& elt)
 
 void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -86,7 +83,7 @@ void msrOah2manPage::visitEnd (S_msrRenamePartAtom& elt)
 //________________________________________________________________________
 void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -116,7 +113,7 @@ void msrOah2manPage::visitStart (S_msrIgnorePartAtom& elt)
 
 void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -130,7 +127,7 @@ void msrOah2manPage::visitEnd (S_msrIgnorePartAtom& elt)
 //________________________________________________________________________
 void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -160,7 +157,7 @@ void msrOah2manPage::visitStart (S_msrKeepPartAtom& elt)
 
 void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -174,7 +171,7 @@ void msrOah2manPage::visitEnd (S_msrKeepPartAtom& elt)
 //________________________________________________________________________
 void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -204,7 +201,7 @@ void msrOah2manPage::visitStart (S_msrPitchesLanguageAtom& elt)
 
 void msrOah2manPage::visitEnd (S_msrPitchesLanguageAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<

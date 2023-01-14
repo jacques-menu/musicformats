@@ -142,7 +142,7 @@ void msrSegment::browseData (basevisitor* v)
 \begin{lstlisting}[language=Terminal]
 void msr2msrTranslator::visitStart (S_msrClef& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrClef" <<

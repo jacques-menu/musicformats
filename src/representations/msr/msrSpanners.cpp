@@ -9,6 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
 #include "mfAssert.h"
@@ -99,11 +101,13 @@ msrSpanner::~msrSpanner ()
 void msrSpanner::setSpannerSideLinkToOtherEnd (
   const S_msrSpanner& sideLinkToOtherEnd)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     sideLinkToOtherEnd != nullptr,
     "sideLinkToOtherEnd is null");
+#endif
 
   // set the two-way sideLink between both ends of the spanner
   fSpannerSideLinkToOtherEnd =

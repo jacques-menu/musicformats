@@ -13,9 +13,9 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
-
-
 
 #include "mfAssert.h"
 
@@ -72,11 +72,13 @@ msrLigature::~msrLigature ()
 void msrLigature::setLigatureSideLinkToOtherEnd (
   const S_msrLigature& sideLinkToOtherEnd)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     sideLinkToOtherEnd != nullptr,
     "sideLinkToOtherEnd is null");
+#endif
 
   // set the two-way sideLink between both ends of the spanner
   fLigatureSideLinkToOtherEnd =

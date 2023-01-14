@@ -9,20 +9,19 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
 #include "mfAssert.h"
 
 #include "mfConstants.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrPartGroups.h"
 
@@ -33,7 +32,6 @@
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
-
 
 
 namespace MusicFormats
@@ -151,12 +149,14 @@ msrPartGroup::msrPartGroup (
   fPartGroupUpLinkToPartGroup = partGroupUpLinkToPartGroup;
 
 /* JMI
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fPartGroupUpLinkToScore != nullptr,
     "fPartGroupUpLinkToScore is null");
-    */
+#endif
+*/
 
   fPartGroupUpLinkToScore     = partGroupUpLinkToScore;
 
@@ -192,7 +192,7 @@ msrPartGroup::msrPartGroup (
 
   fPartGroupBarLineKind     = partGroupBarLineKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "--------------------------------------------" <<
@@ -220,12 +220,14 @@ msrPartGroup::msrPartGroup (
   fPartGroupUpLinkToPartGroup = partGroupUpLinkToPartGroup;
 
 /* JMI
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fPartGroupUpLinkToScore != nullptr,
     "fPartGroupUpLinkToScore is null");
-    */
+#endif
+*/
 
   fPartGroupUpLinkToScore     = partGroupUpLinkToScore;
 
@@ -263,7 +265,7 @@ msrPartGroup::msrPartGroup (
   fPartGroupBarLineKind     = partGroupBarLineKind;
 */
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "--------------------------------------------" <<
@@ -283,7 +285,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   const S_msrPartGroup& partGroupClone,
   const S_msrScore&     scoreClone)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "--------------------------------------------" <<
@@ -297,18 +299,22 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   // don't check partGroupClone against 0, since the partGroup stack JMI
   // that it comes from may be empty
 /* JMI
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     partGroupClone != nullptr,
     "partGroupClone is null");
-    */
+#endif
+*/
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     scoreClone != nullptr,
     "scoreClone is null");
+#endif
 
   S_msrPartGroup
     newbornClone =
@@ -407,8 +413,9 @@ void msrPartGroup::setPartGroupInstrumentName (
 }
 
 void msrPartGroup::checkPartGroupElement (
-  const S_msrPartGroupElement& partGroupElement) const // TEMP JMI v0.9.63
+  const S_msrPartGroupElement& partGroupElement) const // TEMP JMI v0.9.66
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   if (
     ((void*) partGroupElement) == (void*) 0x0000000000000001
@@ -430,17 +437,20 @@ void msrPartGroup::checkPartGroupElement (
       __FILE__, __LINE__,
       s.str ());
   }
+#endif
 }
 
 S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
   int                inputLineNumber,
   const std::string& partID)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     partID.size () > 0,
     "partID is empty");
+#endif
 
   // has this partID already been added to this part?
   if (fPartGroupPartsMap.count (partID)) {
@@ -468,7 +478,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
         this);
 
   // register it in this part group
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Appending part " <<
@@ -483,14 +493,16 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   checkPartGroupElement (part);
+#endif
 
   fPartGroupPartsMap [partID] = part;
 
   fPartGroupElementsList.push_back (part);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
     gLogStream <<
       std::endl <<
@@ -544,7 +556,7 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 {
   // register part in this part group
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Adding part " <<
@@ -560,8 +572,10 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
   // register part into this part group's data
   fPartGroupPartsMap [part->getPartID ()] = part;
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   checkPartGroupElement (part);
+#endif
 
   fPartGroupElementsList.push_back (part);
 
@@ -574,7 +588,7 @@ void msrPartGroup::removePartFromPartGroup (
   const S_msrPart& partToBeRemoved)
 {
   // register part in this part group
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Removing part " <<
@@ -639,7 +653,7 @@ void msrPartGroup::removePartFromPartGroup (
 void msrPartGroup::prependSubPartGroupToPartGroup (
   const S_msrPartGroup& partGroup)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Prepending (sub-)part group " << partGroup->getPartGroupNumber () <<
@@ -652,8 +666,10 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
 
   // register it in this part group
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   checkPartGroupElement (partGroup);
+#endif
 
   fPartGroupElementsList.push_front (partGroup);
 }
@@ -661,7 +677,7 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
 void msrPartGroup::appendSubPartGroupToPartGroup (
   const S_msrPartGroup& partGroup)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Appending (sub-)part group " << partGroup->getPartGroupNumber () <<
@@ -674,8 +690,10 @@ void msrPartGroup::appendSubPartGroupToPartGroup (
 
   // register it in this part group
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   checkPartGroupElement (partGroup);
+#endif
 
   fPartGroupElementsList.push_back (partGroup);
 }
@@ -840,7 +858,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 {
   S_msrPart result;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
     gLogStream <<
       "fetchPartFromPartGroupByItsPartID(" << partID <<
@@ -953,8 +971,10 @@ void msrPartGroup::collectPartGroupPartsList (
       ) {
       // this is a part
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       checkPartGroupElement (part);
+#endif
 
       partsList.push_back (part);
     }

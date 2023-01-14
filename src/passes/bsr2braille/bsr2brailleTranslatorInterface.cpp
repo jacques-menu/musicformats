@@ -11,10 +11,9 @@
 
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableSanityChecksSetting.h"
+
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 #include "mfTiming.h"
@@ -39,11 +38,13 @@ void translateBsrToBraille (
   const std::string&    passDescription,
   std::ostream&         brailleOutputStream)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     originalBsrScore != nullptr,
     "originalBsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
@@ -51,7 +52,7 @@ void translateBsrToBraille (
   std::string separator =
     "%--------------------------------------------------------------";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       std::endl <<

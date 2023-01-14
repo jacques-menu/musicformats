@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "msrWae.h"
 
@@ -43,7 +43,7 @@ S_msrDivisions msrDivisions::create (
 
 S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
  if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
     gLogStream <<
       "Creating a newborn clone of divisions '" <<
@@ -79,7 +79,7 @@ msrDivisions::~msrDivisions ()
 
 void msrDivisions::initializeDivisions ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     gLogStream <<
       "Initializing divisions" <<
@@ -142,7 +142,7 @@ void msrDivisions::initializeDivisions ()
   }
 
   // print the durations divisions if needed
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
     printDurationKindsDivisions (gLogStream);
   }
@@ -253,7 +253,7 @@ std::string msrDivisions::divisionsAsMsrString (
   // the result is a base duration, followed by a suffix made of
   // either a sequence of dots or a multiplication factor
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
     const int fieldWidth = 16;
 
@@ -305,7 +305,7 @@ std::string msrDivisions::divisionsAsMsrString (
       result =
         msrDurationKindAsString (baseDurationKind);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
         const int fieldWidth = 22;
 
@@ -340,7 +340,7 @@ std::string msrDivisions::divisionsAsMsrString (
     int nextDivisionsInList =
       baseDurationDivisions / 2;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
       const int fieldWidth = 22;
 
@@ -366,7 +366,7 @@ std::string msrDivisions::divisionsAsMsrString (
         divisions,
         baseDurationDivisions);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
         const int fieldWidth = 22;
 
@@ -395,7 +395,7 @@ std::string msrDivisions::divisionsAsMsrString (
         remainingDivisions -= nextDivisionsInList;
         nextDivisionsInList /= 2;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
           const int fieldWidth = 22;
 
@@ -423,7 +423,7 @@ std::string msrDivisions::divisionsAsMsrString (
         }
       } // while
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
         const int fieldWidth = 24;
 
@@ -456,7 +456,7 @@ std::string msrDivisions::divisionsAsMsrString (
 
   numberOfDotsNeeded = dotsNumber;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
     gLogStream <<
       "<-- divisionsAsMsrString (): returns " << result <<

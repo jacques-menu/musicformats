@@ -14,14 +14,13 @@
 
 #include <regex>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -46,7 +45,7 @@ namespace MusicFormats
 //   char*                argv[],
 //   mfStringsPairVector& stringPairVector)
 // {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //     gLogStream <<
 //       "Converting argc/argv to a string pair vector" <<
@@ -66,7 +65,7 @@ namespace MusicFormats
 //   for (int i = 1; i < argc; ++i) {
 //     std::string currString = argv [i];
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //       gLogStream <<
 //         "--> currentOption: " << currentOption <<
@@ -110,7 +109,7 @@ namespace MusicFormats
 //       std::make_pair (
 //         currentOption, ""));
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 //     displayStringPairVector (
 //       stringPairVector,
@@ -183,7 +182,7 @@ EXP void displayStringPairVector (
 //
 //   argvElements2stringsVector (argc, argv, stringsVector);
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (getEarlyTracingOah ()) {
 //     gLogStream <<
 //       "arguments2optionsVector: stringsVector size: " <<
@@ -211,7 +210,7 @@ EXP void displayStringPairVector (
 //     for (size_t i = 0; i < stringsVectorSize; ++i) {
 //       std::string str = stringsVector [i];
 //
-//   #ifdef OAH_TRACING_IS_ENABLED
+//   #ifdef MF_TRACING_IS_ENABLED
 //       if (getEarlyTracingOah ()) {
 //         gLogStream << "--> curOption: " << curOption << std::endl;
 //         gLogStream << "--> str     : " << str << std::endl;
@@ -305,7 +304,7 @@ EXP void displayStringPairVector (
 //   char                   *argv[],
 //   oahOptionsAndArguments optionsAndArguments)
 // {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //     gLogStream <<
 //       "Converting argc/argv to options and arguments" <<
@@ -323,7 +322,7 @@ EXP void displayStringPairVector (
 //   size_t stringsVectorSize =
 //     stringsVector.size ();
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //     gLogStream <<
 //       "Converting argc/argv to options and arguments" <<
@@ -349,7 +348,7 @@ EXP void displayStringPairVector (
 //   if (stringsVectorSize) {
 //     for (std::string currString: stringsVector) {
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //         gLogStream <<
 //           "--> currentOption: " << currentOption <<
@@ -391,7 +390,7 @@ EXP void displayStringPairVector (
 //     optionsAndArguments.appendOption (
 //       currentOption, "");
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 //     gLogStream <<
 //       optionsAndArguments;
@@ -997,7 +996,7 @@ oahPrefix::~oahPrefix ()
 
 void oahPrefix::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahPrefix::acceptIn ()" <<
@@ -1010,7 +1009,7 @@ void oahPrefix::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahPrefix>*> (v)) {
         S_oahPrefix elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahPrefix::visitStart ()" <<
@@ -1023,7 +1022,7 @@ void oahPrefix::acceptIn (basevisitor* v)
 
 void oahPrefix::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahPrefix::acceptOut ()" <<
@@ -1036,7 +1035,7 @@ void oahPrefix::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahPrefix>*> (v)) {
         S_oahPrefix elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahPrefix::visitEnd ()" <<
@@ -1049,7 +1048,7 @@ void oahPrefix::acceptOut (basevisitor* v)
 
 void oahPrefix::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahPrefix::browseData ()" <<
@@ -1233,11 +1232,13 @@ oahAtom::~oahAtom ()
 void oahAtom::setUpLinkToSubGroup (
   const S_oahSubGroup& subGroup)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     subGroup != nullptr,
     "subGroup is null");
+#endif
 
   // set the atom subgroup upLink
   fUpLinkToSubGroup = subGroup;
@@ -1273,7 +1274,7 @@ S_oahHandler oahAtom::fetchAtomUpLinkToHandler () const
 void oahAtom::appendAtomToElementsList (
   const S_oahHandler& handler)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     if (false) // JMI ???
       gLogStream <<
@@ -1348,7 +1349,7 @@ void oahAtom::registerAtomAsBeingUsed ()
 
 void oahAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtom::acceptIn ()" <<
@@ -1361,7 +1362,7 @@ void oahAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahAtom>*> (v)) {
         S_oahAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtom::visitStart ()" <<
@@ -1374,7 +1375,7 @@ void oahAtom::acceptIn (basevisitor* v)
 
 void oahAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtom::acceptOut ()" <<
@@ -1387,7 +1388,7 @@ void oahAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahAtom>*> (v)) {
         S_oahAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtom::visitEnd ()" <<
@@ -1400,7 +1401,7 @@ void oahAtom::acceptOut (basevisitor* v)
 
 void oahAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtom::browseData ()" <<
@@ -1529,7 +1530,7 @@ oahAtomExpectingAValue::~oahAtomExpectingAValue ()
 
 void oahAtomExpectingAValue::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomExpectingAValue::acceptIn ()" <<
@@ -1542,7 +1543,7 @@ void oahAtomExpectingAValue::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahAtomExpectingAValue>*> (v)) {
         S_oahAtomExpectingAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtomExpectingAValue::visitStart ()" <<
@@ -1555,7 +1556,7 @@ void oahAtomExpectingAValue::acceptIn (basevisitor* v)
 
 void oahAtomExpectingAValue::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomExpectingAValue::acceptOut ()" <<
@@ -1568,7 +1569,7 @@ void oahAtomExpectingAValue::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahAtomExpectingAValue>*> (v)) {
         S_oahAtomExpectingAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtomExpectingAValue::visitEnd ()" <<
@@ -1581,7 +1582,7 @@ void oahAtomExpectingAValue::acceptOut (basevisitor* v)
 
 void oahAtomExpectingAValue::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomExpectingAValue::browseData ()" <<
@@ -1707,7 +1708,7 @@ void oahAtomImplicitlyStoringAValue::applyElement (std::ostream& os)
 
 void oahAtomImplicitlyStoringAValue::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomImplicitlyStoringAValue::acceptIn ()" <<
@@ -1720,7 +1721,7 @@ void oahAtomImplicitlyStoringAValue::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahAtomImplicitlyStoringAValue>*> (v)) {
         S_oahAtomImplicitlyStoringAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtomImplicitlyStoringAValue::visitStart ()" <<
@@ -1733,7 +1734,7 @@ void oahAtomImplicitlyStoringAValue::acceptIn (basevisitor* v)
 
 void oahAtomImplicitlyStoringAValue::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomImplicitlyStoringAValue::acceptOut ()" <<
@@ -1746,7 +1747,7 @@ void oahAtomImplicitlyStoringAValue::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahAtomImplicitlyStoringAValue>*> (v)) {
         S_oahAtomImplicitlyStoringAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtomImplicitlyStoringAValue::visitEnd ()" <<
@@ -1759,7 +1760,7 @@ void oahAtomImplicitlyStoringAValue::acceptOut (basevisitor* v)
 
 void oahAtomImplicitlyStoringAValue::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomImplicitlyStoringAValue::browseData ()" <<
@@ -1913,7 +1914,7 @@ oahAtomStoringAValue::~oahAtomStoringAValue ()
 
 void oahAtomStoringAValue::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomStoringAValue::acceptIn ()" <<
@@ -1926,7 +1927,7 @@ void oahAtomStoringAValue::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahAtomStoringAValue>*> (v)) {
         S_oahAtomStoringAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtomStoringAValue::visitStart ()" <<
@@ -1939,7 +1940,7 @@ void oahAtomStoringAValue::acceptIn (basevisitor* v)
 
 void oahAtomStoringAValue::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomStoringAValue::acceptOut ()" <<
@@ -1952,7 +1953,7 @@ void oahAtomStoringAValue::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahAtomStoringAValue>*> (v)) {
         S_oahAtomStoringAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahAtomStoringAValue::visitEnd ()" <<
@@ -1965,7 +1966,7 @@ void oahAtomStoringAValue::acceptOut (basevisitor* v)
 
 void oahAtomStoringAValue::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahAtomStoringAValue::browseData ()" <<
@@ -2123,7 +2124,7 @@ oahPureHelpAtomWithoutAValue::~oahPureHelpAtomWithoutAValue ()
 
 void oahPureHelpAtomWithoutAValue::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahPureHelpAtomWithoutAValue::acceptIn ()" <<
@@ -2136,7 +2137,7 @@ void oahPureHelpAtomWithoutAValue::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahPureHelpAtomWithoutAValue>*> (v)) {
         S_oahPureHelpAtomWithoutAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahPureHelpAtomWithoutAValue::visitStart ()" <<
@@ -2149,7 +2150,7 @@ void oahPureHelpAtomWithoutAValue::acceptIn (basevisitor* v)
 
 void oahPureHelpAtomWithoutAValue::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahPureHelpAtomWithoutAValue::acceptOut ()" <<
@@ -2162,7 +2163,7 @@ void oahPureHelpAtomWithoutAValue::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahPureHelpAtomWithoutAValue>*> (v)) {
         S_oahPureHelpAtomWithoutAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahPureHelpAtomWithoutAValue::visitEnd ()" <<
@@ -2175,7 +2176,7 @@ void oahPureHelpAtomWithoutAValue::acceptOut (basevisitor* v)
 
 void oahPureHelpAtomWithoutAValue::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahPureHelpAtomWithoutAValue::browseData ()" <<
@@ -2260,7 +2261,7 @@ oahPureHelpAtomExpectingAValue::~oahPureHelpAtomExpectingAValue ()
 
 void oahPureHelpAtomExpectingAValue::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahPureHelpAtomExpectingAValue::acceptIn ()" <<
@@ -2273,7 +2274,7 @@ void oahPureHelpAtomExpectingAValue::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahPureHelpAtomExpectingAValue>*> (v)) {
         S_oahPureHelpAtomExpectingAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahPureHelpAtomExpectingAValue::visitStart ()" <<
@@ -2286,7 +2287,7 @@ void oahPureHelpAtomExpectingAValue::acceptIn (basevisitor* v)
 
 void oahPureHelpAtomExpectingAValue::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahPureHelpAtomExpectingAValue::acceptOut ()" <<
@@ -2299,7 +2300,7 @@ void oahPureHelpAtomExpectingAValue::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahPureHelpAtomExpectingAValue>*> (v)) {
         S_oahPureHelpAtomExpectingAValue elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahPureHelpAtomExpectingAValue::visitEnd ()" <<
@@ -2312,7 +2313,7 @@ void oahPureHelpAtomExpectingAValue::acceptOut (basevisitor* v)
 
 void oahPureHelpAtomExpectingAValue::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahPureHelpAtomExpectingAValue::browseData ()" <<
@@ -2462,7 +2463,7 @@ S_oahHandler oahSubGroup::fetchSubGroupUpLinkToHandler () const
 void oahSubGroup::appendSubGroupToElementsList (
   const S_oahHandler& handler)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Appending subgroup \"" <<
@@ -2503,7 +2504,7 @@ void oahSubGroup::appendSubGroupToElementsList (
 void oahSubGroup::registerNamesInSubGroupToTheNamesToElementsMap (
   const S_oahHandler& handler)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Registering the names in subgroup \"" <<
@@ -2543,11 +2544,13 @@ void oahSubGroup::registerNamesInSubGroupToTheNamesToElementsMap (
 void oahSubGroup::appendAtomToSubGroup (
   const S_oahAtom& atom)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     atom != nullptr,
     "atom is null");
+#endif
 
   // append atom to atoms list
   fSubGroupAtomsList.push_back (
@@ -2585,7 +2588,7 @@ S_oahElement oahSubGroup::fetchOptionByNameInSubGroup (
 
 void oahSubGroup::applyElement (std::ostream& os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Applying element " <<
@@ -2625,7 +2628,7 @@ void oahSubGroup::checkSubGroupOptionsConsistency ()
 
 void oahSubGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahSubGroup::acceptIn ()" <<
@@ -2638,7 +2641,7 @@ void oahSubGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahSubGroup>*> (v)) {
         S_oahSubGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahSubGroup::visitStart ()" <<
@@ -2651,7 +2654,7 @@ void oahSubGroup::acceptIn (basevisitor* v)
 
 void oahSubGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahSubGroup::acceptOut ()" <<
@@ -2664,7 +2667,7 @@ void oahSubGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahSubGroup>*> (v)) {
         S_oahSubGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahSubGroup::visitEnd ()" <<
@@ -2677,7 +2680,7 @@ void oahSubGroup::acceptOut (basevisitor* v)
 
 void oahSubGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahSubGroup::browseData ()" <<
@@ -3084,7 +3087,7 @@ void oahSubGroup::printSubGroupSpecificHelpOrOptionsSummary (
   std::ostream&      os,
   const S_oahSubGroup& subGroup) const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     os <<
       "oahSubGroup::printSubGroupSpecificHelpOrOptionsSummary" <<
@@ -3180,7 +3183,7 @@ void oahSubGroup::printSubGroupOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
-  if (true || fNumberOfUserChoseAtomsInThisSubGroup > 0) {
+  if (true || fNumberOfUserChoseAtomsInThisSubGroup > 0) { // JMI v0.9.66
     // print the header
     os <<
       fSubGroupHeader <<
@@ -3445,7 +3448,7 @@ void oahGroup::setUpLinkToHandler (
 void oahGroup::appendGroupToElementsList (
   const S_oahHandler& handler)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Appending group \"" <<
@@ -3459,11 +3462,13 @@ void oahGroup::appendGroupToElementsList (
 
   ++gIndenter;
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     handler != nullptr,
     "handler is null");
+#endif
 
   // append this group to the elements list
   handler->
@@ -3493,7 +3498,7 @@ void oahGroup::appendGroupToElementsList (
 void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
   const S_oahHandler& handler)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Registering the names in group \"" <<
@@ -3507,11 +3512,13 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
 
   ++gIndenter;
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     handler != nullptr,
     "handler is null");
+#endif
 
   // register this group' names in handler
   handler->
@@ -3539,11 +3546,13 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
 void  oahGroup::appendSubGroupToGroup (
   const S_oahSubGroup& subGroup)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     subGroup != nullptr,
     "subGroup is null");
+#endif
 
   // append options subgroup
   fGroupSubGroupsList.push_back (
@@ -3579,7 +3588,7 @@ S_oahElement oahGroup::fetchOptionByNameInGroup (
 
 void oahGroup::applyElement (std::ostream& os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Applying element '" <<
@@ -3638,7 +3647,7 @@ void oahGroup::checkGroupOptionsConsistency ()
 
 void oahGroup::checkGroupSubGroupsOptionsConsistency ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Checking the consistency of OAH group \"" <<
@@ -3673,7 +3682,7 @@ void oahGroup::checkGroupSubGroupsOptionsConsistency ()
 
 void oahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahGroup::acceptIn ()" <<
@@ -3686,7 +3695,7 @@ void oahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahGroup>*> (v)) {
         S_oahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahGroup::visitStart ()" <<
@@ -3699,7 +3708,7 @@ void oahGroup::acceptIn (basevisitor* v)
 
 void oahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahGroup::acceptOut ()" <<
@@ -3712,7 +3721,7 @@ void oahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahGroup>*> (v)) {
         S_oahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahGroup::visitEnd ()" <<
@@ -3725,7 +3734,7 @@ void oahGroup::acceptOut (basevisitor* v)
 
 void oahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahGroup::browseData ()" <<
@@ -4054,7 +4063,7 @@ void oahGroup::printGroupAndSubGroupSpecificHelp (
   std::ostream&        os,
   const S_oahSubGroup& subGroup) const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     os <<
       "oahGroup::printGroupAndSubGroupSpecificHelp" <<
@@ -4126,7 +4135,7 @@ void oahGroup::printGroupOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
-  if (true || fNumberOfUserChoseAtomsInThisGroup > 0) {
+  if (true || fNumberOfUserChoseAtomsInThisGroup > 0) { // JMI v0.9.66
     // print the header
     os <<
       fGroupHeader <<
@@ -4345,7 +4354,7 @@ oahHandler::oahHandler (
 
 void oahHandler::initializeHandler ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing handler \"" <<
@@ -4429,7 +4438,7 @@ S_oahElement oahHandler::fetchNameInNamesToElementsMap (
 void oahHandler::registerElementNamesInHandler (
   const S_oahElement& element)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     if (true) // JMI
       gLogStream <<
@@ -4456,7 +4465,8 @@ void oahHandler::registerElementNamesInHandler (
     elementLongNameSize =
       elementLongName.size ();
 
-  // sanity checks
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
   if (elementLongNameSize == 0) {
     std::stringstream s;
 
@@ -4465,6 +4475,7 @@ void oahHandler::registerElementNamesInHandler (
 
     oahError (s.str ());
   }
+#endif
 
   if (elementShortNameSize == 0 && elementLongNameSize == 0) {
     std::stringstream s;
@@ -4607,7 +4618,7 @@ void oahHandler::registerElementNamesInHandler (
 
 void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Registering the names in handler \"" <<
@@ -4636,7 +4647,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
   }
 
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     if (false) // JMI
       displayNamesToElementsMapShort (gLogStream);
@@ -4655,7 +4666,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
 void oahHandler::appendElementToElementsList (
   const S_oahElement& element)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     if (true) // JMI
       gLogStream <<
@@ -4703,7 +4714,7 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
       getArgumentsVector ().size ();
 
   if (argumentsNumber > 0) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         mfSingularOrPluralWithoutNumber (
@@ -4734,7 +4745,7 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
   }
 
   else {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "There are no arguments to " <<
@@ -4748,7 +4759,7 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
 //______________________________________________________________________________
 void oahHandler::createTheCommonPrefixes ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the common prefixes in \"" <<
@@ -4800,7 +4811,7 @@ void oahHandler::createTheCommonPrefixes ()
 //______________________________________________________________________________
 void oahHandler::checkNoInputSourceInArgumentsVector () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Checking no input source in argument vector in \"" <<
@@ -4817,7 +4828,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
   size_t argumentsNumber =
     argumentsVector.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (
     gGlobalOahEarlyOptions.getTraceEarlyOptions ()
       &&
@@ -4888,7 +4899,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
 //______________________________________________________________________________
 void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Checking no or one input source in argument vector in \"" <<
@@ -4905,7 +4916,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
   size_t argumentsNumber =
     argumentsVector.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (
     gGlobalOahEarlyOptions.getTraceEarlyOptions  ()
       &&
@@ -5003,7 +5014,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
 //______________________________________________________________________________
 void oahHandler::checkSingleInputSourceInArgumentsVector () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Checking single input source in argument vector in \"" <<
@@ -5020,7 +5031,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
   size_t argumentsNumber =
     argumentsVector.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (
     gGlobalOahEarlyOptions.getTraceEarlyOptions  ()
       &&
@@ -5110,7 +5121,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
 void oahHandler::setOahHandlerFoundAHelpOption (
   const std::string& context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Setting oahHandlerFoundAHelpOption in handler \"" <<
@@ -5134,7 +5145,7 @@ void oahHandler::checkHandlerOwnOptionsConsistency ()
 
 void oahHandler::checkHandlerOptionsConsistency ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (
     gGlobalOahEarlyOptions.getEarlyTracePasses ()
       ||
@@ -5277,12 +5288,14 @@ void oahHandler::displayElementUsesList (std::ostream& os) const
     ) {
       S_oahElementUse elementUse = (*i);
 
-      // sanity check
-      if (false) // JMI
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+      if (false) // JMI v0.9.66
       mfAssert (
         __FILE__, __LINE__,
         elementUse != nullptr,
         "elementUse is null");
+#endif
 
       ++counter;
 
@@ -5330,7 +5343,7 @@ void oahHandler::displayOptionsAndArguments (std::ostream& os) const
 
 void oahHandler::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHandler::acceptIn ()" <<
@@ -5343,7 +5356,7 @@ void oahHandler::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_oahHandler>*> (v)) {
         S_oahHandler elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahHandler::visitStart ()" <<
@@ -5356,7 +5369,7 @@ void oahHandler::acceptIn (basevisitor* v)
 
 void oahHandler::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHandler::acceptOut ()" <<
@@ -5369,7 +5382,7 @@ void oahHandler::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_oahHandler>*> (v)) {
         S_oahHandler elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching oahHandler::visitEnd ()" <<
@@ -5382,7 +5395,7 @@ void oahHandler::acceptOut (basevisitor* v)
 
 void oahHandler::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> oahHandler::browseData ()" <<
@@ -5762,7 +5775,7 @@ void oahHandler::printHandlerAndGroupAndSubGroupSpecificHelp (
   std::ostream&      os,
   const S_oahSubGroup& subGroup) const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     os <<
       "oahHandler::printHandlerAndGroupAndSubGroupSpecificHelp" <<
@@ -5804,7 +5817,7 @@ void oahHandler::printNameIntrospectiveHelp (
   std::ostream&      os,
   const std::string& name)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     os << "Printing name \"" <<
       name <<
@@ -6013,7 +6026,7 @@ Bool oahHandler::findStringInFindableElement (
 {
   Bool result;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     os << "Finding std::string \"" <<
       lowerCaseString <<
@@ -6102,7 +6115,7 @@ void oahHandler::includeOptionsFileInHandler (
   const std::string& optionsFileName,
   std::ostream&      os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     os << "Including options file \"" <<
       optionsFileName <<
@@ -6114,7 +6127,7 @@ void oahHandler::includeOptionsFileInHandler (
 #endif
 
   // open options file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       gWaeHandler->openingOptionsFileForReading (optionsFileName) <<
@@ -6148,7 +6161,7 @@ void oahHandler::includeOptionsFileInHandler (
     fOptionsAndArguments);
 
   // close options file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
 			gWaeHandler->closingOptionsFile (optionsFileName) <<
@@ -6159,7 +6172,7 @@ void oahHandler::includeOptionsFileInHandler (
   optionsStream.close ();
 
   //  print the options and arguments found
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) { // JMI
 //     gLogStream <<
 //       fOptionsAndArguments;
@@ -6176,7 +6189,7 @@ void oahHandler::printHandlerOptionsAndArguments (
 void oahHandler::printHandlerOptionsValues (
   std::ostream& os) const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // print the options handler values header
   size_t
     handlerCommandLineElementsMultisetSize =
@@ -6207,7 +6220,7 @@ void oahHandler::printHandlerOptionsValues (
   os <<
     "The options values for ";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     os <<
       "\"" <<
@@ -6278,7 +6291,7 @@ void oahHandler::printHandlerOptionsValues (
 void oahHandler::printHandlerOptionsValuesAll (
   std::ostream& os) const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // print the options handler values header
   size_t
     handlerCommandLineElementsMultisetSize =
@@ -6308,7 +6321,7 @@ void oahHandler::printHandlerOptionsValuesAll (
 
   os <<
     "All the options values for ";
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     os <<
       "\"" <<
@@ -6411,13 +6424,15 @@ std::ostream& operator << (std::ostream& os, const S_oahHandler& elt)
 void oahHandler::registerPrefixInHandler (
   const S_oahPrefix& prefix)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     prefix != nullptr,
     "prefix is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Registering prefix " <<
@@ -6478,13 +6493,15 @@ S_oahPrefix oahHandler::fetchNameInPrefixesMap (
 void oahHandler::appendGroupToHandler (
   const S_oahGroup& group)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     group != nullptr,
     "group is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Appending group \"" <<
@@ -6511,13 +6528,15 @@ void oahHandler::appendGroupToHandler (
 void oahHandler::prependGroupToHandler (
   const S_oahGroup& group)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     group != nullptr,
     "group is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Prepending group \"" <<
@@ -6819,7 +6838,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
   const std::string& lastOptionNameFound,
   const std::string& context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     ++gIndenter;
 
@@ -6848,7 +6867,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
   }
 
 /* JMI
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       ", fHandlerOptionalValuesStyleKind: " <<
@@ -6864,7 +6883,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
 #endif
 
   if (fPendingArgvAtomExpectingAValue) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Checking missing value for pending atom expecting a value \"" <<
@@ -6906,7 +6925,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
         break;
 
       case oahElementValueKind::kElementValueOptional:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
           gLogStream <<
             "Applying default value to pending atom expecting a value \"" <<
@@ -6924,7 +6943,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
     } // switch
 
     // forget about this pending atom expecting a value
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Forgetting about the pending argv atom expecting a value when handling atom name \"" <<
@@ -6940,7 +6959,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
 
   else {
     // no atom expecting a value is pending
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "No argv atom expecting a value is pending when handling atom name \"" <<
@@ -6957,14 +6976,16 @@ void oahHandler::registerOahElementUse (
   const std::string& nameUsed,
   const std::string& valueUsed)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   if (false) // JMI
   mfAssert (
     __FILE__, __LINE__,
     elementUsed != nullptr,
     "elementUsed is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Registering element use " <<
@@ -6988,7 +7009,7 @@ void oahHandler::registerOahElementUse (
     valueUsed);
 
   // should we apply '-trace-oah' right now? JMIJMIJMI
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (
     elementUsed == gGlobalTracingOahGroup->getTracingOahBooleanAtom ()
   ) {
@@ -7000,7 +7021,7 @@ void oahHandler::registerOahElementUse (
   if (
     elementUsed == gGlobalOahOahGroup->getIncludeOptionsAndArgumentsFileAtom ()
   ) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
       gLogStream <<
         "Registering element use " <<
@@ -7042,14 +7063,16 @@ void oahHandler::registerOahElementUseInLaunchCommand (
   const std::string&  nameUsed,
   const std::string&  valueUsed)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   if (false) // JMI
   mfAssert (
     __FILE__, __LINE__,
     elementUsed != nullptr,
     "elementUsed is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Registering element use " <<
@@ -7217,7 +7240,7 @@ void oahHandler::handleOptionPrefixName (
   size_t             equalsSignPosition,
   const std::string& stringAfterEqualsSign)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Handling option prefix name \"" <<
@@ -7239,7 +7262,7 @@ void oahHandler::handleOptionPrefixName (
 
   size_t chunksListSize = chunksList.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "There are " << chunksListSize << " chunk[s]" <<
@@ -7288,7 +7311,7 @@ void oahHandler::handleOptionPrefixName (
           uncontractedOptionName =
             prefix->getPrefixErsatz () + singleOptionName;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
           gLogStream <<
             "Expanding option \"" << singleOptionName <<
@@ -7326,7 +7349,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
 {
   Bool result (true); // until the contrary is known
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Checking whether optionName \"" <<
@@ -7336,11 +7359,13 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     optionName.size () != 0,
     "optionName.size () == 0");
+#endif
 
   ++gIndenter;
 
@@ -7354,7 +7379,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
   ) {
     std::string singleCharacterString (1, (*i));
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
       gLogStream <<
         "Considering single-character '" << singleCharacterString << "'" <<
@@ -7380,7 +7405,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     }
   } // for
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
       gLogStream << std::endl;
     }
@@ -7389,7 +7414,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
   size_t clusterElementsListSize =
     clusterElementsList.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "clusterElementsListSize: " << clusterElementsListSize <<
@@ -7440,7 +7465,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
   size_t optionNameSize =
     optionName.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "optionNameSize: " << optionNameSize <<
@@ -7463,7 +7488,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
       S_oahElement element = (*i);
 
       // handle element name
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       if (element) { // JMI should not be necessary...
         gLogStream <<
@@ -7480,7 +7505,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
   }
 
   else {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "OptionName \"" <<
@@ -7509,7 +7534,7 @@ void oahHandler::handleNameContainingEqualSign (
     stringAfterEqualsSign =
       optionName.substr (equalsSignPosition + 1);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Deciphering option name \"" <<
@@ -7530,7 +7555,7 @@ void oahHandler::handleNameContainingEqualSign (
 
   if (prefix) {
     // handle prefix name
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Option name \"" <<
@@ -7564,7 +7589,7 @@ void oahHandler::handleNameContainingEqualSign (
           stringWithDefaultValueAtom =
             dynamic_cast<oahStringWithDefaultValueAtom*>(&(*element))
       ) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
           gLogStream <<
             "Option \"" <<
@@ -7602,7 +7627,7 @@ void oahHandler::handleOptionsVectorOptionName (
   const std::string& optionName,
   const std::string& valueUsed)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Handling option name \"" <<
@@ -7625,7 +7650,7 @@ void oahHandler::handleOptionsVectorOptionName (
 
   if (element) {
     // optionName is known, let's handle it
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   gLogStream <<
     "Handling option name \"" <<
@@ -7645,7 +7670,7 @@ if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 
   else {
     // optionName is unknown
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
       if (false) // JMI
         this->printHelp (gOutputStream);
@@ -7665,7 +7690,7 @@ if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 std::string oahHandler::handleArgvOptionName (
   const std::string& optionName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Handling argv option name \"" <<
@@ -7704,7 +7729,7 @@ std::string oahHandler::handleArgvOptionName (
       currentOptionName =
         trailerAfterFirstDash.substr (1, std::string::npos);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "\"" << currentOptionName << "\" is a double-dashed option" <<
@@ -7718,7 +7743,7 @@ std::string oahHandler::handleArgvOptionName (
     // optionName is a single-dashed option
     currentOptionName = trailerAfterFirstDash;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
       gLogStream <<
         "\"" << currentOptionName << "\" is a single-dashed option" <<
@@ -7738,7 +7763,7 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
   const std::string& optionName,
   const std::string& optionValue)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       std::endl <<
@@ -7752,11 +7777,13 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     optionName.size () > 0,
     "optionName is empty");
+#endif
 
   // does optionName start with a dash?
   if (optionName.front () != '-') {
@@ -7804,7 +7831,7 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
 void oahHandler::handleArgvOptionValueOrArgument (
   const std::string& theString)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Handling argv option value or argument \"" <<
@@ -7843,7 +7870,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
   if (fPendingArgvAtomExpectingAValue) {
     // theString is the value for the pending atom expecting a value
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "The value associated to atom \"" <<
@@ -7878,7 +7905,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
     }
 
     // forget about this pending atom expecting a value
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
       gLogStream <<
         "handleArgvOptionValueOrArgument() Forgetting about the pending atom expecting a value" <<
@@ -7893,7 +7920,7 @@ void oahHandler::handleArgvOptionValueOrArgument (
   else {
     // theString is an argument
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "\"" << theString << "\" is an argument" <<
@@ -7916,7 +7943,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Handling the options from options and arguments in " <<
@@ -7931,7 +7958,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
   std::string optionsPassDescription =
     "Handle the options from the options and arguments";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -7957,7 +7984,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
 
   // initialize the history
   // only now because the library must initialized beforehand
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Initializing handler component" <<
@@ -7972,7 +7999,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
   createElementUsesListFromOptionsAndArguments ( // (pass 2)
     serviceName);
 
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //     // display the options and arguments
 //     gLogStream <<
@@ -7987,7 +8014,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
   // check the options and arguments
   checkOptionsAndArgumentsConsistency ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Result oahElementHelpOnlyKind: " <<
@@ -8000,7 +8027,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
     optionsPassDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -8020,7 +8047,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
   std::string optionsAndArgumentsPassDescription =
     gWaeHandler->handleOptionsAndArgumentsFromArgcArgv ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       optionsAndArgumentsPassDescription << " in \"" <<
@@ -8035,7 +8062,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -8054,7 +8081,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     mfDisplayArgcAndArgv (
       argc,
@@ -8071,7 +8098,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
 
   // initialize the history
   // only now because the library must initialized beforehand
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Initializing handler component" <<
@@ -8093,7 +8120,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
   // check the options and arguments
   checkOptionsAndArguments ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "result oahElementHelpOnlyKind: " <<
@@ -8106,7 +8133,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
     optionsAndArgumentsPassDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -8118,7 +8145,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
 void oahHandler::createElementUsesListFromOptionsAndArguments (
   const std::string& serviceName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Creating atom uses list from options and arguments in \"" <<
@@ -8128,6 +8155,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   switch (fHandlerUsedThruKind) {
     case oahHandlerUsedThruKind::kHandlerUsedThruUnknown: // default value
@@ -8161,10 +8189,11 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
       }
       break;
   } // switch
+#endif
 
   ++gIndenter;
 
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //     gLogStream <<
 //       fOptionsAndArguments;
@@ -8194,7 +8223,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
 //   }
 //
 //   else {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //       gLogStream <<
 //         "The options and arguments is empty in \"" <<
@@ -8212,7 +8241,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
 //   // check the options and arguments
 //   checkOptionsAndArgumentsConsistency ();
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
 //     displayOptionsAndArguments (gLogStream);
 //
@@ -8230,7 +8259,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
   // force early options tracing // TEMP JMIJMIJMI
 //   gGlobalOahEarlyOptions.setTraceEarlyOptions ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     if (false) // JMI
       this->printHelp (gOutputStream);
@@ -8243,6 +8272,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   switch (fHandlerUsedThruKind) {
     case oahHandlerUsedThruKind::kHandlerUsedThruUnknown: // default value
@@ -8276,6 +8306,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       }
       break;
   } // switch
+#endif
 
   ++gIndenter;
 
@@ -8291,7 +8322,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
 
     std::string currentString = std::string (argv [n]);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     // print current option
     gLogStream <<
@@ -8315,7 +8346,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
 
       if (currentString.size () == 1) {
         // currentString is the stdin indicator, thus an argument
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
         gLogStream <<
           "\"" << currentString << "\" is the '-' stdin indicator" <<
@@ -8324,7 +8355,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
 #endif
 
         // currentString is an argument
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
             gLogStream <<
               currentString << " is an argument" <<
@@ -8339,7 +8370,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
 
       else {
         // currentString is an option name
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
             gLogStream <<
               currentString << " is an option name" <<
@@ -8375,7 +8406,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     displayOptionsAndArguments (gLogStream);
 
@@ -8388,7 +8419,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 {
   // this is OAH handling pass 3
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Applying options from elements uses list in \"" <<
@@ -8399,7 +8430,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     displayOptionsAndArguments (gLogStream); // JMIJMIJMI
 
@@ -8431,7 +8462,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
       ++counter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
       gLogStream <<
         std::endl <<
@@ -8458,7 +8489,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 #endif
 
       if (elementUsed) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         oahElementValueKind
           atomValueExpectedKind =
@@ -8513,7 +8544,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
               atomExpectingAValue =
                 dynamic_cast<oahAtomExpectingAValue*>(&(*elementUsed))
           ) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
             if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
               gLogStream <<
                 "**** Handling atom expecting a value:" <<
@@ -8589,7 +8620,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
           }
 
           else {
-  #ifdef OAH_TRACING_IS_ENABLED
+  #ifdef MF_TRACING_IS_ENABLED
             if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
               gLogStream <<
                 "**** Handling atom not expecting a value:" <<
@@ -8643,7 +8674,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   // print the options and arguments if so chosen
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalDisplayOahGroup->getDisplayOptionsAndArguments ()) {
     printHandlerOptionsAndArguments (
       gLogStream);
@@ -8655,7 +8686,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   // print the early options if so chosen
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalDisplayOahGroup->getDisplayEarlyOptionsValues ()) {
     gGlobalOahEarlyOptions.print (
       gLogStream);
@@ -8667,7 +8698,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   // print the options values if so chosen
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalDisplayOahGroup->getDisplayOptionsValues ()) {
     printHandlerOptionsValues (
       gLogStream);
@@ -8675,7 +8706,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalDisplayOahGroup->getDisplayOptionsValuesAll ()) {
     printHandlerOptionsValuesAll (
       gLogStream);
@@ -8697,7 +8728,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   // was this run a 'help-only' one?
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     if (false && fOahHandlerFoundAHelpOption) { // JMIJMIJMI
       gLogStream <<
@@ -8728,7 +8759,7 @@ void oahHandler::handleKnownOptionsVectorElement (
   const std::string&  valueUsed)
 {
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Handling known options and arguments element " <<
@@ -8740,7 +8771,7 @@ void oahHandler::handleKnownOptionsVectorElement (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Element \"" <<
@@ -8776,7 +8807,7 @@ void oahHandler::handleKnownOptionsVectorElement (
   }
 
   // remember this element as occurring in the command line
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Inserting \"" <<
@@ -8843,7 +8874,7 @@ void oahHandler::handleKnownOptionsVectorElement (
       originalOahAtom =
         atomAlias->getOriginalOahAtom ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
       gLogStream <<
         "Atom name \"" << optionNameUsed << "\" is a alias for \"" <<
@@ -8889,7 +8920,7 @@ void oahHandler::handleKnownArgvElement (
   const S_oahElement& element,
   const std::string&  optionNameUsed)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Handling argv known element " <<
@@ -8901,7 +8932,7 @@ void oahHandler::handleKnownArgvElement (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Element " <<
@@ -8993,7 +9024,7 @@ void oahHandler::handleKnownArgvElement (
       originalOahAtom =
         atomAlias->getOriginalOahAtom ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
       gLogStream <<
         "Atom name \"" << optionNameUsed << "\" is a alias for \"" <<
@@ -9033,7 +9064,7 @@ void oahHandler::handleKnownOptionsVectorAtom (
   const std::string& optionNameUsed,
   const std::string& valueUsed)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Handling known options and arguments atom " <<
@@ -9091,7 +9122,7 @@ void oahHandler::handleKnownArgvAtom (
   const S_oahAtom&   atom,
   const std::string& optionNameUsed)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Handling known argv atom " <<
@@ -9173,7 +9204,7 @@ void oahHandler::handleKnownArgvAtom (
 void oahHandler::handleUnknownOptionName (
   const std::string& optionName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Handling unknown option name \"" <<
@@ -9276,7 +9307,7 @@ void oahHandler::unknownOptionValueKindError (const std::string& name)
 void oahHandler::handleOptionNameCommon (
   const std::string& optionName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     gLogStream <<
       "Common handling of option name \"" <<
@@ -9305,7 +9336,7 @@ void oahHandler::handleOptionNameCommon (
 
     if (element) {
       // optionName is known, let's handle it
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Handling option name \"" <<
@@ -9324,7 +9355,7 @@ void oahHandler::handleOptionNameCommon (
 
     else {
       // optionName is unknown
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         if (false) // JMI
           this->printHelp (gOutputStream);
@@ -9483,7 +9514,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
   const std::string& includeFileName,
   std::ostream&      os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     os << "Including options and arguments file \"" <<
       includeFileName <<
@@ -9517,7 +9548,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
   }
 
   // open options and arguments file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     os <<
       gWaeHandler->openingIncludeFileForReading (includeFileName) <<
@@ -9550,7 +9581,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
     optionsStream,
     fOptionsAndArguments);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   //  print the options and arguments found
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) { // JMI
     os <<
@@ -9570,7 +9601,7 @@ void oahHandler::includeOptionsFromFile (
   std::istream&           inputStream,
   oahOptionsAndArguments& optionsAndArguments)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> includeOptionsFromFile()" <<
@@ -9584,7 +9615,7 @@ void oahHandler::includeOptionsFromFile (
 
     getline (inputStream, currentLine);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
       gLogStream <<
         "==> currentLine: [" << currentLine << ']' <<
@@ -9597,7 +9628,7 @@ void oahHandler::includeOptionsFromFile (
     // remove comment from currentLine if relevant
     size_t commentStart = currentLine.find_first_of ('#');
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "--> currentLine with comment: [" << currentLine << ']' <<
@@ -9609,7 +9640,7 @@ void oahHandler::includeOptionsFromFile (
       currentLine.erase (
         commentStart);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "--> currentLine without comment: [" << currentLine << ']' <<
@@ -9622,7 +9653,7 @@ void oahHandler::includeOptionsFromFile (
       // trim the currentLine
       mfTrimString (currentLine);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "--> trimmed currentLine: [" << currentLine << ']' <<
@@ -9637,7 +9668,7 @@ void oahHandler::includeOptionsFromFile (
       if (currentLine [0] == '-') {
         // option
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
           gLogStream <<
             "--> option found: [" << currentLine << ']' <<
@@ -9660,7 +9691,7 @@ void oahHandler::includeOptionsFromFile (
 
         if (afterOptionName == std::string::npos) {
           // there isn't any value after the option name
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
             gLogStream <<
               "Found option [" << optionNamePart << ']' <<
@@ -9685,7 +9716,7 @@ void oahHandler::includeOptionsFromFile (
           // there is at least a space after the option name
           mfTrimString (valuePart);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
             gLogStream <<
               "Found option [" << optionNamePart << ' ' << valuePart << ']' <<
@@ -9727,7 +9758,7 @@ void oahHandler::includeOptionsFromFile (
           }
         }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
             gLogStream <<
               "valuePart: [" << valuePart << ']' <<
@@ -9759,7 +9790,7 @@ void oahHandler::includeOptionsFromFile (
 //           optionName.erase (0, 1);
 //         } // while
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //         if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
 //           gLogStream <<
 //             "optionName: " << optionName <<
@@ -9809,7 +9840,7 @@ void oahHandler::includeOptionsFromFile (
       else {
         // argument
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
           gLogStream <<
             "Found argument [" << currentLine << ']' <<
@@ -9828,7 +9859,7 @@ void oahHandler::includeOptionsFromFile (
   } // while
 
   //  print the options and arguments found
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       optionsAndArguments;
@@ -9863,7 +9894,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 
   size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -9889,7 +9920,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
       majorNumberValue      = sm [2],
       minorNumberValue      = sm [3];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "--> generationNumberValue = \"" << generationNumberValue << "\", " <<
@@ -9919,7 +9950,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 
     size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "There are " << smSize << " matches" <<
@@ -9945,7 +9976,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
         generationNumberValue = sm [1],
         majorNumberValue      = sm [2];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
         gLogStream <<
           "--> generationNumberValue = \"" << generationNumberValue << "\", " <<

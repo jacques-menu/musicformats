@@ -345,7 +345,7 @@ class EXP oahOahGroup : public oahGroup
 
     void                  initializeOahOahAndArgumentsOptions ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     void                  initializeOahtracingOah ();
 #endif
 

@@ -14,7 +14,7 @@
 #include "mfAssert.h"
 #include "mfIndentedTextOutput.h"
 
-#include "mfEnableAbortToDebugErrors.h"
+#include "mfEnableAbortToDebugErrorsSetting.h"
 
 
 namespace MusicFormats
@@ -23,8 +23,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 void mfAssert (
   const std::string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
-  Bool          condition,
+  int                sourceCodeLineNumber,
+  Bool               condition,
   const std::string& messageIfFalse)
 {
   if (! condition) {
@@ -37,7 +37,7 @@ void mfAssert (
       " - quitting." <<
       std::endl;
 
-#ifdef MF_ABORT_TO_DEBUG_ERRORS
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
 #endif
 

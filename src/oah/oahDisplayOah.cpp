@@ -16,10 +16,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahEarlyOptions.h"
 
@@ -45,7 +42,7 @@ displayOahGroup::displayOahGroup ()
   : oahGroup (
       "Display group",
       "help-display", "hdisp",
-  R"()",
+R"()",
       oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeDisplayOahGroup ();
@@ -170,7 +167,7 @@ void displayOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void displayOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       "% ==> displayOahGroup::acceptIn ()" <<
@@ -183,7 +180,7 @@ void displayOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_displayOahGroup>*> (v)) {
         S_displayOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             "% ==> Launching displayOahGroup::visitStart ()" <<
@@ -196,7 +193,7 @@ void displayOahGroup::acceptIn (basevisitor* v)
 
 void displayOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       "% ==> displayOahGroup::acceptOut ()" <<
@@ -209,7 +206,7 @@ void displayOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_displayOahGroup>*> (v)) {
         S_displayOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             "% ==> Launching displayOahGroup::visitEnd ()" <<
@@ -222,7 +219,7 @@ void displayOahGroup::acceptOut (basevisitor* v)
 
 void displayOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       "% ==> displayOahGroup::browseData ()" <<
@@ -336,7 +333,7 @@ std::ostream& operator << (std::ostream& os, const S_displayOahGroup& elt)
 //______________________________________________________________________________
 S_displayOahGroup createGlobalDisplayOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global global OAH group" <<

@@ -9,6 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
 #include "mfAssert.h"
@@ -50,7 +52,7 @@ lpsrNewStaffgroupBlock::~lpsrNewStaffgroupBlock ()
 
 void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffgroupBlock::acceptIn ()" <<
@@ -63,7 +65,7 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrNewStaffgroupBlock>*> (v)) {
         S_lpsrNewStaffgroupBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffgroupBlock::visitStart ()" <<
@@ -76,7 +78,7 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
 
 void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffgroupBlock::acceptOut ()" <<
@@ -89,7 +91,7 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrNewStaffgroupBlock>*> (v)) {
         S_lpsrNewStaffgroupBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffgroupBlock::visitEnd ()" <<
@@ -149,7 +151,7 @@ lpsrNewStaffTuningBlock::~lpsrNewStaffTuningBlock ()
 
 void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffTuningBlock::acceptIn ()" <<
@@ -162,7 +164,7 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrNewStaffTuningBlock>*> (v)) {
         S_lpsrNewStaffTuningBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffTuningBlock::visitStart ()" <<
@@ -175,7 +177,7 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
 
 void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffTuningBlock::acceptOut ()" <<
@@ -188,7 +190,7 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrNewStaffTuningBlock>*> (v)) {
         S_lpsrNewStaffTuningBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffTuningBlock::visitEnd ()" <<
@@ -241,7 +243,7 @@ lpsrNewStaffBlock::~lpsrNewStaffBlock ()
 
 void lpsrNewStaffBlock::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffBlock::acceptIn ()" <<
@@ -254,7 +256,7 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrNewStaffBlock>*> (v)) {
         S_lpsrNewStaffBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffBlock::visitStart ()" <<
@@ -267,7 +269,7 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
 
 void lpsrNewStaffBlock::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrNewStaffBlock::acceptOut ()" <<
@@ -280,7 +282,7 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrNewStaffBlock>*> (v)) {
         S_lpsrNewStaffBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrNewStaffBlock::visitEnd ()" <<
@@ -329,11 +331,13 @@ lpsrStaffBlock::lpsrStaffBlock (
   const S_msrStaff& staff)
     : lpsrElement (0) // JMI
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     staff != nullptr,
     "staff is null");
+#endif
 
   fStaff = staff;
 
@@ -374,7 +378,7 @@ void lpsrStaffBlock::appendLyricsUseToStaffBlock (const S_msrStanza& stanza)
 
 void lpsrStaffBlock::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrStaffBlock::acceptIn ()" <<
@@ -387,7 +391,7 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrStaffBlock>*> (v)) {
         S_lpsrStaffBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrStaffBlock::visitStart ()" <<
@@ -400,7 +404,7 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
 
 void lpsrStaffBlock::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrStaffBlock::acceptOut ()" <<
@@ -413,7 +417,7 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrStaffBlock>*> (v)) {
         S_lpsrStaffBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrStaffBlock::visitEnd ()" <<
@@ -426,7 +430,7 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
 
 void lpsrStaffBlock::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrStaffBlock::browseData ()" <<
@@ -444,7 +448,7 @@ void lpsrStaffBlock::browseData (basevisitor* v)
     browser.browse (*(*i));
   } // for
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrStaffBlock::browseData ()" <<

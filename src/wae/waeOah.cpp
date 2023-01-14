@@ -15,10 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfStringsHandling.h"
 
@@ -128,7 +125,7 @@ void waeOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void waeOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> waeOahGroup::acceptIn ()" <<
@@ -141,7 +138,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_waeOahGroup>*> (v)) {
         S_waeOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching waeOahGroup::visitStart ()" <<
@@ -154,7 +151,7 @@ void waeOahGroup::acceptIn (basevisitor* v)
 
 void waeOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> waeOahGroup::acceptOut ()" <<
@@ -167,7 +164,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_waeOahGroup>*> (v)) {
         S_waeOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching waeOahGroup::visitEnd ()" <<
@@ -180,7 +177,7 @@ void waeOahGroup::acceptOut (basevisitor* v)
 
 void waeOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> waeOahGroup::browseData ()" <<
@@ -239,7 +236,7 @@ std::ostream& operator << (std::ostream& os, const S_waeOahGroup& elt)
 //______________________________________________________________________________
 S_waeOahGroup createGlobalWaeOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global wae OAH group" <<

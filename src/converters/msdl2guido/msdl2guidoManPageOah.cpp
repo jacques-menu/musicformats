@@ -14,10 +14,7 @@
 
 #include <regex>
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 
 #include "oahEarlyOptions.h"
@@ -64,7 +61,7 @@ msdl2guidoManPageGenerateAtom::~msdl2guidoManPageGenerateAtom ()
 
 void msdl2guidoManPageGenerateAtom::applyElement (std::ostream& os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a msdl2guidoManPageGenerateAtom" <<
@@ -77,7 +74,7 @@ void msdl2guidoManPageGenerateAtom::applyElement (std::ostream& os)
 
 void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoManPageGenerateAtom::acceptIn ()" <<
@@ -90,7 +87,7 @@ void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoManPageGenerateAtom>*> (v)) {
         S_msdl2guidoManPageGenerateAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2guidoManPageGenerateAtom::visitStart ()" <<
@@ -103,7 +100,7 @@ void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
 
 void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoManPageGenerateAtom::acceptOut ()" <<
@@ -116,7 +113,7 @@ void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoManPageGenerateAtom>*> (v)) {
         S_msdl2guidoManPageGenerateAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2guidoManPageGenerateAtom::visitEnd ()" <<
@@ -129,7 +126,7 @@ void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
 
 void msdl2guidoManPageGenerateAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoManPageGenerateAtom::browseData ()" <<
@@ -253,7 +250,7 @@ R"(Write man page data for EXECUTABLE to standard output.)",
         fOahVisitor));
 }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void msdl2guidoManPageOahGroup::initializeManPagetracingOah ()
 {
   S_oahSubGroup
@@ -280,7 +277,7 @@ void msdl2guidoManPageOahGroup::initializeMsdl2gmnManPageOahGroup (
   initializeManPageGenerateOptions (
     theOah2manPage);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeManPagetracingOah ();
@@ -302,7 +299,7 @@ void msdl2guidoManPageOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoManPageOahGroup::acceptIn ()" <<
@@ -315,7 +312,7 @@ void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoManPageOahGroup>*> (v)) {
         S_msdl2guidoManPageOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2guidoManPageOahGroup::visitStart ()" <<
@@ -328,7 +325,7 @@ void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
 
 void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoManPageOahGroup::acceptOut ()" <<
@@ -341,7 +338,7 @@ void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoManPageOahGroup>*> (v)) {
         S_msdl2guidoManPageOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2guidoManPageOahGroup::visitEnd ()" <<
@@ -354,7 +351,7 @@ void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
 
 void msdl2guidoManPageOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoManPageOahGroup::browseData ()" <<
@@ -393,7 +390,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2guidoManPageOahGroup& 
 S_msdl2guidoManPageOahGroup createGlobalMsdl2gmnManPageOahGroupHandler (
   const S_oahVisitor& theOah2manPage)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdl2guidoManPage OAH group" <<

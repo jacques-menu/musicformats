@@ -205,14 +205,14 @@ To debug this:
 //#define DEBUG_INDENTER
 \end{lstlisting}
 
-\item activate abortion on errors in \wae{mfEnableAbortToDebugErrors.h}:
+\item activate abortion on errors in \wae{mfEnableAbortToDebugErrorsSetting.h}:
 \begin{lstlisting}[language=CPlusPlus]
 // comment the following definition if abort on internal errors is desired
 // CAUTION: DON'T USE THIS IN PRODUCTION CODE,
 // since that could kill a session on a web server, for example
 
-#ifndef MF_ABORT_TO_DEBUG_ERRORS
-  //#define MF_ABORT_TO_DEBUG_ERRORS
+#ifndef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+  //#define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 #endif
 \end{lstlisting}
 

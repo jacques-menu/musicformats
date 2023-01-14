@@ -168,6 +168,7 @@ The \method{msr2mxsrTranslator}{translateMsrToMxsr} method does the following:
 //________________________________________________________________________
 Sxmlelement msr2mxsrTranslator::translateMsrToMxsr ()
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,

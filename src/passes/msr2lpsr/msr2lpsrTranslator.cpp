@@ -13,17 +13,16 @@
 #include <sstream>
 #include <algorithm>    // for_each
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "mfAssert.h"
 #include "mfConstants.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msr2lpsrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msr2lpsrComponent.h"
 
@@ -482,11 +481,13 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   const S_msrScore&          theMsrScore,
   const S_mfcMultiComponent& multiComponent)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
+#endif
 
   // the MSR score we're visiting
   fVisitedMsrScore = theMsrScore;
@@ -651,11 +652,13 @@ void msr2lpsrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
       S_msrHiddenMeasureAndBarLineDescr
         hiddenMeasureAndBarLineDescr = (*i);
 
-      // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+			// sanity check
       mfAssert (
         __FILE__, __LINE__,
         hiddenMeasureAndBarLineDescr != nullptr,
         "hiddenMeasureAndBarLineDescr is null");
+#endif
 
       S_msrDalSegno
         dalSegno =
@@ -748,11 +751,13 @@ void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
       S_msrHiddenMeasureAndBarLineDescr
         hiddenMeasureAndBarLineDescr = (*i);
 
-      // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+			// sanity check
       mfAssert (
         __FILE__, __LINE__,
         hiddenMeasureAndBarLineDescr != nullptr,
         "hiddenMeasureAndBarLineDescr is null");
+#endif
 
       S_msrDalSegno
         dalSegno =
@@ -773,6 +778,7 @@ void msr2lpsrTranslator::populateHeaderFromIdentification (
   const S_lpsrHeader&        header,
   const S_msrIdentification& identification)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
@@ -782,8 +788,9 @@ void msr2lpsrTranslator::populateHeaderFromIdentification (
     __FILE__, __LINE__,
     identification != nullptr,
     "identification is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Populating LPSR header from identification " <<
@@ -813,7 +820,7 @@ void msr2lpsrTranslator::populateHeaderFromIdentification (
 
   // setLilypondCopyright ??? JMI
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Resulting LPSR header:" <<
@@ -879,7 +886,7 @@ void msr2lpsrTranslator::setPaperIndentsIfNeeded (
   // heuristics to determine the number of characters per centimeter
 //  float charactersPerCemtimeter = 4.0; // JMI ???
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGeometry ()) {
   /*
     // get the paper width
@@ -969,7 +976,7 @@ void msr2lpsrTranslator::setPaperIndentsIfNeeded (
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrScore& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -1054,7 +1061,7 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrScore& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -1091,7 +1098,7 @@ void msr2lpsrTranslator::visitEnd (S_msrScore& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrIdentification& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrIdentification" <<
@@ -1127,7 +1134,7 @@ void msr2lpsrTranslator::visitEnd (S_msrIdentification& elt)
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrIdentification" <<
@@ -1140,7 +1147,7 @@ void msr2lpsrTranslator::visitEnd (S_msrIdentification& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrScaling& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrScaling" <<
@@ -1166,11 +1173,13 @@ void msr2lpsrTranslator::visitStart (S_msrScaling& elt)
     paper =
       fResultingLpsr->getScorePaper ();
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     paper != nullptr,
     "paper is null");
+#endif
 
   // set the current book block's paper as a newborn clone of paper
   fCurrentLpsrBookBlock ->
@@ -1188,7 +1197,7 @@ void msr2lpsrTranslator::visitEnd (S_msrScaling& elt)
 {
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrScaling" <<
@@ -1201,7 +1210,7 @@ void msr2lpsrTranslator::visitEnd (S_msrScaling& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrSystemLayout& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSystemLayout" <<
@@ -1218,7 +1227,7 @@ void msr2lpsrTranslator::visitStart (S_msrSystemLayout& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrSystemLayout& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSystemLayout" <<
@@ -1231,7 +1240,7 @@ void msr2lpsrTranslator::visitEnd (S_msrSystemLayout& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrStaffLayout& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStaffLayout" <<
@@ -1248,7 +1257,7 @@ void msr2lpsrTranslator::visitStart (S_msrStaffLayout& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrStaffLayout& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrStaffLayout" <<
@@ -1261,7 +1270,7 @@ void msr2lpsrTranslator::visitEnd (S_msrStaffLayout& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrAppearance& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrAppearance" <<
@@ -1278,7 +1287,7 @@ void msr2lpsrTranslator::visitStart (S_msrAppearance& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrAppearance& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrAppearance" <<
@@ -1291,7 +1300,7 @@ void msr2lpsrTranslator::visitEnd (S_msrAppearance& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrPageLayout& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrPageLayout" <<
@@ -1308,7 +1317,7 @@ void msr2lpsrTranslator::visitStart (S_msrPageLayout& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrPageLayout& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrPageLayout" <<
@@ -1321,7 +1330,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPageLayout& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrCredit& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrCredit" <<
@@ -1377,7 +1386,7 @@ void msr2lpsrTranslator::visitStart (S_msrCredit& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrCredit& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrCredit" <<
@@ -1392,7 +1401,7 @@ void msr2lpsrTranslator::visitEnd (S_msrCredit& elt)
 
 void msr2lpsrTranslator::visitStart (S_msrCreditWords& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrCreditWords" <<
@@ -1458,7 +1467,7 @@ void msr2lpsrTranslator::visitStart (S_msrCreditWords& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrCreditWords& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrCreditWords" <<
@@ -1471,7 +1480,7 @@ void msr2lpsrTranslator::visitEnd (S_msrCreditWords& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrPartGroup " <<
@@ -1494,7 +1503,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 
   // push it onto this visitors's stack,
   // making it the current partGroup block
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroups ()) {
     gLogStream <<
       "Pushing part group clone " <<
@@ -1537,7 +1546,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrPartGroup " <<
@@ -1555,7 +1564,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
     // add the current partgroup clone to the MSR score clone
     // if it is the top-level one, i.e it's alone in the stack
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
       gLogStream <<
         "Adding part group clone " <<
@@ -1575,7 +1584,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
   else {
 
     // pop current partGroup from this visitors's stack
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
       gLogStream <<
         "Popping part group clone " <<
@@ -1602,7 +1611,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
     // add the current partgroup clone to the LPSR score's parallel music
     // if it is the top-level one, i.e it's alone in the stack
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
       gLogStream <<
         "Adding part group block clone for part group " <<
@@ -1622,16 +1631,18 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
       case lpsrScoreOutputKind::kScoreOutputScoreAndPartsOneFile:
       case lpsrScoreOutputKind::kScoreOutputPartsAndScoreOneFile:
         {
-          // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+					// sanity check
           mfAssert (
             __FILE__, __LINE__,
             fCurrentScoreBlock != nullptr,
             "fCurrentScoreBlock is null");
+#endif
 
           // append the current partgroup block to the current score block
           // if it is the top-level one, i.e it's alone in the stack JMI
           // JMI BOF if (fPartGroupBlocksStack.size () == 1)
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
             gLogStream <<
               "Appending part group block for part group " <<
@@ -1665,16 +1676,18 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
       case lpsrScoreOutputKind::kScoreOutputPartsOnly:
       case lpsrScoreOutputKind::kScoreOutputPartsOnlyOneFile:
         {
-          // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+					// sanity check
           mfAssert (
             __FILE__, __LINE__,
             fCurrentBookPartBlock != nullptr,
             "fCurrentBookPartBlock is null");
+#endif
 
           // append the current partgroup block to the current bookpart block
           // if it is the top-level one, i.e it's alone in the stack JMI
           // JMI BOF if (fPartGroupBlocksStack.size () == 1)
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalLpsrOahGroup->getTraceLpsrBlocks ()) {
             gLogStream <<
               "Appending part group block for part group " <<
@@ -1701,7 +1714,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
   else {
     // pop current partGroup block from this visitors's stack
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePartGroups ()) {
       gLogStream <<
         "Popping part group block clone for part group " <<
@@ -1733,7 +1746,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
     partCombinedName =
       elt->getPartCombinedName ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrPart " <<
@@ -1743,7 +1756,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       std::endl <<
@@ -1761,7 +1774,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
       fPartGroupsStack.top ());
 
   // add it to the partGroup clone
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "Adding part clone " <<
@@ -1782,7 +1795,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
       fCurrentPartClone);
 
   // append it to the current partGroup block
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "Appending part block " <<
@@ -1828,7 +1841,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrPart " <<
@@ -1860,7 +1873,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
       inputLineNumber);
 
   // handle the hidden measure and barLine elements
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     displayPartHiddenMeasureAndBarLineDescrList ();
   }
@@ -1891,7 +1904,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
 /* JMI
 void msr2lpsrTranslator::visitStart (S_msrStaffLinesNumber& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStaffLinesNumber" <<
@@ -1910,7 +1923,7 @@ void msr2lpsrTranslator::visitStart (S_msrStaffLinesNumber& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrStaffTuning& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStaffTuning" <<
@@ -1928,7 +1941,7 @@ void msr2lpsrTranslator::visitStart (S_msrStaffTuning& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrStaffDetails& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStaffDetails" <<
@@ -1942,7 +1955,7 @@ void msr2lpsrTranslator::visitStart (S_msrStaffDetails& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrStaffDetails& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrStaffDetails" <<
@@ -1960,7 +1973,7 @@ void msr2lpsrTranslator::visitEnd (S_msrStaffDetails& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrStaff& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStaff \"" <<
@@ -2103,7 +2116,7 @@ void msr2lpsrTranslator::visitEnd (S_msrStaff& elt)
 {
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting S_msrStaff \"" <<
@@ -2142,7 +2155,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrVoice \"" <<
@@ -2152,8 +2165,8 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
-  if (true || gGlobalTracingOahGroup->getTraceVoices ()) {
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       std::endl <<
       "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
@@ -2202,7 +2215,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          true || fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI CAFE
+          true || fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI CAFE  // JMI v0.9.66
         ) {
           // append the voice clone to the LPSR score elements list
           fResultingLpsr ->
@@ -2218,7 +2231,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
               fetchVoiceUpLinkToPart ()->
                 getPartCombinedName ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
             gLogStream <<
               "Creating a ChordNames context for \"" << voiceName <<
@@ -2238,7 +2251,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
                 fCurrentVoiceOriginal);
 
           // append it to the current part block
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
             gLogStream <<
               "Appending the ChordNames context for \"" << voiceName <<
@@ -2281,7 +2294,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
               fetchVoiceUpLinkToPart ()->
                 getPartCombinedName ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
             gLogStream <<
               "Creating a FiguredBass context for \"" << voiceName <<
@@ -2299,7 +2312,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
                 fCurrentVoiceOriginal-> getVoiceUpLinkToStaff ());
 
           // append it to the current part block
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
             gLogStream <<
               "Appending the FiguredBass context for \"" << voiceName <<
@@ -2328,7 +2341,7 @@ void msr2lpsrTranslator::visitEnd (S_msrVoice& elt)
 {
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrVoice \"" <<
@@ -2362,7 +2375,7 @@ void msr2lpsrTranslator::visitEnd (S_msrVoice& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrVoiceStaffChange& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrVoiceStaffChange '" <<
@@ -2387,7 +2400,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoiceStaffChange& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrSegment& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSegment '" <<
@@ -2413,7 +2426,7 @@ void msr2lpsrTranslator::visitEnd (S_msrSegment& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSegment '" <<
@@ -2435,7 +2448,7 @@ void msr2lpsrTranslator::visitEnd (S_msrSegment& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrHarmony '" <<
@@ -2506,7 +2519,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
 
 void msr2lpsrTranslator::visitStart (S_msrHarmonyDegree& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_msrHarmonyDegree '" <<
@@ -2528,7 +2541,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmonyDegree& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrHarmony '" <<
@@ -2548,7 +2561,7 @@ void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrFrame& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrFrame '" <<
@@ -2583,7 +2596,7 @@ void msr2lpsrTranslator::visitStart (S_msrFrame& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrFiguredBass '" <<
@@ -2654,7 +2667,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 
 void msr2lpsrTranslator::visitStart (S_msrBassFigure& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrBassFigure '" <<
@@ -2689,7 +2702,7 @@ void msr2lpsrTranslator::visitStart (S_msrBassFigure& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrFiguredBass '" <<
@@ -2719,7 +2732,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
     measurePuristNumber =
       elt->getMeasurePuristNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrMeasure '" <<
@@ -2731,7 +2744,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       std::endl <<
@@ -2848,11 +2861,11 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     nextMeasureNumber =
       elt->getNextMeasureNumber ();
 
+#ifdef MF_TRACING_IS_ENABLED
   int
     measurePuristNumber =
       elt->getMeasurePuristNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrMeasure '" <<
@@ -2910,7 +2923,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
               getVoiceCurrentTimeSignature ()->
                 wholeNotesDurationPerMeasure ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (
           gGlobalTracingOahGroup->getTraceBarChecks ()
             ||
@@ -2942,7 +2955,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
               getVoiceCurrentTimeSignature ()->
                 wholeNotesDurationPerMeasure ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (
           gGlobalTracingOahGroup->getTraceBarChecks ()
             ||
@@ -3077,7 +3090,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrStanza& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStanza \"" <<
@@ -3115,7 +3128,7 @@ void msr2lpsrTranslator::visitEnd (S_msrStanza& elt)
 {
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrStanza \"" <<
@@ -3138,7 +3151,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSyllable" <<
@@ -3179,7 +3192,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
           elt->syllableTextsListAsString();
 
         // create the words
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceLyrics ()) {
           gLogStream <<
             "Changing lyrics '" <<
@@ -3212,7 +3225,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
                     getStaffNumber ());
 
         // append it to the current non-grace note
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceWords ()) {
           gLogStream <<
             "Appending words '" <<
@@ -3264,7 +3277,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrSyllable& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSyllable" <<
@@ -3277,7 +3290,7 @@ void msr2lpsrTranslator::visitEnd (S_msrSyllable& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrClef& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrClef" <<
@@ -3292,7 +3305,7 @@ void msr2lpsrTranslator::visitStart (S_msrClef& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrClef& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrClef" <<
@@ -3305,7 +3318,7 @@ void msr2lpsrTranslator::visitEnd (S_msrClef& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrKey& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrKey" <<
@@ -3320,7 +3333,7 @@ void msr2lpsrTranslator::visitStart (S_msrKey& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrKey& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrKey" <<
@@ -3333,7 +3346,7 @@ void msr2lpsrTranslator::visitEnd (S_msrKey& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrTimeSignature& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTimeSignature" <<
@@ -3349,7 +3362,7 @@ void msr2lpsrTranslator::visitStart (S_msrTimeSignature& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrTimeSignature& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTimeSignature" <<
@@ -3362,7 +3375,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTimeSignature& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrTransposition& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTransposition" <<
@@ -3378,7 +3391,7 @@ void msr2lpsrTranslator::visitStart (S_msrTransposition& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrTransposition& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTransposition" <<
@@ -3391,7 +3404,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTransposition& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTempo" <<
@@ -3432,7 +3445,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
           elt->tempoWordsListAsString (" "), //JMI ???
           elt->getTempoPlacementKind ());
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTempos ()) {
       gLogStream <<
         "Converting tempo " <<
@@ -3457,7 +3470,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrTempo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTempo" <<
@@ -3470,7 +3483,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTempo& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrRehearsalMark& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrRehearsalMark" <<
@@ -3485,7 +3498,7 @@ void msr2lpsrTranslator::visitStart (S_msrRehearsalMark& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrRehearsalMark& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrRehearsalMark" <<
@@ -3498,7 +3511,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRehearsalMark& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrArticulation& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrArticulation" <<
@@ -3543,7 +3556,7 @@ void msr2lpsrTranslator::visitStart (S_msrArticulation& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrArticulation& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrArticulation" <<
@@ -3556,7 +3569,7 @@ void msr2lpsrTranslator::visitEnd (S_msrArticulation& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrFermata& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrFermata" <<
@@ -3593,7 +3606,7 @@ void msr2lpsrTranslator::visitStart (S_msrFermata& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrArpeggiato& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrArpeggiato" <<
@@ -3630,7 +3643,7 @@ void msr2lpsrTranslator::visitStart (S_msrArpeggiato& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrNonArpeggiato& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrNonArpeggiato" <<
@@ -3667,7 +3680,7 @@ void msr2lpsrTranslator::visitStart (S_msrNonArpeggiato& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrTechnical& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTechnical" <<
@@ -3741,7 +3754,7 @@ void msr2lpsrTranslator::visitStart (S_msrTechnical& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrTechnical& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTechnical" <<
@@ -3754,7 +3767,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTechnical& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrTechnicalWithInteger& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTechnicalWithInteger" <<
@@ -3788,7 +3801,7 @@ void msr2lpsrTranslator::visitStart (S_msrTechnicalWithInteger& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTechnicalWithInteger" <<
@@ -3801,7 +3814,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrTechnicalWithFloat& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTechnicalWithFloat" <<
@@ -3835,7 +3848,7 @@ void msr2lpsrTranslator::visitStart (S_msrTechnicalWithFloat& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTechnicalWithFloat" <<
@@ -3848,7 +3861,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrTechnicalWithString& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTechnicalWithString" <<
@@ -3893,7 +3906,7 @@ void msr2lpsrTranslator::visitStart (S_msrTechnicalWithString& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrTechnicalWithString& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTechnicalWithString" <<
@@ -3906,7 +3919,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTechnicalWithString& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrOrnament& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrOrnament " <<
@@ -3916,7 +3929,7 @@ void msr2lpsrTranslator::visitStart (S_msrOrnament& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceOrnamentsDetails ()) {
       displayOnGoingNotesStack ("visitStart (S_msrOrnament&)");
     }
@@ -3959,7 +3972,7 @@ void msr2lpsrTranslator::visitStart (S_msrOrnament& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrOrnament& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrOrnament " <<
@@ -3973,7 +3986,7 @@ void msr2lpsrTranslator::visitEnd (S_msrOrnament& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrSpanner& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSpanner" <<
@@ -4026,7 +4039,7 @@ void msr2lpsrTranslator::visitStart (S_msrSpanner& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrSpanner& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSpanner" <<
@@ -4039,7 +4052,7 @@ void msr2lpsrTranslator::visitEnd (S_msrSpanner& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrGlissando& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrGlissando" <<
@@ -4079,7 +4092,7 @@ void msr2lpsrTranslator::visitStart (S_msrGlissando& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrGlissando& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrGlissando" <<
@@ -4092,7 +4105,7 @@ void msr2lpsrTranslator::visitEnd (S_msrGlissando& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrSlide& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSlide" <<
@@ -4126,7 +4139,7 @@ void msr2lpsrTranslator::visitStart (S_msrSlide& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrSlide& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSlide" <<
@@ -4139,7 +4152,7 @@ void msr2lpsrTranslator::visitEnd (S_msrSlide& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrSingleTremolo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSingleTremolo" <<
@@ -4173,7 +4186,7 @@ void msr2lpsrTranslator::visitStart (S_msrSingleTremolo& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrSingleTremolo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSingleTremolo" <<
@@ -4186,7 +4199,7 @@ void msr2lpsrTranslator::visitEnd (S_msrSingleTremolo& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrDoubleTremolo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrDoubleTremolo" <<
@@ -4210,7 +4223,7 @@ void msr2lpsrTranslator::visitStart (S_msrDoubleTremolo& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrDoubleTremolo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSingleTremolo" <<
@@ -4233,7 +4246,7 @@ void msr2lpsrTranslator::visitEnd (S_msrDoubleTremolo& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrDynamic& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrDynamic" <<
@@ -4295,7 +4308,7 @@ void msr2lpsrTranslator::visitStart (S_msrDynamic& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrDynamic& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrDynamic" <<
@@ -4308,7 +4321,7 @@ void msr2lpsrTranslator::visitEnd (S_msrDynamic& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrOtherDynamic& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrOtherDynamic" <<
@@ -4346,7 +4359,7 @@ void msr2lpsrTranslator::visitStart (S_msrOtherDynamic& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrOtherDynamic& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrOtherDynamic" <<
@@ -4362,7 +4375,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrWords" <<
@@ -4385,7 +4398,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
             msrTempoParenthesizedKind::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWords ()) {
         gLogStream <<
           "Converting words '" <<
@@ -4415,7 +4428,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
             elt->getWordsContents (),
             elt->getWordsPlacementKind ()); // above ??? JMI
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceWords ()) {
         gLogStream <<
           "Converting words '" <<
@@ -4463,7 +4476,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrWords& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrWords" <<
@@ -4479,7 +4492,7 @@ void msr2lpsrTranslator::visitStart (S_msrSlur& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSlur " <<
@@ -4554,7 +4567,7 @@ void msr2lpsrTranslator::visitStart (S_msrSlur& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrSlur& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrSlur " <<
@@ -4568,7 +4581,7 @@ void msr2lpsrTranslator::visitEnd (S_msrSlur& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrChordSlurLink& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrChordSlurLink " <<
@@ -4580,7 +4593,7 @@ void msr2lpsrTranslator::visitStart (S_msrChordSlurLink& elt)
 
   S_msrSlur originalSlur = elt->getOriginalSlur ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlurs ()) {
     gLogStream <<
       "--> visitStart (S_msrChordSlurLink&), " <<
@@ -4624,7 +4637,7 @@ void msr2lpsrTranslator::visitStart (S_msrChordSlurLink& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrChordSlurLink& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrChordSlurLink " <<
@@ -4640,7 +4653,7 @@ void msr2lpsrTranslator::visitEnd (S_msrChordSlurLink& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrLigature& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrLigature" <<
@@ -4674,7 +4687,7 @@ void msr2lpsrTranslator::visitStart (S_msrLigature& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrLigature& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrLigature" <<
@@ -4687,7 +4700,7 @@ void msr2lpsrTranslator::visitEnd (S_msrLigature& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrSlash& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSlash" <<
@@ -4722,7 +4735,7 @@ void msr2lpsrTranslator::visitStart (S_msrSlash& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrCrescDecresc& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrCrescDecresc" <<
@@ -4756,7 +4769,7 @@ void msr2lpsrTranslator::visitStart (S_msrCrescDecresc& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrCrescDecresc& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrCrescDecresc" <<
@@ -4769,7 +4782,7 @@ void msr2lpsrTranslator::visitEnd (S_msrCrescDecresc& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrWedge& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrWedge" <<
@@ -4803,7 +4816,7 @@ void msr2lpsrTranslator::visitStart (S_msrWedge& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrWedge& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrWedge" <<
@@ -4819,7 +4832,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   int inputLineNumber =
     elt->getInputLineNumber () ;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrGraceNotesGroup " <<
@@ -4838,7 +4851,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 //   if (doCreateAGraceNoteClone) JMI ???
   {
     // create a clone of this graceNotesGroup
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
       gLogStream <<
         "Creating a clone of grace notes group '" <<
@@ -4912,7 +4925,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "+++++++++++++++++++++++++ visitStart (S_msrGraceNotesGroup&)" <<
@@ -4954,7 +4967,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   fOnGoingGraceNotesGroup = true;
 
   // is noteNotesGroupIsAttachedTo the first one in its voice?
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (false && gGlobalTracingOahGroup->getTraceGraceNotes ()) { // JMI
     gLogStream <<
       "The noteNotesGroupIsAttachedTo voice clone FIRST_ONE??? '" <<
@@ -4975,7 +4988,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (false && gGlobalTracingOahGroup->getTraceGraceNotes ()) { // JMI
     gLogStream <<
       "The first note of voice clone KLJWLPOEF '" <<
@@ -5010,7 +5023,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       // skip grace notes in the other voices of the part
 
       // create the skip grace notes group
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
           gLogStream <<
             "Creating a skip clone of grace notes group '" <<
@@ -5033,7 +5046,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrGraceNotesGroup" <<
@@ -5046,7 +5059,7 @@ void msr2lpsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "+++++++++++++++++++++++++ visitEnd (S_msrGraceNotesGroup&)" <<
@@ -5073,7 +5086,7 @@ void msr2lpsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
   if (fPendingAfterGraceNotesGroup) {
     // remove the current afterGraceNotesGroup note clone
     // from the current voice clone
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
       gLogStream <<
         "Removing the after grace notes element from the current voice clone" <<
@@ -5101,7 +5114,7 @@ void msr2lpsrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrChordGraceNotesGroupLink " <<
@@ -5115,7 +5128,7 @@ void msr2lpsrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
     originalGraceNotesGroup =
       elt->getOriginalGraceNotesGroup ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
     gLogStream <<
       "--> visitStart (S_msrChordGraceNotesGroupLink&), " <<
@@ -5175,7 +5188,7 @@ void msr2lpsrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     S_msrGraceNotesGroup
       originalGraceNotesGroup =
         elt->getOriginalGraceNotesGroup ();
@@ -5200,7 +5213,7 @@ void msr2lpsrTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrNote& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrNote '" <<
@@ -5224,7 +5237,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
   fVoiceNotesMap [elt] = noteClone; // JMI XXL
   fOnGoingNotesStack.push_front (noteClone);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) { // JMI
     displayOnGoingNotesStack ("visitStart (S_msrNote&)");
   }
@@ -5233,7 +5246,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
   // don't register grace notes as the current note clone,
   // but as the current grace note clone instead
 /* JMI
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
           gLogStream <<
             "The first note of voice clone GFFF '" <<
@@ -5270,7 +5283,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
         fFirstNoteCloneInVoice =
           fCurrentNonGraceNoteClone;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceNotes ()) {
           gLogStream <<
             "The first note of voice clone RJIRWR '" <<
@@ -5298,7 +5311,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
       elt->getInputLineNumber ();
 
     // yes, create the after grace notes
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
       gLogStream <<
         "Optimizing grace notes on trilled note '" <<
@@ -5331,7 +5344,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
   msrNoteKind
     noteKind = elt->getNoteKind ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrNote " <<
@@ -5341,7 +5354,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
     gLogStream <<
       "FAA fCurrentNonGraceNoteClone = " <<
@@ -5377,7 +5390,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
         gLogStream <<
           "Appending rest note clone '" <<
@@ -5393,7 +5406,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       break;
 
     case msrNoteKind::kNoteSkipInMeasure: // JMI
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
         gLogStream <<
           "Appending skip note clone '" <<
@@ -5409,7 +5422,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
         gLogStream <<
           "Appending unpitched note clone '" <<
@@ -5425,7 +5438,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
         gLogStream <<
           "Appending regular note clone '" <<
@@ -5444,7 +5457,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       if (fOnGoingDoubleTremolo) {
 
         if (fCurrentNonGraceNoteClone->getNoteIsFirstNoteInADoubleTremolo ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceNotes ()) {
             gLogStream <<
               "Setting note '" <<
@@ -5464,7 +5477,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         }
 
         else if (fCurrentNonGraceNoteClone->getNoteIsSecondNoteInADoubleTremolo ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceNotes ()) {
             gLogStream <<
               "Setting note '" <<
@@ -5523,7 +5536,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         */
 
       if (fCurrentGraceNotesGroupClone) { // JMI v0.9.66
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
           gLogStream <<
             "Appending grace note '" <<
@@ -5556,7 +5569,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 
     /* JMI ???
       if (fCurrentGraceNotesGroupClone) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
           gLogStream <<
             "Appending note '" <<
@@ -5573,7 +5586,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       }
 
       else if (fPendingAfterGraceNotes) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
           gLogStream <<
             "Appending note '" <<
@@ -5662,7 +5675,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteRestInTuplet:
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
     case msrNoteKind::kNoteUnpitchedInTuplet:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
         gLogStream <<
           "Appending note clone '" <<
@@ -5756,7 +5769,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrOctaveShift& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrOctaveShift" <<
@@ -5790,7 +5803,7 @@ void msr2lpsrTranslator::visitStart (S_msrOctaveShift& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrOctaveShift& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrOctaveShift" <<
@@ -5803,7 +5816,7 @@ void msr2lpsrTranslator::visitEnd (S_msrOctaveShift& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrAccordionRegistration& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrAccordionRegistration" <<
@@ -5824,7 +5837,7 @@ void msr2lpsrTranslator::visitStart (S_msrAccordionRegistration& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrHarpPedalsTuning& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrHarpPedalsTuning" <<
@@ -5841,7 +5854,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarpPedalsTuning& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrStem& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrStem" <<
@@ -5875,7 +5888,7 @@ void msr2lpsrTranslator::visitStart (S_msrStem& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrStem& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrStem" <<
@@ -5888,7 +5901,7 @@ void msr2lpsrTranslator::visitEnd (S_msrStem& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrBeam& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrBeam" <<
@@ -5933,7 +5946,7 @@ void msr2lpsrTranslator::visitStart (S_msrBeam& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrBeam& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrBeam" <<
@@ -5946,7 +5959,7 @@ void msr2lpsrTranslator::visitEnd (S_msrBeam& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrChordBeamLink& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrChordBeamLink " <<
@@ -5958,7 +5971,7 @@ void msr2lpsrTranslator::visitStart (S_msrChordBeamLink& elt)
 
   S_msrBeam originalBeam = elt->getOriginalBeam ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
     gLogStream <<
       "--> visitStart (S_msrChordBeamLink&), " <<
@@ -6002,7 +6015,7 @@ void msr2lpsrTranslator::visitStart (S_msrChordBeamLink& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrChordBeamLink& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrChordBeamLink " <<
@@ -6021,7 +6034,7 @@ void msr2lpsrTranslator::visitStart (S_msrChord& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrChord " <<
@@ -6096,7 +6109,7 @@ void msr2lpsrTranslator::visitEnd (S_msrChord& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrChord" <<
@@ -6119,7 +6132,7 @@ void msr2lpsrTranslator::visitEnd (S_msrChord& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTuplet" <<
@@ -6134,7 +6147,7 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
       elt->createTupletNewbornClone ();
 
   // register it in this visitor
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "++> pushing tuplet '" <<
@@ -6160,7 +6173,7 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTuplet" <<
@@ -6169,7 +6182,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Popping tuplet '" <<
@@ -6183,7 +6196,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
 
   if (fTupletClonesStack.size ()) {
     // tuplet is a nested tuplet
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTuplets ()) {
       gLogStream <<
         "Adding nested tuplet '" <<
@@ -6202,7 +6215,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
   else {
     // tuplet is a top level tuplet
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceTuplets ()) {
       gLogStream <<
         "Adding top level tuplet '" <<
@@ -6221,7 +6234,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrTie& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTie" <<
@@ -6255,7 +6268,7 @@ void msr2lpsrTranslator::visitStart (S_msrTie& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrTie& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrTie" <<
@@ -6268,7 +6281,7 @@ void msr2lpsrTranslator::visitEnd (S_msrTie& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrSegno& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSegno" <<
@@ -6307,7 +6320,7 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrDalSegno" <<
@@ -6375,7 +6388,7 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
 
 void msr2lpsrTranslator::visitStart (S_msrCoda& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrCoda" <<
@@ -6411,7 +6424,7 @@ void msr2lpsrTranslator::visitStart (S_msrCoda& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrEyeGlasses& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting eyeGlasses" <<
@@ -6426,7 +6439,7 @@ void msr2lpsrTranslator::visitStart (S_msrEyeGlasses& elt)
 
 void msr2lpsrTranslator::visitStart (S_msrScordatura& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting scordatura" <<
@@ -6441,7 +6454,7 @@ void msr2lpsrTranslator::visitStart (S_msrScordatura& elt)
 
 void msr2lpsrTranslator::visitStart (S_msrPedal& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting pedal" <<
@@ -6456,7 +6469,7 @@ void msr2lpsrTranslator::visitStart (S_msrPedal& elt)
 
 void msr2lpsrTranslator::visitStart (S_msrDamp& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting damp" <<
@@ -6475,7 +6488,7 @@ void msr2lpsrTranslator::visitStart (S_msrDamp& elt)
 
 void msr2lpsrTranslator::visitStart (S_msrDampAll& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting dampAll" <<
@@ -6495,7 +6508,7 @@ void msr2lpsrTranslator::visitStart (S_msrDampAll& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrBarCheck& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrBarCheck" <<
@@ -6512,7 +6525,7 @@ void msr2lpsrTranslator::visitStart (S_msrBarCheck& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrBarCheck& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrBarCheck" <<
@@ -6525,7 +6538,7 @@ void msr2lpsrTranslator::visitEnd (S_msrBarCheck& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrBarNumberCheck& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrBarNumberCheck" <<
@@ -6540,7 +6553,7 @@ void msr2lpsrTranslator::visitStart (S_msrBarNumberCheck& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrBarNumberCheck& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrBarNumberCheck" <<
@@ -6553,7 +6566,7 @@ void msr2lpsrTranslator::visitEnd (S_msrBarNumberCheck& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrLineBreak& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrLineBreak" <<
@@ -6568,7 +6581,7 @@ void msr2lpsrTranslator::visitStart (S_msrLineBreak& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrLineBreak& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrLineBreak" <<
@@ -6581,7 +6594,7 @@ void msr2lpsrTranslator::visitEnd (S_msrLineBreak& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrPageBreak& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrPageBreak" <<
@@ -6596,7 +6609,7 @@ void msr2lpsrTranslator::visitStart (S_msrPageBreak& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrPageBreak& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrPageBreak" <<
@@ -6612,7 +6625,7 @@ void msr2lpsrTranslator::visitStart (S_msrRepeat& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrRepeat" <<
@@ -6621,7 +6634,7 @@ void msr2lpsrTranslator::visitStart (S_msrRepeat& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling repeat start in voice clone \"" <<
@@ -6642,7 +6655,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeat& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrRepeat" <<
@@ -6651,7 +6664,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeat& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling repeat end in voice clone \"" <<
@@ -6674,7 +6687,7 @@ void msr2lpsrTranslator::visitStart (S_msrRepeatCommonPart& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrRepeatCommonPart" <<
@@ -6693,7 +6706,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrRepeatCommonPart" <<
@@ -6713,7 +6726,7 @@ void msr2lpsrTranslator::visitStart (S_msrRepeatEnding& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrRepeatEnding" <<
@@ -6723,7 +6736,7 @@ void msr2lpsrTranslator::visitStart (S_msrRepeatEnding& elt)
 #endif
 
   // handle the repeat ending start in the voice clone
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling a repeat ending start in voice clone \"" <<
@@ -6745,7 +6758,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeatEnding& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrRepeatEnding" <<
@@ -6755,7 +6768,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 #endif
 
   // handle the repeat ending end in the voice clone
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling a repeat ending end in voice clone \"" <<
@@ -6778,7 +6791,7 @@ void msr2lpsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrMultipleFullBarRests" <<
@@ -6789,7 +6802,7 @@ void msr2lpsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Handling multiple rest start in voice clone \"" <<
@@ -6816,10 +6829,10 @@ void msr2lpsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 {
+#ifdef MF_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrMultipleFullBarRests" <<
@@ -6830,7 +6843,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Handling multiple rest start in voice clone \"" <<
@@ -6856,7 +6869,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeat& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrMeasureRepeat" <<
@@ -6867,7 +6880,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeat& elt)
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
       "Handling measures repeat start in voice clone \"" <<
@@ -6888,7 +6901,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrMeasureRepeat" <<
@@ -6901,7 +6914,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
 
 /* JMI
   // set last segment as the measures repeat pattern segment
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
       "Setting current last segment as measures repeat pattern segment in voice \"" <<
@@ -6912,7 +6925,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeat& elt)
 #endif
 */
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
       "Handling measures repeat end in voice clone \"" <<
@@ -6933,7 +6946,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrMeasureRepeatPattern" <<
@@ -6944,7 +6957,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
@@ -6963,7 +6976,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrMeasureRepeatPattern" <<
@@ -6974,7 +6987,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
@@ -6994,7 +7007,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrMeasureRepeatReplicas" <<
@@ -7005,7 +7018,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
@@ -7024,7 +7037,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting S_msrMeasureRepeatReplicas" <<
@@ -7036,7 +7049,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
   --gIndenter;
 
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
@@ -7053,12 +7066,12 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrBarLine" <<
@@ -7067,7 +7080,7 @@ void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Handling '" <<
@@ -7118,7 +7131,7 @@ void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrBarLine& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrBarLine" <<
@@ -7131,7 +7144,7 @@ void msr2lpsrTranslator::visitEnd (S_msrBarLine& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrMidiTempo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -7143,7 +7156,7 @@ void msr2lpsrTranslator::visitStart (S_msrMidiTempo& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Handling MIDI tempo " <<
@@ -7161,7 +7174,7 @@ void msr2lpsrTranslator::visitStart (S_msrMidiTempo& elt)
 
 void msr2lpsrTranslator::visitEnd (S_msrMidiTempo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrMidiTempo" <<
@@ -7181,7 +7194,7 @@ void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
   const S_msrVoice&           voiceClone,
   const S_msrGraceNotesGroup& skipGraceNotesGroup)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
       gLogStream <<
         "--> prepending a skip graceNotesGroup clone " <<

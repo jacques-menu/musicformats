@@ -9,7 +9,7 @@ Debugging \mf\ can be quite time-consuming. The trace options available have bee
 
 \Function{catchSignals} at the beginning of the \functionName {main} function can be commented out in order to run a tool under a debugger.
 
-File \wae{mfEnableAbortToDebugErrors.h} contains:
+File \wae{mfEnableAbortToDebugErrorsSetting.h} contains:
 \begin{lstlisting}[language=CPlusPlus]
 /*
   MusicFormats Library
@@ -30,8 +30,8 @@ File \wae{mfEnableAbortToDebugErrors.h} contains:
 // CAUTION: DON'T USE THIS IN PRODUCTION CODE,
 // since that could kill a session on a \Web\ server, for example
 
-#ifndef MF_ABORT_TO_DEBUG_ERRORS
-  #define MF_ABORT_TO_DEBUG_ERRORS
+#ifndef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+  #define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 #endif
 
 

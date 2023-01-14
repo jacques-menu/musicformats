@@ -108,12 +108,12 @@ For example, in \msrToLpsr{}, the \smartPointerType{S_msrBarLine} values found i
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrBarLine" <<
@@ -136,7 +136,7 @@ Such new descriptions are created by \starMethodName{NewbornClone} methods, such
 \begin{lstlisting}[language=CPlusPlus]
 S_msrTuplet msrTuplet::createTupletNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Creating a newborn clone of tuplet " <<
@@ -167,7 +167,7 @@ Such a newborn clone is created and used this way in \method{}{}:
 \begin{lstlisting}[language=CPlusPlus]
 void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrTuplet" <<
@@ -182,7 +182,7 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
       elt->createTupletNewbornClone ();
 
   // register it in this visitor
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "++> pushing tuplet '" <<
@@ -344,7 +344,7 @@ msdlScanner::msdlScanner (std::istream& inputStream)
         fCurrentToken.getTokenDescriptionNonConst ())
 {
   // trace
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   fTraceTokens        = gGlobalMsdl2msrOahGroup->getTraceTokens ();
   fTraceTokensDetails = gGlobalMsdl2msrOahGroup->getTraceTokensDetails ();
 #endif
@@ -379,7 +379,7 @@ Then there are \methodName{visitStart} and/or \methodName{visitEnd} methods to h
 \begin{lstlisting}[language=CPlusPlus]
 void msr2msrTranslator::visitStart (S_msrIdentification& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrIdentification" <<
@@ -409,7 +409,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrIdentification" <<

@@ -11,6 +11,8 @@
 
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "mfAssert.h"
 #include "mfTiming.h"
 
@@ -18,10 +20,7 @@
 
 #include "lpsr2lilypondWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "lpsr2lilypondOah.h"
 
@@ -44,11 +43,13 @@ void translateLpsrToLilypond (
   const std::string&     passDescription,
   std::ostream&          lilypondCodeStream)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
     "theLpsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
@@ -56,7 +57,7 @@ void translateLpsrToLilypond (
   std::string separator =
     "%--------------------------------------------------------------";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       std::endl <<
@@ -118,7 +119,7 @@ EXP void translateLpsrToLilypondWithHandler (
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "xmlFile2lilypond() outputFileName = \"" <<
@@ -129,7 +130,7 @@ EXP void translateLpsrToLilypondWithHandler (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2lilypond() output goes to standard output" <<
@@ -165,7 +166,7 @@ EXP void translateLpsrToLilypondWithHandler (
   }
 
   else {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2lilypond() output goes to file \"" <<
@@ -176,7 +177,7 @@ EXP void translateLpsrToLilypondWithHandler (
 #endif
 
     // open output file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<

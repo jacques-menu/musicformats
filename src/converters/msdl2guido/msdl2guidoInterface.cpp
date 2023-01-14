@@ -13,7 +13,10 @@
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
                         // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
-#include "mfServiceRunData.h"
+#include "mfEnableSanityChecksSetting.h"
+
+#include "mfPasses.h"
+#include "mfServices.h"
 
 #include "oahWae.h"
 #include "msdlWae.h"
@@ -22,10 +25,7 @@
 #include "mxsr2guidoWae.h"
 #include "guidoWae.h" // JMI SAXOSAXO ???
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -89,7 +89,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
     // start the clock
     clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       std::string separator =
         "%--------------------------------------------------------------";
@@ -98,7 +98,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        gWaeHandler->pass1 () <<
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_1) <<
         ": " <<
         "Creating a first MSR from the MSDL input" <<
         std::endl <<
@@ -122,13 +122,14 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gWaeHandler->pass1 (),
+      gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
       "Create the MSR score from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
       endClock);
 
-    // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
     if (! firstMsrScore) {
       std::stringstream s;
 
@@ -145,6 +146,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
 
       throw msdlException (message);
     }
+#endif
   }
   catch (msdl2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -178,7 +180,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gWaeHandler->pass2 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
@@ -200,7 +202,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        gWaeHandler->pass3 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -226,7 +228,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       theMxsr,
       outputFileName,
       err,
-      gWaeHandler->pass4 (),
+      gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
       "Convert  the MXSR into Guido text");
   }
   catch (mxsr2guidoException& e) {
@@ -266,7 +268,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
     gLogStream <<
       handlerOptionsAndArguments;
@@ -285,7 +287,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<
@@ -393,7 +395,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
   std::ostream&           err)
 {
   // open input file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
@@ -438,7 +440,7 @@ mfMusicformatsErrorKind msdlFile2guidoWithHandler (
   std::ostream&       err)
 {
   // open input file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<

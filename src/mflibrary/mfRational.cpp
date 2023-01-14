@@ -9,18 +9,18 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <cmath>
 #include <iostream>
+#include <regex>
 #include <sstream>
 
-#include <cmath>
-
-#include <regex>
+#include "mfEnableSanityChecksSetting.h"
 
 #include "mfAssert.h"
 
 #include "mfRational.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "msrWae.h"
 
@@ -34,11 +34,13 @@ Rational::Rational (
   long int num,
   long int denom)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     denom > 0,
     "denom '" + std::to_string (denom) + "' is not positive");
+#endif
 
   fNumerator = num;
   fDenominator = denom;
@@ -75,7 +77,7 @@ Rational::Rational (const std::string &theString)
       numerator   = sm [1],
       denominator = sm [2];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (false) {
       gLogStream <<
         "--> numerator = \"" << numerator << "\", " <<
@@ -97,11 +99,13 @@ Rational::Rational (const std::string &theString)
       s << denominator;
       s >> fDenominator;
 
-      // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
       mfAssert (
         __FILE__, __LINE__,
         fDenominator > 0,
         "fDenominator '" + denominator + "' is not positive");
+#endif
     }
   }
 

@@ -11,6 +11,7 @@
 
 #include "mfInitialization.h"
 #include "mfLanguages.h"
+#include "mfPasses.h"
 
 #include "oahEarlyOptions.h"
 
@@ -26,7 +27,7 @@ void initializeMusicFormats ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (
       gGlobalOahEarlyOptions.getEarlyTracingOah ()
         &&
@@ -42,6 +43,8 @@ void initializeMusicFormats ()
     // ------------------------------------------------------
 
     initializeMusicFormatsLanguages ();
+
+    initializeMusicFormatsPassIDs ();
 
     pPrivateThisMethodHasBeenRun = true;
   }

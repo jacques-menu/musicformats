@@ -9,18 +9,17 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <iomanip>      // std::setw, std::setprecision, ...
 #include <iostream>
 #include <sstream>
-#include <iomanip>      // std::setw, std::setprecision, ...
+
+#include "mfEnableSanityChecksSetting.h"
 
 #include "visitor.h"
 
 #include "mfAssert.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
@@ -80,7 +79,7 @@ msrBarCheck::msrBarCheck (
     : msrMeasureElement (
         inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
     gLogStream <<
       "Creating a bar check without next bar number" <<
@@ -102,7 +101,7 @@ msrBarCheck::msrBarCheck (
   fNextBarOriginalNumber = nextBarOriginalNumber;
   fNextBarPuristNumber   = nextBarPuristNumber;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
     gLogStream <<
       "Creating a bar check" <<
@@ -122,13 +121,15 @@ msrBarCheck::~msrBarCheck ()
 void msrBarCheck::setBarCheckUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -149,7 +150,7 @@ void msrBarCheck::setBarCheckUpLinkToMeasure (
 
 void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
     gLogStream <<
       "Setting bar check next bar number to '" <<

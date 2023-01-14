@@ -18,10 +18,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 #include "msrOah.h"
@@ -156,7 +153,7 @@ void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions ()
 
 void Mikrokosmos3WanderingOahGroup::initializeMikrokosmos3WanderingOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 // JMI  initializeMikrokosmos3WanderingtracingOah ();
@@ -203,7 +200,7 @@ void Mikrokosmos3WanderingOahGroup::checkGroupOptionsConsistency ()
 
 void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptIn ()" <<
@@ -216,7 +213,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_Mikrokosmos3WanderingOahGroup>*> (v)) {
         S_Mikrokosmos3WanderingOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitStart ()" <<
@@ -229,7 +226,7 @@ void Mikrokosmos3WanderingOahGroup::acceptIn (basevisitor* v)
 
 void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::acceptOut ()" <<
@@ -242,7 +239,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_Mikrokosmos3WanderingOahGroup>*> (v)) {
         S_Mikrokosmos3WanderingOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching Mikrokosmos3WanderingOahGroup::visitEnd ()" <<
@@ -255,7 +252,7 @@ void Mikrokosmos3WanderingOahGroup::acceptOut (basevisitor* v)
 
 void Mikrokosmos3WanderingOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> Mikrokosmos3WanderingOahGroup::browseData ()" <<
@@ -323,7 +320,7 @@ std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingOahGro
 //______________________________________________________________________________
 S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global Mikrokosmos3Wandering OAH group" <<

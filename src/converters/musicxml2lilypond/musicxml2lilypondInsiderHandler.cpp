@@ -19,18 +19,15 @@
 // WAE
 #include "oahWae.h"
 
-#include "mfEnableHarmoniesExtra.h"
+#include "mfEnableHarmoniesExtraSetting.h"
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfInitialization.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrInitialization.h"
@@ -100,7 +97,7 @@ Usage: xml2ly [[option]* [MusicXMLFile|-] [[option]*
       "" // temporary, will be set below
       )
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing xml2ly insider options handler \"" <<
@@ -202,7 +199,7 @@ std::string xml2lyInsiderHandler::usageFromUsedThruKind (
 //______________________________________________________________________________
 void xml2lyInsiderHandler::createTheXml2lyPrefixes ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Creating the xml2ly prefixes" <<
@@ -217,7 +214,7 @@ void xml2lyInsiderHandler::createTheXml2lyPrefixes ()
 void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   const std::string& serviceName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Creating the xml2ly insider option groups" <<
@@ -243,7 +240,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -310,7 +307,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   appendGroupToHandler (
     createGlobalXml2lyInsiderOahGroup ());
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     // print the options handler initial state
     gLogStream <<
@@ -328,7 +325,7 @@ void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "musicxml2lilypondInsiderInsiderHandler help:" <<
@@ -342,7 +339,7 @@ if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
 //______________________________________________________________________________
 void xml2lyInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Checking options and arguments from argc/argv in \"" <<
@@ -358,7 +355,7 @@ void xml2lyInsiderHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -446,7 +443,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
         }
       }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
@@ -459,7 +456,7 @@ std::string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
       // append the file extension to the output file name
        outputFileName += ".ly";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "musicxml2lilypondInsiderInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
@@ -487,7 +484,7 @@ void xml2lyInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void xml2lyInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -530,7 +527,7 @@ void xml2lyInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyInsiderOahGroup::acceptIn ()" <<
@@ -543,7 +540,7 @@ void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_xml2lyInsiderOahGroup>*> (v)) {
         S_xml2lyInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2lyInsiderOahGroup::visitStart ()" <<
@@ -556,7 +553,7 @@ void xml2lyInsiderOahGroup::acceptIn (basevisitor* v)
 
 void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyInsiderOahGroup::acceptOut ()" <<
@@ -569,7 +566,7 @@ void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_xml2lyInsiderOahGroup>*> (v)) {
         S_xml2lyInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2lyInsiderOahGroup::visitEnd ()" <<
@@ -582,7 +579,7 @@ void xml2lyInsiderOahGroup::acceptOut (basevisitor* v)
 
 void xml2lyInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2lyInsiderOahGroup::browseData ()" <<
@@ -677,7 +674,7 @@ xml2lyInsiderOahGroup::~xml2lyInsiderOahGroup ()
 //_______________________________________________________________________________
 void xml2lyInsiderOahGroup::initializeXml2lyInsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   gLogStream << std::left <<
     "Initializing \"" <<
@@ -701,7 +698,7 @@ void xml2lyInsiderOahGroup::initializeXml2lyInsiderOahGroup ()
 //_______________________________________________________________________________
 void xml2lyInsiderOahGroup::createInsiderQuitSubGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
   gLogStream << std::left <<
     "Creating insider quit subgroup in \"" <<
@@ -771,7 +768,7 @@ of the first MSR to a second MSR.)",
 //_______________________________________________________________________________
 void xml2lyInsiderOahGroup::createInsiderMacrosSubGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
   gLogStream << std::left <<
     "Creating insider macro subgroup in \"" <<
@@ -805,7 +802,7 @@ R"()",
       debugMacroAtom);
 
   // populate it
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   debugMacroAtom->
     appendAtomToMacro (
       gGlobalTracingOahGroup->
@@ -860,7 +857,7 @@ void xml2lyInsiderOahGroup::printXml2lyInsiderOahGroupValues (int fieldWidth)
 //______________________________________________________________________________
 S_xml2lyInsiderOahGroup createGlobalXml2lyInsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global xml2ly OAH group" <<

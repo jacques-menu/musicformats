@@ -13,18 +13,15 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfEnableHarmoniesExtra.h"
+#include "mfEnableHarmoniesExtraSetting.h"
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 
 #include "mfInitialization.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrInitialization.h"
@@ -84,7 +81,7 @@ R"(
 Usage: msr2musicxml [[option]* [MusicXMLFile|-] [[option]*
 )")
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing \"" <<
@@ -139,7 +136,7 @@ R"(What msr2musicxml does:
 //______________________________________________________________________________
 void msr2musicxmlInsiderHandler::createTheMsr2musicxmlPrefixes ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msr2musicxml prefixes in \"" <<
@@ -156,7 +153,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlPrefixes ()
 void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
   const std::string& serviceName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the \"" <<
@@ -178,7 +175,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -235,7 +232,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
 //______________________________________________________________________________
 void msr2musicxmlInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<
@@ -251,7 +248,7 @@ void msr2musicxmlInsiderHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -339,7 +336,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
         }
       }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
@@ -352,7 +349,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
       // append the file extension to the output file name
        outputFileName += ".xml";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
@@ -380,7 +377,7 @@ void msr2musicxmlInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void msr2musicxmlInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -444,7 +441,7 @@ void msr2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptIn ()" <<
@@ -457,7 +454,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2musicxmlInsiderOahGroup>*> (v)) {
         S_msr2musicxmlInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitStart ()" <<
@@ -470,7 +467,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
 
 void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptOut ()" <<
@@ -483,7 +480,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2musicxmlInsiderOahGroup>*> (v)) {
         S_msr2musicxmlInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitEnd ()" <<
@@ -496,7 +493,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
 
 void msr2musicxmlInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::browseData ()" <<
@@ -592,7 +589,7 @@ msr2musicxmlInsiderOahGroup::~msr2musicxmlInsiderOahGroup ()
 //_______________________________________________________________________________
 void msr2musicxmlInsiderOahGroup::initializeMsr2musicxmlInsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   gLogStream << std::left <<
     "Initializing \"" <<
@@ -637,7 +634,7 @@ void msr2musicxmlInsiderOahGroup::printMsr2musicxmlInsiderOahGroupValues (int fi
 //______________________________________________________________________________
 S_msr2musicxmlInsiderOahGroup createGlobalMsr2musicxmlOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2musicxml OAH group" <<

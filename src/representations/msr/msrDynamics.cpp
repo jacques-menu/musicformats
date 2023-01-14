@@ -237,7 +237,7 @@ S_msrDynamic msrDynamic::createDynamicFromString (
   const std::string&    dynamicsString,
   msrPlacementKind dynamicPlacementKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamicss ()) {
     gLogStream <<
       "Creating dynamic from string \"" <<

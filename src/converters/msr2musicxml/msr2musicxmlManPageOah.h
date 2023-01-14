@@ -150,7 +150,7 @@ class EXP msr2musicxmlManPageOahGroup : public oahGroup
                             const S_oahVisitor&
                                  theOah2manPage);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     void                  initializeManPagetracingOah ();
 #endif
 

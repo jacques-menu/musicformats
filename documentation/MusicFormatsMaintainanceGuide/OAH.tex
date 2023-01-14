@@ -263,7 +263,7 @@ in \oah{oahAtomsCollection.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahIntegerAtom::setIntegerVariable (int value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Setting option '" <<
@@ -1009,7 +1009,7 @@ EXP mfMusicformatsErrorKind musicxmlfile2musicxml (
 	  sxmlfile =
 	    createSXMLFileFromFile (
 	      fileName,
-	    gWaeHandler->pass1 (),
+	    gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
 	      "Create an MXSR from a MusicXML file");
 
 	if (sxmlfile) {
@@ -1170,7 +1170,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
           }
 
           else {
-  #ifdef OAH_TRACING_IS_ENABLED
+  #ifdef MF_TRACING_IS_ENABLED
             if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
               gLogStream <<
                 "**** Handling atom not expecting a value:" <<
@@ -1707,7 +1707,7 @@ Then in \method{oahHistoryAtom}{printHistory}, the call to \methodName{printVers
 \begin{lstlisting}[language=CPlusPlus]
 void oahHistoryAtom::applyElement (std::ostream& os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahHistoryAtom" <<
@@ -1735,6 +1735,7 @@ void oahHistoryAtom::printHistory (std::ostream& os) const
       fetchAtomUpLinkToHandler ()->
         getHandlerMultiComponent ();
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
@@ -2026,7 +2027,7 @@ This is done in \oahBoth{harmoniesExtraOah}. It suffices to call \function{creat
 #endif
 \end{lstlisting}
 
-Macro {\tt MF_HARMONIES_EXTRA_IS_ENABLED} is defined or not in \oah{mfEnableHarmoniesExtra.h}:
+Macro {\tt MF_HARMONIES_EXTRA_IS_ENABLED} is defined or not in \oah{mfEnableHarmoniesExtraSetting.h}:
 \begin{lstlisting}[language=CPlusPlus]
 // comment the following definition if no extra options are wanted
 

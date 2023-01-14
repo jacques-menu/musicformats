@@ -13,15 +13,14 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrMeasureConstants.h"
@@ -247,7 +246,7 @@ msrTempoTuplet::msrTempoTuplet (
 
   fTempoTupletDisplayWholeNotes  = Rational (0, 1);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()){
     gLogStream <<
       "Creating tempo tuplet '" <<
@@ -338,7 +337,7 @@ std::ostream& operator << (std::ostream& os, const msrTempoTupletShowNumberKind&
 
 void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "Adding tempoNote '" <<
@@ -367,7 +366,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
 /*
 void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "Adding tempoTuplet '" <<
@@ -407,7 +406,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
   int            inputLineNumber,
   const S_msrTempoNote& tempoNote)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "Removing first tempoNote '" <<
@@ -480,7 +479,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
 /* JMI
 void msrTempoTuplet::applyDisplayFactorToTempoTupletMembers ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "% ==> applyDisplayFactorToTempoTupletMembers ()" <<
@@ -502,7 +501,7 @@ void msrTempoTuplet::unapplySoundingFactorToTempoTupletMembers (
   int containingTempoTupletActualNotes,
   int containingTempoTupletNormalNotes)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "unapplySoundingFactorToTempoTupletMembers ()" <<
@@ -821,7 +820,7 @@ msrTempoNotesRelationshipElements::~msrTempoNotesRelationshipElements ()
 void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElements (
   const S_msrElement& element)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()){
     gLogStream <<
       "Adding element '" <<
@@ -1166,11 +1165,13 @@ msrTempo::msrTempo (
       fTempoBeatUnit (),
       fTempoEquivalentBeatUnit ()
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     tempoWords != nullptr,
     "tempoWords is null");
+#endif
 
   fTempoKind = msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly;
 
@@ -1272,13 +1273,15 @@ msrTempo::~msrTempo ()
 void msrTempo::setTempoUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 

@@ -11,20 +11,19 @@
 
 #include <iomanip>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
 #include "mfEnumAll.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrMeasureConstants.h"
 
@@ -69,7 +68,7 @@ msrHarmonyInterval::msrHarmonyInterval (
 
   fHarmonyIntervalRelativeOctave = harmonyIntervalRelativeOctave;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "==> Creating harmony item '" <<
@@ -151,7 +150,7 @@ void msrHarmonyInterval::deNormalizeInterval ()
 S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
   const S_msrHarmonyInterval& otherHarmonyInterval)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
     gLogStream <<
       std::endl <<
@@ -178,7 +177,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
   operand2->
     normalizeInterval ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
     gLogStream <<
       "--> normalized operands are '" <<
@@ -237,7 +236,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
     --resultRelativeOctave;
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
     gLogStream <<
       "--> permuteRelativeOctaves = " <<
@@ -1415,7 +1414,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       ;
   } // switch
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
     gLogStream <<
       "--> base resultIntervalKind = '" <<
@@ -1448,7 +1447,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
   // greater than an augmented seventh if applicable
   result->deNormalizeInterval ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
     gLogStream <<
       "--> result = '" <<
@@ -3599,7 +3598,7 @@ msrHarmonyDegree::msrHarmonyDegree (
   fHarmonyDegreeAlterationKind = harmonyDegreeAlterationKind;
   fHarmonyDegreeTypeKind       = harmonyDegreeTypeKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Creating harmony degree '" <<
@@ -3616,11 +3615,13 @@ msrHarmonyDegree::~msrHarmonyDegree ()
 void msrHarmonyDegree::setHarmonyDegreeUpLinkToHarmony (
   const S_msrHarmony& UpLinkToHarmony)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     UpLinkToHarmony != nullptr,
      "UpLinkToHarmony is null");
+#endif
 
   fHarmonyDegreeUpLinkToHarmony =
     UpLinkToHarmony;
@@ -3831,7 +3832,7 @@ msrHarmonyContents::msrHarmonyContents (
   fHarmonyContentsRootNote    = harmonyContentsRootNote;
   fHarmonyContentsHarmonyKind = harmonyContentsHarmonyKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "==> Creating harmonyContents '" <<
@@ -4297,7 +4298,7 @@ msrHarmony::msrHarmony (
       invertedHarmonyBassQuarterTonesPitchKind;
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Creating harmony " <<
@@ -4313,7 +4314,7 @@ msrHarmony::~msrHarmony ()
 S_msrHarmony msrHarmony::createHarmonyNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Creating a newborn clone of harmony " <<
@@ -4323,11 +4324,13 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrHarmony
     newbornClone =
@@ -4358,7 +4361,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
 S_msrHarmony msrHarmony::createHarmonyDeepClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Creating a deep clone of harmony " <<
@@ -4368,11 +4371,13 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrHarmony
     deepClone =
@@ -4401,13 +4406,15 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
 void msrHarmony::setHarmonyUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -4429,7 +4436,7 @@ void msrHarmony::setHarmonyUpLinkToMeasure (
 void msrHarmony::setHarmonyTupletFactor (
   const msrTupletFactor& tupletFactor)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Setting the tuplet factor of harmony " <<
@@ -4447,7 +4454,7 @@ void msrHarmony::setHarmonyTupletFactor (
 void msrHarmony::setHarmonyUpLinkToNote (
   const S_msrNote& note)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "==> Setting the uplink to note of harmony " <<
@@ -4457,11 +4464,13 @@ void msrHarmony::setHarmonyUpLinkToNote (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     note != nullptr,
     "note is null");
+#endif
 
   fHarmonyUpLinkToNote = note;
 }
@@ -4473,11 +4482,13 @@ void msrHarmony::setHarmonyUpLinkToNote (
 // {
 //   // set the harmony measure position, taking it's offset into account
 //
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
 //      "setMeasureElementMeasurePosition(): measure is null");
+// #endif
 //
 //   // the offset can be negative, so we merely add it to measurePosition
 //   // to obtain the harmony's actual measurePosition
@@ -4488,7 +4499,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //         +
 //       fHarmonyWholeNotesOffset;
 //
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Setting harmony's measure position of " << asString () <<
@@ -4509,11 +4520,13 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //   }
 // #endif
 //
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     fHarmonyUpLinkToNote != nullptr,
 //     "fHarmonyUpLinkToNote is null");
+// #endif
 //
 //   // compute harmony's voice position
 //   Rational
@@ -4523,11 +4536,13 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //         +
 //       actualMeasurePosition;
 //
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+// #endif
 //
 //   // set harmony's measure position
 //   fMeasureElementMeasurePosition = measurePosition;
@@ -4546,7 +4561,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 
 void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFrames ()) {
     gLogStream <<
       "Setting harmony " << asShortString ()  <<
@@ -4570,7 +4585,7 @@ void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
       wholeNotesDelta;
 
   // extend currentHarmony's sounding whole notes
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Extending the sounding whole notes of harmony " <<
@@ -5062,7 +5077,7 @@ void printHarmonyDetails (
           harmonyStructure->
             invertHarmonyStructure (inversion);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         os <<
           "==> inversion: " << inversion <<
@@ -5243,7 +5258,7 @@ void printHarmonyAnalysis (
           harmonyStructure->
             invertHarmonyStructure (inversion);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         os <<
           "==> inversion: " << inversion <<
@@ -5558,7 +5573,7 @@ msrHarmonyStructure::msrHarmonyStructure (
 {
   fHarmonyStructureHarmonyKind = harmonyStructureHarmonyKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "==> Creating harmony intervals '" <<
@@ -6550,7 +6565,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
     harmonyStructureIntervalsSize =
       fHarmonyStructureIntervals.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "==> invertHarmonyStructure (), inversion = " <<
@@ -6569,7 +6584,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           fHarmonyStructureIntervals [i]->
             createHarmonyIntervalNewbornClone ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         gLogStream <<
           "--> adding first item to result:" <<
@@ -6586,7 +6601,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         appendHarmonyIntervalToHarmonyStructure (
           harmonyIntervalClone);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         gLogStream <<
           "==> result harmony structure after adding first item :" <<
@@ -6611,7 +6626,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       harmonyIntervalClone->
         incrementHarmonyIntervalRelativeOctave ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         gLogStream <<
           "--> adding last item to resultlast item :" <<
@@ -6628,7 +6643,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
         appendHarmonyIntervalToHarmonyStructure (
           harmonyIntervalClone);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
         gLogStream <<
           "==> result harmony structure after  after adding last item:" <<

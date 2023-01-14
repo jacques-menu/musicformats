@@ -191,7 +191,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
   int inputLineNumber) const
 {
   if (! fSegmentElementsList.size ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (
     gGlobalTracingOahGroup->getTraceMeasuresDetails ()
       ||
@@ -230,7 +230,7 @@ One such call is:
 void msrSegment::appendKeyToSegment (
   const S_msrKey& key)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Appending key " << key->asString () <<
@@ -242,6 +242,7 @@ void msrSegment::appendKeyToSegment (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentElementsListIsNotEmpty (
     key->getInputLineNumber ());

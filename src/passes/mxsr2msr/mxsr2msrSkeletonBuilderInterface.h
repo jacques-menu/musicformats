@@ -18,17 +18,17 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 EXP S_msrScore translateMxsrToMsrSkeleton (
-  Sxmlelement    theMxsr,
-  S_msrOahGroup& msrOpts,
-  const std::string&   passNumber,
-  const std::string&   passDescription);
+  Sxmlelement        theMxsr,
+  S_msrOahGroup&     msrOpts,
+  const std::string& passNumber,
+  const std::string& passDescription);
 
 //_______________________________________________________________________________
 EXP void displayMsrScoreSkeleton (
-  S_msrOahGroup& msrOpts,
-  S_msrScore     theMsrScore,
-  const std::string&  passNumber,
-  const std::string&  passDescription);
+  S_msrOahGroup&     msrOpts,
+  S_msrScore         theMsrScore,
+  const std::string& passNumber,
+  const std::string& passDescription);
 
 
 }

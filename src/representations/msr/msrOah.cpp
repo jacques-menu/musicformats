@@ -18,10 +18,7 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -87,7 +84,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrPitchesLanguageAtom'" <<
@@ -98,7 +95,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the pitches languages map?
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrPitchesLanguageAtom'" <<
@@ -141,7 +138,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
 
 void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrPitchesLanguageAtom::acceptIn ()" <<
@@ -154,7 +151,7 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrPitchesLanguageAtom>*> (v)) {
         S_msrPitchesLanguageAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrPitchesLanguageAtom::visitStart ()" <<
@@ -167,7 +164,7 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
 
 void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrPitchesLanguageAtom::acceptOut ()" <<
@@ -180,7 +177,7 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrPitchesLanguageAtom>*> (v)) {
         S_msrPitchesLanguageAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrPitchesLanguageAtom::visitEnd ()" <<
@@ -193,7 +190,7 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
 
 void msrPitchesLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrPitchesLanguageAtom::browseData ()" <<
@@ -331,7 +328,7 @@ void msrRenamePartAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrRenamePartAtom'" <<
@@ -342,7 +339,7 @@ void msrRenamePartAtom::applyAtomWithValue (
   // theString contains the part rename specification
   // decipher it to extract the old and new part names
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrRenamePartAtom'" <<
@@ -363,7 +360,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -375,7 +372,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 #endif
 
   if (smSize == 3) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
@@ -403,7 +400,7 @@ void msrRenamePartAtom::applyAtomWithValue (
   mfTrimFromBothEnds (oldPartName);
   mfTrimFromBothEnds (newPartName);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> oldPartName = \"" << oldPartName << "\", " <<
@@ -437,7 +434,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
 void msrRenamePartAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrRenamePartAtom::acceptIn ()" <<
@@ -450,7 +447,7 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrRenamePartAtom>*> (v)) {
         S_msrRenamePartAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrRenamePartAtom::visitStart ()" <<
@@ -463,7 +460,7 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
 
 void msrRenamePartAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrRenamePartAtom::acceptOut ()" <<
@@ -476,7 +473,7 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrRenamePartAtom>*> (v)) {
         S_msrRenamePartAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrRenamePartAtom::visitEnd ()" <<
@@ -489,7 +486,7 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
 
 void msrRenamePartAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrRenamePartAtom::browseData ()" <<
@@ -663,7 +660,7 @@ R"(These options control the way MSR data is handled.)",
 msrOahGroup::~msrOahGroup ()
 {}
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void msrOahGroup::initializeMsrtracingOah ()
 {
   S_oahSubGroup subGroup =
@@ -735,8 +732,8 @@ R"(Write the structure of the part groups to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-msr-skeleton", "dmsrskel",
-R"(Write the contents of the MSR skeleton data to standard error.)",
+        "display-msr1-skeleton", "dmsr1skel",
+R"(Write the contents of the first MSR skeleton data to standard error.)",
         "fDisplayMsrSkeleton",
         fDisplayMsrSkeleton));
 
@@ -757,7 +754,7 @@ R"(Write the contents of the first MSR data to standard error.)",
     displayFirstMsrFullBooleanAtom =
       oahBooleanAtomWithTracePasses::create (
         "display-msr1-full", "dmsr1full",
-  R"(Write the contents of the first MSR data, full version, to standard error.)",
+R"(Write the contents of the first MSR data, full version, to standard error.)",
         "fDisplayFirstMsrFull",
         fDisplayFirstMsrFull);
 
@@ -1089,7 +1086,7 @@ even though they do not contain music.)",
 
 void msrOahGroup::initializeMsrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeMsrtracingOah ();
@@ -1160,7 +1157,7 @@ void msrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrOahGroup::acceptIn ()" <<
@@ -1173,7 +1170,7 @@ void msrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrOahGroup>*> (v)) {
         S_msrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrOahGroup::visitStart ()" <<
@@ -1186,7 +1183,7 @@ void msrOahGroup::acceptIn (basevisitor* v)
 
 void msrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrOahGroup::acceptOut ()" <<
@@ -1199,7 +1196,7 @@ void msrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrOahGroup>*> (v)) {
         S_msrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrOahGroup::visitEnd ()" <<
@@ -1212,7 +1209,7 @@ void msrOahGroup::acceptOut (basevisitor* v)
 
 void msrOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrOahGroup::browseData ()" <<
@@ -1418,7 +1415,7 @@ std::ostream& operator << (std::ostream& os, const S_msrOahGroup& elt)
 //______________________________________________________________________________
 S_msrOahGroup createGlobalMsrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global MSR OAH group" <<

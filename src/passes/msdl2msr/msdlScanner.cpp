@@ -13,16 +13,13 @@
 #include <iomanip>  // for setw()
 #include <cstdlib>  // for stod()
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfExceptions.h"
 #include "mfStringsHandling.h"
 
 #include "waeInterface.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msdlScannerWaeHandlers.h"
 
@@ -88,7 +85,7 @@ msdlScanner::msdlScanner (std::istream& inputStream)
         fCurrentToken.getTokenDescriptionNonConst ())
 {
   // trace
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   fTraceTokens        = gGlobalMsdl2msrOahGroup->getTraceTokens ();
   fTraceTokensDetails = gGlobalMsdl2msrOahGroup->getTraceTokensDetails ();
 #endif
@@ -169,7 +166,7 @@ msdlScanner::~ msdlScanner ()
 
 void msdlScanner::populateInputString (std::istream& inputStream)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "Populating the input std::string" <<
@@ -193,7 +190,7 @@ void msdlScanner::populateInputString (std::istream& inputStream)
 
   fInputIsEmpty = fInputStringSize == 0;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "inputStringSize: " << fInputStringSize <<
@@ -230,7 +227,7 @@ std::string msdlScanner::currentCharacterAsString () const
 
 char msdlScanner::fetchNextCharacter ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "--> fetchNextCharacter()" <<
@@ -266,7 +263,7 @@ char msdlScanner::fetchNextCharacter ()
 
   fNextCharacterIsAvailable = true;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "<-- fetchNextCharacter() returns: " <<
@@ -284,7 +281,7 @@ char msdlScanner::fetchNextCharacter ()
 
 void msdlScanner::handleEndOfLine (const std::string& context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "--> handleEndOfLine(): " <<
@@ -301,7 +298,7 @@ void msdlScanner::handleEndOfLine (const std::string& context)
 
   fCurrentPositionInLine = 0;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "<-- handleEndOfLine(): " <<
@@ -324,7 +321,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
 {
   ++fTokensCounter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
     gLogStream <<
       std::endl <<
@@ -377,7 +374,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
 
     switch (fCurrentCharacter) {
       case EOF:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (fTraceTokensDetails) {
           gLogStream << "EOF has been reached" << std::endl;
         }
@@ -584,7 +581,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         }
     } // switch (fCurrentCharacter)
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceTokensDetails) {
       gLogStream <<
         fCurrentToken.asString () <<
@@ -626,7 +623,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
         ;
     } // switch
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceTokensDetails) {
       gLogStream <<
         "--- fetchNextToken(): onceMore: " << onceMore <<
@@ -655,7 +652,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
   fCurrentToken.setTokenLineNumber (fCurrentTokenLineNumber);
   fCurrentToken.setTokenPositionInLine (fCurrentTokenPositionInLine);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
     gLogStream <<
       std::endl <<
@@ -740,7 +737,7 @@ void msdlScanner::handlePercent ()
         // the end of the comment has been reached
         fNextCharacterIsAvailable = false;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (fTraceTokensDetails) {
           gLogStream <<
             "percentParenthesizedCommentStartPositionInInput: " <<
@@ -824,7 +821,7 @@ void msdlScanner::handleSlash ()
 
         fNextCharacterIsAvailable = false;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (fTraceTokensDetails) {
           gLogStream <<
             "slashParenthesizedCommentStartPositionInInput: " <<
@@ -898,7 +895,7 @@ void msdlScanner::acceptAName ()
     nameStartPositionInInput =
       fCurrentTokenPositionInInput;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream << std::left <<
       "Accepting a name" <<
@@ -938,7 +935,7 @@ void msdlScanner::acceptAName ()
       nameStartPositionInInput,
       fCurrentPositionInInput - nameStartPositionInInput);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "--- acceptAName()" <<
@@ -953,7 +950,7 @@ void msdlScanner::acceptAName ()
         fKeywordsInputLanguageKind,
         nameString);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "--- acceptAName()" <<
@@ -1053,7 +1050,7 @@ void msdlScanner::acceptAName ()
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "Accepting a name, found: \"" << nameString << "\"" <<
@@ -1074,7 +1071,7 @@ void msdlScanner::acceptAnInteger ()
     integerStartPositionInInput =
       fCurrentTokenPositionInInput;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream << std::left <<
       "Accepting an integer" <<
@@ -1126,7 +1123,7 @@ void msdlScanner::acceptAnInteger ()
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "Accepting an integer, found: \"" << integerString << "\"" <<
@@ -1147,7 +1144,7 @@ void msdlScanner::acceptAString ()
     stringStartPositionInInput =
       fCurrentTokenPositionInInput;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream << std::left <<
       std::endl <<
@@ -1171,7 +1168,7 @@ void msdlScanner::acceptAString ()
     stringStartPositionInInput + 1;
 
   while (! endOfStringHasBeenReached) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "--- acceptAString()" <<
@@ -1198,7 +1195,7 @@ void msdlScanner::acceptAString ()
       case '\\': // escaped characted
         {
           // append the current chunk to theString
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (fTraceTokensDetails) {
             gLogStream <<
               "--- acceptAString()" <<
@@ -1217,7 +1214,7 @@ void msdlScanner::acceptAString ()
               chunkStartPositionInInput,
               fCurrentPositionInInput - chunkStartPositionInInput);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (fTraceTokensDetails) {
             gLogStream <<
               "--- acceptAString(), escaped character" <<
@@ -1229,7 +1226,7 @@ void msdlScanner::acceptAString ()
 #endif
 
           theString += currentChunk;
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (fTraceTokensDetails) {
             gLogStream <<
               "--- acceptAString(), theString with chunk appended" <<
@@ -1244,7 +1241,7 @@ void msdlScanner::acceptAString ()
           fetchNextCharacter ();
 
           // append the escaped character to theString
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (fTraceTokensDetails) {
             gLogStream <<
               ", escaped character: " <<
@@ -1275,7 +1272,7 @@ void msdlScanner::acceptAString ()
               fNextCharacterIsAvailable = false;
           } // switch
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (fTraceTokensDetails) {
             gLogStream <<
               "--- acceptAString(), theString with escaped character appended" <<
@@ -1325,7 +1322,7 @@ void msdlScanner::acceptAString ()
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       std::endl <<
@@ -1346,7 +1343,7 @@ std::string msdlScanner::currentLocationAsString () const
 
   std::stringstream s;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
     s <<
       "==> fCurrentTokenPositionInInput:" << fCurrentTokenPositionInInput <<
@@ -1380,7 +1377,7 @@ std::string msdlScanner::currentLocationAsString () const
         fCurrentTokenPositionInInput,
         lineBeginningLength);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
     s <<
       "==> lineBeginningLength:" << lineBeginningLength <<
@@ -1414,7 +1411,7 @@ void msdlScanner::scanAllTheInputAtOnce (
   msdlIgnoreSeparatorTokensKind
     ignoreSeparatorTokens)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "==> scanAllTheInputAtOnce()";
@@ -1432,7 +1429,7 @@ void msdlScanner::scanAllTheInputAtOnce (
 #endif
 
   if (fInputIsEmpty) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     gLogStream <<
       "Input is empty " <<
       std::endl;
@@ -1456,7 +1453,7 @@ void msdlScanner::scanAllTheInputAtOnce (
         tokenKind = fetchNextToken (ignoreSeparatorTokens);
         ++numberOfTokens;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (fTraceTokensDetails) {
           int fieldWidth = 28;
 
@@ -1511,7 +1508,7 @@ void msdlScanner::scanAllTheInputAtOnce (
     --gIndenter;
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       std::endl <<
@@ -1529,7 +1526,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
   msdlKeywordsLanguageKind keywordsConversionLanguage,
   msdlCommentsTypeKind     commentsTypeKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
     gLogStream <<
       "==> translateAllTheInputToKeywordsLanguage()" <<
@@ -1540,7 +1537,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 #endif
 
   if (fInputIsEmpty) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     gLogStream <<
       "Input is empty " <<
       std::endl;
@@ -1573,7 +1570,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
       tokenKind = fetchNextToken (msdlIgnoreSeparatorTokensKind::kIgnoreSeparatorTokensNo);
       ++numberOfTokens;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (fTraceTokens) {
         int fieldWidth = 23;
 
@@ -1634,7 +1631,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
     mfDisplayException (e, gOutputStream);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokens) {
     gLogStream <<
       std::endl <<
@@ -1650,7 +1647,7 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
 
 void msdlScanner::scanWholeInputAtOnce ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceTokensDetails) {
     gLogStream <<
       "==> scanWholeInputAtOnce()" <<
@@ -1659,7 +1656,7 @@ void msdlScanner::scanWholeInputAtOnce ()
 #endif
 
   if (fInputIsEmpty) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     gLogStream <<
       "Input is empty " <<
       std::endl;

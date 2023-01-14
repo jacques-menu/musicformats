@@ -11,12 +11,11 @@
 
 #include <iomanip>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
@@ -170,11 +169,13 @@ msrBassFigure::msrBassFigure (
   msrBassFigureSuffixKind figureSuffixKind)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     figureUpLinkToPart != nullptr,
     "figureUpLinkToPart is null");
+#endif
 
   // set figured's part upLink
   fFigureUpLinkToPart =
@@ -184,7 +185,7 @@ msrBassFigure::msrBassFigure (
   fFigureNumber     = figureNumber;
   fFigureSuffixKind = figureSuffixKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating bass figure " <<
@@ -200,7 +201,7 @@ msrBassFigure::~msrBassFigure ()
 S_msrBassFigure msrBassFigure::createFigureNewbornClone (
   const S_msrPart& containingPart)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a newborn clone of bass figure " <<
@@ -209,11 +210,13 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
+#endif
 
   S_msrBassFigure
     newbornClone =
@@ -230,7 +233,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
 S_msrBassFigure msrBassFigure::createFigureDeepClone (
   const S_msrPart& containingPart)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a deep clone of bass figure " <<
@@ -239,11 +242,13 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
     "containingPart is null");
+#endif
 
   S_msrBassFigure
     deepClone =
@@ -454,7 +459,7 @@ msrFiguredBass::msrFiguredBass (
   // until this is computed in msrMeasure::finalizeFiguredBassesInFiguredBassMeasure()
   fMeasureElementMeasurePosition = Rational (0, 1);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating figuredBass " <<
@@ -470,7 +475,7 @@ msrFiguredBass::~msrFiguredBass ()
 S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a newborn clone of figured bass " <<
@@ -480,11 +485,13 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrFiguredBass
     newbornClone =
@@ -505,7 +512,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
 S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
  // S_msrPart containingPart) // JMI v0.9.66
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Creating a deep clone of figuredBass " <<
@@ -515,11 +522,13 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
   }
 #endif
 
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     containingPart != nullptr,
 //     "containingPart is null");
+// #endif
 
   S_msrFiguredBass
     figuredBassDeepClone =
@@ -540,7 +549,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 void msrFiguredBass::setFiguredBassUpLinkToNote (
   const S_msrNote& note)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (true || gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "==> Setting the uplink to note of figured bass " <<
@@ -550,11 +559,13 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     note != nullptr,
     "note is null");
+#endif
 
   fFiguredBassUpLinkToNote = note;
 }
@@ -562,13 +573,15 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
 void msrFiguredBass::setFiguredBassUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     ++gIndenter;
 
@@ -590,7 +603,7 @@ void msrFiguredBass::setFiguredBassUpLinkToMeasure (
 void msrFiguredBass::appendFigureToFiguredBass (
   const S_msrBassFigure& bassFigure)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "Appending bass figure " << bassFigure->asString () <<

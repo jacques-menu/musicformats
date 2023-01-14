@@ -9,43 +9,39 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <cassert>
 #include <iostream>
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <regex>
 
-#include "mfEnableSanityChecks.h"
+#include "mfEnableSanityChecksSetting.h"
 
-#include "oahWae.h"
-
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 
-#include "mfcBasicTypes.h"
-
 #include "oahEarlyOptions.h"
 
+#include "mfcBasicTypes.h"
 #include "mfcLibraryComponent.h"
 
 #include "oahComponent.h"
+#include "oahWae.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-void crackVersionNumber (
+void crackVersionNumber ( // JMI ??? v0.9.66
   const std::string& theString,
-  int&          generationNumber,
-  int&          majorNumber,
-  int&          minorNumber)
+  int&  generationNumber,
+  int&  majorNumber,
+  int&  minorNumber)
 {
   // obtains the three numbers in "2.19.83" or "2.20" for example
 
@@ -65,7 +61,7 @@ void crackVersionNumber (
 
   size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -91,7 +87,7 @@ void crackVersionNumber (
       majorNumberValue      = sm [2],
       minorNumberValue      = sm [3];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "--> generationNumberValue = \"" << generationNumberValue << "\", " <<
@@ -121,7 +117,7 @@ void crackVersionNumber (
 
     size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "There are " << smSize << " matches" <<
@@ -147,7 +143,7 @@ void crackVersionNumber (
         generationNumberValue = sm [1],
         majorNumberValue      = sm [2];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
         gLogStream <<
           "--> generationNumberValue = \"" << generationNumberValue << "\", " <<
@@ -272,6 +268,8 @@ Bool versionNumberGreaterThanOrEqualTo (
 
 //______________________________________________________________________________
 /*
+*** MusicFormats uses semantic versioning inspired from https://semver.org
+
 Once a versioned package has been released, the contents of that version MUST NOT be modified. Any modifications MUST be released as a new version.
 
 Major version zero (0.y.z) is for initial development. Anything MAY change at any time. The public API SHOULD NOT be considered stable.
@@ -316,10 +314,11 @@ A larger set of pre-release fields has a higher precedence than a smaller set, i
 
 Example: 1.0.0-alpha < 1.0.0-alpha.1 < 1.0.0-alpha.beta < 1.0.0-beta < 1.0.0-beta.2 < 1.0.0-beta.11 < 1.0.0-rc.1 < 1.0.0.
 */
+
 S_mfcVersionNumber mfcVersionNumber::create (
-  int           majorNumber,
-  int           minorNumber,
-  int           patchNumber,
+  int                majorNumber,
+  int                minorNumber,
+  int                patchNumber,
   const std::string& preRelease)
 {
   mfcVersionNumber* o =
@@ -333,12 +332,12 @@ S_mfcVersionNumber mfcVersionNumber::create (
 }
 
 mfcVersionNumber::mfcVersionNumber (
-  int           majorNumber,
-  int           minorNumber,
-  int           patchNumber,
+  int                majorNumber,
+  int                minorNumber,
+  int                patchNumber,
   const std::string& preRelease)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcVersionNumber" <<
@@ -387,7 +386,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -423,7 +422,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
     preReleaseValue         = sm [4];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
@@ -704,8 +703,8 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionNumber& elt)
 
 //______________________________________________________________________________
 S_mfcVersionDescr mfcVersionDescr::create (
-  const S_mfcVersionNumber&  versionNumber,
-  const std::string&       versionDate,
+  const S_mfcVersionNumber&     versionNumber,
+  const std::string&            versionDate,
   const std::list<std::string>& versionDescriptionItems)
 {
   mfcVersionDescr* o =
@@ -718,11 +717,11 @@ S_mfcVersionDescr mfcVersionDescr::create (
 }
 
 mfcVersionDescr::mfcVersionDescr (
-  const S_mfcVersionNumber&  versionNumber,
-  const std::string&       versionDate,
+  const S_mfcVersionNumber&     versionNumber,
+  const std::string&            versionDate,
   const std::list<std::string>& versionDescriptionItems)
 {
- #ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcVersionDescr" <<
@@ -790,7 +789,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionDescr& elt)
 //______________________________________________________________________________
 S_mfcVersionsHistory mfcVersionsHistory::create ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcVersionsHistory" <<
@@ -807,7 +806,7 @@ S_mfcVersionsHistory mfcVersionsHistory::create ()
 mfcVersionsHistory::mfcVersionsHistory ()
 {
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcVersionsHistory" <<
@@ -822,7 +821,7 @@ mfcVersionsHistory::~mfcVersionsHistory ()
 void mfcVersionsHistory::appendVersionDescrToHistory (
   const S_mfcVersionDescr& versionDescr)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Appending version " <<
@@ -877,25 +876,25 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionsHistory& elt)
 }
 
 //______________________________________________________________________________
-std::string mfcComponenKindAsString (
-  mfcComponenKind componenKind)
+std::string mfcComponentKindAsString (
+  mfcComponentKind componentKind)
 {
   std::string result;
 
-  switch (componenKind) {
-    case mfcComponenKind::kComponentRepresentation:
+  switch (componentKind) {
+    case mfcComponentKind::kComponentRepresentation:
       result = "format";
       break;
-    case mfcComponenKind::kComponentPass:
+    case mfcComponentKind::kComponentPass:
       result = "pass";
       break;
-    case mfcComponenKind::kComponentGenerator:
+    case mfcComponentKind::kComponentGenerator:
       result = "generator";
       break;
-    case mfcComponenKind::kComponentConverter:
+    case mfcComponentKind::kComponentConverter:
       result = "converter";
       break;
-    case mfcComponenKind::kComponentLibrary:
+    case mfcComponentKind::kComponentLibrary:
       result = "library";
       break;
   } // switch
@@ -906,10 +905,10 @@ std::string mfcComponenKindAsString (
 //______________________________________________________________________________
 /* this class is purely virtual
 S_mfcComponent mfcComponent::create (
-  const std::string&   componentName,
-  mfcComponenKind componenKind)
+  const std::string& componentName,
+  mfcComponentKind   componentKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcComponent" <<
@@ -921,17 +920,17 @@ S_mfcComponent mfcComponent::create (
   mfcComponent* o =
     new mfcComponent (
       componentName,
-      componenKind);
+      componentKind);
   assert (o != nullptr);
   return o;
 }
 */
 
 mfcComponent::mfcComponent (
-  const std::string&   componentName,
-  mfcComponenKind componenKind)
+  const std::string& componentName,
+  mfcComponentKind   componentKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcComponent \"" <<
@@ -942,7 +941,7 @@ mfcComponent::mfcComponent (
 #endif
 
   fComponentName = componentName;
-  fComponenKind  = componenKind;
+  fComponentKind  = componentKind;
 
   // create the versions history
   fVersionsHistory = mfcVersionsHistory::create ();
@@ -954,13 +953,13 @@ mfcComponent::~mfcComponent ()
 void mfcComponent::appendVersionDescrToComponent (
   const S_mfcVersionDescr& versionDescr)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Appending version " <<
       versionDescr <<
       " to " <<
-      mfcComponenKindAsString (fComponenKind) <<
+      mfcComponentKindAsString (fComponentKind) <<
       ' ' <<
       fComponentName <<
       std::endl;
@@ -982,7 +981,7 @@ std::string mfcComponent::asString () const
   s <<
     fComponentName <<
     ' ' <<
-    mfcComponenKindAsString (fComponenKind) <<
+    mfcComponentKindAsString (fComponentKind) <<
     ' ' <<
     componentMostRecentVersion->
       getVersionNumber ()->
@@ -1042,7 +1041,7 @@ void mfcComponent::printVersion (std::ostream& os) const
   os <<
     fComponentName <<
     ' ' <<
-    mfcComponenKindAsString (fComponenKind) <<
+    mfcComponentKindAsString (fComponentKind) <<
     ' ' <<
     getGlobalMusicFormatsVersionNumberAndDate () <<
     std::endl;
@@ -1069,7 +1068,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcComponent& elt)
 S_mfcOahComponent mfcOahComponent::create (
   const std::string& formatName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcOahComponent" <<
@@ -1089,9 +1088,9 @@ mfcOahComponent::mfcOahComponent (
   const std::string& formatName)
   : mfcComponent (
       formatName,
-      mfcComponenKind::kComponentRepresentation)
+      mfcComponentKind::kComponentRepresentation)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcOahComponent \"" <<
@@ -1121,7 +1120,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcOahComponent& elt)
 S_mfcRepresentationComponent mfcRepresentationComponent::create (
   const std::string& formatName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcRepresentationComponent" <<
@@ -1141,9 +1140,9 @@ mfcRepresentationComponent::mfcRepresentationComponent (
   const std::string& formatName)
   : mfcComponent (
       formatName,
-      mfcComponenKind::kComponentRepresentation)
+      mfcComponentKind::kComponentRepresentation)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcRepresentationComponent \"" <<
@@ -1173,7 +1172,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcRepresentationComponent&
 S_mfcPassComponent mfcPassComponent::create (
   const std::string& passName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcPassComponent" <<
@@ -1193,9 +1192,9 @@ mfcPassComponent::mfcPassComponent (
   const std::string& passName)
   : mfcComponent (
       passName,
-      mfcComponenKind::kComponentPass)
+      mfcComponentKind::kComponentPass)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcPassComponent \"" <<
@@ -1258,15 +1257,15 @@ std::string mfcComponentEntropicityKindAsString (
 
 //______________________________________________________________________________
 /* this class is purely virtual
-S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
-  const std::string&   multiComponentName,
-  mfcComponenKind componenKind,
+S_mfcMultiComponent mfcMultiComponent::create (
+  const std::string& multiComponentName,
+  mfcComponentKind   componentKind,
   mfcMultiComponentEntropicityKind
-                  componentEntropicityKind,
+                     componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
-                  componentUsedFromTheCLIKind)
+                     componentUsedFromTheCLIKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcMultiComponent" <<
@@ -1278,7 +1277,7 @@ S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
   mfcMultiComponent* o =
     new mfcMultiComponent (
       multiComponentName,
-      componenKind,
+      componentKind,
       componentEntropicityKind,
       componentUsedFromTheCLIKind);
   assert (o != nullptr);
@@ -1287,17 +1286,17 @@ S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
 */
 
 mfcMultiComponent::mfcMultiComponent (
-  const std::string&   multiComponentName,
-  mfcComponenKind componenKind,
+  const std::string& multiComponentName,
+  mfcComponentKind   componentKind,
   mfcMultiComponentEntropicityKind
-                  componentEntropicityKind,
+                     componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
-                  componentUsedFromTheCLIKind)
+                     componentUsedFromTheCLIKind)
   : mfcComponent (
       multiComponentName,
-      componenKind)
+      componentKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcMultiComponent \"" <<
@@ -1323,7 +1322,7 @@ mfcMultiComponent::~mfcMultiComponent ()
 void mfcMultiComponent::appendRepresentationToMultiComponent (
   const S_mfcRepresentationComponent& format)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Appending format " <<
@@ -1331,7 +1330,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
       " to " <<
       fComponentName <<
       ' ' <<
-      mfcComponenKindAsString (fComponenKind) <<
+      mfcComponentKindAsString (fComponentKind) <<
       ' ' <<
       "\"" <<
       std::endl;
@@ -1368,7 +1367,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
             "Versions numbering inconsistency: multi component " <<
             fComponentName <<
             ' ' <<
-            mfcComponenKindAsString (fComponenKind) <<
+            mfcComponentKindAsString (fComponentKind) <<
             " has version number " <<
             multiComponentMostRecentVersionNumber->asString () <<
             " while " <<
@@ -1391,7 +1390,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
 void mfcMultiComponent::appendPassToMultiComponent (
   const S_mfcPassComponent& pass)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Appending pass " <<
@@ -1431,7 +1430,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
             "Versions numbering inconsistency: multi component " <<
             fComponentName <<
             ' ' <<
-            mfcComponenKindAsString (fComponenKind) <<
+            mfcComponentKindAsString (fComponentKind) <<
             " has version number " <<
             multiComponentMostRecentVersionNumber->asString () <<
             " while " <<
@@ -1681,7 +1680,7 @@ void mfcMultiComponent::print (std::ostream& os) const
         "Command line version of " <<
         fComponentName <<
         ' ' <<
-        mfcComponenKindAsString (fComponenKind) <<
+        mfcComponentKindAsString (fComponentKind) <<
         ' ';
       break;
 
@@ -1689,7 +1688,7 @@ void mfcMultiComponent::print (std::ostream& os) const
       os <<
         fComponentName <<
         ' ' <<
-        mfcComponenKindAsString (fComponenKind) <<
+        mfcComponentKindAsString (fComponentKind) <<
         " API version ";
       break;
   } // switch
@@ -1771,7 +1770,7 @@ void mfcMultiComponent::printVersionShort (std::ostream& os) const
         "Command line version of " <<
         fComponentName <<
         ' ' <<
-        mfcComponenKindAsString (fComponenKind) <<
+        mfcComponentKindAsString (fComponentKind) <<
         ' ';
       break;
 
@@ -1779,7 +1778,7 @@ void mfcMultiComponent::printVersionShort (std::ostream& os) const
       os <<
         fComponentName <<
         ' ' <<
-        mfcComponenKindAsString (fComponenKind) <<
+        mfcComponentKindAsString (fComponentKind) <<
       " API version ";
       break;
   } // switch
@@ -1797,7 +1796,7 @@ void mfcMultiComponent::printVersionFull (std::ostream& os) const
         "Command line version of " <<
         fComponentName <<
         ' ' <<
-        mfcComponenKindAsString (fComponenKind) <<
+        mfcComponentKindAsString (fComponentKind) <<
         ' ';
       break;
 
@@ -1805,7 +1804,7 @@ void mfcMultiComponent::printVersionFull (std::ostream& os) const
       os <<
         fComponentName <<
         ' ' <<
-        mfcComponenKindAsString (fComponenKind) <<
+        mfcComponentKindAsString (fComponentKind) <<
         " API version ";
       break;
   } // switch
@@ -1835,7 +1834,7 @@ void mfcMultiComponent::printHistory (std::ostream&  os) const
         "Command line version of " <<
         fComponentName <<
         ' ' <<
-        mfcComponenKindAsString (fComponenKind) <<
+        mfcComponentKindAsString (fComponentKind) <<
         ' ';
       break;
 
@@ -1843,7 +1842,7 @@ void mfcMultiComponent::printHistory (std::ostream&  os) const
       os <<
         fComponentName <<
         ' ' <<
-        mfcComponenKindAsString (fComponenKind) <<
+        mfcComponentKindAsString (fComponentKind) <<
       " API version ";
       break;
   } // switch
@@ -1881,13 +1880,13 @@ std::ostream& operator << (std::ostream& os, const S_mfcMultiComponent& elt)
 
 //______________________________________________________________________________
 S_mfcGeneratorComponent mfcGeneratorComponent::create (
-  const std::string&   generatorName,
+  const std::string& generatorName,
   mfcMultiComponentEntropicityKind
-                  componentEntropicityKind,
+                     componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
-                  componentUsedFromTheCLIKind)
+                     componentUsedFromTheCLIKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcGeneratorComponent" <<
@@ -1906,18 +1905,18 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
 }
 
 mfcGeneratorComponent::mfcGeneratorComponent (
-  const std::string&   generatorName,
+  const std::string& generatorName,
   mfcMultiComponentEntropicityKind
-                  componentEntropicityKind,
+                     componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
-                  componentUsedFromTheCLIKind)
+                     componentUsedFromTheCLIKind)
   : mfcMultiComponent (
       generatorName,
-      mfcComponenKind::kComponentGenerator,
+      mfcComponentKind::kComponentGenerator,
       componentEntropicityKind,
       componentUsedFromTheCLIKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcGeneratorComponent \"" <<
@@ -1951,7 +1950,7 @@ S_mfcConverterComponent mfcConverterComponent::create (
   mfcMultiComponentUsedFromTheCLIKind
                   componentUsedFromTheCLIKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcConverterComponent" <<
@@ -1977,11 +1976,11 @@ mfcConverterComponent::mfcConverterComponent (
                   componentUsedFromTheCLIKind)
   : mfcMultiComponent (
       converterName,
-      mfcComponenKind::kComponentConverter,
+      mfcComponentKind::kComponentConverter,
       componentEntropicityKind,
       componentUsedFromTheCLIKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcConverterComponent \"" <<
@@ -2009,13 +2008,13 @@ std::ostream& operator << (std::ostream& os, const S_mfcConverterComponent& elt)
 
 //______________________________________________________________________________
 S_mfcLibraryComponent mfcLibraryComponent::create (
-  const std::string&   libraryVersionsName,
+  const std::string& libraryVersionsName,
   mfcMultiComponentEntropicityKind
-                  componentEntropicityKind,
+                     componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
-                  componentUsedFromTheCLIKind)
+                     componentUsedFromTheCLIKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Creating mfcLibraryComponent" <<
@@ -2034,18 +2033,18 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
 }
 
 mfcLibraryComponent::mfcLibraryComponent (
-  const std::string&   libraryVersionsName,
+  const std::string& libraryVersionsName,
   mfcMultiComponentEntropicityKind
-                  componentEntropicityKind,
+                     componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
-                  componentUsedFromTheCLIKind)
+                     componentUsedFromTheCLIKind)
   : mfcMultiComponent (
       libraryVersionsName,
-      mfcComponenKind::kComponentLibrary,
+      mfcComponentKind::kComponentLibrary,
       componentEntropicityKind,
       componentUsedFromTheCLIKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Constructing mfcLibraryComponent \"" <<
@@ -2062,7 +2061,7 @@ mfcLibraryComponent::~mfcLibraryComponent ()
 void mfcLibraryComponent::appendConverterToMultiComponent (
   const S_mfcConverterComponent& converter)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
       "Appending converter " <<
@@ -2070,7 +2069,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
       " to " <<
       fComponentName <<
       ' ' <<
-      mfcComponenKindAsString (fComponenKind) <<
+      mfcComponentKindAsString (fComponentKind) <<
       ' ' <<
       "\"" <<
       std::endl;
@@ -2107,7 +2106,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
             "Versions numbering inconsistency: multi component " <<
             fComponentName <<
             ' ' <<
-            mfcComponenKindAsString (fComponenKind) <<
+            mfcComponentKindAsString (fComponentKind) <<
             " has version number " <<
             multiComponentMostRecentVersionNumber->asString () <<
             " while " <<

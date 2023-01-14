@@ -17,10 +17,7 @@
 
 #include "bsrOah2manPage.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 
 #include "oahOah.h"
@@ -43,7 +40,7 @@ bsrOah2manPage::~bsrOah2manPage ()
 //________________________________________________________________________
 void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -72,7 +69,7 @@ void bsrOah2manPage::visitStart (S_bsrFacSimileKindAtom& elt)
 
 void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -86,7 +83,7 @@ void bsrOah2manPage::visitEnd (S_bsrFacSimileKindAtom& elt)
 //________________________________________________________________________
 void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -115,7 +112,7 @@ void bsrOah2manPage::visitStart (S_bsrTextsLanguageAtom& elt)
 
 void bsrOah2manPage::visitEnd (S_bsrTextsLanguageAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<

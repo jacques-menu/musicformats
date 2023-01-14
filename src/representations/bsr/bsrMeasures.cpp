@@ -13,10 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfStringsHandling.h"
 
@@ -54,7 +51,7 @@ bsrMeasure::bsrMeasure (
   // initially, fBrailleMeasureNumber is the same as fPrintMeasureNumber
   fBrailleMeasureNumber = fPrintMeasureNumber;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating bsrMeasure '" <<
@@ -71,7 +68,7 @@ bsrMeasure::~bsrMeasure ()
 
 S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating a newborn clone of measure " <<
@@ -101,7 +98,7 @@ void bsrMeasure::appendLineElementToMeasure (
 
 void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceClefs ()) {
     gLogStream <<
       "Appending clef '" <<
@@ -118,7 +115,7 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 
 void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Appending barLine " <<
@@ -135,7 +132,7 @@ void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 
 void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceNumbers ()) {
     gLogStream <<
       "Appending number '" <<
@@ -152,7 +149,7 @@ void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
 
 void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceNumbers ()) {
     gLogStream <<
       "Appending words '" <<
@@ -169,7 +166,7 @@ void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
 
 void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Appending note '" <<
@@ -186,7 +183,7 @@ void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 
 void bsrMeasure::appendDynamicToMeasure (S_bsrDynamic dynamic)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamics ()) {
     gLogStream <<
       "Appending dynamic '" <<
@@ -227,7 +224,7 @@ int bsrMeasure::fetchCellsNumber () const
 
 void bsrMeasure::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrMeasure::acceptIn ()" <<
@@ -240,7 +237,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrMeasure>*> (v)) {
         S_bsrMeasure elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrMeasure::visitStart ()" <<
@@ -253,7 +250,7 @@ void bsrMeasure::acceptIn (basevisitor* v)
 
 void bsrMeasure::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrMeasure::acceptOut ()" <<
@@ -266,7 +263,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrMeasure>*> (v)) {
         S_bsrMeasure elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrMeasure::visitEnd ()" <<

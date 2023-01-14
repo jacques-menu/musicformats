@@ -20,7 +20,6 @@
 #include "msrMeasures.h"
 
 
-
 namespace MusicFormats
 {
 

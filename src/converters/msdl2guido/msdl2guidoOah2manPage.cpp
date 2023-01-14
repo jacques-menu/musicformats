@@ -17,15 +17,9 @@
 
 #include "msdl2guidoOah2manPage.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
-
-
-
 
 
 namespace MusicFormats

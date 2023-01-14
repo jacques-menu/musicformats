@@ -12,6 +12,8 @@
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>         // std::chrono::seconds
 
+#include "mfEnableSanityChecksSetting.h"
+
 /*
 int main()
 {
@@ -49,7 +51,7 @@ ischemeDriver::ischemeDriver ()
 
   if (fScriptName == "-") {
     // iScheme data comes from standard input
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream << "Reading standard input" << std::endl;
     }
@@ -58,7 +60,7 @@ ischemeDriver::ischemeDriver ()
 
   else {
     // iScheme data comes from a file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Reading file \"" << fScriptName << "\"" <<
@@ -220,11 +222,13 @@ void ischemeDriver::optionsBlocksStackPush (
 
 S_ischemeOptionsBlock ischemeDriver::optionsBlocksStackTop () const
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fOptionsBlocksStack.size (),
     "optionsBlocksStackTop(): fOptionsBlocksStack is empty");
+#endif
 
   return fOptionsBlocksStack.front ();
 }
@@ -237,11 +241,13 @@ void ischemeDriver::registerOptionInCurrentOptionsBlock (
     currentOptionsBlock =
       fOptionsBlocksStack.front ();
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     currentOptionsBlock != nullptr,
     "currentOptionsBlock is null");
+#endif
 
   if (fDisplayOptions) { // JMI
     gLogStream <<
@@ -292,11 +298,13 @@ void ischemeDriver::registerOptionsSuppliedChoicesAsUnused (
 void ischemeDriver::optionsBlocksStackPop (
   const std::string& context)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fOptionsBlocksStack.size () != 0,
     "optionsBlocksStackPop(): fOptionsBlocksStack is empty");
+#endif
 
   if (fTraceOptionsBlocks) {
     gLogStream <<
@@ -365,22 +373,26 @@ void ischemeDriver::caseChoiceStatementsStackPush (
 
 S_ischemeCaseChoiceStatement ischemeDriver::caseChoiceStatementsStackTop () const
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fCaseChoiceStatementsStack.size (),
     "caseChoiceStatementsStackTop(): fCaseChoiceStatementsStack is empty");
+#endif
 
   return fCaseChoiceStatementsStack.front ();
 }
 
 void ischemeDriver::caseChoiceStatementsStackPop ()
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fCaseChoiceStatementsStack.size () != 0,
     "caseChoiceStatementsStackPop(): fCaseChoiceStatementsStack is empty");
+#endif
 
   if (fTraceCaseChoiceStatements) {
     gLogStream <<
@@ -445,22 +457,26 @@ void ischemeDriver::caseInputStatementsStackPush (
 
 S_ischemeCaseInputStatement ischemeDriver::caseInputStatementsStackTop () const
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fCaseInputStatementsStack.size (),
     "caseInputStatementsStackTop(): fCaseInputStatementsStack is empty");
+#endif
 
   return fCaseInputStatementsStack.front ();
 }
 
 void ischemeDriver::caseInputStatementsStackPop ()
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fCaseInputStatementsStack.size () != 0,
     "caseInputStatementsStackPop(): fCaseInputStatementsStack is empty");
+#endif
 
   if (fTraceCaseInputStatements) {
     gLogStream <<
@@ -786,11 +802,13 @@ mfMusicformatsErrorKind ischemeDriver::launchIschemeTool_Pass2 ()
       std::endl;
   }
 
-  // sanity checks
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fCaseChoiceStatementsStack.size () == 0,
     "fCaseChoiceStatementsStack should be empty after parsing");
+#endif
 
   // populate the commands list with the options gathered in the script
   populateTheCommandsList ();

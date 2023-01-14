@@ -9,20 +9,19 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
 #include "mfAssert.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrMultipleFullBarRests.h"
 
@@ -97,7 +96,7 @@ msrMultipleFullBarRests::~msrMultipleFullBarRests ()
 S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNewbornClone (
   const S_msrSegment& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Creating a newborn clone of multiple full-bar rests '" <<
@@ -107,11 +106,13 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrMultipleFullBarRests
     newbornClone =
@@ -143,7 +144,7 @@ Rational msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes 
 void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
   const std::string& nextMeasureNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Setting multiple full-bar rests next measure number to '" <<
@@ -160,18 +161,21 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
 void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNumber (
   int inputLineNumber)
 {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     fMultipleFullBarRestsContents != nullptr,
 //     "fMultipleFullBarRestsContents is null");
+// #endif
 //
 //   S_msrSegment
 //     multipleFullBarRestsContentsSegment =
 //       fMultipleFullBarRestsContents->
 //         getMultipleFullBarRestsContentsSegment ();
 //
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     multipleFullBarRestsContentsSegment != nullptr,
@@ -208,7 +212,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //       s.str ());
 //   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Setting multiple full-bar rests last measure purist number to '" <<
@@ -248,7 +252,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
 //     getMultipleFullBarRestsContentsSegment ()->
 //       appendMeasureToSegment (
 //         measureClone);
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Appending measure "<<

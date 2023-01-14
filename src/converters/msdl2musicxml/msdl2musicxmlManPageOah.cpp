@@ -14,10 +14,7 @@
 
 #include <regex>
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 
 #include "oahEarlyOptions.h"
@@ -64,7 +61,7 @@ msdl2musicxmlManPageGenerateAtom::~msdl2musicxmlManPageGenerateAtom ()
 
 void msdl2musicxmlManPageGenerateAtom::applyElement (std::ostream& os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a msdl2musicxmlManPageGenerateAtom" <<
@@ -77,7 +74,7 @@ void msdl2musicxmlManPageGenerateAtom::applyElement (std::ostream& os)
 
 void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptIn ()" <<
@@ -90,7 +87,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2musicxmlManPageGenerateAtom>*> (v)) {
         S_msdl2musicxmlManPageGenerateAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitStart ()" <<
@@ -103,7 +100,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
 
 void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptOut ()" <<
@@ -116,7 +113,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2musicxmlManPageGenerateAtom>*> (v)) {
         S_msdl2musicxmlManPageGenerateAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitEnd ()" <<
@@ -129,7 +126,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
 
 void msdl2musicxmlManPageGenerateAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2musicxmlManPageGenerateAtom::browseData ()" <<
@@ -253,7 +250,7 @@ R"(Write man page data for EXECUTABLE to standard output.)",
         fOahVisitor));
 }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void msdl2musicxmlManPageOahGroup::initializeManPagetracingOah ()
 {
   S_oahSubGroup
@@ -280,7 +277,7 @@ void msdl2musicxmlManPageOahGroup::initializeMsdl2xmlManPageOahGroup (
   initializeManPageGenerateOptions (
     theOah2manPage);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeManPagetracingOah ();
@@ -302,7 +299,7 @@ void msdl2musicxmlManPageOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptIn ()" <<
@@ -315,7 +312,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2musicxmlManPageOahGroup>*> (v)) {
         S_msdl2musicxmlManPageOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitStart ()" <<
@@ -328,7 +325,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
 
 void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptOut ()" <<
@@ -341,7 +338,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2musicxmlManPageOahGroup>*> (v)) {
         S_msdl2musicxmlManPageOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitEnd ()" <<
@@ -354,7 +351,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
 
 void msdl2musicxmlManPageOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2musicxmlManPageOahGroup::browseData ()" <<
@@ -393,7 +390,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2musicxmlManPageOahGrou
 S_msdl2musicxmlManPageOahGroup createGlobalMsdl2xmlManPageOahGroupHandler (
   const S_oahVisitor& theOah2manPage)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdl2musicxmlManPage OAH group" <<

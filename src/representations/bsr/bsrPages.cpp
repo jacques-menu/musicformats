@@ -51,7 +51,7 @@ bsrPage::bsrPage (
 
   fLinesPerPage = linesPerPage;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTracePages ()) {
     gLogStream <<
       "Creating bsrPage '" <<
@@ -68,7 +68,7 @@ bsrPage::~bsrPage ()
 
 S_bsrPage bsrPage::createPageNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTracePages ()) {
     gLogStream <<
       "Creating a newborn clone of page " <<
@@ -108,7 +108,7 @@ int bsrPage::fetchLineContentsNumber () const
 
 void bsrPage::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPage::acceptIn ()" <<
@@ -121,7 +121,7 @@ void bsrPage::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrPage>*> (v)) {
         S_bsrPage elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPage::visitStart ()" <<
@@ -134,7 +134,7 @@ void bsrPage::acceptIn (basevisitor* v)
 
 void bsrPage::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPage::acceptOut ()" <<
@@ -147,7 +147,7 @@ void bsrPage::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrPage>*> (v)) {
         S_bsrPage elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPage::visitEnd ()" <<

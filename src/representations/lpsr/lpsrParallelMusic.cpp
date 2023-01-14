@@ -86,7 +86,7 @@ lpsrParallelMusicBLock::~lpsrParallelMusicBLock ()
 
 void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrParallelMusicBLock::acceptIn ()" <<
@@ -99,7 +99,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrParallelMusicBLock>*> (v)) {
         S_lpsrParallelMusicBLock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrParallelMusicBLock::visitStart ()" <<
@@ -112,7 +112,7 @@ void lpsrParallelMusicBLock::acceptIn (basevisitor* v)
 
 void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrParallelMusicBLock::acceptOut ()" <<
@@ -125,7 +125,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrParallelMusicBLock>*> (v)) {
         S_lpsrParallelMusicBLock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrParallelMusicBLock::visitEnd ()" <<
@@ -138,7 +138,7 @@ void lpsrParallelMusicBLock::acceptOut (basevisitor* v)
 
 void lpsrParallelMusicBLock::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrParallelMusicBLock::browseData ()" <<
@@ -157,7 +157,7 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
     browser.browse (*(*i));
   } // for
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrParallelMusicBLock::browseData ()" <<
