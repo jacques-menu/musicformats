@@ -110,7 +110,7 @@ EXP int ischeme (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " xml2ly()" <<
@@ -218,7 +218,7 @@ EXP int ischeme (
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -264,7 +264,7 @@ EXP int ischeme (
   // welcome message
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     int
       outputFileNameSize =
@@ -346,7 +346,7 @@ EXP int ischeme (
   // acknoledge end of command line analysis
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       "The command line options and arguments have been analyzed" <<
@@ -362,7 +362,7 @@ EXP int ischeme (
   try {
     if (inputSourceName == "-") {
       // MusicXML data comes from standard input
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream << "Reading standard input" << std::endl;
       }
@@ -378,7 +378,7 @@ EXP int ischeme (
 
     else {
       // MusicXML data comes from a file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "Reading file \"" <<

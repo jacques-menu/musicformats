@@ -15,12 +15,9 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "bsrWae.h"
@@ -134,7 +131,7 @@ bsrTimeSignatureItem::bsrTimeSignatureItem (
 {
   fTimeSignatureBeatValue = -1;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Creating time signature item" <<
@@ -182,7 +179,7 @@ Bool bsrTimeSignatureItem::isEqualTo (S_bsrTimeSignatureItem otherTimeSignatureI
 
 void bsrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending beat number '" <<
@@ -201,7 +198,7 @@ void bsrTimeSignatureItem::appendBeatsNumber (int beatsNumber)
 
 void bsrTimeSignatureItem::setTimeSignatureBeatValue (int timeSignatureBeatValue)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Setting beat value to '" <<
@@ -230,7 +227,7 @@ int bsrTimeSignatureItem::getTimeSignatureBeatsNumber () const
 
 void bsrTimeSignatureItem::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTimeSignatureItem::acceptIn ()" <<
@@ -243,7 +240,7 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTimeSignatureItem>*> (v)) {
         S_bsrTimeSignatureItem elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTimeSignatureItem::visitStart ()" <<
@@ -256,7 +253,7 @@ void bsrTimeSignatureItem::acceptIn (basevisitor* v)
 
 void bsrTimeSignatureItem::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTimeSignatureItem::acceptOut ()" <<
@@ -269,7 +266,7 @@ void bsrTimeSignatureItem::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTimeSignatureItem>*> (v)) {
         S_bsrTimeSignatureItem elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTimeSignatureItem::visitEnd ()" <<
@@ -375,7 +372,7 @@ bsrTimeSignature::bsrTimeSignature (
 {
   fTimeKind = timeKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Creating bsrTimeSignatures '" <<
@@ -392,7 +389,7 @@ bsrTimeSignature::~bsrTimeSignature ()
 
 void bsrTimeSignature::appendTimeSignatureItem (S_bsrTimeSignatureItem timeSignatureItem)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending time signature item '" <<
@@ -756,7 +753,7 @@ int bsrTimeSignature::fetchCellsNumber() const
 
 void bsrTimeSignature::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTimeSignature::acceptIn ()" <<
@@ -769,7 +766,7 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTimeSignature>*> (v)) {
         S_bsrTimeSignature elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTimeSignature::visitStart ()" <<
@@ -782,7 +779,7 @@ void bsrTimeSignature::acceptIn (basevisitor* v)
 
 void bsrTimeSignature::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrTimeSignature::acceptOut ()" <<
@@ -795,7 +792,7 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTimeSignature>*> (v)) {
         S_bsrTimeSignature elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrTimeSignature::visitEnd ()" <<

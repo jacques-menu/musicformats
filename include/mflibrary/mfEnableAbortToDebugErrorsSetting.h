@@ -9,16 +9,15 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfEnableAbortToDebugErrors___
-#define ___mfEnableAbortToDebugErrors___
+#ifndef ___mfEnableAbortToDebugErrorsSetting___
+#define ___mfEnableAbortToDebugErrorsSetting___
 
 
-#ifndef MF_ABORT_TO_DEBUG_ERRORS
+#ifndef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   // comment the following definition if abort on internal errors is desired
   // CAUTION: DON'T USE THIS IN PRODUCTION CODE,
   // since that could kill a session on a web server, for example
-
-  #define MF_ABORT_TO_DEBUG_ERRORS
+  #define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 #endif
 
 

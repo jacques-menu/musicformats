@@ -18,17 +18,14 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfEnableHarmoniesExtra.h"
+#include "mfEnableHarmoniesExtraSetting.h"
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "mfStringsHandling.h"
 
@@ -117,7 +114,7 @@ R"(
       fMultiGenerationOutputKind (
         multiGenerationOutputKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing \"" <<
@@ -323,7 +320,7 @@ R"(
 //______________________________________________________________________________
 void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34Prefixes ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the LilyPondIssue34 prefixes in \"" <<
@@ -341,7 +338,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
   const std::string&       serviceName,
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the \"" <<
@@ -363,7 +360,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -499,7 +496,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
 //______________________________________________________________________________
 void LilyPondIssue34InsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<
@@ -515,7 +512,7 @@ void LilyPondIssue34InsiderHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -545,7 +542,7 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
       autoOutputFileNameAtom->
         getSetByAnOption ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions()" <<
@@ -664,7 +661,7 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
     // return empty outputFileName to indicate that output goes to stdout
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "outputFileName: " <<
@@ -683,7 +680,7 @@ void LilyPondIssue34InsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void LilyPondIssue34InsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -750,7 +747,7 @@ void LilyPondIssue34InsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34InsiderOahGroup::acceptIn ()" <<
@@ -763,7 +760,7 @@ void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_LilyPondIssue34InsiderOahGroup>*> (v)) {
         S_LilyPondIssue34InsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching LilyPondIssue34InsiderOahGroup::visitStart ()" <<
@@ -776,7 +773,7 @@ void LilyPondIssue34InsiderOahGroup::acceptIn (basevisitor* v)
 
 void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34InsiderOahGroup::acceptOut ()" <<
@@ -789,7 +786,7 @@ void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_LilyPondIssue34InsiderOahGroup>*> (v)) {
         S_LilyPondIssue34InsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching LilyPondIssue34InsiderOahGroup::visitEnd ()" <<
@@ -802,7 +799,7 @@ void LilyPondIssue34InsiderOahGroup::acceptOut (basevisitor* v)
 
 void LilyPondIssue34InsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> LilyPondIssue34InsiderOahGroup::browseData ()" <<
@@ -901,7 +898,7 @@ LilyPondIssue34InsiderOahGroup::~LilyPondIssue34InsiderOahGroup ()
 
 void LilyPondIssue34InsiderOahGroup::initializeLilyPondIssue34InsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream << std::left <<
       "Initializing \"" <<
@@ -962,7 +959,7 @@ void LilyPondIssue34InsiderOahGroup::printLilyPondIssue34InsiderOahGroupValues (
 //______________________________________________________________________________
 S_LilyPondIssue34InsiderOahGroup createGlobalLilyPondIssue34InsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global LilyPondIssue34 insider OAH group" <<

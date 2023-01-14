@@ -11,12 +11,11 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "mfEnableAbortToDebugErrors.h"
+#include "mfEnableAbortToDebugErrorsSetting.h"
 
 #include "waeOah.h"
 
 #include "bmmlWae.h"
-
 
 
 namespace MusicFormats
@@ -74,7 +73,7 @@ void bmmlInternalError (
     sourceCodeLineNumber,
     message);
 
-#ifdef MF_ABORT_TO_DEBUG_ERRORS
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
 #endif
 

@@ -63,7 +63,7 @@ class EXP mxsrOahGroup : public oahGroup
     // set and get
     // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     // specific trace
     // --------------------------------------
 
@@ -115,7 +115,7 @@ class EXP mxsrOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     void                  initializeMxsrtracingOah ();
 #endif
 
@@ -143,7 +143,7 @@ class EXP mxsrOahGroup : public oahGroup
     // private fields
     // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     // specific trace
     // --------------------------------------
 

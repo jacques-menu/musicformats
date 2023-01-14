@@ -12,12 +12,11 @@
 #include <iostream>
 #include <sstream>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
@@ -96,7 +95,7 @@ msrLineBreak::msrLineBreak (
 
   fUserChosenLineBreakKind = userChosenLineBreakKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
     gLogStream <<
       "Constructing a break before measure " << fNextBarNumber <<
@@ -115,13 +114,15 @@ msrLineBreak::~msrLineBreak ()
 void msrLineBreak::setLineBreakUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -273,7 +274,7 @@ msrPageBreak::msrPageBreak (
     : msrMeasureElement (
         inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
     gLogStream <<
       "Constructing a page break" <<
@@ -294,13 +295,15 @@ msrPageBreak::~msrPageBreak ()
 void msrPageBreak::setPageBreakUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 

@@ -11,17 +11,14 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableHarmoniesExtra.h"
+#include "mfEnableHarmoniesExtraSetting.h"
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfInitialization.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrInitialization.h"
@@ -83,7 +80,7 @@ R"(
 Usage: xml2gmn [[option]* [MusicXMLFile|-] [[option]*
 )")
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing \"" <<
@@ -139,7 +136,7 @@ R"(What xml2gmn does:
 //______________________________________________________________________________
 void xml2gmnInsiderHandler::createTheXml2gmnPrefixes ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Creating the xml2gmn prefixes in \"" <<
@@ -156,7 +153,7 @@ void xml2gmnInsiderHandler::createTheXml2gmnPrefixes ()
 void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
   const std::string& serviceName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Creating the \"" <<
@@ -182,7 +179,7 @@ void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -248,7 +245,7 @@ void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
 //______________________________________________________________________________
 void xml2gmnInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Checking options and arguments from argc/argv in \"" <<
@@ -264,7 +261,7 @@ void xml2gmnInsiderHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -352,7 +349,7 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
         }
       }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
@@ -365,7 +362,7 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
       // append the file extension to the output file name
        outputFileName += ".gmn";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
           "xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
@@ -393,7 +390,7 @@ void xml2gmnInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void xml2gmnInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -463,7 +460,7 @@ void xml2gmnInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void xml2gmnInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnInsiderOahGroup::acceptIn ()" <<
@@ -476,7 +473,7 @@ void xml2gmnInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_xml2gmnInsiderOahGroup>*> (v)) {
         S_xml2gmnInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnInsiderOahGroup::visitStart ()" <<
@@ -489,7 +486,7 @@ void xml2gmnInsiderOahGroup::acceptIn (basevisitor* v)
 
 void xml2gmnInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnInsiderOahGroup::acceptOut ()" <<
@@ -502,7 +499,7 @@ void xml2gmnInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_xml2gmnInsiderOahGroup>*> (v)) {
         S_xml2gmnInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching xml2gmnInsiderOahGroup::visitEnd ()" <<
@@ -515,7 +512,7 @@ void xml2gmnInsiderOahGroup::acceptOut (basevisitor* v)
 
 void xml2gmnInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> xml2gmnInsiderOahGroup::browseData ()" <<
@@ -611,7 +608,7 @@ xml2gmnInsiderOahGroup::~xml2gmnInsiderOahGroup ()
 //_______________________________________________________________________________
 void xml2gmnInsiderOahGroup::initializeXml2gmnInsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   gLogStream << std::left <<
     "Initializing \"" <<
@@ -630,7 +627,7 @@ void xml2gmnInsiderOahGroup::initializeXml2gmnInsiderOahGroup ()
 //_______________________________________________________________________________
 void xml2gmnInsiderOahGroup::createInsiderQuitSubGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
   gLogStream << std::left <<
     "Creating insider quit subgroup in \"" <<
@@ -758,7 +755,7 @@ void xml2gmnInsiderOahGroup::printXml2gmnInsiderOahGroupValues (int fieldWidth)
 //______________________________________________________________________________
 S_xml2gmnInsiderOahGroup createGlobalXml2gmnOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global xml2gmn OAH group" <<

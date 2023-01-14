@@ -165,7 +165,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 // JMI    void                  initializemfslInterpretertracingOah ();
 #endif
 

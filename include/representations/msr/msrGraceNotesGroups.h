@@ -12,6 +12,8 @@
 #ifndef ___msrGraceNotesGroups___
 #define ___msrGraceNotesGroups___
 
+#include "mfRational.h"
+
 #include "msrElements.h"
 
 #include "msrTypesForwardDeclarations.h"

@@ -17,7 +17,6 @@
 #include "msrIdentification.h"
 
 
-
 namespace MusicFormats
 {
 

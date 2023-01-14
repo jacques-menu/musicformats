@@ -117,6 +117,7 @@ The current version of a component is the last one appended to \fieldName{fVersi
 \begin{lstlisting}[language=CPlusPlus]
 S_mfcVersionDescr mfcVersionsHistory::fetchMostRecentVersion () const
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
@@ -132,9 +133,9 @@ S_mfcVersionDescr mfcVersionsHistory::fetchMostRecentVersion () const
 \section{Components descriptions}\label{Components descriptions}
 % -------------------------------------------------------------------------
 
-The \component s of \mf\ are described by \enumType{mfcComponenKind}:
+The \component s of \mf\ are described by \enumType{mfcComponentKind}:
 \begin{lstlisting}[language=CPlusPlus]
-enum class mfcComponenKind {
+enum class mfcComponentKind {
   kComponentRepresentation,
   kComponentPass,
   kComponentGenerator,
@@ -191,7 +192,7 @@ class   mfcComponent : public smartable
 
     std::string           fComponentName;
 
-    mfcComponenKind       fComponenKind;
+    mfcComponentKind       fComponentKind;
 
     S_mfcVersionsHistory  fVersionsHistory;
 };
@@ -374,7 +375,7 @@ S_mfcRepresentationComponent EXP createMsrRepresentationComponent ()
   // protect library against multiple initializations
   if (! pRepresentationComponent) {
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Initializing MSR format component" <<
@@ -432,7 +433,7 @@ S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
   // protect library against multiple initializations
   if (! pConverterComponent) {
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the musicxml2braille component" <<
@@ -518,7 +519,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
   // protect library against multiple initializations
   if (! pLibraryComponent) {
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "Creating the  MFC library component" <<
@@ -870,7 +871,7 @@ The option is applied by \method{oahVersionAtom}{applyElement}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahVersionAtom::applyElement (std::ostream& os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> option '" << fetchNames () << "' is a oahVersionAtom" <<
@@ -898,6 +899,7 @@ void oahVersionAtom::printVersion (std::ostream& os) const
       fetchAtomUpLinkToHandler ()->
         getHandlerMultiComponent ();
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,

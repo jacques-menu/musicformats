@@ -11,6 +11,8 @@
 
 #include <fstream>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
@@ -19,10 +21,7 @@
 
 #include "mxsr2musicxmlWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahEarlyOptions.h"
 
@@ -42,16 +41,18 @@ EXP void translateMxsrToMusicXML (
   const std::string& passNumber,
   const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMxsr != nullptr,
     "translateMxsrToMusicXML(): theMxsr is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -68,7 +69,7 @@ EXP void translateMxsrToMusicXML (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "translateMxsrToMusicXML() outputFileName = \"" <<
@@ -84,7 +85,7 @@ EXP void translateMxsrToMusicXML (
   // insert the MXSR into it
   sxmlfile->set (theMxsr);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "xmlFile2musicxml() outputFileName = \"" <<
@@ -95,7 +96,7 @@ EXP void translateMxsrToMusicXML (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2musicxml() output goes to standard output" <<
@@ -109,7 +110,7 @@ EXP void translateMxsrToMusicXML (
   }
 
   else {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2musicxml() output goes to file \"" <<
@@ -122,7 +123,7 @@ EXP void translateMxsrToMusicXML (
     // open output file
     std::ofstream outputFileStream;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<

@@ -9,14 +9,14 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfEnableCaughtExceptionsDisplayIfDesired___
-#define ___mfEnableCaughtExceptionsDisplayIfDesired___
+#ifndef ___mfEnableHarmoniesExtraOahSetting___
+#define ___mfEnableHarmoniesExtraOahSetting___
 
 
-#ifndef MF_CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
-  // uncomment the following definition if no exceptions display is desired
-
-  #define MF_CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
+#ifndef MF_HARMONIES_EXTRA_IS_ENABLED
+  // uncomment the following definition if extra options are wanted
+  #define MF_HARMONIES_EXTRA_IS_ENABLED
 #endif
+
 
 #endif

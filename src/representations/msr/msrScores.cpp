@@ -13,16 +13,13 @@
 
 #include "visitor.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrScores.h"
 
@@ -30,12 +27,11 @@
 
 #include "msrOah.h"
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   #include "lpsrOah.h"
 #endif
 
 #include "msrBrowsers.h"
-
 
 
 namespace MusicFormats
@@ -96,7 +92,7 @@ msrScore::~msrScore ()
 
 S_msrScore msrScore::createScoreNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceScores ()) {
     gLogStream <<
       "Creating a newborn clone of a score" <<
@@ -187,7 +183,7 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 void msrScore::appendCreditToScore (
   const S_msrCredit& credit)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCredits ()) {
     gLogStream <<
       "Appending credit '" <<
@@ -206,7 +202,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 {
   S_msrPart result;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePartGroupsDetails ()) {
     gLogStream <<
       "fetchPartFromScoreByItsPartID(" << partID << "), fPartGroupsList contains:" <<
@@ -712,7 +708,7 @@ void msrScore::print(std::ostream& os) const
 
 void msrScore::printSummary (std::ostream& os) const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
     os << "MSR score summary";
   }

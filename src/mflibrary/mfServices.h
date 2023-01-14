@@ -12,18 +12,101 @@
 #ifndef ___mfServiceRunData___
 #define ___mfServiceRunData___
 
-#include <set>
+#include <list>
 
 #include "smartpointer.h"
 #include "exports.h"
 
-#include "oahBasicTypes.h"
+#include "mfPasses.h"
 
 
 using namespace MusicXML2;
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+class EXP mfService : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mfService> create (
+                            const std::string& serviceName);
+
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfService (
+                            const std::string& serviceName);
+
+    virtual               ~mfService ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    // service name
+    std::string           getServiceName () const
+                              { return fServiceName; }
+
+    // service pass descriptions
+    const std::list<S_mfPassDescription>&
+                          getServicePassDescriptionsList () const
+                              { return fServicePassDescriptionsList; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  appendPassToService (
+                            S_mfPassDescription passDescription)
+                              {
+                                fServicePassDescriptionsList.push_back (
+                                  passDescription);
+                              }
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    void                  print (std::ostream& os) const;
+
+  private:
+
+    // private services
+    // ------------------------------------------------------
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    // service name
+    std::string           fServiceName;
+
+    // service pass descriptions
+    std::list<S_mfPassDescription>
+                          fServicePassDescriptionsList;
+
+  private:
+
+    // private work fields
+    // ------------------------------------------------------
+
+  // JMIJMIJMI
+};
+typedef SMARTP<mfService> S_mfService;
+EXP std::ostream& operator << (std::ostream& os, const S_mfService& elt);
+
+EXP extern S_mfService gGlobalService;
 
 //______________________________________________________________________________
 class EXP mfServiceRunData : public smartable

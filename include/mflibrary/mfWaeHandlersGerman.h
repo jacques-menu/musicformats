@@ -30,7 +30,7 @@ class EXP mfWaeHandlerGerman : public mfWaeHandler
 
   public:
 
-    // constructors/destructor
+    // const overrideructors/destructor
     // ------------------------------------------------------
 
                           mfWaeHandlerGerman ();
@@ -49,9 +49,131 @@ class EXP mfWaeHandlerGerman : public mfWaeHandler
 
     // pass numbers
 
+    virtual std::string   pass (mfPassIDKind passIDKind) const override;
+
+    virtual std::string   pass1 () const override;
+
+    virtual std::string   pass2 () const override;
+    virtual std::string   pass2a () const override;
+    virtual std::string   pass2b () const override;
+
+    virtual std::string   pass3 () const override;
+    virtual std::string   pass3a () const override;
+    virtual std::string   pass3b () const override;
+
+    virtual std::string   pass4 () const override;
+    virtual std::string   pass4a () const override;
+    virtual std::string   pass4b () const override;
+
+    virtual std::string   pass5 () const override;
+
+    virtual std::string   passOptional () const override;
+
+    virtual std::string   fullVersion () const override;
+    virtual std::string   summary () const override;
+    virtual std::string   names () const override;
+    virtual std::string   slices () const override;
+
     // OAH
 
+    virtual std::string   handleOptionsAndArgumentsFromArgcArgv () const override;
+
     // passes
+
+    virtual std::string   createAnMXSRFromAMusicXMLFile () const override;
+    virtual std::string   createAnMXSRFromAMusicXMLDescriptor () const override;
+    virtual std::string   createAnMXSRFromAMusicXMLBuffer () const override;
+
+    virtual std::string   createAnMSRSqueletonFromTheMXSR () const override;
+
+    virtual std::string   populateTheMSRSqueletonFromMusicXMLData () const override;
+
+    virtual std::string   convertTheFirstMSRIntoASecondMSR () const override;
+
+    virtual std::string   convertTheSecondMSRIntoAnLPSR () const override;
+
+    virtual std::string   convertTheLPSRIntoLilyPondCode () const override;
+
+    // display
+
+    virtual std::string   displayTheFirstMSRSkeletonAsText () const override;
+    virtual std::string   displayTheFirstMSRAsText () const override;
+    virtual std::string   displayTheSecondMSRAsText () const override;
+    virtual std::string   displayTheLPSRAsText () const override;
+
+    virtual std::string   displayTheNamesInTheFirstMSR () const override;
+    virtual std::string   displayTheNamesInTheSecondMSR () const override;
+
+    virtual std::string   displayASummaryOfTheFirstMSR () const override;
+    virtual std::string   displayASummaryOfTheSecondMSR () const override;
+
+    // timing
+
+    virtual std::string   timingInformation () const override;
+    virtual std::string   activity () const override;
+    virtual std::string   description () const override;
+    virtual std::string   kind () const override;
+    virtual std::string   CPUSeconds () const override;
+    virtual std::string   mandatory () const override;
+    virtual std::string   optional () const override;
+    virtual std::string   totalSeconds () const override;
+
+    // options files
+
+    virtual std::string   openingOptionsFileForReading (
+                            const std::string& optionsFileName) const override;
+    virtual std::string   openingIncludeFileForReading (
+                            const std::string& includeFileName) const override;
+
+    virtual std::string   cannotOpenOptionsFileForReading (
+                            const std::string& optionsFileName) const override;
+
+    virtual std::string   closingOptionsFile (
+                            const std::string& optionsFileName) const override;
+
+    // output files
+
+    virtual std::string   openingLilypondFileForWriting (
+                            const std::string& inputFileName) const override;
+    virtual std::string   openingBrailleMusicFileForWriting (
+                            const std::string& inputFileName) const override;
+    virtual std::string   openingMusicXMLFileForWriting (
+                            const std::string& inputFileName) const override;
+    virtual std::string   openingGuidoFileForWriting (
+                            const std::string& inputFileName) const override;
+
+    virtual std::string   cannotOpenLilypondFileForWriting (
+                            const std::string& inputFileName) const override;
+    virtual std::string   cannotOpenBrailleMusicFileForWriting (
+                            const std::string& inputFileName) const override;
+    virtual std::string   cannotOpenMusicXMLFileForWriting (
+                            const std::string& inputFileName) const override;
+    virtual std::string   cannotOpenGuidoFileForWriting (
+                            const std::string& inputFileName) const override;
+
+    virtual std::string   closingLilypondFile (
+                            const std::string& outputFileName) const override;
+    virtual std::string   closingBrailleMusicFile (
+                            const std::string& outputFileName) const override;
+    virtual std::string   closingMusicXMLFile (
+                            const std::string& outputFileName) const override;
+    virtual std::string   closingGuidoFile (
+                            const std::string& outputFileName) const override;
+
+    // include files
+
+    virtual std::string   cannotOpenIncludeFileForReading (
+                            const std::string& includeFileName) const override;
+
+    // scripts
+
+    virtual std::string   cannotOpenScriptForWriting (
+                            const std::string& scriptName) const override;
+
+    // MSDL
+
+    virtual std::string   cannotOpenMSDLFileForReading (
+                            const std::string& inputFileName) const override;
 
   public:
 

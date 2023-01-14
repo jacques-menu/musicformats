@@ -12,7 +12,7 @@
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 
-#include "mfEnableAbortToDebugErrors.h"
+#include "mfEnableAbortToDebugErrorsSetting.h"
 
 #include "oahEarlyOptions.h"
 
@@ -88,7 +88,7 @@ void msr2mxsrInternalError (
     sourceCodeLineNumber,
     message);
 
-#ifdef MF_ABORT_TO_DEBUG_ERRORS
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
 #endif
 

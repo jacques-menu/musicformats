@@ -31,6 +31,7 @@
 #include "msrIdentification.h"
 #include "msrLyrics.h"
 #include "msrMeasures.h"
+#include "msrMidi.h"
 #include "msrMultipleFullBarRests.h"
 #include "msrNotes.h"
 #include "msrParts.h"

@@ -16,10 +16,7 @@
 // libmusicxml2
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 
@@ -62,7 +59,7 @@ mfslInterpreterOahGroup::~mfslInterpreterOahGroup ()
 
 void mfslInterpreterOahGroup::initializeMfslInterpreterOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 // JMI  initializemfslInterpretertracingOah ();
@@ -260,7 +257,7 @@ void mfslInterpreterOahGroup::checkGroupOptionsConsistency ()
 
 void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfslInterpreterOahGroup::acceptIn ()" <<
@@ -273,7 +270,7 @@ void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_mfslInterpreterOahGroup>*> (v)) {
         S_mfslInterpreterOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfslInterpreterOahGroup::visitStart ()" <<
@@ -286,7 +283,7 @@ void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
 
 void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfslInterpreterOahGroup::acceptOut ()" <<
@@ -299,7 +296,7 @@ void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_mfslInterpreterOahGroup>*> (v)) {
         S_mfslInterpreterOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mfslInterpreterOahGroup::visitEnd ()" <<
@@ -312,7 +309,7 @@ void mfslInterpreterOahGroup::acceptOut (basevisitor* v)
 
 void mfslInterpreterOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mfslInterpreterOahGroup::browseData ()" <<
@@ -433,7 +430,7 @@ std::ostream& operator << (std::ostream& os, const S_mfslInterpreterOahGroup& el
 //______________________________________________________________________________
 S_mfslInterpreterOahGroup createGlobalMfslInterpreterOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global mfsl OAH group" <<

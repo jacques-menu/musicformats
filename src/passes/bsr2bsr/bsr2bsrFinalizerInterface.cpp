@@ -9,15 +9,14 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "bsr2bsrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfTiming.h"
 
 #include "oahOah.h"
@@ -44,11 +43,13 @@ S_bsrScore translateBsrToFinalizedBsr (
   S_bsrScore finalizedBsrScore;
 
   if (! gGlobalBrailleGenerationOahGroup->getNoBrailleCode ()) {
-    // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
       mfAssert (
         __FILE__, __LINE__,
       originalBsrScore != nullptr,
       "originalBsrScore is null");
+#endif
 
     S_bsrScore result;
 
@@ -58,7 +59,7 @@ S_bsrScore translateBsrToFinalizedBsr (
     std::string separator =
       "%--------------------------------------------------------------";
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       gLogStream <<
         std::endl <<

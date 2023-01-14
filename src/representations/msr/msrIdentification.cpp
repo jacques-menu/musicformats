@@ -15,10 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrIdentification.h"
 
@@ -53,7 +50,7 @@ void msrIdentification::setIdentificationWorkNumber (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting workNumber to \"" << val << "\"" <<
@@ -68,7 +65,7 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting workCreditTypeTitle to \"" << val << "\"" <<
@@ -83,7 +80,7 @@ void msrIdentification::setIdentificationOpus (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting opus to \"" << val << "\"" <<
@@ -98,7 +95,7 @@ void msrIdentification::setIdentificationMovementNumber (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting movementNumber to \"" << val << "\"" <<
@@ -113,7 +110,7 @@ void msrIdentification::setIdentificationMovementTitle (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting movementTitle to \"" << val << "\"" <<
@@ -128,7 +125,7 @@ void msrIdentification::setIdentificationEncodingDate (
   int           inputLineNumber,
   const std::string& val)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting encodingDate to \"" << val << "\"" <<
@@ -143,7 +140,7 @@ void msrIdentification::setIdentificationMiscellaneousField (
   int           inputLineNumber,
   const std::string& val)
 {
- #ifdef OAH_TRACING_IS_ENABLED
+ #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting miscellaneousField to \"" << val << "\"" <<
@@ -158,7 +155,7 @@ void msrIdentification::setIdentificationScoreInstrument (
   int           inputLineNumber,
   const std::string& val)
 {
- #ifdef OAH_TRACING_IS_ENABLED
+ #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Setting scoreInstrument to \"" << val << "\"" <<
@@ -173,7 +170,7 @@ void msrIdentification::appendComposer (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending composer \"" << value << "\"" <<
@@ -188,7 +185,7 @@ void msrIdentification::appendLyricist (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending lyricist \"" << value << "\"" <<
@@ -203,7 +200,7 @@ void msrIdentification::appendArranger (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending arranger \"" << value << "\"" <<
@@ -218,7 +215,7 @@ void msrIdentification::appendPoet (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending poet \"" << value << "\"" <<
@@ -233,7 +230,7 @@ void msrIdentification::appendTranslator (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending translator \"" << value << "\"" <<
@@ -248,7 +245,7 @@ void msrIdentification::appendArtist (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending artist \"" << value << "\"" <<
@@ -263,7 +260,7 @@ void msrIdentification::appendSoftware (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending software \"" << value << "\"" <<
@@ -278,7 +275,7 @@ void msrIdentification::appendRight (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending right \"" << value << "\"" <<
@@ -293,7 +290,7 @@ void msrIdentification::appendSource (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appendings source \"" << value << "\"" <<
@@ -308,7 +305,7 @@ void msrIdentification::appendRelation (
   int           inputLineNumber,
   const std::string& value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
       "Appending relation \"" << value << "\"" <<

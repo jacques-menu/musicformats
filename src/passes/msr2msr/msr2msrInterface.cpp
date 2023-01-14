@@ -11,22 +11,21 @@
 
 #include <iostream>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
 
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfTiming.h"
 
 #include "msrPathToVoice.h"
 
 #include "msr2msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -54,11 +53,13 @@ S_msrScore translateMsrToMsr (
   const std::string&     passNumber,
   const std::string&     passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     originalMsrScore != nullptr,
     "originalMsrScore is null");
+#endif
 
   if (gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) { // for TESTS ONLY ???
     return originalMsrScore;
@@ -67,7 +68,7 @@ S_msrScore translateMsrToMsr (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -184,11 +185,13 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   const std::string&     passDescription,
   S_msrPathToVoice  pathToVoice)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     originalMsrScore != nullptr,
     "originalMsrScore is null");
+#endif
 
   if (gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) { // for TESTS
     return originalMsrScore;
@@ -197,7 +200,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -269,13 +272,13 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
     displayMsrScore (
       resultingNewMsrScore,
-      "Display the second MSR as text");
+      gWaeHandler->displayTheSecondMSRAsText ());
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
     displayMsrScoreFull (
       resultingNewMsrScore,
-      "Display the second MSR as text");
+      gWaeHandler->displayTheSecondMSRAsText ());
   }
 
   // display the resulting new MSR score summary if requested

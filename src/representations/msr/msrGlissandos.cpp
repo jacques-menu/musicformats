@@ -13,10 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrGlissandos.h"
 
@@ -95,7 +92,7 @@ msrGlissando::~msrGlissando ()
 
 S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
     gLogStream <<
       "Creating a newborn clone of glissando '" <<

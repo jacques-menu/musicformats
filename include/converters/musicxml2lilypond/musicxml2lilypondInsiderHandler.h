@@ -12,8 +12,8 @@
 #ifndef __musicxml2lilypondInsiderHandler___
 #define __musicxml2lilypondInsiderHandler___
 
-#include "mfEnableHarmoniesExtra.h"
-#ifdef OAH_TRACING_IS_ENABLED
+#include "mfEnableHarmoniesExtraSetting.h"
+#ifdef MF_TRACING_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 

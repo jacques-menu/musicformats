@@ -24,7 +24,6 @@
 #include "msrTupletFactors.h"
 
 
-
 namespace MusicFormats
 {
 

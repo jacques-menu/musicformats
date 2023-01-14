@@ -13,12 +13,11 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
@@ -39,7 +38,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating hiddenMeasureAndBarLine" <<
@@ -78,13 +77,15 @@ msrHiddenMeasureAndBarLine::~msrHiddenMeasureAndBarLine ()
 void msrHiddenMeasureAndBarLine::setHiddenMeasureAndBarLineUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 

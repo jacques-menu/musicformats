@@ -17,12 +17,9 @@
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "mfStringsHandling.h"
 
@@ -72,7 +69,7 @@ msrFrameNote::msrFrameNote (
 
   fFrameNoteBarreTypeKind = frameNoteBarreTypeKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Creating frame note '" <<
@@ -247,7 +244,7 @@ msrFrame::msrFrame (
 
   fFrameContainsFingerings = false;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Creating frame '" <<

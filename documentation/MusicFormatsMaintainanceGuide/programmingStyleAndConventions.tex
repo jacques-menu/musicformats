@@ -245,7 +245,8 @@ They are performed to ensure that the formats in \mf\ are consistent, to avoid u
         fCurrentPart->
           getPartHarmoniesVoice ();
 
-    // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 		mfAssert (
 			__FILE__, __LINE__,
 			voiceToInsertHarmoniesInto != nullptr,
@@ -660,7 +661,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> End visiting S_accordion_registration" <<
@@ -883,7 +884,7 @@ void initializeBSR ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       gLogStream <<
         "Initializing BSR basic types handling" <<
@@ -1518,6 +1519,7 @@ msrPart::msrPart (
     mfStringSpaceReplacer (fPartID, '_'));
 
 /* JMI
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
@@ -1647,6 +1649,7 @@ class EXP msr2msrTranslator :
 S_msrScore msr2msrTranslator::translateMsrToMsr (
   const S_msrScore& theMsrScore)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,

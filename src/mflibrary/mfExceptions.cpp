@@ -13,7 +13,7 @@
 
 #include "mfExceptions.h"
 
-#include "mfEnableCaughtExceptionsDisplay.h"
+#include "mfEnableCaughtExceptionsDisplaySetting.h"
 
 
 namespace MusicFormats

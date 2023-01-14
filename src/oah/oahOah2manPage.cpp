@@ -15,10 +15,7 @@
 
 #include "oahOah2manPage.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 
 #include "oahOah.h"
@@ -42,7 +39,7 @@ oahOah2manPage::~oahOah2manPage ()
 //________________________________________________________________________
 void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -72,7 +69,7 @@ void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
 
 void oahOah2manPage::visitEnd (S_oahOptionalValuesStyleKindAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<

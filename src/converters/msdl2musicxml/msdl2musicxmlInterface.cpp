@@ -13,7 +13,10 @@
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
                         // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
-#include "mfServiceRunData.h"
+#include "mfEnableSanityChecksSetting.h"
+
+#include "mfPasses.h"
+#include "mfServices.h"
 
 #include "oahWae.h"
 #include "msdlWae.h"
@@ -21,10 +24,7 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2musicxmlWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -90,7 +90,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
     // start the clock
     clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       std::string separator =
         "%--------------------------------------------------------------";
@@ -99,7 +99,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        gWaeHandler->pass1 () <<
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_1) <<
         ": " <<
         "Creating a first MSR from the MSDL input" <<
         std::endl <<
@@ -122,13 +122,14 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gWaeHandler->pass1 (),
+      gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
       endClock);
 
-    // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
     if (! firstMsrScore) {
       std::stringstream s;
 
@@ -145,6 +146,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
       throw msdl2msrException (message);
     }
+#endif
   }
   catch (msdl2musicxmlException& e) {
     mfDisplayException (e, gOutputStream);
@@ -178,7 +180,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gWaeHandler->pass2 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
@@ -200,7 +202,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        gWaeHandler->pass3 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -226,7 +228,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
       secondMxsr,
       outputFileName,
       err,
-      gWaeHandler->pass4 (),
+      gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
       "Convert the MXSR into MusicXML text");
   }
   catch (mxsr2musicxmlException& e) {
@@ -266,7 +268,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
     gLogStream <<
       handlerOptionsAndArguments;
@@ -285,7 +287,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<
@@ -393,7 +395,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
   std::ostream&           err)
 {
   // open input file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
@@ -438,7 +440,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
   std::ostream&       err)
 {
   // open input file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<

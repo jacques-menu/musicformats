@@ -107,7 +107,7 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
   int inputLineNumber =
     elem->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Appending element " <<
@@ -154,7 +154,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Appending harmony " << harmony->asString () <<
@@ -207,7 +207,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
   int inputLineNumber =
     harmony->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Appending harmony " << harmony->asString () <<
@@ -272,7 +272,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       ? ""
       : fSegmentElementsList.back ()->getMeasureNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Appending measure '" << measureNumber <<
@@ -395,7 +395,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
 {
   fVoiceCurrentMeasureNumber = measureNumber;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Creating measure '" <<
@@ -428,7 +428,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       std::endl;
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
@@ -457,7 +457,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   // result is the new voice last appended measure
   fVoiceLastAppendedMeasure = result;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,

@@ -14,10 +14,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfWaeHandlersDutch.h"
 #include "mfWaeHandlersEnglish.h"
@@ -59,12 +56,12 @@ oahEarlyOptions::oahEarlyOptions ()
     "Enforcing fTraceEarlyOptions" <<
     std::endl;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   fTraceEarlyOptions = true;
 #endif
 
 #elsif
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   fTraceEarlyOptions = false;
 #endif
 
@@ -81,7 +78,7 @@ const std::string K_LANGUAGE_OPTION_SHORT_NAME = "lang";
 void oahEarlyOptions::setEarlyLanguageKind (
   mfLanguageKind languageKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyLanguageKind to " <<
@@ -131,7 +128,7 @@ const std::string K_INSIDER_OPTION_SHORT_NAME = "ins";
 
 void oahEarlyOptions::setEarlyInsiderOption ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyInsiderOption" <<
@@ -147,7 +144,7 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 //
 // void oahEarlyOptions::setEarlyRegularOption ()
 // {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (fTraceEarlyOptions) {
 //     gLogStream <<
 //       "Setting fEarlyRegularOption" <<
@@ -169,7 +166,7 @@ const std::string K_QUIET_OPTION_SHORT_NAME = "q";
 
 void oahEarlyOptions::setEarlyQuietOption ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyQuietOption" <<
@@ -184,7 +181,7 @@ void oahEarlyOptions::setEarlyQuietOption ()
 void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
   mfMultiGenerationOutputKind value)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyMultiGenerationOutputKind" <<
@@ -201,7 +198,7 @@ const std::string K_INCLUDE_OPTION_SHORT_NAME = "inc";
 
 void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Appending fEarlyIncludeFileName [" <<
@@ -214,7 +211,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
   fEarlyIncludeFileNamesList.push_back (includeFileName);
 }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 
 //_______________________________________________________________________________
 const std::string K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME  ("trace-early-options");
@@ -237,7 +234,7 @@ const std::string K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME = "ovm";
 
 void oahEarlyOptions::setEarlyOahVerboseMode ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyOahVerboseMode" <<
@@ -254,7 +251,7 @@ const std::string K_TRACE_OAH_SHORT_OPTION_NAME = "toah";
 
 void oahEarlyOptions::setEarlyTracingOah ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracingOah" <<
@@ -271,7 +268,7 @@ const std::string K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME = "toahd";
 
 void oahEarlyOptions::setEarlyTracingOahDetails ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracingOahDetails" <<
@@ -288,7 +285,7 @@ const std::string K_TRACE_COMPONENTS_SHORT_OPTION_NAME = "tcomps";
 
 void oahEarlyOptions::setEarlyTraceComponents ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTraceComponents" <<
@@ -305,7 +302,7 @@ const std::string K_TRACE_PASSES_SHORT_OPTION_NAME = "tpasses";
 
 void oahEarlyOptions::setEarlyTracePasses ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracePasses" <<
@@ -334,7 +331,7 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
 //   }
 
   if (theString == optionName) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceEarlyOptions) {
       gLogStream <<
         "Option '-" <<
@@ -438,7 +435,7 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
     appendEarlyIncludeFileName (optionValue);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 
   // the trace options are available only if tracing is enabled
   if (
@@ -529,7 +526,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
     }
 
     if (argumentIsAnOption) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
           gLogStream <<
             "argumentIsAnOption, " <<
@@ -569,7 +566,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           std::string ("trace-") + argumentWithoutDash.substr (6);
       }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
         gLogStream <<
           serviceName <<
@@ -611,7 +608,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
   size_t argumentsNumber =
     argumentsVector.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (
     gGlobalOahEarlyOptions.getTraceEarlyOptions ()
       &&
@@ -672,7 +669,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
     }
 
     if (argumentIsAnOption) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
           gLogStream <<
             "argumentIsAnOption, " <<
@@ -712,7 +709,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           std::string ("trace-") + argumentWithoutDash.substr (6);
       }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
         gLogStream <<
           "??? serviceName" <<
@@ -789,14 +786,14 @@ void oahEarlyOptions::print (std::ostream& os) const
     os << "[NONE]" << std::endl;
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 
   os << std::left <<
     std::setw (fieldWidth) <<
     "fTraceEarlyOptions" << ": " << fTraceEarlyOptions <<
     std::endl;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   os << std::left <<
     std::setw (fieldWidth) <<
     "fEarlyOahVerboseMode" << ": " << fEarlyOahVerboseMode <<

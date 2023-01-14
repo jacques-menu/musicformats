@@ -263,7 +263,7 @@ void bsrCellsList::generateBrailleCode (std::ostream& os)
 
 void bsrCellsList::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrCellsList::acceptIn ()" <<
@@ -276,7 +276,7 @@ void bsrCellsList::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrCellsList>*> (v)) {
         S_bsrCellsList elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrCellsList::visitStart ()" <<
@@ -289,7 +289,7 @@ void bsrCellsList::acceptIn (basevisitor* v)
 
 void bsrCellsList::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrCellsList::acceptOut ()" <<
@@ -302,7 +302,7 @@ void bsrCellsList::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrCellsList>*> (v)) {
         S_bsrCellsList elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrCellsList::visitEnd ()" <<

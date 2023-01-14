@@ -12,8 +12,8 @@
 #ifndef ___oah2manPage___
 #define ___oah2manPage___
 
-#include "mfEnableHarmoniesExtra.h"
-#ifdef OAH_TRACING_IS_ENABLED
+#include "mfEnableHarmoniesExtraSetting.h"
+#ifdef MF_TRACING_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 

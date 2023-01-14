@@ -11,21 +11,19 @@
 
 #include <iostream>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-
 #include "mxsr2msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "mfTiming.h"
 
@@ -46,21 +44,23 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 S_msrScore translateMxsrToMsrSkeleton (
-  Sxmlelement    theMxsr,
-  S_msrOahGroup& msrOpts,
-  const std::string&  passNumber,
-  const std::string&  passDescription)
+  Sxmlelement        theMxsr,
+  S_msrOahGroup&     msrOpts,
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMxsr != nullptr,
     "translateMxsrToMsrSkeleton(): theMxsr is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -144,16 +144,18 @@ S_msrScore translateMxsrToMsrSkeleton (
 
 //_______________________________________________________________________________
 void displayMsrScoreSkeleton (
-  const S_msrOahGroup&  msrOpts,
-  const S_msrScore& theMsrScore,
-  std::string     passNumber,
-  std::string     passDescription)
+  S_msrOahGroup&     msrOpts,
+  S_msrScore         theMsrScore,
+  const std::string& passNumber,
+  const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
     "theMsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
@@ -178,8 +180,8 @@ void displayMsrScoreSkeleton (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    "Display the MSR skeleton as text",
+		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+    gWaeHandler->displayTheFirstMSRSkeletonAsText (), // JMI ??? v0.9.66
     mfTimingItemKind::kOptional,
     startClock,
     endClock);

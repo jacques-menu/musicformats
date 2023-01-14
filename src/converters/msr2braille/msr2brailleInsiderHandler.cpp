@@ -17,18 +17,15 @@
 
 #include "oahWae.h"
 
-#include "mfEnableHarmoniesExtra.h"
+#include "mfEnableHarmoniesExtraSetting.h"
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfInitialization.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrInitialization.h"
@@ -88,7 +85,7 @@ R"(
 Usage: msr2braille [option]* [MusicXMLFile|-] [[option]*
 )")
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing msr2braille insider options handler \"" <<
@@ -149,7 +146,7 @@ R"(What msr2braille does:
 //______________________________________________________________________________
 void msr2brailleInsiderHandler::createTheXml2braillePrefixes ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msr2braille prefixes" <<
@@ -164,7 +161,7 @@ void msr2brailleInsiderHandler::createTheXml2braillePrefixes ()
 void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
   const std::string& serviceName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msr2braille insider option groups" <<
@@ -186,7 +183,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -242,7 +239,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
     createGlobalHarmoniesExtraOahGroup ());
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     // print the options handler initial state
     gLogStream <<
@@ -264,7 +261,7 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
 //______________________________________________________________________________
 void msr2brailleInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<
@@ -280,7 +277,7 @@ void msr2brailleInsiderHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Fetching the output file name from the options in OAH handler \"" <<
@@ -368,7 +365,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
         }
       }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 1 = \"" <<
@@ -428,7 +425,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
         } // switch
       }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 2 = " <<
@@ -454,7 +451,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
           break;
       } // switch
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream <<
           "msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions(): outputFileName 3 = " <<
@@ -482,7 +479,7 @@ void msr2brailleInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void msr2brailleInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -519,7 +516,7 @@ void msr2brailleInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleInsiderOahGroup::acceptIn ()" <<
@@ -532,7 +529,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2brailleInsiderOahGroup>*> (v)) {
         S_msr2brailleInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitStart ()" <<
@@ -545,7 +542,7 @@ void msr2brailleInsiderOahGroup::acceptIn (basevisitor* v)
 
 void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleInsiderOahGroup::acceptOut ()" <<
@@ -558,7 +555,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2brailleInsiderOahGroup>*> (v)) {
         S_msr2brailleInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2brailleInsiderOahGroup::visitEnd ()" <<
@@ -571,7 +568,7 @@ void msr2brailleInsiderOahGroup::acceptOut (basevisitor* v)
 
 void msr2brailleInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2brailleInsiderOahGroup::browseData ()" <<
@@ -673,7 +670,7 @@ msr2brailleInsiderOahGroup::~msr2brailleInsiderOahGroup ()
 //_______________________________________________________________________________
 void msr2brailleInsiderOahGroup::initializeXml2brailleInsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream << std::left <<
       "Initializing \"" <<
@@ -720,7 +717,7 @@ S_msr2brailleInsiderOahGroup createGlobalMrailleGenerationOahGroup (
   const std::string& serviceName,
   const std::string& handlerHeader)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2braille OAH group" <<

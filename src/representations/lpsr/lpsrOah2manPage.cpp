@@ -15,10 +15,7 @@
 
 #include "lpsrOah2manPage.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 
 #include "oahOah.h"
@@ -42,7 +39,7 @@ lpsrOah2manPage::~lpsrOah2manPage ()
 //________________________________________________________________________
 void lpsrOah2manPage::visitStart (S_lpsrScoreOutputKindAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -72,7 +69,7 @@ void lpsrOah2manPage::visitStart (S_lpsrScoreOutputKindAtom& elt)
 
 void lpsrOah2manPage::visitEnd (S_lpsrScoreOutputKindAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -87,7 +84,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrScoreOutputKindAtom& elt)
 //________________________________________________________________________
 void lpsrOah2manPage::visitStart (S_lpsrPitchesLanguageAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -117,7 +114,7 @@ void lpsrOah2manPage::visitStart (S_lpsrPitchesLanguageAtom& elt)
 
 void lpsrOah2manPage::visitEnd (S_lpsrPitchesLanguageAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -131,7 +128,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrPitchesLanguageAtom& elt)
 //________________________________________________________________________
 void lpsrOah2manPage::visitStart (S_lpsrChordsLanguageAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -161,7 +158,7 @@ void lpsrOah2manPage::visitStart (S_lpsrChordsLanguageAtom& elt)
 
 void lpsrOah2manPage::visitEnd (S_lpsrChordsLanguageAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -175,7 +172,7 @@ void lpsrOah2manPage::visitEnd (S_lpsrChordsLanguageAtom& elt)
 //________________________________________________________________________
 void lpsrOah2manPage::visitStart (S_lpsrTransposeAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
@@ -205,7 +202,7 @@ void lpsrOah2manPage::visitStart (S_lpsrTransposeAtom& elt)
 
 void lpsrOah2manPage::visitEnd (S_lpsrTransposeAtom& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<

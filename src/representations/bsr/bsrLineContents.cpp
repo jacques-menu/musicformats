@@ -13,12 +13,9 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "bsrWae.h"
@@ -69,7 +66,7 @@ bsrLineContents::~bsrLineContents ()
 
 S_bsrLineContents bsrLineContents::createLineNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceLines ()) {
     gLogStream <<
       "Creating a newborn clone of line " <<
@@ -116,7 +113,7 @@ void bsrLineContents::appendLineElementToLineContents (
 void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
   const S_bsrLineContentsElement& lineElement)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting line element '" <<
@@ -200,7 +197,7 @@ int bsrLineContents::fetchCellsNumber () const
 
 void bsrLineContents::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrLineContents::acceptIn ()" <<
@@ -213,7 +210,7 @@ void bsrLineContents::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrLineContents>*> (v)) {
         S_bsrLineContents elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrLineContents::visitStart ()" <<
@@ -226,7 +223,7 @@ void bsrLineContents::acceptIn (basevisitor* v)
 
 void bsrLineContents::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrLineContents::acceptOut ()" <<
@@ -239,7 +236,7 @@ void bsrLineContents::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrLineContents>*> (v)) {
         S_bsrLineContents elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrLineContents::visitEnd ()" <<

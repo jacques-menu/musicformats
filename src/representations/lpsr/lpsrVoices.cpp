@@ -49,7 +49,7 @@ lpsrUseVoiceCommand::~lpsrUseVoiceCommand ()
 
 void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrUseVoiceCommand::acceptIn ()" <<
@@ -62,7 +62,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrUseVoiceCommand>*> (v)) {
         S_lpsrUseVoiceCommand elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrUseVoiceCommand::visitStart ()" <<
@@ -75,7 +75,7 @@ void lpsrUseVoiceCommand::acceptIn (basevisitor* v)
 
 void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrUseVoiceCommand::acceptOut ()" <<
@@ -88,7 +88,7 @@ void lpsrUseVoiceCommand::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrUseVoiceCommand>*> (v)) {
         S_lpsrUseVoiceCommand elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrUseVoiceCommand::visitEnd ()" <<

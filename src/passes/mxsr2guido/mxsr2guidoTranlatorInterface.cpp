@@ -11,6 +11,8 @@
 
 #include <fstream>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
@@ -18,11 +20,8 @@
 
 #include "mxsr2guidoWae.h"
 
-#include "mfEnableTracingIfDesired.h"
+#include "mfEnableTracingSetting.h"
 
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
 
 #include "mfAssert.h"
 #include "mfTiming.h"
@@ -48,16 +47,18 @@ void translateMxsrToGuido (
   const std::string& passNumber,
   const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     theMxsr != nullptr,
     "translateMxsrToGuido(): theMxsr is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -87,7 +88,7 @@ void translateMxsrToGuido (
   Sguidoelement
     guidoData = v.convert (theMxsr);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "xmlFile2gmn() outputFileName = \"" <<
@@ -98,7 +99,7 @@ void translateMxsrToGuido (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2gmn() output goes to standard output" <<
@@ -113,7 +114,7 @@ void translateMxsrToGuido (
   }
 
   else {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "xmlFile2gmn() output goes to file \"" <<
@@ -126,7 +127,7 @@ void translateMxsrToGuido (
     // open output file
     std::ofstream outputFileStream;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<

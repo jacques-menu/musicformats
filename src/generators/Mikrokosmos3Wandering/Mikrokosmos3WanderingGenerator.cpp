@@ -13,10 +13,7 @@
 
 #include "Mikrokosmos3WanderingGenerator.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrParts.h"
 #include "msrBarLines.h"

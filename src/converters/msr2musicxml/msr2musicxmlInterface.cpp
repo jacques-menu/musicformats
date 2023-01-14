@@ -22,10 +22,7 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2musicxmlWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "waeOah.h"
 
@@ -67,7 +64,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
   std::ostream&       err,
   const S_oahHandler& handler)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Translating an MSR score to MusicXML in \"" <<
@@ -132,7 +129,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
     gLogStream <<
       std::endl <<

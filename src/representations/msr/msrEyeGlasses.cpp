@@ -13,12 +13,11 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
@@ -69,13 +68,15 @@ msrEyeGlasses::~msrEyeGlasses ()
 void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -99,7 +100,7 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //   const Rational&     measurePosition,
 //   const std::string&  context)
 // {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //
 //     gLogStream <<
@@ -119,11 +120,13 @@ void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
 //   }
 // #endif
 //
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
 //     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+// #endif
 //
 //   // set measure element's measure position
 //   fEyeGlassesMeasurePosition = measurePosition;

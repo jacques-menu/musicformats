@@ -13,7 +13,10 @@
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
                         // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
-#include "mfServiceRunData.h"
+#include "mfEnableSanityChecksSetting.h"
+
+#include "mfPasses.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
 
@@ -23,10 +26,7 @@
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "lpsrScores.h"
 
@@ -90,7 +90,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     // start the clock
     clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       std::string separator =
         "%--------------------------------------------------------------";
@@ -99,7 +99,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        gWaeHandler->pass1 () <<
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_1) <<
         ": " <<
         "Creating a first MSR from the MSDL input" <<
         std::endl <<
@@ -123,12 +123,13 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gWaeHandler->pass1 (),
+      gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
       endClock);
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
     // sanity check
     if (! theMsrScore) {
       std::stringstream s;
@@ -146,6 +147,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
       throw msdl2msrException (message);
     }
+#endif
   }
   catch (msdl2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -181,7 +183,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theMsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->pass2 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
         "Convert the MSR into an LPSR",
         createMsdl2lilypondConverterComponent ());
   }
@@ -214,7 +216,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       handler->
         fetchOutputFileNameFromTheOptions ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     err <<
       "msdlStream2lilypond() outputFileName = \"" <<
@@ -225,7 +227,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #endif
 
   if (! outputFileName.size ()) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "msdlStream2lilypond() output goes to standard output" <<
@@ -246,7 +248,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->pass3 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
     }
@@ -261,7 +263,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   }
 
   else {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       err <<
         "msdlStream2lilypond() output goes to file \"" <<
@@ -272,7 +274,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 #endif
 
     // open output file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
       err <<
         std::endl <<
@@ -314,7 +316,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->pass4 (),
+        gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
     }
@@ -368,7 +370,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
   // print the options and arguments
   // ------------------------------------------------------
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
@@ -389,7 +391,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<
@@ -498,7 +500,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
   std::ostream&           err)
 {
   // open input file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<
@@ -543,7 +545,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   std::ostream&       err)
 {
   // open input file
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     err <<
       std::endl <<

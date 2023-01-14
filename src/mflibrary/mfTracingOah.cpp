@@ -13,13 +13,12 @@
 
 #include "mfStringsHandling.h"
 
-#include "mfEnableTracingIfDesired.h"
+#include "mfEnableTracingSetting.h"
 
-#ifdef OAH_TRACING_IS_ENABLED // encompasses this whole file
+
+#ifdef MF_TRACING_IS_ENABLED // encompasses the remainder of this file
 
 #include <iomanip>      // std::setw, std::setprecision, ...
-
-#include "mfTracingOah.h"
 
 #include "oahOah.h"
 
@@ -48,11 +47,11 @@ tracingOahGroup::tracingOahGroup (
   : oahGroup (
       "OAH Trace",
       "help-trace", "ht",
-  R"(There are trace options transversal to the successive passes,
-  showing what's going on in the various conversion activities.
-  They're provided as a help to the maintainers, as well as for the curious.
-  The options in this group can be quite verbose, use them with small input data!
-  All of them imply '-trace-passes, -tpasses'.)",
+R"(There are trace options transversal to the successive passes,
+showing what's going on in the various conversion activities.
+They're provided as a help to the maintainers, as well as for the curious.
+The options in this group can be quite verbose, use them with small input data!
+All of them imply '-trace-passes, -tpasses'.)",
       oahElementVisibilityKind::kElementVisibilityHeaderOnly)
 {
   createTheTracePrefixes (handler);
@@ -177,7 +176,7 @@ R"()",
     appendAtomToSubGroup (
       oahBooleanAtom::create (
         K_TRACE_COMPONENTS_LONG_OPTION_NAME, K_TRACE_COMPONENTS_SHORT_OPTION_NAME,
-  R"(Write a trace of components handling to standard error.)",
+R"(Write a trace of components handling to standard error.)",
         "fTraceComponents",
         fTraceComponents));
 

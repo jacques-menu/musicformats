@@ -13,15 +13,12 @@
 
 #include "visitor.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 
@@ -88,7 +85,7 @@ msrBook::~msrBook ()
 
 S_msrBook msrBook::createBookNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBooks ()) {
     gLogStream <<
       "Creating a newborn clone of a score" <<
@@ -190,7 +187,7 @@ void msrBook::addBookElementToBook (
 void msrBook::appendCreditToBook (
   const S_msrCredit& credit)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceCredits ()) {
     gLogStream <<
       "Appending credit '" <<
@@ -276,7 +273,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
 
               switch (topCreditsCounter) {
                 case 1:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
                   if (gGlobalTracingOahGroup->getTraceCredits ()) {
                     gLogStream <<
                       "Using credit words '" <<
@@ -293,7 +290,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                   break;
 
                 case 2:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
                   if (gGlobalTracingOahGroup->getTraceCredits ()) {
                     gLogStream <<
                       "Using credit words '" <<
@@ -322,7 +319,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
 
               switch (bottomCreditsCounter) {
                 case 1:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
                   if (gGlobalTracingOahGroup->getTraceCredits ()) {
                     gLogStream <<
                       "Using credit words '" <<
@@ -339,7 +336,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
                   break;
 
                 case 2:
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
                   if (gGlobalTracingOahGroup->getTraceCredits ()) {
                     gLogStream <<
                       "Using credit words '" <<

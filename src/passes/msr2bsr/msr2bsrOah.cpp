@@ -13,10 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfStringsHandling.h"
 
@@ -165,7 +162,7 @@ R"(Include clefs in BSR. By default, they are not.)",
 
 void msr2bsrOahGroup::initializeMsr2bsrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 // JMI  initializeMsr2bsrtracingOahGroup ();
@@ -184,7 +181,7 @@ void msr2bsrOahGroup::checkGroupOptionsConsistency ()
 
 void msr2bsrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2bsrOahGroup::acceptIn ()" <<
@@ -197,7 +194,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msr2bsrOahGroup>*> (v)) {
         S_msr2bsrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2bsrOahGroup::visitStart ()" <<
@@ -210,7 +207,7 @@ void msr2bsrOahGroup::acceptIn (basevisitor* v)
 
 void msr2bsrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2bsrOahGroup::acceptOut ()" <<
@@ -223,7 +220,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msr2bsrOahGroup>*> (v)) {
         S_msr2bsrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msr2bsrOahGroup::visitEnd ()" <<
@@ -236,7 +233,7 @@ void msr2bsrOahGroup::acceptOut (basevisitor* v)
 
 void msr2bsrOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msr2bsrOahGroup::browseData ()" <<
@@ -317,7 +314,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2bsrOahGroup& elt)
 //______________________________________________________________________________
 S_msr2bsrOahGroup createGlobalMsr2bsrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msr2bsr OAH group" <<

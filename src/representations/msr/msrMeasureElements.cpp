@@ -11,12 +11,11 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 
@@ -71,7 +70,7 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
   const Rational&    wholeNotes,
   const std::string& context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -95,11 +94,13 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     wholeNotes != K_WHOLE_NOTES_UNKNOWN,
     "wholeNotes == K_WHOLE_NOTES_UNKNOWN");
+#endif
 
   fMeasureElementSoundingWholeNotes = wholeNotes;
 }
@@ -109,7 +110,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   const Rational&     measurePosition,
   const std::string&  context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -133,11 +134,13 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+#endif
 
   // set measure element's measure position
   fMeasureElementMeasurePosition = measurePosition;
@@ -185,7 +188,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
   const Rational&    voicePosition,
   const std::string& context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -205,14 +208,16 @@ void msrMeasureElement::setMeasureElementVoicePosition (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     voicePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
     "voicePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+#endif
 
   // set measure element voice position
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoicePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -239,7 +244,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   const msrMoment& measureMoment,
 //   const std::string&    context)
 // {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasureMoments ()) {
 //     gLogStream <<
 //       "Setting measure element measure moment of " <<
@@ -266,7 +271,7 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   const msrMoment& voiceMoment,
 //   const std::string&    context)
 // {
-// #ifdef OAH_TRACING_IS_ENABLED
+// #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceMeasureMoments ()) {
 //     gLogStream <<
 //       "Setting measure element voice moment of " <<
@@ -281,18 +286,20 @@ void msrMeasureElement::setMeasureElementVoicePosition (
 //   }
 // #endif
 //
-//   // sanity check
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     voiceMoment != msrMoment::K_MOMENT_UNKNOWN,
 //     "voiceMoment == msrMoment::K_MOMENT_UNKNOWN");
+// #endif
 //
 //   fMeasureElementVoiceMoment = voiceMoment;
 // }
 
 void msrMeasureElement::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureElement::acceptIn ()" <<
@@ -305,7 +312,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
         S_msrMeasureElement elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureElement::visitStart ()" <<
@@ -318,7 +325,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
 
 void msrMeasureElement::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "% ==> msrMeasureElement::acceptOut ()" <<
@@ -331,7 +338,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrMeasureElement>*> (v)) {
         S_msrMeasureElement elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
             "% ==> Launching msrMeasureElement::visitEnd ()" <<

@@ -11,12 +11,11 @@
 
 #include <iomanip>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -54,11 +53,13 @@ msrBeatRepeatElement::msrBeatRepeatElement (
   const S_msrBeatRepeat& upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     upLinkToBeatRepeat != nullptr,
     "upLinkToBeatRepeat is null");
+#endif
 
   fBeatRepeatElementUpLinkToBeatRepeat = upLinkToBeatRepeat;
 }
@@ -71,7 +72,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
   const S_msrSegment&  segment,
   const std::string& context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending segment '" << segment <<
@@ -82,11 +83,13 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     segment != nullptr,
     "segment is null");
+#endif
 
   fBeatRepeatElementsList.push_back (segment);
 }
@@ -96,7 +99,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
   S_msrBeatRepeat beatRepeat,
   const std::string&   context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending beatRepeat '" << beatRepeat <<
@@ -107,11 +110,13 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     beatRepeat != nullptr,
     "beatRepeat is null");
+#endif
 
   fBeatRepeatElementsList.push_back (beatRepeat);
 }
@@ -121,7 +126,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
   const S_msrVoiceElement& voiceElement,
   const std::string&     context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Appending voice element '" << voiceElement <<
@@ -132,11 +137,13 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     voiceElement != nullptr,
     "voiceElement is null");
+#endif
 
   fBeatRepeatElementsList.push_back (voiceElement);
 }
@@ -444,11 +451,13 @@ msrBeatRepeatPattern::msrBeatRepeatPattern (
   const S_msrBeatRepeat& upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     upLinkToBeatRepeat != nullptr,
     "upLinkToBeatRepeat is null");
+#endif
 
   fUpLinkToBeatRepeat = upLinkToBeatRepeat;
 }
@@ -459,7 +468,7 @@ msrBeatRepeatPattern::~msrBeatRepeatPattern ()
 void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
   const S_msrSegment& beatRepeatPatternSegment)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Setting measures repeat pattern segment containing " <<
@@ -471,11 +480,13 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatPatternSegment != nullptr,
     "beatRepeatPatternSegment is null");
+#endif
 
   fBeatRepeatPatternSegment =
     beatRepeatPatternSegment;
@@ -639,11 +650,13 @@ msrBeatRepeatReplicas::msrBeatRepeatReplicas (
   const S_msrBeatRepeat& upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     upLinkToBeatRepeat != nullptr,
     "upLinkToBeatRepeat is null");
+#endif
 
   fUpLinkToBeatRepeat = upLinkToBeatRepeat;
 }
@@ -654,7 +667,7 @@ msrBeatRepeatReplicas::~msrBeatRepeatReplicas ()
 void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
   const S_msrSegment& beatRepeatReplicasSegment)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Setting measures repeat replicas segment containing " <<
@@ -666,11 +679,13 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatReplicasSegment != nullptr,
     "beatRepeatReplicasSegment is null");
+#endif
 
   fBeatRepeatReplicasSegment =
     beatRepeatReplicasSegment;
@@ -840,19 +855,23 @@ msrBeatRepeat::msrBeatRepeat (
   const S_msrVoice& upLinkToVoice)
     : msrSegmentElement (inputLineNumber)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatMeasuresNumber > 0,
     "beatRepeatMeasuresNumber is not positive");
+#endif
 
   fBeatRepeatMeasuresNumber = beatRepeatMeasuresNumber;
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatSlashesNumber > 0,
     "beatRepeatSlashesNumber is not positive");
+#endif
 
   fBeatRepeatSlashesNumber  = beatRepeatSlashesNumber;
 
@@ -869,7 +888,7 @@ msrBeatRepeat::~msrBeatRepeat ()
 S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
   const S_msrVoice& containingVoice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Creating a newborn clone of measures repeat '" <<
@@ -879,11 +898,13 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
     "containingVoice is null");
+#endif
 
   S_msrBeatRepeat
     newbornClone =
@@ -899,7 +920,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
 void msrBeatRepeat::setBeatRepeatPattern (
   const S_msrBeatRepeatPattern& beatRepeatPattern)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Setting measures repeat pattern containing " <<
@@ -912,11 +933,13 @@ void msrBeatRepeat::setBeatRepeatPattern (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatPattern != nullptr,
     "beatRepeatPattern is null");
+#endif
 
   fBeatRepeatPattern = beatRepeatPattern;
 
@@ -928,7 +951,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
 void msrBeatRepeat::setBeatRepeatReplicas (
   const S_msrBeatRepeatReplicas& beatRepeatReplicas)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     gLogStream <<
       "Setting measures repeat replicas containing " <<
@@ -941,11 +964,13 @@ void msrBeatRepeat::setBeatRepeatReplicas (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatReplicas != nullptr,
     "beatRepeatReplicas is null");
+#endif
 
   fBeatRepeatReplicas = beatRepeatReplicas;
 
@@ -959,11 +984,13 @@ int msrBeatRepeat::fetchBeatRepeatReplicasNumber () const
   int patternMeasuresNumber =
     fetchBeatRepeatPatternMeasuresNumber ();
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     patternMeasuresNumber > 0,
     "patternMeasuresNumber is not positive");
+#endif
 
   return
     fetchBeatRepeatReplicasMeasuresNumber ()
@@ -973,11 +1000,13 @@ int msrBeatRepeat::fetchBeatRepeatReplicasNumber () const
 
 int msrBeatRepeat::fetchBeatRepeatPatternMeasuresNumber () const
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fBeatRepeatPattern != nullptr,
     "fBeatRepeatPattern is null");
+#endif
 
   return
     fBeatRepeatPattern->
@@ -986,11 +1015,13 @@ int msrBeatRepeat::fetchBeatRepeatPatternMeasuresNumber () const
 
 int msrBeatRepeat::fetchBeatRepeatReplicasMeasuresNumber () const
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     fBeatRepeatReplicas != nullptr,
     "fBeatRepeatReplicas is null");
+#endif
 
   return
     fBeatRepeatReplicas->
@@ -1066,7 +1097,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
     score->getInhibitBeatRepeatReplicasBrowsing ();
 
   if (inhibitBeatRepeatReplicasBrowsing) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalMsrOahGroup->getTraceMsrVisitors () || gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
       gLogStream <<
         "% ==> visiting measures repeat replicas is inhibited" <<
@@ -1235,7 +1266,7 @@ void msrBeatRepeat::print (std::ostream& os) const
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeatRepeats ()) {
     // print the current measures repeat build phase
     const int fieldWidth = 36;

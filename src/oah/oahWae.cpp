@@ -11,7 +11,7 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "mfEnableAbortToDebugErrors.h"
+#include "mfEnableAbortToDebugErrorsSetting.h"
 
 #include "oahWae.h"
 
@@ -83,7 +83,7 @@ void oahError (const std::string& errorMessage)
     errorMessage <<
     std::endl;
 
-#ifdef MF_ABORT_TO_DEBUG_ERRORS
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
 #endif
 
@@ -103,7 +103,7 @@ void oahErrorWithContext (
     context <<
     std::endl;
 
-#ifdef MF_ABORT_TO_DEBUG_ERRORS
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
 #endif
 
@@ -120,7 +120,7 @@ void oahInternalError (const std::string& errorMessage)
     errorMessage <<
     std::endl;
 
-#ifdef MF_ABORT_TO_DEBUG_ERRORS
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
 #endif
 
@@ -154,7 +154,7 @@ void oahInternalErrorWithContext (
     context <<
     std::endl;
 
-#ifdef MF_ABORT_TO_DEBUG_ERRORS
+#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();
 #endif
 

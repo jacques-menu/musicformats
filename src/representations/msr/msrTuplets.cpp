@@ -9,17 +9,16 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "visitor.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrMeasureConstants.h"
@@ -128,7 +127,7 @@ msrTuplet::msrTuplet (
 
   fTupletDisplayWholeNotes          = Rational (0, 1);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Creating tuplet:" <<
@@ -148,7 +147,7 @@ msrTuplet::~msrTuplet ()
 
 S_msrTuplet msrTuplet::createTupletNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Creating a newborn clone of tuplet " <<
@@ -247,13 +246,15 @@ void msrTuplet::getMeasureElementUpLinkToMeasure (
 void msrTuplet::setTupletUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -282,7 +283,7 @@ void msrTuplet::appendNoteToTuplet (
   const S_msrNote&  note,
   const S_msrVoice& voice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Appending note " <<
@@ -344,7 +345,7 @@ void msrTuplet::appendNoteToTuplet (
 
 void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Appending chord " <<
@@ -384,7 +385,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 
 void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Appending tuplet " <<
@@ -424,7 +425,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 
 void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Appending tuplet " <<
@@ -493,7 +494,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 {
   S_msrNote result;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Removing first note from tuplet " <<
@@ -598,7 +599,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 {
   S_msrNote result;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Removing last note from tuplet " <<
@@ -658,7 +659,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
       s.str ());
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "This last note from tuplet " <<
@@ -677,7 +678,7 @@ void msrTuplet::setMeasureElementMeasurePosition (
   const Rational&     measurePosition,
   const std::string&  context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     S_msrMeasure upLinkToMeasure;
 
@@ -717,7 +718,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
   const S_msrMeasure& measure,
   const Rational&     measurePosition)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting tuplet members measure positions of " << asString () <<
@@ -731,11 +732,13 @@ void msrTuplet::setTupletMembersMeasurePositions (
   std::string context = // JMI v0.9.66
     "setTupletMembersMeasurePositions()";
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measurePosition != msrMoment::K_MEASURE_POSITION_UNKNOWN,
     "measurePosition == msrMoment::K_MEASURE_POSITION_UNKNOWN");
+#endif
 
   // set tuplet's measure position
   fMeasureElementMeasurePosition = measurePosition;
@@ -816,7 +819,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
   int containingTupletNormalNotes)
   */
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "unapplySoundingFactorToTupletMembers ()" <<
@@ -855,7 +858,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
 void msrTuplet::finalizeTuplet (
   int inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Finalizing tuplet " <<

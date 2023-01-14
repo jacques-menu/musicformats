@@ -864,7 +864,7 @@ int bsrNote::fetchCellsNumber() const
 
 void bsrNote::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrNote::acceptIn ()" <<
@@ -877,7 +877,7 @@ void bsrNote::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrNote>*> (v)) {
         S_bsrNote elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrNote::visitStart ()" <<
@@ -890,7 +890,7 @@ void bsrNote::acceptIn (basevisitor* v)
 
 void bsrNote::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrNote::acceptOut ()" <<
@@ -903,7 +903,7 @@ void bsrNote::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrNote>*> (v)) {
         S_bsrNote elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrNote::visitEnd ()" <<

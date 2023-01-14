@@ -21,10 +21,7 @@
 #include "waeInterface.h"
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "libmusicxml.h" // for mfMusicformatsErrorKind
 
@@ -107,7 +104,7 @@ int main (int argc, char* argv[])
   Bool insiderOption =
     gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       serviceName << " main()" <<
@@ -241,7 +238,7 @@ int main (int argc, char* argv[])
     scriptSourceName =
       gGlobalServiceRunData->getInputSourceName ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     std::string separator =
       "%--------------------------------------------------------------";
@@ -286,7 +283,7 @@ int main (int argc, char* argv[])
   // welcome message
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       "This is " << serviceName << ' ' <<
@@ -348,7 +345,7 @@ int main (int argc, char* argv[])
   // acknoledge end of command line analysis
   // ------------------------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     gLogStream <<
       "The command line options and arguments have been analyzed" <<

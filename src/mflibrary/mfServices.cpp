@@ -11,12 +11,9 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "oahEarlyOptions.h"
@@ -26,6 +23,61 @@
 
 namespace MusicFormats
 {
+
+//_______________________________________________________________________________
+S_mfService gGlobalService;
+
+S_mfService mfService::create (
+  const std::string& serviceName)
+{
+  mfService* o = new
+    mfService (
+      serviceName);
+  assert (o != nullptr);
+  return o;
+}
+
+mfService::mfService (
+  const std::string& serviceName)
+{
+  // service name
+  fServiceName = serviceName;
+}
+
+mfService::~mfService ()
+{}
+
+void mfService::print (std::ostream& os) const
+{
+  os <<
+    "[Service \"" << fServiceName << " \":" <<
+    std::endl;
+
+  ++gIndenter;
+
+  // service passIDs
+  // --------------------------------------
+
+  const int fieldWidth = 21;
+
+  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+    os << std::left <<
+      std::setw (fieldWidth) <<
+      "passDescription " << ": " <<
+      passDescription->asString () <<
+      std::endl;
+  } // for
+
+  --gIndenter;
+
+  os << "]" << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const mfService& elt)
+{
+  elt.print (os);
+  return os;
+}
 
 //_______________________________________________________________________________
 S_mfServiceRunData gGlobalServiceRunData;

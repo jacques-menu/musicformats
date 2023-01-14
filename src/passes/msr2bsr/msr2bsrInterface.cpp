@@ -11,12 +11,14 @@
 
 #include <iostream>
 
+#include "mfEnableSanityChecksSetting.h"
+
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
 
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfTiming.h"
 
 #include "msrScores.h"
@@ -25,10 +27,7 @@
 
 #include "msr2bsrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -51,16 +50,18 @@ S_bsrScore translateMsrToBsr (
   const std::string& passNumber,
   const std::string& passDescription)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     originalMsrScore != nullptr,
     "originalMsrScore is null");
+#endif
 
   // start the clock
   clock_t startClock = clock ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";

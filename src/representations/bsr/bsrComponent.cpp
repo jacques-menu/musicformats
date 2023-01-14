@@ -24,7 +24,7 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
   // protect library against multiple initializations
   if (! pRepresentationComponent) {
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
       gLogStream <<
         "Creating the BSR component" <<

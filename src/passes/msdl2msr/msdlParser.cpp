@@ -13,17 +13,14 @@
 #include <iomanip>  // for setw()
 #include <cstdlib>  // for stod()
 
+#include "mfEnableSanityChecksSetting.h"
 
-
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "msrOah.h"
 
@@ -63,7 +60,7 @@ msdlParser::msdlParser (std::istream& inputStream)
         fScanner.getCurrentToken ())
 {
   // trace
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   fTraceSyntax        =
     gGlobalMsdl2msrOahGroup->getTraceSyntax ();
   fTraceSyntaxDetails =
@@ -302,11 +299,13 @@ void msdlParser::displayTokenKindsSetsStack (const std::string& context)
     for ( ; ; ) {
       S_msdlTokenKindsSet tokenKindsSet = (*i);
 
-      // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
       mfAssert (
         __FILE__, __LINE__,
         tokenKindsSet != nullptr,
         "tokenKindsSet is null");
+#endif
 
       gLogStream <<
         "v " <<
@@ -348,7 +347,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
   size_t
     tokensSetsStackSize = fMsdlTokensSetsStack.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     gLogStream <<
       std::endl <<
@@ -375,7 +374,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
     for ( ; ; ) {
       S_msdlTokenKindsSet stoppersSet = ((*i));
 
-  #ifdef OAH_TRACING_IS_ENABLED
+  #ifdef MF_TRACING_IS_ENABLED
       if (fTraceSyntaxErrorRecoveryDetails) {
         gLogStream <<
           std::endl <<
@@ -411,7 +410,7 @@ void msdlParser::fetchNextToken ()
     fScanner.fetchNextToken (
       fIgnoreSeparatorTokensKind);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -432,7 +431,7 @@ Bool msdlParser::checkMandatoryTokenKind (
   msdlTokenKind tokenKind,
   const std::string& context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     gLogStream <<
       std::endl <<
@@ -446,7 +445,7 @@ Bool msdlParser::checkMandatoryTokenKind (
 
   Bool result (false);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     displayTokenKindsSetsStack ("checkMandatoryTokenKind()");
   }
@@ -477,7 +476,7 @@ Bool msdlParser::checkMandatoryTokenKind (
 
       while (true) {
         // let's ignore fCurrentToken
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (fTraceSyntaxErrorRecovery) {
           fParserWaeHandler->
             ignoringToken (fCurrentToken, context);
@@ -496,7 +495,7 @@ Bool msdlParser::checkMandatoryTokenKind (
     }
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     gLogStream <<
       std::endl <<
@@ -521,7 +520,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
   const S_msdlTokenKindsSet& tokenKindsSet,
   const std::string&       context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     gLogStream <<
       std::endl <<
@@ -536,7 +535,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
 
   Bool result (false);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     displayTokenKindsSetsStack ("checkMandatoryTokenKindsSet()");
   }
@@ -567,7 +566,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
 
       while (true) {
         // let's ignore fCurrentToken
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (fTraceSyntaxErrorRecovery) {
           fParserWaeHandler->
             ignoringToken (fCurrentToken, context);
@@ -584,7 +583,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
     }
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     gLogStream <<
       std::endl <<
@@ -609,7 +608,7 @@ Bool msdlParser::checkOptionalTokenKind (
   msdlTokenKind tokenKind,
   const std::string& context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     gLogStream <<
       std::endl <<
@@ -623,7 +622,7 @@ Bool msdlParser::checkOptionalTokenKind (
 
   Bool result (false);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     displayTokenKindsSetsStack ("checkOptionalTokenKind()");
   }
@@ -676,7 +675,7 @@ Bool msdlParser::checkOptionalTokenKind (
           }
         }
 
-  #ifdef OAH_TRACING_IS_ENABLED
+  #ifdef MF_TRACING_IS_ENABLED
         if (fTraceSyntaxErrorRecovery) {
           fParserWaeHandler->
             ignoringToken (fCurrentToken, context);
@@ -691,7 +690,7 @@ Bool msdlParser::checkOptionalTokenKind (
     }
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     gLogStream <<
       std::endl <<
@@ -716,7 +715,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
   const S_msdlTokenKindsSet& tokenKindsSet,
   const std::string&       context)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     gLogStream <<
       std::endl <<
@@ -729,7 +728,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     displayTokenKindsSetsStack ("checkOptionalTokenKindsSet()");
   }
@@ -765,7 +764,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
 
         while (false) { // JMI BLARK
           // let's ignore fCurrentToken
-  #ifdef OAH_TRACING_IS_ENABLED
+  #ifdef MF_TRACING_IS_ENABLED
           if (fTraceSyntaxErrorRecovery) {
             fParserWaeHandler->
               ignoringToken (fCurrentToken, context);
@@ -783,7 +782,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
     }
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecoveryDetails) {
     gLogStream <<
       std::endl <<
@@ -955,7 +954,7 @@ void msdlParser::createIdentificationIfNeeded (int inputLineNumber)
       RunDate =
         gGlobalServiceRunData->getRunDateFull ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       gLogStream <<
         "--- createIdentificationIfNeeded()" <<
@@ -996,12 +995,14 @@ void msdlParser::setCurrentOctaveEntryReference ()
       break;
 
     case msrOctaveEntryKind::kOctaveEntryFixed:
-      // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
       mfAssert (
         __FILE__, __LINE__,
         gGlobalLpsr2lilypondOahGroup->
         getFixedOctaveEntrySemiTonesPitchAndOctave () != nullptr,
        "gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave () is null");
+#endif
 
       fCurrentOctaveEntryReference =
         msrNote::createNoteFromSemiTonesPitchAndOctave (
@@ -1028,7 +1029,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
     // the first note in the voice will become the initial reference
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream <<
       "setCurrentOctaveEntryReferenceFromTheLilypondOah()" <<
@@ -1110,7 +1111,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
         +
       referenceDiatonicPitchKind - msrDiatonicPitchKind::kDiatonicPitchC;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     const int fieldWidth = 28;
 
@@ -1161,7 +1162,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
     } // while
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream <<
       "lilypondOctaveInRelativeEntryMode() 2" <<
@@ -1205,7 +1206,7 @@ std::string msdlParser::lilypondOctaveInFixedEntryMode (
   int absoluteOctavesDifference =
     (int) noteAbsoluteOctave - (int) referenceAbsoluteOctave;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream << std::left <<
       "% noteAbsoluteOctave = " <<
@@ -1323,7 +1324,7 @@ void msdlParser::parse ()
   fetchNextToken ();
 
   if (fCurrentTokenKind == msdlTokenKind::k_TokenEOF) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     gLogStream <<
       "Input doesn't contain any token" <<
       std::endl;
@@ -1335,7 +1336,7 @@ void msdlParser::parse ()
 
     ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       gLogStream <<
         "==> parse()" <<
@@ -1353,7 +1354,7 @@ void msdlParser::parse ()
       msdlTokenKind::k_TokenEOF,
       "Specification")
     ) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (fTraceSyntax) {
         gLogStream <<
           std::endl <<
@@ -1364,7 +1365,7 @@ void msdlParser::parse ()
 #endif
     }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       if (fSourceIsSyntacticallyCorrect) {
         fParserWaeHandler->
@@ -1414,7 +1415,7 @@ void msdlParser::Specification (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntaxErrorRecovery) {
     displayTokenKindsSetsStack ("Specification");
   }
@@ -1492,7 +1493,7 @@ void msdlParser::Identification (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1542,7 +1543,7 @@ void msdlParser::Identification (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1565,7 +1566,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1594,7 +1595,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
     // get the title
     std::string title = fCurrentToken.getTokenDescription ().getString ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "=== Title()" <<
@@ -1620,7 +1621,7 @@ void msdlParser::Title (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1643,7 +1644,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1673,7 +1674,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
     std::string composer =
       fCurrentToken.getTokenDescription ().getString ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "=== Composer()" <<
@@ -1699,7 +1700,7 @@ void msdlParser::Composer (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "=================================================================" <<
@@ -1721,7 +1722,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1751,7 +1752,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
     std::string opus =
       fCurrentToken.getTokenDescription ().getString ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "=== Opus()" <<
@@ -1777,7 +1778,7 @@ void msdlParser::Opus (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1808,7 +1809,7 @@ void msdlParser::Identifier (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1834,7 +1835,7 @@ void msdlParser::Identifier (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1857,7 +1858,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1894,7 +1895,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
       std::string pitchesLanguageName =
         fCurrentToken.getTokenDescription ().getString ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (fTraceSyntax) {
         gLogStream <<
           "=== Pitches()" <<
@@ -1908,7 +1909,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
         msrQuarterTonesPitchesLanguageKindFromString (
           pitchesLanguageName);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (fTraceSyntax) {
         gLogStream <<
           "=== Pitches()" <<
@@ -1929,7 +1930,7 @@ void msdlParser::Pitches (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1952,7 +1953,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -1989,7 +1990,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
       std::string pitchesLanguageName =
         fCurrentToken.getTokenDescription ().getString ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (fTraceSyntax) {
         gLogStream <<
           "=== Octaves()" <<
@@ -2003,7 +2004,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
         msrQuarterTonesPitchesLanguageKindFromString (
           pitchesLanguageName);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (fTraceSyntax) {
         gLogStream <<
           "=== Octaves()" <<
@@ -2024,7 +2025,7 @@ void msdlParser::Octaves (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2047,7 +2048,7 @@ void msdlParser::PitchesLanguage (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2073,7 +2074,7 @@ void msdlParser::PitchesLanguage (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2096,7 +2097,7 @@ void msdlParser::PitchesOctaveEntry (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2122,7 +2123,7 @@ void msdlParser::PitchesOctaveEntry (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2145,7 +2146,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2170,7 +2171,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
       "Anacrusis")
   ) {
 //  if (fCurrentTokenKind == msdlTokenKind::kTokenAnacrusis) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       gLogStream <<
         "=== Anacrusis()" <<
@@ -2189,7 +2190,7 @@ void msdlParser::Anacrusis (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2212,7 +2213,7 @@ void msdlParser::Structure (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2265,7 +2266,7 @@ void msdlParser::Structure (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2288,7 +2289,7 @@ void msdlParser::Book (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2342,7 +2343,7 @@ void msdlParser::Book (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2365,7 +2366,7 @@ void msdlParser::Score (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2416,7 +2417,7 @@ void msdlParser::Score (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2439,7 +2440,7 @@ void msdlParser::PartGroup (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2487,7 +2488,7 @@ void msdlParser::PartGroup (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2510,7 +2511,7 @@ void msdlParser::Part (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2555,7 +2556,7 @@ void msdlParser::Part (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2578,7 +2579,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2610,7 +2611,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
     std::string musicName =
       fCurrentToken.getTokenDescription ().getString ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       gLogStream <<
         "=== Music()" <<
@@ -2656,7 +2657,7 @@ void msdlParser::Music (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "=================================================================" <<
@@ -2678,7 +2679,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2726,7 +2727,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
       std::string fragmentName =
         fCurrentToken.getTokenDescription ().getString ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (fTraceSyntax) {
         gLogStream <<
           "=== Fragment()" <<
@@ -2760,7 +2761,7 @@ void msdlParser::Fragment (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2783,7 +2784,7 @@ void msdlParser::MeasuresSequence (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2817,7 +2818,7 @@ void msdlParser::MeasuresSequence (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "<-- MeasuresSequence()" <<
@@ -2839,7 +2840,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2891,7 +2892,7 @@ void msdlParser::Measure (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "<-- Measure()" <<
@@ -2913,7 +2914,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2947,7 +2948,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
     // get the measure number
     measureNumber = fCurrentToken.getTokenDescription ().getInteger ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       gLogStream <<
         "=== MeasureNumber()" <<
@@ -2971,7 +2972,7 @@ void msdlParser::MeasureNumber (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -2994,7 +2995,7 @@ void msdlParser::Clef (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -3020,7 +3021,7 @@ void msdlParser::Clef (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "<-- Clef()" <<
@@ -3042,7 +3043,7 @@ void msdlParser::Key (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -3068,7 +3069,7 @@ void msdlParser::Key (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "<-- Key()" <<
@@ -3090,7 +3091,7 @@ void msdlParser::Time (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -3116,7 +3117,7 @@ void msdlParser::Time (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "<-- Time()" <<
@@ -3138,7 +3139,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -3173,7 +3174,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
     std::string pitchName =
       fCurrentToken.getTokenDescription ().getString ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       gLogStream <<
         "=== Note()" <<
@@ -3187,7 +3188,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
         fPitchesLanguageKind,
         pitchName);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (false) { // JMI
       gLogStream <<
         "=== Note()" <<
@@ -3203,7 +3204,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
   }
 
   // is there an octave indication?
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (false) { // JMI
     gLogStream <<
       std::endl <<
@@ -3224,7 +3225,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
         stopperTokensSet);
 
   // fetch the note duration?
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (false) { // JMI
     gLogStream <<
       std::endl <<
@@ -3264,7 +3265,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
         fCurrentNoteDisplayWholeNotes,
         fCurrentNoteDotsNumber);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "=== Note()" <<
@@ -3283,7 +3284,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "<-- Note()" <<
@@ -3305,7 +3306,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -3333,7 +3334,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
     std::string pitchName =
       fCurrentToken.getTokenDescription ().getString ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       gLogStream <<
         "=== Pitch()" <<
@@ -3352,7 +3353,7 @@ void msdlParser::Pitch (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "<-- Pitch()" <<
@@ -3376,7 +3377,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -3420,7 +3421,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
     fetchNextToken ();
   } // while
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       gLogStream <<
         "=== OctaveIndication()" <<
@@ -3430,11 +3431,13 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
     }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   if (commasCounter > 0 && quotesCounter > 0) {
     fParserWaeHandler->
       mixedCommasAndQuotesInOctaveIndication ();
   }
+#endif
 
   // compute result - the octave starting at Middle C (c') has number 4
   if (commasCounter > 0) {
@@ -3451,7 +3454,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
     result = msrOctaveKind::kOctave3;
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (fTraceSyntax) {
       gLogStream <<
         "=== OctaveIndication()" <<
@@ -3466,7 +3469,7 @@ msrOctaveKind msdlParser::OctaveIndication (S_msdlTokenKindsSet stopperTokensSet
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "<-- OctaveIndication()" <<
@@ -3490,7 +3493,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.push_front (stopperTokensSet);
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       std::endl <<
@@ -3526,7 +3529,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
           fCurrentToken.getTokenLineNumber (),
           durationInteger);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (fTraceSyntax) {
         gLogStream <<
           "=== NoteDuration()" <<
@@ -3551,7 +3554,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
           fCurrentToken.getTokenLineNumber (),
           durationName);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (fTraceSyntax) {
         gLogStream <<
           "=== NoteDuration()" <<
@@ -3562,7 +3565,8 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
 #endif
     }
 
-    // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
     switch (durationKind) {
       case msrDurationKind::kDuration_UNKNOWN:
         fParserWaeHandler->
@@ -3571,6 +3575,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
       default:
         ;
     } // switch
+#endif
 
     // consume the duration integer or name
     fetchNextToken ();
@@ -3606,7 +3611,7 @@ void msdlParser::NoteDuration (S_msdlTokenKindsSet stopperTokensSet)
     fMsdlTokensSetsStack.pop_front ();
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (fTraceSyntax) {
     gLogStream <<
       "<-- NoteDuration()" <<

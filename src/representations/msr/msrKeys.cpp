@@ -10,22 +10,20 @@
 */
 
 #include <iostream>
+#include <regex>
 #include <sstream>
 
-#include <regex>
+#include "mfEnableSanityChecksSetting.h"
 
 #include "visitor.h"
 
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrPitchesNames.h"
 #include "msrIntervals.h"
@@ -85,7 +83,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Creating Humdrum/Scot key item" <<
@@ -121,7 +119,7 @@ Bool msrHumdrumScotKeyItem::isEqualTo (
 void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
   msrDiatonicPitchKind diatonicPitchKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Setting Humdrum/Scot key item diatonic pitch to '" <<
@@ -137,7 +135,7 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
 void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
   msrAlterationKind alterationKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Setting Humdrum/Scot key item alteration to '" <<
@@ -152,7 +150,7 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
 
 void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Setting Humdrum/Scot key item octave to '" <<
@@ -376,7 +374,7 @@ msrKey::msrKey ( // for traditional keys
   // initialization in all cases
   fKeyItemsOctavesAreSpecified = false;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Creating traditional key '" <<
@@ -399,7 +397,7 @@ msrKey::msrKey ( // for Humdrum/Scot keys
   // initialization in all cases
   fKeyItemsOctavesAreSpecified = false;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Creating Humdrum/Scot key '" <<
@@ -416,13 +414,15 @@ msrKey::~msrKey ()
 void msrKey::setKeyUpLinkToMeasure (
   const S_msrMeasure& measure)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
     "measure is null");
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     ++gIndenter;
 
@@ -502,7 +502,7 @@ Bool msrKey::isEqualTo (S_msrKey otherKey) const
 void msrKey::appendHumdrumScotKeyItem (
   const S_msrHumdrumScotKeyItem& item)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Append item '" <<
@@ -534,7 +534,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
   S_msrKey result;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Creating traditional key from string \"" <<
@@ -552,7 +552,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
     "[[:space:]]*"
     );
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "regularExpression = " <<
@@ -568,7 +568,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -625,7 +625,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
         inputLineNumber,
         keyMode);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "keyTonic = \"" <<

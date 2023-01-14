@@ -16,10 +16,7 @@
 
 #include "bsrEnumTypes.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "waeOah.h"
 

@@ -14,7 +14,6 @@
 #include "oahWae.h"
 
 
-
 namespace MusicFormats
 {
 

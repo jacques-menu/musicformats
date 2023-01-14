@@ -30,7 +30,7 @@ class EXP mfWaeHandlerFrench : public mfWaeHandler
 
   public:
 
-    // constructors/destructor
+    // const overrideructors/destructor
     // ------------------------------------------------------
 
                           mfWaeHandlerFrench ();
@@ -48,6 +48,8 @@ class EXP mfWaeHandlerFrench : public mfWaeHandler
     // ------------------------------------------------------
 
     // pass numbers
+
+    virtual std::string   pass (mfPassIDKind passIDKind) const override;
 
     std::string           pass1 () const override;
 

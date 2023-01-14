@@ -13,10 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrSlides.h"
 
@@ -95,7 +92,7 @@ msrSlide::~msrSlide ()
 
 S_msrSlide msrSlide::createSlideNewbornClone ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlides ()) {
     gLogStream <<
       "Creating a newborn clone of slide '" <<

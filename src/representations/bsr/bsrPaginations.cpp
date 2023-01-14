@@ -105,7 +105,7 @@ int bsrPagination::fetchCellsNumber () const
 
 void bsrPagination::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPagination::acceptIn ()" <<
@@ -118,7 +118,7 @@ void bsrPagination::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrPagination>*> (v)) {
         S_bsrPagination elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPagination::visitStart ()" <<
@@ -131,7 +131,7 @@ void bsrPagination::acceptIn (basevisitor* v)
 
 void bsrPagination::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrPagination::acceptOut ()" <<
@@ -144,7 +144,7 @@ void bsrPagination::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrPagination>*> (v)) {
         S_bsrPagination elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrPagination::visitEnd ()" <<

@@ -18,10 +18,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -107,7 +104,7 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
 {
   // JMI ???
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'bsrFacSimileKindAtom'" <<
@@ -118,7 +115,7 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
 
 void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrFacSimileKindAtom::acceptIn ()" <<
@@ -131,7 +128,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrFacSimileKindAtom>*> (v)) {
         S_bsrFacSimileKindAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrFacSimileKindAtom::visitStart ()" <<
@@ -144,7 +141,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
 
 void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrFacSimileKindAtom::acceptOut ()" <<
@@ -157,7 +154,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrFacSimileKindAtom>*> (v)) {
         S_bsrFacSimileKindAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrFacSimileKindAtom::visitEnd ()" <<
@@ -170,7 +167,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
 
 void bsrFacSimileKindAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrFacSimileKindAtom::browseData ()" <<
@@ -306,7 +303,7 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
 {
   // JMI ???
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'bsrTextsLanguageAtom'" <<
@@ -317,7 +314,7 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
 
 void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrTextsLanguageAtom::acceptIn ()" <<
@@ -330,7 +327,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrTextsLanguageAtom>*> (v)) {
         S_bsrTextsLanguageAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrTextsLanguageAtom::visitStart ()" <<
@@ -343,7 +340,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
 
 void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrTextsLanguageAtom::acceptOut ()" <<
@@ -356,7 +353,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrTextsLanguageAtom>*> (v)) {
         S_bsrTextsLanguageAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrTextsLanguageAtom::visitEnd ()" <<
@@ -369,7 +366,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
 
 void bsrTextsLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrTextsLanguageAtom::browseData ()" <<
@@ -469,7 +466,7 @@ bsrOahGroup::bsrOahGroup ()
   : oahGroup (
       "BSR",
       "help-bsr", "hbsr",
-  R"(These bsr control the way BSR data is handled.)",
+R"(These bsr control the way BSR data is handled.)",
       oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeBsrOahGroup ();
@@ -599,7 +596,7 @@ The default is 'DEFAULT_VALUE'.)",
         fBsrTextsLanguageKind));
 }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void bsrOahGroup::initializeBsrtracingOah ()
 {
   S_oahSubGroup
@@ -696,7 +693,7 @@ void bsrOahGroup::initializeBsrOahGroup ()
   // --------------------------------------
   initializeBsrLanguagesOptions ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeBsrtracingOah ();
@@ -740,7 +737,7 @@ void bsrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void bsrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrOahGroup::acceptIn ()" <<
@@ -753,7 +750,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrOahGroup>*> (v)) {
         S_bsrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrOahGroup::visitStart ()" <<
@@ -766,7 +763,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
 
 void bsrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrOahGroup::acceptOut ()" <<
@@ -779,7 +776,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrOahGroup>*> (v)) {
         S_bsrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching bsrOahGroup::visitEnd ()" <<
@@ -792,7 +789,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
 
 void bsrOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> bsrOahGroup::browseData ()" <<
@@ -838,7 +835,7 @@ void bsrOahGroup::printBsrOahValues (int fieldWidth)
   // trace
   // --------------------------------------
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   gLogStream <<
     "Trace:" <<
     std::endl;
@@ -889,7 +886,7 @@ std::ostream& operator << (std::ostream& os, const S_bsrOahGroup& elt)
 //______________________________________________________________________________
 S_bsrOahGroup createGlobalBsrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global BSR OAH group" <<

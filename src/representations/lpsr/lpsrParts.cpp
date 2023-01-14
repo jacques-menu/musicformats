@@ -9,13 +9,12 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableSanityChecksSetting.h"
+
+#include "mfEnableTracingSetting.h"
 
 #include "mfAssert.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "lpsrWae.h"
@@ -46,11 +45,13 @@ lpsrPartBlock::lpsrPartBlock (
   const S_msrPart& part)
     : lpsrElement (0) // JMI
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     part != nullptr,
     "part is null");
+#endif
 
   fPart = part;
 
@@ -328,7 +329,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
   fPartBlockElementsList.push_back (chordNamesContext);
 
   // sort the std::list if necessary
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
       "Sorting the voices in part block for part \"" <<
@@ -398,7 +399,7 @@ void lpsrPartBlock::appendFiguredBassContextToPartBlock (
 
 void lpsrPartBlock::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartBlock::acceptIn ()" <<
@@ -411,7 +412,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPartBlock>*> (v)) {
         S_lpsrPartBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPartBlock::visitStart ()" <<
@@ -424,7 +425,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
 
 void lpsrPartBlock::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartBlock::acceptOut ()" <<
@@ -437,7 +438,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPartBlock>*> (v)) {
         S_lpsrPartBlock elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
           gLogStream <<
             "% ==> Launching lpsrPartBlock::visitEnd ()" <<
@@ -450,7 +451,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
 
 void lpsrPartBlock::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% ==> lpsrPartBlock::browseData ()" <<
@@ -468,7 +469,7 @@ void lpsrPartBlock::browseData (basevisitor* v)
     browser.browse (*(*i));
   } // for
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceLpsrVisitors ()) {
     gLogStream <<
       "% <== lpsrPartBlock::browseData ()" <<

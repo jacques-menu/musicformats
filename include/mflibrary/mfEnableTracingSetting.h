@@ -9,13 +9,17 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___tracingOah___
-#define ___tracingOah___
+#ifndef ___mfEnableTracingSetting___
+#define ___mfEnableTracingSetting___
 
 
-#include "mfEnableTracingIfDesired.h"
+#ifndef MF_TRACING_IS_ENABLED
+  // comment the following definition if no tracing is desired
+//   #define MF_TRACING_IS_ENABLED
+#endif
 
-#ifdef OAH_TRACING_IS_ENABLED // encompasses this whole file
+
+#ifdef MF_TRACING_IS_ENABLED // encompasses the remainder of this file
 
 
 #include <set>

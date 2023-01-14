@@ -15,12 +15,9 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "bsrKeys.h"
 #include "bsrNumbers.h"
@@ -109,7 +106,7 @@ bsrKey::bsrKey (
 
   fKeyCellsList = buildCellsList ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Creating bsrKey '" <<
@@ -205,7 +202,7 @@ int bsrKey::fetchCellsNumber() const
 
 void bsrKey::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrKey::acceptIn ()" <<
@@ -218,7 +215,7 @@ void bsrKey::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_bsrKey>*> (v)) {
         S_bsrKey elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrKey::visitStart ()" <<
@@ -231,7 +228,7 @@ void bsrKey::acceptIn (basevisitor* v)
 
 void bsrKey::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% ==> bsrKey::acceptOut ()" <<
@@ -244,7 +241,7 @@ void bsrKey::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_bsrKey>*> (v)) {
         S_bsrKey elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
           gLogStream <<
             "% ==> Launching bsrKey::visitEnd ()" <<

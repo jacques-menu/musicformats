@@ -17,10 +17,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -64,7 +61,7 @@ R"(These options control the way xmlelement are translated to MSDR.)",
 msdl2msrOahGroup::~msdl2msrOahGroup ()
 {}
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void msdl2msrOahGroup::initializeMsdl2msrtracingOah ()
 {
   S_oahSubGroup
@@ -393,7 +390,7 @@ The default is 'DEFAULT_VALUE'.)",
 
 void msdl2msrOahGroup::initializeMsdl2msrGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeMsdl2msrtracingOah ();
@@ -425,7 +422,7 @@ Bool msdl2msrOahGroup::setMsdlQuarterTonesPitchesLanguage (std::string language)
 //______________________________________________________________________________
 void msdl2msrOahGroup::enforceGroupQuietness ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 // JMI
 #endif
 }
@@ -439,7 +436,7 @@ void msdl2msrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdl2msrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2msrOahGroup::acceptIn ()" <<
@@ -452,7 +449,7 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2msrOahGroup>*> (v)) {
         S_msdl2msrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2msrOahGroup::visitStart ()" <<
@@ -465,7 +462,7 @@ void msdl2msrOahGroup::acceptIn (basevisitor* v)
 
 void msdl2msrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2msrOahGroup::acceptOut ()" <<
@@ -478,7 +475,7 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2msrOahGroup>*> (v)) {
         S_msdl2msrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2msrOahGroup::visitEnd ()" <<
@@ -491,7 +488,7 @@ void msdl2msrOahGroup::acceptOut (basevisitor* v)
 
 void msdl2msrOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2msrOahGroup::browseData ()" <<
@@ -509,7 +506,7 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 
@@ -639,7 +636,7 @@ std::ostream& operator << (std::ostream& os, const S_msdl2msrOahGroup& elt)
 //______________________________________________________________________________
 S_msdl2msrOahGroup createGlobalMsdl2msrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdl2msr OAH group" <<

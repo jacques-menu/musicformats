@@ -17,10 +17,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -83,7 +80,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'msrReplaceClefAtom'" <<
@@ -94,7 +91,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   // theString contains the replace clef specification
   // decipher it to extract the old and new clef names
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> theString = \"" << theString << "\", " <<
@@ -115,7 +112,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -127,7 +124,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 #endif
 
   if (smSize == 3) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
@@ -152,7 +149,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     originalClefName    = sm [1],
     destinationClefName = sm [2];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> originalClefName = \"" << originalClefName << "\", " <<
@@ -199,7 +196,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
 void msrReplaceClefAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrReplaceClefAtom::acceptIn ()" <<
@@ -212,7 +209,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msrReplaceClefAtom>*> (v)) {
         S_msrReplaceClefAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitStart ()" <<
@@ -225,7 +222,7 @@ void msrReplaceClefAtom::acceptIn (basevisitor* v)
 
 void msrReplaceClefAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrReplaceClefAtom::acceptOut ()" <<
@@ -238,7 +235,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msrReplaceClefAtom>*> (v)) {
         S_msrReplaceClefAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msrReplaceClefAtom::visitEnd ()" <<
@@ -251,7 +248,7 @@ void msrReplaceClefAtom::acceptOut (basevisitor* v)
 
 void msrReplaceClefAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msrReplaceClefAtom::browseData ()" <<
@@ -479,7 +476,7 @@ void mxsr2msrOahGroup::createTheMxsr2msrPrefixes (
 
 void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   initializeMxsr2msrTraceOptions ();
@@ -526,7 +523,7 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
   initializeCombinedOptionsOptions ();
 }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void mxsr2msrOahGroup::initializeMxsr2msrTraceOptions ()
 {
   S_oahSubGroup
@@ -1399,8 +1396,8 @@ There can be several occurrences of this option.)",
     appendAtomToSubGroup (
       oahStringSetElementAtom::create (
         "convert-musicxml-words-to-msr-rehearsal-mark", "words-to-rehearsalMark",
-  R"(Convert MusicXML words STRING to an MSR rehearsal mark.
-  There can be several occurrences of this option.)",
+R"(Convert MusicXML words STRING to an MSR rehearsal mark.
+There can be several occurrences of this option.)",
         "STRING",
         "fWordsToRehearsalMarkSet",
         fWordsToRehearsalMarkSet));
@@ -1411,8 +1408,8 @@ There can be several occurrences of this option.)",
     appendAtomToSubGroup (
       oahStringSetElementAtom::create (
         "convert-musicxml-words-to-msr-segno", "words-to-segno",
-  R"(Convert MusicXML words STRING to an MSR segno.
-  There can be several occurrences of this option.)",
+R"(Convert MusicXML words STRING to an MSR segno.
+There can be several occurrences of this option.)",
         "STRING",
         "fWordsToSegnoSet",
         fWordsToSegnoSet));
@@ -1423,8 +1420,8 @@ There can be several occurrences of this option.)",
     appendAtomToSubGroup (
       oahStringSetElementAtom::create (
         "convert-musicxml-words-to-msr-dal-segno", "words-to-dal-segno",
-  R"(Convert MusicXML words STRING to an MSR dal segno.
-  There can be several occurrences of this option.)",
+R"(Convert MusicXML words STRING to an MSR dal segno.
+There can be several occurrences of this option.)",
         "STRING",
         "fWordsToDalSegnoSet",
         fWordsToDalSegnoSet));
@@ -1435,8 +1432,8 @@ There can be several occurrences of this option.)",
     appendAtomToSubGroup (
       oahStringSetElementAtom::create (
         "convert-musicxml-words-to-msr-dal_segno-al-fine", "words-to-dal_segno-al-fine",
-  R"(Convert MusicXML words STRING to an MSR dal segno al fine.
-  There can be several occurrences of this option.)",
+R"(Convert MusicXML words STRING to an MSR dal segno al fine.
+There can be several occurrences of this option.)",
         "STRING",
         "fWordsToDalSegnoAlFineSet",
         fWordsToDalSegnoAlFineSet));
@@ -1447,8 +1444,8 @@ There can be several occurrences of this option.)",
     appendAtomToSubGroup (
       oahStringSetElementAtom::create (
         "convert-musicxml-words-to-msr-dal_segno-al-coda", "words-to-dal_segno-al-coda",
-  R"(Convert MusicXML words STRING to an MSR dal segno al coda.
-  There can be several occurrences of this option.)",
+R"(Convert MusicXML words STRING to an MSR dal segno al coda.
+There can be several occurrences of this option.)",
         "STRING",
         "fWordsToDalSegnoAlCodaSet",
         fWordsToDalSegnoAlCodaSet));
@@ -1459,8 +1456,8 @@ There can be several occurrences of this option.)",
     appendAtomToSubGroup (
       oahStringSetElementAtom::create (
         "convert-musicxml-words-to-msr-coda-first", "words-to-coda-first",
-  R"(Convert MusicXML words STRING to an MSR coda first.
-  There can be several occurrences of this option.)",
+R"(Convert MusicXML words STRING to an MSR coda first.
+There can be several occurrences of this option.)",
         "STRING",
         "fWordsToCodaFirstSet",
         fWordsToCodaFirstSet));
@@ -1469,8 +1466,8 @@ There can be several occurrences of this option.)",
     appendAtomToSubGroup (
       oahStringSetElementAtom::create (
         "convert-musicxml-words-to-msr-coda-second", "words-to-coda-second",
-  R"(Convert MusicXML words STRING to an MSR coda second.
-  There can be several occurrences of this option.)",
+R"(Convert MusicXML words STRING to an MSR coda second.
+There can be several occurrences of this option.)",
         "STRING",
         "fWordsToCodaSecondSet",
         fWordsToCodaSecondSet));
@@ -1481,8 +1478,8 @@ There can be several occurrences of this option.)",
     appendAtomToSubGroup (
       oahStringSetElementAtom::create (
         "convert-musicxml-words-to-msr-cresc", "words-to-cresc",
-  R"(Convert MusicXML words STRING to an MSR cresc.
-  There can be several occurrences of this option.)",
+R"(Convert MusicXML words STRING to an MSR cresc.
+There can be several occurrences of this option.)",
         "STRING",
         "fWordsToCrescSet",
         fWordsToCrescSet));
@@ -1493,8 +1490,8 @@ There can be several occurrences of this option.)",
     appendAtomToSubGroup (
       oahStringSetElementAtom::create (
         "convert-musicxml-words-to-msr-decresc", "words-to-decresc",
-  R"(Convert MusicXML words STRING to an MSR decresc.
-  There can be several occurrences of this option.)",
+R"(Convert MusicXML words STRING to an MSR decresc.
+There can be several occurrences of this option.)",
         "STRING",
         "fWordsToDecrescSet",
         fWordsToDecrescSet));
@@ -1532,7 +1529,7 @@ R"()",
     cubaseCombinedBooleansAtom =
       oahCombinedBooleansAtom::create (
         "cubase", "",
-  R"(Useful settings for MusicXML data exported from Cubase.)");
+R"(Useful settings for MusicXML data exported from Cubase.)");
 
   subGroup->
     appendAtomToSubGroup (
@@ -1566,7 +1563,7 @@ void mxsr2msrOahGroup::enforceGroupQuietness ()
 //______________________________________________________________________________
 void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Checking the consistency of mxsr2msrOahGroup group \"" <<
@@ -1918,7 +1915,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDecresc (
 //______________________________________________________________________________
 void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsr2msrOahGroup::acceptIn ()" <<
@@ -1931,7 +1928,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_mxsr2msrOahGroup>*> (v)) {
         S_mxsr2msrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitStart ()" <<
@@ -1944,7 +1941,7 @@ void mxsr2msrOahGroup::acceptIn (basevisitor* v)
 
 void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsr2msrOahGroup::acceptOut ()" <<
@@ -1957,7 +1954,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_mxsr2msrOahGroup>*> (v)) {
         S_mxsr2msrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching mxsr2msrOahGroup::visitEnd ()" <<
@@ -1970,7 +1967,7 @@ void mxsr2msrOahGroup::acceptOut (basevisitor* v)
 
 void mxsr2msrOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> mxsr2msrOahGroup::browseData ()" <<
@@ -2418,7 +2415,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   --gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 
@@ -2453,7 +2450,7 @@ std::ostream& operator << (std::ostream& os, const S_mxsr2msrOahGroup& elt)
 S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
   const S_oahHandler& handler)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global mxsr2msr OAH group" <<

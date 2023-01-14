@@ -20,7 +20,7 @@ S_mfcPassComponent createMxsr2musicxmlComponent ()
 {
   static S_mfcPassComponent pPassComponent;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the mxsr2musicxml pass component" <<

@@ -19,10 +19,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -87,7 +84,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
@@ -98,7 +95,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the pitches languages map?
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'" <<
@@ -141,7 +138,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 
 void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptIn ()" <<
@@ -154,7 +151,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPitchesLanguageAtom>*> (v)) {
         S_lpsrPitchesLanguageAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitStart ()" <<
@@ -167,7 +164,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
 
 void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptOut ()" <<
@@ -180,7 +177,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrPitchesLanguageAtom>*> (v)) {
         S_lpsrPitchesLanguageAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitEnd ()" <<
@@ -193,7 +190,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
 
 void lpsrPitchesLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrPitchesLanguageAtom::browseData ()" <<
@@ -329,7 +326,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
@@ -340,7 +337,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the chords languages map?
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'" <<
@@ -381,7 +378,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 
 void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptIn ()" <<
@@ -394,7 +391,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrChordsLanguageAtom>*> (v)) {
         S_lpsrChordsLanguageAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitStart ()" <<
@@ -407,7 +404,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
 
 void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptOut ()" <<
@@ -420,7 +417,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrChordsLanguageAtom>*> (v)) {
         S_lpsrChordsLanguageAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitEnd ()" <<
@@ -433,7 +430,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
 
 void lpsrChordsLanguageAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrChordsLanguageAtom::browseData ()" <<
@@ -566,7 +563,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
@@ -577,7 +574,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   // theString contains the part rename specification
   // decipher it to extract the old and new part names
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
@@ -598,7 +595,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
   size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -610,7 +607,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 #endif
 
   if (smSize == 3) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
@@ -638,7 +635,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   mfTrimFromBothEnds (partName);
   mfTrimFromBothEnds (partInstrumentName);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "--> partName = \"" << partName << "\", " <<
@@ -672,7 +669,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
 void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptIn ()" <<
@@ -685,7 +682,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrStaffInstrumentNameAtom>*> (v)) {
         S_lpsrStaffInstrumentNameAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitStart ()" <<
@@ -698,7 +695,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
 
 void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptOut ()" <<
@@ -711,7 +708,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrStaffInstrumentNameAtom>*> (v)) {
         S_lpsrStaffInstrumentNameAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitEnd ()" <<
@@ -724,7 +721,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
 
 void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::browseData ()" <<
@@ -938,7 +935,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
   std::ostream&      os)
 {
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrTransposeAtom'" <<
@@ -949,7 +946,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the chords languages map?
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "==> oahAtom is of type 'lpsrTransposeAtom'" <<
@@ -971,7 +968,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
 
 void lpsrTransposeAtom::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrTransposeAtom::acceptIn ()" <<
@@ -984,7 +981,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrTransposeAtom>*> (v)) {
         S_lpsrTransposeAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrTransposeAtom::visitStart ()" <<
@@ -997,7 +994,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
 
 void lpsrTransposeAtom::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrTransposeAtom::acceptOut ()" <<
@@ -1010,7 +1007,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrTransposeAtom>*> (v)) {
         S_lpsrTransposeAtom elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrTransposeAtom::visitEnd ()" <<
@@ -1023,7 +1020,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
 
 void lpsrTransposeAtom::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrTransposeAtom::browseData ()" <<
@@ -1129,7 +1126,7 @@ R"(These options control the way LPSR data is handled.)",
 lpsrOahGroup::~lpsrOahGroup ()
 {}
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 void lpsrOahGroup::initializeLpsrtracingOah ()
 {
   S_oahSubGroup
@@ -1897,7 +1894,7 @@ for instruments in 'a', 'f' and B flat respectively)",
 
 void lpsrOahGroup::initializeLpsrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace and display
   // --------------------------------------
   initializeLpsrtracingOah ();
@@ -1973,7 +1970,7 @@ Bool lpsrOahGroup::setLpsrChordsLanguageKind (std::string language)
 //______________________________________________________________________________
 void lpsrOahGroup::enforceGroupQuietness ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   fTraceLpsr = false;
   fTraceLilypondVersion = false;
   fTraceLpsrVisitors = false;
@@ -1994,7 +1991,7 @@ void lpsrOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void lpsrOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrOahGroup::acceptIn ()" <<
@@ -2007,7 +2004,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_lpsrOahGroup>*> (v)) {
         S_lpsrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrOahGroup::visitStart ()" <<
@@ -2020,7 +2017,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
 
 void lpsrOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrOahGroup::acceptOut ()" <<
@@ -2033,7 +2030,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_lpsrOahGroup>*> (v)) {
         S_lpsrOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching lpsrOahGroup::visitEnd ()" <<
@@ -2046,7 +2043,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
 
 void lpsrOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> lpsrOahGroup::browseData ()" <<
@@ -2064,7 +2061,7 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 
   ++gIndenter;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // trace
   // --------------------------------------
   gLogStream <<
@@ -2326,7 +2323,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrOahGroup& elt)
 //______________________________________________________________________________
 S_lpsrOahGroup createGlobalLpsrOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global LPSR OAH group" <<

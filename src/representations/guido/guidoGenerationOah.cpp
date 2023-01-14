@@ -13,12 +13,9 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfEnableHarmoniesExtra.h"
+#include "mfEnableHarmoniesExtraSetting.h"
 
 #include "mfStringsHandling.h"
 
@@ -72,7 +69,7 @@ guidoGenerationOahGroup::~guidoGenerationOahGroup ()
 //_______________________________________________________________________________
 void guidoGenerationOahGroup::initializeGuidoGenerationOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   gLogStream << std::left <<
     "Initializing \"" <<
@@ -90,7 +87,7 @@ void guidoGenerationOahGroup::initializeGuidoGenerationOahGroup ()
 
 void guidoGenerationOahGroup::createGuidoSubGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   gLogStream << std::left <<
     "Creating insider Guido subgroup in \"" <<
@@ -145,7 +142,7 @@ R"(Generate barLines in the Guido output.)",
 //______________________________________________________________________________
 void guidoGenerationOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> guidoGenerationOahGroup::acceptIn ()" <<
@@ -158,7 +155,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_guidoGenerationOahGroup>*> (v)) {
         S_guidoGenerationOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching guidoGenerationOahGroup::visitStart ()" <<
@@ -171,7 +168,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
 
 void guidoGenerationOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> guidoGenerationOahGroup::acceptOut ()" <<
@@ -184,7 +181,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_guidoGenerationOahGroup>*> (v)) {
         S_guidoGenerationOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching guidoGenerationOahGroup::visitEnd ()" <<
@@ -197,7 +194,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
 
 void guidoGenerationOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> guidoGenerationOahGroup::browseData ()" <<
@@ -255,7 +252,7 @@ void guidoGenerationOahGroup::printGuidoGenerationOahGroupValues (
 //______________________________________________________________________________
 S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global generators insider OAH group" <<

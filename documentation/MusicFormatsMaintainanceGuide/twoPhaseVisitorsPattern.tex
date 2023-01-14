@@ -165,7 +165,7 @@ In \mxsrToMsr{mxsr2msrTranslator.cpp}, visiting a \musicXmlMarkup{scaling} eleme
 \begin{lstlisting}[language=CPlusPlus,caption={Visiting {\tt $<$scaling /$>$}}]
 void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_millimeters" <<
@@ -179,7 +179,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 
 void mxsr2msrTranslator::visitStart ( S_tenths& elt )
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_tenths" <<
@@ -196,7 +196,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> End visiting S_scaling" <<
@@ -213,7 +213,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
         fCurrentMillimeters,
         fCurrentTenths);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGeometry ()) {
     gLogStream <<
       "There are " << fCurrentTenths <<
@@ -302,7 +302,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                   getInhibitMultipleFullBarRestsBrowsing ();
 
             if (inhibitMultipleFullBarRestsBrowsing) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
               if (
                 gGlobalTracingOahGroup->getTraceNotes ()
                   ||
@@ -314,7 +314,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
               if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
                 gLogStream <<
                   "% ==> returning from visitEnd (S_msrNote&)" <<
@@ -377,7 +377,7 @@ void msrNote::browseData (basevisitor* v)
             getInhibitGraceNotesGroupsBeforeBrowsing ();
 
       if (inhibitGraceNotesGroupsBeforeBrowsing) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (
           gGlobalMsrOahGroup->getTraceMsrVisitors ()
             ||
@@ -438,7 +438,7 @@ void msrStaff::browseData (basevisitor* v)
       }
 
       if (ignoreVoice) {
-#ifdef OAH_TRACING_IS_ENABLED // JMI
+#ifdef MF_TRACING_IS_ENABLED // JMI
         if (gGlobalTracingOahGroup->getTraceVoices ()) {
           gLogStream <<
             "Ignoring voice \"" <<

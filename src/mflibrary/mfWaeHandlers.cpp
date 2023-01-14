@@ -9,10 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "oahOah.h"
 
@@ -76,6 +73,61 @@ std::ostream& operator << (std::ostream& os, const S_mfWaeHandler& elt)
 
 //_______________________________________________________________________________
 // pass numbers
+
+std::string mfWaeHandler::pass (mfPassIDKind passIDKind) const
+{
+  std::string result;
+
+  switch (passIDKind) {
+    case mfPassIDKind::kMfPassID_UNKNOWN:
+      result = "*Pass kMfPassID_UNKNOWN*";
+      break;
+
+    case mfPassIDKind::kMfPassID_0:
+      result = "Pass 0";
+      break;
+
+    case mfPassIDKind::kMfPassID_1:
+     result = "Pass 1";
+      break;
+
+    case mfPassIDKind::kMfPassID_2:
+     result = "Pass 2";
+      break;
+    case mfPassIDKind::kMfPassID_2a:
+     result = "Pass 2a";
+      break;
+    case mfPassIDKind::kMfPassID_2b:
+     result = "Pass 2b";
+      break;
+
+    case mfPassIDKind::kMfPassID_3:
+     result = "Pass 3";
+      break;
+    case mfPassIDKind::kMfPassID_3a:
+     result = "Pass 3a";
+      break;
+    case mfPassIDKind::kMfPassID_3b:
+     result = "Pass 3b";
+      break;
+
+    case mfPassIDKind::kMfPassID_4:
+     result = "Pass 4";
+      break;
+    case mfPassIDKind::kMfPassID_4a:
+     result = "Pass 4a";
+      break;
+    case mfPassIDKind::kMfPassID_4b:
+     result = "Pass 4b";
+      break;
+
+    case mfPassIDKind::kMfPassID_5:
+     result = "Pass 5";
+      break;
+  } // switch
+
+  return result;
+}
 
 std::string mfWaeHandler::pass1 () const
 {
@@ -206,11 +258,11 @@ std::string mfWaeHandler::displayTheFirstMSRSkeletonAsText () const
 }
 std::string mfWaeHandler::displayTheFirstMSRAsText () const
 {
-  return "Display the second MSR as text";
+  return "Display the first MSR as text";
 }
 std::string mfWaeHandler::displayTheSecondMSRAsText () const
 {
-  return "Timing information";
+  return "Display the second MSR as text";
 }
 std::string mfWaeHandler::displayTheLPSRAsText () const
 {
@@ -233,6 +285,19 @@ std::string mfWaeHandler::displayASummaryOfTheFirstMSR () const
 std::string mfWaeHandler::displayASummaryOfTheSecondMSR () const
 {
   return "Display a summary of the second MSR";
+}
+
+std::string mfWaeHandler::displayTheBSRAsText () const
+{
+  return "Display the BSR as text";
+}
+std::string mfWaeHandler::displayTheFirstBSRAsText () const
+{
+  return "Display the first BSR as text";
+}
+std::string mfWaeHandler::displayTheFinalizedBSRAsText () const
+{
+  return "Display the finalized BSR as text";
 }
 
 //_______________________________________________________________________________

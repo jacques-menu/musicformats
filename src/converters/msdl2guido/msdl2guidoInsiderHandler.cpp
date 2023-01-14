@@ -11,18 +11,15 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
-#include "mfEnableHarmoniesExtra.h"
+#include "mfEnableHarmoniesExtraSetting.h"
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 
 #include "mfInitialization.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrInitialization.h"
@@ -84,7 +81,7 @@ R"(
 Usage: msdl2guido [option]* [MSDLFile] [option]*
 )")
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing \"" <<
@@ -140,7 +137,7 @@ R"(What msdl2guido does:
 //______________________________________________________________________________
 void msdl2guidoInsiderHandler::createTheMsdl2gmnPrefixes ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msdl2guido prefixes in \"" <<
@@ -157,7 +154,7 @@ void msdl2guidoInsiderHandler::createTheMsdl2gmnPrefixes ()
 void msdl2guidoInsiderHandler::createTheMsdl2gmnOptionGroups (
   const std::string& serviceName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the \"" <<
@@ -179,7 +176,7 @@ void msdl2guidoInsiderHandler::createTheMsdl2gmnOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -236,7 +233,7 @@ void msdl2guidoInsiderHandler::createTheMsdl2gmnOptionGroups (
 //______________________________________________________________________________
 void msdl2guidoInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<
@@ -262,7 +259,7 @@ void msdl2guidoInsiderHandler::checkHandlerOptionsConsistency ()
 //______________________________________________________________________________
 void msdl2guidoInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -326,7 +323,7 @@ void msdl2guidoInsiderOahGroup::checkGroupOptionsConsistency ()
 //______________________________________________________________________________
 void msdl2guidoInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoInsiderOahGroup::acceptIn ()" <<
@@ -339,7 +336,7 @@ void msdl2guidoInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoInsiderOahGroup>*> (v)) {
         S_msdl2guidoInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2guidoInsiderOahGroup::visitStart ()" <<
@@ -352,7 +349,7 @@ void msdl2guidoInsiderOahGroup::acceptIn (basevisitor* v)
 
 void msdl2guidoInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoInsiderOahGroup::acceptOut ()" <<
@@ -365,7 +362,7 @@ void msdl2guidoInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2guidoInsiderOahGroup>*> (v)) {
         S_msdl2guidoInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2guidoInsiderOahGroup::visitEnd ()" <<
@@ -378,7 +375,7 @@ void msdl2guidoInsiderOahGroup::acceptOut (basevisitor* v)
 
 void msdl2guidoInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2guidoInsiderOahGroup::browseData ()" <<
@@ -474,7 +471,7 @@ msdl2guidoInsiderOahGroup::~msdl2guidoInsiderOahGroup ()
 //_______________________________________________________________________________
 void msdl2guidoInsiderOahGroup::initializeMsdl2gmnInsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   gLogStream << std::left <<
     "Initializing \"" <<
@@ -492,7 +489,7 @@ void msdl2guidoInsiderOahGroup::initializeMsdl2gmnInsiderOahGroup ()
 
 void msdl2guidoInsiderOahGroup::createInsiderQuitSubGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   gLogStream << std::left <<
     "Creating insider quit subgroup in \"" <<
@@ -561,7 +558,7 @@ void msdl2guidoInsiderOahGroup::printMsdl2gmnInsiderOahGroupValues (
 //______________________________________________________________________________
 S_msdl2guidoInsiderOahGroup createGlobalMsdl2gmnInsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdl2guido insider OAH group" <<

@@ -15,7 +15,7 @@
 
 #include "bsr2brailleWae.h"
 
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfAssert.h"
 
 #include "bsr2brailleTranslator.h"
@@ -44,7 +44,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
   // the BSR score we're visiting
   fVisitedBsrScore = bsrScore;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsr ()) {
     gLogStream <<
       "gGlobalBrailleGenerationOahGroup->getBrailleOutputKind (): " <<
@@ -137,7 +137,7 @@ void bsr2brailleTranslator::translateBsrToBraille ()
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrScore& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrScore" <<
@@ -149,7 +149,7 @@ void bsr2brailleTranslator::visitStart (S_bsrScore& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrScore" <<
@@ -162,7 +162,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrSpaces" <<
@@ -186,7 +186,7 @@ void bsr2brailleTranslator::visitStart (S_bsrSpaces& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrSpaces& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrSpaces" <<
@@ -199,7 +199,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrSpaces& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrBarLine& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrBarLine" <<
@@ -215,7 +215,7 @@ void bsr2brailleTranslator::visitStart (S_bsrBarLine& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotes& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting S_bsrTranscriptionNotes" <<
@@ -227,7 +227,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotes& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting S_bsrTranscriptionNotes" <<
@@ -240,7 +240,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotesElement& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrTranscriptionNotesElement" <<
@@ -255,7 +255,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTranscriptionNotesElement& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotesElement& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
@@ -268,7 +268,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotesElement& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrPage& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrPage '" <<
@@ -282,7 +282,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPage& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrPage '" <<
@@ -300,7 +300,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
 
 void bsr2brailleTranslator::visitStart (S_bsrPageElement& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrPageElement '" <<
@@ -314,7 +314,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageElement& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrPageElement '" <<
@@ -329,7 +329,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrPagination& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrPagination '" <<
@@ -346,7 +346,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPagination& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrPagination& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrPagination '" <<
@@ -361,7 +361,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPagination& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrPageHeading& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrPageHeading '" <<
@@ -378,7 +378,7 @@ void bsr2brailleTranslator::visitStart (S_bsrPageHeading& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrPageHeading& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrPageHeading '" <<
@@ -393,7 +393,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageHeading& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrMusicHeading '" <<
@@ -430,7 +430,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMusicHeading& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrMusicHeading '" <<
@@ -441,7 +441,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (false) { // JMI
     gLogStream <<
       "Generating an EOL after S_bsrMusicHeading" <<
@@ -457,7 +457,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrFootNotes& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrFootNotes '" <<
@@ -476,7 +476,7 @@ void bsr2brailleTranslator::visitStart (S_bsrFootNotes& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrFootNotes& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrFootNotes '" <<
@@ -491,7 +491,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrFootNotes& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrLine& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrLine '" <<
@@ -505,7 +505,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLine& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrLine '" <<
@@ -520,7 +520,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrLineContents& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrLineContents '" <<
@@ -537,7 +537,7 @@ void bsr2brailleTranslator::visitStart (S_bsrLineContents& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrLineContents '" <<
@@ -548,7 +548,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (false) { // JMI
     gLogStream <<
       "Generating an EOL after S_bsrLineContents" <<
@@ -564,7 +564,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrMeasure '" <<
@@ -578,7 +578,7 @@ void bsr2brailleTranslator::visitStart (S_bsrMeasure& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrMeasure '" <<
@@ -593,7 +593,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMeasure& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrNumber& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrNumber '" <<
@@ -610,7 +610,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNumber& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrNumber& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrNumber '" <<
@@ -625,7 +625,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNumber& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrWords& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrWords '" <<
@@ -642,7 +642,7 @@ void bsr2brailleTranslator::visitStart (S_bsrWords& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrWords& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrWords '" <<
@@ -657,7 +657,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrWords& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrClef& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrClef '" <<
@@ -674,7 +674,7 @@ void bsr2brailleTranslator::visitStart (S_bsrClef& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrClef& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrClef '" <<
@@ -689,7 +689,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrClef& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrKey& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrKey '" <<
@@ -706,7 +706,7 @@ void bsr2brailleTranslator::visitStart (S_bsrKey& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrKey& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrKey '" <<
@@ -721,7 +721,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrKey& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrTimeSignature& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrTimeSignature " <<
@@ -737,7 +737,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTimeSignature& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrTimeSignature& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrTimeSignature " <<
@@ -751,7 +751,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTimeSignature& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrTempo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrTempo " <<
@@ -767,7 +767,7 @@ void bsr2brailleTranslator::visitStart (S_bsrTempo& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrTempo& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrTempo " <<
@@ -781,7 +781,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTempo& elt)
 //________________________________________________________________________
 void bsr2brailleTranslator::visitStart (S_bsrNote& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> Start visiting bsrNote " <<
@@ -797,7 +797,7 @@ void bsr2brailleTranslator::visitStart (S_bsrNote& elt)
 
 void bsr2brailleTranslator::visitEnd (S_bsrNote& elt)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalBsrOahGroup->getTraceBsrVisitors ()) {
     gLogStream <<
       "% --> End visiting bsrNote " <<

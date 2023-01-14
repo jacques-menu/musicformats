@@ -15,18 +15,15 @@
 
 #include "visitor.h"
 
-#include "mfEnableHarmoniesExtra.h"
+#include "mfEnableHarmoniesExtraSetting.h"
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
   #include "oahHarmoniesExtraOah.h"
 #endif
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "mfInitialization.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 #include "mfStringsHandling.h"
 
 #include "msrInitialization.h"
@@ -96,7 +93,7 @@ Usage: msdl2lilypond [option]* [MSDLFile] [option]*
 */
       usageFromUsedThruKind (handlerUsedThruKind))
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Initializing msdl2lilypond insider options handler \"" <<
@@ -183,7 +180,7 @@ std::string msdl2lilypondInsiderHandler::usageFromUsedThruKind (
 
 void msdl2lilypondInsiderHandler::createTheMsdl2lyPrefixes ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msdl2lilypond prefixes" <<
@@ -197,7 +194,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyPrefixes ()
 void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
   const std::string& serviceName)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating the msdl2lilypond insider option groups" <<
@@ -219,7 +216,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
   appendGroupToHandler (
     createGlobalWaeOahGroup ());
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   // create the tracing OAH group
   appendGroupToHandler (
     createGlobalTracingOahGroup (
@@ -273,7 +270,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
     createGlobalHarmoniesExtraOahGroup ());
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     // print the options handler initial state
     gLogStream <<
@@ -291,7 +288,7 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
   }
 #endif
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
 if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "msdl2lilypondInsiderHandler help:" <<
@@ -304,7 +301,7 @@ if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
 
 void msdl2lilypondInsiderHandler::checkOptionsAndArguments () const
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "checking options and arguments from argc/argv in \"" <<
@@ -327,7 +324,7 @@ void msdl2lilypondInsiderHandler::checkHandlerOptionsConsistency ()
 
 void msdl2lilypondInsiderHandler::enforceHandlerQuietness ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   gGlobalTracingOahGroup->
     enforceGroupQuietness ();
 #endif
@@ -361,7 +358,7 @@ void msdl2lilypondInsiderOahGroup::checkGroupOptionsConsistency ()
 
 void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2lilypondInsiderOahGroup::acceptIn ()" <<
@@ -374,7 +371,7 @@ void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
       dynamic_cast<visitor<S_msdl2lilypondInsiderOahGroup>*> (v)) {
         S_msdl2lilypondInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2lilypondInsiderOahGroup::visitStart ()" <<
@@ -387,7 +384,7 @@ void msdl2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
 
 void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2lilypondInsiderOahGroup::acceptOut ()" <<
@@ -400,7 +397,7 @@ void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
       dynamic_cast<visitor<S_msdl2lilypondInsiderOahGroup>*> (v)) {
         S_msdl2lilypondInsiderOahGroup elem = this;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
             ".\\\" ==> Launching msdl2lilypondInsiderOahGroup::visitEnd ()" <<
@@ -413,7 +410,7 @@ void msdl2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
 
 void msdl2lilypondInsiderOahGroup::browseData (basevisitor* v)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       ".\\\" ==> msdl2lilypondInsiderOahGroup::browseData ()" <<
@@ -507,7 +504,7 @@ msdl2lilypondInsiderOahGroup::~msdl2lilypondInsiderOahGroup ()
 
 void msdl2lilypondInsiderOahGroup::initializeMsdl2lyInsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream << std::left <<
       "Initializing \"" <<
@@ -525,7 +522,7 @@ void msdl2lilypondInsiderOahGroup::initializeMsdl2lyInsiderOahGroup ()
 
 void msdl2lilypondInsiderOahGroup::createInsiderQuitSubGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   gLogStream << std::left <<
     "Creating insider quit subgroup in \"" <<
@@ -593,7 +590,7 @@ void msdl2lilypondInsiderOahGroup::printMsdl2lyInsiderOahGroupValues (
 //______________________________________________________________________________
 S_msdl2lilypondInsiderOahGroup createGlobalMsdl2lyInsiderOahGroup ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating global msdl2lilypond OAH group" <<

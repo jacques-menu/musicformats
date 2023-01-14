@@ -13,16 +13,15 @@
 #include <sstream>
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfServiceRunData.h"
+#include "mfEnableSanityChecksSetting.h"
+
+#include "mfServices.h"
 
 #include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
-#include "mfEnableTracingIfDesired.h"
-#ifdef OAH_TRACING_IS_ENABLED
-  #include "mfTracingOah.h"
-#endif
+#include "mfEnableTracingSetting.h"
 
 #include "msrMeasuresSlices.h"
 
@@ -319,7 +318,7 @@ msrMeasuresSlice::~msrMeasuresSlice ()
 
 S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Creating a shallow copy of measures slice " <<
@@ -354,7 +353,7 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
   int          inputLineNumber,
   const S_msrMeasure& measure)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Appending measure " <<
@@ -372,7 +371,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
   int                inputLineNumber,
   const S_msrMeasuresSlice& otherSlice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Appending measures from measures slice " <<
@@ -383,6 +382,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
   }
 #endif
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   if (
     otherSlice->getSliceMeasureNumber ()
@@ -405,6 +405,7 @@ if (true) // JMI
       __FILE__, __LINE__,
       s.str ());
   }
+#endif
 
   size_t otherSliceSize = otherSlice->getSliceSize ();
 
@@ -427,7 +428,7 @@ if (true) // JMI
 
 void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Collecting the notes from the measures slices in " <<
@@ -460,7 +461,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
     ) {
       S_msrNote note = (*i);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
         gLogStream <<
           "--> note: " <<
@@ -540,7 +541,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
 void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Building the simultaneous notes chunks list in " <<
@@ -607,7 +608,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
 
 void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Identifying solo notes and rests in measures slice " <<
@@ -655,7 +656,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
         if (simultaneousNotesNumber == 1) {
           soloCandidate = note;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
             gLogStream <<
               "Solo note or rest " <<
@@ -683,7 +684,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
         else {
           // forget about the solo candidate
           if (soloCandidate) {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
             if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
               gLogStream <<
                 "Forget about solo note or rest candidate " <<
@@ -738,7 +739,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                       staffRegularVoicesList.size ();
 
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
                   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
                     gLogStream <<
                       "Solo note or rest? " <<
@@ -752,7 +753,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                       setSoloNoteOrRestInStaffKind (
                         msrSoloNoteOrRestInStaffKind::kSoloNoteOrRestInStaffYes);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
                     if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
                       gLogStream <<
                         "Solo note or rest " <<
@@ -1106,7 +1107,7 @@ msrMeasuresSlicesSequence::~msrMeasuresSlicesSequence ()
 S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSequenceShallowCopy (
   const std::string& measuresOrigin)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Creating a shallow copy of measures slices sequence " <<
@@ -1142,7 +1143,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
 void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
   const S_msrMeasuresSlice& measuresSlice)
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Appending measures slice " <<
@@ -1165,7 +1166,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 {
   S_msrMeasuresSlicesSequence result;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Merging measures slices sequence " <<
@@ -1179,7 +1180,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
   size_t sequenceSize =
     getSlicesSequenceSize ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "---> sequenceSize: " <<
@@ -1211,7 +1212,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
     size_t otherSequenceSize =
       otherMeasuresSlicesSequence->getSlicesSequenceSize ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
       gLogStream <<
         "mergeWithMeasuresSlicesSequence()" <<
@@ -1221,7 +1222,8 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
     }
 #endif
 
-    // sanity check
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
     if (otherSequenceSize != sequenceSize) {
       std::stringstream s;
 
@@ -1247,6 +1249,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
     }
 
     else {
+#endif
       if (sequenceSize) {
         // the two measures slices sequences have the same non null size
 
@@ -1287,10 +1290,12 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
               otherMeasuresSlicesVector [i]);
         } // for
       }
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
     }
+#endif
   }
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "---> mergeWithMeasuresSlicesSequence()" <<
@@ -1309,7 +1314,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
 void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 {
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
     gLogStream <<
       "Identifying solo notes and rests in measures slices sequence " <<

@@ -15,7 +15,7 @@
 #include <regex>
 
 #include "mfIndentedTextOutput.h"
-#include "mfServiceRunData.h"
+#include "mfServices.h"
 
 #include "msrOctaves.h"
 
@@ -474,7 +474,7 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
   fSemiTonesPitchKind = semiTonesPitchKind;
   fOctaveKind         = octaveKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "==> Creating pitch and octave '" <<
@@ -518,7 +518,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
   size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -544,7 +544,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
       pitch            = sm [1],
       octaveIndication = sm [2];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "--> pitch = \"" << pitch << "\", " <<
@@ -566,7 +566,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
           inputLineNumber,
           octaveIndication);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "--> semiTonesPitchKind = \"" <<
@@ -754,7 +754,7 @@ msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
 
   fAbsoluteOctave = absoluteOctave;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "==> Creating harmony item '" <<
@@ -850,7 +850,7 @@ msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
 
   fRelativeOctave = relativeOctave;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "==> Creating harmony item '" <<
@@ -947,7 +947,7 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
   fQuarterTonesPitchKind = quarterTonesPitchKind;
   fOctaveKind            = octaveKind;
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "==> Creating pitch and octave '" <<
@@ -991,7 +991,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
   size_t smSize = sm.size ();
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
@@ -1017,7 +1017,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
       pitch            = sm [1],
       octaveIndication = sm [2];
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "--> pitch = \"" << pitch << "\", " <<
@@ -1041,7 +1041,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
           inputLineNumber,
           octaveIndication);
 
-#ifdef OAH_TRACING_IS_ENABLED
+#ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
         "--> quarterTonesPitchKind = \"" <<
