@@ -13,7 +13,7 @@
 #include <regex>
 #include <sstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
@@ -23,7 +23,7 @@
 
 #include "msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "msrPitchesNames.h"
 #include "msrIntervals.h"

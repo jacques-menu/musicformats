@@ -25,7 +25,7 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2guidoWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfServices.h"
 #include "mfStringsHandling.h"
@@ -117,7 +117,8 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       translateMxsrToMsrSkeleton (
         originalMxsr,
         gGlobalMsrOahGroup,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_2a),
+//         gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2a),
+        mfPassIDKind::kMfPassID_2a,
         "Create the skeleton of the first MSR from the originalMxsr");
   }
   catch (mxsr2msrException& e) {
@@ -133,10 +134,10 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2a ()) {
-    err <<
-      std::endl <<
-      "Quitting after creating the MSR skeleton in pass 2a of xmlFile2guidoWithHandler as requested" <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -149,7 +150,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     populateMsrSkeletonFromMxsr (
       originalMxsr,
       firstMsrScore,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_2b),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2b),
         gWaeHandler->populateTheMSRSqueletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
@@ -165,10 +166,10 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2b ()) {
-    err <<
-      std::endl <<
-      "Quitting after pass 2b as requested" <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -184,7 +185,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (mxsr2msrException& e) {
@@ -200,10 +201,10 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass3 ()) {
-    err <<
-      std::endl <<
-      "Quitting after pass 3 as requested" <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_3));
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -218,7 +219,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -244,7 +245,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       secondMxsr,
       outputFileName,
       err,
-      gWaeHandler->pass (mfPassIDKind::kMfPassID_5),
+      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_5),
       "Convert the MXSR into Guido text");
   }
   catch (mxsr2msrException& e) {
@@ -435,7 +436,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2guido (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
@@ -460,7 +461,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
@@ -486,7 +487,7 @@ EXP mfMusicformatsErrorKind musicxmlFd2guido (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
@@ -511,7 +512,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2guidoWithHandler (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
@@ -537,7 +538,7 @@ EXP mfMusicformatsErrorKind musicxmlString2guido (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2guido() even if sxmlfile is null,
@@ -562,7 +563,7 @@ mfMusicformatsErrorKind convertMusicxmlString2guidoWithHandler (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
         gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2guido() even if sxmlfile is null,

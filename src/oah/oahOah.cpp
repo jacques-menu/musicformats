@@ -14,7 +14,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 
@@ -60,9 +60,9 @@ languageOahAtom::languageOahAtom (
       description,
       valueSpecification,
       variableName)
-//       ,
-//     fLanguageKindVariable (
-//       languageKindVariable)
+      ,
+    fLanguageKindVariable (
+      languageKindVariable)
 {}
 
 languageOahAtom::~languageOahAtom ()
@@ -82,7 +82,7 @@ void languageOahAtom::applyAtomWithValue (
   }
 #endif
 
-//   fLanguageKindVariable = mfLanguageKindFromString (theString);
+  fLanguageKindVariable = mfLanguageKindFromString (theString);
 //
 //   gGlobalOahEarlyOptions.setEarlyLanguageKind (
 //     mfLanguageKindFromString (theString));
@@ -214,17 +214,16 @@ insiderOahAtom::insiderOahAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description)
-  : oahAtom (
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
+      description)
 {}
 
 insiderOahAtom::~insiderOahAtom ()
 {}
 
-void insiderOahAtom::applyElement (std::ostream& os)
+void insiderOahAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -361,17 +360,16 @@ regularOahAtom::regularOahAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description)
-  : oahAtom (
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
+      description)
 {}
 
 regularOahAtom::~regularOahAtom ()
 {}
 
-void regularOahAtom::applyElement (std::ostream& os)
+void regularOahAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -489,6 +487,175 @@ std::ostream& operator << (std::ostream& os, const S_regularOahAtom& elt)
   return os;
 }
 
+//______________________________________________________________________________
+S_passIDOahAtom passIDOahAtom::create (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  mfPassIDKind&      languageKindVariable)
+{
+  passIDOahAtom* o = new
+    passIDOahAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName,
+      languageKindVariable);
+  assert (o != nullptr);
+  return o;
+}
+
+passIDOahAtom::passIDOahAtom (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
+  mfPassIDKind&      languageKindVariable)
+  : oahAtomStoringAValue (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName)
+//       ,
+//     fLanguageKindVariable (
+//       languageKindVariable)
+{}
+
+passIDOahAtom::~passIDOahAtom ()
+{}
+
+void passIDOahAtom::applyAtomWithValue (
+  const std::string& theString,
+  std::ostream&      os)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a passIDOahAtom" <<
+      std::endl;
+  }
+#endif
+
+//   fLanguageKindVariable = mfPassIDKindFromString (theString);
+//
+//   gGlobalOahEarlyOptions.setEarlyLanguageKind (
+//     mfPassIDKindFromString (theString));
+
+  fOptionHasBeenSelected = true;
+
+  // do nothing more, choosing the insider OAH handler has been done already
+}
+
+void passIDOahAtom::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> passIDOahAtom::acceptIn ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_passIDOahAtom>*
+    p =
+      dynamic_cast<visitor<S_passIDOahAtom>*> (v)) {
+        S_passIDOahAtom elem = this;
+
+#ifdef MF_TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching passIDOahAtom::visitStart ()" <<
+            std::endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void passIDOahAtom::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> passIDOahAtom::acceptOut ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_passIDOahAtom>*
+    p =
+      dynamic_cast<visitor<S_passIDOahAtom>*> (v)) {
+        S_passIDOahAtom elem = this;
+
+#ifdef MF_TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching passIDOahAtom::visitEnd ()" <<
+            std::endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void passIDOahAtom::browseData (basevisitor* v)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> passIDOahAtom::browseData ()" <<
+      std::endl;
+  }
+#endif
+}
+
+void passIDOahAtom::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "passIDOahAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  --gIndenter;
+}
+
+void passIDOahAtom::printAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    "language" <<  ": " <<
+    "fOptionHasBeenSelected: " <<
+    fOptionHasBeenSelected <<
+    std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_passIDOahAtom& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  return os;
+}
+
 //_______________________________________________________________________________
 S_oahOahGroup gGlobalOahOahGroup;
 
@@ -559,7 +726,8 @@ The default is 'DEFAULT_VALUE'.)",
           mfLanguageKindDefaultValue)),
       "LANGUAGE",
       "fLanguageKind",
-      fLanguageKind));
+//       fLanguageKind));
+      gGlobalOahEarlyOptions.getEarlyLanguageKindRef ()));
 
   // the 'insider' option
 
@@ -588,7 +756,7 @@ such a slurs, tuplets and figured bass.)"));
 
   fTraceEarlyOptionsAtom =
     oahBooleanAtom::create (
-      K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME, K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME,
+      K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, K_TRACE_EARLY_OPTIONS_OPTION_SHORT_NAME,
 R"(Trace the handling of early options, which happens
 at the very beginning of options and arguments handling.
 This option is handy to debug OAH.)",
@@ -603,7 +771,7 @@ This option is handy to debug OAH.)",
 
   fOahVerboseModeAtom =
     oahBooleanAtom::create (
-     K_OAH_VERBOSE_MODE_LONG_OPTION_NAME, K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME,
+     K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, K_OAH_VERBOSE_MODE_OPTION_SHORT_NAME,
 R"(Produce internal details about the context of options errors.
 By default, only the mimimum information is output.
 This option is handy to debug OAH.)",
@@ -789,7 +957,7 @@ R"(Print help about OPTION_NAME.)",
     appendAtomToSubGroup (
       fQueryOptionNameAtom);
 
-  // find std::string
+  // find string
 
   fFindStringAtom =
     oahFindStringAtom::create (

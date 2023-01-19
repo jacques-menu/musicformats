@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahBasicTypes.h"
 
@@ -48,27 +48,30 @@ EXP extern const std::string K_INCLUDE_OPTION_SHORT_NAME;
 #ifdef MF_TRACING_IS_ENABLED
 
 // trace early options
-EXP extern const std::string K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME;
-EXP extern const std::string K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME;
+EXP extern const std::string K_TRACE_EARLY_OPTIONS_OPTION_SHORT_NAME;
 
 // OAH verbose mode
-EXP extern const std::string K_OAH_VERBOSE_MODE_LONG_OPTION_NAME;
-EXP extern const std::string K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME;
+EXP extern const std::string K_OAH_VERBOSE_MODE_OPTION_LONG_NAME;
+EXP extern const std::string K_OAH_VERBOSE_MODE_OPTION_SHORT_NAME;
 
 // trace OAH
-EXP extern const std::string K_TRACE_OAH_LONG_OPTION_NAME;
-EXP extern const std::string K_TRACE_OAH_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_OAH_OPTION_LONG_NAME;
+EXP extern const std::string K_TRACE_OAH_OPTION_SHORT_NAME;
 
-EXP extern const std::string K_TRACE_OAH_DETAILS_LONG_OPTION_NAME;
-EXP extern const std::string K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_OAH_DETAILS_OPTION_LONG_NAME;
+EXP extern const std::string K_TRACE_OAH_DETAILS_OPTION_SHORT_NAME;
 
 // trace components
-EXP extern const std::string K_TRACE_COMPONENTS_LONG_OPTION_NAME;
-EXP extern const std::string K_TRACE_COMPONENTS_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_COMPONENTS_OPTION_LONG_NAME;
+EXP extern const std::string K_TRACE_COMPONENTS_OPTION_SHORT_NAME;
 
 // trace passes
-EXP extern const std::string K_TRACE_PASSES_LONG_OPTION_NAME;
-EXP extern const std::string K_TRACE_PASSES_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_PASSES_OPTION_LONG_NAME;
+EXP extern const std::string K_TRACE_PASSES_OPTION_SHORT_NAME;
+
+EXP extern const std::string K_TRACE_ONLY_PASS_OPTION_LONG_NAME;
+EXP extern const std::string K_TRACE_ONLY_PASS_OPTION_SHORT_NAME;
 
 #endif
 
@@ -92,6 +95,8 @@ class EXP oahEarlyOptions
     void                  setEarlyLanguageKind (
                             mfLanguageKind languageKind);
     mfLanguageKind        getEarlyLanguageKind () const
+                              { return fEarlyLanguageKind; }
+    mfLanguageKind&       getEarlyLanguageKindRef ()
                               { return fEarlyLanguageKind; }
 
     S_mfWaeHandler        getMfWaeHandler () const
@@ -121,6 +126,8 @@ class EXP oahEarlyOptions
     void                  setTraceEarlyOptions ();
     Bool                  getTraceEarlyOptions () const
                               { return fTraceEarlyOptions; }
+    Bool&                 getTraceEarlyOptionsRef ()
+                              { return fTraceEarlyOptions; }
 
     void                  setEarlyOahVerboseMode ();
     Bool                  getEarlyOahVerboseMode () const
@@ -142,6 +149,11 @@ class EXP oahEarlyOptions
     void                  setEarlyTracePasses ();
     Bool                  getEarlyTracePasses () const
                               { return fEarlyTracePasses; }
+
+    void                  setEarlyTraceOnlyPass (mfPassIDKind passIDKind);
+    mfPassIDKind          getEarlyTraceOnlyPass () const
+                              { return fEarlyTraceOnlyPass; }
+
 #endif
 
   public:
@@ -167,6 +179,8 @@ class EXP oahEarlyOptions
 
     // private services
     // ------------------------------------------------------
+
+    void                  initializeEarlyOptions ();
 
     void                  appendEarlyIncludeFileName (std::string includeFileName);
 
@@ -209,14 +223,18 @@ class EXP oahEarlyOptions
     Bool                  fEarlyTraceComponents;
 
     Bool                  fEarlyTracePasses;
+    mfPassIDKind          fEarlyTraceOnlyPass;
 
 #endif
 };
 typedef SMARTP<oahEarlyOptions> S_oahEarlyOptions;
 EXP std::ostream& operator << (std::ostream& os, const oahEarlyOptions& elt);
 
+//______________________________________________________________________________
+// global variable
 EXP extern oahEarlyOptions gGlobalOahEarlyOptions;
 
+//______________________________________________________________________________
 // useful shortcut macro
 #define gWaeHandler gGlobalOahEarlyOptions.getMfWaeHandler ()
 

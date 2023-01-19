@@ -582,10 +582,10 @@ typedef SMARTP<oahAtom> S_oahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahAtomExpectingAValue : public oahAtom
+class EXP oahValueLessAtom : public oahAtom
 /*
   a purely virtual common ancestor for all atom classes
-  that take a value from argv or an oahOptionsVector
+  that don't take a value from argv or an oahOptionsVector
 */
 {
   public:
@@ -593,7 +593,7 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // creation
     // ------------------------------------------------------
 /* this class is purely virtual
-    static SMARTP<oahAtomExpectingAValue> create (
+    static SMARTP<oahValueLessAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description);
@@ -603,12 +603,12 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahAtomExpectingAValue (
+                          oahValueLessAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description);
 
-    virtual               ~oahAtomExpectingAValue ();
+    virtual               ~oahValueLessAtom ();
 
   public:
 
@@ -620,17 +620,7 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
-                            // reports an error
-
-    virtual void          applyAtomWithValue (
-                            const std::string& theString,
-                            std::ostream&      os) = 0;
-
-    virtual void          applyAtomWithDefaultValue (std::ostream& os);
-                            // used only if fElementValueKind
-                            // is oahElementValueKind::kElementValueImplicit
-                            // or oahElementValueKind::kElementValueOptional
+    virtual void          applyValueLessAtom (std::ostream& os) = 0;
 
   public:
 
@@ -655,15 +645,14 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // protected fields
     // ------------------------------------------------------
 };
-typedef SMARTP<oahAtomExpectingAValue> S_oahAtomExpectingAValue;
-EXP std::ostream& operator << (std::ostream& os, const S_oahAtomExpectingAValue& elt);
+typedef SMARTP<oahValueLessAtom> S_oahValueLessAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahValueLessAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahAtomImplicitlyStoringAValue : public oahAtom
+class EXP oahValueFittedAtom : public oahAtom
 /*
   a purely virtual common ancestor for all atom classes
-  that store a value in a variable
-  withoud taking it from argv or an oahOptionsVector
+  that take a value from argv or an oahOptionsVector
 */
 {
   public:
@@ -671,41 +660,38 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // creation
     // ------------------------------------------------------
 /* this class is purely virtual
-    static SMARTP<oahAtomImplicitlyStoringAValue> create (
+    static SMARTP<oahValueFittedAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
-                            const std::string& description,
-                            const std::string& variableName);
+                            const std::string& description);
 */
-
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahAtomImplicitlyStoringAValue (
+                          oahValueFittedAtom (
                             const std::string& longName,
                             const std::string& shortName,
-                            const std::string& description,
-                            const std::string& variableName);
+                            const std::string& description);
 
-    virtual               ~oahAtomImplicitlyStoringAValue ();
+    virtual               ~oahValueFittedAtom ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    Bool                  getSetByAnOption () const
-                              { return fSetByAnOption; }
-
   public:
 
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
-                            // reports an error
+    virtual void          applyAtomWithValue (
+                            const std::string& theString,
+                            std::ostream&      os) = 0;
+
+//     virtual void          applyAtomWithDefaultValue (std::ostream& os); // JMI ??? v0.9.66
 
   public:
 
@@ -722,34 +708,19 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // print
     // ------------------------------------------------------
 
-    virtual void          printAtomWithVariableEssentials (
-                            std::ostream& os,
-                            int fieldWidth) const;
-    virtual void          printAtomWithVariableEssentialsFull (
-                            std::ostream& os,
-                            int fieldWidth) const;
-
     void                  print (std::ostream& os) const override;
-
-    void                  printHelp (std::ostream& os) const override;
-
-    virtual void          printAtomWithVariableOptionsValues (
-                            std::ostream& os,
-                            int           valueFieldWidth) const override;
+    void                  printFull (std::ostream& os) const override;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
-
-    std::string           fVariableName;
-    Bool                  fSetByAnOption;
 };
-typedef SMARTP<oahAtomImplicitlyStoringAValue> S_oahAtomImplicitlyStoringAValue;
-EXP std::ostream& operator << (std::ostream& os, const S_oahAtomImplicitlyStoringAValue& elt);
+typedef SMARTP<oahValueFittedAtom> S_oahValueFittedAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahValueFittedAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
+class EXP oahAtomStoringAValue : public oahValueFittedAtom
 /*
   a purely virtual common ancestor for all atom classes
   that take a value from argv or an oahOptionsVector
@@ -842,7 +813,187 @@ typedef SMARTP<oahAtomStoringAValue> S_oahAtomStoringAValue;
 EXP std::ostream& operator << (std::ostream& os, const S_oahAtomStoringAValue& elt);
 
 //______________________________________________________________________________
-class EXP oahPureHelpAtomWithoutAValue : public oahAtom
+class EXP oahAtomImplicitlySettingAVariable : public oahValueLessAtom
+/*
+  a purely virtual common ancestor for all atom classes
+  that store a value in a variable
+  withoud taking it from argv or an oahOptionsVector
+*/
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+/* this class is purely virtual
+    static SMARTP<oahAtomImplicitlySettingAVariable> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& variableName);
+*/
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahAtomImplicitlySettingAVariable (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& variableName);
+
+    virtual               ~oahAtomImplicitlySettingAVariable ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    Bool                  getSetByAnOption () const
+                              { return fSetByAnOption; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    virtual void          setImplicitVariable (std::ostream& os) = 0;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    virtual void          printAtomWithVariableEssentials (
+                            std::ostream& os,
+                            int fieldWidth) const;
+    virtual void          printAtomWithVariableEssentialsFull (
+                            std::ostream& os,
+                            int fieldWidth) const;
+
+    void                  print (std::ostream& os) const override;
+
+    void                  printHelp (std::ostream& os) const override;
+
+    virtual void          printAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    std::string           fVariableName;
+    Bool                  fSetByAnOption;
+};
+typedef SMARTP<oahAtomImplicitlySettingAVariable> S_oahAtomImplicitlySettingAVariable;
+EXP std::ostream& operator << (std::ostream& os, const S_oahAtomImplicitlySettingAVariable& elt);
+
+//______________________________________________________________________________
+class EXP oahValueDefaultedAtom : public oahAtom
+{
+/*
+  an atom controlling a std::string variable with a default value
+  used in case there is no '=...' attached to the atom name
+*/
+
+/* this class is purely virtual
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahValueDefaultedAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& defaultStringValue);
+*/
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahValueDefaultedAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& defaultStringValue);
+
+    virtual               ~oahValueDefaultedAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    std::string           getDefaultStringValue () const
+                              { return fDefaultStringValue; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    virtual void          applyAtomWithDefaultValue (std::ostream& os) = 0;
+
+    virtual void          applyAtomWithValue (
+                            const std::string& theString,
+                            std::ostream&      os) = 0;
+
+    Bool                  getSetByAnOption () const
+                              { return fSetByAnOption; }
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+//     void                  acceptIn  (basevisitor* v) override;
+//     void                  acceptOut (basevisitor* v) override;
+//
+//     void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+//     std::string           asShortNamedOptionString () const override;
+//     std::string           asActualLongNamedOptionString () const override;
+//
+//     void                  print (std::ostream& os) const override;
+//
+//     void                  printAtomWithVariableOptionsValues (
+//                             std::ostream& os,
+//                             int           valueFieldWidth) const override;
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    std::string           fDefaultStringValue;
+    Bool                  fSetByAnOption;
+};
+typedef SMARTP<oahValueDefaultedAtom> S_oahValueDefaultedAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahValueDefaultedAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahPureHelpValueLessAtom : public oahValueLessAtom
 {
   public:
 
@@ -850,7 +1001,7 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // ------------------------------------------------------
 
 /* this class is purely virtual
-    static SMARTP<oahPureHelpAtomWithoutAValue> create (
+    static SMARTP<oahPureHelpValueLessAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -862,13 +1013,13 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahPureHelpAtomWithoutAValue (
+                          oahPureHelpValueLessAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
                             const std::string& serviceName);
 
-    virtual               ~oahPureHelpAtomWithoutAValue ();
+    virtual               ~oahPureHelpValueLessAtom ();
 
   public:
 
@@ -906,13 +1057,13 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // protected fields
     // ------------------------------------------------------
 
-    std::string           fHelpAtomWithoutAValueServiceName;
+    std::string           fHelpValueLessAtomServiceName;
 };
-typedef SMARTP<oahPureHelpAtomWithoutAValue> S_oahPureHelpAtomWithoutAValue;
-EXP std::ostream& operator << (std::ostream& os, const S_oahPureHelpAtomWithoutAValue& elt);
+typedef SMARTP<oahPureHelpValueLessAtom> S_oahPureHelpValueLessAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahPureHelpValueLessAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
+class EXP oahPureHelpValueFittedAtom : public oahValueFittedAtom
 {
   public:
 
@@ -920,7 +1071,7 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
 /* this class is purely virtual
-    static SMARTP<oahPureHelpAtomExpectingAValue> create (
+    static SMARTP<oahPureHelpValueFittedAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -933,14 +1084,14 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahPureHelpAtomExpectingAValue (
+                          oahPureHelpValueFittedAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& serviceName);
 
-    virtual               ~oahPureHelpAtomExpectingAValue ();
+    virtual               ~oahPureHelpValueFittedAtom ();
 
   public:
 
@@ -979,12 +1130,12 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // protected fields
     // ------------------------------------------------------
 
-    std::string           fHelpAtomExpectingAValueServiceName; // JMI ???
+    std::string           fHelpValueFittedAtomServiceName; // JMI ???
 
     std::string           fValueSpecification;
 };
-typedef SMARTP<oahPureHelpAtomExpectingAValue> S_oahPureHelpAtomExpectingAValue;
-EXP std::ostream& operator << (std::ostream& os, const S_oahPureHelpAtomExpectingAValue& elt);
+typedef SMARTP<oahPureHelpValueFittedAtom> S_oahPureHelpValueFittedAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahPureHelpValueFittedAtom& elt);
 
 //_______________________________________________________________________________
 class EXP oahSubGroup : public oahElement
@@ -1077,7 +1228,7 @@ class EXP oahSubGroup : public oahElement
     S_oahElement          fetchOptionByNameInSubGroup (
                             const std::string& name);
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applySubGroup (std::ostream& os);
 
   public:
 
@@ -1286,7 +1437,7 @@ class EXP oahGroup : public oahElement
     S_oahElement          fetchOptionByNameInGroup (
                             const std::string& name);
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyGroup (std::ostream& os);
 
     virtual void          handleAtomValue (
                             std::ostream&      os,
@@ -1616,7 +1767,7 @@ class EXP oahHandler : public oahFindableElement
 
     void                  printKnownPrefixes (std::ostream& os) const;
     void                  printKnownSingleCharacterOptions (std::ostream& os) const;
-//     void                  printOptionsDefaultValuesInformation (std::ostream& os) const; JMI
+//     void                  printOptionsDefaultValuesInformation (std::ostream& os) const; JMI v0.9.66
 
     void                  displayNamesToElementsMap (std::ostream& os) const;
     void                  displayNamesToElementsMapShort (std::ostream& os) const;
@@ -1798,7 +1949,7 @@ class EXP oahHandler : public oahFindableElement
                             const S_oahElement& element,
                             const std::string&  optionNameUsed);
 
-    void                  checkMissingPendingArgvAtomExpectingAValueValue (
+    void                  checkMissingPendingArgvValueFittedAtomValue (
                             const std::string& atomName,
                             const std::string& context);
 
@@ -1929,9 +2080,8 @@ class EXP oahHandler : public oahFindableElement
                           fOptionsAndArguments;
 
     // atoms waiting for a value
-    S_oahAtomExpectingAValue
-                          fPendingArgvAtomExpectingAValue;
-    std::string           fNameUsedForPendingArgvAtomExpectingAValue;
+    S_oahValueFittedAtom  fPendingArgvValueFittedAtom;
+    std::string           fNameUsedForPendingArgvValueFittedAtom;
 
     std::list <std::string>
                           fIncludeFileNamesStack;

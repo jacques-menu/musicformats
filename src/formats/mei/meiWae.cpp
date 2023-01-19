@@ -9,9 +9,9 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfIndentedTextOutput.h"
+#include "mfStaticSettings.h"
 
-#include "mfEnableAbortToDebugErrorsSetting.h"
+#include "mfIndentedTextOutput.h"
 
 #include "waeOah.h"
 

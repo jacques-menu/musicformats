@@ -13,7 +13,7 @@
 #include <regex>
 #include <sstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
@@ -27,6 +27,8 @@
 #include "msrClefs.h"
 
 #include "oahOah.h"
+
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -495,7 +497,7 @@ S_msrClef msrClef::createClefFromString (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "clefName = \"" <<
-      beatsNumber <<
+      clefName <<
       "\"" <<
       std::endl;
   }

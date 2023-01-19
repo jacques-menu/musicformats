@@ -17,7 +17,7 @@
 
 #include "musicxml2musicxmlOah2manPage.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 

@@ -32,11 +32,11 @@ EXP extern const int K_OAH_FIELD_WIDTH;
 // ------------------------------------------------------
 
 enum class oahElementValueKind {
-  kElementValueUnknown,    // default value
-  kElementValueWithout,   // i.e. -cpu, -minimal, -cubase, groups and subgroups elements
-  kElementValueImplicit,  // for oahBoolean
-  kElementValueMandatory, // i.e. -global-staff-size 30
-  kElementValueOptional   // i.e. -name-help, -name-help=cpu
+  kElementValue_UNKNOWN, // default value
+  kElementValueLess,     // i.e. -cpu, -minimal, -cubase, groups and subgroups elements
+//   kElementValueImplicit,  // for oahBoolean
+  kElementValueFitted,   // i.e. -global-staff-size 30
+  kElementValueDefaulted // i.e. -name-help for 'name' itself by default, or -name-help=cpu
 };
 
 std::string oahElementValueKindAsString (
@@ -76,7 +76,7 @@ std::ostream& operator << (std::ostream& os, const oahElementHelpOnlyKind& elt);
     - first is the std::string that has been found
     - second is the description of the oahElement in which it has been found
 */
-class   oahFindStringMatch : public smartable
+class oahFindStringMatch : public smartable
 {
   public:
 
@@ -111,7 +111,7 @@ class   oahFindStringMatch : public smartable
     const std::string&    getFoundString () const
                               { return fFoundString; }
 
-    const std::string&          getContainingFindableElementInfo () const
+    const std::string&    getContainingFindableElementInfo () const
                               { return fContainingFindableElementInfo; }
 
   public:
@@ -131,8 +131,9 @@ class   oahFindStringMatch : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::string                fElementName;
-    std::string                fFoundString;
+    std::string           fElementName;
+
+    std::string           fFoundString;
     std::string           fContainingFindableElementInfo;
 };
 typedef SMARTP<oahFindStringMatch> S_oahFindStringMatch;
@@ -175,7 +176,7 @@ class EXP oahFindableElement : public smartable
     // ------------------------------------------------------
 
     virtual Bool          findStringInFindableElement (
-                            const std::string&          lowerCaseString,
+                            const std::string&               lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const = 0;
 
@@ -314,8 +315,6 @@ class EXP oahElement : public oahFindableElement
 
     S_oahElement          thisElementIfItHasName (
                             const std::string& name);
-
-    virtual void          applyElement (std::ostream& os) = 0;
 
     Bool                  findStringInFindableElement (
                             const std::string&          lowerCaseString,

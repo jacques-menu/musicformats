@@ -17,12 +17,7 @@
 // WAE
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
-
-#include "mfEnableHarmoniesExtraSetting.h"
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  #include "oahHarmoniesExtraOah.h"
-#endif
+#include "mfStaticSettings.h"
 
 #include "mfServices.h"
 

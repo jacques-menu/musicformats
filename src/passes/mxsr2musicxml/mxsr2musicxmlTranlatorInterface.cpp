@@ -11,7 +11,7 @@
 
 #include <fstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -21,7 +21,7 @@
 
 #include "mxsr2musicxmlWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahEarlyOptions.h"
 
@@ -35,7 +35,7 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 EXP void translateMxsrToMusicXML (
-  Sxmlelement   theMxsr,
+  Sxmlelement        theMxsr,
   std::string        outputFileName,
   std::ostream&      err,
   const std::string& passNumber,
@@ -57,8 +57,9 @@ EXP void translateMxsrToMusicXML (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    err <<
-      std::endl <<
+    std::stringstream s;
+
+    s <<
       separator <<
       std::endl <<
       gTab <<
@@ -66,6 +67,11 @@ EXP void translateMxsrToMusicXML (
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 

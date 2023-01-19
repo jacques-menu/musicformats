@@ -14,7 +14,7 @@
 
 #include <regex>
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 #include "oahEarlyOptions.h"
@@ -27,10 +27,10 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msr2musicxmlManPageGenerateAtom msr2musicxmlManPageGenerateAtom::create (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
 {
   msr2musicxmlManPageGenerateAtom* o = new
     msr2musicxmlManPageGenerateAtom (
@@ -43,15 +43,14 @@ S_msr2musicxmlManPageGenerateAtom msr2musicxmlManPageGenerateAtom::create (
 }
 
 msr2musicxmlManPageGenerateAtom::msr2musicxmlManPageGenerateAtom (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
-  : oahAtom (
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
+      description)
 {
   fOahVisitor = theOahVisitor;
 }
@@ -59,7 +58,7 @@ msr2musicxmlManPageGenerateAtom::msr2musicxmlManPageGenerateAtom (
 msr2musicxmlManPageGenerateAtom::~msr2musicxmlManPageGenerateAtom ()
 {}
 
-void msr2musicxmlManPageGenerateAtom::applyElement (std::ostream& os)
+void msr2musicxmlManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -177,7 +176,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2musicxmlManPageGenerate
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -382,7 +381,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2musicxmlManPageOahGroup
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

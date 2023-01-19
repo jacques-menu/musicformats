@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
@@ -17,7 +17,7 @@
 #include "mfIndentedTextOutput.h"
 #include "mfStringsHandling.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "msrBrowsers.h"
 #include "msrMeasureConstants.h"

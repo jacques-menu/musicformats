@@ -59,7 +59,7 @@ void initializeMultiGenerationOutputKindsMap ();
 EXP extern mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ();
 
 //______________________________________________________________________________
-class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValue
+class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlySettingAVariable
 {
   public:
 
@@ -110,7 +110,10 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override
+                              { setImplicitVariable (os); }
+
+    void                  setImplicitVariable (std::ostream& os) override;
 
   public:
 

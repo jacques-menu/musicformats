@@ -17,7 +17,7 @@
 
 #include "lpsrPapers.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 

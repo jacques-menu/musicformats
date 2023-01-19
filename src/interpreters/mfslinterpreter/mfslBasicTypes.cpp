@@ -11,13 +11,13 @@
 
 #include <iomanip>      // setw()), set::precision(), ...
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfBool.h"
 #include "mfStringsHandling.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 

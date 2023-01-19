@@ -16,7 +16,7 @@
 
 #include "lpsrEnumTypes.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahAtomsCollection.h"
 

@@ -11,9 +11,9 @@
 
 #include <iostream>
 
-#include "mfExceptions.h"
+#include "mfStaticSettings.h"
 
-#include "mfEnableCaughtExceptionsDisplaySetting.h"
+#include "mfExceptions.h"
 
 
 namespace MusicFormats

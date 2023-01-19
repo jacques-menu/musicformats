@@ -61,15 +61,19 @@ std::ostream& operator << (std::ostream& os, const S_mfWaeHandlerGerman& elt)
 
 
 //_______________________________________________________________________________
-// pass numbers
+// pass names
 
-std::string mfWaeHandlerGerman::pass (mfPassIDKind passIDKind) const
+std::string mfWaeHandlerGerman::passIDKindAsString (mfPassIDKind passIDKind) const
 {
   std::string result;
 
   switch (passIDKind) {
     case mfPassIDKind::kMfPassID_UNKNOWN:
       result = "*Pass kMfPassID_UNKNOWN*";
+      break;
+
+    case mfPassIDKind::kMfPassID_ALL:
+      result = "*Pass kMfPassID_ALL*";
       break;
 
     case mfPassIDKind::kMfPassID_0:
@@ -187,6 +191,20 @@ std::string mfWaeHandlerGerman::names () const
 std::string mfWaeHandlerGerman::slices () const
 {
   return "slices";
+}
+
+//_______________________________________________________________________________
+// quitting after passes
+std::string mfWaeHandlerGerman::quittingAfterPass (mfPassIDKind passIDKind) const
+{
+  std::stringstream s;
+
+  s <<
+    "Quitting after pass " <<
+    passIDKindAsString (passIDKind) <<
+    " as requested";
+
+  return s.str ();
 }
 
 //_______________________________________________________________________________

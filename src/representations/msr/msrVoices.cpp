@@ -11,14 +11,14 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
 
 #include "msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 
@@ -184,7 +184,7 @@ std::ostream& operator << (std::ostream& os, const msrVoiceCreateInitialLastSegm
 
 //______________________________________________________________________________
 S_msrRepeatDescr msrRepeatDescr::create (
-  int         repeatDescrStartInputLineNumber,
+  int                repeatDescrStartInputLineNumber,
   const S_msrRepeat& repeatDescrRepeat)
 {
   msrRepeatDescr* o = new
@@ -196,7 +196,7 @@ S_msrRepeatDescr msrRepeatDescr::create (
 }
 
 msrRepeatDescr::msrRepeatDescr (
-  int         repeatDescrStartInputLineNumber,
+  int                repeatDescrStartInputLineNumber,
   const S_msrRepeat& repeatDescrRepeat)
 {
   fRepeatDescrStartInputLineNumber =
@@ -259,12 +259,12 @@ const int msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER =  40;
 int msrVoice::gVoicesCounter = 0;
 
 S_msrVoice msrVoice::create (
-  int          inputLineNumber,
-  msrVoiceKind voiceKind,
-  int          voiceNumber,
+  int               inputLineNumber,
+  msrVoiceKind      voiceKind,
+  int               voiceNumber,
   msrVoiceCreateInitialLastSegmentKind
-               voiceCreateInitialLastSegmentKind,
-  const S_msrStaff&   voiceUpLinkToStaff)
+                    voiceCreateInitialLastSegmentKind,
+  const S_msrStaff& voiceUpLinkToStaff)
 {
   msrVoice* o =
     new msrVoice (
@@ -278,8 +278,8 @@ S_msrVoice msrVoice::create (
 }
 
 S_msrVoice msrVoice::createRegularVoice (
-  int        inputLineNumber,
-  int        voiceNumber,
+  int               inputLineNumber,
+  int               voiceNumber,
   const S_msrStaff& voiceUpLinkToStaff)
 {
   return
@@ -292,10 +292,10 @@ S_msrVoice msrVoice::createRegularVoice (
       voiceUpLinkToStaff);
 }
 
-S_msrVoice msrVoice::createHarmoniesVoice ( // unused yet JMI
-  int        inputLineNumber,
-  int        voiceNumber,
-  const S_msrStaff& voiceUpLinkToStaff)
+S_msrVoice msrVoice::createHarmoniesVoice (
+  int               inputLineNumber,
+  int               voiceNumber,
+  const S_msrStaff& voiceUpLinkToStaff) // unused yet JMI v0.9.66
 {
   return
     msrVoice::create (
@@ -307,10 +307,10 @@ S_msrVoice msrVoice::createHarmoniesVoice ( // unused yet JMI
       voiceUpLinkToStaff);
 }
 
-S_msrVoice msrVoice::createFiguredBassVoice ( // unused yet JMI
-  int        inputLineNumber,
-  int        voiceNumber,
-  const S_msrStaff& voiceUpLinkToStaff)
+S_msrVoice msrVoice::createFiguredBassVoice (
+  int               inputLineNumber,
+  int               voiceNumber,
+  const S_msrStaff& voiceUpLinkToStaff) // unused yet JMIv0.9.66
 {
   return
     msrVoice::create (
@@ -323,12 +323,12 @@ S_msrVoice msrVoice::createFiguredBassVoice ( // unused yet JMI
 }
 
 msrVoice::msrVoice (
-  int          inputLineNumber,
-  msrVoiceKind voiceKind,
-  int          voiceNumber,
+  int               inputLineNumber,
+  msrVoiceKind      voiceKind,
+  int               voiceNumber,
   msrVoiceCreateInitialLastSegmentKind
-               voiceCreateInitialLastSegmentKind,
-  const S_msrStaff&   voiceUpLinkToStaff)
+                    voiceCreateInitialLastSegmentKind,
+  const S_msrStaff& voiceUpLinkToStaff)
     : msrElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -750,10 +750,10 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
 }
 
 S_msrVoice msrVoice::createVoiceDeepClone (
-  int          inputLineNumber,
-  msrVoiceKind voiceKind,
-  int          voiceNumber,
-  const S_msrStaff&   containingStaff)
+  int               inputLineNumber,
+  msrVoiceKind      voiceKind,
+  int               voiceNumber,
+  const S_msrStaff& containingStaff)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {

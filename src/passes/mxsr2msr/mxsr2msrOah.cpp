@@ -17,7 +17,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -951,6 +951,7 @@ R"()",
 R"(Ignore articulations in MusicXML data.)",
         "fIgnoreArticulations",
         fIgnoreArticulations);
+        
   subGroup->
     appendAtomToSubGroup (
       ignoreArticulationsAtom);
@@ -965,6 +966,7 @@ R"(Ignore articulations in MusicXML data.)",
 R"(Ignore ornaments in MusicXML data.)",
         "fIgnoreOrnaments",
         fIgnoreOrnaments);
+        
   subGroup->
     appendAtomToSubGroup (
       ignoreOrnamentsAtom);
@@ -979,6 +981,7 @@ R"(Ignore ornaments in MusicXML data.)",
 R"(Ignore ties in MusicXML data)",
         "fIgnoreTies",
         fIgnoreTies);
+        
   subGroup->
     appendAtomToSubGroup (
       ignoreTiesAtom);
@@ -993,6 +996,7 @@ R"(Ignore ties in MusicXML data)",
 R"(Ignore dynamics in MusicXML data)",
         "fIgnoreDynamics",
         fIgnoreDynamics);
+        
   subGroup->
     appendAtomToSubGroup (
       ignoreDynamicsAtom);
@@ -1007,6 +1011,7 @@ R"(Ignore dynamics in MusicXML data)",
 R"(Ignore slurs in MusicXML data.)",
         "fIgnoreSlurs",
         fIgnoreSlurs);
+        
   subGroup->
     appendAtomToSubGroup (
       ignoreSlursAtom);
@@ -1021,6 +1026,7 @@ R"(Ignore slurs in MusicXML data.)",
 R"(Ignore '<wedge/>' in MusicXML data.)",
         "fIgnoreWedges",
         fIgnoreWedges);
+        
   subGroup->
     appendAtomToSubGroup (
       ignoreWedgesAtom);
@@ -1070,6 +1076,7 @@ R"(Ignore figured bass elements in MusicXML data.)",
 R"(Add a slash to all grace notes)",
         "fSlashAllGraceNotes",
         fSlashAllGraceNotes);
+        
   subGroup->
     appendAtomToSubGroup (
       slashAllGraceNotesAtom);
@@ -1084,6 +1091,7 @@ R"(Add a slash to all grace notes)",
 R"(Add a slur to all grace notes)",
         "fSlurAllGraceNotes",
         fSlurAllGraceNotes);
+        
   subGroup->
     appendAtomToSubGroup (
       slurAllGraceNotesAtom);
@@ -1098,6 +1106,7 @@ R"(Add a slur to all grace notes)",
 R"(Add a beam to all grace notes)",
         "fBeamAllGraceNotes",
         fBeamAllGraceNotes);
+        
   subGroup->
     appendAtomToSubGroup (
       beamAllGraceNotesAtom);
@@ -1129,6 +1138,7 @@ R"(Add a beam to all grace notes)",
 R"()",
         "fDelayRestsDynamics",
         fDelayRestsDynamics);
+        
   subGroup->
     appendAtomToSubGroup (
       delayRestsDynamicsAtom);
@@ -1146,6 +1156,7 @@ R"()",
 R"()",
         "fDelayRestsWords",
         fDelayRestsWords);
+        
   subGroup->
     appendAtomToSubGroup (
       delayRestsWordsAtom);
@@ -1163,6 +1174,7 @@ R"()",
 R"()",
         "fDelayRestsBeams",
         fDelayRestsBeams);
+        
   subGroup->
     appendAtomToSubGroup (
       delayRestsBeamsAtom);
@@ -1180,6 +1192,7 @@ R"()",
 R"()",
         "fDelayRestsSlurs",
         fDelayRestsSlurs);
+        
   subGroup->
     appendAtomToSubGroup (
       delayRestsSlursAtom);
@@ -1197,6 +1210,7 @@ R"()",
 R"(<bracket/> in MusicXML, '\[... \}' in LilyPond)",
         "fDelayRestsLigatures",
         fDelayRestsLigatures);
+        
   subGroup->
     appendAtomToSubGroup (
       delayRestsLigaturesAtom);
@@ -1214,6 +1228,7 @@ R"(<bracket/> in MusicXML, '\[... \}' in LilyPond)",
 R"()",
         "fDelayRestsPedals",
         fDelayRestsPedals);
+        
   subGroup->
     appendAtomToSubGroup (
       delayRestsPedalsAtom);
@@ -1231,6 +1246,7 @@ R"()",
 R"('<slash/>' in MusicXML)",
         "fDelayRestsSlashes",
         fDelayRestsSlashes);
+        
   subGroup->
     appendAtomToSubGroup (
       delayRestsSlashesAtom);
@@ -1245,6 +1261,7 @@ R"('<slash/>' in MusicXML)",
 R"('<wedge/>' in MusicXML, '<!' in LilyPond)",
         "fDelayRestsWedges",
         fDelayRestsWedges);
+        
   subGroup->
     appendAtomToSubGroup (
       delayRestsWedgesAtom);
@@ -1311,6 +1328,7 @@ R"(Ignore words in MusicXML data.)",
 R"(Ignore '<words />' in MusicXML data.)",
         "fIgnoreMusicXMLWords",
         fIgnoreMusicXMLWords);
+        
   subGroup->
     appendAtomToSubGroup (
       ignoreMusicXMLWordsAtom);

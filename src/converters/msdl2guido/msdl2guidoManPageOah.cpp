@@ -14,7 +14,7 @@
 
 #include <regex>
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 #include "oahEarlyOptions.h"
@@ -27,10 +27,10 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdl2guidoManPageGenerateAtom msdl2guidoManPageGenerateAtom::create (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
 {
   msdl2guidoManPageGenerateAtom* o = new
     msdl2guidoManPageGenerateAtom (
@@ -43,15 +43,14 @@ S_msdl2guidoManPageGenerateAtom msdl2guidoManPageGenerateAtom::create (
 }
 
 msdl2guidoManPageGenerateAtom::msdl2guidoManPageGenerateAtom (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
-  : oahAtom (
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
+      description)
 {
   fOahVisitor = theOahVisitor;
 }
@@ -59,7 +58,7 @@ msdl2guidoManPageGenerateAtom::msdl2guidoManPageGenerateAtom (
 msdl2guidoManPageGenerateAtom::~msdl2guidoManPageGenerateAtom ()
 {}
 
-void msdl2guidoManPageGenerateAtom::applyElement (std::ostream& os)
+void msdl2guidoManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

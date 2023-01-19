@@ -11,7 +11,7 @@
 
 #include <regex>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
@@ -23,7 +23,7 @@
 #include "oahWae.h"
 #include "msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "msrMeasureConstants.h"
 

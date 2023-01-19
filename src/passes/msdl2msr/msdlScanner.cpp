@@ -19,7 +19,7 @@
 
 #include "waeInterface.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "msdlScannerWaeHandlers.h"
 

@@ -18,7 +18,7 @@
 
 #include "bsrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfServices.h"
 

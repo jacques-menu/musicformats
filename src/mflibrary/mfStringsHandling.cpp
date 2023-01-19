@@ -13,7 +13,7 @@
 #include <string.h>     // strncat
 #include <sstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include <map>
 

@@ -16,7 +16,7 @@
 
 #include "msr2lilypondOah2manPage.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 

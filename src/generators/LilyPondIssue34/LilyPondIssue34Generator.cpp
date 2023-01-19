@@ -13,7 +13,7 @@
 
 #include "LilyPondIssue34Generator.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "msrScores.h"
 #include "msrBarLines.h"

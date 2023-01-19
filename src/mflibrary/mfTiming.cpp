@@ -104,6 +104,25 @@ void mfTimingItemsList::appendTimingItem (
   fTimingItemsList.push_back (mfTimingItem);
 }
 
+void mfTimingItemsList::appendTimingItem ( // JMI NEW in v0.9.66
+  mfPassIDKind       passIDKind,
+  const std::string& description,
+  mfTimingItemKind   kind,
+  clock_t            startClock,
+  clock_t            endClock)
+{
+  S_mfTimingItem
+    mfTimingItem =
+      mfTimingItem::createTimingItem (
+        gWaeHandler->passIDKindAsString (passIDKind),
+        description,
+        kind,
+        startClock,
+        endClock);
+
+  fTimingItemsList.push_back (mfTimingItem);
+}
+
 void mfTimingItemsList::doPrint (std::ostream& os) const
 {
   // printing the details

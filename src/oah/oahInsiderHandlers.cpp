@@ -9,12 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfStaticSettings.h"
+
 #include "mfStringsHandling.h"
 
-#include "mfEnableHarmoniesExtraSetting.h"
 #include "oahWae.h"
-
-#include "mfEnableTracingSetting.h"
 
 #include "oahEarlyOptions.h"
 

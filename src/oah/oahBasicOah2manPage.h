@@ -31,7 +31,7 @@ class EXP basicOah2manPage : virtual public oah2manPage,
 
   public visitor<S_oahAtom>,
 
-  public visitor<S_oahAtomAlias>,
+  public visitor<S_oahValueLessAtomAlias>,
 
   public visitor<S_oahOptionsUsageAtom>,
 
@@ -49,7 +49,7 @@ class EXP basicOah2manPage : virtual public oah2manPage,
 
   public visitor<S_oahCommonPrefixBooleansAtom>,
 
-// JMI  public visitor<S_oahAtomStoringAValue>,
+// JMI  public visitor<S_oahAtomStoringAValue>, v0.9.66
 
   public visitor<S_oahIntegerAtom>,
   public visitor<S_oahTwoIntegersAtom>,
@@ -62,7 +62,7 @@ class EXP basicOah2manPage : virtual public oah2manPage,
 
   public visitor<S_oahFactorizedStringAtom>,
 
-  public visitor<S_oahStringWithDefaultValueAtom>,
+  public visitor<S_oahDefaultedStringAtom>,
 
   public visitor<oahNaturalNumbersSetElementAtom>,
 
@@ -78,7 +78,7 @@ class EXP basicOah2manPage : virtual public oah2manPage,
 
                           basicOah2manPage (
                             const S_oahHandler& handler,
-                            std::ostream&           manPageOutputStream);
+                            std::ostream&       manPageOutputStream);
 
     virtual               ~basicOah2manPage ();
 
@@ -99,8 +99,8 @@ class EXP basicOah2manPage : virtual public oah2manPage,
     virtual void          visitStart (S_oahAtom& elt);
     virtual void          visitEnd   (S_oahAtom& elt);
 
-    virtual void          visitStart (S_oahAtomAlias& elt);
-    virtual void          visitEnd   (S_oahAtomAlias& elt);
+    virtual void          visitStart (S_oahValueLessAtomAlias& elt);
+    virtual void          visitEnd   (S_oahValueLessAtomAlias& elt);
 
     virtual void          visitStart (S_oahOptionsUsageAtom& elt);
     virtual void          visitEnd   (S_oahOptionsUsageAtom& elt);
@@ -148,8 +148,8 @@ class EXP basicOah2manPage : virtual public oah2manPage,
     virtual void          visitStart (S_oahFactorizedStringAtom& elt);
     virtual void          visitEnd   (S_oahFactorizedStringAtom& elt);
 
-    virtual void          visitStart (S_oahStringWithDefaultValueAtom& elt);
-    virtual void          visitEnd   (S_oahStringWithDefaultValueAtom& elt);
+    virtual void          visitStart (S_oahDefaultedStringAtom& elt);
+    virtual void          visitEnd   (S_oahDefaultedStringAtom& elt);
 
     virtual void          visitStart (S_oahNaturalNumbersSetElementAtom& elt);
     virtual void          visitEnd   (S_oahNaturalNumbersSetElementAtom& elt);

@@ -12,7 +12,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -20,7 +20,7 @@
 
 #include "bsrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahEarlyOptions.h"
 
@@ -70,7 +70,7 @@ void displayBsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
     gWaeHandler->displayTheBSRAsText (), // JMI ??? v0.9.66
     mfTimingItemKind::kOptional,
     startClock,
@@ -121,7 +121,7 @@ void displayBsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
     gWaeHandler->displayTheBSRAsText ()
       + ", " +
     gWaeHandler->fullVersion (),

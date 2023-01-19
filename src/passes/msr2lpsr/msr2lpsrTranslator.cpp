@@ -13,7 +13,7 @@
 #include <sstream>
 #include <algorithm>    // for_each
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -22,7 +22,7 @@
 
 #include "msr2lpsrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "msr2lpsrComponent.h"
 

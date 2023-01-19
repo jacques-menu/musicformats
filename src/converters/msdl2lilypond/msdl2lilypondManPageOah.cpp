@@ -14,7 +14,7 @@
 
 #include <regex>
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 #include "oahEarlyOptions.h"
@@ -27,10 +27,10 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdl2lilypondManPageGenerateAtom msdl2lilypondManPageGenerateAtom::create (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
 {
   msdl2lilypondManPageGenerateAtom* o = new
     msdl2lilypondManPageGenerateAtom (
@@ -43,15 +43,14 @@ S_msdl2lilypondManPageGenerateAtom msdl2lilypondManPageGenerateAtom::create (
 }
 
 msdl2lilypondManPageGenerateAtom::msdl2lilypondManPageGenerateAtom (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
-  : oahAtom (
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
+      description)
 {
   fOahVisitor = theOahVisitor;
 }
@@ -59,7 +58,7 @@ msdl2lilypondManPageGenerateAtom::msdl2lilypondManPageGenerateAtom (
 msdl2lilypondManPageGenerateAtom::~msdl2lilypondManPageGenerateAtom ()
 {}
 
-void msdl2lilypondManPageGenerateAtom::applyElement (std::ostream& os)
+void msdl2lilypondManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

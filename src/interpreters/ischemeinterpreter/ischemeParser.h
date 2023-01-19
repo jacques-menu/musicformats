@@ -795,7 +795,7 @@ switch (yykind)
       /// Empty symbol.
       symbol_type () YY_NOEXCEPT {}
 
-      /// Constructor for valueless symbols, and symbols from each type.
+      /// Constructor for value-less symbols, and symbols from each type.
 #if 201103L <= YY_CPLUSPLUS
       symbol_type (int tok, location_type l)
         : super_type (token_kind_type (tok), std::move (l))

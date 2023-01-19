@@ -17,7 +17,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -110,6 +110,7 @@ R"(Write a trace of the MSDL tokens handling activity with more details to stand
 R"(Write a trace of the MSDL syntax analysis activity to standard error.)",
         "traceSyntax",
         fTraceSyntax);
+        
   subGroup->
     appendAtomToSubGroup (
       traceSyntaxBooleanAtom);
@@ -135,6 +136,7 @@ R"(Write a trace of the MSDL syntax analysis activity with more details to stand
 R"(Write a trace of the MSDL syntax error recovery activity to standard error.)",
         "traceSyntaxErrorRecovery",
         fTraceSyntaxErrorRecovery);
+        
   subGroup->
     appendAtomToSubGroup (
       traceSyntaxErrorRecoveryBooleanAtom);

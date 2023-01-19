@@ -12,11 +12,11 @@
 #include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"

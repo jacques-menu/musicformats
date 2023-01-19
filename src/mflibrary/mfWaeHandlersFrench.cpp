@@ -60,15 +60,19 @@ std::ostream& operator << (std::ostream& os, const S_mfWaeHandlerFrench& elt)
 }
 
 //_______________________________________________________________________________
-// pass numbers
+// pass names
 
-std::string mfWaeHandlerFrench::pass (mfPassIDKind passIDKind) const
+std::string mfWaeHandlerFrench::passIDKindAsString (mfPassIDKind passIDKind) const
 {
   std::string result;
 
   switch (passIDKind) {
     case mfPassIDKind::kMfPassID_UNKNOWN:
       result = "*Passe kMfPassID_UNKNOWN*";
+      break;
+
+    case mfPassIDKind::kMfPassID_ALL:
+      result = "*Passe kMfPassID_ALL*";
       break;
 
     case mfPassIDKind::kMfPassID_0:
@@ -189,6 +193,20 @@ std::string mfWaeHandlerFrench::slices () const
 }
 
 //_______________________________________________________________________________
+// quitting after passes
+std::string mfWaeHandlerFrench::quittingAfterPass (mfPassIDKind passIDKind) const
+{
+  std::stringstream s;
+
+  s <<
+    "On sort après la passe " <<
+    passIDKindAsString (passIDKind) <<
+    " comme demandé";
+
+  return s.str ();
+}
+
+//_______________________________________________________________________________
 // OAH
 
 std::string mfWaeHandlerFrench::handleOptionsAndArgumentsFromArgcArgv () const
@@ -304,7 +322,7 @@ std::string mfWaeHandlerFrench::mandatory () const
 }
 std::string mfWaeHandlerFrench::optional () const
 {
-  return "optionel";
+  return "optionnel";
 }
 std::string mfWaeHandlerFrench::totalSeconds () const
 {

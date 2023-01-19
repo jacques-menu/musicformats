@@ -13,7 +13,7 @@
 
 #include "Mikrokosmos3WanderingGenerator.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "msrParts.h"
 #include "msrBarLines.h"

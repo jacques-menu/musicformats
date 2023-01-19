@@ -9,14 +9,15 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfStaticSettings.h"
+
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
-
-#include "mfEnableAbortToDebugErrorsSetting.h"
 
 #include "oahEarlyOptions.h"
 
 #include "waeInterface.h"
+
 #include "msr2mxsrWae.h"
 
 #include "oahOah.h"

@@ -35,13 +35,13 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-S_extraShowAllHarmoniesStructuresAtom extraShowAllHarmoniesStructuresAtom::create (
+S_extraDisplayAllHarmoniesStructuresAtom extraDisplayAllHarmoniesStructuresAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description)
 {
-  extraShowAllHarmoniesStructuresAtom* o = new
-    extraShowAllHarmoniesStructuresAtom (
+  extraDisplayAllHarmoniesStructuresAtom* o = new
+    extraDisplayAllHarmoniesStructuresAtom (
       longName,
       shortName,
       description);
@@ -49,70 +49,66 @@ S_extraShowAllHarmoniesStructuresAtom extraShowAllHarmoniesStructuresAtom::creat
   return o;
 }
 
-extraShowAllHarmoniesStructuresAtom::extraShowAllHarmoniesStructuresAtom (
+extraDisplayAllHarmoniesStructuresAtom::extraDisplayAllHarmoniesStructuresAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description)
-  : oahAtomStoringAValue (
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      "valueSpecification JMI",
-      "fVariableName JMI")
+      description)
 {}
 
-extraShowAllHarmoniesStructuresAtom::~extraShowAllHarmoniesStructuresAtom ()
+extraDisplayAllHarmoniesStructuresAtom::~extraDisplayAllHarmoniesStructuresAtom ()
 {}
 
-/* JMI
-void extraShowAllHarmoniesStructuresAtom::applyElement (std::ostream& os)
+void extraDisplayAllHarmoniesStructuresAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> option '" << fetchNames () << "' is a extraShowAllHarmoniesStructuresAtom" <<
+      "==> option '" << fetchNames () << "' is a extraDisplayAllHarmoniesStructuresAtom" <<
       std::endl;
   }
 #endif
 
   printAllHarmoniesStructures (os);
 }
-*/
+//
+// void extraDisplayAllHarmoniesStructuresAtom::applyAtomWithValue (
+//   const std::string& theString,
+//   std::ostream&      os)
+// {
+// #ifdef MF_TRACING_IS_ENABLED
+//   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+//     gLogStream <<
+//       "==> option '" << fetchNames () << "' is a extraDisplayAllHarmoniesStructuresAtom" <<
+//       std::endl;
+//   }
+// #endif
+//
+//   printAllHarmoniesStructures (os);
+// }
 
-void extraShowAllHarmoniesStructuresAtom::applyAtomWithValue (
-  const std::string& theString,
-  std::ostream&      os)
-{
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
-      "==> option '" << fetchNames () << "' is a extraShowAllHarmoniesStructuresAtom" <<
-      std::endl;
-  }
-#endif
-
-  printAllHarmoniesStructures (os);
-}
-
-void extraShowAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
+void extraDisplayAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowAllHarmoniesStructuresAtom::acceptIn ()" <<
+      ".\\\" ==> extraDisplayAllHarmoniesStructuresAtom::acceptIn ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_extraShowAllHarmoniesStructuresAtom>*
+  if (visitor<S_extraDisplayAllHarmoniesStructuresAtom>*
     p =
-      dynamic_cast<visitor<S_extraShowAllHarmoniesStructuresAtom>*> (v)) {
-        S_extraShowAllHarmoniesStructuresAtom elem = this;
+      dynamic_cast<visitor<S_extraDisplayAllHarmoniesStructuresAtom>*> (v)) {
+        S_extraDisplayAllHarmoniesStructuresAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching extraShowAllHarmoniesStructuresAtom::visitStart ()" <<
+            ".\\\" ==> Launching extraDisplayAllHarmoniesStructuresAtom::visitStart ()" <<
             std::endl;
         }
 #endif
@@ -120,25 +116,25 @@ void extraShowAllHarmoniesStructuresAtom::acceptIn (basevisitor* v)
   }
 }
 
-void extraShowAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
+void extraDisplayAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowAllHarmoniesStructuresAtom::acceptOut ()" <<
+      ".\\\" ==> extraDisplayAllHarmoniesStructuresAtom::acceptOut ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_extraShowAllHarmoniesStructuresAtom>*
+  if (visitor<S_extraDisplayAllHarmoniesStructuresAtom>*
     p =
-      dynamic_cast<visitor<S_extraShowAllHarmoniesStructuresAtom>*> (v)) {
-        S_extraShowAllHarmoniesStructuresAtom elem = this;
+      dynamic_cast<visitor<S_extraDisplayAllHarmoniesStructuresAtom>*> (v)) {
+        S_extraDisplayAllHarmoniesStructuresAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching extraShowAllHarmoniesStructuresAtom::visitEnd ()" <<
+            ".\\\" ==> Launching extraDisplayAllHarmoniesStructuresAtom::visitEnd ()" <<
             std::endl;
         }
 #endif
@@ -146,23 +142,23 @@ void extraShowAllHarmoniesStructuresAtom::acceptOut (basevisitor* v)
   }
 }
 
-void extraShowAllHarmoniesStructuresAtom::browseData (basevisitor* v)
+void extraDisplayAllHarmoniesStructuresAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowAllHarmoniesStructuresAtom::browseData ()" <<
+      ".\\\" ==> extraDisplayAllHarmoniesStructuresAtom::browseData ()" <<
       std::endl;
   }
 #endif
 }
 
-void extraShowAllHarmoniesStructuresAtom::print (std::ostream& os) const
+void extraDisplayAllHarmoniesStructuresAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "extraShowAllHarmoniesStructuresAtom:" <<
+    "extraDisplayAllHarmoniesStructuresAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -173,19 +169,19 @@ void extraShowAllHarmoniesStructuresAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void extraShowAllHarmoniesStructuresAtom::printAllHarmoniesStructures (std::ostream& os) const
+void extraDisplayAllHarmoniesStructuresAtom::printAllHarmoniesStructures (std::ostream& os) const
 {
   msrHarmonyStructure::printAllHarmoniesStructures (os);
 }
 
-void extraShowAllHarmoniesStructuresAtom::printAtomWithVariableOptionsValues (
+void extraDisplayAllHarmoniesStructuresAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   // nothing to print here
 }
 
-std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesStructuresAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_extraDisplayAllHarmoniesStructuresAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -198,7 +194,7 @@ std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesStruct
 }
 
 //______________________________________________________________________________
-S_extraShowAllHarmoniesContentsAtom extraShowAllHarmoniesContentsAtom::create (
+S_extraDisplayAllHarmoniesContentsAtom extraDisplayAllHarmoniesContentsAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
@@ -206,8 +202,8 @@ S_extraShowAllHarmoniesContentsAtom extraShowAllHarmoniesContentsAtom::create (
   const std::string& variableName,
   std::string&       stringVariable)
 {
-  extraShowAllHarmoniesContentsAtom* o = new
-    extraShowAllHarmoniesContentsAtom (
+  extraDisplayAllHarmoniesContentsAtom* o = new
+    extraDisplayAllHarmoniesContentsAtom (
       longName,
       shortName,
       description,
@@ -218,7 +214,7 @@ S_extraShowAllHarmoniesContentsAtom extraShowAllHarmoniesContentsAtom::create (
   return o;
 }
 
-extraShowAllHarmoniesContentsAtom::extraShowAllHarmoniesContentsAtom (
+extraDisplayAllHarmoniesContentsAtom::extraDisplayAllHarmoniesContentsAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
@@ -238,17 +234,17 @@ extraShowAllHarmoniesContentsAtom::extraShowAllHarmoniesContentsAtom (
     oahElementHelpOnlyKind::kElementHelpOnlyYes;
 }
 
-extraShowAllHarmoniesContentsAtom::~extraShowAllHarmoniesContentsAtom ()
+extraDisplayAllHarmoniesContentsAtom::~extraDisplayAllHarmoniesContentsAtom ()
 {}
 
-void extraShowAllHarmoniesContentsAtom::applyAtomWithValue (
+void extraDisplayAllHarmoniesContentsAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> oahAtom is of type 'extraShowAllHarmoniesContentsAtom'" <<
+      "==> oahAtom is of type 'extraDisplayAllHarmoniesContentsAtom'" <<
       std::endl;
   }
 #endif
@@ -259,7 +255,7 @@ void extraShowAllHarmoniesContentsAtom::applyAtomWithValue (
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> oahAtom is of type 'extraShowAllHarmoniesContentsAtom'" <<
+      "==> oahAtom is of type 'extraDisplayAllHarmoniesContentsAtom'" <<
       ", theString = \"" << theString << "\"" <<
       std::endl;
   }
@@ -338,25 +334,25 @@ void extraShowAllHarmoniesContentsAtom::applyAtomWithValue (
     semiTonesPitchKind);
 }
 
-void extraShowAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
+void extraDisplayAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowAllHarmoniesContentsAtom::acceptIn ()" <<
+      ".\\\" ==> extraDisplayAllHarmoniesContentsAtom::acceptIn ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_extraShowAllHarmoniesContentsAtom>*
+  if (visitor<S_extraDisplayAllHarmoniesContentsAtom>*
     p =
-      dynamic_cast<visitor<S_extraShowAllHarmoniesContentsAtom>*> (v)) {
-        S_extraShowAllHarmoniesContentsAtom elem = this;
+      dynamic_cast<visitor<S_extraDisplayAllHarmoniesContentsAtom>*> (v)) {
+        S_extraDisplayAllHarmoniesContentsAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching extraShowAllHarmoniesContentsAtom::visitStart ()" <<
+            ".\\\" ==> Launching extraDisplayAllHarmoniesContentsAtom::visitStart ()" <<
             std::endl;
         }
 #endif
@@ -364,25 +360,25 @@ void extraShowAllHarmoniesContentsAtom::acceptIn (basevisitor* v)
   }
 }
 
-void extraShowAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
+void extraDisplayAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowAllHarmoniesContentsAtom::acceptOut ()" <<
+      ".\\\" ==> extraDisplayAllHarmoniesContentsAtom::acceptOut ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_extraShowAllHarmoniesContentsAtom>*
+  if (visitor<S_extraDisplayAllHarmoniesContentsAtom>*
     p =
-      dynamic_cast<visitor<S_extraShowAllHarmoniesContentsAtom>*> (v)) {
-        S_extraShowAllHarmoniesContentsAtom elem = this;
+      dynamic_cast<visitor<S_extraDisplayAllHarmoniesContentsAtom>*> (v)) {
+        S_extraDisplayAllHarmoniesContentsAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching extraShowAllHarmoniesContentsAtom::visitEnd ()" <<
+            ".\\\" ==> Launching extraDisplayAllHarmoniesContentsAtom::visitEnd ()" <<
             std::endl;
         }
 #endif
@@ -390,23 +386,23 @@ void extraShowAllHarmoniesContentsAtom::acceptOut (basevisitor* v)
   }
 }
 
-void extraShowAllHarmoniesContentsAtom::browseData (basevisitor* v)
+void extraDisplayAllHarmoniesContentsAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowAllHarmoniesContentsAtom::browseData ()" <<
+      ".\\\" ==> extraDisplayAllHarmoniesContentsAtom::browseData ()" <<
       std::endl;
   }
 #endif
 }
 
-void extraShowAllHarmoniesContentsAtom::print (std::ostream& os) const
+void extraDisplayAllHarmoniesContentsAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "extraShowAllHarmoniesContentsAtom:" <<
+    "extraDisplayAllHarmoniesContentsAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -417,7 +413,7 @@ void extraShowAllHarmoniesContentsAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void extraShowAllHarmoniesContentsAtom::printAllHarmoniesContents (
+void extraDisplayAllHarmoniesContentsAtom::printAllHarmoniesContents (
   std::ostream&              os,
   msrSemiTonesPitchKind semiTonesPitchKind) const
 {
@@ -426,14 +422,14 @@ void extraShowAllHarmoniesContentsAtom::printAllHarmoniesContents (
     semiTonesPitchKind);
 }
 
-void extraShowAllHarmoniesContentsAtom::printAtomWithVariableOptionsValues (
+void extraDisplayAllHarmoniesContentsAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   // nothing to print here
 }
 
-std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesContentsAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_extraDisplayAllHarmoniesContentsAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -446,7 +442,7 @@ std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesConten
 }
 
 //______________________________________________________________________________
-S_extraShowHarmonyDetailsAtom extraShowHarmonyDetailsAtom::create (
+S_extraDisplayHarmonyDetailsAtom extraDisplayHarmonyDetailsAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
@@ -454,8 +450,8 @@ S_extraShowHarmonyDetailsAtom extraShowHarmonyDetailsAtom::create (
   const std::string& variableName,
   std::string&       stringVariable)
 {
-  extraShowHarmonyDetailsAtom* o = new
-    extraShowHarmonyDetailsAtom (
+  extraDisplayHarmonyDetailsAtom* o = new
+    extraDisplayHarmonyDetailsAtom (
       longName,
       shortName,
       description,
@@ -466,7 +462,7 @@ S_extraShowHarmonyDetailsAtom extraShowHarmonyDetailsAtom::create (
   return o;
 }
 
-extraShowHarmonyDetailsAtom::extraShowHarmonyDetailsAtom (
+extraDisplayHarmonyDetailsAtom::extraDisplayHarmonyDetailsAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
@@ -486,17 +482,17 @@ extraShowHarmonyDetailsAtom::extraShowHarmonyDetailsAtom (
     oahElementHelpOnlyKind::kElementHelpOnlyYes;
 }
 
-extraShowHarmonyDetailsAtom::~extraShowHarmonyDetailsAtom ()
+extraDisplayHarmonyDetailsAtom::~extraDisplayHarmonyDetailsAtom ()
 {}
 
-void extraShowHarmonyDetailsAtom::applyAtomWithValue (
+void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> oahAtom is of type 'extraShowHarmonyDetailsAtom'" <<
+      "==> oahAtom is of type 'extraDisplayHarmonyDetailsAtom'" <<
       std::endl;
   }
 #endif
@@ -506,7 +502,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> oahAtom is of type 'extraShowHarmonyDetailsAtom'" <<
+      "==> oahAtom is of type 'extraDisplayHarmonyDetailsAtom'" <<
       ", theString = \"" << theString << "\"" <<
       std::endl;
   }
@@ -656,25 +652,25 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
     harmonyKind);
 }
 
-void extraShowHarmonyDetailsAtom::acceptIn (basevisitor* v)
+void extraDisplayHarmonyDetailsAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowHarmonyDetailsAtom::acceptIn ()" <<
+      ".\\\" ==> extraDisplayHarmonyDetailsAtom::acceptIn ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_extraShowHarmonyDetailsAtom>*
+  if (visitor<S_extraDisplayHarmonyDetailsAtom>*
     p =
-      dynamic_cast<visitor<S_extraShowHarmonyDetailsAtom>*> (v)) {
-        S_extraShowHarmonyDetailsAtom elem = this;
+      dynamic_cast<visitor<S_extraDisplayHarmonyDetailsAtom>*> (v)) {
+        S_extraDisplayHarmonyDetailsAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching extraShowHarmonyDetailsAtom::visitStart ()" <<
+            ".\\\" ==> Launching extraDisplayHarmonyDetailsAtom::visitStart ()" <<
             std::endl;
         }
 #endif
@@ -682,25 +678,25 @@ void extraShowHarmonyDetailsAtom::acceptIn (basevisitor* v)
   }
 }
 
-void extraShowHarmonyDetailsAtom::acceptOut (basevisitor* v)
+void extraDisplayHarmonyDetailsAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowHarmonyDetailsAtom::acceptOut ()" <<
+      ".\\\" ==> extraDisplayHarmonyDetailsAtom::acceptOut ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_extraShowHarmonyDetailsAtom>*
+  if (visitor<S_extraDisplayHarmonyDetailsAtom>*
     p =
-      dynamic_cast<visitor<S_extraShowHarmonyDetailsAtom>*> (v)) {
-        S_extraShowHarmonyDetailsAtom elem = this;
+      dynamic_cast<visitor<S_extraDisplayHarmonyDetailsAtom>*> (v)) {
+        S_extraDisplayHarmonyDetailsAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching extraShowHarmonyDetailsAtom::visitEnd ()" <<
+            ".\\\" ==> Launching extraDisplayHarmonyDetailsAtom::visitEnd ()" <<
             std::endl;
         }
 #endif
@@ -708,23 +704,23 @@ void extraShowHarmonyDetailsAtom::acceptOut (basevisitor* v)
   }
 }
 
-void extraShowHarmonyDetailsAtom::browseData (basevisitor* v)
+void extraDisplayHarmonyDetailsAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowHarmonyDetailsAtom::browseData ()" <<
+      ".\\\" ==> extraDisplayHarmonyDetailsAtom::browseData ()" <<
       std::endl;
   }
 #endif
 }
 
-void extraShowHarmonyDetailsAtom::print (std::ostream& os) const
+void extraDisplayHarmonyDetailsAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "extraShowHarmonyDetailsAtom:" <<
+    "extraDisplayHarmonyDetailsAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -735,7 +731,7 @@ void extraShowHarmonyDetailsAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void extraShowHarmonyDetailsAtom::printAtomWithVariableOptionsValues (
+void extraDisplayHarmonyDetailsAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -743,7 +739,7 @@ void extraShowHarmonyDetailsAtom::printAtomWithVariableOptionsValues (
 }
 
 //______________________________________________________________________________
-S_extraShowHarmonyAnalysisAtom extraShowHarmonyAnalysisAtom::create (
+S_extraDisplayHarmonyAnalysisAtom extraDisplayHarmonyAnalysisAtom::create (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
@@ -751,8 +747,8 @@ S_extraShowHarmonyAnalysisAtom extraShowHarmonyAnalysisAtom::create (
   const std::string& variableName,
   std::string&       stringVariable)
 {
-  extraShowHarmonyAnalysisAtom* o = new
-    extraShowHarmonyAnalysisAtom (
+  extraDisplayHarmonyAnalysisAtom* o = new
+    extraDisplayHarmonyAnalysisAtom (
       longName,
       shortName,
       description,
@@ -763,7 +759,7 @@ S_extraShowHarmonyAnalysisAtom extraShowHarmonyAnalysisAtom::create (
   return o;
 }
 
-extraShowHarmonyAnalysisAtom::extraShowHarmonyAnalysisAtom (
+extraDisplayHarmonyAnalysisAtom::extraDisplayHarmonyAnalysisAtom (
   const std::string& shortName,
   const std::string& longName,
   const std::string& description,
@@ -783,17 +779,17 @@ extraShowHarmonyAnalysisAtom::extraShowHarmonyAnalysisAtom (
     oahElementHelpOnlyKind::kElementHelpOnlyYes;
 }
 
-extraShowHarmonyAnalysisAtom::~extraShowHarmonyAnalysisAtom ()
+extraDisplayHarmonyAnalysisAtom::~extraDisplayHarmonyAnalysisAtom ()
 {}
 
-void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
+void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> oahAtom is of type 'extraShowHarmonyAnalysisAtom'" <<
+      "==> oahAtom is of type 'extraDisplayHarmonyAnalysisAtom'" <<
       std::endl;
   }
 #endif
@@ -804,7 +800,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> oahAtom is of type 'extraShowHarmonyAnalysisAtom'" <<
+      "==> oahAtom is of type 'extraDisplayHarmonyAnalysisAtom'" <<
       ", theString = \"" << theString << "\"" <<
       std::endl;
   }
@@ -988,25 +984,25 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
     inversion);
 }
 
-void extraShowHarmonyAnalysisAtom::acceptIn (basevisitor* v)
+void extraDisplayHarmonyAnalysisAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowHarmonyAnalysisAtom::acceptIn ()" <<
+      ".\\\" ==> extraDisplayHarmonyAnalysisAtom::acceptIn ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_extraShowHarmonyAnalysisAtom>*
+  if (visitor<S_extraDisplayHarmonyAnalysisAtom>*
     p =
-      dynamic_cast<visitor<S_extraShowHarmonyAnalysisAtom>*> (v)) {
-        S_extraShowHarmonyAnalysisAtom elem = this;
+      dynamic_cast<visitor<S_extraDisplayHarmonyAnalysisAtom>*> (v)) {
+        S_extraDisplayHarmonyAnalysisAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching extraShowHarmonyAnalysisAtom::visitStart ()" <<
+            ".\\\" ==> Launching extraDisplayHarmonyAnalysisAtom::visitStart ()" <<
             std::endl;
         }
 #endif
@@ -1014,25 +1010,25 @@ void extraShowHarmonyAnalysisAtom::acceptIn (basevisitor* v)
   }
 }
 
-void extraShowHarmonyAnalysisAtom::acceptOut (basevisitor* v)
+void extraDisplayHarmonyAnalysisAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowHarmonyAnalysisAtom::acceptOut ()" <<
+      ".\\\" ==> extraDisplayHarmonyAnalysisAtom::acceptOut ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_extraShowHarmonyAnalysisAtom>*
+  if (visitor<S_extraDisplayHarmonyAnalysisAtom>*
     p =
-      dynamic_cast<visitor<S_extraShowHarmonyAnalysisAtom>*> (v)) {
-        S_extraShowHarmonyAnalysisAtom elem = this;
+      dynamic_cast<visitor<S_extraDisplayHarmonyAnalysisAtom>*> (v)) {
+        S_extraDisplayHarmonyAnalysisAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching extraShowHarmonyAnalysisAtom::visitEnd ()" <<
+            ".\\\" ==> Launching extraDisplayHarmonyAnalysisAtom::visitEnd ()" <<
             std::endl;
         }
 #endif
@@ -1040,23 +1036,23 @@ void extraShowHarmonyAnalysisAtom::acceptOut (basevisitor* v)
   }
 }
 
-void extraShowHarmonyAnalysisAtom::browseData (basevisitor* v)
+void extraDisplayHarmonyAnalysisAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> extraShowHarmonyAnalysisAtom::browseData ()" <<
+      ".\\\" ==> extraDisplayHarmonyAnalysisAtom::browseData ()" <<
       std::endl;
   }
 #endif
 }
 
-void extraShowHarmonyAnalysisAtom::print (std::ostream& os) const
+void extraDisplayHarmonyAnalysisAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "extraShowHarmonyAnalysisAtom:" <<
+    "extraDisplayHarmonyAnalysisAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -1067,7 +1063,7 @@ void extraShowHarmonyAnalysisAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void extraShowHarmonyAnalysisAtom::printAtomWithVariableOptionsValues (
+void extraDisplayHarmonyAnalysisAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1114,7 +1110,7 @@ and around the '=' sign, otherwise they can be dispensed with.)",
 harmoniesExtraOahGroup::~harmoniesExtraOahGroup ()
 {}
 
-void harmoniesExtraOahGroup::initializeExtraShowAllHarmoniesStructuresOptions ()
+void harmoniesExtraOahGroup::initializeExtraDisplayAllHarmoniesStructuresOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -1129,12 +1125,12 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      extraShowAllHarmoniesStructuresAtom::create (
-        "show-harmonies-structures", "scs",
+      extraDisplayAllHarmoniesStructuresAtom::create (
+        "display-harmonies-structures", "dhs",
 R"(Write all known harmonies structures to standard output.)"));
 }
 
-void harmoniesExtraOahGroup::initializeExtraShowAllHarmoniesContentsOptions ()
+void harmoniesExtraOahGroup::initializeExtraDisplayAllHarmoniesContentsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -1153,8 +1149,8 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      extraShowAllHarmoniesContentsAtom::create (
-        "show-all-harmonies-contents", "sacc",
+      extraDisplayAllHarmoniesContentsAtom::create (
+        "display-all-harmonies-contents", "dahc",
 R"(Write all harmonies contents for the given diatonic (semitones) PITCH,
 supplied in the current language to standard output.)",
         "PITCH",
@@ -1162,7 +1158,7 @@ supplied in the current language to standard output.)",
         fHarmoniesRootAsString));
 }
 
-void harmoniesExtraOahGroup::initializeExtraShowHarmonyDetailsOptions ()
+void harmoniesExtraOahGroup::initializeExtraDisplayHarmonyDetailsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -1177,8 +1173,8 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      extraShowHarmonyDetailsAtom::create (
-        "show-harmony-details", "scd",
+      extraDisplayHarmonyDetailsAtom::create (
+        "display-harmony-details", "dhd",
         regex_replace (
 R"(Write the details of the harmony for the given diatonic (semitones) pitch
 in the current language and the given harmony to standard output.
@@ -1191,7 +1187,7 @@ There can be spaces around the ':', in which case quoting is needed.")",
         fHarmoniesRootAsString));
 }
 
-void harmoniesExtraOahGroup::initializeExtraShowHarmonyAnalysisOptions ()
+void harmoniesExtraOahGroup::initializeExtraDisplayHarmonyAnalysisOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -1206,8 +1202,8 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      extraShowHarmonyAnalysisAtom::create (
-        "show-harmony-analysis", "sca", // -sca "c dommin9 0"
+      extraDisplayHarmonyAnalysisAtom::create (
+        "display-harmony-analysis", "dha", // -sca "c dommin9 0"
         regex_replace (
 R"(Write an analysis of the harmony for the given diatonic (semitones) pitch
 in the current language and the given harmony to standard output.
@@ -1223,19 +1219,19 @@ void harmoniesExtraOahGroup::initializeHarmoniesExtraOahGroup ()
 {
   // show all harmonies structures
   // --------------------------------------
-  initializeExtraShowAllHarmoniesStructuresOptions ();
+  initializeExtraDisplayAllHarmoniesStructuresOptions ();
 
   // show all harmonies contents
   // --------------------------------------
-  initializeExtraShowAllHarmoniesContentsOptions ();
+  initializeExtraDisplayAllHarmoniesContentsOptions ();
 
   // show harmony details
   // --------------------------------------
-  initializeExtraShowHarmonyDetailsOptions ();
+  initializeExtraDisplayHarmonyDetailsOptions ();
 
   // show harmony analysis
   // --------------------------------------
-  initializeExtraShowHarmonyAnalysisOptions ();
+  initializeExtraDisplayHarmonyAnalysisOptions ();
 }
 
 //______________________________________________________________________________

@@ -19,7 +19,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP xml2brlManPageGenerateAtom : public oahAtom
+class EXP xml2brlManPageGenerateAtom : public oahValueLessAtom
 {
   public:
 
@@ -27,10 +27,10 @@ class EXP xml2brlManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<xml2brlManPageGenerateAtom> create (
-                            const std::string& longName,
-                            const std::string& shortName,
-                            const std::string& description,
-                            const S_oahVisitor&  theOahVisitor);
+                            const std::string&  longName,
+                            const std::string&  shortName,
+                            const std::string&  description,
+                            const S_oahVisitor& theOahVisitor);
 
   protected:
 
@@ -38,10 +38,10 @@ class EXP xml2brlManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
                           xml2brlManPageGenerateAtom (
-                            const std::string& longName,
-                            const std::string& shortName,
-                            const std::string& description,
-                            const S_oahVisitor&  theOahVisitor);
+                            const std::string&  longName,
+                            const std::string&  shortName,
+                            const std::string&  description,
+                            const S_oahVisitor& theOahVisitor);
 
     virtual               ~xml2brlManPageGenerateAtom ();
 
@@ -55,7 +55,7 @@ class EXP xml2brlManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
   public:
 

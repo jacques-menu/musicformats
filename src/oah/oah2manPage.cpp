@@ -15,7 +15,7 @@
 
 #include "oah2manPage.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 #include "oahOah.h"
@@ -26,7 +26,7 @@ namespace MusicFormats
 //________________________________________________________________________
 oah2manPage::oah2manPage (
   const S_oahHandler& handler,
-  std::ostream&           manPageOutputStream)
+  std::ostream&       manPageOutputStream)
     : oahVisitor (
         handler),
       fManPageOutputStream (

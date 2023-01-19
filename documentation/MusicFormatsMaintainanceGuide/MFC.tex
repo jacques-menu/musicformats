@@ -843,7 +843,7 @@ Passes history:
 
 In \oahBoth{oahAtomsCollection}, \class{oahVersionAtom} contains method \methodName{printVersion}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
+class EXP oahVersionAtom : public oahPureHelpValueLessAtom
 {
 	// ... ... ...
 
@@ -852,7 +852,7 @@ class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
 	// ... ... ...
 
@@ -869,7 +869,7 @@ class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
 
 The option is applied by \method{oahVersionAtom}{applyElement}:
 \begin{lstlisting}[language=CPlusPlus]
-void oahVersionAtom::applyElement (std::ostream& os)
+void oahVersionAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

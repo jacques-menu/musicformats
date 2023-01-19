@@ -13,7 +13,7 @@
 
 #include "oahBasicOah2manPage.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfServices.h"
 
@@ -25,7 +25,7 @@ namespace MusicFormats
 //________________________________________________________________________
 basicOah2manPage::basicOah2manPage (
   const S_oahHandler& handler,
-  std::ostream&           manPageOutputStream)
+  std::ostream&       manPageOutputStream)
     : oah2manPage (
         handler,
         manPageOutputStream)
@@ -286,13 +286,13 @@ void basicOah2manPage::visitEnd (S_oahAtomStoringAValue& elt)
 }
 
 //________________________________________________________________________
-void basicOah2manPage::visitStart (S_oahAtomAlias& elt)
+void basicOah2manPage::visitStart (S_oahValueLessAtomAlias& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
-      ".\\\" --> Start visiting oahAtomAlias" <<
+      ".\\\" --> Start visiting oahValueLessAtomAlias" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
   }
@@ -300,13 +300,13 @@ void basicOah2manPage::visitStart (S_oahAtomAlias& elt)
 
 }
 
-void basicOah2manPage::visitEnd (S_oahAtomAlias& elt)
+void basicOah2manPage::visitEnd (S_oahValueLessAtomAlias& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
-      ".\\\" --> End visiting oahAtomAlias" <<
+      ".\\\" --> End visiting oahValueLessAtomAlias" <<
       " \"" << elt->fetchNames () << "\"" <<
       std::endl;
   }
@@ -770,13 +770,13 @@ void basicOah2manPage::visitEnd (S_oahFactorizedStringAtom& elt)
 }
 
 //________________________________________________________________________
-void basicOah2manPage::visitStart (S_oahStringWithDefaultValueAtom& elt)
+void basicOah2manPage::visitStart (S_oahDefaultedStringAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
-      ".\\\" --> Start visiting oahStringWithDefaultValueAtom '" <<
+      ".\\\" --> Start visiting oahDefaultedStringAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
@@ -785,13 +785,13 @@ void basicOah2manPage::visitStart (S_oahStringWithDefaultValueAtom& elt)
 #endif
 }
 
-void basicOah2manPage::visitEnd (S_oahStringWithDefaultValueAtom& elt)
+void basicOah2manPage::visitEnd (S_oahDefaultedStringAtom& elt)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       std::endl <<
-      ".\\\" --> End visiting oahStringWithDefaultValueAtom '" <<
+      ".\\\" --> End visiting oahDefaultedStringAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<

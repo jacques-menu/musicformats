@@ -12,7 +12,7 @@
 #ifndef ___harmoniesExtraOah2manPage___
 #define ___harmoniesExtraOah2manPage___
 
-#include "mfEnableHarmoniesExtraSetting.h"
+#include "mfStaticSettings.h"
 
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
 
@@ -27,36 +27,36 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP harmoniesExtraOah2manPage : virtual public oah2manPage,
 
-  public visitor<S_extraShowAllHarmoniesStructuresAtom>,
+  public visitor<S_extraDisplayAllHarmoniesStructuresAtom>,
 
-  public visitor<S_extraShowAllHarmoniesContentsAtom>,
+  public visitor<S_extraDisplayAllHarmoniesContentsAtom>,
 
-  public visitor<S_extraShowHarmonyDetailsAtom>,
+  public visitor<S_extraDisplayHarmonyDetailsAtom>,
 
-  public visitor<S_extraShowHarmonyAnalysisAtom>
+  public visitor<S_extraDisplayHarmonyAnalysisAtom>
 
 {
   public:
 
                           harmoniesExtraOah2manPage (
                             const S_oahHandler& handler,
-                            std::ostream&           manPageOutputStream);
+                            std::ostream&       manPageOutputStream);
 
     virtual               ~harmoniesExtraOah2manPage ();
 
   protected:
 
-    virtual void          visitStart (S_extraShowAllHarmoniesStructuresAtom& elt);
-    virtual void          visitEnd   (S_extraShowAllHarmoniesStructuresAtom& elt);
+    virtual void          visitStart (S_extraDisplayAllHarmoniesStructuresAtom& elt);
+    virtual void          visitEnd   (S_extraDisplayAllHarmoniesStructuresAtom& elt);
 
-    virtual void          visitStart (S_extraShowAllHarmoniesContentsAtom& elt);
-    virtual void          visitEnd   (S_extraShowAllHarmoniesContentsAtom& elt);
+    virtual void          visitStart (S_extraDisplayAllHarmoniesContentsAtom& elt);
+    virtual void          visitEnd   (S_extraDisplayAllHarmoniesContentsAtom& elt);
 
-    virtual void          visitStart (S_extraShowHarmonyDetailsAtom& elt);
-    virtual void          visitEnd   (S_extraShowHarmonyDetailsAtom& elt);
+    virtual void          visitStart (S_extraDisplayHarmonyDetailsAtom& elt);
+    virtual void          visitEnd   (S_extraDisplayHarmonyDetailsAtom& elt);
 
-    virtual void          visitStart (S_extraShowHarmonyAnalysisAtom& elt);
-    virtual void          visitEnd   (S_extraShowHarmonyAnalysisAtom& elt);
+    virtual void          visitStart (S_extraDisplayHarmonyAnalysisAtom& elt);
+    virtual void          visitEnd   (S_extraDisplayHarmonyAnalysisAtom& elt);
 };
 typedef SMARTP<harmoniesExtraOah2manPage> S_harmoniesExtraOah2manPage;
 

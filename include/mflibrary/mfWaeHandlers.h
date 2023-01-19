@@ -53,9 +53,9 @@ class EXP mfWaeHandler : public waeHandler
 
     // default versions are in english, sub-classes override them for other languages
 
-    // pass numbers
+    // pass names
 
-    virtual std::string   pass (mfPassIDKind passIDKind) const;
+    virtual std::string   passIDKindAsString (mfPassIDKind passIDKind) const;
 
     virtual std::string   pass1 () const;
 
@@ -79,6 +79,10 @@ class EXP mfWaeHandler : public waeHandler
     virtual std::string   summary () const;
     virtual std::string   names () const;
     virtual std::string   slices () const;
+
+    // quitting after passes
+
+    virtual std::string   quittingAfterPass (mfPassIDKind passIDKind) const;
 
     // OAH
 

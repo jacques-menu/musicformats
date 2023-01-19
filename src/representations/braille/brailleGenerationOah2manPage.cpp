@@ -17,7 +17,7 @@
 
 #include "brailleGenerationOah2manPage.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 #include "oahOah.h"
@@ -29,7 +29,7 @@ namespace MusicFormats
 //________________________________________________________________________
 brailleGenerationOah2manPage::brailleGenerationOah2manPage (
   const S_oahHandler& handler,
-  std::ostream&           manPageOutputStream)
+  std::ostream&       manPageOutputStream)
     : oah2manPage (
         handler,
         manPageOutputStream)

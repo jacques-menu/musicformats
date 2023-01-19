@@ -19,7 +19,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -303,19 +303,13 @@ oahDisplayMsdlKeywordsInLanguageAtom::oahDisplayMsdlKeywordsInLanguageAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& serviceName)
-  : oahPureHelpAtomExpectingAValue (
+  : oahPureHelpValueFittedAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       serviceName)
 {
-  this->setElementValueKind (
-    oahElementValueKind::kElementValueMandatory);
-
-  fElementHelpOnlyKind =
-    oahElementHelpOnlyKind::kElementHelpOnlyYes;
-
   this->setMultipleOccurrencesAllowed ();
 }
 
@@ -515,19 +509,13 @@ oahDisplayMsdlTokensInLanguageAtom::oahDisplayMsdlTokensInLanguageAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& serviceName)
-  : oahPureHelpAtomExpectingAValue (
+  : oahPureHelpValueFittedAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       serviceName)
 {
-  this->setElementValueKind (
-    oahElementValueKind::kElementValueMandatory);
-
-  fElementHelpOnlyKind =
-    oahElementHelpOnlyKind::kElementHelpOnlyYes;
-
   this->setMultipleOccurrencesAllowed ();
 }
 

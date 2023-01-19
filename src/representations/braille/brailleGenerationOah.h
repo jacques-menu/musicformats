@@ -39,7 +39,7 @@ EXP extern const std::string K_BRAILLE_BYTE_ORDERING_KIND_LONG_NAME;
 EXP extern const std::string K_BRAILLE_BYTE_ORDERING_KIND_SHORT_NAME;
 
 //______________________________________________________________________________
-class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
+class EXP brailleOutputKindAtom : public oahAtomImplicitlySettingAVariable
 {
   public:
 
@@ -47,10 +47,10 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<brailleOutputKindAtom> create (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    variableName,
                             bsrBrailleOutputKind& brailleOutputKindVariable,
                             bsrBrailleOutputKind  brailleOutputKindValue);
 
@@ -60,10 +60,10 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // ------------------------------------------------------
 
                           brailleOutputKindAtom (
-                            const std::string&         longName,
-                            const std::string&         shortName,
-                            const std::string&         description,
-                            const std::string&         variableName,
+                            const std::string&    longName,
+                            const std::string&    shortName,
+                            const std::string&    description,
+                            const std::string&    variableName,
                             bsrBrailleOutputKind& brailleOutputKindVariable,
                             bsrBrailleOutputKind  brailleOutputKindValue);
 
@@ -79,7 +79,10 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override
+                              { setImplicitVariable (os); }
+
+    void                  setImplicitVariable (std::ostream& os) override;
 
   public:
 

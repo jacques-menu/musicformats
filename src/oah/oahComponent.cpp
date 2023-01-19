@@ -55,7 +55,7 @@ S_mfcOahComponent createOahComponent ()
           mfcVersionNumber::createFromString ("0.9.66"),
           "October 4, 2022",
           std::list<std::string> {
-            "Added oahElementValueKind::kElementValueUnknown to fix an initialization issue"
+            "Added oahElementValueKind::kElementValue_UNKNOWN to fix an initialization issue"
           }
       ));
 

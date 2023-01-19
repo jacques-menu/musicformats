@@ -16,7 +16,7 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -268,7 +268,7 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
                      multiGenerationOutputKindVariable,
   mfMultiGenerationOutputKind
                      multiGenerationOutputKindValue)
-  : oahAtomImplicitlyStoringAValue (
+  : oahAtomImplicitlySettingAVariable (
       longName,
       shortName,
       description,
@@ -285,7 +285,7 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
 mfMultiGenerationOutputKindAtom::~mfMultiGenerationOutputKindAtom ()
 {}
 
-void mfMultiGenerationOutputKindAtom::applyElement (std::ostream& os)
+void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

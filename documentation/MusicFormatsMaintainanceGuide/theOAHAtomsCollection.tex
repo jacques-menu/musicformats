@@ -7,14 +7,14 @@
 These handly general-purpose OAH atoms are used in \mf\ itself. They are defined in \oahBoth{oahAtomsCollection}:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/oah > grep class   oahAtomsCollection.h
-class EXP oahAtomAlias : public oahAtom
+class EXP oahValueLessAtomAlias : public oahAtom
 class EXP oahMacroAtom : public oahAtom
-class EXP oahOptionsUsageAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahHelpAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahHelpSummaryAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahAboutAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahContactAtom : public oahPureHelpAtomWithoutAValue
+class EXP oahOptionsUsageAtom : public oahPureHelpValueLessAtom
+class EXP oahHelpAtom : public oahPureHelpValueLessAtom
+class EXP oahHelpSummaryAtom : public oahPureHelpValueLessAtom
+class EXP oahAboutAtom : public oahPureHelpValueLessAtom
+class EXP oahVersionAtom : public oahPureHelpValueLessAtom
+class EXP oahContactAtom : public oahPureHelpValueLessAtom
 class EXP oahBooleanAtom : public oahAtom
 class EXP oahTwoBooleansAtom : public oahBooleanAtom
 class EXP oahThreeBooleansAtom : public oahBooleanAtom
@@ -25,7 +25,7 @@ class EXP oahTwoIntegersAtom : public oahIntegerAtom
 class EXP oahFloatAtom : public oahAtomStoringAValue
 class EXP oahStringAtom : public oahAtomStoringAValue
 class EXP oahFactorizedStringAtom : public oahAtom
-class EXP oahStringWithDefaultValueAtom : public oahStringAtom
+class EXP oahDefaultedStringAtom : public oahStringAtom
 class EXP oahRationalAtom : public oahAtomStoringAValue
 class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 class EXP oahColorRGBAtom : public oahAtomStoringAValue
@@ -37,9 +37,9 @@ class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
 class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
 class EXP oahLengthAtom : public oahAtomStoringAValue
 class EXP oahMidiTempoAtom : public oahAtomStoringAValue
-class EXP oahOptionNameHelpAtom : public oahStringWithDefaultValueAtom
-class EXP oahQueryOptionNameAtom : public oahPureHelpAtomExpectingAValue
-class EXP oahFindStringAtom : public oahPureHelpAtomExpectingAValue
+class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
+class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
+class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
 \end{lstlisting}
 
 
@@ -62,9 +62,9 @@ class EXP oahMacroAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  appendAtomToMacro (S_oahAtom atom);
+    void                  oahValueLessAtomAlias (S_oahAtom atom);
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
 
 
@@ -73,13 +73,13 @@ class EXP oahMacroAtom : public oahAtom
     // private fields
     // ------------------------------------------------------
 
-     std::list<S_oahAtom>      fMacroAtomsList;
+     std::list<S_oahAtom>      fMacroValueLessAtomsList;
 };
 \end{lstlisting}
 
-Populating \field{oahMacroAtom}{fMacroAtomsList} is straightfoward:
+Populating \field{oahMacroAtom}{fMacroValueLessAtomsList} is straightfoward:
 \begin{lstlisting}[language=CPlusPlus]
-void oahMacroAtom::appendAtomToMacro (S_oahAtom atom)
+void oahMacroAtom::oahValueLessAtomAlias (S_oahAtom atom)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -88,13 +88,13 @@ void oahMacroAtom::appendAtomToMacro (S_oahAtom atom)
     atom != nullptr,
     "atom is null");
 
-  fMacroAtomsList.push_back (atom);
+  fMacroValueLessAtomsList.push_back (atom);
 }
 \end{lstlisting}
 
 Applying the macro atom is done in \method{oahMacroAtom}{applyElement}:
 \begin{lstlisting}[language=CPlusPlus]
-void oahMacroAtom::applyElement (std::ostream& os)
+void oahMacroAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -106,8 +106,8 @@ void oahMacroAtom::applyElement (std::ostream& os)
 
   for (
     std::list<S_oahAtom>::const_iterator i =
-      fMacroAtomsList.begin ();
-    i != fMacroAtomsList.end ();
+      fMacroValueLessAtomsList.begin ();
+    i != fMacroValueLessAtomsList.end ();
     ++i
   ) {
     S_oahAtom atom = (*i);
@@ -122,9 +122,9 @@ void oahMacroAtom::applyElement (std::ostream& os)
 //         applyAtomWithValue (theString, os);
     }
     else {
-      // valueless atom
+      // value-less atom
       atom->
-        applyElement (os);
+        applyValueLessAtom (os);
     }
   } // for
 }
@@ -172,7 +172,7 @@ R"()",
 
   // populate it
   autoUTFd8MacroAtom->
-    appendAtomToMacro (
+    oahValueLessAtomAlias (
       gGlobalOutputFileOahGroup->getAutoOutputFileNameAtom ());
 
   fBrailleOutputKindAtom->
@@ -180,11 +180,11 @@ R"()",
       "utf8d",
       gLogStream);
   autoUTFd8MacroAtom->
-    appendAtomToMacro (
+    oahValueLessAtomAlias (
       fBrailleOutputKindAtom);
 
   autoUTFd8MacroAtom->
-    appendAtomToMacro (
+    oahValueLessAtomAlias (
       fUseEncodingInFileNameAtom);
 }
 \end{lstlisting}

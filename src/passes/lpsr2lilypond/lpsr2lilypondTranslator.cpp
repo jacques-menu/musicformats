@@ -13,7 +13,7 @@
 #include <cmath>
 #include <string>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -45,7 +45,7 @@
 #include "waeInterface.h"
 #include "lpsr2lilypondWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 #include "mfIndentedTextOutput.h"

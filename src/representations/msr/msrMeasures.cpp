@@ -11,11 +11,11 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfRational.h"
@@ -5065,7 +5065,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
       gLogStream <<
-        "Reducing the sounding whole notes of figured bass FOO " <<
+        "Reducing the sounding whole notes of figured bass " <<
         previousFiguredBass->asString () <<
         " from " <<
         previousFiguredBassSoundingWholeNotes <<
@@ -6829,7 +6829,7 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
-//         "Reducing the sounding whole notes of harmony FOO " <<
+//         "Reducing the sounding whole notes of harmony " <<
 //         previousHarmony->asString () <<
 //         " from " <<
 //         previousHarmonySoundingWholeNotes <<

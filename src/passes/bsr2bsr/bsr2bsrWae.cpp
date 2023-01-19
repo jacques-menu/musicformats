@@ -9,11 +9,12 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfStaticSettings.h"
+
 #include "mfIndentedTextOutput.h"
 
-#include "mfEnableAbortToDebugErrorsSetting.h"
-
 #include "waeInterface.h"
+
 #include "bsr2bsrWae.h"
 
 

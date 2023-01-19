@@ -19,7 +19,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -1214,6 +1214,7 @@ R"()",
 R"(Write the contents of the LPSR data to standard error.)",
         "fDisplayLpsr",
         fDisplayLpsr);
+        
   subGroup->
     appendAtomToSubGroup (
       DisplayLpsrBooleanAtom);
@@ -1300,6 +1301,7 @@ By default, LilyPond uses 297 mm (A4 format).)",
       "HEIGHT",
       "fPaperHeight",
       fPaperHeight);
+        
   subGroup->
     appendAtomToSubGroup (
       fPaperHeightAtom);
@@ -1319,6 +1321,7 @@ By default, LilyPond uses 210 mm (A4 format).)",
       "WIDTH",
       "fPaperWidth",
       fPaperWidth);
+        
   subGroup->
     appendAtomToSubGroup (
       fPaperWidthAtom);
@@ -1338,6 +1341,7 @@ By default, this is left to LilyPond'.)",
       "MARGIN",
       "fPaperLeftMargin",
       fPaperLeftMargin);
+        
   subGroup->
     appendAtomToSubGroup (
       fPaperLeftMarginAtom);
@@ -1357,6 +1361,7 @@ By default, this is left to LilyPond'.)",
       "MARGIN",
       "fPaperRightMargin",
       fPaperRightMargin);
+        
   subGroup->
     appendAtomToSubGroup (
       fPaperRightMarginAtom);
@@ -1376,6 +1381,7 @@ By default, this is left to LilyPond'.)",
       "MARGIN",
       "fPaperTopMargin",
       fPaperTopMargin);
+        
   subGroup->
     appendAtomToSubGroup (
       fPaperTopMarginAtom);
@@ -1395,6 +1401,7 @@ By default, this is left to LilyPond'.)",
       "MARGIN",
       "fPaperBottomMargin",
       fPaperBottomMargin);
+        
   subGroup->
     appendAtomToSubGroup (
       fPaperBottomMarginAtom);
@@ -1402,7 +1409,8 @@ By default, this is left to LilyPond'.)",
 /* JMI superflous
   // a4
 
-   subGroup->
+ 
+  subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
         "a4", "",

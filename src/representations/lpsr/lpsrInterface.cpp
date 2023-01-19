@@ -12,7 +12,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -22,7 +22,7 @@
 
 #include "lpsrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahEarlyOptions.h"
 
@@ -75,7 +75,7 @@ void displayLpsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
     gWaeHandler->displayTheLPSRAsText (),
     mfTimingItemKind::kOptional,
     startClock,
@@ -126,7 +126,7 @@ void displayLpsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
     gWaeHandler->displayTheLPSRAsText ()
       + ", " +
     gWaeHandler->fullVersion (),

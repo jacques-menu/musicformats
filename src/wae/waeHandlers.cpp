@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -52,7 +52,7 @@ void waeHandler::waeWarning (
 
     gLogStream <<
       "*** " << context << " warning *** " <<
-      inputSourceName << ":" << inputLineNumber << ": " <<message <<
+      inputSourceName << ":" << inputLineNumber << ": " << message <<
       std::endl;
 
     fWarningsInputLineNumbers.insert (inputLineNumber);
@@ -74,7 +74,7 @@ void waeHandler::waeInternalWarning (
 
     gLogStream <<
       "*** " << context << " INTERNAL warning *** " <<
-      inputSourceName << ":" << inputLineNumber << ": " <<message <<
+      inputSourceName << ":" << inputLineNumber << ": " << message <<
       std::endl;
 
     fWarningsInputLineNumbers.insert (
@@ -258,6 +258,102 @@ void waeHandler::waeInternalErrorWithException (
     message);
 
   throw *except;
+}
+
+//______________________________________________________________________________
+void waeHandler::waeTrace (
+//   const std::string& context,
+  std::ostream&      os,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message)
+{
+  mfPassIDKind
+    earlyTraceOnlyPass =
+      gGlobalOahEarlyOptions.getEarlyTraceOnlyPass (),
+    globalCurrentPassIDKind =
+      getGlobalCurrentPassIDKind ();
+
+  os <<
+    "--> earlyTraceOnlyPass:      " << earlyTraceOnlyPass << std::endl <<
+    "--> globalCurrentPassIDKind: " << globalCurrentPassIDKind << std::endl <<
+    std::endl;
+
+  // should we actually produce the trace?
+  Bool doTrace;
+
+  switch (globalCurrentPassIDKind) {
+    case mfPassIDKind::kMfPassID_UNKNOWN:
+      os <<
+        "waeHandler::waeTrace: " <<
+        "globalCurrentPassIDKind = " << globalCurrentPassIDKind <<
+        std::endl;
+      break;
+
+    case mfPassIDKind::kMfPassID_ALL:
+      doTrace = true;
+      break;
+
+//     case mfPassIDKind::kMfPassID_0:
+//       break;
+//
+//     case mfPassIDKind::kMfPassID_1:
+//       break;
+//
+//     case mfPassIDKind::kMfPassID_2:
+//       break;
+//     case mfPassIDKind::kMfPassID_2a:
+//       break;
+//     case mfPassIDKind::kMfPassID_2b:
+//       break;
+//
+//     case mfPassIDKind::kMfPassID_3:
+//       break;
+//     case mfPassIDKind::kMfPassID_3a:
+//       break;
+//     case mfPassIDKind::kMfPassID_3b:
+//       break;
+//
+//     case mfPassIDKind::kMfPassID_4:
+//       break;
+//     case mfPassIDKind::kMfPassID_4a:
+//       break;
+//     case mfPassIDKind::kMfPassID_4b:
+//       break;
+//
+//     case mfPassIDKind::kMfPassID_5:
+//       break;
+
+    default:
+      doTrace =
+        earlyTraceOnlyPass == globalCurrentPassIDKind;
+  } // switch
+
+  // do trace if relevant
+  if (doTrace) {
+    ++gIndenter;
+
+    os <<
+  //     '[' << context << "] " <<
+//       inputSourceName << ":" << inputLineNumber << ": " <<
+      message <<
+      std::endl;
+
+    --gIndenter;
+  }
+}
+
+void waeHandler::waeTrace (
+//   const std::string& context,
+  const std::string& inputSourceName,
+  int                inputLineNumber,
+  const std::string& message)
+{
+  waeTrace (
+    gLogStream,
+    inputSourceName,
+    inputLineNumber,
+    message);
 }
 
 //______________________________________________________________________________
