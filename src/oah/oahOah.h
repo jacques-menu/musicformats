@@ -90,7 +90,7 @@ class EXP languageOahAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-//     mfLanguageKind&       fLanguageKindVariable;
+    mfLanguageKind&       fLanguageKindVariable;
 
     Bool                  fOptionHasBeenSelected;
 };
@@ -98,7 +98,7 @@ typedef SMARTP<languageOahAtom> S_languageOahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_languageOahAtom& elt);
 
 //______________________________________________________________________________
-class EXP insiderOahAtom : public oahAtom
+class EXP insiderOahAtom : public oahValueLessAtom
 {
   public:
 
@@ -132,7 +132,7 @@ class EXP insiderOahAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
   public:
 
@@ -163,7 +163,7 @@ typedef SMARTP<insiderOahAtom> S_insiderOahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_insiderOahAtom& elt);
 
 //______________________________________________________________________________
-class EXP regularOahAtom : public oahAtom
+class EXP regularOahAtom : public oahValueLessAtom
 {
   public:
 
@@ -197,7 +197,7 @@ class EXP regularOahAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
   public:
 
@@ -227,6 +227,81 @@ class EXP regularOahAtom : public oahAtom
 };
 typedef SMARTP<regularOahAtom> S_regularOahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_regularOahAtom& elt);
+
+//______________________________________________________________________________
+class EXP passIDOahAtom : public oahAtomStoringAValue
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<passIDOahAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            mfPassIDKind&      languageKindVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          passIDOahAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            mfPassIDKind  &    languageKindVariable);
+
+    virtual               ~passIDOahAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const std::string& theString,
+                            std::ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+    // print
+    // ------------------------------------------------------
+
+    void                  print (std::ostream& os) const override;
+
+    void                  printAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+
+    // private fields
+    // ------------------------------------------------------
+
+//     mfPassIDKind&        fLanguageKindVariable;
+
+    Bool                  fOptionHasBeenSelected;
+};
+typedef SMARTP<passIDOahAtom> S_passIDOahAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_passIDOahAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahOahGroup : public oahGroup

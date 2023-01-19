@@ -290,7 +290,7 @@ S_mfcLibraryComponent createLibraryComponent ()
           std::list<std::string> {
             "Fixed an issue in strings quoting",
             "Finalized the components terminology",
-            "Finalized oahAtomImplicitlyStoringAValue"
+            "Finalized oahAtomImplicitlySettingAVariable"
           }
       ));
 

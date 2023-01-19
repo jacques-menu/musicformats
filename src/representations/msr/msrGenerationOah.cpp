@@ -17,7 +17,7 @@
 
 #include "mfConstants.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 #include "msrOah.h"

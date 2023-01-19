@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
@@ -21,7 +21,7 @@
 
 #include "msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
@@ -1960,10 +1960,10 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 
     if (segmentElementsListSize == 0) {
       gLogStream <<
-        ", as first measure FOO"; // JMI
+        ", as first measure";
     }
 
-/* JMI
+/* JMI v0.9.66
     else
       gLogStream <<
       ", after measure number '" << currentMeasureNumber << "'";

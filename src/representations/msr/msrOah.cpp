@@ -18,7 +18,7 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -746,6 +746,7 @@ R"(Write the contents of the first MSR skeleton data to standard error.)",
 R"(Write the contents of the first MSR data to standard error.)",
         "fDisplayFirstMsr",
         fDisplayFirstMsr);
+        
   subGroup->
     appendAtomToSubGroup (
       DisplayFirstMsrBooleanAtom);
@@ -781,6 +782,7 @@ R"(Write the contents of the first MSR data slices to standard error.)",
 R"(Write the contents of the second MSR data to standard error.)",
         "fDisplaySecondMsr",
         fDisplaySecondMsr);
+        
   subGroup->
     appendAtomToSubGroup (
       displaySecondMsrBooleanAtom);
@@ -1047,7 +1049,6 @@ R"()",
 
   // show harmonies voices
   // --------------------------------------
-
 
   subGroup->
     appendAtomToSubGroup (

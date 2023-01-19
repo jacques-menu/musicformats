@@ -16,7 +16,7 @@
 
 #include "bsrEnumTypes.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahBasicTypes.h"
 

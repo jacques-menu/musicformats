@@ -13,7 +13,7 @@
 
 #include "msdl2brailleOah2manPage.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 

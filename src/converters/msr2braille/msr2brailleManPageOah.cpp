@@ -14,7 +14,7 @@
 
 #include <regex>
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 #include "oahOah.h"
@@ -29,10 +29,10 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msr2brailleManPageGenerateAtom msr2brailleManPageGenerateAtom::create (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
 {
   msr2brailleManPageGenerateAtom* o = new
     msr2brailleManPageGenerateAtom (
@@ -45,15 +45,14 @@ S_msr2brailleManPageGenerateAtom msr2brailleManPageGenerateAtom::create (
 }
 
 msr2brailleManPageGenerateAtom::msr2brailleManPageGenerateAtom (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
-  : oahAtom (
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
+      description)
 {
   fOahVisitor = theOahVisitor;
 }
@@ -61,7 +60,7 @@ msr2brailleManPageGenerateAtom::msr2brailleManPageGenerateAtom (
 msr2brailleManPageGenerateAtom::~msr2brailleManPageGenerateAtom ()
 {}
 
-void msr2brailleManPageGenerateAtom::applyElement (std::ostream& os)
+void msr2brailleManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -179,7 +178,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2brailleManPageGenerateA
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -371,7 +370,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2brailleManPageOahGroup&
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

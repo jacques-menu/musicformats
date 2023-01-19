@@ -47,9 +47,9 @@ class EXP mfWaeHandlerGerman : public mfWaeHandler
     // public services
     // ------------------------------------------------------
 
-    // pass numbers
+    // pass names
 
-    virtual std::string   pass (mfPassIDKind passIDKind) const override;
+    virtual std::string   passIDKindAsString (mfPassIDKind passIDKind) const override;
 
     virtual std::string   pass1 () const override;
 
@@ -73,6 +73,10 @@ class EXP mfWaeHandlerGerman : public mfWaeHandler
     virtual std::string   summary () const override;
     virtual std::string   names () const override;
     virtual std::string   slices () const override;
+
+    // quitting after passes
+
+    virtual std::string   quittingAfterPass (mfPassIDKind passIDKind) const override;
 
     // OAH
 

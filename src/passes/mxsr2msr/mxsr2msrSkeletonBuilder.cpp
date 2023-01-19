@@ -13,7 +13,7 @@
 
 #include <regex>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "tree_browser.h"
 
@@ -21,7 +21,7 @@
 #include "musicxmlWae.h"
 #include "mxsr2msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"

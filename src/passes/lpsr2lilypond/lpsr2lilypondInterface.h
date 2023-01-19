@@ -21,20 +21,20 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 EXP void translateLpsrToLilypond (
-  const S_lpsrScore& theLpsrScore,
-  const S_msrOahGroup&     msrOpts,
-  const S_lpsrOahGroup&    lpsrOpts,
-  const std::string&     passNumber,
-  const std::string&     passDescription,
-  std::ostream&          lilypondCodeStream);
+  const S_lpsrScore&    theLpsrScore,
+  const S_msrOahGroup&  msrOpts,
+  const S_lpsrOahGroup& lpsrOpts,
+  const std::string&    passNumber,
+  const std::string&    passDescription,
+  std::ostream&         lilypondCodeStream);
 
 EXP void translateLpsrToLilypondWithHandler (
-  const S_lpsrScore& theLpsrScore,
-  const S_msrOahGroup&     msrOpts,
-  const S_lpsrOahGroup&    lpsrOpts,
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup& lpsrOpts,
   const std::string&     passNumber,
   const std::string&     passDescription,
-  S_oahHandler      handler,
+  S_oahHandler           handler,
   std::ostream&          out,
   std::ostream&          err);
 

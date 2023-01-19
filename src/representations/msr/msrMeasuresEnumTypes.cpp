@@ -313,7 +313,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
 //       gLogStream <<
-//         "Reducing the sounding whole notes of harmony FOO " <<
+//         "Reducing the sounding whole notes of harmony " <<
 //         previousHarmony->asString () <<
 //         " from " <<
 //         previousHarmonySoundingWholeNotes <<

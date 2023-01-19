@@ -18,7 +18,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 #include "msrOah.h"

@@ -19,7 +19,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msdl2brailleManPageGenerateAtom : public oahAtom
+class EXP msdl2brailleManPageGenerateAtom : public oahValueLessAtom
 {
   public:
 
@@ -27,10 +27,10 @@ class EXP msdl2brailleManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<msdl2brailleManPageGenerateAtom> create (
-                            const std::string& longName,
-                            const std::string& shortName,
-                            const std::string& description,
-                            const S_oahVisitor&  theOahVisitor);
+                            const std::string&  longName,
+                            const std::string&  shortName,
+                            const std::string&  description,
+                            const S_oahVisitor& theOahVisitor);
 
   protected:
 
@@ -38,10 +38,10 @@ class EXP msdl2brailleManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
                           msdl2brailleManPageGenerateAtom (
-                            const std::string& longName,
-                            const std::string& shortName,
-                            const std::string& description,
-                            const S_oahVisitor&  theOahVisitor);
+                            const std::string&  longName,
+                            const std::string&  shortName,
+                            const std::string&  description,
+                            const S_oahVisitor& theOahVisitor);
 
     virtual               ~msdl2brailleManPageGenerateAtom ();
 
@@ -55,7 +55,7 @@ class EXP msdl2brailleManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
   public:
 

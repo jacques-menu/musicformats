@@ -9,11 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "bsr2bsrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"

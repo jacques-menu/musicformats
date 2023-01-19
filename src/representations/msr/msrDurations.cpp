@@ -13,7 +13,7 @@
 #include <climits>      // INT_MIN, INT_MAX
 #include <iomanip>      // setw()), set::precision(), ...
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfServices.h"
 
@@ -968,7 +968,7 @@ std::string wholeNotesAsMsrString (
     denominator  = wholeNotes.getDenominator ();
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (true || gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numerator:   " << numerator <<
       std::endl <<
@@ -1027,7 +1027,7 @@ std::string wholeNotesAsMsrString (
   int  numeratorDots = msrNumberOfDots (numerator);
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (true || gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> numeratorDots " << ": " << numeratorDots <<
       std::endl << std::endl;
@@ -1105,7 +1105,7 @@ std::string wholeNotesAsMsrString (
   }
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (true || gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
     gLogStream <<
       "--> denominatorDurationLog" << ": " <<
       denominatorDurationLog <<

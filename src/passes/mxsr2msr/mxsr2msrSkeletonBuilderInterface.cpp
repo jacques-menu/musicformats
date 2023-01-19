@@ -10,8 +10,9 @@
 */
 
 #include <iostream>
+#include <sstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -19,7 +20,7 @@
 
 #include "mxsr2msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 
@@ -46,7 +47,8 @@ namespace MusicFormats
 S_msrScore translateMxsrToMsrSkeleton (
   Sxmlelement        theMxsr,
   S_msrOahGroup&     msrOpts,
-  const std::string& passNumber,
+//   const std::string& passNumber,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -65,19 +67,26 @@ S_msrScore translateMxsrToMsrSkeleton (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
-      std::endl;
-
-    gLogStream <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
+
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
 
   S_msrScore scoreSkeleton;
 
@@ -104,7 +113,8 @@ S_msrScore translateMxsrToMsrSkeleton (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+//     passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -116,7 +126,8 @@ S_msrScore translateMxsrToMsrSkeleton (
       std::stringstream s;
 
       s <<
-        "gIndenter value after " << passNumber << ": " <<
+//         "gIndenter value after " << passNumber << ": " <<
+        "gIndenter value after " << passIDKind << ": " <<
         gIndenter.getIndentation ();
 
       mxsr2msrWarning (
@@ -142,50 +153,51 @@ S_msrScore translateMxsrToMsrSkeleton (
   return scoreSkeleton;
 }
 
-//_______________________________________________________________________________
-void displayMsrScoreSkeleton (
-  S_msrOahGroup&     msrOpts,
-  S_msrScore         theMsrScore,
-  const std::string& passNumber,
-  const std::string& passDescription)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    theMsrScore != nullptr,
-    "theMsrScore is null");
-#endif
-
-  // start the clock
-  clock_t startClock = clock ();
-
-  std::string separator =
-    "%--------------------------------------------------------------";
-
-  gLogStream <<
-    std::endl <<
-    separator <<
-    std::endl <<
-    gTab <<
-    gWaeHandler->passOptional () <<
-    ": "<<
-    passDescription <<
-    std::endl <<
-    separator <<
-    std::endl << std::endl <<
-    theMsrScore;
-
-  // register time spent
-  clock_t endClock = clock ();
-
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
-    gWaeHandler->displayTheFirstMSRSkeletonAsText (), // JMI ??? v0.9.66
-    mfTimingItemKind::kOptional,
-    startClock,
-    endClock);
-}
+// //_______________________________________________________________________________
+// void displayMsrScoreSkeleton ( // UNUSED JMI v0.9.66
+//   S_msrOahGroup&     msrOpts,
+//   S_msrScore         theMsrScore,
+// //   const std::string& passNumber,
+//   const std::string& passIDKind,
+//   const std::string& passDescription)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     theMsrScore != nullptr,
+//     "theMsrScore is null");
+// #endif
+//
+//   // start the clock
+//   clock_t startClock = clock ();
+//
+//   std::string separator =
+//     "%--------------------------------------------------------------";
+//
+//   gLogStream <<
+//     std::endl <<
+//     separator <<
+//     std::endl <<
+//     gTab <<
+//     gWaeHandler->passOptional () <<
+//     ": "<<
+//     passDescription <<
+//     std::endl <<
+//     separator <<
+//     std::endl << std::endl <<
+//     theMsrScore;
+//
+//   // register time spent
+//   clock_t endClock = clock ();
+//
+//   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+// 		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+//     gWaeHandler->displayTheFirstMSRSkeletonAsText (), // JMI ??? v0.9.66
+//     mfTimingItemKind::kOptional,
+//     startClock,
+//     endClock);
+// }
 
 
 }

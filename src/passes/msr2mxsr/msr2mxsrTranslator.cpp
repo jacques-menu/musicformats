@@ -13,7 +13,7 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "elements.h"
 #include "factory.h"
@@ -22,7 +22,7 @@
 
 #include "mfAssert.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfcLibraryComponent.h"
 
@@ -3036,7 +3036,7 @@ void msr2mxsrTranslator::visitStart (S_msrVoice& elt)
 #endif
 
 #ifdef MF_TRACING_IS_ENABLED
-  if (true || gGlobalTracingOahGroup->getTraceVoices ()) {
+  if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       std::endl <<
       "<!--=== voice \"" << elt->getVoiceName () << "\"" <<

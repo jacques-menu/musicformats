@@ -11,9 +11,9 @@
 
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfTiming.h"

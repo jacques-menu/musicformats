@@ -16,7 +16,7 @@
 
 #include "libmusicxml.h" // for mfMusicformatsErrorKind
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 #include "mfPasses.h"
@@ -488,7 +488,7 @@ int main (int argc, char*  argv[])
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->pass (mfPassIDKind::kMfPassID_1) <<
+      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1) <<
       ": " <<
       "Creating the MSR score with the " <<
       msrGenerationAPIKindAsString (theGenerationAPIKind) <<
@@ -514,7 +514,7 @@ int main (int argc, char*  argv[])
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+    gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
     "Create the MSR score",
     mfTimingItemKind::kMandatory,
     startClock,
@@ -539,9 +539,9 @@ int main (int argc, char*  argv[])
       err =
         msrScore2lilypondWithHandler (
           theMsrScore,
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
           "Convert the MSR into an LPSR",
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
           gWaeHandler->convertTheLPSRIntoLilyPondCode (),
           gOutputStream,
           gLogStream,
@@ -552,11 +552,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2brailleWithHandler (
           theMsrScore,
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_2a),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2a),
           "Create the first BSR from the MSR",
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_2b),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2b),
           "Create the finalized BSR from the first BSR",
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
           "Convert the BSR into Braille text",
           gOutputStream,
           gLogStream,
@@ -567,11 +567,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2musicxmlWithHandler (
           theMsrScore,
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
           "Convert the MSR score into a second MSR",
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
           "Convert the second MSR into an MXSR",
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
           "Convert the MXSR into MusicXML text",
           gOutputStream,
           gLogStream,
@@ -582,11 +582,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2guidoWithHandler (
           theMsrScore,
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
           "Convert the MSR score into a second MSR",
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
           "Convert the second MSR into an MXSR",
-          gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
+          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
           "Convert the MXSR into Guido text",
           gOutputStream,
           gLogStream,

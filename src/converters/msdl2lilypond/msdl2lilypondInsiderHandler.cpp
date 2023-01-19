@@ -15,12 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableHarmoniesExtraSetting.h"
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  #include "oahHarmoniesExtraOah.h"
-#endif
-
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfInitialization.h"
 #include "mfServices.h"

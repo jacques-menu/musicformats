@@ -13,7 +13,7 @@
 #include <iomanip>      // std::setw, std::setprecision, ...
 #include <algorithm>    // for_each
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
@@ -25,7 +25,7 @@
 
 #include "msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "msrBarLines.h"
 #include "msrBreaks.h"

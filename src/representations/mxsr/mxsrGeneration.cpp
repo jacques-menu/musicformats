@@ -18,7 +18,7 @@
 #include "mxsrGeneration.h"
 #include "xmlvisitor.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 namespace MusicFormats

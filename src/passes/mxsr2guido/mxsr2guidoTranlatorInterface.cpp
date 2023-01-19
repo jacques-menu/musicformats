@@ -11,7 +11,7 @@
 
 #include <fstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -20,7 +20,7 @@
 
 #include "mxsr2guidoWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 #include "mfAssert.h"
@@ -41,7 +41,7 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 void translateMxsrToGuido (
-  Sxmlelement   theMxsr,
+  Sxmlelement        theMxsr,
   std::string        outputFileName,
   std::ostream&      err,
   const std::string& passNumber,
@@ -63,8 +63,9 @@ void translateMxsrToGuido (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    err <<
-      std::endl <<
+    std::stringstream s;
+
+    s <<
       separator <<
       std::endl <<
       gTab <<
@@ -72,6 +73,11 @@ void translateMxsrToGuido (
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 

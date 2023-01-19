@@ -14,7 +14,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfWaeHandlersDutch.h"
 #include "mfWaeHandlersEnglish.h"
@@ -35,9 +35,11 @@ namespace MusicFormats
 //______________________________________________________________________________
 //#define DEBUG_EARLY_OPTIONS
 
-//_______________________________________________________________________________
+//______________________________________________________________________________
+// global variable
 oahEarlyOptions gGlobalOahEarlyOptions;
 
+//_______________________________________________________________________________
 oahEarlyOptions::oahEarlyOptions ()
 {
   // cannot use method setEarlyLanguageKind() in constructor
@@ -58,6 +60,9 @@ oahEarlyOptions::oahEarlyOptions ()
 
 #ifdef MF_TRACING_IS_ENABLED
   fTraceEarlyOptions = true;
+
+  fEarlyTraceOnlyPass =
+    mfPassIDKind::kMfPassID_ALL; // default value for passes tracing
 #endif
 
 #elsif
@@ -66,10 +71,18 @@ oahEarlyOptions::oahEarlyOptions ()
 #endif
 
 #endif
+
+  initializeEarlyOptions ();
 }
 
 oahEarlyOptions::~oahEarlyOptions ()
 {}
+
+void oahEarlyOptions::initializeEarlyOptions ()
+{
+  fEarlyTraceOnlyPass =
+    mfPassIDKind::kMfPassID_ALL; // default value for passes tracing
+}
 
 //_______________________________________________________________________________
 const std::string K_LANGUAGE_OPTION_LONG_NAME  = "language";
@@ -214,8 +227,8 @@ void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
 #ifdef MF_TRACING_IS_ENABLED
 
 //_______________________________________________________________________________
-const std::string K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME  ("trace-early-options");
-const std::string K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME = "teo";
+const std::string K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME  ("trace-early-options");
+const std::string K_TRACE_EARLY_OPTIONS_OPTION_SHORT_NAME = "teo";
 
 void oahEarlyOptions::setTraceEarlyOptions ()
 {
@@ -229,8 +242,8 @@ void oahEarlyOptions::setTraceEarlyOptions ()
 }
 
 //_______________________________________________________________________________
-const std::string K_OAH_VERBOSE_MODE_LONG_OPTION_NAME  = "oah-verbose-mode";
-const std::string K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME = "ovm";
+const std::string K_OAH_VERBOSE_MODE_OPTION_LONG_NAME  = "oah-verbose-mode";
+const std::string K_OAH_VERBOSE_MODE_OPTION_SHORT_NAME = "ovm";
 
 void oahEarlyOptions::setEarlyOahVerboseMode ()
 {
@@ -246,8 +259,8 @@ void oahEarlyOptions::setEarlyOahVerboseMode ()
 }
 
 //_______________________________________________________________________________
-const std::string K_TRACE_OAH_LONG_OPTION_NAME  = "trace-oah";
-const std::string K_TRACE_OAH_SHORT_OPTION_NAME = "toah";
+const std::string K_TRACE_OAH_OPTION_LONG_NAME  = "trace-oah";
+const std::string K_TRACE_OAH_OPTION_SHORT_NAME = "toah";
 
 void oahEarlyOptions::setEarlyTracingOah ()
 {
@@ -263,8 +276,8 @@ void oahEarlyOptions::setEarlyTracingOah ()
 }
 
 //_______________________________________________________________________________
-const std::string K_TRACE_OAH_DETAILS_LONG_OPTION_NAME  = "trace-oah-details";
-const std::string K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME = "toahd";
+const std::string K_TRACE_OAH_DETAILS_OPTION_LONG_NAME  = "trace-oah-details";
+const std::string K_TRACE_OAH_DETAILS_OPTION_SHORT_NAME = "toahd";
 
 void oahEarlyOptions::setEarlyTracingOahDetails ()
 {
@@ -280,8 +293,8 @@ void oahEarlyOptions::setEarlyTracingOahDetails ()
 }
 
 //_______________________________________________________________________________
-const std::string K_TRACE_COMPONENTS_LONG_OPTION_NAME  = "trace-components";
-const std::string K_TRACE_COMPONENTS_SHORT_OPTION_NAME = "tcomps";
+const std::string K_TRACE_COMPONENTS_OPTION_LONG_NAME  = "trace-components";
+const std::string K_TRACE_COMPONENTS_OPTION_SHORT_NAME = "tcomps";
 
 void oahEarlyOptions::setEarlyTraceComponents ()
 {
@@ -297,20 +310,32 @@ void oahEarlyOptions::setEarlyTraceComponents ()
 }
 
 //_______________________________________________________________________________
-const std::string K_TRACE_PASSES_LONG_OPTION_NAME  = "trace-passes";
-const std::string K_TRACE_PASSES_SHORT_OPTION_NAME = "tpasses";
+const std::string K_TRACE_PASSES_OPTION_LONG_NAME  = "trace-passes";
+const std::string K_TRACE_PASSES_OPTION_SHORT_NAME = "tpasses";
 
 void oahEarlyOptions::setEarlyTracePasses ()
 {
-#ifdef MF_TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracePasses" <<
       std::endl;
   }
-#endif
 
   fEarlyTracePasses = true;
+}
+
+const std::string K_TRACE_ONLY_PASS_OPTION_LONG_NAME  = "trace-only-pass";
+const std::string K_TRACE_ONLY_PASS_OPTION_SHORT_NAME = "topass";
+
+void oahEarlyOptions::setEarlyTraceOnlyPass (mfPassIDKind passIDKind)
+{
+  if (fTraceEarlyOptions) {
+    gLogStream <<
+      "Setting fEarlyTraceOnlyPass to " << passIDKind <<
+      std::endl;
+  }
+
+  fEarlyTraceOnlyPass = passIDKind;
 }
 
 #endif
@@ -440,60 +465,60 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
   // the trace options are available only if tracing is enabled
   if (
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME)
       ||
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_EARLY_OPTIONS_OPTION_SHORT_NAME)
   ) {
     setTraceEarlyOptions ();
   }
 
   if (
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_OAH_VERBOSE_MODE_LONG_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_OAH_VERBOSE_MODE_OPTION_LONG_NAME)
       ||
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_OAH_VERBOSE_MODE_OPTION_SHORT_NAME)
   ) {
     setEarlyOahVerboseMode ();
   }
 
   if (
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_OAH_LONG_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_OAH_OPTION_LONG_NAME)
       ||
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_OAH_SHORT_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_OAH_OPTION_SHORT_NAME)
   ) {
     setEarlyTracingOah ();
   }
 
   if (
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_OAH_DETAILS_LONG_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_OAH_DETAILS_OPTION_LONG_NAME)
       ||
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_OAH_DETAILS_OPTION_SHORT_NAME)
   ) {
     setEarlyTracingOahDetails ();
   }
 
   if (
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_COMPONENTS_LONG_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_COMPONENTS_OPTION_LONG_NAME)
       ||
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_COMPONENTS_SHORT_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_COMPONENTS_OPTION_SHORT_NAME)
   ) {
     setEarlyTraceComponents ();
   }
 
   if (
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_PASSES_LONG_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_ONLY_PASS_OPTION_LONG_NAME)
       ||
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_PASSES_SHORT_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_TRACE_ONLY_PASS_OPTION_SHORT_NAME)
   ) {
     setEarlyTracePasses ();
   }
@@ -527,7 +552,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
 
     if (argumentIsAnOption) {
 #ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
+      if (getTraceEarlyOptions ()) {
           gLogStream <<
             "argumentIsAnOption, " <<
             serviceName << " main()" <<
@@ -567,7 +592,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
       }
 
 #ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
+      if (getTraceEarlyOptions ()) {
         gLogStream <<
           serviceName <<
           " applyEarlyOptionsIfPresentInArgcArgv()" <<
@@ -591,7 +616,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
         optionValue = std::string (argv [i + 1]);
       }
 
-      gGlobalOahEarlyOptions.applyEarlyOptionIfRelevant (
+      applyEarlyOptionIfRelevant (
         argumentWithoutDashToBeUsed,
         optionValue);
     }
@@ -610,9 +635,9 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (
-    gGlobalOahEarlyOptions.getTraceEarlyOptions ()
+    getTraceEarlyOptions ()
       &&
-    ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+    ! getEarlyQuietOption ()
   ) {
     if (argumentsNumber > 0) {
       gLogStream <<
@@ -670,7 +695,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
 
     if (argumentIsAnOption) {
 #ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
+      if (getTraceEarlyOptions ()) {
           gLogStream <<
             "argumentIsAnOption, " <<
             "??? serviceName" << " main()" <<
@@ -710,7 +735,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
       }
 
 #ifdef MF_TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
+      if (getTraceEarlyOptions ()) {
         gLogStream <<
           "??? serviceName" <<
           " applyEarlyOptionsIfPresentInArgcArgv()" <<
@@ -726,7 +751,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
 #endif
 
       // apply argumentWithoutDashToBeUsed early if it is known as such
-      gGlobalOahEarlyOptions.applyEarlyOptionIfRelevant (
+      applyEarlyOptionIfRelevant (
         argumentWithoutDashToBeUsed,
         "basic/HelloWorld.xml");
     }
@@ -813,6 +838,9 @@ void oahEarlyOptions::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fEarlyTracePasses" << ": " << fEarlyTracePasses <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fEarlyTraceOnlyPass" << ": " << fEarlyTraceOnlyPass <<
     std::endl;
 
 #endif

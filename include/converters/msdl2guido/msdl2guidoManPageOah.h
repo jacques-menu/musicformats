@@ -21,7 +21,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msdl2guidoManPageGenerateAtom : public oahAtom
+class EXP msdl2guidoManPageGenerateAtom : public oahValueLessAtom
 {
   public:
 
@@ -57,7 +57,8 @@ class EXP msdl2guidoManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
+
   public:
 
     // visitors

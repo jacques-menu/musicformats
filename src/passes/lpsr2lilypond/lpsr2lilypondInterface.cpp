@@ -11,7 +11,7 @@
 
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfTiming.h"
@@ -20,7 +20,7 @@
 
 #include "lpsr2lilypondWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "lpsr2lilypondOah.h"
 
@@ -36,12 +36,12 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 void translateLpsrToLilypond (
-  const S_lpsrScore& theLpsrScore,
-  const S_msrOahGroup&     msrOpts,
-  const S_lpsrOahGroup&    lpsrOpts,
-  const std::string&     passNumber,
-  const std::string&     passDescription,
-  std::ostream&          lilypondCodeStream)
+  const S_lpsrScore&    theLpsrScore,
+  const S_msrOahGroup&  msrOpts,
+  const S_lpsrOahGroup& lpsrOpts,
+  const std::string&    passNumber,
+  const std::string&    passDescription,
+  std::ostream&         lilypondCodeStream)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -105,14 +105,14 @@ void translateLpsrToLilypond (
 }
 
 EXP void translateLpsrToLilypondWithHandler (
-  const S_lpsrScore& theLpsrScore,
-  const S_msrOahGroup&     msrOpts,
-  const S_lpsrOahGroup&    lpsrOpts,
-  const std::string&     passNumber,
-  const std::string&     passDescription,
-  S_oahHandler      handler,
-  std::ostream&          out,
-  std::ostream&          err)
+  const S_lpsrScore&    theLpsrScore,
+  const S_msrOahGroup&  msrOpts,
+  const S_lpsrOahGroup& lpsrOpts,
+  const std::string&    passNumber,
+  const std::string&    passDescription,
+  S_oahHandler          handler,
+  std::ostream&         out,
+  std::ostream&         err)
 {
   std::string
     outputFileName =
@@ -179,10 +179,10 @@ EXP void translateLpsrToLilypondWithHandler (
     // open output file
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-      err <<
-        std::endl <<
-        gWaeHandler->openingLilypondFileForWriting (outputFileName) <<
-        std::endl;
+      gWaeHandler->waeTrace (
+        err,
+        __FILE__, __LINE__,
+        gWaeHandler->openingLilypondFileForWriting (outputFileName));
     }
 #endif
 

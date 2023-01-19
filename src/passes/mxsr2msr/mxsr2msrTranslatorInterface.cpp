@@ -11,13 +11,13 @@
 
 #include <iostream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "xml.h"
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfTiming.h"

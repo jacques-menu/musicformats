@@ -12,7 +12,7 @@
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>         // std::chrono::seconds
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 /*
 int main()
@@ -28,6 +28,8 @@ int main()
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 #include "mfSystemInterface.h"
+
+#include "oahEarlyOptions.h"
 
 #include "ischemeInterpreterOah.h"
 

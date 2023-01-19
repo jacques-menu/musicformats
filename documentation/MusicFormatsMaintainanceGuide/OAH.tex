@@ -169,14 +169,14 @@ oahElements.h:391:class EXP oahElementUse : public smartable
 
 
 % -------------------------------------------------------------------------
-\section{Atoms expecting a value}
+\section{Value-fitted atoms}
 % -------------------------------------------------------------------------
 
-Some options expect a value, such a length or a color, to be supplied in the \CLI\ or in a \type{oahOptionsVector}.
+Some options expect a value, such a length or a color, to be supplied as an argument in the \CLI\ or in a \typeName{oahOptionsVector}.
 
-\PurelyVirtualClass{oahAtomExpectingAValue}, defined in \oahBoth{oahBasicTypes}, is a common ancestor to all the classes describing such options:
+\PurelyVirtualClass{oahValueFittedAtom}, defined in \oahBoth{oahBasicTypes}, is a common ancestor to all the classes describing such options:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP oahAtomExpectingAValue : public oahAtom
+class EXP oahValueFittedAtom : public oahAtom
 /*
   a purely virtual common ancestor for all atom classes
   that take a value from argv or an oahOptionsVector
@@ -189,7 +189,7 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
                             // reports an error
 
     virtual void          applyAtomWithValue (
@@ -197,19 +197,137 @@ class EXP oahAtomExpectingAValue : public oahAtom
                             std::ostream&      os) = 0;
 
     virtual void          applyAtomWithDefaultValue (std::ostream& os);
-                            // used only if fElementValueKind
-                            // is oahElementValueKind::kElementValueImplicit
-                            // or oahElementValueKind::kElementValueOptional
 };
 \end{lstlisting}
 
-The classes derived from \className{oahAtomExpectingAValue} are:
-\begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src > grh 'public oahAtomExpectingAValue'
-oah/oahBasicTypes.h:class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
-oah/oahBasicTypes.h:class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
-passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondRelativeOctaveEntryAtom : public oahAtomExpectingAValue
-passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
+The classes derived from \className{oahValueFittedAtom} are:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macstudio:~/musicformats-git-dev/src > grh 'public oahValueFittedAtom'
+oah/oahBasicTypes.h:class EXP oahAtomStoringAValue : public oahValueFittedAtom
+oah/oahBasicTypes.h:class EXP oahPureHelpValueFittedAtom : public oahValueFittedAtom
+oah/oahBasicTypes.h:class EXP oahAtomStoringAValue : public oahValueFittedAtom
+oah/oahBasicTypes.h:class EXP oahPureHelpValueFittedAtom : public oahValueFittedAtom
+passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondFixedOctaveEntryAtom : public oahValueFittedAtom
+passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondFixedOctaveEntryAtom : public oahValueFittedAtom
+passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondFixedOctaveEntryAtom : public oahValueFittedAtom
+\end{lstlisting}
+
+For example:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP lilypondFixedOctaveEntryAtom : public oahValueFittedAtom
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<lilypondFixedOctaveEntryAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            msrOctaveEntryVariable&
+                                               octaveEntryKindVariable,
+                            S_msrSemiTonesPitchAndOctave&
+                                               lilypondFixedOctaveEntryVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          lilypondFixedOctaveEntryAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            msrOctaveEntryVariable&
+                                               octaveEntryKindVariable,
+                            S_msrSemiTonesPitchAndOctave&
+                                               lilypondFixedOctaveEntryVariable);
+
+    virtual               ~lilypondFixedOctaveEntryAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    void                  setFixedOctaveEntryVariableValue (
+                            const S_msrSemiTonesPitchAndOctave& value)
+                              { fSemiTonesPitchAndOctaveVariable = value; }
+
+    S_msrSemiTonesPitchAndOctave&
+                          getFixedOctaveEntryVariableValue () const
+                              { return fSemiTonesPitchAndOctaveVariable; }
+
+		// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    msrOctaveEntryVariable&
+                          fOctaveEntryKindVariable;
+
+    S_msrSemiTonesPitchAndOctave&
+                          fSemiTonesPitchAndOctaveVariable;
+};
+\end{lstlisting}
+
+This class in instanciated this way:
+\begin{lstlisting}[language=CPlusPlus]
+void lpsr2lilypondOahGroup::initializeNotesOptions ()
+{
+	// ... ... ...
+
+  subGroup->
+    appendAtomToSubGroup (
+      lilypondFixedOctaveEntryAtom::create (
+        "fixed", "",
+R"(Use fixed octave entry reference PITCH_AND_OCTAVE in the generated LilyPond code.
+PITCH_AND_OCTAVE is made of a diatonic pitch and
+an optional sequence of commas or single quotes.
+It should be placed between double quotes if it contains single quotes, such as:
+  -fixed "c''")",
+        "PITCH_AND_OCTAVE",
+        "fFixedOctaveEntrySemiTonesPitchAndOctave",
+        fOctaveEntryVariable,
+        fFixedOctaveEntrySemiTonesPitchAndOctave));
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+Applying such an atom with a value is done this way:
+\begin{lstlisting}[language=CPlusPlus]
+void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
+  const std::string& theString,
+  std::ostream&      os)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "==> oahAtom is of type 'lilypondFixedOctaveEntryAtom'" <<
+      std::endl;
+  }
+#endif
+
+  // theString contains the fixed reference note
+
+  // set octave entry kind
+  fOctaveEntryKindVariable.setOctaveEntryKind (
+    msrOctaveEntryKind::kOctaveEntryFixed);
+
+  // set fixed octave reference value
+  setFixedOctaveEntryVariableValue (
+    msrSemiTonesPitchAndOctave::createFromString (
+      K_MF_INPUT_LINE_UNKNOWN,
+      theString));
+}
 \end{lstlisting}
 
 
@@ -219,7 +337,7 @@ passes/lpsr2lilypond/lpsr2lilypondOah.h:class EXP lilypondFixedOctaveEntryAtom :
 
 \PurelyVirtualClass{oahAtomStoringAValue}, defined in \oahBoth{oahBasicTypes}, is the base class   for them:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
+class EXP oahAtomStoringAValue : public oahValueFittedAtom
 {
 	// ... ... ...
 
@@ -286,7 +404,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
 % -------------------------------------------------------------------------
 
 \Class{oahBooleanAtom} has its own \fieldName{fSetByAnOption} field, because is it not derived from\\
-\class{oahAtomStoringAValue}: there isn't any value to be supplied in the command line, since \fieldName{fBooleanVariable} is \code{false} by default:
+\class{oahAtomStoringAValue}: there isn't any value to be supplied in the command line, since \fieldName{fBooleanVariable} is \code{false} by default and becomes \code{true} when the options is chosen:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
 class EXP oahBooleanAtom : public oahAtom
@@ -364,10 +482,10 @@ jacquesmenu@macmini > xml2ly -find lilypond-version
 The classes derived from \className{oahAtomStoringAValue} are:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grh 'public oahAtomStoringAValue'
-oah/oahHarmoniesExtraOah.h:class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
-oah/oahHarmoniesExtraOah.h:class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
-oah/oahHarmoniesExtraOah.h:class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
-oah/oahHarmoniesExtraOah.h:class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
+oah/oahHarmoniesExtraOah.h:class EXP extraDisplayAllHarmoniesStructuresAtom : public oahAtomStoringAValue
+oah/oahHarmoniesExtraOah.h:class EXP extraDisplayAllHarmoniesContentsAtom : public oahAtomStoringAValue
+oah/oahHarmoniesExtraOah.h:class EXP extraDisplayHarmonyDetailsAtom : public oahAtomStoringAValue
+oah/oahHarmoniesExtraOah.h:class EXP extraDisplayHarmonyAnalysisAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahIntegerAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahFloatAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahStringAtom : public oahAtomStoringAValue
@@ -424,10 +542,10 @@ Some options, such as {\tt -a, -about}, only provide help to the user. Such \Mai
 \subsection{Pure help atoms without a value}
 % -------------------------------------------------------------------------
 
-The base \className{oahPureHelpAtomWithoutAValue} class   is defined in \oahBoth{oahBasicTypes}:
+The base \className{oahPureHelpValueLessAtom} class   is defined in \oahBoth{oahBasicTypes}:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
-class EXP oahPureHelpAtomWithoutAValue : public oahAtom
+class EXP oahPureHelpValueLessAtom : public oahAtom
 {
 	// ... ... ...
 
@@ -436,32 +554,32 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // protected fields
     // ------------------------------------------------------
 
-    std::string           fHelpAtomWithoutAValueServiceName;
+    std::string           fHelpValueLessAtomServiceName;
 };
 \end{lstlisting}
 
 The actual pure help atoms without a value are:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src > grh 'public oahPureHelpAtomWithoutAValue'
-oah/oahAtomsCollection.h:class EXP oahOptionsUsageAtom : public oahPureHelpAtomWithoutAValue
-oah/oahAtomsCollection.h:class EXP oahHelpAtom : public oahPureHelpAtomWithoutAValue
-oah/oahAtomsCollection.h:class EXP oahHelpSummaryAtom : public oahPureHelpAtomWithoutAValue
-oah/oahAtomsCollection.h:class EXP oahAboutAtom : public oahPureHelpAtomWithoutAValue
-oah/oahAtomsCollection.h:class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
-oah/oahAtomsCollection.h:class EXP oahLibraryVersionAtom : public oahPureHelpAtomWithoutAValue
-oah/oahAtomsCollection.h:class EXP oahHistoryAtom : public oahPureHelpAtomWithoutAValue
-oah/oahAtomsCollection.h:class EXP oahLibraryHistoryAtom : public oahPureHelpAtomWithoutAValue
-oah/oahAtomsCollection.h:class EXP oahContactAtom : public oahPureHelpAtomWithoutAValue
+jacquesmenu@macmini: ~/musicformats-git-dev/src > grh 'public oahPureHelpValueLessAtom'
+oah/oahAtomsCollection.h:class EXP oahOptionsUsageAtom : public oahPureHelpValueLessAtom
+oah/oahAtomsCollection.h:class EXP oahHelpAtom : public oahPureHelpValueLessAtom
+oah/oahAtomsCollection.h:class EXP oahHelpSummaryAtom : public oahPureHelpValueLessAtom
+oah/oahAtomsCollection.h:class EXP oahAboutAtom : public oahPureHelpValueLessAtom
+oah/oahAtomsCollection.h:class EXP oahVersionAtom : public oahPureHelpValueLessAtom
+oah/oahAtomsCollection.h:class EXP oahLibraryVersionAtom : public oahPureHelpValueLessAtom
+oah/oahAtomsCollection.h:class EXP oahHistoryAtom : public oahPureHelpValueLessAtom
+oah/oahAtomsCollection.h:class EXP oahLibraryHistoryAtom : public oahPureHelpValueLessAtom
+oah/oahAtomsCollection.h:class EXP oahContactAtom : public oahPureHelpValueLessAtom
 \end{lstlisting}
 
 
 % -------------------------------------------------------------------------
-\subsection{Pure help atoms expecting a value}
+\subsection{Pure help value-fitted atoms}
 % -------------------------------------------------------------------------
 
-The base \className{oahPureHelpAtomExpectingAValue} class   is defined in \oahBoth{oahBasicTypes}:
+The base \className{oahPureHelpValueFittedAtom} class   is defined in \oahBoth{oahBasicTypes}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
+class EXP oahPureHelpValueFittedAtom : public oahValueFittedAtom
 {
 	// ... ... ...
 
@@ -470,18 +588,18 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // protected fields
     // ------------------------------------------------------
 
-    std::string           fHelpAtomExpectingAValueServiceName; // JMI ???
+    std::string           fHelpValueFittedAtomServiceName; // JMI ???
 };
 
 \end{lstlisting}
 
-The actual pure help atoms expecting a value are:
+The actual pure help value-fitted atoms are:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src > grh 'public oahPureHelpAtomExpectingAValue'
-oah/oahAtomsCollection.h:class EXP oahQueryOptionNameAtom : public oahPureHelpAtomExpectingAValue
-oah/oahAtomsCollection.h:class EXP oahFindStringAtom : public oahPureHelpAtomExpectingAValue
-formats/msdl/msdlInputOah.h:class EXP oahDisplayMsdlKeywordsInLanguageAtom : public oahPureHelpAtomExpectingAValue
-formats/msdl/msdlInputOah.h:class EXP oahDisplayMsdlTokensInLanguageAtom : public oahPureHelpAtomExpectingAValue
+jacquesmenu@macmini: ~/musicformats-git-dev/src > grh 'public oahPureHelpValueFittedAtom'
+oah/oahAtomsCollection.h:class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
+oah/oahAtomsCollection.h:class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
+formats/msdl/msdlInputOah.h:class EXP oahDisplayMsdlKeywordsInLanguageAtom : public oahPureHelpValueFittedAtom
+formats/msdl/msdlInputOah.h:class EXP oahDisplayMsdlTokensInLanguageAtom : public oahPureHelpValueFittedAtom
 \end{lstlisting}
 
 
@@ -508,9 +626,9 @@ jacquesmenu@macmini > msdlconverter --help-generate-output
 
 No value is supplied in the \CLI\ or in a \type{oahOptionsVector}, but a variable is used to store a value alright.
 
-\PurelyVirtualClass{oahAtomImplicitlyStoringAValue} is the base class   for this:
+\PurelyVirtualClass{oahAtomImplicitlySettingAVariable} is the base class for this:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP oahAtomImplicitlyStoringAValue : public oahAtom
+class EXP oahAtomImplicitlySettingAVariable : public oahAtom
 /*
   a purely virtual common ancestor for all atom classes
   that store a value in a variable
@@ -529,10 +647,10 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
 };
 \end{lstlisting}
 
-This used by \class{mfMultiGenerationOutputKindAtom} defined in \\
+This is used by \class{mfMultiGenerationOutputKindAtom} defined in \\
 \multiGenerationBoth{multiGenerationOah}:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValue
+class EXP mfMultiGenerationOutputKindAtom : public oahAtomStoringAValue
 {
 	// ... ... ...
 
@@ -555,12 +673,12 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
   const std::string&        description,
   const std::string&        variableName,
   mfMultiGenerationOutputKind& mfMultiGenerationOutputKindVariable)
-  : oahAtomImplicitlyStoringAValue (
+  : oahAtomImplicitlySettingAVariable (
       longName,
       shortName,
       description,
       variableName,
-      oahElementValueKind::kElementValueWithout),
+      oahElementValueKind::kElementValueLess),
     fMultiGenerationOutputKindVariable ( // this is where the value is supplied
       mfMultiGenerationOutputKindVariable)
 {}
@@ -592,10 +710,10 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
     \virtualMethod{applyAtomWithDefaultValue};
 
 \item \method{oahHandler}{handleKnownArgvAtom} associatiates the value
-    to the (preceding) \field{oahHandler}{fPendingArgvAtomExpectingAValue} if not null,
+    to the (preceding) \field{oahHandler}{fPendingArgvValueFittedAtom} if not null,
     or appends it to \field{oahHandler}{fHandlerArgumentsVector} to otherwise;
 
-\item {\tt fPendingArgvAtomExpectingAValue} is used in {\tt argv} contents handling
+\item {\tt fPendingArgvValueFittedAtom} is used in {\tt argv} contents handling
     to associate an option name with it value, which is the next element in {\tt argv}.
 
 \end{itemize}
@@ -621,22 +739,22 @@ class EXP oahPrefix : public smartable
   this class   contains  only an uplink to the containing subgroup
 class EXP oahAtom : public oahElement
 /* this class is purely virtual
-class EXP oahAtomExpectingAValue : public oahAtom
+class EXP oahValueFittedAtom : public oahAtom
   a common ancestor for all atom classes
 /* this class is purely virtual
   a common ancestor for all atom classes
-class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
+class EXP oahAtomStoringAValue : public oahValueFittedAtom
 /* this class is purely virtual
-class EXP oahPureHelpAtomWithoutAValue : public oahAtom
+class EXP oahPureHelpValueLessAtom : public oahAtom
 /* this class is purely virtual
-class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
+class EXP oahPureHelpValueFittedAtom : public oahValueFittedAtom
 /* this class is purely virtual
 class EXP oahSubGroup : public oahElement
 class EXP oahGroup : public oahElement
 class EXP oahHandler : public smartable
  /* this class is purely virtual
 enum class oahOptionalValuesStyleKind {
-class EXP oahAtomWithoutAValue : public oahAtom
+class EXP oahValueLessAtom : public oahAtom
 / * this class is purely virtual
 \end{lstlisting}
 
@@ -700,31 +818,28 @@ class   {\tt oahHandler} in \oahBoth{oahBasicTypes} contains:
 
 Each {\tt oahElement}, defined in {\oahBoth{oahElements}, has an applyElement {\tt } method:
 \begin{lstlisting}[language=CPlusPlus]
-    virtual void          applyElement (std::ostream& os) = 0;
+    virtual void          applyValueLessAtom (std::ostream& os) = 0;
 \end{lstlisting}
 
-Atoms that can have an associated value are described in \oahBoth{oahBasicTypes} by class   {\tt oahAtomExpectingAValue}, which has methods {\tt applyAtomWithValue} and {\tt applyAtomWithDefaultValue}:
+Atoms that can have an associated value are described in \oahBoth{oahBasicTypes} by class   {\tt oahValueFittedAtom}, which has methods {\tt applyAtomWithValue} and {\tt applyAtomWithDefaultValue}:
 \begin{lstlisting}[language=CPlusPlus]
     virtual void          applyAtomWithValue (
                             const std::string& theString,
                             std::ostream& os) = 0;
 
     virtual void          applyAtomWithDefaultValue (std::ostream& os);
-                            // used only if fElementValueKind
-                            // is oahElementValueKind::kElementValueImplicit
-                            // or oahElementValueKind::kElementValueOptional
 \end{lstlisting}
 
 There are two methods for that:%%%JMI
 \begin{lstlisting}[language=CPlusPlus]
-    void                  applyElement (std::ostream& os) override; %%%JMI
+    void                  applyValueLessAtom (std::ostream& os) override; %%%JMI
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
 
 \end{lstlisting}
 
-The last option is checked by \method{oahHandler}{checkMissingPendingArgvAtomExpectingAValueValue} in \oah{oahBasicTypes.cpp}. %%% JMI
+The last option is checked by \method{oahHandler}{checkMissingPendingArgvValueFittedAtomValue} in \oah{oahBasicTypes.cpp}. %%% JMI
 
 
 % -------------------------------------------------------------------------
@@ -734,14 +849,14 @@ The last option is checked by \method{oahHandler}{checkMissingPendingArgvAtomExp
 Frequent OAH atoms have been grouped in \oahBoth{oahAtomsCollection}. They are:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/oah > grep class   oahAtomsCollection.h
-class EXP oahAtomAlias : public oahAtom
+class EXP oahValueLessAtomAlias : public oahAtom
 class EXP oahMacroAtom : public oahAtom
-class EXP oahOptionsUsageAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahHelpAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahHelpSummaryAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahAboutAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahContactAtom : public oahPureHelpAtomWithoutAValue
+class EXP oahOptionsUsageAtom : public oahPureHelpValueLessAtom
+class EXP oahHelpAtom : public oahPureHelpValueLessAtom
+class EXP oahHelpSummaryAtom : public oahPureHelpValueLessAtom
+class EXP oahAboutAtom : public oahPureHelpValueLessAtom
+class EXP oahVersionAtom : public oahPureHelpValueLessAtom
+class EXP oahContactAtom : public oahPureHelpValueLessAtom
 class EXP oahBooleanAtom : public oahAtom
 class EXP oahTwoBooleansAtom : public oahBooleanAtom
 class EXP oahThreeBooleansAtom : public oahBooleanAtom
@@ -752,7 +867,7 @@ class EXP oahTwoIntegersAtom : public oahIntegerAtom
 class EXP oahFloatAtom : public oahAtomStoringAValue
 class EXP oahStringAtom : public oahAtomStoringAValue
 class EXP oahFactorizedStringAtom : public oahAtom
-class EXP oahStringWithDefaultValueAtom : public oahStringAtom
+class EXP oahDefaultedStringAtom : public oahStringAtom
 class EXP oahRationalAtom : public oahAtomStoringAValue
 class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 class EXP oahColorRGBAtom : public oahAtomStoringAValue
@@ -764,9 +879,9 @@ class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
 class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
 class EXP oahLengthAtom : public oahAtomStoringAValue
 class EXP oahMidiTempoAtom : public oahAtomStoringAValue
-class EXP oahOptionNameHelpAtom : public oahStringWithDefaultValueAtom
-class EXP oahQueryOptionNameAtom : public oahPureHelpAtomExpectingAValue
-class EXP oahFindStringAtom : public oahPureHelpAtomExpectingAValue
+class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
+class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
+class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
 \end{lstlisting}
 
 See \chapterRef{The OAH atoms collection}, for more details.
@@ -805,6 +920,7 @@ void mxsr2msrOahGroup::initializeNotesOptions ()
 R"(Add a beam to all grace notes)",
         "beamAllGraceNotes",
         fBeamAllGraceNotes);
+
   subGroup->
     appendAtomToSubGroup (
       beamAllGraceNotesAtom);
@@ -1009,7 +1125,7 @@ EXP mfMusicformatsErrorKind musicxmlfile2musicxml (
 	  sxmlfile =
 	    createSXMLFileFromFile (
 	      fileName,
-	    gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+	    gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
 	      "Create an MXSR from a MusicXML file");
 
 	if (sxmlfile) {
@@ -1039,9 +1155,9 @@ class   {\tt oahHandler} contains:
     std::list<S_oahElementUse> fElementUsesList;
 
     // atoms waiting for a value
-    S_oahAtomExpectingAValue
-                          fPendingArgvAtomExpectingAValue;
-    std::string           fNameUsedForPendingArgvAtomExpectingAValue;
+    S_oahValueFittedAtom
+                          fPendingArgvValueFittedAtom;
+    std::string           fNameUsedForPendingArgvValueFittedAtom;
 \end{lstlisting}
 
 
@@ -1081,7 +1197,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
               dynamic_cast<oahGroup*>(&(*elementUsed))
         ) {
           group->
-            applyElement (
+            applyValueLessAtom (
               gOutputStream);
         }
 
@@ -1092,7 +1208,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
               dynamic_cast<oahSubGroup*>(&(*elementUsed))
         ) {
           subGroup->
-            applyElement (
+            applyValueLessAtom (
               gOutputStream);
         }
 
@@ -1109,34 +1225,34 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
                 getElementValueKind ();
 
           if (
-            // atom expecting a value?
-            S_oahAtomExpectingAValue
-              atomExpectingAValue =
-                dynamic_cast<oahAtomExpectingAValue*>(&(*elementUsed))
+            // value-fitted atom?
+            S_oahValueFittedAtom
+              valueFittedAtom =
+                dynamic_cast<oahValueFittedAtom*>(&(*elementUsed))
           ) {
             switch (atomValueKind) {
-              case oahElementValueKind::kElementValueWithout:
+              case oahElementValueKind::kElementValueLess:
                 {
                   std::stringstream s;
 
                   s <<
                     "Atom with value " <<
-                    atomExpectingAValue->fetchNamesBetweenQuotes () <<
+                    valueFittedAtom->fetchNamesBetweenQuotes () <<
                     " has been registered as without value";
 
                   oahInternalError (s.str ());
                 }
                 break;
 
-              case oahElementValueKind::kElementValueImplicit:
-                atomExpectingAValue->
-                  applyAtomWithDefaultValue (
-                    gOutputStream);
-                break;
+%              case oahElementValueKind::kElementValueImplicit:
+%                valueFittedAtom->
+%                  applyAtomWithDefaultValue (
+%                    gOutputStream);
+%                break;
 
-              case oahElementValueKind::kElementValueMandatory:
+              case oahElementValueKind::kElementValueFitted:
                 if (valueUsed.size ()) {
-                  atomExpectingAValue->
+                  valueFittedAtom->
                     applyAtomWithValue (
                       valueUsed,
                       gOutputStream);
@@ -1145,23 +1261,23 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
                   std::stringstream s;
 
                   s <<
-                    "Atom expecting a value " <<
-                    atomExpectingAValue->fetchNamesBetweenQuotes () <<
+                    "Value-fitted atom " <<
+                    valueFittedAtom->fetchNamesBetweenQuotes () <<
                     " needs a non-empty value";
 
                   oahInternalError (s.str ());
                 }
                 break;
 
-              case oahElementValueKind::kElementValueOptional:
+              case oahElementValueKind::kElementValueDefaulted:
                 if (valueUsed.size ()) {
-                  atomExpectingAValue->
+                  valueFittedAtom->
                     applyAtomWithValue (
                       valueUsed,
                       gOutputStream);
                 }
                 else {
-                  atomExpectingAValue->
+                  valueFittedAtom->
                     applyAtomWithDefaultValue (
                       gOutputStream);
                 }
@@ -1173,7 +1289,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   #ifdef MF_TRACING_IS_ENABLED
             if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
               gLogStream <<
-                "**** Handling atom not expecting a value:" <<
+                "**** Handling value-less atom:" <<
                 std::endl;
 
               ++gIndenter;
@@ -1187,7 +1303,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   #endif
 
             atom->
-              applyElement (
+              applyValueLessAtom (
                 gOutputStream);
           }
         }
@@ -1673,7 +1789,7 @@ class   mfcMultiComponent : public smartable
 Then the next thing has been to clone \class{oahVersionAtom} in \oahBoth{oahAtomCollection}, renaming \methodName{printVersion} to \methodName{printHistory}:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
-class EXP oahHistoryAtom : public oahPureHelpAtomWithoutAValue
+class EXP oahHistoryAtom : public oahPureHelpValueLessAtom
 {
 	// ... ... ...
 
@@ -1682,7 +1798,7 @@ class EXP oahHistoryAtom : public oahPureHelpAtomWithoutAValue
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
   public:
 
@@ -1705,7 +1821,7 @@ class EXP oahHistoryAtom : public oahPureHelpAtomWithoutAValue
 
 Then in \method{oahHistoryAtom}{printHistory}, the call to \methodName{printVersion} has been replaced by a call to \methodName{printHistory}:
 \begin{lstlisting}[language=CPlusPlus]
-void oahHistoryAtom::applyElement (std::ostream& os)
+void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1773,7 +1889,7 @@ And the new option long name {\tt version} has been added to all \regular\ \oahR
 
 
 % -------------------------------------------------------------------------
-\subsection{Creating a new OAH atom class EXPecting a value}
+\subsection{Creating a new OAH value-fitted atom class}
 % -------------------------------------------------------------------------
 
 Let's look at how \class{oahLengthAtom} is implemented.
@@ -1991,6 +2107,7 @@ By default, LilyPond uses 297 mm (A4 format).)",
       "HEIGHT",
       "paperHeight",
       fPaperHeight);
+
   subGroup->
     appendAtomToSubGroup (
       fPaperHeightAtom);
@@ -2004,7 +2121,7 @@ By default, LilyPond uses 297 mm (A4 format).)",
 The description of music scores in \mf\ is quite rich, and it was easy (and temptating\dots) to offer options such as:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -query show-harmony-analysis
---- Help for atom "show-harmony-analysis" in subgroup "Harmony analysis" of group "Extra" ---
+--- Help for atom "display-harmony-analysis" in subgroup "Harmony analysis" of group "Extra" ---
     -sca, -show-harmony-analysis HARMONY_SPEC
           Write an analysis of the harmony for the given diatonic (semitones) pitch
           in the current language and the given harmony to standard output.
@@ -2093,10 +2210,10 @@ class EXP generalOahGroup : public oahGroup
 There are also harmonies-specific options grouped in \oahBoth{harmoniesExtraOah}. They are available as icing on the cake\index{Main}{icing on the cake} independently of any conversion activity:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/oah > grep class   oahHarmoniesExtraOah.h
-class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
-class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
-class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
-class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
+class EXP extraDisplayAllHarmoniesStructuresAtom : public oahAtomStoringAValue
+class EXP extraDisplayAllHarmoniesContentsAtom : public oahAtomStoringAValue
+class EXP extraDisplayHarmonyDetailsAtom : public oahAtomStoringAValue
+class EXP extraDisplayHarmonyAnalysisAtom : public oahAtomStoringAValue
 class EXP harmoniesExtraOahGroup : public oahGroup
 \end{lstlisting}
 
@@ -2132,23 +2249,23 @@ As an internal representation, OAH can be browsed with the two-phase visitors. T
 %% -------------------------------------------------------------------------
 %
 %\begin{itemize}
-%\item oahAtomExpectingAValue
-%oahAtomImplicitlyStoringAValue
+%\item oahValueFittedAtom
+%oahAtomImplicitlySettingAVariable
 %oahAtomStoringAValue
-%oahPureHelpAtomWithoutAValue
-%oahPureHelpAtomExpectingAValue
+%oahPureHelpValueLessAtom
+%oahPureHelpValueFittedAtom
 %
-%class EXP oahAtomAlias : public oahAtom
+%class EXP oahValueLessAtomAlias : public oahAtom
 %class EXP oahMacroAtom : public oahAtom
-%class EXP oahOptionsUsageAtom : public oahPureHelpAtomWithoutAValue
-%class EXP oahHelpAtom : public oahPureHelpAtomWithoutAValue
-%class EXP oahHelpSummaryAtom : public oahPureHelpAtomWithoutAValue
-%class EXP oahAboutAtom : public oahPureHelpAtomWithoutAValue
-%class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
-%class EXP oahLibraryVersionAtom : public oahPureHelpAtomWithoutAValue
-%class EXP oahHistoryAtom : public oahPureHelpAtomWithoutAValue
-%class EXP oahLibraryHistoryAtom : public oahPureHelpAtomWithoutAValue
-%class EXP oahContactAtom : public oahPureHelpAtomWithoutAValue
+%class EXP oahOptionsUsageAtom : public oahPureHelpValueLessAtom
+%class EXP oahHelpAtom : public oahPureHelpValueLessAtom
+%class EXP oahHelpSummaryAtom : public oahPureHelpValueLessAtom
+%class EXP oahAboutAtom : public oahPureHelpValueLessAtom
+%class EXP oahVersionAtom : public oahPureHelpValueLessAtom
+%class EXP oahLibraryVersionAtom : public oahPureHelpValueLessAtom
+%class EXP oahHistoryAtom : public oahPureHelpValueLessAtom
+%class EXP oahLibraryHistoryAtom : public oahPureHelpValueLessAtom
+%class EXP oahContactAtom : public oahPureHelpValueLessAtom
 %class EXP oahBooleanAtom : public oahAtom
 %class EXP oahTwoBooleansAtom : public oahBooleanAtom
 %class EXP oahThreeBooleansAtom : public oahBooleanAtom
@@ -2159,8 +2276,8 @@ As an internal representation, OAH can be browsed with the two-phase visitors. T
 %class EXP oahFloatAtom : public oahAtomStoringAValue
 %class EXP oahStringAtom : public oahAtomStoringAValue
 %class EXP oahFactorizedStringAtom : public oahAtom
-%class EXP oahStringWithDefaultValueAtom : public oahStringAtom
-%class EXP oahStringWithRegexAtom : public oahStringAtom
+%class EXP oahDefaultedStringAtom : public oahStringAtom
+%class EXP oahRegexAtom : public oahStringAtom
 %class EXP oahRationalAtom : public oahAtomStoringAValue
 %class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 %class EXP oahColorRGBAtom : public oahAtomStoringAValue
@@ -2172,9 +2289,9 @@ As an internal representation, OAH can be browsed with the two-phase visitors. T
 %class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
 %class EXP oahLengthAtom : public oahAtomStoringAValue
 %class EXP oahMidiTempoAtom : public oahAtomStoringAValue
-%class EXP oahOptionNameHelpAtom : public oahStringWithDefaultValueAtom
-%class EXP oahQueryOptionNameAtom : public oahPureHelpAtomExpectingAValue
-%class EXP oahFindStringAtom : public oahPureHelpAtomExpectingAValue
+%class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
+%class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
+%class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
 %
 %
 %\end{itemize}

@@ -91,7 +91,7 @@ class EXP msrRepeatDescr : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrRepeatDescr> create (
-                            int         repeatDescrStartInputLineNumber,
+                            int                repeatDescrStartInputLineNumber,
                             const S_msrRepeat& repeatDescrRepeat);
 
   protected:
@@ -100,8 +100,8 @@ class EXP msrRepeatDescr : public smartable
     // ------------------------------------------------------
 
                           msrRepeatDescr (
-                            int         repeatDescrStartInputLineNumber,
-                            const S_msrRepeat& fRepeatDescrRepeat);
+                            int                repeatDescrStartInputLineNumber,
+                            const S_msrRepeat& repeatDescrRepeat);
 
     virtual               ~msrRepeatDescr ();
 
@@ -168,38 +168,38 @@ class EXP msrVoice : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrVoice> create (
-                            int          inputLineNumber,
-                            msrVoiceKind voiceKind,
-                            int          voiceNumber,
+                            int               inputLineNumber,
+                            msrVoiceKind      voiceKind,
+                            int               voiceNumber,
                             msrVoiceCreateInitialLastSegmentKind
-                                         voiceCreateInitialLastSegmentKind,
-                            const S_msrStaff&   voiceUpLinkToStaff);
+                                              voiceCreateInitialLastSegmentKind,
+                            const S_msrStaff& voiceUpLinkToStaff);
 
     SMARTP<msrVoice> createVoiceNewbornClone (
                             const S_msrStaff& containingStaff);
 
     SMARTP<msrVoice> createVoiceDeepClone (
-                            int          inputLineNumber,
-                            msrVoiceKind voiceKind,
-                            int          voiceNumber,
-                            const S_msrStaff&   containingStaff);
+                            int               inputLineNumber,
+                            msrVoiceKind      voiceKind,
+                            int               voiceNumber,
+                            const S_msrStaff& containingStaff);
 
     // creation from the API
     // ------------------------------------------------------
 
     static SMARTP<msrVoice> createRegularVoice (
-                            int        inputLineNumber,
-                            int        voiceNumber,
+                            int               inputLineNumber,
+                            int               voiceNumber,
                             const S_msrStaff& voiceUpLinkToStaff);
 
     static SMARTP<msrVoice> createHarmoniesVoice (
-                            int        inputLineNumber,
-                            int        voiceNumber,
+                            int               inputLineNumber,
+                            int               voiceNumber,
                             const S_msrStaff& voiceUpLinkToStaff);
 
     static SMARTP<msrVoice> createFiguredBassVoice (
-                            int        inputLineNumber,
-                            int        voiceNumber,
+                            int               inputLineNumber,
+                            int               voiceNumber,
                             const S_msrStaff& voiceUpLinkToStaff);
 
   protected:
@@ -209,12 +209,12 @@ class EXP msrVoice : public msrElement
 
     // for regular voices
                           msrVoice (
-                            int          inputLineNumber,
-                            msrVoiceKind voiceKind,
-                            int          voiceNumber,
+                            int               inputLineNumber,
+                            msrVoiceKind      voiceKind,
+                            int               voiceNumber,
                             msrVoiceCreateInitialLastSegmentKind
-                                         voiceCreateInitialLastSegmentKind,
-                            const S_msrStaff&   voiceUpLinkToStaff);
+                                              voiceCreateInitialLastSegmentKind,
+                            const S_msrStaff& voiceUpLinkToStaff);
 
                           msrVoice (
                             int          inputLineNumber,
@@ -1151,7 +1151,7 @@ class EXP msrVoice : public msrElement
     // i.e. without segments nor repeats,
     // gathered from fVoiceInitialElementsList and fVoiceLastSegment
     // by finalizeMeasure()
-    std::list<S_msrMeasure>    
+    std::list<S_msrMeasure>
                           fVoiceMeasuresFlatList;
 
     // measures slices sequence

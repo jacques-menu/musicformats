@@ -11,12 +11,7 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableTracingSetting.h"
-
-#include "mfEnableHarmoniesExtraSetting.h"
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  #include "oahHarmoniesExtraOah.h"
-#endif
+#include "mfStaticSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -206,8 +201,8 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
 #ifdef MF_TRACING_IS_ENABLED
-  registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME, subGroup);
-  registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_LONG_OPTION_NAME, subGroup);
+  registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
+  registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
 #endif
 
   registerAtomInRegularSubgroup ("help", subGroup);
@@ -254,10 +249,11 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
 
 #ifdef MF_TRACING_IS_ENABLED
-  registerAtomInRegularSubgroup (K_TRACE_OAH_LONG_OPTION_NAME, subGroup);
-  registerAtomInRegularSubgroup (K_TRACE_OAH_DETAILS_LONG_OPTION_NAME, subGroup);
+  registerAtomInRegularSubgroup (K_TRACE_OAH_OPTION_LONG_NAME, subGroup);
+  registerAtomInRegularSubgroup (K_TRACE_OAH_DETAILS_OPTION_LONG_NAME, subGroup);
 
-  registerAtomInRegularSubgroup (K_TRACE_PASSES_LONG_OPTION_NAME, subGroup);
+  registerAtomInRegularSubgroup (K_TRACE_PASSES_OPTION_LONG_NAME, subGroup);
+  registerAtomInRegularSubgroup (K_TRACE_ONLY_PASS_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup ("trace-msr", subGroup);
   registerAtomInRegularSubgroup ("trace-msr-visitors", subGroup);
@@ -1299,10 +1295,10 @@ void msr2lilypondRegularHandler::createHarmoniesRegularGroup ()
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  registerAtomInRegularSubgroup ("show-harmonies-structures", subGroup);
-  registerAtomInRegularSubgroup ("show-all-harmonies-contents", subGroup);
-  registerAtomInRegularSubgroup ("show-harmony-details", subGroup);
-  registerAtomInRegularSubgroup ("show-harmony-analysis", subGroup);
+  registerAtomInRegularSubgroup ("display-harmonies-structures", subGroup);
+  registerAtomInRegularSubgroup ("display-all-harmonies-contents", subGroup);
+  registerAtomInRegularSubgroup ("display-harmony-details", subGroup);
+  registerAtomInRegularSubgroup ("display-harmony-analysis", subGroup);
 #endif
 }
 

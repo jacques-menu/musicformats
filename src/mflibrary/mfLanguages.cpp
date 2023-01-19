@@ -13,7 +13,7 @@
 
 #include "mfConstants.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfBool.h"
 

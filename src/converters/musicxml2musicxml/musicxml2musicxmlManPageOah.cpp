@@ -14,7 +14,7 @@
 
 #include <regex>
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 #include "oahEarlyOptions.h"
@@ -27,10 +27,10 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_xml2xmlManPageGenerateAtom xml2xmlManPageGenerateAtom::create (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
 {
   xml2xmlManPageGenerateAtom* o = new
     xml2xmlManPageGenerateAtom (
@@ -43,15 +43,14 @@ S_xml2xmlManPageGenerateAtom xml2xmlManPageGenerateAtom::create (
 }
 
 xml2xmlManPageGenerateAtom::xml2xmlManPageGenerateAtom (
-  const std::string& shortName,
-  const std::string& longName,
-  const std::string& description,
-  const S_oahVisitor&  theOahVisitor)
-  : oahAtom (
+  const std::string&  shortName,
+  const std::string&  longName,
+  const std::string&  description,
+  const S_oahVisitor& theOahVisitor)
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
+      description)
 {
   fOahVisitor = theOahVisitor;
 }
@@ -59,7 +58,7 @@ xml2xmlManPageGenerateAtom::xml2xmlManPageGenerateAtom (
 xml2xmlManPageGenerateAtom::~xml2xmlManPageGenerateAtom ()
 {}
 
-void xml2xmlManPageGenerateAtom::applyElement (std::ostream& os)
+void xml2xmlManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -177,7 +176,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2xmlManPageGenerateAtom&
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -382,7 +381,7 @@ std::ostream& operator << (std::ostream& os, const S_xml2xmlManPageOahGroup& elt
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

@@ -16,7 +16,7 @@
 // libmusicxml2
 #include "visitor.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfMultiGenerationOah.h"
 

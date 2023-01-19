@@ -9,17 +9,13 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfEnableTracingSetting___
-#define ___mfEnableTracingSetting___
+#ifndef ___tracingOah___
+#define ___tracingOah___
 
 
-#ifndef MF_TRACING_IS_ENABLED
-  // comment the following definition if no tracing is desired
-//   #define MF_TRACING_IS_ENABLED
-#endif
+#include "mfStaticSettings.h"
 
-
-#ifdef MF_TRACING_IS_ENABLED // encompasses the remainder of this file
+#ifdef MF_TRACING_IS_ENABLED // encompasses this whole file
 
 
 #include <set>
@@ -27,6 +23,7 @@
 #include "exports.h"
 
 #include "oahAtomsCollection.h"
+#include "oahOah.h"
 
 
 namespace MusicFormats
@@ -152,9 +149,20 @@ class EXP tracingOahGroup : public oahGroup
 //     Bool                  getTracePasses () const
 //                               { return fTracePasses; }
 
+// replaced by getEarlyTraceOnlyPass() // JMI v0.9.66
+//     void                  setTraceOnlyPass ()
+//                               { fTraceOnlyPass = true; }
+//
+//     Bool                  getTraceOnlyPass () const
+//                               { return fTraceOnlyPass; }
+
     const S_oahBooleanAtom&
                           getTracePassesBooleanAtom () const
                               { return fTracePassesBooleanAtom; }
+
+    const S_passIDOahAtom&
+                          getTraceOnlyPassBooleanAtom () const
+                              { return fTraceOnlyPassIDOahAtom; }
 
     // geometry
     void                  setTraceGeometry ()
@@ -811,6 +819,9 @@ class EXP tracingOahGroup : public oahGroup
     // passes
     Bool                  fTracePasses;
     S_oahBooleanAtom      fTracePassesBooleanAtom;
+
+    mfPassIDKind          fTraceOnlyPassIDKind;
+    S_passIDOahAtom       fTraceOnlyPassIDOahAtom;
 
   public:
 

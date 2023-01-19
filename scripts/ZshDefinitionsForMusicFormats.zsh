@@ -6,7 +6,8 @@ alias zrc='. ${HOME}/.zrc'
 #	my actual work directory
 #----------------------------------------------
 
-MY_WORK_DIR=${HOME}/JMI_Developpement
+# MY_WORK_DIR=${HOME}/JMI_Developpement
+MY_WORK_DIR=/Volumes/JMI_Volume/JMI_Developpement
 
 # dev branch
 #----------------------------------------------
@@ -234,7 +235,7 @@ function bit ()
 
   egrep \
     --colour=always \
-    -i 'BUILD|error|warning|Undefined|referenced from|duplicate symbol|unknown|undeclared|In file included from|const|unterminated|expected' \
+    -i 'BUILD|error|warning|Undefined|referenced from|duplicate symbol|unknown|undeclared|In file included from|const|unterminated|expected|^' \
     ${LOGFILE} \
     | \
     egrep -v 'forward' | egrep -v 'build' | egrep -v 'Build' | grep -v 'TARGET'
@@ -480,6 +481,8 @@ alias cgic='checkGIndenterCrement'
 
 # xml2ly
 #----------------------------------------------
+
+alias xy='xml2ly'
 
 alias xlv='xml2ly -version'
 alias xlq='xml2ly -query'

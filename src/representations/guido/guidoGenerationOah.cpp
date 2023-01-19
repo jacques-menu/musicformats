@@ -13,15 +13,12 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
-#include "mfEnableHarmoniesExtraSetting.h"
-
+#include "mfOutputFileOah.h"
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
-
-#include "mfOutputFileOah.h"
 #include "oahHarmoniesExtraOah.h"
 
 // MSR

@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -40,20 +40,20 @@ std::string oahElementValueKindAsString (
   std::string result;
 
   switch (elementValueKind) {
-    case oahElementValueKind::kElementValueUnknown:
-      result = "kElementValueUnknown";
+    case oahElementValueKind::kElementValue_UNKNOWN:
+      result = "*kElementValue_UNKNOWN*";
       break;
-    case oahElementValueKind::kElementValueWithout:
-      result = "kElementValueWithout";
+    case oahElementValueKind::kElementValueLess:
+      result = "kElementValueLess";
       break;
-    case oahElementValueKind::kElementValueImplicit:
-      result = "kElementValueImplicit";
+//     case oahElementValueKind::kElementValueImplicit:
+//       result = "kElementValueImplicit";
+//       break;
+    case oahElementValueKind::kElementValueFitted:
+      result = "kElementValueFitted";
       break;
-    case oahElementValueKind::kElementValueMandatory:
-      result = "kElementValueMandatory";
-      break;
-    case oahElementValueKind::kElementValueOptional:
-      result = "kElementValueOptional";
+    case oahElementValueKind::kElementValueDefaulted:
+      result = "kElementValueDefaulted";
       break;
   } // switch
 
@@ -293,7 +293,7 @@ oahElement::oahElement ()
   fDescription = "";
 
   fElementValueKind =
-    oahElementValueKind::kElementValueUnknown; // default value JMI v0.9.66
+    oahElementValueKind::kElementValue_UNKNOWN; // default value
 
   fElementHelpOnlyKind =
     oahElementHelpOnlyKind::kElementHelpOnlyNo; // default value
@@ -517,7 +517,7 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 // }
 
 Bool oahElement::findStringInFindableElement (
-  const std::string&     lowerCaseString,
+  const std::string&               lowerCaseString,
   std::list<S_oahFindStringMatch>& foundMatchesList,
   std::ostream&                    os) const
 {

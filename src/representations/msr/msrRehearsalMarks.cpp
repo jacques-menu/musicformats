@@ -12,7 +12,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 

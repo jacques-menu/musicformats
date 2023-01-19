@@ -17,7 +17,7 @@
 #include "msdlEnumTypes.h"
 #include "msdlKeywords.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahAtomsCollection.h"
 
@@ -114,7 +114,7 @@ typedef SMARTP<msdlKeywordsLanguageAtom> S_msdlKeywordsLanguageAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_msdlKeywordsLanguageAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahDisplayMsdlKeywordsInLanguageAtom : public oahPureHelpAtomExpectingAValue
+class EXP oahDisplayMsdlKeywordsInLanguageAtom : public oahPureHelpValueFittedAtom
 {
   public:
 
@@ -185,7 +185,7 @@ typedef SMARTP<oahDisplayMsdlKeywordsInLanguageAtom> S_oahDisplayMsdlKeywordsInL
 EXP std::ostream& operator << (std::ostream& os, const S_oahDisplayMsdlKeywordsInLanguageAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahDisplayMsdlTokensInLanguageAtom : public oahPureHelpAtomExpectingAValue
+class EXP oahDisplayMsdlTokensInLanguageAtom : public oahPureHelpValueFittedAtom
 {
   public:
 

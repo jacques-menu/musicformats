@@ -51,6 +51,8 @@ class EXP waeHandler : public smartable
     // public services
     // ------------------------------------------------------
 
+    // warning and errors
+
     virtual void          waeWarning (
                             const std::string& context,
                             const std::string& inputSourceName,
@@ -127,6 +129,21 @@ class EXP waeHandler : public smartable
                             S_mfException      except);
 
     virtual void          displayWarningsAndErrorsInputLineNumbers ();
+
+    // trace
+
+    virtual void          waeTrace (
+//                             const std::string& context,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& message);
+
+    virtual void          waeTrace (
+//                             const std::string& context,
+                            std::ostream&      os,
+                            const std::string& inputSourceName,
+                            int                inputLineNumber,
+                            const std::string& message);
 
     // print
     // ------------------------------------------------------

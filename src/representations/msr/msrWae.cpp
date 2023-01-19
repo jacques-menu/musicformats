@@ -9,13 +9,14 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStringsHandling.h"
+#include "mfStaticSettings.h"
 
-#include "mfEnableAbortToDebugErrorsSetting.h"
+#include "mfStringsHandling.h"
 
 #include "oahEarlyOptions.h"
 
 #include "waeInterface.h"
+
 #include "msrWae.h"
 
 #include "oahOah.h"

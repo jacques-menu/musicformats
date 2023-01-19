@@ -39,6 +39,10 @@ std::string mfPassIDKindAsString (
       result = "*kMfPassID_UNKNOWN*";
       break;
 
+    case mfPassIDKind::kMfPassID_ALL:
+      result = "*kMfPassID_ALL*";
+      break;
+
     case mfPassIDKind::kMfPassID_0:
       result = "0";
       break;
@@ -276,6 +280,22 @@ void mfPassDescription::print (std::ostream& os) const
 std::ostream& operator << (std::ostream& os, const S_mfPassDescription& elt) {
   os << elt->asString ();
   return os;
+}
+
+//______________________________________________________________________________
+// global variable
+
+EXP mfPassIDKind gGlobalCurrentPassIDKind =
+  mfPassIDKind::kMfPassID_ALL; // default value for passes tracing
+
+extern EXP void setGlobalCurrentPassIDKind (mfPassIDKind passIDKind)
+{
+  gGlobalCurrentPassIDKind = passIDKind;
+}
+
+extern EXP mfPassIDKind getGlobalCurrentPassIDKind ()
+{
+  return gGlobalCurrentPassIDKind;
 }
 
 

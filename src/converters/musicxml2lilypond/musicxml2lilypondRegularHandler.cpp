@@ -11,12 +11,7 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableTracingSetting.h"
-
-#include "mfEnableHarmoniesExtraSetting.h"
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  #include "oahHarmoniesExtraOah.h"
-#endif
+#include "mfStaticSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -215,8 +210,8 @@ void xml2lyRegularHandler::createOahRegularGroup ()
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
 #ifdef MF_TRACING_IS_ENABLED
-  registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME, subGroup);
-  registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_LONG_OPTION_NAME, subGroup);
+  registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME, subGroup);
+  registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_OPTION_LONG_NAME, subGroup);
 #endif
 
   registerAtomInRegularSubgroup ("help", subGroup);
@@ -1366,10 +1361,10 @@ void xml2lyRegularHandler::createHarmoniesRegularGroup ()
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  registerAtomInRegularSubgroup ("show-harmonies-structures", subGroup);
-  registerAtomInRegularSubgroup ("show-all-harmonies-contents", subGroup);
-  registerAtomInRegularSubgroup ("show-harmony-details", subGroup);
-  registerAtomInRegularSubgroup ("show-harmony-analysis", subGroup);
+  registerAtomInRegularSubgroup ("display-harmonies-structures", subGroup);
+  registerAtomInRegularSubgroup ("display-all-harmonies-contents", subGroup);
+  registerAtomInRegularSubgroup ("display-harmony-details", subGroup);
+  registerAtomInRegularSubgroup ("display-harmony-analysis", subGroup);
 #endif
 }
 

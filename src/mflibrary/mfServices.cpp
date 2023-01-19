@@ -11,7 +11,7 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfServices.h"
 #include "mfStringsHandling.h"

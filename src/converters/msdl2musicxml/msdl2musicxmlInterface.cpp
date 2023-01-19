@@ -13,7 +13,7 @@
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
                         // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfPasses.h"
 #include "mfServices.h"
@@ -24,7 +24,7 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2musicxmlWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -99,7 +99,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_1) <<
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1) <<
         ": " <<
         "Creating a first MSR from the MSDL input" <<
         std::endl <<
@@ -122,7 +122,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-      gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -161,10 +161,10 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
   // ------------------------------------------------------
 
   if (false && gGlobalMsdl2xmlInsiderOahGroup->getQuitAfterPass1 ()) { // JMI
-    err <<
-      std::endl <<
-      "Quitting after creating the MSR skeleton in pass 1 of convertMsdlStream2musicxmlWithHandler as requested" <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_1));
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -180,7 +180,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
@@ -202,7 +202,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -228,7 +228,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
       secondMxsr,
       outputFileName,
       err,
-      gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
+      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
       "Convert the MXSR into MusicXML text");
   }
   catch (mxsr2musicxmlException& e) {
@@ -397,10 +397,10 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
   // open input file
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    err <<
-      std::endl <<
-      gWaeHandler->openingMusicXMLFileForWriting (inputFileName) <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->openingMusicXMLFileForWriting (inputFileName));
   }
 #endif
 
@@ -442,10 +442,10 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
   // open input file
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    err <<
-      std::endl <<
-      gWaeHandler->openingMusicXMLFileForWriting (inputFileName) <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->openingMusicXMLFileForWriting (inputFileName));
   }
 #endif
 

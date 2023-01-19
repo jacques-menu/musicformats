@@ -13,16 +13,16 @@
 #include <climits>      // INT_MIN, INT_MAX
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "xml_tree_browser.h"
 
 #include "waeInterface.h"
 #include "mxsr2msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mxsr2msrComponent.h"
 

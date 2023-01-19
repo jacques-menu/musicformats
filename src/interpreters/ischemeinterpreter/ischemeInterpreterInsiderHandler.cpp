@@ -14,21 +14,18 @@
 // libmusicxml2
 #include "visitor.h"
 
-// WAE
-#include "oahWae.h"
-
-#include "mfEnableHarmoniesExtraSetting.h"
-
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfServices.h"
-
 #include "mfStringsHandling.h"
 
 // OAH
 #include "oahOah.h"
 #include "waeOah.h"
 #include "oahDisplayOah.h"
+
+// WAE
+#include "oahWae.h"
 
 // early options
 #include "oahEarlyOptions.h"

@@ -181,23 +181,23 @@ jacquesmenu@macmini > xml2ly -query help-summary
 
 There are various options in \mr\ for various needs:
 \begin{itemize}
-\item oahAtomExpectingAValue
-oahAtomImplicitlyStoringAValue
+\item oahValueFittedAtom
+oahAtomImplicitlySettingAVariable
 oahAtomStoringAValue
-oahPureHelpAtomWithoutAValue
-oahPureHelpAtomExpectingAValue
+oahPureHelpValueLessAtom
+oahPureHelpValueFittedAtom
 
-class EXP oahAtomAlias : public oahAtom
+class EXP oahValueLessAtomAlias : public oahAtom
 class EXP oahMacroAtom : public oahAtom
-class EXP oahOptionsUsageAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahHelpAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahHelpSummaryAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahAboutAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahLibraryVersionAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahHistoryAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahLibraryHistoryAtom : public oahPureHelpAtomWithoutAValue
-class EXP oahContactAtom : public oahPureHelpAtomWithoutAValue
+class EXP oahOptionsUsageAtom : public oahPureHelpValueLessAtom
+class EXP oahHelpAtom : public oahPureHelpValueLessAtom
+class EXP oahHelpSummaryAtom : public oahPureHelpValueLessAtom
+class EXP oahAboutAtom : public oahPureHelpValueLessAtom
+class EXP oahVersionAtom : public oahPureHelpValueLessAtom
+class EXP oahLibraryVersionAtom : public oahPureHelpValueLessAtom
+class EXP oahHistoryAtom : public oahPureHelpValueLessAtom
+class EXP oahLibraryHistoryAtom : public oahPureHelpValueLessAtom
+class EXP oahContactAtom : public oahPureHelpValueLessAtom
 class EXP oahBooleanAtom : public oahAtom
 class EXP oahTwoBooleansAtom : public oahBooleanAtom
 class EXP oahThreeBooleansAtom : public oahBooleanAtom
@@ -208,8 +208,8 @@ class EXP oahTwoIntegersAtom : public oahIntegerAtom
 class EXP oahFloatAtom : public oahAtomStoringAValue
 class EXP oahStringAtom : public oahAtomStoringAValue
 class EXP oahFactorizedStringAtom : public oahAtom
-class EXP oahStringWithDefaultValueAtom : public oahStringAtom
-class EXP oahStringWithRegexAtom : public oahStringAtom
+class EXP oahDefaultedStringAtom : public oahStringAtom
+class EXP oahRegexAtom : public oahStringAtom
 class EXP oahRationalAtom : public oahAtomStoringAValue
 class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 class EXP oahColorRGBAtom : public oahAtomStoringAValue
@@ -221,9 +221,9 @@ class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
 class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
 class EXP oahLengthAtom : public oahAtomStoringAValue
 class EXP oahMidiTempoAtom : public oahAtomStoringAValue
-class EXP oahOptionNameHelpAtom : public oahStringWithDefaultValueAtom
-class EXP oahQueryOptionNameAtom : public oahPureHelpAtomExpectingAValue
-class EXP oahFindStringAtom : public oahPureHelpAtomExpectingAValue
+class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
+class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
+class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
 
 
 \end{itemize}

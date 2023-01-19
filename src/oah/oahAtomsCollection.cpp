@@ -13,14 +13,14 @@
 
 #include <regex>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
 #include "mfStringsHandling.h"
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -41,71 +41,70 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-S_oahAtomAlias oahAtomAlias::create (
-  const std::string&    shortName,
-  const std::string&    longName,
-  const std::string&    description,
-  const S_oahAtom&      originalOahAtom)
+S_oahValueLessAtomAlias oahValueLessAtomAlias::create (
+  const std::string&        shortName,
+  const std::string&        longName,
+  const std::string&        description,
+  const S_oahValueLessAtom& originalValueLessAtom)
 {
-  oahAtomAlias* o = new
-    oahAtomAlias (
+  oahValueLessAtomAlias* o = new
+    oahValueLessAtomAlias (
       longName,
       shortName,
       description,
-      originalOahAtom);
+      originalValueLessAtom);
   assert (o != nullptr);
   return o;
 }
 
-oahAtomAlias::oahAtomAlias (
-  const std::string&    shortName,
-  const std::string&    longName,
-  const std::string&    description,
-  const S_oahAtom&      originalOahAtom)
-  : oahAtom (
+oahValueLessAtomAlias::oahValueLessAtomAlias (
+  const std::string&        shortName,
+  const std::string&        longName,
+  const std::string&        description,
+  const S_oahValueLessAtom& originalValueLessAtom)
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      originalOahAtom->getElementValueKind ())
+      description)
 {
-  fOriginalOahAtom = originalOahAtom;
+  fOriginalValueLessAtom = originalValueLessAtom;
 }
 
-oahAtomAlias::~oahAtomAlias ()
+oahValueLessAtomAlias::~oahValueLessAtomAlias ()
 {}
 
-void oahAtomAlias::applyElement (std::ostream& os)
+void oahValueLessAtomAlias::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> option '" << fetchNames () << "' is a oahAtomAlias" <<
+      "==> option '" << fetchNames () << "' is a oahValueLessAtomAlias" <<
       std::endl;
   }
 #endif
 
-  // JMI ???
+  // JMI ??? v0.9.66
 }
 
-void oahAtomAlias::acceptIn (basevisitor* v)
+void oahValueLessAtomAlias::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahAtomAlias::acceptIn ()" <<
+      ".\\\" ==> oahValueLessAtomAlias::acceptIn ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_oahAtomAlias>*
+  if (visitor<S_oahValueLessAtomAlias>*
     p =
-      dynamic_cast<visitor<S_oahAtomAlias>*> (v)) {
-        S_oahAtomAlias elem = this;
+      dynamic_cast<visitor<S_oahValueLessAtomAlias>*> (v)) {
+        S_oahValueLessAtomAlias elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahAtomAlias::visitStart ()" <<
+            ".\\\" ==> Launching oahValueLessAtomAlias::visitStart ()" <<
             std::endl;
         }
 #endif
@@ -113,25 +112,25 @@ void oahAtomAlias::acceptIn (basevisitor* v)
   }
 }
 
-void oahAtomAlias::acceptOut (basevisitor* v)
+void oahValueLessAtomAlias::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahAtomAlias::acceptOut ()" <<
+      ".\\\" ==> oahValueLessAtomAlias::acceptOut ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_oahAtomAlias>*
+  if (visitor<S_oahValueLessAtomAlias>*
     p =
-      dynamic_cast<visitor<S_oahAtomAlias>*> (v)) {
-        S_oahAtomAlias elem = this;
+      dynamic_cast<visitor<S_oahValueLessAtomAlias>*> (v)) {
+        S_oahValueLessAtomAlias elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahAtomAlias::visitEnd ()" <<
+            ".\\\" ==> Launching oahValueLessAtomAlias::visitEnd ()" <<
             std::endl;
         }
 #endif
@@ -139,24 +138,24 @@ void oahAtomAlias::acceptOut (basevisitor* v)
   }
 }
 
-void oahAtomAlias::browseData (basevisitor* v)
+void oahValueLessAtomAlias::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahAtomAlias::browseData ()" <<
+      ".\\\" ==> oahValueLessAtomAlias::browseData ()" <<
       std::endl;
   }
 #endif
 
-  if (fOriginalOahAtom) {
+  if (fOriginalValueLessAtom) {
     // browse the original atom
     oahBrowser<oahAtom> browser (v);
-    browser.browse (*fOriginalOahAtom);
+    browser.browse (*fOriginalValueLessAtom);
   }
 }
 
-void oahAtomAlias::print (std::ostream& os) const
+void oahValueLessAtomAlias::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -172,17 +171,17 @@ void oahAtomAlias::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahAtomAlias::printAtomWithVariableOptionsValues (
+void oahValueLessAtomAlias::printAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
-  fOriginalOahAtom->
+  fOriginalValueLessAtom->
     printAtomWithVariableOptionsValues (
       os,
       valueFieldWidth);
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahAtomAlias& elt)
+std::ostream& operator << (std::ostream& os, const S_oahValueLessAtomAlias& elt)
 {
   if (elt) {
     elt->print (os);
@@ -213,30 +212,30 @@ oahMacroAtom::oahMacroAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description)
-  : oahAtom (
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
+      description)
 {}
 
 oahMacroAtom::~oahMacroAtom ()
 {}
 
-void oahMacroAtom::appendAtomToMacro (S_oahAtom atom)
+void oahMacroAtom::appendValueLessAtomToMacro (
+	S_oahValueLessAtom atomNotExpectingAValue)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    atom != nullptr,
-    "atom is null");
+    atomNotExpectingAValue != nullptr,
+    "atomNotExpectingAValue is null");
 #endif
 
-  fMacroAtomsList.push_back (atom);
+  fMacroValueLessAtomsList.push_back (atomNotExpectingAValue);
 }
 
-void oahMacroAtom::applyElement (std::ostream& os)
+void oahMacroAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -247,27 +246,10 @@ void oahMacroAtom::applyElement (std::ostream& os)
 #endif
 
   for (
-    std::list<S_oahAtom>::const_iterator i =
-      fMacroAtomsList.begin ();
-    i != fMacroAtomsList.end ();
-    ++i
+  	S_oahValueLessAtom atomNotExpectingAValue : fMacroValueLessAtomsList
   ) {
-    S_oahAtom atom = (*i);
-
-    if (
-      // oahAtomStoringAValue?
-      S_oahAtomStoringAValue
-        atomWithVariable =
-          dynamic_cast<oahAtomStoringAValue*>(&(*atom))
-    ) {
-//       atomWithVariable-> JMI ???
-//         applyAtomWithValue (theString, os);
-    }
-    else {
-      // valueless atom
-      atom->
-        applyElement (os);
-    }
+		atomNotExpectingAValue->
+			applyValueLessAtom (os);
   } // for
 }
 
@@ -333,17 +315,10 @@ void oahMacroAtom::browseData (basevisitor* v)
   }
 #endif
 
-  for (
-    std::list<S_oahAtom>::const_iterator i =
-      fMacroAtomsList.begin ();
-    i != fMacroAtomsList.end ();
-    ++i
-  ) {
-    S_oahAtom atom = (*i);
-
-    // browse the atom
+  for (S_oahValueLessAtom valueLessAtom : fMacroValueLessAtomsList) {
+    // browse the valueLessAtom
     oahBrowser<oahAtom> browser (v);
-    browser.browse (*atom);
+    browser.browse (*valueLessAtom);
   } // for
 }
 
@@ -360,20 +335,13 @@ void oahMacroAtom::printFull (std::ostream& os) const
   oahElement::printOahElementEssentials (
     os, fieldWidth);
 
-  for (
-    std::list<S_oahAtom>::const_iterator i =
-      fMacroAtomsList.begin ();
-    i != fMacroAtomsList.end ();
-    ++i
-  ) {
-    S_oahAtom atom = (*i);
-
+  for (S_oahValueLessAtom valueLessAtom : fMacroValueLessAtomsList) {
     os <<
-      "atom:" <<
+      "valueLessAtom:" <<
       std::endl;
     ++gIndenter;
     os <<
-      atom;
+      valueLessAtom;
     --gIndenter;
     os << std::endl;
   } // for
@@ -391,16 +359,16 @@ void oahMacroAtom::print (std::ostream& os) const
   oahElement::printOahElementEssentials (
     os, fieldWidth);
 
-  std::list<S_oahAtom>::const_iterator
-    iBegin = fMacroAtomsList.begin (),
-    iEnd   = fMacroAtomsList.end (),
+  std::list<S_oahValueLessAtom>::const_iterator
+    iBegin = fMacroValueLessAtomsList.begin (),
+    iEnd   = fMacroValueLessAtomsList.end (),
     i      = iBegin;
 
   for ( ; ; ) {
-    S_oahAtom atom = (*i);
+    S_oahAtom valueLessAtom = (*i);
 
     os <<
-      atom->fetchNames ();
+      valueLessAtom->fetchNames ();
 
     if (++i == iEnd) break;
     os << ", ";
@@ -426,7 +394,7 @@ void oahMacroAtom::printHelp (std::ostream& os) const
   os <<
     "This macro option is equivalent to: ";
 
-  if (! fMacroAtomsList.size ()) {
+  if (! fMacroValueLessAtomsList.size ()) {
     os <<
       "[NONE]" << // JMI
       std::endl;
@@ -437,23 +405,23 @@ void oahMacroAtom::printHelp (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahAtom>::const_iterator
-      iBegin = fMacroAtomsList.begin (),
-      iEnd   = fMacroAtomsList.end (),
+    std::list<S_oahValueLessAtom>::const_iterator
+      iBegin = fMacroValueLessAtomsList.begin (),
+      iEnd   = fMacroValueLessAtomsList.end (),
       i      = iBegin;
 
     for ( ; ; ) {
-      S_oahAtom atom = (*i);
+      S_oahAtom valueLessAtom = (*i);
 
       os <<
-        atom-> fetchNames () <<
+        valueLessAtom-> fetchNames () <<
         ":" <<
         std::endl;
 
       ++gIndenter;
 
       gIndenter.indentMultiLineString (
-        atom-> getDescription (),
+        valueLessAtom-> getDescription (),
         os);
 
       --gIndenter;
@@ -479,7 +447,7 @@ void oahMacroAtom::printAtomWithVariableOptionsValues (
 
   ++gIndenter;
 
-  for (S_oahAtom atom : fMacroAtomsList) {
+  for (S_oahAtom atom : fMacroValueLessAtomsList) {
     atom->
       printAtomWithVariableOptionsValues (
         os,
@@ -523,7 +491,7 @@ oahOptionsUsageAtom::oahOptionsUsageAtom (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -533,7 +501,7 @@ oahOptionsUsageAtom::oahOptionsUsageAtom (
 oahOptionsUsageAtom::~oahOptionsUsageAtom ()
 {}
 
-void oahOptionsUsageAtom::applyElement (std::ostream& os)
+void oahOptionsUsageAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -555,7 +523,7 @@ void oahOptionsUsageAtom::printOptionsUsage (std::ostream& os) const
   gIndenter.resetToZero ();
 
   os <<
-    fHelpAtomWithoutAValueServiceName <<
+    fHelpValueLessAtomServiceName <<
     " options usage:" <<
     std::endl;
 
@@ -597,7 +565,7 @@ as is the case of https://libmusicxml.grame.fr .)",
             fetchNamesBetweenQuotes ()
         ),
       std::regex ("EXECUTABLE_NAME"),
-      fHelpAtomWithoutAValueServiceName
+      fHelpValueLessAtomServiceName
       ),
     os);
 
@@ -719,7 +687,7 @@ oahHelpAtom::oahHelpAtom (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -729,7 +697,7 @@ oahHelpAtom::oahHelpAtom (
 oahHelpAtom::~oahHelpAtom ()
 {}
 
-void oahHelpAtom::applyElement (std::ostream& os)
+void oahHelpAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -871,7 +839,7 @@ oahHelpSummaryAtom::oahHelpSummaryAtom (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -881,7 +849,7 @@ oahHelpSummaryAtom::oahHelpSummaryAtom (
 oahHelpSummaryAtom::~oahHelpSummaryAtom ()
 {}
 
-void oahHelpSummaryAtom::applyElement (std::ostream& os)
+void oahHelpSummaryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1023,7 +991,7 @@ oahAboutAtom::oahAboutAtom (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -1033,7 +1001,7 @@ oahAboutAtom::oahAboutAtom (
 oahAboutAtom::~oahAboutAtom ()
 {}
 
-void oahAboutAtom::applyElement (std::ostream& os)
+void oahAboutAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1200,7 +1168,7 @@ oahVersionAtom::oahVersionAtom (
   const std::string&  description,
   const std::string&  serviceName,
   oahVersionKind      versionKind)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -1212,7 +1180,7 @@ oahVersionAtom::oahVersionAtom (
 oahVersionAtom::~oahVersionAtom ()
 {}
 
-void oahVersionAtom::applyElement (std::ostream& os)
+void oahVersionAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1391,7 +1359,7 @@ oahLibraryVersionAtom::oahLibraryVersionAtom (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -1401,7 +1369,7 @@ oahLibraryVersionAtom::oahLibraryVersionAtom (
 oahLibraryVersionAtom::~oahLibraryVersionAtom ()
 {}
 
-void oahLibraryVersionAtom::applyElement (std::ostream& os)
+void oahLibraryVersionAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1553,7 +1521,7 @@ oahHistoryAtom::oahHistoryAtom (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -1563,7 +1531,7 @@ oahHistoryAtom::oahHistoryAtom (
 oahHistoryAtom::~oahHistoryAtom ()
 {}
 
-void oahHistoryAtom::applyElement (std::ostream& os)
+void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1715,7 +1683,7 @@ oahLibraryHistoryAtom::oahLibraryHistoryAtom (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -1725,7 +1693,7 @@ oahLibraryHistoryAtom::oahLibraryHistoryAtom (
 oahLibraryHistoryAtom::~oahLibraryHistoryAtom ()
 {}
 
-void oahLibraryHistoryAtom::applyElement (std::ostream& os)
+void oahLibraryHistoryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1877,7 +1845,7 @@ oahContactAtom::oahContactAtom (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -1888,7 +1856,7 @@ oahContactAtom::oahContactAtom (
 oahContactAtom::~oahContactAtom ()
 {}
 
-void oahContactAtom::applyElement (std::ostream& os)
+void oahContactAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1995,7 +1963,7 @@ R"(To contact the maintainers of EXECUTABLE_NAME:
   describing the problem and any error messages you get if relevant.
   You should sign up for GitHub for that.)",
         std::regex ("EXECUTABLE_NAME"),
-        fHelpAtomWithoutAValueServiceName),
+        fHelpValueLessAtomServiceName),
     os);
 }
 
@@ -2033,7 +2001,7 @@ oahDisplayPrefixes::oahDisplayPrefixes (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -2044,7 +2012,7 @@ oahDisplayPrefixes::oahDisplayPrefixes (
 oahDisplayPrefixes::~oahDisplayPrefixes ()
 {}
 
-void oahDisplayPrefixes::applyElement (std::ostream& os)
+void oahDisplayPrefixes::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2187,7 +2155,7 @@ oahDisplaySingleCharacterOptions::oahDisplaySingleCharacterOptions (
   const std::string& shortName,
   const std::string& description,
   const std::string& serviceName)
-  : oahPureHelpAtomWithoutAValue (
+  : oahPureHelpValueLessAtom (
       longName,
       shortName,
       description,
@@ -2198,7 +2166,7 @@ oahDisplaySingleCharacterOptions::oahDisplaySingleCharacterOptions (
 oahDisplaySingleCharacterOptions::~oahDisplaySingleCharacterOptions ()
 {}
 
-void oahDisplaySingleCharacterOptions::applyElement (std::ostream& os)
+void oahDisplaySingleCharacterOptions::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2402,7 +2370,7 @@ void oahOnOffAtom::setOnOffKindVariable (mfOnOffKind value)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    if (fLongName == K_TRACE_OAH_LONG_OPTION_NAME) {
+    if (fLongName == K_TRACE_OAH_OPTION_LONG_NAME) {
       // get the options handler
       S_oahHandler
         handler =
@@ -2572,11 +2540,10 @@ oahBooleanAtom::oahBooleanAtom (
   const std::string& description,
   const std::string& variableName,
   Bool&              booleanVariable)
-  : oahAtom (
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout), // kElementValueImplicit ??? JMI
+      description),
     fVariableName (
       variableName),
     fBooleanVariable (
@@ -2586,7 +2553,7 @@ oahBooleanAtom::oahBooleanAtom (
 oahBooleanAtom::~oahBooleanAtom ()
 {}
 
-void oahBooleanAtom::applyElement (std::ostream& os)
+void oahBooleanAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2605,7 +2572,7 @@ void oahBooleanAtom::setBooleanVariable (Bool value)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    if (fLongName == K_TRACE_OAH_LONG_OPTION_NAME) {
+    if (fLongName == K_TRACE_OAH_OPTION_LONG_NAME) {
       // get the options handler
       S_oahHandler
         handler =
@@ -2786,7 +2753,7 @@ oahBooleanAtomWithTracePasses::oahBooleanAtomWithTracePasses (
 oahBooleanAtomWithTracePasses::~oahBooleanAtomWithTracePasses ()
 {}
 
-void oahBooleanAtomWithTracePasses::applyElement (std::ostream& os)
+void oahBooleanAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2967,7 +2934,7 @@ oahTwoBooleansAtom::oahTwoBooleansAtom (
 oahTwoBooleansAtom::~oahTwoBooleansAtom ()
 {}
 
-void oahTwoBooleansAtom::applyElement (std::ostream& os)
+void oahTwoBooleansAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -3175,7 +3142,7 @@ oahTwoBooleansAtomWithTracePasses::oahTwoBooleansAtomWithTracePasses (
 oahTwoBooleansAtomWithTracePasses::~oahTwoBooleansAtomWithTracePasses ()
 {}
 
-void oahTwoBooleansAtomWithTracePasses::applyElement (std::ostream& os)
+void oahTwoBooleansAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -3370,7 +3337,7 @@ oahThreeBooleansAtom::oahThreeBooleansAtom (
 oahThreeBooleansAtom::~oahThreeBooleansAtom ()
 {}
 
-void oahThreeBooleansAtom::applyElement (std::ostream& os)
+void oahThreeBooleansAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -3586,7 +3553,7 @@ oahThreeBooleansAtomWithTracePasses::oahThreeBooleansAtomWithTracePasses (
 oahThreeBooleansAtomWithTracePasses::~oahThreeBooleansAtomWithTracePasses ()
 {}
 
-void oahThreeBooleansAtomWithTracePasses::applyElement (std::ostream& os)
+void oahThreeBooleansAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -3755,11 +3722,10 @@ oahCombinedBooleansAtom::oahCombinedBooleansAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description)
-  : oahAtom (
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
+      description)
 {}
 
 oahCombinedBooleansAtom::~oahCombinedBooleansAtom ()
@@ -3873,7 +3839,7 @@ void oahCombinedBooleansAtom::setCombinedBooleanVariables (Bool value)
   }
 }
 
-void oahCombinedBooleansAtom::applyElement (std::ostream& os)
+void oahCombinedBooleansAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -4159,631 +4125,6 @@ void oahCombinedBooleansAtom::printAtomWithVariableOptionsValues (
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahCombinedBooleansAtom& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "[NONE]" << std::endl;
-  }
-
-  return os;
-}
-
-//______________________________________________________________________________
-S_oahCommonPrefixBooleansAtom oahCommonPrefixBooleansAtom::create (
-  const std::string& longName,
-  const std::string& shortName,
-  const std::string& description,
-  const std::string& shortSuffixDescriptor,
-  const std::string& longSuffixDescriptor,
-  const S_oahPrefix& shortNamesPrefix,
-  const S_oahPrefix& longNamesPrefix)
-{
-  oahCommonPrefixBooleansAtom* o = new
-    oahCommonPrefixBooleansAtom (
-      longName,
-      shortName,
-      description,
-      shortSuffixDescriptor,
-      longSuffixDescriptor,
-      shortNamesPrefix,
-      longNamesPrefix);
-  assert (o != nullptr);
-  return o;
-}
-
-oahCommonPrefixBooleansAtom::oahCommonPrefixBooleansAtom (
-  const std::string& longName,
-  const std::string& shortName,
-  const std::string& description,
-  const std::string& shortSuffixDescriptor,
-  const std::string& longSuffixDescriptor,
-  const S_oahPrefix& shortNamesPrefix,
-  const S_oahPrefix& longNamesPrefix)
-  : oahAtom (
-      longName,
-      shortName,
-      description,
-      oahElementValueKind::kElementValueWithout)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    shortNamesPrefix != nullptr,
-    "shortNamesPrefix is null");
-  mfAssert (
-    __FILE__, __LINE__,
-    longNamesPrefix != nullptr,
-    "fLongNamesPrefix is null");
-#endif
-
-  fShortSuffixDescriptor = shortSuffixDescriptor;
-  fLongSuffixDescriptor  = longSuffixDescriptor;
-
-  fShortNamesPrefix = shortNamesPrefix;
-  fLongNamesPrefix  = longNamesPrefix;
-
-  // get prefixes names
-  fShortNamesPrefixName =
-    fShortNamesPrefix->getPrefixName ();
-  fLongNamesPrefixName =
-    fLongNamesPrefix->getPrefixName ();
-}
-
-oahCommonPrefixBooleansAtom::~oahCommonPrefixBooleansAtom ()
-{}
-
-void oahCommonPrefixBooleansAtom::addBooleanAtom (
-  const S_oahBooleanAtom& booleanAtom)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    booleanAtom != nullptr,
-    "booleanAtom is null");
-#endif
-
-  // long name consistency check
-  {
-    std::string booleanAtomLongName =
-      booleanAtom->getLongName ();
-
-    if (booleanAtomLongName.size ()) {
-      std::size_t found =
-        booleanAtomLongName.find (fLongNamesPrefixName);
-
-      if (found == std::string::npos) {
-        std::stringstream s;
-
-        s <<
-          "Option long name \"" <<
-          booleanAtomLongName <<
-          "\" is different than the long names prefix name \"" <<
-          fLongNamesPrefixName <<
-          "\"" <<
-          std::endl;
-
-        booleanAtom->print (s);
-
-//         oahError (s.str ());
-        oahWarning (s.str ());
-      }
-
-      else if (found != 0) {
-        std::stringstream s;
-
-        s <<
-          "Option long name \"" <<
-          booleanAtomLongName <<
-          "\" doesn't start by the long names prefix name \"" <<
-          fLongNamesPrefixName <<
-          "\"" <<
-          std::endl;
-
-        booleanAtom->print (s);
-
-        oahError (s.str ());
-      }
-
-      else {
-        std::string booleanAtomLongNameSuffix =
-          booleanAtomLongName.substr (
-            fLongNamesPrefixName.size ());
-
-        if (booleanAtomLongNameSuffix.size () == 0) {
-          std::stringstream s;
-
-          s <<
-            "Option long name \"" <<
-            booleanAtomLongName <<
-            "\" is nothing more than the long names prefix name \"" <<
-            fLongNamesPrefixName <<
-            "\"" <<
-          std::endl;
-
-          booleanAtom->print (s);
-
-          oahError (s.str ());
-        }
-        else {
-          // register this boolean atom's suffix in the list
-          fLongNamesSuffixes.push_back (booleanAtomLongNameSuffix);
-        }
-      }
-    }
-
-    else {
-      std::stringstream s;
-
-      s <<
-        "Option long name \"" <<
-        booleanAtomLongName <<
-        "\" is empty, atom \"" <<
-        fLongNamesPrefixName <<
-        "\" cannot be used in a multiplex booleans atom";
-
-      booleanAtom->print (s);
-
-      oahError (s.str ());
-    }
-  }
-
-  // short name consistency check
-  {
-    std::string booleanAtomShortName =
-      booleanAtom->getShortName ();
-
-    std::size_t found =
-      booleanAtomShortName.find (fShortNamesPrefixName);
-
-    if (found == std::string::npos) {
-      std::stringstream s;
-
-      s <<
-        "Option short name \"" <<
-        booleanAtomShortName <<
-        "\" is different than the short names prefix name \"" <<
-        fShortNamesPrefixName <<
-        "\"";
-
-      booleanAtom->print (s);
-
-      oahError (s.str ());
-    }
-
-    else if (found != 0) {
-      std::stringstream s;
-
-      s <<
-        "Option short name \"" <<
-        booleanAtomShortName <<
-        "\" doesn't start by the short names prefix name \"" <<
-        fShortNamesPrefixName <<
-        "\"";
-
-      booleanAtom->print (s);
-
-//       oahError (s.str ());
-      oahWarning (s.str ());
-    }
-
-    else {
-      std::string booleanAtomShortNameSuffix =
-        booleanAtomShortName.substr (
-          fShortNamesPrefixName.size ());
-
-      if (booleanAtomShortNameSuffix.size () == 0) {
-        std::stringstream s;
-
-        s <<
-          "Option short name \"" <<
-          booleanAtomShortName <<
-          "\" is nothing more than the short names prefix name \"" <<
-          fShortNamesPrefixName <<
-          "\"";
-
-        booleanAtom->print (s);
-
-        oahError (s.str ());
-      }
-      else {
-        // register this boolean atom's suffix in the list
-        fShortNamesSuffixes.push_back (booleanAtomShortNameSuffix);
-      }
-    }
-  }
-
-  // append the boolean atom to the list
-  fBooleanAtomsList.push_back (
-    booleanAtom);
-
-  // make this atom imvisible
-  booleanAtom->
-    setElementVisibilityKind (
-      oahElementVisibilityKind::kElementVisibilityNone);
-}
-
-void oahCommonPrefixBooleansAtom::addBooleanAtomByName (
-  const std::string& name)
-{
-  // get the options handler
-  S_oahHandler
-    handler =
-      fetchAtomUpLinkToHandler ();
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    handler != nullptr,
-    "handler is null");
-#endif
-
-  // is name known in options map?
-  S_oahElement
-    element =
-      handler->
-        fetchNameInNamesToElementsMap (name);
-
-  if (! element) {
-    // no, name is unknown in the map
-    handler->
-      printOptionsSummary ();
-
-    handler->
-      unknownOptionNameError (
-        name,
-        "in common prefix booleans atom");
-  }
-
-  else {
-    // name is known, let's handle it
-
-    if (
-      // boolean atom?
-      S_oahBooleanAtom
-        atom =
-          dynamic_cast<oahBooleanAtom*>(&(*element))
-      ) {
-      // add the boolean atom
-      addBooleanAtom (atom);
-    }
-
-    else {
-      handler->
-        unknownOptionNameError (
-          name,
-          "in combined booleans atom, not the name of an atom");
-    }
-  }
-}
-
-void oahCommonPrefixBooleansAtom::applyElement (std::ostream& os)
-{
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
-      "Handling option name '" <<
-      fetchNames () <<
-      "' which is a oahCommonPrefixBooleansAtom" <<
-      std::endl;
-  }
-#endif
-
-  // handle it at once JMI ???
-}
-
-void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
-{
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
-      ".\\\" ==> oahCommonPrefixBooleansAtom::acceptIn ()" <<
-      std::endl;
-  }
-#endif
-
-  if (visitor<S_oahCommonPrefixBooleansAtom>*
-    p =
-      dynamic_cast<visitor<S_oahCommonPrefixBooleansAtom>*> (v)) {
-        S_oahCommonPrefixBooleansAtom elem = this;
-
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
-            ".\\\" ==> Launching oahCommonPrefixBooleansAtom::visitStart ()" <<
-            std::endl;
-        }
-#endif
-        p->visitStart (elem);
-  }
-}
-
-void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
-{
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
-      ".\\\" ==> oahCommonPrefixBooleansAtom::acceptOut ()" <<
-      std::endl;
-  }
-#endif
-
-  if (visitor<S_oahCommonPrefixBooleansAtom>*
-    p =
-      dynamic_cast<visitor<S_oahCommonPrefixBooleansAtom>*> (v)) {
-        S_oahCommonPrefixBooleansAtom elem = this;
-
-#ifdef MF_TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
-            ".\\\" ==> Launching oahCommonPrefixBooleansAtom::visitEnd ()" <<
-            std::endl;
-        }
-#endif
-        p->visitEnd (elem);
-  }
-}
-
-void oahCommonPrefixBooleansAtom::browseData (basevisitor* v)
-{
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
-      ".\\\" ==> oahCommonPrefixBooleansAtom::browseData ()" <<
-      std::endl;
-  }
-#endif
-
-  if (fShortNamesPrefix) {
-    // browse the short names prefix
-    oahBrowser<oahPrefix> browser (v);
-    browser.browse (*(fShortNamesPrefix));
-  }
-
-  if (fLongNamesPrefix) {
-    // browse the long names prefix
-    oahBrowser<oahPrefix> browser (v);
-    browser.browse (*(fLongNamesPrefix));
-  }
-
-  // browse the boolean atoms
-  if (fBooleanAtomsList.size ()) {
-    for (
-      std::list<S_oahBooleanAtom>::const_iterator i = fBooleanAtomsList.begin ();
-      i != fBooleanAtomsList.end ();
-      ++i
-    ) {
-      const S_oahBooleanAtom& booleanAtom = (*i);
-
-      // browse the boolean atom
-      oahBrowser<oahBooleanAtom> browser (v);
-      browser.browse (*(booleanAtom));
-    } // for
-  }
-}
-
-void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
-{
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
-
-  os <<
-    "MultiplexBooleansAtom:" <<
-    std::endl;
-
-  ++gIndenter;
-
-  printOahElementEssentials (
-    os, fieldWidth);
-
-  os << std::left <<
-    "shortSuffixDescriptor" << ": " <<
-    fShortSuffixDescriptor <<
-    std::endl <<
-    "longSuffixDescriptor" << ": " <<
-    fLongSuffixDescriptor <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "shortNamesPrefix" << ": ";
-  if (fShortNamesPrefix) {
-    os << fShortNamesPrefix;
-  }
-  else {
-    os << "[NONE]" << std::endl;
-  }
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "longNamesPrefix" << ": ";
-  if (fLongNamesPrefix) {
-    os << fLongNamesPrefix;
-  }
-  else {
-    os << "[NONE]" << std::endl;
-  }
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fBooleanAtomsList" << ": ";
-
-  if (! fBooleanAtomsList.size ()) {
-    os << "[EMPTY]";
-  }
-  else {
-    os << std::endl;
-
-    ++gIndenter;
-
-    std::list<S_oahBooleanAtom>::const_iterator
-      iBegin = fBooleanAtomsList.begin (),
-      iEnd   = fBooleanAtomsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
-      os << ' ';
-    } // for
-
-    --gIndenter;
-  }
-  os << std::endl;
-
-  --gIndenter;
-}
-
-void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
-{
-  os <<
-    '-' << fShortNamesPrefixName << "<" << fShortSuffixDescriptor << ">" <<
-    ", " <<
-    '-' << fLongNamesPrefixName << "-<" << fLongSuffixDescriptor << ">" <<
-    std::endl;
-
-  if (fDescription.size ()) {
-    // indent a bit more for readability
-    gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
-    gIndenter.indentMultiLineString (
-      fDescription,
-      os);
-
-    gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-  }
-
-  os <<
-    "The " <<
-    fShortNamesSuffixes.size () <<
-    " known " << fShortSuffixDescriptor << "s are: ";
-
-  if (fShortNamesSuffixes.size ()) {
-    os << std::endl;
-    ++gIndenter;
-
-    std::list<std::string>::const_iterator
-      iBegin = fShortNamesSuffixes.begin (),
-      iEnd   = fShortNamesSuffixes.end (),
-      i      = iBegin;
-
-    int cumulatedLength = 0;
-
-    for ( ; ; ) {
-      std::string suffix = (*i);
-
-      cumulatedLength += suffix.size ();
-      if (cumulatedLength >= K_MF_NAMES_LIST_MAX_LENGTH) {
-        os << std::endl;
-        cumulatedLength = 0;
-        break;
-      }
-
-      os << suffix;
-
-      if (++i == iEnd) break;
-
-      if (next (i) == iEnd) {
-        os << " and ";
-      }
-      else {
-        os << ", ";
-      }
-    } // for
-
-    os << "." << std::endl;
-    --gIndenter;
-  }
-  else {
-    os <<
-      "[NONE]" <<
-      std::endl;
-  }
-
-  if (fLongSuffixDescriptor != fShortSuffixDescriptor) {
-    int longNamesSuffixesCount = 0;
-
-    {
-      std::list<std::string>::const_iterator
-        iBegin = fLongNamesSuffixes.begin (),
-        iEnd   = fLongNamesSuffixes.end (),
-        i      = iBegin;
-
-      for ( ; ; ) {
-        if ((*i).size ()) {
-          ++longNamesSuffixesCount;
-        }
-
-        if (++i == iEnd) break;
-      } // for
-    }
-
-    os <<
-      "The " <<
-      fLongNamesSuffixes.size () <<
- // JMI     " -- " << longNamesSuffixesCount <<
-      " known " << fLongSuffixDescriptor << "s are: ";
-
-    if (fLongNamesSuffixes.size ()) {
-      os << std::endl;
-      ++gIndenter;
-
-      std::list<std::string>::const_iterator
-        iBegin = fLongNamesSuffixes.begin (),
-        iEnd   = fLongNamesSuffixes.end (),
-        i      = iBegin;
-
-      int cumulatedLength = 0;
-
-      for ( ; ; ) {
-        std::string suffix = (*i);
-
-        cumulatedLength += suffix.size ();
-        if (cumulatedLength >= K_MF_NAMES_LIST_MAX_LENGTH) {
-          os << std::endl;
-          cumulatedLength = 0;
-//        break;
-        }
-
-        os << suffix;
-
-        if (++i == iEnd) break;
-
-        if (next (i) == iEnd) {
-          os << " and ";
-        }
-        else {
-          os << ", ";
-        }
-      } // for
-
-      os << "." << std::endl;
-      --gIndenter;
-    }
-    else {
-      os <<
-        "[NONE]" <<
-        std::endl;
-    }
-  }
-
-  if (fDescription.size ()) { // ??? JMI
-// JMI    g_Indenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-  }
-}
-
-void oahCommonPrefixBooleansAtom::printAtomWithVariableOptionsValues (
-  std::ostream& os,
-  int           valueFieldWidth) const
-{
-  // nothing to do, these options values will be printed
-  // by the boolean atoms in the list
-}
-
-std::ostream& operator << (std::ostream& os, const S_oahCommonPrefixBooleansAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -5813,11 +5154,10 @@ oahFactorizedStringAtom::oahFactorizedStringAtom (
   const std::string& description,
   const std::string& atomNameDescriptor,
   const std::string& stringValueDescriptor)
-  : oahAtom (
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout),
+      description),
     fAtomNameDescriptor (
       atomNameDescriptor),
     fStringValueDescriptor (
@@ -5954,7 +5294,7 @@ void oahFactorizedStringAtom::addStringAtomByName (
   }
 }
 
-void oahFactorizedStringAtom::applyElement (std::ostream& os) // JMI
+void oahFactorizedStringAtom::applyValueLessAtom (std::ostream& os) // JMI v0.9.66
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -6191,7 +5531,8 @@ std::ostream& operator << (std::ostream& os, const S_oahFactorizedStringAtom& el
 }
 
 //______________________________________________________________________________
-S_oahStringWithDefaultValueAtom oahStringWithDefaultValueAtom::create (
+/* this class is purely virtual
+S_oahDefaultedStringAtom oahDefaultedStringAtom::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -6200,8 +5541,8 @@ S_oahStringWithDefaultValueAtom oahStringWithDefaultValueAtom::create (
   std::string&       stringVariable,
   const std::string& defaultStringValue)
 {
-  oahStringWithDefaultValueAtom* o = new
-    oahStringWithDefaultValueAtom (
+  oahDefaultedStringAtom* o = new
+    oahDefaultedStringAtom (
       longName,
       shortName,
       description,
@@ -6212,8 +5553,9 @@ S_oahStringWithDefaultValueAtom oahStringWithDefaultValueAtom::create (
   assert (o != nullptr);
   return o;
 }
+*/
 
-oahStringWithDefaultValueAtom::oahStringWithDefaultValueAtom (
+oahDefaultedStringAtom::oahDefaultedStringAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -6221,23 +5563,23 @@ oahStringWithDefaultValueAtom::oahStringWithDefaultValueAtom (
   const std::string& variableName,
   std::string&       stringVariable,
   const std::string& defaultStringValue)
-  : oahStringAtom (
+  : oahValueDefaultedAtom (
       longName,
       shortName,
       description,
-      valueSpecification,
-      variableName,
-      stringVariable),
-    fDefaultStringValue (
-      defaultStringValue)
-{
-  this->setElementValueKind (oahElementValueKind::kElementValueOptional);
-}
-
-oahStringWithDefaultValueAtom::~oahStringWithDefaultValueAtom ()
+      defaultStringValue),
+    fValueSpecification (
+    	valueSpecification),
+    fVariableName (
+      variableName),
+    fStringVariable (
+    	stringVariable)
 {}
 
-void oahStringWithDefaultValueAtom::applyAtomWithValue (
+oahDefaultedStringAtom::~oahDefaultedStringAtom ()
+{}
+
+void oahDefaultedStringAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -6246,35 +5588,33 @@ void oahStringWithDefaultValueAtom::applyAtomWithValue (
     gLogStream <<
       "Handling option name '" <<
       fetchNames () <<
-      "' which is a oahStringWithDefaultValueAtom" <<
+      "' which is a oahDefaultedStringAtom" <<
       std::endl;
   }
 #endif
 
-  oahStringAtom::applyAtomWithValue (
-    theString,
-    os);
+  setStringVariable (theString);
 }
 
-void oahStringWithDefaultValueAtom::acceptIn (basevisitor* v)
+void oahDefaultedStringAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringWithDefaultValueAtom::acceptIn ()" <<
+      ".\\\" ==> oahDefaultedStringAtom::acceptIn ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_oahStringWithDefaultValueAtom>*
+  if (visitor<S_oahDefaultedStringAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringWithDefaultValueAtom>*> (v)) {
-        S_oahStringWithDefaultValueAtom elem = this;
+      dynamic_cast<visitor<S_oahDefaultedStringAtom>*> (v)) {
+        S_oahDefaultedStringAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahStringWithDefaultValueAtom::visitStart ()" <<
+            ".\\\" ==> Launching oahDefaultedStringAtom::visitStart ()" <<
             std::endl;
         }
 #endif
@@ -6282,7 +5622,7 @@ void oahStringWithDefaultValueAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahStringWithDefaultValueAtom::setStringVariable (const std::string& value)
+void oahDefaultedStringAtom::setStringVariable (const std::string& value)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -6296,29 +5636,29 @@ void oahStringWithDefaultValueAtom::setStringVariable (const std::string& value)
   }
 #endif
 
-  oahStringAtom::setStringVariable (value);
+  fStringVariable = value;
   fSetByAnOption = true;
 }
 
-void oahStringWithDefaultValueAtom::acceptOut (basevisitor* v)
+void oahDefaultedStringAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringWithDefaultValueAtom::acceptOut ()" <<
+      ".\\\" ==> oahDefaultedStringAtom::acceptOut ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_oahStringWithDefaultValueAtom>*
+  if (visitor<S_oahDefaultedStringAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringWithDefaultValueAtom>*> (v)) {
-        S_oahStringWithDefaultValueAtom elem = this;
+      dynamic_cast<visitor<S_oahDefaultedStringAtom>*> (v)) {
+        S_oahDefaultedStringAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahStringWithDefaultValueAtom::visitEnd ()" <<
+            ".\\\" ==> Launching oahDefaultedStringAtom::visitEnd ()" <<
             std::endl;
         }
 #endif
@@ -6326,18 +5666,18 @@ void oahStringWithDefaultValueAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahStringWithDefaultValueAtom::browseData (basevisitor* v)
+void oahDefaultedStringAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringWithDefaultValueAtom::browseData ()" <<
+      ".\\\" ==> oahDefaultedStringAtom::browseData ()" <<
       std::endl;
   }
 #endif
 }
 
-std::string oahStringWithDefaultValueAtom::asShortNamedOptionString () const
+std::string oahDefaultedStringAtom::asShortNamedOptionString () const
 {
   std::stringstream s;
 
@@ -6347,7 +5687,7 @@ std::string oahStringWithDefaultValueAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-std::string oahStringWithDefaultValueAtom::asActualLongNamedOptionString () const
+std::string oahDefaultedStringAtom::asActualLongNamedOptionString () const
 {
   std::stringstream s;
 
@@ -6357,7 +5697,7 @@ std::string oahStringWithDefaultValueAtom::asActualLongNamedOptionString () cons
   return s.str ();
 }
 
-void oahStringWithDefaultValueAtom::print (std::ostream& os) const
+void oahDefaultedStringAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -6367,23 +5707,38 @@ void oahStringWithDefaultValueAtom::print (std::ostream& os) const
 
   ++gIndenter;
 
-  printAtomWithVariableEssentials (
+  printOahElementEssentials (
     os, fieldWidth);
 
   os << std::left <<
     std::setw (fieldWidth) <<
+    "fValueSpecification" << ": " <<
+    fValueSpecification <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fVariableName" << ": " <<
+    fVariableName <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fStringVariable" << ": " <<
     "\"" << fStringVariable << "\"" <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fDefaultStringValue" << ": " <<
     "\"" << fDefaultStringValue << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fSetByAnOption" << ": " <<
+    fSetByAnOption <<
     std::endl;
 
   --gIndenter;
 }
 
-void oahStringWithDefaultValueAtom::printAtomWithVariableOptionsValues (
+void oahDefaultedStringAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -6401,7 +5756,7 @@ void oahStringWithDefaultValueAtom::printAtomWithVariableOptionsValues (
   os << std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahStringWithDefaultValueAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahDefaultedStringAtom& elt)
 {
   os <<
     "StringWithDefaultValueAtom:" <<
@@ -6417,7 +5772,631 @@ std::ostream& operator << (std::ostream& os, const S_oahStringWithDefaultValueAt
 }
 
 //______________________________________________________________________________
-S_oahStringWithRegexAtom oahStringWithRegexAtom::create (
+S_oahCommonPrefixBooleansAtom oahCommonPrefixBooleansAtom::create (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& shortSuffixDescriptor,
+  const std::string& longSuffixDescriptor,
+  const S_oahPrefix& shortNamesPrefix,
+  const S_oahPrefix& longNamesPrefix)
+{
+  oahCommonPrefixBooleansAtom* o = new
+    oahCommonPrefixBooleansAtom (
+      longName,
+      shortName,
+      description,
+      shortSuffixDescriptor,
+      longSuffixDescriptor,
+      shortNamesPrefix,
+      longNamesPrefix);
+  assert (o != nullptr);
+  return o;
+}
+
+oahCommonPrefixBooleansAtom::oahCommonPrefixBooleansAtom (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& shortSuffixDescriptor,
+  const std::string& longSuffixDescriptor,
+  const S_oahPrefix& shortNamesPrefix,
+  const S_oahPrefix& longNamesPrefix)
+  : oahValueLessAtom (
+      longName,
+      shortName,
+      description)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    shortNamesPrefix != nullptr,
+    "shortNamesPrefix is null");
+  mfAssert (
+    __FILE__, __LINE__,
+    longNamesPrefix != nullptr,
+    "fLongNamesPrefix is null");
+#endif
+
+  fShortSuffixDescriptor = shortSuffixDescriptor;
+  fLongSuffixDescriptor  = longSuffixDescriptor;
+
+  fShortNamesPrefix = shortNamesPrefix;
+  fLongNamesPrefix  = longNamesPrefix;
+
+  // get prefixes names
+  fShortNamesPrefixName =
+    fShortNamesPrefix->getPrefixName ();
+  fLongNamesPrefixName =
+    fLongNamesPrefix->getPrefixName ();
+}
+
+oahCommonPrefixBooleansAtom::~oahCommonPrefixBooleansAtom ()
+{}
+
+void oahCommonPrefixBooleansAtom::addBooleanAtom (
+  const S_oahBooleanAtom& booleanAtom)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    booleanAtom != nullptr,
+    "booleanAtom is null");
+#endif
+
+  // long name consistency check
+  {
+    std::string booleanAtomLongName =
+      booleanAtom->getLongName ();
+
+    if (booleanAtomLongName.size ()) {
+      std::size_t found =
+        booleanAtomLongName.find (fLongNamesPrefixName);
+
+      if (found == std::string::npos) {
+        std::stringstream s;
+
+        s <<
+          "Option long name \"" <<
+          booleanAtomLongName <<
+          "\" is different than the long names prefix name \"" <<
+          fLongNamesPrefixName <<
+          "\"" <<
+          std::endl;
+
+        booleanAtom->print (s);
+
+//         oahError (s.str ());
+        oahWarning (s.str ());
+      }
+
+      else if (found != 0) {
+        std::stringstream s;
+
+        s <<
+          "Option long name \"" <<
+          booleanAtomLongName <<
+          "\" doesn't start by the long names prefix name \"" <<
+          fLongNamesPrefixName <<
+          "\"" <<
+          std::endl;
+
+        booleanAtom->print (s);
+
+        oahError (s.str ());
+      }
+
+      else {
+        std::string booleanAtomLongNameSuffix =
+          booleanAtomLongName.substr (
+            fLongNamesPrefixName.size ());
+
+        if (booleanAtomLongNameSuffix.size () == 0) {
+          std::stringstream s;
+
+          s <<
+            "Option long name \"" <<
+            booleanAtomLongName <<
+            "\" is nothing more than the long names prefix name \"" <<
+            fLongNamesPrefixName <<
+            "\"" <<
+          std::endl;
+
+          booleanAtom->print (s);
+
+          oahError (s.str ());
+        }
+        else {
+          // register this boolean atom's suffix in the list
+          fLongNamesSuffixes.push_back (booleanAtomLongNameSuffix);
+        }
+      }
+    }
+
+    else {
+      std::stringstream s;
+
+      s <<
+        "Option long name \"" <<
+        booleanAtomLongName <<
+        "\" is empty, atom \"" <<
+        fLongNamesPrefixName <<
+        "\" cannot be used in a multiplex booleans atom";
+
+      booleanAtom->print (s);
+
+      oahError (s.str ());
+    }
+  }
+
+  // short name consistency check
+  {
+    std::string booleanAtomShortName =
+      booleanAtom->getShortName ();
+
+    std::size_t found =
+      booleanAtomShortName.find (fShortNamesPrefixName);
+
+    if (found == std::string::npos) {
+      std::stringstream s;
+
+      s <<
+        "Option short name \"" <<
+        booleanAtomShortName <<
+        "\" is different than the short names prefix name \"" <<
+        fShortNamesPrefixName <<
+        "\"";
+
+      booleanAtom->print (s);
+
+      oahError (s.str ());
+    }
+
+    else if (found != 0) {
+      std::stringstream s;
+
+      s <<
+        "Option short name \"" <<
+        booleanAtomShortName <<
+        "\" doesn't start by the short names prefix name \"" <<
+        fShortNamesPrefixName <<
+        "\"";
+
+      booleanAtom->print (s);
+
+//       oahError (s.str ());
+      oahWarning (s.str ());
+    }
+
+    else {
+      std::string booleanAtomShortNameSuffix =
+        booleanAtomShortName.substr (
+          fShortNamesPrefixName.size ());
+
+      if (booleanAtomShortNameSuffix.size () == 0) {
+        std::stringstream s;
+
+        s <<
+          "Option short name \"" <<
+          booleanAtomShortName <<
+          "\" is nothing more than the short names prefix name \"" <<
+          fShortNamesPrefixName <<
+          "\"";
+
+        booleanAtom->print (s);
+
+        oahError (s.str ());
+      }
+      else {
+        // register this boolean atom's suffix in the list
+        fShortNamesSuffixes.push_back (booleanAtomShortNameSuffix);
+      }
+    }
+  }
+
+  // append the boolean atom to the list
+  fBooleanAtomsList.push_back (
+    booleanAtom);
+
+  // make this atom imvisible
+  booleanAtom->
+    setElementVisibilityKind (
+      oahElementVisibilityKind::kElementVisibilityNone);
+}
+
+void oahCommonPrefixBooleansAtom::addBooleanAtomByName (
+  const std::string& name)
+{
+  // get the options handler
+  S_oahHandler
+    handler =
+      fetchAtomUpLinkToHandler ();
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    handler != nullptr,
+    "handler is null");
+#endif
+
+  // is name known in options map?
+  S_oahElement
+    element =
+      handler->
+        fetchNameInNamesToElementsMap (name);
+
+  if (! element) {
+    // no, name is unknown in the map
+    handler->
+      printOptionsSummary ();
+
+    handler->
+      unknownOptionNameError (
+        name,
+        "in common prefix booleans atom");
+  }
+
+  else {
+    // name is known, let's handle it
+
+    if (
+      // boolean atom?
+      S_oahBooleanAtom
+        atom =
+          dynamic_cast<oahBooleanAtom*>(&(*element))
+      ) {
+      // add the boolean atom
+      addBooleanAtom (atom);
+    }
+
+    else {
+      handler->
+        unknownOptionNameError (
+          name,
+          "in combined booleans atom, not the name of an atom");
+    }
+  }
+}
+
+void oahCommonPrefixBooleansAtom::applyValueLessAtom (std::ostream& os)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahCommonPrefixBooleansAtom" <<
+      std::endl;
+  }
+#endif
+
+  // handle it at once JMI ??? v0.9.66
+}
+
+void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahCommonPrefixBooleansAtom::acceptIn ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahCommonPrefixBooleansAtom>*
+    p =
+      dynamic_cast<visitor<S_oahCommonPrefixBooleansAtom>*> (v)) {
+        S_oahCommonPrefixBooleansAtom elem = this;
+
+#ifdef MF_TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahCommonPrefixBooleansAtom::visitStart ()" <<
+            std::endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void oahCommonPrefixBooleansAtom::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahCommonPrefixBooleansAtom::acceptOut ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahCommonPrefixBooleansAtom>*
+    p =
+      dynamic_cast<visitor<S_oahCommonPrefixBooleansAtom>*> (v)) {
+        S_oahCommonPrefixBooleansAtom elem = this;
+
+#ifdef MF_TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahCommonPrefixBooleansAtom::visitEnd ()" <<
+            std::endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void oahCommonPrefixBooleansAtom::browseData (basevisitor* v)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahCommonPrefixBooleansAtom::browseData ()" <<
+      std::endl;
+  }
+#endif
+
+  if (fShortNamesPrefix) {
+    // browse the short names prefix
+    oahBrowser<oahPrefix> browser (v);
+    browser.browse (*(fShortNamesPrefix));
+  }
+
+  if (fLongNamesPrefix) {
+    // browse the long names prefix
+    oahBrowser<oahPrefix> browser (v);
+    browser.browse (*(fLongNamesPrefix));
+  }
+
+  // browse the boolean atoms
+  if (fBooleanAtomsList.size ()) {
+    for (
+      std::list<S_oahBooleanAtom>::const_iterator i = fBooleanAtomsList.begin ();
+      i != fBooleanAtomsList.end ();
+      ++i
+    ) {
+      const S_oahBooleanAtom& booleanAtom = (*i);
+
+      // browse the boolean atom
+      oahBrowser<oahBooleanAtom> browser (v);
+      browser.browse (*(booleanAtom));
+    } // for
+  }
+}
+
+void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "MultiplexBooleansAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  printOahElementEssentials (
+    os, fieldWidth);
+
+  os << std::left <<
+    "shortSuffixDescriptor" << ": " <<
+    fShortSuffixDescriptor <<
+    std::endl <<
+    "longSuffixDescriptor" << ": " <<
+    fLongSuffixDescriptor <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "shortNamesPrefix" << ": ";
+  if (fShortNamesPrefix) {
+    os << fShortNamesPrefix;
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "longNamesPrefix" << ": ";
+  if (fLongNamesPrefix) {
+    os << fLongNamesPrefix;
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fBooleanAtomsList" << ": ";
+
+  if (! fBooleanAtomsList.size ()) {
+    os << "[EMPTY]";
+  }
+  else {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_oahBooleanAtom>::const_iterator
+      iBegin = fBooleanAtomsList.begin (),
+      iEnd   = fBooleanAtomsList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      os << ' ';
+    } // for
+
+    --gIndenter;
+  }
+  os << std::endl;
+
+  --gIndenter;
+}
+
+void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
+{
+  os <<
+    '-' << fShortNamesPrefixName << "<" << fShortSuffixDescriptor << ">" <<
+    ", " <<
+    '-' << fLongNamesPrefixName << "-<" << fLongSuffixDescriptor << ">" <<
+    std::endl;
+
+  if (fDescription.size ()) {
+    // indent a bit more for readability
+    gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
+
+    gIndenter.indentMultiLineString (
+      fDescription,
+      os);
+
+    gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+  }
+
+  os <<
+    "The " <<
+    fShortNamesSuffixes.size () <<
+    " known " << fShortSuffixDescriptor << "s are: ";
+
+  if (fShortNamesSuffixes.size ()) {
+    os << std::endl;
+    ++gIndenter;
+
+    std::list<std::string>::const_iterator
+      iBegin = fShortNamesSuffixes.begin (),
+      iEnd   = fShortNamesSuffixes.end (),
+      i      = iBegin;
+
+    int cumulatedLength = 0;
+
+    for ( ; ; ) {
+      std::string suffix = (*i);
+
+      cumulatedLength += suffix.size ();
+      if (cumulatedLength >= K_MF_NAMES_LIST_MAX_LENGTH) {
+        os << std::endl;
+        cumulatedLength = 0;
+        break;
+      }
+
+      os << suffix;
+
+      if (++i == iEnd) break;
+
+      if (next (i) == iEnd) {
+        os << " and ";
+      }
+      else {
+        os << ", ";
+      }
+    } // for
+
+    os << "." << std::endl;
+    --gIndenter;
+  }
+  else {
+    os <<
+      "[NONE]" <<
+      std::endl;
+  }
+
+  if (fLongSuffixDescriptor != fShortSuffixDescriptor) {
+    int longNamesSuffixesCount = 0;
+
+    {
+      std::list<std::string>::const_iterator
+        iBegin = fLongNamesSuffixes.begin (),
+        iEnd   = fLongNamesSuffixes.end (),
+        i      = iBegin;
+
+      for ( ; ; ) {
+        if ((*i).size ()) {
+          ++longNamesSuffixesCount;
+        }
+
+        if (++i == iEnd) break;
+      } // for
+    }
+
+    os <<
+      "The " <<
+      fLongNamesSuffixes.size () <<
+ // JMI     " -- " << longNamesSuffixesCount <<
+      " known " << fLongSuffixDescriptor << "s are: ";
+
+    if (fLongNamesSuffixes.size ()) {
+      os << std::endl;
+      ++gIndenter;
+
+      std::list<std::string>::const_iterator
+        iBegin = fLongNamesSuffixes.begin (),
+        iEnd   = fLongNamesSuffixes.end (),
+        i      = iBegin;
+
+      int cumulatedLength = 0;
+
+      for ( ; ; ) {
+        std::string suffix = (*i);
+
+        cumulatedLength += suffix.size ();
+        if (cumulatedLength >= K_MF_NAMES_LIST_MAX_LENGTH) {
+          os << std::endl;
+          cumulatedLength = 0;
+//        break;
+        }
+
+        os << suffix;
+
+        if (++i == iEnd) break;
+
+        if (next (i) == iEnd) {
+          os << " and ";
+        }
+        else {
+          os << ", ";
+        }
+      } // for
+
+      os << "." << std::endl;
+      --gIndenter;
+    }
+    else {
+      os <<
+        "[NONE]" <<
+        std::endl;
+    }
+  }
+
+  if (fDescription.size ()) { // ??? JMI
+// JMI    g_Indenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+  }
+}
+
+void oahCommonPrefixBooleansAtom::printAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  // nothing to do, these options values will be printed
+  // by the boolean atoms in the list
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahCommonPrefixBooleansAtom& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
+S_oahRegexAtom oahRegexAtom::create ( // JMI UNUSED as of v0.9.66
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -6426,8 +6405,8 @@ S_oahStringWithRegexAtom oahStringWithRegexAtom::create (
   std::string&       stringVariable,
   const std::string& regexString)
 {
-  oahStringWithRegexAtom* o = new
-    oahStringWithRegexAtom (
+  oahRegexAtom* o = new
+    oahRegexAtom (
       longName,
       shortName,
       description,
@@ -6439,7 +6418,7 @@ S_oahStringWithRegexAtom oahStringWithRegexAtom::create (
   return o;
 }
 
-oahStringWithRegexAtom::oahStringWithRegexAtom (
+oahRegexAtom::oahRegexAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -6456,14 +6435,12 @@ oahStringWithRegexAtom::oahStringWithRegexAtom (
       stringVariable),
     fRegexString (
       regexString)
-{
-// JMI  this->setElementValueKind (oahElementValueKind::kElementValueOptional);
-}
-
-oahStringWithRegexAtom::~oahStringWithRegexAtom ()
 {}
 
-void oahStringWithRegexAtom::applyAtomWithValue (
+oahRegexAtom::~oahRegexAtom ()
+{}
+
+void oahRegexAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -6472,7 +6449,7 @@ void oahStringWithRegexAtom::applyAtomWithValue (
     gLogStream <<
       "Handling option name '" <<
       fetchNames () <<
-      "' which is a oahStringWithRegexAtom" <<
+      "' which is a oahRegexAtom" <<
       std::endl;
   }
 #endif
@@ -6484,25 +6461,25 @@ void oahStringWithRegexAtom::applyAtomWithValue (
     os);
 }
 
-void oahStringWithRegexAtom::acceptIn (basevisitor* v)
+void oahRegexAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringWithRegexAtom::acceptIn ()" <<
+      ".\\\" ==> oahRegexAtom::acceptIn ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_oahStringWithRegexAtom>*
+  if (visitor<S_oahRegexAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringWithRegexAtom>*> (v)) {
-        S_oahStringWithRegexAtom elem = this;
+      dynamic_cast<visitor<S_oahRegexAtom>*> (v)) {
+        S_oahRegexAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahStringWithRegexAtom::visitStart ()" <<
+            ".\\\" ==> Launching oahRegexAtom::visitStart ()" <<
             std::endl;
         }
 #endif
@@ -6510,7 +6487,7 @@ void oahStringWithRegexAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahStringWithRegexAtom::setStringVariable (const std::string& value)
+void oahRegexAtom::setStringVariable (const std::string& value)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -6528,25 +6505,25 @@ void oahStringWithRegexAtom::setStringVariable (const std::string& value)
   fSetByAnOption = true;
 }
 
-void oahStringWithRegexAtom::acceptOut (basevisitor* v)
+void oahRegexAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringWithRegexAtom::acceptOut ()" <<
+      ".\\\" ==> oahRegexAtom::acceptOut ()" <<
       std::endl;
   }
 #endif
 
-  if (visitor<S_oahStringWithRegexAtom>*
+  if (visitor<S_oahRegexAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringWithRegexAtom>*> (v)) {
-        S_oahStringWithRegexAtom elem = this;
+      dynamic_cast<visitor<S_oahRegexAtom>*> (v)) {
+        S_oahRegexAtom elem = this;
 
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahStringWithRegexAtom::visitEnd ()" <<
+            ".\\\" ==> Launching oahRegexAtom::visitEnd ()" <<
             std::endl;
         }
 #endif
@@ -6554,18 +6531,18 @@ void oahStringWithRegexAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahStringWithRegexAtom::browseData (basevisitor* v)
+void oahRegexAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringWithRegexAtom::browseData ()" <<
+      ".\\\" ==> oahRegexAtom::browseData ()" <<
       std::endl;
   }
 #endif
 }
 
-std::string oahStringWithRegexAtom::asShortNamedOptionString () const
+std::string oahRegexAtom::asShortNamedOptionString () const
 {
   std::stringstream s;
 
@@ -6575,7 +6552,7 @@ std::string oahStringWithRegexAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-std::string oahStringWithRegexAtom::asActualLongNamedOptionString () const
+std::string oahRegexAtom::asActualLongNamedOptionString () const
 {
   std::stringstream s;
 
@@ -6585,7 +6562,7 @@ std::string oahStringWithRegexAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void oahStringWithRegexAtom::print (std::ostream& os) const
+void oahRegexAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -6611,7 +6588,7 @@ void oahStringWithRegexAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringWithRegexAtom::printAtomWithVariableOptionsValues (
+void oahRegexAtom::printAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -6629,7 +6606,7 @@ void oahStringWithRegexAtom::printAtomWithVariableOptionsValues (
   os << std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahStringWithRegexAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahRegexAtom& elt)
 {
   os <<
     "StringWithDefaultValueAtom:" <<
@@ -10526,7 +10503,7 @@ oahOptionNameHelpAtom::oahOptionNameHelpAtom (
   const std::string& variableName,
   std::string&       stringVariable,
   const std::string& defaultOptionName)
-  : oahStringWithDefaultValueAtom (
+  : oahDefaultedStringAtom (
       longName,
       shortName,
       description,
@@ -10535,9 +10512,6 @@ oahOptionNameHelpAtom::oahOptionNameHelpAtom (
       stringVariable,
       defaultOptionName)
 {
-  this->setElementValueKind (
-    oahElementValueKind::kElementValueOptional);
-
   fElementHelpOnlyKind =
     oahElementHelpOnlyKind::kElementHelpOnlyYes;
 
@@ -10720,19 +10694,13 @@ oahQueryOptionNameAtom::oahQueryOptionNameAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& serviceName)
-  : oahPureHelpAtomExpectingAValue (
+  : oahPureHelpValueFittedAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       serviceName)
 {
-  this->setElementValueKind (
-    oahElementValueKind::kElementValueMandatory);
-
-  fElementHelpOnlyKind =
-    oahElementHelpOnlyKind::kElementHelpOnlyYes;
-
   this->setMultipleOccurrencesAllowed ();
 }
 
@@ -10974,19 +10942,13 @@ oahFindStringAtom::oahFindStringAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& serviceName)
-  : oahPureHelpAtomExpectingAValue (
+  : oahPureHelpValueFittedAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       serviceName)
 {
-  this->setElementValueKind (
-    oahElementValueKind::kElementValueMandatory);
-
-  fElementHelpOnlyKind =
-    oahElementHelpOnlyKind::kElementHelpOnlyYes;
-
   this->setMultipleOccurrencesAllowed ();
 }
 
@@ -11249,18 +11211,13 @@ oahIncludeOptionsAndArgumentsFileAtom::oahIncludeOptionsAndArgumentsFileAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& serviceName)
-  : oahPureHelpAtomExpectingAValue (
+  : oahValueFittedAtom (
       longName,
       shortName,
-      description,
-      valueSpecification,
-      serviceName)
+      description)
 {
-  fElementHelpOnlyKind =
-    oahElementHelpOnlyKind::kElementHelpOnlyNo; // superflous??? JMI
-
-  this->setElementValueKind (
-    oahElementValueKind::kElementValueMandatory);
+//       valueSpecification, JMI v0.9.66
+//       serviceName)
 
   this->setMultipleOccurrencesAllowed ();
 }
@@ -11283,7 +11240,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::applyAtomWithValue (
   }
 #endif
 
-  // delegate this to the handler JMIJMIJMI
+  // delegate this to the handler JMIJMIJMI v0.9.66 ??? see oahHandler::handleArgvOptionValueOrArgument()
 //   fetchAtomUpLinkToHandler ()->
 //     includeOptionsFileInHandler (
 //       theString,

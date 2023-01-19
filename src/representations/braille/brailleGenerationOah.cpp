@@ -17,7 +17,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -74,7 +74,7 @@ brailleOutputKindAtom::brailleOutputKindAtom (
   const std::string&    variableName,
   bsrBrailleOutputKind& brailleOutputKindVariable,
   bsrBrailleOutputKind  brailleOutputKindValue)
-  : oahAtomImplicitlyStoringAValue (
+  : oahAtomImplicitlySettingAVariable (
       longName,
       shortName,
       description,
@@ -91,7 +91,7 @@ brailleOutputKindAtom::brailleOutputKindAtom (
 brailleOutputKindAtom::~brailleOutputKindAtom ()
 {}
 
-void brailleOutputKindAtom::applyElement (std::ostream& os)
+void brailleOutputKindAtom::setImplicitVariable (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -263,7 +263,7 @@ std::ostream& operator << (std::ostream& os, const S_brailleOutputKindAtom& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -485,7 +485,7 @@ std::ostream& operator << (std::ostream& os, const S_brailleUTFKindAtom& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -707,7 +707,7 @@ std::ostream& operator << (std::ostream& os, const S_brailleByteOrderingKindAtom
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 
@@ -962,8 +962,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // create the auto utfd8 macro
-
+  // create the auto utfd8 macro atom
   S_oahMacroAtom
     autoUTFd8MacroAtom =
       oahMacroAtom::create (
@@ -976,12 +975,12 @@ R"()",
 
   // populate it
   autoUTFd8MacroAtom->
-    appendAtomToMacro (
+    appendValueLessAtomToMacro (
       gGlobalOutputFileOahGroup->
         getAutoOutputFileNameAtom ());
 
   autoUTFd8MacroAtom->
-    appendAtomToMacro (
+    appendValueLessAtomToMacro (
       brailleOutputKindAtom::create (
         "utf8d", "",
 R"(Generate UTF-8 debug braille as output.)",
@@ -990,7 +989,7 @@ R"(Generate UTF-8 debug braille as output.)",
         bsrBrailleOutputKind::kBrailleOutputUTF8Debug));
 
   autoUTFd8MacroAtom->
-    appendAtomToMacro (
+    appendValueLessAtomToMacro (
       fUseEncodingInFileNameAtom);
 }
 
@@ -1157,7 +1156,7 @@ std::ostream& operator << (std::ostream& os, const S_brailleGenerationOahGroup& 
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

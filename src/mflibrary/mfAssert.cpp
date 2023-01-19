@@ -9,12 +9,12 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "mfStaticSettings.h"
+
 #include "mfExceptions.h"
 
 #include "mfAssert.h"
 #include "mfIndentedTextOutput.h"
-
-#include "mfEnableAbortToDebugErrorsSetting.h"
 
 
 namespace MusicFormats

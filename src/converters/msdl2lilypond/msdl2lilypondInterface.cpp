@@ -13,7 +13,7 @@
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
                         // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfPasses.h"
 #include "mfServices.h"
@@ -26,7 +26,7 @@
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "lpsrScores.h"
 
@@ -99,7 +99,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         separator <<
         std::endl <<
         gTab <<
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_1) <<
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1) <<
         ": " <<
         "Creating a first MSR from the MSDL input" <<
         std::endl <<
@@ -123,7 +123,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-      gWaeHandler->pass (mfPassIDKind::kMfPassID_1),
+      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -162,10 +162,10 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass1 ()) {
-    err <<
-      std::endl <<
-      "Quitting after pass 1 as requested" <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_1));
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -183,7 +183,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theMsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_2),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
         "Convert the MSR into an LPSR",
         createMsdl2lilypondConverterComponent ());
   }
@@ -200,10 +200,10 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass2b ()) {
-    err <<
-      std::endl <<
-      "Quitting after pass 2b as requested" <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -248,7 +248,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_3),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
     }
@@ -316,7 +316,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->pass (mfPassIDKind::kMfPassID_4),
+        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
     }
@@ -502,10 +502,10 @@ EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
   // open input file
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    err <<
-      std::endl <<
-      gWaeHandler->openingLilypondFileForWriting (inputFileName) <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->openingLilypondFileForWriting (inputFileName));
   }
 #endif
 
@@ -547,10 +547,10 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   // open input file
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    err <<
-      std::endl <<
-      gWaeHandler->openingLilypondFileForWriting (inputFileName) <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      err,
+      __FILE__, __LINE__,
+      gWaeHandler->openingLilypondFileForWriting (inputFileName));
   }
 #endif
 

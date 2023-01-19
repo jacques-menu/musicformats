@@ -13,7 +13,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 
@@ -92,6 +92,7 @@ R"()",
 R"(Encoding)",
         "fTraceEncoding",
         fTraceEncoding);
+        
   subGroup->
     appendAtomToSubGroup (
       traceEncodingAtom);
@@ -108,6 +109,7 @@ R"(Encoding)",
 R"(Divisions)",
         "fTraceDivisions",
         fTraceDivisions);
+        
   subGroup->
     appendAtomToSubGroup (
       traceDivisionsAtom);
@@ -124,6 +126,7 @@ R"(Divisions)",
 R"(Backup)",
         "fTraceBackup",
         fTraceBackup);
+        
   subGroup->
     appendAtomToSubGroup (
       traceBackupAtom);
@@ -137,6 +140,7 @@ R"(Backup)",
 R"(Forward)",
         "fTraceForward",
         fTraceForward);
+        
   subGroup->
     appendAtomToSubGroup (
       traceForwardAtom);

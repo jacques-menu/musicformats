@@ -16,7 +16,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahEarlyOptions.h"
 
@@ -140,6 +140,7 @@ R"(Write the essentials of the contents of the options handler to standard error
 R"(Write information about CPU usage to standard error.)",
       "fDisplayCPUusage",
       fDisplayCPUusage);
+        
   subGroup->
     appendAtomToSubGroup (
       fDisplayCPUusageAtom);

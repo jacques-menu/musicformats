@@ -17,7 +17,7 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -103,7 +103,7 @@ lilypondScoreOutputKindAtom::~lilypondScoreOutputKindAtom ()
 
 void lilypondScoreOutputKindAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
   // JMI ???
 
@@ -305,7 +305,7 @@ lilypondTransposePartNameAtom::~lilypondTransposePartNameAtom ()
 
 void lilypondTransposePartNameAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -664,7 +664,7 @@ lilypondTransposePartIDAtom::~lilypondTransposePartIDAtom ()
 
 void lilypondTransposePartIDAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1083,11 +1083,10 @@ lilypondAbsoluteOctaveEntryAtom::lilypondAbsoluteOctaveEntryAtom (
   const std::string&      description,
   const std::string&      variableName,
   msrOctaveEntryVariable& octaveEntryKindVariable)
-  : oahAtom (
+  : oahValueLessAtom (
       longName,
       shortName,
-      description,
-      oahElementValueKind::kElementValueWithout),
+      description),
     fOctaveEntryKindVariable (
       octaveEntryKindVariable)
 {}
@@ -1095,7 +1094,7 @@ lilypondAbsoluteOctaveEntryAtom::lilypondAbsoluteOctaveEntryAtom (
 lilypondAbsoluteOctaveEntryAtom::~lilypondAbsoluteOctaveEntryAtom ()
 {}
 
-void lilypondAbsoluteOctaveEntryAtom::applyElement (std::ostream& os)
+void lilypondAbsoluteOctaveEntryAtom::applyValueLessAtom (std::ostream& os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1274,7 +1273,7 @@ lilypondRelativeOctaveEntryAtom::~lilypondRelativeOctaveEntryAtom ()
 
 void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1513,10 +1512,12 @@ lilypondFixedOctaveEntryAtom::lilypondFixedOctaveEntryAtom (
                      octaveEntryKindVariable,
   S_msrSemiTonesPitchAndOctave&
                      lilypondFixedOctaveEntryVariable)
-  : oahAtomExpectingAValue (
+  : oahAtomStoringAValue (
       longName,
       shortName,
-      description),
+      description,
+      valueSpecification,
+      variableName),
     fOctaveEntryKindVariable (
       octaveEntryKindVariable),
     fSemiTonesPitchAndOctaveVariable (
@@ -1528,7 +1529,7 @@ lilypondFixedOctaveEntryAtom::~lilypondFixedOctaveEntryAtom ()
 
 void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1738,7 +1739,7 @@ lilypondAccidentalStyleKindAtom::~lilypondAccidentalStyleKindAtom ()
 
 void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1979,7 +1980,7 @@ lilypondChordsDisplayAtom::~lilypondChordsDisplayAtom ()
 
 void lilypondChordsDisplayAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2348,7 +2349,7 @@ lilypondLyricsDurationsKindAtom::~lilypondLyricsDurationsKindAtom ()
 
 void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2591,7 +2592,7 @@ lilypondDynamicsTextSpannersStyleKindAtom::~lilypondDynamicsTextSpannersStyleKin
 
 void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2966,6 +2967,7 @@ R"(Set the 'rights' to STRING in the LilyPond code \header.)",
         "STRING",
         "fRights",
         fRights);
+
   subGroup->
     appendAtomToSubGroup (
       rightsAtom);
@@ -2981,6 +2983,7 @@ R"(Set the 'composer' to STRING in the LilyPond code \header.)",
         "STRING",
         "fComposer",
         fComposer);
+
   subGroup->
     appendAtomToSubGroup (
       composerAtom);
@@ -2996,6 +2999,7 @@ R"(Set the 'arranger' to STRING in the LilyPond code \header.)",
         "STRING",
         "fArranger",
         fArranger);
+
   subGroup->
     appendAtomToSubGroup (
       arrangerAtom);
@@ -3010,6 +3014,7 @@ R"(Set the 'poet' to STRING in the LilyPond code \header.)",
       "STRING",
       "fPoet",
       fPoet);
+
   subGroup->
     appendAtomToSubGroup (
       fPoetAtom);
@@ -3025,6 +3030,7 @@ R"(Set the 'lyricist' to STRING in the LilyPond code \header.)",
         "STRING",
         "fLyricist",
         fLyricist);
+
   subGroup->
     appendAtomToSubGroup (
       lyricistAtom);
@@ -3040,6 +3046,7 @@ R"(Set the 'software' to STRING in the LilyPond code \header.)",
         "STRING",
         "fSoftware",
         fSoftware);
+
   subGroup->
     appendAtomToSubGroup (
       softwareAtom);
@@ -3057,6 +3064,7 @@ R"(Set 'dedication' to STRING in the LilyPond code \header.)",
         "STRING",
         "fDedication",
         fDedication);
+
   subGroup->
     appendAtomToSubGroup (
       dedicationAtom);
@@ -3072,6 +3080,7 @@ R"(Set 'piece' to STRING in the LilyPond code \header.)",
         "STRING",
         "fPiece",
         fPiece);
+
   subGroup->
     appendAtomToSubGroup (
       pieceAtom);
@@ -3087,6 +3096,7 @@ R"(Set 'opus' to STRING in the LilyPond code \header.)",
         "STRING",
         "fOpus",
         fOpus);
+
   subGroup->
     appendAtomToSubGroup (
       opusAtom);
@@ -3113,6 +3123,7 @@ R"(Set 'title' to STRING in the LilyPond code \header.)",
         "STRING",
         "fTitle",
         fTitle);
+
   subGroup->
     appendAtomToSubGroup (
       titleAtom);
@@ -3128,6 +3139,7 @@ R"(Set 'subtitle' to STRING in the LilyPond code \header.)",
         "STRING",
         "fSubTitle",
         fSubTitle);
+
   subGroup->
     appendAtomToSubGroup (
       subtitleAtom);
@@ -3143,6 +3155,7 @@ R"(Set 'subsubtitle' to STRING in the LilyPond code \header.)",
         "STRING",
         "fSubSubTitle",
         fSubSubTitle);
+
   subGroup->
     appendAtomToSubGroup (
       subsubtitleAtom);
@@ -3158,6 +3171,7 @@ R"(Set 'instrument' to STRING in the LilyPond code \header.)",
         "STRING",
         "fHeaderInstrument",
         fHeaderInstrument);
+
   subGroup->
     appendAtomToSubGroup (
       instrumentAtom);
@@ -3173,6 +3187,7 @@ R"(Set 'meter' to STRING in the LilyPond code \header.)",
         "STRING",
         "fHeaderMeter",
         fHeaderMeter);
+
   subGroup->
     appendAtomToSubGroup (
       meterAtom);
@@ -3188,6 +3203,7 @@ R"(Set 'tagline' to STRING in the LilyPond code \header.)",
         "STRING",
         "fTagline",
         fTagline);
+
   subGroup->
     appendAtomToSubGroup (
       taglineAtom);
@@ -3203,6 +3219,7 @@ R"(Set 'copyright' to STRING in the LilyPond code \header.)",
         "STRING",
         "fCopyright",
         fCopyright);
+
   subGroup->
     appendAtomToSubGroup (
       copyrightAtom);
@@ -3743,7 +3760,7 @@ R"(Generate LilyPond code to show all bar numbers.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahAtomAlias::create (
+      oahValueLessAtomAlias::create (
         "all-lilypond-measure-numbers", "almn",
 R"(Generate LilyPond code to show all measure numbers.
 This option is an alias for '-all-bar-numbers, -abn'.)",
@@ -4261,7 +4278,6 @@ The default is 'DEFAULT_VALUE'.)",
       "STYLE",
       "fDynamicsTextSpannersStyleKind",
       fDynamicsTextSpannersStyleKind);
-
 
   subGroup->
     appendAtomToSubGroup (
@@ -6341,7 +6357,7 @@ lilypondBreakPageAfterMeasureNumberAtom::~lilypondBreakPageAfterMeasureNumberAto
 
 void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
   const std::string& theString,
-  std::ostream& os)
+  std::ostream&      os)
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

@@ -13,7 +13,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include <regex>
 
@@ -22,7 +22,7 @@
 #include "oahWae.h"
 #include "msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 

@@ -13,9 +13,9 @@
 #include <iomanip>  // for setw()
 #include <cstdlib>  // for stod()
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"

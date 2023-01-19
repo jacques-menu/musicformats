@@ -619,12 +619,12 @@ typedef SMARTP<musicxmlException> S_musicxmlException;
 There are warning and error reporting functions\index{functions} in \waeBoth{waeInterface.h}.
 Examples are:
 \begin{lstlisting}[language=CPlusPlus]
-void oahAtomExpectingAValue::applyElement (std::ostream& os)
+void oahValueFittedAtom::applyValueLessAtom (std::ostream& os)
 {
   std::stringstream s;
 
   s <<
-    "Applying atom expecting a value '" <<
+    "Applying value-fitted atom '" <<
     fetchNames () <<
     "' without a value";
 

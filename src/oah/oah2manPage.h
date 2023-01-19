@@ -12,10 +12,7 @@
 #ifndef ___oah2manPage___
 #define ___oah2manPage___
 
-#include "mfEnableHarmoniesExtraSetting.h"
-#ifdef MF_TRACING_IS_ENABLED
-  #include "oahHarmoniesExtraOah.h"
-#endif
+#include "mfStaticSettings.h"
 
 #include "oahVisitor.h"
 

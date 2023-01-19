@@ -22,7 +22,7 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2guidoWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahEarlyOptions.h"
 

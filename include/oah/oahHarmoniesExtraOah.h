@@ -13,7 +13,7 @@
 #define ___harmoniesExtraOah___
 
 
-#include "mfEnableHarmoniesExtraSetting.h"
+#include "mfStaticSettings.h"
 
 #ifdef MF_HARMONIES_EXTRA_IS_ENABLED
 
@@ -27,14 +27,14 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
+class EXP extraDisplayAllHarmoniesStructuresAtom : public oahValueLessAtom
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<extraShowAllHarmoniesStructuresAtom> create (
+    static SMARTP<extraDisplayAllHarmoniesStructuresAtom> create (
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description);
@@ -44,12 +44,12 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-    extraShowAllHarmoniesStructuresAtom (
+    extraDisplayAllHarmoniesStructuresAtom (
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description);
 
-    virtual               ~extraShowAllHarmoniesStructuresAtom ();
+    virtual               ~extraDisplayAllHarmoniesStructuresAtom ();
 
   public:
 
@@ -61,9 +61,7 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
     // public services
     // ------------------------------------------------------
 
-    void                  applyAtomWithValue (
-                            const std::string& theString,
-                            std::ostream&      os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
   public:
 
@@ -92,21 +90,19 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
 
     // private fields
     // ------------------------------------------------------
-
-    //  JMI ???
 };
-typedef SMARTP<extraShowAllHarmoniesStructuresAtom> S_extraShowAllHarmoniesStructuresAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesStructuresAtom& elt);
+typedef SMARTP<extraDisplayAllHarmoniesStructuresAtom> S_extraDisplayAllHarmoniesStructuresAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_extraDisplayAllHarmoniesStructuresAtom& elt);
 
 //______________________________________________________________________________
-class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
+class EXP extraDisplayAllHarmoniesContentsAtom : public oahAtomStoringAValue
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<extraShowAllHarmoniesContentsAtom> create (
+    static SMARTP<extraDisplayAllHarmoniesContentsAtom> create (
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
@@ -119,7 +115,7 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-    extraShowAllHarmoniesContentsAtom (
+    extraDisplayAllHarmoniesContentsAtom (
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
@@ -127,7 +123,7 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
                             const std::string& variableName,
                             std::string&       stringVariable);
 
-    virtual               ~extraShowAllHarmoniesContentsAtom ();
+    virtual               ~extraDisplayAllHarmoniesContentsAtom ();
 
   public:
 
@@ -176,20 +172,20 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::string&               fStringVariable;
+    std::string&          fStringVariable;
 };
-typedef SMARTP<extraShowAllHarmoniesContentsAtom> S_extraShowAllHarmoniesContentsAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_extraShowAllHarmoniesContentsAtom& elt);
+typedef SMARTP<extraDisplayAllHarmoniesContentsAtom> S_extraDisplayAllHarmoniesContentsAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_extraDisplayAllHarmoniesContentsAtom& elt);
 
 //______________________________________________________________________________
-class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
+class EXP extraDisplayHarmonyDetailsAtom : public oahAtomStoringAValue
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<extraShowHarmonyDetailsAtom> create (
+    static SMARTP<extraDisplayHarmonyDetailsAtom> create (
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
@@ -202,7 +198,7 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-    extraShowHarmonyDetailsAtom (
+    extraDisplayHarmonyDetailsAtom (
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
@@ -210,14 +206,14 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
                             const std::string& variableName,
                             std::string&       stringVariable);
 
-    virtual               ~extraShowHarmonyDetailsAtom ();
+    virtual               ~extraDisplayHarmonyDetailsAtom ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    void                  setShowHarmonyDetailsVariableValue (
+    void                  setDisplayHarmonyDetailsVariableValue (
                             const std::string& value)
                               {  fStringVariable = value; }
 
@@ -256,20 +252,20 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::string&               fStringVariable;
+    std::string&          fStringVariable;
 };
-typedef SMARTP<extraShowHarmonyDetailsAtom> S_extraShowHarmonyDetailsAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_extraShowHarmonyDetailsAtom& elt);
+typedef SMARTP<extraDisplayHarmonyDetailsAtom> S_extraDisplayHarmonyDetailsAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_extraDisplayHarmonyDetailsAtom& elt);
 
 //______________________________________________________________________________
-class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
+class EXP extraDisplayHarmonyAnalysisAtom : public oahAtomStoringAValue
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<extraShowHarmonyAnalysisAtom> create (
+    static SMARTP<extraDisplayHarmonyAnalysisAtom> create (
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
@@ -282,7 +278,7 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-    extraShowHarmonyAnalysisAtom (
+    extraDisplayHarmonyAnalysisAtom (
                             const std::string& shortName,
                             const std::string& longName,
                             const std::string& description,
@@ -290,14 +286,14 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
                             const std::string& variableName,
                             std::string&       stringVariable);
 
-    virtual               ~extraShowHarmonyAnalysisAtom ();
+    virtual               ~extraDisplayHarmonyAnalysisAtom ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    void                  setShowHarmonyAnalysisVariableValue (
+    void                  setDisplayHarmonyAnalysisVariableValue (
                             const std::string& value)
                               { fStringVariable = value; }
 
@@ -336,10 +332,10 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::string&               fStringVariable;
+    std::string&          fStringVariable;
 };
-typedef SMARTP<extraShowHarmonyAnalysisAtom> S_extraShowHarmonyAnalysisAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_extraShowHarmonyAnalysisAtom& elt);
+typedef SMARTP<extraDisplayHarmonyAnalysisAtom> S_extraDisplayHarmonyAnalysisAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_extraDisplayHarmonyAnalysisAtom& elt);
 
 //______________________________________________________________________________
 class EXP harmoniesExtraOahGroup : public oahGroup
@@ -383,13 +379,13 @@ class EXP harmoniesExtraOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-    void                  initializeExtraShowAllHarmoniesStructuresOptions ();
+    void                  initializeExtraDisplayAllHarmoniesStructuresOptions ();
 
-    void                  initializeExtraShowAllHarmoniesContentsOptions ();
+    void                  initializeExtraDisplayAllHarmoniesContentsOptions ();
 
-    void                  initializeExtraShowHarmonyDetailsOptions ();
+    void                  initializeExtraDisplayHarmonyDetailsOptions ();
 
-    void                  initializeExtraShowHarmonyAnalysisOptions ();
+    void                  initializeExtraDisplayHarmonyAnalysisOptions ();
 
   public:
 

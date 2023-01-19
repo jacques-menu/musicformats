@@ -19,12 +19,7 @@
 // WAE
 #include "oahWae.h"
 
-#include "mfEnableHarmoniesExtraSetting.h"
-#ifdef MF_HARMONIES_EXTRA_IS_ENABLED
-  #include "oahHarmoniesExtraOah.h"
-#endif
-
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfInitialization.h"
 #include "mfServices.h"
@@ -804,18 +799,18 @@ R"()",
   // populate it
 #ifdef MF_TRACING_IS_ENABLED
   debugMacroAtom->
-    appendAtomToMacro (
+    appendValueLessAtomToMacro (
       gGlobalTracingOahGroup->
         getTracePassesBooleanAtom ());
 #endif
 
   debugMacroAtom->
-    appendAtomToMacro (
+    appendValueLessAtomToMacro (
       gGlobalOutputFileOahGroup->
         getAutoOutputFileNameAtom ());
 
   debugMacroAtom->
-    appendAtomToMacro (
+    appendValueLessAtomToMacro (
       gGlobalDisplayOahGroup->
         getDisplayCPUusageAtom ());
 }

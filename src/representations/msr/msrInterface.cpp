@@ -12,7 +12,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -23,7 +23,7 @@
 
 #include "msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -130,7 +130,7 @@ void displayMsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -193,7 +193,7 @@ void displayMsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -267,7 +267,7 @@ void displayMsrScoreSummary (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -324,7 +324,7 @@ void displayMsrScoreNames (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -370,7 +370,7 @@ void displayMsrScoreSlices (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->pass (mfPassIDKind::kMfPassID_0),
+		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,

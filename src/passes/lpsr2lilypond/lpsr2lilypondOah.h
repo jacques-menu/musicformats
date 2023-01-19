@@ -369,7 +369,7 @@ typedef SMARTP<msrOctaveEntryVariable> S_msrOctaveEntryVariable;
 EXP std::ostream& operator << (std::ostream& os, const msrOctaveEntryVariable& elt);
 
 //______________________________________________________________________________
-class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
+class EXP lilypondAbsoluteOctaveEntryAtom : public oahValueLessAtom
 {
   public:
 
@@ -377,10 +377,10 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<lilypondAbsoluteOctaveEntryAtom> create (
-                            const std::string&           longName,
-                            const std::string&           shortName,
-                            const std::string&           description,
-                            const std::string&           variableName,
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
                             msrOctaveEntryVariable& octaveEntryKindVariable);
 
   protected:
@@ -389,10 +389,10 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
     // ------------------------------------------------------
 
                           lilypondAbsoluteOctaveEntryAtom (
-                            const std::string&           longName,
-                            const std::string&           shortName,
-                            const std::string&           description,
-                            const std::string&           variableName,
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
                             msrOctaveEntryVariable& octaveEntryKindVariable);
 
     virtual               ~lilypondAbsoluteOctaveEntryAtom ();
@@ -407,7 +407,7 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
     void                  applyAtomWithValue (
                             const std::string& theString,
@@ -542,7 +542,7 @@ typedef SMARTP<lilypondRelativeOctaveEntryAtom> S_lilypondRelativeOctaveEntryAto
 EXP std::ostream& operator << (std::ostream& os, const S_lilypondRelativeOctaveEntryAtom& elt);
 
 //______________________________________________________________________________
-class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
+class EXP lilypondFixedOctaveEntryAtom : public oahAtomStoringAValue
 {
   public:
 

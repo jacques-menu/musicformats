@@ -21,7 +21,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP xml2lyManPageGenerateAtom : public oahAtom
+class EXP xml2lyManPageGenerateAtom : public oahValueLessAtom
 {
   public:
 
@@ -57,7 +57,7 @@ class EXP xml2lyManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (std::ostream& os) override;
+    void                  applyValueLessAtom (std::ostream& os) override;
 
   public:
 

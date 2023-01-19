@@ -11,11 +11,11 @@
 
 #include <iomanip>
 
-#include "mfEnableSanityChecksSetting.h"
+#include "mfStaticSettings.h"
 
 #include "visitor.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 
@@ -550,7 +550,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
   const S_msrNote& note)
 {
 #ifdef MF_TRACING_IS_ENABLED
-  if (true || gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
+  if (gGlobalTracingOahGroup->getTraceFiguredBasses ()) {
     gLogStream <<
       "==> Setting the uplink to note of figured bass " <<
       asString () <<

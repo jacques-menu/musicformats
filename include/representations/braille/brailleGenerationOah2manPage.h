@@ -34,7 +34,7 @@ class EXP brailleGenerationOah2manPage : virtual public oah2manPage,
 
                           brailleGenerationOah2manPage (
                             const S_oahHandler& handler,
-                            std::ostream&           manPageOutputStream);
+                            std::ostream&       manPageOutputStream);
 
     virtual               ~brailleGenerationOah2manPage ();
 

@@ -18,7 +18,7 @@
 
 #include "oahWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -497,6 +497,7 @@ R"()",
 R"(Write the contents of the first BSR data to standard error.)",
         "fDisplayFirstBsr",
         fDisplayFirstBsr);
+        
   subGroup->
     appendAtomToSubGroup (
       displayFirstBsrScoreShortBooleanAtom);
@@ -518,6 +519,7 @@ R"(Write the contents of the first BSR data, full version, to standard error.)",
 R"(Write the contents of the second BSR data to standard error.)",
         "fDisplaySecondBsr",
         fDisplaySecondBsr);
+        
   subGroup->
     appendAtomToSubGroup (
       displaySecondBsrScoreShortBooleanAtom);

@@ -16,9 +16,7 @@
 
 #include <regex>
 
-#include "mfEnableSanityChecksSetting.h"
-
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"

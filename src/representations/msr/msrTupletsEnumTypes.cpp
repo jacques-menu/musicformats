@@ -13,7 +13,7 @@
 
 #include "msrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"

@@ -11,11 +11,9 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfEnableHarmoniesExtraSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahWae.h"
-
-#include "mfEnableTracingSetting.h"
 
 #include "mfInitialization.h"
 #include "mfServices.h"

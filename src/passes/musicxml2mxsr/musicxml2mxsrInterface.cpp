@@ -22,7 +22,7 @@
 
 #include "musicxml2mxsrWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfServices.h"
 

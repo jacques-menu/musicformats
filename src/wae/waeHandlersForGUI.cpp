@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "mfStringsHandling.h"
 

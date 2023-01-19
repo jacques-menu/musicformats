@@ -9,22 +9,22 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "visitor.h"
-
-#include "mfStringsHandling.h"
-
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 
 #ifdef MF_TRACING_IS_ENABLED // encompasses the remainder of this file
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "oahOah.h"
+#include <regex>
 
-#include "oahEarlyOptions.h"
+#include "visitor.h"
+
+#include "mfConstants.h"
+#include "mfStringsHandling.h"
 
 #include "oahAtomsCollection.h"
+#include "oahEarlyOptions.h"
 
 
 namespace MusicFormats
@@ -136,6 +136,7 @@ R"(Print layouts)",
         "fTraceMusicXMLPrintLayouts",
         fTraceMusicXMLPrintLayouts,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMusicXMLPrintLayoutsAtom);
@@ -175,7 +176,7 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        K_TRACE_COMPONENTS_LONG_OPTION_NAME, K_TRACE_COMPONENTS_SHORT_OPTION_NAME,
+        K_TRACE_COMPONENTS_OPTION_LONG_NAME, K_TRACE_COMPONENTS_OPTION_SHORT_NAME,
 R"(Write a trace of components handling to standard error.)",
         "fTraceComponents",
         fTraceComponents));
@@ -184,16 +185,48 @@ R"(Write a trace of components handling to standard error.)",
 
   fTracePassesBooleanAtom =
     oahBooleanAtom::create (
-      K_TRACE_PASSES_LONG_OPTION_NAME, K_TRACE_PASSES_SHORT_OPTION_NAME,
+      K_TRACE_PASSES_OPTION_LONG_NAME, K_TRACE_PASSES_OPTION_SHORT_NAME,
 R"(Write a trace of the passes to standard error.)",
       "fTracePasses",
-      fTracePasses);
+//       fTracePasses);
+      gGlobalOahEarlyOptions.getTraceEarlyOptionsRef ());
+
   subGroup->
     appendAtomToSubGroup (
       fTracePassesBooleanAtom);
+
   otherMultiplexBooleansAtom->
     addBooleanAtom (
       fTracePassesBooleanAtom);
+
+  mfPassIDKind
+    mfPassIDKindDefaultValue =
+      mfPassIDKind::kMfPassID_ALL; // default value for passes tracing
+
+  fTraceOnlyPassIDOahAtom =
+    passIDOahAtom::create (
+      K_TRACE_ONLY_PASS_OPTION_LONG_NAME, K_TRACE_ONLY_PASS_OPTION_SHORT_NAME,
+      regex_replace (
+        regex_replace (
+          regex_replace (
+R"(Write a trace of pass PASSID only to standard error.
+The NUMBER PASSIDs available are:
+PASSID_KINDS.
+The default is 'DEFAULT_VALUE'.)",
+          std::regex ("NUMBER"),
+          std::to_string (gGlobalMusicFormatsPassIDKindsMap.size ())),
+        std::regex ("PASSID_KINDS"),
+        existingMusicFormatsPassIDKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+      std::regex ("DEFAULT_VALUE"),
+      mfPassIDKindAsString (
+        mfPassIDKindDefaultValue)),
+    "PASSID",
+    "fTraceOnlyPassIDKind",
+    fTraceOnlyPassIDKind);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fTraceOnlyPassIDOahAtom);
 
   // geometry
 
@@ -201,13 +234,15 @@ R"(Write a trace of the passes to standard error.)",
     traceGeometryBooleanAtom =
       oahTwoBooleansAtom::create (
         "trace-geometry", "tgeom",
-R"(Scaling)",
+R"(Geometry)",
         "fTraceGeometry",
         fTraceGeometry,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceGeometryBooleanAtom);
+
   otherMultiplexBooleansAtom->
     addBooleanAtom (
       traceGeometryBooleanAtom);
@@ -222,9 +257,11 @@ R"(Identification)",
         "fTraceIdentification",
         fTraceIdentification,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceIdentificationBooleanAtom);
+
   otherMultiplexBooleansAtom->
     addBooleanAtom (
       traceIdentificationBooleanAtom);
@@ -238,6 +275,7 @@ R"(Identification)",
 R"(Write a trace for tests to standard error.)",
         "fTraceForTests",
         fTraceForTests);
+
   traceForTestsOahBooleanAtom->
     setElementVisibilityKind (
       oahElementVisibilityKind::kElementVisibilityHidden);
@@ -270,6 +308,7 @@ R"(Transpositions (<transpose/> in MusicXML, \transposition in LilyPond))",
         "fTraceTranspositions",
         fTraceTranspositions,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceTranspositionsAtom);
@@ -284,6 +323,7 @@ R"(Octave shifts (<octave-shift/> in MusicXML, \ottava in LilyPond))",
         "fTraceOctaveShifts",
         fTraceOctaveShifts,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceOctaveShiftsAtom);
@@ -328,6 +368,7 @@ R"(Rehearsal marks)",
         "fTraceRehearsalMarks",
         fTraceRehearsalMarks,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceRehearsalMarksAtom);
@@ -345,6 +386,7 @@ R"(Segnos)",
         "fTraceSegnos",
         fTraceSegnos,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceSegnosAtom);
@@ -362,6 +404,7 @@ R"(Dal segnos)",
         "fTraceDalSegnos",
         fTraceDalSegnos,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceDalSegnosAtom);
@@ -379,6 +422,7 @@ R"(Codas)",
         "fTraceCodas",
         fTraceCodas,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceCodasAtom);
@@ -396,6 +440,7 @@ R"(Eyeglasses)",
         "fTraceEyeGlasses",
         fTraceEyeGlasses,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceEyeGlassesAtom);
@@ -443,6 +488,7 @@ R"(Line breaks)",
         "fTraceLineBreaks",
         fTraceLineBreaks,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceLineBreaksAtom);
@@ -460,6 +506,7 @@ R"(Page breaks)",
         "fTracePageBreaks",
         fTracePageBreaks,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       tracePageBreaksAtom);
@@ -477,6 +524,7 @@ R"(BarLines)",
         "fTraceBarLines",
         fTraceBarLines,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceBarLinesAtom);
@@ -495,6 +543,7 @@ R"(BarLines details)",
         fTraceBarLinesDetails,
         traceBarLinesAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceBarLinesDetailsAtom);
@@ -513,6 +562,7 @@ R"(Bar checks)",
         fTraceBarChecks,
         traceBarLinesAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceBarChecksAtom);
@@ -531,6 +581,7 @@ R"(Bar number checks)",
         fTraceBarNumberChecks,
         traceBarLinesAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceBarNumberChecksAtom);
@@ -578,6 +629,7 @@ R"(Clefs)",
         "fTraceClefs",
         fTraceClefs,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceClefsAtom);
@@ -595,6 +647,7 @@ R"(Keys)",
         "fTraceKeys",
         fTraceKeys,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceKeysAtom);
@@ -608,6 +661,7 @@ R"(Keys details)",
         fTraceKeysDetails,
         traceKeysAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceKeysDetailsAtom);
@@ -622,6 +676,7 @@ R"(Times)",
         "fTraceTimeSignatures",
         fTraceTimeSignatures,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceTimeSignaturesAtom);
@@ -635,6 +690,7 @@ R"(Times)",
 R"(Temps)",
         traceTimeSignaturesAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceTempsAtom);
@@ -650,6 +706,7 @@ R"(Tempos)",
         "fTraceTempos",
         fTraceTempos,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceTemposAtom);
@@ -697,6 +754,7 @@ R"(Ties)",
         "fTraceTies",
         fTraceTies,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceTiesAtom);
@@ -714,6 +772,7 @@ R"(Glissandos)",
         "fTraceGlissandos",
         fTraceGlissandos,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceGlissandosAtom);
@@ -761,6 +820,7 @@ R"(Spanners)",
         "fTraceSpanners",
         fTraceSpanners,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceSpannersAtom);
@@ -778,6 +838,7 @@ R"(Cresc/Decrescs)",
         "fTraceCrescDecrescs",
         fTraceCrescDecrescs,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceCrescDecrescsAtom);
@@ -795,6 +856,7 @@ R"(Wedges)",
         "fTraceWedges",
         fTraceWedges,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceWedgesAtom);
@@ -812,6 +874,7 @@ R"(Slurs)",
         "fTraceSlurs",
         fTraceSlurs,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceSlursAtom);
@@ -830,6 +893,7 @@ R"(Slurs details)",
         fTraceSlursDetails,
         traceSlursAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceSlursDetailsAtom);
@@ -847,6 +911,7 @@ R"(Ligatures)",
         "fTraceLigatures",
         fTraceLigatures,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceLigaturesAtom);
@@ -895,6 +960,7 @@ R"(<harmony/> in MusicXML, \chordmode in LilyPond)",
       "fTraceHarmonies",
       fTraceHarmonies,
       fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       fTraceHarmoniesBooleanAtom);
@@ -910,6 +976,7 @@ R"(<harmony/> in MusicXML, \chordmode in LilyPond, with more details)",
         fTraceHarmoniesDetails,
         fTraceHarmoniesBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceHarmoniesDetailsAtom);
@@ -924,6 +991,7 @@ R"(<harmony/> in MusicXML, \chordmode in LilyPond)",
         "fTraceExtraHarmonies",
         fTraceExtraHarmonies,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceExtraHarmoniesAtom);
@@ -951,6 +1019,7 @@ R"(<figured-bass> in MusicXML, \figuremode in LilyPond)",
       "fTraceFiguredBasses",
       fTraceFiguredBasses,
       fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       fTraceFiguredBassesBooleanAtom);
@@ -966,6 +1035,7 @@ R"(<figured-bass> in MusicXML, \figuremode in LilyPond, with more details)",
         fTraceFiguredBassesDetails,
         fTraceFiguredBassesBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceFiguredBasseseAtomDetails);
@@ -1010,6 +1080,7 @@ R"(Credits)",
         "fTraceCredits",
         fTraceCredits,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceCreditsBooleanAtom);
@@ -1027,6 +1098,7 @@ R"(Lyrics)",
         "fTraceLyrics",
         fTraceLyrics,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceLyricsBooleanAtom);
@@ -1045,6 +1117,7 @@ R"(Lyrics in MusicXML, stanzas in MSR)",
         fTraceLyricsDetails,
         traceLyricsBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceLyricsDetailsBooleanAtom);
@@ -1062,6 +1135,7 @@ R"(Words)",
         "fTraceWords",
         fTraceWords,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceWordsBooleanAtom);
@@ -1109,6 +1183,7 @@ R"(Chords)",
         "fTraceChords",
         fTraceChords,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       taceChordsBooleanAtom);
@@ -1127,6 +1202,7 @@ R"(Chords details)",
         fTraceChordsDetails,
         taceChordsBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceChordsDetailsBooleanAtom);
@@ -1144,6 +1220,7 @@ R"(Tuplets)",
         "fTraceTuplets",
         fTraceTuplets,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceTupletsBooleanAtom);
@@ -1175,6 +1252,7 @@ R"(Tuplets details)",
         fTraceTupletsDetails,
         traceTupletsBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceTupletsDetailsBooleanAtom);
@@ -1222,6 +1300,7 @@ R"(<frame/> in MusicXML, \fret-diagram in LilyPond)",
         "fTraceFrames",
         fTraceFrames,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceFramesBooleanAtom);
@@ -1241,6 +1320,7 @@ R"(Scordaturas)",
         "fTraceScordaturas",
         fTraceScordaturas,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceScordaturasBooleanAtom);
@@ -1258,6 +1338,7 @@ R"(Slides)",
         "fTraceSlides",
         fTraceSlides,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceSlidesBooleanAtom);
@@ -1275,6 +1356,7 @@ R"(Pedals)",
         "fTracePedals",
         fTracePedals,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       tracePedalsBooleanAtom);
@@ -1292,6 +1374,7 @@ R"(Accordion registrations)",
         "fTraceAccordionRegistrations",
         fTraceAccordionRegistrations,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceAccordionRegistrationsBooleanAtom);
@@ -1309,6 +1392,7 @@ R"(Harp pedals)",
         "fTraceHarpPedals",
         fTraceHarpPedals,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceHarpPedalsBooleanAtom);
@@ -1326,6 +1410,7 @@ R"(Harp pedals tuning)",
         "fTraceHarpPedalsTunings",
         fTraceHarpPedalsTunings,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceHarpPedalsTuningsBooleanAtom);
@@ -1343,6 +1428,7 @@ R"(Damps)",
         "fTraceDamps",
         fTraceDamps,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceDampsBooleanAtom);
@@ -1360,6 +1446,7 @@ R"(Dampalls)",
         "fTraceDampAlls",
         fTraceDampAlls,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceDampAllsBooleanAtom);
@@ -1377,6 +1464,7 @@ R"(MIDI)",
         "fTraceMidi",
         fTraceMidi,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMidiBooleanAtom);
@@ -1424,6 +1512,7 @@ R"(Stems)",
         "fTraceStems",
         fTraceStems,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceStemsBooleanAtom);
@@ -1441,6 +1530,7 @@ R"(Beams)",
         "fTraceBeams",
         fTraceBeams,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceBeamsBooleanAtom);
@@ -1458,6 +1548,7 @@ R"(Articulations)",
         "fTraceArticulations",
         fTraceArticulations,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceArticulationsBooleanAtom);
@@ -1475,6 +1566,7 @@ R"(Technicals)",
         "fTraceTechnicals",
         fTraceTechnicals,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceTechnicalsBooleanAtom);
@@ -1492,6 +1584,7 @@ R"(Ornaments)",
         "fTraceOrnaments",
         fTraceOrnaments,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceOrnamentsBooleanAtom);
@@ -1508,6 +1601,7 @@ R"(Ornaments)",
         fTraceOrnamentsDetails,
         traceOrnamentsBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceOrnamentsDetailsBooleanAtom);
@@ -1525,6 +1619,7 @@ R"(Dynamics)",
         "fTraceDynamics",
         fTraceDynamics,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceDynamicsBooleanAtom);
@@ -1572,6 +1667,7 @@ R"(Voices segments)",
         "fTraceSegments",
         fTraceSegments,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceSegmentsBooleanAtom);
@@ -1590,6 +1686,7 @@ R"(Voices segments details)",
         fTraceSegmentsDetails,
         traceSegmentsBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceSegmentsDetailsBooleanAtom);
@@ -1637,6 +1734,7 @@ R"(Measure numberss)",
         "fTraceMeasuresNumbers",
         fTraceMeasuresNumbers,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMeasuresNumbersBooleanAtom);
@@ -1654,6 +1752,7 @@ R"(Measures)",
         "fTraceMeasures",
         fTraceMeasures,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMeasuresBooleanAtom);
@@ -1672,6 +1771,7 @@ R"(Measures details)",
         fTraceMeasuresDetails,
         traceMeasuresBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMeasuresDetailsBooleanAtom);
@@ -1689,6 +1789,7 @@ R"(Measure positions)",
         "fTraceMeasurePositions",
         fTraceMeasurePositions,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMeasurePositionsBooleanAtom);
@@ -1706,6 +1807,7 @@ R"(Voice positions)",
         "fTraceVoicePositions",
         fTraceVoicePositions,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceVoicePositionsBooleanAtom);
@@ -1723,6 +1825,7 @@ R"(Measure moments)",
         "fTraceMeasureMoments",
         fTraceMeasureMoments,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMeasureMomentsBooleanAtom);
@@ -1740,6 +1843,7 @@ R"(Voice moments)",
         "fTraceVoiceMoments",
         fTraceVoiceMoments,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceVoiceMomentsBooleanAtom);
@@ -1791,6 +1895,7 @@ R"(Measures slices)",
         "fTraceMeasuresSlices",
         fTraceMeasuresSlices,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMeasuresSlicesBooleanAtom);
@@ -1809,6 +1914,7 @@ R"(Measures slices details)",
         fTraceMeasuresSlicesDetails,
         traceMeasuresSlicesBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMeasuresSlicesDetailsBooleanAtom);
@@ -1856,6 +1962,7 @@ R"(Books)",
         "fTraceBooks",
         fTraceBooks,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceBooksBooleanAtom);
@@ -1873,6 +1980,7 @@ R"(Score)",
         "fTraceScores",
         fTraceScores,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceScoresBooleanAtom);
@@ -1890,6 +1998,7 @@ R"(Part groups)",
         "trafTracePartGroupscePartGroups",
         fTracePartGroups,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       tracePartGroupsBooleanAtom);
@@ -1909,6 +2018,7 @@ This option implies '-tpgrps, -trace-part-groups'.)",
         fTracePartGroupsDetails,
         tracePartGroupsBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       tracePartGroupsDetailsBooleanAtom);
@@ -1926,6 +2036,7 @@ R"(Parts)",
         "fTraceParts",
         fTraceParts,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       tracePartsBooleanAtom);
@@ -1943,6 +2054,7 @@ R"(Staves)",
         "fTraceStaves",
         fTraceStaves,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceStavesBooleanAtom);
@@ -1961,6 +2073,7 @@ R"(Staff details)",
         fTraceStaffDetails,
         traceStavesBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceStaffDetailsBooleanAtom);
@@ -1978,6 +2091,7 @@ R"(Staff changes)",
         "fTraceStaffChanges",
         fTraceStaffChanges,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceStaffChangesBooleanAtom);
@@ -1995,6 +2109,7 @@ R"(Voices)",
         "fTraceVoices",
         fTraceVoices,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceVoicesBooleanAtom);
@@ -2014,6 +2129,7 @@ This option implies '-tvoices, -trace-voices'.)",
         fTraceVoicesDetails,
         traceVoicesBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceVoicesDetailsBooleanAtom);
@@ -2061,6 +2177,7 @@ R"(Notes)",
         "fTraceNotes",
         fTraceNotes,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceNotesBooleanAtom);
@@ -2080,6 +2197,7 @@ This option implies '-tnotes, -trace-notes'.)",
         fTraceNotesDetails,
         traceNotesBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceNotesDetailsBooleanAtom);
@@ -2097,6 +2215,7 @@ R"(Whole notes computations (quite verbose)...)",
         "fTraceWholeNotes",
         fTraceWholeNotes,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceWholeNotesBooleanAtom);
@@ -2115,6 +2234,7 @@ R"(Whole notes computations details (event more verbose)...)",
         fTraceWholeNotesDetails,
         traceWholeNotesBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceWholeNotesDetailsBooleanAtom);
@@ -2132,6 +2252,7 @@ R"(Rest notes)",
         "fTraceRestNotes",
         fTraceRestNotes,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceRestNotesBooleanAtom);
@@ -2149,6 +2270,7 @@ R"(Skip notes)",
         "fTraceSkipNotes",
         fTraceSkipNotes,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceSkipNotesBooleanAtom);
@@ -2166,6 +2288,7 @@ R"(Notes octave entry)",
         "fTraceNotesOctaveEntry",
         fTraceNotesOctaveEntry,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceNotesOctaveEntryBooleanAtom);
@@ -2183,6 +2306,7 @@ R"(Grace notes)",
         "fTraceGraceNotes",
         fTraceGraceNotes,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceGraceNotesBooleanAtom);
@@ -2200,6 +2324,7 @@ R"(Tremolos)",
         "fTraceTremolos",
         fTraceTremolos,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceTremolosBooleanAtom);
@@ -2225,7 +2350,7 @@ R"()",
 
   fTracingOahBooleanAtom =
     oahBooleanAtom::create (
-      K_TRACE_OAH_LONG_OPTION_NAME, K_TRACE_OAH_SHORT_OPTION_NAME,
+      K_TRACE_OAH_OPTION_LONG_NAME, K_TRACE_OAH_OPTION_SHORT_NAME,
 R"(Write a trace of options and help handling to standard error.)",
       "fTracingOah",
       fTracingOah);
@@ -2239,7 +2364,7 @@ R"(Write a trace of options and help handling to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       oahTwoBooleansAtom::create (
-        K_TRACE_OAH_DETAILS_LONG_OPTION_NAME, K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME,
+        K_TRACE_OAH_DETAILS_OPTION_LONG_NAME, K_TRACE_OAH_DETAILS_OPTION_SHORT_NAME,
 R"(Write a trace of options and help handling with more details to standard error.)",
         "fTracingOahDetails",
         fTracingOahDetails,
@@ -2287,6 +2412,7 @@ R"(Repeats)",
         "fTraceRepeats",
         fTraceRepeats,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceRepeatsBooleanAtom);
@@ -2305,6 +2431,7 @@ R"(Repeats details)",
         fTraceRepeatsDetails,
         traceRepeatsBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceRepeatsDetailsBooleanAtom);
@@ -2322,6 +2449,7 @@ R"(Measure repeats)",
         "fTraceMeasureRepeats",
         fTraceMeasureRepeats,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMeasureRepeatsBooleanAtom);
@@ -2338,6 +2466,7 @@ R"(Measure repeats)",
         fTraceMeasureRepeatsDetails,
         traceMeasureRepeatsBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMeasureRepeatsDetailsBooleanAtom);
@@ -2355,6 +2484,7 @@ R"(Full-bar rests)",
         "fTraceMultipleFullBarRests",
         fTraceMultipleFullBarRests,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMultipleFullBarRestsBooleanAtom);
@@ -2371,6 +2501,7 @@ R"(Full-bar rests details)",
         fTraceMultipleFullBarRestsDetails,
         traceMultipleFullBarRestsBooleanAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceMultipleFullBarRestsDetailsBooleanAtom);
@@ -2388,6 +2519,7 @@ R"(Beats repeatss)",
         "fTraceBeatRepeats",
         fTraceBeatRepeats,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceBeatRepeatsBooleanAtom);
@@ -2405,6 +2537,7 @@ R"(Slashes)",
         "fTraceSlashes",
         fTraceSlashes,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceSlashesBooleanAtom);

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "oahOah.h"
 
@@ -72,15 +72,19 @@ std::ostream& operator << (std::ostream& os, const S_mfWaeHandler& elt)
 }
 
 //_______________________________________________________________________________
-// pass numbers
+// pass names
 
-std::string mfWaeHandler::pass (mfPassIDKind passIDKind) const
+std::string mfWaeHandler::passIDKindAsString (mfPassIDKind passIDKind) const
 {
   std::string result;
 
   switch (passIDKind) {
     case mfPassIDKind::kMfPassID_UNKNOWN:
       result = "*Pass kMfPassID_UNKNOWN*";
+      break;
+
+    case mfPassIDKind::kMfPassID_ALL:
+      result = "*Pass kMfPassID_ALL*";
       break;
 
     case mfPassIDKind::kMfPassID_0:
@@ -198,6 +202,20 @@ std::string mfWaeHandler::names () const
 std::string mfWaeHandler::slices () const
 {
   return "slices";
+}
+
+//_______________________________________________________________________________
+// quitting after passes
+std::string mfWaeHandler::quittingAfterPass (mfPassIDKind passIDKind) const
+{
+  std::stringstream s;
+
+  s <<
+    "Quitting after pass " <<
+    passIDKindAsString (passIDKind) <<
+    " as requested";
+
+  return s.str ();
 }
 
 //_______________________________________________________________________________

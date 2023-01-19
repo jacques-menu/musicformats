@@ -22,7 +22,7 @@
 #include "bsr2bsrWae.h"
 #include "bsr2brailleWae.h"
 
-#include "mfEnableTracingSetting.h"
+#include "mfStaticSettings.h"
 
 #include "waeOah.h"
 
