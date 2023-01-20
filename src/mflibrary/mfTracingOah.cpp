@@ -189,7 +189,7 @@ R"(Write a trace of components handling to standard error.)",
 R"(Write a trace of the passes to standard error.)",
       "fTracePasses",
 //       fTracePasses);
-      gGlobalOahEarlyOptions.getTraceEarlyOptionsRef ());
+      gGlobalOahEarlyOptions.getEarlyTracePassesRef ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -222,7 +222,8 @@ The default is 'DEFAULT_VALUE'.)",
         mfPassIDKindDefaultValue)),
     "PASSID",
     "fTraceOnlyPassIDKind",
-    fTraceOnlyPassIDKind);
+//     fTraceOnlyPassIDKind);
+      gGlobalOahEarlyOptions.getEarlyTraceOnlyPassRef ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -2716,6 +2717,10 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     // passes
     std::setw (fieldWidth) << "fTracePasses" << ": " <<
     fTracePasses <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fTraceOnlyPassIDKind" << ": " <<
+    fTraceOnlyPassIDKind <<
     std::endl <<
 
     // for tests, hidden

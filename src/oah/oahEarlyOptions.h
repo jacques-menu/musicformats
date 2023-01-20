@@ -149,9 +149,13 @@ class EXP oahEarlyOptions
     void                  setEarlyTracePasses ();
     Bool                  getEarlyTracePasses () const
                               { return fEarlyTracePasses; }
+    Bool&                 getEarlyTracePassesRef ()
+                              { return fEarlyTracePasses; }
 
     void                  setEarlyTraceOnlyPass (mfPassIDKind passIDKind);
     mfPassIDKind          getEarlyTraceOnlyPass () const
+                              { return fEarlyTraceOnlyPass; }
+    mfPassIDKind&         getEarlyTraceOnlyPassRef ()
                               { return fEarlyTraceOnlyPass; }
 
 #endif

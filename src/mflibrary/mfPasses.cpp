@@ -95,7 +95,7 @@ std::ostream& operator << (std::ostream& os, const mfPassIDKind elt)
   return os;
 }
 
-mfPassIDKind mfPassIDFromString (const std::string& theString)
+mfPassIDKind mfPassIDKindFromString (const std::string& theString)
 {
   mfPassIDKind result =
     mfPassIDKind::kMfPassID_UNKNOWN;
