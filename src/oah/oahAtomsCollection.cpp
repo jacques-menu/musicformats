@@ -194,6 +194,163 @@ std::ostream& operator << (std::ostream& os, const S_oahValueLessAtomAlias& elt)
 }
 
 //______________________________________________________________________________
+S_oahValueFittedAtomAlias oahValueFittedAtomAlias::create (
+  const std::string&          shortName,
+  const std::string&          longName,
+  const std::string&          description,
+  const S_oahValueFittedAtom& originalValueFittedAtom)
+{
+  oahValueFittedAtomAlias* o = new
+    oahValueFittedAtomAlias (
+      longName,
+      shortName,
+      description,
+      originalValueFittedAtom);
+  assert (o != nullptr);
+  return o;
+}
+
+oahValueFittedAtomAlias::oahValueFittedAtomAlias (
+  const std::string&          shortName,
+  const std::string&          longName,
+  const std::string&          description,
+  const S_oahValueFittedAtom& originalValueFittedAtom)
+  : oahValueFittedAtom (
+      longName,
+      shortName,
+      description)
+{
+  fOriginalValueFittedAtom = originalValueFittedAtom;
+}
+
+oahValueFittedAtomAlias::~oahValueFittedAtomAlias ()
+{}
+
+void oahValueFittedAtomAlias::applyAtomWithValue (
+  const std::string& theString,
+  std::ostream&      os)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahOnOffAtom" <<
+      std::endl;
+  }
+#endif
+
+  // JMI ??? v0.9.66
+}
+
+void oahValueFittedAtomAlias::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahValueFittedAtomAlias::acceptIn ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahValueFittedAtomAlias>*
+    p =
+      dynamic_cast<visitor<S_oahValueFittedAtomAlias>*> (v)) {
+        S_oahValueFittedAtomAlias elem = this;
+
+#ifdef MF_TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahValueFittedAtomAlias::visitStart ()" <<
+            std::endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void oahValueFittedAtomAlias::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahValueFittedAtomAlias::acceptOut ()" <<
+      std::endl;
+  }
+#endif
+
+  if (visitor<S_oahValueFittedAtomAlias>*
+    p =
+      dynamic_cast<visitor<S_oahValueFittedAtomAlias>*> (v)) {
+        S_oahValueFittedAtomAlias elem = this;
+
+#ifdef MF_TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahValueFittedAtomAlias::visitEnd ()" <<
+            std::endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void oahValueFittedAtomAlias::browseData (basevisitor* v)
+{
+#ifdef MF_TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahValueFittedAtomAlias::browseData ()" <<
+      std::endl;
+  }
+#endif
+
+  if (fOriginalValueFittedAtom) {
+    // browse the original atom
+    oahBrowser<oahAtom> browser (v);
+    browser.browse (*fOriginalValueFittedAtom);
+  }
+}
+
+void oahValueFittedAtomAlias::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "AtomAlias:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  --gIndenter;
+}
+
+void oahValueFittedAtomAlias::printAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  fOriginalValueFittedAtom->
+    printAtomWithVariableOptionsValues (
+      os,
+      valueFieldWidth);
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahValueFittedAtomAlias& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahMacroAtom oahMacroAtom::create (
   const std::string& longName,
   const std::string& shortName,

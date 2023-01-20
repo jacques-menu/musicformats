@@ -515,12 +515,23 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
 
   if (
     isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_TRACE_PASSES_OPTION_LONG_NAME)
+      ||
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_TRACE_PASSES_OPTION_SHORT_NAME)
+  ) {
+    setEarlyTracePasses ();
+  }
+
+  if (
+    isEarlyOptionRecognized (
       argumentWithoutDashToBeUsed, K_TRACE_ONLY_PASS_OPTION_LONG_NAME)
       ||
     isEarlyOptionRecognized (
       argumentWithoutDashToBeUsed, K_TRACE_ONLY_PASS_OPTION_SHORT_NAME)
   ) {
-    setEarlyTracePasses ();
+    setEarlyTraceOnlyPass (
+      mfPassIDKindFromString (optionValue));
   }
 
 #endif
