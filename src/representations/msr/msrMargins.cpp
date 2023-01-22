@@ -67,7 +67,7 @@ void initializeMsrMarginTypeKindsMap ()
   gGlobalMsrMarginTypeKindsMap ["both"] = msrMarginTypeKind::kMarginBoth;
 }
 
-std::string existingMsrMarginTypeKinds (size_t namesListMaxLength)
+std::string availableMsrMarginTypeKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 

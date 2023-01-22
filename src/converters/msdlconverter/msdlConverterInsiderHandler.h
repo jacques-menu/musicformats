@@ -35,8 +35,8 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<msdlConverterInsiderHandler> create (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 
   protected:
@@ -45,8 +45,8 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           msdlConverterInsiderHandler (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 
     virtual               ~msdlConverterInsiderHandler ();

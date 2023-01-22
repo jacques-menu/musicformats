@@ -161,7 +161,7 @@ void msr2musicxmlManPageGenerateAtom::generateManPageData (std::ostream& os) con
       "msr2musicxmlManPageGenerateAtom::generateManPageData");
 }
 
-void msr2musicxmlManPageGenerateAtom::printAtomWithVariableOptionsValues (
+void msr2musicxmlManPageGenerateAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {

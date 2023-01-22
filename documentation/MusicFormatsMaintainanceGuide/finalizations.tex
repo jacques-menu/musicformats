@@ -675,7 +675,9 @@ void msrMeasure::finalizeHarmonyMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Finalizing harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -706,7 +708,9 @@ void msrMeasure::finalizeHarmonyMeasure (
         getPartNumberOfMeasures ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "fMeasureOrdinalNumberInVoice = " <<
       fMeasureOrdinalNumberInVoice <<
       ", harmoniesPartNumberOfMeasures = " <<
@@ -810,7 +814,9 @@ void msrMeasure::finalizeFiguredBassMeasure (
         getPartNumberOfMeasures ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "fMeasureOrdinalNumberInVoice = " <<
       fMeasureOrdinalNumberInVoice <<
       ", figuredBassPartNumberOfMeasures = " <<

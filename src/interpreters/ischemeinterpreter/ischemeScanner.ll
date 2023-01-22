@@ -17,7 +17,7 @@
 /* ---------------------------------------------------------------------- */
 
 #include <sstream>
-#include <string.h>     // strerror_r
+// #include <string.h>     // strerror_r
 
 #include "mfStringsHandling.h"
 
@@ -32,9 +32,9 @@
 
 #include "ischemeInterpreterInterface.h"
 
-#ifdef WIN32
-  #include "mfSystemInterface.h" // for isatty()
+#include "mfSystemInterface.h" // for isatty(), mfStrErrorCString()
 
+#ifdef WIN64
   #define YY_NO_UNISTD_H
 #endif
 
@@ -561,14 +561,14 @@ void ischemeDriver::scanBegin ()
       std::stringstream s;
 
       char*
-        errorString =
-          strerror (errno);
+        errorCString =
+          mfStrErrorCString ();
 
-      if (errorString != nullptr) {
+      if (errorCString != nullptr) {
         s <<
           gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
           ": " <<
-          errorString <<
+          errorCString <<
           std::endl;
 
         ischemeFileError (

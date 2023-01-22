@@ -269,7 +269,9 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //     // insert skipNote before currentHarmony in the measure's elements list
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       gLogStream <<
+//       std::stringstream s;
+//
+//       s <<
 //         "Inserting subsequent padding note " <<
 //         skipNote->asString () <<
 //         " before currentHarmony " <<
@@ -278,6 +280,10 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         voice->getVoiceName () <<
 //         "\", line " << inputLineNumber <<
 //         std::endl;
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         s.str ());
 //     }
 // #endif
 //
@@ -312,7 +318,9 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       gLogStream <<
+//       std::stringstream s;
+//
+//       s <<
 //         "Reducing the sounding whole notes of harmony " <<
 //         previousHarmony->asString () <<
 //         " from " <<
@@ -323,6 +331,10 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         voice->getVoiceName () <<
 //         "\", line " << inputLineNumber <<
 //         std::endl;
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         s.str ());
 //     }
 // #endif
 //

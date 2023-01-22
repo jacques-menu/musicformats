@@ -117,7 +117,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //       translateMxsrToMsrSkeleton (
 //         theMxsr,
 //         gGlobalMsrOahGroup,
-//         gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2a),
+//         mfPassIDKind::kMfPassID_2a,
 //         gWaeHandler->createAnMSRSqueletonFromTheMXSR ());
 //   }
 //   catch (mxsr2msrException& e) {
@@ -148,7 +148,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //     populateMsrSkeletonFromMxsr (
 //       theMxsr,
 //       firstMsrScore,
-//         gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2b),
+//         mfPassIDKind::kMfPassID_2b,
 //         gWaeHandler->populateTheMSRSqueletonFromMusicXMLData ());
 //   }
 //   catch (mxsr2msrException& e) {
@@ -194,7 +194,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           firstMsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalMsr2msrOahGroup,
-//           gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+//           mfPassIDKind::kMfPassID_3,
 //           gWaeHandler->convertTheFirstMSRIntoASecondMSR (),
 //           pathToVoice);
 //     } // for
@@ -205,7 +205,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //         firstMsrScore,
 //         gGlobalMsrOahGroup,
 //         gGlobalMsr2msrOahGroup,
-//         gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+//         mfPassIDKind::kMfPassID_3,
 //         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
 // }
 //   }
@@ -245,7 +245,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           secondMsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
-//           gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
+//           mfPassIDKind::kMfPassID_4,
 //           gWaeHandler->convertTheSecondMSRIntoAnLPSR (),
 //           createMsdl2lilypondConverterComponent ());
 //     }
@@ -323,7 +323,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           theLpsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
-//           gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_5),
+//           mfPassIDKind::kMfPassID_5,
 //           gWaeHandler->convertTheLPSRIntoLilyPondCode (),
 //           lilypondStandardOutputStream);
 //       }
@@ -391,7 +391,7 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //           theLpsrScore,
 //           gGlobalMsrOahGroup,
 //           gGlobalLpsrOahGroup,
-//           gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_5),
+//           mfPassIDKind::kMfPassID_5,
 //           gWaeHandler->convertTheLPSRIntoLilyPondCode (),
 //           lilypondFileOutputStream);
 //       }
@@ -599,7 +599,7 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromFile (
 //         fileName,
-		//     gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+		//     mfPassIDKind::kMfPassID_1,
 //         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 //
 //   if (sxmlfile) {
@@ -624,7 +624,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
 //     sxmlfile =
 //       createSXMLFileFromFile (
 //         fileName,
-		//     gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+		//     mfPassIDKind::kMfPassID_1,
 //         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 //
 //   if (sxmlfile) {
@@ -650,7 +650,7 @@ EXP mfMusicformatsErrorKind msdlFd2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromFd (
 //         fd,
-		//     gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+		//     mfPassIDKind::kMfPassID_1,
 //         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
@@ -675,7 +675,7 @@ mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
 //     sxmlfile =
 //       createSXMLFileFromFd (
 //         fd,
-		//     gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+		//     mfPassIDKind::kMfPassID_1,
 //         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 //
 //   if (sxmlfile) {
@@ -701,7 +701,7 @@ EXP mfMusicformatsErrorKind msdlString2lilypond (
 //     sxmlfile =
 //       createSXMLFileFromString (
 //         buffer,
-		//     gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+		//     mfPassIDKind::kMfPassID_1,
 //         gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 //
 //   // call xmlFile2lilypond() even if sxmlfile is null,
@@ -726,7 +726,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //     sxmlfile =
 //       createSXMLFileFromString (
 //         buffer,
-		//     gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+		//     mfPassIDKind::kMfPassID_1,
 //         "Create an MXSR from a MusicXML buffer");
 //
 //   // call xmlFile2lilypond() even if sxmlfile is null,

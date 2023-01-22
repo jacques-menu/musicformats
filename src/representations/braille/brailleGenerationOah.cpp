@@ -103,7 +103,7 @@ void brailleOutputKindAtom::setImplicitVariable (std::ostream& os)
   }
 #endif
 
-  if (fSetByAnOption) {
+  if (fSelected) {
     std::stringstream s;
 
     s <<
@@ -115,8 +115,9 @@ void brailleOutputKindAtom::setImplicitVariable (std::ostream& os)
   }
   else {
     fBrailleOutputKindVariable = fBrailleOutputKindValue;
-    fSetByAnOption = true;
   }
+
+	fSelected = true;
 }
 
 void brailleOutputKindAtom::acceptIn (basevisitor* v)
@@ -238,7 +239,7 @@ void brailleOutputKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void brailleOutputKindAtom::printAtomWithVariableOptionsValues (
+void brailleOutputKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -248,9 +249,8 @@ void brailleOutputKindAtom::printAtomWithVariableOptionsValues (
     ": " <<
     bsrBrailleOutputKindAsString (
       fBrailleOutputKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -344,7 +344,8 @@ void brailleUTFKindAtom::applyAtomWithValue (
   }
 
   fBsrUTFKindVariable = UTFKind;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void brailleUTFKindAtom::acceptIn (basevisitor* v)
@@ -459,7 +460,7 @@ void brailleUTFKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void brailleUTFKindAtom::printAtomWithVariableOptionsValues (
+void brailleUTFKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -470,9 +471,8 @@ void brailleUTFKindAtom::printAtomWithVariableOptionsValues (
     bsrUTFKindAsString (
       fBsrUTFKindVariable) <<
     "\"";
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -566,7 +566,8 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
   }
 
   fBsrByteOrderingKindVariable = byteOrderingKind;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
@@ -682,7 +683,7 @@ void brailleByteOrderingKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void brailleByteOrderingKindAtom::printAtomWithVariableOptionsValues (
+void brailleByteOrderingKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -692,9 +693,8 @@ void brailleByteOrderingKindAtom::printAtomWithVariableOptionsValues (
     ": " <<
     bsrByteOrderingKindAsString (
       fBsrByteOrderingKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -1095,7 +1095,7 @@ void brailleGenerationOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void brailleGenerationOahGroup::printBrailleGenerationOahValues (int fieldWidth)
+void brailleGenerationOahGroup::displayBrailleGenerationOahValues (int fieldWidth)
 {
   gLogStream <<
     "The Bsr2braille options are:" <<

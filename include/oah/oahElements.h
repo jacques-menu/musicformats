@@ -287,6 +287,9 @@ class EXP oahElement : public oahFindableElement
     Bool                  getMultipleOccurrencesAllowed () const
                               { return fMultipleOccurrencesAllowed; }
 
+    Bool                  getSelected () const
+                              { return fSelected; }
+
   public:
 
     // public services
@@ -381,15 +384,24 @@ class EXP oahElement : public oahFindableElement
                           fElementVisibilityKind;
 
     Bool                  fMultipleOccurrencesAllowed;
+
+    Bool                  fSelected;
 };
 EXP std::ostream& operator << (std::ostream& os, const S_oahElement& elt);
 EXP std::ostream& operator << (std::ostream& os, const oahElement& elt);
 
 //______________________________________________________________________________
 /*
-Because the set needs a comparison functor to work with. If you don't specify one, it will make a default-constructed one. In this case, since you're using a function-pointer type, the default-constructed one will be a null pointer, which can't be called; so instead, you have to provide the correct function pointer at run time.
+	Because the set needs a comparison functor to work with. JMI v0.9.66
 
-A better approach might be to use a function class   type (a.k.a. functor type); then the function call can be resolved at compile time, and a default-constructed object will do the right thing.
+	If you don't specify one, it will make a default-constructed one.
+	In this case, since you're using a function-pointer type,
+	the default-constructed one will be a null pointer, which can't be called;
+	so instead, you have to provide the correct function pointer at run time.
+
+	A better approach might be to use a function class type (a.k.a. functor type);
+	then the function call can be resolved at compile time,
+	and a default-constructed object will do the right thing.
 */
 
 struct compareOahElements {

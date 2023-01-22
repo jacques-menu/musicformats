@@ -36,7 +36,7 @@ class EXP languageOahAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfLanguageKind&    languageKindVariable);
+                            mfLanguageKind&    languageKindVariableRef);
 
   protected:
 
@@ -49,7 +49,7 @@ class EXP languageOahAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfLanguageKind&    languageKindVariable);
+                            mfLanguageKind&    languageKindVariableRef);
 
     virtual               ~languageOahAtom ();
 
@@ -82,7 +82,7 @@ class EXP languageOahAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -90,9 +90,7 @@ class EXP languageOahAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    mfLanguageKind&       fLanguageKindVariable;
-
-    Bool                  fOptionHasBeenSelected;
+  mfLanguageKind&         fLanguageKindVariableRef;
 };
 typedef SMARTP<languageOahAtom> S_languageOahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_languageOahAtom& elt);
@@ -149,15 +147,12 @@ class EXP insiderOahAtom : public oahValueLessAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
-
     // private fields
     // ------------------------------------------------------
-
-    Bool                  fOptionHasBeenSelected;
 };
 typedef SMARTP<insiderOahAtom> S_insiderOahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_insiderOahAtom& elt);
@@ -214,7 +209,7 @@ class EXP regularOahAtom : public oahValueLessAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -222,8 +217,6 @@ class EXP regularOahAtom : public oahValueLessAtom
 
     // private fields
     // ------------------------------------------------------
-
-    Bool                  fOptionHasBeenSelected;
 };
 typedef SMARTP<regularOahAtom> S_regularOahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_regularOahAtom& elt);
@@ -242,7 +235,7 @@ class EXP passIDOahAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfPassIDKind&      languageKindVariable);
+                            mfPassIDKind&      passIDKindRef);
 
   protected:
 
@@ -255,7 +248,7 @@ class EXP passIDOahAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfPassIDKind  &    languageKindVariable);
+                            mfPassIDKind&      passIDKindRef);
 
     virtual               ~passIDOahAtom ();
 
@@ -288,17 +281,14 @@ class EXP passIDOahAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
-
 
     // private fields
     // ------------------------------------------------------
 
-//     mfPassIDKind&        fLanguageKindVariable;
-
-    Bool                  fOptionHasBeenSelected;
+    mfPassIDKind&         fPassIDKindVariableRef;
 };
 typedef SMARTP<passIDOahAtom> S_passIDOahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_passIDOahAtom& elt);
@@ -341,20 +331,15 @@ class EXP oahOahGroup : public oahGroup
     S_mfcMultiComponent   fetchOahOahGroupHandlerMultiComponent () const;
 
     // OAH verbose mode
-
-// replaced by getEarlyOahVerboseMode()
-//     Bool                  getOahVerboseMode () const
-//                               { return fOahVerboseMode; }
-
     const S_oahBooleanAtom&
                           getOahVerboseModeAtom () const
                               { return fOahVerboseModeAtom; }
 
     // options and arguments
-    void                  setShowOptionsAndArguments ()
-                              { fShowOptionsAndArguments = true; }
-    Bool                  getShowOptionsAndArguments () const
-                              { return fShowOptionsAndArguments; }
+    void                  setdisplayOptionsAndArguments ()
+                              { fdisplayOptionsAndArguments = true; }
+    Bool                  getdisplayOptionsAndArguments () const
+                              { return fdisplayOptionsAndArguments; }
 
     // help about option name
     std::string           getOptionNameToProvideHelpAbout () const
@@ -394,7 +379,7 @@ class EXP oahOahGroup : public oahGroup
                               { return fDisplaySourceCodePositions;  }
 
     // tracing
-    void                  setEarlyTracingOahVisitors ()
+    void                  setTracingOahVisitors ()
                               { fTracingOahVisitors = true; }
     Bool                  getTracingOahVisitors () const
                               { return fTracingOahVisitors; }
@@ -443,7 +428,7 @@ class EXP oahOahGroup : public oahGroup
 
     void                  printOahOahValues (int valueFieldWidth);
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const;
 
@@ -456,16 +441,14 @@ class EXP oahOahGroup : public oahGroup
     std::string           fOahOahGroupServiceName;
 
     // language
-    mfLanguageKind        fLanguageKind;
+    // JMI v0.9.66
 
     // trace early options
 
-    Bool                  fTraceEarlyOptions;
     S_oahBooleanAtom      fTraceEarlyOptionsAtom;
 
     // OAH verbose mode
 
-    Bool                  fOahVerboseMode;
     S_oahBooleanAtom      fOahVerboseModeAtom;
 
     // help about option name
@@ -479,7 +462,7 @@ class EXP oahOahGroup : public oahGroup
                           fQueryOptionNameAtom;
 
     // find std::string
-//     std::string           fStringToBeFound; JMI ???
+//     std::string           fStringToBeFound; JMI ??? v0.9.66
     S_oahFindStringAtom   fFindStringAtom;
 
     // include options file
@@ -492,7 +475,7 @@ class EXP oahOahGroup : public oahGroup
     // --------------------------------------
 
     // options and arguments
-    Bool                  fShowOptionsAndArguments;
+    Bool                  fdisplayOptionsAndArguments;
 
     // display
     Bool                  fReverseNamesDisplayOrder;

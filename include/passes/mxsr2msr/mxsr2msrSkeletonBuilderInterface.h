@@ -20,7 +20,6 @@ namespace MusicFormats
 EXP S_msrScore translateMxsrToMsrSkeleton (
   Sxmlelement        theMxsr,
   S_msrOahGroup&     msrOpts,
-//   const std::string& passNumber,
   mfPassIDKind       passIDKind,
   const std::string& passDescription);
 
@@ -28,7 +27,7 @@ EXP S_msrScore translateMxsrToMsrSkeleton (
 // EXP void displayMsrScoreSkeleton ( // UNUSED JMI v0.9.66
 //   S_msrOahGroup&     msrOpts,
 //   S_msrScore         theMsrScore,
-//   const std::string& passNumber,
+//   mfPassIDKind       passIDKind,
 //   const std::string& passDescription);
 
 

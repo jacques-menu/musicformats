@@ -161,7 +161,7 @@ void msr2lilypondManPageGenerateAtom::generateManPageData (std::ostream& os) con
       "msr2lilypondManPageGenerateAtom::generateManPageData");
 }
 
-void msr2lilypondManPageGenerateAtom::printAtomWithVariableOptionsValues (
+void msr2lilypondManPageGenerateAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {

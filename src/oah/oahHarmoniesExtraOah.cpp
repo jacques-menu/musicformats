@@ -73,6 +73,8 @@ void extraDisplayAllHarmoniesStructuresAtom::applyValueLessAtom (std::ostream& o
 #endif
 
   printAllHarmoniesStructures (os);
+
+	fSelected = true;
 }
 //
 // void extraDisplayAllHarmoniesStructuresAtom::applyAtomWithValue (
@@ -174,7 +176,7 @@ void extraDisplayAllHarmoniesStructuresAtom::printAllHarmoniesStructures (std::o
   msrHarmonyStructure::printAllHarmoniesStructures (os);
 }
 
-void extraDisplayAllHarmoniesStructuresAtom::printAtomWithVariableOptionsValues (
+void extraDisplayAllHarmoniesStructuresAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -422,7 +424,7 @@ void extraDisplayAllHarmoniesContentsAtom::printAllHarmoniesContents (
     semiTonesPitchKind);
 }
 
-void extraDisplayAllHarmoniesContentsAtom::printAtomWithVariableOptionsValues (
+void extraDisplayAllHarmoniesContentsAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -731,7 +733,7 @@ void extraDisplayHarmonyDetailsAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void extraDisplayHarmonyDetailsAtom::printAtomWithVariableOptionsValues (
+void extraDisplayHarmonyDetailsAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1063,7 +1065,7 @@ void extraDisplayHarmonyAnalysisAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void extraDisplayHarmonyAnalysisAtom::printAtomWithVariableOptionsValues (
+void extraDisplayHarmonyAnalysisAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1089,7 +1091,7 @@ R"(These extra provide features not related to conversion from MusicXML to other
 In the text below:
   - ROOT_DIATONIC_PITCH should belong to the names available in
     the selected MSR pitches language, "nederlands" by default;
-  - other languages can be chosen with the '-mpl, -msr-pitches-language' option;
+  - other languages can be selected with the '-mpl, -msr-pitches-language' option;
   - HARMONY_NAME should be one of:
       MusicXML harmonies:
         "maj", "min", "aug", "dim", "dom",
@@ -1139,7 +1141,7 @@ void harmoniesExtraOahGroup::initializeExtraDisplayAllHarmoniesContentsOptions (
         "help-extra-harmonies-contents", "hecc",
 //          regex_replace (
 //            std::regex ("HARMONIES_KINDS"),
-//            existingHarmonyKindsNames ()
+//            availableHarmonyKindsNames ()
 //    HARMONIES_KINDS.
 R"()",
         oahElementVisibilityKind::kElementVisibilityWhole,
@@ -1309,7 +1311,7 @@ void harmoniesExtraOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void harmoniesExtraOahGroup::printHarmoniesExtraOahValues (int fieldWidth)
+void harmoniesExtraOahGroup::displayHarmoniesExtraOahValues (int fieldWidth)
 {
   gLogStream <<
     "The extra extra are:" << // JMI

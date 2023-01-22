@@ -740,7 +740,7 @@ class EXP oahRegularHandler : public oahHandler
   that contains all the options values gathered from the user,
   grouped according to the internal representations and passes used.
 
-  The variables containing the values of the options chosen by the user
+  The variables containing the values of the options selected by the user
   are actually held by the insider handler.
 */
 {
@@ -886,6 +886,8 @@ void oahVersionAtom::applyValueLessAtom (std::ostream& os)
   printVersion (os);
 
   gIndenter.setIndent (saveIndent);
+
+	fSelected = true;
 }
 \end{lstlisting}
 

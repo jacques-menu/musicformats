@@ -263,7 +263,7 @@ void initializeClefKinds ()
   }
 }
 
-std::string existingClefKinds (size_t namesListMaxLength)
+std::string availableClefKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -310,7 +310,7 @@ std::string existingClefKinds (size_t namesListMaxLength)
   return s.str ();
 }
 
-std::string existingClefKindsNames (size_t namesListMaxLength)
+std::string availableClefKindsNames (size_t namesListMaxLength)
 {
   std::stringstream s;
 

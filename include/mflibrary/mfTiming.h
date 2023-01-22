@@ -119,13 +119,6 @@ class EXP mfTimingItemsList {
 
     // add an item
     void                  appendTimingItem (
-                            const std::string& activity,
-                            const std::string& description,
-                            mfTimingItemKind   kind,
-                            clock_t            startClock,
-                            clock_t            endClock);
-
-    void                  appendTimingItem (
                             mfPassIDKind       passIDKind,
                             const std::string& description,
                             mfTimingItemKind   kind,

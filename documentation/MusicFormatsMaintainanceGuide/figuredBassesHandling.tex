@@ -615,13 +615,19 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %
 %#ifdef MF_TRACING_IS_ENABLED
 %      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-%        gLogStream <<
+%        std::stringstream s;
+%
+%        s <<
 %          "Copying harmony '" <<
 %          harmony->asString () <<
 %          "' from note " << note->asString () <<
 %          " to chord '" << chord->asString () <<
 %          "'" <<
 %          std::endl;
+%
+%      gWaeHandler->waeTrace (
+%        __FILE__, __LINE__,
+%        s.str ());
 %      }
 %#endif
 %

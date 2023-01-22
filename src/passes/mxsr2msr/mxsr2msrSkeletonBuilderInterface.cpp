@@ -47,7 +47,6 @@ namespace MusicFormats
 S_msrScore translateMxsrToMsrSkeleton (
   Sxmlelement        theMxsr,
   S_msrOahGroup&     msrOpts,
-//   const std::string& passNumber,
   mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
@@ -61,6 +60,9 @@ S_msrScore translateMxsrToMsrSkeleton (
 
   // start the clock
   clock_t startClock = clock ();
+
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
@@ -84,9 +86,6 @@ S_msrScore translateMxsrToMsrSkeleton (
       s.str ());
   }
 #endif
-
-  // set the global current passID
-  setGlobalCurrentPassIDKind (passIDKind);
 
   S_msrScore scoreSkeleton;
 
@@ -113,7 +112,6 @@ S_msrScore translateMxsrToMsrSkeleton (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-//     passNumber,
     passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
@@ -126,7 +124,6 @@ S_msrScore translateMxsrToMsrSkeleton (
       std::stringstream s;
 
       s <<
-//         "gIndenter value after " << passNumber << ": " <<
         "gIndenter value after " << passIDKind << ": " <<
         gIndenter.getIndentation ();
 
@@ -157,7 +154,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 // void displayMsrScoreSkeleton ( // UNUSED JMI v0.9.66
 //   S_msrOahGroup&     msrOpts,
 //   S_msrScore         theMsrScore,
-// //   const std::string& passNumber,
+// //   mfPassIDKind       passIDKind,
 //   const std::string& passIDKind,
 //   const std::string& passDescription)
 // {
@@ -172,6 +169,9 @@ S_msrScore translateMxsrToMsrSkeleton (
 //   // start the clock
 //   clock_t startClock = clock ();
 //
+//   // DON'T set the global current passID,
+//   // this optional pass is considered part of the preceding 'true' pass
+//
 //   std::string separator =
 //     "%--------------------------------------------------------------";
 //
@@ -180,9 +180,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 //     separator <<
 //     std::endl <<
 //     gTab <<
-//     gWaeHandler->passOptional () <<
-//     ": "<<
-//     passDescription <<
+//     gWaeHandler->passOptional () << ": "<< passDescription <<
 //     std::endl <<
 //     separator <<
 //     std::endl << std::endl <<
@@ -192,7 +190,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 //   clock_t endClock = clock ();
 //
 //   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-// 		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+// 		 mfPassIDKind::kMfPassID_0,
 //     gWaeHandler->displayTheFirstMSRSkeletonAsText (), // JMI ??? v0.9.66
 //     mfTimingItemKind::kOptional,
 //     startClock,

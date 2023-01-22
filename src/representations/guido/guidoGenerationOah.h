@@ -89,7 +89,7 @@ class EXP guidoGenerationOahGroup : public oahGroup
 
     void                  printGuidoGenerationOahGroupHelp ();
 
-    void                  printGuidoGenerationOahGroupValues (
+    void                  displayGuidoGenerationOahGroupValues (
                             int fieldWidth);
 
   private:

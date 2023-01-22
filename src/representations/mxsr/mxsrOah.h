@@ -136,7 +136,7 @@ class EXP mxsrOahGroup : public oahGroup
 
     void                  printMxsrOahHelp ();
 
-    void                  printMxsrOahValues (int fieldWidth);
+    void                  displayMxsrOahValues (int fieldWidth);
 
   private:
 

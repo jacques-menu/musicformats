@@ -188,7 +188,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     void                  printMfslInterpreterOahHelp ();
 
-    void                  printMfslInterpreterOahValues (
+    void                  displayMfslInterpreterOahValues (
                             int fieldWidth);
 
   private:

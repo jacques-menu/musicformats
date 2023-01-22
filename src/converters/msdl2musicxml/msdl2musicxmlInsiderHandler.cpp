@@ -301,7 +301,7 @@ void msdl2musicxmlInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream s;
 
     s <<
-      "msdl2musicxmlInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
+      "msdl2musicxmlInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
     oahError (s.str ());
   }

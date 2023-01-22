@@ -371,7 +371,7 @@ enum class msrNoteEventKind {
 % -------------------------------------------------------------------------
 
 A spanner... spans from one note or rest to another one. A choice to be made about when to use spanners: should
-wedges {\tt <} and {\tt >} be handled as spanners, or simply as being attached to notes? It has been chosen to use spanners only for ligatures apart from true spanners.
+wedges {\tt <} and {\tt >} be handled as spanners, or simply as being attached to notes? It has been selected to use spanners only for ligatures apart from true spanners.
 
 \mxml\ uses {\tt "start"}, {\tt "start"} and {\tt "start"} attributes, which need to be present in MSR for \mxml\ generation. They are reflected in MSR as enumeration type \enumType{msrSpannerTypeKind}, defined this way:
 \begin{lstlisting}[language=CPlusPlus]

@@ -301,7 +301,7 @@ class   mfslDriver
 
     // tool launching
     std::list<S_mfslOptionsBlock>
-                          fSelectedOptionsBlocksList;
+                          fSelectedsBlocksList;
 
     // commands list
     std::list<std::string>

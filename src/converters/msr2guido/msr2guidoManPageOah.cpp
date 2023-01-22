@@ -161,7 +161,7 @@ void msr2guidoManPageGenerateAtom::generateManPageData (std::ostream& os) const
       "msr2guidoManPageGenerateAtom::generateManPageData");
 }
 
-void msr2guidoManPageGenerateAtom::printAtomWithVariableOptionsValues (
+void msr2guidoManPageGenerateAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {

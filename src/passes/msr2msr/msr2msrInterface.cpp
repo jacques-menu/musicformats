@@ -47,11 +47,11 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsr (
-  S_msrScore        originalMsrScore,
-  const S_msrOahGroup&     msrOpts,
-  S_msr2msrOahGroup msr2msrOpts,
-  const std::string&     passNumber,
-  const std::string&     passDescription)
+  S_msrScore           originalMsrScore,
+  const S_msrOahGroup& msrOpts,
+  S_msr2msrOahGroup    msr2msrOpts,
+  mfPassIDKind         passIDKind,
+  const std::string&   passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -68,20 +68,29 @@ S_msrScore translateMsrToMsr (
   // start the clock
   clock_t startClock = clock ();
 
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -99,7 +108,7 @@ S_msrScore translateMsrToMsr (
 
   // register time spent
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -178,12 +187,12 @@ S_msrScore translateMsrToMsr (
 
 //_______________________________________________________________________________
 S_msrScore translateMsrToMsrAlongPathToVoice (
-  S_msrScore        originalMsrScore,
-  const S_msrOahGroup&     msrOpts,
-  S_msr2msrOahGroup msr2msrOpts,
-  const std::string&     passNumber,
-  const std::string&     passDescription,
-  S_msrPathToVoice  pathToVoice)
+  S_msrScore           originalMsrScore,
+  const S_msrOahGroup& msrOpts,
+  S_msr2msrOahGroup    msr2msrOpts,
+  mfPassIDKind         passIDKind,
+  const std::string    passDescription,
+  S_msrPathToVoice     pathToVoice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -200,20 +209,29 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // start the clock
   clock_t startClock = clock ();
 
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -232,7 +250,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
 
   // register time spent
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,

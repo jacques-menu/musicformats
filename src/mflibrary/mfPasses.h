@@ -55,7 +55,7 @@ mfPassIDKind mfPassIDKindFromString (
 extern std::map<std::string, mfPassIDKind>
   gGlobalMusicFormatsPassIDKindsMap;
 
-std::string existingMusicFormatsPassIDKinds (size_t namesListMaxLength);
+std::string availableMusicFormatsPassIDKinds (size_t namesListMaxLength);
 
 void initializeMusicFormatsPassIDKindsMap ();
 

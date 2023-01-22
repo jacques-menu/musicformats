@@ -35,10 +35,10 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 S_bsrScore translateBsrToFinalizedBsr (
-  const S_bsrScore originalBsrScore,
-  const S_bsrOahGroup&    bsrOpts,
-  const std::string&    passNumber,
-  const std::string&    passDescription)
+  const S_bsrScore     originalBsrScore,
+  const S_bsrOahGroup& bsrOpts,
+  mfPassIDKind         passIDKind,
+  const std::string&   passDescription)
 {
   S_bsrScore finalizedBsrScore;
 
@@ -66,7 +66,7 @@ S_bsrScore translateBsrToFinalizedBsr (
         separator <<
         std::endl <<
         gTab <<
-        passNumber << ": " << passDescription <<
+        gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
         std::endl <<
         separator <<
         std::endl;
@@ -89,7 +89,7 @@ S_bsrScore translateBsrToFinalizedBsr (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-      passNumber,
+      passIDKind,
       passDescription,
       mfTimingItemKind::kMandatory,
       startClock,
@@ -103,7 +103,7 @@ S_bsrScore translateBsrToFinalizedBsr (
       std::stringstream s;
 
       s <<
-        "gIndenter value after " << passNumber << ": " <<
+        "gIndenter value after " << passIDKind << ": " <<
         gIndenter.getIndentation ();
 
       bsr2bsrWarning (

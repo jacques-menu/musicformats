@@ -17,7 +17,7 @@
 /* ---------------------------------------------------------------------- */
 
 #include <sstream>
-#include <string.h>     // strerror_r
+// #include <string.h>     // strerror_r
 
 #include "mfStringsHandling.h"
 
@@ -30,11 +30,9 @@
 
 #include "mfslInterpreterOah.h"
 
-#include "mfslInterpreterInterface.h"
+#include "mfSystemInterface.h" // for isatty(), mfStrErrorCString()
 
-#ifdef WIN32
-  #include "mfSystemInterface.h" // for isatty()
-
+#ifdef WIN64
   #define YY_NO_UNISTD_H
 #endif
 
@@ -561,14 +559,14 @@ void mfslDriver::scanBegin ()
       std::stringstream s;
 
       char*
-        errorString =
-          strerror (errno);
+        errorCString =
+          mfStrErrorCString ();
 
-      if (errorString != nullptr) {
+      if (errorCString != nullptr) {
         s <<
           gWaeHandler->cannotOpenScriptForWriting (fScriptName) <<
           ": " <<
-          errorString <<
+          errorCString <<
           std::endl;
 
         mfslFileError (

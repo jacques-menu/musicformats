@@ -41,8 +41,8 @@ namespace MusicFormats
 Sxmlelement translateMsrToMxsr (
   const S_msrScore theMsrScore,
   S_msrOahGroup    msrOpts,
-  std::string           passNumber,
-  std::string           passDescription,
+  mfPassIDKind     passIDKind,
+  std::string      passDescription,
   mfTimingItemKind mfTimingItemKind)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -56,20 +56,29 @@ Sxmlelement translateMsrToMxsr (
   // start the clock
   clock_t startClock = clock ();
 
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber + ": Translating the MSR into an MXSR" <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -87,7 +96,7 @@ Sxmlelement translateMsrToMxsr (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,

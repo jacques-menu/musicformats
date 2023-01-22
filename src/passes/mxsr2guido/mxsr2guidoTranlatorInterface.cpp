@@ -44,7 +44,7 @@ void translateMxsrToGuido (
   Sxmlelement        theMxsr,
   std::string        outputFileName,
   std::ostream&      err,
-  const std::string& passNumber,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -69,7 +69,7 @@ void translateMxsrToGuido (
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
@@ -184,7 +184,7 @@ void translateMxsrToGuido (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,

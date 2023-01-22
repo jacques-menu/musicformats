@@ -89,7 +89,7 @@ class EXP oahValueLessAtomAlias : public oahValueLessAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -166,7 +166,7 @@ class EXP oahValueFittedAtomAlias : public oahValueFittedAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -248,7 +248,7 @@ class EXP oahMacroAtom : public oahValueLessAtom
 
     void                  printHelp (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
   private:
@@ -944,9 +944,6 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
     mfOnOffKind           getOnOffKindVariable () const
                               { return fOnOffKindVariable; }
 
-    Bool                  getSetByAnOption () const
-                              { return fSetByAnOption; }
-
   public:
 
     // public services
@@ -973,7 +970,7 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -984,7 +981,6 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
 
     std::string           fVariableName;
     mfOnOffKind&          fOnOffKindVariable;
-    Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahOnOffAtom> S_oahOnOffAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahOnOffAtom& elt);
@@ -1035,9 +1031,6 @@ class EXP oahBooleanAtom : public oahValueLessAtom
     Bool                  getBooleanVariable () const
                               { return fBooleanVariable; }
 
-    Bool                  getSetByAnOption () const
-                              { return fSetByAnOption; }
-
   public:
 
     // public services
@@ -1062,7 +1055,7 @@ class EXP oahBooleanAtom : public oahValueLessAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1073,7 +1066,6 @@ class EXP oahBooleanAtom : public oahValueLessAtom
 
     std::string           fVariableName;
     Bool&                 fBooleanVariable;
-    Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahBooleanAtom> S_oahBooleanAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahBooleanAtom& elt);
@@ -1140,7 +1132,7 @@ class EXP oahBooleanAtomWithTracePasses : public oahBooleanAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1214,7 +1206,7 @@ class EXP oahTwoBooleansAtom : public oahBooleanAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1288,7 +1280,7 @@ class EXP oahTwoBooleansAtomWithTracePasses : public oahTwoBooleansAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1366,7 +1358,7 @@ class EXP oahThreeBooleansAtom : public oahBooleanAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1443,7 +1435,7 @@ class EXP oahThreeBooleansAtomWithTracePasses : public oahThreeBooleansAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1538,7 +1530,7 @@ class EXP oahCombinedBooleansAtom : public oahValueLessAtom
 
     void                  printHelp (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1630,7 +1622,7 @@ class EXP oahIntegerAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
   protected:
@@ -1719,7 +1711,7 @@ class EXP oahTwoIntegersAtom : public oahIntegerAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
   private:
@@ -1806,7 +1798,7 @@ class EXP oahFloatAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1894,7 +1886,7 @@ class EXP oahStringAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1983,7 +1975,7 @@ class EXP oahFactorizedStringAtom : public oahValueLessAtom
 
     void                  printHelp (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2086,7 +2078,7 @@ class EXP oahDefaultedStringAtom : public oahValueDefaultedAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2184,7 +2176,7 @@ class EXP oahCommonPrefixBooleansAtom : public oahValueLessAtom
 
     void                  printHelp (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2290,7 +2282,7 @@ class EXP oahRegexAtom : public oahStringAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2348,7 +2340,6 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
                             const Rational& value)
                               {
                                 fRationalVariable = value;
-                                fSetByAnOption = true;
                               }
 
     Rational              getRationalVariable () const
@@ -2383,7 +2374,7 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2441,7 +2432,6 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
                             std::set<int>& value)
                               {
                                 fNaturalNumbersSetVariable = value;
-                                fSetByAnOption = true;
                               }
 
     const std::set<int>&       getNaturalNumbersSetVariable () const
@@ -2476,7 +2466,7 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2534,7 +2524,6 @@ class EXP oahColorRGBAtom : public oahAtomStoringAValue
                             msrColorRGB& value)
                               {
                                 fColorRGBVariable = value;
-                                fSetByAnOption = true;
                               }
 
     const msrColorRGB&    getColorRGBVariable () const
@@ -2569,7 +2558,7 @@ class EXP oahColorRGBAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2655,7 +2644,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2713,7 +2702,6 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
                             const std::string& partName)
                               {
                                 fStringSetVariable.insert (partName);
-                                fSetByAnOption = true;
                               }
 
     const std::set<std::string>&
@@ -2749,7 +2737,7 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2837,7 +2825,7 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -2925,7 +2913,7 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -3013,7 +3001,7 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -3111,7 +3099,7 @@ class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -3217,7 +3205,7 @@ class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -3278,7 +3266,6 @@ class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
                             msrLengthUnitKind value)
                               {
                                 fLengthUnitKindVariable = value;
-                                fSetByAnOption = true;
                               }
 
     msrLengthUnitKind     getLengthUnitKindVariable () const
@@ -3313,7 +3300,7 @@ class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -3371,7 +3358,6 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
                             msrLength value)
                               {
                                 fLengthVariable = value;
-                                fSetByAnOption = true;
                               }
 
     msrLength             getLengthVariable () const
@@ -3406,7 +3392,7 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -3495,7 +3481,7 @@ class EXP oahMidiTempoAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -3588,7 +3574,7 @@ class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
 
     void                  print (std::ostream& os) const override;
 
-    virtual void          printAtomWithVariableOptionsValues (
+    virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
   private:
@@ -3668,7 +3654,7 @@ class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
 
     void                  print (std::ostream& os) const override;
 
-    virtual void          printAtomWithVariableOptionsValues (
+    virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
   private:
@@ -3804,7 +3790,7 @@ class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
 
     void                  print (std::ostream& os) const override;
 
-    virtual void          printAtomWithVariableOptionsValues (
+    virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
   private:
@@ -3882,7 +3868,7 @@ class EXP oahIncludeOptionsAndArgumentsFileAtom : public oahValueFittedAtom
 
     void                  print (std::ostream& os) const override;
 
-    virtual void          printAtomWithVariableOptionsValues (
+    virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
   private:

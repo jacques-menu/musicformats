@@ -34,6 +34,7 @@
 #include "msrTempos.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -108,7 +109,7 @@ void msrPart::initializePart ()
       "Creating part \"" << asString () << "\"" <<
       std::endl;
 
-    gGlobalMsrOahGroup->printMsrOahValues (40); // JMI
+    gGlobalMsrOahGroup->displayMsrOahValues (40); // JMI
   }
 #endif
 
@@ -1751,13 +1752,19 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
     msrPart::K_PART_HARMONIES_STAFF_NUMBER;
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Creating harmonies staff for part \"" <<
       getPartCombinedName () <<
       "\" with staff number " <<
       partHarmoniesStaffNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -1771,13 +1778,19 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Creating harmonies voice for part \"" <<
       getPartCombinedName () <<
       "\" with voice number " <<
       partHarmoniesVoiceNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 

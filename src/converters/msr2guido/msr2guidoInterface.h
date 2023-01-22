@@ -27,12 +27,12 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
   S_msrScore          theMsrScore,
-  std::string         passNumber1,
-  std::string         passDescription1,
-  std::string         passNumber2,
-  std::string         passDescription2,
-  std::string         passNumber3,
-  std::string         passDescription3,
+  mfPassIDKind        passID_A,
+  std::string         passDescription_A,
+  mfPassIDKind        passID_B,
+  std::string         passDescription_B,
+  mfPassIDKind        passID_C,
+  std::string         passDescription_C,
   std::ostream&       out,
   std::ostream&       err,
   const S_oahHandler& handler);

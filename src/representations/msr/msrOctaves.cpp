@@ -404,7 +404,7 @@ void initializeMsrOctaveEntryKindsMap ()
   gGlobalMsrOctaveEntryKindsMap ["fixed"] = msrOctaveEntryKind::kOctaveEntryFixed;
 }
 
-std::string existingMsrOctaveEntryKinds (size_t namesListMaxLength)
+std::string availableMsrOctaveEntryKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -476,11 +476,17 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "==> Creating pitch and octave '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 }
@@ -756,11 +762,17 @@ msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "==> Creating harmony item '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 }
@@ -852,11 +864,17 @@ msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "==> Creating harmony item '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 }
@@ -949,11 +967,17 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "==> Creating pitch and octave '" <<
       asString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 }

@@ -85,7 +85,7 @@ EXP void translateLpsrToLilypondWithHandler (
   const S_lpsrScore& theLpsrScore,
   const S_msrOahGroup&     msrOpts,
   const S_lpsrOahGroup&    lpsrOpts,
-  const std::string&     passNumber,
+  mfPassIDKind          passIDKind,
   const std::string&     passDescription,
   S_oahHandler      handler,
   std::ostream&          out,
@@ -112,7 +112,7 @@ When writing to \standardOutput, the indented output stream is constructed above
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        passNumber,
+        passIDKind,
         passDescription,
         lilypondStandardOutputStream);
     }
@@ -138,7 +138,7 @@ When writing to a file, an {\tt std::ofstream} is instantiated to write to the f
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        passNumber,
+        passIDKind,
         passDescription,
         lilypondFileOutputStream);
     }

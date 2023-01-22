@@ -66,7 +66,7 @@ mfLanguageKind mfLanguageKindFromString (const std::string& theString)
     ++gIndenter;
 
     s <<
-      existingMusicFormatsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMusicFormatsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -144,7 +144,7 @@ std::ostream& operator << (std::ostream& os, const mfLanguageKind& elt)
   return os;
 }
 
-std::string existingMusicFormatsLanguageKinds (size_t namesListMaxLength)
+std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 

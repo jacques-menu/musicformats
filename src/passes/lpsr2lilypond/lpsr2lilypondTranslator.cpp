@@ -5892,7 +5892,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
     lilypondVersionHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getLilypondVersionAtom ()->
-          getSetByAnOption ();
+          getSelected ();
 
   std::string
     lilypondVersion =
@@ -5922,7 +5922,7 @@ void lpsr2lilypondTranslator::generateGlobalStaffSize ()
     globalStaffSizeHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getGlobalStaffSizeAtom ()->
-          getSetByAnOption ();
+          getSelected ();
 
   Bool
     doGenerateGlobalStaffSize =
@@ -6929,7 +6929,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
     paperHeightHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperHeightAtom ()->
-          getSetByAnOption (),
+          getSelected (),
     doGeneratePaperHeight =
       paperHeightHasBeenSet || generateCommentedOutVariables;
 
@@ -6949,7 +6949,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
     paperWidthHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperWidthAtom ()->
-          getSetByAnOption (),
+          getSelected (),
     doGeneratePaperWidth =
       paperWidthHasBeenSet || generateCommentedOutVariables;
 
@@ -6970,7 +6970,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   std::list<std::pair<std::string, Bool> >& nameBooleanValuePairsList)
 {
   // ragged-last
-  if (gGlobalLpsrOahGroup->getRaggedLastAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getRaggedLastAtom ()->getSelected ()) {
     mfOnOffKind
       raggedLast =
         paper->getRaggedLast ();
@@ -6990,7 +6990,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   }
 
   // ragged-bottom
-  if (gGlobalLpsrOahGroup->getRaggedBottomAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getRaggedBottomAtom ()->getSelected ()) {
     mfOnOffKind
       raggedBottom =
         paper->getRaggedBottom ();
@@ -7010,7 +7010,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   }
 
   // ragged-last-bottom
-  if (gGlobalLpsrOahGroup->getRaggedLastBottomAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getRaggedLastBottomAtom ()->getSelected ()) {
     mfOnOffKind
       raggedLastBottom =
         paper->getRaggedLastBottom ();
@@ -7030,7 +7030,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   }
 
   // ragged-right
-  if (gGlobalLpsrOahGroup->getRaggedRightAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getRaggedRightAtom ()->getSelected ()) {
     mfOnOffKind
       raggedRight =
         paper->getRaggedRight ();
@@ -7066,7 +7066,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
     paperHeightHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperHeightAtom ()->
-          getSetByAnOption (),
+          getSelected (),
     doGeneratePaperHeight =
       paperHeightHasBeenSet || generateCommentedOutVariables;
 
@@ -7092,7 +7092,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
     paperWidthHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperWidthAtom ()->
-          getSetByAnOption (),
+          getSelected (),
     doGeneratePaperWidth =
       paperWidthHasBeenSet || generateCommentedOutVariables;
 
@@ -7130,7 +7130,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     leftMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperLeftMarginAtom ()->
-          getSetByAnOption (),
+          getSelected (),
     doGenerateLeftMargin =
       leftMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -7156,7 +7156,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     rightMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperRightMarginAtom ()->
-          getSetByAnOption (),
+          getSelected (),
     doGenerateRightMargin =
       rightMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -7182,7 +7182,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     topMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperTopMarginAtom ()->
-          getSetByAnOption (),
+          getSelected (),
     doGenerateTopMargin =
       topMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -7208,7 +7208,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     bottomMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperBottomMarginAtom ()->
-          getSetByAnOption (),
+          getSelected (),
     doGenerateBottomMargin =
       bottomMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -7842,7 +7842,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     barNumbersSizeAtom =
       gGlobalLpsr2lilypondOahGroup->getBarNumbersSizeAtom ();
 
-  if (barNumbersSizeAtom->getSetByAnOption ()) {
+  if (barNumbersSizeAtom->getSelected ()) {
     fLilypondCodeStream <<
       "\\context {" <<
       std::endl;
@@ -8940,7 +8940,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
         ||
       gGlobalLpsrOahGroup->
         getLpsrStavesInstrumentsNamesMapAtom ()->
-          getSetByAnOption ()
+          getSelected ()
     ) {
       fLilypondCodeStream <<
         "instrumentName = ";
@@ -8951,7 +8951,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
       if (
         gGlobalLpsrOahGroup->
           getLpsrStavesInstrumentsNamesMapAtom ()->
-            getSetByAnOption ()
+            getSelected ()
       ) {
         const std::map<std::string, std::string>&
           lpsrStavesInstrumentsNamesMap =
@@ -11458,7 +11458,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       gGlobalLpsr2lilypondOahGroup->
         getDynamicsTextSpannersStyleKindAtom ();
 
-  if (dynamicsTextSpannersStyleKindAtom->getSetByAnOption ()) {
+  if (dynamicsTextSpannersStyleKindAtom->getSelected ()) {
     fLilypondCodeStream <<
       "\\override DynamicTextSpanner.style = #'" <<
       lpsrDynamicsTextSpannersStyleKindAsString (
@@ -11725,14 +11725,20 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 #endif
 
   if (fOnGoingNotesStack.size () > 0) {
-  /* JMI
+  /* JMI v0.9.66
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      fLilypondCodeStream <<
+			std::stringstream s;
+
+			s <<
         "%{ fOnGoingNotesStack.size () S_msrHarmony JMI " <<
         elt->asString () <<
         " %}" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				s.str ());
     }
 #endif
 */
@@ -18175,7 +18181,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
                 getNonPrintNotesHeadColorRGBAtom ();
 
           // has the note color been set? // JMI v0.9.65
-          if (nonPrintNotesHeadColorRGBAtom->getSetByAnOption ()) {
+          if (nonPrintNotesHeadColorRGBAtom->getSelected ()) {
             // yes
             const msrColorRGB&
               theColorRGB =
@@ -22545,13 +22551,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
   }
 
   // enforce a line break here, not using \myLineBreak,
-  // if this is a user chosen line break
-  switch (elt->getUserChosenLineBreakKind ()) {
-    case msrUserChosenLineBreakKind::kUserChosenLineBreakYes:
+  // if this is a user selected line break
+  switch (elt->getUserSelectedLineBreakKind ()) {
+    case msrUserSelectedLineBreakKind::kUserSelectedLineBreakYes:
       fLilypondCodeStream <<
         "\\lineBreak ";
       break;
-    case msrUserChosenLineBreakKind::kUserChosenLineBreakNo:
+    case msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo:
       fLilypondCodeStream <<
         "\\myLineBreak ";
       break;
@@ -22632,13 +22638,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
 #endif
 
   // enforce a page break here, not using \myPageBreak,
-  // if this is a user chosen page break
-  switch (elt->getUserChosenPageBreakKind ()) {
-    case msrUserChosenPageBreakKind::kUserChosenPageBreakYes:
+  // if this is a user selected page break
+  switch (elt->getUserSelectedPageBreakKind ()) {
+    case msrUserSelectedPageBreakKind::kUserSelectedPageBreakYes:
       fLilypondCodeStream <<
         "\\pageBreak ";
       break;
-    case msrUserChosenPageBreakKind::kUserChosenPageBreakNo:
+    case msrUserSelectedPageBreakKind::kUserSelectedPageBreakNo:
       fLilypondCodeStream <<
         "\\myPageBreak ";
       break;
@@ -23589,7 +23595,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRests& elt)
 
   if (
     gGlobalLpsr2lilypondOahGroup->
-      getMultipleFullBarRestsExpandLimitAtom ()->getSetByAnOption ()
+      getMultipleFullBarRestsExpandLimitAtom ()->getSelected ()
   ) {
     fLilypondCodeStream <<
       "\\override MultiMeasureRest.expand-limit = " <<

@@ -123,7 +123,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+      mfPassIDKind::kMfPassID_1,
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -183,7 +183,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theMsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
+        mfPassIDKind::kMfPassID_2,
         "Convert the MSR into an LPSR",
         createMsdl2lilypondConverterComponent ());
   }
@@ -248,7 +248,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+        mfPassIDKind::kMfPassID_3,
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
     }
@@ -316,7 +316,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
+        mfPassIDKind::kMfPassID_4,
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
     }

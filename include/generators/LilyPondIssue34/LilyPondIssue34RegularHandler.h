@@ -32,8 +32,8 @@ class EXP LilyPondIssue34RegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<LilyPondIssue34RegularHandler> create (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             const S_LilyPondIssue34InsiderHandler&
                                               insiderOahHandler,
                             mfMultiGenerationOutputKind
@@ -45,8 +45,8 @@ class EXP LilyPondIssue34RegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           LilyPondIssue34RegularHandler (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             const S_LilyPondIssue34InsiderHandler&
                                               insiderOahHandler,
                             mfMultiGenerationOutputKind

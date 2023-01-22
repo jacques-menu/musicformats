@@ -27,12 +27,12 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   S_msrScore          theMsrScore,
-  std::string         passNumber1a,
-  std::string         passDescription1a,
-  std::string         passNumber1b,
-  std::string         passDescription1b,
-  std::string         passNumber2,
-  std::string         passDescription2,
+  mfPassIDKind        passID_A,
+  std::string         passDescription_A,
+  mfPassIDKind        passID_B,
+  std::string         passDescription_B,
+  mfPassIDKind        passID_C,
+  std::string         passDescription_c,
   std::ostream&       out,
   std::ostream&       err,
   const S_oahHandler& handler);

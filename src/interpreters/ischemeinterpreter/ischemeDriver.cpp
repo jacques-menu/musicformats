@@ -739,7 +739,7 @@ void ischemeDriver::appendSelectLabelForToolLaunching (
   if (
     gGlobalIschemeInterpreterOahGroup->
       getSelectChoiceToLabelsMultiMapAtom ()->
-        getSetByAnOption ()
+        getSelected ()
   ) {
     if (! overriddenMessageHasBeenIssued) {
       std::stringstream s;
@@ -779,7 +779,7 @@ void ischemeDriver::appendSelectLabelForToolLaunching (
     }
 
     // this 'select' statement is to be applied
-    fSelectedOptionsBlocksList.push_back (
+    fSelectedsBlocksList.push_back (
       selectOptionsBlock);
   }
 }
@@ -1022,7 +1022,7 @@ Bool ischemeDriver::applySelectOption (
             label,
             *this);
 
-    fSelectedOptionsBlocksList.push_back (
+    fSelectedsBlocksList.push_back (
       selectOptionsBlock);
 
     if (fTraceChoices) {
@@ -1079,7 +1079,7 @@ void ischemeDriver::finalSemanticsCheck ()
         getSelectChoiceToLabelsMultiMapAtom ();
 
   if (
-    selectChoiceToLabelsMultiMapAtom->getSetByAnOption ()
+    selectChoiceToLabelsMultiMapAtom->getSelected ()
   ) {
     applySelectOptionsFinally ();
   }
@@ -1119,11 +1119,11 @@ void ischemeDriver::populateTheCommandsList ()
     else {
       // there are case statements
 
-      if (fSelectedOptionsBlocksList.size ()) {
+      if (fSelectedsBlocksList.size ()) {
         // 'select' statement have been supplied,
         // either in the script or by an option
 
-        for (S_ischemeOptionsBlock optionsBlock :fSelectedOptionsBlocksList ) {
+        for (S_ischemeOptionsBlock optionsBlock :fSelectedsBlocksList ) {
           // the 'select' choice options block options as std::string
           std::string
             selectChoiceOptionsAsString =

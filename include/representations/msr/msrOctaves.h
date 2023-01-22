@@ -84,7 +84,7 @@ std::ostream& operator << (std::ostream& os, const msrOctaveEntryKind& elt);
 extern std::map<std::string, msrOctaveEntryKind>
   gGlobalMsrOctaveEntryKindsMap;
 
-std::string existingMsrOctaveEntryKinds (size_t namesListMaxLength);
+std::string availableMsrOctaveEntryKinds (size_t namesListMaxLength);
 
 void initializeMsrOctaveEntryKindsMap ();
 

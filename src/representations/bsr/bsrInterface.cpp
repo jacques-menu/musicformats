@@ -49,6 +49,9 @@ void displayBsrScore (
   // start the clock
   clock_t startClock = clock ();
 
+  // DON'T set the global current passID,
+  // this optional pass is considered part of the preceding 'true' pass
+
   std::string separator =
     "%--------------------------------------------------------------";
 
@@ -56,9 +59,7 @@ void displayBsrScore (
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () <<
-    ": "<<
-    passDescription <<
+    gWaeHandler->passOptional () << ": "<< passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl <<
@@ -70,7 +71,7 @@ void displayBsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     gWaeHandler->displayTheBSRAsText (), // JMI ??? v0.9.66
     mfTimingItemKind::kOptional,
     startClock,
@@ -95,6 +96,9 @@ void displayBsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
+  // DON'T set the global current passID,
+  // this optional pass is considered part of the preceding 'true' pass
+
   std::string separator =
     "%--------------------------------------------------------------";
 
@@ -102,9 +106,7 @@ void displayBsrScoreFull (
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () <<
-    ": "<<
-    passDescription <<
+    gWaeHandler->passOptional () << ": "<< passDescription <<
     ", " <<
     gWaeHandler->fullVersion () <<
     std::endl <<
@@ -121,7 +123,7 @@ void displayBsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     gWaeHandler->displayTheBSRAsText ()
       + ", " +
     gWaeHandler->fullVersion (),

@@ -107,8 +107,8 @@ class EXP xml2brlInsiderOahGroup : public oahGroup
   public:
 
     static SMARTP<xml2brlInsiderOahGroup> create (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
   public:
 
@@ -123,8 +123,8 @@ class EXP xml2brlInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           xml2brlInsiderOahGroup (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
     virtual               ~xml2brlInsiderOahGroup ();
 

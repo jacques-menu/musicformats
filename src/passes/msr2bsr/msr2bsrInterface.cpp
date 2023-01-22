@@ -44,10 +44,10 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 S_bsrScore translateMsrToBsr (
-  S_msrScore    originalMsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts,
-  const std::string& passNumber,
+  S_msrScore         originalMsrScore,
+  S_msrOahGroup      msrOpts,
+  S_bsrOahGroup      bsrOpts,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -61,20 +61,29 @@ S_bsrScore translateMsrToBsr (
   // start the clock
   clock_t startClock = clock ();
 
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -92,7 +101,7 @@ S_bsrScore translateMsrToBsr (
 
   // register time spent
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,

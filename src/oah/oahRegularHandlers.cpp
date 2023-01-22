@@ -377,7 +377,7 @@ void initializeOahOptionalValuesStyleKindsMap ()
   gGlobalOahOptionalValuesStyleKindsMap ["oah"] = kOptionalValuesStyleOAH;
 }
 
-std::string existingOahOptionalValuesStyleKinds (size_t namesListMaxLength)
+std::string availableOahOptionalValuesStyleKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 

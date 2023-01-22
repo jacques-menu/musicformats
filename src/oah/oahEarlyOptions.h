@@ -34,8 +34,6 @@ EXP extern const std::string K_LANGUAGE_OPTION_SHORT_NAME;
 // insider
 EXP extern const std::string K_INSIDER_OPTION_LONG_NAME;
 EXP extern const std::string K_INSIDER_OPTION_SHORT_NAME;
-// EXP extern const std::string K_REGULAR_OPTION_LONG_NAME;
-// EXP extern const std::string K_REGULAR_OPTION_SHORT_NAME;
 
 // quiet mode
 EXP extern const std::string K_QUIET_OPTION_LONG_NAME;
@@ -105,10 +103,13 @@ class EXP oahEarlyOptions
     void                  setEarlyInsiderOption ();
     Bool                  getEarlyInsiderOption () const
                               { return fEarlyInsiderOption; }
-//     void                  setEarlyRegularOption ();
+    Bool&                 getEarlyInsiderOptionRef ()
+                              { return fEarlyInsiderOption; }
 
     void                  setEarlyQuietOption ();
     Bool                  getEarlyQuietOption () const
+                              { return fEarlyQuietOption; }
+    Bool&                 getEarlyQuietOptionRef ()
                               { return fEarlyQuietOption; }
 
     void                  setEarlyMultiGenerationOutputKind (
@@ -116,9 +117,15 @@ class EXP oahEarlyOptions
     mfMultiGenerationOutputKind
                           getEarlyMultiGenerationOutputKind () const
                               { return fEarlyMultiGenerationOutputKind; }
+    mfMultiGenerationOutputKind&
+                          getEarlyMultiGenerationOutputKindRef ()
+                              { return fEarlyMultiGenerationOutputKind; }
 
     const std::list<std::string>&
                           getEarlyIncludeFileNamesList () const
+                              { return fEarlyIncludeFileNamesList; }
+    const std::list<std::string>&
+                          getEarlyIncludeFileNamesListRef ()
                               { return fEarlyIncludeFileNamesList; }
 
 #ifdef MF_TRACING_IS_ENABLED
@@ -132,17 +139,25 @@ class EXP oahEarlyOptions
     void                  setEarlyOahVerboseMode ();
     Bool                  getEarlyOahVerboseMode () const
                               { return fEarlyOahVerboseMode; }
+    Bool&                 getEarlyOahVerboseModeRef ()
+                              { return fEarlyOahVerboseMode; }
 
     void                  setEarlyTracingOah ();
     Bool                  getEarlyTracingOah () const
+                              { return fEarlyTracingOah; }
+    Bool&                 getEarlyTracingOahRef ()
                               { return fEarlyTracingOah; }
 
     void                  setEarlyTracingOahDetails ();
     Bool                  getEarlyTracingOahDetails () const
                               { return fEarlyTracingOahDetails; }
+    Bool&                 getEarlyTracingOahDetailsRef ()
+                              { return fEarlyTracingOahDetails; }
 
     void                  setEarlyTraceComponents ();
     Bool                  getEarlyTraceComponents () const
+                              { return fEarlyTraceComponents; }
+    Bool&                  getEarlyTraceComponentsRef ()
                               { return fEarlyTraceComponents; }
 
 

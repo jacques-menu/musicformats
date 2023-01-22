@@ -4370,12 +4370,18 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
   else if (fOnGoingHarmony) {
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+			std::stringstream s;
+
+			s <<
         "Harmony offset \"" << offsetValue << "\"" <<
         ", represents = \'" <<
        offsetWholeNotesFromDuration <<
        "\' whole notes" <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				s.str ());
     }
 #endif
 
@@ -9158,7 +9164,7 @@ Staff spacing between multiple staves is measured in
           msrLineBreak::create (
             inputLineNumber,
             fCurrentMeasureNumber,
-            msrUserChosenLineBreakKind::kUserChosenLineBreakNo);
+            msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo);
 
       // append lineBreak to the pending line breaks
       fPendingLineBreaksList.push_back (lineBreak);
@@ -9204,7 +9210,7 @@ Staff spacing between multiple staves is measured in
           pageBreak =
             msrPageBreak::create (
               inputLineNumber,
-              msrUserChosenPageBreakKind::kUserChosenPageBreakNo);
+              msrUserSelectedPageBreakKind::kUserSelectedPageBreakNo);
 
         // append it to the pending page breaks
         fPendingPageBreaksList.push_back (pageBreak);
@@ -18321,13 +18327,19 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-        gLogStream <<
+				std::stringstream s;
+
+				s <<
           "Copying harmony '" <<
           harmony->asString () <<
           "' from note " << note->asString () <<
           " to chord '" << chord->asString () <<
           "'" <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					s.str ());
       }
 #endif
 
@@ -22001,14 +22013,20 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
-      "handlePendingHarmonies(), newNote: " <<
+		std::stringstream s;
+
+		s <<
+			"handlePendingHarmonies(), newNote: " <<
       std::endl;
     ++gIndenter;
     gLogStream <<
       newNote <<
       std::endl;
     --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -25160,11 +25178,17 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
   if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
  #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+			std::stringstream s;
+
+			s <<
         "Ignoring harmony" <<
         ", line " <<
         inputLineNumber <<
         std::endl;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				s.str ());
     }
 #endif
   }
@@ -25172,7 +25196,9 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
    // create the harmony
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-      gLogStream <<
+			std::stringstream s;
+
+			s <<
         "Creating a harmony" <<
         ", line " << inputLineNumber << ":" <<
         std::endl;
@@ -25237,6 +25263,10 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
         std::endl;
 
       --gIndenter;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				s.str ());
     }
 #endif
 

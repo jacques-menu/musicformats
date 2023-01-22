@@ -90,7 +90,7 @@ R"(Write the early options values to standard error.)",
     appendAtomToSubGroup (
       oahBooleanAtom::create (
         "display-options-values", "dov",
-R"(Write the chosen options values to standard error.)",
+R"(Write the selected options values to standard error.)",
         "fDisplayOptionsValues",
         fDisplayOptionsValues));
 
@@ -99,7 +99,7 @@ R"(Write the chosen options values to standard error.)",
       oahBooleanAtom::create (
         "display-options-values-all", "dova",
 R"(Write all the options values to standard error.)",
-        "fDisplayOptionsValuesSelected",
+        "fDisplayOptionsValuesAll",
         fDisplayOptionsValuesAll));
 
   // display options handler
@@ -140,7 +140,7 @@ R"(Write the essentials of the contents of the options handler to standard error
 R"(Write information about CPU usage to standard error.)",
       "fDisplayCPUusage",
       fDisplayCPUusage);
-        
+
   subGroup->
     appendAtomToSubGroup (
       fDisplayCPUusageAtom);
@@ -229,7 +229,7 @@ void displayOahGroup::browseData (basevisitor* v)
 #endif
 }
 
-void displayOahGroup::printAtomWithVariableOptionsValues (
+void displayOahGroup::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -267,7 +267,7 @@ void displayOahGroup::printAtomWithVariableOptionsValues (
 }
 
 //______________________________________________________________________________
-void displayOahGroup::printDisplayOptionsValues (int valueFieldWidth)
+void displayOahGroup::displayDisplayOptionsValues (int valueFieldWidth)
 {
   gLogStream <<
     "The basic options are:" <<

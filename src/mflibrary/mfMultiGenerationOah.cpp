@@ -125,7 +125,7 @@ void initializeMultiGenerationOutputKindsMap ()
     mfMultiGenerationOutputKind::kGenerationMidi;
 }
 
-std::string existingMultiGenerationOutputKinds (size_t namesListMaxLength)
+std::string availableMultiGenerationOutputKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -297,7 +297,7 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
   }
 #endif
 
-  if (fSetByAnOption) {
+  if (fSelected) {
     std::stringstream s;
 
     s <<
@@ -309,8 +309,9 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
   }
   else {
     fMultiGenerationOutputKindVariable = fMultiGenerationOutputKindValue;
-    fSetByAnOption = true;
   }
+
+	fSelected = true;
 }
 
 void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
@@ -432,7 +433,7 @@ void mfMultiGenerationOutputKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void mfMultiGenerationOutputKindAtom::printAtomWithVariableOptionsValues (
+void mfMultiGenerationOutputKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -440,11 +441,9 @@ void mfMultiGenerationOutputKindAtom::printAtomWithVariableOptionsValues (
     std::setw (valueFieldWidth) <<
     fVariableName <<
     ": " <<
-    mfMultiGenerationOutputKindAsString (
-      fMultiGenerationOutputKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+    fMultiGenerationOutputKindVariable;
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -640,7 +639,7 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void mfMultiGenerationOahGroup::printMultiGenerationOahValues (int fieldWidth)
+void mfMultiGenerationOahGroup::displayMultiGenerationOahValues (int fieldWidth)
 {
   gLogStream <<
     "The MultiGeneration options are:" <<

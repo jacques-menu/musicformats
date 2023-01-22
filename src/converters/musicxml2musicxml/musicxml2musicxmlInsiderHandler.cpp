@@ -274,19 +274,19 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
   Bool
     outputFileNameHasBeenSet =
       outputFileNameStringAtom->
-        getSetByAnOption ();
+        getSelected ();
 
   Bool
     autoOutputFileNameHasBeenSet =
       autoOutputFileNameAtom->
-        getSetByAnOption ();
+        getSelected ();
 
   std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has been chosen
-      // '-aofn, -auto-output-file-name' has been chosen
+      // '-o, -output-file-name' has been selected
+      // '-aofn, -auto-output-file-name' has been selected
       std::stringstream s;
 
       s <<
@@ -294,14 +294,14 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
         outputFileNameStringAtom->fetchNames () <<
         "' and '" <<
         autoOutputFileNameAtom->fetchNames () <<
-        "' cannot be chosen simultaneously" <<
+        "' cannot be selected simultaneously" <<
         "\")";
 
       oahError (s.str ());
     }
     else {
-      // '-o, -output-file-name' has been chosen
-      // '-aofn, -auto-output-file-name' has NOT been chosen
+      // '-o, -output-file-name' has been selected
+      // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
           getStringVariable ();
@@ -310,8 +310,8 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-o, -output-file-name' has NOT been chosen
-      // '-aofn, -auto-output-file-name' has been chosen
+      // '-o, -output-file-name' has NOT been selected
+      // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
           gGlobalServiceRunData->getInputSourceName ();
@@ -364,8 +364,8 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
     }
 
     else {
-      // '-o, -output-file-name' has NOT been chosen
-      // '-aofn, -auto-output-file-name' has NOT been chosen
+      // '-o, -output-file-name' has NOT been selected
+      // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }
   }
@@ -431,7 +431,7 @@ void xml2xmlInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream s;
 
     s <<
-      "xml2xmlInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
+      "xml2xmlInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
     oahError (s.str ());
   }

@@ -739,7 +739,7 @@ void mfslDriver::appendSelectLabelForToolLaunching (
   if (
     gGlobalMfslInterpreterOahGroup->
       getSelectChoiceToLabelsMultiMapAtom ()->
-        getSetByAnOption ()
+        getSelected ()
   ) {
     if (! overriddenMessageHasBeenIssued) {
       std::stringstream s;
@@ -779,7 +779,7 @@ void mfslDriver::appendSelectLabelForToolLaunching (
     }
 
     // this 'select' statement is to be applied
-    fSelectedOptionsBlocksList.push_back (
+    fSelectedsBlocksList.push_back (
       selectOptionsBlock);
   }
 }
@@ -1022,7 +1022,7 @@ Bool mfslDriver::applySelectOption (
             label,
             *this);
 
-    fSelectedOptionsBlocksList.push_back (
+    fSelectedsBlocksList.push_back (
       selectOptionsBlock);
 
     if (fTraceChoices) {
@@ -1079,7 +1079,7 @@ void mfslDriver::finalSemanticsCheck ()
         getSelectChoiceToLabelsMultiMapAtom ();
 
   if (
-    selectChoiceToLabelsMultiMapAtom->getSetByAnOption ()
+    selectChoiceToLabelsMultiMapAtom->getSelected ()
   ) {
     applySelectOptionsFinally ();
   }
@@ -1119,11 +1119,11 @@ void mfslDriver::populateTheCommandsList ()
     else {
       // there are case statements
 
-      if (fSelectedOptionsBlocksList.size ()) {
+      if (fSelectedsBlocksList.size ()) {
         // 'select' statement have been supplied,
         // either in the script or by an option
 
-        for (S_mfslOptionsBlock optionsBlock :fSelectedOptionsBlocksList ) {
+        for (S_mfslOptionsBlock optionsBlock :fSelectedsBlocksList ) {
           // the 'select' choice options block options as std::string
           std::string
             selectChoiceOptionsAsString =

@@ -28,7 +28,7 @@ EXP extern S_lpsrScore translateMsrToLpsr (
   const S_msrScore&          originalMsrScore,
   const S_msrOahGroup&       msrOpts,
   const S_lpsrOahGroup&      lpsrOpts,
-  std::string                passNumber,
+  mfPassIDKind               passIDKind,
   std::string                passDescription,
   const S_mfcMultiComponent& multiComponent);
 

@@ -96,7 +96,7 @@ The default is 'DEFAULT_VALUE'.)",
             std::regex ("NUMBER"),
             std::to_string (gGlobalGenerationAPIKindsMap.size ())),
           std::regex ("GENERATION_API_KINDS"),
-          existingGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+          availableGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         std::regex ("DEFAULT_VALUE"),
         msrGenerationAPIKindAsString (
           generationAPIKindDefaultValue)),
@@ -109,7 +109,7 @@ The default is 'DEFAULT_VALUE'.)",
       fGenerationAPIKindAtom);
 }
 
-void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions ()
+void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions () //UNUSED??? JMI v0.9.66
 {
 //   S_oahSubGroup
 //     subGroup =
@@ -139,7 +139,7 @@ void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions ()
 //             std::regex ("NUMBER"),
 //             std::to_string (gGlobalMultiGenerationOutputKindsMap.size ())),
 //           std::regex ("GENERATION_API_KINDS"),
-//           existingMultiGenerationOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+//           availableMultiGenerationOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
 //         std::regex ("DEFAULT_VALUE"),
 //         mfMultiGenerationOutputKindAsString (
 //           multiGenerationKindDefaultValue)),
@@ -161,11 +161,11 @@ void Mikrokosmos3WanderingOahGroup::initializeMikrokosmos3WanderingOahGroup ()
 
   // generation API
   // --------------------------------------
-  // initializeGenerationAPIOptions ();
+  initializeGenerationAPIOptions ();
 
   //  multi-generation output kind
   // --------------------------------------
-  initializeMultiGenerationOutputOptions ();
+//   initializeMultiGenerationOutputOptions ();
 }
 
 void Mikrokosmos3WanderingOahGroup::enforceGroupQuietness ()
@@ -180,13 +180,13 @@ void Mikrokosmos3WanderingOahGroup::checkGroupOptionsConsistency ()
 
         s <<
           fUpLinkToHandler->getHandlerServiceName () <<
-          " needs an generate code option chosen among:" <<
+          " needs an generate code option selected among:" <<
           std::endl;
 
         ++gIndenter;
 
         s <<
-          existingMultiGenerationOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+          availableMultiGenerationOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
         --gIndenter;
 

@@ -406,8 +406,8 @@ void mfslDriver::scanBegin ()
       std::stringstream s;
 
       char*
-        errorString =
-          strerror (errno);
+        errorCString =
+          mfStrErrorCString ();
 
       if (errorString != nullptr) {
         s <<
@@ -810,16 +810,16 @@ Let's show show the \mfslInterp\ uses the options above:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl -display-tokens -display-non-terminals -display-options-values
   The options values for //Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl are:
-    MFSL group (-help-mfsl-group, -hmfsl-group), 2 atoms chosen:
+    MFSL group (-help-mfsl-group, -hmfsl-group), 2 atoms selected:
     --------------------------
-      MFSL (-help-mfsl, -hmfsl), 2 atoms chosen:
-        fTraceTokens                     : true, set by user
-        fDisplayNonTerminals               : true, set by user
+      MFSL (-help-mfsl, -hmfsl), 2 atoms selected:
+        fTraceTokens                     : true, selected option
+        fDisplayNonTerminals               : true, selected option
 
-    Options and help group (-help-oah-group, -hoah-group), 1 atom chosen:
+    Options and help group (-help-oah-group, -hoah-group), 1 atom selected:
     --------------------------
-      Options and help (-help-oah, -hoah), 1 atom chosen:
-        fDisplayOptionsValues              : true, set by user
+      Options and help (-help-oah, -hoah), 1 atom selected:
+        fDisplayOptionsValues              : true, selected option
 
 
 --> ./test.mfsl:2.1-39: tool

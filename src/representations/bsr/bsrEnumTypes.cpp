@@ -234,7 +234,7 @@ std::string bsrBrailleOutputKindAsString (
   return result;
 }
 
-std::string existingBsrBrailleOutputKinds (size_t namesListMaxLength)
+std::string availableBsrBrailleOutputKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -318,7 +318,7 @@ std::string bsrTextsLanguageKindAsString (
   return result;
 }
 
-std::string existingBsrTextsLanguageKinds (size_t namesListMaxLength)
+std::string availableBsrTextsLanguageKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 

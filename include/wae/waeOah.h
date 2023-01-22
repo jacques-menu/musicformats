@@ -96,14 +96,12 @@ class EXP waeOahGroup : public oahGroup
 
     void                  printWaeOahHelp ();
 
-    void                  printWaeOahValues (int fieldWidth);
+    void                  displayWaeOahValues (int fieldWidth);
 
   private:
 
     // warning and error handling
     // --------------------------------------
-
-    Bool                  fQuiet;
 
     Bool                  fDontShowErrors;
     Bool                  fDontQuitOnErrors;

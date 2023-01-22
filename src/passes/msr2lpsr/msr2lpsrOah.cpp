@@ -119,7 +119,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrScoreOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableLpsrScoreOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -128,6 +128,8 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
 
   setLpsrScoreOutputKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void msr2lpsrScoreOutputKindAtom::acceptIn (basevisitor* v)
@@ -243,7 +245,7 @@ void msr2lpsrScoreOutputKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msr2lpsrScoreOutputKindAtom::printAtomWithVariableOptionsValues (
+void msr2lpsrScoreOutputKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -253,9 +255,8 @@ void msr2lpsrScoreOutputKindAtom::printAtomWithVariableOptionsValues (
     ": " <<
     lpsrScoreOutputKindAsString (
       fLpsrScoreOutputKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -341,7 +342,7 @@ The default is 'DEFAULT_VALUE'.)",
               std::regex ("NUMBER"),
               std::to_string (gGlobalLpsrScoreOutputKindsMap.size ())),
             std::regex ("OUTPUT_KINDS"),
-            existingLpsrScoreOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableLpsrScoreOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           lpsrScoreOutputKindAsString (
             lpsrScoreOutputKindDefaultValue)),
@@ -500,7 +501,7 @@ void msr2lpsrOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msr2lpsrOahGroup::printMsr2lpsrOahValues (int valueFieldWidth)
+void msr2lpsrOahGroup::displayMsr2lpsrOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The MusicXML options are:" <<

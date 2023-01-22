@@ -124,7 +124,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+      mfPassIDKind::kMfPassID_1,
       "Create the first MSR from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -182,7 +182,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
+        mfPassIDKind::kMfPassID_2,
         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
@@ -221,7 +221,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           secondMsrScore,
           gGlobalMsrOahGroup,
           gGlobalBsrOahGroup,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+          mfPassIDKind::kMfPassID_3,
           "Create a first BSR from the MSR");
     }
     catch (msr2bsrException& e) {
@@ -279,7 +279,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         translateBsrToFinalizedBsr (
           firstBsrScore,
           gGlobalBsrOahGroup,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
+          mfPassIDKind::kMfPassID_4,
           "Create the finalized BSR from the first BSR");
     }
     catch (bsr2finalizedBsrException& e) {
@@ -356,7 +356,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_5),
+          mfPassIDKind::kMfPassID_5,
           "Convert the finalized BSR into braille",
           out);
       }
@@ -416,7 +416,7 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
+          mfPassIDKind::kMfPassID_4,
           "Convert the finalized BSR into braille",
           brailleCodeFileOutputStream);
       }

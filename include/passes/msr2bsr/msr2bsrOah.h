@@ -125,7 +125,7 @@ class EXP msr2bsrOahGroup : public oahGroup
 
     void                  printMsr2bsrOahHelp ();
 
-    void                  printMsr2bsrOahValues (int fieldWidth);
+    void                  displayMsr2bsrOahValues (int fieldWidth);
 
   private:
 

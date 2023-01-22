@@ -32,11 +32,11 @@ namespace MusicFormats
 {
 //_______________________________________________________________________________
 void translateBsrToBraille (
-  const S_bsrScore originalBsrScore,
-  const S_bsrOahGroup&    bsrOpts,
-  const std::string&    passNumber,
-  const std::string&    passDescription,
-  std::ostream&         brailleOutputStream)
+  const S_bsrScore     originalBsrScore,
+  const S_bsrOahGroup& bsrOpts,
+  mfPassIDKind         passIDKind,
+  const std::string&   passDescription,
+  std::ostream&        brailleOutputStream)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -49,20 +49,29 @@ void translateBsrToBraille (
   // start the clock
   clock_t startClock = clock ();
 
-  std::string separator =
-    "%--------------------------------------------------------------";
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    gLogStream <<
+    std::string separator =
+      "%--------------------------------------------------------------";
+
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -80,7 +89,7 @@ void translateBsrToBraille (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,

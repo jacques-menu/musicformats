@@ -38,8 +38,10 @@ void checkSXMLFile (
   \return an error code (\c mfMusicformatsErrorKind::kMusicformatsError_NONE when success)
 */
 EXP Sxmlelement musicxmlFile2mxsr (
-  const char*    fileName,
-  S_mxsrOahGroup musicxmlOpts);
+  const char*        fileName,
+  S_mxsrOahGroup     musicxmlOpts,
+  mfPassIDKind       passIDKind,
+  const std::string& passDescription);
 
 //______________________________________________________________________________
 /*!
@@ -50,8 +52,10 @@ EXP Sxmlelement musicxmlFile2mxsr (
 */
 
 EXP Sxmlelement musicxmlFd2mxsr (
-  FILE*          fd,
-  S_mxsrOahGroup musicxmlOpts);
+  FILE*              fd,
+  S_mxsrOahGroup     musicxmlOpts,
+  mfPassIDKind       passIDKind,
+  const std::string& passDescription);
 
 //______________________________________________________________________________
 /*!
@@ -60,28 +64,28 @@ EXP Sxmlelement musicxmlFd2mxsr (
   \param msrOpts the MSR options to be used
   \return an error code (\c mfMusicformatsErrorKind::kMusicformatsError_NONE when success)
 */
-EXP Sxmlelement musicxmlString2mxsr (
-  const char*    buffer,
-  S_mxsrOahGroup musicxmlOpts,
-  const std::string&  passNumber,
-  const std::string&  passDescription);
+EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
+  const char*        buffer,
+  S_mxsrOahGroup     musicxmlOpts,
+  mfPassIDKind       passIDKind,
+  const std::string& passDescription);
 
 //_______________________________________________________________________________
 EXP SXMLFile createSXMLFileFromFile (
-  const char*   fileName,
-  const std::string& passNumber,
+  const char*        fileName,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription);
 
 //_______________________________________________________________________________
 EXP SXMLFile createSXMLFileFromFd (
-  FILE*         fd,
-  const std::string& passNumber,
+  FILE*              fd,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription);
 
 //_______________________________________________________________________________
 EXP SXMLFile createSXMLFileFromString (
-  const char*   buffer,
-  const std::string& passNumber,
+  const char*        buffer,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription);
 
 

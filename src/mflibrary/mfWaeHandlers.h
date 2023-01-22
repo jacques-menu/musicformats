@@ -57,21 +57,7 @@ class EXP mfWaeHandler : public waeHandler
 
     virtual std::string   passIDKindAsString (mfPassIDKind passIDKind) const;
 
-    virtual std::string   pass1 () const;
-
-    virtual std::string   pass2 () const;
-    virtual std::string   pass2a () const;
-    virtual std::string   pass2b () const;
-
-    virtual std::string   pass3 () const;
-    virtual std::string   pass3a () const;
-    virtual std::string   pass3b () const;
-
-    virtual std::string   pass4 () const;
-    virtual std::string   pass4a () const;
-    virtual std::string   pass4b () const;
-
-    virtual std::string   pass5 () const;
+//     virtual std::string   passName (mfPassIDKind passIDKind) const;
 
     virtual std::string   passOptional () const;
 

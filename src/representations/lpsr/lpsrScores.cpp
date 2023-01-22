@@ -298,44 +298,44 @@ lpsrScore::lpsrScore (
   // populate the paper
 
   // geometry
-//   if (gGlobalLpsrOahGroup->getPaperWidthAtom ()->getSetByAnOption ()) {
+//   if (gGlobalLpsrOahGroup->getPaperWidthAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setPaperWidth (
 //         gGlobalLpsrOahGroup->getPaperWidth ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHeightAtom ()->getSetByAnOption ()) {
+//   if (gGlobalLpsrOahGroup->getPaperHeightAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setPaperHeight (
 //         gGlobalLpsrOahGroup->getPaperHeight ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
+//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setTopMargin (
 //         gGlobalLpsrOahGroup->getTopMargin ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
+//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setBottomMargin (
 //         gGlobalLpsrOahGroup->getBottomMargin ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
+//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setLeftMargin (
 //         gGlobalLpsrOahGroup->getLeftMargin ());
 //   }
 //
-//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
+//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
 //     fScorePaper->
 //       setRightMargin (
 //         gGlobalLpsrOahGroup->getRightMargin ());
 //   }
 
   // indents
-  if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSelected ()) {
     fScorePaper->
       setHorizontalShift (
         msrLength::create (
@@ -343,7 +343,7 @@ lpsrScore::lpsrScore (
           gGlobalLpsrOahGroup->getPaperHorizontalShift ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getPaperIndentAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getPaperIndentAtom ()->getSelected ()) {
     fScorePaper->
       setIndent (
         msrLength::create (
@@ -351,7 +351,7 @@ lpsrScore::lpsrScore (
           gGlobalLpsrOahGroup->getPaperIndent ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getPaperShortIndentAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getPaperShortIndentAtom ()->getSelected ()) {
     fScorePaper->
       setShortIndent (
         msrLength::create (
@@ -360,7 +360,7 @@ lpsrScore::lpsrScore (
   }
 
   // spaces
-  if (gGlobalLpsrOahGroup->getMarkupSystemSpacingPaddingAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getMarkupSystemSpacingPaddingAtom ()->getSelected ()) {
     fScorePaper->
       setMarkupSystemSpacingPadding (
         msrLength::create (
@@ -368,7 +368,7 @@ lpsrScore::lpsrScore (
           gGlobalLpsrOahGroup->getMarkupSystemSpacingPadding ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getBetweenSystemSpaceAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getBetweenSystemSpaceAtom ()->getSelected ()) {
     fScorePaper->
       setBetweenSystemSpace (
         msrLength::create (
@@ -376,7 +376,7 @@ lpsrScore::lpsrScore (
           gGlobalLpsrOahGroup->getBetweenSystemSpace ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getPageTopSpacingAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getPageTopSpacingAtom ()->getSelected ()) {
     fScorePaper->
       setPageTopSpacing (
         msrLength::create (
@@ -385,12 +385,12 @@ lpsrScore::lpsrScore (
   }
 
   // counts
-  if (gGlobalLpsrOahGroup->getPageCountAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getPageCountAtom ()->getSelected ()) {
     fScorePaper->
       setPageCount (gGlobalLpsrOahGroup->getPageCount ());
   }
 
-  if (gGlobalLpsrOahGroup->getSystemCountAtom ()->getSetByAnOption ()) {
+  if (gGlobalLpsrOahGroup->getSystemCountAtom ()->getSelected ()) {
     fScorePaper->
       setSystemCount (gGlobalLpsrOahGroup->getSystemCount ());
   }
@@ -2278,7 +2278,7 @@ R"###(%% http://lsr.di.unimi.it/LSR/Item?id=336
                                        (rest-score v2-rest)))
                          (rest-to-keep (if keep-v1? v1-rest v2-rest))
                          (dot-to-kill (if keep-v1? v2-dot v1-dot)))
-                    ; uncomment if you're curious of which rest was chosen:
+                    ; uncomment if you're curious of which rest was selected:
                     ;(ly:grob-set-property! v1-rest 'color green)
                     ;(ly:grob-set-property! v2-rest 'color blue)
                     (ly:grob-suicide! (if keep-v1? v2-rest v1-rest))

@@ -190,7 +190,7 @@ void outputFileOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void outputFileOahGroup::printOutputFileOahValues (int fieldWidth)
+void outputFileOahGroup::displayOutputFileOahValues (int fieldWidth)
 {
   gLogStream <<
     "The outputFile options are:" <<

@@ -121,7 +121,7 @@ mfPassIDKind mfPassIDKindFromString (const std::string& theString)
     ++gIndenter;
 
     s <<
-      existingMusicFormatsPassIDKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMusicFormatsPassIDKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -133,7 +133,7 @@ mfPassIDKind mfPassIDKindFromString (const std::string& theString)
   return result;
 }
 
-std::string existingMusicFormatsPassIDKinds (size_t namesListMaxLength)
+std::string availableMusicFormatsPassIDKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 

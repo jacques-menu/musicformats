@@ -1701,7 +1701,7 @@ msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString 
     ++gIndenter;
 
     s <<
-      existingMsrQuarterTonesPitchesLanguageKinds (
+      availableMsrQuarterTonesPitchesLanguageKinds (
         K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;

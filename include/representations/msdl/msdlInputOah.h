@@ -98,7 +98,7 @@ class EXP msdlKeywordsLanguageAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -328,7 +328,7 @@ class EXP msdlCommentsTypeAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -415,7 +415,7 @@ class EXP msdlUserLanguageAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -503,7 +503,7 @@ class EXP msdlPitchesLanguageAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -601,7 +601,7 @@ class EXP msdlInputOahGroup : public oahGroup
 
     void                  printMsdlInputOahHelp ();
 
-    void                  printMsdlInputOahValues (int fieldWidth);
+    void                  displayMsdlInputOahValues (int fieldWidth);
 
   private:
 

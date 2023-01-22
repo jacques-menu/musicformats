@@ -76,7 +76,7 @@ class EXP msr2lilypondManPageGenerateAtom : public oahValueLessAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 

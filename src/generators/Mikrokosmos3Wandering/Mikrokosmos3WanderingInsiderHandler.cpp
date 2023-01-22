@@ -528,12 +528,12 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
   Bool
     outputFileNameHasBeenSet =
       outputFileNameStringAtom->
-        getSetByAnOption ();
+        getSelected ();
 
   Bool
     autoOutputFileNameHasBeenSet =
       autoOutputFileNameAtom->
-        getSetByAnOption ();
+        getSelected ();
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -550,14 +550,14 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
   std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
-    // '-o, -output-file-name' has been chosen
+    // '-o, -output-file-name' has been selected
     outputFileName =
       outputFileNameStringAtom->
         getStringVariable ();
   }
 
   else if (autoOutputFileNameHasBeenSet) {
-     // '-aofn, -auto-output-file-name' has been chosen
+     // '-aofn, -auto-output-file-name' has been selected
 
     // start with the service name
     outputFileName = fHandlerServiceName;
@@ -721,7 +721,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream s;
 
     s <<
-      "Mikrokosmos3WanderingInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
+      "Mikrokosmos3WanderingInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
     oahError (s.str ());
   }

@@ -301,7 +301,7 @@ class   ischemeDriver
 
     // tool launching
     std::list<S_ischemeOptionsBlock>
-                          fSelectedOptionsBlocksList;
+                          fSelectedsBlocksList;
 
     // commands list
     std::list<std::string>

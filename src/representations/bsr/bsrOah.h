@@ -103,7 +103,7 @@ class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -190,7 +190,7 @@ class EXP bsrTextsLanguageAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -374,7 +374,7 @@ class EXP bsrOahGroup : public oahGroup
 
     void                  printBsrOahHelp ();
 
-    void                  printBsrOahValues (int fieldWidth);
+    void                  displayBsrOahValues (int fieldWidth);
 
   private:
 

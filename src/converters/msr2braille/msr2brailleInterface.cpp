@@ -54,12 +54,12 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   S_msrScore          theMsrScore,
-  std::string         passNumber1a,
-  std::string         passDescription1a,
-  std::string         passNumber1b,
-  std::string         passDescription1b,
-  std::string         passNumber2,
-  std::string         passDescription2,
+  mfPassIDKind        passID_A,
+  std::string         passDescription_A,
+  mfPassIDKind        passID_B,
+  std::string         passDescription_B,
+  mfPassIDKind        passID_C,
+  std::string         passDescription_C,
   std::ostream&       out,
   std::ostream&       err,
   const S_oahHandler& handler)
@@ -86,7 +86,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   S_bsrScore firstBsrScore;
 
   {
-    // create the first BSR from the MSR
+    // create the first BSR from the MSR (pass A)
     // ------------------------------------------------------
 
     try {
@@ -95,8 +95,8 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           theMsrScore,
           gGlobalMsrOahGroup,
           gGlobalBsrOahGroup,
-          passNumber1a,
-          passDescription1a);
+          passID_A,
+          passDescription_A);
     }
     catch (msr2bsrException& e) {
       mfDisplayException (e, gOutputStream);
@@ -131,7 +131,7 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   S_bsrScore finalizedBsrScore;
 
   {
-    // create the finalized BSR from the first BSR
+    // create the finalized BSR from the first BSR (pass B)
     // ------------------------------------------------------
 
     try {
@@ -139,8 +139,8 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         translateBsrToFinalizedBsr (
           firstBsrScore,
           gGlobalBsrOahGroup,
-          passNumber1b,
-          passDescription1b);
+          passID_B,
+          passDescription_B);
     }
     catch (bsr2finalizedBsrException& e) {
       mfDisplayException (e, gOutputStream);
@@ -199,13 +199,13 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
       }
 #endif
 
-      // convert the BSR score to braille
+      // convert the BSR score to braille( pass C)
       try {
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          passNumber2,
-          passDescription2,
+          passID_C,
+          passDescription_C,
           out);
       }
       catch (bsr2brailleException& e) {
@@ -259,13 +259,13 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
         throw bsr2brailleException (message);
       }
 
-      // convert the finalized BSR score to braille
+      // convert the finalized BSR score to braille (pass D) // JMI ??? v0.9.66
       try {
         translateBsrToBraille (
           finalizedBsrScore,
           gGlobalBsrOahGroup,
-          passNumber2,
-          passDescription2,
+          passID_C,
+          passDescription_C,
           brailleCodeFileOutputStream);
       }
       catch (bsr2brailleException& e) {

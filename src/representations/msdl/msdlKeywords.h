@@ -47,7 +47,7 @@ msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (
 extern std::map<std::string, msdlKeywordsLanguageKind>
   gGlobalMsdlKeywordsLanguageKindsMap;
 
-std::string existingMsdlKeywordsLanguageKinds (size_t namesListMaxLength);
+std::string availableMsdlKeywordsLanguageKinds (size_t namesListMaxLength);
 
 void initializeMsdlKeywordsLanguageKindsMap ();
 
@@ -102,7 +102,7 @@ msdlKeywordKind msdlKeywordKindFromString (
   msdlKeywordsLanguageKind languageKind,
   const std::string&       theString);
 
-std::string existingKeywordsInLanguage (
+std::string availableKeywordsInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
   size_t                   namesListMaxLength);
 
@@ -120,7 +120,7 @@ void initializeGermanKeywordsNamesMap ();
 void initializeSpanishKeywordsNamesMap ();
 void initializeDutchKeywordsNamesMap ();
 
-std::string existingKeywordsLanguageKinds (size_t namesListMaxLength);
+std::string availableKeywordsLanguageKinds (size_t namesListMaxLength);
 
 // initialization
 //______________________________________________________________________________

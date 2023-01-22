@@ -33,11 +33,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2guidoWithHandler (
           theMsrScore,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
+          mfPassIDKind::kMfPassID_2,
           "Convert the MSR score into a second MSR",
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+          mfPassIDKind::kMfPassID_3,
           "Convert the second MSR into an MXSR",
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
+          mfPassIDKind::kMfPassID_4,
           "Convert the MXSR into Guido text",
           std::cout,
           std::cerr,

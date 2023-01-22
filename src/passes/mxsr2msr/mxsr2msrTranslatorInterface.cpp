@@ -41,9 +41,9 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 void populateMsrSkeletonFromMxsr (
-  Sxmlelement   theMxsr,
-  S_msrScore    scoreSkeletonToBePopulated,
-  const std::string& passNumber,
+  Sxmlelement        theMxsr,
+  S_msrScore         scoreSkeletonToBePopulated,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -62,22 +62,29 @@ void populateMsrSkeletonFromMxsr (
   // start the clock
   clock_t startClock = clock ();
 
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
-      std::endl;
-
-    gLogStream <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -94,7 +101,7 @@ void populateMsrSkeletonFromMxsr (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,

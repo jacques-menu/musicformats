@@ -161,7 +161,7 @@ void msdl2musicxmlManPageGenerateAtom::generateManPageData (std::ostream& os) co
       "msdl2musicxmlManPageGenerateAtom::generateManPageData");
 }
 
-void msdl2musicxmlManPageGenerateAtom::printAtomWithVariableOptionsValues (
+void msdl2musicxmlManPageGenerateAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {

@@ -50,10 +50,10 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   S_msrScore          theMsrScore,
-  std::string         passNumber1,
-  std::string         passDescription1,
-  std::string         passNumber2,
-  std::string         passDescription2,
+  mfPassIDKind        passID_A,
+  std::string         passDescription_A,
+  mfPassIDKind        passID_B,
+  std::string         passDescription_B,
   std::ostream&       out,
   std::ostream&       err,
   const S_oahHandler& handler)
@@ -90,8 +90,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           theMsrScore,
           gGlobalMsrOahGroup,
           gGlobalLpsrOahGroup,
-          passNumber1,
-          passDescription1,
+          passID_A,
+          passDescription_A,
           createMsr2lilypondConverterComponent ());
     }
     catch (msr2lpsrException& e) {
@@ -145,8 +145,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           theLpsrScore,
           gGlobalMsrOahGroup,
           gGlobalLpsrOahGroup,
-          passNumber2,
-          passDescription2,
+          passID_B,
+          passDescription_B,
           lilypondStandardOutputStream);
       }
       catch (lpsr2lilypondException& e) {
@@ -213,8 +213,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           theLpsrScore,
           gGlobalMsrOahGroup,
           gGlobalLpsrOahGroup,
-          passNumber2,
-          passDescription2,
+          passID_B,
+          passDescription_B,
           lilypondFileOutputStream);
       }
       catch (lpsr2lilypondException& e) {

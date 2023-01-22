@@ -114,6 +114,8 @@ void lilypondScoreOutputKindAtom::applyAtomWithValue (
       std::endl;
   }
 #endif
+
+	fSelected = true;
 }
 
 void lilypondScoreOutputKindAtom::acceptIn (basevisitor* v)
@@ -229,7 +231,7 @@ void lilypondScoreOutputKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondScoreOutputKindAtom::printAtomWithVariableOptionsValues (
+void lilypondScoreOutputKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -241,9 +243,8 @@ void lilypondScoreOutputKindAtom::printAtomWithVariableOptionsValues (
       fLpsrScoreOutputKindVariable) <<
     "\"";
 
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -402,9 +403,9 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
       msrSemiTonesPitchAndOctave::createFromString (
         K_MF_INPUT_LINE_UNKNOWN,
         destinationPitchName);
-
-    fSetByAnOption = true;
   }
+
+	fSelected = true;
 }
 
 void lilypondTransposePartNameAtom::acceptIn (basevisitor* v)
@@ -564,7 +565,7 @@ void lilypondTransposePartNameAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondTransposePartNameAtom::printAtomWithVariableOptionsValues (
+void lilypondTransposePartNameAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -573,10 +574,8 @@ void lilypondTransposePartNameAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     ": ";
 
-  if (fSetByAnOption) {
-    os <<
-      "ffSetByAnOption: " <<
-      fSetByAnOption;
+  if (fSelected) {
+    os << ", selected";
   }
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
@@ -758,9 +757,9 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
       msrSemiTonesPitchAndOctave::createFromString (
         K_MF_INPUT_LINE_UNKNOWN,
         destinationPitchName);
-
-    fSetByAnOption = true;
   }
+
+	fSelected = true;
 }
 
 void lilypondTransposePartIDAtom::acceptIn (basevisitor* v)
@@ -920,7 +919,7 @@ void lilypondTransposePartIDAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondTransposePartIDAtom::printAtomWithVariableOptionsValues (
+void lilypondTransposePartIDAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -929,10 +928,8 @@ void lilypondTransposePartIDAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     ": ";
 
-  if (fSetByAnOption) {
-    os <<
-      "ffSetByAnOption: " <<
-      fSetByAnOption;
+  if (fSelected) {
+    os << ", selected";
   }
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
@@ -1025,7 +1022,7 @@ void msrOctaveEntryVariable::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msrOctaveEntryVariable::printAtomWithVariableOptionsValues (
+void msrOctaveEntryVariable::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1108,6 +1105,8 @@ void lilypondAbsoluteOctaveEntryAtom::applyValueLessAtom (std::ostream& os)
   // set octave entry kind
   fOctaveEntryKindVariable.setOctaveEntryKind (
     msrOctaveEntryKind::kOctaveEntryAbsolute);
+
+	fSelected = true;
 }
 
 void lilypondAbsoluteOctaveEntryAtom::acceptIn (basevisitor* v)
@@ -1209,7 +1208,7 @@ void lilypondAbsoluteOctaveEntryAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondAbsoluteOctaveEntryAtom::printAtomWithVariableOptionsValues (
+void lilypondAbsoluteOctaveEntryAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1312,7 +1311,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsrOctaveEntryKinds ();
+      availableMsrOctaveEntryKinds ();
 
     --gIndenter;
 
@@ -1333,6 +1332,8 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
     msrSemiTonesPitchAndOctave::createFromString (
       K_MF_INPUT_LINE_UNKNOWN,
       theString));
+
+	fSelected = true;
 }
 
 void lilypondRelativeOctaveEntryAtom::acceptIn (basevisitor* v)
@@ -1443,7 +1444,7 @@ void lilypondRelativeOctaveEntryAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondRelativeOctaveEntryAtom::printAtomWithVariableOptionsValues (
+void lilypondRelativeOctaveEntryAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1550,6 +1551,8 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
     msrSemiTonesPitchAndOctave::createFromString (
       K_MF_INPUT_LINE_UNKNOWN,
       theString));
+
+	fSelected = true;
 }
 
 void lilypondFixedOctaveEntryAtom::acceptIn (basevisitor* v)
@@ -1660,7 +1663,7 @@ void lilypondFixedOctaveEntryAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondFixedOctaveEntryAtom::printAtomWithVariableOptionsValues (
+void lilypondFixedOctaveEntryAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1781,7 +1784,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrAccidentalStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableLpsrAccidentalStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1790,6 +1793,8 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
 
   setLpsrAccidentalStyleKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void lilypondAccidentalStyleKindAtom::acceptIn (basevisitor* v)
@@ -1905,7 +1910,7 @@ void lilypondAccidentalStyleKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondAccidentalStyleKindAtom::printAtomWithVariableOptionsValues (
+void lilypondAccidentalStyleKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1916,9 +1921,8 @@ void lilypondAccidentalStyleKindAtom::printAtomWithVariableOptionsValues (
     lpsrAccidentalStyleKindAsString (
       fLpsrAccidentalStyleKindVariable);
 
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -2099,6 +2103,8 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
       chordContents, chordsDisplaycode));
   }
 #endif
+
+	fSelected = true;
 }
 
 void lilypondChordsDisplayAtom::acceptIn (basevisitor* v)
@@ -2254,7 +2260,7 @@ void lilypondChordsDisplayAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondChordsDisplayAtom::printAtomWithVariableOptionsValues (
+void lilypondChordsDisplayAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -2277,10 +2283,10 @@ void lilypondChordsDisplayAtom::printAtomWithVariableOptionsValues (
       os << std::endl;
     } // for
 
-    if (fSetByAnOption) {
+    if (fSelected) {
       os <<
-        "ffSetByAnOption: " <<
-        fSetByAnOption <<
+        "fSelected: " <<
+        fSelected <<
         std::endl;
     }
 
@@ -2391,7 +2397,7 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrLyricsDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableLpsrLyricsDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -2400,6 +2406,8 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
 
   setLpsrLyricsDurationsKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void lilypondLyricsDurationsKindAtom::acceptIn (basevisitor* v)
@@ -2516,7 +2524,7 @@ void lilypondLyricsDurationsKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondLyricsDurationsKindAtom::printAtomWithVariableOptionsValues (
+void lilypondLyricsDurationsKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -2527,9 +2535,9 @@ void lilypondLyricsDurationsKindAtom::printAtomWithVariableOptionsValues (
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable);
 
-  if (fSetByAnOption) {
+  if (fSelected) {
     os <<
-      ", set by an option";
+      ", selected";
 
   }
   os << std::endl;
@@ -2634,7 +2642,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrDynamicsTextSpannersStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableLpsrDynamicsTextSpannersStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -2643,6 +2651,8 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
 
   setLpsrdDynamicsTextSpannersStyleKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void lilypondDynamicsTextSpannersStyleKindAtom::acceptIn (basevisitor* v)
@@ -2757,7 +2767,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondDynamicsTextSpannersStyleKindAtom::printAtomWithVariableOptionsValues (
+void lilypondDynamicsTextSpannersStyleKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -2768,9 +2778,9 @@ void lilypondDynamicsTextSpannersStyleKindAtom::printAtomWithVariableOptionsValu
     lpsrDynamicsTextSpannersStyleKindAsString (
       fLpsrdDynamicsTextSpannersStyleKindVariable);
 
-  if (fSetByAnOption) {
+  if (fSelected) {
     os <<
-      ", set by an option";
+      ", selected";
 
   }
   os << std::endl;
@@ -3576,7 +3586,7 @@ The default is 'DEFAULT_VALUE'.)",
               std::regex ("NUMBER"),
               std::to_string (gGlobalLpsrAccidentalStyleKindsMap.size ())),
             std::regex ("ACCIDENTAL_STYLES"),
-            existingLpsrAccidentalStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableLpsrAccidentalStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           lpsrAccidentalStyleKindAsLilypondString (
             lpsrAccidentalStyleKindDefaultValue)),
@@ -4271,7 +4281,7 @@ The default is 'DEFAULT_VALUE'.)",
             std::regex ("NUMBER"),
             std::to_string (getLpsrDynamicsTextSpannersStyleKindsMap ().size ())),
           std::regex ("LYRICS_DYNAMICS_TEXT_SPANNERS_STYLE_KINDS"),
-          existingLpsrDynamicsTextSpannersStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+          availableLpsrDynamicsTextSpannersStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         std::regex ("DEFAULT_VALUE"),
         lpsrDynamicsTextSpannersStyleKindAsString (
           lpsrDynamicsTextSpannersStyleKindDefaultValue)),
@@ -4332,7 +4342,7 @@ The default is 'DEFAULT_VALUE'.)",
               std::regex ("NUMBER"),
               std::to_string (gGlobalLpsrLyricsDurationsKindsMap.size ())),
             std::regex ("LYRICS_DURATIONS_KINDS"),
-            existingLpsrLyricsDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableLpsrLyricsDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           lpsrLyricsDurationsKindAsString (
             lpsrLyricsDurationsKindDefaultValue)),
@@ -4977,7 +4987,7 @@ void lpsr2lilypondOahGroup::browseData (basevisitor* v)
 #endif
 }
 
-void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
+void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -5217,10 +5227,10 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
           std::setw (valueFieldWidth) <<
           "relativeOctaveEntrySemiTonesPitchAndOctave" << ": ";
 /* JMI
-        if (fSetByAnOption) {
+        if (fSelected) {
           os <<
-            ", fSetByAnOption: " <<
-            fSetByAnOption;
+            ", fSelected: " <<
+            fSelected;
         }
 */
         os <<
@@ -5236,10 +5246,10 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
           std::setw (valueFieldWidth) <<
           "fixedOctaveEntrySemiTonesPitchAndOctave" << ": ";
 /* JMI
-        if (fSetByAnOption) {
+        if (fSelected) {
           os <<
-            ", fSetByAnOption: " <<
-            fSetByAnOption;
+            ", fSelected: " <<
+            fSelected;
         }
 */
         os <<
@@ -5693,7 +5703,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   --gIndenter;
 }
 
-void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
+void lpsr2lilypondOahGroup::displayLilypondGenerationOahValues (int fieldWidth)
 {
   gLogStream <<
     "The LilyPond lilypond are:" <<
@@ -6449,6 +6459,8 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
   fStringSetVariable [musicxmlMeasureNumber] = lilypondMeasureNumber;
   }
 #endif
+
+	fSelected = true;
 }
 
 void lilypondBreakPageAfterMeasureNumberAtom::print (std::ostream& os) const
@@ -6491,7 +6503,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lilypondBreakPageAfterMeasureNumberAtom::printAtomWithVariableOptionsValues (
+void lilypondBreakPageAfterMeasureNumberAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -6520,8 +6532,8 @@ void lilypondBreakPageAfterMeasureNumberAtom::printAtomWithVariableOptionsValues
         "\" --> \"" <<
         (*i).second <<
         "\"" <<
-        ", fSetByAnOption: " <<
-        fSetByAnOption <<
+        ", fSelected: " <<
+        fSelected <<
         std::endl;
       if (++i == iEnd) break;
     } // for

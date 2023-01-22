@@ -51,7 +51,7 @@
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
-#ifndef WIN32
+#ifndef WIN64
 static void _sigaction (int signal, siginfo_t *si, void *arg)
 {
   std::cerr << "Signal #" << signal << " catched!" << std::endl;
@@ -85,7 +85,7 @@ void enforceSomeOptions (
 {
   /*
     This is a way to enforce options 'permanently'
-    independently of the options chosen by the user
+    independently of the options selected by the user
   */
 
   // trace
@@ -339,7 +339,7 @@ int main (int argc, char*  argv[])
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  // has the output kind been chosen?
+  // has the output kind been selected?
   // ------------------------------------------------------
 
   switch (multiGenerationOutputKind) {
@@ -471,7 +471,7 @@ int main (int argc, char*  argv[])
   }
 #endif
 
-  // create and populate the theMsrScore
+  // create and populate the theMsrScore (pass 1)
   // ------------------------------------------------------
 
   // start the clock
@@ -488,7 +488,7 @@ int main (int argc, char*  argv[])
       gTab <<
       gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1) <<
       ": " <<
-      "Creating the MSR score with the " <<
+      "Creating and populating the MSR score with the " <<
       msrGenerationAPIKindAsString (theGenerationAPIKind) <<
       std::endl <<
       separator <<
@@ -512,7 +512,7 @@ int main (int argc, char*  argv[])
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+    mfPassIDKind::kMfPassID_1,
     "Create the MSR score",
     mfTimingItemKind::kMandatory,
     startClock,
@@ -533,58 +533,58 @@ int main (int argc, char*  argv[])
       // should not occur, unless the run is a pure help one
       break;
 
-    case mfMultiGenerationOutputKind::kGenerationLilypond:
+    case mfMultiGenerationOutputKind::kGenerationLilypond: // (pass 2 and pass 3)
       err =
         msrScore2lilypondWithHandler (
           theMsrScore,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
+          mfPassIDKind::kMfPassID_2,
           "Convert the MSR into an LPSR",
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+          mfPassIDKind::kMfPassID_3,
           gWaeHandler->convertTheLPSRIntoLilyPondCode (),
           gOutputStream,
           gLogStream,
           handler);
       break;
 
-    case mfMultiGenerationOutputKind::kGenerationBraille:
+    case mfMultiGenerationOutputKind::kGenerationBraille: // (pass 2a, pass 2b and pass 3)
       err =
         msrScore2brailleWithHandler (
           theMsrScore,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2a),
+          mfPassIDKind::kMfPassID_2a,
           "Create the first BSR from the MSR",
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2b),
+          mfPassIDKind::kMfPassID_2b,
           "Create the finalized BSR from the first BSR",
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+          mfPassIDKind::kMfPassID_3,
           "Convert the BSR into Braille text",
           gOutputStream,
           gLogStream,
           handler);
       break;
 
-    case mfMultiGenerationOutputKind::kGenerationMusicXML:
+    case mfMultiGenerationOutputKind::kGenerationMusicXML: // (pass 2, pass 3 and pass 4)
       err =
         msrScore2musicxmlWithHandler (
           theMsrScore,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
+          mfPassIDKind::kMfPassID_2,
           "Convert the MSR score into a second MSR",
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+          mfPassIDKind::kMfPassID_3,
           "Convert the second MSR into an MXSR",
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
+          mfPassIDKind::kMfPassID_4,
           "Convert the MXSR into MusicXML text",
           gOutputStream,
           gLogStream,
           handler);
       break;
 
-    case mfMultiGenerationOutputKind::kGenerationGuido:
+    case mfMultiGenerationOutputKind::kGenerationGuido:// (pass 2, pass 3 and pass 4)
       err =
         msrScore2guidoWithHandler (
           theMsrScore,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
+          mfPassIDKind::kMfPassID_2,
           "Convert the MSR score into a second MSR",
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+          mfPassIDKind::kMfPassID_3,
           "Convert the second MSR into an MXSR",
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
+          mfPassIDKind::kMfPassID_4,
           "Convert the MXSR into Guido text",
           gOutputStream,
           gLogStream,

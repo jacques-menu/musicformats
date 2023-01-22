@@ -40,12 +40,12 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdlConverterRegularHandler msdlConverterRegularHandler::create (
-  const std::string&     serviceName,
-  const std::string&     handlerHeader,
+  const std::string& serviceName,
+  const std::string& handlerHeader,
   const S_msdlConverterInsiderHandler&
-                    insiderOahHandler,
+                     insiderOahHandler,
   mfMultiGenerationOutputKind
-                    multiGenerationOutputKind)
+                     multiGenerationOutputKind)
 {
   // create the regular handler
   msdlConverterRegularHandler* o = new
@@ -59,12 +59,12 @@ S_msdlConverterRegularHandler msdlConverterRegularHandler::create (
 }
 
 msdlConverterRegularHandler::msdlConverterRegularHandler (
-  const std::string&     serviceName,
-  const std::string&     handlerHeader,
+  const std::string& serviceName,
+  const std::string& handlerHeader,
   const S_msdlConverterInsiderHandler&
-                    insiderOahHandler,
+                     insiderOahHandler,
   mfMultiGenerationOutputKind
-                    multiGenerationOutputKind)
+                     multiGenerationOutputKind)
   : oahRegularHandler (
       serviceName,
       handlerHeader,

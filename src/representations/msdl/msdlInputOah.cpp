@@ -125,7 +125,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -134,6 +134,8 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
 
   setMsdlKeywordsLanguageKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void msdlKeywordsLanguageAtom::acceptIn (basevisitor* v)
@@ -248,7 +250,7 @@ void msdlKeywordsLanguageAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msdlKeywordsLanguageAtom::printAtomWithVariableOptionsValues (
+void msdlKeywordsLanguageAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -259,9 +261,8 @@ void msdlKeywordsLanguageAtom::printAtomWithVariableOptionsValues (
     msdlKeywordsLanguageKindAsString (
       fMsdlKeywordsLanguageKindVariable) <<
     "\"";
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -343,7 +344,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -365,12 +366,14 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
   ++gIndenter;
 
   gIndenter.indentMultiLineString (
-    existingKeywordsInLanguage (
+    availableKeywordsInLanguage (
       keywordsLanguageKind,
       K_MF_NAMES_LIST_MAX_LENGTH),
     gLogStream);
 
   --gIndenter;
+
+	fSelected = true;
 }
 
 void oahDisplayMsdlKeywordsInLanguageAtom::acceptIn (basevisitor* v)
@@ -466,7 +469,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::print (std::ostream& os) const
 
   ++gIndenter;
 
-  printAtomWithVariableOptionsValues (
+  displayAtomWithVariableOptionsValues (
     os, fieldWidth);
 
   --gIndenter;
@@ -549,7 +552,7 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -577,6 +580,8 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
     gLogStream);
 
   --gIndenter;
+
+	fSelected = true;
 }
 
 void oahDisplayMsdlTokensInLanguageAtom::acceptIn (basevisitor* v)
@@ -672,7 +677,7 @@ void oahDisplayMsdlTokensInLanguageAtom::print (std::ostream& os) const
 
   ++gIndenter;
 
-  printAtomWithVariableOptionsValues (
+  displayAtomWithVariableOptionsValues (
     os, fieldWidth);
 
   --gIndenter;
@@ -776,7 +781,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -785,6 +790,8 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
 
   setMsdlCommentsTypeKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void msdlCommentsTypeAtom::acceptIn (basevisitor* v)
@@ -899,7 +906,7 @@ void msdlCommentsTypeAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msdlCommentsTypeAtom::printAtomWithVariableOptionsValues (
+void msdlCommentsTypeAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -910,9 +917,8 @@ void msdlCommentsTypeAtom::printAtomWithVariableOptionsValues (
     msdlCommentsTypeKindAsString (
       fMsdlCommentsTypeKindVariable) <<
     "\"";
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -1018,7 +1024,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1027,6 +1033,8 @@ void msdlUserLanguageAtom::applyAtomWithValue (
 
   setMsdlUserLanguageKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void msdlUserLanguageAtom::acceptIn (basevisitor* v)
@@ -1144,7 +1152,7 @@ void msdlUserLanguageAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msdlUserLanguageAtom::printAtomWithVariableOptionsValues (
+void msdlUserLanguageAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1155,9 +1163,8 @@ void msdlUserLanguageAtom::printAtomWithVariableOptionsValues (
     msdlUserLanguageKindAsString (
       fMsdlUserLanguageVariable) <<
     "\"";
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -1263,7 +1270,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1272,6 +1279,8 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
 
   setMsrQuarterTonesPitchesLanguageKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void msdlPitchesLanguageAtom::acceptIn (basevisitor* v)
@@ -1388,7 +1397,7 @@ void msdlPitchesLanguageAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msdlPitchesLanguageAtom::printAtomWithVariableOptionsValues (
+void msdlPitchesLanguageAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1398,9 +1407,8 @@ void msdlPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -1509,7 +1517,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1542,7 +1550,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -1576,7 +1584,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlKeywordsLanguageKindDefaultValue)),
@@ -1609,7 +1617,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlTokensLanguageKindDefaultValue)),
@@ -1741,7 +1749,7 @@ void msdlInputOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msdlInputOahGroup::printMsdlInputOahValues (int fieldWidth)
+void msdlInputOahGroup::displayMsdlInputOahValues (int fieldWidth)
 {
   gLogStream <<
     "The MSDR options are:" <<

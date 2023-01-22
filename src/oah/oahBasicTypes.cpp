@@ -1476,7 +1476,7 @@ Bool oahAtom::findStringInAtom (
       os);
 }
 
-void oahAtom::printAtomWithVariableOptionsValues (
+void oahAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1893,10 +1893,10 @@ void oahAtomImplicitlySettingAVariable::printAtomWithVariableEssentials (
     "fVariableName" << ": " <<
     fVariableName <<
     std::endl;
-  if (fSetByAnOption) {
+  if (fSelected) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "set by an option" <<
+      "selected" <<
       std::endl;
   }
 }
@@ -1913,10 +1913,10 @@ void oahAtomImplicitlySettingAVariable::printAtomWithVariableEssentialsFull (
     "fVariableName" << ": " <<
     fVariableName <<
     std::endl;
-  if (fSetByAnOption) {
+  if (fSelected) {
     os << std::left <<
       std::setw (fieldWidth) <<
-      "set by an option" <<
+      "selected" <<
       std::endl;
   }
 }
@@ -1927,9 +1927,8 @@ void oahAtomImplicitlySettingAVariable::print (std::ostream& os) const
 
   os <<
     "AtomWithVariable";
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 
@@ -1959,14 +1958,14 @@ void oahAtomImplicitlySettingAVariable::printHelp (std::ostream& os) const
   }
 }
 
-void oahAtomImplicitlySettingAVariable::printAtomWithVariableOptionsValues (
+void oahAtomImplicitlySettingAVariable::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   os <<
     "AtomWithVariable values:" <<
-    "???, fSetByAnOption: " <<
-    fSetByAnOption <<
+    "???, fSelected: " <<
+    fSelected <<
     std::endl;
 }
 
@@ -2077,7 +2076,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 // #endif
 //
 //   oahStringAtom::setStringVariable (value);
-//   fSetByAnOption = true;
+//   fSelected = true;
 // }
 //
 // void oahValueDefaultedAtom::acceptOut (basevisitor* v)
@@ -2163,7 +2162,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //   --gIndenter;
 // }
 //
-// void oahValueDefaultedAtom::printAtomWithVariableOptionsValues (
+// void oahValueDefaultedAtom::displayAtomWithVariableOptionsValues (
 //   std::ostream& os,
 //   int           valueFieldWidth) const
 // {
@@ -2173,9 +2172,9 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //     ": " <<
 //     fStringVariable;
 //
-//   if (fSetByAnOption) { // JMIJMIJMI
+//   if (fSelected) { // JMIJMIJMI
 //     os <<
-//       ", set by an option";
+//       ", selected";
 //   }
 //
 //   os << std::endl;
@@ -2317,8 +2316,8 @@ void oahAtomStoringAValue::printAtomWithVariableEssentials (
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << ": " <<
-    fSetByAnOption <<
+    "fSelected" << ": " <<
+    fSelected <<
     std::endl;
 }
 
@@ -2340,8 +2339,8 @@ void oahAtomStoringAValue::printAtomWithVariableEssentialsFull (
     fVariableName <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << ": " <<
-    fSetByAnOption <<
+    "fSelected" << ": " <<
+    fSelected <<
     std::endl;
 }
 
@@ -2351,9 +2350,8 @@ void oahAtomStoringAValue::print (std::ostream& os) const
 
   os <<
     "AtomWithVariable";
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 
@@ -2384,14 +2382,14 @@ void oahAtomStoringAValue::printHelp (std::ostream& os) const
   }
 }
 
-void oahAtomStoringAValue::printAtomWithVariableOptionsValues (
+void oahAtomStoringAValue::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   os <<
     "AtomWithVariable values:" <<
-    "???, fSetByAnOption: " <<
-    fSetByAnOption <<
+    "???, fSelected: " <<
+    fSelected <<
     std::endl;
 }
 
@@ -2524,7 +2522,7 @@ void oahPureHelpValueLessAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahPureHelpValueLessAtom::printAtomWithVariableOptionsValues (
+void oahPureHelpValueLessAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -3517,7 +3515,7 @@ void oahSubGroup::printSubGroupOptionsValues (
       fetchNamesBetweenParentheses () <<
       ", " <<
       mfSingularOrPlural (
-        fNumberOfUserChoseAtomsInThisSubGroup, "atom chosen", "atoms chosen") <<
+        fNumberOfUserChoseAtomsInThisSubGroup, "atom selected", "atoms selected") <<
     ":" <<
     std::endl;
 
@@ -3537,10 +3535,10 @@ void oahSubGroup::printSubGroupOptionsValues (
           booleanAtom =
             dynamic_cast<oahBooleanAtom*>(&(*atom))
       ) {
-        // print the atom value if the variable has been set by an option by user
-        if (booleanAtom->getSetByAnOption ()) {
+        // print the atom value if the variable has been selected option by user
+        if (booleanAtom->getSelected ()) {
           atom->
-            printAtomWithVariableOptionsValues (
+            displayAtomWithVariableOptionsValues (
               os,
               valueFieldWidth);
         }
@@ -3553,10 +3551,10 @@ void oahSubGroup::printSubGroupOptionsValues (
           atomImplicitlyStoringAValue =
             dynamic_cast<oahAtomImplicitlySettingAVariable*>(&(*atom))
       ) {
-        // print the atom value if the variable has been set by an option by user
-        if (atomImplicitlyStoringAValue->getSetByAnOption ()) {
+        // print the atom value if the variable has been selected option by user
+        if (atomImplicitlyStoringAValue->getSelected ()) {
           atom->
-            printAtomWithVariableOptionsValues (
+            displayAtomWithVariableOptionsValues (
               os,
               valueFieldWidth);
         }
@@ -3569,10 +3567,10 @@ void oahSubGroup::printSubGroupOptionsValues (
           atomStoringAValue =
             dynamic_cast<oahAtomStoringAValue*>(&(*atom))
       ) {
-        // print the atom value if the variable has been set by an option by user
-        if (atomStoringAValue->getSetByAnOption ()) {
+        // print the atom value if the variable has been selected option by user
+        if (atomStoringAValue->getSelected ()) {
           atom->
-            printAtomWithVariableOptionsValues (
+            displayAtomWithVariableOptionsValues (
               os,
               valueFieldWidth);
         }
@@ -3596,7 +3594,7 @@ void oahSubGroup::printSubGroupOptionsValuesAll (
     os <<
       ", " <<
       mfSingularOrPlural (
-        fNumberOfUserChoseAtomsInThisSubGroup, "atom chosen", "atoms chosen");
+        fNumberOfUserChoseAtomsInThisSubGroup, "atom selected", "atoms selected");
   }
   os <<
     ":" <<
@@ -3616,7 +3614,7 @@ void oahSubGroup::printSubGroupOptionsValuesAll (
     for ( ; ; ) {
       // print the atom values
       (*i)->
-        printAtomWithVariableOptionsValues (
+        displayAtomWithVariableOptionsValues (
           os,
           valueFieldWidth);
       if (++i == iEnd) break;
@@ -4469,7 +4467,7 @@ void oahGroup::printGroupOptionsValues (
       fetchNamesBetweenParentheses () <<
       ", " <<
       mfSingularOrPlural (
-        fNumberOfUserChoseAtomsInThisGroup, "atom chosen", "atoms chosen") <<
+        fNumberOfUserChoseAtomsInThisGroup, "atom selected", "atoms selected") <<
     ":" <<
     std::endl;
 
@@ -4526,7 +4524,7 @@ void oahGroup::printGroupOptionsValuesAll (
     os <<
       ", " <<
       mfSingularOrPlural (
-        fNumberOfUserChoseAtomsInThisGroup, "atom chosen", "atoms chosen");
+        fNumberOfUserChoseAtomsInThisGroup, "atom selected", "atoms selected");
   }
   os <<
     ":" <<
@@ -8304,17 +8302,22 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
+//       gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
       optionsPassDescription <<
-      std::endl;
-
-    gLogStream <<
+      std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -8368,7 +8371,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     optionsPassDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -8408,17 +8411,21 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
-      gTab <<
-      optionsAndArgumentsPassDescription <<
+//       gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+			optionsAndArgumentsPassDescription <<
+      std::endl <<
+      separator <<
       std::endl;
 
-    gLogStream <<
-      separator <<
-      std::endl;
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -8474,7 +8481,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     optionsAndArgumentsPassDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -8873,10 +8880,10 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
             atom =
               dynamic_cast<oahAtom*>(&(*elementUsed));
 
-          oahElementValueKind
-            atomValueKind =
-              atom->
-                getElementValueKind ();
+//           oahElementValueKind
+//             atomValueKind =
+//               atom->
+//                 getElementValueKind ();
 
           if (
             // value-fitted atom?
@@ -9037,7 +9044,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
     --gIndenter;
   }
 
-  // print the options and arguments if so chosen
+  // print the options and arguments if so selected
   // ------------------------------------------------------
 
 #ifdef MF_TRACING_IS_ENABLED
@@ -9049,7 +9056,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   }
 #endif
 
-  // print the early options if so chosen
+  // print the early options if so selected
   // ------------------------------------------------------
 
 #ifdef MF_TRACING_IS_ENABLED
@@ -9061,7 +9068,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   }
 #endif
 
-  // print the options values if so chosen
+  // print the options values if so selected
   // ------------------------------------------------------
 
 #ifdef MF_TRACING_IS_ENABLED
