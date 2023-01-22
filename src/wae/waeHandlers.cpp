@@ -274,10 +274,10 @@ void waeHandler::waeTrace (
     globalCurrentPassIDKind =
       getGlobalCurrentPassIDKind ();
 
-  os <<
-    "--> earlyTraceOnlyPass:      " << earlyTraceOnlyPass << std::endl <<
-    "--> globalCurrentPassIDKind: " << globalCurrentPassIDKind << std::endl <<
-    std::endl;
+//   os <<
+//     "--> earlyTraceOnlyPass:      " << earlyTraceOnlyPass << std::endl <<
+//     "--> globalCurrentPassIDKind: " << globalCurrentPassIDKind << std::endl <<
+//     std::endl;
 
   // should we actually produce the trace?
   Bool doTrace;

@@ -661,32 +661,32 @@ This can be done with the \optionNameBoth{display-options-values}{dov} option:
 jacquesmenu@macmini > xml2ly -query display-options-values
 --- Help for atom "display-options-values" in subgroup "Options and help"
     -display-options-values, -dov
-          Write the chosen options values to standard error.
+          Write the selected options values to standard error.
 \end{lstlisting}
 
 Executing this command:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -global-staff-size 30 -display-cpu-usage -display-options-values
   The options values for xml2ly are:
-    Informations group (-help-informations-group, -hinfos-group), 1 atom chosen:
+    Informations group (-help-informations-group, -hinfos-group), 1 atom selected:
     --------------------------
-      Informations (-help-informations, -hinfos), 1 atom chosen:
-        fDisplayCPUusage                         : true, has been set by user
+      Informations (-help-informations, -hinfos), 1 atom selected:
+        fDisplayCPUusage                         : true, has been selected option
 
-    Options and help group (-help-oah-group, -hoah-group), 1 atom chosen:
+    Options and help group (-help-oah-group, -hoah-group), 1 atom selected:
     --------------------------
-      Options and help (-help-oah, -hoah), 1 atom chosen:
-        fDisplayOptionsValues                    : true, has been set by user
+      Options and help (-help-oah, -hoah), 1 atom selected:
+        fDisplayOptionsValues                    : true, has been selected option
 
-    Layout group (-help-layout-group, -hlayout-group), 1 atom chosen:
+    Layout group (-help-layout-group, -hlayout-group), 1 atom selected:
     --------------------------
-      Layout (-help-layout, -hlayout), 1 atom chosen:
-        fGlobalStaffSize                         : 30, has been set by user
+      Layout (-help-layout, -hlayout), 1 atom selected:
+        fGlobalStaffSize                         : 30, has been selected option
 
 Input file name or '-' for standard input expected
 \end{lstlisting}
 
-A exhaustive display of all the options values, chosen by the user or not, can be obtained with \optionNameBoth{display-options-values-all}{dova}:
+A exhaustive display of all the options values, selected by the user or not, can be obtained with \optionNameBoth{display-options-values-all}{dova}:
 displays the whole set of options with their values, and whether they have been set by the user:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -global-staff-size 30 -display-cpu-usage -display-options-values-all
@@ -707,7 +707,7 @@ jacquesmenu@macmini > xml2ly -global-staff-size 30 -display-cpu-usage -display-o
     Informations group (-help-informations-group, -hinfos-group):
     --------------------------
       Informations (-help-informations, -hinfos):
-        fDisplayCPUusage                         : true, has been set by user
+        fDisplayCPUusage                         : true, has been selected option
 
     Files group (-help-files-group, -hfiles-group):
     --------------------------
@@ -718,10 +718,10 @@ jacquesmenu@macmini > xml2ly -global-staff-size 30 -display-cpu-usage -display-o
     Options and help group (-help-oah-group, -hoah-group):
     --------------------------
       Options and help (-help-oah, -hoah):
-        insider                                  : fOptionHasBeenSelected: false
+        insider                                  : fSelected: false
         fOahVerboseMode                          : false
         fReverseNamesDisplayOrder                : false
-        fDisplayOptionsValues                        : true, has been set by user
+        fDisplayOptionsValues                        : true, has been selected option
 
 		... ... ...
 
@@ -775,7 +775,7 @@ jacquesmenu@macmini > xml2ly -global-staff-size 30 -display-cpu-usage -display-o
     Layout group (-help-layout-group, -hlayout-group):
     --------------------------
       Layout (-help-layout, -hlayout):
-        fGlobalStaffSize                         : 30, has been set by user
+        fGlobalStaffSize                         : 30, has been selected option
         fKeepStaffSize                           : false
 
 		... ... ...
@@ -950,26 +950,26 @@ Including this file and displaying the options values, we get:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/basic > xml2ly -include QuotingInIncludedOptionsFiles.txt HelloWorld.xml
   The options values for xml2ly are:
-    Files group (-help-files-group, -hfiles-group), 1 atom chosen:
+    Files group (-help-files-group, -hfiles-group), 1 atom selected:
     --------------------------
-      Files (-help-files, -hfiles), 1 atom chosen:
+      Files (-help-files, -hfiles), 1 atom selected:
         fAutoOutputFileName                      : true
 
-    Options and help group (-help-oah-group, -hoah-group), 1 atom chosen:
+    Options and help group (-help-oah-group, -hoah-group), 1 atom selected:
     --------------------------
-      Options and help (-help-oah, -hoah), 1 atom chosen:
+      Options and help (-help-oah, -hoah), 1 atom selected:
         fDisplayOptionsValues                    : true
 
-    Header group (-help-header-group, -hheader-group), 3 atoms chosen:
+    Header group (-help-header-group, -hheader-group), 3 atoms selected:
     --------------------------
-      Header (-help-header, -hheader), 3 atoms chosen:
+      Header (-help-header, -hheader), 3 atoms selected:
         fTitle                                   : This year's title
         fSubTitle                                : Last year's quoted multi-word subtitle
         fSubSubTitle                             : Double quoted multi-word subsubtitle
 
-    Output group (-help-output-group, -houtput-group), 1 atom chosen:
+    Output group (-help-output-group, -houtput-group), 1 atom selected:
     --------------------------
-      Output (-help-output, -houtput), 1 atom chosen:
+      Output (-help-output, -houtput), 1 atom selected:
         fXml2lyInfos                             : true
 \end{lstlisting}
 

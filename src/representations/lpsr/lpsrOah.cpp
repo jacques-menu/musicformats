@@ -125,7 +125,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -134,6 +134,8 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 
   setMsrQuarterTonesPitchesLanguageKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
@@ -250,7 +252,7 @@ void lpsrPitchesLanguageAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
+void lpsrPitchesLanguageAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -260,9 +262,8 @@ void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -365,7 +366,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrChordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableLpsrChordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -374,6 +375,8 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
 
   setLpsrChordsLanguageKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
@@ -487,7 +490,7 @@ void lpsrChordsLanguageAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
+void lpsrChordsLanguageAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -497,9 +500,8 @@ void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
     ": " <<
     lpsrChordsLanguageKindAsString (
       fLpsrChordsLanguageKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -663,8 +665,9 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 
   else {
     fStringToStringMapVariable [partName] = partInstrumentName;
-    fSetByAnOption = true;
   }
+
+	fSelected = true;
 }
 
 void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
@@ -820,7 +823,7 @@ void lpsrStaffInstrumentNameAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
+void lpsrStaffInstrumentNameAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -869,7 +872,7 @@ void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", set by an option";
+      ", selected";
 
     --gIndenter;
   }
@@ -934,7 +937,6 @@ void lpsrTransposeAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
-
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
@@ -964,6 +966,8 @@ void lpsrTransposeAtom::applyAtomWithValue (
   // set the transpose atom variable value
   setSemiTonesPitchAndOctaveVariable (
     semiTonesPitchAndOctave);
+
+	fSelected = true;
 }
 
 void lpsrTransposeAtom::acceptIn (basevisitor* v)
@@ -1067,7 +1071,7 @@ void lpsrTransposeAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
+void lpsrTransposeAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1079,9 +1083,11 @@ void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
     os <<
-      fSemiTonesPitchAndOctaveVariable <<
-      ", fSetByAnOption: " <<
-      fSetByAnOption;
+      fSemiTonesPitchAndOctaveVariable;
+    if (fSelected) {
+      os << ", selected";
+    }
+    os << std::endl;
     --gIndenter;
   }
   else {
@@ -1214,7 +1220,7 @@ R"()",
 R"(Write the contents of the LPSR data to standard error.)",
         "fDisplayLpsr",
         fDisplayLpsr);
-        
+
   subGroup->
     appendAtomToSubGroup (
       DisplayLpsrBooleanAtom);
@@ -1278,7 +1284,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msrLengthUnitKindAsString (
             fLengthUnitKindDefaultValue)),
@@ -1301,7 +1307,7 @@ By default, LilyPond uses 297 mm (A4 format).)",
       "HEIGHT",
       "fPaperHeight",
       fPaperHeight);
-        
+
   subGroup->
     appendAtomToSubGroup (
       fPaperHeightAtom);
@@ -1321,7 +1327,7 @@ By default, LilyPond uses 210 mm (A4 format).)",
       "WIDTH",
       "fPaperWidth",
       fPaperWidth);
-        
+
   subGroup->
     appendAtomToSubGroup (
       fPaperWidthAtom);
@@ -1341,7 +1347,7 @@ By default, this is left to LilyPond'.)",
       "MARGIN",
       "fPaperLeftMargin",
       fPaperLeftMargin);
-        
+
   subGroup->
     appendAtomToSubGroup (
       fPaperLeftMarginAtom);
@@ -1361,7 +1367,7 @@ By default, this is left to LilyPond'.)",
       "MARGIN",
       "fPaperRightMargin",
       fPaperRightMargin);
-        
+
   subGroup->
     appendAtomToSubGroup (
       fPaperRightMarginAtom);
@@ -1381,7 +1387,7 @@ By default, this is left to LilyPond'.)",
       "MARGIN",
       "fPaperTopMargin",
       fPaperTopMargin);
-        
+
   subGroup->
     appendAtomToSubGroup (
       fPaperTopMarginAtom);
@@ -1401,7 +1407,7 @@ By default, this is left to LilyPond'.)",
       "MARGIN",
       "fPaperBottomMargin",
       fPaperBottomMargin);
-        
+
   subGroup->
     appendAtomToSubGroup (
       fPaperBottomMarginAtom);
@@ -1409,7 +1415,7 @@ By default, this is left to LilyPond'.)",
 /* JMI superflous
   // a4
 
- 
+
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
@@ -1792,7 +1798,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1824,7 +1830,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -1860,7 +1866,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingLpsrChordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableLpsrChordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           lpsrChordsLanguageKindAsString (
             lpsrChordsLanguageKindDefaultValue)),
@@ -2061,7 +2067,7 @@ void lpsrOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
+void lpsrOahGroup::displayLpsrOahValues (int fieldWidth)
 {
   gLogStream <<
     "The LPSR options are:" <<

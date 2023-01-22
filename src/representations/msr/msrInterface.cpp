@@ -110,6 +110,9 @@ void displayMsrScore (
   // start the clock
   clock_t startClock =  clock ();
 
+  // DON'T set the global current passID,
+  // this optional pass is considered part of the preceding 'true' pass
+
   std::string separator =
     "%--------------------------------------------------------------";
 
@@ -118,9 +121,7 @@ void displayMsrScore (
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () <<
-    ": "<<
-    passDescription <<
+    gWaeHandler->passOptional () << ": "<< passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl <<
@@ -130,7 +131,7 @@ void displayMsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -170,6 +171,9 @@ void displayMsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
+  // DON'T set the global current passID,
+  // this optional pass is considered part of the preceding 'true' pass
+
   std::string separator =
     "%--------------------------------------------------------------";
 
@@ -178,9 +182,7 @@ void displayMsrScoreFull (
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () <<
-    ": "<<
-    passDescription <<
+    gWaeHandler->passOptional () << ": "<< passDescription <<
     ", " <<
     gWaeHandler->fullVersion () <<
     std::endl <<
@@ -193,7 +195,7 @@ void displayMsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -234,18 +236,22 @@ void displayMsrScoreSummary (
   // start the clock
   clock_t startClock = clock ();
 
+  // DON'T set the global current passID,
+  // this optional pass is considered part of the preceding 'true' pass
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passOptional () <<
-      ": "<<
+    gWaeHandler->passOptional () << ": "<< passDescription <<
       passDescription <<
       ", " <<
       gWaeHandler->summary () <<
@@ -267,7 +273,7 @@ void displayMsrScoreSummary (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -291,19 +297,22 @@ void displayMsrScoreNames (
   // start the clock
   clock_t startClock = clock ();
 
+  // DON'T set the global current passID,
+  // this optional pass is considered part of the preceding 'true' pass
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      gWaeHandler->passOptional () <<
-      ": "<<
-      passDescription <<
+      gWaeHandler->passOptional () << ": "<< passDescription <<
       ", " <<
       gWaeHandler->names () <<
       std::endl <<
@@ -324,7 +333,7 @@ void displayMsrScoreNames (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,
@@ -347,6 +356,9 @@ void displayMsrScoreSlices (
   // start the clock
   clock_t startClock = clock ();
 
+  // DON'T set the global current passID,
+  // this optional pass is considered part of the preceding 'true' pass
+
   std::string separator =
     "%--------------------------------------------------------------";
 
@@ -355,9 +367,7 @@ void displayMsrScoreSlices (
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () <<
-    ": "<<
-    passDescription <<
+    gWaeHandler->passOptional () << ": "<< passDescription <<
     ", " <<
     gWaeHandler->slices () <<
     std::endl <<
@@ -370,7 +380,7 @@ void displayMsrScoreSlices (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     passDescription,
     mfTimingItemKind::kOptional,
     startClock,

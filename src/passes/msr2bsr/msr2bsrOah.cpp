@@ -242,7 +242,7 @@ void msr2bsrOahGroup::browseData (basevisitor* v)
 #endif
 }
 
-void msr2bsrOahGroup::printMsr2bsrOahValues (int fieldWidth)
+void msr2bsrOahGroup::displayMsr2bsrOahValues (int fieldWidth)
 {
   gLogStream <<
     "The Msr2bsr options are:" <<

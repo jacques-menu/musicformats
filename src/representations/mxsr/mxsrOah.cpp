@@ -92,7 +92,7 @@ R"()",
 R"(Encoding)",
         "fTraceEncoding",
         fTraceEncoding);
-        
+
   subGroup->
     appendAtomToSubGroup (
       traceEncodingAtom);
@@ -109,7 +109,7 @@ R"(Encoding)",
 R"(Divisions)",
         "fTraceDivisions",
         fTraceDivisions);
-        
+
   subGroup->
     appendAtomToSubGroup (
       traceDivisionsAtom);
@@ -126,7 +126,7 @@ R"(Divisions)",
 R"(Backup)",
         "fTraceBackup",
         fTraceBackup);
-        
+
   subGroup->
     appendAtomToSubGroup (
       traceBackupAtom);
@@ -140,7 +140,7 @@ R"(Backup)",
 R"(Forward)",
         "fTraceForward",
         fTraceForward);
-        
+
   subGroup->
     appendAtomToSubGroup (
       traceForwardAtom);
@@ -252,7 +252,7 @@ void mxsrOahGroup::browseData (basevisitor* v)
 #endif
 }
 
-void mxsrOahGroup::printMxsrOahValues (int fieldWidth)
+void mxsrOahGroup::displayMxsrOahValues (int fieldWidth)
 {
   gLogStream <<
     "The MusicXML options are:" <<
@@ -307,7 +307,7 @@ std::ostream& operator << (std::ostream& os, const S_mxsrOahGroup& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

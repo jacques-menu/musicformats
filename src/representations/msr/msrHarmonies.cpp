@@ -33,6 +33,8 @@
 #include "msrTablatures.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
+
 #include "msrOah.h"
 #include "lpsrOah.h"
 
@@ -70,11 +72,17 @@ msrHarmonyInterval::msrHarmonyInterval (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "==> Creating harmony item '" <<
       harmonyIntervalAsString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 }
@@ -3476,7 +3484,7 @@ void initializeHarmonyKinds ()
   }
 }
 
-std::string existingHarmonyKinds (size_t namesListMaxLength)
+std::string availableHarmonyKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -3523,7 +3531,7 @@ std::string existingHarmonyKinds (size_t namesListMaxLength)
   return s.str ();
 }
 
-std::string existingHarmonyKindsNames (size_t namesListMaxLength)
+std::string availableHarmonyKindsNames (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -3600,11 +3608,17 @@ msrHarmonyDegree::msrHarmonyDegree (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Creating harmony degree '" <<
       asString () <<
       "', line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 }
@@ -3834,11 +3848,17 @@ msrHarmonyContents::msrHarmonyContents (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "==> Creating harmonyContents '" <<
       harmonyContentsAsString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4300,10 +4320,16 @@ msrHarmony::msrHarmony (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Creating harmony " <<
       asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 }
@@ -4316,11 +4342,17 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Creating a newborn clone of harmony " <<
       asShortString () <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4363,11 +4395,17 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Creating a deep clone of harmony " <<
       asShortString () <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4456,11 +4494,17 @@ void msrHarmony::setHarmonyUpLinkToNote (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "==> Setting the uplink to note of harmony " <<
       asString () <<
       " to note " << note->asString () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4587,7 +4631,9 @@ void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
   // extend currentHarmony's sounding whole notes
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Extending the sounding whole notes of harmony " <<
       asString () <<
       " from " <<
@@ -4600,6 +4646,10 @@ void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
       fHarmoniesUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -5575,11 +5625,17 @@ msrHarmonyStructure::msrHarmonyStructure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "==> Creating harmony intervals '" <<
       harmonyStructureAsString () <<
       "'" <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 }
@@ -6567,12 +6623,18 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "==> invertHarmonyStructure (), inversion = " <<
       inversion <<
       ", original harmonyStructureIntervalsSize = " <<
       harmonyStructureIntervalsSize <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -6586,7 +6648,9 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-        gLogStream <<
+        std::stringstream s;
+
+        s <<
           "--> adding first item to result:" <<
           std::endl;
         ++gIndenter;
@@ -6594,6 +6658,10 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           harmonyIntervalClone <<
           std::endl;
         --gIndenter;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          s.str ());
       }
 #endif
 
@@ -6603,7 +6671,9 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-        gLogStream <<
+        std::stringstream s;
+
+        s <<
           "==> result harmony structure after adding first item :" <<
           std::endl;
 
@@ -6612,6 +6682,10 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           result <<
           std::endl;
         --gIndenter;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          s.str ());
       }
 #endif
     } // for
@@ -6628,7 +6702,9 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-        gLogStream <<
+        std::stringstream s;
+
+        s <<
           "--> adding last item to resultlast item :" <<
           std::endl;
         ++gIndenter;
@@ -6636,6 +6712,10 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           harmonyIntervalClone <<
           std::endl;
         --gIndenter;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          s.str ());
       }
 #endif
 
@@ -6645,7 +6725,9 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-        gLogStream <<
+        std::stringstream s;
+
+        s <<
           "==> result harmony structure after  after adding last item:" <<
           std::endl;
 
@@ -6654,6 +6736,10 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           result <<
           std::endl;
         --gIndenter;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          s.str ());
       }
 #endif
     } // for

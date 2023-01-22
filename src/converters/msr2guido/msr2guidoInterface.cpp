@@ -50,12 +50,12 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
   S_msrScore          theMsrScore,
-  std::string         passNumber1,
-  std::string         passDescription1,
-  std::string         passNumber2,
-  std::string         passDescription2,
-  std::string         passNumber3,
-  std::string         passDescription3,
+  mfPassIDKind        passID_A,
+  std::string         passDescription_A,
+  mfPassIDKind        passID_B,
+  std::string         passDescription_B,
+  mfPassIDKind        passID_C,
+  std::string         passDescription_C,
   std::ostream&       out,
   std::ostream&       err,
   const S_oahHandler& handler)
@@ -80,8 +80,8 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
         theMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        passNumber1,
-        passDescription1);
+        passID_A,
+        passDescription_A);
   }
   catch (msr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -102,8 +102,8 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        passNumber2,
-        passDescription2,
+        passID_B,
+        passDescription_B,
         mfTimingItemKind::kMandatory);
   }
   catch (msr2mxsrException& e) {
@@ -152,8 +152,8 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
       secondMxsr,
       outputFileName,
       err,
-      passNumber3,
-      passDescription3);
+      passID_C,
+      passDescription_C);
   }
   catch (mxsr2guidoException& e) {
     mfDisplayException (e, gOutputStream);

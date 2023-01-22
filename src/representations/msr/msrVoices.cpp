@@ -27,6 +27,7 @@
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -1570,13 +1571,19 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Creating harmonies voice for regular voice \"" <<
       getVoiceName () <<
       "\" with voice number " <<
       regularVoiceHarmoniesVoiceNumber <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -2248,11 +2255,17 @@ void msrVoice::appendHarmonyToVoice (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Appending harmony " << harmony->asString () <<
       " to voice \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -2302,11 +2315,17 @@ void msrVoice::appendHarmonyToHarmoniesVoice (
     harmony->getInputLineNumber ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Appending harmony " << harmony->asString () <<
       " to harmonies voice \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -2331,11 +2350,17 @@ void msrVoice::appendFiguredBassToFiguredBassVoice (
     figuredBass->getInputLineNumber ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Appending figured bass " << figuredBass->asString () <<
       " to figured bass voice \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -2359,11 +2384,17 @@ void msrVoice::appendHarmonyToVoiceClone (const S_msrHarmony& harmony)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Appending harmony " << harmony->asString () <<
       " to voice clone \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 

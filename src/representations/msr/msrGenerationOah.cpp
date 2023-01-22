@@ -87,7 +87,7 @@ The default is 'DEFAULT_VALUE'.)",
             std::regex ("NUMBER"),
             std::to_string (gGlobalGenerationAPIKindsMap.size ())),
           std::regex ("GENERATION_API_KINDS"),
-          existingGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+          availableGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         std::regex ("DEFAULT_VALUE"),
         msrGenerationAPIKindAsString (
           msrGenerationAPIKindDefaultValue)),
@@ -186,7 +186,7 @@ void msrGeneratorsOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msrGeneratorsOahGroup::printMsrGeneratorsOahValues (
+void msrGeneratorsOahGroup::displayMsrGeneratorsOahValues (
   int fieldWidth)
 {
   gLogStream <<

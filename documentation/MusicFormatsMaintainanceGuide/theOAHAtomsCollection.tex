@@ -66,14 +66,12 @@ class EXP oahMacroAtom : public oahAtom
 
     void                  applyValueLessAtom (std::ostream& os) override;
 
-
-
   private:
 
     // private fields
     // ------------------------------------------------------
 
-     std::list<S_oahAtom>      fMacroValueLessAtomsList;
+     std::list<S_oahAtom> fMacroValueLessAtomsList;
 };
 \end{lstlisting}
 
@@ -128,6 +126,8 @@ void oahMacroAtom::applyValueLessAtom (std::ostream& os)
     }
   } // for
 }
+
+	fSelected = true;
 \end{lstlisting}
 
 
@@ -238,8 +238,6 @@ class EXP msrOctaveEntryVariable : public smartable
 
     std::string           fVariableName;
     msrOctaveEntryKind    fOctaveEntryKind;
-
-    Bool                  fSetByAnOption;
 };
 
 \end{lstlisting}

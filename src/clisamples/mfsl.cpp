@@ -40,7 +40,7 @@
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
-#ifndef WIN32
+#ifndef WIN64
 
 static void _sigaction (int signal, siginfo_t *si, void *arg)
 {

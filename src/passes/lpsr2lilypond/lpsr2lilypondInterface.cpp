@@ -39,7 +39,7 @@ void translateLpsrToLilypond (
   const S_lpsrScore&    theLpsrScore,
   const S_msrOahGroup&  msrOpts,
   const S_lpsrOahGroup& lpsrOpts,
-  const std::string&    passNumber,
+  mfPassIDKind          passIDKind,
   const std::string&    passDescription,
   std::ostream&         lilypondCodeStream)
 {
@@ -54,20 +54,29 @@ void translateLpsrToLilypond (
   // start the clock
   clock_t startClock = clock ();
 
-  std::string separator =
-    "%--------------------------------------------------------------";
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    gLogStream <<
+    std::string separator =
+      "%--------------------------------------------------------------";
+
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -86,7 +95,7 @@ void translateLpsrToLilypond (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -108,7 +117,7 @@ EXP void translateLpsrToLilypondWithHandler (
   const S_lpsrScore&    theLpsrScore,
   const S_msrOahGroup&  msrOpts,
   const S_lpsrOahGroup& lpsrOpts,
-  const std::string&    passNumber,
+  mfPassIDKind          passIDKind,
   const std::string&    passDescription,
   S_oahHandler          handler,
   std::ostream&         out,
@@ -151,7 +160,7 @@ EXP void translateLpsrToLilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        passNumber,
+        passIDKind,
         passDescription,
         lilypondStandardOutputStream);
     }
@@ -220,7 +229,7 @@ EXP void translateLpsrToLilypondWithHandler (
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        passNumber,
+        passIDKind,
         passDescription,
         lilypondFileOutputStream);
     }

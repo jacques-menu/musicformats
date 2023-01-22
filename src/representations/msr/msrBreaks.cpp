@@ -33,17 +33,17 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-std::string msrUserChosenLineBreakKindAsString (
-  msrUserChosenLineBreakKind userChosenLineBreakKind)
+std::string msrUserSelectedLineBreakKindAsString (
+  msrUserSelectedLineBreakKind userSelectedLineBreakKind)
 {
   std::string result;
 
-  switch (userChosenLineBreakKind) {
-    case msrUserChosenLineBreakKind::kUserChosenLineBreakYes:
-      result = "kUserChosenLineBreakYes";
+  switch (userSelectedLineBreakKind) {
+    case msrUserSelectedLineBreakKind::kUserSelectedLineBreakYes:
+      result = "kUserSelectedLineBreakYes";
       break;
-    case msrUserChosenLineBreakKind::kUserChosenLineBreakNo:
-      result = "kUserChosenLineBreakNo";
+    case msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo:
+      result = "kUserSelectedLineBreakNo";
       break;
   } // switch
 
@@ -55,15 +55,15 @@ S_msrLineBreak msrLineBreak::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const std::string&  nextBarNumber,
-  msrUserChosenLineBreakKind
-                      userChosenLineBreakKind)
+  msrUserSelectedLineBreakKind
+                      userSelectedLineBreakKind)
 {
   msrLineBreak* o =
     new msrLineBreak (
       inputLineNumber,
       upLinkToMeasure,
       nextBarNumber,
-      userChosenLineBreakKind);
+      userSelectedLineBreakKind);
   assert (o != nullptr);
   return o;
 }
@@ -71,37 +71,37 @@ S_msrLineBreak msrLineBreak::create (
 S_msrLineBreak msrLineBreak::create (
   int                inputLineNumber,
   const std::string& nextBarNumber,
-  msrUserChosenLineBreakKind
-                     userChosenLineBreakKind)
+  msrUserSelectedLineBreakKind
+                     userSelectedLineBreakKind)
 {
   return
     msrLineBreak::create (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
       nextBarNumber,
-      userChosenLineBreakKind);
+      userSelectedLineBreakKind);
 }
 
 msrLineBreak::msrLineBreak (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const std::string&  nextBarNumber,
-  msrUserChosenLineBreakKind
-                      userChosenLineBreakKind)
+  msrUserSelectedLineBreakKind
+                      userSelectedLineBreakKind)
     : msrMeasureElement (
         inputLineNumber)
 {
   fNextBarNumber = nextBarNumber;
 
-  fUserChosenLineBreakKind = userChosenLineBreakKind;
+  fUserSelectedLineBreakKind = userSelectedLineBreakKind;
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
     gLogStream <<
       "Constructing a break before measure " << fNextBarNumber <<
-      ", fUserChosenLineBreakKind: " <<
-      msrUserChosenLineBreakKindAsString (
-        fUserChosenLineBreakKind) <<
+      ", fUserSelectedLineBreakKind: " <<
+      msrUserSelectedLineBreakKindAsString (
+        fUserSelectedLineBreakKind) <<
       ", line " << inputLineNumber <<
       std::endl;
   }
@@ -195,9 +195,9 @@ std::string msrLineBreak::asString () const
   s <<
     "LineBreak" <<
     ", nextBarNumber = \"" << fNextBarNumber << "\"" <<
-    ", fUserChosenLineBreakKind: " <<
-    msrUserChosenLineBreakKindAsString (
-      fUserChosenLineBreakKind) <<
+    ", fUserSelectedLineBreakKind: " <<
+    msrUserSelectedLineBreakKindAsString (
+      fUserSelectedLineBreakKind) <<
     ", line " << fInputLineNumber;
 
   return s.str ();
@@ -221,17 +221,17 @@ std::ostream& operator << (std::ostream& os, const S_msrLineBreak& elt)
 }
 
 //______________________________________________________________________________
-std::string msrUserChosenPageBreakKindAsString (
-  msrUserChosenPageBreakKind userChosenPageBreakKind)
+std::string msrUserSelectedPageBreakKindAsString (
+  msrUserSelectedPageBreakKind userSelectedPageBreakKind)
 {
   std::string result;
 
-  switch (userChosenPageBreakKind) {
-    case msrUserChosenPageBreakKind::kUserChosenPageBreakYes:
-      result = "kUserChosenPageBreakYes";
+  switch (userSelectedPageBreakKind) {
+    case msrUserSelectedPageBreakKind::kUserSelectedPageBreakYes:
+      result = "kUserSelectedPageBreakYes";
       break;
-    case msrUserChosenPageBreakKind::kUserChosenPageBreakNo:
-      result = "kUserChosenPageBreakNo";
+    case msrUserSelectedPageBreakKind::kUserSelectedPageBreakNo:
+      result = "kUserSelectedPageBreakNo";
       break;
   } // switch
 
@@ -242,35 +242,35 @@ std::string msrUserChosenPageBreakKindAsString (
 S_msrPageBreak msrPageBreak::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrUserChosenPageBreakKind
-                      userChosenPageBreakKind)
+  msrUserSelectedPageBreakKind
+                      userSelectedPageBreakKind)
 {
   msrPageBreak* o =
     new msrPageBreak (
       inputLineNumber,
       upLinkToMeasure,
-      userChosenPageBreakKind);
+      userSelectedPageBreakKind);
   assert (o != nullptr);
   return o;
 }
 
 S_msrPageBreak msrPageBreak::create (
   int                 inputLineNumber,
-  msrUserChosenPageBreakKind
-                      userChosenPageBreakKind)
+  msrUserSelectedPageBreakKind
+                      userSelectedPageBreakKind)
 {
   return
     msrPageBreak::create (
       inputLineNumber,
       gGlobalNullMeasureSmartPointer, // set later in setMeasureElementUpLinkToMeasure()
-      userChosenPageBreakKind);
+      userSelectedPageBreakKind);
 }
 
 msrPageBreak::msrPageBreak (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrUserChosenPageBreakKind
-                      userChosenPageBreakKind)
+  msrUserSelectedPageBreakKind
+                      userSelectedPageBreakKind)
     : msrMeasureElement (
         inputLineNumber)
 {
@@ -278,15 +278,15 @@ msrPageBreak::msrPageBreak (
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
     gLogStream <<
       "Constructing a page break" <<
-      ", fUserChosenPageBreakKind: " <<
-      msrUserChosenPageBreakKindAsString (
-        fUserChosenPageBreakKind) <<
+      ", fUserSelectedPageBreakKind: " <<
+      msrUserSelectedPageBreakKindAsString (
+        fUserSelectedPageBreakKind) <<
       ", line " << inputLineNumber <<
       std::endl;
   }
 #endif
 
-  fUserChosenPageBreakKind = userChosenPageBreakKind;
+  fUserSelectedPageBreakKind = userSelectedPageBreakKind;
 }
 
 msrPageBreak::~msrPageBreak ()
@@ -375,9 +375,9 @@ std::string msrPageBreak::asString () const
 
   s <<
     "PageBreak" <<
-    ", fUserChosenPageBreakKind: " <<
-    msrUserChosenPageBreakKindAsString (
-      fUserChosenPageBreakKind) <<
+    ", fUserSelectedPageBreakKind: " <<
+    msrUserSelectedPageBreakKindAsString (
+      fUserSelectedPageBreakKind) <<
     ", line " << fInputLineNumber;
 
   return s.str ();

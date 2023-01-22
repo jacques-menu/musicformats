@@ -45,6 +45,7 @@
 #include "msr2msrTranslator.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 #include "msr2msrOah.h"
@@ -1152,10 +1153,16 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-            gLogStream <<
+						std::stringstream s;
+
+						s <<
               "Creating a ChordNames context for \"" << voiceName <<
               "\" in part " << partCombinedName <<
               std::endl;
+
+						gWaeHandler->waeTrace (
+							__FILE__, __LINE__,
+							s.str ());
           }
 #endif
 
@@ -1182,10 +1189,16 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
 
 #ifdef MF_TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-            gLogStream <<
+						std::stringstream s;
+
+						s <<
               "Creating a FiguredBass context for \"" << voiceName <<
               "\" in part " << partCombinedName <<
               std::endl;
+
+						gWaeHandler->waeTrace (
+							__FILE__, __LINE__,
+							s.str ());
           }
 #endif
 
@@ -1916,7 +1929,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
           msrPageBreak::create (
             inputLineNumber,
             fCurrentMeasureClone,
-            msrUserChosenPageBreakKind::kUserChosenPageBreakYes);
+            msrUserSelectedPageBreakKind::kUserSelectedPageBreakYes);
 
       fCurrentMeasureClone->
         appendPageBreakToMeasure (

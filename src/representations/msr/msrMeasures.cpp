@@ -34,6 +34,7 @@
 #include "msrVoiceStaffChanges.h"
 
 #include "oahOah.h"
+#include "oahEarlyOptions.h"
 
 #include "msrOah.h"
 
@@ -887,7 +888,9 @@ void msrMeasure::setMeasurePuristNumber (
 // {
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       gLogStream <<
+//       std::stringstream s;
+//
+//       s <<
 //         "Incrementing the measure voice position " <<
 //         this->asShortString () <<
 //         " by " <<
@@ -896,7 +899,11 @@ void msrMeasure::setMeasurePuristNumber (
 //         voice->getVoiceName () <<
 //         "\", line " << inputLineNumber <<
 //         std::endl;
-//     }
+//
+// 			 gWaeHandler->waeTrace (
+// 		  	 __FILE__, __LINE__,
+// 			   s.str ());
+//      }
 // #endif
 //
 //   fMeasureVoicePosition += wholeNotesDelta;
@@ -2628,7 +2635,9 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Appending harmony " << harmony->asString () <<
       " to measure " <<
       this->asShortString () <<
@@ -2642,6 +2651,10 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -2666,7 +2679,9 @@ void msrMeasure::appendHarmonyToMeasureClone (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Appending harmony " << harmony->asString () <<
       " to measure clone " <<
       this->asShortString () <<
@@ -2680,6 +2695,10 @@ void msrMeasure::appendHarmonyToMeasureClone (
       fMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4209,13 +4228,19 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "--> handleFirstHarmonyInHarmoniesMeasure() 1" <<
       ", currentHarmonyMeasurePosition: " <<
       currentHarmonyMeasurePosition <<
       ", measurePositionToPadUpTo: " <<
       measurePositionToPadUpTo <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4233,7 +4258,9 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
     // this will result in a 'no chord' (N.C.) in LilyPond, for example
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+      std::stringstream s;
+
+      s <<
         "Inserting first padding note " <<
         skipNote->asString () <<
         " before currentHarmony " <<
@@ -4242,6 +4269,10 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        s.str ());
     }
 #endif
 
@@ -4310,7 +4341,9 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "---> handleSubsequentHarmonyInHarmoniesMeasure() 1" <<
       ", previousHarmony: ";
 
@@ -4334,6 +4367,10 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
       ", measurePositionsDelta: " <<
       measurePositionsDelta <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4354,7 +4391,9 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 //     // insert skipNote before currentHarmony in the measure's elements list
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       gLogStream <<
+//       std::stringstream s;
+//
+//       s <<
 //         "Inserting first padding note " <<
 //         skipNote->asString () <<
 //         " before currentHarmony " <<
@@ -4363,6 +4402,10 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 //         voice->getVoiceName () <<
 //         "\", line " << inputLineNumber <<
 //         std::endl;
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         s.str ());
 //     }
 // #endif
 //
@@ -4392,12 +4435,18 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+      std::stringstream s;
+
+      s <<
         "Setting the sounding whole notes duration of harmony " <<
         previousHarmony->asString () <<
         " to " <<
         newPreviousHarmonyWholeNotes <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        s.str ());
     }
 #endif
 
@@ -4449,7 +4498,9 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "--> postHandleCurrentHarmonyInHarmoniesMeasure():" <<
       std::endl;
 
@@ -4500,6 +4551,10 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
       std::endl;
 
     --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4528,7 +4583,9 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
       // take wholeNotesDelta into account in measure whole notes duration
   #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-        gLogStream <<
+        std::stringstream s;
+
+        s <<
           "Incrementing the sounding whole notes of measure " <<
           this->asShortString () <<
           " by " <<
@@ -4537,6 +4594,10 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
           voice->getVoiceName () <<
           "\", line " << inputLineNumber <<
           std::endl;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          s.str ());
       }
   #endif
 
@@ -4570,7 +4631,9 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+      std::stringstream s;
+
+      s <<
         "Reducing the sounding whole notes of harmony FII " <<
         currentHarmony->asString () <<
         " from " <<
@@ -4581,6 +4644,10 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        s.str ());
     }
 #endif
 
@@ -4612,7 +4679,9 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
     // i.e. there are not notes after the one that bears it
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+      std::stringstream s;
+
+      s <<
         "Harmony " <<
         currentHarmony->asString () <<
         " reaches the end of measure " <<
@@ -4622,6 +4691,10 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        s.str ());
     }
 #endif
   }
@@ -4642,7 +4715,9 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Finalizing harmonies in harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -4652,6 +4727,10 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4670,7 +4749,9 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
     // taking their offset into account
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+      std::stringstream s;
+
+      s <<
         "Sorting the elements in harmonies measure " <<
         this->asShortString () <<
         " in segment '" <<
@@ -4680,6 +4761,10 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
         "\" (" << context << ")" <<
         ", line " << inputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        s.str ());
     }
 #endif
 
@@ -4784,7 +4869,9 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
   // handle the currentHarmony
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Finalizing harmony " <<
       currentHarmony->asString () <<
       " while finalizing harmonies measure " <<
@@ -4796,6 +4883,10 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4820,7 +4911,9 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
         getMeasureElementMeasurePosition ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "--> finalizeHarmonyInHarmoniesMeasure() 2" <<
       ", previousHarmony: ";
 
@@ -4836,6 +4929,10 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
       ", currentUpLinkToHarmonyToNoteMeasurePosition: " <<
       currentUpLinkToHarmonyToNoteMeasurePosition <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4887,11 +4984,17 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "handleFirstFiguredBassInFiguredBassMeasure() 5" <<
       ", previousFiguredBass is null, measurePositionToPadUpTo: " <<
       measurePositionToPadUpTo <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -4909,7 +5012,9 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
     // this will result in a 'no chord' (N.C.) in LilyPond, for example
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+      std::stringstream s;
+
+      s <<
         "Inserting first padding note " <<
         skipNote->asString () <<
         " before currentFiguredBass " <<
@@ -4918,6 +5023,10 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        s.str ());
     }
 #endif
 
@@ -4974,7 +5083,9 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "handleSubsequentFiguredBassInFiguredBassMeasure() 7" <<
       ", previousFiguredBass: ";
 
@@ -4998,6 +5109,10 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       ", measurePositionsDelta: " <<
       measurePositionsDelta <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -5021,7 +5136,9 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
     // insert skipNote before currentFiguredBass in the measure's elements list
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+      std::stringstream s;
+
+      s <<
         "Inserting subsequent padding note " <<
         skipNote->asString () <<
         " before currentFiguredBass " <<
@@ -5030,6 +5147,10 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        s.str ());
     }
 #endif
 
@@ -5064,7 +5185,9 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+      std::stringstream s;
+
+      s <<
         "Reducing the sounding whole notes of figured bass " <<
         previousFiguredBass->asString () <<
         " from " <<
@@ -5075,6 +5198,10 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        s.str ());
     }
 #endif
 
@@ -5135,7 +5262,9 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "postHandleCurrentFiguredBassInFiguredBassMeasure() 1" <<
       ", currentFiguredBassUpLinkToNote:" <<
       std::endl;
@@ -5144,6 +5273,10 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
       currentFiguredBassUpLinkToNote <<
       std::endl;
     --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -5156,7 +5289,9 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "postHandleCurrentFiguredBassInFiguredBassMeasure() 2" <<
       ", currentFiguredBass: ";
 
@@ -5188,6 +5323,10 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
       ", measureOverflowWholeNotes: " <<
       measureOverflowWholeNotes <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -5215,7 +5354,9 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      gLogStream <<
+      std::stringstream s;
+
+      s <<
         "Reducing the sounding whole notes of figured bass FII " <<
         currentFiguredBass->asString () <<
         " from " <<
@@ -5226,6 +5367,10 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
         voice->getVoiceName () <<
         "\", line " << inputLineNumber <<
         std::endl;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        s.str ());
     }
 #endif
 
@@ -5268,7 +5413,9 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Finalizing harmonies in figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -5278,6 +5425,10 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -5296,7 +5447,9 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
     // taking their offset into account
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Sorting the elements in figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -5306,6 +5459,10 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -5353,7 +5510,9 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
         // handle the currentFiguredBass
 #ifdef MF_TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-          gLogStream <<
+          std::stringstream s;
+
+          s <<
             "finalizeFiguredBassesInFiguredBassMeasure() 3" <<
             ", currentFiguredBass: ";
             ++gIndenter;
@@ -5361,6 +5520,10 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
               currentFiguredBass->asString () <<
               std::endl;
             --gIndenter;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            s.str ());
         }
 #endif
 
@@ -5384,7 +5547,9 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
               getMeasureElementMeasurePosition ();
 
         if (gGlobalTracingOahGroup->getTraceHarmonies () ) {
-          gLogStream <<
+          std::stringstream s;
+
+          s <<
             "finalizeFiguredBassesInFiguredBassMeasure() 4" <<
             ", previousFiguredBass: ";
 
@@ -5402,6 +5567,10 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
             ", currentFiguredBassUpLinkToNoteMeasurePosition: " <<
             currentFiguredBassUpLinkToNoteMeasurePosition <<
             std::endl;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            s.str ());
         }
 #endif
 
@@ -5479,7 +5648,9 @@ void msrMeasure::finalizeHarmonyMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Finalizing harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
@@ -5489,6 +5660,10 @@ void msrMeasure::finalizeHarmonyMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -5510,12 +5685,18 @@ void msrMeasure::finalizeHarmonyMeasure (
         getPartNumberOfMeasures ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "--> fMeasureOrdinalNumberInVoice: " <<
       fMeasureOrdinalNumberInVoice <<
       ", harmoniesPartNumberOfMeasures: " <<
       harmoniesPartNumberOfMeasures <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -5611,12 +5792,18 @@ void msrMeasure::finalizeFiguredBassMeasure (
         getPartNumberOfMeasures ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "fMeasureOrdinalNumberInVoice: " <<
       fMeasureOrdinalNumberInVoice <<
       ", figuredBassPartNumberOfMeasures = " <<
       figuredBassPartNumberOfMeasures <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -6785,7 +6972,9 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //     // insert skipNote before currentHarmony in the measure's elements list
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       gLogStream <<
+//       std::stringstream s;
+//
+//       s <<
 //         "Inserting subsequent padding note " <<
 //         skipNote->asString () <<
 //         " before currentHarmony " <<
@@ -6794,6 +6983,10 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         voice->getVoiceName () <<
 //         "\", line " << inputLineNumber <<
 //         std::endl;
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         s.str ());
 //     }
 // #endif
 //
@@ -6828,7 +7021,9 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       gLogStream <<
+//       std::stringstream s;
+//
+//       s <<
 //         "Reducing the sounding whole notes of harmony " <<
 //         previousHarmony->asString () <<
 //         " from " <<
@@ -6839,6 +7034,10 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //         voice->getVoiceName () <<
 //         "\", line " << inputLineNumber <<
 //         std::endl;
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         s.str ());
 //     }
 // #endif
 //

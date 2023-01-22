@@ -84,6 +84,8 @@ void oahValueLessAtomAlias::applyValueLessAtom (std::ostream& os)
 #endif
 
   // JMI ??? v0.9.66
+
+	fSelected = true;
 }
 
 void oahValueLessAtomAlias::acceptIn (basevisitor* v)
@@ -171,12 +173,12 @@ void oahValueLessAtomAlias::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahValueLessAtomAlias::printAtomWithVariableOptionsValues (
+void oahValueLessAtomAlias::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   fOriginalValueLessAtom->
-    printAtomWithVariableOptionsValues (
+    displayAtomWithVariableOptionsValues (
       os,
       valueFieldWidth);
 }
@@ -240,6 +242,7 @@ void oahValueFittedAtomAlias::applyAtomWithValue (
   }
 #endif
 
+	fSelected = true;
   // JMI ??? v0.9.66
 }
 
@@ -328,12 +331,12 @@ void oahValueFittedAtomAlias::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahValueFittedAtomAlias::printAtomWithVariableOptionsValues (
+void oahValueFittedAtomAlias::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   fOriginalValueFittedAtom->
-    printAtomWithVariableOptionsValues (
+    displayAtomWithVariableOptionsValues (
       os,
       valueFieldWidth);
 }
@@ -408,6 +411,8 @@ void oahMacroAtom::applyValueLessAtom (std::ostream& os)
 		atomNotExpectingAValue->
 			applyValueLessAtom (os);
   } // for
+
+	fSelected = true;
 }
 
 void oahMacroAtom::acceptIn (basevisitor* v)
@@ -595,7 +600,7 @@ void oahMacroAtom::printHelp (std::ostream& os) const
   }
 }
 
-void oahMacroAtom::printAtomWithVariableOptionsValues (
+void oahMacroAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -606,7 +611,7 @@ void oahMacroAtom::printAtomWithVariableOptionsValues (
 
   for (S_oahAtom atom : fMacroValueLessAtomsList) {
     atom->
-      printAtomWithVariableOptionsValues (
+      displayAtomWithVariableOptionsValues (
         os,
         valueFieldWidth);
   } // for
@@ -671,6 +676,8 @@ void oahOptionsUsageAtom::applyValueLessAtom (std::ostream& os)
 #endif
 
   printOptionsUsage (os);
+
+	fSelected = true;
 }
 
 void oahOptionsUsageAtom::printOptionsUsage (std::ostream& os) const
@@ -874,6 +881,8 @@ void oahHelpAtom::applyValueLessAtom (std::ostream& os)
     printHelp (os);
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahHelpAtom::acceptIn (basevisitor* v)
@@ -1026,6 +1035,8 @@ void oahHelpSummaryAtom::applyValueLessAtom (std::ostream& os)
     printOptionsSummary (os);
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahHelpSummaryAtom::acceptIn (basevisitor* v)
@@ -1175,6 +1186,8 @@ void oahAboutAtom::applyValueLessAtom (std::ostream& os)
   printAbout (os);
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahAboutAtom::acceptIn (basevisitor* v)
@@ -1361,6 +1374,8 @@ void oahVersionAtom::applyValueLessAtom (std::ostream& os)
   } // switch
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahVersionAtom::acceptIn (basevisitor* v)
@@ -1543,6 +1558,8 @@ void oahLibraryVersionAtom::applyValueLessAtom (std::ostream& os)
   printVersion (os);
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahLibraryVersionAtom::acceptIn (basevisitor* v)
@@ -1705,6 +1722,8 @@ void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
   printHistory (os);
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahHistoryAtom::acceptIn (basevisitor* v)
@@ -1867,6 +1886,8 @@ void oahLibraryHistoryAtom::applyValueLessAtom (std::ostream& os)
   printHistory (os);
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
@@ -2030,6 +2051,8 @@ void oahContactAtom::applyValueLessAtom (std::ostream& os)
   printContact (os);
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahContactAtom::acceptIn (basevisitor* v)
@@ -2186,6 +2209,8 @@ void oahDisplayPrefixes::applyValueLessAtom (std::ostream& os)
   printPrefixes (os);
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahDisplayPrefixes::acceptIn (basevisitor* v)
@@ -2340,6 +2365,8 @@ void oahDisplaySingleCharacterOptions::applyValueLessAtom (std::ostream& os)
   printSingleCharacterOptions (os);
 
   gIndenter.setIndentation (saveIndent);
+
+	fSelected = true;
 }
 
 void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
@@ -2521,6 +2548,8 @@ void oahOnOffAtom::applyAtomWithValue (
 
     oahError (s.str ());
   }
+
+	fSelected = true;
 }
 
 void oahOnOffAtom::setOnOffKindVariable (mfOnOffKind value)
@@ -2545,7 +2574,8 @@ void oahOnOffAtom::setOnOffKindVariable (mfOnOffKind value)
 #endif
 
   fOnOffKindVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahOnOffAtom::acceptIn (basevisitor* v)
@@ -2635,14 +2665,14 @@ void oahOnOffAtom::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << ": " <<
-    fSetByAnOption <<
+    "fSelected" << ": " <<
+    fSelected <<
     std::endl;
 
   --gIndenter;
 }
 
-void oahOnOffAtom::printAtomWithVariableOptionsValues (
+void oahOnOffAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -2652,9 +2682,9 @@ void oahOnOffAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fOnOffKindVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -2723,6 +2753,8 @@ void oahBooleanAtom::applyValueLessAtom (std::ostream& os)
 #endif
 
   setBooleanVariable (true);
+
+	fSelected = true;
 }
 
 void oahBooleanAtom::setBooleanVariable (Bool value)
@@ -2747,7 +2779,8 @@ void oahBooleanAtom::setBooleanVariable (Bool value)
 #endif
 
   fBooleanVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahBooleanAtom::acceptIn (basevisitor* v)
@@ -2837,14 +2870,14 @@ void oahBooleanAtom::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << ": " <<
-    fSetByAnOption <<
+    "fSelected" << ": " <<
+    fSelected <<
     std::endl;
 
   --gIndenter;
 }
 
-void oahBooleanAtom::printAtomWithVariableOptionsValues (
+void oahBooleanAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -2854,9 +2887,9 @@ void oahBooleanAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fBooleanVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -2923,6 +2956,8 @@ void oahBooleanAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
   setBooleanVariable (true);
 
   gGlobalOahEarlyOptions.setEarlyTracePasses ();
+
+	fSelected = true;
 #endif
 }
 
@@ -3013,14 +3048,14 @@ void oahBooleanAtomWithTracePasses::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << ": " <<
-    fSetByAnOption <<
+    "fSelected" << ": " <<
+    fSelected <<
     std::endl;
 
   --gIndenter;
 }
 
-void oahBooleanAtomWithTracePasses::printAtomWithVariableOptionsValues (
+void oahBooleanAtomWithTracePasses::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -3030,9 +3065,9 @@ void oahBooleanAtomWithTracePasses::printAtomWithVariableOptionsValues (
     ": " <<
     fBooleanVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -3104,6 +3139,8 @@ void oahTwoBooleansAtom::applyValueLessAtom (std::ostream& os)
 #endif
 
   setTwoBooleansVariables (true);
+
+	fSelected = true;
 }
 
 void oahTwoBooleansAtom::setTwoBooleansVariables (Bool value)
@@ -3124,7 +3161,7 @@ void oahTwoBooleansAtom::setTwoBooleansVariables (Bool value)
 
   fSecondBooleanAtom->setBooleanVariable (value);
 
-  fSetByAnOption = true;
+  fSelected = true;
 }
 
 void oahTwoBooleansAtom::acceptIn (basevisitor* v)
@@ -3229,7 +3266,7 @@ void oahTwoBooleansAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahTwoBooleansAtom::printAtomWithVariableOptionsValues (
+void oahTwoBooleansAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -3239,9 +3276,9 @@ void oahTwoBooleansAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fBooleanVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -3313,6 +3350,8 @@ void oahTwoBooleansAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
   setTwoBooleansVariables (true);
 
   gGlobalOahEarlyOptions.setEarlyTracePasses ();
+
+	fSelected = true;
 #endif
 }
 
@@ -3418,7 +3457,7 @@ void oahTwoBooleansAtomWithTracePasses::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahTwoBooleansAtomWithTracePasses::printAtomWithVariableOptionsValues (
+void oahTwoBooleansAtomWithTracePasses::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -3428,9 +3467,9 @@ void oahTwoBooleansAtomWithTracePasses::printAtomWithVariableOptionsValues (
     ": " <<
     fBooleanVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -3507,6 +3546,8 @@ void oahThreeBooleansAtom::applyValueLessAtom (std::ostream& os)
 #endif
 
   setThreeBooleansVariables (true);
+
+	fSelected = true;
 }
 
 void oahThreeBooleansAtom::setThreeBooleansVariables (Bool value)
@@ -3528,7 +3569,7 @@ void oahThreeBooleansAtom::setThreeBooleansVariables (Bool value)
   fSecondBooleanAtom->setBooleanVariable (value);
   fThirdBooleanAtom->setBooleanVariable (value);
 
-  fSetByAnOption = true;
+  fSelected = true;
 }
 
 void oahThreeBooleansAtom::acceptIn (basevisitor* v)
@@ -3637,7 +3678,7 @@ void oahThreeBooleansAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahThreeBooleansAtom::printAtomWithVariableOptionsValues (
+void oahThreeBooleansAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -3647,9 +3688,8 @@ void oahThreeBooleansAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fBooleanVariable;
 
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -3720,9 +3760,11 @@ void oahThreeBooleansAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
       "' which is a oahThreeBooleansAtomWithTracePasses" <<
       std::endl;
   }
-#endif
 
   setThreeBooleansVariables (true);
+
+	fSelected = true;
+#endif
 }
 
 void oahThreeBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
@@ -3831,7 +3873,7 @@ void oahThreeBooleansAtomWithTracePasses::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahThreeBooleansAtomWithTracePasses::printAtomWithVariableOptionsValues (
+void oahThreeBooleansAtomWithTracePasses::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -3841,9 +3883,8 @@ void oahThreeBooleansAtomWithTracePasses::printAtomWithVariableOptionsValues (
     ": " <<
     fBooleanVariable;
 
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -4009,6 +4050,8 @@ void oahCombinedBooleansAtom::applyValueLessAtom (std::ostream& os)
 #endif
 
   setCombinedBooleanVariables (true);
+
+	fSelected = true;
 }
 
 void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
@@ -4234,7 +4277,7 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
   }
 }
 
-void oahCombinedBooleansAtom::printAtomWithVariableOptionsValues (
+void oahCombinedBooleansAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -4267,7 +4310,7 @@ void oahCombinedBooleansAtom::printAtomWithVariableOptionsValues (
         ) {
         // print the boolean value
         booleanAtom->
-          printAtomWithVariableOptionsValues (
+          displayAtomWithVariableOptionsValues (
             os, fieldWidth);
       }
 
@@ -4391,6 +4434,8 @@ void oahIntegerAtom::applyAtomWithValue (
 
     oahError (s.str ());
   }
+
+	fSelected = true;
 }
 
 void oahIntegerAtom::setIntegerVariable (int value)
@@ -4408,7 +4453,8 @@ void oahIntegerAtom::setIntegerVariable (int value)
 #endif
 
   fIntegerVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahIntegerAtom::acceptIn (basevisitor* v)
@@ -4516,7 +4562,7 @@ void oahIntegerAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahIntegerAtom::printAtomWithVariableOptionsValues (
+void oahIntegerAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -4526,9 +4572,9 @@ void oahIntegerAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fIntegerVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -4645,8 +4691,6 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
       s >> integerValue;
     }
     fIntegerSecondaryVariable = integerValue;
-
-    fSetByAnOption = true;
   }
 
   else {
@@ -4659,6 +4703,8 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
 
     oahError (s.str ());
   }
+
+	fSelected = true;
 }
 
 void oahTwoIntegersAtom::setIntegerVariable (int value)
@@ -4676,7 +4722,8 @@ void oahTwoIntegersAtom::setIntegerVariable (int value)
 #endif
 
   fIntegerVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahTwoIntegersAtom::acceptIn (basevisitor* v)
@@ -4798,7 +4845,7 @@ void oahTwoIntegersAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahTwoIntegersAtom::printAtomWithVariableOptionsValues (
+void oahTwoIntegersAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -4810,9 +4857,9 @@ void oahTwoIntegersAtom::printAtomWithVariableOptionsValues (
     ' ' <<
     fIntegerSecondaryVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -4930,6 +4977,8 @@ void oahFloatAtom::applyAtomWithValue (
 
     oahError (s.str ());
   }
+
+	fSelected = true;
 }
 
 void oahFloatAtom::setFloatVariable (float value)
@@ -4947,7 +4996,8 @@ void oahFloatAtom::setFloatVariable (float value)
 #endif
 
   fFloatVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahFloatAtom::acceptIn (basevisitor* v)
@@ -5055,7 +5105,7 @@ void oahFloatAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahFloatAtom::printAtomWithVariableOptionsValues (
+void oahFloatAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -5065,9 +5115,9 @@ void oahFloatAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fFloatVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -5148,7 +5198,8 @@ void oahStringAtom::setStringVariable (const std::string& value)
 #endif
 
   fStringVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahStringAtom::acceptIn (basevisitor* v)
@@ -5256,7 +5307,7 @@ void oahStringAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringAtom::printAtomWithVariableOptionsValues (
+void oahStringAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -5266,9 +5317,9 @@ void oahStringAtom::printAtomWithVariableOptionsValues (
     ": " <<
     '[' << fStringVariable << ']';
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -5464,6 +5515,8 @@ void oahFactorizedStringAtom::applyValueLessAtom (std::ostream& os) // JMI v0.9.
 #endif
 
   // handle it at once JMI ???
+
+	fSelected = true;
 }
 
 void oahFactorizedStringAtom::acceptIn (basevisitor* v)
@@ -5667,7 +5720,7 @@ void oahFactorizedStringAtom::printHelp (std::ostream& os) const
   }
 }
 
-void oahFactorizedStringAtom::printAtomWithVariableOptionsValues (
+void oahFactorizedStringAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -5751,6 +5804,8 @@ void oahDefaultedStringAtom::applyAtomWithValue (
 #endif
 
   setStringVariable (theString);
+
+	fSelected = true;
 }
 
 void oahDefaultedStringAtom::acceptIn (basevisitor* v)
@@ -5794,7 +5849,8 @@ void oahDefaultedStringAtom::setStringVariable (const std::string& value)
 #endif
 
   fStringVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahDefaultedStringAtom::acceptOut (basevisitor* v)
@@ -5888,14 +5944,14 @@ void oahDefaultedStringAtom::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSetByAnOption" << ": " <<
-    fSetByAnOption <<
+    "fSelected" << ": " <<
+    fSelected <<
     std::endl;
 
   --gIndenter;
 }
 
-void oahDefaultedStringAtom::printAtomWithVariableOptionsValues (
+void oahDefaultedStringAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -5905,9 +5961,9 @@ void oahDefaultedStringAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fStringVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -6231,6 +6287,8 @@ void oahCommonPrefixBooleansAtom::applyValueLessAtom (std::ostream& os)
 #endif
 
   // handle it at once JMI ??? v0.9.66
+
+	fSelected = true;
 }
 
 void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
@@ -6532,7 +6590,7 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
   }
 }
 
-void oahCommonPrefixBooleansAtom::printAtomWithVariableOptionsValues (
+void oahCommonPrefixBooleansAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -6616,6 +6674,8 @@ void oahRegexAtom::applyAtomWithValue (
   oahStringAtom::applyAtomWithValue (
     theString,
     os);
+
+	fSelected = true;
 }
 
 void oahRegexAtom::acceptIn (basevisitor* v)
@@ -6659,7 +6719,8 @@ void oahRegexAtom::setStringVariable (const std::string& value)
 #endif
 
   oahStringAtom::setStringVariable (value);
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahRegexAtom::acceptOut (basevisitor* v)
@@ -6745,7 +6806,7 @@ void oahRegexAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahRegexAtom::printAtomWithVariableOptionsValues (
+void oahRegexAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -6755,9 +6816,9 @@ void oahRegexAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fStringVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -6898,6 +6959,8 @@ void oahRationalAtom::applyAtomWithValue (
 
     oahError (s.str ());
   }
+
+	fSelected = true;
 }
 
 void oahRationalAtom::acceptIn (basevisitor* v)
@@ -7005,7 +7068,7 @@ void oahRationalAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahRationalAtom::printAtomWithVariableOptionsValues (
+void oahRationalAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -7015,9 +7078,9 @@ void oahRationalAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fRationalVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -7084,6 +7147,8 @@ void oahNaturalNumbersSetElementAtom::applyAtomWithValue (
     mfDecipherNaturalNumbersSetSpecification (
       theString,
       false); // 'true' to debug it
+
+	fSelected = true;
 }
 
 void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
@@ -7246,7 +7311,7 @@ void oahNaturalNumbersSetElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
+void oahNaturalNumbersSetElementAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -7261,9 +7326,9 @@ void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
   }
 
   else {
-    if (fSetByAnOption) {
+    if (fSelected) {
       os <<
-        "set by an option" <<
+        "selected" <<
         std::endl;
     }
 
@@ -7344,6 +7409,8 @@ void oahColorRGBAtom::applyAtomWithValue (
   msrColorRGB theColorRGB (theString);
 
   setColorRGBVariable (theColorRGB);
+
+	fSelected = true;
 }
 
 void oahColorRGBAtom::acceptIn (basevisitor* v)
@@ -7457,7 +7524,7 @@ void oahColorRGBAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahColorRGBAtom::printAtomWithVariableOptionsValues (
+void oahColorRGBAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -7466,9 +7533,9 @@ void oahColorRGBAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     ": " <<
     fColorRGBVariable.asString ();
-  if (fSetByAnOption) {
+  if (fSelected) {
     os <<
-      ", set by an option" <<
+      ", selected" <<
       std::endl;
   }
   os << std::endl;
@@ -7607,7 +7674,8 @@ void oahIntSetElementAtom::applyAtomWithValue (
 #endif
 
   fIntSetVariable.insert (lilypondMeasureNumber);
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahIntSetElementAtom::acceptIn (basevisitor* v)
@@ -7761,7 +7829,7 @@ void oahIntSetElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahIntSetElementAtom::printAtomWithVariableOptionsValues (
+void oahIntSetElementAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -7789,7 +7857,7 @@ void oahIntSetElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      "set by an option" <<
+      "selected" <<
       std::endl;
 
     --gIndenter;
@@ -7894,8 +7962,9 @@ void oahStringSetElementAtom::applyAtomWithValue (
 
   else {
     fStringSetVariable.insert (partName);
-    fSetByAnOption = true;
   }
+
+	fSelected = true;
 }
 
 void oahStringSetElementAtom::acceptIn (basevisitor* v)
@@ -8048,7 +8117,7 @@ void oahStringSetElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringSetElementAtom::printAtomWithVariableOptionsValues (
+void oahStringSetElementAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -8064,7 +8133,7 @@ void oahStringSetElementAtom::printAtomWithVariableOptionsValues (
   }
   else {
     os <<
-      "set by an option" <<
+      "selected" <<
       std::endl;
 
     ++gIndenter;
@@ -8238,7 +8307,8 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
 
   fStringToIntMapVariable [musicxmlMeasureNumber] =
     lilypondMeasureNumber;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
@@ -8392,7 +8462,7 @@ void oahStringToIntMapElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringToIntMapElementAtom::printAtomWithVariableOptionsValues (
+void oahStringToIntMapElementAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -8426,7 +8496,7 @@ void oahStringToIntMapElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      "set by an option" <<
+      "selected" <<
       std::endl;
 
     --gIndenter;
@@ -8580,9 +8650,9 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
   }
 #endif
 
-  fStringToStringMapVariable [key] =
-    value;
-  fSetByAnOption = true;
+  fStringToStringMapVariable [key] = value;
+
+  fSelected = true;
 }
 
 void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
@@ -8741,7 +8811,7 @@ void oahStringToStringMapElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringToStringMapElementAtom::printAtomWithVariableOptionsValues (
+void oahStringToStringMapElementAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -8775,7 +8845,7 @@ void oahStringToStringMapElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      "set by an option" <<
+      "selected" <<
       std::endl;
 
     --gIndenter;
@@ -8931,7 +9001,8 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
 
   fStringToStringMultiMapVariable.insert (
     std::pair<std::string, std::string> (key, value));
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
@@ -9090,7 +9161,7 @@ void oahStringToStringMultiMapElementAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringToStringMultiMapElementAtom::printAtomWithVariableOptionsValues (
+void oahStringToStringMultiMapElementAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -9124,7 +9195,7 @@ void oahStringToStringMultiMapElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      "set by an option" <<
+      "selected" <<
       std::endl;
 
     --gIndenter;
@@ -9250,8 +9321,6 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
     }
 
     fIntegerVariable = integerValue;
-
-    fSetByAnOption = true;
   }
 
   else {
@@ -9264,6 +9333,8 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
 
     oahError (s.str ());
   }
+
+	fSelected = true;
 }
 
 void oahStringAndIntegerAtom::setIntegerVariable (int value)
@@ -9281,7 +9352,8 @@ void oahStringAndIntegerAtom::setIntegerVariable (int value)
 #endif
 
   fIntegerVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahStringAndIntegerAtom::setStringVariable (const std::string& value)
@@ -9299,7 +9371,8 @@ void oahStringAndIntegerAtom::setStringVariable (const std::string& value)
 #endif
 
   fStringVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
@@ -9428,7 +9501,7 @@ void oahStringAndIntegerAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringAndIntegerAtom::printAtomWithVariableOptionsValues (
+void oahStringAndIntegerAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -9444,9 +9517,9 @@ void oahStringAndIntegerAtom::printAtomWithVariableOptionsValues (
     ": " <<
     "\"" << fIntegerVariable << "\"";
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -9575,8 +9648,6 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
       s >> integerValue;
     }
     fSecondaryIntegerVariable = integerValue;
-
-    fSetByAnOption = true;
   }
 
   else {
@@ -9589,6 +9660,8 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
 
     oahError (s.str ());
   }
+
+	fSelected = true;
 }
 
 void oahStringAndTwoIntegersAtom::setStringVariable (const std::string& value)
@@ -9606,7 +9679,8 @@ void oahStringAndTwoIntegersAtom::setStringVariable (const std::string& value)
 #endif
 
   fStringVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahStringAndTwoIntegersAtom::setPrimaryIntegerVariable (int value)
@@ -9624,7 +9698,8 @@ void oahStringAndTwoIntegersAtom::setPrimaryIntegerVariable (int value)
 #endif
 
   fPrimaryIntegerVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahStringAndTwoIntegersAtom::setSecondaryIntegerVariable (int value)
@@ -9642,7 +9717,8 @@ void oahStringAndTwoIntegersAtom::setSecondaryIntegerVariable (int value)
 #endif
 
   fSecondaryIntegerVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
@@ -9767,7 +9843,7 @@ void oahStringAndTwoIntegersAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahStringAndTwoIntegersAtom::printAtomWithVariableOptionsValues (
+void oahStringAndTwoIntegersAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -9791,9 +9867,9 @@ void oahStringAndTwoIntegersAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fSecondaryIntegerVariable;
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -9897,7 +9973,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -9906,6 +9982,8 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
 
   setLengthUnitKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void oahLengthUnitKindAtom::acceptIn (basevisitor* v)
@@ -10016,7 +10094,7 @@ void oahLengthUnitKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahLengthUnitKindAtom::printAtomWithVariableOptionsValues (
+void oahLengthUnitKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -10027,9 +10105,9 @@ void oahLengthUnitKindAtom::printAtomWithVariableOptionsValues (
     msrLengthUnitKindAsString (
       fLengthUnitKindVariable);
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -10170,7 +10248,7 @@ void oahLengthAtom::applyAtomWithValue (
       ++gIndenter;
 
       s <<
-        existingMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+        availableMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
       --gIndenter;
 
@@ -10193,6 +10271,8 @@ void oahLengthAtom::applyAtomWithValue (
 
     oahError (s.str ());
   }
+
+	fSelected = true;
 }
 
 void oahLengthAtom::acceptIn (basevisitor* v)
@@ -10302,7 +10382,7 @@ void oahLengthAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahLengthAtom::printAtomWithVariableOptionsValues (
+void oahLengthAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -10312,9 +10392,9 @@ void oahLengthAtom::printAtomWithVariableOptionsValues (
     ": " <<
     fLengthVariable.asString ();
 
-  if (fSetByAnOption) { // JMIJMIJMI
+  if (fSelected) { // JMIJMIJMI
     os <<
-      ", set by an option";
+      ", selected";
   }
 
   os << std::endl;
@@ -10386,7 +10466,8 @@ void oahMidiTempoAtom::setMidiTempoVariable (
 #endif
 
   fMidiTempoVariable = value;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void oahMidiTempoAtom::applyAtomWithValue (
@@ -10490,6 +10571,8 @@ void oahMidiTempoAtom::applyAtomWithValue (
     theMidiTempo);
   }
 #endif
+
+	fSelected = true;
 }
 
 void oahMidiTempoAtom::acceptIn (basevisitor* v)
@@ -10600,7 +10683,7 @@ void oahMidiTempoAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahMidiTempoAtom::printAtomWithVariableOptionsValues (
+void oahMidiTempoAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -10609,9 +10692,9 @@ void oahMidiTempoAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     ": " <<
     fMidiTempoVariable.asString ();
-  if (fSetByAnOption) {
+  if (fSelected) {
     os <<
-      ", set by an option" <<
+      ", selected" <<
       std::endl;
   }
   os << std::endl;
@@ -10807,7 +10890,7 @@ void oahOptionNameHelpAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahOptionNameHelpAtom::printAtomWithVariableOptionsValues (
+void oahOptionNameHelpAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -10984,7 +11067,7 @@ void oahQueryOptionNameAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahQueryOptionNameAtom::printAtomWithVariableOptionsValues (
+void oahQueryOptionNameAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -11324,7 +11407,7 @@ void oahFindStringAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahFindStringAtom::printAtomWithVariableOptionsValues (
+void oahFindStringAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -11503,7 +11586,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahIncludeOptionsAndArgumentsFileAtom::printAtomWithVariableOptionsValues (
+void oahIncludeOptionsAndArgumentsFileAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {

@@ -51,6 +51,9 @@ void displayLpsrScore (
   // start the clock
   clock_t startClock = clock ();
 
+  // DON'T set the global current passID,
+  // this optional pass is considered part of the preceding 'true' pass
+
   std::string separator =
     "%--------------------------------------------------------------";
 
@@ -58,9 +61,7 @@ void displayLpsrScore (
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () <<
-    ": "<<
-    passDescription <<
+    gWaeHandler->passOptional () << ": "<< passDescription <<
     std::endl <<
     separator <<
     std::endl << std::endl;
@@ -75,7 +76,7 @@ void displayLpsrScore (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     gWaeHandler->displayTheLPSRAsText (),
     mfTimingItemKind::kOptional,
     startClock,
@@ -100,6 +101,9 @@ void displayLpsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
+  // DON'T set the global current passID,
+  // this optional pass is considered part of the preceding 'true' pass
+
   std::string separator =
     "%--------------------------------------------------------------";
 
@@ -107,9 +111,7 @@ void displayLpsrScoreFull (
     separator <<
     std::endl <<
     gTab <<
-    gWaeHandler->passOptional () <<
-    ": "<<
-    passDescription <<
+    gWaeHandler->passOptional () << ": "<< passDescription <<
     ", " <<
     gWaeHandler->fullVersion () <<
     std::endl <<
@@ -126,7 +128,7 @@ void displayLpsrScoreFull (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-		gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_0),
+		mfPassIDKind::kMfPassID_0,
     gWaeHandler->displayTheLPSRAsText ()
       + ", " +
     gWaeHandler->fullVersion (),

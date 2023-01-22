@@ -229,7 +229,7 @@ std::ostream& operator << (std::ostream& os, const bsrBrailleOutputKind& elt);
 extern std::map<std::string, bsrBrailleOutputKind>
   gGlobalBsrBrailleOutputKindsMap;
 
-std::string existingBsrBrailleOutputKinds (size_t namesListMaxLength);
+std::string availableBsrBrailleOutputKinds (size_t namesListMaxLength);
 
 void initializeBsrBrailleOutputKindsMap ();
 
@@ -248,7 +248,7 @@ std::ostream& operator << (std::ostream& os, const bsrTextsLanguageKind& elt);
 extern std::map<std::string, bsrTextsLanguageKind>
   gGlobalBsrTextsLanguageKindsMap;
 
-std::string existingBsrTextsLanguageKinds (size_t namesListMaxLength);
+std::string availableBsrTextsLanguageKinds (size_t namesListMaxLength);
 
 void initializeBsrTextsLanguageKindsMap ();
 

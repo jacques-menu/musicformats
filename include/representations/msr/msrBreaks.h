@@ -21,15 +21,15 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-enum class msrUserChosenLineBreakKind {
-  kUserChosenLineBreakYes,
-  kUserChosenLineBreakNo
+enum class msrUserSelectedLineBreakKind {
+  kUserSelectedLineBreakYes,
+  kUserSelectedLineBreakNo
 };
 
-std::string msrUserChosenLineBreakKindAsString (
-  msrUserChosenLineBreakKind userChosenLineBreakKind);
+std::string msrUserSelectedLineBreakKindAsString (
+  msrUserSelectedLineBreakKind userSelectedLineBreakKind);
 
-std::ostream& operator << (std::ostream& os, const msrUserChosenLineBreakKind& elt);
+std::ostream& operator << (std::ostream& os, const msrUserSelectedLineBreakKind& elt);
 
 class EXP msrLineBreak : public msrMeasureElement
 {
@@ -42,14 +42,14 @@ class EXP msrLineBreak : public msrMeasureElement
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             const std::string&  nextBarNumber,
-                            msrUserChosenLineBreakKind
-                                                userChosenLineBreakKind);
+                            msrUserSelectedLineBreakKind
+                                                userSelectedLineBreakKind);
 
     static SMARTP<msrLineBreak> create (
                             int                 inputLineNumber,
                             const std::string&  nextBarNumber,
-                            msrUserChosenLineBreakKind
-                                                userChosenLineBreakKind);
+                            msrUserSelectedLineBreakKind
+                                                userSelectedLineBreakKind);
 
   protected:
 
@@ -60,8 +60,8 @@ class EXP msrLineBreak : public msrMeasureElement
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
                             const std::string&  nextBarNumber,
-                            msrUserChosenLineBreakKind
-                                                userChosenLineBreakKind);
+                            msrUserSelectedLineBreakKind
+                                                userSelectedLineBreakKind);
 
     virtual               ~msrLineBreak ();
 
@@ -87,9 +87,9 @@ class EXP msrLineBreak : public msrMeasureElement
     std::string           getNextBarNumber () const
                               { return fNextBarNumber; }
 
-    msrUserChosenLineBreakKind
-                          getUserChosenLineBreakKind () const
-                              { return fUserChosenLineBreakKind; }
+    msrUserSelectedLineBreakKind
+                          getUserSelectedLineBreakKind () const
+                              { return fUserSelectedLineBreakKind; }
 
   public:
 
@@ -124,22 +124,22 @@ class EXP msrLineBreak : public msrMeasureElement
 
     std::string           fNextBarNumber;
 
-    msrUserChosenLineBreakKind
-                          fUserChosenLineBreakKind;
+    msrUserSelectedLineBreakKind
+                          fUserSelectedLineBreakKind;
 };
 typedef SMARTP<msrLineBreak> S_msrLineBreak;
 EXP std::ostream& operator << (std::ostream& os, const S_msrLineBreak& elt);
 
 //______________________________________________________________________________
-enum class msrUserChosenPageBreakKind {
-  kUserChosenPageBreakYes,
-  kUserChosenPageBreakNo
+enum class msrUserSelectedPageBreakKind {
+  kUserSelectedPageBreakYes,
+  kUserSelectedPageBreakNo
 };
 
-std::string msrUserChosenPageBreakKindAsString (
-  msrUserChosenPageBreakKind userChosenPageBreakKind);
+std::string msrUserSelectedPageBreakKindAsString (
+  msrUserSelectedPageBreakKind userSelectedPageBreakKind);
 
-std::ostream& operator << (std::ostream& os, const msrUserChosenPageBreakKind& elt);
+std::ostream& operator << (std::ostream& os, const msrUserSelectedPageBreakKind& elt);
 
 class EXP msrPageBreak : public msrMeasureElement
 {
@@ -151,13 +151,13 @@ class EXP msrPageBreak : public msrMeasureElement
     static SMARTP<msrPageBreak> create (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            msrUserChosenPageBreakKind
-                                                userChosenPageBreakKind);
+                            msrUserSelectedPageBreakKind
+                                                userSelectedPageBreakKind);
 
     static SMARTP<msrPageBreak> create (
                             int                 inputLineNumber,
-                            msrUserChosenPageBreakKind
-                                                userChosenPageBreakKind);
+                            msrUserSelectedPageBreakKind
+                                                userSelectedPageBreakKind);
 
   protected:
 
@@ -167,8 +167,8 @@ class EXP msrPageBreak : public msrMeasureElement
                           msrPageBreak (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            msrUserChosenPageBreakKind
-                                                userChosenPageBreakKind);
+                            msrUserSelectedPageBreakKind
+                                                userSelectedPageBreakKind);
 
     virtual               ~msrPageBreak ();
 
@@ -191,9 +191,9 @@ class EXP msrPageBreak : public msrMeasureElement
     S_msrMeasure          getPageBreakUpLinkToMeasure () const
                             { return fPageBreakUpLinkToMeasure; }
 
-    msrUserChosenPageBreakKind
-                          getUserChosenPageBreakKind () const
-                              { return fUserChosenPageBreakKind; }
+    msrUserSelectedPageBreakKind
+                          getUserSelectedPageBreakKind () const
+                              { return fUserSelectedPageBreakKind; }
 
   public:
 
@@ -226,8 +226,8 @@ class EXP msrPageBreak : public msrMeasureElement
 
     S_msrMeasure          fPageBreakUpLinkToMeasure;
 
-    msrUserChosenPageBreakKind
-                          fUserChosenPageBreakKind;
+    msrUserSelectedPageBreakKind
+                          fUserSelectedPageBreakKind;
 };
 typedef SMARTP<msrPageBreak> S_msrPageBreak;
 EXP std::ostream& operator << (std::ostream& os, const S_msrPageBreak& elt);

@@ -78,7 +78,7 @@ void initializeGenerationAPIKindsMap ()
   gGlobalGenerationAPIKindsMap ["strings"]   = msrGenerationAPIKind::kMsrStringsAPIKind;
 }
 
-std::string existingGenerationAPIKinds (
+std::string availableGenerationAPIKinds (
   size_t namesListMaxLength)
 {
   std::stringstream s;
@@ -204,7 +204,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -213,7 +213,8 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
 
   fGenerationAPIKindVariable =
     (*it).second;
-  fSetByAnOption = true;
+
+  fSelected = true;
 }
 
 void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
@@ -328,7 +329,7 @@ void msrGenerationAPIKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msrGenerationAPIKindAtom::printAtomWithVariableOptionsValues (
+void msrGenerationAPIKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -337,9 +338,8 @@ void msrGenerationAPIKindAtom::printAtomWithVariableOptionsValues (
     fVariableName << ": " <<
     msrGenerationAPIKindAsString (
       fGenerationAPIKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }

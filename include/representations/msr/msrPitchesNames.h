@@ -67,7 +67,7 @@ std::string msrQuarterTonesPitchKindAsFlatsAndSharps (
   msrQuarterTonesPitchKind           quarterTonesPitchKind);
 */
 
-std::string existingMsrQuarterTonesPitchesLanguageKinds (
+std::string availableMsrQuarterTonesPitchesLanguageKinds (
   size_t namesListMaxLength);
 
 extern std::map<std::string, msrQuarterTonesPitchesLanguageKind>&
@@ -75,7 +75,7 @@ extern std::map<std::string, msrQuarterTonesPitchesLanguageKind>&
 
 void initializeQuarterTonesPitchesLanguageKinds ();
 
-std::string existingQuarterTonesPitchesLanguageKinds (
+std::string availableQuarterTonesPitchesLanguageKinds (
   size_t namesListMaxLength);
 
 //______________________________________________________________________________

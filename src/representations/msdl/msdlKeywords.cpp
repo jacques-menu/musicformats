@@ -64,7 +64,7 @@ msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (const std::string& 
     ++gIndenter;
 
     s <<
-      existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -144,7 +144,7 @@ std::string msdlKeywordsLanguageKindAsString (
   return result;
 }
 
-std::string existingMsdlKeywordsLanguageKinds (size_t namesListMaxLength)
+std::string availableMsdlKeywordsLanguageKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -722,7 +722,7 @@ msdlKeywordKind msdlKeywordKindFromString (
   return result;
 }
 
-std::string existingKeywordsInLanguage (
+std::string availableKeywordsInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
   size_t                   namesListMaxLength)
 {

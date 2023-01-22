@@ -93,7 +93,7 @@ class EXP msrIgnorePartAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -179,7 +179,7 @@ class EXP msrKeepPartAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -326,7 +326,7 @@ class EXP msr2msrOahGroup : public oahGroup
 
     void                  printMsr2msrOahHelp ();
 
-    void                  printMsr2msrOahValues (int valueFieldWidth);
+    void                  displayMsr2msrOahValues (int valueFieldWidth);
 
   private:
 

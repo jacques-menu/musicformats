@@ -33,7 +33,7 @@ class EXP oahInsiderHandler : public oahHandler
   when they are grouped by user topics
   such as tuplets or grace notes in regular handlers.
 
-  The variables containing the values of the options chosen by the user
+  The variables containing the values of the options selected by the user
   are actually held by the insider handler.
 */
 {

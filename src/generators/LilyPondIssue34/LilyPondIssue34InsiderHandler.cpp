@@ -530,12 +530,12 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
   Bool
     outputFileNameHasBeenSet =
       outputFileNameStringAtom->
-        getSetByAnOption ();
+        getSelected ();
 
   Bool
     autoOutputFileNameHasBeenSet =
       autoOutputFileNameAtom->
-        getSetByAnOption ();
+        getSelected ();
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -552,14 +552,14 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
   std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
-    // '-o, -output-file-name' has been chosen
+    // '-o, -output-file-name' has been selected
     outputFileName =
       outputFileNameStringAtom->
         getStringVariable ();
   }
 
   else if (autoOutputFileNameHasBeenSet) {
-     // '-aofn, -auto-output-file-name' has been chosen
+     // '-aofn, -auto-output-file-name' has been selected
 
     // start with the service name
     outputFileName = fHandlerServiceName;
@@ -723,7 +723,7 @@ void LilyPondIssue34InsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream s;
 
     s <<
-      "LilyPondIssue34InsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
+      "LilyPondIssue34InsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
     oahError (s.str ());
   }

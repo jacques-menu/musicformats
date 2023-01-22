@@ -327,6 +327,8 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
     msrSemiTonesPitchAndOctave::createFromString (
       K_MF_INPUT_LINE_UNKNOWN,
       theString));
+
+	fSelected = true;
 }
 \end{lstlisting}
 
@@ -358,7 +360,7 @@ class EXP oahAtomStoringAValue : public oahValueFittedAtom
 
     void                  printHelp (std::ostream& os) const override;
 
-    virtual void          printAtomWithVariableOptionsValues (
+    virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int      valueFieldWidth) const override;
 
@@ -370,13 +372,12 @@ class EXP oahAtomStoringAValue : public oahValueFittedAtom
     std::string           fValueSpecification;
 
     std::string           fVariableName;
-    Bool                  fSetByAnOption;
 };
 \end{lstlisting}
 
-The \field{oahAtomStoringAValue}{fSetByAnOption} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahColorRGBAtom}, for example. It is not used for data structures such as sets, lists and vector, since this is indicated by their size.
+The \field{oahAtomStoringAValue}{fSelected} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahColorRGBAtom}, for example. It is not used for data structures such as sets, lists and vector, since this is indicated by their size.
 
-\fieldName{fSetByAnOption} is set in \methodName{set*Variable} methods, as in \method{oahIntegerAtom}{setIntegerVariable}\\
+\fieldName{fSelected} is set in \methodName{set*Variable} methods, as in \method{oahIntegerAtom}{setIntegerVariable}\\
 in \oah{oahAtomsCollection.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahIntegerAtom::setIntegerVariable (int value)
@@ -394,7 +395,8 @@ void oahIntegerAtom::setIntegerVariable (int value)
 #endif
 
   fIntegerVariable = value;
-  fSetByAnOption = true;
+  
+  fSelected = true;
 }
 \end{lstlisting}
 
@@ -403,8 +405,8 @@ void oahIntegerAtom::setIntegerVariable (int value)
 \subsection{The {\tt oahBooleanAtom} special case}
 % -------------------------------------------------------------------------
 
-\Class{oahBooleanAtom} has its own \fieldName{fSetByAnOption} field, because is it not derived from\\
-\class{oahAtomStoringAValue}: there isn't any value to be supplied in the command line, since \fieldName{fBooleanVariable} is \code{false} by default and becomes \code{true} when the options is chosen:
+\Class{oahBooleanAtom} has its own \fieldName{fSelected} field, because is it not derived from\\
+\class{oahAtomStoringAValue}: there isn't any value to be supplied in the command line, since \fieldName{fBooleanVariable} is \code{false} by default and becomes \code{true} when the options is selected:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
 class EXP oahBooleanAtom : public oahAtom
@@ -425,7 +427,6 @@ class EXP oahBooleanAtom : public oahAtom
 
     std::string           fVariableName;
     Bool&                 fBooleanVariable;
-    Bool                  fSetByAnOption;
 };
 \end{lstlisting}
 
@@ -434,7 +435,7 @@ class EXP oahBooleanAtom : public oahAtom
 \subsection{Checking whether an option has been selected}
 % -------------------------------------------------------------------------
 
-This in done by calls to the \methodName{getSetByAnOption} methods.
+This in done by calls to the \methodName{getSelected} methods.
 
 For example, \method{lpsr2lilypondTranslator}{generateLilypondVersion} in \\
 \lpsr{lpsr2lilypondTranslator.cpp} contains:
@@ -446,7 +447,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
     lilypondVersionHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getLilypondVersionAtom ()->
-          getSetByAnOption ();
+          getSelected ();
 
   std::string
     lilypondVersion =
@@ -464,7 +465,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
 }
 \end{lstlisting}
 
-The default \lily\ version number is \code{2.22.0}. Another can be chosen with the \optionNameBoth{lilypond-version}{lpv} option:
+The default \lily\ version number is \code{2.22.0}. Another can be selected with the \optionNameBoth{lilypond-version}{lpv} option:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -find lilypond-version
 1 occurrence of string "lilypond-version" has been found:
@@ -643,7 +644,6 @@ class EXP oahAtomImplicitlySettingAVariable : public oahAtom
     // ------------------------------------------------------
 
     std::string           fVariableName;
-    Bool                  fSetByAnOption;
 };
 \end{lstlisting}
 
@@ -1125,7 +1125,7 @@ EXP mfMusicformatsErrorKind musicxmlfile2musicxml (
 	  sxmlfile =
 	    createSXMLFileFromFile (
 	      fileName,
-	    gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+	    mfPassIDKind::kMfPassID_1,
 	      "Create an MXSR from a MusicXML file");
 
 	if (sxmlfile) {
@@ -1838,6 +1838,8 @@ void oahHistoryAtom::applyValueLessAtom (std::ostream& os)
   printHistory (os);
 
   gIndenter.setIndent (saveIndent);
+
+	fSelected = true;
 }
 \end{lstlisting}
 
@@ -1956,7 +1958,6 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
                             msrLength value)
                               {
                                 fLengthVariable = value;
-                                fSetByAnOption = true;
                               }
 
     msrLength             getLengthVariable () const
@@ -1980,7 +1981,7 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
 
 	// ... ... ...
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int      valueFieldWidth) const override;
 
@@ -2045,7 +2046,7 @@ void oahLengthAtom::applyAtomWithValue (
       ++gIndenter;
 
       s <<
-        existingMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+        availableMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
       --gIndenter;
 
@@ -2068,12 +2069,14 @@ void oahLengthAtom::applyAtomWithValue (
 
     oahError (s.str ());
   }
+
+	fSelected = true;
 }
 \end{lstlisting}
 
-\Method{oahLengthAtom}{printAtomWithVariableOptionsValues} is in charge of displaying the length value when \option{display-options-values}{dov} is chosen:
+\Method{oahLengthAtom}{displayAtomWithVariableOptionsValues} is in charge of displaying the length value when \option{display-options-values}{dov} is selected:
 \begin{lstlisting}[language=CPlusPlus]
-void oahLengthAtom::printAtomWithVariableOptionsValues (
+void oahLengthAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int      valueFieldWidth) const
 {
@@ -2082,9 +2085,8 @@ void oahLengthAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : " <<
     fLengthVariable.asString ();
-  if (fSetByAnOption) {
-    os <<
-      ", set by user";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }

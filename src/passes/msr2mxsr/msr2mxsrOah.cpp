@@ -250,7 +250,7 @@ void msr2mxsrOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msr2mxsrOahGroup::printMsr2mxsrOahValues (int valueFieldWidth)
+void msr2mxsrOahGroup::displayMsr2mxsrOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The MusicXML options are:" <<

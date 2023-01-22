@@ -162,7 +162,7 @@ void xml2lyManPageGenerateAtom::generateManPageData (std::ostream& os) const
       "musicxml2lilypondInsiderManPageGenerateAtom::generateManPageData");
 }
 
-void xml2lyManPageGenerateAtom::printAtomWithVariableOptionsValues (
+void xml2lyManPageGenerateAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {

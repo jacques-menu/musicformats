@@ -1483,7 +1483,7 @@ void fetchDiatonicPitchKindAndAlterationKindFromQuarterTonesPitchKind (
       quarterTonesPitchKind);
 }
 
-std::string existingQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength)
+std::string availableQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -2525,7 +2525,7 @@ msrSemiTonesPitchKind semiTonesPitchKindFromQuarterTonesPitchKind (
   return result;
 }
 
-std::string existingMsrQuarterTonesPitchesLanguageKinds (
+std::string availableMsrQuarterTonesPitchesLanguageKinds (
   size_t namesListMaxLength)
 {
   std::stringstream s;

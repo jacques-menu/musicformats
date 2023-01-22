@@ -131,9 +131,9 @@ class EXP displayOahGroup : public oahGroup
 
     void                  printDisplayOahHelp ();
 
-    void                  printDisplayOptionsValues (int valueFieldWidth);
+    void                  displayDisplayOptionsValues (int valueFieldWidth);
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const;
 

@@ -2298,9 +2298,16 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 // // JMI v0.9.66
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream << "fNoteHarmoniesList.size (): " <<
+    std::stringstream s;
+
+    s <<
+      "fNoteHarmoniesList.size (): " <<
       fNoteHarmoniesList.size () <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -3208,13 +3215,19 @@ void msrNote::appendHarmonyToNote (
 {
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       "Appending harmony " <<
       harmony->asString () <<
       " to the harmonies list of " <<
       asString () <<
       ", line " << fInputLineNumber <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 

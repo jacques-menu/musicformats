@@ -104,7 +104,7 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlySettingAVariable
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -184,7 +184,7 @@ class EXP brailleUTFKindAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -261,7 +261,7 @@ class EXP brailleByteOrderingKindAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -421,7 +421,7 @@ class EXP brailleGenerationOahGroup : public oahGroup
 
     void                  printBrailleGenerationOahHelp ();
 
-    void                  printBrailleGenerationOahValues (int fieldWidth);
+    void                  displayBrailleGenerationOahValues (int fieldWidth);
 
   private:
 

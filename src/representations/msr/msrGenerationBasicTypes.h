@@ -35,7 +35,7 @@ EXP extern msrGenerationAPIKind msrGenerationAPIKindFromString (
 extern std::map<std::string, msrGenerationAPIKind>
   gGlobalGenerationAPIKindsMap;
 
-std::string existingGenerationAPIKinds (size_t namesListMaxLength);
+std::string availableGenerationAPIKinds (size_t namesListMaxLength);
 
 void initializeGenerationAPIKindsMap ();
 
@@ -104,7 +104,7 @@ class EXP msrGenerationAPIKindAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 

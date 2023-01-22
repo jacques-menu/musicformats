@@ -165,7 +165,7 @@ std::string msrColorRGB::asString (int precision) const
     fG <<
     "," <<
     fB <<
-    ']';
+    "]]";
 
   return s.str ();
 }

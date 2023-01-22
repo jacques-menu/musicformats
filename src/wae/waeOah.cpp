@@ -73,10 +73,10 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-         "quiet", "q",
+         K_QUIET_OPTION_LONG_NAME, K_QUIET_OPTION_SHORT_NAME,
 R"(Don't issue any warning or error messages.)",
-        "fQuiet",
-        fQuiet));
+        "earlyQuietOptionRef",
+        gGlobalOahEarlyOptions.getEarlyQuietOptionRef ()));
 
   // don't show errors
 
@@ -187,7 +187,7 @@ void waeOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void waeOahGroup::printWaeOahValues (int fieldWidth)
+void waeOahGroup::displayWaeOahValues (int fieldWidth)
 {
   gLogStream <<
     "The wae options are:" <<
@@ -205,9 +205,6 @@ void waeOahGroup::printWaeOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream <<
-    std::setw (fieldWidth) << "fQuiet" << ": " <<
-    fQuiet <<
-    std::endl <<
     std::setw (fieldWidth) << "fDontShowErrors" << ": " <<
     fDontShowErrors <<
     std::endl <<
@@ -229,7 +226,7 @@ std::ostream& operator << (std::ostream& os, const S_waeOahGroup& elt)
   else {
     os << "[NONE]" << std::endl;
   }
-  
+
   return os;
 }
 

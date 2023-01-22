@@ -278,7 +278,7 @@ EXP S_mxsrOahGroup createGlobalMxsrOahGroup ();
 
 \code{EXP} is defined in \interface{exports.h} and is non-blank only when building on \Windows:
 \begin{lstlisting}[language=CPlusPlus]
-#if defined(WIN32) // && !defined (GCC)
+#if defined(WIN64) // && !defined (GCC)
 
 # ifdef MSVC
 #  pragma warning (disable : 4267)
@@ -527,7 +527,7 @@ const int msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
 
 When a field is an STL container, such a {\tt vector}, {\tt list}, {\tt map} or {\tt set}, this in indicated as part of the identifier, such as:
 \begin{lstlisting}[language=CPlusPlus]
-    std::map<std::string, std::string>   
+    std::map<std::string, std::string>
                           fPartsRenamingMap;
 \end{lstlisting}
 or
@@ -630,6 +630,8 @@ void oahValueFittedAtom::applyValueLessAtom (std::ostream& os)
 
   oahInternalError (s.str ());
 }
+
+	fSelected = true;
 \end{lstlisting}
 
 and:
@@ -726,7 +728,7 @@ It is defined in \elements{exports.h} to be empty except on Windows, where it is
 #ifndef __exports__
 #define __exports__
 
-#if defined(WIN32) // && !defined (GCC)
+#if defined(WIN64) // && !defined (GCC)
 
 # ifdef MSVC
 #  pragma warning (disable : 4267)
@@ -1415,7 +1417,7 @@ One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to th
 };
 \end{lstlisting}
 
-Another case is that of \class{msrKey} in \msrBoth{msrKeys}, in which the variant chosen is made explicit:
+Another case is that of \class{msrKey} in \msrBoth{msrKeys}, in which the variant selected is made explicit:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP msrKey : public msrMeasureElement
 {
@@ -1684,7 +1686,7 @@ S_msrScore translateMsrToMsr (
   S_msrScore        originalMsrScore,
   const S_msrOahGroup&     msrOpts,
   S_msr2msrOahGroup msr2msrOpts,
-  const std::string&     passNumber,
+  mfPassIDKind          passIDKind,
   const std::string&     passDescription)
 {
 	// ... ... ...

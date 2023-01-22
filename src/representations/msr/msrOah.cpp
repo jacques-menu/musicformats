@@ -125,7 +125,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -134,6 +134,8 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
 
   setMsrQuarterTonesPitchesLanguageKindVariable (
     (*it).second);
+
+	fSelected = true;
 }
 
 void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
@@ -250,7 +252,7 @@ void msrPitchesLanguageAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
+void msrPitchesLanguageAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -260,9 +262,8 @@ void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     ": " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -428,8 +429,9 @@ void msrRenamePartAtom::applyAtomWithValue (
 
   else {
     fStringToStringMapVariable [oldPartName] = newPartName;
-    fSetByAnOption = true;
   }
+
+	fSelected = true;
 }
 
 void msrRenamePartAtom::acceptIn (basevisitor* v)
@@ -585,7 +587,7 @@ void msrRenamePartAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void msrRenamePartAtom::printAtomWithVariableOptionsValues (
+void msrRenamePartAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -619,7 +621,7 @@ void msrRenamePartAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", set by an option";
+      ", selected";
 
     --gIndenter;
   }
@@ -746,7 +748,7 @@ R"(Write the contents of the first MSR skeleton data to standard error.)",
 R"(Write the contents of the first MSR data to standard error.)",
         "fDisplayFirstMsr",
         fDisplayFirstMsr);
-        
+
   subGroup->
     appendAtomToSubGroup (
       DisplayFirstMsrBooleanAtom);
@@ -782,7 +784,7 @@ R"(Write the contents of the first MSR data slices to standard error.)",
 R"(Write the contents of the second MSR data to standard error.)",
         "fDisplaySecondMsr",
         fDisplaySecondMsr);
-        
+
   subGroup->
     appendAtomToSubGroup (
       displaySecondMsrBooleanAtom);
@@ -879,7 +881,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -907,7 +909,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -1220,7 +1222,7 @@ void msrOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msrOahGroup::printMsrOahValues (int valueFieldWidth)
+void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The MSR options are:" <<

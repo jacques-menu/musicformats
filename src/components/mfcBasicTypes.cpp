@@ -1346,7 +1346,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
   switch (fComponentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:
       {
-        // is the multi component versions numbering consistent?
+        // is the multi-component versions numbering consistent?
         S_mfcVersionNumber
           multiComponentMostRecentVersionNumber =
             fetchComponentMostRecentVersionNumber (),
@@ -1362,7 +1362,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
           std::stringstream s;
 
           s <<
-            "Versions numbering inconsistency: multi component " <<
+            "Versions numbering inconsistency: multi-component " <<
             fComponentName <<
             ' ' <<
             mfcComponentKindAsString (fComponentKind) <<
@@ -1393,7 +1393,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
     gLogStream <<
       "Appending pass " <<
       pass <<
-      " to multi component \"" << fComponentName << "\"" <<
+      " to multi-component \"" << fComponentName << "\"" <<
       std::endl;
   }
 #endif
@@ -1409,7 +1409,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
   switch (fComponentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:
       {
-        // is the multi component versions numbering consistent?
+        // is the multi-component versions numbering consistent?
         S_mfcVersionNumber
           multiComponentMostRecentVersionNumber =
             fetchComponentMostRecentVersionNumber (),
@@ -1425,7 +1425,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
           std::stringstream s;
 
           s <<
-            "Versions numbering inconsistency: multi component " <<
+            "Versions numbering inconsistency: multi-component " <<
             fComponentName <<
             ' ' <<
             mfcComponentKindAsString (fComponentKind) <<
@@ -2085,7 +2085,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
   switch (fComponentEntropicityKind) {
     case mfcMultiComponentEntropicityKind::kComponentEntropicityYes:
       {
-        // is the multi component versions numbering consistent?
+        // is the multi-component versions numbering consistent?
         S_mfcVersionNumber
           multiComponentMostRecentVersionNumber =
             fetchComponentMostRecentVersionNumber (),
@@ -2101,7 +2101,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
           std::stringstream s;
 
           s <<
-            "Versions numbering inconsistency: multi component " <<
+            "Versions numbering inconsistency: multi-component " <<
             fComponentName <<
             ' ' <<
             mfcComponentKindAsString (fComponentKind) <<

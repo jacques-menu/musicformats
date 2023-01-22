@@ -26,7 +26,7 @@ EXP void translateMxsrToMusicXML (
   Sxmlelement        theMxsr,
   std::string        outputFileName,
   std::ostream&      err,
-  const std::string& passNumber,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription);
 
 

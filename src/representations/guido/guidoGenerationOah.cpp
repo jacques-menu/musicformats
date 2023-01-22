@@ -209,7 +209,7 @@ void guidoGenerationOahGroup::checkGroupOptionsConsistency ()
 {}
 
 //______________________________________________________________________________
-void guidoGenerationOahGroup::printGuidoGenerationOahGroupValues (
+void guidoGenerationOahGroup::displayGuidoGenerationOahGroupValues (
   int fieldWidth)
 {
   gLogStream <<

@@ -483,6 +483,7 @@ alias cgic='checkGIndenterCrement'
 #----------------------------------------------
 
 alias xy='xml2ly'
+alias cxy='clear; xml2ly'
 
 alias xlv='xml2ly -version'
 alias xlq='xml2ly -query'

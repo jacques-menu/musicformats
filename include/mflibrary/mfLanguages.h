@@ -43,7 +43,7 @@ mfLanguageKind mfLanguageKindFromString (
 extern std::map<std::string, mfLanguageKind>
   gGlobalMusicFormatsLanguageKindsMap;
 
-std::string existingMusicFormatsLanguageKinds (size_t namesListMaxLength);
+std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength);
 
 void initializeMusicFormatsLanguageKindsMap ();
 

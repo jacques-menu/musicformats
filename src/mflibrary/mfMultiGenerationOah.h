@@ -51,7 +51,7 @@ EXP extern mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
 extern std::map<std::string, mfMultiGenerationOutputKind>
   gGlobalMultiGenerationOutputKindsMap;
 
-std::string existingMultiGenerationOutputKinds (size_t namesListMaxLength);
+std::string availableMultiGenerationOutputKinds (size_t namesListMaxLength);
 
 void initializeMultiGenerationOutputKindsMap ();
 
@@ -67,14 +67,14 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlySettingAVari
     // ------------------------------------------------------
 
     static SMARTP<mfMultiGenerationOutputKindAtom> create (
-                          const std::string& longName,
-                          const std::string& shortName,
-                          const std::string& description,
-                          const std::string& variableName,
-                          mfMultiGenerationOutputKind&
-                                             multiGenerationOutputKindVariable,
-                          mfMultiGenerationOutputKind
-                                             multiGenerationOutputKindValue);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& variableName,
+                            mfMultiGenerationOutputKind&
+                                               multiGenerationOutputKindVariable,
+                            mfMultiGenerationOutputKind
+                                               multiGenerationOutputKindValue);
 
   protected:
 
@@ -82,14 +82,14 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlySettingAVari
     // ------------------------------------------------------
 
                           mfMultiGenerationOutputKindAtom (
-                          const std::string& longName,
-                          const std::string& shortName,
-                          const std::string& description,
-                          const std::string& variableName,
-                          mfMultiGenerationOutputKind&
-                                             multiGenerationOutputKindVariable,
-                          mfMultiGenerationOutputKind
-                                             multiGenerationOutputKindValue);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& variableName,
+                            mfMultiGenerationOutputKind&
+                                               multiGenerationOutputKindVariable,
+                            mfMultiGenerationOutputKind
+                                               multiGenerationOutputKindValue);
 
     virtual               ~mfMultiGenerationOutputKindAtom ();
 
@@ -135,7 +135,7 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlySettingAVari
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -219,7 +219,7 @@ class EXP mfMultiGenerationOahGroup : public oahGroup
 
     void                  printMultiGenerationOahHelp ();
 
-    void                  printMultiGenerationOahValues (int fieldWidth);
+    void                  displayMultiGenerationOahValues (int fieldWidth);
 
   private:
 

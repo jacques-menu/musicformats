@@ -54,8 +54,8 @@ EXP msrClefKind msrClefKindFromString (
   int           inputLineNumber,
   const std::string& clefString);
 
-std::string existingClefKinds (size_t namesListMaxLength);
-std::string existingClefKindsNames (size_t namesListMaxLength);
+std::string availableClefKinds (size_t namesListMaxLength);
+std::string availableClefKindsNames (size_t namesListMaxLength);
 
 extern std::map<std::string, msrClefKind>
   gGlobalClefKindsMap;

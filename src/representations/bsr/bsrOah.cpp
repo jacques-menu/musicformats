@@ -111,6 +111,8 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
       std::endl;
   }
 #endif
+
+	fSelected = true;
 }
 
 void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
@@ -225,7 +227,7 @@ void bsrFacSimileKindAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void bsrFacSimileKindAtom::printAtomWithVariableOptionsValues (
+void bsrFacSimileKindAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -235,9 +237,8 @@ void bsrFacSimileKindAtom::printAtomWithVariableOptionsValues (
     ": " <<
     bsrFacSimileKindAsString (
       fBsrFacSimileKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -310,6 +311,8 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
       std::endl;
   }
 #endif
+
+	fSelected = true;
 }
 
 void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
@@ -423,7 +426,7 @@ void bsrTextsLanguageAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void bsrTextsLanguageAtom::printAtomWithVariableOptionsValues (
+void bsrTextsLanguageAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -433,9 +436,8 @@ void bsrTextsLanguageAtom::printAtomWithVariableOptionsValues (
     ": " <<
     bsrTextsLanguageKindAsString (
       fBsrTextsLanguageKindVariable);
-  if (fSetByAnOption) {
-    os <<
-      ", set by an option";
+  if (fSelected) {
+    os << ", selected";
   }
   os << std::endl;
 }
@@ -497,7 +499,7 @@ R"()",
 R"(Write the contents of the first BSR data to standard error.)",
         "fDisplayFirstBsr",
         fDisplayFirstBsr);
-        
+
   subGroup->
     appendAtomToSubGroup (
       displayFirstBsrScoreShortBooleanAtom);
@@ -519,7 +521,7 @@ R"(Write the contents of the first BSR data, full version, to standard error.)",
 R"(Write the contents of the second BSR data to standard error.)",
         "fDisplaySecondBsr",
         fDisplaySecondBsr);
-        
+
   subGroup->
     appendAtomToSubGroup (
       displaySecondBsrScoreShortBooleanAtom);
@@ -563,7 +565,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingBsrTextsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableBsrTextsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -589,7 +591,7 @@ The default is 'DEFAULT_VALUE'.)",
               std::regex ("NUMBER"),
               std::to_string (gGlobalBsrTextsLanguageKindsMap.size ())),
             std::regex ("TEXT_LANGUAGES"),
-            existingBsrTextsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableBsrTextsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           bsrTextsLanguageKindAsString (
             bsrTextsLanguageKindDefaultValue)),
@@ -801,7 +803,7 @@ void bsrOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void bsrOahGroup::printBsrOahValues (int fieldWidth)
+void bsrOahGroup::displayBsrOahValues (int fieldWidth)
 {
   gLogStream <<
     "The BSR bsr are:" <<

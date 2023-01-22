@@ -35,8 +35,8 @@ class EXP msdl2brailleRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<msdl2brailleRegularHandler> create (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             const S_msdl2brailleInsiderHandler&
                                               insiderOahHandler);
 
@@ -46,8 +46,8 @@ class EXP msdl2brailleRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           msdl2brailleRegularHandler (
-                            const std::string&          serviceName,
-                            const std::string&          handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             const S_msdl2brailleInsiderHandler&
                                               insiderOahHandler);
 

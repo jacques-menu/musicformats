@@ -104,7 +104,7 @@ class EXP outputFileOahGroup : public oahGroup
 
     void                  printOutputFileOahHelp ();
 
-    void                  printOutputFileOahValues (int fieldWidth);
+    void                  displayOutputFileOahValues (int fieldWidth);
 
   private:
 

@@ -133,29 +133,7 @@ class EXP tracingOahGroup : public oahGroup
     // other
     // --------------------------------------
 
-    // history
-    void                  setTraceComponents ()
-                              { fTraceComponents = true; }
-
-// replaced by getEarlyTraceComponents()
-//     Bool                  getTraceComponents () const
-//                               { return fTraceComponents; }
-
     // passes
-// replaced by getEarlyTracePasses() // JMI v0.9.66
-//     void                  setTracePasses ()
-//                               { fTracePasses = true; }
-//
-//     Bool                  getTracePasses () const
-//                               { return fTracePasses; }
-
-// replaced by getEarlyTraceOnlyPass() // JMI v0.9.66
-//     void                  setTraceOnlyPass ()
-//                               { fTraceOnlyPass = true; }
-//
-//     Bool                  getTraceOnlyPass () const
-//                               { return fTraceOnlyPass; }
-
     const S_oahBooleanAtom&
                           getTracePassesBooleanAtom () const
                               { return fTracePassesBooleanAtom; }
@@ -779,11 +757,11 @@ class EXP tracingOahGroup : public oahGroup
     // print
     // ------------------------------------------------------
 
-    void                  printtracingOahHelp ();
+    void                  printTracingOahHelp ();
 
-    void                  printtracingOahValues (int fieldWidth);
+    void                  displayTracingOahValues (int fieldWidth);
 
-    virtual void          printAtomWithVariableOptionsValues (
+    virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const;
 
@@ -813,14 +791,11 @@ class EXP tracingOahGroup : public oahGroup
     // other
     // --------------------------------------
 
-    // history
-    Bool                  fTraceComponents;
-
     // passes
-    Bool                  fTracePasses;
+//     Bool                  fTracePasses;
     S_oahBooleanAtom      fTracePassesBooleanAtom;
 
-    mfPassIDKind          fTraceOnlyPassIDKind;
+//     mfPassIDKind          fTraceOnlyPassIDKind;
     S_passIDOahAtom       fTraceOnlyPassIDOahAtom;
 
   public:
@@ -828,7 +803,7 @@ class EXP tracingOahGroup : public oahGroup
     // scaling
     Bool                  fTraceGeometry;
     // identification
-    Bool                  fTraceIdentification; // specialize ??? JMI
+    Bool                  fTraceIdentification; // specialize ??? JMI v0.9.66
     // for tests, hidden
     Bool                  fTraceForTests;
 

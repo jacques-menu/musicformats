@@ -96,7 +96,7 @@ class EXP msrPitchesLanguageAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -182,7 +182,7 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -422,7 +422,7 @@ class EXP msrOahGroup : public oahGroup
 
     void                  printMsrOahHelp ();
 
-    void                  printMsrOahValues (int valueFieldWidth);
+    void                  displayMsrOahValues (int valueFieldWidth);
 
   private:
 

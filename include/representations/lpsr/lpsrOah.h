@@ -97,7 +97,7 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -185,7 +185,7 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -269,7 +269,7 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -356,7 +356,7 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -686,7 +686,7 @@ class EXP lpsrOahGroup : public oahGroup
 
     void                  printLpsrOahHelp ();
 
-    void                  printLpsrOahValues (int fieldWidth);
+    void                  displayLpsrOahValues (int fieldWidth);
 
   private:
 

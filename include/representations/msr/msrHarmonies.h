@@ -112,8 +112,8 @@ std::string msrHarmonyKindShortName (
 EXP msrHarmonyKind msrHarmonyKindFromString (
   const std::string& theString);
 
-std::string existingHarmonyKinds (size_t namesListMaxLength);
-std::string existingHarmonyKindsNames (size_t namesListMaxLength);
+std::string availableHarmonyKinds (size_t namesListMaxLength);
+std::string availableHarmonyKindsNames (size_t namesListMaxLength);
 
 // constant
 EXP extern const int K_HARMONY_INVERSION_NONE;

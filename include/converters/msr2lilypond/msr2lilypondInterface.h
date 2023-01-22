@@ -27,10 +27,10 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   S_msrScore          theMsrScore,
-  std::string         passNumber1,
-  std::string         passDescription1,
-  std::string         passNumber2,
-  std::string         passDescription2,
+  mfPassIDKind        passID_A,
+  std::string         passDescription_A,
+  mfPassIDKind        passID_B,
+  std::string         passDescription_B,
   std::ostream&       out,
   std::ostream&       err,
   const S_oahHandler& handler);

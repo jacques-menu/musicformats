@@ -34,7 +34,7 @@ std::string msrMarginTypeKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrMarginTypeKind& elt);
 
-std::string existingMsrMarginTypeKinds (size_t namesListMaxLength);
+std::string availableMsrMarginTypeKinds (size_t namesListMaxLength);
 
 extern std::map<std::string, msrMarginTypeKind>
   gGlobalMsrMarginTypeKindsMap;

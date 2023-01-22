@@ -318,7 +318,7 @@ void mfslInterpreterOahGroup::browseData (basevisitor* v)
 #endif
 }
 
-void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
+void mfslInterpreterOahGroup::displayMfslInterpreterOahValues (
   int fieldWidth)
 {
   gLogStream <<

@@ -122,7 +122,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
     clock_t endClock = clock ();
 
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+      mfPassIDKind::kMfPassID_1,
       "Create the MSR score from the MSDL input",
       mfTimingItemKind::kMandatory,
       startClock,
@@ -180,7 +180,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2),
+        mfPassIDKind::kMfPassID_2,
         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
   }
   catch (msr2msrException& e) {
@@ -202,7 +202,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gGlobalMsrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+        mfPassIDKind::kMfPassID_3,
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -228,7 +228,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       theMxsr,
       outputFileName,
       err,
-      gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
+      mfPassIDKind::kMfPassID_4,
       "Convert  the MXSR into Guido text");
   }
   catch (mxsr2guidoException& e) {

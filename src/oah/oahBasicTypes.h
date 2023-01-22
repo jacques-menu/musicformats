@@ -66,7 +66,7 @@ std::ostream& operator << (std::ostream& os, const oahOptionOrArgumentKind& elt)
     - first is the name of the option, such as '-x'
     - second is the value of the option
 */
-class   oahOptionOrArgument : public smartable
+class oahOptionOrArgument : public smartable
 {
   public:
 
@@ -557,7 +557,7 @@ class EXP oahAtom : public oahElement
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
-    virtual void          printAtomWithVariableOptionsValues (
+    virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const;
 
@@ -762,9 +762,6 @@ class EXP oahAtomStoringAValue : public oahValueFittedAtom
     std::string           getValueSpecification () const
                               { return fValueSpecification; }
 
-    Bool                  getSetByAnOption () const
-                              { return fSetByAnOption; }
-
   public:
 
     // public services
@@ -796,7 +793,7 @@ class EXP oahAtomStoringAValue : public oahValueFittedAtom
 
     void                  printHelp (std::ostream& os) const override;
 
-    virtual void          printAtomWithVariableOptionsValues (
+    virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -807,7 +804,6 @@ class EXP oahAtomStoringAValue : public oahValueFittedAtom
     std::string           fValueSpecification;
 
     std::string           fVariableName;
-    Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahAtomStoringAValue> S_oahAtomStoringAValue;
 EXP std::ostream& operator << (std::ostream& os, const S_oahAtomStoringAValue& elt);
@@ -850,9 +846,6 @@ class EXP oahAtomImplicitlySettingAVariable : public oahValueLessAtom
     // set and get
     // ------------------------------------------------------
 
-    Bool                  getSetByAnOption () const
-                              { return fSetByAnOption; }
-
   public:
 
     // public services
@@ -886,7 +879,7 @@ class EXP oahAtomImplicitlySettingAVariable : public oahValueLessAtom
 
     void                  printHelp (std::ostream& os) const override;
 
-    virtual void          printAtomWithVariableOptionsValues (
+    virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -896,7 +889,6 @@ class EXP oahAtomImplicitlySettingAVariable : public oahValueLessAtom
     // ------------------------------------------------------
 
     std::string           fVariableName;
-    Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahAtomImplicitlySettingAVariable> S_oahAtomImplicitlySettingAVariable;
 EXP std::ostream& operator << (std::ostream& os, const S_oahAtomImplicitlySettingAVariable& elt);
@@ -954,9 +946,6 @@ class EXP oahValueDefaultedAtom : public oahAtom
                             const std::string& theString,
                             std::ostream&      os) = 0;
 
-    Bool                  getSetByAnOption () const
-                              { return fSetByAnOption; }
-
   public:
 
     // visitors
@@ -977,7 +966,7 @@ class EXP oahValueDefaultedAtom : public oahAtom
 //
 //     void                  print (std::ostream& os) const override;
 //
-//     void                  printAtomWithVariableOptionsValues (
+//     void                  displayAtomWithVariableOptionsValues (
 //                             std::ostream& os,
 //                             int           valueFieldWidth) const override;
 
@@ -987,7 +976,6 @@ class EXP oahValueDefaultedAtom : public oahAtom
     // ------------------------------------------------------
 
     std::string           fDefaultStringValue;
-    Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahValueDefaultedAtom> S_oahValueDefaultedAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahValueDefaultedAtom& elt);
@@ -1048,7 +1036,7 @@ class EXP oahPureHelpValueLessAtom : public oahValueLessAtom
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -1396,11 +1384,11 @@ class EXP oahGroup : public oahElement
     Bool                  getGroupHeaderIsToBeWritten () const
                               { return fGroupHeaderIsToBeWritten; }
 
-    // number of chosen atoms
+    // number of selected atoms
     void                  incrementNumberOfUserChoseAtomsInThisGroup ()
                               { fNumberOfUserChoseAtomsInThisGroup += 1; }
 
-    // number of chosen atoms
+    // number of selected atoms
     int                   getNumberOfUserChoseAtomsInThisGroup () const
                               { return fNumberOfUserChoseAtomsInThisGroup; }
 

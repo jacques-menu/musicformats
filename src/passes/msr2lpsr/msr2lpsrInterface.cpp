@@ -48,7 +48,7 @@ S_lpsrScore translateMsrToLpsr (
   const S_msrScore&          originalMsrScore,
   const S_msrOahGroup&       msrOpts,
   const S_lpsrOahGroup&      lpsrOpts,
-  std::string                passNumber,
+  mfPassIDKind               passIDKind,
   std::string                passDescription,
   const S_mfcMultiComponent& multiComponent)
 {
@@ -71,20 +71,29 @@ S_lpsrScore translateMsrToLpsr (
   // start the clock
   clock_t startClock = clock ();
 
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -103,7 +112,7 @@ S_lpsrScore translateMsrToLpsr (
 
   // register time spent
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,

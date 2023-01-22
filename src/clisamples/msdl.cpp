@@ -49,7 +49,7 @@
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
-#ifndef WIN32
+#ifndef WIN64
 static void _sigaction (int signal, siginfo_t *si, void *arg)
 {
   std::cerr << "Signal #" << signal << " catched!" << std::endl;
@@ -83,7 +83,7 @@ static void catchSignals () {}
 // {
 //   /*
 //     This is a way to enforce options 'permanently'
-//     independently of the options chosen by the user
+//     independently of the options selected by the user
 //   */
 //
 //   // trace
@@ -447,7 +447,7 @@ int main (int argc, char*  argv[])
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  // has the output kind been chosen?
+  // has the output kind been selected?
   // ------------------------------------------------------
 
   switch (multiGenerationOutputKind) {

@@ -187,7 +187,7 @@ lpsrScoreBlock::lpsrScoreBlock (
   std::string midiTempoDuration  = "16";
   int    midiTempoPerSecond = 360;
 
-  if (midiTempoAtom->getSetByAnOption ()) {
+  if (midiTempoAtom->getSelected ()) {
     const msrMidiTempo&
       midiTempo =
        gGlobalLpsr2lilypondOahGroup->getMidiTempo ();

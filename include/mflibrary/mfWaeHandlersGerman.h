@@ -51,21 +51,7 @@ class EXP mfWaeHandlerGerman : public mfWaeHandler
 
     virtual std::string   passIDKindAsString (mfPassIDKind passIDKind) const override;
 
-    virtual std::string   pass1 () const override;
-
-    virtual std::string   pass2 () const override;
-    virtual std::string   pass2a () const override;
-    virtual std::string   pass2b () const override;
-
-    virtual std::string   pass3 () const override;
-    virtual std::string   pass3a () const override;
-    virtual std::string   pass3b () const override;
-
-    virtual std::string   pass4 () const override;
-    virtual std::string   pass4a () const override;
-    virtual std::string   pass4b () const override;
-
-    virtual std::string   pass5 () const override;
+//     virtual std::string   passName (mfPassIDKind passIDKind) const override;
 
     virtual std::string   passOptional () const override;
 

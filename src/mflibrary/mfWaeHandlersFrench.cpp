@@ -121,54 +121,10 @@ std::string mfWaeHandlerFrench::passIDKindAsString (mfPassIDKind passIDKind) con
   return result;
 }
 
-std::string mfWaeHandlerFrench::pass1 () const
-{
-  return "Passe 1";
-}
-
-std::string mfWaeHandlerFrench::pass2 () const
-{
-  return "Passe 2";
-}
-std::string mfWaeHandlerFrench::pass2a () const
-{
-  return "Passe 2a";
-}
-std::string mfWaeHandlerFrench::pass2b () const
-{
-  return "Passe 2b";
-}
-
-std::string mfWaeHandlerFrench::pass3 () const
-{
-  return "Passe 3";
-}
-std::string mfWaeHandlerFrench::pass3a () const
-{
-  return "Passe 3a";
-}
-std::string mfWaeHandlerFrench::pass3b () const
-{
-  return "Passe 3b";
-}
-
-std::string mfWaeHandlerFrench::pass4 () const
-{
-  return "Passe 4";
-}
-std::string mfWaeHandlerFrench::pass4a () const
-{
-  return "Passe 4a";
-}
-std::string mfWaeHandlerFrench::pass4b () const
-{
-  return "Passe 4b";
-}
-
-std::string mfWaeHandlerFrench::pass5 () const
-{
-  return "Passe 5";
-}
+// std::string mfWaeHandlerFrench::passName (mfPassIDKind passIDKind) const
+// {
+//   return "Passe 1";
+// }
 
 std::string mfWaeHandlerFrench::passOptional () const
 {

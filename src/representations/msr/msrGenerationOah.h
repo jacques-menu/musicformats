@@ -107,7 +107,7 @@ class EXP msrGeneratorsOahGroup : public oahGroup
 
     void                  printMsrGeneratorsOahHelp ();
 
-    void                  printMsrGeneratorsOahValues (
+    void                  displayMsrGeneratorsOahValues (
                             int fieldWidth);
 
   private:

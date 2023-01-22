@@ -3897,11 +3897,17 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
     if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-        gLogStream <<
+				std::stringstream s;
+
+				s <<
           "Ignoring the harmonies" <<
           ", line " <<
           inputLineNumber <<
           std::endl;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					s.str ());
       }
 #endif
     }

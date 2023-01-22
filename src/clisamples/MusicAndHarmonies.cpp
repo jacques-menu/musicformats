@@ -30,7 +30,7 @@ using namespace MusicXML2;
 // a function that return random numbers in the given range
 //------------------------------------------------------------------------
 static int getrandom(int range) {
-#ifdef WIN32
+#ifdef WIN64
   float f = (float)rand() / RAND_MAX;
 #else
   float f = (float)random() / RAND_MAX;
@@ -259,7 +259,7 @@ int main (int argc, char*  argv[]) {
   // if present, reads the measures count from the command line
   int count = (argc == 2) ? atoi(argv[1]) : 20;
   // sets the random numbers seed
-#ifdef WIN32
+#ifdef WIN64
   srand((unsigned)time(0));
 #else
   srandom((unsigned)time(0));

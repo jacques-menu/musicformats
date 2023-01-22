@@ -82,7 +82,7 @@ class EXP extraDisplayAllHarmoniesStructuresAtom : public oahValueLessAtom
 
     void                  printAllHarmoniesStructures (std::ostream& os) const;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -163,7 +163,7 @@ class EXP extraDisplayAllHarmoniesContentsAtom : public oahAtomStoringAValue
                             std::ostream&              os,
                             msrSemiTonesPitchKind semiTonesPitchKind) const;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -243,7 +243,7 @@ class EXP extraDisplayHarmonyDetailsAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -323,7 +323,7 @@ class EXP extraDisplayHarmonyAnalysisAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -404,7 +404,7 @@ class EXP harmoniesExtraOahGroup : public oahGroup
 
     void                  printHarmoniesExtraOahHelp ();
 
-    void                  printHarmoniesExtraOahValues (int fieldWidth);
+    void                  displayHarmoniesExtraOahValues (int fieldWidth);
 
   public:
 

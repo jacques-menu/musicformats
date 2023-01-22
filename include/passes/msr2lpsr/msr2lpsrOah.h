@@ -90,7 +90,7 @@ class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
 
     void                  print (std::ostream& os) const override;
 
-    void                  printAtomWithVariableOptionsValues (
+    void                  displayAtomWithVariableOptionsValues (
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
@@ -196,7 +196,7 @@ class EXP msr2lpsrOahGroup : public oahGroup
 
     void                  printMsr2lpsrOahHelp ();
 
-    void                  printMsr2lpsrOahValues (int valueFieldWidth);
+    void                  displayMsr2lpsrOahValues (int valueFieldWidth);
 
   private:
 

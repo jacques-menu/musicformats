@@ -121,7 +121,7 @@ std::string uncompressMXLFile (
 
   std::string uncompressedFileName;
 
-#ifdef WIN32
+#ifdef WIN64
   // JMI
 #else
   {
@@ -513,8 +513,8 @@ void checkSXMLFile (
 
 //_______________________________________________________________________________
 SXMLFile createSXMLFileFromFile (
-  const char*   fileName,
-  const std::string& passNumber,
+  const char*        fileName,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
   SXMLFile sxmlfile;
@@ -522,22 +522,28 @@ SXMLFile createSXMLFileFromFile (
   // start the clock
   clock_t startClock = clock ();
 
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
-      std::endl;
-
-    gLogStream <<
+      std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -569,7 +575,7 @@ SXMLFile createSXMLFileFromFile (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -580,8 +586,8 @@ SXMLFile createSXMLFileFromFile (
 
 //_______________________________________________________________________________
 SXMLFile createSXMLFileFromFd (
-  FILE*         fd,
-  const std::string& passNumber,
+  FILE*              fd,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
   SXMLFile sxmlfile;
@@ -589,22 +595,29 @@ SXMLFile createSXMLFileFromFd (
   // start the clock
   clock_t startClock = clock ();
 
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": " << passDescription <<
-      std::endl;
-
-    gLogStream <<
+      gWaeHandler->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -636,7 +649,7 @@ SXMLFile createSXMLFileFromFd (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -647,8 +660,8 @@ SXMLFile createSXMLFileFromFd (
 
 //_______________________________________________________________________________
 SXMLFile createSXMLFileFromString (
-  const char*   buffer,
-  const std::string& passNumber,
+  const char*        buffer,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
   SXMLFile sxmlfile;
@@ -688,7 +701,7 @@ SXMLFile createSXMLFileFromString (
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -698,32 +711,40 @@ SXMLFile createSXMLFileFromString (
 }
 
 //_______________________________________________________________________________
-EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
-  const char*    fileName,
-  S_mxsrOahGroup musicxmlOpts,
-  const std::string&  passNumber,
-  const std::string&  passDescription)
+EXP Sxmlelement musicxmlFile2mxsr (
+  const char*        fileName,
+  S_mxsrOahGroup     musicxmlOpts,
+  mfPassIDKind       passIDKind,
+  const std::string& passDescription)
 {
   // start the clock
   clock_t startClock = clock ();
 
   std::string fileNameAsString = fileName;
 
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": building the MXSR from \"" <<
-      fileNameAsString << "\"" <<
+      passIDKind << ": building the MXSR from \"" << fileNameAsString << "\"" <<
       std::endl <<
       separator <<
-      std::endl << std::endl;
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -792,7 +813,7 @@ EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -802,29 +823,38 @@ EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
 }
 
 //_______________________________________________________________________________
-EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
-  FILE*          fd,
-  S_mxsrOahGroup musicxmlOpts,
-  const std::string&  passNumber,
-  const std::string&  passDescription)
+EXP Sxmlelement musicxmlFd2mxsr (
+  FILE*              fd,
+  S_mxsrOahGroup     musicxmlOpts,
+  mfPassIDKind       passIDKind,
+  const std::string& passDescription)
 {
   // start the clock
   clock_t startClock = clock ();
+
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << ": building the MXSR from standard input" <<
+      passIDKind << ": building the MXSR from standard input" <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -911,7 +941,7 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -925,28 +955,37 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
 
 //_______________________________________________________________________________
 EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
-  const char*    buffer,
-  S_mxsrOahGroup musicxmlOpts,
-  const std::string&  passNumber,
-  const std::string&  passDescription)
+  const char*        buffer,
+  S_mxsrOahGroup     musicxmlOpts,
+  mfPassIDKind       passIDKind,
+  const std::string& passDescription)
 {
   // start the clock
   clock_t startClock = clock ();
+
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
       "%--------------------------------------------------------------";
 
-    gLogStream <<
+    std::stringstream s;
+
+    s <<
       std::endl <<
       separator <<
       std::endl <<
       gTab <<
-      passNumber << "building the MXSR from a buffer" <<
+      passIDKind << "building the MXSR from a buffer" <<
       std::endl <<
       separator <<
       std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      s.str ());
   }
 #endif
 
@@ -969,7 +1008,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
   clock_t endClock = clock ();
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    passNumber,
+    passIDKind,
     passDescription,
     mfTimingItemKind::kMandatory,
     startClock,
@@ -984,7 +1023,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
 //_______________________________________________________________________________
 Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
   const std::string& inputSourceName,
-  const std::string& passNumber,
+  mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
 #ifdef MF_TRACING_IS_ENABLED
@@ -995,7 +1034,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
     gLogStream <<
       "convertMusicXMLToMxsr(): " <<
       "inputSourceName: \"" << inputSourceName << "\"" <<
-      ", passNumber: \"" << passNumber << "\"" <<
+      ", passIDKind: \"" << passIDKind << "\"" <<
       std::endl <<
       separator <<
       std::endl;
@@ -1015,7 +1054,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
       musicxmlFd2mxsr (
         stdin,
         gGlobalMxsrOahGroup,
-        passNumber,
+        passIDKind,
         passDescription);
   }
 
@@ -1045,7 +1084,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
       musicxmlFile2mxsr (
         inputSourceName.c_str(),
         gGlobalMxsrOahGroup,
-        passNumber,
+        passIDKind,
         passDescription);
   }
 

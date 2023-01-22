@@ -100,7 +100,7 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const std::string& theStrin
     ++gIndenter;
 
     s <<
-      existingMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -112,7 +112,7 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const std::string& theStrin
   return result;
 }
 
-std::string existingMsdlUserLanguageKinds (size_t namesListMaxLength)
+std::string availableMsdlUserLanguageKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -192,7 +192,7 @@ msdlCommentsTypeKind msdlCommentsTypeKindFromString (const std::string& theStrin
     ++gIndenter;
 
     s <<
-      existingMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -234,7 +234,7 @@ std::string msdlCommentsTypeKindAsString (
   return result;
 }
 
-std::string existingMsdlCommentsTypeKinds (size_t namesListMaxLength)
+std::string availableMsdlCommentsTypeKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 

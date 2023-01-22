@@ -57,19 +57,6 @@ oahEarlyOptions::oahEarlyOptions ()
   std::cerr << // JMI
     "Enforcing fTraceEarlyOptions" <<
     std::endl;
-
-#ifdef MF_TRACING_IS_ENABLED
-  fTraceEarlyOptions = true;
-
-  fEarlyTraceOnlyPass =
-    mfPassIDKind::kMfPassID_ALL; // default value for passes tracing
-#endif
-
-#elsif
-#ifdef MF_TRACING_IS_ENABLED
-  fTraceEarlyOptions = false;
-#endif
-
 #endif
 
   initializeEarlyOptions ();
@@ -80,8 +67,10 @@ oahEarlyOptions::~oahEarlyOptions ()
 
 void oahEarlyOptions::initializeEarlyOptions ()
 {
+#ifdef MF_TRACING_IS_ENABLED
   fEarlyTraceOnlyPass =
     mfPassIDKind::kMfPassID_ALL; // default value for passes tracing
+#endif
 }
 
 //_______________________________________________________________________________
@@ -802,8 +791,7 @@ void oahEarlyOptions::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fEarlyIncludeFileNamesList" << ": " <<
-    std::endl;
+    "fEarlyIncludeFileNamesList" << ": ";
 
   if (fEarlyIncludeFileNamesList.size ()) {
     os << std::endl;

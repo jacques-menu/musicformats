@@ -723,7 +723,7 @@ void initializeLpsrScoreOutputKindsMap ()
     lpsrScoreOutputKind::kScoreOutputPartsOnlyOneFile;
 }
 
-std::string existingLpsrScoreOutputKinds (size_t namesListMaxLength)
+std::string availableLpsrScoreOutputKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -957,7 +957,7 @@ void initializeLpsrAccidentalStyleKindsMap ()
     lpsrAccidentalStyleKind::kAccidentalStyleForget;
 }
 
-std::string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength)
+std::string availableLpsrAccidentalStyleKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -1058,7 +1058,7 @@ std::ostream& operator << (std::ostream& os, const lpsrChordsLanguageKind& elt)
   return os;
 }
 
-std::string existingLpsrChordsLanguageKinds (size_t namesListMaxLength)
+std::string availableLpsrChordsLanguageKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 
@@ -1333,7 +1333,7 @@ void initializeLpsrDynamicsTextSpannersStyleKindsMap ()
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleTrill;
 }
 
-std::string existingLpsrDynamicsTextSpannersStyleKinds (
+std::string availableLpsrDynamicsTextSpannersStyleKinds (
   size_t namesListMaxLength)
 {
   std::stringstream s;
@@ -1428,7 +1428,7 @@ void initializeLpsrLyricsDurationsKindsMap ()
     lpsrLyricsDurationsKind::kLyricsDurationsExplicit;
 }
 
-std::string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength)
+std::string availableLpsrLyricsDurationsKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 

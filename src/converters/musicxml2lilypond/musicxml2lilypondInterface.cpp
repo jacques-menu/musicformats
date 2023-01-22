@@ -123,7 +123,6 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       translateMxsrToMsrSkeleton (
         theMxsr,
         gGlobalMsrOahGroup,
-//         gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2a),
         mfPassIDKind::kMfPassID_2a,
         gWaeHandler->createAnMSRSqueletonFromTheMXSR ());
   }
@@ -155,7 +154,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     populateMsrSkeletonFromMxsr (
       theMxsr,
       firstMsrScore,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_2b),
+        mfPassIDKind::kMfPassID_2b,
         gWaeHandler->populateTheMSRSqueletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
@@ -201,7 +200,7 @@ if (false) { // JMI
           firstMsrScore,
           gGlobalMsrOahGroup,
           gGlobalMsr2msrOahGroup,
-          gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+          mfPassIDKind::kMfPassID_3,
           gWaeHandler->convertTheFirstMSRIntoASecondMSR (),
           pathToVoice);
     } // for
@@ -212,7 +211,7 @@ else {
         firstMsrScore,
         gGlobalMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_3),
+        mfPassIDKind::kMfPassID_3,
         gWaeHandler->convertTheFirstMSRIntoASecondMSR ());
 }
   }
@@ -251,7 +250,7 @@ else {
         secondMsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_4),
+        mfPassIDKind::kMfPassID_4,
         gWaeHandler->convertTheSecondMSRIntoAnLPSR (),
         createMusicxml2lilypondConverterComponent ());
   }
@@ -304,7 +303,7 @@ else {
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_5),
+        mfPassIDKind::kMfPassID_5,
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
     }
@@ -372,7 +371,7 @@ else {
         theLpsrScore,
         gGlobalMsrOahGroup,
         gGlobalLpsrOahGroup,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_5),
+        mfPassIDKind::kMfPassID_5,
         gWaeHandler->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
     }
@@ -578,7 +577,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2lilypond (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        gWaeHandler-> pass1 (),
+        mfPassIDKind::kMfPassID_1,
         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
@@ -603,7 +602,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
     sxmlfile =
       createSXMLFileFromFile (
         fileName,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+        mfPassIDKind::kMfPassID_1,
         gWaeHandler->createAnMXSRFromAMusicXMLFile ());
 
   if (sxmlfile) {
@@ -629,7 +628,7 @@ EXP mfMusicformatsErrorKind musicxmlFd2lilypond (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+        mfPassIDKind::kMfPassID_1,
         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
@@ -654,7 +653,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2lilypondWithHandler (
     sxmlfile =
       createSXMLFileFromFd (
         fd,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+        mfPassIDKind::kMfPassID_1,
         gWaeHandler->createAnMXSRFromAMusicXMLDescriptor ());
 
   if (sxmlfile) {
@@ -680,7 +679,7 @@ EXP mfMusicformatsErrorKind musicxmlString2lilypond (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+        mfPassIDKind::kMfPassID_1,
         gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2lilypond() even if sxmlfile is null,
@@ -705,7 +704,7 @@ mfMusicformatsErrorKind convertMusicxmlString2lilypondWithHandler (
     sxmlfile =
       createSXMLFileFromString (
         buffer,
-        gWaeHandler->passIDKindAsString (mfPassIDKind::kMfPassID_1),
+        mfPassIDKind::kMfPassID_1,
         gWaeHandler->createAnMXSRFromAMusicXMLBuffer ());
 
   // call xmlFile2lilypond() even if sxmlfile is null,

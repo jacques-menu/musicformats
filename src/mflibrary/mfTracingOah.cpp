@@ -178,8 +178,8 @@ R"()",
       oahBooleanAtom::create (
         K_TRACE_COMPONENTS_OPTION_LONG_NAME, K_TRACE_COMPONENTS_OPTION_SHORT_NAME,
 R"(Write a trace of components handling to standard error.)",
-        "fTraceComponents",
-        fTraceComponents));
+        "earlyTraceComponentsRef",
+        gGlobalOahEarlyOptions.getEarlyTraceComponentsRef ()));
 
   // passes
 
@@ -187,8 +187,7 @@ R"(Write a trace of components handling to standard error.)",
     oahBooleanAtom::create (
       K_TRACE_PASSES_OPTION_LONG_NAME, K_TRACE_PASSES_OPTION_SHORT_NAME,
 R"(Write a trace of the passes to standard error.)",
-      "fTracePasses",
-//       fTracePasses);
+      "earlyTracePassesRef",
       gGlobalOahEarlyOptions.getEarlyTracePassesRef ());
 
   subGroup->
@@ -216,14 +215,13 @@ The default is 'DEFAULT_VALUE'.)",
           std::regex ("NUMBER"),
           std::to_string (gGlobalMusicFormatsPassIDKindsMap.size ())),
         std::regex ("PASSID_KINDS"),
-        existingMusicFormatsPassIDKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+        availableMusicFormatsPassIDKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
       std::regex ("DEFAULT_VALUE"),
       mfPassIDKindAsString (
         mfPassIDKindDefaultValue)),
     "PASSID",
-    "fTraceOnlyPassIDKind",
-//     fTraceOnlyPassIDKind);
-      gGlobalOahEarlyOptions.getEarlyTraceOnlyPassRef ());
+    "earlyTraceOnlyPassRef",
+    gGlobalOahEarlyOptions.getEarlyTraceOnlyPassRef ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -2681,12 +2679,12 @@ void tracingOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void tracingOahGroup::printAtomWithVariableOptionsValues (
+void tracingOahGroup::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {}
 
-void tracingOahGroup::printtracingOahValues (int fieldWidth)
+void tracingOahGroup::displayTracingOahValues (int fieldWidth)
 {
   gLogStream <<
     "The trace options are:" <<
@@ -2709,19 +2707,19 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     fTracingOahDetails <<
     std::endl <<
 
-    // history
-    std::setw (fieldWidth) << "fTracecomponents" << ": " <<
-    fTraceComponents <<
-    std::endl <<
+    // components
+//     std::setw (fieldWidth) << "fTracecomponents" << ": " <<
+//     fTraceComponents <<
+//     std::endl <<
 
     // passes
-    std::setw (fieldWidth) << "fTracePasses" << ": " <<
-    fTracePasses <<
-    std::endl <<
-
-    std::setw (fieldWidth) << "fTraceOnlyPassIDKind" << ": " <<
-    fTraceOnlyPassIDKind <<
-    std::endl <<
+//     std::setw (fieldWidth) << "fTracePasses" << ": " <<
+//     fTracePasses <<
+//     std::endl <<
+//
+//     std::setw (fieldWidth) << "fTraceOnlyPassIDKind" << ": " <<
+//     fTraceOnlyPassIDKind <<
+//     std::endl <<
 
     // for tests, hidden
     std::setw (fieldWidth) << "fTraceForTests" << ": " <<

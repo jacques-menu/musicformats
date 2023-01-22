@@ -183,7 +183,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
+      availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -216,7 +216,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msdlUserLanguageKindAsString (
             msdlUserLanguageKindDefaultValue)),
@@ -250,7 +250,7 @@ The default is 'DEFAULT_VALUE'.)",
 //           gIndenter.indentMultiLineString (
 //             foundString,
 //             os);
-            existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -284,7 +284,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlKeywordsInputLanguageKindDefaultValue)),
@@ -350,7 +350,7 @@ The default is not to translate the keywords.)",
 //           gIndenter.indentMultiLineString (
 //             foundString,
 //             os);
-          existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+          availableMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         "LANGUAGE",
         "fMsdlKeywordsConversionLanguageKind",
         fMsdlKeywordsConversionLanguageKind));
@@ -381,7 +381,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+            availableMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           std::regex ("DEFAULT_VALUE"),
           msdlCommentsTypeKindAsString (
             msdlCommentsTypeKindDefaultValue)),

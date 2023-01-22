@@ -66,7 +66,7 @@ void initializeMsrLengthUnitKindsMap ()
   gGlobalMsrLengthUnitKindsMap ["mm"] = msrLengthUnitKind::kUnitMillimeter;
 }
 
-std::string existingMsrLengthUnitKinds (size_t namesListMaxLength)
+std::string availableMsrLengthUnitKinds (size_t namesListMaxLength)
 {
   std::stringstream s;
 

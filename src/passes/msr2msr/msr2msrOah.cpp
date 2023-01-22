@@ -119,6 +119,8 @@ void msrIgnorePartAtom::applyAtomWithValue (
   else {
     fStringSetVariable.insert (partName);
   }
+
+	fSelected = true;
 }
 
 void msrIgnorePartAtom::acceptIn (basevisitor* v)
@@ -275,7 +277,7 @@ void msrIgnorePartAtom::print (std::ostream& os) const
   os << std::endl;
 }
 
-void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
+void msrIgnorePartAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -306,7 +308,7 @@ void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", set by an option";
+      ", selected";
 
     --gIndenter;
   }
@@ -412,6 +414,8 @@ void msrKeepPartAtom::applyAtomWithValue (
   else {
     fStringSetVariable.insert (partName);
   }
+
+	fSelected = true;
 }
 
 void msrKeepPartAtom::acceptIn (basevisitor* v)
@@ -568,7 +572,7 @@ void msrKeepPartAtom::print (std::ostream& os) const
   os << std::endl;
 }
 
-void msrKeepPartAtom::printAtomWithVariableOptionsValues (
+void msrKeepPartAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -599,7 +603,7 @@ void msrKeepPartAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", set by an option";
+      ", selected";
 
     --gIndenter;
   }
@@ -1038,7 +1042,7 @@ void msr2msrOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
+void msr2msrOahGroup::displayMsr2msrOahValues (int valueFieldWidth)
 {
   gLogStream <<
     "The MusicXML options are:" <<

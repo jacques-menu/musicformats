@@ -33,7 +33,7 @@ S_languageOahAtom languageOahAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfLanguageKind&    languageKindVariable)
+  mfLanguageKind&    languageKindVariableRef)
 {
   languageOahAtom* o = new
     languageOahAtom (
@@ -42,7 +42,7 @@ S_languageOahAtom languageOahAtom::create (
       description,
       valueSpecification,
       variableName,
-      languageKindVariable);
+      languageKindVariableRef);
   assert (o != nullptr);
   return o;
 }
@@ -53,16 +53,15 @@ languageOahAtom::languageOahAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfLanguageKind&    languageKindVariable)
+  mfLanguageKind&    languageKindVariableRef)
   : oahAtomStoringAValue (
       longName,
       shortName,
       description,
       valueSpecification,
-      variableName)
-      ,
-    fLanguageKindVariable (
-      languageKindVariable)
+      variableName),
+    fLanguageKindVariableRef (
+      languageKindVariableRef)
 {}
 
 languageOahAtom::~languageOahAtom ()
@@ -82,12 +81,9 @@ void languageOahAtom::applyAtomWithValue (
   }
 #endif
 
-  fLanguageKindVariable = mfLanguageKindFromString (theString);
-//
-//   gGlobalOahEarlyOptions.setEarlyLanguageKind (
-//     mfLanguageKindFromString (theString));
+  fLanguageKindVariableRef = mfLanguageKindFromString (theString);
 
-  fOptionHasBeenSelected = true;
+  fSelected = true;
 
   // do nothing more, choosing the insider OAH handler has been done already
 }
@@ -168,19 +164,27 @@ void languageOahAtom::print (std::ostream& os) const
   oahElement::printOahElementEssentials (
     os, fieldWidth);
 
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fLanguageKindVariableRef" << ": " <<
+    fLanguageKindVariableRef <<
+    std::endl;
+
   --gIndenter;
 }
 
-void languageOahAtom::printAtomWithVariableOptionsValues (
+void languageOahAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
-    "language" <<  ": " <<
-    "fOptionHasBeenSelected: " <<
-    fOptionHasBeenSelected <<
-    std::endl;
+    "fLanguageKindVariableRef" << ": " <<
+    fLanguageKindVariableRef;
+  if (fSelected) {
+    os << ", selected";
+  }
+  os << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_languageOahAtom& elt)
@@ -233,9 +237,11 @@ void insiderOahAtom::applyValueLessAtom (std::ostream& os)
   }
 #endif
 
-  fOptionHasBeenSelected = true;
+  fSelected = true;
 
   // do nothing more, choosing the insider OAH handler has been done already
+
+	fSelected = true;
 }
 
 void insiderOahAtom::acceptIn (basevisitor* v)
@@ -317,16 +323,17 @@ void insiderOahAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void insiderOahAtom::printAtomWithVariableOptionsValues (
+void insiderOahAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
-    "insider" <<  ": " <<
-    "fOptionHasBeenSelected: " <<
-    fOptionHasBeenSelected <<
-    std::endl;
+    "insider" <<  ": ";
+  if (fSelected) {
+    os << ", selected";
+  }
+  os << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_insiderOahAtom& elt)
@@ -379,9 +386,11 @@ void regularOahAtom::applyValueLessAtom (std::ostream& os)
   }
 #endif
 
-  fOptionHasBeenSelected = true;
+  fSelected = true;
 
   // do nothing more, choosing the regular OAH handler has been done already
+
+	fSelected = true;
 }
 
 void regularOahAtom::acceptIn (basevisitor* v)
@@ -463,16 +472,17 @@ void regularOahAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void regularOahAtom::printAtomWithVariableOptionsValues (
+void regularOahAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
-    "regular" <<  ": " <<
-    "fOptionHasBeenSelected: " <<
-    fOptionHasBeenSelected <<
-    std::endl;
+    "regular" <<  ": ";
+  if (fSelected) {
+    os << ", selected";
+  }
+  os << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_regularOahAtom& elt)
@@ -494,7 +504,7 @@ S_passIDOahAtom passIDOahAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfPassIDKind&      languageKindVariable)
+  mfPassIDKind&      passIDKindRef)
 {
   passIDOahAtom* o = new
     passIDOahAtom (
@@ -503,7 +513,7 @@ S_passIDOahAtom passIDOahAtom::create (
       description,
       valueSpecification,
       variableName,
-      languageKindVariable);
+      passIDKindRef);
   assert (o != nullptr);
   return o;
 }
@@ -514,16 +524,15 @@ passIDOahAtom::passIDOahAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfPassIDKind&      languageKindVariable)
+  mfPassIDKind&      passIDKindRef)
   : oahAtomStoringAValue (
       longName,
       shortName,
       description,
       valueSpecification,
-      variableName)
-//       ,
-//     fLanguageKindVariable (
-//       languageKindVariable)
+      variableName),
+    fPassIDKindVariableRef (
+      passIDKindRef)
 {}
 
 passIDOahAtom::~passIDOahAtom ()
@@ -543,12 +552,9 @@ void passIDOahAtom::applyAtomWithValue (
   }
 #endif
 
-//   fLanguageKindVariable = mfPassIDKindFromString (theString);
-//
-//   gGlobalOahEarlyOptions.setEarlyLanguageKind (
-//     mfPassIDKindFromString (theString));
+  fPassIDKindVariableRef = mfPassIDKindFromString (theString);
 
-  fOptionHasBeenSelected = true;
+  fSelected = true;
 
   // do nothing more, choosing the insider OAH handler has been done already
 }
@@ -632,16 +638,18 @@ void passIDOahAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void passIDOahAtom::printAtomWithVariableOptionsValues (
+void passIDOahAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
-    "language" <<  ": " <<
-    "fOptionHasBeenSelected: " <<
-    fOptionHasBeenSelected <<
-    std::endl;
+    "fPassIDKindVariableRef" <<  ": " <<
+    fPassIDKindVariableRef;
+  if (fSelected) {
+    os << ", selected";
+  }
+  os << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_passIDOahAtom& elt)
@@ -720,13 +728,12 @@ The default is 'DEFAULT_VALUE'.)",
             std::regex ("NUMBER"),
             std::to_string (gGlobalMusicFormatsLanguageKindsMap.size ())),
           std::regex ("LANGUAGE_KINDS"),
-          existingMusicFormatsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
+          availableMusicFormatsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         std::regex ("DEFAULT_VALUE"),
         mfLanguageKindAsString (
           mfLanguageKindDefaultValue)),
       "LANGUAGE",
-      "fLanguageKind",
-//       fLanguageKind));
+      "earlyLanguageKindRef",
       gGlobalOahEarlyOptions.getEarlyLanguageKindRef ()));
 
   // the 'insider' option
@@ -760,8 +767,8 @@ such a slurs, tuplets and figured bass.)"));
 R"(Trace the handling of early options, which happens
 at the very beginning of options and arguments handling.
 This option is handy to debug OAH.)",
-      "fTraceEarlyOptions",
-      fTraceEarlyOptions);
+      "traceEarlyOptions",
+      gGlobalOahEarlyOptions.getTraceEarlyOptionsRef ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -775,8 +782,8 @@ This option is handy to debug OAH.)",
 R"(Produce internal details about the context of options errors.
 By default, only the mimimum information is output.
 This option is handy to debug OAH.)",
-      "fOahVerboseMode",
-      fOahVerboseMode);
+      "earlyOahVerboseModeRef",
+      gGlobalOahEarlyOptions.getEarlyOahVerboseModeRef ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -1040,13 +1047,13 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "show-options-and-arguments", "soaa",
+        "display-options-and-arguments", "doaa",
         regex_replace (
 R"(Print the options and arguments to EXECUTABLE.)",
           std::regex ("EXECUTABLE"),
           fOahOahGroupServiceName),
-        "fShowOptionsAndArguments",
-        fShowOptionsAndArguments));
+        "fdisplayOptionsAndArguments",
+        fdisplayOptionsAndArguments));
 }
 
 #ifdef MF_TRACING_IS_ENABLED
@@ -1177,7 +1184,7 @@ void oahOahGroup::browseData (basevisitor* v)
 #endif
 }
 
-void oahOahGroup::printAtomWithVariableOptionsValues ( // JMIJMIJMI
+void oahOahGroup::displayAtomWithVariableOptionsValues ( // JMIJMIJMI
   std::ostream& os,
   int           valueFieldWidth) const
 {
@@ -1216,8 +1223,8 @@ void oahOahGroup::printOahOahValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << std::left <<
-    std::setw (valueFieldWidth) << "fShowOptionsAndArguments" << ": " <<
-    fShowOptionsAndArguments <<
+    std::setw (valueFieldWidth) << "fdisplayOptionsAndArguments" << ": " <<
+    fdisplayOptionsAndArguments <<
     std::endl;
 
   --gIndenter;

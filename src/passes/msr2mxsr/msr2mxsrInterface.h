@@ -31,8 +31,8 @@ namespace MusicFormats
 EXP Sxmlelement translateMsrToMxsr (
   const S_msrScore theMsrScore,
   S_msrOahGroup    msrOpts,
-  std::string           passNumber,
-  std::string           passDescription,
+  mfPassIDKind     passIDKind,
+  std::string      passDescription,
   mfTimingItemKind mfTimingItemKind);
 
 
