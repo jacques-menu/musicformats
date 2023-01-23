@@ -582,7 +582,7 @@ void mfslDriver::scanEnd ()
 }
 
 //_______________________________________________________________________________
-mfMusicformatsErrorKind launchMfslInterpreter ()
+EXP mfMusicformatsErrorKind launchMfslInterpreter ()
 {
   mfMusicformatsErrorKind
     result =

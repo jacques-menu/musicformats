@@ -33,7 +33,7 @@ S_languageOahAtom languageOahAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfLanguageKind&    languageKindVariableRef)
+  mfLanguageKind&    languageKindVariable)
 {
   languageOahAtom* o = new
     languageOahAtom (
@@ -42,7 +42,7 @@ S_languageOahAtom languageOahAtom::create (
       description,
       valueSpecification,
       variableName,
-      languageKindVariableRef);
+      languageKindVariable);
   assert (o != nullptr);
   return o;
 }
@@ -53,15 +53,15 @@ languageOahAtom::languageOahAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfLanguageKind&    languageKindVariableRef)
+  mfLanguageKind&    languageKindVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
       description,
       valueSpecification,
       variableName),
-    fLanguageKindVariableRef (
-      languageKindVariableRef)
+    fLanguageKindVariable (
+      languageKindVariable)
 {}
 
 languageOahAtom::~languageOahAtom ()
@@ -81,7 +81,7 @@ void languageOahAtom::applyAtomWithValue (
   }
 #endif
 
-  fLanguageKindVariableRef = mfLanguageKindFromString (theString);
+  fLanguageKindVariable = mfLanguageKindFromString (theString);
 
   fSelected = true;
 
@@ -166,8 +166,8 @@ void languageOahAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fLanguageKindVariableRef" << ": " <<
-    fLanguageKindVariableRef <<
+    "fLanguageKindVariable" << ": " <<
+    fLanguageKindVariable <<
     std::endl;
 
   --gIndenter;
@@ -179,8 +179,8 @@ void languageOahAtom::displayAtomWithVariableOptionsValues (
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
-    "fLanguageKindVariableRef" << ": " <<
-    fLanguageKindVariableRef;
+    "fLanguageKindVariable" << ": " <<
+    fLanguageKindVariable;
   if (fSelected) {
     os << ", selected";
   }
@@ -504,7 +504,7 @@ S_passIDOahAtom passIDOahAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfPassIDKind&      passIDKindRef)
+  mfPassIDKind&      passIDKind)
 {
   passIDOahAtom* o = new
     passIDOahAtom (
@@ -513,7 +513,7 @@ S_passIDOahAtom passIDOahAtom::create (
       description,
       valueSpecification,
       variableName,
-      passIDKindRef);
+      passIDKind);
   assert (o != nullptr);
   return o;
 }
@@ -524,15 +524,15 @@ passIDOahAtom::passIDOahAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfPassIDKind&      passIDKindRef)
+  mfPassIDKind&      passIDKind)
   : oahAtomStoringAValue (
       longName,
       shortName,
       description,
       valueSpecification,
       variableName),
-    fPassIDKindVariableRef (
-      passIDKindRef)
+    fPassIDKindVariable (
+      passIDKind)
 {}
 
 passIDOahAtom::~passIDOahAtom ()
@@ -552,7 +552,7 @@ void passIDOahAtom::applyAtomWithValue (
   }
 #endif
 
-  fPassIDKindVariableRef = mfPassIDKindFromString (theString);
+  fPassIDKindVariable = mfPassIDKindFromString (theString);
 
   fSelected = true;
 
@@ -644,8 +644,8 @@ void passIDOahAtom::displayAtomWithVariableOptionsValues (
 {
   os << std::left <<
     std::setw (valueFieldWidth) <<
-    "fPassIDKindVariableRef" <<  ": " <<
-    fPassIDKindVariableRef;
+    "fPassIDKindVariable" <<  ": " <<
+    fPassIDKindVariable;
   if (fSelected) {
     os << ", selected";
   }

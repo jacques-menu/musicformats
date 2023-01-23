@@ -298,7 +298,6 @@ int mfIndentedStringStreamBuf::sync ()
   // When we sync the stream with fOutputStringStream:
   // 1) output the indentation then the buffer
   // 2) reset the buffer
-  // 3) flush the actual output stream we are using.
 
   size_t strSize = str ().size ();
 
@@ -310,7 +309,7 @@ int mfIndentedStringStreamBuf::sync ()
   // fOutputStringStream << "% strSize: " << strSize << ", found: " << found << '\n';
 
   // output the indenter
-  fOutputStringStream << fOutputIndenter;
+  fOutputStringStream << "fOutputIndenter";
 
   // output the buffer
   if (found == strSize - 3) {
@@ -324,9 +323,6 @@ int mfIndentedStringStreamBuf::sync ()
 
   // reset the buffer
   str ("");
-
-  // flush the output stream
-  fOutputStringStream.flush ();
 
   return 0;
 }

@@ -239,7 +239,7 @@ void testMfIndentedStringstream ()
 //______________________________________________________________________________
 void initializeMusicFormatsLanguages ()
 {
-//   testMfIndentedStringstream (); JMI v0.9.66
+//   testMfIndentedStringstream (); // JMI v0.9.66
 
   // protect library against multiple initializations
   static Bool pPrivateThisMethodHasBeenRun (false);
