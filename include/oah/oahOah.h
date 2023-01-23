@@ -36,7 +36,7 @@ class EXP languageOahAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfLanguageKind&    languageKindVariableRef);
+                            mfLanguageKind&    languageKindVariable);
 
   protected:
 
@@ -49,7 +49,7 @@ class EXP languageOahAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfLanguageKind&    languageKindVariableRef);
+                            mfLanguageKind&    languageKindVariable);
 
     virtual               ~languageOahAtom ();
 
@@ -90,7 +90,7 @@ class EXP languageOahAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-  mfLanguageKind&         fLanguageKindVariableRef;
+  mfLanguageKind&         fLanguageKindVariable;
 };
 typedef SMARTP<languageOahAtom> S_languageOahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_languageOahAtom& elt);
@@ -235,7 +235,7 @@ class EXP passIDOahAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfPassIDKind&      passIDKindRef);
+                            mfPassIDKind&      passIDKind);
 
   protected:
 
@@ -248,7 +248,7 @@ class EXP passIDOahAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfPassIDKind&      passIDKindRef);
+                            mfPassIDKind&      passIDKind);
 
     virtual               ~passIDOahAtom ();
 
@@ -288,7 +288,7 @@ class EXP passIDOahAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    mfPassIDKind&         fPassIDKindVariableRef;
+    mfPassIDKind&         fPassIDKindVariable;
 };
 typedef SMARTP<passIDOahAtom> S_passIDOahAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_passIDOahAtom& elt);
