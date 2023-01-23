@@ -18,10 +18,10 @@ This leads to class   {\tt mfIndentedOstream}, defined in \mfutilitiesBoth{mfInd
 class EXP mfIndentedOstream: public std::ostream, public smartable
 \end{lstlisting}
 
-The key to this lies in thw overloaded \method{mfIndentedStreamBuf}{sync}:
+The key to this lies in thw overloaded \method{mfIndentedOStreamBuf}{sync}:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
-int mfIndentedStreamBuf::sync ()
+int mfIndentedOStreamBuf::sync ()
 {
   // When we sync the stream with fOutputSteam:
   // 1) output the indentation then the buffer

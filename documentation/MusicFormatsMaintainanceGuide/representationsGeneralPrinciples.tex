@@ -503,10 +503,10 @@ Usage:
     mfOutputIndenter&       getIndenter () const
                               { return fIndentedStreamBuf.getOutputIndenter (); }
 
-    void                  incrIdentation ()
+    void                  incrIndentation ()
                               { ++ (fIndentedStreamBuf.getOutputIndenter ()); }
 
-    void                  decrIdentation ()
+    void                  decrIndentation ()
                               { -- (fIndentedStreamBuf.getOutputIndenter ()); }
 
   private:
@@ -514,8 +514,8 @@ Usage:
     // private fields
     // ------------------------------------------------------
 
-    // mfIndentedOstream just uses an mfIndentedStreamBuf
-    mfIndentedStreamBuf     fIndentedStreamBuf;
+    // mfIndentedOstream just uses an mfIndentedOStreamBuf
+    mfIndentedOStreamBuf     fIndentedStreamBuf;
 
 };
 typedef SMARTP<mfIndentedOstream> S_indentedOstream;

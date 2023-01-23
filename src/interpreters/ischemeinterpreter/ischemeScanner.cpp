@@ -920,7 +920,7 @@ char *yytext;
 
 #include "mfSystemInterface.h" // for isatty(), mfStrErrorCString()
 
-#ifdef WIN64
+#ifdef WIN32
   #define YY_NO_UNISTD_H
 #endif
 

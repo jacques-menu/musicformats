@@ -13,7 +13,7 @@
 #define ___msrElementsBase___
 
 
-// #ifdef WIN64
+// #ifdef WIN32
 // #pragma warning (disable : 4251 4275)
 // #endif
 
