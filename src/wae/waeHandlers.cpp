@@ -282,11 +282,11 @@ void waeHandler::waeTrace (
   // should we actually produce the trace?
   Bool doTrace;
 
-  switch (globalCurrentPassIDKind) {
+  switch (earlyTraceOnlyPass) {
     case mfPassIDKind::kMfPassID_UNKNOWN:
       os <<
         "waeHandler::waeTrace: " <<
-        "globalCurrentPassIDKind = " << globalCurrentPassIDKind <<
+        "earlyTraceOnlyPass = " << earlyTraceOnlyPass <<
         std::endl;
       break;
 

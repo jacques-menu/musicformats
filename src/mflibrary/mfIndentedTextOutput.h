@@ -278,9 +278,9 @@ class EXP mfIndentedStringStreamBuf: public std::stringbuf
     mfOutputIndenter&     getOutputIndenter () const
                               { return fOutputIndenter; }
 
-    // flush
-    void                  flush ()
-                              { fOutputStringStream.flush (); }
+//     // flush
+//     void                  flush ()
+//                               { fOutputStringStream.flush (); }
 
     virtual int           sync ();
 
@@ -346,10 +346,6 @@ Usage:
 
     // public services
     // ------------------------------------------------------
-
-    // flush
-    void                  flush ()
-                              { fIndentedStringStreamBuf.flush (); }
 
     // indentation
     mfOutputIndenter&     getIndenter () const
