@@ -121,7 +121,7 @@ std::string uncompressMXLFile (
 
   std::string uncompressedFileName;
 
-#ifdef WIN64
+#ifdef WIN32
   // JMI
 #else
   {

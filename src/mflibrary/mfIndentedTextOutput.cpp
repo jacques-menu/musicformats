@@ -254,9 +254,9 @@ std::ostream& operator << (std::ostream& os, const mfOutputIndenter& theIndenter
 }
 
 //______________________________________________________________________________
-int mfIndentedStreamBuf::sync ()
+int mfIndentedOStreamBuf::sync ()
 {
-  // When we sync the stream with fOutputSteam:
+  // When we sync the stream with fOutputOStream:
   // 1) output the indentation then the buffer
   // 2) reset the buffer
   // 3) flush the actual output stream we are using.
@@ -268,26 +268,65 @@ int mfIndentedStreamBuf::sync ()
   size_t found = str ().find_last_not_of (' ', strSize - 2);
 
   // this can be uncommented to see low level informations
-  // fOutputSteam << "% strSize: " << strSize << ", found: " << found << '\n';
+  // fOutputOStream << "% strSize: " << strSize << ", found: " << found << '\n';
 
   // output the indenter
-  fOutputSteam << fOutputIndenter;
+  fOutputOStream << fOutputIndenter;
 
   // output the buffer
   if (found == strSize - 3) {
     // don't output the trailing spaces, but output the end of line
-    fOutputSteam << str ().substr (0, found + 1) << '\n';
+    fOutputOStream << str ().substr (0, found + 1) << '\n';
   }
   else {
     // output the whole buffer
-    fOutputSteam << str ();
+    fOutputOStream << str ();
   }
 
   // reset the buffer
   str ("");
 
   // flush the output stream
-  fOutputSteam.flush ();
+  fOutputOStream.flush ();
+
+  return 0;
+}
+
+//______________________________________________________________________________
+int mfIndentedStringStreamBuf::sync ()
+{
+  // When we sync the stream with fOutputStringStream:
+  // 1) output the indentation then the buffer
+  // 2) reset the buffer
+  // 3) flush the actual output stream we are using.
+
+  size_t strSize = str ().size ();
+
+  // fetch the last non-space character in the buffer
+  // caution: the '\n' is present as the last character!
+  size_t found = str ().find_last_not_of (' ', strSize - 2);
+
+  // this can be uncommented to see low level informations
+  // fOutputStringStream << "% strSize: " << strSize << ", found: " << found << '\n';
+
+  // output the indenter
+  fOutputStringStream << fOutputIndenter;
+
+  // output the buffer
+  if (found == strSize - 3) {
+    // don't output the trailing spaces, but output the end of line
+    fOutputStringStream << str ().substr (0, found + 1) << '\n';
+  }
+  else {
+    // output the whole buffer
+    fOutputStringStream << str ();
+  }
+
+  // reset the buffer
+  str ("");
+
+  // flush the output stream
+  fOutputStringStream.flush ();
 
   return 0;
 }

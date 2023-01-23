@@ -21,7 +21,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-#ifdef WIN64
+#ifdef WIN32
 /*
   isatty() is needed for Flex interactive mode,
   but doesn't follow the Standard C rules

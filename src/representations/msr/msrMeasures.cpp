@@ -4348,14 +4348,14 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
       ", previousHarmony: ";
 
     if (previousHarmony) {
-      gLogStream <<
+      s <<
         previousHarmony->asString ();
     }
     else {
-      gLogStream << "[NONE]";
+      s << "[NONE]";
     }
 
-    gLogStream <<
+    s <<
       ", currentHarmony: " <<
       currentHarmony->asString () <<
       ", previousHarmonyMeasurePosition: " <<
@@ -4506,28 +4506,28 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
     ++gIndenter;
 
-    gLogStream <<
+    s <<
       "currentHarmony: ";
 
     if (currentHarmony) {
-      gLogStream <<
+      s <<
         currentHarmony->asString ();
     }
     else {
-      gLogStream << "[NONE]";
+      s << "[NONE]";
     }
 
-    gLogStream <<
+    s <<
       std::endl <<
       "currentUpLinkToHarmonyToNote:" <<
       std::endl;
     ++gIndenter;
-    gLogStream <<
+    s <<
       currentUpLinkToHarmonyToNote->asString () <<
       std::endl;
     --gIndenter;
 
-    gLogStream <<
+    s <<
       ", currentHarmonyMeasurePosition: " <<
       currentHarmonyMeasurePosition <<
       ", currentHarmonySoundingWholeNotes: " <<
@@ -4918,14 +4918,14 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
       ", previousHarmony: ";
 
     if (previousHarmony) {
-      gLogStream <<
+      s <<
         previousHarmony->asString ();
     }
     else {
-      gLogStream << "[NONE]";
+      s << "[NONE]";
     }
 
-    gLogStream <<
+    s <<
       ", currentUpLinkToHarmonyToNoteMeasurePosition: " <<
       currentUpLinkToHarmonyToNoteMeasurePosition <<
       std::endl;
@@ -5090,14 +5090,14 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       ", previousFiguredBass: ";
 
     if (previousFiguredBass) {
-      gLogStream <<
+      s <<
         previousFiguredBass->asString ();
     }
     else {
-      gLogStream << "[NONE]";
+      s << "[NONE]";
     }
 
-    gLogStream <<
+    s <<
       ", currentFiguredBass: " <<
       currentFiguredBass->asString () <<
       ", previousFiguredBassMeasurePosition: " <<
@@ -5296,14 +5296,14 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
       ", currentFiguredBass: ";
 
     if (currentFiguredBass) {
-      gLogStream <<
+      s <<
         currentFiguredBass->asString ();
     }
     else {
-      gLogStream << "[NONE]";
+      s << "[NONE]";
     }
 
-    gLogStream <<
+    s <<
       ", currentFiguredBassMeasurePosition: " <<
       currentFiguredBassMeasurePosition <<
       ", currentFiguredBassSoundingWholeNotes: " <<
@@ -5516,7 +5516,7 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
             "finalizeFiguredBassesInFiguredBassMeasure() 3" <<
             ", currentFiguredBass: ";
             ++gIndenter;
-            gLogStream <<
+            s <<
               currentFiguredBass->asString () <<
               std::endl;
             --gIndenter;
@@ -5554,14 +5554,14 @@ void msrMeasure::finalizeFiguredBassesInFiguredBassMeasure (
             ", previousFiguredBass: ";
 
           if (previousFiguredBass) {
-            gLogStream <<
+            s <<
               previousFiguredBass->asString ();
           }
           else {
-            gLogStream << "[NONE]";
+            s << "[NONE]";
           }
 
-          gLogStream <<
+          s <<
             ", currentFiguredBassMeasurePosition: " <<
             currentFiguredBassMeasurePosition <<
             ", currentFiguredBassUpLinkToNoteMeasurePosition: " <<

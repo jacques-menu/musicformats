@@ -12,7 +12,10 @@
 #include <errno.h>  // errno_t
 #include <stdio.h>  // strerror_r()
 #include <stdlib.h> // system()
-// #include <string.h> // strerror_s()
+
+#ifdef WIN32
+#include <string.h> // strerror_s()
+#endif
 
 #include "mfIndentedTextOutput.h"
 #include "mfStringsHandling.h"
@@ -52,8 +55,6 @@ As with all bounds-checked functions, strerror_s and strerrorlen_s are only guar
 
 int
  strerror_r(int errnum, char *strerrbuf, size_t buflen);
-
-
 */
 
 EXP char* mfStrErrorCString ()
@@ -63,8 +64,11 @@ EXP char* mfStrErrorCString ()
 
   errno_t
     result =
-//       strerror_s (pBuffer, kBufferSize, errno);
+#ifdef WIN32
+      strerror_s (pBuffer, kBufferSize, errno);
+#else
       strerror_r (errno, pBuffer, kBufferSize);
+#endif
 
   return pBuffer;
 }
@@ -113,7 +117,7 @@ EXP int mfExecuteCommand (
   result =
     system (commandStringBuffer);
 
-// #if (WIN64)
+// #if (WIN32)
 //
 // //   system (commandAsCString); // JMI
 //

@@ -193,8 +193,54 @@ std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength)
 }
 
 //______________________________________________________________________________
+void testMfIndentedStringstream ()
+{
+#include <sstream>
+
+  std::stringstream s;
+
+  mfIndentedStringstream indentedStringstream (
+      s,
+      mfOutputIndenter::gGlobalOStreamIndenter);
+
+  indentedStringstream <<
+    "indentedStringstream 1" <<
+    std::endl;
+
+//   ++indentedStringstream;
+  indentedStringstream.incrIndentation ();
+
+  indentedStringstream <<
+    "indentedStringstream 1.1" <<
+    std::endl <<
+    "indentedStringstream 1.2" <<
+    std::endl;
+
+//   --indentedStringstream;
+  indentedStringstream.decrIndentation ();
+
+  indentedStringstream <<
+    "indentedStringstream 2" <<
+    std::endl;
+
+  gLogStream <<
+    "indentedStringstream.str ():" <<
+    std::endl;
+
+  ++gIndenter;
+
+  gLogStream <<
+    indentedStringstream.str () <<
+    std::endl;
+
+  --gIndenter;
+}
+
+//______________________________________________________________________________
 void initializeMusicFormatsLanguages ()
 {
+//   testMfIndentedStringstream (); JMI v0.9.66
+
   // protect library against multiple initializations
   static Bool pPrivateThisMethodHasBeenRun (false);
 

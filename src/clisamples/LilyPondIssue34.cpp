@@ -51,7 +51,7 @@
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
-#ifndef WIN64
+#ifndef WIN32
 static void _sigaction (int signal, siginfo_t *si, void *arg)
 {
   std::cerr << "Signal #" << signal << " catched!" << std::endl;
