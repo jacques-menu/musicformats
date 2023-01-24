@@ -110,8 +110,7 @@ void displayMsrScore (
   // start the clock
   clock_t startClock =  clock ();
 
-  // DON'T set the global current passID,
-  // this optional pass is considered part of the preceding 'true' pass
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -171,8 +170,7 @@ void displayMsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  // DON'T set the global current passID,
-  // this optional pass is considered part of the preceding 'true' pass
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -236,8 +234,7 @@ void displayMsrScoreSummary (
   // start the clock
   clock_t startClock = clock ();
 
-  // DON'T set the global current passID,
-  // this optional pass is considered part of the preceding 'true' pass
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
@@ -297,8 +294,7 @@ void displayMsrScoreNames (
   // start the clock
   clock_t startClock = clock ();
 
-  // DON'T set the global current passID,
-  // this optional pass is considered part of the preceding 'true' pass
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
@@ -356,8 +352,7 @@ void displayMsrScoreSlices (
   // start the clock
   clock_t startClock = clock ();
 
-  // DON'T set the global current passID,
-  // this optional pass is considered part of the preceding 'true' pass
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
 
   std::string separator =
     "%--------------------------------------------------------------";

@@ -37,6 +37,8 @@ enum class mfPassIDKind {
 
   kMfPassID_0, // options and arguments handling
 
+  kMfPassID_Optional,
+
   kMfPassID_1,
   kMfPassID_2, kMfPassID_2a, kMfPassID_2b,
   kMfPassID_3, kMfPassID_3a, kMfPassID_3b,

@@ -47,6 +47,10 @@ std::string mfPassIDKindAsString (
       result = "0";
       break;
 
+    case mfPassIDKind::kMfPassID_Optional:
+      result = "opt";
+      break;
+
     case mfPassIDKind::kMfPassID_1:
       result = "1";
       break;
@@ -190,6 +194,9 @@ void initializeMusicFormatsPassIDKindsMap ()
   if (! pPrivateThisMethodHasBeenRun) {
     gGlobalMusicFormatsPassIDKindsMap ["0"]   =
       mfPassIDKind::kMfPassID_0;
+
+    gGlobalMusicFormatsPassIDKindsMap ["opt"]   =
+      mfPassIDKind::kMfPassID_Optional;
 
     gGlobalMusicFormatsPassIDKindsMap ["1"]   =
       mfPassIDKind::kMfPassID_1;

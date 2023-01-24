@@ -79,6 +79,10 @@ std::string mfWaeHandlerFrench::passIDKindAsString (mfPassIDKind passIDKind) con
       result = "Passe 0";
       break;
 
+    case mfPassIDKind::kMfPassID_Optional:
+      result = "opt";
+      break;
+
     case mfPassIDKind::kMfPassID_1:
      result = "Passe 1";
       break;

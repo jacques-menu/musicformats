@@ -49,8 +49,7 @@ void displayBsrScore (
   // start the clock
   clock_t startClock = clock ();
 
-  // DON'T set the global current passID,
-  // this optional pass is considered part of the preceding 'true' pass
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
 
   std::string separator =
     "%--------------------------------------------------------------";
@@ -96,8 +95,7 @@ void displayBsrScoreFull (
   // start the clock
   clock_t startClock = clock ();
 
-  // DON'T set the global current passID,
-  // this optional pass is considered part of the preceding 'true' pass
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_Optional);
 
   std::string separator =
     "%--------------------------------------------------------------";

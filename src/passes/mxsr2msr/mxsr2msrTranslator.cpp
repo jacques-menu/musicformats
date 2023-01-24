@@ -18327,15 +18327,40 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 
 #ifdef MF_TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-				std::stringstream s;
+				std::stringstream      s;
+// 				mfIndentedStringstream iss (
+// 					s,
+// 					gIndenter);
 
 				s <<
-          "Copying harmony '" <<
-          harmony->asString () <<
-          "' from note " << note->asString () <<
-          " to chord '" << chord->asString () <<
-          "'" <<
+          "Copying harmony:" <<
           std::endl;
+
+				++gIndenter;
+				s <<
+          harmony->asString () <<
+          std::endl;
+				--gIndenter;
+
+				s <<
+          "from note:" <<
+					std::endl;
+
+				++gIndenter;
+				s <<
+					note->asString () <<
+					std::endl;
+				--gIndenter;
+
+				s <<
+          "to chord:" <<
+					std::endl;
+
+				++gIndenter;
+				s <<
+          chord->asString () <<
+          std::endl;
+				--gIndenter;
 
 				gWaeHandler->waeTrace (
 					__FILE__, __LINE__,

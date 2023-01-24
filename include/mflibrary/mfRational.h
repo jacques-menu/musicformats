@@ -160,7 +160,7 @@ class EXP Rational
     // Used by rationalise()
     long int gcd(long int a, long int b);
 };
-EXP std::ostream& operator << (std::ostream& os, const Rational& elt);
+EXP std::ostream& operator << (std::ostream& os, const Rational& rat);
 
 
 EXP void testRational ();
