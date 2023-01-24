@@ -4228,8 +4228,12 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream      s;
+//     mfIndentedStringstream iss (
+//       s,
+//       gIndenter);
 
+// //     s <<
     s <<
       "--> handleFirstHarmonyInHarmoniesMeasure() 1" <<
       ", currentHarmonyMeasurePosition: " <<
@@ -4341,24 +4345,48 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream      s;
+//     mfIndentedStringstream iss (
+//       s,
+//       gIndenter);
 
+//     s <<
     s <<
       "---> handleSubsequentHarmonyInHarmoniesMeasure() 1" <<
-      ", previousHarmony: ";
+      std::endl;
 
+    ++gIndenter;
+
+//     s <<
+    s <<
+      "previousHarmony: ";
+
+    ++gIndenter;
     if (previousHarmony) {
-      s <<
+  //     s <<
+    s <<
         previousHarmony->asString ();
     }
     else {
       s << "[NONE]";
     }
+    --gIndenter;
 
+//     s <<
     s <<
-      ", currentHarmony: " <<
+      "currentHarmony: " <<
+      std::endl;
+
+    ++gIndenter;
+//     s <<
+    s <<
       currentHarmony->asString () <<
-      ", previousHarmonyMeasurePosition: " <<
+      std::endl;
+    --gIndenter;
+
+//     s <<
+    s <<
+      "previousHarmonyMeasurePosition: " <<
       previousHarmonyMeasurePosition <<
       ", currentHarmonyMeasurePosition: " <<
       currentHarmonyMeasurePosition <<
@@ -4367,6 +4395,8 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
       ", measurePositionsDelta: " <<
       measurePositionsDelta <<
       std::endl;
+
+    --gIndenter;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4498,37 +4528,49 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream      s;
+//     mfIndentedStringstream iss (
+//       s,
+//       gIndenter);
 
+//     s <<
     s <<
       "--> postHandleCurrentHarmonyInHarmoniesMeasure():" <<
       std::endl;
 
     ++gIndenter;
 
+//     s <<
     s <<
       "currentHarmony: ";
 
+    ++gIndenter;
     if (currentHarmony) {
-      s <<
+  //     s <<
+    s <<
         currentHarmony->asString ();
     }
     else {
       s << "[NONE]";
     }
+    --gIndenter;
 
+//     s <<
     s <<
       std::endl <<
       "currentUpLinkToHarmonyToNote:" <<
       std::endl;
+
     ++gIndenter;
+//     s <<
     s <<
       currentUpLinkToHarmonyToNote->asString () <<
       std::endl;
     --gIndenter;
 
+//     s <<
     s <<
-      ", currentHarmonyMeasurePosition: " <<
+      "currentHarmonyMeasurePosition: " <<
       currentHarmonyMeasurePosition <<
       ", currentHarmonySoundingWholeNotes: " <<
       currentHarmonySoundingWholeNotes <<

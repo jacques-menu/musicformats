@@ -333,11 +333,14 @@ void waeHandler::waeTrace (
   if (doTrace) {
     ++gIndenter;
 
-    os <<
-  //     '[' << context << "] " <<
-//       inputSourceName << ":" << inputLineNumber << ": " <<
-      message <<
-      std::endl;
+//     '[' << context << "] " <<
+//     inputSourceName << ":" << inputLineNumber << ": " <<
+
+    // message can be a multi-line string
+    gIndenter.indentMultiLineString (
+      message,
+      os);
+    os << std::endl;
 
     --gIndenter;
   }

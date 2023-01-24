@@ -215,7 +215,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
       appendLyricTextToSyllable ((*i));
   } // for
 
-  // dont't set 'newbornClone->fSyllableUpLinkToStanza'
+  // don't set 'newbornClone->fSyllableUpLinkToStanza'
   // nor 'newbornClone->fSyllableUpLinkToNote',
   // this will be done by the caller
 
@@ -268,7 +268,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
       appendLyricTextToSyllable ((*i));
   } // for
 
-  // dont't set 'newbornClone->fSyllableUpLinkToStanza'
+  // don't set 'newbornClone->fSyllableUpLinkToStanza'
   // nor 'newbornClone->fSyllableUpLinkToNote',
   // this will be done by the caller
 

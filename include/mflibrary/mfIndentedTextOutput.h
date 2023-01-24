@@ -19,6 +19,7 @@
 #include "smartpointer.h"
 
 #include "mfBool.h"
+#include "mfRational.h"
 
 
 using namespace MusicXML2;
@@ -89,7 +90,7 @@ class EXP mfOutputIndenter
                               { return fIndentation != value; }
 
     // output as much space as specified
-    void                  print (std::ostream& os) const;
+    void                  printSpacers (std::ostream& os) const;
 
     // current offset
     std::string           fetchCurrentOffset ();
@@ -293,81 +294,99 @@ class EXP mfIndentedStringStreamBuf: public std::stringbuf
     mfOutputIndenter&     fOutputIndenter;
 };
 
-//______________________________________________________________________________
-class EXP mfIndentedStringstream: public std::stringstream, public smartable
-{
-/*
-Reference for this class:
-  https://cplusplus.com/reference/sstream/stringstream/
-
-Usage:
-  mfIndentedStringstream myStream (std::cout);
-
-  myStream <<
-    1 << 2 << 3 << std::endl <<
-    5 << 6 << std::endl <<
-    7 << 8 << std::endl;
-*/
-
-  public:
-
-    // creation
-    // ------------------------------------------------------
-
-    static SMARTP<mfIndentedStringstream> create (
-                            std::stringstream& theStringstream,
-                            mfOutputIndenter&  theIndenter)
-                              {
-                                mfIndentedStringstream* o =
-                                  new mfIndentedStringstream (
-                                    theStringstream,
-                                    theIndenter);
-                                assert (o != nullptr);
-
-                                return o;
-                              }
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          mfIndentedStringstream (
-                            std::stringstream& theStringstream,
-                            mfOutputIndenter&  theIndenter)
-                              : std::stringstream (
-                                  ios_base::out),
-                                fIndentedStringStreamBuf (
-                                  theStringstream,
-                                  theIndenter)
-                              {}
-
-    virtual               ~mfIndentedStringstream () {};
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-    // indentation
-    mfOutputIndenter&     getIndenter () const
-                              { return fIndentedStringStreamBuf.getOutputIndenter (); }
-
-    void                  incrIndentation ()
-                              { ++ (fIndentedStringStreamBuf.getOutputIndenter ()); }
-
-    void                  decrIndentation ()
-                              { -- (fIndentedStringStreamBuf.getOutputIndenter ()); }
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    // mfIndentedStringstream just uses an mfIndentedStringStreamBuf
-    mfIndentedStringStreamBuf
-                          fIndentedStringStreamBuf;
-
-};
-typedef SMARTP<mfIndentedStringstream> S_mfIndentedStringstream;
+// //______________________________________________________________________________
+// class EXP mfIndentedStringstream: public std::stringstream, public smartable
+// {
+// /*
+// Reference for this class:
+//   https://cplusplus.com/reference/sstream/stringstream/
+//
+// Usage:
+//   mfIndentedStringstream myStream (std::cout);
+//
+//   myStream <<
+//     1 << 2 << 3 << std::endl <<
+//     5 << 6 << std::endl <<
+//     7 << 8 << std::endl;
+// */
+//
+//   public:
+//
+//     // creation
+//     // ------------------------------------------------------
+//
+//     static SMARTP<mfIndentedStringstream> create (
+//                             std::stringstream& theStringstream,
+//                             mfOutputIndenter&  theIndenter)
+//                               {
+//                                 mfIndentedStringstream* o =
+//                                   new mfIndentedStringstream (
+//                                     theStringstream,
+//                                     theIndenter);
+//                                 assert (o != nullptr);
+//
+//                                 return o;
+//                               }
+//
+//     // constructors/destructor
+//     // ------------------------------------------------------
+//
+//                           mfIndentedStringstream (
+//                             std::stringstream& theStringstream,
+//                             mfOutputIndenter&  theIndenter)
+//                               : std::stringstream (
+//                                   ios_base::out),
+//                                 fIndentedStringStreamBuf (
+//                                   theStringstream,
+//                                   theIndenter)
+//                               {}
+//
+//     virtual               ~mfIndentedStringstream () {};
+//
+//   public:
+//
+//     // set and get
+//     // ------------------------------------------------------
+//
+//     mfIndentedStringStreamBuf&
+//                           getIndentedStringStreamBuf ()
+//                             { return fIndentedStringStreamBuf; }
+//
+//   public:
+//
+//     // public services
+//     // ------------------------------------------------------
+//
+//     // indentation
+//     mfOutputIndenter&     getIndenter () const
+//                               { return fIndentedStringStreamBuf.getOutputIndenter (); }
+//
+//     void                  incrIndentation ()
+//                               { ++ (fIndentedStringStreamBuf.getOutputIndenter ()); }
+//
+//     void                  decrIndentation ()
+//                               { -- (fIndentedStringStreamBuf.getOutputIndenter ()); }
+//
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//     // mfIndentedStringstream just uses an mfIndentedStringStreamBuf
+//     mfIndentedStringStreamBuf
+//                           fIndentedStringStreamBuf;
+//
+// };
+// typedef SMARTP<mfIndentedStringstream> S_mfIndentedStringstream;
+//
+// EXP mfIndentedStringstream& operator << (
+//   mfIndentedStringstream& iss, const std::string& theString);
+//
+// EXP mfIndentedStringstream& operator << (
+//   mfIndentedStringstream& iss, const char* theCString);
+//
+// EXP mfIndentedStringstream& operator << (
+//   mfIndentedStringstream& iss, const Rational& rat);
 
 //______________________________________________________________________________
 // the global log indented stream

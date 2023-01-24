@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <errno.h>  // errno_t
+// #include <errno.h>  // errno_t
 #include <stdio.h>  // strerror_r()
 #include <stdlib.h> // system()
 
@@ -62,7 +62,8 @@ EXP char* mfStrErrorCString ()
   const int    kBufferSize = 1024;
   static char  pBuffer [kBufferSize];
 
-  errno_t
+  //   errno is a mere int, even if an alias type exists
+  int
     result =
 #ifdef WIN32
       strerror_s (pBuffer, kBufferSize, errno);

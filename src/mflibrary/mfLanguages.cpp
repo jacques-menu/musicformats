@@ -192,49 +192,49 @@ std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength)
   return s.str ();
 }
 
-//______________________________________________________________________________
-void testMfIndentedStringstream ()
-{
-#include <sstream>
-
-  std::stringstream s;
-
-  mfIndentedStringstream indentedStringstream (
-      s,
-      mfOutputIndenter::gGlobalOStreamIndenter);
-
-  indentedStringstream <<
-    "indentedStringstream 1" <<
-    std::endl;
-
-//   ++indentedStringstream;
-  indentedStringstream.incrIndentation ();
-
-  indentedStringstream <<
-    "indentedStringstream 1.1" <<
-    std::endl <<
-    "indentedStringstream 1.2" <<
-    std::endl;
-
-//   --indentedStringstream;
-  indentedStringstream.decrIndentation ();
-
-  indentedStringstream <<
-    "indentedStringstream 2" <<
-    std::endl;
-
-  gLogStream <<
-    "indentedStringstream.str ():" <<
-    std::endl;
-
-  ++gIndenter;
-
-  gLogStream <<
-    indentedStringstream.str () <<
-    std::endl;
-
-  --gIndenter;
-}
+// //______________________________________________________________________________
+// void testMfIndentedStringstream ()
+// {
+// #include <sstream>
+//
+//   std::stringstream s;
+//
+//   mfIndentedStringstream indentedStringstream (
+//       s,
+//       mfOutputIndenter::gGlobalOStreamIndenter);
+//
+//   indentedStringstream <<
+//     "indentedStringstream 1" <<
+//     std::endl;
+//
+// //   ++indentedStringstream;
+//   indentedStringstream.incrIndentation ();
+//
+//   indentedStringstream <<
+//     "indentedStringstream 1.1" <<
+//     std::endl <<
+//     "indentedStringstream 1.2" <<
+//     std::endl;
+//
+// //   --indentedStringstream;
+//   indentedStringstream.decrIndentation ();
+//
+//   indentedStringstream <<
+//     "indentedStringstream 2" <<
+//     std::endl;
+//
+//   gLogStream <<
+//     "indentedStringstream.str ():" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//
+//   gLogStream <<
+//     indentedStringstream.str () <<
+//     std::endl;
+//
+//   --gIndenter;
+// }
 
 //______________________________________________________________________________
 void initializeMusicFormatsLanguages ()
