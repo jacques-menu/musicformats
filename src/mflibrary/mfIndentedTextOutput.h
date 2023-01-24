@@ -260,40 +260,40 @@ Usage:
 };
 typedef SMARTP<mfIndentedOstream> S_indentedOstream;
 
-//______________________________________________________________________________
-class EXP mfIndentedStringStreamBuf: public std::stringbuf
-{
-  public:
-
-    // constructor
-                          mfIndentedStringStreamBuf (
-                            std::stringstream& stringStream,
-                            mfOutputIndenter&  theIndenter)
-                              : fOutputStringStream (
-                                  stringStream),
-                                fOutputIndenter (
-                                  theIndenter)
-                              {}
-
-    // indentation
-    mfOutputIndenter&     getOutputIndenter () const
-                              { return fOutputIndenter; }
-
-//     // flush
-//     void                  flush ()
-//                               { fOutputStringStream.flush (); }
-
-    virtual int           sync ();
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    std::stringstream&    fOutputStringStream;
-    mfOutputIndenter&     fOutputIndenter;
-};
-
+// //______________________________________________________________________________
+// class EXP mfIndentedStringStreamBuf: public std::stringbuf
+// {
+//   public:
+//
+//     // constructor
+//                           mfIndentedStringStreamBuf (
+//                             std::stringstream& stringStream,
+//                             mfOutputIndenter&  theIndenter)
+//                               : fOutputStringStream (
+//                                   stringStream),
+//                                 fOutputIndenter (
+//                                   theIndenter)
+//                               {}
+//
+//     // indentation
+//     mfOutputIndenter&     getOutputIndenter () const
+//                               { return fOutputIndenter; }
+//
+// //     // flush
+// //     void                  flush ()
+// //                               { fOutputStringStream.flush (); }
+//
+//     virtual int           sync ();
+//
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//     std::stringstream&    fOutputStringStream;
+//     mfOutputIndenter&     fOutputIndenter;
+// };
+//
 // //______________________________________________________________________________
 // class EXP mfIndentedStringstream: public std::stringstream, public smartable
 // {
