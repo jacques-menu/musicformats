@@ -9,7 +9,32 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include <errno.h>  // errno_t
+/*
+  On MacOXS:
+
+    INTRO(2)                    BSD System Calls Manual                   INTRO(2)
+
+NAME
+     intro -- introduction to system calls and error numbers
+
+SYNOPSIS
+     #include <sys/errno.h>
+
+DESCRIPTION
+     This section provides an overview of the system calls, their error
+     returns, and other common definitions and concepts.
+
+DIAGNOSTICS
+     Nearly all of the system calls provide an error number in the external
+     variable errno, which is defined as:
+
+           extern int errno
+
+
+*/
+
+#include <errno.h>  // errno_t
+#include <string.h> // strerror_r() on MacOS and Linux
 #include <stdio.h>  // strerror_r()
 #include <stdlib.h> // system()
 
