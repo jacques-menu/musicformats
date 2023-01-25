@@ -17,13 +17,15 @@
 // #include <stdlib.h> // system()
 
 #ifdef __APPLE__
+  // nothing specific needed here
 #endif
 
 #ifdef __gnu_linux__
+  #include <string.h> // strerror_r()
 #endif
 
 #ifdef WIN32
-// #include <string.h> // strerror_s()
+  // nothing specific needed here
 #endif
 
 #include "mfIndentedTextOutput.h"

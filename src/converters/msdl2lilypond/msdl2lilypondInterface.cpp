@@ -496,51 +496,51 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 }
 
-//_______________________________________________________________________________
-EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
-  std::string             inputFileName,
-  oahOptionsAndArguments& handlerOptionsAndArguments,
-  std::ostream&           out,
-  std::ostream&           err)
-{
-  // open input file
-#ifdef MF_TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTrace (
-      err,
-      __FILE__, __LINE__,
-      gWaeHandler->openingLilypondFileForWriting (inputFileName));
-  }
-#endif
-
-  std::ifstream
-    inputStream (
-      inputFileName.c_str (),
-      std::ifstream::in);
-
-  if (! inputStream.is_open ()) {
-    std::stringstream s;
-
-    s <<
-      gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
-
-    std::string message = s.str ();
-
-    err <<
-      message <<
-      std::endl;
-
-    throw msdl2lilyponException (message);
-  }
-
-  return
-    convertMsdlStream2lilypondWithOptionsAndArguments (
-      inputFileName,
-      inputStream,
-      handlerOptionsAndArguments,
-      out,
-      err);
-}
+// //_______________________________________________________________________________
+// EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
+//   std::string             inputFileName,
+//   oahOptionsAndArguments& handlerOptionsAndArguments,
+//   std::ostream&           out,
+//   std::ostream&           err)
+// {
+//   // open input file
+// #ifdef MF_TRACING_IS_ENABLED
+//   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+//     gWaeHandler->waeTrace (
+//       err,
+//       __FILE__, __LINE__,
+//       gWaeHandler->openingLilypondFileForWriting (inputFileName));
+//   }
+// #endif
+//
+//   std::ifstream
+//     inputStream (
+//       inputFileName.c_str (),
+//       std::ifstream::in);
+//
+//   if (! inputStream.is_open ()) {
+//     std::stringstream s;
+//
+//     s <<
+//       gWaeHandler->cannotOpenMSDLFileForReading (inputFileName);
+//
+//     std::string message = s.str ();
+//
+//     err <<
+//       message <<
+//       std::endl;
+//
+//     throw msdl2lilyponException (message);
+//   }
+//
+//   return
+//     convertMsdlStream2lilypondWithOptionsAndArguments (
+//       inputFileName,
+//       inputStream,
+//       handlerOptionsAndArguments,
+//       out,
+//       err);
+// }
 
 mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   std::string         inputFileName,
