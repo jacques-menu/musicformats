@@ -140,7 +140,7 @@ using namespace MusicFormats;
     {                                           \
       *yycdebug_ << Title << ' ';               \
       yy_print_ (*yycdebug_, Symbol);           \
-      *yycdebug_ << '\n';                       \
+      *yycdebug_ << std::endl;                       \
     }                                           \
   } while (false)
 
@@ -575,7 +575,7 @@ namespace mfsl {
   | yynewstate -- push a new symbol on the stack.  |
   `-----------------------------------------------*/
   yynewstate:
-    YYCDEBUG << "Entering state " << int (yystack_[0].state) << '\n';
+    YYCDEBUG << "Entering state " << int (yystack_[0].state) << std::endl;
     YY_STACK_PRINT ();
 
     // Accept?
@@ -608,7 +608,7 @@ namespace mfsl {
 #if YY_EXCEPTIONS
         catch (const syntax_error& yyexc)
           {
-            YYCDEBUG << "Caught std::exception: " << yyexc.what() << '\n';
+            YYCDEBUG << "Caught std::exception: " << yyexc.what() << std::endl;
             error (yyexc);
             goto yyerrlab1;
           }
@@ -1425,7 +1425,7 @@ namespace mfsl {
 #if YY_EXCEPTIONS
       catch (const syntax_error& yyexc)
         {
-          YYCDEBUG << "Caught std::exception: " << yyexc.what() << '\n';
+          YYCDEBUG << "Caught std::exception: " << yyexc.what() << std::endl;
           error (yyexc);
           YYERROR;
         }
@@ -1703,7 +1703,7 @@ namespace mfsl {
               }
             if (0 < yyrule)
               {
-                YYCDEBUG << " S" << yyrule << '\n';
+                YYCDEBUG << " S" << yyrule << std::endl;
                 return true;
               }
             yyrule = -yyrule;
@@ -1773,7 +1773,7 @@ namespace mfsl {
       {
 #if MFSLDEBUG
         YYCDEBUG << "LAC: initial context established for "
-                 << symbol_name (yytoken) << '\n';
+                 << symbol_name (yytoken) << std::endl;
 #endif
         yy_lac_established_ = true;
         return yy_lac_check_ (yytoken);
@@ -1798,7 +1798,7 @@ namespace mfsl {
     if (yy_lac_established_)
       {
         YYCDEBUG << "LAC: initial context discarded due to "
-                 << event << '\n';
+                 << event << std::endl;
         yy_lac_established_ = false;
       }
   }
@@ -2032,7 +2032,7 @@ namespace mfsl {
            i_end = yystack_.end ();
          i != i_end; ++i)
       *yycdebug_ << ' ' << int (i->state);
-    *yycdebug_ << '\n';
+    *yycdebug_ << std::endl;
   }
 
   void

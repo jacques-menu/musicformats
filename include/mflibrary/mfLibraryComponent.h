@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfcLibraryComponent__
-#define ___mfcLibraryComponent__
+#ifndef ___mfLibraryComponent__
+#define ___mfLibraryComponent__
 
 #include "exports.h"
 

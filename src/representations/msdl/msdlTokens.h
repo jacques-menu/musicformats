@@ -423,7 +423,7 @@ struct myclass  {
 int main ()
 {
   myclass  myobject {10, 20, 30};
-  std::cout << "myobject contains:" << myobject.str << '\n';
+  std::cout << "myobject contains:" << myobject.str << std::endl;
   return 0;
 }
 

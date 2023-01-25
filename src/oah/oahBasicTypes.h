@@ -270,7 +270,7 @@ void optionsNameAndValueVectorsPlusEquals (
 // typedef SMARTP<oahOptionsNamesAndValuesVector> S_oahOptionsNamesAndValuesVector;
 // EXP std::ostream& operator << (std::ostream& os, const S_oahOptionsNamesAndValuesVector& elt);
 // EXP std::ostream& operator << (std::ostream& os, const oahOptionsNamesAndValuesVector& elt);
-//
+
 //_______________________________________________________________________________
 class EXP oahOptionsAndArguments : public smartable
 {

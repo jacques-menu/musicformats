@@ -25,7 +25,7 @@
 #include "oahEarlyOptions.h"
 
 #include "mfcBasicTypes.h"
-#include "mfcLibraryComponent.h"
+#include "mfLibraryComponent.h"
 
 #include "oahComponent.h"
 #include "oahWae.h"

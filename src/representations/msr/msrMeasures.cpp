@@ -2635,9 +2635,9 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Appending harmony " << harmony->asString () <<
       " to measure " <<
       this->asShortString () <<
@@ -2654,7 +2654,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -2679,9 +2679,9 @@ void msrMeasure::appendHarmonyToMeasureClone (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "Appending harmony " << harmony->asString () <<
       " to measure clone " <<
       this->asShortString () <<
@@ -2698,7 +2698,7 @@ void msrMeasure::appendHarmonyToMeasureClone (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -4228,13 +4228,9 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream      s;
-//     mfIndentedStringstream iss (
-//       s,
-//       gIndenter);
+    std::stringstream ss;
 
-// //     s <<
-    s <<
+    ss <<
       "--> handleFirstHarmonyInHarmoniesMeasure() 1" <<
       ", currentHarmonyMeasurePosition: " <<
       currentHarmonyMeasurePosition <<
@@ -4244,7 +4240,7 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      ss.str ());
   }
 #endif
 
@@ -4262,9 +4258,9 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
     // this will result in a 'no chord' (N.C.) in LilyPond, for example
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Inserting first padding note " <<
         skipNote->asString () <<
         " before currentHarmony " <<
@@ -4276,7 +4272,7 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
@@ -4345,62 +4341,58 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream      s;
-//     mfIndentedStringstream iss (
-//       s,
-//       gIndenter);
+    mfIndentedStringStream iss;
 
-//     s <<
-    s <<
+    iss <<
       "---> handleSubsequentHarmonyInHarmoniesMeasure() 1" <<
-      std::endl;
+      '\n';
 
     ++gIndenter;
 
-//     s <<
-    s <<
-      "previousHarmony: ";
+    iss <<
+      "previousHarmony:" <<
+      '\n';
 
     ++gIndenter;
     if (previousHarmony) {
-  //     s <<
-    s <<
+      iss <<
         previousHarmony->asString ();
     }
     else {
-      s << "[NONE]";
+      iss << "[NONE]";
     }
     --gIndenter;
+    iss << '\n';
 
-//     s <<
-    s <<
+    iss <<
       "currentHarmony: " <<
-      std::endl;
+      '\n';
 
     ++gIndenter;
-//     s <<
-    s <<
+    iss <<
       currentHarmony->asString () <<
-      std::endl;
+      '\n';
     --gIndenter;
 
-//     s <<
-    s <<
+    iss <<
       "previousHarmonyMeasurePosition: " <<
       previousHarmonyMeasurePosition <<
-      ", currentHarmonyMeasurePosition: " <<
+      '\n' <<
+      "currentHarmonyMeasurePosition: " <<
       currentHarmonyMeasurePosition <<
-      ", measurePositionFollowingPreviousHarmony: " <<
+      '\n' <<
+      "measurePositionFollowingPreviousHarmony: " <<
       measurePositionFollowingPreviousHarmony <<
-      ", measurePositionsDelta: " <<
+      '\n' <<
+      "measurePositionsDelta: " <<
       measurePositionsDelta <<
-      std::endl;
+      '\n';
 
     --gIndenter;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      iss.str ());
   }
 #endif
 
@@ -4421,9 +4413,9 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 //     // insert skipNote before currentHarmony in the measure's elements list
 // #ifdef MF_TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-//       std::stringstream s;
+//       std::stringstream ss;
 //
-//       s <<
+//       ss <<
 //         "Inserting first padding note " <<
 //         skipNote->asString () <<
 //         " before currentHarmony " <<
@@ -4435,7 +4427,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
-//         s.str ());
+//         ss.str ());
 //     }
 // #endif
 //
@@ -4465,9 +4457,9 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Setting the sounding whole notes duration of harmony " <<
         previousHarmony->asString () <<
         " to " <<
@@ -4476,7 +4468,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
@@ -4528,56 +4520,55 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    std::stringstream      s;
-//     mfIndentedStringstream iss (
-//       s,
-//       gIndenter);
+    mfIndentedStringStream iss;
 
-//     s <<
-    s <<
+    iss <<
       "--> postHandleCurrentHarmonyInHarmoniesMeasure():" <<
-      std::endl;
+      '\n';
 
     ++gIndenter;
 
-//     s <<
-    s <<
-      "currentHarmony: ";
+    iss <<
+      "currentHarmony:" <<
+      '\n';
 
     ++gIndenter;
     if (currentHarmony) {
-  //     s <<
-    s <<
+      iss <<
         currentHarmony->asString ();
     }
     else {
-      s << "[NONE]";
+      iss << "[NONE]";
     }
+    iss << '\n';
     --gIndenter;
 
-//     s <<
-    s <<
-      std::endl <<
+    iss <<
       "currentUpLinkToHarmonyToNote:" <<
-      std::endl;
+      '\n';
 
     ++gIndenter;
-//     s <<
-    s <<
+    iss <<
       currentUpLinkToHarmonyToNote->asString () <<
-      std::endl;
+      '\n';
     --gIndenter;
 
-//     s <<
-    s <<
+    iss <<
       "currentHarmonyMeasurePosition: " <<
       currentHarmonyMeasurePosition <<
-      ", currentHarmonySoundingWholeNotes: " <<
+      '\n' <<
+
+      "currentHarmonySoundingWholeNotes: " <<
       currentHarmonySoundingWholeNotes <<
-      ", measurePositionFollowingCurrentHarmony: " <<
+      '\n' <<
+
+      "measurePositionFollowingCurrentHarmony: " <<
       measurePositionFollowingCurrentHarmony <<
-      ", fFullMeasureWholeNotesDuration: " <<
+      '\n' <<
+
+      "fFullMeasureWholeNotesDuration: " <<
       fFullMeasureWholeNotesDuration <<
+      '\n' <<
       /* JMI
       ", measurePositionFollowingCurrentUpLinkToHarmonyToNote: " <<
       measurePositionFollowingCurrentUpLinkToHarmonyToNote <<
@@ -4586,17 +4577,18 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
       ", measurePositionFollowingCurrentUpLinkToHarmonyToNote: " <<
       measurePositionFollowingCurrentUpLinkToHarmonyToNote <<
       */
-      ", currentHarmonySoundingWholeNotes: " <<
+      "currentHarmonySoundingWholeNotes: " <<
       currentHarmonySoundingWholeNotes <<
-      ", measureOverflowWholeNotes: " <<
+      '\n' <<
+      "measureOverflowWholeNotes: " <<
       measureOverflowWholeNotes <<
-      std::endl;
+      '\n';
 
     --gIndenter;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
-      s.str ());
+      iss.str ());
   }
 #endif
 
@@ -4673,9 +4665,9 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Reducing the sounding whole notes of harmony FII " <<
         currentHarmony->asString () <<
         " from " <<
@@ -4689,14 +4681,14 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
     if (reducedSoundingWholeNotes.getNumerator () == 0) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Cannot reduce the duration of harmony " <<
         currentHarmony->asShortString () <<
         " to 0 : leaving it as it is";
@@ -4705,7 +4697,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
         gGlobalServiceRunData->getInputSourceName (),
         inputLineNumber,
 //  JMI             __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
     else {
       // set currentHarmony's duration to the reduced value
@@ -4721,9 +4713,9 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
     // i.e. there are not notes after the one that bears it
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Harmony " <<
         currentHarmony->asString () <<
         " reaches the end of measure " <<
@@ -4736,7 +4728,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
   }
@@ -4791,9 +4783,9 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
     // taking their offset into account
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Sorting the elements in harmonies measure " <<
         this->asShortString () <<
         " in segment '" <<
@@ -4806,7 +4798,7 @@ void msrMeasure::finalizeTheHarmoniesInHarmoniesMeasure (
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
@@ -5054,9 +5046,9 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
     // this will result in a 'no chord' (N.C.) in LilyPond, for example
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Inserting first padding note " <<
         skipNote->asString () <<
         " before currentFiguredBass " <<
@@ -5068,7 +5060,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
@@ -5178,9 +5170,9 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
     // insert skipNote before currentFiguredBass in the measure's elements list
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Inserting subsequent padding note " <<
         skipNote->asString () <<
         " before currentFiguredBass " <<
@@ -5192,7 +5184,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
@@ -5227,9 +5219,9 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Reducing the sounding whole notes of figured bass " <<
         previousFiguredBass->asString () <<
         " from " <<
@@ -5243,14 +5235,14 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
     if (reducedSoundingWholeNotes.getNumerator () == 0) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Cannot reduce the duration of figured bass " <<
         previousFiguredBass->asShortString () <<
         " to 0 : leaving it as it is";
@@ -5259,7 +5251,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
         gGlobalServiceRunData->getInputSourceName (),
         inputLineNumber,
 //  JMI             __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
     else {
       // set previousFiguredBass's duration to the reduced value
@@ -5396,9 +5388,9 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 
 #ifdef MF_TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Reducing the sounding whole notes of figured bass FII " <<
         currentFiguredBass->asString () <<
         " from " <<
@@ -5412,14 +5404,14 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
 #endif
 
     if (reducedSoundingWholeNotes.getNumerator () == 0) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Cannot reduce the duration of figured bass " <<
         currentFiguredBass->asShortString () <<
         " to 0 : leaving it as it is";
@@ -5428,7 +5420,7 @@ void msrMeasure::postHandleCurrentFiguredBassInFiguredBassMeasure (
         gGlobalServiceRunData->getInputSourceName (),
         inputLineNumber,
 //  JMI             __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
     }
     else {
       // set currentFiguredBass's duration to the reduced value
@@ -5960,9 +5952,9 @@ void msrMeasure::finalizeMeasure (
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     if (fMeasureWholeNotesDuration.getNumerator () == 0) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Measure " <<
         this->asShortString () <<
         " in segment '" <<
@@ -5976,7 +5968,7 @@ void msrMeasure::finalizeMeasure (
       msrWarning (
         gGlobalServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
   }
 #endif
@@ -6065,9 +6057,9 @@ void msrMeasure::finalizeMeasureClone (
 #ifdef MF_TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     if (fMeasureWholeNotesDuration.getNumerator () == 0) {
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "Measure " <<
         this->asShortString () <<
         " in segment '" <<
@@ -6081,7 +6073,7 @@ void msrMeasure::finalizeMeasureClone (
       msrWarning (
         gGlobalServiceRunData->getInputSourceName (),
         inputLineNumber,
-        s.str ());
+        ss.str ());
     }
   }
 #endif
@@ -6181,9 +6173,9 @@ void msrMeasure::finalizeMeasureClone (
           inputLineNumber,
           "finalizeMeasureClone() 3 - originalMeasure");
 
-      std::stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "*********>> measure clone '" <<
         fMeasureNumber <<
         "': measure kind '" <<
@@ -6199,12 +6191,12 @@ void msrMeasure::finalizeMeasureClone (
         gGlobalServiceRunData->getInputSourceName (),
         inputLineNumber,
    //      __FILE__, __LINE__,
-        s.str ());
+        ss.str ());
 
       if (fFullMeasureWholeNotesDuration.getNumerator () == 0) { // JMI
-        std::stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "*********>> measure clone '" <<
           fMeasureNumber <<
           "' full measure whole notes is 0" <<
@@ -6215,7 +6207,7 @@ void msrMeasure::finalizeMeasureClone (
           gGlobalServiceRunData->getInputSourceName (),
           inputLineNumber,
      //      __FILE__, __LINE__,
-          s.str ());
+          ss.str ());
       }
     }
 #endif

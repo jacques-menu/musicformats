@@ -14,6 +14,8 @@
 
 #include <string>
 
+#include "mfIndentedTextOutput.h"
+
 
 namespace MusicFormats
 {
@@ -40,6 +42,8 @@ std::string msrMeasureKindAsString (
   msrMeasureKind measureKind);
 
 std::ostream& operator << (std::ostream& os, const msrMeasureKind& elt);
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasureKind elt);
+
 
 std::string msrMeasureKindasShortStringForMeasuresSlices (
   msrMeasureKind measureKind);
@@ -53,9 +57,10 @@ std::string msrMeasureImplicitKindAsString (
   msrMeasureImplicitKind measureImplicitKind);
 
 std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt);
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasureImplicitKind elt);
 
 //______________________________________________________________________________
-  // data types
+// data types
 
 enum msrMeasureFirstInSegmentKind {
   kMeasureFirstInSegmentKindUnknown,

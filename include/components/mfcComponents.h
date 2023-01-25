@@ -57,7 +57,7 @@
 #include "msr2musicxmlComponent.h"
 
 // the MusicFormats library
-#include "mfcLibraryComponent.h"
+#include "mfLibraryComponent.h"
 
 
 #endif

@@ -132,6 +132,7 @@ class EXP waeHandler : public smartable
 
     // trace
 
+#ifdef MF_TRACING_IS_ENABLED
     virtual void          waeTrace (
 //                             const std::string& context,
                             const std::string& inputSourceName,
@@ -144,6 +145,7 @@ class EXP waeHandler : public smartable
                             const std::string& inputSourceName,
                             int                inputLineNumber,
                             const std::string& message);
+#endif
 
     // print
     // ------------------------------------------------------

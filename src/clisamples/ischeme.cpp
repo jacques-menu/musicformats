@@ -29,7 +29,7 @@
 
 #include "oahEarlyOptions.h"
 
-#include "mfcLibraryComponent.h"
+#include "mfLibraryComponent.h"
 
 #include "ischemeInterpreterInsiderHandler.h"
 #include "ischemeInterpreterRegularHandler.h"

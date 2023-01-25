@@ -261,6 +261,8 @@ void waeHandler::waeInternalErrorWithException (
 }
 
 //______________________________________________________________________________
+#ifdef MF_TRACING_IS_ENABLED
+
 void waeHandler::waeTrace (
 //   const std::string& context,
   std::ostream&      os,
@@ -358,6 +360,8 @@ void waeHandler::waeTrace (
     inputLineNumber,
     message);
 }
+
+#endif
 
 //______________________________________________________________________________
 void waeHandler::displayWarningsAndErrorsInputLineNumbers ()

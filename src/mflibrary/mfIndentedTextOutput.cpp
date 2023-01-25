@@ -235,7 +235,7 @@ std::string mfOutputIndenter::indentMultiLineStringWithCurrentOffset (
 
   // append theString line by line
   while (getline (inputStream, line)) {
-    s << fetchCurrentOffset () << line << std::endl;
+    s << fetchCurrentOffset () << line; // << std::endl;
   } // while
 
   return s.str ();
@@ -265,11 +265,11 @@ int mfIndentedOStreamBuf::sync ()
   size_t strSize = str ().size ();
 
   // fetch the last non-space character in the buffer
-  // caution: the '\n' is present as the last character!
+  // caution: the std::endl is present as the last character!
   size_t found = str ().find_last_not_of (' ', strSize - 2);
 
   // this can be uncommented to see low level informations
-  // fOutputOStream << "% strSize: " << strSize << ", found: " << found << '\n';
+  // fOutputOStream << "% strSize: " << strSize << ", found: " << found << std::endl;
 
   // output the spacers
   fOutputIndenter.printSpacers (fOutputOStream);
@@ -277,7 +277,7 @@ int mfIndentedOStreamBuf::sync ()
   // output the buffer
   if (found == strSize - 3) {
     // don't output the trailing spaces, but output the end of line
-    fOutputOStream << str ().substr (0, found + 1) << '\n';
+    fOutputOStream << str ().substr (0, found + 1) << std::endl;
   }
   else {
     // output the whole buffer
@@ -303,11 +303,11 @@ int mfIndentedOStreamBuf::sync ()
 //   size_t strSize = str ().size ();
 //
 //   // fetch the last non-space character in the buffer
-//   // caution: the '\n' is present as the last character!
+//   // caution: the std::endl is present as the last character!
 //   size_t found = str ().find_last_not_of (' ', strSize - 2);
 //
 //   // this can be uncommented to see low level informations
-//   // fOutputStringStream << "% strSize: " << strSize << ", found: " << found << '\n';
+//   // fOutputStringStream << "% strSize: " << strSize << ", found: " << found << std::endl;
 //
 //   // output the indenter
 //   fOutputStringStream << "fOutputIndenter";
@@ -315,7 +315,7 @@ int mfIndentedOStreamBuf::sync ()
 //   // output the buffer
 //   if (found == strSize - 3) {
 //     // don't output the trailing spaces, but output the end of line
-//     fOutputStringStream << str ().substr (0, found + 1) << '\n';
+//     fOutputStringStream << str ().substr (0, found + 1) << std::endl;
 //   }
 //   else {
 //     // output the whole buffer
@@ -327,42 +327,63 @@ int mfIndentedOStreamBuf::sync ()
 //
 //   return 0;
 // }
-//
-// EXP mfIndentedStringstream& operator << (
-//   mfIndentedStringstream& iss, const std::string& theString)
-// {
-//   iss.getIndentedStringStreamBuf ().getOutputIndenter ().printSpacers (iss);
-//
-//   iss.getIndentedStringStreamBuf ().getOutputIndenter ().indentMultiLineString (
-//     theString,
-//     iss);
-//
-//   return iss;
-// }
-//
-// EXP mfIndentedStringstream& operator << (
-//   mfIndentedStringstream& iss, const char* theCString)
-// {
-//   iss.getIndentedStringStreamBuf ().getOutputIndenter ().printSpacers (iss);
-//
-//   iss.getIndentedStringStreamBuf ().getOutputIndenter ().indentMultiLineString (
-//     theCString,
-//     iss);
-//
-//   return iss;
-// }
-//
-// EXP mfIndentedStringstream& operator << (
-//   mfIndentedStringstream& iss, const Rational& rat)
-// {
-//   iss.getIndentedStringStreamBuf ().getOutputIndenter ().printSpacers (iss);
-//
-//   iss.getIndentedStringStreamBuf ().getOutputIndenter ().indentMultiLineString (
-//     rat.asString (),
-//     iss);
-//
-//   return iss;
-// }
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const char theChar)
+{
+  iss.getStringstream () <<
+    theChar;
+
+  return iss;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const std::string& theString)
+{
+  iss.getStringstream () <<
+    gIndenter.indentMultiLineStringWithCurrentOffset (
+      theString);
+
+  return iss;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const char* theCString)
+{
+  iss.getStringstream () <<
+    gIndenter.indentMultiLineStringWithCurrentOffset (
+      theCString);
+
+  return iss;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const int& elt)
+{
+  iss.getStringstream () <<
+    elt;
+
+  return iss;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const float& elt)
+{
+  iss.getStringstream () <<
+    elt;
+
+  return iss;
+}
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const Rational& rat)
+{
+  iss.getStringstream () <<
+    gIndenter.indentMultiLineStringWithCurrentOffset (
+      rat.asString ());
+
+  return iss;
+}
 
 //______________________________________________________________________________
 // the global indented streams

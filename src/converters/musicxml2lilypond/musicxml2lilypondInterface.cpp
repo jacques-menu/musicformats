@@ -139,10 +139,12 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass2a ()) {
+#ifdef MF_TRACING_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
+#endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -170,10 +172,12 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass2b ()) {
+#ifdef MF_TRACING_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
+#endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -228,10 +232,12 @@ else {
   // ------------------------------------------------------
 
   if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass3 ()) {
+#ifdef MF_TRACING_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_3));
+#endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }

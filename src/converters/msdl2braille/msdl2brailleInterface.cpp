@@ -163,10 +163,12 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsdl2brlInsiderOahGroup->getQuitAfterPass1 ()) {
+#ifdef MF_TRACING_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_1));
+#endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -198,10 +200,12 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsdl2brlInsiderOahGroup->getQuitAfterPass2 ()) {
+#ifdef MF_TRACING_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_2));
+#endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -257,10 +261,12 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsdl2brlInsiderOahGroup->getQuitAfterPass3 ()) {
+#ifdef MF_TRACING_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_3));
+#endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
@@ -315,10 +321,12 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsdl2brlInsiderOahGroup->getQuitAfterPass4 ()) {
+#ifdef MF_TRACING_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_4));
+#endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
