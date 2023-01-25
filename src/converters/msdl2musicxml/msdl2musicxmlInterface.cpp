@@ -161,10 +161,12 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
   // ------------------------------------------------------
 
   if (false && gGlobalMsdl2xmlInsiderOahGroup->getQuitAfterPass1 ()) { // JMI
+#ifdef MF_TRACING_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_1));
+#endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }

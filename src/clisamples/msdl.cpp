@@ -33,7 +33,7 @@
 
 #include "oahEarlyOptions.h"
 
-#include "mfcLibraryComponent.h"
+#include "mfLibraryComponent.h"
 #include "msdlComponent.h"
 #include "msdlConverterComponent.h"
 

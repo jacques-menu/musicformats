@@ -161,10 +161,12 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsdl2gmnInsiderOahGroup->getQuitAfterPass1 ()) {
+#ifdef MF_TRACING_IS_ENABLED
     gWaeHandler->waeTrace (
       err,
       __FILE__, __LINE__,
       gWaeHandler->quittingAfterPass (mfPassIDKind::kMfPassID_1));
+#endif
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }

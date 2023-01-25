@@ -81,14 +81,14 @@ void simple_printf(const char* fmt...) // C-style "const char* fmt, ..." is also
     while (*fmt != '\0') {
         if (*fmt == 'd') {
             int i = va_arg(args, int);
-            std::cout << i << '\n';
+            std::cout << i << std::endl;
         } else if (*fmt == 'c') {
             // note automatic conversion to integral type
             int c = va_arg(args, int);
-            std::cout << static_cast<char>(c) << '\n';
+            std::cout << static_cast<char>(c) << std::endl;
         } else if (*fmt == 'f') {
             double d = va_arg(args, double);
-            std::cout << d << '\n';
+            std::cout << d << std::endl;
         }
         ++fmt;
     }

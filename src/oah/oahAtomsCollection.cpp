@@ -34,7 +34,7 @@
 
 #include "oahBrowsers.h"
 
-#include "mfcLibraryComponent.h"
+#include "mfLibraryComponent.h"
 
 
 namespace MusicFormats

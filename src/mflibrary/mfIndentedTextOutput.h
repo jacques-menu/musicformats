@@ -293,16 +293,16 @@ typedef SMARTP<mfIndentedOstream> S_indentedOstream;
 //     std::stringstream&    fOutputStringStream;
 //     mfOutputIndenter&     fOutputIndenter;
 // };
-//
+
 // //______________________________________________________________________________
-// class EXP mfIndentedStringstream: public std::stringstream, public smartable
+// class EXP mfIndentedStringStream: public std::stringstream, public smartable
 // {
 // /*
 // Reference for this class:
 //   https://cplusplus.com/reference/sstream/stringstream/
 //
 // Usage:
-//   mfIndentedStringstream myStream (std::cout);
+//   mfIndentedStringStream myStream (std::cout);
 //
 //   myStream <<
 //     1 << 2 << 3 << std::endl <<
@@ -315,12 +315,12 @@ typedef SMARTP<mfIndentedOstream> S_indentedOstream;
 //     // creation
 //     // ------------------------------------------------------
 //
-//     static SMARTP<mfIndentedStringstream> create (
+//     static SMARTP<mfIndentedStringStream> create (
 //                             std::stringstream& theStringstream,
 //                             mfOutputIndenter&  theIndenter)
 //                               {
-//                                 mfIndentedStringstream* o =
-//                                   new mfIndentedStringstream (
+//                                 mfIndentedStringStream* o =
+//                                   new mfIndentedStringStream (
 //                                     theStringstream,
 //                                     theIndenter);
 //                                 assert (o != nullptr);
@@ -331,7 +331,7 @@ typedef SMARTP<mfIndentedOstream> S_indentedOstream;
 //     // constructors/destructor
 //     // ------------------------------------------------------
 //
-//                           mfIndentedStringstream (
+//                           mfIndentedStringStream (
 //                             std::stringstream& theStringstream,
 //                             mfOutputIndenter&  theIndenter)
 //                               : std::stringstream (
@@ -341,7 +341,7 @@ typedef SMARTP<mfIndentedOstream> S_indentedOstream;
 //                                   theIndenter)
 //                               {}
 //
-//     virtual               ~mfIndentedStringstream () {};
+//     virtual               ~mfIndentedStringStream () {};
 //
 //   public:
 //
@@ -372,21 +372,101 @@ typedef SMARTP<mfIndentedOstream> S_indentedOstream;
 //     // private fields
 //     // ------------------------------------------------------
 //
-//     // mfIndentedStringstream just uses an mfIndentedStringStreamBuf
+//     // mfIndentedStringStream just uses an mfIndentedStringStreamBuf
 //     mfIndentedStringStreamBuf
 //                           fIndentedStringStreamBuf;
 //
 // };
-// typedef SMARTP<mfIndentedStringstream> S_mfIndentedStringstream;
+// typedef SMARTP<mfIndentedStringStream> S_mfIndentedStringstream;
 //
-// EXP mfIndentedStringstream& operator << (
-//   mfIndentedStringstream& iss, const std::string& theString);
+// EXP mfIndentedStringStream& operator << (
+//   mfIndentedStringStream& iss, const std::string& theString);
 //
-// EXP mfIndentedStringstream& operator << (
-//   mfIndentedStringstream& iss, const char* theCString);
+// EXP mfIndentedStringStream& operator << (
+//   mfIndentedStringStream& iss, const char* theCString);
 //
-// EXP mfIndentedStringstream& operator << (
-//   mfIndentedStringstream& iss, const Rational& rat);
+// EXP mfIndentedStringStream& operator << (
+//   mfIndentedStringStream& iss, const Rational& rat);
+
+//______________________________________________________________________________
+class EXP mfIndentedStringStream: public smartable
+{
+/*
+Reference for this class:
+  https://cplusplus.com/reference/sstream/stringstream/
+
+Usage:
+  mfIndentedStringStream iss;
+
+  iss <<
+    1 << 2 << 3 << std::endl << // no std::endl here!
+    5 << 6 << std::endl <<
+    7 << 8 << std::endl;
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mfIndentedStringStream> create ()
+                              {
+                                mfIndentedStringStream* o =
+                                  new mfIndentedStringStream ();
+                                assert (o != nullptr);
+
+                                return o;
+                              }
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfIndentedStringStream () {}
+
+    virtual               ~mfIndentedStringStream () {};
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    std::stringstream&    getStringstream ()
+                            { return fStringstream; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    std::string           str () const
+                              { return fStringstream.str (); }
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    std::stringstream     fStringstream;
+};
+typedef SMARTP<mfIndentedStringStream> S_mfIndentedStringstream;
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const char theChar);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const std::string& theString);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const char* theCString);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const int& elt);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const float& elt);
+
+EXP mfIndentedStringStream& operator << (
+  mfIndentedStringStream& iss, const Rational& rat);
 
 //______________________________________________________________________________
 // the global log indented stream

@@ -14,7 +14,7 @@
 
 #include "mfIndentedTextOutput.h"
 
-#include "mfcLibraryComponent.h"
+#include "mfLibraryComponent.h"
 
 
 using namespace MusicFormats;

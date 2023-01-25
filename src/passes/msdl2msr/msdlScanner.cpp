@@ -852,7 +852,7 @@ void msdlScanner::handleSlash ()
         unsigned slashCommentToEndOfLineStartPositionInInput = fCurrentTokenPositionInInput;
 
         while (fCurrentCharacter != '\n') {
-          // consume the '\n'
+          // consume the std::endl
           fetchNextCharacter ();
         } // while
 

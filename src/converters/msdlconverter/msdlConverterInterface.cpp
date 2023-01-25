@@ -59,13 +59,13 @@
 namespace MusicFormats
 {
 
-//_______________________________________________________________________________
-static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUSED v0.9.66
-  SXMLFile&           sxmlfile,
-  std::ostream&       out,
-  std::ostream&       err,
-  const S_oahHandler& handler)
-{
+// //_______________________________________________________________________________
+// static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUSED v0.9.66
+//   SXMLFile&           sxmlfile,
+//   std::ostream&       out,
+//   std::ostream&       err,
+//   const S_oahHandler& handler)
+// {
 // #ifdef MF_TRACING_IS_ENABLED
 //   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
 //     gLogStream <<
@@ -417,9 +417,9 @@ static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUS
 //       outputFileStream.close ();
 //     }
 //   }
-
-  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
-}
+//
+//   return mfMusicformatsErrorKind::kMusicformatsError_NONE;
+// }
 
 //_______________________________________________________________________________
 static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI UNUSED v0.9.66
@@ -614,7 +614,7 @@ EXP mfMusicformatsErrorKind msdlFile2lilypond (
   return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
+mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI ??? v0.9.66
   const char*         fileName,
   std::ostream&       out,
   std::ostream&       err,

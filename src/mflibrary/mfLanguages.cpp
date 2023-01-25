@@ -192,48 +192,67 @@ std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength)
   return s.str ();
 }
 
-// //______________________________________________________________________________
+//______________________________________________________________________________
 // void testMfIndentedStringstream ()
 // {
-// #include <sstream>
+//   mfIndentedStringStream iss;
 //
-//   std::stringstream s;
-//
-//   mfIndentedStringstream indentedStringstream (
-//       s,
-//       mfOutputIndenter::gGlobalOStreamIndenter);
-//
-//   indentedStringstream <<
-//     "indentedStringstream 1" <<
-//     std::endl;
-//
-// //   ++indentedStringstream;
-//   indentedStringstream.incrIndentation ();
-//
-//   indentedStringstream <<
-//     "indentedStringstream 1.1" <<
-//     std::endl <<
-//     "indentedStringstream 1.2" <<
-//     std::endl;
-//
-// //   --indentedStringstream;
-//   indentedStringstream.decrIndentation ();
-//
-//   indentedStringstream <<
-//     "indentedStringstream 2" <<
-//     std::endl;
-//
-//   gLogStream <<
-//     "indentedStringstream.str ():" <<
+//   // populate the mfIndentedStringStream
+//   iss <<
+//     "iss 1" <<
 //     std::endl;
 //
 //   ++gIndenter;
+//   iss <<
+//     "iss 1.1" <<
+//     std::endl <<
+//     "iss 1.2" <<
+//     std::endl;
+//   --gIndenter;
 //
-//   gLogStream <<
-//     indentedStringstream.str () <<
+//   iss <<
+//     "iss 2" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//   iss <<
+//     "iss 2.1" <<
+//     std::endl;
+//
+//   iss <<
+//     "iss 2.2" <<
+//     std::endl;
+//   {
+//     ++gIndenter;
+//     iss <<
+//       "iss 2.2.1" <<
+//       std::endl <<
+//       "iss 2.2.2" <<
+//       std::endl;
+//     --gIndenter;
+//   }
+//
+//   iss <<
+//     "iss 2.3" <<
 //     std::endl;
 //
 //   --gIndenter;
+//
+//   iss <<
+//     "iss 3" <<
+//     std::endl;
+//
+//
+//   // display the mfIndentedStringStream contents
+// //   gLogStream <<
+// //     "iss.str ():" <<
+// //     std::endl;
+// //
+// //   ++gIndenter;
+//   gLogStream <<
+//     iss.str () <<
+//     std::endl;
+// //   --gIndenter;
 // }
 
 //______________________________________________________________________________

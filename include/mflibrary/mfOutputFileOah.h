@@ -17,6 +17,7 @@
 #include "exports.h"
 
 #include "oahBasicTypes.h"
+#include "oahAtomsCollection.h"
 
 
 namespace MusicFormats

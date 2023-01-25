@@ -15,7 +15,7 @@
 
 #include "mfStaticSettings.h"
 
-#include "mfcLibraryComponent.h"
+#include "mfLibraryComponent.h"
 
 #include "mfServices.h"
 

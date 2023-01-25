@@ -75,6 +75,14 @@ std::ostream& operator << (std::ostream& os, const msrMeasureKind& elt)
   return os;
 }
 
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasureKind elt)
+{
+  iss.getStringstream () <<
+    msrMeasureKindAsString (elt);
+
+  return iss;
+}
+
 std::string msrMeasureKindasShortStringForMeasuresSlices (
   msrMeasureKind measureKind)
 {
@@ -146,6 +154,14 @@ std::ostream& operator << (std::ostream& os, const msrMeasureImplicitKind& elt)
 {
   os << msrMeasureImplicitKindAsString (elt);
   return os;
+}
+
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasureImplicitKind elt)
+{
+  iss.getStringstream () <<
+    msrMeasureImplicitKindAsString (elt);
+
+  return iss;
 }
 
 std::string msrMeasureFirstInSegmentKindAsString (

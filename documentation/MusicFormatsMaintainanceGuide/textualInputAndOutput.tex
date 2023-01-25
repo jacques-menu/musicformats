@@ -31,11 +31,11 @@ int mfIndentedOStreamBuf::sync ()
   unsigned int strSize = str ().size ();
 
   // fetch the last non-space character in the buffer
-  // caution: the '\n' is present as the last character!
+  // caution: the std::endl is present as the last character!
   size_t found = str ().find_last_not_of (' ', strSize - 2);
 
   // this can be uncommented to see low level informations
-  // fOutputSteam << "% strSize: " << strSize << ", found: " << found << '\n';
+  // fOutputSteam << "% strSize: " << strSize << ", found: " << found << std::endl;
 
   // output the indenter
   fOutputSteam << fOutputIndenter;
@@ -43,7 +43,7 @@ int mfIndentedOStreamBuf::sync ()
   // output the buffer
   if (found == strSize - 3) {
     // don't output the trailing spaces, but output the end of line
-    fOutputSteam << str ().substr (0, found + 1) << '\n';
+    fOutputSteam << str ().substr (0, found + 1) << std::endl;
   }
   else {
     // output the whole buffer

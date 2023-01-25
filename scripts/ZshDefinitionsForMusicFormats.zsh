@@ -255,10 +255,14 @@ function bit ()
 #   set +x
 }
 
+function cbit ()
+{
+	clear
+	bit
+}
+
 alias cmakall='pushd . ; cd ${BUILD_DIR}/libdir; cmake .. -DALL=on -DAPPLEDEBUG=on ; popd'
 #cmake .. -DLILY=on -DBRAILLE=on
-
-alias cbit=’clear; bit’
 
 
 # version number
