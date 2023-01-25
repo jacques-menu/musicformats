@@ -35,9 +35,9 @@ mfOutputIndenter::~mfOutputIndenter ()
 {}
 
 /*
-  // Declare prefix and postfix decrement operators.
-  Point& operator--();       // Prefix decrement operator.
-  Point operator--(int);     // Postfix decrement operator.
+  Declare prefix and postfix decrement operators.
+    Point& operator--();       // Prefix decrement operator.
+    Point operator--(int);     // Postfix decrement operator.
 */
 
 // increase the indentation by 1, prefix operator
@@ -292,41 +292,6 @@ int mfIndentedOStreamBuf::sync ()
 
   return 0;
 }
-
-// //______________________________________________________________________________
-// int mfIndentedStringStreamBuf::sync ()
-// {
-//   // When we sync the stream with fOutputStringStream:
-//   // 1) output the indentation then the buffer
-//   // 2) reset the buffer
-//
-//   size_t strSize = str ().size ();
-//
-//   // fetch the last non-space character in the buffer
-//   // caution: the std::endl is present as the last character!
-//   size_t found = str ().find_last_not_of (' ', strSize - 2);
-//
-//   // this can be uncommented to see low level informations
-//   // fOutputStringStream << "% strSize: " << strSize << ", found: " << found << std::endl;
-//
-//   // output the indenter
-//   fOutputStringStream << "fOutputIndenter";
-//
-//   // output the buffer
-//   if (found == strSize - 3) {
-//     // don't output the trailing spaces, but output the end of line
-//     fOutputStringStream << str ().substr (0, found + 1) << std::endl;
-//   }
-//   else {
-//     // output the whole buffer
-//     fOutputStringStream << str ();
-//   }
-//
-//   // reset the buffer
-//   str ("");
-//
-//   return 0;
-// }
 
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const char theChar)

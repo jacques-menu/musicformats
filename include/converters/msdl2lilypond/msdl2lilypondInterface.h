@@ -40,11 +40,11 @@ EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   std::ostream&       out,
   std::ostream&       err);
 
-EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
-  std::string                   inputFileName,
-  const oahOptionsAndArguments& handlerOptionsAndArguments,
-  std::ostream&                 out,
-  std::ostream&                 err);
+// EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
+//   std::string                   inputFileName,
+//   const oahOptionsAndArguments& handlerOptionsAndArguments,
+//   std::ostream&                 out,
+//   std::ostream&                 err);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (

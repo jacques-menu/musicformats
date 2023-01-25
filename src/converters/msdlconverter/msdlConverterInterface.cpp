@@ -421,13 +421,13 @@ namespace MusicFormats
 //   return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 // }
 
-//_______________________________________________________________________________
-static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI UNUSED v0.9.66
-  SXMLFile&               sxmlfile,
-  oahOptionsAndArguments& handlerOptionsAndArguments,
-  std::ostream&           out,
-  std::ostream&           err)
-{
+// //_______________________________________________________________________________
+// static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI UNUSED v0.9.66
+//   SXMLFile&               sxmlfile,
+//   oahOptionsAndArguments& handlerOptionsAndArguments,
+//   std::ostream&           out,
+//   std::ostream&           err)
+// {
 //   Sxmlelement st;
 //
 //   if (sxmlfile) {
@@ -584,9 +584,9 @@ static mfMusicformatsErrorKind msdlFile2lilypondWithOptionsAndArguments ( // JMI
 //     out,
 //     err,
 //     handler);
-
-  return mfMusicformatsErrorKind::kMusicformatsError_NONE;
-}
+//
+//   return mfMusicformatsErrorKind::kMusicformatsError_NONE;
+// }
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msdlFile2lilypond (
