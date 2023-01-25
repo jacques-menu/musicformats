@@ -10,7 +10,6 @@
 */
 
 #include <iomanip>      // std::setw, ...
-#include <format>
 
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
