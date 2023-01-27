@@ -3,6 +3,11 @@
 
 alias zrc='. ${HOME}/.zrc'
 
+# LaTeX
+#----------------------------------------------
+
+export PATH=/Library/TeX/texbin:$PATH
+
 #	my actual work directory
 #----------------------------------------------
 

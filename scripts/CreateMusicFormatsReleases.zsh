@@ -118,8 +118,8 @@ echo "----------------------------------------------"
 echo "==> create the realeases:"
 echo "----------------------------------------------"
 echo
-# CreateRelease "${DOWNLOADED_MACOS_VERSION_NAME}"
-# CreateRelease "${DOWNLOADED_UBUNTU_VERSION_NAME}"
+CreateRelease "${DOWNLOADED_MACOS_VERSION_NAME}"
+CreateRelease "${DOWNLOADED_UBUNTU_VERSION_NAME}"
 CreateRelease "${DOWNLOADED_WINDOWS_VERSION_NAME}"
 
 
