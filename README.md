@@ -22,23 +22,19 @@ The documentation contains among other things a user guide :
 and a maintenance guide for developpers :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
 
-The 'releases' folder contains ready-to-be-used versions of [MusicFormats] for the three main operating systems,
+The MusicFormats releases contain ready-to-be-used versions of [MusicFormats] for the three main operating systems,
 i.e. MacOS™, Linux in its Ubuntu declination and Windows™.
-They are in ZIP format and can be downloaded from the repository main page at
-https://github.com/jacques-menu/musicformats.
-Click on the 'n tags' link at the top of the page to access the various versions.
-
-One can also go directly to:
-https://github.com/jacques-menu/musicformats/tags .
-Then click on the link to the desired version such as v0.9.65, to access its contents.
+They are in ZIP format and can be downloaded:
+  - from the repository 'releases' page at
+https://github.com/jacques-menu/musicformats/releases;
+  - or manually by clicking on the 'Releases' link in the right pane of the repository's main window..
 
 Each .zip archive contains:
   - text files containing the version number and release date;
   - the executable tools in the bin subdirectory;
   - binary versions of the library in the lib subdirectory;
-  - a PDF introduction to MusicXML;
-  - a PDF MusicFormats user guide.
+  - the whole set of PDF documentation files.
 
 These ready-to-use versions can be accessed directly with URLs such as:
-  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.65 .
-Replace v0.9.65 by the version number for the desired operations system.
+  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.66.
+Replace v0.9.66 by the version number of the desired release.
