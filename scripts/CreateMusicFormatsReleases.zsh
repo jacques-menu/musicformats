@@ -111,7 +111,7 @@ function CreateRelease ()
   cp -pr ${VERSION_ORG_DIR}/documentation/*/*.pdf ${RELEASE_DEST_DIR}
   cp -pr ${VERSION_ORG_DIR}/build/bin ${RELEASE_DEST_DIR}
   cp -pr ${VERSION_ORG_DIR}/build/lib ${RELEASE_DEST_DIR}
-  cp -pr ${VERSION_ORG_DIR}/build/include ${RELEASE_DEST_DIR}
+  cp -pr ${VERSION_ORG_DIR}/include ${RELEASE_DEST_DIR}
   ls -salh ${RELEASE_DEST_DIR}/*
 # set +x
 
@@ -144,7 +144,7 @@ echo "----------------------------------------------"
 echo
 
 # CreateRelease "${DOWNLOADED_MACOS_ARTIFACT_NAME}"
-# CreateRelease "${DOWNLOADED_UBUNTU_ARTIFACT_NAME}"
+CreateRelease "${DOWNLOADED_UBUNTU_ARTIFACT_NAME}"
 CreateRelease "${DOWNLOADED_WINDOWS_ARTIFACT_NAME}"
 echo
 
