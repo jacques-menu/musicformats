@@ -41,9 +41,9 @@ jobs:
             build/bin
             build/lib
             include
-            #uncomment to have the full libdir in the .zip archive
-            #build/libdir
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
             documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
             documentation/MusicFormatsFigures/MusicFormatsFigures.pdf
             documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
+            #uncomment to have the full libdir in the .zip archive
+            #build/libdir
