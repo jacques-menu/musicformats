@@ -32,6 +32,9 @@ echo "----------------------------------------------"
 DOWNLOADS_DIR=${HOME}/JMI_Downloads
 echo "--> DOWNLOADS_DIR = ${DOWNLOADS_DIR}"
 echo
+ls -sal "${DOWNLOADS_DIR}/musicformats-*"
+echo
+
 
 echo "----------------------------------------------"
 # where to create the releases ZIP files
@@ -41,7 +44,7 @@ RELEASE_DIR=${MUSIC_FORMATS_DEV_DIR}/releases
 echo "--> RELEASE_DIR = ${RELEASE_DIR}"
 echo
 
-rm -rf ${RELEASE_DIR}
+[[ -d ${RELEASE_DIR} ]]; rm -rf ${RELEASE_DIR}
 mkdir ${RELEASE_DIR}
 ls -sal ${RELEASE_DIR}
 echo
@@ -51,13 +54,13 @@ echo "----------------------------------------------"
 # the release versions
 echo "----------------------------------------------"
 
-DOWNLOADED_MACOS_VERSION_NAME="musicformats-macos-version"
-DOWNLOADED_UBUNTU_VERSION_NAME="musicformats-ubuntu-version"
-DOWNLOADED_WINDOWS_VERSION_NAME="musicformats-windows-version"
+DOWNLOADED_MACOS_ARTIFACT_NAME="musicformats-macos-artifact"
+DOWNLOADED_UBUNTU_ARTIFACT_NAME="musicformats-ubuntu-artifact"
+DOWNLOADED_WINDOWS_ARTIFACT_NAME="musicformats-windows-artifact"
 
-MACOS_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_MACOS_VERSION_NAME}"
-UBUNTU_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_UBUNTU_VERSION_NAME}"
-WINDOWS_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_WINDOWS_VERSION_NAME}"
+MACOS_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_MACOS_ARTIFACT_NAME}"
+UBUNTU_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_UBUNTU_ARTIFACT_NAME}"
+WINDOWS_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_WINDOWS_ARTIFACT_NAME}"
 
 echo "MACOS_VERSION_ORG: ${MACOS_VERSION_ORG}"
 ls -sal ${MACOS_VERSION_ORG}
@@ -108,10 +111,11 @@ function CreateRelease ()
   cp -pr ${VERSION_ORG_DIR}/documentation/*/*.pdf ${RELEASE_DEST_DIR}
   cp -pr ${VERSION_ORG_DIR}/build/bin ${RELEASE_DEST_DIR}
   cp -pr ${VERSION_ORG_DIR}/build/lib ${RELEASE_DEST_DIR}
+  cp -pr ${VERSION_ORG_DIR}/build/include ${RELEASE_DEST_DIR}
   ls -salh ${RELEASE_DEST_DIR}/*
 # set +x
 
-  echo "===> VERSION_ORG_DIR_NAME: ${VERSION_ORG_DIR_NAME},DOWNLOADED_WINDOWS_VERSION_NAME: ${DOWNLOADED_WINDOWS_VERSION_NAME} "
+  echo "===> VERSION_ORG_DIR_NAME: ${VERSION_ORG_DIR_NAME},DOWNLOADED_WINDOWS_ARTIFACT_NAME: ${DOWNLOADED_WINDOWS_ARTIFACT_NAME} "
 
   # zip RELEASE_DEST_DIR
   RELEASE_ZIP_NAME="${RELEASE_DEST_DIR_NAME}.zip"
@@ -138,16 +142,39 @@ echo "----------------------------------------------"
 echo "==> create the realeases:"
 echo "----------------------------------------------"
 echo
-CreateRelease "${DOWNLOADED_MACOS_VERSION_NAME}"
-CreateRelease "${DOWNLOADED_UBUNTU_VERSION_NAME}"
-CreateRelease "${DOWNLOADED_WINDOWS_VERSION_NAME}"
 
+# CreateRelease "${DOWNLOADED_MACOS_ARTIFACT_NAME}"
+# CreateRelease "${DOWNLOADED_UBUNTU_ARTIFACT_NAME}"
+CreateRelease "${DOWNLOADED_WINDOWS_ARTIFACT_NAME}"
+echo
 
 echo "----------------------------------------------"
 echo "==> final ${RELEASE_DIR} contents:"
 echo "----------------------------------------------"
 echo
 
-ls -salh ${RELEASE_DIR}
+echo "----------------------------------------------"
+echo "==> MacOS:"
+echo "----------------------------------------------"
+echo
+ls -salh ${RELEASE_DIR}/*macos*
+ls -salh ${RELEASE_DIR}/*macos*/*
+echo
+
+echo "----------------------------------------------"
+echo "==> Ubuntu:"
+echo "----------------------------------------------"
+echo
+ls -salh ${RELEASE_DIR}/*ubuntu*
+ls -salh ${RELEASE_DIR}/*ubuntu*/*
+echo
+
+echo "----------------------------------------------"
+echo "==> Windows:"
+echo "----------------------------------------------"
+echo
+ls -salh ${RELEASE_DIR}/*windows*
+ls -salh ${RELEASE_DIR}/*windows*/*
+echo
 
 # set +x
