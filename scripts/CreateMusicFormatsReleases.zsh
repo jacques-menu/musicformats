@@ -82,7 +82,7 @@ function CreateRelease ()
   RELEASE_DEST_DIR="${RELEASE_DIR}/${RELEASE_DEST_DIR_NAME}"
 
   echo "----------------------------------------------"
-  echo "Creating ready to use versions, VERSION_ORG_DIR: ${VERSION_ORG_DIR}, RELEASE_DEST_DIR: ${RELEASE_DEST_DIR}"
+  echo "Creating release for ${VERSION_ORG_DIR_NAME}, VERSION_ORG_DIR: ${VERSION_ORG_DIR}, RELEASE_DEST_DIR: ${RELEASE_DEST_DIR}"
   echo "----------------------------------------------"
   echo
 
@@ -96,17 +96,20 @@ function CreateRelease ()
   echo
 
   # remove RELEASE_DEST_DIR it it exists
-  [ -d ${RELEASE_DEST_DIR} ] & rm -r ${RELEASE_DEST_DIR}
+  [[ -d ${RELEASE_DEST_DIR} ]] & rm -r ${RELEASE_DEST_DIR}
 
   # create RELEASE_DEST_DIR
   mkdir ${RELEASE_DEST_DIR}
 
   # populate RELEASE_DEST_DIR
+# set -x
   cp -p ${VERSION_ORG_DIR}/MusicFormatsVersionNumber.txt ${RELEASE_DEST_DIR}
   cp -p ${VERSION_ORG_DIR}/MusicFormatsVersionDate.txt ${RELEASE_DEST_DIR}
   cp -pr ${VERSION_ORG_DIR}/documentation/*/*.pdf ${RELEASE_DEST_DIR}
   cp -pr ${VERSION_ORG_DIR}/build/bin ${RELEASE_DEST_DIR}
   cp -pr ${VERSION_ORG_DIR}/build/lib ${RELEASE_DEST_DIR}
+  ls -salh ${RELEASE_DEST_DIR}/*
+# set +x
 
   echo "===> VERSION_ORG_DIR_NAME: ${VERSION_ORG_DIR_NAME},DOWNLOADED_WINDOWS_VERSION_NAME: ${DOWNLOADED_WINDOWS_VERSION_NAME} "
 
@@ -116,11 +119,12 @@ function CreateRelease ()
   RELEASE_ZIP="${RELEASE_DIR}/${RELEASE_ZIP_NAME}"
   echo "--> RELEASE_ZIP   = ${RELEASE_ZIP}"
   echo
-  zip ${RELEASE_ZIP} --recurse-paths --junk-paths ${RELEASE_DEST_DIR}
+#   zip ${RELEASE_ZIP} --recurse-paths --junk-paths ${RELEASE_DEST_DIR}
+  zip ${RELEASE_ZIP} --recurse-paths ${RELEASE_DEST_DIR}
   echo
 
   # remove RELEASE_DEST_DIR
-  rm -r ${RELEASE_DEST_DIR}
+#   rm -r ${RELEASE_DEST_DIR}
   echo
 }
 
