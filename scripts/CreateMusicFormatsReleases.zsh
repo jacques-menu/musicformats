@@ -7,28 +7,19 @@
 
 #exec > ${MUSIC_FORMATS_DEV_DIR}/$(basename $0).log 2>&1
 
-echo "----------------------------------------------"
 # the MusicFormats local repo
-echo "----------------------------------------------"
-
 MUSIC_FORMATS_DEV_DIR=${HOME}/musicformats-git-dev
 echo "--> MUSIC_FORMATS_DEV_DIR = ${MUSIC_FORMATS_DEV_DIR}"
-cd ${MUSIC_FORMATS_DEV_DIR}
+echo
 
 
-echo "----------------------------------------------"
 # the MusicFormats version number
-echo "----------------------------------------------"
-
 VERSION_NUMBER=`cat MusicFormatsVersionNumber.txt | tr '.' '_'`
 VERSION_NUMBER="v${VERSION_NUMBER}"
 echo "--> VERSION_NUMBER = ${VERSION_NUMBER}"
 
 
-echo "----------------------------------------------"
 # where to download the ZIP artifacts
-echo "----------------------------------------------"
-
 DOWNLOADS_DIR=${HOME}/JMI_Downloads
 echo "--> DOWNLOADS_DIR = ${DOWNLOADS_DIR}"
 echo
@@ -36,99 +27,100 @@ ls -sal "${DOWNLOADS_DIR}/musicformats-*"
 echo
 
 
-echo "----------------------------------------------"
-# where to create the releases ZIP files
-echo "----------------------------------------------"
-
-RELEASE_DIR=${MUSIC_FORMATS_DEV_DIR}/releases
-echo "--> RELEASE_DIR = ${RELEASE_DIR}"
-echo
-
-[[ -d ${RELEASE_DIR} ]]; rm -rf ${RELEASE_DIR}
-mkdir ${RELEASE_DIR}
-ls -sal ${RELEASE_DIR}
+# cd to MUSIC_FORMATS_DEV_DIR
+cd "${MUSIC_FORMATS_DEV_DIR}"
+echo -n "--> current directory: "; pwd
 echo
 
 
-echo "----------------------------------------------"
-# the release versions
-echo "----------------------------------------------"
+# remove MF_RELEASES_DIR or create it if it does not exist
+MF_RELEASES_NAME=releases
+MF_RELEASES_DIR="${MUSIC_FORMATS_DEV_DIR}/${MF_RELEASES_NAME}"
+echo "--> MF_RELEASES_DIR = ${MF_RELEASES_DIR}"
 
-DOWNLOADED_MACOS_ARTIFACT_NAME="musicformats-macos-artifact"
-DOWNLOADED_UBUNTU_ARTIFACT_NAME="musicformats-ubuntu-artifact"
-DOWNLOADED_WINDOWS_ARTIFACT_NAME="musicformats-windows-artifact"
+[[ ! -d "${MF_RELEASES_NAME}" ]] && mkdir "${MF_RELEASES_NAME}"
 
-MACOS_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_MACOS_ARTIFACT_NAME}"
-UBUNTU_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_UBUNTU_ARTIFACT_NAME}"
-WINDOWS_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_WINDOWS_ARTIFACT_NAME}"
-
-echo "MACOS_VERSION_ORG: ${MACOS_VERSION_ORG}"
-ls -sal ${MACOS_VERSION_ORG}
-echo "UBUNTU_VERSION_ORG: ${UBUNTU_VERSION_ORG}"
-ls -sal ${UBUNTU_VERSION_ORG}
-echo "WINDOWS_VERSION_ORG: ${WINDOWS_VERSION_ORG}"
-ls -sal ${WINDOWS_VERSION_ORG}
+cd "${MF_RELEASES_NAME}"
+echo -n "--> current directory: "; pwd
+echo
+ls -sal "${MF_RELEASES_NAME}"
 echo
 echo
 
 
-echo "----------------------------------------------"
-# release creation
-echo "----------------------------------------------"
+# cd to MF_RELEASES_DIR
+cd ${MF_RELEASES_DIR}
+echo -n "--> current directory: "; pwd
+echo
 
-function CreateRelease ()
+
+function CreateReleaseForOS ()
 {
-  VERSION_ORG_DIR_NAME="$1"
-  VERSION_ORG_DIR="${DOWNLOADS_DIR}/${VERSION_ORG_DIR_NAME}"
-
-  RELEASE_DEST_DIR_NAME="${VERSION_ORG_DIR_NAME}_${VERSION_NUMBER}"
-  RELEASE_DEST_DIR="${RELEASE_DIR}/${RELEASE_DEST_DIR_NAME}"
-
+  OS_NAME="$1"
   echo "----------------------------------------------"
-  echo "Creating release for ${VERSION_ORG_DIR_NAME}, VERSION_ORG_DIR: ${VERSION_ORG_DIR}, RELEASE_DEST_DIR: ${RELEASE_DEST_DIR}"
+  echo "Creating release for ${OS_NAME}"
   echo "----------------------------------------------"
   echo
 
-  echo "VERSION_ORG_DIR: ${VERSION_ORG_DIR}"
-  ls -salR ${VERSION_ORG_DIR}
-  echo "RELEASE_DEST_DIR: ${RELEASE_DEST_DIR}"
-  ls -salR ${RELEASE_DEST_DIR}
+  ARTIFACT_NAME="musicformats-${OS_NAME}-artifact"
+  ARTIFACT_DIR="${DOWNLOADS_DIR}/${ARTIFACT_NAME}"
+  echo "---> ARTIFACT_NAME: ${ARTIFACT_NAME}"
+  echo "---> ARTIFACT_DIR : ${ARTIFACT_DIR}"
+  ls -salh "${ARTIFACT_DIR}"
+  echo
 
-  cd ${RELEASE_DIR}
+  OS_RELEASE_NAME="musicformats-${OS_NAME}-${VERSION_NUMBER}"
+  OS_RELEASE_DIR="${MF_RELEASES_DIR}/${OS_RELEASE_NAME}"
+  echo "---> OS_RELEASE_NAME: ${OS_RELEASE_NAME}"
+  echo "---> OS_RELEASE_DIR : ${OS_RELEASE_DIR}"
+
+  # create OS_RELEASE_NAME
+  mkdir "${OS_RELEASE_NAME}"
+  ls -salh "${OS_RELEASE_NAME}"
+  echo
+
+  # pushd to
+  pushd "${OS_RELEASE_NAME}"
   echo -n "--> current directory: "; pwd
   echo
 
-  # remove RELEASE_DEST_DIR it it exists
-  [[ -d ${RELEASE_DEST_DIR} ]] & rm -r ${RELEASE_DEST_DIR}
-
-  # create RELEASE_DEST_DIR
-  mkdir ${RELEASE_DEST_DIR}
-
-  # populate RELEASE_DEST_DIR
+  # populate OS_RELEASE_DIR
 # set -x
-  cp -p ${VERSION_ORG_DIR}/MusicFormatsVersionNumber.txt ${RELEASE_DEST_DIR}
-  cp -p ${VERSION_ORG_DIR}/MusicFormatsVersionDate.txt ${RELEASE_DEST_DIR}
-  cp -pr ${VERSION_ORG_DIR}/documentation/*/*.pdf ${RELEASE_DEST_DIR}
-  cp -pr ${VERSION_ORG_DIR}/build/bin ${RELEASE_DEST_DIR}
-  cp -pr ${VERSION_ORG_DIR}/build/lib ${RELEASE_DEST_DIR}
-  cp -pr ${VERSION_ORG_DIR}/include ${RELEASE_DEST_DIR}
-  ls -salh ${RELEASE_DEST_DIR}/*
+  cp -p ${ARTIFACT_DIR}/MusicFormatsVersionNumber.txt .
+  cp -p ${ARTIFACT_DIR}/MusicFormatsVersionDate.txt .
+  cp -pr ${ARTIFACT_DIR}/documentation/*/*.pdf .
+  cp -pr ${ARTIFACT_DIR}/build/bin .
+  cp -pr ${ARTIFACT_DIR}/build/lib .
+  cp -pr ${ARTIFACT_DIR}/include .
+  ls -salhr .
 # set +x
-
-  echo "===> VERSION_ORG_DIR_NAME: ${VERSION_ORG_DIR_NAME},DOWNLOADED_WINDOWS_ARTIFACT_NAME: ${DOWNLOADED_WINDOWS_ARTIFACT_NAME} "
-
-  # zip RELEASE_DEST_DIR
-  RELEASE_ZIP_NAME="${RELEASE_DEST_DIR_NAME}.zip"
-  echo "--> RELEASE_ZIP_NAME = ${RELEASE_ZIP_NAME}"
-  RELEASE_ZIP="${RELEASE_DIR}/${RELEASE_ZIP_NAME}"
-  echo "--> RELEASE_ZIP   = ${RELEASE_ZIP}"
-  echo
-#   zip ${RELEASE_ZIP} --recurse-paths --junk-paths ${RELEASE_DEST_DIR}
-  zip ${RELEASE_ZIP} --recurse-paths ${RELEASE_DEST_DIR}
   echo
 
-  # remove RELEASE_DEST_DIR
-#   rm -r ${RELEASE_DEST_DIR}
+
+  # back to previous working directory
+  popd
+  echo -n "--> current directory: "; pwd
+  echo
+
+
+  # create the zip archive
+  OS_RELEASE_ZIP_NAME="${OS_RELEASE_NAME}.zip"
+  echo "--> OS_RELEASE_ZIP_NAME = ${OS_RELEASE_ZIP_NAME}"
+  OS_RELEASE_ZIP_FILE="${MF_RELEASES_DIR}/${OS_RELEASE_ZIP_NAME}"
+  echo "--> OS_RELEASE_ZIP_FILE = ${OS_RELEASE_ZIP_FILE}"
+  echo
+
+# set -x
+  zip --recurse-paths ${OS_RELEASE_ZIP_NAME} ${OS_RELEASE_NAME}
+  ls -salhr
+# set +x
+  echo
+
+
+  # remove OS_RELEASE_NAME
+# set -x
+  rm -rf ${OS_RELEASE_NAME}
+# set +x
   echo
 }
 
@@ -143,13 +135,13 @@ echo "==> create the realeases:"
 echo "----------------------------------------------"
 echo
 
-# CreateRelease "${DOWNLOADED_MACOS_ARTIFACT_NAME}"
-CreateRelease "${DOWNLOADED_UBUNTU_ARTIFACT_NAME}"
-CreateRelease "${DOWNLOADED_WINDOWS_ARTIFACT_NAME}"
+CreateReleaseForOS "macos"
+CreateReleaseForOS "ubuntu"
+CreateReleaseForOS "windows"
 echo
 
 echo "----------------------------------------------"
-echo "==> final ${RELEASE_DIR} contents:"
+echo "==> final ${MF_RELEASES_DIR} contents:"
 echo "----------------------------------------------"
 echo
 
@@ -157,24 +149,24 @@ echo "----------------------------------------------"
 echo "==> MacOS:"
 echo "----------------------------------------------"
 echo
-ls -salh ${RELEASE_DIR}/*macos*
-ls -salh ${RELEASE_DIR}/*macos*/*
+ls -salh ${MF_RELEASES_DIR}/*macos*
+ls -salh ${MF_RELEASES_DIR}/*macos*/*
 echo
 
 echo "----------------------------------------------"
 echo "==> Ubuntu:"
 echo "----------------------------------------------"
 echo
-ls -salh ${RELEASE_DIR}/*ubuntu*
-ls -salh ${RELEASE_DIR}/*ubuntu*/*
+ls -salh ${MF_RELEASES_DIR}/*ubuntu*
+ls -salh ${MF_RELEASES_DIR}/*ubuntu*/*
 echo
 
 echo "----------------------------------------------"
 echo "==> Windows:"
 echo "----------------------------------------------"
 echo
-ls -salh ${RELEASE_DIR}/*windows*
-ls -salh ${RELEASE_DIR}/*windows*/*
+ls -salh ${MF_RELEASES_DIR}/*windows*
+ls -salh ${MF_RELEASES_DIR}/*windows*/*
 echo
 
 # set +x
