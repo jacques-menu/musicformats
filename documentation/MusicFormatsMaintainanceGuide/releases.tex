@@ -1,7 +1,7 @@
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
-\chapter{MusicFormats distributions}\label{MusicFormats distributions}
+\chapter{MusicFormats releases}\label{MusicFormats releases}
 % -------------------------------------------------------------------------
 
 %Create a new release
@@ -32,9 +32,9 @@
 %git push -f origin master
 
 
-The \mf\ \repo\ is hosted by \github\ and uses so-called \MainIt{actions} to build the library on \MacOS, \Ubuntu\ and \Windows. The resulting files are then uploaded to the \repo, where they are available to create the distributions for these three \OS s.
+The \mf\ \repo\ is hosted by \github\ and uses so-called \MainIt{actions} to build the library on \MacOS, \Ubuntu\ and \Windows. The resulting files are then available in the \repo, where they are available to create the releases for these three \OS s.
 
-The distributions \zip\ archives are supplied with all \mf\ versions, i.e. the current, most recent version of \mf\ (the \default\ \masterBranch\ in the \repo), and the earlier versions such as the \code{v0.9.65} branch.
+The releases \zip\ archives are supplied with all \mf\ versions, i.e. the current, most recent version of \mf\ (the \default\ \masterBranch\ in the \repo), and the earlier versions such as the \code{v0.9.65} release.
 
 
 % -------------------------------------------------------------------------
@@ -52,9 +52,12 @@ total 24
 8 -rw-r--r--@ 1 jacquesmenu  staff  1455 Aug 23 07:08 build-windows-version.yml
 \end{lstlisting}
 
-For example, the \Ubuntu\ action in \file{build-ubuntu-version.yml} is shown below. It is executed each time a \code{git push} is performed to the \masterBranch:
+These actions are executed by default each time a \code{git push} is performed to the \masterBranch. This can be disabled at will if needed.
+
+For example, the \Ubuntu\ action in \file{build-ubuntu-version.yml} is shown below:
 \begin{lstlisting}[language=Terminal]
-# This is a workflow to build MusicFormats and create a distribution of it
+jacquesmenu@macstudio-1:/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev/.github/workflows > cat build-ubuntu-artifact.yml
+# This is a workflow to build MusicFormats and create an artifact of it
 
 name: Build Ubuntu Version
 
@@ -79,22 +82,30 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
       - name: Build MusicFormats for Ubuntu
         run: make -C build
 
       - name: Upload libraries and executables for Ubuntu
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: musicformats-ubuntu-version
+          name: musicformats-ubuntu-artifact
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt
             build/bin
             build/lib
+            include
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
             documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
+            documentation/MusicFormatsFigures/MusicFormatsFigures.pdf
+            documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
+            #uncomment to have the full libdir in the .zip archive
+            #build/libdir
 \end{lstlisting}
 
 After a push to the \masterBranch:
@@ -122,7 +133,7 @@ Then cliking on the link leads to:\\
 
 The \code{musicformats-ubuntu-distrib} archive has to be clicked to get downloaded, since its URL cannot be guessed by an algorithm (it contains numbers internal to \github).
 
-Doing so for the three distributions, we get the following, here in the \directoryName{Downloads} folder on \MacOS, with the \zip\ archives are automatically uncompressed :
+Doing so for the three releases, we get the following, here in the \directoryName{Downloads} folder on \MacOS, with the \zip\ archives are automatically uncompressed :
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/Downloads > ls -sal musicformats-*-distrib
 musicformats-macos-distrib:
@@ -231,7 +242,7 @@ total 37672
 
 For \MacOS, there is no \directoryName{lib} directory, since the executables in \directoryName{bin} are self-sufficient. They can be placed anywhere on a disk except the trash. Usually, they are placed in the \directoryName{/Applications} directory.
 
-%These distributions are in the form of \zip\ files. They are are available from \url{https://github.com/jacques-menu/musicformats/tree/master/distrib}, as well as the documentation PDF files and version number:
+%These releases are in the form of \zip\ files. They are are available from \url{https://github.com/jacques-menu/musicformats/tree/master/distrib}, as well as the documentation PDF files and version number:
 %\begin{lstlisting}[language=Terminal]
 %jacquesmenu@macmini: ~/musicformats_local_clone/distrib > ls -sal
 %total 150088
@@ -247,7 +258,7 @@ For \MacOS, there is no \directoryName{lib} directory, since the executables in 
 
 
 % -------------------------------------------------------------------------
-\subsection{Creating the distributions}
+\subsection{Creating the releases}
 % -------------------------------------------------------------------------
 
 The hierarchy in the \directoryName{musicformats-*-distrib} directories comes from the \mf\ \repo\ untouched, which is not convenient for the users.
@@ -320,7 +331,7 @@ total 154128
 
 \MacOS\ gets more and more stringent over time regarding security. The \OS\ part in charge of this is named \Gatekeeper.
 
-When downloading the \mf\ distributions from the \repo\ on versions up to 10 (\Main{High Sierra}), the executables in \code{bin} are usable alright.
+When downloading the \mf\ releases from the \repo\ on versions up to 10 (\Main{High Sierra}), the executables in \code{bin} are usable alright.
 
 From version 11 (\Main{Catalina}) on, though, the executables you get are not executable actually, because their developer is unknown to the \OS, and actions have to be taken for them to be usable.
 
